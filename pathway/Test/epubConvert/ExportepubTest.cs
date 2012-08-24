@@ -28,7 +28,7 @@ namespace Test.epubConvert
     /// </summary>
     /// ----------------------------------------------------------------------------------------
     [TestFixture]
-    public class ExportepubTest
+    public class ExportepubTest: Exportepub
     {
         #region setup
         private string _inputPath;
@@ -132,6 +132,46 @@ namespace Test.epubConvert
             var target = new Exportepub();
             var actual = target.Export(projInfo);
             Assert.IsTrue(actual);
+        }
+
+        [Test]
+        public void ChapterLinkAfterTitleTest()
+        {
+            const string FolderName = "ChapterLinkTest";
+            FolderTree.Copy(FileInput(FolderName), FileOutput(FolderName));
+            _inputType = "scripture";
+            InsertChapterLinkBelowBookName(FileOutput(FolderName));
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            var filePath = Path.Combine(FolderName, "PartFile00001_.xhtml");
+            XmlReader xmlReader = XmlReader.Create(FileOutput(filePath), xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            XmlNodeList nodes = xmlDocument.SelectNodes(".//xhtml:a", namespaceManager);
+            Assert.AreEqual(3, nodes.Count, "Should be 3 chapter links for Titus");
+            var next = nodes[nodes.Count - 1].NextSibling.NextSibling;
+            Assert.AreEqual("Section_Head", next.Attributes.GetNamedItem("class").InnerText, "Section head should follow chapter links");
+        }
+
+        [Test]
+        public void ChapterLinkForSingleChapterTest()
+        {
+            const string FolderName = "ChapterLinkTest";
+            FolderTree.Copy(FileInput(FolderName), FileOutput(FolderName));
+            _inputType = "scripture";
+            InsertChapterLinkBelowBookName(FileOutput(FolderName));
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            var filePath = Path.Combine(FolderName, "PartFile00002_.xhtml");
+            XmlReader xmlReader = XmlReader.Create(FileOutput(filePath), xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            XmlNodeList nodes = xmlDocument.SelectNodes(".//xhtml:a", namespaceManager);
+            Assert.AreEqual(0, nodes.Count, "Should be 0 chapter links for Philemon");
         }
 
         public static void IsValid(string filename, string msg)

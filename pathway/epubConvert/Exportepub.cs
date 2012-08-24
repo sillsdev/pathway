@@ -3936,7 +3936,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void InsertChapterLinkBelowBookName(string contentFolder)
+        protected void InsertChapterLinkBelowBookName(string contentFolder)
         {
             string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
             List<string> chapterIdList = new List<string>();
@@ -3972,6 +3972,8 @@ namespace SIL.PublishingSolution
                 if (fileName.LastIndexOf("_01") == fileName.Length - 3 || fileName.LastIndexOf("_") == fileName.Length - 1)
                 {
                     string[] valueList1 = Path.GetFileNameWithoutExtension(sourceFile).Split('_');
+                    if (OnlyOneChapter(chapterIdList, valueList1[0]))
+                        continue;
                     XmlReader xmlReader = XmlReader.Create(sourceFile, xmlReaderSettings);
                     xmlDocument.Load(xmlReader);
                     xmlReader.Close();
@@ -3981,6 +3983,8 @@ namespace SIL.PublishingSolution
                     if (nodes.Count > 0)
                     {
                         var next = nodes[0].NextSibling;
+                        while (next.Attributes.GetNamedItem("class").InnerText.ToLower().Contains("title"))
+                            next = next.NextSibling;
                         foreach (string VARIABLE in chapterIdList)
                         {
                             string[] valueList = VARIABLE.Split('_');
@@ -3995,7 +3999,7 @@ namespace SIL.PublishingSolution
                             nodeContent.InnerText = GetChapterNumber(VARIABLE);
                             next.ParentNode.InsertBefore(nodeContent, next);
                             XmlNode spaceNode = xmlDocument.CreateElement("span",
-                                                                          xmlDocument.DocumentElement.NamespaceURI);
+                                                                            xmlDocument.DocumentElement.NamespaceURI);
                             spaceNode.InnerText = " ";
                             next.ParentNode.InsertBefore(spaceNode, next);
                         }
@@ -4004,6 +4008,18 @@ namespace SIL.PublishingSolution
                     xmlDocument.Save(sourceFile);
                 }
             }
+        }
+
+        private bool OnlyOneChapter(List<string> chapterIdList, string s)
+        {
+            int count = 0;
+            foreach (string s1 in chapterIdList)
+            {
+                var values = s1.Split('_');
+                if (values[0] == s)
+                    count += 1;
+            }
+            return count == 1;
         }
 
         private string GetChapterNumber(string value)

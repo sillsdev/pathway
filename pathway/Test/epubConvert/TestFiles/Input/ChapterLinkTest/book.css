@@ -1,0 +1,1710 @@
+/* font info - added by Paratext (epubConvert, Version=1.2.0.2572, Culture=neutral, PublicKeyToken=null) */
+@font-face {
+ font-family : Charis SIL;
+ font-weight : normal;
+ font-style : normal;
+ font-variant : normal;
+ font-size : all;
+ src : url('CharisSILR.ttf');
+}
+@font-face {
+ font-family : i_Charis SIL;
+ font-weight : normal;
+ font-style : italic;
+ font-variant : normal;
+ font-size : all;
+ src : url('CharisSILI.ttf');
+}
+@font-face {
+ font-family : b_Charis SIL;
+ font-weight : bold;
+ font-style : normal;
+ font-variant : normal;
+ font-size : all;
+ src : url('CharisSILB.ttf');
+}
+/* default language font info */
+body {
+font-family: 'Charis SIL', Times, serif;
+direction: ltr;
+}
+.partofspeech, .example, .grammatical-info, .lexref-type, .parallel_passage_reference, .Parallel_Passage_Reference, .Emphasis, .pictureCaption, .Section_Range_Paragraph {
+font-family: 'i_Charis SIL', Times, serif;
+}
+.headword, .headword-minor, .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .xsensenumber.complexform-form, .crossref, .LexEntry-publishStemComponentTarget-MLHeadWordPub, .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .LexSense-publishStemComponentTarget-OwnerOutlinePub, .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, .sense-crossref, .crossref-headword, .reversal-form, .Alternate_Reading, .Section_Head_Minor, .Inscription, .Intro_Section_Head, .Section_Head_Major, .iot {
+font-family: 'b_Charis SIL', Times, serif;
+}
+*:lang(auc) {
+font-family: 'Charis SIL', Times, serif;
+direction: ltr;
+}
+.partofspeech:lang(auc), .example:lang(auc), .grammatical-info:lang(auc), .lexref-type:lang(auc), .parallel_passage_reference:lang(auc), .Parallel_Passage_Reference:lang(auc), .Emphasis:lang(auc), .pictureCaption:lang(auc), .Section_Range_Paragraph:lang(auc) {
+font-family: 'i_Charis SIL', Times, serif;
+}
+.headword:lang(auc), .headword-minor:lang(auc), .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub:lang(auc), .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub:lang(auc), .xsensenumber:lang(auc), .complexform-form:lang(auc), .crossref:lang(auc), .LexEntry-publishStemComponentTarget-MLHeadWordPub:lang(auc), .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub:lang(auc), .LexSense-publishStemComponentTarget-OwnerOutlinePub:lang(auc), .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub:lang(auc), .sense-crossref:lang(auc), .crossref-headword:lang(auc), .reversal-form:lang(auc), .Alternate_Reading:lang(auc), .Section_Head:lang(auc), .Section_Head_Minor:lang(auc), .Inscription:lang(auc), .Intro_Section_Head:lang(auc), .Section_Head_Major:lang(auc), .iot:lang(auc) {
+font-family: 'b_Charis SIL', Times, serif;
+}
+/* end auto-generated font info */
+
+.id
+{
+}
+
+.ide
+{
+}
+
+.h
+{
+}
+
+.h1
+{
+}
+
+.h2
+{
+}
+
+.h3
+{
+}
+
+.scrBookCode
+{
+display: none;
+font-style: italic;
+font-weight: bold;
+}
+
+.scrBookName
+{
+display: none;
+font-style: italic;
+}
+
+.toc3
+{
+font-weight: bold;
+font-style: italic;
+}
+
+.rem
+{
+color: #ff0000;
+}
+
+.restore
+{
+color: #ff0000;
+}
+
+.imt
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.imt1
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.imt2
+{
+font-style: italic;
+text-align: center;
+padding-top: 6pt;
+padding-bottom: 3pt;
+}
+
+.imt3
+{
+font-weight: bold;
+text-align: center;
+padding-top: 2pt;
+padding-bottom: 2pt;
+}
+
+.imt4
+{
+font-style: italic;
+text-align: center;
+padding-top: 2pt;
+padding-bottom: 2pt;
+}
+
+.imte
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.imte1
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.imte2
+{
+font-style: italic;
+text-align: center;
+padding-bottom: 2 pt;
+}
+
+.is
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.is1
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.is2
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.iot
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.io
+{
+margin-left: .5pt;
+}
+
+.io1
+{
+margin-left: .5pt;
+}
+
+.io2
+{
+margin-left: .75pt;
+}
+
+.io3
+{
+margin-left: 1pt;
+}
+
+.io4
+{
+margin-left: 1.25pt;
+}
+
+.ior
+{
+}
+
+.ip
+{
+text-indent: .125pt;
+}
+
+.im
+{
+}
+
+.ipi
+{
+text-indent: .125pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.imi
+{
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.ili
+{
+margin-left: .5pt;
+text-indent: -.375pt;
+}
+
+.ili1
+{
+margin-left: .5pt;
+text-indent: -.375pt;
+}
+
+.ili2
+{
+margin-left: .75pt;
+text-indent: -.375pt;
+}
+
+.ipq
+{
+margin-left: .25pt;
+margin-right: .25pt;
+text-indent: .125pt;
+font-style: italic;
+}
+
+.imq
+{
+margin-left: .25pt;
+margin-right: .25pt;
+font-style: italic;
+}
+
+.ipr
+{
+margin-left: .25pt;
+margin-right: .25pt;
+text-align: right;
+font-style: italic;
+}
+
+.ib
+{
+}
+
+.iq
+{
+margin-left: 1pt;
+text-indent: -.75pt;
+font-style: italic;
+}
+
+.iq1
+{
+margin-left: 1pt;
+text-indent: -.75pt;
+font-style: italic;
+}
+
+.iq2
+{
+margin-left: 1pt;
+text-indent: -.5pt;
+font-style: italic;
+}
+
+.iq3
+{
+margin-left: 1pt;
+text-indent: -.25pt;
+font-style: italic;
+}
+
+.iex
+{
+text-indent: .125pt;
+padding-top: 4pt;
+padding-bottom: 4pt;
+}
+
+.iqt
+{
+font-style: italic;
+}
+
+.ie
+{
+}
+
+.Chapter_Number
+{
+font-weight: bold;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.ca
+{
+font-style: italic;
+color: #228b22;
+}
+
+.cp
+{
+font-weight: bold;
+padding-top: 8pt;
+padding-bottom: 4pt;
+color: #ff0000;
+}
+
+.cl
+{
+font-weight: bold;
+padding-top: 8pt;
+padding-bottom: 4pt;
+text-align: center;
+}
+
+.cd
+{
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.Verse_Number
+{
+vertical-align: super;
+}
+
+.va
+{
+vertical-align: super;
+color: #228b22;
+}
+
+.vp
+{
+vertical-align: super;
+color: #ff0000;
+}
+
+.Paragraph
+{
+text-indent: .125pt;
+}
+
+.Paragraph_Continuation
+{
+}
+
+.pmo
+{
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pm
+{
+text-indent: .125pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pmc
+{
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pmr
+{
+text-align: right;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pi
+{
+text-indent: .125pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pi1
+{
+text-indent: .125pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pi2
+{
+text-indent: .125pt;
+margin-left: .5pt;
+margin-right: .25pt;
+}
+
+.pi3
+{
+text-indent: .125pt;
+margin-left: .75pt;
+margin-right: .25pt;
+}
+
+.pc
+{
+text-align: center;
+}
+
+.mi
+{
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.nb
+{
+}
+
+.cls
+{
+text-align: right;
+}
+
+.q
+{
+margin-left: 1.25pt;
+text-indent: -1pt;
+}
+
+.Line1
+{
+margin-left: 1.25pt;
+text-indent: -1pt;
+}
+
+.Line2
+{
+margin-left: 1.25pt;
+text-indent: -.75pt;
+}
+
+.q3
+{
+margin-left: 1.25pt;
+text-indent: -.5pt;
+}
+
+.q4
+{
+margin-left: 1.25pt;
+text-indent: -.25pt;
+}
+
+.qc
+{
+text-align: center;
+}
+
+.qr
+{
+text-align: right;
+}
+
+.qs
+{
+font-style: italic;
+}
+
+.qa
+{
+font-style: italic;
+}
+
+.qac
+{
+font-style: italic;
+}
+
+.qm
+{
+margin-left: 1pt;
+text-indent: -.75pt;
+}
+
+.qm1
+{
+margin-left: 1pt;
+text-indent: -.75pt;
+}
+
+.qm2
+{
+margin-left: 1pt;
+text-indent: -.5pt;
+}
+
+.qm3
+{
+margin-left: 1pt;
+text-indent: -.25pt;
+}
+
+.b
+{
+}
+
+.mt
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.Title_Main
+{
+font-weight: bold;
+text-align: center;
+padding-top: 2pt;
+padding-bottom: 4pt;
+}
+
+.Title_Secondary
+{
+font-style: italic;
+text-align: center;
+padding-bottom: 2pt;
+}
+
+.mt3
+{
+font-weight: bold;
+text-align: center;
+padding-top: 2pt;
+padding-bottom: 2pt;
+}
+
+.mt4
+{
+text-align: center;
+padding-top: 2pt;
+padding-bottom: 2pt;
+}
+
+.mte
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.mte1
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.mte2
+{
+font-style: italic;
+text-align: center;
+padding-bottom: 2pt;
+}
+
+.ms
+{
+font-weight: bold;
+text-align: center;
+padding-top: 16pt;
+padding-bottom: 4pt;
+}
+
+.ms1
+{
+font-weight: bold;
+text-align: center;
+padding-top: 16pt;
+padding-bottom: 4pt;
+}
+
+.ms2
+{
+font-weight: bold;
+text-align: center;
+padding-top: 16pt;
+padding-bottom: 4pt;
+}
+
+.ms3
+{
+font-style: italic;
+text-align: center;
+padding-top: 16pt;
+padding-bottom: 4pt;
+}
+
+.mr
+{
+font-style: italic;
+text-align: center;
+padding-bottom: 4pt;
+}
+
+.Section_Head
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.s1
+{
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.s2
+{
+font-style: italic;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.s3
+{
+font-style: italic;
+text-align: left;
+padding-top: 6pt;
+padding-bottom: 3pt;
+}
+
+.s4
+{
+font-style: italic;
+text-align: left;
+padding-top: 6pt;
+padding-bottom: 3pt;
+}
+
+.sr
+{
+font-weight: bold;
+text-align: center;
+padding-bottom: 4pt;
+}
+
+.Parallel_Passage_Reference
+{
+font-style: italic;
+text-align: center;
+padding-bottom: 4pt;
+}
+
+.sp
+{
+font-style: italic;
+text-align: left;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.d
+{
+font-style: italic;
+text-align: center;
+padding-top: 4pt;
+padding-bottom: 4pt;
+}
+
+.tr
+{
+margin-left: .5pt;
+text-indent: -.25pt;
+}
+
+.th1
+{
+font-style: italic;
+}
+
+.th2
+{
+font-style: italic;
+}
+
+.th3
+{
+font-style: italic;
+}
+
+.th4
+{
+font-style: italic;
+}
+
+.th5
+{
+font-style: italic;
+}
+
+.tc1
+{
+}
+
+.tc2
+{
+}
+
+.tc3
+{
+}
+
+.tc4
+{
+}
+
+.tc5
+{
+}
+
+.thc1
+{
+font-style: italic;
+text-align: center;
+}
+
+.thc2
+{
+font-style: italic;
+text-align: center;
+}
+
+.thc3
+{
+font-style: italic;
+text-align: center;
+}
+
+.thc4
+{
+font-style: italic;
+text-align: center;
+}
+
+.thc5
+{
+font-style: italic;
+text-align: center;
+}
+
+.tcc1
+{
+text-align: center;
+}
+
+.tcc2
+{
+text-align: center;
+}
+
+.tcc3
+{
+text-align: center;
+}
+
+.tcc4
+{
+text-align: center;
+}
+
+.tcc5
+{
+text-align: center;
+}
+
+.thr1
+{
+font-style: italic;
+text-align: right;
+}
+
+.thr2
+{
+font-style: italic;
+text-align: right;
+}
+
+.thr3
+{
+font-style: italic;
+text-align: right;
+}
+
+.thr4
+{
+font-style: italic;
+text-align: right;
+}
+
+.thr5
+{
+font-style: italic;
+text-align: right;
+}
+
+.tcr1
+{
+text-align: right;
+}
+
+.tcr2
+{
+text-align: right;
+}
+
+.tcr3
+{
+text-align: right;
+}
+
+.tcr4
+{
+text-align: right;
+}
+
+.tcr5
+{
+text-align: right;
+}
+
+.li
+{
+margin-left: .5pt;
+text-indent: -.375pt;
+}
+
+.li1
+{
+margin-left: .5pt;
+text-indent: -.375pt;
+}
+
+.li2
+{
+margin-left: .75pt;
+text-indent: -.375pt;
+}
+
+.li3
+{
+margin-left: 1pt;
+text-indent: -.375pt;
+}
+
+.li4
+{
+margin-left: 1.25pt;
+text-indent: -.375pt;
+}
+
+.Note_General_Paragraph
+{
+}
+
+.fe
+{
+}
+
+.Note_Target_Reference
+{
+font-weight: bold;
+}
+
+.ft
+{
+}
+
+.fk
+{
+font-weight: bold;
+font-style: italic;
+}
+
+.Alternate_Reading
+{
+font-style: italic;
+}
+
+.fqa
+{
+font-style: italic;
+}
+
+.fl
+{
+font-style: italic;
+font-weight: bold;
+}
+
+.fp
+{
+}
+
+.fv
+{
+vertical-align: super;
+}
+
+.fdc
+{
+}
+
+.fm
+{
+vertical-align: super;
+}
+
+.x
+{
+}
+
+.xo
+{
+font-weight: bold;
+}
+
+.xt
+{
+}
+
+.xk
+{
+font-style: italic;
+}
+
+.xq
+{
+font-style: italic;
+}
+
+.xot
+{
+}
+
+.xnt
+{
+}
+
+.xdc
+{
+}
+
+.rq
+{
+font-style: italic;
+}
+
+.qt
+{
+font-style: italic;
+}
+
+.nd
+{
+text-decoration: underline;
+}
+
+.tl
+{
+font-style: italic;
+}
+
+.dc
+{
+font-style: italic;
+}
+
+.bk
+{
+font-style: italic;
+}
+
+.sig
+{
+font-style: italic;
+}
+
+.pn
+{
+font-weight: bold;
+text-decoration: underline;
+}
+
+.addpn
+{
+font-weight: bold;
+font-style: italic;
+text-decoration: underline;
+}
+
+.wj
+{
+color: #ff;
+}
+
+.k
+{
+font-style: italic;
+font-weight: bold;
+}
+
+.sls
+{
+font-style: italic;
+}
+
+.ord
+{
+vertical-align: super;
+}
+
+.add
+{
+font-weight: bold;
+font-style: italic;
+}
+
+.lit
+{
+text-align: right;
+font-weight: bold;
+}
+
+.no
+{
+}
+
+.it
+{
+font-style: italic;
+}
+
+.bd
+{
+font-weight: bold;
+}
+
+.bdit
+{
+font-weight: bold;
+font-style: italic;
+}
+
+.em
+{
+font-style: italic;
+}
+
+.Inscription
+{
+}
+
+.pb
+{
+}
+
+.fig
+{
+}
+
+.pro
+{
+}
+
+.See_In_Glossary
+{
+}
+
+.wh
+{
+}
+
+.wg
+{
+}
+
+.ndx
+{
+}
+
+.periph
+{
+font-weight: bold;
+padding-top: 16pt;
+padding-bottom: 4pt;
+color: #80ff;
+}
+
+.p1
+{
+text-indent: .125pt;
+}
+
+.p2
+{
+text-indent: .125pt;
+margin-left: .125pt;
+}
+
+.k1
+{
+}
+
+.k2
+{
+}
+
+.xtSee
+{
+font-style: italic;
+color: #ff0000;
+}
+
+.xtSeeAlso
+{
+font-style: italic;
+}
+
+.DEPRECATED
+{
+font-style: italic;
+}
+
+.OBSOLETE
+{
+color: #ff0000;
+}
+
+.zpa-xb
+{
+}
+
+.zpa-xc
+{
+font-weight: bold;
+}
+
+.zpa-xv
+{
+}
+
+.zpa-d
+{
+}
+
+/** imported styles from from epub_Scripture.css **/
+
+body {
+font-size: 13pt;
+line-height: 125%;
+
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   font-size: --> from BaseFontSize
+   line-height: --> from DefaultLineHeight
+*/
+font-weight: normal;
+font-style: normal;
+}
+.Alternate_Reading {
+    font-style: italic;
+    display: inline;
+    list-style-position: inside;
+}
+.border {
+    border-top : 0.5pt solid #808080;
+    text-align : center;
+    margin-left : 1in;
+    margin-right : 1in;
+    margin-top : 9pt;
+    margin-bottom : 18pt;
+    content : "&nbsp;";
+}
+.Chapter_Head {
+    padding-top:21pt;
+    padding-bottom:21pt;
+}
+.Chapter_Number {
+float: left;
+padding-right: 5pt; padding-left: 4%;
+font-size: 250%;
+padding-top: 6pt;
+
+    line-height: 85%;
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   font-size: -->  from ChapterNumbers
+   width: --> if ChapterNumbers is set to left margin
+   padding-right, padding-left: --> from ChapterNumbers
+*/
+}
+.Emphasis, .it {
+    font-style: italic;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.footnotes {
+    border-top: 1px solid #ccc;
+    padding-top: 1%;
+    margin-top: 1%;
+    padding-left: 0;
+    margin-left : 4%;
+    margin-right: 4%;
+    list-style: none;
+}
+.Inscription {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 0pt;
+    padding-top: 0pt;
+    margin-top: 1%;
+    margin-bottom: .5%;
+}
+.Inscription_Paragraph {
+    text-indent: .2in;
+    margin-left: 0pt;
+}
+.Intro_List_Item1, .List_Item1 {
+    text-indent : -1%;
+    margin-left : 5%;
+    margin-right: 5%;
+}
+.Intro_List_Item2, .List_Item2 {
+    text-indent : 0pt;
+    margin-left : 5%;
+    margin-right: 5%;
+}
+.Intro_Paragraph {
+    text-indent : 1%;
+    margin-left : 4%;
+    margin-right: 4%;
+}
+.Intro_Section_Head {
+    font-weight : bold;
+    font-style : normal;
+    text-align: left;
+
+    text-indent : 0;
+    margin-left : 0;
+    margin-top : 3pt;
+    margin-bottom : 3pt;
+}
+.REVERSE_SOLIDUSCitation_Line1, .Citation_Line1, .Line1 {
+    margin-left : 6%;
+    margin-right: 4%;
+    text-indent : -1%;
+    padding-left : 0;
+}
+.REVERSE_SOLIDUSCitation_Line2, .Citation_Line2, .Line2 {
+    margin-left : 6%;
+    margin-right: 4%;
+    text-indent : -1%;
+    padding-left : 0;
+}
+.REVERSE_SOLIDUSCitation_Line3, .Citation_Line3, .Line3 {
+    margin-left : 6%;
+    margin-right: 4%;
+    text-indent : 0;
+    padding-left : 0;
+}
+.REVERSE_SOLIDUS2, .REVERSE_SOLIDUScom, .REVERSE_SOLIDUSCom, .REVERSE_SOLIDUSEllaFULL_STOP,
+.REVERSE_SOLIDUSsl, .REVERSE_SOLIDUSv1, .REVERSE_SOLIDUSv14, .REVERSE_SOLIDUSv15,
+.REVERSE_SOLIDUSv19, .REVERSE_SOLIDUSv20, .REVERSE_SOLIDUSv8 {
+    text-indent: 0pt;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+.Note_CrossHYPHENReference_Paragraph {
+    text-indent : 0;
+    margin-left : 0;
+    display : inline;
+    list-style-position : inside;
+}
+.Endnote_General_Paragraph,
+.Note_General_Paragraph {
+    text-indent : 0;
+    margin-left : 0;
+    padding-left: 2px;
+    display : inline;
+    list-style-position : inside;
+    line-height:80%;
+}
+.Endnote_General_Paragraph span,
+.Note_General_Paragraph span {
+    display: none;
+    visibility: hidden;
+}
+.Paragraph {
+    text-indent : 1%;
+    margin-left : 4%;
+    margin-right: 4%;
+    text-align: left;
+
+}
+.Paragraph_Continuation {
+    text-indent : 0;
+    margin-left : 4%;
+    margin-right: 4%;
+}
+.Paragraph1 {
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   margin-left: --> from ChapterNumbers
+*/
+    text-align: left;
+
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.parallel_passage_reference, .Parallel_Passage_Reference {
+    font-style: italic;
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 0pt;
+    margin-bottom: 3pt;
+}
+.scrBook {
+    clear: both;
+}
+/* hidden items */
+.rem, .Verse_Number1, .scrBookCode {
+    display : none;
+    visibility: hidden;
+}
+.scrIntroSection {
+    text-align: left;
+}
+.scrSection {
+    text-align: left;
+}
+.Section_Head {
+    font-weight : bold;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 0;
+    margin-bottom: 0;
+    padding-bottom : 1%;
+    padding-top : 2%;
+}
+.Section_Head_Major {
+    font-weight : bold;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 4%;
+    margin-right: 4%;
+    margin-top : 8pt;
+}
+.Section_Head_Minor {
+    font-weight : bold;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 4%;
+    margin-right: 4%;
+    margin-top : 8pt;
+}
+.See_In_Glossary {
+    color: blue;
+    background-color:inherit;
+}
+.Stanza_Break {
+    text-indent : 0;
+    margin-left : 0;
+    height: .9em;
+    content: "&nbsp;";
+}
+.Title_Main {
+    font-weight : bold;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 0;
+    padding-bottom : 2%;
+    padding-top : 2%;
+    line-height:125%;
+}
+.Title_Secondary {
+    display: block;
+    font-weight : normal;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 0;
+    padding-bottom : 2%;
+    padding-top : 1%;
+}
+.Title_Tertiary {
+    font-weight : normal;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 0;
+    padding-bottom : 1%;
+    padding-top : 1%;
+}
+.Verse_Number {
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Verse_Number_In_Note {
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Front_Matter {
+margin-left : 4%;
+margin-right: 4%;
+text-align: left;
+}
+
+/** imported styles from epub_Pictures.css **/
+
+.pictureRight {
+    float : right;
+    text-align : center;
+    margin: 0px 0px 5px 5px;
+    text-indent: 0px;
+}
+.pictureLeft {
+    float : left;
+    position : relative;
+    left : -2pc;
+    text-align : center;
+    margin: 0px 5px 5px 0px;
+    text-indent: 0px;
+}
+.pictureCenter {
+    clear : both;
+    text-align : center;
+    margin-top : 1%;
+    margin: 0px 5px 5px 0px;
+    text-indent: 0px;
+}
+.pictureCaption {
+    font-size : 80%;
+    font-weight : normal;
+    font-style : italic;
+    display : block;
+    text-align : center;
+    text-transform : capitalize;
+    margin-bottom : .5%;
+}
+.pictureColumn {
+    float: right;
+    width: 100%;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.picturePage {
+    clear: both;
+    width: 100%;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+span.reference :before {
+	content: "(";
+}
+span.reference :after {
+	content: ")";
+}
+/** imported styles from from FrontMatter.css **/
+
+em {
+    font-weight: bold;
+    font-style: normal;
+}
+a {
+    white-space: nowrap;
+}
+table {
+    margin-bottom: 1em;
+}
+td {
+    vertical-align: middle;
+    padding: 8px;
+}
+h1 {
+    font-size: 150%;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+#TitlePage h1 {
+    font-size: 250%;
+    margin-top: 2em;
+    text-align: center;
+    line-height: 125%;
+}
+h2 {
+    font-size: 125%;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+.ccimg {
+    width: 32px;
+    height: 32px;
+}
+p {
+    margin-top: .5em;
+    margin-bottom: 1em;
+}
+#Logo {
+    padding-top: 3em;
+}
+.Publisher {
+    padding-top: 6em;
+    font-size: 80%;
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.logo {
+    text-align: center;
+    padding-top: .5em;
+    margin-top: 0;
+}
+.Contents ul a::after {
+  content: leader('.') target-counter(attr(href), page);
+}
+.Contents ul {
+    list-style-type: none;
+}
+/** imported styles from from epub_FontSize.css **/
+
+/*
+*  For the .epub format, each style is based on a percentage of the
+*  body element (which is set programmatically in the epubExport. Setting
+*  these values explicitly allows us to override the merged settings.
+*/
+
+.columns {
+    font-size: 100%;	/* cascaded environment */
+}
+.Chapter_Head {
+    font-size:150%;
+}
+.Chapter_Number {
+float: left;
+padding-right: 5pt; padding-left: 4%;
+font-size: 250%;
+padding-top: 6pt;
+
+    font-size: 250%;
+}
+.Endnote_General_Paragraph,
+.Note_General_Paragraph {
+    font-size : 80%;
+}
+.footnotes {
+    font-size: 85%;
+}
+.Inscription {
+    font-size: 95%;
+}
+.Inscription_Paragraph {
+    font-size: 95%;
+}
+.Intro_List_Item1, .List_Item1 {
+    font-size: 95%;
+}
+.Intro_List_Item2, .List_Item2 {
+    font-size: 95%;
+}
+.Intro_Paragraph {
+    font-size: 95%;
+    line-height: inherit;
+}
+.Intro_Section_Head {
+    font-size: 95%;
+}
+.Citation_Line1, .Line1 {
+    font-size: 100%;
+}
+.Citation_Line2, .Line2 {
+    font-size: 100%;
+}
+.Note_CrossHYPHENReference_Paragraph {
+    font-size: 90%;
+}
+.Note_General_Paragraph {
+    font-size: 90%;
+}
+.Paragraph {
+    font-size: 100%;text-indent:0pt;
+}
+.Paragraph_Continuation {
+    font-size: 100%;
+}
+.Paragraph1 {
+    font-size: 100%;
+}
+.parallel_passage_reference {
+    font-size: 100%;
+}
+.REVERSE_SOLIDUS2, .REVERSE_SOLIDUScom, .REVERSE_SOLIDUSCom, .REVERSE_SOLIDUSEllaFULL_STOP,
+.REVERSE_SOLIDUSsl, .REVERSE_SOLIDUSv1, .REVERSE_SOLIDUSv14, .REVERSE_SOLIDUSv15,
+.REVERSE_SOLIDUSv19, .REVERSE_SOLIDUSv20, .REVERSE_SOLIDUSv8 {
+    font-size: 90%;
+}
+.Section_Head {
+    font-size: 95%;
+}
+.Section_Head_Major {
+    font-size: 100%;
+}
+.Section_Head_Minor {
+    font-size: 100%;
+}
+.Stanza_Break {
+    font-size: 100%;
+}
+.Title_Main {
+    font-size: 250%;
+}
+.Title_Secondary {
+    font-size: 125%;
+}
+.Title_Tertiary {
+    font-size: 100%;
+}
+.Verse_Number {
+    font-size: 80%;
+}
+.Verse_Number_In_Note {
+    font-size: 80%;
+}
+.Chapter_Number {
+float: left;
+padding-right: 5pt; padding-left: 4%;
+font-size: 250%;
+padding-top: 6pt;
+
+font-size: 199%;
+}
