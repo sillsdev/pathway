@@ -77,11 +77,14 @@ namespace SIL.PublishingSolution
         private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
         private string currentChapterNumber = string.Empty;
         private bool isIncludeImage = true;
+        private bool isNoteTargetReferenceExists = false;
+
 
         //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
 
         public const string ReferencesFilename = "zzReferences.xhtml";
+
 
         // property implementations
         public string Title { get; set; }
@@ -175,6 +178,8 @@ namespace SIL.PublishingSolution
                 }
 
                 isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
+                isNoteTargetReferenceExists = Common.NodeExists(projInfo.DefaultXhtmlFileWithPath, "");
+                
 
                 if (projInfo.ProjectInputType.ToLower() == "dictionary")
                     InsertBeforeAfterInXHTML(projInfo);
@@ -530,26 +535,26 @@ namespace SIL.PublishingSolution
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(fileName);
             XmlElement elmRoot = xDoc.DocumentElement;
-            string xPath = "//xhtml:span[@class='Note_Target_Reference']";
-            if (elmRoot != null)
-            {
-                XmlNodeList referenceNode = elmRoot.SelectNodes(xPath, namespaceManager);
-                if (referenceNode != null && referenceNode.Count > 0)
-                {
-                    for (int i = 0; i < referenceNode.Count; i++)
-                    {
-                        //referenceNode[i].RemoveChild(referenceNode[i].FirstChild);
-                        var parentNode = referenceNode[i].ParentNode;
-                        if (parentNode != null)
-                            parentNode.RemoveChild(referenceNode[i]);
-                    }
-                }
-            }
+            //string xPath = "//xhtml:span[@class='Note_Target_Reference']";
+            //if (elmRoot != null)
+            //{
+            //    XmlNodeList referenceNode = elmRoot.SelectNodes(xPath, namespaceManager);
+            //    if (referenceNode != null && referenceNode.Count > 0)
+            //    {
+            //        for (int i = 0; i < referenceNode.Count; i++)
+            //        {
+            //            //referenceNode[i].RemoveChild(referenceNode[i].FirstChild);
+            //            var parentNode = referenceNode[i].ParentNode;
+            //            if (parentNode != null)
+            //                parentNode.RemoveChild(referenceNode[i]);
+            //        }
+            //    }
+            //}
 
             //If includeImage is false, removes the img -> parent tag
             if (isIncludeImage == false)
             {
-                xPath = "//xhtml:div[@class='pictureCaption']";
+                string xPath = "//xhtml:div[@class='pictureCaption']";
                 if (elmRoot != null)
                 {
                     XmlNodeList pictCaptionNode = elmRoot.SelectNodes(xPath, namespaceManager);
@@ -863,9 +868,20 @@ namespace SIL.PublishingSolution
                 sbRef.AppendLine("<xsl:attribute name=\"id\"><xsl:text>FN_</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
                 sbRef.AppendLine("<xsl:element name=\"a\">");
                 sbRef.AppendLine("<xsl:attribute name=\"href\"><xsl:text>#</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
-                sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Chapter_Number'][1]\"/><xsl:text>:</xsl:text>");
-                sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Verse_Number'][1]\"/>");
-                sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text><xsl:value-of select=\".\"/></xsl:element></xsl:for-each>");
+                if (isNoteTargetReferenceExists)
+                {
+                    sbRef.AppendLine("<xsl:value-of select=\"xhtml:span[@class='Note_Target_Reference']\"/>");
+                    sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text>");
+                    sbRef.AppendLine("<xsl:for-each select=\"xhtml:span[not(@class ='Note_Target_Reference')]\"><xsl:value-of select=\".\"/></xsl:for-each>");
+                    sbRef.AppendLine("</xsl:element></xsl:for-each>");
+                }
+                else
+                {
+                    sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Chapter_Number'][1]\"/><xsl:text>:</xsl:text>");
+                    sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Verse_Number'][1]\"/>");
+                    sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text><xsl:value-of select=\".\"/></xsl:element></xsl:for-each>");
+                }
+
                 sbRef.AppendLine("</xsl:element></xsl:if></xsl:if>");
                 Common.StreamReplaceInFile(xsltFullName, searchText, sbRef.ToString());
                 // add references inline (second change)
@@ -890,9 +906,20 @@ namespace SIL.PublishingSolution
                 sbRef.AppendLine("<xsl:attribute name=\"id\"><xsl:text>FN_</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
                 sbRef.AppendLine("<xsl:element name=\"a\">");
                 sbRef.AppendLine("<xsl:attribute name=\"href\"><xsl:text>#</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
-                sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Chapter_Number'][1]\"/><xsl:text>:</xsl:text>");
-                sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Verse_Number'][1]\"/>");
-                sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text><xsl:value-of select=\".\"/></xsl:element>");
+                if (isNoteTargetReferenceExists)
+                {
+                    sbRef.AppendLine("<xsl:value-of select=\"xhtml:span[@class='Note_Target_Reference']\"/>");
+                    sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text>");
+                    sbRef.AppendLine("<xsl:for-each select=\"xhtml:span[not(@class ='Note_Target_Reference')]\"><xsl:value-of select=\".\"/></xsl:for-each>");
+                    sbRef.AppendLine("</xsl:element>");
+                }
+                else
+                {
+                    sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Chapter_Number'][1]\"/><xsl:text>:</xsl:text>");
+                    sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Verse_Number'][1]\"/>");
+                    sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text><xsl:value-of select=\".\"/></xsl:element>");
+                }
+
                 sbRef.AppendLine("</xsl:for-each></xsl:element></xsl:if>");
                 Common.StreamReplaceInFile(xsltFullName, searchText2, sbRef.ToString());
             }

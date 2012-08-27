@@ -1621,8 +1621,9 @@ namespace SIL.Tool
                 {
                     string chapterNumber = chapterNode.InnerText;
                     XmlAttribute attribute = xdoc.CreateAttribute("id");
-                    attribute.Value = "id_" + bookNode.InnerText + "_" + "Chapter" + chapterNumber;
-                    chapterNode.Attributes.Append(attribute);
+                    if (bookNode != null)
+                        attribute.Value = "id_" + bookNode.InnerText + "_" + "Chapter" + chapterNumber;
+                    if (chapterNode.Attributes != null) chapterNode.Attributes.Append(attribute);
                 }
 
                 //xPath = ".//xhtml:div[@class='Section_Head']";
