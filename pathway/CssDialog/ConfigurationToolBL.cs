@@ -58,6 +58,7 @@ namespace SIL.PublishingSolution
         public string inputTypeBL = "Dictionary";
 
         public string ElementDesc = "description";
+        public string ElementAvailable = "available";
         public string ElementComment = "comment";
 
         public string TypeStandard = "Standard";
@@ -1674,13 +1675,16 @@ namespace SIL.PublishingSolution
                     break;
             }
 
-            if (Common.GetOsName().IndexOf("Windows") >= 0) // Hide Preview if LibreOffice not exist            {
+            if (Common.GetOsName().IndexOf("Windows") >= 0) // Hide Preview if LibreOffice not exist
+            {
                 string regEntry = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\LibreOffice\\UNO\\InstallPath", "");
                 if (regEntry == null)
                 {
                     if (cTool.TabControl1.TabPages.ContainsKey("tabPreview"))
                         cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPreview"]);
-                }            }
+                }
+            }
+
         }
 
         /// <summary>
@@ -3531,10 +3535,11 @@ namespace SIL.PublishingSolution
             //catch { }
         }
 
-        public void chkAvailable_CheckedChangedBL()
+        public void chkAvailable_CheckedChangedBL(object sender)
         {
             try
             {
+                WriteAttrib(ElementAvailable, sender);
                 UpdateGrid(cTool.ChkAvailable, cTool.StylesGrid);
             }
             catch { }
