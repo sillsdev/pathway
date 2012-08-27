@@ -1,11 +1,11 @@
-UI-About: عن البرنامج
+﻿UI-About: عن البرنامج
 UI-Add-Bookmark: أضف شارة رجوع
 UI-All: الكل
 UI-Back: الرجوع
 UI-Bold: عريض
 UI-Book: كتاب
 UI-Bookmarks: شارات الرجوع
-UI-Books-Of-Moses: الأسفار الموساوية
+UI-Books-Of-Moses: الأسفار الموسوية
 UI-Books: أسفار البحث
 UI-Cancel: إلغاء
 UI-Change: تغيير
@@ -32,7 +32,7 @@ UI-Message-Too-Large-To-Be-Sent: الرسالة لا يمكن ارسالها ل�
 UI-Minor-Prophets: أسفار الأنبياء الصغار
 UI-New-Testament: العهد الجديد
 UI-OK: موافق
-UI-Of: of
+UI-Of: -
 UI-Off: غير منشط
 UI-Old-Testament: العهد القديم
 UI-On: منشط
@@ -66,7 +66,7 @@ UI-Theme-Natural: طبيعة
 UI-Theme-Paper: ورقية
 UI-Theme-Sunshine: صفراء
 UI-Theme: نوع الخلفية
-UI-Themes: Themes
+UI-Themes: الخلفيات
 UI-To-Book: الى سفر
 UI-To: إلى
 UI-Verse-Does-Not-Exist: الآية لا توجد
