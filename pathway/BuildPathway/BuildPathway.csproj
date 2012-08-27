@@ -593,12 +593,14 @@
     <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tec*" />
     <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tex" />
     <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\mk*" />
+    <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\fmt*" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\kpse*" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xdvipdf*" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xe*" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\tec*" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\tex" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\mk*" />
+    <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\fmt*" />
     <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\*.cache-3" />
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" Exclude="..\XeLaTexConvert\Paratexmf\**\.svn\**\**" />
   </ItemGroup>
