@@ -2,6 +2,18 @@
 Go Bible Software Release Notes - History of Changes since version 2.2.6
 ===========================================================================
 GoBibleCreator 2.4.3 Notes 
+
+August 26, 2012
+
+GoBibleCore updated as follows.
+ BUG FIX: (Issue 163 follow-up - see below)
+ - Viewer Version 2.4.2 updated to use obfuscated Java class names
+ - In January 2012, it became apparent that obfuscation is really necessary!
+ - This is a long overdue corrective action that had been deferred for no reason whatsoever.
+ - Apologies for any inconvenience caused by the delay.
+ - N.B. The software revision number has not been changed!
+ - i.e. Viewer Version remains as 2.4.2 despite the above change. 
+
 December 8, 2011
 
 GoBibleCreator updated as follows.
