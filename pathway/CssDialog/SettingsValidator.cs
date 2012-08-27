@@ -293,14 +293,14 @@ namespace SIL.PublishingSolution
             //if (!ValidateCssEditor(parentNode)) return false;
             if (!ValidateSelectedIcon(parentNode)) return false;
             if (!ValidateMisingIcon(parentNode)) return false;
-            if (!ValidatePrintVia(parentNode)) return false;
+            //if (!ValidatePrintVia(parentNode)) return false;
             if (!ValidateConfigureDictionary(parentNode)) return false;
             if (!ValidateReversalIndexes(parentNode)) return false;
             if (!ValidateGrammerSketch(parentNode)) return false;
             if (!ValidateExtraProcessing(parentNode)) return false;
             if (!ValidateLayoutSelected(parentNode)) return false;
             if (!ValidateMedia(parentNode)) return false;
-            if (!ValidateDefaultPrintVia(parentNode)) return false;
+            //if (!ValidateDefaultPrintVia(parentNode)) return false;
             if (!ValidateDefaultConfigureDictionary(parentNode)) return false;
             if (!ValidateDefaultReversalIndexes(parentNode)) return false;
             if (!ValidateDefaultGrammerSketch(parentNode)) return false;
