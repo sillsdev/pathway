@@ -49,7 +49,7 @@ namespace SIL.Tool
             else if (Common.IsUnixOS())
             {
                 if (Common.ReadingCommandPromptOutputValue("uname", "-m").IndexOf("i686") >= 0)
-                   pathwayXeLaTeXPath = "/usr/lib/pwtex/bin/i386-bin";
+                   pathwayXeLaTeXPath = "/usr/lib/pwtex/bin/i386-linux";
                 else if (Common.ReadingCommandPromptOutputValue("uname", "-m").IndexOf("x86_64") >= 0)
                     pathwayXeLaTeXPath = "/usr/lib/pwtex/bin/x86_64-linux";
             }
