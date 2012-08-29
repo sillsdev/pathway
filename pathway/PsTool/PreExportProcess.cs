@@ -1074,6 +1074,11 @@ namespace SIL.Tool
                 //COPYRIGHT 
                 if (File.Exists(copyRightFilePath))
                 {
+                    if(Common.UnixVersionCheck())
+                    {
+                        Common.RemoveDTDForLinuxProcess(copyRightFilePath);
+                    }
+
                     XmlDocument crdoc = Common.DeclareXMLDocument(true);
                     crdoc.Load(copyRightFilePath);
                     XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);

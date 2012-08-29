@@ -172,14 +172,11 @@ namespace SIL.PublishingSolution
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 if (Common.UnixVersionCheck())
                 {
-                    
-                    AfterBeforeProcessEpub epubProcess = new AfterBeforeProcessEpub();
-                    epubProcess.PreserveSpace(projInfo.DefaultXhtmlFileWithPath);
+                    Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
                 }
 
                 isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
                 isNoteTargetReferenceExists = Common.NodeExists(projInfo.DefaultXhtmlFileWithPath, "");
-                
 
                 if (projInfo.ProjectInputType.ToLower() == "dictionary")
                     InsertBeforeAfterInXHTML(projInfo);
