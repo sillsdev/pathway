@@ -37,77 +37,81 @@ namespace SIL.PublishingSolution
     public class AfterBeforeProcessEpub : AfterBeforeXHTMLProcess
     {
         #region Private Variable
-        string _strBook = string.Empty;
-        string _strBook2ndBook = string.Empty;
+
+        private string _strBook = string.Empty;
+        private string _strBook2ndBook = string.Empty;
         private bool _is1stBookFound = false;
-        readonly Stack _styleStack = new Stack();
-        readonly Stack _allSpanStack = new Stack();
-        readonly Stack _allDivStack = new Stack();
-        readonly Stack _usedSpanStack = new Stack();
-        readonly Stack _tagTypeStack = new Stack(); // P - Para, T - Text, I - Image, L - <ol>/<ul> tag , S - <li> tag,  O - Others
-        readonly Dictionary<string, string> _makeAttribute = new Dictionary<string, string>();
+        private readonly Stack _styleStack = new Stack();
+        private readonly Stack _allSpanStack = new Stack();
+        private readonly Stack _allDivStack = new Stack();
+        private readonly Stack _usedSpanStack = new Stack();
+
+        private readonly Stack _tagTypeStack = new Stack();
+                               // P - Para, T - Text, I - Image, L - <ol>/<ul> tag , S - <li> tag,  O - Others
+
+        private readonly Dictionary<string, string> _makeAttribute = new Dictionary<string, string>();
         private ArrayList _sectionName = new ArrayList();
         //Dictionary<string, string> dictColumnGap = new Dictionary<string, string>();
 
-        bool isHiddenText = false;
-        string _familyType = string.Empty;
-        string _styleName = string.Empty;
+        private bool isHiddenText = false;
+        private string _familyType = string.Empty;
+        private string _styleName = string.Empty;
         // Image
-        int _frameCount; //For Picture Frame count
-        string _beforePseudoValue = string.Empty;
-        string _beforePseudoParentValue = string.Empty;
+        private int _frameCount; //For Picture Frame count
+        private string _beforePseudoValue = string.Empty;
+        private string _beforePseudoParentValue = string.Empty;
         //readonly StringBuilder _imageBuilder = new StringBuilder();
-        readonly Stack _prevLangStack = new Stack(); // For handle previous Language
-        readonly StringBuilder _pseudoBuilder = new StringBuilder();
-        bool _contentReplace;
-        readonly StringBuilder _classContentBuilder = new StringBuilder();
-        int _styleCounter;
-        string _metaValue = string.Empty;   // TD-278 <meta name />
-        ArrayList _odtFiles;
+        private readonly Stack _prevLangStack = new Stack(); // For handle previous Language
+        private readonly StringBuilder _pseudoBuilder = new StringBuilder();
+        private bool _contentReplace;
+        private readonly StringBuilder _classContentBuilder = new StringBuilder();
+        private int _styleCounter;
+        private string _metaValue = string.Empty; // TD-278 <meta name />
+        private ArrayList _odtFiles;
         //ArrayList _odtEndFiles;
 
-        string _outputExtension = string.Empty;
-        int _autoFootNoteCount;
+        private string _outputExtension = string.Empty;
+        private int _autoFootNoteCount;
         private string _sourcePicturePath;
 
         //Table 
-        List<string> _table = new List<string>();
+        private List<string> _table = new List<string>();
         private int _tableCount = 0;
         private int _tableColumnCount = 0;
-        Dictionary<string, int> _tableColumnModify = new Dictionary<string, int>();
+        private Dictionary<string, int> _tableColumnModify = new Dictionary<string, int>();
         private bool _isTableOpen;
 
         //readonly Library _lib = new Library();
-        int _pbCounter;
-        string _readerValue = string.Empty;
-        string _footnoteValue = string.Empty;
-        string _classAfter = string.Empty;
-        char _closeTagType;
-        string _parentStyleName;
-        readonly Dictionary<string, string> _existingStyleName = new Dictionary<string, string>();
+        private int _pbCounter;
+        private string _readerValue = string.Empty;
+        private string _footnoteValue = string.Empty;
+        private string _classAfter = string.Empty;
+        private char _closeTagType;
+        private string _parentStyleName;
+        private readonly Dictionary<string, string> _existingStyleName = new Dictionary<string, string>();
 
-        string _styleFilePath;
-        float _columnWidth;
-        string _temp;
-        string _divClass = string.Empty;
-        string _allDiv = string.Empty;
-        string _class = string.Empty;
+        private string _styleFilePath;
+        private float _columnWidth;
+        private string _temp;
+        private string _divClass = string.Empty;
+        private string _allDiv = string.Empty;
+        private string _class = string.Empty;
         private bool _pseudoSingleSpace = false;
         //bool _isWhiteSpace;
-        bool _isNewLine = true;
-        string _prevLang = string.Empty;
-        string _parentClass = string.Empty;
-        string _parentLang = string.Empty;
-        string _projectType = string.Empty;
-        readonly Dictionary<string, string> _counterVolantryReset = new Dictionary<string, string>();
-        readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
-        readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");
+        private bool _isNewLine = true;
+        private string _prevLang = string.Empty;
+        private string _parentClass = string.Empty;
+        private string _parentLang = string.Empty;
+        private string _projectType = string.Empty;
+        private readonly Dictionary<string, string> _counterVolantryReset = new Dictionary<string, string>();
+        private readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
+        private readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");
 
-        ArrayList _anchor = new ArrayList();
+        private ArrayList _anchor = new ArrayList();
         private XmlDocument _xmldoc;
         private bool _imageStart;
         private string _imageParent;
-        bool _imageDiv;
+        private bool _imageDiv;
         private bool progressBarError;
         private string _imageGraphicsName = string.Empty;
         private bool _imageTextAvailable;
@@ -116,8 +120,8 @@ namespace SIL.PublishingSolution
         private bool _imagePreviousFinished = false;
         private bool _imageParaForCaption = false;
         private List<string> _unUsedParagraphStyle = new List<string>();
-        string footCallSymb = string.Empty;
-        List<string> LanguageFontStyleName = new List<string>();
+        private string footCallSymb = string.Empty;
+        private List<string> LanguageFontStyleName = new List<string>();
         private int _storyNo = 0;
         private int _hyperLinkNo = 0;
         private bool isFileEmpty = true;
@@ -157,11 +161,13 @@ namespace SIL.PublishingSolution
 
         private string _originalXHTML = string.Empty;
 
-        Dictionary<string, string> _pageSize = new Dictionary<string, string>();
+        private Dictionary<string, string> _pageSize = new Dictionary<string, string>();
         private bool _isFromExe = false;
+
         #endregion
 
         #region Public Variable
+
         public bool _multiLanguageHeader = false;
         public string RefFormat = "Genesis 1";
         public bool IsMirrorPage;
@@ -188,7 +194,9 @@ namespace SIL.PublishingSolution
             return mat.Count;
         }
 
-        public void RemoveAfterBefore(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
+        public void RemoveAfterBefore(PublicationInformation projInfo,
+                                      Dictionary<string, Dictionary<string, string>> idAllClass,
+                                      Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             string sourceFile = SourceTargetFile(projInfo);
@@ -221,7 +229,9 @@ namespace SIL.PublishingSolution
 
         #endregion
 
-        private void InitializeData(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
+        private void InitializeData(PublicationInformation projInfo,
+                                    Dictionary<string, Dictionary<string, string>> idAllClass,
+                                    Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
             _outputExtension = projInfo.OutputExtension;
             _allStyle = new Stack<string>();
@@ -331,7 +341,7 @@ namespace SIL.PublishingSolution
                         break;
 
                     case XmlNodeType.Text:
-                        Write();  // Code here ************
+                        Write(); // Code here ************
                         break;
 
                     case XmlNodeType.Whitespace:
@@ -363,7 +373,8 @@ namespace SIL.PublishingSolution
 
                     case XmlNodeType.DocumentType:
 
-                        _writer.WriteDocType(_reader.Name, _reader.GetAttribute("PUBLIC"), _reader.GetAttribute("SYSTEM"), _reader.Value);
+                        _writer.WriteDocType(_reader.Name, _reader.GetAttribute("PUBLIC"),
+                                             _reader.GetAttribute("SYSTEM"), _reader.Value);
 
                         break;
 
@@ -466,7 +477,7 @@ namespace SIL.PublishingSolution
             {
                 //bool whiteSpaceExist = _significant;
                 //string content1 = SignificantSpace(psuedoBefore.Content);
-                if (psuedoBefore.Content!= null  && psuedoBefore.Content.Trim().Length == 0)
+                if (psuedoBefore.Content != null && psuedoBefore.Content.Trim().Length == 0)
                 {
                     if (!_significant)
                     {
@@ -626,7 +637,7 @@ namespace SIL.PublishingSolution
                 if (_psuedoAfter.ContainsKey(_closeChildName))
                 {
                     ClassInfo classInfo = _psuedoAfter[_closeChildName];
-                    if (classInfo.Content!= null && classInfo.Content.Trim().Length == 0)
+                    if (classInfo.Content != null && classInfo.Content.Trim().Length == 0)
                     {
                         if (!_significant)
                         {
@@ -651,50 +662,6 @@ namespace SIL.PublishingSolution
             _writer = new XmlTextWriter(projInfo.DefaultXhtmlFileWithPath, null);
         }
 
-        /// <summary>
-        /// 1. Modify <html  xmlns="http://www.w3.org/1999/xhtml"> tag as <html>
-        ///  </summary>
-        public string PreserveSpace(string xhtmlFileNameWithPath)
-        {
-            FileStream fs = new FileStream(xhtmlFileNameWithPath, FileMode.Open);
-            StreamReader stream = new StreamReader(fs);
-
-            string fileDir = Path.GetDirectoryName(xhtmlFileNameWithPath);
-            string fileName = "Preserve" + Path.GetFileName(xhtmlFileNameWithPath);
-            string Newfile = Path.Combine(fileDir, fileName);
-            bool continueProcess = false;
-            var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
-            var sw2 = new StreamWriter(fs2);
-            string line;
-            while ((line = stream.ReadLine()) != null)
-            {
-                if(continueProcess)
-                {
-                    sw2.WriteLine(line);
-                }
-                else
-                {
-                    int htmlNodeStart = line.IndexOf("<html");
-                    if (htmlNodeStart >= 0)
-                    {
-                        int htmlNodeEnd = line.IndexOf(">", htmlNodeStart);
-                        string line1 = "<?xml version=\"1.0\" encoding=\"utf-8\"?> <!DOCTYPE html[]>";
-                        line = line1 + "<html" + line.Substring(htmlNodeEnd);
-                        sw2.WriteLine(line);
-                        continueProcess = true;
-                    }    
-                }
-            }
-            stream.Close();
-            sw2.Close();
-            fs.Close();
-            fs2.Close();
-
-            
-            File.Copy(xhtmlFileNameWithPath, xhtmlFileNameWithPath.Replace(".", "_File."), true);
-            File.Copy(Newfile, Newfile.Replace("Preserve", ""), true);
-            File.Delete(Newfile);
-            return xhtmlFileNameWithPath;
-        }
     }
+
 }
