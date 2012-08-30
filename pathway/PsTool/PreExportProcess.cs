@@ -1076,7 +1076,14 @@ namespace SIL.Tool
                 {
                     if(Common.UnixVersionCheck())
                     {
-                        Common.RemoveDTDForLinuxProcess(copyRightFilePath);
+                        string draftTempFileName = Path.GetFileName(copyRightFilePath);
+                        draftTempFileName = Path.Combine(Path.GetTempPath(), draftTempFileName);
+                        if (!File.Exists(draftTempFileName))
+                        {
+                            File.Copy(copyRightFilePath, draftTempFileName, true);
+                            Common.RemoveDTDForLinuxProcess(draftTempFileName);
+                        }
+                        copyRightFilePath = draftTempFileName;
                     }
 
                     XmlDocument crdoc = Common.DeclareXMLDocument(true);
