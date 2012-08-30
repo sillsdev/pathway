@@ -994,7 +994,6 @@ namespace SIL.PublishingSolution
                                 cTool.DdlDefaultFont.Enabled = bEnabled;
                                 cTool.DdlMissingFont.Enabled = bEnabled;
                                 cTool.DdlNonSILFont.Enabled = bEnabled;
-                                cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
                                 break;
                             case "includefontvariants":
                                 cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
