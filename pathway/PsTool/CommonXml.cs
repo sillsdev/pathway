@@ -259,7 +259,7 @@ namespace SIL.Tool
 
             if (!File.Exists(metaDataFull)) return _metaDataDic;
 
-            XmlDocument xmlDocument = new XmlDocument();
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             xmlDocument.Load(metaDataFull);
             XmlNode root = xmlDocument.DocumentElement;
             if (root == null) return _metaDataDic;
@@ -1016,7 +1016,7 @@ namespace SIL.Tool
                     var wsPath = PathCombine(GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
                     if (File.Exists(wsPath))
                     {
-                        var ldml = new XmlDocument { XmlResolver = null };
+                        var ldml = Common.DeclareXMLDocument(false);
                         ldml.Load(wsPath);
                         var nsmgr = new XmlNamespaceManager(ldml.NameTable);
                         nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");

@@ -81,7 +81,7 @@ namespace SIL.PublishingSolution
 
             if (styleFilePath.ToLower().IndexOf("dictionary") > 0)
             {
-                _styleXMLdoc = new XmlDocument();
+                _styleXMLdoc = Common.DeclareXMLDocument(false);
                 _styleXMLdoc.Load(styleFilePath);
                 var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
                 nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
@@ -115,7 +115,7 @@ namespace SIL.PublishingSolution
             }
             else//Scripture
             {
-                _styleXMLdoc = new XmlDocument();
+                _styleXMLdoc = Common.DeclareXMLDocument(false);
                 _styleXMLdoc.Load(styleFilePath);
                 var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
                 nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
@@ -138,7 +138,7 @@ namespace SIL.PublishingSolution
         {
             if (font.Count == 0) return;
 
-            _styleXMLdoc = new XmlDocument();
+            _styleXMLdoc = Common.DeclareXMLDocument(false);
             _styleXMLdoc.Load(styleFilePath);
             var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
@@ -850,7 +850,7 @@ namespace SIL.PublishingSolution
         /// <param name="noOfChar">No of Character to be displayed as Drop Caps</param>
         public void CreateDropCapStyle(string styleFilePath, string className, string makeClassName, string parentName, int noOfChar)
         {
-            _styleXMLdoc = new XmlDocument();
+            _styleXMLdoc = Common.DeclareXMLDocument(false);
             _styleXMLdoc.Load(styleFilePath);
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -941,7 +941,7 @@ namespace SIL.PublishingSolution
         {
             var columnGap = new Dictionary<string, XmlNode>();
             var columnGapBuilder = new StringBuilder();
-            _styleXMLdoc = new XmlDocument();
+            _styleXMLdoc = Common.DeclareXMLDocument(false);
             var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
@@ -1012,7 +1012,7 @@ namespace SIL.PublishingSolution
             float abs;
             string absValue = string.Empty;
 
-            var doc = new XmlDocument();
+            var doc = Common.DeclareXMLDocument(false);
             doc.Load(styleFilePath);
 
             var nsmgr = new XmlNamespaceManager(doc.NameTable);
@@ -1098,7 +1098,7 @@ namespace SIL.PublishingSolution
             string fileName = Path.GetFileNameWithoutExtension(_projectPath);
             string styleFilePath = Common.PathCombine(targetFolder, fileName + "styles.xml");
 
-            _styleXMLdoc = new XmlDocument();
+            _styleXMLdoc = Common.DeclareXMLDocument(false);
             _styleXMLdoc.Load(styleFilePath);
             return styleFilePath;
         }
