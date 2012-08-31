@@ -299,23 +299,34 @@ namespace SIL.PublishingSolution
             var systemFontList = FontFamily.Families;
             if (systemFontList.Length != XeLaTexInstallation.GetXeLaTexFontCount())
             {
-                using (var p2 = new Process())
+				var si = new ProcessStartInfo("fc-cache", "-v -r");
+                var xelatexPath = XeLaTexInstallation.GetXeLaTexDir();
+                if (!Common.IsUnixOS())
                 {
-                    var xelatexPath = XeLaTexInstallation.GetXeLaTexDir();
-                    if (!Common.IsUnixOS())
-                    {
-                        xelatexPath = Path.Combine(xelatexPath, "bin");
-                        xelatexPath = Path.Combine(xelatexPath, "win32");
-                    }
-                    p2.StartInfo.WorkingDirectory = xelatexPath;
-                    p2.StartInfo.FileName = "fc-cache";
-                    p2.StartInfo.Arguments = "-v -r";
-                    p2.Start();
+                    xelatexPath = Path.Combine(xelatexPath, "bin");
+                    xelatexPath = Path.Combine(xelatexPath, "win32");
+                }
+                si.WorkingDirectory = xelatexPath;
+                using (var p2 = Process.Start(si))
+                {
                     p2.WaitForExit();
                 }
                 XeLaTexInstallation.SetXeLaTexFontCount(systemFontList.Length);
             }
         }
+
+		protected void XeLaTexProcess (string name, string arguments, out string p1Error)
+		{
+			var si = new ProcessStartInfo(name, arguments);
+			si.RedirectStandardOutput = true;
+			si.RedirectStandardError = true;
+			si.UseShellExecute = false;
+			using (Process p1 = Process.Start(si))
+			{
+				p1.WaitForExit();
+				p1Error = p1.StandardError.ReadToEnd();
+			}
+		}
 
         public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
@@ -365,49 +376,12 @@ namespace SIL.PublishingSolution
             Directory.SetCurrentDirectory(xeLaTexInstallationPath);
 
             string p1Error = string.Empty;
-            using (Process p1 = new Process())
-            {
-                p1.StartInfo.FileName = name;
-                if (xeLatexFullFile != null)
-                    p1.StartInfo.Arguments = arguments;
-                p1.StartInfo.RedirectStandardOutput = true;
-                p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
-                p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
-                p1.Start();
-                p1.WaitForExit();
-                p1Error = p1.StandardError.ReadToEnd();
-            }
+			XeLaTexProcess (name, arguments, out p1Error);
 
             if (Convert.ToBoolean(_tableOfContent))
             {
-                using (Process p1 = new Process())
-                {
-                    p1.StartInfo.FileName = name;
-                    if (xeLatexFullFile != null)
-                        p1.StartInfo.Arguments = arguments;
-                    p1.StartInfo.RedirectStandardOutput = true;
-                    p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
-                    p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
-                    p1.Start();
-                    p1.WaitForExit();
-                    //p1Output = p1.StandardOutput.ReadToEnd();
-                    p1Error = p1.StandardError.ReadToEnd();
-                }
-
-                using (Process p1 = new Process())
-                {
-                    p1.StartInfo.FileName = name;
-                    if (xeLatexFullFile != null)
-                        p1.StartInfo.Arguments = arguments;
-                    p1.StartInfo.RedirectStandardOutput = true;
-                    p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
-                    p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
-                    p1.Start();
-                    p1.WaitForExit();
-                    //p1Output = p1.StandardOutput.ReadToEnd();
-                    p1Error = p1.StandardError.ReadToEnd();
-                }
-
+				XeLaTexProcess (name, arguments, out p1Error);
+				XeLaTexProcess (name, arguments, out p1Error);
             }
             string pdfFullName = string.Empty;
             string texNameOnly = Path.GetFileNameWithoutExtension(xeLatexFullFile);
