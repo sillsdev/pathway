@@ -1,6 +1,7 @@
-pathway-xelatex (1.6.0.2545-1) unstable; urgency=high
+pathway-xelatex (1.7.0.2604-3) unstable; urgency=high
 
-  * 1.6.0.2545 daily
+  * 1.7.0.2604 sprint
+    - add fmtutil to the bin folder
   * 1.6.0.2528 sprint
     - Update to TexLive 2012
   * 1.5.0.2463 sprint
