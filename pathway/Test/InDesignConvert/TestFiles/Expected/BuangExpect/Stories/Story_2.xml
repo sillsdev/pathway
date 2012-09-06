@@ -7,7 +7,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>=a</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_1">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_1">
@@ -95,7 +95,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>a-</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -201,7 +201,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aba</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -316,7 +316,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>abel</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -494,7 +494,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>abel abel</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -576,7 +576,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>abes</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -691,7 +691,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>abiba</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -785,7 +785,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>abu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -879,7 +879,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>abuhek</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -1099,7 +1099,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>abuung</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -1193,7 +1193,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>adiiv</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -1275,7 +1275,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ading</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -1660,7 +1660,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>adingnë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -1838,7 +1838,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>adingseḳë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -2082,7 +2082,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -2227,7 +2227,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aga</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -2342,7 +2342,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>agesip</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -2424,7 +2424,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aget</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -2506,7 +2506,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>agi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -2657,7 +2657,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>agu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -2832,7 +2832,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aġe</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -2929,7 +2929,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aġee</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -3023,7 +3023,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aġeleng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -3114,7 +3114,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aġo</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -3196,7 +3196,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aġönġ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -3227,7 +3227,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aġuu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -3420,7 +3420,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>agga</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -3745,7 +3745,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aggagga</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -3863,7 +3863,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aggata</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -4119,7 +4119,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aggata avi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -4216,7 +4216,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aggata-dob-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -4313,7 +4313,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aggata-mala-tumsën-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -4470,7 +4470,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aggatata</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -4612,7 +4612,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aggis</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -5150,7 +5150,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aggis-apel</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -5283,7 +5283,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aggis-seḳë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -5476,7 +5476,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahaa</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -5630,7 +5630,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aheeng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -5763,7 +5763,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aheeng-ata</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -5917,7 +5917,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -7361,7 +7361,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë aliveng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -7461,7 +7461,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë biing</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -7549,7 +7549,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë dahis</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -7637,7 +7637,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë degën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -7779,7 +7779,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë degwa</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -8032,7 +8032,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë desën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -8120,7 +8120,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ġami</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -8220,7 +8220,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ġami tur</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -8293,7 +8293,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ġeru</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -8384,7 +8384,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ggeneng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -8517,7 +8517,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ggöh</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -8752,7 +8752,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë gwap</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -8858,7 +8858,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë gweng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -8943,7 +8943,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë hiiḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -9037,7 +9037,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë köd</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -9173,7 +9173,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë kul</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -9285,7 +9285,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ḳapeeng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -9433,7 +9433,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ḳatëḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -9521,7 +9521,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ḳaving</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -9681,7 +9681,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ḳedaaḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -9802,7 +9802,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ḳedik</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -9887,7 +9887,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ḳeḳung</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -10029,7 +10029,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ḳemu ḳemu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -10102,7 +10102,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ḳerin</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -10259,7 +10259,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ḳevus</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -10380,7 +10380,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë leeng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -10471,7 +10471,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë leḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -10556,7 +10556,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë loḳ vu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -10644,7 +10644,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë maggin</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -10744,7 +10744,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë meggëveng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -10832,7 +10832,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë meḳus</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -10944,7 +10944,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë memus</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -11044,7 +11044,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë menġëës</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -11132,7 +11132,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë meyip</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -11220,7 +11220,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë nalu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -11332,7 +11332,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë navi nesang</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -11468,7 +11468,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë nevis</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -11715,7 +11715,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë nipaya</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -11803,7 +11803,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë nivesa</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -11891,7 +11891,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë nudeng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -12039,7 +12039,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë nġaya (in)</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -12166,7 +12166,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë pahu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -12266,7 +12266,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë pelot</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -12351,7 +12351,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë pepeleng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -12514,7 +12514,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë pepoleḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -12620,7 +12620,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë pepu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -12711,7 +12711,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë puḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -12847,7 +12847,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë raġo</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -12947,7 +12947,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë raḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -13020,7 +13020,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë raru</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -13132,7 +13132,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë rekwareḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -13232,7 +13232,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë salaḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -13350,7 +13350,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë sekwahek</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -13423,7 +13423,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë sengën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -13580,7 +13580,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë sepëp</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -13716,7 +13716,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë sis yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -13804,7 +13804,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë soveḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -13940,7 +13940,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë tabaaḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -14112,7 +14112,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë to</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -14230,7 +14230,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë valo</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -14318,7 +14318,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë veġo</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -14424,7 +14424,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë veriik</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -14548,7 +14548,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë verup</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -14636,7 +14636,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë vewev</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -14724,7 +14724,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë ving</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -14902,7 +14902,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë vonġin</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -15077,7 +15077,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë yes</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -15345,7 +15345,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahë-vuuḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -15463,7 +15463,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahëbu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -15863,7 +15863,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahëggi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -15996,7 +15996,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahëggin</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -16186,7 +16186,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahësa</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -16394,7 +16394,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahëseḳë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -16587,7 +16587,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahëta</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -16717,7 +16717,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahëtöḳsën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -16847,7 +16847,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahëvavu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -16950,7 +16950,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahëvingsën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -17068,7 +17068,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahëwëëk</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -17210,7 +17210,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahoḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -17307,7 +17307,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahon</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -17422,7 +17422,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahov</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -17531,7 +17531,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -17808,7 +17808,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahugu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -17962,7 +17962,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahun</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -18035,7 +18035,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahuyi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -18153,7 +18153,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahuyi-ë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -18274,7 +18274,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ahuyigu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -18407,7 +18407,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aidaba</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -18492,7 +18492,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -18580,7 +18580,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -18683,7 +18683,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ajee-maluh</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -18804,7 +18804,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ajel</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -18910,7 +18910,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -19007,7 +19007,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -19101,7 +19101,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ala</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -19279,7 +19279,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ala ngwë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -19589,7 +19589,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alabasta</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -19671,7 +19671,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -20347,7 +20347,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam beböġeksën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -20459,7 +20459,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam dahis</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -20559,7 +20559,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam hib</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -20680,7 +20680,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam ḳetu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -20783,7 +20783,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam sepoh</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -20874,7 +20874,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam teta</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -21031,7 +21031,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-beġö-hodeḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -21119,7 +21119,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-beġö-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -21207,7 +21207,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-begganġ-ngwë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -21289,7 +21289,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-bël-mala</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -21377,7 +21377,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-bël-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -21459,7 +21459,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-deneḳo-seriveng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -21547,7 +21547,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-deneḳo-takës</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -21650,7 +21650,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-denenër-ġaġek-kuungsën-ranġah</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -21747,7 +21747,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-denenër-ġaġek-ranġahsën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -21829,7 +21829,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-diiḳsën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -21977,7 +21977,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-dob-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -22059,7 +22059,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-ġaġek-keyëhsën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -22168,7 +22168,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-ġaġek-kuungsën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -22250,7 +22250,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-ġaġek-niröp-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -22359,7 +22359,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-ġël-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -22447,7 +22447,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-hodeḳ-ata</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -22535,7 +22535,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-horek-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -22623,7 +22623,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-huk-yaġ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -22714,7 +22714,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-huk-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -22805,7 +22805,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-julsën-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -22938,7 +22938,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-ḳupeḳ-masën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -23053,7 +23053,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-los-bengöj</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -23144,7 +23144,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-los-bengöj-ggoreksën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -23262,7 +23262,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-los-bengöj-monë-ggoreksën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -23380,7 +23380,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-los-bengöj-vonġvingsën-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -23534,7 +23534,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-los-kwaj-böp</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -23649,7 +23649,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-malaj-vesa</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -23794,7 +23794,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-meris</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -23903,7 +23903,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-nën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -24003,7 +24003,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-nijpaya</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -24085,7 +24085,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-nyëġ-ngwë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -24188,7 +24188,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-ranġah-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -24321,7 +24321,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-rob</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -24421,7 +24421,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-sën-deseggi-ġaġek</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -24503,7 +24503,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-vonġvingsën-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -24600,7 +24600,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-yaġ-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -24691,7 +24691,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-yohvu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -24800,7 +24800,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-yu-ngwë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -24903,7 +24903,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-yuj-ading</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -25012,7 +25012,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alam-yuj-töḳsën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -25106,7 +25106,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alana</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -25197,7 +25197,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alaya</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -25288,7 +25288,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alee</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -25397,7 +25397,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alen</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -25500,7 +25500,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aliveng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -25606,7 +25606,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alov</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -25700,7 +25700,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alöö</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -25990,7 +25990,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aluheng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -26087,7 +26087,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alunġ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -26193,7 +26193,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alunġ-bu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -26302,7 +26302,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>alunġbu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -26399,7 +26399,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aluu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -26721,7 +26721,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -26959,7 +26959,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -27041,7 +27041,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>amëgo</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -27126,7 +27126,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>amon</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -27484,7 +27484,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ana</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -27644,7 +27644,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -27753,7 +27753,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -27850,7 +27850,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>anii</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -28013,7 +28013,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>anil</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -28125,7 +28125,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>anon</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -28519,7 +28519,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>anon raḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -28607,7 +28607,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>Anon Vabuung</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -28731,7 +28731,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>anon-avuuk</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -28843,7 +28843,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -28952,7 +28952,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -29046,7 +29046,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>anöö-lin</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -29158,7 +29158,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>anöö-nenga</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -29276,7 +29276,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>anöö-nenga-ris</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -29397,7 +29397,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>anööhë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -29518,7 +29518,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>anöösik</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -29618,7 +29618,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>Anutu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -29748,7 +29748,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>anutu-kuungsën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -29845,7 +29845,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>Anutu-yi-alam</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -29942,7 +29942,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>Anutu-yi-ḳapiya</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -30045,7 +30045,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>Anutu-yi-nyëġ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -30142,7 +30142,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>angahek</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -30254,7 +30254,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>angër</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -30336,7 +30336,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>apel</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -30487,7 +30487,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>apel-ḳöḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -30572,7 +30572,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>apel-veriik</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -30657,7 +30657,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aperek</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -30784,7 +30784,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aperek-agga</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -30917,7 +30917,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>apop</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -31026,7 +31026,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>arahek</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -31108,7 +31108,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>areeng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -31223,7 +31223,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>areeng maluh</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -31359,7 +31359,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>arë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -31489,7 +31489,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>arë-ngwë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -31571,7 +31571,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>arë-pesiv</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -31767,7 +31767,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>arë-rahu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -31855,7 +31855,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>arë'</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -32021,7 +32021,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -32283,7 +32283,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -32377,7 +32377,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ari-avëh</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -32669,7 +32669,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ari-maluh</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -32973,7 +32973,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ariv</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -33082,7 +33082,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>arohenġ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -33164,7 +33164,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aru</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -33309,7 +33309,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aseeng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -33493,7 +33493,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>asoreng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -33767,7 +33767,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>asoreng-bël-yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -33876,7 +33876,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>asub</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -34045,7 +34045,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ata</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -34451,7 +34451,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ata-masën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -34524,7 +34524,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>atë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -34618,7 +34618,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>atohenġ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -34700,7 +34700,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>atov</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -34848,7 +34848,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>auskuk</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -34909,7 +34909,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avaheng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -35015,7 +35015,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avan</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -35151,7 +35151,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ave</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -35218,7 +35218,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avee</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -35306,7 +35306,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avëë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -35388,7 +35388,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avëh</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -35674,7 +35674,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avëh-anöö</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -35747,7 +35747,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avëh-avö</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -35901,7 +35901,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avëh-baggëb</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -36004,7 +36004,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avëh-bu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -36137,7 +36137,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avëh-los-bengö</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -36243,7 +36243,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avëh-rohek</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -36337,7 +36337,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avëh-vahus</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -36407,7 +36407,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avëh-yu-ngwë</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -36528,7 +36528,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avëhnö</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -36781,7 +36781,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -37088,7 +37088,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi maggin</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -37176,7 +37176,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi nipaya</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -37276,7 +37276,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi puḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -37388,7 +37388,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi raḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -37476,7 +37476,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi sepëp</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -37564,7 +37564,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi töḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -37652,7 +37652,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi vuuḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -37752,7 +37752,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi-ḳos</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -37858,7 +37858,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi-rahu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -37970,7 +37970,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi-ruḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -38082,7 +38082,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi-taveḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -38173,7 +38173,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avi-tömeng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -38285,7 +38285,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avoong</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -38370,7 +38370,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avö</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -38488,7 +38488,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avöö</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -38603,7 +38603,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -38754,7 +38754,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avu luu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -38863,7 +38863,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avu-avu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -38972,7 +38972,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avuti</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -39162,7 +39162,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avuuḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -39283,7 +39283,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>avuuḳ-atov</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -39410,7 +39410,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -39513,7 +39513,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -39640,7 +39640,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aye</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -39920,7 +39920,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aye loḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -40008,7 +40008,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>aye semusën</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -40108,7 +40108,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayeheng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -40226,7 +40226,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayehu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -40395,7 +40395,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -41020,7 +41020,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo bebov</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -41108,7 +41108,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo dahis</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -41259,7 +41259,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo jeġuu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -41383,7 +41383,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo ḳanum</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -41489,7 +41489,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo luu luu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -41577,7 +41577,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo maggin</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -41665,7 +41665,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo medeḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -41765,7 +41765,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo meḳus</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -41865,7 +41865,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo nevu-nevu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -42016,7 +42016,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo nipaya</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -42104,7 +42104,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo nivesa</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -42192,7 +42192,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo pebip yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -42319,7 +42319,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo rera</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -42431,7 +42431,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo sepëp</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -42519,7 +42519,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo sevek</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -42646,7 +42646,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo sis yi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -42734,7 +42734,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo sovin</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -42834,7 +42834,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo to revuh</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -42946,7 +42946,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo töḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -43019,7 +43019,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo vo raḳ</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -43119,7 +43119,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo vonġin</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -43207,7 +43207,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo ya timu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -43319,7 +43319,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo-ji</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -43392,7 +43392,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo-peggo</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -43525,7 +43525,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayo-rasap</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -43613,7 +43613,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayoga</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -43734,7 +43734,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayogi</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -43843,7 +43843,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayogu</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -43995,7 +43995,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayööng</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
@@ -44197,7 +44197,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content>ayur</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword..after_2">
         <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pronunciation..before_2">
