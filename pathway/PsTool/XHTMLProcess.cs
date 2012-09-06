@@ -987,7 +987,7 @@ namespace SIL.PublishingSolution
             if (styleName == "hideVerseNumber1") return styleName;
             //if (styleName == "ChapterNumber") return styleName;
             //if (styleName == "VerseNumber") return styleName;
-            if (_headwordStyles) return styleName;
+            //if (_headwordStyles) return styleName;
             int suffix = 1;
             string newname;
             while (true)
