@@ -141,9 +141,9 @@ namespace SIL.PublishingSolution
             {
                 var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
-                string xeLatexCopyrightFile = fileNameXhtml + ".tex";
+                string xeLatexRevFileName = fileNameXhtml + ".tex";
 
-                CloseDocument(xeLatexFile, true, xeLatexCopyrightFile);
+                CloseDocument(xeLatexFile, true, xeLatexRevFileName);
             }
             else
             {
@@ -207,7 +207,31 @@ namespace SIL.PublishingSolution
                 {
                     return false;
                 }
-                projInfo.DefaultXhtmlFileWithPath = copyRightFilePath;
+
+                if (File.Exists(copyRightFilePath))
+                {
+                    if (Common.UnixVersionCheck())
+                    {
+                        string draftTempFileName = Path.GetFileName(copyRightFilePath);
+                        draftTempFileName = Path.Combine(Path.GetTempPath(), draftTempFileName);
+                        if (!File.Exists(draftTempFileName))
+                        {
+                            File.Copy(copyRightFilePath, draftTempFileName, true);
+                            Common.RemoveDTDForLinuxProcess(draftTempFileName);
+                        }
+                        projInfo.DefaultXhtmlFileWithPath = draftTempFileName;
+                        copyRightFilePath = draftTempFileName;
+                    }
+                    else
+                    {
+                        projInfo.DefaultXhtmlFileWithPath = copyRightFilePath;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
                 string filepath = Path.GetFullPath(copyRightFilePath);
 
                 Dictionary<string, Dictionary<string, string>> cssClass =
@@ -263,6 +287,14 @@ namespace SIL.PublishingSolution
                     return false;
                 }
 
+                if (File.Exists(revFile))
+                {
+                    if (Common.UnixVersionCheck())
+                    {
+                        Common.RemoveDTDForLinuxProcess(revFile);
+                    }
+                }
+
                 projInfo.DefaultXhtmlFileWithPath = revFile;
                 Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
                 CssTree cssTree = new CssTree();
@@ -273,7 +305,7 @@ namespace SIL.PublishingSolution
                 _reversalIndexTexFileName = xeLatexRevesalIndexFile;
                 StreamWriter xeLatexFile = new StreamWriter(xeLatexRevesalIndexFile);
                 Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
-                Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
+                //Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
                 XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
                 classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo.ProjectPath, xeLatexFile, cssClass);
 
@@ -281,7 +313,7 @@ namespace SIL.PublishingSolution
                 Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
                 Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
 
-                _xelatexDocumentOpenClosedRequired = true;          //Don't change the place.
+                _xelatexDocumentOpenClosedRequired = true;  //Don't change the place.
                 CloseDocument(xeLatexFile, false, string.Empty);
                 string include = xeLaTexStyles.PageStyle.ToString();
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
@@ -488,7 +520,7 @@ namespace SIL.PublishingSolution
         /// <param name="xhtmlFileName">File name to parse</param>
         private void BuildLanguagesList(string xhtmlFileName)
         {
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);// new XmlDocument { XmlResolver = null };
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
