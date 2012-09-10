@@ -1033,11 +1033,6 @@ namespace SIL.PublishingSolution
                     if (Common.IsUnixOS())
                     {
                         toPath = _inputPath;
-                        if (picFile.IndexOf(".tif") >= 0)
-                        {
-                            if (picFile != null)
-                                picFile = picFile.Replace(".tif", ".jpg");
-                        }
                         destination = Common.PathCombine(_inputPath, Path.GetFileName(picFile));
                         installedDirectory = _inputPath;
                     }
@@ -1061,8 +1056,7 @@ namespace SIL.PublishingSolution
                         }
                         if (!string.IsNullOrEmpty(toPath))
                         {
-                            if (fromPath != Common.PathCombine(toPath, Path.GetFileName(fromPath)))
-                                File.Copy(fromPath, Common.PathCombine(toPath, Path.GetFileName(fromPath)), true);
+                            File.Copy(fromPath, Common.PathCombine(toPath, Path.GetFileName(fromPath)), true);
                         }
                     }
                     else

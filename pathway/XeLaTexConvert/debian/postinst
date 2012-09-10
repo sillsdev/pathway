@@ -20,13 +20,6 @@ set -e
 
 case "$1" in
     configure)
-	cd /usr/lib/pwtex/texmf
-	if [ -d "/usr/lib/pwtex/bin/i386-linux/" ]; then
-		/usr/lib/pwtex/bin/i386-linux/mktexlsr
-	fi
-	if [ -d "/usr/lib/pwtex/bin/x86_64-linux" ]; then
-		/usr/lib/pwtex/bin/x86_64-linux/mktexlsr
-	fi
         #mv /etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml.dpkg-dist /etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml
 #rm -f ${prefix}/share/man/man7/ConfigurationTool.7.gz
 #link ${prefix}/share/man/man7/pathwayB.7.gz ${prefix}/share/man/man7/ConfigurationTool.7.gz

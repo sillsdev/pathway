@@ -141,9 +141,9 @@ namespace SIL.PublishingSolution
             {
                 var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
-                string xeLatexRevFileName = fileNameXhtml + ".tex";
+                string xeLatexCopyrightFile = fileNameXhtml + ".tex";
 
-                CloseDocument(xeLatexFile, true, xeLatexRevFileName);
+                CloseDocument(xeLatexFile, true, xeLatexCopyrightFile);
             }
             else
             {
@@ -207,31 +207,7 @@ namespace SIL.PublishingSolution
                 {
                     return false;
                 }
-
-                if (File.Exists(copyRightFilePath))
-                {
-                    if (Common.UnixVersionCheck())
-                    {
-                        string draftTempFileName = Path.GetFileName(copyRightFilePath);
-                        draftTempFileName = Path.Combine(Path.GetTempPath(), draftTempFileName);
-                        if (!File.Exists(draftTempFileName))
-                        {
-                            File.Copy(copyRightFilePath, draftTempFileName, true);
-                            Common.RemoveDTDForLinuxProcess(draftTempFileName);
-                        }
-                        projInfo.DefaultXhtmlFileWithPath = draftTempFileName;
-                        copyRightFilePath = draftTempFileName;
-                    }
-                    else
-                    {
-                        projInfo.DefaultXhtmlFileWithPath = copyRightFilePath;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-
+                projInfo.DefaultXhtmlFileWithPath = copyRightFilePath;
                 string filepath = Path.GetFullPath(copyRightFilePath);
 
                 Dictionary<string, Dictionary<string, string>> cssClass =
@@ -287,14 +263,6 @@ namespace SIL.PublishingSolution
                     return false;
                 }
 
-                if (File.Exists(revFile))
-                {
-                    if (Common.UnixVersionCheck())
-                    {
-                        Common.RemoveDTDForLinuxProcess(revFile);
-                    }
-                }
-
                 projInfo.DefaultXhtmlFileWithPath = revFile;
                 Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
                 CssTree cssTree = new CssTree();
@@ -305,7 +273,7 @@ namespace SIL.PublishingSolution
                 _reversalIndexTexFileName = xeLatexRevesalIndexFile;
                 StreamWriter xeLatexFile = new StreamWriter(xeLatexRevesalIndexFile);
                 Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
-                //Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
+                Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
                 XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
                 classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo.ProjectPath, xeLatexFile, cssClass);
 
@@ -313,7 +281,7 @@ namespace SIL.PublishingSolution
                 Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
                 Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
 
-                _xelatexDocumentOpenClosedRequired = true;  //Don't change the place.
+                _xelatexDocumentOpenClosedRequired = true;          //Don't change the place.
                 CloseDocument(xeLatexFile, false, string.Empty);
                 string include = xeLaTexStyles.PageStyle.ToString();
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
@@ -331,34 +299,23 @@ namespace SIL.PublishingSolution
             var systemFontList = FontFamily.Families;
             if (systemFontList.Length != XeLaTexInstallation.GetXeLaTexFontCount())
             {
-				var si = new ProcessStartInfo("fc-cache", "-v -r");
-                var xelatexPath = XeLaTexInstallation.GetXeLaTexDir();
-                if (!Common.IsUnixOS())
+                using (var p2 = new Process())
                 {
-                    xelatexPath = Path.Combine(xelatexPath, "bin");
-                    xelatexPath = Path.Combine(xelatexPath, "win32");
-                }
-                si.WorkingDirectory = xelatexPath;
-                using (var p2 = Process.Start(si))
-                {
+                    var xelatexPath = XeLaTexInstallation.GetXeLaTexDir();
+                    if (!Common.IsUnixOS())
+                    {
+                        xelatexPath = Path.Combine(xelatexPath, "bin");
+                        xelatexPath = Path.Combine(xelatexPath, "win32");
+                    }
+                    p2.StartInfo.WorkingDirectory = xelatexPath;
+                    p2.StartInfo.FileName = "fc-cache";
+                    p2.StartInfo.Arguments = "-v -r";
+                    p2.Start();
                     p2.WaitForExit();
                 }
                 XeLaTexInstallation.SetXeLaTexFontCount(systemFontList.Length);
             }
         }
-
-		protected void XeLaTexProcess (string name, string arguments, out string p1Error)
-		{
-			var si = new ProcessStartInfo(name, arguments);
-			si.RedirectStandardOutput = true;
-			si.RedirectStandardError = true;
-			si.UseShellExecute = false;
-			using (Process p1 = Process.Start(si))
-			{
-				p1.WaitForExit();
-				p1Error = p1.StandardError.ReadToEnd();
-			}
-		}
 
         public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
@@ -408,12 +365,49 @@ namespace SIL.PublishingSolution
             Directory.SetCurrentDirectory(xeLaTexInstallationPath);
 
             string p1Error = string.Empty;
-			XeLaTexProcess (name, arguments, out p1Error);
+            using (Process p1 = new Process())
+            {
+                p1.StartInfo.FileName = name;
+                if (xeLatexFullFile != null)
+                    p1.StartInfo.Arguments = arguments;
+                p1.StartInfo.RedirectStandardOutput = true;
+                p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
+                p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
+                p1.Start();
+                p1.WaitForExit();
+                p1Error = p1.StandardError.ReadToEnd();
+            }
 
             if (Convert.ToBoolean(_tableOfContent))
             {
-				XeLaTexProcess (name, arguments, out p1Error);
-				XeLaTexProcess (name, arguments, out p1Error);
+                using (Process p1 = new Process())
+                {
+                    p1.StartInfo.FileName = name;
+                    if (xeLatexFullFile != null)
+                        p1.StartInfo.Arguments = arguments;
+                    p1.StartInfo.RedirectStandardOutput = true;
+                    p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
+                    p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
+                    p1.Start();
+                    p1.WaitForExit();
+                    //p1Output = p1.StandardOutput.ReadToEnd();
+                    p1Error = p1.StandardError.ReadToEnd();
+                }
+
+                using (Process p1 = new Process())
+                {
+                    p1.StartInfo.FileName = name;
+                    if (xeLatexFullFile != null)
+                        p1.StartInfo.Arguments = arguments;
+                    p1.StartInfo.RedirectStandardOutput = true;
+                    p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
+                    p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
+                    p1.Start();
+                    p1.WaitForExit();
+                    //p1Output = p1.StandardOutput.ReadToEnd();
+                    p1Error = p1.StandardError.ReadToEnd();
+                }
+
             }
             string pdfFullName = string.Empty;
             string texNameOnly = Path.GetFileNameWithoutExtension(xeLatexFullFile);
@@ -520,7 +514,7 @@ namespace SIL.PublishingSolution
         /// <param name="xhtmlFileName">File name to parse</param>
         private void BuildLanguagesList(string xhtmlFileName)
         {
-            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);// new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };

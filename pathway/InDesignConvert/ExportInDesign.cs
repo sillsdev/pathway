@@ -17,7 +17,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -52,17 +54,18 @@ namespace SIL.PublishingSolution
         {
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
+            //preProcessor.RemoveEmptySpanHeadword(preProcessor.ProcessedXhtml);
+            preProcessor.InsertEmptyHeadwordForReversal(preProcessor.ProcessedXhtml);
+            MergeProcessInXHTMLforMasterPage(preProcessor.ProcessedXhtml);
             preProcessor.PreserveSpace();
             preProcessor.ImagePreprocess();
             //preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
-            preProcessor.InsertInDesignFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
+            //preProcessor.InsertInDesignFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
 
             preProcessor.ReplaceInvalidTagtoSpan("_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes", "span");
             preProcessor.InsertHiddenChapterNumber();
             preProcessor.InsertHiddenVerseNumber();
             preProcessor.GetDefinitionLanguage();
-
-            
 
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
@@ -72,6 +75,10 @@ namespace SIL.PublishingSolution
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+
+            
+            cssClass = MergeProcessInCSSforMasterPage(projInfo.DefaultCssFileWithPath, cssClass);
+
             //return false;
             preProcessor.InsertEmptyXHomographNumber(cssClass);
 
@@ -115,7 +122,86 @@ namespace SIL.PublishingSolution
             return true;
         }
 
-        
+        private Dictionary<string, Dictionary<string, string>> MergeProcessInCSSforMasterPage(string fileName, Dictionary<string, Dictionary<string, string>> cssClass)
+        {
+            Dictionary<string, Dictionary<string, string>> mergedCssClass = cssClass;
+            if(cssClass.Count > 0)
+            {
+                string flexCSs = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.css");
+                Dictionary<string, Dictionary<string, string>> cssClass1 = new Dictionary<string, Dictionary<string, string>>();
+                CssTree cssTree = new CssTree();
+                cssClass1 = cssTree.CreateCssProperty(flexCSs, true);
+                foreach (string clsName in cssClass1.Keys)
+                {
+                    if(!mergedCssClass.ContainsKey(clsName))
+                    {
+                        mergedCssClass.Add(clsName, cssClass1[clsName]);
+                    }
+                }
+                Dictionary<string, string> pageBreakProperty = new Dictionary<string, string>();
+                pageBreakProperty.Add("page-break-after", "always");
+                mergedCssClass.Add("mergeBreak", pageBreakProperty);
+            }
+            return mergedCssClass;
+        }
+
+        private void MergeProcessInXHTMLforMasterPage(string xhtmlFileName)
+        {
+            string projectFolder = Path.GetDirectoryName(xhtmlFileName);
+            string[] fileNames = Directory.GetFiles(projectFolder, "*.xhtml");
+            if (ValidateXHTMLFiles(fileNames))
+            {
+                string mainFileName = Common.PathCombine(projectFolder, "Main.xhtml");
+                string flexRevFileName = Common.PathCombine(projectFolder, "FlexRev.xhtml");
+                if(File.Exists(flexRevFileName))
+                {
+                    XmlDocument xDocRev = Common.DeclareXMLDocument(false);
+                    XmlNamespaceManager namespaceManagerRev = new XmlNamespaceManager(xDocRev.NameTable);
+                    namespaceManagerRev.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                    xDocRev.Load(flexRevFileName);
+                    XmlNodeList divNodesRev = xDocRev.SelectNodes("//xhtml:body/xhtml:div", namespaceManagerRev);
+                    if(divNodesRev != null)
+                    {
+                        XmlDocument xDocMain = Common.DeclareXMLDocument(false);
+                        XmlNamespaceManager namespaceManagerMain = new XmlNamespaceManager(xDocMain.NameTable);
+                        namespaceManagerMain.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                        xDocMain.Load(mainFileName);
+                        XmlNode bodyNodeMain = xDocMain.SelectSingleNode("//xhtml:body", namespaceManagerMain);
+                        if (bodyNodeMain != null)
+                        {
+                            XmlDocumentFragment styleNode = xDocMain.CreateDocumentFragment();
+                            styleNode.InnerXml = "<div class=\"mergeBreak\"></div>";
+                            bodyNodeMain.AppendChild(styleNode);
+                            for (int i = 0; i < divNodesRev.Count; i++)
+                            {
+                                XmlNode importNode = xDocMain.ImportNode(divNodesRev[i].CloneNode(true), true);
+                                bodyNodeMain.AppendChild(importNode);
+                            }
+                        }
+                        xDocMain.Save(mainFileName);
+                    }
+                }
+            }
+        }
+
+
+        private bool ValidateXHTMLFiles(string[] fileNames)
+        {
+            bool result = false;
+            if(fileNames.Length > 1)
+            {
+                foreach (string fileName in fileNames)
+                {
+                    if(Path.GetFileNameWithoutExtension(fileName).IndexOf("main") == 0)
+                    {
+                        result = true;
+                    }
+                }
+            }
+            return result;
+        }
+
+
 
         private void Compress(string sourceFolder, string ldmlFullName)
         {
