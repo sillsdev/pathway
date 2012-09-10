@@ -1328,7 +1328,9 @@ namespace Test.InDesignConvert
             string xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             XmlNode node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             string result = node.InnerXml;
-            string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+
+            string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_1\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenFirst3";
@@ -1336,7 +1338,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN_1\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenFirst4";
@@ -1344,7 +1346,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa_1\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenLast1";
@@ -1352,7 +1354,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_1\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenLast3";
@@ -1360,7 +1362,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN_1\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenLast4";
@@ -1368,7 +1370,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa_1\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
         }
 
