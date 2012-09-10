@@ -518,6 +518,8 @@ namespace SIL.PublishingSolution
             CreateGuideWord("LG_", "dTextVariablenLast", "LastOnPage");
             CreateHomoGraphNumber("HGF", "dTextVariablenHomoGraphF", "FirstOnPage");
             CreateHomoGraphNumber("HGL", "dTextVariablenHomoGraphL", "LastOnPage");
+            CreateGuideWord("RFG_", "dTextVariablenRFirst", "FirstOnPage");
+            CreateGuideWord("RLG_", "dTextVariablenRLast", "LastOnPage");
 
             _writer.WriteStartElement("TextVariable");
             _writer.WriteAttributeString("Self", "dTextVariablenFirstBookName");
@@ -609,8 +611,26 @@ namespace SIL.PublishingSolution
             int i = 1;
             foreach (string sName in _textVariables)
             {
-                if (_textVariables.Count > 2 && sName.IndexOf("headword") >= 0) continue;
+                //if (_textVariables.Count > 2 && sName.IndexOf("headword") >= 0) continue;
                 if (sName.IndexOf("Guideword") == 0)
+                {
+                    string styleName = Common.RightString(sName, "_");
+                    styleName = "CharacterStyle/" + styleName;
+                    _writer.WriteStartElement("TextVariable");
+                    _writer.WriteAttributeString("Self", selfName + i);
+                    _writer.WriteAttributeString("Name", name + i);
+                    _writer.WriteAttributeString("VariableType", "MatchCharacterStyleType");
+                    _writer.WriteStartElement("MatchCharacterStylePreference");
+                    _writer.WriteAttributeString("TextBefore", "");
+                    _writer.WriteAttributeString("TextAfter", "");
+                    _writer.WriteAttributeString("AppliedCharacterStyle", styleName);
+                    _writer.WriteAttributeString("SearchStrategy", position);
+                    _writer.WriteAttributeString("ChangeCase", "None");
+                    _writer.WriteAttributeString("DeleteEndPunctuation", "false");
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                }
+                else if (sName.IndexOf("RevGuideword") == 0)
                 {
                     string styleName = Common.RightString(sName, "_");
                     styleName = "CharacterStyle/" + styleName;

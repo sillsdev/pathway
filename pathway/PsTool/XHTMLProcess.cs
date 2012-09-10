@@ -309,7 +309,12 @@ namespace SIL.PublishingSolution
             if (isHeadword)
             {
                 string styleName;
-                string headwordStyle = _childName;
+                string headwordStyle = string.Empty;//_childName
+                if (_childName.IndexOf("headword") == 0 || _childName.IndexOf("reversalform") == 0)
+                {
+                    headwordStyle = _childName;
+                }
+                if (headwordStyle.Length == 0) return;
                 if (headwordStyle.IndexOf("xhomographnumber") >= 0)
                 {
                     styleName = "HomoGraphNumber_" + headwordStyle;
@@ -319,8 +324,15 @@ namespace SIL.PublishingSolution
                 else
                 {
                     styleName = "Guideword_" + headwordStyle;
+                    if (headwordStyle.IndexOf("reversalform") == 0)
+                    {
+                        styleName = "Rev" + styleName;
+                    }
                     if (!_headwordStyleName.Contains(styleName))
+                    {
                         _headwordStyleName.Add(styleName);
+                    }
+                    
                 }
             }
         }

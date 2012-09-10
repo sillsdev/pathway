@@ -50,6 +50,7 @@ namespace SIL.Tool
     {
         private string _xhtmlFileNameWithPath;
         private string _cssFileNameWithPath;
+        private string _cssRevFileNameWithPath;
         private string _xhtmlRevFileNameWithPath;
         private string _baseXhtmlFileNameWithPath;
         private PublicationInformation _projInfo;
@@ -1682,10 +1683,18 @@ namespace SIL.Tool
             if (File.Exists(_xhtmlRevFileNameWithPath))
                 File.Copy(_xhtmlRevFileNameWithPath, tempRevFile, true);
 
+            if (_cssFileNameWithPath != null)
+                _cssRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_cssFileNameWithPath), "FlexRev.css");
+
+            string tempCssFile = Common.PathCombine(tempFolder, Path.GetFileName(_cssRevFileNameWithPath));
+
             tempFile = Common.PathCombine(tempFolder, Path.GetFileName(_cssFileNameWithPath));
             if (File.Exists(_cssFileNameWithPath))
                 File.Copy(Common.DirectoryPathReplace(_cssFileNameWithPath), tempFile, true);
             _cssFileNameWithPath = tempFile;
+
+            if (File.Exists(_cssRevFileNameWithPath))
+                File.Copy(_cssRevFileNameWithPath, tempCssFile, true);
             // add a timestamp to the .css for troubleshooting purposes
             AddProductVersionToCSS();
         }
@@ -2290,6 +2299,75 @@ namespace SIL.Tool
             xDoc.Save(_xhtmlFileNameWithPath);
             SetHideChapterNumberInCSS();
             return _xhtmlFileNameWithPath;
+        }
+
+        public void RemoveEmptySpanHeadword(string fileName)
+        {
+            string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
+            if (!File.Exists(flexRevFileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(flexRevFileName);
+            string xPath = "//xhtml:span[@class='reversal-form']";
+            XmlNodeList RevFormNodes = xDoc.SelectNodes(xPath, namespaceManager);
+            for (int i = 0; i < RevFormNodes.Count; i++)
+            {
+                RevFormNodes[i].InnerXml = RevFormNodes[i].InnerText;
+            }
+            xDoc.Save(flexRevFileName);
+
+
+        }
+
+
+        public void RemoveEmptySpan(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            string xPath = "//xhtml:span[@class='reversal-form']";
+            XmlNodeList RevFormNodes = xDoc.SelectNodes(xPath, namespaceManager);
+
+            for (int i = 0; i < RevFormNodes.Count; i++)
+            {
+                XmlDocumentFragment docFrag = InsertEmptyHeadword(xDoc);
+                RevFormNodes[i].AppendChild(docFrag);
+            }
+            xDoc.Save(fileName);
+            //SetHideChapterNumberInCSS();
+            //return _xhtmlFileNameWithPath;
+        }
+
+        public void InsertEmptyHeadwordForReversal(string fileName)
+        {
+            string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
+            if(!File.Exists(flexRevFileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(flexRevFileName);
+            string xPath = "//xhtml:span[@class='reversal-form']";
+            XmlNodeList RevFormNodes = xDoc.SelectNodes(xPath, namespaceManager);
+
+            for (int i = 0; i < RevFormNodes.Count; i++)
+            {
+                XmlDocumentFragment docFrag = InsertEmptyHeadword(xDoc);
+                RevFormNodes[i].AppendChild(docFrag);
+            }
+            xDoc.Save(flexRevFileName);
+            //SetHideChapterNumberInCSS();
+            //return _xhtmlFileNameWithPath;
+        }
+
+        private static XmlDocumentFragment InsertEmptyHeadword(XmlDocument xdoc)
+        {
+            const string toInsert = "<span class=\"headword\"> </span>";
+            XmlDocumentFragment docFrag = xdoc.CreateDocumentFragment();
+            docFrag.InnerXml = toInsert;
+            return docFrag;
         }
 
         public string InsertHiddenVerseNumber()
