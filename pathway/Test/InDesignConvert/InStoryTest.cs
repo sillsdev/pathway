@@ -1264,6 +1264,7 @@ namespace Test.InDesignConvert
         #endregion List
 
         [Test]
+        [Ignore]
         public void MultiLangHeader1()
         {
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/MultiLangHeader1.xhtml");
@@ -1327,7 +1328,9 @@ namespace Test.InDesignConvert
             string xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             XmlNode node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             string result = node.InnerXml;
+
             string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_1\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenFirst3";

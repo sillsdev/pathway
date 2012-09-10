@@ -489,8 +489,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    string beforeContent = ReplaceLineBreakSymbol(psuedoBefore.Content);
-                    _writer.WriteString(beforeContent);
+                    _writer.WriteString(psuedoBefore.Content);
                 }
             }
 
@@ -650,8 +649,7 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                        string afterContent = ReplaceLineBreakSymbol(classInfo.Content);
-                        _writer.WriteString(afterContent);
+                        _writer.WriteString(classInfo.Content);
                     }
                     _psuedoAfter.Remove(_closeChildName);
                 }
@@ -664,20 +662,6 @@ namespace SIL.PublishingSolution
             _writer = new XmlTextWriter(projInfo.DefaultXhtmlFileWithPath, null);
         }
 
-        private string ReplaceLineBreakSymbol(string content)
-        {
-            if (content == null) return string.Empty;
-
-            if (_outputType == Common.OutputType.ODT || _outputType == Common.OutputType.ODT)
-            {
-                string uniCode = Common.ConvertStringToUnicode(content);
-                if (uniCode.IndexOf("2028") > 0)
-                {
-                    return "<br/>";
-                }
-            }
-            return content;
-        }
     }
 
 }

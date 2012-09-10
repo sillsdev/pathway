@@ -1126,7 +1126,7 @@ namespace SIL.PublishingSolution
 
         private void SetHeadwordTrue()
         {
-            if (_reader.GetAttribute("class") != null && _reader.GetAttribute("class").ToLower() == "headword")
+            if (_reader.GetAttribute("class") != null && (_reader.GetAttribute("class").ToLower() == "headword" || _reader.GetAttribute("class").ToLower() == "reversal-form"))
             {
                 _IsHeadword = true;
                 _headwordStyles = true;
@@ -1240,7 +1240,7 @@ namespace SIL.PublishingSolution
 
         private void SetHeadwordFalse()
         {
-            if (_closeChildName.ToLower() == "headword")
+            if (_closeChildName.ToLower() == "headword" || _closeChildName.ToLower() == "reversalform")
             {
                 _IsHeadword = false;
                 _headwordStyles = false;
