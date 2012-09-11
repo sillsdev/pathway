@@ -1,5 +1,38 @@
-pathway (1.2.0.2573-1) unstable; urgency=high
+pathway (1.2.0.2622-1) unstable; urgency=high
 
+  * 1.2.0.2622 sprint
+    - Common:TD-3133 Help doesn't launch on Linux
+    - Common:Update Linux XeLaTeX installer build instructions
+    - Common:Add preprocess for links that begin with a preserved space
+    - Common:Create an epub only installer
+    - Go Bible:TD-3153 Process GoBibleCreator in a writable folder
+    - Go Bible:Replacing GoBibleCore2.jar within GoBibleCreator Version 2.4.3
+    - Go Bible:Remove proprietary icons
+    - InDesign:TD-3166 span tag not inherited from the parent property
+    - InDesign:TD-3167 Wrong Guidewords shown on Main and Reversal Header
+    - LibreOffice:TD-3117 Adjust chapter number in header
+    - LibreOffice:TD-3127 Output takes a long time with no progress bar on Linux Precise 32 bit
+    - LibreOffice:TD-3128 Parallel reference not formated on Precise 32 bit
+    - LibreOffice:TD-3131 Picture missing
+    - LibreOffice:TD-3137 Default Libre Office export crashes if macro is run
+    - LibreOffice:TD-3159 French Regional settings causes large numbers and small pictures
+    - LibreOffice:TD-3162 Gondwana sample (2-3 pages) takes over 6 minutes
+    - PrincePdf:TD-3168 Fix test for Prince output.
+    - E-Book:TD-3139 Crash exporting Gondwana to Epub on Linux
+    - E-Book:TD-3140 Link uses verse bridge when cross reference specifies a verse
+    - E-Book:TD-3141 Footnote references should be present if given but absent otherwise.
+    - E-Book:TD-3143 Cross reference verse is duplicated.
+    - E-Book:TD-3152 Handle hard line breaks for E-Book
+    - E-Book:TD-3154 Unchecking include images is not saved.
+    - E-Book:TD-3156 put links after all titles don't put links for single chapter
+    - UI:TD-3148 Disable preview of Open Office / Libre Office assembly is not present
+    - UI:TD-3149 Default destination to first one if Libre Office is not present
+    - UI:TD-3155 Making stylesheet unavailable is not honored by defaults
+    - UI:TD-3158 Lucid gives error after running ConfigurationTool
+    - XeLaTeX:Add XeLaTeX binary folder to the path in Linux
+    - XeLaTeX:Adjust XeLaTeX package to work on 64-bit
+    - XeLaTeX:Fix XeLaTeX export on Linux, Update developer copy
+    - XeLaTeX:Include fmtutil in Linux XeLaTeX package.
   * 1.2.0.2573 sprint
     - Common: Optionally remove empty verses when only part of a book has been translated
     - Common: TD-3109 Speed up conversion, avoid accessing the Internet
