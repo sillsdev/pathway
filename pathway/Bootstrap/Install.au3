@@ -216,9 +216,9 @@ Func InstallJavaIfNecessary()
 	;if MsgBox(35,"No Java","Java is used by the Epub validator among other things. It is not installed in your computer. Would you like to install Java?") = 6 Then
 	;	LaunchSite("http://java.com/en/download/index.jsp")
 	;EndIf
-	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "Java", "6u30")
+	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "Java", "7u3")
 	if @OSArch = "X86" Then
-		$pkg = "jre-" & $latest & "-windows-i586-s.exe"
+		$pkg = "jre-" & $latest & "-windows-i586.exe"
 	Else
 		$pkg = "jre-" & $latest & "-windows-x64.exe"
 	Endif
@@ -322,7 +322,7 @@ Func InstallPrinceXmlIfNecessary()
 	;if MsgBox(35,"No PrinceXml","PrinceXml is used to create new previews and is one of the output destinations. It is not installed in your computer. Would you like to install PrinceXml?") = 6 Then
 	;	LaunchSite("http://www.princexml.com/download/")
 	;EndIf
-	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "Prince", "8.0")
+	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "Prince", "8.1r3")
 	$pkg = "prince-" & $latest & "-setup.exe"
 	GetFromUrl($pkg, "http://www.princexml.com/download/" & $pkg)
 	if FileExists($pkg) Then
@@ -355,7 +355,7 @@ Func InstallPdfReaderIfNecessary()
 	;if MsgBox(35,"No Pdf Reader","The Pdf Reader displays Pdf results after they are produced by various destinations. None installed in your computer. Would you like to install a Pdf Reader?") = 6 Then
 	;	LaunchSite("http://get.adobe.com/reader/")
 	;EndIf
-	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "FoxitReader", "513.1201")
+	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "FoxitReader", "542.0901")
 	$pkg = "FoxitReader" & $latest & "_enu_Setup.exe"
 	GetFromUrl($pkg, "http://cdn04.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/" & $pkg)
 	If FileExists($pkg) Then
@@ -427,7 +427,7 @@ Func XeLaTexInstalled($size)
 			if @error Then
 				$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexVer")
 			EndIf
-			$latest = IniRead("PathwayBootstrap.Ini", "Versions", "XeLaTex", "1.5")
+			$latest = IniRead("PathwayBootstrap.Ini", "Versions", "XeLaTex", "1.6")
 			if $ver = $latest Then
 				Return True
 			EndIf
@@ -444,7 +444,7 @@ Func InstallXeLaTeXIfNecessary()
 	if $InstallStable or Not $INS_XeLaTex Then
 		Return
 	Endif
-	Local $name = "SetupXeLaTeXTesting-1.5.msi"
+	Local $name = "SetupXeLaTeXTesting-1.6.msi"
 	CleanUp($name)
 	GetInstaller($name)
 	LaunchInstaller($name)
