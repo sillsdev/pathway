@@ -88,7 +88,7 @@ Func GetInstaller($name)
 		$urlPath = 'http://pathway.googlecode.com/files/'
 	EndIf
 	if not FileExists($name) Then
-		MsgBox(4096,"Status","Downloading " & $urlPath & $name)
+		;MsgBox(4096,"Status","Downloading " & $urlPath & $name)
 		RunWait("wget.exe " & $urlPath & $name)
 	EndIf
 	Sleep( 500 )
@@ -224,12 +224,36 @@ Func InstallJavaIfNecessary()
 	Endif
 	GetFromUrl($pkg, "http://pathway.sil.org/wp-content/sprint/" & $pkg)
 	if FileExists($pkg) Then
-		RunWait($pkg & " /s /v/qn""ALL IEXPLORER=1 MOZILLA=1 REBOOT=Suppress""")
+		Local $pid
+		$pid = Run($pkg & " /s /v/qn""ALL IEXPLORER=1 MOZILLA=1 REBOOT=Suppress""")
+		Busy($pid)
 		CleanUp($pkg)
 	Else
 		MsgBox(4096,"Status","Please install the Java run time Environment (jre)")
 		LaunchSite("http://java.com/en/download/index.jsp")
 	EndIf
+EndFunc
+
+Func Busy($pid)
+	Local $progress, $inc, $val
+	
+	Do
+		Sleep( 500 )
+	Until ProcessExists( $pid )
+	$progress = GUICtrlCreateProgress(265, 320)
+	$inc = 2
+	$val = 0
+	Do
+		$val += $inc
+		GUICtrlSetData($progress, $val)
+		if $val = 100 Then
+			$inc = -2
+		ElseIf $val = 0 Then
+			$inc = 2
+		EndIf
+		Sleep( 500 )
+	Until Not ProcessExists( $pid )
+	GUICtrlDelete( $progress )
 EndFunc
 
 Func OfficeInstalled($size)
@@ -258,25 +282,31 @@ Func InstallLibreOfficeIfNecessary()
 	;EndIf
 	;$latest = IniRead("PathwayBootstrap.Ini", "Versions", "LibreOffice", "3.4.3")
 	$latest = StringSplit(IniRead("PathwayBootstrap.Ini", "Versions", "LibreOffice", "3.4.3,6263"), ",")
-	$pkg = "LibO_" & $latest[1] & "_Win_x86_install_multi.exe"
+	$pkg = "LibO_" & $latest[1] & "_Win_x86_install_multi.msi"
 	If $latest[0] = "1" Then
-		GetFromUrl($pkg, "http://download.documentfoundation.org/libreoffice/stable/" & $latest & "/win/x86/" & $pkg)
+		;MsgBox( 4096, "Getting URL", "http://download.documentfoundation.org/libreoffice/stable/" & $latest[1] & "/win/x86/" & $pkg)
+		GetFromUrl($pkg, "http://download.documentfoundation.org/libreoffice/stable/" & $latest[1] & "/win/x86/" & $pkg)
 	Else
 		GetFromUrl($pkg, "http://www.oldapps.com/libreoffice.php?app=" & $latest[2])
 	EndIf
 	If FileExists($pkg) Then
+		Local $pid
 		RunWait(@ComSpec & " /c " & $pkg)  ;LibreOffice installer won't run as a sub task from a non-admin main task in Win7
-		if not @error Then
-			$major = MajorPart($latest[1])
-			$installerTitle = "LibreOffice " & $major & " - Installation Wizard"
-			;MsgBox(4096,"Status","Title is " & $installerTitle)
-			WinWaitActive($installerTitle)
-			While WinExists($installerTitle)
-				Sleep( 2000 )
-			WEnd
-		EndIf
+		;This code is needed for 3.4.3 (old installer format but not for .msi)
+;~ 		if not @error Then
+;~ 			$major = MajorPart($latest[1])
+;~ 			$installerTitle = "LibreOffice " & $major & " - Installation Wizard"
+;~ 			MsgBox(4096,"Status","Title is " & $installerTitle)
+;~ 			WinWaitActive($installerTitle)
+;~ 			MsgBox(4096,"Status","Active: " & $installerTitle)
+;~ 			While ProcessExists($installerTitle)
+;~ 				Sleep( 2000 )
+;~ 			WEnd
+;~ 			MsgBox(4096,"Status","InActive: " & $installerTitle)
+;~ 		EndIf
+;~ 		RemoveFolderMatching(@DesktopDir, "LibreOffice * Installation Files")
+		;End of code needed for 3.4.3 (old installer format but not for .msi)
 		CleanUp($pkg)
-		RemoveFolderMatching(@DesktopDir, "LibreOffice * Installation Files")
 	Else
 		MsgBox(4096,"Status","Please install LibreOffice.")
 		LaunchSite("http://www.libreoffice.org/download/")
@@ -358,6 +388,7 @@ Func InstallPdfReaderIfNecessary()
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "FoxitReader", "542.0901")
 	$pkg = "FoxitReader" & $latest & "_enu_Setup.exe"
 	GetFromUrl($pkg, "http://cdn04.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/" & $pkg)
+	$pkg = "reader_lastest.exe"
 	If FileExists($pkg) Then
 		RunWait($pkg)
 		CleanUp($pkg)
