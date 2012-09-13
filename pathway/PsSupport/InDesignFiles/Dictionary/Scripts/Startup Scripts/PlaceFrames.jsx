@@ -218,7 +218,7 @@ function main()
 	d = new Date();
 	times=times + "\n" + d;
 	TOC();
-	CreatePageNumberStyles();
+	//CreatePageNumberStyles();
 	SaveDocument();
 
 

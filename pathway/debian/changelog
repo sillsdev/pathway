@@ -1,6 +1,84 @@
-pathway (1.1.6.2485-1) unstable; urgency=high
+pathway (1.2.0.2622-1) unstable; urgency=high
 
-  * Sprint 1.1.6.2485
+  * 1.2.0.2622 sprint
+    - Common:TD-3133 Help doesn't launch on Linux
+    - Common:Update Linux XeLaTeX installer build instructions
+    - Common:Add preprocess for links that begin with a preserved space
+    - Common:Create an epub only installer
+    - Go Bible:TD-3153 Process GoBibleCreator in a writable folder
+    - Go Bible:Replacing GoBibleCore2.jar within GoBibleCreator Version 2.4.3
+    - Go Bible:Remove proprietary icons
+    - InDesign:TD-3166 span tag not inherited from the parent property
+    - InDesign:TD-3167 Wrong Guidewords shown on Main and Reversal Header
+    - LibreOffice:TD-3117 Adjust chapter number in header
+    - LibreOffice:TD-3127 Output takes a long time with no progress bar on Linux Precise 32 bit
+    - LibreOffice:TD-3128 Parallel reference not formated on Precise 32 bit
+    - LibreOffice:TD-3131 Picture missing
+    - LibreOffice:TD-3137 Default Libre Office export crashes if macro is run
+    - LibreOffice:TD-3159 French Regional settings causes large numbers and small pictures
+    - LibreOffice:TD-3162 Gondwana sample (2-3 pages) takes over 6 minutes
+    - PrincePdf:TD-3168 Fix test for Prince output.
+    - E-Book:TD-3139 Crash exporting Gondwana to Epub on Linux
+    - E-Book:TD-3140 Link uses verse bridge when cross reference specifies a verse
+    - E-Book:TD-3141 Footnote references should be present if given but absent otherwise.
+    - E-Book:TD-3143 Cross reference verse is duplicated.
+    - E-Book:TD-3152 Handle hard line breaks for E-Book
+    - E-Book:TD-3154 Unchecking include images is not saved.
+    - E-Book:TD-3156 put links after all titles don't put links for single chapter
+    - UI:TD-3148 Disable preview of Open Office / Libre Office assembly is not present
+    - UI:TD-3149 Default destination to first one if Libre Office is not present
+    - UI:TD-3155 Making stylesheet unavailable is not honored by defaults
+    - UI:TD-3158 Lucid gives error after running ConfigurationTool
+    - XeLaTeX:Add XeLaTeX binary folder to the path in Linux
+    - XeLaTeX:Adjust XeLaTeX package to work on 64-bit
+    - XeLaTeX:Fix XeLaTeX export on Linux, Update developer copy
+    - XeLaTeX:Include fmtutil in Linux XeLaTeX package.
+  * 1.2.0.2573 sprint
+    - Common: Optionally remove empty verses when only part of a book has been translated
+    - Common: TD-3109 Speed up conversion, avoid accessing the Internet
+    - Common: TD-3110 Update rights statements based on GPS input
+    - Common: Update Copyright page order, adding WBT and fix SIL pages.
+    - Go Bible: TD-3082 Map USX to USFM
+    - Go Bible: TD-3083 User interface to choose UI language for GoBible 
+    - Go Bible: TD-3084 Create Go Bible module with non-English UI.
+    - Go Bible: TD-3085 Use the latest version of the Go Bible creator (2.4.3)
+    - Go Bible: TD-3087 Prevent duplicate book name.
+    - Go Bible: TD-3090 Add ... for missing verses 
+    - Go Bible: TD-3113 Split verses are combined for Go Bible 
+    - Go Bible: TD-3114 Create correct Go Bible if \h is imissing on any book.
+    - Go Bible: Removed the old GoBibleCreator Directory
+    - Go Bible: Added Language topic for Go Bible.
+    - InDesign: TD-2892 Picture too small and not centered 
+    - Linux Build: TD-3075 Linux showing test fails 
+    - Linux Build: Add setups for Linug builds
+    - Libre Office: TD-3098 BASIC runtime error on Scripture preview 
+    - Libre Office: TD-3104 Book names missing from TOC
+    - Libre Office: TD-3105 cause each book to start on a new page 
+    - Libre Office: TD-3107 Include page number for all print output formats 
+    - Libre Office: TD-3108 Activate widow and orphan control on standard style sheets 
+    - Libre Office: TD-3120 Reversal section missing
+    - Libre Office: TD-3121 Dictionary export no longer has date and time in folder name
+    - Libre Office: TD-3129 Drop capital chapter number is not large 
+    - Libre Office: TD-3130 Footnote reference causes extra line space
+    - Libre Office: TD-3138 referenced headword in reversal doesn't display with the right font. 
+    - E-Book: TD-3088 Reference appears twice in cross reference
+    - E-Book: TD-3089 Epub ignore illustrations 
+    - E-Book: TD-3092 \toc2 field comes through in epub 
+    - E-Book: TD-3100 Ignore Images does not work with Dictionaries 
+    - E-Book: TD-3103 formatting lost on custom style epub 
+    - E-Book: TD-3125 box chars in E-Book output
+    - E-Book: TD-3126 Copyright page missing in e-book
+    - E-Book: Td-3093 Chapter links after main 
+    - E-Book: Add DocType to noXmlSpace.xsl
+    - Stylesheet: Edits to stylesheet-related topics and index items.
+    - User Interface: TD-3101 Webonary values not saved in the ConfigurationTool
+    - User Interface: TD-3097 Add Include Image check box above Maximum Image Width in Properties tab 
+    - Web: TD-3097 Add Include Image check box above Maximum Image Width in Properties tab 
+    - Web: Added Contact link for Webonary.
+    - Web: Edited Webonary topic.
+    - Web: Updates from Philip for MultilingualDictionary-1.3 and webonary-zeedisplay-1.2
+    - XeLaTeX: TD-3079 XeLaTeX export for Linux
+    - XeLaTeX: Update for XeLaTeX TexLive 2012 installer build  * Sprint 1.1.6.2485
     - Common Code: TD-3077 don't require writing system store for direction. </li>
     - Common Code: TD-3077 don't require writing system store for font name.</li>
     - Common Code: Remove CadreBible from Pathway build</li>
@@ -25,7 +103,7 @@ pathway (1.1.6.2485-1) unstable; urgency=high
     - XeLaTeX: TD-1610 XeLaTex difference output with different styles.</li>
     - XeLaTeX: TD-2057 margin-bottom on paragraph</li>
     - XeLaTeX: Update TexLive Linux install process for Linux 32 &amp; 64 bit</li>
-  * 1.1.5.2445 spint
+  * 1.1.5.2445 sprint
     - CadreBible: TD-2911 Create the DBL bundle
     - CadreBible: TD-3059 accomodate different between versions of USX export
     - CadreBible: TD-3063 use lower case lds extension

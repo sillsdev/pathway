@@ -149,10 +149,42 @@ namespace Test.XhtmlExport
             if (p1.Id <= 0)
                 throw new MissingSatelliteAssemblyException(project);
             p1.WaitForExit();
-            if (backend == "InDesign")
-                IdmlCheck(project, message);
-            else
-                OdtCheck(project, message);
+            switch (backend)
+            {
+                case "OpenOffice/LibreOffice":
+                    OdtCheck(project, message);
+                    break;
+                case "InDesign":
+                    IdmlCheck(project, message);
+                    break;
+                case "E-Book (.epub)":
+                    //TODO: Epub needs more than a file compare test.
+                    FileCheck(project, ".epub", message);
+                    break;
+                case "Go Bible":
+                    FileCheck(project, ".jar", message);
+                    break;
+                case "XeLaTex":
+                    FileCheck(project, ".tex", message.Length > 0? message: "Tex file mismatch");
+                    TextCheck(project, ".log", new ArrayList {1}, message.Length > 0? message: "Log file mismatch");
+                    break;
+                default:
+                    throw new AssertionException("Unrecognized backend type");
+            }
+        }
+
+        private static void TextCheck(string project, string ext, ArrayList ex, string message)
+        {
+            var fileExpect = _tf.SubExpected(project, project + ext);
+            var fileOutput = _tf.SubOutput(project, project + ext);
+            TextFileAssert.AreEqualEx(fileExpect, fileOutput, ex, message);
+        }
+
+        private static void FileCheck(string project, string ext, string message)
+        {
+            var fileExpect = _tf.SubExpected(project, project + ext);
+            var fileOutput = _tf.SubOutput(project, project + ext);
+            FileAssert.AreEqual(fileExpect, fileOutput, message);
         }
 
         private static void IdmlCheck(string project, string message)
@@ -302,5 +334,85 @@ namespace Test.XhtmlExport
             PathawyB("NKOu3", "NKOu3", "Scripture", "InDesign");
         }
         #endregion Nkonya Sample Open Office
+
+        //#region Gondwana Sample Epub
+        ///// <summary>
+        ///// Gondwana Sample E-Book Back End Test
+        ///// </summary>
+        //[Test]
+        //[Category("LongTest")]
+        //[Category("SkipOnTeamCity")]
+        //public void GondwanaSampleEpubTest()
+        //{
+        //    PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "E-Book (.epub)");
+        //}
+        //#endregion Gondwana Sample Epub
+
+        //#region Paratext NKOu3 E-Book
+        ///// <summary>
+        ///// Paratext NKOu3 E-Book Back End Test
+        ///// </summary>
+        //[Test]
+        //[Category("LongTest")]
+        //[Category("SkipOnTeamCity")]
+        //public void NKOu3EpubTest()
+        //{
+        //    PathawyB("NKOu3", "NKOu3", "Scripture", "E-Book (.epub)");
+        //}
+        //#endregion Nkonya Sample E-Book
+
+        //Dictionaries can not be output with Go Bible!
+        //#region Gondwana Sample Go Bible
+        ///// <summary>
+        ///// Gondwana Sample Go Bible Back End Test
+        ///// </summary>
+        //[Test]
+        //[Category("LongTest")]
+        //[Category("SkipOnTeamCity")]
+        //public void GondwanaSampleGoBibleTest()
+        //{
+        //    PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "Go Bible");
+        //}
+        //#endregion Gondwana Sample Go Bible
+
+        //Todo: PathwayB must be tested with .sfm for new GoBible
+        //#region Paratext NKOu3 Go Bible
+        ///// <summary>
+        ///// Paratext NKOu3 Go Bible Back End Test
+        ///// </summary>
+        //[Test]
+        //[Category("LongTest")]
+        //[Category("SkipOnTeamCity")]
+        //public void NKOu3GoBibleTest()
+        //{
+        //    PathawyB("NKOu3", "NKOu3", "Scripture", "Go Bible");
+        //}
+        //#endregion Nkonya Sample Go Bible
+
+        #region Gondwana Sample XeLaTex
+        /// <summary>
+        /// Gondwana Sample XeLaTex Back End Test
+        /// </summary>
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void GondwanaSampleXeLaTexTest()
+        {
+            PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "XeLaTex");
+        }
+        #endregion Gondwana Sample XeLaTex
+
+        #region Paratext NKOu3 XeLaTex
+        /// <summary>
+        /// Paratext NKOu3 XeLaTex Back End Test
+        /// </summary>
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void NKOu3XeLaTexTest()
+        {
+            PathawyB("NKOu3", "NKOu3", "Scripture", "XeLaTex");
+        }
+        #endregion Nkonya Sample XeLaTex
     }
 }

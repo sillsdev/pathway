@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<USX>
+    <book id="LUK" style="id">
+        <para style="ip">Explain who Luke was, who Theophilus was, target audience </para>
+        <para style="mt2">MT2</para>
+        <para style="mt1">MT1 </para>
+        <para style="mt2">MT2 </para>
+        <chapter number="1" style="c"/>
+        <para style="s">Test Para </para>
+        <para style="p">
+            <verse number="1-2a" style="v"/>This is a
+            <char style="it">sample </char>test case for "1-2a"
+            <char style="it">and  </char>​
+            <verse number="2b" style="v"/>the content for "2b" node.
+            <verse number="3-4" style="v"/>This is another case for "3-4" case </para>
+    </book>
+</USX>

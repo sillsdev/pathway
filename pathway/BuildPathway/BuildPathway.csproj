@@ -94,7 +94,8 @@
     <Edition>BTE</Edition>
     <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
-    <Status></Status>
+    <Status>
+    </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
@@ -108,7 +109,8 @@
     <Edition>SE</Edition>
     <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
-    <Status></Status>
+    <Status>
+    </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
@@ -177,7 +179,8 @@
     <Edition>BTE</Edition>
     <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
-    <Status></Status>
+    <Status>
+    </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
@@ -191,7 +194,8 @@
     <Edition>SE</Edition>
     <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
-    <Status></Status>
+    <Status>
+    </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|x86' ">
@@ -272,6 +276,48 @@
     <DebugType>none</DebugType>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
+    <OutputPath>bin\Corporate7EPUB\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition>EPUB</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status/>
+    <CodeAnalysisLogFile>bin\Corporate7BTE\BuildPathway.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
+    <OutputPath>bin\x86\Corporate7EPUB\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>EPUB</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>
+    </Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisLogFile>bin\x86\Corporate7BTE\BuildPathway.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfigurationTool\ConfigurationTool.csproj">
@@ -355,15 +401,16 @@
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="Build">
     <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' and '$(ConfTag)' != 'YouVersion' " />
+    <Delete Files="Files\ConfigurationTool\LibreOfficeConvert.dll;Files\ConfigurationTool\LibreOfficeConvert.pdb" Condition=" '$(Edition)' == 'EPUB'" />
     <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
     <CallTarget Targets="YouVersionBeforeBuild" Condition=" '$(ConfTag)' == 'YouVersion' " />
     <CallTarget Targets="WebonaryBeforeBuild" Condition="$(OS) != 'Linux' and '$(ConfTag)' != 'XeLaTeX' and '$(ConfTag)' != 'YouVersion'" />
     <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high" />
-    <CallTarget Targets="Wix" Condition="$(OS) != 'Linux'"/>
+    <CallTarget Targets="Wix" Condition="$(OS) != 'Linux'" />
   </Target>
   <Target Name="Wix">
     <RemoveDir Directories="Wix" />
-    <UpdateVersion Product="$(ProductName) " Version="1.1.6" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
+    <UpdateVersion Product="$(ProductName) " Version="1.3.0" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
     <ZeroCheck />
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs" />
@@ -373,7 +420,7 @@
     <Exec Command="candle -nologo UserInterface.wxs" WorkingDirectory="Wix" />
     <Exec Command="candle -nologo Files.wxs -sw1044" WorkingDirectory="Wix" />
     <Exec Command="light -nologo wixca.wixlib Features.wixobj Install$(ConfTag)$(Edition).wixobj Files.wixobj UserInterface.wixobj -out Setup$(ConfTag)$(Edition)$(Status)-$(BUILD_NUMBER).msi" WorkingDirectory="Wix" />
-    <Copy SourceFiles=".\Wix\Setup$(ConfTag)$(Edition)$(Status)-$(BUILD_NUMBER).msi" DestinationFolder="..\Sprint"/>
+    <Copy SourceFiles=".\Wix\Setup$(ConfTag)$(Edition)$(Status)-$(BUILD_NUMBER).msi" DestinationFolder="..\Sprint" />
   </Target>
   <Target Name="BeforeBuild">
     <Copy SourceFiles="@(ConfigurationTool)" DestinationFolder="Files\ConfigurationTool\" />
@@ -383,7 +430,9 @@
     <Copy SourceFiles="@(BatchProcess)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(LiftPrepare)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(ParatextSupport)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(AllBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(AllBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' != 'EPUB'" />
+    <Copy SourceFiles="@(epubBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(epubValid)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(BteBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TestBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
     <!-- Copy SourceFiles="@(UsfmConvert)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " / -->
@@ -408,12 +457,12 @@
     <Copy SourceFiles="@(BteSettings)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <!-- Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" / -->
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'Files\ConfigurationTool\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
@@ -426,8 +475,8 @@
   <Target Name="Clean">
     <!-- Delete Files="@(AllFiles)" / -->
     <!-- RemoveDir Directories="@(AllFileDirs)"/ -->
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Files" Condition="Exists(Files)"/>
-    <RemoveDir Directories="Files" Condition="Exists(Files)"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Files" Condition="Exists(Files)" />
+    <RemoveDir Directories="Files" Condition="Exists(Files)" />
   </Target>
   <ItemGroup>
     <AllFiles Include="Files\**\*.*" />
@@ -442,13 +491,13 @@
     <LiftPrepare Include="..\LiftPrepare\$(OutputPath)\LiftPrepare.*" />
     <ParatextSupport Include="..\ParatextSupport\$(OutputPath)\ParatextSupport.*" />
     <AllBackend Include="..\InDesignConvert\$(OutputPath)\InDesignConvert.*" />
-    <AllBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
     <AllBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
+    <AllBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
+    <epubBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
     <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\MySql*.dll" />
     <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
-    <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
     <TestBackend Include="..\YouVersionConvert\$(OutputPath)\YouVersionWriter.*" />
     <!-- TestBackend Include="..\CadreBibleConvert\$(OutputPath)\CadreBibleConvert.*" / -->
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
@@ -480,7 +529,7 @@
     <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <AllBackend Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
+    <epubValid Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
     <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
@@ -511,14 +560,14 @@
     <Exec Command="mktexlsr ..\..\texmf" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
     <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
     <Exec Command="mktexlsr ..\..\texmf-dist" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="i386-linux" Condition="$(Platform) == 'x86'" >
-      <Output TaskParameter="Folders" ItemName="bdir"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="i386-linux" Condition="$(Platform) == 'x86'">
+      <Output TaskParameter="Folders" ItemName="bdir" />
     </MSBuild.ExtensionPack.FileSystem.Folder>
     <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
     <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
     <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="x86_64-linux" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" >
-      <Output TaskParameter="Folders" ItemName="bdir"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="x86_64-linux" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'">
+      <Output TaskParameter="Folders" ItemName="bdir" />
     </MSBuild.ExtensionPack.FileSystem.Folder>
     <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
     <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
@@ -544,13 +593,14 @@
     <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tec*" />
     <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tex" />
     <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\mk*" />
-
+    <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\fmt*" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\kpse*" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xdvipdf*" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xe*" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\tec*" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\tex" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\mk*" />
+    <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\fmt*" />
     <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\*.cache-3" />
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" Exclude="..\XeLaTexConvert\Paratexmf\**\.svn\**\**" />
   </ItemGroup>

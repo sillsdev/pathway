@@ -137,6 +137,13 @@ namespace SIL.PublishingSolution
                         Version19(GetDirectoryPath(settingsPath, appPath), projSchemaVersion);
                         Param.LoadSettings();
                     }
+
+                    if (int.Parse(projSettingsVerNum) <= 19)
+                    {
+                        Version20(GetDirectoryPath(settingsPath, appPath), projSchemaVersion);
+                        Param.LoadSettings();
+                    }
+
                     //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
                     string usrPath = GetDirectoryPath(settingsPath, appPath);
                     string insPath = Common.PathCombine(Path.GetDirectoryName(installerPath), Path.GetFileName(usrPath));
@@ -430,7 +437,7 @@ namespace SIL.PublishingSolution
                 root.SetAttribute("version", versionNumber);
                 XmlNode searchNode = root.SelectSingleNode(sPath);
                 if (searchNode != null && searchNode.ChildNodes.Count != 0)
-                {                    
+                {
                     XmlNodeList allNodes = root.SelectNodes(sPath);
                     if (allNodes != null && allNodes.Count > 0)
                     {
@@ -442,7 +449,7 @@ namespace SIL.PublishingSolution
                                 searchNode.AppendChild(docFrag);
                             }
                         }
-                    }
+                    } 
                 }
             }
             xdoc.Save(path);
@@ -509,6 +516,42 @@ namespace SIL.PublishingSolution
             xdoc.Save(path);
         }
 
+        /// <summary>
+        /// Method to update the changed made in version 20
+        /// </summary>
+        /// <param name="path">Settings file path</param>
+        /// <param name="versionNumber">Updating version number</param>
+        /// <returns>Nothing</returns>
+        public void Version20(string path, string versionNumber)
+        {
+            if (!File.Exists(path)) { return; }
+
+            var xdoc = Common.DeclareXMLDocument(false);
+            xdoc.Load(path);
+            XmlElement root = xdoc.DocumentElement;
+            if (root != null)
+            {
+                string sPath = "//stylePick/styles/mobile/style";
+                root.SetAttribute("version", versionNumber);
+                XmlNode searchNode = root.SelectSingleNode(sPath);
+                if (searchNode != null && searchNode.ChildNodes.Count != 0)
+                {
+                    XmlNodeList allNodes = root.SelectNodes(sPath);
+                    if (allNodes != null && allNodes.Count > 0)
+                    {
+                        if (searchNode.InnerXml.Contains("FileProduced"))
+                        {
+                            if (!searchNode.InnerXml.Contains("Language"))
+                            {
+                                XmlDocumentFragment docFrag = InsertDefaultTagVersion17(xdoc);
+                                searchNode.AppendChild(docFrag);
+                            }
+                        }
+                    }
+                }
+            }
+            xdoc.Save(path);
+        }
 
         /// <summary>
         /// Method to update the changed made in version 2
@@ -689,6 +732,21 @@ namespace SIL.PublishingSolution
         private static XmlDocumentFragment InsertDefaultTagVersion19(XmlDocument xdoc)
         {
             const string toInsert = "<styleProperty name=\"IncludeImage\" value=\"Yes\" />";
+            XmlDocumentFragment docFrag = xdoc.CreateDocumentFragment();
+            docFrag.InnerXml = toInsert;
+            return docFrag;
+        }
+
+        /// <summary>
+        /// To insert the xml default tag part into the alluser's XML file.
+        /// </summary>
+        /// <param name="xdoc">XMLDocument object</param>
+        /// <returns>XmlDocumentFragment to attach in XMLFile</returns>
+        private static XmlDocumentFragment InsertDefaultTagVersion20(XmlDocument xdoc)
+        {
+            const string toInsert = @"
+            <styleProperty name=""Language"" value=""English"" />            
+           ";
             XmlDocumentFragment docFrag = xdoc.CreateDocumentFragment();
             docFrag.InnerXml = toInsert;
             return docFrag;

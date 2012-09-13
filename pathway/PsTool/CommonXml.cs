@@ -130,31 +130,32 @@ namespace SIL.Tool
             string metaName = string.Empty;
             //var reader = new XmlTextReader(fileName) { XmlResolver = null, WhitespaceHandling = WhitespaceHandling.Significant };
             XmlTextReader reader = Common.DeclareXmlTextReader(fileName, true);
-            while (reader.Read())
+            if (Common.IsUnixOS())
             {
-                if (reader.IsEmptyElement)
+                while (reader.Read())
                 {
-                    if (string.Compare(reader.Name, "meta", true) >= 0)
+                    if (reader.Name == "meta")
                     {
                         if (reader.GetAttribute("name") != null)
                         {
                             metaName = reader.GetAttribute("name");
-                            if (string.Compare(metaName, "extLinkRootDir", true) >= 0)
+                            if (metaName.IndexOf("RootDir") >= 0)
                             {
                                 if (reader.GetAttribute("content") != null)
                                 {
                                     metaName = reader.GetAttribute("content");
-                                    if (Common.UnixVersionCheck())
+                                    if (Common.UnixVersionCheck() && metaName == null)
                                     {
                                         metaName = Common.GetAllUserAppPath();
                                         metaName = Common.RightRemove(metaName, "sil");
                                         metaName = Path.Combine(metaName, "fieldworks");
                                         //metaName = Path.Combine(metaName, "Projects");
                                     }
-                                    else if (metaName.IndexOf("file://") >= 0)  // from the file access
+                                    else if (metaName.IndexOf("file://") >= 0) // from the file access
                                     {
                                         const int designatorLength = 7;
-                                        metaName = metaName.Substring(designatorLength, metaName.Length - designatorLength);
+                                        metaName = metaName.Substring(designatorLength,
+                                                                      metaName.Length - designatorLength);
                                     }
                                     break;
                                 }
@@ -162,14 +163,59 @@ namespace SIL.Tool
                             }
                         }
                     }
-                }
-
-                // Check only in the header and retrun 
-                if (reader.NodeType == XmlNodeType.EndElement)
-                {
-                    if (string.Compare(reader.Name, "head", true) >= 0)
+                    // Check only in the header and retrun 
+                    if (reader.NodeType == XmlNodeType.EndElement)
                     {
-                        break;
+                        if (reader.Name == "head")
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                while (reader.Read())
+                {
+                    if (reader.IsEmptyElement)
+                    {
+                        if (string.Compare(reader.Name, "meta", true) >= 0)
+                        {
+                            if (reader.GetAttribute("name") != null)
+                            {
+                                metaName = reader.GetAttribute("name");
+                                if (metaName.IndexOf("RootDir") >= 0)
+                                {
+                                    if (reader.GetAttribute("content") != null)
+                                    {
+                                        metaName = reader.GetAttribute("content");
+                                        if (Common.UnixVersionCheck())
+                                        {
+                                            metaName = Common.GetAllUserAppPath();
+                                            metaName = Common.RightRemove(metaName, "sil");
+                                            metaName = Path.Combine(metaName, "fieldworks");
+                                            //metaName = Path.Combine(metaName, "Projects");
+                                        }
+                                        else if (metaName.IndexOf("file://") >= 0) // from the file access
+                                        {
+                                            const int designatorLength = 7;
+                                            metaName = metaName.Substring(designatorLength,
+                                                                          metaName.Length - designatorLength);
+                                        }
+                                        break;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    // Check only in the header and retrun 
+                    if (reader.NodeType == XmlNodeType.EndElement)
+                    {
+                        if (string.Compare(reader.Name, "head", true) >= 0)
+                        {
+                            break;
+                        }
                     }
                 }
             }
@@ -1299,7 +1345,7 @@ namespace SIL.Tool
                             }
                             writerCount5++;
                         }
-                        
+
                         break;
                 }
             }

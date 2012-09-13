@@ -314,7 +314,7 @@ namespace Test.UIConfigurationToolBLTest
             cTool.TxtDesc.Text = "NewDescription";
             cTool._CToolBL.txtDesc_KeyUpBL();
             cTool.ChkAvailable.Checked = true;
-            cTool._CToolBL.chkAvailable_CheckedChangedBL();
+            cTool._CToolBL.chkAvailable_CheckedChangedBL(cTool.ChkAvailable);
             cTool.TxtComment.Text = "NewComment";
             cTool._CToolBL.txtComment_KeyUpBL();
             cTool.TxtApproved.Text = "Tester";

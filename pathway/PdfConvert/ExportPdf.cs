@@ -115,7 +115,7 @@ namespace SIL.PublishingSolution
                     string defaultCSS = Path.GetFileName(mergedCSS);
                     Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
                     _processedXhtml = preProcessor.ProcessedXhtml;
-                    if (Common.UnixVersionCheck())
+                    if (!Common.UnixVersionCheck())
                     {
                         Object princePath = regPrinceKey.GetValue("InstallLocation");
                         _fullPrincePath = Common.PathCombine((string)princePath, "Engine/Bin/Prince.exe");

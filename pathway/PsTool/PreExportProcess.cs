@@ -50,6 +50,7 @@ namespace SIL.Tool
     {
         private string _xhtmlFileNameWithPath;
         private string _cssFileNameWithPath;
+        private string _cssRevFileNameWithPath;
         private string _xhtmlRevFileNameWithPath;
         private string _baseXhtmlFileNameWithPath;
         private PublicationInformation _projInfo;
@@ -393,6 +394,10 @@ namespace SIL.Tool
                     sb.Append("<img src='WBT_H_RGB_red.png' alt='Wycliffe Logo'/>");
                 }
             }
+            else if (Param.GetOrganization().StartsWith("Wycliffe"))
+            {
+                sb.Append("<img src='WBT_H_RGB_red.png' alt='Wycliffe Logo'/>");
+            }
             sb.AppendLine("</p>");
             sb.AppendLine("</div>");
             return sb.ToString();
@@ -425,6 +430,10 @@ namespace SIL.Tool
                 {
                     File.Copy(Path.Combine(strCopyrightFolder, "WBT_H_RGB_red.png"), Path.Combine(outputFolder, "WBT_H_RGB_red.png"), true);
                 }
+            }
+            else if (Param.GetOrganization().StartsWith("Wycliffe"))
+            {
+                File.Copy(Path.Combine(strCopyrightFolder, "WBT_H_RGB_red.png"), Path.Combine(outputFolder, "WBT_H_RGB_red.png"), true);
             }
             File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"), true);
         }
@@ -521,13 +530,18 @@ namespace SIL.Tool
             if (languageCode.Length > 0)
             {
                 var languageName = Common.GetLanguageName(languageCode);
-                sb.Append("<h1>About this document</h1>");
+                sb.Append("<p><em>About this document</em></p>");
                 sb.Append("<p>This document contains data written in ");
-                sb.Append(languageName.Length > 0 ? languageName : languageCode);
-                sb.Append(". For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
+                if (languageName.Length > 0)
+                {
+                    sb.Append(languageName);
+                }
+                sb.Append("[");
                 sb.Append(languageCode);
+                sb.Append("]. For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
+                sb.Append(languageCode.Substring(0,3));
                 sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
-                sb.Append(languageCode);
+                sb.Append(languageCode.Substring(0,3));
                 sb.Append("</a>.</p>  ");
             }
             return sb.ToString();
@@ -1061,6 +1075,18 @@ namespace SIL.Tool
                 //COPYRIGHT 
                 if (File.Exists(copyRightFilePath))
                 {
+                    if(Common.UnixVersionCheck())
+                    {
+                        string draftTempFileName = Path.GetFileName(copyRightFilePath);
+                        draftTempFileName = Path.Combine(Path.GetTempPath(), draftTempFileName);
+                        if (!File.Exists(draftTempFileName))
+                        {
+                            File.Copy(copyRightFilePath, draftTempFileName, true);
+                            Common.RemoveDTDForLinuxProcess(draftTempFileName);
+                        }
+                        copyRightFilePath = draftTempFileName;
+                    }
+
                     XmlDocument crdoc = Common.DeclareXMLDocument(true);
                     crdoc.Load(copyRightFilePath);
                     XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
@@ -1608,8 +1634,9 @@ namespace SIL.Tool
                 {
                     string chapterNumber = chapterNode.InnerText;
                     XmlAttribute attribute = xdoc.CreateAttribute("id");
-                    attribute.Value = "id_" + bookNode.InnerText + "_" + "Chapter" + chapterNumber;
-                    chapterNode.Attributes.Append(attribute);
+                    if (bookNode != null)
+                        attribute.Value = "id_" + bookNode.InnerText + "_" + "Chapter" + chapterNumber;
+                    if (chapterNode.Attributes != null) chapterNode.Attributes.Append(attribute);
                 }
 
                 //xPath = ".//xhtml:div[@class='Section_Head']";
@@ -1656,10 +1683,18 @@ namespace SIL.Tool
             if (File.Exists(_xhtmlRevFileNameWithPath))
                 File.Copy(_xhtmlRevFileNameWithPath, tempRevFile, true);
 
+            if (_cssFileNameWithPath != null)
+                _cssRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_cssFileNameWithPath), "FlexRev.css");
+
+            string tempCssFile = Common.PathCombine(tempFolder, Path.GetFileName(_cssRevFileNameWithPath));
+
             tempFile = Common.PathCombine(tempFolder, Path.GetFileName(_cssFileNameWithPath));
             if (File.Exists(_cssFileNameWithPath))
                 File.Copy(Common.DirectoryPathReplace(_cssFileNameWithPath), tempFile, true);
             _cssFileNameWithPath = tempFile;
+
+            if (File.Exists(_cssRevFileNameWithPath))
+                File.Copy(_cssRevFileNameWithPath, tempCssFile, true);
             // add a timestamp to the .css for troubleshooting purposes
             AddProductVersionToCSS();
         }
@@ -1694,6 +1729,7 @@ namespace SIL.Tool
                 }
 
             }
+            _reader.Close();
             return headerVariable;
         }
 
@@ -2265,6 +2301,75 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
+        public void RemoveEmptySpanHeadword(string fileName)
+        {
+            string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
+            if (!File.Exists(flexRevFileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(flexRevFileName);
+            string xPath = "//xhtml:span[@class='reversal-form']";
+            XmlNodeList RevFormNodes = xDoc.SelectNodes(xPath, namespaceManager);
+            for (int i = 0; i < RevFormNodes.Count; i++)
+            {
+                RevFormNodes[i].InnerXml = RevFormNodes[i].InnerText;
+            }
+            xDoc.Save(flexRevFileName);
+
+
+        }
+
+
+        public void RemoveEmptySpan(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            string xPath = "//xhtml:span[@class='reversal-form']";
+            XmlNodeList RevFormNodes = xDoc.SelectNodes(xPath, namespaceManager);
+
+            for (int i = 0; i < RevFormNodes.Count; i++)
+            {
+                XmlDocumentFragment docFrag = InsertEmptyHeadword(xDoc);
+                RevFormNodes[i].AppendChild(docFrag);
+            }
+            xDoc.Save(fileName);
+            //SetHideChapterNumberInCSS();
+            //return _xhtmlFileNameWithPath;
+        }
+
+        public void InsertEmptyHeadwordForReversal(string fileName)
+        {
+            string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
+            if(!File.Exists(flexRevFileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(flexRevFileName);
+            string xPath = "//xhtml:span[@class='reversal-form']";
+            XmlNodeList RevFormNodes = xDoc.SelectNodes(xPath, namespaceManager);
+
+            for (int i = 0; i < RevFormNodes.Count; i++)
+            {
+                XmlDocumentFragment docFrag = InsertEmptyHeadword(xDoc);
+                RevFormNodes[i].AppendChild(docFrag);
+            }
+            xDoc.Save(flexRevFileName);
+            //SetHideChapterNumberInCSS();
+            //return _xhtmlFileNameWithPath;
+        }
+
+        private static XmlDocumentFragment InsertEmptyHeadword(XmlDocument xdoc)
+        {
+            const string toInsert = "<span class=\"headword\"> </span>";
+            XmlDocumentFragment docFrag = xdoc.CreateDocumentFragment();
+            docFrag.InnerXml = toInsert;
+            return docFrag;
+        }
+
         public string InsertHiddenVerseNumber()
         {
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
@@ -2333,7 +2438,11 @@ namespace SIL.Tool
                     var atts = node.Attributes;
                     if (atts != null)
                     {
-                        return (atts["lang"].Value);
+                        if(atts["lang"] != null)
+                            return (atts["lang"].Value);
+                        else if(atts["xml:lang"] != null)
+                            return (atts["xml:lang"].Value);
+
                     }
                 }
             }
@@ -2633,6 +2742,7 @@ namespace SIL.Tool
                     }
                 }
             }
+            _reader.Close();
         }
 
         //public ArrayList GetReferenceList()

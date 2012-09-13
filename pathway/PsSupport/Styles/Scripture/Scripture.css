@@ -207,6 +207,21 @@
     //margin-bottom:6pt;
     margin-bottom:0pt;
 }
+
+.Section_Range_Paragraph
+{
+   font-weight: bold;	/* cascaded environment */
+   font-style: normal;	/* cascaded environment */
+   text-align: center;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 0pt;
+   padding-top: 0pt;
+   margin-top: 6pt;
+   margin-bottom:0pt;
+}
+
+
 .Section_Head_Major {
     font-weight: bold;	/* cascaded environment */
     font-style: normal;	/* cascaded environment */
@@ -248,6 +263,7 @@ span {
 }
 .Title_Secondary {
     display: block;
+	page-break-before: always;
 }
 .Verse_Number {
     font-size:6pt;

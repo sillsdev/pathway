@@ -490,6 +490,9 @@ namespace SIL.PublishingSolution
                 string VertAlignment = "CenterAlign";
                 string VertRefPoint = "LineBaseline";
                 string AnchorPoint = "TopLeftAnchor";
+                int height = 72; //1 in
+                int width = 72; // 1 in
+
 
                 isImage = true;
                 inserted = true;
@@ -498,11 +501,29 @@ namespace SIL.PublishingSolution
                 srcFile = _imageSource.ToLower();
                 string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _inputPath);
                 string fileName1 = Common.GetPictureFromPath(srcFile, "", _inputPath);
-                if (IdAllClass.ContainsKey(srcFile))
+                //if (IdAllClass.ContainsKey(srcFile))
+                //To get Image details
+                if (File.Exists(fileName1))
                 {
-                    rectHeight = GetPropertyValue(srcFile, "height", rectHeight);
-                    rectWidth = GetPropertyValue(srcFile, "width", rectWidth);
-                    GetAlignment(alignment, ref HoriAlignment, ref AnchorPoint, srcFile);
+                    Image fullimage = Image.FromFile(fileName1);
+                    height = fullimage.Height;
+                    width = fullimage.Width;
+                }
+                string imgCls = Common.LeftString(imageClass, "_");
+                if (IdAllClass.ContainsKey(imgCls))
+                {
+                    rectWidth = GetPropertyValue(imgCls, "width", rectWidth);
+                    //if(rectWidth.IndexOf('%') > 0)
+                    //{
+                    //    CalculateImageDimension();
+                    //    rectWidth = ((Convert.ToDouble(rectWidth.Replace("%", ""))*width)/100).ToString();
+                    //    if(IdAllClass.ContainsKey("columns"))
+                    //    {
+
+                    //    }
+                    //}
+                    rectHeight = GetPropertyValue(imgCls, "height", rectHeight);
+                    GetAlignment(alignment, ref HoriAlignment, ref AnchorPoint, imgCls);
                 }
                 else
                 {
@@ -544,17 +565,19 @@ namespace SIL.PublishingSolution
                 string yPlus = y.ToString();
                 string yMinus = "-" + yPlus;
 
-                int height = 72; //1 in
-                int width = 72; // 1 in
+               
 
                 //TODO Make it function 
                 //To get Image details
-                if (File.Exists(fileName1))
-                {
-                    Image fullimage = Image.FromFile(fileName1);
-                    height = fullimage.Height;
-                    width = fullimage.Width;
-                }
+                //if (File.Exists(fileName1))
+                //{
+                //    Image fullimage = Image.FromFile(fileName1);
+                //    height = fullimage.Height;
+                //    width = fullimage.Width;
+                //}
+                int xx = GCD(width, height);
+                string xxw = string.Format("{0}:{1}", width/xx, height/xx);
+;
                 string imageFloatLeftRightOrCenter = string.Empty;
                 string anchorPoint = string.Empty;
                 string horizontalAlignment = string.Empty;
@@ -591,8 +614,8 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    anchorPoint = "TopRightAnchor";
-                    horizontalAlignment = "RightAlign";
+                    anchorPoint = "TopCenterAnchor";
+                    horizontalAlignment = "CenterAlign";
                 }
 
                 // Writing the Images
@@ -843,6 +866,34 @@ namespace SIL.PublishingSolution
             return inserted;
         }
 
+        private void CalculateImageDimension()
+        {
+
+        }
+
+        private static int GCD(int width, int height)
+        {
+            try
+            {
+                while (width != 0 && height != 0)
+                {
+                    if (width > height)
+                        width %= height;
+                    else
+                        height %= width;
+                }
+                if (width == 0)
+                    return height;
+                else
+                    return width;
+            }
+            catch
+            {
+                return 0;
+            }
+            
+        }
+
         private void GetHeightandWidth(ref string height, ref string width)
         {
             if (_allCharacter.Count > 0)
@@ -1075,7 +1126,7 @@ namespace SIL.PublishingSolution
 
         private void SetHeadwordTrue()
         {
-            if (_reader.GetAttribute("class") != null && _reader.GetAttribute("class").ToLower() == "headword")
+            if (_reader.GetAttribute("class") != null && (_reader.GetAttribute("class").ToLower() == "headword" || _reader.GetAttribute("class").ToLower() == "reversal-form"))
             {
                 _IsHeadword = true;
                 _headwordStyles = true;
@@ -1189,7 +1240,7 @@ namespace SIL.PublishingSolution
 
         private void SetHeadwordFalse()
         {
-            if (_closeChildName.ToLower() == "headword")
+            if (_closeChildName.ToLower() == "headword" || _closeChildName.ToLower() == "reversalform")
             {
                 _IsHeadword = false;
                 _headwordStyles = false;

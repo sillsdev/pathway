@@ -30,5 +30,7 @@
         <file name="../Test/Test.csproj"/>
         <file name="../TestBed/TestBed.csproj"/>
         <file name="../WordPressConvert/WordPressConvert.csproj"/>
+        <file name="../XeLaTexConvert/XeLaTexConvert.csproj"/>
+        <file name="../YouVersionConvert/YouVersionConvert.csproj"/>
     </projectTree>
 </project>

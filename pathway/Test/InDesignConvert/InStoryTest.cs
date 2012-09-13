@@ -1264,6 +1264,7 @@ namespace Test.InDesignConvert
         #endregion List
 
         [Test]
+        [Ignore]
         public void MultiLangHeader1()
         {
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/MultiLangHeader1.xhtml");
@@ -1327,7 +1328,9 @@ namespace Test.InDesignConvert
             string xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             XmlNode node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             string result = node.InnerXml;
-            string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+
+            string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_1\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenFirst3";
@@ -1335,7 +1338,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN_1\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenFirst4";
@@ -1343,7 +1346,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa_1\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenLast1";
@@ -1351,7 +1354,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_1\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenLast3";
@@ -1359,7 +1362,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN_1\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenLast4";
@@ -1367,7 +1370,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa_1\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
         }
 
@@ -1442,57 +1445,57 @@ namespace Test.InDesignConvert
             node = nodesList[0];
             attrb = node.Attributes;
             string result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "1 0 0 1 72 -108", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "1 0 0 1 18 -13.5", "Case1 ItemTransform Property failed");
 
             XmlNode childNode = node.SelectSingleNode("//Image");
             attrb = childNode.Attributes;
 
             result = attrb["ActualPpi"].Value;
-            Assert.AreEqual(result, "144 216", "Case1 ActualPpi Property failed");
+            Assert.AreEqual(result, "36 27", "Case1 ActualPpi Property failed");
 
             result = attrb["EffectivePpi"].Value;
             Assert.AreEqual(result, "308 231", "Case1 EffectivePpi Property failed");
 
             result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "0.467532467532468 0 0 0.935064935064935 -72 -108", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "0.116883116883117 0 0 0.116883116883117 -18 -13.5", "Case1 ItemTransform Property failed");
             childNode.RemoveAll();
 
             //Case 2:
             node = nodesList[1];
             attrb = node.Attributes;
             result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "1 0 0 1 55.813953488372 -72", "Case2 ItemTransform Property failed");
+            Assert.AreEqual(result, "1 0 0 1 18 -23.22", "Case2 ItemTransform Property failed");
 
             childNode = node.SelectSingleNode("Image");
             attrb = childNode.Attributes;
 
             result = attrb["ActualPpi"].Value;
-            Assert.AreEqual(result, "111.627906976744 144", "Case2 ActualPpi Property failed");
+            Assert.AreEqual(result, "36 46.44", "Case2 ActualPpi Property failed");
 
             result = attrb["EffectivePpi"].Value;
             Assert.AreEqual(result, "200 258", "Case2 EffectivePpi Property failed");
 
             result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "0.55813953488372 0 0 0.558139534883721 -55.813953488372 -72", "Case2 ItemTransform Property failed");
+            Assert.AreEqual(result, "0.18 0 0 0.18 -18 -23.22", "Case2 ItemTransform Property failed");
             childNode.RemoveAll();
 
             //Case 3:
             node = nodesList[2];
             attrb = node.Attributes;
             result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "1 0 0 1 36 -42", "Case3 ItemTransform Property failed");
+            Assert.AreEqual(result, "1 0 0 1 18 -21", "Case3 ItemTransform Property failed");
 
             childNode = node.SelectSingleNode("Image");
             attrb = childNode.Attributes;
 
             result = attrb["ActualPpi"].Value;
-            Assert.AreEqual(result, "72 84", "Case3 ActualPpi Property failed");
+            Assert.AreEqual(result, "36 42", "Case3 ActualPpi Property failed");
 
             result = attrb["EffectivePpi"].Value;
             Assert.AreEqual(result, "180 210", "Case3 EffectivePpi Property failed");
 
             result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "0.4 0 0 0.4 -36 -42", "Case3 ItemTransform Property failed");
+            Assert.AreEqual(result, "0.2 0 0 0.2 -18 -21", "Case3 ItemTransform Property failed");
             childNode.RemoveAll();
         }
 
@@ -1515,38 +1518,38 @@ namespace Test.InDesignConvert
             node = nodesList[0];
             attrb = node.Attributes;
             string result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "1 0 0 1 144 -72", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "1 0 0 1 18 -23.22", "Case1 ItemTransform Property failed");
 
             XmlNode childNode = node.SelectSingleNode("//Image");
             attrb = childNode.Attributes;
 
             result = attrb["ActualPpi"].Value;
-            Assert.AreEqual(result, "288 144", "Case1 ActualPpi Property failed");
+            Assert.AreEqual(result, "36 46.44", "Case1 ActualPpi Property failed");
 
             result = attrb["EffectivePpi"].Value;
             Assert.AreEqual(result, "200 258", "Case1 EffectivePpi Property failed");
 
             result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "1.44 0 0 0.558139534883721 -144 -72", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "0.18 0 0 0.18 -18 -23.22", "Case1 ItemTransform Property failed");
             childNode.RemoveAll();
 
             //Case 2:
             node = nodesList[1];
             attrb = node.Attributes;
             result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "1 0 0 1 72 -144", "Case2 ItemTransform Property failed");
+            Assert.AreEqual(result, "1 0 0 1 18 -21", "Case2 ItemTransform Property failed");
 
             childNode = node.SelectSingleNode("Image");
             attrb = childNode.Attributes;
 
             result = attrb["ActualPpi"].Value;
-            Assert.AreEqual(result, "144 288", "Case2 ActualPpi Property failed");
+            Assert.AreEqual(result, "36 42", "Case2 ActualPpi Property failed");
 
             result = attrb["EffectivePpi"].Value;
             Assert.AreEqual(result, "180 210", "Case2 EffectivePpi Property failed");
 
             result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "0.8 0 0 1.37142857142857 -72 -144", "Case2 ItemTransform Property failed");
+            Assert.AreEqual(result, "0.2 0 0 0.2 -18 -21", "Case2 ItemTransform Property failed");
 
         }
 
@@ -1597,19 +1600,19 @@ namespace Test.InDesignConvert
             node = nodesList[0];
             XmlAttributeCollection attrb = node.Attributes;
             string result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "1 0 0 1 30.8571428571429 -36", "Case2 ItemTransform Property failed");
+            Assert.AreEqual(result, "1 0 0 1 18 -21", "Case2 ItemTransform Property failed");
 
             XmlNode childNode = node.SelectSingleNode("//Image");
             attrb = childNode.Attributes;
 
             result = attrb["ActualPpi"].Value;
-            Assert.AreEqual(result, "61.7142857142857 72", "Case1 ActualPpi Property failed");
+            Assert.AreEqual(result, "36 42", "Case1 ActualPpi Property failed");
 
             result = attrb["EffectivePpi"].Value;
             Assert.AreEqual(result, "180 210", "Case1 EffectivePpi Property failed");
 
             result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "0.342857142857143 0 0 0.342857142857143 -30.8571428571429 -36", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "0.2 0 0 0.2 -18 -21", "Case1 ItemTransform Property failed");
             childNode.RemoveAll();
         }
 
@@ -1630,10 +1633,10 @@ namespace Test.InDesignConvert
             node = nodesList[0];
             attrb = node.Attributes;
             string result = attrb["AnchorPoint"].Value;
-            Assert.AreEqual(result, "TopRightAnchor", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "TopCenterAnchor", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalAlignment"].Value;
-            Assert.AreEqual(result, "RightAlign", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "CenterAlign", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalReferencePoint"].Value;
             Assert.AreEqual(result, "ColumnEdge", "Case1 ItemTransform Property failed");
@@ -1662,10 +1665,10 @@ namespace Test.InDesignConvert
             node = nodesList[0];
             attrb = node.Attributes;
             string result = attrb["AnchorPoint"].Value;
-            Assert.AreEqual(result, "TopRightAnchor", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "TopCenterAnchor", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalAlignment"].Value;
-            Assert.AreEqual(result, "RightAlign", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "CenterAlign", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalReferencePoint"].Value;
             Assert.AreEqual(result, "ColumnEdge", "Case1 ItemTransform Property failed");

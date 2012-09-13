@@ -266,44 +266,53 @@ namespace SIL.PublishingSolution
 
         public void ExportUSXRawToUSX(List<XmlDocument> usxBooksToExport)
         {
-            string vrsFileDest = Path.Combine(m_outputLocationPath, "versification.vrs");
-            string ldsFileDest = Path.Combine(m_outputLocationPath, "English.lds");
-            
-            string paratextProjectLocation = string.Empty;
-            object paraTextprojectPath;
-            if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey,
-                                                      "Settings_Directory", "", out paraTextprojectPath))
+            if (m_format != "Go Bible")
             {
-                paratextProjectLocation = (string)paraTextprojectPath;
-                paratextProjectLocation = Path.Combine(paratextProjectLocation, m_projectName);
-                paratextProjectLocation = Path.Combine(paratextProjectLocation, "gather");
+                string vrsFileDest = Path.Combine(m_outputLocationPath, "versification.vrs");
+                string ldsFileDest = Path.Combine(m_outputLocationPath, "English.lds");
 
-                string vrsFileName = "eng";
-                string ldsFileName = "*"; //project file name associate file.
-
-                if (!Directory.Exists(paratextProjectLocation))
+                string paratextProjectLocation = string.Empty;
+                object paraTextprojectPath;
+                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey,
+                                                      "Settings_Directory", "", out paraTextprojectPath))
                 {
-                    paratextProjectLocation = (string)paraTextprojectPath;
+                    paratextProjectLocation = (string) paraTextprojectPath;
+                    paratextProjectLocation = Path.Combine(paratextProjectLocation, m_projectName);
+                    paratextProjectLocation = Path.Combine(paratextProjectLocation, "gather");
+
+                    string vrsFileName = "eng";
+                    string ldsFileName = "*"; //project file name associate file.
+
+                    if (!Directory.Exists(paratextProjectLocation))
+                    {
+                        paratextProjectLocation = (string) paraTextprojectPath;
+                    }
+                    string ssfFileName = Path.Combine(paratextProjectLocation, Common.databaseName + ".ssf");
+                    XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
+                    xmlDoc.Load(ssfFileName);
+                    string xPath = "//Language";
+                    XmlNode list = xmlDoc.SelectSingleNode(xPath);
+                    if (list != null)
+                    {
+                        ldsFileName = list.InnerText;
+                    }
+
+                    if (File.Exists(Path.Combine(paratextProjectLocation, vrsFileName + ".vrs")))
+                        File.Copy(Path.Combine(paratextProjectLocation, vrsFileName + ".vrs"), vrsFileDest);
+
+                    if (File.Exists(Path.Combine(paratextProjectLocation, ldsFileName + ".lds")))
+                        File.Copy(Path.Combine(paratextProjectLocation, ldsFileName + ".lds"), ldsFileDest);
+
                 }
-                string ssfFileName = Path.Combine(paratextProjectLocation, Common.databaseName + ".ssf");
-                XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
-                xmlDoc.Load(ssfFileName);
-                string xPath = "//Language";
-                XmlNode list = xmlDoc.SelectSingleNode(xPath);
-                if (list != null)
-                {
-                    ldsFileName = list.InnerText;
-                }
 
-                if (File.Exists(Path.Combine(paratextProjectLocation, vrsFileName + ".vrs")))
-                    File.Copy(Path.Combine(paratextProjectLocation, vrsFileName + ".vrs"), vrsFileDest);
-
-                if (File.Exists(Path.Combine(paratextProjectLocation, ldsFileName + ".lds")))
-                    File.Copy(Path.Combine(paratextProjectLocation, ldsFileName + ".lds"), ldsFileDest);
-
+                m_outputLocationPath = Path.Combine(m_outputLocationPath, "USX");
+            }
+            else
+            {
+                m_outputLocationPath = Path.Combine(m_outputLocationPath, "SFM");
             }
 
-            m_outputLocationPath = Path.Combine(m_outputLocationPath, "USX");
+            
             if (!Directory.Exists(m_outputLocationPath))
                 Directory.CreateDirectory(m_outputLocationPath);
 
@@ -378,8 +387,12 @@ namespace SIL.PublishingSolution
                     UsxToSFM usxToSfm = new UsxToSFM();
                     string targetFile = bookFileName.Replace(".usx", ".sfm");
                     usxToSfm.ConvertUsxToSFM(bookFileName, targetFile);
+
+                    if(File.Exists(targetFile))
+                    {
+                        File.Delete(bookFileName);
+                    }
                 }
-                
             }
         }
 

@@ -58,6 +58,7 @@ namespace SIL.PublishingSolution
         public string inputTypeBL = "Dictionary";
 
         public string ElementDesc = "description";
+        public string ElementAvailable = "available";
         public string ElementComment = "comment";
 
         public string TypeStandard = "Standard";
@@ -993,7 +994,6 @@ namespace SIL.PublishingSolution
                                 cTool.DdlDefaultFont.Enabled = bEnabled;
                                 cTool.DdlMissingFont.Enabled = bEnabled;
                                 cTool.DdlNonSILFont.Enabled = bEnabled;
-                                cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
                                 break;
                             case "includefontvariants":
                                 cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
@@ -1196,6 +1196,7 @@ namespace SIL.PublishingSolution
 
             if (languageList.Count > 0)
             {
+                cTool.DdlLanguage.Items.Clear();
                 foreach (XmlNode language in languageList)
                 {
                     cTool.DdlLanguage.Items.Add(language.InnerText);
@@ -1672,6 +1673,17 @@ namespace SIL.PublishingSolution
                     ShowCssSummary();
                     break;
             }
+
+            if (Common.GetOsName().IndexOf("Windows") >= 0) // Hide Preview if LibreOffice not exist
+            {
+                string regEntry = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\LibreOffice\\UNO\\InstallPath", "");
+                if (regEntry == null)
+                {
+                    if (cTool.TabControl1.TabPages.ContainsKey("tabPreview"))
+                        cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPreview"]);
+                }
+            }
+
         }
 
         /// <summary>
@@ -3522,10 +3534,11 @@ namespace SIL.PublishingSolution
             //catch { }
         }
 
-        public void chkAvailable_CheckedChangedBL()
+        public void chkAvailable_CheckedChangedBL(object sender)
         {
             try
             {
+                WriteAttrib(ElementAvailable, sender);
                 UpdateGrid(cTool.ChkAvailable, cTool.StylesGrid);
             }
             catch { }
@@ -4023,7 +4036,7 @@ namespace SIL.PublishingSolution
                         cTool.tsDelete_Click(sender, null);
                     }
                 }
-                else if (e.KeyCode == Keys.F1)
+                else if (e.KeyCode == Keys.F1 && !Common.IsUnixOS())
                 {
                     CallHelp();
                 }
@@ -4045,9 +4058,19 @@ namespace SIL.PublishingSolution
         private void CallHelp()
         {
             Common.PathwayHelpSetup();
-            Common.HelpProv.SetHelpNavigator(cTool, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(cTool, "Overview.htm");
-            SendKeys.Send("{F1}");
+            if (Common.IsUnixOS())
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "chmsee";
+                startInfo.Arguments = Common.HelpProv.HelpNamespace;
+                Process.Start(startInfo);
+            }
+            else
+            {
+                Common.HelpProv.SetHelpNavigator(cTool, HelpNavigator.Topic);
+                Common.HelpProv.SetHelpKeyword(cTool, "Overview.htm");
+                SendKeys.Send("{F1}");
+            }
         }
 
         public void AboutDialog()

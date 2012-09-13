@@ -29,7 +29,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
 
         private string _tagName, _style, _number, _code, _caller, _content;
-        private string _parentTagName = string.Empty,_parentStyleName = string.Empty;
+        private string _parentTagName = string.Empty, _parentStyleName = string.Empty;
 
         private string _desc, _file, _size, _loc, _copy, _ref;
         private bool _significant, _isEmptyNode, _isParaWritten;
@@ -39,7 +39,7 @@ namespace SIL.PublishingSolution
 
         private bool _isclassNameExist;
         private List<string> _xhtmlAttribute = new List<string>();
-        
+
         #endregion
 
         /// <summary>
@@ -98,11 +98,12 @@ namespace SIL.PublishingSolution
         private void WriteElement()
         {
             _content = SignificantSpace(_reader.Value);
-            if (_tagName == "book")
-            {
-                Book();
-            }
-            else if (_tagName == "para")
+            //if (_tagName == "book")
+            //{
+            //    Book();
+            //}
+            //else 
+            if (_tagName == "para")
             {
                 Para();
                 _isParaWritten = true;
@@ -135,8 +136,19 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void Book()
         {
-            string line = "\\" + _style + Space + _code + Space + _content;
-            _sfmFile.WriteLine(line);
+            if (_tagName == "book")
+            {
+                string line = "\\" + _style + Space + _code + Space + _content;
+                _sfmFile.WriteLine(line);
+                if (_style == "id")
+                {
+                    Common.BookNameTag = "id";
+                    if (Common.BookNameCollection.Contains(_code) == false && _code != null)
+                    {
+                        Common.BookNameCollection.Add(_code);
+                    }
+                }
+            }
 
         }
 
@@ -164,6 +176,19 @@ namespace SIL.PublishingSolution
                 prefix = "\\" + _style + Space;
             }
             string line = prefix + _content + EndText();
+
+            string bookName = string.Empty;
+            if (_style == "h")
+            {
+                bookName = _content;
+                Common.BookNameTag = "h";
+                if (Common.BookNameCollection.Contains(bookName) == false && bookName != string.Empty)
+                {
+                    Common.BookNameCollection.Remove(_code);
+                    Common.BookNameCollection.Add(bookName);
+                }
+            }
+
             _sfmFile.Write(line);
         }
 
@@ -174,7 +199,7 @@ namespace SIL.PublishingSolution
         private void Verse()
         {
             string line;
-            if (_isParaWritten ==false)
+            if (_isParaWritten == false)
             {
                 line = "\\" + _parentStyleName;
                 _sfmFile.WriteLine(line);
@@ -185,8 +210,64 @@ namespace SIL.PublishingSolution
                 _sfmFile.WriteLine();
             }
 
-            line = "\\" + _style + Space + _number + Space + _content.Trim() + EndText();
-            _sfmFile.Write(line);
+            bool isWritten = HandleBridgeVerseNumbers(_number);
+
+            if (!isWritten)
+            {
+                line = "\\" + _style + Space + _number + Space + _content.Trim() + EndText();
+                _sfmFile.Write(line);
+            }
+        }
+
+        private bool HandleBridgeVerseNumbers(string verseNumber)
+        {
+            bool isWritten = false;
+            StringBuilder sb = new StringBuilder();
+            string[] bridgeVerses = verseNumber.Split('-');
+            if (bridgeVerses.Length == 2)
+            {
+                int verseFrom = int.Parse(bridgeVerses[0]);
+
+                if (Common.IsAlphanumeric(bridgeVerses[1]))
+                {
+                    if (bridgeVerses[1].IndexOf("a") > 0)
+                    {
+                        int verseAlpha = Common.GetNumberFromAlphaNumeric(bridgeVerses[1]);
+                        for (int cntVal = verseFrom; cntVal < verseAlpha; cntVal++)
+                        {
+                            sb.AppendLine("\\" + _style + Space + cntVal + Space + "..." + EndText());
+                        }
+                        sb.AppendLine("\\" + _style + Space + verseAlpha + Space + _content.Trim() + EndText());
+                        _sfmFile.Write(sb.ToString());
+                    }
+                }
+                else
+                {
+                    int verseAlpha = int.Parse(bridgeVerses[1]);
+                    for (int cntVal = verseFrom; cntVal < verseAlpha; cntVal++)
+                    {
+                        sb.AppendLine("\\" + _style + Space + cntVal + Space + "..." + EndText());
+                    }
+                    sb.AppendLine("\\" + _style + Space + verseAlpha + Space + _content.Trim() + EndText());
+                    _sfmFile.Write(sb.ToString());
+                }
+                isWritten = true;
+            }
+            else if (bridgeVerses.Length == 1 && Common.IsAlphanumeric(bridgeVerses[0]))
+            {
+                if (bridgeVerses[0].IndexOf("a") > 0)
+                {
+                    int verseAlpha = Common.GetNumberFromAlphaNumeric(bridgeVerses[0]);
+                    sb.AppendLine("\\" + _style + Space + verseAlpha + Space + _content.Trim() + EndText());
+                }
+                else
+                {
+                    sb.AppendLine(_content.Trim() + EndText());
+                }
+                _sfmFile.Write(sb.ToString());
+                isWritten = true;
+            }
+            return isWritten;
         }
 
         /// <summary>
@@ -209,7 +290,7 @@ namespace SIL.PublishingSolution
             _sfmFile.Write(line);
         }
 
-       
+
         /// <summary>
         /// input:  
         /// output: 
@@ -236,7 +317,7 @@ namespace SIL.PublishingSolution
 
         private string EndText()
         {
-            string endText=string.Empty;
+            string endText = string.Empty;
             if (_tagName == "char" || _tagName == "figure" || _tagName == "note")
             {
                 endText = "\\" + StackPeek(_allStyle) + "*";
@@ -250,7 +331,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void EndElement()
         {
-            string style=  StackPop(_allStyle);
+            string style = StackPop(_allStyle);
             string tag = StackPop(_alltagName);
 
             if (tag == "para" || tag == "verse")
@@ -275,7 +356,7 @@ namespace SIL.PublishingSolution
         {
             _xhtmlAttribute.Clear();
             _isclassNameExist = false;
-            _number = string.Empty;  
+            _number = string.Empty;
 
             _parentStyleName = StackPeek(_allStyle);
             _parentTagName = StackPeek(_alltagName);
@@ -307,6 +388,10 @@ namespace SIL.PublishingSolution
                         {
                             _code = _reader.Value;
                         }
+                        else if (_reader.Name == "id")
+                        {
+                            _code = _reader.Value;
+                        }
                         else if (_reader.Name == "caller")
                         {
                             _caller = _reader.Value;
@@ -314,9 +399,9 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            //Para();
-            Note();
 
+            Note();
+            Book();
             if (_isEmptyNode)
             {
                 if (_tagName != "verse")
@@ -335,10 +420,10 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                 if (_tagName == "para")
-                 {
-                     _isParaWritten = false;
-                 }
+                if (_tagName == "para")
+                {
+                    _isParaWritten = false;
+                }
 
                 _allStyle.Push(_style);
                 _alltagName.Push(_tagName);
@@ -351,7 +436,7 @@ namespace SIL.PublishingSolution
             if (style != string.Empty)
             {
                 prefix = "\\" + style;
-                if(_number != string.Empty)
+                if (_number != string.Empty)
                 {
                     prefix += Space + _number;
                 }

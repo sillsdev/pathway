@@ -2995,7 +2995,7 @@ namespace SIL.PublishingSolution
                     fillHeadword = true;
                 }
             }
-            else if (_projInfo.ProjectInputType.ToLower() == "scripture")
+            else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture
             {
                 if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0))
                 {

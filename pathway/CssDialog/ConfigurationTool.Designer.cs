@@ -371,7 +371,7 @@ namespace SIL.PublishingSolution
             // 
             // tsDefault
             // 
-            this.tsDefault.AccessibleName = "tsHelp";
+            this.tsDefault.AccessibleName = "tsDefault";
             this.tsDefault.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.tsDefault.Image = ((System.Drawing.Image)(resources.GetObject("tsDefault.Image")));
             this.tsDefault.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -399,6 +399,7 @@ namespace SIL.PublishingSolution
             // 
             // toolStripSplitButton1
             // 
+            this.tsDefault.AccessibleName = "tsHelp";
             this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.contentsToolStripMenuItem,
             this.aboutToolStripMenuItem});

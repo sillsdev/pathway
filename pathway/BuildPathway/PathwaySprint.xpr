@@ -234,6 +234,7 @@
         <file name="FilesYouVersion-tpl.wxs"/>
         <file name="InstallPs-tpl.wxs"/>
         <file name="InstallPw7BTE-tpl.wxs"/>
+        <file name="InstallPw7EPUB-tpl.wxs"/>
         <file name="InstallPw7SE-tpl.wxs"/>
         <file name="InstallPwBTE-tpl.wxs"/>
         <file name="InstallPwCtx-tpl.wxs"/>

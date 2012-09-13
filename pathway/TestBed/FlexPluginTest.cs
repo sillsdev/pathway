@@ -317,7 +317,7 @@ namespace TestBed
 
         private void Btn_InputPath_Click(object sender, EventArgs e)
         {
-            txtInputPath.Text = GetFilePath("XHTML Files|*.xhtml|XML Files|*.xml|Tex|*.tex|Zip Files|*.zip|usx Files|*.usx");
+            txtInputPath.Text = GetFilePath("XHTML Files|*.xhtml|XML Files|*.xml|Tex|*.tex|Zip Files|*.zip|usx Files|*.usx|usfm Files|*.usfm|Text Files|*.txt|All Files|*.*");
             txtCSSInput.Text = Path.ChangeExtension(txtInputPath.Text, "css");
         }
 
@@ -1139,6 +1139,24 @@ namespace TestBed
 
            UsxToSFM usxToSfm = new UsxToSFM();
            usxToSfm.ConvertUsxToSFM(txtInputPath.Text, Path.GetDirectoryName(txtInputPath.Text)+ "\\output.sfm");
+        }
+
+        private void btnRemoveBom_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(txtInputPath.Text))
+            {
+                string temporaryCvFullName = txtInputPath.Text;
+                var utf8WithoutBom = new UTF8Encoding(false);
+                string noBom = txtInputPath.Text;
+                noBom = noBom.Replace(".", "bom.");
+                var reader = new StreamReader(temporaryCvFullName);
+                var writer = new StreamWriter(noBom, false, utf8WithoutBom);
+                writer.Write(reader.ReadToEnd());
+                reader.Close();
+                writer.Close();
+
+                MessageBox.Show("Updated sucessfully.");
+            }
         }
     }
 }

@@ -805,7 +805,7 @@ namespace SIL.PublishingSolution
 
         private void chkAvailable_CheckedChanged(object sender, EventArgs e)
         {
-            _CToolBL.chkAvailable_CheckedChangedBL();
+            _CToolBL.chkAvailable_CheckedChangedBL(sender);
         }
 
         private void tsUndo_Click(object sender, EventArgs e)

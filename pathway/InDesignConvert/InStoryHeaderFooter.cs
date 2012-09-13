@@ -220,7 +220,7 @@ namespace SIL.PublishingSolution
             bool isHomographExist = FindHomographNumber(GuideWordStyle);
             foreach (string sName in GuideWordStyle)
             {
-                if (GuideWordStyle.Count > 2 && sName.IndexOf("headword") >= 0) continue;
+                //if (GuideWordStyle.Count > 2 && (sName.IndexOf("headword") >= 0 || sName.ToLower() == "reversal-form")) continue;
                 if (sName.IndexOf("Guideword") == 0)
                 {
                     string styleName = Common.RightString(sName, "_");
@@ -282,6 +282,37 @@ namespace SIL.PublishingSolution
                         _writer.WriteEndElement();
                     }
                     // Note: HomoGraphNumber Character End Element
+                }
+                else if (sName.IndexOf("RevGuideword") == 0)
+                //else
+                {
+                    string styleName = Common.RightString(sName, "_");
+                    styleName = "CharacterStyle/" + styleName;
+                    // Note: GuideWord Character Start Element
+                    _writer.WriteStartElement("CharacterStyleRange");
+                    _writer.WriteAttributeString("AppliedCharacterStyle", styleName);
+                    //_writer.WriteAttributeString("AppliedCharacterStyle", PageStyleName);
+                    if (_contentType == "GF")
+                    {
+                        _writer.WriteAttributeString("PageNumberType", "TextVariable");
+                        _writer.WriteStartElement("TextVariableInstance");
+                        _writer.WriteAttributeString("Self", "uf1");
+                        _writer.WriteAttributeString("Name", "RFG_" + i);
+                        _writer.WriteAttributeString("ResultText", "&lt;First&gt;");
+                        _writer.WriteAttributeString("AssociatedTextVariable", "dTextVariablenFirst" + i);
+                        _writer.WriteEndElement();
+                    }
+                    if (_contentType == "GL")
+                    {
+                        _writer.WriteAttributeString("PageNumberType", "TextVariable");
+                        _writer.WriteStartElement("TextVariableInstance");
+                        _writer.WriteAttributeString("Self", "ul1");
+                        _writer.WriteAttributeString("Name", "RLG_" + i);
+                        _writer.WriteAttributeString("ResultText", "&lt;Last&gt;");
+                        _writer.WriteAttributeString("AssociatedTextVariable", "dTextVariablenLast" + i);
+                        _writer.WriteEndElement();
+                    }
+                    _writer.WriteEndElement();
                 }
                 i = i + 1;
             }

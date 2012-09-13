@@ -111,7 +111,7 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="OrdinalNumberEnding_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="6pt" style:font-size-complex="6pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Foreign_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
@@ -212,7 +212,7 @@
     </style:style>
     <style:style style:name="OrdinalNumberEnding" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="150%" style:text-position="super 55%" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-size="75%" style:text-position="super 55%" />
     </style:style>
     <style:style style:name="Paragraph" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="12pt" fo:margin-left="0pt" />

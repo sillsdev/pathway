@@ -325,6 +325,12 @@ namespace SIL.PublishingSolution
             string arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
             if (Common.IsUnixOS())
             {
+                string path = Environment.GetEnvironmentVariable("PATH");
+                Debug.Assert(path != null);
+                if (!path.Contains(xeLaTexInstallationPath))
+                {
+                    Environment.SetEnvironmentVariable("PATH", string.Format("{0}:{1}", xeLaTexInstallationPath, path));
+                }
                 xeLaTexInstallationPath = Path.GetDirectoryName(xeLatexFullFile);
                 name = "xelatex";
                 arguments = "-interaction=batchmode \"" + xeLatexFullFile + "\"";
