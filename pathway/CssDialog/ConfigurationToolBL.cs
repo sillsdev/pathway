@@ -2453,6 +2453,7 @@ namespace SIL.PublishingSolution
 
             string file;
             string attribValue = Common.GetTextValue(sender, out file);
+            if (attribValue.Trim().Length == 0) return false;
             if (PreviousValue == attribValue)
             {
                 return result;
@@ -2892,7 +2893,7 @@ namespace SIL.PublishingSolution
             sb.Append("pt Font, ");
             sb.Append(cTool.TxtDefaultLineHeight.Text);
             sb.Append("% Line Height, Alignment: ");
-            sb.Append(cTool.DdlDefaultAlignment.SelectedItem.ToString());
+            sb.Append(cTool.DdlDefaultAlignment.SelectedText.ToString(CultureInfo.InvariantCulture));
 
             cTool.TxtCss.Text = sb.ToString();
         }
