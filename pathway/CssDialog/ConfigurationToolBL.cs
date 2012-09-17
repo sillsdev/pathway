@@ -2195,7 +2195,8 @@ namespace SIL.PublishingSolution
             var currentRow = grid.Rows[SelectedRowIndex];
             if (currentRow == null) return false;
             //var currentDescription = currentRow.Cells[ColumnDescription].Value.ToString();
-            var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
+           // var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
+            var currentApprovedBy = grid[4, SelectedRowIndex].Value.ToString();
             string type = grid[ColumnType, SelectedRowIndex].Value.ToString();
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
             if (PreviousStyleName.Length > 50)
