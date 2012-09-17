@@ -76,6 +76,10 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("AppliedParagraphStyle", "ParagraphStyle/" + className);
             _writer.WriteAttributeString("Justification", textAlign);
 
+            string stylename = string.Empty;
+
+            stylename = (projectPath.ToLower().IndexOf("dictionary") > 0) ? "xhomographnumber_headword_entry_letData_dicBody" : "scrBookName_1";
+
             if (_contentType == "PageCount")
             {
                 WritePageCount(className);
@@ -87,7 +91,8 @@ namespace SIL.PublishingSolution
             }
             else if (_contentType == "BL CL:VL" || _contentType == "BF CF:VF")
             {
-                string stylename = "xhomographnumber_headword_entry_letData_dicBody";
+                //string stylename = "xhomographnumber_headword_entry_letData_dicBody";
+                
                 string position = _contentType.IndexOf("F") > 0 ? ReferencePosition.first.ToString() : ReferencePosition.last.ToString();
                 WriteBooknameVariable("CharacterStyle/" + stylename, position);
                 WriteSpecialCharacter(" ");
@@ -97,7 +102,7 @@ namespace SIL.PublishingSolution
             }
             else if (_contentType == "BF CF" || _contentType == "BL CL")
             {
-                string stylename = "xhomographnumber_headword_entry_letData_dicBody";
+                //string stylename = "xhomographnumber_headword_entry_letData_dicBody";
                 string position = _contentType.IndexOf("F") > 0 ? "first" : "last";
                 WriteBooknameVariable("CharacterStyle/" + stylename, position);
                 WriteSpecialCharacter(" ");
@@ -105,7 +110,7 @@ namespace SIL.PublishingSolution
             }
             else if (_contentType == "BF CF:VF-CL:VL")
             {
-                string stylename = "xhomographnumber_headword_entry_letData_dicBody";
+                //string stylename = "xhomographnumber_headword_entry_letData_dicBody";
                 WriteBooknameVariable("CharacterStyle/" + stylename, ReferencePosition.first.ToString());
                 WriteSpecialCharacter(" ");
                 WriteChapterVariable("CharacterStyle/" + stylename, ReferencePosition.first.ToString());
@@ -118,7 +123,7 @@ namespace SIL.PublishingSolution
             }
             else if (_contentType == "BF CF-CL")
             {
-                string stylename = "xhomographnumber_headword_entry_letData_dicBody";
+                //string stylename = "xhomographnumber_headword_entry_letData_dicBody";
                 WriteBooknameVariable("CharacterStyle/" + stylename, ReferencePosition.first.ToString());
                 WriteSpecialCharacter(" ");
                 WriteChapterVariable("CharacterStyle/" + stylename, ReferencePosition.first.ToString());
