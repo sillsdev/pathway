@@ -1255,5 +1255,10 @@ namespace SIL.PublishingSolution
             EditCSS(sender, e);
             _CToolBL.chkIncludeImage_CheckedChangedBL(sender, e);
         }
+
+        private void lnkLblUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData.ToString());
+        }
      }
 }

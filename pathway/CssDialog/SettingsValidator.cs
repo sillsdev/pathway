@@ -776,11 +776,14 @@ namespace SIL.PublishingSolution
                 const string methodname = "ReversalIndexes";
                 const string xPath = "//stylePick/settings/property[@name=\"ReversalIndexes\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string result = childNode.Attributes["value"].Value;
-                if (!boolValue.Contains(result))
+                if (childNode != null && childNode.Attributes != null)
                 {
-                    errorTag = methodname;
-                    return false;
+                    string result = childNode.Attributes["value"].Value;
+                    if (!boolValue.Contains(result))
+                    {
+                        errorTag = methodname;
+                        return false;
+                    }
                 }
             }
             catch { }
@@ -795,11 +798,14 @@ namespace SIL.PublishingSolution
                 const string methodname = "GrammerSketch";
                 const string xPath = "//stylePick/settings/property[@name=\'GrammerSketch\']";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string result = childNode.Attributes["value"].Value;
-                if (!boolValue.Contains(result))
+                if (childNode != null && childNode.Attributes != null)
                 {
-                    errorTag = methodname;
-                    return false;
+                    string result = childNode.Attributes["value"].Value;
+                    if (!boolValue.Contains(result))
+                    {
+                        errorTag = methodname;
+                        return false;
+                    }
                 }
             }
             catch { }
@@ -814,11 +820,14 @@ namespace SIL.PublishingSolution
                 const string methodname = "ExtraProcessing";
                 const string xPath = "//stylePick/settings/property[@name=\"ExtraProcessing\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string result = childNode.Attributes["value"].Value;
-                if (!boolValue.Contains(result))
+                if (childNode != null && childNode.Attributes != null)
                 {
-                    errorTag = methodname;
-                    return false;
+                    string result = childNode.Attributes["value"].Value;
+                    if (!boolValue.Contains(result))
+                    {
+                        errorTag = methodname;
+                        return false;
+                    }
                 }
             }
             catch { }
@@ -910,11 +919,14 @@ namespace SIL.PublishingSolution
                 const string methodname = "DefaultConfigureDictionary";
                 const string xPath = "//stylePick/defaultSettings/property[@name=\"ConfigureDictionary\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string result = childNode.Attributes["value"].Value;
-                if (!boolValue.Contains(result))
+                if (childNode != null && childNode.Attributes != null)
                 {
-                    errorTag = methodname;
-                    return false;
+                    string result = childNode.Attributes["value"].Value;
+                    if (!boolValue.Contains(result))
+                    {
+                        errorTag = methodname;
+                        return false;
+                    }
                 }
             }
             catch { }
@@ -929,11 +941,14 @@ namespace SIL.PublishingSolution
                 const string methodname = "DefaultReversalIndexes";
                 const string xPath = "//stylePick/defaultSettings/property[@name=\"ReversalIndexes\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string result = childNode.Attributes["value"].Value;
-                if (!boolValue.Contains(result))
+                if (childNode != null && childNode.Attributes != null)
                 {
-                    errorTag = methodname;
-                    return false;
+                    string result = childNode.Attributes["value"].Value;
+                    if (!boolValue.Contains(result))
+                    {
+                        errorTag = methodname;
+                        return false;
+                    }
                 }
             }
             catch { }
@@ -948,11 +963,14 @@ namespace SIL.PublishingSolution
                 const string methodname = "DefaultGrammerSketch";
                 const string xPath = "//stylePick/defaultSettings/property[@name=\"GrammerSketch\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string result = childNode.Attributes["value"].Value;
-                if (!boolValue.Contains(result))
+                if (childNode != null && childNode.Attributes != null)
                 {
-                    errorTag = methodname;
-                    return false;
+                    string result = childNode.Attributes["value"].Value;
+                    if (!boolValue.Contains(result))
+                    {
+                        errorTag = methodname;
+                        return false;
+                    }
                 }
             }
             catch { }
@@ -967,11 +985,14 @@ namespace SIL.PublishingSolution
                 const string methodname = "DefaultExtraProcessing";
                 const string xPath = "//stylePick/defaultSettings/property[@name=\"ExtraProcessing\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string result = childNode.Attributes["value"].Value;
-                if (!boolValue.Contains(result))
+                if (childNode != null && childNode.Attributes != null)
                 {
-                    errorTag = methodname;
-                    return false;
+                    string result = childNode.Attributes["value"].Value;
+                    if (!boolValue.Contains(result))
+                    {
+                        errorTag = methodname;
+                        return false;
+                    }
                 }
             }
             catch { }

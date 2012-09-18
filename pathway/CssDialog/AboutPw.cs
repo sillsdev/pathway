@@ -292,5 +292,10 @@ namespace SIL.PublishingSolution
             Common.SetFont(this);
 
         }
+
+        private void lnkLblUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://pathway.sil.org/");
+        }
     }
 }

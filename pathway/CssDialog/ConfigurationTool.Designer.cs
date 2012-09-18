@@ -205,6 +205,8 @@ namespace SIL.PublishingSolution
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblProjectUrl = new System.Windows.Forms.Label();
+            this.lnkLblUrl = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -371,7 +373,7 @@ namespace SIL.PublishingSolution
             // 
             // tsDefault
             // 
-            this.tsDefault.AccessibleName = "tsDefault";
+            this.tsDefault.AccessibleName = "tsHelp";
             this.tsDefault.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.tsDefault.Image = ((System.Drawing.Image)(resources.GetObject("tsDefault.Image")));
             this.tsDefault.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -399,7 +401,6 @@ namespace SIL.PublishingSolution
             // 
             // toolStripSplitButton1
             // 
-            this.tsDefault.AccessibleName = "tsHelp";
             this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.contentsToolStripMenuItem,
             this.aboutToolStripMenuItem});
@@ -451,6 +452,8 @@ namespace SIL.PublishingSolution
             // tabInfo
             // 
             this.tabInfo.AutoScroll = true;
+            this.tabInfo.Controls.Add(this.lnkLblUrl);
+            this.tabInfo.Controls.Add(this.lblProjectUrl);
             this.tabInfo.Controls.Add(this.txtApproved);
             this.tabInfo.Controls.Add(this.lblApproved);
             this.tabInfo.Controls.Add(this.btnApproved);
@@ -2311,6 +2314,27 @@ namespace SIL.PublishingSolution
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblProjectUrl
+            // 
+            this.lblProjectUrl.AutoSize = true;
+            this.lblProjectUrl.Location = new System.Drawing.Point(13, 434);
+            this.lblProjectUrl.Name = "lblProjectUrl";
+            this.lblProjectUrl.Size = new System.Drawing.Size(157, 26);
+            this.lblProjectUrl.TabIndex = 12;
+            this.lblProjectUrl.Text = "Other project related information\r\n                          is available at: ";
+            // 
+            // lnkLblUrl
+            // 
+            this.lnkLblUrl.AutoSize = true;
+            this.lnkLblUrl.Location = new System.Drawing.Point(165, 447);
+            this.lnkLblUrl.Name = "lnkLblUrl";
+            this.lnkLblUrl.Size = new System.Drawing.Size(113, 13);
+            this.lnkLblUrl.TabIndex = 13;
+            this.lnkLblUrl.TabStop = true;
+            this.lnkLblUrl.Text = "http://pathway.sil.org/";
+            this.lnkLblUrl.Links.Add(0, 22, "http://pathway.sil.org");
+            this.lnkLblUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLblUrl_LinkClicked);
+            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2544,5 +2568,7 @@ namespace SIL.PublishingSolution
         private ComboBox ddlLanguage;
         private Label label20;
         private CheckBox chkIncludeImage;
+        private LinkLabel lnkLblUrl;
+        private Label lblProjectUrl;
     }
 }
