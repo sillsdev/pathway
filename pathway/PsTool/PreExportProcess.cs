@@ -539,9 +539,9 @@ namespace SIL.Tool
                 sb.Append("[");
                 sb.Append(languageCode);
                 sb.Append("]. For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
-                sb.Append(languageCode.Substring(0,3));
+                sb.Append(languageCode.Substring(0, 3));
                 sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
-                sb.Append(languageCode.Substring(0,3));
+                sb.Append(languageCode.Substring(0, 3));
                 sb.Append("</a>.</p>  ");
             }
             return sb.ToString();
@@ -1075,7 +1075,7 @@ namespace SIL.Tool
                 //COPYRIGHT 
                 if (File.Exists(copyRightFilePath))
                 {
-                    if(Common.UnixVersionCheck())
+                    if (Common.UnixVersionCheck())
                     {
                         string draftTempFileName = Path.GetFileName(copyRightFilePath);
                         draftTempFileName = Path.Combine(Path.GetTempPath(), draftTempFileName);
@@ -1338,7 +1338,7 @@ namespace SIL.Tool
         /// <param name="inputXhtmlFilePath">Input XHTML file</param>
         public void InsertDummyTitleSecondary(string inputXhtmlFilePath)
         {
-            if(_projInfo.ProjectInputType.ToLower() != "scripture") return;
+            if (_projInfo.ProjectInputType.ToLower() != "scripture") return;
             XmlDocument xmldoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
@@ -1351,7 +1351,7 @@ namespace SIL.Tool
                 for (int i = 0; i < titleMainNodeList.Count; i++)
                 {
                     XmlNode node = titleMainNodeList[i];
-                    if(node.ChildNodes.Count > 0)
+                    if (node.ChildNodes.Count > 0)
                     {
                         bool isTitleSecExists = false;
                         XmlNodeList spanList = node.SelectNodes(".//span", namespaceManager);
@@ -1363,7 +1363,7 @@ namespace SIL.Tool
                                 isTitleSecExists = true;
                             }
                         }
-                        if(isTitleSecExists == false)
+                        if (isTitleSecExists == false)
                         {
                             XmlNode newNodeSpan = xmldoc.CreateElement("span");
                             XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
@@ -1538,72 +1538,141 @@ namespace SIL.Tool
             //Temp folder and file copy
             string sourcePicturePath = Path.GetDirectoryName(_baseXhtmlFileNameWithPath);
             //GetTempFolderPath();
+
             string tempFile = ProcessedXhtml;
 
             string metaname = Common.GetBaseValue(tempFile);
+
+
+            if (_projInfo.ProjectInputType.ToLower() == "scripture" && Common.IsUnixOS())
+            {
+                string str = Common.GetApplicationDataPath();
+
+            }
+
             if (metaname.Length == 0)
             {
                 metaname = Common.GetMetaValue(tempFile);
             }
 
-            // Removal of html tag namespace and other formats.
-            //Common.ReplaceInCssFile(tempFile, @"<html\b[^>]*>", "<html>");
-
-            //Common.ReplaceInXhtmlFile(tempFile);
-            if (!File.Exists(tempFile)) return string.Empty;
-            var xmldoc = new XmlDocument();
-            // xml image copy
-            try
+            if (Common.IsUnixOS() && _projInfo.ProjectInputType.ToLower() == "scripture")
             {
-                //xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
-                xmldoc = Common.DeclareXMLDocument(true);
-                xmldoc.Load(tempFile);
-
-                const string tag = "img";
-                XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
-                if (nodeList.Count > 0)
-                {
-                    var counter = 1;
-                    foreach (XmlNode item in nodeList)
-                    {
-                        var name = item.Attributes.GetNamedItem("src");
-                        if (name != null)
-                        {
-                            var src = name.Value;
-                            if (src.Length > 0)
-                            {
-                                string fromFileName = Common.GetPictureFromPath(src, metaname, sourcePicturePath);
-                                if (File.Exists(fromFileName))
-                                {
-                                    string ext = Path.GetExtension(fromFileName);
-                                    string toFileName = Common.PathCombine(tempFolder, counter + ext);
-                                    File.Copy(fromFileName, toFileName, true);
-
-                                    XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
-                                    xa.Value = name.Value;
-                                    item.Attributes.Append(xa);
-
-                                    name.Value = counter + ext;
-
-                                }
-                            }
-                        }
-                        counter++;
-                    }
-                }
+                string paraTextprojectPath;
+                paraTextprojectPath = Common.GetParatextProjectPath();
+                if (!File.Exists(tempFile)) return string.Empty;
+                var xmldoc = new XmlDocument();
+                // xml image copy
                 try
                 {
-                    ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
+                    //xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                    xmldoc = Common.DeclareXMLDocument(true);
+                    xmldoc.Load(tempFile);
+
+                    const string tag = "img";
+                    XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
+                    if (nodeList.Count > 0)
+                    {
+                        var counter = 1;
+                        foreach (XmlNode item in nodeList)
+                        {
+                            var name = item.Attributes.GetNamedItem("src");
+                            if (name != null)
+                            {
+                                var src = name.Value;
+                                src = Path.Combine(paraTextprojectPath, src);
+                                if (src.Length > 0)
+                                {
+                                    string fromFileName = Common.GetPictureFromPath(src, metaname, sourcePicturePath);
+                                    if (File.Exists(fromFileName))
+                                    {
+                                        string ext = Path.GetExtension(fromFileName);
+                                        string toFileName = Common.PathCombine(tempFolder, counter + ext);
+                                        File.Copy(fromFileName, toFileName, true);
+
+                                        XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
+                                        xa.Value = name.Value;
+                                        item.Attributes.Append(xa);
+                                        name.Value = counter + ext;
+                                    }
+                                }
+                            }
+                            counter++;
+                        }
+                    }
+                    try
+                    {
+                        ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Write(ex.Message);
+                    }
+                    xmldoc.Save(tempFile);
                 }
-                catch (Exception ex)
+                catch
                 {
-                    Console.Write(ex.Message);
                 }
-                xmldoc.Save(tempFile);
             }
-            catch
+            else
             {
+                // Removal of html tag namespace and other formats.
+                //Common.ReplaceInCssFile(tempFile, @"<html\b[^>]*>", "<html>");
+
+                //Common.ReplaceInXhtmlFile(tempFile);
+                if (!File.Exists(tempFile)) return string.Empty;
+                var xmldoc = new XmlDocument();
+                // xml image copy
+                try
+                {
+                    //xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                    xmldoc = Common.DeclareXMLDocument(true);
+                    xmldoc.Load(tempFile);
+
+                    const string tag = "img";
+                    XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
+                    if (nodeList.Count > 0)
+                    {
+                        var counter = 1;
+                        foreach (XmlNode item in nodeList)
+                        {
+                            var name = item.Attributes.GetNamedItem("src");
+                            if (name != null)
+                            {
+                                var src = name.Value;
+                                if (src.Length > 0)
+                                {
+                                    string fromFileName = Common.GetPictureFromPath(src, metaname, sourcePicturePath);
+                                    if (File.Exists(fromFileName))
+                                    {
+                                        string ext = Path.GetExtension(fromFileName);
+                                        string toFileName = Common.PathCombine(tempFolder, counter + ext);
+                                        File.Copy(fromFileName, toFileName, true);
+
+                                        XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
+                                        xa.Value = name.Value;
+                                        item.Attributes.Append(xa);
+                                        name.Value = counter + ext;
+                                    }
+                                }
+                            }
+                            counter++;
+                        }
+                    }
+                    try
+                    {
+                        ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Write(ex.Message);
+                    }
+                    xmldoc.Save(tempFile);
+                }
+                catch
+                {
+                }
             }
+
             return tempFile;
         }
 
@@ -2344,7 +2413,7 @@ namespace SIL.Tool
         public void InsertEmptyHeadwordForReversal(string fileName)
         {
             string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
-            if(!File.Exists(flexRevFileName)) return;
+            if (!File.Exists(flexRevFileName)) return;
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
@@ -2438,9 +2507,9 @@ namespace SIL.Tool
                     var atts = node.Attributes;
                     if (atts != null)
                     {
-                        if(atts["lang"] != null)
+                        if (atts["lang"] != null)
                             return (atts["lang"].Value);
-                        else if(atts["xml:lang"] != null)
+                        else if (atts["xml:lang"] != null)
                             return (atts["xml:lang"].Value);
 
                     }
