@@ -1534,28 +1534,16 @@ namespace SIL.Tool
         public string ImagePreprocess()
         {
             //if (string.IsNullOrEmpty(sourceFile) || !File.Exists(sourceFile)) return string.Empty;
-
             //Temp folder and file copy
             string sourcePicturePath = Path.GetDirectoryName(_baseXhtmlFileNameWithPath);
             //GetTempFolderPath();
-
             string tempFile = ProcessedXhtml;
-
             string metaname = Common.GetBaseValue(tempFile);
-
-
-            if (_projInfo.ProjectInputType.ToLower() == "scripture" && Common.IsUnixOS())
-            {
-                string str = Common.GetApplicationDataPath();
-
-            }
-
             if (metaname.Length == 0)
             {
                 metaname = Common.GetMetaValue(tempFile);
             }
-
-            if (Common.IsUnixOS() && _projInfo.ProjectInputType.ToLower() == "scripture")
+            if (Common.UnixVersionCheck() && _projInfo.ProjectInputType.ToLower() == "scripture")
             {
                 string paraTextprojectPath;
                 paraTextprojectPath = Common.GetParatextProjectPath();
@@ -1564,7 +1552,6 @@ namespace SIL.Tool
                 // xml image copy
                 try
                 {
-                    //xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
                     xmldoc = Common.DeclareXMLDocument(true);
                     xmldoc.Load(tempFile);
 
