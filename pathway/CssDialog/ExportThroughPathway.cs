@@ -634,6 +634,7 @@ namespace SIL.PublishingSolution
         #region LoadAvailFormats
         protected void LoadAvailFormats()
         {
+            OperatingSystem OS = Environment.OSVersion;
             string BackendsPath = Common.ProgInstall;
             Backend.Load(BackendsPath);
             ArrayList exportType = Backend.GetExportType(InputType);
@@ -643,6 +644,10 @@ namespace SIL.PublishingSolution
                 foreach (string item in exportType)
                 {
                     if (item.Trim().ToLower() == "webonary" && !IsWebDataFilled())
+                    {
+                        continue;
+                    }
+                    if (item.ToLower() == "indesign" && OS.VersionString.ToLower().IndexOf("windows") < 0)
                     {
                         continue;
                     }
