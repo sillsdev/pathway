@@ -147,39 +147,41 @@ namespace SIL.PublishingSolution
         {
             var dataDir = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             var projDir = Path.GetDirectoryName(dataDir);
-            string FileGuidPath = Path.Combine(projDir, GuidFileName);
-            if (!File.Exists(FileGuidPath))
+            if (projDir != null)
             {
-                string srcGuidFile = Path.Combine(Common.GetPSApplicationPath(), GuidFileName);
-                File.Copy(srcGuidFile, FileGuidPath);
+                string FileGuidPath = Path.Combine(projDir, GuidFileName);
+                if (!File.Exists(FileGuidPath))
+                {
+                    string srcGuidFile = Path.Combine(Common.GetPSApplicationPath(), GuidFileName);
+                    File.Copy(srcGuidFile, FileGuidPath);
+                }
+                XmlDocument xmlDoc = new XmlDocument { XmlResolver = null };
+                xmlDoc.Load(FileGuidPath);
+                string outputName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                string xPath = "//files/file[@name='" + outputName + "']";
+                //"//st:style[@st:name='" + name.Value + "']
+                var node = xmlDoc.SelectSingleNode(xPath);
+                if (node == null)
+                {
+                    string newGuid = Guid.NewGuid().ToString();
+                    XmlElement elmRoot = xmlDoc.DocumentElement;
+
+                    XmlElement newFile = xmlDoc.CreateElement("file");
+
+                    // Add the Id attribute.
+                    XmlAttribute attName = xmlDoc.CreateAttribute("name");
+                    attName.Value = outputName;
+                    newFile.Attributes.Append(attName);
+
+                    XmlAttribute attGuid = xmlDoc.CreateAttribute("guid");
+                    attGuid.Value = newGuid;
+                    newFile.Attributes.Append(attGuid);
+
+                    if (elmRoot != null) elmRoot.AppendChild(newFile);
+
+                    xmlDoc.Save(FileGuidPath);
+                }
             }
-            XmlDocument xmlDoc = new XmlDocument { XmlResolver = null };
-            xmlDoc.Load(FileGuidPath);
-            string outputName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-            string xPath = "//files/file[@name='" + outputName + "']";
-            //"//st:style[@st:name='" + name.Value + "']
-            var node = xmlDoc.SelectSingleNode(xPath);
-            if (node == null)
-            {
-                string newGuid = Guid.NewGuid().ToString();
-                XmlElement elmRoot = xmlDoc.DocumentElement;
-
-                XmlElement newFile = xmlDoc.CreateElement("file");
-
-                // Add the Id attribute.
-                XmlAttribute attName = xmlDoc.CreateAttribute("name");
-                attName.Value = outputName;
-                newFile.Attributes.Append(attName);
-
-                XmlAttribute attGuid = xmlDoc.CreateAttribute("guid");
-                attGuid.Value = newGuid;
-                newFile.Attributes.Append(attGuid);
-
-                elmRoot.AppendChild(newFile);
-
-                xmlDoc.Save(FileGuidPath);
-            }
-
         }
 
         private void ZipResults(PublicationInformation projInfo)
@@ -232,21 +234,30 @@ namespace SIL.PublishingSolution
         {
             string processedXhtmlFile = projInfo.DefaultXhtmlFileWithPath;
             processFolder = Path.GetDirectoryName(processedXhtmlFile);
-            var guidFileFullName = Path.Combine(processFolder, GuidFileName);
-            if (!File.Exists(guidFileFullName))
+            if (processFolder != null)
             {
-                var projDir = Path.GetDirectoryName(processFolder);
-                var savedGuids = Path.Combine(projDir, GuidFileName);
-                File.Copy(savedGuids, guidFileFullName);    // File put here by UpdateGuid
+                var guidFileFullName = Path.Combine(processFolder, GuidFileName);
+                if (!File.Exists(guidFileFullName))
+                {
+                    var projDir = Path.GetDirectoryName(processFolder);
+                    if (projDir != null)
+                    {
+                        var savedGuids = Path.Combine(projDir, GuidFileName);
+                        File.Copy(savedGuids, guidFileFullName);    // File put here by UpdateGuid
+                    }
+                }
             }
-            var xsltFullName = Path.Combine(processFolder, xsltName);
-            if (!File.Exists(xsltFullName))
+            if (processFolder != null)
             {
-                string srcXsltFullName = Common.FromRegistry(xsltName);
-                File.Copy(srcXsltFullName, xsltFullName);                
+                var xsltFullName = Path.Combine(processFolder, xsltName);
+                if (!File.Exists(xsltFullName))
+                {
+                    string srcXsltFullName = Common.FromRegistry(xsltName);
+                    File.Copy(srcXsltFullName, xsltFullName);                
+                }
+                var xsltParam = new Dictionary<string, string> {{"currentYear", DateTime.Now.Year.ToString()}};
+                Common.XsltProcess(processedXhtmlFile, xsltFullName, ending + ".xml", xsltParam);
             }
-            var xsltParam = new Dictionary<string, string> {{"currentYear", DateTime.Now.Year.ToString()}};
-            Common.XsltProcess(processedXhtmlFile, xsltFullName, ending + ".xml", xsltParam);
         }
 
         /// <summary>
