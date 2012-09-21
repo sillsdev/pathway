@@ -1,5 +1,7 @@
-pathway-xelatex (1.6.0.2545-1) unstable; urgency=high
+pathway-xelatex (1.8.0.2646-1) unstable; urgency=high
 
+  * 1.8.0.2646 daily
+    - execute mktexlsr and fmtutil after install
   * 1.6.0.2545 daily
   * 1.6.0.2528 sprint
     - Update to TexLive 2012
