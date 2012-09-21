@@ -663,6 +663,13 @@ namespace TestBed
             ProjType = Common.GetProjectType(projInfo.DefaultXhtmlFileWithPath);
             projInfo.ProjectInputType = ProjType;
 
+            ////if you enable below five lines it will execute both files and produced odm.
+            //projInfo.DefaultRevCssFileWithPath = txtCSSInput.Text.Replace("main","Flexrev");
+            //projInfo.IsReversalExist = true;
+            //projInfo.IsLexiconSectionExist = true;
+            //projInfo.FromPlugin = true;
+            //projInfo.FinalOutput = "odm";
+
             exportOdt.Export(projInfo);
         }
 

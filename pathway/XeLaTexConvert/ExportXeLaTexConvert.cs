@@ -207,7 +207,30 @@ namespace SIL.PublishingSolution
                 {
                     return false;
                 }
-                projInfo.DefaultXhtmlFileWithPath = copyRightFilePath;
+                if (File.Exists(copyRightFilePath))
+                {
+                    if (Common.UnixVersionCheck())
+                    {
+                        string draftTempFileName = Path.GetFileName(copyRightFilePath);
+                        draftTempFileName = Path.Combine(Path.GetTempPath(), draftTempFileName);
+                        if (!File.Exists(draftTempFileName))
+                        {
+                            File.Copy(copyRightFilePath, draftTempFileName, true);
+                            Common.RemoveDTDForLinuxProcess(draftTempFileName);
+                        }
+                        projInfo.DefaultXhtmlFileWithPath = draftTempFileName;
+                        copyRightFilePath = draftTempFileName;
+                    }
+                    else
+                    {
+                        projInfo.DefaultXhtmlFileWithPath = copyRightFilePath;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
                 string filepath = Path.GetFullPath(copyRightFilePath);
 
                 Dictionary<string, Dictionary<string, string>> cssClass =
@@ -261,6 +284,14 @@ namespace SIL.PublishingSolution
                 if (!File.Exists(revFile))
                 {
                     return false;
+                }
+
+                if (File.Exists(revFile))
+                {
+                    if (Common.UnixVersionCheck())
+                    {
+                        Common.RemoveDTDForLinuxProcess(revFile);
+                    }
                 }
 
                 projInfo.DefaultXhtmlFileWithPath = revFile;
@@ -319,11 +350,11 @@ namespace SIL.PublishingSolution
 
         public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
-
+            bool isUnixOs = Common.IsUnixOS();
             string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
             string name = "xelatex.exe";
             string arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
-            if (Common.IsUnixOS())
+            if (isUnixOs)
             {
                 string path = Environment.GetEnvironmentVariable("PATH");
                 Debug.Assert(path != null);
@@ -413,7 +444,7 @@ namespace SIL.PublishingSolution
             string texNameOnly = Path.GetFileNameWithoutExtension(xeLatexFullFile);
             string userFolder = Path.GetDirectoryName(xeLatexFullFile);
 
-            if (Common.IsUnixOS())
+            if (isUnixOs)
             {
                 if (userFolder != null) 
                     pdfFullName = Path.Combine(userFolder, texNameOnly + ".pdf");

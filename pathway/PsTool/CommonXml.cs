@@ -1067,7 +1067,7 @@ namespace SIL.Tool
                     var wsPath = PathCombine(GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
                     if (File.Exists(wsPath))
                     {
-                        var ldml = new XmlDocument { XmlResolver = null };
+                        var ldml = Common.DeclareXMLDocument(false); //new XmlDocument { XmlResolver = null };
                         ldml.Load(wsPath);
                         var nsmgr = new XmlNamespaceManager(ldml.NameTable);
                         nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
