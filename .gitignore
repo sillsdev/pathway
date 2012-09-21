@@ -16,6 +16,11 @@ pathway/debian/pathway-etc/values.xml
 pathway/debian/pathway.*
 pathway/debian/pathway/*
 pathway_*
+pathway/XeLaTexConvert/debian/files
+pathway/XeLaTexConvert/debian/pathway-xelatex-etc/values.xml
+pathway/XeLaTexConvert/debian/pathway-xelatex.*
+pathway/XeLaTexConvert/debian/pathway-xelatex/*
+pathway/pathway-xelatex_*
 
 pathway/ApplyXslt/bin/*
 pathway/ApplyXslt/obj/*
