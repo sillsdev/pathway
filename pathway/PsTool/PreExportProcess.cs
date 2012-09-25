@@ -2757,9 +2757,10 @@ namespace SIL.Tool
             }
         }
 
-        public void GetReferenceList(List<string> sourceList, List<string> targetList)
+        public void GetReferenceList(string xhtmlFileNameWithPath, List<string> sourceList, List<string> targetList)
         {
-            XmlTextReader _reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
+
+            XmlTextReader _reader = Common.DeclareXmlTextReader(xhtmlFileNameWithPath, true);
             while (_reader.Read())
             {
                 if (_reader.NodeType == XmlNodeType.Element)

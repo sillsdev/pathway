@@ -73,6 +73,7 @@ namespace SIL.PublishingSolution
         private string _outputExtension = string.Empty;
         private int _autoFootNoteCount;
         private string _sourcePicturePath;
+        private bool IsEmptyElement = false;
 
         //Table 
         private List<string> _table = new List<string>();
@@ -304,11 +305,13 @@ namespace SIL.PublishingSolution
 
         public void InsertBeforeAfter()
         {
-
             bool headXML = true;
             while (_reader.Read())
             {
-
+                if (_reader.IsEmptyElement)
+                {
+                    IsEmptyElement = true;
+                }
                 switch (_reader.NodeType)
                 {
 
@@ -588,8 +591,14 @@ namespace SIL.PublishingSolution
         /// <param name="targetPath"></param>
         private void StartElement()
         {
-            StartElementBase(_IsHeadword);
-            Psuedo();
+            if (!IsEmptyElement)
+            {
+                StartElementBase(_IsHeadword);
+                Psuedo();
+            }
+            IsEmptyElement = false;
+            //StartElementBase(_IsHeadword);
+            //Psuedo();
         }
 
         private void Psuedo()

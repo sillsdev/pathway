@@ -2064,6 +2064,46 @@ namespace SIL.PublishingSolution
             }
             return brokenRelativeHrefIds;
         }
+        
+        private void FixRelativeHyperlinks(string contentFolder, InProcess inProcess)
+        {
+            string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
+            inProcess.AddToMaximum(files.Length);
+            PreExportProcess preExport = new PreExportProcess();
+            var dictHyperlinks = new Dictionary<string, string>();
+            List<string> sourceList = new List<string>();
+            List<string> targetList = new List<string>();
+            List<string> targettempList = new List<string>();
+            Dictionary<string, string> fileDict = new Dictionary<string, string>();
+
+            foreach (string targetFile in files)
+            {
+                preExport.GetReferenceList(targetFile, sourceList, targettempList);
+
+                targetList.AddRange(targettempList);
+                foreach (string target in targettempList)
+                {
+                    fileDict[target] = Path.GetFileName(targetFile);
+                }
+                targettempList.Clear();
+            }
+
+            foreach (string target in targetList)
+            {
+                if (sourceList.Contains(target))
+                {
+                    dictHyperlinks.Add(target, fileDict[target] + "#" + target);
+                }
+            }
+
+            if (dictHyperlinks.Count > 0)
+            {
+                foreach (string targetFile in files)
+                {
+                    ReplaceAllBrokenHrefs(targetFile, dictHyperlinks);
+                }
+            }
+        }
 
         /// <summary>
         /// When the preprocessed xhtml gets split out into chunks the epub reader can understand, the
@@ -2073,7 +2113,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="contentFolder">Folder containing the xhtml to be parsed</param>
         /// <param name="inProcess">progress bar (this is a potentially long-running process)</param>
-        private void FixRelativeHyperlinks(string contentFolder, InProcess inProcess)
+        private void FixRelativeHyperlinks_OLD(string contentFolder, InProcess inProcess)
         {
             string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
             inProcess.AddToMaximum(files.Length);
