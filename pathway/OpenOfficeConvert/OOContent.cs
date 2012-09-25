@@ -232,7 +232,7 @@ namespace SIL.PublishingSolution
         {
             PreExportProcess preProcessor = new PreExportProcess(_projInfo);
             //preProcessor.ReplaceInvalidTagtoSpan("CmPicture-publishStemPile-ThumbnailPub", "div");
-            preProcessor.GetReferenceList(_sourceList, _targetList);
+            preProcessor.GetReferenceList(_projInfo.DefaultXhtmlFileWithPath, _sourceList, _targetList);
                 //TD-2912
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
