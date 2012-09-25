@@ -220,7 +220,7 @@ namespace SIL.PublishingSolution
 
 
                 string cssFullPath = Common.PathCombine(cssFolder, "epub.css");
-                if(!File.Exists(cssFullPath))
+                if (!File.Exists(cssFullPath))
                 {
                     cssFullPath = projInfo.DefaultCssFileWithPath;
                 }
@@ -312,7 +312,7 @@ namespace SIL.PublishingSolution
                 foreach (string file in splitFiles)
                 {
                     string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-                    if(fileNameWithoutExtension != null && fileNameWithoutExtension.IndexOf(@"PartFile") == 0)
+                    if (fileNameWithoutExtension != null && fileNameWithoutExtension.IndexOf(@"PartFile") == 0)
                     {
                         RemoveNodeInXhtmlFile(file);
                     }
@@ -509,7 +509,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                if (cssFileName.Trim().Length == 0){return true;}
+                if (cssFileName.Trim().Length == 0) { return true; }
                 Param.LoadSettings();
                 XmlDocument xDoc = Common.DeclareXMLDocument(false);
                 string path = Param.SettingOutputPath;
@@ -517,10 +517,10 @@ namespace SIL.PublishingSolution
                 string xPath = "//stylePick/styles/others/style[@name='" + cssFileName + "']/styleProperty[@name='IncludeImage']/@value";
                 //string xPath = "//stylePick/styles/others/style[@name='" + "Copy of EBook (epub)" + "']/styleProperty[@name='IncludeImage']/@value";
                 XmlNode includeImageNode = xDoc.SelectSingleNode(xPath);
-                if (includeImageNode!= null && includeImageNode.InnerText == "No")
+                if (includeImageNode != null && includeImageNode.InnerText == "No")
                     isIncludeImage = false;
             }
-            catch {}
+            catch { }
             return isIncludeImage;
         }
 
@@ -1394,7 +1394,7 @@ namespace SIL.PublishingSolution
                 if (embeddedFont.Filename.ToString() != string.Empty && File.Exists(embeddedFont.Filename))
                 {
                     File.Copy(embeddedFont.Filename, dest, true);
-                    
+
                     if (IncludeFontVariants)
                     {
                         // italic
@@ -2100,6 +2100,7 @@ namespace SIL.PublishingSolution
             {
                 foreach (string targetFile in files)
                 {
+                    RemoveSpanVerseNumberNodeInXhtmlFile(targetFile);
                     ReplaceAllBrokenHrefs(targetFile, dictHyperlinks);
                 }
             }
@@ -2127,6 +2128,9 @@ namespace SIL.PublishingSolution
             var dictHyperlinks = new Dictionary<string, string>();
             foreach (string sourceFile in files)
             {
+
+                RemoveSpanVerseNumberNodeInXhtmlFile(sourceFile);
+
                 var relativeIDs = FindBrokenRelativeHrefIds(sourceFile);
                 item = 0;
                 dictHyperlinks.Clear();
@@ -2207,6 +2211,36 @@ namespace SIL.PublishingSolution
             TimeSpan tsTotal = DateTime.Now - startTime;
             Debug.WriteLine("Exportepub: time spent in FixRelativeHyperlinks: " + tsTotal);
 #endif
+        }
+
+        private void RemoveSpanVerseNumberNodeInXhtmlFile(string fileName)
+        {
+            //Removed NoteTargetReference tag from XHTML file
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            XmlElement elmRoot = xDoc.DocumentElement;
+
+            //If includeImage is false, removes the img -> parent tag
+
+            string xPath = "//xhtml:div[@class='scrBook']/xhtml:span[@class='Verse_Number']";
+            if (elmRoot != null)
+            {
+                XmlNodeList divNode = elmRoot.SelectNodes(xPath, namespaceManager);
+                if (divNode.Count > 0)
+                {
+                    for (int i = 0; i < divNode.Count; i++)
+                    {
+                        //referenceNode[i].RemoveChild(referenceNode[i].FirstChild);
+                        var parentNode = divNode[i].ParentNode;
+                        if (parentNode != null)
+                            parentNode.RemoveChild(divNode[i]);
+                    }
+                }
+            }
+
+            xDoc.Save(fileName);
         }
 
         private void ReplaceAllBrokenHrefs(string filePath, Dictionary<string, string> dictHyperlinks)

@@ -1733,7 +1733,16 @@ namespace SIL.Tool
 
             //Note - copies the xhtml and css files to temp folder
             string tempFile = Common.PathCombine(tempFolder, Path.GetFileName(_xhtmlFileNameWithPath));
-            File.Copy(Common.DirectoryPathReplace(_xhtmlFileNameWithPath), tempFile, true);
+
+            if (Directory.Exists(tempFolder))
+            {
+                File.Copy(Common.DirectoryPathReplace(_xhtmlFileNameWithPath), tempFile, true);
+            }
+            else
+            {
+                Directory.CreateDirectory(tempFolder);
+                File.Copy(Common.DirectoryPathReplace(_xhtmlFileNameWithPath), tempFile, true);
+            }
             _xhtmlFileNameWithPath = tempFile;
 
             if (File.Exists(_xhtmlRevFileNameWithPath))
