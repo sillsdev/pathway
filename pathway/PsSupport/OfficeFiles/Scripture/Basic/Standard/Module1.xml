@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Aug-08-2012 for TD-3098(BASIC runtime error on Scripture preview)
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Sep-25-2012 for TD-3222(CoverPage Image not centered in Pdf (Using OpenOffice))
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -40,6 +40,12 @@ On Error GoTo MyError:
 
 	UpdateTOC()
 	
+
+	&apos;SetImageToCoverPage()
+	If IsCoverImageInserted = &quot;true&quot; And Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
+		SetImageToCoverPage()
+	End If
+	
 	If CanSave Then
 		oDoc = ThisComponent 
 		oDoc.store() 
@@ -48,10 +54,7 @@ On Error GoTo MyError:
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
 		ExportToDOC_PDF
 	End IF
-	&apos;SetImageToCoverPage()
-	If IsCoverImageInserted = &quot;true&quot; And Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
-		SetImageToCoverPage()
-	End If
+	
 	Exit Sub
 MyError:
 End Sub
