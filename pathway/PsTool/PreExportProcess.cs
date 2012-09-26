@@ -3134,6 +3134,21 @@ namespace SIL.Tool
             tw.Close();
         }
 
+        public void InsertCoverPageImageStyleInCSS(string cssFileName)
+        {
+            TextWriter tw = new StreamWriter(cssFileName, true);
+            tw.WriteLine(".Cover {");
+            tw.WriteLine("vertical-align: center;");
+            tw.WriteLine("text-align: center;");
+            tw.WriteLine("}");
+            tw.WriteLine("");
+            tw.WriteLine(".Cover img{");
+            tw.WriteLine("height: 595px;");
+            tw.WriteLine("width: 446.25px;");
+            tw.WriteLine("}");
+            tw.Close();
+        }
+
         public void SetHideChapterNumberInCSS()
         {
             TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);

@@ -229,6 +229,7 @@ namespace SIL.PublishingSolution
                 string mergedCSS = mc.Make(cssFullPath, "book.css");
                 preProcessor.ReplaceStringInCss(mergedCSS);
                 preProcessor.SetDropCapInCSS(mergedCSS);
+                preProcessor.InsertCoverPageImageStyleInCSS(mergedCSS);
                 preProcessor.InsertSectionHeadID();
                 string defaultCSS = Path.GetFileName(mergedCSS);
                 // rename the CSS file to something readable
