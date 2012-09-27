@@ -1,0 +1,1 @@
+(RULE ANY (PSEUDO lang ( bss )) (PROPERTY direction ltr))
