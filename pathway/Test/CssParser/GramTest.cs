@@ -548,5 +548,16 @@ namespace Test.CssParserTest
             OneTest("T31b", "CSS quoted single quote");
         }
         #endregion T31b
+
+        #region T32
+        /// <summary>
+        /// CSS pseudo only selector
+        /// </summary>
+        [Test]
+        public void CssPseudoOnlyT32()
+        {
+            OneTest("T32", "CSS pseudo only");
+        }
+        #endregion T32
     }
 }
