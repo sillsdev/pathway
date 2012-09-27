@@ -654,7 +654,7 @@ namespace SIL.PublishingSolution
             else
             {
                 publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
-                ExportODT(publicationInfo);
+                returnValue = ExportODT(publicationInfo);
             }
             
             return returnValue;

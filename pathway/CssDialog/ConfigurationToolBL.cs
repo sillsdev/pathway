@@ -104,8 +104,8 @@ namespace SIL.PublishingSolution
         //DataSet _dataSet = new DataSet();
         //UndoRedo _redoundo;
         protected bool _isCreatePreview1;
-        protected string _caption = string.Empty;
-        //protected string _caption = Caption;
+        //protected string _caption = string.Empty;
+        protected string _caption = "Pathway Configuration Tool";
         protected string _redoUndoBufferValue = string.Empty;
         // Undo Redo
         //protected string _currentControl = string.Empty;
@@ -857,8 +857,16 @@ namespace SIL.PublishingSolution
                 //try
                 //{
                 StyleName = cTool.StylesGrid[ColumnName, SelectedRowIndex].Value.ToString();
-                PreviewFileName1 = cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value.ToString();
-                PreviewFileName2 = cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value.ToString();
+                if (cTool.StylesGrid[3, SelectedRowIndex].Value.ToString().ToLower() == "standard")
+                {
+                    PreviewFileName1 = cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value.ToString();
+                    PreviewFileName2 = cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value.ToString();
+                }
+                else
+                {
+                    PreviewFileName1 = "PreviewMessage.jpg";
+                    PreviewFileName2 = "PreviewMessage.jpg";
+                }
                 //}
                 //catch (Exception)
                 //{
@@ -3164,6 +3172,11 @@ namespace SIL.PublishingSolution
             {
                 CreatePreviewFile();
 
+                if (cTool.StylesGrid[3, SelectedRowIndex].Value.ToString().ToLower() != "standard")
+                {
+                    return;
+                }
+
                 if (File.Exists(PreviewFileName1) || File.Exists(PreviewFileName2))
                 {
                     PreviewConfig preview = new PreviewConfig(PreviewFileName1,
@@ -3193,50 +3206,85 @@ namespace SIL.PublishingSolution
                 string selectedTypeValue = cTool.StylesGrid[ColumnType, SelectedRowIndex].Value.ToString();
                 if (selectedTypeValue != TypeStandard)
                 {
-                    bool isPreviewFileExist = false;
-                    if (File.Exists(PreviewFileName1) || File.Exists(PreviewFileName2))
-                    {
-                        isPreviewFileExist = true;
-                    }
-                    //(_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.SaveAs || _screenMode == ScreenMode.New || !isPreviewFileExist)
-                    string fileName = string.Empty;
+                    bool isPreviewFileExist = File.Exists(PreviewFileName1) || File.Exists(PreviewFileName2);
 
-                    if (IsPropertyModified() || (isPreviewFileExist == false))
+                    if (isPreviewFileExist == false || IsPropertyModified())
                     {
                         WriteCss();
                         ShowCSSValue();
                         _screenMode = ScreenMode.Edit;
-                        PleaseWait st = new PleaseWait();
-                        st.ShowDialog();
-                        string cssFile = Param.StylePath(FileName);
-                        PdftoJpg pd = new PdftoJpg();
-                        fileName = pd.ConvertPdftoJpg(cssFile, true, _loadType);
 
-                        if (!Directory.Exists(stylenamePath)) return;
-
-                        //String imageFile = Common.PathCombine(stylenamePath, PreviewFileName1);
-                        //String imageFile1 = Common.PathCombine(stylenamePath, PreviewFileName2);
-                        //if (!(File.Exists(imageFile) && File.Exists(imageFile1)) || IsPropertyModified())
-                        //{
-                        String imageFile = Common.PathCombine(Common.GetAllUserPath(),
-                                                              Path.GetFileNameWithoutExtension(fileName) + ".pdf1.jpg");
-                        PreviewFileName1 = imageFile;
-                        String imageFile1 = Common.PathCombine(Common.GetAllUserPath(),
-                                                               Path.GetFileNameWithoutExtension(fileName) + ".pdf2.jpg");
-                        PreviewFileName2 = imageFile1;
-                        //}
-
-                        cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
-                        cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
-
-                        string xPath = "//styles/" + MediaType + "/style[@name='" + StyleName + "']";
-                        XmlNode baseNode = Param.GetItem(xPath);
-                        if (baseNode != null)
+                        string cssMergeFullFileName = Param.StylePath(FileName);
+                        string PsSupportPath = Path.Combine(Common.LeftString(cssMergeFullFileName, "Pathway"),
+                                                            "Pathway");
+                        string PsSupportPathfrom = Common.GetApplicationPath();
+                        string previewFile = _loadType + "Preview.xhtml";
+                        string xhtmlPreviewFilePath = Path.Combine(PsSupportPath, previewFile);
+                        string xhtmlPreviewFile_fromPath = Path.Combine(PsSupportPathfrom, previewFile);
+                        if (!File.Exists(xhtmlPreviewFilePath))
                         {
-                            Param.SetAttrValue(baseNode, "previewfile1", imageFile);
-                            Param.SetAttrValue(baseNode, "previewfile2", imageFile1);
-                            Param.Write();
+                            if (File.Exists(xhtmlPreviewFile_fromPath))
+                            {
+                                File.Copy(xhtmlPreviewFile_fromPath, xhtmlPreviewFilePath);
+                            }
                         }
+
+                        if (!(File.Exists(xhtmlPreviewFilePath) && File.Exists(cssMergeFullFileName)))
+                        {
+                            return;
+                        }
+
+                        PublicationInformation ps = new PublicationInformation();
+                        ps.DefaultXhtmlFileWithPath = xhtmlPreviewFilePath;
+                        ps.DefaultCssFileWithPath = cssMergeFullFileName;
+                        string fileName = Path.GetTempFileName();
+                        ps.ProjectName = fileName;
+                        ps.DictionaryOutputName = fileName;
+                        ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
+                        ps.ProjectInputType = _loadType;
+
+                        bool success = PrincePreview(ps);
+
+                        if (!success)
+                        {
+                            success = LOPreview(ps);
+                        }
+
+                        if (!success)
+                        {
+                            MessageBox.Show(@"Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                        }
+
+                        PreviewFileName1 = Common.PathCombine(stylenamePath, "PreviewMessage.jpg");
+                        PreviewFileName2 = Common.PathCombine(stylenamePath, "PreviewMessage.jpg");
+
+
+                        //PleaseWait st = new PleaseWait();
+                        //st.ShowDialog();
+                        //string cssFile = Param.StylePath(FileName);
+                        //PdftoJpg pd = new PdftoJpg();
+                        //fileName = pd.ConvertPdftoJpg(cssFile, true, _loadType);
+
+                        //if (!Directory.Exists(stylenamePath)) return;
+
+                        //String imageFile = Common.PathCombine(Common.GetAllUserPath(),
+                        //                                      Path.GetFileNameWithoutExtension(fileName) + ".pdf1.jpg");
+                        //PreviewFileName1 = imageFile;
+                        //String imageFile1 = Common.PathCombine(Common.GetAllUserPath(),
+                        //                                       Path.GetFileNameWithoutExtension(fileName) + ".pdf2.jpg");
+                        //PreviewFileName2 = imageFile1;
+
+                        //cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
+                        //cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
+
+                        //string xPath = "//styles/" + MediaType + "/style[@name='" + StyleName + "']";
+                        //XmlNode baseNode = Param.GetItem(xPath);
+                        //if (baseNode != null)
+                        //{
+                        //    Param.SetAttrValue(baseNode, "previewfile1", imageFile);
+                        //    Param.SetAttrValue(baseNode, "previewfile2", imageFile1);
+                        //    Param.Write();
+                        //}
                     }
 
                 }
@@ -3249,7 +3297,25 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        /// <summary>
+        private bool PrincePreview(PublicationInformation projInfo)
+        {
+            bool success = false;
+            //string destination = "Pdf (using Prince)";
+            ExportPdf exportPdf = new ExportPdf();
+            success = exportPdf.Export(projInfo);
+            // copy to preview folder *******************
+            return success;
+        }
+
+        private bool LOPreview(PublicationInformation projInfo)
+        {
+            bool success = false;
+            ExportLibreOffice openOffice = new ExportLibreOffice();
+            success = openOffice.Export(projInfo);
+            return success;
+        }
+
+         /// <summary>
         /// Comparing the loaded values in property values vs changed property values
         /// Except the Label controls
         /// </summary>
@@ -4203,6 +4269,7 @@ namespace SIL.PublishingSolution
         public void ShowPreview(int page)
         {
             string preview;
+
             if (!File.Exists(PreviewFileName1) || _screenMode == ScreenMode.Modify)
             {
                 CreatePreviewFile();
