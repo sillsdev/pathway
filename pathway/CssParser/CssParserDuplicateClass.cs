@@ -1004,7 +1004,15 @@ namespace SIL.PublishingSolution
                 }
                 else if (childNode.Text == "ANY")
                 {
-                    className += "*" + childNode.FirstNode.Text;
+                    if (childNode.FirstNode != null)
+                    {
+                        className += "*" + childNode.FirstNode.Text;
+                    }
+                    else
+                    {
+                        className += "*";
+                    }
+                    
                 }
                 else if (childNode.Text == "PARENTOF")
                 {
@@ -1310,7 +1318,15 @@ namespace SIL.PublishingSolution
                 }
                 else if (childNode.Text == "ANY")
                 {
-                    getRuleInfo.ClassName += "*" + childNode.FirstNode.Text;
+                    if (childNode.FirstNode != null)
+                    {
+                        getRuleInfo.ClassName += "*" + childNode.FirstNode.Text;
+                    }
+                    else
+                    {
+                        getRuleInfo.ClassName += "*";
+                    }
+                    
                 }
                 else if (childNode.Text == "PARENTOF")
                 {
