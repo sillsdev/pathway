@@ -276,6 +276,7 @@
     <Compile Include="FontInternals.cs">
     </Compile>
     <Compile Include="HashUtilities.cs" />
+    <Compile Include="MergeCss.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="PathPart.cs" />
     <Compile Include="PathwayPath.cs" />
