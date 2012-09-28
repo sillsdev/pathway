@@ -336,7 +336,6 @@
     <Compile Include="GlobalSettings.Designer.cs">
       <DependentUpon>GlobalSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="MergeCss.cs" />
     <Compile Include="OrganizationNameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -550,6 +549,10 @@
     <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
       <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
       <Name>OpenOfficeConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PdfConvert\PdfConvert.csproj">
+      <Project>{E75BC85C-6240-45F0-ADBF-F0F80EEFD6D8}</Project>
+      <Name>PdfConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
