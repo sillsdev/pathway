@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 C:\\git\\pathway\\pathway\\CssParser\\csst3.g 2012-09-26 17:16:57
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 C:\\git\\pathway\\pathway\\CssParser\\csst3.g 2012-09-28 17:06:46
 
 
 using System;
@@ -15,7 +15,6 @@ public class csst3Lexer : Lexer {
     public const int CLASS = 21;
     public const int ATTRIB = 9;
     public const int T__64 = 64;
-    public const int T__29 = 29;
     public const int T__65 = 65;
     public const int T__62 = 62;
     public const int T__63 = 63;
@@ -24,10 +23,10 @@ public class csst3Lexer : Lexer {
     public const int MEDIA = 5;
     public const int T__61 = 61;
     public const int ID = 20;
+    public const int T__60 = 60;
     public const int ATTRIBEQUAL = 12;
     public const int EOF = -1;
-    public const int T__60 = 60;
-    public const int COLOR = 25;
+    public const int COLOR = 26;
     public const int REGION = 7;
     public const int T__55 = 55;
     public const int T__56 = 56;
@@ -39,8 +38,9 @@ public class csst3Lexer : Lexer {
     public const int T__53 = 53;
     public const int T__54 = 54;
     public const int T__59 = 59;
-    public const int IDENT = 23;
-    public const int COMMENT = 27;
+    public const int IDENT = 24;
+    public const int EM = 22;
+    public const int COMMENT = 28;
     public const int T__50 = 50;
     public const int T__42 = 42;
     public const int T__43 = 43;
@@ -56,7 +56,7 @@ public class csst3Lexer : Lexer {
     public const int T__48 = 48;
     public const int T__49 = 49;
     public const int PRECEDES = 11;
-    public const int NUM = 24;
+    public const int NUM = 25;
     public const int TAG = 19;
     public const int T__30 = 30;
     public const int T__31 = 31;
@@ -64,7 +64,7 @@ public class csst3Lexer : Lexer {
     public const int T__33 = 33;
     public const int PAGE = 6;
     public const int ANY = 18;
-    public const int WS = 28;
+    public const int WS = 29;
     public const int T__34 = 34;
     public const int T__35 = 35;
     public const int T__36 = 36;
@@ -72,8 +72,8 @@ public class csst3Lexer : Lexer {
     public const int PROPERTY = 16;
     public const int T__38 = 38;
     public const int T__39 = 39;
-    public const int SL_COMMENT = 26;
-    public const int STRING = 22;
+    public const int SL_COMMENT = 27;
+    public const int STRING = 23;
 
     // delegates
     // delegators
@@ -96,30 +96,6 @@ public class csst3Lexer : Lexer {
     	get { return "C:\\git\\pathway\\pathway\\CssParser\\csst3.g";} 
     }
 
-    // $ANTLR start "T__29"
-    public void mT__29() // throws RecognitionException [2]
-    {
-    		try
-    		{
-            int _type = T__29;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:7:7: ( '@import' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:7:9: '@import'
-            {
-            	Match("@import"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally 
-    	{
-        }
-    }
-    // $ANTLR end "T__29"
-
     // $ANTLR start "T__30"
     public void mT__30() // throws RecognitionException [2]
     {
@@ -127,10 +103,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__30;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:8:7: ( '@include' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:8:9: '@include'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:7:7: ( '@import' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:7:9: '@import'
             {
-            	Match("@include"); 
+            	Match("@import"); 
 
 
             }
@@ -151,10 +127,11 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__31;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:9:7: ( ';' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:9:9: ';'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:8:7: ( '@include' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:8:9: '@include'
             {
-            	Match(';'); 
+            	Match("@include"); 
+
 
             }
 
@@ -174,11 +151,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__32;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:10:7: ( '@media' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:10:9: '@media'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:9:7: ( ';' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:9:9: ';'
             {
-            	Match("@media"); 
-
+            	Match(';'); 
 
             }
 
@@ -198,10 +174,11 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__33;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:11:7: ( '{' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:11:9: '{'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:10:7: ( '@media' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:10:9: '@media'
             {
-            	Match('{'); 
+            	Match("@media"); 
+
 
             }
 
@@ -221,10 +198,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__34;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:12:7: ( '}' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:12:9: '}'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:11:7: ( '{' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:11:9: '{'
             {
-            	Match('}'); 
+            	Match('{'); 
 
             }
 
@@ -244,11 +221,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__35;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:13:7: ( '@page' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:13:9: '@page'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:12:7: ( '}' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:12:9: '}'
             {
-            	Match("@page"); 
-
+            	Match('}'); 
 
             }
 
@@ -268,10 +244,11 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__36;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:14:7: ( '@' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:14:9: '@'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:13:7: ( '@page' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:13:9: '@page'
             {
-            	Match('@'); 
+            	Match("@page"); 
+
 
             }
 
@@ -291,10 +268,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__37;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:15:7: ( ',' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:15:9: ','
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:14:7: ( '@' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:14:9: '@'
             {
-            	Match(','); 
+            	Match('@'); 
 
             }
 
@@ -314,10 +291,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__38;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:16:7: ( '>' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:16:9: '>'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:15:7: ( ',' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:15:9: ','
             {
-            	Match('>'); 
+            	Match(','); 
 
             }
 
@@ -337,10 +314,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__39;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:17:7: ( '+' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:17:9: '+'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:16:7: ( '>' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:16:9: '>'
             {
-            	Match('+'); 
+            	Match('>'); 
 
             }
 
@@ -360,10 +337,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__40;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:18:7: ( '#' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:18:9: '#'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:17:7: ( '+' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:17:9: '+'
             {
-            	Match('#'); 
+            	Match('+'); 
 
             }
 
@@ -383,10 +360,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__41;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:19:7: ( '.' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:19:9: '.'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:18:7: ( '#' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:18:9: '#'
             {
-            	Match('.'); 
+            	Match('#'); 
 
             }
 
@@ -406,10 +383,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__42;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:20:7: ( '*' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:20:9: '*'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:19:7: ( '.' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:19:9: '.'
             {
-            	Match('*'); 
+            	Match('.'); 
 
             }
 
@@ -429,10 +406,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__43;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:21:7: ( ':' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:21:9: ':'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:20:7: ( '*' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:20:9: '*'
             {
-            	Match(':'); 
+            	Match('*'); 
 
             }
 
@@ -452,11 +429,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__44;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:22:7: ( '::' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:22:9: '::'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:21:7: ( ':' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:21:9: ':'
             {
-            	Match("::"); 
-
+            	Match(':'); 
 
             }
 
@@ -476,10 +452,11 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__45;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:23:7: ( '[' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:23:9: '['
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:22:7: ( '::' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:22:9: '::'
             {
-            	Match('['); 
+            	Match("::"); 
+
 
             }
 
@@ -499,10 +476,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__46;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:24:7: ( ']' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:24:9: ']'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:23:7: ( '[' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:23:9: '['
             {
-            	Match(']'); 
+            	Match('['); 
 
             }
 
@@ -522,10 +499,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__47;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:25:7: ( '=' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:25:9: '='
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:24:7: ( ']' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:24:9: ']'
             {
-            	Match('='); 
+            	Match(']'); 
 
             }
 
@@ -545,11 +522,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__48;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:26:7: ( '~=' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:26:9: '~='
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:25:7: ( '=' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:25:9: '='
             {
-            	Match("~="); 
-
+            	Match('='); 
 
             }
 
@@ -569,10 +545,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__49;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:27:7: ( '|=' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:27:9: '|='
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:26:7: ( '~=' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:26:9: '~='
             {
-            	Match("|="); 
+            	Match("~="); 
 
 
             }
@@ -593,10 +569,11 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__50;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:28:7: ( '%' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:28:9: '%'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:27:7: ( '|=' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:27:9: '|='
             {
-            	Match('%'); 
+            	Match("|="); 
+
 
             }
 
@@ -616,11 +593,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__51;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:29:7: ( 'px' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:29:9: 'px'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:28:7: ( '%' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:28:9: '%'
             {
-            	Match("px"); 
-
+            	Match('%'); 
 
             }
 
@@ -640,10 +616,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__52;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:30:7: ( 'cm' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:30:9: 'cm'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:29:7: ( 'px' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:29:9: 'px'
             {
-            	Match("cm"); 
+            	Match("px"); 
 
 
             }
@@ -664,10 +640,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__53;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:31:7: ( 'mm' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:31:9: 'mm'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:30:7: ( 'cm' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:30:9: 'cm'
             {
-            	Match("mm"); 
+            	Match("cm"); 
 
 
             }
@@ -688,10 +664,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__54;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:32:7: ( 'in' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:32:9: 'in'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:31:7: ( 'mm' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:31:9: 'mm'
             {
-            	Match("in"); 
+            	Match("mm"); 
 
 
             }
@@ -712,10 +688,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__55;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:33:7: ( 'pt' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:33:9: 'pt'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:32:7: ( 'in' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:32:9: 'in'
             {
-            	Match("pt"); 
+            	Match("in"); 
 
 
             }
@@ -736,10 +712,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__56;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:34:7: ( 'pc' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:34:9: 'pc'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:33:7: ( 'pt' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:33:9: 'pt'
             {
-            	Match("pc"); 
+            	Match("pt"); 
 
 
             }
@@ -760,10 +736,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__57;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:35:7: ( 'em' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:35:9: 'em'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:34:7: ( 'pc' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:34:9: 'pc'
             {
-            	Match("em"); 
+            	Match("pc"); 
 
 
             }
@@ -784,8 +760,8 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__58;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:36:7: ( 'ex' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:36:9: 'ex'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:35:7: ( 'ex' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:35:9: 'ex'
             {
             	Match("ex"); 
 
@@ -808,8 +784,8 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__59;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:37:7: ( 'deg' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:37:9: 'deg'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:36:7: ( 'deg' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:36:9: 'deg'
             {
             	Match("deg"); 
 
@@ -832,8 +808,8 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__60;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:38:7: ( 'rad' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:38:9: 'rad'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:37:7: ( 'rad' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:37:9: 'rad'
             {
             	Match("rad"); 
 
@@ -856,8 +832,8 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__61;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:39:7: ( 'grad' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:39:9: 'grad'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:38:7: ( 'grad' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:38:9: 'grad'
             {
             	Match("grad"); 
 
@@ -880,8 +856,8 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__62;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:40:7: ( 'ms' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:40:9: 'ms'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:39:7: ( 'ms' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:39:9: 'ms'
             {
             	Match("ms"); 
 
@@ -904,8 +880,8 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__63;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:41:7: ( 's' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:41:9: 's'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:40:7: ( 's' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:40:9: 's'
             {
             	Match('s'); 
 
@@ -927,8 +903,8 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__64;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:42:7: ( 'hz' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:42:9: 'hz'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:41:7: ( 'hz' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:41:9: 'hz'
             {
             	Match("hz"); 
 
@@ -951,8 +927,8 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__65;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:43:7: ( 'khz' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:43:9: 'khz'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:42:7: ( 'khz' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:42:9: 'khz'
             {
             	Match("khz"); 
 
@@ -975,8 +951,8 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__66;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:44:7: ( '(' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:44:9: '('
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:43:7: ( '(' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:43:9: '('
             {
             	Match('('); 
 
@@ -998,8 +974,8 @@ public class csst3Lexer : Lexer {
     		{
             int _type = T__67;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:45:7: ( ')' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:45:9: ')'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:44:7: ( ')' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:44:9: ')'
             {
             	Match(')'); 
 
@@ -1014,6 +990,30 @@ public class csst3Lexer : Lexer {
     }
     // $ANTLR end "T__67"
 
+    // $ANTLR start "EM"
+    public void mEM() // throws RecognitionException [2]
+    {
+    		try
+    		{
+            int _type = EM;
+    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:136:9: ( 'em' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:136:11: 'em'
+            {
+            	Match("em"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally 
+    	{
+        }
+    }
+    // $ANTLR end "EM"
+
     // $ANTLR start "IDENT"
     public void mIDENT() // throws RecognitionException [2]
     {
@@ -1021,7 +1021,7 @@ public class csst3Lexer : Lexer {
     		{
             int _type = IDENT;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:136:2: ( ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )* | '-' ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )* )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:139:2: ( ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )* | '-' ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )* )
             int alt3 = 2;
             int LA3_0 = input.LA(1);
 
@@ -1043,7 +1043,7 @@ public class csst3Lexer : Lexer {
             switch (alt3) 
             {
                 case 1 :
-                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:136:4: ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
+                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:139:4: ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
                     {
                     	if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') || (input.LA(1) >= '\u0100' && input.LA(1) <= '\uFFFE') ) 
                     	{
@@ -1056,7 +1056,7 @@ public class csst3Lexer : Lexer {
                     	    Recover(mse);
                     	    throw mse;}
 
-                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:137:3: ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
+                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:140:3: ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
                     	do 
                     	{
                     	    int alt1 = 2;
@@ -1100,7 +1100,7 @@ public class csst3Lexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:138:4: '-' ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
+                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:141:4: '-' ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
                     {
                     	Match('-'); 
                     	if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') || (input.LA(1) >= '\u0100' && input.LA(1) <= '\uFFFE') ) 
@@ -1114,7 +1114,7 @@ public class csst3Lexer : Lexer {
                     	    Recover(mse);
                     	    throw mse;}
 
-                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:139:3: ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
+                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:142:3: ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
                     	do 
                     	{
                     	    int alt2 = 2;
@@ -1175,7 +1175,7 @@ public class csst3Lexer : Lexer {
     		{
             int _type = STRING;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:144:2: ( '\"' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\"' | '\\n' | '\\r' | '\\\\' ) )* '\"' | '\\'' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\\'' | '\\n' | '\\r' | '\\\\' ) )* '\\'' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:147:2: ( '\"' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\"' | '\\n' | '\\r' | '\\\\' ) )* '\"' | '\\'' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\\'' | '\\n' | '\\r' | '\\\\' ) )* '\\'' )
             int alt6 = 2;
             int LA6_0 = input.LA(1);
 
@@ -1197,10 +1197,10 @@ public class csst3Lexer : Lexer {
             switch (alt6) 
             {
                 case 1 :
-                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:144:4: '\"' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\"' | '\\n' | '\\r' | '\\\\' ) )* '\"'
+                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:147:4: '\"' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\"' | '\\n' | '\\r' | '\\\\' ) )* '\"'
                     {
                     	Match('\"'); 
-                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:144:8: ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\"' | '\\n' | '\\r' | '\\\\' ) )*
+                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:147:8: ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\"' | '\\n' | '\\r' | '\\\\' ) )*
                     	do 
                     	{
                     	    int alt4 = 3;
@@ -1219,10 +1219,10 @@ public class csst3Lexer : Lexer {
                     	    switch (alt4) 
                     		{
                     			case 1 :
-                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:144:10: ( '\\\\' ~ ( '\\n' ) )
+                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:147:10: ( '\\\\' ~ ( '\\n' ) )
                     			    {
-                    			    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:144:10: ( '\\\\' ~ ( '\\n' ) )
-                    			    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:144:11: '\\\\' ~ ( '\\n' )
+                    			    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:147:10: ( '\\\\' ~ ( '\\n' ) )
+                    			    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:147:11: '\\\\' ~ ( '\\n' )
                     			    	{
                     			    		Match('\\'); 
                     			    		if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\uFFFF') ) 
@@ -1243,7 +1243,7 @@ public class csst3Lexer : Lexer {
                     			    }
                     			    break;
                     			case 2 :
-                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:145:17: ~ ( '\"' | '\\n' | '\\r' | '\\\\' )
+                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:148:17: ~ ( '\"' | '\\n' | '\\r' | '\\\\' )
                     			    {
                     			    	if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\f') || (input.LA(1) >= '\u000E' && input.LA(1) <= '!') || (input.LA(1) >= '#' && input.LA(1) <= '[') || (input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) 
                     			    	{
@@ -1273,10 +1273,10 @@ public class csst3Lexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:147:4: '\\'' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\\'' | '\\n' | '\\r' | '\\\\' ) )* '\\''
+                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:150:4: '\\'' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\\'' | '\\n' | '\\r' | '\\\\' ) )* '\\''
                     {
                     	Match('\''); 
-                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:147:9: ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\\'' | '\\n' | '\\r' | '\\\\' ) )*
+                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:150:9: ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\\'' | '\\n' | '\\r' | '\\\\' ) )*
                     	do 
                     	{
                     	    int alt5 = 3;
@@ -1295,10 +1295,10 @@ public class csst3Lexer : Lexer {
                     	    switch (alt5) 
                     		{
                     			case 1 :
-                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:147:11: ( '\\\\' ~ ( '\\n' ) )
+                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:150:11: ( '\\\\' ~ ( '\\n' ) )
                     			    {
-                    			    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:147:11: ( '\\\\' ~ ( '\\n' ) )
-                    			    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:147:12: '\\\\' ~ ( '\\n' )
+                    			    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:150:11: ( '\\\\' ~ ( '\\n' ) )
+                    			    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:150:12: '\\\\' ~ ( '\\n' )
                     			    	{
                     			    		Match('\\'); 
                     			    		if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\uFFFF') ) 
@@ -1319,7 +1319,7 @@ public class csst3Lexer : Lexer {
                     			    }
                     			    break;
                     			case 2 :
-                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:148:17: ~ ( '\\'' | '\\n' | '\\r' | '\\\\' )
+                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:151:17: ~ ( '\\'' | '\\n' | '\\r' | '\\\\' )
                     			    {
                     			    	if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\f') || (input.LA(1) >= '\u000E' && input.LA(1) <= '&') || (input.LA(1) >= '(' && input.LA(1) <= '[') || (input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) 
                     			    	{
@@ -1366,7 +1366,7 @@ public class csst3Lexer : Lexer {
     		{
             int _type = NUM;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:153:2: ( '-' ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+ | ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+ )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:156:2: ( '-' ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+ | ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+ )
             int alt13 = 2;
             int LA13_0 = input.LA(1);
 
@@ -1388,18 +1388,18 @@ public class csst3Lexer : Lexer {
             switch (alt13) 
             {
                 case 1 :
-                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:153:4: '-' ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+
+                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:156:4: '-' ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+
                     {
                     	Match('-'); 
-                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:153:8: ( ( '0' .. '9' )* '.' )?
+                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:156:8: ( ( '0' .. '9' )* '.' )?
                     	int alt8 = 2;
                     	alt8 = dfa8.Predict(input);
                     	switch (alt8) 
                     	{
                     	    case 1 :
-                    	        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:153:9: ( '0' .. '9' )* '.'
+                    	        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:156:9: ( '0' .. '9' )* '.'
                     	        {
-                    	        	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:153:9: ( '0' .. '9' )*
+                    	        	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:156:9: ( '0' .. '9' )*
                     	        	do 
                     	        	{
                     	        	    int alt7 = 2;
@@ -1414,7 +1414,7 @@ public class csst3Lexer : Lexer {
                     	        	    switch (alt7) 
                     	        		{
                     	        			case 1 :
-                    	        			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:153:10: '0' .. '9'
+                    	        			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:156:10: '0' .. '9'
                     	        			    {
                     	        			    	MatchRange('0','9'); 
 
@@ -1436,7 +1436,7 @@ public class csst3Lexer : Lexer {
 
                     	}
 
-                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:153:27: ( '0' .. '9' )+
+                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:156:27: ( '0' .. '9' )+
                     	int cnt9 = 0;
                     	do 
                     	{
@@ -1452,7 +1452,7 @@ public class csst3Lexer : Lexer {
                     	    switch (alt9) 
                     		{
                     			case 1 :
-                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:153:28: '0' .. '9'
+                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:156:28: '0' .. '9'
                     			    {
                     			    	MatchRange('0','9'); 
 
@@ -1475,17 +1475,17 @@ public class csst3Lexer : Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:154:4: ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+
+                    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:157:4: ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+
                     {
-                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:154:4: ( ( '0' .. '9' )* '.' )?
+                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:157:4: ( ( '0' .. '9' )* '.' )?
                     	int alt11 = 2;
                     	alt11 = dfa11.Predict(input);
                     	switch (alt11) 
                     	{
                     	    case 1 :
-                    	        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:154:5: ( '0' .. '9' )* '.'
+                    	        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:157:5: ( '0' .. '9' )* '.'
                     	        {
-                    	        	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:154:5: ( '0' .. '9' )*
+                    	        	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:157:5: ( '0' .. '9' )*
                     	        	do 
                     	        	{
                     	        	    int alt10 = 2;
@@ -1500,7 +1500,7 @@ public class csst3Lexer : Lexer {
                     	        	    switch (alt10) 
                     	        		{
                     	        			case 1 :
-                    	        			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:154:6: '0' .. '9'
+                    	        			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:157:6: '0' .. '9'
                     	        			    {
                     	        			    	MatchRange('0','9'); 
 
@@ -1522,7 +1522,7 @@ public class csst3Lexer : Lexer {
 
                     	}
 
-                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:154:23: ( '0' .. '9' )+
+                    	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:157:23: ( '0' .. '9' )+
                     	int cnt12 = 0;
                     	do 
                     	{
@@ -1538,7 +1538,7 @@ public class csst3Lexer : Lexer {
                     	    switch (alt12) 
                     		{
                     			case 1 :
-                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:154:24: '0' .. '9'
+                    			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:157:24: '0' .. '9'
                     			    {
                     			    	MatchRange('0','9'); 
 
@@ -1578,11 +1578,11 @@ public class csst3Lexer : Lexer {
     		{
             int _type = COLOR;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:158:2: ( '#' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:158:4: '#' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:161:2: ( '#' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:161:4: '#' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
             	Match('#'); 
-            	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:158:8: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:161:8: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             	int cnt14 = 0;
             	do 
             	{
@@ -1646,12 +1646,12 @@ public class csst3Lexer : Lexer {
     		{
             int _type = SL_COMMENT;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:163:2: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? ) )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:163:4: '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:166:2: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? ) )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:166:4: '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )
             {
             	Match("//"); 
 
-            	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:164:3: (~ ( '\\n' | '\\r' ) )*
+            	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:167:3: (~ ( '\\n' | '\\r' ) )*
             	do 
             	{
             	    int alt15 = 2;
@@ -1666,7 +1666,7 @@ public class csst3Lexer : Lexer {
             	    switch (alt15) 
             		{
             			case 1 :
-            			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:164:4: ~ ( '\\n' | '\\r' )
+            			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:167:4: ~ ( '\\n' | '\\r' )
             			    {
             			    	if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\f') || (input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFF') ) 
             			    	{
@@ -1691,7 +1691,7 @@ public class csst3Lexer : Lexer {
             	loop15:
             		;	// Stops C# compiler whining that label 'loop15' has no statements
 
-            	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:164:19: ( '\\n' | '\\r' ( '\\n' )? )
+            	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:167:19: ( '\\n' | '\\r' ( '\\n' )? )
             	int alt17 = 2;
             	int LA17_0 = input.LA(1);
 
@@ -1713,17 +1713,17 @@ public class csst3Lexer : Lexer {
             	switch (alt17) 
             	{
             	    case 1 :
-            	        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:164:20: '\\n'
+            	        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:167:20: '\\n'
             	        {
             	        	Match('\n'); 
 
             	        }
             	        break;
             	    case 2 :
-            	        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:164:25: '\\r' ( '\\n' )?
+            	        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:167:25: '\\r' ( '\\n' )?
             	        {
             	        	Match('\r'); 
-            	        	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:164:29: ( '\\n' )?
+            	        	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:167:29: ( '\\n' )?
             	        	int alt16 = 2;
             	        	int LA16_0 = input.LA(1);
 
@@ -1734,7 +1734,7 @@ public class csst3Lexer : Lexer {
             	        	switch (alt16) 
             	        	{
             	        	    case 1 :
-            	        	        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:164:30: '\\n'
+            	        	        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:167:30: '\\n'
             	        	        {
             	        	        	Match('\n'); 
 
@@ -1769,12 +1769,12 @@ public class csst3Lexer : Lexer {
     		{
             int _type = COMMENT;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:170:2: ( '/*' ( . )* '*/' )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:170:4: '/*' ( . )* '*/'
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:173:2: ( '/*' ( . )* '*/' )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:173:4: '/*' ( . )* '*/'
             {
             	Match("/*"); 
 
-            	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:170:9: ( . )*
+            	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:173:9: ( . )*
             	do 
             	{
             	    int alt18 = 2;
@@ -1804,7 +1804,7 @@ public class csst3Lexer : Lexer {
             	    switch (alt18) 
             		{
             			case 1 :
-            			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:170:9: .
+            			    // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:173:9: .
             			    {
             			    	MatchAny(); 
 
@@ -1841,10 +1841,10 @@ public class csst3Lexer : Lexer {
     		{
             int _type = WS;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:174:4: ( ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+ )
-            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:174:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:177:4: ( ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+ )
+            // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:177:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
             {
-            	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:174:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
+            	// C:\\git\\pathway\\pathway\\CssParser\\csst3.g:177:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
             	int cnt19 = 0;
             	do 
             	{
@@ -1904,328 +1904,328 @@ public class csst3Lexer : Lexer {
 
     override public void mTokens() // throws RecognitionException 
     {
-        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:8: ( T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | IDENT | STRING | NUM | COLOR | SL_COMMENT | COMMENT | WS )
+        // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:8: ( T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | EM | IDENT | STRING | NUM | COLOR | SL_COMMENT | COMMENT | WS )
         int alt20 = 46;
         alt20 = dfa20.Predict(input);
         switch (alt20) 
         {
             case 1 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:10: T__29
-                {
-                	mT__29(); 
-
-                }
-                break;
-            case 2 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:16: T__30
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:10: T__30
                 {
                 	mT__30(); 
 
                 }
                 break;
-            case 3 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:22: T__31
+            case 2 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:16: T__31
                 {
                 	mT__31(); 
 
                 }
                 break;
-            case 4 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:28: T__32
+            case 3 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:22: T__32
                 {
                 	mT__32(); 
 
                 }
                 break;
-            case 5 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:34: T__33
+            case 4 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:28: T__33
                 {
                 	mT__33(); 
 
                 }
                 break;
-            case 6 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:40: T__34
+            case 5 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:34: T__34
                 {
                 	mT__34(); 
 
                 }
                 break;
-            case 7 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:46: T__35
+            case 6 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:40: T__35
                 {
                 	mT__35(); 
 
                 }
                 break;
-            case 8 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:52: T__36
+            case 7 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:46: T__36
                 {
                 	mT__36(); 
 
                 }
                 break;
-            case 9 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:58: T__37
+            case 8 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:52: T__37
                 {
                 	mT__37(); 
 
                 }
                 break;
-            case 10 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:64: T__38
+            case 9 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:58: T__38
                 {
                 	mT__38(); 
 
                 }
                 break;
-            case 11 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:70: T__39
+            case 10 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:64: T__39
                 {
                 	mT__39(); 
 
                 }
                 break;
-            case 12 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:76: T__40
+            case 11 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:70: T__40
                 {
                 	mT__40(); 
 
                 }
                 break;
-            case 13 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:82: T__41
+            case 12 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:76: T__41
                 {
                 	mT__41(); 
 
                 }
                 break;
-            case 14 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:88: T__42
+            case 13 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:82: T__42
                 {
                 	mT__42(); 
 
                 }
                 break;
-            case 15 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:94: T__43
+            case 14 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:88: T__43
                 {
                 	mT__43(); 
 
                 }
                 break;
-            case 16 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:100: T__44
+            case 15 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:94: T__44
                 {
                 	mT__44(); 
 
                 }
                 break;
-            case 17 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:106: T__45
+            case 16 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:100: T__45
                 {
                 	mT__45(); 
 
                 }
                 break;
-            case 18 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:112: T__46
+            case 17 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:106: T__46
                 {
                 	mT__46(); 
 
                 }
                 break;
-            case 19 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:118: T__47
+            case 18 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:112: T__47
                 {
                 	mT__47(); 
 
                 }
                 break;
-            case 20 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:124: T__48
+            case 19 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:118: T__48
                 {
                 	mT__48(); 
 
                 }
                 break;
-            case 21 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:130: T__49
+            case 20 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:124: T__49
                 {
                 	mT__49(); 
 
                 }
                 break;
-            case 22 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:136: T__50
+            case 21 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:130: T__50
                 {
                 	mT__50(); 
 
                 }
                 break;
-            case 23 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:142: T__51
+            case 22 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:136: T__51
                 {
                 	mT__51(); 
 
                 }
                 break;
-            case 24 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:148: T__52
+            case 23 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:142: T__52
                 {
                 	mT__52(); 
 
                 }
                 break;
-            case 25 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:154: T__53
+            case 24 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:148: T__53
                 {
                 	mT__53(); 
 
                 }
                 break;
-            case 26 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:160: T__54
+            case 25 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:154: T__54
                 {
                 	mT__54(); 
 
                 }
                 break;
-            case 27 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:166: T__55
+            case 26 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:160: T__55
                 {
                 	mT__55(); 
 
                 }
                 break;
-            case 28 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:172: T__56
+            case 27 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:166: T__56
                 {
                 	mT__56(); 
 
                 }
                 break;
-            case 29 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:178: T__57
+            case 28 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:172: T__57
                 {
                 	mT__57(); 
 
                 }
                 break;
-            case 30 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:184: T__58
+            case 29 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:178: T__58
                 {
                 	mT__58(); 
 
                 }
                 break;
-            case 31 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:190: T__59
+            case 30 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:184: T__59
                 {
                 	mT__59(); 
 
                 }
                 break;
-            case 32 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:196: T__60
+            case 31 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:190: T__60
                 {
                 	mT__60(); 
 
                 }
                 break;
-            case 33 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:202: T__61
+            case 32 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:196: T__61
                 {
                 	mT__61(); 
 
                 }
                 break;
-            case 34 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:208: T__62
+            case 33 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:202: T__62
                 {
                 	mT__62(); 
 
                 }
                 break;
-            case 35 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:214: T__63
+            case 34 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:208: T__63
                 {
                 	mT__63(); 
 
                 }
                 break;
-            case 36 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:220: T__64
+            case 35 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:214: T__64
                 {
                 	mT__64(); 
 
                 }
                 break;
-            case 37 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:226: T__65
+            case 36 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:220: T__65
                 {
                 	mT__65(); 
 
                 }
                 break;
-            case 38 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:232: T__66
+            case 37 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:226: T__66
                 {
                 	mT__66(); 
 
                 }
                 break;
-            case 39 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:238: T__67
+            case 38 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:232: T__67
                 {
                 	mT__67(); 
 
                 }
                 break;
+            case 39 :
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:238: EM
+                {
+                	mEM(); 
+
+                }
+                break;
             case 40 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:244: IDENT
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:241: IDENT
                 {
                 	mIDENT(); 
 
                 }
                 break;
             case 41 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:250: STRING
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:247: STRING
                 {
                 	mSTRING(); 
 
                 }
                 break;
             case 42 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:257: NUM
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:254: NUM
                 {
                 	mNUM(); 
 
                 }
                 break;
             case 43 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:261: COLOR
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:258: COLOR
                 {
                 	mCOLOR(); 
 
                 }
                 break;
             case 44 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:267: SL_COMMENT
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:264: SL_COMMENT
                 {
                 	mSL_COMMENT(); 
 
                 }
                 break;
             case 45 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:278: COMMENT
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:275: COMMENT
                 {
                 	mCOMMENT(); 
 
                 }
                 break;
             case 46 :
-                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:286: WS
+                // C:\\git\\pathway\\pathway\\CssParser\\csst3.g:1:283: WS
                 {
                 	mWS(); 
 
@@ -2292,7 +2292,7 @@ public class csst3Lexer : Lexer {
 
         override public string Description
         {
-            get { return "153:8: ( ( '0' .. '9' )* '.' )?"; }
+            get { return "156:8: ( ( '0' .. '9' )* '.' )?"; }
         }
 
     }
@@ -2342,7 +2342,7 @@ public class csst3Lexer : Lexer {
 
         override public string Description
         {
-            get { return "154:4: ( ( '0' .. '9' )* '.' )?"; }
+            get { return "157:4: ( ( '0' .. '9' )* '.' )?"; }
         }
 
     }
@@ -2372,12 +2372,12 @@ public class csst3Lexer : Lexer {
     const string DFA20_acceptS =
         "\x02\uffff\x01\x03\x01\x05\x01\x06\x01\x09\x01\x0a\x01\x0b\x02"+
         "\uffff\x01\x0e\x01\uffff\x01\x11\x01\x12\x01\x13\x01\x14\x01\x15"+
-        "\x01\x16\x0b\uffff\x01\x26\x01\x27\x01\x28\x01\uffff\x01\x29\x01"+
+        "\x01\x16\x0b\uffff\x01\x25\x01\x26\x01\x28\x01\uffff\x01\x29\x01"+
         "\x2a\x01\uffff\x01\x2e\x01\uffff\x01\x04\x01\x07\x01\x08\x01\x0c"+
-        "\x01\x2b\x01\x0d\x01\x10\x01\x0f\x0c\uffff\x01\x23\x02\uffff\x01"+
+        "\x01\x2b\x01\x0d\x01\x10\x01\x0f\x0c\uffff\x01\x22\x02\uffff\x01"+
         "\x2c\x01\x2d\x01\x01\x01\x02\x01\x17\x01\x1b\x01\x1c\x01\x18\x01"+
-        "\x19\x01\x22\x01\x1a\x01\x1d\x01\x1e\x03\uffff\x01\x24\x01\uffff"+
-        "\x01\x1f\x01\x20\x01\uffff\x01\x25\x01\x21";
+        "\x19\x01\x21\x01\x1a\x01\x1d\x01\x27\x03\uffff\x01\x23\x01\uffff"+
+        "\x01\x1e\x01\x1f\x01\uffff\x01\x24\x01\x20";
     const string DFA20_specialS =
         "\x54\uffff}>";
     static readonly string[] DFA20_transitionS = {
@@ -2411,7 +2411,7 @@ public class csst3Lexer : Lexer {
             "\x01\x31",
             "\x01\x32\x05\uffff\x01\x33",
             "\x01\x34",
-            "\x01\x35\x0a\uffff\x01\x36",
+            "\x01\x36\x0a\uffff\x01\x35",
             "\x01\x37",
             "\x01\x38",
             "\x01\x39",
@@ -2517,7 +2517,7 @@ public class csst3Lexer : Lexer {
 
         override public string Description
         {
-            get { return "1:1: Tokens : ( T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | IDENT | STRING | NUM | COLOR | SL_COMMENT | COMMENT | WS );"; }
+            get { return "1:1: Tokens : ( T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | EM | IDENT | STRING | NUM | COLOR | SL_COMMENT | COMMENT | WS );"; }
         }
 
     }
