@@ -70,6 +70,7 @@ selectors
 	
 selector
 	: elem selectorOperation* pseudo? ->  elem selectorOperation* pseudo*
+	| pseudo -> ANY pseudo 
 	;
 
 selectorOperation
