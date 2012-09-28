@@ -1108,7 +1108,7 @@ namespace SIL.Tool
                         frontMatterXHTMLContent = frontMatterXHTMLContent + copyRightContentNode.OuterXml;
                         _projInfo.IsFrontMatterEnabled = true;
 
-                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:12pt;page-break-after: always;.tableofcontents{text-align: left; font-size:12pt;page-break-after: always;} ";
+                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:12pt;page-break-after: always;}.tableofcontents{text-align: left; font-size:12pt;page-break-after: always;} ";
                     }
                 }
                 //END OF COPYRIGHT 
