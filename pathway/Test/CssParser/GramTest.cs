@@ -559,5 +559,16 @@ namespace Test.CssParserTest
             OneTest("T32", "CSS pseudo only");
         }
         #endregion T32
+
+        #region T33
+        /// <summary>
+        /// CSS em as tag and unit
+        /// </summary>
+        [Test]
+        public void CssEmAsTagAndUnitT33()
+        {
+            OneTest("T33", "CSS em as tag and unit");
+        }
+        #endregion T33
     }
 }
