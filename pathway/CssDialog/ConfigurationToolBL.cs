@@ -3187,10 +3187,6 @@ namespace SIL.PublishingSolution
                     preview.Icon = cTool.Icon;
                     preview.ShowDialog();
                 }
-                else
-                {
-                    MessageBox.Show("Preview is not available", "Pathway");
-                }
             }
             catch { }
         }
@@ -3242,7 +3238,7 @@ namespace SIL.PublishingSolution
                         ps.DictionaryOutputName = fileName;
                         ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
                         ps.ProjectInputType = _loadType;
-
+                        
                         bool success = PrincePreview(ps);
 
                         if (!success)
