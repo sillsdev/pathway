@@ -24,6 +24,7 @@ tokens {
 	TAG;
 	ID;
 	CLASS;
+	EM;
 }
 
 @members {
@@ -87,9 +88,9 @@ properties
 	;
 	
 elem
-	:     IDENT attrib* -> ^( TAG IDENT attrib* )
-	| '#' IDENT attrib* -> ^( ID IDENT attrib* )
-	| '.' IDENT attrib* -> ^( CLASS IDENT attrib* )
+	:     (IDENT | EM) attrib* -> ^( TAG IDENT* EM* attrib* )
+	| '#' (IDENT | EM) attrib* -> ^( ID IDENT* EM* attrib* )
+	| '.' (IDENT | EM) attrib* -> ^( CLASS IDENT* EM* attrib* )
 	| '*' attrib* -> ^( ANY attrib* )
 	;
 
@@ -125,12 +126,14 @@ expr
 	;
 
 unit
-	: ('%'|'px'|'cm'|'mm'|'in'|'pt'|'pc'|'em'|'ex'|'deg'|'rad'|'grad'|'ms'|'s'|'hz'|'khz')
+	: ('%'|'px'|'cm'|'mm'|'in'|'pt'|'pc'|EM|'ex'|'deg'|'rad'|'grad'|'ms'|'s'|'hz'|'khz')
 	;
 	
 function
 	: IDENT '(' args? ')' -> IDENT '(' args* ')'
 	;
+	
+EM      :	'em';	
 
 IDENT
 	:	('_' | 'a'..'z'| 'A'..'Z' | '\u0100'..'\ufffe' ) 
