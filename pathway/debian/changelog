@@ -1,5 +1,31 @@
-pathway (1.2.0.2622-1) unstable; urgency=high
+pathway (1.3.1.2686-1) unstable; urgency=high
 
+  * 1.3.1.2686 sprint
+    - Common: TD-3185 recognize em element tab
+    - Common: TD-3215 pseudo only selector (ex. :lang(en))
+    - Help: Edits to student manuals.
+    - Help: Process Options tab topic edits
+    - Help: Removed topic about the bat preprocessing file.
+    - Installer: adjust fmt & lsr after xelatex linux install
+    - Installer: ignore pathway-xelatex release build files
+    - Installer: update for 1.8 pathway-xelatex
+    - InDesign: Destination field on Linux OS.
+    - Logos: TD-3190 Error box.
+    - Libre Office: TD-3178 Pdf with two page number
+    - Libre Office: TD-3189 Word are merged for telugu on Linux
+    - Libre Office: TD-3197 Picture missing from output
+    - Libre Office: TD-3215 letter header style missing
+    - Libre Office: TD-3222 CoverPage Image not centered in Pdf
+    - E-pub: TD-3217 Freezes when processing Buang
+    - E-pub: TD-3232 Crashed when export from Flex
+    - E-pub: TD-3214 Needs styles, samples, and settings files
+    - Stylesheet: TD-3200 Others for a custom stylesheet.
+    - UI: TD-3170 Add project URL to rights page.
+    - UI: TD-3174 Preview isnt available
+    - UI: TD-3175 Fix Save button on Configuration Tool
+    - UI: Edit Layout button in paratext.
+    - XeLaTex: TD-3162 (2-3 pages) takes over 6 minutes
+    - XeLaTex: TD-3196 Error on paratext in Linux
   * 1.2.0.2622 sprint
     - Common:TD-3133 Help doesn't launch on Linux
     - Common:Update Linux XeLaTeX installer build instructions
