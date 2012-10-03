@@ -2754,7 +2754,8 @@ namespace SIL.Tool
                             }
                             else if (className == "fontSize")
                             {
-                                projInfo.DefaultFontSize = float.Parse(node.Attributes["content"].Value);
+                                if (float.Parse(node.Attributes["content"].Value) < projInfo.DefaultFontSize)
+                                    projInfo.DefaultFontSize = float.Parse(node.Attributes["content"].Value);
                             }
                         }
                     }
