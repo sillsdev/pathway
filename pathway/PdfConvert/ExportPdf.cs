@@ -91,6 +91,7 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             bool success;
+            bool isUnixOS = false;
             try
             {
                 var regPrinceKey = RegPrinceKey;
@@ -98,6 +99,13 @@ namespace SIL.PublishingSolution
                 {
                     var curdir = Environment.CurrentDirectory;
                     PreExportProcess preProcessor = new PreExportProcess(projInfo);
+                    isUnixOS = Common.UnixVersionCheck();
+                    if (isUnixOS)
+                    {
+                        projInfo.DefaultXhtmlFileWithPath =
+                            Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
+                    }
+
                     Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                     preProcessor.GetTempFolderPath();
                     preProcessor.ImagePreprocess();
@@ -115,7 +123,7 @@ namespace SIL.PublishingSolution
                     string defaultCSS = Path.GetFileName(mergedCSS);
                     Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
                     _processedXhtml = preProcessor.ProcessedXhtml;
-                    if (!Common.UnixVersionCheck())
+                    if (!isUnixOS)
                     {
                         Object princePath = regPrinceKey.GetValue("InstallLocation");
                         _fullPrincePath = Common.PathCombine((string)princePath, "Engine/Bin/Prince.exe");
@@ -124,7 +132,37 @@ namespace SIL.PublishingSolution
                         myPrince.Convert(_processedXhtml, xhtmlFileName + ".pdf");
                     }
                     else
-                        Common.RunCommand("Prince ", _processedXhtml + " " + defaultCSS + " -o " + xhtmlFileName + ".pdf", 1);
+                    {
+                        if (isUnixOS)
+                        {
+                            if (!Directory.Exists("/usr/lib/prince/bin"))
+                            {
+                                return success = false;
+                                //MessageBox.Show(@"Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", "Pathway Configuration Tool" , MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                            }
+                        }
+                        Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+                        Directory.SetCurrentDirectory(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath));
+                        string p1Error = string.Empty;
+                        string inputArguments = "";
+                        inputArguments = _processedXhtml + " -o " + xhtmlFileName + ".pdf";
+                        using (Process p1 = new Process())
+                        {
+                            p1.StartInfo.FileName = "prince";
+                            if (File.Exists(_processedXhtml))
+                            {
+                                p1.StartInfo.Arguments = inputArguments;
+                            }
+                            p1.StartInfo.RedirectStandardOutput = true;
+                            p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
+                            p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
+                            p1.Start();
+                            p1.WaitForExit();
+                            p1Error = p1.StandardError.ReadToEnd();
+                        }
+                        //Common.RunCommand("prince ", _processedXhtml + " -o, " + xhtmlFileName + ".pdf", 1);
+                    }
+                    
                     if (!Common.Testing)
                         Process.Start(xhtmlFileName + ".pdf");
                     Environment.CurrentDirectory = curdir;

@@ -2754,7 +2754,8 @@ namespace SIL.Tool
                             }
                             else if (className == "fontSize")
                             {
-                                projInfo.DefaultFontSize = float.Parse(node.Attributes["content"].Value);
+                                if (float.Parse(node.Attributes["content"].Value) < projInfo.DefaultFontSize)
+                                    projInfo.DefaultFontSize = float.Parse(node.Attributes["content"].Value);
                             }
                         }
                     }
@@ -3130,6 +3131,21 @@ namespace SIL.Tool
             TextWriter tw = new StreamWriter(cssFileName, true);
             tw.WriteLine(".Chapter_Number {");
             tw.WriteLine("font-size: 199%;");
+            tw.WriteLine("}");
+            tw.Close();
+        }
+
+        public void InsertCoverPageImageStyleInCSS(string cssFileName)
+        {
+            TextWriter tw = new StreamWriter(cssFileName, true);
+            tw.WriteLine(".Cover {");
+            tw.WriteLine("vertical-align: center;");
+            tw.WriteLine("text-align: center;");
+            tw.WriteLine("}");
+            tw.WriteLine("");
+            tw.WriteLine(".Cover img{");
+            tw.WriteLine("height: 595px;");
+            tw.WriteLine("width: 446.25px;");
             tw.WriteLine("}");
             tw.Close();
         }
