@@ -946,6 +946,10 @@ namespace SIL.PublishingSolution
             cTool.DdlJustified.SelectedItem = JustifyUI;
             cTool.DdlPagePageSize.SelectedItem = PageSize;
             cTool.DdlRunningHead.SelectedItem = RunningHeader;
+
+            string pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+            DdlRunningHeadSelectedIndexChangedBl(pageType);
+
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
             cTool.DdlSense.SelectedItem = Sense;
@@ -4367,6 +4371,15 @@ namespace SIL.PublishingSolution
             catch { }
         }
         
+        public void ddlPageNumber_SelectedIndexChange()
+        {
+            if (_screenMode == ScreenMode.Edit)
+            {
+                SetModifyMode(true);
+                ShowCssSummary();
+                WriteCss();
+            }
+        }
 
         #endregion
     }
