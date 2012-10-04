@@ -2887,7 +2887,7 @@ namespace SIL.PublishingSolution
         private string CleanupSpans(string text)
         {
             var sb = new StringBuilder(text);
-            sb.Replace("lang", "xml:lang");
+            sb.Replace(" lang", " xml:lang");
             sb.Replace("xmlns=\"http://www.w3.org/1999/xhtml\"", "");
             return sb.ToString();
         }
