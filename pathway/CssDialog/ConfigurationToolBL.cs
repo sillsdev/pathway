@@ -276,7 +276,16 @@ namespace SIL.PublishingSolution
                     string result = GetValue(srchKey, key, "false");
                     if (result.IndexOf("page") > 0)
                     {
-                        return pageDict[srchKey];
+                        string pageNumberValue = pageDict[srchKey];
+                        if (Common.UnixVersionCheck())
+                        {
+                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
+                                return pageDict[srchKey];
+                        }
+                        else
+                        {
+                            return pageDict[srchKey];
+                        }
                     }
                 }
                 return defaultValue;
