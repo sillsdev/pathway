@@ -542,8 +542,8 @@
     <Fw606 Include="..\PsExport\Dlls606\FieldworksVersions.txt" />
     <BteHelpFile Include="Pathway_Configuration_Tool_BTE.chm" />
     <SeHelpFile Include="Pathway_Configuration_Tool_SE.chm" />
-    <BteStudent Include="Pathway_Student_Manual_BTE.doc" />
-    <SeStudent Include="Pathway_Student_Manual_SE.doc" />
+    <BteStudent Include="Pathway_Student_Manual_BTE.pdf" />
+    <SeStudent Include="Pathway_Student_Manual_SE.pdf" />
     <License Include="License.rtf" />
     <Readme Include="ReadMePw.rtf" />
     <AllSettings Include="..\PsSupport\DictionaryStyleSettings.xml" />

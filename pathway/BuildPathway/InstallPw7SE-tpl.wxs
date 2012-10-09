@@ -101,7 +101,7 @@
 							Guid="3A0CF01A-A7C3-49F0-A00F-0574B54370C9">
 							<Shortcut Id="TutorialShortcutApp" Directory="PathwayMenu"
 								Name="Tutorial" LongName="Student Manual"
-								Target="[#Pathway_Student_Manual_SE.doc]" Hotkey="0" IconIndex="0"
+								Target="[#Pathway_Student_Manual_SE.pdf]" Hotkey="0" IconIndex="0"
 								Show="normal" WorkingDirectory="INSTALLDIR"/>
 						</Component>
 						<Component Id="LicenseShortcutApp"

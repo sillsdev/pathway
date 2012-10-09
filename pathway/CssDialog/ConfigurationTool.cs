@@ -1223,6 +1223,11 @@ namespace SIL.PublishingSolution
             _CToolBL.HelpButton_Clicked();
         }
 
+        private void studentManualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _CToolBL.StudentManual();
+        }
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _CToolBL.AboutDialog();

@@ -4150,6 +4150,11 @@ namespace SIL.PublishingSolution
             }
         }
 
+        public void StudentManual()
+        {
+            Common.PathwayStudentManualLaunch();
+        }
+
         public void AboutDialog()
         {
             var aboutPw = new AboutPw();

@@ -207,6 +207,7 @@ namespace SIL.PublishingSolution
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.studentManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -242,8 +243,8 @@ namespace SIL.PublishingSolution
             this.stylesGrid.AllowUserToAddRows = false;
             this.stylesGrid.AllowUserToDeleteRows = false;
             this.stylesGrid.AllowUserToResizeRows = false;
-            this.stylesGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.stylesGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.stylesGrid.BackgroundColor = System.Drawing.SystemColors.Control;
             this.stylesGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.stylesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -403,6 +404,7 @@ namespace SIL.PublishingSolution
             // 
             this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.contentsToolStripMenuItem,
+            this.studentManualToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.toolStripSplitButton1.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
@@ -418,22 +420,22 @@ namespace SIL.PublishingSolution
             // 
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
             this.contentsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.contentsToolStripMenuItem.Text = "Help";
             this.contentsToolStripMenuItem.Click += new System.EventHandler(this.contentsToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabInfo);
             this.tabControl1.Controls.Add(this.tabDisplay);
             this.tabControl1.Controls.Add(this.tabMobile);
@@ -497,8 +499,8 @@ namespace SIL.PublishingSolution
             // 
             // txtApproved
             // 
-            this.txtApproved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtApproved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtApproved.Enabled = false;
             this.txtApproved.Location = new System.Drawing.Point(72, 221);
             this.txtApproved.MaxLength = 10;
@@ -519,8 +521,8 @@ namespace SIL.PublishingSolution
             // 
             // btnApproved
             // 
-            this.btnApproved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnApproved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApproved.Location = new System.Drawing.Point(238, 250);
             this.btnApproved.Name = "btnApproved";
             this.btnApproved.Size = new System.Drawing.Size(24, 20);
@@ -553,8 +555,8 @@ namespace SIL.PublishingSolution
             // 
             // txtComment
             // 
-            this.txtComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtComment.Location = new System.Drawing.Point(72, 141);
             this.txtComment.MaxLength = 250;
             this.txtComment.Multiline = true;
@@ -577,8 +579,8 @@ namespace SIL.PublishingSolution
             // 
             // txtDesc
             // 
-            this.txtDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDesc.Location = new System.Drawing.Point(72, 44);
             this.txtDesc.MaxLength = 250;
             this.txtDesc.Multiline = true;
@@ -601,8 +603,8 @@ namespace SIL.PublishingSolution
             // 
             // txtName
             // 
-            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.Location = new System.Drawing.Point(72, 21);
             this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
@@ -693,8 +695,8 @@ namespace SIL.PublishingSolution
             // ddlPageNumber
             // 
             this.ddlPageNumber.AccessibleName = "ddlPageNumber";
-            this.ddlPageNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlPageNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlPageNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlPageNumber.FormattingEnabled = true;
             this.ddlPageNumber.Location = new System.Drawing.Point(93, 283);
@@ -706,8 +708,8 @@ namespace SIL.PublishingSolution
             // ddlFileProduceDict
             // 
             this.ddlFileProduceDict.AccessibleName = "";
-            this.ddlFileProduceDict.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlFileProduceDict.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlFileProduceDict.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlFileProduceDict.FormattingEnabled = true;
             this.ddlFileProduceDict.Location = new System.Drawing.Point(93, 354);
@@ -730,8 +732,8 @@ namespace SIL.PublishingSolution
             // ddlVerticalJustify
             // 
             this.ddlVerticalJustify.AccessibleName = "ddlPageColumn";
-            this.ddlVerticalJustify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlVerticalJustify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlVerticalJustify.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlVerticalJustify.FormattingEnabled = true;
             this.ddlVerticalJustify.Location = new System.Drawing.Point(93, 163);
@@ -753,8 +755,8 @@ namespace SIL.PublishingSolution
             // ddlSense
             // 
             this.ddlSense.AccessibleName = "ddlPageColumn";
-            this.ddlSense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlSense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlSense.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlSense.FormattingEnabled = true;
             this.ddlSense.Location = new System.Drawing.Point(93, 378);
@@ -776,8 +778,8 @@ namespace SIL.PublishingSolution
             // ddlPicture
             // 
             this.ddlPicture.AccessibleName = "ddlPageColumn";
-            this.ddlPicture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlPicture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlPicture.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlPicture.FormattingEnabled = true;
             this.ddlPicture.Location = new System.Drawing.Point(93, 187);
@@ -809,8 +811,8 @@ namespace SIL.PublishingSolution
             // ddlLeading
             // 
             this.ddlLeading.AccessibleName = "ddlPageColumn";
-            this.ddlLeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlLeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlLeading.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlLeading.FormattingEnabled = true;
             this.ddlLeading.Location = new System.Drawing.Point(93, 211);
@@ -822,8 +824,8 @@ namespace SIL.PublishingSolution
             // ddlRunningHead
             // 
             this.ddlRunningHead.AccessibleName = "ddlPageColumn";
-            this.ddlRunningHead.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlRunningHead.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlRunningHead.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlRunningHead.FormattingEnabled = true;
             this.ddlRunningHead.Location = new System.Drawing.Point(93, 259);
@@ -845,8 +847,8 @@ namespace SIL.PublishingSolution
             // ddlRules
             // 
             this.ddlRules.AccessibleName = "ddlPageColumn";
-            this.ddlRules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlRules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlRules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlRules.FormattingEnabled = true;
             this.ddlRules.Location = new System.Drawing.Point(93, 306);
@@ -868,8 +870,8 @@ namespace SIL.PublishingSolution
             // ddlFontSize
             // 
             this.ddlFontSize.AccessibleName = "ddlPageColumn";
-            this.ddlFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlFontSize.FormattingEnabled = true;
             this.ddlFontSize.Location = new System.Drawing.Point(93, 330);
@@ -1016,8 +1018,8 @@ namespace SIL.PublishingSolution
             // ddlJustified
             // 
             this.ddlJustified.AccessibleName = "ddlPageColumn";
-            this.ddlJustified.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlJustified.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlJustified.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlJustified.FormattingEnabled = true;
             this.ddlJustified.Location = new System.Drawing.Point(93, 138);
@@ -1040,8 +1042,8 @@ namespace SIL.PublishingSolution
             // ddlPageColumn
             // 
             this.ddlPageColumn.AccessibleName = "ddlPageColumn";
-            this.ddlPageColumn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlPageColumn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlPageColumn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlPageColumn.FormattingEnabled = true;
             this.ddlPageColumn.Location = new System.Drawing.Point(93, 90);
@@ -1064,8 +1066,8 @@ namespace SIL.PublishingSolution
             // ddlPagePageSize
             // 
             this.ddlPagePageSize.AccessibleName = "ddlPagePageSize";
-            this.ddlPagePageSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlPagePageSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlPagePageSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlPagePageSize.FormattingEnabled = true;
             this.ddlPagePageSize.Location = new System.Drawing.Point(93, 11);
@@ -1111,8 +1113,8 @@ namespace SIL.PublishingSolution
             // ddlLanguage
             // 
             this.ddlLanguage.AccessibleName = "";
-            this.ddlLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlLanguage.FormattingEnabled = true;
             this.ddlLanguage.Location = new System.Drawing.Point(112, 162);
@@ -1133,8 +1135,8 @@ namespace SIL.PublishingSolution
             // 
             // lblMobileOptionsSection
             // 
-            this.lblMobileOptionsSection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMobileOptionsSection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMobileOptionsSection.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.lblMobileOptionsSection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMobileOptionsSection.Location = new System.Drawing.Point(7, 52);
@@ -1146,8 +1148,8 @@ namespace SIL.PublishingSolution
             // 
             // lblGoBibleDescription
             // 
-            this.lblGoBibleDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblGoBibleDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lblGoBibleDescription.Location = new System.Drawing.Point(48, 16);
             this.lblGoBibleDescription.Name = "lblGoBibleDescription";
             this.lblGoBibleDescription.Size = new System.Drawing.Size(216, 26);
@@ -1177,8 +1179,8 @@ namespace SIL.PublishingSolution
             // ddlRedLetter
             // 
             this.ddlRedLetter.AccessibleName = "";
-            this.ddlRedLetter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlRedLetter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlRedLetter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlRedLetter.FormattingEnabled = true;
             this.ddlRedLetter.Location = new System.Drawing.Point(112, 106);
@@ -1200,8 +1202,8 @@ namespace SIL.PublishingSolution
             // ddlFiles
             // 
             this.ddlFiles.AccessibleName = "";
-            this.ddlFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlFiles.FormattingEnabled = true;
             this.ddlFiles.Location = new System.Drawing.Point(112, 78);
@@ -1295,8 +1297,8 @@ namespace SIL.PublishingSolution
             // 
             // ddlReferences
             // 
-            this.ddlReferences.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlReferences.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlReferences.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlReferences.FormattingEnabled = true;
             this.ddlReferences.Location = new System.Drawing.Point(147, 264);
@@ -1336,8 +1338,8 @@ namespace SIL.PublishingSolution
             // 
             // ddlNonSILFont
             // 
-            this.ddlNonSILFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlNonSILFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlNonSILFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlNonSILFont.FormattingEnabled = true;
             this.ddlNonSILFont.Location = new System.Drawing.Point(138, 391);
@@ -1348,8 +1350,8 @@ namespace SIL.PublishingSolution
             // 
             // lblEpubFontsSection
             // 
-            this.lblEpubFontsSection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEpubFontsSection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEpubFontsSection.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.lblEpubFontsSection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEpubFontsSection.Location = new System.Drawing.Point(7, 292);
@@ -1361,8 +1363,8 @@ namespace SIL.PublishingSolution
             // 
             // ddlMissingFont
             // 
-            this.ddlMissingFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlMissingFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlMissingFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlMissingFont.FormattingEnabled = true;
             this.ddlMissingFont.Location = new System.Drawing.Point(138, 364);
@@ -1373,8 +1375,8 @@ namespace SIL.PublishingSolution
             // 
             // ddlDefaultAlignment
             // 
-            this.ddlDefaultAlignment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlDefaultAlignment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlDefaultAlignment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlDefaultAlignment.FormattingEnabled = true;
             this.ddlDefaultAlignment.Location = new System.Drawing.Point(147, 130);
@@ -1394,8 +1396,8 @@ namespace SIL.PublishingSolution
             // 
             // lblEputLayoutSection
             // 
-            this.lblEputLayoutSection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEputLayoutSection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEputLayoutSection.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.lblEputLayoutSection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEputLayoutSection.Location = new System.Drawing.Point(7, 52);
@@ -1425,8 +1427,8 @@ namespace SIL.PublishingSolution
             // 
             // ddlDefaultFont
             // 
-            this.ddlDefaultFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlDefaultFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlDefaultFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlDefaultFont.FormattingEnabled = true;
             this.ddlDefaultFont.Location = new System.Drawing.Point(138, 418);
@@ -1455,8 +1457,8 @@ namespace SIL.PublishingSolution
             // 
             // chkIncludeFontVariants
             // 
-            this.chkIncludeFontVariants.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkIncludeFontVariants.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.chkIncludeFontVariants.AutoSize = true;
             this.chkIncludeFontVariants.Location = new System.Drawing.Point(51, 341);
             this.chkIncludeFontVariants.Name = "chkIncludeFontVariants";
@@ -1468,8 +1470,8 @@ namespace SIL.PublishingSolution
             // 
             // lblEpubDescription
             // 
-            this.lblEpubDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEpubDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEpubDescription.Location = new System.Drawing.Point(48, 16);
             this.lblEpubDescription.Name = "lblEpubDescription";
             this.lblEpubDescription.Size = new System.Drawing.Size(216, 29);
@@ -1478,8 +1480,8 @@ namespace SIL.PublishingSolution
             // 
             // chkEmbedFonts
             // 
-            this.chkEmbedFonts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkEmbedFonts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.chkEmbedFonts.AutoSize = true;
             this.chkEmbedFonts.Location = new System.Drawing.Point(51, 318);
             this.chkEmbedFonts.Name = "chkEmbedFonts";
@@ -1500,8 +1502,8 @@ namespace SIL.PublishingSolution
             // 
             // ddlTocLevel
             // 
-            this.ddlTocLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlTocLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlTocLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlTocLevel.FormattingEnabled = true;
             this.ddlTocLevel.Location = new System.Drawing.Point(118, 210);
@@ -1569,8 +1571,8 @@ namespace SIL.PublishingSolution
             // 
             // ddlChapterNumbers
             // 
-            this.ddlChapterNumbers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlChapterNumbers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlChapterNumbers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlChapterNumbers.FormattingEnabled = true;
             this.ddlChapterNumbers.Location = new System.Drawing.Point(147, 237);
@@ -1945,8 +1947,8 @@ namespace SIL.PublishingSolution
             // 
             // picPreview
             // 
-            this.picPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.picPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.picPreview.Location = new System.Drawing.Point(3, 24);
             this.picPreview.Name = "picPreview";
             this.picPreview.Size = new System.Drawing.Size(260, 352);
@@ -2336,6 +2338,13 @@ namespace SIL.PublishingSolution
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // studentManualToolStripMenuItem
+            // 
+            this.studentManualToolStripMenuItem.Name = "studentManualToolStripMenuItem";
+            this.studentManualToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.studentManualToolStripMenuItem.Text = "Student &Manual";
+            this.studentManualToolStripMenuItem.Click += new System.EventHandler(this.studentManualToolStripMenuItem_Click);
+            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2571,5 +2580,6 @@ namespace SIL.PublishingSolution
         private CheckBox chkIncludeImage;
         private LinkLabel lnkLblUrl;
         private Label lblProjectUrl;
+        private ToolStripMenuItem studentManualToolStripMenuItem;
     }
 }
