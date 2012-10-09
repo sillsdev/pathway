@@ -1,4 +1,3 @@
-
 *.suo
 *.chw
 *.msi
@@ -8,6 +7,7 @@
 *.pidb
 *.resources
 *.userprefs
+./pathway_*
 pathway/_*
 pathway/Releases
 pathway/bin
@@ -15,13 +15,11 @@ pathway/debian/files
 pathway/debian/pathway-etc/values.xml
 pathway/debian/pathway.*
 pathway/debian/pathway/*
-pathway_*
 pathway/XeLaTexConvert/debian/files
 pathway/XeLaTexConvert/debian/pathway-xelatex-etc/values.xml
 pathway/XeLaTexConvert/debian/pathway-xelatex.*
 pathway/XeLaTexConvert/debian/pathway-xelatex/*
 pathway/pathway-xelatex_*
-
 pathway/ApplyXslt/bin/*
 pathway/ApplyXslt/obj/*
 pathway/BookletBuilder/bin/*
@@ -97,7 +95,6 @@ pathway/YouVersionConvert/obj/*
 pathway/epubConvert/bin/*
 pathway/epubConvert/obj/*
 pathway/epubValidator/*
-
 pathway/Test/ApplyXslt/TestFiles/output/*
 pathway/Test/Build/TestFiles/output/*
 pathway/Test/ConfigurationTool/TestFiles/output/*
@@ -114,7 +111,6 @@ pathway/Test/WordPressConvert/TestFiles/output/*
 pathway/Test/XeLatex/TestFiles/output/*
 pathway/Test/XhtmlExport/TestFiles/output/*
 pathway/Test/epubConvert/TestFiles/output/*
-
 pathway/Test/ConfigurationTool/TestFiles/input/*
 pathway/Test/Files/*
 pathway/Test/PsTool/TestFiles/InputFiles/DestinationFolder/*
