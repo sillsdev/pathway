@@ -467,7 +467,7 @@ namespace SIL.Tool
             //For ParaText Path.
             if (fromPath == string.Empty)
             {
-                if (Common.UnixVersionCheck())
+                if (!Common.UnixVersionCheck())
                 {
                     string databaseNamePara = databaseName; // "NKOu1"; // todo substitute for database name
                     string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\ScrChecks\1.0\Settings_Directory";
