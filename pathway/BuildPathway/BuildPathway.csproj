@@ -425,7 +425,7 @@
   <Target Name="BeforeBuild">
     <Copy SourceFiles="@(ConfigurationTool)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(Plugin)" DestinationFolder="Files\ConfigurationTool\" />
-    <Copy SourceFiles="@(GhostScript)" DestinationFolder="Files\ConfigurationTool\" />
+    <!-- Copy SourceFiles="@(GhostScript)" DestinationFolder="Files\ConfigurationTool\" /-->
     <Copy SourceFiles="@(Icu)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BatchProcess)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(LiftPrepare)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
@@ -483,7 +483,7 @@
     <AllFileDirs Include="Files\**" />
     <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
-    <GhostScript Include="..\ThirdParty\gsdll32.dll" />
+    <!-- GhostScript Include="..\ThirdParty\gsdll32.dll" / -->
     <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
     <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
