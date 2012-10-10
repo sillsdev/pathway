@@ -467,7 +467,7 @@ namespace SIL.Tool
             //For ParaText Path.
             if (fromPath == string.Empty)
             {
-                if (!Common.UnixVersionCheck())
+                if (Common.UnixVersionCheck())
                 {
                     string databaseNamePara = databaseName; // "NKOu1"; // todo substitute for database name
                     string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\ScrChecks\1.0\Settings_Directory";
@@ -527,10 +527,11 @@ namespace SIL.Tool
                 {
                     string dataPath = Path.GetDirectoryName(src);
                     fileName = Path.GetFileName(src); // para + database + fileName
-                    string flexPict = PathCombine(dataPath, fileName);
-                    if (File.Exists(flexPict))
+                    dataPath = Path.Combine(dataPath, databaseName);
+                    string pictureFileName = PathCombine(dataPath, fileName);
+                    if (File.Exists(pictureFileName))
                     {
-                        fromPath = flexPict;
+                        fromPath = pictureFileName;
                     }
                     else
                     {
@@ -538,11 +539,11 @@ namespace SIL.Tool
                         // Note: The converted jpg files are stored under figures folder.
 
                         // para + database + figures(folder) + fileName
-                        flexPict = PathCombine(dataPath, PathCombine("figures", fileName));
-                        string flexJPGPath = flexPict;
+                        pictureFileName = PathCombine(dataPath, PathCombine("figures", fileName));
+                        string flexJPGPath = pictureFileName;
                         if (Path.GetExtension(flexJPGPath).ToLower() != "jpg") // jpg files need no conversion
                         {
-                            flexJPGPath = Path.ChangeExtension(flexPict, "jpg");
+                            flexJPGPath = Path.ChangeExtension(pictureFileName, "jpg");
                         }
                         if (File.Exists(flexJPGPath))
                         {
@@ -550,25 +551,25 @@ namespace SIL.Tool
                         }
                         else
                         {
-                            if (File.Exists(flexPict))
+                            if (File.Exists(pictureFileName))
                             {
-                                fromPath = flexPict;
+                                fromPath = pictureFileName;
                             }
                             else
                             {
                                 // para + database + local(folder) + figures(folder) + fileName
-                                flexPict = PathCombine(dataPath, PathCombine("local", PathCombine("figures", fileName)));
-                                if (File.Exists(flexPict))
+                                pictureFileName = PathCombine(dataPath, PathCombine("local", PathCombine("figures", fileName)));
+                                if (File.Exists(pictureFileName))
                                 {
-                                    fromPath = flexPict;
+                                    fromPath = pictureFileName;
                                 }
                                 else
                                 {
                                     // para + database + fileName with exact sourceFolder path
-                                    flexPict = PathCombine(dataPath, src);
-                                    if (File.Exists(flexPict))
+                                    pictureFileName = PathCombine(dataPath, src);
+                                    if (File.Exists(pictureFileName))
                                     {
-                                        fromPath = flexPict;
+                                        fromPath = pictureFileName;
                                     }
                                 }
                             }
