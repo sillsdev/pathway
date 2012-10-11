@@ -425,7 +425,7 @@
   <Target Name="BeforeBuild">
     <Copy SourceFiles="@(ConfigurationTool)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(Plugin)" DestinationFolder="Files\ConfigurationTool\" />
-    <Copy SourceFiles="@(GhostScript)" DestinationFolder="Files\ConfigurationTool\" />
+    <!-- Copy SourceFiles="@(GhostScript)" DestinationFolder="Files\ConfigurationTool\" /-->
     <Copy SourceFiles="@(Icu)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BatchProcess)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(LiftPrepare)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
@@ -483,7 +483,7 @@
     <AllFileDirs Include="Files\**" />
     <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
-    <GhostScript Include="..\ThirdParty\gsdll32.dll" />
+    <!-- GhostScript Include="..\ThirdParty\gsdll32.dll" / -->
     <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
     <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
@@ -516,8 +516,8 @@
     <FwVersion Include="FieldworksVersions.txt" />
     <BteHelpFile Include="Pathway_Configuration_Tool_BTE.chm" />
     <SeHelpFile Include="Pathway_Configuration_Tool_SE.chm" />
-    <BteStudent Include="Pathway_Student_Manual_BTE.doc" />
-    <SeStudent Include="Pathway_Student_Manual_SE.doc" />
+    <BteStudent Include="Pathway_Student_Manual_BTE.pdf" />
+    <SeStudent Include="Pathway_Student_Manual_SE.pdf" />
     <License Include="License.rtf" />
     <Readme Include="ReadMePw.rtf" />
     <AllSettings Include="..\PsSupport\DictionaryStyleSettings.xml" />

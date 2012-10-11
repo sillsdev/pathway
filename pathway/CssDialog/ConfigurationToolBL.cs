@@ -276,7 +276,16 @@ namespace SIL.PublishingSolution
                     string result = GetValue(srchKey, key, "false");
                     if (result.IndexOf("page") > 0)
                     {
-                        return pageDict[srchKey];
+                        string pageNumberValue = pageDict[srchKey];
+                        if (Common.UnixVersionCheck())
+                        {
+                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
+                                return pageDict[srchKey];
+                        }
+                        else
+                        {
+                            return pageDict[srchKey];
+                        }
                     }
                 }
                 return defaultValue;
@@ -946,6 +955,10 @@ namespace SIL.PublishingSolution
             cTool.DdlJustified.SelectedItem = JustifyUI;
             cTool.DdlPagePageSize.SelectedItem = PageSize;
             cTool.DdlRunningHead.SelectedItem = RunningHeader;
+
+            string pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+            DdlRunningHeadSelectedIndexChangedBl(pageType);
+
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
             cTool.DdlSense.SelectedItem = Sense;
@@ -4137,6 +4150,11 @@ namespace SIL.PublishingSolution
             }
         }
 
+        public void StudentManual()
+        {
+            Common.PathwayStudentManualLaunch();
+        }
+
         public void AboutDialog()
         {
             var aboutPw = new AboutPw();
@@ -4367,6 +4385,15 @@ namespace SIL.PublishingSolution
             catch { }
         }
         
+        public void ddlPageNumber_SelectedIndexChange()
+        {
+            if (_screenMode == ScreenMode.Edit)
+            {
+                SetModifyMode(true);
+                ShowCssSummary();
+                WriteCss();
+            }
+        }
 
         #endregion
     }

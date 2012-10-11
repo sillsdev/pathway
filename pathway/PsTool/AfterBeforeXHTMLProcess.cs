@@ -703,8 +703,7 @@ namespace SIL.PublishingSolution
             {
                 if (_parentStyleName.Trim().Length == 0) return styleName;
 
-                string newStyleName = styleName + Common.SepParent + _parentStyleName;
-                return newStyleName;
+                return styleName + Common.SepParent + _parentStyleName;
             }
 
             if (styleName == "headword") return styleName;

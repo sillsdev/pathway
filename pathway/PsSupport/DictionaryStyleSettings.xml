@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="21">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="22">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -146,7 +146,7 @@
       <option name="Top Right Margin" file="PageNumber_TopRight.css" type="Every Page" />
       <option name="Top Center" file="PageNumber_TopCenter.css" type="Every Page" />
       <option name="Bottom Left Margin" file="PageNumber_BottomLeft.css" type="Every Page" />
-      <option name="Bottom Right Margin" file="PageNumber_BottomOutside.css" type="Every Page" />
+      <option name="Bottom Right Margin" file="PageNumber_BottomRight.css" type="Every Page" />
       <option name="Bottom Center" file="PageNumber_BottomCenter.css" type="Every Page" />
       <option name="None" file="PageNumber_None.css" type="Both" />
     </feature>

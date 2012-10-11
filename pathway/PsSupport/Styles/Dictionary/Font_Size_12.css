@@ -143,3 +143,8 @@
 .xhomographnumber { }
 .xlanguagetag     { }
 .xsensenumber     { font-size: 11pt; }
+ span { font-size: 12pt; }
+.LexEntry-publishStemComponentTarget-HeadWordRef{ font-size: 12pt; }
+.LexEntry-publishRootMinorPrimaryTarget-HeadWordRef { font-size: 12pt; }
+.LexEntry-publishStemMinorPrimaryTarget-HeadWordRef { font-size: 12pt; }
+

@@ -78,7 +78,7 @@ namespace SIL.PublishingSolution
         private string currentChapterNumber = string.Empty;
         private bool isIncludeImage = true;
         private bool isNoteTargetReferenceExists = false;
-
+        private bool _isUnixOS = false;
 
         //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
@@ -151,7 +151,7 @@ namespace SIL.PublishingSolution
             Debug.Assert(noXmlSpaceStream != null);
             _noXmlSpace.Load(XmlReader.Create(noXmlSpaceStream));
             _addDicTocHeads.Load(XmlReader.Create(UsersXsl("addDicTocHeads.xsl")));
-
+            _isUnixOS = Common.UnixVersionCheck();
             var myCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             var curdir = Environment.CurrentDirectory;
@@ -170,7 +170,7 @@ namespace SIL.PublishingSolution
 #endif
                 // basic setup
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
-                if (Common.UnixVersionCheck())
+                if (_isUnixOS)
                 {
                     Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
                 }
@@ -325,6 +325,12 @@ namespace SIL.PublishingSolution
                     var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
                     // EDB 10/20/2010 - TD-1629 - remove when merged CSS passes validation
                     // (note that the rev file uses a "FlexRev.css", not "main.css"
+
+                    if(_isUnixOS)
+                    {
+                        Common.RemoveDTDForLinuxProcess(revFile);
+                    }
+
                     Common.SetDefaultCSS(revFile, defaultCSS);
                     // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
                     Common.StreamReplaceInFile(revFile, "<ReversalIndexEntry_Self", "<span class='ReversalIndexEntry_Self'");
@@ -428,6 +434,12 @@ namespace SIL.PublishingSolution
                     string name = Path.GetFileNameWithoutExtension(file).Substring(0, 8);
                     string substring = Path.GetFileNameWithoutExtension(file).Substring(8);
                     string dest = Common.PathCombine(contentFolder, name + substring.PadLeft(6, '0') + ".xhtml");
+
+                    if(_isUnixOS)
+                    {
+                        Common.RemoveDTDForLinuxProcess(file);
+                    }
+
                     File.Move(file, dest);
                     // split the file into smaller pieces if needed
                     List<string> files = SplitBook(dest);
@@ -2065,7 +2077,7 @@ namespace SIL.PublishingSolution
             }
             return brokenRelativeHrefIds;
         }
-        
+
         private void FixRelativeHyperlinks(string contentFolder, InProcess inProcess)
         {
             string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
@@ -2887,7 +2899,7 @@ namespace SIL.PublishingSolution
         private string CleanupSpans(string text)
         {
             var sb = new StringBuilder(text);
-            sb.Replace("lang", "xml:lang");
+            sb.Replace(" lang", " xml:lang");
             sb.Replace("xmlns=\"http://www.w3.org/1999/xhtml\"", "");
             return sb.ToString();
         }

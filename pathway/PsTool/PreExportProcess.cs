@@ -307,6 +307,9 @@ namespace SIL.Tool
         /// <param name="outputFolder">Content folder the resulting file is saved to.</param>
         private void CreateCoverImage(string outputFolder)
         {
+
+            bool isUnixOS = Common.UnixVersionCheck();
+
             if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("false")) { return; }
             // open up the appropriate image for processing
             string strImageFile = Param.GetMetadataValue(Param.CoverPageFilename).Trim();
@@ -351,13 +354,25 @@ namespace SIL.Tool
             SizeF size = g.MeasureString(strTitle, badgeFont, (bmp.Width - 20));
             int width = (int)Math.Ceiling(size.Width);
             int height = (int)Math.Ceiling(size.Height);
+
+            if (isUnixOS)
+            {
+                width += 80;
+                height -= 50;
+                badgeFont = new Font("Times New Roman", 36);
+                size = g.MeasureString(strTitle, badgeFont, (bmp.Width - 20));
+                size.Height += 20;
+            }
+
             // create the bounding rect, centered horizontally on the image
             Rectangle rect = new Rectangle(((bmp.Size.Width / 2) - (width / 2)), 100, width, height);
             // draw the badge (rect and string)
             g.FillRectangle(Brushes.Brown, rect);
             g.DrawRectangle(Pens.Gold, rect);
+
             g.DrawString(strTitle, badgeFont, Brushes.Gold,
-                    new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width / 2)), 100f), size), strFormat);
+                new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width / 2)), 100f), size), strFormat);
+
             // save this puppy
             string strCoverImageFile = Path.Combine(outputFolder, "cover.png");
             bmp.Save(strCoverImageFile, System.Drawing.Imaging.ImageFormat.Png);
@@ -462,7 +477,13 @@ namespace SIL.Tool
             {
                 File.Delete(destFile);
             }
-            File.Copy(strCopyrightFile, destFile);
+
+            if (Common.UnixVersionCheck())
+            {
+                Common.RemoveDTDForLinuxProcess(strCopyrightFile);
+            }
+
+            File.Copy(strCopyrightFile, destFile, true);
             Common.StreamReplaceInFile(destFile, "div id='LanguageInformation' class='Front_Matter' dir='ltr'>", GetLanguageInfo());
             Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>", GetCopyrightInfo());
             if (_projInfo.ProjectInputType.ToLower() != "dictionary")
@@ -2754,7 +2775,8 @@ namespace SIL.Tool
                             }
                             else if (className == "fontSize")
                             {
-                                projInfo.DefaultFontSize = float.Parse(node.Attributes["content"].Value);
+                                if (float.Parse(node.Attributes["content"].Value) < projInfo.DefaultFontSize)
+                                    projInfo.DefaultFontSize = float.Parse(node.Attributes["content"].Value);
                             }
                         }
                     }
