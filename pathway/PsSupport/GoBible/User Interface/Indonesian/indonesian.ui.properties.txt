@@ -36,6 +36,7 @@ UI-Off: Off
 UI-OK: OK
 UI-Old-Testament: Perjanjian Lama
 UI-On: On
+UI-Options: Pilihan
 UI-Other-Letters: Surat-surat Lain
 UI-Pauls-Letters: Surat-surat Paulus
 UI-Phone-Number: Nomor Telepon
