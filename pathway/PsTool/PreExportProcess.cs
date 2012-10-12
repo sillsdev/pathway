@@ -1697,6 +1697,7 @@ namespace SIL.Tool
             xdoc.Load(ProcessedXhtml);
             //XmlNode bookNode1 = xdoc.DocumentElement;
             string xPath = "//xhtml:div[@class='scrBook']";
+            string bookName = string.Empty;
             //XmlNodeList scrBookList = bookNode1.SelectNodes(xPath, namespaceManager);
             XmlNodeList scrBookList = xdoc.SelectNodes(xPath, namespaceManager);
             if (scrBookList == null) return;
@@ -1708,12 +1709,21 @@ namespace SIL.Tool
                 xPath = ".//xhtml:span[@class='Chapter_Number']";
                 XmlNodeList chapterNodeList = scrBookNode.SelectNodes(xPath, namespaceManager);
 
+                if (bookNode != null)
+                {
+                    bookName = bookNode.InnerText;
+                    Regex regex = new Regex(@"[^a-zA-Z0-9\s]", (RegexOptions) 0);
+                    bookName = regex.Replace(bookName, "");
+                }
+
                 foreach (XmlNode chapterNode in chapterNodeList)
                 {
                     string chapterNumber = chapterNode.InnerText;
                     XmlAttribute attribute = xdoc.CreateAttribute("id");
                     if (bookNode != null)
-                        attribute.Value = "id_" + bookNode.InnerText + "_" + "Chapter" + chapterNumber;
+                    {
+                        attribute.Value = "id_" + bookName + "_" + "Chapter" + chapterNumber;
+                    }
                     if (chapterNode.Attributes != null) chapterNode.Attributes.Append(attribute);
                 }
 
