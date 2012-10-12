@@ -1087,7 +1087,8 @@ namespace SIL.Tool
                     frontMatterXHTMLContent = frontMatterXHTMLContent + titleNode.OuterXml;
                     if (_includeTOCPage)
                     {
-                        frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
+                        //frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
+                        frontMatterXHTMLContent = frontMatterXHTMLContent;
                     }
                     _projInfo.IsFrontMatterEnabled = true;
                     frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
