@@ -97,6 +97,7 @@ namespace Test.PsTool
             CopyToOutput(input, output);
             string expected = GetFileNameWithExpectedPath(fileName);
             xmldoc.Load(output);
+            preExportProcess = new PreExportProcess();
             preExportProcess.ParagraphVerserSetUp(xmldoc);
             xmldoc.Save(output);
             TextFileAssert.AreEqual(expected, output);
