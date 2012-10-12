@@ -2229,7 +2229,7 @@ namespace SIL.PublishingSolution
         private void RemoveSpanVerseNumberNodeInXhtmlFile(string fileName)
         {
             //Removed NoteTargetReference tag from XHTML file
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(fileName);
