@@ -260,10 +260,11 @@ span {
     margin-left: 0pt;
     padding-bottom: 12pt;
     padding-top: 36pt;
+	page-break-after:avoid;
+    orphans:5;
 }
 .Title_Secondary {
     display: block;
-	page-break-before: always;
 }
 .Verse_Number {
     font-size:6pt;
