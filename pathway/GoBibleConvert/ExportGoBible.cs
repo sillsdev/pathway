@@ -128,7 +128,7 @@ namespace SIL.PublishingSolution
                 inProcess.Close();
                 Cursor.Current = myCursor;
                 inProcess.PerformStep();
-                string jarFile = Path.Combine(processFolder, GetInfo(Param.Title) + ".jar");
+                string jarFile = Path.Combine(processFolder, NoSp(GetInfo(Param.Title)) + ".jar");
 
                 if (File.Exists(jarFile))
                 {
@@ -152,6 +152,11 @@ namespace SIL.PublishingSolution
                 inProcess.Close();
             }
             return success;
+        }
+
+        private static string NoSp(string p)
+        {
+            return string.Concat(p.Split());
         }
 
         private static void UIPropertiesCopyToTempFolder(string goBibleCreatorPath, string[] filePaths)
@@ -339,12 +344,17 @@ namespace SIL.PublishingSolution
             return DuplicateBooks.Count > 0;
         }
 
+        /// <summary>
+        /// Uses Java to create GoBible application
+        /// </summary>
+        /// <param name="goBibleCreatorPath"></param>
         protected void BuildApplication(string goBibleCreatorPath)
         {
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
             var creatorFullPath = Path.Combine(goBibleCreatorPath, Creator);
             var progFolder = SubProcess.GetLocation(prog);
+            progFolder = JavaProgFolder(progFolder);
             var progFullName = Common.PathCombine(progFolder, prog);
             if (progFullName.EndsWith(".exe"))
             {
@@ -353,6 +363,35 @@ namespace SIL.PublishingSolution
             var args = string.Format(@"-Xmx128m -jar ""{0}"" ""{1}""", creatorFullPath, collectionFullName);
             SubProcess.RedirectOutput = RedirectOutputFileName;
             SubProcess.Run(processFolder, progFullName, args, true);
+        }
+
+        /// <summary>
+        /// Check for the Java program in it's normal location on Windows
+        /// </summary>
+        /// <param name="progFolder">path to Java program</param>
+        /// <returns>path to Java program</returns>
+        protected static string JavaProgFolder(string progFolder)
+        {
+            if (string.IsNullOrEmpty(progFolder))
+            {
+                var info = new DirectoryInfo("C:\\Program Files\\Java");
+                foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
+                {
+                    progFolder = Path.Combine(directoryInfo.FullName, "bin");
+                    if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                        break;
+                }
+                if (string.IsNullOrEmpty(progFolder))
+                {
+                    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
+                    {
+                        progFolder = Path.Combine(directoryInfo.FullName, "bin");
+                        if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                            break;
+                    }
+                }
+            }
+            return progFolder;
         }
 
         /// <summary>

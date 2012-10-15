@@ -106,35 +106,37 @@ namespace SIL.Tool
             // clean out the results of any previous runs
             LastError = String.Empty;
             ExitCode = 0;
-            // set the current directory
-            string theCurrent = Directory.GetCurrentDirectory();
-            Directory.SetCurrentDirectory(instPath);
-            Process p1 = new Process();
-            p1.StartInfo.FileName = name;
+            var info = new ProcessStartInfo(name)
+                           {
+                               CreateNoWindow = true,
+                               RedirectStandardOutput = !string.IsNullOrEmpty(RedirectOutput),
+                               RedirectStandardError = !string.IsNullOrEmpty(RedirectOutput),
+                               UseShellExecute = string.IsNullOrEmpty(RedirectOutput),
+                               WorkingDirectory = instPath
+                           };
             if (arg != null)
-                p1.StartInfo.Arguments = arg;
-            p1.StartInfo.RedirectStandardOutput = !string.IsNullOrEmpty(RedirectOutput);
-            p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
-            p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
-            p1.Start();
-            if (wait)
+                info.Arguments = arg;
+            using (Process p1 = Process.Start(info))
             {
-                if (p1.Id <= 0)
-                    throw new MissingSatelliteAssemblyException(name);
-                p1.WaitForExit();
+                if (wait)
+                {
+                    if (p1.Id <= 0)
+                        throw new MissingSatelliteAssemblyException(name);
+                    p1.WaitForExit();
+                    ExitCode = p1.ExitCode;
+                    if (!string.IsNullOrEmpty(RedirectOutput))
+                    {
+                        string result = p1.StandardOutput.ReadToEnd();
+                        LastError = p1.StandardError.ReadToEnd();
+                        result += LastError;
+                        StreamWriter streamWriter = new StreamWriter(RedirectOutput);
+                        streamWriter.Write(result);
+                        streamWriter.Close();
+                        RedirectOutput = null;
+                    }
+                }
+                p1.Close();
             }
-            ExitCode = p1.ExitCode;
-            if (!string.IsNullOrEmpty(RedirectOutput))
-            {
-                string result = p1.StandardOutput.ReadToEnd();
-                LastError = p1.StandardError.ReadToEnd();
-                result += LastError;
-                StreamWriter streamWriter = new StreamWriter(RedirectOutput);
-                streamWriter.Write(result);
-                streamWriter.Close();
-                RedirectOutput = null;
-            }
-            Directory.SetCurrentDirectory(theCurrent);
         }
         #endregion RunProcess
 
