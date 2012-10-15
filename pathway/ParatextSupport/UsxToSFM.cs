@@ -224,7 +224,19 @@ namespace SIL.PublishingSolution
             bool isWritten = false;
             StringBuilder sb = new StringBuilder();
             string[] bridgeVerses = verseNumber.Split('-');
-            if (bridgeVerses.Length == 2)
+
+            bool isNumeric = true;
+            foreach (string bridgeVerseNo in bridgeVerses)
+            {
+                if (!Common.ValidateNumber(bridgeVerseNo))
+                {
+                    isNumeric = false;
+                    break;
+                }
+            }
+
+
+            if (bridgeVerses.Length == 2 && isNumeric)
             {
                 int verseFrom = int.Parse(bridgeVerses[0]);
 
@@ -264,6 +276,12 @@ namespace SIL.PublishingSolution
                 {
                     sb.AppendLine(_content.Trim() + EndText());
                 }
+                _sfmFile.Write(sb.ToString());
+                isWritten = true;
+            }
+            else if (isNumeric == false)
+            {
+                sb.AppendLine("\\" + _style + Space + verseNumber + Space + _content.Trim() + EndText());
                 _sfmFile.Write(sb.ToString());
                 isWritten = true;
             }
