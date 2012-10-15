@@ -2117,6 +2117,16 @@ namespace SIL.PublishingSolution
                     ReplaceAllBrokenHrefs(targetFile, dictHyperlinks);
                 }
             }
+            else
+            {
+                if (files.Length > 0)
+                {
+                    foreach (string targetFile in files)
+                    {
+                        RemoveSpanVerseNumberNodeInXhtmlFile(targetFile);
+                    }
+                }
+            }
         }
 
         /// <summary>
