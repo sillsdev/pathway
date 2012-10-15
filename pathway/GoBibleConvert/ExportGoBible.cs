@@ -353,8 +353,7 @@ namespace SIL.PublishingSolution
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
             var creatorFullPath = Path.Combine(goBibleCreatorPath, Creator);
-            var progFolder = SubProcess.GetLocation(prog);
-            progFolder = JavaProgFolder(progFolder);
+            var progFolder = SubProcess.JavaLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);
             if (progFullName.EndsWith(".exe"))
             {
@@ -363,35 +362,6 @@ namespace SIL.PublishingSolution
             var args = string.Format(@"-Xmx128m -jar ""{0}"" ""{1}""", creatorFullPath, collectionFullName);
             SubProcess.RedirectOutput = RedirectOutputFileName;
             SubProcess.Run(processFolder, progFullName, args, true);
-        }
-
-        /// <summary>
-        /// Check for the Java program in it's normal location on Windows
-        /// </summary>
-        /// <param name="progFolder">path to Java program</param>
-        /// <returns>path to Java program</returns>
-        protected static string JavaProgFolder(string progFolder)
-        {
-            if (string.IsNullOrEmpty(progFolder))
-            {
-                var info = new DirectoryInfo("C:\\Program Files\\Java");
-                foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
-                {
-                    progFolder = Path.Combine(directoryInfo.FullName, "bin");
-                    if (File.Exists(Path.Combine(progFolder, "java.exe")))
-                        break;
-                }
-                if (string.IsNullOrEmpty(progFolder))
-                {
-                    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
-                    {
-                        progFolder = Path.Combine(directoryInfo.FullName, "bin");
-                        if (File.Exists(Path.Combine(progFolder, "java.exe")))
-                            break;
-                    }
-                }
-            }
-            return progFolder;
         }
 
         /// <summary>

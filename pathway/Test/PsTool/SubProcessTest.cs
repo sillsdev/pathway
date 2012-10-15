@@ -36,7 +36,7 @@ namespace Test.PsTool
             string instPath = string.Empty;
             string name = string.Empty;
             bool wait = false;
-            Assert.Throws<ArgumentException>(
+            Assert.Throws<InvalidOperationException>(
                 delegate
                     {
                         SubProcess.Run(instPath, name, wait);
@@ -52,7 +52,7 @@ namespace Test.PsTool
         {
             string instPath = string.Empty;
             string name = string.Empty;
-            Assert.Throws<ArgumentException>(
+            Assert.Throws<InvalidOperationException>(
                 delegate
                     {
                         SubProcess.Run(instPath, name);
@@ -72,8 +72,9 @@ namespace Test.PsTool
             string arg = "-version";
             bool wait = true;
             const string EchoLog = "JavaVersion.log";
+            var progFolder = SubProcess.JavaLocation(name);
             SubProcess.RedirectOutput = EchoLog;
-            SubProcess.Run(instPath, name, arg, wait);
+            SubProcess.Run(instPath, Path.Combine(progFolder,name), arg, wait);
             string logFullName = Path.Combine(instPath, EchoLog);
             Assert.IsTrue(File.Exists(logFullName));
             File.Delete(logFullName);

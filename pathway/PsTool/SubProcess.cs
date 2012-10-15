@@ -129,7 +129,7 @@ namespace SIL.Tool
                         string result = p1.StandardOutput.ReadToEnd();
                         LastError = p1.StandardError.ReadToEnd();
                         result += LastError;
-                        StreamWriter streamWriter = new StreamWriter(RedirectOutput);
+                        StreamWriter streamWriter = new StreamWriter(Path.Combine(instPath, RedirectOutput));
                         streamWriter.Write(result);
                         streamWriter.Close();
                         RedirectOutput = null;
@@ -184,6 +184,37 @@ namespace SIL.Tool
                 return false;
         }
         #endregion ExistsOnPath(string name)
+
+        #region JavaLocation(name)
+        /// <summary>
+        /// Identify Java program location
+        /// </summary>
+        public static string JavaLocation(string name)
+        {
+            string progFolder = GetLocation(name);
+            if (string.IsNullOrEmpty(progFolder))
+            {
+                var info = new DirectoryInfo("C:\\Program Files\\Java");
+                foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
+                {
+                    progFolder = Path.Combine(directoryInfo.FullName, "bin");
+                    if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                        break;
+                }
+                if (string.IsNullOrEmpty(progFolder))
+                {
+                    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
+                    {
+                        progFolder = Path.Combine(directoryInfo.FullName, "bin");
+                        if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                            break;
+                    }
+                }
+            }
+            return progFolder;
+        }
+
+        #endregion JavaLocation(name)
 
         #region GetLocation(string name)
         public static string GetLocation(string name)
