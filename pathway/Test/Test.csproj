@@ -279,6 +279,9 @@
     <Compile Include="Build\FileComponentsTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolBLTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
+    <Compile Include="CssDialog\AboutPwTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CssDialog\BackendTest.cs" />
     <Compile Include="CssDialog\ExportThroughPathwayTest.cs">
       <SubType>Form</SubType>

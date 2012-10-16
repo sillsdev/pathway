@@ -784,9 +784,6 @@ namespace SIL.PublishingSolution
             string helpImproveCommand = Path.Combine(getApplicationPath, "HelpImprove.exe");
             string registryPath = "Software\\SIL\\Pathway";
 
-            if (Common.GetOsName().ToLower() == "windows7")
-                registryPath = "Software\\Wow6432Node\\SIL\\Pathway";
-
             if (File.Exists(helpImproveCommand))
                 Common.RunCommand(helpImproveCommand, string.Format("{0} {1} {2}", "204.93.172.30", registryPath, "HelpImprove"), 0);
         }
