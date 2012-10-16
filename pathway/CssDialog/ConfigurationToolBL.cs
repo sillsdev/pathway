@@ -3360,7 +3360,7 @@ namespace SIL.PublishingSolution
                     //break;
                 }
                 string val = control.Text;
-                if (_propertyValue[i++] != val)
+                if (_propertyValue.Count >= i && _propertyValue[i++] != val)
                 {
                     propertyModified = true;
                     break;
@@ -4051,7 +4051,17 @@ namespace SIL.PublishingSolution
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
             }
             //_redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
-            cTool.MinimumSize = new Size(497, 183);
+
+
+            if (Common.IsUnixOS())
+            {
+                cTool.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                cTool.MinimumSize = new Size(497, 183);
+            }
+
             cTool.LoadSettings();
             SetInputTypeButton();
             ShowInputTypeButton();
