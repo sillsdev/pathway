@@ -357,7 +357,7 @@ namespace SIL.PublishingSolution
                     splitFiles.AddRange(fileNameWithPath);
                 }
                 // add the total file count (so far) to the progress bar, so it's a little more accurate
-                inProcess.AddToMaximum(splitFiles.Count);
+                //inProcess.AddToMaximum(splitFiles.Count);
                 inProcess.SetStatus("Processing stylesheet information");
                 // get rid of styles that don't work with .epub
                 RemovePagedStylesFromCss(niceNameCSS);
@@ -2081,7 +2081,7 @@ namespace SIL.PublishingSolution
         private void FixRelativeHyperlinks(string contentFolder, InProcess inProcess)
         {
             string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
-            inProcess.AddToMaximum(files.Length);
+            //inProcess.AddToMaximum(files.Length);
             PreExportProcess preExport = new PreExportProcess();
             var dictHyperlinks = new Dictionary<string, string>();
             List<string> sourceList = new List<string>();
@@ -2715,7 +2715,7 @@ namespace SIL.PublishingSolution
         {
             var outFilename = Path.Combine(contentFolder, ReferencesFilename);
             var hrefs = FindBrokenRelativeHrefIds(outFilename);
-            inProcess.AddToMaximum(hrefs.Count + 1);
+            //inProcess.AddToMaximum(hrefs.Count + 1);
             var reader = new StreamReader(outFilename);
             var content = new StringBuilder();
             content.Append(reader.ReadToEnd());
