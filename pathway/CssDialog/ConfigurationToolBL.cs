@@ -718,6 +718,9 @@ namespace SIL.PublishingSolution
                         case "webftpfldrnme":
                             baseNode.Attributes["value"].Value = cTool.TxtWebFtpFldrNme.Text;
                             break;
+                        case "comment":
+                            baseNode.Attributes["value"].Value = cTool.TxtComment.Text;
+                            break;
                         default:
                             break;
                     }
@@ -1132,6 +1135,9 @@ namespace SIL.PublishingSolution
                                 break;
                             case "webftpfldrnme":
                                 cTool.TxtWebFtpFldrNme.Text = attribValue;
+                                break;
+                            case "comment":
+                                cTool.TxtComment.Text = attribValue;
                                 break;
                             default:
                                 break;
@@ -1679,6 +1685,9 @@ namespace SIL.PublishingSolution
                                 break;
                             case "webftpfldrnme":
                                 cTool.TxtWebFtpFldrNme.Text = attribValue;
+                                break;
+                            case "comment":
+                                cTool.TxtComment.Text = attribValue;
                                 break;
                             default:
                                 break;

@@ -693,6 +693,7 @@ namespace SIL.PublishingSolution
                     case "webadminsitenme":
                     case "webemailid":
                     case "webftpfldrnme":
+                    case "comment":
                         if (attribValue.Trim().Length == 0)
                         {
                             return false;
