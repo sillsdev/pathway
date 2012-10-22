@@ -2,7 +2,7 @@
 
 
 em {
-    font-weight: bold;
+    font-weight: normal;
     font-style: normal;
 }
 a {
@@ -16,7 +16,7 @@ td {
     padding: 8px;
 }
 h1 {
-    font-size: 150%;
+    font-size: 125%;
     margin-top: 1em;
     margin-bottom: 0;
 }
@@ -27,7 +27,7 @@ h1 {
     line-height: 125%;
 }
 h2 {
-    font-size: 125%;
+    font-size: 110%;
     margin-top: 1em;
     margin-bottom: 0;
 }
@@ -40,7 +40,7 @@ p {
     margin-bottom: 1em;
 }
 #Logo {
-    padding-top: 3em;
+    padding-top: 0.5em;
 }
 .Publisher {
     padding-top: 6em;
