@@ -116,6 +116,7 @@ namespace SIL.Tool
                            };
             if (arg != null)
                 info.Arguments = arg;
+            Debug.Print("Run: Filename: {0}", info.FileName);
             using (Process p1 = Process.Start(info))
             {
                 if (wait)
@@ -192,7 +193,7 @@ namespace SIL.Tool
         public static string JavaLocation(string name)
         {
             string progFolder = GetLocation(name);
-            if (string.IsNullOrEmpty(progFolder))
+            if (string.IsNullOrEmpty(progFolder) || !File.Exists(Path.Combine(progFolder, "java.exe")))
             {
                 var info = new DirectoryInfo("C:\\Program Files\\Java");
                 foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
