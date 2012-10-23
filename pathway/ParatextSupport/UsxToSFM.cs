@@ -231,8 +231,8 @@ namespace SIL.PublishingSolution
                 if (!Common.ValidateNumber(bridgeVerseNo))
                 {
                     isNumeric = false;
-                    break;
                 }
+                break;
             }
 
 

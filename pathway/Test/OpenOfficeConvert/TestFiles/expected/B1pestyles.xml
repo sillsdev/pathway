@@ -87,14 +87,14 @@
       <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="8pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="8pt" style:font-size-complex="8pt" text:display="prince-footnote" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
+      <style:paragraph-properties style:line-height-at-least="8pt" fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="8pt" style:font-size-complex="8pt" text:display="prince-footnote" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -112,7 +112,7 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="9pt" style:font-size-complex="9pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteCrossHYPHENReferenceParagraph_Line1_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
+      <style:paragraph-properties style:line-height-at-least="8pt" fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="8pt" style:font-size-complex="8pt" text:display="prince-footnote" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_NoteCrossHYPHENReferenceParagraph_Line1_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteCrossHYPHENReferenceParagraph_Line1_scrSection_columns_scrBook_scrBody">
@@ -194,7 +194,7 @@
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="11pt" />
     </style:style>
     <style:style style:name="NoteCrossHYPHENReferenceParagraph" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-spacing="8pt" fo:text-indent="0pt" fo:margin-left="0pt" />
+      <style:paragraph-properties style:line-height-at-least="8pt" fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="8pt" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="NoteCrossHYPHENReferenceParagraph..footnote-call" style:family="text" style:parent-style-name="none">
@@ -204,7 +204,7 @@
       <style:text-properties fo:font-size="8pt" fo:font-weight="700" fo:font-family="Charis SIL" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="NoteGeneralParagraph" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-spacing="8pt" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="8pt" />
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="8pt" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="NoteGeneralParagraph..footnote-call" style:family="text" style:parent-style-name="none">
