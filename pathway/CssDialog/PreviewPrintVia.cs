@@ -37,6 +37,7 @@ namespace SIL.PublishingSolution
         public string AttribPreviewFile1 = "previewfile1";
         public string AttribPreviewFile2 = "previewfile2";
         public string AttribCSSName = "file";
+        public string StyleName = "type";
 
         public string SelectedStyle = string.Empty;
 
@@ -105,6 +106,8 @@ namespace SIL.PublishingSolution
                 XmlAttribute previewFile1 = xml.Attributes[AttribPreviewFile1];
                 XmlAttribute previewFile2 = xml.Attributes[AttribPreviewFile2];
                 XmlAttribute cssFilename = xml.Attributes[AttribCSSName];
+                XmlAttribute styleType = xml.Attributes[StyleName];
+
                 string currentMedia = xml.ParentNode.Name;
                 XmlNode xmlDesc = xml.SelectSingleNode(ElementDesc);
                 string desc = string.Empty;
@@ -124,6 +127,7 @@ namespace SIL.PublishingSolution
                 row["previewFile2"] = previewFile2 != null && previewFile2.Value != null ? previewFile2.Value : string.Empty;
                 row["mediaType"] = currentMedia;
                 row["fileName"] = cssFilename != null && cssFilename.Value != null ? cssFilename.Value : string.Empty;
+                row["styleType"] = styleType != null && styleType.Value != null ? styleType.Value : string.Empty;
 
                 if (name != null && name.Value == SelectedStyle)
                 {
@@ -147,6 +151,7 @@ namespace SIL.PublishingSolution
                 grid.Columns[2].Visible = false; // Preview File 1
                 grid.Columns[3].Visible = false; // Preview File 2     
                 grid.Columns[5].Visible = false; // CSS Filename     
+                grid.Columns[6].Visible = false; // StyleType
             }
 
             if (grid.RowCount > 0)
@@ -230,6 +235,18 @@ namespace SIL.PublishingSolution
                          };
             table.Columns.Add(column);
 
+            // Create StyleType.
+            column = new DataColumn
+            {
+                DataType = Type.GetType("System.String"),
+                ColumnName = "StyleType",
+                Caption = "StyleType",
+                ReadOnly = false,
+                Unique = false,
+                MaxLength = 150
+            };
+            table.Columns.Add(column);
+
             DataSetForGrid.Tables.Add(table);
         }
 
@@ -277,6 +294,8 @@ namespace SIL.PublishingSolution
             if (page == 1)
             {
                 //CreatePreview();
+                if (grid.SelectedRows[0].Cells[6].Value.ToString().ToLower() == "custom")
+                    ShowPreview(ref _previewFileName1);
                 preview = _previewFileName1;
                 btnPrevious.Enabled = false;
                 btnNext.Enabled = true;
@@ -303,6 +322,99 @@ namespace SIL.PublishingSolution
 
         }
 
+        public void ShowPreview(ref string _previewFileName1)
+        {
+            try
+            {
+                CreatePreviewFile(ref _previewFileName1);
+            }
+            catch { }
+        }
+
+        private void CreatePreviewFile(ref string _previewFileName1)
+        {
+            try
+            {
+                string settingPath = Path.GetDirectoryName(Param.SettingPath);
+                string inputPath = Common.PathCombine(settingPath, "Styles");
+                inputPath = Common.PathCombine(inputPath, Param.Value["InputType"]);
+                string stylenamePath = Common.PathCombine(inputPath, "Preview");
+                string selectedTypeValue = grid.SelectedRows[0].Cells[6].Value.ToString();
+                string _loadType = Param.Value["InputType"];// "Dictionary";
+                if (selectedTypeValue != "standard")
+                {
+                    bool isPreviewFileExist = File.Exists(_previewFileName1);
+
+                    if (isPreviewFileExist == false)
+                    {
+                        string FileName = grid.SelectedRows[0].Cells[5].Value.ToString();
+                        string cssMergeFullFileName = Param.StylePath(FileName);
+                        string PsSupportPath = Path.Combine(Common.LeftString(cssMergeFullFileName, "Pathway"),
+                                                            "Pathway");
+                        string PsSupportPathfrom = Common.GetApplicationPath();
+                        string previewFile = _loadType + "Preview.xhtml";
+                        string xhtmlPreviewFilePath = Path.Combine(PsSupportPath, previewFile);
+                        string xhtmlPreviewFile_fromPath = Path.Combine(PsSupportPathfrom, previewFile);
+                        if (!File.Exists(xhtmlPreviewFilePath))
+                        {
+                            if (File.Exists(xhtmlPreviewFile_fromPath))
+                            {
+                                File.Copy(xhtmlPreviewFile_fromPath, xhtmlPreviewFilePath);
+                            }
+                        }
+
+                        if (!(File.Exists(xhtmlPreviewFilePath) && File.Exists(cssMergeFullFileName)))
+                        {
+                            return;
+                        }
+
+                        PublicationInformation ps = new PublicationInformation();
+                        ps.DefaultXhtmlFileWithPath = xhtmlPreviewFilePath;
+                        ps.DefaultCssFileWithPath = cssMergeFullFileName;
+                        string fileName = Path.GetTempFileName();
+                        ps.ProjectName = fileName;
+                        ps.DictionaryOutputName = fileName;
+                        ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
+                        ps.ProjectInputType = _loadType;
+
+                        bool success = PrincePreview(ps);
+
+                        if (!success)
+                        {
+                            success = LOPreview(ps);
+                        }
+
+                        if (!success)
+                        {
+                            MessageBox.Show(@"Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", "Select Layout", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                        }
+
+                        _previewFileName1 = Common.PathCombine(stylenamePath, "PreviewMessage.jpg");
+
+                    }
+
+                }
+            }
+            catch { }
+        }
+
+        private bool PrincePreview(PublicationInformation projInfo)
+        {
+            bool success = false;
+            //string destination = "Pdf (using Prince)";
+            ExportPdf exportPdf = new ExportPdf();
+            success = exportPdf.Export(projInfo);
+            // copy to preview folder *******************
+            return success;
+        }
+
+        private bool LOPreview(PublicationInformation projInfo)
+        {
+            bool success = false;
+            ExportLibreOffice openOffice = new ExportLibreOffice();
+            success = openOffice.Export(projInfo);
+            return success;
+        }
         //private void CreatePreview()
         //{
         //    if (!File.Exists(_previewFileName1))
@@ -387,6 +499,11 @@ namespace SIL.PublishingSolution
             LoadGridValues(sender);
             //Process.Start(startInfo);
             ////lnkEdit.Enabled = false;
+        }
+
+        private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
