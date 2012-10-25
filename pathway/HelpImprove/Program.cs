@@ -34,7 +34,7 @@ namespace SIL.PublishingSolution
                 string sendUsageData = Common.GetValueFromRegistryFromCurrentUser(args[1], args[2]);
                 Console.Write("\r\n args index registry check" + " -- " + args[1] + " -- " + args[2] + " -- " + sendUsageData);
                 UserInformation user = new UserInformation();
-                if (sendUsageData != null && sendUsageData.ToLower() == "true") 
+                if (sendUsageData != null && sendUsageData.ToLower() == "yes") 
                 {
                     Console.Write("\r\n args index send usage data \r\n");
                     if (user.CheckInternetAvailability(args[0]))
@@ -51,7 +51,7 @@ namespace SIL.PublishingSolution
 
             //string sendUsageData = Common.GetValueFromRegistryFromCurrentUser("Software\\Wow6432Node\\SIL\\Pathway", "HelpImprove");
             //UserInformation user = new UserInformation();
-            //if (sendUsageData != null && sendUsageData.ToLower() == "true")
+            //if (sendUsageData != null && sendUsageData.ToLower() == "yes")
             //{
             //    if (user.CheckInternetAvailability("204.93.172.30"))
             //    {

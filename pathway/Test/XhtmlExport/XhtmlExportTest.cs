@@ -115,16 +115,17 @@ namespace Test.XhtmlExport
         /// </summary>
         private static void PathawyB(string project, string layout, string inputType, string backend)
         {
-            PathawyB(project, layout, inputType, backend, "");
+            PathawyB(project, layout, inputType, backend, "xhtml");
         }
 
         /// <summary>
         /// Runs Pathway on the data and applies the back end
         /// </summary>
-        private static void PathawyB(string project, string layout, string inputType, string backend, string message)
+        private static void PathawyB(string project, string layout, string inputType, string backend, string format)
         {
             const bool overwrite = true;
-            var xhtmlName = project + ".xhtml";
+            const string message = "";
+            var xhtmlName = project + "." + format;
             var xhtmlInput = _tf.Input(xhtmlName);
             var xhtmlOutput = _tf.SubOutput(project, xhtmlName);
             File.Copy(xhtmlInput, xhtmlOutput, overwrite);
@@ -132,6 +133,13 @@ namespace Test.XhtmlExport
             var cssInput = _tf.Input(cssName);
             var cssOutput = _tf.SubOutput(project, cssName);
             File.Copy(cssInput, cssOutput, overwrite);
+            var workingFolder = Path.GetDirectoryName(xhtmlInput);
+            if (format == "usx")
+            {
+                FolderTree.Copy(_tf.Input("gather"), Path.Combine(_tf.Output("NKOu3"), "gather"));
+                FolderTree.Copy(_tf.Input("figures"), Path.Combine(_tf.Output("NKOu3"), "figures"));
+                workingFolder = Path.GetDirectoryName(xhtmlOutput);
+            }
             var p1 = new Process();
             p1.StartInfo.UseShellExecute = false;
             StringBuilder arg = new StringBuilder(string.Format("-f \"{0}\" ", xhtmlOutput)); 
@@ -139,8 +147,8 @@ namespace Test.XhtmlExport
             arg.Append(string.Format("-t \"{0}\" ", backend));
             arg.Append(string.Format("-i {0} ", inputType));
             arg.Append(string.Format("-n \"{0}\" ", project));
-            arg.Append("-if xhtml ");
-            arg.Append(string.Format("-d \"{0}\" ", Path.GetDirectoryName(xhtmlInput)));
+            arg.Append(string.Format("-if {0} ", format));
+            arg.Append(string.Format("-d \"{0}\" ", workingFolder));
             p1.StartInfo.Arguments = arg.ToString();
             p1.StartInfo.WorkingDirectory = _tf.Output(null);
             p1.StartInfo.FileName = Common.PathCombine(PathwayPath.GetPathwayDir(), "PathwayB.exe");
@@ -292,7 +300,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void NKOu3OpenOfficeTest()
         {
-            PathawyB("NKOu3", "NKOu3", "Scripture", "OpenOffice/LibreOffice");
+            PathawyB("NKOu3", "NKOu3", "Scripture", "OpenOffice/LibreOffice", "usx");
         }
         #endregion Nkonya Sample Open Office
 
@@ -331,7 +339,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void NKOu3InDesignTest()
         {
-            PathawyB("NKOu3", "NKOu3", "Scripture", "InDesign");
+            PathawyB("NKOu3", "NKOu3", "Scripture", "InDesign", "usx");
         }
         #endregion Nkonya Sample Open Office
 
@@ -411,7 +419,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void NKOu3XeLaTexTest()
         {
-            PathawyB("NKOu3", "NKOu3", "Scripture", "XeLaTex");
+            PathawyB("NKOu3", "NKOu3", "Scripture", "XeLaTex", "usx");
         }
         #endregion Nkonya Sample XeLaTex
     }

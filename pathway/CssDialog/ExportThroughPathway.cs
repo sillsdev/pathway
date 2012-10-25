@@ -55,7 +55,6 @@ namespace SIL.PublishingSolution
         public List<string> XsltFile = new List<string>();
         public static bool isFromConfigurationTool = false;
 
-
         public ExportThroughPathway()
         {
             InitializeComponent();
@@ -694,6 +693,7 @@ namespace SIL.PublishingSolution
                     case "webadminsitenme":
                     case "webemailid":
                     case "webftpfldrnme":
+                    case "comment":
                         if (attribValue.Trim().Length == 0)
                         {
                             return false;
@@ -784,9 +784,6 @@ namespace SIL.PublishingSolution
             string getApplicationPath = Common.GetApplicationPath();
             string helpImproveCommand = Path.Combine(getApplicationPath, "HelpImprove.exe");
             string registryPath = "Software\\SIL\\Pathway";
-
-            if (Common.GetOsName().ToLower() == "windows7")
-                registryPath = "Software\\Wow6432Node\\SIL\\Pathway";
 
             if (File.Exists(helpImproveCommand))
                 Common.RunCommand(helpImproveCommand, string.Format("{0} {1} {2}", "204.93.172.30", registryPath, "HelpImprove"), 0);
@@ -1249,8 +1246,12 @@ namespace SIL.PublishingSolution
 
         private void lnkIP_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            //_helpTopic = "Concepts/Intellectual_Property.htm";
             _helpTopic = "Concepts/Intellectual_Property.htm";
-            btnHelp_Click(sender, e);
+            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            SendKeys.Send("{F1}");
+            //Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            //btnHelp_Click(sender, e);
         }
 
         private void btnCoverImage_Click(object sender, EventArgs e)
@@ -1334,6 +1335,7 @@ namespace SIL.PublishingSolution
         private void lnkChooseCopyright_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // TODO: replace with correct help topic
+            
             _helpTopic = "Tasks/Basic_Tasks/Choosing_a_rights_statement_overview.htm";
             btnHelp_Click(sender, e);
         }
@@ -1386,6 +1388,9 @@ namespace SIL.PublishingSolution
                         _helpTopic = "User_Interface/Dialog_boxes/Processing_Options_tab.htm";
                         break;
                 }
+            //_helpTopic = "Concepts/Intellectual_Property.htm";
+
+            //_helpTopic = "/Concepts/Intellectual_Property_(Copyright)_Info.htm";//Concepts/Intellectual_Property.htm
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
         }
 

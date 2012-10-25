@@ -276,7 +276,16 @@ namespace SIL.PublishingSolution
                     string result = GetValue(srchKey, key, "false");
                     if (result.IndexOf("page") > 0)
                     {
-                        return pageDict[srchKey];
+                        string pageNumberValue = pageDict[srchKey];
+                        if (Common.UnixVersionCheck())
+                        {
+                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
+                                return pageDict[srchKey];
+                        }
+                        else
+                        {
+                            return pageDict[srchKey];
+                        }
                     }
                 }
                 return defaultValue;
@@ -709,6 +718,9 @@ namespace SIL.PublishingSolution
                         case "webftpfldrnme":
                             baseNode.Attributes["value"].Value = cTool.TxtWebFtpFldrNme.Text;
                             break;
+                        case "comment":
+                            baseNode.Attributes["value"].Value = cTool.TxtComment.Text;
+                            break;
                         default:
                             break;
                     }
@@ -946,6 +958,10 @@ namespace SIL.PublishingSolution
             cTool.DdlJustified.SelectedItem = JustifyUI;
             cTool.DdlPagePageSize.SelectedItem = PageSize;
             cTool.DdlRunningHead.SelectedItem = RunningHeader;
+
+            string pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+            DdlRunningHeadSelectedIndexChangedBl(pageType);
+
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
             cTool.DdlSense.SelectedItem = Sense;
@@ -1119,6 +1135,9 @@ namespace SIL.PublishingSolution
                                 break;
                             case "webftpfldrnme":
                                 cTool.TxtWebFtpFldrNme.Text = attribValue;
+                                break;
+                            case "comment":
+                                cTool.TxtComment.Text = attribValue;
                                 break;
                             default:
                                 break;
@@ -1667,6 +1686,9 @@ namespace SIL.PublishingSolution
                             case "webftpfldrnme":
                                 cTool.TxtWebFtpFldrNme.Text = attribValue;
                                 break;
+                            case "comment":
+                                cTool.TxtComment.Text = attribValue;
+                                break;
                             default:
                                 break;
                         }
@@ -2204,7 +2226,7 @@ namespace SIL.PublishingSolution
             if (currentRow == null) return false;
             //var currentDescription = currentRow.Cells[ColumnDescription].Value.ToString();
            // var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
-            var currentApprovedBy = grid[4, SelectedRowIndex].Value.ToString();
+            var currentApprovedBy = grid[5, SelectedRowIndex].Value.ToString();
             string type = grid[ColumnType, SelectedRowIndex].Value.ToString();
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
             if (PreviousStyleName.Length > 50)
@@ -3347,7 +3369,7 @@ namespace SIL.PublishingSolution
                     //break;
                 }
                 string val = control.Text;
-                if (_propertyValue[i++] != val)
+                if (_propertyValue.Count >= i && _propertyValue[i++] != val)
                 {
                     propertyModified = true;
                     break;
@@ -4038,7 +4060,17 @@ namespace SIL.PublishingSolution
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
             }
             //_redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
-            cTool.MinimumSize = new Size(497, 183);
+
+
+            if (Common.IsUnixOS())
+            {
+                cTool.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                cTool.MinimumSize = new Size(497, 183);
+            }
+
             cTool.LoadSettings();
             SetInputTypeButton();
             ShowInputTypeButton();
@@ -4135,6 +4167,11 @@ namespace SIL.PublishingSolution
                 Common.HelpProv.SetHelpKeyword(cTool, "Overview.htm");
                 SendKeys.Send("{F1}");
             }
+        }
+
+        public void StudentManual()
+        {
+            Common.PathwayStudentManualLaunch();
         }
 
         public void AboutDialog()
@@ -4367,6 +4404,15 @@ namespace SIL.PublishingSolution
             catch { }
         }
         
+        public void ddlPageNumber_SelectedIndexChange()
+        {
+            if (_screenMode == ScreenMode.Edit)
+            {
+                SetModifyMode(true);
+                ShowCssSummary();
+                WriteCss();
+            }
+        }
 
         #endregion
     }

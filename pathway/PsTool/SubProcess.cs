@@ -106,35 +106,38 @@ namespace SIL.Tool
             // clean out the results of any previous runs
             LastError = String.Empty;
             ExitCode = 0;
-            // set the current directory
-            string theCurrent = Directory.GetCurrentDirectory();
-            Directory.SetCurrentDirectory(instPath);
-            Process p1 = new Process();
-            p1.StartInfo.FileName = name;
+            var info = new ProcessStartInfo(name)
+                           {
+                               CreateNoWindow = true,
+                               RedirectStandardOutput = !string.IsNullOrEmpty(RedirectOutput),
+                               RedirectStandardError = !string.IsNullOrEmpty(RedirectOutput),
+                               UseShellExecute = string.IsNullOrEmpty(RedirectOutput),
+                               WorkingDirectory = instPath
+                           };
             if (arg != null)
-                p1.StartInfo.Arguments = arg;
-            p1.StartInfo.RedirectStandardOutput = !string.IsNullOrEmpty(RedirectOutput);
-            p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
-            p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
-            p1.Start();
-            if (wait)
+                info.Arguments = arg;
+            Debug.Print("Run: Filename: {0}", info.FileName);
+            using (Process p1 = Process.Start(info))
             {
-                if (p1.Id <= 0)
-                    throw new MissingSatelliteAssemblyException(name);
-                p1.WaitForExit();
+                if (wait)
+                {
+                    if (p1.Id <= 0)
+                        throw new MissingSatelliteAssemblyException(name);
+                    p1.WaitForExit();
+                    ExitCode = p1.ExitCode;
+                    if (!string.IsNullOrEmpty(RedirectOutput))
+                    {
+                        string result = p1.StandardOutput.ReadToEnd();
+                        LastError = p1.StandardError.ReadToEnd();
+                        result += LastError;
+                        StreamWriter streamWriter = new StreamWriter(Path.Combine(instPath, RedirectOutput));
+                        streamWriter.Write(result);
+                        streamWriter.Close();
+                        RedirectOutput = null;
+                    }
+                }
+                p1.Close();
             }
-            ExitCode = p1.ExitCode;
-            if (!string.IsNullOrEmpty(RedirectOutput))
-            {
-                string result = p1.StandardOutput.ReadToEnd();
-                LastError = p1.StandardError.ReadToEnd();
-                result += LastError;
-                StreamWriter streamWriter = new StreamWriter(RedirectOutput);
-                streamWriter.Write(result);
-                streamWriter.Close();
-                RedirectOutput = null;
-            }
-            Directory.SetCurrentDirectory(theCurrent);
         }
         #endregion RunProcess
 
@@ -182,6 +185,37 @@ namespace SIL.Tool
                 return false;
         }
         #endregion ExistsOnPath(string name)
+
+        #region JavaLocation(name)
+        /// <summary>
+        /// Identify Java program location
+        /// </summary>
+        public static string JavaLocation(string name)
+        {
+            string progFolder = GetLocation(name);
+            if (string.IsNullOrEmpty(progFolder) || !File.Exists(Path.Combine(progFolder, "java.exe")))
+            {
+                var info = new DirectoryInfo("C:\\Program Files\\Java");
+                foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
+                {
+                    progFolder = Path.Combine(directoryInfo.FullName, "bin");
+                    if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                        break;
+                }
+                if (string.IsNullOrEmpty(progFolder))
+                {
+                    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
+                    {
+                        progFolder = Path.Combine(directoryInfo.FullName, "bin");
+                        if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                            break;
+                    }
+                }
+            }
+            return progFolder;
+        }
+
+        #endregion JavaLocation(name)
 
         #region GetLocation(string name)
         public static string GetLocation(string name)

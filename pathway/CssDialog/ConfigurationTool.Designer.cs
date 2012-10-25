@@ -44,9 +44,12 @@ namespace SIL.PublishingSolution
             this.tsSend = new System.Windows.Forms.ToolStripButton();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.studentManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabInfo = new System.Windows.Forms.TabPage();
+            this.lnkLblUrl = new System.Windows.Forms.LinkLabel();
+            this.lblProjectUrl = new System.Windows.Forms.Label();
             this.txtApproved = new System.Windows.Forms.TextBox();
             this.lblApproved = new System.Windows.Forms.Label();
             this.btnApproved = new System.Windows.Forms.Button();
@@ -205,8 +208,6 @@ namespace SIL.PublishingSolution
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.lblProjectUrl = new System.Windows.Forms.Label();
-            this.lnkLblUrl = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -256,7 +257,7 @@ namespace SIL.PublishingSolution
             this.stylesGrid.RowHeadersVisible = false;
             this.stylesGrid.RowTemplate.Height = 24;
             this.stylesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.stylesGrid.Size = new System.Drawing.Size(539, 498);
+            this.stylesGrid.Size = new System.Drawing.Size(566, 498);
             this.stylesGrid.TabIndex = 0;
             this.stylesGrid.TabStop = false;
             this.stylesGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.stylesGrid_RowEnter);
@@ -278,7 +279,7 @@ namespace SIL.PublishingSolution
             this.toolStripSplitButton1});
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(954, 52);
+            this.toolStripMain.Size = new System.Drawing.Size(981, 52);
             this.toolStripMain.TabIndex = 0;
             this.toolStripMain.Text = "New";
             this.toolStripMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMain_ItemClicked);
@@ -403,6 +404,7 @@ namespace SIL.PublishingSolution
             // 
             this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.contentsToolStripMenuItem,
+            this.studentManualToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.toolStripSplitButton1.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
@@ -418,14 +420,21 @@ namespace SIL.PublishingSolution
             // 
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
             this.contentsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.contentsToolStripMenuItem.Text = "Help";
             this.contentsToolStripMenuItem.Click += new System.EventHandler(this.contentsToolStripMenuItem_Click);
+            // 
+            // studentManualToolStripMenuItem
+            // 
+            this.studentManualToolStripMenuItem.Name = "studentManualToolStripMenuItem";
+            this.studentManualToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.studentManualToolStripMenuItem.Text = "Student &Manual";
+            this.studentManualToolStripMenuItem.Click += new System.EventHandler(this.studentManualToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -472,6 +481,28 @@ namespace SIL.PublishingSolution
             this.tabInfo.TabIndex = 0;
             this.tabInfo.Text = "Info";
             this.tabInfo.UseVisualStyleBackColor = true;
+            // 
+            // lnkLblUrl
+            // 
+            this.lnkLblUrl.AutoSize = true;
+            this.lnkLblUrl.LinkArea = new System.Windows.Forms.LinkArea(0, 22);
+            this.lnkLblUrl.Location = new System.Drawing.Point(165, 447);
+            this.lnkLblUrl.Name = "lnkLblUrl";
+            this.lnkLblUrl.Size = new System.Drawing.Size(111, 17);
+            this.lnkLblUrl.TabIndex = 13;
+            this.lnkLblUrl.TabStop = true;
+            this.lnkLblUrl.Text = "http://pathway.sil.org/";
+            this.lnkLblUrl.UseCompatibleTextRendering = true;
+            this.lnkLblUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLblUrl_LinkClicked);
+            // 
+            // lblProjectUrl
+            // 
+            this.lblProjectUrl.AutoSize = true;
+            this.lblProjectUrl.Location = new System.Drawing.Point(13, 434);
+            this.lblProjectUrl.Name = "lblProjectUrl";
+            this.lblProjectUrl.Size = new System.Drawing.Size(157, 26);
+            this.lblProjectUrl.TabIndex = 12;
+            this.lblProjectUrl.Text = "Other project related information\r\n                          is available at: ";
             // 
             // txtApproved
             // 
@@ -653,7 +684,7 @@ namespace SIL.PublishingSolution
             this.chkFixedLineHeight.Location = new System.Drawing.Point(93, 239);
             this.chkFixedLineHeight.Name = "chkFixedLineHeight";
             this.chkFixedLineHeight.Size = new System.Drawing.Size(108, 17);
-            this.chkFixedLineHeight.TabIndex = 99;
+            this.chkFixedLineHeight.TabIndex = 11;
             this.chkFixedLineHeight.Text = "Fixed Line Height";
             this.chkFixedLineHeight.UseVisualStyleBackColor = true;
             this.chkFixedLineHeight.CheckStateChanged += new System.EventHandler(this.chkFixedLineHeight_CheckStateChanged);
@@ -678,8 +709,8 @@ namespace SIL.PublishingSolution
             this.ddlPageNumber.Location = new System.Drawing.Point(93, 283);
             this.ddlPageNumber.Name = "ddlPageNumber";
             this.ddlPageNumber.Size = new System.Drawing.Size(151, 21);
-            this.ddlPageNumber.TabIndex = 97;
-            this.ddlPageNumber.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
+            this.ddlPageNumber.TabIndex = 13;
+            this.ddlPageNumber.SelectedIndexChanged += new System.EventHandler(this.ddlPageNumber_SelectedIndexChanged);
             // 
             // ddlFileProduceDict
             // 
@@ -691,7 +722,7 @@ namespace SIL.PublishingSolution
             this.ddlFileProduceDict.Location = new System.Drawing.Point(93, 354);
             this.ddlFileProduceDict.Name = "ddlFileProduceDict";
             this.ddlFileProduceDict.Size = new System.Drawing.Size(151, 21);
-            this.ddlFileProduceDict.TabIndex = 15;
+            this.ddlFileProduceDict.TabIndex = 16;
             this.ddlFileProduceDict.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlFileProduceDict.Validated += new System.EventHandler(this.ddlFileProduceDict_Validated);
             // 
@@ -715,7 +746,7 @@ namespace SIL.PublishingSolution
             this.ddlVerticalJustify.Location = new System.Drawing.Point(93, 163);
             this.ddlVerticalJustify.Name = "ddlVerticalJustify";
             this.ddlVerticalJustify.Size = new System.Drawing.Size(151, 21);
-            this.ddlVerticalJustify.TabIndex = 9;
+            this.ddlVerticalJustify.TabIndex = 8;
             this.ddlVerticalJustify.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
             // lblVerticalJustify
@@ -738,7 +769,7 @@ namespace SIL.PublishingSolution
             this.ddlSense.Location = new System.Drawing.Point(93, 378);
             this.ddlSense.Name = "ddlSense";
             this.ddlSense.Size = new System.Drawing.Size(151, 21);
-            this.ddlSense.TabIndex = 16;
+            this.ddlSense.TabIndex = 17;
             this.ddlSense.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
             // lblSenseLayout
@@ -761,7 +792,7 @@ namespace SIL.PublishingSolution
             this.ddlPicture.Location = new System.Drawing.Point(93, 187);
             this.ddlPicture.Name = "ddlPicture";
             this.ddlPicture.Size = new System.Drawing.Size(151, 21);
-            this.ddlPicture.TabIndex = 10;
+            this.ddlPicture.TabIndex = 9;
             this.ddlPicture.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
             // lblLineSpace
@@ -794,7 +825,7 @@ namespace SIL.PublishingSolution
             this.ddlLeading.Location = new System.Drawing.Point(93, 211);
             this.ddlLeading.Name = "ddlLeading";
             this.ddlLeading.Size = new System.Drawing.Size(151, 21);
-            this.ddlLeading.TabIndex = 11;
+            this.ddlLeading.TabIndex = 10;
             this.ddlLeading.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
             // ddlRunningHead
@@ -830,7 +861,7 @@ namespace SIL.PublishingSolution
             this.ddlRules.Location = new System.Drawing.Point(93, 306);
             this.ddlRules.Name = "ddlRules";
             this.ddlRules.Size = new System.Drawing.Size(151, 21);
-            this.ddlRules.TabIndex = 13;
+            this.ddlRules.TabIndex = 14;
             this.ddlRules.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
             // lblFont
@@ -853,7 +884,7 @@ namespace SIL.PublishingSolution
             this.ddlFontSize.Location = new System.Drawing.Point(93, 330);
             this.ddlFontSize.Name = "ddlFontSize";
             this.ddlFontSize.Size = new System.Drawing.Size(151, 21);
-            this.ddlFontSize.TabIndex = 14;
+            this.ddlFontSize.TabIndex = 15;
             this.ddlFontSize.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
             // label4
@@ -873,7 +904,7 @@ namespace SIL.PublishingSolution
             this.txtPageGutterWidth.MaxLength = 6;
             this.txtPageGutterWidth.Name = "txtPageGutterWidth";
             this.txtPageGutterWidth.Size = new System.Drawing.Size(44, 20);
-            this.txtPageGutterWidth.TabIndex = 7;
+            this.txtPageGutterWidth.TabIndex = 6;
             this.txtPageGutterWidth.Tag = "Gutter Width";
             this.txtPageGutterWidth.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtPageGutterWidth.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPageGutterWidth_KeyUp);
@@ -906,7 +937,7 @@ namespace SIL.PublishingSolution
             this.txtPageOutside.MaxLength = 6;
             this.txtPageOutside.Name = "txtPageOutside";
             this.txtPageOutside.Size = new System.Drawing.Size(33, 20);
-            this.txtPageOutside.TabIndex = 3;
+            this.txtPageOutside.TabIndex = 2;
             this.txtPageOutside.Tag = "Outside";
             this.txtPageOutside.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtPageOutside.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPageOutside_KeyUp);
@@ -919,7 +950,7 @@ namespace SIL.PublishingSolution
             this.txtPageInside.MaxLength = 6;
             this.txtPageInside.Name = "txtPageInside";
             this.txtPageInside.Size = new System.Drawing.Size(33, 20);
-            this.txtPageInside.TabIndex = 2;
+            this.txtPageInside.TabIndex = 1;
             this.txtPageInside.Tag = "Inside";
             this.txtPageInside.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtPageInside.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPageInside_KeyUp);
@@ -932,7 +963,7 @@ namespace SIL.PublishingSolution
             this.txtPageTop.MaxLength = 6;
             this.txtPageTop.Name = "txtPageTop";
             this.txtPageTop.Size = new System.Drawing.Size(33, 20);
-            this.txtPageTop.TabIndex = 4;
+            this.txtPageTop.TabIndex = 3;
             this.txtPageTop.Tag = "Top";
             this.txtPageTop.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtPageTop.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPageTop_KeyUp);
@@ -945,7 +976,7 @@ namespace SIL.PublishingSolution
             this.txtPageBottom.MaxLength = 6;
             this.txtPageBottom.Name = "txtPageBottom";
             this.txtPageBottom.Size = new System.Drawing.Size(33, 20);
-            this.txtPageBottom.TabIndex = 5;
+            this.txtPageBottom.TabIndex = 4;
             this.txtPageBottom.Tag = "Bottom";
             this.txtPageBottom.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtPageBottom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPageBottom_KeyUp);
@@ -1001,7 +1032,7 @@ namespace SIL.PublishingSolution
             this.ddlJustified.Location = new System.Drawing.Point(93, 138);
             this.ddlJustified.Name = "ddlJustified";
             this.ddlJustified.Size = new System.Drawing.Size(151, 21);
-            this.ddlJustified.TabIndex = 8;
+            this.ddlJustified.TabIndex = 7;
             this.ddlJustified.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlJustified.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
@@ -1025,7 +1056,7 @@ namespace SIL.PublishingSolution
             this.ddlPageColumn.Location = new System.Drawing.Point(93, 90);
             this.ddlPageColumn.Name = "ddlPageColumn";
             this.ddlPageColumn.Size = new System.Drawing.Size(151, 21);
-            this.ddlPageColumn.TabIndex = 6;
+            this.ddlPageColumn.TabIndex = 5;
             this.ddlPageColumn.SelectedIndexChanged += new System.EventHandler(this.ddlPageColumn_SelectedIndexChanged);
             this.ddlPageColumn.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
@@ -1049,7 +1080,7 @@ namespace SIL.PublishingSolution
             this.ddlPagePageSize.Location = new System.Drawing.Point(93, 11);
             this.ddlPagePageSize.Name = "ddlPagePageSize";
             this.ddlPagePageSize.Size = new System.Drawing.Size(168, 21);
-            this.ddlPagePageSize.TabIndex = 1;
+            this.ddlPagePageSize.TabIndex = 0;
             this.ddlPagePageSize.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlPagePageSize.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
@@ -2076,7 +2107,7 @@ namespace SIL.PublishingSolution
             this.label2.Location = new System.Drawing.Point(94, 1);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(548, 23);
+            this.label2.Size = new System.Drawing.Size(575, 23);
             this.label2.TabIndex = 1;
             this.label2.Text = "Stylesheets";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2086,7 +2117,7 @@ namespace SIL.PublishingSolution
             this.lblInfoCaption.BackColor = System.Drawing.Color.RoyalBlue;
             this.lblInfoCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInfoCaption.ForeColor = System.Drawing.Color.White;
-            this.lblInfoCaption.Location = new System.Drawing.Point(643, 1);
+            this.lblInfoCaption.Location = new System.Drawing.Point(670, 1);
             this.lblInfoCaption.Margin = new System.Windows.Forms.Padding(0);
             this.lblInfoCaption.Name = "lblInfoCaption";
             this.lblInfoCaption.Size = new System.Drawing.Size(290, 23);
@@ -2126,7 +2157,7 @@ namespace SIL.PublishingSolution
             this.TLPanelOuter.RowCount = 2;
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanelOuter.Size = new System.Drawing.Size(954, 582);
+            this.TLPanelOuter.Size = new System.Drawing.Size(981, 582);
             this.TLPanelOuter.TabIndex = 19;
             // 
             // TLPanel1
@@ -2272,7 +2303,7 @@ namespace SIL.PublishingSolution
             this.TLPanel2.RowCount = 1;
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 498F));
-            this.TLPanel2.Size = new System.Drawing.Size(542, 550);
+            this.TLPanel2.Size = new System.Drawing.Size(569, 550);
             this.TLPanel2.TabIndex = 4;
             // 
             // TLPanel3
@@ -2282,7 +2313,7 @@ namespace SIL.PublishingSolution
             this.TLPanel3.Controls.Add(this.panel3, 0, 1);
             this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
             this.TLPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TLPanel3.Location = new System.Drawing.Point(646, 28);
+            this.TLPanel3.Location = new System.Drawing.Point(673, 28);
             this.TLPanel3.Name = "TLPanel3";
             this.TLPanel3.RowCount = 2;
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
@@ -2314,32 +2345,11 @@ namespace SIL.PublishingSolution
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblProjectUrl
-            // 
-            this.lblProjectUrl.AutoSize = true;
-            this.lblProjectUrl.Location = new System.Drawing.Point(13, 434);
-            this.lblProjectUrl.Name = "lblProjectUrl";
-            this.lblProjectUrl.Size = new System.Drawing.Size(157, 26);
-            this.lblProjectUrl.TabIndex = 12;
-            this.lblProjectUrl.Text = "Other project related information\r\n                          is available at: ";
-            // 
-            // lnkLblUrl
-            // 
-            this.lnkLblUrl.AutoSize = true;
-            this.lnkLblUrl.Location = new System.Drawing.Point(165, 447);
-            this.lnkLblUrl.Name = "lnkLblUrl";
-            this.lnkLblUrl.Size = new System.Drawing.Size(113, 13);
-            this.lnkLblUrl.TabIndex = 13;
-            this.lnkLblUrl.TabStop = true;
-            this.lnkLblUrl.Text = "http://pathway.sil.org/";
-            this.lnkLblUrl.Links.Add(0, 22, "http://pathway.sil.org");
-            this.lnkLblUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLblUrl_LinkClicked);
-            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(954, 634);
+            this.ClientSize = new System.Drawing.Size(981, 634);
             this.Controls.Add(this.TLPanelOuter);
             this.Controls.Add(this.toolStripMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -2570,5 +2580,6 @@ namespace SIL.PublishingSolution
         private CheckBox chkIncludeImage;
         private LinkLabel lnkLblUrl;
         private Label lblProjectUrl;
+        private ToolStripMenuItem studentManualToolStripMenuItem;
     }
 }

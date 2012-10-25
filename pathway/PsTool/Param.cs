@@ -865,7 +865,84 @@ namespace SIL.PublishingSolution
                 descNode.InnerText = description;
             }
             AddAttrValue(style, "shown", "Yes");
+            WebInfo(baseNode, style);        
             Write();
+        }
+
+        public static void WebInfo(XmlNode baseNode, XmlNode style)
+        {
+            if (MediaType != "web")
+                return;
+
+            XmlNode styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "ftpaddress");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "ftpuserid");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "ftppwd");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "dbservername");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "dbname");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "dbuserid");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "dbpwd");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "weburl");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "webadminusrnme");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "webadminpwd");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "webadminsiteNme");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "webemailid");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "webftpfldrnme");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
+
+            styleProp = xmlMap.CreateElement("styleProperty");
+            AddAttrValue(styleProp, "name", "comment");
+            AddAttrValue(styleProp, "value", String.Empty);
+            style.AppendChild(styleProp);
         }
 
         public static void SaveSheet(string sheet, string fileNamewithPath, string description, string configureType)

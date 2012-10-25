@@ -15,21 +15,13 @@
 // --------------------------------------------------------------------------------------------
 
 #region Using
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Collections;
-using System.Windows.Forms;
 using System.IO;
-using System.Drawing;
 using System.Text.RegularExpressions;
-using SIL.PublishingSolution;
 using SIL.Tool;
-using SIL.Tool.Localization;
 
 #endregion Using
 namespace SIL.PublishingSolution
@@ -37,128 +29,26 @@ namespace SIL.PublishingSolution
     public class AfterBeforeProcess : AfterBeforeXHTMLProcess
     {
         #region Private Variable
-        string _strBook = string.Empty;
-        string _strBook2ndBook = string.Empty;
-        private bool _is1stBookFound = false;
-        readonly Stack _styleStack = new Stack();
-        readonly Stack _allSpanStack = new Stack();
-        readonly Stack _allDivStack = new Stack();
-        readonly Stack _usedSpanStack = new Stack();
-        readonly Stack _tagTypeStack = new Stack(); // P - Para, T - Text, I - Image, L - <ol>/<ul> tag , S - <li> tag,  O - Others
-        readonly Dictionary<string, string> _makeAttribute = new Dictionary<string, string>();
-        private ArrayList _sectionName = new ArrayList();
-        //Dictionary<string, string> dictColumnGap = new Dictionary<string, string>();
-
-        bool isHiddenText = false;
-        string _familyType = string.Empty;
-        string _styleName = string.Empty;
-        // Image
-        int _frameCount; //For Picture Frame count
-        string _beforePseudoValue = string.Empty;
-        string _beforePseudoParentValue = string.Empty;
-        //readonly StringBuilder _imageBuilder = new StringBuilder();
-        readonly Stack _prevLangStack = new Stack(); // For handle previous Language
-        readonly StringBuilder _pseudoBuilder = new StringBuilder();
-        bool _contentReplace;
-        readonly StringBuilder _classContentBuilder = new StringBuilder();
-        int _styleCounter;
-        string _metaValue = string.Empty;   // TD-278 <meta name />
-        ArrayList _odtFiles;
-        //ArrayList _odtEndFiles;
 
         string _outputExtension = string.Empty;
-        int _autoFootNoteCount;
         private string _sourcePicturePath;
 
-        //Table 
-        List<string> _table = new List<string>();
-        private int _tableCount = 0;
-        private int _tableColumnCount = 0;
-        Dictionary<string, int> _tableColumnModify = new Dictionary<string, int>();
-        private bool _isTableOpen;
-
-        //readonly Library _lib = new Library();
-        int _pbCounter;
-        string _readerValue = string.Empty;
-        string _footnoteValue = string.Empty;
-        string _classAfter = string.Empty;
-        char _closeTagType;
-        string _parentStyleName;
-        readonly Dictionary<string, string> _existingStyleName = new Dictionary<string, string>();
-
-        string _styleFilePath;
-        float _columnWidth;
-        string _temp;
-        string _divClass = string.Empty;
         string _allDiv = string.Empty;
-        string _class = string.Empty;
-        private bool _pseudoSingleSpace = false;
-        //bool _isWhiteSpace;
         bool _isNewLine = true;
-        string _prevLang = string.Empty;
-        string _parentClass = string.Empty;
-        string _parentLang = string.Empty;
-        string _projectType = string.Empty;
-        readonly Dictionary<string, string> _counterVolantryReset = new Dictionary<string, string>();
         readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
-        readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");
 
-        ArrayList _anchor = new ArrayList();
         private XmlDocument _xmldoc;
-        private bool _imageStart;
-        private string _imageParent;
-        bool _imageDiv;
-        private bool progressBarError;
-        private string _imageGraphicsName = string.Empty;
-        private bool _imageTextAvailable;
-        private ArrayList _imageCaptionEmpty = new ArrayList();
-        private int _imageZindexCounter;
-        private bool _imagePreviousFinished = false;
         private bool _imageParaForCaption = false;
-        private List<string> _unUsedParagraphStyle = new List<string>();
-        string footCallSymb = string.Empty;
-        List<string> LanguageFontStyleName = new List<string>();
-        private int _storyNo = 0;
-        private int _hyperLinkNo = 0;
         private bool isFileEmpty = true;
-        private bool isFileCreated;
-        private bool isImage;
-        private bool isHomographNumber = false;
-        private string imageClass = string.Empty;
-        private string _inputPath;
-        private ArrayList _textFrameClass = new ArrayList();
-        private ArrayList _textVariables = new ArrayList();
-        private ArrayList _columnClass = new ArrayList();
+        
         private ArrayList _psuedoBefore = new ArrayList();
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
-        //private Dictionary<string, ArrayList> _styleName = new Dictionary<string, ArrayList>();
-        private ArrayList _crossRef = new ArrayList();
-        private int _crossRefCounter = 1;
-        private bool _isWhiteSpace = false;
-        private bool _isForcedWhiteSpace = false;
-        private bool _isVerseNumberContent = false;
-        private StringBuilder _verseContent = new StringBuilder();
 
         private bool _IsHeadword = false;
-        private bool _significant;
-        private bool _isListBegin;
-        private Dictionary<string, string> ListType;
-        //private string _anchorText = string.Empty;
         private bool _anchorWrite;
-        private List<string> _sourceList = new List<string>();
-        private List<string> _targetList = new List<string>();
-
-        //private Stack<string> _referenceCloseStyleStack = new Stack<string>();
         private bool _isPictureDisplayNone = false;
         
-        private bool _isEmptyTitleExist;
-        private int _titleCounter=1;
-        private int _pageWidth;
         private bool IsEmptyElement = false;
-        private string _originalXHTML = string.Empty;
-
-        Dictionary<string, string> _pageSize = new Dictionary<string, string>();
-        private bool _isFromExe = false;
         #endregion
 
         #region Public Variable

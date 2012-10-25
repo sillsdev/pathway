@@ -1,15 +1,20 @@
 .entry {
        text-align: left;
-       margin-left: 12pt;
+       margin-left: 0pt;
        text-indent: -12pt;
 }
 .revEntry {
        text-align: left;
-       margin-left: 12pt;
+       margin-left: 0pt;
        text-indent: -12pt;
 }
 .subentry {
        text-align: left;
-       margin-left: 12pt;
+       margin-left: 0pt;
        display: block;
+}
+
+.complexform {
+    counter-reset: complexformpara;
+    text-indent: 2pc;
 }

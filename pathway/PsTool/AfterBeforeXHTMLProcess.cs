@@ -15,15 +15,11 @@
 // --------------------------------------------------------------------------------------------
 
 #region Using
-
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
-using SIL.PublishingSolution;
 using SIL.Tool;
 
 #endregion Using
@@ -703,8 +699,7 @@ namespace SIL.PublishingSolution
             {
                 if (_parentStyleName.Trim().Length == 0) return styleName;
 
-                string newStyleName = styleName + Common.SepParent + _parentStyleName;
-                return newStyleName;
+                return styleName + Common.SepParent + _parentStyleName;
             }
 
             if (styleName == "headword") return styleName;

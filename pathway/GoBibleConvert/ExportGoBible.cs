@@ -128,7 +128,7 @@ namespace SIL.PublishingSolution
                 inProcess.Close();
                 Cursor.Current = myCursor;
                 inProcess.PerformStep();
-                string jarFile = Path.Combine(processFolder, GetInfo(Param.Title) + ".jar");
+                string jarFile = Path.Combine(processFolder, NoSp(GetInfo(Param.Title)) + ".jar");
 
                 if (File.Exists(jarFile))
                 {
@@ -152,6 +152,11 @@ namespace SIL.PublishingSolution
                 inProcess.Close();
             }
             return success;
+        }
+
+        private static string NoSp(string p)
+        {
+            return string.Concat(p.Split());
         }
 
         private static void UIPropertiesCopyToTempFolder(string goBibleCreatorPath, string[] filePaths)
@@ -339,12 +344,16 @@ namespace SIL.PublishingSolution
             return DuplicateBooks.Count > 0;
         }
 
+        /// <summary>
+        /// Uses Java to create GoBible application
+        /// </summary>
+        /// <param name="goBibleCreatorPath"></param>
         protected void BuildApplication(string goBibleCreatorPath)
         {
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
             var creatorFullPath = Path.Combine(goBibleCreatorPath, Creator);
-            var progFolder = SubProcess.GetLocation(prog);
+            var progFolder = SubProcess.JavaLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);
             if (progFullName.EndsWith(".exe"))
             {

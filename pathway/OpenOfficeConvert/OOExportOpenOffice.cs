@@ -731,7 +731,7 @@ namespace SIL.PublishingSolution
             preProcessor.GetfigureNode();
             preProcessor.GetDefaultLanguage(projInfo);
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
-            preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
+            //preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
 
             //if (_isFromExe)

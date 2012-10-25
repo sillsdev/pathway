@@ -34,7 +34,7 @@ namespace SIL.PublishingSolution
 
         #region Public Variable
         public bool _fromNunit = false;
-        public string InputType=string.Empty ;
+        public string InputType = string.Empty;
         public string MediaType = string.Empty;
         public string Style = string.Empty;
         #endregion
@@ -44,7 +44,7 @@ namespace SIL.PublishingSolution
         {
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
             InitializeComponent();
-           
+
         }
         #endregion
 
@@ -785,7 +785,7 @@ namespace SIL.PublishingSolution
 
         private void txtName_Validated(object sender, EventArgs e)
         {
-           // _CToolBL.txtName_ValidatedBL(sender);
+            // _CToolBL.txtName_ValidatedBL(sender);
         }
 
         private void txtDesc_Validated(object sender, EventArgs e)
@@ -890,7 +890,7 @@ namespace SIL.PublishingSolution
         private void ddlPageColumn_SelectedIndexChanged(object sender, EventArgs e)
         {
             _CToolBL.ddlPageColumn_SelectedIndexChangedBL(sender, e);
-            EditCSS(sender,e);
+            EditCSS(sender, e);
         }
 
         private void tsPreview_Click(object sender, EventArgs e)
@@ -941,7 +941,6 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.SetModifyMode(false);
             _CToolBL.ShowCssSummary();
-            
         }
 
         private void EditMobileCSS(object sender, EventArgs e)
@@ -1224,6 +1223,11 @@ namespace SIL.PublishingSolution
             _CToolBL.HelpButton_Clicked();
         }
 
+        private void studentManualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _CToolBL.StudentManual();
+        }
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _CToolBL.AboutDialog();
@@ -1242,7 +1246,7 @@ namespace SIL.PublishingSolution
 
         private void txtFtpFileLocation_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtFtpFileLocation_ValidatedBL(sender,e);
+            _CToolBL.txtFtpFileLocation_ValidatedBL(sender, e);
         }
 
         private void txtWebUrl_Validated(object sender, EventArgs e)
@@ -1260,5 +1264,10 @@ namespace SIL.PublishingSolution
         {
             Process.Start(e.Link.LinkData.ToString());
         }
-     }
+
+        private void ddlPageNumber_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlPageNumber_SelectedIndexChange();
+        }
+    }
 }
