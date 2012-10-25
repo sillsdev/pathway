@@ -33,33 +33,35 @@
   <li>Change the first page of <a href="http://pathway.sil.org/wp-admin/edit.php?post_type=page" target="_blank">pathway.sil.org</a> to reference this new bootstrap program google code link.</li>
   <li>Update the version number in Team city <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt75" target="_blank">daily</a> and <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt84" target="_blank">sprint</a> build configuration</li>
   <li><a href="http://build.palaso.org/project.html?projectId=project18" target="_blank">Launch Team City</a> Sprint Build</li>
-  <li><a href="http://pathway.sil.org/wp-admin/post-new.php?post_type=post" target="_blank">Add a post</a> to pathway.sil.org web site with the list of changes and a link to the sprint build page.</li>
-  <li>Mark the post of the last step category as "Release" so it is picked up by lingtransoft.info</li>
+  <li><a href="http://pathway.sil.org/wp-admin/post-new.php?post_type=post" target="_blank">Add a "Release" post</a> to pathway.sil.org web site with the list of changes and a link to the sprint build page. (The "Release" category is checked before the post is added. This will add the post to the Release feed that is picked up by lingtransoft.info and perhaps others.)</li>
   <li>Save download statistics from <a href="http://pathway.sil.org/wp-admin/tools.php?page=simple-download-monitor.php" target="_blank">Download monitor and reset statistics</a></li>
+  <li>Edit sprint-1.1.1.htm produced above to create entry for changelog</li>
+  <li>On precise 32 virtual machine: status, pull and track the release</li>
+  <li>Edit debian/changelog with modifications and new version #, commit, push</li>
+  <li>Build with <code>debuild -eBUILD_NUMBER=1.1.1.1 -i -us -uc -b</code></li>
+  <li>Rename to add _pYYMMDD where YYMMDD is replaced with the current date</li>
+  <li>Upload to downloads page</li>
+  <li>Compute md5sum, save this is updated on <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> page</li>
+  <li>On precise 64 virtual machine:  status, pull and track the release</li>
+  <li>Build with <code>debuild -eBUILD_NUMBER=1.1.1.1 -ePlatform=Any\ CPU -i -us -uc -b</code></li>
+  <li>Rename to add _pYYMMDD where YYMMDD is replaced with the current date</li>
+  <li>Upload to downloads page</li>
+  <li>Compute md5sum, save this is updated on <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> page</li>
+  <li>On lucid 32 virtual machine:  status, pull and track the release</li>
+  <li>Build with <code>debuild -eBUILD_NUMBER=1.1.1.1 -i -us -uc -b</code></li>
+  <li>Rename to add _lYYMMDD where YYMMDD is replaced with the current date</li>
+  <li>Upload to downloads page</li>
+  <li>Compute md5sum, save this is updated on <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> page</li>
+  <li>Update the <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">latest downloads</a> page changing the names of the download files as well as the name of the bootstrap. You will also need to change the md5sums for each download that has changed.
+  <li>Update the link at the bottom of <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> to point to the artifacts on Team city of the <a href="http://build.palaso.org/viewType.html?buildTypeId=bt84&tab=buildTypeStatusDiv" target="_blank">latest sprint</a>.</li>
   <li>Back up the pathway.sil.org web site.</li>
   <li>Mark previous release downloads as deprecated.</li>
-  <li>Update changelog, use precise 32, 64, and lucid 32 virtual machines to build packages</li>
-  <li>Update the link at the bottom of <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> to point to the artifacts on Team city of the <a href="http://build.palaso.org/viewType.html?buildTypeId=bt84&tab=buildTypeStatusDiv" target="_blank">latest sprint</a>.</li>
   <li>Update <a href="http://lingtransoft.info" target="_blank">lingtransoft.info</a></li>
   <li>Jira update: add completed issues to sprint, move uncompleted to new sprint, mark sprint as released</li>
   <li>Inform <a href="mailto:richard_young@wycliffe.org">Richard Young</a> (LangTran) of the new build</li>
   <li>Review <a href="http://myphpapps.com.cws10.my-hosting-panel.com/getdata.php" target="_blank">usage data</a></li>
 </ol>
 
-<p>Instead of launching the Team city build, you can also build locally and post to the pathway.sil.org web site.</p>
-
-<ol>
-<li>Use Visual Studio to do a Debug build of Pathway. This creates BuildTasks.dll</li>
-<li>From the command prompt at the root of your local copy of the svn type:<br/>
-<code>PathwaySprint</code><br/>
-This command sets up the path so that msbuild for dot net 3.5 is used.</li>
-<li>Then type:<br/>
-<code>msbuild BuildPathwaySprint.csproj /p:BUILD_NUMBER=x.x.x.x</code><br/>
-where x.x.x.x is replaced with the version number (0.7.5.1289 for example).</li>
-<li>Use ftp to transfer the .msi files in the sprint folder to the wp-content/sprint folder on the web site.<br/>
-(The latest sprint build page on the site currently points to these download packages.)</li>
-<li>Update http://pathway.sil.org/download/latest-sprint-downloads/ with the latest version number and date</li>
-</ol>
 <hr/>
 <p><small>Created on ... June 22, 2011</small></p>
 </body>
