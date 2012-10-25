@@ -1564,8 +1564,16 @@ namespace SIL.PublishingSolution
                                 sb.Append(".partofspeech, .example, .grammatical-info, .lexref-type, ");
                                 sb.Append(".parallel_passage_reference, .Parallel_Passage_Reference, ");
                                 sb.AppendLine(".Emphasis, .pictureCaption, .Section_Range_Paragraph {");
-                                sb.Append("font-family: 'i_");
-                                sb.Append(language.Value);
+                                if (language.Value.ToLower() == "charis sil")
+                                {
+                                    sb.Append("font-family: '" + language.Value.Trim());
+                                    sb.Append("-i");
+                                }
+                                else
+                                {
+                                    sb.Append("font-family: 'i_");
+                                    sb.Append(language.Value);
+                                }
                                 sb.Append("', ");
                                 if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                                 {
@@ -1594,8 +1602,16 @@ namespace SIL.PublishingSolution
                                 //sb.Append(".Alternate_Reading, .Section_Head, .Section_Head_Minor, ");
                                 sb.Append(".Alternate_Reading, .Section_Head_Minor, ");
                                 sb.AppendLine(".Inscription, .Intro_Section_Head, .Section_Head_Major, .iot {");
-                                sb.Append("font-family: 'b_");
-                                sb.Append(language.Value);
+                                if (language.Value.ToLower() == "charis sil")
+                                {
+                                    sb.Append("font-family: '" + language.Value.Trim());
+                                    sb.Append("-b");
+                                }
+                                else
+                                {
+                                    sb.Append("font-family: 'b_");
+                                    sb.Append(language.Value);
+                                }
                                 sb.Append("', ");
                                 if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                                 {
