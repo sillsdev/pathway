@@ -30,6 +30,7 @@ namespace SIL.PublishingSolution
         private List<string> _infoValue = new List<string>();
         private List<string> _propertyValue = new List<string>();
         private List<string> _groupPropertyValue = new List<string>();
+        private bool _isUnixOS = false;
         #endregion
 
         #region Public Variable
@@ -277,7 +278,7 @@ namespace SIL.PublishingSolution
                     if (result.IndexOf("page") > 0)
                     {
                         string pageNumberValue = pageDict[srchKey];
-                        if (Common.UnixVersionCheck())
+                        if (IsUnixOs)
                         {
                             if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
                                 return pageDict[srchKey];
@@ -540,6 +541,12 @@ namespace SIL.PublishingSolution
                 return ((AssemblyFileVersionAttribute)attributes[0]).Version;
                 //return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
+        }
+
+        public bool IsUnixOs
+        {
+            get { return _isUnixOS; }
+            set { _isUnixOS = value; }
         }
 
         /// <summary>
@@ -2682,7 +2689,7 @@ namespace SIL.PublishingSolution
 
             }
 
-            if (grid.SelectedRows.Count <= 0 && Common.IsUnixOS())
+            if (grid.SelectedRows.Count <= 0 && IsUnixOs)
             {
                 Param.LoadSettings();
                 SetPreviousLayoutSelect(grid);
@@ -4038,6 +4045,8 @@ namespace SIL.PublishingSolution
 
         public void ConfigurationTool_LoadBL()
         {
+
+            IsUnixOs = Common.UnixVersionCheck();
             _screenMode = ScreenMode.Load;
             _lastSelectedLayout = StyleEXE;
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
@@ -4062,7 +4071,7 @@ namespace SIL.PublishingSolution
             //_redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
 
 
-            if (Common.IsUnixOS())
+            if (IsUnixOs)
             {
                 cTool.WindowState = FormWindowState.Maximized;
             }
@@ -4132,7 +4141,7 @@ namespace SIL.PublishingSolution
                         cTool.tsDelete_Click(sender, null);
                     }
                 }
-                else if (e.KeyCode == Keys.F1 && !Common.IsUnixOS())
+                else if (e.KeyCode == Keys.F1 && !IsUnixOs)
                 {
                     CallHelp();
                 }
@@ -4154,7 +4163,7 @@ namespace SIL.PublishingSolution
         private void CallHelp()
         {
             Common.PathwayHelpSetup();
-            if (Common.IsUnixOS())
+            if (IsUnixOs)
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.FileName = "chmsee";
@@ -4413,7 +4422,6 @@ namespace SIL.PublishingSolution
                 WriteCss();
             }
         }
-
         #endregion
     }
 }

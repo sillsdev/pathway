@@ -1269,5 +1269,27 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.ddlPageNumber_SelectedIndexChange();
         }
+
+        private void ConfigurationTool_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (_CToolBL.IsUnixOs)
+            {
+                if (e.KeyCode == Keys.ShiftKey)
+                {
+                    //bool noKey = (int)ModifierKeys == 0;
+                    //bool controlKey = (ModifierKeys & Keys.Control) == Keys.Control;
+                    bool shiftKey = (ModifierKeys & Keys.Shift) == Keys.Shift;
+
+                    string allUsersPath = Common.GetAllUserPath();
+                    if (ModifierKeys == Keys.Shift && shiftKey)
+                    {
+                        if (Directory.Exists(allUsersPath))
+                        {
+                            Directory.Delete(allUsersPath, true);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

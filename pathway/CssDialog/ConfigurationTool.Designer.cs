@@ -2359,6 +2359,7 @@ namespace SIL.PublishingSolution
             this.Text = "Pathway Configuration Tool";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigurationTool_FormClosing);
             this.Load += new System.EventHandler(this.ConfigurationTool_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConfigurationTool_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ConfigurationTool_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).EndInit();
             this.toolStripMain.ResumeLayout(false);
