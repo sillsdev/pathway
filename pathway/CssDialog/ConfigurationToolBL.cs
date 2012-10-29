@@ -915,6 +915,7 @@ namespace SIL.PublishingSolution
                 else
                 {
                     EnableDisablePanel(true);
+                    if (cTool.TxtName.Text.ToLower() == "oneweb") { cTool.TsDelete.Enabled = false; }
                     //tsPreview.Enabled = false;
                     cTool.TxtApproved.Visible = false;
                     cTool.LblApproved.Visible = false;
