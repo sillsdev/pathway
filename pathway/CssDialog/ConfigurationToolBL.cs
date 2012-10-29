@@ -3377,7 +3377,7 @@ namespace SIL.PublishingSolution
                     //break;
                 }
                 string val = control.Text;
-                if (_propertyValue.Count >= i && _propertyValue[i++] != val)
+                if (_propertyValue.Count > 0 && _propertyValue.Count >= i && _propertyValue[i++] != val)
                 {
                     propertyModified = true;
                     break;
