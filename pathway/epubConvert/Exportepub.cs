@@ -357,7 +357,7 @@ namespace SIL.PublishingSolution
                     splitFiles.AddRange(fileNameWithPath);
                 }
                 // add the total file count (so far) to the progress bar, so it's a little more accurate
-                inProcess.AddToMaximum(splitFiles.Count);
+                //inProcess.AddToMaximum(splitFiles.Count);
                 inProcess.SetStatus("Processing stylesheet information");
                 // get rid of styles that don't work with .epub
                 RemovePagedStylesFromCss(niceNameCSS);
@@ -1564,8 +1564,16 @@ namespace SIL.PublishingSolution
                                 sb.Append(".partofspeech, .example, .grammatical-info, .lexref-type, ");
                                 sb.Append(".parallel_passage_reference, .Parallel_Passage_Reference, ");
                                 sb.AppendLine(".Emphasis, .pictureCaption, .Section_Range_Paragraph {");
-                                sb.Append("font-family: 'i_");
-                                sb.Append(language.Value);
+                                if (language.Value.ToLower() == "charis sil")
+                                {
+                                    sb.Append("font-family: '" + language.Value.Trim());
+                                    sb.Append("-i");
+                                }
+                                else
+                                {
+                                    sb.Append("font-family: 'i_");
+                                    sb.Append(language.Value);
+                                }
                                 sb.Append("', ");
                                 if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                                 {
@@ -1594,8 +1602,16 @@ namespace SIL.PublishingSolution
                                 //sb.Append(".Alternate_Reading, .Section_Head, .Section_Head_Minor, ");
                                 sb.Append(".Alternate_Reading, .Section_Head_Minor, ");
                                 sb.AppendLine(".Inscription, .Intro_Section_Head, .Section_Head_Major, .iot {");
-                                sb.Append("font-family: 'b_");
-                                sb.Append(language.Value);
+                                if (language.Value.ToLower() == "charis sil")
+                                {
+                                    sb.Append("font-family: '" + language.Value.Trim());
+                                    sb.Append("-b");
+                                }
+                                else
+                                {
+                                    sb.Append("font-family: 'b_");
+                                    sb.Append(language.Value);
+                                }
                                 sb.Append("', ");
                                 if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                                 {
@@ -2081,7 +2097,7 @@ namespace SIL.PublishingSolution
         private void FixRelativeHyperlinks(string contentFolder, InProcess inProcess)
         {
             string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
-            inProcess.AddToMaximum(files.Length);
+            //inProcess.AddToMaximum(files.Length);
             PreExportProcess preExport = new PreExportProcess();
             var dictHyperlinks = new Dictionary<string, string>();
             List<string> sourceList = new List<string>();
@@ -2115,6 +2131,16 @@ namespace SIL.PublishingSolution
                 {
                     RemoveSpanVerseNumberNodeInXhtmlFile(targetFile);
                     ReplaceAllBrokenHrefs(targetFile, dictHyperlinks);
+                }
+            }
+            else
+            {
+                if (files.Length > 0)
+                {
+                    foreach (string targetFile in files)
+                    {
+                        RemoveSpanVerseNumberNodeInXhtmlFile(targetFile);
+                    }
                 }
             }
         }
@@ -2229,7 +2255,7 @@ namespace SIL.PublishingSolution
         private void RemoveSpanVerseNumberNodeInXhtmlFile(string fileName)
         {
             //Removed NoteTargetReference tag from XHTML file
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(fileName);
@@ -2705,7 +2731,7 @@ namespace SIL.PublishingSolution
         {
             var outFilename = Path.Combine(contentFolder, ReferencesFilename);
             var hrefs = FindBrokenRelativeHrefIds(outFilename);
-            inProcess.AddToMaximum(hrefs.Count + 1);
+            //inProcess.AddToMaximum(hrefs.Count + 1);
             var reader = new StreamReader(outFilename);
             var content = new StringBuilder();
             content.Append(reader.ReadToEnd());

@@ -241,6 +241,45 @@ namespace Test.epubConvert
             return Common.PathCombine(_expectedPath, fileName);
         }
 
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void EpubIndentFileComparisonTest()
+        {
+            const string XhtmlName = "EpubIndentFileComparison.xhtml";
+            const string CssName = "EpubIndentFileComparison.css";
+            PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+            projInfo.IsReversalExist = false;
+            projInfo.ProjectName = "Scripture Draft";
+            projInfo.ProjectInputType = "Scripture";
+            var target = new Exportepub();
+            var actual = target.Export(projInfo);
+            Assert.IsTrue(actual);
+            var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+            var zf = new FastZip();
+            zf.ExtractZip(result, FileOutput("EpubIndentFileComparison"), ".*");
+            var zfExpected = new FastZip();
+            result = result.Replace("Output", "Expected");
+            zfExpected.ExtractZip(result, FileExpected("EpubIndentFileComparison"), ".*");
+            FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_.xhtml");
+            string directoryExist = FileExpected("EpubIndentFileComparison");
+
+            if (Directory.Exists(directoryExist))
+                Directory.Delete(directoryExist, true);
+
+            directoryExist = FileOutput("");
+            if (Directory.Exists(directoryExist))
+                Directory.Delete(directoryExist, true);
+        }
+
+        private void FileCompare(string file)
+        {
+            string xhtmlOutput = FileOutput(file);
+            string xhtmlExpected = FileExpected(file);
+            TextFileAssert.AreEqual(xhtmlOutput, xhtmlExpected, file + " in epub ");
+        }
+
         /// <summary>
         /// Create a simple PublicationInformation instance
         /// </summary>

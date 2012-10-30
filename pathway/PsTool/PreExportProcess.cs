@@ -551,8 +551,8 @@ namespace SIL.Tool
             if (languageCode.Length > 0)
             {
                 var languageName = Common.GetLanguageName(languageCode);
-                sb.Append("<p><em>About this document</em></p>");
-                sb.Append("<p>This document contains data written in ");
+                sb.Append("<h1>ABOUT THIS DOCUMENT</h1>");
+                sb.Append("<p><em>This document contains data written in ");
                 if (languageName.Length > 0)
                 {
                     sb.Append(languageName);
@@ -563,7 +563,7 @@ namespace SIL.Tool
                 sb.Append(languageCode.Substring(0, 3));
                 sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
                 sb.Append(languageCode.Substring(0, 3));
-                sb.Append("</a>.</p>  ");
+                sb.Append("</a>.</em></p> ");
             }
             return sb.ToString();
         }
@@ -586,8 +586,7 @@ namespace SIL.Tool
             if (rights.Trim().Length > 0)
             {
                 sb.Append(rights);
-                sb.Append("</p>  ");
-
+                sb.Append("</p> ");
             }
             return sb.ToString();
         }
@@ -614,7 +613,7 @@ namespace SIL.Tool
             sb.AppendLine("<!-- Contents page -->");
             sb.AppendLine("<div id='TOCPage' class='Contents'>");
 
-            if (_xhtmlFileNameWithPath.ToLower().Contains("main"))
+            if (_xhtmlFileNameWithPath.ToLower().Contains("main"))//TocError
             {
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
@@ -1087,7 +1086,8 @@ namespace SIL.Tool
                     frontMatterXHTMLContent = frontMatterXHTMLContent + titleNode.OuterXml;
                     if (_includeTOCPage)
                     {
-                        frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
+                        //frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
+                        frontMatterXHTMLContent = frontMatterXHTMLContent;
                     }
                     _projInfo.IsFrontMatterEnabled = true;
                     frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
@@ -1120,8 +1120,8 @@ namespace SIL.Tool
                         XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
                         xmlAttribute.Value = "copyright";
                         copyRightContentNode.Attributes.Append(xmlAttribute);
-                        copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", " ").Replace("\t",
-                                                                                                                 "");
+
+                        copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", " ").Replace("\t", "");
                     }
 
                     if (copyRightFile.Count > 0 && _copyrightInformation)
@@ -1147,6 +1147,8 @@ namespace SIL.Tool
                 if (tocNode != null)
                 {
                     //mainXhtmlFile[0].InnerXml = tocNode.OuterXml + dummyNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                    //frontMatterXHTMLContent = frontMatterXHTMLContent.Replace("http://creativecommons.org/licenses/by-nc-sa/3.0/", "<text:a xlink:type=\"simple\"xlink:href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/\">http://creativecommons.org/licenses/by-nc-sa/3.0/</text:a>");
+                    //frontMatterXHTMLContent = frontMatterXHTMLContent.Replace("http://creativecommons.org/licenses/by-nc-nd/3.0/", "<text:a xlink:type=\"simple\"xlink:href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">http://creativecommons.org/licenses/by-nc-nd/3.0/</text:a>");
                     frontMatterXHTMLContent = frontMatterXHTMLContent + tocNode.OuterXml + dummyNode.OuterXml;
                     _projInfo.IsFrontMatterEnabled = true;
                 }
@@ -1696,6 +1698,7 @@ namespace SIL.Tool
             xdoc.Load(ProcessedXhtml);
             //XmlNode bookNode1 = xdoc.DocumentElement;
             string xPath = "//xhtml:div[@class='scrBook']";
+            string bookName = string.Empty;
             //XmlNodeList scrBookList = bookNode1.SelectNodes(xPath, namespaceManager);
             XmlNodeList scrBookList = xdoc.SelectNodes(xPath, namespaceManager);
             if (scrBookList == null) return;
@@ -1707,12 +1710,21 @@ namespace SIL.Tool
                 xPath = ".//xhtml:span[@class='Chapter_Number']";
                 XmlNodeList chapterNodeList = scrBookNode.SelectNodes(xPath, namespaceManager);
 
+                if (bookNode != null)
+                {
+                    bookName = bookNode.InnerText;
+                    Regex regex = new Regex(@"[^a-zA-Z0-9\s]", (RegexOptions) 0);
+                    bookName = regex.Replace(bookName, "");
+                }
+
                 foreach (XmlNode chapterNode in chapterNodeList)
                 {
                     string chapterNumber = chapterNode.InnerText;
                     XmlAttribute attribute = xdoc.CreateAttribute("id");
                     if (bookNode != null)
-                        attribute.Value = "id_" + bookNode.InnerText + "_" + "Chapter" + chapterNumber;
+                    {
+                        attribute.Value = "id_" + bookName + "_" + "Chapter" + chapterNumber;
+                    }
                     if (chapterNode.Attributes != null) chapterNode.Attributes.Append(attribute);
                 }
 
@@ -2528,7 +2540,6 @@ namespace SIL.Tool
                             return (atts["lang"].Value);
                         else if (atts["xml:lang"] != null)
                             return (atts["xml:lang"].Value);
-
                     }
                 }
             }
@@ -2549,7 +2560,10 @@ namespace SIL.Tool
                     var atts = node.Attributes;
                     if (atts != null)
                     {
-                        return (atts["lang"].Value);
+                        if (atts["lang"] != null)
+                            return (atts["lang"].Value);
+                        else if(atts["xml:lang"] != null)
+                            return (atts["xml:lang"].Value);
                     }
                 }
             }

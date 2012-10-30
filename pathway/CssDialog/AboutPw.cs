@@ -26,7 +26,7 @@ using SIL.Tool.Localization;
 
 namespace SIL.PublishingSolution
 {
-    partial class AboutPw : Form
+    public partial class AboutPw : Form
     {
         #region Constructor
         /// <summary>
@@ -184,7 +184,7 @@ namespace SIL.PublishingSolution
             labelCompanyName.Text = AssemblyCompany;
             textBoxDescription.Text = AssemblyDescription;
 
-            HelpImproveGetValue(Common.GetOsName(), chkbHelpImprove);
+            HelpImproveGetValue(chkbHelpImprove);
         }
 
         /// <summary>
@@ -192,88 +192,33 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void okButton_Click(object sender, EventArgs e)
         {
-            HelpImproveSetValue(Common.GetOsName(), chkbHelpImprove);
+            HelpImproveSetValue(chkbHelpImprove);
             Close();
         }
 
-        private static void HelpImproveSetValue(string osName, CheckBox chbHelpImprove)
+        private const string HelpImproveSubKeyName = "SOFTWARE\\SIL\\Pathway";
+        private const string HelpImproveValueName = "HelpImprove";
+
+        private static void HelpImproveSetValue(CheckBox chbHelpImprove)
         {
-            string helpImproveValue = "False";
+            var helpImproveValue = (chbHelpImprove.Checked)? "Yes": "No";
 
-            if (chbHelpImprove.Checked)
-                helpImproveValue = "True";
-
-            if (osName == "Windows7")
-            {
-                string registryValue = Common.GetValueFromRegistryFromCurrentUser("SOFTWARE\\Wow6432Node\\SIL\\Pathway",
-                                                                       "HelpImprove");
-
-                if (registryValue == null)
-                {
-                    RegistryKey masterKey =
-                        Registry.CurrentUser.CreateSubKey("SOFTWARE\\Wow6432Node\\SIL\\Pathway");
-                    masterKey.SetValue("HelpImprove", helpImproveValue);
-                    masterKey.Close();
-                }
-                else
-                {
-                    RegistryKey masterKey =
-                        Registry.CurrentUser.CreateSubKey("SOFTWARE\\Wow6432Node\\SIL\\Pathway");
-                    masterKey.SetValue("HelpImprove", helpImproveValue);
-                    masterKey.Close();
-                }
-            }
-            else if (osName == "Windows XP")
-            {
-                string registryValue = Common.GetValueFromRegistryFromCurrentUser("SOFTWARE\\SIL\\Pathway", "HelpImprove");
-
-                if (registryValue == null)
-                {
-                    RegistryKey masterKey = Registry.CurrentUser.CreateSubKey("SOFTWARE\\SIL\\Pathway");
-                    masterKey.SetValue("HelpImprove", helpImproveValue);
-                    masterKey.Close();
-                }
-                else
-                {
-                    RegistryKey masterKey = Registry.CurrentUser.CreateSubKey("SOFTWARE\\SIL\\Pathway");
-                    masterKey.SetValue("HelpImprove", helpImproveValue);
-                    masterKey.Close();
-                }
-            }
+            RegistryKey subKey = Registry.CurrentUser.CreateSubKey(HelpImproveSubKeyName);
+            subKey.SetValue(HelpImproveValueName, helpImproveValue);
+            subKey.Close();
         }
 
-        private static void HelpImproveGetValue(string osName, CheckBox cbHelpImprove)
+        protected static void HelpImproveGetValue(CheckBox cbHelpImprove)
         {
-            string registryValue = null;
+            var registryValue = Common.GetValueFromRegistryFromCurrentUser(HelpImproveSubKeyName, HelpImproveValueName);
 
-            if (osName == "Windows7")
+            if (registryValue == null)
             {
-                registryValue = Common.GetValueFromRegistryFromCurrentUser("SOFTWARE\\Wow6432Node\\SIL\\Pathway", "HelpImprove");
-                if (registryValue == null)
-                {
-                    cbHelpImprove.Checked = false;
-                }
+                cbHelpImprove.Checked = false;
             }
-            else if (osName == "Windows XP")
+            else
             {
-                registryValue = Common.GetValueFromRegistryFromCurrentUser("SOFTWARE\\SIL\\Pathway", "HelpImprove");
-
-                if (registryValue == null)
-                {
-                    cbHelpImprove.Checked = false;
-                }
-            }
-
-            if (registryValue != null)
-            {
-                if (registryValue == "True")
-                {
-                    cbHelpImprove.Checked = true;
-                }
-                else
-                {
-                    cbHelpImprove.Checked = false;
-                }
+                cbHelpImprove.Checked = (registryValue == "Yes");
             }
         }
 

@@ -30,6 +30,7 @@ namespace SIL.PublishingSolution
         private List<string> _infoValue = new List<string>();
         private List<string> _propertyValue = new List<string>();
         private List<string> _groupPropertyValue = new List<string>();
+        private bool _isUnixOS = false;
         #endregion
 
         #region Public Variable
@@ -277,7 +278,7 @@ namespace SIL.PublishingSolution
                     if (result.IndexOf("page") > 0)
                     {
                         string pageNumberValue = pageDict[srchKey];
-                        if (Common.UnixVersionCheck())
+                        if (IsUnixOs)
                         {
                             if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
                                 return pageDict[srchKey];
@@ -542,6 +543,12 @@ namespace SIL.PublishingSolution
             }
         }
 
+        public bool IsUnixOs
+        {
+            get { return _isUnixOS; }
+            set { _isUnixOS = value; }
+        }
+
         /// <summary>
         /// Method to add the file location to copy the attached files.
         /// </summary>
@@ -717,6 +724,9 @@ namespace SIL.PublishingSolution
                             break;
                         case "webftpfldrnme":
                             baseNode.Attributes["value"].Value = cTool.TxtWebFtpFldrNme.Text;
+                            break;
+                        case "comment":
+                            baseNode.Attributes["value"].Value = cTool.TxtComment.Text;
                             break;
                         default:
                             break;
@@ -905,6 +915,7 @@ namespace SIL.PublishingSolution
                 else
                 {
                     EnableDisablePanel(true);
+                    if (cTool.TxtName.Text.ToLower() == "oneweb") { cTool.TsDelete.Enabled = false; }
                     //tsPreview.Enabled = false;
                     cTool.TxtApproved.Visible = false;
                     cTool.LblApproved.Visible = false;
@@ -1132,6 +1143,9 @@ namespace SIL.PublishingSolution
                                 break;
                             case "webftpfldrnme":
                                 cTool.TxtWebFtpFldrNme.Text = attribValue;
+                                break;
+                            case "comment":
+                                cTool.TxtComment.Text = attribValue;
                                 break;
                             default:
                                 break;
@@ -1680,6 +1694,9 @@ namespace SIL.PublishingSolution
                             case "webftpfldrnme":
                                 cTool.TxtWebFtpFldrNme.Text = attribValue;
                                 break;
+                            case "comment":
+                                cTool.TxtComment.Text = attribValue;
+                                break;
                             default:
                                 break;
                         }
@@ -2217,7 +2234,7 @@ namespace SIL.PublishingSolution
             if (currentRow == null) return false;
             //var currentDescription = currentRow.Cells[ColumnDescription].Value.ToString();
            // var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
-            var currentApprovedBy = grid[4, SelectedRowIndex].Value.ToString();
+            var currentApprovedBy = grid[5, SelectedRowIndex].Value.ToString();
             string type = grid[ColumnType, SelectedRowIndex].Value.ToString();
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
             if (PreviousStyleName.Length > 50)
@@ -2673,7 +2690,7 @@ namespace SIL.PublishingSolution
 
             }
 
-            if (grid.SelectedRows.Count <= 0 && Common.IsUnixOS())
+            if (grid.SelectedRows.Count <= 0 && IsUnixOs)
             {
                 Param.LoadSettings();
                 SetPreviousLayoutSelect(grid);
@@ -3360,7 +3377,7 @@ namespace SIL.PublishingSolution
                     //break;
                 }
                 string val = control.Text;
-                if (_propertyValue[i++] != val)
+                if (_propertyValue.Count >= i && _propertyValue[i++] != val)
                 {
                     propertyModified = true;
                     break;
@@ -4029,6 +4046,8 @@ namespace SIL.PublishingSolution
 
         public void ConfigurationTool_LoadBL()
         {
+
+            IsUnixOs = Common.UnixVersionCheck();
             _screenMode = ScreenMode.Load;
             _lastSelectedLayout = StyleEXE;
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
@@ -4051,7 +4070,17 @@ namespace SIL.PublishingSolution
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
             }
             //_redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
-            cTool.MinimumSize = new Size(497, 183);
+
+
+            if (IsUnixOs)
+            {
+                cTool.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                cTool.MinimumSize = new Size(497, 183);
+            }
+
             cTool.LoadSettings();
             SetInputTypeButton();
             ShowInputTypeButton();
@@ -4113,7 +4142,7 @@ namespace SIL.PublishingSolution
                         cTool.tsDelete_Click(sender, null);
                     }
                 }
-                else if (e.KeyCode == Keys.F1 && !Common.IsUnixOS())
+                else if (e.KeyCode == Keys.F1 && !IsUnixOs)
                 {
                     CallHelp();
                 }
@@ -4135,7 +4164,7 @@ namespace SIL.PublishingSolution
         private void CallHelp()
         {
             Common.PathwayHelpSetup();
-            if (Common.IsUnixOS())
+            if (IsUnixOs)
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.FileName = "chmsee";
@@ -4394,7 +4423,6 @@ namespace SIL.PublishingSolution
                 WriteCss();
             }
         }
-
         #endregion
     }
 }

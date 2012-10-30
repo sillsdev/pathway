@@ -54,6 +54,7 @@ namespace SIL.PublishingSolution
         private SettingsHelper _settingsHelper;
         public List<string> XsltFile = new List<string>();
         public static bool isFromConfigurationTool = false;
+        private bool _isUnixOS = false;
 
         public ExportThroughPathway()
         {
@@ -328,7 +329,7 @@ namespace SIL.PublishingSolution
                     DialogResult = DialogResult.Cancel;
                     Close();
                 }
-
+                _isUnixOS = Common.UnixVersionCheck();
                 PopulateFilesFromPreprocessingFolder();
 
                 // Load the .ssf or .ldml as appropriate
@@ -385,9 +386,14 @@ namespace SIL.PublishingSolution
                 SetOkStatus();
                 LoadProperty();
                 EnableUIElements();
-                Common.PathwayHelpSetup();
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+
+                if (!_isUnixOS)
+                {
+                    Common.PathwayHelpSetup();
+                    Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+                    Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+                }
+
                 if (AppDomain.CurrentDomain.FriendlyName.ToLower().IndexOf("configurationtool") == -1)
                 {
                     Common.databaseName = DatabaseName;
@@ -693,6 +699,7 @@ namespace SIL.PublishingSolution
                     case "webadminsitenme":
                     case "webemailid":
                     case "webftpfldrnme":
+                    case "comment":
                         if (attribValue.Trim().Length == 0)
                         {
                             return false;
@@ -783,9 +790,6 @@ namespace SIL.PublishingSolution
             string getApplicationPath = Common.GetApplicationPath();
             string helpImproveCommand = Path.Combine(getApplicationPath, "HelpImprove.exe");
             string registryPath = "Software\\SIL\\Pathway";
-
-            if (Common.GetOsName().ToLower() == "windows7")
-                registryPath = "Software\\Wow6432Node\\SIL\\Pathway";
 
             if (File.Exists(helpImproveCommand))
                 Common.RunCommand(helpImproveCommand, string.Format("{0} {1} {2}", "204.93.172.30", registryPath, "HelpImprove"), 0);
@@ -1250,7 +1254,8 @@ namespace SIL.PublishingSolution
         {
             //_helpTopic = "Concepts/Intellectual_Property.htm";
             _helpTopic = "Concepts/Intellectual_Property.htm";
-            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            //Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            SetTabbedHelpTopic();
             SendKeys.Send("{F1}");
             //Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             //btnHelp_Click(sender, e);
@@ -1391,14 +1396,28 @@ namespace SIL.PublishingSolution
                         break;
                 }
             //_helpTopic = "Concepts/Intellectual_Property.htm";
-
             //_helpTopic = "/Concepts/Intellectual_Property_(Copyright)_Info.htm";//Concepts/Intellectual_Property.htm
-            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            if (_isUnixOS)
+            {
+                Common.PathwayHelpSetup();
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                startInfo.FileName = "chmsee";
+                startInfo.Arguments = Common.HelpProv.HelpNamespace;
+                System.Diagnostics.Process.Start(startInfo);
+            }
+            else
+            {
+                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+                Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+               // SendKeys.Send("{F1}");
+            }
+
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetTabbedHelpTopic();
+            if(!_isUnixOS)
+                SetTabbedHelpTopic();
         }
     }
 }

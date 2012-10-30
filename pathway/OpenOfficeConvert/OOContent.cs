@@ -800,37 +800,39 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    //Insert Fixed Height Hidden Paragraph for TD-2912
-                    if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-                    {
-                        if (_previousParagraphName != null && _previousParagraphName.IndexOf("entry") == 0 &&
-                            (_childName.IndexOf("letHead") == -1 && _childName.IndexOf("pictureCaption") == -1))
-                        {
-                            //<text:p text:style-name="block_5f_p">
-                            //    <text:soft-page-break/>
-                            //    <text:span text:style-name="headword_5f_entry_5f_letData_5f_dicBody"
-                            //        >abaá</text:span>
-                            //</text:p> 
-                            //Insert Fixed Height Hidden Paragraph for TD-2912
-                            //if (_childName.IndexOf("letHead") == -1)
-                            //{
-                            if (_headwordIndex < _headwordVariable.Count)
-                            {
-                                _writer.WriteStartElement("text:p");
-                                _writer.WriteAttributeString("text:style-name", "block_5f_p");
-                                _writer.WriteStartElement("text:soft-page-break");
-                                _writer.WriteEndElement();
-                                _writer.WriteStartElement("text:span");
-                                _writer.WriteAttributeString("text:style-name", "headword_5f_entry_5f_letData_5f_dicBody");
+                    //I comment this feature, we can use this feature, when we need again.(TD-3187, 3226)
+                    ////Insert Fixed Height Hidden Paragraph for TD-2912
+                    //if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                    //{
+                    //    if (_previousParagraphName != null && _previousParagraphName.IndexOf("entry") == 0 &&
+                    //        (_childName.IndexOf("letHead") == -1 && _childName.IndexOf("pictureCaption") == -1))
+                    //    {
+                    //        //<text:p text:style-name="block_5f_p">
+                    //        //    <text:soft-page-break/>
+                    //        //    <text:span text:style-name="headword_5f_entry_5f_letData_5f_dicBody"
+                    //        //        >abaá</text:span>
+                    //        //</text:p> 
+                    //        //Insert Fixed Height Hidden Paragraph for TD-2912
+                    //        //if (_childName.IndexOf("letHead") == -1)
+                    //        //{
 
-                                _writer.WriteValue(_headwordVariable[_headwordIndex]); // + 1
-                                _writer.WriteEndElement();
+                    //        if (_headwordIndex < _headwordVariable.Count)
+                    //        {
+                    //            _writer.WriteStartElement("text:p");
+                    //            _writer.WriteAttributeString("text:style-name", "block_5f_p");
+                    //            _writer.WriteStartElement("text:soft-page-break");
+                    //            _writer.WriteEndElement();
+                    //            _writer.WriteStartElement("text:span");
+                    //            _writer.WriteAttributeString("text:style-name", "headword_5f_entry_5f_letData_5f_dicBody");
 
-                                _writer.WriteEndElement();
-                            }
-                            // }
-                        }
-                    }
+                    //            _writer.WriteValue(_headwordVariable[_headwordIndex]); // + 1
+                    //            _writer.WriteEndElement();
+
+                    //            _writer.WriteEndElement();
+                    //        }
+                    //        // }
+                    //    }
+                    //}
 
 
                     // Note: Paragraph Start Element
