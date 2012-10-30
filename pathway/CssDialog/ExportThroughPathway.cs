@@ -54,6 +54,7 @@ namespace SIL.PublishingSolution
         private SettingsHelper _settingsHelper;
         public List<string> XsltFile = new List<string>();
         public static bool isFromConfigurationTool = false;
+        private bool _isUnixOS = false;
 
         public ExportThroughPathway()
         {
@@ -328,7 +329,7 @@ namespace SIL.PublishingSolution
                     DialogResult = DialogResult.Cancel;
                     Close();
                 }
-
+                _isUnixOS = Common.UnixVersionCheck();
                 PopulateFilesFromPreprocessingFolder();
 
                 // Load the .ssf or .ldml as appropriate
@@ -1391,7 +1392,22 @@ namespace SIL.PublishingSolution
             //_helpTopic = "Concepts/Intellectual_Property.htm";
 
             //_helpTopic = "/Concepts/Intellectual_Property_(Copyright)_Info.htm";//Concepts/Intellectual_Property.htm
-            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            
+            Common.PathwayHelpSetup();
+            if (_isUnixOS)
+            {
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                startInfo.FileName = "chmsee";
+                startInfo.Arguments = Common.HelpProv.HelpNamespace;
+                System.Diagnostics.Process.Start(startInfo);
+            }
+            else
+            {
+                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+                Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+               // SendKeys.Send("{F1}");
+            }
+
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
