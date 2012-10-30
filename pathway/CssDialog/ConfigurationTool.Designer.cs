@@ -486,6 +486,7 @@ namespace SIL.PublishingSolution
             // 
             this.lnkLblUrl.AutoSize = true;
             this.lnkLblUrl.LinkArea = new System.Windows.Forms.LinkArea(0, 22);
+            this.lnkLblUrl.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkLblUrl.Location = new System.Drawing.Point(165, 447);
             this.lnkLblUrl.Name = "lnkLblUrl";
             this.lnkLblUrl.Size = new System.Drawing.Size(111, 17);
