@@ -5,7 +5,7 @@
 Global $StableVersionDate = ''
 Global $LatestSuffix = 'Testing-1.3.2.2752'
 Global $DEL_Installer = True
-Global $Bootstrap_version = "Version 1.17"
+Global $Bootstrap_version = "Version 1.17a"
 
 Opt('MustDeclareVars', 1)
 
