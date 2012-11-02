@@ -1,16 +1,16 @@
 .entry {
        text-align: left;
-       margin-left: 0pt;
+       margin-left: 12pt;
        text-indent: -12pt;
 }
 .revEntry {
        text-align: left;
-       margin-left: 0pt;
+       margin-left: 12pt;
        text-indent: -12pt;
 }
 .subentry {
        text-align: left;
-       margin-left: 0pt;
+       margin-left: 12pt;
        display: block;
 }
 
