@@ -983,11 +983,6 @@ namespace SIL.PublishingSolution
             Param.SetValue(Param.Media, _media);
             Param.SetValue(Param.PublicationLocation, dlg.OutputFolder);
             Param.Write();
-
-
-
-
-
             return success;
         }
 
@@ -998,9 +993,6 @@ namespace SIL.PublishingSolution
         /// <returns>path name to processed xthml file</returns>
         private string GetProcessedXhtml(PublicationInformation projInfo)
         {
-
-
-
             var result = projInfo.DefaultXhtmlFileWithPath;
 
             result = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),

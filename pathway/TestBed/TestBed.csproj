@@ -344,6 +344,10 @@
       <Project>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</Project>
       <Name>ParatextSupport</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PdfConvert\PdfConvert.csproj">
+      <Project>{E75BC85C-6240-45F0-ADBF-F0F80EEFD6D8}</Project>
+      <Name>PdfConvert</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PsExport\PsExport.csproj">
       <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
       <Name>PsExport</Name>

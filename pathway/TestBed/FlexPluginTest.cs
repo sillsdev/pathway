@@ -1179,5 +1179,30 @@ namespace TestBed
             MessageBox.Show("Done");
         }
 
+        private void btnPrinceExport_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
+
+            if (!File.Exists(txtCSSInput.Text))
+            {
+                MessageBox.Show("Please enter the valid CSS path");
+                return;
+            }
+            ExportPdf exportPDFPrince = new ExportPdf();
+            PublicationInformation projInfo = new PublicationInformation();
+
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
+            projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
+            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            projInfo.DictionaryPath = projInfo.ProjectPath;
+            exportPDFPrince.Export(projInfo);
+        }
+
        }
 }

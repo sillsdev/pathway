@@ -23,7 +23,7 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class ExportPdf : IExportProcess 
+    public class ExportPdf : IExportProcess
     {
         private static string _fullPrincePath;
         private static string _processedXhtml;
@@ -44,10 +44,20 @@ namespace SIL.PublishingSolution
         {
             bool returnValue = false;
             if (RegPrinceKey != null)
+            {
                 if (inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture")
                 {
-                    returnValue = true;
+                    return true;
                 }
+            }
+            else if (RegPrinceKey == null && Common.UnixVersionCheck())
+            {
+                if (Directory.Exists("/usr/lib/prince/bin"))
+                {
+                    return true;
+                }
+            }
+
             return returnValue;
         }
         #endregion Handle
@@ -63,9 +73,11 @@ namespace SIL.PublishingSolution
                     regPrinceKey =
                         Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
                     if (regPrinceKey == null)
+                    {
                         regPrinceKey =
                             Registry.LocalMachine.OpenSubKey(
                                 @"SOFTWARE\Wow6432Node\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
+                    }
                 }
                 catch (Exception)
                 {
@@ -91,21 +103,19 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             bool success;
-            bool isUnixOS = false;
+            bool isUnixOS = Common.UnixVersionCheck();
             try
             {
                 var regPrinceKey = RegPrinceKey;
-                if (regPrinceKey != null || Common.UnixVersionCheck())
+                if (regPrinceKey != null || isUnixOS)
                 {
                     var curdir = Environment.CurrentDirectory;
                     PreExportProcess preProcessor = new PreExportProcess(projInfo);
-                    isUnixOS = Common.UnixVersionCheck();
                     if (isUnixOS)
                     {
                         projInfo.DefaultXhtmlFileWithPath =
                             Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
                     }
-
                     Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                     preProcessor.GetTempFolderPath();
                     preProcessor.ImagePreprocess();
@@ -162,7 +172,7 @@ namespace SIL.PublishingSolution
                         }
                         //Common.RunCommand("prince ", _processedXhtml + " -o, " + xhtmlFileName + ".pdf", 1);
                     }
-                    
+
                     if (!Common.Testing)
                         Process.Start(xhtmlFileName + ".pdf");
                     Environment.CurrentDirectory = curdir;
