@@ -317,7 +317,7 @@ namespace TestBed
 
         private void Btn_InputPath_Click(object sender, EventArgs e)
         {
-            txtInputPath.Text = GetFilePath("XHTML Files|*.xhtml|XML Files|*.xml|Tex|*.tex|Zip Files|*.zip|usx Files|*.usx|usfm Files|*.usfm|Text Files|*.txt|All Files|*.*");
+            txtInputPath.Text = GetFilePath("XHTML Files|*.xhtml|XML Files|*.xml|Tex|*.tex|Zip Files|*.zip|usx Files|*.usx|sfm Files|*.sfm|Text Files|*.txt|All Files|*.*");
             txtCSSInput.Text = Path.ChangeExtension(txtInputPath.Text, "css");
         }
 
@@ -1165,5 +1165,19 @@ namespace TestBed
                 MessageBox.Show("Updated sucessfully.");
             }
         }
-    }
+
+        private void btnSfm2Usx_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid USX file");
+                return;
+            }
+
+            SFMtoUsx sfMtoUsx = new SFMtoUsx();
+            sfMtoUsx.ConvertSFMtoUsx(txtInputPath.Text, Path.GetDirectoryName(txtInputPath.Text) + "\\output.usx");
+            MessageBox.Show("Done");
+        }
+
+       }
 }

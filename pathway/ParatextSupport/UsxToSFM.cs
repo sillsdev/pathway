@@ -289,8 +289,6 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// input:  <figure style="fig" desc="Map" file="Ruth.pdf" size="col" loc="" copy="" ref="RUT 1.0">Israel</figure>
-        /// output: \fig Map|Ruth.pdf|col|||Israel|RUT 1.0\fig*
         /// </summary>
         private void Chapter()
         {
