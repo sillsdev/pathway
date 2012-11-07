@@ -94,32 +94,96 @@ namespace SIL.PublishingSolution
             switch (word)
             {
                 case "\\id":
-                    book(line);
+                    Book(line);
                     break;
                 case "\\h":
-                    para(line, word);
+                    Para(line, word);
                     break;
                 case "\\c":
-                    chapter(line);
+                    Chapter(line);
+                    break;
+                case "\\v":
+                    Verse(line, word);
                     break;
                 default:
-                    para(line, word);
+                    Para(line, word);
                     break;
             }
         }
 
-        private void book(string line)
+        /// <summary>
+        /// input:  <verse number="1" style="v" />abc </verse>
+        /// output: \v 1 abc
+        /// </summary>
+        private void Verse(string line, string word)
         {
+            word = word.Replace("\\", "");
             string data = Common.RightString(line, " ");
-            _writer.WriteStartElement("book");
-            _writer.WriteAttributeString("code", data);
-            _writer.WriteAttributeString("style", "id");
-            _writer.WriteString(data);
+            string number = Common.LeftString(data, " ");
+            data = Common.RightString(data, " ");
+
+            _writer.WriteStartElement("verse");
+            _writer.WriteAttributeString("number", number);
+            _writer.WriteAttributeString("style", word);
+
+            data = WriteFigure(data);
+            if (data.Length > 0)
+            {
+                _writer.WriteString(data);
+            }
             _writer.WriteEndElement();
 
         }
 
-        private void para(string line, string word)
+
+
+        /// <summary>
+        /// Collect Figure Tag Information
+        /// <figure style="fig" desc="Map of Israel and Moab during the time of Naomi and Ruth"
+        /// file="Ruth-CS4_BW_ver2.pdf" size="col" loc="" copy="" ref="RUT 1.0">
+        /// </summary>
+        private string WriteFigure(string data)
+        {
+
+            int start,end;
+            string sourcePart, extractPart;
+            FindStartEnd(data, "\\fig", "\\fig*", out start, out end);
+
+            if (start < 0 || end < 0)
+            {
+                return data;
+            }
+            BreakNode(data, start, end, out sourcePart, out extractPart);
+            if (data.Length > 0)
+            {
+                _writer.WriteString(sourcePart);
+                sourcePart = string.Empty;
+            }
+
+            extractPart = extractPart.Replace("\\fig*", "");
+            extractPart = extractPart.Replace("\\fig", "");
+
+            string[] fig = extractPart.Split('|');
+
+            string desc = fig[0];
+            string file = fig[1];
+            string size = fig[2];
+            string loc = fig[3];
+            string copy = fig[4];
+            string refer = fig[5];
+            _writer.WriteStartElement("figure");
+            _writer.WriteAttributeString("style", "fig");
+            _writer.WriteAttributeString("desc", desc);
+            _writer.WriteAttributeString("file", file);
+            _writer.WriteAttributeString("size", size);
+            _writer.WriteAttributeString("loc", loc);
+            _writer.WriteAttributeString("copy", copy);
+            _writer.WriteAttributeString("ref", refer);
+            _writer.WriteEndElement();
+            return sourcePart;
+        }
+
+        private void Para(string line, string word)
         {
             word = word.Replace("\\", "");
             string data = Common.RightString(line, " ");
@@ -133,7 +197,7 @@ namespace SIL.PublishingSolution
 
         }
 
-        private void chapter(string line)
+        private void Chapter(string line)
         {
             string data = Common.RightString(line, " ");
             _writer.WriteStartElement("chapter");
@@ -142,7 +206,40 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
 
         }
- 
+
+        private void Book(string line)
+        {
+            string data = Common.RightString(line, " ");
+            _writer.WriteStartElement("book");
+            _writer.WriteAttributeString("code", data);
+            _writer.WriteAttributeString("style", "id");
+            _writer.WriteString(data);
+            _writer.WriteEndElement();
+
+        }
+
+        private void FindStartEnd(string data,string startStr,string endStr, out int start,out int end)
+        {
+            start = data.IndexOf(startStr);
+            end = data.IndexOf(endStr) + endStr.Length;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data">This is Pathway</param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="sourcePart"></param>
+        /// <param name="extractPart"></param>
+        private void BreakNode(string data, int start, int end, out string sourcePart,out string extractPart)
+        {
+
+            extractPart = data.Substring(start, end - start );
+            sourcePart = data.Remove(start, end - start);
+        }
+
+
         private string StackPop(Stack<string> stack)
         {
             string result = string.Empty;
@@ -176,7 +273,7 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("USX");
             //_writer.WriteAttributeString("version", "2.0");
 
-            _sfmFile = new StreamReader(_sfmFullPath);
+            _sfmFile = new StreamReader(_sfmFullPath,true);
         }
     }
 }
