@@ -362,7 +362,7 @@
         </text:p>
       </style:footer>
     </style:master-page>
-    <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="First_20_Page" style:page-layout-name="pm2">
+    <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="TOC_20_Page" style:page-layout-name="pm2">
       <style:footer>
         <text:p text:style-name="Footer">
           <text:tab />
@@ -370,7 +370,7 @@
         </text:p>
       </style:footer>
     </style:master-page>
-    <style:master-page style:name="TOC_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7">
+    <style:master-page style:name="CopyRight_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7">
       <style:footer>
         <text:p text:style-name="Footer">
           <text:tab />

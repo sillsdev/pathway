@@ -44,6 +44,8 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSfm2Usx = new System.Windows.Forms.Button();
+            this.btnRemoveBom = new System.Windows.Forms.Button();
             this.btnUsx2SFM = new System.Windows.Forms.Button();
             this.btnDBL_Metadata = new System.Windows.Forms.Button();
             this.btnSty2XML = new System.Windows.Forms.Button();
@@ -55,8 +57,6 @@
             this.button12 = new System.Windows.Forms.Button();
             this.btnXeLaTex = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.btnXeTex = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.btnParaText = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -67,14 +67,13 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.pbWordPress = new System.Windows.Forms.ProgressBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnFlexTest2 = new System.Windows.Forms.Button();
             this.chkIncrease = new System.Windows.Forms.CheckBox();
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnRemoveBom = new System.Windows.Forms.Button();
+            this.btnPrinceExport = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -181,7 +180,7 @@
             // 
             this.InDesign.AccessibleName = "BtnFlexTest";
             this.InDesign.BackColor = System.Drawing.Color.MediumOrchid;
-            this.InDesign.Location = new System.Drawing.Point(207, 128);
+            this.InDesign.Location = new System.Drawing.Point(176, 128);
             this.InDesign.Name = "InDesign";
             this.InDesign.Size = new System.Drawing.Size(78, 28);
             this.InDesign.TabIndex = 49;
@@ -196,7 +195,7 @@
             this.panel2.Controls.Add(this.txtCSSInput);
             this.panel2.Controls.Add(this.txtInputPath);
             this.panel2.Controls.Add(this.Btn_InputPath);
-            this.panel2.Location = new System.Drawing.Point(41, 24);
+            this.panel2.Location = new System.Drawing.Point(10, 24);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(513, 98);
             this.panel2.TabIndex = 50;
@@ -237,6 +236,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnPrinceExport);
+            this.groupBox1.Controls.Add(this.btnSfm2Usx);
             this.groupBox1.Controls.Add(this.btnRemoveBom);
             this.groupBox1.Controls.Add(this.btnUsx2SFM);
             this.groupBox1.Controls.Add(this.btnDBL_Metadata);
@@ -249,8 +250,6 @@
             this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.btnXeLaTex);
             this.groupBox1.Controls.Add(this.button11);
-            this.groupBox1.Controls.Add(this.button8);
-            this.groupBox1.Controls.Add(this.btnXeTex);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.btnParaText);
             this.groupBox1.Controls.Add(this.button6);
@@ -261,19 +260,43 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.InDesign);
-            this.groupBox1.Location = new System.Drawing.Point(26, 247);
+            this.groupBox1.Location = new System.Drawing.Point(13, 247);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(583, 270);
+            this.groupBox1.Size = new System.Drawing.Size(623, 270);
             this.groupBox1.TabIndex = 51;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // btnSfm2Usx
+            // 
+            this.btnSfm2Usx.AccessibleName = "btnSfm2Usx";
+            this.btnSfm2Usx.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnSfm2Usx.Location = new System.Drawing.Point(290, 234);
+            this.btnSfm2Usx.Name = "btnSfm2Usx";
+            this.btnSfm2Usx.Size = new System.Drawing.Size(72, 28);
+            this.btnSfm2Usx.TabIndex = 76;
+            this.btnSfm2Usx.Text = "SFM to Usx";
+            this.btnSfm2Usx.UseVisualStyleBackColor = false;
+            this.btnSfm2Usx.Click += new System.EventHandler(this.btnSfm2Usx_Click);
+            // 
+            // btnRemoveBom
+            // 
+            this.btnRemoveBom.AccessibleName = "BtnFlexTest";
+            this.btnRemoveBom.BackColor = System.Drawing.Color.Aquamarine;
+            this.btnRemoveBom.Location = new System.Drawing.Point(368, 234);
+            this.btnRemoveBom.Name = "btnRemoveBom";
+            this.btnRemoveBom.Size = new System.Drawing.Size(84, 27);
+            this.btnRemoveBom.TabIndex = 75;
+            this.btnRemoveBom.Text = "Rem BOM";
+            this.btnRemoveBom.UseVisualStyleBackColor = false;
+            this.btnRemoveBom.Click += new System.EventHandler(this.btnRemoveBom_Click);
+            // 
             // btnUsx2SFM
             // 
             this.btnUsx2SFM.AccessibleName = "BtnFlexTest";
             this.btnUsx2SFM.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.btnUsx2SFM.Location = new System.Drawing.Point(243, 234);
+            this.btnUsx2SFM.Location = new System.Drawing.Point(212, 234);
             this.btnUsx2SFM.Name = "btnUsx2SFM";
             this.btnUsx2SFM.Size = new System.Drawing.Size(72, 28);
             this.btnUsx2SFM.TabIndex = 74;
@@ -284,7 +307,7 @@
             // btnDBL_Metadata
             // 
             this.btnDBL_Metadata.AccessibleName = "BtnFlexTest";
-            this.btnDBL_Metadata.Location = new System.Drawing.Point(142, 193);
+            this.btnDBL_Metadata.Location = new System.Drawing.Point(110, 193);
             this.btnDBL_Metadata.Name = "btnDBL_Metadata";
             this.btnDBL_Metadata.Size = new System.Drawing.Size(95, 28);
             this.btnDBL_Metadata.TabIndex = 73;
@@ -295,7 +318,7 @@
             // btnSty2XML
             // 
             this.btnSty2XML.AccessibleName = "BtnFlexTest";
-            this.btnSty2XML.Location = new System.Drawing.Point(40, 193);
+            this.btnSty2XML.Location = new System.Drawing.Point(8, 193);
             this.btnSty2XML.Name = "btnSty2XML";
             this.btnSty2XML.Size = new System.Drawing.Size(95, 28);
             this.btnSty2XML.TabIndex = 72;
@@ -307,7 +330,7 @@
             // 
             this.btnEpub.AccessibleName = "BtnFlexTest";
             this.btnEpub.BackColor = System.Drawing.Color.Pink;
-            this.btnEpub.Location = new System.Drawing.Point(142, 234);
+            this.btnEpub.Location = new System.Drawing.Point(110, 234);
             this.btnEpub.Name = "btnEpub";
             this.btnEpub.Size = new System.Drawing.Size(95, 28);
             this.btnEpub.TabIndex = 71;
@@ -319,7 +342,7 @@
             // 
             this.btnWordPress.AccessibleName = "BtnWordPress";
             this.btnWordPress.BackColor = System.Drawing.Color.Plum;
-            this.btnWordPress.Location = new System.Drawing.Point(259, 158);
+            this.btnWordPress.Location = new System.Drawing.Point(227, 158);
             this.btnWordPress.Name = "btnWordPress";
             this.btnWordPress.Size = new System.Drawing.Size(95, 28);
             this.btnWordPress.TabIndex = 69;
@@ -331,7 +354,7 @@
             // 
             this.btnYouVersion.AccessibleName = "BtnGoBibleTest";
             this.btnYouVersion.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnYouVersion.Location = new System.Drawing.Point(459, 128);
+            this.btnYouVersion.Location = new System.Drawing.Point(428, 128);
             this.btnYouVersion.Name = "btnYouVersion";
             this.btnYouVersion.Size = new System.Drawing.Size(78, 28);
             this.btnYouVersion.TabIndex = 68;
@@ -343,7 +366,7 @@
             // 
             this.btnGetSoftwareData.AccessibleName = "BtnFlexTest";
             this.btnGetSoftwareData.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.btnGetSoftwareData.Location = new System.Drawing.Point(40, 236);
+            this.btnGetSoftwareData.Location = new System.Drawing.Point(8, 236);
             this.btnGetSoftwareData.Name = "btnGetSoftwareData";
             this.btnGetSoftwareData.Size = new System.Drawing.Size(95, 28);
             this.btnGetSoftwareData.TabIndex = 67;
@@ -354,7 +377,7 @@
             // btnDotNet
             // 
             this.btnDotNet.AccessibleName = "BtnFlexTest";
-            this.btnDotNet.Location = new System.Drawing.Point(434, 162);
+            this.btnDotNet.Location = new System.Drawing.Point(403, 158);
             this.btnDotNet.Name = "btnDotNet";
             this.btnDotNet.Size = new System.Drawing.Size(114, 28);
             this.btnDotNet.TabIndex = 66;
@@ -364,7 +387,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(142, 160);
+            this.button12.Location = new System.Drawing.Point(110, 160);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(112, 26);
             this.button12.TabIndex = 65;
@@ -376,7 +399,7 @@
             // 
             this.btnXeLaTex.AccessibleName = "BtnFlexTest";
             this.btnXeLaTex.BackColor = System.Drawing.Color.Orange;
-            this.btnXeLaTex.Location = new System.Drawing.Point(123, 128);
+            this.btnXeLaTex.Location = new System.Drawing.Point(92, 128);
             this.btnXeLaTex.Name = "btnXeLaTex";
             this.btnXeLaTex.Size = new System.Drawing.Size(78, 28);
             this.btnXeLaTex.TabIndex = 62;
@@ -388,7 +411,7 @@
             // 
             this.button11.AccessibleName = "BtnGoBibleTest";
             this.button11.BackColor = System.Drawing.Color.Green;
-            this.button11.Location = new System.Drawing.Point(291, 128);
+            this.button11.Location = new System.Drawing.Point(260, 128);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(78, 28);
             this.button11.TabIndex = 61;
@@ -396,24 +419,10 @@
             this.button11.UseVisualStyleBackColor = false;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(0, 0);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 63;
-            // 
-            // btnXeTex
-            // 
-            this.btnXeTex.Location = new System.Drawing.Point(0, 0);
-            this.btnXeTex.Name = "btnXeTex";
-            this.btnXeTex.Size = new System.Drawing.Size(75, 23);
-            this.btnXeTex.TabIndex = 64;
-            // 
             // button7
             // 
             this.button7.AccessibleName = "BtnFlexTest";
-            this.button7.Location = new System.Drawing.Point(41, 159);
+            this.button7.Location = new System.Drawing.Point(10, 159);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(95, 28);
             this.button7.TabIndex = 58;
@@ -425,7 +434,7 @@
             // 
             this.btnParaText.AccessibleName = "BtnFlexTest";
             this.btnParaText.BackColor = System.Drawing.Color.Salmon;
-            this.btnParaText.Location = new System.Drawing.Point(375, 128);
+            this.btnParaText.Location = new System.Drawing.Point(344, 128);
             this.btnParaText.Name = "btnParaText";
             this.btnParaText.Size = new System.Drawing.Size(78, 28);
             this.btnParaText.TabIndex = 57;
@@ -436,7 +445,7 @@
             // button6
             // 
             this.button6.AccessibleName = "BtnLogos";
-            this.button6.Location = new System.Drawing.Point(360, 158);
+            this.button6.Location = new System.Drawing.Point(328, 158);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(68, 28);
             this.button6.TabIndex = 56;
@@ -449,20 +458,20 @@
             this.chkPage.AutoSize = true;
             this.chkPage.Checked = true;
             this.chkPage.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPage.Location = new System.Drawing.Point(418, 204);
+            this.chkPage.Location = new System.Drawing.Point(528, 75);
             this.chkPage.Name = "chkPage";
-            this.chkPage.Size = new System.Drawing.Size(118, 17);
+            this.chkPage.Size = new System.Drawing.Size(93, 17);
             this.chkPage.TabIndex = 55;
-            this.chkPage.Text = "With Page Property";
+            this.chkPage.Text = "Page Property";
             this.chkPage.UseVisualStyleBackColor = true;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.radDictionary);
             this.panel3.Controls.Add(this.radScripture);
-            this.panel3.Location = new System.Drawing.Point(412, 232);
+            this.panel3.Location = new System.Drawing.Point(528, 24);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(154, 25);
+            this.panel3.Size = new System.Drawing.Size(80, 49);
             this.panel3.TabIndex = 54;
             // 
             // radDictionary
@@ -480,7 +489,7 @@
             // radScripture
             // 
             this.radScripture.AutoSize = true;
-            this.radScripture.Location = new System.Drawing.Point(81, 3);
+            this.radScripture.Location = new System.Drawing.Point(3, 27);
             this.radScripture.Name = "radScripture";
             this.radScripture.Size = new System.Drawing.Size(67, 17);
             this.radScripture.TabIndex = 1;
@@ -490,7 +499,7 @@
             // button5
             // 
             this.button5.AccessibleName = "BtnFlexTest";
-            this.button5.Location = new System.Drawing.Point(240, 193);
+            this.button5.Location = new System.Drawing.Point(208, 193);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(68, 28);
             this.button5.TabIndex = 53;
@@ -502,7 +511,7 @@
             // 
             this.button4.AccessibleName = "BtnFlexTest";
             this.button4.BackColor = System.Drawing.SystemColors.Highlight;
-            this.button4.Location = new System.Drawing.Point(40, 128);
+            this.button4.Location = new System.Drawing.Point(8, 128);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(78, 28);
             this.button4.TabIndex = 52;
@@ -513,20 +522,13 @@
             // button1
             // 
             this.button1.AccessibleName = "BtnFlexTest";
-            this.button1.Location = new System.Drawing.Point(314, 192);
+            this.button1.Location = new System.Drawing.Point(283, 192);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(91, 28);
             this.button1.TabIndex = 51;
             this.button1.Text = "&OLD_OpenOffice";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // pbWordPress
-            // 
-            this.pbWordPress.Location = new System.Drawing.Point(184, 515);
-            this.pbWordPress.Name = "pbWordPress";
-            this.pbWordPress.Size = new System.Drawing.Size(196, 21);
-            this.pbWordPress.TabIndex = 70;
             // 
             // groupBox2
             // 
@@ -597,17 +599,17 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnRemoveBom
+            // btnPrinceExport
             // 
-            this.btnRemoveBom.AccessibleName = "BtnFlexTest";
-            this.btnRemoveBom.BackColor = System.Drawing.Color.Aquamarine;
-            this.btnRemoveBom.Location = new System.Drawing.Point(321, 234);
-            this.btnRemoveBom.Name = "btnRemoveBom";
-            this.btnRemoveBom.Size = new System.Drawing.Size(84, 27);
-            this.btnRemoveBom.TabIndex = 75;
-            this.btnRemoveBom.Text = "Rem BOM";
-            this.btnRemoveBom.UseVisualStyleBackColor = false;
-            this.btnRemoveBom.Click += new System.EventHandler(this.btnRemoveBom_Click);
+            this.btnPrinceExport.AccessibleName = "BtnFlexTest";
+            this.btnPrinceExport.BackColor = System.Drawing.Color.GreenYellow;
+            this.btnPrinceExport.Location = new System.Drawing.Point(512, 128);
+            this.btnPrinceExport.Name = "btnPrinceExport";
+            this.btnPrinceExport.Size = new System.Drawing.Size(78, 28);
+            this.btnPrinceExport.TabIndex = 77;
+            this.btnPrinceExport.Text = "Prince Export";
+            this.btnPrinceExport.UseVisualStyleBackColor = false;
+            this.btnPrinceExport.Click += new System.EventHandler(this.btnPrinceExport_Click);
             // 
             // FlexPluginTest
             // 
@@ -617,7 +619,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(646, 532);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.pbWordPress);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Name = "FlexPluginTest";
@@ -671,8 +672,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button btnParaText;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button btnXeTex;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button btnFlexTest2;
         private System.Windows.Forms.Button btnXeLaTex;
@@ -681,11 +680,12 @@
         private System.Windows.Forms.Button btnGetSoftwareData;
         private System.Windows.Forms.Button btnYouVersion;
         private System.Windows.Forms.Button btnWordPress;
-        private System.Windows.Forms.ProgressBar pbWordPress;
         private System.Windows.Forms.Button btnEpub;
         private System.Windows.Forms.Button btnSty2XML;
         private System.Windows.Forms.Button btnDBL_Metadata;
         private System.Windows.Forms.Button btnUsx2SFM;
         private System.Windows.Forms.Button btnRemoveBom;
+        private System.Windows.Forms.Button btnSfm2Usx;
+        private System.Windows.Forms.Button btnPrinceExport;
     }
 }

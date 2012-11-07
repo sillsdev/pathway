@@ -76,6 +76,8 @@ namespace SIL.PublishingSolution
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             CreateToolTip();
             btnEdit.Visible = _showEdit;
+            btnPrevious.Visible = false;
+            btnNext.Visible = false;
         }
 
         private void CreateToolTip()
@@ -272,7 +274,6 @@ namespace SIL.PublishingSolution
                     _previewFileName1 = Common.PathCombine(_path, file1);
                     pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
                     _cssFile = grid[5, rowid].Value.ToString();
-                    ShowPreview(1);
                     SelectedStyle = grid[0, rowid].Value.ToString();
                     string file2 = grid[3, rowid].Value.ToString();
                     _previewFileName2 = Common.PathCombine(_path, file2);
@@ -503,7 +504,16 @@ namespace SIL.PublishingSolution
 
         private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (grid.RowCount > 0)
+            {
+                try
+                {
+                    ShowPreview(1);
+                }
+                catch
+                {
+                }
+            }
         }
     }
 }

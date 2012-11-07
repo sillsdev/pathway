@@ -240,6 +240,7 @@
   <ItemGroup>
     <Compile Include="ParatextPathwayLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SFMtoUsx.cs" />
     <Compile Include="StyToCSS.cs" />
     <Compile Include="UsxToSFM.cs" />
   </ItemGroup>
