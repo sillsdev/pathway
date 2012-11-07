@@ -64,4 +64,4 @@
 	noconsole = yes
 [guitool "B6 NoInfoXng"]
 	cmd = git checkout */AssemblyInfo.cs
-
+	noconsole = yes
