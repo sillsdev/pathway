@@ -21,6 +21,7 @@ namespace SIL.PublishingSolution
 
         private XmlTextWriter _writer;
         private StreamReader _sfmFile;
+        private short _noTagsOpen=0;
 
         private Dictionary<string, Dictionary<string, string>> _styleInfo =
             new Dictionary<string, Dictionary<string, string>>();
@@ -39,6 +40,7 @@ namespace SIL.PublishingSolution
 
         private bool _isclassNameExist;
         private List<string> _xhtmlAttribute = new List<string>();
+
 
         #endregion
 
@@ -89,81 +91,140 @@ namespace SIL.PublishingSolution
         private void ParseLine(string line)
         {
             string value;
-            string word = Common.LeftString(line, " ");
-
-            switch (word)
+            string[] parse = line.Split('\\');
+            foreach (string node in parse)
             {
-                case "\\id":
-                    Book(line);
-                    break;
-                case "\\h":
-                    Para(line, word);
-                    break;
-                case "\\c":
-                    Chapter(line);
-                    break;
-                case "\\v":
-                    Verse(line, word);
-                    break;
-                default:
-                    Para(line, word);
-                    break;
+                if (node.Trim().Length == 0) continue;
+
+                string style = Common.LeftString(node, " ");
+                string content = Common.LeftRemove(node, style).Trim();
+                switch (style)
+                {
+                    case "id":
+                        Book(style,content);
+                        break;
+                    case "h":
+                        Para(style, content);
+                        break;
+                    case "c":
+                        Chapter(style, content);
+                        break;
+                    case "v":
+                        Verse(style, content);
+                        break;
+                    case "fig":
+                        Figure(style, content);
+                        break;
+                    default:
+                        Other(style, content);
+                        break;
+                }
             }
+            CloseTag();
+
         }
-
-        /// <summary>
-        /// input:  <verse number="1" style="v" />abc </verse>
-        /// output: \v 1 abc
-        /// </summary>
-        private void Verse(string line, string word)
+        
+        private void Para(string style, string content)
         {
-            word = word.Replace("\\", "");
-            string data = Common.RightString(line, " ");
-            string number = Common.LeftString(data, " ");
-            data = Common.RightString(data, " ");
-
-            _writer.WriteStartElement("verse");
-            _writer.WriteAttributeString("number", number);
-            _writer.WriteAttributeString("style", word);
-
-            data = WriteFigure(data);
-            if (data.Length > 0)
+            _writer.WriteStartElement("para");
+            _writer.WriteAttributeString("style", style);
+            if (content.Length > 0)
             {
-                _writer.WriteString(data);
+                _writer.WriteString(content);
             }
             _writer.WriteEndElement();
 
         }
 
+        private void Other(string style, string content)
+        {
 
+            if (style.Trim().Length == 0)
+            {
+                if (content.Length > 0)
+                {
+                    _writer.WriteString(content);
+                }
+            }
+            else if (style.IndexOf('*') > 0)
+            {
+                _writer.WriteEndElement();
+                _noTagsOpen--;
+                if (content.Length > 0)
+                {
+                    _writer.WriteString(content);
+                }
+            }
+            else
+            {
+                _writer.WriteStartElement("para");
+                _writer.WriteAttributeString("style", style);
+                _noTagsOpen++;
+                if (content.Length > 0)
+                {
+                    _writer.WriteString(content);
+                }
+            }
+        }
+
+        private void CloseTag()
+        {
+            for(int i=1;i<= _noTagsOpen; i++ )
+            {
+                _writer.WriteEndElement();
+            }
+            _noTagsOpen = 0;
+        }
+
+
+        /// <summary>
+        /// input:  <verse number="1" style="v" />abc </verse>
+        /// output: \v 1 abc
+        /// </summary>
+        private void Verse(string style, string content)
+        {
+            string number = Common.LeftString(content, " ");
+            content = Common.RightString(content, " ");
+
+            _writer.WriteStartElement("verse");
+            _writer.WriteAttributeString("number", number);
+            _writer.WriteAttributeString("style", style);
+
+            if (content.Length > 0)
+            {
+                _writer.WriteString(content);
+            }
+            _noTagsOpen++;
+
+        }
 
         /// <summary>
         /// Collect Figure Tag Information
         /// <figure style="fig" desc="Map of Israel and Moab during the time of Naomi and Ruth"
         /// file="Ruth-CS4_BW_ver2.pdf" size="col" loc="" copy="" ref="RUT 1.0">
         /// </summary>
-        private string WriteFigure(string data)
+        private void Figure(string style, string content)
         {
 
-            int start,end;
-            string sourcePart, extractPart;
-            FindStartEnd(data, "\\fig", "\\fig*", out start, out end);
+            //int start,end;
+            //string sourcePart, extractPart;
+            //FindStartEnd(data, "\\fig", "\\fig*", out start, out end);
 
-            if (start < 0 || end < 0)
-            {
-                return data;
-            }
-            BreakNode(data, start, end, out sourcePart, out extractPart);
-            if (data.Length > 0)
-            {
-                _writer.WriteString(sourcePart);
-                sourcePart = string.Empty;
-            }
+            //if (start < 0 || end < 0)
+            //{
+            //    return data;
+            //}
+            //BreakNode(data, start, end, out sourcePart, out extractPart);
+            //if (data.Length > 0)
+            //{
+            //    _writer.WriteString(sourcePart);
+            //    sourcePart = string.Empty;
+            //}
 
-            extractPart = extractPart.Replace("\\fig*", "");
-            extractPart = extractPart.Replace("\\fig", "");
+            //extractPart = extractPart.Replace("\\fig*", "");
+            //extractPart = extractPart.Replace("\\fig", "");
 
-            string[] fig = extractPart.Split('|');
+            string[] fig = content.Split('|');
 
             string desc = fig[0];
             string file = fig[1];
@@ -180,40 +241,24 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("copy", copy);
             _writer.WriteAttributeString("ref", refer);
             _writer.WriteEndElement();
-            return sourcePart;
+            //return sourcePart;
         }
 
-        private void Para(string line, string word)
+        private void Chapter(string style, string content)
         {
-            word = word.Replace("\\", "");
-            string data = Common.RightString(line, " ");
-            _writer.WriteStartElement("para");
-            _writer.WriteAttributeString("style", word);
-            if (data.Length > 0)
-            {
-                _writer.WriteString(data);
-            }
-            _writer.WriteEndElement();
-
-        }
-
-        private void Chapter(string line)
-        {
-            string data = Common.RightString(line, " ");
             _writer.WriteStartElement("chapter");
-            _writer.WriteAttributeString("number", data);
-            _writer.WriteAttributeString("style", "c");
+            _writer.WriteAttributeString("number", content);
+            _writer.WriteAttributeString("style", style);
             _writer.WriteEndElement();
 
         }
 
-        private void Book(string line)
+        private void Book(string style, string content)
         {
-            string data = Common.RightString(line, " ");
             _writer.WriteStartElement("book");
-            _writer.WriteAttributeString("code", data);
-            _writer.WriteAttributeString("style", "id");
-            _writer.WriteString(data);
+            _writer.WriteAttributeString("code", content);
+            _writer.WriteAttributeString("style", style);
+            _writer.WriteString(content);
             _writer.WriteEndElement();
 
         }
