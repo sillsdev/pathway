@@ -950,7 +950,7 @@ namespace SIL.PublishingSolution
                 //{
                 //    content = content.TrimEnd() + " ";
                 //}
-                if (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat == "Genesis 1")
+                if (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0)
                 {
                     //_strBook = content;
                     content = content.TrimEnd() + " ";
@@ -965,7 +965,7 @@ namespace SIL.PublishingSolution
                         _is1stBookFound = true;
                     }
                 }
-                else if (_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat == "Gen 1")
+                else if (_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen 1") == 0)
                 {
                     //_strBook = content;
                     content = content.TrimEnd() + " ";
@@ -2987,7 +2987,7 @@ namespace SIL.PublishingSolution
         private void WriteGuidewordValueToVariable(string content)
         {
             bool fillHeadword = false;
-            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary1")
             {
                 if (_previousParagraphName == null) _previousParagraphName = string.Empty;  
                 if ((_classNameWithLang.IndexOf("headword_") == 0 || (_classNameWithLang.IndexOf("reversalform") == 0 || _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0))
@@ -2997,7 +2997,7 @@ namespace SIL.PublishingSolution
                     fillHeadword = true;
                 }
             }
-            else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture
+            else if (_projInfo.ProjectInputType.ToLower() == "dictionary")//scripture
             {
                 if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0))
                 {
