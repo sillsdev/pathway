@@ -2987,7 +2987,7 @@ namespace SIL.PublishingSolution
         private void WriteGuidewordValueToVariable(string content)
         {
             bool fillHeadword = false;
-            if (_projInfo.ProjectInputType.ToLower() == "dictionary1")
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 if (_previousParagraphName == null) _previousParagraphName = string.Empty;  
                 if ((_classNameWithLang.IndexOf("headword_") == 0 || (_classNameWithLang.IndexOf("reversalform") == 0 || _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0))
@@ -2997,7 +2997,7 @@ namespace SIL.PublishingSolution
                     fillHeadword = true;
                 }
             }
-            else if (_projInfo.ProjectInputType.ToLower() == "dictionary")//scripture
+            else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture
             {
                 if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0))
                 {
