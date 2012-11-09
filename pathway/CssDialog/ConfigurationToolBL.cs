@@ -597,7 +597,8 @@ namespace SIL.PublishingSolution
             ShowInfoValue();
             string newName = GetNewStyleName(_cssNames, "new");
             cTool.TxtName.Text = newName;
-            cTool.LblInfoCaption.Text = newName;
+            //cTool.LblInfoCaption.Text = newName;
+            SetInfoCaption(newName);
         }
 
         protected void SetFocusToName()
@@ -894,7 +895,8 @@ namespace SIL.PublishingSolution
 
                 // SelectRow( cTool.StylesGrid, StyleName);
                 //} 
-                cTool.TxtName.Text = cTool.LblInfoCaption.Text = StyleName;
+                cTool.TxtName.Text = StyleName;
+                SetInfoCaption(StyleName);
                 FileName = cTool.StylesGrid[ColumnFile, SelectedRowIndex].Value.ToString();
                 FileType = cTool.StylesGrid[ColumnType, SelectedRowIndex].Value.ToString();
                 cTool.TxtCss.Text = cTool.StylesGrid[ColumnDescription, SelectedRowIndex].Value.ToString();
@@ -3772,10 +3774,21 @@ namespace SIL.PublishingSolution
                     IsLayoutSelectedStyle();
                 }
                 StyleName = cTool.TxtName.Text;
-                cTool.LblInfoCaption.Text = cTool.TxtName.Text;
-
+                SetInfoCaption(cTool.TxtName.Text);
             }
             catch { }
+        }
+
+        private void SetInfoCaption(string txtName)
+        {
+            if (txtName.Length > 40)
+            {
+                cTool.LblInfoCaption.Text = txtName.Remove(37) + "...";
+            }
+            else
+            {
+                cTool.LblInfoCaption.Text = txtName;
+            }
         }
 
         public void btnScripture_ClickBL()
@@ -4079,6 +4092,7 @@ namespace SIL.PublishingSolution
             else
             {
                 cTool.MinimumSize = new Size(497, 183);
+                cTool.Width = Screen.PrimaryScreen.WorkingArea.Size.Width;
             }
 
             cTool.LoadSettings();
@@ -4196,7 +4210,8 @@ namespace SIL.PublishingSolution
             //_redoundo.Reset();
             //StyleName = cTool.StylesGrid[ColumnName, SelectedRowIndex].Value.ToString();
             //cTool.LblInfoCaption.Text = StyleName;
-            string name = cTool.LblInfoCaption.Text;
+            //string name = cTool.LblInfoCaption.Text;
+            string name = cTool.TxtName.Text;
             string msg = "Are you sure you want to delete the " + name + " stylesheet?";
             //string msg = "Are you sure you want to delete the " + StyleName + " stylesheet?";
             string caption = "Delete Stylesheet";
