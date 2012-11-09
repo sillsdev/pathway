@@ -301,11 +301,11 @@ namespace SIL.PublishingSolution
         }
 
         // Processing Options tab
-        public bool RunningHeader
-        {
-            get { return chkRunningHeader.Checked; }
-            set { chkRunningHeader.Checked = value; }
-        }
+        //public bool RunningHeader
+        //{
+        //    get { return chkRunningHeader.Checked; }
+        //    set { chkRunningHeader.Checked = value; }
+        //}
         public bool ReduceNumberOfStyles
         {
             get { return chkOOReduceStyleNames.Checked; }
@@ -529,7 +529,7 @@ namespace SIL.PublishingSolution
 
 
             // Processing Options tab
-            chkRunningHeader.Enabled = (FindMedia() == "paper");
+            //chkRunningHeader.Enabled = (FindMedia() == "paper");
             chkOOReduceStyleNames.Enabled = (ddlLayout.Text.Contains("LibreOffice"));
             if (InputType != "Dictionary")
             {
@@ -892,7 +892,7 @@ namespace SIL.PublishingSolution
                     ExportGrammar = Param.DefaultValue[Param.GrammarSketch] == "True";
             }
             DictionaryName = Param.DefaultValue[Param.LayoutSelected];
-            RunningHeader = Param.DefaultValue[Param.ExtraProcessing] == "True";
+            //RunningHeader = Param.DefaultValue[Param.ExtraProcessing] == "True";
             Media = Param.DefaultValue[Param.Media];
 
             //Fillup XSLT Processing Checkboxes
@@ -979,7 +979,7 @@ namespace SIL.PublishingSolution
                 Param.SetValue(Param.GrammarSketch, dlg.ExportGrammar.ToString());
             }
 
-            Param.SetValue(Param.ExtraProcessing, dlg.RunningHeader.ToString());
+            //Param.SetValue(Param.ExtraProcessing, dlg.RunningHeader.ToString());
             Param.SetValue(Param.Media, _media);
             Param.SetValue(Param.PublicationLocation, dlg.OutputFolder);
             Param.Write();
@@ -1017,7 +1017,7 @@ namespace SIL.PublishingSolution
                 Param.SetDefaultValue(Param.ReversalIndex, dlg.ExportReversal.ToString());
                 Param.SetDefaultValue(Param.GrammarSketch, dlg.ExportGrammar.ToString());
             }
-            Param.SetDefaultValue(Param.ExtraProcessing, dlg.RunningHeader.ToString());
+            //Param.SetDefaultValue(Param.ExtraProcessing, dlg.RunningHeader.ToString());
             Param.SetDefaultValue(Param.Media, _media);
             if (Common.CustomSaveInFolder(dlg.OutputFolder))
                 Param.SetValue(Param.PublicationLocation, dlg.OutputFolder);
