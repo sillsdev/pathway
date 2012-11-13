@@ -27,11 +27,12 @@
   <li><code>PathwaySprint.bat 1.1.1.2124</code> where 1.1.1.2124 is replaced by current version number</li>
   <li>Rename Sprint folder and move to Releases folder as a subfolder (ex. Sprint-1.1.1.2124)</li>
   <li>Uninstall any old versions and install SetupPw7BTE-1.1.1.2124.msi and make sure default export works.</li>
-  <li>Make sure Firefox is the default browser and <a href="http://code.google.com/p/pathway/downloads/list">downloads page</a> is displayed. Use <a href="file:///C:/Users/Trihus.DALLAS/Documents/work/Outsourcing/Engagement/pathway-sil-org/Upload2Google.au3"><code>Upload2Google</code></a></li>
+  <li>Make sure Firefox is the default browser and <a href="http://code.google.com/p/pathway/downloads/list" target="_blank">downloads page</a> is displayed. Use <a href="file:///C:/Users/Trihus.DALLAS/Documents/work/Outsourcing/Engagement/pathway-sil-org/Upload2Google.au3"><code>Upload2Google</code></a></li>
   <li>Edit the PathwayBootstrap.au3 so the GetInstaller will point to the right URL location. Change it's version number and compile.</li>
   <li>Use fciv (console tool) to calculate the checksum for the new bootstrap program.</li>
   <li>Change the first page of <a href="http://pathway.sil.org/wp-admin/edit.php?post_type=page" target="_blank">pathway.sil.org</a> to reference this new bootstrap program google code link.</li>
   <li>Update the version number in Team city <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt75" target="_blank">daily</a> and <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt84" target="_blank">sprint</a> build configuration</li>
+  <li>Commit Changes</li>
   <li><a href="http://build.palaso.org/project.html?projectId=project18" target="_blank">Launch Team City</a> Sprint Build</li>
   <li><a href="http://pathway.sil.org/wp-admin/post-new.php?post_type=post" target="_blank">Add a "Release" post</a> to pathway.sil.org web site with the list of changes and a link to the sprint build page. (The "Release" category is checked before the post is added. This will add the post to the Release feed that is picked up by lingtransoft.info and perhaps others.)</li>
   <li>Save download statistics from <a href="http://pathway.sil.org/wp-admin/tools.php?page=simple-download-monitor.php" target="_blank">Download monitor and reset statistics</a></li>
