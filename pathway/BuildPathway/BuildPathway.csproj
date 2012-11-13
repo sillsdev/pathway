@@ -432,7 +432,7 @@
     <Copy SourceFiles="@(ParatextSupport)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(AllBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(epubBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(epubValid)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
+    <!-- Copy SourceFiles="@(epubValid)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" / -->
     <Copy SourceFiles="@(BteBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TestBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
     <!-- Copy SourceFiles="@(UsfmConvert)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " / -->
@@ -468,7 +468,7 @@
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
     <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'Files\ConfigurationTool\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles->'Files\ConfigurationTool\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <!-- Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles->'Files\ConfigurationTool\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " / -->
   </Target>
   <Target Name="AfterBuild">
   </Target>
@@ -529,7 +529,7 @@
     <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <epubValid Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
+    <!-- epubValid Include="..\epubValidator\$(OutputPath)\epubValidator.*" / -->
     <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
@@ -541,7 +541,7 @@
     <BteTransform Include="..\PsSupport\pxhtml2xpw-scr.xsl" />
     <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
-    <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <!-- XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" / -->
     <WixSoftware Include="WixSoftware\**\*.*" Exclude="WixSoftware\**\.svn\**\*.*" />
     <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
   </ItemGroup>
