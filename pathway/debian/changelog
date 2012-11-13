@@ -1,6 +1,25 @@
-pathway (1.3.2.2752-1) unstable; urgency=high
+pathway (1.3.2.2794-1) unstable; urgency=high
 
-  * pathway 1.3.2 sprint
+  * pathway 1.3.3 sprint
+    - Common: TD-2909 Add ability to get USFM from Paratext for Go Bible
+    - Common: TD-3132 Starting ConfigurationTool with Shift down key
+    - Common: Reset missing picture.
+    - Help: TD-3202 Help page and links
+    - Libre Office: TD-3199 Table Of Contents page number formatting
+    - Libre Office: TD-3210 Page number fixes
+    - Libre Office: TD-3253 Word header is appeared out of margin
+    - Libre Office: TD-3271 Book Name missing from header
+    - Libre Office: TD-3274 Remove unused macros - removed unused macros
+    - Epub: TD-3123 E-book formatting discrepencies
+    - Stylesheet: TD-3229 Styles not appearing correctly from FLEx
+    - Stylesheet: TD-3251 Words overlap in center margin
+    - UI: TD-3248 Crash box when click on Hyperlink to open site
+    - UI: TD-3249 Error on Web pane When click on Save button.
+    - UI: TD-3250 Copy of Copy of name in Configuration Tool
+    - UI: TD-3252 Delete icon is enabled on standard style sheet on Web pane.
+    - UI: TD-3255 Preview would not be opened
+    - UI: TD-3261 Prince option is missing
+    - UI: TD-3269 Rmove Insert Running Header check box  * pathway 1.3.2 sprint
     - Common: TD-3109 Improve speed on Linux
     - Help: TD-3233 Help menu item for Student Manual
     - Help: Added info about converting EPUB to MOBI for Kindles.
