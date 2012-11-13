@@ -603,3 +603,24 @@ Func Check4Fw6()
 		$Fw6 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\FieldWorks", "RootCodeDir")
 	EndIf
 EndFunc
+
+Func Fw73orLater()
+	Local $fwDir, $ver
+	$fwDir = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\FieldWorks\7.0", "RootCodeDir")
+	if @error Then
+		$fwDir = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\FieldWorks\7.0", "RootCodeDir")
+		if @error Then
+			Return False
+		EndIf
+	EndIf
+	$ver = FileGetVersion( $fwDir & "Fieldworks.exe" )
+	MsgBox( 1, "Info", $ver )
+	if StringInStr($ver, "7.2") Then
+		if StringMid($ver, 5, 1) > "4" Then
+			return True
+		EndIf
+	ElseIf StringInStr($ver, "7.3") Then
+		Return True
+	EndIf
+	Return False
+EndFunc
