@@ -285,7 +285,8 @@ namespace SIL.PublishingSolution
                         }
                         else
                         {
-                            return pageDict[srchKey];
+                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
+                                return pageDict[srchKey];
                         }
                     }
                 }
