@@ -614,7 +614,7 @@ Func Fw73orLater()
 		EndIf
 	EndIf
 	$ver = FileGetVersion( $fwDir & "Fieldworks.exe" )
-	MsgBox( 1, "Info", $ver )
+	;MsgBox( 1, "Info", $ver )
 	if StringInStr($ver, "7.2") Then
 		if StringMid($ver, 5, 1) > "4" Then
 			return True
