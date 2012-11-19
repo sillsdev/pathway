@@ -1,4 +1,23 @@
-
+.letData, .revData {
+       line-height: auto;
+       -ps-fixed-line-height: auto;
+}
+.entry {
+       line-height: auto;
+       -ps-fixed-line-height: auto;
+}
+.revEntry {
+       line-height: auto;
+       -ps-fixed-line-height: auto;
+}
+.letHead {
+       line-height: auto;
+       -ps-fixed-line-height: auto;
+}
+.revHeader {
+       line-height: auto;
+       -ps-fixed-line-height: auto;
+}
 
 
 

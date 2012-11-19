@@ -278,16 +278,8 @@ namespace SIL.PublishingSolution
                     if (result.IndexOf("page") > 0)
                     {
                         string pageNumberValue = pageDict[srchKey];
-                        if (IsUnixOs)
-                        {
-                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
-                                return pageDict[srchKey];
-                        }
-                        else
-                        {
-                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
-                                return pageDict[srchKey];
-                        }
+                        if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
+                            return pageDict[srchKey];
                     }
                 }
                 return defaultValue;
@@ -1241,8 +1233,8 @@ namespace SIL.PublishingSolution
                 }
                 cTool.DdlLanguage.Sorted = true;
             }
-        }        
-        
+        }
+
         ///// <summary>
         ///// If the value of margins are invalid at load time, the values are shown in red color(TD-1331).
         ///// </summary>
@@ -2085,9 +2077,11 @@ namespace SIL.PublishingSolution
             if (_cssClass.ContainsKey(task) && _cssClass[task].ContainsKey(key))
             {
                 string result = _cssClass[task][key].Replace("'", "");
-                //if (result.Length == 0)
-                //    result = "true";
-                return result;
+                
+                if (result.Length == 0)
+                    return defaultValue;
+                else
+                    return result;
             }
             return defaultValue;
         }
@@ -2236,7 +2230,7 @@ namespace SIL.PublishingSolution
             var currentRow = grid.Rows[SelectedRowIndex];
             if (currentRow == null) return false;
             //var currentDescription = currentRow.Cells[ColumnDescription].Value.ToString();
-           // var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
+            // var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
             var currentApprovedBy = grid[5, SelectedRowIndex].Value.ToString();
             string type = grid[ColumnType, SelectedRowIndex].Value.ToString();
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
@@ -3271,7 +3265,7 @@ namespace SIL.PublishingSolution
                         ps.DictionaryOutputName = fileName;
                         ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
                         ps.ProjectInputType = _loadType;
-                        
+
                         bool success = PrincePreview(ps);
 
                         if (!success)
@@ -3344,7 +3338,7 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-         /// <summary>
+        /// <summary>
         /// Comparing the loaded values in property values vs changed property values
         /// Except the Label controls
         /// </summary>
@@ -4429,7 +4423,7 @@ namespace SIL.PublishingSolution
             }
             catch { }
         }
-        
+
         public void ddlPageNumber_SelectedIndexChange()
         {
             if (_screenMode == ScreenMode.Edit)
