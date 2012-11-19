@@ -29,7 +29,13 @@ GotHome:
 Run, "%FW_HOME%\\Fieldworks.exe" -app Flex -db "%proj%" -restore "%InputPath%\\%Backup%" -include %IncOpt%
 WinWaitActive, %proj% - FieldWorks Language Explorer
 Send, !fe{DOWN 5}{ENTER}
-WinWaitActive, Export to XHTML
+sfmBox:
+WinWaitActive, Export to SFM,,200
+ifEqual,errorlevel,1, Goto, xhtmlBox
+Send, {Esc}{Down}{ENTER}
+xhtmlBox:
+WinWaitActive, Export to XHTML,,200
+ifEqual,errorlevel,1, Goto, sfmBox
 Send, %OutputPath%\\%proj%.xhtml{ENTER}
 WinWaitActive,output
 Send, !{F4}
