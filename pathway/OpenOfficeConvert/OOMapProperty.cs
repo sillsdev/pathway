@@ -405,7 +405,7 @@ namespace SIL.PublishingSolution
                     int value = int.Parse(propertyValue.Replace("%", ""));
                     if (value <= 100)
                     {
-                        value = (int)(value * 1.5);
+                        value = 100;
                     }
                     _IDProperty["font-size"] = value + "%";
                 }
@@ -420,9 +420,9 @@ namespace SIL.PublishingSolution
                 else
                 {
                     int value = int.Parse(propertyValue.Replace("pt", ""));
-                    if (value < 10)
+                    if (value < 12)
                     {
-                        value = (int) (value*1.5);
+                        value = 12;
                     }
                     _IDProperty["font-size"] = value + "pt";
                 }
