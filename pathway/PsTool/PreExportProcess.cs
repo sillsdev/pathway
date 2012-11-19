@@ -75,7 +75,7 @@ namespace SIL.Tool
             _cssFileNameWithPath = projInfo.DefaultCssFileWithPath;
             _xhtmlRevFileNameWithPath = string.Empty;
             _projInfo = projInfo;
-            if (Param.Value.Count > 0)
+            if (Param.Value.Count > 0 && Common.Testing == false)
                 _projInfo.ProjectInputType = Param.Value[Param.InputType];
 
             // EDB 11/29/2011: removed method to fix invalid xhtml:
