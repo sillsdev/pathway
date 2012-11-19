@@ -3776,9 +3776,10 @@ namespace SIL.PublishingSolution
 
         private void SetInfoCaption(string txtName)
         {
-            if (txtName.Length > 40)
+            int width = cTool.LblInfoCaption.Width / 11;
+            if (txtName.Length > width)
             {
-                cTool.LblInfoCaption.Text = txtName.Remove(37) + "...";
+                cTool.LblInfoCaption.Text = txtName.Remove(width) + "...";
             }
             else
             {
