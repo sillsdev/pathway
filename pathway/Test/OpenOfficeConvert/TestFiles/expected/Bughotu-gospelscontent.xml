@@ -4303,9 +4303,9 @@
             </text:note>
           </text:p>
           <text:p text:style-name="\f*_scrSection_columns_scrBook_scrBody">
-            <draw:frame draw:style-name="Graphics11" draw:name="Graphics11" text:anchor-type="as-char" draw:z-index="0" svg:width="116.599190283401pt" svg:height="72pt">
+            <draw:frame draw:style-name="Graphics11" draw:name="Graphics11" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
-                <draw:frame draw:style-name="Graphics11" draw:name="Graphics11" text:anchor-type="paragraph" svg:width="116.599190283401pt" svg:height="72pt">
+                <draw:frame draw:style-name="Graphics11" draw:name="Graphics11" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
                   <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00103b.tif" />
                   <svg:title>lb00103b.tif</svg:title>
                 </draw:frame>
@@ -4695,9 +4695,9 @@
             </text:note>
           </text:p>
           <text:p text:style-name="\f*_scrSection_columns_scrBook_scrBody">
-            <draw:frame draw:style-name="Graphics12" draw:name="Graphics12" text:anchor-type="as-char" draw:z-index="0" svg:width="58.5pt" svg:height="72pt">
+            <draw:frame draw:style-name="Graphics12" draw:name="Graphics12" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
-                <draw:frame draw:style-name="Graphics12" draw:name="Graphics12" text:anchor-type="paragraph" svg:width="58.5pt" svg:height="72pt">
+                <draw:frame draw:style-name="Graphics12" draw:name="Graphics12" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
                   <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/hk00274b.tif" />
                   <svg:title>hk00274b.tif</svg:title>
                 </draw:frame>
@@ -14592,9 +14592,9 @@
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">Imarea kena haghore tughua, &lt;&lt;Na King gna i Rom.&gt;&gt;</text:span>
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-            <draw:frame draw:style-name="Graphics43" draw:name="Graphics43" text:anchor-type="as-char" draw:z-index="0" svg:width="150.785340314136pt" svg:height="72pt">
+            <draw:frame draw:style-name="Graphics43" draw:name="Graphics43" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
-                <draw:frame draw:style-name="Graphics43" draw:name="Graphics43" text:anchor-type="paragraph" svg:width="150.785340314136pt" svg:height="72pt">
+                <draw:frame draw:style-name="Graphics43" draw:name="Graphics43" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
                   <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/hk00166b.tif" />
                   <svg:title>hk00166b.tif</svg:title>
                 </draw:frame>
