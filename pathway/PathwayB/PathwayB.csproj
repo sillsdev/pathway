@@ -242,6 +242,10 @@
       <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
       <Name>CssDialog</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ParatextSupport\ParatextSupport.csproj">
+      <Project>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</Project>
+      <Name>ParatextSupport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PsExport\PsExport.csproj">
       <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
       <Name>PsExport</Name>
