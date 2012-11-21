@@ -162,7 +162,7 @@
           <style:tab-stop style:position="6.925in" style:type="right" />
         </style:tab-stops>
       </style:paragraph-properties>
-      <style:text-properties fo:font-weight="regular" fo:font-size="12" />
+      <style:text-properties style:font-name="Times New Roman" fo:font-weight="regular" fo:font-size="12" />
     </style:style>
     <style:style style:name="Footer" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text_20_body" style:class="text">
       <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:keep-with-next="always" text:number-lines="false" text:line-number="0">
