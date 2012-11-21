@@ -1,22 +1,22 @@
 .letData, .revData {
-       line-height: auto;
-       -ps-fixed-line-height: auto;
+       line-height: inherit;
+       -ps-fixed-line-height: inherit;
 }
 .entry {
-       line-height: auto;
-       -ps-fixed-line-height: auto;
+       line-height: inherit;
+       -ps-fixed-line-height: inherit;
 }
 .revEntry {
-       line-height: auto;
-       -ps-fixed-line-height: auto;
+       line-height: inherit;
+       -ps-fixed-line-height: inherit;
 }
 .letHead {
-       line-height: auto;
-       -ps-fixed-line-height: auto;
+       line-height: inherit;
+       -ps-fixed-line-height: inherit;
 }
 .revHeader {
-       line-height: auto;
-       -ps-fixed-line-height: auto;
+       line-height: inherit;
+       -ps-fixed-line-height: inherit;
 }
 
 
