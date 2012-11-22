@@ -2446,7 +2446,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("draw:image");
                     _writer.WriteAttributeString("xlink:type", "simple");
                     _writer.WriteAttributeString("xlink:show", "embed");
-                    _writer.WriteAttributeString("xlink:actuatet", "onLoad");
+                    _writer.WriteAttributeString("xlink:actuate", "onLoad");
                     _writer.WriteAttributeString("xlink:href", "Pictures/" + fileName);
                     _writer.WriteEndElement();
                     //_writer.WriteStartElement("svg:desc");
