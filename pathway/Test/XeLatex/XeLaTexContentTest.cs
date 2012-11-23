@@ -849,6 +849,16 @@ namespace Test.XeLatex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void Parent1()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Parent1";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void VisibilityTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
