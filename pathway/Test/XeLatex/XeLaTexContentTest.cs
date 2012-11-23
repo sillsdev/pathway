@@ -799,6 +799,56 @@ namespace Test.XeLatex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void Precede1()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Precede1";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoLangTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoLangTest";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoTest";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoTestA()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoTestA";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoTestB()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoTestB";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void VisibilityTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
