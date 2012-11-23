@@ -1378,6 +1378,8 @@ namespace SIL.PublishingSolution
                 string paddingBottom = string.Empty;
                 string displayNoneStart = string.Empty;
                 string displayNoneEnd = string.Empty;
+                string widows = string.Empty;
+                string orphans = string.Empty;
 
                 foreach (string property in _classInlineStyle[childClass])
                 {
@@ -1460,6 +1462,16 @@ namespace SIL.PublishingSolution
                         {
                             paddingBottom = Common.RightString(property, " ");
                         }
+                        else if (propName == "widows")
+                        {
+                            //widows = "\\enlargethispage{-\\baselineskip}";
+                            widows = "\\widowpenalty=300";
+                        }
+                        else if (propName == "orphans")
+                        {
+                            //orphans = "\\clearpage";
+                            orphans = "\\clubpenalty=300";
+                        }
                     }
                 }
 
@@ -1531,6 +1543,14 @@ namespace SIL.PublishingSolution
 
                     //if (_endParagraphStringDic.ContainsKey(getStyleName) == false)
                     _endParagraphStringDic[getStyleName] = endParagraphString;
+                }
+                if(widows != string.Empty)
+                {
+                    _xetexFile.WriteLine(widows);
+                }
+                if (orphans != string.Empty)
+                {
+                    _xetexFile.WriteLine(orphans);
                 }
 
             }
@@ -1831,6 +1851,10 @@ namespace SIL.PublishingSolution
             //TextAlign
             _paragraphPropertyList.Add("text-align");
             _paragraphPropertyList.Add("column-count");
+
+            //Widows and Orphans
+            _paragraphPropertyList.Add("widows");
+            _paragraphPropertyList.Add("orphans");
 
 
         }
