@@ -867,6 +867,16 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TaggedText()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TaggedText";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Ignore]
         [Test]
         [Category("SkipOnTeamCity")]
