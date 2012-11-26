@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- #############################################################
-    # Name:        RemoveExtraLetterHeaders1.xsl
+    # Name:        Remove Unwanted Letter Dividers.xsl
     # Purpose:     Letter headers for secondary distinctions are removed.
     #
     # Author:      Greg Trihus <greg_trihus@sil.org>
