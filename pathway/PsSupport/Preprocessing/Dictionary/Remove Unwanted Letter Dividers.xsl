@@ -12,8 +12,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"
     xmlns:x="http://www.w3.org/1999/xhtml">
     
-    <xsl:param name="from">ÀàÁá</xsl:param>
-    <xsl:param name="to">AaAa</xsl:param>
+    <xsl:param name="from">ÀàÁáÈèÉéÌìÍíÒòÓóÙùÚú</xsl:param>
+    <xsl:param name="to">AaAaEeEeIiIiOoOoUuUu</xsl:param>
     
     <!-- Recursive copy template (all except xml:space attributes) -->   
     <xsl:template match="node() | @*">
