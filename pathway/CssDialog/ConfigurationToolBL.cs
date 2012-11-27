@@ -4089,6 +4089,7 @@ namespace SIL.PublishingSolution
             {
                 cTool.MinimumSize = new Size(497, 183);
                 cTool.Width = Screen.PrimaryScreen.WorkingArea.Size.Width;
+                cTool.Width = cTool.Width < 1175? cTool.Width: 1175;
             }
 
             cTool.LoadSettings();
