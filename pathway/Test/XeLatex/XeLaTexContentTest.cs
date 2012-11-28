@@ -869,6 +869,16 @@ namespace Test.XeLatex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void multiClass()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "multiClass";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void TaggedText()
         {
             _projInfo.ProjectInputType = "Dictionary";
