@@ -170,7 +170,6 @@ namespace SIL.PublishingSolution
                 // run headless from the command line
                 Common.Testing = true;
                 //_projectInfo.ProgressBar = null;
-
                 if (inFormat == InputFormat.USFM)
                 {
                     // convert from USFM to xhtml
@@ -393,8 +392,28 @@ namespace SIL.PublishingSolution
                     System.IO.StringWriter stringWriter = new System.IO.StringWriter();
                     System.Xml.XmlTextWriter xmlTextWriter = new System.Xml.XmlTextWriter(stringWriter); 
                     XmlDocument doc = new XmlDocument();
-                    SFMtoUsx objSFMtoUsx = new SFMtoUsx();
-                    objSFMtoUsx.ConvertSFMtoUsx(xmlTextWriter, filename, filename.Replace(".SFM", ".usx"));
+                    try
+                    {
+                        // load the ParatextSupport DLL dynamically
+                        Assembly asmPTSupport =
+                            Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+                        Type tSfmToUsx = asmPTSupport.GetType("SIL.PublishingSolution.SFMtoUsx");
+                        Object objSFMtoUsx = null;
+                        if (tSfmToUsx != null)
+                        {
+                            // SFMtoUsx objSFMtoUsx = new SFMtoUsx();
+                            objSFMtoUsx = Activator.CreateInstance(tSfmToUsx);
+                            // objSFMtoUsx.ConvertSFMtoUsx(xmlTextWriter, filename, filename.Replace(".SFM", ".usx"));
+                            Object[] args = new object[3];
+                            args[0] = xmlTextWriter;
+                            args[1] = filename;
+                            args[2] = filename.Replace(".SFM", ".usx");
+                            tSfmToUsx.InvokeMember("ConvertSFMtoUsx", BindingFlags.Default | BindingFlags.InvokeMethod, null, objSFMtoUsx, args);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                    }
                     doc.LoadXml(stringWriter.ToString());
                     xmlTextWriter.Flush();
                     xmlTextWriter.Close();
