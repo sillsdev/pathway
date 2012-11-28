@@ -3712,7 +3712,7 @@ namespace SIL.PublishingSolution
             {
                 cTool.TxtName.Text = cTool.TxtName.Text.Trim();
                 if (cTool._previousTxtName == cTool.TxtName.Text) return;
-
+                PreviousStyleName = cTool._previousTxtName;
                 bool isNoDuplicateStyleName = NoDuplicateStyleName();
                 bool isValidateStyleName = ValidateStyleName(cTool.TxtName.Text);
 
