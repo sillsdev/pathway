@@ -245,19 +245,23 @@ namespace SIL.PublishingSolution
                     else
                     {
                         string key = "-ps-referenceformat";
-                        string task = "@page:left-top-left$@page:right-top-right";
+                        string task;
+
+                        task = "@page-top-center";
                         string result = GetPageValue(task, key, "false");
                         if (result.Length > 0)
                         {
                             return result;
                         }
 
-                        task = "@page-top-center";
-                        result = GetPageValue(task, key, "false");
+                        task = "@page:left-top-left$@page:right-top-right";
+                         result = GetPageValue(task, key, "false");
                         if (result.Length > 0)
                         {
                             return result;
                         }
+
+                        
 
                         defaultValue = "Genesis 1-2";
                     }
