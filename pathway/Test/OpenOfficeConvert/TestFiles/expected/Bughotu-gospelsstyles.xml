@@ -265,7 +265,7 @@
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="8pt" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="NoteCrossHYPHENReferenceParagraph..footnote-call" style:family="text" style:parent-style-name="none">
-      <style:text-properties fo:color="#800080" fo:font-size="9pt" style:text-position="super 55%" fo:font-family="Charis SIL" text:display="prince-footnote" />
+      <style:text-properties fo:color="#800080" fo:font-size="12pt" style:text-position="super 55%" fo:font-family="Charis SIL" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="NoteCrossHYPHENReferenceParagraph..footnote-marker" style:family="text" style:parent-style-name="none">
       <style:text-properties fo:font-size="10pt" fo:font-weight="700" fo:font-family="Charis SIL" text:display="prince-footnote" />
@@ -275,7 +275,7 @@
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="8pt" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="NoteGeneralParagraph..footnote-call" style:family="text" style:parent-style-name="none">
-      <style:text-properties fo:color="#800080" fo:font-size="9pt" style:text-position="super 55%" fo:font-family="Charis SIL" text:display="prince-footnote" />
+      <style:text-properties fo:color="#800080" fo:font-size="12pt" style:text-position="super 55%" fo:font-family="Charis SIL" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="NoteGeneralParagraph..footnote-marker" style:family="text" style:parent-style-name="none">
       <style:text-properties fo:font-size="10pt" fo:font-weight="700" fo:font-family="Charis SIL" text:display="prince-footnote" />
@@ -438,7 +438,7 @@
           <style:tab-stop style:position="6.5in" style:type="right" />
         </style:tab-stops>
       </style:paragraph-properties>
-      <style:text-properties fo:font-weight="regular" fo:font-size="12" />
+      <style:text-properties style:font-name="Times New Roman" fo:font-weight="regular" fo:font-size="12" />
     </style:style>
     <style:style style:name="Footer" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text_20_body" style:class="text">
       <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:keep-with-next="always" text:number-lines="false" text:line-number="0">

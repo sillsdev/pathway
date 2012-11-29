@@ -110,7 +110,10 @@
         margin-top: 18pt;
         text-align: center;
         width: 100%;
-		page-break-after:avoid;
+		/*page-break-after:avoid;*/
+		page-break-inside:avoid;
+		orphans:5;
+		widows:5;
 }
 .LexEntrypublishStemParaHomographNumber {
         font-size: 8pt;

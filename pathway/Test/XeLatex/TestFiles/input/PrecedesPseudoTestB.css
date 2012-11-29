@@ -1,0 +1,77 @@
+.headword 
+{
+	
+}
+
+.dictionary 
+{
+	text-align: justify;
+	font-size: 10pt;
+}
+.locator
+{	
+	text-align: center;
+}
+
+.pronunciation 
+{	
+	font-size: 20pt;
+	font-style: italic;
+        color:green;
+}
+
+
+.article > .pronunciation + .pronunciation[lang=en_US]::before
+{
+	content: '1 ';
+
+}
+
+.pronunciation[lang="en_US"] + .pronunciation[lang="en_UK"]:before {content: " LangUS_UK";
+color:blue;
+}
+
+/*.pronunciation[lang="en_UK"] + .pronunciation[lang="en_US"]:before {content: " LangUK_US";
+color:red;
+}
+*/
+
+.pronunciation[lang=en_US][class~=first-of-type]::before
+{
+	content: "2 ";
+
+}
+
+.pronunciation + .pronunciation[lang=en_US]::before
+{
+	content: '3 ';
+
+}
+
+.pronunciation[class~=first-of-type]::before
+{
+	content: "4 ";
+
+}
+
+.pronunciation[lang=en_US]::before
+{
+	content: '5 ';
+}
+
+
+.pronunciation + .pronunciation::before
+{
+	content: '6 ';
+
+}
+
+.pronunciation:before { content: "7 " ;
+}
+
+
+
+
+
+
+

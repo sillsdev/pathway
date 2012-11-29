@@ -46,6 +46,7 @@ namespace SIL.PublishingSolution
         protected bool IsMirrored = false;
         public StringBuilder PageStyle = new StringBuilder();
         readonly Dictionary<string, string> _pageStyleFormat = new Dictionary<string, string>();
+        public string referenceFormat = string.Empty;
 
 
 
@@ -53,7 +54,7 @@ namespace SIL.PublishingSolution
         #endregion
 
 
-        public Dictionary<string, List<string>> CreateXeTexStyles(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> cssProperty)
+        public Dictionary<string, List<string>> CreateXeTexStyles(PublicationInformation projInfo, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> cssProperty)
         {
             try
             {
@@ -61,6 +62,7 @@ namespace SIL.PublishingSolution
                 _inlineText = new List<string>();
                 _xetexFile = xetexFile;
                 _cssProperty = cssProperty;
+                _projInfo = projInfo;
                 LoadPageStyleFormat();
                 CreatePageStyle();
                 CreateStyle();  // CODE HERE
@@ -75,12 +77,42 @@ namespace SIL.PublishingSolution
 
         private void LoadPageStyleFormat()
         {
-            _pageStyleFormat.Add("@page-top-left","\\lhead");
-            _pageStyleFormat.Add("@page-top-center", "\\chead");
-            _pageStyleFormat.Add("@page-top-right", "\\rhead");
-            _pageStyleFormat.Add("@page-bottom-left", "\\lfoot");
-            _pageStyleFormat.Add("@page-bottom-center", "\\cfoot");
-            _pageStyleFormat.Add("@page-bottom-right", "\\rfoot");
+            if (_cssProperty.ContainsKey("@page:left") || _cssProperty.ContainsKey("@page:right"))
+            {
+                IsMirrored = true;
+            }
+
+            if (IsMirrored)
+            {
+                _pageStyleFormat.Add("@page:left-top-left", "\\fancyhead[LO]");
+                _pageStyleFormat.Add("@page:left-top-center", "\\fancyhead[CO]");
+                _pageStyleFormat.Add("@page:left-top-right", "\\fancyhead[RO]");
+                _pageStyleFormat.Add("@page:left-bottom-left", "\\fancyfoot[LO]");
+                _pageStyleFormat.Add("@page:left-bottom-center", "\\fancyfoot[CO]");
+                _pageStyleFormat.Add("@page:left-bottom-right", "\\fancyfoot[RO]");
+                _pageStyleFormat.Add("@page:right-top-left", "\\fancyhead[LE]");
+                _pageStyleFormat.Add("@page:right-top-center", "\\fancyhead[CE]");
+                _pageStyleFormat.Add("@page:right-top-right", "\\fancyhead[RE]");
+                _pageStyleFormat.Add("@page:right-bottom-left", "\\fancyfoot[LE]");
+                _pageStyleFormat.Add("@page:right-bottom-center", "\\fancyfoot[CE]");
+                _pageStyleFormat.Add("@page:right-bottom-right", "\\fancyfoot[RE]");
+            }
+            else
+            {
+                _pageStyleFormat.Add("@page-top-left", "\\lhead");
+                _pageStyleFormat.Add("@page-top-center", "\\chead");
+                _pageStyleFormat.Add("@page-top-right", "\\rhead");
+                _pageStyleFormat.Add("@page-bottom-left", "\\lfoot");
+                _pageStyleFormat.Add("@page-bottom-center", "\\cfoot");
+                _pageStyleFormat.Add("@page-bottom-right", "\\rfoot");
+                _pageStyleFormat.Add("@page:first-top-left", "\\lhead");
+                _pageStyleFormat.Add("@page:first-top-center", "\\chead");
+                _pageStyleFormat.Add("@page:first-top-right", "\\rhead");
+                _pageStyleFormat.Add("@page:first-bottom-left", "\\lfoot");
+                _pageStyleFormat.Add("@page:first-bottom-center", "\\cfoot");
+                _pageStyleFormat.Add("@page:first-bottom-right", "\\rfoot");
+            }
+            
         }
 
         private void CreatePageStyle()   // PageHeaderFooter() in odt conversion 
@@ -93,6 +125,7 @@ namespace SIL.PublishingSolution
         {
             PageStyle.Append("\\pagestyle{plain}");
             PageStyle.AppendLine("\\pagestyle{fancy}");
+			PageStyle.AppendLine("\\fancyhead{}");
             if (_cssProperty.ContainsKey("@page:left") || _cssProperty.ContainsKey("@page:right"))
             {
                 IsMirrored = true;
@@ -144,9 +177,22 @@ namespace SIL.PublishingSolution
                             {
                                 PageStyle.AppendLine(_pageStyleFormat[currentPagePosition] + "{\\thepage}");
                             }
+                            if (writingString.IndexOf("booknamefirst") >= 0)
+                            {
+                                PageStyle.AppendLine(_pageStyleFormat[currentPagePosition] + "{\\rightmark}");
+                            }
+                            else if (writingString.IndexOf("booknamelast") >= 0)
+                            {
+                                PageStyle.AppendLine(_pageStyleFormat[currentPagePosition] + "{\\leftmark}");
+                            }
 
                             if (!_includePackageList.Contains("fancyhdr"))
                                 _includePackageList.Add("fancyhdr");
+                        }
+                        else if (para.Key.ToLower() == "-ps-referenceformat")
+                        {
+                            //if (_projInfo.HeaderReferenceFormat.Trim().Length == 0)
+                                _projInfo.HeaderReferenceFormat = para.Value;
                         }
                     }
 

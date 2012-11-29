@@ -1540,7 +1540,14 @@ namespace SIL.PublishingSolution
                 {
                     if (IdAllClass[ancestor].ContainsKey(fontPointSize))
                     {
-                        fontSize = float.Parse(IdAllClass[ancestor][fontPointSize].Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
+                        try
+                        {
+                            fontSize = float.Parse(IdAllClass[ancestor][fontPointSize].Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
+                        }
+                        catch (Exception)
+                        {
+                            fontSize = 10;
+                        }
                         break;
                     }
                 }
@@ -1564,7 +1571,14 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    fontSize = float.Parse(currentFontSize.Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
+                    try
+                    {
+                        fontSize = float.Parse(currentFontSize.Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
+                    }
+                    catch (Exception)
+                    {
+                        fontSize = 10;
+                    }
                 }
             }
 

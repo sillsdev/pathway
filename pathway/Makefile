@@ -62,6 +62,7 @@ clean:
 	-xdg-desktop-menu uninstall /etc/pathway/sil-ConfigurationTool.desktop
 	sudo rm -rf $(DESTDIR)/etc/pathway
 	-rm -rf ~/.mono/registry/CurrentUser/software/sil/pathway
+	-rm -rf .local/share/SIL/Pathway
 
 clean-build:
 	sudo rm -rf debian/pathway bin

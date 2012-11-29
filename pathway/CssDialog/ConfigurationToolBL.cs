@@ -245,19 +245,23 @@ namespace SIL.PublishingSolution
                     else
                     {
                         string key = "-ps-referenceformat";
-                        string task = "@page:left-top-left$@page:right-top-right";
+                        string task;
+
+                        task = "@page-top-center";
                         string result = GetPageValue(task, key, "false");
                         if (result.Length > 0)
                         {
                             return result;
                         }
 
-                        task = "@page-top-center";
-                        result = GetPageValue(task, key, "false");
+                        task = "@page:left-top-left$@page:right-top-right";
+                         result = GetPageValue(task, key, "false");
                         if (result.Length > 0)
                         {
                             return result;
                         }
+
+                        
 
                         defaultValue = "Genesis 1-2";
                     }
@@ -278,15 +282,8 @@ namespace SIL.PublishingSolution
                     if (result.IndexOf("page") > 0)
                     {
                         string pageNumberValue = pageDict[srchKey];
-                        if (IsUnixOs)
-                        {
-                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
-                                return pageDict[srchKey];
-                        }
-                        else
-                        {
+                        if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
                             return pageDict[srchKey];
-                        }
                     }
                 }
                 return defaultValue;
@@ -1240,8 +1237,8 @@ namespace SIL.PublishingSolution
                 }
                 cTool.DdlLanguage.Sorted = true;
             }
-        }        
-        
+        }
+
         ///// <summary>
         ///// If the value of margins are invalid at load time, the values are shown in red color(TD-1331).
         ///// </summary>
@@ -2084,9 +2081,11 @@ namespace SIL.PublishingSolution
             if (_cssClass.ContainsKey(task) && _cssClass[task].ContainsKey(key))
             {
                 string result = _cssClass[task][key].Replace("'", "");
-                //if (result.Length == 0)
-                //    result = "true";
-                return result;
+                
+                if (result.Length == 0)
+                    return defaultValue;
+                else
+                    return result;
             }
             return defaultValue;
         }
@@ -2235,7 +2234,7 @@ namespace SIL.PublishingSolution
             var currentRow = grid.Rows[SelectedRowIndex];
             if (currentRow == null) return false;
             //var currentDescription = currentRow.Cells[ColumnDescription].Value.ToString();
-           // var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
+            // var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
             var currentApprovedBy = grid[5, SelectedRowIndex].Value.ToString();
             string type = grid[ColumnType, SelectedRowIndex].Value.ToString();
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
@@ -3270,7 +3269,7 @@ namespace SIL.PublishingSolution
                         ps.DictionaryOutputName = fileName;
                         ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
                         ps.ProjectInputType = _loadType;
-                        
+
                         bool success = PrincePreview(ps);
 
                         if (!success)
@@ -3343,7 +3342,7 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-         /// <summary>
+        /// <summary>
         /// Comparing the loaded values in property values vs changed property values
         /// Except the Label controls
         /// </summary>
@@ -3717,7 +3716,7 @@ namespace SIL.PublishingSolution
             {
                 cTool.TxtName.Text = cTool.TxtName.Text.Trim();
                 if (cTool._previousTxtName == cTool.TxtName.Text) return;
-
+                PreviousStyleName = cTool._previousTxtName;
                 bool isNoDuplicateStyleName = NoDuplicateStyleName();
                 bool isValidateStyleName = ValidateStyleName(cTool.TxtName.Text);
 
@@ -3781,9 +3780,10 @@ namespace SIL.PublishingSolution
 
         private void SetInfoCaption(string txtName)
         {
-            if (txtName.Length > 40)
+            int width = cTool.LblInfoCaption.Width / 11;
+            if (txtName.Length > width)
             {
-                cTool.LblInfoCaption.Text = txtName.Remove(37) + "...";
+                cTool.LblInfoCaption.Text = txtName.Remove(width) + "...";
             }
             else
             {
@@ -4093,6 +4093,7 @@ namespace SIL.PublishingSolution
             {
                 cTool.MinimumSize = new Size(497, 183);
                 cTool.Width = Screen.PrimaryScreen.WorkingArea.Size.Width;
+                cTool.Width = cTool.Width < 1175? cTool.Width: 1175;
             }
 
             cTool.LoadSettings();
@@ -4428,7 +4429,7 @@ namespace SIL.PublishingSolution
             }
             catch { }
         }
-        
+
         public void ddlPageNumber_SelectedIndexChange()
         {
             if (_screenMode == ScreenMode.Edit)

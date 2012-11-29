@@ -410,7 +410,7 @@
   </Target>
   <Target Name="Wix">
     <RemoveDir Directories="Wix" />
-    <UpdateVersion Product="$(ProductName) " Version="1.3.3" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
+    <UpdateVersion Product="$(ProductName) " Version="1.3.4" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
     <ZeroCheck />
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs" />
@@ -432,7 +432,7 @@
     <Copy SourceFiles="@(ParatextSupport)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(AllBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(epubBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
-    <!-- Copy SourceFiles="@(epubValid)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" / -->
+    <Copy SourceFiles="@(epubValid)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" /> <!-- validator is referenced even if not called -->
     <Copy SourceFiles="@(BteBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TestBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
     <!-- Copy SourceFiles="@(UsfmConvert)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " / -->
@@ -529,7 +529,7 @@
     <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <!-- epubValid Include="..\epubValidator\$(OutputPath)\epubValidator.*" / -->
+    <epubValid Include="..\epubValidator\$(OutputPath)\epubValidator.*" /> <!-- Validator is referenced even if not called -->
     <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />

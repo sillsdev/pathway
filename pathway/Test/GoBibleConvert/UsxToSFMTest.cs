@@ -31,7 +31,6 @@ namespace Test.GoBibleConvert
         private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
-        UsxToSFM _usxToSfm = new UsxToSFM();
         #endregion
 
         #region SetUp
@@ -54,6 +53,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void Book()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "book";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -72,6 +72,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void chapter()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "chapter";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -90,6 +91,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void figure()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "figure";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -108,6 +110,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void note()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "note";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -126,6 +129,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void note_figure()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "note_figure";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -144,6 +148,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void para()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "para";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -162,6 +167,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void para_char()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "para_char";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -180,6 +186,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void para_empty()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "para_empty";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -198,6 +205,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void verse()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "verse";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -217,6 +225,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void verse_BridgeCase1()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "BridgeVerse1";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -236,6 +245,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void verse_BridgeCase2()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "BridgeVerse2";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -254,6 +264,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void rut()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "rut";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -273,6 +284,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void ACCNT()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "ACCNT";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");
@@ -291,6 +303,7 @@ namespace Test.GoBibleConvert
         [Category("SkipOnTeamCity")]
         public void BM2()
         {
+            UsxToSFM _usxToSfm = new UsxToSFM();
             const string file = "BM2";
 
             string input = Common.PathCombine(_inputPath, file + ".usx");

@@ -155,12 +155,12 @@ namespace SIL.PublishingSolution
                     case "visibility":
                         Visibility(propertyValue);
                         break;
-                    //case "orphans":
-                    //    Orphans(propertyValue);
-                    //    break;
-                    //case "widows":
-                    //    Widows(propertyValue);
-                    //    break;
+                    case "orphans":
+                        Orphans(propertyValue);
+                        break;
+                    case "widows":
+                        Widows(propertyValue);
+                        break;
                     //case "direction":
                     //    Direction(propertyValue);
                     //    break;
@@ -330,6 +330,9 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            propertyValue = Common.SetPropertyValue("widows", propertyValue);
+            _inlineStyle.Add(propertyValue);
+            //_inlineStyle.Add("\\enlargethispage{-\baselineskip}");
             _IDProperty["KeepLastLines"] = propertyValue;
             AddKeepLinesTogetherProperty();
         }
@@ -340,6 +343,9 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            propertyValue = Common.SetPropertyValue("orphans", propertyValue);
+            _inlineStyle.Add(propertyValue);
+            //_inlineStyle.Add("\\clearpage");
             _IDProperty["KeepFirstLines"] = propertyValue;
             AddKeepLinesTogetherProperty();
         }

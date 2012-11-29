@@ -2549,6 +2549,9 @@ namespace SIL.PublishingSolution
         private void GetPictureDisplay()
         {
             string className = Common.RightString(_childName, "_");
+            if(className.ToLower().IndexOf("picture") == 0)
+                className = Common.LeftString(className, "_");
+
             if (IdAllClass.ContainsKey(className) && IdAllClass[className].ContainsKey("display"))
             {
                 if (IdAllClass[className]["display"] == "none")
@@ -3012,7 +3015,7 @@ namespace SIL.PublishingSolution
             {
                 //Insert leftGuideword for TD-2912
                 string leftHeadword = content;
-
+                
                     if (_classNameWithLang.IndexOf("headword") >= 0)
                     {
                         if (_headwordVariable.Count - 1 > _headwordIndex + 1)
@@ -3024,7 +3027,10 @@ namespace SIL.PublishingSolution
                                 IsFirstEntry = false;
                             }
                             else
-                                leftHeadword = _headwordVariable[++_headwordIndex];
+                            {
+                                ++_headwordIndex;
+                                leftHeadword = content;// _headwordVariable[++_headwordIndex];
+                            }
                         }
 
                     }
@@ -3041,10 +3047,10 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("text:variable-set");
                 _writer.WriteAttributeString("text:name", "Left_Guideword_L");
                 _writer.WriteAttributeString("text:display", "none");
-                _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword);
+                _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword);//leftHeadword
                 _writer.WriteAttributeString("office:value-type", "string");
                 //_writer.WriteAttributeString("office:string-value", " " + content);//TD-2688
-                _writer.WriteAttributeString("office:string-value", leftHeadword);
+                _writer.WriteAttributeString("office:string-value", leftHeadword);//leftHeadword
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
                 
