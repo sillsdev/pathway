@@ -2549,6 +2549,9 @@ namespace SIL.PublishingSolution
         private void GetPictureDisplay()
         {
             string className = Common.RightString(_childName, "_");
+            if(className.ToLower().IndexOf("picture") == 0)
+                className = Common.LeftString(className, "_");
+
             if (IdAllClass.ContainsKey(className) && IdAllClass[className].ContainsKey("display"))
             {
                 if (IdAllClass[className]["display"] == "none")
