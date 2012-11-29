@@ -18,6 +18,7 @@ namespace SIL.PublishingSolution
         protected Dictionary<string, string> _leftPageLayoutProperty;
         protected Dictionary<string, string> _rightPageLayoutProperty;
         protected bool isMirrored = false;
+        protected PublicationInformation _projInfo = new PublicationInformation();
 
         /// -------------------------------------------------------------------------------------------
         /// <summary>

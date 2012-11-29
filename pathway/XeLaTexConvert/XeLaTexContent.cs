@@ -80,6 +80,9 @@ namespace SIL.PublishingSolution
         private string _tocStyleName;
         private Dictionary<string, string> _toc = new Dictionary<string, string>();
 
+        private string _bookName = string.Empty;
+        private string _chapterStyleforHeader = string.Empty;
+
         #endregion
 
         #region Private Variables
@@ -427,6 +430,11 @@ namespace SIL.PublishingSolution
                 _xetexNewLine = true;
             }
 
+            if (_previousParagraphName.ToLower().IndexOf("scrbook") == 0)
+            {
+                if (_bookName.Trim().Length == 0)
+                    _bookName = _reader.Value;
+            }
             WriteText();
             isFileEmpty = false;
         }
@@ -763,29 +771,73 @@ namespace SIL.PublishingSolution
                         _xetexFile.Write("{");
                     }
                     _inlineCount = inlineStyle.Count - paraStyleCount;
-                    //if (inlineStyle.Count > 0)
-                    //{
-                    //    _braceInlineClassCount[getStyleName] = inlineStyle.Count;
-                    //    _braceInlineClass.Push(getStyleName);
-                    //}
-
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
-
-                    if (mergedParaStyle.IndexOf("headword") == 0 && content != null)
+                    if(_projInfo.ProjectInputType.ToLower() == "scripture")
                     {
-                        if (_headerContent.Trim().Length == 0)
-                            _headerContent = content;
+                        string referenceFormat = _projInfo.HeaderReferenceFormat;
+                        if(mergedParaStyle.ToLower().IndexOf("chapter") == 0)
+                        {
+                            _chapterStyleforHeader = mergedParaStyle;
+                        }
+                        if (mergedParaStyle.ToLower().IndexOf("chapter") == 0 && (referenceFormat == "Genesis 1" || referenceFormat == "Gen 1"))
+                        {
 
-                        //string hangparaFormat = "\\hangpara{" + "36pt" + "}{" + "1" + "}";
-                        //_xetexFile.Write(hangparaFormat);
-                        _tocStyleName = mergedParaStyle;
-                        string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
-                        _xetexFile.Write(headerFormat);
-                        _headerContent = content;
+                            if (_headerContent.Trim().Length == 0)
+                            {
+                                if (referenceFormat == "Genesis 1")
+                                {
+                                    _headerContent = _bookName + " " + _chapterNo;
+                                }
+                                else if (referenceFormat == "Gen 1")
+                                {
+                                    _headerContent = _bookName.Substring(0,3) + " " + _chapterNo;
+                                }
+
+                            }
+                            _tocStyleName = mergedParaStyle;
+                            string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
+                            _xetexFile.Write(headerFormat);
+                            _headerContent = string.Empty;
+                        }
+                        else if (mergedParaStyle.ToLower().IndexOf("verse") == 0 && (referenceFormat == "Genesis 1:1" || referenceFormat == "Gen 1:1" || referenceFormat == "Genesis 1:1-2:1"))
+                        {
+                            if (_headerContent.Trim().Length == 0)
+                            {
+                                if (referenceFormat == "Genesis 1:1")
+                                {
+                                    _headerContent = _bookName + " " + _chapterNo + ":" + _verseNo;
+                                }
+                                else if (referenceFormat == "Gen 1:1")
+                                {
+                                    _headerContent = _bookName.Substring(0, 3) + " " + _chapterNo + ":" + _verseNo;
+                                }
+                                else if (referenceFormat == "Genesis 1:1-2:1")
+                                {
+                                    _headerContent = _bookName + " " + _chapterNo + ":" + _verseNo + "-" + _chapterNo + ":" + _verseNo;
+                                }
+
+                            }
+                            _tocStyleName = mergedParaStyle;
+                            string headerFormat = "\\markboth{ \\" + _chapterStyleforHeader + " " + _headerContent + "}{ \\" + _chapterStyleforHeader + " " + _headerContent + "}";
+                            _xetexFile.Write(headerFormat);
+                            _headerContent = string.Empty;
+                        }
+                    }
+                    else
+                    {
+                        if (mergedParaStyle.IndexOf("headword") == 0 && content != null)
+                        {
+                            if (_headerContent.Trim().Length == 0)
+                                _headerContent = content;
+
+                            _tocStyleName = mergedParaStyle;
+                            string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
+                            _xetexFile.Write(headerFormat);
+                            _headerContent = content;
+                        }
                     }
 
                     _xetexFile.Write("\\" + mergedParaStyle + "{");
-                    //_braceClass.Push(getStyleName);
                 }
                 AddUsedStyleName(characterStyle);
             }
@@ -1618,6 +1670,7 @@ namespace SIL.PublishingSolution
             if (classNameWOLang == "ChapterNumber")
             {
                 _chapterNo = _reader.ReadString();
+                //_chapterNo = "\\lettrine[lines=2]{" + _chapterNo + "}{}";
             }
             if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("vertical-align"))
             {
@@ -1643,6 +1696,7 @@ namespace SIL.PublishingSolution
                 _newProperty[_paragraphName] = mystyle;
                 _dropCapStyle = _paragraphName;
                 Write();
+                
             }
         }
 

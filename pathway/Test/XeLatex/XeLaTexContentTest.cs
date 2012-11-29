@@ -988,7 +988,7 @@ namespace Test.XeLatex
             StreamWriter xetexFile = new StreamWriter(xetexFullFile);
 
             XeLaTexStyles styles = new XeLaTexStyles();
-            _classInlineStyle = styles.CreateXeTexStyles(_outputPath,xetexFile, cssClass);
+            _classInlineStyle = styles.CreateXeTexStyles(_projInfo, xetexFile, cssClass);
 
             XeLaTexContent content = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = styles._classInlineText;

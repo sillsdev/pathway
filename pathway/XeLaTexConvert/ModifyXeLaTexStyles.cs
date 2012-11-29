@@ -50,6 +50,7 @@ namespace SIL.PublishingSolution
         private string _copyrightTexFilename = string.Empty;
         private string _reversalIndexTexFilename = string.Empty;
         private bool _reversalIndexExist = false;
+        private bool _isMirrored = false;
 
         public string ProjectType
         {
@@ -142,8 +143,17 @@ namespace SIL.PublishingSolution
             //{
             //    MergeCssStyle(cssStyle.Key);
             //}
+            ValidatePageType();
             GetTableofContent(newProperty);
             MapProperty();
+        }
+
+        private void ValidatePageType()
+        {
+            if(_cssClass.ContainsKey("@page:left-top-left"))
+            {
+                _isMirrored = true;
+            }
         }
 
         private void GetTableofContent(Dictionary<string, Dictionary<string, string>> newProperty)
@@ -240,7 +250,12 @@ namespace SIL.PublishingSolution
                     Common.FileInsertText(_xetexFullFile, package);
                 }
                 //Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
-                Common.FileInsertText(_xetexFullFile, @"\documentclass[a4paper]{article} ");
+                string paperSize = "a4paper";
+                if (_isMirrored)
+                {
+                    paperSize = paperSize + ",twoside";
+                }
+                Common.FileInsertText(_xetexFullFile, @"\documentclass[" + paperSize + "]{article} ");
                 //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
             }
         }

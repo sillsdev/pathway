@@ -71,6 +71,8 @@ namespace SIL.Tool
         public string _headerFontName = "GenericFont";
         public string _selectedTemplateStyle = string.Empty;
 
+        private string _headerReferenceFormat = string.Empty;
+
         #endregion
 
         #region public Variable
@@ -262,6 +264,12 @@ namespace SIL.Tool
         {
             get { return _selectedTemplateStyle; }
             set { _selectedTemplateStyle = value; }
+        }
+
+        public string HeaderReferenceFormat
+        {
+            get { return _headerReferenceFormat; }
+            set { _headerReferenceFormat = value; }
         }
 
         #endregion
