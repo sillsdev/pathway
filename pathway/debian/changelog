@@ -1,6 +1,58 @@
-pathway (1.3.2.2794-1) unstable; urgency=high
+pathway (1.3.4.2898-1) unstable; urgency=high
 
-  * pathway 1.3.3 sprint
+  * pathway 1.3.4 sprint
+    - packaging: Don't offer stable if incompatible with Fieldworks
+    - packaging: Remove xetex cobolt support from package
+    - packaging: TD-3325 Keep reference to Epub validator
+    - help: TD-3202 Fix broken links in Help page
+    - help: Reset missing picture.
+    - help: Updated info related to macros
+    - help: add link for pathway site backup
+    - LibreOffice: TD-1630 Added hyperlink to internet page on large files
+    - LibreOffice: TD-1893 Wrong Page Number Position .
+    - LibreOffice: TD-2651 Header shows wrong guideword
+    - LibreOffice: TD-3199 Format number in TOC
+    - LibreOffice: TD-3210 Show page number consistently
+    - LibreOffice: TD-3253 Keep header in margins
+    - LibreOffice: TD-3270 Homograph number too small in reversal
+    - LibreOffice: TD-3271 Show book name in header
+    - LibreOffice: TD-3274 Remove unused macros - removed unused macros
+    - LibreOffice: TD-3301 Fix Margin indentations
+    - LibreOffice: TD-3304 Use vernacular font for header
+    - LibreOffice: TD-3307 Remove duplicate headers
+    - LibreOffice: TD-3313 Introduction table heading too large
+    - LibreOffice: TD-3319 Pictures set off still leave boxes
+    - paratext plugin: TD-2909 Add ability to get USFM from Paratext for Go Bible
+    - paratext plugin: TD-3150 Update PathwayB Paratextshared call
+    - paratext plugin: TD-3150 ParatextSupport must be dynamically loaded for SE build
+    - e-book: TD-3123 E-book formatting discrepencies
+    - stylesheet: TD-3229 Headwords not bold, and other styles
+    - stylesheet: TD-3251 Center Margin merges with the Words
+    - ui: TD-3132 Erase settings when starting ConfigurationTool with Shift down key
+    - ui: TD-3220 Page number field update
+    - ui: TD-3220 Switching Nochange in the Fontsize,leading
+    - ui: TD-3220 reset the dropdown in Configuration tool
+    - ui: TD-3248 Crash box when click on Hyperlink to open site
+    - ui: TD-3249 Error on Web pane When click on Save button.
+    - ui: TD-3250 Avoid "Copy of Copy of" names
+    - ui: TD-3252 Delete icon is enabled on standard style sheet on Web pane.
+    - ui: TD-3255 Preview would not be opened
+    - ui: TD-3261 Prince option is missing
+    - ui: TD-3287 Add transform to remove empty chapters
+    - ui: TD-3306 Save the new custom style sheets with same name and descriptions.
+    - ui: TD-3309 Remove unwanted letter dividers
+    - ui: TD-3269 Remove "Insert Running Header" check box
+    - ui: Expand pre-processing list box to more easily read name
+    - ui: change form size to fit on small screens
+    - ui: set ConfigurationTool maximum window size on Windows
+    - xelatex: TD-2144 handle before punctuation
+    - xelatex: TD-2145 orphan control
+    - xelatex: TD-2146 combine properties from general and specific selector blocks
+    - xelatex: TD-2154 widow control
+    - xelatex: TD-2157 div.header
+    - xelatex: TD-2121 Handle scripture Reference Format for Mirror Page
+    - xelatex: TD-2161 Create guidewords for Mirror Page
+    - xelatex: TD-2289 .letter[class~='current']  * pathway 1.3.3 sprint
     - Common: TD-2909 Add ability to get USFM from Paratext for Go Bible
     - Common: TD-3132 Starting ConfigurationTool with Shift down key
     - Common: Reset missing picture.
