@@ -438,7 +438,7 @@
           <style:tab-stop style:position="6.5in" style:type="right" />
         </style:tab-stops>
       </style:paragraph-properties>
-      <style:text-properties style:font-name="Times New Roman" fo:font-weight="regular" fo:font-size="12" />
+      <style:text-properties style:font-name="Times New Roman" fo:font-weight="regular" fo:font-size="10" />
     </style:style>
     <style:style style:name="Footer" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text_20_body" style:class="text">
       <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:keep-with-next="always" text:number-lines="false" text:line-number="0">
@@ -463,7 +463,7 @@
       <style:text-properties style:font-name-asian="Yi plus Phonetics" style:font-name-complex="Tahoma1" />
     </style:style>
     <style:style style:name="Frame_20_contents" style:display-name="Frame contents" style:family="paragraph" style:parent-style-name="headerFontStyleName" style:class="extra">
-      <style:text-properties style:font-name="Times New Roman" fo:font-weight="regular" fo:font-size="12" />
+      <style:text-properties style:font-name="Times New Roman" fo:font-weight="regular" fo:font-size="10" />
     </style:style>
     <style:style style:family="graphic" style:name="Graphics0">
       <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="baseline" style:horizontal-pos="from-left" style:horizontal-rel="paragraph" fo:margin-left="5.7pt" />
