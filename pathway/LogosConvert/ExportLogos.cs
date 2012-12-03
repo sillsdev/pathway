@@ -155,7 +155,7 @@ namespace SIL.PublishingSolution
                     string srcGuidFile = Path.Combine(Common.GetPSApplicationPath(), GuidFileName);
                     File.Copy(srcGuidFile, FileGuidPath);
                 }
-                XmlDocument xmlDoc = new XmlDocument { XmlResolver = null };
+                XmlDocument xmlDoc = Common.DeclareXMLDocument(true); //new XmlDocument { XmlResolver = null };
                 xmlDoc.Load(FileGuidPath);
                 string outputName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 string xPath = "//files/file[@name='" + outputName + "']";
