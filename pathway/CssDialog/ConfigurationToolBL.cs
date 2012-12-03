@@ -156,6 +156,7 @@ namespace SIL.PublishingSolution
             _screenMode = ScreenMode.Load;
 
             //Mirrored
+            pageDict.Add("@page:none-none", "None");
             pageDict.Add("@page:left-top-right", "Top Inside Margin");
             pageDict.Add("@page:left-top-left", "Top Outside Margin");
             pageDict.Add("@page:left-top-center", "Top Center");
@@ -227,63 +228,94 @@ namespace SIL.PublishingSolution
             get
             {
                 string defaultValue = string.Empty;
+                string task = "@page:left-top-left"; // Page left top left
+                string key = "content";
+                string result = GetValue(task, key, "false");
+                if (_loadType == "Dictionary")
                 {
-                    if (_loadType == "Dictionary")
+                    if (result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0)
                     {
-                        string task = "@page:left-top-left";
-                        string key = "content";
-                        string result = GetValue(task, key, "false");
-                        //task = "@page:right-top-right";
-                        //key = "content";
-                        //result = GetValue(task, key, "false");
-                        if (result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0)
-                        {
-                            return "Mirrored";
-                        }
-                        defaultValue = "Every Page";
+                        return "Mirrored";
                     }
-                    else
+                    defaultValue = "Every Page";
+                }
+                else
+                {
+                    //task = "@page:right-top-right";
+                    //key = "content";
+                    //result = GetValue(task, key, "false");
+                    if (result.IndexOf("bookname") > 0 || result.IndexOf("chapter") > 0 || result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0)
                     {
-                        string key = "-ps-referenceformat";
-                        string task;
-
-                        task = "@page-top-center";
-                        string result = GetPageValue(task, key, "false");
-                        if (result.Length > 0)
-                        {
-                            return result;
-                        }
-
-                        task = "@page:left-top-left$@page:right-top-right";
-                         result = GetPageValue(task, key, "false");
-                        if (result.Length > 0)
-                        {
-                            return result;
-                        }
-
-                        
-
-                        defaultValue = "Genesis 1-2";
+                        return "Mirrored";
                     }
+                    defaultValue = "Every Page";
                 }
                 return defaultValue;
-
             }
         }
+
+        public string ReferenceFormat
+        {
+            get
+            {
+                string defaultValue = string.Empty;
+
+                string key = "-ps-referenceformat";
+                string task = string.Empty;
+                string result = string.Empty;
+
+                task = "@page-top-center";
+                result = GetPageValue(task, key, "false");
+                if (result.Length > 0)
+                {
+                    if (cTool.DdlReferenceFormat.Items.Contains(result))
+                        return result;
+                }
+                
+                task = "@page:left-top-left$@page:right-top-right";
+                result = GetPageValue(task, key, "false");
+                if (result.Length > 0)
+                {
+                    if (cTool.DdlReferenceFormat.Items.Contains(result))
+                        return result;
+                }
+
+                defaultValue = "Genesis 1-2";
+                return defaultValue;
+            }
+        }
+
         public string PageNumber
         {
             get
             {
                 string defaultValue = "Top Center";
-                foreach (string srchKey in pageDict.Keys)
+                if (_loadType == "Dictionary")
                 {
-                    const string key = "content";
-                    string result = GetValue(srchKey, key, "false");
-                    if (result.IndexOf("page") > 0)
+                    foreach (string srchKey in pageDict.Keys)
                     {
-                        string pageNumberValue = pageDict[srchKey];
-                        if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
-                            return pageDict[srchKey];
+                        const string key = "content";
+                        string result = GetValue(srchKey, key, "false");
+                        if (result.IndexOf("page") > 0)
+                        {
+                            string pageNumberValue = pageDict[srchKey];
+                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
+                                return pageDict[srchKey];
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (string srchKey in pageDict.Keys)
+                    {
+                        const string key = "content";
+                        string result = GetValue(srchKey, key, "false");
+                        if (result.IndexOf("page") > 0)
+                        {
+                            string pageNumberValue = pageDict[srchKey];
+                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
+                                return pageDict[srchKey];
+                        }
                     }
                 }
                 return defaultValue;
@@ -799,6 +831,13 @@ namespace SIL.PublishingSolution
                         key = cTool.DdlRunningHead.Text;
                         WriteAtImport(writeCss, attribute, key);
 
+                        if (inputTypeBL.ToLower() == "scripture")
+                        {
+                            attribute = "Reference Format";
+                            key = cTool.DdlReferenceFormat.Text;
+                            WriteAtImport(writeCss, attribute, key);
+                        }
+
                         attribute = "Page Number";
                         key = cTool.DdlPageNumber.Text;
                         WriteAtImport(writeCss, attribute, key);
@@ -968,6 +1007,52 @@ namespace SIL.PublishingSolution
 
             string pageType = cTool.DdlRunningHead.SelectedItem.ToString();
             DdlRunningHeadSelectedIndexChangedBl(pageType);
+
+            if (inputTypeBL.ToLower() == "scripture")
+            {
+                cTool.DdlReferenceFormat.SelectedItem = ReferenceFormat;
+                cTool.DdlReferenceFormat.Visible = true;
+                cTool.LblReferenceFormat.Visible = true;
+
+                cTool.LblReferenceFormat.Location = new System.Drawing.Point(1, 286);
+                cTool.DdlReferenceFormat.Location = new System.Drawing.Point(107, 283);
+
+                cTool.LblPageNumber.Location = new System.Drawing.Point(14, 310);
+                cTool.DdlPageNumber.Location = new System.Drawing.Point(107, 307);
+
+                cTool.LblRules.Location = new System.Drawing.Point(14, 334);
+                cTool.DdlRules.Location = new System.Drawing.Point(107, 331);
+
+                cTool.LblFont.Location = new System.Drawing.Point(14, 359);
+                cTool.DdlFontSize.Location = new System.Drawing.Point(107, 355);
+
+                cTool.LblFileProduceDict.Location = new System.Drawing.Point(14, 383);
+                cTool.DdlFileProduceDict.Location = new System.Drawing.Point(107, 379);
+
+                cTool.LblSenseLayout.Location = new System.Drawing.Point(14, 407);
+                cTool.DdlSense.Location = new System.Drawing.Point(107, 403);
+                
+            }
+            else
+            {
+                cTool.DdlReferenceFormat.Visible = false;
+                cTool.LblReferenceFormat.Visible = false;
+
+                cTool.LblPageNumber.Location = new System.Drawing.Point(1, 286);
+                cTool.DdlPageNumber.Location = new System.Drawing.Point(107, 283);
+
+                cTool.LblRules.Location = new System.Drawing.Point(14, 310);
+                cTool.DdlRules.Location = new System.Drawing.Point(107, 307);
+
+                cTool.LblFont.Location = new System.Drawing.Point(14, 334);
+                cTool.DdlFontSize.Location = new System.Drawing.Point(107, 331);
+
+                cTool.LblFileProduceDict.Location = new System.Drawing.Point(14, 359);
+                cTool.DdlFileProduceDict.Location = new System.Drawing.Point(107, 355);
+
+                cTool.LblSenseLayout.Location = new System.Drawing.Point(14, 383);
+                cTool.DdlSense.Location = new System.Drawing.Point(107, 379);
+            }
 
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
@@ -2081,7 +2166,7 @@ namespace SIL.PublishingSolution
             if (_cssClass.ContainsKey(task) && _cssClass[task].ContainsKey(key))
             {
                 string result = _cssClass[task][key].Replace("'", "");
-                
+
                 if (result.Length == 0)
                     return defaultValue;
                 else
@@ -2329,12 +2414,15 @@ namespace SIL.PublishingSolution
         {
             string xPath = string.Empty;
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulatePageNumberFeature");
-            if (inputTypeBL.ToLower() == "scripture")
-                xPath = "//features/feature[@name='Page Number']/option[@name!='']";
-            else
-            {
-                xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
-            }
+            //if (inputTypeBL.ToLower() == "scripture")
+            //    xPath = "//features/feature[@name='Page Number']/option[@name!='']";
+            //else
+            //{
+            //    xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+            //}
+
+            xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+
             XmlNodeList pageNumList = Param.GetItems(xPath);
             try
             {
@@ -3572,13 +3660,13 @@ namespace SIL.PublishingSolution
         {
             string xPath = string.Empty;
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulatePageNumberFeature");
-            if (inputTypeBL.ToLower() == "scripture")
-                xPath = "//features/feature[@name='Page Number']/option[@name!='']";
-            else
-            {
-                xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
-            }
-
+            //if (inputTypeBL.ToLower() == "scripture")
+            //    xPath = "//features/feature[@name='Page Number']/option[@name!='']";
+            //else
+            //{
+            //    xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+            //}
+            xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
 
             XmlNodeList pageNumList = Param.GetItems(xPath);
             cTool.DdlPageNumber.Items.Clear();
@@ -3599,6 +3687,25 @@ namespace SIL.PublishingSolution
             {
             }
 
+            xPath = "//features/feature[@name='Reference Format']/option[@type='" + pageType + "' or @type= 'Both']";
+            pageNumList = Param.GetItems(xPath);
+            cTool.DdlReferenceFormat.Items.Clear();
+            try
+            {
+                foreach (XmlNode node in pageNumList)
+                {
+                    if (node.Attributes != null)
+                    {
+                        string value = node.Attributes["name"].Value;
+                        if (!cTool.DdlReferenceFormat.Items.Contains(value))
+                            cTool.DdlReferenceFormat.Items.Add(value);
+                    }
+                }
+                cTool.DdlReferenceFormat.SelectedIndex = 0;
+            }
+            catch
+            {
+            }
         }
 
         public void tsUndo_ClickBL(object sender, EventArgs e)
@@ -4093,7 +4200,7 @@ namespace SIL.PublishingSolution
             {
                 cTool.MinimumSize = new Size(497, 183);
                 cTool.Width = Screen.PrimaryScreen.WorkingArea.Size.Width;
-                cTool.Width = cTool.Width < 1175? cTool.Width: 1175;
+                cTool.Width = cTool.Width < 1175 ? cTool.Width : 1175;
             }
 
             cTool.LoadSettings();

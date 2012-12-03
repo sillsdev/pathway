@@ -26,19 +26,19 @@ namespace epubValidator
 {
     public static class Program
     {
-		/// <summary>
-		/// Returns whether this program is running under the mono VM environment. 
-		/// ONLY USE THIS IF YOU ABSOLUTELY NEED CONDITIONAL CODE. 
-		/// </summary>
-		public static bool UsingMonoVM 
-		{
-			get 
-			{
-				Type t = Type.GetType ("Mono.Runtime");
-				return (t != null);
-			}
-		}
-		
+        /// <summary>
+        /// Returns whether this program is running under the mono VM environment. 
+        /// ONLY USE THIS IF YOU ABSOLUTELY NEED CONDITIONAL CODE. 
+        /// </summary>
+        public static bool UsingMonoVM
+        {
+            get
+            {
+                Type t = Type.GetType("Mono.Runtime");
+                return (t != null);
+            }
+        }
+
         public static String[] args;
         /// <summary>
         /// The main entry point for the application.
@@ -63,22 +63,24 @@ namespace epubValidator
             var currentPath = Environment.GetEnvironmentVariable("path");
             if (!String.IsNullOrEmpty(currentPath))
             {
-                string[] directories = currentPath.Split(new[] {';'});
+                string[] directories = currentPath.Split(new[] { ';' });
                 foreach (string directory in directories)
-                try
                 {
-                    var myDirectory = directory.Replace("\"", "");
-                    if (!Directory.Exists(myDirectory)) continue;
-                    fullName = Path.Combine(myDirectory, name);
-                    if (File.Exists(fullName))
+                    try
                     {
-                        return fullName;
+                        var myDirectory = directory.Replace("\"", "");
+                        if (!Directory.Exists(myDirectory)) continue;
+                        fullName = Path.Combine(myDirectory, name);
+                        if (File.Exists(fullName))
+                        {
+                            return fullName;
+                        }
                     }
-                }
-                catch (Exception e)
-                {
-                    e.Source = directory + @"\" + name;
-                    throw;
+                    catch (Exception e)
+                    {
+                        e.Source = directory + @"\" + name;
+                        throw;
+                    }
                 }
             }
             // either no path defined (not likely) or Java.exe isn't on the path
@@ -91,7 +93,7 @@ namespace epubValidator
         /// </summary>
         /// <param name="Filename">Full path / filename of .epub file to validate</param>
         /// <returns>Results of the epubcheck run</returns>
-        public static string ValidateFile (string Filename)
+        public static string ValidateFile(string Filename)
         {
             if (Filename == null)
             {
@@ -111,21 +113,21 @@ namespace epubValidator
                             progFullName = progFullName.Substring(0, progFullName.Length - 4);
                         }
                         var strAppDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
-						// jar file to execute (epubcheck)
-						sb.Append("-jar");
+                        // jar file to execute (epubcheck)
+                        sb.Append("-jar");
                         sb.Append(" \"");
-						// if we're in linux-land, add a leading slash
-						if (UsingMonoVM) 
-						{
-							sb.Append(Path.DirectorySeparatorChar);
-						}
+                        // if we're in linux-land, add a leading slash
+                        if (UsingMonoVM)
+                        {
+                            sb.Append(Path.DirectorySeparatorChar);
+                        }
                         sb.Append(strAppDir.Substring(6)); // Remove the leading file:/ from the CodeBase result
                         sb.Append(Path.DirectorySeparatorChar);
                         sb.Append("epubcheck-1.2");
                         sb.Append(Path.DirectorySeparatorChar);
                         sb.Append("epubcheck-1.2.jar");
                         sb.Append("\" ");
-						// filename to run it against (the .epub file)
+                        // filename to run it against (the .epub file)
                         sb.Append("\"");
                         sb.Append(Filename);
                         sb.Append("\"");

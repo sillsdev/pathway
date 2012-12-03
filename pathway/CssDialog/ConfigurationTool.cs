@@ -260,6 +260,11 @@ namespace SIL.PublishingSolution
             get { return lblPageColumn; }
         }
 
+        public Label LblPageNumber
+        {
+            get { return lblPageNumber; }
+        }
+
         public ToolStripButton TsSaveAs
         {
             get { return tsSaveAs; }
@@ -505,9 +510,9 @@ namespace SIL.PublishingSolution
             get { return ddlFileProduceDict; }
         }
 
-        public Label Label9
+        public Label LblFileProduceDict
         {
-            get { return label9; }
+            get { return lblFileProduceDict; }
         }
 
         public ToolTip ToolTip1
@@ -699,6 +704,16 @@ namespace SIL.PublishingSolution
         public CheckBox ChkIncludeImage
         {
             get { return chkIncludeImage; }
+        }
+
+        public ComboBox DdlReferenceFormat
+        {
+            get { return ddlReferenceFormat; }
+        }
+
+        public Label LblReferenceFormat
+        {
+            get { return lblReferenceFormat; }
         }
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
