@@ -887,6 +887,17 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TextFontSizeTestC()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TextFontSizeTestC";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+
         [Ignore]
         [Test]
         [Category("SkipOnTeamCity")]
@@ -956,8 +967,6 @@ namespace Test.XeLatex
             Assert.AreEqual(systemFontList.Length, XeLaTexInstallation.GetXeLaTexFontCount());
         }
         #endregion
-
-
 
         #region Private Functions
 
