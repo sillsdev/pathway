@@ -899,9 +899,6 @@
       </style:footer>
       <style:header>
         <text:p text:style-name="Header">
-          <text:span text:style-name="MT1">
-            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
-          </text:span>
           <text:tab />
           <text:tab />
           <text:page-number text:select-page="current">4</text:page-number>
