@@ -488,7 +488,7 @@ namespace SIL.PublishingSolution
             this.lnkLblUrl.AutoSize = true;
             this.lnkLblUrl.LinkArea = new System.Windows.Forms.LinkArea(0, 22);
             this.lnkLblUrl.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkLblUrl.Location = new System.Drawing.Point(165, 447);
+            this.lnkLblUrl.Location = new System.Drawing.Point(177, 455);
             this.lnkLblUrl.Name = "lnkLblUrl";
             this.lnkLblUrl.Size = new System.Drawing.Size(111, 17);
             this.lnkLblUrl.TabIndex = 13;
@@ -499,12 +499,11 @@ namespace SIL.PublishingSolution
             // 
             // lblProjectUrl
             // 
-            this.lblProjectUrl.AutoSize = true;
-            this.lblProjectUrl.Location = new System.Drawing.Point(13, 434);
+            this.lblProjectUrl.Location = new System.Drawing.Point(10, 437);
             this.lblProjectUrl.Name = "lblProjectUrl";
-            this.lblProjectUrl.Size = new System.Drawing.Size(157, 26);
+            this.lblProjectUrl.Size = new System.Drawing.Size(276, 26);
             this.lblProjectUrl.TabIndex = 12;
-            this.lblProjectUrl.Text = "Other project related information\r\n                          is available at: ";
+            this.lblProjectUrl.Text = "Other project related information is available at:";
             // 
             // txtApproved
             // 
@@ -514,7 +513,7 @@ namespace SIL.PublishingSolution
             this.txtApproved.Location = new System.Drawing.Point(72, 221);
             this.txtApproved.MaxLength = 10;
             this.txtApproved.Name = "txtApproved";
-            this.txtApproved.Size = new System.Drawing.Size(274, 20);
+            this.txtApproved.Size = new System.Drawing.Size(214, 20);
             this.txtApproved.TabIndex = 5;
             this.txtApproved.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtApproved.Validated += new System.EventHandler(this.txtApproved_Validated);
@@ -532,7 +531,7 @@ namespace SIL.PublishingSolution
             // 
             this.btnApproved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApproved.Location = new System.Drawing.Point(238, 250);
+            this.btnApproved.Location = new System.Drawing.Point(178, 250);
             this.btnApproved.Name = "btnApproved";
             this.btnApproved.Size = new System.Drawing.Size(108, 20);
             this.btnApproved.TabIndex = 6;
@@ -571,7 +570,7 @@ namespace SIL.PublishingSolution
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
             this.txtComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtComment.Size = new System.Drawing.Size(274, 75);
+            this.txtComment.Size = new System.Drawing.Size(214, 75);
             this.txtComment.TabIndex = 4;
             this.txtComment.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtComment.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtComment_KeyUp);
@@ -595,7 +594,7 @@ namespace SIL.PublishingSolution
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDesc.Size = new System.Drawing.Size(274, 75);
+            this.txtDesc.Size = new System.Drawing.Size(214, 75);
             this.txtDesc.TabIndex = 2;
             this.txtDesc.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtDesc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDesc_KeyUp);
@@ -617,7 +616,7 @@ namespace SIL.PublishingSolution
             this.txtName.Location = new System.Drawing.Point(72, 21);
             this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(274, 20);
+            this.txtName.Size = new System.Drawing.Size(214, 20);
             this.txtName.TabIndex = 1;
             this.txtName.Enter += new System.EventHandler(this.txtName_Enter);
             this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyUp);
@@ -1138,7 +1137,7 @@ namespace SIL.PublishingSolution
             this.tabMobile.Location = new System.Drawing.Point(4, 22);
             this.tabMobile.Name = "tabMobile";
             this.tabMobile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMobile.Size = new System.Drawing.Size(284, 477);
+            this.tabMobile.Size = new System.Drawing.Size(292, 477);
             this.tabMobile.TabIndex = 2;
             this.tabMobile.Text = "Properties";
             this.tabMobile.UseVisualStyleBackColor = true;
@@ -1312,7 +1311,7 @@ namespace SIL.PublishingSolution
             this.tabOthers.Controls.Add(this.pictureBox1);
             this.tabOthers.Location = new System.Drawing.Point(4, 22);
             this.tabOthers.Name = "tabOthers";
-            this.tabOthers.Size = new System.Drawing.Size(284, 477);
+            this.tabOthers.Size = new System.Drawing.Size(292, 477);
             this.tabOthers.TabIndex = 3;
             this.tabOthers.Text = "Properties";
             this.tabOthers.UseVisualStyleBackColor = true;
@@ -1659,7 +1658,7 @@ namespace SIL.PublishingSolution
             this.tabWeb.Controls.Add(this.groupBox1);
             this.tabWeb.Location = new System.Drawing.Point(4, 22);
             this.tabWeb.Name = "tabWeb";
-            this.tabWeb.Size = new System.Drawing.Size(284, 477);
+            this.tabWeb.Size = new System.Drawing.Size(292, 477);
             this.tabWeb.TabIndex = 6;
             this.tabWeb.Text = "Properties";
             this.tabWeb.UseVisualStyleBackColor = true;
@@ -1951,7 +1950,7 @@ namespace SIL.PublishingSolution
             this.tabPreview.Controls.Add(this.picPreview);
             this.tabPreview.Location = new System.Drawing.Point(4, 22);
             this.tabPreview.Name = "tabPreview";
-            this.tabPreview.Size = new System.Drawing.Size(284, 477);
+            this.tabPreview.Size = new System.Drawing.Size(292, 477);
             this.tabPreview.TabIndex = 4;
             this.tabPreview.Text = "Preview";
             this.tabPreview.UseVisualStyleBackColor = true;
@@ -1997,7 +1996,7 @@ namespace SIL.PublishingSolution
             this.tabPicture.Controls.Add(this.GrpPicture);
             this.tabPicture.Location = new System.Drawing.Point(4, 22);
             this.tabPicture.Name = "tabPicture";
-            this.tabPicture.Size = new System.Drawing.Size(284, 477);
+            this.tabPicture.Size = new System.Drawing.Size(292, 477);
             this.tabPicture.TabIndex = 5;
             this.tabPicture.Text = "Pictures";
             this.tabPicture.UseVisualStyleBackColor = true;
