@@ -1655,6 +1655,10 @@ namespace SIL.Tool
                                     if (File.Exists(fromFileName))
                                     {
                                         string ext = Path.GetExtension(fromFileName);
+
+                                        if (ext != null && ext.Contains("tif"))
+                                            ext = ".jpg";
+
                                         string toFileName = Common.PathCombine(tempFolder, counter + ext);
                                         File.Copy(fromFileName, toFileName, true);
 
