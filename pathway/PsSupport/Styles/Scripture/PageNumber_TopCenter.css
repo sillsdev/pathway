@@ -1,11 +1,6 @@
 /* Top Center.css */
-@page :left {
+@page {
     @top-center{
-           content: counter( page);
-    }
-}
-@page :right {
-   @top-center{
            content: counter( page);
     }
 }
