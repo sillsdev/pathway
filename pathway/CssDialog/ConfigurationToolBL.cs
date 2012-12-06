@@ -264,23 +264,40 @@ namespace SIL.PublishingSolution
                 string task = string.Empty;
                 string result = string.Empty;
 
-                task = "@page-top-center";
-                result = GetPageValue(task, key, "false");
-                if (result.Length > 0)
+                if (cTool.DdlRunningHead.SelectedItem.ToString().ToLower() == "mirrored")
                 {
-                    if (cTool.DdlReferenceFormat.Items.Contains(result))
-                        return result;
+                    task = "@page-top-center";
+                    result = GetPageValue(task, key, "false");
+                    if (result.Length > 0)
+                    {
+                        if (cTool.DdlReferenceFormat.Items.Contains(result))
+                            return result;
+                    }
+
+                    task = "@page:left-top-left$@page:right-top-right";
+                    result = GetPageValue(task, key, "false");
+                    if (result.Length > 0)
+                    {
+                        if (cTool.DdlReferenceFormat.Items.Contains(result))
+                            return result;
+                    }
+
+                    defaultValue = "Genesis 1-2";
                 }
-                
-                task = "@page:left-top-left$@page:right-top-right";
-                result = GetPageValue(task, key, "false");
-                if (result.Length > 0)
+                else if (cTool.DdlRunningHead.SelectedItem.ToString().ToLower() == "every page")
                 {
-                    if (cTool.DdlReferenceFormat.Items.Contains(result))
-                        return result;
+                    task = "@page-top-left$@page-top-right";
+                    result = GetPageValue(task, key, "false");
+                    if (result.Length > 0)
+                    {
+                        if (cTool.DdlReferenceFormat.Items.Contains(result))
+                            return result;
+                    }
+
+                    defaultValue = "Genesis 1:1-2:1";
                 }
 
-                defaultValue = "Genesis 1-2";
+
                 return defaultValue;
             }
         }

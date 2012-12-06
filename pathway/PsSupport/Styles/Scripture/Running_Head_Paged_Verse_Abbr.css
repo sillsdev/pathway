@@ -1,12 +1,12 @@
 @page {
     @top-left      { 
-        -ps-referenceFormat: "Gen 1:1";
+        -ps-referenceFormat: "Gen 1:1-2:1";
         content: string(bookname, first) " "  string(chapter, first);
         font-weight: bold;
 	}
     @top-center    { content: ''; }    
     @top-right     { 
-        -ps-referenceFormat: "Gen 1:1";
+        -ps-referenceFormat: "Gen 1:1-2:1";
         content: string(bookname, last) " "  string(chapter, last);
         font-weight: bold;
 	}
