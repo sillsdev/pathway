@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="23">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="24">
   <settings>
     <property name="InputPath" value="%(AppData)s/SIL/Pathway" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture" />
     <property name="UserSheetPath" value="%(AppData)s/SIL/Pathway/Scripture" />
-    <property name="PublicationLocation" value="C:/Documents and Settings/Karthik/My Documents/Publications/Gondwana Test Data/Scripture/C5 Cols ApplicationStyles_2010-11-02_0429" />
+    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s" />
     <property name="MasterSheetPath" value="Styles/Scripture" />
     <property name="IconPath" value="Icons" />
     <property name="SamplePath" value="Samples/Scripture" />
