@@ -455,7 +455,7 @@ namespace SIL.PublishingSolution
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(292, 503);
+            this.tabControl1.Size = new System.Drawing.Size(300, 503);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -478,7 +478,7 @@ namespace SIL.PublishingSolution
             this.tabInfo.Location = new System.Drawing.Point(4, 22);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInfo.Size = new System.Drawing.Size(284, 477);
+            this.tabInfo.Size = new System.Drawing.Size(292, 477);
             this.tabInfo.TabIndex = 0;
             this.tabInfo.Text = "Info";
             this.tabInfo.UseVisualStyleBackColor = true;
@@ -514,7 +514,7 @@ namespace SIL.PublishingSolution
             this.txtApproved.Location = new System.Drawing.Point(72, 221);
             this.txtApproved.MaxLength = 10;
             this.txtApproved.Name = "txtApproved";
-            this.txtApproved.Size = new System.Drawing.Size(266, 20);
+            this.txtApproved.Size = new System.Drawing.Size(274, 20);
             this.txtApproved.TabIndex = 5;
             this.txtApproved.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtApproved.Validated += new System.EventHandler(this.txtApproved_Validated);
@@ -534,7 +534,7 @@ namespace SIL.PublishingSolution
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApproved.Location = new System.Drawing.Point(238, 250);
             this.btnApproved.Name = "btnApproved";
-            this.btnApproved.Size = new System.Drawing.Size(100, 20);
+            this.btnApproved.Size = new System.Drawing.Size(108, 20);
             this.btnApproved.TabIndex = 6;
             this.btnApproved.Text = "...";
             this.btnApproved.UseVisualStyleBackColor = true;
@@ -571,7 +571,7 @@ namespace SIL.PublishingSolution
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
             this.txtComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtComment.Size = new System.Drawing.Size(266, 75);
+            this.txtComment.Size = new System.Drawing.Size(274, 75);
             this.txtComment.TabIndex = 4;
             this.txtComment.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtComment.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtComment_KeyUp);
@@ -595,7 +595,7 @@ namespace SIL.PublishingSolution
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDesc.Size = new System.Drawing.Size(266, 75);
+            this.txtDesc.Size = new System.Drawing.Size(274, 75);
             this.txtDesc.TabIndex = 2;
             this.txtDesc.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtDesc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDesc_KeyUp);
@@ -617,7 +617,7 @@ namespace SIL.PublishingSolution
             this.txtName.Location = new System.Drawing.Point(72, 21);
             this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(266, 20);
+            this.txtName.Size = new System.Drawing.Size(274, 20);
             this.txtName.TabIndex = 1;
             this.txtName.Enter += new System.EventHandler(this.txtName_Enter);
             this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyUp);
@@ -677,7 +677,7 @@ namespace SIL.PublishingSolution
             this.tabDisplay.Location = new System.Drawing.Point(4, 22);
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplay.Size = new System.Drawing.Size(284, 477);
+            this.tabDisplay.Size = new System.Drawing.Size(292, 477);
             this.tabDisplay.TabIndex = 1;
             this.tabDisplay.Text = "Properties";
             this.tabDisplay.UseVisualStyleBackColor = true;
@@ -701,7 +701,7 @@ namespace SIL.PublishingSolution
             this.ddlReferenceFormat.FormattingEnabled = true;
             this.ddlReferenceFormat.Location = new System.Drawing.Point(107, 283);
             this.ddlReferenceFormat.Name = "ddlReferenceFormat";
-            this.ddlReferenceFormat.Size = new System.Drawing.Size(168, 21);
+            this.ddlReferenceFormat.Size = new System.Drawing.Size(176, 21);
             this.ddlReferenceFormat.TabIndex = 99;
             // 
             // chkFixedLineHeight
@@ -734,7 +734,7 @@ namespace SIL.PublishingSolution
             this.ddlPageNumber.FormattingEnabled = true;
             this.ddlPageNumber.Location = new System.Drawing.Point(107, 307);
             this.ddlPageNumber.Name = "ddlPageNumber";
-            this.ddlPageNumber.Size = new System.Drawing.Size(168, 21);
+            this.ddlPageNumber.Size = new System.Drawing.Size(176, 21);
             this.ddlPageNumber.TabIndex = 13;
             this.ddlPageNumber.SelectedIndexChanged += new System.EventHandler(this.ddlPageNumber_SelectedIndexChanged);
             // 
@@ -747,7 +747,7 @@ namespace SIL.PublishingSolution
             this.ddlFileProduceDict.FormattingEnabled = true;
             this.ddlFileProduceDict.Location = new System.Drawing.Point(107, 379);
             this.ddlFileProduceDict.Name = "ddlFileProduceDict";
-            this.ddlFileProduceDict.Size = new System.Drawing.Size(168, 21);
+            this.ddlFileProduceDict.Size = new System.Drawing.Size(176, 21);
             this.ddlFileProduceDict.TabIndex = 16;
             this.ddlFileProduceDict.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlFileProduceDict.Validated += new System.EventHandler(this.ddlFileProduceDict_Validated);
@@ -771,7 +771,7 @@ namespace SIL.PublishingSolution
             this.ddlVerticalJustify.FormattingEnabled = true;
             this.ddlVerticalJustify.Location = new System.Drawing.Point(107, 163);
             this.ddlVerticalJustify.Name = "ddlVerticalJustify";
-            this.ddlVerticalJustify.Size = new System.Drawing.Size(168, 21);
+            this.ddlVerticalJustify.Size = new System.Drawing.Size(176, 21);
             this.ddlVerticalJustify.TabIndex = 8;
             this.ddlVerticalJustify.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -794,7 +794,7 @@ namespace SIL.PublishingSolution
             this.ddlSense.FormattingEnabled = true;
             this.ddlSense.Location = new System.Drawing.Point(107, 403);
             this.ddlSense.Name = "ddlSense";
-            this.ddlSense.Size = new System.Drawing.Size(168, 21);
+            this.ddlSense.Size = new System.Drawing.Size(176, 21);
             this.ddlSense.TabIndex = 17;
             this.ddlSense.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -817,7 +817,7 @@ namespace SIL.PublishingSolution
             this.ddlPicture.FormattingEnabled = true;
             this.ddlPicture.Location = new System.Drawing.Point(107, 187);
             this.ddlPicture.Name = "ddlPicture";
-            this.ddlPicture.Size = new System.Drawing.Size(168, 21);
+            this.ddlPicture.Size = new System.Drawing.Size(176, 21);
             this.ddlPicture.TabIndex = 9;
             this.ddlPicture.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -850,7 +850,7 @@ namespace SIL.PublishingSolution
             this.ddlLeading.FormattingEnabled = true;
             this.ddlLeading.Location = new System.Drawing.Point(107, 211);
             this.ddlLeading.Name = "ddlLeading";
-            this.ddlLeading.Size = new System.Drawing.Size(168, 21);
+            this.ddlLeading.Size = new System.Drawing.Size(176, 21);
             this.ddlLeading.TabIndex = 10;
             this.ddlLeading.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -863,7 +863,7 @@ namespace SIL.PublishingSolution
             this.ddlRunningHead.FormattingEnabled = true;
             this.ddlRunningHead.Location = new System.Drawing.Point(107, 259);
             this.ddlRunningHead.Name = "ddlRunningHead";
-            this.ddlRunningHead.Size = new System.Drawing.Size(168, 21);
+            this.ddlRunningHead.Size = new System.Drawing.Size(176, 21);
             this.ddlRunningHead.TabIndex = 12;
             this.ddlRunningHead.SelectedIndexChanged += new System.EventHandler(this.ddlRunningHead_SelectedIndexChanged);
             // 
@@ -886,7 +886,7 @@ namespace SIL.PublishingSolution
             this.ddlRules.FormattingEnabled = true;
             this.ddlRules.Location = new System.Drawing.Point(107, 331);
             this.ddlRules.Name = "ddlRules";
-            this.ddlRules.Size = new System.Drawing.Size(168, 21);
+            this.ddlRules.Size = new System.Drawing.Size(176, 21);
             this.ddlRules.TabIndex = 14;
             this.ddlRules.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -909,7 +909,7 @@ namespace SIL.PublishingSolution
             this.ddlFontSize.FormattingEnabled = true;
             this.ddlFontSize.Location = new System.Drawing.Point(107, 355);
             this.ddlFontSize.Name = "ddlFontSize";
-            this.ddlFontSize.Size = new System.Drawing.Size(168, 21);
+            this.ddlFontSize.Size = new System.Drawing.Size(176, 21);
             this.ddlFontSize.TabIndex = 15;
             this.ddlFontSize.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -959,7 +959,7 @@ namespace SIL.PublishingSolution
             // txtPageOutside
             // 
             this.txtPageOutside.AccessibleName = "txtPageOutside";
-            this.txtPageOutside.Location = new System.Drawing.Point(211, 38);
+            this.txtPageOutside.Location = new System.Drawing.Point(224, 38);
             this.txtPageOutside.MaxLength = 6;
             this.txtPageOutside.Name = "txtPageOutside";
             this.txtPageOutside.Size = new System.Drawing.Size(33, 20);
@@ -985,7 +985,7 @@ namespace SIL.PublishingSolution
             // txtPageTop
             // 
             this.txtPageTop.AccessibleName = "txtPageTop";
-            this.txtPageTop.Location = new System.Drawing.Point(140, 64);
+            this.txtPageTop.Location = new System.Drawing.Point(139, 64);
             this.txtPageTop.MaxLength = 6;
             this.txtPageTop.Name = "txtPageTop";
             this.txtPageTop.Size = new System.Drawing.Size(33, 20);
@@ -998,7 +998,7 @@ namespace SIL.PublishingSolution
             // txtPageBottom
             // 
             this.txtPageBottom.AccessibleName = "txtPageBottom";
-            this.txtPageBottom.Location = new System.Drawing.Point(211, 64);
+            this.txtPageBottom.Location = new System.Drawing.Point(224, 64);
             this.txtPageBottom.MaxLength = 6;
             this.txtPageBottom.Name = "txtPageBottom";
             this.txtPageBottom.Size = new System.Drawing.Size(33, 20);
@@ -1021,7 +1021,7 @@ namespace SIL.PublishingSolution
             // lblPageOutside
             // 
             this.lblPageOutside.AccessibleName = "lblPageOutside";
-            this.lblPageOutside.Location = new System.Drawing.Point(176, 41);
+            this.lblPageOutside.Location = new System.Drawing.Point(174, 41);
             this.lblPageOutside.Name = "lblPageOutside";
             this.lblPageOutside.Size = new System.Drawing.Size(49, 13);
             this.lblPageOutside.TabIndex = 75;
@@ -1031,7 +1031,7 @@ namespace SIL.PublishingSolution
             // lblPageBottom
             // 
             this.lblPageBottom.AccessibleName = "lblPageBottom";
-            this.lblPageBottom.Location = new System.Drawing.Point(178, 67);
+            this.lblPageBottom.Location = new System.Drawing.Point(176, 67);
             this.lblPageBottom.Name = "lblPageBottom";
             this.lblPageBottom.Size = new System.Drawing.Size(47, 13);
             this.lblPageBottom.TabIndex = 73;
@@ -1057,7 +1057,7 @@ namespace SIL.PublishingSolution
             this.ddlJustified.FormattingEnabled = true;
             this.ddlJustified.Location = new System.Drawing.Point(107, 138);
             this.ddlJustified.Name = "ddlJustified";
-            this.ddlJustified.Size = new System.Drawing.Size(168, 21);
+            this.ddlJustified.Size = new System.Drawing.Size(176, 21);
             this.ddlJustified.TabIndex = 7;
             this.ddlJustified.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlJustified.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -1081,7 +1081,7 @@ namespace SIL.PublishingSolution
             this.ddlPageColumn.FormattingEnabled = true;
             this.ddlPageColumn.Location = new System.Drawing.Point(107, 90);
             this.ddlPageColumn.Name = "ddlPageColumn";
-            this.ddlPageColumn.Size = new System.Drawing.Size(168, 21);
+            this.ddlPageColumn.Size = new System.Drawing.Size(176, 21);
             this.ddlPageColumn.TabIndex = 5;
             this.ddlPageColumn.SelectedIndexChanged += new System.EventHandler(this.ddlPageColumn_SelectedIndexChanged);
             this.ddlPageColumn.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -1105,7 +1105,7 @@ namespace SIL.PublishingSolution
             this.ddlPagePageSize.FormattingEnabled = true;
             this.ddlPagePageSize.Location = new System.Drawing.Point(107, 11);
             this.ddlPagePageSize.Name = "ddlPagePageSize";
-            this.ddlPagePageSize.Size = new System.Drawing.Size(185, 21);
+            this.ddlPagePageSize.Size = new System.Drawing.Size(178, 21);
             this.ddlPagePageSize.TabIndex = 0;
             this.ddlPagePageSize.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlPagePageSize.Enter += new System.EventHandler(this.SetGotFocusValue);
