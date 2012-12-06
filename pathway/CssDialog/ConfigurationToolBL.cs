@@ -1007,7 +1007,15 @@ namespace SIL.PublishingSolution
             cTool.DdlPagePageSize.SelectedItem = PageSize;
             cTool.DdlRunningHead.SelectedItem = RunningHeader;
 
-            string pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+            string pageType;
+            if (cTool.DdlRunningHead.SelectedIndex != -1)
+            {
+                pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+            }
+            else
+            {
+                pageType = cTool.DdlRunningHead.Items[0].ToString();
+            }
             DdlRunningHeadSelectedIndexChangedBl(pageType);
 
             if (inputTypeBL.ToLower() == "scripture")
@@ -2405,7 +2413,16 @@ namespace SIL.PublishingSolution
                 string fileName = values[key];
                 if (attribute.ToLower() == "page number")
                 {
-                    string pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+                    string pageType;
+                    if (cTool.DdlRunningHead.SelectedIndex != -1)
+                    {
+                        pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+                    }
+                    else
+                    {
+                        pageType = cTool.DdlRunningHead.Items[0].ToString();
+                    }
+
                     fileName = GetPageNumberImport(pageType, key);
                 }
                 writeCss.WriteLine("@import \"" + fileName + "\";");
