@@ -493,7 +493,12 @@ namespace SIL.PublishingSolution
                 string task = "@page";
                 string key = "-ps-fileproduce";
                 string file = GetValue(task, key, "One");
-                return file.Replace("\"", "");
+                if (file != null) 
+                    return file.Replace("\"", "");
+                else
+                {
+                    return "One";
+                }
             }
         }
 
@@ -1266,7 +1271,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    cTool.DdlFileProduceDict.SelectedItem = FileProduced.Trim();
+                    cTool.DdlFileProduceDict.SelectedItem = FileProduced.ToString();
                     ShowCssSummary();
                 }
                 SavePropertyValue();
@@ -4434,7 +4439,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                _fileProduce = cTool.DdlFileProduceDict.Text;
+                _fileProduce = cTool.DdlFileProduceDict.SelectedItem.ToString();
                 //WriteCss(sender);
             }
             catch { }

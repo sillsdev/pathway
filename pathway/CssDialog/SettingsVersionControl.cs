@@ -40,25 +40,25 @@ namespace SIL.PublishingSolution
         public void UpdateSettingsFile(string appPath)
         {
             _xmlFileWithPath = appPath;
-			var sbFile = new StringBuilder();
-			sbFile.Append(Common.GetAllUserAppPath());
-			sbFile.Append(Path.DirectorySeparatorChar);
-			sbFile.Append("SIL");
-			sbFile.Append(Path.DirectorySeparatorChar);
-			sbFile.Append("Pathway");
-			sbFile.Append(Path.DirectorySeparatorChar);
+            var sbFile = new StringBuilder();
+            sbFile.Append(Common.GetAllUserAppPath());
+            sbFile.Append(Path.DirectorySeparatorChar);
+            sbFile.Append("SIL");
+            sbFile.Append(Path.DirectorySeparatorChar);
+            sbFile.Append("Pathway");
+            sbFile.Append(Path.DirectorySeparatorChar);
             sbFile.Append("Dictionary");
             sbFile.Append(Path.DirectorySeparatorChar);
-			sbFile.Append(Path.GetFileName(appPath));
+            sbFile.Append(Path.GetFileName(appPath));
             string allUserPath = sbFile.ToString();
             if (File.Exists(allUserPath))
             {
                 _xmlFileWithPath = allUserPath;
             }
-            if (Param.LoadValues(_xmlFileWithPath) == null) 
-			{
-				return;
-			}
+            if (Param.LoadValues(_xmlFileWithPath) == null)
+            {
+                return;
+            }
 
             //MigrateProjectSettingsFile(_xmlFileWithPath, "sSchemaPath", "sSettingsPath", appPath);
             MigrateProjectSettingsFile(_xmlFileWithPath, "projSchemaPath", "projSettingsPath", appPath);
@@ -94,7 +94,7 @@ namespace SIL.PublishingSolution
                     //}
                     bool copiedMetadataBlock = false;
 
-                    if(projSettingsVerNum == "0")
+                    if (projSettingsVerNum == "0")
                     {
                         Version1(GetDirectoryPath(settingsPath, appPath), projSchemaVersion);
                     }
@@ -144,6 +144,12 @@ namespace SIL.PublishingSolution
                         Param.LoadSettings();
                     }
 
+                    if (int.Parse(projSettingsVerNum) < 25)
+                    {
+                        Version25(GetDirectoryPath(settingsPath, appPath));
+                        Param.LoadSettings();
+                    }
+
                     //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
                     string usrPath = GetDirectoryPath(settingsPath, appPath);
                     string insPath = Common.PathCombine(Path.GetDirectoryName(installerPath), Path.GetFileName(usrPath));
@@ -172,30 +178,30 @@ namespace SIL.PublishingSolution
 
             string projFile = Param.Value["InputType"].ToLower() == "scripture" ? xmlFile[2].ToString() : xmlFile[1].ToString();
             string path = string.Empty;
-			var sbPath = new StringBuilder();
-			
+            var sbPath = new StringBuilder();
+
             switch (DirectoryName)
             {
                 case "sSchemaPath":
-					sbPath.Append(Common.GetAllUserAppPath());
-					sbPath.Append(Path.DirectorySeparatorChar);
-					sbPath.Append("SIL");
-					sbPath.Append(Path.DirectorySeparatorChar);
-					sbPath.Append("Pathway");
-					sbPath.Append(Path.DirectorySeparatorChar);
-					sbPath.Append(xmlFile[3].ToString());
-					path = sbPath.ToString();
+                    sbPath.Append(Common.GetAllUserAppPath());
+                    sbPath.Append(Path.DirectorySeparatorChar);
+                    sbPath.Append("SIL");
+                    sbPath.Append(Path.DirectorySeparatorChar);
+                    sbPath.Append("Pathway");
+                    sbPath.Append(Path.DirectorySeparatorChar);
+                    sbPath.Append(xmlFile[3].ToString());
+                    path = sbPath.ToString();
                     //path = Path.Combine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL\\Pathway"), xmlFile[3].ToString());
                     break;
                 case "sSettingsPath":
-					sbPath.Append(Common.GetAllUserAppPath());
-					sbPath.Append(Path.DirectorySeparatorChar);
-					sbPath.Append("SIL");
-					sbPath.Append(Path.DirectorySeparatorChar);
-					sbPath.Append("Pathway");
-					sbPath.Append(Path.DirectorySeparatorChar);
-					sbPath.Append(xmlFile[0].ToString());
-					path = sbPath.ToString();
+                    sbPath.Append(Common.GetAllUserAppPath());
+                    sbPath.Append(Path.DirectorySeparatorChar);
+                    sbPath.Append("SIL");
+                    sbPath.Append(Path.DirectorySeparatorChar);
+                    sbPath.Append("Pathway");
+                    sbPath.Append(Path.DirectorySeparatorChar);
+                    sbPath.Append(xmlFile[0].ToString());
+                    path = sbPath.ToString();
                     //path = Path.Combine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL\\Pathway"), xmlFile[0].ToString());
                     break;
                 case "projSchemaPath":
@@ -275,7 +281,7 @@ namespace SIL.PublishingSolution
             if (!File.Exists(srcSettingsFile)) { return; }
             var srcDoc = Common.DeclareXMLDocument(false);
             srcDoc.Load(srcSettingsFile);
-            if (srcDoc.DocumentElement == null) {return;} // make sure we have something to copy over
+            if (srcDoc.DocumentElement == null) { return; } // make sure we have something to copy over
             // load the destination settings file (the one in ProgramData) that is missing the <metadata> block);
             if (!File.Exists(destSettingsFile)) { return; }
             var destDoc = Common.DeclareXMLDocument(false);
@@ -299,7 +305,7 @@ namespace SIL.PublishingSolution
                 {
                     XmlNode newMetaNode = destDoc.ImportNode(metadataNode, true);
                     root.AppendChild(newMetaNode);
-                    
+
                 }
             }
             destDoc.Save(destSettingsFile);
@@ -355,7 +361,7 @@ namespace SIL.PublishingSolution
                 const string featuresPath = "//stylePick/features";
                 XmlNode referencesNode = root.SelectSingleNode(referencesPath);
                 XmlNode featuresNode = root.SelectSingleNode(featuresPath);
-                if (featuresNode == null) {return;}
+                if (featuresNode == null) { return; }
                 if (referencesNode != null)
                 {
                     XmlElement newNode = destDoc.CreateElement("feature");
@@ -449,7 +455,7 @@ namespace SIL.PublishingSolution
                                 searchNode.AppendChild(docFrag);
                             }
                         }
-                    } 
+                    }
                 }
             }
             xdoc.Save(path);
@@ -554,6 +560,236 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
+        /// Update to change made in version 15 of the XML. The change here is a References feature block for Dictionary / scriptures (only).
+        /// </summary>
+        /// <param name="destSettingsFile"></param>
+        private void Version25(string destSettingsFile)
+        {
+            // load the destination settings file (the one in ProgramData) that is missing the <meta> block for the TOC);
+            if (!File.Exists(destSettingsFile)) { return; }
+            var destDoc = Common.DeclareXMLDocument(false);
+            destDoc.Load(destSettingsFile);
+            XmlElement root = destDoc.DocumentElement;
+            if (root != null)
+            {
+                root.SetAttribute("version", "25");
+                // Metadata block
+                const string referencesPath = "//stylePick/features/feature[@name=\"Page Number\"]";
+                const string featuresPath = "//stylePick/features";
+                XmlNode referencesNode = root.SelectSingleNode(referencesPath);
+                XmlNode featuresNode = root.SelectSingleNode(featuresPath);
+                if (featuresNode == null) { return; }
+                if (referencesNode != null)
+                {
+                    XmlElement newNode = destDoc.CreateElement("feature");
+                    newNode.SetAttribute("name", "Page Number");
+
+                    XmlElement optionNode11 = destDoc.CreateElement("option");
+                    optionNode11.SetAttribute("name", "Top Inside Margin");
+                    optionNode11.SetAttribute("file", "PageNumber_TopOutside.css");
+                    optionNode11.SetAttribute("type", "Mirrored");
+
+                    XmlElement optionNode12 = destDoc.CreateElement("option");
+                    optionNode12.SetAttribute("name", "Top Outside Margin");
+                    optionNode12.SetAttribute("file", "PageNumber_TopOutside.css");
+                    optionNode12.SetAttribute("type", "Mirrored");
+
+
+                    XmlElement optionNode13 = destDoc.CreateElement("option");
+                    optionNode13.SetAttribute("name", "Top Center");
+                    optionNode13.SetAttribute("file", "PageNumber_TopCenter_Mirrored.css");
+                    optionNode13.SetAttribute("type", "Mirrored");
+
+
+                    XmlElement optionNode14 = destDoc.CreateElement("option");
+                    optionNode14.SetAttribute("name", "Bottom Inside Margin");
+                    optionNode14.SetAttribute("file", "PageNumber_BottomInside.css");
+                    optionNode14.SetAttribute("type", "Mirrored");
+
+
+                    XmlElement optionNode15 = destDoc.CreateElement("option");
+                    optionNode15.SetAttribute("name", "Bottom Outside Margin");
+                    optionNode15.SetAttribute("file", "PageNumber_BottomOutside.css");
+                    optionNode15.SetAttribute("type", "Mirrored");
+
+
+                    XmlElement optionNode16 = destDoc.CreateElement("option");
+                    optionNode16.SetAttribute("name", "Bottom Center");
+                    optionNode16.SetAttribute("file", "PageNumber_BottomCenter_Mirrored.css");
+                    optionNode16.SetAttribute("type", "Mirrored");
+
+                    //EveryPage
+
+                    XmlElement optionNode1 = destDoc.CreateElement("option");
+                    optionNode1.SetAttribute("name", "Top Center");
+                    optionNode1.SetAttribute("file", "PageNumber_TopCenter.css");
+                    optionNode1.SetAttribute("type", "Every Page");
+
+                    XmlElement optionNode2 = destDoc.CreateElement("option");
+                    optionNode2.SetAttribute("name", "Bottom Center");
+                    optionNode2.SetAttribute("file", "PageNumber_BottomCenter.css");
+                    optionNode2.SetAttribute("type", "Every Page");
+
+                    XmlElement optionNode3 = destDoc.CreateElement("option");
+                    optionNode3.SetAttribute("name", "None");
+                    optionNode3.SetAttribute("file", "PageNumber_None.css");
+                    optionNode3.SetAttribute("type", "Both");
+
+                    newNode.AppendChild(optionNode11);
+                    newNode.AppendChild(optionNode12);
+                    newNode.AppendChild(optionNode13);
+                    newNode.AppendChild(optionNode14);
+                    newNode.AppendChild(optionNode15);
+                    newNode.AppendChild(optionNode16);
+
+                    newNode.AppendChild(optionNode1);
+                    newNode.AppendChild(optionNode2);
+                    newNode.AppendChild(optionNode3);
+
+                    featuresNode.ReplaceChild(newNode, referencesNode);
+                    //featuresNode.RemoveChild(referencesNode);
+                    //featuresNode.AppendChild(newNode);
+                }
+
+                if (destSettingsFile.ToLower().Contains("scripture"))
+                {
+                    const string referencesPathRF = "//stylePick/features/feature[@name=\"Reference Format\"]";
+                    const string featuresPathRF = "//stylePick/features";
+                    XmlNode referencesNodeRF = root.SelectSingleNode(referencesPathRF);
+                    XmlNode featuresNodeRF = root.SelectSingleNode(featuresPathRF);
+                    if (featuresNodeRF == null) { return; }
+                    if (referencesNodeRF != null)
+                    {
+                        XmlElement newNode = destDoc.CreateElement("feature");
+                        newNode.SetAttribute("name", "Reference Format");
+
+                        XmlElement optionNode11 = destDoc.CreateElement("option");
+                        optionNode11.SetAttribute("name", "Genesis 1:1");
+                        optionNode11.SetAttribute("file", "Running_Head_Mirrored_Verse.css");
+                        optionNode11.SetAttribute("type", "Mirrored");
+
+                        XmlElement optionNode12 = destDoc.CreateElement("option");
+                        optionNode12.SetAttribute("name", "Genesis 1");
+                        optionNode12.SetAttribute("file", "Running_Head_Mirrored_Chapter.css");
+                        optionNode12.SetAttribute("type", "Mirrored");
+
+
+                        XmlElement optionNode13 = destDoc.CreateElement("option");
+                        optionNode13.SetAttribute("name", "Genesis 1-2");
+                        optionNode13.SetAttribute("file", "Running_Head_Paged_Chapter.css");
+                        optionNode13.SetAttribute("type", "Mirrored");
+
+
+                        XmlElement optionNode14 = destDoc.CreateElement("option");
+                        optionNode14.SetAttribute("name", "Gen 1:1");
+                        optionNode14.SetAttribute("file", "Running_Head_Mirrored_Verse_Abbr.css");
+                        optionNode14.SetAttribute("type", "Mirrored");
+
+
+                        XmlElement optionNode15 = destDoc.CreateElement("option");
+                        optionNode15.SetAttribute("name", "Gen 1");
+                        optionNode15.SetAttribute("file", "Running_Head_Mirrored_Chapter_Abbr.css");
+                        optionNode15.SetAttribute("type", "Mirrored");
+
+
+                        XmlElement optionNode16 = destDoc.CreateElement("option");
+                        optionNode16.SetAttribute("name", "Gen 1-2");
+                        optionNode16.SetAttribute("file", "Running_Head_Paged_Chapter_Abbr.css");
+                        optionNode16.SetAttribute("type", "Mirrored");
+
+                        //EveryPage
+
+                        XmlElement optionNode1 = destDoc.CreateElement("option");
+                        optionNode1.SetAttribute("name", "Genesis 1:1-2:1");
+                        optionNode1.SetAttribute("file", "Running_Head_Paged_Verse.css");
+                        optionNode1.SetAttribute("type", "Every Page");
+
+                        XmlElement optionNode2 = destDoc.CreateElement("option");
+                        optionNode2.SetAttribute("name", "Gen 1:1-2:1");
+                        optionNode2.SetAttribute("file", "Running_Head_Paged_Verse_Abbr.css");
+                        optionNode2.SetAttribute("type", "Every Page");
+
+                        newNode.AppendChild(optionNode11);
+                        newNode.AppendChild(optionNode12);
+                        newNode.AppendChild(optionNode13);
+                        newNode.AppendChild(optionNode14);
+                        newNode.AppendChild(optionNode15);
+                        newNode.AppendChild(optionNode16);
+
+                        newNode.AppendChild(optionNode1);
+                        newNode.AppendChild(optionNode2);
+
+                        featuresNode.ReplaceChild(newNode, referencesNodeRF);
+                    }
+                    else
+                    {
+                        XmlElement newNode = destDoc.CreateElement("feature");
+                        newNode.SetAttribute("name", "Reference Format");
+
+                        XmlElement optionNode11 = destDoc.CreateElement("option");
+                        optionNode11.SetAttribute("name", "Genesis 1:1");
+                        optionNode11.SetAttribute("file", "Running_Head_Mirrored_Verse.css");
+                        optionNode11.SetAttribute("type", "Mirrored");
+
+                        XmlElement optionNode12 = destDoc.CreateElement("option");
+                        optionNode12.SetAttribute("name", "Genesis 1");
+                        optionNode12.SetAttribute("file", "Running_Head_Mirrored_Chapter.css");
+                        optionNode12.SetAttribute("type", "Mirrored");
+
+
+                        XmlElement optionNode13 = destDoc.CreateElement("option");
+                        optionNode13.SetAttribute("name", "Genesis 1-2");
+                        optionNode13.SetAttribute("file", "Running_Head_Paged_Chapter.css");
+                        optionNode13.SetAttribute("type", "Mirrored");
+
+
+                        XmlElement optionNode14 = destDoc.CreateElement("option");
+                        optionNode14.SetAttribute("name", "Gen 1:1");
+                        optionNode14.SetAttribute("file", "Running_Head_Mirrored_Verse_Abbr.css");
+                        optionNode14.SetAttribute("type", "Mirrored");
+
+
+                        XmlElement optionNode15 = destDoc.CreateElement("option");
+                        optionNode15.SetAttribute("name", "Gen 1");
+                        optionNode15.SetAttribute("file", "Running_Head_Mirrored_Chapter_Abbr.css");
+                        optionNode15.SetAttribute("type", "Mirrored");
+
+
+                        XmlElement optionNode16 = destDoc.CreateElement("option");
+                        optionNode16.SetAttribute("name", "Gen 1-2");
+                        optionNode16.SetAttribute("file", "Running_Head_Paged_Chapter_Abbr.css");
+                        optionNode16.SetAttribute("type", "Mirrored");
+
+                        //EveryPage
+
+                        XmlElement optionNode1 = destDoc.CreateElement("option");
+                        optionNode1.SetAttribute("name", "Genesis 1:1-2:1");
+                        optionNode1.SetAttribute("file", "Running_Head_Paged_Verse.css");
+                        optionNode1.SetAttribute("type", "Every Page");
+
+                        XmlElement optionNode2 = destDoc.CreateElement("option");
+                        optionNode2.SetAttribute("name", "Gen 1:1-2:1");
+                        optionNode2.SetAttribute("file", "Running_Head_Paged_Verse_Abbr.css");
+                        optionNode2.SetAttribute("type", "Every Page");
+
+                        newNode.AppendChild(optionNode11);
+                        newNode.AppendChild(optionNode12);
+                        newNode.AppendChild(optionNode13);
+                        newNode.AppendChild(optionNode14);
+                        newNode.AppendChild(optionNode15);
+                        newNode.AppendChild(optionNode16);
+
+                        newNode.AppendChild(optionNode1);
+                        newNode.AppendChild(optionNode2);
+
+                        featuresNode.AppendChild(newNode);
+                    }
+                }
+            }
+            destDoc.Save(destSettingsFile);
+        }
+
+        /// <summary>
         /// Method to update the changed made in version 2
         /// </summary>
         /// <param name="oldFile">Old version file</param>
@@ -569,7 +805,7 @@ namespace SIL.PublishingSolution
                 var oData = new DataSet();
                 oData.EnforceConstraints = false;
                 oData.ReadXml(oReader, XmlReadMode.Auto);
-                
+
                 var rData = new DataSet();
                 rData.EnforceConstraints = false;
                 rData.ReadXml(rReader, XmlReadMode.Auto);
@@ -584,7 +820,7 @@ namespace SIL.PublishingSolution
                 xdoc.Load(oldFile);
 
                 XmlElement ele = xdoc.DocumentElement;
-                
+
                 if (ele != null)
                 {
                     ele.SetAttribute("version", versionNumber);
