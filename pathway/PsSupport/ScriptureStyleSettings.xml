@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="22">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="25">
   <settings>
     <property name="InputPath" value="%(AppData)s/SIL/Pathway" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture" />
     <property name="UserSheetPath" value="%(AppData)s/SIL/Pathway/Scripture" />
-    <property name="PublicationLocation" value="C:/Documents and Settings/Karthik/My Documents/Publications/Gondwana Test Data/Scripture/C5 Cols ApplicationStyles_2010-11-02_0429" />
+    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s" />
     <property name="MasterSheetPath" value="Styles/Scripture" />
     <property name="IconPath" value="Icons" />
     <property name="SamplePath" value="Samples/Scripture" />
@@ -100,25 +100,31 @@
       <option name="Yes" file="Pictures_Yes.css" />
       <option name="No" file="Pictures_No.css" />
     </feature>
-    <feature name="Running Head">
-      <option name="Genesis 1:1" file="Running_Head_Mirrored_Verse.css" />
-      <option name="Genesis 1:1-2:1" file="Running_Head_Paged_Verse.css" />
-      <option name="Genesis 1" file="Running_Head_Mirrored_Chapter.css" />
-      <option name="Genesis 1-2" file="Running_Head_Paged_Chapter.css" />
-      <option name="Gen 1:1" file="Running_Head_Mirrored_Verse_Abbr.css" />
-      <option name="Gen 1:1-2:1" file="Running_Head_Paged_Verse_Abbr.css" />
-      <option name="Gen 1" file="Running_Head_Mirrored_Chapter_Abbr.css" />
-      <option name="Gen 1-2" file="Running_Head_Paged_Chapter_Abbr.css" />
+	<feature name="Running Head">
+      <option name="Every Page" file="Running_Head_Every_Page.css" />
+      <option name="Mirrored" file="Running_Head_Mirrored.css" />
     </feature>
-    <feature name="Page Number">
-      <option name="Top Inside Margin" file="PageNumber_TopInside.css" />
-      <option name="Top Outside Margin" file="PageNumber_TopOutside.css" />
-      <option name="Top Center" file="PageNumber_TopCenter.css" />
-      <option name="Bottom Inside Margin" file="PageNumber_BottomInside.css" />
-      <option name="Bottom Outside Margin" file="PageNumber_BottomOutside.css" />
-      <option name="Bottom Center" file="PageNumber_BottomCenter.css" />
-      <option name="None" file="PageNumber_None.css" />
-    </feature>
+    <feature name="Reference Format">
+      <option name="Genesis 1:1" file="Running_Head_Mirrored_Verse.css" type="Mirrored" />      
+      <option name="Genesis 1" file="Running_Head_Mirrored_Chapter.css" type="Mirrored" />
+      <option name="Genesis 1-2" file="Running_Head_Paged_Chapter.css" type="Mirrored" />
+      <option name="Gen 1:1" file="Running_Head_Mirrored_Verse_Abbr.css" type="Mirrored" />      
+      <option name="Gen 1" file="Running_Head_Mirrored_Chapter_Abbr.css" type="Mirrored" />
+      <option name="Gen 1-2" file="Running_Head_Paged_Chapter_Abbr.css" type="Mirrored" />
+	  <option name="Genesis 1:1-2:1" file="Running_Head_Paged_Verse.css" type="Every Page" />
+	  <option name="Gen 1:1-2:1" file="Running_Head_Paged_Verse_Abbr.css" type="Every Page" />
+    </feature>	
+	 <feature name="Page Number">
+      <option name="Top Inside Margin" file="PageNumber_TopInside.css" type="Mirrored" />
+      <option name="Top Outside Margin" file="PageNumber_TopOutside.css" type="Mirrored" />
+      <option name="Top Center" file="PageNumber_TopCenter_Mirrored.css" type="Mirrored" />
+      <option name="Bottom Inside Margin" file="PageNumber_BottomInside.css" type="Mirrored" />
+      <option name="Bottom Outside Margin" file="PageNumber_BottomOutside.css" type="Mirrored" />
+      <option name="Bottom Center" file="PageNumber_BottomCenter_Mirrored.css" type="Mirrored" />
+      <option name="Top Center" file="PageNumber_TopCenter.css" type="Every Page" />
+      <option name="Bottom Center" file="PageNumber_BottomCenter.css" type="Every Page" />
+      <option name="None" file="PageNumber_None.css" type="Both" />
+    </feature>	
     <feature name="Rules">
       <option name="Yes" file="Rules_Yes.css" />
       <option name="No" file="Rules_No.css" />

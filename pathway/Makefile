@@ -36,7 +36,9 @@ install:
 	sudo chmod 777 $(DESTDIR)$(prefix)/share/doc/pathway
 	sudo mkdir -p $(DESTDIR)$(prefix)/share/pathway
 	sudo chmod 777 $(DESTDIR)$(prefix)/share/pathway
-	sudo cp -r debian/WritePathwayKeys.cs $(DESTDIR)$(prefix)/share/pathway/WritePathwayKeys.cs
+	sudo cp -r debian/pathwayValues.xml $(DESTDIR)$(prefix)/share/pathway/pathwayValues.xml
+	sudo cp -r debian/pathwayWsValues.xml $(DESTDIR)$(prefix)/share/pathway/pathwayWsValues.xml
+	sudo cp -r debian/pathwayRegistryKeys.sh $(DESTDIR)$(prefix)/share/pathway/pathwayRegistryKeys.sh
 	sudo mkdir -p $(DESTDIR)$(prefix)/share/applications
 	sudo chmod 777 $(DESTDIR)$(prefix)/share/applications
 	sudo cp debian/*.desktop $(DESTDIR)$(prefix)/share/applications
@@ -59,9 +61,12 @@ clean:
 	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/pathwayB.*
 	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/ConfigurationTool.*
 	sudo rm -rf $(DESTDIR)$(prefix)/bin/pathwayB $(DESTDIR)$(prefix)/bin/ConfigurationTool
+	sudo rm -rf $(DESTDIR)$(prefix)/share/pathway
+	sudo rm -rf $(DESTDIR)/etc/profile.d/pathway*
 	-xdg-desktop-menu uninstall /etc/pathway/sil-ConfigurationTool.desktop
 	sudo rm -rf $(DESTDIR)/etc/pathway
 	-rm -rf ~/.mono/registry/CurrentUser/software/sil/pathway
+	-rm -rf .local/share/SIL/Pathway
 
 clean-build:
 	sudo rm -rf debian/pathway bin

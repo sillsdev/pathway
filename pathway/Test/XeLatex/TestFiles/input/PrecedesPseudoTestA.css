@@ -1,0 +1,38 @@
+.head
+{
+	text-align: center;
+	font-size: 27pt;	
+}
+
+.dictionary 
+{
+	text-align: justify;
+	font-size: 10pt;
+}
+.locator
+{	
+	text-align: center;
+}
+
+.pronunciation 
+{	
+	font-size: 20pt;
+	font-style: italic;
+}
+
+.pronunciation + .pronunciation[lang=en_UK]::before
+{
+	content: 'UK ';
+}
+
+/*.pronunciation + .pronunciation[lang=en_US]::before
+{
+	content: 'US ';
+}*/
+
+.pronunciation + .pronunciation::before
+{
+	content: ', ';
+}
+
+

@@ -799,6 +799,66 @@ namespace Test.XeLatex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void Precede1()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Precede1";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoLangTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoLangTest";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoTest";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoTestA()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoTestA";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoTestB()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoTestB";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void Parent1()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Parent1";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void VisibilityTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -806,6 +866,37 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void multiClass()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "multiClass";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TaggedText()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TaggedText";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TextFontSizeTestC()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TextFontSizeTestC";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
 
         [Ignore]
         [Test]
@@ -877,8 +968,6 @@ namespace Test.XeLatex
         }
         #endregion
 
-
-
         #region Private Functions
 
         private void FileCompare(string file)
@@ -908,7 +997,7 @@ namespace Test.XeLatex
             StreamWriter xetexFile = new StreamWriter(xetexFullFile);
 
             XeLaTexStyles styles = new XeLaTexStyles();
-            _classInlineStyle = styles.CreateXeTexStyles(_outputPath,xetexFile, cssClass);
+            _classInlineStyle = styles.CreateXeTexStyles(_projInfo, xetexFile, cssClass);
 
             XeLaTexContent content = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = styles._classInlineText;

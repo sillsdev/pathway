@@ -56,6 +56,15 @@ namespace SIL.PublishingSolution
             ProcessSFM();
         }
 
+        public void ConvertSFMtoUsx(XmlTextWriter xmlw, string sfmFullPath, string usxFullPath)
+        {
+            _writer = xmlw;
+            _sfmFullPath = sfmFullPath;
+            _usxFullPath = usxFullPath;
+            OpenFileDirectText();
+            ProcessSFM();
+        }
+
         /// ------------------------------------------------------------------------
         /// <summary>
         /// Parses all the lines in an sty file converting the settings to 
@@ -319,6 +328,20 @@ namespace SIL.PublishingSolution
             //_writer.WriteAttributeString("version", "2.0");
 
             _sfmFile = new StreamReader(_sfmFullPath,true);
+        }
+
+        /// <summary>
+        /// Open usx and sfm file
+        /// </summary>
+        private void OpenFileDirectText()
+        {
+            //xmlw = new XmlTextWriter(_usxFullPath, null)
+            //{
+            //    Formatting = Formatting.Indented
+            //};
+            _writer.WriteStartDocument();
+            _writer.WriteStartElement("usx");
+            _sfmFile = new StreamReader(_sfmFullPath, true);
         }
     }
 }
