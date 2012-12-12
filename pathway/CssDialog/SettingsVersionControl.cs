@@ -144,9 +144,9 @@ namespace SIL.PublishingSolution
                         Param.LoadSettings();
                     }
 
-                    if (int.Parse(projSettingsVerNum) < 25)
+                    if (int.Parse(projSettingsVerNum) < 26)
                     {
-                        Version25(GetDirectoryPath(settingsPath, appPath));
+                        Version26(GetDirectoryPath(settingsPath, appPath));
                         Param.LoadSettings();
                     }
 
@@ -154,7 +154,7 @@ namespace SIL.PublishingSolution
                     string usrPath = GetDirectoryPath(settingsPath, appPath);
                     string insPath = Common.PathCombine(Path.GetDirectoryName(installerPath), Path.GetFileName(usrPath));
                     Common.MigrateCustomSheet(usrPath, insPath);
-                }
+                }                
             }
         }
 
@@ -563,7 +563,7 @@ namespace SIL.PublishingSolution
         /// Update to change made in version 15 of the XML. The change here is a References feature block for Dictionary / scriptures (only).
         /// </summary>
         /// <param name="destSettingsFile"></param>
-        private void Version25(string destSettingsFile)
+        private void Version26(string destSettingsFile)
         {
             // load the destination settings file (the one in ProgramData) that is missing the <meta> block for the TOC);
             if (!File.Exists(destSettingsFile)) { return; }
@@ -572,7 +572,7 @@ namespace SIL.PublishingSolution
             XmlElement root = destDoc.DocumentElement;
             if (root != null)
             {
-                root.SetAttribute("version", "25");
+                root.SetAttribute("version", "26");
                 // Metadata block
                 const string referencesPath = "//stylePick/features/feature[@name=\"Page Number\"]";
                 const string featuresPath = "//stylePick/features";
@@ -586,7 +586,7 @@ namespace SIL.PublishingSolution
 
                     XmlElement optionNode11 = destDoc.CreateElement("option");
                     optionNode11.SetAttribute("name", "Top Inside Margin");
-                    optionNode11.SetAttribute("file", "PageNumber_TopOutside.css");
+                    optionNode11.SetAttribute("file", "PageNumber_TopInside.css");
                     optionNode11.SetAttribute("type", "Mirrored");
 
                     XmlElement optionNode12 = destDoc.CreateElement("option");
