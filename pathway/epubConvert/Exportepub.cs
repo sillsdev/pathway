@@ -79,6 +79,7 @@ namespace SIL.PublishingSolution
         private bool isIncludeImage = true;
         private bool isNoteTargetReferenceExists = false;
         private bool _isUnixOS = false;
+        private bool _isPictureDisplayNone = false;
 
         //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
@@ -564,22 +565,26 @@ namespace SIL.PublishingSolution
             //If includeImage is false, removes the img -> parent tag
             if (isIncludeImage == false)
             {
-                string xPath = "//xhtml:div[@class='pictureCaption']";
-                if (elmRoot != null)
+                string[] pictureClass = { "pictureCaption", "pictureColumn", "picturePage" };
+                foreach (string clsName in pictureClass)
                 {
-                    XmlNodeList pictCaptionNode = elmRoot.SelectNodes(xPath, namespaceManager);
-                    if (pictCaptionNode != null && pictCaptionNode.Count > 0)
+                    string xPath = "//xhtml:div[@class='" + clsName + "']";
+                    if (elmRoot != null)
                     {
-                        for (int i = 0; i < pictCaptionNode.Count; i++)
+                        XmlNodeList pictCaptionNode = elmRoot.SelectNodes(xPath, namespaceManager);
+                        if (pictCaptionNode != null && pictCaptionNode.Count > 0)
                         {
-                            //referenceNode[i].RemoveChild(referenceNode[i].FirstChild);
-                            var parentNode = pictCaptionNode[i].ParentNode;
-                            if (parentNode != null)
-                                parentNode.RemoveChild(pictCaptionNode[i]);
+                            for (int i = 0; i < pictCaptionNode.Count; i++)
+                            {
+                                //referenceNode[i].RemoveChild(referenceNode[i].FirstChild);
+                                var parentNode = pictCaptionNode[i].ParentNode;
+                                if (parentNode != null)
+                                    parentNode.RemoveChild(pictCaptionNode[i]);
+                            }
                         }
                     }
                 }
-
+                
                 if (elmRoot != null && isIncludeImage == false)
                 {
                     XmlNodeList imgNodes = elmRoot.GetElementsByTagName("img");
