@@ -264,7 +264,7 @@ namespace SIL.PublishingSolution
                 string task = string.Empty;
                 string result = string.Empty;
 
-                if (cTool.DdlRunningHead.SelectedItem.ToString().ToLower() == "mirrored")
+                if (GetDdlRunningHead().ToLower() == "mirrored")
                 {
                     task = "@page-top-center";
                     result = GetPageValue(task, key, "false");
@@ -284,7 +284,7 @@ namespace SIL.PublishingSolution
 
                     defaultValue = "Genesis 1-2";
                 }
-                else if (cTool.DdlRunningHead.SelectedItem.ToString().ToLower() == "every page")
+                else if (GetDdlRunningHead().ToLower() == "every page")
                 {
                     task = "@page-top-left$@page-top-right";
                     result = GetPageValue(task, key, "false");
@@ -1030,14 +1030,7 @@ namespace SIL.PublishingSolution
             cTool.DdlRunningHead.SelectedItem = RunningHeader;
 
             string pageType;
-            if (cTool.DdlRunningHead.SelectedIndex != -1)
-            {
-                pageType = cTool.DdlRunningHead.SelectedItem.ToString();
-            }
-            else
-            {
-                pageType = cTool.DdlRunningHead.Items[0].ToString();
-            }
+            pageType = GetDdlRunningHead();
             DdlRunningHeadSelectedIndexChangedBl(pageType);
 
             if (inputTypeBL.ToLower() == "scripture")
@@ -2435,16 +2428,7 @@ namespace SIL.PublishingSolution
                 string fileName = values[key];
                 if (attribute.ToLower() == "page number")
                 {
-                    string pageType;
-                    if (cTool.DdlRunningHead.SelectedIndex != -1)
-                    {
-                        pageType = cTool.DdlRunningHead.SelectedItem.ToString();
-                    }
-                    else
-                    {
-                        pageType = cTool.DdlRunningHead.Items[0].ToString();
-                    }
-
+                    string pageType = GetDdlRunningHead();
                     fileName = GetPageNumberImport(pageType, key);
                 }
                 writeCss.WriteLine("@import \"" + fileName + "\";");
@@ -4587,6 +4571,21 @@ namespace SIL.PublishingSolution
                 WriteCss();
             }
         }
+
+        private string GetDdlRunningHead()
+        {
+            string pageType;
+            if (cTool.DdlRunningHead.SelectedIndex != -1)
+            {
+                pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+            }
+            else
+            {
+                pageType = cTool.DdlRunningHead.Items[0].ToString();
+            }
+            return pageType;
+        }
+
         #endregion
     }
 }
