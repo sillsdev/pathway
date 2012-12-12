@@ -1949,17 +1949,17 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    // start out with the book code (e.g., 2CH for 2 Chronicles)
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                    // no scrBookName - use Title_Main
+                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
+                    if (nodes == null || nodes.Count == 0)
+                    {
+                        // start out with the book code (e.g., 2CH for 2 Chronicles)
+                        nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                    }
                     if (nodes == null || nodes.Count == 0)
                     {
                         // no book code - use scrBookName
                         nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                    }
-                    if (nodes == null || nodes.Count == 0)
-                    {
-                        // no scrBookName - use Title_Main
-                        nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
                     }
                 }
                 if (nodes != null && nodes.Count > 0)
@@ -2024,7 +2024,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
+                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
                 if (nodes == null || nodes.Count == 0)
                 {
                     // nothing there - check on the scrBookName span
