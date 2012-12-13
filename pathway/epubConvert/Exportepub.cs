@@ -327,7 +327,7 @@ namespace SIL.PublishingSolution
                     // EDB 10/20/2010 - TD-1629 - remove when merged CSS passes validation
                     // (note that the rev file uses a "FlexRev.css", not "main.css"
 
-                    if(_isUnixOS)
+                    if (_isUnixOS)
                     {
                         Common.RemoveDTDForLinuxProcess(revFile);
                     }
@@ -436,7 +436,7 @@ namespace SIL.PublishingSolution
                     string substring = Path.GetFileNameWithoutExtension(file).Substring(8);
                     string dest = Common.PathCombine(contentFolder, name + substring.PadLeft(6, '0') + ".xhtml");
 
-                    if(_isUnixOS)
+                    if (_isUnixOS)
                     {
                         Common.RemoveDTDForLinuxProcess(file);
                     }
@@ -512,7 +512,21 @@ namespace SIL.PublishingSolution
                     //var validationDialog = new ValidationDialog();
                     //validationDialog.FileName = outputPathWithFileName;
                     //validationDialog.ShowDialog();
-                    Process.Start(outputPathWithFileName);
+                    if (File.Exists(outputPathWithFileName))
+                    {
+                        if (_isUnixOS)
+                        {
+                            if (outputPathWithFileName != outputPathWithFileName.Replace(" ", ""))
+                                File.Copy(outputPathWithFileName, outputPathWithFileName.Replace(" ", ""), true);
+
+                            string epubFileName = fileName.Replace(" ", "") + ".epub";
+                            SubProcess.Run(outputFolder, "ebook-viewer", epubFileName, false);
+                        }
+                        else
+                        {
+                            Process.Start(outputPathWithFileName);
+                        }
+                    }
                 }
             }
 
@@ -584,7 +598,7 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
-                
+
                 if (elmRoot != null && isIncludeImage == false)
                 {
                     XmlNodeList imgNodes = elmRoot.GetElementsByTagName("img");
