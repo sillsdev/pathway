@@ -5,7 +5,8 @@
 @import "base_font_charis.css";
 @import "Font_Size_11_13.css";
 @import "Pictures_Yes.css";
+@import "Running_Head_Mirrored.css";
 @import "Running_Head_Paged_Chapter.css";
 @import "Rules_Yes.css";
-@import "PageNumber_BottomCenter.css";
+@import "PageNumber_TopCenter_Mirrored.css";
 @import "PageNumber_BottomCenter_FirstPage.css";
