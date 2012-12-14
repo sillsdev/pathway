@@ -48,7 +48,7 @@
       </text:sequence-decls>
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
-          <text:span text:style-name="scrBookName_scrBook_scrBody">Matthew </text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">Matthew</text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_.tpi_TitleMain_scrBook_scrBody">Gutnius Matyu i raitim</text:span>
@@ -68,10 +68,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 1" office:value-type="string" office:string-value="Matthew 1" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 1" office:value-type="string" office:string-value="1" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 1" office:value-type="string" office:string-value="Matthew 1" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 1" office:value-type="string" office:string-value="1" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -195,10 +195,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">2</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 2" office:value-type="string" office:string-value="Matthew 2" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 2" office:value-type="string" office:string-value="2" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 2" office:value-type="string" office:string-value="Matthew 2" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 2" office:value-type="string" office:string-value="2" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -287,10 +287,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">3</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 3" office:value-type="string" office:string-value="Matthew 3" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 3" office:value-type="string" office:string-value="Matthew 3" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -347,10 +347,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">4</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 4" office:value-type="string" office:string-value="Matthew 4" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 4" office:value-type="string" office:string-value="Matthew 4" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -441,10 +441,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">5</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 5" office:value-type="string" office:string-value="Matthew 5" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 5" office:value-type="string" office:string-value="5" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 5" office:value-type="string" office:string-value="Matthew 5" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 5" office:value-type="string" office:string-value="5" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -619,10 +619,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">6</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 6" office:value-type="string" office:string-value="Matthew 6" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 6" office:value-type="string" office:string-value="6" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 6" office:value-type="string" office:string-value="Matthew 6" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 6" office:value-type="string" office:string-value="6" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -784,10 +784,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">7</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 7" office:value-type="string" office:string-value="Matthew 7" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 7" office:value-type="string" office:string-value="7" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 7" office:value-type="string" office:string-value="Matthew 7" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 7" office:value-type="string" office:string-value="7" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -883,10 +883,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">8</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 8" office:value-type="string" office:string-value="Matthew 8" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 8" office:value-type="string" office:string-value="8" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 8" office:value-type="string" office:string-value="Matthew 8" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 8" office:value-type="string" office:string-value="8" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -1002,10 +1002,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">9</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 9" office:value-type="string" office:string-value="Matthew 9" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 9" office:value-type="string" office:string-value="9" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 9" office:value-type="string" office:string-value="Matthew 9" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 9" office:value-type="string" office:string-value="9" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -1137,10 +1137,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">10</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 10" office:value-type="string" office:string-value="Matthew 10" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 10" office:value-type="string" office:string-value="10" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 10" office:value-type="string" office:string-value="Matthew 10" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 10" office:value-type="string" office:string-value="10" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -1281,10 +1281,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">11</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 11" office:value-type="string" office:string-value="Matthew 11" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 11" office:value-type="string" office:string-value="11" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 11" office:value-type="string" office:string-value="Matthew 11" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 11" office:value-type="string" office:string-value="11" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -1376,10 +1376,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">12</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 12" office:value-type="string" office:string-value="Matthew 12" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 12" office:value-type="string" office:string-value="12" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 12" office:value-type="string" office:string-value="Matthew 12" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 12" office:value-type="string" office:string-value="12" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -1536,10 +1536,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">13</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 13" office:value-type="string" office:string-value="Matthew 13" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 13" office:value-type="string" office:string-value="13" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 13" office:value-type="string" office:string-value="Matthew 13" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 13" office:value-type="string" office:string-value="13" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -1749,10 +1749,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">14</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 14" office:value-type="string" office:string-value="Matthew 14" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 14" office:value-type="string" office:string-value="14" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 14" office:value-type="string" office:string-value="Matthew 14" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 14" office:value-type="string" office:string-value="14" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -1861,10 +1861,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">15</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 15" office:value-type="string" office:string-value="Matthew 15" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 15" office:value-type="string" office:string-value="15" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 15" office:value-type="string" office:string-value="Matthew 15" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 15" office:value-type="string" office:string-value="15" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -1986,10 +1986,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">16</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 16" office:value-type="string" office:string-value="Matthew 16" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 16" office:value-type="string" office:string-value="16" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 16" office:value-type="string" office:string-value="Matthew 16" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 16" office:value-type="string" office:string-value="16" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -2084,10 +2084,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">17</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 17" office:value-type="string" office:string-value="Matthew 17" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 17" office:value-type="string" office:string-value="17" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 17" office:value-type="string" office:string-value="Matthew 17" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 17" office:value-type="string" office:string-value="17" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -2183,10 +2183,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">18</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 18" office:value-type="string" office:string-value="Matthew 18" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 18" office:value-type="string" office:string-value="18" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 18" office:value-type="string" office:string-value="Matthew 18" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 18" office:value-type="string" office:string-value="18" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -2308,10 +2308,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">19</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 19" office:value-type="string" office:string-value="Matthew 19" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 19" office:value-type="string" office:string-value="19" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 19" office:value-type="string" office:string-value="Matthew 19" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 19" office:value-type="string" office:string-value="19" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -2421,10 +2421,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">20</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 20" office:value-type="string" office:string-value="Matthew 20" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 20" office:value-type="string" office:string-value="20" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 20" office:value-type="string" office:string-value="Matthew 20" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 20" office:value-type="string" office:string-value="20" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -2534,10 +2534,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">21</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 21" office:value-type="string" office:string-value="Matthew 21" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 21" office:value-type="string" office:string-value="21" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 21" office:value-type="string" office:string-value="Matthew 21" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 21" office:value-type="string" office:string-value="21" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -2716,10 +2716,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">22</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 22" office:value-type="string" office:string-value="Matthew 22" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 22" office:value-type="string" office:string-value="22" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 22" office:value-type="string" office:string-value="Matthew 22" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 22" office:value-type="string" office:string-value="22" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -2863,10 +2863,10 @@
         <text:p text:style-name="ChapterNumber2">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">23</text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Matthew 23" office:value-type="string" office:string-value="Matthew 23" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 23" office:value-type="string" office:string-value="23" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.tpi">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Matthew 23" office:value-type="string" office:string-value="Matthew 23" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 23" office:value-type="string" office:string-value="23" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">

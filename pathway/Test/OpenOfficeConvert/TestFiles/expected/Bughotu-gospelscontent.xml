@@ -57,7 +57,7 @@
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
           <text:s text:c="1" />
-          <text:span text:style-name="scrBookName_scrBook_scrBody">Sen Matiu Ke Risoa </text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">Sen Matiu Ke Risoa</text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_.bgt_TitleMain_scrBook_scrBody">Sen Matiu Ke Risoa</text:span>
@@ -108,10 +108,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">1</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 1" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 1" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 1" office:value-type="string" office:string-value="1" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 1" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 1" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 1" office:value-type="string" office:string-value="1" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -561,10 +561,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">3</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 3" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 3" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 3" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 3" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -723,10 +723,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">4</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 4" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 4" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 4" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 4" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -942,10 +942,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">5</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 5" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 5" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 5" office:value-type="string" office:string-value="5" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 5" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 5" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 5" office:value-type="string" office:string-value="5" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -1297,10 +1297,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">6</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 6" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 6" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 6" office:value-type="string" office:string-value="6" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 6" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 6" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 6" office:value-type="string" office:string-value="6" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -1465,10 +1465,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">7</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 7" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 7" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 7" office:value-type="string" office:string-value="7" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 7" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 7" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 7" office:value-type="string" office:string-value="7" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -1585,10 +1585,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">8</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 8" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 8" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 8" office:value-type="string" office:string-value="8" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 8" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 8" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 8" office:value-type="string" office:string-value="8" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -1801,10 +1801,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">9</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 9" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 9" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 9" office:value-type="string" office:string-value="9" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 9" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 9" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 9" office:value-type="string" office:string-value="9" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -2006,10 +2006,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">10</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 10" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 10" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 10" office:value-type="string" office:string-value="10" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 10" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 10" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 10" office:value-type="string" office:string-value="10" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -2208,10 +2208,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">11</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 11" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 11" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 11" office:value-type="string" office:string-value="11" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 11" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 11" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 11" office:value-type="string" office:string-value="11" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -2352,10 +2352,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">12</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 12" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 12" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 12" office:value-type="string" office:string-value="12" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 12" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 12" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 12" office:value-type="string" office:string-value="12" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -2942,10 +2942,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">14</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 14" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 14" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 14" office:value-type="string" office:string-value="14" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 14" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 14" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 14" office:value-type="string" office:string-value="14" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -3092,10 +3092,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">15</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 15" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 15" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 15" office:value-type="string" office:string-value="15" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 15" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 15" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 15" office:value-type="string" office:string-value="15" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -3302,10 +3302,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">16</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 16" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 16" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 16" office:value-type="string" office:string-value="16" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 16" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 16" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 16" office:value-type="string" office:string-value="16" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -3443,10 +3443,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">17</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 17" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 17" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 17" office:value-type="string" office:string-value="17" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 17" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 17" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 17" office:value-type="string" office:string-value="17" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -3583,10 +3583,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">18</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 18" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 18" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 18" office:value-type="string" office:string-value="18" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 18" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 18" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 18" office:value-type="string" office:string-value="18" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -3738,10 +3738,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">19</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 19" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 19" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 19" office:value-type="string" office:string-value="19" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 19" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 19" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 19" office:value-type="string" office:string-value="19" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -3885,10 +3885,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">20</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 20" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 20" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 20" office:value-type="string" office:string-value="20" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 20" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 20" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 20" office:value-type="string" office:string-value="20" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -4408,10 +4408,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">22</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 22" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 22" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 22" office:value-type="string" office:string-value="22" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 22" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 22" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 22" office:value-type="string" office:string-value="22" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -4663,10 +4663,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">23</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 23" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 23" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 23" office:value-type="string" office:string-value="23" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 23" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 23" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 23" office:value-type="string" office:string-value="23" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -4856,10 +4856,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">24</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 24" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 24" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 24" office:value-type="string" office:string-value="24" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 24" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 24" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 24" office:value-type="string" office:string-value="24" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -5072,10 +5072,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">25</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 25" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 25" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 25" office:value-type="string" office:string-value="25" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 25" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 25" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 25" office:value-type="string" office:string-value="25" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -5229,10 +5229,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">26</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 26" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 26" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 26" office:value-type="string" office:string-value="26" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 26" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 26" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 26" office:value-type="string" office:string-value="26" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -5632,10 +5632,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">27</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 27" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 27" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 27" office:value-type="string" office:string-value="27" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 27" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 27" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 27" office:value-type="string" office:string-value="27" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -5981,10 +5981,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">28</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 28" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 28" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 28" office:value-type="string" office:string-value="28" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 28" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 28" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 28" office:value-type="string" office:string-value="28" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -6067,7 +6067,7 @@
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
           <text:s text:c="1" />
-          <text:span text:style-name="scrBookName_scrBook_scrBody">Sen Mak Ke Risoa </text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">Sen Mak Ke Risoa</text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_.bgt_TitleMain_scrBook_scrBody">Sen Mak Ke Risoa</text:span>
@@ -6118,10 +6118,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">1</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 1" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 1" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 1" office:value-type="string" office:string-value="1" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 1" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 1" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 1" office:value-type="string" office:string-value="1" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -6848,10 +6848,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">4</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 4" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 4" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 4" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 4" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -7068,10 +7068,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">5</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 5" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 5" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 5" office:value-type="string" office:string-value="5" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 5" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 5" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 5" office:value-type="string" office:string-value="5" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -7227,10 +7227,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">6</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 6" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 6" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 6" office:value-type="string" office:string-value="6" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 6" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 6" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 6" office:value-type="string" office:string-value="6" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -7447,10 +7447,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">7</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 7" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 7" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 7" office:value-type="string" office:string-value="7" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 7" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 7" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 7" office:value-type="string" office:string-value="7" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -7625,10 +7625,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">8</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 8" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 8" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 8" office:value-type="string" office:string-value="8" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 8" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 8" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 8" office:value-type="string" office:string-value="8" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -7811,10 +7811,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">9</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 9" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 9" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 9" office:value-type="string" office:string-value="9" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 9" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 9" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 9" office:value-type="string" office:string-value="9" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -8041,10 +8041,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">10</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 10" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 10" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 10" office:value-type="string" office:string-value="10" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 10" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 10" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 10" office:value-type="string" office:string-value="10" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -8546,10 +8546,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">12</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 12" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 12" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 12" office:value-type="string" office:string-value="12" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 12" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 12" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 12" office:value-type="string" office:string-value="12" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -8915,10 +8915,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">13</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 13" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 13" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 13" office:value-type="string" office:string-value="13" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 13" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 13" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 13" office:value-type="string" office:string-value="13" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -9077,10 +9077,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">14</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 14" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 14" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 14" office:value-type="string" office:string-value="14" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 14" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 14" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 14" office:value-type="string" office:string-value="14" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -9503,10 +9503,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">15</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 15" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 15" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 15" office:value-type="string" office:string-value="15" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 15" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 15" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 15" office:value-type="string" office:string-value="15" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -9780,10 +9780,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">16</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 16" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 16" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 16" office:value-type="string" office:string-value="16" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Matiu Ke Risoa 16" office:value-type="string" office:string-value="Sen Matiu Ke Risoa 16" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 16" office:value-type="string" office:string-value="16" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -9883,7 +9883,7 @@
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
           <text:s text:c="1" />
-          <text:span text:style-name="scrBookName_scrBook_scrBody">Sen Luk Ke Risoa </text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">Sen Luk Ke Risoa</text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_.bgt_TitleMain_scrBook_scrBody">Sen Luk Ke Risoa</text:span>
@@ -9931,10 +9931,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">1</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 1" office:value-type="string" office:string-value="Sen Luk Ke Risoa 1" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 1" office:value-type="string" office:string-value="1" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 1" office:value-type="string" office:string-value="Sen Luk Ke Risoa 1" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 1" office:value-type="string" office:string-value="1" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -10341,10 +10341,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">2</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 2" office:value-type="string" office:string-value="Sen Luk Ke Risoa 2" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 2" office:value-type="string" office:string-value="2" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 2" office:value-type="string" office:string-value="Sen Luk Ke Risoa 2" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 2" office:value-type="string" office:string-value="2" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -10642,10 +10642,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">3</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 3" office:value-type="string" office:string-value="Sen Luk Ke Risoa 3" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 3" office:value-type="string" office:string-value="Sen Luk Ke Risoa 3" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -11061,10 +11061,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">4</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 4" office:value-type="string" office:string-value="Sen Luk Ke Risoa 4" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 4" office:value-type="string" office:string-value="Sen Luk Ke Risoa 4" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -11610,10 +11610,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">6</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 6" office:value-type="string" office:string-value="Sen Luk Ke Risoa 6" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 6" office:value-type="string" office:string-value="6" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 6" office:value-type="string" office:string-value="Sen Luk Ke Risoa 6" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 6" office:value-type="string" office:string-value="6" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -11912,10 +11912,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">7</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 7" office:value-type="string" office:string-value="Sen Luk Ke Risoa 7" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 7" office:value-type="string" office:string-value="7" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 7" office:value-type="string" office:string-value="Sen Luk Ke Risoa 7" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 7" office:value-type="string" office:string-value="7" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -12110,10 +12110,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">8</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 8" office:value-type="string" office:string-value="Sen Luk Ke Risoa 8" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 8" office:value-type="string" office:string-value="8" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 8" office:value-type="string" office:string-value="Sen Luk Ke Risoa 8" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 8" office:value-type="string" office:string-value="8" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -12377,10 +12377,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">9</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 9" office:value-type="string" office:string-value="Sen Luk Ke Risoa 9" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 9" office:value-type="string" office:string-value="9" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 9" office:value-type="string" office:string-value="Sen Luk Ke Risoa 9" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 9" office:value-type="string" office:string-value="9" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -12681,10 +12681,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">10</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 10" office:value-type="string" office:string-value="Sen Luk Ke Risoa 10" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 10" office:value-type="string" office:string-value="10" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 10" office:value-type="string" office:string-value="Sen Luk Ke Risoa 10" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 10" office:value-type="string" office:string-value="10" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -12890,10 +12890,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">11</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 11" office:value-type="string" office:string-value="Sen Luk Ke Risoa 11" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 11" office:value-type="string" office:string-value="11" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 11" office:value-type="string" office:string-value="Sen Luk Ke Risoa 11" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 11" office:value-type="string" office:string-value="11" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13098,10 +13098,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">12</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 12" office:value-type="string" office:string-value="Sen Luk Ke Risoa 12" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 12" office:value-type="string" office:string-value="12" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 12" office:value-type="string" office:string-value="Sen Luk Ke Risoa 12" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 12" office:value-type="string" office:string-value="12" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13319,10 +13319,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">13</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 13" office:value-type="string" office:string-value="Sen Luk Ke Risoa 13" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 13" office:value-type="string" office:string-value="13" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 13" office:value-type="string" office:string-value="Sen Luk Ke Risoa 13" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 13" office:value-type="string" office:string-value="13" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13466,10 +13466,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">14</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 14" office:value-type="string" office:string-value="Sen Luk Ke Risoa 14" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 14" office:value-type="string" office:string-value="14" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 14" office:value-type="string" office:string-value="Sen Luk Ke Risoa 14" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 14" office:value-type="string" office:string-value="14" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13598,10 +13598,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">15</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 15" office:value-type="string" office:string-value="Sen Luk Ke Risoa 15" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 15" office:value-type="string" office:string-value="15" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 15" office:value-type="string" office:string-value="Sen Luk Ke Risoa 15" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 15" office:value-type="string" office:string-value="15" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13714,10 +13714,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">16</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 16" office:value-type="string" office:string-value="Sen Luk Ke Risoa 16" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 16" office:value-type="string" office:string-value="16" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 16" office:value-type="string" office:string-value="Sen Luk Ke Risoa 16" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 16" office:value-type="string" office:string-value="16" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13846,10 +13846,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">17</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 17" office:value-type="string" office:string-value="Sen Luk Ke Risoa 17" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 17" office:value-type="string" office:string-value="17" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 17" office:value-type="string" office:string-value="Sen Luk Ke Risoa 17" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 17" office:value-type="string" office:string-value="17" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13988,10 +13988,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">18</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 18" office:value-type="string" office:string-value="Sen Luk Ke Risoa 18" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 18" office:value-type="string" office:string-value="18" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 18" office:value-type="string" office:string-value="Sen Luk Ke Risoa 18" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 18" office:value-type="string" office:string-value="18" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -14199,10 +14199,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">19</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 19" office:value-type="string" office:string-value="Sen Luk Ke Risoa 19" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 19" office:value-type="string" office:string-value="19" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 19" office:value-type="string" office:string-value="Sen Luk Ke Risoa 19" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 19" office:value-type="string" office:string-value="19" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -14443,10 +14443,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">20</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 20" office:value-type="string" office:string-value="Sen Luk Ke Risoa 20" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 20" office:value-type="string" office:string-value="20" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 20" office:value-type="string" office:string-value="Sen Luk Ke Risoa 20" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 20" office:value-type="string" office:string-value="20" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -14743,10 +14743,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">21</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 21" office:value-type="string" office:string-value="Sen Luk Ke Risoa 21" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 21" office:value-type="string" office:string-value="21" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 21" office:value-type="string" office:string-value="Sen Luk Ke Risoa 21" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 21" office:value-type="string" office:string-value="21" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -14888,10 +14888,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">22</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 22" office:value-type="string" office:string-value="Sen Luk Ke Risoa 22" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 22" office:value-type="string" office:string-value="22" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 22" office:value-type="string" office:string-value="Sen Luk Ke Risoa 22" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 22" office:value-type="string" office:string-value="22" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -15246,10 +15246,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">23</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 23" office:value-type="string" office:string-value="Sen Luk Ke Risoa 23" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 23" office:value-type="string" office:string-value="23" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 23" office:value-type="string" office:string-value="Sen Luk Ke Risoa 23" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 23" office:value-type="string" office:string-value="23" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -15660,7 +15660,7 @@
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
           <text:s text:c="1" />
-          <text:span text:style-name="scrBookName_scrBook_scrBody">Sen Jon Ke Risoa </text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">Sen Jon Ke Risoa</text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_.bgt_TitleMain_scrBook_scrBody">Sen Jon Ke Risoa</text:span>
@@ -15717,10 +15717,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">1</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 1" office:value-type="string" office:string-value="Sen Luk Ke Risoa 1" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 1" office:value-type="string" office:string-value="1" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 1" office:value-type="string" office:string-value="Sen Luk Ke Risoa 1" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 1" office:value-type="string" office:string-value="1" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -16046,10 +16046,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">2</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 2" office:value-type="string" office:string-value="Sen Luk Ke Risoa 2" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 2" office:value-type="string" office:string-value="2" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 2" office:value-type="string" office:string-value="Sen Luk Ke Risoa 2" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 2" office:value-type="string" office:string-value="2" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -16200,10 +16200,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">3</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 3" office:value-type="string" office:string-value="Sen Luk Ke Risoa 3" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 3" office:value-type="string" office:string-value="Sen Luk Ke Risoa 3" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -16343,10 +16343,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">4</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 4" office:value-type="string" office:string-value="Sen Luk Ke Risoa 4" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 4" office:value-type="string" office:string-value="Sen Luk Ke Risoa 4" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -16529,10 +16529,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">5</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 5" office:value-type="string" office:string-value="Sen Luk Ke Risoa 5" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 5" office:value-type="string" office:string-value="5" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 5" office:value-type="string" office:string-value="Sen Luk Ke Risoa 5" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 5" office:value-type="string" office:string-value="5" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -16738,10 +16738,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">6</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 6" office:value-type="string" office:string-value="Sen Luk Ke Risoa 6" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 6" office:value-type="string" office:string-value="6" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 6" office:value-type="string" office:string-value="Sen Luk Ke Risoa 6" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 6" office:value-type="string" office:string-value="6" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -17052,10 +17052,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">7</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 7" office:value-type="string" office:string-value="Sen Luk Ke Risoa 7" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 7" office:value-type="string" office:string-value="7" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 7" office:value-type="string" office:string-value="Sen Luk Ke Risoa 7" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 7" office:value-type="string" office:string-value="7" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -17275,10 +17275,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">8</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 8" office:value-type="string" office:string-value="Sen Luk Ke Risoa 8" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 8" office:value-type="string" office:string-value="8" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 8" office:value-type="string" office:string-value="Sen Luk Ke Risoa 8" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 8" office:value-type="string" office:string-value="8" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -17536,10 +17536,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">9</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 9" office:value-type="string" office:string-value="Sen Luk Ke Risoa 9" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 9" office:value-type="string" office:string-value="9" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 9" office:value-type="string" office:string-value="Sen Luk Ke Risoa 9" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 9" office:value-type="string" office:string-value="9" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -17860,10 +17860,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">11</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 11" office:value-type="string" office:string-value="Sen Luk Ke Risoa 11" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 11" office:value-type="string" office:string-value="11" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 11" office:value-type="string" office:string-value="Sen Luk Ke Risoa 11" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 11" office:value-type="string" office:string-value="11" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -18109,10 +18109,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">12</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 12" office:value-type="string" office:string-value="Sen Luk Ke Risoa 12" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 12" office:value-type="string" office:string-value="12" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 12" office:value-type="string" office:string-value="Sen Luk Ke Risoa 12" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 12" office:value-type="string" office:string-value="12" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -18380,10 +18380,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">13</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 13" office:value-type="string" office:string-value="Sen Luk Ke Risoa 13" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 13" office:value-type="string" office:string-value="13" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 13" office:value-type="string" office:string-value="Sen Luk Ke Risoa 13" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 13" office:value-type="string" office:string-value="13" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -18600,10 +18600,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">14</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 14" office:value-type="string" office:string-value="Sen Luk Ke Risoa 14" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 14" office:value-type="string" office:string-value="14" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 14" office:value-type="string" office:string-value="Sen Luk Ke Risoa 14" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 14" office:value-type="string" office:string-value="14" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -18795,10 +18795,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">16</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 16" office:value-type="string" office:string-value="Sen Luk Ke Risoa 16" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 16" office:value-type="string" office:string-value="16" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 16" office:value-type="string" office:string-value="Sen Luk Ke Risoa 16" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 16" office:value-type="string" office:string-value="16" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -18896,10 +18896,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">17</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 17" office:value-type="string" office:string-value="Sen Luk Ke Risoa 17" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 17" office:value-type="string" office:string-value="17" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 17" office:value-type="string" office:string-value="Sen Luk Ke Risoa 17" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 17" office:value-type="string" office:string-value="17" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -18980,10 +18980,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">18</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 18" office:value-type="string" office:string-value="Sen Luk Ke Risoa 18" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 18" office:value-type="string" office:string-value="18" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 18" office:value-type="string" office:string-value="Sen Luk Ke Risoa 18" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 18" office:value-type="string" office:string-value="18" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -19247,10 +19247,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">19</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 19" office:value-type="string" office:string-value="Sen Luk Ke Risoa 19" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 19" office:value-type="string" office:string-value="19" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 19" office:value-type="string" office:string-value="Sen Luk Ke Risoa 19" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 19" office:value-type="string" office:string-value="19" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -19533,10 +19533,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">20</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 20" office:value-type="string" office:string-value="Sen Luk Ke Risoa 20" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 20" office:value-type="string" office:string-value="20" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 20" office:value-type="string" office:string-value="Sen Luk Ke Risoa 20" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 20" office:value-type="string" office:string-value="20" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -19673,10 +19673,10 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="ChapterNumber_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">21</text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 21" office:value-type="string" office:string-value="Sen Luk Ke Risoa 21" />
+              <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 21" office:value-type="string" office:string-value="21" />
             </text:span>
             <text:span text:style-name="ChapterNumber_.bgt">
-              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Sen Luk Ke Risoa 21" office:value-type="string" office:string-value="Sen Luk Ke Risoa 21" />
+              <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 21" office:value-type="string" office:string-value="21" />
             </text:span>
             <text:span />
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
