@@ -715,6 +715,17 @@ namespace SIL.PublishingSolution
         {
             get { return lblReferenceFormat; }
         }
+
+        public Panel PnlOtherFormat
+        {
+            get { return pnlOtherFormat; }
+        }
+
+        public Panel PnlReferenceFormat
+        {
+            get { return pnlReferenceFormat; }
+        }
+
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
