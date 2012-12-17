@@ -395,7 +395,6 @@ namespace SIL.PublishingSolution
                         {
                             _isclassNameExist = true;
                             _style = _reader.Value;
-                            if (_style == "wj") _style = "w";
                         }
                         else if (_reader.Name == "number")
                         {
