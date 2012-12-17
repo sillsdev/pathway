@@ -46,9 +46,8 @@ install:
 	sudo chmod 777 $(DESTDIR)$(prefix)/share/pixmaps
 	sudo cp debian/*.png $(DESTDIR)$(prefix)/share/pixmaps
 	sudo cp debian/*.xpm $(DESTDIR)$(prefix)/share/pixmaps
-	sudo mkdir -p $(DESTDIR)$(prefix)/share/man/man7
-	sudo chmod 777 $(DESTDIR)$(prefix)/share/man/man7
-	sudo gzip -c debian/pathwayB.7.manpages >$(DESTDIR)$(prefix)/share/man/man7/pathwayB.7.gz
+	sudo mkdir -p $(DESTDIR)$(prefix)/share/man
+	sudo chmod 777 $(DESTDIR)$(prefix)/share/man
 
 binary:
 	exit 0
@@ -58,8 +57,8 @@ clean:
 	-sudo apt-get -y remove pathway
 	sudo rm -rf $(DESTDIR)$(prefix)/lib/pathway
 	sudo rm -rf $(DESTDIR)$(prefix)/share/doc/pathway
-	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/pathwayB.*
-	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/ConfigurationTool.*
+	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/pathway*
+	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/ConfigurationTool*
 	sudo rm -rf $(DESTDIR)$(prefix)/bin/pathwayB $(DESTDIR)$(prefix)/bin/ConfigurationTool
 	sudo rm -rf $(DESTDIR)$(prefix)/share/pathway
 	sudo rm -rf $(DESTDIR)/etc/profile.d/pathway*
