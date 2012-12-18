@@ -179,7 +179,7 @@ namespace SIL.PublishingSolution
                 isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
                 isNoteTargetReferenceExists = Common.NodeExists(projInfo.DefaultXhtmlFileWithPath, "");
 
-                if (projInfo.ProjectInputType.ToLower() == "dictionary")
+                //if (projInfo.ProjectInputType.ToLower() == "dictionary")
                     InsertBeforeAfterInXHTML(projInfo);
 
                 _langFontDictionary = new Dictionary<string, string>();
@@ -643,7 +643,7 @@ namespace SIL.PublishingSolution
             AfterBeforeProcessEpub afterBeforeProcess = new AfterBeforeProcessEpub();
             afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
-            if (projInfo.IsReversalExist)
+            if (projInfo.IsReversalExist && projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
                 string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
