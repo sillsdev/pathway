@@ -31,6 +31,7 @@ namespace SIL.PublishingSolution
         private List<string> _propertyValue = new List<string>();
         private List<string> _groupPropertyValue = new List<string>();
         private bool _isUnixOS = false;
+        private int _cToolPnlOtherFormatTop = 0;
         #endregion
 
         #region Public Variable
@@ -264,7 +265,7 @@ namespace SIL.PublishingSolution
                 string task = string.Empty;
                 string result = string.Empty;
 
-                if (cTool.DdlRunningHead.SelectedItem.ToString().ToLower() == "mirrored")
+                if (GetDdlRunningHead().ToLower() == "mirrored")
                 {
                     task = "@page-top-center";
                     result = GetPageValue(task, key, "false");
@@ -284,7 +285,7 @@ namespace SIL.PublishingSolution
 
                     defaultValue = "Genesis 1-2";
                 }
-                else if (cTool.DdlRunningHead.SelectedItem.ToString().ToLower() == "every page")
+                else if (GetDdlRunningHead().ToLower() == "every page")
                 {
                     task = "@page-top-left$@page-top-right";
                     result = GetPageValue(task, key, "false");
@@ -493,7 +494,12 @@ namespace SIL.PublishingSolution
                 string task = "@page";
                 string key = "-ps-fileproduce";
                 string file = GetValue(task, key, "One");
-                return file.Replace("\"", "");
+                if (file != null) 
+                    return file.Replace("\"", "");
+                else
+                {
+                    return "One";
+                }
             }
         }
 
@@ -1025,62 +1031,13 @@ namespace SIL.PublishingSolution
             cTool.DdlRunningHead.SelectedItem = RunningHeader;
 
             string pageType;
-            if (cTool.DdlRunningHead.SelectedIndex != -1)
-            {
-                pageType = cTool.DdlRunningHead.SelectedItem.ToString();
-            }
-            else
-            {
-                pageType = cTool.DdlRunningHead.Items[0].ToString();
-            }
+            pageType = GetDdlRunningHead();
             DdlRunningHeadSelectedIndexChangedBl(pageType);
 
             if (inputTypeBL.ToLower() == "scripture")
             {
                 cTool.DdlReferenceFormat.SelectedItem = ReferenceFormat;
-                cTool.DdlReferenceFormat.Visible = true;
-                cTool.LblReferenceFormat.Visible = true;
-
-                cTool.LblReferenceFormat.Location = new System.Drawing.Point(1, 286);
-                cTool.DdlReferenceFormat.Location = new System.Drawing.Point(107, 283);
-
-                cTool.LblPageNumber.Location = new System.Drawing.Point(14, 310);
-                cTool.DdlPageNumber.Location = new System.Drawing.Point(107, 307);
-
-                cTool.LblRules.Location = new System.Drawing.Point(14, 334);
-                cTool.DdlRules.Location = new System.Drawing.Point(107, 331);
-
-                cTool.LblFont.Location = new System.Drawing.Point(14, 359);
-                cTool.DdlFontSize.Location = new System.Drawing.Point(107, 355);
-
-                cTool.LblFileProduceDict.Location = new System.Drawing.Point(14, 383);
-                cTool.DdlFileProduceDict.Location = new System.Drawing.Point(107, 379);
-
-                cTool.LblSenseLayout.Location = new System.Drawing.Point(14, 407);
-                cTool.DdlSense.Location = new System.Drawing.Point(107, 403);
-                
             }
-            else
-            {
-                cTool.DdlReferenceFormat.Visible = false;
-                cTool.LblReferenceFormat.Visible = false;
-
-                cTool.LblPageNumber.Location = new System.Drawing.Point(1, 286);
-                cTool.DdlPageNumber.Location = new System.Drawing.Point(107, 283);
-
-                cTool.LblRules.Location = new System.Drawing.Point(14, 310);
-                cTool.DdlRules.Location = new System.Drawing.Point(107, 307);
-
-                cTool.LblFont.Location = new System.Drawing.Point(14, 334);
-                cTool.DdlFontSize.Location = new System.Drawing.Point(107, 331);
-
-                cTool.LblFileProduceDict.Location = new System.Drawing.Point(14, 359);
-                cTool.DdlFileProduceDict.Location = new System.Drawing.Point(107, 355);
-
-                cTool.LblSenseLayout.Location = new System.Drawing.Point(14, 383);
-                cTool.DdlSense.Location = new System.Drawing.Point(107, 379);
-            }
-
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
             cTool.DdlSense.SelectedItem = Sense;
@@ -1266,7 +1223,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    cTool.DdlFileProduceDict.SelectedItem = FileProduced.Trim();
+                    cTool.DdlFileProduceDict.SelectedItem = FileProduced.ToString();
                     ShowCssSummary();
                 }
                 SavePropertyValue();
@@ -2430,16 +2387,7 @@ namespace SIL.PublishingSolution
                 string fileName = values[key];
                 if (attribute.ToLower() == "page number")
                 {
-                    string pageType;
-                    if (cTool.DdlRunningHead.SelectedIndex != -1)
-                    {
-                        pageType = cTool.DdlRunningHead.SelectedItem.ToString();
-                    }
-                    else
-                    {
-                        pageType = cTool.DdlRunningHead.Items[0].ToString();
-                    }
-
+                    string pageType = GetDdlRunningHead();
                     fileName = GetPageNumberImport(pageType, key);
                 }
                 writeCss.WriteLine("@import \"" + fileName + "\";");
@@ -4414,6 +4362,21 @@ namespace SIL.PublishingSolution
             }
             else if (cTool.TabControl1.SelectedIndex == 1) // css properties
             {
+                if (inputTypeBL.ToLower() == "dictionary")
+                {
+                    cTool.PnlReferenceFormat.Visible = false;
+                    _cToolPnlOtherFormatTop = cTool.PnlOtherFormat.Top;
+                    cTool.PnlOtherFormat.Top = cTool.PnlReferenceFormat.Top;
+                }
+                else
+                {
+                    if (_cToolPnlOtherFormatTop > 0)
+                    {
+                        cTool.PnlReferenceFormat.Visible = true;
+                        cTool.PnlOtherFormat.Top = _cToolPnlOtherFormatTop;
+                    }
+                }
+
                 ShowCSSValue();
                 if (cTool.BtnPaper.Enabled && cTool.TabControl1.TabPages[1].Enabled)
                 {
@@ -4434,7 +4397,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                _fileProduce = cTool.DdlFileProduceDict.Text;
+                _fileProduce = cTool.DdlFileProduceDict.SelectedItem.ToString();
                 //WriteCss(sender);
             }
             catch { }
@@ -4582,6 +4545,21 @@ namespace SIL.PublishingSolution
                 WriteCss();
             }
         }
+
+        private string GetDdlRunningHead()
+        {
+            string pageType;
+            if (cTool.DdlRunningHead.SelectedIndex != -1)
+            {
+                pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+            }
+            else
+            {
+                pageType = cTool.DdlRunningHead.Items[0].ToString();
+            }
+            return pageType;
+        }
+
         #endregion
     }
 }

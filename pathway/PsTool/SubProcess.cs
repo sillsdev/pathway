@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
 using System.Resources;
 using System.Diagnostics;
 using System.IO;
@@ -195,20 +196,23 @@ namespace SIL.Tool
             string progFolder = GetLocation(name);
             if (string.IsNullOrEmpty(progFolder) || !File.Exists(Path.Combine(progFolder, "java.exe")))
             {
-                var info = new DirectoryInfo("C:\\Program Files\\Java");
-                foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
+                foreach (string progBases in new ArrayList {"C:\\Program Files", "C:\\Program Files (x86)"})
                 {
-                    progFolder = Path.Combine(directoryInfo.FullName, "bin");
-                    if (File.Exists(Path.Combine(progFolder, "java.exe")))
-                        break;
-                }
-                if (string.IsNullOrEmpty(progFolder))
-                {
-                    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
+                    var info = new DirectoryInfo(progBases + "\\Java");
+                    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
                     {
                         progFolder = Path.Combine(directoryInfo.FullName, "bin");
                         if (File.Exists(Path.Combine(progFolder, "java.exe")))
                             break;
+                    }
+                    if (string.IsNullOrEmpty(progFolder))
+                    {
+                        foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
+                        {
+                            progFolder = Path.Combine(directoryInfo.FullName, "bin");
+                            if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                                break;
+                        }
                     }
                 }
             }

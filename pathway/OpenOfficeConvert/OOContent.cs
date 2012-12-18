@@ -484,6 +484,16 @@ namespace SIL.PublishingSolution
             //data = Common.ReplaceSymbolToText(data);
             if (_replaceSymbolToText.Count > 0)
             {
+                if (data.IndexOf("<<<") >= 0)
+                {
+                    string s1 = Common.ConvertUnicodeToString("\\201C")+ Common.ConvertUnicodeToString("\\2018");
+                    data = data.Replace("<<<", s1);
+                }
+                if (data.IndexOf(">>>") >= 0)
+                {
+                    string s2 = Common.ConvertUnicodeToString("\\2019")+ Common.ConvertUnicodeToString("\\201D");
+                    data = data.Replace(">>>", s2);
+                }
                 foreach (string srchKey in _replaceSymbolToText.Keys)
                 {
                     if (data.IndexOf(srchKey) >= 0)
@@ -950,7 +960,7 @@ namespace SIL.PublishingSolution
                 //{
                 //    content = content.TrimEnd() + " ";
                 //}
-                if (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0)
+                if (_allCharacter.Peek().IndexOf("span_TitleMain") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0)
                 {
                     //_strBook = content;
                     content = content.TrimEnd() + " ";

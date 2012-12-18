@@ -49,7 +49,7 @@
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
           <text:s text:c="1" />
-          <text:span text:style-name="scrBookName_scrBook_scrBody">Ruth </text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">Ruth</text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_.x-kal_TitleMain_scrBook_scrBody">Ruth</text:span>
@@ -186,10 +186,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">2</text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Ruth 2" office:value-type="string" office:string-value="Ruth 2" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 2" office:value-type="string" office:string-value="2" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Ruth 2" office:value-type="string" office:string-value="Ruth 2" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 2" office:value-type="string" office:string-value="2" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
@@ -303,10 +303,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">3</text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Ruth 3" office:value-type="string" office:string-value="Ruth 3" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Ruth 3" office:value-type="string" office:string-value="Ruth 3" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
@@ -399,10 +399,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">4</text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Ruth 4" office:value-type="string" office:string-value="Ruth 4" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Ruth 4" office:value-type="string" office:string-value="Ruth 4" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
@@ -493,7 +493,7 @@
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
           <text:s text:c="1" />
-          <text:span text:style-name="scrBookName_scrBook_scrBody">Jonas </text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">Jonas</text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_.x-kal_TitleMain_scrBook_scrBody">Jonas</text:span>
@@ -628,10 +628,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">2</text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Ruth 2" office:value-type="string" office:string-value="Ruth 2" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 2" office:value-type="string" office:string-value="2" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Ruth 2" office:value-type="string" office:string-value="Ruth 2" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 2" office:value-type="string" office:string-value="2" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
@@ -788,10 +788,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">3</text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Ruth 3" office:value-type="string" office:string-value="Ruth 3" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Ruth 3" office:value-type="string" office:string-value="Ruth 3" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 3" office:value-type="string" office:string-value="3" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
@@ -857,10 +857,10 @@
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">4</text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: Ruth 4" office:value-type="string" office:string-value="Ruth 4" />
+            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
           </text:span>
           <text:span text:style-name="ChapterNumber_.x-kal">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: Ruth 4" office:value-type="string" office:string-value="Ruth 4" />
+            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: 4" office:value-type="string" office:string-value="4" />
           </text:span>
           <text:span />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
@@ -917,7 +917,7 @@
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
           <text:s text:c="1" />
-          <text:span text:style-name="scrBookName_scrBook_scrBody">*** </text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">***</text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_.x-kal_TitleMain_scrBook_scrBody">ÉPÎTRE À PHILÉMON</text:span>

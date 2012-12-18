@@ -62,6 +62,7 @@ namespace SIL.PublishingSolution
         private string _matchedCssStyleName;
         protected Dictionary<string, string> _tempStyle;
         protected Dictionary<string, string> _displayBlock;
+        protected string footerMarkerClassName = string.Empty;
 
         protected Dictionary<string, Dictionary<string, string>> IdAllClass;
         protected Dictionary<string, Dictionary<string, string>> _newProperty;
@@ -822,7 +823,7 @@ namespace SIL.PublishingSolution
                 //    footnoteContent.Append(a);
                 //}
 
-                string footerMarkerClassName = _className + "..footnote-marker";
+                footerMarkerClassName = _className + "..footnote-marker";
                 if (IdAllClass.ContainsKey(footerMarkerClassName))
                 {
                     string footnoteText = string.Empty;
@@ -842,7 +843,7 @@ namespace SIL.PublishingSolution
                         }
                         else
                         {
-                            footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">");
+                           //footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">");
                         }
                         //footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">" + footnoteText + "</text:span>");
                         
@@ -870,6 +871,10 @@ namespace SIL.PublishingSolution
                     //    footnoteContent.Append("<CharacterStyleRange AppliedCharacterStyle=\"" + "CharacterStyle/" + footerMarkerClassName + "\"><Content>" + footnoteText + "</Content></CharacterStyleRange>");
                     //}
                 }
+            }
+            else if (_className.IndexOf("NoteTargetReference") == 0 && outputType == Common.OutputType.ODT.ToString())
+            {
+                footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">");
             }
 
             //}

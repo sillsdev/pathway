@@ -57,10 +57,10 @@
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
           <text:s text:c="1" />
-          <text:span text:style-name="scrBookName_scrBook_scrBody">Pita </text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">Pita</text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
-          <text:span text:style-name="span_TitleMain_scrBook_scrBody">Pita</text:span>
+          <text:span text:style-name="span_TitleMain_scrBook_scrBody">Pita </text:span>
         </text:p>
         <text:p text:style-name="IntroSectionHead_scrIntroSection_scrBook_scrBody">
           <text:span text:style-name="span_IntroSectionHead_scrIntroSection_scrBook_scrBody">Na Titiono Eigna Na Letasi Iaani</text:span>

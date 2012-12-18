@@ -142,7 +142,11 @@ namespace SIL.PublishingSolution
                     break;
                 case "\\Color":
                     value = PropertyValue(line);
-                    string strHex = String.Format("{0:x2}", Convert.ToUInt32(value));
+                    string strHex =     String.Format("{0:x2}", Convert.ToUInt32(value));
+                    if (strHex.Length <6)
+                    {
+                        strHex = strHex.PadRight(6, '0');
+                    }
                     _cssProp["color"] = "#" + strHex;
                     break;
                 case "\\Justification":
@@ -236,7 +240,7 @@ namespace SIL.PublishingSolution
 	        {
 	            className = className.Substring(0, pos);
 	        }
-	        return className;
+	        return className.Replace("(","");
 	    }
 
 	    /// ------------------------------------------------------------

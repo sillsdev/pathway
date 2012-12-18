@@ -79,6 +79,7 @@ namespace SIL.PublishingSolution
         private bool isIncludeImage = true;
         private bool isNoteTargetReferenceExists = false;
         private bool _isUnixOS = false;
+        private bool _isPictureDisplayNone = false;
 
         //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
@@ -178,7 +179,7 @@ namespace SIL.PublishingSolution
                 isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
                 isNoteTargetReferenceExists = Common.NodeExists(projInfo.DefaultXhtmlFileWithPath, "");
 
-                if (projInfo.ProjectInputType.ToLower() == "dictionary")
+                //if (projInfo.ProjectInputType.ToLower() == "dictionary")
                     InsertBeforeAfterInXHTML(projInfo);
 
                 _langFontDictionary = new Dictionary<string, string>();
@@ -326,7 +327,7 @@ namespace SIL.PublishingSolution
                     // EDB 10/20/2010 - TD-1629 - remove when merged CSS passes validation
                     // (note that the rev file uses a "FlexRev.css", not "main.css"
 
-                    if(_isUnixOS)
+                    if (_isUnixOS)
                     {
                         Common.RemoveDTDForLinuxProcess(revFile);
                     }
@@ -435,7 +436,7 @@ namespace SIL.PublishingSolution
                     string substring = Path.GetFileNameWithoutExtension(file).Substring(8);
                     string dest = Common.PathCombine(contentFolder, name + substring.PadLeft(6, '0') + ".xhtml");
 
-                    if(_isUnixOS)
+                    if (_isUnixOS)
                     {
                         Common.RemoveDTDForLinuxProcess(file);
                     }
@@ -511,7 +512,21 @@ namespace SIL.PublishingSolution
                     //var validationDialog = new ValidationDialog();
                     //validationDialog.FileName = outputPathWithFileName;
                     //validationDialog.ShowDialog();
-                    Process.Start(outputPathWithFileName);
+                    if (File.Exists(outputPathWithFileName))
+                    {
+                        if (_isUnixOS)
+                        {
+                            if (outputPathWithFileName != outputPathWithFileName.Replace(" ", ""))
+                                File.Copy(outputPathWithFileName, outputPathWithFileName.Replace(" ", ""), true);
+
+                            string epubFileName = fileName.Replace(" ", "") + ".epub";
+                            SubProcess.Run(outputFolder, "ebook-viewer", epubFileName, false);
+                        }
+                        else
+                        {
+                            Process.Start(outputPathWithFileName);
+                        }
+                    }
                 }
             }
 
@@ -564,18 +579,22 @@ namespace SIL.PublishingSolution
             //If includeImage is false, removes the img -> parent tag
             if (isIncludeImage == false)
             {
-                string xPath = "//xhtml:div[@class='pictureCaption']";
-                if (elmRoot != null)
+                string[] pictureClass = { "pictureCaption", "pictureColumn", "picturePage" };
+                foreach (string clsName in pictureClass)
                 {
-                    XmlNodeList pictCaptionNode = elmRoot.SelectNodes(xPath, namespaceManager);
-                    if (pictCaptionNode != null && pictCaptionNode.Count > 0)
+                    string xPath = "//xhtml:div[@class='" + clsName + "']";
+                    if (elmRoot != null)
                     {
-                        for (int i = 0; i < pictCaptionNode.Count; i++)
+                        XmlNodeList pictCaptionNode = elmRoot.SelectNodes(xPath, namespaceManager);
+                        if (pictCaptionNode != null && pictCaptionNode.Count > 0)
                         {
-                            //referenceNode[i].RemoveChild(referenceNode[i].FirstChild);
-                            var parentNode = pictCaptionNode[i].ParentNode;
-                            if (parentNode != null)
-                                parentNode.RemoveChild(pictCaptionNode[i]);
+                            for (int i = 0; i < pictCaptionNode.Count; i++)
+                            {
+                                //referenceNode[i].RemoveChild(referenceNode[i].FirstChild);
+                                var parentNode = pictCaptionNode[i].ParentNode;
+                                if (parentNode != null)
+                                    parentNode.RemoveChild(pictCaptionNode[i]);
+                            }
                         }
                     }
                 }
@@ -624,7 +643,7 @@ namespace SIL.PublishingSolution
             AfterBeforeProcessEpub afterBeforeProcess = new AfterBeforeProcessEpub();
             afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
-            if (projInfo.IsReversalExist)
+            if (projInfo.IsReversalExist && projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
                 string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
@@ -1949,17 +1968,17 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    // start out with the book code (e.g., 2CH for 2 Chronicles)
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                    // no scrBookName - use Title_Main
+                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
+                    if (nodes == null || nodes.Count == 0)
+                    {
+                        // start out with the book code (e.g., 2CH for 2 Chronicles)
+                        nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                    }
                     if (nodes == null || nodes.Count == 0)
                     {
                         // no book code - use scrBookName
                         nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                    }
-                    if (nodes == null || nodes.Count == 0)
-                    {
-                        // no scrBookName - use Title_Main
-                        nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
                     }
                 }
                 if (nodes != null && nodes.Count > 0)
@@ -2024,7 +2043,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
+                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
                 if (nodes == null || nodes.Count == 0)
                 {
                     // nothing there - check on the scrBookName span
