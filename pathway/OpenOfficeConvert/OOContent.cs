@@ -1022,6 +1022,17 @@ namespace SIL.PublishingSolution
                     _verseContent.Remove(0, _verseContent.Length);
                 }
 
+                if (_classNameWithLang.IndexOf("reference") == 0)
+                {
+                    if(content.IndexOf(" ") >= 0)
+                    {
+                        _writer.WriteStartElement("text:s");
+                        _writer.WriteAttributeString("text:c", "1");
+                        _writer.WriteEndElement();
+                        content.Replace(" ", "");
+                    }
+                }
+
                 content = SignificantSpace(content);
                 if (_imageClass.Length > 0)
                 {

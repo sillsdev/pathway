@@ -57,7 +57,7 @@ div.pictureLeft > img.picture {
 }
 
 span.reference :before {
-	content: "(";
+	content: " (";
 }
 span.reference :after {
 	content: ")";

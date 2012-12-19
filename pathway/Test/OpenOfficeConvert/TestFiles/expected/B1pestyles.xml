@@ -162,7 +162,7 @@
       <style:paragraph-properties style:line-spacing="15pt" fo:padding-top="21pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="21pt" />
       <style:text-properties fo:font-size="14pt" />
     </style:style>
-    <style:style style:family="paragraph" style:name="ChapterNumber1" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody" style:master-page-name="">
+    <style:style style:family="paragraph" style:name="ChapterNumber1" style:parent-style-name="ChapterNumber" style:master-page-name="">
       <style:paragraph-properties>
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="1" />
       </style:paragraph-properties>

@@ -922,7 +922,8 @@ namespace SIL.PublishingSolution
                 parentName = parentName.Replace("1", "");
                 _nameElement = (XmlElement)node;
                 SetAttribute(makeClassName, "style:name");
-                SetAttribute(parentName, "style:parent-style-name");
+                //SetAttribute(parentName, "style:parent-style-name");
+                SetAttribute(className, "style:parent-style-name");
                 SetAttribute("", "style:master-page-name");
             }
             _styleXMLdoc.Save(styleFilePath);

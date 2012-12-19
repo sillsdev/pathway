@@ -166,7 +166,7 @@
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-weight="700" />
     </style:style>
-    <style:style style:family="paragraph" style:name="ChapterNumber1" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody" style:master-page-name="">
+    <style:style style:family="paragraph" style:name="ChapterNumber1" style:parent-style-name="ChapterNumber" style:master-page-name="">
       <style:paragraph-properties>
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="1" />
       </style:paragraph-properties>
