@@ -150,7 +150,7 @@ namespace SIL.PublishingSolution
 
         private void ValidatePageType()
         {
-            if(_cssClass.ContainsKey("@page:left-top-left"))
+            if (_cssClass.ContainsKey("@page:left-top-left"))
             {
                 _isMirrored = true;
             }
@@ -195,9 +195,9 @@ namespace SIL.PublishingSolution
                 {
                     Common.FileInsertText(_xetexFullFile, xeLaTexProperty);
                     //_xetexFile.WriteLine(xeTexProperty);
-                }                
+                }
             }
-            
+
             //%\singlespacing
             //\onehalfspacing
             //%\doublespacing
@@ -219,7 +219,7 @@ namespace SIL.PublishingSolution
                     }
                 }
                 //Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
-                Common.FileInsertText(_xetexFullFile, @"\pagestyle{plain} ");                
+                Common.FileInsertText(_xetexFullFile, @"\pagestyle{plain} ");
                 Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
                 Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
                 //setmainfont{Arial} //Default Font 
@@ -233,7 +233,7 @@ namespace SIL.PublishingSolution
                 else
                 {
                     int cmMarginValue = Convert.ToInt32(pageMargin * 2.54 / 96);
-                    Common.FileInsertText(_xetexFullFile, @"\usepackage[margin="+ cmMarginValue +"cm,includeheadfoot]{geometry}");
+                    Common.FileInsertText(_xetexFullFile, @"\usepackage[margin=" + cmMarginValue + "cm,includeheadfoot]{geometry}");
                 }
 
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{calc}");
@@ -244,20 +244,179 @@ namespace SIL.PublishingSolution
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{graphicx}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{grffile}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{float}");
-                
+
                 foreach (var package in includePackageList)
                 {
                     Common.FileInsertText(_xetexFullFile, package);
                 }
                 //Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
-                string paperSize = "a4paper";
-                if (_isMirrored)
-                {
-                    paperSize = paperSize + ",twoside";
-                }
-                Common.FileInsertText(_xetexFullFile, @"\documentclass[" + paperSize + "]{article} ");
+
+                string paperSize = GetPageStyle(_cssClass, _isMirrored);
+
+                Common.FileInsertText(_xetexFullFile, @"\documentclass" + paperSize);
+
+                //Common.FileInsertText(_xetexFullFile, @"\documentclass[" + paperSize + "]{article} ");
                 //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
             }
+        }
+
+        private string GetPageStyle(Dictionary<string, Dictionary<string, string>> _cssClass, bool isMirrored)
+        {
+            string pageStyleText = "[a4paper]{article} ";
+
+            double pageWidth = 0;
+            double pageHeight = 0;
+            if (_cssClass.ContainsKey("@page"))
+            {
+                Dictionary<string, string> cssProp = _cssClass["@page"];
+                foreach (KeyValuePair<string, string> para in cssProp)
+                {
+                    if (para.Key == "page-width")
+                    {
+                        pageWidth = Convert.ToDouble(para.Value);
+                    }
+                    if (para.Key == "page-height")
+                    {
+                        pageHeight = Convert.ToDouble(para.Value);
+                    }
+                }
+            }
+
+            string paperSize = GetPaperSize(pageWidth, pageHeight);
+
+            if (paperSize == "a4")
+            {
+                pageStyleText = "[a4paper]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[a4paper,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "a5")
+            {
+                pageStyleText = "[a5paper]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[a5paper,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "C5")
+            {
+                pageStyleText = "[c5paper]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[c5paper,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "a6")
+            {
+                pageStyleText = "[a6paper]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[a6paper,twoside]{article} ";
+                }
+            }
+            //else if (paperSize == "Letter")
+            //{
+            //    pageStyleText = "[Letter]{article} ";
+            //    if (isMirrored)
+            //    {
+            //        pageStyleText = "[HalfLetter,twoside]{article} ";
+            //    }
+            //}
+            else if (paperSize == "halfletter")
+            {
+                pageStyleText = "[HalfLetter]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[HalfLetter,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "5.25in x 8.25in")
+            {
+                pageStyleText = "[gps1]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[gps1,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "5.8in x 8.7in")
+            {
+                pageStyleText = "[gps2]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[gps2,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "6in x 9in")
+            {
+                pageStyleText = @"[a4paper]{article}  \usepackage[margin=1in, paperwidth=6in, paperheight=9in]{geometry}";
+                if (isMirrored)
+                {
+                    pageStyleText = @"[a4paper,twoside]{article}  \usepackage[margin=1in, paperwidth=6in, paperheight=9in]{geometry}";
+                }
+            }
+
+            return pageStyleText;
+            //if (Math.Round(pageWidth) == 595 && Math.Round(pageHeight) == 842) //A4 Size
+            //    pageStyleText = "[a4paper]{article} ";
+            //if (Math.Round(pageWidth) == 420 && Math.Round(pageHeight) == 595) //A5 Size
+            //    pageStyleText = "[a5paper]{article} ";
+            //if (Math.Round(pageWidth) == 459 && Math.Round(pageHeight) == 649) //C5 Size
+            //    pageStyleText = "[c5paper]{article} ";
+            ////\special{papersize=148mm,210mm}% it is A5 paper size, I got from Wikipedia.
+            //if (Math.Round(pageWidth) == 298 && Math.Round(pageHeight) == 420) //A6 Size
+            //    pageStyleText = "[a6paper]{article} ";
+            //if (Math.Round(pageWidth) == 612 && Math.Round(pageHeight) == 792) //Letter
+            //    pageStyleText = "[letter]{article} ";
+            //if (Math.Round(pageWidth) == 396 && Math.Round(pageHeight) == 612) //Half Letter
+            //    pageStyleText = "[halfletter]{article} ";
+            //if (Math.Round(pageWidth) == 432 && Math.Round(pageHeight) == 648) //6in 9in paper
+            //    pageStyleText = @"[a4paper]{article}  \usepackage[margin=1in, paperwidth=6in, paperheight=9in]{geometry}";
+            //if (Math.Round(pageWidth) == 378 && Math.Round(pageHeight) == 594) //5.25in 8.25in paper
+            //    pageStyleText = "[gps1]{article} ";
+            //if (Math.Round(pageWidth) == 418 && Math.Round(pageHeight) == 626) //5.8in 8.7in paper
+            //    pageStyleText = "[gps2]{article} ";
+        }
+
+        private string GetPaperSize(double paperWidth, double paperHeight)
+        {
+            string paperSize = "a4";
+
+            if (Math.Round(paperWidth) == 612 && Math.Round(paperHeight) == 792)
+            {
+                paperSize = "Letter";
+            }
+            if (Math.Round(paperWidth) == 420 && Math.Round(paperHeight) == 595)
+            {
+                paperSize = "a5";
+            }
+            if (Math.Round(paperWidth) == 459 && Math.Round(paperHeight) == 649)
+            {
+                paperSize = "C5";
+            }
+            if (Math.Round(paperWidth) == 298 && Math.Round(paperHeight) == 420)
+            {
+                paperSize = "a6";
+            }
+            if (Math.Round(paperWidth) == 396 && Math.Round(paperHeight) == 612)
+            {
+                paperSize = "halfletter";
+            }
+            if (Math.Round(paperWidth) == 378 && Math.Round(paperHeight) == 594)
+            {
+                paperSize = "5.25in x 8.25in";
+            }
+            if (Math.Round(paperWidth) == 418 && Math.Round(paperHeight) == 626)
+            {
+                paperSize = "5.8in x 8.7in";
+            }
+            if (Math.Round(paperWidth) == 432 && Math.Round(paperHeight) == 648)
+            {
+                paperSize = "6in x 9in";
+            }
+
+            return paperSize;
         }
 
         private void InsertTableOfContent()
@@ -360,7 +519,7 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\mbox{} \r\n";
 
             }
-           
+
 
             if (Convert.ToBoolean(CopyrightInformation))
             {
