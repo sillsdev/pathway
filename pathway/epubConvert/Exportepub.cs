@@ -2043,11 +2043,14 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
+                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                //nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
                 if (nodes == null || nodes.Count == 0)
                 {
+                    // nothing there - check on the Title_Main span
+                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
                     // nothing there - check on the scrBookName span
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                    //nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
                 }
                 if (nodes == null || nodes.Count == 0)
                 {
@@ -2863,24 +2866,26 @@ namespace SIL.PublishingSolution
                         Debug.WriteLine(e);
                     }
                     outFile.Write("] ");
-                    XmlNode bookNode = footnoteNode.SelectSingleNode("preceding::xhtml:div[@class='Title_Main'][1]", namespaceManager);
+                    outFile.Write("</a> ");
+                    //XmlNode bookNode = footnoteNode.SelectSingleNode("preceding::xhtml:div[@class='Title_Main'][1]", namespaceManager);
+                    XmlNode bookNode = footnoteNode.SelectSingleNode("preceding::xhtml:span[@class='scrBookName'][1]", namespaceManager);
                     if (bookNode != null)
                     {
-                        outFile.Write(bookNode.InnerText);
+                        outFile.Write("<b>" + bookNode.InnerText + "</b>");
                     }
                     outFile.Write(" ");
-                    XmlNode chapterNode = footnoteNode.SelectSingleNode("preceding::xhtml:span[@class='Chapter_Number'][1]", namespaceManager);
-                    if (chapterNode != null)
-                    {
-                        outFile.Write(chapterNode.InnerText);
-                    }
-                    outFile.Write(":");
-                    XmlNode verseNode = footnoteNode.SelectSingleNode("preceding::xhtml:span[@class='Verse_Number'][1]", namespaceManager);
-                    if (verseNode != null)
-                    {
-                        outFile.Write(verseNode.InnerText);
-                    }
-                    outFile.Write("</a> ");
+                    //XmlNode chapterNode = footnoteNode.SelectSingleNode("preceding::xhtml:span[@class='Chapter_Number'][1]", namespaceManager);
+                    //if (chapterNode != null)
+                    //{
+                    //    outFile.Write(chapterNode.InnerText);
+                    //}
+                    //outFile.Write(":");
+                    //XmlNode verseNode = footnoteNode.SelectSingleNode("preceding::xhtml:span[@class='Verse_Number'][1]", namespaceManager);
+                    //if (verseNode != null)
+                    //{
+                    //    outFile.Write(verseNode.InnerText);
+                    //}
+                    //outFile.Write("</a> ");
                     outFile.Write(CleanupSpans(footnoteNode.InnerXml));
                     outFile.WriteLine("</li>");
                 }
