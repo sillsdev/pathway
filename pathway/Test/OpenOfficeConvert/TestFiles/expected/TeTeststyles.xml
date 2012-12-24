@@ -167,12 +167,12 @@
       <style:text-properties fo:font-family="Times New Roman" fo:font-weight="700" />
     </style:style>
     <style:style style:family="paragraph" style:name="ChapterNumber1" style:parent-style-name="ChapterNumber" style:master-page-name="">
-      <style:paragraph-properties>
+      <style:paragraph-properties style:vertical-align="top" fo:text-indent="0pt" fo:margin-left="0pt" fo:float="left">
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="1" />
       </style:paragraph-properties>
     </style:style>
     <style:style style:name="ChapterNumber" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties>
+      <style:paragraph-properties style:vertical-align="top" fo:text-indent="0pt" fo:margin-left="0pt" fo:float="left" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="1" />
       </style:paragraph-properties>
     </style:style>
