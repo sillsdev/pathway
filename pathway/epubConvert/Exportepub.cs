@@ -2871,7 +2871,7 @@ namespace SIL.PublishingSolution
                     XmlNode bookNode = footnoteNode.SelectSingleNode("preceding::xhtml:span[@class='scrBookName'][1]", namespaceManager);
                     if (bookNode != null)
                     {
-                        outFile.Write("<b>" + bookNode.InnerText + "</b>");
+                        outFile.Write("<span class=\"BookName\"><b>" + bookNode.InnerText + "</b></span>");
                     }
                     outFile.Write(" ");
                     //XmlNode chapterNode = footnoteNode.SelectSingleNode("preceding::xhtml:span[@class='Chapter_Number'][1]", namespaceManager);
@@ -3618,6 +3618,31 @@ namespace SIL.PublishingSolution
                             }
                             isScriptureSubOpen = true;
                         }
+                        else if (name.IndexOf("zzReference") == 0)
+                        {
+                            if (isScriptureSubOpen)
+                            {
+                                ncx.WriteEndElement(); // navPoint
+                            }
+                            ncx.WriteStartElement("navPoint");
+                            ncx.WriteAttributeString("id", "dtb:uid");
+                            ncx.WriteAttributeString("playOrder", index.ToString());
+                            ncx.WriteStartElement("navLabel");
+                            ncx.WriteElementString("text", "End Notes");
+                            ncx.WriteEndElement(); // navlabel
+                            ncx.WriteStartElement("content");
+                            ncx.WriteAttributeString("src", name);
+                            ncx.WriteEndElement(); // meta
+                            index++;
+                            // chapters within the books (nested as a subhead)
+                            chapNum = 1;
+                            if (!skipChapterInfo)
+                            {
+                                WriteEndNoteLinks(file, ref index, ncx, ref chapNum);
+                                //WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                            }
+                            //isScriptureSubOpen = true;
+                        }
                         else
                         {
                             if (!skipChapterInfo)
@@ -4096,6 +4121,129 @@ namespace SIL.PublishingSolution
                 }
             }
         }
+
+
+        protected void WriteEndNoteLinks(string xhtmlFileName, ref int playOrder, XmlWriter ncx, ref int chapnum)
+        {
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            XmlNodeList nodes;
+            bool isanchor = false, isBookName = false, isNoteTargetReference = false, isList =  false;
+            string sectionHeadRef = string.Empty;
+            string anchorValue = string.Empty, bookNameValue = string.Empty, noteTargetReferenceValue = string.Empty, ListValue = string.Empty;
+            string formatString = string.Empty;
+            nodes = xmlDocument.SelectNodes("//xhtml:li", namespaceManager);
+
+            if (nodes != null && nodes.Count > 0)
+            {
+                var sb = new StringBuilder();
+                string name = Path.GetFileName(xhtmlFileName);
+                foreach (XmlNode node in nodes)
+                {
+                    string textString = string.Empty;
+                    using (XmlReader reader = XmlReader.Create(new StringReader(node.OuterXml)))
+                    {
+                        // Parse the file and display each of the nodes.
+                        while (reader.Read())
+                        {
+                            switch (reader.NodeType)
+                            {
+                                case XmlNodeType.Element:
+                                    string className = reader.GetAttribute("class");
+                                    if(reader.Name == "a")
+                                    {
+                                        isanchor = true;
+                                    }
+                                    else if(reader.Name == "li")
+                                    {
+                                        if (reader.GetAttribute("id") != null)
+                                        {
+                                            sb.Append(name);
+                                            sb.Append("#");
+                                            sb.Append(reader.GetAttribute("id"));
+                                        }
+                                        isList = true;
+                                    }
+                                    else if (className == "BookName")
+                                    {
+                                        isBookName = true;
+                                    }
+                                    else if (className == "Note_Target_Reference")
+                                    {
+                                        isNoteTargetReference = true;
+                                    }
+                                    break;
+                                case XmlNodeType.Text:
+                                    if (isanchor)
+                                    {
+                                        anchorValue = reader.Value;
+                                        isanchor = false;
+                                    }
+                                    else if (isList)
+                                    {
+                                        //ListValue = reader.GetAttribute("id");
+                                    }
+                                    if (isBookName)
+                                    {
+                                        bookNameValue = reader.Value;
+                                        isBookName = false;
+                                    }
+                                    if (isNoteTargetReference)
+                                    {
+                                        if(anchorValue.Trim().Length > 0 && bookNameValue.Trim().Length > 0)
+                                        {
+                                            textString = anchorValue + " " + bookNameValue + " " + reader.Value;
+                                        }
+                                        if (textString.Trim().Length > 0)
+                                        {
+                                            // write out the node
+                                            ncx.WriteStartElement("navPoint");
+                                            ncx.WriteAttributeString("id", "dtb:uid");
+                                            ncx.WriteAttributeString("playOrder", playOrder.ToString());
+                                            ncx.WriteStartElement("navLabel");
+                                            ncx.WriteElementString("text", textString);
+                                            ncx.WriteEndElement(); // navlabel
+                                            ncx.WriteStartElement("content");
+                                            ncx.WriteAttributeString("src", sb.ToString());
+                                            ncx.WriteEndElement(); // meta
+                                            //ncx.WriteEndElement(); // meta
+                                            //ncx.WriteEndElement(); // navPoint
+                                            playOrder++;
+                                            sb.Length = 0;
+                                        }
+                                       
+                                        if (textString.Trim().Length > 4)
+                                        {
+                                            ncx.WriteEndElement(); // navPoint
+                                        }
+                                        //noteTargetReferenceValue = reader.Value;
+                                        isNoteTargetReference = false;
+                                    }
+                                    break;
+                                case XmlNodeType.XmlDeclaration:
+                                case XmlNodeType.ProcessingInstruction:
+                                    break;
+                                case XmlNodeType.Comment:
+                                    break;
+                                case XmlNodeType.EndElement:
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                    }
+                    // reset the stringbuilder
+                    sb.Length = 0;
+                }
+            }
+        }
+
 
         protected void InsertChapterLinkBelowBookName(string contentFolder)
         {
