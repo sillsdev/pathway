@@ -460,6 +460,7 @@ namespace SIL.PublishingSolution
                 if (_inputType == "scripture" && References.Contains("End"))
                 {
                     UpdateReferenceHyperlinks(contentFolder, inProcess);
+                    UpdateReferenceSourcelinks(contentFolder, inProcess);
                 }
                 FixRelativeHyperlinks(contentFolder, inProcess);
 
@@ -2098,14 +2099,10 @@ namespace SIL.PublishingSolution
                 stop = (content.IndexOf("\"", start) - start);
                 if (stop == -1) { break; }
                 var hrefID = content.Substring(start, (stop));
-                // We now have the href target id. Does the target exist in this file?
-                if (content.IndexOf("id=\"" + hrefID) == -1)
+                // not found -- this link is broken
+                if (!brokenRelativeHrefIds.Contains(hrefID))
                 {
-                    // not found -- this link is broken
-                    if (!brokenRelativeHrefIds.Contains(hrefID))
-                    {
-                        brokenRelativeHrefIds.Add(hrefID);
-                    }
+                    brokenRelativeHrefIds.Add(hrefID);
                 }
                 start = content.IndexOf(searchText, (start + stop));
                 if (start != -1)
@@ -2791,6 +2788,42 @@ namespace SIL.PublishingSolution
             writer.Write(content);
             writer.Close();
             inProcess.PerformStep();
+        }
+
+        /// <summary>
+        /// Helper method to change the relative hyperlinks in the references file to absolute ones. 
+        /// This is done after the scripture files are split out into individual books of 100K or less in size.
+        /// </summary>
+        /// <param name="contentFolder"></param>
+        /// <param name="inProcess"></param>
+        private void UpdateReferenceSourcelinks(string contentFolder, InProcess inProcess)
+        {
+            //var hrefs = FindBrokenRelativeHrefIds(Path.Combine(contentFolder, "zzReferences.xhtml"));
+            string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
+            foreach (var file in files)
+            {
+                XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
+                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; 
+                XmlReader xmlReader = XmlReader.Create(file, xmlReaderSettings);
+                xmlDocument.Load(xmlReader);
+                xmlReader.Close();
+                //var crossRefNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']", namespaceManager);
+                var footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
+                if (footnoteNodes == null)
+                {
+                    return;
+                }
+                foreach (XmlNode footnoteNode in footnoteNodes)
+                {
+                    if (footnoteNode.Attributes != null)
+                        footnoteNode.Attributes["href"].Value = "zzReferences.xhtml" + footnoteNode.Attributes["href"].Value;
+                }
+
+                xmlDocument.Save(file);
+                inProcess.PerformStep();
+            }
         }
 
         /// <summary>
