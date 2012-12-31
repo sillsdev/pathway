@@ -358,7 +358,7 @@
             <draw:frame draw:style-name="Graphics0" draw:name="Graphics0" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics0" draw:name="Graphics0" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01629b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01629b.tif" />
                   <svg:title>cn01629b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -880,7 +880,7 @@
             <draw:frame draw:style-name="Graphics1" draw:name="Graphics1" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics1" draw:name="Graphics1" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/hk00207b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/hk00207b.tif" />
                   <svg:title>hk00207b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -1874,7 +1874,7 @@
             <draw:frame draw:style-name="Graphics2" draw:name="Graphics2" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics2" draw:name="Graphics2" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/ab02816b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/ab02816b.tif" />
                   <svg:title>ab02816b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -2106,7 +2106,7 @@
             <draw:frame draw:style-name="Graphics3" draw:name="Graphics3" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics3" draw:name="Graphics3" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00011b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00011b.tif" />
                   <svg:title>lb00011b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -2378,7 +2378,7 @@
             <draw:frame draw:style-name="Graphics4" draw:name="Graphics4" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics4" draw:name="Graphics4" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00101b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00101b.tif" />
                   <svg:title>lb00101b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_\f*_scrSection_columns_scrBook_scrBody">
@@ -2659,7 +2659,7 @@
             <draw:frame draw:style-name="Graphics5" draw:name="Graphics5" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics5" draw:name="Graphics5" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00094b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00094b.tif" />
                   <svg:title>lb00094b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -3049,7 +3049,7 @@
             <draw:frame draw:style-name="Graphics6" draw:name="Graphics6" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics6" draw:name="Graphics6" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01722b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01722b.tif" />
                   <svg:title>cn01722b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -3496,7 +3496,7 @@
             <draw:frame draw:style-name="Graphics7" draw:name="Graphics7" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics7" draw:name="Graphics7" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01729b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01729b.tif" />
                   <svg:title>cn01729b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -3680,7 +3680,7 @@
             <draw:frame draw:style-name="Graphics8" draw:name="Graphics8" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics8" draw:name="Graphics8" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/ab02840b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/ab02840b.tif" />
                   <svg:title>ab02840b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -3832,7 +3832,7 @@
             <draw:frame draw:style-name="Graphics9" draw:name="Graphics9" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics9" draw:name="Graphics9" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00052b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00052b.tif" />
                   <svg:title>lb00052b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -4051,7 +4051,7 @@
             <draw:frame draw:style-name="Graphics10" draw:name="Graphics10" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics10" draw:name="Graphics10" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/hk00033b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/hk00033b.tif" />
                   <svg:title>hk00033b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -4306,7 +4306,7 @@
             <draw:frame draw:style-name="Graphics11" draw:name="Graphics11" text:anchor-type="as-char" draw:z-index="0" svg:width="116.599190283401pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics11" draw:name="Graphics11" text:anchor-type="paragraph" svg:width="116.599190283401pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00103b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00103b.tif" />
                   <svg:title>lb00103b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_\f*_scrSection_columns_scrBook_scrBody">
@@ -4698,7 +4698,7 @@
             <draw:frame draw:style-name="Graphics12" draw:name="Graphics12" text:anchor-type="as-char" draw:z-index="0" svg:width="58.5pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics12" draw:name="Graphics12" text:anchor-type="paragraph" svg:width="58.5pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/hk00274b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/hk00274b.tif" />
                   <svg:title>hk00274b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_\f*_scrSection_columns_scrBook_scrBody">
@@ -5473,7 +5473,7 @@
             <draw:frame draw:style-name="Graphics13" draw:name="Graphics13" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics13" draw:name="Graphics13" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00354b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00354b.tif" />
                   <svg:title>lb00354b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -5826,7 +5826,7 @@
             <draw:frame draw:style-name="Graphics14" draw:name="Graphics14" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics14" draw:name="Graphics14" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/hk00322b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/hk00322b.tif" />
                   <svg:title>hk00322b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_\f*_scrSection_columns_scrBook_scrBody">
@@ -6417,7 +6417,7 @@
             <draw:frame draw:style-name="Graphics15" draw:name="Graphics15" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics15" draw:name="Graphics15" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00305b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00305b.tif" />
                   <svg:title>lb00305b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -6641,7 +6641,7 @@
             <draw:frame draw:style-name="Graphics16" draw:name="Graphics16" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics16" draw:name="Graphics16" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01695b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01695b.tif" />
                   <svg:title>cn01695b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -7032,7 +7032,7 @@
             <draw:frame draw:style-name="Graphics17" draw:name="Graphics17" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics17" draw:name="Graphics17" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01707b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01707b.tif" />
                   <svg:title>cn01707b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -7163,7 +7163,7 @@
             <draw:frame draw:style-name="Graphics18" draw:name="Graphics18" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics18" draw:name="Graphics18" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00438b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00438b.tif" />
                   <svg:title>dn00438b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -7728,7 +7728,7 @@
             <draw:frame draw:style-name="Graphics19" draw:name="Graphics19" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics19" draw:name="Graphics19" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00447b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00447b.tif" />
                   <svg:title>dn00447b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -8353,7 +8353,7 @@
             <draw:frame draw:style-name="Graphics20" draw:name="Graphics20" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics20" draw:name="Graphics20" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00487b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00487b.tif" />
                   <svg:title>dn00487b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -8889,7 +8889,7 @@
             <draw:frame draw:style-name="Graphics21" draw:name="Graphics21" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics21" draw:name="Graphics21" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/ab02867b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/ab02867b.tif" />
                   <svg:title>ab02867b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -9178,7 +9178,7 @@
             <draw:frame draw:style-name="Graphics22" draw:name="Graphics22" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics22" draw:name="Graphics22" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01795b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01795b.tif" />
                   <svg:title>cn01795b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -9578,7 +9578,7 @@
             <draw:frame draw:style-name="Graphics23" draw:name="Graphics23" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics23" draw:name="Graphics23" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01827b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01827b.tif" />
                   <svg:title>cn01827b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -9869,7 +9869,7 @@
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <draw:frame draw:style-name="Graphics24" draw:name="Graphics24" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0">
-              <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/christs_ministry.pdf" xmlns:xlink="http://www.w3.org/1999/xlink" />
+              <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/christs_ministry.pdf" xmlns:xlink="http://www.w3.org/1999/xlink" />
               <svg:title>christs_ministry.pdf</svg:title>
             </draw:frame>
             <text:span text:style-name="span_.bgt_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -10034,7 +10034,7 @@
             <draw:frame draw:style-name="Graphics25" draw:name="Graphics25" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics25" draw:name="Graphics25" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01603b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01603b.tif" />
                   <svg:title>cn01603b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -10389,7 +10389,7 @@
             <draw:frame draw:style-name="Graphics26" draw:name="Graphics26" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics26" draw:name="Graphics26" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00013b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00013b.tif" />
                   <svg:title>lb00013b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -10576,7 +10576,7 @@
             <draw:frame draw:style-name="Graphics27" draw:name="Graphics27" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics27" draw:name="Graphics27" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00416b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00416b.tif" />
                   <svg:title>dn00416b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_\f*_scrSection_columns_scrBook_scrBody">
@@ -10786,7 +10786,7 @@
             <draw:frame draw:style-name="Graphics28" draw:name="Graphics28" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics28" draw:name="Graphics28" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00410b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00410b.tif" />
                   <svg:title>dn00410b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -11222,7 +11222,7 @@
             <draw:frame draw:style-name="Graphics29" draw:name="Graphics29" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics29" draw:name="Graphics29" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/hk00150b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/hk00150b.tif" />
                   <svg:title>hk00150b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_\f*_scrSection_columns_scrBook_scrBody">
@@ -11409,7 +11409,7 @@
             <draw:frame draw:style-name="Graphics30" draw:name="Graphics30" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics30" draw:name="Graphics30" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01875b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01875b.tif" />
                   <svg:title>cn01875b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -11584,7 +11584,7 @@
             <draw:frame draw:style-name="Graphics31" draw:name="Graphics31" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics31" draw:name="Graphics31" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00145b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00145b.tif" />
                   <svg:title>lb00145b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -12045,7 +12045,7 @@
             <draw:frame draw:style-name="Graphics32" draw:name="Graphics32" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics32" draw:name="Graphics32" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01778b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01778b.tif" />
                   <svg:title>cn01778b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -12133,7 +12133,7 @@
             <draw:frame draw:style-name="Graphics33" draw:name="Graphics33" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics33" draw:name="Graphics33" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00470b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00470b.tif" />
                   <svg:title>dn00470b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -12422,7 +12422,7 @@
             <draw:frame draw:style-name="Graphics34" draw:name="Graphics34" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics34" draw:name="Graphics34" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/hk00155b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/hk00155b.tif" />
                   <svg:title>hk00155b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -12811,7 +12811,7 @@
             <draw:frame draw:style-name="Graphics35" draw:name="Graphics35" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics35" draw:name="Graphics35" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00479b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00479b.tif" />
                   <svg:title>dn00479b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13190,7 +13190,7 @@
             <draw:frame draw:style-name="Graphics36" draw:name="Graphics36" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics36" draw:name="Graphics36" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/hk00079b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/hk00079b.tif" />
                   <svg:title>hk00079b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13536,7 +13536,7 @@
             <draw:frame draw:style-name="Graphics37" draw:name="Graphics37" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics37" draw:name="Graphics37" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00477b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00477b.tif" />
                   <svg:title>dn00477b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13665,7 +13665,7 @@
             <draw:frame draw:style-name="Graphics38" draw:name="Graphics38" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics38" draw:name="Graphics38" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00485b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00485b.tif" />
                   <svg:title>dn00485b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13790,7 +13790,7 @@
             <draw:frame draw:style-name="Graphics39" draw:name="Graphics39" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics39" draw:name="Graphics39" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/ab02842b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/ab02842b.tif" />
                   <svg:title>ab02842b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -13968,7 +13968,7 @@
             <draw:frame draw:style-name="Graphics40" draw:name="Graphics40" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics40" draw:name="Graphics40" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00075b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00075b.tif" />
                   <svg:title>lb00075b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -14062,7 +14062,7 @@
             <draw:frame draw:style-name="Graphics41" draw:name="Graphics41" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics41" draw:name="Graphics41" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/ab02881b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/ab02881b.tif" />
                   <svg:title>ab02881b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -14400,7 +14400,7 @@
             <draw:frame draw:style-name="Graphics42" draw:name="Graphics42" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics42" draw:name="Graphics42" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01787b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01787b.tif" />
                   <svg:title>cn01787b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -14595,7 +14595,7 @@
             <draw:frame draw:style-name="Graphics43" draw:name="Graphics43" text:anchor-type="as-char" draw:z-index="0" svg:width="150.785340314136pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics43" draw:name="Graphics43" text:anchor-type="paragraph" svg:width="150.785340314136pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/hk00166b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/hk00166b.tif" />
                   <svg:title>hk00166b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -14963,7 +14963,7 @@
             <draw:frame draw:style-name="Graphics44" draw:name="Graphics44" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics44" draw:name="Graphics44" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00320b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00320b.tif" />
                   <svg:title>lb00320b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -15381,7 +15381,7 @@
             <draw:frame draw:style-name="Graphics45" draw:name="Graphics45" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics45" draw:name="Graphics45" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00493b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00493b.tif" />
                   <svg:title>dn00493b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -15491,7 +15491,7 @@
             <draw:frame draw:style-name="Graphics46" draw:name="Graphics46" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics46" draw:name="Graphics46" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01850b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01850b.tif" />
                   <svg:title>cn01850b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -16071,7 +16071,7 @@
             <draw:frame draw:style-name="Graphics47" draw:name="Graphics47" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics47" draw:name="Graphics47" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00135b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00135b.tif" />
                   <svg:title>lb00135b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -16360,7 +16360,7 @@
             <draw:frame draw:style-name="Graphics48" draw:name="Graphics48" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics48" draw:name="Graphics48" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00433b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00433b.tif" />
                   <svg:title>dn00433b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -16558,7 +16558,7 @@
             <draw:frame draw:style-name="Graphics49" draw:name="Graphics49" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics49" draw:name="Graphics49" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00307b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00307b.tif" />
                   <svg:title>lb00307b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_\f*_scrSection_columns_scrBook_scrBody">
@@ -16791,7 +16791,7 @@
             <draw:frame draw:style-name="Graphics50" draw:name="Graphics50" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics50" draw:name="Graphics50" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00443b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00443b.tif" />
                   <svg:title>dn00443b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -17170,7 +17170,7 @@
             <draw:frame draw:style-name="Graphics51" draw:name="Graphics51" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics51" draw:name="Graphics51" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01737b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01737b.tif" />
                   <svg:title>cn01737b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -17559,7 +17559,7 @@
             <draw:frame draw:style-name="Graphics52" draw:name="Graphics52" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics52" draw:name="Graphics52" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/dn00456b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/dn00456b.tif" />
                   <svg:title>dn00456b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -17717,7 +17717,7 @@
             <draw:frame draw:style-name="Graphics53" draw:name="Graphics53" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics53" draw:name="Graphics53" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/bk00004b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/bk00004b.tif" />
                   <svg:title>bk00004b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -17991,7 +17991,7 @@
             <draw:frame draw:style-name="Graphics54" draw:name="Graphics54" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics54" draw:name="Graphics54" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01769b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01769b.tif" />
                   <svg:title>cn01769b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -18393,7 +18393,7 @@
             <draw:frame draw:style-name="Graphics55" draw:name="Graphics55" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics55" draw:name="Graphics55" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01799b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01799b.tif" />
                   <svg:title>cn01799b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -18701,7 +18701,7 @@
             <draw:frame draw:style-name="Graphics56" draw:name="Graphics56" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics56" draw:name="Graphics56" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/hk00110b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/hk00110b.tif" />
                   <svg:title>hk00110b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -19121,7 +19121,7 @@
             <draw:frame draw:style-name="Graphics57" draw:name="Graphics57" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics57" draw:name="Graphics57" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01815b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01815b.tif" />
                   <svg:title>cn01815b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -19399,7 +19399,7 @@
             <draw:frame draw:style-name="Graphics58" draw:name="Graphics58" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics58" draw:name="Graphics58" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01840b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01840b.tif" />
                   <svg:title>cn01840b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -19599,7 +19599,7 @@
             <draw:frame draw:style-name="Graphics59" draw:name="Graphics59" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics59" draw:name="Graphics59" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/cn01855b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/cn01855b.tif" />
                   <svg:title>cn01855b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -19706,7 +19706,7 @@
             <draw:frame draw:style-name="Graphics60" draw:name="Graphics60" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics60" draw:name="Graphics60" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lb00330b.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lb00330b.tif" />
                   <svg:title>lb00330b.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
