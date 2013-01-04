@@ -2526,12 +2526,31 @@ namespace SIL.PublishingSolution
                         rectWidth = GetPropertyValue(srcFilrLongDesc, "width", rectWidth);
                     }
 
+                    //Calculate Cover Imagesize
                     if (clsName.IndexOf("coverImage") == 0 && rectHeight == "0" && rectWidth == "0")
                     {
+                        // Get Page property
                         clsName = _childName;
                         rectHeight = GetPropertyValue(clsName, "height", _pageSize["height"]);
                         rectWidth = GetPropertyValue(clsName, "width", _pageSize["width"]);
+
+                        // Get Picture property
+                        Image fullimage = Image.FromFile(fromPath);
+                        double picheight = fullimage.Height;
+                        double picwidth = fullimage.Width;
+                        fullimage.Dispose();
+
+                        //Find aspect Ratio
+                        if (picheight > picwidth) // Find width
+                        {
+                            rectWidth = (picwidth / picheight * double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US"))).ToString();
+                        }
+                        else  // Find height
+                        {
+                            rectHeight = (picheight / picwidth * double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US"))).ToString();
+                        }
                     }
+                    //END Calculate Cover Imagesize
 
                     string strFrameCount = "Graphics" + _frameCount;
                     _imageGraphicsName = strFrameCount;
