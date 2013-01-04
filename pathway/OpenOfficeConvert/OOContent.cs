@@ -2527,7 +2527,6 @@ namespace SIL.PublishingSolution
                     }
 
                     //Calculate Cover Imagesize
-
                     if (clsName.IndexOf("coverImage") == 0 && rectHeight == "0" && rectWidth == "0")
                     {
                         // Get Page property
@@ -2536,10 +2535,15 @@ namespace SIL.PublishingSolution
                         rectWidth = GetPropertyValue(clsName, "width", _pageSize["width"]);
 
                         // Get Picture property
-                        Image fullimage = Image.FromFile(fromPath);
-                        double picheight = fullimage.Height;
-                        double picwidth = fullimage.Width;
-                        fullimage.Dispose();
+                        double picheight = 0.0;
+                        double picwidth = 0.0;
+                        if (File.Exists(fromPath))
+                        {
+                            Image fullimage = Image.FromFile(fromPath);
+                            picheight = fullimage.Height;
+                            picwidth = fullimage.Width;
+                            fullimage.Dispose();
+                        }
 
                         try
                         {
