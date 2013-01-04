@@ -2527,6 +2527,7 @@ namespace SIL.PublishingSolution
                     }
 
                     //Calculate Cover Imagesize
+
                     if (clsName.IndexOf("coverImage") == 0 && rectHeight == "0" && rectWidth == "0")
                     {
                         // Get Page property
@@ -2540,15 +2541,20 @@ namespace SIL.PublishingSolution
                         double picwidth = fullimage.Width;
                         fullimage.Dispose();
 
-                        //Find aspect Ratio
-                        if (picheight > picwidth) // Find width
+                        try
                         {
-                            rectWidth = (picwidth / picheight * double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US"))).ToString();
+                            //Find aspect Ratio
+                            if (picheight > picwidth) // Find width
+                            {
+                                rectWidth = (picwidth / picheight * double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US"))).ToString();
+                            }
+                            else  // Find height
+                            {
+                                rectHeight = (picheight / picwidth * double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US"))).ToString();
+                            }
                         }
-                        else  // Find height
-                        {
-                            rectHeight = (picheight / picwidth * double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US"))).ToString();
-                        }
+                        catch{}
+
                     }
                     //END Calculate Cover Imagesize
 
