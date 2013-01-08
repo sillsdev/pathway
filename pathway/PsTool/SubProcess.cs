@@ -203,7 +203,7 @@ namespace SIL.Tool
                     {
                         progFolder = Path.Combine(directoryInfo.FullName, "bin");
                         if (File.Exists(Path.Combine(progFolder, "java.exe")))
-                            break;
+                            return progFolder;
                     }
                     if (string.IsNullOrEmpty(progFolder))
                     {
@@ -211,7 +211,7 @@ namespace SIL.Tool
                         {
                             progFolder = Path.Combine(directoryInfo.FullName, "bin");
                             if (File.Exists(Path.Combine(progFolder, "java.exe")))
-                                break;
+                                return progFolder;
                         }
                     }
                 }
