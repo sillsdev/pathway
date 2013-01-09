@@ -714,9 +714,10 @@ namespace SIL.PublishingSolution
             }
 
             string cssFile = projInfo.DefaultCssFileWithPath;
+            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(defaultXhtml);
             if(projInfo.DefaultRevCssFileWithPath != null && projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
             {
-                var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(defaultXhtml);
+                //var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(defaultXhtml);
                 if (fileNameWithoutExtension != null && fileNameWithoutExtension.ToLower() == "flexrev")
                 {
                     cssFile = projInfo.DefaultRevCssFileWithPath;
@@ -725,6 +726,10 @@ namespace SIL.PublishingSolution
             
 
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
+            if (fileNameWithoutExtension != null && fileNameWithoutExtension.ToLower() == "flexrev")
+            {
+                preProcessor.InsertEmptyDiv(preProcessor.ProcessedXhtml);
+            }
             preProcessor.GetTempFolderPath();
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
             InsertFrontMatter(projInfo);

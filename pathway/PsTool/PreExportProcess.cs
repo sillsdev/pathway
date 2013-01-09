@@ -3245,9 +3245,42 @@ namespace SIL.Tool
             tw.WriteLine("page-break-after:avoid;");
             tw.WriteLine("}");
 
+            tw.WriteLine(".hideDiv {");
+            tw.WriteLine("page-break-before:always;");
+            tw.WriteLine("display: none;");
+            tw.WriteLine("}");
+            //page-break-before:always
 
             tw.Close();
         }
+
+        public void InsertEmptyDiv(string fileName)
+        {
+            string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
+            if (!File.Exists(flexRevFileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(flexRevFileName);
+            string xPath = "//xhtml:body";//body
+            XmlNodeList RevFormNodes = xDoc.SelectNodes(xPath, namespaceManager);
+
+            if (RevFormNodes.Count > 0)
+            {
+                //XmlDocumentFragment docFrag = CreateEmptyDiv(xDoc);
+                RevFormNodes[0].InnerXml = "<div class='hideDiv'> </div> " + RevFormNodes[0].InnerXml;
+            }
+            xDoc.Save(flexRevFileName);
+
+        }
+
+        //private static XmlDocumentFragment CreateEmptyDiv(XmlDocument xdoc)
+        //{
+        //    const string toInsert = "<div class=\"hideDiv\"> </div>";
+        //    XmlDocumentFragment docFrag = xdoc.CreateDocumentFragment();
+        //    docFrag.InnerXml = toInsert;
+        //    return docFrag;
+        //}
 
         /// <summary>
         /// Appends the product / assembly version to the .css file for field troubleshooting
