@@ -16,6 +16,7 @@
 
 #region Using
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.IO;
@@ -228,8 +229,9 @@ namespace Test.PsExport
         /// <param name="testName">test name (also folder name of test)</param>
         /// <param name="mainXhtml">input xhtml name in folder</param>
         /// <param name="target">desired destination</param>
+        /// <param name="tests">array of tests to apply to result</param>
         /// <param name="msg">message to identify test if error occurs</param>
-        protected void ExportTest(string testName, string mainXhtml, string dataType, string target, string msg)
+        protected void ExportTest(string testName, string mainXhtml, string dataType, string target, string msg = null, ArrayList tests = null)
         {
             CommonOutputSetup(testName);
             CopyExistingFile(mainXhtml);
@@ -249,7 +251,10 @@ namespace Test.PsExport
             switch (target)
             {
                 case "OpenOffice":
-                    OdtTest.AreEqual(_expectTestPath, _outputTestPath, msg);
+                    if (tests != null)
+                        OdtTest.DoTests(_outputTestPath, tests);
+                    else
+                        OdtTest.AreEqual(_expectTestPath, _outputTestPath, msg);
                     break;
                 case "Pdf":
                     var outName = Path.GetFileNameWithoutExtension(mainXhtml) + ".pdf";
@@ -373,12 +378,114 @@ namespace Test.PsExport
         /// <summary>
         /// Test Flex Export test
         /// </summary>
+        /// <remarks>For language, see: http://www.w3schools.com/xslfo/prop_language.asp
+        /// and http://www.ietf.org/rfc/rfc3066.txt
+        /// For country see: http://www.iso.org/iso/iso-3166-1_decoding_table.html
+        /// </remarks>
         [Test]
         [Category("SkipOnTeamCity")]
         public void PsExportT5()
         {
-
-            ExportTest("T5", "main.xhtml", "Dictionary", "OpenOffice", "T5: Flex ODT Export Test");
+            var tests = new ArrayList
+            {
+                new ODet(ODet.Def, "1st master", ODet.Main, ODet.Content, "//style:style[1]/@style:master-page-name", "masterPage"),
+                new ODet(ODet.Def, "page layout", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{masterPage}']/@style:page-layout-name", "pageLayout"),
+                new ODet(ODet.Chk, "page top margin", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-top", "2cm"),
+                new ODet(ODet.Chk, "page left margin", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-left", "2cm"),
+                new ODet(ODet.Chk, "page right margin", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-right", "2cm"),
+                new ODet(ODet.Chk, "page bottom margin", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-bottom", "2cm"),
+                new ODet(ODet.Chk, "1st Page empty header", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:header-style", ""),
+                new ODet(ODet.Chk, "1st Page empty footer", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:footer-style", ""),
+                new ODet(ODet.Def, "left master", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{masterPage}']/@style:next-style-name", "leftMaster"),
+                new ODet(ODet.Chk, "left header variable", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{leftMaster}']//text:variable-get/@text:name", "Left_Guideword_L"),
+                new ODet(ODet.Def, "left header style", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{leftMaster}']//text:span/@text:style-name", "headerTextStyle"),
+                new ODet(ODet.Chk, "left header font", ODet.Main, ODet.Styles, "//style:style[@style:name='{headerTextStyle}']//fo:font-family", "Charis SIL"),
+                new ODet(ODet.Chk, "left header weight", ODet.Main, ODet.Styles, "//style:style[@style:name='{headerTextStyle}']//fo:font-weight", "700"),
+                new ODet(ODet.Chk, "left header size", ODet.Main, ODet.Styles, "//style:style[@style:name='{headerTextStyle}']//fo:font-size", "12pt"),
+                new ODet(ODet.Def, "right master", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{leftMaster}']/@style:next-style-name", "rightMaster"),
+                new ODet(ODet.Chk, "right footer variable", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{rightMaster}']//style:footer//draw:frame//text:variable-get/@text:name", "Right_Guideword_R"),
+                new ODet(ODet.Chk, "single column letter header", ODet.Main, ODet.Content, "//style:style[@style:name='Sect_letHead']//@fo:column-count", "1"),
+                new ODet(ODet.Chk, "double column data", ODet.Main, ODet.Content, "//style:style[@style:name='Sect_letData']//@fo:column-count", "2"),
+                new ODet(ODet.Chk, "letter header center", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:text-align", "center"),
+                new ODet(ODet.Chk, "letter header keep with next", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:keep-with-next", "always"),
+                new ODet(ODet.Chk, "letter header top margin", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:margin-top", "18pt"),
+                new ODet(ODet.Chk, "letter header bottom margin", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:margin-bottom", "18pt"),
+                new ODet(ODet.Chk, "letter header font", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-family", "Charis SIL"),
+                new ODet(ODet.Chk, "letter header complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-name-complex", "Charis SIL"),
+                new ODet(ODet.Chk, "letter header font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-weight", "700"),
+                new ODet(ODet.Chk, "letter header complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-weight-complex", "700"),
+                new ODet(ODet.Chk, "letter header font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-size", "24pt"),
+                new ODet(ODet.Chk, "letter header complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-size-complex", "24pt"),
+                new ODet(ODet.Chk, "entry background", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:background-color", "transparent"),
+                new ODet(ODet.Chk, "entry alignment", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-align", "left"),
+                new ODet(ODet.Chk, "entry left margin", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "12pt"),
+                new ODet(ODet.Chk, "entry indent", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-indent", "-12pt"),
+                new ODet(ODet.Chk, "headword font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-family", "Times New Roman"),
+                new ODet(ODet.Chk, "headword complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-name-complex", "Times New Roman"),
+                new ODet(ODet.Chk, "headword font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-weight", "700"),
+                new ODet(ODet.Chk, "headword complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-weight-complex", "700"),
+                new ODet(ODet.Chk, "headword font style", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-style", "normal"),
+                new ODet(ODet.Chk, "headword font size", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-size", "10pt"),
+                new ODet(ODet.Chk, "headword complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-size-complex", "10pt"),
+                new ODet(ODet.Chk, "headword language", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:language", "bzh"),
+                new ODet(ODet.Chk, "headword country", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:country", "PG"),
+                new ODet(ODet.Chk, "headword left variable", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[2]//@text:name", "Left_Guideword_L"),
+                new ODet(ODet.Chk, "headword right variable", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[3]//@text:name", "Right_Guideword_R"),
+                new ODet(ODet.Chk, "headword left variable value", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[2]//@office:string-value", "anon"),
+                new ODet(ODet.Chk, "headword right variable value", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[3]//@office:string-value", "anon"),
+                new ODet(ODet.Chk, "pronunciation", ODet.Main, ODet.Content, "//text:span[@text:style-name='pronunciation_pronunciations_entry_letData_dicBody']", "[a.ˈnon]"),
+                new ODet(ODet.Chk, "pronunciation font", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@fo:font-family", "Times New Roman"),
+                new ODet(ODet.Chk, "pronunciation complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@style:font-name-complex", "Times New Roman"),
+                new ODet(ODet.Chk, "pronunciation font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@fo:font-weight", "400"),
+                new ODet(ODet.Chk, "pronunciation complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@style:font-weight-complex", "400"),
+                new ODet(ODet.Chk, "pronunciation font style", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@fo:font-style", "normal"),
+                new ODet(ODet.Chk, "pronunciation font size", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@fo:font-size", "10pt"),
+                new ODet(ODet.Chk, "pronunciation complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@style:font-size-complex", "10pt"),
+                new ODet(ODet.Chk, "pronunciation language", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@fo:language", "bzh-fonipa"),
+                new ODet(ODet.Chk, "pronunciation country", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@fo:country", "PG"),
+                new ODet(ODet.Chk, "part of speech", ODet.Main, ODet.Content, "//text:span[@text:style-name='partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody']", "noun(inal)"),
+                new ODet(ODet.Chk, "part of speech parent style", ODet.Main, ODet.Styles, "//style:style[@style:name='partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody']//@style:parent-style-name", "grammaticalinfo_sense_senses_entry_letData_dicBody"),
+                new ODet(ODet.Chk, "part of speech font", ODet.Main, ODet.Styles, "//style:style[@style:name='grammaticalinfo_sense_senses_entry_letData_dicBody']//@fo:font-family", "Times New Roman"),
+                new ODet(ODet.Chk, "part of speech complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='grammaticalinfo_sense_senses_entry_letData_dicBody']//@style:font-name-complex", "Times New Roman"),
+                new ODet(ODet.Chk, "part of speech font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='grammaticalinfo_sense_senses_entry_letData_dicBody']//@fo:font-weight", "400"),
+                new ODet(ODet.Chk, "part of speech complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='grammaticalinfo_sense_senses_entry_letData_dicBody']//@style:font-weight-complex", "400"),
+                new ODet(ODet.Chk, "part of speech font style", ODet.Main, ODet.Styles, "//style:style[@style:name='grammaticalinfo_sense_senses_entry_letData_dicBody']//@fo:font-style", "italic"),
+                new ODet(ODet.Chk, "part of speech font size", ODet.Main, ODet.Styles, "//style:style[@style:name='grammaticalinfo_sense_senses_entry_letData_dicBody']//@fo:font-size", "10pt"),
+                new ODet(ODet.Chk, "part of speech complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='grammaticalinfo_sense_senses_entry_letData_dicBody']//@style:font-size-complex", "10pt"),
+                new ODet(ODet.Chk, "part of speech language", ODet.Main, ODet.Styles, "//style:style[@style:name='partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody']//@fo:language", "en"),
+                new ODet(ODet.Chk, "part of speech country", ODet.Main, ODet.Styles, "//style:style[@style:name='partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody']//@fo:country", "US"),
+                new ODet(ODet.Chk, "sense number", ODet.Main, ODet.Content, "//text:span[@text:style-name='xsensenumber_sense_senses_entry_letData_dicBody']", "1) "),
+                new ODet(ODet.Chk, "sense number font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='xsensenumber_sense_senses_entry_letData_dicBody']//@fo:font-weight", "700"),
+                new ODet(ODet.Chk, "sense number complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='xsensenumber_sense_senses_entry_letData_dicBody']//@style:font-weight-complex", "700"),
+                new ODet(ODet.Chk, "sense number parent style", ODet.Main, ODet.Styles, "//style:style[@style:name='xsensenumber_sense_senses_entry_letData_dicBody']//@style:parent-style-name", "sense_senses_entry_letData_dicBody"),
+                new ODet(ODet.Chk, "sense number parent of parent style", ODet.Main, ODet.Styles, "//style:style[@style:name='sense_senses_entry_letData_dicBody']//@style:parent-style-name", "senses_entry_letData_dicBody"),
+                new ODet(ODet.Chk, "sense number parent of parent of parent style", ODet.Main, ODet.Styles, "//style:style[@style:name='senses_entry_letData_dicBody']//@style:parent-style-name", "entry_letData_dicBody"),
+                //new ODet(ODet.Chk, "sense number language", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:language", "bzh-fonipa"), -- sense numbers don't have a language
+                //new ODet(ODet.Chk, "sense number country", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:country", "PG"),
+                new ODet(ODet.Chk, "definition", ODet.Main, ODet.Content, "//text:span[@text:style-name='xitem_.en_definition_.en_sense_senses_entry_letData_dicBody']", "fruit, seed"),
+                new ODet(ODet.Chk, "definition language", ODet.Main, ODet.Styles, "//style:style[@style:name='xitem_.en_definition_.en_sense_senses_entry_letData_dicBody']//@fo:language", "en"),
+                new ODet(ODet.Chk, "definition country", ODet.Main, ODet.Styles, "//style:style[@style:name='xitem_.en_definition_.en_sense_senses_entry_letData_dicBody']//@fo:country", "US"),
+                new ODet(ODet.Chk, "definition parent style", ODet.Main, ODet.Styles, "//style:style[@style:name='xitem_.en_definition_.en_sense_senses_entry_letData_dicBody']//@style:parent-style-name", "definition_.en_sense_senses_entry_letData_dicBody"),
+                new ODet(ODet.Chk, "definition parent of parent style", ODet.Main, ODet.Styles, "//style:style[@style:name='definition_.en_sense_senses_entry_letData_dicBody']//@style:parent-style-name", "sense_senses_entry_letData_dicBody"),
+                new ODet(ODet.Chk, "example font", ODet.Main, ODet.Styles, "//style:style[@style:name='example_xitem_examples_sense_senses_entry_letData_dicBody']//@fo:font-family", "Times New Roman"),
+                new ODet(ODet.Chk, "example complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='example_xitem_examples_sense_senses_entry_letData_dicBody']//@style:font-name-complex", "Times New Roman"),
+                new ODet(ODet.Chk, "example font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='example_xitem_examples_sense_senses_entry_letData_dicBody']//@fo:font-weight", "400"),
+                new ODet(ODet.Chk, "example complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='example_xitem_examples_sense_senses_entry_letData_dicBody']//@style:font-weight-complex", "400"),
+                new ODet(ODet.Chk, "example font style", ODet.Main, ODet.Styles, "//style:style[@style:name='example_xitem_examples_sense_senses_entry_letData_dicBody']//@fo:font-style", "italic"),
+                new ODet(ODet.Chk, "example font size", ODet.Main, ODet.Styles, "//style:style[@style:name='example_xitem_examples_sense_senses_entry_letData_dicBody']//@fo:font-size", "10pt"),
+                new ODet(ODet.Chk, "example complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='example_xitem_examples_sense_senses_entry_letData_dicBody']//@style:font-size-complex", "10pt"),
+                new ODet(ODet.Chk, "example language", ODet.Main, ODet.Styles, "//style:style[@style:name='example_xitem_examples_sense_senses_entry_letData_dicBody']//@fo:language", "bzh"),
+                new ODet(ODet.Chk, "example country", ODet.Main, ODet.Styles, "//style:style[@style:name='example_xitem_examples_sense_senses_entry_letData_dicBody']//@fo:country", "PG"),
+                new ODet(ODet.Chk, "translation", ODet.Main, ODet.Content, "//text:span[@text:style-name='translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody']", "There is fruit on the corn so let's eat it"),
+                new ODet(ODet.Chk, "translation language", ODet.Main, ODet.Styles, "//style:style[@style:name='translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody']//@fo:language", "en"),
+                new ODet(ODet.Chk, "translation country", ODet.Main, ODet.Styles, "//style:style[@style:name='translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody']//@fo:country", "US"),
+                new ODet(ODet.Chk, "translation parent style", ODet.Main, ODet.Styles, "//style:style[@style:name='translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody']//@style:parent-style-name", "translations_xitem_examples_sense_senses_entry_letData_dicBody"),
+                new ODet(ODet.Chk, "translation parent of parent style", ODet.Main, ODet.Styles, "//style:style[@style:name='translations_xitem_examples_sense_senses_entry_letData_dicBody']//@style:parent-style-name", "xitem_examples_sense_senses_entry_letData_dicBody"),
+                new ODet(ODet.Chk, "translation parent of parent of parent style", ODet.Main, ODet.Styles, "//style:style[@style:name='xitem_examples_sense_senses_entry_letData_dicBody']//@style:parent-style-name", "examples_sense_senses_entry_letData_dicBody"),
+                new ODet(ODet.Chk, "translation parent of parent of parent of parent style", ODet.Main, ODet.Styles, "//style:style[@style:name='examples_sense_senses_entry_letData_dicBody']//@style:parent-style-name", "sense_senses_entry_letData_dicBody"),
+                //new ODet(ODet.Chk, "", ODet.Main, ODet.Styles, "", ""),
+            };
+            ExportTest("T5", "main.xhtml", "Dictionary", "OpenOffice", "", tests);
         }
         #endregion T5
 

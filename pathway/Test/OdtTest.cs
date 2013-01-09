@@ -13,6 +13,10 @@
 // ODT Test Support
 // </remarks>
 // --------------------------------------------------------------------------------------------
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.Xml;
 using System.Xml;
@@ -22,6 +26,33 @@ using SIL.Tool;
 
 namespace Test
 {
+    public class ODet // Output Details
+    {
+        public const int Def = 1;
+        public const int Chk = 0;
+        public const string Main = "main.odt";
+        public const string Rev = "FlexRev.odt";
+        public const string Mast = "main.odm";
+        public const string Content = "content.xml";
+        public const string Styles = "styles.xml";
+        public int Op = Chk;
+        public string File = string.Empty;
+        public string Part = string.Empty;
+        public string XPath = string.Empty;
+        public string Res = string.Empty;
+        public string Msg = string.Empty;
+
+        public ODet(int pOp, string pMsg, string pFile, string pPart, string pXPath, string pRes)
+        {
+            Op = pOp;
+            Msg = pMsg;
+            File = pFile;
+            Part = pPart;
+            XPath = pXPath;
+            Res = pRes;
+        }
+    }
+
     public static class OdtTest
     {
         /// <summary>
@@ -64,6 +95,84 @@ namespace Test
                     FileAssert.AreEqual(expectStream, outputStream, errMessage);
                 }
             }
+        }
+
+        public static void DoTests(string outputPath, ArrayList tests)
+        {
+            var parts = new Dictionary<string, XmlDocument>();
+            var variables = new Dictionary<string, string>();
+            var outDi = new DirectoryInfo(outputPath);
+            var errorCount = 0;
+
+            foreach (ODet detail in tests)
+            {
+                var fileKey = Path.Combine(detail.File, detail.Part);
+                if (!parts.ContainsKey(fileKey))
+                    parts[fileKey] = LoadXml(Path.Combine(outDi.FullName, detail.File), detail.Part);
+                var spath = SubstituteVariables(detail.XPath, variables);
+                var xDoc = parts[fileKey];
+                var nsMgr = XmlDocumentNamespaceManager(xDoc);
+                var res = xDoc.SelectSingleNode(spath, nsMgr);
+                if (res == null)
+                {
+                    Console.WriteLine(string.Format("Missing property {0}", detail.Msg));
+                    errorCount += 1;
+                    continue;
+                }
+                Assert.IsNotNull(res, detail.Msg);
+                var resultStr = res.NodeType == XmlNodeType.Element ? res.InnerText : res.Value;
+                if (detail.Op == ODet.Def)
+                    variables[detail.Res] = resultStr;
+                else if (resultStr != ToPt(detail.Res))
+                {
+                    Console.WriteLine(string.Format("{0} {1} failure. Expected {2} but was {3}", fileKey, detail.Msg, ToPt(detail.Res), resultStr));
+                    errorCount += 1;
+                }
+            }
+            Assert.AreEqual(0,errorCount, "Error Count");
+        }
+
+        private static string ToPt(string p)
+        {
+            if (p.EndsWith("cm"))
+            {
+                var v = double.Parse(p.Substring(0, p.Length - 2));
+                v *= 72.0 / 2.54;
+                return string.Format("{0:0.00000}pt", v);
+            }
+            return p;
+        }
+
+        private static string SubstituteVariables(string p, Dictionary<string, string> variables)
+        {
+            var q = "";
+            int b = 0;
+            int i = p.IndexOf('{');
+            while (i != -1)
+            {
+                int j = p.IndexOf('}', i);
+                var name = p.Substring(i + 1, j - i - 1);
+                if (variables.ContainsKey(name))
+                {
+                    q += p.Substring(b, i - b);
+                    q += variables[name];
+                    b = j + 1;
+                }
+                i = p.IndexOf('{', j);
+            }
+            q += p.Substring(b);
+            return q;
+        }
+
+        private static XmlNamespaceManager XmlDocumentNamespaceManager(XmlDocument xDoc)
+        {
+            var nsMgr = new XmlNamespaceManager(xDoc.NameTable);
+            Assert.IsNotNull(xDoc.DocumentElement);
+            foreach (XmlAttribute attribute in xDoc.DocumentElement.Attributes)
+            {
+                nsMgr.AddNamespace(attribute.LocalName, attribute.Value);
+            }
+            return nsMgr;
         }
 
         /// <summary>
