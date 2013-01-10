@@ -2133,6 +2133,7 @@ namespace SIL.Tool
             string line;
 
             bool replace = true;
+            bool body = true;
             while ((line = stream.ReadLine()) != null)
             {
                 if (replace)
@@ -2149,10 +2150,11 @@ namespace SIL.Tool
                 }
                 else
                 {
-                    if (line.IndexOf("<body") >= 0)
+                    if (body && line.IndexOf("<body") >= 0)
                     {
                         //line = line.Replace(">", @" xml:space=""preserve"">");
                         line = line.Replace("<body", @" <body xml:space=""preserve""  ");
+                        body = false;
                     }
                     sw2.WriteLine(line);
                 }

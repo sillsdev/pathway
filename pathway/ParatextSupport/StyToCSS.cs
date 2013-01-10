@@ -218,6 +218,11 @@ namespace SIL.PublishingSolution
 
 		    className = RemoveMultiClass(className);
 
+            if (className.ToLower() == "nd")
+            {
+                className = "NameOfGod";
+            }
+
 		    string mapClassName = className;
             if (_mapClassName.ContainsKey(className))
                 mapClassName = _mapClassName[className];
