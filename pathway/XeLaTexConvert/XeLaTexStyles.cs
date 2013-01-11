@@ -146,6 +146,7 @@ namespace SIL.PublishingSolution
                 SetPageHeaderFooter(pageName);
             }
             PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \\renewcommand{\\footrulewidth}{0.4pt}");
+            PageStyle.AppendLine("\\fancyfoot{}");
         }
 
         private void SetPageHeaderFooter(string pageName)
