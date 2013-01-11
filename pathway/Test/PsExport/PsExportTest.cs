@@ -368,9 +368,19 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
-        public void PsExportT4()
+        public void AcceptT4NkonyaLO()
         {
-            ExportTest("T4", "1pe.xhtml", "Scripture", "OpenOffice", "T4: TE ODT Export Test");
+            var tests = new ArrayList
+            {
+                new ODet(ODet.Def, "1st master", "mat21-23.odt", ODet.Content, "//style:style[1]/@style:master-page-name", "masterPage"),
+                new ODet(ODet.Def, "page layout", "mat21-23.odt", ODet.Styles, "//style:master-page[@style:name='{masterPage}']/@style:page-layout-name", "pageLayout"),
+                new ODet(ODet.Chk, "page top margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-top", "1.15cm"),
+                new ODet(ODet.Chk, "page left margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-left", "1.5cm"),
+                new ODet(ODet.Chk, "page right margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-right", "1.5cm"),
+                new ODet(ODet.Chk, "page bottom margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-bottom", "1.15cm"),
+            };
+
+            ExportTest("T4", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
         }
         #endregion T4
 
@@ -384,7 +394,7 @@ namespace Test.PsExport
         /// </remarks>
         [Test]
         [Category("SkipOnTeamCity")]
-        public void PsExportT5()
+        public void AcceptT5BuangALO()
         {
             var tests = new ArrayList
             {

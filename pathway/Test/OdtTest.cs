@@ -138,7 +138,8 @@ namespace Test
             {
                 var v = double.Parse(p.Substring(0, p.Length - 2));
                 v *= 72.0 / 2.54;
-                return string.Format("{0:0.00000}pt", v);
+                var vstr = string.Format("{0:0.000000}", v);
+                return string.Format("{0}pt", vstr.Substring(0, vstr.Length -1));
             }
             return p;
         }
