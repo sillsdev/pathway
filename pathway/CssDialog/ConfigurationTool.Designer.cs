@@ -62,8 +62,20 @@ namespace SIL.PublishingSolution
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.tabDisplay = new System.Windows.Forms.TabPage();
-            this.lblReferenceFormat = new System.Windows.Forms.Label();
+            this.pnlOtherFormat = new System.Windows.Forms.Panel();
+            this.lblPageNumber = new System.Windows.Forms.Label();
+            this.ddlPageNumber = new System.Windows.Forms.ComboBox();
+            this.ddlFileProduceDict = new System.Windows.Forms.ComboBox();
+            this.lblFileProduceDict = new System.Windows.Forms.Label();
+            this.ddlSense = new System.Windows.Forms.ComboBox();
+            this.lblSenseLayout = new System.Windows.Forms.Label();
+            this.lblRules = new System.Windows.Forms.Label();
+            this.ddlRules = new System.Windows.Forms.ComboBox();
+            this.lblFont = new System.Windows.Forms.Label();
+            this.ddlFontSize = new System.Windows.Forms.ComboBox();
+            this.pnlReferenceFormat = new System.Windows.Forms.Panel();
             this.ddlReferenceFormat = new System.Windows.Forms.ComboBox();
+            this.lblReferenceFormat = new System.Windows.Forms.Label();
             this.chkFixedLineHeight = new System.Windows.Forms.CheckBox();
             this.ddlVerticalJustify = new System.Windows.Forms.ComboBox();
             this.lblVerticalJustify = new System.Windows.Forms.Label();
@@ -200,23 +212,13 @@ namespace SIL.PublishingSolution
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.pnlReferenceFormat = new System.Windows.Forms.Panel();
-            this.pnlOtherFormat = new System.Windows.Forms.Panel();
-            this.lblPageNumber = new System.Windows.Forms.Label();
-            this.ddlPageNumber = new System.Windows.Forms.ComboBox();
-            this.ddlFileProduceDict = new System.Windows.Forms.ComboBox();
-            this.lblFileProduceDict = new System.Windows.Forms.Label();
-            this.ddlSense = new System.Windows.Forms.ComboBox();
-            this.lblSenseLayout = new System.Windows.Forms.Label();
-            this.lblRules = new System.Windows.Forms.Label();
-            this.ddlRules = new System.Windows.Forms.ComboBox();
-            this.lblFont = new System.Windows.Forms.Label();
-            this.ddlFontSize = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabInfo.SuspendLayout();
             this.tabDisplay.SuspendLayout();
+            this.pnlOtherFormat.SuspendLayout();
+            this.pnlReferenceFormat.SuspendLayout();
             this.tabMobile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).BeginInit();
@@ -240,8 +242,6 @@ namespace SIL.PublishingSolution
             this.TLPanel2.SuspendLayout();
             this.TLPanel3.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.pnlReferenceFormat.SuspendLayout();
-            this.pnlOtherFormat.SuspendLayout();
             this.SuspendLayout();
             // 
             // stylesGrid
@@ -524,10 +524,9 @@ namespace SIL.PublishingSolution
             // 
             // lblApproved
             // 
-            this.lblApproved.AutoSize = true;
-            this.lblApproved.Location = new System.Drawing.Point(2, 225);
+            this.lblApproved.Location = new System.Drawing.Point(2, 224);
             this.lblApproved.Name = "lblApproved";
-            this.lblApproved.Size = new System.Drawing.Size(68, 13);
+            this.lblApproved.Size = new System.Drawing.Size(68, 18);
             this.lblApproved.TabIndex = 11;
             this.lblApproved.Text = "Approved By";
             // 
@@ -545,10 +544,9 @@ namespace SIL.PublishingSolution
             // 
             // lblComment
             // 
-            this.lblComment.AutoSize = true;
-            this.lblComment.Location = new System.Drawing.Point(19, 144);
+            this.lblComment.Location = new System.Drawing.Point(19, 142);
             this.lblComment.Name = "lblComment";
-            this.lblComment.Size = new System.Drawing.Size(51, 13);
+            this.lblComment.Size = new System.Drawing.Size(51, 18);
             this.lblComment.TabIndex = 9;
             this.lblComment.Text = "Comment";
             // 
@@ -582,10 +580,9 @@ namespace SIL.PublishingSolution
             // 
             // lblAvailable
             // 
-            this.lblAvailable.AutoSize = true;
-            this.lblAvailable.Location = new System.Drawing.Point(20, 124);
+            this.lblAvailable.Location = new System.Drawing.Point(20, 123);
             this.lblAvailable.Name = "lblAvailable";
-            this.lblAvailable.Size = new System.Drawing.Size(50, 13);
+            this.lblAvailable.Size = new System.Drawing.Size(50, 18);
             this.lblAvailable.TabIndex = 4;
             this.lblAvailable.Text = "Available";
             // 
@@ -606,10 +603,9 @@ namespace SIL.PublishingSolution
             // 
             // lblDesc
             // 
-            this.lblDesc.AutoSize = true;
-            this.lblDesc.Location = new System.Drawing.Point(10, 47);
+            this.lblDesc.Location = new System.Drawing.Point(10, 45);
             this.lblDesc.Name = "lblDesc";
-            this.lblDesc.Size = new System.Drawing.Size(60, 13);
+            this.lblDesc.Size = new System.Drawing.Size(60, 18);
             this.lblDesc.TabIndex = 2;
             this.lblDesc.Text = "Description";
             // 
@@ -629,10 +625,9 @@ namespace SIL.PublishingSolution
             // 
             // lblName
             // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(35, 24);
+            this.lblName.Location = new System.Drawing.Point(35, 23);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.Size = new System.Drawing.Size(35, 18);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Name";
             // 
@@ -675,15 +670,141 @@ namespace SIL.PublishingSolution
             this.tabDisplay.Text = "Properties";
             this.tabDisplay.UseVisualStyleBackColor = true;
             // 
-            // lblReferenceFormat
+            // pnlOtherFormat
             // 
-            this.lblReferenceFormat.AccessibleName = "lblReferenceFormat";
-            this.lblReferenceFormat.Location = new System.Drawing.Point(1, 5);
-            this.lblReferenceFormat.Name = "lblReferenceFormat";
-            this.lblReferenceFormat.Size = new System.Drawing.Size(100, 12);
-            this.lblReferenceFormat.TabIndex = 100;
-            this.lblReferenceFormat.Text = "Reference Format";
-            this.lblReferenceFormat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.pnlOtherFormat.Controls.Add(this.lblPageNumber);
+            this.pnlOtherFormat.Controls.Add(this.ddlPageNumber);
+            this.pnlOtherFormat.Controls.Add(this.ddlFileProduceDict);
+            this.pnlOtherFormat.Controls.Add(this.lblFileProduceDict);
+            this.pnlOtherFormat.Controls.Add(this.ddlSense);
+            this.pnlOtherFormat.Controls.Add(this.lblSenseLayout);
+            this.pnlOtherFormat.Controls.Add(this.lblRules);
+            this.pnlOtherFormat.Controls.Add(this.ddlRules);
+            this.pnlOtherFormat.Controls.Add(this.lblFont);
+            this.pnlOtherFormat.Controls.Add(this.ddlFontSize);
+            this.pnlOtherFormat.Location = new System.Drawing.Point(9, 307);
+            this.pnlOtherFormat.Name = "pnlOtherFormat";
+            this.pnlOtherFormat.Size = new System.Drawing.Size(275, 123);
+            this.pnlOtherFormat.TabIndex = 103;
+            // 
+            // lblPageNumber
+            // 
+            this.lblPageNumber.AccessibleName = "lblPageNumber";
+            this.lblPageNumber.Location = new System.Drawing.Point(5, 4);
+            this.lblPageNumber.Name = "lblPageNumber";
+            this.lblPageNumber.Size = new System.Drawing.Size(87, 18);
+            this.lblPageNumber.TabIndex = 108;
+            this.lblPageNumber.Text = "Page Numbers";
+            this.lblPageNumber.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // ddlPageNumber
+            // 
+            this.ddlPageNumber.AccessibleName = "ddlPageNumber";
+            this.ddlPageNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlPageNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlPageNumber.FormattingEnabled = true;
+            this.ddlPageNumber.Location = new System.Drawing.Point(98, 1);
+            this.ddlPageNumber.Name = "ddlPageNumber";
+            this.ddlPageNumber.Size = new System.Drawing.Size(176, 21);
+            this.ddlPageNumber.TabIndex = 99;
+            // 
+            // ddlFileProduceDict
+            // 
+            this.ddlFileProduceDict.AccessibleName = "";
+            this.ddlFileProduceDict.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlFileProduceDict.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlFileProduceDict.FormattingEnabled = true;
+            this.ddlFileProduceDict.Location = new System.Drawing.Point(98, 73);
+            this.ddlFileProduceDict.Name = "ddlFileProduceDict";
+            this.ddlFileProduceDict.Size = new System.Drawing.Size(176, 21);
+            this.ddlFileProduceDict.TabIndex = 102;
+            // 
+            // lblFileProduceDict
+            // 
+            this.lblFileProduceDict.AccessibleName = "lblFileProduceDict";
+            this.lblFileProduceDict.Location = new System.Drawing.Point(5, 77);
+            this.lblFileProduceDict.Name = "lblFileProduceDict";
+            this.lblFileProduceDict.Size = new System.Drawing.Size(87, 18);
+            this.lblFileProduceDict.TabIndex = 107;
+            this.lblFileProduceDict.Text = "Files Produced";
+            this.lblFileProduceDict.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // ddlSense
+            // 
+            this.ddlSense.AccessibleName = "ddlPageColumn";
+            this.ddlSense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlSense.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlSense.FormattingEnabled = true;
+            this.ddlSense.Location = new System.Drawing.Point(98, 97);
+            this.ddlSense.Name = "ddlSense";
+            this.ddlSense.Size = new System.Drawing.Size(176, 21);
+            this.ddlSense.TabIndex = 103;
+            // 
+            // lblSenseLayout
+            // 
+            this.lblSenseLayout.AccessibleName = "lblPageColumn";
+            this.lblSenseLayout.Location = new System.Drawing.Point(5, 101);
+            this.lblSenseLayout.Name = "lblSenseLayout";
+            this.lblSenseLayout.Size = new System.Drawing.Size(87, 18);
+            this.lblSenseLayout.TabIndex = 106;
+            this.lblSenseLayout.Text = "Sense Layout";
+            this.lblSenseLayout.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblRules
+            // 
+            this.lblRules.AccessibleName = "label17";
+            this.lblRules.Location = new System.Drawing.Point(5, 28);
+            this.lblRules.Name = "lblRules";
+            this.lblRules.Size = new System.Drawing.Size(87, 18);
+            this.lblRules.TabIndex = 104;
+            this.lblRules.Text = "Divider Lines";
+            this.lblRules.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // ddlRules
+            // 
+            this.ddlRules.AccessibleName = "ddlPageColumn";
+            this.ddlRules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlRules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlRules.FormattingEnabled = true;
+            this.ddlRules.Location = new System.Drawing.Point(98, 25);
+            this.ddlRules.Name = "ddlRules";
+            this.ddlRules.Size = new System.Drawing.Size(176, 21);
+            this.ddlRules.TabIndex = 100;
+            // 
+            // lblFont
+            // 
+            this.lblFont.AccessibleName = "label17";
+            this.lblFont.Location = new System.Drawing.Point(5, 53);
+            this.lblFont.Name = "lblFont";
+            this.lblFont.Size = new System.Drawing.Size(87, 18);
+            this.lblFont.TabIndex = 105;
+            this.lblFont.Text = "BaseFont Size";
+            this.lblFont.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // ddlFontSize
+            // 
+            this.ddlFontSize.AccessibleName = "ddlPageColumn";
+            this.ddlFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlFontSize.FormattingEnabled = true;
+            this.ddlFontSize.Location = new System.Drawing.Point(98, 49);
+            this.ddlFontSize.Name = "ddlFontSize";
+            this.ddlFontSize.Size = new System.Drawing.Size(176, 21);
+            this.ddlFontSize.TabIndex = 101;
+            // 
+            // pnlReferenceFormat
+            // 
+            this.pnlReferenceFormat.Controls.Add(this.ddlReferenceFormat);
+            this.pnlReferenceFormat.Controls.Add(this.lblReferenceFormat);
+            this.pnlReferenceFormat.Location = new System.Drawing.Point(0, 281);
+            this.pnlReferenceFormat.Name = "pnlReferenceFormat";
+            this.pnlReferenceFormat.Size = new System.Drawing.Size(292, 24);
+            this.pnlReferenceFormat.TabIndex = 102;
             // 
             // ddlReferenceFormat
             // 
@@ -697,9 +818,18 @@ namespace SIL.PublishingSolution
             this.ddlReferenceFormat.Size = new System.Drawing.Size(176, 21);
             this.ddlReferenceFormat.TabIndex = 99;
             // 
+            // lblReferenceFormat
+            // 
+            this.lblReferenceFormat.AccessibleName = "lblReferenceFormat";
+            this.lblReferenceFormat.Location = new System.Drawing.Point(1, 5);
+            this.lblReferenceFormat.Name = "lblReferenceFormat";
+            this.lblReferenceFormat.Size = new System.Drawing.Size(100, 18);
+            this.lblReferenceFormat.TabIndex = 100;
+            this.lblReferenceFormat.Text = "Reference Format";
+            this.lblReferenceFormat.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // chkFixedLineHeight
             // 
-            this.chkFixedLineHeight.AutoSize = true;
             this.chkFixedLineHeight.Location = new System.Drawing.Point(107, 239);
             this.chkFixedLineHeight.Name = "chkFixedLineHeight";
             this.chkFixedLineHeight.Size = new System.Drawing.Size(108, 17);
@@ -726,10 +856,10 @@ namespace SIL.PublishingSolution
             this.lblVerticalJustify.AccessibleName = "lblPageColumn";
             this.lblVerticalJustify.Location = new System.Drawing.Point(14, 166);
             this.lblVerticalJustify.Name = "lblVerticalJustify";
-            this.lblVerticalJustify.Size = new System.Drawing.Size(87, 13);
+            this.lblVerticalJustify.Size = new System.Drawing.Size(87, 18);
             this.lblVerticalJustify.TabIndex = 94;
             this.lblVerticalJustify.Text = "Vertical Justify";
-            this.lblVerticalJustify.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblVerticalJustify.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // ddlPicture
             // 
@@ -749,20 +879,20 @@ namespace SIL.PublishingSolution
             this.lblLineSpace.AccessibleName = "label26";
             this.lblLineSpace.Location = new System.Drawing.Point(14, 214);
             this.lblLineSpace.Name = "lblLineSpace";
-            this.lblLineSpace.Size = new System.Drawing.Size(87, 13);
+            this.lblLineSpace.Size = new System.Drawing.Size(87, 18);
             this.lblLineSpace.TabIndex = 86;
             this.lblLineSpace.Text = "Line Spacing ";
-            this.lblLineSpace.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblLineSpace.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblRunningHeader
             // 
             this.lblRunningHeader.AccessibleName = "label17";
             this.lblRunningHeader.Location = new System.Drawing.Point(1, 262);
             this.lblRunningHeader.Name = "lblRunningHeader";
-            this.lblRunningHeader.Size = new System.Drawing.Size(100, 13);
+            this.lblRunningHeader.Size = new System.Drawing.Size(100, 18);
             this.lblRunningHeader.TabIndex = 87;
             this.lblRunningHeader.Text = "Running Header";
-            this.lblRunningHeader.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblRunningHeader.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // ddlLeading
             // 
@@ -795,10 +925,10 @@ namespace SIL.PublishingSolution
             this.label4.AccessibleName = "lblPageColumn";
             this.label4.Location = new System.Drawing.Point(14, 190);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.Size = new System.Drawing.Size(87, 18);
             this.label4.TabIndex = 90;
             this.label4.Text = "Pictures";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txtPageGutterWidth
             // 
@@ -818,20 +948,20 @@ namespace SIL.PublishingSolution
             this.lblPageGutter.AccessibleName = "lblPageGutter";
             this.lblPageGutter.Location = new System.Drawing.Point(14, 117);
             this.lblPageGutter.Name = "lblPageGutter";
-            this.lblPageGutter.Size = new System.Drawing.Size(87, 13);
+            this.lblPageGutter.Size = new System.Drawing.Size(87, 18);
             this.lblPageGutter.TabIndex = 79;
             this.lblPageGutter.Text = "Column Gap";
-            this.lblPageGutter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPageGutter.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label5
             // 
             this.label5.AccessibleName = "lblPagePageSize";
-            this.label5.Location = new System.Drawing.Point(31, 45);
+            this.label5.Location = new System.Drawing.Point(31, 42);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 20);
             this.label5.TabIndex = 78;
             this.label5.Text = "Page Margin";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txtPageOutside
             // 
@@ -890,40 +1020,40 @@ namespace SIL.PublishingSolution
             this.lblPageInside.AccessibleName = "lblPageInside";
             this.lblPageInside.Location = new System.Drawing.Point(99, 41);
             this.lblPageInside.Name = "lblPageInside";
-            this.lblPageInside.Size = new System.Drawing.Size(40, 13);
+            this.lblPageInside.Size = new System.Drawing.Size(40, 18);
             this.lblPageInside.TabIndex = 77;
             this.lblPageInside.Text = "Inside";
-            this.lblPageInside.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPageInside.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblPageOutside
             // 
             this.lblPageOutside.AccessibleName = "lblPageOutside";
             this.lblPageOutside.Location = new System.Drawing.Point(174, 41);
             this.lblPageOutside.Name = "lblPageOutside";
-            this.lblPageOutside.Size = new System.Drawing.Size(49, 13);
+            this.lblPageOutside.Size = new System.Drawing.Size(49, 18);
             this.lblPageOutside.TabIndex = 75;
             this.lblPageOutside.Text = "Outside";
-            this.lblPageOutside.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPageOutside.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblPageBottom
             // 
             this.lblPageBottom.AccessibleName = "lblPageBottom";
             this.lblPageBottom.Location = new System.Drawing.Point(176, 67);
             this.lblPageBottom.Name = "lblPageBottom";
-            this.lblPageBottom.Size = new System.Drawing.Size(47, 13);
+            this.lblPageBottom.Size = new System.Drawing.Size(47, 18);
             this.lblPageBottom.TabIndex = 73;
             this.lblPageBottom.Text = "Bottom";
-            this.lblPageBottom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPageBottom.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblPageTop
             // 
             this.lblPageTop.AccessibleName = "lblPageTop";
             this.lblPageTop.Location = new System.Drawing.Point(114, 67);
             this.lblPageTop.Name = "lblPageTop";
-            this.lblPageTop.Size = new System.Drawing.Size(26, 13);
+            this.lblPageTop.Size = new System.Drawing.Size(26, 18);
             this.lblPageTop.TabIndex = 71;
             this.lblPageTop.Text = "Top";
-            this.lblPageTop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPageTop.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // ddlJustified
             // 
@@ -944,10 +1074,10 @@ namespace SIL.PublishingSolution
             this.lblJustified.AccessibleName = "lblPageColumn";
             this.lblJustified.Location = new System.Drawing.Point(14, 141);
             this.lblJustified.Name = "lblJustified";
-            this.lblJustified.Size = new System.Drawing.Size(87, 13);
+            this.lblJustified.Size = new System.Drawing.Size(87, 18);
             this.lblJustified.TabIndex = 64;
             this.lblJustified.Text = "Justified";
-            this.lblJustified.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblJustified.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // ddlPageColumn
             // 
@@ -966,12 +1096,12 @@ namespace SIL.PublishingSolution
             // lblPageColumn
             // 
             this.lblPageColumn.AccessibleName = "lblPageColumn";
-            this.lblPageColumn.Location = new System.Drawing.Point(14, 93);
+            this.lblPageColumn.Location = new System.Drawing.Point(14, 92);
             this.lblPageColumn.Name = "lblPageColumn";
-            this.lblPageColumn.Size = new System.Drawing.Size(87, 13);
+            this.lblPageColumn.Size = new System.Drawing.Size(87, 18);
             this.lblPageColumn.TabIndex = 42;
             this.lblPageColumn.Text = "Columns";
-            this.lblPageColumn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPageColumn.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // ddlPagePageSize
             // 
@@ -992,10 +1122,10 @@ namespace SIL.PublishingSolution
             this.lblPagePageSize.AccessibleName = "lblPagePageSize";
             this.lblPagePageSize.Location = new System.Drawing.Point(14, 14);
             this.lblPagePageSize.Name = "lblPagePageSize";
-            this.lblPagePageSize.Size = new System.Drawing.Size(87, 13);
+            this.lblPagePageSize.Size = new System.Drawing.Size(87, 18);
             this.lblPagePageSize.TabIndex = 33;
             this.lblPagePageSize.Text = "Page Size";
-            this.lblPagePageSize.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPagePageSize.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // tabMobile
             // 
@@ -2248,142 +2378,6 @@ namespace SIL.PublishingSolution
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pnlReferenceFormat
-            // 
-            this.pnlReferenceFormat.Controls.Add(this.ddlReferenceFormat);
-            this.pnlReferenceFormat.Controls.Add(this.lblReferenceFormat);
-            this.pnlReferenceFormat.Location = new System.Drawing.Point(0, 281);
-            this.pnlReferenceFormat.Name = "pnlReferenceFormat";
-            this.pnlReferenceFormat.Size = new System.Drawing.Size(292, 24);
-            this.pnlReferenceFormat.TabIndex = 102;
-            // 
-            // pnlOtherFormat
-            // 
-            this.pnlOtherFormat.Controls.Add(this.lblPageNumber);
-            this.pnlOtherFormat.Controls.Add(this.ddlPageNumber);
-            this.pnlOtherFormat.Controls.Add(this.ddlFileProduceDict);
-            this.pnlOtherFormat.Controls.Add(this.lblFileProduceDict);
-            this.pnlOtherFormat.Controls.Add(this.ddlSense);
-            this.pnlOtherFormat.Controls.Add(this.lblSenseLayout);
-            this.pnlOtherFormat.Controls.Add(this.lblRules);
-            this.pnlOtherFormat.Controls.Add(this.ddlRules);
-            this.pnlOtherFormat.Controls.Add(this.lblFont);
-            this.pnlOtherFormat.Controls.Add(this.ddlFontSize);
-            this.pnlOtherFormat.Location = new System.Drawing.Point(9, 307);
-            this.pnlOtherFormat.Name = "pnlOtherFormat";
-            this.pnlOtherFormat.Size = new System.Drawing.Size(275, 123);
-            this.pnlOtherFormat.TabIndex = 103;
-            // 
-            // lblPageNumber
-            // 
-            this.lblPageNumber.AccessibleName = "lblPageNumber";
-            this.lblPageNumber.Location = new System.Drawing.Point(5, 4);
-            this.lblPageNumber.Name = "lblPageNumber";
-            this.lblPageNumber.Size = new System.Drawing.Size(87, 13);
-            this.lblPageNumber.TabIndex = 108;
-            this.lblPageNumber.Text = "Page Numbers";
-            this.lblPageNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ddlPageNumber
-            // 
-            this.ddlPageNumber.AccessibleName = "ddlPageNumber";
-            this.ddlPageNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ddlPageNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlPageNumber.FormattingEnabled = true;
-            this.ddlPageNumber.Location = new System.Drawing.Point(98, 1);
-            this.ddlPageNumber.Name = "ddlPageNumber";
-            this.ddlPageNumber.Size = new System.Drawing.Size(176, 21);
-            this.ddlPageNumber.TabIndex = 99;
-            // 
-            // ddlFileProduceDict
-            // 
-            this.ddlFileProduceDict.AccessibleName = "";
-            this.ddlFileProduceDict.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ddlFileProduceDict.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlFileProduceDict.FormattingEnabled = true;
-            this.ddlFileProduceDict.Location = new System.Drawing.Point(98, 73);
-            this.ddlFileProduceDict.Name = "ddlFileProduceDict";
-            this.ddlFileProduceDict.Size = new System.Drawing.Size(176, 21);
-            this.ddlFileProduceDict.TabIndex = 102;
-            // 
-            // lblFileProduceDict
-            // 
-            this.lblFileProduceDict.AccessibleName = "lblFileProduceDict";
-            this.lblFileProduceDict.Location = new System.Drawing.Point(5, 77);
-            this.lblFileProduceDict.Name = "lblFileProduceDict";
-            this.lblFileProduceDict.Size = new System.Drawing.Size(87, 13);
-            this.lblFileProduceDict.TabIndex = 107;
-            this.lblFileProduceDict.Text = "Files Produced";
-            this.lblFileProduceDict.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ddlSense
-            // 
-            this.ddlSense.AccessibleName = "ddlPageColumn";
-            this.ddlSense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ddlSense.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlSense.FormattingEnabled = true;
-            this.ddlSense.Location = new System.Drawing.Point(98, 97);
-            this.ddlSense.Name = "ddlSense";
-            this.ddlSense.Size = new System.Drawing.Size(176, 21);
-            this.ddlSense.TabIndex = 103;
-            // 
-            // lblSenseLayout
-            // 
-            this.lblSenseLayout.AccessibleName = "lblPageColumn";
-            this.lblSenseLayout.Location = new System.Drawing.Point(5, 101);
-            this.lblSenseLayout.Name = "lblSenseLayout";
-            this.lblSenseLayout.Size = new System.Drawing.Size(87, 13);
-            this.lblSenseLayout.TabIndex = 106;
-            this.lblSenseLayout.Text = "Sense Layout";
-            this.lblSenseLayout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblRules
-            // 
-            this.lblRules.AccessibleName = "label17";
-            this.lblRules.Location = new System.Drawing.Point(5, 28);
-            this.lblRules.Name = "lblRules";
-            this.lblRules.Size = new System.Drawing.Size(87, 13);
-            this.lblRules.TabIndex = 104;
-            this.lblRules.Text = "Divider Lines";
-            this.lblRules.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ddlRules
-            // 
-            this.ddlRules.AccessibleName = "ddlPageColumn";
-            this.ddlRules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ddlRules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlRules.FormattingEnabled = true;
-            this.ddlRules.Location = new System.Drawing.Point(98, 25);
-            this.ddlRules.Name = "ddlRules";
-            this.ddlRules.Size = new System.Drawing.Size(176, 21);
-            this.ddlRules.TabIndex = 100;
-            // 
-            // lblFont
-            // 
-            this.lblFont.AccessibleName = "label17";
-            this.lblFont.Location = new System.Drawing.Point(5, 53);
-            this.lblFont.Name = "lblFont";
-            this.lblFont.Size = new System.Drawing.Size(87, 13);
-            this.lblFont.TabIndex = 105;
-            this.lblFont.Text = "BaseFont Size";
-            this.lblFont.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ddlFontSize
-            // 
-            this.ddlFontSize.AccessibleName = "ddlPageColumn";
-            this.ddlFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ddlFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlFontSize.FormattingEnabled = true;
-            this.ddlFontSize.Location = new System.Drawing.Point(98, 49);
-            this.ddlFontSize.Name = "ddlFontSize";
-            this.ddlFontSize.Size = new System.Drawing.Size(176, 21);
-            this.ddlFontSize.TabIndex = 101;
-            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2408,6 +2402,8 @@ namespace SIL.PublishingSolution
             this.tabInfo.PerformLayout();
             this.tabDisplay.ResumeLayout(false);
             this.tabDisplay.PerformLayout();
+            this.pnlOtherFormat.ResumeLayout(false);
+            this.pnlReferenceFormat.ResumeLayout(false);
             this.tabMobile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).EndInit();
@@ -2438,8 +2434,6 @@ namespace SIL.PublishingSolution
             this.TLPanel3.ResumeLayout(false);
             this.TLPanel3.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.pnlReferenceFormat.ResumeLayout(false);
-            this.pnlOtherFormat.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
