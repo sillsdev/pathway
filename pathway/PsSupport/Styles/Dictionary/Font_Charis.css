@@ -1,1 +1,139 @@
-﻿ 
+﻿.CmPossibility-publishDomainTypeForReversal-AbbreviationPub,
+.CmPossibility-publishDomainTypeForReversal-NamePub,
+.CmPossibility-publishSenseTypeForReversal-AbbreviationPub,
+.CmPossibility-publishUsageTypeForReversal-AbbreviationPub,
+.CmSemanticDomain-publishSemDomForReversal-AbbreviationPub,
+.CmSemanticDomain-publishSemDomForReversal-NamePub,
+.complexform,
+.complexform-entry-type,
+.complexform-form,
+.complexform-summarydef,
+.complexform-type,
+.crossref-headword,
+.crossref-type-abbr,
+.domain-type-abbr,
+.domain-type-name,
+.encyclopedic-info,
+.entryref-component,
+.entryref-summary,
+.entryref-summary-minor,
+.entryref-type,
+.etymology,
+.etymology-comment,
+.etymology-form,
+.etymology-gloss,
+.LexEntry-publishStemComponentTarget-MLHeadWordPub,
+.LexEntry-publishStemMinorPrimaryTarget-SummaryDefinitionPub,
+.LexEntryType-publishAbbreviationForReversal-AbbreviationPub,
+.LexEntryType-publishStemComplexFormType-ReverseAbbrPub,
+.LexEntryType-publishStemEntryType-AbbreviationPub,
+.LexEntryType-publishStemVariantType-ReverseAbbrPub,
+.lexref,
+.lexref-type-abbr,
+.pictureLabel,
+.pronunciation-form,
+.reversal-form,
+.semantic-domain-abbr,
+.semantic-domain-name,
+.sense-crossref-headword,
+.sense-type,
+.sense-type-abbr,
+.slot,
+.summarydef-minor,
+.usage-type-abbr,
+.variant-headword,
+.variant-summary,
+.variantref,
+.variantref-entry-type,
+.variantref-form,
+.complexentryform    { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.crossref            { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.crossref > .xitem + .xitem :before { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.crossref-targets            { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.crossref-targets > .xitem + .xitem :before { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.crossref-type            { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.crossref-type > .xitem + .xitem :before { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.crossrefs		   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.crossreftype        { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.crossreftype :after { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.definition-minor	   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.definition-sub	   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.definition          { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.entry-type-abbr-sub { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.entry               { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.entryref-primary-minor { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.entryref-type-minor { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.example-minor	   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.example-sub	   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.example             { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.example :after      { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.example :before     { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.example > .xitem + .xitem :before { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.grammatical-info	   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.grammatical-info-minor { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.grammatical-info-sub { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.grammaticalinfo     { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.grammaticalinfo :after { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.headword-minor	   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.headword-sub	   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.headword            { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.headword :after     { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.headword > .xitem + .xitem :before { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.headwordminor       { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.headwordminor :after { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.headwordminor > .xitem + .xitem :before { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.letHead             { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.letter              { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.LexEntrypublishStemParaHomographNumber :after { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.LexEntrypublishStemParaHomographNumber {font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.LexEntryRef-publishRootSubEntryType-RootSubEntryType { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.LexEntryType-publishRootMinorEntryType-AbbreviationPub { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.LexEntryType-publishStemMinorEntryType-AbbreviationPub { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.lexref-targets 	   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.lexref-targets-sub  { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.lexref-type	   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.lexref-type-sub	   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.lexreftype          { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.lexreftype :after   { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.mainentryref        { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.mainentryref > .xitem + .xitem :before { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.mainentryrefminor   { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.mainentryrefminor > .xitem + .xitem :before { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.partofspeech        { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.partofspeech-minor  { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.partofspeech-sub    { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.pictureCaption      { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.primaryrefs-minor   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.pronunciation-minor { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.pronunciation-sub   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.pronunciation       { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.pronunciationminor  { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.pronunciationminor > .xitem + .xitem :before { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.revEntry            { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.revHeader           { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.scientific-name     { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.semantic-domain-abbr-sub { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.semantic-domain-name-sub { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.semantic-domains-sub { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.sense-crossref      { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.sense-crossref-sub  { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.sense               { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.sensecomplexentryform { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.sensecrossref       { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.sensecrossref > .xitem + .xitem :before { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.sensemainentryref   { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.sensemainentryref > .xitem + .xitem :before { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.slot-name           { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.subentry            { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.subentry-type       { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.translation-minor   { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.translation-sub     { font-family: "Charis SIL", serif;  color: rgb(0,0,0); }
+.translation         { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.translation :after  { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.translation > .xitem + .xitem :before { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.variantrefform      { font-family: "Charis SIL", serif; color: rgb(0,0,0); }
+.xhomographnumber { color: rgb(0,0,0); }
+.xlanguagetag     { color: rgb(0,0,0); }
+.xsensenumber     { color: rgb(0,0,0); }

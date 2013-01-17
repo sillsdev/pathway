@@ -443,6 +443,8 @@ namespace SIL.PublishingSolution
 
         private void ValidateLineHeight(StyleAttribute styleAttributeInfo)
         {
+            if (styleAttributeInfo.StringValue.ToLower() == "inherit")
+                return;
             string attrValue = DeleteSeperator(styleAttributeInfo.StringValue);
             if (styleAttributeInfo.StringValue.ToLower() == "none" || styleAttributeInfo.StringValue.ToLower() == "normal")
             {
