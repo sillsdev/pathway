@@ -374,10 +374,28 @@ namespace Test.PsExport
             {
                 new ODet(ODet.Def, "1st master", "mat21-23.odt", ODet.Content, "//style:style[1]/@style:master-page-name", "masterPage"),
                 new ODet(ODet.Def, "page layout", "mat21-23.odt", ODet.Styles, "//style:master-page[@style:name='{masterPage}']/@style:page-layout-name", "pageLayout"),
+                new ODet(ODet.Chk, "page height", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:page-height", "22.9cm"),
+                new ODet(ODet.Chk, "page width", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:page-width", "16.2cm"),
                 new ODet(ODet.Chk, "page top margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-top", "1.15cm"),
                 new ODet(ODet.Chk, "page left margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-left", "1.5cm"),
                 new ODet(ODet.Chk, "page right margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-right", "1.5cm"),
                 new ODet(ODet.Chk, "page bottom margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-bottom", "1.15cm"),
+                new ODet(ODet.Chk, "title section", "mat21-23.odt", ODet.Content, "//office:body/office:text/*[5]/@text:name", "Sect_scrBook"),
+                new ODet(ODet.Chk, "book title", "mat21-23.odt", ODet.Content, "//text:span[@text:style-name='scrBookName_scrBook_scrBody']", "Mateo"),
+                new ODet(ODet.Chk, "book code", "mat21-23.odt", ODet.Content, "//text:span[@text:style-name='scrBookCode_scrBook_scrBody']", "MAT"),
+                new ODet(ODet.Chk, "2nd secondary title", "mat21-23.odt", ODet.Content, "//text:p[@text:style-name='TitleSecondary_TitleMain_scrBook_scrBody'][2]", "Lɔ́wanlɩ́n"),
+                new ODet(ODet.Chk, "main title center", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@fo:text-align", "center"),
+                new ODet(ODet.Chk, "main title keep with next", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@fo:keep-with-next", "always"),
+                new ODet(ODet.Chk, "main title top pad", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@fo:padding-top", "36pt"),
+                new ODet(ODet.Chk, "main title bottom pad", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@fo:padding-bottom", "12pt"),
+                new ODet(ODet.Chk, "main title left margin", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@fo:margin-left", "0pt"),
+                new ODet(ODet.Chk, "main title indent", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@fo:text-indent", "0pt"),
+                new ODet(ODet.Chk, "main title orphans", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@fo:orphans", "5"),
+                new ODet(ODet.Chk, "main title font weight", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@fo:font-weight", "700"),
+                new ODet(ODet.Chk, "main title complex font weight", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@style:font-weight-complex", "700"),
+                new ODet(ODet.Chk, "main title style", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@fo:font-style", "normal"),
+                new ODet(ODet.Chk, "main title font size", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@fo:font-size", "18pt"),
+                new ODet(ODet.Chk, "main title complex font size", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleMain_scrBook_scrBody']//@style:font-size-complex", "18pt"),
             };
 
             ExportTest("T4", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);

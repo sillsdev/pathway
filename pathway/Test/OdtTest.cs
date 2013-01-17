@@ -123,7 +123,7 @@ namespace Test
                 var resultStr = res.NodeType == XmlNodeType.Element ? res.InnerText : res.Value;
                 if (detail.Op == ODet.Def)
                     variables[detail.Res] = resultStr;
-                else if (resultStr != ToPt(detail.Res))
+                else if (ToPt(resultStr) != ToPt(detail.Res))
                 {
                     Console.WriteLine(string.Format("{0} {1} failure. Expected {2} but was {3}", fileKey, detail.Msg, ToPt(detail.Res), resultStr));
                     errorCount += 1;
@@ -135,11 +135,15 @@ namespace Test
         private static string ToPt(string p)
         {
             if (p.EndsWith("cm"))
-            {
+            {   // convert centimeters to points and round to 4 places
                 var v = double.Parse(p.Substring(0, p.Length - 2));
                 v *= 72.0 / 2.54;
-                var vstr = string.Format("{0:0.000000}", v);
-                return string.Format("{0}pt", vstr.Substring(0, vstr.Length -1));
+                return string.Format("{0:0.0000}pt", v);
+            }
+            if (p.EndsWith("pt"))
+            {   // return value rounded to 4 places
+                var v = double.Parse(p.Substring(0, p.Length - 2));
+                return string.Format("{0:0.0000}pt", v);
             }
             return p;
         }
