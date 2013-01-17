@@ -1208,6 +1208,14 @@ namespace SIL.PublishingSolution
                 {
                     retValue = "#" + attributeStringValue[1] + attributeStringValue[1] + attributeStringValue[2] + attributeStringValue[2] + attributeStringValue[3] + attributeStringValue[3];
                 }
+                if (colorLen == 3)
+                {
+                    retValue = "#" + attributeStringValue[1] + attributeStringValue[2] + "0000";
+                }
+                if (colorLen == 5)
+                {
+                    retValue = "#" + attributeStringValue[1] + attributeStringValue[2]  + attributeStringValue[3] + attributeStringValue[4] + "00";
+                }
                 if (retValue.Length != 7)
                 {
                     throw new Exception("Parameter Length - Not Valid");
