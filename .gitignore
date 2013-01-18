@@ -10,6 +10,7 @@
 ./pathway_*
 pathway/_*
 pathway/Releases
+pathway/Reference
 pathway/bin
 pathway/debian/files
 pathway/debian/pathway-etc/values.xml

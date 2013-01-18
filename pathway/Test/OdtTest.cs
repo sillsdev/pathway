@@ -145,7 +145,7 @@ namespace Test
                 var v = double.Parse(p.Substring(0, p.Length - 2));
                 return string.Format("{0:0.0000}pt", v);
             }
-            return p;
+            return p.Trim();
         }
 
         private static string SubstituteVariables(string p, Dictionary<string, string> variables)

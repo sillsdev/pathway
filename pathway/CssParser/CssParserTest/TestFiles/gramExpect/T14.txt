@@ -1,1 +1,0 @@
-(PAGE (PSEUDO left) (REGION left (PROPERTY margin-right 1 cm) (PROPERTY content flow ( locator )) (PROPERTY width .5 cm))) (PAGE (PSEUDO right) (REGION right (PROPERTY margin-left 1 cm) (PROPERTY width .5 cm) (PROPERTY content flow ( locator ))))

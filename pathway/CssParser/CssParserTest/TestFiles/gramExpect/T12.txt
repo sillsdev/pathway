@@ -1,1 +1,0 @@
-(RULE (CLASS variant-inflection (ATTRIB class HASVALUE last-of-type)) (PSEUDO after) (PROPERTY content ') '))

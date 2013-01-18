@@ -1,1 +1,0 @@
-(RULE (CLASS variant-spelling) (PSEUDO before) (PROPERTY content "also ") (PROPERTY font-family serif) (PROPERTY font-weight normal) (PROPERTY color Black))

@@ -1,1 +1,0 @@
-(RULE (CLASS sense (ATTRIB title)) (PSEUDO before) (PROPERTY font-weight bold) (PROPERTY content " " attr ( title ) ") "))
