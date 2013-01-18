@@ -1071,7 +1071,7 @@ namespace SIL.PublishingSolution
                     _pseudoSingleSpace = false;
                     _isWhiteSpace = false;
 
-                    content = content.Replace("//", @"<text:line-break/>");
+                    content = content.Replace(" // ", @" <text:line-break/> ");
                     if (content.IndexOf(@"text:line-break/") >= 0)
                     {
                         _writer.WriteRaw(content);
