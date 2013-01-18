@@ -975,7 +975,7 @@ namespace SIL.PublishingSolution
                         _is1stBookFound = true;
                     }
                 }
-                else if (_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen 1") == 0)
+                else if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) || (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0))
                 {
                     //_strBook = content;
                     content = content.TrimEnd() + " ";

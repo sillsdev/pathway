@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jan-07-2013 for TD-3344(Pictures come out in wrong place)
+&apos;Changed On Jan-18-2013 for TD-3358(Scripture is starting each chapter on a new page.)
 
 Dim CanSave as Boolean
 
@@ -10,7 +10,7 @@ Sub StartDontForget
 On Error GoTo MyError:
 	TurnOffNonPrintingCharacters() 
 	
-	AlingOverlappingImages()
+	&apos;AlingOverlappingImages()
 
 	UpdateTOC()
 	

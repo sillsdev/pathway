@@ -3227,13 +3227,13 @@ namespace SIL.Tool
         public void InsertKeepWithNextOnStyles(string _cssFileNameWithPath)
         {
             TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
-            tw.WriteLine(".Section_Head {");
-            tw.WriteLine("page-break-after:avoid;");
-            tw.WriteLine("}");
+            //tw.WriteLine(".Section_Head {");
+            //tw.WriteLine("page-break-after:avoid;");
+            //tw.WriteLine("}");
 
-            tw.WriteLine(".Chapter_Number {");
-            tw.WriteLine("page-break-after:avoid;");
-            tw.WriteLine("}");
+            //tw.WriteLine(".Chapter_Number {");
+            //tw.WriteLine("page-break-after:avoid;");//page-break-after:avoid;
+            //tw.WriteLine("}");
 
             //tw.WriteLine(".Chapter_Number1 {");
             //tw.WriteLine("page-break-after:avoid;");
@@ -3243,15 +3243,14 @@ namespace SIL.Tool
             //tw.WriteLine("page-break-after:avoid;");
             //tw.WriteLine("}");
 
-            tw.WriteLine(".Parallel_Passage_Reference {");
-            tw.WriteLine("page-break-after:avoid;");
-            tw.WriteLine("}");
+            //tw.WriteLine(".Parallel_Passage_Reference {");
+            //tw.WriteLine("page-break-after:avoid;");
+            //tw.WriteLine("}");
 
             tw.WriteLine(".hideDiv {");
             tw.WriteLine("page-break-before:always;");
             tw.WriteLine("display: none;");
             tw.WriteLine("}");
-            //page-break-before:always
 
             tw.Close();
         }
