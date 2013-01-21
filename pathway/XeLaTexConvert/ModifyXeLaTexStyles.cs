@@ -130,6 +130,16 @@ namespace SIL.PublishingSolution
             set { _xelatexDocumentOpenClosedRequired = value; }
         }
 
+
+        public string Title { get; set; }
+        public string Creator { get; set; }
+        public string Description { get; set; }
+        public string Publisher { get; set; }
+        public string Relation { get; set; }
+        public string Coverage { get; set; }
+        public string Rights { get; set; }
+        public string Format { get; set; }
+        public string Source { get; set; }
         #endregion
 
         public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty,
@@ -505,12 +515,167 @@ namespace SIL.PublishingSolution
 
             if (Convert.ToBoolean(TitleInCoverPage))
             {
-                tableOfContent += "\\title{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
-                tableOfContent += "\\author{ " + Param.GetMetadataValue(Param.Creator) + "} \r\n";
-                string copyrightContent = Param.GetMetadataValue(Param.CopyrightHolder);
-                //copyrightContent = copyrightContent.Replace("©", "");
-                //tableOfContent += "\\subtitle{ " + copyrightContent + "} \r\n";
-                tableOfContent += "\\maketitle \r\n";
+                string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename);
+
+                string logoFileName = string.Empty;
+                if (Param.GetOrganization().StartsWith("SIL"))
+                {
+                    if (ProjectType.ToLower() == "dictionary")
+                    {
+                        logoFileName = "SIL-Logo-No-Tag-Color.gif";
+                    }
+                    else
+                    {
+                        logoFileName = "WBT_H_RGB_red.png";
+                    }
+                }
+                else if (Param.GetOrganization().StartsWith("Wycliffe"))
+                {
+                    logoFileName = "WBT_H_RGB_red.png";
+                }
+                copyRightFilePath = Path.GetDirectoryName(copyRightFilePath);
+
+                copyRightFilePath = Path.Combine(copyRightFilePath, logoFileName);
+                if (File.Exists(copyRightFilePath))
+                {
+                    if (Common.UnixVersionCheck())
+                    {
+                        string logoTitleFileName = logoFileName;
+                        logoTitleFileName = Path.Combine(Path.GetTempPath(), logoTitleFileName);
+                        if (File.Exists(copyRightFilePath))
+                        {
+                            File.Copy(copyRightFilePath, logoTitleFileName, true);
+                            File.Copy(copyRightFilePath, Path.Combine(_projectPath, logoFileName), true);
+                            File.Copy(copyRightFilePath, Path.Combine(xeLaTexInstallationPath, logoFileName), true);
+                        }
+                    }
+                    else
+                    {
+                        if (logoFileName.IndexOf("gif") > 0)
+                        {
+                            try
+                            {
+                                // Load the image.
+
+                                System.Drawing.Image image1 = System.Drawing.Image.FromFile(copyRightFilePath);
+                                // Save the image in JPEG format.
+                                logoFileName = logoFileName.Replace(".gif", ".jpg");
+                                image1.Save(Path.Combine(Path.GetTempPath(), logoFileName), System.Drawing.Imaging.ImageFormat.Jpeg);
+                            }
+                            catch { }
+
+                            if (File.Exists(Path.Combine(Path.GetTempPath(), logoFileName)))
+                            {
+                                File.Copy(Path.Combine(Path.GetTempPath(), logoFileName), Path.Combine(_projectPath, logoFileName), true);
+                                File.Copy(Path.Combine(Path.GetTempPath(), logoFileName), Path.Combine(xeLaTexInstallationPath, logoFileName), true);
+                            }
+                        }
+                        else
+                        {
+                            string logoTitleFileName = logoFileName;
+                            logoTitleFileName = Path.Combine(Path.GetTempPath(), logoTitleFileName);
+                            if (File.Exists(copyRightFilePath))
+                            {
+                                File.Copy(copyRightFilePath, logoTitleFileName, true);
+                                File.Copy(copyRightFilePath, Path.Combine(_projectPath, logoFileName), true);
+                                
+                                File.Copy(copyRightFilePath, Path.Combine(xeLaTexInstallationPath, logoFileName), true);
+                            }
+                        }
+                    }
+
+                }
+
+
+                tableOfContent += "\\begin{titlepage}\r\n";
+
+                tableOfContent += "\\begin{center}\r\n";
+
+
+
+                tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
+
+                tableOfContent += "\\vspace{140 mm} \r\n";
+
+                tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Publisher) + "}\\\\[0.5cm] \r\n";
+
+                tableOfContent += "\\includegraphics[width=0.05 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";
+
+                //tableOfContent += "% Title\r\n";
+                //tableOfContent += "\\HRule \\[0.4cm]\r\n";
+                //tableOfContent += "{ \\huge \\bfseries Lager brewing techniques}\\[0.4cm]\r\n";
+
+                //tableOfContent += "\\HRule \\[1.5cm]\r\n";
+
+                //tableOfContent += "% Author and supervisor\r\n";
+                //tableOfContent += "\\begin{minipage}{0.4\\textwidth}\r\n";
+                //tableOfContent += "\\begin{flushleft} \\large\r\n";
+                //tableOfContent += "John \\textsc{Smith}\r\n";
+                //tableOfContent += "\\end{flushleft}\r\n";
+                //tableOfContent += "\\end{minipage}\r\n";
+                //tableOfContent += "\\begin{minipage}{0.4\textwidth}\r\n";
+                //tableOfContent += "\\begin{flushright} \\large\r\n";
+                //tableOfContent += "\\emph{Supervisor:} \\ \r\n";
+                //tableOfContent += "Dr.~Mark \\textsc{Brown} \r\n";
+                //tableOfContent += "\\end{flushright} \r\n";
+                //tableOfContent += "\\end{minipage} \r\n";
+
+                //tableOfContent += "\\vfill \r\n";
+
+                //tableOfContent += "% Bottom of the page \r\n";
+                //tableOfContent += "{\\large \\today} \r\n";
+
+                tableOfContent += "\\end{center} \r\n";
+
+                tableOfContent += "\\end{titlepage} \r\n";
+
+
+                ////////tableOfContent += "\\font\\TitlePageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
+                ////////tableOfContent += "\\title{" + "\\TitlePageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n " + "} \r\n";
+
+                //string organization;
+                //try
+                //{
+                //    // get the organization
+                //    organization = Param.Value["Organization"];
+                //}
+                //catch (Exception)
+                //{
+                //    // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                //    // but just in case, specify a default org.
+                //    organization = "SIL International";
+                //}
+
+                //string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+                //Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
+                //// Title (book title in Configuration Tool UI / dc:title in metadata)
+                //Title = Param.GetMetadataValue(Param.Title, organization) ?? ""; // empty string if null / not found
+                //// Creator (dc:creator))
+                //Creator = Param.GetMetadataValue(Param.Creator, organization) ?? ""; // empty string if null / not found
+                //// information
+                //Description = Param.GetMetadataValue(Param.Description, organization) ?? ""; // empty string if null / not found
+                //// Source
+                //Source = Param.GetMetadataValue(Param.Source, organization) ?? ""; // empty string if null / not found
+                //// Format
+                //Format = Param.GetMetadataValue(Param.Format, organization) ?? ""; // empty string if null / not found
+                //// Publisher
+                //Publisher = Param.GetMetadataValue(Param.Publisher, organization) ?? ""; // empty string if null / not found
+                //// Coverage
+                //Coverage = Param.GetMetadataValue(Param.Coverage, organization) ?? ""; // empty string if null / not found
+                //// Rights (dc:rights)
+                //Rights = Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
+
+
+
+                //// embed fonts
+
+                //tableOfContent += "\\author{ " + Param.GetMetadataValue(Param.Publisher) + "} \r\n";
+
+                ////tableOfContent += "\\author{ " + Param.GetMetadataValue(Param.Creator) + "} \r\n";
+                //string copyrightContent = Param.GetMetadataValue(Param.CopyrightHolder);
+                ////copyrightContent = copyrightContent.Replace("©", "");
+                ////tableOfContent += "\\subtitle{ " + copyrightContent + "} \r\n";
+                //tableOfContent += "\\maketitle \r\n";
                 tableOfContent += "\\thispagestyle{empty} \r\n";
 
                 tableOfContent += "\\newpage \r\n";
