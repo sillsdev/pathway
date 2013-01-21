@@ -261,8 +261,8 @@ namespace Test.epubConvert
             zf.ExtractZip(result, FileOutput("EpubIndentFileComparison"), ".*");
             var zfExpected = new FastZip();
             result = result.Replace("Output", "Expected");
-            zfExpected.ExtractZip(result, FileExpected("EpubIndentFileComparison"), ".*");
-            FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_.xhtml");
+            zfExpected.ExtractZip(result, FileOutput("EpubIndentFileComparisonExpect"), ".*");
+            FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_.xhtml");
             string directoryExist = FileExpected("EpubIndentFileComparison");
 
             if (Directory.Exists(directoryExist))
@@ -278,6 +278,13 @@ namespace Test.epubConvert
             string xhtmlOutput = FileOutput(file);
             string xhtmlExpected = FileExpected(file);
             TextFileAssert.AreEqual(xhtmlOutput, xhtmlExpected, file + " in epub ");
+        }
+
+        private void FileCompare(string file1, string file2)
+        {
+            string xhtmlOutput = FileOutput(file1);
+            string xhtmlExpected = FileOutput(file2);
+            TextFileAssert.AreEqual(xhtmlOutput, xhtmlExpected, file1 + " in epub ");
         }
 
         /// <summary>
