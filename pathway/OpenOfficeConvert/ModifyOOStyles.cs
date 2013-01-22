@@ -816,7 +816,7 @@ namespace SIL.PublishingSolution
                     SetAttribute("right", "style:horizontal-pos");
                     SetAttribute("paragraph", "style:horizontal-rel");
                 }
-                else if (position == "top")
+                else if (position == "top" || position == "bottom")
                 {
                     _nameElement = (XmlElement)node.ChildNodes[0];
                     SetAttribute("none", "style:wrap");

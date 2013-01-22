@@ -898,6 +898,43 @@ namespace SIL.PublishingSolution
             InsertChapterNumber(projInfo.TempOutputFolder);
             InsertVariableOnLetHead(projInfo.TempOutputFolder);
             InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
+            InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
+        }
+
+        public static void InsertPublisherOnTitlePage(string tempOutputFolder)
+        {
+            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.PreserveWhitespace = false;
+            xdoc.Load(filename);
+
+            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
+            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+            nsmgr1.AddNamespace("draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0");
+
+            string xpath = "//text:p[@text:style-name='logo_div_dicBody']";
+            if (publicationInfo.ProjectInputType.ToLower() == "scripture")
+            {
+                xpath = "//text:p[@text:style-name='logo_div_scrBody']";
+            }
+
+            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
+            if (list != null)
+            {
+                foreach (XmlNode xmlNode in list)
+                {
+                    XmlNode FirstNode = xmlNode.FirstChild.CloneNode(true);
+                    xmlNode.RemoveChild(xmlNode.FirstChild);
+                    xpath = "//draw:frame/draw:text-box";
+                    XmlNode list1 = xdoc.SelectSingleNode(xpath, nsmgr1);
+
+                    list1.InnerXml = FirstNode.OuterXml.Replace("text:span", "text:p") + @"<text:p text:style-name=""Illustration"">" + list1.InnerXml + "</text:p>";
+                }
+            }
+            xdoc.PreserveWhitespace = true;
+            xdoc.Save(filename);
         }
 
         private static void InsertKeepWithNextForEntryOnCondition(string tempOutputFolder)

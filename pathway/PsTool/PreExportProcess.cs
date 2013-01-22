@@ -418,6 +418,108 @@ namespace SIL.Tool
             return sb.ToString();
         }
 
+        public XmlNode LoTitlePage(XmlDocument xmldoc)
+        {
+            XmlNode mainNode = xmldoc.CreateElement("div");
+            XmlNode tNode = xmldoc.CreateElement("div");
+            XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+            xmlAttribute.Value = "title";
+            tNode.Attributes.Append(xmlAttribute);
+            tNode.InnerText = Param.GetMetadataValue(Param.Title);
+            mainNode.AppendChild(tNode);
+            XmlNode t4Node = xmldoc.CreateElement("div");
+            XmlAttribute xmlAttribute2 = xmldoc.CreateAttribute("class");
+            xmlAttribute2.Value = "logo";
+            t4Node.Attributes.Append(xmlAttribute2);
+
+            XmlNode t3Node = xmldoc.CreateElement("span");
+            XmlAttribute xmlAttribute1 = xmldoc.CreateAttribute("class");
+            xmlAttribute1.Value = "publisher";
+            t3Node.InnerText = Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher));
+            t3Node.Attributes.Append(xmlAttribute1);
+            t4Node.AppendChild(t3Node);
+
+            XmlNode t5Node = xmldoc.CreateElement("img");
+            XmlAttribute xmlAttribute3 = xmldoc.CreateAttribute("src");
+            XmlAttribute xmlAttribute4 = xmldoc.CreateAttribute("alt");
+            if (Param.GetOrganization().StartsWith("SIL"))
+            {
+
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    // dictionary - SIL logo
+                    xmlAttribute3.Value = "SIL-Logo-No-Tag-Color.gif";
+                    xmlAttribute4.Value = "SIL International Logo";
+                }
+                else
+                {
+                    // Scripture - WBT logo
+                    xmlAttribute3.Value = "WBT_H_RGB_red.png";
+                    xmlAttribute4.Value = "Wycliffe Logo";
+                }
+            }
+            else if (Param.GetOrganization().StartsWith("Wycliffe"))
+            {
+                xmlAttribute3.Value = "WBT_H_RGB_red.png";
+                xmlAttribute4.Value = "Wycliffe Logo";
+            }
+            t5Node.Attributes.Append(xmlAttribute3);
+            t5Node.Attributes.Append(xmlAttribute4);
+            t4Node.AppendChild(t5Node);
+            mainNode.AppendChild(t4Node);
+            return mainNode;
+        }
+
+        public XmlNode LoTitlePage_Old(XmlDocument xmldoc)
+        {
+            XmlNode mainNode = xmldoc.CreateElement("div");
+            XmlNode tNode = xmldoc.CreateElement("div");
+            XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+            xmlAttribute.Value = "title";
+            tNode.Attributes.Append(xmlAttribute);
+            tNode.InnerText = Param.GetMetadataValue(Param.Title);
+            mainNode.AppendChild(tNode);
+            XmlNode t3Node = xmldoc.CreateElement("div");
+            XmlAttribute xmlAttribute1 = xmldoc.CreateAttribute("class");
+            xmlAttribute1.Value = "publisher";
+            t3Node.InnerText = Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher));
+            t3Node.Attributes.Append(xmlAttribute1);
+            mainNode.AppendChild(t3Node);
+            XmlNode t4Node = xmldoc.CreateElement("div");
+            XmlAttribute xmlAttribute2 = xmldoc.CreateAttribute("class");
+            xmlAttribute2.Value = "logo";
+            t4Node.Attributes.Append(xmlAttribute2);
+            XmlNode t5Node = xmldoc.CreateElement("img");
+            XmlAttribute xmlAttribute3 = xmldoc.CreateAttribute("src");
+            XmlAttribute xmlAttribute4 = xmldoc.CreateAttribute("alt");
+            if (Param.GetOrganization().StartsWith("SIL"))
+            {
+
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    // dictionary - SIL logo
+                    xmlAttribute3.Value = "SIL-Logo-No-Tag-Color.gif";
+                    xmlAttribute4.Value = "SIL International Logo";
+                }
+                else
+                {
+                    // Scripture - WBT logo
+                    xmlAttribute3.Value = "WBT_H_RGB_red.png";
+                    xmlAttribute4.Value = "Wycliffe Logo";
+                }
+            }
+            else if (Param.GetOrganization().StartsWith("Wycliffe"))
+            {
+                xmlAttribute3.Value = "WBT_H_RGB_red.png";
+                xmlAttribute4.Value = "Wycliffe Logo";
+            }
+            t5Node.Attributes.Append(xmlAttribute3);
+            t5Node.Attributes.Append(xmlAttribute4);
+            t4Node.AppendChild(t5Node);
+            mainNode.AppendChild(t4Node);
+            return mainNode;
+        }
+
         /// <summary>
         /// Copies the Creative Commons images, etc. from the Copyrights folder into the temp output folder
         /// </summary>
@@ -568,6 +670,34 @@ namespace SIL.Tool
             return sb.ToString();
         }
 
+        // Returns the language information for this document as an XHTML snippet (not well formed). This is meant to be used
+        // in conjunction with the StreamReplaceInFile() call in CreateCopyrightPage().
+        private string GetLanguageInfoForLO()
+        {
+            var sb = new StringBuilder();
+            sb.Append("div id='LanguageInformation' class='Front_Matter' dir='ltr'>");
+            // append what we know about this language, including a hyperlink to the ethnologue.
+            string languageCode = GetLanguageCodeForLO();
+            if (languageCode.Length > 0)
+            {
+                var languageName = Common.GetLanguageName(languageCode);
+                sb.Append("<span class='LHeading'>ABOUT THIS DOCUMENT</span>");
+                sb.Append("<span class='LText'>This document contains data written in ");
+                if (languageName.Length > 0)
+                {
+                    sb.Append(languageName);
+                }
+                sb.Append("[");
+                sb.Append(languageCode);
+                sb.Append("]. For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
+                sb.Append(languageCode.Substring(0, 3));
+                sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
+                sb.Append(languageCode.Substring(0, 3));
+                sb.Append("</a>.</span> ");
+            }
+            return sb.ToString();
+        }
+
         // Returns the copyright information for this document as an XHTML snippet (not well formed). This is meant to be used
         // in conjunction with the StreamReplaceInFile() call in CreateCopyrightPage().
         private string GetCopyrightInfo()
@@ -587,6 +717,29 @@ namespace SIL.Tool
             {
                 sb.Append(rights);
                 sb.Append("</p> ");
+            }
+            return sb.ToString();
+        }
+
+        // Returns the copyright information for this document as an XHTML snippet (not well formed). This is meant to be used
+        // in conjunction with the StreamReplaceInFile() call in CreateCopyrightPage().
+        private string GetCopyrightInfoForLO()
+        {
+            var sb = new StringBuilder();
+            sb.Append("div id='OtherCopyrights' class='Front_Matter' dir='ltr'><span class='LText'>");
+            // append any other copyright information to the list
+            string contributors = Param.GetMetadataValue(Param.Contributor);
+            if (contributors.Trim().Length > 0)
+            {
+                sb.Append("(");
+                sb.Append(contributors);
+                sb.Append("), ");
+            }
+            string rights = Param.GetMetadataValue(Param.CopyrightHolder);
+            if (rights.Trim().Length > 0)
+            {
+                sb.Append(rights);
+                sb.Append("</span> ");
             }
             return sb.ToString();
         }
@@ -1074,11 +1227,7 @@ namespace SIL.Tool
                 XmlNode titleNode = null;
                 if (_includeTitlePage)
                 {
-                    titleNode = xmldoc.CreateElement("div");
-                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
-                    xmlAttribute.Value = "title";
-                    titleNode.Attributes.Append(xmlAttribute);
-                    titleNode.InnerText = Param.GetMetadataValue(Param.Title);
+                    titleNode = LoTitlePage(xmldoc);
                 }
 
                 if (titleNode != null)
@@ -1090,46 +1239,49 @@ namespace SIL.Tool
                         frontMatterXHTMLContent = frontMatterXHTMLContent;
                     }
                     _projInfo.IsFrontMatterEnabled = true;
-                    frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
+                    frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;} .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}";
                 }
                 //END OF TITLE
                 //COPYRIGHT 
+                XmlNode copyRightContentNode = null;
                 if (File.Exists(copyRightFilePath))
                 {
-                    if (Common.UnixVersionCheck())
-                    {
-                        string draftTempFileName = Path.GetFileName(copyRightFilePath);
-                        draftTempFileName = Path.Combine(Path.GetTempPath(), draftTempFileName);
-                        if (!File.Exists(draftTempFileName))
-                        {
-                            File.Copy(copyRightFilePath, draftTempFileName, true);
-                            Common.RemoveDTDForLinuxProcess(draftTempFileName);
-                        }
-                        copyRightFilePath = draftTempFileName;
-                    }
-
-                    XmlDocument crdoc = Common.DeclareXMLDocument(true);
-                    crdoc.Load(copyRightFilePath);
-                    XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
-
-
-                    XmlNode copyRightContentNode = null;
                     if (_copyrightInformation)
                     {
-                        copyRightContentNode = xmldoc.CreateElement("div");
-                        XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
-                        xmlAttribute.Value = "copyright";
-                        copyRightContentNode.Attributes.Append(xmlAttribute);
 
-                        copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", " ").Replace("\t", "");
+                        string draftTempFileName = Path.Combine(Path.GetTempPath(), Path.GetFileName(copyRightFilePath));
+
+                        File.Copy(copyRightFilePath, draftTempFileName, true);
+                        Common.StreamReplaceInFile(draftTempFileName,
+                                                   "div id='LanguageInformation' class='Front_Matter' dir='ltr'>",
+                                                   GetLanguageInfoForLO());
+                        Common.StreamReplaceInFile(draftTempFileName,
+                                                   "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>",
+                                                   GetCopyrightInfoForLO());
+                        Common.StreamReplaceInFile(draftTempFileName, "<h1>", "<span class='LHeading'>");
+                        Common.StreamReplaceInFile(draftTempFileName, "</h1>", "</span>");
+                        Common.StreamReplaceInFile(draftTempFileName, "<p><em>", "<span class='LText'>");
+                        Common.StreamReplaceInFile(draftTempFileName, "</em></p>", "</span>");
+
+                        XmlDocument xDoc = Common.DeclareXMLDocument(false);
+                        XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
+                        namespaceManager.AddNamespace("html", "http://www.w3.org/1999/xhtml");
+                        xDoc.Load(draftTempFileName);
+                        XmlNode bodyNode = xDoc.SelectSingleNode("//html:body", namespaceManager);
+
+                        copyRightContentNode = xmldoc.CreateElement("div");
+                        
+                        XmlNode importNode = copyRightContentNode.OwnerDocument.ImportNode(bodyNode, true);
+
+                        copyRightContentNode.InnerXml = importNode.InnerXml;
                     }
 
-                    if (copyRightFile.Count > 0 && _copyrightInformation)
+                    if (copyRightContentNode != null && _copyrightInformation)
                     {
-                        frontMatterXHTMLContent = frontMatterXHTMLContent + copyRightContentNode.OuterXml;
+                        frontMatterXHTMLContent = frontMatterXHTMLContent + "<div id='copyright' class='copyright' dir='ltr'>.</div>" + copyRightContentNode.OuterXml + "<div id='dummyTOC' class='dummyTOC' dir='ltr'>.</div>";
                         _projInfo.IsFrontMatterEnabled = true;
 
-                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:12pt;page-break-after: always;}.tableofcontents{text-align: left; font-size:12pt;page-break-after: always;} ";
+                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:1pt;visible:hidden;}.LHeading{font-size:18pt;font-weight:bold;line-height=14pt;margin-bottom:.25in;}.LText{font-size:12pt;font-style:italic}.LText:before{content: \"\\2028\"}.dummyTOC{text-align: left; font-size:1pt;visible:hidden;page-break-after: always;} ";
                     }
                 }
                 //END OF COPYRIGHT 
@@ -2521,9 +2673,9 @@ namespace SIL.Tool
         public string GetLanguageCode()
         {
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
-            xDoc.Load(_xhtmlFileNameWithPath);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(_xhtmlFileNameWithPath);
             XmlNode node;
             if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
@@ -2569,6 +2721,70 @@ namespace SIL.Tool
                         if (atts["lang"] != null)
                             return (atts["lang"].Value);
                         else if(atts["xml:lang"] != null)
+                            return (atts["xml:lang"].Value);
+                    }
+                }
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Returns the "main" language code in use by the document.
+        /// </summary>
+        /// <returns></returns>
+        public string GetLanguageCodeForLO()
+        {
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(_xhtmlFileNameWithPath);
+            XmlNodeList nodes;
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                // dictionary
+                try
+                {
+                    nodes = xDoc.SelectNodes("//span[@class='headword']", namespaceManager);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    nodes = null;
+                }
+                if (nodes != null)
+                {
+                    XmlNode node = nodes[0];
+                    var atts = node.Attributes;
+                    if (atts != null)
+                    {
+                        if (atts["lang"] != null)
+                            return (atts["lang"].Value);
+                        else if (atts["xml:lang"] != null)
+                            return (atts["xml:lang"].Value);
+                    }
+                }
+            }
+            else
+            {
+                // scripture
+                try
+                {
+                    nodes = xDoc.SelectNodes("//span[@class='Chapter_Number']", namespaceManager);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    nodes = null;
+                }
+                if (nodes != null)
+                {
+                    XmlNode node = nodes[0];
+                    var atts = node.Attributes;
+                    if (atts != null)
+                    {
+                        if (atts["lang"] != null)
+                            return (atts["lang"].Value);
+                        else if (atts["xml:lang"] != null)
                             return (atts["xml:lang"].Value);
                     }
                 }
@@ -3239,9 +3455,9 @@ namespace SIL.Tool
             //tw.WriteLine("page-break-after:avoid;");
             //tw.WriteLine("}");
 
-            //tw.WriteLine(".Paragraph {");
-            //tw.WriteLine("page-break-after:avoid;");
-            //tw.WriteLine("}");
+            tw.WriteLine(".Front_Matter {");
+            tw.WriteLine("margin-left : 12pt;margin-right: 12pt;text-align: left;");
+            tw.WriteLine("}");
 
             //tw.WriteLine(".Parallel_Passage_Reference {");
             //tw.WriteLine("page-break-after:avoid;");

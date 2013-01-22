@@ -407,6 +407,7 @@
       <style:text-properties style:font-name-asian="Yi plus Phonetics" style:font-name-complex="Tahoma1" />
     </style:style>
     <style:style style:name="Frame_20_contents" style:display-name="Frame contents" style:family="paragraph" style:parent-style-name="headerFontStyleName" style:class="extra">
+      <style:paragraph-properties fo:text-align="center" style:justify-single-word="false" />
       <style:text-properties style:font-name="Times New Roman" fo:font-weight="regular" fo:font-size="11" />
     </style:style>
     <style:style style:family="graphic" style:name="Graphics0">
@@ -598,27 +599,19 @@
     <style:page-layout style:name="pm13">
       <style:page-layout-properties fo:page-width="450pt" fo:page-height="630pt" fo:margin-top="36pt" fo:margin-right="36pt" fo:margin-bottom="36pt" fo:margin-left="36pt" />
     </style:page-layout>
+    <style:page-layout style:name="pm7">
+      <style:page-layout-properties fo:page-width="450pt" fo:page-height="630pt" fo:margin-top="36pt" fo:margin-right="36pt" fo:margin-bottom="36pt" fo:margin-left="36pt">
+        <style:background-image />
+        <style:footnote-sep style:width="0.0071in" style:line-style="solid" style:distance-before-sep="4pt" style:distance-after-sep="4pt" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
+      </style:page-layout-properties>
+    </style:page-layout>
   </office:automatic-styles>
   <office:master-styles>
     <style:master-page style:name="Standard" style:page-layout-name="pm1" />
     <style:master-page style:name="Cover_20_Page" style:display-name="Cover Page" style:next-style-name="First_20_Page" style:page-layout-name="pm1" />
     <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
-    <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="First_20_Page" style:page-layout-name="pm6">
-      <style:footer>
-        <text:p text:style-name="Footer">
-          <text:tab />
-          <text:page-number style:num-format="i" text:select-page="current">xv</text:page-number>
-        </text:p>
-      </style:footer>
-    </style:master-page>
-    <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="TOC_20_Page" style:page-layout-name="pm2">
-      <style:footer>
-        <text:p text:style-name="Footer">
-          <text:tab />
-          <text:page-number style:num-format="i" text:select-page="current">xv</text:page-number>
-        </text:p>
-      </style:footer>
-    </style:master-page>
+    <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7" />
+    <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7" />
     <style:master-page style:name="CopyRight_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7">
       <style:footer>
         <text:p text:style-name="Footer">

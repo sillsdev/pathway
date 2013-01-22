@@ -325,7 +325,7 @@ namespace SIL.PublishingSolution
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
             {
                 string beforeContent = ReplaceLineBreakSymbol(psuedoBefore.Content);
-                _writer.WriteString(beforeContent);
+                _writer.WriteRaw(beforeContent);
             }
 
             //// Psuedo Before
@@ -453,7 +453,7 @@ namespace SIL.PublishingSolution
                     else
                     {
                         string afterContent = ReplaceLineBreakSymbol(classInfo.Content);
-                        _writer.WriteString(afterContent);
+                        _writer.WriteRaw(afterContent);
                     }
                     _psuedoAfter.Remove(_closeChildName);
                 }
@@ -475,7 +475,10 @@ namespace SIL.PublishingSolution
                 string uniCode = Common.ConvertStringToUnicode(content);
                 if (uniCode.IndexOf("2028") > 0)
                 {
-                    return "<text:line-break/>";
+                    return "text:line-break/";
+                    //return "&lt;text:line-break/&gt;";
+                    //return "<text:line-break/>";
+                    //return "<br>";
                 }
             }
             return content;

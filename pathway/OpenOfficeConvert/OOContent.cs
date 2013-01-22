@@ -1071,10 +1071,10 @@ namespace SIL.PublishingSolution
                     _pseudoSingleSpace = false;
                     _isWhiteSpace = false;
 
-                    content = content.Replace(" // ", @" <text:line-break/> ");
+                    content = content.Replace(" // ", @"text:line-break/");
                     if (content.IndexOf(@"text:line-break/") >= 0)
                     {
-                        _writer.WriteRaw(content);
+                        _writer.WriteRaw(content.Replace(@"text:line-break/", @"<text:line-break/>"));
                     }
                     else
                     {
@@ -2267,6 +2267,22 @@ namespace SIL.PublishingSolution
                     //string srcFilrLongDesc = _imageSrcClass;
 
                     //string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _sourcePicturePath);
+                    string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+                    if (_allStyle.Peek().IndexOf("logo") == 0)
+                    {
+                        //Change the path which have the default styles
+                        string folderName = string.Empty;
+                        if(executablePath.Contains("Paratext 7"))
+                        {
+                            folderName = Common.LeftString(executablePath, "Paratext 7");
+                            _sourcePicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "SIL\\Pathway7\\Copyrights"));
+                        }
+                        else if (executablePath.Contains("FieldWorks 7"))
+                        {
+                            folderName = Common.LeftString(executablePath, "FieldWorks 7");
+                            _sourcePicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "Pathway7\\Copyrights"));
+                        }
+                    }
                     string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, _sourcePicturePath);
                     string fileName = Path.GetFileName(srcFile);
 
@@ -2320,8 +2336,19 @@ namespace SIL.PublishingSolution
                     }
                     else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0, 
                     {
-
-                        rectWidth = Convert.ToString(Common.ColumnWidth * .9);
+                        double value = .9;
+                        if (_allStyle.Peek().IndexOf("logo") == 0)
+                        {
+                            if (executablePath.Contains("Paratext 7"))
+                            {
+                                value = .45;
+                            }
+                            else if (executablePath.Contains("FieldWorks 7"))
+                            {
+                                value = .25;
+                            }
+                        }
+                        rectWidth = Convert.ToString(Common.ColumnWidth * value);
                         rectHeight = Common.CalcDimension(fromPath, ref rectWidth, 'H');
                     }
                     else
@@ -2440,8 +2467,17 @@ namespace SIL.PublishingSolution
                     if (rectHeight.IndexOf("%") == -1)
                         height = rectHeight + imgWUnit;
 
-                    _writer.WriteAttributeString("svg:width", width);
-                    _writer.WriteAttributeString("svg:height", height);
+                    if (_allStyle.Peek().IndexOf("logo") == 0)
+                    {
+                        _writer.WriteAttributeString("svg:width", "2.3063in");
+                        //_writer.WriteAttributeString("svg:height", height);
+                    }
+                    else
+                    {
+                        _writer.WriteAttributeString("svg:width", width);
+                        _writer.WriteAttributeString("svg:height", height);
+                    }
+
                     //TD-349(width:auto)
                     if (_isAutoWidthforCaption)
                     {
@@ -2450,7 +2486,8 @@ namespace SIL.PublishingSolution
 
                     //1st textbox
                     _writer.WriteStartElement("draw:text-box");
-                    _writer.WriteAttributeString("fo:min-height", "0in");
+                    _writer.WriteAttributeString("fo:min-height", _allStyle.Peek().IndexOf("logo") == 0 ? "1in" : "0in");
+
 
                     _frameCount++;
 
