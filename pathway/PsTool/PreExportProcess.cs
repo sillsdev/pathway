@@ -1281,7 +1281,7 @@ namespace SIL.Tool
                         frontMatterXHTMLContent = frontMatterXHTMLContent + "<div id='copyright' class='copyright' dir='ltr'>.</div>" + copyRightContentNode.OuterXml + "<div id='dummyTOC' class='dummyTOC' dir='ltr'>.</div>";
                         _projInfo.IsFrontMatterEnabled = true;
 
-                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:1pt;visible:hidden;}.LHeading{font-size:18pt;font-weight:bold;line-height=14pt;margin-bottom:.25in;}.LText{font-size:12pt;font-style:italic}.LText:before{content: \"\\2028\"}.dummyTOC{text-align: left; font-size:1pt;visible:hidden;page-break-after: always;} ";
+                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:1pt;visibility:hidden;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;}.LText{font-size:12pt;font-style:italic}.LText:before{content: \"\\2028\"}.dummyTOC{text-align: left; font-size:1pt;visibility:hidden;page-break-after: always;} ";
                     }
                 }
                 //END OF COPYRIGHT 
