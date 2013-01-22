@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jan-18-2013 for (TD-0000 Uncomment SetImageToCoverPage with If)
+&apos;Changed On Jan-22-2013 for TD-3279(Maintain aspect ration on cover image)
 
 Dim CanSave as Boolean
 
@@ -48,10 +48,19 @@ End Sub
 
 &apos;This procedure align Cover page Image
 Sub SetImageToCoverPage
-	if ThisComponent.getDrawPage().GetCount &gt; 0 Then
-		oGraphic  = ThisComponent.getDrawPage().getByIndex(0)
+
+  For i = 0 To ThisComponent.getDrawPage().GetCount -1
+  	oGraphic  = ThisComponent.getDrawPage().getByIndex(i)
+	&apos;&apos;msgbox  	oGraphic.Width  &amp; &quot;   &quot; &amp; oGraphic.Height
+	if oGraphic.Height &gt; 10000 Then
 		oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
-	End If
+	End IF
+  Next
+  
+	&apos;if ThisComponent.getDrawPage().GetCount &gt; 0 Then
+		&apos;oGraphic  = ThisComponent.getDrawPage().getByIndex(0)
+		&apos;oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
+	&apos;End If
 End Sub
 
 &apos;This procedure turn off non-printing characters
