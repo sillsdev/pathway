@@ -98,6 +98,7 @@ namespace Test.epubConvert
             PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
             File.Copy(FileInput("FlexRev.xhtml"), FileOutput("FlexRev.xhtml"), true);
             File.Copy(FileInput("FlexRev.css"), FileOutput("FlexRev.css"), true);
+            File.Copy(FileProg(@"Styles\Dictionary\book.css"), FileOutput("book.css"), true);
             projInfo.IsReversalExist = true;
             projInfo.IsLexiconSectionExist = true;
             projInfo.ProjectInputType = "Dictionary";
@@ -253,6 +254,7 @@ namespace Test.epubConvert
             projInfo.IsReversalExist = false;
             projInfo.ProjectName = "Scripture Draft";
             projInfo.ProjectInputType = "Scripture";
+            File.Copy(FileProg(@"Styles\Scripture\epub.css"), FileOutput("epub.css"));
             var target = new Exportepub();
             var actual = target.Export(projInfo);
             Assert.IsTrue(actual);
