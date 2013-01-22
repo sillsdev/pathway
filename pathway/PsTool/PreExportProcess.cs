@@ -690,9 +690,10 @@ namespace SIL.Tool
                 sb.Append("[");
                 sb.Append(languageCode);
                 sb.Append("]. For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
-                sb.Append(languageCode.Substring(0, 3));
+                var codeLen = languageCode.Length > 3? 3: languageCode.Length;
+                sb.Append(languageCode.Substring(0, codeLen));
                 sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
-                sb.Append(languageCode.Substring(0, 3));
+                sb.Append(languageCode.Substring(0, codeLen));
                 sb.Append("</a>.</span> ");
             }
             return sb.ToString();
