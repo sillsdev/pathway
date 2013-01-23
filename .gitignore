@@ -1,6 +1,7 @@
 *.suo
 *.chw
 *.msi
+*.pyc
 *.user
 *.cache
 *.StyleCop
