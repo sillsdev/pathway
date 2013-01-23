@@ -593,7 +593,7 @@ namespace SIL.PublishingSolution
 
 
 
-                tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
+                tableOfContent += "\\textsc{\\LARGE " + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
 
                 tableOfContent += "\\vspace{140 mm} \r\n";
 
@@ -676,7 +676,7 @@ namespace SIL.PublishingSolution
                 ////copyrightContent = copyrightContent.Replace("©", "");
                 ////tableOfContent += "\\subtitle{ " + copyrightContent + "} \r\n";
                 //tableOfContent += "\\maketitle \r\n";
-                tableOfContent += "\\thispagestyle{empty} \r\n";
+                //tableOfContent += "\\thispagestyle{empty} \r\n";
 
                 tableOfContent += "\\newpage \r\n";
                 tableOfContent += "\\newpage \r\n";
