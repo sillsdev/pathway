@@ -899,6 +899,50 @@ namespace SIL.PublishingSolution
             InsertVariableOnLetHead(projInfo.TempOutputFolder);
             InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
+            CopyChapterVariableBeforeSectionHead(projInfo.TempOutputFolder);
+        }
+
+        public static void CopyChapterVariableBeforeSectionHead(string tempOutputFolder)
+        {
+            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.PreserveWhitespace = false;
+            xdoc.Load(filename);
+
+            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
+            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+
+            string xpath = "//text:p[@text:style-name='ChapterNumber1']";
+
+            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
+            if (list != null)
+            {
+                foreach (XmlNode xmlNode in list)
+                {
+                    XmlNode prevNode = xmlNode.PreviousSibling;
+                    string xx = prevNode.Attributes["text:style-name"].Value;
+                    if (xx.ToLower().IndexOf("sectionhead") == 0)
+                    {
+                        xpath = ".//text:span";
+                        XmlNodeList spanList = xmlNode.SelectNodes(xpath, nsmgr1);
+                        int Cnt = 0;
+                        for (int i = 0; i < spanList.Count; i++)
+                        {
+                            if(spanList[i].InnerXml.Contains("_Guideword_"))
+                            {
+                                Cnt++;
+                                prevNode.InsertBefore(spanList[i].CloneNode(true),prevNode.FirstChild);
+                                if (Cnt != 2) continue;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            xdoc.PreserveWhitespace = true;
+            xdoc.Save(filename);
         }
 
         public static void InsertPublisherOnTitlePage(string tempOutputFolder)

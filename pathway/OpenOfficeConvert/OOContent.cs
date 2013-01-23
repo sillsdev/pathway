@@ -1599,6 +1599,12 @@ namespace SIL.PublishingSolution
             if (_closeChildName == string.Empty) return;
             string closeChild = Common.LeftString(_closeChildName, "_");
 
+            if (_closeChildName.IndexOf("scrBookCode") == 0)
+            {
+                _strBook = "";
+                _strBook2ndBook = "";
+            }
+
             ReferenceClose(_closeChildName);
             CheckDisplayNone(closeChild);
             if (_outputType == Common.OutputType.ODT && (_reader.Name == "ul" || _reader.Name == "ol"))

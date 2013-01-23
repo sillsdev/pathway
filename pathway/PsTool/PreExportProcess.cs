@@ -3444,9 +3444,10 @@ namespace SIL.Tool
         public void InsertKeepWithNextOnStyles(string _cssFileNameWithPath)
         {
             TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
-            //tw.WriteLine(".Section_Head {");
-            //tw.WriteLine("page-break-after:avoid;");
-            //tw.WriteLine("}");
+            tw.WriteLine(".Section_Head {");
+            tw.WriteLine("page-break-after:avoid;");
+            tw.WriteLine("orphans:2;");
+            tw.WriteLine("}");
 
             //tw.WriteLine(".Chapter_Number {");
             //tw.WriteLine("page-break-after:avoid;");//page-break-after:avoid;
