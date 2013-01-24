@@ -44,6 +44,7 @@ namespace SIL.PublishingSolution
         private string _copyrightTexFileName = string.Empty;
         private string _reversalIndexTexFileName = string.Empty;
         private bool _reversalIndexTexCreated = false;
+        private Dictionary<string, string> _langFontCodeandName;
         #region Public Functions
         public string ExportType
         {
@@ -74,7 +75,7 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             _langFontDictionary = new Dictionary<string, string>();
-
+            _langFontCodeandName = new Dictionary<string, string>();
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             if (Common.IsUnixOS())
             {
@@ -112,12 +113,14 @@ namespace SIL.PublishingSolution
 
 
             BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
-
+            GetXhtmlFileFontCodeandFontName(projInfo.DefaultXhtmlFileWithPath);
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             //projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
             projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
+            ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
+            modifyXeLaTexStyles.LangFontDictionary = _langFontCodeandName;
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
@@ -151,7 +154,7 @@ namespace SIL.PublishingSolution
             }
 
             string include = xeLaTexStyles.PageStyle.ToString();
-            ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
+
             modifyXeLaTexStyles.ProjectType = _inputType;
             modifyXeLaTexStyles.TocChecked = _tableOfContent.ToString();
 
@@ -183,7 +186,7 @@ namespace SIL.PublishingSolution
 
             modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = false;
             _xelatexDocumentOpenClosedRequired = false;
-            modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include);
+            modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include, _langFontCodeandName);
 
             //CallXeTex(Path.GetFileName(xeLatexFullFile));
             Dictionary<string, string> imgPath = new Dictionary<string, string>();
@@ -268,7 +271,7 @@ namespace SIL.PublishingSolution
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
                 modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
-                                                    xeLatexCopyrightFile, include);
+                                                    xeLatexCopyrightFile, include, _langFontCodeandName);
 
                 return true;
             }
@@ -317,7 +320,7 @@ namespace SIL.PublishingSolution
                 string include = xeLaTexStyles.PageStyle.ToString();
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
-                modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexRevesalIndexFile, include);
+                modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexRevesalIndexFile, include, _langFontCodeandName);
                 return true;
             }
 
@@ -590,6 +593,38 @@ namespace SIL.PublishingSolution
         }
 
         #endregion
+
+        private void GetXhtmlFileFontCodeandFontName(string xhtmlFileName)
+        {
+            if (!File.Exists(xhtmlFileName)) return;
+            XmlDocument xdoc = new XmlDocument { XmlResolver = null };
+            xdoc.Load(xhtmlFileName);
+            XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
+            if (metaNodes != null && metaNodes.Count > 0)
+            {
+                try
+                {
+                    foreach (XmlNode metaNode in metaNodes)
+                    {
+                        FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
+                        foreach (FontFamily systemFont in systemFontList)
+                        {
+                            if (metaNode.Attributes["content"].Value.ToLower() == systemFont.Name.ToLower())
+                            {
+                                _langFontCodeandName.Add(metaNode.Attributes["name"].Value, metaNode.Attributes["content"].Value);
+                                break;
+                            }
+                        }
+                        //if (metaNode.Attributes["name"].Value == "linkedFilesRootDir")
+                        //{
+                        //    imageRootPath = metaNode.Attributes["content"].Value;
+                        //    break;
+                        //}
+                    }
+                }
+                catch{}
+            }
+        }
 
         #endregion
     }

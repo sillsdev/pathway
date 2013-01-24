@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
@@ -34,7 +35,7 @@ namespace Test.XeLatex
         private CssTree _cssTree;
         private PublicationInformation _projInfo;
         private Dictionary<string, List<string>> _classInlineStyle;
-
+        Dictionary<string, string> _langFontCodeandName = new Dictionary<string, string>();
         #endregion
 
         #region Setup
@@ -981,7 +982,8 @@ namespace Test.XeLatex
         {
             string input = FileInput(file + ".xhtml");
             _projInfo.DefaultXhtmlFileWithPath = input;
-
+            _langFontCodeandName = new Dictionary<string, string>();
+            GetXhtmlFileFontCodeandFontName(_projInfo.DefaultXhtmlFileWithPath);
             input = FileInput(file + ".css");
             _projInfo.DefaultCssFileWithPath = input;
 
@@ -1006,8 +1008,40 @@ namespace Test.XeLatex
             CloseFile(xetexFile);
 
             ModifyXeLaTexStyles modifyXeTexStyles = new ModifyXeLaTexStyles();
-            modifyXeTexStyles.ModifyStylesXML(_projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile, string.Empty);
+            modifyXeTexStyles.ModifyStylesXML(_projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile, string.Empty, _langFontCodeandName);
 
+        }
+
+        private void GetXhtmlFileFontCodeandFontName(string xhtmlFileName)
+        {
+            if (!File.Exists(xhtmlFileName)) return;
+            XmlDocument xdoc = new XmlDocument { XmlResolver = null };
+            xdoc.Load(xhtmlFileName);
+            XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
+            if (metaNodes != null && metaNodes.Count > 0)
+            {
+                try
+                {
+                    foreach (XmlNode metaNode in metaNodes)
+                    {
+                        FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
+                        foreach (FontFamily systemFont in systemFontList)
+                        {
+                            if (metaNode.Attributes["content"].Value.ToLower() == systemFont.Name.ToLower())
+                            {
+                                _langFontCodeandName.Add(metaNode.Attributes["name"].Value, metaNode.Attributes["content"].Value);
+                                break;
+                            }
+                        }
+                        //if (metaNode.Attributes["name"].Value == "linkedFilesRootDir")
+                        //{
+                        //    imageRootPath = metaNode.Attributes["content"].Value;
+                        //    break;
+                        //}
+                    }
+                }
+                catch { }
+            }
         }
 
         private string FileInput(string fileName)

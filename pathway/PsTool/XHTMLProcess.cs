@@ -926,7 +926,7 @@ namespace SIL.PublishingSolution
             if (styleName == string.Empty) // missing style in CSS
             {
                 styleName = _className;
-                if (_outputType == Common.OutputType.ODT)
+                if (_outputType == Common.OutputType.ODT || _outputType == Common.OutputType.XELATEX)
                 {
                     if (_lang.Length > 0)
                         styleName = _className + Common.SepAttrib + _lang;

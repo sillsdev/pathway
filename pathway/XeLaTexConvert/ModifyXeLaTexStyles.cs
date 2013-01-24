@@ -51,6 +51,7 @@ namespace SIL.PublishingSolution
         private string _reversalIndexTexFilename = string.Empty;
         private bool _reversalIndexExist = false;
         private bool _isMirrored = false;
+        private Dictionary<string, string> _langFontDictionary;
 
         public string ProjectType
         {
@@ -140,11 +141,19 @@ namespace SIL.PublishingSolution
         public string Rights { get; set; }
         public string Format { get; set; }
         public string Source { get; set; }
+
+        public Dictionary<string, string> LangFontDictionary
+        {
+            get { return _langFontDictionary; }
+            set { _langFontDictionary = value; }
+        }
+
         #endregion
 
         public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty,
-            Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat)
+            Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat, Dictionary<string, string> langFontDictionary)
         {
+            _langFontDictionary = langFontDictionary;
             _projectPath = projectPath;
             _cssClass = cssClass;
             _xetexFullFile = xetexFullFile;
@@ -200,7 +209,7 @@ namespace SIL.PublishingSolution
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
                 string className = RemoveBody(replaceNumberInStyle);
                 if (className.Length == 0) continue;
-                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle);
+                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle, _langFontDictionary);
                 if (xeLaTexProperty.Trim().Length > 0)
                 {
                     Common.FileInsertText(_xetexFullFile, xeLaTexProperty);
