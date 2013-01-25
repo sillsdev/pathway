@@ -324,7 +324,8 @@ namespace SIL.PublishingSolution
                 sb.AppendLine(@"\empFrontMatterdiv{" + txt + @"}\end{adjustwidth}");
                 
                 txt =" For more information about this language, visit http://www.ethnologue.com/show_language.asp?code=";
-                txt = txt + languageCode.Substring(0, 3);
+                var codeLen = languageCode.Length > 3 ? 3 : languageCode.Length;
+                txt = txt + languageCode.Substring(0, codeLen);
                 sb.AppendLine(@"\empFrontMatterdiv{" + txt + @"}\end{adjustwidth}");
             }
             return sb.ToString();

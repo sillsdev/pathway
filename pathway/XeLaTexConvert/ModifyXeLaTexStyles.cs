@@ -457,7 +457,12 @@ namespace SIL.PublishingSolution
             {
                 if (_firstString != null)
                 {
-                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + _firstString.ToUpper() + " - " + _lastString.ToUpper() + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
+                    _firstString = _firstString.ToUpper();
+                    _lastString = _lastString.ToUpper();
+                    _firstString = _firstString.Replace("~", "\\textasciitilde{~}");
+                    _lastString = _lastString.Replace("~", "\\textasciitilde{~}");
+
+                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + _firstString + " - " + _lastString  + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
 
                     //For other Font style apply the below line
                     //tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + "\\" + _headWordStyleName + " " + _firstString.ToUpper() + " - " + "\\" + _headWordStyleName + " " + _lastString.ToUpper() + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";

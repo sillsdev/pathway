@@ -620,12 +620,14 @@ namespace SIL.PublishingSolution
                 _childName = Common.ReplaceSeperators(_childName);
                
                 content = Common.ReplaceSymbolToXelatexText(content);
+                
                 List<string> value = CreateInlineInnerStyle(characterStyle);
 
                 if (_childName.IndexOf("scrBookName") == 0 && content != null)
                 {
                     content = "\r\n \\section{" + content + "} ";
                 }
+                content = content.Replace("~", "\\textasciitilde{~}");
 
                 _xetexFile.Write(content);
 
@@ -643,6 +645,9 @@ namespace SIL.PublishingSolution
                     if (!_dictionaryStarting)
                     {
                         _tocStartingPage = content.Substring(0,1) .ToString();
+
+                        _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
+
                         _xetexFile.Write("\r\n \\label{first_page" + _tocStartingPage + "} ");
 
                         //_xetexFile.Write("\r\n \\section*{} \\label{first_page" + _tocStartingPage + "} ");
@@ -655,6 +660,8 @@ namespace SIL.PublishingSolution
                         if (content == TocEndingPage)
                         {
                             _tocEndingPage = content.Substring(0, 1).ToString();
+
+                            _tocEndingPage = _tocEndingPage.Replace("~", "\\textasciitilde{~}");
 
                             _xetexFile.WriteLine("\r\n \\label{last_page" + _tocEndingPage + "} ");
                         }
@@ -774,6 +781,7 @@ namespace SIL.PublishingSolution
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
                     if(_projInfo.ProjectInputType.ToLower() == "scripture")
                     {
+                        
                         string referenceFormat = _projInfo.HeaderReferenceFormat;
                         if(mergedParaStyle.ToLower().IndexOf("chapter") == 0)
                         {
@@ -795,7 +803,11 @@ namespace SIL.PublishingSolution
 
                             }
                             _tocStyleName = mergedParaStyle;
+
+                           
+
                             string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
+                            headerFormat = headerFormat.Replace("~", "\\textasciitilde{~}");
                             _xetexFile.Write(headerFormat);
                             _headerContent = string.Empty;
                         }
@@ -819,6 +831,7 @@ namespace SIL.PublishingSolution
                             }
                             _tocStyleName = mergedParaStyle;
                             string headerFormat = "\\markboth{ \\" + _chapterStyleforHeader + " " + _headerContent + "}{ \\" + _chapterStyleforHeader + " " + _headerContent + "}";
+                            headerFormat = headerFormat.Replace("~", "\\textasciitilde{~}");
                             _xetexFile.Write(headerFormat);
                             _headerContent = string.Empty;
                         }
@@ -832,6 +845,7 @@ namespace SIL.PublishingSolution
 
                             _tocStyleName = mergedParaStyle;
                             string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
+                            headerFormat = headerFormat.Replace("~", "\\textasciitilde{~}");
                             _xetexFile.Write(headerFormat);
                             _headerContent = content;
                         }
