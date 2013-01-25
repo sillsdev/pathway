@@ -649,7 +649,7 @@ namespace SIL.Tool
             var sb = new StringBuilder();
             sb.Append("div id='LanguageInformation' class='Front_Matter' dir='ltr'>");
             // append what we know about this language, including a hyperlink to the ethnologue.
-            string languageCode = GetLanguageCode();
+            string languageCode = Common.GetLanguageCode(_xhtmlFileNameWithPath, _projInfo.ProjectInputType);
             if (languageCode.Length > 0)
             {
                 var languageName = Common.GetLanguageName(languageCode);
@@ -2665,68 +2665,6 @@ namespace SIL.Tool
             xDoc.Save(_xhtmlFileNameWithPath);
             SetHideVerseNumberInCSS();
             return _xhtmlFileNameWithPath;
-        }
-
-        /// <summary>
-        /// Returns the "main" language code in use by the document.
-        /// </summary>
-        /// <returns></returns>
-        public string GetLanguageCode()
-        {
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-            namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
-            xDoc.Load(_xhtmlFileNameWithPath);
-            XmlNode node;
-            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-            {
-                // dictionary
-                try
-                {
-                    node = xDoc.SelectSingleNode("//x:span[@class='headword'][1]", namespaceManager);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                    node = null;
-                }
-                if (node != null)
-                {
-                    var atts = node.Attributes;
-                    if (atts != null)
-                    {
-                        if (atts["lang"] != null)
-                            return (atts["lang"].Value);
-                        else if (atts["xml:lang"] != null)
-                            return (atts["xml:lang"].Value);
-                    }
-                }
-            }
-            else
-            {
-                // scripture
-                try
-                {
-                    node = xDoc.SelectSingleNode("//x:span[@class='Chapter_Number'][1]", namespaceManager);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                    node = null;
-                }
-                if (node != null)
-                {
-                    var atts = node.Attributes;
-                    if (atts != null)
-                    {
-                        if (atts["lang"] != null)
-                            return (atts["lang"].Value);
-                        else if(atts["xml:lang"] != null)
-                            return (atts["xml:lang"].Value);
-                    }
-                }
-            }
-            return string.Empty;
         }
 
         /// <summary>

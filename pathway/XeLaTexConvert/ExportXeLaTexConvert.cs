@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
@@ -76,6 +78,7 @@ namespace SIL.PublishingSolution
         {
             _langFontDictionary = new Dictionary<string, string>();
             _langFontCodeandName = new Dictionary<string, string>();
+			string mainXhtmlFileWithPath = projInfo.DefaultXhtmlFileWithPath;
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             if (Common.IsUnixOS())
             {
@@ -165,7 +168,7 @@ namespace SIL.PublishingSolution
             modifyXeLaTexStyles.CopyrightInformationPagePath = _copyrightInformationPagePath;
             modifyXeLaTexStyles.CoverPageImagePath = _coverPageImagePath;
 
-            if (ExportCopyright(projInfo))
+            if (ExportCopyright(projInfo, mainXhtmlFileWithPath))
             {
                 _copyrightTexCreated = true;
                 modifyXeLaTexStyles.CopyrightTexCreated = true;
@@ -199,7 +202,7 @@ namespace SIL.PublishingSolution
             return true;
         }
 
-        public bool ExportCopyright(PublicationInformation projInfo)
+        public bool ExportCopyright(PublicationInformation projInfo, string mainXhtmlFileWithPath)
         {
             if (_copyrightInformation)
             {
@@ -272,10 +275,63 @@ namespace SIL.PublishingSolution
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
                 modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
                                                     xeLatexCopyrightFile, include, _langFontCodeandName);
+				
+				string copyright = GetLanguageInfo(mainXhtmlFileWithPath, projInfo);
+                InsertInFile(xeLatexCopyrightFile, "Copyright information", copyright);
 
                 return true;
             }
             return false;
+        }
+        static public void InsertInFile(string filePath, string searchText, string insertText)
+        {
+            if (!File.Exists(filePath)) return;
+            string tempFile = Path.Combine(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath) + "1.tex");
+            File.Move(filePath, tempFile);
+            var reader = new StreamReader(tempFile);
+            string contentWriter;
+            var writer = new StreamWriter(filePath);
+            while ((contentWriter = reader.ReadLine()) != null)
+            {
+                if (contentWriter.IndexOf(searchText) >= 0)
+                {
+                    writer.WriteLine(insertText);
+                }
+                writer.WriteLine(contentWriter);
+            }
+            reader.Close();
+            writer.Close();
+            File.Delete(tempFile);
+        }
+
+        private string GetLanguageInfo(string mainXhtmlFileWithPath, PublicationInformation projInfo)
+        {
+            var sb = new StringBuilder();
+            // append what we know about this language, including a hyperlink to the ethnologue.
+            string languageCode = Common.GetLanguageCode(mainXhtmlFileWithPath, projInfo.ProjectInputType);
+            if (languageCode.Length > 0)
+            {
+                var languageName = Common.GetLanguageName(languageCode);
+
+                sb.AppendLine(@"\empFrontMatterdiv{ABOUT THIS DOCUMENT}\end{adjustwidth}");
+
+                string txt = "This document contains data written in ";
+                if (languageName.Length > 0)
+                {
+                    txt = txt +languageName;
+                }
+                txt = txt + "[" + languageCode + "].";
+                sb.AppendLine(@"\empFrontMatterdiv{" + txt + @"}\end{adjustwidth}");
+                
+                txt =" For more information about this language, visit http://www.ethnologue.com/show_language.asp?code=";
+                txt = txt + languageCode.Substring(0, 3);
+                sb.AppendLine(@"\empFrontMatterdiv{" + txt + @"}\end{adjustwidth}");
+
+                txt = "http://www.ethnologue.com/show_language.asp?code=";
+                txt = txt + languageCode.Substring(0, 3);
+                sb.AppendLine(@"\empFrontMatterdiv{" + txt + @"}\end{adjustwidth}");
+            }
+            return sb.ToString();
         }
 
         public bool ExportReversalIndex(PublicationInformation projInfo)

@@ -697,8 +697,8 @@ namespace SIL.PublishingSolution
 
             if (Convert.ToBoolean(CopyrightInformation))
             {
-                tableOfContent += "\\setcounter{page}{1} \r\n";
                 tableOfContent += "\\pagenumbering{roman}  \r\n";
+                tableOfContent += "\\setcounter{page}{3} \r\n";
 
                 tableOfContent += "\\input{" + CopyrightTexFilename + "} \r\n";
                 //tableOfContent += "\\thispagestyle{empty} \r\n";
