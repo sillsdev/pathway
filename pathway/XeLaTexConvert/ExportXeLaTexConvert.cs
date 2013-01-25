@@ -326,10 +326,6 @@ namespace SIL.PublishingSolution
                 txt =" For more information about this language, visit http://www.ethnologue.com/show_language.asp?code=";
                 txt = txt + languageCode.Substring(0, 3);
                 sb.AppendLine(@"\empFrontMatterdiv{" + txt + @"}\end{adjustwidth}");
-
-                txt = "http://www.ethnologue.com/show_language.asp?code=";
-                txt = txt + languageCode.Substring(0, 3);
-                sb.AppendLine(@"\empFrontMatterdiv{" + txt + @"}\end{adjustwidth}");
             }
             return sb.ToString();
         }
