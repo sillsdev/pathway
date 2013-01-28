@@ -71,7 +71,6 @@
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
@@ -82,21 +81,18 @@
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_span_.zxx_li_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="span_.zxx_li_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_span_.zxx_li_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="span_.zxx_li_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="9pt" />
       <style:text-properties text:display="prince-footnote" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="9pt" />
       <style:text-properties text:display="prince-footnote" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -106,7 +102,6 @@
       <style:paragraph-properties fo:margin-left="24pt" fo:text-indent="-12pt" fo:padding-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:text-align="justify" fo:line-height="13pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_Line1_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_Line1_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_columns_scrBook_scrBody">
@@ -125,14 +120,12 @@
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line2_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="9pt" />
       <style:text-properties text:display="prince-footnote" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_ParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook_scrBody" />
@@ -140,14 +133,12 @@
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="9pt" />
       <style:text-properties text:display="prince-footnote" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Inscription_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:margin-top="12pt" fo:margin-bottom="6pt" />
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />

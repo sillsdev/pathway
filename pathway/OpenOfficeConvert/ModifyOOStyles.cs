@@ -376,6 +376,11 @@ namespace SIL.PublishingSolution
             }
 
             XmlNode paraNode = null;
+            if(node.Attributes != null && (node.Attributes.Count > 0 && node.Attributes["style:family"].Value.ToLower() == "text"))
+            {
+                _paragraphProperty.Clear();
+            }
+
             if (_paragraphProperty.Count > 0)
             {
                 for (int i = 0; i < node.ChildNodes.Count; i++) 

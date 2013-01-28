@@ -75,7 +75,6 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:country="none" fo:language="none" fo:font-weight="700" style:font-weight-complex="700" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="7.5pt" style:font-size-complex="7.5pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
@@ -83,22 +82,18 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="10pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="8pt" style:font-size-complex="8pt" text:display="prince-footnote" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="AlternateReading_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody">
       <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NameOfGod_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="italic" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Emphasis_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="pictureCenter_Paragraph_scrSection_scrBook_scrBody" />
@@ -106,15 +101,12 @@
       <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Emphasis_pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="OrdinalNumberEnding_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="6pt" style:font-size-complex="6pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Foreign_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Line1_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_scrBook_scrBody">
@@ -125,15 +117,12 @@
       <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NameOfGod_Line1_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="italic" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_Line1_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="7.5pt" style:font-size-complex="7.5pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Emphasis_Line1_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ParagraphContinuation_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_scrBook_scrBody">
@@ -141,14 +130,12 @@
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_ParagraphContinuation_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="7.5pt" style:font-size-complex="7.5pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_ParagraphContinuation_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_scrBook_scrBody">
       <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NameOfGod_ParagraphContinuation_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="italic" fo:language="none" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
