@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="26">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="27">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -55,8 +55,9 @@
     <feature name="Page Size">
       <option name="A4" file="Page_size_A4.css" />
       <option name="A5" file="Page_size_A5.css" />
+	  <option name="B5" file="Page_size_B5.css" />
       <option name="C5" file="Page_size_C5.css" />
-      <option name="A6" file="Page_size_A6.css" />
+      <option name="A6" file="Page_size_A6.css" />	  
       <option name="Letter" file="Page_size_Letter.css" />
       <option name="Half letter" file="Page_size_Half_Letter.css" />
       <option name="6in x 9in" file="Page_size_6inx9in.css" />

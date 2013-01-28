@@ -150,6 +150,12 @@ namespace SIL.PublishingSolution
                         Param.LoadSettings();
                     }
 
+                    if (int.Parse(projSettingsVerNum) < 27 || int.Parse(projSettingsVerNum) == 27)
+                    {
+                        Version27(GetDirectoryPath(settingsPath, appPath));
+                        Param.LoadSettings();
+                    }
+
                     //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
                     string usrPath = GetDirectoryPath(settingsPath, appPath);
                     string insPath = Common.PathCombine(Path.GetDirectoryName(installerPath), Path.GetFileName(usrPath));
@@ -560,7 +566,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Update to change made in version 15 of the XML. The change here is a References feature block for Dictionary / scriptures (only).
+        /// Update to change made in version 26 of the XML. The change here is a References feature block for Dictionary / scriptures (only).
         /// </summary>
         /// <param name="destSettingsFile"></param>
         private void Version26(string destSettingsFile)
@@ -788,6 +794,165 @@ namespace SIL.PublishingSolution
             }
             destDoc.Save(destSettingsFile);
         }
+
+
+        /// <summary>
+        /// Update to change made in version 27 of the XML. The change here is a References feature block for Dictionary / scriptures (only).
+        /// </summary>
+        /// <param name="destSettingsFile"></param>
+        private void Version27(string destSettingsFile)
+        {
+            // load the destination settings file (the one in ProgramData) that is missing the <meta> block for the TOC);
+            if (!File.Exists(destSettingsFile)) { return; }
+            var destDoc = Common.DeclareXMLDocument(false);
+            destDoc.Load(destSettingsFile);
+            XmlElement root = destDoc.DocumentElement;
+            if (root != null)
+            {
+                root.SetAttribute("version", "27");
+                // Metadata block
+                const string referencesPath = "//stylePick/features/feature[@name=\"Page Size\"]";
+                const string featuresPath = "//stylePick/features";
+                XmlNode referencesNode = root.SelectSingleNode(referencesPath);
+                XmlNode featuresNode = root.SelectSingleNode(featuresPath);
+                if (featuresNode == null) { return; }
+                if (referencesNode != null)
+                {
+
+                    XmlElement newNode = destDoc.CreateElement("feature");
+                    newNode.SetAttribute("name", "Page Size");
+
+                    XmlElement optionNode11 = destDoc.CreateElement("option");
+                    optionNode11.SetAttribute("name", "A4");
+                    optionNode11.SetAttribute("file", "Page_size_A4.css");
+                    
+                    XmlElement optionNode12 = destDoc.CreateElement("option");
+                    optionNode12.SetAttribute("name", "A5");
+                    optionNode12.SetAttribute("file", "Page_size_A5.css");
+                    
+                    XmlElement optionNode13 = destDoc.CreateElement("option");
+                    optionNode13.SetAttribute("name", "B5");
+                    optionNode13.SetAttribute("file", "Page_size_B5.css");
+                    
+                    XmlElement optionNode14 = destDoc.CreateElement("option");
+                    optionNode14.SetAttribute("name", "C5");
+                    optionNode14.SetAttribute("file", "Page_size_C5.css");
+                    
+                    XmlElement optionNode15 = destDoc.CreateElement("option");
+                    optionNode15.SetAttribute("name", "A6");
+                    optionNode15.SetAttribute("file", "Page_size_A6.css");
+                    
+                    XmlElement optionNode16 = destDoc.CreateElement("option");
+                    optionNode16.SetAttribute("name", "Letter");
+                    optionNode16.SetAttribute("file", "Page_size_Letter.css");
+                    
+                    XmlElement optionNode17 = destDoc.CreateElement("option");
+                    optionNode17.SetAttribute("name", "Half letter");
+                    optionNode17.SetAttribute("file", "Page_size_Half_Letter.css");
+                    
+                    XmlElement optionNode18 = destDoc.CreateElement("option");
+                    optionNode18.SetAttribute("name", "6in x 9in");
+                    optionNode18.SetAttribute("file", "Page_size_6inx9in.css");
+                    
+                    XmlElement optionNode19 = destDoc.CreateElement("option");
+                    optionNode19.SetAttribute("name", "5.25in x 8.25in");
+                    optionNode19.SetAttribute("file", "Page_size_GPS1.css");
+                    
+                    XmlElement optionNode20 = destDoc.CreateElement("option");
+                    optionNode20.SetAttribute("name", "5.8in x 8.7in");
+                    optionNode20.SetAttribute("file", "Page_size_GPS2.css");
+
+                    newNode.AppendChild(optionNode11);
+                    newNode.AppendChild(optionNode12);
+                    newNode.AppendChild(optionNode13);
+                    newNode.AppendChild(optionNode14);
+                    newNode.AppendChild(optionNode15);
+                    newNode.AppendChild(optionNode16);
+                    newNode.AppendChild(optionNode17);
+                    newNode.AppendChild(optionNode18);
+                    newNode.AppendChild(optionNode19);
+                    newNode.AppendChild(optionNode20);
+
+                    featuresNode.ReplaceChild(newNode, referencesNode);
+                }
+                destDoc.Save(destSettingsFile);
+
+                destSettingsFile = destSettingsFile.Replace("Dictionary", "Scripture");
+                if (!File.Exists(destSettingsFile)) { return; }
+                destDoc = Common.DeclareXMLDocument(false);
+                destDoc.Load(destSettingsFile);
+                root = destDoc.DocumentElement;
+                
+                if (destSettingsFile.ToLower().Contains("scripture"))
+                {
+                    const string referencesPathRF = "//stylePick/features/feature[@name=\"Page Size\"]";
+                    const string featuresPathRF = "//stylePick/features";
+                    XmlNode referencesNodeRF = root.SelectSingleNode(referencesPathRF);
+                    XmlNode featuresNodeRF = root.SelectSingleNode(featuresPathRF);
+                    if (featuresNodeRF == null) { return; }
+                    if (referencesNodeRF != null)
+                    {
+                        XmlElement newNode = destDoc.CreateElement("feature");
+                        newNode.SetAttribute("name", "Page Size");
+
+                        XmlElement optionNode11 = destDoc.CreateElement("option");
+                        optionNode11.SetAttribute("name", "A4");
+                        optionNode11.SetAttribute("file", "Page_size_A4.css");
+
+                        XmlElement optionNode12 = destDoc.CreateElement("option");
+                        optionNode12.SetAttribute("name", "A5");
+                        optionNode12.SetAttribute("file", "Page_size_A5.css");
+
+                        XmlElement optionNode13 = destDoc.CreateElement("option");
+                        optionNode13.SetAttribute("name", "B5");
+                        optionNode13.SetAttribute("file", "Page_size_B5.css");
+
+                        XmlElement optionNode14 = destDoc.CreateElement("option");
+                        optionNode14.SetAttribute("name", "C5");
+                        optionNode14.SetAttribute("file", "Page_size_C5.css");
+
+                        XmlElement optionNode15 = destDoc.CreateElement("option");
+                        optionNode15.SetAttribute("name", "A6");
+                        optionNode15.SetAttribute("file", "Page_size_A6.css");
+
+                        XmlElement optionNode16 = destDoc.CreateElement("option");
+                        optionNode16.SetAttribute("name", "Letter");
+                        optionNode16.SetAttribute("file", "Page_size_Letter.css");
+
+                        XmlElement optionNode17 = destDoc.CreateElement("option");
+                        optionNode17.SetAttribute("name", "Half letter");
+                        optionNode17.SetAttribute("file", "Page_size_Half_Letter.css");
+
+                        XmlElement optionNode18 = destDoc.CreateElement("option");
+                        optionNode18.SetAttribute("name", "6in x 9in");
+                        optionNode18.SetAttribute("file", "Page_size_6inx9in.css");
+
+                        XmlElement optionNode19 = destDoc.CreateElement("option");
+                        optionNode19.SetAttribute("name", "5.25in x 8.25in");
+                        optionNode19.SetAttribute("file", "Page_size_GPS1.css");
+
+                        XmlElement optionNode20 = destDoc.CreateElement("option");
+                        optionNode20.SetAttribute("name", "5.8in x 8.7in");
+                        optionNode20.SetAttribute("file", "Page_size_GPS2.css");
+
+                        newNode.AppendChild(optionNode11);
+                        newNode.AppendChild(optionNode12);
+                        newNode.AppendChild(optionNode13);
+                        newNode.AppendChild(optionNode14);
+                        newNode.AppendChild(optionNode15);
+                        newNode.AppendChild(optionNode16);
+                        newNode.AppendChild(optionNode17);
+                        newNode.AppendChild(optionNode18);
+                        newNode.AppendChild(optionNode19);
+                        newNode.AppendChild(optionNode20);
+
+                        featuresNode.ReplaceChild(newNode, referencesNodeRF);
+                    }
+                }
+            }
+            destDoc.Save(destSettingsFile);
+        }
+
 
         /// <summary>
         /// Method to update the changed made in version 2

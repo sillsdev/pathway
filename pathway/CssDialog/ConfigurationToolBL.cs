@@ -146,6 +146,7 @@ namespace SIL.PublishingSolution
         {
             standardSize["595x842"] = "A4";
             standardSize["420x595"] = "A5";
+            standardSize["499x709"] = "B5";
             standardSize["459x649"] = "C5";
             standardSize["298x420"] = "A6";
             standardSize["612x792"] = "Letter";

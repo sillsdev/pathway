@@ -781,7 +781,6 @@ namespace SIL.PublishingSolution
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
                     if(_projInfo.ProjectInputType.ToLower() == "scripture")
                     {
-                        
                         string referenceFormat = _projInfo.HeaderReferenceFormat;
                         if(mergedParaStyle.ToLower().IndexOf("chapter") == 0)
                         {
@@ -789,7 +788,6 @@ namespace SIL.PublishingSolution
                         }
                         if (mergedParaStyle.ToLower().IndexOf("chapter") == 0 && (referenceFormat == "Genesis 1" || referenceFormat == "Gen 1"))
                         {
-
                             if (_headerContent.Trim().Length == 0)
                             {
                                 if (referenceFormat == "Genesis 1")
@@ -800,12 +798,8 @@ namespace SIL.PublishingSolution
                                 {
                                     _headerContent = _bookName.Substring(0,3) + " " + _chapterNo;
                                 }
-
                             }
                             _tocStyleName = mergedParaStyle;
-
-                           
-
                             string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
                             headerFormat = headerFormat.Replace("~", "\\textasciitilde{~}");
                             _xetexFile.Write(headerFormat);
