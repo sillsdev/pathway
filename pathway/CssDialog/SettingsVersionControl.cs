@@ -652,7 +652,7 @@ namespace SIL.PublishingSolution
                     newNode.AppendChild(optionNode2);
                     newNode.AppendChild(optionNode3);
 
-                    featuresNode.ReplaceChild(newNode, referencesNode);
+                    featuresNode.ParentNode.ReplaceChild(newNode, referencesNode);
                     //featuresNode.RemoveChild(referencesNode);
                     //featuresNode.AppendChild(newNode);
                 }
@@ -725,7 +725,7 @@ namespace SIL.PublishingSolution
                         newNode.AppendChild(optionNode1);
                         newNode.AppendChild(optionNode2);
 
-                        featuresNode.ReplaceChild(newNode, referencesNodeRF);
+                        featuresNode.ParentNode.ReplaceChild(newNode, referencesNodeRF);
                     }
                     else
                     {
@@ -873,7 +873,7 @@ namespace SIL.PublishingSolution
                     newNode.AppendChild(optionNode19);
                     newNode.AppendChild(optionNode20);
 
-                    featuresNode.ReplaceChild(newNode, referencesNode);
+                    featuresNode.ParentNode.ReplaceChild(newNode, referencesNode);
                 }
                 destDoc.Save(destSettingsFile);
 
@@ -946,7 +946,7 @@ namespace SIL.PublishingSolution
                         newNode.AppendChild(optionNode19);
                         newNode.AppendChild(optionNode20);
 
-                        featuresNode.ReplaceChild(newNode, referencesNodeRF);
+                        featuresNode.ParentNode.ReplaceChild(newNode, referencesNodeRF);
                     }
                 }
             }
