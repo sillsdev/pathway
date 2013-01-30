@@ -718,11 +718,12 @@ namespace SIL.PublishingSolution
             //_writer.WriteString(data);
             if (!whiteSpaceExist && !_pseudoSingleSpace)
             {
-                _writer.WriteStartElement("text:s");
-                _writer.WriteAttributeString("text:c", "1");
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("text:s");
+                //_writer.WriteAttributeString("text:c", "1");
+                //_writer.WriteString(" ");
+                //_writer.WriteEndElement();
                 _significant = true;
-                //_writer.WriteString(" ");
+                _writer.WriteString(" ");
             }
         }
 
@@ -733,11 +734,12 @@ namespace SIL.PublishingSolution
             //_writer.WriteString(data);
             if (!whiteSpaceExist && !_pseudoSingleSpace)
             {
-                _writer.WriteStartElement("text:s");
-                _writer.WriteAttributeString("text:c", "1");
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("text:s");
+                //_writer.WriteAttributeString("text:c", "1");
+                //_writer.WriteString(" ");
+                //_writer.WriteEndElement();
                 _significant = true;
-                //_writer.WriteString(" ");
+                _writer.WriteString(" ");
             }
         }
 
@@ -921,9 +923,11 @@ namespace SIL.PublishingSolution
                 {
                     if (!_significant)
                     {
-                        _writer.WriteStartElement("text:s");
-                        _writer.WriteAttributeString("text:c", "1");
-                        _writer.WriteEndElement();
+                        //_writer.WriteStartElement("text:s");
+                        //_writer.WriteAttributeString("text:c", "1");
+                        //_writer.WriteString(" ");
+                        //_writer.WriteEndElement();
+                        _writer.WriteString(" ");
                         _significant = true;
                     }
                 }
@@ -1026,9 +1030,11 @@ namespace SIL.PublishingSolution
                 {
                     if (content.IndexOf(" ") >= 0)
                     {
-                        _writer.WriteStartElement("text:s");
-                        _writer.WriteAttributeString("text:c", "1");
-                        _writer.WriteEndElement();
+                        //_writer.WriteStartElement("text:s");
+                        //_writer.WriteAttributeString("text:c", "1");
+                        //_writer.WriteString(" ");
+                        //_writer.WriteEndElement();
+                        _writer.WriteString(" ");
                         content.Replace(" ", "");
                     }
                 }
@@ -1387,9 +1393,11 @@ namespace SIL.PublishingSolution
             {
                 int noOfChar = _reader.Value.Trim().Replace("\r\n", "").Length;
                 noOfChar = noOfChar + (noOfChar * 20 / 100);
-                _writer.WriteStartElement("text:s");
-                _writer.WriteAttributeString("text:c", noOfChar.ToString());
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("text:s");
+                //_writer.WriteAttributeString("text:c", noOfChar.ToString());
+                //_writer.WriteString(" ");
+                //_writer.WriteEndElement();
+                _writer.WriteString(" ");
                 isHiddenText = false;
                 hidden = true;
             }
@@ -1801,9 +1809,11 @@ namespace SIL.PublishingSolution
                 {
                     if (j > 0)
                     {
-                        _writer.WriteStartElement("text:s");
-                        _writer.WriteAttributeString("text:c", j.ToString());
-                        _writer.WriteEndElement();
+                        //_writer.WriteStartElement("text:s");
+                        //_writer.WriteAttributeString("text:c", j.ToString());
+                        //_writer.WriteString(" ");
+                        //_writer.WriteEndElement();
+                        _writer.WriteString(" ");
 
                         j = 0;
                     }
@@ -1816,9 +1826,11 @@ namespace SIL.PublishingSolution
                 {
                     if (j > 0)
                     {
-                        _writer.WriteStartElement("text:s");
-                        _writer.WriteAttributeString("text:c", j.ToString());
-                        _writer.WriteEndElement();
+                        //_writer.WriteStartElement("text:s");
+                        //_writer.WriteAttributeString("text:c", j.ToString());
+                        //_writer.WriteString(" ");
+                        //_writer.WriteEndElement();
+                        _writer.WriteString(" ");
                         j = 0;
                     }
                     _writer.WriteString(var.ToString());
@@ -2497,6 +2509,12 @@ namespace SIL.PublishingSolution
 
 
                     _frameCount++;
+
+                    if(_allStyle.Peek().ToLower().IndexOf("picturenone") == 0)
+                    {
+                        HoriAlignment = "center";
+                        wrapSide = "none";
+                    }
 
                     ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
                     modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strFrameCount, _util.ParentName, HoriAlignment,

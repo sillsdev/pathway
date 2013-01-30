@@ -736,6 +736,7 @@ namespace SIL.PublishingSolution
             preProcessor.GetfigureNode();
             preProcessor.GetDefaultLanguage(projInfo);
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
+            preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
             //preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
 
@@ -974,7 +975,11 @@ namespace SIL.PublishingSolution
                     xpath = "//draw:frame/draw:text-box";
                     XmlNode list1 = xdoc.SelectSingleNode(xpath, nsmgr1);
 
-                    list1.InnerXml = FirstNode.OuterXml.Replace("text:span", "text:p") + @"<text:p text:style-name=""Illustration"">" + list1.InnerXml + "</text:p>";
+                    if (list1 != null)
+                    {
+                        list1.InnerXml = FirstNode.OuterXml.Replace("text:span", "text:p") +
+                                         @"<text:p text:style-name=""Illustration"">" + list1.InnerXml + "</text:p>";
+                    }
                 }
             }
             xdoc.PreserveWhitespace = true;
