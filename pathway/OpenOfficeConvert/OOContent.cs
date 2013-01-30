@@ -2480,7 +2480,8 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                        _writer.WriteAttributeString("svg:width", width);
+                        if (width != "100%")
+                            _writer.WriteAttributeString("svg:width", width);
                         _writer.WriteAttributeString("svg:height", height);
                     }
 
@@ -2517,8 +2518,10 @@ namespace SIL.PublishingSolution
                     else
                         height = "100%";
 
-                    _writer.WriteAttributeString("svg:width", width);
-                    _writer.WriteAttributeString("svg:height", height);
+                    if (width != "100%")
+                        _writer.WriteAttributeString("svg:width", width);
+                    if (height != "100%")
+                        _writer.WriteAttributeString("svg:height", height);
 
                     //_writer.WriteAttributeString("style:rel-height", "scale");
                     //_writer.WriteAttributeString("style:rel-width", "100%");
@@ -2635,7 +2638,8 @@ namespace SIL.PublishingSolution
                     {
                         _writer.WriteAttributeString("text:anchor-type", "page");
                     }
-                    _writer.WriteAttributeString("svg:width", width);
+                    if (width != "100%")
+                        _writer.WriteAttributeString("svg:width", width);
                     _writer.WriteAttributeString("svg:height", height);
 
                     _writer.WriteStartElement("draw:image");
