@@ -248,7 +248,6 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void EpubIndentFileComparisonTest()
         {
-            Param.LoadSettings();
             const string XhtmlName = "EpubIndentFileComparison.xhtml";
             const string CssName = "EpubIndentFileComparison.css";
             PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -256,9 +255,6 @@ namespace Test.epubConvert
             projInfo.ProjectName = "Scripture Draft";
             projInfo.ProjectInputType = "Scripture";
             File.Copy(FileProg(@"Styles\Scripture\epub.css"), FileOutput("epub.css"));
-            File.Copy(FileProg(@"Styles\Scripture\book.css"), FileOutput("book.css"));
-            File.Copy(FileProg(@"Styles\Scripture\epub_scripture.css"), FileOutput("epub_scripture.css"));
-            File.Copy(FileProg(@"Styles\Scripture\epub_pictures.css"), FileOutput("epub_pictures.css"));
             var target = new Exportepub();
             var actual = target.Export(projInfo);
             Assert.IsTrue(actual);
