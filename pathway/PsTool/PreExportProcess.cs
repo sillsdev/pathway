@@ -2578,6 +2578,33 @@ namespace SIL.Tool
 
         }
 
+        public void ChangeEntryMultiPictClassName(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            string xPath = "//div[@class='entry']";
+            XmlNodeList entryNodes = xDoc.SelectNodes(xPath, namespaceManager);
+
+            for (int i = 0; i < entryNodes.Count; i++)
+            {
+                xPath = ".//img";
+                XmlNodeList imgNodes = entryNodes[i].SelectNodes(xPath, namespaceManager);
+                if(imgNodes.Count <= 1) continue;
+                 for (int j = 0; j < imgNodes.Count; j++)
+                 {
+                     if(j==0) continue;
+                     XmlNode imgNode = imgNodes[j].ParentNode;
+                     imgNode.Attributes["class"].Value = "pictureNone";
+                 }
+            }
+            xDoc.Save(fileName);
+            SetPictureNoneInCSS();
+
+        }
+
 
         public void RemoveEmptySpan(string fileName)
         {
@@ -3343,6 +3370,18 @@ namespace SIL.Tool
             tw.WriteLine(".Cover img{");
             tw.WriteLine("height: 595px;");
             tw.WriteLine("width: 446.25px;");
+            tw.WriteLine("}");
+            tw.Close();
+        }
+
+        public void SetPictureNoneInCSS()
+        {
+            TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
+            tw.WriteLine(".PictureNone {");
+            tw.WriteLine("float: none;");
+            tw.WriteLine("display: none;");
+            tw.WriteLine("text-align: center;");
+            tw.WriteLine("clear: none;");
             tw.WriteLine("}");
             tw.Close();
         }
