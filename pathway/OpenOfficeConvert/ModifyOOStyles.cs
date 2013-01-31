@@ -795,7 +795,7 @@ namespace SIL.PublishingSolution
                     //nameGraphicElement.SetAttribute("style:wrap-contour", "false");
                     SetAttribute("false", "style:wrap-contour");
                     //nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
-                    SetAttribute("bottom", "style:vertical-pos");
+                    SetAttribute( "from-top","style:vertical-pos");
                     //nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
                     SetAttribute("paragraph", "style:vertical-rel");
                     //nameGraphicElement.SetAttribute("style:horizontal-pos", position);
@@ -816,7 +816,7 @@ namespace SIL.PublishingSolution
                         SetAttribute("none","style:wrap");
                     }
                     SetAttribute("false", "style:wrap-contour");
-                    SetAttribute("bottom", "style:vertical-pos");
+                    SetAttribute("from-top", "style:vertical-pos");
                     SetAttribute("paragraph", "style:vertical-rel");
                     SetAttribute("right", "style:horizontal-pos");
                     SetAttribute("paragraph", "style:horizontal-rel");

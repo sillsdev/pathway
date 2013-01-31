@@ -380,7 +380,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "page left margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-left", "1.5cm"),
                 new ODet(ODet.Chk, "page right margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-right", "1.5cm"),
                 new ODet(ODet.Chk, "page bottom margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-bottom", "1.15cm"),
-                new ODet(ODet.Chk, "title section", "mat21-23.odt", ODet.Content, "//office:body/office:text/*[5]/@text:name", "Sect_scrBook"),
+                new ODet(ODet.Chk, "title section", "mat21-23.odt", ODet.Content, "//office:body/office:text/*[4]/@text:name", "Sect_scrBook"),
                 new ODet(ODet.Chk, "book title", "mat21-23.odt", ODet.Content, "//text:span[@text:style-name='scrBookName_scrBook_scrBody']", "Mateo"),
                 new ODet(ODet.Chk, "book code", "mat21-23.odt", ODet.Content, "//text:span[@text:style-name='scrBookCode_scrBook_scrBody']", "MAT"),
                 new ODet(ODet.Chk, "main title", "mat21-23.odt", ODet.Content, "//text:span[@text:style-name='span_TitleMain_scrBook_scrBody']", "Mateo"),
@@ -403,6 +403,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "secondary title style", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleSecondary_TitleMain_scrBook_scrBody']//@fo:font-style", "italic"),
                 new ODet(ODet.Chk, "secondary title font size", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleSecondary_TitleMain_scrBook_scrBody']//@fo:font-size", "16pt"),
                 new ODet(ODet.Chk, "secondary title complex font size", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleSecondary_TitleMain_scrBook_scrBody']//@style:font-size-complex", "16pt"),
+                new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics1']//@style:vertical-pos", "from-top"),
             };
 
             ExportTest("T4", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
