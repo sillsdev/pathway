@@ -2286,6 +2286,7 @@ namespace SIL.PublishingSolution
 
                     //string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _sourcePicturePath);
                     string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+                    string currentPicturePath = _sourcePicturePath;
                     if (_allStyle.Peek().IndexOf("logo") == 0)
                     {
                         //Change the path which have the default styles
@@ -2293,15 +2294,15 @@ namespace SIL.PublishingSolution
                         if(executablePath.Contains("Paratext 7"))
                         {
                             folderName = Common.LeftString(executablePath, "Paratext 7");
-                            _sourcePicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "SIL\\Pathway7\\Copyrights"));
+                            currentPicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "SIL\\Pathway7\\Copyrights"));
                         }
                         else if (executablePath.Contains("FieldWorks 7"))
                         {
                             folderName = Common.LeftString(executablePath, "FieldWorks 7");
-                            _sourcePicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "Pathway7\\Copyrights"));
+                            currentPicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "Pathway7\\Copyrights"));
                         }
                     }
-                    string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, _sourcePicturePath);
+                    string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, currentPicturePath);
                     string fileName = Path.GetFileName(srcFile);
 
                     string normalTargetFile = _projInfo.TempOutputFolder;
@@ -2309,15 +2310,6 @@ namespace SIL.PublishingSolution
                                                                  normalTargetFile.LastIndexOf(
                                                                      Path.DirectorySeparatorChar));
                     String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + fileName);
-                    if (fromPath == string.Empty)
-                    {
-                        string tempFolder = Common.PathCombine(Path.GetTempPath(), "Preprocess");
-                        string pictureFile = Common.PathCombine(tempFolder, fileName);
-                        if (File.Exists(pictureFile))
-                        {
-                            fromPath = pictureFile;
-                        }
-                    }
                     if (File.Exists(fromPath))
                     {
                         File.Copy(fromPath, toPath, true);
