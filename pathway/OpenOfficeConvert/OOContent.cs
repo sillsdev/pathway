@@ -2309,10 +2309,18 @@ namespace SIL.PublishingSolution
                                                                  normalTargetFile.LastIndexOf(
                                                                      Path.DirectorySeparatorChar));
                     String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + fileName);
+                    if (fromPath == string.Empty)
+                    {
+                        string tempFolder = Common.PathCombine(Path.GetTempPath(), "Preprocess");
+                        string pictureFile = Common.PathCombine(tempFolder, fileName);
+                        if (File.Exists(pictureFile))
+                        {
+                            fromPath = pictureFile;
+                        }
+                    }
                     if (File.Exists(fromPath))
                     {
                         File.Copy(fromPath, toPath, true);
-
                     }
 
                     string clsName = _allStyle.Peek();

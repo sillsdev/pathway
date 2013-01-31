@@ -922,21 +922,24 @@ namespace SIL.PublishingSolution
             {
                 foreach (XmlNode xmlNode in list)
                 {
-                    XmlNode prevNode = xmlNode.PreviousSibling;
-                    string xx = prevNode.Attributes["text:style-name"].Value;
-                    if (xx.ToLower().IndexOf("sectionhead") == 0)
+                    if (xmlNode.PreviousSibling != null)
                     {
-                        xpath = ".//text:span";
-                        XmlNodeList spanList = xmlNode.SelectNodes(xpath, nsmgr1);
-                        int Cnt = 0;
-                        for (int i = 0; i < spanList.Count; i++)
+                        XmlNode prevNode = xmlNode.PreviousSibling;
+                        string xx = prevNode.Attributes["text:style-name"].Value;
+                        if (xx.ToLower().IndexOf("sectionhead") == 0)
                         {
-                            if(spanList[i].InnerXml.Contains("_Guideword_"))
+                            xpath = ".//text:span";
+                            XmlNodeList spanList = xmlNode.SelectNodes(xpath, nsmgr1);
+                            int Cnt = 0;
+                            for (int i = 0; i < spanList.Count; i++)
                             {
-                                Cnt++;
-                                prevNode.InsertBefore(spanList[i].CloneNode(true),prevNode.FirstChild);
-                                if (Cnt != 2) continue;
-                                break;
+                                if (spanList[i].InnerXml.Contains("_Guideword_"))
+                                {
+                                    Cnt++;
+                                    prevNode.InsertBefore(spanList[i].CloneNode(true), prevNode.FirstChild);
+                                    if (Cnt != 2) continue;
+                                    break;
+                                }
                             }
                         }
                     }
