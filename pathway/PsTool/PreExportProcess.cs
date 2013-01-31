@@ -2718,7 +2718,7 @@ namespace SIL.Tool
                     Debug.WriteLine(ex);
                     nodes = null;
                 }
-                if (nodes != null)
+                if (nodes != null && nodes.Count > 0)
                 {
                     XmlNode node = nodes[0];
                     var atts = node.Attributes;
@@ -2743,7 +2743,7 @@ namespace SIL.Tool
                     Debug.WriteLine(ex);
                     nodes = null;
                 }
-                if (nodes != null)
+                if (nodes != null && nodes.Count > 0)
                 {
                     XmlNode node = nodes[0];
                     var atts = node.Attributes;

@@ -277,7 +277,7 @@ namespace SIL.PublishingSolution
                                                     xeLatexCopyrightFile, include, _langFontCodeandName);
 				
 				string copyright = GetLanguageInfo(mainXhtmlFileWithPath, projInfo);
-                InsertInFile(xeLatexCopyrightFile, "Copyright information", copyright);
+                InsertInFile(xeLatexCopyrightFile, "copyright information", copyright);
 
                 return true;
             }
@@ -293,11 +293,32 @@ namespace SIL.PublishingSolution
             var writer = new StreamWriter(filePath);
             while ((contentWriter = reader.ReadLine()) != null)
             {
-                if (contentWriter.IndexOf(searchText) >= 0)
+                if (contentWriter.ToLower().IndexOf(searchText) >= 0)
                 {
                     writer.WriteLine(insertText);
+                    writer.WriteLine("\\mbox{}");
+                    writer.WriteLine("\\mbox{}");
+                    writer.WriteLine(contentWriter);
+                    string st = string.Empty;
+                    string contributors = Param.GetMetadataValue(Param.Contributor);
+                    if (contributors.Trim().Length > 0)
+                    {
+                        st = "(" + contributors + "), ";
+                    }
+                    string rights = Param.GetMetadataValue(Param.CopyrightHolder);
+                    if (rights.Trim().Length > 0)
+                    {
+                        st = st + rights;
+                    }
+
+                    writer.WriteLine(@"\OtherCopyrights{" + st + @"}\end{adjustwidth}");
+                    writer.WriteLine("\\mbox{}");
+ 
                 }
-                writer.WriteLine(contentWriter);
+                else
+                {
+                    writer.WriteLine(contentWriter);    
+                }
             }
             reader.Close();
             writer.Close();
