@@ -2138,7 +2138,7 @@ namespace SIL.PublishingSolution
 
             foreach (string target in targetList)
             {
-                if (sourceList.Contains(target))
+                if (sourceList.Contains(target) && !dictHyperlinks.ContainsKey(target))
                 {
                     dictHyperlinks.Add(target, fileDict[target] + "#" + target);
                 }
