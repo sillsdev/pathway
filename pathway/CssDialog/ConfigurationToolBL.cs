@@ -579,6 +579,8 @@ namespace SIL.PublishingSolution
             {
                 cTool.BtnScripture.Visible = true;
                 cTool.BtnDictionary.Visible = true;
+
+                btnDictionary_ClickBL();
             }
         }
 
@@ -4058,7 +4060,7 @@ namespace SIL.PublishingSolution
                 // EDB (2 May 2011): TD-2344 / replace with Export Through Pathway dlg
                 var dlg = new ExportThroughPathway("Set Defaults");
                 //var dlg = new PrintVia("Set Defaults");
-                dlg.InputType = inputTypeBL;
+                dlg.InputType = inputTypeBL; 
                 dlg.DatabaseName = "{Project_Name}";
                 dlg.Media = MediaType;
                 dlg.ShowDialog();
