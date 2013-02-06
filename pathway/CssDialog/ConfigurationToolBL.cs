@@ -579,8 +579,6 @@ namespace SIL.PublishingSolution
             {
                 cTool.BtnScripture.Visible = true;
                 cTool.BtnDictionary.Visible = true;
-
-                btnDictionary_ClickBL();
             }
         }
 
