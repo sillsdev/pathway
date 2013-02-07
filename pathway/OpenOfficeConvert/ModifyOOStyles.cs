@@ -194,6 +194,11 @@ namespace SIL.PublishingSolution
             {
                 if (!usedStyleName.Contains(className.Key))
                     continue;
+
+                if (className.Key.IndexOf("TitleMain_scrBook") == 0)
+                {
+                    _childStyle[className.Key].Add("break-before", "page");
+                }
                 //SetVisibilityColor(className);
                 //_tagType = "paragraph";
                 //_xPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + paraStyle + "\"]";
