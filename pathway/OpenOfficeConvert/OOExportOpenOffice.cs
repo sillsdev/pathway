@@ -900,11 +900,12 @@ namespace SIL.PublishingSolution
             InsertVariableOnLetHead(projInfo.TempOutputFolder);
             InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
-            CopyChapterVariableBeforeSectionHead(projInfo.TempOutputFolder);
+            ContentPostProcess(projInfo.TempOutputFolder);
         }
 
-        public static void CopyChapterVariableBeforeSectionHead(string tempOutputFolder)
+        public static void ContentPostProcess(string tempOutputFolder)
         {
+            
             string filename = Path.Combine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = new XmlDocument();
             xdoc.PreserveWhitespace = false;
@@ -915,6 +916,7 @@ namespace SIL.PublishingSolution
             nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
             nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
 
+            //CopyChapterVariableBeforeSectionHead
             string xpath = "//text:p[@text:style-name='ChapterNumber1']";
 
             XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
@@ -925,26 +927,54 @@ namespace SIL.PublishingSolution
                     if (xmlNode.PreviousSibling != null)
                     {
                         XmlNode prevNode = xmlNode.PreviousSibling;
-                        string xx = prevNode.Attributes["text:style-name"].Value;
-                        if (xx.ToLower().IndexOf("sectionhead") == 0)
+                        if (prevNode.Attributes != null)
                         {
-                            xpath = ".//text:span";
-                            XmlNodeList spanList = xmlNode.SelectNodes(xpath, nsmgr1);
-                            int Cnt = 0;
-                            for (int i = 0; i < spanList.Count; i++)
+                            string value = prevNode.Attributes["text:style-name"].Value;
+                            if (value.ToLower().IndexOf("sectionhead") == 0)
                             {
-                                if (spanList[i].InnerXml.Contains("_Guideword_"))
+                                xpath = ".//text:span";
+                                XmlNodeList spanList = xmlNode.SelectNodes(xpath, nsmgr1);
+                                int cnt = 0;
+                                for (int i = 0; i < spanList.Count; i++)
                                 {
-                                    Cnt++;
-                                    prevNode.InsertBefore(spanList[i].CloneNode(true), prevNode.FirstChild);
-                                    if (Cnt != 2) continue;
-                                    break;
+                                    if (spanList[i].InnerXml.Contains("_Guideword_"))
+                                    {
+                                        cnt++;
+                                        prevNode.InsertBefore(spanList[i].CloneNode(true), prevNode.FirstChild);
+                                        if (cnt != 2) continue;
+                                        break;
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+
+            //Move the crossrefernce to previous node TD--3346
+            xpath = "//text:note";
+
+            XmlNodeList noteList = xdoc.SelectNodes(xpath, nsmgr1);
+            if (noteList != null)
+            {
+                foreach (XmlNode note in noteList)
+                {
+                    if (note.PreviousSibling != null)
+                    {
+                        XmlNode prevNode = note.PreviousSibling;
+                        if (prevNode.InnerText.Trim().Length == 0)
+                        {
+                            prevNode = prevNode.PreviousSibling;
+                        }
+                        if (prevNode != null)
+                        {
+                            prevNode.InnerText = prevNode.InnerText.TrimEnd();
+                            prevNode.AppendChild(note);
+                        }
+                    }
+                }
+            }
+
             xdoc.PreserveWhitespace = true;
             xdoc.Save(filename);
         }
