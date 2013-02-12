@@ -843,6 +843,17 @@ namespace SIL.PublishingSolution
                             _xetexFile.Write(headerFormat);
                             _headerContent = content;
                         }
+                        if (mergedParaStyle.IndexOf("headref") == 0 && content != null)
+                        {
+                            if (_headerContent.Trim().Length == 0)
+                                _headerContent = content;
+
+                            _tocStyleName = mergedParaStyle;
+                            string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
+                            headerFormat = headerFormat.Replace("~", "\\textasciitilde{~}");
+                            _xetexFile.Write(headerFormat);
+                            _headerContent = content;
+                        }
                     }
 
                     _xetexFile.Write("\\" + mergedParaStyle + "{");

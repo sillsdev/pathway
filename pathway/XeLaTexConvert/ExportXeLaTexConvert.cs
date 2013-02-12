@@ -381,7 +381,6 @@ namespace SIL.PublishingSolution
                 _reversalIndexTexFileName = xeLatexRevesalIndexFile;
                 StreamWriter xeLatexFile = new StreamWriter(xeLatexRevesalIndexFile);
                 Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
-                Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
                 XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
                 classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
 
@@ -600,8 +599,8 @@ namespace SIL.PublishingSolution
 
                 xeLatexFile.WriteLine();
                 ReversalIndexContent += "\\input{" + reversalFileName + "} \r\n";
-                ReversalIndexContent += "\\thispagestyle{empty} \r\n";
-                ReversalIndexContent += "\\newpage \r\n";
+                //ReversalIndexContent += "\\thispagestyle{empty} \r\n";
+                //ReversalIndexContent += "\\newpage \r\n";
                 xeLatexFile.WriteLine(ReversalIndexContent);
             }
 

@@ -933,6 +933,14 @@ namespace SIL.PublishingSolution
                 }
 
             }
+            else
+            {
+                if (_outputType == Common.OutputType.XELATEX)
+                {
+                    if (_lang.Length > 0)
+                        styleName = _className + Common.SepAttrib + _lang;
+                }
+            }
             //string newStyleName = styleName + Common.SepParent + parentStyle;
             string newStyleName = GetStyleNumber(styleName);
 
