@@ -1639,15 +1639,23 @@ namespace SIL.PublishingSolution
 
         private void TableClose()
         {
-            if (_reader.Name == "table" || _reader.Name == "th" || _reader.Name == "tr" || _reader.Name == "td") // end of table,td,tr,th
-            {
-                _writer.WriteEndElement();
-                if (_reader.Name == "table")
+            
+                // end of table,td,tr,th
+                if (_reader.Name == "table" || _reader.Name == "th" || _reader.Name == "tr" || _reader.Name == "td")
                 {
-                    _tableColumnModify["table" + _tableCount] = _tableColumnCount;
-                    _isTableOpen = false;
+                    if (_isTableOpen == false)
+                    {
+                        _table.Clear();
+                        _paragraphName = null;
+                        return;
+                    }
+                    _writer.WriteEndElement();
+                    if (_reader.Name == "table")
+                    {
+                        _tableColumnModify["table" + _tableCount] = _tableColumnCount;
+                        _isTableOpen = false;
+                    }
                 }
-            }
             //if (_reader.Name == "table" || _reader.Name == "th" || _reader.Name == "tr" || _reader.Name == "td") // end of table,td,tr,th
             //{
             //    _writer.WriteEndElement();
@@ -1719,7 +1727,7 @@ namespace SIL.PublishingSolution
             {
                 _table.Add("table:table|table" + ++_tableCount);
                 _table.Add("table:table-column|" + _childName);
-                _isTableOpen = true;
+
             }
             else if (_tagType == "tr")
             {
@@ -1752,6 +1760,7 @@ namespace SIL.PublishingSolution
                     if (tag_styleName[0] == "table:table")
                     {
                         _writer.WriteAttributeString("table:name", tag_styleName[1]);
+                        _isTableOpen = true;
                     }
                     else if (tag_styleName[0] == "table:table-column")
                     {
