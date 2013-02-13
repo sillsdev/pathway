@@ -901,6 +901,93 @@ namespace SIL.PublishingSolution
             InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
             ContentPostProcess(projInfo.TempOutputFolder);
+            InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
+            InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
+        }
+
+        public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
+        {
+
+            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.PreserveWhitespace = false;
+            xdoc.Load(filename);
+
+            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
+            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+
+            //CopyChapterVariableBeforeSectionHead
+            string xpath = "//text:p[@text:style-name='letter_letHead_body']";
+
+            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
+            if (list != null)
+            {
+                foreach (XmlNode xmlNode in list)
+                {
+                    if (xmlNode.ParentNode != null)
+                    {
+                        XmlNode letDataNode = xmlNode.ParentNode.NextSibling;
+                        xpath = ".//text:variable-set[@text:name='Left_Guideword_L']";
+                        XmlNodeList leftGuidewordList = letDataNode.SelectNodes(xpath, nsmgr1);
+                        if (leftGuidewordList.Count > 0)
+                        {
+                            string xpath1 = "//text:p[@text:style-name='hideDiv_body']";
+
+                            XmlNodeList list1 = xdoc.SelectNodes(xpath1, nsmgr1);
+                            if (list1 != null && list1.Count > 0)
+                            {
+                                list1[0].AppendChild(leftGuidewordList[0].Clone());
+                            }
+                            break;
+                            //xmlNode.AppendChild(leftGuidewordList[0].Clone());
+                        }
+                    }
+                }
+            }
+
+            xdoc.PreserveWhitespace = true;
+            xdoc.Save(filename);
+        }
+
+        public static void InsertGuidewordAfterLetter(string tempOutputFolder)
+        {
+
+            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.PreserveWhitespace = false;
+            xdoc.Load(filename);
+
+            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
+            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+
+            //CopyChapterVariableBeforeSectionHead
+            string xpath = "//text:p[@text:style-name='letter_letHead_body']";
+
+            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
+            if (list != null)
+            {
+                foreach (XmlNode xmlNode in list)
+                {
+                    if (xmlNode.ParentNode != null)
+                    {
+                        XmlNode letDataNode = xmlNode.ParentNode.NextSibling;
+                        xpath = ".//text:variable-set[@text:name='Left_Guideword_L']";
+                        XmlNodeList leftGuidewordList = letDataNode.SelectNodes(xpath, nsmgr1);
+                        if (leftGuidewordList.Count > 0)
+                        {
+                            xmlNode.AppendChild(leftGuidewordList[0].Clone());
+                            continue;
+                        }
+                    }
+                }
+            }
+
+            xdoc.PreserveWhitespace = true;
+            xdoc.Save(filename);
         }
 
         public static void ContentPostProcess(string tempOutputFolder)

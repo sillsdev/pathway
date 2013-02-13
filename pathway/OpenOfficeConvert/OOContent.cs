@@ -3133,7 +3133,7 @@ namespace SIL.PublishingSolution
             if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 if (_previousParagraphName == null) _previousParagraphName = string.Empty;
-                if ((_classNameWithLang.IndexOf("headword_") == 0 || (_classNameWithLang.IndexOf("reversalform") == 0 || _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0))
+                if ((_classNameWithLang.IndexOf("headword_") == 0 || (_classNameWithLang.IndexOf("reversalform") == 0 || _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0 || _childName.Replace("span_", "").IndexOf("reversalform") == 0))
                     && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0
                     || _previousParagraphName.IndexOf("picture") >= 0))
                 {
