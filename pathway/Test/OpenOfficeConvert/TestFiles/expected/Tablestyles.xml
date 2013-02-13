@@ -332,7 +332,7 @@
       </style:graphic-properties>
     </style:style>
     <style:page-layout style:name="pm1">
-      <style:page-layout-properties>
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
       <style:header-style />
