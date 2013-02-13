@@ -1522,11 +1522,11 @@ namespace SIL.PublishingSolution
                     {
                         footCallSymb = _reader.GetAttribute(attrName);
                         if (footCallSymb.Trim().Length == 0)
-                            footCallSymb = "*";
+                            footCallSymb = "\u2006";
                     }
                     catch (NullReferenceException)
                     {
-                        footCallSymb = "*";
+                        footCallSymb = "\u2006";
                     }
                 }
             }
