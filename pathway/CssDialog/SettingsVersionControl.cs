@@ -822,18 +822,15 @@ namespace SIL.PublishingSolution
                 root.SetAttribute("version", "27");
                 // Metadata block
                 
-                XmlNode beforeNode = root.SelectSingleNode(beforeNodePath);
-
-                XmlElement newNode = dictDoc.CreateElement("option");
-                newNode.SetAttribute("name", "B5");
-                newNode.SetAttribute("file", "Page_size_B5.css");
-
-                if (beforeNode == null){return;}
-                if (beforeNode != null)
-                {
-
-                    beforeNode.ParentNode.InsertBefore(newNode, beforeNode);
-                }
+                //XmlNode beforeNode = root.SelectSingleNode(beforeNodePath);
+                //XmlElement newNode = dictDoc.CreateElement("option");
+                //newNode.SetAttribute("name", "B5");
+                //newNode.SetAttribute("file", "Page_size_B5.css");
+                //if (beforeNode == null){return;}
+                //if (beforeNode != null)
+                //{
+                //    beforeNode.ParentNode.InsertBefore(newNode, beforeNode);
+                //}
                 dictDoc.Save(destSettingsFile);
             }
             //Scripture
@@ -848,21 +845,18 @@ namespace SIL.PublishingSolution
             if (root1 != null)
             {
                 root1.SetAttribute("version", "27");
-                XmlNode beforeNode = root1.SelectSingleNode(beforeNodePath);
-
-                XmlElement newSNode = scripDoc.CreateElement("option");
-                newSNode.SetAttribute("name", "B5");
-                newSNode.SetAttribute("file", "Page_size_B5.css");
-
-                if (destSettingsFile.ToLower().Contains("scripture"))
-                {
-                    if (beforeNode == null){return;}
-                    if (beforeNode != null)
-                    {
-                        beforeNode.ParentNode.InsertBefore(newSNode, beforeNode);
-                    }
-                }
-
+                //XmlNode beforeNode = root1.SelectSingleNode(beforeNodePath);
+                //XmlElement newSNode = scripDoc.CreateElement("option");
+                //newSNode.SetAttribute("name", "B5");
+                //newSNode.SetAttribute("file", "Page_size_B5.css");
+                //if (destSettingsFile.ToLower().Contains("scripture"))
+                //{
+                //    if (beforeNode == null){return;}
+                //    if (beforeNode != null)
+                //    {
+                //        beforeNode.ParentNode.InsertBefore(newSNode, beforeNode);
+                //    }
+                //}
                 scripDoc.Save(destSettingsFile);
             }
         }
