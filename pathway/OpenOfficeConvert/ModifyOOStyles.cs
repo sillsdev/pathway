@@ -793,7 +793,7 @@ namespace SIL.PublishingSolution
                     else
                     {
                         //nameGraphicElement.SetAttribute("style:wrap", "dynamic");
-                        SetAttribute("dynamic","style:wrap");
+                        SetAttribute("parallel", "style:wrap");
                     }
                     //nameGraphicElement.SetAttribute("style:number-wrapped-paragraphs", "no-limit");
                     SetAttribute("no-limit","style:number-wrapped-paragraphs");
