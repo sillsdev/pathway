@@ -1892,6 +1892,7 @@ namespace SIL.PublishingSolution
                     result = false;
                     //cTool.TxtName.Focus();
                 }
+                cTool._previousTxtName = cTool.TxtName.Text;
             }
             return result;
         }
@@ -3686,7 +3687,8 @@ namespace SIL.PublishingSolution
                             cTool.DdlReferenceFormat.Items.Add(value);
                     }
                 }
-                cTool.DdlReferenceFormat.SelectedIndex = 0;
+                if (cTool.DdlReferenceFormat.Items.Count > 0)
+                    cTool.DdlReferenceFormat.SelectedIndex = 0;
             }
             catch
             {
