@@ -3139,7 +3139,7 @@ namespace SIL.PublishingSolution
                     && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0
                     || _previousParagraphName.IndexOf("picture") >= 0))
                 {
-                    fillHeadword = true;
+                    fillHeadword = true; 
                 }
             }
             else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture
