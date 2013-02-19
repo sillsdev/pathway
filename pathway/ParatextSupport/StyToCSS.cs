@@ -131,16 +131,16 @@ namespace SIL.PublishingSolution
             string value;
             string word = Common.LeftString(line, " ");
 
-            switch (word)
+            switch (word.ToLower())
             {
-                case "\\Name":
+                case "\\marker":
                     CreateClass(line);
                     break;
-                case "\\FontSize":
+                case "\\fontsize":
                     value = PropertyValue(line);
                     _cssProp["font-size"] = value + "pt";
                     break;
-                case "\\Color":
+                case "\\color":
                     value = PropertyValue(line);
                     string strHex =     String.Format("{0:x2}", Convert.ToUInt32(value));
                     if (strHex.Length <6)
@@ -149,52 +149,52 @@ namespace SIL.PublishingSolution
                     }
                     _cssProp["color"] = "#" + strHex;
                     break;
-                case "\\Justification":
-                case "\\JustificationType": // ??
+                case "\\justification":
+                case "\\justificationtype": // ??
                     value = PropertyValue(line);
                     _cssProp["text-align"] = value;
                     break;
-                case "\\SpaceBefore":
+                case "\\spacebefore":
                     value = PropertyValue(line);
                     _cssProp["padding-top"] = value + "pt";
                     break;
-                case "\\SpaceAfter":
+                case "\\spaceafter":
                     value = PropertyValue(line);
                     _cssProp["padding-bottom"] = value + "pt";
                     break;
-                case "\\LeftMargin":
+                case "\\leftmargin":
                     value = PropertyValue(line);
                     _cssProp["margin-left"] = value + "pt";
                     break;
-                case "\\RightMargin":
+                case "\\rightmargin":
                     value = PropertyValue(line);
                     _cssProp["margin-right"] = value + "pt";
                     break;
-                case "\\FirstLineIndent":
+                case "\\firstlineindent":
                     value = PropertyValue(line);
                     value = Common.LeftString(value, "#").Trim();
                     _cssProp["text-indent"] = value + "pt";
                     break;
-                case "\\Fontname":
+                case "\\fontname":
                     value = PropertyValue(line);
                     _cssProp["font-name"] = value;
                     break;
-                case "\\Italic":
+                case "\\italic":
                     _cssProp["font-style"] = "italic";
                     break;
-                case "\\Bold":
+                case "\\bold":
                     _cssProp["font-weight"] = "bold";
                     break;
-                case "\\Superscript":
+                case "\\superscript":
                     _cssProp["vertical-align"] = "super";
                     break;
-                case "\\Subscript":
+                case "\\subscript":
                     _cssProp["vertical-align"] = "sub";
                     break;
-                case "\\Underline":
+                case "\\underline":
                     _cssProp["text-decoration"] = "underline";
                     break;
-                case "\\LineSpacing":
+                case "\\linespacing":
                     value = PropertyValue(line);
                     string val = LineSpace(value);
                     _cssProp["line-height"] = val;
@@ -262,6 +262,7 @@ namespace SIL.PublishingSolution
             try
             {
                 propertyVal = Common.RightString(line, " ").ToLower();
+                propertyVal = Common.RightRemove(propertyVal,"#");
             }
             catch (Exception)
             {
