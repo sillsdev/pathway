@@ -753,15 +753,7 @@ namespace SIL.PublishingSolution
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.ODT;
             cssClass = cssTree.CreateCssProperty(cssFile, true);
-
-            if (projInfo.IsReversalExist)
-            {
-                if (cssClass.ContainsKey("headref") && cssClass["headref"].ContainsKey("font-family"))
-                {
-                    cssClass["headref"].Remove("font-family");
-                }
-            }
-
+            HandledInCss(ref projInfo, ref cssClass);
             int pageWidth = GetPictureWidth(cssClass);
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
@@ -881,6 +873,36 @@ namespace SIL.PublishingSolution
                 }
             }
             return returnValue;
+        }
+
+        private void HandledInCss(ref PublicationInformation projInfo, ref Dictionary<string, Dictionary<string, string>> cssClass)
+        {
+            if (projInfo.IsReversalExist)
+            {
+                if (cssClass.ContainsKey("headref") && cssClass["headref"].ContainsKey("font-family"))
+                {
+                    cssClass["headref"].Remove("font-family");
+                }
+            }
+
+            if (projInfo.ProjectInputType.ToLower() == "scripture")
+            {
+                if (cssClass.ContainsKey("ipi") && cssClass["ipi"].ContainsKey("font-size")) //TD-3281  
+                {
+                    if (cssClass.ContainsKey("IntroParagraph") && cssClass["IntroParagraph"].ContainsKey("font-size"))
+                    {
+                        cssClass["ipi"]["font-size"] = cssClass["IntroParagraph"]["font-size"];
+                    }
+                }
+
+                if (cssClass.ContainsKey("li") && cssClass["li"].ContainsKey("font-size")) //TD-3299  
+                {
+                    if (cssClass.ContainsKey("Paragraph") && cssClass["Paragraph"].ContainsKey("font-size"))
+                    {
+                        cssClass["li"]["font-size"] = cssClass["Paragraph"]["font-size"];
+                    }
+                }
+            }
         }
 
         private static void SetHeaderFontName(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass)
