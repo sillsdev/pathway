@@ -120,14 +120,25 @@ namespace SIL.PublishingSolution
             Param.LoadSettings();
         }
 
-        protected void CreateSubmission(PublicationInformation projInfo)
+        protected void ReformatData(PublicationInformation projInfo)
         {
-            throw new NotImplementedException();
-        }
+            var outFile = new Dic4MidStreamWriter(projInfo);
+            var xml = LoadXmlDocument(projInfo);
+            var nsmgr = GetNamespaceManager(xml);
+            foreach (XmlNode sense in xml.SelectNodes("//*[@class = 'entry']/xhtml:div", nsmgr))
+            {
+                var rec = new Dic4MidRec();
+                rec.AddHeadword(sense);
+                //rec.AddB4Sense(sense);
+                //rec.AddB4Sense(sense);
+                //rec.AddAfterSense(sense);
+                rec.AddReversal(sense);
+                outFile.Write(rec.Rec);
+            }
+            outFile.Close();
 
-        protected void ReportReults(PublicationInformation projInfo)
-        {
-            throw new NotImplementedException();
+            Debug.Assert(xml.DocumentElement != null);
+            xml.DocumentElement.RemoveAll();
         }
 
         protected void CreateProperties(PublicationInformation projInfo)
@@ -140,34 +151,41 @@ namespace SIL.PublishingSolution
             throw new NotImplementedException();
         }
 
-        protected void ReformatData(PublicationInformation projInfo)
+        protected void CreateSubmission(PublicationInformation projInfo)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected void ReportReults(PublicationInformation projInfo)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected static XmlDocument LoadXmlDocument(PublicationInformation projInfo)
         {
             var xml = new XmlDocument {XmlResolver = null};
             var streamReader = new StreamReader(projInfo.DefaultXhtmlFileWithPath);
             xml.Load(streamReader);
             streamReader.Close();
-            var nsmgr = GetNamespaceManager(xml);
-            foreach (XmlNode sense in xml.SelectNodes("//*['entry']/xhtml:div", nsmgr))
-            {
-
-            }
-
-            Debug.Assert(xml.DocumentElement != null);
-            xml.DocumentElement.RemoveAll();
+            return xml;
         }
 
-        private static XmlNamespaceManager GetNamespaceManager(XmlDocument xmlDocument)
+        protected static XmlNamespaceManager GetNamespaceManager(XmlDocument xmlDocument, string defaultNs = "xhtml")
         {
             var root = xmlDocument.DocumentElement;
             Debug.Assert(root != null, "Missing xml document");
             var nsManager = new XmlNamespaceManager(xmlDocument.NameTable);
             foreach (XmlAttribute attribute in root.Attributes)
             {
+                if (attribute.Name == "xmlns")
+                {
+                    nsManager.AddNamespace(defaultNs, attribute.Value);
+                    continue;
+                }
                 var namePart = attribute.Name.Split(':');
                 if (namePart[0] == "xmlns")
                     nsManager.AddNamespace(namePart[1], attribute.Value);
             }
-            nsManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             return nsManager;
         }
     }

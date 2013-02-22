@@ -63,6 +63,33 @@ namespace Test.Dic4MidConvert
             PublicationInformation projInfo = new PublicationInformation();
             Assert.IsFalse(Export(projInfo));
         }
+
+        [Test]
+        public void AddHeadwordTest()
+        {
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
+            var xml = LoadXmlDocument(projInfo);
+            var nsmgr = GetNamespaceManager(xml);
+            var sense = xml.SelectNodes("//*[@class = 'entry']/xhtml:div", nsmgr)[0];
+            var rec = new Dic4MidRec();
+            rec.AddHeadword(sense);
+            Assert.AreEqual("imba  ", rec.Rec);
+        }
+
+        [Test]
+        public void AddReversalTest()
+        {
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
+            var xml = LoadXmlDocument(projInfo);
+            var nsmgr = GetNamespaceManager(xml);
+            var sense = xml.SelectNodes("//*[@class = 'entry']/xhtml:div", nsmgr)[0];
+            var rec = new Dic4MidRec();
+            rec.AddReversal(sense);
+            Assert.AreEqual("\tcantar", rec.Rec);
+        }
+        
         /////<summary>
         /////A test for XhtmlCheck
         /////</summary>

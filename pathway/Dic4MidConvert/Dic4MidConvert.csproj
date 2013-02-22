@@ -236,6 +236,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dic4MidRec.cs" />
+    <Compile Include="Dic4MidStreamWriter.cs" />
     <Compile Include="ExportDic4Mid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
