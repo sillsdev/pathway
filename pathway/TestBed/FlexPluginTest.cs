@@ -1204,5 +1204,30 @@ namespace TestBed
             exportPDFPrince.Export(projInfo);
         }
 
+        private void button8_Click_1(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
+
+            if (!File.Exists(txtCSSInput.Text))
+            {
+                MessageBox.Show("Please enter the valid CSS path");
+                return;
+            }
+            var exportDic4Mid = new ExportDic4Mid();
+            PublicationInformation projInfo = new PublicationInformation();
+
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
+
+            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            projInfo.DictionaryPath = projInfo.ProjectPath;
+            exportDic4Mid.Export(projInfo);
+        }
+
        }
 }

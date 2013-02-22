@@ -41,6 +41,8 @@ pathway/CssDialog/obj/*
 pathway/CssParser/bin/*
 pathway/CssParser/obj/*
 pathway/CssParser/Output
+pathway/Dic4MidConvert/bin/*
+pathway/Dic4MidConvert/obj/*
 pathway/GoBibleConvert/bin/*
 pathway/GoBibleConvert/obj/*
 pathway/HelpImprove/bin/*
