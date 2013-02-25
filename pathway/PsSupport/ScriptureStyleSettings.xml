@@ -275,6 +275,12 @@
       <style name="C5 Cols ApplicationStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="GPS - C5 - 2 Col p1.jpg" previewfile2="GPS - C5 - 2 Col p2.jpg" shown="Yes">
         <description> Two column C5 output format. </description>
       </style>
+      <style name="Letter Cols ApplicationStyles" file="Layout_14.css" approvedBy="GPS" previewfile1="GPS - Letter - 2 Col p1.jpg" previewfile2="GPS - Letter - 2 Col p2.jpg" shown="Yes">
+        <description> Two column Letter output format. </description>
+      </style>
+      <style name="A4 Cols ApplicationStyles" file="Layout_15.css" approvedBy="GPS" previewfile1="GPS - A4 - 2 Col p1.jpg" previewfile2="GPS - A4 - 2 Col p2.jpg" shown="Yes">
+        <description> Two column A4 output format. </description>
+      </style>
       <style name="A4 11pt draft" file="Layout_01.css" approvedBy="GPS" previewfile1="GPS - A4 - 1 Col - Charis 11 on 13 p1.jpg" previewfile2="GPS - A4 - 1 Col - Charis 11 on 13 p2.jpg" shown="Yes">
         <description> Single column draft 11pt A4 with drop capital </description>
       </style>
