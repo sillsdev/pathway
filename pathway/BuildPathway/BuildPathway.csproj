@@ -493,8 +493,8 @@
     <AllBackend Include="..\InDesignConvert\$(OutputPath)\InDesignConvert.*" />
     <AllBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
     <AllBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
-    <AllBackend Include="..\PsSupport\Dic4Mid\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <epubBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
+    <TestBackend Include="..\PsSupport\Dic4Mid\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\MySql*.dll" />
