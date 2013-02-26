@@ -929,7 +929,6 @@ namespace SIL.PublishingSolution
 
         public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
         {
-
             string filename = Path.Combine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = new XmlDocument();
             xdoc.PreserveWhitespace = false;
@@ -941,7 +940,7 @@ namespace SIL.PublishingSolution
             nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
 
             //CopyChapterVariableBeforeSectionHead
-            string xpath = "//text:p[@text:style-name='letter_letHead_body']";
+            string xpath = "//text:p[@text:style-name='letter_letHead_dicBody']";//letter_letHead_body
 
             XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
             if (list != null)
@@ -955,7 +954,7 @@ namespace SIL.PublishingSolution
                         XmlNodeList leftGuidewordList = letDataNode.SelectNodes(xpath, nsmgr1);
                         if (leftGuidewordList.Count > 0)
                         {
-                            string xpath1 = "//text:p[@text:style-name='hideDiv_body']";
+                            string xpath1 = "//text:p[@text:style-name='hideDiv_dicBody']";//hideDiv_body
 
                             XmlNodeList list1 = xdoc.SelectNodes(xpath1, nsmgr1);
                             if (list1 != null && list1.Count > 0)
