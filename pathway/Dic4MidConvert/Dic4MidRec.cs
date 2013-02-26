@@ -64,7 +64,7 @@ namespace SIL.PublishingSolution
             foreach (XmlNode node in sense.ChildNodes)
             {
                 var nodeClass = node.Attributes.GetNamedItem("class");
-                if (nodeClass != null && nodeClass.InnerText.Substring(0, p.Length) == p)
+                if (nodeClass != null && nodeClass.InnerText.Length >= p.Length &&  nodeClass.InnerText.Substring(0, p.Length) == p)
                 {
                     if (node.ChildNodes.Count > 1)
                         RenderNode(node.FirstChild);

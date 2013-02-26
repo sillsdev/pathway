@@ -69,9 +69,8 @@ namespace Test.Dic4MidConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
-            var xml = LoadXmlDocument(projInfo);
-            var nsmgr = GetNamespaceManager(xml);
-            var sense = xml.SelectNodes("//*[@class = 'entry']/xhtml:div", nsmgr)[0];
+            var input = new Dic4MidInput(projInfo);
+            var sense = input.SelectNodes("//*[@class = 'entry']/xhtml:div")[0];
             var rec = new Dic4MidRec();
             rec.AddHeadword(sense);
             Assert.AreEqual("imba  ", rec.Rec);
@@ -82,14 +81,53 @@ namespace Test.Dic4MidConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
-            var xml = LoadXmlDocument(projInfo);
-            var nsmgr = GetNamespaceManager(xml);
-            var sense = xml.SelectNodes("//*[@class = 'entry']/xhtml:div", nsmgr)[0];
+            var input = new Dic4MidInput(projInfo);
+            var sense = input.SelectNodes("//*[@class = 'entry']/xhtml:div")[0];
             var rec = new Dic4MidRec();
             rec.AddReversal(sense);
             Assert.AreEqual("\tcantar", rec.Rec);
         }
-        
+
+        [Test]
+        public void VernacularIsoTest()
+        {
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
+            var input = new Dic4MidInput(projInfo);
+            var result = input.VernacularIso();
+            Assert.AreEqual("seh", result);
+        }
+
+        [Test]
+        public void VernacularNameTest()
+        {
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
+            var input = new Dic4MidInput(projInfo);
+            var result = input.VernacularName();
+            Assert.AreEqual("Sena", result);
+        }
+
+        [Test]
+        public void AnalysisIsoTest()
+        {
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
+            var input = new Dic4MidInput(projInfo);
+            var result = input.AnalysisIso();
+            Assert.AreEqual("pt", result);
+        }
+
+        [Test]
+        public void AnalysisNameTest()
+        {
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
+            var input = new Dic4MidInput(projInfo);
+            var result = input.AnalysisName();
+            Assert.AreEqual("Portuguese", result);
+        }
+
         /////<summary>
         /////A test for XhtmlCheck
         /////</summary>

@@ -103,6 +103,7 @@ pathway/Test/Build/TestFiles/output/*
 pathway/Test/ConfigurationTool/TestFiles/output/*
 pathway/Test/CssDialog/TestFiles/output/*
 pathway/Test/CssParser/TestFiles/gramOutput/T*
+pathway/Test/Dic4MidConvert/TestFiles/output/*
 pathway/Test/GoBibleConvert/TestFiles/output/*
 pathway/Test/InDesignConvert/TestFiles/output/*
 pathway/Test/LiftPrepare/TestFiles/output/*

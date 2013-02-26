@@ -27,6 +27,7 @@ namespace SIL.PublishingSolution
 {
     public class ExportDic4Mid : IExportProcess
     {
+        private static Dic4MidInput _dic4MidInput;
         protected static string WorkDir;
         protected static Dictionary<string, Dictionary<string, string>> CssClass;
 
@@ -90,10 +91,10 @@ namespace SIL.PublishingSolution
                 CreateDic4Mid(projInfo);
                 inProcess.PerformStep();
 
-                CreateSubmission(projInfo);
+                //CreateSubmission(projInfo);
                 inProcess.PerformStep();
 
-                ReportReults(projInfo);
+                //ReportReults(projInfo);
                 inProcess.PerformStep();
                 success = true;
             }
@@ -123,9 +124,9 @@ namespace SIL.PublishingSolution
         protected void ReformatData(PublicationInformation projInfo)
         {
             var outFile = new Dic4MidStreamWriter(projInfo);
-            var xml = LoadXmlDocument(projInfo);
-            var nsmgr = GetNamespaceManager(xml);
-            foreach (XmlNode sense in xml.SelectNodes("//*[@class = 'entry']/xhtml:div", nsmgr))
+            outFile.Open();
+            var input = Input(projInfo);
+            foreach (XmlNode sense in input.SelectNodes("//*[@class = 'entry']/xhtml:div"))
             {
                 var rec = new Dic4MidRec();
                 rec.AddHeadword(sense);
@@ -133,22 +134,32 @@ namespace SIL.PublishingSolution
                 //rec.AddB4Sense(sense);
                 //rec.AddAfterSense(sense);
                 rec.AddReversal(sense);
-                outFile.Write(rec.Rec);
+                outFile.WriteLine(rec.Rec);
             }
             outFile.Close();
-
-            Debug.Assert(xml.DocumentElement != null);
-            xml.DocumentElement.RemoveAll();
         }
 
         protected void CreateProperties(PublicationInformation projInfo)
         {
-            throw new NotImplementedException();
+            var input = Input(projInfo);
+            var myProps = new Dic4MidProperties(projInfo);
+            myProps.SetLanguage(1, input.VernacularIso(), input.VernacularName());
+            myProps.SetLanguage(2, input.AnalysisIso(), input.AnalysisName());
+            myProps.Write();
+            myProps.Close();
         }
 
         protected void CreateDic4Mid(PublicationInformation projInfo)
         {
-            throw new NotImplementedException();
+            var output = new Dic4MidStreamWriter(projInfo);
+            Debug.Assert(output.Directory != null);
+            var processFullPath = Path.Combine(output.Directory, "go.bat");
+            var dic4MidPath = Common.FromRegistry("Dic4Mid");
+            var creatorPath = Path.Combine(dic4MidPath, "DfM-Creator");
+            FolderTree.Copy(creatorPath, output.Directory);
+            const string redirectOutputFileName = "Convert.log";
+            SubProcess.RedirectOutput = redirectOutputFileName;
+            SubProcess.Run(output.Directory, processFullPath, output.FullPath, true);
         }
 
         protected void CreateSubmission(PublicationInformation projInfo)
@@ -161,32 +172,12 @@ namespace SIL.PublishingSolution
             throw new NotImplementedException();
         }
 
-        protected static XmlDocument LoadXmlDocument(PublicationInformation projInfo)
+        protected Dic4MidInput Input(PublicationInformation projInfo)
         {
-            var xml = new XmlDocument {XmlResolver = null};
-            var streamReader = new StreamReader(projInfo.DefaultXhtmlFileWithPath);
-            xml.Load(streamReader);
-            streamReader.Close();
-            return xml;
-        }
-
-        protected static XmlNamespaceManager GetNamespaceManager(XmlDocument xmlDocument, string defaultNs = "xhtml")
-        {
-            var root = xmlDocument.DocumentElement;
-            Debug.Assert(root != null, "Missing xml document");
-            var nsManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            foreach (XmlAttribute attribute in root.Attributes)
-            {
-                if (attribute.Name == "xmlns")
-                {
-                    nsManager.AddNamespace(defaultNs, attribute.Value);
-                    continue;
-                }
-                var namePart = attribute.Name.Split(':');
-                if (namePart[0] == "xmlns")
-                    nsManager.AddNamespace(namePart[1], attribute.Value);
-            }
-            return nsManager;
+            if (_dic4MidInput != null)
+                return _dic4MidInput;
+            _dic4MidInput = new Dic4MidInput(projInfo);
+            return _dic4MidInput;
         }
     }
 }

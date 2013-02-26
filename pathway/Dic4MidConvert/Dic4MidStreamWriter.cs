@@ -14,10 +14,8 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Text;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -30,12 +28,13 @@ namespace SIL.PublishingSolution
         {
             var name = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             var myPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            Debug.Assert(myPath != null);
             StreamWriter = new StreamWriter(Path.Combine(myPath, name + ".txt"));
         }
 
-        public void Write(string value)
+        public void WriteLine(string value)
         {
-            StreamWriter.Write(value);
+            StreamWriter.WriteLine(value);
         }
 
         public void Close()
