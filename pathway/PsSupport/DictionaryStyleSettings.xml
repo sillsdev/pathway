@@ -231,6 +231,15 @@
   </roles>
   <styles>
     <paper>
+      <style name="FieldWorksA4Styles" file="Layout_15.css" approvedBy="GPS" previewfile1="FieldWorksA4Styles P1.jpg" previewfile2="FieldWorksA4Styles P2.jpg" shown="Yes">
+        <description>A4 ruled double column with Flex formatting</description>
+      </style>
+      <style name="FieldWorksStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="Fieldworks_Layout_12 P1.jpg" previewfile2="Fieldworks_Layout_12 P2.jpg" shown="Yes">
+        <description>C5 ruled double column with Flex formatting</description>
+      </style>
+      <style name="FieldWorksLetterStyles" file="Layout_14.css" approvedBy="GPS" previewfile1="FieldWorksLetterStyles P1.jpg" previewfile2="FieldWorksLetterStyles P2.jpg" shown="Yes">
+        <description>Letter ruled double column with Flex formatting</description>
+      </style>
       <style name="OneColumn" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg" shown="Yes">
         <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13</description>
       </style>
@@ -241,15 +250,6 @@
         <description>Double column 9/13pt C5 with one column, sense paragraphs, example callouts,
           writing system separator, embedded spans marked according to writing system, mirrored
           headers and rule lines.</description>
-      </style>
-      <style name="FieldWorksStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="Fieldworks_Layout_12 P1.jpg" previewfile2="Fieldworks_Layout_12 P2.jpg" shown="Yes">
-        <description>C5 ruled double column with Flex formatting</description>
-      </style>
-      <style name="FieldWorksLetterStyles" file="Layout_14.css" approvedBy="GPS" previewfile1="FieldWorksLetterStyles P1.jpg" previewfile2="FieldWorksLetterStyles P2.jpg" shown="Yes">
-        <description>Letter ruled double column with Flex formatting</description>
-      </style>
-      <style name="FieldWorksA4Styles" file="Layout_15.css" approvedBy="GPS" previewfile1="FieldWorksA4Styles P1.jpg" previewfile2="FieldWorksA4Styles P2.jpg" shown="Yes">
-        <description>A4 ruled double column with Flex formatting</description>
       </style>
       <style name="FieldWorksArabicBased" file="Layout_13.css" approvedBy="GPS" previewfile1="FieldworksArabicBased_Layout_13 p1.jpg" previewfile2="FieldworksArabicBased_Layout_13 p2.jpg" shown="Yes">
         <description>C5 ruled double column with Flex formatting for Arabic based font</description>
