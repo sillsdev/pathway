@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
@@ -152,8 +153,30 @@ namespace SIL.PublishingSolution
             var myProps = new Dic4MidProperties(projInfo);
             myProps.SetLanguage(1, input.VernacularIso(), input.VernacularName());
             myProps.SetLanguage(2, input.AnalysisIso(), input.AnalysisName());
+            myProps.InfoText = GetInfo();
             myProps.Write();
             myProps.Close();
+        }
+
+        private string GetInfo()
+        {
+            var sb = new StringBuilder();
+            const bool isConfigurationTool = false;
+            sb.Append(Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool));
+            AddMetaItem(sb, "Description");
+            AddMetaItem(sb, "Copyright Holder");
+            AddMetaItem(sb, "Creator");
+            return sb.ToString();
+        }
+
+        private static void AddMetaItem(StringBuilder sb, string item)
+        {
+            var val = Param.GetMetadataValue(item);
+            if (val != "")
+            {
+                sb.Append(" ");
+                sb.Append(val);
+            }
         }
 
         protected void CreateDic4Mid(PublicationInformation projInfo)

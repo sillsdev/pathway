@@ -14,10 +14,6 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System.Collections;
-using System.Diagnostics;
-using System.IO;
-using System.Xml;
 using NUnit.Framework;
 using System;
 using SIL.PublishingSolution;
