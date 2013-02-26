@@ -182,7 +182,7 @@
       <option name="Non-Commercial No Derivatives" file="SIL_CC-by-nc-nd.xhtml"/>
       <option name="Intended for Sale" file="SIL_Selling.xhtml"/>
     </feature>
-    <feature name="Lic_Wycliffe_x0020_Inc.">
+    <feature name="Lic_Wycliffe_x0020_Bible_x0020_Translators">
       <option name="Draft" file="WBT_Draft.xhtml"/>
       <option name="Non-Commercial Share Alike" file="WBT_CC-by-nc-sa.xhtml"/>
       <option name="Non-Commercial No Derivatives" file="WBT_CC-by-nc-nd.xhtml"/>
@@ -197,8 +197,8 @@
     </feature>
   </features>
   <categories>
-    <category name="Publisher" select="Wycliffe">
-      <item name="Wycliffe" />
+    <category name="Publisher" select="Wycliffe Bible Translators">
+      <item name="Wycliffe Bible Translators" />
       <item name="UBS" />
     </category>
     <category name="Media" select="mobile">
@@ -321,7 +321,7 @@
         <styleProperty name="FileProduced" value="One" />
         <styleProperty name="RedLetter" value="No" />
         <styleProperty name="Information" value="DRAFT Bible text." />
-        <styleProperty name="Copyright" value="© 2012 Wycliffe Inc." />
+        <styleProperty name="Copyright" value="© 2013 Wycliffe Bible Translators, Inc." />
         <styleProperty name="Icon" value="Icon.png" />
 		<styleProperty name="Language" value="English" />
       </style>
@@ -359,7 +359,7 @@
         <styleProperty name="Coverage" value=" " />
 		<styleProperty name="IncludeImage" value="Yes" />
         <styleProperty name="Information" value="DRAFT Bible text." />
-        <styleProperty name="Copyright" value="© 2012 Wycliffe Inc." />
+        <styleProperty name="Copyright" value="© 2012 Wycliffe Bible Translators, Inc." />
       </style>
     </others>
   </styles>
@@ -380,8 +380,8 @@
   </column-width>
   <Organizations>
     <Organization>SIL International</Organization>
+    <Organization>Wycliffe Bible Translators</Organization>
     <Organization>United Bible Societies</Organization>
-	  <Organization>Wycliffe Inc.</Organization>
     <Organization>Pioneer Bible Translators</Organization>
   </Organizations>
   <Metadata>
@@ -394,7 +394,8 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Publisher" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">Wycliffe_x0020_Inc.</organizationDefault>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false">Wycliffe_x0020_Bible_x0020_Translators</organizationDefault>
+      <organizationDefault organizationName="Wycliffe_x0020_Bible_x0020_Translators" Locked="false">Wycliffe_x0020_Bible_x0020_Translators</organizationDefault>
       <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">United_x0020_Bible_x0020_Societies</organizationDefault>
       <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">Pioneer_x0020_Bible_x0020_Translators</organizationDefault>
       <defaultValue></defaultValue>
@@ -403,8 +404,8 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2012_x0020_Wycliffe_x0020_Inc.</organizationDefault>
-      <organizationDefault organizationName="Wycliffe_x0020_Inc." Locked="false">_x00A9__x0020_2012_x0020_Wycliffe_x0020_Inc.</organizationDefault>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2012_x0020_Wycliffe_x0020_Bible_x0020_Translators,_x0020_Inc.</organizationDefault>
+      <organizationDefault organizationName="Wycliffe_x0020_Bible_0x0020_Translators" Locked="false">_x00A9__x0020_2012_x0020_Wycliffe_x0020_Inc.</organizationDefault>
       <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">_x00A9__x0020_2012_x0020_United_x0020_Bible_x0020_Societies._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
       <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">_x00A9__x0020_2012_x0020_Pioneer_x0020_Bible_x0020_Translators._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
       <defaultValue>_x00A9__x0020_2012_x0020_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
