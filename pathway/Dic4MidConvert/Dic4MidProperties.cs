@@ -38,17 +38,18 @@ namespace SIL.PublishingSolution
         #endregion indexed by language
 
         #region indexed by content (style number)
-        public Dic4MidStyle Styles = new Dic4MidStyle();
+        public Dic4MidStyle Styles;
         #endregion indexed by content (style number)
 
-        public Dic4MidProperties(PublicationInformation projInfo)
+        public Dic4MidProperties(PublicationInformation projInfo, Dic4MidStyle contentStyles)
         {
             var myPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             Debug.Assert(myPath != null);
+            Styles = contentStyles;
             Sw = new StreamWriter(Path.Combine(myPath, "DictionaryForMIDs.properties"));
             DictionaryAbbreviation = "SIL";
             NumberOfAvailableLanguages = 2;
-            Language1NumberOfContentDeclarations = 1;
+            Language1NumberOfContentDeclarations = Styles.NumStyles;
         }
 
         public void SetLanguage(int num, string iso, string name)

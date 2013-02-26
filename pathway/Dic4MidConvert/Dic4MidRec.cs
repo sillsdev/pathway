@@ -17,7 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
+using System.Diagnostics;
 using System.Xml;
 
 namespace SIL.PublishingSolution
@@ -25,6 +25,10 @@ namespace SIL.PublishingSolution
     public class Dic4MidRec
     {
         public string Rec { get; set; }
+        public Dictionary<string, Dictionary<string, string>> CssClass;
+        public Dic4MidStyle Styles;
+        protected int CurStyle = 1;
+        protected bool Styled = false;
         protected bool UnIndexedData = false;
 
         public Dic4MidRec()
@@ -35,6 +39,7 @@ namespace SIL.PublishingSolution
         public void AddHeadword(XmlNode sense)
         {
             var entry = sense.ParentNode;
+            Debug.Assert(entry != null);
             RenderNode(entry.FirstChild);
         }
 
@@ -45,7 +50,11 @@ namespace SIL.PublishingSolution
 
         public void AddSense(XmlNode sense)
         {
-            throw new NotImplementedException();
+            Rec += "{{";
+            RenderNode(sense);
+            if (Styled)
+                Rec += "]";
+            Rec += "}}";
         }
 
         public void AddAfterSense(XmlNode sense)
@@ -95,17 +104,55 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void RenderTextNode(XmlNode xmlNode)
+        private void RenderTextNode(XmlNode node)
         {
-            //AddStyleTag(xmlNode);
-            //AddBefore(xmlNode);
-            Rec += xmlNode.InnerText;
-            //AddAfter(xmlNode);
+            bool styled = false;
+
+            AddStyleTag(node);
+            //AddBefore(node);
+            Rec += node.InnerText;
+            //AddAfter(node);
         }
 
-        private void AddStyleTag(XmlNode xmlNode)
+        private void AddStyleTag(XmlNode node)
         {
-            throw new NotImplementedException();
+            XmlNode classNode = node;
+            string className;
+            while (true)
+            {
+                if (classNode == null)
+                    return;
+                while (classNode.Attributes == null || classNode.Attributes.GetNamedItem("class") == null)
+                    classNode = classNode.ParentNode;
+                className = classNode.Attributes.GetNamedItem("class").InnerText.Replace("-","");
+                if (CssClass.ContainsKey(className))
+                    break;
+                classNode = classNode.ParentNode;
+            }
+            var fontStyle = "plain";
+            Debug.Assert(CssClass != null);
+            if (CssClass[className].ContainsKey("font-style"))
+                if (CssClass[className]["font-style"] != "normal")
+                    fontStyle = CssClass[className]["font-style"];
+            var fontColor = "128,0,0";
+            if (CssClass[className].ContainsKey("color"))
+            {
+                var val = CssClass[className]["color"];
+                var red = int.Parse(val.Substring(1, 2));
+                var green = int.Parse(val.Substring(3, 2));
+                var blue = int.Parse(val.Substring(5, 2));
+                fontColor = string.Format("{0},{1},{2}", red, green, blue);
+            }
+            Debug.Assert(Styles != null);
+            var styleNum = Styles.Add(className, fontColor, fontStyle);
+            if (styleNum != CurStyle)
+            {
+                if (Styled)
+                    Rec += "]";
+                Rec += string.Format("[{0:D2}", styleNum);
+                CurStyle = styleNum;
+                Styled = true;
+            }
         }
 
         private void AddBefore(XmlNode xmlNode)

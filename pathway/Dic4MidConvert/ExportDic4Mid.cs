@@ -33,6 +33,7 @@ namespace SIL.PublishingSolution
         private static Dic4MidInput _dic4MidInput;
         protected static string WorkDir;
         protected static Dictionary<string, Dictionary<string, string>> CssClass;
+        protected static Dic4MidStyle ContentStyles = new Dic4MidStyle();
 
         #region Properties
         #region ExportType
@@ -136,10 +137,10 @@ namespace SIL.PublishingSolution
             var input = Input(projInfo);
             foreach (XmlNode sense in input.SelectNodes("//*[@class = 'entry']/xhtml:div"))
             {
-                var rec = new Dic4MidRec();
+                var rec = new Dic4MidRec {CssClass = CssClass, Styles = ContentStyles};
                 rec.AddHeadword(sense);
                 //rec.AddB4Sense(sense);
-                //rec.AddB4Sense(sense);
+                rec.AddSense(sense);
                 //rec.AddAfterSense(sense);
                 rec.AddReversal(sense);
                 outFile.WriteLine(rec.Rec);
@@ -150,7 +151,7 @@ namespace SIL.PublishingSolution
         protected void CreateProperties(PublicationInformation projInfo)
         {
             var input = Input(projInfo);
-            var myProps = new Dic4MidProperties(projInfo);
+            var myProps = new Dic4MidProperties(projInfo, ContentStyles);
             myProps.SetLanguage(1, input.VernacularIso(), input.VernacularName());
             myProps.SetLanguage(2, input.AnalysisIso(), input.AnalysisName());
             myProps.InfoText = GetInfo();

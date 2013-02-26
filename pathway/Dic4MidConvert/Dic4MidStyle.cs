@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 
 namespace SIL.PublishingSolution
 {
@@ -27,47 +28,60 @@ namespace SIL.PublishingSolution
             public string ContentStyle;
         } ;
 
-        protected const int NumStyles = 100;
-        protected Style[] Styles = new Style[NumStyles];
-        protected int CurStyles = 0;
+        protected const int MaxStyles = 100;
+        protected Style[] Styles = new Style[MaxStyles];
+        public int NumStyles = 0;
+        protected Dictionary<string, int> Index = new Dictionary<string,int>();
 
         public Dic4MidStyle()
         {
-            Styles[CurStyles].DisplayText = "Default";
-            Styles[CurStyles].FontColor = "128,0,0";
-            Styles[CurStyles].ContentStyle = "plain";
-            CurStyles++;
+            Styles[NumStyles].DisplayText = "Default";
+            Styles[NumStyles].FontColor = "128,0,0";
+            Styles[NumStyles].ContentStyle = "plain";
+            AddIndex(++NumStyles);
+        }
+
+        private void AddIndex(int styleNum)
+        {
+            var key = Styles[styleNum - 1].ContentStyle + ":" + Styles[styleNum - 1].FontColor;
+            Index[key] = styleNum;
         }
 
         public string DisplayText(int n)
         {
-            if (n >= CurStyles)
+            if (n > NumStyles)
                 n = 1;
             return Styles[n - 1].DisplayText;
         }
 
         public string FontColor(int n)
         {
-            if (n >= CurStyles)
+            if (n > NumStyles)
                 n = 1;
             return Styles[n - 1].FontColor;
         }
 
         public string ContentStyle(int n)
         {
-            if (n >= CurStyles)
+            if (n > NumStyles)
                 n = 1;
             return Styles[n - 1].ContentStyle;
         }
 
         public int Add(string text, string color, string style)
         {
-            if (CurStyles >= NumStyles)
+            var key = style + ":" + color;
+            if (Index.ContainsKey(key))
+            {
+                return Index[key];
+            }
+            if (NumStyles >= MaxStyles)
                 throw new OverflowException("Content Styles");
-            Styles[CurStyles].DisplayText = text;
-            Styles[CurStyles].FontColor = color;
-            Styles[CurStyles].ContentStyle = style;
-            return ++CurStyles;
+            Styles[NumStyles].DisplayText = text;
+            Styles[NumStyles].FontColor = color;
+            Styles[NumStyles].ContentStyle = style;
+            AddIndex(++NumStyles);
+            return NumStyles;
         }
     }
 }
