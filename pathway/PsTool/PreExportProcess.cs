@@ -586,6 +586,7 @@ namespace SIL.Tool
             }
 
             File.Copy(strCopyrightFile, destFile, true);
+            InsertCopyrightImageFiles(destFile, strCopyrightFile);
             Common.StreamReplaceInFile(destFile, "div id='LanguageInformation' class='Front_Matter' dir='ltr'>", GetLanguageInfo());
             Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>", GetCopyrightInfo());
             if (_projInfo.ProjectInputType.ToLower() != "dictionary")
@@ -595,6 +596,46 @@ namespace SIL.Tool
             }
             Common.SetDefaultCSS(destFile, Path.GetFileName(_cssFileNameWithPath));
         }
+
+        private void InsertCopyrightImageFiles(string copyrighthtmlfile, string copyFromLocation)
+        {
+            if (!File.Exists(copyrighthtmlfile)) return;
+            try
+            {
+                XmlTextReader _reader = Common.DeclareXmlTextReader(copyrighthtmlfile, true);
+                while (_reader.Read())
+                {
+                    if (_reader.NodeType == XmlNodeType.Element)
+                    {
+                        if (_reader.Name == "img")
+                        {
+                            string id = _reader.GetAttribute("src");
+                            var srcValue = id;
+                            if (srcValue != null)
+                            {
+                                var sourceFile = srcValue;
+                                string pictureDirectory = Path.GetDirectoryName(copyFromLocation);
+                                sourceFile = Path.Combine(pictureDirectory, sourceFile);
+                                if (sourceFile.Length > 0)
+                                {
+                                    if (File.Exists(sourceFile))
+                                    {
+                                        string destinationFile = Path.GetDirectoryName(copyrighthtmlfile);
+                                        destinationFile = Path.Combine(destinationFile, srcValue);
+                                        File.Copy(sourceFile, destinationFile, true);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                _reader.Close();
+            }
+            catch
+            {
+            }
+        }
+
 
         /// <summary>
         /// Returns the string contents of the copyright / license xhtml for inserting into the dictionary / scripture data.
