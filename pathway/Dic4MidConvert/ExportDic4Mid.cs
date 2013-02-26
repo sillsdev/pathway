@@ -102,7 +102,11 @@ namespace SIL.PublishingSolution
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                var result = MessageBox.Show(string.Format("{0} Display partial results?", ex.Message),"Report: Failure", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (result == DialogResult.Yes)
+                {
+                    DisplayOutput(projInfo);
+                }
             }
 
             inProcess.Close();
@@ -169,7 +173,7 @@ namespace SIL.PublishingSolution
         {
             var output = new Dic4MidStreamWriter(projInfo);
             var folder = Directory.GetDirectories(output.Directory, "DfM_*")[0];
-            var date = DateTime.Now.ToString("y.m.d");
+            var date = DateTime.Now.ToString("y.M.d");
             var folderParts = folder.Split('_');
             var submissionName = string.Format("DictionaryForMIDs_{0}_{1}_{2}.zip", date, folderParts[1], folderParts[2]);
             var submissionFullName = Path.Combine(output.Directory, submissionName);
@@ -181,14 +185,18 @@ namespace SIL.PublishingSolution
         protected void ReportReults(PublicationInformation projInfo)
         {
             var output = new Dic4MidStreamWriter(projInfo);
-            var result = MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display log?", output.Directory),"Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+            var result = MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display output?", output.Directory),"Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
             {
-                var viewer = Param.GetItem("//*[@name='CssEditor']/@value");
-                var arg = Path.Combine(output.Directory, LogName);
-                const bool noWait = false;
-                SubProcess.Run(output.Directory, viewer.InnerText, arg, noWait);
+                DisplayOutput(projInfo);
             }
+        }
+
+        private static void DisplayOutput(PublicationInformation projInfo)
+        {
+            var output = new Dic4MidStreamWriter(projInfo);
+            const bool noWait = false;
+            SubProcess.Run(output.Directory, "explorer.exe", output.Directory, noWait);
         }
 
         protected Dic4MidInput Input(PublicationInformation projInfo)
