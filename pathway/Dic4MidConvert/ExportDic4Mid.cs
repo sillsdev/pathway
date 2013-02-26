@@ -68,6 +68,11 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             bool success = false;
+            if (projInfo == null || string.IsNullOrEmpty(projInfo.DefaultXhtmlFileWithPath) ||
+                string.IsNullOrEmpty(projInfo.DefaultCssFileWithPath))
+            {
+                return false;
+            }
             WorkDir = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             bool isUnixOS = Common.UnixVersionCheck();
             var inProcess = new InProcess(0, 6);

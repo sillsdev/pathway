@@ -29,7 +29,6 @@ namespace SIL.PublishingSolution
         public Dic4MidStyle Styles;
         protected int CurStyle = 1;
         protected bool Styled = false;
-        protected bool UnIndexedData = false;
 
         public Dic4MidRec()
         {
@@ -90,7 +89,9 @@ namespace SIL.PublishingSolution
                 switch (node.NodeType)
                 {
                 case XmlNodeType.Element:
+                    AddBefore(node);
                     RenderNode(node);
+                    AddAfter(node);
                     break;
                 case XmlNodeType.Text:
                     RenderTextNode(node);
@@ -106,31 +107,18 @@ namespace SIL.PublishingSolution
 
         private void RenderTextNode(XmlNode node)
         {
-            bool styled = false;
-
             AddStyleTag(node);
-            //AddBefore(node);
             Rec += node.InnerText;
-            //AddAfter(node);
         }
 
-        private void AddStyleTag(XmlNode node)
+        public void AddStyleTag(XmlNode node)
         {
-            XmlNode classNode = node;
-            string className;
-            while (true)
-            {
-                if (classNode == null)
-                    return;
-                while (classNode.Attributes == null || classNode.Attributes.GetNamedItem("class") == null)
-                    classNode = classNode.ParentNode;
-                className = classNode.Attributes.GetNamedItem("class").InnerText.Replace("-","");
-                if (CssClass.ContainsKey(className))
-                    break;
-                classNode = classNode.ParentNode;
-            }
+            if (CssClass == null)
+                return;
+            var className = GetClassName(node);
+            if (className == null)
+                return;
             var fontStyle = "plain";
-            Debug.Assert(CssClass != null);
             if (CssClass[className].ContainsKey("font-style"))
                 if (CssClass[className]["font-style"] != "normal")
                     fontStyle = CssClass[className]["font-style"];
@@ -155,20 +143,43 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void AddBefore(XmlNode xmlNode)
+        private string GetClassName(XmlNode node)
         {
-            throw new NotImplementedException();
+            XmlNode classNode = node;
+            string className = null;
+            while (classNode != null)
+            {
+                while (classNode.Attributes == null || classNode.Attributes.GetNamedItem("class") == null)
+                    classNode = classNode.ParentNode;
+                className = classNode.Attributes.GetNamedItem("class").InnerText.Replace("-", "");
+                if (CssClass.ContainsKey(className))
+                    break;
+                classNode = classNode.ParentNode;
+            }
+            return className;
         }
 
-        private void AddContent(XmlNode xmlNode)
+        private void AddBefore(XmlNode node)
         {
-            throw new NotImplementedException();
+            BeforeOrAfterContent(node, "..before");
         }
 
-        private void AddAfter(XmlNode xmlNode)
+        public void AddAfter(XmlNode node)
         {
-            throw new NotImplementedException();
+            BeforeOrAfterContent(node, "..after");
         }
 
+        private void BeforeOrAfterContent(XmlNode node, string suffix)
+        {
+            if (node.Attributes == null || node.Attributes.GetNamedItem("class") == null)
+                return;
+            var className = node.Attributes.GetNamedItem("class").InnerText.Replace("-", "") + suffix;
+            if (!CssClass.ContainsKey(className))
+                return;
+            var properties = CssClass[className];
+            if (!properties.ContainsKey("content"))
+                return;
+            Rec += properties["content"];
+        }
     }
 }
