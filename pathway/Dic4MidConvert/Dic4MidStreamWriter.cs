@@ -23,13 +23,20 @@ namespace SIL.PublishingSolution
     public class Dic4MidStreamWriter
     {
         protected StreamWriter StreamWriter { get; set; }
+        public string Directory;
+        public string FullPath;
 
         public Dic4MidStreamWriter(PublicationInformation projInfo)
         {
             var name = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-            var myPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-            Debug.Assert(myPath != null);
-            StreamWriter = new StreamWriter(Path.Combine(myPath, name + ".txt"));
+            Directory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            Debug.Assert(Directory != null);
+            FullPath = Path.Combine(Directory, name + ".txt");
+        }
+
+        public void Open()
+        {
+            StreamWriter = new StreamWriter(FullPath);
         }
 
         public void WriteLine(string value)

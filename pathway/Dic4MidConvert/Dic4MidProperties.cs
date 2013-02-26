@@ -94,16 +94,16 @@ namespace SIL.PublishingSolution
             Sw.WriteLine("language2NumberOfContentDeclarations:1");
             for (int n = 1; n <= Language1NumberOfContentDeclarations; n++)
             {
-                Sw.WriteLine(string.Format("language1NumberOfContent{0:D2}DisplayText:{1}", n, Styles.DisplayText(n)));
-                Sw.WriteLine(string.Format("language1NumberOfContent{0:D2}FontColour:{1}", n, Styles.FontColor(n)));
-                Sw.WriteLine(string.Format("language1NumberOfContent{0:D2}FontStyle:{1}", n, Styles.ContentStyle(n)));
-                Sw.WriteLine(string.Format("language1NumberOfContent{0:D2}DisplaySelectable:true", n));
+                Sw.WriteLine(string.Format("language1Content{0:D2}DisplayText:{1}", n, Styles.DisplayText(n)));
+                Sw.WriteLine(string.Format("language1Content{0:D2}FontColour:{1}", n, Styles.FontColor(n)));
+                Sw.WriteLine(string.Format("language1Content{0:D2}FontStyle:{1}", n, Styles.ContentStyle(n)));
+                Sw.WriteLine(string.Format("language1Content{0:D2}DisplaySelectable:true", n));
             }
             Sw.WriteLine();
-            Sw.WriteLine("language2NumberOfContent01DisplayText:Gloss");
-            Sw.WriteLine("language2NumberOfContent01FontColour:128,0,0");
-            Sw.WriteLine("language2NumberOfContent01FontStyle:plain");
-            Sw.WriteLine("language2NumberOfContent01DisplaySelectable:true");
+            Sw.WriteLine("language2Content01DisplayText:Gloss");
+            Sw.WriteLine("language2Content01FontColour:128,0,0");
+            Sw.WriteLine("language2Content01FontStyle:plain");
+            Sw.WriteLine("language2Content01DisplaySelectable:true");
         }
 
         public void Close()

@@ -20,6 +20,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
+using ICSharpCode.SharpZipLib.Zip;
 using SIL.Tool;
 
 
@@ -27,6 +28,7 @@ namespace SIL.PublishingSolution
 {
     public class ExportDic4Mid : IExportProcess
     {
+        private const string LogName = "Convert.log";
         private static Dic4MidInput _dic4MidInput;
         protected static string WorkDir;
         protected static Dictionary<string, Dictionary<string, string>> CssClass;
@@ -51,7 +53,7 @@ namespace SIL.PublishingSolution
         #endregion Properties
 
         /// <summary>
-        /// Entry point for InDesign export
+        /// Entry point for Dictionary for Mids export
         /// </summary>
         /// <param name="exportType">scripture / dictionary</param>
         /// <param name="publicationInformation">structure with other necessary information about project.</param>
@@ -91,15 +93,16 @@ namespace SIL.PublishingSolution
                 CreateDic4Mid(projInfo);
                 inProcess.PerformStep();
 
-                //CreateSubmission(projInfo);
+                CreateSubmission(projInfo);
                 inProcess.PerformStep();
 
-                //ReportReults(projInfo);
+                ReportReults(projInfo);
                 inProcess.PerformStep();
                 success = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
             }
 
             inProcess.Close();
@@ -157,19 +160,35 @@ namespace SIL.PublishingSolution
             var dic4MidPath = Common.FromRegistry("Dic4Mid");
             var creatorPath = Path.Combine(dic4MidPath, "DfM-Creator");
             FolderTree.Copy(creatorPath, output.Directory);
-            const string redirectOutputFileName = "Convert.log";
+            const string redirectOutputFileName = LogName;
             SubProcess.RedirectOutput = redirectOutputFileName;
             SubProcess.Run(output.Directory, processFullPath, output.FullPath, true);
         }
 
         protected void CreateSubmission(PublicationInformation projInfo)
         {
-            throw new NotImplementedException();
+            var output = new Dic4MidStreamWriter(projInfo);
+            var folder = Directory.GetDirectories(output.Directory, "DfM_*")[0];
+            var date = DateTime.Now.ToString("y.m.d");
+            var folderParts = folder.Split('_');
+            var submissionName = string.Format("DictionaryForMIDs_{0}_{1}_{2}.zip", date, folderParts[1], folderParts[2]);
+            var submissionFullName = Path.Combine(output.Directory, submissionName);
+            var zip = new FastZip();
+            const bool recurse = true;
+            zip.CreateZip(submissionFullName, folder, recurse, ".*");
         }
 
         protected void ReportReults(PublicationInformation projInfo)
         {
-            throw new NotImplementedException();
+            var output = new Dic4MidStreamWriter(projInfo);
+            var result = MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display log?", output.Directory),"Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.Yes)
+            {
+                var viewer = Param.GetItem("//*[@name='CssEditor']/@value");
+                var arg = Path.Combine(output.Directory, LogName);
+                const bool noWait = false;
+                SubProcess.Run(output.Directory, viewer.InnerText, arg, noWait);
+            }
         }
 
         protected Dic4MidInput Input(PublicationInformation projInfo)
