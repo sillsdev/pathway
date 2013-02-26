@@ -76,14 +76,14 @@ namespace SIL.PublishingSolution
 
         protected static XmlDocument LoadXmlDocument(PublicationInformation projInfo)
         {
-            var xml = new XmlDocument { XmlResolver = null };
+            var xml = new XmlDocument {XmlResolver = null};
             var streamReader = new StreamReader(projInfo.DefaultXhtmlFileWithPath);
             xml.Load(streamReader);
             streamReader.Close();
             return xml;
         }
 
-        protected static XmlNamespaceManager GetNamespaceManager(XmlDocument xmlDocument, string defaultNs = "xhtml")
+        protected static XmlNamespaceManager GetNamespaceManager(XmlDocument xmlDocument, string defaultNs)
         {
             var root = xmlDocument.DocumentElement;
             Debug.Assert(root != null, "Missing xml document");
@@ -100,6 +100,11 @@ namespace SIL.PublishingSolution
                     nsManager.AddNamespace(namePart[1], attribute.Value);
             }
             return nsManager;
+        }
+
+        protected static XmlNamespaceManager GetNamespaceManager(XmlDocument xmlDocument)
+        {
+            return GetNamespaceManager(xmlDocument, "xhtml");
         }
     }
 }
