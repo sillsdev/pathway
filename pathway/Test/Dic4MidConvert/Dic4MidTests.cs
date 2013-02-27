@@ -14,6 +14,8 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
+using System.IO;
+using Microsoft.Win32;
 using NUnit.Framework;
 using System;
 using SIL.PublishingSolution;
@@ -97,11 +99,33 @@ namespace Test.Dic4MidConvert
         [Test]
         public void VernacularNameTest()
         {
+            const string sKey = @"SIL\Pathway\WritingSystemStore";
+            var lgFullPath = _testFiles.Output("seh.ldml");
+            var oVal = Registry.CurrentUser.GetValue(sKey, null);
+            RegistryKey myKey = (oVal == null)
+                        ? Registry.CurrentUser.CreateSubKey(sKey)
+                        : Registry.CurrentUser.OpenSubKey(sKey, true);
+            Registry.CurrentUser.SetValue(sKey, lgFullPath);
+            var wr = new StreamWriter(lgFullPath);
+            wr.Write(@"<?xml version=""1.0"" encoding=""utf-8""?>
+                <ldml><special xmlns:palaso=""urn://palaso.org/ldmlExtensions/v1"">
+                        <palaso:abbreviation value=""Sen"" />
+                        <palaso:languageName value=""Sena"" />
+                </special></ldml>");
+            wr.Close();
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
             var input = new Dic4MidInput(projInfo);
             var result = input.VernacularName();
             Assert.AreEqual("Sena", result);
+            if (oVal == null)
+            {
+                Registry.CurrentUser.DeleteSubKey(sKey);
+            }
+            else
+            {
+                Registry.CurrentUser.SetValue(sKey, oVal);
+            }
         }
 
         [Test]

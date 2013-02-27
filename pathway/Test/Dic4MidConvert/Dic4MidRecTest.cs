@@ -39,9 +39,6 @@ namespace Test.Dic4MidConvert
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
             projInfo.DefaultCssFileWithPath = _testFiles.Input("sena3-imba.css");
-            Param.LoadSettings();
-            Param.SetValue(Param.InputType, "Dictionary");
-            Param.LoadSettings();
             var cssTree = new CssTree();
             CssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
             var ContentStyles = new Dic4MidStyle();
@@ -58,9 +55,6 @@ namespace Test.Dic4MidConvert
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-ipa.xhtml");
             projInfo.DefaultCssFileWithPath = _testFiles.Input("sena3-ipa.css");
-            Param.LoadSettings();
-            Param.SetValue(Param.InputType, "Dictionary");
-            Param.LoadSettings();
             var cssTree = new CssTree();
             CssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
             var ContentStyles = new Dic4MidStyle();
