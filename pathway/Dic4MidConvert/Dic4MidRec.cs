@@ -37,24 +37,50 @@ namespace SIL.PublishingSolution
 
         public void AddHeadword(XmlNode sense)
         {
-            var entry = sense;
-            while (entry.Attributes == null || 
-                entry.Attributes.GetNamedItem("class") == null || 
-                entry.Attributes.GetNamedItem("class").InnerText != "entry")
-            {
-                entry = entry.ParentNode;
-            }
-            RenderNode(entry.FirstChild);
+            var headword = GetHeadwordOfSense(sense);
+            if (headword != null)
+                RenderNode(headword);
         }
 
-        public void AddB4Sense(XmlNode sense)
+        private static XmlNode GetHeadwordOfSense(XmlNode sense)
         {
-            throw new NotImplementedException();
+            var entry = GetEntry(sense);
+            var headword = entry.FirstChild;
+            // pictures use div and headwords use span. Text nodes have no local name
+            while (headword != null && headword.LocalName != "span")
+            {
+                headword = headword.NextSibling;
+            }
+            return headword;
+        }
+
+        private static XmlNode senses;
+        private static XmlNode GetEntry(XmlNode sense)
+        {
+            var entry = sense;
+            while (entry.Attributes == null ||
+                   entry.Attributes.GetNamedItem("class") == null ||
+                   entry.Attributes.GetNamedItem("class").InnerText != "entry")
+            {
+                senses = entry;
+                entry = entry.ParentNode;
+            }
+            return entry;
+        }
+
+        public void AddBeforeSense(XmlNode sense)
+        {
+            Rec += "{{";
+            var field = GetHeadwordOfSense(sense).NextSibling;
+            while (field != senses)
+            {
+                RenderNode(field);
+                field = field.NextSibling;
+            }
         }
 
         public void AddSense(XmlNode sense)
         {
-            Rec += "{{";
             RenderNode(sense);
             if (Styled)
                 Rec += "]";
@@ -63,7 +89,20 @@ namespace SIL.PublishingSolution
 
         public void AddAfterSense(XmlNode sense)
         {
-            throw new NotImplementedException();
+            GetEntry(sense);
+            var field = senses.NextSibling;
+            while (field.Attributes != null && field.Attributes.GetNamedItem("id") != null)
+            {
+                field = field.NextSibling;
+            }
+            while (field != null)
+            {
+                RenderNode(field);
+                field = field.NextSibling;
+            }
+            if (Styled)
+                Rec += "]";
+            Rec += "}}";
         }
 
         public void AddReversal(XmlNode sense)
@@ -176,6 +215,8 @@ namespace SIL.PublishingSolution
 
         private void BeforeOrAfterContent(XmlNode node, string suffix)
         {
+            if (CssClass == null)
+                return;
             if (node.Attributes == null || node.Attributes.GetNamedItem("class") == null)
                 return;
             var className = node.Attributes.GetNamedItem("class").InnerText.Replace("-", "") + suffix;

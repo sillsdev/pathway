@@ -144,9 +144,9 @@ namespace SIL.PublishingSolution
             {
                 var rec = new Dic4MidRec {CssClass = CssClass, Styles = ContentStyles};
                 rec.AddHeadword(sense);
-                //rec.AddB4Sense(sense);
+                rec.AddBeforeSense(sense);
                 rec.AddSense(sense);
-                //rec.AddAfterSense(sense);
+                rec.AddAfterSense(sense);
                 rec.AddReversal(sense);
                 outFile.WriteLine(rec.Rec);
             }

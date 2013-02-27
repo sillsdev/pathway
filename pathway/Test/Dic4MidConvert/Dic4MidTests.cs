@@ -69,10 +69,46 @@ namespace Test.Dic4MidConvert
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
             var input = new Dic4MidInput(projInfo);
-            var sense = input.SelectNodes("//*[@class = 'entry']/xhtml:div")[0];
+            var sense = input.SelectNodes("//*[@class = 'entry']//*[@id]")[0];
             var rec = new Dic4MidRec();
             rec.AddHeadword(sense);
             Assert.AreEqual("imba  ", rec.Rec);
+        }
+
+        [Test]
+        public void AddHeadwordWithPicturePresentTest()
+        {
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("hornbill.xhtml");
+            var input = new Dic4MidInput(projInfo);
+            var sense = input.SelectNodes("//*[@class = 'entry']//*[@id]")[0];
+            var rec = new Dic4MidRec();
+            rec.AddHeadword(sense);
+            Assert.AreEqual("daġöl  ", rec.Rec);
+        }
+
+        [Test]
+        public void AddBeforeSenseTest()
+        {
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("hornbill.xhtml");
+            var input = new Dic4MidInput(projInfo);
+            var sense = input.SelectNodes("//*[@class = 'entry']//*[@id]")[0];
+            var rec = new Dic4MidRec();
+            rec.AddBeforeSense(sense);
+            Assert.AreEqual("{{[ⁿda.ˈᵑɢɔl̪] ", rec.Rec);
+        }
+
+        [Test]
+        public void AddAfterSenseTest()
+        {
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("hornbill.xhtml");
+            var input = new Dic4MidInput(projInfo);
+            var sense = input.SelectNodes("//*[@class = 'entry']//*[@id]")[0];
+            var rec = new Dic4MidRec();
+            rec.AddAfterSense(sense);
+            Assert.AreEqual(" }}", rec.Rec);
         }
 
         [Test]
@@ -113,9 +149,7 @@ namespace Test.Dic4MidConvert
             var wr = new StreamWriter(lgFullPath);
             wr.Write(@"<?xml version=""1.0"" encoding=""utf-8""?>
                 <ldml><special xmlns:palaso=""urn://palaso.org/ldmlExtensions/v1"">
-                        <palaso:abbreviation value=""Sen"" />
                         <palaso:languageName value=""Sena"" />
-                        <palaso:spellCheckingId value=""seh"" />
                 </special></ldml>");
             wr.Close();
             PublicationInformation projInfo = new PublicationInformation();
