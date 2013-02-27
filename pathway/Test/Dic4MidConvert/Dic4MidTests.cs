@@ -14,6 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
+using System.Diagnostics;
 using System.IO;
 using Microsoft.Win32;
 using NUnit.Framework;
@@ -99,33 +100,41 @@ namespace Test.Dic4MidConvert
         [Test]
         public void VernacularNameTest()
         {
-            const string sKey = @"SIL\Pathway\WritingSystemStore";
+            const string sKey = @"Software\SIL\Pathway";
+            const string keyName = "WritingSystemStore";
             var lgFullPath = _testFiles.Output("seh.ldml");
-            var oVal = Registry.CurrentUser.GetValue(sKey, null);
-            RegistryKey myKey = (oVal == null)
-                        ? Registry.CurrentUser.CreateSubKey(sKey)
-                        : Registry.CurrentUser.OpenSubKey(sKey, true);
-            Registry.CurrentUser.SetValue(sKey, lgFullPath);
+            var lgDirectory = Path.GetDirectoryName(lgFullPath);
+            Debug.Assert(!string.IsNullOrEmpty(lgDirectory));
+            RegistryKey oKey = Registry.CurrentUser.OpenSubKey(sKey, true);
+            RegistryKey myKey = oKey ?? Registry.CurrentUser.CreateSubKey(sKey);
+            Debug.Assert(myKey != null);
+            var oVal = (oKey == null) ? null : oKey.GetValue(keyName, null);
+            myKey.SetValue(keyName, lgDirectory);
             var wr = new StreamWriter(lgFullPath);
             wr.Write(@"<?xml version=""1.0"" encoding=""utf-8""?>
                 <ldml><special xmlns:palaso=""urn://palaso.org/ldmlExtensions/v1"">
                         <palaso:abbreviation value=""Sen"" />
                         <palaso:languageName value=""Sena"" />
+                        <palaso:spellCheckingId value=""seh"" />
                 </special></ldml>");
             wr.Close();
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
             var input = new Dic4MidInput(projInfo);
             var result = input.VernacularName();
-            Assert.AreEqual("Sena", result);
-            if (oVal == null)
+            if (oKey == null)
             {
                 Registry.CurrentUser.DeleteSubKey(sKey);
             }
+            else if (oVal == null)
+            {
+                oKey.DeleteValue(keyName);
+            }
             else
             {
-                Registry.CurrentUser.SetValue(sKey, oVal);
+                oKey.SetValue(keyName, oVal);
             }
+            Assert.AreEqual("Sena", result);
         }
 
         [Test]
