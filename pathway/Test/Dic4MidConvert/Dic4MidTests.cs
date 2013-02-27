@@ -96,7 +96,7 @@ namespace Test.Dic4MidConvert
             var sense = input.SelectNodes("//*[@class = 'entry']//*[@id]")[0];
             var rec = new Dic4MidRec();
             rec.AddBeforeSense(sense);
-            Assert.AreEqual("{{[ⁿda.ˈᵑɢɔl̪] ", rec.Rec);
+            Assert.AreEqual(@"{{\[ⁿda.ˈᵑɢɔl̪\] ", rec.Rec);
         }
 
         [Test]

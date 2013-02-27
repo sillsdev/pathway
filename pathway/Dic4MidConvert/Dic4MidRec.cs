@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Xml;
 
 namespace SIL.PublishingSolution
@@ -29,6 +30,7 @@ namespace SIL.PublishingSolution
         public Dic4MidStyle Styles;
         protected int CurStyle = 1;
         protected bool Styled = false;
+        protected bool DisableStyles = false;
 
         public Dic4MidRec()
         {
@@ -38,8 +40,10 @@ namespace SIL.PublishingSolution
         public void AddHeadword(XmlNode sense)
         {
             var headword = GetHeadwordOfSense(sense);
+            DisableStyles = true;
             if (headword != null)
                 RenderNode(headword);
+            DisableStyles = false;
         }
 
         private static XmlNode GetHeadwordOfSense(XmlNode sense)
@@ -71,6 +75,7 @@ namespace SIL.PublishingSolution
         public void AddBeforeSense(XmlNode sense)
         {
             Rec += "{{";
+            StartStyles();
             var field = GetHeadwordOfSense(sense).NextSibling;
             while (field != senses)
             {
@@ -82,16 +87,13 @@ namespace SIL.PublishingSolution
         public void AddSense(XmlNode sense)
         {
             RenderNode(sense);
-            if (Styled)
-                Rec += "]";
-            Rec += "}}";
         }
 
         public void AddAfterSense(XmlNode sense)
         {
             GetEntry(sense);
             var field = senses.NextSibling;
-            while (field.Attributes != null && field.Attributes.GetNamedItem("id") != null)
+            while (field != null && field.Attributes != null && field.Attributes.GetNamedItem("id") != null)
             {
                 field = field.NextSibling;
             }
@@ -100,15 +102,29 @@ namespace SIL.PublishingSolution
                 RenderNode(field);
                 field = field.NextSibling;
             }
-            if (Styled)
-                Rec += "]";
+            EndStyles();
             Rec += "}}";
         }
 
         public void AddReversal(XmlNode sense)
         {
+            DisableStyles = true;
             Rec += "\t";
             RenderChildClass(sense, "definition");
+            DisableStyles = false;
+        }
+
+        private void StartStyles()
+        {
+            Styled = false;
+            CurStyle = 1;
+        }
+
+        private void EndStyles()
+        {
+            if (Styled)
+                Rec += "]";
+            Styled = false;
         }
 
         private void RenderChildClass(XmlNode sense, string p)
@@ -152,30 +168,37 @@ namespace SIL.PublishingSolution
         private void RenderTextNode(XmlNode node)
         {
             AddStyleTag(node);
-            Rec += node.InnerText;
+            Rec += Quote(node.InnerText);
+        }
+
+        private string Quote(string p)
+        {
+            return p.Replace("[", @"\[").Replace("]", @"\]").Replace("{", @"\{").Replace("}", @"\}");
         }
 
         public void AddStyleTag(XmlNode node)
         {
-            if (CssClass == null)
+            if (CssClass == null || DisableStyles)
                 return;
-            var className = GetClassName(node);
-            if (className == null)
-                return;
+            var className = GetClassName(node, "font-style");
             var fontStyle = "plain";
-            if (CssClass[className].ContainsKey("font-style"))
+            if (className != null)
+            {
                 if (CssClass[className]["font-style"] != "normal")
                     fontStyle = CssClass[className]["font-style"];
+            }
+            className = GetClassName(node, "color");
             var fontColor = "128,0,0";
-            if (CssClass[className].ContainsKey("color"))
+            if (className != null)
             {
                 var val = CssClass[className]["color"];
-                var red = int.Parse(val.Substring(1, 2));
-                var green = int.Parse(val.Substring(3, 2));
-                var blue = int.Parse(val.Substring(5, 2));
+                var red = int.Parse(val.Substring(1, 2), NumberStyles.AllowHexSpecifier);
+                var green = int.Parse(val.Substring(3, 2), NumberStyles.AllowHexSpecifier);
+                var blue = int.Parse(val.Substring(5, 2), NumberStyles.AllowHexSpecifier);
                 fontColor = string.Format("{0},{1},{2}", red, green, blue);
             }
             Debug.Assert(Styles != null);
+            className = GetClassName(node, null);
             var styleNum = Styles.Add(className, fontColor, fontStyle);
             if (styleNum != CurStyle)
             {
@@ -187,20 +210,39 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string GetClassName(XmlNode node)
+        private string GetClassName(XmlNode node, string property)
         {
             XmlNode classNode = node;
-            string className = null;
+            string className;
             while (classNode != null)
             {
-                while (classNode.Attributes == null || classNode.Attributes.GetNamedItem("class") == null)
-                    classNode = classNode.ParentNode;
-                className = classNode.Attributes.GetNamedItem("class").InnerText.Replace("-", "");
-                if (CssClass.ContainsKey(className))
-                    break;
+                if (classNode.Attributes != null)
+                {
+                    if (classNode.Attributes.GetNamedItem("xml:lang") != null && property != null)
+                    {
+                        className = "xitem_." + classNode.Attributes.GetNamedItem("xml:lang").InnerText;
+                        if (CssClass.ContainsKey(className) && CssClass[className].ContainsKey(property))
+                            return className;
+                    }
+                    if (classNode.Attributes.GetNamedItem("lang") != null && property != null)
+                    {
+                        className = "xitem_." + classNode.Attributes.GetNamedItem("lang").InnerText;
+                        if (CssClass.ContainsKey(className) && CssClass[className].ContainsKey(property))
+                            return className;
+                    }
+                    if (classNode.Attributes.GetNamedItem("class") != null)
+                    {
+                        className = classNode.Attributes.GetNamedItem("class").InnerText.Replace("-", "");
+                        if (CssClass.ContainsKey(className))
+                        {
+                            if (property == null || CssClass[className].ContainsKey(property))
+                                return className;
+                        }
+                    }
+                }
                 classNode = classNode.ParentNode;
             }
-            return className;
+            return null;
         }
 
         private void AddBefore(XmlNode node)
@@ -225,7 +267,7 @@ namespace SIL.PublishingSolution
             var properties = CssClass[className];
             if (!properties.ContainsKey("content"))
                 return;
-            Rec += properties["content"];
+            Rec += Quote(properties["content"]);
         }
     }
 }

@@ -43,7 +43,8 @@ namespace SIL.PublishingSolution
 
         private void AddIndex(int styleNum)
         {
-            var key = Styles[styleNum - 1].ContentStyle + ":" + Styles[styleNum - 1].FontColor;
+            //var key = Styles[styleNum - 1].ContentStyle + ":" + Styles[styleNum - 1].FontColor;
+            var key = Styles[styleNum - 1].DisplayText;
             Index[key] = styleNum;
         }
 
@@ -70,10 +71,21 @@ namespace SIL.PublishingSolution
 
         public int Add(string text, string color, string style)
         {
-            var key = style + ":" + color;
+            //var key = style + ":" + color;
+            var key = text;
             if (Index.ContainsKey(key))
             {
-                return Index[key];
+                var idx = Index[key];
+                if (FontColor(idx) == color && ContentStyle(idx) == style)
+                    return idx;
+                int n = 2;
+                while (Index.ContainsKey(text + n.ToString()))
+                {
+                    idx = Index[text + n.ToString()];
+                    if (FontColor(idx) == color && ContentStyle(idx) == style)
+                        return idx;
+                }
+                text += n.ToString();
             }
             if (NumStyles >= MaxStyles)
                 throw new OverflowException("Content Styles");

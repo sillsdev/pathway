@@ -50,6 +50,23 @@ namespace Test.Dic4MidConvert
         }
 
         [Test]
+        public void AddStyleTagLangTest()
+        {
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("wasp.xhtml");
+            projInfo.DefaultCssFileWithPath = _testFiles.Input("wasp.css");
+            var cssTree = new CssTree();
+            CssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+            var ContentStyles = new Dic4MidStyle();
+            var rec = new Dic4MidRec { CssClass = CssClass, Styles = ContentStyles };
+            var input = new Dic4MidInput(projInfo);
+            var node = input.SelectNodes("(//*[@class='xitem'])/*")[1];
+            rec.AddStyleTag(node);
+            Assert.AreEqual(2, ContentStyles.NumStyles);
+            Assert.AreEqual("153,51,102", rec.Styles.FontColor(2));
+        }
+
+        [Test]
         public void AddAfterTest()
         {
             PublicationInformation projInfo = new PublicationInformation();
