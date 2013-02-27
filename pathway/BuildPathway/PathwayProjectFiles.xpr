@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="13.2">
+<project version="14.1">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options/>
@@ -11,6 +11,7 @@
         <file name="../ConfigurationTool/ConfigurationTool.csproj"/>
         <file name="../CssDialog/CssDialog.csproj"/>
         <file name="../CssParser/CssParser.csproj"/>
+        <file name="../Dic4MidConvert/Dic4MidConvert.csproj"/>
         <file name="../epubConvert/epubConvert.csproj"/>
         <file name="../epubValidator/epubValidator.csproj"/>
         <file name="../GoBibleConvert/GoBibleConvert.csproj"/>

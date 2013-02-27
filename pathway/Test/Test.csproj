@@ -286,6 +286,7 @@
     <Compile Include="CssDialog\ExportThroughPathwayTest.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dic4MidConvert\Dic4MidRecTest.cs" />
     <Compile Include="Dic4MidConvert\Dic4MidTests.cs" />
     <Compile Include="GoBibleConvert\UsxToSFMTest.cs" />
     <Compile Include="PathwayB\PathwayBTest.cs" />
