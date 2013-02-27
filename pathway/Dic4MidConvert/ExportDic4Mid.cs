@@ -140,7 +140,7 @@ namespace SIL.PublishingSolution
             var outFile = new Dic4MidStreamWriter(projInfo);
             outFile.Open();
             var input = Input(projInfo);
-            foreach (XmlNode sense in input.SelectNodes("//*[@class = 'entry']/xhtml:div"))
+            foreach (XmlNode sense in input.SelectNodes("//*[@class = 'entry']//*[@id]"))
             {
                 var rec = new Dic4MidRec {CssClass = CssClass, Styles = ContentStyles};
                 rec.AddHeadword(sense);
@@ -202,8 +202,9 @@ namespace SIL.PublishingSolution
         {
             var output = new Dic4MidStreamWriter(projInfo);
             var folder = Directory.GetDirectories(output.Directory, "DfM_*")[0];
+            var folderName = Path.GetFileName(folder);
             var date = DateTime.Now.ToString("y.M.d");
-            var folderParts = folder.Split('_');
+            var folderParts = folderName.Split('_');
             var submissionName = string.Format("DictionaryForMIDs_{0}_{1}_{2}.zip", date, folderParts[1], folderParts[2]);
             var submissionFullName = Path.Combine(output.Directory, submissionName);
             var zip = new FastZip();

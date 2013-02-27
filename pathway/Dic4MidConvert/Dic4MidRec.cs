@@ -37,8 +37,13 @@ namespace SIL.PublishingSolution
 
         public void AddHeadword(XmlNode sense)
         {
-            var entry = sense.ParentNode;
-            Debug.Assert(entry != null);
+            var entry = sense;
+            while (entry.Attributes == null || 
+                entry.Attributes.GetNamedItem("class") == null || 
+                entry.Attributes.GetNamedItem("class").InnerText != "entry")
+            {
+                entry = entry.ParentNode;
+            }
             RenderNode(entry.FirstChild);
         }
 

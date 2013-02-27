@@ -63,7 +63,7 @@ namespace SIL.PublishingSolution
         {
             if (_analysisIso != null)
                 return _analysisIso;
-            var node = Xml.SelectSingleNode("//*[@class='entry']/xhtml:div//@lang", Nsmgr);
+            var node = Xml.SelectSingleNode("//*[@class='entry']//*[@id]//@lang", Nsmgr);
             Debug.Assert(node != null);
             _analysisIso = node.InnerText;
             return _analysisIso;
