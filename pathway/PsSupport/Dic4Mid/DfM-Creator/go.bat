@@ -9,6 +9,6 @@
 @if '%1' == '' GOTO Done
 @set base=%CD%
 @if NOT '%2' == '' set base=%2
-java -jar DfM-Creator.jar -DictionaryGeneration %1 %base% %base%
-java -jar DfM-Creator.jar -JarCreator %base%\dictionary %base%\Empty_Jar-Jad %base%
+java -jar DfM-Creator.jar -DictionaryGeneration "%1" "%base%" "%base%"
+java -jar DfM-Creator.jar -JarCreator "%base%\dictionary" "%base%\Empty_Jar-Jad" "%base%"
 :Done
