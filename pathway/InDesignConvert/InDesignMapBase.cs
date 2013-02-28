@@ -641,7 +641,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("MatchCharacterStylePreference");
                     _writer.WriteAttributeString("TextBefore", "");
                     _writer.WriteAttributeString("TextAfter", "");
-                    _writer.WriteAttributeString("AppliedCharacterStyle", styleName);
+                    _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/span");//styleName
                     _writer.WriteAttributeString("SearchStrategy", position);
                     _writer.WriteAttributeString("ChangeCase", "None");
                     _writer.WriteAttributeString("DeleteEndPunctuation", "false");
