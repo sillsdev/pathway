@@ -93,6 +93,8 @@ pathway/XeLaTexConvert/bin/*
 pathway/XeLaTexConvert/obj/*
 pathway/XeLaTexConvert/XeLaTexExe
 pathway/XeLaTexConvert/TexLive
+pathway/XslProcess/bin/*
+pathway/XslProcess/obj/*
 pathway/YouVersionConvert/bin/*
 pathway/YouVersionConvert/obj/*
 pathway/epubConvert/bin/*
