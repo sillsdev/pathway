@@ -478,7 +478,7 @@ namespace SIL.PublishingSolution
             else
             {
                 propertyValue = propertyValue.Replace("pt", "");
-                propertyValue = Convert.ToString(Convert.ToDouble(propertyValue) / 10);
+                propertyValue = Convert.ToString(Convert.ToDouble(propertyValue) / 24);
             }
             propertyValue = Common.SetPropertyValue("line-height", propertyValue);
             propertyValue = propertyValue.Replace("pt", "");
