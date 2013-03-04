@@ -296,7 +296,7 @@ namespace SIL.PublishingSolution
                 //    ListType[className] = IdAllClass[className][searchKey];
                 //}
             }
-            
+
             //if (Common.ColumnWidth == 0.0)
             //{
             //    Common.ColumnWidth = 148;
@@ -618,9 +618,9 @@ namespace SIL.PublishingSolution
                 }
 
                 _childName = Common.ReplaceSeperators(_childName);
-               
+
                 content = Common.ReplaceSymbolToXelatexText(content);
-                
+
                 List<string> value = CreateInlineInnerStyle(characterStyle);
 
                 if (_childName.IndexOf("scrBookName") == 0 && content != null)
@@ -638,13 +638,13 @@ namespace SIL.PublishingSolution
                 }
                 _xetexFile.Write("}");
 
-                
+
                 if (_childName.IndexOf("letterletHead") == 0 && content != null)
                 {
 
                     if (!_dictionaryStarting)
                     {
-                        _tocStartingPage = content.Substring(0,1) .ToString();
+                        _tocStartingPage = content.Substring(0, 1).ToString();
 
                         _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
 
@@ -694,7 +694,7 @@ namespace SIL.PublishingSolution
         {
             if (characterStyle == "$ID/[No character style]")
             {
-                characterStyle =  StackPeek(_allStyle);
+                characterStyle = StackPeek(_allStyle);
             }
             List<string> value = new List<string>();
             if (characterStyle.IndexOf("_") > 0)
@@ -779,10 +779,10 @@ namespace SIL.PublishingSolution
                     }
                     _inlineCount = inlineStyle.Count - paraStyleCount;
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
-                    if(_projInfo.ProjectInputType.ToLower() == "scripture")
+                    if (_projInfo.ProjectInputType.ToLower() == "scripture")
                     {
                         string referenceFormat = _projInfo.HeaderReferenceFormat;
-                        if(mergedParaStyle.ToLower().IndexOf("chapter") == 0)
+                        if (mergedParaStyle.ToLower().IndexOf("chapter") == 0)
                         {
                             _chapterStyleforHeader = mergedParaStyle;
                         }
@@ -796,7 +796,7 @@ namespace SIL.PublishingSolution
                                 }
                                 else if (referenceFormat == "Gen 1")
                                 {
-                                    _headerContent = _bookName.Substring(0,3) + " " + _chapterNo;
+                                    _headerContent = _bookName.Substring(0, 3) + " " + _chapterNo;
                                 }
                             }
                             _tocStyleName = mergedParaStyle;
@@ -832,9 +832,19 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
+                        string styleFullName = string.Empty;
+                        string[] rearrangeStyleName = characterStyle.Split('_');
+                        foreach (string currString in rearrangeStyleName)
+                        {
+                            if (!currString.Contains("."))
+                            {
+                                styleFullName += currString;
+                            }
+                        }
+
                         if (mergedParaStyle.IndexOf("headword") == 0 && content != null)
                         {
-                            if (_headerContent.Trim().Length == 0)
+                            //if (_headerContent.Trim().Length == 0)
                                 _headerContent = content;
 
                             _tocStyleName = mergedParaStyle;
@@ -843,9 +853,9 @@ namespace SIL.PublishingSolution
                             _xetexFile.Write(headerFormat);
                             _headerContent = content;
                         }
-                        if (mergedParaStyle.IndexOf("headref") == 0 && content != null)
+                        if (styleFullName == "spanreversalformentryletDatadicBody" && content != null)
                         {
-                            if (_headerContent.Trim().Length == 0)
+                            //if (_headerContent.Trim().Length == 0)
                                 _headerContent = content;
 
                             _tocStyleName = mergedParaStyle;
@@ -983,8 +993,8 @@ namespace SIL.PublishingSolution
                 isImageAvailable = true;
                 inserted = true;
                 string[] cc = _allParagraph.ToArray();
-                
-                if(cc.Length < 1)
+
+                if (cc.Length < 1)
                     imageClass = cc[1];
 
                 srcFile = _imageSource.ToLower();
@@ -1119,7 +1129,7 @@ namespace SIL.PublishingSolution
                         toPath = installedDirectory;
                         destination = Common.PathCombine(installedDirectory, Path.GetFileName(picFile));
                     }
-                    
+
                     if (!File.Exists(destination))
                     {
                         if (fromPath.IndexOf(".tif") >= 0)
@@ -1163,20 +1173,20 @@ namespace SIL.PublishingSolution
             return inserted;
         }
 
-        private void WriteImage(string picFile,int height, int width)
+        private void WriteImage(string picFile, int height, int width)
         {
             if (!string.IsNullOrEmpty(picFile))
             {
                 isImageAvailable = true;
 
                 _xetexFile.WriteLine("\r\n");
-                
+
                 string p1 = @"\begin{wrapfigure}";
                 string p2 = @"\begin{center}";
                 //string p3 = @"{\includegraphics[natwidth=2bp,natheight=2bp, width=1bp]{" + picFile + "}} ";
                 //string p3 = @"\includegraphics[width=1in,height=1in,%keepaspectratio]{" + picFile + "} ";
                 string p3 = @"\includegraphics[angle=0,width=" + width + "mm,height=" + height + "mm]{" + picFile + "} ";
-                
+
 
                 //string p1 = @"\begin{figure*}[ht!] ";
                 //string p2 = @"\centering ";
@@ -1615,7 +1625,7 @@ namespace SIL.PublishingSolution
                     //if (_endParagraphStringDic.ContainsKey(getStyleName) == false)
                     _endParagraphStringDic[getStyleName] = endParagraphString;
                 }
-                if(widows != string.Empty)
+                if (widows != string.Empty)
                 {
                     _xetexFile.WriteLine(widows);
                 }
@@ -1715,7 +1725,7 @@ namespace SIL.PublishingSolution
                 _newProperty[_paragraphName] = mystyle;
                 _dropCapStyle = _paragraphName;
                 Write();
-                
+
             }
         }
 
