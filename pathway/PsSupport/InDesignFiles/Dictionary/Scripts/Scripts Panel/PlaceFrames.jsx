@@ -14,8 +14,8 @@ var margin=new Array("letHead", "1.5", "4.5", "1.666667", "4.5");//
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  May 04 2012 
-// Task Number : TD-2984(InDesign: Change Macro to format FrontMatter Elements based on User Selection)
+// Modified On:  Mar 04 2013 
+// TD-3398(Page breaks in main section but not before reversal)
 // <remarks> 
 // Format the FrontMatter based on User Selection
 // </remarks>
@@ -530,7 +530,7 @@ function PlaceFrames()
 		frameBounds = myStory.geometricBounds;
 		frameHeight=frameBounds[2] - frameBounds[0];
 
-		if(firstParagraphStyle == "pagebreaksinside" && (currentMarginTop + frameHeight) > pageHeight)
+		if((firstParagraphStyle == "pagebreaksinside" && (currentMarginTop + frameHeight) > pageHeight) || firstParagraphStyle == "letter_4")
 		{
 			goNewPage = true;
 		}
