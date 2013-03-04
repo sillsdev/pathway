@@ -13,8 +13,9 @@ var indexTab = false;
 // <author>Greg Trihus</author> <email>greg_trihus@sil.org</email>
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
-// Modified By:  James Prabu                        
-// Task Number : TD-2984(InDesign: Change Macro to format FrontMatter Elements based on User Selection)
+// Modified By:  James Prabu           
+// Modified On:  Mar 04 2013
+// Task Number : TD-3398(Page breaks in main section but not before reversal)
 // <remarks> 
 // Format the FrontMatter based on User Selection
 // </remarks>
@@ -595,8 +596,8 @@ function PlaceFrames()
 
 		frameBounds = myStory.geometricBounds;
 		frameHeight=frameBounds[2] - frameBounds[0];
-
-		if(firstParagraphStyle == "pagebreaksinside" && (currentMarginTop + frameHeight) > pageHeight)
+		//alert(firstParagraphStyle);//pagebreaksinside
+		if((firstParagraphStyle == "pagebreaksinside" && (currentMarginTop + frameHeight) > pageHeight) || firstParagraphStyle == "letter_4")
 		{
 			goNewPage = true;
 		}
