@@ -718,11 +718,12 @@ namespace SIL.PublishingSolution
             //_writer.WriteString(data);
             if (!whiteSpaceExist && !_pseudoSingleSpace)
             {
-                _writer.WriteStartElement("text:s");
-                _writer.WriteAttributeString("text:c", "1");
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("text:s");
+                //_writer.WriteAttributeString("text:c", "1");
+                //_writer.WriteString(" ");
+                //_writer.WriteEndElement();
                 _significant = true;
-                //_writer.WriteString(" ");
+                _writer.WriteString(" ");
             }
         }
 
@@ -733,11 +734,12 @@ namespace SIL.PublishingSolution
             //_writer.WriteString(data);
             if (!whiteSpaceExist && !_pseudoSingleSpace)
             {
-                _writer.WriteStartElement("text:s");
-                _writer.WriteAttributeString("text:c", "1");
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("text:s");
+                //_writer.WriteAttributeString("text:c", "1");
+                //_writer.WriteString(" ");
+                //_writer.WriteEndElement();
                 _significant = true;
-                //_writer.WriteString(" ");
+                _writer.WriteString(" ");
             }
         }
 
@@ -921,9 +923,11 @@ namespace SIL.PublishingSolution
                 {
                     if (!_significant)
                     {
-                        _writer.WriteStartElement("text:s");
-                        _writer.WriteAttributeString("text:c", "1");
-                        _writer.WriteEndElement();
+                        //_writer.WriteStartElement("text:s");
+                        //_writer.WriteAttributeString("text:c", "1");
+                        //_writer.WriteString(" ");
+                        //_writer.WriteEndElement();
+                        _writer.WriteString(" ");
                         _significant = true;
                     }
                 }
@@ -1026,9 +1030,11 @@ namespace SIL.PublishingSolution
                 {
                     if (content.IndexOf(" ") >= 0)
                     {
-                        _writer.WriteStartElement("text:s");
-                        _writer.WriteAttributeString("text:c", "1");
-                        _writer.WriteEndElement();
+                        //_writer.WriteStartElement("text:s");
+                        //_writer.WriteAttributeString("text:c", "1");
+                        //_writer.WriteString(" ");
+                        //_writer.WriteEndElement();
+                        _writer.WriteString(" ");
                         content.Replace(" ", "");
                     }
                 }
@@ -1387,9 +1393,11 @@ namespace SIL.PublishingSolution
             {
                 int noOfChar = _reader.Value.Trim().Replace("\r\n", "").Length;
                 noOfChar = noOfChar + (noOfChar * 20 / 100);
-                _writer.WriteStartElement("text:s");
-                _writer.WriteAttributeString("text:c", noOfChar.ToString());
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("text:s");
+                //_writer.WriteAttributeString("text:c", noOfChar.ToString());
+                //_writer.WriteString(" ");
+                //_writer.WriteEndElement();
+                _writer.WriteString(" ");
                 isHiddenText = false;
                 hidden = true;
             }
@@ -1514,11 +1522,11 @@ namespace SIL.PublishingSolution
                     {
                         footCallSymb = _reader.GetAttribute(attrName);
                         if (footCallSymb.Trim().Length == 0)
-                            footCallSymb = "*";
+                            footCallSymb = "\u2006";
                     }
                     catch (NullReferenceException)
                     {
-                        footCallSymb = "*";
+                        footCallSymb = "\u2006";
                     }
                 }
             }
@@ -1599,11 +1607,11 @@ namespace SIL.PublishingSolution
             if (_closeChildName == string.Empty) return;
             string closeChild = Common.LeftString(_closeChildName, "_");
 
-            if (_closeChildName.IndexOf("scrBookCode") == 0)
-            {
-                _strBook = "";
-                _strBook2ndBook = "";
-            }
+            //if (_closeChildName.IndexOf("scrBookCode") == 0)
+            //{
+            //    _strBook = "";
+            //    _strBook2ndBook = "";
+            //}
 
             ReferenceClose(_closeChildName);
             CheckDisplayNone(closeChild);
@@ -1631,15 +1639,23 @@ namespace SIL.PublishingSolution
 
         private void TableClose()
         {
-            if (_reader.Name == "table" || _reader.Name == "th" || _reader.Name == "tr" || _reader.Name == "td") // end of table,td,tr,th
-            {
-                _writer.WriteEndElement();
-                if (_reader.Name == "table")
+            
+                // end of table,td,tr,th
+                if (_reader.Name == "table" || _reader.Name == "th" || _reader.Name == "tr" || _reader.Name == "td")
                 {
-                    _tableColumnModify["table" + _tableCount] = _tableColumnCount;
-                    _isTableOpen = false;
+                    if (_isTableOpen == false)
+                    {
+                        _table.Clear();
+                        _paragraphName = null;
+                        return;
+                    }
+                    _writer.WriteEndElement();
+                    if (_reader.Name == "table")
+                    {
+                        _tableColumnModify["table" + _tableCount] = _tableColumnCount;
+                        _isTableOpen = false;
+                    }
                 }
-            }
             //if (_reader.Name == "table" || _reader.Name == "th" || _reader.Name == "tr" || _reader.Name == "td") // end of table,td,tr,th
             //{
             //    _writer.WriteEndElement();
@@ -1711,7 +1727,7 @@ namespace SIL.PublishingSolution
             {
                 _table.Add("table:table|table" + ++_tableCount);
                 _table.Add("table:table-column|" + _childName);
-                _isTableOpen = true;
+
             }
             else if (_tagType == "tr")
             {
@@ -1744,6 +1760,7 @@ namespace SIL.PublishingSolution
                     if (tag_styleName[0] == "table:table")
                     {
                         _writer.WriteAttributeString("table:name", tag_styleName[1]);
+                        _isTableOpen = true;
                     }
                     else if (tag_styleName[0] == "table:table-column")
                     {
@@ -1801,9 +1818,11 @@ namespace SIL.PublishingSolution
                 {
                     if (j > 0)
                     {
-                        _writer.WriteStartElement("text:s");
-                        _writer.WriteAttributeString("text:c", j.ToString());
-                        _writer.WriteEndElement();
+                        //_writer.WriteStartElement("text:s");
+                        //_writer.WriteAttributeString("text:c", j.ToString());
+                        //_writer.WriteString(" ");
+                        //_writer.WriteEndElement();
+                        _writer.WriteString(" ");
 
                         j = 0;
                     }
@@ -1816,9 +1835,11 @@ namespace SIL.PublishingSolution
                 {
                     if (j > 0)
                     {
-                        _writer.WriteStartElement("text:s");
-                        _writer.WriteAttributeString("text:c", j.ToString());
-                        _writer.WriteEndElement();
+                        //_writer.WriteStartElement("text:s");
+                        //_writer.WriteAttributeString("text:c", j.ToString());
+                        //_writer.WriteString(" ");
+                        //_writer.WriteEndElement();
+                        _writer.WriteString(" ");
                         j = 0;
                     }
                     _writer.WriteString(var.ToString());
@@ -2274,6 +2295,7 @@ namespace SIL.PublishingSolution
 
                     //string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _sourcePicturePath);
                     string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+                    string currentPicturePath = _sourcePicturePath;
                     if (_allStyle.Peek().IndexOf("logo") == 0)
                     {
                         //Change the path which have the default styles
@@ -2281,15 +2303,15 @@ namespace SIL.PublishingSolution
                         if(executablePath.Contains("Paratext 7"))
                         {
                             folderName = Common.LeftString(executablePath, "Paratext 7");
-                            _sourcePicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "SIL\\Pathway7\\Copyrights"));
+                            currentPicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "SIL\\Pathway7\\Copyrights"));
                         }
                         else if (executablePath.Contains("FieldWorks 7"))
                         {
                             folderName = Common.LeftString(executablePath, "FieldWorks 7");
-                            _sourcePicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "Pathway7\\Copyrights"));
+                            currentPicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "Pathway7\\Copyrights"));
                         }
                     }
-                    string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, _sourcePicturePath);
+                    string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, currentPicturePath);
                     string fileName = Path.GetFileName(srcFile);
 
                     string normalTargetFile = _projInfo.TempOutputFolder;
@@ -2300,7 +2322,6 @@ namespace SIL.PublishingSolution
                     if (File.Exists(fromPath))
                     {
                         File.Copy(fromPath, toPath, true);
-
                     }
 
                     string clsName = _allStyle.Peek();
@@ -2439,7 +2460,7 @@ namespace SIL.PublishingSolution
                     else if (HoriAlignment.Length > 0)
                     {
                         anchorType = "paragraph";
-                        if (HoriAlignment == "top" || HoriAlignment == "bottom")
+                        if (_allStyle.Peek().IndexOf("logo") != 0 && (HoriAlignment == "top" || HoriAlignment == "bottom"))
                             anchorType = "page";
                         _writer.WriteAttributeString("text:anchor-type", anchorType);
                         _writer.WriteAttributeString("draw:z-index", "1");
@@ -2480,7 +2501,8 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                        _writer.WriteAttributeString("svg:width", width);
+                        if (width != "100%")
+                            _writer.WriteAttributeString("svg:width", width);
                         _writer.WriteAttributeString("svg:height", height);
                     }
 
@@ -2496,6 +2518,12 @@ namespace SIL.PublishingSolution
 
 
                     _frameCount++;
+
+                    if(_allStyle.Peek().ToLower().IndexOf("picturenone") == 0)
+                    {
+                        HoriAlignment = "center";
+                        wrapSide = "none";
+                    }
 
                     ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
                     modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strFrameCount, _util.ParentName, HoriAlignment,
@@ -2517,8 +2545,10 @@ namespace SIL.PublishingSolution
                     else
                         height = "100%";
 
-                    _writer.WriteAttributeString("svg:width", width);
-                    _writer.WriteAttributeString("svg:height", height);
+                    if (width != "100%")
+                        _writer.WriteAttributeString("svg:width", width);
+                    if (height != "100%")
+                        _writer.WriteAttributeString("svg:height", height);
 
                     //_writer.WriteAttributeString("style:rel-height", "scale");
                     //_writer.WriteAttributeString("style:rel-width", "100%");
@@ -2526,7 +2556,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("draw:image");
                     _writer.WriteAttributeString("xlink:type", "simple");
                     _writer.WriteAttributeString("xlink:show", "embed");
-                    _writer.WriteAttributeString("xlink:actuated", "onLoad");
+                    _writer.WriteAttributeString("xlink:actuate", "onLoad");
                     _writer.WriteAttributeString("xlink:href", "Pictures/" + fileName);
                     _writer.WriteEndElement();
                     //_writer.WriteStartElement("svg:desc");
@@ -2635,13 +2665,14 @@ namespace SIL.PublishingSolution
                     {
                         _writer.WriteAttributeString("text:anchor-type", "page");
                     }
-                    _writer.WriteAttributeString("svg:width", width);
+                    if (width != "100%")
+                        _writer.WriteAttributeString("svg:width", width);
                     _writer.WriteAttributeString("svg:height", height);
 
                     _writer.WriteStartElement("draw:image");
                     _writer.WriteAttributeString("xlink:type", "simple");
                     _writer.WriteAttributeString("xlink:show", "embed");
-                    _writer.WriteAttributeString("xlink:actuated", "onLoad");
+                    _writer.WriteAttributeString("xlink:actuate", "onLoad");
                     _writer.WriteAttributeString("xlink:href", "Pictures/" + fileName);
                     _writer.WriteEndElement();
                     _writer.WriteEndElement();
@@ -3101,12 +3132,14 @@ namespace SIL.PublishingSolution
             bool fillHeadword = false;
             if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
+                //if (content == "inde")
+                //    fillHeadword = false;
                 if (_previousParagraphName == null) _previousParagraphName = string.Empty;
-                if ((_classNameWithLang.IndexOf("headword_") == 0 || (_classNameWithLang.IndexOf("reversalform") == 0 || _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0))
+                if ((_classNameWithLang.IndexOf("headword") == 0 || (_classNameWithLang.IndexOf("reversalform") == 0 || _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0 || _childName.Replace("span_", "").IndexOf("reversalform") == 0))
                     && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0
                     || _previousParagraphName.IndexOf("picture") >= 0))
                 {
-                    fillHeadword = true;
+                    fillHeadword = true; 
                 }
             }
             else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture

@@ -194,6 +194,11 @@ namespace SIL.PublishingSolution
             {
                 if (!usedStyleName.Contains(className.Key))
                     continue;
+
+                if (className.Key.IndexOf("TitleMain_scrBook") == 0)
+                {
+                    _childStyle[className.Key].Add("break-before", "page");
+                }
                 //SetVisibilityColor(className);
                 //_tagType = "paragraph";
                 //_xPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + paraStyle + "\"]";
@@ -376,6 +381,11 @@ namespace SIL.PublishingSolution
             }
 
             XmlNode paraNode = null;
+            if(node.Attributes != null && (node.Attributes.Count > 0 && node.Attributes["style:family"].Value.ToLower() == "text"))
+            {
+                _paragraphProperty.Clear();
+            }
+
             if (_paragraphProperty.Count > 0)
             {
                 for (int i = 0; i < node.ChildNodes.Count; i++) 
@@ -783,14 +793,14 @@ namespace SIL.PublishingSolution
                     else
                     {
                         //nameGraphicElement.SetAttribute("style:wrap", "dynamic");
-                        SetAttribute("dynamic","style:wrap");
+                        SetAttribute("parallel", "style:wrap");
                     }
                     //nameGraphicElement.SetAttribute("style:number-wrapped-paragraphs", "no-limit");
                     SetAttribute("no-limit","style:number-wrapped-paragraphs");
                     //nameGraphicElement.SetAttribute("style:wrap-contour", "false");
                     SetAttribute("false", "style:wrap-contour");
                     //nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
-                    SetAttribute("bottom", "style:vertical-pos");
+                    SetAttribute( "from-top","style:vertical-pos");
                     //nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
                     SetAttribute("paragraph", "style:vertical-rel");
                     //nameGraphicElement.SetAttribute("style:horizontal-pos", position);
@@ -811,7 +821,7 @@ namespace SIL.PublishingSolution
                         SetAttribute("none","style:wrap");
                     }
                     SetAttribute("false", "style:wrap-contour");
-                    SetAttribute("bottom", "style:vertical-pos");
+                    SetAttribute("from-top", "style:vertical-pos");
                     SetAttribute("paragraph", "style:vertical-rel");
                     SetAttribute("right", "style:horizontal-pos");
                     SetAttribute("paragraph", "style:horizontal-rel");

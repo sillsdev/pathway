@@ -20,6 +20,7 @@ if "%1" == "Corporate7BTE" goto justgobible
 if "%1" == "CorporateSE" goto nogobible
 if "%1" == "Corporate7SE" goto nogobible
 xcopy %base2%\PdfConvert\%cfg2%\PdfConvert.* . /y
+xcopy %base2%\Dic4MidConvert\%cfg2%\Dic4MidConvert.* . /y
 xcopy %base2%\WordPressConvert\%cfg2%\WordPressConvert.* . /y
 xcopy %base2%\WordPressConvert\%cfg2%\MySql*.dll . /y
 xcopy %base2%\XeTeXConvert\%cfg2%\XeTeXConvert.* . /y
@@ -53,6 +54,7 @@ xcopy %base2%\PsSupport\Icons .\Icons  /i /s /q /y
 xcopy %base2%\PsSupport\Graphic .\Graphic  /i /s /q /y
 xcopy %base2%\PsSupport\Loc .\Loc  /i /s /q /y
 xcopy %base2%\PsSupport\Samples .\Samples  /i /s /q /y
+xcopy %base2%\PsSupport\Dic4Mid .\Dic4Mid  /i /s /q /y
 
 mkdir Help
 xcopy %base2%\Build\Installer\Pathway*.chm .\Help /i /s /q /y

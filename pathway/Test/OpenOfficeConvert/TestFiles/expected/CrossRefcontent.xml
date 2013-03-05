@@ -52,18 +52,46 @@
         <text:span text:style-name="headword1_.bzh_a_entry_letData_dicBody">
           <text:bookmark-start text:name="nema3" />
           <text:bookmark-end text:name="nema3" />nema3 text</text:span>
+        <text:span text:style-name="headword1_.bzh">
+          <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: nema3 text" office:value-type="string" office:string-value="nema3 text" />
+        </text:span>
+        <text:span text:style-name="headword1_.bzh">
+          <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: nema3 text" office:value-type="string" office:string-value="nema3 text" />
+        </text:span>
+        <text:span />
         <text:span text:style-name="headword1_.bzh_a_entry_letData_dicBody">
           <text:bookmark-start text:name="nema1" />
           <text:bookmark-end text:name="nema1" />nema1 text</text:span>
+        <text:span text:style-name="headword1_.bzh">
+          <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: nema1 text" office:value-type="string" office:string-value="nema1 text" />
+        </text:span>
+        <text:span text:style-name="headword1_.bzh">
+          <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: nema1 text" office:value-type="string" office:string-value="nema1 text" />
+        </text:span>
+        <text:span />
         <text:span text:style-name="headword1_.bzh_a_entry_letData_dicBody">
           <text:bookmark-start text:name="nema2" />
           <text:bookmark-end text:name="nema2" />nema2 text</text:span>
+        <text:span text:style-name="headword1_.bzh">
+          <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: nema2 text" office:value-type="string" office:string-value="nema2 text" />
+        </text:span>
+        <text:span text:style-name="headword1_.bzh">
+          <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: nema2 text" office:value-type="string" office:string-value="nema2 text" />
+        </text:span>
+        <text:span />
         <text:span text:style-name="link_entry_letData_dicBody">
           <text:a xlink:type="simple" xlink:href="#nema3">nema3 source</text:a>
         </text:span>
         <text:span text:style-name="headword1_.bzh_a_entry_letData_dicBody">
           <text:bookmark-start text:name="nema4" />
           <text:bookmark-end text:name="nema4" />nema4 text</text:span>
+        <text:span text:style-name="headword1_.bzh">
+          <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: nema4 text" office:value-type="string" office:string-value="nema4 text" />
+        </text:span>
+        <text:span text:style-name="headword1_.bzh">
+          <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: nema4 text" office:value-type="string" office:string-value="nema4 text" />
+        </text:span>
+        <text:span />
         <text:span text:style-name="pronunciation_.bzh-fonipa_pronunciations_entry_letData_dicBody">n bë jaḳ ni niröp nabë betuheng verup loḳ buk tena Eng Herod asked them in order to know without doubt when the star appeared Bua Gwelë nn bë jaḳ ni niröp nabë betuheng verup loḳ buk tena Eng Herod asked them in order to know without doubt when the star appeared Bua Gwelë nn bë jaḳ ni niröp nabë betuheng verup loḳ buk tena Eng Herod asked them in order to know without doubt when the star appeared Bua Gwelë n</text:span>
         <text:span text:style-name="link_entry_letData_dicBody">
           <text:a xlink:type="simple" xlink:href="#nema4">nema4 source</text:a>

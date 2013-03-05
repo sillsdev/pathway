@@ -1,0 +1,5 @@
+﻿@page {
+    size: 17.6cm 25cm;
+    counter-increment: page;
+    margin: 1cm 1.5cm;
+}

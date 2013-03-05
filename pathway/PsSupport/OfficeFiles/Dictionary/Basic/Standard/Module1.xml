@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jan-22-2013 for TD-3279(Maintain aspect ration on cover image)
+&apos;Changed On Mar-05-2013 for TD-3405(Pictures not on right of column)
 
 Dim CanSave as Boolean
 
@@ -10,13 +10,15 @@ Sub StartDontForget
 On Error GoTo MyError:
 	TurnOffNonPrintingCharacters() 
 	
-	AlingOverlappingImages()
+	&apos;AlingOverlappingImages()
 
 	UpdateTOC()
 	
 	If IsCoverImageInserted = &quot;true&quot; And Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
 		SetImageToCoverPage()
 	End If
+	
+	KeepLastGuidewordRight()
 	
 	If CanSave Then
 		oDoc = ThisComponent 
@@ -31,6 +33,16 @@ On Error GoTo MyError:
 MyError:
 End Sub
 
+&apos;This procedure set RightGuideword on Right align in Header
+Sub KeepLastGuidewordRight
+  For i = 0 To ThisComponent.getDrawPage().GetCount -1
+  	oGraphic  = ThisComponent.getDrawPage().getByIndex(i)
+	if oGraphic.Height &lt; 1000 Then
+		oGraphic.HoriOrient = com.sun.star.text.HoriOrientation.RIGHT
+		Exit For
+	End IF
+  Next
+End Sub
 
 &apos;Update the Table of Content
 Sub UpdateTOC

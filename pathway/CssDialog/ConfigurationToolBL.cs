@@ -146,6 +146,7 @@ namespace SIL.PublishingSolution
         {
             standardSize["595x842"] = "A4";
             standardSize["420x595"] = "A5";
+            standardSize["499x709"] = "B5";
             standardSize["459x649"] = "C5";
             standardSize["298x420"] = "A6";
             standardSize["612x792"] = "Letter";
@@ -1891,6 +1892,7 @@ namespace SIL.PublishingSolution
                     result = false;
                     //cTool.TxtName.Focus();
                 }
+                cTool._previousTxtName = cTool.TxtName.Text;
             }
             return result;
         }
@@ -3685,7 +3687,8 @@ namespace SIL.PublishingSolution
                             cTool.DdlReferenceFormat.Items.Add(value);
                     }
                 }
-                cTool.DdlReferenceFormat.SelectedIndex = 0;
+                if (cTool.DdlReferenceFormat.Items.Count > 0)
+                    cTool.DdlReferenceFormat.SelectedIndex = 0;
             }
             catch
             {
@@ -4057,7 +4060,7 @@ namespace SIL.PublishingSolution
                 // EDB (2 May 2011): TD-2344 / replace with Export Through Pathway dlg
                 var dlg = new ExportThroughPathway("Set Defaults");
                 //var dlg = new PrintVia("Set Defaults");
-                dlg.InputType = inputTypeBL;
+                dlg.InputType = inputTypeBL; 
                 dlg.DatabaseName = "{Project_Name}";
                 dlg.Media = MediaType;
                 dlg.ShowDialog();

@@ -37,6 +37,8 @@ using SIL.Tool;
 using SIL.Tool.Localization;
 using System.Data.Common;
 using System.Data;
+using TestBed.Properties;
+using epubValidator;
 using Test;
 
 namespace TestBed
@@ -356,166 +358,166 @@ namespace TestBed
             XmlNodeList nodes;
             nodes = xdoc.SelectNodes("//xhtml:div[@class='scrBook']", namespaceManager);
 
-             foreach (XmlNode node in nodes)
-             {
-                 using (XmlReader reader = XmlReader.Create(new StringReader(node.OuterXml)))
-                 {
-                     // Parse the file and display each of the nodes.
-                     while (reader.Read())
-                     {
-                         switch (reader.NodeType)
-                         {
-                             case XmlNodeType.Element:
-                                 string className = reader.GetAttribute("class");
-                                 if (className == "Section_Head")
-                                 {
-                                     if (fromChapterNumber == currentChapterNumber)
-                                     {
-                                         textString = textString + "-" + lastVerseNumber;
-                                     }
-                                     else
-                                     {
-                                         textString = textString + "-" + currentChapterNumber + ":" +
-                                                        lastVerseNumber;
-                                     }
-                                     if (textString.Trim().Length > 4)
-                                     {
-                                         // write out the node
-                                         ncx.WriteStartElement("navPoint");
-                                         ncx.WriteAttributeString("id", "dtb:uid");
-                                         ncx.WriteAttributeString("playOrder", playOrder.ToString());
-                                         ncx.WriteStartElement("navLabel");
-                                         ncx.WriteElementString("text", textString);
-                                         ncx.WriteEndElement(); // navlabel
-                                         ncx.WriteStartElement("content");
-                                         ncx.WriteAttributeString("src", sb.ToString());
-                                         ncx.WriteEndElement(); // meta
-                                         //ncx.WriteEndElement(); // meta
-                                         //ncx.WriteEndElement(); // navPoint
-                                         playOrder++;
-                                     }
-                                     if (textString.Trim().Length > 4)
-                                     {
-                                         ncx.WriteEndElement(); // navPoint
-                                         textString = string.Empty;
-                                     }
-                                     textString = string.Empty;
-                                     firstVerseNumber = string.Empty;
-                                     isSectionHead = true;
-                                 }
-                                 else if (className == "Chapter_Number")
-                                 {
-                                     isChapterNumber = true;
-                                 }
-                                 else if (className != null && className.IndexOf("Verse_Number") == 0)
-                                 {
-                                     isVerseNumber = true;
-                                 }
-                                 break;
-                             case XmlNodeType.Text:
-                                 if (isSectionHead)
-                                 {
-                                     sectionHead = reader.Value;
-                                     isSectionHead = false;
-                                 }
-                                 if (isChapterNumber)
-                                 {
-                                     currentChapterNumber = reader.Value;
-                                     isChapterNumber = false;
-                                 }
-                                 if (isVerseNumber)
-                                 {
-                                     if (firstVerseNumber.Trim().Length == 0 && sectionHead.Length > 0)
-                                     {
-                                         firstVerseNumber = reader.Value;
-                                         fromChapterNumber = currentChapterNumber;
-                                         textString = sectionHead + " " + currentChapterNumber + ":" + firstVerseNumber;
-                                     }
-                                     lastVerseNumber = reader.Value;
-                                     isVerseNumber = false;
-                                 }
-                                 break;
-                             case XmlNodeType.XmlDeclaration:
-                             case XmlNodeType.ProcessingInstruction:
-                                 break;
-                             case XmlNodeType.Comment:
-                                 break;
-                             case XmlNodeType.EndElement:
-                                 break;
-                         }
-                     }
-                 }
-                 //using (XmlReader reader = XmlReader.Create(new StringReader(node.OuterXml)))
-                 //{
-                 //    // Parse the file and display each of the nodes.
-                 //    while (reader.Read())
-                 //    {
-                 //        switch (reader.NodeType)
-                 //        {
-                 //            case XmlNodeType.Element:
-                 //                string one = reader.Name;
-                 //                string className = reader.GetAttribute("class");
-                 //                if (className == "Section_Head")
-                 //                {
-                 //                    if (fromChapterNumber == currentChapterNumber)
-                 //                    {
-                 //                        formatString = formatString + "-" + lastVerseNumber;
-                 //                    }
-                 //                    else
-                 //                    {
-                 //                        formatString = formatString + "-" + currentChapterNumber + ":" +
-                 //                                       lastVerseNumber;
-                 //                    }
-                 //                    mylist.Add(formatString);
-                 //                    formatString = string.Empty;
-                 //                    firstVerseNumber = string.Empty;
-                 //                    isSectionHead = true;
-                 //                }
-                 //                else if (className == "Chapter_Number")
-                 //                {
-                 //                    isChapterNumber = true;
-                 //                }
-                 //                else if (className != null && className.IndexOf("Verse_Number") == 0)
-                 //                {
-                 //                    isVerseNumber = true;
-                 //                }
-                 //                break;
-                 //            case XmlNodeType.Text:
-                 //                if (isSectionHead)
-                 //                {
-                 //                    sectionHead = reader.Value;
-                 //                    isSectionHead = false;
-                 //                    //VerseNumber = "0";
-                 //                }
-                 //                if (isChapterNumber)
-                 //                {
-                 //                    currentChapterNumber = reader.Value;
-                 //                    isChapterNumber = false;
-                 //                }
-                 //                if (isVerseNumber)
-                 //                {
-                 //                    if (firstVerseNumber.Trim().Length == 0 && sectionHead.Length > 0)
-                 //                    {
-                 //                        firstVerseNumber = reader.Value;
-                 //                        fromChapterNumber = currentChapterNumber;
-                 //                        formatString = sectionHead + " " + currentChapterNumber + ":" + firstVerseNumber;
-                 //                    }
+            foreach (XmlNode node in nodes)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(node.OuterXml)))
+                {
+                    // Parse the file and display each of the nodes.
+                    while (reader.Read())
+                    {
+                        switch (reader.NodeType)
+                        {
+                            case XmlNodeType.Element:
+                                string className = reader.GetAttribute("class");
+                                if (className == "Section_Head")
+                                {
+                                    if (fromChapterNumber == currentChapterNumber)
+                                    {
+                                        textString = textString + "-" + lastVerseNumber;
+                                    }
+                                    else
+                                    {
+                                        textString = textString + "-" + currentChapterNumber + ":" +
+                                                       lastVerseNumber;
+                                    }
+                                    if (textString.Trim().Length > 4)
+                                    {
+                                        // write out the node
+                                        ncx.WriteStartElement("navPoint");
+                                        ncx.WriteAttributeString("id", "dtb:uid");
+                                        ncx.WriteAttributeString("playOrder", playOrder.ToString());
+                                        ncx.WriteStartElement("navLabel");
+                                        ncx.WriteElementString("text", textString);
+                                        ncx.WriteEndElement(); // navlabel
+                                        ncx.WriteStartElement("content");
+                                        ncx.WriteAttributeString("src", sb.ToString());
+                                        ncx.WriteEndElement(); // meta
+                                        //ncx.WriteEndElement(); // meta
+                                        //ncx.WriteEndElement(); // navPoint
+                                        playOrder++;
+                                    }
+                                    if (textString.Trim().Length > 4)
+                                    {
+                                        ncx.WriteEndElement(); // navPoint
+                                        textString = string.Empty;
+                                    }
+                                    textString = string.Empty;
+                                    firstVerseNumber = string.Empty;
+                                    isSectionHead = true;
+                                }
+                                else if (className == "Chapter_Number")
+                                {
+                                    isChapterNumber = true;
+                                }
+                                else if (className != null && className.IndexOf("Verse_Number") == 0)
+                                {
+                                    isVerseNumber = true;
+                                }
+                                break;
+                            case XmlNodeType.Text:
+                                if (isSectionHead)
+                                {
+                                    sectionHead = reader.Value;
+                                    isSectionHead = false;
+                                }
+                                if (isChapterNumber)
+                                {
+                                    currentChapterNumber = reader.Value;
+                                    isChapterNumber = false;
+                                }
+                                if (isVerseNumber)
+                                {
+                                    if (firstVerseNumber.Trim().Length == 0 && sectionHead.Length > 0)
+                                    {
+                                        firstVerseNumber = reader.Value;
+                                        fromChapterNumber = currentChapterNumber;
+                                        textString = sectionHead + " " + currentChapterNumber + ":" + firstVerseNumber;
+                                    }
+                                    lastVerseNumber = reader.Value;
+                                    isVerseNumber = false;
+                                }
+                                break;
+                            case XmlNodeType.XmlDeclaration:
+                            case XmlNodeType.ProcessingInstruction:
+                                break;
+                            case XmlNodeType.Comment:
+                                break;
+                            case XmlNodeType.EndElement:
+                                break;
+                        }
+                    }
+                }
+                //using (XmlReader reader = XmlReader.Create(new StringReader(node.OuterXml)))
+                //{
+                //    // Parse the file and display each of the nodes.
+                //    while (reader.Read())
+                //    {
+                //        switch (reader.NodeType)
+                //        {
+                //            case XmlNodeType.Element:
+                //                string one = reader.Name;
+                //                string className = reader.GetAttribute("class");
+                //                if (className == "Section_Head")
+                //                {
+                //                    if (fromChapterNumber == currentChapterNumber)
+                //                    {
+                //                        formatString = formatString + "-" + lastVerseNumber;
+                //                    }
+                //                    else
+                //                    {
+                //                        formatString = formatString + "-" + currentChapterNumber + ":" +
+                //                                       lastVerseNumber;
+                //                    }
+                //                    mylist.Add(formatString);
+                //                    formatString = string.Empty;
+                //                    firstVerseNumber = string.Empty;
+                //                    isSectionHead = true;
+                //                }
+                //                else if (className == "Chapter_Number")
+                //                {
+                //                    isChapterNumber = true;
+                //                }
+                //                else if (className != null && className.IndexOf("Verse_Number") == 0)
+                //                {
+                //                    isVerseNumber = true;
+                //                }
+                //                break;
+                //            case XmlNodeType.Text:
+                //                if (isSectionHead)
+                //                {
+                //                    sectionHead = reader.Value;
+                //                    isSectionHead = false;
+                //                    //VerseNumber = "0";
+                //                }
+                //                if (isChapterNumber)
+                //                {
+                //                    currentChapterNumber = reader.Value;
+                //                    isChapterNumber = false;
+                //                }
+                //                if (isVerseNumber)
+                //                {
+                //                    if (firstVerseNumber.Trim().Length == 0 && sectionHead.Length > 0)
+                //                    {
+                //                        firstVerseNumber = reader.Value;
+                //                        fromChapterNumber = currentChapterNumber;
+                //                        formatString = sectionHead + " " + currentChapterNumber + ":" + firstVerseNumber;
+                //                    }
 
-                 //                    lastVerseNumber = reader.Value;
-                 //                    isVerseNumber = false;
-                 //                }
-                 //                break;
-                 //            case XmlNodeType.XmlDeclaration:
-                 //            case XmlNodeType.ProcessingInstruction:
-                 //                break;
-                 //            case XmlNodeType.Comment:
-                 //                break;
-                 //            case XmlNodeType.EndElement:
-                 //                break;
-                 //        }
-                 //    }
-                 //}
-             }
+                //                    lastVerseNumber = reader.Value;
+                //                    isVerseNumber = false;
+                //                }
+                //                break;
+                //            case XmlNodeType.XmlDeclaration:
+                //            case XmlNodeType.ProcessingInstruction:
+                //                break;
+                //            case XmlNodeType.Comment:
+                //                break;
+                //            case XmlNodeType.EndElement:
+                //                break;
+                //        }
+                //    }
+                //}
+            }
 
 
             //MessageBox.Show("Code is commented");
@@ -1048,7 +1050,7 @@ namespace TestBed
 
             string inputHtmlFileName = xhtmlFileName;
             inputHtmlFileName = Path.GetFileName(inputHtmlFileName);
-            if(!inputHtmlFileName.ToLower().Contains("main"))
+            if (!inputHtmlFileName.ToLower().Contains("main"))
             {
                 File.Copy(xhtmlFileName, xhtmlFileName.Replace(".", "main."));
                 xhtmlFileName = xhtmlFileName.Replace(".", "main.");
@@ -1078,10 +1080,10 @@ namespace TestBed
             projInfo.ProjectInputType = ProjType;
             projInfo.ProjectPath = Path.GetDirectoryName(xhtmlFileName);
             projInfo.DictionaryPath = Path.GetDirectoryName(xhtmlFileName);
-            
+
             projInfo.ProgressBar = new ProgressBar();
             projInfo.DictionaryOutputName = "test";
-            
+
             ProjType = Common.GetProjectType(projInfo.DefaultXhtmlFileWithPath);
             projInfo.ProjectInputType = ProjType;
 
@@ -1098,10 +1100,10 @@ namespace TestBed
             //tpe.ProgressBar = null;
             //tpe.Export(projInfo.DefaultXhtmlFileWithPath);
 
-            
+
             projInfo.IsReversalExist = false;
             projInfo.IsLexiconSectionExist = true;
-            
+
 
             string getDirectoryName = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             projInfo.DefaultRevCssFileWithPath = Path.Combine(getDirectoryName, "flexrev.css");
@@ -1130,7 +1132,7 @@ namespace TestBed
 #if !Not7
             DBLMetadata dblMetadata = new DBLMetadata();
             dblMetadata.StyFullPath = txtCSSInput.Text;
-            string outputCSS = Path.Combine(Path.GetDirectoryName(txtCSSInput.Text),  "metadata.XML");
+            string outputCSS = Path.Combine(Path.GetDirectoryName(txtCSSInput.Text), "metadata.XML");
             dblMetadata.CreateMetadata("TestBed", outputCSS);
             MessageBox.Show("Exported in " + outputCSS);
 #endif
@@ -1144,8 +1146,8 @@ namespace TestBed
                 return;
             }
 
-           UsxToSFM usxToSfm = new UsxToSFM();
-           usxToSfm.ConvertUsxToSFM(txtInputPath.Text, Path.GetDirectoryName(txtInputPath.Text)+ "\\output.sfm");
+            UsxToSFM usxToSfm = new UsxToSFM();
+            usxToSfm.ConvertUsxToSFM(txtInputPath.Text, Path.GetDirectoryName(txtInputPath.Text) + "\\output.sfm");
         }
 
         private void btnRemoveBom_Click(object sender, EventArgs e)
@@ -1204,5 +1206,44 @@ namespace TestBed
             exportPDFPrince.Export(projInfo);
         }
 
-       }
+        private void button8_Click_1(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
+
+            if (!File.Exists(txtCSSInput.Text))
+            {
+                MessageBox.Show("Please enter the valid CSS path");
+                return;
+            }
+            var exportDic4Mid = new ExportDic4Mid();
+            PublicationInformation projInfo = new PublicationInformation();
+
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
+
+            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            projInfo.DictionaryPath = projInfo.ProjectPath;
+            exportDic4Mid.Export(projInfo);
+        }
+
+        private void btnEpubValidator_Click(object sender, EventArgs e)
+        {
+            var outputPathWithFileName = txtInputPath.Text;
+            // Running the unit test - just run the validator and return the result
+            var validationResults = epubValidator.Program.ValidateFile(outputPathWithFileName);
+            Debug.WriteLine("Exportepub: validation results: " + validationResults);
+            // we've succeeded if epubcheck returns no errors
+            //success = (validationResults.Contains("No errors or warnings detected"));
+
+            MessageBox.Show(validationResults);
+            var validationDialog = new ValidationDialog();
+            validationDialog.FileName = outputPathWithFileName;
+            validationDialog.ShowDialog();
+        }
+    }
 }

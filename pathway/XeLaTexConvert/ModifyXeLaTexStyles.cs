@@ -51,6 +51,7 @@ namespace SIL.PublishingSolution
         private string _reversalIndexTexFilename = string.Empty;
         private bool _reversalIndexExist = false;
         private bool _isMirrored = false;
+        private Dictionary<string, string> _langFontDictionary;
 
         public string ProjectType
         {
@@ -140,11 +141,19 @@ namespace SIL.PublishingSolution
         public string Rights { get; set; }
         public string Format { get; set; }
         public string Source { get; set; }
+
+        public Dictionary<string, string> LangFontDictionary
+        {
+            get { return _langFontDictionary; }
+            set { _langFontDictionary = value; }
+        }
+
         #endregion
 
         public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty,
-            Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat)
+            Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat, Dictionary<string, string> langFontDictionary)
         {
+            _langFontDictionary = langFontDictionary;
             _projectPath = projectPath;
             _cssClass = cssClass;
             _xetexFullFile = xetexFullFile;
@@ -200,7 +209,7 @@ namespace SIL.PublishingSolution
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
                 string className = RemoveBody(replaceNumberInStyle);
                 if (className.Length == 0) continue;
-                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle);
+                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle, _langFontDictionary);
                 if (xeLaTexProperty.Trim().Length > 0)
                 {
                     Common.FileInsertText(_xetexFullFile, xeLaTexProperty);
@@ -448,7 +457,12 @@ namespace SIL.PublishingSolution
             {
                 if (_firstString != null)
                 {
-                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + _firstString.ToUpper() + " - " + _lastString.ToUpper() + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
+                    _firstString = _firstString.ToUpper();
+                    _lastString = _lastString.ToUpper();
+                    _firstString = _firstString.Replace("~", "\\textasciitilde{~}");
+                    _lastString = _lastString.Replace("~", "\\textasciitilde{~}");
+
+                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + _firstString + " - " + _lastString  + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
 
                     //For other Font style apply the below line
                     //tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + "\\" + _headWordStyleName + " " + _firstString.ToUpper() + " - " + "\\" + _headWordStyleName + " " + _lastString.ToUpper() + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
@@ -688,8 +702,8 @@ namespace SIL.PublishingSolution
 
             if (Convert.ToBoolean(CopyrightInformation))
             {
-                tableOfContent += "\\setcounter{page}{1} \r\n";
                 tableOfContent += "\\pagenumbering{roman}  \r\n";
+                tableOfContent += "\\setcounter{page}{3} \r\n";
 
                 tableOfContent += "\\input{" + CopyrightTexFilename + "} \r\n";
                 //tableOfContent += "\\thispagestyle{empty} \r\n";

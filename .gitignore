@@ -1,6 +1,7 @@
 *.suo
 *.chw
 *.msi
+*.pyc
 *.user
 *.cache
 *.StyleCop
@@ -40,6 +41,8 @@ pathway/CssDialog/obj/*
 pathway/CssParser/bin/*
 pathway/CssParser/obj/*
 pathway/CssParser/Output
+pathway/Dic4MidConvert/bin/*
+pathway/Dic4MidConvert/obj/*
 pathway/GoBibleConvert/bin/*
 pathway/GoBibleConvert/obj/*
 pathway/HelpImprove/bin/*
@@ -90,6 +93,8 @@ pathway/XeLaTexConvert/bin/*
 pathway/XeLaTexConvert/obj/*
 pathway/XeLaTexConvert/XeLaTexExe
 pathway/XeLaTexConvert/TexLive
+pathway/XslProcess/bin/*
+pathway/XslProcess/obj/*
 pathway/YouVersionConvert/bin/*
 pathway/YouVersionConvert/obj/*
 pathway/epubConvert/bin/*
@@ -100,6 +105,7 @@ pathway/Test/Build/TestFiles/output/*
 pathway/Test/ConfigurationTool/TestFiles/output/*
 pathway/Test/CssDialog/TestFiles/output/*
 pathway/Test/CssParser/TestFiles/gramOutput/T*
+pathway/Test/Dic4MidConvert/TestFiles/output/*
 pathway/Test/GoBibleConvert/TestFiles/output/*
 pathway/Test/InDesignConvert/TestFiles/output/*
 pathway/Test/LiftPrepare/TestFiles/output/*

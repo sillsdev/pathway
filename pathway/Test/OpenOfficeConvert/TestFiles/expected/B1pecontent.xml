@@ -55,10 +55,7 @@
         <text:sequence-decl text:display-outline-level="0" text:name="Drawing" />
       </text:sequence-decls>
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
-        <text:p text:style-name="scrBook_scrBody">
-          <text:s text:c="1" />
-          <text:span text:style-name="scrBookName_scrBook_scrBody">Pita </text:span>
-        </text:p>
+        <text:p text:style-name="scrBook_scrBody"> <text:span text:style-name="scrBookName_scrBook_scrBody">Pita </text:span></text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_TitleMain_scrBook_scrBody">Pita </text:span>
         </text:p>
@@ -166,7 +163,8 @@
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">16 </text:span>A God ke velea tadia na komi Rioriso ke Tabu, “Oti mono tabu eigna inau ku tabu.”</text:span>
             <text:note text:id="ftn2" text:note-class="footnote">
-              <text:note-citation text:label="* ">* </text:note-citation>
+              <text:note-citation text:label=" ">
+              </text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">1:16 = </text:span>
@@ -210,7 +208,8 @@
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Line1_scrSection_columns_scrBook_scrBody"> 25 </text:span>kari na haghoregna a Lod ke mono thovohaliu.”</text:span>
             <text:note text:id="ftn3" text:note-class="footnote">
-              <text:note-citation text:label="* ">* </text:note-citation>
+              <text:note-citation text:label=" ">
+              </text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">1:25 = </text:span>
@@ -274,7 +273,8 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">Ahai ke vaututunia, imanea teo keda toatogha ke boi toke ke vaututunia.”</text:span>
             <text:note text:id="ftn5" text:note-class="footnote">
-              <text:note-citation text:label="* ">* </text:note-citation>
+              <text:note-citation text:label=" ">
+              </text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2:6 = </text:span>
@@ -295,7 +295,8 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">ikageeni na ghahira iaani na naghoi ghahira kori hidigna na vathe.”</text:span>
             <text:note text:id="ftn6" text:note-class="footnote">
-              <text:note-citation text:label="* ">* </text:note-citation>
+              <text:note-citation text:label=" ">
+              </text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2:7 = </text:span>
@@ -313,7 +314,8 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">“Iaani na ghahira ke vapejuraghinira na komi tinoni ke sethe eigna kedana sikili.”</text:span>
             <text:note text:id="ftn7" text:note-class="footnote">
-              <text:note-citation text:label="* ">* </text:note-citation>
+              <text:note-citation text:label=" ">
+              </text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2:8 = </text:span>
@@ -461,7 +463,8 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">Keana a Lod ke sokara pungusira arahai kena eia na komi fata ke dika.”</text:span>
             <text:note text:id="ftn10" text:note-class="footnote">
-              <text:note-citation text:label="* ">* </text:note-citation>
+              <text:note-citation text:label=" ">
+              </text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">3:12 = </text:span>
@@ -567,7 +570,8 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">na hava keda padara arahai kena boi leghua a God mena eia na komi puhi ke dika na?”</text:span>
             <text:note text:id="ftn11" text:note-class="footnote">
-              <text:note-citation text:label="* ">* </text:note-citation>
+              <text:note-citation text:label=" ">
+              </text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">4:18 = </text:span>
@@ -613,7 +617,8 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">keana imanea ke vatokera arahai kena mono taluleghu.”</text:span>
             <text:note text:id="ftn12" text:note-class="footnote">
-              <text:note-citation text:label="* ">* </text:note-citation>
+              <text:note-citation text:label=" ">
+              </text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">5:5 = </text:span>
@@ -634,7 +639,7 @@
             <draw:frame draw:style-name="Graphics0" draw:name="Graphics0" text:anchor-type="page" draw:z-index="1" svg:width="342pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics0" draw:name="Graphics0" text:anchor-type="paragraph" svg:width="342pt" svg:height="72pt">
-                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuated="onLoad" xlink:href="Pictures/lion.tif" />
+                  <draw:image xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad" xlink:href="Pictures/lion.tif" />
                   <svg:title>lion.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">

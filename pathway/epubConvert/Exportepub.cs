@@ -365,20 +365,29 @@ namespace SIL.PublishingSolution
                 // customize the CSS file based on the settings
                 CustomizeCSS(mergedCSS);
 
-                foreach (string file in splitFiles)
+                string getPsApplicationPath = Common.GetPSApplicationPath();
+                string xsltProcessExe = Path.Combine(getPsApplicationPath, "XslProcess.exe");
+                inProcess.SetStatus("Apply Xslt Process in html file");
+                if (File.Exists(xsltProcessExe))
                 {
-                    inProcess.SetStatus("Converting file to .epub format:" + file);
-                    if (File.Exists(file))
+                    foreach (string file in splitFiles)
                     {
-                        Common.XsltProcess(file, xsltFullName, "_.xhtml");
-                        // add this file to the html files list
-                        htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
-                        // clean up the un-transformed file
-                        File.Delete(file);
-                    }
-                    inProcess.PerformStep();
-                }
+                        if (File.Exists(file))
+                        {
+                            Common.RunCommand(xsltProcessExe,
+                                              string.Format("{0} {1} {2} {3}", file, xsltFullName, "_.xhtml",
+                                                            getPsApplicationPath), 1);
 
+                            //Common.XsltProcess(file, xsltFullName, "_.xhtml");
+                            // add this file to the html files list
+                            htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),
+                                                       (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
+                            // clean up the un-transformed file
+                            File.Delete(file);
+                        }
+                    }
+                }
+                inProcess.PerformStep();
                 // create the "epub" directory structure and copy over the boilerplate files
                 inProcess.SetStatus("Creating .epub structure");
                 sb.Append(tempFolder);
@@ -2138,7 +2147,7 @@ namespace SIL.PublishingSolution
 
             foreach (string target in targetList)
             {
-                if (sourceList.Contains(target))
+                if (sourceList.Contains(target) && !dictHyperlinks.ContainsKey(target))
                 {
                     dictHyperlinks.Add(target, fileDict[target] + "#" + target);
                 }
@@ -2811,6 +2820,17 @@ namespace SIL.PublishingSolution
                 xmlReader.Close();
                 //var crossRefNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']", namespaceManager);
                 var footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
+                if (footnoteNodes == null)
+                {
+                    return;
+                }
+                foreach (XmlNode footnoteNode in footnoteNodes)
+                {
+                    if (footnoteNode.Attributes != null)
+                        footnoteNode.Attributes["href"].Value = "zzReferences.xhtml" + footnoteNode.Attributes["href"].Value;
+                }
+
+                footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
                 if (footnoteNodes == null)
                 {
                     return;
