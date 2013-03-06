@@ -3400,6 +3400,26 @@ namespace SIL.Tool
             tw.Close();
         }
 
+        public void InsertPropertyInCSS(string cssFileName)
+        {
+            //DropCap Property
+            TextWriter tw = new StreamWriter(cssFileName, true);
+            tw.WriteLine(".Chapter_Number {");
+            tw.WriteLine("font-size: 199%;");
+            tw.WriteLine("}");
+
+            //Footnote marker Property
+            tw.WriteLine(".Note_CrossHYPHENReference_Paragraph::footnote-marker {");
+            tw.WriteLine("content: attr(title);");
+            tw.WriteLine("}");
+
+            tw.WriteLine(".Note_General_Paragraph::footnote-marker {");
+            tw.WriteLine("content: attr(title);");
+            tw.WriteLine("}");
+
+            tw.Close();
+        }
+
         public void InsertCoverPageImageStyleInCSS(string cssFileName)
         {
             TextWriter tw = new StreamWriter(cssFileName, true);

@@ -1059,29 +1059,29 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            //Move the crossrefernce to previous node TD--3346
-            xpath = "//text:note";
+            ////Move the crossrefernce to previous node TD--3346
+            //xpath = "//text:note";
 
-            XmlNodeList noteList = xdoc.SelectNodes(xpath, nsmgr1);
-            if (noteList != null)
-            {
-                foreach (XmlNode note in noteList)
-                {
-                    if (note.PreviousSibling != null)
-                    {
-                        XmlNode prevNode = note.PreviousSibling;
-                        if (prevNode.InnerText.Trim().Length == 0)
-                        {
-                            prevNode = prevNode.PreviousSibling;
-                        }
-                        if (prevNode != null)
-                        {
-                            prevNode.InnerText = prevNode.InnerText.TrimEnd();
-                            prevNode.AppendChild(note);
-                        }
-                    }
-                }
-            }
+            //XmlNodeList noteList = xdoc.SelectNodes(xpath, nsmgr1);
+            //if (noteList != null)
+            //{
+            //    foreach (XmlNode note in noteList)
+            //    {
+            //        if (note.PreviousSibling != null)
+            //        {
+            //            XmlNode prevNode = note.PreviousSibling;
+            //            if (prevNode.InnerText.Trim().Length == 0)
+            //            {
+            //                prevNode = prevNode.PreviousSibling;
+            //            }
+            //            if (prevNode != null)
+            //            {
+            //                prevNode.InnerText = prevNode.InnerText.TrimEnd();
+            //                prevNode.AppendChild(note);
+            //            }
+            //        }
+            //    }
+            //}
 
             xdoc.PreserveWhitespace = true;
             xdoc.Save(filename);

@@ -127,7 +127,7 @@ namespace SIL.PublishingSolution
                     var mc = new MergeCss { OutputLocation = tempFolderName };
                     string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
                     preProcessor.ReplaceStringInCss(mergedCSS);
-                    preProcessor.SetDropCapInCSS(mergedCSS);
+                    preProcessor.InsertPropertyInCSS(mergedCSS);
 
                     string xhtmlFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                     string defaultCSS = Path.GetFileName(mergedCSS);
