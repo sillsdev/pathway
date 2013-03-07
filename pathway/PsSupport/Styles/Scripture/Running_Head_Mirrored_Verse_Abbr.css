@@ -9,8 +9,7 @@
 @page :left {
     @top-left {
         -ps-referenceFormat: "Gen 1:1";
-        content: string(bookname, first) " "  string(chapter, first) ":" string(verse, first);
-        font-weight: bold;
+        content: string(bookname, first) " "  string(chapter, first) string(verse, first);
     }
     @top-center { content: ''; }
     @top-right     { content: ''; }
@@ -24,7 +23,6 @@
     @top-right     {
         -ps-referenceFormat: "Gen 1:1";
         content: string(bookname, last) " "  string(chapter, last) string(verse, last);
-        font-weight: bold;
     }
     @bottom-left   { content: ''; }
     @bottom-center { content: ''; }
