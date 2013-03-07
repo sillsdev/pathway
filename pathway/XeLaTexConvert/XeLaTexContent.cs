@@ -39,6 +39,9 @@ namespace SIL.PublishingSolution
         private int _hyperLinkNo = 0;
         private bool isFileEmpty = true;
         private bool isFileCreated;
+        private bool _isDropCaps;
+
+        
         private bool isImageAvailable;
         private bool isHomographNumber = false;
         private string columnCount = string.Empty;
@@ -212,20 +215,20 @@ namespace SIL.PublishingSolution
                 }
 
                 // Drop caps starts
-                bool dropCap = false;
-                searchKey = "float";
-                if (IdAllClass[className].ContainsKey(searchKey))
-                {
-                    dropCap = true;
-                }
-                searchKey = "vertical-align";
-                if (IdAllClass[className].ContainsKey(searchKey))
-                {
-                    if (dropCap)
-                    {
-                        _dropCap.Add(className);
-                    }
-                }
+                //bool dropCap = false;
+                //searchKey = "float";
+                //if (IdAllClass[className].ContainsKey(searchKey))
+                //{
+                //    dropCap = true;
+                //}
+                //searchKey = "vertical-align";
+                //if (IdAllClass[className].ContainsKey(searchKey))
+                //{
+                //    if (dropCap)
+                //    {
+                //        _dropCap.Add(className);
+                //    }
+                //}
                 // Drop caps ends
 
 
@@ -423,6 +426,7 @@ namespace SIL.PublishingSolution
                 DoNotInheritClassStart();
 
                 AddUsedStyleName(_paragraphName);
+
                 _previousParagraphName = _paragraphName;
                 _paragraphName = null;
                 _isNewParagraph = false;
@@ -611,11 +615,11 @@ namespace SIL.PublishingSolution
 
                 LanguageFontCheck(content, _childName);
 
-                if (_isDropCap)
-                {
-                    content = _chapterNo;
-                    _isDropCap = false;
-                }
+                //if (_isDropCap)
+                //{
+                //    content = _chapterNo;
+                //    _isDropCap = false;
+                //}
 
                 _childName = Common.ReplaceSeperators(_childName);
 
@@ -627,6 +631,14 @@ namespace SIL.PublishingSolution
                 {
                     content = "\r\n \\section{" + content + "} ";
                 }
+                else if (_isDropCaps)
+                {
+                    _xetexFile.Write("\\lettrine{");
+                    _isDropCaps = false;
+                    //_inlineCount++;
+                }
+
+
                 content = content.Replace("~", "\\textasciitilde{~}");
 
                 _xetexFile.Write(content);
@@ -636,6 +648,7 @@ namespace SIL.PublishingSolution
                 {
                     _xetexFile.Write("}");
                 }
+                _inlineCount = 0;
                 _xetexFile.Write("}");
 
 
@@ -1689,7 +1702,20 @@ namespace SIL.PublishingSolution
             }
         }
 
+
         private void DropCaps()
+        {
+            string classNameWOLang = _classNameWithLang;
+            if (classNameWOLang.IndexOf("_.") > 0)
+                classNameWOLang = Common.LeftString(classNameWOLang, "_.");
+
+            if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("vertical-align"))
+            {
+                _isDropCaps = true;
+            }
+        }
+
+        private void DropCapsOLD()
         {
             string classNameWOLang = _classNameWithLang;
             if (classNameWOLang.IndexOf("_.") > 0)

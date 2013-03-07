@@ -255,6 +255,7 @@ namespace SIL.PublishingSolution
                     Common.FileInsertText(_xetexFullFile, @"\usepackage[margin=" + cmMarginValue + "cm,includeheadfoot]{geometry}");
                 }
 
+                Common.FileInsertText(_xetexFullFile, @"\usepackage{lettrine}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{calc}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
