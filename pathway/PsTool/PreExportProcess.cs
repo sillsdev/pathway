@@ -3488,6 +3488,11 @@ namespace SIL.Tool
             tw.WriteLine("orphans:2;");
             tw.WriteLine("}");
 
+            tw.WriteLine(".iot {");
+            tw.WriteLine("page-break-after:avoid;");
+            tw.WriteLine("widows:2;");
+            tw.WriteLine("}");
+
             //tw.WriteLine(".Chapter_Number {");
             //tw.WriteLine("page-break-after:avoid;");//page-break-after:avoid;
             //tw.WriteLine("}");
