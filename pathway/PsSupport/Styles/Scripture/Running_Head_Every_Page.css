@@ -3,17 +3,13 @@
     @top-left {
            content: string( guideword, first);
            direction: ltr;
-           font-weight: bold;
            font-size: 12pt;
-           margin-top: 1cm;
     }
     @top-center{ content: ''; }
     @top-right {
            content: string( guideword, last);
            direction: ltr;
-           font-weight: bold;
            font-size: 12pt;
-           margin-top: 1cm;
     }
     @bottom-left   { content: ''; }
     @bottom-center { content: ''; }
