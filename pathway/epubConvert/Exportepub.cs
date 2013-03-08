@@ -75,6 +75,9 @@ namespace SIL.PublishingSolution
         private readonly XslCompiledTransform _addRevId = new XslCompiledTransform();
         private readonly XslCompiledTransform _noXmlSpace = new XslCompiledTransform();
         private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
+        private readonly XslCompiledTransform _fixEpub = new XslCompiledTransform();
+        private readonly XslCompiledTransform _fixEpubToc = new XslCompiledTransform();
+
         private string currentChapterNumber = string.Empty;
         private bool isIncludeImage = true;
         private bool isNoteTargetReferenceExists = false;
@@ -152,6 +155,12 @@ namespace SIL.PublishingSolution
             Debug.Assert(noXmlSpaceStream != null);
             _noXmlSpace.Load(XmlReader.Create(noXmlSpaceStream));
             _addDicTocHeads.Load(XmlReader.Create(UsersXsl("addDicTocHeads.xsl")));
+
+            _fixEpub.Load(XmlReader.Create(UsersXsl("FixEpub.xsl")));
+
+            _fixEpubToc.Load(XmlReader.Create(UsersXsl("FixEpubToc.xsl")));
+
+
             _isUnixOS = Common.UnixVersionCheck();
             var myCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
@@ -180,7 +189,7 @@ namespace SIL.PublishingSolution
                 isNoteTargetReferenceExists = Common.NodeExists(projInfo.DefaultXhtmlFileWithPath, "");
 
                 //if (projInfo.ProjectInputType.ToLower() == "dictionary")
-                    InsertBeforeAfterInXHTML(projInfo);
+                InsertBeforeAfterInXHTML(projInfo);
 
                 _langFontDictionary = new Dictionary<string, string>();
                 _embeddedFonts = new Dictionary<string, EmbeddedFont>();
@@ -279,6 +288,7 @@ namespace SIL.PublishingSolution
                 }
 
                 ApplyXslt(preProcessor.ProcessedXhtml, _noXmlSpace);
+                ApplyXslt(preProcessor.ProcessedXhtml, _fixEpub);
                 // end EDB 10/22/2010
                 inProcess.PerformStep();
 
@@ -507,6 +517,7 @@ namespace SIL.PublishingSolution
                 Environment.CurrentDirectory = curdir;
                 Cursor.Current = myCursor;
 
+
                 // Postscript - validate the file using our epubcheck wrapper
                 if (Common.Testing)
                 {
@@ -518,10 +529,19 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    MessageBox.Show(Resources.ExportCallingEpubValidator, Resources.ExportComplete, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //var validationDialog = new ValidationDialog();
-                    //validationDialog.FileName = outputPathWithFileName;
-                    //validationDialog.ShowDialog();
+                    //MessageBox.Show(Resources.ExportCallingEpubValidator, Resources.ExportComplete,
+                    //                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    if (MessageBox.Show(Resources.ExportCallingEpubValidator + "\r\nDo you want to Validate ePub file", Resources.ExportComplete, MessageBoxButtons.YesNo,
+                                        MessageBoxIcon.Information) ==
+                        DialogResult.Yes)
+                    {
+
+                        var validationDialog = new ValidationDialog();
+                        validationDialog.FileName = outputPathWithFileName;
+                        validationDialog.ShowDialog();
+                    }
+
                     if (File.Exists(outputPathWithFileName))
                     {
                         if (_isUnixOS)
@@ -539,7 +559,6 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-
             return success;
         }
 
@@ -2814,7 +2833,7 @@ namespace SIL.PublishingSolution
                 XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
                 XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
                 namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; 
+                XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
                 XmlReader xmlReader = XmlReader.Create(file, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
@@ -3361,6 +3380,9 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
+            List<string> _listIdRef = new List<string>();
+            int counterSet = 1;
+            string idRefValue = string.Empty;
             // now add the xhtml files to the manifest
             string[] files = Directory.GetFiles(contentFolder);
             foreach (string file in files)
@@ -3368,6 +3390,7 @@ namespace SIL.PublishingSolution
                 // iterate through the file set and add <item> elements for each xhtml file
                 string name = Path.GetFileName(file);
                 string nameNoExt = Path.GetFileNameWithoutExtension(file);
+
                 if (name.EndsWith(".xhtml"))
                 {
                     // is this the cover page?
@@ -3381,8 +3404,22 @@ namespace SIL.PublishingSolution
                         opf.WriteEndElement(); // item
                         continue;
                     }
+
                     // if we can, write out the "user friendly" book name in the TOC
                     string fileId = GetBookID(file);
+
+                    if (_listIdRef.Contains(fileId))
+                    {
+                        _listIdRef.Add(fileId + counterSet.ToString());
+                        idRefValue = fileId + counterSet.ToString();
+                        counterSet++;
+                    }
+                    else
+                    {
+                        _listIdRef.Add(fileId);
+                        idRefValue = fileId;
+                    }
+
                     opf.WriteStartElement("item");
                     if (_inputType == "dictionary")
                     {
@@ -3392,7 +3429,7 @@ namespace SIL.PublishingSolution
                     else
                     {
                         // scripture - use the book ID
-                        opf.WriteAttributeString("id", fileId);
+                        opf.WriteAttributeString("id", idRefValue);
                     }
                     opf.WriteAttributeString("href", name);
                     opf.WriteAttributeString("media-type", "application/xhtml+xml");
@@ -3443,6 +3480,10 @@ namespace SIL.PublishingSolution
                 opf.WriteAttributeString("linear", "yes");
                 opf.WriteEndElement(); // itemref
             }
+
+            _listIdRef = new List<string>();
+            counterSet = 1;
+            idRefValue = string.Empty;
             foreach (string file in files)
             {
                 // is this the cover page?
@@ -3455,6 +3496,19 @@ namespace SIL.PublishingSolution
                 if (name.EndsWith(".xhtml"))
                 {
                     string fileId = GetBookID(file);
+                    if (_listIdRef.Contains(fileId))
+                    {
+                        _listIdRef.Add(fileId + counterSet.ToString());
+                        idRefValue = fileId + counterSet.ToString();
+                        counterSet++;
+                    }
+                    else
+                    {
+                        _listIdRef.Add(fileId);
+                        idRefValue = fileId;
+                    }
+
+
                     opf.WriteStartElement("itemref"); // item (stylesheet)
                     if (_inputType == "dictionary")
                     {
@@ -3464,7 +3518,7 @@ namespace SIL.PublishingSolution
                     else
                     {
                         // scripture - use the book ID
-                        opf.WriteAttributeString("idref", fileId);
+                        opf.WriteAttributeString("idref", idRefValue);
                     }
                     opf.WriteEndElement(); // itemref
                 }
@@ -3729,6 +3783,8 @@ namespace SIL.PublishingSolution
             {
                 ApplyXslt(tocFullPath, _addDicTocHeads);
             }
+
+            ApplyXslt(tocFullPath, _fixEpubToc);
         }
 
         private void FixPlayOrder(string tocFullPath)
@@ -4186,7 +4242,7 @@ namespace SIL.PublishingSolution
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
             XmlNodeList nodes;
-            bool isanchor = false, isBookName = false, isNoteTargetReference = false, isList =  false;
+            bool isanchor = false, isBookName = false, isNoteTargetReference = false, isList = false;
             string sectionHeadRef = string.Empty;
             string anchorValue = string.Empty, bookNameValue = string.Empty, noteTargetReferenceValue = string.Empty, ListValue = string.Empty;
             string formatString = string.Empty;
@@ -4208,11 +4264,11 @@ namespace SIL.PublishingSolution
                             {
                                 case XmlNodeType.Element:
                                     string className = reader.GetAttribute("class");
-                                    if(reader.Name == "a")
+                                    if (reader.Name == "a")
                                     {
                                         isanchor = true;
                                     }
-                                    else if(reader.Name == "li")
+                                    else if (reader.Name == "li")
                                     {
                                         if (reader.GetAttribute("id") != null)
                                         {
@@ -4248,7 +4304,7 @@ namespace SIL.PublishingSolution
                                     }
                                     if (isNoteTargetReference)
                                     {
-                                        if(anchorValue.Trim().Length > 0 && bookNameValue.Trim().Length > 0)
+                                        if (anchorValue.Trim().Length > 0 && bookNameValue.Trim().Length > 0)
                                         {
                                             textString = anchorValue + " " + bookNameValue + " " + reader.Value;
                                         }
@@ -4269,7 +4325,7 @@ namespace SIL.PublishingSolution
                                             playOrder++;
                                             sb.Length = 0;
                                         }
-                                       
+
                                         if (textString.Trim().Length > 4)
                                         {
                                             ncx.WriteEndElement(); // navPoint

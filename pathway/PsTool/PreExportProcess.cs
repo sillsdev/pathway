@@ -1915,6 +1915,7 @@ namespace SIL.Tool
                     Regex regex = new Regex(@"[^a-zA-Z0-9\s]", (RegexOptions) 0);
                     bookName = regex.Replace(bookName, "");
                 }
+                bookName = bookName.Replace(" ", "_");
 
                 foreach (XmlNode chapterNode in chapterNodeList)
                 {
