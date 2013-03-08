@@ -48,7 +48,7 @@ install:
 	#sudo gzip -c debian/pathwayB.7.manpages >$(DESTDIR)$(prefix)/share/man/man7/pathwayB.7.gz
 	sudo mkdir -p $(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX
 	sudo chmod 777 $(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX
-	sudo python -c 'print "<values><value name=\"XeLaTexDir\" type=\"string\">/usr$(bininst)/</value><value name=\"XeLaTexVer\" type=\"string\">1.5</value></values>"' >$(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml
+	sudo python -c 'print "<values><value name=\"XeLaTexDir\" type=\"string\">/usr$(bininst)/</value><value name=\"XeLaTexVer\" type=\"string\">1.9</value></values>"' >$(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml
 
 binary:
 	exit 0
