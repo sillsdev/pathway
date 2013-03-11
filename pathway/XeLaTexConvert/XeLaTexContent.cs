@@ -986,7 +986,8 @@ namespace SIL.PublishingSolution
 
         public bool InsertImage()
         {
-
+            int defaultWidht, defaultHeight;
+            defaultWidht = defaultHeight = 11;
             bool inserted = false;
             if (_imageInsert)
             {
@@ -1057,26 +1058,26 @@ namespace SIL.PublishingSolution
                 else
                 {
                     //Default value is 72 
-                    rectHeight = "72"; // fixed the width as 1 in = 72pt;
+                    rectHeight = defaultHeight.ToString(); // fixed the width as 1 in = 72pt;
                     rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
                 }
                 if (rectWidth == "0")
                 {
-                    rectWidth = "72";
+                    rectWidth = defaultWidht.ToString();
                 }
                 if (rectHeight == "0")
                 {
-                    rectHeight = "72";
+                    rectHeight = defaultHeight.ToString();
                 }
 
                 if (rectWidth.IndexOf("%") != -1)
                 {
-                    rectWidth = "72";
+                    rectWidth = defaultWidht.ToString();
                 }
 
                 if (rectHeight.IndexOf("%") != -1)
                 {
-                    rectHeight = "72";
+                    rectHeight = defaultHeight.ToString();
                 }
 
                 //if (rectHeight != "0")
@@ -1198,7 +1199,7 @@ namespace SIL.PublishingSolution
                 string p2 = @"\begin{center}";
                 //string p3 = @"{\includegraphics[natwidth=2bp,natheight=2bp, width=1bp]{" + picFile + "}} ";
                 //string p3 = @"\includegraphics[width=1in,height=1in,%keepaspectratio]{" + picFile + "} ";
-                string p3 = @"\includegraphics[angle=0,width=" + width + "mm,height=" + height + "mm]{" + picFile + "} ";
+                string p3 = @"\includegraphics[angle=0,width=" + width + "cm,height=" + height + "cm]{" + picFile + "} ";
 
 
                 //string p1 = @"\begin{figure*}[ht!] ";
