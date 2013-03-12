@@ -26,9 +26,9 @@ case "$1" in
 		fmtutil --all
 	fi
 	if [ -d "${prefix}/lib/pwtex/bin/x86_64-linux" ]; then
-		export PATH=${prefix}/lib/pwtex/bin/x86_64-linux:$PATH
-		mktexlsr
-		fmtutil --all
+		cd ${prefix}/lib/pwtex/bin/x86_64-linux
+		./mktexlsr
+		TEXMFMAIN=${prefix}/lib/pwtex/texmf;./fmtutil --all
 	fi
         #mv /etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml.dpkg-dist /etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml
 #rm -f ${prefix}/share/man/man7/ConfigurationTool.7.gz
