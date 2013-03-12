@@ -47,6 +47,7 @@ namespace SIL.PublishingSolution
         private string _reversalIndexTexFileName = string.Empty;
         private bool _reversalIndexTexCreated = false;
         private Dictionary<string, string> _langFontCodeandName;
+
         #region Public Functions
         public string ExportType
         {
@@ -142,7 +143,8 @@ namespace SIL.PublishingSolution
             Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
             xeLaTexContent.TocEndingPage = preProcessor.GetDictionaryLetterCount();
             Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
-
+            
+          
             if (projInfo.IsReversalExist)
             {
                 var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
@@ -189,6 +191,7 @@ namespace SIL.PublishingSolution
 
             modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = false;
             _xelatexDocumentOpenClosedRequired = false;
+            modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include, _langFontCodeandName);
 
             //CallXeTex(Path.GetFileName(xeLatexFullFile));
@@ -273,6 +276,7 @@ namespace SIL.PublishingSolution
                 string include = xeLaTexStyles.PageStyle.ToString();
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
+                modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
                 modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
                                                     xeLatexCopyrightFile, include, _langFontCodeandName);
 				
@@ -393,6 +397,7 @@ namespace SIL.PublishingSolution
                 string include = xeLaTexStyles.PageStyle.ToString();
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
+                modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
                 modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexRevesalIndexFile, include, _langFontCodeandName);
                 return true;
             }

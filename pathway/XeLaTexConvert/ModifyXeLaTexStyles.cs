@@ -52,7 +52,7 @@ namespace SIL.PublishingSolution
         private bool _reversalIndexExist = false;
         private bool _isMirrored = false;
         private Dictionary<string, string> _langFontDictionary;
-
+        private Dictionary<string, Dictionary<string, string>> _tocList;
         public string ProjectType
         {
             get { return _projectType; }
@@ -179,10 +179,11 @@ namespace SIL.PublishingSolution
         {
             if (newProperty.ContainsKey("TableofContent"))
             {
+                _tocList = newProperty;
                 _firstString = newProperty["TableofContent"]["first"];
                 _lastString = newProperty["TableofContent"]["last"];
                 _headWordStyleName = newProperty["TableofContent"]["stylename"];
-                newProperty.Remove("TableofContent");
+
             }
         }
 
@@ -463,7 +464,7 @@ namespace SIL.PublishingSolution
                     _firstString = _firstString.Replace("~", "\\textasciitilde{~}");
                     _lastString = _lastString.Replace("~", "\\textasciitilde{~}");
 
-                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + _firstString + " - " + _lastString  + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
+                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + _firstString + " - " + _lastString + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
 
                     //For other Font style apply the below line
                     //tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + "\\" + _headWordStyleName + " " + _firstString.ToUpper() + " - " + "\\" + _headWordStyleName + " " + _lastString.ToUpper() + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
@@ -473,6 +474,23 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\newpage \r\n";
             }
 
+            if (_projectType.ToLower() == "scripture")
+            {
+
+                if (_tocList.ContainsKey("TableofContent") && _tocList["TableofContent"].Count > 0)
+                {
+                    foreach (var tocSection in _tocList["TableofContent"])
+                    {
+                        if (tocSection.Key.Contains("bookname"))
+                        {
+                            //tableOfContent += "\r\n" + tocSection.Value;
+                            //tableOfContent += @"\addtocontents{toc}{\contentsline {chapter}{\numberline{} " + tocSection.Value + "}{\\pageref{" + tocSection.Value + "}}{}} ";
+
+                            tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{" + tocSection.Value + "}{{\\protect \\pageref{" + tocSection.Value + "}}}{}}" + "\r\n";
+                        }
+                    }
+                }
+            }
             //tableOfContent += "\\thispagestyle{empty} \r\n";
             tableOfContent += "\\pagestyle{plain} \r\n";
             tableOfContent += "\\tableofcontents \r\n";
@@ -593,7 +611,7 @@ namespace SIL.PublishingSolution
                             {
                                 File.Copy(copyRightFilePath, logoTitleFileName, true);
                                 File.Copy(copyRightFilePath, Path.Combine(_projectPath, logoFileName), true);
-                                
+
                                 File.Copy(copyRightFilePath, Path.Combine(xeLaTexInstallationPath, logoFileName), true);
                             }
                         }
