@@ -540,6 +540,8 @@
     <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\addDicTocHeads.xsl" />
+    <AllTransform Include="..\PsSupport\FixEpub.xsl" />
+    <AllTransform Include="..\PsSupport\FixEpubToc.xsl" />
     <BteTransform Include="..\PsSupport\*.xslt" />
     <BteTransform Include="..\PsSupport\pxhtml2xpw-scr.xsl" />
     <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
