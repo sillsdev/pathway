@@ -536,6 +536,9 @@ namespace SIL.PublishingSolution
                     _characterName = _psuedoContainsStyle.StyleName;
                 }
             }
+            if (_previousParagraphName.IndexOf("TitleSecondary") == 0)
+                content = "\\newpage " + content;
+
             string modifiedContent = ModifiedContent(content, _previousParagraphName, _characterName);
             WriteCharacterStyle(modifiedContent, _characterName);
 
