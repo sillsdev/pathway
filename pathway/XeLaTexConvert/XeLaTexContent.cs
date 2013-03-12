@@ -136,10 +136,20 @@ namespace SIL.PublishingSolution
 
         private void GetTableofContent()
         {
-            _toc.Add("first", TocStartingPage);
-            _toc.Add("last", TocEndingPage);
-            _toc.Add("stylename", TocStyleName);
-            _newProperty.Add("TableofContent", _toc);
+
+            if (_projInfo.ProjectInputType.ToLower() == "scripture")
+            {               
+                _newProperty.Add("TableofContent",_toc);
+
+                
+            }
+            else
+            {
+                _toc.Add("first", TocStartingPage);
+                _toc.Add("last", TocEndingPage);
+                _toc.Add("stylename", TocStyleName);
+                _newProperty.Add("TableofContent", _toc);
+            }            
         }
 
         private void ProcessProperty()
@@ -615,24 +625,18 @@ namespace SIL.PublishingSolution
             {
                 content = WriteCounter(content);
                 content = whiteSpacePre(content);
-
                 LanguageFontCheck(content, _childName);
-
-                //if (_isDropCap)
-                //{
-                //    content = _chapterNo;
-                //    _isDropCap = false;
-                //}
-
                 _childName = Common.ReplaceSeperators(_childName);
-
                 content = Common.ReplaceSymbolToXelatexText(content);
-
                 List<string> value = CreateInlineInnerStyle(characterStyle);
 
                 if (_childName.IndexOf("scrBookName") == 0 && content != null)
                 {
-                    content = "\r\n \\section{" + content + "} ";
+                    //content = "\r\n \\section{" + content + "} ";
+                    _tocStartingPage = content.ToString();
+                    _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
+                    _toc.Add("bookname_" + _tocStartingPage, _tocStartingPage);                   
+                    //_xetexFile.Write("\r\n \\label{"+ _tocStartingPage + "} ");
                 }
                 else if (_isDropCaps)
                 {
@@ -640,7 +644,6 @@ namespace SIL.PublishingSolution
                     _isDropCaps = false;
                     //_inlineCount++;
                 }
-
 
                 content = content.Replace("~", "\\textasciitilde{~}");
 
@@ -1782,6 +1785,13 @@ namespace SIL.PublishingSolution
             }
 
             EndElementBase(false);
+
+            if (_closeChildName.IndexOf("scrBookName") == 0)
+            {
+                _xetexFile.Write("\r\n \\label{"+ _tocStartingPage + "} ");            
+                _bookName = string.Empty;
+            }
+           
             //if (_columnClass.Count > 0 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
             //if (_columnClass.Count == 2 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
             //{
