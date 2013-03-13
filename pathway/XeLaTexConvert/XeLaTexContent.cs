@@ -41,7 +41,7 @@ namespace SIL.PublishingSolution
         private bool isFileCreated;
         private bool _isDropCaps;
 
-        
+
         private bool isImageAvailable;
         private bool isHomographNumber = false;
         private string columnCount = string.Empty;
@@ -85,7 +85,7 @@ namespace SIL.PublishingSolution
 
         private string _bookName = string.Empty;
         private string _chapterStyleforHeader = string.Empty;
-
+        private int _bookCount = 0;
         #endregion
 
         #region Private Variables
@@ -138,10 +138,10 @@ namespace SIL.PublishingSolution
         {
 
             if (_projInfo.ProjectInputType.ToLower() == "scripture")
-            {               
-                _newProperty.Add("TableofContent",_toc);
+            {
+                _newProperty.Add("TableofContent", _toc);
 
-                
+
             }
             else
             {
@@ -149,7 +149,7 @@ namespace SIL.PublishingSolution
                 _toc.Add("last", TocEndingPage);
                 _toc.Add("stylename", TocStyleName);
                 _newProperty.Add("TableofContent", _toc);
-            }            
+            }
         }
 
         private void ProcessProperty()
@@ -546,9 +546,16 @@ namespace SIL.PublishingSolution
                     _characterName = _psuedoContainsStyle.StyleName;
                 }
             }
-            if (_previousParagraphName.IndexOf("TitleSecondary") == 0)
-                content = "\\newpage " + content;
 
+            if (_previousParagraphName.IndexOf("TitleSecondary") == 0)
+            {
+                if (_bookCount != 0)
+                {
+                    content = "\\newpage \r\n" + content;
+                }
+                content +="\r\n \\label{" + _tocStartingPage + "} ";
+                _bookCount++;
+            }
             string modifiedContent = ModifiedContent(content, _previousParagraphName, _characterName);
             WriteCharacterStyle(modifiedContent, _characterName);
 
@@ -635,7 +642,7 @@ namespace SIL.PublishingSolution
                     //content = "\r\n \\section{" + content + "} ";
                     _tocStartingPage = content.ToString();
                     _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
-                    _toc.Add("bookname_" + _tocStartingPage, _tocStartingPage);                   
+                    _toc.Add("bookname_" + _tocStartingPage, _tocStartingPage);
                     //_xetexFile.Write("\r\n \\label{"+ _tocStartingPage + "} ");
                 }
                 else if (_isDropCaps)
@@ -864,7 +871,7 @@ namespace SIL.PublishingSolution
                         if (mergedParaStyle.IndexOf("headword") == 0 && content != null)
                         {
                             //if (_headerContent.Trim().Length == 0)
-                                _headerContent = content;
+                            _headerContent = content;
 
                             _tocStyleName = mergedParaStyle;
                             string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
@@ -875,7 +882,7 @@ namespace SIL.PublishingSolution
                         if (styleFullName == "spanreversalformentryletDatadicBody" && content != null)
                         {
                             //if (_headerContent.Trim().Length == 0)
-                                _headerContent = content;
+                            _headerContent = content;
 
                             _tocStyleName = mergedParaStyle;
                             string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
@@ -1788,10 +1795,10 @@ namespace SIL.PublishingSolution
 
             if (_closeChildName.IndexOf("scrBookName") == 0)
             {
-                _xetexFile.Write("\r\n \\label{"+ _tocStartingPage + "} ");            
+                //_xetexFile.Write("\r\n \\label{" + _tocStartingPage + "} ");            
                 _bookName = string.Empty;
             }
-           
+
             //if (_columnClass.Count > 0 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
             //if (_columnClass.Count == 2 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
             //{

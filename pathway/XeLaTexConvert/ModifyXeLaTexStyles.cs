@@ -180,10 +180,13 @@ namespace SIL.PublishingSolution
             if (newProperty.ContainsKey("TableofContent"))
             {
                 _tocList = newProperty;
-                _firstString = newProperty["TableofContent"]["first"];
-                _lastString = newProperty["TableofContent"]["last"];
-                _headWordStyleName = newProperty["TableofContent"]["stylename"];
 
+                if (_projectType != null && _projectType != "Scripture")
+                {
+                    _firstString = newProperty["TableofContent"]["first"];
+                    _lastString = newProperty["TableofContent"]["last"];
+                    _headWordStyleName = newProperty["TableofContent"]["stylename"];
+                }
             }
         }
 
@@ -486,7 +489,9 @@ namespace SIL.PublishingSolution
                             //tableOfContent += "\r\n" + tocSection.Value;
                             //tableOfContent += @"\addtocontents{toc}{\contentsline {chapter}{\numberline{} " + tocSection.Value + "}{\\pageref{" + tocSection.Value + "}}{}} ";
 
-                            tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{" + tocSection.Value + "}{{\\protect \\pageref{" + tocSection.Value + "}}}{}}" + "\r\n";
+                            tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{" +
+                                              tocSection.Value + "}{{\\protect \\pageref{" + tocSection.Value + "}}}{}}" +
+                                              "\r\n";
                         }
                     }
                 }
