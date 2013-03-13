@@ -553,7 +553,9 @@ namespace SIL.PublishingSolution
                 {
                     content = "\\newpage \r\n" + content;
                 }
-                content +="\r\n \\label{" + _tocStartingPage + "} ";
+                if (_tocStartingPage != "" && _tocStartingPage != null)
+                    content +="\r\n \\label{" + _tocStartingPage + "} ";
+
                 _bookCount++;
             }
             string modifiedContent = ModifiedContent(content, _previousParagraphName, _characterName);
