@@ -1795,7 +1795,7 @@ namespace SIL.PublishingSolution
 
             if (_closeChildName.IndexOf("scrBookName") == 0)
             {
-                //_xetexFile.Write("\r\n \\label{" + _tocStartingPage + "} ");            
+                _xetexFile.Write("\r\n \\label{" + _tocStartingPage + "} ");            
                 _bookName = string.Empty;
             }
 
