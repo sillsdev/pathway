@@ -923,8 +923,11 @@ namespace SIL.PublishingSolution
             InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
             ContentPostProcess(projInfo.TempOutputFolder);
-            InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
-            InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
+            if (projInfo.ProjectInputType == "Dictionary")
+            {
+                InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
+                InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
+            }
         }
 
         public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
