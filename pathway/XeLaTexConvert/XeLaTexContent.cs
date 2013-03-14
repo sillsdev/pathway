@@ -68,6 +68,7 @@ namespace SIL.PublishingSolution
         Dictionary<string, List<string>> _classInlineInnerStyle = new Dictionary<string, List<string>>();
         private string xhtmlFile;
         private Dictionary<string, string> _endParagraphStringDic = new Dictionary<string, string>();
+        private int _pageWidth;
 
         protected Stack<string> _braceClass = new Stack<string>();
         protected Stack<string> _braceInlineClass = new Stack<string>();
@@ -110,13 +111,13 @@ namespace SIL.PublishingSolution
 
         #endregion
 
-        public Dictionary<string, Dictionary<string, string>> CreateContent(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssClass, StreamWriter xetexFile, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, Dictionary<string, List<string>> classInlineText)
+        public Dictionary<string, Dictionary<string, string>> CreateContent(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssClass, StreamWriter xetexFile, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, Dictionary<string, List<string>> classInlineText, int pageWidth)
         {
             _projInfo = projInfo;
             _xetexFile = xetexFile;
             _classInlineStyle = classInlineStyle;
             _classInlineInnerStyle = classInlineText;
-            //_inputPath = Path.GetDirectoryName(projInfo.ProjectPath);
+            _pageWidth = pageWidth;
             _inputPath = projInfo.ProjectPath;
 
             xhtmlFile = projInfo.DefaultXhtmlFileWithPath;
@@ -308,6 +309,12 @@ namespace SIL.PublishingSolution
                 //{
                 //    ListType[className] = IdAllClass[className][searchKey];
                 //}
+            }
+
+            if (Common.ColumnWidth == 0.0)
+            {
+                //Common.ColumnWidth = _pageWidth;
+                Common.ColumnWidth = Common.GetPictureWidth(IdAllClass, _projInfo.ProjectInputType);
             }
 
             //if (Common.ColumnWidth == 0.0)
@@ -1003,7 +1010,7 @@ namespace SIL.PublishingSolution
         public bool InsertImage()
         {
             int defaultWidht, defaultHeight;
-            defaultWidht = defaultHeight = 11;
+            defaultWidht = defaultHeight = 72;
             bool inserted = false;
             if (_imageInsert)
             {
@@ -1119,8 +1126,8 @@ namespace SIL.PublishingSolution
                 //    }
                 //}
 
-                double x = double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US")) / 2;
-                double y = double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US")) / 2;
+                double x = double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US")) / 3;
+                double y = double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US")) / 3;
 
                 string xPlus = x.ToString();
                 string xMinus = "-" + xPlus;
@@ -1215,7 +1222,8 @@ namespace SIL.PublishingSolution
                 string p2 = @"\begin{center}";
                 //string p3 = @"{\includegraphics[natwidth=2bp,natheight=2bp, width=1bp]{" + picFile + "}} ";
                 //string p3 = @"\includegraphics[width=1in,height=1in,%keepaspectratio]{" + picFile + "} ";
-                string p3 = @"\includegraphics[angle=0,width=" + width + "cm,height=" + height + "cm]{" + picFile + "} ";
+                //string p3 = @"\includegraphics[angle=0,width=" + width + "cm,height=" + height + "cm]{" + picFile + "} ";
+                string p3 = @"\includegraphics[angle=0,width=" + width + "mm,height=" + height + "mm]{" + picFile + "} ";
 
 
                 //string p1 = @"\begin{figure*}[ht!] ";

@@ -19,6 +19,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -132,6 +133,7 @@ namespace SIL.PublishingSolution
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.XELATEX;
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+            int pageWidth = Common.GetPictureWidth(cssClass, projInfo.ProjectInputType);
 
             string xeLatexFullFile = Path.Combine(projInfo.ProjectPath, fileName + ".tex");
             StreamWriter xeLatexFile = new StreamWriter(xeLatexFullFile);
@@ -144,9 +146,9 @@ namespace SIL.PublishingSolution
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
             xeLaTexContent.TocEndingPage = preProcessor.GetDictionaryLetterCount();
-            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
-            
-          
+            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, 
+                cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
+
             if (projInfo.IsReversalExist)
             {
                 var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
@@ -252,7 +254,7 @@ namespace SIL.PublishingSolution
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(copyRightFilePath);
                 string xeLatexCopyrightFile = Path.Combine(projInfo.ProjectPath, fileNameXhtml + ".tex");
                 _copyrightTexFileName = xeLatexCopyrightFile;
-
+                int pageWidth = Common.GetPictureWidth(cssClass, projInfo.ProjectInputType);
 
                 StreamWriter xeLatexFile = new StreamWriter(xeLatexCopyrightFile);
                 Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
@@ -271,7 +273,7 @@ namespace SIL.PublishingSolution
                                                                                                               SpecificityClass,
                                                                                                           cssTree.
                                                                                                               CssClassOrder,
-                                                                                                          classInlineText);
+                                                                                                          classInlineText, pageWidth);
 
                 _xelatexDocumentOpenClosedRequired = true; //Don't change the place.
                 CloseDocument(xeLatexFile, false, string.Empty);
@@ -389,10 +391,11 @@ namespace SIL.PublishingSolution
                 Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
                 XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
                 classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
+                int pageWidth = Common.GetPictureWidth(cssClass, projInfo.ProjectInputType);
 
                 XeLaTexContent xeLaTexContent = new XeLaTexContent();
                 Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
-                Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
+                Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 
                 _xelatexDocumentOpenClosedRequired = true;          //Don't change the place.
                 CloseDocument(xeLatexFile, false, string.Empty);
