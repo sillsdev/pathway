@@ -123,6 +123,8 @@ namespace SIL.PublishingSolution
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
             projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
+            preProcessor.InsertPropertyForXelatexCss(projInfo.DefaultCssFileWithPath);
+
             ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
             modifyXeLaTexStyles.LangFontDictionary = _langFontCodeandName;
 

@@ -3421,6 +3421,23 @@ namespace SIL.Tool
             tw.Close();
         }
 
+        public void InsertPropertyForXelatexCss(string cssFileName)
+        {
+            TextWriter tw = new StreamWriter(cssFileName, true);
+            tw.WriteLine(".Intro_Paragraph {");
+            tw.WriteLine("line-height: 0pt;");
+            tw.WriteLine("-ps-fixed-line-height: 0pt;");
+            tw.WriteLine("}");
+
+
+            tw.WriteLine(".Intro_Section_Head {");
+            tw.WriteLine("padding-top: 8pt;");
+            tw.WriteLine("padding-bottom: 4pt;");
+            tw.WriteLine("}");
+
+            tw.Close();
+        }
+
         public void InsertCoverPageImageStyleInCSS(string cssFileName)
         {
             TextWriter tw = new StreamWriter(cssFileName, true);

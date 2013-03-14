@@ -2298,18 +2298,7 @@ namespace SIL.PublishingSolution
                     string currentPicturePath = _sourcePicturePath;
                     if (_allStyle.Peek().IndexOf("logo") == 0)
                     {
-                        //Change the path which have the default styles
-                        string folderName = string.Empty;
-                        if(executablePath.Contains("Paratext 7"))
-                        {
-                            folderName = Common.LeftString(executablePath, "Paratext 7");
-                            currentPicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "SIL\\Pathway7\\Copyrights"));
-                        }
-                        else if (executablePath.Contains("FieldWorks 7"))
-                        {
-                            folderName = Common.LeftString(executablePath, "FieldWorks 7");
-                            currentPicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "Pathway7\\Copyrights"));
-                        }
+                        currentPicturePath = Common.FromRegistry("Copyrights");
                     }
                     string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, currentPicturePath);
                     string fileName = Path.GetFileName(srcFile);
