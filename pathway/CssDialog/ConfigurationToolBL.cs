@@ -4078,16 +4078,22 @@ namespace SIL.PublishingSolution
                 SelectRow(cTool.StylesGrid, NewStyleName);
                 WriteCss();
                 cTool.TabControl1.SelectedIndex = 0;
-
                 cTool.PicPreview.Visible = false;
                 cTool.BtnPrevious.Visible = false;
                 cTool.BtnNext.Visible = false;
+                
+                string seletedLayout = string.Empty;
+                cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Selected = true;
+                seletedLayout = cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Cells[0].Value.ToString();
+                _lastSelectedLayout = seletedLayout;
+                _previousStyleName = seletedLayout;
+                cTool.TxtName.Text = seletedLayout;
+                setLastSelectedLayout();
+
+                _screenMode = ScreenMode.View;
+                SelectedRowIndex = cTool.StylesGrid.Rows.Count - 1;
                 ShowInfoValue();
                 cTool.TxtName.Select();
-                //EnableToolStripButtons(true);
-                ////AddNewRow();
-                ////SetFocusToName();
-                ////EnableToolStripButtons(false);
             }
             catch { }
         }
@@ -4302,13 +4308,8 @@ namespace SIL.PublishingSolution
         public void tsDelete_ClickBL()
         {
             _screenMode = ScreenMode.Delete;
-            //_redoundo.Reset();
-            //StyleName = cTool.StylesGrid[ColumnName, SelectedRowIndex].Value.ToString();
-            //cTool.LblInfoCaption.Text = StyleName;
-            //string name = cTool.LblInfoCaption.Text;
             string name = cTool.TxtName.Text;
             string msg = "Are you sure you want to delete the " + name + " stylesheet?";
-            //string msg = "Are you sure you want to delete the " + StyleName + " stylesheet?";
             string caption = "Delete Stylesheet";
             if (!cTool._fromNunit)
             {
@@ -4318,23 +4319,31 @@ namespace SIL.PublishingSolution
             }
             try
             {
-                //_redoundo.Set(Common.Action.Delete, StyleName, null, "", string.Empty);
                 if (SelectedRowIndex >= 0)
                 {
+                    int currentRowIndex = SelectedRowIndex;
                     string selectedTypeValue = cTool.StylesGrid[ColumnType, SelectedRowIndex].Value.ToString();
-
                     if (selectedTypeValue != TypeStandard)
                     {
                         _cssNames.Remove(StyleName);
                         RemoveXMLNode(StyleName);
-                        cTool.StylesGrid.Rows.RemoveAt(cTool.StylesGrid.Rows.GetFirstRow(DataGridViewElementStates.Selected));
-                        if (SelectedRowIndex == cTool.StylesGrid.Rows.Count) // Is last row?
+                        LoadParam();
+                        ShowDataInGrid();
+                        SetPropertyTab();
+                        string seletedLayout = string.Empty;
+                        SelectedRowIndex = currentRowIndex;
+                        if (currentRowIndex == cTool.StylesGrid.Rows.Count) // Is last row?
                             SelectedRowIndex = SelectedRowIndex - 1;
+                        cTool.StylesGrid.ClearSelection();
                         cTool.StylesGrid.Rows[SelectedRowIndex].Selected = true;
-                        //SelectedRowIndex--;
-                        //WriteCss();
-                        _screenMode = ScreenMode.Edit;
+                        seletedLayout = cTool.StylesGrid.Rows[SelectedRowIndex].Cells[0].Value.ToString();
+                        _lastSelectedLayout = seletedLayout;
+                        _previousStyleName = seletedLayout;
+                        cTool.TxtName.Text = seletedLayout;
+                        setLastSelectedLayout();
+                        _screenMode = ScreenMode.View;
                         ShowInfoValue();
+                        cTool.TxtName.Select();
                     }
                     else
                     {
@@ -4411,25 +4420,24 @@ namespace SIL.PublishingSolution
             try
             {
                 _screenMode = ScreenMode.SaveAs;
-                //_redoundo.Set(Common.Action.Copy, StyleName, null, "", string.Empty);
                 if (CopyStyle(cTool.StylesGrid, _cssNames))
                 {
                     ShowStyleInGrid(cTool.StylesGrid, _cssNames);
+					string seletedLayout = string.Empty;
+                    cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Selected = true;
+                    seletedLayout = cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Cells[0].Value.ToString();
+                    _lastSelectedLayout = seletedLayout;
+                    _previousStyleName = seletedLayout;
+                    cTool.TxtName.Text = seletedLayout;
+                    setLastSelectedLayout();
                     SelectRow(cTool.StylesGrid, PreviousStyleName);
                     WriteCss();
+                    
+                    _screenMode = ScreenMode.View;
+                    SelectedRowIndex = cTool.StylesGrid.Rows.Count - 1;
                     ShowInfoValue();
-                    cTool.TxtName.Select();
+                    cTool.TxtName.Focus();
                 }
-
-                //_screenMode = ScreenMode.Add;
-                //AddStyleInXML(cTool.StylesGrid, _cssNames);
-                //ShowStyleInGrid(cTool.StylesGrid, _cssNames);
-                //SelectRow(cTool.StylesGrid, NewStyleName);
-
-                //ShowInfoValue();
-                //cTool.TxtName.Select();
-                //EnableToolStripButtons(true);
-
             }
             catch { }
         }
@@ -4442,9 +4450,6 @@ namespace SIL.PublishingSolution
             {
                 CreatePreviewFile();
                 cTool.PicPreview.Visible = false;
-
-                //cTool.BtnPrevious.Visible = true;
-                //cTool.BtnNext.Visible = true;
             }
             cTool.PicPreview.SizeMode = PictureBoxSizeMode.StretchImage;
             if (File.Exists(PreviewFileName1))
