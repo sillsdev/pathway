@@ -35,7 +35,7 @@
                         </xsl:element>
                     </xsl:element>
                     <xsl:element name="content" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                        <xsl:attribute name="src">PartFile00001_.xhtml</xsl:attribute>
+                        <xsl:attribute name="src">PartFile00001_.xhtml#body</xsl:attribute>
                     </xsl:element>
                     <xsl:for-each select=". | following-sibling::node()">
                         <xsl:if test="contains(ncx:content/@src,'Part')">
@@ -59,7 +59,7 @@
                         </xsl:element>
                     </xsl:element>
                     <xsl:element name="content" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                        <xsl:attribute name="src">RevIndex00001_.xhtml</xsl:attribute>
+                        <xsl:attribute name="src">RevIndex00001_.xhtml#body</xsl:attribute>
                     </xsl:element>
                     <xsl:for-each select=". | following-sibling::node()">
                         <xsl:if test="contains(ncx:content/@src,'Rev')">

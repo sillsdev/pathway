@@ -1851,11 +1851,19 @@ namespace SIL.Tool
                                     {
                                         string ext = Path.GetExtension(fromFileName);
 
-                                        if (ext != null && ext.Contains("tif"))
-                                            ext = ".jpg";
-
                                         string toFileName = Common.PathCombine(tempFolder, counter + ext);
                                         File.Copy(fromFileName, toFileName, true);
+
+                                        if (ext != null && ext.Contains("tif"))
+                                        {
+                                            ext = ".jpg";
+                                            string tiffFileName = toFileName;
+                                            toFileName = Common.ConvertTifftoImage(toFileName, "jpg");
+                                            if (File.Exists(tiffFileName))
+                                            {
+                                                File.Delete(tiffFileName);
+                                            }
+                                        }
 
                                         XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
                                         xa.Value = name.Value;
