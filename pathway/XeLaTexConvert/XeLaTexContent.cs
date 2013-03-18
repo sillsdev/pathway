@@ -87,6 +87,8 @@ namespace SIL.PublishingSolution
         private string _bookName = string.Empty;
         private string _chapterStyleforHeader = string.Empty;
         private int _bookCount = 0;
+        private bool _bookPageBreak;
+
         #endregion
 
         #region Private Variables
@@ -554,8 +556,9 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            if (_previousParagraphName.IndexOf("TitleSecondary") == 0)
+            if (!_bookPageBreak && (_previousParagraphName.IndexOf("TitleMain") == 0 || _previousParagraphName.IndexOf("TitleSecondary") == 0))
             {
+                _bookPageBreak = true;
                 if (_bookCount != 0)
                 {
                     content = "\\newpage \r\n" + content;
@@ -1808,6 +1811,7 @@ namespace SIL.PublishingSolution
             {
                 _xetexFile.Write("\r\n \\label{" + _tocStartingPage + "} ");            
                 _bookName = string.Empty;
+                _bookPageBreak = false;
             }
 
             //if (_columnClass.Count > 0 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
