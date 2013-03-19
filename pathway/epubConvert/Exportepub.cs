@@ -448,6 +448,7 @@ namespace SIL.PublishingSolution
                 // copy over the XHTML and CSS files
                 string cssPath = Common.PathCombine(contentFolder, defaultCSS);
                 File.Copy(mergedCSS, cssPath);
+                string tocFiletoUpdate = string.Empty;
                 // copy the xhtml files into the content directory
                 foreach (string file in htmlFiles)
                 {
@@ -459,12 +460,24 @@ namespace SIL.PublishingSolution
                     {
                         Common.RemoveDTDForLinuxProcess(file);
                     }
-
+                    
                     File.Move(file, dest);
                     // split the file into smaller pieces if needed
                     List<string> files = SplitBook(dest);
+
+                    if (dest.Contains("File3TOC"))
+                    {
+                        tocFiletoUpdate = dest;
+                    }
+
                     if (files.Count > 1)
                     {
+                        Common.StreamReplaceInFile(tocFiletoUpdate, Path.GetFileName(dest), Path.GetFileName(files[0]));
+                        try
+                        {
+                            File.Delete(tocFiletoUpdate + ".tmp");
+                        }
+                        catch { }
                         // file was split out - delete "dest" (it's been replaced)
                         File.Delete(dest);
                     }
