@@ -493,6 +493,7 @@
     <LiftPrepare Include="..\LiftPrepare\$(OutputPath)\LiftPrepare.*" />
     <ParatextSupport Include="..\ParatextSupport\$(OutputPath)\ParatextSupport.*" />
     <AllBackend Include="..\InDesignConvert\$(OutputPath)\InDesignConvert.*" />
+    <AllBackend Include="..\XslProcess\$(OutputPath)\XslProcess.*" />
     <AllBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
     <AllBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" />
