@@ -954,6 +954,10 @@ namespace SIL.PublishingSolution
                     {
                         XmlNode letDataNode = xmlNode.ParentNode.NextSibling;
                         xpath = ".//text:variable-set[@text:name='Left_Guideword_L']";
+                        if (letDataNode == null)
+                        {
+                            continue;
+                        }
                         XmlNodeList leftGuidewordList = letDataNode.SelectNodes(xpath, nsmgr1);
                         if (leftGuidewordList.Count > 0)
                         {
