@@ -304,8 +304,8 @@ namespace SIL.PublishingSolution
                 if (contentWriter.ToLower().IndexOf(searchText) >= 0)
                 {
                     writer.WriteLine(insertText);
-                    writer.WriteLine("\\mbox{}");
-                    writer.WriteLine("\\mbox{}");
+                    //writer.WriteLine("\\mbox{}");
+                    //writer.WriteLine("\\mbox{}");
                     writer.WriteLine(contentWriter);
                     string st = string.Empty;
                     string contributors = Param.GetMetadataValue(Param.Contributor);
@@ -355,7 +355,7 @@ namespace SIL.PublishingSolution
                 txt =" For more information about this language, visit http://www.ethnologue.com/show_language.asp?code=";
                 var codeLen = languageCode.Length > 3 ? 3 : languageCode.Length;
                 txt = txt + languageCode.Substring(0, codeLen);
-                sb.AppendLine(@"\empFrontMatterdiv{" + txt + @"}\end{adjustwidth}");
+                sb.Append(@"\empFrontMatterdiv{" + txt + @" \newline \newline}\end{adjustwidth}");
             }
             return sb.ToString();
         }
