@@ -382,18 +382,29 @@ namespace SIL.PublishingSolution
                 {
                     foreach (string file in splitFiles)
                     {
-                        if (File.Exists(file))
+                        if (_isUnixOS)
                         {
-                            Common.RunCommand(xsltProcessExe,
-                                              string.Format("{0} {1} {2} {3}", file, xsltFullName, "_.xhtml",
-                                                            getPsApplicationPath), 1);
-
-                            //Common.XsltProcess(file, xsltFullName, "_.xhtml");
-                            // add this file to the html files list
+                            Common.XsltProcess(file, xsltFullName, "_.xhtml");
                             htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),
-                                                       (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
-                            // clean up the un-transformed file
+                                                                            (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
                             File.Delete(file);
+                        }
+                        else
+                        {
+
+                            if (File.Exists(file))
+                            {
+                                Common.RunCommand(xsltProcessExe,
+                                                  string.Format("{0} {1} {2} {3}", file, xsltFullName, "_.xhtml",
+                                                                getPsApplicationPath), 1);
+
+                                //Common.XsltProcess(file, xsltFullName, "_.xhtml");
+                                // add this file to the html files list
+                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),
+                                                           (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
+                                // clean up the un-transformed file
+                                File.Delete(file);
+                            }
                         }
                     }
                 }
@@ -460,7 +471,7 @@ namespace SIL.PublishingSolution
                     {
                         Common.RemoveDTDForLinuxProcess(file);
                     }
-                    
+
                     File.Move(file, dest);
                     // split the file into smaller pieces if needed
                     List<string> files = SplitBook(dest);
@@ -559,10 +570,14 @@ namespace SIL.PublishingSolution
                     {
                         if (_isUnixOS)
                         {
-                            if (outputPathWithFileName != outputPathWithFileName.Replace(" ", ""))
-                                File.Copy(outputPathWithFileName, outputPathWithFileName.Replace(" ", ""), true);
-
                             string epubFileName = fileName.Replace(" ", "") + ".epub";
+                            string replaceEmptyCharacterinFileName = Path.GetDirectoryName(outputPathWithFileName);
+                            replaceEmptyCharacterinFileName = Path.Combine(outputFolder, epubFileName);
+                            if (outputPathWithFileName != replaceEmptyCharacterinFileName && File.Exists(outputPathWithFileName))
+                            {
+                                File.Copy(outputPathWithFileName, replaceEmptyCharacterinFileName, true);
+                            }
+
                             SubProcess.Run(outputFolder, "ebook-viewer", epubFileName, false);
                         }
                         else
