@@ -2355,11 +2355,11 @@ namespace SIL.PublishingSolution
                         double value = .9;
                         if (_allStyle.Peek().IndexOf("logo") == 0)
                         {
-                            if (executablePath.Contains("Paratext 7"))
+                            if (_projInfo.ProjectInputType.ToLower() == "scripture")
                             {
                                 value = .45;
                             }
-                            else if (executablePath.Contains("FieldWorks 7"))
+                            else if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                             {
                                 value = .25;
                             }

@@ -560,7 +560,7 @@ namespace SIL.PublishingSolution
                 {
                     if (ProjectType.ToLower() == "dictionary")
                     {
-                        logoFileName = "SIL-Logo-No-Tag-Color.gif";
+                        logoFileName = "sil-bw-logo.jpg";
                     }
                     else
                     {
