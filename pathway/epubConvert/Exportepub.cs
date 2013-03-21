@@ -384,10 +384,20 @@ namespace SIL.PublishingSolution
                     {
                         if (_isUnixOS)
                         {
+			   if(file.Contains("File2Cpy"))
+			  {
+				string copyRightpage = file.Replace(".xhtml","_.xhtml");
+				File.Copy(file,copyRightpage);
+				htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),                               (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
+	                        File.Delete(file);
+				}
+			else
+			{
                             Common.XsltProcess(file, xsltFullName, "_.xhtml");
                             htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),
                                                                             (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
                             File.Delete(file);
+			}
                         }
                         else
                         {
@@ -3811,8 +3821,10 @@ namespace SIL.PublishingSolution
             {
                 ApplyXslt(tocFullPath, _addDicTocHeads);
             }
-
-            ApplyXslt(tocFullPath, _fixEpubToc);
+            if(!_isUnixOS)
+            {
+                ApplyXslt(tocFullPath, _fixEpubToc);
+            }
         }
 
         private void FixPlayOrder(string tocFullPath)

@@ -401,7 +401,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // dictionary - SIL logo
-                    sb.Append("<img src='sil-bw-logo.jpg' alt='SIL International Logo'/>");
+                    sb.Append("<img src='SIL-Logo-No-Tag-Color.gif' alt='SIL International Logo'/>");
                 }
                 else
                 {
@@ -448,7 +448,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // dictionary - SIL logo
-                    xmlAttribute3.Value = "sil-bw-logo.jpg";
+                    xmlAttribute3.Value = "SIL-Logo-No-Tag-Color.gif";
                     xmlAttribute4.Value = "SIL International Logo";
                 }
                 else
@@ -498,7 +498,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // dictionary - SIL logo
-                    xmlAttribute3.Value = "sil-bw-logo.jpg";
+                    xmlAttribute3.Value = "SIL-Logo-No-Tag-Color.gif";
                     xmlAttribute4.Value = "SIL International Logo";
                 }
                 else
@@ -541,7 +541,7 @@ namespace SIL.Tool
             {
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
-                    File.Copy(Path.Combine(strCopyrightFolder, "sil-bw-logo.jpg"), Path.Combine(outputFolder, "sil-bw-logo.jpg"), true);
+                    File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-No-Tag-Color.gif"), Path.Combine(outputFolder, "SIL-Logo-No-Tag-Color.gif"), true);
                 }
                 else
                 {
@@ -580,18 +580,17 @@ namespace SIL.Tool
                 File.Delete(destFile);
             }
 
+            File.Copy(strCopyrightFile, destFile, true);
             if (Common.UnixVersionCheck())
             {
-                Common.RemoveDTDForLinuxProcess(strCopyrightFile);
+                Common.RemoveDTDForLinuxProcess(destFile);
             }
-
-            File.Copy(strCopyrightFile, destFile, true);
             InsertCopyrightImageFiles(destFile, strCopyrightFile);
             Common.StreamReplaceInFile(destFile, "div id='LanguageInformation' class='Front_Matter' dir='ltr'>", GetLanguageInfo());
             Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>", GetCopyrightInfo());
             if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
-                Common.StreamReplaceInFile(destFile, "src='sil-bw-logo.jpg' alt='SIL International logo'",
+                Common.StreamReplaceInFile(destFile, "src='SIL-Logo-No-Tag-Color.gif' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
             }
             Common.SetDefaultCSS(destFile, Path.GetFileName(_cssFileNameWithPath));
@@ -672,7 +671,7 @@ namespace SIL.Tool
             string s0;
             if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
-                s0 = Regex.Replace(outData.ToString(), "src='sil-bw-logo.jpg' alt='SIL International logo'",
+                s0 = Regex.Replace(outData.ToString(), "src='SIL-Logo-No-Tag-Color.gif' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
             }
             else
@@ -732,7 +731,7 @@ namespace SIL.Tool
                 sb.Append("[");
                 sb.Append(languageCode);
                 sb.Append("]. For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
-                var codeLen = languageCode.Length > 3? 3: languageCode.Length;
+                var codeLen = languageCode.Length > 3 ? 3 : languageCode.Length;
                 sb.Append(languageCode.Substring(0, codeLen));
                 sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
                 sb.Append(languageCode.Substring(0, codeLen));
@@ -1313,7 +1312,7 @@ namespace SIL.Tool
                         XmlNode bodyNode = xDoc.SelectSingleNode("//html:body", namespaceManager);
 
                         copyRightContentNode = xmldoc.CreateElement("div");
-                        
+
                         XmlNode importNode = copyRightContentNode.OwnerDocument.ImportNode(bodyNode, true);
 
                         copyRightContentNode.InnerXml = importNode.InnerXml;
@@ -1920,7 +1919,7 @@ namespace SIL.Tool
                 if (bookNode != null)
                 {
                     bookName = bookNode.InnerText;
-                    Regex regex = new Regex(@"[^a-zA-Z0-9\s]", (RegexOptions) 0);
+                    Regex regex = new Regex(@"[^a-zA-Z0-9\s]", (RegexOptions)0);
                     bookName = regex.Replace(bookName, "");
                 }
                 bookName = bookName.Replace(" ", "_");
@@ -2642,13 +2641,13 @@ namespace SIL.Tool
             {
                 xPath = ".//img";
                 XmlNodeList imgNodes = entryNodes[i].SelectNodes(xPath, namespaceManager);
-                if(imgNodes.Count <= 1) continue;
-                 for (int j = 0; j < imgNodes.Count; j++)
-                 {
-                     if(j==0) continue;
-                     XmlNode imgNode = imgNodes[j].ParentNode;
-                     imgNode.Attributes["class"].Value = "pictureNone";
-                 }
+                if (imgNodes.Count <= 1) continue;
+                for (int j = 0; j < imgNodes.Count; j++)
+                {
+                    if (j == 0) continue;
+                    XmlNode imgNode = imgNodes[j].ParentNode;
+                    imgNode.Attributes["class"].Value = "pictureNone";
+                }
             }
             xDoc.Save(fileName);
             SetPictureNoneInCSS();
