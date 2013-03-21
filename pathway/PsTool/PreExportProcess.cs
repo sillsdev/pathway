@@ -401,7 +401,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // dictionary - SIL logo
-                    sb.Append("<img src='SIL-Logo-No-Tag-Color.gif' alt='SIL International Logo'/>");
+                    sb.Append("<img src='sil-bw-logo.jpg' alt='SIL International Logo'/>");
                 }
                 else
                 {
@@ -448,7 +448,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // dictionary - SIL logo
-                    xmlAttribute3.Value = "SIL-Logo-No-Tag-Color.gif";
+                    xmlAttribute3.Value = "sil-bw-logo.jpg";
                     xmlAttribute4.Value = "SIL International Logo";
                 }
                 else
@@ -498,7 +498,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // dictionary - SIL logo
-                    xmlAttribute3.Value = "SIL-Logo-No-Tag-Color.gif";
+                    xmlAttribute3.Value = "sil-bw-logo.jpg";
                     xmlAttribute4.Value = "SIL International Logo";
                 }
                 else
@@ -541,7 +541,7 @@ namespace SIL.Tool
             {
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
-                    File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-No-Tag-Color.gif"), Path.Combine(outputFolder, "SIL-Logo-No-Tag-Color.gif"), true);
+                    File.Copy(Path.Combine(strCopyrightFolder, "sil-bw-logo.jpg"), Path.Combine(outputFolder, "sil-bw-logo.jpg"), true);
                 }
                 else
                 {
@@ -590,7 +590,7 @@ namespace SIL.Tool
             Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>", GetCopyrightInfo());
             if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
-                Common.StreamReplaceInFile(destFile, "src='SIL-Logo-No-Tag-Color.gif' alt='SIL International logo'",
+                Common.StreamReplaceInFile(destFile, "src='sil-bw-logo.jpg' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
             }
             Common.SetDefaultCSS(destFile, Path.GetFileName(_cssFileNameWithPath));
@@ -671,7 +671,7 @@ namespace SIL.Tool
             string s0;
             if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
-                s0 = Regex.Replace(outData.ToString(), "src='SIL-Logo-No-Tag-Color.gif' alt='SIL International logo'",
+                s0 = Regex.Replace(outData.ToString(), "src='sil-bw-logo.jpg' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
             }
             else
