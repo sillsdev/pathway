@@ -3213,6 +3213,80 @@ namespace SIL.Tool
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void MovePictureAsLastChild(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            string xPath = "//xhtml:div[@class='entry']";
+            XmlNodeList entryNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if (entryNodeList == null) return;
+            for (int i = 0; i < entryNodeList.Count; i++)
+            {
+                XmlNode firstNode = entryNodeList[i].FirstChild;
+                if (firstNode.Attributes != null && firstNode.Attributes["class"].Value.ToLower() == "pictureright")
+                {
+                    entryNodeList[i].InsertAfter(firstNode, entryNodeList[i].LastChild);
+                }
+                //xPath = ".//xhtml:div[@class='headword']|.//xhtml:span[@class='headword']";
+                //XmlNode firstNode = entryNodeList[i].FirstChild;
+                //if (firstNode.Attributes != null && firstNode.Attributes["class"].Value.ToLower() != "pictureright")
+                //{
+                //    XmlNodeList headwordNodeList = entryNodeList[i].SelectNodes(xPath, namespaceManager);
+                //    if (headwordNodeList == null) return;
+                //    if (headwordNodeList.Count > 0)
+                //    {
+                //        for (int j = 0; j < headwordNodeList.Count; j++)
+                //        {
+                //            entryNodeList[i].InsertBefore(headwordNodeList[j], entryNodeList[i].FirstChild);
+                //        }
+                //    }
+                //}
+            }
+            xDoc.Save(fileName);
+        }
+
+        public void RemoveTextIntent(string fileName)
+        {
+            //string fileName = txtInputPath.Text;
+            string newFileName = fileName.Replace(".", "1.");
+            string line;
+            StreamReader read = new StreamReader(fileName);
+            StreamWriter write = new StreamWriter(newFileName);
+
+            bool isPicture = false;
+            while ((line = read.ReadLine()) != null)
+            {
+                if (isPicture || line.Contains(".picture"))
+                {
+                    isPicture = true;
+                    
+                    if (!line.Contains("text-indent"))
+                    {
+                        write.WriteLine(line);
+                        if (line.Contains("}"))
+                        {
+                            isPicture = false;
+                        }
+                    }
+                }
+                else
+                {
+                    write.WriteLine(line);
+                }
+            }
+
+            read.Close();
+            write.Close();
+
+        }
+
         #endregion
 
         #region XML PreProcessor
