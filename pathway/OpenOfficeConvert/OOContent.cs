@@ -734,12 +734,12 @@ namespace SIL.PublishingSolution
             //_writer.WriteString(data);
             if (!whiteSpaceExist && !_pseudoSingleSpace)
             {
-                //_writer.WriteStartElement("text:s");
-                //_writer.WriteAttributeString("text:c", "1");
-                //_writer.WriteString(" ");
-                //_writer.WriteEndElement();
-                _significant = true;
+                _writer.WriteStartElement("text:s");
+                _writer.WriteAttributeString("text:c", "1");
                 _writer.WriteString(" ");
+                _writer.WriteEndElement();
+                _significant = true;
+                //_writer.WriteString(" ");
             }
         }
 
