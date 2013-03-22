@@ -145,6 +145,7 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
+            //projInfo.IsReversalExist = true;
             var fixPlayorderStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.fixPlayorder.xsl");
             Debug.Assert(fixPlayorderStream != null);
             _fixPlayOrder.Load(XmlReader.Create(fixPlayorderStream));
@@ -2182,6 +2183,7 @@ namespace SIL.PublishingSolution
         private void FixRelativeHyperlinks(string contentFolder, InProcess inProcess)
         {
             string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
+            string[] revFiles = Directory.GetFiles(contentFolder, "RevIndex*.xhtml");
             //inProcess.AddToMaximum(files.Length);
             PreExportProcess preExport = new PreExportProcess();
             var dictHyperlinks = new Dictionary<string, string>();
@@ -2217,12 +2219,24 @@ namespace SIL.PublishingSolution
                     RemoveSpanVerseNumberNodeInXhtmlFile(targetFile);
                     ReplaceAllBrokenHrefs(targetFile, dictHyperlinks);
                 }
+                foreach (string targetFile in revFiles)
+                {
+                    RemoveSpanVerseNumberNodeInXhtmlFile(targetFile);
+                    ReplaceAllBrokenHrefs(targetFile, dictHyperlinks);
+                }
             }
             else
             {
                 if (files.Length > 0)
                 {
                     foreach (string targetFile in files)
+                    {
+                        RemoveSpanVerseNumberNodeInXhtmlFile(targetFile);
+                    }
+                }
+                if (revFiles.Length > 0)
+                {
+                    foreach (string targetFile in revFiles)
                     {
                         RemoveSpanVerseNumberNodeInXhtmlFile(targetFile);
                     }
