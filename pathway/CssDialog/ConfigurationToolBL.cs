@@ -801,18 +801,21 @@ namespace SIL.PublishingSolution
                 {
                     string path = Param.Value["UserSheetPath"]; // all user path
                     string file = Common.PathCombine(path, FileName);
-                    string importStatement;
+                    string importStatement = string.Empty;
 
-                    //Reading the existing file for 1st Line (@import statement)
-                    var sr = new StreamReader(file);
-                    while ((importStatement = sr.ReadLine()) != null)
+                    if (File.Exists(file))
                     {
-                        if (importStatement.Contains("@import"))
+                        //Reading the existing file for 1st Line (@import statement)
+                        var sr = new StreamReader(file);
+                        while ((importStatement = sr.ReadLine()) != null)
                         {
-                            break;
+                            if (importStatement.Contains("@import"))
+                            {
+                                break;
+                            }
                         }
+                        sr.Close();
                     }
-                    sr.Close();
 
                     //Start Writing the Changes
                     writeCss = new StreamWriter(file);
