@@ -75,7 +75,7 @@ namespace SIL.PublishingSolution
             }
             WorkDir = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             bool isUnixOS = Common.UnixVersionCheck();
-            var inProcess = new InProcess(0, 6);
+            var inProcess = new InProcess(0, 8);
             var curdir = Environment.CurrentDirectory;
             var myCursor = Cursor.Current;
             try
