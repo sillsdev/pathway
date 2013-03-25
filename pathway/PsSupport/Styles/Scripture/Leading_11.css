@@ -18,3 +18,7 @@
        line-height: 22pt;
        -ps-fixed-line-height: 22pt;
 }
+.Chapter_Number {
+       line-height: 11pt;
+       -ps-fixed-line-height: 11pt;
+}

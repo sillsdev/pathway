@@ -1,1 +1,0 @@
-(RULE (CLASS illustrationColumn) PARENTOF (CLASS illustration) (PROPERTY width 100 %) (PROPERTY height 100 %))

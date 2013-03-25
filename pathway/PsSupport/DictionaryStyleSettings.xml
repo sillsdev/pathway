@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="22">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="28">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -55,8 +55,9 @@
     <feature name="Page Size">
       <option name="A4" file="Page_size_A4.css" />
       <option name="A5" file="Page_size_A5.css" />
+	  <option name="B5" file="Page_size_B5.css" />
       <option name="C5" file="Page_size_C5.css" />
-      <option name="A6" file="Page_size_A6.css" />
+      <option name="A6" file="Page_size_A6.css" />	  
       <option name="Letter" file="Page_size_Letter.css" />
       <option name="Half letter" file="Page_size_Half_Letter.css" />
       <option name="6in x 9in" file="Page_size_6inx9in.css" />
@@ -142,11 +143,7 @@
       <option name="Bottom Inside Margin" file="PageNumber_BottomInside.css" type="Mirrored" />
       <option name="Bottom Outside Margin" file="PageNumber_BottomOutside.css" type="Mirrored" />
       <option name="Bottom Center" file="PageNumber_BottomCenter_Mirrored.css" type="Mirrored" />
-      <option name="Top Left Margin" file="PageNumber_TopLeft.css" type="Every Page" />
-      <option name="Top Right Margin" file="PageNumber_TopRight.css" type="Every Page" />
-      <option name="Top Center" file="PageNumber_TopCenter.css" type="Every Page" />
-      <option name="Bottom Left Margin" file="PageNumber_BottomLeft.css" type="Every Page" />
-      <option name="Bottom Right Margin" file="PageNumber_BottomRight.css" type="Every Page" />
+	  <option name="Top Center" file="PageNumber_TopCenter.css" type="Every Page" />
       <option name="Bottom Center" file="PageNumber_BottomCenter.css" type="Every Page" />
       <option name="None" file="PageNumber_None.css" type="Both" />
     </feature>
@@ -195,25 +192,11 @@
       <option name="Non-Commercial No Derivatives" file="SIL_CC-by-nc-nd.xhtml"/>
       <option name="Intended for Sale" file="SIL_Selling.xhtml"/>
     </feature>
-    <feature name="Lic_Wycliffe_x0020_Inc.">
-      <option name="Draft" file="WBT_Draft.xhtml"/>
-      <option name="Non-Commercial Share Alike" file="WBT_CC-by-nc-sa.xhtml"/>
-      <option name="Non-Commercial No Derivatives" file="WBT_CC-by-nc-nd.xhtml"/>
-      <option name="Intended for Sale" file="WBT_Selling.xhtml"/>
-    </feature>
-    <feature name="Lic_United Bible Societies">
-      <option name="Draft" file="UBS_Draft.xhtml"/>
-    </feature>
     <feature name="Subject">
-      <option name="Religion and Spirituality" file="Empty.css" />
       <option name="Reference" file="Empty.css" />
     </feature>
   </features>
   <categories>
-    <category name="Publisher" select="Wycliffe">
-      <item name="Wycliffe" />
-      <item name="UBS" />
-    </category>
     <category name="Media" select="paper">
       <item name="Paper" />
       <item name="Mobile" />
@@ -234,6 +217,15 @@
   </roles>
   <styles>
     <paper>
+      <style name="FieldWorksA4Styles" file="Layout_15.css" approvedBy="GPS" previewfile1="FieldWorksA4Styles P1.jpg" previewfile2="FieldWorksA4Styles P2.jpg" shown="Yes">
+        <description>A4 ruled double column with Flex formatting</description>
+      </style>
+      <style name="FieldWorksStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="Fieldworks_Layout_12 P1.jpg" previewfile2="Fieldworks_Layout_12 P2.jpg" shown="Yes">
+        <description>C5 ruled double column with Flex formatting</description>
+      </style>
+      <style name="FieldWorksLetterStyles" file="Layout_14.css" approvedBy="GPS" previewfile1="FieldWorksLetterStyles P1.jpg" previewfile2="FieldWorksLetterStyles P2.jpg" shown="Yes">
+        <description>Letter ruled double column with Flex formatting</description>
+      </style>
       <style name="OneColumn" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg" shown="Yes">
         <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13</description>
       </style>
@@ -244,9 +236,6 @@
         <description>Double column 9/13pt C5 with one column, sense paragraphs, example callouts,
           writing system separator, embedded spans marked according to writing system, mirrored
           headers and rule lines.</description>
-      </style>
-      <style name="FieldWorksStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="Fieldworks_Layout_12 P1.jpg" previewfile2="Fieldworks_Layout_12 P2.jpg" shown="Yes">
-        <description>C5 ruled double column with Flex formatting</description>
       </style>
       <style name="FieldWorksArabicBased" file="Layout_13.css" approvedBy="GPS" previewfile1="FieldworksArabicBased_Layout_13 p1.jpg" previewfile2="FieldworksArabicBased_Layout_13 p2.jpg" shown="Yes">
         <description>C5 ruled double column with Flex formatting for Arabic based font</description>
@@ -380,7 +369,7 @@
         <styleProperty name="Coverage" value=" " />
 		<styleProperty name="IncludeImage" value="Yes" />
         <styleProperty name="Information" value="DRAFT Dictionary." />
-        <styleProperty name="Copyright" value="© 2011 Wycliffe Bible Translators, Inc." />
+        <styleProperty name="Copyright" value="© 2013 SIL International®." />
       </style>
     </others>
   </styles>
@@ -401,8 +390,6 @@
   </column-width>
   <Organizations>
     <Organization>SIL International</Organization>
-    <Organization>United Bible Societies</Organization>
-    <Organization>Pioneer Bible Translators</Organization>
   </Organizations>
   <Metadata>
     <meta name="Title" outputTypes="all">
@@ -415,18 +402,14 @@
     </meta>
     <meta name="Publisher" outputTypes="all">
       <organizationDefault organizationName="SIL_x0020_International" Locked="false">SIL_x0020_International</organizationDefault>
-      <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">United_x0020_Bible_x0020_Societies</organizationDefault>
-      <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">Pioneer_x0020_Bible_x0020_Translators</organizationDefault>
       <defaultValue></defaultValue>
     </meta>
     <meta name="Description" outputTypes="all">
       <defaultValue></defaultValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2012_x0020_SIL_x0020_International.</organizationDefault>
-      <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">_x00A9__x0020_2012_x0020_United_x0020_Bible_x0020_Societies._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
-      <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">_x00A9__x0020_2012_x0020_Pioneer_x0020_Bible_x0020_Translators._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
-      <defaultValue>_x00A9__x0020_2012_x0020_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2012_x0020_SIL_x0020_International_x00AE_.</organizationDefault>
+      <defaultValue>_x00A9__x0020_2012_x0020_SIL_x0020_International_x00AE_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
     </meta>
     <meta name="Type" outputTypes="all">
       <defaultValue></defaultValue>

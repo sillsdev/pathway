@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article} 
+\documentclass[c5paper,twoside]{article} 
 \usepackage{texthanglist}
 \usepackage{multicol}
 \usepackage{changepage}
@@ -10,13 +10,14 @@
 \usepackage{fancyhdr}
 \usepackage{multicol}
 \usepackage{calc}
+\usepackage{lettrine}
 \usepackage[margin=1cm,includeheadfoot]{geometry}
 
 \begin{document} 
 \pagestyle{plain} 
-\font\spanSectionHeadscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 12pt
+\font\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 12pt
 \font\SectionHeadscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 12pt
-\font\ChapterNumberParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 12pt
+\font\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 12pt
 \font\ParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
 \font\scrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
 \font\columnsscrBookscrBody="Times New Roman" at 12pt
@@ -27,8 +28,8 @@
 \setlength{\columnsep}{12pt} 
 \setlength\columnseprule{0.4pt} 
 \begin{multicols}{2}{\raggedright} 
-\leftmargin 0pt{\ChapterNumberParagraphscrSectioncolumnsscrBookscrBody{2}}
+\leftmargin 0pt{\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody{\lettrine{2}}
  {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanSectionHeadscrSectioncolumnsscrBookscrBody{Betlehemfɔ Abí Mɔ }\end{center}\end{adjustwidth} 
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Betlehemfɔ Abí Mɔ }\end{center}\end{adjustwidth} 
  \end{multicols}
 \end{document}

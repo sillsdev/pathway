@@ -51,7 +51,8 @@ namespace SIL.PublishingSolution
         private string _reversalIndexTexFilename = string.Empty;
         private bool _reversalIndexExist = false;
         private bool _isMirrored = false;
-
+        private Dictionary<string, string> _langFontDictionary;
+        private Dictionary<string, Dictionary<string, string>> _tocList;
         public string ProjectType
         {
             get { return _projectType; }
@@ -130,11 +131,29 @@ namespace SIL.PublishingSolution
             set { _xelatexDocumentOpenClosedRequired = value; }
         }
 
+
+        public string Title { get; set; }
+        public string Creator { get; set; }
+        public string Description { get; set; }
+        public string Publisher { get; set; }
+        public string Relation { get; set; }
+        public string Coverage { get; set; }
+        public string Rights { get; set; }
+        public string Format { get; set; }
+        public string Source { get; set; }
+
+        public Dictionary<string, string> LangFontDictionary
+        {
+            get { return _langFontDictionary; }
+            set { _langFontDictionary = value; }
+        }
+
         #endregion
 
         public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty,
-            Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat)
+            Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat, Dictionary<string, string> langFontDictionary)
         {
+            _langFontDictionary = langFontDictionary;
             _projectPath = projectPath;
             _cssClass = cssClass;
             _xetexFullFile = xetexFullFile;
@@ -150,7 +169,7 @@ namespace SIL.PublishingSolution
 
         private void ValidatePageType()
         {
-            if(_cssClass.ContainsKey("@page:left-top-left"))
+            if (_cssClass.ContainsKey("@page:left-top-left"))
             {
                 _isMirrored = true;
             }
@@ -160,10 +179,14 @@ namespace SIL.PublishingSolution
         {
             if (newProperty.ContainsKey("TableofContent"))
             {
-                _firstString = newProperty["TableofContent"]["first"];
-                _lastString = newProperty["TableofContent"]["last"];
-                _headWordStyleName = newProperty["TableofContent"]["stylename"];
-                newProperty.Remove("TableofContent");
+                _tocList = newProperty;
+
+                if (_projectType != null && _projectType != "Scripture")
+                {
+                    _firstString = newProperty["TableofContent"]["first"];
+                    _lastString = newProperty["TableofContent"]["last"];
+                    _headWordStyleName = newProperty["TableofContent"]["stylename"];
+                }
             }
         }
 
@@ -190,14 +213,14 @@ namespace SIL.PublishingSolution
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
                 string className = RemoveBody(replaceNumberInStyle);
                 if (className.Length == 0) continue;
-                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle);
+                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle, _langFontDictionary);
                 if (xeLaTexProperty.Trim().Length > 0)
                 {
                     Common.FileInsertText(_xetexFullFile, xeLaTexProperty);
                     //_xetexFile.WriteLine(xeTexProperty);
-                }                
+                }
             }
-            
+
             //%\singlespacing
             //\onehalfspacing
             //%\doublespacing
@@ -219,7 +242,7 @@ namespace SIL.PublishingSolution
                     }
                 }
                 //Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
-                Common.FileInsertText(_xetexFullFile, @"\pagestyle{plain} ");                
+                Common.FileInsertText(_xetexFullFile, @"\pagestyle{plain} ");
                 Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
                 Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
                 //setmainfont{Arial} //Default Font 
@@ -233,9 +256,10 @@ namespace SIL.PublishingSolution
                 else
                 {
                     int cmMarginValue = Convert.ToInt32(pageMargin * 2.54 / 96);
-                    Common.FileInsertText(_xetexFullFile, @"\usepackage[margin="+ cmMarginValue +"cm,includeheadfoot]{geometry}");
+                    Common.FileInsertText(_xetexFullFile, @"\usepackage[margin=" + cmMarginValue + "cm,includeheadfoot]{geometry}");
                 }
 
+                Common.FileInsertText(_xetexFullFile, @"\usepackage{lettrine}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{calc}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
@@ -244,20 +268,179 @@ namespace SIL.PublishingSolution
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{graphicx}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{grffile}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{float}");
-                
+
                 foreach (var package in includePackageList)
                 {
                     Common.FileInsertText(_xetexFullFile, package);
                 }
                 //Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
-                string paperSize = "a4paper";
-                if (_isMirrored)
-                {
-                    paperSize = paperSize + ",twoside";
-                }
-                Common.FileInsertText(_xetexFullFile, @"\documentclass[" + paperSize + "]{article} ");
+
+                string paperSize = GetPageStyle(_cssClass, _isMirrored);
+
+                Common.FileInsertText(_xetexFullFile, @"\documentclass" + paperSize);
+
+                //Common.FileInsertText(_xetexFullFile, @"\documentclass[" + paperSize + "]{article} ");
                 //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
             }
+        }
+
+        private string GetPageStyle(Dictionary<string, Dictionary<string, string>> _cssClass, bool isMirrored)
+        {
+            string pageStyleText = "[a4paper]{article} ";
+
+            double pageWidth = 0;
+            double pageHeight = 0;
+            if (_cssClass.ContainsKey("@page"))
+            {
+                Dictionary<string, string> cssProp = _cssClass["@page"];
+                foreach (KeyValuePair<string, string> para in cssProp)
+                {
+                    if (para.Key == "page-width")
+                    {
+                        pageWidth = Convert.ToDouble(para.Value);
+                    }
+                    if (para.Key == "page-height")
+                    {
+                        pageHeight = Convert.ToDouble(para.Value);
+                    }
+                }
+            }
+
+            string paperSize = GetPaperSize(pageWidth, pageHeight);
+
+            if (paperSize == "a4")
+            {
+                pageStyleText = "[a4paper]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[a4paper,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "a5")
+            {
+                pageStyleText = "[a5paper]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[a5paper,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "C5")
+            {
+                pageStyleText = "[c5paper]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[c5paper,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "a6")
+            {
+                pageStyleText = "[a6paper]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[a6paper,twoside]{article} ";
+                }
+            }
+            //else if (paperSize == "Letter")
+            //{
+            //    pageStyleText = "[Letter]{article} ";
+            //    if (isMirrored)
+            //    {
+            //        pageStyleText = "[HalfLetter,twoside]{article} ";
+            //    }
+            //}
+            else if (paperSize == "halfletter")
+            {
+                pageStyleText = "[HalfLetter]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[HalfLetter,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "5.25in x 8.25in")
+            {
+                pageStyleText = "[gps1]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[gps1,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "5.8in x 8.7in")
+            {
+                pageStyleText = "[gps2]{article} ";
+                if (isMirrored)
+                {
+                    pageStyleText = "[gps2,twoside]{article} ";
+                }
+            }
+            else if (paperSize == "6in x 9in")
+            {
+                pageStyleText = @"[a4paper]{article}  \usepackage[margin=1in, paperwidth=6in, paperheight=9in]{geometry}";
+                if (isMirrored)
+                {
+                    pageStyleText = @"[a4paper,twoside]{article}  \usepackage[margin=1in, paperwidth=6in, paperheight=9in]{geometry}";
+                }
+            }
+
+            return pageStyleText;
+            //if (Math.Round(pageWidth) == 595 && Math.Round(pageHeight) == 842) //A4 Size
+            //    pageStyleText = "[a4paper]{article} ";
+            //if (Math.Round(pageWidth) == 420 && Math.Round(pageHeight) == 595) //A5 Size
+            //    pageStyleText = "[a5paper]{article} ";
+            //if (Math.Round(pageWidth) == 459 && Math.Round(pageHeight) == 649) //C5 Size
+            //    pageStyleText = "[c5paper]{article} ";
+            ////\special{papersize=148mm,210mm}% it is A5 paper size, I got from Wikipedia.
+            //if (Math.Round(pageWidth) == 298 && Math.Round(pageHeight) == 420) //A6 Size
+            //    pageStyleText = "[a6paper]{article} ";
+            //if (Math.Round(pageWidth) == 612 && Math.Round(pageHeight) == 792) //Letter
+            //    pageStyleText = "[letter]{article} ";
+            //if (Math.Round(pageWidth) == 396 && Math.Round(pageHeight) == 612) //Half Letter
+            //    pageStyleText = "[halfletter]{article} ";
+            //if (Math.Round(pageWidth) == 432 && Math.Round(pageHeight) == 648) //6in 9in paper
+            //    pageStyleText = @"[a4paper]{article}  \usepackage[margin=1in, paperwidth=6in, paperheight=9in]{geometry}";
+            //if (Math.Round(pageWidth) == 378 && Math.Round(pageHeight) == 594) //5.25in 8.25in paper
+            //    pageStyleText = "[gps1]{article} ";
+            //if (Math.Round(pageWidth) == 418 && Math.Round(pageHeight) == 626) //5.8in 8.7in paper
+            //    pageStyleText = "[gps2]{article} ";
+        }
+
+        private string GetPaperSize(double paperWidth, double paperHeight)
+        {
+            string paperSize = "a4";
+
+            if (Math.Round(paperWidth) == 612 && Math.Round(paperHeight) == 792)
+            {
+                paperSize = "Letter";
+            }
+            if (Math.Round(paperWidth) == 420 && Math.Round(paperHeight) == 595)
+            {
+                paperSize = "a5";
+            }
+            if (Math.Round(paperWidth) == 459 && Math.Round(paperHeight) == 649)
+            {
+                paperSize = "C5";
+            }
+            if (Math.Round(paperWidth) == 298 && Math.Round(paperHeight) == 420)
+            {
+                paperSize = "a6";
+            }
+            if (Math.Round(paperWidth) == 396 && Math.Round(paperHeight) == 612)
+            {
+                paperSize = "halfletter";
+            }
+            if (Math.Round(paperWidth) == 378 && Math.Round(paperHeight) == 594)
+            {
+                paperSize = "5.25in x 8.25in";
+            }
+            if (Math.Round(paperWidth) == 418 && Math.Round(paperHeight) == 626)
+            {
+                paperSize = "5.8in x 8.7in";
+            }
+            if (Math.Round(paperWidth) == 432 && Math.Round(paperHeight) == 648)
+            {
+                paperSize = "6in x 9in";
+            }
+
+            return paperSize;
         }
 
         private void InsertTableOfContent()
@@ -279,7 +462,12 @@ namespace SIL.PublishingSolution
             {
                 if (_firstString != null)
                 {
-                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + _firstString.ToUpper() + " - " + _lastString.ToUpper() + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
+                    _firstString = _firstString.ToUpper();
+                    _lastString = _lastString.ToUpper();
+                    _firstString = _firstString.Replace("~", "\\textasciitilde{~}");
+                    _lastString = _lastString.Replace("~", "\\textasciitilde{~}");
+
+                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + _firstString + " - " + _lastString + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
 
                     //For other Font style apply the below line
                     //tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + "\\" + _headWordStyleName + " " + _firstString.ToUpper() + " - " + "\\" + _headWordStyleName + " " + _lastString.ToUpper() + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
@@ -289,6 +477,25 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\newpage \r\n";
             }
 
+            if (_projectType.ToLower() == "scripture")
+            {
+
+                if (_tocList.ContainsKey("TableofContent") && _tocList["TableofContent"].Count > 0)
+                {
+                    foreach (var tocSection in _tocList["TableofContent"])
+                    {
+                        if (tocSection.Key.Contains("bookname"))
+                        {
+                            //tableOfContent += "\r\n" + tocSection.Value;
+                            //tableOfContent += @"\addtocontents{toc}{\contentsline {chapter}{\numberline{} " + tocSection.Value + "}{\\pageref{" + tocSection.Value + "}}{}} ";
+
+                            tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{" +
+                                              tocSection.Value + "}{{\\protect \\pageref{" + tocSection.Value + "}}}{}}" +
+                                              "\r\n";
+                        }
+                    }
+                }
+            }
             //tableOfContent += "\\thispagestyle{empty} \r\n";
             tableOfContent += "\\pagestyle{plain} \r\n";
             tableOfContent += "\\tableofcontents \r\n";
@@ -346,13 +553,168 @@ namespace SIL.PublishingSolution
 
             if (Convert.ToBoolean(TitleInCoverPage))
             {
-                tableOfContent += "\\title{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
-                tableOfContent += "\\author{ " + Param.GetMetadataValue(Param.Creator) + "} \r\n";
-                string copyrightContent = Param.GetMetadataValue(Param.CopyrightHolder);
-                //copyrightContent = copyrightContent.Replace("©", "");
-                //tableOfContent += "\\subtitle{ " + copyrightContent + "} \r\n";
-                tableOfContent += "\\maketitle \r\n";
-                tableOfContent += "\\thispagestyle{empty} \r\n";
+                string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename);
+
+                string logoFileName = string.Empty;
+                if (Param.GetOrganization().StartsWith("SIL"))
+                {
+                    if (ProjectType.ToLower() == "dictionary")
+                    {
+                        logoFileName = "sil-bw-logo.jpg";
+                    }
+                    else
+                    {
+                        logoFileName = "WBT_H_RGB_red.png";
+                    }
+                }
+                else if (Param.GetOrganization().StartsWith("Wycliffe"))
+                {
+                    logoFileName = "WBT_H_RGB_red.png";
+                }
+                copyRightFilePath = Path.GetDirectoryName(copyRightFilePath);
+
+                copyRightFilePath = Path.Combine(copyRightFilePath, logoFileName);
+                if (File.Exists(copyRightFilePath))
+                {
+                    if (Common.UnixVersionCheck())
+                    {
+                        string logoTitleFileName = logoFileName;
+                        logoTitleFileName = Path.Combine(Path.GetTempPath(), logoTitleFileName);
+                        if (File.Exists(copyRightFilePath))
+                        {
+                            File.Copy(copyRightFilePath, logoTitleFileName, true);
+                            File.Copy(copyRightFilePath, Path.Combine(_projectPath, logoFileName), true);
+                            File.Copy(copyRightFilePath, Path.Combine(xeLaTexInstallationPath, logoFileName), true);
+                        }
+                    }
+                    else
+                    {
+                        if (logoFileName.IndexOf("gif") > 0)
+                        {
+                            try
+                            {
+                                // Load the image.
+
+                                System.Drawing.Image image1 = System.Drawing.Image.FromFile(copyRightFilePath);
+                                // Save the image in JPEG format.
+                                logoFileName = logoFileName.Replace(".gif", ".jpg");
+                                image1.Save(Path.Combine(Path.GetTempPath(), logoFileName), System.Drawing.Imaging.ImageFormat.Jpeg);
+                            }
+                            catch { }
+
+                            if (File.Exists(Path.Combine(Path.GetTempPath(), logoFileName)))
+                            {
+                                File.Copy(Path.Combine(Path.GetTempPath(), logoFileName), Path.Combine(_projectPath, logoFileName), true);
+                                File.Copy(Path.Combine(Path.GetTempPath(), logoFileName), Path.Combine(xeLaTexInstallationPath, logoFileName), true);
+                            }
+                        }
+                        else
+                        {
+                            string logoTitleFileName = logoFileName;
+                            logoTitleFileName = Path.Combine(Path.GetTempPath(), logoTitleFileName);
+                            if (File.Exists(copyRightFilePath))
+                            {
+                                File.Copy(copyRightFilePath, logoTitleFileName, true);
+                                File.Copy(copyRightFilePath, Path.Combine(_projectPath, logoFileName), true);
+
+                                File.Copy(copyRightFilePath, Path.Combine(xeLaTexInstallationPath, logoFileName), true);
+                            }
+                        }
+                    }
+
+                }
+
+
+                tableOfContent += "\\begin{titlepage}\r\n";
+
+                tableOfContent += "\\begin{center}\r\n";
+
+
+
+                tableOfContent += "\\textsc{\\LARGE " + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
+
+                tableOfContent += "\\vspace{140 mm} \r\n";
+
+                tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Publisher) + "}\\\\[0.5cm] \r\n";
+
+                tableOfContent += "\\includegraphics[width=0.05 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";
+
+                //tableOfContent += "% Title\r\n";
+                //tableOfContent += "\\HRule \\[0.4cm]\r\n";
+                //tableOfContent += "{ \\huge \\bfseries Lager brewing techniques}\\[0.4cm]\r\n";
+
+                //tableOfContent += "\\HRule \\[1.5cm]\r\n";
+
+                //tableOfContent += "% Author and supervisor\r\n";
+                //tableOfContent += "\\begin{minipage}{0.4\\textwidth}\r\n";
+                //tableOfContent += "\\begin{flushleft} \\large\r\n";
+                //tableOfContent += "John \\textsc{Smith}\r\n";
+                //tableOfContent += "\\end{flushleft}\r\n";
+                //tableOfContent += "\\end{minipage}\r\n";
+                //tableOfContent += "\\begin{minipage}{0.4\textwidth}\r\n";
+                //tableOfContent += "\\begin{flushright} \\large\r\n";
+                //tableOfContent += "\\emph{Supervisor:} \\ \r\n";
+                //tableOfContent += "Dr.~Mark \\textsc{Brown} \r\n";
+                //tableOfContent += "\\end{flushright} \r\n";
+                //tableOfContent += "\\end{minipage} \r\n";
+
+                //tableOfContent += "\\vfill \r\n";
+
+                //tableOfContent += "% Bottom of the page \r\n";
+                //tableOfContent += "{\\large \\today} \r\n";
+
+                tableOfContent += "\\end{center} \r\n";
+
+                tableOfContent += "\\end{titlepage} \r\n";
+
+
+                ////////tableOfContent += "\\font\\TitlePageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
+                ////////tableOfContent += "\\title{" + "\\TitlePageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n " + "} \r\n";
+
+                //string organization;
+                //try
+                //{
+                //    // get the organization
+                //    organization = Param.Value["Organization"];
+                //}
+                //catch (Exception)
+                //{
+                //    // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                //    // but just in case, specify a default org.
+                //    organization = "SIL International";
+                //}
+
+                //string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+                //Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
+                //// Title (book title in Configuration Tool UI / dc:title in metadata)
+                //Title = Param.GetMetadataValue(Param.Title, organization) ?? ""; // empty string if null / not found
+                //// Creator (dc:creator))
+                //Creator = Param.GetMetadataValue(Param.Creator, organization) ?? ""; // empty string if null / not found
+                //// information
+                //Description = Param.GetMetadataValue(Param.Description, organization) ?? ""; // empty string if null / not found
+                //// Source
+                //Source = Param.GetMetadataValue(Param.Source, organization) ?? ""; // empty string if null / not found
+                //// Format
+                //Format = Param.GetMetadataValue(Param.Format, organization) ?? ""; // empty string if null / not found
+                //// Publisher
+                //Publisher = Param.GetMetadataValue(Param.Publisher, organization) ?? ""; // empty string if null / not found
+                //// Coverage
+                //Coverage = Param.GetMetadataValue(Param.Coverage, organization) ?? ""; // empty string if null / not found
+                //// Rights (dc:rights)
+                //Rights = Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
+
+
+
+                //// embed fonts
+
+                //tableOfContent += "\\author{ " + Param.GetMetadataValue(Param.Publisher) + "} \r\n";
+
+                ////tableOfContent += "\\author{ " + Param.GetMetadataValue(Param.Creator) + "} \r\n";
+                //string copyrightContent = Param.GetMetadataValue(Param.CopyrightHolder);
+                ////copyrightContent = copyrightContent.Replace("©", "");
+                ////tableOfContent += "\\subtitle{ " + copyrightContent + "} \r\n";
+                //tableOfContent += "\\maketitle \r\n";
+                //tableOfContent += "\\thispagestyle{empty} \r\n";
 
                 tableOfContent += "\\newpage \r\n";
                 tableOfContent += "\\newpage \r\n";
@@ -360,12 +722,12 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\mbox{} \r\n";
 
             }
-           
+
 
             if (Convert.ToBoolean(CopyrightInformation))
             {
-                tableOfContent += "\\setcounter{page}{1} \r\n";
                 tableOfContent += "\\pagenumbering{roman}  \r\n";
+                tableOfContent += "\\setcounter{page}{3} \r\n";
 
                 tableOfContent += "\\input{" + CopyrightTexFilename + "} \r\n";
                 //tableOfContent += "\\thispagestyle{empty} \r\n";

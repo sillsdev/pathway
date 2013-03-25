@@ -247,11 +247,11 @@ namespace SIL.PublishingSolution
             if (errorTag.IndexOf("|") > 0)
             {
                 string[] errMessage = errorTag.Split('|');
-                msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the installed settings file? \r\n (Specifically, \"" + errMessage[0] + "\" property has an invalid path.)";
+                msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errMessage[0] + "\" property has an invalid path.)";
             }
             else
             {
-                msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the installed settings file? \r\n (Specifically, \"" + errorTag + "\" property has an invalid value.)";
+                msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errorTag + "\" property has an invalid value.)";
             }
 
             DialogResult result = MessageBox.Show(msg, "Information",

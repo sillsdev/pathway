@@ -47,7 +47,7 @@ namespace SIL.PublishingSolution
         public StringBuilder PageStyle = new StringBuilder();
         readonly Dictionary<string, string> _pageStyleFormat = new Dictionary<string, string>();
         public string referenceFormat = string.Empty;
-
+        private Dictionary<string, string> _langFontDictionary = new Dictionary<string, string>();
 
 
 
@@ -146,6 +146,7 @@ namespace SIL.PublishingSolution
                 SetPageHeaderFooter(pageName);
             }
             PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \\renewcommand{\\footrulewidth}{0.4pt}");
+            PageStyle.AppendLine("\\fancyfoot{}");
         }
 
         private void SetPageHeaderFooter(string pageName)
@@ -317,7 +318,7 @@ namespace SIL.PublishingSolution
                 _inlineStyle = new List<string>();
                 _inlineText = new List<string>();
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
-                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList, _inlineText);
+                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList, _inlineText, _langFontDictionary);
 
                 //if (_inlineStyle.Count > 0)
                 {

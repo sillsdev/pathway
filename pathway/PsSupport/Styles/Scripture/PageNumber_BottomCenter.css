@@ -1,11 +1,6 @@
 /* Bottom Center.css */
-@page :left {
+@page {
     @bottom-center{
-           content: counter( page);
-    }
-}
-@page :right {
-   @bottom-center{
            content: counter( page);
     }
 }

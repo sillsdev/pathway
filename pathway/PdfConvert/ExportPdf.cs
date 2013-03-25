@@ -122,12 +122,14 @@ namespace SIL.PublishingSolution
                     preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
                     if (projInfo.SwapHeadword)
                         preProcessor.SwapHeadWordAndReversalForm();
+                    preProcessor.MovePictureAsLastChild(preProcessor.ProcessedXhtml);
                     string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
                     string tempFolderName = Path.GetFileName(tempFolder);
                     var mc = new MergeCss { OutputLocation = tempFolderName };
                     string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
                     preProcessor.ReplaceStringInCss(mergedCSS);
-                    preProcessor.SetDropCapInCSS(mergedCSS);
+                    preProcessor.InsertPropertyInCSS(mergedCSS);
+                    preProcessor.RemoveTextIntent(mergedCSS);
 
                     string xhtmlFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                     string defaultCSS = Path.GetFileName(mergedCSS);

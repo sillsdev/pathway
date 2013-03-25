@@ -1,1 +1,0 @@
-(RULE (CLASS xitem (ATTRIB lang ATTRIBEQUAL "en")) PRECEDES (CLASS xitem (ATTRIB lang ATTRIBEQUAL "tpi")) PARENTOF (CLASS xlanguagetag) (PROPERTY content "TEST "))

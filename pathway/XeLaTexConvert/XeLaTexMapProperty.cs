@@ -21,11 +21,12 @@ namespace SIL.PublishingSolution
         private List<string> _inlineStyle;
         private List<string> _includePackageList;
         private List<string> _inlineInnerStyle;
-
+        private Dictionary<string, string> _langFontDictionary = new Dictionary<string, string>();
 
         //TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
-        public string XeLaTexProperty(Dictionary<string, string> cssProperty, string className, List<string> inlineStyle, List<string> includePackageList, List<string> inlineInnerStyle)
+        public string XeLaTexProperty(Dictionary<string, string> cssProperty, string className, List<string> inlineStyle, List<string> includePackageList, List<string> inlineInnerStyle, Dictionary<string, string> langFontDictionary)
         {
+            _langFontDictionary = langFontDictionary;
             Initialize(className, cssProperty, inlineStyle, includePackageList, inlineInnerStyle);
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
@@ -477,7 +478,7 @@ namespace SIL.PublishingSolution
             else
             {
                 propertyValue = propertyValue.Replace("pt", "");
-                propertyValue = Convert.ToString(Convert.ToDouble(propertyValue) / 10);
+                propertyValue = Convert.ToString(Convert.ToDouble(propertyValue) / 24);
             }
             propertyValue = Common.SetPropertyValue("line-height", propertyValue);
             propertyValue = propertyValue.Replace("pt", "");
@@ -714,6 +715,19 @@ namespace SIL.PublishingSolution
         {
             string fontName = "Times New Roman";
             //string fontName = "Gautami";
+
+            if (_langFontDictionary.Count != 0)
+            {
+                foreach (string langCode in _langFontDictionary.Keys)
+                {
+                    if (_className.Contains("." + langCode))
+                    {
+                        fontName = _langFontDictionary[langCode];
+                        propertyValue = fontName;
+                    }
+                }
+            }
+
             FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
             foreach (FontFamily systemFont in systemFontList)
             {
@@ -723,9 +737,44 @@ namespace SIL.PublishingSolution
                     break;
                 }
             }
+
             _fontName = fontName;
             return _fontName;
         }
+
+
+        //private string GetImageRootDirectory()
+        //{
+        //    string imageRootPath = string.Empty;
+        //    if (!File.Exists(projInfo.DefaultXhtmlFileWithPath)) return imageRootPath;
+        //    XmlDocument xdoc = new XmlDocument { XmlResolver = null };
+        //    xdoc.Load(projInfo.DefaultXhtmlFileWithPath);
+        //    XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
+        //    if (metaNodes != null && metaNodes.Count > 0)
+        //    {
+        //        try
+        //        {
+        //            foreach (XmlNode metaNode in metaNodes)
+        //            {
+        //                if (metaNode.Attributes["name"].Value == "linkedFilesRootDir")
+        //                {
+        //                    imageRootPath = metaNode.Attributes["content"].Value;
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //        catch
+        //        {
+
+        //            return string.Empty;
+        //        }
+        //        return imageRootPath;
+        //    }
+
+
+
+        //    return imageRootPath;
+        //}
 
         public string GetFontSize()
         {

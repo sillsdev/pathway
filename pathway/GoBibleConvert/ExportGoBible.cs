@@ -361,7 +361,7 @@ namespace SIL.PublishingSolution
             }
             var args = string.Format(@"-Xmx128m -jar ""{0}"" ""{1}""", creatorFullPath, collectionFullName);
             SubProcess.RedirectOutput = RedirectOutputFileName;
-            SubProcess.Run(processFolder, progFullName, args, true);
+            SubProcess.Run(processFolder, "java", args, true);
         }
 
         /// <summary>

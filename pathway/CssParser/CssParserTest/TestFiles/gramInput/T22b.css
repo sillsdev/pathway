@@ -1,4 +1,0 @@
-.pronunciation[lang='en'] + .pronunciation[lang='tpi']::before
-{
-	content: ' / ';
-}

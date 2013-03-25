@@ -267,7 +267,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void CreateRootParagraphStyleGroup()
+        public void CreateRootParagraphStyleGroup(string headerFontName)
         {
             _writer.WriteStartElement("RootParagraphStyleGroup");
             _writer.WriteAttributeString("Self", "u69");
@@ -499,7 +499,8 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteStartElement("AppliedFont");
             _writer.WriteAttributeString("type", "string");
-            _writer.WriteString("Times New Roman");
+
+            _writer.WriteString(headerFontName);//"Times New Roman"
             _writer.WriteEndElement();
             _writer.WriteStartElement("RuleAboveColor");
             _writer.WriteAttributeString("type", "string");
@@ -641,7 +642,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteStartElement("AppliedFont");
             _writer.WriteAttributeString("type", "string");
-            _writer.WriteString("Times New Roman");
+            _writer.WriteString(headerFontName);//"Times New Roman"
             _writer.WriteEndElement();
             _writer.WriteStartElement("PreviewColor");
             _writer.WriteAttributeString("type", "enumeration");
@@ -1569,7 +1570,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
         }
 
-        public void CreateRootCharacterStyleGroup()
+        public void CreateRootCharacterStyleGroup(string headerFontName)
         {
             _writer.WriteStartElement("RootCharacterStyleGroup");
             _writer.WriteAttributeString("Self", "u6a");
@@ -1592,7 +1593,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteStartElement("AppliedFont");
             _writer.WriteAttributeString("type", "string");
-            _writer.WriteString("Times New Roman");
+            _writer.WriteString(headerFontName);//"Times New Roman"
             _writer.WriteEndElement();
             _writer.WriteStartElement("PreviewColor");
             _writer.WriteAttributeString("type", "enumeration");

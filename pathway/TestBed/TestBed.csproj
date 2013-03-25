@@ -316,9 +316,17 @@
       <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
       <Name>CssDialog</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dic4MidConvert\Dic4MidConvert.csproj">
+      <Project>{D4AFCA5B-4C8A-4478-A08F-75540BE0D3B0}</Project>
+      <Name>Dic4MidConvert</Name>
+    </ProjectReference>
     <ProjectReference Include="..\epubConvert\epubConvert.csproj">
       <Project>{B19037F2-26F7-48A2-9301-B5CA335C6824}</Project>
       <Name>epubConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\epubValidator\epubValidator.csproj">
+      <Project>{403F8C54-4154-4D79-AED7-326B976875B4}</Project>
+      <Name>epubValidator</Name>
     </ProjectReference>
     <ProjectReference Include="..\GoBibleConvert\GoBibleConvert.csproj">
       <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>

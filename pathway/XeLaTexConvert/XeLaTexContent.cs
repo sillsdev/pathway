@@ -39,6 +39,9 @@ namespace SIL.PublishingSolution
         private int _hyperLinkNo = 0;
         private bool isFileEmpty = true;
         private bool isFileCreated;
+        private bool _isDropCaps;
+
+
         private bool isImageAvailable;
         private bool isHomographNumber = false;
         private string columnCount = string.Empty;
@@ -65,6 +68,7 @@ namespace SIL.PublishingSolution
         Dictionary<string, List<string>> _classInlineInnerStyle = new Dictionary<string, List<string>>();
         private string xhtmlFile;
         private Dictionary<string, string> _endParagraphStringDic = new Dictionary<string, string>();
+        private int _pageWidth;
 
         protected Stack<string> _braceClass = new Stack<string>();
         protected Stack<string> _braceInlineClass = new Stack<string>();
@@ -82,6 +86,8 @@ namespace SIL.PublishingSolution
 
         private string _bookName = string.Empty;
         private string _chapterStyleforHeader = string.Empty;
+        private int _bookCount = 0;
+        private bool _bookPageBreak;
 
         #endregion
 
@@ -107,13 +113,13 @@ namespace SIL.PublishingSolution
 
         #endregion
 
-        public Dictionary<string, Dictionary<string, string>> CreateContent(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssClass, StreamWriter xetexFile, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, Dictionary<string, List<string>> classInlineText)
+        public Dictionary<string, Dictionary<string, string>> CreateContent(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssClass, StreamWriter xetexFile, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, Dictionary<string, List<string>> classInlineText, int pageWidth)
         {
             _projInfo = projInfo;
             _xetexFile = xetexFile;
             _classInlineStyle = classInlineStyle;
             _classInlineInnerStyle = classInlineText;
-            //_inputPath = Path.GetDirectoryName(projInfo.ProjectPath);
+            _pageWidth = pageWidth;
             _inputPath = projInfo.ProjectPath;
 
             xhtmlFile = projInfo.DefaultXhtmlFileWithPath;
@@ -133,10 +139,20 @@ namespace SIL.PublishingSolution
 
         private void GetTableofContent()
         {
-            _toc.Add("first", TocStartingPage);
-            _toc.Add("last", TocEndingPage);
-            _toc.Add("stylename", TocStyleName);
-            _newProperty.Add("TableofContent", _toc);
+
+            if (_projInfo.ProjectInputType.ToLower() == "scripture")
+            {
+                _newProperty.Add("TableofContent", _toc);
+
+
+            }
+            else
+            {
+                _toc.Add("first", TocStartingPage);
+                _toc.Add("last", TocEndingPage);
+                _toc.Add("stylename", TocStyleName);
+                _newProperty.Add("TableofContent", _toc);
+            }
         }
 
         private void ProcessProperty()
@@ -212,20 +228,20 @@ namespace SIL.PublishingSolution
                 }
 
                 // Drop caps starts
-                bool dropCap = false;
-                searchKey = "float";
-                if (IdAllClass[className].ContainsKey(searchKey))
-                {
-                    dropCap = true;
-                }
-                searchKey = "vertical-align";
-                if (IdAllClass[className].ContainsKey(searchKey))
-                {
-                    if (dropCap)
-                    {
-                        _dropCap.Add(className);
-                    }
-                }
+                //bool dropCap = false;
+                //searchKey = "float";
+                //if (IdAllClass[className].ContainsKey(searchKey))
+                //{
+                //    dropCap = true;
+                //}
+                //searchKey = "vertical-align";
+                //if (IdAllClass[className].ContainsKey(searchKey))
+                //{
+                //    if (dropCap)
+                //    {
+                //        _dropCap.Add(className);
+                //    }
+                //}
                 // Drop caps ends
 
 
@@ -296,7 +312,13 @@ namespace SIL.PublishingSolution
                 //    ListType[className] = IdAllClass[className][searchKey];
                 //}
             }
-            
+
+            if (Common.ColumnWidth == 0.0)
+            {
+                //Common.ColumnWidth = _pageWidth;
+                Common.ColumnWidth = Common.GetPictureWidth(IdAllClass, _projInfo.ProjectInputType);
+            }
+
             //if (Common.ColumnWidth == 0.0)
             //{
             //    Common.ColumnWidth = 148;
@@ -423,6 +445,7 @@ namespace SIL.PublishingSolution
                 DoNotInheritClassStart();
 
                 AddUsedStyleName(_paragraphName);
+
                 _previousParagraphName = _paragraphName;
                 _paragraphName = null;
                 _isNewParagraph = false;
@@ -532,6 +555,19 @@ namespace SIL.PublishingSolution
                     _characterName = _psuedoContainsStyle.StyleName;
                 }
             }
+
+            if (!_bookPageBreak && (_previousParagraphName.IndexOf("TitleMain") == 0 || _previousParagraphName.IndexOf("TitleSecondary") == 0))
+            {
+                _bookPageBreak = true;
+                if (_bookCount != 0)
+                {
+                    content = "\\newpage \r\n" + content;
+                }
+                if (_tocStartingPage != "" && _tocStartingPage != null)
+                    content +="\r\n \\label{" + _tocStartingPage + "} ";
+
+                _bookCount++;
+            }
             string modifiedContent = ModifiedContent(content, _previousParagraphName, _characterName);
             WriteCharacterStyle(modifiedContent, _characterName);
 
@@ -608,24 +644,27 @@ namespace SIL.PublishingSolution
             {
                 content = WriteCounter(content);
                 content = whiteSpacePre(content);
-
                 LanguageFontCheck(content, _childName);
-
-                if (_isDropCap)
-                {
-                    content = _chapterNo;
-                    _isDropCap = false;
-                }
-
                 _childName = Common.ReplaceSeperators(_childName);
-               
                 content = Common.ReplaceSymbolToXelatexText(content);
                 List<string> value = CreateInlineInnerStyle(characterStyle);
 
                 if (_childName.IndexOf("scrBookName") == 0 && content != null)
                 {
-                    content = "\r\n \\section{" + content + "} ";
+                    //content = "\r\n \\section{" + content + "} ";
+                    _tocStartingPage = content.ToString();
+                    _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
+                    _toc.Add("bookname_" + _tocStartingPage, _tocStartingPage);
+                    //_xetexFile.Write("\r\n \\label{"+ _tocStartingPage + "} ");
                 }
+                else if (_isDropCaps)
+                {
+                    _xetexFile.Write("\\lettrine{");
+                    _isDropCaps = false;
+                    //_inlineCount++;
+                }
+
+                content = content.Replace("~", "\\textasciitilde{~}");
 
                 _xetexFile.Write(content);
 
@@ -634,15 +673,19 @@ namespace SIL.PublishingSolution
                 {
                     _xetexFile.Write("}");
                 }
+                _inlineCount = 0;
                 _xetexFile.Write("}");
 
-                
+
                 if (_childName.IndexOf("letterletHead") == 0 && content != null)
                 {
 
                     if (!_dictionaryStarting)
                     {
-                        _tocStartingPage = content.Substring(0,1) .ToString();
+                        _tocStartingPage = content.Substring(0, 1).ToString();
+
+                        _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
+
                         _xetexFile.Write("\r\n \\label{first_page" + _tocStartingPage + "} ");
 
                         //_xetexFile.Write("\r\n \\section*{} \\label{first_page" + _tocStartingPage + "} ");
@@ -655,6 +698,8 @@ namespace SIL.PublishingSolution
                         if (content == TocEndingPage)
                         {
                             _tocEndingPage = content.Substring(0, 1).ToString();
+
+                            _tocEndingPage = _tocEndingPage.Replace("~", "\\textasciitilde{~}");
 
                             _xetexFile.WriteLine("\r\n \\label{last_page" + _tocEndingPage + "} ");
                         }
@@ -687,7 +732,7 @@ namespace SIL.PublishingSolution
         {
             if (characterStyle == "$ID/[No character style]")
             {
-                characterStyle =  StackPeek(_allStyle);
+                characterStyle = StackPeek(_allStyle);
             }
             List<string> value = new List<string>();
             if (characterStyle.IndexOf("_") > 0)
@@ -772,16 +817,16 @@ namespace SIL.PublishingSolution
                     }
                     _inlineCount = inlineStyle.Count - paraStyleCount;
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
-                    if(_projInfo.ProjectInputType.ToLower() == "scripture")
+                    if (_projInfo.ProjectInputType.ToLower() == "scripture")
                     {
+                        string headerStyle = Common.ReplaceSeperators(_previousParagraphName);
                         string referenceFormat = _projInfo.HeaderReferenceFormat;
-                        if(mergedParaStyle.ToLower().IndexOf("chapter") == 0)
+                        if (mergedParaStyle.ToLower().IndexOf("chapter") == 0)
                         {
                             _chapterStyleforHeader = mergedParaStyle;
                         }
                         if (mergedParaStyle.ToLower().IndexOf("chapter") == 0 && (referenceFormat == "Genesis 1" || referenceFormat == "Gen 1"))
                         {
-
                             if (_headerContent.Trim().Length == 0)
                             {
                                 if (referenceFormat == "Genesis 1")
@@ -790,12 +835,12 @@ namespace SIL.PublishingSolution
                                 }
                                 else if (referenceFormat == "Gen 1")
                                 {
-                                    _headerContent = _bookName.Substring(0,3) + " " + _chapterNo;
+                                    _headerContent = _bookName.Substring(0, 3) + " " + _chapterNo;
                                 }
-
                             }
                             _tocStyleName = mergedParaStyle;
-                            string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
+                            string headerFormat = "\\markboth{ \\" + headerStyle + " " + _headerContent + "}{ \\" + headerStyle + " " + _headerContent + "}";
+                            headerFormat = headerFormat.Replace("~", "\\textasciitilde{~}");
                             _xetexFile.Write(headerFormat);
                             _headerContent = string.Empty;
                         }
@@ -818,20 +863,43 @@ namespace SIL.PublishingSolution
 
                             }
                             _tocStyleName = mergedParaStyle;
-                            string headerFormat = "\\markboth{ \\" + _chapterStyleforHeader + " " + _headerContent + "}{ \\" + _chapterStyleforHeader + " " + _headerContent + "}";
+                            string headerFormat = "\\markboth{ \\" + headerStyle + " " + _headerContent + "}{ \\" + headerStyle + " " + _headerContent + "}";
+                            headerFormat = headerFormat.Replace("~", "\\textasciitilde{~}");
                             _xetexFile.Write(headerFormat);
                             _headerContent = string.Empty;
                         }
                     }
                     else
                     {
+                        string styleFullName = string.Empty;
+                        string[] rearrangeStyleName = characterStyle.Split('_');
+                        foreach (string currString in rearrangeStyleName)
+                        {
+                            if (!currString.Contains("."))
+                            {
+                                styleFullName += currString;
+                            }
+                        }
+
                         if (mergedParaStyle.IndexOf("headword") == 0 && content != null)
                         {
-                            if (_headerContent.Trim().Length == 0)
-                                _headerContent = content;
+                            //if (_headerContent.Trim().Length == 0)
+                            _headerContent = content;
 
                             _tocStyleName = mergedParaStyle;
                             string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
+                            headerFormat = headerFormat.Replace("~", "\\textasciitilde{~}");
+                            _xetexFile.Write(headerFormat);
+                            _headerContent = content;
+                        }
+                        if (styleFullName == "spanreversalformentryletDatadicBody" && content != null)
+                        {
+                            //if (_headerContent.Trim().Length == 0)
+                            _headerContent = content;
+
+                            _tocStyleName = mergedParaStyle;
+                            string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
+                            headerFormat = headerFormat.Replace("~", "\\textasciitilde{~}");
                             _xetexFile.Write(headerFormat);
                             _headerContent = content;
                         }
@@ -944,7 +1012,8 @@ namespace SIL.PublishingSolution
 
         public bool InsertImage()
         {
-
+            int defaultWidht, defaultHeight;
+            defaultWidht = defaultHeight = 72;
             bool inserted = false;
             if (_imageInsert)
             {
@@ -964,8 +1033,8 @@ namespace SIL.PublishingSolution
                 isImageAvailable = true;
                 inserted = true;
                 string[] cc = _allParagraph.ToArray();
-                
-                if(cc.Length < 1)
+
+                if (cc.Length < 1)
                     imageClass = cc[1];
 
                 srcFile = _imageSource.ToLower();
@@ -1015,26 +1084,26 @@ namespace SIL.PublishingSolution
                 else
                 {
                     //Default value is 72 
-                    rectHeight = "72"; // fixed the width as 1 in = 72pt;
+                    rectHeight = defaultHeight.ToString(); // fixed the width as 1 in = 72pt;
                     rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
                 }
                 if (rectWidth == "0")
                 {
-                    rectWidth = "72";
+                    rectWidth = defaultWidht.ToString();
                 }
                 if (rectHeight == "0")
                 {
-                    rectHeight = "72";
+                    rectHeight = defaultHeight.ToString();
                 }
 
                 if (rectWidth.IndexOf("%") != -1)
                 {
-                    rectWidth = "72";
+                    rectWidth = defaultWidht.ToString();
                 }
 
                 if (rectHeight.IndexOf("%") != -1)
                 {
-                    rectHeight = "72";
+                    rectHeight = defaultHeight.ToString();
                 }
 
                 //if (rectHeight != "0")
@@ -1060,8 +1129,8 @@ namespace SIL.PublishingSolution
                 //    }
                 //}
 
-                double x = double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US")) / 2;
-                double y = double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US")) / 2;
+                double x = double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US")) / 3;
+                double y = double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US")) / 3;
 
                 string xPlus = x.ToString();
                 string xMinus = "-" + xPlus;
@@ -1100,7 +1169,7 @@ namespace SIL.PublishingSolution
                         toPath = installedDirectory;
                         destination = Common.PathCombine(installedDirectory, Path.GetFileName(picFile));
                     }
-                    
+
                     if (!File.Exists(destination))
                     {
                         if (fromPath.IndexOf(".tif") >= 0)
@@ -1144,20 +1213,21 @@ namespace SIL.PublishingSolution
             return inserted;
         }
 
-        private void WriteImage(string picFile,int height, int width)
+        private void WriteImage(string picFile, int height, int width)
         {
             if (!string.IsNullOrEmpty(picFile))
             {
                 isImageAvailable = true;
 
                 _xetexFile.WriteLine("\r\n");
-                
+
                 string p1 = @"\begin{wrapfigure}";
                 string p2 = @"\begin{center}";
                 //string p3 = @"{\includegraphics[natwidth=2bp,natheight=2bp, width=1bp]{" + picFile + "}} ";
                 //string p3 = @"\includegraphics[width=1in,height=1in,%keepaspectratio]{" + picFile + "} ";
+                //string p3 = @"\includegraphics[angle=0,width=" + width + "cm,height=" + height + "cm]{" + picFile + "} ";
                 string p3 = @"\includegraphics[angle=0,width=" + width + "mm,height=" + height + "mm]{" + picFile + "} ";
-                
+
 
                 //string p1 = @"\begin{figure*}[ht!] ";
                 //string p2 = @"\centering ";
@@ -1455,9 +1525,12 @@ namespace SIL.PublishingSolution
                         }
                         else if (propName == "line-height")
                         {
-
-                            txtLineSpaceStart = "\\begin{spacing}{" + Common.RightString(property, " ") + "}";
-                            txtLineSpaceEnd = "\\end{spacing}";
+                            string prop = Common.RightString(property, " ");
+                            if (prop.Trim() != "0")
+                            {
+                                txtLineSpaceStart = "\\begin{spacing}{" + prop + "}";
+                                txtLineSpaceEnd = "\\end{spacing}";
+                            }
 
                         }
                         else if (propName == "text-align")
@@ -1596,7 +1669,7 @@ namespace SIL.PublishingSolution
                     //if (_endParagraphStringDic.ContainsKey(getStyleName) == false)
                     _endParagraphStringDic[getStyleName] = endParagraphString;
                 }
-                if(widows != string.Empty)
+                if (widows != string.Empty)
                 {
                     _xetexFile.WriteLine(widows);
                 }
@@ -1660,7 +1733,20 @@ namespace SIL.PublishingSolution
             }
         }
 
+
         private void DropCaps()
+        {
+            string classNameWOLang = _classNameWithLang;
+            if (classNameWOLang.IndexOf("_.") > 0)
+                classNameWOLang = Common.LeftString(classNameWOLang, "_.");
+
+            if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("vertical-align"))
+            {
+                _isDropCaps = true;
+            }
+        }
+
+        private void DropCapsOLD()
         {
             string classNameWOLang = _classNameWithLang;
             if (classNameWOLang.IndexOf("_.") > 0)
@@ -1696,7 +1782,7 @@ namespace SIL.PublishingSolution
                 _newProperty[_paragraphName] = mystyle;
                 _dropCapStyle = _paragraphName;
                 Write();
-                
+
             }
         }
 
@@ -1723,6 +1809,14 @@ namespace SIL.PublishingSolution
             }
 
             EndElementBase(false);
+
+            if (_closeChildName.IndexOf("scrBookName") == 0)
+            {
+                _xetexFile.Write("\r\n \\label{" + _tocStartingPage + "} ");            
+                _bookName = string.Empty;
+                _bookPageBreak = false;
+            }
+
             //if (_columnClass.Count > 0 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
             //if (_columnClass.Count == 2 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
             //{

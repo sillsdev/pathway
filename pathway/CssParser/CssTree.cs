@@ -406,7 +406,8 @@ namespace SIL.PublishingSolution
                 _classInfo.SpecificityWeightage = _specificityWeightage;
                 _classInfo.StyleName = styleName;
                 CssClassOrder.Add(_classInfo.CoreClass.ClassName);
-                SetSpecificityClass(_baseClassName,_classInfo);
+                if (_baseClassName != null)
+                    SetSpecificityClass(_baseClassName,_classInfo);
 
                 //// Todo :remove the PseduoBefore class
                 //if(_classInfo.Pseudo.Length > 0 )

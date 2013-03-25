@@ -435,7 +435,7 @@ namespace SIL.PublishingSolution
                                                 {
                                                     foreach (TreeNode mNode in pNode.Nodes)
                                                     {
-                                                        if (mNode.Text == "PROPERTY" && prpNode.Text == "PROPERTY" && mNode.FirstNode.Text == prpNode.FirstNode.Text)
+                                                        if (mNode != null && mNode.Text == "PROPERTY" && prpNode.Text == "PROPERTY" && mNode.FirstNode.Text == prpNode.FirstNode.Text)
                                                         {
                                                             pNode.Nodes.Remove(mNode);
                                                         }

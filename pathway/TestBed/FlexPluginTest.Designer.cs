@@ -44,6 +44,8 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.btnPrinceExport = new System.Windows.Forms.Button();
             this.btnSfm2Usx = new System.Windows.Forms.Button();
             this.btnRemoveBom = new System.Windows.Forms.Button();
             this.btnUsx2SFM = new System.Windows.Forms.Button();
@@ -73,7 +75,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnPrinceExport = new System.Windows.Forms.Button();
+            this.btnEpubValidator = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -236,6 +238,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnEpubValidator);
+            this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Controls.Add(this.btnPrinceExport);
             this.groupBox1.Controls.Add(this.btnSfm2Usx);
             this.groupBox1.Controls.Add(this.btnRemoveBom);
@@ -267,6 +271,30 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button8
+            // 
+            this.button8.AccessibleName = "BtnFlexTest";
+            this.button8.BackColor = System.Drawing.Color.LimeGreen;
+            this.button8.Location = new System.Drawing.Point(458, 234);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(84, 27);
+            this.button8.TabIndex = 78;
+            this.button8.Text = "Dic4Mid";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click_1);
+            // 
+            // btnPrinceExport
+            // 
+            this.btnPrinceExport.AccessibleName = "BtnFlexTest";
+            this.btnPrinceExport.BackColor = System.Drawing.Color.GreenYellow;
+            this.btnPrinceExport.Location = new System.Drawing.Point(512, 128);
+            this.btnPrinceExport.Name = "btnPrinceExport";
+            this.btnPrinceExport.Size = new System.Drawing.Size(78, 28);
+            this.btnPrinceExport.TabIndex = 77;
+            this.btnPrinceExport.Text = "Prince Export";
+            this.btnPrinceExport.UseVisualStyleBackColor = false;
+            this.btnPrinceExport.Click += new System.EventHandler(this.btnPrinceExport_Click);
             // 
             // btnSfm2Usx
             // 
@@ -599,17 +627,16 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnPrinceExport
+            // btnEpubValidator
             // 
-            this.btnPrinceExport.AccessibleName = "BtnFlexTest";
-            this.btnPrinceExport.BackColor = System.Drawing.Color.GreenYellow;
-            this.btnPrinceExport.Location = new System.Drawing.Point(512, 128);
-            this.btnPrinceExport.Name = "btnPrinceExport";
-            this.btnPrinceExport.Size = new System.Drawing.Size(78, 28);
-            this.btnPrinceExport.TabIndex = 77;
-            this.btnPrinceExport.Text = "Prince Export";
-            this.btnPrinceExport.UseVisualStyleBackColor = false;
-            this.btnPrinceExport.Click += new System.EventHandler(this.btnPrinceExport_Click);
+            this.btnEpubValidator.BackColor = System.Drawing.Color.Cyan;
+            this.btnEpubValidator.Location = new System.Drawing.Point(380, 188);
+            this.btnEpubValidator.Name = "btnEpubValidator";
+            this.btnEpubValidator.Size = new System.Drawing.Size(140, 33);
+            this.btnEpubValidator.TabIndex = 79;
+            this.btnEpubValidator.Text = "EPubValidator";
+            this.btnEpubValidator.UseVisualStyleBackColor = false;
+            this.btnEpubValidator.Click += new System.EventHandler(this.btnEpubValidator_Click);
             // 
             // FlexPluginTest
             // 
@@ -687,5 +714,7 @@
         private System.Windows.Forms.Button btnRemoveBom;
         private System.Windows.Forms.Button btnSfm2Usx;
         private System.Windows.Forms.Button btnPrinceExport;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button btnEpubValidator;
     }
 }
