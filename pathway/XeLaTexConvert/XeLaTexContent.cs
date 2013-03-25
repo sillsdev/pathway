@@ -1525,9 +1525,12 @@ namespace SIL.PublishingSolution
                         }
                         else if (propName == "line-height")
                         {
-
-                            txtLineSpaceStart = "\\begin{spacing}{" + Common.RightString(property, " ") + "}";
-                            txtLineSpaceEnd = "\\end{spacing}";
+                            string prop = Common.RightString(property, " ");
+                            if (prop.Trim() != "0")
+                            {
+                                txtLineSpaceStart = "\\begin{spacing}{" + prop + "}";
+                                txtLineSpaceEnd = "\\end{spacing}";
+                            }
 
                         }
                         else if (propName == "text-align")
