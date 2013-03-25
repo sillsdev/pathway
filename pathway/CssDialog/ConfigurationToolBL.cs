@@ -31,6 +31,7 @@ namespace SIL.PublishingSolution
         private List<string> _propertyValue = new List<string>();
         private List<string> _groupPropertyValue = new List<string>();
         private bool _isUnixOS = false;
+        private int _cToolPnlOtherFormatTop = 0;
         #endregion
 
         #region Public Variable
@@ -145,6 +146,7 @@ namespace SIL.PublishingSolution
         {
             standardSize["595x842"] = "A4";
             standardSize["420x595"] = "A5";
+            standardSize["499x709"] = "B5";
             standardSize["459x649"] = "C5";
             standardSize["298x420"] = "A6";
             standardSize["612x792"] = "Letter";
@@ -156,6 +158,7 @@ namespace SIL.PublishingSolution
             _screenMode = ScreenMode.Load;
 
             //Mirrored
+            pageDict.Add("@page:none-none", "None");
             pageDict.Add("@page:left-top-right", "Top Inside Margin");
             pageDict.Add("@page:left-top-left", "Top Outside Margin");
             pageDict.Add("@page:left-top-center", "Top Center");
@@ -227,65 +230,110 @@ namespace SIL.PublishingSolution
             get
             {
                 string defaultValue = string.Empty;
+                string task = "@page:left-top-left"; // Page left top left
+                string key = "content";
+                string result = GetValue(task, key, "false");
+                if (_loadType == "Dictionary")
                 {
-                    if (_loadType == "Dictionary")
+                    if (result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0)
                     {
-                        string task = "@page:left-top-left";
-                        string key = "content";
-                        string result = GetValue(task, key, "false");
-                        //task = "@page:right-top-right";
-                        //key = "content";
-                        //result = GetValue(task, key, "false");
-                        if (result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0)
-                        {
-                            return "Mirrored";
-                        }
-                        defaultValue = "Every Page";
+                        return "Mirrored";
                     }
-                    else
+                    defaultValue = "Every Page";
+                }
+                else
+                {
+                    //task = "@page:right-top-right";
+                    //key = "content";
+                    //result = GetValue(task, key, "false");
+                    if (result.IndexOf("bookname") > 0 || result.IndexOf("chapter") > 0 || result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0)
                     {
-                        string key = "-ps-referenceformat";
-                        string task = "@page:left-top-left$@page:right-top-right";
-                        string result = GetPageValue(task, key, "false");
-                        if (result.Length > 0)
-                        {
-                            return result;
-                        }
-
-                        task = "@page-top-center";
-                        result = GetPageValue(task, key, "false");
-                        if (result.Length > 0)
-                        {
-                            return result;
-                        }
-
-                        defaultValue = "Genesis 1-2";
+                        return "Mirrored";
                     }
+                    defaultValue = "Every Page";
                 }
                 return defaultValue;
-
             }
         }
+
+        public string ReferenceFormat
+        {
+            get
+            {
+                string defaultValue = string.Empty;
+
+                string key = "-ps-referenceformat";
+                string task = string.Empty;
+                string result = string.Empty;
+
+                if (GetDdlRunningHead().ToLower() == "mirrored")
+                {
+                    task = "@page-top-center";
+                    result = GetPageValue(task, key, "false");
+                    if (result.Length > 0)
+                    {
+                        if (cTool.DdlReferenceFormat.Items.Contains(result))
+                            return result;
+                    }
+
+                    task = "@page:left-top-left$@page:right-top-right";
+                    result = GetPageValue(task, key, "false");
+                    if (result.Length > 0)
+                    {
+                        if (cTool.DdlReferenceFormat.Items.Contains(result))
+                            return result;
+                    }
+
+                    defaultValue = "Genesis 1-2";
+                }
+                else if (GetDdlRunningHead().ToLower() == "every page")
+                {
+                    task = "@page-top-left$@page-top-right";
+                    result = GetPageValue(task, key, "false");
+                    if (result.Length > 0)
+                    {
+                        if (cTool.DdlReferenceFormat.Items.Contains(result))
+                            return result;
+                    }
+
+                    defaultValue = "Genesis 1:1-2:1";
+                }
+
+
+                return defaultValue;
+            }
+        }
+
         public string PageNumber
         {
             get
             {
                 string defaultValue = "Top Center";
-                foreach (string srchKey in pageDict.Keys)
+                if (_loadType == "Dictionary")
                 {
-                    const string key = "content";
-                    string result = GetValue(srchKey, key, "false");
-                    if (result.IndexOf("page") > 0)
+                    foreach (string srchKey in pageDict.Keys)
                     {
-                        string pageNumberValue = pageDict[srchKey];
-                        if (IsUnixOs)
+                        const string key = "content";
+                        string result = GetValue(srchKey, key, "false");
+                        if (result.IndexOf("page") > 0)
                         {
+                            string pageNumberValue = pageDict[srchKey];
                             if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
                                 return pageDict[srchKey];
                         }
-                        else
+                    }
+                }
+                else
+                {
+                    foreach (string srchKey in pageDict.Keys)
+                    {
+                        const string key = "content";
+                        string result = GetValue(srchKey, key, "false");
+                        if (result.IndexOf("page") > 0)
                         {
-                            return pageDict[srchKey];
+                            string pageNumberValue = pageDict[srchKey];
+                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
+                                return pageDict[srchKey];
                         }
                     }
                 }
@@ -447,7 +495,12 @@ namespace SIL.PublishingSolution
                 string task = "@page";
                 string key = "-ps-fileproduce";
                 string file = GetValue(task, key, "One");
-                return file.Replace("\"", "");
+                if (file != null) 
+                    return file.Replace("\"", "");
+                else
+                {
+                    return "One";
+                }
             }
         }
 
@@ -748,18 +801,21 @@ namespace SIL.PublishingSolution
                 {
                     string path = Param.Value["UserSheetPath"]; // all user path
                     string file = Common.PathCombine(path, FileName);
-                    string importStatement;
+                    string importStatement = string.Empty;
 
-                    //Reading the existing file for 1st Line (@import statement)
-                    var sr = new StreamReader(file);
-                    while ((importStatement = sr.ReadLine()) != null)
+                    if (File.Exists(file))
                     {
-                        if (importStatement.Contains("@import"))
+                        //Reading the existing file for 1st Line (@import statement)
+                        var sr = new StreamReader(file);
+                        while ((importStatement = sr.ReadLine()) != null)
                         {
-                            break;
+                            if (importStatement.Contains("@import"))
+                            {
+                                break;
+                            }
                         }
+                        sr.Close();
                     }
-                    sr.Close();
 
                     //Start Writing the Changes
                     writeCss = new StreamWriter(file);
@@ -802,6 +858,13 @@ namespace SIL.PublishingSolution
                         key = cTool.DdlRunningHead.Text;
                         WriteAtImport(writeCss, attribute, key);
 
+                        if (inputTypeBL.ToLower() == "scripture")
+                        {
+                            attribute = "Reference Format";
+                            key = cTool.DdlReferenceFormat.Text;
+                            WriteAtImport(writeCss, attribute, key);
+                        }
+
                         attribute = "Page Number";
                         key = cTool.DdlPageNumber.Text;
                         WriteAtImport(writeCss, attribute, key);
@@ -834,16 +897,18 @@ namespace SIL.PublishingSolution
                     writeCss.Flush();
                     writeCss.Close();
 
-
                     PreviewFileName1 = "";
                     PreviewFileName2 = "";
-                    cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
-                    cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
-                    XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + StyleName + "']");
-                    Param.SetAttrValue(baseNode, "previewfile1", PreviewFileName1);
-                    Param.SetAttrValue(baseNode, "previewfile2", PreviewFileName1);
-                    Param.Write();
 
+                    if (cTool.StylesGrid.Rows.Count >= SelectedRowIndex)
+                    {
+                        cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
+                        cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
+                        XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + StyleName + "']");
+                        Param.SetAttrValue(baseNode, "previewfile1", PreviewFileName1);
+                        Param.SetAttrValue(baseNode, "previewfile2", PreviewFileName1);
+                        Param.Write();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -969,9 +1034,14 @@ namespace SIL.PublishingSolution
             cTool.DdlPagePageSize.SelectedItem = PageSize;
             cTool.DdlRunningHead.SelectedItem = RunningHeader;
 
-            string pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+            string pageType;
+            pageType = GetDdlRunningHead();
             DdlRunningHeadSelectedIndexChangedBl(pageType);
 
+            if (inputTypeBL.ToLower() == "scripture")
+            {
+                cTool.DdlReferenceFormat.SelectedItem = ReferenceFormat;
+            }
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
             cTool.DdlSense.SelectedItem = Sense;
@@ -1157,7 +1227,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    cTool.DdlFileProduceDict.SelectedItem = FileProduced.Trim();
+                    cTool.DdlFileProduceDict.SelectedItem = FileProduced.ToString();
                     ShowCssSummary();
                 }
                 SavePropertyValue();
@@ -1240,8 +1310,8 @@ namespace SIL.PublishingSolution
                 }
                 cTool.DdlLanguage.Sorted = true;
             }
-        }        
-        
+        }
+
         ///// <summary>
         ///// If the value of margins are invalid at load time, the values are shown in red color(TD-1331).
         ///// </summary>
@@ -1825,6 +1895,7 @@ namespace SIL.PublishingSolution
                     result = false;
                     //cTool.TxtName.Focus();
                 }
+                cTool._previousTxtName = cTool.TxtName.Text;
             }
             return result;
         }
@@ -2084,9 +2155,11 @@ namespace SIL.PublishingSolution
             if (_cssClass.ContainsKey(task) && _cssClass[task].ContainsKey(key))
             {
                 string result = _cssClass[task][key].Replace("'", "");
-                //if (result.Length == 0)
-                //    result = "true";
-                return result;
+
+                if (result.Length == 0)
+                    return defaultValue;
+                else
+                    return result;
             }
             return defaultValue;
         }
@@ -2235,7 +2308,7 @@ namespace SIL.PublishingSolution
             var currentRow = grid.Rows[SelectedRowIndex];
             if (currentRow == null) return false;
             //var currentDescription = currentRow.Cells[ColumnDescription].Value.ToString();
-           // var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
+            // var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
             var currentApprovedBy = grid[5, SelectedRowIndex].Value.ToString();
             string type = grid[ColumnType, SelectedRowIndex].Value.ToString();
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
@@ -2319,7 +2392,7 @@ namespace SIL.PublishingSolution
                 string fileName = values[key];
                 if (attribute.ToLower() == "page number")
                 {
-                    string pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+                    string pageType = GetDdlRunningHead();
                     fileName = GetPageNumberImport(pageType, key);
                 }
                 writeCss.WriteLine("@import \"" + fileName + "\";");
@@ -2330,12 +2403,15 @@ namespace SIL.PublishingSolution
         {
             string xPath = string.Empty;
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulatePageNumberFeature");
-            if (inputTypeBL.ToLower() == "scripture")
-                xPath = "//features/feature[@name='Page Number']/option[@name!='']";
-            else
-            {
-                xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
-            }
+            //if (inputTypeBL.ToLower() == "scripture")
+            //    xPath = "//features/feature[@name='Page Number']/option[@name!='']";
+            //else
+            //{
+            //    xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+            //}
+
+            xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+
             XmlNodeList pageNumList = Param.GetItems(xPath);
             try
             {
@@ -3270,7 +3346,7 @@ namespace SIL.PublishingSolution
                         ps.DictionaryOutputName = fileName;
                         ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
                         ps.ProjectInputType = _loadType;
-                        
+
                         bool success = PrincePreview(ps);
 
                         if (!success)
@@ -3343,7 +3419,7 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-         /// <summary>
+        /// <summary>
         /// Comparing the loaded values in property values vs changed property values
         /// Except the Label controls
         /// </summary>
@@ -3573,13 +3649,13 @@ namespace SIL.PublishingSolution
         {
             string xPath = string.Empty;
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulatePageNumberFeature");
-            if (inputTypeBL.ToLower() == "scripture")
-                xPath = "//features/feature[@name='Page Number']/option[@name!='']";
-            else
-            {
-                xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
-            }
-
+            //if (inputTypeBL.ToLower() == "scripture")
+            //    xPath = "//features/feature[@name='Page Number']/option[@name!='']";
+            //else
+            //{
+            //    xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+            //}
+            xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
 
             XmlNodeList pageNumList = Param.GetItems(xPath);
             cTool.DdlPageNumber.Items.Clear();
@@ -3600,6 +3676,26 @@ namespace SIL.PublishingSolution
             {
             }
 
+            xPath = "//features/feature[@name='Reference Format']/option[@type='" + pageType + "' or @type= 'Both']";
+            pageNumList = Param.GetItems(xPath);
+            cTool.DdlReferenceFormat.Items.Clear();
+            try
+            {
+                foreach (XmlNode node in pageNumList)
+                {
+                    if (node.Attributes != null)
+                    {
+                        string value = node.Attributes["name"].Value;
+                        if (!cTool.DdlReferenceFormat.Items.Contains(value))
+                            cTool.DdlReferenceFormat.Items.Add(value);
+                    }
+                }
+                if (cTool.DdlReferenceFormat.Items.Count > 0)
+                    cTool.DdlReferenceFormat.SelectedIndex = 0;
+            }
+            catch
+            {
+            }
         }
 
         public void tsUndo_ClickBL(object sender, EventArgs e)
@@ -3717,7 +3813,7 @@ namespace SIL.PublishingSolution
             {
                 cTool.TxtName.Text = cTool.TxtName.Text.Trim();
                 if (cTool._previousTxtName == cTool.TxtName.Text) return;
-
+                PreviousStyleName = cTool._previousTxtName;
                 bool isNoDuplicateStyleName = NoDuplicateStyleName();
                 bool isValidateStyleName = ValidateStyleName(cTool.TxtName.Text);
 
@@ -3781,9 +3877,10 @@ namespace SIL.PublishingSolution
 
         private void SetInfoCaption(string txtName)
         {
-            if (txtName.Length > 40)
+            int width = cTool.LblInfoCaption.Width / 11;
+            if (txtName.Length > width)
             {
-                cTool.LblInfoCaption.Text = txtName.Remove(37) + "...";
+                cTool.LblInfoCaption.Text = txtName.Remove(width) + "...";
             }
             else
             {
@@ -3966,7 +4063,7 @@ namespace SIL.PublishingSolution
                 // EDB (2 May 2011): TD-2344 / replace with Export Through Pathway dlg
                 var dlg = new ExportThroughPathway("Set Defaults");
                 //var dlg = new PrintVia("Set Defaults");
-                dlg.InputType = inputTypeBL;
+                dlg.InputType = inputTypeBL; 
                 dlg.DatabaseName = "{Project_Name}";
                 dlg.Media = MediaType;
                 dlg.ShowDialog();
@@ -3984,16 +4081,22 @@ namespace SIL.PublishingSolution
                 SelectRow(cTool.StylesGrid, NewStyleName);
                 WriteCss();
                 cTool.TabControl1.SelectedIndex = 0;
-
                 cTool.PicPreview.Visible = false;
                 cTool.BtnPrevious.Visible = false;
                 cTool.BtnNext.Visible = false;
+                
+                string seletedLayout = string.Empty;
+                cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Selected = true;
+                seletedLayout = cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Cells[0].Value.ToString();
+                _lastSelectedLayout = seletedLayout;
+                _previousStyleName = seletedLayout;
+                cTool.TxtName.Text = seletedLayout;
+                setLastSelectedLayout();
+
+                _screenMode = ScreenMode.View;
+                SelectedRowIndex = cTool.StylesGrid.Rows.Count - 1;
                 ShowInfoValue();
                 cTool.TxtName.Select();
-                //EnableToolStripButtons(true);
-                ////AddNewRow();
-                ////SetFocusToName();
-                ////EnableToolStripButtons(false);
             }
             catch { }
         }
@@ -4093,6 +4196,7 @@ namespace SIL.PublishingSolution
             {
                 cTool.MinimumSize = new Size(497, 183);
                 cTool.Width = Screen.PrimaryScreen.WorkingArea.Size.Width;
+                cTool.Width = cTool.Width < 1175 ? cTool.Width : 1175;
             }
 
             cTool.LoadSettings();
@@ -4207,13 +4311,8 @@ namespace SIL.PublishingSolution
         public void tsDelete_ClickBL()
         {
             _screenMode = ScreenMode.Delete;
-            //_redoundo.Reset();
-            //StyleName = cTool.StylesGrid[ColumnName, SelectedRowIndex].Value.ToString();
-            //cTool.LblInfoCaption.Text = StyleName;
-            //string name = cTool.LblInfoCaption.Text;
             string name = cTool.TxtName.Text;
             string msg = "Are you sure you want to delete the " + name + " stylesheet?";
-            //string msg = "Are you sure you want to delete the " + StyleName + " stylesheet?";
             string caption = "Delete Stylesheet";
             if (!cTool._fromNunit)
             {
@@ -4223,23 +4322,31 @@ namespace SIL.PublishingSolution
             }
             try
             {
-                //_redoundo.Set(Common.Action.Delete, StyleName, null, "", string.Empty);
                 if (SelectedRowIndex >= 0)
                 {
+                    int currentRowIndex = SelectedRowIndex;
                     string selectedTypeValue = cTool.StylesGrid[ColumnType, SelectedRowIndex].Value.ToString();
-
                     if (selectedTypeValue != TypeStandard)
                     {
                         _cssNames.Remove(StyleName);
                         RemoveXMLNode(StyleName);
-                        cTool.StylesGrid.Rows.RemoveAt(cTool.StylesGrid.Rows.GetFirstRow(DataGridViewElementStates.Selected));
-                        if (SelectedRowIndex == cTool.StylesGrid.Rows.Count) // Is last row?
+                        LoadParam();
+                        ShowDataInGrid();
+                        SetPropertyTab();
+                        string seletedLayout = string.Empty;
+                        SelectedRowIndex = currentRowIndex;
+                        if (currentRowIndex == cTool.StylesGrid.Rows.Count) // Is last row?
                             SelectedRowIndex = SelectedRowIndex - 1;
+                        cTool.StylesGrid.ClearSelection();
                         cTool.StylesGrid.Rows[SelectedRowIndex].Selected = true;
-                        //SelectedRowIndex--;
-                        //WriteCss();
-                        _screenMode = ScreenMode.Edit;
+                        seletedLayout = cTool.StylesGrid.Rows[SelectedRowIndex].Cells[0].Value.ToString();
+                        _lastSelectedLayout = seletedLayout;
+                        _previousStyleName = seletedLayout;
+                        cTool.TxtName.Text = seletedLayout;
+                        setLastSelectedLayout();
+                        _screenMode = ScreenMode.View;
                         ShowInfoValue();
+                        cTool.TxtName.Select();
                     }
                     else
                     {
@@ -4270,6 +4377,21 @@ namespace SIL.PublishingSolution
             }
             else if (cTool.TabControl1.SelectedIndex == 1) // css properties
             {
+                if (inputTypeBL.ToLower() == "dictionary")
+                {
+                    cTool.PnlReferenceFormat.Visible = false;
+                    _cToolPnlOtherFormatTop = cTool.PnlOtherFormat.Top;
+                    cTool.PnlOtherFormat.Top = cTool.PnlReferenceFormat.Top;
+                }
+                else
+                {
+                    if (_cToolPnlOtherFormatTop > 0)
+                    {
+                        cTool.PnlReferenceFormat.Visible = true;
+                        cTool.PnlOtherFormat.Top = _cToolPnlOtherFormatTop;
+                    }
+                }
+
                 ShowCSSValue();
                 if (cTool.BtnPaper.Enabled && cTool.TabControl1.TabPages[1].Enabled)
                 {
@@ -4290,7 +4412,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                _fileProduce = cTool.DdlFileProduceDict.Text;
+                _fileProduce = cTool.DdlFileProduceDict.SelectedItem.ToString();
                 //WriteCss(sender);
             }
             catch { }
@@ -4301,25 +4423,24 @@ namespace SIL.PublishingSolution
             try
             {
                 _screenMode = ScreenMode.SaveAs;
-                //_redoundo.Set(Common.Action.Copy, StyleName, null, "", string.Empty);
                 if (CopyStyle(cTool.StylesGrid, _cssNames))
                 {
                     ShowStyleInGrid(cTool.StylesGrid, _cssNames);
+					string seletedLayout = string.Empty;
+                    cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Selected = true;
+                    seletedLayout = cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Cells[0].Value.ToString();
+                    _lastSelectedLayout = seletedLayout;
+                    _previousStyleName = seletedLayout;
+                    cTool.TxtName.Text = seletedLayout;
+                    setLastSelectedLayout();
                     SelectRow(cTool.StylesGrid, PreviousStyleName);
                     WriteCss();
+                    
+                    _screenMode = ScreenMode.View;
+                    SelectedRowIndex = cTool.StylesGrid.Rows.Count - 1;
                     ShowInfoValue();
-                    cTool.TxtName.Select();
+                    cTool.TxtName.Focus();
                 }
-
-                //_screenMode = ScreenMode.Add;
-                //AddStyleInXML(cTool.StylesGrid, _cssNames);
-                //ShowStyleInGrid(cTool.StylesGrid, _cssNames);
-                //SelectRow(cTool.StylesGrid, NewStyleName);
-
-                //ShowInfoValue();
-                //cTool.TxtName.Select();
-                //EnableToolStripButtons(true);
-
             }
             catch { }
         }
@@ -4332,9 +4453,6 @@ namespace SIL.PublishingSolution
             {
                 CreatePreviewFile();
                 cTool.PicPreview.Visible = false;
-
-                //cTool.BtnPrevious.Visible = true;
-                //cTool.BtnNext.Visible = true;
             }
             cTool.PicPreview.SizeMode = PictureBoxSizeMode.StretchImage;
             if (File.Exists(PreviewFileName1))
@@ -4428,7 +4546,7 @@ namespace SIL.PublishingSolution
             }
             catch { }
         }
-        
+
         public void ddlPageNumber_SelectedIndexChange()
         {
             if (_screenMode == ScreenMode.Edit)
@@ -4438,6 +4556,21 @@ namespace SIL.PublishingSolution
                 WriteCss();
             }
         }
+
+        private string GetDdlRunningHead()
+        {
+            string pageType;
+            if (cTool.DdlRunningHead.SelectedIndex != -1)
+            {
+                pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+            }
+            else
+            {
+                pageType = cTool.DdlRunningHead.Items[0].ToString();
+            }
+            return pageType;
+        }
+
         #endregion
     }
 }

@@ -492,6 +492,7 @@ namespace SIL.PublishingSolution
             configurationTool.InputType = InputType;
             configurationTool.MediaType = grid.SelectedRows[0].Cells[4].Value.ToString();
             configurationTool.Style = grid.SelectedRows[0].Cells[0].Value.ToString().Replace(' ', '&');
+            configurationTool.StartPosition = FormStartPosition.CenterScreen;
             configurationTool.ShowDialog();
 
             SelectedStyle = configurationTool.Style;

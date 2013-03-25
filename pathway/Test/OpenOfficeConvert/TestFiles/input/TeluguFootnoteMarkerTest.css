@@ -1,0 +1,861 @@
+div[lang='zxx']{ font-family: "Gautami";}
+span[lang='zxx']{ font-family: "Gautami";}
+
+div[lang='zxx']{ font-family: "Gautami";}
+span[lang='zxx']{ font-family: "Gautami";}
+
+div[lang='zxx']{ font-family: "Gautami";}
+span[lang='zxx']{ font-family: "Gautami";}
+
+.cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} .title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} .copyright{text-align: left; font-size:12pt;page-break-after: always;}.tableofcontents{text-align: left; font-size:12pt;page-break-after: always;} .dummypage{page-break-after: always;} 
+div[lang='zxx']{ font-family: "Gautami";}
+span[lang='zxx']{ font-family: "Gautami";}
+
+@page {
+    -ps-positionchapternumbers-string: "Drop Capital";
+    -ps-IncludeVersenumber-string: "True";
+    -ps-IncludeVerseInHeaderReferences-string:"yes";
+    ps-NonConsecutiveReferenceSeparator-string:",";
+}
+
+.Alternate_Reading {
+    font-style: italic;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+
+.Chapter_Head {
+    padding-top:21pt;
+    padding-bottom:21pt;
+}
+
+.Chapter_Number {
+    font-weight: bolder;
+    vertical-align: top;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-right: 2pt;
+    float: left;
+    string-set: chapter content() ":";
+}
+
+.crossHYPHENReference::footnote-call {
+    font-style:Italic;
+}
+
+
+.Emphasis {
+    font-style: italic;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Inscription {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 0pt;
+    padding-top: 0pt;
+    margin-top: 12pt;
+    margin-bottom:6pt;
+}
+.Inscription_Paragraph {
+    text-indent: .2in;
+    margin-left: 0pt;
+}
+.Intro_List_Item1 {
+    text-indent: -18pt;
+    margin-left: 36pt;
+}
+.Intro_Paragraph {
+    text-indent: .2in;
+    margin-left: 0pt;
+}
+.Intro_Section_Head {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: left;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 3pt;
+    margin-bottom: 3pt;
+}
+.REVERSE_SOLIDUSCitation_Line1, .Line1 {
+    text-align: left;
+    margin-left: 24pt;
+    text-indent: -12pt;
+    padding-left: 0pt;
+}
+.REVERSE_SOLIDUSCitation_Line2, .Line2 {
+    text-align: left;
+    margin-left: 24pt;
+    text-indent: -6pt;
+    padding-left: 0pt;
+}
+.REVERSE_SOLIDUSCitation_Line3, .Line3 {
+    text-align: left;
+    margin-left: 24pt;
+    text-indent: 0pt;
+    padding-left: 0pt;
+}
+.Note_CrossHYPHENReference_Paragraph {
+    text-indent: 0pt;
+    margin-left: 0pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Note_CrossHYPHENReference_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    line-height: none;
+}
+.Note_CrossHYPHENReference_Paragraph::footnote-marker {
+    font-weight: bold;
+    content: string(chapter) string(verse) ' ';
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
+    text-align: left;
+}
+.Endnote_General_Paragraph,
+.Note_General_Paragraph {
+    text-indent: 0pt;
+    margin-left: 0pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Endnote_General_Paragraph::footnote-call,
+.Note_General_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    vertical-align: top;
+    line-height: none;
+}
+/*.Note_General_Paragraph::footnote-marker {
+    font-weight: bold;
+    content: string(chapter) string(verse) ' ';
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple;
+    text-align: left;
+} */
+.Note_Target_Reference::footnote-marker {
+    font-weight: bold;
+}
+.Endnote_General_Paragraph::footnote-call,
+.Note_General_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    vertical-align: top;
+    line-height: none;
+}
+.scrFootnoteMarker {
+}
+.Paragraph {
+    text-indent: 12pt;
+    margin-left: 0pt;
+	orphans: 2;
+    widows:2;
+}
+.Paragraph_Continuation {
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Paragraph1 {
+    margin-left: 0pt;
+	orphans: 2;
+    widows:2;
+}
+
+.parallel_passage_reference,  .Parallel_Passage_Reference {
+    font-style: italic;
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 0pt;
+    margin-bottom: 3pt;
+}
+
+.rem {
+    display: none;
+}
+
+.scrBody {
+}
+.scrBook {
+    column-count: 1;
+    clear: both;
+}
+.scrBookCode {
+    display: none;
+}
+.scrBookName {
+    string-set: bookname content();
+    display: none;
+}
+.scrIntroSection {
+    text-align: left;
+}
+.scrSection {
+    text-align: left;
+}
+.Section_Head {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 0pt;
+    padding-top: 0pt;
+    margin-top: 12pt;
+    //margin-bottom:6pt;
+    margin-bottom:0pt;
+}
+
+.Section_Range_Paragraph
+{
+   font-weight: bold;	/* cascaded environment */
+   font-style: normal;	/* cascaded environment */
+   text-align: center;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 0pt;
+   padding-top: 0pt;
+   margin-top: 6pt;
+   margin-bottom:0pt;
+}
+
+
+.Section_Head_Major {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 8pt;
+}
+.Section_Head_Minor {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 8pt;
+}
+
+.See_In_Glossary {
+    color: blue;
+}
+
+span {
+    prince-text-replace: "<<" "\201C" ">>" "\201D" "<" "\2018" ">" "\2019";
+}
+
+.Stanza_Break {
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Title_Main {
+    font-size: 18pt;
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+	page-break-after:avoid;
+    orphans:5;
+}
+.Title_Secondary {
+    display: block;
+}
+.Verse_Number {
+    font-size:6pt;
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: verse content();
+}
+.Verse_Number_In_Note {
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Verse_Number1 {
+    display: none;
+}
+.Front_Matter {
+margin-left : 48pt;
+margin-right: 48pt;
+text-align: justify;
+}
+
+@page {
+    size: 5.8in 8.7in;
+    margin: .5in;
+    counter-increment: page;
+}
+
+/* The following formats the scripture text into 1 column */
+
+.columns {
+	column-count: 1; -moz-column-count: 1;
+}
+
+/* justify text */
+
+.Intro_Section_Head {
+    text-align: justify;
+}
+.Line1 {
+    text-align: justify;
+}
+.scrIntroSection {
+    text-align: justify;
+}
+.scrSection {
+    text-align: justify;
+}
+.Chapter_Head {
+    line-height:16pt;
+}
+
+.Intro_List_Item1 {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Intro_Paragraph {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Intro_Section_Head {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Line1 {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Note_CrossHYPHENReference_Paragraph {
+    line-height: 9pt;
+    -ps-fixed-line-height: 9pt;
+}
+
+.Note_General_Paragraph {
+    line-height: 9pt;
+    -ps-fixed-line-height: 9pt;
+}
+
+.Chapter_Number {
+       line-height: 13pt;
+       -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph_Continuation {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph1 {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.parallel_passage_reference {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Section_Head {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Section_Head_Major {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Title_Main {
+    line-height: 24pt;
+    -ps-fixed-line-height: 24pt;
+}
+.pictureRight {
+    float: right;
+    width: 99px;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureLeft {
+    float: left;
+    position: relative;
+    left: -2pc;
+    width: 99px;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureCenter {
+    float: top;
+    clear: both;
+    width: 4.75in;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureColumn {
+    float: right;
+    width: 100%;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.picturePage {
+    float: top;
+    clear: both;
+    width: 100%;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureRight > .picture {
+    width: 95px;
+    height: 84px;
+}
+div.pictureLeft > img.picture {
+    width: 95px;
+    height: 84px;
+}
+.pictureCaption {
+    display: block;
+    text-align: center;
+    text-transform:capitalize;
+}
+
+span.reference :before {
+	content: " (";
+}
+span.reference :after {
+	content: ")";
+}
+/* Running Head Mirrored.css */
+@page :left {
+    @top-left {
+           content: string( guideword, first);
+           direction: ltr;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @top-center    { content: ''; }
+    @top-right  { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left   { content: ''; }
+    @top-center { content: ''; }
+    @top-right  {
+           content: string( guideword, last);
+           direction: ltr;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+
+
+
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :left {
+    @top-left {
+        -ps-referenceFormat: "Genesis 1:1";
+        content: string(bookname, first) " "  string(chapter, first) ":" string(verse, first);
+        font-weight: bold;
+    }
+    @top-center { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left { content: ''; }
+    @top-center { content: ''; }
+    @top-right     {
+        -ps-referenceFormat: "Genesis 1:1";
+        content: string(bookname, last) " "  string(chapter, last) string(verse, last);
+        font-weight: bold;
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+/* Page number  Top Inside.css */
+@page :left {
+    @top-right {
+          content: counter( page);
+           margin-top: 1cm;
+    }
+}
+
+@page :right {
+    @top-left {
+           content: counter( page);
+    }
+}
+/* scripture ruling lines */
+@page {
+    @footnotes {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+    @footnote {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+}
+.border {
+    border-top: .5pt solid #808080;
+    text-align: center;
+    margin-left: 1in;
+    margin-right: 1in;
+    margin-top: 9pt;
+    margin-bottom: 18pt;
+    content: "\00A0";
+}
+.columns {
+       column-rule: solid 1pt #808080;
+}
+/* justify text */
+
+.Intro_Section_Head {
+    text-align: justify;
+}
+.Line1 {
+    text-align: justify;
+}
+.scrIntroSection {
+    text-align: justify;
+}
+.scrSection {
+    text-align: justify;
+}
+@page {
+    -ps-vertical-justification: Top;
+}
+@page {
+    size: 5.8in 8.7in;
+    margin: .5in;
+    counter-increment: page;
+}
+
+/* The following formats the scripture text into 1 column */
+
+.columns {
+	column-count: 1; -moz-column-count: 1;
+}
+
+
+
+
+.Chapter_Head {
+    line-height:16pt;
+}
+
+.Intro_List_Item1 {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Intro_Paragraph {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Intro_Section_Head {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Line1 {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Note_CrossHYPHENReference_Paragraph {
+    line-height: 9pt;
+    -ps-fixed-line-height: 9pt;
+}
+
+.Note_General_Paragraph {
+    line-height: 9pt;
+    -ps-fixed-line-height: 9pt;
+}
+
+.Chapter_Number {
+       line-height: 13pt;
+       -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph_Continuation {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph1 {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.parallel_passage_reference {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Section_Head {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Section_Head_Major {
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Title_Main {
+    line-height: 24pt;
+    -ps-fixed-line-height: 24pt;
+}
+.pictureRight {
+    float: right;
+    width: 99px;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureLeft {
+    float: left;
+    position: relative;
+    left: -2pc;
+    width: 99px;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureCenter {
+    float: top;
+    clear: both;
+    width: 4.75in;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureColumn {
+    float: right;
+    width: 100%;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.picturePage {
+    float: top;
+    clear: both;
+    width: 100%;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureRight > .picture {
+    width: 95px;
+    height: 84px;
+}
+div.pictureLeft > img.picture {
+    width: 95px;
+    height: 84px;
+}
+.pictureCaption {
+    display: block;
+    text-align: center;
+    text-transform:capitalize;
+}
+
+span.reference :before {
+	content: " (";
+}
+span.reference :after {
+	content: ")";
+}
+/* Running Head Mirrored.css */
+@page :left {
+    @top-left {
+           content: string( guideword, first);
+           direction: ltr;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @top-center    { content: ''; }
+    @top-right  { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left   { content: ''; }
+    @top-center { content: ''; }
+    @top-right  {
+           content: string( guideword, last);
+           direction: ltr;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+
+
+
+@page {
+    @top-left      { content: ''; }
+    @top-center {
+    -ps-referenceFormat: "Gen 1-2";
+    content: string(bookname, first) " "  string(chapter, first) "-"  string(chapter, last);
+    }    
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+/* Page number  Top Inside.css */
+@page :left {
+    @top-right {
+          content: counter( page);
+           margin-top: 1cm;
+    }
+}
+
+@page :right {
+    @top-left {
+           content: counter( page);
+    }
+}
+/* scripture ruling lines */
+@page {
+    @footnotes {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+    @footnote {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+}
+.border {
+    border-top: .5pt solid #808080;
+    text-align: center;
+    margin-left: 1in;
+    margin-right: 1in;
+    margin-top: 9pt;
+    margin-bottom: 18pt;
+    content: "\00A0";
+}
+.columns {
+       column-rule: solid 1pt #808080;
+}
+.letData{
+column-gap:18pt;
+}
+@page{
+margin-top:36pt;
+margin-right:36pt;
+margin-bottom:36pt;
+margin-left:36pt;
+-ps-fileproduce:"English";
+-ps-fixed-line-height:"True";
+}
+.Section_Head {
+page-break-after:avoid;
+}
+.Chapter_Number {
+page-break-after:avoid;
+}
+.Parallel_Passage_Reference {
+page-break-after:avoid;
+}

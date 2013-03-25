@@ -39,6 +39,13 @@
     text-indent: 0pt;
     margin-left: 0pt;
 }
+
+.Quoted_Text {
+    font-style: italic;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+
 .Inscription {
     font-weight: bold;	/* cascaded environment */
     font-style: normal;	/* cascaded environment */

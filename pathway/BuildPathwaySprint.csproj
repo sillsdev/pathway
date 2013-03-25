@@ -293,8 +293,8 @@
   </Target>
   <ItemGroup>
     <TestOutput Include="**\TestFiles\output\**"/>
-    <PathwayProjects Include="ApplyXslt;BookletBuilder;BuildPathway;BuildTasks;ConfigurationTool;CssDialog;CssParser;epubConvert;epubValidator;GoBibleConvert;HelpImprove;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExe;TestBed;Test;WordPressConvert;XeLaTexConvert;YouVersionConvert" />
-    <PathwayTests Include="ApplyXslt;Build;ConfigurationTool;CssDialog;CssParser;epubConvert;GoBibleConvert;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;PathwayB;PsExport;PsTool;PublishingSolutionExeUi;WordPressConvert;XeLatex;XhtmlExport"/>
+    <PathwayProjects Include="ApplyXslt;BookletBuilder;BuildPathway;BuildTasks;ConfigurationTool;CssDialog;CssParser;Dic4MidConvert;epubConvert;epubValidator;GoBibleConvert;HelpImprove;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExe;TestBed;Test;WordPressConvert;XeLaTexConvert;YouVersionConvert" />
+    <PathwayTests Include="ApplyXslt;Build;ConfigurationTool;CssDialog;CssParser;Dic4MidConvert;epubConvert;GoBibleConvert;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;PathwayB;PsExport;PsTool;PublishingSolutionExeUi;WordPressConvert;XeLatex;XhtmlExport"/>
   </ItemGroup>
   <Target Name="RemoveSprint">
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Sprint" Condition="Exists(Sprint)"/>
@@ -499,7 +499,7 @@
     <modules Include="latex l3kernel l3packages etoolbox"/>
     <modules Include="lm fontspec euenc tipa xkeyval xunicode"/>
     <modules Include="fancyhdr float graphics hanging mdframed oberdiek"/>
-    <modules Include="setspace tools xcolor eso-pic geometry"/>
+    <modules Include="setspace tools xcolor eso-pic geometry lettrine"/>
     <modules Include="xetex xetex-def"/>
   </ItemGroup>
   <Target Name="TlWinPkgInstall">
@@ -569,6 +569,7 @@ portable 1
     <Exec Command="echo y| $(InstallerWorkProp)\install-tl-advanced.bat -profile tlpw.profile -repository %(repo.Identity)" WorkingDirectory="$(InstallerWorkProp)"/>
     <CallTarget Targets="TlWinPkgInstall"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-zh-latn-pinyin.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-pms.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-uk.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-tr.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-tk.hyp.txt"/>

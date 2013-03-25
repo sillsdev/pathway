@@ -570,5 +570,16 @@ namespace Test.CssParserTest
             OneTest("T33", "CSS em as tag and unit");
         }
         #endregion T33
+
+        #region T34
+        /// <summary>
+        /// Test selector same as unit
+        /// </summary>
+        [Test]
+        public void SelectorIsUnitT34()
+        {
+            OneTest("T34", "Selector Is Unit");
+        }
+        #endregion T34
     }
 }

@@ -1,4 +1,0 @@
-.pronunciation + .pronunciation[lang|=en]::before
-{
-	content: ', $';
-}

@@ -32,6 +32,11 @@
     -ps-fixed-line-height: 18pt;
 }
 
+.Chapter_Number {
+       line-height: 26pt;
+       -ps-fixed-line-height: 26pt;
+}
+
 .Paragraph {
     line-height: 26pt;
     -ps-fixed-line-height: 26pt;

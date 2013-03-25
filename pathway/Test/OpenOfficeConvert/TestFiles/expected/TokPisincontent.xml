@@ -101,7 +101,7 @@
           <draw:frame draw:style-name="Graphics0" draw:name="Graphics0" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
             <draw:text-box fo:min-height="0in">
               <draw:frame draw:style-name="Graphics0" draw:name="Graphics0" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/j0384909.jpg" />
+                <draw:image xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad" xlink:href="Pictures/j0384909.jpg" />
                 <svg:title>j0384909.jpg</svg:title>
               </draw:frame>
               <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody">
@@ -159,7 +159,7 @@
           <draw:frame draw:style-name="Graphics1" draw:name="Graphics1" text:anchor-type="as-char" draw:z-index="0" svg:width="72pt" svg:height="72pt">
             <draw:text-box fo:min-height="0in">
               <draw:frame draw:style-name="Graphics1" draw:name="Graphics1" text:anchor-type="paragraph" svg:width="72pt" svg:height="72pt">
-                <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/nativity.jpg" />
+                <draw:image xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad" xlink:href="Pictures/nativity.jpg" />
                 <svg:title>nativity.jpg</svg:title>
               </draw:frame>
               <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody">

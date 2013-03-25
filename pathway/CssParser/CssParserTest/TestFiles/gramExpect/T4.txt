@@ -1,1 +1,0 @@
-(RULE (CLASS variant) PRECEDES (CLASS variant) (PSEUDO before) (PROPERTY display inline) (PROPERTY content ', '))

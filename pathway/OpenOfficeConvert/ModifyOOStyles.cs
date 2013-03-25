@@ -376,6 +376,11 @@ namespace SIL.PublishingSolution
             }
 
             XmlNode paraNode = null;
+            if(node.Attributes != null && (node.Attributes.Count > 0 && node.Attributes["style:family"].Value.ToLower() == "text"))
+            {
+                _paragraphProperty.Clear();
+            }
+
             if (_paragraphProperty.Count > 0)
             {
                 for (int i = 0; i < node.ChildNodes.Count; i++) 
@@ -783,7 +788,7 @@ namespace SIL.PublishingSolution
                     else
                     {
                         //nameGraphicElement.SetAttribute("style:wrap", "dynamic");
-                        SetAttribute("dynamic","style:wrap");
+                        SetAttribute("parallel", "style:wrap");
                     }
                     //nameGraphicElement.SetAttribute("style:number-wrapped-paragraphs", "no-limit");
                     SetAttribute("no-limit","style:number-wrapped-paragraphs");
@@ -816,7 +821,7 @@ namespace SIL.PublishingSolution
                     SetAttribute("right", "style:horizontal-pos");
                     SetAttribute("paragraph", "style:horizontal-rel");
                 }
-                else if (position == "top")
+                else if (position == "top" || position == "bottom")
                 {
                     _nameElement = (XmlElement)node.ChildNodes[0];
                     SetAttribute("none", "style:wrap");
@@ -922,7 +927,8 @@ namespace SIL.PublishingSolution
                 parentName = parentName.Replace("1", "");
                 _nameElement = (XmlElement)node;
                 SetAttribute(makeClassName, "style:name");
-                SetAttribute(parentName, "style:parent-style-name");
+                //SetAttribute(parentName, "style:parent-style-name");
+                SetAttribute(className, "style:parent-style-name");
                 SetAttribute("", "style:master-page-name");
             }
             _styleXMLdoc.Save(styleFilePath);

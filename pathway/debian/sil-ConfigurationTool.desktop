@@ -2,11 +2,11 @@
 Encodeing=UTF-8
 Version=1.0
 Type=Application
-Icon=sil-pathwayConfigurationTool
+Icon=pathwayConfigurationTool22
 Name=Pathway ConfigurationTool
 Comment=Sets default values and styles for Pathway export
-Exec=mono ConfigurationTool.exe
-Path=/usr/lib/pathway
+Exec=/usr/bin/ConfigurationTool
+Path=/usr/lib/pathway/
 Terminal=false
 Categories=Education
 Name[en_US]=Pathway ConfigurationTool

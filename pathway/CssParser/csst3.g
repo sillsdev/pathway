@@ -1,9 +1,10 @@
 grammar csst3;
 options {
-	output=AST;
-	ASTLabelType=CommonTree;
+	    output=AST;
+	    ASTLabelType=CommonTree;
         language=CSharp;
-	k=4;}
+	    k=4;
+		}
 
 tokens {
 	IMPORT;
@@ -24,18 +25,19 @@ tokens {
 	TAG;
 	ID;
 	CLASS;
-	EM;
 }
 
+//@lexer::namespace {SIL.PublishingSolution.Compiler}
+//@parser::namespace {SIL.PublishingSolution.Compiler}
+
 @members {
-private System.Collections.Generic.List<String> errors = new System.Collections.Generic.List<String>();
-override public void DisplayRecognitionError(String[] tokenNames,
-                                    RecognitionException e) {
-    String hdr = GetErrorHeader(e);
-    String msg = GetErrorMessage(e, tokenNames);
+private System.Collections.Generic.List<System.String> errors = new System.Collections.Generic.List<System.String>();
+override public void DisplayRecognitionError(System.String[] tokenNames, RecognitionException e) {
+    System.String hdr = GetErrorHeader(e);
+    System.String msg = GetErrorMessage(e, tokenNames);
     errors.Add(hdr + " " + msg);
 }
-public System.Collections.Generic.List<String> GetErrors() {
+public System.Collections.Generic.List<System.String> GetErrors() {
     return errors;
 }
 }
@@ -54,7 +56,7 @@ media
 	;
 
 pageRule
- 	: '@page' IDENT* pseudo* '{' properties? region* '}' -> ^( PAGE IDENT* pseudo* properties* region* )
+ 	: '@page' IDENT? pseudo? '{' properties? region* '}' -> ^( PAGE IDENT* pseudo* properties* region* )
 	;
 
 region
@@ -88,9 +90,9 @@ properties
 	;
 	
 elem
-	:     (IDENT | EM) attrib* -> ^( TAG IDENT* EM* attrib* )
-	| '#' (IDENT | EM) attrib* -> ^( ID IDENT* EM* attrib* )
-	| '.' (IDENT | EM) attrib* -> ^( CLASS IDENT* EM* attrib* )
+	:     (IDENT | UNIT) attrib* -> ^( TAG IDENT* UNIT* attrib* )
+	| '#' (IDENT | UNIT) attrib* -> ^( ID IDENT* UNIT* attrib* )
+	| '.' (IDENT | UNIT) attrib* -> ^( CLASS IDENT* UNIT* attrib* )
 	| '*' attrib* -> ^( ANY attrib* )
 	;
 
@@ -126,14 +128,14 @@ expr
 	;
 
 unit
-	: ('%'|'px'|'cm'|'mm'|'in'|'pt'|'pc'|EM|'ex'|'deg'|'rad'|'grad'|'ms'|'s'|'hz'|'khz')
+	: ('%'| UNIT)
 	;
 	
 function
 	: IDENT '(' args? ')' -> IDENT '(' args* ')'
 	;
 	
-EM      :	'em';	
+UNIT      :	'em'|'px'|'cm'|'mm'|'in'|'pt'|'pc'|'ex'|'deg'|'rad'|'grad'|'ms'|'s'|'hz'|'khz';	
 
 IDENT
 	:	('_' | 'a'..'z'| 'A'..'Z' | '\u0100'..'\ufffe' ) 

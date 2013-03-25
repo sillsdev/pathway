@@ -45,9 +45,11 @@ namespace SIL.PublishingSolution
             {
                 _cssProperty = cssProperty;
                 CreateFile(projectPath);
-                CreateRootCharacterStyleGroup();
+
+                string headerFontName = GetHeaderFontName();
+                CreateRootCharacterStyleGroup(headerFontName);
                 CreateCharacterStyle();
-                CreateRootParagraphStyleGroup();
+                CreateRootParagraphStyleGroup(headerFontName);
                 CreateParagraphStyle();  // CODE HERE
                 CreateTOCStyle();
                 CreateRootCellStyleGroup();
@@ -61,6 +63,16 @@ namespace SIL.PublishingSolution
                 Console.Write(ex.Message);
             }
             return _IDAllClass;
+        }
+
+        private string GetHeaderFontName()
+        {
+            string headerFontName = "Times New Roman";
+            if (_cssProperty.ContainsKey("div_.zxx") && _cssProperty["div_.zxx"].ContainsKey("font-family"))
+            {
+                headerFontName = _cssProperty["div_.zxx"]["font-family"];
+            }
+            return headerFontName;
         }
 
         /// <summary>

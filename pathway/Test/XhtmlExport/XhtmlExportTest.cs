@@ -270,6 +270,7 @@ namespace Test.XhtmlExport
         /// Gondwana Sample Open Office Back End Test
         /// </summary>
         [Test]
+        [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void GondwanaSampleOpenOfficeTest()
@@ -283,6 +284,7 @@ namespace Test.XhtmlExport
         /// Nkonya Sample Open Office Back End Test
         /// </summary>
         [Test]
+        [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void NkonyaSampleOpenOfficeTest()
@@ -296,6 +298,7 @@ namespace Test.XhtmlExport
         /// Paratext NKOu3 Open Office Back End Test
         /// </summary>
         [Test]
+        [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void NKOu3OpenOfficeTest()
@@ -309,6 +312,7 @@ namespace Test.XhtmlExport
         /// Gondwana Sample InDesign Back End Test
         /// </summary>
         [Test]
+        [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void GondwanaSampleInDesignTest()
@@ -322,6 +326,7 @@ namespace Test.XhtmlExport
         /// Nkonya Sample InDesign Back End Test
         /// </summary>
         [Test]
+        [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void NkonyaSampleInDesignTest()
@@ -335,6 +340,7 @@ namespace Test.XhtmlExport
         /// Paratext NKOu3 InDesign Back End Test
         /// </summary>
         [Test]
+        [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void NKOu3InDesignTest()
@@ -402,6 +408,7 @@ namespace Test.XhtmlExport
         /// Gondwana Sample XeLaTex Back End Test
         /// </summary>
         [Test]
+        [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void GondwanaSampleXeLaTexTest()
@@ -415,6 +422,7 @@ namespace Test.XhtmlExport
         /// Paratext NKOu3 XeLaTex Back End Test
         /// </summary>
         [Test]
+        [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void NKOu3XeLaTexTest()

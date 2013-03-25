@@ -1,4 +1,0 @@
-.sense[title]:before {
-    font-weight: bold;
-    content: " " attr(title) ") ";
-}

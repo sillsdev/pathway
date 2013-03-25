@@ -443,6 +443,8 @@ namespace SIL.PublishingSolution
 
         private void ValidateLineHeight(StyleAttribute styleAttributeInfo)
         {
+            if (styleAttributeInfo.StringValue.ToLower() == "inherit")
+                return;
             string attrValue = DeleteSeperator(styleAttributeInfo.StringValue);
             if (styleAttributeInfo.StringValue.ToLower() == "none" || styleAttributeInfo.StringValue.ToLower() == "normal")
             {
@@ -1205,6 +1207,14 @@ namespace SIL.PublishingSolution
                 if (colorLen == 4)
                 {
                     retValue = "#" + attributeStringValue[1] + attributeStringValue[1] + attributeStringValue[2] + attributeStringValue[2] + attributeStringValue[3] + attributeStringValue[3];
+                }
+                if (colorLen == 3)
+                {
+                    retValue = "#" + attributeStringValue[1] + attributeStringValue[2] + "0000";
+                }
+                if (colorLen == 5)
+                {
+                    retValue = "#" + attributeStringValue[1] + attributeStringValue[2]  + attributeStringValue[3] + attributeStringValue[4] + "00";
                 }
                 if (retValue.Length != 7)
                 {

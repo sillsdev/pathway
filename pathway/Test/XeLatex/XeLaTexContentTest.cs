@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
@@ -34,7 +36,7 @@ namespace Test.XeLatex
         private CssTree _cssTree;
         private PublicationInformation _projInfo;
         private Dictionary<string, List<string>> _classInlineStyle;
-
+        Dictionary<string, string> _langFontCodeandName = new Dictionary<string, string>();
         #endregion
 
         #region Setup
@@ -799,6 +801,66 @@ namespace Test.XeLatex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void Precede1()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Precede1";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoLangTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoLangTest";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoTest";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoTestA()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoTestA";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PrecedesPseudoTestB()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PrecedesPseudoTestB";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void Parent1()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Parent1";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void VisibilityTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -806,6 +868,37 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void multiClass()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "multiClass";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TaggedText()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TaggedText";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TextFontSizeTestC()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TextFontSizeTestC";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
 
         [Ignore]
         [Test]
@@ -877,8 +970,6 @@ namespace Test.XeLatex
         }
         #endregion
 
-
-
         #region Private Functions
 
         private void FileCompare(string file)
@@ -892,7 +983,8 @@ namespace Test.XeLatex
         {
             string input = FileInput(file + ".xhtml");
             _projInfo.DefaultXhtmlFileWithPath = input;
-
+            _langFontCodeandName = new Dictionary<string, string>();
+            GetXhtmlFileFontCodeandFontName(_projInfo.DefaultXhtmlFileWithPath);
             input = FileInput(file + ".css");
             _projInfo.DefaultCssFileWithPath = input;
 
@@ -903,22 +995,55 @@ namespace Test.XeLatex
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.XELATEX;
             cssClass = cssTree.CreateCssProperty(input, true);
+            int pageWidth = Common.GetPictureWidth(cssClass, _projInfo.ProjectInputType);
 
             string xetexFullFile = Path.Combine(_outputPath, file + ".tex");
             StreamWriter xetexFile = new StreamWriter(xetexFullFile);
 
             XeLaTexStyles styles = new XeLaTexStyles();
-            _classInlineStyle = styles.CreateXeTexStyles(_outputPath,xetexFile, cssClass);
+            _classInlineStyle = styles.CreateXeTexStyles(_projInfo, xetexFile, cssClass);
 
             XeLaTexContent content = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = styles._classInlineText;
-            Dictionary<string, Dictionary<string, string>> newProperty = content.CreateContent(_projInfo, cssClass, xetexFile, _classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
+            Dictionary<string, Dictionary<string, string>> newProperty = content.CreateContent(_projInfo, cssClass, xetexFile, _classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 
             CloseFile(xetexFile);
 
             ModifyXeLaTexStyles modifyXeTexStyles = new ModifyXeLaTexStyles();
-            modifyXeTexStyles.ModifyStylesXML(_projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile, string.Empty);
+            modifyXeTexStyles.ModifyStylesXML(_projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile, string.Empty, _langFontCodeandName);
 
+        }
+
+        private void GetXhtmlFileFontCodeandFontName(string xhtmlFileName)
+        {
+            if (!File.Exists(xhtmlFileName)) return;
+            XmlDocument xdoc = new XmlDocument { XmlResolver = null };
+            xdoc.Load(xhtmlFileName);
+            XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
+            if (metaNodes != null && metaNodes.Count > 0)
+            {
+                try
+                {
+                    foreach (XmlNode metaNode in metaNodes)
+                    {
+                        FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
+                        foreach (FontFamily systemFont in systemFontList)
+                        {
+                            if (metaNode.Attributes["content"].Value.ToLower() == systemFont.Name.ToLower())
+                            {
+                                _langFontCodeandName.Add(metaNode.Attributes["name"].Value, metaNode.Attributes["content"].Value);
+                                break;
+                            }
+                        }
+                        //if (metaNode.Attributes["name"].Value == "linkedFilesRootDir")
+                        //{
+                        //    imageRootPath = metaNode.Attributes["content"].Value;
+                        //    break;
+                        //}
+                    }
+                }
+                catch { }
+            }
         }
 
         private string FileInput(string fileName)

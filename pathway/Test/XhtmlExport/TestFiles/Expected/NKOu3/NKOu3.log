@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.4-0.9998 (TeX Live 2012/W32TeX) (format=xelatex 2012.8.7)  24 OCT 2012 15:59
+This is XeTeX, Version 3.1415926-2.4-0.9998 (TeX Live 2012/W32TeX) (format=xelatex 2012.8.7)  24 JAN 2013 18:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -7,9 +7,9 @@ entering extended mode
 LaTeX2e <2011/06/27>
 Babel <v3.8m-luatex-1.5> and hyphenation patterns for english, dumylang, nohyph
 enation, ukenglish, usenglishmax, loaded.
-(e:/pwtex/texmf-dist/tex/latex/base/article.cls
+(d:/pwtex/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(e:/pwtex/texmf-dist/tex/latex/base/size10.clo
+(d:/pwtex/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count80
@@ -23,13 +23,13 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (e:/pwtex/texmf/tex/texthanglist/texthanglist.sty) (e:/pwtex/texmf-dist/tex/l
+) (d:/pwtex/texmf/tex/texthanglist/texthanglist.sty) (d:/pwtex/texmf-dist/tex/l
 atex/tools/verbatim.sty
 Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks14
 \verbatim@line=\toks15
 \verbatim@in@stream=\read1
-) (e:/pwtex/texmf-dist/tex/latex/tools/multicol.sty
+) (d:/pwtex/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
 \c@tracingmulticols=\count88
 \mult@box=\box26
@@ -76,23 +76,23 @@ Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
 \mult@nat@firstbox=\box50
 \colbreak@box=\box51
 \multicol@sort@counter=\count96
-) (e:/pwtex/texmf/tex/changepage/changepage.sty
+) (d:/pwtex/texmf/tex/changepage/changepage.sty
 Package: changepage 2008/03/22 v1.0 check page and change page layout
 \c@cp@cntr=\count97
 \cp@tempcnt=\count98
-) (e:/pwtex/texmf-dist/tex/latex/float/float.sty
+) (d:/pwtex/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count99
 \float@exts=\toks16
 \float@box=\box52
 \@float@everytoks=\toks17
 \@floatcapt=\box53
-) (e:/pwtex/texmf-dist/tex/latex/oberdiek/grffile.sty
+) (d:/pwtex/texmf-dist/tex/latex/oberdiek/grffile.sty
 Package: grffile 2012/04/05 v1.16 Extended file name support for graphics (HO)
-(e:/pwtex/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+(d:/pwtex/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is not detected.
-) (e:/pwtex/texmf/tex/generic/ifxetex/ifxetex.sty
+) (d:/pwtex/texmf/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2006/08/21 v0.3 Provides ifxetex conditional
 )
 
@@ -102,20 +102,20 @@ LaTeX Warning: You have requested, on input line 60, version
                `2006/08/21 v0.3 Provides ifxetex conditional'
                is available.
 
-(e:/pwtex/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(d:/pwtex/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
-(e:/pwtex/texmf-dist/tex/latex/graphics/keyval.sty
+(d:/pwtex/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks18
-) (e:/pwtex/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+) (d:/pwtex/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
-) (e:/pwtex/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+) (d:/pwtex/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
-(e:/pwtex/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+(d:/pwtex/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-) (e:/pwtex/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+) (d:/pwtex/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
-(e:/pwtex/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+(d:/pwtex/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
@@ -123,7 +123,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             That can mean that you are not using pdfTeX 1.50 or
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
-))) (e:/pwtex/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+))) (d:/pwtex/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
@@ -131,15 +131,15 @@ Package pdftexcmds Info: pdfTeX >= 1.30 not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode not found.
-) (e:/pwtex/texmf-dist/tex/latex/graphics/graphics.sty
+) (d:/pwtex/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
-(e:/pwtex/texmf-dist/tex/latex/graphics/trig.sty
+(d:/pwtex/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
-) (e:/pwtex/texmf-dist/tex/latex/latexconfig/graphics.cfg
+) (d:/pwtex/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: xetex.def on input line 91.
-(e:/pwtex/texmf-dist/tex/xelatex/xetex-def/xetex.def
+(d:/pwtex/texmf-dist/tex/xelatex/xetex-def/xetex.def
 File: xetex.def 2009/11/22 v0.94 LaTeX color/graphics driver for XeTeX (RRM/JK)
 
 ))
@@ -148,41 +148,41 @@ Package grffile Info: \Gread@eps patched on input line 303.
 Package grffile Info: Option `multidot' is set to `true'.
 Package grffile Info: Option `extendedchars' is set to `false'.
 Package grffile Info: Option `space' is set to `true'.
-) (e:/pwtex/texmf-dist/tex/latex/graphics/graphicx.sty
+) (d:/pwtex/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 \Gin@req@height=\dimen111
 \Gin@req@width=\dimen112
-) (e:/pwtex/texmf-dist/tex/latex/amsfonts/amssymb.sty
+) (d:/pwtex/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2009/06/22 v3.00
-(e:/pwtex/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(d:/pwtex/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 \@emptytoks=\toks19
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
-)) (e:/pwtex/texmf-dist/tex/latex/fontspec/fontspec.sty
+)) (d:/pwtex/texmf-dist/tex/latex/fontspec/fontspec.sty
 Package: fontspec 2012/05/06 v2.2b Advanced font selection for XeLaTeX/LuaLaTeX
 
-(e:/pwtex/texmf-dist/tex/latex/l3kernel/expl3.sty (e:/pwtex/texmf-dist/tex/late
-x/l3kernel/l3names.sty (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3bootstrap.sty
+(d:/pwtex/texmf-dist/tex/latex/l3kernel/expl3.sty (d:/pwtex/texmf-dist/tex/late
+x/l3kernel/l3names.sty (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3bootstrap.sty
 Package: l3bootstrap 2012/07/15 v3986 L3 Experimental bootstrap code
 )
 Package: l3names 2012/07/16 v3990 L3 Namespace for primitives
-) (e:/pwtex/texmf-dist/tex/latex/etex-pkg/etex.sty
+) (d:/pwtex/texmf-dist/tex/latex/etex-pkg/etex.sty
 Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
 \et@xins=\count100
 )
 Package: expl3 2012/07/16 v3990 L3 Experimental code bundle wrapper
-(e:/pwtex/texmf-dist/tex/latex/l3kernel/l3basics.sty
+(d:/pwtex/texmf-dist/tex/latex/l3kernel/l3basics.sty
 Package: l3basics 2012/07/15 v3987 L3 Basic definitions
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3expan.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3expan.sty
 Package: l3expan 2012/07/15 v3986 L3 Argument expansion
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3tl.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3tl.sty
 Package: l3tl 2012/07/15 v3986 L3 Token lists
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3seq.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3seq.sty
 Package: l3seq 2012/07/15 v3986 L3 Sequences and stacks
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3int.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3int.sty
 Package: l3int 2012/07/15 v3986 L3 Integers
 \c_max_int=\count101
 \l_tmpa_int=\count102
@@ -190,20 +190,20 @@ Package: l3int 2012/07/15 v3986 L3 Integers
 \g_tmpa_int=\count104
 \g_tmpb_int=\count105
 \l_tmpc_int=\count106
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3quark.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3quark.sty
 Package: l3quark 2012/07/15 v3986 L3 Quarks
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3prg.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3prg.sty
 Package: l3prg 2012/07/15 v3986 L3 Control structures
 \g__prg_map_int=\count107
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3clist.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3clist.sty
 Package: l3clist 2012/07/15 v3986 L3 Comma separated lists
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3token.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3token.sty
 Package: l3token 2012/07/15 v3986 L3 Experimental token manipulation
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3prop.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3prop.sty
 Package: l3prop 2012/07/15 v3986 L3 Property lists
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3msg.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3msg.sty
 Package: l3msg 2012/07/15 v3986 L3 Messages
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3file.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3file.sty
 Package: l3file 2012/07/15 v3986 L3 File and I/O operations
 \l__ior_stream_int=\count108
 \l_iow_line_count_int=\count109
@@ -211,7 +211,7 @@ Package: l3file 2012/07/15 v3986 L3 File and I/O operations
 \l__iow_current_line_int=\count111
 \l__iow_current_word_int=\count112
 \l__iow_current_indentation_int=\count113
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3skip.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3skip.sty
 Package: l3skip 2012/07/15 v3986 L3 Dimensions and skips
 \l_tmpa_dim=\dimen113
 \l_tmpb_dim=\dimen114
@@ -227,11 +227,11 @@ Package: l3skip 2012/07/15 v3986 L3 Dimensions and skips
 \l_tmpb_muskip=\muskip13
 \g_tmpa_muskip=\muskip14
 \g_tmpb_muskip=\muskip15
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3keys.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3keys.sty
 Package: l3keys 2012/07/15 v3986 L3 Experimental key-value interfaces
 \g__keyval_level_int=\count114
 \l_keys_choice_int=\count115
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3fp.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3fp.sty
 Package: l3fp 2012/07/15 v3986 L3 Floating points
 \c__fp_leading_shift_int=\count116
 \c__fp_middle_shift_int=\count117
@@ -239,12 +239,12 @@ Package: l3fp 2012/07/15 v3986 L3 Floating points
 \c__fp_big_leading_shift_int=\count119
 \c__fp_big_middle_shift_int=\count120
 \c__fp_big_trailing_shift_int=\count121
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3box.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3box.sty
 Package: l3box 2012/07/15 v3986 L3 Experimental boxes
 \l_tmpb_box=\box54
 \g_tmpa_box=\box55
 \g_tmpb_box=\box56
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3coffins.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3coffins.sty
 Package: l3coffins 2012/07/15 v3986 L3 Coffin code layer
 \l__coffin_internal_box=\box57
 \l__coffin_internal_dim=\dimen117
@@ -269,13 +269,13 @@ Package: l3coffins 2012/07/15 v3986 L3 Coffin code layer
 \l__coffin_display_offset_dim=\dimen128
 \l__coffin_display_x_dim=\dimen129
 \l__coffin_display_y_dim=\dimen130
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3color.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3color.sty
 Package: l3color 2012/07/15 v3986 L3 Experimental colour support
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3luatex.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3luatex.sty
 Package: l3luatex 2012/07/15 v3986 L3 Experimental LuaTeX-specific functions
 \g__cctab_allocate_int=\count122
 \g__cctab_stack_int=\count123
-) (e:/pwtex/texmf-dist/tex/latex/l3kernel/l3candidates.sty
+) (d:/pwtex/texmf-dist/tex/latex/l3kernel/l3candidates.sty
 Package: l3candidates 2012/05/12 v3633 L3 Experimental additions to l3kernel
 \l__box_top_dim=\dimen131
 \l__box_bottom_dim=\dimen132
@@ -293,7 +293,7 @@ Package: l3candidates 2012/05/12 v3633 L3 Experimental additions to l3kernel
 \l__coffin_top_corner_dim=\dimen143
 \l__coffin_scaled_total_height_dim=\dimen144
 \l__coffin_scaled_width_dim=\dimen145
-)) (e:/pwtex/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+)) (d:/pwtex/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2012/07/16 v3990 L3 Experimental document command parser
 \l__xparse_current_arg_int=\count124
 \l__xparse_m_args_int=\count125
@@ -308,10 +308,10 @@ Package: xparse 2012/07/16 v3990 L3 Experimental document command parser
 \l_fontspec_tmpb_dim=\dimen147
 \l_fontspec_tmpc_dim=\dimen148
 Variant \tl_gset:cV already defined; not changing it on line 66
-(e:/pwtex/texmf-dist/tex/latex/fontspec/fontspec-patches.sty
+(d:/pwtex/texmf-dist/tex/latex/fontspec/fontspec-patches.sty
 Package: fontspec-patches 2012/05/06 v2.2b Advanced font selection for XeLaTeX/
 LuaLaTeX
-(e:/pwtex/texmf-dist/tex/latex/base/fixltx2e.sty
+(d:/pwtex/texmf-dist/tex/latex/base/fixltx2e.sty
 Package: fixltx2e 2006/09/13 v1.1m fixes to LaTeX
 LaTeX Info: Redefining \em on input line 420.
 )
@@ -328,26 +328,26 @@ LaTeX Info: Redefining \- on input line 32.
 . 
 . Defining document command \liningnums with arg. spec. 'm' on line 111.
 .................................................
-) (e:/pwtex/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+) (d:/pwtex/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
 Package: fontspec-xetex 2012/05/06 v2.2b Advanced font selection for XeLaTeX/Lu
 aLaTeX
-(e:/pwtex/texmf-dist/tex/latex/base/fontenc.sty
+(d:/pwtex/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
-(e:/pwtex/texmf-dist/tex/latex/euenc/eu1enc.def
+(d:/pwtex/texmf-dist/tex/latex/euenc/eu1enc.def
 File: eu1enc.def 2010/05/27 v0.1h Experimental Unicode font encodings
 )
 LaTeX Font Info:    Try loading font information for EU1+lmr on input line 100.
 
-(e:/pwtex/texmf-dist/tex/latex/euenc/eu1lmr.fd
+(d:/pwtex/texmf-dist/tex/latex/euenc/eu1lmr.fd
 File: eu1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)) (e:/pwtex/texmf-dist/tex/xelatex/xunicode/xunicode.sty
+)) (d:/pwtex/texmf-dist/tex/xelatex/xunicode/xunicode.sty
 File: xunicode.sty 2011/09/09 v0.981 provides access to latin accents and many 
 other characters in Unicode lower plane
-(e:/pwtex/texmf-dist/tex/latex/tipa/t3enc.def
+(d:/pwtex/texmf-dist/tex/latex/tipa/t3enc.def
 File: t3enc.def 2001/12/31 T3 encoding
 LaTeX Font Info:    Try loading font information for EU1+lmss on input line 357
 .
-(e:/pwtex/texmf-dist/tex/latex/euenc/eu1lmss.fd
+(d:/pwtex/texmf-dist/tex/latex/euenc/eu1lmss.fd
 File: eu1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ))
 \tipaTiiicode=\count132
@@ -465,7 +465,7 @@ LaTeX Info: Redefining \itshape on input line 1893.
 LaTeX Info: Redefining \slshape on input line 1897.
 LaTeX Info: Redefining \scshape on input line 1901.
 LaTeX Info: Redefining \upshape on input line 1905.
-(e:/pwtex/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (e:/pwtex/texmf-dist/te
+(d:/pwtex/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (d:/pwtex/texmf-dist/te
 x/latex/fancyhdr/fancyhdr.sty
 \fancy@headwidth=\skip49
 \f@ncyO@elh=\skip50
@@ -476,7 +476,7 @@ x/latex/fancyhdr/fancyhdr.sty
 \f@ncyO@erf=\skip55
 \f@ncyO@olf=\skip56
 \f@ncyO@orf=\skip57
-) (e:/pwtex/texmf-dist/tex/latex/tools/calc.sty
+) (d:/pwtex/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count134
 \calc@Bcount=\count135
@@ -488,9 +488,9 @@ LaTeX Info: Redefining \setlength on input line 76.
 LaTeX Info: Redefining \addtolength on input line 77.
 \calc@Ccount=\count136
 \calc@Cskip=\skip60
-) (e:/pwtex/texmf-dist/tex/latex/geometry/geometry.sty
+) (d:/pwtex/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
-(e:/pwtex/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+(d:/pwtex/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
@@ -506,13 +506,13 @@ Package ifvtex Info: VTeX not detected.
 \Gm@layouthoffset=\dimen157
 \Gm@layoutvoffset=\dimen158
 \Gm@dimlist=\toks22
-) (e:/pwtex/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+) (d:/pwtex/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 Package: eso-pic 2010/10/06 v2.0c eso-pic (RN)
-(e:/pwtex/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+(d:/pwtex/texmf-dist/tex/generic/oberdiek/atbegshi.sty
 Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
-) (e:/pwtex/texmf-dist/tex/latex/xcolor/xcolor.sty
+) (d:/pwtex/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
-(e:/pwtex/texmf-dist/tex/latex/latexconfig/color.cfg
+(d:/pwtex/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package xcolor Info: Driver file: xetex.def on input line 225.
@@ -525,30 +525,34 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 ))
-No file NKOu3.aux.
+
+LaTeX Warning: Unused global option(s):
+    [c5paper].
+
+(./NKOu3.aux)
 \openout1 = `NKOu3.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 19.
-LaTeX Font Info:    Try loading font information for T3+cmr on input line 19.
-(e:/pwtex/texmf-dist/tex/latex/tipa/t3cmr.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 25.
+LaTeX Font Info:    Try loading font information for T3+cmr on input line 25.
+(d:/pwtex/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
-LaTeX Font Info:    ... okay on input line 19.
-Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 19.
+LaTeX Font Info:    ... okay on input line 25.
+Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 25.
 .................................................
 . fontspec info: "setup-math"
 . 
@@ -556,75 +560,75 @@ Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 19.
 .................................................
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 19.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 19.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 19.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 19.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 19.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 19.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 19.
-LaTeX Font Info:    Redeclaring math accent \check on input line 19.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 19.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 19.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \colon on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 19.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 19.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 19.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 25.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 25.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 25.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 25.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 25.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 25.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 25.
+LaTeX Font Info:    Redeclaring math accent \check on input line 25.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 25.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 25.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \colon on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 25.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 25.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
-(Font)              `operators' in the math version `normal' on input line 19.
+(Font)              `operators' in the math version `normal' on input line 25.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> EU1/lmr/m/n on input line 19.
+(Font)                  OT1/cmr/m/n --> EU1/lmr/m/n on input line 25.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
-(Font)              `operators' in the math version `bold' on input line 19.
+(Font)              `operators' in the math version `bold' on input line 25.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> EU1/lmr/m/n on input line 19.
+(Font)                  OT1/cmr/bx/n --> EU1/lmr/m/n on input line 25.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  EU1/lmr/m/n --> EU1/lmr/m/n on input line 19.
+(Font)                  EU1/lmr/m/n --> EU1/lmr/m/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  EU1/lmr/m/n --> EU1/lmr/m/n on input line 19.
+(Font)                  EU1/lmr/m/n --> EU1/lmr/m/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> EU1/lmr/m/it on input line 19.
+(Font)                  OT1/cmr/m/it --> EU1/lmr/m/it on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> EU1/lmr/bx/n on input line 19.
+(Font)                  OT1/cmr/bx/n --> EU1/lmr/bx/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> EU1/lmss/m/n on input line 19.
+(Font)                  OT1/cmss/m/n --> EU1/lmss/m/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 19.
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 25.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  EU1/lmr/m/n --> EU1/lmr/bx/n on input line 19.
+(Font)                  EU1/lmr/m/n --> EU1/lmr/bx/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  EU1/lmr/m/n --> EU1/lmr/bx/n on input line 19.
+(Font)                  EU1/lmr/m/n --> EU1/lmr/bx/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> EU1/lmr/bx/it on input line 19.
+(Font)                  OT1/cmr/bx/it --> EU1/lmr/bx/it on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> EU1/lmss/bx/n on input line 19.
+(Font)                  OT1/cmss/bx/n --> EU1/lmss/bx/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> EU1/lmtt/bx/n on input line 19.
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/bx/n on input line 25.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
 * driver: xetex
-* paper: a4paper
+* paper: c5paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: includehead includefoot 
-* h-part:(L,W,R)=(28.45274pt, 540.60239pt, 28.45274pt)
-* v-part:(T,H,B)=(28.45274pt, 788.14136pt, 28.45274pt)
-* \paperwidth=597.50787pt
-* \paperheight=845.04684pt
-* \textwidth=540.60239pt
-* \textheight=721.14136pt
+* modes: includehead includefoot twoside 
+* h-part:(L,W,R)=(28.45274pt, 404.02914pt, 28.45274pt)
+* v-part:(T,H,B)=(28.45274pt, 594.66261pt, 28.45274pt)
+* \paperwidth=460.93463pt
+* \paperheight=651.5681pt
+* \textwidth=404.02914pt
+* \textheight=527.66261pt
 * \oddsidemargin=-43.81725pt
 * \evensidemargin=-43.81725pt
 * \topmargin=-43.81725pt
@@ -632,7 +636,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 * \headsep=25.0pt
 * \topskip=10.0pt
 * \footskip=30.0pt
-* \marginparwidth=57.0pt
+* \marginparwidth=121.0pt
 * \marginparsep=11.0pt
 * \columnsep=10.0pt
 * \skip\footins=9.0pt plus 4.0pt minus 2.0pt
@@ -640,8 +644,8 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 * \voffset=0.0pt
 * \mag=1000
 * \@twocolumnfalse
-* \@twosidefalse
-* \@mparswitchfalse
+* \@twosidetrue
+* \@mparswitchtrue
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
@@ -649,13 +653,25 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 File: cover.png Graphic file (type QTm)
 <use  "cover.png" > [1
 
-]
-LaTeX Font Info:    Try loading font information for U+msa on input line 169.
-(e:/pwtex/texmf-dist/tex/latex/amsfonts/umsa.fd
+] [2]
+File: ./WBT_H_RGB_red.png Graphic file (type QTm)
+<use  "./WBT_H_RGB_red.png" > [1] (./SIL_CC-by-nc-nd.tex
+Overfull \hbox (110.6559pt too wide) in paragraph at lines 9--9
+\FrontMatter NoDerivs 3.0 Unported License. To view a copy of this license, vis
+it http://creativecommons.org/licenses/by-
+ []
+
+) [1] (./NKOu3.toc)
+\tf@toc=\write3
+\openout3 = `NKOu3.toc'.
+
+[2]
+LaTeX Font Info:    Try loading font information for U+msa on input line 221.
+(d:/pwtex/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 169.
-(e:/pwtex/texmf-dist/tex/latex/amsfonts/umsb.fd
+LaTeX Font Info:    Try loading font information for U+msb on input line 221.
+(d:/pwtex/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
 Missing character: There is no ɔ in font [lmroman8-regular]:mapping=tex-text!
@@ -669,9 +685,89 @@ Missing character: There is no ɩ in font [lmroman8-regular]:mapping=tex-text!
 Missing character: There is no ʋ in font [lmroman8-regular]:mapping=tex-text!
 Missing character: There is no ʋ in font [lmroman8-regular]:mapping=tex-text!
 
-Package multicol Warning: I moved some lines to the next page.
-(multicol)                Footnotes on page 2 might be wrong on input line 233.
+Underfull \hbox (badness 5548) in paragraph at lines 261--264
+[]\FrontMatter Yesu lɛ́lɛ mʋ́ ɔnɔ́ ɔbɛ́ɛ, $[]$Ndenu.
+ []
 
+
+Package multicol Warning: I moved some lines to the next page.
+(multicol)                Footnotes on page 1 might be wrong on input line 280.
+
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.7641pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[1]
+
+! LaTeX Error: Environment wrapfigure undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.325 \begin{wrapfigure}
+                        
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+File: 1.jpg Graphic file (type QTm)
+<use  "1.jpg" >
+
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.328 \caption
+              {}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+\caption ... \endcsname \fi \fi \@dblarg {\@tempf 
+                                                  \@captype }
+l.328 \caption
+              {}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\caption ...e \fi \fi \@dblarg {\@tempf \@captype 
+                                                  }
+l.328 \caption
+              {}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{center} on input line 323 ended by \end{wrapfigure}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.330 \end{wrapfigure}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.7641pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
 
 [2]
 Missing character: There is no ʋ in font [lmroman8-regular]:mapping=tex-text!
@@ -683,11 +779,153 @@ Missing character: There is no ʋ in font [lmroman8-regular]:mapping=tex-text!
 Missing character: There is no ʋ in font [lmroman8-regular]:mapping=tex-text!
 Missing character: There is no ɔ in font [lmroman8-regular]:mapping=tex-text!
 
-Package multicol Warning: I moved some lines to the next page.
-(multicol)                Footnotes on page 3 might be wrong on input line 295.
+Underfull \hbox (badness 10000) in paragraph at lines 365--366
+[]$[]$ $[]$\FrontMatter Ɩ́nɩ sʋ ɔhá ánɩ́ ɔlɛdɩda ibwi
+ []
 
+
+Package multicol Warning: I moved some lines to the next page.
+(multicol)                Footnotes on page 3 might be wrong on input line 393.
+
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.7641pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
 
 [3]
+
+! LaTeX Error: Environment wrapfigure undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.395 \begin{wrapfigure}
+                        
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+File: 2.jpg Graphic file (type QTm)
+<use  "2.jpg" >
+
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.398 \caption
+              {}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+\caption ... \endcsname \fi \fi \@dblarg {\@tempf 
+                                                  \@captype }
+l.398 \caption
+              {}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\caption ...e \fi \fi \@dblarg {\@tempf \@captype 
+                                                  }
+l.398 \caption
+              {}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{center} on input line 393 ended by \end{wrapfigure}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.400 \end{wrapfigure}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.7641pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[4]
+
+! LaTeX Error: Environment wrapfigure undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.487 \begin{wrapfigure}
+                        
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+File: 3.jpg Graphic file (type QTm)
+<use  "3.jpg" >
+
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.490 \caption
+              {}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+\caption ... \endcsname \fi \fi \@dblarg {\@tempf 
+                                                  \@captype }
+l.490 \caption
+              {}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\caption ...e \fi \fi \@dblarg {\@tempf \@captype 
+                                                  }
+l.490 \caption
+              {}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{center} on input line 485 ended by \end{wrapfigure}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.492 \end{wrapfigure}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
 Missing character: There is no ʋ in font [lmroman8-regular]:mapping=tex-text!
 Missing character: There is no ɔ in font [lmroman8-regular]:mapping=tex-text!
 Missing character: There is no ʋ in font [lmroman8-regular]:mapping=tex-text!
@@ -744,14 +982,51 @@ Missing character: There is no ɩ in font [lmroman8-regular]:mapping=tex-text!
 Missing character: There is no ʋ in font [lmroman8-regular]:mapping=tex-text!
 Missing character: There is no ʋ in font [lmroman8-regular]:mapping=tex-text!
 Missing character: There is no ɛ in font [lmroman8-regular]:mapping=tex-text!
-[4] [5] (./NKOu3.aux) ) 
-Here is how much of TeX's memory you used:
- 16105 strings out of 495671
- 335594 string characters out of 3185590
- 353633 words of memory out of 3000000
- 19042 multiletter control sequences out of 15000+200000
- 8671 words of font info for 63 fonts, out of 3000000 for 9000
- 36 hyphenation exceptions out of 8191
- 37i,11n,43p,2494b,407s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on NKOu3.pdf (5 pages).
+Underfull \hbox (badness 10000) in paragraph at lines 511--514
+[]$[]$ $[]$\FrontMatter Mlɩ Farisifɔ pʋ́ Mose mbla
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 519--522
+[]$[]$ $[]$\FrontMatter Mlɩ Farisifɔ pʋ́ Mose mbla
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 523--526
+[]$[]$ $[]$\FrontMatter Mlɩ Farisifɔ pʋ́ Mose mbla
+ []
+
+
+Package multicol Warning: I moved some lines to the next page.
+(multicol)                Footnotes on page 5 might be wrong on input line 526.
+
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.7641pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 527--528
+[]$[]$ $[]$\FrontMatter Mlɩ Farisifɔ pʋ́ Mose mbla
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.7641pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[6] (./NKOu3.aux) ) 
+Here is how much of TeX's memory you used:
+ 16169 strings out of 495671
+ 336381 string characters out of 3185590
+ 350629 words of memory out of 3000000
+ 19078 multiletter control sequences out of 15000+200000
+ 8735 words of font info for 71 fonts, out of 3000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 37i,11n,43p,2635b,393s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on NKOu3.pdf (11 pages).

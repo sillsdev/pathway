@@ -124,6 +124,12 @@
     -ps-fixed-line-height: 16pt;
 }
 
+.iot{
+    font-size: 10pt;
+    line-height: 16pt;
+    -ps-fixed-line-height: 16pt;
+}
+
 .Section_Head_Major {
     font-size: 14pt;
     line-height: 16pt;

@@ -94,7 +94,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
 
             _writer.WriteStartElement("text:p");
-            _writer.WriteAttributeString("text:style-name", "P2");
+            _writer.WriteAttributeString("text:style-name", "Contents_20_1");
             _writer.WriteString("test");
             _writer.WriteStartElement("text:tab");
             _writer.WriteEndElement();

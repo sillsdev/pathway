@@ -62,6 +62,7 @@ namespace SIL.PublishingSolution
         private string _matchedCssStyleName;
         protected Dictionary<string, string> _tempStyle;
         protected Dictionary<string, string> _displayBlock;
+        protected string footerMarkerClassName = string.Empty;
 
         protected Dictionary<string, Dictionary<string, string>> IdAllClass;
         protected Dictionary<string, Dictionary<string, string>> _newProperty;
@@ -822,7 +823,7 @@ namespace SIL.PublishingSolution
                 //    footnoteContent.Append(a);
                 //}
 
-                string footerMarkerClassName = _className + "..footnote-marker";
+                footerMarkerClassName = _className + "..footnote-marker";
                 if (IdAllClass.ContainsKey(footerMarkerClassName))
                 {
                     string footnoteText = string.Empty;
@@ -842,7 +843,7 @@ namespace SIL.PublishingSolution
                         }
                         else
                         {
-                            footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">");
+                           //footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">");
                         }
                         //footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">" + footnoteText + "</text:span>");
                         
@@ -870,6 +871,10 @@ namespace SIL.PublishingSolution
                     //    footnoteContent.Append("<CharacterStyleRange AppliedCharacterStyle=\"" + "CharacterStyle/" + footerMarkerClassName + "\"><Content>" + footnoteText + "</Content></CharacterStyleRange>");
                     //}
                 }
+            }
+            else if (_className.IndexOf("NoteTargetReference") == 0 && outputType == Common.OutputType.ODT.ToString())
+            {
+                footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">");
             }
 
             //}
@@ -921,12 +926,20 @@ namespace SIL.PublishingSolution
             if (styleName == string.Empty) // missing style in CSS
             {
                 styleName = _className;
-                if (_outputType == Common.OutputType.ODT)
+                if (_outputType == Common.OutputType.ODT || _outputType == Common.OutputType.XELATEX)
                 {
                     if (_lang.Length > 0)
                         styleName = _className + Common.SepAttrib + _lang;
                 }
 
+            }
+            else
+            {
+                if (_outputType == Common.OutputType.XELATEX)
+                {
+                    if (_lang.Length > 0)
+                        styleName = _className + Common.SepAttrib + _lang;
+                }
             }
             //string newStyleName = styleName + Common.SepParent + parentStyle;
             string newStyleName = GetStyleNumber(styleName);
@@ -1540,7 +1553,14 @@ namespace SIL.PublishingSolution
                 {
                     if (IdAllClass[ancestor].ContainsKey(fontPointSize))
                     {
-                        fontSize = float.Parse(IdAllClass[ancestor][fontPointSize].Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
+                        try
+                        {
+                            fontSize = float.Parse(IdAllClass[ancestor][fontPointSize].Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
+                        }
+                        catch (Exception)
+                        {
+                            fontSize = 10;
+                        }
                         break;
                     }
                 }
@@ -1564,7 +1584,14 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    fontSize = float.Parse(currentFontSize.Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
+                    try
+                    {
+                        fontSize = float.Parse(currentFontSize.Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
+                    }
+                    catch (Exception)
+                    {
+                        fontSize = 10;
+                    }
                 }
             }
 

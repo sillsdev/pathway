@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Nov-09-2012 for TD-3274(Remove unused macros)
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
+&apos;Changed On Mar-05-2013 for TD-3405(Pictures not on right of column)
+
 Dim CanSave as Boolean
 
+&apos;This procedure set the dialgue to correct Update References 
 Sub StartDontForget
 On Error GoTo MyError:
 	TurnOffNonPrintingCharacters() 
 	
-	AlingOverlappingImages()
-	
-	If  Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
-		HideODMVariable()&apos;&lt;-- set exit sub
-	End If
+	&apos;AlingOverlappingImages()
 
 	UpdateTOC()
 	
-	&apos;SetImageToCoverPage()
 	If IsCoverImageInserted = &quot;true&quot; And Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
 		SetImageToCoverPage()
 	End If
+	
+	KeepLastGuidewordRight()
 	
 	If CanSave Then
 		oDoc = ThisComponent 
@@ -28,11 +28,21 @@ On Error GoTo MyError:
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
 		ExportToDOC_PDF
 	End IF
-		
-Exit Sub
-MyError:	
+	
+	Exit Sub
+MyError:
 End Sub
 
+&apos;This procedure set RightGuideword on Right align in Header
+Sub KeepLastGuidewordRight
+  For i = 0 To ThisComponent.getDrawPage().GetCount -1
+  	oGraphic  = ThisComponent.getDrawPage().getByIndex(i)
+	if oGraphic.Height &lt; 1000 Then
+		oGraphic.HoriOrient = com.sun.star.text.HoriOrientation.RIGHT
+		Exit For
+	End IF
+  Next
+End Sub
 
 &apos;Update the Table of Content
 Sub UpdateTOC
@@ -50,37 +60,20 @@ End Sub
 
 &apos;This procedure align Cover page Image
 Sub SetImageToCoverPage
-	if ThisComponent.getDrawPage().GetCount &gt; 0 Then
-		oGraphic  = ThisComponent.getDrawPage().getByIndex(ThisComponent.getDrawPage().GetCount -1)
+
+  For i = 0 To ThisComponent.getDrawPage().GetCount -1
+  	oGraphic  = ThisComponent.getDrawPage().getByIndex(i)
+	&apos;&apos;msgbox  	oGraphic.Width  &amp; &quot;   &quot; &amp; oGraphic.Height
+	if oGraphic.Height &gt; 10000 Then
 		oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
-	End If
+	End IF
+  Next
+  
+	&apos;if ThisComponent.getDrawPage().GetCount &gt; 0 Then
+		&apos;oGraphic  = ThisComponent.getDrawPage().getByIndex(0)
+		&apos;oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
+	&apos;End If
 End Sub
-
-
-Sub HideODMVariable
-exit sub
-
-PageCount = TotalPages
-ThisComponent.currentController.getViewCursor().jumpToPage(PageCount)
-
-
-dim document   as object
-dim dispatcher as object
-
-document   = ThisComponent.CurrentController.Frame
-dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
-
-dim args1(0) as new com.sun.star.beans.PropertyValue
-args1(0).Name = &quot;Text&quot;
-args1(0).Value = &quot; &quot;
-
-dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 0, args1())
-
-dispatcher.executeDispatch(document, &quot;.uno:SwBackspace&quot;, &quot;&quot;, 0, Array())
-
-end sub
-
-
 
 &apos;This procedure turn off non-printing characters
 Sub TurnOffNonPrintingCharacters
@@ -99,19 +92,16 @@ end sub
 
 &apos;This procedure align the overlapping images
 Sub AlingOverlappingImages 
-dim frameCount, lclNo, curHoriPos, nxtHoriPos
+dim frameCount, lclNo 
 oGraphics = ThisComponent.getTextFrames
 
 frameCount = oGraphics.getCount() -1
 lclNo = 0
   For i = 0 To oGraphics.getCount() -1 step 1 
-
+    	oGraphic = oGraphics.getByIndex(i)
     	If frameCount &gt; i Then
-	    	oGraphic = oGraphics.getByIndex(i)
-	    	curHoriPos = oGraphic.HoriOrientPosition    	
 	    	nxt = oGraphics.getByIndex(i + 1)
-	    	nxtHoriPos = nxt.HoriOrientPosition 
-			If curHoriPos = nxtHoriPos And (curHoriPos + nxtHoriPos) &gt; 0 Then
+			If nxt.HoriOrientPosition = oGraphic.HoriOrientPosition Then
 				lclNo = lclNo + 1
 				If lclNo = 1 Then
 				 	oGraphic.HoriOrient = 3
@@ -127,8 +117,6 @@ lclNo = 0
 		End If
   Next    
 End Sub
-	
-
 
 &apos;This procedure exports Odt file into Word/PDF based on the OutputFormat in given FilePath
 Sub ExportToDOC_PDF
@@ -146,20 +134,22 @@ On Error GoTo MyError:
 	else
 		filterType = &quot;writer_pdf_Export&quot;
 	End If 
-	&apos;msgbox(&quot;start&quot;)
    	oDoc.storeToURL(fileURL, Array(MakePropertyValue(&quot;FilterName&quot;,filterType)) 
-	&apos;msgbox(&quot;end&quot;)
+
 	If Lcase(IsPreview) = &quot;false&quot; Then
 		oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
 		oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
 	End If
-		&apos;msgbox(&quot;dispose&quot;)
+
+	&apos;msgbox(&quot;dispose&quot;)
 	oDoc.dispose()
-			&apos;msgbox(&quot;disposeEnd&quot;)
+	&apos;msgbox(&quot;disposeEnd&quot;)
+	&apos;wait 5000 
 Exit Sub
 MyError:
-&apos;msgbox(&quot;hi&quot;)
+&apos;	msgbox &quot;Same file has been opened already&quot; , 0 + 64,  &quot;File Error&quot;	
 End Sub
+
 
 &apos;This function sets the Property Value as Word or PDF
 Function MakePropertyValue( Optional cName As String, Optional uValue ) As com.sun.star.beans.PropertyValue 
@@ -172,8 +162,6 @@ Function MakePropertyValue( Optional cName As String, Optional uValue ) As com.s
    EndIf 
    MakePropertyValue() = oPropertyValue 
 End Function 
-
-
 
 
 </script:module>
