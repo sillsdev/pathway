@@ -3220,7 +3220,7 @@ namespace SIL.Tool
         public void MovePictureAsLastChild(string fileName)
         {
             if (!File.Exists(fileName)) return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(fileName);
