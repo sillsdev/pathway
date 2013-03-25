@@ -1,6 +1,183 @@
-pathway (1.3.2.2794-1) unstable; urgency=high
+pathway (1.3.5.3120-1) unstable; urgency=high
 
-  * pathway 1.3.3 sprint
+  * pathway 1.3.5 sprint
+    - Help:Added draft of Reference Format topic
+    - Help:Added link to the blog page on website.
+    - InDesign:TD-3194 footnote and cross references
+    - InDesign:TD-3398 Page break before reversal
+    - InDesign:TD-3399 Guide words in header of reversal section
+    - LinuxPkg:TD-3259 Show Pathway icon on Menu
+    - LinuxPkg:TD-3260 Associate epub type with a viewer
+    - LinuxPkg:TD-3262 create registry keys for pathway
+    - LinuxPkg:Alternate Internet based install for XeLaTeX on 64-bit Linux
+    - Logos:TD-3190 Error box is appeared When I exporting Logos Alpha in Linux. 
+    - LibreOffice:TD-1599 space after verse #
+    - LibreOffice:TD-2046 Picture formatting
+    - LibreOffice:TD-2623 No reference header information 
+    - LibreOffice:TD-3295 Handle hard page break
+    - LibreOffice:TD-3296 Handle quote indents levels 1-4
+    - LibreOffice:TD-3340 Add Endnotes to table of contents
+    - LibreOffice:TD-3342 Use \toc2 field for book name in end notes
+    - LibreOffice:TD-3279 Maintain aspect ration on cover image 
+    - LibreOffice:TD-3281 ipi size same as ip
+    - LibreOffice:TD-3282 Drop cap should remove paragraph indentation 
+    - LibreOffice:TD-3286 book names in headers
+    - LibreOffice:TD-3288 Space between caption and caption reference
+    - LibreOffice:TD-3289 New books should start
+    - LibreOffice:TD-3290 Convert &gt;&gt;&gt; as single quote followed by a double
+    - LibreOffice:TD-3291 Table code processing 
+    - LibreOffice:TD-3299 list items should be same size as running text
+    - LibreOffice:TD-3311 Scripture Fixed line height not fixed. 
+    - LibreOffice:TD-3314 Header should contain \h 
+    - LibreOffice:TD-3315 Header text size should be base font size 
+    - LibreOffice:TD-3316 Footnote reference font size too large
+    - LibreOffice:TD-3318 Chapters at start of page should reflect in header
+    - LibreOffice:TD-3327 Guide word handling on mirrored pages.
+    - LibreOffice:TD-3328 Paratext picture export broken
+    - LibreOffice:TD-3331 Guide word references for every page.
+    - LibreOffice:TD-3333 Apply filter for pagenumber for Dictionary
+    - LibreOffice:TD-3345 fix bug causing computer to hang
+    - LibreOffice:TD-3349 right header contains part of a line
+    - LibreOffice:TD-3351 Fix apply of fixed line spacing
+    - LibreOffice:TD-3358 extra page breaks removed
+    - LibreOffice:TD-3359 Move the publisher
+    - LibreOffice:TD-3365 Putting page number at bottom leads to hang
+    - LibreOffice:TD-3367 Libre office hangs for two entries
+    - LibreOffice:TD-3370 Need to migrate the settings
+    - LibreOffice:TD-3372 Second copyright removed
+    - LibreOffice:TD-3373 Picture missing
+    - LibreOffice:Td-3376 use vertical-pos from-top to avoid hanging
+    - LibreOffice:TD-3377 Space in before text blocked running header
+    - LibreOffice:TD-3378 Page set to A4 but came out letter
+    - LibreOffice:TD-3379 Table of contents not created
+    - LibreOffice:TD-3380 Picture alignment 
+    - LibreOffice:TD-3381 Header on page 6 didn't reflect page content
+    - LibreOffice:TD-3386 Information box wording
+    - LibreOffice:TD-3387 Use thin space when no caller should be used.
+    - LibreOffice:TD-3396 Fix left header bug
+    - LibreOffice:TD-3397 Add Publisher name and logo to Title page
+    - LibreOffice:TD-3405 Fix picture placement to right of column
+    - LibreOffice:TD-3407 fqa shows as italic
+    - LibreOffice:TD-3409 Fix front matter issues
+    - LibreOffice:TD-3435 Words are broken instead of breaking the line at a space 
+    - LibreOffice:TD-3436 Use Black and white 12mm x 15mm SIL International logo
+    - LibreOffice:Allow for 2 character language code.
+    - PtxPlugin:TD-3276 Trying GoBible option from Paratext
+    - PtxPlugin:TD-3283 Handle discretionary line break (// )
+    - PtxPlugin:TD-3284 Underline Name of diety (\nd )
+    - PtxPlugin:TD-3285 Handle custom styles (such as color)
+    - PtxPlugin:TD-3428 Null Reference if no default font. 
+    - EBook:TD-1868 XslProcess improves Epub memory management
+    - EBook:TD-3321 Pictures not removed 
+    - EBook:TD-3322 Format of Scripture reference in picture caption
+    - EBook:TD-3324 Use toc1 as book name in TOC
+    - EBook:TD-3330 Go Bible - Words of Jesus style breaks conversion
+    - EBook:TD-3335 look for Java in 32 bit and 64 bit locations
+    - EBook:TD-3338 Exporting Codes project crashes 
+    - EBook:TD-3340 Add Endnotes to toc 
+    - EBook:TD-3341 Link from main text to Endnotes is broken. 
+    - EBook:TD-3342 Put the toc2 field in the End note book reference 
+    - EBook:TD-3390 Epub links to end notes broken
+    - EBook:TD-3391 Epub Missing Copyright logo image
+    - EBook:TD-3394 Dictionary for Mids add method to create jar file.
+    - EBook:TD-3402 Add FixEpub and EpubCheck to installer
+    - EBook:TD-3433 On Linux Error opening epub
+    - EBook:TD-3434 Fix error in Linux epub
+    - EBook:TD-3439 Fix broken Epub links
+    - Stylesheet:TD-3246 Index error Message
+    - Stylesheet:TD-3302 Fix One Column Preview
+    - Stylesheet:TD-3302a UI changes
+    - Stylesheet:TD-3336 Page numbers do not appear in Libreoffice
+    - Stylesheet:TD-3393 give Letter and A4 default for Scripture too.
+    - Stylesheet:TD-3422 Drop cap given 3 lines instead of 2 
+    - Stylesheet:TD-3423 Fix guide words that end with colon
+    - Stylesheet:TD-3425 Fix footnote markers
+    - Stylesheet:TD-3426 references used instead of daggers for xref
+    - Stylesheet:TD-3403 mt, mt1, mt2 all cause page break
+    - Stylesheet:TD-3427 Keep pictures within the column margins
+    - Stylesheet:TD-3437 License missing from intended for sale option 
+    - Stylesheet:TD-3442 Indents wrong for entries with pictures
+    - Stylesheet:TD-3443 Indents of entries with pictures 
+    - Stylesheet:Fix Copyright css
+    - Stylesheet:Make a best guess for Paratext color values.
+    - Stylesheet:Update style sheet to handle case where style name is a unit
+    - UI:TD-3266 allow writing to a LocalMachine registry key
+    - UI:TD-3326 Add Running Header Dropdown and apply filter
+    - UI:TD-3339 ConfigurationTool Display controls on top
+    - UI:TD-3350 Descenders are cut off in Configuration Tool 
+    - UI:TD-3368 Adding a page size
+    - UI:TD-3388 ConfigurationTool creates invalid settings
+    - UI:TD-3393 move FieldWorks export options to top of the list
+    - UI:TD-3431 Linux Custom styles issues fixed
+    - UI:TD-3448 Linux set A5 page size
+    - UI:added blurb about new preprocessing option
+    - XeLaTeX:TD-1283 Xetex page size incorrect
+    - XeLaTeX:TD-2090 font-size: x-small, small, medium, large, x-large, xx-large 
+    - XeLaTeX:TD-3352 Copyright Statement Missing
+    - XeLaTeX:TD-3353 Title page is missing publisher
+    - XeLaTeX:TD-3354 Remove extra page number
+    - XeLaTeX:TD-3355 Reversal section has box chars
+    - XeLaTeX:TD-3369 Escape tilde character
+    - XeLaTeX:TD-3406 Reversal guide words not correct
+    - XeLaTeX:TD-3410 Add lettrine package to XeLaTeX making 1.7 build
+    - XeLaTeX:TD-3411 Table of contents empty
+    - XeLaTeX:TD-3412 Page 4 - space above Copyright Information header and left align 
+    - XeLaTeX:TD-3413 Guideword content and style
+    - XeLaTeX:TD-3417 Have each book start on a new page
+    - XeLaTeX:TD-3420 picture is too small. Should fit better in column 
+    - XeLaTeX:Minor Issue fixed for Xelatex header.  * pathway 1.3.4 sprint
+    - packaging: Don't offer stable if incompatible with Fieldworks
+    - packaging: Remove xetex cobolt support from package
+    - packaging: TD-3325 Keep reference to Epub validator
+    - help: TD-3202 Fix broken links in Help page
+    - help: Reset missing picture.
+    - help: Updated info related to macros
+    - help: add link for pathway site backup
+    - LibreOffice: TD-1630 Added hyperlink to internet page on large files
+    - LibreOffice: TD-1893 Wrong Page Number Position .
+    - LibreOffice: TD-2651 Header shows wrong guideword
+    - LibreOffice: TD-3199 Format number in TOC
+    - LibreOffice: TD-3210 Show page number consistently
+    - LibreOffice: TD-3253 Keep header in margins
+    - LibreOffice: TD-3270 Homograph number too small in reversal
+    - LibreOffice: TD-3271 Show book name in header
+    - LibreOffice: TD-3274 Remove unused macros - removed unused macros
+    - LibreOffice: TD-3301 Fix Margin indentations
+    - LibreOffice: TD-3304 Use vernacular font for header
+    - LibreOffice: TD-3307 Remove duplicate headers
+    - LibreOffice: TD-3313 Introduction table heading too large
+    - LibreOffice: TD-3319 Pictures set off still leave boxes
+    - paratext plugin: TD-2909 Add ability to get USFM from Paratext for Go Bible
+    - paratext plugin: TD-3150 Update PathwayB Paratextshared call
+    - paratext plugin: TD-3150 ParatextSupport must be dynamically loaded for SE build
+    - e-book: TD-3123 E-book formatting discrepencies
+    - stylesheet: TD-3229 Headwords not bold, and other styles
+    - stylesheet: TD-3251 Center Margin merges with the Words
+    - ui: TD-3132 Erase settings when starting ConfigurationTool with Shift down key
+    - ui: TD-3220 Page number field update
+    - ui: TD-3220 Switching Nochange in the Fontsize,leading
+    - ui: TD-3220 reset the dropdown in Configuration tool
+    - ui: TD-3248 Crash box when click on Hyperlink to open site
+    - ui: TD-3249 Error on Web pane When click on Save button.
+    - ui: TD-3250 Avoid "Copy of Copy of" names
+    - ui: TD-3252 Delete icon is enabled on standard style sheet on Web pane.
+    - ui: TD-3255 Preview would not be opened
+    - ui: TD-3261 Prince option is missing
+    - ui: TD-3287 Add transform to remove empty chapters
+    - ui: TD-3306 Save the new custom style sheets with same name and descriptions.
+    - ui: TD-3309 Remove unwanted letter dividers
+    - ui: TD-3269 Remove "Insert Running Header" check box
+    - ui: Expand pre-processing list box to more easily read name
+    - ui: change form size to fit on small screens
+    - ui: set ConfigurationTool maximum window size on Windows
+    - xelatex: TD-2144 handle before punctuation
+    - xelatex: TD-2145 orphan control
+    - xelatex: TD-2146 combine properties from general and specific selector blocks
+    - xelatex: TD-2154 widow control
+    - xelatex: TD-2157 div.header
+    - xelatex: TD-2121 Handle scripture Reference Format for Mirror Page
+    - xelatex: TD-2161 Create guidewords for Mirror Page
+    - xelatex: TD-2289 .letter[class~='current']  * pathway 1.3.3 sprint
     - Common: TD-2909 Add ability to get USFM from Paratext for Go Bible
     - Common: TD-3132 Starting ConfigurationTool with Shift down key
     - Common: Reset missing picture.
