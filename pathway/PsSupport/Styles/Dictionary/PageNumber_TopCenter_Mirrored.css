@@ -2,10 +2,12 @@
 @page :left {
     @top-center{
            content: counter( page);
+           margin-top: 1cm;
     }
 }
 @page :right {
    @top-center{
            content: counter( page);
+           margin-top: 1cm;
     }
 }

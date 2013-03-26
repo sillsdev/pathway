@@ -9,5 +9,6 @@
 @page :right {
     @top-left {
            content: counter( page);
+           margin-top: 1cm;
     }
 }
