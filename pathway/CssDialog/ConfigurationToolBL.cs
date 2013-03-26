@@ -495,7 +495,7 @@ namespace SIL.PublishingSolution
                 string task = "@page";
                 string key = "-ps-fileproduce";
                 string file = GetValue(task, key, "One");
-                if (file != null) 
+                if (file != null)
                     return file.Replace("\"", "");
                 else
                 {
@@ -2325,9 +2325,7 @@ namespace SIL.PublishingSolution
             //To add StyleProperty for Mobile media
             if (inputTypeBL.ToLower() == "scripture" && MediaType.ToLower() == "mobile")
             {
-                XmlNodeList mobileBaseNode =
-                    Param.GetItems("//styles/" + MediaType + "/style[@name='" +
-                                   grid[AttribName, SelectedRowIndex].Value + "']/styleProperty");
+                XmlNodeList mobileBaseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + grid[0, SelectedRowIndex].Value.ToString() + "']/styleProperty");
                 foreach (XmlNode stylePropertyNode in mobileBaseNode)
                 {
                     baseNode.AppendChild(stylePropertyNode.Clone());
@@ -2336,10 +2334,8 @@ namespace SIL.PublishingSolution
             // others (epub)
             if (MediaType.ToLower() == "others")
             {
-                XmlNodeList mobileBaseNode =
-                    Param.GetItems("//styles/" + MediaType + "/style[@name='" +
-                                   grid[AttribName, SelectedRowIndex].Value + "']/styleProperty");
-                foreach (XmlNode stylePropertyNode in mobileBaseNode)
+                XmlNodeList otherBaseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + grid[0, SelectedRowIndex].Value.ToString() + "']/styleProperty");
+                foreach (XmlNode stylePropertyNode in otherBaseNode)
                 {
                     baseNode.AppendChild(stylePropertyNode.Clone());
                 }
@@ -2347,9 +2343,7 @@ namespace SIL.PublishingSolution
             //web
             if (inputTypeBL.ToLower() == "scripture" && MediaType.ToLower() == "web")
             {
-                XmlNodeList webBaseNode =
-                    Param.GetItems("//styles/" + MediaType + "/style[@name='" +
-                                   grid[AttribName, SelectedRowIndex].Value + "']/styleProperty");
+                XmlNodeList webBaseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + grid[0, SelectedRowIndex].Value.ToString() + "']/styleProperty");
                 foreach (XmlNode stylePropertyNode in webBaseNode)
                 {
                     baseNode.AppendChild(stylePropertyNode.Clone());
@@ -2776,6 +2770,8 @@ namespace SIL.PublishingSolution
                 {
                     grid.ClearSelection();
                     grid.Rows[0].Selected = true;
+                    SelectedRowIndex = 0;
+                    ShowInfoValue();
                 }
             }
         }
@@ -4063,7 +4059,7 @@ namespace SIL.PublishingSolution
                 // EDB (2 May 2011): TD-2344 / replace with Export Through Pathway dlg
                 var dlg = new ExportThroughPathway("Set Defaults");
                 //var dlg = new PrintVia("Set Defaults");
-                dlg.InputType = inputTypeBL; 
+                dlg.InputType = inputTypeBL;
                 dlg.DatabaseName = "{Project_Name}";
                 dlg.Media = MediaType;
                 dlg.ShowDialog();
@@ -4084,7 +4080,7 @@ namespace SIL.PublishingSolution
                 cTool.PicPreview.Visible = false;
                 cTool.BtnPrevious.Visible = false;
                 cTool.BtnNext.Visible = false;
-                
+
                 string seletedLayout = string.Empty;
                 cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Selected = true;
                 seletedLayout = cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Cells[0].Value.ToString();
@@ -4423,10 +4419,11 @@ namespace SIL.PublishingSolution
             try
             {
                 _screenMode = ScreenMode.SaveAs;
+                StyleName = cTool.TxtName.Text;
                 if (CopyStyle(cTool.StylesGrid, _cssNames))
                 {
                     ShowStyleInGrid(cTool.StylesGrid, _cssNames);
-					string seletedLayout = string.Empty;
+                    string seletedLayout = string.Empty;
                     cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Selected = true;
                     seletedLayout = cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Cells[0].Value.ToString();
                     _lastSelectedLayout = seletedLayout;
@@ -4435,7 +4432,7 @@ namespace SIL.PublishingSolution
                     setLastSelectedLayout();
                     SelectRow(cTool.StylesGrid, PreviousStyleName);
                     WriteCss();
-                    
+
                     _screenMode = ScreenMode.View;
                     SelectedRowIndex = cTool.StylesGrid.Rows.Count - 1;
                     ShowInfoValue();
