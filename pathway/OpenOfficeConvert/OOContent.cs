@@ -1607,7 +1607,7 @@ namespace SIL.PublishingSolution
             if (_closeChildName == string.Empty) return;
             string closeChild = Common.LeftString(_closeChildName, "_");
 
-            //if (_closeChildName.IndexOf("scrBookCode") == 0)
+            //if (_closeChildName.IndexOf("scrBookName") == 0)
             //{
             //    _strBook = "";
             //    _strBook2ndBook = "";

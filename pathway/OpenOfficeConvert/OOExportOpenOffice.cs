@@ -739,7 +739,7 @@ namespace SIL.PublishingSolution
             preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
             //preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
-
+            preProcessor.TableOfContentsforLo(projInfo.DefaultXhtmlFileWithPath);
             //if (_isFromExe)
             //{
             //    //Preprocess for FrontMatter CSS
