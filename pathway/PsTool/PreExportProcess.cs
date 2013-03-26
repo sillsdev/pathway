@@ -3255,37 +3255,6 @@ namespace SIL.Tool
             xDoc.Save(fileName);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fileName"></param>
-        public void TableOfContentsforLo(string fileName)
-        {
-            if (!File.Exists(fileName) || _projInfo.ProjectInputType.ToLower() == "dictionary") return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            xDoc.Load(fileName);
-            string xPath = "//div[@class='scrBook']";
-            XmlNodeList bookList = xDoc.SelectNodes(xPath);
-            if (bookList == null) return;
-            for (int i = 0; i < bookList.Count; i++)
-            {
-                xPath = ".//span[@class='scrBookName']";
-                XmlNode bookName = bookList[i].SelectSingleNode(xPath);
-                if (bookName != null)
-                {
-                    XmlNode spanNode = bookName.CloneNode(true);
-                    if (spanNode.Attributes != null) spanNode.Attributes.RemoveAt(0);
-                    XmlDocumentFragment docFrag = xDoc.CreateDocumentFragment();
-                    docFrag.InnerXml = "<div class=\"TableOfContentLO\">" + spanNode.OuterXml + "</div>";
-                    bookList[i].InsertAfter(docFrag, bookList[i].FirstChild);
-                }
-            }
-            xDoc.Save(fileName);
-        }
-
-
         public void RemoveTextIntent(string fileName)
         {
             //string fileName = txtInputPath.Text;
