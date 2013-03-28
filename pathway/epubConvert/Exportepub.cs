@@ -2108,10 +2108,18 @@ namespace SIL.PublishingSolution
             if (_inputType.Equals("dictionary"))
             {
                 nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
-            }
+                if (nodes == null || nodes.Count == 0)
+                {
+                    nodes = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
+                }
+		    }
             else
             {
                 nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                if (nodes == null || nodes.Count == 0)
+                {
+                    nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
+                }
                 //nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
                 if (nodes == null || nodes.Count == 0)
                 {
@@ -2119,11 +2127,19 @@ namespace SIL.PublishingSolution
                     nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
                     // nothing there - check on the scrBookName span
                     //nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                    if (nodes == null || nodes.Count == 0)
+                    {
+                        nodes = xmlDocument.SelectNodes("//div[@class='Title_Main']", namespaceManager);
+                    }
                 }
                 if (nodes == null || nodes.Count == 0)
                 {
                     // we're really scraping the bottom - check on the scrBookCode span
                     nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                    if (nodes == null || nodes.Count == 0)
+                    {
+                        nodes = xmlDocument.SelectNodes("//span[@class='scrBookCode']", namespaceManager);
+                    }
                 }
             }
             if (nodes != null && nodes.Count > 0)
