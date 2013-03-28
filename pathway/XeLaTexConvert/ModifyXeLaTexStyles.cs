@@ -197,7 +197,7 @@ namespace SIL.PublishingSolution
             if (Convert.ToBoolean(TocChecked))
                 InsertTableOfContent();
 
-                InsertFrontMatter();
+            InsertFrontMatter();
 
             string xeLaTexProperty = "";
             List<string> includePackageList = new List<string>();
@@ -520,7 +520,7 @@ namespace SIL.PublishingSolution
                 xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
                 xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
             }
-            
+
 
             if (Convert.ToBoolean(CoverImage))
             {
@@ -575,16 +575,16 @@ namespace SIL.PublishingSolution
                     logoFileName = "WBT_H_RGB_red.png";
                 }
 
-                if (copyRightFilePath.Trim().Length !=0)
+                if (copyRightFilePath.Trim().Length != 0)
                 {
-                    copyRightFilePath = Path.GetDirectoryName(copyRightFilePath);    
+                    copyRightFilePath = Path.GetDirectoryName(copyRightFilePath);
                 }
                 else
                 {
                     string executablePath = Common.GetApplicationPath();
                     copyRightFilePath = Common.PathCombine(executablePath, "Copyrights");
                 }
-                
+
 
                 copyRightFilePath = Path.Combine(copyRightFilePath, logoFileName);
                 if (File.Exists(copyRightFilePath))
@@ -641,9 +641,16 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\begin{titlepage}\r\n";
                 tableOfContent += "\\begin{center}\r\n";
                 tableOfContent += "\\textsc{\\LARGE " + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
-                tableOfContent += "\\vspace{140 mm} \r\n";
+                tableOfContent += "\\vspace{130 mm} \r\n";
                 tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Publisher) + "}\\\\[0.5cm] \r\n";
-                tableOfContent += "\\includegraphics[width=0.05 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";
+                if (logoFileName.Contains(".png"))
+                {
+                    tableOfContent += "\\includegraphics[width=0.15 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";
+                }
+                else
+                {
+                    tableOfContent += "\\includegraphics[width=0.10 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";
+                }
                 tableOfContent += "\\end{center} \r\n";
                 tableOfContent += "\\end{titlepage} \r\n";
 
@@ -667,6 +674,8 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\newpage \r\n";
                 tableOfContent += "\\thispagestyle{empty} \r\n";
                 tableOfContent += "\\mbox{} \r\n";
+                tableOfContent += "\\setlength{\\textheight}{23cm} \r\n";
+                tableOfContent += "\\setlength{\\textwidth}{7in} \r\n";
             }
 
             Common.FileInsertText(_xetexFullFile, tableOfContent);
