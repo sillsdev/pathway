@@ -14,8 +14,8 @@ var indexTab = false;
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu           
-// Modified On:  Mar 04 2013
-// Task Number : TD-3398(Page breaks in main section but not before reversal)
+// Modified On:  Mar 28 2013 
+// TD-3440(Some letters begin a new page and others do not)
 // <remarks> 
 // Format the FrontMatter based on User Selection
 // </remarks>
@@ -597,14 +597,15 @@ function PlaceFrames()
 		frameBounds = myStory.geometricBounds;
 		frameHeight=frameBounds[2] - frameBounds[0];
 		//alert(firstParagraphStyle);//pagebreaksinside
-		if((firstParagraphStyle == "pagebreaksinside" && (currentMarginTop + frameHeight) > pageHeight) || firstParagraphStyle == "letter_4")
+		if((firstParagraphStyle == "pagebreaksinside" && (currentMarginTop + frameHeight) > pageHeight) || firstParagraphStyle == "letter_4")//|| firstParagraphStyle == "letter_4"
 		{
-			goNewPage = true;
+			goNewPage = true;//true
 		}
 		if(currentMarginTop >= pageHeight -1 || (currentMarginTop + minHeight) > pageHeight  || 
 																						firstParagraphStyle == "pagebreaksafter" || goNewPage == true)
 		{
-			//myDocument.pages.add();	
+			//myDocument.pages.add();
+			//alert(myStory.contents + "\n" + currentMarginTop + "  " + (pageHeight -1) );
 			AddNewPage(curPageNo + 1);
 			curPageNo = curPageNo + 1;
 			currentMarginTop = marginTop;
@@ -826,6 +827,7 @@ function SetOverflowsPages(myStory,frameBounds)
 			  }
 		  
 			MoveFrame(myTextFrame, _marginTop, pageNo);
+
 /*
 			fitFrameBound = myTextFrame.geometricBounds;
 			
@@ -847,7 +849,8 @@ function SetOverflowsPages(myStory,frameBounds)
 				//fitFrameBound = myTextFrame.geometricBounds;
 				currentMarginTop = parseFloat(fitFrameBound[2]); //Global Variable
 			}
-*/			
+*/
+
 			myStory=myTextFrame;
 
 			if(loopNo > 3)
@@ -857,6 +860,9 @@ function SetOverflowsPages(myStory,frameBounds)
 	if(!myStory.overflows)
 	{
 		BalancedColumns(myStory);
+		fitFrameBound = myStory.geometricBounds;
+		currentMarginTop = fitFrameBound[2] ;
+		//alert(fitFrameBound[2] + "\n" + myStory.contents);
 	}
 
 	return myStory;
