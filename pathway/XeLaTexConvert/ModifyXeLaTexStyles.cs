@@ -507,18 +507,21 @@ namespace SIL.PublishingSolution
 
         private void InsertFrontMatter()
         {
+            string xeLaTexInstallationPath = string.Empty;
             String tableOfContent = string.Empty;
-
-            string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
-
-            if (Common.IsUnixOS())
+            if (Convert.ToBoolean(CoverImage) || Convert.ToBoolean(TitleInCoverPage))
             {
-                xeLaTexInstallationPath = Path.GetDirectoryName(_xetexFullFile);
-            }
-            else
-            {
-                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
-                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
+                xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
+
+                if (Common.IsUnixOS())
+                {
+                    xeLaTexInstallationPath = Path.GetDirectoryName(_xetexFullFile);
+                }
+                else
+                {
+                    xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
+                    xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
+                }
             }
 
 
