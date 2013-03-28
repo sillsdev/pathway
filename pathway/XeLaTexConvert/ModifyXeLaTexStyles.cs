@@ -197,7 +197,6 @@ namespace SIL.PublishingSolution
             if (Convert.ToBoolean(TocChecked))
                 InsertTableOfContent();
 
-            if (Convert.ToBoolean(CoverImage))
                 InsertFrontMatter();
 
             string xeLaTexProperty = "";
@@ -521,35 +520,39 @@ namespace SIL.PublishingSolution
                 xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
                 xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
             }
-            string destinctionPath = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(CoverPageImagePath));
+            
 
-            if (CoverPageImagePath.Trim() != "")
+            if (Convert.ToBoolean(CoverImage))
             {
-                if (CoverPageImagePath != destinctionPath)
-                    File.Copy(CoverPageImagePath, destinctionPath, true);
+                string destinctionPath = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(CoverPageImagePath));
+                if (CoverPageImagePath.Trim() != "")
+                {
+                    if (CoverPageImagePath != destinctionPath)
+                        File.Copy(CoverPageImagePath, destinctionPath, true);
 
-                tableOfContent += "\\color{black} \r\n";
-                tableOfContent += "\\AddToShipoutPicture*{% \r\n";
-                tableOfContent +=
-                    "\\put(0,0){\\rule{\\paperwidth}{\\paperheight}}{\\includegraphics[width=\\paperwidth, height=\\paperheight]{" +
-                    Path.GetFileName(CoverPageImagePath) + "}}% \r\n";
-                tableOfContent += "} \r\n";
+                    tableOfContent += "\\color{black} \r\n";
+                    tableOfContent += "\\AddToShipoutPicture*{% \r\n";
+                    tableOfContent +=
+                        "\\put(0,0){\\rule{\\paperwidth}{\\paperheight}}{\\includegraphics[width=\\paperwidth, height=\\paperheight]{" +
+                        Path.GetFileName(CoverPageImagePath) + "}}% \r\n";
+                    tableOfContent += "} \r\n";
+                    tableOfContent += "\\thispagestyle{empty} \r\n";
+                }
+
+                if (Convert.ToBoolean(IncludeBookTitleintheImage))
+                {
+                    tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
+                    tableOfContent += "\\vskip 60pt \r\n";
+                    tableOfContent += "\\begin{center} \r\n";
+                    tableOfContent += "\\CoverPageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
+                    tableOfContent += "\\end{center} \r\n";
+                }
+
+                tableOfContent += "\\newpage \r\n";
+                tableOfContent += "\\newpage \r\n";
                 tableOfContent += "\\thispagestyle{empty} \r\n";
+                tableOfContent += "\\mbox{} \r\n";
             }
-
-            if (Convert.ToBoolean(IncludeBookTitleintheImage))
-            {
-                tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
-                tableOfContent += "\\vskip 60pt \r\n";
-                tableOfContent += "\\begin{center} \r\n";
-                tableOfContent += "\\CoverPageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
-                tableOfContent += "\\end{center} \r\n";
-            }
-
-            tableOfContent += "\\newpage \r\n";
-            tableOfContent += "\\newpage \r\n";
-            tableOfContent += "\\thispagestyle{empty} \r\n";
-            tableOfContent += "\\mbox{} \r\n";
 
             if (Convert.ToBoolean(TitleInCoverPage))
             {
@@ -571,7 +574,17 @@ namespace SIL.PublishingSolution
                 {
                     logoFileName = "WBT_H_RGB_red.png";
                 }
-                copyRightFilePath = Path.GetDirectoryName(copyRightFilePath);
+
+                if (copyRightFilePath.Trim().Length !=0)
+                {
+                    copyRightFilePath = Path.GetDirectoryName(copyRightFilePath);    
+                }
+                else
+                {
+                    string executablePath = Common.GetApplicationPath();
+                    copyRightFilePath = Common.PathCombine(executablePath, "Copyrights");
+                }
+                
 
                 copyRightFilePath = Path.Combine(copyRightFilePath, logoFileName);
                 if (File.Exists(copyRightFilePath))
@@ -626,95 +639,13 @@ namespace SIL.PublishingSolution
 
 
                 tableOfContent += "\\begin{titlepage}\r\n";
-
                 tableOfContent += "\\begin{center}\r\n";
-
-
-
                 tableOfContent += "\\textsc{\\LARGE " + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
-
                 tableOfContent += "\\vspace{140 mm} \r\n";
-
                 tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Publisher) + "}\\\\[0.5cm] \r\n";
-
                 tableOfContent += "\\includegraphics[width=0.05 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";
-
-                //tableOfContent += "% Title\r\n";
-                //tableOfContent += "\\HRule \\[0.4cm]\r\n";
-                //tableOfContent += "{ \\huge \\bfseries Lager brewing techniques}\\[0.4cm]\r\n";
-
-                //tableOfContent += "\\HRule \\[1.5cm]\r\n";
-
-                //tableOfContent += "% Author and supervisor\r\n";
-                //tableOfContent += "\\begin{minipage}{0.4\\textwidth}\r\n";
-                //tableOfContent += "\\begin{flushleft} \\large\r\n";
-                //tableOfContent += "John \\textsc{Smith}\r\n";
-                //tableOfContent += "\\end{flushleft}\r\n";
-                //tableOfContent += "\\end{minipage}\r\n";
-                //tableOfContent += "\\begin{minipage}{0.4\textwidth}\r\n";
-                //tableOfContent += "\\begin{flushright} \\large\r\n";
-                //tableOfContent += "\\emph{Supervisor:} \\ \r\n";
-                //tableOfContent += "Dr.~Mark \\textsc{Brown} \r\n";
-                //tableOfContent += "\\end{flushright} \r\n";
-                //tableOfContent += "\\end{minipage} \r\n";
-
-                //tableOfContent += "\\vfill \r\n";
-
-                //tableOfContent += "% Bottom of the page \r\n";
-                //tableOfContent += "{\\large \\today} \r\n";
-
                 tableOfContent += "\\end{center} \r\n";
-
                 tableOfContent += "\\end{titlepage} \r\n";
-
-
-                ////////tableOfContent += "\\font\\TitlePageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
-                ////////tableOfContent += "\\title{" + "\\TitlePageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n " + "} \r\n";
-
-                //string organization;
-                //try
-                //{
-                //    // get the organization
-                //    organization = Param.Value["Organization"];
-                //}
-                //catch (Exception)
-                //{
-                //    // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
-                //    // but just in case, specify a default org.
-                //    organization = "SIL International";
-                //}
-
-                //string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
-                //Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
-                //// Title (book title in Configuration Tool UI / dc:title in metadata)
-                //Title = Param.GetMetadataValue(Param.Title, organization) ?? ""; // empty string if null / not found
-                //// Creator (dc:creator))
-                //Creator = Param.GetMetadataValue(Param.Creator, organization) ?? ""; // empty string if null / not found
-                //// information
-                //Description = Param.GetMetadataValue(Param.Description, organization) ?? ""; // empty string if null / not found
-                //// Source
-                //Source = Param.GetMetadataValue(Param.Source, organization) ?? ""; // empty string if null / not found
-                //// Format
-                //Format = Param.GetMetadataValue(Param.Format, organization) ?? ""; // empty string if null / not found
-                //// Publisher
-                //Publisher = Param.GetMetadataValue(Param.Publisher, organization) ?? ""; // empty string if null / not found
-                //// Coverage
-                //Coverage = Param.GetMetadataValue(Param.Coverage, organization) ?? ""; // empty string if null / not found
-                //// Rights (dc:rights)
-                //Rights = Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
-
-
-
-                //// embed fonts
-
-                //tableOfContent += "\\author{ " + Param.GetMetadataValue(Param.Publisher) + "} \r\n";
-
-                ////tableOfContent += "\\author{ " + Param.GetMetadataValue(Param.Creator) + "} \r\n";
-                //string copyrightContent = Param.GetMetadataValue(Param.CopyrightHolder);
-                ////copyrightContent = copyrightContent.Replace("©", "");
-                ////tableOfContent += "\\subtitle{ " + copyrightContent + "} \r\n";
-                //tableOfContent += "\\maketitle \r\n";
-                //tableOfContent += "\\thispagestyle{empty} \r\n";
 
                 tableOfContent += "\\newpage \r\n";
                 tableOfContent += "\\newpage \r\n";
