@@ -192,15 +192,18 @@ namespace SIL.PublishingSolution
 
         private void MapProperty()
         {
-            Common.FileInsertText(_xetexFullFile, @"\pagestyle{fancy} ");
+            string newFile1 = _xetexFullFile.Replace(".tex", "1.tex");
+            string newFile2 = _xetexFullFile.Replace(".tex", "2.tex");
 
-            if (Convert.ToBoolean(TocChecked))
-                InsertTableOfContent();
+            File.Copy(_xetexFullFile, newFile1,true);
 
-            InsertFrontMatter();
+            StreamWriter sw = new StreamWriter(newFile2);
 
-            string xeLaTexProperty = "";
+
+
+            string xeLaTexProp = "";
             List<string> includePackageList = new List<string>();
+            List<string> xeLaTexProperty = new List<string>();
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssClass)
             {
                 if (cssClass.Key.IndexOf("h1") >= 0 ||
@@ -212,21 +215,21 @@ namespace SIL.PublishingSolution
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
                 string className = RemoveBody(replaceNumberInStyle);
                 if (className.Length == 0) continue;
-                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle, _langFontDictionary);
-                if (xeLaTexProperty.Trim().Length > 0)
+                xeLaTexProp = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle, _langFontDictionary);
+                if (xeLaTexProp.Trim().Length > 0)
                 {
-                    Common.FileInsertText(_xetexFullFile, xeLaTexProperty);
-                    //_xetexFile.WriteLine(xeTexProperty);
+                    xeLaTexProperty.Add(xeLaTexProp);
                 }
             }
 
-            //%\singlespacing
-            //\onehalfspacing
-            //%\doublespacing
-            //%\setstretch{1.1}
-            //Common.FileInsertText(_xetexFullFile, @"\setstretch{1.1} ");            
+        
             if (!XelatexDocumentOpenClosedRequired)
             {
+
+
+                string paperSize = GetPageStyle(_cssClass, _isMirrored);
+                sw.WriteLine(@"\documentclass" + paperSize);
+
                 double pageMargin = 0;
                 if (_cssClass.ContainsKey("@page"))
                 {
@@ -240,48 +243,90 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
-                //Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
-                Common.FileInsertText(_xetexFullFile, @"\pagestyle{plain} ");
-                Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
-                Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
-                //setmainfont{Arial} //Default Font 
-                //Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
-                if (Convert.ToBoolean(CoverImage))
-                    Common.FileInsertText(_xetexFullFile, @"\usepackage{eso-pic}");
+
+                sw.WriteLine(_pageStyleFormat);
+
+                foreach (var package in includePackageList)
+                {
+                    sw.WriteLine(package);
+                }
+
+                sw.WriteLine(@"\usepackage{float}");
+                sw.WriteLine(@"\usepackage{grffile}");
+                sw.WriteLine(@"\usepackage{graphicx}");
+                sw.WriteLine(@"\usepackage{amssymb}");
+                sw.WriteLine(@"\usepackage{fontspec}");
+                sw.WriteLine(@"\usepackage{fancyhdr}");
+                sw.WriteLine(@"\usepackage{multicol}");
+                sw.WriteLine(@"\usepackage{calc}");
+                sw.WriteLine(@"\usepackage{lettrine}");
+
+
                 if (pageMargin == 0)
                 {
-                    Common.FileInsertText(_xetexFullFile, @"\usepackage[margin=2cm,includeheadfoot]{geometry}");
+                    sw.WriteLine(@"\usepackage[margin=2cm,includeheadfoot]{geometry}");
                 }
                 else
                 {
                     int cmMarginValue = Convert.ToInt32(pageMargin * 2.54 / 96);
-                    Common.FileInsertText(_xetexFullFile, @"\usepackage[margin=" + cmMarginValue + "cm,includeheadfoot]{geometry}");
+                    sw.WriteLine(@"\usepackage[margin=" + cmMarginValue + "cm,includeheadfoot]{geometry}");
                 }
 
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{lettrine}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{calc}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{fontspec}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{amssymb}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{graphicx}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{grffile}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{float}");
-
-                foreach (var package in includePackageList)
-                {
-                    Common.FileInsertText(_xetexFullFile, package);
-                }
-                //Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
-
-                string paperSize = GetPageStyle(_cssClass, _isMirrored);
-
-                Common.FileInsertText(_xetexFullFile, @"\documentclass" + paperSize);
-
-                //Common.FileInsertText(_xetexFullFile, @"\documentclass[" + paperSize + "]{article} ");
-                //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
+                if (Convert.ToBoolean(CoverImage))
+                    sw.WriteLine(@"\usepackage{eso-pic}");
             }
+
+            sw.WriteLine(@"\begin{document} ");
+            sw.WriteLine(@"\pagestyle{plain} ");
+
+            foreach (var prop in xeLaTexProperty)
+            {
+                sw.WriteLine(prop);
+            }
+
+
+            InsertFrontMatter(sw);
+
+            if (Convert.ToBoolean(TocChecked))
+                InsertTableOfContent(sw);
+
+            sw.WriteLine(@"\pagestyle{fancy} ");
+            sw.Flush();
+            sw.Close();
+            MergeFile(newFile1, newFile2);
         }
+
+        private void MergeFile(string newFile1, string newFile2)
+        {
+            var fsw = new FileStream(_xetexFullFile, FileMode.Create, FileAccess.Write);
+            var sw = new StreamWriter(fsw);
+
+            FileStream fs1 = new FileStream(newFile2, FileMode.Open);
+            StreamReader sr1 = new StreamReader(fs1);
+            string line;
+            while ((line = sr1.ReadLine()) != null)
+            {
+                sw.WriteLine(line);
+            }
+            sw.Flush();
+            fs1.Close();
+            sr1.Close();
+
+
+            FileStream fs2 = new FileStream(newFile1, FileMode.Open);
+            StreamReader sr2 = new StreamReader(fs2);
+            while ((line = sr2.ReadLine()) != null)
+            {
+                sw.WriteLine(line);
+            }
+            sw.Flush();
+            fs2.Close();
+            sr2.Close();
+
+            sw.Close();
+            fsw.Close();
+        }
+
 
         private string GetPageStyle(Dictionary<string, Dictionary<string, string>> _cssClass, bool isMirrored)
         {
@@ -442,7 +487,7 @@ namespace SIL.PublishingSolution
             return paperSize;
         }
 
-        private void InsertTableOfContent()
+        private void InsertTableOfContent(StreamWriter sw)
         {
             String tableOfContent = string.Empty;
 
@@ -502,10 +547,11 @@ namespace SIL.PublishingSolution
             tableOfContent += "\\newpage \r\n";
             tableOfContent += "\\setcounter{page}{1} \r\n";
             tableOfContent += "\\pagenumbering{arabic}  \r\n";
-            Common.FileInsertText(_xetexFullFile, tableOfContent);
+           // Common.FileInsertText(_xetexFullFile, tableOfContent);
+            sw.WriteLine(tableOfContent);
         }
 
-        private void InsertFrontMatter()
+        private void InsertFrontMatter(StreamWriter sw)
         {
             string xeLaTexInstallationPath = string.Empty;
             String tableOfContent = string.Empty;
@@ -680,11 +726,11 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\setlength{\\textheight}{23cm} \r\n";
                 tableOfContent += "\\setlength{\\textwidth}{7in} \r\n";
             }
-
-            Common.FileInsertText(_xetexFullFile, tableOfContent);
+            sw.WriteLine(tableOfContent);
+            //Common.FileInsertText(_xetexFullFile, tableOfContent);
         }
 
-        private void InsertReversalIndex()
+        private void InsertReversalIndex(StreamWriter sw)
         {
             String ReversalIndexContent = string.Empty;
 
@@ -695,8 +741,8 @@ namespace SIL.PublishingSolution
                 ReversalIndexContent += "\\pagestyle{plain} \r\n";
                 ReversalIndexContent += "\\newpage \r\n";
             }
-
-            Common.FileInsertText(_xetexFullFile, ReversalIndexContent);
+            sw.WriteLine(ReversalIndexContent);
+            //Common.FileInsertText(_xetexFullFile, ReversalIndexContent);
         }
 
         private string RemoveBody(string paraStyle)

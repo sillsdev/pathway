@@ -3420,6 +3420,47 @@ namespace SIL.Tool
         /// <returns></returns>
         public string GetDictionaryLetterCount()
         {
+            bool isLetterFound = false;
+            string lastLetterString = string.Empty;
+            XmlTextReader _reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
+            while (_reader.Read())
+            {
+                if (_reader.NodeType == XmlNodeType.Element)
+                {
+                    if (_reader.Name == "div")
+                    {
+                        string name = _reader.GetAttribute("class");
+                        if (name != null)
+                        {
+                            if (name.ToLower() == "letter")
+                            {
+                                isLetterFound = true;
+                            }
+                        }
+                    }
+                }
+
+                if (isLetterFound)
+                {
+                    if (_reader.NodeType == XmlNodeType.Text)
+                    {
+                        lastLetterString = _reader.Value;
+                        isLetterFound = false;
+                    }
+                }
+
+            }
+            _reader.Close();
+
+            return lastLetterString;
+        }
+
+        /// <summary>
+        /// For dictionary data, returns the first and last letter count
+        /// </summary>
+        /// <returns></returns>
+        public string GetDictionaryLetterCountOLD()
+        {
             string lastLetterString = string.Empty;
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(_xhtmlFileNameWithPath);
