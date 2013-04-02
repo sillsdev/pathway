@@ -3237,23 +3237,40 @@ namespace SIL.Tool
                 {
                     entryNodeList[i].InsertAfter(firstNode, entryNodeList[i].LastChild);
                 }
-                //xPath = ".//xhtml:div[@class='headword']|.//xhtml:span[@class='headword']";
-                //XmlNode firstNode = entryNodeList[i].FirstChild;
-                //if (firstNode.Attributes != null && firstNode.Attributes["class"].Value.ToLower() != "pictureright")
-                //{
-                //    XmlNodeList headwordNodeList = entryNodeList[i].SelectNodes(xPath, namespaceManager);
-                //    if (headwordNodeList == null) return;
-                //    if (headwordNodeList.Count > 0)
-                //    {
-                //        for (int j = 0; j < headwordNodeList.Count; j++)
-                //        {
-                //            entryNodeList[i].InsertBefore(headwordNodeList[j], entryNodeList[i].FirstChild);
-                //        }
-                //    }
-                //}
             }
             xDoc.Save(fileName);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void SetNonBreakInVerseNumber(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            string xPath = "//xhtml:span[@class='Verse_Number']";
+            XmlNodeList verseNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if (verseNodeList == null) return;
+            for (int i = 0; i < verseNodeList.Count; i++)
+            {
+                XmlNode nextNode = verseNodeList[i].NextSibling;
+                if(nextNode == null) continue;
+                if(nextNode.OuterXml.IndexOf("span") == -1)
+                {
+                    nextNode = nextNode.NextSibling;
+                }
+                verseNodeList[i].InnerText = verseNodeList[i].InnerText.Trim() +  " ";
+                nextNode.InnerXml = verseNodeList[i].OuterXml + nextNode.InnerXml;
+                nextNode.ParentNode.RemoveChild(verseNodeList[i]);
+            }
+            xDoc.Save(fileName);
+        }
+
+        //SetNonBreakInVerseNumberSetNonBreakInVerseNumber
 
         public void RemoveTextIntent(string fileName)
         {
