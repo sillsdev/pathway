@@ -124,6 +124,7 @@ namespace SIL.PublishingSolution
                         preProcessor.SwapHeadWordAndReversalForm();
                     preProcessor.MovePictureAsLastChild(preProcessor.ProcessedXhtml);
                     preProcessor.SetNonBreakInVerseNumber(preProcessor.ProcessedXhtml);
+                    preProcessor.ReplaceDoubleSlashToLineBreak(preProcessor.ProcessedXhtml);
                     string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
                     string tempFolderName = Path.GetFileName(tempFolder);
                     var mc = new MergeCss { OutputLocation = tempFolderName };

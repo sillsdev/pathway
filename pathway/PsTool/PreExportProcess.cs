@@ -3270,6 +3270,31 @@ namespace SIL.Tool
             xDoc.Save(fileName);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void ReplaceDoubleSlashToLineBreak(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            string xPath = "//xhtml:div[@class='scrSection']";
+            XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if (SectionNodeList == null) return;
+            for (int i = 0; i < SectionNodeList.Count; i++)
+            {
+                if (SectionNodeList[i].InnerText.IndexOf(" // ") > 0)
+                {
+                    SectionNodeList[i].InnerXml = SectionNodeList[i].InnerXml.Replace(" // ", " <br/>");
+                }
+                
+            }
+            xDoc.Save(fileName);
+        }
+
         //SetNonBreakInVerseNumberSetNonBreakInVerseNumber
 
         public void RemoveTextIntent(string fileName)
