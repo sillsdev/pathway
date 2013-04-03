@@ -325,6 +325,13 @@ namespace SIL.PublishingSolution
 
             sw.Close();
             fsw.Close();
+
+            try
+            {
+                File.Delete(newFile1);
+                File.Delete(newFile2);
+            }
+            catch (Exception e){}
         }
 
 
