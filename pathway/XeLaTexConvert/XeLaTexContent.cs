@@ -892,7 +892,7 @@ namespace SIL.PublishingSolution
                             _xetexFile.Write(headerFormat);
                             _headerContent = content;
                         }
-                        if (styleFullName == "spanreversalformentryletDatadicBody" && content != null)
+                        if (styleFullName.Contains("spanreversalform") && styleFullName.Contains("entryletDatadicBody") && content != null)
                         {
                             //if (_headerContent.Trim().Length == 0)
                             _headerContent = content;
