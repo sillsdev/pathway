@@ -199,8 +199,6 @@ namespace SIL.PublishingSolution
 
             StreamWriter sw = new StreamWriter(newFile2);
 
-
-
             string xeLaTexProp = "";
             List<string> includePackageList = new List<string>();
             List<string> xeLaTexProperty = new List<string>();
@@ -221,12 +219,9 @@ namespace SIL.PublishingSolution
                     xeLaTexProperty.Add(xeLaTexProp);
                 }
             }
-
         
             if (!XelatexDocumentOpenClosedRequired)
             {
-
-
                 string paperSize = GetPageStyle(_cssClass, _isMirrored);
                 sw.WriteLine(@"\documentclass" + paperSize);
 
@@ -243,8 +238,6 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
-
-                sw.WriteLine(_pageStyleFormat);
 
                 foreach (var package in includePackageList)
                 {
@@ -274,10 +267,14 @@ namespace SIL.PublishingSolution
 
                 if (Convert.ToBoolean(CoverImage))
                     sw.WriteLine(@"\usepackage{eso-pic}");
+
+                sw.WriteLine(_pageStyleFormat);
+
+                sw.WriteLine(@"\begin{document} ");
+                sw.WriteLine(@"\pagestyle{plain} ");
             }
 
-            sw.WriteLine(@"\begin{document} ");
-            sw.WriteLine(@"\pagestyle{plain} ");
+          
 
             foreach (var prop in xeLaTexProperty)
             {

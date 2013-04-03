@@ -299,7 +299,7 @@ namespace SIL.PublishingSolution
         {
             if (!File.Exists(filePath)) return;
             string tempFile = Path.Combine(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath) + "1.tex");
-            File.Move(filePath, tempFile);
+            File.Copy(filePath, tempFile, true);
             var reader = new StreamReader(tempFile);
             string contentWriter;
             var writer = new StreamWriter(filePath);
