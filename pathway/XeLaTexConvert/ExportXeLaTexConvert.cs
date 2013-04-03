@@ -157,9 +157,9 @@ namespace SIL.PublishingSolution
             {
                 var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
-                string xeLatexCopyrightFile = fileNameXhtml + ".tex";
+                string reversalFileName = fileNameXhtml + ".tex";
 
-                CloseDocument(xeLatexFile, true, xeLatexCopyrightFile);
+                CloseDocument(xeLatexFile, true, reversalFileName);
             }
             else
             {
@@ -387,7 +387,7 @@ namespace SIL.PublishingSolution
                 Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
                 CssTree cssTree = new CssTree();
                 cssTree.OutputType = Common.OutputType.XELATEX;
-                cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+                cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
                 string xeLatexRevesalIndexFile = Path.Combine(projInfo.ProjectPath, fileNameXhtml + ".tex");
                 _reversalIndexTexFileName = xeLatexRevesalIndexFile;
