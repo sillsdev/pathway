@@ -622,6 +622,11 @@ namespace SIL.PublishingSolution
                 }
                 content = builder.ToString();
             }
+            // No space after versenumber
+            if (_classNameWithLang.IndexOf("VerseNumber") == 0)
+            {
+                _isWhiteSpace = true;
+            }
             return content;
         }
 
