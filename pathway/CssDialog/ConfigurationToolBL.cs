@@ -551,7 +551,7 @@ namespace SIL.PublishingSolution
                 cTool.BtnPaper.Enabled = true;
                 cTool.BtnWeb.Enabled = true;
                 cTool.BtnOthers.Enabled = true;
-                cTool.BtnMobile.Enabled = false;
+                cTool.BtnMobile.Enabled = true;
             }
         }
 
