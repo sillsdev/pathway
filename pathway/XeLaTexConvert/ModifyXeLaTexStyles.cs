@@ -195,7 +195,7 @@ namespace SIL.PublishingSolution
             string newFile1 = _xetexFullFile.Replace(".tex", "1.tex");
             string newFile2 = _xetexFullFile.Replace(".tex", "2.tex");
 
-            File.Copy(_xetexFullFile, newFile1,true);
+            File.Copy(_xetexFullFile, newFile1, true);
 
             StreamWriter sw = new StreamWriter(newFile2);
 
@@ -219,13 +219,16 @@ namespace SIL.PublishingSolution
                     xeLaTexProperty.Add(xeLaTexProp);
                 }
             }
-        
+
             if (!XelatexDocumentOpenClosedRequired)
             {
                 string paperSize = GetPageStyle(_cssClass, _isMirrored);
                 sw.WriteLine(@"\documentclass" + paperSize);
 
-                double pageMargin = 0;
+                double pageTopMargin = 0;
+                double pageBottomMargin = 0;
+                double pageLeftMargin = 0;
+                double pageRightMargin = 0;
                 if (_cssClass.ContainsKey("@page"))
                 {
                     Dictionary<string, string> cssProp = _cssClass["@page"];
@@ -233,7 +236,30 @@ namespace SIL.PublishingSolution
                     {
                         if (para.Key == "margin-top")
                         {
-                            pageMargin = Convert.ToDouble(para.Value);
+                            pageTopMargin = Convert.ToDouble(para.Value);
+                        }
+                        if (para.Key == "margin-bottom")
+                        {
+                            pageBottomMargin = Convert.ToDouble(para.Value);
+
+                        }
+                        if (para.Key == "margin-left")
+                        {
+                            pageLeftMargin = Convert.ToDouble(para.Value);
+
+                        }
+                        if (para.Key == "margin-right")
+                        {
+                            pageRightMargin = Convert.ToDouble(para.Value);
+
+                        }
+
+                        if (para.Key == "margin")
+                        {
+                            pageTopMargin = Convert.ToDouble(para.Value);
+                            pageBottomMargin = Convert.ToDouble(para.Value);
+                            pageLeftMargin = Convert.ToDouble(para.Value);
+                            pageRightMargin = Convert.ToDouble(para.Value);
                             break;
                         }
                     }
@@ -253,17 +279,7 @@ namespace SIL.PublishingSolution
                 sw.WriteLine(@"\usepackage{multicol}");
                 sw.WriteLine(@"\usepackage{calc}");
                 sw.WriteLine(@"\usepackage{lettrine}");
-
-
-                if (pageMargin == 0)
-                {
-                    sw.WriteLine(@"\usepackage[margin=2cm,includeheadfoot]{geometry}");
-                }
-                else
-                {
-                    int cmMarginValue = Convert.ToInt32(pageMargin * 2.54 / 96);
-                    sw.WriteLine(@"\usepackage[margin=" + cmMarginValue + "cm,includeheadfoot]{geometry}");
-                }
+                sw.WriteLine(@"\usepackage[margin=1cm,includeheadfoot]{geometry}");
 
                 if (Convert.ToBoolean(CoverImage))
                     sw.WriteLine(@"\usepackage{eso-pic}");
@@ -272,15 +288,25 @@ namespace SIL.PublishingSolution
 
                 sw.WriteLine(@"\begin{document} ");
                 sw.WriteLine(@"\pagestyle{plain} ");
-            }
+                if (pageTopMargin != 0 || pageBottomMargin != 0 || pageLeftMargin != 0 || pageRightMargin != 0)
+                {
+                    pageTopMargin = (pageTopMargin / 28.346456693F) + 1.5;
+                    pageBottomMargin = (pageBottomMargin / 28.346456693F) + 1.5;
 
-          
+                    pageLeftMargin = Convert.ToDouble(Common.UnitConverter(pageLeftMargin.ToString() + "pt", "cm"));
+                    pageRightMargin = Convert.ToDouble(Common.UnitConverter(pageRightMargin.ToString() + "pt", "cm"));
+                    sw.WriteLine(@"\newgeometry{left=" + Math.Round(pageLeftMargin, 2) + "cm, right=" + Math.Round(pageRightMargin, 2) + "cm, bottom=" + Math.Round(pageBottomMargin, 2) + "cm, top=" + Math.Round(pageTopMargin, 2) + "cm}");
+                }
+                else
+                {
+                    sw.WriteLine(@"\newgeometry{left=1cm}{right=1cm}");
+                }
+            }
 
             foreach (var prop in xeLaTexProperty)
             {
                 sw.WriteLine(prop);
             }
-
 
             InsertFrontMatter(sw);
 
@@ -328,7 +354,7 @@ namespace SIL.PublishingSolution
                 File.Delete(newFile1);
                 File.Delete(newFile2);
             }
-            catch (Exception e){}
+            catch (Exception e) { }
         }
 
 
@@ -551,7 +577,7 @@ namespace SIL.PublishingSolution
             tableOfContent += "\\newpage \r\n";
             tableOfContent += "\\setcounter{page}{1} \r\n";
             tableOfContent += "\\pagenumbering{arabic}  \r\n";
-           // Common.FileInsertText(_xetexFullFile, tableOfContent);
+            // Common.FileInsertText(_xetexFullFile, tableOfContent);
             sw.WriteLine(tableOfContent);
         }
 
@@ -727,8 +753,6 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\newpage \r\n";
                 tableOfContent += "\\thispagestyle{empty} \r\n";
                 tableOfContent += "\\mbox{} \r\n";
-                tableOfContent += "\\setlength{\\textheight}{23cm} \r\n";
-                tableOfContent += "\\setlength{\\textwidth}{7in} \r\n";
             }
             sw.WriteLine(tableOfContent);
             //Common.FileInsertText(_xetexFullFile, tableOfContent);
