@@ -794,7 +794,7 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            if (propertyValue != "0" && className == "entry")
+            if (propertyValue != "0" && (className == "entry" || className.Contains("IntroList")))
             {
                 //propertyValue = "text-indent hangpara";
 
