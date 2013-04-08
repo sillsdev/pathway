@@ -962,6 +962,16 @@ namespace Test.XeLatex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void LineBreak()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "LineBreak";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void XeLaTexUpdateCache()
         {
             UpdateXeLaTexFontCacheIfNecessary();

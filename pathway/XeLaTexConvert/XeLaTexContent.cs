@@ -581,6 +581,11 @@ namespace SIL.PublishingSolution
         private string ReplaceString(string data)
         {
             //data = Common.ReplaceSymbolToText(data);
+            if (!_replaceSymbolToText.ContainsKey(" // "))
+            {
+                _replaceSymbolToText.Add(" // ", " \\linebreak  ");
+            }
+            
             if (_replaceSymbolToText.Count > 0)
             {
                 foreach (string srchKey in _replaceSymbolToText.Keys)
