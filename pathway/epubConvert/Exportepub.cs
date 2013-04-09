@@ -2055,7 +2055,8 @@ namespace SIL.PublishingSolution
                     // just in case the name starts with a number, prepend "id"
                     sb.Append("id");
                     // remove any whitespace in the node text (the ID can't have it)
-                    sb.Append(new Regex(@"\s*").Replace(nodes[0].InnerText, string.Empty));
+                    //sb.Append(new Regex(@"\s*").Replace(nodes[0].InnerText, string.Empty));
+                    sb.Append("boooknode");
                     return (sb.ToString());
                 }
                 // fall back on just the file name
