@@ -358,7 +358,7 @@ namespace SIL.Tool
             if (isUnixOS)
             {
                 width += 80;
-                height -= 50;
+                height += 50;
                 badgeFont = new Font("Times New Roman", 36);
                 size = g.MeasureString(strTitle, badgeFont, (bmp.Width - 20));
                 size.Height += 20;
