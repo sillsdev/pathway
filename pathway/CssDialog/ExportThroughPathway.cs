@@ -681,7 +681,7 @@ namespace SIL.PublishingSolution
         {
             Param.LoadSettings();
             XmlNodeList baseNode1 = Param.GetItems("//styles/" + "web" + "/style[@name='" + "OneWeb" + "']/styleProperty");
-            
+
             foreach (XmlNode VARIABLE in baseNode1)
             {
                 string attribName = VARIABLE.Attributes["name"].Value.ToLower();
@@ -730,7 +730,7 @@ namespace SIL.PublishingSolution
                         OutputFolder = OutputFolder + "\\";
                 }
 
-                if(!Directory.Exists(OutputFolder))
+                if (!Directory.Exists(OutputFolder))
                     Directory.CreateDirectory(OutputFolder);
             }
             catch (Exception)
@@ -739,7 +739,7 @@ namespace SIL.PublishingSolution
                 MessageBoxIcon.Error);
                 return;
             }
-            
+
             ProcessSendingHelpImprove();
 
             if (!File.Exists(CoverPageImagePath))
@@ -758,8 +758,8 @@ namespace SIL.PublishingSolution
             DialogResult = DialogResult.Yes;
             if (Text.Contains("Default"))
                 SaveDefaultProperty(this);
-            
-            if(!Common.IsUnixOS())
+
+            if (!Common.IsUnixOS())
             {
                 OutputFolder = Path.GetDirectoryName(OutputFolder);
             }
@@ -896,10 +896,10 @@ namespace SIL.PublishingSolution
             Media = Param.DefaultValue[Param.Media];
 
             //Fillup XSLT Processing Checkboxes
-            var preprocess = Param.Value.ContainsKey(Param.Preprocessing)? Param.Value[Param.Preprocessing]: string.Empty;
+            var preprocess = Param.Value.ContainsKey(Param.Preprocessing) ? Param.Value[Param.Preprocessing] : string.Empty;
             for (int i = 0; i < chkLbPreprocess.Items.Count; i++)
             {
-                chkLbPreprocess.SetItemCheckState(i,preprocess.Contains(chkLbPreprocess.Items[i].ToString())? CheckState.Checked : CheckState.Unchecked);
+                chkLbPreprocess.SetItemCheckState(i, preprocess.Contains(chkLbPreprocess.Items[i].ToString()) ? CheckState.Checked : CheckState.Unchecked);
             }
         }
 
@@ -1130,7 +1130,7 @@ namespace SIL.PublishingSolution
                                          ? fullPathwayPath.Substring(6)
                                          : fullPathwayPath;
 
-                if(Common.UnixVersionCheck())
+                if (Common.UnixVersionCheck())
                 {
                     return true;
                 }
@@ -1150,8 +1150,6 @@ namespace SIL.PublishingSolution
             EnableUIElements();
             SetOkStatus();
         }
-
-
 
         private string FindMedia()
         {
@@ -1182,7 +1180,9 @@ namespace SIL.PublishingSolution
             // expand / collapse the dialog (Toggle)
             IsExpanded = !IsExpanded;
             ResizeDialog();
-            SetTabbedHelpTopic();
+
+            if (!_isUnixOS)
+                SetTabbedHelpTopic();
         }
 
         private void ddlStyle_SelectedIndexChanged(object sender, EventArgs e)
@@ -1334,7 +1334,7 @@ namespace SIL.PublishingSolution
         private void lnkChooseCopyright_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // TODO: replace with correct help topic
-            
+
             _helpTopic = "Tasks/Basic_Tasks/Choosing_a_rights_statement_overview.htm";
             btnHelp_Click(sender, e);
         }
@@ -1401,14 +1401,14 @@ namespace SIL.PublishingSolution
             {
                 Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
                 Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-               // SendKeys.Send("{F1}");
+                // SendKeys.Send("{F1}");
             }
 
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(!_isUnixOS)
+            if (!_isUnixOS)
                 SetTabbedHelpTopic();
         }
     }
