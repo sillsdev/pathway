@@ -372,7 +372,7 @@ namespace SIL.PublishingSolution
                 //inProcess.AddToMaximum(splitFiles.Count);
                 inProcess.SetStatus("Processing stylesheet information");
                 // get rid of styles that don't work with .epub
-                RemovePagedStylesFromCss(niceNameCSS);
+                //RemovePagedStylesFromCss(niceNameCSS);
                 // customize the CSS file based on the settings
                 CustomizeCSS(mergedCSS);
 
@@ -385,20 +385,20 @@ namespace SIL.PublishingSolution
                     {
                         if (_isUnixOS)
                         {
-			   if(file.Contains("File2Cpy"))
-			  {
-				string copyRightpage = file.Replace(".xhtml","_.xhtml");
-				File.Copy(file,copyRightpage);
-				htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),                               (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
-	                        File.Delete(file);
-				}
-			else
-			{
-                            Common.XsltProcess(file, xsltFullName, "_.xhtml");
-                            htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),
-                                                                            (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
-                            File.Delete(file);
-			}
+                            if (file.Contains("File2Cpy"))
+                            {
+                                string copyRightpage = file.Replace(".xhtml", "_.xhtml");
+                                File.Copy(file, copyRightpage);
+                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
+                                File.Delete(file);
+                            }
+                            else
+                            {
+                                Common.XsltProcess(file, xsltFullName, "_.xhtml");
+                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),
+                                                                                (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
+                                File.Delete(file);
+                            }
                         }
                         else
                         {
@@ -2113,7 +2113,7 @@ namespace SIL.PublishingSolution
                 {
                     nodes = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
                 }
-		    }
+            }
             else
             {
                 nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
@@ -3852,7 +3852,7 @@ namespace SIL.PublishingSolution
             {
                 ApplyXslt(tocFullPath, _addDicTocHeads);
             }
-            if(!_isUnixOS)
+            if (!_isUnixOS)
             {
                 ApplyXslt(tocFullPath, _fixEpubToc);
             }
