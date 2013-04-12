@@ -198,22 +198,35 @@ namespace SIL.Tool
             {
                 foreach (string progBases in new ArrayList {"C:\\Program Files", "C:\\Program Files (x86)"})
                 {
-                    var info = new DirectoryInfo(progBases + "\\Java");
-                    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
+                    string javaPath = Common.PathCombine(progBases, "java");
+
+                    if (Directory.Exists(javaPath))
                     {
-                        progFolder = Path.Combine(directoryInfo.FullName, "bin");
-                        if (File.Exists(Path.Combine(progFolder, "java.exe")))
-                            return progFolder;
-                    }
-                    if (string.IsNullOrEmpty(progFolder))
-                    {
-                        foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
+                        var info = new DirectoryInfo(javaPath);
+                        foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
                         {
                             progFolder = Path.Combine(directoryInfo.FullName, "bin");
                             if (File.Exists(Path.Combine(progFolder, "java.exe")))
                                 return progFolder;
                         }
                     }
+
+                    //var info = new DirectoryInfo(progBases + "\\Java\\");
+                    //foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
+                    //{
+                    //    progFolder = Path.Combine(directoryInfo.FullName, "bin");
+                    //    if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                    //        return progFolder;
+                    //}
+                    //if (string.IsNullOrEmpty(progFolder))
+                    //{
+                    //    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
+                    //    {
+                    //        progFolder = Path.Combine(directoryInfo.FullName, "bin");
+                    //        if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                    //            return progFolder;
+                    //    }
+                    //}
                 }
             }
             return progFolder;
