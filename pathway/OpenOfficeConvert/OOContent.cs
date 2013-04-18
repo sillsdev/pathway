@@ -648,6 +648,11 @@ namespace SIL.PublishingSolution
                         {
                             _hasImgCloseTag = false;
                         }
+                        else if (_reader.Name == "br")
+                        {
+                            _writer.WriteRaw(@"<text:line-break/>");
+                            continue;
+                        }
                         else
                         {
                             if (_reader.Name == "a")
