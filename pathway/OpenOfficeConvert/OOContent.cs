@@ -148,6 +148,7 @@ namespace SIL.PublishingSolution
 
         private bool _IsHeadword = false;
         private bool _significant;
+        private bool _footnoteSpace;
         private bool _isListBegin;
         private Dictionary<string, string> ListType;
         //private string _anchorText = string.Empty;
@@ -739,11 +740,18 @@ namespace SIL.PublishingSolution
             //_writer.WriteString(data);
             if (!whiteSpaceExist && !_pseudoSingleSpace)
             {
-                _writer.WriteStartElement("text:s");
-                _writer.WriteAttributeString("text:c", "1");
-                _writer.WriteString(" ");
-                _writer.WriteEndElement();
-                _significant = true;
+                //if (_isNewParagraph)
+                //{
+                //    _footnoteSpace = false;
+                //}
+                if (_footnoteSpace == false)
+                {
+                    _writer.WriteStartElement("text:s");
+                    _writer.WriteAttributeString("text:c", "1");
+                    _writer.WriteString(" ");
+                    _writer.WriteEndElement();
+                    _significant = true;
+                }
                 //_writer.WriteString(" ");
             }
         }
@@ -777,6 +785,18 @@ namespace SIL.PublishingSolution
                 builder.Append(var);
             }
             content = builder.ToString();
+            //if (_classNameWithLang.IndexOf("scrFootnoteMarker") == 0 || _classNameWithLang.IndexOf("VerseNumber") == 0)
+            if (_classNameWithLang.IndexOf("scrFootnoteMarker") == 0)
+            {
+                _significant = true;
+            }
+            else if (_classNameWithLang.IndexOf("VerseNumber") == 0)
+            {
+                _significant = true;
+                _footnoteSpace = true;
+            }
+
+
             return content;
             //_writer.WriteString(content);
         }
@@ -803,6 +823,7 @@ namespace SIL.PublishingSolution
 
             if (_isNewParagraph)
             {
+                _footnoteSpace = false;
                 if (_paragraphName == null)
                 {
                     _paragraphName = StackPeek(_allParagraph); // _allParagraph.Pop();
