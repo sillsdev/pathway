@@ -3429,16 +3429,23 @@ namespace SIL.PublishingSolution
                         // italic
                         if (embeddedFont.HasItalic && embeddedFont.Filename.CompareTo(embeddedFont.ItalicFilename) != 0)
                         {
+			if(embeddedFont.ItalicFilename != string.Empty )
+			{
                             opf.WriteStartElement("item"); // item (charis embedded font)
                             opf.WriteAttributeString("id", "epub.embedded.font_i_" + fontNum);
+
                             opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.ItalicFilename));
+
                             opf.WriteAttributeString("media-type", "font/opentype/");
                             opf.WriteEndElement(); // item
                             fontNum++;
+			}
                         }
                         // bold
                         if (embeddedFont.HasBold && embeddedFont.Filename.CompareTo(embeddedFont.BoldFilename) != 0)
                         {
+			if(embeddedFont.BoldFilename != string.Empty )
+			{
                             opf.WriteStartElement("item"); // item (charis embedded font)
                             opf.WriteAttributeString("id", "epub.embedded.font_b_" + fontNum);
                             opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.BoldFilename));
@@ -3446,6 +3453,7 @@ namespace SIL.PublishingSolution
                             opf.WriteEndElement(); // item
                             fontNum++;
                         }
+			}
                     }
                 }
             }
@@ -3856,6 +3864,10 @@ namespace SIL.PublishingSolution
             {
                 ApplyXslt(tocFullPath, _fixEpubToc);
             }
+	    else
+	    {
+		FixPlayOrder(tocFullPath);
+	    }
         }
 
         private void FixPlayOrder(string tocFullPath)
