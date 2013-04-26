@@ -533,6 +533,11 @@ namespace SIL.PublishingSolution
                 inProcess.SetStatus("Generating .epub TOC and manifest");
                 CreateOpf(projInfo, contentFolder, bookId);
                 CreateNcx(projInfo, contentFolder, bookId);
+if(_isUnixOS)
+				{
+					AddDtdInXhtml(projInfo, contentFolder);
+				}
+
                 inProcess.PerformStep();
 
                 // Done adding content - now zip the whole thing up and name it
@@ -3870,6 +3875,14 @@ namespace SIL.PublishingSolution
 	    }
         }
 
+	private void AddDtdInXhtml(PublicationInformation projInfo, string contentFolder)
+        {
+            string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
+	foreach (string file in files)
+            {
+		Common.AddingDTDForLinuxProcess(file);
+	}
+	}
         private void FixPlayOrder(string tocFullPath)
         {
             // Renumber all PlayOrder attributes in order with no gaps.
