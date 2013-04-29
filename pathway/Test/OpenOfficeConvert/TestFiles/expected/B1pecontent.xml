@@ -120,7 +120,7 @@
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">7 </text:span>Na komi papara iraani kena padaghamu bali tateli aua nimiu na vaututuni ke pukuni tutuni ba teo. Nimiu na vaututuni ke vaghagna na gol kena pughulia kori joto bali hati aua na komi fata ke dika itagna.</text:span>
             <text:note text:id="ftn1" text:note-class="footnote">
-              <text:note-citation text:label="† ">† </text:note-citation>
+              <text:note-citation text:label="†">†</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">1:7 = </text:span>
@@ -134,6 +134,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="f7ba33092-b30d-451d-b1af-b5719418562b" />
               <text:bookmark-end text:name="f7ba33092-b30d-451d-b1af-b5719418562b" /> Ma nimiu na vaututuni ke nagho vano tagna na gol ke boi mono thovohaliu. Gi keda talu heta nimiu na vaututuni leghugna ke govu na komi papara, a God keda veletokeghamu me ghaghana boheghamu tagna na maghavu a Jisas Krais keda tabiru mai.</text:span>
@@ -163,8 +164,7 @@
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">16 </text:span>A God ke velea tadia na komi Rioriso ke Tabu, “Oti mono tabu eigna inau ku tabu.”</text:span>
             <text:note text:id="ftn2" text:note-class="footnote">
-              <text:note-citation text:label=" ">
-              </text:note-citation>
+              <text:note-citation text:label="" />
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">1:16 = </text:span>
@@ -172,6 +172,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:bookmark-start text:name="fdf091ef0-3e60-493d-a403-f543d7981e23" />
@@ -208,8 +209,7 @@
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Line1_scrSection_columns_scrBook_scrBody"> 25 </text:span>kari na haghoregna a Lod ke mono thovohaliu.”</text:span>
             <text:note text:id="ftn3" text:note-class="footnote">
-              <text:note-citation text:label=" ">
-              </text:note-citation>
+              <text:note-citation text:label="" />
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">1:25 = </text:span>
@@ -217,6 +217,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_ParagraphContinuation_scrSection_columns_scrBook_scrBody">
@@ -246,7 +247,7 @@
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody"> 4 </text:span>Oti mai tagna a Lod Jisas Krais ke heghita na havi mathangani. Imanea ke vaghagna na naghoi ghahira kori hidigna na vathe.</text:span>
             <text:note text:id="ftn4" text:note-class="footnote">
-              <text:note-citation text:label="† ">† </text:note-citation>
+              <text:note-citation text:label="†">†</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">2:4 = </text:span>
@@ -256,6 +257,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="f5b0eba9d-b90d-456b-9d9c-152c9d5ed0e8" />
               <text:bookmark-end text:name="f5b0eba9d-b90d-456b-9d9c-152c9d5ed0e8" /> Na ghahira iangeni, na komi tinoni kena bosi magnahaghinia, kari a God ke vahia me toatogha ke nagho vano. </text:span>
@@ -273,8 +275,7 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">Ahai ke vaututunia, imanea teo keda toatogha ke boi toke ke vaututunia.”</text:span>
             <text:note text:id="ftn5" text:note-class="footnote">
-              <text:note-citation text:label=" ">
-              </text:note-citation>
+              <text:note-citation text:label="" />
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2:6 = </text:span>
@@ -282,6 +283,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
             <text:bookmark-start text:name="f97a912ed-9b5e-4f71-b8bf-7853dd31e237" />
@@ -295,8 +297,7 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">ikageeni na ghahira iaani na naghoi ghahira kori hidigna na vathe.”</text:span>
             <text:note text:id="ftn6" text:note-class="footnote">
-              <text:note-citation text:label=" ">
-              </text:note-citation>
+              <text:note-citation text:label="" />
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2:7 = </text:span>
@@ -304,6 +305,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
             <text:bookmark-start text:name="fd9f0c8d8-cecf-48a1-9d75-1ebf00ca1197" />
@@ -314,8 +316,7 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">“Iaani na ghahira ke vapejuraghinira na komi tinoni ke sethe eigna kedana sikili.”</text:span>
             <text:note text:id="ftn7" text:note-class="footnote">
-              <text:note-citation text:label=" ">
-              </text:note-citation>
+              <text:note-citation text:label="" />
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2:8 = </text:span>
@@ -323,6 +324,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_ParagraphContinuation_scrSection_columns_scrBook_scrBody">
@@ -348,7 +350,7 @@
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody"> 13 </text:span>A Lod ke magnahaghinighamu kotida leghua na haghoredia arahai kena vunaghi pungusighamu kori maramagna, haluhadi na King gna i Rom,</text:span>
             <text:note text:id="ftn8" text:note-class="footnote">
-              <text:note-citation text:label="† ">† </text:note-citation>
+              <text:note-citation text:label="†">†</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">2:13 = </text:span>
@@ -357,6 +359,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="fd09cf77e-71d7-4ec8-a193-f3ee594c17a3" />
               <text:bookmark-end text:name="fd09cf77e-71d7-4ec8-a193-f3ee594c17a3" /> eigna imanea ke vunaghi pungusira na komi tinoni gougovu. </text:span>
@@ -376,7 +379,7 @@
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody"> 18 </text:span>Ighamu na komi tinoni seka,</text:span>
             <text:note text:id="ftn9" text:note-class="footnote">
-              <text:note-citation text:label="† ">† </text:note-citation>
+              <text:note-citation text:label="†">†</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">2:18 = </text:span>
@@ -385,6 +388,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="f3d72e7a7-431d-4bfb-9023-72c6e17b9574" />
               <text:bookmark-end text:name="f3d72e7a7-431d-4bfb-9023-72c6e17b9574" /> oti leghua na haghoredia na komi vunaghimiu moti ghaghana bohera hahali. Kekeha vunaghimiu ke toke mena eia vanighamu na komi puhi ke toke. Keana kekeha kena eia na hava ke dika itamiu. Oti leghura gougovu vamua. </text:span>
@@ -463,8 +467,7 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">Keana a Lod ke sokara pungusira arahai kena eia na komi fata ke dika.”</text:span>
             <text:note text:id="ftn10" text:note-class="footnote">
-              <text:note-citation text:label=" ">
-              </text:note-citation>
+              <text:note-citation text:label="" />
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">3:12 = </text:span>
@@ -472,6 +475,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="SectionHeadMajor_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_SectionHeadMajor_scrSection_columns_scrBook_scrBody">
@@ -570,8 +574,7 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">na hava keda padara arahai kena boi leghua a God mena eia na komi puhi ke dika na?”</text:span>
             <text:note text:id="ftn11" text:note-class="footnote">
-              <text:note-citation text:label=" ">
-              </text:note-citation>
+              <text:note-citation text:label="" />
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">4:18 = </text:span>
@@ -579,6 +582,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:bookmark-start text:name="fc1d7c22a-20dd-48c5-9031-fc150482477b" />
@@ -617,8 +621,7 @@
           <text:p text:style-name="Line1_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Line1_scrSection_columns_scrBook_scrBody">keana imanea ke vatokera arahai kena mono taluleghu.”</text:span>
             <text:note text:id="ftn12" text:note-class="footnote">
-              <text:note-citation text:label=" ">
-              </text:note-citation>
+              <text:note-citation text:label="" />
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">5:5 = </text:span>
@@ -626,6 +629,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
             <text:bookmark-start text:name="f8e617e9c-8bc3-4091-9ca7-75917b7c2229" />
@@ -671,7 +675,7 @@
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">14 </text:span>Oti veikubaeghi</text:span>
             <text:note text:id="ftn13" text:note-class="footnote">
-              <text:note-citation text:label="† ">† </text:note-citation>
+              <text:note-citation text:label="†">†</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">5:14 = </text:span>
@@ -685,6 +689,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="f76f7340b-9db4-4240-b198-cc95bb9af371" />
               <text:bookmark-end text:name="f76f7340b-9db4-4240-b198-cc95bb9af371" /> kori dotho. Inau ku tarai gi a God keda heghamu ighamu koti mono haidu toetoke duagna a Krais na soleana kori havimiu.</text:span>

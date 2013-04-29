@@ -249,7 +249,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">22‑23 </text:span>ప్రవక్త ద్వారా ప్రభువు ఈ విధంగా చెప్పాడు: “కన్యక గర్భవతియై మగ శిశువును ప్రసవిస్తుంది. వాళ్ళాయనను ఇమ్మానుయేలు అని పిలుస్తారు”</text:span>
             <text:note text:id="ftn1" text:note-class="footnote">
-              <text:note-citation text:label="a ">a </text:note-citation>
+              <text:note-citation text:label="a">a</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">122-23 </text:span>
@@ -260,6 +260,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-1" />
               <text:bookmark-end text:name="footnote-mat-1" /> ఇది నిజం కావటానికే ఇలా జరిగింది. </text:span>
@@ -293,7 +294,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">4 </text:span>అతడు ప్రధానయాజకుల్ని, పండితుల్ని</text:span>
             <text:note text:id="ftn2" text:note-class="footnote">
-              <text:note-citation text:label="a ">a </text:note-citation>
+              <text:note-citation text:label="a">a</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -304,6 +305,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-2" />
               <text:bookmark-end text:name="footnote-mat-2" /> సమావేశపరచి, “క్రీస్తు ఎక్కడ జన్మించబోతున్నాడు?” అని అడిగాడు. </text:span>
@@ -357,7 +359,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">15 </text:span>యోసేపు హేరోదు మరణించేదాకా అక్కడే ఉండి పొయ్యాడు. తద్వారా ప్రభువు ప్రవక్త ద్వారా, “నేను నా కుమారుణ్ణి ఈజిప్టు నుండి పిలుస్తాను”</text:span>
             <text:note text:id="ftn3" text:note-class="footnote">
-              <text:note-citation text:label="b ">b </text:note-citation>
+              <text:note-citation text:label="b">b</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">215 </text:span>
@@ -368,6 +370,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-3" />
               <text:bookmark-end text:name="footnote-mat-3" /> అని అన్న మాట నిజమైంది. </text:span>
@@ -434,7 +437,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody"> 1 </text:span>బాప్తిస్మము</text:span>
             <text:note text:id="ftn4" text:note-class="footnote">
-              <text:note-citation text:label="b ">b </text:note-citation>
+              <text:note-citation text:label="b">b</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -445,6 +448,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-4" />
               <text:bookmark-end text:name="footnote-mat-4" /> యిచ్చే యోహాను, ఆ కాలంలో యూదయ దేశంలోని ఎడారిలో ఉపదేశిస్తూ ఉండేవాడు. </text:span>
@@ -477,7 +481,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">7 </text:span>పరిసయ్యులు</text:span>
             <text:note text:id="ftn5" text:note-class="footnote">
-              <text:note-citation text:label="c ">c </text:note-citation>
+              <text:note-citation text:label="c">c</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -488,11 +492,12 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-5" />
               <text:bookmark-end text:name="footnote-mat-5" /> సద్దూకయ్యులు</text:span>
             <text:note text:id="ftn6" text:note-class="footnote">
-              <text:note-citation text:label="d ">d </text:note-citation>
+              <text:note-citation text:label="d">d</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -503,6 +508,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-6" />
               <text:bookmark-end text:name="footnote-mat-6" /> యోహాను బాప్తిస్మమునిస్తున్న ప్రాంతానికి వచ్చారు. అతడు వాళ్ళను చూసి, “మీరు సర్పసంతానం. దేవుని కోపం నుండి తప్పించుకొనుటకు మిమ్మల్ని ఎవరు హెచ్చరించారు? </text:span>
@@ -717,7 +723,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">25 </text:span>గలిలయ నుండి, దెకపొలి</text:span>
             <text:note text:id="ftn7" text:note-class="footnote">
-              <text:note-citation text:label="e ">e </text:note-citation>
+              <text:note-citation text:label="e">e</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -728,6 +734,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-7" />
               <text:bookmark-end text:name="footnote-mat-7" /> నుండి, యెరూషలేము నుండి, యూదయ నుండి, యొర్దాను నది అవతలి వైపుననున్న ప్రాంతాల నుండి ప్రజలు గుంపులు గుంపులుగా ఆయన్ని అనుసరించారు. </text:span>
@@ -847,7 +854,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">20 </text:span>ఎందుకంటే, మీరు శాస్త్రులకన్నా, పరిసయ్యుల</text:span>
             <text:note text:id="ftn8" text:note-class="footnote">
-              <text:note-citation text:label="f ">f </text:note-citation>
+              <text:note-citation text:label="f">f</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -858,6 +865,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-8" />
               <text:bookmark-end text:name="footnote-mat-8" /> కన్నా గొప్ప నీతిమంతులని గుర్తింపబడక పోతే దేవుని రాజ్యంలోకి ప్రవేశింపలేరని నేను చెబుతున్నాను. </text:span>
@@ -871,7 +879,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">22 </text:span>కాని నేను చెప్పేదేమిటంటే తన సోదరునిపై కోపగించిన</text:span>
             <text:note text:id="ftn9" text:note-class="footnote">
-              <text:note-citation text:label="g ">g </text:note-citation>
+              <text:note-citation text:label="g">g</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -882,6 +890,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-9" />
               <text:bookmark-end text:name="footnote-mat-9" /> ప్రతి వ్యక్తి శిక్షింపబడతాడు. తన సోదరుణ్ణి ‘పనికిమాలినవాడా’ అన్న ప్రతి వ్యక్తి మహాసభకు సమాధానం చెప్పవలసి ఉంటుంది. తన సోదరుణ్ణి ‘మూర్ఖుడా!’ అన్న ప్రతి వ్యక్తి నరకంలో అగ్నిపాలు కావలసి వస్తుంది. </text:span>
@@ -903,7 +912,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">27 </text:span>“‘వ్యభిచారం చేయరాదు’</text:span>
             <text:note text:id="ftn10" text:note-class="footnote">
-              <text:note-citation text:label="c ">c </text:note-citation>
+              <text:note-citation text:label="c">c</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">527 </text:span>
@@ -914,6 +923,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-10" />
               <text:bookmark-end text:name="footnote-mat-10" /> అని చెప్పటం మీరు విన్నారు. </text:span>
@@ -934,7 +944,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">31 </text:span>“‘తన భార్యకు విడాకులివ్వదలచిన వ్యక్తి ఆమెకు ఒక విడాకుల పత్రం ఇవ్వాలి’</text:span>
             <text:note text:id="ftn11" text:note-class="footnote">
-              <text:note-citation text:label="d ">d </text:note-citation>
+              <text:note-citation text:label="d">d</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">531 </text:span>
@@ -945,6 +955,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-11" />
               <text:bookmark-end text:name="footnote-mat-11" /> అని చెప్పే వాళ్ళు. </text:span>
@@ -976,7 +987,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">38 </text:span>“‘కంటికి కన్ను, పంటికి పన్ను ఊడ దీయాలి’</text:span>
             <text:note text:id="ftn12" text:note-class="footnote">
-              <text:note-citation text:label="e ">e </text:note-citation>
+              <text:note-citation text:label="e">e</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">538 </text:span>
@@ -987,6 +998,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-12" />
               <text:bookmark-end text:name="footnote-mat-12" /> అని అనటం మీరు విన్నారు. </text:span>
@@ -1009,7 +1021,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">43 </text:span>“‘పొరుగింటి వాణ్ణి ప్రేమించండి. శత్రువును ద్వేషించండి’</text:span>
             <text:note text:id="ftn13" text:note-class="footnote">
-              <text:note-citation text:label="f ">f </text:note-citation>
+              <text:note-citation text:label="f">f</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">543 </text:span>
@@ -1020,13 +1032,14 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-13" />
               <text:bookmark-end text:name="footnote-mat-13" /> అని చెప్పటం మీరు విన్నారు. </text:span>
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">44 </text:span>కాని నేను చెప్పేదేమిటంటే ‘మీ శత్రువుల్ని ప్రేమించండి</text:span>
             <text:note text:id="ftn14" text:note-class="footnote">
-              <text:note-citation text:label="h ">h </text:note-citation>
+              <text:note-citation text:label="h">h</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -1037,6 +1050,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-14" />
               <text:bookmark-end text:name="footnote-mat-14" /> మిమ్మల్ని హింసించిన వాళ్ళ కోసం దేవుణ్ణి ప్రార్థించండి.’ </text:span>
@@ -1124,7 +1138,7 @@
           <text:p text:style-name="Line2_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_.zxx_Line2_scrSection_columns_scrBook_scrBody">పైగా మమ్ములను దుష్టుని నుండి కాపాడుము.’</text:span>
             <text:note text:id="ftn15" text:note-class="footnote">
-              <text:note-citation text:label="a ">a </text:note-citation>
+              <text:note-citation text:label="a">a</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -1134,6 +1148,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="Stanza_Break" />
           <text:p text:style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
@@ -1545,7 +1560,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">13 </text:span>‘నేను కోరేది దయ, జంతువుల బలినికాదు’</text:span>
             <text:note text:id="ftn16" text:note-class="footnote">
-              <text:note-citation text:label="g ">g </text:note-citation>
+              <text:note-citation text:label="g">g</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">913 </text:span>
@@ -1556,6 +1571,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-16" />
               <text:bookmark-end text:name="footnote-mat-16" /> అనే వాక్యానికి అర్థమేమిటో వెళ్ళి నేర్చుకోండి. ఎందుకంటే నేను నీతిమంతులను పిలవటానికి రాలేదు. పాపులను పిలవటానికి వచ్చాను” అని అన్నాడు. </text:span>
@@ -1774,7 +1790,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">25 </text:span>విద్యార్థి గురువులా ఉంటే చాలు. అలాగే సేవకుడు యజమానిలా ఉంటే చాలు. ఇంటి యజమానినే బయెల్జెబూలు</text:span>
             <text:note text:id="ftn17" text:note-class="footnote">
-              <text:note-citation text:label="i ">i </text:note-citation>
+              <text:note-citation text:label="i">i</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -1785,6 +1801,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-17" />
               <text:bookmark-end text:name="footnote-mat-17" /> అని అన్న వాళ్ళు ఆ యింటివాళ్ళను యింకెంత అంటారో కదా! </text:span>
@@ -2037,7 +2054,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">7 </text:span>‘నాకు దయకావాలి, బలికాదు’</text:span>
             <text:note text:id="ftn18" text:note-class="footnote">
-              <text:note-citation text:label="h ">h </text:note-citation>
+              <text:note-citation text:label="h">h</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">127 </text:span>
@@ -2048,6 +2065,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-18" />
               <text:bookmark-end text:name="footnote-mat-18" /> అన్న వాక్యంలోని అర్థం మీకు తెలిసివుంటే మీరు అమాయకుల్ని అవమానించే వాళ్ళు కాదు. </text:span>
@@ -2755,7 +2773,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">24 </text:span>యేసు, “తప్పిపోయిన ఇశ్రాయేలు ప్రజల</text:span>
             <text:note text:id="ftn19" text:note-class="footnote">
-              <text:note-citation text:label="j ">j </text:note-citation>
+              <text:note-citation text:label="j">j</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -2766,6 +2784,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-19" />
               <text:bookmark-end text:name="footnote-mat-19" /> కోసం మాత్రమే దేవుడు నన్ను పంపాడు” అని అన్నాడు. </text:span>
@@ -2948,7 +2967,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">26 </text:span>ప్రపంచాన్నంతా జయించి తన ప్రాణాన్ని</text:span>
             <text:note text:id="ftn20" text:note-class="footnote">
-              <text:note-citation text:label="k ">k </text:note-citation>
+              <text:note-citation text:label="k">k</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -2959,6 +2978,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-20" />
               <text:bookmark-end text:name="footnote-mat-20" /> పొగొట్టుకొన్న వ్యక్తికి ఏం లాభం కలుగుతుంది? ఆ ప్రాణాన్ని తిరిగి పొందటానికి అతడేమివ్వగలుగుతాడు? </text:span>
@@ -3086,7 +3106,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">27 </text:span>కాని వాళ్ళకాటంకం కలిగించటం నాకిష్టం లేదు. సరస్సు దగ్గరకు వెళ్ళి గాలం వెయ్యి! మొదట పట్టుకొన్న చేప నోటిని తెరిచి చూస్తే నీకు నాలుగు ద్రాక్మాల</text:span>
             <text:note text:id="ftn21" text:note-class="footnote">
-              <text:note-citation text:label="l ">l </text:note-citation>
+              <text:note-citation text:label="l">l</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -3097,6 +3117,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-21" />
               <text:bookmark-end text:name="footnote-mat-21" /> నాణెం కనబడుతుంది. దాన్ని తీసుకువెళ్ళి నా పక్షాన, నీ పక్షాన వాళ్ళకు చెల్లించు!” అని అన్నాడు. </text:span>
@@ -3159,7 +3180,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">10 </text:span>“ఈ చిన్న పిల్లల్లో ఎవర్నీ చిన్న చూపు చూడకండి. నేను చెప్పేదేమిటంటే పరలోకంలో ఉన్న వీళ్ళ దూతలు పరలోకంలో ఉన్న నా తండ్రి ముఖాన్ని ఎప్పుడూ చూస్తూ ఉంటారు. </text:span>
             <text:note text:id="ftn22" text:note-class="footnote">
-              <text:note-citation text:label="b ">b </text:note-citation>
+              <text:note-citation text:label="b">b</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -3169,6 +3190,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:bookmark-start text:name="footnote-mat-22" />
@@ -3214,7 +3236,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">22 </text:span>యేసు ఈ విధంగా సమాధానం చెప్పాడు, “ఏడుసార్లు కాదు, డెబ్బది ఏడు సార్లు</text:span>
             <text:note text:id="ftn23" text:note-class="footnote">
-              <text:note-citation text:label="m ">m </text:note-citation>
+              <text:note-citation text:label="m">m</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -3225,6 +3247,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-23" />
               <text:bookmark-end text:name="footnote-mat-23" /> క్షమించాలని చెబుతున్నాను. </text:span>
@@ -3235,7 +3258,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">24 </text:span>ఆ రాజు లెక్కలు పరిష్కరించటం మొదలు పెట్టగానే వేలకొలది తలాంతులు</text:span>
             <text:note text:id="ftn24" text:note-class="footnote">
-              <text:note-citation text:label="n ">n </text:note-citation>
+              <text:note-citation text:label="n">n</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -3246,6 +3269,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-24" />
               <text:bookmark-end text:name="footnote-mat-24" /> అప్పు ఉన్న ఒక వ్యక్తిని భటులు రాజుగారి దగ్గరకు పిలుచుకు వచ్చారు. </text:span>
@@ -3310,7 +3334,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">4‑5 </text:span>యేసు, “మొదట్లో సృష్టికర్త పురుషుణ్ణి, స్త్రీని సృష్టించి ఇలా అన్నాడు: ‘పురుషుడు తన తల్లి తండ్రులను వదలి తన భార్యతో ఏకమౌతాడు. వాళ్ళిద్దరూ కలసి ఒకే శరీరంగా జీవిస్తారు!’</text:span>
             <text:note text:id="ftn25" text:note-class="footnote">
-              <text:note-citation text:label="i ">i </text:note-citation>
+              <text:note-citation text:label="i">i</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">194-5 </text:span>
@@ -3321,6 +3345,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-25" />
               <text:bookmark-end text:name="footnote-mat-25" /> ఇది మీరు చదువలేదా? </text:span>
@@ -3382,7 +3407,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">19 </text:span>తల్లితండ్రుల్ని గౌరవించాలి.</text:span>
             <text:note text:id="ftn26" text:note-class="footnote">
-              <text:note-citation text:label="j ">j </text:note-citation>
+              <text:note-citation text:label="j">j</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">1919 </text:span>
@@ -3393,11 +3418,12 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-26" />
               <text:bookmark-end text:name="footnote-mat-26" /> మీ పొరుగువాళ్ళను మిమ్మల్మి మీరు ప్రేమించుకొన్నంతగా ప్రేమించాలి” అని సమాధానం చెప్పాడు.</text:span>
             <text:note text:id="ftn27" text:note-class="footnote">
-              <text:note-citation text:label="k ">k </text:note-citation>
+              <text:note-citation text:label="k">k</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">1919 </text:span>
@@ -3408,6 +3434,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:bookmark-start text:name="footnote-mat-27" />
@@ -3677,7 +3704,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">13 </text:span>ఆయన వాళ్ళతో, “‘నా ఆలయం ప్రార్థనాలయం అనిపించుకుంటుంది’</text:span>
             <text:note text:id="ftn28" text:note-class="footnote">
-              <text:note-citation text:label="l ">l </text:note-citation>
+              <text:note-citation text:label="l">l</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2113 </text:span>
@@ -3688,6 +3715,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-28" />
               <text:bookmark-end text:name="footnote-mat-28" /> అని వ్రాసారు. కాని దాన్ని మీరు దోపిడి దొంగల గుహగా మార్చారు” అని అన్నాడు. </text:span>
@@ -3705,7 +3733,7 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">యేసు, “విన్నాను. ‘చిన్న పిల్లలు, పసిపాపలు కూడా నిన్ను స్తుతించేటట్లు చేసావు!’</text:span>
             <text:note text:id="ftn29" text:note-class="footnote">
-              <text:note-citation text:label="m ">m </text:note-citation>
+              <text:note-citation text:label="m">m</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2116 </text:span>
@@ -3716,6 +3744,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-29" />
               <text:bookmark-end text:name="footnote-mat-29" /> అని వ్రాసారు. ఇది మీరు ఎన్నడూ చదువలేదా?” అని అన్నాడు. </text:span>
@@ -3975,7 +4004,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">32 </text:span>‘నేను అబ్రాహాముకు దేవుణ్ణి, ఇస్సాక్కు దేవుణ్ణి, యాకోబుకు దేవుణ్ణి’</text:span>
             <text:note text:id="ftn30" text:note-class="footnote">
-              <text:note-citation text:label="n ">n </text:note-citation>
+              <text:note-citation text:label="n">n</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2232 </text:span>
@@ -3986,6 +4015,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-30" />
               <text:bookmark-end text:name="footnote-mat-30" /> అని అన్నాడు. ఆయన చనిపోయిన వాళ్ళ దేవుడు కాదు. జీవిస్తున్న వాళ్ళ దేవుడు.” </text:span>
@@ -4010,7 +4040,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">37 </text:span>యేసు ఈ విధంగా సమాధానం చెప్పాడు: “మీ ప్రభువైన దేవుణ్ణి సంపూర్ణమైన హృదయంతో, సంపూర్ణమైన ఆత్మతో, సంపూర్ణమైన బుద్ధితో ప్రేమించండి.</text:span>
             <text:note text:id="ftn31" text:note-class="footnote">
-              <text:note-citation text:label="o ">o </text:note-citation>
+              <text:note-citation text:label="o">o</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2237 </text:span>
@@ -4021,6 +4051,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:bookmark-start text:name="footnote-mat-31" />
             <text:bookmark-end text:name="footnote-mat-31" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -4028,7 +4059,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">39 </text:span>రెండవ ఆజ్ఞ కూడా అట్టిదే. ‘నిన్ను నీవు ప్రేమించుకొన్నంతగా నీ పొరుగువాణ్ణి ప్రేమించు’</text:span>
             <text:note text:id="ftn32" text:note-class="footnote">
-              <text:note-citation text:label="p ">p </text:note-citation>
+              <text:note-citation text:label="p">p</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2239 </text:span>
@@ -4039,6 +4070,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:bookmark-start text:name="footnote-mat-32" />
             <text:bookmark-end text:name="footnote-mat-32" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -4130,7 +4162,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">13 </text:span>“శాస్త్రులారా! పరిసయ్యులారా! మీరు మోసగాళ్ళు. మీకు శిక్షతప్పదు. దేవుని రాజ్యంలోకి ప్రజల్ని ప్రవేశింపనీయకుండా మీరు దాని మార్గాన్ని మూసివేస్తారు. మీరు ప్రవేశించక పోవటమేకాకుండా, ప్రవేశించటానికి ప్రయత్నించే వాళ్ళను కూడా ఆపుతున్నారు. </text:span>
             <text:note text:id="ftn33" text:note-class="footnote">
-              <text:note-citation text:label="c ">c </text:note-citation>
+              <text:note-citation text:label="c">c</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -4140,6 +4172,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:bookmark-start text:name="footnote-mat-33" />
@@ -4465,7 +4498,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">15 </text:span>ఒకనికి ఐదు తలాంతుల</text:span>
             <text:note text:id="ftn34" text:note-class="footnote">
-              <text:note-citation text:label="o ">o </text:note-citation>
+              <text:note-citation text:label="o">o</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -4476,6 +4509,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-34" />
               <text:bookmark-end text:name="footnote-mat-34" /> ధనం ఇచ్చాడు. రెండవ వానికి రెండు తలాంతులు, మూడవ వానికి ఒక తలాంతు వాళ్ళ వాళ్ళ శక్తిని బట్టి ఇచ్చాడు. ఆ తర్వాత ప్రయాణమై వెళ్ళాడు. </text:span>
@@ -4681,7 +4715,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">25 </text:span>అప్పుడు ఆయనకు ద్రోహం చేయనున్న యూదా, “నేను కాదు కదా రబ్బీ”</text:span>
             <text:note text:id="ftn35" text:note-class="footnote">
-              <text:note-citation text:label="p ">p </text:note-citation>
+              <text:note-citation text:label="p">p</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -4692,6 +4726,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-35" />
               <text:bookmark-end text:name="footnote-mat-35" /> అని అన్నాడు. </text:span>
@@ -4699,7 +4734,7 @@
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">యేసు, “ఔను! నువ్వే!”</text:span>
             <text:note text:id="ftn36" text:note-class="footnote">
-              <text:note-citation text:label="q ">q </text:note-citation>
+              <text:note-citation text:label="q">q</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -4710,6 +4745,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-36" />
               <text:bookmark-end text:name="footnote-mat-36" /> అని సమాధానం చెప్పాడు. </text:span>
@@ -4730,7 +4766,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">28 </text:span>ఇది నా ఒడంబడిక</text:span>
             <text:note text:id="ftn37" text:note-class="footnote">
-              <text:note-citation text:label="r ">r </text:note-citation>
+              <text:note-citation text:label="r">r</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -4741,6 +4777,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-37" />
               <text:bookmark-end text:name="footnote-mat-37" /> రక్తం. అనేకులకు పాప క్షమాపణ కలగాలని నేనీ రక్తాన్ని చిందించాను. </text:span>
@@ -4854,7 +4891,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">53 </text:span>నేను నా తండ్రిని సహాయం కావాలని అడగలేననుకొన్నావా? నేను అడిగిన వెంటనే పన్నెండు దళాలకంటే</text:span>
             <text:note text:id="ftn38" text:note-class="footnote">
-              <text:note-citation text:label="s ">s </text:note-citation>
+              <text:note-citation text:label="s">s</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -4865,6 +4902,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-38" />
               <text:bookmark-end text:name="footnote-mat-38" /> ఎక్కువ మంది దేవదూతల్ని పంపుతాడు. </text:span>
@@ -5005,7 +5043,7 @@
           <text:p text:style-name="EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_.zxx_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">“వాళ్ళు ముప్పై వెండి నాణెములను తెచ్చారు. ఇది అతని విలువ. ఇది ఇశ్రాయేలు ప్రజలు నిర్ణయించిన విలువ. ప్రభువు ఆజ్ఞాపించినట్లు వాళ్ళు ఆ ధనంతో కుమ్మరి పొలాన్ని కొన్నారు.”</text:span>
             <text:note text:id="ftn39" text:note-class="footnote">
-              <text:note-citation text:label="t ">t </text:note-citation>
+              <text:note-citation text:label="t">t</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -5016,6 +5054,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
           </text:p>
           <text:p text:style-name="SectionHead_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_.zxx_SectionHead_scrSection_columns_scrBook_scrBody">
@@ -5139,7 +5178,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">35 </text:span>ఆయన్ని సిలువకు వేసాక ఆయన దుస్తుల్ని చీట్లువేసి పంచుకున్నారు.</text:span>
             <text:note text:id="ftn40" text:note-class="footnote">
-              <text:note-citation text:label="u ">u </text:note-citation>
+              <text:note-citation text:label="u">u</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteGeneralParagraph">
                   <text:span text:style-name="NoteGeneralParagraph..footnote-marker">
@@ -5150,6 +5189,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:bookmark-start text:name="footnote-mat-40" />
             <text:bookmark-end text:name="footnote-mat-40" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -5191,7 +5231,7 @@
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">“ఏలీ! ఏలీ! లామా సబక్తానీ?”</text:span>
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody"> అని కేక వేసాడు. అంటే, “నా దైవమా! నా దైవమా! నన్నెందుకు ఒంటరిగా ఒదిలివేసావు?”</text:span>
             <text:note text:id="ftn41" text:note-class="footnote">
-              <text:note-citation text:label="q ">q </text:note-citation>
+              <text:note-citation text:label="q">q</text:note-citation>
               <text:note-body>
                 <text:p text:style-name="NoteCrossHYPHENReferenceParagraph">
                   <text:span text:style-name="NoteCrossHYPHENReferenceParagraph..footnote-marker">2746 </text:span>
@@ -5202,6 +5242,7 @@
                 </text:p>
               </text:note-body>
             </text:note>
+            <text:s text:c="1" />
             <text:span text:style-name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:bookmark-start text:name="footnote-mat-41" />
               <text:bookmark-end text:name="footnote-mat-41" /> అని అర్థం. </text:span>

@@ -1366,7 +1366,8 @@ namespace SIL.PublishingSolution
                 //footCallSymb = " ";
                 _isEmptyTitleExist = true;
             }
-            footCallSymb = footCallSymb.Trim() + " ";
+            //footCallSymb = footCallSymb.Trim() + " ";
+            footCallSymb = footCallSymb.Trim();
             string footerCall = footerClassName + "..footnote-call";
             string footerMarker = footerClassName + "..footnote-marker";
             if (IdAllClass.ContainsKey(footerCall) && String.IsNullOrEmpty(footCallSymb))
@@ -1399,6 +1400,10 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
             //isFootnote = false;
+
+            _writer.WriteStartElement("text:s"); // Insert space after the footnote call
+            _writer.WriteAttributeString("text:c", "1");
+            _writer.WriteEndElement();
         }
 
         private static string NoteCrossHyphenReferenceContentNodeMissing(string content)
