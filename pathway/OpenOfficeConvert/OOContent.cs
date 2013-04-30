@@ -3155,11 +3155,10 @@ namespace SIL.PublishingSolution
                 //if (content == "inde")
                 //    fillHeadword = false;
                 if (_previousParagraphName == null) _previousParagraphName = string.Empty;
-                if ((_classNameWithLang.IndexOf("headword") == 0 || (_classNameWithLang.IndexOf("reversalform") == 0 || _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0 || _childName.Replace("span_", "").IndexOf("reversalform") == 0))
-                    && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0
-                    || _previousParagraphName.IndexOf("picture") >= 0))
+                if ((_classNameWithLang.IndexOf("headwordminor") == 0 ||_classNameWithLang.IndexOf("headword") == 0 || (_classNameWithLang.IndexOf("reversalform") == 0 ||_childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0 ||_childName.Replace("span_", "").IndexOf("reversalform") == 0))
+                    && (_previousParagraphName.IndexOf("minorentries_") == 0 ||_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0 || _previousParagraphName.IndexOf("picture") >= 0))
                 {
-                    fillHeadword = true; 
+                    fillHeadword = true;
                 }
             }
             else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture
