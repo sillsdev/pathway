@@ -759,7 +759,7 @@ namespace SIL.PublishingSolution
             LOStyles inStyles = new LOStyles();
             inStyles._multiLanguageHeader = isMultiLanguageHeader;
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
-
+            string customFootnoteCaller = inStyles._customFootnoteCaller;
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
@@ -809,8 +809,7 @@ namespace SIL.PublishingSolution
             cXML.RefFormat = this._refFormat;
 
             SetHeaderFontName(projInfo, idAllClass);
-
-            cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize);
+            cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize, customFootnoteCaller);
             PostProcess(projInfo);
 
             if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)

@@ -726,6 +726,16 @@ namespace SIL.PublishingSolution
             get { return pnlReferenceFormat; }
         }
 
+        public CheckBox ChkIncludeCusFnCaller
+        {
+            get { return chkIncludeCusFnCaller; }
+        }
+
+        public TextBox TxtFnCallerSymbol
+        {
+            get { return txtFnCallerSymbol; }
+        }
+
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
@@ -1270,6 +1280,12 @@ namespace SIL.PublishingSolution
             _CToolBL.chkFixedLineHeight_CheckedChangedBL();
         }
 
+        private void chkIncludeCusFnCaller_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkIncludeCusFnCaller_CheckedChangedBL(sender, e);
+        }
+
         private void txtFtpFileLocation_Validated(object sender, EventArgs e)
         {
             _CToolBL.txtFtpFileLocation_ValidatedBL(sender, e);
@@ -1344,6 +1360,12 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
+        }
+
+        private void txtFnCallerSymbol_KeyUp(object sender, KeyEventArgs e)
+        {
+            _CToolBL.txtFnCallerSymbol_KeyUpBL();
+            _CToolBL.SetModifyMode(true);
         }
     }
 }

@@ -168,6 +168,9 @@ namespace SIL.PublishingSolution
 
         List<string> _headwordVariable = new List<string>();
         private int _headwordIndex = 0;
+        private bool _isFootnoteCallerStared;
+        private string _customFootnoteSymbol = string.Empty;
+
         #endregion
 
         #region Public Variable
@@ -202,14 +205,17 @@ namespace SIL.PublishingSolution
             return mat.Count;
         }
 
-        public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
+        public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass,
+            Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize, string customFootnote)
         {
             OldStyles styleInfo = new OldStyles();
             _pageWidth = pageWidth;
             _structStyles = styleInfo;
             _structStyles.IsMacroEnable = true;
             _pageSize = pageSize;
+            _isFootnoteCallerStared = true;
             _isFromExe = Common.CheckExecutionPath();
+            _customFootnoteSymbol = customFootnote;
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             ProcessProperty();
@@ -1552,12 +1558,19 @@ namespace SIL.PublishingSolution
                     try
                     {
                         footCallSymb = _reader.GetAttribute(attrName);
-                        if (footCallSymb.Trim().Length == 0)
-                            footCallSymb = "\u2006";
+                        if (_customFootnoteSymbol != null && _customFootnoteSymbol.ToLower() != "default")
+                        {
+                            footCallSymb = _customFootnoteSymbol;
+                        }
+                        else if (footCallSymb != null && footCallSymb.Trim().Length == 0)
+                        {
+                            footCallSymb = "*";
+                        }
                     }
                     catch (NullReferenceException)
                     {
-                        footCallSymb = "\u2006";
+                        //footCallSymb = "\u2006";
+                        footCallSymb = "*";
                     }
                 }
             }

@@ -139,6 +139,7 @@ namespace SIL.PublishingSolution
         protected TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
         private ConfigurationTool cTool;
         Dictionary<string, string> pageDict = new Dictionary<string, string>();
+        protected string _includeFootnoteCaller;
         #endregion
 
         #region Constructor
@@ -212,6 +213,16 @@ namespace SIL.PublishingSolution
                 string task = "@page";
                 string key = "margin-top";
                 return GetValue(task, key, "0");
+            }
+        }
+
+        public string CustomFootnoteCaller
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-custom-footnote-caller";
+                return GetValue(task, key, "Default");
             }
         }
 
@@ -891,6 +902,11 @@ namespace SIL.PublishingSolution
                         value["margin-left"] = cTool.TxtPageInside.Text;
                         value["-ps-fileproduce"] = "\"" + _fileProduce + "\"";
                         value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
+                        if (inputTypeBL.ToLower() == "scripture")
+                        {
+                            value["-ps-custom-footnote-caller"] = "\"" + _includeFootnoteCaller + "\"";
+                        }
+                        
                         WriteCssClass(writeCss, "page", value);
                     }
                     // write out the changes
@@ -1041,6 +1057,16 @@ namespace SIL.PublishingSolution
             if (inputTypeBL.ToLower() == "scripture")
             {
                 cTool.DdlReferenceFormat.SelectedItem = ReferenceFormat;
+                if(CustomFootnoteCaller.ToLower() == "default")
+                {
+                    cTool.ChkIncludeCusFnCaller.Checked = false;
+                    cTool.TxtFnCallerSymbol.Text = "";
+                }
+                else
+                {
+                    cTool.ChkIncludeCusFnCaller.Checked = true;
+                    cTool.TxtFnCallerSymbol.Text = CustomFootnoteCaller;
+                }
             }
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
@@ -3786,6 +3812,27 @@ namespace SIL.PublishingSolution
                 cTool.LblPx.Enabled = _includeImage;
                 Param.UpdateOthersAtrrib("IncludeImage", cTool.ChkIncludeImage.Checked ? "Yes" : "No", StyleName);
                 SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
+        public void chkIncludeCusFnCaller_CheckedChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                cTool.TxtFnCallerSymbol.Enabled = cTool.ChkIncludeCusFnCaller.Checked;
+                if (cTool.ChkIncludeCusFnCaller.Checked == false)
+                    cTool.TxtFnCallerSymbol.Text = "";
+                _includeFootnoteCaller = cTool.TxtFnCallerSymbol.Text;
+            }
+            catch { }
+        }
+
+        public void txtFnCallerSymbol_KeyUpBL()
+        {
+            try
+            {
+                _includeFootnoteCaller = cTool.TxtFnCallerSymbol.Text;
             }
             catch { }
         }
