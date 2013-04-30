@@ -197,8 +197,8 @@
     </feature>
   </features>
   <categories>
-    <category name="Publisher" select="Wycliffe Bible Translators">
-      <item name="Wycliffe Bible Translators" />
+    <category name="Publisher" select="WBT">
+      <item name="WBT" />
       <item name="UBS" />
     </category>
     <category name="Media" select="mobile">

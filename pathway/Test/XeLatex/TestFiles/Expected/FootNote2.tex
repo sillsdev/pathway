@@ -1,21 +1,21 @@
-\documentclass{article} 
+\documentclass[a4paper]{article} 
+
+\usepackage{changepage}
 \usepackage{float}
+\usepackage{grffile}
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{fontspec}
 \usepackage{fancyhdr}
 \usepackage{multicol}
-
+\usepackage{calc}
+\usepackage{lettrine}
+\usepackage[margin=2cm,includeheadfoot]{geometry}
 \begin{document} 
-\thispagestyle{empty} 
-\font\AlternateReadingNoteGeneralParagraphParagraphscrBookscrBody="Charis SIL Compact/I" at 12pt
-\font\spanNoteGeneralParagraphParagraphscrBookscrBody="Times New Roman" at 12pt
-\font\NoteGeneralParagraphParagraphscrBookscrBody="Times New Roman" at 12pt
-\font\spanParagraphscrBookscrBody="Times New Roman" at 12pt
-\font\VerseNumberParagraphscrBookscrBody="Times New Roman" at 12pt
-\font\ParagraphscrBookscrBody="Times New Roman" at 12pt
-\font\scrBookscrBody="Times New Roman" at 12pt
-\leftskip 0pt{\leftskip 0pt{
-\noindent{\VerseNumberParagraphscrBookscrBody{$^{2 }$}}}\spanParagraphscrBookscrBody{Abraham lɔ́kwɩɩ́ Isak. Isak lɔ́kwɩɩ́ Yakob. Yakob lɔ́kwɩɩ́ Yuda mʋa mʋ apio yinhɛ́ }\leftskip 0pt{}  \footnote {1:2  Apio yinhɛ́  ánfɩ gyí Israel abusuan dúanyɔ ámʋ anáin nɩ. } \spanParagraphscrBookscrBody{. }\leftskip 0pt{\noindent{\VerseNumberParagraphscrBookscrBody{$^{3 }$}}}\spanParagraphscrBookscrBody{Yuda lɔ́kwɩɩ́ Peres mʋa Sera. Amʋ́ yín gyí Tamar. Peres lɔ́kwɩɩ́ Hesron. Hesron lɔ́kwɩɩ́ Ram. }\leftskip 0pt{\noindent{\VerseNumberParagraphscrBookscrBody{$^{4 }$}}}\spanParagraphscrBookscrBody{Ram lɔ́kwɩɩ́ Aminadab. Aminadab lɔ́kwɩɩ́ Nahson. Nahson lɔ́kwɩɩ́ Salmon. }\leftskip 0pt{\noindent{\VerseNumberParagraphscrBookscrBody{$^{5 }$}}}\spanParagraphscrBookscrBody{Salmon lɔ́kwɩɩ́ Boas. Boas mʋ yin gyí Rahab. Boas lɔ́kwɩɩ́ Obed. Obed mʋ yin gyí Rut. Obed lɔ́kwɩɩ́ Yisai. }\leftskip 0pt{\noindent{\VerseNumberParagraphscrBookscrBody{$^{6 }$}}}\spanParagraphscrBookscrBody{Yisai lɔ́kwɩɩ́ Owíe Dawid. }
+\pagestyle{plain} 
+\font\scriptureTextscrBody="Times New Roman" at 12pt
+\font\sectionscriptureTextscrBody="Times New Roman" at 12pt
+\font\psectionscriptureTextscrBody="Times New Roman" at 12pt
+\font\footnotepsectionscriptureTextscrBody="Times New Roman" at 9pt
 
-\end{document}
+\pagestyle{fancy} 

@@ -658,7 +658,8 @@ namespace SIL.PublishingSolution
                     newNode.AppendChild(optionNode2);
                     newNode.AppendChild(optionNode3);
 
-                    featuresNode.ParentNode.ReplaceChild(newNode, referencesNode);
+                    if (featuresNode.ParentNode != null) 
+                        featuresNode.ParentNode.ReplaceChild(newNode, referencesNode);
                     //featuresNode.RemoveChild(referencesNode);
                     //featuresNode.AppendChild(newNode);
                 }

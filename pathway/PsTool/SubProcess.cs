@@ -20,6 +20,7 @@ using System.Resources;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace SIL.Tool
 {
@@ -31,6 +32,9 @@ namespace SIL.Tool
         public static int ExitCode;
         public static string RedirectOutput;
         public static string LastError;
+        private static Process myProcess = new Process();
+        private static int elapsedTime;
+        private static bool eventHandled;
 
         #region RunProcess
 
@@ -84,7 +88,7 @@ namespace SIL.Tool
                 sb.AppendLine(e.StackTrace);
                 stdErr = sb.ToString();
                 stdOut = string.Empty;
-            } 
+            }
             // restore the current directory and return
             Directory.SetCurrentDirectory(theCurrent);
         }
@@ -140,6 +144,66 @@ namespace SIL.Tool
                 p1.Close();
             }
         }
+
+        public static void RunCommand(string instPath, string name, string arg, bool wait)
+        {
+            elapsedTime = 0;
+            eventHandled = false;
+
+            try
+            {
+                // Start a process to print a file and raise an event when done.
+                myProcess.StartInfo.FileName = name;
+                //myProcess.StartInfo.Verb = name;
+                myProcess.StartInfo.Arguments = arg;
+                myProcess.StartInfo.CreateNoWindow = true;
+                myProcess.EnableRaisingEvents = true;
+                myProcess.StartInfo.CreateNoWindow = true;
+                myProcess.StartInfo.UseShellExecute = string.IsNullOrEmpty(RedirectOutput);
+                myProcess.StartInfo.WorkingDirectory = instPath;
+
+                myProcess.Exited += new EventHandler(myProcess_Exited);
+                myProcess.Start();
+                
+            }
+            catch (Exception ex)
+            {
+                if (!string.IsNullOrEmpty(RedirectOutput))
+                {
+                    string result = string.Empty;
+                    StreamWriter streamWriter = new StreamWriter(Path.Combine(instPath, RedirectOutput));
+                    var errorArgs = string.Format("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
+                    result += errorArgs;
+                    streamWriter.Write(result);
+                    streamWriter.Close();
+                    RedirectOutput = null;
+                }
+                //Console.WriteLine("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
+                return;
+            }
+
+            // Wait for Exited event, but not more than 30 seconds. 
+            const int SLEEP_AMOUNT = 100;
+            while (!eventHandled)
+            {
+                elapsedTime += SLEEP_AMOUNT;
+                if (elapsedTime > 30000)
+                {
+                    break;
+                }
+                Thread.Sleep(SLEEP_AMOUNT);
+            }
+            myProcess.Close();
+        }
+
+        // Handle Exited event and display process information. 
+        private static void myProcess_Exited(object sender, System.EventArgs e)
+        {
+
+            eventHandled = true;
+            //  Console.WriteLine("Exit time:    {0}\r\n" + "Exit code:    {1}\r\nElapsed time: {2}", myProcess.ExitTime, myProcess.ExitCode, elapsedTime);
+        }
+
         #endregion RunProcess
 
         public static string Location = "";
@@ -153,20 +217,20 @@ namespace SIL.Tool
         public static bool ExistsOnPath(string name)
         {
             Location = "";
-            string [] directories;
-			string currentPath;
+            string[] directories;
+            string currentPath;
             if (Common.UsingMonoVM)
-			{
-				currentPath = Environment.GetEnvironmentVariable("PATH");
-				if (String.IsNullOrEmpty(currentPath)) return false;
-				directories = currentPath.Split(new [] { ':' });
-			}
-			else
-			{
-				currentPath = Environment.GetEnvironmentVariable("path");
-				if (String.IsNullOrEmpty(currentPath)) return false;
-				directories = currentPath.Split(new [] { ';' });
-			}
+            {
+                currentPath = Environment.GetEnvironmentVariable("PATH");
+                if (String.IsNullOrEmpty(currentPath)) return false;
+                directories = currentPath.Split(new[] { ':' });
+            }
+            else
+            {
+                currentPath = Environment.GetEnvironmentVariable("path");
+                if (String.IsNullOrEmpty(currentPath)) return false;
+                directories = currentPath.Split(new[] { ';' });
+            }
             foreach (string directory in directories)
                 try
                 {
@@ -183,7 +247,7 @@ namespace SIL.Tool
                     e.Source = directory + @"\" + name;
                     throw;
                 }
-                return false;
+            return false;
         }
         #endregion ExistsOnPath(string name)
 
@@ -196,24 +260,37 @@ namespace SIL.Tool
             string progFolder = GetLocation(name);
             if (string.IsNullOrEmpty(progFolder) || !File.Exists(Path.Combine(progFolder, "java.exe")))
             {
-                foreach (string progBases in new ArrayList {"C:\\Program Files", "C:\\Program Files (x86)"})
+                foreach (string progBases in new ArrayList { "C:\\Program Files", "C:\\Program Files (x86)" })
                 {
-                    var info = new DirectoryInfo(progBases + "\\Java");
-                    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
+                    string javaPath = Common.PathCombine(progBases, "java");
+
+                    if (Directory.Exists(javaPath))
                     {
-                        progFolder = Path.Combine(directoryInfo.FullName, "bin");
-                        if (File.Exists(Path.Combine(progFolder, "java.exe")))
-                            return progFolder;
-                    }
-                    if (string.IsNullOrEmpty(progFolder))
-                    {
-                        foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
+                        var info = new DirectoryInfo(javaPath);
+                        foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
                         {
                             progFolder = Path.Combine(directoryInfo.FullName, "bin");
                             if (File.Exists(Path.Combine(progFolder, "java.exe")))
                                 return progFolder;
                         }
                     }
+
+                    //var info = new DirectoryInfo(progBases + "\\Java\\");
+                    //foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
+                    //{
+                    //    progFolder = Path.Combine(directoryInfo.FullName, "bin");
+                    //    if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                    //        return progFolder;
+                    //}
+                    //if (string.IsNullOrEmpty(progFolder))
+                    //{
+                    //    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
+                    //    {
+                    //        progFolder = Path.Combine(directoryInfo.FullName, "bin");
+                    //        if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                    //            return progFolder;
+                    //    }
+                    //}
                 }
             }
             return progFolder;

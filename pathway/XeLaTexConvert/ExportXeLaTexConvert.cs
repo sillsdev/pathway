@@ -19,6 +19,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -46,7 +47,11 @@ namespace SIL.PublishingSolution
         private string _copyrightTexFileName = string.Empty;
         private string _reversalIndexTexFileName = string.Empty;
         private bool _reversalIndexTexCreated = false;
+        private bool _isInputTypeFound = false;
+        private bool _isFileFontCodeandFontNameFound = false;
+        
         private Dictionary<string, string> _langFontCodeandName;
+
         #region Public Functions
         public string ExportType
         {
@@ -86,6 +91,7 @@ namespace SIL.PublishingSolution
             }
             // preProcessor.GetTempFolderPath();
             preProcessor.XelatexImagePreprocess();
+            //preProcessor.MovePictureAsLastChild(projInfo.DefaultXhtmlFileWithPath);
             Param.LoadSettings();
             string organization;
             try
@@ -116,12 +122,14 @@ namespace SIL.PublishingSolution
 
 
             BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
-            GetXhtmlFileFontCodeandFontName(projInfo.DefaultXhtmlFileWithPath);
+            //GetXhtmlFileFontCodeandFontName(projInfo.DefaultXhtmlFileWithPath);
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             //projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
             projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
+            preProcessor.InsertPropertyForXelatexCss(projInfo.DefaultCssFileWithPath);
+            preProcessor.RemoveTextIntent(projInfo.DefaultCssFileWithPath);
             ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
             modifyXeLaTexStyles.LangFontDictionary = _langFontCodeandName;
 
@@ -129,6 +137,7 @@ namespace SIL.PublishingSolution
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.XELATEX;
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+            int pageWidth = Common.GetPictureWidth(cssClass, projInfo.ProjectInputType);
 
             string xeLatexFullFile = Path.Combine(projInfo.ProjectPath, fileName + ".tex");
             StreamWriter xeLatexFile = new StreamWriter(xeLatexFullFile);
@@ -141,15 +150,16 @@ namespace SIL.PublishingSolution
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
             xeLaTexContent.TocEndingPage = preProcessor.GetDictionaryLetterCount();
-            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
+            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, 
+                cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 
             if (projInfo.IsReversalExist)
             {
                 var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
-                string xeLatexCopyrightFile = fileNameXhtml + ".tex";
+                string reversalFileName = fileNameXhtml + ".tex";
 
-                CloseDocument(xeLatexFile, true, xeLatexCopyrightFile);
+                CloseDocument(xeLatexFile, true, reversalFileName);
             }
             else
             {
@@ -189,6 +199,7 @@ namespace SIL.PublishingSolution
 
             modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = false;
             _xelatexDocumentOpenClosedRequired = false;
+            modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include, _langFontCodeandName);
 
             //CallXeTex(Path.GetFileName(xeLatexFullFile));
@@ -247,7 +258,7 @@ namespace SIL.PublishingSolution
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(copyRightFilePath);
                 string xeLatexCopyrightFile = Path.Combine(projInfo.ProjectPath, fileNameXhtml + ".tex");
                 _copyrightTexFileName = xeLatexCopyrightFile;
-
+                int pageWidth = Common.GetPictureWidth(cssClass, projInfo.ProjectInputType);
 
                 StreamWriter xeLatexFile = new StreamWriter(xeLatexCopyrightFile);
                 Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
@@ -266,13 +277,14 @@ namespace SIL.PublishingSolution
                                                                                                               SpecificityClass,
                                                                                                           cssTree.
                                                                                                               CssClassOrder,
-                                                                                                          classInlineText);
+                                                                                                          classInlineText, pageWidth);
 
                 _xelatexDocumentOpenClosedRequired = true; //Don't change the place.
                 CloseDocument(xeLatexFile, false, string.Empty);
                 string include = xeLaTexStyles.PageStyle.ToString();
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
+                modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
                 modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
                                                     xeLatexCopyrightFile, include, _langFontCodeandName);
 				
@@ -287,7 +299,7 @@ namespace SIL.PublishingSolution
         {
             if (!File.Exists(filePath)) return;
             string tempFile = Path.Combine(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath) + "1.tex");
-            File.Move(filePath, tempFile);
+            File.Copy(filePath, tempFile, true);
             var reader = new StreamReader(tempFile);
             string contentWriter;
             var writer = new StreamWriter(filePath);
@@ -296,8 +308,8 @@ namespace SIL.PublishingSolution
                 if (contentWriter.ToLower().IndexOf(searchText) >= 0)
                 {
                     writer.WriteLine(insertText);
-                    writer.WriteLine("\\mbox{}");
-                    writer.WriteLine("\\mbox{}");
+                    //writer.WriteLine("\\mbox{}");
+                    //writer.WriteLine("\\mbox{}");
                     writer.WriteLine(contentWriter);
                     string st = string.Empty;
                     string contributors = Param.GetMetadataValue(Param.Contributor);
@@ -347,7 +359,7 @@ namespace SIL.PublishingSolution
                 txt =" For more information about this language, visit http://www.ethnologue.com/show_language.asp?code=";
                 var codeLen = languageCode.Length > 3 ? 3 : languageCode.Length;
                 txt = txt + languageCode.Substring(0, codeLen);
-                sb.AppendLine(@"\empFrontMatterdiv{" + txt + @"}\end{adjustwidth}");
+                sb.Append(@"\empFrontMatterdiv{" + txt + @" \newline \newline}\end{adjustwidth}");
             }
             return sb.ToString();
         }
@@ -375,7 +387,7 @@ namespace SIL.PublishingSolution
                 Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
                 CssTree cssTree = new CssTree();
                 cssTree.OutputType = Common.OutputType.XELATEX;
-                cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+                cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
                 string xeLatexRevesalIndexFile = Path.Combine(projInfo.ProjectPath, fileNameXhtml + ".tex");
                 _reversalIndexTexFileName = xeLatexRevesalIndexFile;
@@ -383,16 +395,18 @@ namespace SIL.PublishingSolution
                 Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
                 XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
                 classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
+                int pageWidth = Common.GetPictureWidth(cssClass, projInfo.ProjectInputType);
 
                 XeLaTexContent xeLaTexContent = new XeLaTexContent();
                 Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
-                Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
+                Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 
                 _xelatexDocumentOpenClosedRequired = true;          //Don't change the place.
                 CloseDocument(xeLatexFile, false, string.Empty);
                 string include = xeLaTexStyles.PageStyle.ToString();
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
+                modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
                 modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexRevesalIndexFile, include, _langFontCodeandName);
                 return true;
             }
@@ -621,6 +635,99 @@ namespace SIL.PublishingSolution
         /// <param name="xhtmlFileName">File name to parse</param>
         private void BuildLanguagesList(string xhtmlFileName)
         {
+            bool isInputTypeFound = false;
+            XmlTextReader _reader = Common.DeclareXmlTextReader(xhtmlFileName, true);
+            while (_reader.Read())
+            {
+                if (_reader.NodeType == XmlNodeType.Element)
+                {
+                    GetXhtmlFileFontCodeandFontName(_reader);
+                    if (_reader.Name == "div" || _reader.Name == "span")
+                    {
+                        FindInputType(_reader);
+                        string name = _reader.GetAttribute("lang");
+                        if (name != null)
+                        {
+                            if (_langFontDictionary.ContainsKey(name) == false && name.ToLower() != "utf-8")
+                            {
+                                _langFontDictionary.Add(name, "*");
+                            }
+                        }
+                    }
+                }
+            }
+            _reader.Close();
+        }
+        #endregion
+
+        private void GetXhtmlFileFontCodeandFontName(XmlTextReader _reader)
+        {
+
+            if (_isFileFontCodeandFontNameFound)
+            {
+                return;
+            }
+
+            if (_reader.Name == "meta")
+            {
+                string name = _reader.GetAttribute("name");
+                string content = _reader.GetAttribute("content");
+                if (name != null && content != null)
+                {
+                    FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
+                    foreach (FontFamily systemFont in systemFontList)
+                    {
+                        if (content.ToLower() == systemFont.Name.ToLower())
+                        {
+                            _langFontCodeandName.Add(name, content);
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (_reader.Name == "body")
+            {
+                _isFileFontCodeandFontNameFound = true;
+            }
+
+        }
+
+        #region Find InputType
+        /// <summary>
+        /// now go check to see if we're working on scripture or dictionary data
+        /// </summary>
+        /// <param name="xhtmlFileName">File name to parse</param>
+        private void FindInputType(XmlTextReader _reader)
+        {
+            if (_isInputTypeFound)
+            {
+                return;
+            }
+
+            string name = _reader.GetAttribute("class");
+            if (name != null)
+            {
+                if (name == "headword")
+                {
+                    _inputType = "scripture";
+                    _isInputTypeFound = true;
+                }
+                else if (name == "scrBookName")
+                {
+                    _inputType = "dictionary";
+                    _isInputTypeFound = true;
+                }
+            }
+           
+        }
+        #endregion
+
+        /// <summary>
+        /// Parses the specified file and sets the internal languages list to all the languages found in the file.
+        /// </summary>
+        /// <param name="xhtmlFileName">File name to parse</param>
+        private void BuildLanguagesListOLD(string xhtmlFileName)
+        {
             XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
@@ -650,6 +757,9 @@ namespace SIL.PublishingSolution
                     _langFontDictionary.Add(node.Value, "*");
                 }
             }
+
+
+
             // now go check to see if we're working on scripture or dictionary data
             nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
             if (nodes.Count == 0)
@@ -665,9 +775,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        #endregion
-
-        private void GetXhtmlFileFontCodeandFontName(string xhtmlFileName)
+         private void GetXhtmlFileFontCodeandFontNameOLD(string xhtmlFileName)
         {
             if (!File.Exists(xhtmlFileName)) return;
             XmlDocument xdoc = new XmlDocument { XmlResolver = null };

@@ -148,6 +148,7 @@ namespace SIL.PublishingSolution
 
         private bool _IsHeadword = false;
         private bool _significant;
+        private bool _footnoteSpace;
         private bool _isListBegin;
         private Dictionary<string, string> ListType;
         //private string _anchorText = string.Empty;
@@ -167,6 +168,9 @@ namespace SIL.PublishingSolution
 
         List<string> _headwordVariable = new List<string>();
         private int _headwordIndex = 0;
+        private bool _isFootnoteCallerStared;
+        private string _customFootnoteSymbol = string.Empty;
+
         #endregion
 
         #region Public Variable
@@ -201,14 +205,17 @@ namespace SIL.PublishingSolution
             return mat.Count;
         }
 
-        public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
+        public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass,
+            Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize, string customFootnote)
         {
             OldStyles styleInfo = new OldStyles();
             _pageWidth = pageWidth;
             _structStyles = styleInfo;
             _structStyles.IsMacroEnable = true;
             _pageSize = pageSize;
+            _isFootnoteCallerStared = true;
             _isFromExe = Common.CheckExecutionPath();
+            _customFootnoteSymbol = customFootnote;
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             ProcessProperty();
@@ -648,6 +655,11 @@ namespace SIL.PublishingSolution
                         {
                             _hasImgCloseTag = false;
                         }
+                        else if (_reader.Name == "br")
+                        {
+                            _writer.WriteRaw(@"<text:line-break/>");
+                            continue;
+                        }
                         else
                         {
                             if (_reader.Name == "a")
@@ -734,12 +746,19 @@ namespace SIL.PublishingSolution
             //_writer.WriteString(data);
             if (!whiteSpaceExist && !_pseudoSingleSpace)
             {
-                //_writer.WriteStartElement("text:s");
-                //_writer.WriteAttributeString("text:c", "1");
+                //if (_isNewParagraph)
+                //{
+                //    _footnoteSpace = false;
+                //}
+                if (_footnoteSpace == false)
+                {
+                    _writer.WriteStartElement("text:s");
+                    _writer.WriteAttributeString("text:c", "1");
+                    _writer.WriteString(" ");
+                    _writer.WriteEndElement();
+                    _significant = true;
+                }
                 //_writer.WriteString(" ");
-                //_writer.WriteEndElement();
-                _significant = true;
-                _writer.WriteString(" ");
             }
         }
 
@@ -772,6 +791,18 @@ namespace SIL.PublishingSolution
                 builder.Append(var);
             }
             content = builder.ToString();
+            //if (_classNameWithLang.IndexOf("scrFootnoteMarker") == 0 || _classNameWithLang.IndexOf("VerseNumber") == 0)
+            if (_classNameWithLang.IndexOf("scrFootnoteMarker") == 0)
+            {
+                _significant = true;
+            }
+            else if (_classNameWithLang.IndexOf("VerseNumber") == 0)
+            {
+                _significant = true;
+                _footnoteSpace = true;
+            }
+
+
             return content;
             //_writer.WriteString(content);
         }
@@ -798,6 +829,7 @@ namespace SIL.PublishingSolution
 
             if (_isNewParagraph)
             {
+                _footnoteSpace = false;
                 if (_paragraphName == null)
                 {
                     _paragraphName = StackPeek(_allParagraph); // _allParagraph.Pop();
@@ -1340,7 +1372,8 @@ namespace SIL.PublishingSolution
                 //footCallSymb = " ";
                 _isEmptyTitleExist = true;
             }
-            footCallSymb = footCallSymb.Trim() + " ";
+            //footCallSymb = footCallSymb.Trim() + " ";
+            footCallSymb = footCallSymb.Trim();
             string footerCall = footerClassName + "..footnote-call";
             string footerMarker = footerClassName + "..footnote-marker";
             if (IdAllClass.ContainsKey(footerCall) && String.IsNullOrEmpty(footCallSymb))
@@ -1373,6 +1406,10 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
             //isFootnote = false;
+
+            _writer.WriteStartElement("text:s"); // Insert space after the footnote call
+            _writer.WriteAttributeString("text:c", "1");
+            _writer.WriteEndElement();
         }
 
         private static string NoteCrossHyphenReferenceContentNodeMissing(string content)
@@ -1521,12 +1558,19 @@ namespace SIL.PublishingSolution
                     try
                     {
                         footCallSymb = _reader.GetAttribute(attrName);
-                        if (footCallSymb.Trim().Length == 0)
-                            footCallSymb = "\u2006";
+                        if (_customFootnoteSymbol != null && _customFootnoteSymbol.ToLower() != "default")
+                        {
+                            footCallSymb = _customFootnoteSymbol;
+                        }
+                        else if (footCallSymb != null && footCallSymb.Trim().Length == 0)
+                        {
+                            footCallSymb = "*";
+                        }
                     }
                     catch (NullReferenceException)
                     {
-                        footCallSymb = "\u2006";
+                        //footCallSymb = "\u2006";
+                        footCallSymb = "*";
                     }
                 }
             }
@@ -1607,7 +1651,7 @@ namespace SIL.PublishingSolution
             if (_closeChildName == string.Empty) return;
             string closeChild = Common.LeftString(_closeChildName, "_");
 
-            //if (_closeChildName.IndexOf("scrBookCode") == 0)
+            //if (_closeChildName.IndexOf("scrBookName") == 0)
             //{
             //    _strBook = "";
             //    _strBook2ndBook = "";
@@ -2298,18 +2342,7 @@ namespace SIL.PublishingSolution
                     string currentPicturePath = _sourcePicturePath;
                     if (_allStyle.Peek().IndexOf("logo") == 0)
                     {
-                        //Change the path which have the default styles
-                        string folderName = string.Empty;
-                        if(executablePath.Contains("Paratext 7"))
-                        {
-                            folderName = Common.LeftString(executablePath, "Paratext 7");
-                            currentPicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "SIL\\Pathway7\\Copyrights"));
-                        }
-                        else if (executablePath.Contains("FieldWorks 7"))
-                        {
-                            folderName = Common.LeftString(executablePath, "FieldWorks 7");
-                            currentPicturePath = Common.DirectoryPathReplace(Common.PathCombine(folderName, "Pathway7\\Copyrights"));
-                        }
+                        currentPicturePath = Common.FromRegistry("Copyrights");
                     }
                     string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, currentPicturePath);
                     string fileName = Path.GetFileName(srcFile);
@@ -2366,11 +2399,11 @@ namespace SIL.PublishingSolution
                         double value = .9;
                         if (_allStyle.Peek().IndexOf("logo") == 0)
                         {
-                            if (executablePath.Contains("Paratext 7"))
+                            if (_projInfo.ProjectInputType.ToLower() == "scripture")
                             {
                                 value = .45;
                             }
-                            else if (executablePath.Contains("FieldWorks 7"))
+                            else if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                             {
                                 value = .25;
                             }
@@ -3135,11 +3168,10 @@ namespace SIL.PublishingSolution
                 //if (content == "inde")
                 //    fillHeadword = false;
                 if (_previousParagraphName == null) _previousParagraphName = string.Empty;
-                if ((_classNameWithLang.IndexOf("headword") == 0 || (_classNameWithLang.IndexOf("reversalform") == 0 || _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0 || _childName.Replace("span_", "").IndexOf("reversalform") == 0))
-                    && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0
-                    || _previousParagraphName.IndexOf("picture") >= 0))
+                if ((_classNameWithLang.IndexOf("headwordminor") == 0 ||_classNameWithLang.IndexOf("headword") == 0 || (_classNameWithLang.IndexOf("reversalform") == 0 ||_childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0 ||_childName.Replace("span_", "").IndexOf("reversalform") == 0))
+                    && (_previousParagraphName.IndexOf("minorentries_") == 0 ||_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0 || _previousParagraphName.IndexOf("picture") >= 0))
                 {
-                    fillHeadword = true; 
+                    fillHeadword = true;
                 }
             }
             else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture

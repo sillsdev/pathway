@@ -39,6 +39,7 @@ install:
 	sudo cp -r debian/pathwayValues.xml $(DESTDIR)$(prefix)/share/pathway/pathwayValues.xml
 	sudo cp -r debian/pathwayWsValues.xml $(DESTDIR)$(prefix)/share/pathway/pathwayWsValues.xml
 	sudo cp -r debian/pathwayRegistryKeys.sh $(DESTDIR)$(prefix)/share/pathway/pathwayRegistryKeys.sh
+	sudo cp -r XeLaTexConvert/InstallPathwayXeLaTeX.sh $(DESTDIR)$(prefix)/share/pathway/InstallPathwayXeLaTeX.sh
 	sudo mkdir -p $(DESTDIR)$(prefix)/share/applications
 	sudo chmod 777 $(DESTDIR)$(prefix)/share/applications
 	sudo cp debian/*.desktop $(DESTDIR)$(prefix)/share/applications

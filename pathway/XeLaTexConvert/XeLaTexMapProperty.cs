@@ -473,7 +473,8 @@ namespace SIL.PublishingSolution
             if (propertyValue.IndexOf("em") > 0)
             {
                 propertyValue = propertyValue.Replace("em", "");
-                propertyValue = Convert.ToDouble(Convert.ToInt32(propertyValue) + .5).ToString();
+                double decimalValue = Convert.ToDouble(propertyValue) + 0.5;
+                propertyValue = Convert.ToDouble(decimalValue).ToString();
             }
             else
             {
@@ -793,7 +794,7 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            if (propertyValue != "0" && className == "entry")
+            if (propertyValue != "0" && (className == "entry" || className.Contains("IntroList")))
             {
                 //propertyValue = "text-indent hangpara";
 
@@ -833,13 +834,14 @@ namespace SIL.PublishingSolution
         }
         public void BGColor(string propertyValue)
         {
-            if (propertyValue == "transparent")
+            if (propertyValue == "transparent" || propertyValue.Contains("inherit"))
                 return;
 
             if (propertyValue == string.Empty)
             {
                 return;
             }
+
             string cVal = propertyValue.Replace("#", "");
             //decValue += " " + int.Parse(concatChar, System.Globalization.NumberStyles.HexNumber);
 
@@ -1120,7 +1122,7 @@ namespace SIL.PublishingSolution
             if (propertyValue.IndexOf("%") > 0)
             {
                 propertyValue = propertyValue.Replace("%", "");
-                float numericValue = Convert.ToInt32(propertyValue);
+                double numericValue = Convert.ToDouble(propertyValue);
                 numericValue = numericValue / 100;
                 propertyValue = numericValue + "em";
             }

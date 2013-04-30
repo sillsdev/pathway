@@ -74,6 +74,8 @@ namespace SIL.PublishingSolution
             this.lblFont = new System.Windows.Forms.Label();
             this.ddlFontSize = new System.Windows.Forms.ComboBox();
             this.pnlReferenceFormat = new System.Windows.Forms.Panel();
+            this.txtFnCallerSymbol = new System.Windows.Forms.TextBox();
+            this.chkIncludeCusFnCaller = new System.Windows.Forms.CheckBox();
             this.ddlReferenceFormat = new System.Windows.Forms.ComboBox();
             this.lblReferenceFormat = new System.Windows.Forms.Label();
             this.chkFixedLineHeight = new System.Windows.Forms.CheckBox();
@@ -682,7 +684,7 @@ namespace SIL.PublishingSolution
             this.pnlOtherFormat.Controls.Add(this.ddlRules);
             this.pnlOtherFormat.Controls.Add(this.lblFont);
             this.pnlOtherFormat.Controls.Add(this.ddlFontSize);
-            this.pnlOtherFormat.Location = new System.Drawing.Point(9, 307);
+            this.pnlOtherFormat.Location = new System.Drawing.Point(9, 328);
             this.pnlOtherFormat.Name = "pnlOtherFormat";
             this.pnlOtherFormat.Size = new System.Drawing.Size(275, 123);
             this.pnlOtherFormat.TabIndex = 103;
@@ -799,12 +801,37 @@ namespace SIL.PublishingSolution
             // 
             // pnlReferenceFormat
             // 
+            this.pnlReferenceFormat.Controls.Add(this.txtFnCallerSymbol);
+            this.pnlReferenceFormat.Controls.Add(this.chkIncludeCusFnCaller);
             this.pnlReferenceFormat.Controls.Add(this.ddlReferenceFormat);
             this.pnlReferenceFormat.Controls.Add(this.lblReferenceFormat);
             this.pnlReferenceFormat.Location = new System.Drawing.Point(0, 281);
             this.pnlReferenceFormat.Name = "pnlReferenceFormat";
-            this.pnlReferenceFormat.Size = new System.Drawing.Size(292, 24);
+            this.pnlReferenceFormat.Size = new System.Drawing.Size(292, 48);
             this.pnlReferenceFormat.TabIndex = 102;
+            // 
+            // txtFnCallerSymbol
+            // 
+            this.txtFnCallerSymbol.AccessibleName = "txtPageGutterWidth";
+            this.txtFnCallerSymbol.Enabled = false;
+            this.txtFnCallerSymbol.Location = new System.Drawing.Point(239, 25);
+            this.txtFnCallerSymbol.MaxLength = 1;
+            this.txtFnCallerSymbol.Name = "txtFnCallerSymbol";
+            this.txtFnCallerSymbol.Size = new System.Drawing.Size(44, 20);
+            this.txtFnCallerSymbol.TabIndex = 106;
+            this.txtFnCallerSymbol.Tag = "Gutter Width";
+            this.txtFnCallerSymbol.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFnCallerSymbol_KeyUp);
+            // 
+            // chkIncludeCusFnCaller
+            // 
+            this.chkIncludeCusFnCaller.AutoSize = true;
+            this.chkIncludeCusFnCaller.Location = new System.Drawing.Point(107, 25);
+            this.chkIncludeCusFnCaller.Name = "chkIncludeCusFnCaller";
+            this.chkIncludeCusFnCaller.Size = new System.Drawing.Size(135, 17);
+            this.chkIncludeCusFnCaller.TabIndex = 105;
+            this.chkIncludeCusFnCaller.Text = "Include Footnote Caller";
+            this.chkIncludeCusFnCaller.UseVisualStyleBackColor = true;
+            this.chkIncludeCusFnCaller.CheckStateChanged += new System.EventHandler(this.chkIncludeCusFnCaller_CheckStateChanged);
             // 
             // ddlReferenceFormat
             // 
@@ -847,7 +874,7 @@ namespace SIL.PublishingSolution
             this.ddlVerticalJustify.FormattingEnabled = true;
             this.ddlVerticalJustify.Location = new System.Drawing.Point(107, 163);
             this.ddlVerticalJustify.Name = "ddlVerticalJustify";
-            this.ddlVerticalJustify.Size = new System.Drawing.Size(176, 21);
+            this.ddlVerticalJustify.Size = new System.Drawing.Size(179, 21);
             this.ddlVerticalJustify.TabIndex = 8;
             this.ddlVerticalJustify.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -870,7 +897,7 @@ namespace SIL.PublishingSolution
             this.ddlPicture.FormattingEnabled = true;
             this.ddlPicture.Location = new System.Drawing.Point(107, 187);
             this.ddlPicture.Name = "ddlPicture";
-            this.ddlPicture.Size = new System.Drawing.Size(176, 21);
+            this.ddlPicture.Size = new System.Drawing.Size(179, 21);
             this.ddlPicture.TabIndex = 9;
             this.ddlPicture.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -903,7 +930,7 @@ namespace SIL.PublishingSolution
             this.ddlLeading.FormattingEnabled = true;
             this.ddlLeading.Location = new System.Drawing.Point(107, 211);
             this.ddlLeading.Name = "ddlLeading";
-            this.ddlLeading.Size = new System.Drawing.Size(176, 21);
+            this.ddlLeading.Size = new System.Drawing.Size(179, 21);
             this.ddlLeading.TabIndex = 10;
             this.ddlLeading.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -916,7 +943,7 @@ namespace SIL.PublishingSolution
             this.ddlRunningHead.FormattingEnabled = true;
             this.ddlRunningHead.Location = new System.Drawing.Point(107, 259);
             this.ddlRunningHead.Name = "ddlRunningHead";
-            this.ddlRunningHead.Size = new System.Drawing.Size(176, 21);
+            this.ddlRunningHead.Size = new System.Drawing.Size(179, 21);
             this.ddlRunningHead.TabIndex = 12;
             this.ddlRunningHead.SelectedIndexChanged += new System.EventHandler(this.ddlRunningHead_SelectedIndexChanged);
             // 
@@ -1064,7 +1091,7 @@ namespace SIL.PublishingSolution
             this.ddlJustified.FormattingEnabled = true;
             this.ddlJustified.Location = new System.Drawing.Point(107, 138);
             this.ddlJustified.Name = "ddlJustified";
-            this.ddlJustified.Size = new System.Drawing.Size(176, 21);
+            this.ddlJustified.Size = new System.Drawing.Size(179, 21);
             this.ddlJustified.TabIndex = 7;
             this.ddlJustified.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlJustified.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -1088,7 +1115,7 @@ namespace SIL.PublishingSolution
             this.ddlPageColumn.FormattingEnabled = true;
             this.ddlPageColumn.Location = new System.Drawing.Point(107, 90);
             this.ddlPageColumn.Name = "ddlPageColumn";
-            this.ddlPageColumn.Size = new System.Drawing.Size(176, 21);
+            this.ddlPageColumn.Size = new System.Drawing.Size(179, 21);
             this.ddlPageColumn.TabIndex = 5;
             this.ddlPageColumn.SelectedIndexChanged += new System.EventHandler(this.ddlPageColumn_SelectedIndexChanged);
             this.ddlPageColumn.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -1112,7 +1139,7 @@ namespace SIL.PublishingSolution
             this.ddlPagePageSize.FormattingEnabled = true;
             this.ddlPagePageSize.Location = new System.Drawing.Point(107, 11);
             this.ddlPagePageSize.Name = "ddlPagePageSize";
-            this.ddlPagePageSize.Size = new System.Drawing.Size(178, 21);
+            this.ddlPagePageSize.Size = new System.Drawing.Size(181, 21);
             this.ddlPagePageSize.TabIndex = 0;
             this.ddlPagePageSize.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlPagePageSize.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -2404,6 +2431,7 @@ namespace SIL.PublishingSolution
             this.tabDisplay.PerformLayout();
             this.pnlOtherFormat.ResumeLayout(false);
             this.pnlReferenceFormat.ResumeLayout(false);
+            this.pnlReferenceFormat.PerformLayout();
             this.tabMobile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).EndInit();
@@ -2621,5 +2649,7 @@ namespace SIL.PublishingSolution
         private Label lblFont;
         private ComboBox ddlFontSize;
         private Panel pnlReferenceFormat;
+        private TextBox txtFnCallerSymbol;
+        private CheckBox chkIncludeCusFnCaller;
     }
 }

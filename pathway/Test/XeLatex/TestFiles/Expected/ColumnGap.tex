@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article} 
-\usepackage{multicol}
 \usepackage{changepage}
+\usepackage{multicol}
 \usepackage{float}
 \usepackage{grffile}
 \usepackage{graphicx}
@@ -9,13 +9,16 @@
 \usepackage{fancyhdr}
 \usepackage{multicol}
 \usepackage{calc}
-\usepackage[margin=2cm,includeheadfoot]{geometry}
+\usepackage{lettrine}
+\usepackage[margin=1cm,includeheadfoot]{geometry}
 
 \begin{document} 
 \pagestyle{plain} 
-\font\letxitem="Times New Roman" at 20pt
-\font\xitem="Times New Roman" at 12pt
+\newgeometry{left=2cm, right=2cm, bottom=3.5cm, top=3.5cm}
 \font\letData="Times New Roman" at 12pt
+\font\xitem="Times New Roman" at 12pt
+\font\letxitem="Times New Roman" at 20pt
+
 \pagestyle{fancy} 
 \setlength{\columnsep}{1.5em} 
 \setlength\columnseprule{0.4pt} 

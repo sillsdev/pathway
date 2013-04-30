@@ -8,13 +8,16 @@
 \usepackage{fancyhdr}
 \usepackage{multicol}
 \usepackage{calc}
-\usepackage[margin=2cm,includeheadfoot]{geometry}
+\usepackage{lettrine}
+\usepackage[margin=1cm,includeheadfoot]{geometry}
 
 \begin{document} 
 \pagestyle{plain} 
-\font\normalboldnormal="Times New Roman" at 12pt
-\font\boldnormal="Times New Roman/B" at 24pt
+\newgeometry{left=2cm, right=2cm, bottom=3.5cm, top=3.5cm}
 \font\normal="Times New Roman" at 12pt
+\font\boldnormal="Times New Roman/B" at 24pt
+\font\normalboldnormal="Times New Roman" at 12pt
+
 \pagestyle{fancy} 
 
 \normal{To test the font weight }\boldnormal{(bold coming inside) }\normalboldnormal{with normal }\normal{text }

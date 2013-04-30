@@ -22,9 +22,12 @@ case "$1" in
     configure)
 rm -f ${prefix}/share/man/man7/ConfigurationTool.7.gz
 link ${prefix}/share/man/man7/pathwayB.7.gz ${prefix}/share/man/man7/ConfigurationTool.7.gz
-chmod 666 /etc/mono/registry/last-btime
+if [-f "/etc/mono/registry/last-btime"]; then
+    chmod 666 /etc/mono/registry/last-btime
+fi
 mkdir -p /etc/profile.d
 cp ${prefix}/share/pathway/pathwayRegistryKeys.sh /etc/profile.d
+#cp ${prefix}/share/pathway/InstallPathwayXeLaTeX.sh /etc/profile.d
 /usr/share/update-notifier/notify-reboot-required
     ;;
 

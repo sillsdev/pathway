@@ -278,7 +278,7 @@ namespace SIL.PublishingSolution
                 sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org");
                 sw.WriteLine("Codepage: UTF-8");
                 sw.WriteLine("RedLettering: false");
-                sw.WriteLine(@"USFM-TitleTag: \" + Common.BookNameTag);
+                sw.WriteLine(@"USFM-TitleTag: \id"); // + Common.BookNameTag);
                 sw.WriteLine("Collection: " + GetInfo(Param.Title));
 
                 string sfmFiles = Path.Combine(exportGoBiblePath, "SFM");
@@ -350,6 +350,11 @@ namespace SIL.PublishingSolution
         /// <param name="goBibleCreatorPath"></param>
         protected void BuildApplication(string goBibleCreatorPath)
         {
+            if (Directory.Exists(processFolder))
+            {
+                Directory.Move(processFolder, processFolder.Replace("Go Bible", "GoBible"));
+            }
+            processFolder = processFolder.Replace("Go Bible", "GoBible");
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
             var creatorFullPath = Path.Combine(goBibleCreatorPath, Creator);
@@ -359,9 +364,13 @@ namespace SIL.PublishingSolution
             {
                 progFullName = progFullName.Substring(0, progFullName.Length - 4);
             }
-            var args = string.Format(@"-Xmx128m -jar ""{0}"" ""{1}""", creatorFullPath, collectionFullName);
+            collectionFullName = Common.PathCombine(processFolder, "Collections.txt");
+            var args = string.Format(@" -Xmx128m -jar ""{0}""  ""{1}""", creatorFullPath, collectionFullName);
+
+            //var args = "-Xmx128m -jar " + @"""" + creatorFullPath + @"""" + " " + @"""" + collectionFullName + @"""";
+
             SubProcess.RedirectOutput = RedirectOutputFileName;
-            SubProcess.Run(processFolder, "java", args, true);
+            SubProcess.RunCommand(processFolder, "java", args, true);
         }
 
         /// <summary>

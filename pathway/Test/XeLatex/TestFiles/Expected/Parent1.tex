@@ -8,16 +8,19 @@
 \usepackage{fancyhdr}
 \usepackage{multicol}
 \usepackage{calc}
-\usepackage[margin=2cm,includeheadfoot]{geometry}
+\usepackage{lettrine}
+\usepackage[margin=1cm,includeheadfoot]{geometry}
 
 \begin{document} 
 \pagestyle{plain} 
-\font\xitemxitemmain="Times New Roman":color=0000ff at 12pt
-\font\xitemenmain="Times New Roman":color=008000 at 12pt
-\font\main="Times New Roman" at 12pt
-\font\xitemenxitem="Times New Roman":color=008000 at 12pt
-\font\xitemmain="Times New Roman":color=ff0000 at 12pt
+\newgeometry{left=2cm, right=2cm, bottom=3.5cm, top=3.5cm}
 \font\xitemen="Times New Roman":color=ffa500 at 12pt
+\font\xitemmain="Times New Roman":color=ff0000 at 12pt
+\font\xitemenxitem="Times New Roman":color=008000 at 12pt
+\font\main="Times New Roman" at 12pt
+\font\xitemenmain="Times New Roman":color=008000 at 12pt
+\font\xitemxitemmain="Times New Roman":color=0000ff at 12pt
+
 \pagestyle{fancy} 
 
 \xitemenmain{sample text file }

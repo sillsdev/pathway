@@ -10,7 +10,6 @@
     @top-left {
         -ps-referenceFormat: "Gen 1";
         content: string(bookname, first) " "  string(chapter, first);
-        font-weight: bold;
     }
     @top-center  { content: ''; }
     @top-right     { content: ''; }
@@ -24,7 +23,6 @@
     @top-right     {
         -ps-referenceFormat: "Gen 1";
         content: string(bookname, last) " "  string(chapter, last);
-        font-weight: bold;
     }
     @bottom-left   { content: ''; }
     @bottom-center { content: ''; }

@@ -739,7 +739,6 @@ namespace SIL.PublishingSolution
             preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
             //preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
-
             //if (_isFromExe)
             //{
             //    //Preprocess for FrontMatter CSS
@@ -760,7 +759,7 @@ namespace SIL.PublishingSolution
             LOStyles inStyles = new LOStyles();
             inStyles._multiLanguageHeader = isMultiLanguageHeader;
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
-
+            string customFootnoteCaller = inStyles._customFootnoteCaller;
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
@@ -810,8 +809,7 @@ namespace SIL.PublishingSolution
             cXML.RefFormat = this._refFormat;
 
             SetHeaderFontName(projInfo, idAllClass);
-
-            cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize);
+            cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize, customFootnoteCaller);
             PostProcess(projInfo);
 
             if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)
@@ -923,8 +921,12 @@ namespace SIL.PublishingSolution
             InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
             ContentPostProcess(projInfo.TempOutputFolder);
-            InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
-            InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
+            if (projInfo.ProjectInputType == "Dictionary")
+            {
+                InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
+                InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
+            }
+            ChangeTitleNameasBookName(projInfo.TempOutputFolder);
         }
 
         public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
@@ -951,6 +953,10 @@ namespace SIL.PublishingSolution
                     {
                         XmlNode letDataNode = xmlNode.ParentNode.NextSibling;
                         xpath = ".//text:variable-set[@text:name='Left_Guideword_L']";
+                        if (letDataNode == null)
+                        {
+                            continue;
+                        }
                         XmlNodeList leftGuidewordList = letDataNode.SelectNodes(xpath, nsmgr1);
                         if (leftGuidewordList.Count > 0)
                         {
@@ -1059,29 +1065,29 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            //Move the crossrefernce to previous node TD--3346
-            xpath = "//text:note";
+            ////Move the crossrefernce to previous node TD--3346
+            //xpath = "//text:note";
 
-            XmlNodeList noteList = xdoc.SelectNodes(xpath, nsmgr1);
-            if (noteList != null)
-            {
-                foreach (XmlNode note in noteList)
-                {
-                    if (note.PreviousSibling != null)
-                    {
-                        XmlNode prevNode = note.PreviousSibling;
-                        if (prevNode.InnerText.Trim().Length == 0)
-                        {
-                            prevNode = prevNode.PreviousSibling;
-                        }
-                        if (prevNode != null)
-                        {
-                            prevNode.InnerText = prevNode.InnerText.TrimEnd();
-                            prevNode.AppendChild(note);
-                        }
-                    }
-                }
-            }
+            //XmlNodeList noteList = xdoc.SelectNodes(xpath, nsmgr1);
+            //if (noteList != null)
+            //{
+            //    foreach (XmlNode note in noteList)
+            //    {
+            //        if (note.PreviousSibling != null)
+            //        {
+            //            XmlNode prevNode = note.PreviousSibling;
+            //            if (prevNode.InnerText.Trim().Length == 0)
+            //            {
+            //                prevNode = prevNode.PreviousSibling;
+            //            }
+            //            if (prevNode != null)
+            //            {
+            //                prevNode.InnerText = prevNode.InnerText.TrimEnd();
+            //                prevNode.AppendChild(note);
+            //            }
+            //        }
+            //    }
+            //}
 
             xdoc.PreserveWhitespace = true;
             xdoc.Save(filename);
@@ -1120,6 +1126,41 @@ namespace SIL.PublishingSolution
                     {
                         list1.InnerXml = FirstNode.OuterXml.Replace("text:span", "text:p") +
                                          @"<text:p text:style-name=""Illustration"">" + list1.InnerXml + "</text:p>";
+                    }
+                }
+            }
+            xdoc.PreserveWhitespace = true;
+            xdoc.Save(filename);
+        }
+
+        public static void ChangeTitleNameasBookName(string tempOutputFolder)
+        {
+            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.PreserveWhitespace = false;
+            xdoc.Load(filename);
+
+            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
+            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+            if (publicationInfo.ProjectInputType.ToLower() == "scripture")
+            {
+                string xx = "//text:section[@text:style-name='Sect_scrBook']";
+                XmlNodeList bookList = xdoc.SelectNodes(xx, nsmgr1);
+                if(bookList != null && bookList.Count > 0)
+                {
+                    for (int i = 0; i < bookList.Count; i++)
+                    {
+                        string xpath = ".//text:span[@text:style-name='scrBookName_scrBook_scrBody']";
+                        XmlNode bookNameNode = bookList[i].SelectSingleNode(xpath, nsmgr1);
+                        if (bookNameNode != null)
+                        {
+                            string bookName = bookNameNode.InnerText;
+                            xpath = ".//text:span[@text:style-name='span_TitleMain_scrBook_scrBody']";
+                            XmlNode titleNode = bookList[i].SelectSingleNode(xpath, nsmgr1);
+                            if (titleNode != null) titleNode.InnerText = bookName;
+                        }
                     }
                 }
             }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
@@ -961,6 +962,16 @@ namespace Test.XeLatex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void LineBreak()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "LineBreak";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void XeLaTexUpdateCache()
         {
             UpdateXeLaTexFontCacheIfNecessary();
@@ -994,6 +1005,7 @@ namespace Test.XeLatex
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.XELATEX;
             cssClass = cssTree.CreateCssProperty(input, true);
+            int pageWidth = Common.GetPictureWidth(cssClass, _projInfo.ProjectInputType);
 
             string xetexFullFile = Path.Combine(_outputPath, file + ".tex");
             StreamWriter xetexFile = new StreamWriter(xetexFullFile);
@@ -1003,7 +1015,7 @@ namespace Test.XeLatex
 
             XeLaTexContent content = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = styles._classInlineText;
-            Dictionary<string, Dictionary<string, string>> newProperty = content.CreateContent(_projInfo, cssClass, xetexFile, _classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
+            Dictionary<string, Dictionary<string, string>> newProperty = content.CreateContent(_projInfo, cssClass, xetexFile, _classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 
             CloseFile(xetexFile);
 
