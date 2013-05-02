@@ -9,7 +9,7 @@ using System.Resources;
 [assembly: AssemblyTitle("CssDialog")]
 [assembly: AssemblyDescription("Select and modify Cascading Style Sheet")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SIL International in Collaboration with EC Group Datasoft Private Limited")]
+[assembly: AssemblyCompany("SIL International in collaboration with \nEC Group Datasoft Private Limited")]
 [assembly: AssemblyProduct("Pathway")]
 [assembly: AssemblyCopyright("Copyright © 2008-2012 SIL International")]
 [assembly: AssemblyTrademark("")]
