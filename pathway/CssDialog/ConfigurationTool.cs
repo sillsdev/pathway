@@ -736,6 +736,15 @@ namespace SIL.PublishingSolution
             get { return txtFnCallerSymbol; }
         }
 
+        public CheckBox ChkInclThinSpaceXref
+        {
+            get { return chkInclThinSpaceXref; }
+        }
+
+        public CheckBox ChkTurnOffFirstVerse
+        {
+            get { return chkTurnOffFirstVerse; }
+        }
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
@@ -811,11 +820,13 @@ namespace SIL.PublishingSolution
 
         private void btnDictionary_Click(object sender, EventArgs e)
         {
+            btnMobile.Text = "DictForMids";
             _CToolBL.btnDictionary_ClickBL();
         }
 
         private void btnScripture_Click(object sender, EventArgs e)
         {
+            btnMobile.Text = "Mobile";
             _CToolBL.btnScripture_ClickBL();
         }
 
@@ -1366,6 +1377,18 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.txtFnCallerSymbol_KeyUpBL();
             _CToolBL.SetModifyMode(true);
+        }
+
+        private void chkInclThinSpaceXref_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkInclThinSpaceXref_CheckStateChangedBL(sender, e);
+        }
+
+        private void chkTurnOffFirstVerse_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkTurnOffFirstVerse_CheckStateChangedBL(sender, e);
         }
     }
 }

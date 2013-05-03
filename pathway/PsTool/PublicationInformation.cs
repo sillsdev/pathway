@@ -72,6 +72,8 @@ namespace SIL.Tool
         public string _selectedTemplateStyle = string.Empty;
 
         private string _headerReferenceFormat = string.Empty;
+        private string _includeThinSpaceXRef;
+        private string _hideVerseNumberOne;
 
         #endregion
 
@@ -272,6 +274,11 @@ namespace SIL.Tool
             set { _headerReferenceFormat = value; }
         }
 
+        public string IncludeThinSpaceXRef
+        {
+            get { return _includeThinSpaceXRef; }
+            set { _includeThinSpaceXRef = value; }
+        }
         #endregion
 
 

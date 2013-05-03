@@ -1373,10 +1373,10 @@ namespace SIL.PublishingSolution
                 _isEmptyTitleExist = true;
             }
             //footCallSymb = footCallSymb.Trim() + " ";
-            footCallSymb = footCallSymb.Trim();
+            //footCallSymb = footCallSymb.Trim();
             string footerCall = footerClassName + "..footnote-call";
             string footerMarker = footerClassName + "..footnote-marker";
-            if (IdAllClass.ContainsKey(footerCall) && String.IsNullOrEmpty(footCallSymb))
+            if (IdAllClass.ContainsKey(footerCall) && (footerClassName.IndexOf("NoteCross") != 0 && String.IsNullOrEmpty(footCallSymb)))
                 footCallSymb = string.Empty;
 
             _autoFootNoteCount++;
@@ -1407,9 +1407,12 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             //isFootnote = false;
 
-            _writer.WriteStartElement("text:s"); // Insert space after the footnote call
-            _writer.WriteAttributeString("text:c", "1");
-            _writer.WriteEndElement();
+            if (footerClassName.IndexOf("NoteCross") != 0)
+            {
+                _writer.WriteStartElement("text:s"); // Insert space after the footnote call
+                _writer.WriteAttributeString("text:c", "1");
+                _writer.WriteEndElement();
+            }
         }
 
         private static string NoteCrossHyphenReferenceContentNodeMissing(string content)
@@ -1564,7 +1567,14 @@ namespace SIL.PublishingSolution
                         }
                         else if (footCallSymb != null && footCallSymb.Trim().Length == 0)
                         {
-                            footCallSymb = "*";
+                            if (_projInfo.IncludeThinSpaceXRef == "True" && footerCall.IndexOf("NoteCross") == 0)
+                            {
+                                footCallSymb = "\u2009";
+                            }
+                            else
+                            {
+                                footCallSymb = "*";
+                            }
                         }
                     }
                     catch (NullReferenceException)

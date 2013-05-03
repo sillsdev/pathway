@@ -760,6 +760,7 @@ namespace SIL.PublishingSolution
             inStyles._multiLanguageHeader = isMultiLanguageHeader;
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
             string customFootnoteCaller = inStyles._customFootnoteCaller;
+            projInfo.IncludeThinSpaceXRef = inStyles._customXRefCaller;
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);

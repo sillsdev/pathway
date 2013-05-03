@@ -140,6 +140,9 @@ namespace SIL.PublishingSolution
         private ConfigurationTool cTool;
         Dictionary<string, string> pageDict = new Dictionary<string, string>();
         protected string _includeFootnoteCaller;
+        protected bool _includeThinSpaceXRefCaller;
+        protected bool _hideVerseNumberOne;
+
         #endregion
 
         #region Constructor
@@ -223,6 +226,26 @@ namespace SIL.PublishingSolution
                 string task = "@page";
                 string key = "-ps-custom-footnote-caller";
                 return GetValue(task, key, "Default");
+            }
+        }
+
+        public string CustomXRefCaller
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-custom-xref-caller";
+                return GetValue(task, key, "False");
+            }
+        }
+
+        public string HideVerseNumberOne
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-hide-versenumber-one";
+                return GetValue(task, key, "False");
             }
         }
 
@@ -905,6 +928,8 @@ namespace SIL.PublishingSolution
                         if (inputTypeBL.ToLower() == "scripture")
                         {
                             value["-ps-custom-footnote-caller"] = "\"" + _includeFootnoteCaller + "\"";
+                            value["-ps-custom-XRef-caller"] = "\"" + _includeThinSpaceXRefCaller + "\"";
+                            value["-ps-hide-versenumber-one"] = "\"" + _hideVerseNumberOne + "\"";
                         }
                         
                         WriteCssClass(writeCss, "page", value);
@@ -1067,6 +1092,8 @@ namespace SIL.PublishingSolution
                     cTool.ChkIncludeCusFnCaller.Checked = true;
                     cTool.TxtFnCallerSymbol.Text = CustomFootnoteCaller;
                 }
+                cTool.ChkInclThinSpaceXref.Checked = bool.Parse(CustomXRefCaller);
+                cTool.ChkTurnOffFirstVerse.Checked = bool.Parse(HideVerseNumberOne);
             }
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
@@ -4410,6 +4437,24 @@ namespace SIL.PublishingSolution
             //cTool.LblInfoCaption.Text = PreviousStyleName;
             WriteCss();
 
+        }
+
+        public void chkInclThinSpaceXref_CheckStateChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _includeThinSpaceXRefCaller = cTool.ChkInclThinSpaceXref.Checked;
+            }
+            catch { }
+        }
+
+        public void chkTurnOffFirstVerse_CheckStateChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _hideVerseNumberOne = cTool.ChkInclThinSpaceXref.Checked;
+            }
+            catch { }
         }
 
         public void tabControl1_SelectedIndexChangedBL()

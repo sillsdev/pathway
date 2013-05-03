@@ -638,6 +638,8 @@ namespace SIL.PublishingSolution
                 case "ps-nonconsecutivereferenceseparator-string":
                 case "-ps-nonconsecutivereferenceseparator-string":
                 case "-ps-custom-footnote-caller":
+                case "-ps-custom-xref-caller":
+                case "-ps-hide-versenumber-one":
                 case "prince-hyphenate-patterns":
                     _cssProperty[styleAttributeInfo.Name] = value;
                     break;
