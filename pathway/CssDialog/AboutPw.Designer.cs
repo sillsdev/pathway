@@ -159,7 +159,7 @@
             // logoPictureBox
             // 
             this.logoPictureBox.AccessibleName = "logoPictureBox";
-            this.logoPictureBox.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.SIL_Logo_No_Tag_Color;
+            this.logoPictureBox.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources1.SIL_Color_Logo;
             this.logoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
             this.logoPictureBox.Name = "logoPictureBox";
