@@ -39,7 +39,7 @@ namespace SIL.PublishingSolution.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SIL.PublishingSolution.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SIL.PublishingSolution.Properties.Resources", typeof(Resources1).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
