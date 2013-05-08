@@ -853,7 +853,7 @@ namespace SIL.Tool
                 XmlNode fileNode = ProjectDeXML.SelectSingleNode(xPath);
                 if (fileNode != null)
                 {
-                    solnNode.ParentNode.RemoveChild(fileNode);
+                    solnNode.RemoveChild(fileNode);
                 }
             }
             SaveProject();
