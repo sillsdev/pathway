@@ -1158,7 +1158,7 @@ namespace SIL.Tool
                 if (root != null) modifyNode = root.SelectSingleNode(xPath);
                 if (modifyNode != null)
                 {
-                    searchNode.ParentNode.RemoveChild(modifyNode);
+                    searchNode.RemoveChild(modifyNode);
                 }
                 propertyCreated = _DeXml.CreateNode("element", "Modification", "");
                 propertyCreatedOn = _DeXml.CreateNode("element", "ModifiedOn", "");
