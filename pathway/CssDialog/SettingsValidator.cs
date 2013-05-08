@@ -1170,7 +1170,7 @@ namespace SIL.PublishingSolution
                 if (childNode != null)
                     foreach (XmlNode node in childNode)
                     {
-                        childNode.RemoveChild(node);
+                        childNode.ParentNode.RemoveChild(node);
                         XmlNode newChild = settingsDoc.CreateElement("feature");
                         XmlAttribute xmlAttribute = settingsDoc.CreateAttribute("name");
                         xmlAttribute.Value = "Justified";

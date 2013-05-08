@@ -853,7 +853,7 @@ namespace SIL.Tool
                 XmlNode fileNode = ProjectDeXML.SelectSingleNode(xPath);
                 if (fileNode != null)
                 {
-                    solnNode.RemoveChild(fileNode);
+                    solnNode.ParentNode.RemoveChild(fileNode);
                 }
             }
             SaveProject();
@@ -1158,7 +1158,7 @@ namespace SIL.Tool
                 if (root != null) modifyNode = root.SelectSingleNode(xPath);
                 if (modifyNode != null)
                 {
-                    searchNode.RemoveChild(modifyNode);
+                    searchNode.ParentNode.RemoveChild(modifyNode);
                 }
                 propertyCreated = _DeXml.CreateNode("element", "Modification", "");
                 propertyCreatedOn = _DeXml.CreateNode("element", "ModifiedOn", "");

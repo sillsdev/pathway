@@ -342,7 +342,7 @@ namespace SIL.Tool
                                         }
                                         if (baseValue.Length > 0)
                                         {
-                                            xmlNode.RemoveChild(child); // Remove the base Node, to avoid the conflict
+                                            xmlNode.ParentNode.RemoveChild(child); // Remove the base Node, to avoid the conflict
                                         }
                                         break;
                                     }
@@ -670,7 +670,7 @@ namespace SIL.Tool
                 int countChild = findnodes.Count;
                 for (int i = 0; i < countChild; i++)
                 {
-                    headnode.RemoveChild(findnodes[0]);
+                    headnode.ParentNode.RemoveChild(findnodes[0]);
                 }
             }
             else
