@@ -670,7 +670,7 @@ namespace SIL.Tool
                 int countChild = findnodes.Count;
                 for (int i = 0; i < countChild; i++)
                 {
-                    headnode.ParentNode.RemoveChild(findnodes[0]);
+                    headnode.RemoveChild(findnodes[0]);
                 }
             }
             else

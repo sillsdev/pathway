@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Microsoft.Win32;
@@ -132,6 +133,20 @@ namespace SIL.PublishingSolution
                     preProcessor.ReplaceStringInCss(mergedCSS);
                     preProcessor.InsertPropertyInCSS(mergedCSS);
                     preProcessor.RemoveTextIntent(mergedCSS);
+                    
+
+                    Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
+                    CssTree cssTree = new CssTree();
+                    cssTree.OutputType = Common.OutputType.ODT;
+                    cssClass = cssTree.CreateCssProperty(mergedCSS, true);
+                    if(cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-hide-versenumber-one"))
+                    {
+                        string value = cssClass["@page"]["-ps-hide-versenumber-one"];
+                        if(value.ToLower() == "true")
+                        {
+                            preProcessor.RemoveVerseNumberOne(preProcessor.ProcessedXhtml, mergedCSS);
+                        }
+                    }
 
                     string xhtmlFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                     string defaultCSS = Path.GetFileName(mergedCSS);

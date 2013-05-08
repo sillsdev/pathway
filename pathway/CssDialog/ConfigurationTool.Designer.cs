@@ -828,7 +828,7 @@ namespace SIL.PublishingSolution
             // chkTurnOffFirstVerse
             // 
             this.chkTurnOffFirstVerse.AutoSize = true;
-            this.chkTurnOffFirstVerse.Enabled = false;
+            this.chkTurnOffFirstVerse.Enabled = true;
             this.chkTurnOffFirstVerse.Location = new System.Drawing.Point(107, 67);
             this.chkTurnOffFirstVerse.Name = "chkTurnOffFirstVerse";
             this.chkTurnOffFirstVerse.Size = new System.Drawing.Size(113, 17);

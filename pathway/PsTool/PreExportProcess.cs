@@ -3295,6 +3295,36 @@ namespace SIL.Tool
             xDoc.Save(fileName);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="mergedCSS"> </param>
+        public void RemoveVerseNumberOne(string fileName, string mergedCSS)
+        {
+               if (!File.Exists(fileName)) return;
+                XmlDocument xDoc = Common.DeclareXMLDocument(true);
+                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                xDoc.Load(fileName);
+                string xPath = "//xhtml:span[@class='Chapter_Number']";
+                XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+                if (SectionNodeList == null) return;
+                for (int i = 0; i < SectionNodeList.Count; i++)
+                {
+                    XmlNode paraNode = SectionNodeList[i].ParentNode;
+                    xPath = ".//xhtml:span[@class='Verse_Number']";
+                    XmlNodeList verseNodeList = paraNode.SelectNodes(xPath, namespaceManager);
+                    if (verseNodeList == null) return;
+                    for (int j = 0; j < verseNodeList.Count; j++)
+                    {
+                        verseNodeList[j].InnerText = "";
+                        break;
+                    }
+                }
+                xDoc.Save(fileName);
+        }
+
         //SetNonBreakInVerseNumberSetNonBreakInVerseNumber
 
         public void RemoveTextIntent(string fileName)
