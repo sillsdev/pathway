@@ -57,7 +57,6 @@ div.pictureLeft > img.picture {
 .pictureCaption {
     display: block;
     text-align: center;
-    text-transform:capitalize;
 }
 
 span.reference :before {
