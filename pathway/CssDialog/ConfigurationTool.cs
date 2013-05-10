@@ -736,9 +736,14 @@ namespace SIL.PublishingSolution
             get { return txtFnCallerSymbol; }
         }
 
-        public CheckBox ChkInclThinSpaceXref
+        public CheckBox ChkXrefCusSymbol
         {
-            get { return chkInclThinSpaceXref; }
+            get { return chkXrefCusSymbol; }
+        }
+
+        public TextBox TxtXrefCusSymbol
+        {
+            get { return txtXrefCusSymbol; }
         }
 
         public CheckBox ChkTurnOffFirstVerse
@@ -1379,16 +1384,22 @@ namespace SIL.PublishingSolution
             _CToolBL.SetModifyMode(true);
         }
 
-        private void chkInclThinSpaceXref_CheckStateChanged(object sender, EventArgs e)
-        {
-            EditCSS(sender, e);
-            _CToolBL.chkInclThinSpaceXref_CheckStateChangedBL(sender, e);
-        }
-
         private void chkTurnOffFirstVerse_CheckStateChanged(object sender, EventArgs e)
         {
             EditCSS(sender, e);
             _CToolBL.chkTurnOffFirstVerse_CheckStateChangedBL(sender, e);
+        }
+
+        private void txtXrefCusSymbol_KeyUp(object sender, KeyEventArgs e)
+        {
+            _CToolBL.TxtXRefCusSymbol_KeyUpBL();
+            _CToolBL.SetModifyMode(true);
+        }
+
+        private void chkXrefCusSymbol_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkXrefCusSymbol_CheckStateChangedBL(sender, e);
         }
     }
 }

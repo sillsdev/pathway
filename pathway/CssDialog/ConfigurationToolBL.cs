@@ -140,7 +140,7 @@ namespace SIL.PublishingSolution
         private ConfigurationTool cTool;
         Dictionary<string, string> pageDict = new Dictionary<string, string>();
         protected string _includeFootnoteCaller;
-        protected bool _includeThinSpaceXRefCaller;
+        protected string _includeXRefCaller;
         protected bool _hideVerseNumberOne;
 
         #endregion
@@ -235,7 +235,7 @@ namespace SIL.PublishingSolution
             {
                 string task = "@page";
                 string key = "-ps-custom-xref-caller";
-                return GetValue(task, key, "False");
+                return GetValue(task, key, "Default");
             }
         }
 
@@ -927,9 +927,9 @@ namespace SIL.PublishingSolution
                         value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
                         if (inputTypeBL.ToLower() == "scripture")
                         {
-                            value["-ps-custom-footnote-caller"] = "\"" + _includeFootnoteCaller + "\"";
-                            value["-ps-custom-XRef-caller"] = "\"" + _includeThinSpaceXRefCaller + "\"";
-                            value["-ps-hide-versenumber-one"] = "\"" + _hideVerseNumberOne + "\"";
+                            value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
+                            value["-ps-custom-XRef-caller"] = "\"" + cTool.TxtXrefCusSymbol.Text + "\"";
+                            value["-ps-hide-versenumber-one"] = "\"" + cTool.ChkTurnOffFirstVerse.Checked + "\"";
                         }
                         
                         WriteCssClass(writeCss, "page", value);
@@ -1092,7 +1092,17 @@ namespace SIL.PublishingSolution
                     cTool.ChkIncludeCusFnCaller.Checked = true;
                     cTool.TxtFnCallerSymbol.Text = CustomFootnoteCaller;
                 }
-                cTool.ChkInclThinSpaceXref.Checked = bool.Parse(CustomXRefCaller);
+                if (CustomXRefCaller.ToLower() == "default")
+                {
+                    cTool.ChkXrefCusSymbol.Checked = false;
+                    cTool.TxtXrefCusSymbol.Text = "";
+                }
+                else
+                {
+                    cTool.ChkXrefCusSymbol.Checked = true;
+                    cTool.TxtXrefCusSymbol.Text = CustomXRefCaller;
+                }
+                //cTool.ChkXrefCusSymbol.Checked = bool.Parse(CustomXRefCaller);
                 cTool.ChkTurnOffFirstVerse.Checked = bool.Parse(HideVerseNumberOne);
             }
             cTool.DdlPageNumber.SelectedItem = PageNumber;
@@ -3864,6 +3874,27 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
+        public void TxtXRefCusSymbol_KeyUpBL()
+        {
+            try
+            {
+                _includeXRefCaller = cTool.TxtXrefCusSymbol.Text;
+            }
+            catch { }
+        }
+
+        public void chkXrefCusSymbol_CheckStateChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                cTool.TxtXrefCusSymbol.Enabled = cTool.ChkXrefCusSymbol.Checked;
+                if (cTool.ChkXrefCusSymbol.Checked == false)
+                    cTool.TxtXrefCusSymbol.Text = "";
+                _includeXRefCaller = cTool.TxtXrefCusSymbol.Text;
+            }
+            catch { }
+        }
+
 
         public void txtDesc_ValidatedBL(object sender)
         {
@@ -4439,20 +4470,20 @@ namespace SIL.PublishingSolution
 
         }
 
-        public void chkInclThinSpaceXref_CheckStateChangedBL(object sender, EventArgs e)
-        {
-            try
-            {
-                _includeThinSpaceXRefCaller = cTool.ChkInclThinSpaceXref.Checked;
-            }
-            catch { }
-        }
+        //public void chkInclThinSpaceXref_CheckStateChangedBL(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        _includeThinSpaceXRefCaller = cTool.ChkInclThinSpaceXref.Checked;
+        //    }
+        //    catch { }
+        //}
 
         public void chkTurnOffFirstVerse_CheckStateChangedBL(object sender, EventArgs e)
         {
             try
             {
-                _hideVerseNumberOne = cTool.ChkInclThinSpaceXref.Checked;
+                _hideVerseNumberOne = cTool.ChkTurnOffFirstVerse.Checked;
             }
             catch { }
         }

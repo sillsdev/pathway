@@ -170,6 +170,7 @@ namespace SIL.PublishingSolution
         private int _headwordIndex = 0;
         private bool _isFootnoteCallerStared;
         private string _customFootnoteSymbol = string.Empty;
+        private string _customXRefSymbol = string.Empty;
 
         #endregion
 
@@ -206,7 +207,7 @@ namespace SIL.PublishingSolution
         }
 
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass,
-            Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize, string customFootnote)
+            Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
         {
             OldStyles styleInfo = new OldStyles();
             _pageWidth = pageWidth;
@@ -215,7 +216,8 @@ namespace SIL.PublishingSolution
             _pageSize = pageSize;
             _isFootnoteCallerStared = true;
             _isFromExe = Common.CheckExecutionPath();
-            _customFootnoteSymbol = customFootnote;
+            _customFootnoteSymbol = projInfo.IncludeFootnoteSymbol;
+            _customXRefSymbol = projInfo.IncludeXRefSymbol;
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             ProcessProperty();
@@ -1561,13 +1563,17 @@ namespace SIL.PublishingSolution
                     try
                     {
                         footCallSymb = _reader.GetAttribute(attrName);
-                        if (_customFootnoteSymbol != null && _customFootnoteSymbol.ToLower() != "default")
+                        if (!string.IsNullOrEmpty(_customFootnoteSymbol) && _customFootnoteSymbol.ToLower() != "default" && footerCall.IndexOf("NoteGeneral") == 0)
                         {
                             footCallSymb = _customFootnoteSymbol;
                         }
+                        else if (!string.IsNullOrEmpty(_customXRefSymbol) && _customXRefSymbol.ToLower() != "default" && footerCall.IndexOf("NoteCross") == 0)
+                        {
+                            footCallSymb = _customXRefSymbol;
+                        }
                         else if (footCallSymb != null && footCallSymb.Trim().Length == 0)
                         {
-                            if (_projInfo.IncludeThinSpaceXRef == "True" && footerCall.IndexOf("NoteCross") == 0)
+                            if (footerCall.IndexOf("NoteCross") == 0)
                             {
                                 footCallSymb = "\u2009";
                             }

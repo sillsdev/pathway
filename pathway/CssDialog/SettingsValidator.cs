@@ -1170,32 +1170,35 @@ namespace SIL.PublishingSolution
                 if (childNode != null)
                     foreach (XmlNode node in childNode)
                     {
-                        childNode.ParentNode.RemoveChild(node);
-                        XmlNode newChild = settingsDoc.CreateElement("feature");
-                        XmlAttribute xmlAttribute = settingsDoc.CreateAttribute("name");
+                        node.ParentNode.RemoveChild(node);
+                        XmlDocument tempDoc = new XmlDocument();
+
+                        XmlNode newChild = tempDoc.CreateElement("feature");
+                        XmlAttribute xmlAttribute = tempDoc.CreateAttribute("name");
                         xmlAttribute.Value = "Justified";
                         newChild.Attributes.Append(xmlAttribute);
 
-                        XmlNode option1 = settingsDoc.CreateElement("option");
-                        XmlAttribute xmlAttribute1 = settingsDoc.CreateAttribute("name");
+                        XmlNode option1 = tempDoc.CreateElement("option");
+                        XmlAttribute xmlAttribute1 = tempDoc.CreateAttribute("name");
                         xmlAttribute1.Value = "Yes";
-                        XmlAttribute xmlAttribute2 = settingsDoc.CreateAttribute("file");
+                        XmlAttribute xmlAttribute2 = tempDoc.CreateAttribute("file");
                         xmlAttribute2.Value = "Justified_Yes.css";
                         option1.Attributes.Append(xmlAttribute1);
                         option1.Attributes.Append(xmlAttribute2);
 
-                        XmlNode option2 = settingsDoc.CreateElement("option");
-                        XmlAttribute xmlAttrib1 = settingsDoc.CreateAttribute("name");
+                        XmlNode option2 = tempDoc.CreateElement("option");
+                        XmlAttribute xmlAttrib1 = tempDoc.CreateAttribute("name");
                         xmlAttrib1.Value = "No";
-                        XmlAttribute xmlAttrib2 = settingsDoc.CreateAttribute("file");
+                        XmlAttribute xmlAttrib2 = tempDoc.CreateAttribute("file");
                         xmlAttrib2.Value = "Justified_No.css";
                         option2.Attributes.Append(xmlAttrib1);
                         option2.Attributes.Append(xmlAttrib2);
 
                         newChild.AppendChild(option1);
                         newChild.AppendChild(option2);
+                        XmlNode importNode = childNode.OwnerDocument.ImportNode(newChild, true);
 
-                        childNode.AppendChild(newChild);
+                        childNode.AppendChild(importNode);
                     }
             }
             catch { }
