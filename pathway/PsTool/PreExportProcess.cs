@@ -3629,6 +3629,11 @@ namespace SIL.Tool
             tw.WriteLine(".Chapter_Number {");
             tw.WriteLine("font-size: 199%;");
             tw.WriteLine("}");
+
+            tw.WriteLine(".Title_Secondary {");
+            tw.WriteLine("text-align: center;");
+            tw.WriteLine("}");
+
             tw.Close();
         }
 
