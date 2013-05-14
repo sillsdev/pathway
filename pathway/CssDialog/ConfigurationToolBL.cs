@@ -3411,6 +3411,16 @@ namespace SIL.PublishingSolution
                         if (!success)
                         {
                             success = LOPreview(ps);
+
+                            if (success)
+                            {
+                                string os = Common.GetOsName();
+                                string libre = Common.GetLibraofficeVersion(os);
+                                if (os.IndexOf("Windows") == 0 && libre == null)
+                                {
+                                    success = false;
+                                }
+                            }
                         }
 
                         if (!success)

@@ -401,20 +401,25 @@ namespace SIL.PublishingSolution
                             }
                         }
                         else
-                        {
-
+                        {                            
                             if (File.Exists(file))
                             {
-                                Common.RunCommand(xsltProcessExe,
-                                                  string.Format("{0} {1} {2} {3}", file, xsltFullName, "_.xhtml",
-                                                                getPsApplicationPath), 1);
-
+                                Common.RunCommand(xsltProcessExe, string.Format("{0}{1}{2}{3}", file, xsltFullName, "_.xhtml", getPsApplicationPath), 1);
+                                string xhtmlOutputFile = Path.GetFileNameWithoutExtension(file) + "_.xhtml";
                                 //Common.XsltProcess(file, xsltFullName, "_.xhtml");
                                 // add this file to the html files list
-                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),
-                                                           (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
-                                // clean up the un-transformed file
-                                File.Delete(file);
+                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), xhtmlOutputFile));
+
+                                if (File.Exists(xhtmlOutputFile))
+                                {
+                                    // clean up the un-transformed file
+                                    File.Delete(file);
+                                }
+                                else
+                                {
+                                    Common.XsltProcess(file, xsltFullName, "_.xhtml");
+                                    File.Delete(file);
+                                }                                
                             }
                         }
                     }
