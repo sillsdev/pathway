@@ -3216,6 +3216,40 @@ namespace SIL.Tool
 
         }
 
+
+        /// <summary>
+        /// TD-3482 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void MoveCallerToPrevText(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.PreserveWhitespace = false;
+            xDoc.Load(fileName);
+            const string xPath = "//xhtml:span[@class='scrFootnoteMarker']";
+            XmlNodeList markerNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if (markerNodeList == null) return;
+            for (int i = 0; i < markerNodeList.Count; i++)
+            {
+                XmlNode markerPrevNode = markerNodeList[i].PreviousSibling;
+                XmlNode markerNextNode = markerNodeList[i].NextSibling;
+                if (markerPrevNode != null && markerNextNode != null)
+                {
+                    string nextNodeContent = markerNextNode.OuterXml;
+                    if (nextNodeContent.Contains("Note_Target_Reference"))
+                    {
+                        markerPrevNode.InnerXml = markerPrevNode.InnerXml + markerNextNode.OuterXml;
+                    }
+                }
+                if (markerNextNode != null && markerNextNode.ParentNode != null)
+                    markerNextNode.ParentNode.RemoveChild(markerNextNode);
+            }
+            xDoc.Save(fileName);
+        }
+
         /// <summary>
         /// 
         /// </summary>
