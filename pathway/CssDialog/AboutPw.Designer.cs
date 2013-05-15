@@ -59,13 +59,13 @@
             // 
             this.textBoxDescription.AccessibleName = "textBoxDescription";
             this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxDescription.Location = new System.Drawing.Point(127, 139);
+            this.textBoxDescription.Location = new System.Drawing.Point(118, 139);
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.ReadOnly = true;
             this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDescription.Size = new System.Drawing.Size(224, 24);
+            this.textBoxDescription.Size = new System.Drawing.Size(233, 24);
             this.textBoxDescription.TabIndex = 23;
             this.textBoxDescription.TabStop = false;
             this.textBoxDescription.Visible = false;
@@ -75,11 +75,11 @@
             this.labelCompanyName.AccessibleName = "labelCompanyName";
             this.labelCompanyName.AutoSize = true;
             this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCompanyName.Location = new System.Drawing.Point(127, 87);
+            this.labelCompanyName.Location = new System.Drawing.Point(118, 87);
             this.labelCompanyName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 34);
             this.labelCompanyName.Name = "labelCompanyName";
-            this.labelCompanyName.Size = new System.Drawing.Size(224, 34);
+            this.labelCompanyName.Size = new System.Drawing.Size(233, 34);
             this.labelCompanyName.TabIndex = 22;
             this.labelCompanyName.Text = "SIL International";
             this.labelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -88,11 +88,11 @@
             // 
             this.labelCopyright.AccessibleName = "labelCopyright";
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.Location = new System.Drawing.Point(127, 58);
+            this.labelCopyright.Location = new System.Drawing.Point(118, 58);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(224, 17);
+            this.labelCopyright.Size = new System.Drawing.Size(233, 17);
             this.labelCopyright.TabIndex = 21;
             this.labelCopyright.Text = "Copyright © 2008-2012 SIL International";
             this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -101,11 +101,11 @@
             // 
             this.labelVersion.AccessibleName = "labelVersion";
             this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelVersion.Location = new System.Drawing.Point(127, 29);
+            this.labelVersion.Location = new System.Drawing.Point(118, 29);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelVersion.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(224, 17);
+            this.labelVersion.Size = new System.Drawing.Size(233, 17);
             this.labelVersion.TabIndex = 0;
             this.labelVersion.Text = "Version";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -115,11 +115,11 @@
             this.labelProductName.AccessibleName = "labelProductName";
             this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelProductName.Location = new System.Drawing.Point(127, 0);
+            this.labelProductName.Location = new System.Drawing.Point(118, 0);
             this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelProductName.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(224, 17);
+            this.labelProductName.Size = new System.Drawing.Size(233, 17);
             this.labelProductName.TabIndex = 19;
             this.labelProductName.Text = "Product Name";
             this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -128,8 +128,8 @@
             // 
             this.tableLayoutPanel.AccessibleName = "tableLayoutPanel";
             this.tableLayoutPanel.ColumnCount = 3;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.04527F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.79424F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27F));
             this.tableLayoutPanel.Controls.Add(this.logoPictureBox, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.labelProductName, 1, 0);
@@ -159,7 +159,7 @@
             // logoPictureBox
             // 
             this.logoPictureBox.AccessibleName = "logoPictureBox";
-            this.logoPictureBox.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources1.SIL_Color_Logo;
+            this.logoPictureBox.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.SIL_Color_Logo;
             this.logoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
             this.logoPictureBox.Name = "logoPictureBox";
@@ -172,17 +172,16 @@
             // 
             this.lblProjectUrl.AutoSize = true;
             this.lblProjectUrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblProjectUrl.Location = new System.Drawing.Point(124, 166);
+            this.lblProjectUrl.Location = new System.Drawing.Point(115, 166);
             this.lblProjectUrl.Name = "lblProjectUrl";
-            this.lblProjectUrl.Size = new System.Drawing.Size(227, 29);
+            this.lblProjectUrl.Size = new System.Drawing.Size(236, 29);
             this.lblProjectUrl.TabIndex = 26;
             this.lblProjectUrl.Text = "Other project related information is available at:";
-            this.lblProjectUrl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chkbHelpImprove
             // 
             this.chkbHelpImprove.AutoSize = true;
-            this.chkbHelpImprove.Location = new System.Drawing.Point(124, 198);
+            this.chkbHelpImprove.Location = new System.Drawing.Point(115, 198);
             this.chkbHelpImprove.Name = "chkbHelpImprove";
             this.chkbHelpImprove.Size = new System.Drawing.Size(89, 17);
             this.chkbHelpImprove.TabIndex = 25;
@@ -200,7 +199,6 @@
             this.lnkLblUrl.TabIndex = 27;
             this.lnkLblUrl.TabStop = true;
             this.lnkLblUrl.Text = "http://pathway.sil.org/";
-            this.lnkLblUrl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkLblUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLblUrl_LinkClicked);
             // 
             // AboutPw
