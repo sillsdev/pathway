@@ -923,7 +923,7 @@ namespace SIL.PublishingSolution
                         value["margin-right"] = cTool.TxtPageOutside.Text;
                         value["margin-bottom"] = cTool.TxtPageBottom.Text;
                         value["margin-left"] = cTool.TxtPageInside.Text;
-                        value["-ps-fileproduce"] = "\"" + _fileProduce + "\"";
+                        value["-ps-fileproduce"] = "\"" + cTool.DdlFileProduceDict.Text + "\"";
                         value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
                         if (inputTypeBL.ToLower() == "scripture")
                         {
