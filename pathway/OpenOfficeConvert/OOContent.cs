@@ -1554,7 +1554,7 @@ namespace SIL.PublishingSolution
         private void SetFootnote()
         {
             string footerCall = _className + "..footnote-call";
-            if (IdAllClass.ContainsKey(footerCall))
+            if (IdAllClass.ContainsKey(footerCall) && IdAllClass[footerCall].ContainsKey("content"))
             {
                 footCallSymb = IdAllClass[footerCall]["content"];
                 if (footCallSymb.IndexOf('(') >= 0)
