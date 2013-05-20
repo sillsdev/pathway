@@ -808,11 +808,15 @@ namespace SIL.Tool
             sb.AppendLine("<!-- Contents page -->");
             sb.AppendLine("<div id='TOCPage' class='Contents'>");
 
-            if (_xhtmlFileNameWithPath.ToLower().Contains("main"))//TocError
+            if (_xhtmlFileNameWithPath.ToLower().Contains("main") || _projInfo.ProjectInputType.ToLower() == "scripture") //TocError
             {
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     sb.AppendLine("<h1>Table of Contents</h1><h2>Main</h2>");
+                }
+                else
+                {
+                    sb.AppendLine("<h1>Table of Contents</h1>");
                 }
                 // collect book names
 
