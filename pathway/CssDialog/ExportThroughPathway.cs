@@ -1191,7 +1191,7 @@ namespace SIL.PublishingSolution
             txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, ddlStyle.Text);
             if (_newSaveInFolderPath.Length > 0)
             {
-                txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + ddlStyle.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmm");
+                txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + ddlStyle.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
             }
         }
 
@@ -1295,7 +1295,7 @@ namespace SIL.PublishingSolution
                 directoryInfo.Create();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                string folderName = ddlStyle.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmm");
+                string folderName = ddlStyle.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
                 _newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
                 Param.SetValue(Param.PublicationLocation, _newSaveInFolderPath);
                 txtSaveInFolder.Text = _newSaveInFolderPath;
