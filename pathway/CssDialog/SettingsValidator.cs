@@ -62,7 +62,7 @@ namespace SIL.PublishingSolution
             replaceString["%(Documents)s"] = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             replaceString["$(Base)s"] = "Publications";
             replaceString["%(CurrentProject)s"] = "sena3";
-            replaceString["$(StyleSheet)s_$(DateTime)s"] = "GPS11L11" + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmm");
+            replaceString["$(StyleSheet)s_$(DateTime)s"] = "GPS11L11" + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
 
             boolValue.Add("True");
             boolValue.Add("False");

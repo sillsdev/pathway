@@ -1181,7 +1181,7 @@ namespace Test.PsTool
             string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string database = "{Current_Project}";
             string layout = "Quick";
-            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hhmm");
+            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
             string expected = Common.PathCombine(documents, @"Publications\{Current_Project}\Dictionary\Quick_" + dateTime);
             string actual = Common.GetSaveInFolder(template, database, layout);
             Assert.AreEqual(expected, actual);
@@ -1190,7 +1190,7 @@ namespace Test.PsTool
         [Test]
         public void CustomSavedInFolderTest()
         {
-            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hhmm");
+            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
             bool actual = Common.CustomSaveInFolder(dateTime);
             Assert.AreEqual(false, actual);
         }
