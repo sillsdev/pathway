@@ -3366,9 +3366,9 @@ namespace SIL.Tool
         //SetNonBreakInVerseNumberSetNonBreakInVerseNumber
 
         public void RemoveTextIntent(string fileName)
-        {
-            //string fileName = txtInputPath.Text;
-            string newFileName = fileName.Replace(".", "1.");
+        {            
+            string fileNameExtension = Path.GetExtension(fileName);
+            string newFileName = fileName.Replace(fileNameExtension, "1" + fileNameExtension);
             string line;
             StreamReader read = new StreamReader(fileName);
             StreamWriter write = new StreamWriter(newFileName);
