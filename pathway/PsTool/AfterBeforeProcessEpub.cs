@@ -59,6 +59,9 @@ namespace SIL.PublishingSolution
         private bool isFileEmpty = true;
         string _outputExtension = string.Empty;
         private string _sourcePicturePath;
+
+        public ArrayList _psuedoClassName = new ArrayList();
+
         #endregion
 
         #region Public Variable
@@ -387,6 +390,10 @@ namespace SIL.PublishingSolution
                 else
                 {
                     _writer.WriteString(psuedoBefore.Content);
+                    if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.Content))
+                    {
+                        _psuedoClassName.Add(psuedoBefore.Content);
+                    }
                 }
             }
 
@@ -553,6 +560,10 @@ namespace SIL.PublishingSolution
                     else
                     {
                         _writer.WriteString(classInfo.Content);
+                        if (classInfo.Content != null && !_psuedoClassName.Contains(classInfo.StyleName))
+                        {
+                            _psuedoClassName.Add(classInfo.StyleName);
+                        }
                     }
                     _psuedoAfter.Remove(_closeChildName);
                 }

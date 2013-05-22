@@ -2578,6 +2578,28 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
+        public void InsertPseudoContentProperty(string cssFileName, ArrayList pseudoClass)
+        {
+            TextWriter tw = new StreamWriter(cssFileName, true);
+            for (int i = 0; i < pseudoClass.Count; i++)
+            {
+                string[] value = pseudoClass[i].ToString().Split('_');
+                try
+                {
+                    if (value.Length > 1)
+                    {
+                        tw.WriteLine("." +  value[0].Substring(0, value[0].IndexOf('.')) + ":" + value[0].Substring(value[0].IndexOf('.') + 2) + " {");
+                        tw.WriteLine("content: '';" );
+                        tw.WriteLine("}");
+                        tw.Close();
+                    }
+                }
+                catch{}
+
+            }
+            
+        }
+
         public string InsertHiddenChapterNumber()
         {
             XmlDocument xDoc = Common.DeclareXMLDocument(false);

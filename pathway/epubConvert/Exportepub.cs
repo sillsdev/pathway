@@ -31,6 +31,7 @@
 //#define TIME_IT 
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -116,6 +117,8 @@ namespace SIL.PublishingSolution
         public string References { get; set; }
         public FontHandling MissingFont { get; set; } // note that this doesn't use all the enum values
         public FontHandling NonSilFont { get; set; }
+        public ArrayList _pseudoClass = new ArrayList();
+
 
         // interface methods
         public string ExportType
@@ -242,6 +245,7 @@ namespace SIL.PublishingSolution
                 preProcessor.SetDropCapInCSS(mergedCSS);
                 preProcessor.InsertCoverPageImageStyleInCSS(mergedCSS);
                 preProcessor.InsertSectionHeadID();
+                preProcessor.InsertPseudoContentProperty(mergedCSS, _pseudoClass);
                 string defaultCSS = Path.GetFileName(mergedCSS);
                 // rename the CSS file to something readable
                 string niceNameCSS = Path.Combine(tempFolder, "book.css");
@@ -720,6 +724,7 @@ if(_isUnixOS)
 
             AfterBeforeProcessEpub afterBeforeProcess = new AfterBeforeProcessEpub();
             afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            _pseudoClass = afterBeforeProcess._psuedoClassName;
 
             if (projInfo.IsReversalExist && projInfo.ProjectInputType.ToLower() == "dictionary")
             {

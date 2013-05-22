@@ -1024,6 +1024,7 @@ namespace SIL.PublishingSolution
                 {
                     EnableDisablePanel(true);
                     if (cTool.TxtName.Text.ToLower() == "oneweb") { cTool.TsDelete.Enabled = false; }
+                    if(cTool.BtnMobile.Text.ToLower() == "dictformids"){EnableDisablePanel(false);}
                     //tsPreview.Enabled = false;
                     cTool.TxtApproved.Visible = false;
                     cTool.LblApproved.Visible = false;
@@ -1682,6 +1683,12 @@ namespace SIL.PublishingSolution
                     //cTool.TabControl1.TabPages.Add(tabmob);
                     cTool.TabControl1.TabPages.Insert(1, tabmob);
                     cTool.TabControl1.TabPages.Insert(2, tabpreview);
+
+                    if(inputTypeBL.ToLower() == "dictionary")
+                    {
+                        cTool.TabControl1.TabPages[1].Enabled = false;
+                        return;
+                    }
 
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     foreach (XmlNode VARIABLE in baseNode1)
