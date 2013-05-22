@@ -726,6 +726,30 @@ namespace SIL.PublishingSolution
             get { return pnlReferenceFormat; }
         }
 
+        public CheckBox ChkIncludeCusFnCaller
+        {
+            get { return chkIncludeCusFnCaller; }
+        }
+
+        public TextBox TxtFnCallerSymbol
+        {
+            get { return txtFnCallerSymbol; }
+        }
+
+        public CheckBox ChkXrefCusSymbol
+        {
+            get { return chkXrefCusSymbol; }
+        }
+
+        public TextBox TxtXrefCusSymbol
+        {
+            get { return txtXrefCusSymbol; }
+        }
+
+        public CheckBox ChkTurnOffFirstVerse
+        {
+            get { return chkTurnOffFirstVerse; }
+        }
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
@@ -801,11 +825,13 @@ namespace SIL.PublishingSolution
 
         private void btnDictionary_Click(object sender, EventArgs e)
         {
+            btnMobile.Text = "DictForMids";
             _CToolBL.btnDictionary_ClickBL();
         }
 
         private void btnScripture_Click(object sender, EventArgs e)
         {
+            btnMobile.Text = "Mobile";
             _CToolBL.btnScripture_ClickBL();
         }
 
@@ -1270,6 +1296,12 @@ namespace SIL.PublishingSolution
             _CToolBL.chkFixedLineHeight_CheckedChangedBL();
         }
 
+        private void chkIncludeCusFnCaller_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkIncludeCusFnCaller_CheckedChangedBL(sender, e);
+        }
+
         private void txtFtpFileLocation_Validated(object sender, EventArgs e)
         {
             _CToolBL.txtFtpFileLocation_ValidatedBL(sender, e);
@@ -1344,6 +1376,30 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
+        }
+
+        private void txtFnCallerSymbol_KeyUp(object sender, KeyEventArgs e)
+        {
+            _CToolBL.txtFnCallerSymbol_KeyUpBL();
+            _CToolBL.SetModifyMode(true);
+        }
+
+        private void chkTurnOffFirstVerse_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkTurnOffFirstVerse_CheckStateChangedBL(sender, e);
+        }
+
+        private void txtXrefCusSymbol_KeyUp(object sender, KeyEventArgs e)
+        {
+            _CToolBL.TxtXRefCusSymbol_KeyUpBL();
+            _CToolBL.SetModifyMode(true);
+        }
+
+        private void chkXrefCusSymbol_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkXrefCusSymbol_CheckStateChangedBL(sender, e);
         }
     }
 }

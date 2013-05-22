@@ -2,6 +2,7 @@
 @page{
     @top-center{
            content: counter( page);
+           margin-top: 1cm;
     }
 }
 

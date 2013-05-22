@@ -139,6 +139,10 @@ namespace SIL.PublishingSolution
         protected TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
         private ConfigurationTool cTool;
         Dictionary<string, string> pageDict = new Dictionary<string, string>();
+        protected string _includeFootnoteCaller;
+        protected string _includeXRefCaller;
+        protected bool _hideVerseNumberOne;
+
         #endregion
 
         #region Constructor
@@ -212,6 +216,36 @@ namespace SIL.PublishingSolution
                 string task = "@page";
                 string key = "margin-top";
                 return GetValue(task, key, "0");
+            }
+        }
+
+        public string CustomFootnoteCaller
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-custom-footnote-caller";
+                return GetValue(task, key, "Default");
+            }
+        }
+
+        public string CustomXRefCaller
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-custom-xref-caller";
+                return GetValue(task, key, "Default");
+            }
+        }
+
+        public string HideVerseNumberOne
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-hide-versenumber-one";
+                return GetValue(task, key, "False");
             }
         }
 
@@ -495,7 +529,7 @@ namespace SIL.PublishingSolution
                 string task = "@page";
                 string key = "-ps-fileproduce";
                 string file = GetValue(task, key, "One");
-                if (file != null) 
+                if (file != null)
                     return file.Replace("\"", "");
                 else
                 {
@@ -551,7 +585,7 @@ namespace SIL.PublishingSolution
                 cTool.BtnPaper.Enabled = true;
                 cTool.BtnWeb.Enabled = true;
                 cTool.BtnOthers.Enabled = true;
-                cTool.BtnMobile.Enabled = false;
+                cTool.BtnMobile.Enabled = true;
             }
         }
 
@@ -889,8 +923,15 @@ namespace SIL.PublishingSolution
                         value["margin-right"] = cTool.TxtPageOutside.Text;
                         value["margin-bottom"] = cTool.TxtPageBottom.Text;
                         value["margin-left"] = cTool.TxtPageInside.Text;
-                        value["-ps-fileproduce"] = "\"" + _fileProduce + "\"";
+                        value["-ps-fileproduce"] = "\"" + cTool.DdlFileProduceDict.Text + "\"";
                         value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
+                        if (inputTypeBL.ToLower() == "scripture")
+                        {
+                            value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
+                            value["-ps-custom-XRef-caller"] = "\"" + cTool.TxtXrefCusSymbol.Text + "\"";
+                            value["-ps-hide-versenumber-one"] = "\"" + cTool.ChkTurnOffFirstVerse.Checked + "\"";
+                        }
+                        
                         WriteCssClass(writeCss, "page", value);
                     }
                     // write out the changes
@@ -983,6 +1024,7 @@ namespace SIL.PublishingSolution
                 {
                     EnableDisablePanel(true);
                     if (cTool.TxtName.Text.ToLower() == "oneweb") { cTool.TsDelete.Enabled = false; }
+                    if(cTool.BtnMobile.Text.ToLower() == "dictformids"){EnableDisablePanel(false);}
                     //tsPreview.Enabled = false;
                     cTool.TxtApproved.Visible = false;
                     cTool.LblApproved.Visible = false;
@@ -1041,6 +1083,28 @@ namespace SIL.PublishingSolution
             if (inputTypeBL.ToLower() == "scripture")
             {
                 cTool.DdlReferenceFormat.SelectedItem = ReferenceFormat;
+                if(CustomFootnoteCaller.ToLower() == "default")
+                {
+                    cTool.ChkIncludeCusFnCaller.Checked = false;
+                    cTool.TxtFnCallerSymbol.Text = "";
+                }
+                else
+                {
+                    cTool.ChkIncludeCusFnCaller.Checked = true;
+                    cTool.TxtFnCallerSymbol.Text = CustomFootnoteCaller;
+                }
+                if (CustomXRefCaller.ToLower() == "default")
+                {
+                    cTool.ChkXrefCusSymbol.Checked = false;
+                    cTool.TxtXrefCusSymbol.Text = "";
+                }
+                else
+                {
+                    cTool.ChkXrefCusSymbol.Checked = true;
+                    cTool.TxtXrefCusSymbol.Text = CustomXRefCaller;
+                }
+                //cTool.ChkXrefCusSymbol.Checked = bool.Parse(CustomXRefCaller);
+                cTool.ChkTurnOffFirstVerse.Checked = bool.Parse(HideVerseNumberOne);
             }
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
@@ -1619,6 +1683,12 @@ namespace SIL.PublishingSolution
                     //cTool.TabControl1.TabPages.Add(tabmob);
                     cTool.TabControl1.TabPages.Insert(1, tabmob);
                     cTool.TabControl1.TabPages.Insert(2, tabpreview);
+
+                    if(inputTypeBL.ToLower() == "dictionary")
+                    {
+                        cTool.TabControl1.TabPages[1].Enabled = false;
+                        return;
+                    }
 
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     foreach (XmlNode VARIABLE in baseNode1)
@@ -2325,9 +2395,7 @@ namespace SIL.PublishingSolution
             //To add StyleProperty for Mobile media
             if (inputTypeBL.ToLower() == "scripture" && MediaType.ToLower() == "mobile")
             {
-                XmlNodeList mobileBaseNode =
-                    Param.GetItems("//styles/" + MediaType + "/style[@name='" +
-                                   grid[AttribName, SelectedRowIndex].Value + "']/styleProperty");
+                XmlNodeList mobileBaseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + grid[0, SelectedRowIndex].Value.ToString() + "']/styleProperty");
                 foreach (XmlNode stylePropertyNode in mobileBaseNode)
                 {
                     baseNode.AppendChild(stylePropertyNode.Clone());
@@ -2336,10 +2404,8 @@ namespace SIL.PublishingSolution
             // others (epub)
             if (MediaType.ToLower() == "others")
             {
-                XmlNodeList mobileBaseNode =
-                    Param.GetItems("//styles/" + MediaType + "/style[@name='" +
-                                   grid[AttribName, SelectedRowIndex].Value + "']/styleProperty");
-                foreach (XmlNode stylePropertyNode in mobileBaseNode)
+                XmlNodeList otherBaseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + grid[0, SelectedRowIndex].Value.ToString() + "']/styleProperty");
+                foreach (XmlNode stylePropertyNode in otherBaseNode)
                 {
                     baseNode.AppendChild(stylePropertyNode.Clone());
                 }
@@ -2347,9 +2413,7 @@ namespace SIL.PublishingSolution
             //web
             if (inputTypeBL.ToLower() == "scripture" && MediaType.ToLower() == "web")
             {
-                XmlNodeList webBaseNode =
-                    Param.GetItems("//styles/" + MediaType + "/style[@name='" +
-                                   grid[AttribName, SelectedRowIndex].Value + "']/styleProperty");
+                XmlNodeList webBaseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + grid[0, SelectedRowIndex].Value.ToString() + "']/styleProperty");
                 foreach (XmlNode stylePropertyNode in webBaseNode)
                 {
                     baseNode.AppendChild(stylePropertyNode.Clone());
@@ -2776,6 +2840,8 @@ namespace SIL.PublishingSolution
                 {
                     grid.ClearSelection();
                     grid.Rows[0].Selected = true;
+                    SelectedRowIndex = 0;
+                    ShowInfoValue();
                 }
             }
         }
@@ -3352,6 +3418,16 @@ namespace SIL.PublishingSolution
                         if (!success)
                         {
                             success = LOPreview(ps);
+
+                            if (success)
+                            {
+                                string os = Common.GetOsName();
+                                string libre = Common.GetLibraofficeVersion(os);
+                                if (os.IndexOf("Windows") == 0 && libre == null)
+                                {
+                                    success = false;
+                                }
+                            }
                         }
 
                         if (!success)
@@ -3794,6 +3870,48 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
+        public void chkIncludeCusFnCaller_CheckedChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                cTool.TxtFnCallerSymbol.Enabled = cTool.ChkIncludeCusFnCaller.Checked;
+                if (cTool.ChkIncludeCusFnCaller.Checked == false)
+                    cTool.TxtFnCallerSymbol.Text = "";
+                _includeFootnoteCaller = cTool.TxtFnCallerSymbol.Text;
+            }
+            catch { }
+        }
+
+        public void txtFnCallerSymbol_KeyUpBL()
+        {
+            try
+            {
+                _includeFootnoteCaller = cTool.TxtFnCallerSymbol.Text;
+            }
+            catch { }
+        }
+
+        public void TxtXRefCusSymbol_KeyUpBL()
+        {
+            try
+            {
+                _includeXRefCaller = cTool.TxtXrefCusSymbol.Text;
+            }
+            catch { }
+        }
+
+        public void chkXrefCusSymbol_CheckStateChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                cTool.TxtXrefCusSymbol.Enabled = cTool.ChkXrefCusSymbol.Checked;
+                if (cTool.ChkXrefCusSymbol.Checked == false)
+                    cTool.TxtXrefCusSymbol.Text = "";
+                _includeXRefCaller = cTool.TxtXrefCusSymbol.Text;
+            }
+            catch { }
+        }
+
 
         public void txtDesc_ValidatedBL(object sender)
         {
@@ -4063,7 +4181,7 @@ namespace SIL.PublishingSolution
                 // EDB (2 May 2011): TD-2344 / replace with Export Through Pathway dlg
                 var dlg = new ExportThroughPathway("Set Defaults");
                 //var dlg = new PrintVia("Set Defaults");
-                dlg.InputType = inputTypeBL; 
+                dlg.InputType = inputTypeBL;
                 dlg.DatabaseName = "{Project_Name}";
                 dlg.Media = MediaType;
                 dlg.ShowDialog();
@@ -4084,7 +4202,7 @@ namespace SIL.PublishingSolution
                 cTool.PicPreview.Visible = false;
                 cTool.BtnPrevious.Visible = false;
                 cTool.BtnNext.Visible = false;
-                
+
                 string seletedLayout = string.Empty;
                 cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Selected = true;
                 seletedLayout = cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Cells[0].Value.ToString();
@@ -4369,6 +4487,24 @@ namespace SIL.PublishingSolution
 
         }
 
+        //public void chkInclThinSpaceXref_CheckStateChangedBL(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        _includeThinSpaceXRefCaller = cTool.ChkInclThinSpaceXref.Checked;
+        //    }
+        //    catch { }
+        //}
+
+        public void chkTurnOffFirstVerse_CheckStateChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _hideVerseNumberOne = cTool.ChkTurnOffFirstVerse.Checked;
+            }
+            catch { }
+        }
+
         public void tabControl1_SelectedIndexChangedBL()
         {
             if (cTool.TabControl1.SelectedIndex == 0) // css properties
@@ -4423,10 +4559,11 @@ namespace SIL.PublishingSolution
             try
             {
                 _screenMode = ScreenMode.SaveAs;
+                StyleName = cTool.TxtName.Text;
                 if (CopyStyle(cTool.StylesGrid, _cssNames))
                 {
                     ShowStyleInGrid(cTool.StylesGrid, _cssNames);
-					string seletedLayout = string.Empty;
+                    string seletedLayout = string.Empty;
                     cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Selected = true;
                     seletedLayout = cTool.StylesGrid.Rows[cTool.StylesGrid.Rows.Count - 1].Cells[0].Value.ToString();
                     _lastSelectedLayout = seletedLayout;
@@ -4435,7 +4572,7 @@ namespace SIL.PublishingSolution
                     setLastSelectedLayout();
                     SelectRow(cTool.StylesGrid, PreviousStyleName);
                     WriteCss();
-                    
+
                     _screenMode = ScreenMode.View;
                     SelectedRowIndex = cTool.StylesGrid.Rows.Count - 1;
                     ShowInfoValue();

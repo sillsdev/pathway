@@ -193,7 +193,12 @@ namespace SIL.PublishingSolution
                     case "column-rule-width":
                         ColumnWidth(property.Value);
                         break;
-
+                    case "-ps-custom-footnote-caller":
+                        CustomFootnoteCaller(property.Value);
+                        break;
+                    case "-ps-custom-XRef-caller":
+                        CustomXrefCaller(property.Value);
+                        break;
                     case "pathway":
                         Pathway(property.Value);
                         break;
@@ -228,6 +233,16 @@ namespace SIL.PublishingSolution
         {
             //_propertyKey = "width";
             _IDProperty[_propertyKey] = Add_pt(propertyValue);
+        }
+
+        private void CustomFootnoteCaller(string propertyValue)
+        {
+            _IDProperty[_propertyKey] = propertyValue;
+        }
+
+        private void CustomXrefCaller(string propertyValue)
+        {
+            _IDProperty[_propertyKey] = propertyValue;
         }
 
         public void VerticalJustification(string propertyValue)

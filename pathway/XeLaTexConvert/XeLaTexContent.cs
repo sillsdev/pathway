@@ -581,6 +581,11 @@ namespace SIL.PublishingSolution
         private string ReplaceString(string data)
         {
             //data = Common.ReplaceSymbolToText(data);
+            if (!_replaceSymbolToText.ContainsKey(" // "))
+            {
+                _replaceSymbolToText.Add(" // ", " \\linebreak  ");
+            }
+            
             if (_replaceSymbolToText.Count > 0)
             {
                 foreach (string srchKey in _replaceSymbolToText.Keys)
@@ -621,6 +626,11 @@ namespace SIL.PublishingSolution
                     builder.Append(var);
                 }
                 content = builder.ToString();
+            }
+            // No space after versenumber
+            if (_classNameWithLang.IndexOf("VerseNumber") == 0)
+            {
+                _isWhiteSpace = true;
             }
             return content;
         }
@@ -892,7 +902,7 @@ namespace SIL.PublishingSolution
                             _xetexFile.Write(headerFormat);
                             _headerContent = content;
                         }
-                        if (styleFullName == "spanreversalformentryletDatadicBody" && content != null)
+                        if (styleFullName.Contains("spanreversalform") && styleFullName.Contains("entryletDatadicBody") && content != null)
                         {
                             //if (_headerContent.Trim().Length == 0)
                             _headerContent = content;

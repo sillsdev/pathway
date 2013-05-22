@@ -739,7 +739,6 @@ namespace SIL.PublishingSolution
             preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
             //preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
-
             //if (_isFromExe)
             //{
             //    //Preprocess for FrontMatter CSS
@@ -760,7 +759,8 @@ namespace SIL.PublishingSolution
             LOStyles inStyles = new LOStyles();
             inStyles._multiLanguageHeader = isMultiLanguageHeader;
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
-
+            projInfo.IncludeFootnoteSymbol = inStyles._customFootnoteCaller;
+            projInfo.IncludeXRefSymbol = inStyles._customXRefCaller;
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
@@ -810,7 +810,6 @@ namespace SIL.PublishingSolution
             cXML.RefFormat = this._refFormat;
 
             SetHeaderFontName(projInfo, idAllClass);
-
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize);
             PostProcess(projInfo);
 
@@ -928,6 +927,7 @@ namespace SIL.PublishingSolution
                 InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
                 InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
             }
+            ChangeTitleNameasBookName(projInfo.TempOutputFolder);
         }
 
         public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
@@ -1127,6 +1127,41 @@ namespace SIL.PublishingSolution
                     {
                         list1.InnerXml = FirstNode.OuterXml.Replace("text:span", "text:p") +
                                          @"<text:p text:style-name=""Illustration"">" + list1.InnerXml + "</text:p>";
+                    }
+                }
+            }
+            xdoc.PreserveWhitespace = true;
+            xdoc.Save(filename);
+        }
+
+        public static void ChangeTitleNameasBookName(string tempOutputFolder)
+        {
+            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.PreserveWhitespace = false;
+            xdoc.Load(filename);
+
+            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
+            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+            if (publicationInfo.ProjectInputType.ToLower() == "scripture")
+            {
+                string xx = "//text:section[@text:style-name='Sect_scrBook']";
+                XmlNodeList bookList = xdoc.SelectNodes(xx, nsmgr1);
+                if(bookList != null && bookList.Count > 0)
+                {
+                    for (int i = 0; i < bookList.Count; i++)
+                    {
+                        string xpath = ".//text:span[@text:style-name='scrBookName_scrBook_scrBody']";
+                        XmlNode bookNameNode = bookList[i].SelectSingleNode(xpath, nsmgr1);
+                        if (bookNameNode != null)
+                        {
+                            string bookName = bookNameNode.InnerText;
+                            xpath = ".//text:span[@text:style-name='span_TitleMain_scrBook_scrBody']";
+                            XmlNode titleNode = bookList[i].SelectSingleNode(xpath, nsmgr1);
+                            if (titleNode != null) titleNode.InnerText = bookName;
+                        }
                     }
                 }
             }

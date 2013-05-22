@@ -72,6 +72,9 @@ namespace SIL.Tool
         public string _selectedTemplateStyle = string.Empty;
 
         private string _headerReferenceFormat = string.Empty;
+        private string _includeXRefSymbol;
+        private string _hideVerseNumberOne;
+        private string _includeFootnoteSymbol;
 
         #endregion
 
@@ -272,6 +275,17 @@ namespace SIL.Tool
             set { _headerReferenceFormat = value; }
         }
 
+        public string IncludeXRefSymbol
+        {
+            get { return _includeXRefSymbol; }
+            set { _includeXRefSymbol = value; }
+        }
+
+        public string IncludeFootnoteSymbol
+        {
+            get { return _includeFootnoteSymbol; }
+            set { _includeFootnoteSymbol = value; }
+        }
         #endregion
 
 

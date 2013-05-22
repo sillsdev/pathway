@@ -2,12 +2,14 @@
 @page :left {
 @top-left {
            content: counter( page);
+           margin-top: 1cm;
     }
 }
 
 @page :right {
     @top-right {
            content: counter( page);
+           margin-top: 1cm;
     }
     
 }

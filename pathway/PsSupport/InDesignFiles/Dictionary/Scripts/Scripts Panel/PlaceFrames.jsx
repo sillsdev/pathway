@@ -14,8 +14,8 @@ var margin=new Array("letHead", "1.5", "4.5", "1.666667", "4.5");//
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  Mar 04 2013 
-// TD-3398(Page breaks in main section but not before reversal)
+// Modified On:  Mar 28 2013 
+// TD-3440(Some letters begin a new page and others do not)
 // <remarks> 
 // Format the FrontMatter based on User Selection
 // </remarks>
@@ -790,6 +790,8 @@ function SetOverflowsPages(myStory,frameBounds)
 	if(!myStory.overflows)
 	{
 		BalancedColumns(myStory);
+		fitFrameBound = myStory.geometricBounds;
+		currentMarginTop = fitFrameBound[2] ;		
 	}
 
 	return myStory;

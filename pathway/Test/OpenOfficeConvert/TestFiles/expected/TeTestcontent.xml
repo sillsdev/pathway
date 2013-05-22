@@ -76,7 +76,7 @@
             <text:a xlink:type="simple" xlink:href="#f42f5853c-9e2c-433a-9494-5ca12930fd38">Test fghgf </text:a>
           </text:span>
           <text:note text:id="ftn1" text:note-class="footnote">
-            <text:note-citation text:label="a ">a </text:note-citation>
+            <text:note-citation text:label="a">a</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">1:1 = </text:span>
@@ -87,6 +87,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="f42f5853c-9e2c-433a-9494-5ca12930fd38" />
             <text:bookmark-end text:name="f42f5853c-9e2c-433a-9494-5ca12930fd38" />. </text:span>
@@ -121,7 +122,7 @@
             <text:a xlink:type="simple" xlink:href="#f3ed97a6e-dbd4-472a-a467-fd17c8ced75a">Test hkh </text:a>
           </text:span>
           <text:note text:id="ftn2" text:note-class="footnote">
-            <text:note-citation text:label="b ">b </text:note-citation>
+            <text:note-citation text:label="b">b</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">1:11 = </text:span>
@@ -129,6 +130,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="f3ed97a6e-dbd4-472a-a467-fd17c8ced75a" />
             <text:bookmark-end text:name="f3ed97a6e-dbd4-472a-a467-fd17c8ced75a" />? Non! Je suis trop vieille pour cela. </text:span>
@@ -197,7 +199,7 @@
             <text:a xlink:type="simple" xlink:href="#f10469e95-c350-43ed-8441-181aec42ee4e">Test hbjkh </text:a>
           </text:span>
           <text:note text:id="ftn3" text:note-class="footnote">
-            <text:note-citation text:label="c ">c </text:note-citation>
+            <text:note-citation text:label="c">c</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">2:2 = </text:span>
@@ -205,6 +207,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="f10469e95-c350-43ed-8441-181aec42ee4e" />
             <text:bookmark-end text:name="f10469e95-c350-43ed-8441-181aec42ee4e" />qui sera bon envers moi en me permettant de le faire.” Noémi répond: “Vas-y, ma fille.” </text:span>
@@ -272,7 +275,7 @@
             <text:a xlink:type="simple" xlink:href="#f66fb170f-1f1d-418b-86d8-171477728299">Test SSSS </text:a>
           </text:span>
           <text:note text:id="ftn4" text:note-class="footnote">
-            <text:note-citation text:label="d ">d </text:note-citation>
+            <text:note-citation text:label="d">d</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">2:20 = </text:span>
@@ -280,6 +283,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="f66fb170f-1f1d-418b-86d8-171477728299" />
             <text:bookmark-end text:name="f66fb170f-1f1d-418b-86d8-171477728299" />.” </text:span>
@@ -320,7 +324,7 @@
             <text:a xlink:type="simple" xlink:href="#fae3f9f55-e5fc-4bd8-a7f0-8714c4a8b1aa">Test VVV </text:a>
           </text:span>
           <text:note text:id="ftn5" text:note-class="footnote">
-            <text:note-citation text:label="e ">e </text:note-citation>
+            <text:note-citation text:label="e">e</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">3:4 = </text:span>
@@ -328,6 +332,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="fae3f9f55-e5fc-4bd8-a7f0-8714c4a8b1aa" />
             <text:bookmark-end text:name="fae3f9f55-e5fc-4bd8-a7f0-8714c4a8b1aa" />. Après cela, il te dira lui-mêmece que tu dois faire.” </text:span>
@@ -349,7 +354,7 @@
             <text:a xlink:type="simple" xlink:href="#f2fec492c-dfce-42b9-a37a-d1a899d1509e">Test JJJ </text:a>
           </text:span>
           <text:note text:id="ftn6" text:note-class="footnote">
-            <text:note-citation text:label="f ">f </text:note-citation>
+            <text:note-citation text:label="f">f</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">3:9 = </text:span>
@@ -357,6 +362,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="f2fec492c-dfce-42b9-a37a-d1a899d1509e" />
             <text:bookmark-end text:name="f2fec492c-dfce-42b9-a37a-d1a899d1509e" />.” </text:span>
@@ -418,7 +424,7 @@
             <text:a xlink:type="simple" xlink:href="#f7e15ff75-fafd-44d2-910d-8b55c4b9165d">Test HHH </text:a>
           </text:span>
           <text:note text:id="ftn7" text:note-class="footnote">
-            <text:note-citation text:label="g ">g </text:note-citation>
+            <text:note-citation text:label="g">g</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">4:5 = </text:span>
@@ -426,6 +432,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="f7e15ff75-fafd-44d2-910d-8b55c4b9165d" />
             <text:bookmark-end text:name="f7e15ff75-fafd-44d2-910d-8b55c4b9165d" />.” </text:span>
@@ -521,7 +528,7 @@
             <text:a xlink:type="simple" xlink:href="#fd21ac77e-abcc-40b7-9dfb-b49f8ae05d4e">Test BBB </text:a>
           </text:span>
           <text:note text:id="ftn8" text:note-class="footnote">
-            <text:note-citation text:label="a ">a </text:note-citation>
+            <text:note-citation text:label="a">a</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">1:2 = </text:span>
@@ -532,6 +539,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="fd21ac77e-abcc-40b7-9dfb-b49f8ae05d4e" />
             <text:bookmark-end text:name="fd21ac77e-abcc-40b7-9dfb-b49f8ae05d4e" />, la grande ville. Tu menaceras ses habitants en disant: ‘Le </text:span>
@@ -547,7 +555,7 @@
             <text:a xlink:type="simple" xlink:href="#f2a33867f-7bba-4f5b-a903-64fb65cce4e6">Test MMM </text:a>
           </text:span>
           <text:note text:id="ftn9" text:note-class="footnote">
-            <text:note-citation text:label="b ">b </text:note-citation>
+            <text:note-citation text:label="b">b</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">1:3 = </text:span>
@@ -558,6 +566,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="f2a33867f-7bba-4f5b-a903-64fb65cce4e6" />
             <text:bookmark-end text:name="f2a33867f-7bba-4f5b-a903-64fb65cce4e6" />. Là, il trouve un bateau qui part </text:span>
@@ -798,7 +807,7 @@
             <text:a xlink:type="simple" xlink:href="#fdf032e3c-bf35-4286-8f5e-0f4f81378a6b">TGet hjhj </text:a>
           </text:span>
           <text:note text:id="ftn10" text:note-class="footnote">
-            <text:note-citation text:label="c ">c </text:note-citation>
+            <text:note-citation text:label="c">c</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">3:2 = </text:span>
@@ -806,6 +815,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="fdf032e3c-bf35-4286-8f5e-0f4f81378a6b" />
             <text:bookmark-end text:name="fdf032e3c-bf35-4286-8f5e-0f4f81378a6b" />, la grande ville. Annonce-lui le message que je te donne.” </text:span>
@@ -825,7 +835,7 @@
             <text:a xlink:type="simple" xlink:href="#f22b21ff6-a0e6-4861-843b-474f349d0548">Test 888 </text:a>
           </text:span>
           <text:note text:id="ftn11" text:note-class="footnote">
-            <text:note-citation text:label="d ">d </text:note-citation>
+            <text:note-citation text:label="d">d</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">3:7 = </text:span>
@@ -833,6 +843,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="f22b21ff6-a0e6-4861-843b-474f349d0548" />
             <text:bookmark-end text:name="f22b21ff6-a0e6-4861-843b-474f349d0548" />! </text:span>
@@ -869,7 +880,7 @@
             <text:a xlink:type="simple" xlink:href="#fafd17d11-5330-4e85-9969-4c501f0315db">Test jjj </text:a>
           </text:span>
           <text:note text:id="ftn12" text:note-class="footnote">
-            <text:note-citation text:label="e ">e </text:note-citation>
+            <text:note-citation text:label="e">e</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">4:2 = </text:span>
@@ -877,6 +888,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="fafd17d11-5330-4e85-9969-4c501f0315db" />
             <text:bookmark-end text:name="fafd17d11-5330-4e85-9969-4c501f0315db" />. Je le savais bien, tu es plein de tendresse et de pitié, patient, plein d'amour, et tu regrettes tes menaces. </text:span>
@@ -936,7 +948,7 @@
             <text:a xlink:type="simple" xlink:href="#f3cd531d6-a3b3-42e9-83c8-689f76b55de4">Test dfgfd </text:a>
           </text:span>
           <text:note text:id="ftn13" text:note-class="footnote">
-            <text:note-citation text:label="a ">a </text:note-citation>
+            <text:note-citation text:label="a">a</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">4:3 = </text:span>
@@ -944,6 +956,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="f3cd531d6-a3b3-42e9-83c8-689f76b55de4" />
             <text:bookmark-end text:name="f3cd531d6-a3b3-42e9-83c8-689f76b55de4" />.</text:span>
@@ -964,7 +977,7 @@
             <text:a xlink:type="simple" xlink:href="#fd2ca65c1-2249-450c-b8cd-356c94c60226">Testvbn </text:a>
           </text:span>
           <text:note text:id="ftn14" text:note-class="footnote">
-            <text:note-citation text:label="b ">b </text:note-citation>
+            <text:note-citation text:label="b">b</text:note-citation>
             <text:note-body>
               <text:p text:style-name="NoteGeneralParagraph">
                 <text:span text:style-name="NoteGeneralParagraph..footnote-marker">4:6 = </text:span>
@@ -972,6 +985,7 @@
               </text:p>
             </text:note-body>
           </text:note>
+          <text:s text:c="1" />
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:bookmark-start text:name="fd2ca65c1-2249-450c-b8cd-356c94c60226" />
             <text:bookmark-end text:name="fd2ca65c1-2249-450c-b8cd-356c94c60226" />: fais donc connaître tout le bien que nous pouvons accomplir pour la cause du </text:span>

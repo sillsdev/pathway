@@ -31,6 +31,7 @@
 //#define TIME_IT 
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -116,6 +117,8 @@ namespace SIL.PublishingSolution
         public string References { get; set; }
         public FontHandling MissingFont { get; set; } // note that this doesn't use all the enum values
         public FontHandling NonSilFont { get; set; }
+        public ArrayList _pseudoClass = new ArrayList();
+
 
         // interface methods
         public string ExportType
@@ -242,6 +245,7 @@ namespace SIL.PublishingSolution
                 preProcessor.SetDropCapInCSS(mergedCSS);
                 preProcessor.InsertCoverPageImageStyleInCSS(mergedCSS);
                 preProcessor.InsertSectionHeadID();
+                preProcessor.InsertPseudoContentProperty(mergedCSS, _pseudoClass);
                 string defaultCSS = Path.GetFileName(mergedCSS);
                 // rename the CSS file to something readable
                 string niceNameCSS = Path.Combine(tempFolder, "book.css");
@@ -372,7 +376,7 @@ namespace SIL.PublishingSolution
                 //inProcess.AddToMaximum(splitFiles.Count);
                 inProcess.SetStatus("Processing stylesheet information");
                 // get rid of styles that don't work with .epub
-                RemovePagedStylesFromCss(niceNameCSS);
+                //RemovePagedStylesFromCss(niceNameCSS);
                 // customize the CSS file based on the settings
                 CustomizeCSS(mergedCSS);
 
@@ -385,36 +389,41 @@ namespace SIL.PublishingSolution
                     {
                         if (_isUnixOS)
                         {
-			   if(file.Contains("File2Cpy"))
-			  {
-				string copyRightpage = file.Replace(".xhtml","_.xhtml");
-				File.Copy(file,copyRightpage);
-				htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),                               (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
-	                        File.Delete(file);
-				}
-			else
-			{
-                            Common.XsltProcess(file, xsltFullName, "_.xhtml");
-                            htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),
-                                                                            (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
-                            File.Delete(file);
-			}
+                            if (file.Contains("File2Cpy"))
+                            {
+                                string copyRightpage = file.Replace(".xhtml", "_.xhtml");
+                                File.Copy(file, copyRightpage);
+                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
+                                File.Delete(file);
+                            }
+                            else
+                            {
+                                Common.XsltProcess(file, xsltFullName, "_.xhtml");
+                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),
+                                                                                (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
+                                File.Delete(file);
+                            }
                         }
                         else
-                        {
-
+                        {                            
                             if (File.Exists(file))
                             {
-                                Common.RunCommand(xsltProcessExe,
-                                                  string.Format("{0} {1} {2} {3}", file, xsltFullName, "_.xhtml",
-                                                                getPsApplicationPath), 1);
-
+                                Common.RunCommand(xsltProcessExe, string.Format("{0}{1}{2}{3}", file, xsltFullName, "_.xhtml", getPsApplicationPath), 1);
+                                string xhtmlOutputFile = Path.GetFileNameWithoutExtension(file) + "_.xhtml";
                                 //Common.XsltProcess(file, xsltFullName, "_.xhtml");
                                 // add this file to the html files list
-                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),
-                                                           (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
-                                // clean up the un-transformed file
-                                File.Delete(file);
+                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), xhtmlOutputFile));
+
+                                if (File.Exists(xhtmlOutputFile))
+                                {
+                                    // clean up the un-transformed file
+                                    File.Delete(file);
+                                }
+                                else
+                                {
+                                    Common.XsltProcess(file, xsltFullName, "_.xhtml");
+                                    File.Delete(file);
+                                }                                
                             }
                         }
                     }
@@ -533,6 +542,11 @@ namespace SIL.PublishingSolution
                 inProcess.SetStatus("Generating .epub TOC and manifest");
                 CreateOpf(projInfo, contentFolder, bookId);
                 CreateNcx(projInfo, contentFolder, bookId);
+if(_isUnixOS)
+				{
+					AddDtdInXhtml(projInfo, contentFolder);
+				}
+
                 inProcess.PerformStep();
 
                 // Done adding content - now zip the whole thing up and name it
@@ -710,6 +724,7 @@ namespace SIL.PublishingSolution
 
             AfterBeforeProcessEpub afterBeforeProcess = new AfterBeforeProcessEpub();
             afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            _pseudoClass = afterBeforeProcess._psuedoClassName;
 
             if (projInfo.IsReversalExist && projInfo.ProjectInputType.ToLower() == "dictionary")
             {
@@ -2055,7 +2070,8 @@ namespace SIL.PublishingSolution
                     // just in case the name starts with a number, prepend "id"
                     sb.Append("id");
                     // remove any whitespace in the node text (the ID can't have it)
-                    sb.Append(new Regex(@"\s*").Replace(nodes[0].InnerText, string.Empty));
+                    //sb.Append(new Regex(@"\s*").Replace(nodes[0].InnerText, string.Empty));
+                    sb.Append("boooknode");
                     return (sb.ToString());
                 }
                 // fall back on just the file name
@@ -2108,10 +2124,18 @@ namespace SIL.PublishingSolution
             if (_inputType.Equals("dictionary"))
             {
                 nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
+                if (nodes == null || nodes.Count == 0)
+                {
+                    nodes = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
+                }
             }
             else
             {
                 nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                if (nodes == null || nodes.Count == 0)
+                {
+                    nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
+                }
                 //nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
                 if (nodes == null || nodes.Count == 0)
                 {
@@ -2119,11 +2143,19 @@ namespace SIL.PublishingSolution
                     nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
                     // nothing there - check on the scrBookName span
                     //nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                    if (nodes == null || nodes.Count == 0)
+                    {
+                        nodes = xmlDocument.SelectNodes("//div[@class='Title_Main']", namespaceManager);
+                    }
                 }
                 if (nodes == null || nodes.Count == 0)
                 {
                     // we're really scraping the bottom - check on the scrBookCode span
                     nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                    if (nodes == null || nodes.Count == 0)
+                    {
+                        nodes = xmlDocument.SelectNodes("//span[@class='scrBookCode']", namespaceManager);
+                    }
                 }
             }
             if (nodes != null && nodes.Count > 0)
@@ -3412,16 +3444,23 @@ namespace SIL.PublishingSolution
                         // italic
                         if (embeddedFont.HasItalic && embeddedFont.Filename.CompareTo(embeddedFont.ItalicFilename) != 0)
                         {
+			if(embeddedFont.ItalicFilename != string.Empty )
+			{
                             opf.WriteStartElement("item"); // item (charis embedded font)
                             opf.WriteAttributeString("id", "epub.embedded.font_i_" + fontNum);
+
                             opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.ItalicFilename));
+
                             opf.WriteAttributeString("media-type", "font/opentype/");
                             opf.WriteEndElement(); // item
                             fontNum++;
+			}
                         }
                         // bold
                         if (embeddedFont.HasBold && embeddedFont.Filename.CompareTo(embeddedFont.BoldFilename) != 0)
                         {
+			if(embeddedFont.BoldFilename != string.Empty )
+			{
                             opf.WriteStartElement("item"); // item (charis embedded font)
                             opf.WriteAttributeString("id", "epub.embedded.font_b_" + fontNum);
                             opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.BoldFilename));
@@ -3429,6 +3468,7 @@ namespace SIL.PublishingSolution
                             opf.WriteEndElement(); // item
                             fontNum++;
                         }
+			}
                     }
                 }
             }
@@ -3835,12 +3875,24 @@ namespace SIL.PublishingSolution
             {
                 ApplyXslt(tocFullPath, _addDicTocHeads);
             }
-            if(!_isUnixOS)
+            if (!_isUnixOS)
             {
                 ApplyXslt(tocFullPath, _fixEpubToc);
             }
+	    else
+	    {
+		FixPlayOrder(tocFullPath);
+	    }
         }
 
+	private void AddDtdInXhtml(PublicationInformation projInfo, string contentFolder)
+        {
+            string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
+	foreach (string file in files)
+            {
+		Common.AddingDTDForLinuxProcess(file);
+	}
+	}
         private void FixPlayOrder(string tocFullPath)
         {
             // Renumber all PlayOrder attributes in order with no gaps.

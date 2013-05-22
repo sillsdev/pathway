@@ -192,16 +192,16 @@ namespace SIL.PublishingSolution
 
         private void MapProperty()
         {
-            Common.FileInsertText(_xetexFullFile, @"\pagestyle{fancy} ");
+            string newFile1 = _xetexFullFile.Replace(".tex", "1.tex");
+            string newFile2 = _xetexFullFile.Replace(".tex", "2.tex");
 
-            if (Convert.ToBoolean(TocChecked))
-                InsertTableOfContent();
+            File.Copy(_xetexFullFile, newFile1, true);
 
-            if (Convert.ToBoolean(CoverImage))
-                InsertFrontMatter();
+            StreamWriter sw = new StreamWriter(newFile2);
 
-            string xeLaTexProperty = "";
+            string xeLaTexProp = "";
             List<string> includePackageList = new List<string>();
+            List<string> xeLaTexProperty = new List<string>();
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssClass)
             {
                 if (cssClass.Key.IndexOf("h1") >= 0 ||
@@ -213,22 +213,22 @@ namespace SIL.PublishingSolution
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
                 string className = RemoveBody(replaceNumberInStyle);
                 if (className.Length == 0) continue;
-                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle, _langFontDictionary);
-                if (xeLaTexProperty.Trim().Length > 0)
+                xeLaTexProp = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle, _langFontDictionary);
+                if (xeLaTexProp.Trim().Length > 0)
                 {
-                    Common.FileInsertText(_xetexFullFile, xeLaTexProperty);
-                    //_xetexFile.WriteLine(xeTexProperty);
+                    xeLaTexProperty.Add(xeLaTexProp);
                 }
             }
 
-            //%\singlespacing
-            //\onehalfspacing
-            //%\doublespacing
-            //%\setstretch{1.1}
-            //Common.FileInsertText(_xetexFullFile, @"\setstretch{1.1} ");            
             if (!XelatexDocumentOpenClosedRequired)
             {
-                double pageMargin = 0;
+                string paperSize = GetPageStyle(_cssClass, _isMirrored);
+                sw.WriteLine(@"\documentclass" + paperSize);
+
+                double pageTopMargin = 0;
+                double pageBottomMargin = 0;
+                double pageLeftMargin = 0;
+                double pageRightMargin = 0;
                 if (_cssClass.ContainsKey("@page"))
                 {
                     Dictionary<string, string> cssProp = _cssClass["@page"];
@@ -236,53 +236,127 @@ namespace SIL.PublishingSolution
                     {
                         if (para.Key == "margin-top")
                         {
-                            pageMargin = Convert.ToDouble(para.Value);
+                            pageTopMargin = Convert.ToDouble(para.Value);
+                        }
+                        if (para.Key == "margin-bottom")
+                        {
+                            pageBottomMargin = Convert.ToDouble(para.Value);
+
+                        }
+                        if (para.Key == "margin-left")
+                        {
+                            pageLeftMargin = Convert.ToDouble(para.Value);
+
+                        }
+                        if (para.Key == "margin-right")
+                        {
+                            pageRightMargin = Convert.ToDouble(para.Value);
+
+                        }
+
+                        if (para.Key == "margin")
+                        {
+                            pageTopMargin = Convert.ToDouble(para.Value);
+                            pageBottomMargin = Convert.ToDouble(para.Value);
+                            pageLeftMargin = Convert.ToDouble(para.Value);
+                            pageRightMargin = Convert.ToDouble(para.Value);
                             break;
                         }
                     }
                 }
-                //Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
-                Common.FileInsertText(_xetexFullFile, @"\pagestyle{plain} ");
-                Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
-                Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
-                //setmainfont{Arial} //Default Font 
-                //Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
-                if (Convert.ToBoolean(CoverImage))
-                    Common.FileInsertText(_xetexFullFile, @"\usepackage{eso-pic}");
-                if (pageMargin == 0)
-                {
-                    Common.FileInsertText(_xetexFullFile, @"\usepackage[margin=2cm,includeheadfoot]{geometry}");
-                }
-                else
-                {
-                    int cmMarginValue = Convert.ToInt32(pageMargin * 2.54 / 96);
-                    Common.FileInsertText(_xetexFullFile, @"\usepackage[margin=" + cmMarginValue + "cm,includeheadfoot]{geometry}");
-                }
-
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{lettrine}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{calc}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{fontspec}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{amssymb}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{graphicx}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{grffile}");
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{float}");
 
                 foreach (var package in includePackageList)
                 {
-                    Common.FileInsertText(_xetexFullFile, package);
+                    sw.WriteLine(package);
                 }
-                //Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
 
-                string paperSize = GetPageStyle(_cssClass, _isMirrored);
+                sw.WriteLine(@"\usepackage{float}");
+                sw.WriteLine(@"\usepackage{grffile}");
+                sw.WriteLine(@"\usepackage{graphicx}");
+                sw.WriteLine(@"\usepackage{amssymb}");
+                sw.WriteLine(@"\usepackage{fontspec}");
+                sw.WriteLine(@"\usepackage{fancyhdr}");
+                sw.WriteLine(@"\usepackage{multicol}");
+                sw.WriteLine(@"\usepackage{calc}");
+                sw.WriteLine(@"\usepackage{lettrine}");
+                sw.WriteLine(@"\usepackage[margin=1cm,includeheadfoot]{geometry}");
 
-                Common.FileInsertText(_xetexFullFile, @"\documentclass" + paperSize);
+                if (Convert.ToBoolean(CoverImage))
+                    sw.WriteLine(@"\usepackage{eso-pic}");
 
-                //Common.FileInsertText(_xetexFullFile, @"\documentclass[" + paperSize + "]{article} ");
-                //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
+                sw.WriteLine(_pageStyleFormat);
+
+                sw.WriteLine(@"\begin{document} ");
+                sw.WriteLine(@"\pagestyle{plain} ");
+                if (pageTopMargin != 0 || pageBottomMargin != 0 || pageLeftMargin != 0 || pageRightMargin != 0)
+                {
+                    pageTopMargin = (pageTopMargin / 28.346456693F) + 1.5;
+                    pageBottomMargin = (pageBottomMargin / 28.346456693F) + 1.5;
+
+                    pageLeftMargin = Convert.ToDouble(Common.UnitConverter(pageLeftMargin.ToString() + "pt", "cm"));
+                    pageRightMargin = Convert.ToDouble(Common.UnitConverter(pageRightMargin.ToString() + "pt", "cm"));
+                    sw.WriteLine(@"\newgeometry{left=" + Math.Round(pageLeftMargin, 2) + "cm, right=" + Math.Round(pageRightMargin, 2) + "cm, bottom=" + Math.Round(pageBottomMargin, 2) + "cm, top=" + Math.Round(pageTopMargin, 2) + "cm}");
+                }
+                else
+                {
+                    sw.WriteLine(@"\newgeometry{left=1cm}{right=1cm}");
+                }
             }
+
+            foreach (var prop in xeLaTexProperty)
+            {
+                sw.WriteLine(prop);
+            }
+
+            InsertFrontMatter(sw);
+
+            if (Convert.ToBoolean(TocChecked))
+                InsertTableOfContent(sw);
+
+            sw.WriteLine(@"\pagestyle{fancy} ");
+            sw.Flush();
+            sw.Close();
+            MergeFile(newFile1, newFile2);
         }
+
+        private void MergeFile(string newFile1, string newFile2)
+        {
+            var fsw = new FileStream(_xetexFullFile, FileMode.Create, FileAccess.Write);
+            var sw = new StreamWriter(fsw);
+
+            FileStream fs1 = new FileStream(newFile2, FileMode.Open);
+            StreamReader sr1 = new StreamReader(fs1);
+            string line;
+            while ((line = sr1.ReadLine()) != null)
+            {
+                sw.WriteLine(line);
+            }
+            sw.Flush();
+            fs1.Close();
+            sr1.Close();
+
+
+            FileStream fs2 = new FileStream(newFile1, FileMode.Open);
+            StreamReader sr2 = new StreamReader(fs2);
+            while ((line = sr2.ReadLine()) != null)
+            {
+                sw.WriteLine(line);
+            }
+            sw.Flush();
+            fs2.Close();
+            sr2.Close();
+
+            sw.Close();
+            fsw.Close();
+
+            try
+            {
+                File.Delete(newFile1);
+                File.Delete(newFile2);
+            }
+            catch (Exception e) { }
+        }
+
 
         private string GetPageStyle(Dictionary<string, Dictionary<string, string>> _cssClass, bool isMirrored)
         {
@@ -443,7 +517,7 @@ namespace SIL.PublishingSolution
             return paperSize;
         }
 
-        private void InsertTableOfContent()
+        private void InsertTableOfContent(StreamWriter sw)
         {
             String tableOfContent = string.Empty;
 
@@ -503,53 +577,61 @@ namespace SIL.PublishingSolution
             tableOfContent += "\\newpage \r\n";
             tableOfContent += "\\setcounter{page}{1} \r\n";
             tableOfContent += "\\pagenumbering{arabic}  \r\n";
-            Common.FileInsertText(_xetexFullFile, tableOfContent);
+            // Common.FileInsertText(_xetexFullFile, tableOfContent);
+            sw.WriteLine(tableOfContent);
         }
 
-        private void InsertFrontMatter()
+        private void InsertFrontMatter(StreamWriter sw)
         {
+            string xeLaTexInstallationPath = string.Empty;
             String tableOfContent = string.Empty;
-
-            string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
-
-            if (Common.IsUnixOS())
+            if (Convert.ToBoolean(CoverImage) || Convert.ToBoolean(TitleInCoverPage))
             {
-                xeLaTexInstallationPath = Path.GetDirectoryName(_xetexFullFile);
+                xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
+
+                if (Common.IsUnixOS())
+                {
+                    xeLaTexInstallationPath = Path.GetDirectoryName(_xetexFullFile);
+                }
+                else
+                {
+                    xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
+                    xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
+                }
             }
-            else
-            {
-                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
-                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
-            }
-            string destinctionPath = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(CoverPageImagePath));
 
-            if (CoverPageImagePath.Trim() != "")
-            {
-                if (CoverPageImagePath != destinctionPath)
-                    File.Copy(CoverPageImagePath, destinctionPath, true);
 
-                tableOfContent += "\\color{black} \r\n";
-                tableOfContent += "\\AddToShipoutPicture*{% \r\n";
-                tableOfContent +=
-                    "\\put(0,0){\\rule{\\paperwidth}{\\paperheight}}{\\includegraphics[width=\\paperwidth, height=\\paperheight]{" +
-                    Path.GetFileName(CoverPageImagePath) + "}}% \r\n";
-                tableOfContent += "} \r\n";
+            if (Convert.ToBoolean(CoverImage))
+            {
+                string destinctionPath = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(CoverPageImagePath));
+                if (CoverPageImagePath.Trim() != "")
+                {
+                    if (CoverPageImagePath != destinctionPath)
+                        File.Copy(CoverPageImagePath, destinctionPath, true);
+
+                    tableOfContent += "\\color{black} \r\n";
+                    tableOfContent += "\\AddToShipoutPicture*{% \r\n";
+                    tableOfContent +=
+                        "\\put(0,0){\\rule{\\paperwidth}{\\paperheight}}{\\includegraphics[width=\\paperwidth, height=\\paperheight]{" +
+                        Path.GetFileName(CoverPageImagePath) + "}}% \r\n";
+                    tableOfContent += "} \r\n";
+                    tableOfContent += "\\thispagestyle{empty} \r\n";
+                }
+
+                if (Convert.ToBoolean(IncludeBookTitleintheImage))
+                {
+                    tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
+                    tableOfContent += "\\vskip 60pt \r\n";
+                    tableOfContent += "\\begin{center} \r\n";
+                    tableOfContent += "\\CoverPageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
+                    tableOfContent += "\\end{center} \r\n";
+                }
+
+                tableOfContent += "\\newpage \r\n";
+                tableOfContent += "\\newpage \r\n";
                 tableOfContent += "\\thispagestyle{empty} \r\n";
+                tableOfContent += "\\mbox{} \r\n";
             }
-
-            if (Convert.ToBoolean(IncludeBookTitleintheImage))
-            {
-                tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
-                tableOfContent += "\\vskip 60pt \r\n";
-                tableOfContent += "\\begin{center} \r\n";
-                tableOfContent += "\\CoverPageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
-                tableOfContent += "\\end{center} \r\n";
-            }
-
-            tableOfContent += "\\newpage \r\n";
-            tableOfContent += "\\newpage \r\n";
-            tableOfContent += "\\thispagestyle{empty} \r\n";
-            tableOfContent += "\\mbox{} \r\n";
 
             if (Convert.ToBoolean(TitleInCoverPage))
             {
@@ -571,7 +653,17 @@ namespace SIL.PublishingSolution
                 {
                     logoFileName = "WBT_H_RGB_red.png";
                 }
-                copyRightFilePath = Path.GetDirectoryName(copyRightFilePath);
+
+                if (copyRightFilePath.Trim().Length != 0)
+                {
+                    copyRightFilePath = Path.GetDirectoryName(copyRightFilePath);
+                }
+                else
+                {
+                    string executablePath = Common.GetApplicationPath();
+                    copyRightFilePath = Common.PathCombine(executablePath, "Copyrights");
+                }
+
 
                 copyRightFilePath = Path.Combine(copyRightFilePath, logoFileName);
                 if (File.Exists(copyRightFilePath))
@@ -626,95 +718,20 @@ namespace SIL.PublishingSolution
 
 
                 tableOfContent += "\\begin{titlepage}\r\n";
-
                 tableOfContent += "\\begin{center}\r\n";
-
-
-
                 tableOfContent += "\\textsc{\\LARGE " + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
-
-                tableOfContent += "\\vspace{140 mm} \r\n";
-
+                tableOfContent += "\\vspace{130 mm} \r\n";
                 tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Publisher) + "}\\\\[0.5cm] \r\n";
-
-                tableOfContent += "\\includegraphics[width=0.05 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";
-
-                //tableOfContent += "% Title\r\n";
-                //tableOfContent += "\\HRule \\[0.4cm]\r\n";
-                //tableOfContent += "{ \\huge \\bfseries Lager brewing techniques}\\[0.4cm]\r\n";
-
-                //tableOfContent += "\\HRule \\[1.5cm]\r\n";
-
-                //tableOfContent += "% Author and supervisor\r\n";
-                //tableOfContent += "\\begin{minipage}{0.4\\textwidth}\r\n";
-                //tableOfContent += "\\begin{flushleft} \\large\r\n";
-                //tableOfContent += "John \\textsc{Smith}\r\n";
-                //tableOfContent += "\\end{flushleft}\r\n";
-                //tableOfContent += "\\end{minipage}\r\n";
-                //tableOfContent += "\\begin{minipage}{0.4\textwidth}\r\n";
-                //tableOfContent += "\\begin{flushright} \\large\r\n";
-                //tableOfContent += "\\emph{Supervisor:} \\ \r\n";
-                //tableOfContent += "Dr.~Mark \\textsc{Brown} \r\n";
-                //tableOfContent += "\\end{flushright} \r\n";
-                //tableOfContent += "\\end{minipage} \r\n";
-
-                //tableOfContent += "\\vfill \r\n";
-
-                //tableOfContent += "% Bottom of the page \r\n";
-                //tableOfContent += "{\\large \\today} \r\n";
-
+                if (logoFileName.Contains(".png"))
+                {
+                    tableOfContent += "\\includegraphics[width=0.15 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";
+                }
+                else
+                {
+                    tableOfContent += "\\includegraphics[width=0.10 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";
+                }
                 tableOfContent += "\\end{center} \r\n";
-
                 tableOfContent += "\\end{titlepage} \r\n";
-
-
-                ////////tableOfContent += "\\font\\TitlePageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
-                ////////tableOfContent += "\\title{" + "\\TitlePageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n " + "} \r\n";
-
-                //string organization;
-                //try
-                //{
-                //    // get the organization
-                //    organization = Param.Value["Organization"];
-                //}
-                //catch (Exception)
-                //{
-                //    // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
-                //    // but just in case, specify a default org.
-                //    organization = "SIL International";
-                //}
-
-                //string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
-                //Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
-                //// Title (book title in Configuration Tool UI / dc:title in metadata)
-                //Title = Param.GetMetadataValue(Param.Title, organization) ?? ""; // empty string if null / not found
-                //// Creator (dc:creator))
-                //Creator = Param.GetMetadataValue(Param.Creator, organization) ?? ""; // empty string if null / not found
-                //// information
-                //Description = Param.GetMetadataValue(Param.Description, organization) ?? ""; // empty string if null / not found
-                //// Source
-                //Source = Param.GetMetadataValue(Param.Source, organization) ?? ""; // empty string if null / not found
-                //// Format
-                //Format = Param.GetMetadataValue(Param.Format, organization) ?? ""; // empty string if null / not found
-                //// Publisher
-                //Publisher = Param.GetMetadataValue(Param.Publisher, organization) ?? ""; // empty string if null / not found
-                //// Coverage
-                //Coverage = Param.GetMetadataValue(Param.Coverage, organization) ?? ""; // empty string if null / not found
-                //// Rights (dc:rights)
-                //Rights = Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
-
-
-
-                //// embed fonts
-
-                //tableOfContent += "\\author{ " + Param.GetMetadataValue(Param.Publisher) + "} \r\n";
-
-                ////tableOfContent += "\\author{ " + Param.GetMetadataValue(Param.Creator) + "} \r\n";
-                //string copyrightContent = Param.GetMetadataValue(Param.CopyrightHolder);
-                ////copyrightContent = copyrightContent.Replace("©", "");
-                ////tableOfContent += "\\subtitle{ " + copyrightContent + "} \r\n";
-                //tableOfContent += "\\maketitle \r\n";
-                //tableOfContent += "\\thispagestyle{empty} \r\n";
 
                 tableOfContent += "\\newpage \r\n";
                 tableOfContent += "\\newpage \r\n";
@@ -737,11 +754,11 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\thispagestyle{empty} \r\n";
                 tableOfContent += "\\mbox{} \r\n";
             }
-
-            Common.FileInsertText(_xetexFullFile, tableOfContent);
+            sw.WriteLine(tableOfContent);
+            //Common.FileInsertText(_xetexFullFile, tableOfContent);
         }
 
-        private void InsertReversalIndex()
+        private void InsertReversalIndex(StreamWriter sw)
         {
             String ReversalIndexContent = string.Empty;
 
@@ -752,8 +769,8 @@ namespace SIL.PublishingSolution
                 ReversalIndexContent += "\\pagestyle{plain} \r\n";
                 ReversalIndexContent += "\\newpage \r\n";
             }
-
-            Common.FileInsertText(_xetexFullFile, ReversalIndexContent);
+            sw.WriteLine(ReversalIndexContent);
+            //Common.FileInsertText(_xetexFullFile, ReversalIndexContent);
         }
 
         private string RemoveBody(string paraStyle)

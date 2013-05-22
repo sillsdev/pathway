@@ -358,7 +358,7 @@ namespace SIL.Tool
             if (isUnixOS)
             {
                 width += 80;
-                height -= 50;
+                height += 50;
                 badgeFont = new Font("Times New Roman", 36);
                 size = g.MeasureString(strTitle, badgeFont, (bmp.Width - 20));
                 size.Height += 20;
@@ -808,11 +808,15 @@ namespace SIL.Tool
             sb.AppendLine("<!-- Contents page -->");
             sb.AppendLine("<div id='TOCPage' class='Contents'>");
 
-            if (_xhtmlFileNameWithPath.ToLower().Contains("main"))//TocError
+            if (_xhtmlFileNameWithPath.ToLower().Contains("main") || _projInfo.ProjectInputType.ToLower() == "scripture") //TocError
             {
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     sb.AppendLine("<h1>Table of Contents</h1><h2>Main</h2>");
+                }
+                else
+                {
+                    sb.AppendLine("<h1>Table of Contents</h1>");
                 }
                 // collect book names
 
@@ -1340,6 +1344,9 @@ namespace SIL.Tool
 
                 if (tocNode != null)
                 {
+                    frontMatterCSSStyle = frontMatterCSSStyle +
+                                          ".TableOfContentLO{visibility:hidden;}";
+                    
                     //mainXhtmlFile[0].InnerXml = tocNode.OuterXml + dummyNode.OuterXml + mainXhtmlFile[0].InnerXml;
                     //frontMatterXHTMLContent = frontMatterXHTMLContent.Replace("http://creativecommons.org/licenses/by-nc-sa/3.0/", "<text:a xlink:type=\"simple\"xlink:href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/\">http://creativecommons.org/licenses/by-nc-sa/3.0/</text:a>");
                     //frontMatterXHTMLContent = frontMatterXHTMLContent.Replace("http://creativecommons.org/licenses/by-nc-nd/3.0/", "<text:a xlink:type=\"simple\"xlink:href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">http://creativecommons.org/licenses/by-nc-nd/3.0/</text:a>");
@@ -2571,6 +2578,27 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
+        public void InsertPseudoContentProperty(string cssFileName, ArrayList pseudoClass)
+        {
+            TextWriter tw = new StreamWriter(cssFileName, true);
+            for (int i = 0; i < pseudoClass.Count; i++)
+            {
+                string[] value = pseudoClass[i].ToString().Split('_');
+                try
+                {
+                    if (value.Length > 1)
+                    {
+                        tw.WriteLine("." +  value[0].Substring(0, value[0].IndexOf('.')) + ":" + value[0].Substring(value[0].IndexOf('.') + 2) + " {");
+                        tw.WriteLine("content: '';" );
+                        tw.WriteLine("}");
+                    }
+                }
+                catch{}
+            }
+            tw.Close();
+            
+        }
+
         public string InsertHiddenChapterNumber()
         {
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
@@ -3213,6 +3241,40 @@ namespace SIL.Tool
 
         }
 
+
+        /// <summary>
+        /// TD-3482 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void MoveCallerToPrevText(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.PreserveWhitespace = false;
+            xDoc.Load(fileName);
+            const string xPath = "//xhtml:span[@class='scrFootnoteMarker']";
+            XmlNodeList markerNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if (markerNodeList == null) return;
+            for (int i = 0; i < markerNodeList.Count; i++)
+            {
+                XmlNode markerPrevNode = markerNodeList[i].PreviousSibling;
+                XmlNode markerNextNode = markerNodeList[i].NextSibling;
+                if (markerPrevNode != null && markerNextNode != null)
+                {
+                    string nextNodeContent = markerNextNode.OuterXml;
+                    if (nextNodeContent.Contains("Note_Target_Reference"))
+                    {
+                        markerPrevNode.InnerXml = markerPrevNode.InnerXml + markerNextNode.OuterXml;
+                    }
+                }
+                if (markerNextNode != null && markerNextNode.ParentNode != null)
+                    markerNextNode.ParentNode.RemoveChild(markerNextNode);
+            }
+            xDoc.Save(fileName);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -3234,28 +3296,100 @@ namespace SIL.Tool
                 {
                     entryNodeList[i].InsertAfter(firstNode, entryNodeList[i].LastChild);
                 }
-                //xPath = ".//xhtml:div[@class='headword']|.//xhtml:span[@class='headword']";
-                //XmlNode firstNode = entryNodeList[i].FirstChild;
-                //if (firstNode.Attributes != null && firstNode.Attributes["class"].Value.ToLower() != "pictureright")
-                //{
-                //    XmlNodeList headwordNodeList = entryNodeList[i].SelectNodes(xPath, namespaceManager);
-                //    if (headwordNodeList == null) return;
-                //    if (headwordNodeList.Count > 0)
-                //    {
-                //        for (int j = 0; j < headwordNodeList.Count; j++)
-                //        {
-                //            entryNodeList[i].InsertBefore(headwordNodeList[j], entryNodeList[i].FirstChild);
-                //        }
-                //    }
-                //}
             }
             xDoc.Save(fileName);
         }
 
-        public void RemoveTextIntent(string fileName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void SetNonBreakInVerseNumber(string fileName)
         {
-            //string fileName = txtInputPath.Text;
-            string newFileName = fileName.Replace(".", "1.");
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            string xPath = "//xhtml:span[@class='Verse_Number']";
+            XmlNodeList verseNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if (verseNodeList == null) return;
+            for (int i = 0; i < verseNodeList.Count; i++)
+            {
+                XmlNode nextNode = verseNodeList[i].NextSibling;
+                if(nextNode == null) continue;
+                if(nextNode.OuterXml.IndexOf("span") == -1)
+                {
+                    nextNode = nextNode.NextSibling;
+                }
+                verseNodeList[i].InnerText = verseNodeList[i].InnerText.Trim() +  " ";
+                nextNode.InnerXml = verseNodeList[i].OuterXml + nextNode.InnerXml;
+                nextNode.ParentNode.RemoveChild(verseNodeList[i]);
+            }
+            xDoc.Save(fileName);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void ReplaceDoubleSlashToLineBreak(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            string xPath = "//xhtml:div[@class='scrSection']";
+            XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if (SectionNodeList == null) return;
+            for (int i = 0; i < SectionNodeList.Count; i++)
+            {
+                if (SectionNodeList[i].InnerText.IndexOf(" // ") > 0)
+                {
+                    SectionNodeList[i].InnerXml = SectionNodeList[i].InnerXml.Replace(" // ", " <br/>");
+                }
+                
+            }
+            xDoc.Save(fileName);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="mergedCSS"> </param>
+        public void RemoveVerseNumberOne(string fileName, string mergedCSS)
+        {
+               if (!File.Exists(fileName)) return;
+                XmlDocument xDoc = Common.DeclareXMLDocument(true);
+                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                xDoc.Load(fileName);
+                string xPath = "//xhtml:span[@class='Chapter_Number']";
+                XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+                if (SectionNodeList == null) return;
+                for (int i = 0; i < SectionNodeList.Count; i++)
+                {
+                    XmlNode paraNode = SectionNodeList[i].ParentNode;
+                    xPath = ".//xhtml:span[@class='Verse_Number']";
+                    XmlNodeList verseNodeList = paraNode.SelectNodes(xPath, namespaceManager);
+                    if (verseNodeList == null) return;
+                    for (int j = 0; j < verseNodeList.Count; j++)
+                    {
+                        verseNodeList[j].InnerText = "";
+                        break;
+                    }
+                }
+                xDoc.Save(fileName);
+        }
+
+        //SetNonBreakInVerseNumberSetNonBreakInVerseNumber
+
+        public void RemoveTextIntent(string fileName)
+        {            
+            string fileNameExtension = Path.GetExtension(fileName);
+            string newFileName = fileName.Replace(fileNameExtension, "1" + fileNameExtension);
             string line;
             StreamReader read = new StreamReader(fileName);
             StreamWriter write = new StreamWriter(newFileName);
@@ -3400,6 +3534,47 @@ namespace SIL.Tool
         /// <returns></returns>
         public string GetDictionaryLetterCount()
         {
+            bool isLetterFound = false;
+            string lastLetterString = string.Empty;
+            XmlTextReader _reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
+            while (_reader.Read())
+            {
+                if (_reader.NodeType == XmlNodeType.Element)
+                {
+                    if (_reader.Name == "div")
+                    {
+                        string name = _reader.GetAttribute("class");
+                        if (name != null)
+                        {
+                            if (name.ToLower() == "letter")
+                            {
+                                isLetterFound = true;
+                            }
+                        }
+                    }
+                }
+
+                if (isLetterFound)
+                {
+                    if (_reader.NodeType == XmlNodeType.Text)
+                    {
+                        lastLetterString = _reader.Value;
+                        isLetterFound = false;
+                    }
+                }
+
+            }
+            _reader.Close();
+
+            return lastLetterString;
+        }
+
+        /// <summary>
+        /// For dictionary data, returns the first and last letter count
+        /// </summary>
+        /// <returns></returns>
+        public string GetDictionaryLetterCountOLD()
+        {
             string lastLetterString = string.Empty;
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(_xhtmlFileNameWithPath);
@@ -3479,6 +3654,11 @@ namespace SIL.Tool
             tw.WriteLine(".Chapter_Number {");
             tw.WriteLine("font-size: 199%;");
             tw.WriteLine("}");
+
+            tw.WriteLine(".Title_Secondary {");
+            tw.WriteLine("text-align: center;");
+            tw.WriteLine("}");
+
             tw.Close();
         }
 

@@ -9,7 +9,7 @@ using System.Resources;
 [assembly: AssemblyTitle("CssDialog")]
 [assembly: AssemblyDescription("Select and modify Cascading Style Sheet")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SIL International in Collaboration with EC Group Datasoft Private Limited")]
+[assembly: AssemblyCompany("SIL International in collaboration with \nEC Group Datasoft Private Limited")]
 [assembly: AssemblyProduct("Pathway")]
 [assembly: AssemblyCopyright("Copyright © 2008-2012 SIL International")]
 [assembly: AssemblyTrademark("")]
@@ -32,6 +32,6 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.3.5.3119")]
-[assembly: AssemblyFileVersion("1.3.5.3119")]
+[assembly: AssemblyVersion("1.3.6.3213")]
+[assembly: AssemblyFileVersion("1.3.6.3213")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
