@@ -253,10 +253,6 @@
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XeLaTexConvert\XeLaTexConvert.csproj">
-      <Project>{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}</Project>
-      <Name>XeLaTexConvert</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
