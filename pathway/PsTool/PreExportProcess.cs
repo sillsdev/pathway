@@ -2591,12 +2591,11 @@ namespace SIL.Tool
                         tw.WriteLine("." +  value[0].Substring(0, value[0].IndexOf('.')) + ":" + value[0].Substring(value[0].IndexOf('.') + 2) + " {");
                         tw.WriteLine("content: '';" );
                         tw.WriteLine("}");
-                        tw.Close();
                     }
                 }
                 catch{}
-
             }
+            tw.Close();
             
         }
 

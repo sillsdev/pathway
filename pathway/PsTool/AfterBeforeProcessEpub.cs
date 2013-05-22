@@ -390,9 +390,9 @@ namespace SIL.PublishingSolution
                 else
                 {
                     _writer.WriteString(psuedoBefore.Content);
-                    if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.Content))
+                    if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.StyleName))
                     {
-                        _psuedoClassName.Add(psuedoBefore.Content);
+                        _psuedoClassName.Add(psuedoBefore.StyleName);
                     }
                 }
             }
