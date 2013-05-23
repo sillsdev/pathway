@@ -943,12 +943,16 @@ namespace SIL.PublishingSolution
 
                     if (cTool.StylesGrid.Rows.Count >= SelectedRowIndex)
                     {
-                        cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
-                        cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
-                        XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + StyleName + "']");
-                        Param.SetAttrValue(baseNode, "previewfile1", PreviewFileName1);
-                        Param.SetAttrValue(baseNode, "previewfile2", PreviewFileName1);
-                        Param.Write();
+                        if (PreviewFileName1.Trim().Length > 0 && PreviewFileName2.Trim().Length > 0)
+                        {
+                            cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
+                            cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
+                            XmlNode baseNode =
+                                Param.GetItem("//styles/" + MediaType + "/style[@name='" + StyleName + "']");
+                            Param.SetAttrValue(baseNode, "previewfile1", PreviewFileName1);
+                            Param.SetAttrValue(baseNode, "previewfile2", PreviewFileName1);
+                            Param.Write();
+                        }
                     }
                 }
                 catch (Exception ex)
