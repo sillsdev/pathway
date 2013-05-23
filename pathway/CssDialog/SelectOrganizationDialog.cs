@@ -31,8 +31,14 @@ namespace SIL.PublishingSolution
             var dlg = new OrganizationNameDialog();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+                string organizationName = dlg.Organization;
+                if(organizationName.Trim().Length == 0)
+                {
+                    ddlOrganization.SelectedIndex = 0;
+                    return;
+                }
                 // add the organization if it's not already in the list
-                if (!ddlOrganization.Items.Contains(dlg.Organization))
+                if (!ddlOrganization.Items.Contains(organizationName))
                 {
                     // not in our list - add it and select it
                     ddlOrganization.SelectedIndex = ddlOrganization.Items.Add(dlg.Organization);
@@ -40,7 +46,7 @@ namespace SIL.PublishingSolution
                 else
                 {
                     // already in our list - just select it
-                    Organization = dlg.Organization;
+                    Organization = organizationName;
                 }
             }
         }
@@ -64,6 +70,7 @@ namespace SIL.PublishingSolution
             foreach (var org in _organizations)
             {
                 var node = (XmlNode)org;
+                if (node.FirstChild == null) continue;
                 if ((_inputType == "Dictionary") && (node.FirstChild.Value.Contains("Bible")))
                 {
                     // UBS, PBT - don't display in SE version
@@ -103,6 +110,7 @@ namespace SIL.PublishingSolution
             foreach (var org in _organizations)
             {
                 node = (XmlNode)org;
+                if (node.FirstChild == null) continue;
                 if (Organization == (node.FirstChild.Value))
                 {
                     bFound = true;
