@@ -2867,7 +2867,7 @@ namespace SIL.PublishingSolution
                 XmlAttribute file = xml.Attributes[AttribFile];
                 if (file != null)
                 {
-                    string path = Path.Combine(Path.GetDirectoryName(Param.SettingPath), Path.Combine("styles", Param.Value["InputType"]));
+                    string path = Path.Combine(Path.GetDirectoryName(Param.SettingPath), Path.Combine("Styles", Param.Value["InputType"]));
                     if (type != null && type.Value == TypeCustom)
                     {
                         string OutputPath = Path.GetDirectoryName(Path.GetDirectoryName(Param.SettingOutputPath));
@@ -2910,7 +2910,10 @@ namespace SIL.PublishingSolution
                 string fileName = Path.GetFileName(filePath);
                 if (fileName.IndexOf(".xml") > 0 || fileName.IndexOf(".xsd") > 0)
                 {
-                    File.Copy(filePath, Path.Combine(toPath, fileName));
+					if(File.Exists(filePath) && Directory.Exists(toPath))
+					{
+						File.Copy(filePath, Path.Combine(toPath, fileName));
+					}
                 }
             }
         }
@@ -4253,9 +4256,9 @@ namespace SIL.PublishingSolution
                     catch
                     {
                     }
-                    Process.Start(string.Format("mailto:{0}?Subject={1}&Body={2}", MailTo,
-                                                                   MailSubject, MailBody));
 
+                        Process.Start(string.Format("mailto:{0}?Subject={1}&Body={2}", MailTo,
+                                               MailSubject, MailBody));
                 }
                 catch (Exception ex)
                 {

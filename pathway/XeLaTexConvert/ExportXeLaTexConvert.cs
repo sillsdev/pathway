@@ -49,7 +49,7 @@ namespace SIL.PublishingSolution
         private bool _reversalIndexTexCreated = false;
         private bool _isInputTypeFound = false;
         private bool _isFileFontCodeandFontNameFound = false;
-        
+
         private Dictionary<string, string> _langFontCodeandName;
 
         #region Public Functions
@@ -83,7 +83,7 @@ namespace SIL.PublishingSolution
         {
             _langFontDictionary = new Dictionary<string, string>();
             _langFontCodeandName = new Dictionary<string, string>();
-			string mainXhtmlFileWithPath = projInfo.DefaultXhtmlFileWithPath;
+            string mainXhtmlFileWithPath = projInfo.DefaultXhtmlFileWithPath;
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             if (Common.IsUnixOS())
             {
@@ -150,7 +150,7 @@ namespace SIL.PublishingSolution
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
             xeLaTexContent.TocEndingPage = preProcessor.GetDictionaryLetterCount();
-            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, 
+            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle,
                 cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 
             if (projInfo.IsReversalExist)
@@ -287,8 +287,8 @@ namespace SIL.PublishingSolution
                 modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
                 modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
                                                     xeLatexCopyrightFile, include, _langFontCodeandName);
-				
-				string copyright = GetLanguageInfo(mainXhtmlFileWithPath, projInfo);
+
+                string copyright = GetLanguageInfo(mainXhtmlFileWithPath, projInfo);
                 InsertInFile(xeLatexCopyrightFile, "copyright information", copyright);
 
                 return true;
@@ -325,11 +325,11 @@ namespace SIL.PublishingSolution
 
                     writer.WriteLine(@"\OtherCopyrights{" + st + @"}\end{adjustwidth}");
                     writer.WriteLine("\\mbox{}");
- 
+
                 }
                 else
                 {
-                    writer.WriteLine(contentWriter);    
+                    writer.WriteLine(contentWriter);
                 }
             }
             reader.Close();
@@ -351,12 +351,12 @@ namespace SIL.PublishingSolution
                 string txt = "This document contains data written in ";
                 if (languageName.Length > 0)
                 {
-                    txt = txt +languageName;
+                    txt = txt + languageName;
                 }
                 txt = txt + "[" + languageCode + "].";
                 sb.AppendLine(@"\empFrontMatterdiv{" + txt + @"}\end{adjustwidth}");
-                
-                txt =" For more information about this language, visit http://www.ethnologue.com/show_language.asp?code=";
+
+                txt = " For more information about this language, visit http://www.ethnologue.com/show_language.asp?code=";
                 var codeLen = languageCode.Length > 3 ? 3 : languageCode.Length;
                 txt = txt + languageCode.Substring(0, codeLen);
                 sb.Append(@"\empFrontMatterdiv{" + txt + @" \newline \newline}\end{adjustwidth}");
@@ -442,6 +442,13 @@ namespace SIL.PublishingSolution
         {
             bool isUnixOs = Common.IsUnixOS();
             string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
+
+            if (!Directory.Exists(xeLaTexInstallationPath))
+            {
+                MessageBox.Show("Please install the Xelatex application.");
+                return;
+            }
+
             string name = "xelatex.exe";
             string arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
             if (isUnixOs)
@@ -536,7 +543,7 @@ namespace SIL.PublishingSolution
 
             if (isUnixOs)
             {
-                if (userFolder != null) 
+                if (userFolder != null)
                     pdfFullName = Path.Combine(userFolder, texNameOnly + ".pdf");
 
                 if (File.Exists(pdfFullName))
@@ -718,7 +725,7 @@ namespace SIL.PublishingSolution
                     _isInputTypeFound = true;
                 }
             }
-           
+
         }
         #endregion
 
@@ -775,7 +782,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-         private void GetXhtmlFileFontCodeandFontNameOLD(string xhtmlFileName)
+        private void GetXhtmlFileFontCodeandFontNameOLD(string xhtmlFileName)
         {
             if (!File.Exists(xhtmlFileName)) return;
             XmlDocument xdoc = new XmlDocument { XmlResolver = null };
@@ -803,7 +810,7 @@ namespace SIL.PublishingSolution
                         //}
                     }
                 }
-                catch{}
+                catch { }
             }
         }
 
