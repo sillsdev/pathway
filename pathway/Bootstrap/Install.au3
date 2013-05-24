@@ -459,6 +459,7 @@ Func XeLaTexInstalled($size)
 				$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexVer")
 			EndIf
 			$latest = IniRead("PathwayBootstrap.Ini", "Versions", "XeLaTex", "1.6")
+			MsgBox(4096,"Status","XeLaTeX ver " & $ver & ", latest " & $latest)
 			if $ver = $latest Then
 				Return True
 			EndIf
