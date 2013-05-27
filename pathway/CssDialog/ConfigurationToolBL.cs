@@ -2858,6 +2858,12 @@ namespace SIL.PublishingSolution
             return directoryCreated;
         }
 
+        public string GenerateStylesString()
+        {
+            string path = "Styles";
+            return path;
+        }
+
         protected bool BackUpCSSFile(bool directoryCreated, string folderPath)
         {
             XmlNodeList cats = Param.GetItems("//styles/" + MediaType + "/style");
@@ -2867,7 +2873,7 @@ namespace SIL.PublishingSolution
                 XmlAttribute file = xml.Attributes[AttribFile];
                 if (file != null)
                 {
-                    string path = Path.Combine(Path.GetDirectoryName(Param.SettingPath), Path.Combine("Styles", Param.Value["InputType"]));
+                    string path = Path.Combine(Path.GetDirectoryName(Param.SettingPath), Path.Combine(GenerateStylesString(), Param.Value["InputType"]));
                     if (type != null && type.Value == TypeCustom)
                     {
                         string OutputPath = Path.GetDirectoryName(Path.GetDirectoryName(Param.SettingOutputPath));
