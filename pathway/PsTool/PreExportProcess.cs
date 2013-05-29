@@ -280,7 +280,7 @@ namespace SIL.Tool
         {
             if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("false")) { return string.Empty; }
             var sb = new StringBuilder();
-            sb.AppendLine("<div id='CoverPage' class='Cover'><img src='cover.png' alt='Cover image'/></div>");
+            sb.AppendLine("<div id='CoverPage' class='Cover'><img src='cover.png' style='height: 100%; width: 100%;' alt='Cover image'/></div>");
             sb.AppendLine("<div class='Blank'></div>");
             return sb.ToString();
         }
@@ -3703,13 +3703,15 @@ namespace SIL.Tool
         {
             TextWriter tw = new StreamWriter(cssFileName, true);
             tw.WriteLine(".Cover {");
-            tw.WriteLine("vertical-align: center;");
+            tw.WriteLine("vertical-align: middle;");
             tw.WriteLine("text-align: center;");
             tw.WriteLine("}");
             tw.WriteLine("");
             tw.WriteLine(".Cover img{");
-            tw.WriteLine("height: 595px;");
-            tw.WriteLine("width: 446.25px;");
+            tw.WriteLine("height: 100%;");
+            tw.WriteLine("width: 100%;");
+            //tw.WriteLine("height: 595px;");
+            //tw.WriteLine("width: 446.25px;");
             tw.WriteLine("}");
             tw.Close();
         }
