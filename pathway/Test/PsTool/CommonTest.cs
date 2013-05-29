@@ -1132,6 +1132,23 @@ namespace Test.PsTool
         }
 
         /// <summary>
+        ///A test for EpubInsertCoverCSSStyle(from Epub output) file added in css. TD-3361
+        ///</summary>
+        [Test]
+        public void WriteEpubInsertCoverCSSStyle()
+        {
+            const string cssFileName = "EpubInsertCoverCSSStyle.css";
+            string sourceCssFile = GetFileNameWithPath(cssFileName);
+            string output = GetFileNameWithOutputPath(cssFileName);
+            string expected = GetFileNameWithExpectedPath(cssFileName);
+
+            CopyToOutput(sourceCssFile, output);
+            PreExportProcess preExport = new PreExportProcess();
+            preExport.InsertCoverPageImageStyleInCSS(output);
+            TextFileAssert.AreEqual(expected, output);
+        }
+
+        /// <summary>
         ///A test for Languagesettings(from META tag) file added in css. TD-2736
         ///</summary>
         [Test]

@@ -311,7 +311,8 @@ namespace Test
             // clean out old files
             foreach (var file in Directory.GetFiles(_outputPath))
             {
-                File.Delete(file);
+                if (File.Exists(file))
+                    File.Delete(file);
             } 
             // make a copy of the xhtml and CSS files
             File.Copy(Path.Combine(Path.Combine(_inputPath, "Sena 3-01"), "Sena 3-01.xhtml"), Path.Combine(_outputPath, "Scripture Draft.xhtml"), true);
@@ -331,7 +332,8 @@ namespace Test
             // clean out old files
             foreach (var file in Directory.GetFiles(_outputPath))
             {
-                File.Delete(file);
+                if (File.Exists(file))
+                    File.Delete(file);
             }
             if (Directory.Exists(Path.Combine(_outputPath, "gather")))
             {
