@@ -217,6 +217,7 @@ namespace SIL.PublishingSolution
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tabDict4Mids = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -458,6 +459,7 @@ namespace SIL.PublishingSolution
             this.tabControl1.Controls.Add(this.tabMobile);
             this.tabControl1.Controls.Add(this.tabOthers);
             this.tabControl1.Controls.Add(this.tabWeb);
+            this.tabControl1.Controls.Add(this.tabDict4Mids);
             this.tabControl1.Controls.Add(this.tabPreview);
             this.tabControl1.Controls.Add(this.tabPicture);
             this.tabControl1.HotTrack = true;
@@ -2446,6 +2448,15 @@ namespace SIL.PublishingSolution
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // tabDict4Mids
+            // 
+            this.tabDict4Mids.Location = new System.Drawing.Point(4, 22);
+            this.tabDict4Mids.Name = "tabDict4Mids";
+            this.tabDict4Mids.Size = new System.Drawing.Size(292, 516);
+            this.tabDict4Mids.TabIndex = 7;
+            this.tabDict4Mids.Text = "Properties";
+            this.tabDict4Mids.UseVisualStyleBackColor = true;
+            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2695,5 +2706,6 @@ namespace SIL.PublishingSolution
         private CheckBox chkTurnOffFirstVerse;
         private TextBox txtXrefCusSymbol;
         private CheckBox chkXrefCusSymbol;
+        private TabPage tabDict4Mids;
     }
 }

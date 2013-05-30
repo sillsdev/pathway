@@ -17,3 +17,13 @@
 @import "Rules_Yes.css";
 @import "PageNumber_TopInside.css"; 
 @import "Reversal_Reference_Numbers.css";
+
+.pictureRight {
+    float:left;
+}
+.pictureLeft {
+    float:left;
+}
+.pictureCenter {
+    float:left;
+}

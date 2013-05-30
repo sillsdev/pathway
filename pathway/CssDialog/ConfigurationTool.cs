@@ -820,18 +820,15 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.ConfigurationTool_FormClosingBL();
             Style = _CToolBL.StyleEXE.ToString();
-
         }
 
         private void btnDictionary_Click(object sender, EventArgs e)
         {
-            btnMobile.Text = "DictForMids";
             _CToolBL.btnDictionary_ClickBL();
         }
 
         private void btnScripture_Click(object sender, EventArgs e)
         {
-            btnMobile.Text = "Mobile";
             _CToolBL.btnScripture_ClickBL();
         }
 
