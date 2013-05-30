@@ -136,6 +136,7 @@ namespace SIL.PublishingSolution
         TabPage tabothers = new TabPage();
         TabPage tabweb = new TabPage();
         TabPage tabpreview = new TabPage();
+        TabPage tabDict4Mids = new TabPage();
         protected TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
         private ConfigurationTool cTool;
         Dictionary<string, string> pageDict = new Dictionary<string, string>();
@@ -1551,6 +1552,12 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                if (inputTypeBL.ToLower() == "dictionary" && MediaType.ToLower() == "mobile")
+                {
+                    cTool.TxtCss.Text = @"No custom properties for DictionaryForMIDs";
+                    return;
+                }
+
                 string leading = (cTool.DdlLeading.Text.Length > 0) ? " Line Spacing " + cTool.DdlLeading.Text + ", " : " ";
                 string fontSize = (cTool.DdlFontSize.Text.Length > 0) ? " Base FontSize - " + cTool.DdlFontSize.Text + ", " : "";
 
@@ -1676,8 +1683,8 @@ namespace SIL.PublishingSolution
         {
             //if (!(MediaType == "mobile" || MediaType == "others"))
             //    return;
-
-            cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[1]);
+            if (cTool.TabControl1.TabCount > 1)
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[1]);
             if (cTool.TabControl1.TabPages.ContainsKey("tabPreview"))
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPreview"]);
             //cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabdisplay"]);
@@ -1685,14 +1692,14 @@ namespace SIL.PublishingSolution
             {
                 case "mobile":
                     //cTool.TabControl1.TabPages.Add(tabmob);
-                    cTool.TabControl1.TabPages.Insert(1, tabmob);
-                    cTool.TabControl1.TabPages.Insert(2, tabpreview);
-
                     if(inputTypeBL.ToLower() == "dictionary")
                     {
-                        cTool.TabControl1.TabPages[1].Enabled = false;
+                        cTool.TabControl1.TabPages.Insert(1, tabDict4Mids);
                         return;
                     }
+
+                    cTool.TabControl1.TabPages.Insert(1, tabmob);
+                    cTool.TabControl1.TabPages.Insert(2, tabpreview);
 
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     foreach (XmlNode VARIABLE in baseNode1)
@@ -3104,6 +3111,10 @@ namespace SIL.PublishingSolution
 
         public void ShowMobileSummaryBL()
         {
+            if(inputTypeBL.ToLower() == "dictionary")
+            {
+                cTool.TxtCss.Text = @"No custom properties for DictionaryForMIDs";
+            }
             string comma = ", ";
             string red = (cTool.DdlRedLetter.Text.Length > 0 && cTool.DdlRedLetter.Text.ToLower() == "yes") ? " Red Letter  " : "";
             if (red.Length == 0)
@@ -4310,11 +4321,13 @@ namespace SIL.PublishingSolution
                 tabmob = cTool.TabControl1.TabPages["tabmobile"];
                 tabothers = cTool.TabControl1.TabPages["tabothers"];
                 tabweb = cTool.TabControl1.TabPages["tabweb"];
+                tabDict4Mids = cTool.TabControl1.TabPages["tabDict4Mids"];
 
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabmobile"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabothers"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabweb"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabDict4Mids"]);
             }
             //_redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
 
