@@ -170,6 +170,7 @@ namespace SIL.PublishingSolution
         private int _headwordIndex = 0;
         private bool _isFootnoteCallerStared;
         private string _customFootnoteSymbol = string.Empty;
+        private string _customXRefSymbol = string.Empty;
 
         #endregion
 
@@ -206,7 +207,7 @@ namespace SIL.PublishingSolution
         }
 
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass,
-            Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize, string customFootnote)
+            Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
         {
             OldStyles styleInfo = new OldStyles();
             _pageWidth = pageWidth;
@@ -215,7 +216,8 @@ namespace SIL.PublishingSolution
             _pageSize = pageSize;
             _isFootnoteCallerStared = true;
             _isFromExe = Common.CheckExecutionPath();
-            _customFootnoteSymbol = customFootnote;
+            _customFootnoteSymbol = projInfo.IncludeFootnoteSymbol;
+            _customXRefSymbol = projInfo.IncludeXRefSymbol;
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             ProcessProperty();
@@ -1373,10 +1375,10 @@ namespace SIL.PublishingSolution
                 _isEmptyTitleExist = true;
             }
             //footCallSymb = footCallSymb.Trim() + " ";
-            footCallSymb = footCallSymb.Trim();
+            //footCallSymb = footCallSymb.Trim();
             string footerCall = footerClassName + "..footnote-call";
             string footerMarker = footerClassName + "..footnote-marker";
-            if (IdAllClass.ContainsKey(footerCall) && String.IsNullOrEmpty(footCallSymb))
+            if (IdAllClass.ContainsKey(footerCall) && (footerClassName.IndexOf("NoteCross") != 0 && String.IsNullOrEmpty(footCallSymb)))
                 footCallSymb = string.Empty;
 
             _autoFootNoteCount++;
@@ -1407,9 +1409,12 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             //isFootnote = false;
 
-            _writer.WriteStartElement("text:s"); // Insert space after the footnote call
-            _writer.WriteAttributeString("text:c", "1");
-            _writer.WriteEndElement();
+            if (footerClassName.IndexOf("NoteCross") != 0)
+            {
+                _writer.WriteStartElement("text:s"); // Insert space after the footnote call
+                _writer.WriteAttributeString("text:c", "1");
+                _writer.WriteEndElement();
+            }
         }
 
         private static string NoteCrossHyphenReferenceContentNodeMissing(string content)
@@ -1549,7 +1554,7 @@ namespace SIL.PublishingSolution
         private void SetFootnote()
         {
             string footerCall = _className + "..footnote-call";
-            if (IdAllClass.ContainsKey(footerCall))
+            if (IdAllClass.ContainsKey(footerCall) && IdAllClass[footerCall].ContainsKey("content"))
             {
                 footCallSymb = IdAllClass[footerCall]["content"];
                 if (footCallSymb.IndexOf('(') >= 0)
@@ -1558,13 +1563,24 @@ namespace SIL.PublishingSolution
                     try
                     {
                         footCallSymb = _reader.GetAttribute(attrName);
-                        if (_customFootnoteSymbol != null && _customFootnoteSymbol.ToLower() != "default")
+                        if (!string.IsNullOrEmpty(_customFootnoteSymbol) && _customFootnoteSymbol.ToLower() != "default" && footerCall.IndexOf("NoteGeneral") == 0)
                         {
                             footCallSymb = _customFootnoteSymbol;
                         }
+                        else if (!string.IsNullOrEmpty(_customXRefSymbol) && _customXRefSymbol.ToLower() != "default" && footerCall.IndexOf("NoteCross") == 0)
+                        {
+                            footCallSymb = _customXRefSymbol;
+                        }
                         else if (footCallSymb != null && footCallSymb.Trim().Length == 0)
                         {
-                            footCallSymb = "*";
+                            if (footerCall.IndexOf("NoteCross") == 0)
+                            {
+                                footCallSymb = "\u2009";
+                            }
+                            else
+                            {
+                                footCallSymb = "*";
+                            }
                         }
                     }
                     catch (NullReferenceException)

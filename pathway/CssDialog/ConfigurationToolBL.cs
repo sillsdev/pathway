@@ -136,10 +136,14 @@ namespace SIL.PublishingSolution
         TabPage tabothers = new TabPage();
         TabPage tabweb = new TabPage();
         TabPage tabpreview = new TabPage();
+        TabPage tabDict4Mids = new TabPage();
         protected TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
         private ConfigurationTool cTool;
         Dictionary<string, string> pageDict = new Dictionary<string, string>();
         protected string _includeFootnoteCaller;
+        protected string _includeXRefCaller;
+        protected bool _hideVerseNumberOne;
+
         #endregion
 
         #region Constructor
@@ -223,6 +227,26 @@ namespace SIL.PublishingSolution
                 string task = "@page";
                 string key = "-ps-custom-footnote-caller";
                 return GetValue(task, key, "Default");
+            }
+        }
+
+        public string CustomXRefCaller
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-custom-xref-caller";
+                return GetValue(task, key, "Default");
+            }
+        }
+
+        public string HideVerseNumberOne
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-hide-versenumber-one";
+                return GetValue(task, key, "False");
             }
         }
 
@@ -900,11 +924,13 @@ namespace SIL.PublishingSolution
                         value["margin-right"] = cTool.TxtPageOutside.Text;
                         value["margin-bottom"] = cTool.TxtPageBottom.Text;
                         value["margin-left"] = cTool.TxtPageInside.Text;
-                        value["-ps-fileproduce"] = "\"" + _fileProduce + "\"";
+                        value["-ps-fileproduce"] = "\"" + cTool.DdlFileProduceDict.Text + "\"";
                         value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
                         if (inputTypeBL.ToLower() == "scripture")
                         {
-                            value["-ps-custom-footnote-caller"] = "\"" + _includeFootnoteCaller + "\"";
+                            value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
+                            value["-ps-custom-XRef-caller"] = "\"" + cTool.TxtXrefCusSymbol.Text + "\"";
+                            value["-ps-hide-versenumber-one"] = "\"" + cTool.ChkTurnOffFirstVerse.Checked + "\"";
                         }
                         
                         WriteCssClass(writeCss, "page", value);
@@ -918,12 +944,16 @@ namespace SIL.PublishingSolution
 
                     if (cTool.StylesGrid.Rows.Count >= SelectedRowIndex)
                     {
-                        cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
-                        cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
-                        XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + StyleName + "']");
-                        Param.SetAttrValue(baseNode, "previewfile1", PreviewFileName1);
-                        Param.SetAttrValue(baseNode, "previewfile2", PreviewFileName1);
-                        Param.Write();
+                        if (PreviewFileName1.Trim().Length > 0 && PreviewFileName2.Trim().Length > 0)
+                        {
+                            cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
+                            cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
+                            XmlNode baseNode =
+                                Param.GetItem("//styles/" + MediaType + "/style[@name='" + StyleName + "']");
+                            Param.SetAttrValue(baseNode, "previewfile1", PreviewFileName1);
+                            Param.SetAttrValue(baseNode, "previewfile2", PreviewFileName1);
+                            Param.Write();
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -999,6 +1029,7 @@ namespace SIL.PublishingSolution
                 {
                     EnableDisablePanel(true);
                     if (cTool.TxtName.Text.ToLower() == "oneweb") { cTool.TsDelete.Enabled = false; }
+                    if(cTool.BtnMobile.Text.ToLower() == "dictformids"){EnableDisablePanel(false);}
                     //tsPreview.Enabled = false;
                     cTool.TxtApproved.Visible = false;
                     cTool.LblApproved.Visible = false;
@@ -1067,6 +1098,18 @@ namespace SIL.PublishingSolution
                     cTool.ChkIncludeCusFnCaller.Checked = true;
                     cTool.TxtFnCallerSymbol.Text = CustomFootnoteCaller;
                 }
+                if (CustomXRefCaller.ToLower() == "default")
+                {
+                    cTool.ChkXrefCusSymbol.Checked = false;
+                    cTool.TxtXrefCusSymbol.Text = "";
+                }
+                else
+                {
+                    cTool.ChkXrefCusSymbol.Checked = true;
+                    cTool.TxtXrefCusSymbol.Text = CustomXRefCaller;
+                }
+                //cTool.ChkXrefCusSymbol.Checked = bool.Parse(CustomXRefCaller);
+                cTool.ChkTurnOffFirstVerse.Checked = bool.Parse(HideVerseNumberOne);
             }
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
@@ -1509,6 +1552,12 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                if (inputTypeBL.ToLower() == "dictionary" && MediaType.ToLower() == "mobile")
+                {
+                    cTool.TxtCss.Text = @"No custom properties for DictionaryForMIDs";
+                    return;
+                }
+
                 string leading = (cTool.DdlLeading.Text.Length > 0) ? " Line Spacing " + cTool.DdlLeading.Text + ", " : " ";
                 string fontSize = (cTool.DdlFontSize.Text.Length > 0) ? " Base FontSize - " + cTool.DdlFontSize.Text + ", " : "";
 
@@ -1634,8 +1683,8 @@ namespace SIL.PublishingSolution
         {
             //if (!(MediaType == "mobile" || MediaType == "others"))
             //    return;
-
-            cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[1]);
+            if (cTool.TabControl1.TabCount > 1)
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[1]);
             if (cTool.TabControl1.TabPages.ContainsKey("tabPreview"))
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPreview"]);
             //cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabdisplay"]);
@@ -1643,6 +1692,12 @@ namespace SIL.PublishingSolution
             {
                 case "mobile":
                     //cTool.TabControl1.TabPages.Add(tabmob);
+                    if(inputTypeBL.ToLower() == "dictionary")
+                    {
+                        cTool.TabControl1.TabPages.Insert(1, tabDict4Mids);
+                        return;
+                    }
+
                     cTool.TabControl1.TabPages.Insert(1, tabmob);
                     cTool.TabControl1.TabPages.Insert(2, tabpreview);
 
@@ -2810,6 +2865,12 @@ namespace SIL.PublishingSolution
             return directoryCreated;
         }
 
+        public string GenerateStylesString()
+        {
+            string path = "Styles";
+            return path;
+        }
+
         protected bool BackUpCSSFile(bool directoryCreated, string folderPath)
         {
             XmlNodeList cats = Param.GetItems("//styles/" + MediaType + "/style");
@@ -2819,7 +2880,7 @@ namespace SIL.PublishingSolution
                 XmlAttribute file = xml.Attributes[AttribFile];
                 if (file != null)
                 {
-                    string path = Path.Combine(Path.GetDirectoryName(Param.SettingPath), Path.Combine("styles", Param.Value["InputType"]));
+                    string path = Path.Combine(Path.GetDirectoryName(Param.SettingPath), Path.Combine(GenerateStylesString(), Param.Value["InputType"]));
                     if (type != null && type.Value == TypeCustom)
                     {
                         string OutputPath = Path.GetDirectoryName(Path.GetDirectoryName(Param.SettingOutputPath));
@@ -2862,7 +2923,10 @@ namespace SIL.PublishingSolution
                 string fileName = Path.GetFileName(filePath);
                 if (fileName.IndexOf(".xml") > 0 || fileName.IndexOf(".xsd") > 0)
                 {
-                    File.Copy(filePath, Path.Combine(toPath, fileName));
+					if(File.Exists(filePath) && Directory.Exists(toPath))
+					{
+						File.Copy(filePath, Path.Combine(toPath, fileName));
+					}
                 }
             }
         }
@@ -3047,6 +3111,10 @@ namespace SIL.PublishingSolution
 
         public void ShowMobileSummaryBL()
         {
+            if(inputTypeBL.ToLower() == "dictionary")
+            {
+                cTool.TxtCss.Text = @"No custom properties for DictionaryForMIDs";
+            }
             string comma = ", ";
             string red = (cTool.DdlRedLetter.Text.Length > 0 && cTool.DdlRedLetter.Text.ToLower() == "yes") ? " Red Letter  " : "";
             if (red.Length == 0)
@@ -3374,6 +3442,16 @@ namespace SIL.PublishingSolution
                         if (!success)
                         {
                             success = LOPreview(ps);
+
+                            if (success)
+                            {
+                                string os = Common.GetOsName();
+                                string libre = Common.GetLibraofficeVersion(os);
+                                if (os.IndexOf("Windows") == 0 && libre == null)
+                                {
+                                    success = false;
+                                }
+                            }
                         }
 
                         if (!success)
@@ -3837,6 +3915,27 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
+        public void TxtXRefCusSymbol_KeyUpBL()
+        {
+            try
+            {
+                _includeXRefCaller = cTool.TxtXrefCusSymbol.Text;
+            }
+            catch { }
+        }
+
+        public void chkXrefCusSymbol_CheckStateChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                cTool.TxtXrefCusSymbol.Enabled = cTool.ChkXrefCusSymbol.Checked;
+                if (cTool.ChkXrefCusSymbol.Checked == false)
+                    cTool.TxtXrefCusSymbol.Text = "";
+                _includeXRefCaller = cTool.TxtXrefCusSymbol.Text;
+            }
+            catch { }
+        }
+
 
         public void txtDesc_ValidatedBL(object sender)
         {
@@ -4174,9 +4273,9 @@ namespace SIL.PublishingSolution
                     catch
                     {
                     }
-                    Process.Start(string.Format("mailto:{0}?Subject={1}&Body={2}", MailTo,
-                                                                   MailSubject, MailBody));
 
+                        Process.Start(string.Format("mailto:{0}?Subject={1}&Body={2}", MailTo,
+                                               MailSubject, MailBody));
                 }
                 catch (Exception ex)
                 {
@@ -4222,11 +4321,13 @@ namespace SIL.PublishingSolution
                 tabmob = cTool.TabControl1.TabPages["tabmobile"];
                 tabothers = cTool.TabControl1.TabPages["tabothers"];
                 tabweb = cTool.TabControl1.TabPages["tabweb"];
+                tabDict4Mids = cTool.TabControl1.TabPages["tabDict4Mids"];
 
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabmobile"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabothers"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabweb"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabDict4Mids"]);
             }
             //_redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
 
@@ -4410,6 +4511,24 @@ namespace SIL.PublishingSolution
             //cTool.LblInfoCaption.Text = PreviousStyleName;
             WriteCss();
 
+        }
+
+        //public void chkInclThinSpaceXref_CheckStateChangedBL(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        _includeThinSpaceXRefCaller = cTool.ChkInclThinSpaceXref.Checked;
+        //    }
+        //    catch { }
+        //}
+
+        public void chkTurnOffFirstVerse_CheckStateChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _hideVerseNumberOne = cTool.ChkTurnOffFirstVerse.Checked;
+            }
+            catch { }
         }
 
         public void tabControl1_SelectedIndexChangedBL()

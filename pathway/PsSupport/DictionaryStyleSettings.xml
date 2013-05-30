@@ -320,8 +320,8 @@
     </style -->
     </paper>
     <mobile>
-      <style name="Go Bible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
-        <description>Text only, no section heads or cross references</description>
+      <style name="DictionaryForMIDs" file="DictionaryForMIDs.css" approvedBy="GPS" previewfile1="" previewfile2="" shown="Yes">
+        <description>No custom properties for DictionaryForMIDs</description>
       </style>
     </mobile>
     <web>
@@ -379,7 +379,7 @@
     <task name="Trial print" style="LikeBuangPNG" icon="Graphic/trialPrint.png" />
     <task name="Final print" style="TwoColumn" icon="Graphic/final.png" />
     <task name="Web publish" style="OneColumn" icon="Graphic/web.png" />
-    <task name="Cell publish" style="Go Bible" icon="Graphic/cell.png" />
+    <task name="Cell publish" style="DictionaryForMIDs" icon="Graphic/cell.png" />
   </tasks>
   <column-width>
     <column name="0" width="85" />

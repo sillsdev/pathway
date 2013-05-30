@@ -34,6 +34,7 @@ namespace SIL.PublishingSolution
         protected static string WorkDir;
         protected static Dictionary<string, Dictionary<string, string>> CssClass;
         protected static Dic4MidStyle ContentStyles = new Dic4MidStyle();
+        private static bool _isUnixOS = false;
 
         #region Properties
         #region ExportType
@@ -74,7 +75,7 @@ namespace SIL.PublishingSolution
                 return false;
             }
             WorkDir = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-            bool isUnixOS = Common.UnixVersionCheck();
+            _isUnixOS = Common.UnixVersionCheck();
             var inProcess = new InProcess(0, 8);
             var curdir = Environment.CurrentDirectory;
             var myCursor = Cursor.Current;
@@ -109,7 +110,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception ex)
             {
-                var result = MessageBox.Show(string.Format("{0} Display partial results?", ex.Message),"Report: Failure", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                var result = MessageBox.Show(string.Format("{0} Display partial results?", ex.Message), "Report: Failure", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (result == DialogResult.Yes)
                 {
                     DisplayOutput(projInfo);
@@ -142,7 +143,7 @@ namespace SIL.PublishingSolution
             var input = Input(projInfo);
             foreach (XmlNode sense in input.SelectNodes("//*[@class = 'entry']//*[@id]"))
             {
-                var rec = new Dic4MidRec {CssClass = CssClass, Styles = ContentStyles};
+                var rec = new Dic4MidRec { CssClass = CssClass, Styles = ContentStyles };
                 rec.AddHeadword(sense);
                 rec.AddBeforeSense(sense);
                 rec.AddSense(sense);
@@ -195,7 +196,14 @@ namespace SIL.PublishingSolution
             FolderTree.Copy(creatorPath, output.Directory);
             const string redirectOutputFileName = LogName;
             SubProcess.RedirectOutput = redirectOutputFileName;
-            SubProcess.Run(output.Directory, processFullPath, output.FullPath, true);
+            if (_isUnixOS)
+            {
+                SubProcess.Run(output.Directory, "wineconsole", processFullPath, true);
+            }
+            else
+            {
+                SubProcess.Run(output.Directory, processFullPath, output.FullPath, true);
+            }
         }
 
         protected void CreateSubmission(PublicationInformation projInfo)
@@ -217,7 +225,7 @@ namespace SIL.PublishingSolution
         protected void ReportReults(PublicationInformation projInfo)
         {
             var output = new Dic4MidStreamWriter(projInfo);
-            var result = MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display output?", output.Directory),"Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+            var result = MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display output?", output.Directory), "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
             {
                 DisplayOutput(projInfo);
@@ -228,7 +236,14 @@ namespace SIL.PublishingSolution
         {
             var output = new Dic4MidStreamWriter(projInfo);
             const bool noWait = false;
-            SubProcess.Run(output.Directory, "explorer.exe", output.Directory, noWait);
+            if (_isUnixOS)
+            {
+                SubProcess.Run(output.Directory, "nautilus", output.Directory, noWait);
+            }
+            else
+            {
+                SubProcess.Run(output.Directory, "explorer.exe", output.Directory, noWait);
+            }
         }
 
         protected Dic4MidInput Input(PublicationInformation projInfo)

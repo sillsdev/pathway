@@ -196,6 +196,9 @@ namespace SIL.PublishingSolution
                     case "-ps-custom-footnote-caller":
                         CustomFootnoteCaller(property.Value);
                         break;
+                    case "-ps-custom-XRef-caller":
+                        CustomXrefCaller(property.Value);
+                        break;
                     case "pathway":
                         Pathway(property.Value);
                         break;
@@ -233,6 +236,11 @@ namespace SIL.PublishingSolution
         }
 
         private void CustomFootnoteCaller(string propertyValue)
+        {
+            _IDProperty[_propertyKey] = propertyValue;
+        }
+
+        private void CustomXrefCaller(string propertyValue)
         {
             _IDProperty[_propertyKey] = propertyValue;
         }

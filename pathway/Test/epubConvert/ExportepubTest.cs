@@ -93,6 +93,13 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void ExportDictionaryPassTest()
         {
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+
             const string XhtmlName = "main.xhtml";
             const string CssName = "main.css";
             PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -248,6 +255,13 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void EpubIndentFileComparisonTest()
         {
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+            
             const string XhtmlName = "EpubIndentFileComparison.xhtml";
             const string CssName = "EpubIndentFileComparison.css";
             PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -265,14 +279,40 @@ namespace Test.epubConvert
             result = result.Replace("Output", "Expected");
             zfExpected.ExtractZip(result, FileOutput("EpubIndentFileComparisonExpect"), ".*");
             FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_.xhtml");
-            string directoryExist = FileExpected("EpubIndentFileComparison");
+           
+        }
 
-            if (Directory.Exists(directoryExist))
-                Directory.Delete(directoryExist, true);
-
-            directoryExist = FileOutput("");
-            if (Directory.Exists(directoryExist))
-                Directory.Delete(directoryExist, true);
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void ExportDictionaryInsertBeforeAfterTest()
+        {
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+            
+            const string XhtmlName = "InsertBeforeAfter.xhtml";
+            const string CssName = "InsertBeforeAfter.css";
+            PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+            projInfo.IsReversalExist = false;
+            projInfo.ProjectName = "Dictionary Test";
+            projInfo.ProjectInputType = "Dictionary";
+            projInfo.IsLexiconSectionExist = true;
+            File.Copy(FileProg(@"Styles\Dictionary\epub.css"), FileOutput("epub.css"));
+            var target = new Exportepub();
+            var actual = target.Export(projInfo);
+            Assert.IsTrue(actual);
+            var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+            var zf = new FastZip();
+            zf.ExtractZip(result, FileOutput("InsertBeforeAfterComparison"), ".*");
+            var zfExpected = new FastZip();
+            result = result.Replace("Output", "Expected");
+            zfExpected.ExtractZip(result, FileOutput("InsertBeforeAfterComparisonExpect"), ".*");
+            FileCompare("InsertBeforeAfterComparison/OEBPS/PartFile00001_.xhtml", "InsertBeforeAfterComparisonExpect/OEBPS/PartFile00001_.xhtml");
+            
         }
 
         private void FileCompare(string file)

@@ -280,7 +280,7 @@ namespace SIL.Tool
         {
             if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("false")) { return string.Empty; }
             var sb = new StringBuilder();
-            sb.AppendLine("<div id='CoverPage' class='Cover'><img src='cover.png' alt='Cover image'/></div>");
+            sb.AppendLine("<div id='CoverPage' class='Cover'><img src='cover.png' style='height: 100%; width: 100%;' alt='Cover image'/></div>");
             sb.AppendLine("<div class='Blank'></div>");
             return sb.ToString();
         }
@@ -808,11 +808,15 @@ namespace SIL.Tool
             sb.AppendLine("<!-- Contents page -->");
             sb.AppendLine("<div id='TOCPage' class='Contents'>");
 
-            if (_xhtmlFileNameWithPath.ToLower().Contains("main"))//TocError
+            if (_xhtmlFileNameWithPath.ToLower().Contains("main") || _projInfo.ProjectInputType.ToLower() == "scripture") //TocError
             {
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     sb.AppendLine("<h1>Table of Contents</h1><h2>Main</h2>");
+                }
+                else
+                {
+                    sb.AppendLine("<h1>Table of Contents</h1>");
                 }
                 // collect book names
 
@@ -2574,6 +2578,27 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
+        public void InsertPseudoContentProperty(string cssFileName, ArrayList pseudoClass)
+        {
+            TextWriter tw = new StreamWriter(cssFileName, true);
+            for (int i = 0; i < pseudoClass.Count; i++)
+            {
+                string[] value = pseudoClass[i].ToString().Split('_');
+                try
+                {
+                    if (value.Length > 1)
+                    {
+                        tw.WriteLine("." +  value[0].Substring(0, value[0].IndexOf('.')) + ":" + value[0].Substring(value[0].IndexOf('.') + 2) + " {");
+                        tw.WriteLine("content: '';" );
+                        tw.WriteLine("}");
+                    }
+                }
+                catch{}
+            }
+            tw.Close();
+            
+        }
+
         public string InsertHiddenChapterNumber()
         {
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
@@ -3216,6 +3241,40 @@ namespace SIL.Tool
 
         }
 
+
+        /// <summary>
+        /// TD-3482 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void MoveCallerToPrevText(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.PreserveWhitespace = false;
+            xDoc.Load(fileName);
+            const string xPath = "//xhtml:span[@class='scrFootnoteMarker']";
+            XmlNodeList markerNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if (markerNodeList == null) return;
+            for (int i = 0; i < markerNodeList.Count; i++)
+            {
+                XmlNode markerPrevNode = markerNodeList[i].PreviousSibling;
+                XmlNode markerNextNode = markerNodeList[i].NextSibling;
+                if (markerPrevNode != null && markerNextNode != null)
+                {
+                    string nextNodeContent = markerNextNode.OuterXml;
+                    if (nextNodeContent.Contains("Note_Target_Reference"))
+                    {
+                        markerPrevNode.InnerXml = markerPrevNode.InnerXml + markerNextNode.OuterXml;
+                    }
+                }
+                if (markerNextNode != null && markerNextNode.ParentNode != null)
+                    markerNextNode.ParentNode.RemoveChild(markerNextNode);
+            }
+            xDoc.Save(fileName);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -3295,12 +3354,42 @@ namespace SIL.Tool
             xDoc.Save(fileName);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="mergedCSS"> </param>
+        public void RemoveVerseNumberOne(string fileName, string mergedCSS)
+        {
+               if (!File.Exists(fileName)) return;
+                XmlDocument xDoc = Common.DeclareXMLDocument(true);
+                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                xDoc.Load(fileName);
+                string xPath = "//xhtml:span[@class='Chapter_Number']";
+                XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+                if (SectionNodeList == null) return;
+                for (int i = 0; i < SectionNodeList.Count; i++)
+                {
+                    XmlNode paraNode = SectionNodeList[i].ParentNode;
+                    xPath = ".//xhtml:span[@class='Verse_Number']";
+                    XmlNodeList verseNodeList = paraNode.SelectNodes(xPath, namespaceManager);
+                    if (verseNodeList == null) return;
+                    for (int j = 0; j < verseNodeList.Count; j++)
+                    {
+                        verseNodeList[j].InnerText = "";
+                        break;
+                    }
+                }
+                xDoc.Save(fileName);
+        }
+
         //SetNonBreakInVerseNumberSetNonBreakInVerseNumber
 
         public void RemoveTextIntent(string fileName)
-        {
-            //string fileName = txtInputPath.Text;
-            string newFileName = fileName.Replace(".", "1.");
+        {            
+            string fileNameExtension = Path.GetExtension(fileName);
+            string newFileName = fileName.Replace(fileNameExtension, "1" + fileNameExtension);
             string line;
             StreamReader read = new StreamReader(fileName);
             StreamWriter write = new StreamWriter(newFileName);
@@ -3565,6 +3654,11 @@ namespace SIL.Tool
             tw.WriteLine(".Chapter_Number {");
             tw.WriteLine("font-size: 199%;");
             tw.WriteLine("}");
+
+            tw.WriteLine(".Title_Secondary {");
+            tw.WriteLine("text-align: center;");
+            tw.WriteLine("}");
+
             tw.Close();
         }
 
@@ -3609,13 +3703,15 @@ namespace SIL.Tool
         {
             TextWriter tw = new StreamWriter(cssFileName, true);
             tw.WriteLine(".Cover {");
-            tw.WriteLine("vertical-align: center;");
+            tw.WriteLine("vertical-align: middle;");
             tw.WriteLine("text-align: center;");
             tw.WriteLine("}");
             tw.WriteLine("");
             tw.WriteLine(".Cover img{");
-            tw.WriteLine("height: 595px;");
-            tw.WriteLine("width: 446.25px;");
+            tw.WriteLine("height: 100%;");
+            tw.WriteLine("width: 100%;");
+            //tw.WriteLine("height: 595px;");
+            //tw.WriteLine("width: 446.25px;");
             tw.WriteLine("}");
             tw.Close();
         }

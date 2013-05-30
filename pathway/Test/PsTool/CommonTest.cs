@@ -1132,6 +1132,23 @@ namespace Test.PsTool
         }
 
         /// <summary>
+        ///A test for EpubInsertCoverCSSStyle(from Epub output) file added in css. TD-3361
+        ///</summary>
+        [Test]
+        public void WriteEpubInsertCoverCSSStyle()
+        {
+            const string cssFileName = "EpubInsertCoverCSSStyle.css";
+            string sourceCssFile = GetFileNameWithPath(cssFileName);
+            string output = GetFileNameWithOutputPath(cssFileName);
+            string expected = GetFileNameWithExpectedPath(cssFileName);
+
+            CopyToOutput(sourceCssFile, output);
+            PreExportProcess preExport = new PreExportProcess();
+            preExport.InsertCoverPageImageStyleInCSS(output);
+            TextFileAssert.AreEqual(expected, output);
+        }
+
+        /// <summary>
         ///A test for Languagesettings(from META tag) file added in css. TD-2736
         ///</summary>
         [Test]
@@ -1181,7 +1198,7 @@ namespace Test.PsTool
             string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string database = "{Current_Project}";
             string layout = "Quick";
-            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hhmm");
+            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
             string expected = Common.PathCombine(documents, @"Publications\{Current_Project}\Dictionary\Quick_" + dateTime);
             string actual = Common.GetSaveInFolder(template, database, layout);
             Assert.AreEqual(expected, actual);
@@ -1190,7 +1207,7 @@ namespace Test.PsTool
         [Test]
         public void CustomSavedInFolderTest()
         {
-            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hhmm");
+            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
             bool actual = Common.CustomSaveInFolder(dateTime);
             Assert.AreEqual(false, actual);
         }

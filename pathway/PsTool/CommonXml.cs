@@ -342,7 +342,7 @@ namespace SIL.Tool
                                         }
                                         if (baseValue.Length > 0)
                                         {
-                                            xmlNode.RemoveChild(child); // Remove the base Node, to avoid the conflict
+                                            xmlNode.ParentNode.RemoveChild(child); // Remove the base Node, to avoid the conflict
                                         }
                                         break;
                                     }
