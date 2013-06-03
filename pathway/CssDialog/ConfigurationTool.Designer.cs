@@ -183,6 +183,7 @@ namespace SIL.PublishingSolution
             this.label12 = new System.Windows.Forms.Label();
             this.txtSqlServerName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.tabDict4Mids = new System.Windows.Forms.TabPage();
             this.tabPreview = new System.Windows.Forms.TabPage();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
@@ -217,7 +218,6 @@ namespace SIL.PublishingSolution
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tabDict4Mids = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -825,16 +825,16 @@ namespace SIL.PublishingSolution
             // 
             // txtXrefCusSymbol
             // 
-            this.txtXrefCusSymbol.Location = new System.Drawing.Point(241, 48);
+            this.txtXrefCusSymbol.Location = new System.Drawing.Point(239, 54);
             this.txtXrefCusSymbol.Name = "txtXrefCusSymbol";
-            this.txtXrefCusSymbol.Size = new System.Drawing.Size(42, 20);
+            this.txtXrefCusSymbol.Size = new System.Drawing.Size(44, 20);
             this.txtXrefCusSymbol.TabIndex = 110;
             this.txtXrefCusSymbol.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtXrefCusSymbol_KeyUp);
             // 
             // chkXrefCusSymbol
             // 
             this.chkXrefCusSymbol.AutoSize = true;
-            this.chkXrefCusSymbol.Location = new System.Drawing.Point(107, 50);
+            this.chkXrefCusSymbol.Location = new System.Drawing.Point(107, 54);
             this.chkXrefCusSymbol.Name = "chkXrefCusSymbol";
             this.chkXrefCusSymbol.Size = new System.Drawing.Size(117, 17);
             this.chkXrefCusSymbol.TabIndex = 109;
@@ -845,7 +845,7 @@ namespace SIL.PublishingSolution
             // chkTurnOffFirstVerse
             // 
             this.chkTurnOffFirstVerse.AutoSize = true;
-            this.chkTurnOffFirstVerse.Location = new System.Drawing.Point(107, 72);
+            this.chkTurnOffFirstVerse.Location = new System.Drawing.Point(107, 76);
             this.chkTurnOffFirstVerse.Name = "chkTurnOffFirstVerse";
             this.chkTurnOffFirstVerse.Size = new System.Drawing.Size(113, 17);
             this.chkTurnOffFirstVerse.TabIndex = 107;
@@ -857,7 +857,7 @@ namespace SIL.PublishingSolution
             // 
             this.txtFnCallerSymbol.AccessibleName = "txtPageGutterWidth";
             this.txtFnCallerSymbol.Enabled = false;
-            this.txtFnCallerSymbol.Location = new System.Drawing.Point(239, 25);
+            this.txtFnCallerSymbol.Location = new System.Drawing.Point(239, 31);
             this.txtFnCallerSymbol.MaxLength = 1;
             this.txtFnCallerSymbol.Name = "txtFnCallerSymbol";
             this.txtFnCallerSymbol.Size = new System.Drawing.Size(44, 20);
@@ -868,7 +868,7 @@ namespace SIL.PublishingSolution
             // chkIncludeCusFnCaller
             // 
             this.chkIncludeCusFnCaller.AutoSize = true;
-            this.chkIncludeCusFnCaller.Location = new System.Drawing.Point(107, 25);
+            this.chkIncludeCusFnCaller.Location = new System.Drawing.Point(107, 31);
             this.chkIncludeCusFnCaller.Name = "chkIncludeCusFnCaller";
             this.chkIncludeCusFnCaller.Size = new System.Drawing.Size(135, 17);
             this.chkIncludeCusFnCaller.TabIndex = 105;
@@ -883,9 +883,9 @@ namespace SIL.PublishingSolution
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlReferenceFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlReferenceFormat.FormattingEnabled = true;
-            this.ddlReferenceFormat.Location = new System.Drawing.Point(110, 2);
+            this.ddlReferenceFormat.Location = new System.Drawing.Point(107, 5);
             this.ddlReferenceFormat.Name = "ddlReferenceFormat";
-            this.ddlReferenceFormat.Size = new System.Drawing.Size(179, 21);
+            this.ddlReferenceFormat.Size = new System.Drawing.Size(182, 21);
             this.ddlReferenceFormat.TabIndex = 99;
             // 
             // lblReferenceFormat
@@ -2020,6 +2020,15 @@ namespace SIL.PublishingSolution
             this.label13.TabIndex = 0;
             this.label13.Text = "MySql Server name / IP Address";
             // 
+            // tabDict4Mids
+            // 
+            this.tabDict4Mids.Location = new System.Drawing.Point(4, 22);
+            this.tabDict4Mids.Name = "tabDict4Mids";
+            this.tabDict4Mids.Size = new System.Drawing.Size(292, 516);
+            this.tabDict4Mids.TabIndex = 7;
+            this.tabDict4Mids.Text = "Properties";
+            this.tabDict4Mids.UseVisualStyleBackColor = true;
+            // 
             // tabPreview
             // 
             this.tabPreview.AutoScroll = true;
@@ -2405,7 +2414,7 @@ namespace SIL.PublishingSolution
             this.TLPanel2.Name = "TLPanel2";
             this.TLPanel2.RowCount = 1;
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 567F));
+            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 589F));
             this.TLPanel2.Size = new System.Drawing.Size(463, 589);
             this.TLPanel2.TabIndex = 4;
             // 
@@ -2447,15 +2456,6 @@ namespace SIL.PublishingSolution
             this.lblType.TabIndex = 0;
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tabDict4Mids
-            // 
-            this.tabDict4Mids.Location = new System.Drawing.Point(4, 22);
-            this.tabDict4Mids.Name = "tabDict4Mids";
-            this.tabDict4Mids.Size = new System.Drawing.Size(292, 516);
-            this.tabDict4Mids.TabIndex = 7;
-            this.tabDict4Mids.Text = "Properties";
-            this.tabDict4Mids.UseVisualStyleBackColor = true;
             // 
             // ConfigurationTool
             // 
