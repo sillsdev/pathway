@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SIL.PublishingSolution</RootNamespace>
-    <AssemblyName>Dic4MidConvert</AssemblyName>
+    <AssemblyName>DictionaryForMIDsConvert</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -240,12 +240,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dic4MidInput.cs" />
-    <Compile Include="Dic4MidProperties.cs" />
-    <Compile Include="Dic4MidRec.cs" />
-    <Compile Include="Dic4MidStreamWriter.cs" />
-    <Compile Include="Dic4MidStyle.cs" />
-    <Compile Include="ExportDic4Mid.cs" />
+    <Compile Include="DictionaryForMIDsInput.cs" />
+    <Compile Include="DictionaryForMIDsProperties.cs" />
+    <Compile Include="DictionaryForMIDsRec.cs" />
+    <Compile Include="DictionaryForMIDsStreamWriter.cs" />
+    <Compile Include="DictionaryForMIDsStyle.cs" />
+    <Compile Include="ExportDictionaryForMIDs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

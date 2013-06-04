@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Dic4MidConvert")]
+[assembly: AssemblyTitle("DictionaryForMIDsConvert")]
 [assembly: AssemblyDescription("Export to Dictionary for Mid format")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SIL")]
-[assembly: AssemblyProduct("Dic4MidConvert")]
+[assembly: AssemblyProduct("DictionaryForMIDsConvert")]
 [assembly: AssemblyCopyright("Copyright © 2013 SIL International")]
 [assembly: AssemblyTrademark("SIL International")]
 [assembly: AssemblyCulture("")]

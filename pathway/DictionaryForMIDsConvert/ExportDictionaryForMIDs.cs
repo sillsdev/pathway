@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="ExportDic4Mid.cs" from='2013' to='2013' company='SIL International'>
+// <copyright file="ExportDictionaryForMIDs.cs" from='2013' to='2013' company='SIL International'>
 //      Copyright © 2013, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -27,13 +27,13 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class ExportDic4Mid : IExportProcess
+    public class ExportDictionaryForMIDs : IExportProcess
     {
         private const string LogName = "Convert.log";
-        private static Dic4MidInput _dic4MidInput;
+        private static DictionaryForMIDsInput _DictionaryForMIDsInput;
         protected static string WorkDir;
         protected static Dictionary<string, Dictionary<string, string>> CssClass;
-        protected static Dic4MidStyle ContentStyles = new Dic4MidStyle();
+        protected static DictionaryForMIDsStyle ContentStyles = new DictionaryForMIDsStyle();
         private static bool _isUnixOS = false;
 
         #region Properties
@@ -42,7 +42,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "Dic4Mid";
+                return "DictionaryForMIDs";
             }
         }
         #endregion ExportType
@@ -98,7 +98,7 @@ namespace SIL.PublishingSolution
                 CreateProperties(projInfo);
                 inProcess.PerformStep();
 
-                CreateDic4Mid(projInfo);
+                CreateDictionaryForMIDs(projInfo);
                 inProcess.PerformStep();
 
                 CreateSubmission(projInfo);
@@ -138,12 +138,12 @@ namespace SIL.PublishingSolution
 
         protected void ReformatData(PublicationInformation projInfo)
         {
-            var outFile = new Dic4MidStreamWriter(projInfo);
+            var outFile = new DictionaryForMIDsStreamWriter(projInfo);
             outFile.Open();
             var input = Input(projInfo);
             foreach (XmlNode sense in input.SelectNodes("//*[@class = 'entry']//*[@id]"))
             {
-                var rec = new Dic4MidRec { CssClass = CssClass, Styles = ContentStyles };
+                var rec = new DictionaryForMIDsRec { CssClass = CssClass, Styles = ContentStyles };
                 rec.AddHeadword(sense);
                 rec.AddBeforeSense(sense);
                 rec.AddSense(sense);
@@ -157,7 +157,7 @@ namespace SIL.PublishingSolution
         protected void CreateProperties(PublicationInformation projInfo)
         {
             var input = Input(projInfo);
-            var myProps = new Dic4MidProperties(projInfo, ContentStyles);
+            var myProps = new DictionaryForMIDsProperties(projInfo, ContentStyles);
             myProps.SetLanguage(1, input.VernacularIso(), input.VernacularName());
             myProps.SetLanguage(2, input.AnalysisIso(), input.AnalysisName());
             myProps.InfoText = GetInfo();
@@ -186,13 +186,13 @@ namespace SIL.PublishingSolution
             }
         }
 
-        protected void CreateDic4Mid(PublicationInformation projInfo)
+        protected void CreateDictionaryForMIDs(PublicationInformation projInfo)
         {
-            var output = new Dic4MidStreamWriter(projInfo);
+            var output = new DictionaryForMIDsStreamWriter(projInfo);
             Debug.Assert(output.Directory != null);
             var processFullPath = Path.Combine(output.Directory, "go.bat");
-            var dic4MidPath = Common.FromRegistry("Dic4Mid");
-            var creatorPath = Path.Combine(dic4MidPath, "DfM-Creator");
+            var DictionaryForMIDsPath = Common.FromRegistry("DictionaryForMIDs");
+            var creatorPath = Path.Combine(DictionaryForMIDsPath, "DfM-Creator");
             FolderTree.Copy(creatorPath, output.Directory);
             const string redirectOutputFileName = LogName;
             SubProcess.RedirectOutput = redirectOutputFileName;
@@ -208,7 +208,7 @@ namespace SIL.PublishingSolution
 
         protected void CreateSubmission(PublicationInformation projInfo)
         {
-            var output = new Dic4MidStreamWriter(projInfo);
+            var output = new DictionaryForMIDsStreamWriter(projInfo);
             var folder = Directory.GetDirectories(output.Directory, "DfM_*");
             if (folder.Length == 0)
                 return;                 // Output was not created!
@@ -224,7 +224,7 @@ namespace SIL.PublishingSolution
 
         protected void ReportReults(PublicationInformation projInfo)
         {
-            var output = new Dic4MidStreamWriter(projInfo);
+            var output = new DictionaryForMIDsStreamWriter(projInfo);
             var result = MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display output?", output.Directory), "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
             {
@@ -234,7 +234,7 @@ namespace SIL.PublishingSolution
 
         private static void DisplayOutput(PublicationInformation projInfo)
         {
-            var output = new Dic4MidStreamWriter(projInfo);
+            var output = new DictionaryForMIDsStreamWriter(projInfo);
             const bool noWait = false;
             if (_isUnixOS)
             {
@@ -246,12 +246,12 @@ namespace SIL.PublishingSolution
             }
         }
 
-        protected Dic4MidInput Input(PublicationInformation projInfo)
+        protected DictionaryForMIDsInput Input(PublicationInformation projInfo)
         {
-            if (_dic4MidInput != null)
-                return _dic4MidInput;
-            _dic4MidInput = new Dic4MidInput(projInfo);
-            return _dic4MidInput;
+            if (_DictionaryForMIDsInput != null)
+                return _DictionaryForMIDsInput;
+            _DictionaryForMIDsInput = new DictionaryForMIDsInput(projInfo);
+            return _DictionaryForMIDsInput;
         }
     }
 }
