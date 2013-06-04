@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="Dic4MidTest.cs" from='2013' to='2013' company='SIL International'>
+// <copyright file="DictionaryForMIDsTest.cs" from='2013' to='2013' company='SIL International'>
 //      Copyright © 2013, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Test methods of Dic4MidConvert
+// Test methods of DictionaryForMIDsConvert
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -23,13 +23,13 @@ using SIL.PublishingSolution;
 using SIL.Tool;
 using NMock2;
 
-namespace Test.Dic4MidConvert
+namespace Test.DictionaryForMIDsConvert
 {
     ///<summary>
     ///This is a test class for CheckCV_XHTMLTest
     ///</summary>
     [TestFixture]
-    public class Dic4MidTest : ExportDic4Mid
+    public class DictionaryForMIDsTest : ExportDictionaryForMIDs
     {
         private readonly Mockery mocks = new Mockery();
         #region Setup
@@ -39,14 +39,14 @@ namespace Test.Dic4MidConvert
         [TestFixtureSetUp]
         public void Setup()
         {
-            _testFiles = new TestFiles("Dic4MidConvert");
+            _testFiles = new TestFiles("DictionaryForMIDsConvert");
         }
         #endregion Setup
 
         [Test]
         public void ExportTypeTest()
         {
-            Assert.AreEqual("Dic4Mid", ExportType);
+            Assert.AreEqual("DictionaryForMIDs", ExportType);
         }
 
         [Test]
@@ -68,9 +68,9 @@ namespace Test.Dic4MidConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
-            var input = new Dic4MidInput(projInfo);
+            var input = new DictionaryForMIDsInput(projInfo);
             var sense = input.SelectNodes("//*[@class = 'entry']//*[@id]")[0];
-            var rec = new Dic4MidRec();
+            var rec = new DictionaryForMIDsRec();
             rec.AddHeadword(sense);
             Assert.AreEqual("imba  ", rec.Rec);
         }
@@ -80,9 +80,9 @@ namespace Test.Dic4MidConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("hornbill.xhtml");
-            var input = new Dic4MidInput(projInfo);
+            var input = new DictionaryForMIDsInput(projInfo);
             var sense = input.SelectNodes("//*[@class = 'entry']//*[@id]")[0];
-            var rec = new Dic4MidRec();
+            var rec = new DictionaryForMIDsRec();
             rec.AddHeadword(sense);
             Assert.AreEqual("daġöl  ", rec.Rec);
         }
@@ -92,9 +92,9 @@ namespace Test.Dic4MidConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("hornbill.xhtml");
-            var input = new Dic4MidInput(projInfo);
+            var input = new DictionaryForMIDsInput(projInfo);
             var sense = input.SelectNodes("//*[@class = 'entry']//*[@id]")[0];
-            var rec = new Dic4MidRec();
+            var rec = new DictionaryForMIDsRec();
             rec.AddBeforeSense(sense);
             Assert.AreEqual(@"{{\[ⁿda.ˈᵑɢɔl̪\] ", rec.Rec);
         }
@@ -104,9 +104,9 @@ namespace Test.Dic4MidConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("hornbill.xhtml");
-            var input = new Dic4MidInput(projInfo);
+            var input = new DictionaryForMIDsInput(projInfo);
             var sense = input.SelectNodes("//*[@class = 'entry']//*[@id]")[0];
-            var rec = new Dic4MidRec();
+            var rec = new DictionaryForMIDsRec();
             rec.AddAfterSense(sense);
             Assert.AreEqual(" }}", rec.Rec);
         }
@@ -116,9 +116,9 @@ namespace Test.Dic4MidConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
-            var input = new Dic4MidInput(projInfo);
+            var input = new DictionaryForMIDsInput(projInfo);
             var sense = input.SelectNodes("//*[@class = 'entry']/xhtml:div")[0];
-            var rec = new Dic4MidRec();
+            var rec = new DictionaryForMIDsRec();
             rec.AddReversal(sense);
             Assert.AreEqual("\tcantar", rec.Rec);
         }
@@ -128,7 +128,7 @@ namespace Test.Dic4MidConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
-            var input = new Dic4MidInput(projInfo);
+            var input = new DictionaryForMIDsInput(projInfo);
             var result = input.VernacularIso();
             Assert.AreEqual("seh", result);
         }
@@ -154,7 +154,7 @@ namespace Test.Dic4MidConvert
             wr.Close();
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
-            var input = new Dic4MidInput(projInfo);
+            var input = new DictionaryForMIDsInput(projInfo);
             var result = input.VernacularName();
             if (oKey == null)
             {
@@ -176,7 +176,7 @@ namespace Test.Dic4MidConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
-            var input = new Dic4MidInput(projInfo);
+            var input = new DictionaryForMIDsInput(projInfo);
             var result = input.AnalysisIso();
             Assert.AreEqual("pt", result);
         }
@@ -186,7 +186,7 @@ namespace Test.Dic4MidConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
-            var input = new Dic4MidInput(projInfo);
+            var input = new DictionaryForMIDsInput(projInfo);
             var result = input.AnalysisName();
             Assert.AreEqual("Portuguese", result);
         }

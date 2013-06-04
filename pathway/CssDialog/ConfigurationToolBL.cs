@@ -4550,7 +4550,8 @@ namespace SIL.PublishingSolution
                     if (_cToolPnlOtherFormatTop > 0)
                     {
                         cTool.PnlReferenceFormat.Visible = true;
-                        cTool.PnlOtherFormat.Top = _cToolPnlOtherFormatTop;
+                        //cTool.PnlOtherFormat.Top = _cToolPnlOtherFormatTop;
+                        cTool.PnlOtherFormat.Top = cTool.PnlReferenceFormat.Location.Y + cTool.PnlReferenceFormat.Height;
                     }
                 }
 

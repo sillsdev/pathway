@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="Dic4MidRec.cs" from='2013' to='2013' company='SIL International'>
+// <copyright file="DictionaryForMIDsRec.cs" from='2013' to='2013' company='SIL International'>
 //      Copyright © 2013, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -23,16 +23,16 @@ using System.Xml;
 
 namespace SIL.PublishingSolution
 {
-    public class Dic4MidRec
+    public class DictionaryForMIDsRec
     {
         public string Rec { get; set; }
         public Dictionary<string, Dictionary<string, string>> CssClass;
-        public Dic4MidStyle Styles;
+        public DictionaryForMIDsStyle Styles;
         protected int CurStyle = 1;
         protected bool Styled = false;
         protected bool DisableStyles = false;
 
-        public Dic4MidRec()
+        public DictionaryForMIDsRec()
         {
             Rec = string.Empty;
         }

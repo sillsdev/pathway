@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="Dic4MidStyle.cs" from='2013' to='2013' company='SIL International'>
+// <copyright file="DictionaryForMIDsStyle.cs" from='2013' to='2013' company='SIL International'>
 //      Copyright © 2013, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -19,7 +19,7 @@ using System.Collections.Generic;
 
 namespace SIL.PublishingSolution
 {
-    public class Dic4MidStyle
+    public class DictionaryForMIDsStyle
     {
         protected struct Style
         {
@@ -33,7 +33,7 @@ namespace SIL.PublishingSolution
         public int NumStyles = 0;
         protected Dictionary<string, int> Index = new Dictionary<string,int>();
 
-        public Dic4MidStyle()
+        public DictionaryForMIDsStyle()
         {
             Styles[NumStyles].DisplayText = "Default";
             Styles[NumStyles].FontColor = "128,0,0";

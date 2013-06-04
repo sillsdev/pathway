@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="Dic4MidProperties.cs" from='2013' to='2013' company='SIL International'>
+// <copyright file="DictionaryForMIDsProperties.cs" from='2013' to='2013' company='SIL International'>
 //      Copyright © 2013, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -21,7 +21,7 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class Dic4MidProperties
+    public class DictionaryForMIDsProperties
     {
         protected StreamWriter Sw { get; set; }
 
@@ -38,10 +38,10 @@ namespace SIL.PublishingSolution
         #endregion indexed by language
 
         #region indexed by content (style number)
-        public Dic4MidStyle Styles;
+        public DictionaryForMIDsStyle Styles;
         #endregion indexed by content (style number)
 
-        public Dic4MidProperties(PublicationInformation projInfo, Dic4MidStyle contentStyles)
+        public DictionaryForMIDsProperties(PublicationInformation projInfo, DictionaryForMIDsStyle contentStyles)
         {
             var myPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             Debug.Assert(myPath != null);

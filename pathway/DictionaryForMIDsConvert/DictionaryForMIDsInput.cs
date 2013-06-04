@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="Dic4MidInput.cs" from='2013' to='2013' company='SIL International'>
+// <copyright file="DictionaryForMIDsInput.cs" from='2013' to='2013' company='SIL International'>
 //      Copyright © 2013, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -20,7 +20,7 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class Dic4MidInput
+    public class DictionaryForMIDsInput
     {
         private string _vernacularIso;
         private string _analysisIso;
@@ -28,13 +28,13 @@ namespace SIL.PublishingSolution
         protected XmlNamespaceManager Nsmgr;
         protected XmlDocument Xml;
 
-        public Dic4MidInput(PublicationInformation projInfo)
+        public DictionaryForMIDsInput(PublicationInformation projInfo)
         {
             Xml = LoadXmlDocument(projInfo);
             Nsmgr = GetNamespaceManager(Xml);
         }
 
-        ~Dic4MidInput()
+        ~DictionaryForMIDsInput()
         {
             Xml.RemoveAll();
         }

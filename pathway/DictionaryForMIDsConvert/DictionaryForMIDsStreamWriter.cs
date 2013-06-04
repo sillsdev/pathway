@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="Dic4MidStreamWriter.cs" from='2013' to='2013' company='SIL International'>
+// <copyright file="DictionaryForMIDsStreamWriter.cs" from='2013' to='2013' company='SIL International'>
 //      Copyright © 2013, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -20,13 +20,13 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class Dic4MidStreamWriter
+    public class DictionaryForMIDsStreamWriter
     {
         protected StreamWriter StreamWriter { get; set; }
         public string Directory;
         public string FullPath;
 
-        public Dic4MidStreamWriter(PublicationInformation projInfo)
+        public DictionaryForMIDsStreamWriter(PublicationInformation projInfo)
         {
             var name = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             Directory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
