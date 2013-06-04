@@ -280,7 +280,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(84, 27);
             this.button8.TabIndex = 78;
-            this.button8.Text = "Dic4Mid";
+            this.button8.Text = "DictionaryForMIDs";
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 

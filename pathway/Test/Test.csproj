@@ -286,8 +286,8 @@
     <Compile Include="CssDialog\ExportThroughPathwayTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dic4MidConvert\Dic4MidRecTest.cs" />
-    <Compile Include="Dic4MidConvert\Dic4MidTests.cs" />
+    <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsRecTest.cs" />
+    <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsTests.cs" />
     <Compile Include="GoBibleConvert\UsxToSFMTest.cs" />
     <Compile Include="PathwayB\PathwayBTest.cs" />
     <Compile Include="XeLatex\XeLaTexContentTest.cs" />
@@ -392,9 +392,9 @@
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dic4MidConvert\Dic4MidConvert.csproj">
+    <ProjectReference Include="..\DictionaryForMIDsConvert\DictionaryForMIDsConvert.csproj">
       <Project>{D4AFCA5B-4C8A-4478-A08F-75540BE0D3B0}</Project>
-      <Name>Dic4MidConvert</Name>
+      <Name>DictionaryForMIDsConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\epubConvert\epubConvert.csproj">
       <Project>{B19037F2-26F7-48A2-9301-B5CA335C6824}</Project>
