@@ -1156,7 +1156,7 @@ namespace SIL.PublishingSolution
             string backend = ddlLayout.Text.ToLower();
             string media;
 
-            if (backend == "go bible")
+            if (backend == "go bible" || backend == "dictionaryformids")
             {
                 media = "mobile";
             }

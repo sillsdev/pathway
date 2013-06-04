@@ -191,7 +191,7 @@ namespace SIL.PublishingSolution
             var output = new DictionaryForMIDsStreamWriter(projInfo);
             Debug.Assert(output.Directory != null);
             var processFullPath = Path.Combine(output.Directory, "go.bat");
-            var DictionaryForMIDsPath = Common.FromRegistry("DictionaryForMIDs");
+            var DictionaryForMIDsPath = Common.FromRegistry("Dic4Mid");
             var creatorPath = Path.Combine(DictionaryForMIDsPath, "DfM-Creator");
             FolderTree.Copy(creatorPath, output.Directory);
             const string redirectOutputFileName = LogName;
