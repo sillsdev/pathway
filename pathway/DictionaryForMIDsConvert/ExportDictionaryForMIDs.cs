@@ -198,11 +198,11 @@ namespace SIL.PublishingSolution
             SubProcess.RedirectOutput = redirectOutputFileName;
             if (_isUnixOS)
             {
-                SubProcess.Run(output.Directory, "wineconsole", processFullPath, true);
+                SubProcess.RunCommand(output.Directory, "wineconsole", processFullPath, true);
             }
             else
             {
-                SubProcess.Run(output.Directory, processFullPath, output.FullPath, true);
+                SubProcess.RunCommand(output.Directory, processFullPath, output.Directory, true);
             }
         }
 
