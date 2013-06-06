@@ -43,6 +43,8 @@ pathway/CssParser/obj/*
 pathway/CssParser/Output
 pathway/Dic4MidConvert/bin/*
 pathway/Dic4MidConvert/obj/*
+pathway/DictionaryForMIDsConvert/bin/*
+pathway/DictionaryForMIDsConvert/obj/*
 pathway/GoBibleConvert/bin/*
 pathway/GoBibleConvert/obj/*
 pathway/HelpImprove/bin/*
