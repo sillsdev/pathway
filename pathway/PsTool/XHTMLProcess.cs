@@ -88,6 +88,7 @@ namespace SIL.PublishingSolution
         protected bool _isParagraphClosed = true;
         protected bool _isImageParagraphClosed = true;
         protected List<string> _divType;
+        protected bool _isFirstPictureWritten;
 
         #region Footnote
         protected bool _chapterNoStart;
@@ -404,7 +405,6 @@ namespace SIL.PublishingSolution
             _isclassNameExist = false;
             _lang = string.Empty;
             _className = _tagType = _reader.Name;
-
             if (_reader.HasAttributes)
             {
                 while (_reader.MoveToNextAttribute())
@@ -415,6 +415,7 @@ namespace SIL.PublishingSolution
                         _className = _reader.Value;
                         _className = _className.Replace("_", "");
                         _className = _className.Replace("-", "");
+                        FindSecondPicture();
                         _className = Common.SortMutiClass(_className);
                         if (_outputType == Common.OutputType.XELATEX)
                         {
@@ -1209,6 +1210,27 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private void FindSecondPicture()
+        {
+            if (_outputType == Common.OutputType.ODT || _outputType == Common.OutputType.ODM)
+            {
+                if (_isFirstPictureWritten)
+                {
+                    if (_className == "entry")
+                    {
+                        _isFirstPictureWritten = false;
+                    }
+                    else if (_className == "pictureRight")
+                    {
+                        _className = "pictureNone";
+                    }
+                }
+                else if (_className == "pictureRight")
+                {
+                    _isFirstPictureWritten = true;
+                }
+            }
+        }
 
         private void AssignProperty(string cssStyleName, float ancestorFontSize)
         {

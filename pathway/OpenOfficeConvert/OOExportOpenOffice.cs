@@ -917,17 +917,20 @@ namespace SIL.PublishingSolution
 
         private static void PostProcess(PublicationInformation projInfo)
         {
-            InsertChapterNumber(projInfo.TempOutputFolder);
-            InsertVariableOnLetHead(projInfo.TempOutputFolder);
-            InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
-            ContentPostProcess(projInfo.TempOutputFolder);
             if (projInfo.ProjectInputType == "Dictionary")
             {
                 InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
                 InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
+                InsertVariableOnLetHead(projInfo.TempOutputFolder);
+                InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             }
-            ChangeTitleNameasBookName(projInfo.TempOutputFolder);
+            else if (projInfo.ProjectInputType == "Scripture")
+            {
+                InsertChapterNumber(projInfo.TempOutputFolder);
+                ChangeTitleNameasBookName(projInfo.TempOutputFolder);
+                ContentPostProcess(projInfo.TempOutputFolder);
+            }
         }
 
         public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
@@ -1122,7 +1125,6 @@ namespace SIL.PublishingSolution
                     xmlNode.RemoveChild(xmlNode.FirstChild);
                     xpath = "//draw:frame/draw:text-box";
                     XmlNode list1 = xdoc.SelectSingleNode(xpath, nsmgr1);
-
                     if (list1 != null)
                     {
                         list1.InnerXml = FirstNode.OuterXml.Replace("text:span", "text:p") +
