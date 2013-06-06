@@ -162,6 +162,12 @@ namespace SIL.PublishingSolution
                         Param.LoadSettings();
                     }
 
+                    if (int.Parse(projSettingsVerNum) < 29 || int.Parse(projSettingsVerNum) == 29)
+                    {
+                        Version29(GetDirectoryPath(settingsPath, appPath));
+                        Param.LoadSettings();
+                    }
+
                     //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
                     string usrPath = GetDirectoryPath(settingsPath, appPath);
                     string insPath = Common.PathCombine(Path.GetDirectoryName(installerPath), Path.GetFileName(usrPath));
@@ -961,6 +967,105 @@ namespace SIL.PublishingSolution
                 if (root != null)
                 {
                     root.SetAttribute("version", "28");
+
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Update to change made in version 28 of the XML. The change here is a References feature block for Dictionary / scriptures (only).
+        /// </summary>
+        /// <param name="destSettingsFile"></param>
+        private void Version29(string destSettingsFile)
+        {
+            // load the destination settings file (the one in ProgramData) that is missing the <meta> block for the TOC);
+            if (!File.Exists(destSettingsFile))
+            {
+                return;
+            }
+            const string nodePath = "//styles/mobile";
+            var dictDoc = Common.DeclareXMLDocument(false);
+            dictDoc.Load(destSettingsFile);
+            XmlElement root = dictDoc.DocumentElement;
+            if (root != null)
+            {
+                root.SetAttribute("version", "29");
+                XmlNode beforeNode = root.SelectSingleNode(nodePath);
+                if (beforeNode.InnerXml.Length > 0)
+                    beforeNode.InnerXml = "<style name=\"DictionaryForMIDs\" file=\"DictionaryForMIDs.css\" approvedBy=\"GPS\" previewfile1=\"\" previewfile2=\"\" shown=\"Yes\"><description>No custom properties for DictionaryForMIDs</description></style>";
+                dictDoc.Save(destSettingsFile);
+            }
+
+            string styleFileName = Path.GetDirectoryName(destSettingsFile);
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "29");
+
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+            //Scripture
+            destSettingsFile = destSettingsFile.Replace("Dictionary", "Scripture");
+            if (File.Exists(destSettingsFile))
+            {
+                dictDoc.Load(destSettingsFile);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "29");
+                    dictDoc.Save(destSettingsFile);
+                }
+            }
+
+            styleFileName = Path.GetDirectoryName(destSettingsFile);
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "29");
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+            styleFileName = Path.GetDirectoryName(destSettingsFile);
+            styleFileName = Path.GetDirectoryName(styleFileName);
+
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xml");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "29");
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+            styleFileName = Path.GetDirectoryName(styleFileName);
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "29");
 
                     dictDoc.Save(styleFileName);
                 }
