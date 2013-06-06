@@ -1867,14 +1867,14 @@ namespace SIL.PublishingSolution
 
             if (Common.GetOsName().IndexOf("Windows") >= 0) // Hide Preview if LibreOffice not exist
             {
-                string regEntry = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\LibreOffice\\UNO\\InstallPath", "");
-                if (regEntry == null)
+                string regEntryWin7 = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\LibreOffice\\UNO\\InstallPath", "");
+                string regEntryWinXP = Common.GetValueFromRegistry("SOFTWARE\\LibreOffice\\UNO\\InstallPath", "");
+                if (regEntryWin7 == null && regEntryWinXP == null)
                 {
                     if (cTool.TabControl1.TabPages.ContainsKey("tabPreview"))
                         cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPreview"]);
                 }
             }
-
         }
 
         /// <summary>
