@@ -41,8 +41,6 @@ pathway/CssDialog/obj/*
 pathway/CssParser/bin/*
 pathway/CssParser/obj/*
 pathway/CssParser/Output
-pathway/Dic4MidConvert/bin/*
-pathway/Dic4MidConvert/obj/*
 pathway/DictionaryForMIDsConvert/bin/*
 pathway/DictionaryForMIDsConvert/obj/*
 pathway/GoBibleConvert/bin/*
@@ -107,7 +105,7 @@ pathway/Test/Build/TestFiles/output/*
 pathway/Test/ConfigurationTool/TestFiles/output/*
 pathway/Test/CssDialog/TestFiles/output/*
 pathway/Test/CssParser/TestFiles/gramOutput/T*
-pathway/Test/Dic4MidConvert/TestFiles/output/*
+pathway/Test/DictionaryForMIDsConvert/TestFiles/output/*
 pathway/Test/GoBibleConvert/TestFiles/output/*
 pathway/Test/InDesignConvert/TestFiles/output/*
 pathway/Test/LiftPrepare/TestFiles/output/*
