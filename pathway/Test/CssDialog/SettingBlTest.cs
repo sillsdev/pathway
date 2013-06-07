@@ -416,5 +416,14 @@ namespace Test.CssDialog
             string actual = target.ConcateUnit(txtBox);
             Assert.AreEqual(expected, actual, _methodName + " test failed");
         }
+
+        [Test]
+        public void CheckStylesString()
+        {
+            string returnValue = string.Empty;
+            SettingsValidator setValidator = new SettingsValidator();
+            returnValue = setValidator.GetNodeString();
+            Assert.IsTrue(returnValue == "dictionaryformids.css", "Values not equal");
+        }
     }
 }

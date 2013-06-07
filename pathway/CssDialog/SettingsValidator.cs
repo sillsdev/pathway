@@ -1235,6 +1235,12 @@ namespace SIL.PublishingSolution
             return true;
         }
 
+        //It will return DictionaryForMids css name
+        public string GetNodeString()
+        {
+            return "dictionaryformids.css";
+        }
+
         //Each styles/*/style/@file should exist on MasterSheetPath or on OutputPath
         protected bool ValidateStyleFile(XmlNode parentNode)
         {
@@ -1252,6 +1258,8 @@ namespace SIL.PublishingSolution
                         foreach (XmlNode node in childNode)
                         {
                             string oValue = node.Attributes["file"].Value;
+                            if (oValue.ToLower() == GetNodeString())//Since there is no properties for DictionaryForMids, Validation is not needed
+                                return true;
                             string oType = "Standard";
                             if (node.Attributes["type"] != null)
                             {
