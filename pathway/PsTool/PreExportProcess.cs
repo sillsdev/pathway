@@ -3036,6 +3036,14 @@ namespace SIL.Tool
         {
             try
             {
+                var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(_xhtmlFileNameWithPath);
+                if (fileNameWithoutExtension != null)
+                {
+                    string fileName = fileNameWithoutExtension.ToLower();
+                    if (fileName == "flexrev" || fileName.IndexOf("preserve") == 0)
+                        return;
+                }
+
                 var xDoc = Common.DeclareXMLDocument(false);
                 xDoc.Load(_xhtmlFileNameWithPath);
                 XmlNodeList nodeList = xDoc.GetElementsByTagName("meta");
@@ -3812,7 +3820,13 @@ namespace SIL.Tool
             if (RevFormNodes.Count > 0)
             {
                 //XmlDocumentFragment docFrag = CreateEmptyDiv(xDoc);
-                RevFormNodes[0].InnerXml = "<div class='hideDiv'> </div> " + RevFormNodes[0].InnerXml;
+                //RevFormNodes[0].InnerXml = "<div class='hideDiv'> </div> " + RevFormNodes[0].InnerXml;
+                XmlNode divNode = xDoc.CreateElement("div");
+                XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
+                xmlAttribute.Value = "hideDiv";
+                if (divNode.Attributes != null) divNode.Attributes.Append(xmlAttribute);
+                divNode.InnerText = " ";
+                RevFormNodes[0].InsertBefore(divNode, RevFormNodes[0].FirstChild);
             }
             xDoc.Save(flexRevFileName);
 

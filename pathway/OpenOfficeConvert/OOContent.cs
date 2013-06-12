@@ -3092,9 +3092,9 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void ModifyContentXML(string targetPath)
         {
-            string targetFile = targetPath + "content.xml";
-            ModifyLOContent modifyContentXML = new ModifyLOContent();
-            modifyContentXML.SetTableColumnCount(targetFile, _tableColumnModify);
+            //string targetFile = targetPath + "content.xml";
+            //ModifyLOContent modifyContentXML = new ModifyLOContent();
+            //modifyContentXML.SetTableColumnCount(targetFile, _tableColumnModify);
         }
 
 
