@@ -1298,6 +1298,10 @@ namespace SIL.PublishingSolution
                 {
                     cTool.DdlFileProduceDict.SelectedItem = FileProduced.ToString();
                     ShowCssSummary();
+                    if (cTool.StylesGrid.RowCount > 0)
+                    {
+                        cTool.TxtCss.Text = cTool.StylesGrid[ColumnDescription, SelectedRowIndex].Value.ToString();
+                    }
                 }
                 SavePropertyValue();
             }
