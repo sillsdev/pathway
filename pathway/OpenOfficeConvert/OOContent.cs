@@ -741,12 +741,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        //This method should return always False Value
-        public bool FootNoteAndSignificantValue()
-        {
-            return false;
-        }
-
         private void InsertWhiteSpace()
         {
             bool whiteSpaceExist = _significant;
@@ -756,9 +750,9 @@ namespace SIL.PublishingSolution
             {
                 //if (_isNewParagraph)
                 //{
-                //    _footnoteSpace = false;
+                //    _footnoteSpace = false; 
                 //}
-                if (_footnoteSpace == FootNoteAndSignificantValue() && _significant == FootNoteAndSignificantValue())
+                if (_footnoteSpace == false && _significant == false)
                 {
                     _writer.WriteStartElement("text:s");
                     _writer.WriteAttributeString("text:c", "1");
