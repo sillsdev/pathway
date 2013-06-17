@@ -11,7 +11,7 @@
     <RootNamespace>SIL.PublishingSolution</RootNamespace>
     <AssemblyName>ConfigurationTool</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>myIcon.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -281,6 +281,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon.ico" />
     <Content Include="myIcon.ico" />
   </ItemGroup>
   <ItemGroup>
