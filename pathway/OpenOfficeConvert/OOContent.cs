@@ -39,7 +39,6 @@ namespace SIL.PublishingSolution
         #region Private Variable
         public OldStyles _oldStyles = new OldStyles();
         string _strBook = string.Empty;
-        string _strOldBook = string.Empty;
         string _strBook2ndBook = string.Empty;
         private bool _is1stBookFound = false;
         readonly Stack _styleStack = new Stack();
@@ -1017,17 +1016,16 @@ namespace SIL.PublishingSolution
                 else if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) || (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0))
                 {
                     //_strBook = content;
-                    _strOldBook = _strBook;
                     content = content.TrimEnd() + " ";
                     if (_strBook.Length > 0)
                     {
                         _strBook2ndBook = content;
                     }
-                    else
-                    {
-                        _strBook = content;
-                    }
-                    bool result = IsBookNameChanged();
+                    _strBook = content;
+                    //else
+                    //{
+                    //    _strBook = content;
+                    //}
                 }
                 else if (_allCharacter.Peek().ToLower().IndexOf("versenumber") == 0 || _allCharacter.Peek().ToLower().IndexOf("versenumber1") == 0)
                 {
@@ -1037,19 +1035,6 @@ namespace SIL.PublishingSolution
             return content;
         }
 
-        public bool IsBookNameChanged()
-        {
-            bool isBookNameChanged;
-            if(_strOldBook.Trim() == _strBook.Trim())
-            {
-                isBookNameChanged = false;
-            }
-            else
-            {
-                isBookNameChanged = true;
-            }
-            return isBookNameChanged;
-        }
 
         protected override string StackPeekCharStyle(Stack<string> stack)
         {
