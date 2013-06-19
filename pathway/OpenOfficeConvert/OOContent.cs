@@ -750,9 +750,9 @@ namespace SIL.PublishingSolution
             {
                 //if (_isNewParagraph)
                 //{
-                //    _footnoteSpace = false; 
+                //    _footnoteSpace = false;  &&_significant == false
                 //}
-                if (_footnoteSpace == false && _significant == false)
+                if (_footnoteSpace == false &&  _projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     _writer.WriteStartElement("text:s");
                     _writer.WriteAttributeString("text:c", "1");
