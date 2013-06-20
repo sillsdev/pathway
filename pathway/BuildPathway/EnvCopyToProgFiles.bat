@@ -93,7 +93,7 @@ cd %BASE%\BuildPathway
 
 rem now copy the files from the ConfigurationTool output directory to the destination folder
 xcopy %base%\ConfigurationTool%cfg% "%DST%" /y
-xcopy %base%\ConfigurationTool%cfg%\epubcheck-1.2\* "%DST%"\epubcheck-1.2 /i /s /q /y
+xcopy %base%\ConfigurationTool%cfg%\epubcheck-3.0.1\* "%DST%"\epubcheck-3.0.1 /i /s /q /y
 
 rem nuke the extra entries in the Print Via dialog
 cd %DST%

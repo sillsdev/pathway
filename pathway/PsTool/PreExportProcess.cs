@@ -3656,6 +3656,28 @@ namespace SIL.Tool
             }
         }
 
+        public void RemoveHeaderStyles(string cssFileName)
+        {
+            var sr = new StreamReader(cssFileName);
+            string fileContent = sr.ReadToEnd();
+            sr.Close();
+            int searchPos = fileContent.Length;
+            while (true)
+            {
+                int findTop = fileContent.LastIndexOf("@top-", searchPos, StringComparison.OrdinalIgnoreCase);
+                if (findTop == -1)
+                {
+                    break;
+                }
+                int closingbracePos = fileContent.IndexOf("}", findTop) + 1;
+                fileContent = fileContent.Substring(0, findTop) + fileContent.Substring(closingbracePos);
+                searchPos = findTop - 1;
+            }
+            var sw = new StreamWriter(cssFileName);
+            sw.Write(fileContent);
+            sw.Close();
+        }
+
         public void SetDropCapInCSS(string cssFileName)
         {
             TextWriter tw = new StreamWriter(cssFileName, true);
