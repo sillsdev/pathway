@@ -713,7 +713,7 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         protected bool CollectFootNoteChapterVerse(string content, string outputType)
         {
-            if (_outputType == Common.OutputType.ODT && _className.ToLower() == "chapternumber")
+            if ((_outputType == Common.OutputType.ODT || _outputType == Common.OutputType.XELATEX) && _className.ToLower() == "chapternumber")
             {
                 _chapterNo = content;
             }
