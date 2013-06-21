@@ -736,7 +736,7 @@ namespace SIL.PublishingSolution
             preProcessor.GetfigureNode();
             preProcessor.GetDefaultLanguage(projInfo);
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
-            preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
+            //preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
             //preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
             //if (_isFromExe)
@@ -917,13 +917,13 @@ namespace SIL.PublishingSolution
 
         private static void PostProcess(PublicationInformation projInfo)
         {
-            InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
+            //InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
             if (projInfo.ProjectInputType == "Dictionary")
             {
-                InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
-                InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
-                InsertVariableOnLetHead(projInfo.TempOutputFolder);
-                InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
+                //InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
+                //InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
+                //InsertVariableOnLetHead(projInfo.TempOutputFolder);
+                //InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             }
             else if (projInfo.ProjectInputType == "Scripture")
             {
@@ -936,9 +936,11 @@ namespace SIL.PublishingSolution
         public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
         {
             string filename = Path.Combine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -1015,19 +1017,20 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
+                xdoc.PreserveWhitespace = true;
+                xdoc.Save(filename);
             }
-
-            xdoc.PreserveWhitespace = true;
-            xdoc.Save(filename);
         }
 
         public static void ContentPostProcess(string tempOutputFolder)
         {
             
             string filename = Path.Combine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -1139,9 +1142,11 @@ namespace SIL.PublishingSolution
         public static void ChangeTitleNameasBookName(string tempOutputFolder)
         {
             string filename = Path.Combine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -1180,9 +1185,11 @@ namespace SIL.PublishingSolution
         private static void RenameContentStyleOnCondition(string tempFolder)
         {
             string filename = Path.Combine(tempFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -1215,9 +1222,11 @@ namespace SIL.PublishingSolution
         {
 
             string filename = Path.Combine(tempFolder, "styles.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -1285,9 +1294,11 @@ namespace SIL.PublishingSolution
         {
 
             string filename = Path.Combine(tempFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -1332,8 +1343,11 @@ namespace SIL.PublishingSolution
         {
 
             string filename = Path.Combine(tempFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
             xdoc.Load(filename);
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);

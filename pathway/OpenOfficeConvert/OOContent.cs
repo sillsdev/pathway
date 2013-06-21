@@ -171,7 +171,8 @@ namespace SIL.PublishingSolution
         private bool _isFootnoteCallerStared;
         private string _customFootnoteSymbol = string.Empty;
         private string _customXRefSymbol = string.Empty;
-
+        private string firstRevHeadWord = string.Empty;
+        Dictionary<string, string> FirstDataOnEntry = new Dictionary<string, string>();
         #endregion
 
         #region Public Variable
@@ -1120,13 +1121,125 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
+                        content = WriteTitleLogo(content);
                         _writer.WriteString(content);
+                        WriteLeftGuidewordForLetter(content);
                     }
 
                     if (content.LastIndexOf(" ") == content.Length - 1)
                     {
                         _pseudoSingleSpace = true;
                     }
+                }
+            }
+        }
+
+        private string WriteTitleLogo(string content)
+        {
+            if (_classNameWithLang.IndexOf("logo") == 0)
+            {
+
+                Param.LoadSettings();
+                string organization;
+                try
+                {
+                    organization = Param.Value.ContainsKey("Organization")
+                                       ? Param.Value["Organization"]
+                                       : "SIL International";
+                }
+                catch (Exception)
+                {
+                    organization = "SIL International";
+                }
+                string logoName = String.Empty;
+                if (organization.StartsWith("SIL"))
+                {
+                    logoName = _projInfo.ProjectInputType.ToLower() == "dictionary"
+                                   ? "sil-bw-logo.jpg"
+                                   : "WBT_H_RGB_red.png";
+                }
+                else if (organization.StartsWith("Wycliffe"))
+                {
+                    logoName = "WBT_H_RGB_red.png";
+                }
+
+                string height = "19.575pt";
+                string width = "67.5pt";
+                if (logoName.ToLower().StartsWith("sil"))
+                {
+                    height = "50pt";
+                    width = "50pt";
+                }
+
+                string logoFromPath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
+                logoFromPath = Common.PathCombine(Path.GetDirectoryName(logoFromPath), logoName);
+                string normalTargetFile = _projInfo.TempOutputFolder;
+                string basePath = normalTargetFile.Substring(0,
+                                                             normalTargetFile.LastIndexOf(Path.DirectorySeparatorChar));
+                String logoToPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + logoName);
+                if (File.Exists(logoFromPath))
+                {
+                    File.Copy(logoFromPath, logoToPath, true);
+                }
+
+                //_writer.WriteStartElement("text:p");
+                //_writer.WriteAttributeString("text:style-name", "logo");
+                _writer.WriteStartElement("draw:frame");
+                _writer.WriteAttributeString("draw:style-name", "GraphicsI1");
+                _writer.WriteAttributeString("draw:name", "Graphics1");
+                _writer.WriteAttributeString("text:anchor-type", "page");
+                _writer.WriteAttributeString("draw:z-index", "1");
+                _writer.WriteAttributeString("svg:width", "2.3063in");
+                _writer.WriteStartElement("draw:text-box");
+                _writer.WriteAttributeString("fo:min-height", "1in");
+                _writer.WriteStartElement("text:p");
+                _writer.WriteAttributeString("text:style-name", "publisher");
+                _writer.WriteString(Param.GetMetadataCurrentValue(Param.Publisher));
+                _writer.WriteEndElement();
+                _writer.WriteStartElement("text:p");
+                _writer.WriteAttributeString("text:style-name", "Illustration");
+                _writer.WriteStartElement("draw:frame");
+                _writer.WriteAttributeString("draw:style-name", "GraphicsI2");
+                _writer.WriteAttributeString("draw:name", "Graphics1");
+                _writer.WriteAttributeString("text:anchor-type", "paragraph");
+                _writer.WriteAttributeString("svg:height", height);
+                _writer.WriteAttributeString("svg:width", width);
+                _writer.WriteStartElement("draw:image");
+                _writer.WriteAttributeString("xlink:type", "simple");
+                _writer.WriteAttributeString("xlink:show", "embed");
+                _writer.WriteAttributeString("xlink:actuate", "onLoad");
+                _writer.WriteAttributeString("xlink:href", "Pictures/" + logoName);
+                _writer.WriteEndElement();
+                _writer.WriteStartElement("svg:title");
+                _writer.WriteString(logoName);
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+                //_writer.WriteEndElement();
+                content = string.Empty;
+            }
+            return content;
+        }
+
+        /// <summary>
+        /// Insert the left guideword on each letter
+        /// </summary>
+        /// <param name="content"></param>
+        private void WriteLeftGuidewordForLetter(string content)
+        {
+            if (_classNameWithLang.IndexOf("letter") == 0)
+            {
+                if (FirstDataOnEntry.ContainsKey(content))
+                {
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + FirstDataOnEntry[content]);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", FirstDataOnEntry[content]);
+                    _writer.WriteEndElement();
                 }
             }
         }
@@ -2888,43 +3001,207 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
-            //TD-3012(Crash when letter headers are removed) I commented TD-2567, because ODM works fine without below code
-            //if (_projInfo.IsFrontMatterEnabled == false && (_projInfo.FileSequence == null || _projInfo.FileSequence.Count == 1))
-            //{
-            //    _writer.WriteStartElement("text:p");
-            //    _writer.WriteAttributeString("text:style-name", "P4");
-            //    _writer.WriteEndElement();
-            //}//Comment End TD-3012
+            //Get the list of headwords to insert guideword after the letdata
+            ReadAllFirstEntryData(_projInfo.DefaultXhtmlFileWithPath, FirstDataOnEntry);
 
-            //if (_fileType == "odm" && _odtFiles != null)  // ODM - ODT files
-            //{
-            //    int MainPosition = 0;
-            //    if (_odtFiles.Contains("Main"))
-            //    {
-            //        MainPosition = _odtFiles.IndexOf("Main");
-            //    }
-            //    _odtEndFiles = new ArrayList();
-            //    for (int i = MainPosition + 1; i < _odtFiles.Count; i++)
-            //    {
-            //        _odtEndFiles.Add(_odtFiles[i]);
-            //    }
+            //To be insert left guideword on flexrev file
+            WriteLeftGuidewordOnFlexRev();
 
-            //    for (int i = 0; i < MainPosition; i++)
-            //    {
-            //        string outputFile = _odtFiles[i].ToString().Replace("xhtml", "odt");
-            //        _writer.WriteStartElement("text:section");
-            //        _writer.WriteAttributeString("text:style-name", "SectODM");
-            //        _writer.WriteAttributeString("text:name", outputFile);
-            //        //_writer.WriteAttributeString("text:protected", "true"); // read only
-            //        _writer.WriteAttributeString("text:protected", "false"); // Enabled for macro purpose - headword
+            //Fornt Matter added here//
+            //WriteFrontMatter();
+        }
 
-            //        _writer.WriteStartElement("text:section-source");
-            //        _writer.WriteAttributeString("xlink:href", "../" + outputFile);
-            //        _writer.WriteAttributeString("text:filter-name", "writer8");
-            //        _writer.WriteEndElement();
-            //        _writer.WriteEndElement();
-            //    }
-            //}
+
+        /// <summary>
+        /// Front matter for libre office with cover page, title page, copyright page and TOC page
+        /// </summary>
+        private void WriteFrontMatter()
+        {
+            if (_isFromExe)
+            {
+                Param.LoadSettings();
+                string organization;
+                try
+                {
+                    organization = Param.Value.ContainsKey("Organization")
+                                       ? Param.Value["Organization"]
+                                       : "SIL International";
+                }
+                catch (Exception)
+                {
+                    organization = "SIL International";
+                }
+
+                bool coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null)
+                                      ? false
+                                      : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, organization));
+                bool includeTitlePage = (Param.GetMetadataValue(Param.TitlePage, organization) == null)
+                                            ? false
+                                            : Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, organization));
+                bool copyrightInformation = (Param.GetMetadataValue(Param.CopyrightPage, organization) == null)
+                                                ? false
+                                                : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, organization));
+                bool includeTitleinCoverImage = (Param.GetMetadataValue(Param.CoverPageTitle, organization) == null)
+                                                    ? false
+                                                    : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle,
+                                                                                           organization));
+                bool includeTOCPage = (Param.GetMetadataValue(Param.TableOfContents, organization) == null)
+                                          ? false
+                                          : Boolean.Parse(Param.GetMetadataValue(Param.TableOfContents, organization));
+
+                string titleName = Param.GetMetadataCurrentValue(Param.Title);
+                string publisherName = Param.GetMetadataCurrentValue(Param.Publisher);
+                string copyRightFilePath = Param.GetMetadataCurrentValue(Param.CopyrightPageFilename);
+                string logoName = string.Empty;
+                if (Param.GetOrganization().StartsWith("SIL"))
+                {
+                    logoName = _projInfo.ProjectInputType.ToLower() == "dictionary"
+                                   ? "sil-bw-logo.jpg"
+                                   : "WBT_H_RGB_red.png";
+                }
+                else if (Param.GetOrganization().StartsWith("Wycliffe"))
+                {
+                    logoName = "WBT_H_RGB_red.png";
+                }
+
+                string logoFromPath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
+                logoFromPath = Common.PathCombine(Path.GetDirectoryName(logoFromPath), logoName);
+                string normalTargetFile = _projInfo.TempOutputFolder;
+                string basePath = normalTargetFile.Substring(0,
+                                                             normalTargetFile.LastIndexOf(Path.DirectorySeparatorChar));
+                String logoToPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + logoName);
+                if (File.Exists(logoFromPath))
+                {
+                    File.Copy(logoFromPath, logoToPath, true);
+                }
+
+                //COVER IMAGE
+                if (coverImage)
+                {
+                    //InsertCoverImage();
+                }
+
+                //TITLE IN COVER IMAGE
+                if (includeTitleinCoverImage)
+                {
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "cover");
+                    _writer.WriteString(titleName);
+                    _writer.WriteEndElement();
+                }
+
+                _writer.WriteStartElement("text:p");
+                _writer.WriteAttributeString("text:style-name", "dummypage");
+                _writer.WriteEndElement();
+
+                //TITLE PAGE
+                if (includeTitlePage)
+                {
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "title");
+                    _writer.WriteString(titleName);
+                    _writer.WriteEndElement();
+
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "logo");
+                    _writer.WriteStartElement("draw:frame");
+                    _writer.WriteAttributeString("draw:style-name", "GraphicsI1");
+                    _writer.WriteAttributeString("draw:name", "Graphics1");
+                    _writer.WriteAttributeString("text:anchor-type", "page");
+                    _writer.WriteAttributeString("draw:z-index", "1");
+                    _writer.WriteAttributeString("svg:width", "2.3063in"); //TODO
+                    _writer.WriteStartElement("draw:text-box");
+                    _writer.WriteAttributeString("fo:min-height", "1in");
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "publisher");
+                    _writer.WriteString(publisherName);
+                    _writer.WriteEndElement();
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "Illustration");
+                    _writer.WriteStartElement("draw:frame");
+                    _writer.WriteAttributeString("draw:style-name", "GraphicsI2");
+                    _writer.WriteAttributeString("draw:name", "Graphics1");
+                    _writer.WriteAttributeString("text:anchor-type", "paragraph");
+                    _writer.WriteAttributeString("svg:height", "19.575pt");
+                    _writer.WriteAttributeString("svg:width", "67.5pt"); //TODO
+                    _writer.WriteStartElement("draw:image");
+                    _writer.WriteAttributeString("xlink:type", "simple");
+                    _writer.WriteAttributeString("xlink:show", "embed");
+                    _writer.WriteAttributeString("xlink:actuate", "onLoad");
+                    _writer.WriteAttributeString("xlink:href", "Pictures/" + logoName);
+                    _writer.WriteEndElement();
+                    _writer.WriteStartElement("svg:title");
+                    _writer.WriteString(logoName);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "dummypage");
+                    _writer.WriteEndElement();
+                }
+
+                //COPYRIGHT PAGE
+                if (copyrightInformation)
+                {
+                    Dictionary<string, string> outData = new Dictionary<string, string>();
+                    ReadXHTMLData(copyRightFilePath, outData);
+
+                    foreach (var message in outData)
+                    {
+                        _writer.WriteStartElement("text:p");
+                        _writer.WriteAttributeString("text:style-name", message.Key);
+                        _writer.WriteRaw(message.Value);
+                        _writer.WriteEndElement();
+                    }
+
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "dummypage");
+                    _writer.WriteEndElement();
+                }
+
+                //TABLE OF CONTENTS PAGE
+                if (includeTOCPage)
+                {
+                    TableOfContent toc = new TableOfContent();
+                    toc.CreateTOC(_writer, _projInfo.ProjectInputType);
+
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "dummypage");
+                    _writer.WriteEndElement();
+                }
+
+                InsertLoFrontMatterCss(_projInfo.DefaultCssFileWithPath);
+                //End Front Matter//
+            }
+        }
+
+        /// <summary>
+        /// Insert the first headword in Reversal as first line
+        /// </summary>
+        private void WriteLeftGuidewordOnFlexRev()
+        {
+            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0)
+            {
+                firstRevHeadWord = ReadXHTMLFirstData(_projInfo.DefaultXhtmlFileWithPath);
+                if (firstRevHeadWord.Trim().Length > 0)
+                {
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", firstRevHeadWord);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                    firstRevHeadWord = string.Empty;
+                }
+            }
         }
 
         private void CallTOC()
@@ -3296,6 +3573,287 @@ namespace SIL.PublishingSolution
                 LanguageFontCheck(content, "headerFontStyleName");
             }
         }
+
+        /// <summary>
+        /// Read XHTML content
+        /// </summary>
+        /// <param name="filePath">File path of the XHTML file</param>
+        /// <param name="XHTMLData">Return value</param>
+        public static void ReadXHTMLData(string filePath, Dictionary<string, string> XHTMLData)
+        {
+            XmlTextReader reader = Common.DeclareXmlTextReader(filePath, true);
+
+            string className = "div";
+            string content;
+            bool headXML = true;
+            while (reader.Read())
+            {
+                if (headXML) // skip previous parts of <body> tag
+                {
+                    if (reader.Name == "body")
+                    {
+                        headXML = false;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                if (reader.IsEmptyElement)
+                {
+                    if (reader.Name == "br")
+                    {
+                        //_writer.WriteRaw(@"<text:line-break/>");
+                        continue;
+                    }
+                    else
+                    {
+                        if (reader.Name == "a")
+                        {
+                            continue;
+                        }
+                        continue;
+                    }
+                }
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        string clName = StartElement(reader);
+                        if (clName != String.Empty)
+                        {
+                            if (XHTMLData.ContainsKey(clName) || clName == "para")
+                            {
+                                if (XHTMLData[className].Trim() != String.Empty)
+                                {
+
+                                    XHTMLData[className] = XHTMLData[className] + @"<text:line-break/>";
+                                }
+                            }
+                            else
+                            {
+                                className = clName;
+                                XHTMLData[className] = String.Empty;
+                            }
+                        }
+                        break;
+                    case XmlNodeType.Text: // Text.Write
+                        XHTMLData[className] = XHTMLData[className] + reader.Value;
+                        break;
+                }
+            }
+        }
+
+        private static string StartElement(XmlReader reader)
+        {
+            if (reader.Name == "p") return "para";
+            if (reader.Name != "div") return String.Empty;
+            string className = reader.Name;
+            if (reader.HasAttributes)
+            {
+                while (reader.MoveToNextAttribute())
+                {
+                    if (reader.Name == "class")
+                    {
+                        className = reader.Value;
+                        className = className.Replace("_", "");
+                        className = className.Replace("-", "");
+                        if (Common._outputType == Common.OutputType.XELATEX)
+                        {
+                            className = Common.ReplaceCSSClassName(className);
+                        }
+                    }
+                }
+            }
+            return className;
+        }
+
+        /// <summary>
+        /// Read XHTML content
+        /// </summary>
+        /// <param name="filePath">File path of the XHTML file</param>
+        /// <param name="searchText">Text to be search</param>
+        public static string ReadXHTMLFirstData(string filePath)
+        {
+            XmlTextReader reader = Common.DeclareXmlTextReader(filePath, true);
+
+            string className = "div";
+            bool isReadData = false;
+            string content=String.Empty;
+            bool headXML = true;
+            while (reader.Read())
+            {
+                if (headXML) // skip previous parts of <body> tag
+                {
+                    if (reader.Name == "body")
+                    {
+                        headXML = false;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                if (reader.IsEmptyElement)
+                {
+                    if (reader.Name == "br")
+                    {
+                        //_writer.WriteRaw(@"<text:line-break/>");
+                        continue;
+                    }
+                    else
+                    {
+                        if (reader.Name == "a")
+                        {
+                            continue;
+                        }
+                        continue;
+                    }
+                }
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        className = StartElement(reader);
+                        if (className != String.Empty)
+                        {
+                            if (className == "entry")
+                            {
+                                isReadData = true;
+                            }
+                        }
+                        break;
+                    case XmlNodeType.Text: // Text.Write
+                        if (isReadData)
+                        {
+                            content = reader.Value;
+
+                        }
+                        break;
+                }
+
+                if (content.Trim() != String.Empty)
+                {
+                    break;
+                }
+            }
+
+            return content;
+        }
+
+        public void InsertLoFrontMatterCss(string cssFilename)
+        {
+            string frontMatterCSSStyle = string.Empty;
+            try
+            {
+                frontMatterCSSStyle = frontMatterCSSStyle + ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
+                frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;} .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}";
+                frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:1pt;visibility:hidden;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;}.LText{font-size:12pt;font-style:italic}.LText:before{content: \"\\2028\"}.dummyTOC{text-align: left; font-size:1pt;visibility:hidden;page-break-after: always;} ";
+                frontMatterCSSStyle = frontMatterCSSStyle + ".TableOfContentLO{visibility:hidden;}";
+                if (frontMatterCSSStyle.Trim().Length > 0)
+                    frontMatterCSSStyle = frontMatterCSSStyle + ".dummypage{page-break-after: always;} ";
+                InsertLoFrontMatterCssFile(cssFilename, frontMatterCSSStyle);
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void InsertLoFrontMatterCssFile(string inputCssFilePath, string frontMatterCSSStyle)
+        {
+            Param.LoadSettings();
+            if (!File.Exists(inputCssFilePath)) return;
+            Common.FileInsertText(inputCssFilePath, frontMatterCSSStyle);
+        }
+
+        /// <summary>
+        /// Read XHTML content
+        /// </summary>
+        /// <param name="filePath">File path of the XHTML file</param>
+        /// <param name="searchText">Text to be search</param>
+        public static void ReadAllFirstEntryData(string filePath, Dictionary<string, string> XHTMLData)
+        {
+            XmlTextReader reader = Common.DeclareXmlTextReader(filePath, true);
+
+            string className = "div";
+            bool isLetter = false;
+            bool isEntry = false;
+            bool isReadData = false;
+            string letter = string.Empty;
+            string entry = string.Empty;
+            bool headXML = true;
+            while (reader.Read())
+            {
+                if (headXML) // skip previous parts of <body> tag
+                {
+                    if (reader.Name == "body")
+                    {
+                        headXML = false;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                if (reader.IsEmptyElement)
+                {
+                    if (reader.Name == "br")
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        if (reader.Name == "a")
+                        {
+                            continue;
+                        }
+                        continue;
+                    }
+                }
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        className = StartElement(reader);
+                        if (className != string.Empty)
+                        {
+                            if (className == "letter")
+                            {
+                                isLetter = true;
+                                isReadData = true;
+                            }
+                            else if (isReadData && className == "entry")
+                            {
+                                isEntry = true;
+                            }
+                        }
+                        break;
+                    case XmlNodeType.Text: // Text.Write
+                        if (isLetter)
+                        {
+                            if (reader.Value.Trim() != string.Empty)
+                            {
+                                letter = reader.Value;
+                                isLetter = false;
+                            }
+                        }
+                        else if (isEntry && isReadData)
+                        {
+                            if (reader.Value.Trim() != string.Empty)
+                            {
+                                entry = reader.Value;
+                                isEntry = false;
+                                isReadData = false;
+                                XHTMLData[letter] = entry;
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+
+
 
         #endregion
     }

@@ -425,47 +425,48 @@ namespace SIL.Tool
             XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
             xmlAttribute.Value = "title";
             tNode.Attributes.Append(xmlAttribute);
-            tNode.InnerText = Param.GetMetadataValue(Param.Title);
+            tNode.InnerText = Param.GetMetadataCurrentValue(Param.Title);
             mainNode.AppendChild(tNode);
             XmlNode t4Node = xmldoc.CreateElement("div");
             XmlAttribute xmlAttribute2 = xmldoc.CreateAttribute("class");
             xmlAttribute2.Value = "logo";
             t4Node.Attributes.Append(xmlAttribute2);
+            t4Node.InnerText = Common.ReplaceSymbolToText(Param.GetMetadataCurrentValue(Param.Publisher));
 
-            XmlNode t3Node = xmldoc.CreateElement("span");
-            XmlAttribute xmlAttribute1 = xmldoc.CreateAttribute("class");
-            xmlAttribute1.Value = "publisher";
-            t3Node.InnerText = Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher));
-            t3Node.Attributes.Append(xmlAttribute1);
-            t4Node.AppendChild(t3Node);
+            //XmlNode t3Node = xmldoc.CreateElement("span");
+            //XmlAttribute xmlAttribute1 = xmldoc.CreateAttribute("class");
+            //xmlAttribute1.Value = "publisher";
+            //t3Node.InnerText = Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher));
+            //t3Node.Attributes.Append(xmlAttribute1);
+            //t4Node.AppendChild(t3Node);
 
-            XmlNode t5Node = xmldoc.CreateElement("img");
-            XmlAttribute xmlAttribute3 = xmldoc.CreateAttribute("src");
-            XmlAttribute xmlAttribute4 = xmldoc.CreateAttribute("alt");
-            if (Param.GetOrganization().StartsWith("SIL"))
-            {
+            //XmlNode t5Node = xmldoc.CreateElement("img");
+            //XmlAttribute xmlAttribute3 = xmldoc.CreateAttribute("src");
+            //XmlAttribute xmlAttribute4 = xmldoc.CreateAttribute("alt");
+            //if (Param.GetOrganization().StartsWith("SIL"))
+            //{
 
-                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-                {
-                    // dictionary - SIL logo
-                    xmlAttribute3.Value = "sil-bw-logo.jpg";
-                    xmlAttribute4.Value = "SIL International Logo";
-                }
-                else
-                {
-                    // Scripture - WBT logo
-                    xmlAttribute3.Value = "WBT_H_RGB_red.png";
-                    xmlAttribute4.Value = "Wycliffe Logo";
-                }
-            }
-            else if (Param.GetOrganization().StartsWith("Wycliffe"))
-            {
-                xmlAttribute3.Value = "WBT_H_RGB_red.png";
-                xmlAttribute4.Value = "Wycliffe Logo";
-            }
-            t5Node.Attributes.Append(xmlAttribute3);
-            t5Node.Attributes.Append(xmlAttribute4);
-            t4Node.AppendChild(t5Node);
+            //    if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            //    {
+            //        // dictionary - SIL logo
+            //        xmlAttribute3.Value = "sil-bw-logo.jpg";
+            //        xmlAttribute4.Value = "SIL International Logo";
+            //    }
+            //    else
+            //    {
+            //        // Scripture - WBT logo
+            //        xmlAttribute3.Value = "WBT_H_RGB_red.png";
+            //        xmlAttribute4.Value = "Wycliffe Logo";
+            //    }
+            //}
+            //else if (Param.GetOrganization().StartsWith("Wycliffe"))
+            //{
+            //    xmlAttribute3.Value = "WBT_H_RGB_red.png";
+            //    xmlAttribute4.Value = "Wycliffe Logo";
+            //}
+            //t5Node.Attributes.Append(xmlAttribute3);
+            //t5Node.Attributes.Append(xmlAttribute4);
+            //t4Node.AppendChild(t5Node);
             mainNode.AppendChild(t4Node);
             return mainNode;
         }
@@ -1252,7 +1253,7 @@ namespace SIL.Tool
 
                     if (_includeTitleinCoverImage)
                     {
-                        coverTitleNode.InnerText = Param.GetMetadataValue(Param.Title);
+                        coverTitleNode.InnerText = Param.GetMetadataCurrentValue(Param.Title);
                     }
                 }
                 //COVER TITLE
@@ -2661,7 +2662,9 @@ namespace SIL.Tool
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            xDoc.Load(fileName);
+            FileStream fs = File.OpenRead(fileName);
+            xDoc.Load(fs);
+            fs.Close();
             string xPath = "//div[@class='entry']";
             XmlNodeList entryNodes = xDoc.SelectNodes(xPath, namespaceManager);
 
@@ -2842,9 +2845,12 @@ namespace SIL.Tool
         /// <returns></returns>
         public bool GetMultiLanguageHeader()
         {
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary") return false;
             bool isFound = false;
             var xDoc = Common.DeclareXMLDocument(false);
-            xDoc.Load(_xhtmlFileNameWithPath);
+            FileStream fs = File.OpenRead(_xhtmlFileNameWithPath);
+            xDoc.Load(fs);
+            fs.Close();
             XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
             if (nodeList.Count > 0)
             {
