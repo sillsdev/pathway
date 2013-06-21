@@ -983,6 +983,16 @@ namespace Test.XeLatex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void FootNoteMarker()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "FootNoteMarker";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void XeLaTexUpdateCache()
         {
             UpdateXeLaTexFontCacheIfNecessary();
