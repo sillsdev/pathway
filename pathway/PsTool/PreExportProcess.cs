@@ -3662,7 +3662,7 @@ namespace SIL.Tool
             }
         }
 
-        public void RemoveHeaderStyles(string cssFileName)
+        public void RemoveDeclaration(string cssFileName, string match)
         {
             var sr = new StreamReader(cssFileName);
             string fileContent = sr.ReadToEnd();
@@ -3670,7 +3670,7 @@ namespace SIL.Tool
             int searchPos = fileContent.Length;
             while (true)
             {
-                int findTop = fileContent.LastIndexOf("@top-", searchPos, StringComparison.OrdinalIgnoreCase);
+                int findTop = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
                 if (findTop == -1)
                 {
                     break;

@@ -102,6 +102,25 @@ namespace Test.PsTool
             xmldoc.Save(output);
             TextFileAssert.AreEqual(expected, output);
         }
+
+        /// <summary>
+        /// Test removal of @top-left, @top-center and @top-right from @page
+        /// </summary>
+        [Test]
+        public void RemoveHeaderStylesTest()
+        {
+            const string fileName = "RemoveHeaderStyle.css";
+            var input = GetFileNameWithPath(fileName);
+            var output = GetFileNameWithOutputPath(fileName);
+            CopyToOutput(input, output);
+            preExportProcess = new PreExportProcess();
+            preExportProcess.RemoveDeclaration(output, "@top-");
+            var sr = new StreamReader(output);
+            var data = sr.ReadToEnd();
+            sr.Close();
+            var index = data.IndexOf("@top-", 0, StringComparison.CurrentCultureIgnoreCase);
+            Assert.AreEqual(-1, index);
+        }
         #region private Methods
         private static string GetPath(string place, string filename)
         {

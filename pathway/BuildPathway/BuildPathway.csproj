@@ -486,7 +486,7 @@
     <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <!-- GhostScript Include="..\ThirdParty\gsdll32.dll" / -->
-    <EpubCheck Include="..\ThirdParty\epubcheck-3.0.1\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
+    <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
     <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
     <BatchProcess Include="..\HelpImprove\$(OutputPath)\HelpImprove.*" />

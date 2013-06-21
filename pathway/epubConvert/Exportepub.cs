@@ -241,7 +241,9 @@ namespace SIL.PublishingSolution
 
                 var mc = new MergeCss { OutputLocation = tempFolderName };
                 string mergedCSS = mc.Make(cssFullPath, "book.css");
-                preProcessor.RemoveHeaderStyles(mergedCSS);
+                preProcessor.RemoveDeclaration(mergedCSS, "@top-");
+                preProcessor.RemoveDeclaration(mergedCSS, "@bottom-");
+                preProcessor.RemoveDeclaration(mergedCSS, "@footnote");
                 preProcessor.ReplaceStringInCss(mergedCSS);
                 preProcessor.SetDropCapInCSS(mergedCSS);
                 preProcessor.InsertCoverPageImageStyleInCSS(mergedCSS);
