@@ -123,6 +123,7 @@ namespace SIL.PublishingSolution
         protected string _fileProduce = "One";
         protected bool _fixedLineHeight = false;
         protected bool _includeImage = true;
+        protected bool _pageBreak = false;
         protected string _tocLevel = "2 - Book and Chapter";
         protected string _embedFonts = "Yes";
         protected string _includeFontVariants = "Yes";
@@ -1174,6 +1175,9 @@ namespace SIL.PublishingSolution
                             case "includeimage":
                                 cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
                                 break;
+                            case "pagebreak":
+                                cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
+                                break;
                             case "maximagewidth":
                                 cTool.TxtMaxImageWidth.Text = attribValue;
                                 break;
@@ -1754,6 +1758,9 @@ namespace SIL.PublishingSolution
                             case "includeimage":
                                 cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
                                 break;
+                            case "pagebreak":
+                                cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
+                                break;
                             case "maximagewidth":
                                 cTool.TxtMaxImageWidth.Text = attribValue;
                                 break;
@@ -1888,13 +1895,26 @@ namespace SIL.PublishingSolution
         /// <param name="showScriptureControls"></param>
         private void SetEpubUIControls(bool showScriptureControls)
         {
+            
             // show/hide chapter numbers and references UI
             cTool.LblChapterNumbers.Visible = showScriptureControls;
             cTool.DdlChapterNumbers.Visible = showScriptureControls;
             cTool.LblReferences.Visible = showScriptureControls;
             cTool.DdlReferences.Visible = showScriptureControls;
             // set position for embedded font controls (they need to move up if the other items are hidden)
-            cTool.LblEpubFontsSection.Top = (showScriptureControls) ? cTool.DdlReferences.Bottom + 10 : cTool.DdlTocLevel.Bottom + 10;
+
+            if (inputTypeBL.ToLower() == "scripture")
+            {
+                cTool.ChkPageBreaks.Visible = false;
+                cTool.LblEpubFontsSection.Top = (showScriptureControls) ? cTool.DdlReferences.Bottom + 10 : cTool.DdlTocLevel.Bottom + 10;
+            }
+            else
+            {
+                cTool.ChkPageBreaks.Visible = true;
+                cTool.LblEpubFontsSection.Top = (showScriptureControls) ? cTool.DdlReferences.Bottom + 30 : cTool.DdlTocLevel.Bottom + 30;
+            }
+
+            
             cTool.PicFonts.Top = cTool.LblEpubFontsSection.Bottom + 3;
             cTool.ChkEmbedFonts.Top = cTool.PicFonts.Top;
             cTool.ChkIncludeFontVariants.Top = cTool.ChkEmbedFonts.Bottom + 6;
@@ -3893,6 +3913,17 @@ namespace SIL.PublishingSolution
                 cTool.TxtMaxImageWidth.Enabled = _includeImage;
                 cTool.LblPx.Enabled = _includeImage;
                 Param.UpdateOthersAtrrib("IncludeImage", cTool.ChkIncludeImage.Checked ? "Yes" : "No", StyleName);
+                SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
+        public void chkPageBreaks_CheckedChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //_pageBreak = cTool.ChkPageBreaks.Checked;
+                Param.UpdateOthersAtrrib("PageBreak", cTool.ChkPageBreaks.Checked ? "Yes" : "No", StyleName);
                 SetOthersSummary(sender, e);
             }
             catch { }

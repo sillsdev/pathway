@@ -218,6 +218,7 @@ namespace SIL.PublishingSolution
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.chkPageBreaks = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1355,6 +1356,7 @@ namespace SIL.PublishingSolution
             // tabOthers
             // 
             this.tabOthers.AutoScroll = true;
+            this.tabOthers.Controls.Add(this.chkPageBreaks);
             this.tabOthers.Controls.Add(this.chkIncludeImage);
             this.tabOthers.Controls.Add(this.ddlReferences);
             this.tabOthers.Controls.Add(this.lblReferences);
@@ -2457,6 +2459,18 @@ namespace SIL.PublishingSolution
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // chkPageBreaks
+            // 
+            this.chkPageBreaks.AutoSize = true;
+            this.chkPageBreaks.Location = new System.Drawing.Point(51, 239);
+            this.chkPageBreaks.Name = "chkPageBreaks";
+            this.chkPageBreaks.Size = new System.Drawing.Size(163, 17);
+            this.chkPageBreaks.TabIndex = 40;
+            this.chkPageBreaks.Text = "No page breaks within letters";
+            this.chkPageBreaks.UseVisualStyleBackColor = true;
+            this.chkPageBreaks.Visible = false;
+            this.chkPageBreaks.CheckedChanged += new System.EventHandler(this.chkPageBreaks_CheckedChanged);
+            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2707,5 +2721,6 @@ namespace SIL.PublishingSolution
         private TextBox txtXrefCusSymbol;
         private CheckBox chkXrefCusSymbol;
         private TabPage tabDict4Mids;
+        private CheckBox chkPageBreaks;
     }
 }

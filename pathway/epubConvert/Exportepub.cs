@@ -81,6 +81,7 @@ namespace SIL.PublishingSolution
 
         private string currentChapterNumber = string.Empty;
         private bool isIncludeImage = true;
+
         private bool isNoteTargetReferenceExists = false;
         private bool _isUnixOS = false;
         private bool _isPictureDisplayNone = false;
@@ -118,7 +119,7 @@ namespace SIL.PublishingSolution
         public FontHandling MissingFont { get; set; } // note that this doesn't use all the enum values
         public FontHandling NonSilFont { get; set; }
         public ArrayList _pseudoClass = new ArrayList();
-
+        public bool pageBreak = false;
 
         // interface methods
         public string ExportType
@@ -190,6 +191,15 @@ namespace SIL.PublishingSolution
                 }
 
                 isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
+
+                if (_inputType.ToLower() == "dictionary")
+                {
+                    pageBreak = GetPageBreakStatus(projInfo.SelectedTemplateStyle);
+                }
+                else
+                {
+                    pageBreak = false;
+                }
                 isNoteTargetReferenceExists = Common.NodeExists(projInfo.DefaultXhtmlFileWithPath, "");
 
                 //if (projInfo.ProjectInputType.ToLower() == "dictionary")
@@ -402,13 +412,12 @@ namespace SIL.PublishingSolution
                             else
                             {
                                 Common.XsltProcess(file, xsltFullName, "_.xhtml");
-                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file),
-                                                                                (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
+                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
                                 File.Delete(file);
                             }
                         }
                         else
-                        {                            
+                        {
                             if (File.Exists(file))
                             {
                                 Common.RunCommand(xsltProcessExe, string.Format("{0}{1}{2}{3}", file, xsltFullName, "_.xhtml", getPsApplicationPath), 1);
@@ -426,7 +435,7 @@ namespace SIL.PublishingSolution
                                 {
                                     Common.XsltProcess(file, xsltFullName, "_.xhtml");
                                     File.Delete(file);
-                                }                                
+                                }
                             }
                         }
                     }
@@ -484,38 +493,7 @@ namespace SIL.PublishingSolution
                 File.Copy(mergedCSS, cssPath);
                 string tocFiletoUpdate = string.Empty;
                 // copy the xhtml files into the content directory
-                foreach (string file in htmlFiles)
-                {
-                    string name = Path.GetFileNameWithoutExtension(file).Substring(0, 8);
-                    string substring = Path.GetFileNameWithoutExtension(file).Substring(8);
-                    string dest = Common.PathCombine(contentFolder, name + substring.PadLeft(6, '0') + ".xhtml");
-
-                    if (_isUnixOS)
-                    {
-                        Common.RemoveDTDForLinuxProcess(file);
-                    }
-
-                    File.Move(file, dest);
-                    // split the file into smaller pieces if needed
-                    List<string> files = SplitBook(dest);
-
-                    if (dest.Contains("File3TOC"))
-                    {
-                        tocFiletoUpdate = dest;
-                    }
-
-                    if (files.Count > 1)
-                    {
-                        Common.StreamReplaceInFile(tocFiletoUpdate, Path.GetFileName(dest), Path.GetFileName(files[0]));
-                        try
-                        {
-                            File.Delete(tocFiletoUpdate + ".tmp");
-                        }
-                        catch { }
-                        // file was split out - delete "dest" (it's been replaced)
-                        File.Delete(dest);
-                    }
-                }
+                SplitPageSections(htmlFiles, contentFolder, tocFiletoUpdate);
                 // fix any relative hyperlinks that might have broken when we split the .xhtml up
 #if (TIME_IT)
                 DateTime dtRefStart = DateTime.Now;
@@ -545,10 +523,10 @@ namespace SIL.PublishingSolution
                 inProcess.SetStatus("Generating .epub TOC and manifest");
                 CreateOpf(projInfo, contentFolder, bookId);
                 CreateNcx(projInfo, contentFolder, bookId);
-if(_isUnixOS)
-				{
-					AddDtdInXhtml(projInfo, contentFolder);
-				}
+                if (_isUnixOS)
+                {
+                    AddDtdInXhtml(projInfo, contentFolder);
+                }
 
                 inProcess.PerformStep();
 
@@ -616,6 +594,49 @@ if(_isUnixOS)
                 }
             }
             return success;
+        }
+
+        protected void SplitPageSections(List<string> htmlFiles, string contentFolder, string tocFiletoUpdate)
+        {
+            foreach (string file in htmlFiles)
+            {
+                string name = Path.GetFileNameWithoutExtension(file).Substring(0, 8);
+                string substring = Path.GetFileNameWithoutExtension(file).Substring(8);
+                string dest = Common.PathCombine(contentFolder, name + substring.PadLeft(6, '0') + ".xhtml");
+
+                if (_isUnixOS)
+                {
+                    Common.RemoveDTDForLinuxProcess(file);
+                }
+                File.Move(file, dest);
+                // split the file into smaller pieces if needed
+                List<string> files = new List<string>();
+
+                if(!pageBreak && _inputType.ToLower() == "dictionary")
+                    files = SplitBook(dest);
+                
+                if(_inputType.ToLower() == "scripture")
+                {
+                    files = SplitBook(dest);
+                }
+
+                if (dest.Contains("File3TOC"))
+                {
+                    tocFiletoUpdate = dest;
+                }
+                if (files.Count > 1)
+                {
+                    Common.StreamReplaceInFile(tocFiletoUpdate, Path.GetFileName(dest), Path.GetFileName(files[0]));
+                    try
+                    {
+
+                        File.Delete(tocFiletoUpdate + ".tmp");
+                    }
+                    catch { }
+                    // file was split out - delete "dest" (it's been replaced)
+                    File.Delete(dest);
+                }
+            }
         }
 
         private bool GetIncludeImageStatus(string cssFileName)
@@ -3447,31 +3468,31 @@ if(_isUnixOS)
                         // italic
                         if (embeddedFont.HasItalic && embeddedFont.Filename.CompareTo(embeddedFont.ItalicFilename) != 0)
                         {
-			if(embeddedFont.ItalicFilename != string.Empty )
-			{
-                            opf.WriteStartElement("item"); // item (charis embedded font)
-                            opf.WriteAttributeString("id", "epub.embedded.font_i_" + fontNum);
+                            if (embeddedFont.ItalicFilename != string.Empty)
+                            {
+                                opf.WriteStartElement("item"); // item (charis embedded font)
+                                opf.WriteAttributeString("id", "epub.embedded.font_i_" + fontNum);
 
-                            opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.ItalicFilename));
+                                opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.ItalicFilename));
 
-                            opf.WriteAttributeString("media-type", "font/opentype/");
-                            opf.WriteEndElement(); // item
-                            fontNum++;
-			}
+                                opf.WriteAttributeString("media-type", "font/opentype/");
+                                opf.WriteEndElement(); // item
+                                fontNum++;
+                            }
                         }
                         // bold
                         if (embeddedFont.HasBold && embeddedFont.Filename.CompareTo(embeddedFont.BoldFilename) != 0)
                         {
-			if(embeddedFont.BoldFilename != string.Empty )
-			{
-                            opf.WriteStartElement("item"); // item (charis embedded font)
-                            opf.WriteAttributeString("id", "epub.embedded.font_b_" + fontNum);
-                            opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.BoldFilename));
-                            opf.WriteAttributeString("media-type", "font/opentype/");
-                            opf.WriteEndElement(); // item
-                            fontNum++;
+                            if (embeddedFont.BoldFilename != string.Empty)
+                            {
+                                opf.WriteStartElement("item"); // item (charis embedded font)
+                                opf.WriteAttributeString("id", "epub.embedded.font_b_" + fontNum);
+                                opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.BoldFilename));
+                                opf.WriteAttributeString("media-type", "font/opentype/");
+                                opf.WriteEndElement(); // item
+                                fontNum++;
+                            }
                         }
-			}
                     }
                 }
             }
@@ -3882,20 +3903,20 @@ if(_isUnixOS)
             {
                 ApplyXslt(tocFullPath, _fixEpubToc);
             }
-	    else
-	    {
-		FixPlayOrder(tocFullPath);
-	    }
+            else
+            {
+                FixPlayOrder(tocFullPath);
+            }
         }
 
-	private void AddDtdInXhtml(PublicationInformation projInfo, string contentFolder)
+        private void AddDtdInXhtml(PublicationInformation projInfo, string contentFolder)
         {
             string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
-	foreach (string file in files)
+            foreach (string file in files)
             {
-		Common.AddingDTDForLinuxProcess(file);
-	}
-	}
+                Common.AddingDTDForLinuxProcess(file);
+            }
+        }
         private void FixPlayOrder(string tocFullPath)
         {
             // Renumber all PlayOrder attributes in order with no gaps.
@@ -4554,6 +4575,28 @@ if(_isUnixOS)
             string[] valueList = value.Split('_');
             return valueList[valueList.Length - 1].ToLower().Replace("chapter", "");
         }
+
+        private bool GetPageBreakStatus(string cssFileName)
+        {
+            try
+            {
+                if (cssFileName.Trim().Length == 0) { return false; }
+                Param.LoadSettings();
+                XmlDocument xDoc = Common.DeclareXMLDocument(false);
+                string path = Param.SettingOutputPath;
+                xDoc.Load(path);
+                pageBreak = true;
+                string xPath = "//stylePick/styles/others/style[@name='" + cssFileName + "']/styleProperty[@name='PageBreak']/@value";
+                XmlNode includeImageNode = xDoc.SelectSingleNode(xPath);
+                if (includeImageNode != null && includeImageNode.InnerText == "No")
+                    pageBreak = false;
+
+            }
+            catch { }
+
+            return pageBreak;
+        }
+
 
         #endregion
 
