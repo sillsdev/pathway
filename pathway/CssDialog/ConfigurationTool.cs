@@ -175,6 +175,12 @@ namespace SIL.PublishingSolution
             get { return chkAvailable; }
         }
 
+        public CheckBox ChkPageBreaks
+        {
+            get { return chkPageBreaks; }
+        }
+        
+
         public TextBox TxtComment
         {
             get { return txtComment; }
@@ -1397,6 +1403,12 @@ namespace SIL.PublishingSolution
         {
             EditCSS(sender, e);
             _CToolBL.chkXrefCusSymbol_CheckStateChangedBL(sender, e);
+        }
+
+        private void chkPageBreaks_CheckedChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkPageBreaks_CheckedChangedBL(sender, e);
         }
     }
 }

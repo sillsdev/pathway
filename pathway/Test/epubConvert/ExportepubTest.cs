@@ -12,6 +12,7 @@
 // Responsibility: Trihus
 // ---------------------------------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
@@ -181,6 +182,88 @@ namespace Test.epubConvert
             XmlNodeList nodes = xmlDocument.SelectNodes(".//xhtml:a", namespaceManager);
             Assert.AreEqual(0, nodes.Count, "Should be 0 chapter links for Philemon");
         }
+
+        [Test]
+        public void SplitPageSectionPageBreakFalseTest()
+        {
+            const string FolderName = "SplitPageSectionTest";
+
+            string[] outputFiles;
+
+            if (!Directory.Exists(FileOutput(FolderName)))
+                Directory.CreateDirectory(FileOutput(FolderName));
+
+            outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
+
+            foreach (var file in outputFiles)
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+
+            const string TestFolderName = "SplitPageSectionTestOutput";
+            FolderTree.Copy(FileInput(FolderName), FileOutput(TestFolderName));
+
+
+            _inputType = "dictionary";
+            List<string> htmlFiles = new List<string>();
+            string[] files = Directory.GetFiles(FileOutput(TestFolderName), "PartFile*.xhtml");
+            foreach (var htmlFile in files)
+            {
+                htmlFiles.Add(htmlFile);
+            }
+
+            pageBreak = false;
+            SplitPageSections(htmlFiles, FileOutput(FolderName), "");
+            outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
+
+            if (Directory.Exists(TestFolderName))
+                Directory.Delete(TestFolderName);
+
+            Assert.AreEqual(5, outputFiles.Length, "Should be 5 PartFiles but its " + outputFiles.Length.ToString());
+        }
+
+        [Test]
+        public void SplitPageSectionPageBreakTrueTest()
+        {
+            const string FolderName = "SplitPageSectionTest";
+
+            string[] outputFiles;
+
+            if (!Directory.Exists(FileOutput(FolderName)))
+                Directory.CreateDirectory(FileOutput(FolderName));
+
+            outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
+
+            foreach (var file in outputFiles)
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+
+            const string TestFolderName = "SplitPageSectionTestOutput";
+            FolderTree.Copy(FileInput(FolderName), FileOutput(TestFolderName));
+
+
+            _inputType = "dictionary";
+            List<string> htmlFiles = new List<string>();
+            string[] files = Directory.GetFiles(FileOutput(TestFolderName), "PartFile*.xhtml");
+            foreach (var htmlFile in files)
+            {
+                htmlFiles.Add(htmlFile);
+            }
+
+            pageBreak = true;
+            SplitPageSections(htmlFiles, FileOutput(FolderName), "");
+            outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
+
+            if (Directory.Exists(TestFolderName))
+                Directory.Delete(TestFolderName);
+
+            Assert.AreEqual(3, outputFiles.Length, "Should be 3 PartFiles but its " + outputFiles.Length.ToString());
+        }
+
+
 
         [Test]
         [Category("LongTest")]

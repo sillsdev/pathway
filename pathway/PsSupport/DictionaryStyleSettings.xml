@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="29">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="30">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -367,9 +367,10 @@
         <styleProperty name="Contributor" value=" " />
         <styleProperty name="Relation" value=" " />
         <styleProperty name="Coverage" value=" " />
-		<styleProperty name="IncludeImage" value="Yes" />
+		<styleProperty name="IncludeImage" value="Yes" />		
         <styleProperty name="Information" value="DRAFT Dictionary." />
         <styleProperty name="Copyright" value="© 2013 SIL International®." />
+		<styleProperty name="PageBreak" value="No" />
       </style>
     </others>
   </styles>
