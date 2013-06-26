@@ -1187,7 +1187,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("draw:frame");
                 _writer.WriteAttributeString("draw:style-name", "GraphicsI1");
                 _writer.WriteAttributeString("draw:name", "Graphics1");
-                _writer.WriteAttributeString("text:anchor-type", "page");
+                _writer.WriteAttributeString("text:anchor-type", "paragraph");
                 _writer.WriteAttributeString("draw:z-index", "1");
                 _writer.WriteAttributeString("svg:width", "2.3063in");
                 _writer.WriteStartElement("draw:text-box");
@@ -3107,9 +3107,9 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("draw:frame");
                     _writer.WriteAttributeString("draw:style-name", "GraphicsI1");
                     _writer.WriteAttributeString("draw:name", "Graphics1");
-                    _writer.WriteAttributeString("text:anchor-type", "page");
+                    _writer.WriteAttributeString("text:anchor-type", "paragraph");
                     _writer.WriteAttributeString("draw:z-index", "1");
-                    _writer.WriteAttributeString("svg:width", "2.3063in"); //TODO
+                    _writer.WriteAttributeString("svg:width", "2.3063in"); 
                     _writer.WriteStartElement("draw:text-box");
                     _writer.WriteAttributeString("fo:min-height", "1in");
                     _writer.WriteStartElement("text:p");
@@ -3123,7 +3123,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("draw:name", "Graphics1");
                     _writer.WriteAttributeString("text:anchor-type", "paragraph");
                     _writer.WriteAttributeString("svg:height", "19.575pt");
-                    _writer.WriteAttributeString("svg:width", "67.5pt"); //TODO
+                    _writer.WriteAttributeString("svg:width", "67.5pt"); 
                     _writer.WriteStartElement("draw:image");
                     _writer.WriteAttributeString("xlink:type", "simple");
                     _writer.WriteAttributeString("xlink:show", "embed");
