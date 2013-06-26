@@ -121,6 +121,17 @@ namespace Test.XeLatex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void ChapterNumberOnHeaderTest()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "ChapterNumberOnHeader";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void FontStyleItalicTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -966,6 +977,16 @@ namespace Test.XeLatex
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "LineBreak";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FootNoteMarker()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "FootNoteMarker";
             ExportProcess(file);
             FileCompare(file);
         }

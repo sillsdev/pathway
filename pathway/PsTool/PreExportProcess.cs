@@ -280,7 +280,7 @@ namespace SIL.Tool
         {
             if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("false")) { return string.Empty; }
             var sb = new StringBuilder();
-            sb.AppendLine("<div id='CoverPage' class='Cover'><img src='cover.png' alt='Cover image'/></div>");
+            sb.AppendLine("<div id='CoverPage' class='Cover'><img src='cover.png' style='height: 100%; width: 100%;' alt='Cover image'/></div>");
             sb.AppendLine("<div class='Blank'></div>");
             return sb.ToString();
         }
@@ -425,47 +425,48 @@ namespace SIL.Tool
             XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
             xmlAttribute.Value = "title";
             tNode.Attributes.Append(xmlAttribute);
-            tNode.InnerText = Param.GetMetadataValue(Param.Title);
+            tNode.InnerText = Param.GetMetadataCurrentValue(Param.Title);
             mainNode.AppendChild(tNode);
             XmlNode t4Node = xmldoc.CreateElement("div");
             XmlAttribute xmlAttribute2 = xmldoc.CreateAttribute("class");
             xmlAttribute2.Value = "logo";
             t4Node.Attributes.Append(xmlAttribute2);
+            t4Node.InnerText = Common.ReplaceSymbolToText(Param.GetMetadataCurrentValue(Param.Publisher));
 
-            XmlNode t3Node = xmldoc.CreateElement("span");
-            XmlAttribute xmlAttribute1 = xmldoc.CreateAttribute("class");
-            xmlAttribute1.Value = "publisher";
-            t3Node.InnerText = Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher));
-            t3Node.Attributes.Append(xmlAttribute1);
-            t4Node.AppendChild(t3Node);
+            //XmlNode t3Node = xmldoc.CreateElement("span");
+            //XmlAttribute xmlAttribute1 = xmldoc.CreateAttribute("class");
+            //xmlAttribute1.Value = "publisher";
+            //t3Node.InnerText = Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher));
+            //t3Node.Attributes.Append(xmlAttribute1);
+            //t4Node.AppendChild(t3Node);
 
-            XmlNode t5Node = xmldoc.CreateElement("img");
-            XmlAttribute xmlAttribute3 = xmldoc.CreateAttribute("src");
-            XmlAttribute xmlAttribute4 = xmldoc.CreateAttribute("alt");
-            if (Param.GetOrganization().StartsWith("SIL"))
-            {
+            //XmlNode t5Node = xmldoc.CreateElement("img");
+            //XmlAttribute xmlAttribute3 = xmldoc.CreateAttribute("src");
+            //XmlAttribute xmlAttribute4 = xmldoc.CreateAttribute("alt");
+            //if (Param.GetOrganization().StartsWith("SIL"))
+            //{
 
-                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-                {
-                    // dictionary - SIL logo
-                    xmlAttribute3.Value = "sil-bw-logo.jpg";
-                    xmlAttribute4.Value = "SIL International Logo";
-                }
-                else
-                {
-                    // Scripture - WBT logo
-                    xmlAttribute3.Value = "WBT_H_RGB_red.png";
-                    xmlAttribute4.Value = "Wycliffe Logo";
-                }
-            }
-            else if (Param.GetOrganization().StartsWith("Wycliffe"))
-            {
-                xmlAttribute3.Value = "WBT_H_RGB_red.png";
-                xmlAttribute4.Value = "Wycliffe Logo";
-            }
-            t5Node.Attributes.Append(xmlAttribute3);
-            t5Node.Attributes.Append(xmlAttribute4);
-            t4Node.AppendChild(t5Node);
+            //    if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            //    {
+            //        // dictionary - SIL logo
+            //        xmlAttribute3.Value = "sil-bw-logo.jpg";
+            //        xmlAttribute4.Value = "SIL International Logo";
+            //    }
+            //    else
+            //    {
+            //        // Scripture - WBT logo
+            //        xmlAttribute3.Value = "WBT_H_RGB_red.png";
+            //        xmlAttribute4.Value = "Wycliffe Logo";
+            //    }
+            //}
+            //else if (Param.GetOrganization().StartsWith("Wycliffe"))
+            //{
+            //    xmlAttribute3.Value = "WBT_H_RGB_red.png";
+            //    xmlAttribute4.Value = "Wycliffe Logo";
+            //}
+            //t5Node.Attributes.Append(xmlAttribute3);
+            //t5Node.Attributes.Append(xmlAttribute4);
+            //t4Node.AppendChild(t5Node);
             mainNode.AppendChild(t4Node);
             return mainNode;
         }
@@ -1252,7 +1253,7 @@ namespace SIL.Tool
 
                     if (_includeTitleinCoverImage)
                     {
-                        coverTitleNode.InnerText = Param.GetMetadataValue(Param.Title);
+                        coverTitleNode.InnerText = Param.GetMetadataCurrentValue(Param.Title);
                     }
                 }
                 //COVER TITLE
@@ -2661,7 +2662,9 @@ namespace SIL.Tool
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            xDoc.Load(fileName);
+            FileStream fs = File.OpenRead(fileName);
+            xDoc.Load(fs);
+            fs.Close();
             string xPath = "//div[@class='entry']";
             XmlNodeList entryNodes = xDoc.SelectNodes(xPath, namespaceManager);
 
@@ -2842,9 +2845,12 @@ namespace SIL.Tool
         /// <returns></returns>
         public bool GetMultiLanguageHeader()
         {
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary") return false;
             bool isFound = false;
             var xDoc = Common.DeclareXMLDocument(false);
-            xDoc.Load(_xhtmlFileNameWithPath);
+            FileStream fs = File.OpenRead(_xhtmlFileNameWithPath);
+            xDoc.Load(fs);
+            fs.Close();
             XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
             if (nodeList.Count > 0)
             {
@@ -3036,6 +3042,14 @@ namespace SIL.Tool
         {
             try
             {
+                var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(_xhtmlFileNameWithPath);
+                if (fileNameWithoutExtension != null)
+                {
+                    string fileName = fileNameWithoutExtension.ToLower();
+                    if (fileName == "flexrev" || fileName.IndexOf("preserve") == 0)
+                        return;
+                }
+
                 var xDoc = Common.DeclareXMLDocument(false);
                 xDoc.Load(_xhtmlFileNameWithPath);
                 XmlNodeList nodeList = xDoc.GetElementsByTagName("meta");
@@ -3648,6 +3662,28 @@ namespace SIL.Tool
             }
         }
 
+        public void RemoveDeclaration(string cssFileName, string match)
+        {
+            var sr = new StreamReader(cssFileName);
+            string fileContent = sr.ReadToEnd();
+            sr.Close();
+            int searchPos = fileContent.Length;
+            while (true)
+            {
+                int findTop = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
+                if (findTop == -1)
+                {
+                    break;
+                }
+                int closingbracePos = fileContent.IndexOf("}", findTop) + 1;
+                fileContent = fileContent.Substring(0, findTop) + fileContent.Substring(closingbracePos);
+                searchPos = findTop - 1;
+            }
+            var sw = new StreamWriter(cssFileName);
+            sw.Write(fileContent);
+            sw.Close();
+        }
+
         public void SetDropCapInCSS(string cssFileName)
         {
             TextWriter tw = new StreamWriter(cssFileName, true);
@@ -3703,13 +3739,15 @@ namespace SIL.Tool
         {
             TextWriter tw = new StreamWriter(cssFileName, true);
             tw.WriteLine(".Cover {");
-            tw.WriteLine("vertical-align: center;");
+            tw.WriteLine("vertical-align: middle;");
             tw.WriteLine("text-align: center;");
             tw.WriteLine("}");
             tw.WriteLine("");
             tw.WriteLine(".Cover img{");
-            tw.WriteLine("height: 595px;");
-            tw.WriteLine("width: 446.25px;");
+            tw.WriteLine("height: 100%;");
+            tw.WriteLine("width: 100%;");
+            //tw.WriteLine("height: 595px;");
+            //tw.WriteLine("width: 446.25px;");
             tw.WriteLine("}");
             tw.Close();
         }
@@ -3810,7 +3848,13 @@ namespace SIL.Tool
             if (RevFormNodes.Count > 0)
             {
                 //XmlDocumentFragment docFrag = CreateEmptyDiv(xDoc);
-                RevFormNodes[0].InnerXml = "<div class='hideDiv'> </div> " + RevFormNodes[0].InnerXml;
+                //RevFormNodes[0].InnerXml = "<div class='hideDiv'> </div> " + RevFormNodes[0].InnerXml;
+                XmlNode divNode = xDoc.CreateElement("div");
+                XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
+                xmlAttribute.Value = "hideDiv";
+                if (divNode.Attributes != null) divNode.Attributes.Append(xmlAttribute);
+                divNode.InnerText = " ";
+                RevFormNodes[0].InsertBefore(divNode, RevFormNodes[0].FirstChild);
             }
             xDoc.Save(flexRevFileName);
 

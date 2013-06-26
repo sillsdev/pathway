@@ -78,6 +78,7 @@ namespace SIL.PublishingSolution
             btnEdit.Visible = _showEdit;
             btnPrevious.Visible = false;
             btnNext.Visible = false;
+            ShowPreview(1);
         }
 
         private void CreateToolTip()

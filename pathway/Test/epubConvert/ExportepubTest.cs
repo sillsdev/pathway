@@ -12,6 +12,7 @@
 // Responsibility: Trihus
 // ---------------------------------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
@@ -93,6 +94,13 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void ExportDictionaryPassTest()
         {
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+
             const string XhtmlName = "main.xhtml";
             const string CssName = "main.css";
             PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -176,6 +184,88 @@ namespace Test.epubConvert
         }
 
         [Test]
+        public void SplitPageSectionPageBreakFalseTest()
+        {
+            const string FolderName = "SplitPageSectionTest";
+
+            string[] outputFiles;
+
+            if (!Directory.Exists(FileOutput(FolderName)))
+                Directory.CreateDirectory(FileOutput(FolderName));
+
+            outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
+
+            foreach (var file in outputFiles)
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+
+            const string TestFolderName = "SplitPageSectionTestOutput";
+            FolderTree.Copy(FileInput(FolderName), FileOutput(TestFolderName));
+
+
+            _inputType = "dictionary";
+            List<string> htmlFiles = new List<string>();
+            string[] files = Directory.GetFiles(FileOutput(TestFolderName), "PartFile*.xhtml");
+            foreach (var htmlFile in files)
+            {
+                htmlFiles.Add(htmlFile);
+            }
+
+            pageBreak = false;
+            SplitPageSections(htmlFiles, FileOutput(FolderName), "");
+            outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
+
+            if (Directory.Exists(TestFolderName))
+                Directory.Delete(TestFolderName);
+
+            Assert.AreEqual(5, outputFiles.Length, "Should be 5 PartFiles but its " + outputFiles.Length.ToString());
+        }
+
+        [Test]
+        public void SplitPageSectionPageBreakTrueTest()
+        {
+            const string FolderName = "SplitPageSectionTest";
+
+            string[] outputFiles;
+
+            if (!Directory.Exists(FileOutput(FolderName)))
+                Directory.CreateDirectory(FileOutput(FolderName));
+
+            outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
+
+            foreach (var file in outputFiles)
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+
+            const string TestFolderName = "SplitPageSectionTestOutput";
+            FolderTree.Copy(FileInput(FolderName), FileOutput(TestFolderName));
+
+
+            _inputType = "dictionary";
+            List<string> htmlFiles = new List<string>();
+            string[] files = Directory.GetFiles(FileOutput(TestFolderName), "PartFile*.xhtml");
+            foreach (var htmlFile in files)
+            {
+                htmlFiles.Add(htmlFile);
+            }
+
+            pageBreak = true;
+            SplitPageSections(htmlFiles, FileOutput(FolderName), "");
+            outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
+
+            if (Directory.Exists(TestFolderName))
+                Directory.Delete(TestFolderName);
+
+            Assert.AreEqual(3, outputFiles.Length, "Should be 3 PartFiles but its " + outputFiles.Length.ToString());
+        }
+
+
+
+        [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void FootnoteVerseNumberTest()
@@ -248,6 +338,13 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void EpubIndentFileComparisonTest()
         {
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+            
             const string XhtmlName = "EpubIndentFileComparison.xhtml";
             const string CssName = "EpubIndentFileComparison.css";
             PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -265,14 +362,40 @@ namespace Test.epubConvert
             result = result.Replace("Output", "Expected");
             zfExpected.ExtractZip(result, FileOutput("EpubIndentFileComparisonExpect"), ".*");
             FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_.xhtml");
-            string directoryExist = FileExpected("EpubIndentFileComparison");
+           
+        }
 
-            if (Directory.Exists(directoryExist))
-                Directory.Delete(directoryExist, true);
-
-            directoryExist = FileOutput("");
-            if (Directory.Exists(directoryExist))
-                Directory.Delete(directoryExist, true);
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void ExportDictionaryInsertBeforeAfterTest()
+        {
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+            
+            const string XhtmlName = "InsertBeforeAfter.xhtml";
+            const string CssName = "InsertBeforeAfter.css";
+            PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+            projInfo.IsReversalExist = false;
+            projInfo.ProjectName = "Dictionary Test";
+            projInfo.ProjectInputType = "Dictionary";
+            projInfo.IsLexiconSectionExist = true;
+            File.Copy(FileProg(@"Styles\Dictionary\epub.css"), FileOutput("epub.css"));
+            var target = new Exportepub();
+            var actual = target.Export(projInfo);
+            Assert.IsTrue(actual);
+            var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+            var zf = new FastZip();
+            zf.ExtractZip(result, FileOutput("InsertBeforeAfterComparison"), ".*");
+            var zfExpected = new FastZip();
+            result = result.Replace("Output", "Expected");
+            zfExpected.ExtractZip(result, FileOutput("InsertBeforeAfterComparisonExpect"), ".*");
+            FileCompare("InsertBeforeAfterComparison/OEBPS/PartFile00001_.xhtml", "InsertBeforeAfterComparisonExpect/OEBPS/PartFile00001_.xhtml");
+            
         }
 
         private void FileCompare(string file)

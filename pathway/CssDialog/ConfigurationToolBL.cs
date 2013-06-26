@@ -123,6 +123,7 @@ namespace SIL.PublishingSolution
         protected string _fileProduce = "One";
         protected bool _fixedLineHeight = false;
         protected bool _includeImage = true;
+        protected bool _pageBreak = false;
         protected string _tocLevel = "2 - Book and Chapter";
         protected string _embedFonts = "Yes";
         protected string _includeFontVariants = "Yes";
@@ -136,6 +137,7 @@ namespace SIL.PublishingSolution
         TabPage tabothers = new TabPage();
         TabPage tabweb = new TabPage();
         TabPage tabpreview = new TabPage();
+        TabPage tabDict4Mids = new TabPage();
         protected TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
         private ConfigurationTool cTool;
         Dictionary<string, string> pageDict = new Dictionary<string, string>();
@@ -943,12 +945,16 @@ namespace SIL.PublishingSolution
 
                     if (cTool.StylesGrid.Rows.Count >= SelectedRowIndex)
                     {
-                        cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
-                        cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
-                        XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + StyleName + "']");
-                        Param.SetAttrValue(baseNode, "previewfile1", PreviewFileName1);
-                        Param.SetAttrValue(baseNode, "previewfile2", PreviewFileName1);
-                        Param.Write();
+                        if (PreviewFileName1.Trim().Length > 0 && PreviewFileName2.Trim().Length > 0)
+                        {
+                            cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
+                            cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
+                            XmlNode baseNode =
+                                Param.GetItem("//styles/" + MediaType + "/style[@name='" + StyleName + "']");
+                            Param.SetAttrValue(baseNode, "previewfile1", PreviewFileName1);
+                            Param.SetAttrValue(baseNode, "previewfile2", PreviewFileName1);
+                            Param.Write();
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -1169,6 +1175,9 @@ namespace SIL.PublishingSolution
                             case "includeimage":
                                 cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
                                 break;
+                            case "pagebreak":
+                                cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
+                                break;
                             case "maximagewidth":
                                 cTool.TxtMaxImageWidth.Text = attribValue;
                                 break;
@@ -1293,6 +1302,10 @@ namespace SIL.PublishingSolution
                 {
                     cTool.DdlFileProduceDict.SelectedItem = FileProduced.ToString();
                     ShowCssSummary();
+                    if (cTool.StylesGrid.RowCount > 0)
+                    {
+                        cTool.TxtCss.Text = cTool.StylesGrid[ColumnDescription, SelectedRowIndex].Value.ToString();
+                    }
                 }
                 SavePropertyValue();
             }
@@ -1547,6 +1560,12 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                if (inputTypeBL.ToLower() == "dictionary" && MediaType.ToLower() == "mobile")
+                {
+                    cTool.TxtCss.Text = @"No custom properties for DictionaryForMIDs";
+                    return;
+                }
+
                 string leading = (cTool.DdlLeading.Text.Length > 0) ? " Line Spacing " + cTool.DdlLeading.Text + ", " : " ";
                 string fontSize = (cTool.DdlFontSize.Text.Length > 0) ? " Base FontSize - " + cTool.DdlFontSize.Text + ", " : "";
 
@@ -1672,8 +1691,8 @@ namespace SIL.PublishingSolution
         {
             //if (!(MediaType == "mobile" || MediaType == "others"))
             //    return;
-
-            cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[1]);
+            if (cTool.TabControl1.TabCount > 1)
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[1]);
             if (cTool.TabControl1.TabPages.ContainsKey("tabPreview"))
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPreview"]);
             //cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabdisplay"]);
@@ -1681,14 +1700,14 @@ namespace SIL.PublishingSolution
             {
                 case "mobile":
                     //cTool.TabControl1.TabPages.Add(tabmob);
-                    cTool.TabControl1.TabPages.Insert(1, tabmob);
-                    cTool.TabControl1.TabPages.Insert(2, tabpreview);
-
                     if(inputTypeBL.ToLower() == "dictionary")
                     {
-                        cTool.TabControl1.TabPages[1].Enabled = false;
+                        cTool.TabControl1.TabPages.Insert(1, tabDict4Mids);
                         return;
                     }
+
+                    cTool.TabControl1.TabPages.Insert(1, tabmob);
+                    cTool.TabControl1.TabPages.Insert(2, tabpreview);
 
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     foreach (XmlNode VARIABLE in baseNode1)
@@ -1738,6 +1757,9 @@ namespace SIL.PublishingSolution
                                 break;
                             case "includeimage":
                                 cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
+                                break;
+                            case "pagebreak":
+                                cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
                                 break;
                             case "maximagewidth":
                                 cTool.TxtMaxImageWidth.Text = attribValue;
@@ -1856,14 +1878,14 @@ namespace SIL.PublishingSolution
 
             if (Common.GetOsName().IndexOf("Windows") >= 0) // Hide Preview if LibreOffice not exist
             {
-                string regEntry = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\LibreOffice\\UNO\\InstallPath", "");
-                if (regEntry == null)
+                string regEntryWin7 = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\LibreOffice\\UNO\\InstallPath", "");
+                string regEntryWinXP = Common.GetValueFromRegistry("SOFTWARE\\LibreOffice\\UNO\\InstallPath", "");
+                if (regEntryWin7 == null && regEntryWinXP == null)
                 {
                     if (cTool.TabControl1.TabPages.ContainsKey("tabPreview"))
                         cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPreview"]);
                 }
             }
-
         }
 
         /// <summary>
@@ -1873,13 +1895,26 @@ namespace SIL.PublishingSolution
         /// <param name="showScriptureControls"></param>
         private void SetEpubUIControls(bool showScriptureControls)
         {
+            
             // show/hide chapter numbers and references UI
             cTool.LblChapterNumbers.Visible = showScriptureControls;
             cTool.DdlChapterNumbers.Visible = showScriptureControls;
             cTool.LblReferences.Visible = showScriptureControls;
             cTool.DdlReferences.Visible = showScriptureControls;
             // set position for embedded font controls (they need to move up if the other items are hidden)
-            cTool.LblEpubFontsSection.Top = (showScriptureControls) ? cTool.DdlReferences.Bottom + 10 : cTool.DdlTocLevel.Bottom + 10;
+
+            if (inputTypeBL.ToLower() == "scripture")
+            {
+                cTool.ChkPageBreaks.Visible = false;
+                cTool.LblEpubFontsSection.Top = (showScriptureControls) ? cTool.DdlReferences.Bottom + 10 : cTool.DdlTocLevel.Bottom + 10;
+            }
+            else
+            {
+                cTool.ChkPageBreaks.Visible = true;
+                cTool.LblEpubFontsSection.Top = (showScriptureControls) ? cTool.DdlReferences.Bottom + 30 : cTool.DdlTocLevel.Bottom + 30;
+            }
+
+            
             cTool.PicFonts.Top = cTool.LblEpubFontsSection.Bottom + 3;
             cTool.ChkEmbedFonts.Top = cTool.PicFonts.Top;
             cTool.ChkIncludeFontVariants.Top = cTool.ChkEmbedFonts.Bottom + 6;
@@ -2854,6 +2889,12 @@ namespace SIL.PublishingSolution
             return directoryCreated;
         }
 
+        public string GenerateStylesString()
+        {
+            string path = "Styles";
+            return path;
+        }
+
         protected bool BackUpCSSFile(bool directoryCreated, string folderPath)
         {
             XmlNodeList cats = Param.GetItems("//styles/" + MediaType + "/style");
@@ -2863,7 +2904,7 @@ namespace SIL.PublishingSolution
                 XmlAttribute file = xml.Attributes[AttribFile];
                 if (file != null)
                 {
-                    string path = Path.Combine(Path.GetDirectoryName(Param.SettingPath), Path.Combine("styles", Param.Value["InputType"]));
+                    string path = Path.Combine(Path.GetDirectoryName(Param.SettingPath), Path.Combine(GenerateStylesString(), Param.Value["InputType"]));
                     if (type != null && type.Value == TypeCustom)
                     {
                         string OutputPath = Path.GetDirectoryName(Path.GetDirectoryName(Param.SettingOutputPath));
@@ -2906,7 +2947,10 @@ namespace SIL.PublishingSolution
                 string fileName = Path.GetFileName(filePath);
                 if (fileName.IndexOf(".xml") > 0 || fileName.IndexOf(".xsd") > 0)
                 {
-                    File.Copy(filePath, Path.Combine(toPath, fileName));
+					if(File.Exists(filePath) && Directory.Exists(toPath))
+					{
+						File.Copy(filePath, Path.Combine(toPath, fileName));
+					}
                 }
             }
         }
@@ -3091,6 +3135,10 @@ namespace SIL.PublishingSolution
 
         public void ShowMobileSummaryBL()
         {
+            if(inputTypeBL.ToLower() == "dictionary")
+            {
+                cTool.TxtCss.Text = @"No custom properties for DictionaryForMIDs";
+            }
             string comma = ", ";
             string red = (cTool.DdlRedLetter.Text.Length > 0 && cTool.DdlRedLetter.Text.ToLower() == "yes") ? " Red Letter  " : "";
             if (red.Length == 0)
@@ -3870,6 +3918,17 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
+        public void chkPageBreaks_CheckedChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //_pageBreak = cTool.ChkPageBreaks.Checked;
+                Param.UpdateOthersAtrrib("PageBreak", cTool.ChkPageBreaks.Checked ? "Yes" : "No", StyleName);
+                SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
         public void chkIncludeCusFnCaller_CheckedChangedBL(object sender, EventArgs e)
         {
             try
@@ -4249,9 +4308,9 @@ namespace SIL.PublishingSolution
                     catch
                     {
                     }
-                    Process.Start(string.Format("mailto:{0}?Subject={1}&Body={2}", MailTo,
-                                                                   MailSubject, MailBody));
 
+                        Process.Start(string.Format("mailto:{0}?Subject={1}&Body={2}", MailTo,
+                                               MailSubject, MailBody));
                 }
                 catch (Exception ex)
                 {
@@ -4297,11 +4356,13 @@ namespace SIL.PublishingSolution
                 tabmob = cTool.TabControl1.TabPages["tabmobile"];
                 tabothers = cTool.TabControl1.TabPages["tabothers"];
                 tabweb = cTool.TabControl1.TabPages["tabweb"];
+                tabDict4Mids = cTool.TabControl1.TabPages["tabDict4Mids"];
 
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabmobile"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabothers"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabweb"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabDict4Mids"]);
             }
             //_redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
 
@@ -4524,7 +4585,8 @@ namespace SIL.PublishingSolution
                     if (_cToolPnlOtherFormatTop > 0)
                     {
                         cTool.PnlReferenceFormat.Visible = true;
-                        cTool.PnlOtherFormat.Top = _cToolPnlOtherFormatTop;
+                        //cTool.PnlOtherFormat.Top = _cToolPnlOtherFormatTop;
+                        cTool.PnlOtherFormat.Top = cTool.PnlReferenceFormat.Location.Y + cTool.PnlReferenceFormat.Height;
                     }
                 }
 

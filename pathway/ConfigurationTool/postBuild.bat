@@ -5,7 +5,7 @@ set base2=..\..\..\..
 set cfg2=bin\x86\%1
 :anyCpu
 xcopy %base2%\ThirdParty\gsdll32.dll . /y
-xcopy %base2%\ThirdParty\epubcheck-1.2\* .\epubcheck-1.2  /i /s /q /y
+xcopy %base2%\PsSupport\epubcheck-3.0.1\* .\epubcheck-3.0.1  /i /s /q /y
 xcopy %base2%\LiftPrepare\Lib\PalasoLib\*.dll . /y
 xcopy %base2%\HelpImprove\%cfg2%\HelpImprove.* . /y
 xcopy %base2%\PathwayB\%cfg2%\PathwayB.* . /y
@@ -20,7 +20,7 @@ if "%1" == "Corporate7BTE" goto justgobible
 if "%1" == "CorporateSE" goto nogobible
 if "%1" == "Corporate7SE" goto nogobible
 xcopy %base2%\PdfConvert\%cfg2%\PdfConvert.* . /y
-xcopy %base2%\Dic4MidConvert\%cfg2%\Dic4MidConvert.* . /y
+xcopy %base2%\DictionaryForMIDsConvert\%cfg2%\DictionaryForMIDsConvert.* . /y
 xcopy %base2%\WordPressConvert\%cfg2%\WordPressConvert.* . /y
 xcopy %base2%\WordPressConvert\%cfg2%\MySql*.dll . /y
 xcopy %base2%\XeTeXConvert\%cfg2%\XeTeXConvert.* . /y
@@ -54,7 +54,7 @@ xcopy %base2%\PsSupport\Icons .\Icons  /i /s /q /y
 xcopy %base2%\PsSupport\Graphic .\Graphic  /i /s /q /y
 xcopy %base2%\PsSupport\Loc .\Loc  /i /s /q /y
 xcopy %base2%\PsSupport\Samples .\Samples  /i /s /q /y
-xcopy %base2%\PsSupport\Dic4Mid .\Dic4Mid  /i /s /q /y
+xcopy %base2%\PsSupport\DictionaryForMIDs .\DictionaryForMIDs  /i /s /q /y
 
 mkdir Help
 xcopy %base2%\Build\Installer\Pathway*.chm .\Help /i /s /q /y

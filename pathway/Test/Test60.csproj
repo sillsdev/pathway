@@ -510,7 +510,7 @@
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'$(OutputPath)\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'$(OutputPath)\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'$(OutputPath)\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'$(OutputPath)\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'$(OutputPath)\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -525,7 +525,7 @@
     <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <GhostScript Include="..\ThirdParty\gsdll32.dll" />
-    <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
+    <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
     <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
     <LiftPrepare Include="..\LiftPrepare\$(OutputPath)\LiftPrepare.*" />

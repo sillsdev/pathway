@@ -984,15 +984,12 @@ namespace SIL.PublishingSolution
         private void WriteFootNoteMarker(string footerClassName, string content)
         {
             string markerClassName = footerClassName + "..footnote-call";
-            //string marker = string.Empty;
             if (_footnoteMarkerClass.StyleName == markerClassName)
             {
-                //marker = _footnoteMarkerClass.Content;
-                _xetexFile.Write("  \\footnote {" + content + "} ");
+                string styleName = _childName;
+                styleName = Common.ReplaceSeperators(styleName);
+                _xetexFile.Write(" \\footnote {\\" + styleName + "{" + content + "} } ");
             }
-            //_xetexFile.Write("{");
-            //_xetexFile.Write(content);
-            //_xetexFile.Write("}");
         }
 
         private void AnchorBookMark()

@@ -126,6 +126,7 @@ namespace SIL.PublishingSolution
             PageStyle.Append("\\pagestyle{plain}");
             PageStyle.AppendLine("\\pagestyle{fancy}");
 			PageStyle.AppendLine("\\fancyhead{}");
+            PageStyle.AppendLine("\\fancyfoot{}");
             if (_cssProperty.ContainsKey("@page:left") || _cssProperty.ContainsKey("@page:right"))
             {
                 IsMirrored = true;
@@ -146,7 +147,7 @@ namespace SIL.PublishingSolution
                 SetPageHeaderFooter(pageName);
             }
             PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \\renewcommand{\\footrulewidth}{0.4pt}");
-            PageStyle.AppendLine("\\fancyfoot{}");
+            //PageStyle.AppendLine("\\fancyfoot{}");
         }
 
         private void SetPageHeaderFooter(string pageName)

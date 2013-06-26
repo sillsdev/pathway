@@ -410,7 +410,7 @@
   </Target>
   <Target Name="Wix">
     <RemoveDir Directories="Wix" />
-    <UpdateVersion Product="$(ProductName) " Version="1.3.6" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
+    <UpdateVersion Product="$(ProductName) " Version="1.3.7" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
     <ZeroCheck />
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs" />
@@ -438,7 +438,7 @@
     <!-- Copy SourceFiles="@(UsfmConvert)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " / -->
     <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'Files\ConfigurationTool\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'Files\ConfigurationTool\Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
-    <Copy SourceFiles="@(Dic4Mid)" DestinationFiles="@(Dic4Mid->'Files\ConfigurationTool\Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="@(DictionaryForMIDs->'Files\ConfigurationTool\Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'Files\ConfigurationTool\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'Files\ConfigurationTool\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -461,7 +461,7 @@
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'Files\ConfigurationTool\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -486,7 +486,7 @@
     <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <!-- GhostScript Include="..\ThirdParty\gsdll32.dll" / -->
-    <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
+    <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
     <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
     <BatchProcess Include="..\HelpImprove\$(OutputPath)\HelpImprove.*" />
@@ -498,7 +498,7 @@
     <AllBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" />
     <epubBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
-    <TestBackend Include="..\Dic4MidConvert\$(OutputPath)\Dic4MidConvert.*" />
+    <TestBackend Include="..\DictionaryForMIDsConvert\$(OutputPath)\DictionaryForMIDsConvert.*" />
     <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\MySql*.dll" />
@@ -510,7 +510,7 @@
     <BteBackend Include="..\LogosConvert\$(OutputPath)\LogosConvert.*" />
     <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Dic4Mid Include="..\PsSupport\Dic4Mid\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <DictionaryForMIDs Include="..\PsSupport\Dic4Mid\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Icons Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />

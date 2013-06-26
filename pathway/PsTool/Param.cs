@@ -1569,6 +1569,27 @@ namespace SIL.PublishingSolution
             }
         }
 
+        public static string GetMetadataCurrentValue(string name)
+        {
+            XmlNode node;
+            string lastSavedDatabase = string.Empty;
+            try
+            {
+                node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/currentValue");
+                if(node.InnerText.Length == 0)
+                {
+                    node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/defaultValue");
+                }
+            }
+            catch (Exception e)
+            {
+                // Exception (key not found?) - bail out with a null value
+                Debug.WriteLine(e.ToString());
+                return null;
+            }
+            return (node == null) ? null : (XmlConvert.DecodeName(node.InnerText.Trim()));
+        }
+
         #endregion Metadata methods
 
         #region LoadImageList

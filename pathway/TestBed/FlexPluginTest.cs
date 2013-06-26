@@ -1219,7 +1219,7 @@ namespace TestBed
                 MessageBox.Show("Please enter the valid CSS path");
                 return;
             }
-            var exportDic4Mid = new ExportDic4Mid();
+            var exportDictionaryForMIDs = new ExportDictionaryForMIDs();
             PublicationInformation projInfo = new PublicationInformation();
 
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
@@ -1228,7 +1228,7 @@ namespace TestBed
 
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             projInfo.DictionaryPath = projInfo.ProjectPath;
-            exportDic4Mid.Export(projInfo);
+            exportDictionaryForMIDs.Export(projInfo);
         }
 
         private void btnEpubValidator_Click(object sender, EventArgs e)

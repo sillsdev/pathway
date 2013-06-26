@@ -1,0 +1,57 @@
+.dicBody {
+}
+.letHead {
+    column-count: 1;
+    clear: both;
+}
+.letter {
+    text-align: center;
+    width: 100%;
+    margin-top: 18pt;
+    margin-bottom: 18pt;
+    direction: ltr;
+    font-family: "Gautami", serif;	/* default Serif font */
+    font-weight: bold;
+    font-size: 24pt;
+}
+.letData {
+    column-count: 2;   -moz-column-count: 2;
+    column-gap: 1.5em; -moz-column-gap: 1.5em;
+    column-fill: balance;
+    text-align: left;
+}
+.entry {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    padding-left: 9pt;
+    text-indent: -36pt;
+    margin-left: 36pt;
+    line-height: normal;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+    counter-reset: sense;
+}
+
+.headword {
+    /* lang = 'ggo-Telu-IN' */
+    /* explicit FieldWorks style = 'Dictionary-Headword' */
+    font-family: "Gautami", serif;	/* default Serif font */
+    font-weight: bold;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: guideword content();
+}
+
+@page {
+    size: 16.2cm 22.9cm;
+    marks: crop cross;
+    counter-increment: page;
+    margin: 2cm;
+}
+/* two column dictionary */
+.letData {
+       column-count: 2; -moz-column-count: 2;
+       column-gap: 12pt; -moz-column-gap: 12pt;
+       column-fill: balance;
+}
+
+

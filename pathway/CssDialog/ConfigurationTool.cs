@@ -175,6 +175,12 @@ namespace SIL.PublishingSolution
             get { return chkAvailable; }
         }
 
+        public CheckBox ChkPageBreaks
+        {
+            get { return chkPageBreaks; }
+        }
+        
+
         public TextBox TxtComment
         {
             get { return txtComment; }
@@ -820,18 +826,15 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.ConfigurationTool_FormClosingBL();
             Style = _CToolBL.StyleEXE.ToString();
-
         }
 
         private void btnDictionary_Click(object sender, EventArgs e)
         {
-            btnMobile.Text = "DictForMids";
             _CToolBL.btnDictionary_ClickBL();
         }
 
         private void btnScripture_Click(object sender, EventArgs e)
         {
-            btnMobile.Text = "Mobile";
             _CToolBL.btnScripture_ClickBL();
         }
 
@@ -1400,6 +1403,12 @@ namespace SIL.PublishingSolution
         {
             EditCSS(sender, e);
             _CToolBL.chkXrefCusSymbol_CheckStateChangedBL(sender, e);
+        }
+
+        private void chkPageBreaks_CheckedChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkPageBreaks_CheckedChangedBL(sender, e);
         }
     }
 }

@@ -308,6 +308,16 @@ namespace Test.UIConfigurationToolBLTest
                     Assert.IsTrue(node.Attributes["value"].Value == expected, "SaveInputType Test failed");
         }
 
+        [Test]
+        public void CheckStylesString()
+        {
+            string returnValue = string.Empty;
+            cToolBL = new ConfigurationToolBL();
+            returnValue = cToolBL.GenerateStylesString();
+            Assert.IsTrue(returnValue == "Styles", "Values not equal");
+
+        }
+
         private void AssignNewTest()
         {
             cTool.TxtName.Text = "NewStyle";

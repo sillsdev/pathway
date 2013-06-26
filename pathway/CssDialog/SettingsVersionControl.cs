@@ -162,11 +162,22 @@ namespace SIL.PublishingSolution
                         Param.LoadSettings();
                     }
 
+                    if (int.Parse(projSettingsVerNum) < 29 || int.Parse(projSettingsVerNum) == 29)
+                    {
+                        Version29(GetDirectoryPath(settingsPath, appPath));
+                        Param.LoadSettings();
+                    }
+
+                    if (int.Parse(projSettingsVerNum) < 30 || int.Parse(projSettingsVerNum) == 30)
+                    {
+                        Version30(GetDirectoryPath(settingsPath, appPath));
+                        Param.LoadSettings();
+                    }
                     //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
                     string usrPath = GetDirectoryPath(settingsPath, appPath);
                     string insPath = Common.PathCombine(Path.GetDirectoryName(installerPath), Path.GetFileName(usrPath));
                     Common.MigrateCustomSheet(usrPath, insPath);
-                }                
+                }
             }
         }
 
@@ -658,7 +669,7 @@ namespace SIL.PublishingSolution
                     newNode.AppendChild(optionNode2);
                     newNode.AppendChild(optionNode3);
 
-                    if (featuresNode.ParentNode != null) 
+                    if (featuresNode.ParentNode != null)
                         featuresNode.ParentNode.ReplaceChild(newNode, referencesNode);
                     //featuresNode.RemoveChild(referencesNode);
                     //featuresNode.AppendChild(newNode);
@@ -822,7 +833,7 @@ namespace SIL.PublishingSolution
             {
                 root.SetAttribute("version", "27");
                 // Metadata block
-                
+
                 //XmlNode beforeNode = root.SelectSingleNode(beforeNodePath);
                 //XmlElement newNode = dictDoc.CreateElement("option");
                 //newNode.SetAttribute("name", "B5");
@@ -872,21 +883,21 @@ namespace SIL.PublishingSolution
             if (!File.Exists(destSettingsFile))
             {
                 return;
-            }            
+            }
             const string nodePath = "//stylePick/settings/property[@name=\"InputType\"]";
             var dictDoc = Common.DeclareXMLDocument(false);
             dictDoc.Load(destSettingsFile);
             XmlElement root = dictDoc.DocumentElement;
             if (root != null)
             {
-                root.SetAttribute("version", "28");                
+                root.SetAttribute("version", "28");
                 XmlNode beforeNode = root.SelectSingleNode(nodePath);
                 if (beforeNode.Attributes["value"].Value == string.Empty)
                     beforeNode.Attributes["value"].Value = "Dictionary";
                 dictDoc.Save(destSettingsFile);
             }
 
-            string styleFileName = Path.GetDirectoryName(destSettingsFile); 
+            string styleFileName = Path.GetDirectoryName(destSettingsFile);
             styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
 
             if (File.Exists(styleFileName))
@@ -911,13 +922,13 @@ namespace SIL.PublishingSolution
                 {
                     root.SetAttribute("version", "28");
                     XmlNode beforeNode = root.SelectSingleNode(nodePath);
-                    if(beforeNode.Attributes["value"].Value == string.Empty)
+                    if (beforeNode.Attributes["value"].Value == string.Empty)
                         beforeNode.Attributes["value"].Value = "Scripture";
                     dictDoc.Save(destSettingsFile);
                 }
             }
 
-            styleFileName = Path.GetDirectoryName(destSettingsFile); 
+            styleFileName = Path.GetDirectoryName(destSettingsFile);
             styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
 
             if (File.Exists(styleFileName))
@@ -931,7 +942,7 @@ namespace SIL.PublishingSolution
                     dictDoc.Save(styleFileName);
                 }
             }
-            
+
             styleFileName = Path.GetDirectoryName(destSettingsFile);
             styleFileName = Path.GetDirectoryName(styleFileName);
 
@@ -951,7 +962,7 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            styleFileName = Path.GetDirectoryName(styleFileName); 
+            styleFileName = Path.GetDirectoryName(styleFileName);
             styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
 
             if (File.Exists(styleFileName))
@@ -968,6 +979,210 @@ namespace SIL.PublishingSolution
 
         }
 
+        /// <summary>
+        /// Update to change made in version 28 of the XML. The change here is a References feature block for Dictionary / scriptures (only).
+        /// </summary>
+        /// <param name="destSettingsFile"></param>
+        private void Version29(string destSettingsFile)
+        {
+            // load the destination settings file (the one in ProgramData) that is missing the <meta> block for the TOC);
+            if (!File.Exists(destSettingsFile))
+            {
+                return;
+            }
+            const string nodePath = "//styles/mobile";
+            var dictDoc = Common.DeclareXMLDocument(false);
+            dictDoc.Load(destSettingsFile);
+            XmlElement root = dictDoc.DocumentElement;
+            if (root != null)
+            {
+                root.SetAttribute("version", "29");
+                XmlNode beforeNode = root.SelectSingleNode(nodePath);
+                if (beforeNode.InnerXml.Length > 0)
+                    beforeNode.InnerXml = "<style name=\"DictionaryForMIDs\" file=\"DictionaryForMIDs.css\" approvedBy=\"GPS\" previewfile1=\"\" previewfile2=\"\" shown=\"Yes\"><description>No custom properties for DictionaryForMIDs</description></style>";
+                dictDoc.Save(destSettingsFile);
+            }
+
+            string styleFileName = Path.GetDirectoryName(destSettingsFile);
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "29");
+
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+            //Scripture
+            destSettingsFile = destSettingsFile.Replace("Dictionary", "Scripture");
+            if (File.Exists(destSettingsFile))
+            {
+                dictDoc.Load(destSettingsFile);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "29");
+                    dictDoc.Save(destSettingsFile);
+                }
+            }
+
+            styleFileName = Path.GetDirectoryName(destSettingsFile);
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "29");
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+            styleFileName = Path.GetDirectoryName(destSettingsFile);
+            styleFileName = Path.GetDirectoryName(styleFileName);
+
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xml");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "29");
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+            styleFileName = Path.GetDirectoryName(styleFileName);
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "29");
+
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+        }
+
+
+        /// <summary>
+        /// Update to change made in version 28 of the XML. The change here is a References feature block for Dictionary / scriptures (only).
+        /// </summary>
+        /// <param name="destSettingsFile"></param>
+        private void Version30(string destSettingsFile)
+        {
+            // load the destination settings file (the one in ProgramData) that is missing the <meta> block for the TOC);
+            if (!File.Exists(destSettingsFile))
+            {
+                return;
+            }
+            const string nodePath = "//styles/others/style";
+            var dictDoc = Common.DeclareXMLDocument(false);
+            dictDoc.Load(destSettingsFile);
+            XmlElement root = dictDoc.DocumentElement;
+            if (root != null)
+            {
+                root.SetAttribute("version", "30");
+                XmlNodeList searchNode = root.SelectNodes(nodePath);
+                if (searchNode != null && searchNode.Count != 0)
+                {
+                    foreach (XmlNode styleNode in searchNode)
+                    {
+                        XmlDocumentFragment docFrag = InsertDefaultTagVersion30(dictDoc);
+                        styleNode.AppendChild(docFrag);
+                    }
+                }
+                dictDoc.Save(destSettingsFile);
+            }
+
+            string styleFileName = Path.GetDirectoryName(destSettingsFile);
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "30");
+
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+            //Scripture
+            destSettingsFile = destSettingsFile.Replace("Dictionary", "Scripture");
+            if (File.Exists(destSettingsFile))
+            {
+                dictDoc.Load(destSettingsFile);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "30");
+                    dictDoc.Save(destSettingsFile);
+                }
+            }
+
+            styleFileName = Path.GetDirectoryName(destSettingsFile);
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "30");
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+            styleFileName = Path.GetDirectoryName(destSettingsFile);
+            styleFileName = Path.GetDirectoryName(styleFileName);
+
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xml");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "30");
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+            styleFileName = Path.GetDirectoryName(styleFileName);
+            styleFileName = Common.PathCombine(styleFileName, "StyleSettings.xsd");
+
+            if (File.Exists(styleFileName))
+            {
+                dictDoc.Load(styleFileName);
+                root = dictDoc.DocumentElement;
+                if (root != null)
+                {
+                    root.SetAttribute("version", "30");
+
+                    dictDoc.Save(styleFileName);
+                }
+            }
+
+        }
 
         /// <summary>
         /// Method to update the changed made in version 2
@@ -1184,6 +1399,19 @@ namespace SIL.PublishingSolution
             if (node != null && node.Attributes.GetNamedItem(attr) != null)
                 return node.Attributes.GetNamedItem(attr).Value;
             return "0";
+        }
+
+        /// <summary>
+        /// To insert the xml default tag part into the alluser's XML file.
+        /// </summary>
+        /// <param name="xdoc">XMLDocument object</param>
+        /// <returns>XmlDocumentFragment to attach in XMLFile</returns>
+        private static XmlDocumentFragment InsertDefaultTagVersion30(XmlDocument xdoc)
+        {
+            const string toInsert = "<styleProperty name=\"PageBreak\" value=\"No\" />";
+            XmlDocumentFragment docFrag = xdoc.CreateDocumentFragment();
+            docFrag.InnerXml = toInsert;
+            return docFrag;
         }
     }
 }

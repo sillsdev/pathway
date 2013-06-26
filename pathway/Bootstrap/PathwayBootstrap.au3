@@ -3,9 +3,9 @@
 
 ;Global $StableVersionDate = '-0.7.1-2011-04-12'
 Global $StableVersionDate = ''
-Global $LatestSuffix = 'Testing-1.3.6.3213'
+Global $LatestSuffix = 'Testing-1.3.7.3290'
 Global $DEL_Installer = True
-Global $Bootstrap_version = "Version 1.21"
+Global $Bootstrap_version = "Version 1.22"
 
 Opt('MustDeclareVars', 1)
 
@@ -24,6 +24,9 @@ Func DoUI()
 	EndIf
 	If not FileExists("License.rtf") Then
 		FileInstall("res\License.rtf", "License.rtf")
+	EndIf
+	If not FileExists("PathwayBootstrap.ini") Then
+		FileInstall("res\PathwayBootstrap.ini", "PathwayBootstrap.ini")
 	EndIf
 	If FileExists("License.rtf") Then
 		Welcome()
