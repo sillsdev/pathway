@@ -30,6 +30,7 @@ namespace SIL.PublishingSolution
 
         private string _tagName, _style, _number, _code, _caller, _content;
         private string _parentTagName = string.Empty, _parentStyleName = string.Empty;
+        private string _verseNumber = string.Empty;
 
         private string _desc, _file, _size, _loc, _copy, _ref;
         private bool _significant, _isEmptyNode, _isParaWritten;
@@ -204,6 +205,7 @@ namespace SIL.PublishingSolution
                 line = "\\" + _parentStyleName;
                 _sfmFile.WriteLine(line);
                 _isParaWritten = true;
+                _verseNumber = string.Empty;
             }
             else
             {
@@ -216,7 +218,9 @@ namespace SIL.PublishingSolution
             {
                 line = "\\" + _style + Space + _number + Space + _content.Trim() + EndText();
                 _sfmFile.Write(line);
+                _verseNumber = string.Empty;
             }
+            
         }
 
         private bool HandleBridgeVerseNumbers(string verseNumber)
@@ -353,6 +357,7 @@ namespace SIL.PublishingSolution
             if (tag == "para" || tag == "verse")
             {
                 _sfmFile.WriteLine();
+                _verseNumber = string.Empty;
             }
             else if (tag == "note")
             {
@@ -399,6 +404,10 @@ namespace SIL.PublishingSolution
                         else if (_reader.Name == "number")
                         {
                             _number = _reader.Value;
+                            if (_tagName == "verse")
+                            {
+                                _verseNumber = _number;
+                            }
                         }
                         else if (_reader.Name == "code")
                         {
@@ -527,7 +536,14 @@ namespace SIL.PublishingSolution
         {
             if (_tagName == "note")
             {
-                string line = "\\" + _style + Space + _caller + Space;
+                string line;
+                if (_verseNumber != string.Empty)
+                {
+                    line = "\\v " + _verseNumber + Space;
+                    _sfmFile.Write(line);
+                }
+
+                line = "\\" + _style + Space + _caller + Space;
                 _sfmFile.Write(line);
             }
         }
