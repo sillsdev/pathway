@@ -55,7 +55,7 @@ namespace SIL.PublishingSolution
         public List<string> XsltFile = new List<string>();
         public static bool isFromConfigurationTool = false;
         private bool _isUnixOS = false;
-
+        private string _sDateTime = string.Empty;
         public ExportThroughPathway()
         {
             InitializeComponent();
@@ -322,6 +322,8 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                AssignFolderDateTime();
+
                 if (!Common.isRightFieldworksVersion())
                 {
                     MessageBox.Show("Please download and install a Pathway version compatible with your software", "Incompatible Pathway Version", MessageBoxButtons.OK,
@@ -400,6 +402,11 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+        }
+
+        private void AssignFolderDateTime()
+        {
+            _sDateTime = DateTime.Now.ToString("yyyy-MM-dd_HHmmss");
         }
 
 
@@ -1191,7 +1198,7 @@ namespace SIL.PublishingSolution
             txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, ddlStyle.Text);
             if (_newSaveInFolderPath.Length > 0)
             {
-                txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + ddlStyle.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
+                txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + ddlStyle.Text + "_" + _sDateTime;
             }
         }
 
@@ -1295,7 +1302,8 @@ namespace SIL.PublishingSolution
                 directoryInfo.Create();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                string folderName = ddlStyle.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
+
+                string folderName = ddlStyle.Text + "_" + _sDateTime;
                 _newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
                 Param.SetValue(Param.PublicationLocation, _newSaveInFolderPath);
                 txtSaveInFolder.Text = _newSaveInFolderPath;

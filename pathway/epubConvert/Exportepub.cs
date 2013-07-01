@@ -490,7 +490,10 @@ namespace SIL.PublishingSolution
 
                 // copy over the XHTML and CSS files
                 string cssPath = Common.PathCombine(contentFolder, defaultCSS);
-                File.Copy(mergedCSS, cssPath);
+                
+                if(File.Exists(mergedCSS))
+                    File.Copy(mergedCSS, cssPath, true);
+
                 string tocFiletoUpdate = string.Empty;
                 // copy the xhtml files into the content directory
                 SplitPageSections(htmlFiles, contentFolder, tocFiletoUpdate);
