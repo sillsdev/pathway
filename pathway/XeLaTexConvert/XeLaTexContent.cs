@@ -669,7 +669,7 @@ namespace SIL.PublishingSolution
                 }
                 else if (_isDropCaps)
                 {
-                    _xetexFile.Write("\\lettrine{");
+                    //_xetexFile.Write("\\lettrine{");
                     _isDropCaps = false;
                     //_inlineCount++;
                 }
