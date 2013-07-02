@@ -279,7 +279,21 @@ namespace SIL.PublishingSolution
                 sw.WriteLine(@"\usepackage{multicol}");
                 sw.WriteLine(@"\usepackage{calc}");
                 sw.WriteLine(@"\usepackage{lettrine}");
-                sw.WriteLine(@"\usepackage[margin=1cm,includeheadfoot]{geometry}");
+
+
+                if (pageTopMargin != 0 || pageBottomMargin != 0 || pageLeftMargin != 0 || pageRightMargin != 0)
+                {
+                    pageTopMargin = (pageTopMargin / 28.346456693F) + 1.5;
+                    pageBottomMargin = (pageBottomMargin / 28.346456693F) + 1.5;
+
+                    pageLeftMargin = Convert.ToDouble(Common.UnitConverter(pageLeftMargin.ToString() + "pt", "cm"));
+                    pageRightMargin = Convert.ToDouble(Common.UnitConverter(pageRightMargin.ToString() + "pt", "cm"));
+                    sw.WriteLine(@"\usepackage[left=" + Math.Round(pageLeftMargin, 2) + "cm,right=" + Math.Round(pageRightMargin, 2) + "cm,top=" + Math.Round(pageTopMargin, 2) + "cm,bottom=" + Math.Round(pageBottomMargin, 2) + "cm,includeheadfoot]{geometry}");
+                }
+                else
+                {
+                    sw.WriteLine(@"\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm,includeheadfoot]{geometry}");
+                }
 
                 if (Convert.ToBoolean(CoverImage))
                     sw.WriteLine(@"\usepackage{eso-pic}");
@@ -288,19 +302,7 @@ namespace SIL.PublishingSolution
 
                 sw.WriteLine(@"\begin{document} ");
                 sw.WriteLine(@"\pagestyle{plain} ");
-                if (pageTopMargin != 0 || pageBottomMargin != 0 || pageLeftMargin != 0 || pageRightMargin != 0)
-                {
-                    pageTopMargin = (pageTopMargin / 28.346456693F) + 1.5;
-                    pageBottomMargin = (pageBottomMargin / 28.346456693F) + 1.5;
-
-                    pageLeftMargin = Convert.ToDouble(Common.UnitConverter(pageLeftMargin.ToString() + "pt", "cm"));
-                    pageRightMargin = Convert.ToDouble(Common.UnitConverter(pageRightMargin.ToString() + "pt", "cm"));
-                    sw.WriteLine(@"\newgeometry{left=" + Math.Round(pageLeftMargin, 2) + "cm, right=" + Math.Round(pageRightMargin, 2) + "cm, bottom=" + Math.Round(pageBottomMargin, 2) + "cm, top=" + Math.Round(pageTopMargin, 2) + "cm}");
-                }
-                else
-                {
-                    sw.WriteLine(@"\newgeometry{left=1cm}{right=1cm}");
-                }
+               
             }
 
             foreach (var prop in xeLaTexProperty)

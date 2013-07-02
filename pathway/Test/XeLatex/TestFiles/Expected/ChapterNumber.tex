@@ -1,6 +1,7 @@
-\documentclass[c5paper,twoside]{article} 
+\documentclass[a4paper,twoside]{article} 
 \usepackage{changepage}
 \usepackage{multicol}
+\usepackage{verbatim} 
 \usepackage{texthanglist}
 \usepackage{float}
 \usepackage{grffile}
@@ -11,27 +12,49 @@
 \usepackage{multicol}
 \usepackage{calc}
 \usepackage{lettrine}
-\usepackage[margin=1cm,includeheadfoot]{geometry}
+\usepackage[left=1.85cm,right=1.85cm,top=3cm,bottom=3cm,includeheadfoot]{geometry}
 
 \begin{document} 
 \pagestyle{plain} 
-\newgeometry{left=1.5cm, right=1.5cm, bottom=2.65cm, top=2.65cm}
+\font\divzxx="Charis SIL" at 12pt
+\font\spanzxx="Charis SIL" at 12pt
 \font\picturepictureRight="Times New Roman" at 12pt
 \font\imgpicturedivpictureLeft="Times New Roman" at 12pt
 \font\scrBookscrBody="Times New Roman" at 12pt
+\font\scrBookNamezxxscrBookscrBody="Charis SIL" at 12pt
+\font\scrBookCodezxxscrBookscrBody="Charis SIL" at 12pt
+\font\TitleMainscrBookscrBody="Times New Roman/B" at 18pt
+\font\spanzxxTitleMainscrBookscrBody="Charis SIL/B" at 18pt
+\font\TitleSecondaryzxxTitleMainscrBookscrBody="Charis SIL/BI" at 16pt
 \font\columnsscrBookscrBody="Times New Roman" at 12pt
 \font\scrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
 \font\ParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 12pt
-\font\SectionHeadscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 12pt
-\font\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 12pt
+\font\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody="Charis SIL/B" at 12pt
+\font\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody="Charis SIL" at 6pt
+\font\spanzxxParagraphscrSectioncolumnsscrBookscrBody="Charis SIL" at 12pt
 
 \pagestyle{fancy} 
-\setlength{\columnsep}{12pt} 
+\begin{comment}
+
+\scrBookNamezxxscrBookscrBody{Buka Tango}\end{comment}
+ 
+ \label{Buka Tango} \begin{comment}
+\scrBookCodezxxscrBookscrBody{ACT}\end{comment}
+ \begin{adjustwidth}{36pt}{0pt}{12pt}{0pt}\begin{center}\clubpenalty=300
+
+
+\spanzxxTitleMainscrBookscrBody{Na Komi Tango \label{Buka Tango} }\begin{adjustwidth}{0pt}{0pt}{2pt}{0pt}\begin{center}
+
+\TitleSecondaryzxxTitleMainscrBookscrBody{Kena Eia Mara Na Vetula }\end{center}\end{adjustwidth} 
+\end{center}\end{adjustwidth} \setlength{\columnsep}{12pt} 
 \setlength\columnseprule{0.4pt} 
-\begin{multicols}{2}{\raggedright} 
-\leftmargin 0pt{\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody{2}}
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Betlehemfɔ Abí Mɔ }\end{center}\end{adjustwidth} 
+\begin{multicols}{2}{\raggedright} \widowpenalty=300
+\clubpenalty=300
+\lettrine{
+\leftmargin 0pt{\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody{1}}}{\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{1}$}}}\markboth{ \ParagraphscrSectioncolumnsscrBookscrBody ACT 1}{ \ParagraphscrSectioncolumnsscrBookscrBody ACT 1}\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Toke nighe Tiofilus, }
+\widowpenalty=300
+\clubpenalty=300
+
+\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Koragna nigua na buka ku kidi risoa, inau ku riso atua itamua eigna na komi fata gougovu a Jisas ke eia me velepuhi kori vido ke turughua nigna na agutu }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{2}$}}\spanzxxParagraphscrSectioncolumnsscrBookscrBody{me ghieghilei jufu mai na dani a God ke hati hadia i popo. Gi e hadi i popo, a Jisas ke haghore vanira nigna na komi mane vetula ke vahira kori mana nigna na Tarunga ke Tabu. Imanea ke velera na hava kedana eia. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{3}$}}\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Kekeha dani koragna e rua tutughu na dani leghugna kena tupipuhia, a Jisas ke tate vanira me eia sethe na fata eigna kedana pukuni adoa imanea ke havi tabiru. Kori vido ke tate vanira, imanea ke titiono vanira eigna na puhi a God ke vunaghi pungusira nigna na mavitu. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{4}$}}\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Tagna sina dani, kori vido a Jisas ke vanga duadia, imanea ke velera, $“$Saghoi taveti au i Jerusalem me ghieghilei vetula maia a Tamagu na hava ke taluhaghorea itamiu. I hau, inau ku veleghamu ghohi eigna iaani. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{5}$}}\spanzxxParagraphscrSectioncolumnsscrBookscrBody{A Jon ke siuvitabughamu kori bea, kari leghugna kekeha dani, a God keda siuvitabughamu kori Tarunga ke Tabu.$”$ }
  \end{multicols}
 \end{document}

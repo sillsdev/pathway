@@ -113,7 +113,7 @@ namespace Test.XeLatex
         [Category("SkipOnTeamCity")]
         public void ChapterNumberTest()
         {
-            _projInfo.ProjectInputType = "Dictionary";
+            _projInfo.ProjectInputType = "Scripture";
             const string file = "ChapterNumber";
             ExportProcess(file);
             FileCompare(file);
@@ -128,7 +128,16 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void DropCapTest()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "DropCap";
+            ExportProcess(file);
+            FileCompare(file);
+        }
 
         [Test]
         [Category("SkipOnTeamCity")]

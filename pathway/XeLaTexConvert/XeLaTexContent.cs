@@ -40,6 +40,8 @@ namespace SIL.PublishingSolution
         private bool isFileEmpty = true;
         private bool isFileCreated;
         private bool _isDropCaps;
+        private bool _nextContent;
+        private int _incrementDropCap = 0;
 
 
         private bool isImageAvailable;
@@ -564,7 +566,7 @@ namespace SIL.PublishingSolution
                     content = "\\newpage \r\n" + content;
                 }
                 if (_tocStartingPage != "" && _tocStartingPage != null)
-                    content +="\r\n \\label{" + _tocStartingPage + "} ";
+                    content += "\r\n \\label{" + _tocStartingPage + "} ";
 
                 _bookCount++;
             }
@@ -585,7 +587,7 @@ namespace SIL.PublishingSolution
             {
                 _replaceSymbolToText.Add(" // ", " \\linebreak  ");
             }
-            
+
             if (_replaceSymbolToText.Count > 0)
             {
                 foreach (string srchKey in _replaceSymbolToText.Keys)
@@ -639,9 +641,17 @@ namespace SIL.PublishingSolution
         {
             //_imageInserted = InsertImage();
             SetHomographNumber(false);
+            string footerClassName = string.Empty;
+            if (_isDropCaps)
+            {
+                _xetexFile.Write("\\lettrine{");
+                //_isDropCaps = false;
+                _nextContent = true;
+                _inlineCount++;
+            }
 
-            string footerClassName = WritePara(characterStyle, content);
-
+            footerClassName = WritePara(characterStyle, content);
+            
             AnchorBookMark();
 
             if (isFootnote)
@@ -667,12 +677,7 @@ namespace SIL.PublishingSolution
                     _toc.Add("bookname_" + _tocStartingPage, _tocStartingPage);
                     //_xetexFile.Write("\r\n \\label{"+ _tocStartingPage + "} ");
                 }
-                else if (_isDropCaps)
-                {
-                    //_xetexFile.Write("\\lettrine{");
-                    _isDropCaps = false;
-                    //_inlineCount++;
-                }
+
 
                 content = content.Replace("~", "\\textasciitilde{~}");
 
@@ -682,10 +687,25 @@ namespace SIL.PublishingSolution
                 for (int i = 1; i <= _inlineCount; i++) // close braces for inline style
                 {
                     _xetexFile.Write("}");
+
                 }
                 _inlineCount = 0;
                 _xetexFile.Write("}");
 
+                if (_incrementDropCap != 0)
+                {
+                    _xetexFile.Write("}");
+                    _incrementDropCap = 0;
+                    _xetexFile.Write(_headerContent);
+                    _headerContent = string.Empty;
+                }
+
+                if (_nextContent && _isDropCaps)
+                {
+                    _xetexFile.Write("}{");
+                    _isDropCaps = false;
+                    _incrementDropCap++;
+                }
 
                 if (_childName.IndexOf("letterletHead") == 0 && content != null)
                 {
@@ -851,8 +871,7 @@ namespace SIL.PublishingSolution
                             _tocStyleName = mergedParaStyle;
                             string headerFormat = "\\markboth{ \\" + headerStyle + " " + _headerContent + "}{ \\" + headerStyle + " " + _headerContent + "}";
                             headerFormat = headerFormat.Replace("~", "\\textasciitilde{~}");
-                            _xetexFile.Write(headerFormat);
-                            _headerContent = string.Empty;
+                            _headerContent = headerFormat;
                         }
                         else if (mergedParaStyle.ToLower().IndexOf("verse") == 0 && (referenceFormat == "Genesis 1:1" || referenceFormat == "Gen 1:1" || referenceFormat == "Genesis 1:1-2:1"))
                         {
@@ -1819,7 +1838,7 @@ namespace SIL.PublishingSolution
 
             if (_closeChildName.IndexOf("scrBookName") == 0)
             {
-                _xetexFile.Write("\r\n \\label{" + _tocStartingPage + "} ");            
+                _xetexFile.Write("\r\n \\label{" + _tocStartingPage + "} ");
                 _bookName = string.Empty;
                 _bookPageBreak = false;
             }

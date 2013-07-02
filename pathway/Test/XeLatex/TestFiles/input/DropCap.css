@@ -1,0 +1,539 @@
+div[lang='zxx']{ font-family: "Charis SIL";}
+span[lang='zxx']{ font-family: "Charis SIL";}
+
+.Paragraph
+{
+font-size: 12pt;
+text-indent: .125pt;
+}
+
+.Paragraph_Continuation
+{
+font-size: 12pt;
+}
+
+.Title_Main
+{
+font-size: 20pt;
+font-weight: bold;
+text-align: center;
+padding-top: 2pt;
+padding-bottom: 4pt;
+}
+
+.Title_Secondary
+{
+font-size: 16pt;
+font-style: italic;
+text-align: center;
+padding-bottom: 2pt;
+}
+
+
+@page {
+    -ps-positionchapternumbers-string: "Drop Capital";
+    -ps-IncludeVersenumber-string: "True";
+    -ps-IncludeVerseInHeaderReferences-string:"yes";
+    ps-NonConsecutiveReferenceSeparator-string:",";
+}
+
+.Alternate_Reading {
+    font-style: italic;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+
+.Chapter_Head {
+    padding-top:21pt;
+    padding-bottom:21pt;
+}
+
+.Chapter_Number {
+    font-weight: bolder;
+    vertical-align: top;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-right: 2pt;
+    float: left;
+    string-set: chapter content() ":";
+}
+
+.crossHYPHENReference::footnote-call {
+    font-style:Italic;
+}
+
+
+.Emphasis {
+    font-style: italic;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+
+.Quoted_Text {
+    font-style: italic;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+
+.Inscription {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 0pt;
+    padding-top: 0pt;
+    margin-top: 12pt;
+    margin-bottom:6pt;
+}
+.Inscription_Paragraph {
+    text-indent: .2in;
+    margin-left: 0pt;
+}
+.Intro_List_Item1 {
+    text-indent: -18pt;
+    margin-left: 36pt;
+}
+.Intro_Paragraph {
+    text-indent: .2in;
+    margin-left: 0pt;
+}
+.Intro_Section_Head {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: left;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 3pt;
+    margin-bottom: 3pt;
+}
+.REVERSE_SOLIDUSCitation_Line1, .Line1 {
+    text-align: left;
+    margin-left: 24pt;
+    text-indent: -12pt;
+    padding-left: 0pt;
+}
+.REVERSE_SOLIDUSCitation_Line2, .Line2 {
+    text-align: left;
+    margin-left: 24pt;
+    text-indent: -6pt;
+    padding-left: 0pt;
+}
+.REVERSE_SOLIDUSCitation_Line3, .Line3 {
+    text-align: left;
+    margin-left: 24pt;
+    text-indent: 0pt;
+    padding-left: 0pt;
+}
+.Note_CrossHYPHENReference_Paragraph {
+    text-indent: 0pt;
+    margin-left: 0pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Note_CrossHYPHENReference_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    line-height: none;
+}
+.Note_CrossHYPHENReference_Paragraph::footnote-marker {
+    font-weight: bold;
+    /* content: string(chapter) string(verse) ' '; */
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
+    text-align: left;
+}
+.Endnote_General_Paragraph,
+.Note_General_Paragraph {
+    text-indent: 0pt;
+    margin-left: 0pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Endnote_General_Paragraph::footnote-call,
+.Note_General_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    vertical-align: top;
+    line-height: none;
+}
+/*.Note_General_Paragraph::footnote-marker {
+    font-weight: bold;
+    content: string(chapter) string(verse) ' ';
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple;
+    text-align: left;
+} */
+.Note_Target_Reference::footnote-marker {
+    font-weight: bold;
+}
+.Endnote_General_Paragraph::footnote-call,
+.Note_General_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    vertical-align: top;
+    line-height: none;
+}
+.scrFootnoteMarker {
+}
+.Paragraph {
+    text-indent: 12pt;
+    margin-left: 0pt;
+	orphans: 2;
+    widows:2;
+}
+.Paragraph_Continuation {
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Paragraph1 {
+    margin-left: 0pt;
+	orphans: 2;
+    widows:2;
+}
+
+.parallel_passage_reference,  .Parallel_Passage_Reference {
+    font-style: italic;
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 0pt;
+    margin-bottom: 3pt;
+}
+
+.rem {
+    display: none;
+}
+
+.scrBody {
+}
+.scrBook {
+    column-count: 1;
+    clear: both;
+}
+.scrBookCode {
+    display: none;
+}
+.scrBookName {
+    string-set: bookname content();
+    display: none;
+}
+.scrIntroSection {
+    text-align: left;
+}
+.scrSection {
+    text-align: left;
+}
+.Section_Head {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 0pt;
+    padding-top: 0pt;
+    margin-top: 12pt;
+    //margin-bottom:6pt;
+    margin-bottom:0pt;
+}
+
+.Section_Range_Paragraph
+{
+   font-weight: bold;	/* cascaded environment */
+   font-style: normal;	/* cascaded environment */
+   text-align: center;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 0pt;
+   padding-top: 0pt;
+   margin-top: 6pt;
+   margin-bottom:0pt;
+}
+
+
+.Section_Head_Major {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 8pt;
+}
+.Section_Head_Minor {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 8pt;
+}
+
+.See_In_Glossary {
+    color: blue;
+}
+
+span {
+    prince-text-replace: "<<" "\201C" ">>" "\201D" "<" "\2018" ">" "\2019";
+}
+
+.Stanza_Break {
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Title_Main {
+    font-size: 18pt;
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+	page-break-after:avoid;
+    orphans:5;
+}
+.Title_Secondary {
+    display: block;
+}
+.Verse_Number {
+    font-size:6pt;
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: verse content();
+}
+.Verse_Number_In_Note {
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Verse_Number1 {
+    display: none;
+}
+.Front_Matter {
+margin-left : 48pt;
+margin-right: 48pt;
+text-align: justify;
+}
+
+@page {
+    size: 21cm 29.7cm;
+    counter-increment: page;
+    margin: 1.5cm 1.85cm;
+}
+
+.pictureRight {
+    float: right;
+    width: 99px;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureLeft {
+    float: left;
+    position: relative;
+    left: -2pc;
+    width: 99px;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureCenter {
+    float: top;
+    clear: both;
+    width: 4.75in;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureColumn {
+    float: right;
+    /* width: 100%; */
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.picturePage {
+    float: top;
+    clear: both;
+    /* width: 100%; */
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureRight > .picture {
+    width: 95px;
+    height: 84px;
+}
+div.pictureLeft > img.picture {
+    width: 95px;
+    height: 84px;
+}
+.pictureCaption {
+    display: block;
+    text-align: center;
+}
+
+span.reference :before {
+	content: " (";
+}
+span.reference :after {
+	content: ")";
+}
+/* Running Head Mirrored.css */
+
+
+@page :left {
+    
+
+@top-left {
+           
+content: string( guideword, first);
+           
+direction: ltr;
+           
+           
+font-size: 12pt;
+               }
+  
+
+  
+@top-center    { content: ''; }
+    
+
+@top-right  { content: ''; }
+    
+
+
+@bottom-left   { content: ''; }
+    
+@bottom-center { content: ''; }
+    
+@bottom-right  { content: ''; }
+}
+
+
+
+@page :right {
+    
+@top-left   { content: ''; }
+    
+@top-center { content: ''; }
+    
+
+@top-right  {
+           
+content: string( guideword, last);
+           
+direction: ltr;
+                      
+font-size: 12pt;
+               }
+    
+
+
+@bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+
+
+
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :left {
+    @top-left {
+        -ps-referenceFormat: "Genesis 1";
+        content: string(bookname, first) " "  string(chapter, first);
+    }
+    @top-center  { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left { content: ''; }
+    @top-center  { content: ''; }
+    @top-right     {
+        -ps-referenceFormat: "Genesis 1";
+        content: string(bookname, last) " "  string(chapter, last);
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+/* scripture ruling lines */
+@page {
+    @footnotes {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+    @footnote {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+}
+.border {
+    border-top: .5pt solid #808080;
+    text-align: center;
+    margin-left: 1in;
+    margin-right: 1in;
+    margin-top: 9pt;
+    margin-bottom: 18pt;
+    content: "\00A0";
+}
+.columns {
+       column-rule: solid 1pt #808080;
+}
+/* Top Center Mirrored.css */
+@page :left {
+    @top-center{
+           content: counter( page);
+    }
+}
+@page :right {
+   @top-center{
+           content: counter( page);
+    }
+}
+/* First Page Bottom Center.css */
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: counter(page); }
+    @bottom-right  { content: ''; }
+}
