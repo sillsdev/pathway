@@ -1307,8 +1307,10 @@ namespace SIL.Tool
                                                    GetCopyrightInfoForLO());
                         Common.StreamReplaceInFile(draftTempFileName, "<h1>", "<span class='LHeading'>");
                         Common.StreamReplaceInFile(draftTempFileName, "</h1>", "</span>");
-                        Common.StreamReplaceInFile(draftTempFileName, "<p><em>", "<span class='LText'>");
-                        Common.StreamReplaceInFile(draftTempFileName, "</em></p>", "</span>");
+                        Common.StreamReplaceInFile(draftTempFileName, "<p>", "<span class='LText'>");
+                        Common.StreamReplaceInFile(draftTempFileName, "</p>", "</span>");
+                        Common.StreamReplaceInFile(draftTempFileName, "<em>", "<span>");
+                        Common.StreamReplaceInFile(draftTempFileName, "</em>", "</span>");
 
                         XmlDocument xDoc = Common.DeclareXMLDocument(false);
                         XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
