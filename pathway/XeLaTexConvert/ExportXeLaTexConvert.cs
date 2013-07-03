@@ -145,6 +145,7 @@ namespace SIL.PublishingSolution
             Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
             Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
             XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
+            xeLaTexStyles.LangFontDictionary = _langFontCodeandName;
             classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
 
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
@@ -265,6 +266,7 @@ namespace SIL.PublishingSolution
                 Dictionary<string, Dictionary<string, string>> xeTexAllClass =
                     new Dictionary<string, Dictionary<string, string>>();
                 XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
+                xeLaTexStyles.LangFontDictionary = _langFontCodeandName;
                 classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
 
                 XeLaTexContent xeLaTexContent = new XeLaTexContent();
@@ -394,6 +396,7 @@ namespace SIL.PublishingSolution
                 StreamWriter xeLatexFile = new StreamWriter(xeLatexRevesalIndexFile);
                 Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
                 XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
+                xeLaTexStyles.LangFontDictionary = _langFontCodeandName;
                 classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
                 int pageWidth = Common.GetPictureWidth(cssClass, projInfo.ProjectInputType);
 

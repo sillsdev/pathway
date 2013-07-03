@@ -362,6 +362,18 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void GautamiFontTest()
+        {
+            //Added with Unicode
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "GautamiFontTest";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+        
+
         //[Test]
         //[Category("SkipOnTeamCity")]
         //public void TextDecorationTest()

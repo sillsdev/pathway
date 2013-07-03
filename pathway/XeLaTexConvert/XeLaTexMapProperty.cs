@@ -719,12 +719,18 @@ namespace SIL.PublishingSolution
 
             if (_langFontDictionary.Count != 0)
             {
-                foreach (string langCode in _langFontDictionary.Keys)
+                string[] splitClassNameMeta = _className.Split('.');
+                if (splitClassNameMeta.Length > 1)
                 {
-                    if (_className.Contains("." + langCode))
+                    splitClassNameMeta[1] = "." + splitClassNameMeta[1];
+                    foreach (string langCode in _langFontDictionary.Keys)
                     {
-                        fontName = _langFontDictionary[langCode];
-                        propertyValue = fontName;
+                        if (splitClassNameMeta[1].Contains("." + langCode))
+                        {
+                            fontName = _langFontDictionary[langCode];
+                            propertyValue = fontName;
+                            break;
+                        }
                     }
                 }
             }
