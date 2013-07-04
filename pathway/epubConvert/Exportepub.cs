@@ -2649,7 +2649,7 @@ namespace SIL.PublishingSolution
             var g = Graphics.FromImage((Image)b);
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.DrawImage(image, 0, 0, destW, destH);
-            g.Dispose();
+            //g.Dispose();
             return (Image)b;
         }
 
