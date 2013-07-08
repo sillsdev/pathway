@@ -145,14 +145,12 @@ namespace SIL.PublishingSolution
             if (_projInfo.ProjectInputType.ToLower() == "scripture")
             {
                 _newProperty.Add("TableofContent", _toc);
-
-
             }
             else
             {
-                _toc.Add("first", TocStartingPage);
-                _toc.Add("last", TocEndingPage);
-                _toc.Add("stylename", TocStyleName);
+                //_toc.Add("first", TocStartingPage);
+                //_toc.Add("last", TocEndingPage);
+                //_toc.Add("stylename", TocStyleName);
                 _newProperty.Add("TableofContent", _toc);
             }
         }
@@ -651,7 +649,7 @@ namespace SIL.PublishingSolution
             }
 
             footerClassName = WritePara(characterStyle, content);
-            
+
             AnchorBookMark();
 
             if (isFootnote)
@@ -672,7 +670,7 @@ namespace SIL.PublishingSolution
                 if (_childName.IndexOf("scrBookName") == 0 && content != null)
                 {
                     //content = "\r\n \\section{" + content + "} ";
-                    _tocStartingPage = content.ToString();
+                    _tocStartingPage = content;
                     _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
                     _toc.Add("bookname_" + _tocStartingPage, _tocStartingPage);
                     //_xetexFile.Write("\r\n \\label{"+ _tocStartingPage + "} ");
@@ -709,36 +707,11 @@ namespace SIL.PublishingSolution
 
                 if (_childName.IndexOf("letterletHead") == 0 && content != null)
                 {
-
-                    if (!_dictionaryStarting)
-                    {
-                        _tocStartingPage = content.Substring(0, 1).ToString();
-
-                        _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
-
-                        _xetexFile.Write("\r\n \\label{first_page" + _tocStartingPage + "} ");
-
-                        //_xetexFile.Write("\r\n \\section*{} \\label{first_page" + _tocStartingPage + "} ");
-                    }
-                    else
-                    {
-                        _dictionaryEnding = true;
-                        //_tocEndingPage = content.Substring(2).ToString();
-                        //  _xetexFile.Write("\r\n \\section*{} \\label{last_page} ");
-                        if (content == TocEndingPage)
-                        {
-                            _tocEndingPage = content.Substring(0, 1).ToString();
-
-                            _tocEndingPage = _tocEndingPage.Replace("~", "\\textasciitilde{~}");
-
-                            _xetexFile.WriteLine("\r\n \\label{last_page" + _tocEndingPage + "} ");
-                        }
-                        //_xetexFile.WriteLine("\r\n \\section*{} \\label{last_page" + _tocEndingPage + "} ");
-                    }
-
-                    if (!_dictionaryStarting)
-                        _dictionaryStarting = true;
-                    //content = "\\section{" + content + "}";
+                    _tocStartingPage = content;
+                    _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
+                    _toc.Add("letter_" + _tocStartingPage, _tocStartingPage);
+                    //_xetexFile.Write("\r\n \\section*{} \r\n \\label{" + "letter_" + _tocStartingPage.Replace(" ","") + "} \r\n");
+                    _xetexFile.Write("\r\n \\label{" + "letter_" + _tocStartingPage.Replace(" ", "") + "} \r\n");
                 }
             }
             AnchorBookMark();

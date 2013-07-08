@@ -1014,6 +1014,16 @@ namespace Test.XeLatex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void TOCLetters()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TOCLetters";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void XeLaTexUpdateCache()
         {
             UpdateXeLaTexFontCacheIfNecessary();

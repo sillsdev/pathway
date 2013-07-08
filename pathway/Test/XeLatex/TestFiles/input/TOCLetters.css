@@ -1,0 +1,27 @@
+
+
+.dicBody {
+}
+.letHead {
+    column-count: 1;
+    clear: both;
+}
+.letter {
+    text-align: center;
+    width: 100%;
+    margin-top: 18pt;
+    margin-bottom: 18pt;
+    direction: ltr;
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-weight: bold;
+    font-size: 24pt;
+}
+
+.Intro_Paragraph {
+line-height: 0pt;
+-ps-fixed-line-height: 0pt;
+}
+.Intro_Section_Head {
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
