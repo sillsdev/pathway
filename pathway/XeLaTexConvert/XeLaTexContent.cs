@@ -82,7 +82,7 @@ namespace SIL.PublishingSolution
         private bool _dictionaryStarting = false;
         public bool _dictionaryEnding = false;
         private string _tocStartingPage;
-        private string _tocEndingPage;
+        private int _tocPageStock = 0;
         private string _tocStyleName;
         private Dictionary<string, string> _toc = new Dictionary<string, string>();
 
@@ -101,16 +101,16 @@ namespace SIL.PublishingSolution
             set { _tocStartingPage = value; }
         }
 
-        public string TocEndingPage
-        {
-            get { return _tocEndingPage; }
-            set { _tocEndingPage = value; }
-        }
-
         public string TocStyleName
         {
             get { return _tocStyleName; }
             set { _tocStyleName = value; }
+        }
+
+        public int TocPageStock
+        {
+            get { return _tocPageStock; }
+            set { _tocPageStock = value; }
         }
 
         #endregion
@@ -563,9 +563,6 @@ namespace SIL.PublishingSolution
                 {
                     content = "\\newpage \r\n" + content;
                 }
-                if (_tocStartingPage != "" && _tocStartingPage != null)
-                    content += "\r\n \\label{" + _tocStartingPage + "} ";
-
                 _bookCount++;
             }
             string modifiedContent = ModifiedContent(content, _previousParagraphName, _characterName);
@@ -669,11 +666,11 @@ namespace SIL.PublishingSolution
 
                 if (_childName.IndexOf("scrBookName") == 0 && content != null)
                 {
-                    //content = "\r\n \\section{" + content + "} ";
                     _tocStartingPage = content;
                     _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
-                    _toc.Add("bookname_" + _tocStartingPage, _tocStartingPage);
-                    //_xetexFile.Write("\r\n \\label{"+ _tocStartingPage + "} ");
+                    TocPageStock++;
+                    _toc.Add("PageStock_" + TocPageStock.ToString(), "\\" + _childName + "{" + _tocStartingPage + "}");
+                    _xetexFile.Write("\r\n \\label{PageStock_" + TocPageStock.ToString() + "} ");
                 }
 
 
@@ -709,9 +706,9 @@ namespace SIL.PublishingSolution
                 {
                     _tocStartingPage = content;
                     _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
-                    _toc.Add("letter_" + _tocStartingPage, _tocStartingPage);
-                    //_xetexFile.Write("\r\n \\section*{} \r\n \\label{" + "letter_" + _tocStartingPage.Replace(" ","") + "} \r\n");
-                    _xetexFile.Write("\r\n \\label{" + "letter_" + _tocStartingPage.Replace(" ", "") + "} \r\n");
+                    TocPageStock++;
+                    _toc.Add("PageStock_" + TocPageStock.ToString(), "\\" + _childName + "{" + _tocStartingPage + "}");
+                    _xetexFile.Write("\r\n \\label{PageStock_" + TocPageStock.ToString() + "} ");
                 }
             }
             AnchorBookMark();
@@ -1811,18 +1808,10 @@ namespace SIL.PublishingSolution
 
             if (_closeChildName.IndexOf("scrBookName") == 0)
             {
-                _xetexFile.Write("\r\n \\label{" + _tocStartingPage + "} ");
+                _xetexFile.Write("\r\n \\label{PageStock_" + TocPageStock.ToString() + "} ");
                 _bookName = string.Empty;
                 _bookPageBreak = false;
             }
-
-            //if (_columnClass.Count > 0 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
-            //if (_columnClass.Count == 2 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
-            //{
-            //    _columnClass.RemoveAt(_columnClass.Count - 1);
-            //    string columnProperty = "\\end{multicols}";
-            //    _xetexFile.Write(columnProperty);
-            //}
             _classNameWithLang = StackPeek(_allStyle);
             _classNameWithLang = Common.LeftString(_classNameWithLang, "_");
         }

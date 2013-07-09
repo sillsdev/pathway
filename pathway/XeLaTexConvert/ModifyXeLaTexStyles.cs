@@ -522,49 +522,22 @@ namespace SIL.PublishingSolution
         private void InsertTableOfContent(StreamWriter sw)
         {
             String tableOfContent = string.Empty;
-
-            ////Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true") ||
-            ////        Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true") ||
-            ////        Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true") ||
-            ////        Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("true"))
-
-            //tableOfContent += "\\title{" + Param.GetMetadataValue(Param.TitlePage) + "} \r\n";
-            //tableOfContent += "\\author{" + Param.GetMetadataValue(Param.CopyrightHolder) + "} \r\n";
-
-            //tableOfContent += "\\maketitle \r\n";
-
-            //tableOfContent += "\\pagebreak[1] \r\n";
             if (_projectType.ToLower() == "dictionary")
             {
-                //if (_firstString != null)
-                //{
-                //    _firstString = _firstString.ToUpper();
-                //    _lastString = _lastString.ToUpper();
-                //    _firstString = _firstString.Replace("~", "\\textasciitilde{~}");
-                //    _lastString = _lastString.Replace("~", "\\textasciitilde{~}");
-
-                //    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + _firstString + " - " + _lastString + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
-
-                //    //For other Font style apply the below line
-                //    //tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + "\\" + _headWordStyleName + " " + _firstString.ToUpper() + " - " + "\\" + _headWordStyleName + " " + _lastString.ToUpper() + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
-                //}
-
-
                 if (_tocList.ContainsKey("TableofContent") && _tocList["TableofContent"].Count > 0)
                 {
                     foreach (var tocSection in _tocList["TableofContent"])
                     {
-                        if (tocSection.Key.Contains("letter"))
+                        if (tocSection.Key.Contains("PageStock"))
                         {
-                            //tableOfContent += "\r\n" + tocSection.Value;
-                            //tableOfContent += @"\addtocontents{toc}{\contentsline {chapter}{\numberline{} " + tocSection.Value + "}{\\pageref{" + tocSection.Value + "}}{}} ";
+                            //tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} " + tocSection.Value + "}{\\pageref{" + tocSection.Key.Replace(" ", "") + "}}{}} \r\n ";
+                            tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{" +
+                                              tocSection.Value + " \\Large }{{\\protect \\pageref{" + tocSection.Key + "}}}{}}" +
+                                              "\r\n";
 
-                            //tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{" +
-                            //                  tocSection.Value + "}{{\\protect \\pageref{" + tocSection.Value + "}}}{}}" +
+                            //tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{ \\Large " +
+                            //                  tocSection.Value + " \\Large }{{\\protect \\pageref{" + tocSection.Key + "}}}{}}" +
                             //                  "\r\n";
-
-                            tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} " + tocSection.Value + "}{\\pageref{" + tocSection.Key.Replace(" ", "") + "}}{}} \r\n ";
-
                         }
                     }
                 }
@@ -580,13 +553,10 @@ namespace SIL.PublishingSolution
                 {
                     foreach (var tocSection in _tocList["TableofContent"])
                     {
-                        if (tocSection.Key.Contains("bookname"))
+                        if (tocSection.Key.Contains("PageStock"))
                         {
-                            //tableOfContent += "\r\n" + tocSection.Value;
-                            //tableOfContent += @"\addtocontents{toc}{\contentsline {chapter}{\numberline{} " + tocSection.Value + "}{\\pageref{" + tocSection.Value + "}}{}} ";
-
                             tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{" +
-                                              tocSection.Value + "}{{\\protect \\pageref{" + tocSection.Value + "}}}{}}" +
+                                              tocSection.Value + "}{{\\protect \\pageref{" + tocSection.Key + "}}}{}}" +
                                               "\r\n";
                         }
                     }

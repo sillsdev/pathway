@@ -150,7 +150,7 @@ namespace SIL.PublishingSolution
 
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
-            xeLaTexContent.TocEndingPage = preProcessor.GetDictionaryLetterCount();
+            //xeLaTexContent.TocEndingPage = preProcessor.GetDictionaryLetterCount();
             Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle,
                 cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 

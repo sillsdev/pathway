@@ -227,7 +227,24 @@ namespace SIL.PublishingSolution
             _includePackageList = includePackageList;
             _inlineInnerStyle = inlineText;
 
-            if (className.IndexOf("scrBookName") == -1)
+
+            if (_langFontDictionary.Count > 0)
+            {
+                foreach (var selectFontName in _langFontDictionary)
+                {
+                    if (selectFontName.Key.ToLower() == "fontname" || selectFontName.Key.ToLower() == "en")
+                    {
+                        _fontName = selectFontName.Value;
+                        break;
+                    }
+                }                
+            }
+            else
+            {
+                _fontName = string.Empty;
+            }
+
+            if (string.IsNullOrEmpty(_fontName))
                 _fontName = "Times New Roman";
 
             foreach (KeyValuePair<string, string> property in cssProperty)
