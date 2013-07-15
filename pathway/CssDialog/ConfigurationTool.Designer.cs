@@ -121,6 +121,7 @@ namespace SIL.PublishingSolution
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.mobileIcon = new System.Windows.Forms.PictureBox();
             this.tabOthers = new System.Windows.Forms.TabPage();
+            this.chkPageBreaks = new System.Windows.Forms.CheckBox();
             this.chkIncludeImage = new System.Windows.Forms.CheckBox();
             this.ddlReferences = new System.Windows.Forms.ComboBox();
             this.lblReferences = new System.Windows.Forms.Label();
@@ -218,7 +219,6 @@ namespace SIL.PublishingSolution
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.chkPageBreaks = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1396,6 +1396,18 @@ namespace SIL.PublishingSolution
             this.tabOthers.Text = "Properties";
             this.tabOthers.UseVisualStyleBackColor = true;
             // 
+            // chkPageBreaks
+            // 
+            this.chkPageBreaks.AutoSize = true;
+            this.chkPageBreaks.Location = new System.Drawing.Point(51, 239);
+            this.chkPageBreaks.Name = "chkPageBreaks";
+            this.chkPageBreaks.Size = new System.Drawing.Size(163, 17);
+            this.chkPageBreaks.TabIndex = 40;
+            this.chkPageBreaks.Text = "No page breaks within letters";
+            this.chkPageBreaks.UseVisualStyleBackColor = true;
+            this.chkPageBreaks.Visible = false;
+            this.chkPageBreaks.CheckedChanged += new System.EventHandler(this.chkPageBreaks_CheckedChanged);
+            // 
             // chkIncludeImage
             // 
             this.chkIncludeImage.AutoSize = true;
@@ -2458,18 +2470,6 @@ namespace SIL.PublishingSolution
             this.lblType.TabIndex = 0;
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // chkPageBreaks
-            // 
-            this.chkPageBreaks.AutoSize = true;
-            this.chkPageBreaks.Location = new System.Drawing.Point(51, 239);
-            this.chkPageBreaks.Name = "chkPageBreaks";
-            this.chkPageBreaks.Size = new System.Drawing.Size(163, 17);
-            this.chkPageBreaks.TabIndex = 40;
-            this.chkPageBreaks.Text = "No page breaks within letters";
-            this.chkPageBreaks.UseVisualStyleBackColor = true;
-            this.chkPageBreaks.Visible = false;
-            this.chkPageBreaks.CheckedChanged += new System.EventHandler(this.chkPageBreaks_CheckedChanged);
             // 
             // ConfigurationTool
             // 

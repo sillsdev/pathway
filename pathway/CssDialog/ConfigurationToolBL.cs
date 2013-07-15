@@ -3862,12 +3862,14 @@ namespace SIL.PublishingSolution
             //_redoundo.Set(Common.Action.Edit, sender); 
         }
 
-        public void txtComment_ValidatedBL(object sender)
+        public void txtComment_ValidatedBL(object sender, bool modified)
         {
             try
             {
-                WriteAttrib(ElementComment, sender);
-                EnableToolStripButtons(true);
+                if (modified)
+                {
+                    WriteAttrib(ElementComment, sender);
+                }
 
             }
             catch { }
@@ -3972,12 +3974,15 @@ namespace SIL.PublishingSolution
         }
 
 
-        public void txtDesc_ValidatedBL(object sender)
+        public void txtDesc_ValidatedBL(object sender, bool modified)
         {
             try
             {
-                WriteAttrib(ElementDesc, sender);
-                EnableToolStripButtons(true);
+                if (modified)
+                {
+                    WriteAttrib(ElementDesc, sender);
+                    //EnableToolStripButtons(true);
+                }
 
             }
             catch { }
