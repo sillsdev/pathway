@@ -49,7 +49,7 @@ namespace SIL.PublishingSolution
         private bool _reversalIndexTexCreated = false;
         private bool _isInputTypeFound = false;
         private bool _isFileFontCodeandFontNameFound = false;
-
+        private Dictionary<string, string> _tocPropertyList = new Dictionary<string, string>();
         private Dictionary<string, string> _langFontCodeandName;
 
         #region Public Functions
@@ -201,6 +201,18 @@ namespace SIL.PublishingSolution
             modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = false;
             _xelatexDocumentOpenClosedRequired = false;
             modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
+
+            if (newProperty.ContainsKey("TableofContent") && newProperty["TableofContent"].Count > 0)
+            {
+                foreach (var tocSection in _tocPropertyList)
+                {
+                    if (tocSection.Key.Contains("PageStock"))
+                    {
+                        newProperty["TableofContent"].Add(tocSection.Key, tocSection.Value);
+                    }
+                }
+            }
+            
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include, _langFontCodeandName);
 
             //CallXeTex(Path.GetFileName(xeLatexFullFile));
@@ -386,7 +398,8 @@ namespace SIL.PublishingSolution
                 }
 
                 projInfo.DefaultXhtmlFileWithPath = revFile;
-                Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
+                Dictionary<string, Dictionary<string, string>> cssClass =
+                    new Dictionary<string, Dictionary<string, string>>();
                 CssTree cssTree = new CssTree();
                 cssTree.OutputType = Common.OutputType.XELATEX;
                 cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
@@ -402,18 +415,39 @@ namespace SIL.PublishingSolution
 
                 XeLaTexContent xeLaTexContent = new XeLaTexContent();
                 Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
-                Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
+                Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo,
+                                                                                                          cssClass,
+                                                                                                          xeLatexFile,
+                                                                                                          classInlineStyle,
+                                                                                                          cssTree
+                                                                                                              .SpecificityClass,
+                                                                                                          cssTree
+                                                                                                              .CssClassOrder,
+                                                                                                          classInlineText,
+                                                                                                          pageWidth);
 
-                _xelatexDocumentOpenClosedRequired = true;          //Don't change the place.
+                _xelatexDocumentOpenClosedRequired = true; //Don't change the place.
                 CloseDocument(xeLatexFile, false, string.Empty);
                 string include = xeLaTexStyles.PageStyle.ToString();
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
                 modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
-                modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexRevesalIndexFile, include, _langFontCodeandName);
+                modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
+                                                    xeLatexRevesalIndexFile, include, _langFontCodeandName);
+
+
+                if (newProperty.ContainsKey("TableofContent") && newProperty["TableofContent"].Count > 0)
+                {
+                    foreach (var tocSection in newProperty["TableofContent"])
+                    {
+                        if (tocSection.Key.Contains("PageStock"))
+                        {
+                            _tocPropertyList.Add(tocSection.Key, tocSection.Value);
+                        }
+                    }
+                }
                 return true;
             }
-
             return false;
         }
 

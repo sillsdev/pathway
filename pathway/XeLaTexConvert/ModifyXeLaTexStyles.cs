@@ -302,7 +302,6 @@ namespace SIL.PublishingSolution
 
                 sw.WriteLine(@"\begin{document} ");
                 sw.WriteLine(@"\pagestyle{plain} ");
-               
             }
 
             foreach (var prop in xeLaTexProperty)

@@ -87,6 +87,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _toc = new Dictionary<string, string>();
 
         private string _bookName = string.Empty;
+        public string _dicMainReversal = string.Empty;
         private string _chapterStyleforHeader = string.Empty;
         private int _bookCount = 0;
         private bool _bookPageBreak;
@@ -124,6 +125,8 @@ namespace SIL.PublishingSolution
             _pageWidth = pageWidth;
             _inputPath = projInfo.ProjectPath;
 
+            _dicMainReversal = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+
             xhtmlFile = projInfo.DefaultXhtmlFileWithPath;
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             InitializeData(projInfo.ProjectPath, cssClass, classFamily, cssClassOrder);
@@ -148,9 +151,6 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                //_toc.Add("first", TocStartingPage);
-                //_toc.Add("last", TocEndingPage);
-                //_toc.Add("stylename", TocStyleName);
                 _newProperty.Add("TableofContent", _toc);
             }
         }
@@ -634,6 +634,7 @@ namespace SIL.PublishingSolution
 
         private void WriteCharacterStyle(string content, string characterStyle)
         {
+            
             //_imageInserted = InsertImage();
             SetHomographNumber(false);
             string footerClassName = string.Empty;
@@ -663,6 +664,8 @@ namespace SIL.PublishingSolution
                 _childName = Common.ReplaceSeperators(_childName);
                 content = Common.ReplaceSymbolToXelatexText(content);
                 List<string> value = CreateInlineInnerStyle(characterStyle);
+
+                
 
                 if (_childName.IndexOf("scrBookName") == 0 && content != null)
                 {
@@ -707,8 +710,8 @@ namespace SIL.PublishingSolution
                     _tocStartingPage = content;
                     _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
                     TocPageStock++;
-                    _toc.Add("PageStock_" + TocPageStock.ToString(), "\\" + _childName + "{" + _tocStartingPage + "}");
-                    _xetexFile.Write("\r\n \\label{PageStock_" + TocPageStock.ToString() + "} ");
+                    _toc.Add("PageStock_" + _dicMainReversal + TocPageStock.ToString(), "\\" + _childName + "{" + _tocStartingPage + "}");
+                    _xetexFile.Write("\r\n \\label{PageStock_" + _dicMainReversal + TocPageStock.ToString() + "} ");
                 }
             }
             AnchorBookMark();
@@ -1604,6 +1607,17 @@ namespace SIL.PublishingSolution
                     endParagraphString = "\\end{multicols}";
                 }
 
+                //if (_classNameWithLang.ToLower().IndexOf("sectionhead") == 0)
+                //{
+                //    _xetexFile.Write("\\section*{");
+                //}
+
+
+                //if (_classNameWithLang.ToLower().IndexOf("parallelpassagereference") == 0)
+                //{
+                //    _xetexFile.Write("\\subsection*{");
+                //}
+
                 if (paddingLeft.Length > 0 || paddingRight.Length > 0 || paddingTop.Length > 0 || paddingBottom.Length > 0)
                 {
                     if (paddingLeft.Length == 0)
@@ -1627,6 +1641,16 @@ namespace SIL.PublishingSolution
                     string paddingStart = "\\begin{adjustwidth}{" + paddingTop + "}{" + paddingRight + "}{" + paddingBottom + "}{" + paddingLeft + "}";
                     _xetexFile.Write(paddingStart);
                     endParagraphString = "\\end{adjustwidth} " + endParagraphString;
+
+                    //if (_classNameWithLang.ToLower().IndexOf("sectionhead") == 0)
+                    //{
+                    //    endParagraphString = endParagraphString + "}";
+                    //}
+
+                    //if (_classNameWithLang.ToLower().IndexOf("parallelpassagereference") == 0)
+                    //{
+                    //    endParagraphString = endParagraphString + "}";
+                    //}
                 }
 
 
@@ -1808,7 +1832,7 @@ namespace SIL.PublishingSolution
 
             if (_closeChildName.IndexOf("scrBookName") == 0)
             {
-                _xetexFile.Write("\r\n \\label{PageStock_" + TocPageStock.ToString() + "} ");
+                _xetexFile.Write("\r\n \\label{PageStock_"  + _dicMainReversal  + TocPageStock.ToString() + "} ");
                 _bookName = string.Empty;
                 _bookPageBreak = false;
             }
