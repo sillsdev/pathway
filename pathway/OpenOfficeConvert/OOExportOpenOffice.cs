@@ -928,7 +928,7 @@ namespace SIL.PublishingSolution
             else if (projInfo.ProjectInputType == "Scripture")
             {
                 InsertChapterNumber(projInfo.TempOutputFolder);
-                ChangeTitleNameasBookName(projInfo.TempOutputFolder);
+                //ChangeTitleNameasBookName(projInfo.TempOutputFolder);
                 ContentPostProcess(projInfo.TempOutputFolder);
             }
         }

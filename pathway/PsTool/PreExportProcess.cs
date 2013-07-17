@@ -3833,6 +3833,15 @@ namespace SIL.Tool
             tw.WriteLine("display: none;");
             tw.WriteLine("}");
 
+
+            if (_projInfo.ProjectInputType.ToLower() == "scripture")
+            {
+                tw.WriteLine(".scrBookName {");
+                tw.WriteLine("display: inline;");
+                tw.WriteLine("font-size: 0pt;");
+                //tw.WriteLine("text-indent:5cm;");//padding-left: -5pt;
+                tw.WriteLine("}");
+            }
             tw.Close();
         }
 

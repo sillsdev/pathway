@@ -1,0 +1,42 @@
+div[lang='zxx']{ font-family: "Cambria";}
+span[lang='zxx']{ font-family: "Cambria";}
+
+.scrBookCode
+{
+display: none;
+font-size: 12pt;
+font-style: italic;
+font-weight: bold;
+color: #400000;
+}
+
+.scrBookName
+{
+display: none;
+font-size: 12pt;
+font-style: italic;
+color: #400000;
+}
+
+
+.scrBody {
+}
+.scrBook {
+    column-count: 1;
+    clear: both;
+}
+
+.Title_Main {
+    font-size: 18pt;
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+	page-break-after:avoid;
+    orphans:5;
+}
+
+
