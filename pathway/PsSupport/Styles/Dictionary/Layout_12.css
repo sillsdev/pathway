@@ -16,3 +16,9 @@
 @import "Rules_Yes.css";
 @import "PageNumber_TopInside.css"; 
 @import "Reversal_Reference_Numbers.css";
+
+.minorentry {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
