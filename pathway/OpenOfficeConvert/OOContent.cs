@@ -999,7 +999,22 @@ namespace SIL.PublishingSolution
                 //{
                 //    content = content.TrimEnd() + " ";
                 //}
-                if (_allCharacter.Peek().IndexOf("span_TitleMain") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0)
+                if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) || (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0))
+                //if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen") == 0) || (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat.ToLower().IndexOf("gen") == 0))
+                {
+                    //_strBook = content;
+                    content = content.TrimEnd() + " ";
+                    if (_strBook.Length > 0)
+                    {
+                        _strBook2ndBook = content;
+                    }
+                    _strBook = content;
+                    //else
+                    //{
+                    //    _strBook = content;
+                    //}
+                }
+                else if (_allCharacter.Peek().IndexOf("span_TitleMain") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0 && _strBook.Trim().Length == 0)
                 {
                     //_strBook = content;
                     content = content.TrimEnd() + " ";
@@ -1013,20 +1028,6 @@ namespace SIL.PublishingSolution
                         _strBook = content;
                         _is1stBookFound = true;
                     }
-                }
-                else if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) || (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0))
-                {
-                    //_strBook = content;
-                    content = content.TrimEnd() + " ";
-                    if (_strBook.Length > 0)
-                    {
-                        _strBook2ndBook = content;
-                    }
-                    _strBook = content;
-                    //else
-                    //{
-                    //    _strBook = content;
-                    //}
                 }
                 else if (_allCharacter.Peek().ToLower().IndexOf("versenumber") == 0 || _allCharacter.Peek().ToLower().IndexOf("versenumber1") == 0)
                 {
