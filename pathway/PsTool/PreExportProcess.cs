@@ -1862,17 +1862,17 @@ namespace SIL.Tool
 
                                         string toFileName = Common.PathCombine(tempFolder, counter + ext);
                                         File.Copy(fromFileName, toFileName, true);
-
-                                        if (ext != null && ext.Contains("tif"))
-                                        {
-                                            ext = ".jpg";
-                                            string tiffFileName = toFileName;
-                                            toFileName = Common.ConvertTifftoImage(toFileName, "jpg");
-                                            if (File.Exists(tiffFileName))
-                                            {
-                                                File.Delete(tiffFileName);
-                                            }
-                                        }
+                                        //No need this conversion logic
+                                        //if (ext != null && ext.Contains("tif"))
+                                        //{
+                                        //    ext = ".jpg";
+                                        //    string tiffFileName = toFileName;
+                                        //    toFileName = Common.ConvertTifftoImage(toFileName, "jpg");
+                                        //    if (File.Exists(tiffFileName))
+                                        //    {
+                                        //        File.Delete(tiffFileName);
+                                        //    }
+                                        //}
 
                                         XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
                                         xa.Value = name.Value;
