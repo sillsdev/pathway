@@ -833,7 +833,7 @@ namespace SIL.PublishingSolution
         {
             if (propertyValue == "avoid")
             {
-                _propertyKey = "keep-together";
+                _propertyKey = "keep-with-next";
                 propertyValue = "always";
             }
             else if (propertyValue == "auto")

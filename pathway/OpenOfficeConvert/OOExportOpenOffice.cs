@@ -923,7 +923,7 @@ namespace SIL.PublishingSolution
                 //InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
                 //InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
                 //InsertVariableOnLetHead(projInfo.TempOutputFolder);
-                //InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
+                InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             }
             else if (projInfo.ProjectInputType == "Scripture")
             {
@@ -1233,7 +1233,26 @@ namespace SIL.PublishingSolution
             nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
             nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
 
-            string xpath = "//style:style[@style:name='entry_letData_dicBody']";
+            //string xpath = "//style:style[@style:name='entry_letData_dicBody']";
+            //XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
+            //if (list.Count > 0)
+            //{
+            //    XmlNode copyNode = list[0].Clone();
+            //    if (copyNode.Attributes != null)
+            //    {
+            //        string copyAttr = copyNode.Attributes["style:name"].Value;
+            //        copyNode.Attributes["style:name"].Value = copyAttr.Replace("entry", "entry1");
+            //    }
+            //    string xPath = "//style:paragraph-properties";
+            //    XmlAttribute attribute = xdoc.CreateAttribute("keep-with-next", nsmgr1.LookupNamespace("fo"));
+            //    attribute.Value = "always";
+            //    XmlNode paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
+            //    if (paraAttriblist != null && paraAttriblist.Attributes != null)
+            //        paraAttriblist.Attributes.Append(attribute);
+            //    list[0].ParentNode.AppendChild(copyNode);
+            //}
+
+            string xpath = "//style:style[@style:name='letter_letHead_dicBody']";
             XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
             if (list.Count > 0)
             {
@@ -1249,8 +1268,41 @@ namespace SIL.PublishingSolution
                 XmlNode paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
                 if (paraAttriblist != null && paraAttriblist.Attributes != null)
                     paraAttriblist.Attributes.Append(attribute);
-                list[0].ParentNode.AppendChild(copyNode);
+
+                //attribute = xdoc.CreateAttribute("orphans", nsmgr1.LookupNamespace("fo"));
+                //attribute.Value = "2";
+                //paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
+                //if (paraAttriblist != null && paraAttriblist.Attributes != null)
+                //    paraAttriblist.Attributes.Append(attribute);
+
+
+                attribute = xdoc.CreateAttribute("widows", nsmgr1.LookupNamespace("fo"));
+                attribute.Value = "3";
+                paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
+                if (paraAttriblist != null && paraAttriblist.Attributes != null)
+                    paraAttriblist.Attributes.Append(attribute);
+
+                attribute = xdoc.CreateAttribute("page-number", nsmgr1.LookupNamespace("style"));
+                attribute.Value = "auto";
+                paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
+                if (paraAttriblist != null && paraAttriblist.Attributes != null)
+                    paraAttriblist.Attributes.Append(attribute);
+
+                
+                attribute = xdoc.CreateAttribute("auto-update", nsmgr1.LookupNamespace("style"));
+                attribute.Value = "true";
+                if (copyNode != null && copyNode.Attributes != null)
+                    copyNode.Attributes.Append(attribute);
+
+                attribute = xdoc.CreateAttribute("master-page-name", nsmgr1.LookupNamespace("style"));
+                attribute.Value = "";
+                if (copyNode.Attributes != null) 
+                    copyNode.Attributes.Append(attribute);
+
+                var parentNode = list[0].ParentNode;
+                if (parentNode != null) parentNode.AppendChild(copyNode);
             }
+
             xdoc.PreserveWhitespace = true;
             xdoc.Save(filename);
         }
