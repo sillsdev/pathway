@@ -918,14 +918,15 @@ namespace SIL.PublishingSolution
         private static void PostProcess(PublicationInformation projInfo)
         {
             //InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
-            if (projInfo.ProjectInputType == "Dictionary")
+            if (projInfo.ProjectInputType.ToLower() == "dictionary")
             {
+                InsertKeepWithNextinEntryStyle(projInfo.TempOutputFolder, "styles.xml");
                 //InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
                 //InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
                 //InsertVariableOnLetHead(projInfo.TempOutputFolder);
-                InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
+                //InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             }
-            else if (projInfo.ProjectInputType == "Scripture")
+            else if (projInfo.ProjectInputType.ToLower() == "scripture")
             {
                 InsertChapterNumber(projInfo.TempOutputFolder);
                 //ChangeTitleNameasBookName(projInfo.TempOutputFolder);
@@ -1176,11 +1177,11 @@ namespace SIL.PublishingSolution
             xdoc.Save(filename);
         }
 
-        private static void InsertKeepWithNextForEntryOnCondition(string tempOutputFolder)
-        {
-            DuplicateEntryStyle(tempOutputFolder);
-            RenameContentStyleOnCondition(tempOutputFolder);
-        }
+        //private static void InsertKeepWithNextForEntryOnCondition(string tempOutputFolder)
+        //{
+        //    DuplicateEntryStyle(tempOutputFolder, "style.xml");
+        //   //RenameContentStyleOnCondition(tempOutputFolder);
+        //}
 
         private static void RenameContentStyleOnCondition(string tempFolder)
         {
@@ -1217,11 +1218,10 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// TD-2488
         /// </summary>
-        /// <param name="tempFolder">Temp folder path</param>
-        private static void DuplicateEntryStyle(string tempFolder)
+        /// <param name="directoryPath">File Directory path</param>
+        public static void InsertKeepWithNextinEntryStyle(string directoryPath, string styleFilename)
         {
-
-            string filename = Path.Combine(tempFolder, "styles.xml");
+            string filename = Path.Combine(directoryPath, styleFilename);
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1288,7 +1288,7 @@ namespace SIL.PublishingSolution
                 if (paraAttriblist != null && paraAttriblist.Attributes != null)
                     paraAttriblist.Attributes.Append(attribute);
 
-                
+
                 attribute = xdoc.CreateAttribute("auto-update", nsmgr1.LookupNamespace("style"));
                 attribute.Value = "true";
                 if (copyNode != null && copyNode.Attributes != null)
@@ -1296,7 +1296,7 @@ namespace SIL.PublishingSolution
 
                 attribute = xdoc.CreateAttribute("master-page-name", nsmgr1.LookupNamespace("style"));
                 attribute.Value = "";
-                if (copyNode.Attributes != null) 
+                if (copyNode.Attributes != null)
                     copyNode.Attributes.Append(attribute);
 
                 var parentNode = list[0].ParentNode;
