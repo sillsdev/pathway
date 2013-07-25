@@ -756,6 +756,11 @@ namespace SIL.PublishingSolution
         {
             get { return chkTurnOffFirstVerse; }
         }
+
+        public CheckBox ChkHideSpaceVerseNo
+        {
+            get { return chkHideSpaceVerseNo; }
+        }
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
@@ -1411,6 +1416,12 @@ namespace SIL.PublishingSolution
         {
             EditCSS(sender, e);
             _CToolBL.chkPageBreaks_CheckedChangedBL(sender, e);
+        }
+
+        private void chkHideSpaceVerseNo_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkHideSpaceVerseNo_CheckStateChangedBL(sender, e);
         }
     }
 }

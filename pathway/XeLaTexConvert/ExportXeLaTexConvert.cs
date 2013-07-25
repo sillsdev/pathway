@@ -587,7 +587,12 @@ namespace SIL.PublishingSolution
                 {
                     try
                     {
-                        Common.OpenOutput(pdfFullName);
+                        //Common.OpenOutput(pdfFullName);
+                        if (File.Exists(pdfFullName))
+                        {
+                            pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex");
+                            Common.OpenOutput(pdfFullName);
+                        }
                     }
                     catch { }
                 }
@@ -602,7 +607,12 @@ namespace SIL.PublishingSolution
                 {
                     try
                     {
-                        Common.OpenOutput(pdfFullName);
+                        //Common.OpenOutput(pdfFullName);
+                        if (File.Exists(pdfFullName))
+                        {
+                            pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex");
+                            Common.OpenOutput(pdfFullName);
+                        }
                     }
                     catch (System.ComponentModel.Win32Exception ex)
                     {
