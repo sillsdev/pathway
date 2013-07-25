@@ -2,7 +2,7 @@
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
 &apos;Changed On Jul-25-2013 for TD-3593
-
+Private Declare Sub Sleep Lib &quot;kernel32.dll&quot; (ByVal dwMilliseconds As Long)
 Dim CanSave as Boolean
 
 &apos;This procedure set the dialgue to correct Update References 
@@ -164,6 +164,10 @@ On Error GoTo MyError:
 			Shell(ConvertToURL(FilePathWithName), 1, &quot;&quot;)
 			FilePathWithName = FilePath &amp; &quot;1.&quot; &amp; OutputFormat
 			&apos;msgbox &quot;New File: &quot; &amp; FilePathWithName
+
+			
+			Sleep 3000 &apos; to sleep for 1 second
+
 			oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
 		End If
 		
