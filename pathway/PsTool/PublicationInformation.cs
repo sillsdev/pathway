@@ -59,6 +59,7 @@ namespace SIL.Tool
         private string _DefaultRevCssFileWithPath;
         private string _DefaultCssFileWithPath;
         private string _DefaultXhtmlFileWithPath;
+        private string _hideSpaceVerseNumber;
         private XmlDocument _DeXml = new XmlDocument();
         private bool _fromPlugin = false;
         public string FinalOutput;
@@ -279,6 +280,12 @@ namespace SIL.Tool
         {
             get { return _includeXRefSymbol; }
             set { _includeXRefSymbol = value; }
+        }
+
+        public string HideSpaceVerseNumber
+        {
+            get { return _hideSpaceVerseNumber; }
+            set { _hideSpaceVerseNumber = value; }
         }
 
         public string IncludeFootnoteSymbol

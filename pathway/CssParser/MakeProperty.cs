@@ -640,6 +640,7 @@ namespace SIL.PublishingSolution
                 case "-ps-custom-footnote-caller":
                 case "-ps-custom-xref-caller":
                 case "-ps-hide-versenumber-one":
+                case "-ps-hide-space-versenumber":
                 case "prince-hyphenate-patterns":
                     _cssProperty[styleAttributeInfo.Name] = value;
                     break;

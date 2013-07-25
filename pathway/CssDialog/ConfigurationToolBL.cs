@@ -251,6 +251,16 @@ namespace SIL.PublishingSolution
             }
         }
 
+        public string HideSpaceVerseNumber
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-hide-space-versenumber";
+                return GetValue(task, key, "False");
+            }
+        }
+
         public string MarginBottom
         {
             get
@@ -932,6 +942,7 @@ namespace SIL.PublishingSolution
                             value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
                             value["-ps-custom-XRef-caller"] = "\"" + cTool.TxtXrefCusSymbol.Text + "\"";
                             value["-ps-hide-versenumber-one"] = "\"" + cTool.ChkTurnOffFirstVerse.Checked + "\"";
+                            value["-ps-hide-space-versenumber"] = "\"" + cTool.ChkHideSpaceVerseNo.Checked + "\"";
                         }
                         
                         WriteCssClass(writeCss, "page", value);
@@ -1111,6 +1122,7 @@ namespace SIL.PublishingSolution
                 }
                 //cTool.ChkXrefCusSymbol.Checked = bool.Parse(CustomXRefCaller);
                 cTool.ChkTurnOffFirstVerse.Checked = bool.Parse(HideVerseNumberOne);
+                cTool.ChkHideSpaceVerseNo.Checked = bool.Parse(HideSpaceVerseNumber);
             }
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
@@ -3927,6 +3939,16 @@ namespace SIL.PublishingSolution
                 //_pageBreak = cTool.ChkPageBreaks.Checked;
                 Param.UpdateOthersAtrrib("PageBreak", cTool.ChkPageBreaks.Checked ? "Yes" : "No", StyleName);
                 SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
+        public void chkHideSpaceVerseNo_CheckStateChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //Param.UpdateOthersAtrrib("HideSpaceVerse", cTool.ChkHideSpaceVerseNo.Checked ? "Yes" : "No", StyleName);
+                //SetOthersSummary(sender, e);
             }
             catch { }
         }
