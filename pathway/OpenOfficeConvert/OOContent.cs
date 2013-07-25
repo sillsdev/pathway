@@ -1309,7 +1309,7 @@ namespace SIL.PublishingSolution
                 else
                 {
                     _verseContent.Append(" <text:span text:style-name=\"" + characterStyle + "\">");
-                    if (_projInfo.HideSpaceVerseNumber == "false")
+                    if (_projInfo.HideSpaceVerseNumber.ToLower() == "false")
                     {
                         content = content.Replace("-", "‑") + " ";
                     }

@@ -896,6 +896,7 @@ namespace SIL.PublishingSolution
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
             projInfo.IncludeFootnoteSymbol = inStyles._customFootnoteCaller;
             projInfo.IncludeXRefSymbol = inStyles._customXRefCaller;
+            projInfo.HideSpaceVerseNumber = inStyles._hideSpaceVerseNumber;
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
