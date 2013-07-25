@@ -199,6 +199,9 @@ namespace SIL.PublishingSolution
                     case "-ps-custom-XRef-caller":
                         CustomXrefCaller(property.Value);
                         break;
+                    case "-ps-hide-space-versenumber":
+                        HideSpaceVerseNumber(property.Value);
+                        break;
                     case "pathway":
                         Pathway(property.Value);
                         break;
@@ -241,6 +244,11 @@ namespace SIL.PublishingSolution
         }
 
         private void CustomXrefCaller(string propertyValue)
+        {
+            _IDProperty[_propertyKey] = propertyValue;
+        }
+
+        private void HideSpaceVerseNumber(string propertyValue)
         {
             _IDProperty[_propertyKey] = propertyValue;
         }
@@ -833,7 +841,7 @@ namespace SIL.PublishingSolution
         {
             if (propertyValue == "avoid")
             {
-                _propertyKey = "keep-together";
+                _propertyKey = "keep-with-next";
                 propertyValue = "always";
             }
             else if (propertyValue == "auto")

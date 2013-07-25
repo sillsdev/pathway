@@ -75,7 +75,8 @@ namespace SIL.PublishingSolution
             }
             else if (inputType.ToLower() == "scripture")
             {
-                _writer.WriteAttributeString("text:style-name", "TitleMain_scrBook_scrBody");
+                //_writer.WriteAttributeString("text:style-name", "TitleMain_scrBook_scrBody");
+                _writer.WriteAttributeString("text:style-name", "scrBook_scrBody");
             }
             
             _writer.WriteEndElement();

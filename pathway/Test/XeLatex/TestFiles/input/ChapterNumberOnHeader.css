@@ -1,0 +1,49 @@
+div[lang='zxx']{ font-family: "Charis SIL";}
+span[lang='zxx']{ font-family: "Charis SIL";}
+
+.scrBookCode
+{
+display: none;
+font-size: 12pt;
+font-style: italic;
+font-weight: bold;
+color: #400000;
+}
+
+.scrBookName
+{
+display: none;
+font-size: 12pt;
+font-style: italic;
+color: #400000;
+}
+
+.Chapter_Number
+{
+font-weight: bold;
+font-size: 18pt;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.Verse_Number
+{
+font-size: 12pt;
+vertical-align: super;
+}
+
+
+.Paragraph
+{
+font-size: 12pt;
+text-indent: .125pt;
+}
+
+/* The following formats the scripture text into 2 columns */
+
+.columns {
+	column-count: 2; -moz-column-count: 2;
+	column-gap: 12pt; -moz-column-gap: 12pt;
+	column-fill: balance;
+}
+

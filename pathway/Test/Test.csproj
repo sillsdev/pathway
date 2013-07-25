@@ -1088,7 +1088,7 @@
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'$(OutputPath)\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'$(OutputPath)\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'$(OutputPath)\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'$(OutputPath)\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'$(OutputPath)\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -1100,10 +1100,29 @@
   </Target>
   <Target Name="AfterBuild" />
   <ItemGroup>
-    <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\ConfigurationTool.exe" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\ConfigurationTool.exe.config" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\ConfigurationTool.pdb" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssDialog.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssDialog.pdb" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssParser.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssParser.pdb" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\ICSharpCode.SharpZipLib.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\icu.net.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\LibreOfficeConvert.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\LibreOfficeConvert.pdb" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\LiftPrepare.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\LiftPrepare.pdb" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\Palaso.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfConvert.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfConvert.pdb" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfToImage.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\Prince.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PsTool.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PsTool.pdb" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <GhostScript Include="..\ThirdParty\gsdll32.dll" />
-    <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
+    <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
     <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
     <LiftPrepare Include="..\LiftPrepare\$(OutputPath)\LiftPrepare.*" />

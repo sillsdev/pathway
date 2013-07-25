@@ -548,6 +548,12 @@
     <style:style style:name="Graphics" style:family="graphic">
       <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" />
     </style:style>
+    <style:style style:name="GraphicsI1" style:family="graphic" style:parent-style-name="Graphics1">
+      <style:graphic-properties style:vertical-pos="bottom" style:vertical-rel="page-content" style:horizontal-pos="center" style:horizontal-rel="page" />
+    </style:style>
+    <style:style style:name="GraphicsI2" style:family="graphic" style:parent-style-name="Graphics1">
+      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" />
+    </style:style>
     <style:style style:name="Frame" style:family="graphic">
       <style:graphic-properties text:anchor-type="paragraph" svg:x="0pt" svg:y="0pt" fo:margin-left="0pt" fo:margin-right="0pt" fo:margin-bottom="0pt" fo:margin-top="0pt" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" fo:padding="4.25pt" fo:border="0.06pt solid #000000" />
     </style:style>

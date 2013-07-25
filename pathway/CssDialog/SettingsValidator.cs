@@ -1266,6 +1266,10 @@ namespace SIL.PublishingSolution
                                 oType = node.Attributes["type"].Value;
                             }
                             string path = Common.PathCombine(masterPath, oValue);
+
+                            if (path.ToLower().IndexOf("dictionary") > 0 && oValue.ToLower() == "gobible.css")
+                                return true;
+
                             if (oType != "Custom" && !File.Exists(path) && !File.Exists(Path.Combine(outputPath, oValue)))
                             {
                                 errorTag = methodname;

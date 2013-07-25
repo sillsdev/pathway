@@ -9,11 +9,10 @@
 \usepackage{multicol}
 \usepackage{calc}
 \usepackage{lettrine}
-\usepackage[margin=1cm,includeheadfoot]{geometry}
+\usepackage[left=2cm,right=2cm,top=3.5cm,bottom=3.5cm,includeheadfoot]{geometry}
 
 \begin{document} 
 \pagestyle{plain} 
-\newgeometry{left=2cm, right=2cm, bottom=3.5cm, top=3.5cm}
 \font\scriptureTextscrBody="Times New Roman" at 12pt
 \font\sectionscriptureTextscrBody="Times New Roman" at 12pt
 \font\psectionscriptureTextscrBody="Times New Roman" at 12pt
@@ -21,7 +20,7 @@
 
 \pagestyle{fancy} 
 \begin{adjustwidth}{12pt}{0pt}{12pt}{0pt}
-\psectionscriptureTextscrBody{This is the Header Line}  \footnote {1:1 FootNote Content} \psectionscriptureTextscrBody{ sample text}  \footnote {1:2 second chapter
-                  } \psectionscriptureTextscrBody{Texts are given in default Text}\end{adjustwidth} 
+\psectionscriptureTextscrBody{This is the Header Line} \footnote {\footnotepsectionscriptureTextscrBody{1:1 FootNote Content} } \psectionscriptureTextscrBody{ sample text} \footnote {\footnotepsectionscriptureTextscrBody{1:2 second chapter
+                  } } \psectionscriptureTextscrBody{Texts are given in default Text}\end{adjustwidth} 
 
 \end{document}

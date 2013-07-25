@@ -123,6 +123,7 @@ namespace SIL.PublishingSolution
         protected string _fileProduce = "One";
         protected bool _fixedLineHeight = false;
         protected bool _includeImage = true;
+        protected bool _pageBreak = false;
         protected string _tocLevel = "2 - Book and Chapter";
         protected string _embedFonts = "Yes";
         protected string _includeFontVariants = "Yes";
@@ -246,6 +247,16 @@ namespace SIL.PublishingSolution
             {
                 string task = "@page";
                 string key = "-ps-hide-versenumber-one";
+                return GetValue(task, key, "False");
+            }
+        }
+
+        public string HideSpaceVerseNumber
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-hide-space-versenumber";
                 return GetValue(task, key, "False");
             }
         }
@@ -931,6 +942,7 @@ namespace SIL.PublishingSolution
                             value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
                             value["-ps-custom-XRef-caller"] = "\"" + cTool.TxtXrefCusSymbol.Text + "\"";
                             value["-ps-hide-versenumber-one"] = "\"" + cTool.ChkTurnOffFirstVerse.Checked + "\"";
+                            value["-ps-hide-space-versenumber"] = "\"" + cTool.ChkHideSpaceVerseNo.Checked + "\"";
                         }
                         
                         WriteCssClass(writeCss, "page", value);
@@ -1110,6 +1122,7 @@ namespace SIL.PublishingSolution
                 }
                 //cTool.ChkXrefCusSymbol.Checked = bool.Parse(CustomXRefCaller);
                 cTool.ChkTurnOffFirstVerse.Checked = bool.Parse(HideVerseNumberOne);
+                cTool.ChkHideSpaceVerseNo.Checked = bool.Parse(HideSpaceVerseNumber);
             }
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
@@ -1173,6 +1186,9 @@ namespace SIL.PublishingSolution
                                 break;
                             case "includeimage":
                                 cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
+                                break;
+                            case "pagebreak":
+                                cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
                                 break;
                             case "maximagewidth":
                                 cTool.TxtMaxImageWidth.Text = attribValue;
@@ -1298,6 +1314,10 @@ namespace SIL.PublishingSolution
                 {
                     cTool.DdlFileProduceDict.SelectedItem = FileProduced.ToString();
                     ShowCssSummary();
+                    if (cTool.StylesGrid.RowCount > 0)
+                    {
+                        cTool.TxtCss.Text = cTool.StylesGrid[ColumnDescription, SelectedRowIndex].Value.ToString();
+                    }
                 }
                 SavePropertyValue();
             }
@@ -1750,6 +1770,9 @@ namespace SIL.PublishingSolution
                             case "includeimage":
                                 cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
                                 break;
+                            case "pagebreak":
+                                cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
+                                break;
                             case "maximagewidth":
                                 cTool.TxtMaxImageWidth.Text = attribValue;
                                 break;
@@ -1884,13 +1907,26 @@ namespace SIL.PublishingSolution
         /// <param name="showScriptureControls"></param>
         private void SetEpubUIControls(bool showScriptureControls)
         {
+            
             // show/hide chapter numbers and references UI
             cTool.LblChapterNumbers.Visible = showScriptureControls;
             cTool.DdlChapterNumbers.Visible = showScriptureControls;
             cTool.LblReferences.Visible = showScriptureControls;
             cTool.DdlReferences.Visible = showScriptureControls;
             // set position for embedded font controls (they need to move up if the other items are hidden)
-            cTool.LblEpubFontsSection.Top = (showScriptureControls) ? cTool.DdlReferences.Bottom + 10 : cTool.DdlTocLevel.Bottom + 10;
+
+            if (inputTypeBL.ToLower() == "scripture")
+            {
+                cTool.ChkPageBreaks.Visible = false;
+                cTool.LblEpubFontsSection.Top = (showScriptureControls) ? cTool.DdlReferences.Bottom + 10 : cTool.DdlTocLevel.Bottom + 10;
+            }
+            else
+            {
+                cTool.ChkPageBreaks.Visible = true;
+                cTool.LblEpubFontsSection.Top = (showScriptureControls) ? cTool.DdlReferences.Bottom + 30 : cTool.DdlTocLevel.Bottom + 30;
+            }
+
+            
             cTool.PicFonts.Top = cTool.LblEpubFontsSection.Bottom + 3;
             cTool.ChkEmbedFonts.Top = cTool.PicFonts.Top;
             cTool.ChkIncludeFontVariants.Top = cTool.ChkEmbedFonts.Bottom + 6;
@@ -3838,12 +3874,14 @@ namespace SIL.PublishingSolution
             //_redoundo.Set(Common.Action.Edit, sender); 
         }
 
-        public void txtComment_ValidatedBL(object sender)
+        public void txtComment_ValidatedBL(object sender, bool modified)
         {
             try
             {
-                WriteAttrib(ElementComment, sender);
-                EnableToolStripButtons(true);
+                if (modified)
+                {
+                    WriteAttrib(ElementComment, sender);
+                }
 
             }
             catch { }
@@ -3894,6 +3932,27 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
+        public void chkPageBreaks_CheckedChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //_pageBreak = cTool.ChkPageBreaks.Checked;
+                Param.UpdateOthersAtrrib("PageBreak", cTool.ChkPageBreaks.Checked ? "Yes" : "No", StyleName);
+                SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
+        public void chkHideSpaceVerseNo_CheckStateChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //Param.UpdateOthersAtrrib("HideSpaceVerse", cTool.ChkHideSpaceVerseNo.Checked ? "Yes" : "No", StyleName);
+                //SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
         public void chkIncludeCusFnCaller_CheckedChangedBL(object sender, EventArgs e)
         {
             try
@@ -3937,12 +3996,15 @@ namespace SIL.PublishingSolution
         }
 
 
-        public void txtDesc_ValidatedBL(object sender)
+        public void txtDesc_ValidatedBL(object sender, bool modified)
         {
             try
             {
-                WriteAttrib(ElementDesc, sender);
-                EnableToolStripButtons(true);
+                if (modified)
+                {
+                    WriteAttrib(ElementDesc, sender);
+                    //EnableToolStripButtons(true);
+                }
 
             }
             catch { }

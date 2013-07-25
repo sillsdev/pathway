@@ -6,6 +6,7 @@
     # Author:      Greg Trihus <greg_trihus@sil.org>
     #
     # Created:     2011/11/30
+    # Updated:     2013/06/27 GT - improve copy
     # Copyright:   (c) 2011 SIL International
     # Licence:     <LPGL>
     ################################################################-->
@@ -14,6 +15,18 @@
     
     <xsl:output encoding="UTF-8" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" 
         doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"/>
+    
+    <!-- Recursive copy template -->   
+    <xsl:template match="node() | @*">
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="x:a/@shape"/>
+    <xsl:template match="x:head/@profile"/>
+    <xsl:template match="x:html/@version"/>
+    
     
     <!-- Handle entry and letData element-->
     <xsl:template match="x:div[@class = 'entry' or @class = 'subsubentries']">
@@ -28,14 +41,4 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- Copy unaffected non-span elements-->
-    <xsl:template match="x:html | x:head | x:body | x:span | x:div[@class != 'entry' and @class != 'subsubentries'] | x:link | x:meta | x:a | x:img | x:title | x:style | comment()">
-        <xsl:copy>
-            <xsl:for-each select="@*">
-                <xsl:copy/>
-            </xsl:for-each>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-    
 </xsl:stylesheet>

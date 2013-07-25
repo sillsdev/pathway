@@ -1,0 +1,65 @@
+.letHead {
+    column-count: 1;
+    clear: both;
+}
+.letter {
+    text-align: center;
+    width: 100%;
+    margin-top: 18pt;
+    margin-bottom: 18pt;
+    direction: ltr;
+    font-family: "Doulos SIL", serif;	/* default Serif font */
+    font-weight: bold;
+    font-size: 24pt;
+}
+.letData {
+    column-count: 2;   -moz-column-count: 2;
+    column-gap: 1.5em; -moz-column-gap: 1.5em;
+    column-fill: balance;
+    text-align: left;
+}
+.entry {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 10pt;
+    padding-left: 9pt;
+    text-indent: -36pt;
+    margin-left: 36pt;
+    line-height: normal;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+    counter-reset: sense;
+}
+.letData {
+        column-count: 2;
+        column-fill: balance;
+        column-gap: 18pt;
+        column-rule: solid 1pt #aa0000;
+        text-align: left;
+}
+.letHead {
+        border-bottom: .5pt solid #a00;
+        clear: both;
+        column-count: 1;
+        font-style: normal;
+        font-weight: bold;
+        line-height: 26pt;
+        margin: 18pt 9pt;
+        margin-left: .75in;
+        margin-right: .75in;
+        /* padding-bottom: 36pt; */
+        /* padding-top: 36pt; */
+        text-align: center;
+}
+.letter {
+        direction: ltr;
+        font-size: 18pt;
+        font-weight: bold;
+        margin-bottom: 18pt;
+        margin-top: 18pt;
+        text-align: center;
+        width: 100%;
+		/*page-break-after:avoid;*/
+		page-break-inside:avoid;
+		orphans:5;
+		widows:5;
+}

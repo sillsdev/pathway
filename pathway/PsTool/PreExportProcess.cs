@@ -425,47 +425,48 @@ namespace SIL.Tool
             XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
             xmlAttribute.Value = "title";
             tNode.Attributes.Append(xmlAttribute);
-            tNode.InnerText = Param.GetMetadataValue(Param.Title);
+            tNode.InnerText = Param.GetMetadataCurrentValue(Param.Title);
             mainNode.AppendChild(tNode);
             XmlNode t4Node = xmldoc.CreateElement("div");
             XmlAttribute xmlAttribute2 = xmldoc.CreateAttribute("class");
             xmlAttribute2.Value = "logo";
             t4Node.Attributes.Append(xmlAttribute2);
+            t4Node.InnerText = Common.ReplaceSymbolToText(Param.GetMetadataCurrentValue(Param.Publisher));
 
-            XmlNode t3Node = xmldoc.CreateElement("span");
-            XmlAttribute xmlAttribute1 = xmldoc.CreateAttribute("class");
-            xmlAttribute1.Value = "publisher";
-            t3Node.InnerText = Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher));
-            t3Node.Attributes.Append(xmlAttribute1);
-            t4Node.AppendChild(t3Node);
+            //XmlNode t3Node = xmldoc.CreateElement("span");
+            //XmlAttribute xmlAttribute1 = xmldoc.CreateAttribute("class");
+            //xmlAttribute1.Value = "publisher";
+            //t3Node.InnerText = Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher));
+            //t3Node.Attributes.Append(xmlAttribute1);
+            //t4Node.AppendChild(t3Node);
 
-            XmlNode t5Node = xmldoc.CreateElement("img");
-            XmlAttribute xmlAttribute3 = xmldoc.CreateAttribute("src");
-            XmlAttribute xmlAttribute4 = xmldoc.CreateAttribute("alt");
-            if (Param.GetOrganization().StartsWith("SIL"))
-            {
+            //XmlNode t5Node = xmldoc.CreateElement("img");
+            //XmlAttribute xmlAttribute3 = xmldoc.CreateAttribute("src");
+            //XmlAttribute xmlAttribute4 = xmldoc.CreateAttribute("alt");
+            //if (Param.GetOrganization().StartsWith("SIL"))
+            //{
 
-                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-                {
-                    // dictionary - SIL logo
-                    xmlAttribute3.Value = "sil-bw-logo.jpg";
-                    xmlAttribute4.Value = "SIL International Logo";
-                }
-                else
-                {
-                    // Scripture - WBT logo
-                    xmlAttribute3.Value = "WBT_H_RGB_red.png";
-                    xmlAttribute4.Value = "Wycliffe Logo";
-                }
-            }
-            else if (Param.GetOrganization().StartsWith("Wycliffe"))
-            {
-                xmlAttribute3.Value = "WBT_H_RGB_red.png";
-                xmlAttribute4.Value = "Wycliffe Logo";
-            }
-            t5Node.Attributes.Append(xmlAttribute3);
-            t5Node.Attributes.Append(xmlAttribute4);
-            t4Node.AppendChild(t5Node);
+            //    if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            //    {
+            //        // dictionary - SIL logo
+            //        xmlAttribute3.Value = "sil-bw-logo.jpg";
+            //        xmlAttribute4.Value = "SIL International Logo";
+            //    }
+            //    else
+            //    {
+            //        // Scripture - WBT logo
+            //        xmlAttribute3.Value = "WBT_H_RGB_red.png";
+            //        xmlAttribute4.Value = "Wycliffe Logo";
+            //    }
+            //}
+            //else if (Param.GetOrganization().StartsWith("Wycliffe"))
+            //{
+            //    xmlAttribute3.Value = "WBT_H_RGB_red.png";
+            //    xmlAttribute4.Value = "Wycliffe Logo";
+            //}
+            //t5Node.Attributes.Append(xmlAttribute3);
+            //t5Node.Attributes.Append(xmlAttribute4);
+            //t4Node.AppendChild(t5Node);
             mainNode.AppendChild(t4Node);
             return mainNode;
         }
@@ -1252,7 +1253,7 @@ namespace SIL.Tool
 
                     if (_includeTitleinCoverImage)
                     {
-                        coverTitleNode.InnerText = Param.GetMetadataValue(Param.Title);
+                        coverTitleNode.InnerText = Param.GetMetadataCurrentValue(Param.Title);
                     }
                 }
                 //COVER TITLE
@@ -1306,8 +1307,10 @@ namespace SIL.Tool
                                                    GetCopyrightInfoForLO());
                         Common.StreamReplaceInFile(draftTempFileName, "<h1>", "<span class='LHeading'>");
                         Common.StreamReplaceInFile(draftTempFileName, "</h1>", "</span>");
-                        Common.StreamReplaceInFile(draftTempFileName, "<p><em>", "<span class='LText'>");
-                        Common.StreamReplaceInFile(draftTempFileName, "</em></p>", "</span>");
+                        Common.StreamReplaceInFile(draftTempFileName, "<p>", "<span class='LText'>");
+                        Common.StreamReplaceInFile(draftTempFileName, "</p>", "</span>");
+                        Common.StreamReplaceInFile(draftTempFileName, "<em>", "<span>");
+                        Common.StreamReplaceInFile(draftTempFileName, "</em>", "</span>");
 
                         XmlDocument xDoc = Common.DeclareXMLDocument(false);
                         XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
@@ -1859,17 +1862,17 @@ namespace SIL.Tool
 
                                         string toFileName = Common.PathCombine(tempFolder, counter + ext);
                                         File.Copy(fromFileName, toFileName, true);
-
-                                        if (ext != null && ext.Contains("tif"))
-                                        {
-                                            ext = ".jpg";
-                                            string tiffFileName = toFileName;
-                                            toFileName = Common.ConvertTifftoImage(toFileName, "jpg");
-                                            if (File.Exists(tiffFileName))
-                                            {
-                                                File.Delete(tiffFileName);
-                                            }
-                                        }
+                                        //No need this conversion logic
+                                        //if (ext != null && ext.Contains("tif"))
+                                        //{
+                                        //    ext = ".jpg";
+                                        //    string tiffFileName = toFileName;
+                                        //    toFileName = Common.ConvertTifftoImage(toFileName, "jpg");
+                                        //    if (File.Exists(tiffFileName))
+                                        //    {
+                                        //        File.Delete(tiffFileName);
+                                        //    }
+                                        //}
 
                                         XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
                                         xa.Value = name.Value;
@@ -2661,7 +2664,9 @@ namespace SIL.Tool
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            xDoc.Load(fileName);
+            FileStream fs = File.OpenRead(fileName);
+            xDoc.Load(fs);
+            fs.Close();
             string xPath = "//div[@class='entry']";
             XmlNodeList entryNodes = xDoc.SelectNodes(xPath, namespaceManager);
 
@@ -2842,9 +2847,12 @@ namespace SIL.Tool
         /// <returns></returns>
         public bool GetMultiLanguageHeader()
         {
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary") return false;
             bool isFound = false;
             var xDoc = Common.DeclareXMLDocument(false);
-            xDoc.Load(_xhtmlFileNameWithPath);
+            FileStream fs = File.OpenRead(_xhtmlFileNameWithPath);
+            xDoc.Load(fs);
+            fs.Close();
             XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
             if (nodeList.Count > 0)
             {
@@ -3656,6 +3664,28 @@ namespace SIL.Tool
             }
         }
 
+        public void RemoveDeclaration(string cssFileName, string match)
+        {
+            var sr = new StreamReader(cssFileName);
+            string fileContent = sr.ReadToEnd();
+            sr.Close();
+            int searchPos = fileContent.Length;
+            while (true)
+            {
+                int findTop = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
+                if (findTop == -1)
+                {
+                    break;
+                }
+                int closingbracePos = fileContent.IndexOf("}", findTop) + 1;
+                fileContent = fileContent.Substring(0, findTop) + fileContent.Substring(closingbracePos);
+                searchPos = findTop - 1;
+            }
+            var sw = new StreamWriter(cssFileName);
+            sw.Write(fileContent);
+            sw.Close();
+        }
+
         public void SetDropCapInCSS(string cssFileName)
         {
             TextWriter tw = new StreamWriter(cssFileName, true);
@@ -3803,6 +3833,15 @@ namespace SIL.Tool
             tw.WriteLine("display: none;");
             tw.WriteLine("}");
 
+
+            if (_projInfo.ProjectInputType.ToLower() == "scripture")
+            {
+                tw.WriteLine(".scrBookName {");
+                tw.WriteLine("display: inline;");
+                tw.WriteLine("font-size: 0pt;");
+                //tw.WriteLine("text-indent:5cm;");//padding-left: -5pt;
+                tw.WriteLine("}");
+            }
             tw.Close();
         }
 

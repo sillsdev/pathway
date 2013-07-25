@@ -656,8 +656,143 @@ namespace SIL.PublishingSolution
                 publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
                 returnValue = ExportODT(publicationInfo);
             }
+
+            if (publicationInfo.FinalOutput.ToLower() == "pdf")
+            {
+                IncludeCopyrightForPdf(defaultXhtml);
+            }
             
             return returnValue;
+        }
+
+        /// <summary>
+        /// To insert the ccopyright informations inside the PDF document
+        /// </summary>
+        /// <param name="defaultXhtml"></param>
+        private static void IncludeCopyrightForPdf(string defaultXhtml)
+        {
+            string getPsApplicationPath = Common.GetPSApplicationPath();
+            string licenseXml = Path.Combine(getPsApplicationPath, "Copyrights\\SIL_License.xml");
+            string destLicenseXml = Path.Combine(Path.GetDirectoryName(defaultXhtml), "SIL_License.xml");
+            Param.LoadSettings();
+            string organization;
+            try
+            {
+                organization = Param.Value.ContainsKey("Organization") ? Param.Value["Organization"] : "SIL International";
+            }
+            catch (Exception)
+            {
+                organization = "SIL International";
+            }
+
+            if (File.Exists(destLicenseXml))
+                File.Delete(destLicenseXml);
+
+            File.Copy(licenseXml, destLicenseXml);
+
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            xDoc.PreserveWhitespace = false;
+            xDoc.Load(destLicenseXml);
+
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(xDoc.NameTable);
+            nsmgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+            nsmgr.AddNamespace("xap", "http://ns.adobe.com/xap/1.0/");
+
+            string xPath = "//xap:CreateDate";
+            XmlElement root = xDoc.DocumentElement;
+            if (root != null)
+            {
+                XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+                returnNode.InnerText = DateTime.Now.Date.ToString();
+            }
+
+            xPath = "//xap:CreatorTool";
+            root = xDoc.DocumentElement;
+            if (root != null)
+            {
+                XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+                returnNode.InnerText = "LibreOffice";
+            }
+
+            xPath = "//xap:ModifyDate";
+            root = xDoc.DocumentElement;
+            if (root != null)
+            {
+                XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+                returnNode.InnerText = DateTime.Now.Date.ToString();
+            }
+
+            xPath = "//xap:MetadataDate";
+            root = xDoc.DocumentElement;
+            if (root != null)
+            {
+                XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+                returnNode.InnerText = DateTime.Now.Date.ToString();
+            }
+
+            nsmgr.AddNamespace("pdf", "http://ns.adobe.com/pdf/1.3/");
+
+            xPath = "//pdf:Producer";
+            root = xDoc.DocumentElement;
+            if (root != null)
+            {
+                XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+                returnNode.InnerText = DateTime.Now.Date.ToString();
+            }
+
+            nsmgr.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
+
+            xPath = "//dc:description/rdf:Alt/rdf:li";
+            root = xDoc.DocumentElement;
+            if (root != null)
+            {
+                XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+                returnNode.InnerText = Param.GetMetadataValue(Param.Description, organization);
+            }
+
+            xPath = "//dc:creator/rdf:Seq/rdf:li";
+            root = xDoc.DocumentElement;
+            if (root != null)
+            {
+                XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+                returnNode.InnerText = Param.GetMetadataValue(Param.Creator, organization);
+            }
+
+            xPath = "//dc:title/rdf:Alt/rdf:li";
+            root = xDoc.DocumentElement;
+            if (root != null)
+            {
+                XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+                returnNode.InnerText = Param.GetMetadataValue(Param.Title, organization);
+            }
+
+            xPath = "//dc:rights/rdf:Alt/rdf:li";
+            root = xDoc.DocumentElement;
+            if (root != null)
+            {
+                XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+                returnNode.InnerText = "© " + organization + "® " + DateTime.Now.Year;
+            }
+
+            xDoc.Save(destLicenseXml);
+
+            string sourceJarFile = Path.Combine(getPsApplicationPath, "pdflicensemanager-2.3.jar");
+            string destJarFile = Path.Combine(Path.GetDirectoryName(defaultXhtml), "pdflicensemanager-2.3.jar");
+
+            if (!File.Exists(destJarFile))
+            {
+                File.Copy(sourceJarFile, destJarFile, true);
+            }
+
+            //Creating bat file macro use
+            string pdfFilename = "Preserve" + Path.GetFileNameWithoutExtension(defaultXhtml);
+            StreamWriter sw = new StreamWriter(Common.PathCombine(Path.GetDirectoryName(defaultXhtml), "License.bat"));
+
+            sw.WriteLine("cd " + Path.GetDirectoryName(defaultXhtml));
+            sw.WriteLine("dir");
+            sw.WriteLine("java -jar pdflicensemanager-2.3.jar putXMP " + pdfFilename + ".pdf " + pdfFilename + "1.pdf " +
+                         "SIL_License.xml ");
+            sw.Close();
         }
 
         private void InsertFrontMatter(PublicationInformation projInfo)
@@ -736,7 +871,7 @@ namespace SIL.PublishingSolution
             preProcessor.GetfigureNode();
             preProcessor.GetDefaultLanguage(projInfo);
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
-            preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
+            //preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
             //preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
             //if (_isFromExe)
@@ -761,6 +896,7 @@ namespace SIL.PublishingSolution
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
             projInfo.IncludeFootnoteSymbol = inStyles._customFootnoteCaller;
             projInfo.IncludeXRefSymbol = inStyles._customXRefCaller;
+            projInfo.HideSpaceVerseNumber = inStyles._hideSpaceVerseNumber;
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
@@ -917,18 +1053,19 @@ namespace SIL.PublishingSolution
 
         private static void PostProcess(PublicationInformation projInfo)
         {
-            InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
-            if (projInfo.ProjectInputType == "Dictionary")
+            //InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
+            if (projInfo.ProjectInputType.ToLower() == "dictionary")
             {
-                InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
-                InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
-                InsertVariableOnLetHead(projInfo.TempOutputFolder);
-                InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
+                InsertKeepWithNextinEntryStyle(projInfo.TempOutputFolder, "styles.xml");
+                //InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
+                //InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
+                //InsertVariableOnLetHead(projInfo.TempOutputFolder);
+                //InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             }
-            else if (projInfo.ProjectInputType == "Scripture")
+            else if (projInfo.ProjectInputType.ToLower() == "scripture")
             {
                 InsertChapterNumber(projInfo.TempOutputFolder);
-                ChangeTitleNameasBookName(projInfo.TempOutputFolder);
+                //ChangeTitleNameasBookName(projInfo.TempOutputFolder);
                 ContentPostProcess(projInfo.TempOutputFolder);
             }
         }
@@ -936,9 +1073,11 @@ namespace SIL.PublishingSolution
         public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
         {
             string filename = Path.Combine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -1015,19 +1154,20 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
+                xdoc.PreserveWhitespace = true;
+                xdoc.Save(filename);
             }
-
-            xdoc.PreserveWhitespace = true;
-            xdoc.Save(filename);
         }
 
         public static void ContentPostProcess(string tempOutputFolder)
         {
             
             string filename = Path.Combine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -1139,9 +1279,11 @@ namespace SIL.PublishingSolution
         public static void ChangeTitleNameasBookName(string tempOutputFolder)
         {
             string filename = Path.Combine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -1171,18 +1313,20 @@ namespace SIL.PublishingSolution
             xdoc.Save(filename);
         }
 
-        private static void InsertKeepWithNextForEntryOnCondition(string tempOutputFolder)
-        {
-            DuplicateEntryStyle(tempOutputFolder);
-            RenameContentStyleOnCondition(tempOutputFolder);
-        }
+        //private static void InsertKeepWithNextForEntryOnCondition(string tempOutputFolder)
+        //{
+        //    DuplicateEntryStyle(tempOutputFolder, "style.xml");
+        //   //RenameContentStyleOnCondition(tempOutputFolder);
+        //}
 
         private static void RenameContentStyleOnCondition(string tempFolder)
         {
             string filename = Path.Combine(tempFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -1210,21 +1354,41 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// TD-2488
         /// </summary>
-        /// <param name="tempFolder">Temp folder path</param>
-        private static void DuplicateEntryStyle(string tempFolder)
+        /// <param name="directoryPath">File Directory path</param>
+        public static void InsertKeepWithNextinEntryStyle(string directoryPath, string styleFilename)
         {
-
-            string filename = Path.Combine(tempFolder, "styles.xml");
-            XmlDocument xdoc = new XmlDocument();
+            string filename = Path.Combine(directoryPath, styleFilename);
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
             nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
 
-            string xpath = "//style:style[@style:name='entry_letData_dicBody']";
+            //string xpath = "//style:style[@style:name='entry_letData_dicBody']";
+            //XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
+            //if (list.Count > 0)
+            //{
+            //    XmlNode copyNode = list[0].Clone();
+            //    if (copyNode.Attributes != null)
+            //    {
+            //        string copyAttr = copyNode.Attributes["style:name"].Value;
+            //        copyNode.Attributes["style:name"].Value = copyAttr.Replace("entry", "entry1");
+            //    }
+            //    string xPath = "//style:paragraph-properties";
+            //    XmlAttribute attribute = xdoc.CreateAttribute("keep-with-next", nsmgr1.LookupNamespace("fo"));
+            //    attribute.Value = "always";
+            //    XmlNode paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
+            //    if (paraAttriblist != null && paraAttriblist.Attributes != null)
+            //        paraAttriblist.Attributes.Append(attribute);
+            //    list[0].ParentNode.AppendChild(copyNode);
+            //}
+
+            string xpath = "//style:style[@style:name='letter_letHead_dicBody']";
             XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
             if (list.Count > 0)
             {
@@ -1240,8 +1404,41 @@ namespace SIL.PublishingSolution
                 XmlNode paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
                 if (paraAttriblist != null && paraAttriblist.Attributes != null)
                     paraAttriblist.Attributes.Append(attribute);
-                list[0].ParentNode.AppendChild(copyNode);
+
+                //attribute = xdoc.CreateAttribute("orphans", nsmgr1.LookupNamespace("fo"));
+                //attribute.Value = "2";
+                //paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
+                //if (paraAttriblist != null && paraAttriblist.Attributes != null)
+                //    paraAttriblist.Attributes.Append(attribute);
+
+
+                attribute = xdoc.CreateAttribute("widows", nsmgr1.LookupNamespace("fo"));
+                attribute.Value = "3";
+                paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
+                if (paraAttriblist != null && paraAttriblist.Attributes != null)
+                    paraAttriblist.Attributes.Append(attribute);
+
+                attribute = xdoc.CreateAttribute("page-number", nsmgr1.LookupNamespace("style"));
+                attribute.Value = "auto";
+                paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
+                if (paraAttriblist != null && paraAttriblist.Attributes != null)
+                    paraAttriblist.Attributes.Append(attribute);
+
+
+                attribute = xdoc.CreateAttribute("auto-update", nsmgr1.LookupNamespace("style"));
+                attribute.Value = "true";
+                if (copyNode != null && copyNode.Attributes != null)
+                    copyNode.Attributes.Append(attribute);
+
+                attribute = xdoc.CreateAttribute("master-page-name", nsmgr1.LookupNamespace("style"));
+                attribute.Value = "";
+                if (copyNode.Attributes != null)
+                    copyNode.Attributes.Append(attribute);
+
+                var parentNode = list[0].ParentNode;
+                if (parentNode != null) parentNode.AppendChild(copyNode);
             }
+
             xdoc.PreserveWhitespace = true;
             xdoc.Save(filename);
         }
@@ -1285,9 +1482,11 @@ namespace SIL.PublishingSolution
         {
 
             string filename = Path.Combine(tempFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
-            xdoc.Load(filename);
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -1332,8 +1531,11 @@ namespace SIL.PublishingSolution
         {
 
             string filename = Path.Combine(tempFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
+            FileStream fs = File.OpenRead(filename);
+            xdoc.Load(fs);
+            fs.Close();
             xdoc.Load(filename);
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);

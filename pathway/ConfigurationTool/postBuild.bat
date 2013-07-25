@@ -5,7 +5,7 @@ set base2=..\..\..\..
 set cfg2=bin\x86\%1
 :anyCpu
 xcopy %base2%\ThirdParty\gsdll32.dll . /y
-xcopy %base2%\ThirdParty\epubcheck-1.2\* .\epubcheck-1.2  /i /s /q /y
+xcopy %base2%\PsSupport\epubcheck-3.0.1\* .\epubcheck-3.0.1  /i /s /q /y
 xcopy %base2%\LiftPrepare\Lib\PalasoLib\*.dll . /y
 xcopy %base2%\HelpImprove\%cfg2%\HelpImprove.* . /y
 xcopy %base2%\PathwayB\%cfg2%\PathwayB.* . /y

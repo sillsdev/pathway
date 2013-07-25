@@ -1,0 +1,15 @@
+.pictureRight {
+    float: right;
+    margin: 0pt 0pt 4pt 4pt;
+    padding: 2pt;
+    text-indent: 0pt;
+    text-align: center;
+}
+.picture {
+    height: 1.0in;
+}
+
+.pictureRight {
+    display: block;
+}
+

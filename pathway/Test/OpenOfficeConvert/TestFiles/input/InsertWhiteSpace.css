@@ -1,0 +1,268 @@
+div[lang='zxx']{ font-family: "Charis SIL";}
+span[lang='zxx']{ font-family: "Charis SIL";}
+
+.id
+{
+font-size: 12pt;
+}
+
+.ide
+{
+font-size: 12pt;
+}
+
+.h
+{
+font-size: 12pt;
+}
+
+.h1
+{
+font-size: 12pt;
+}
+
+.h2
+{
+font-size: 12pt;
+}
+
+.h3
+{
+font-size: 12pt;
+}
+
+.scrBookCode
+{
+display: none;
+font-size: 12pt;
+font-style: italic;
+font-weight: bold;
+color: #400000;
+}
+
+.scrBookName
+{
+display: none;
+font-size: 12pt;
+font-style: italic;
+color: #400000;
+}
+
+
+@page {
+    -ps-positionchapternumbers-string: "Drop Capital";
+    -ps-IncludeVersenumber-string: "True";
+    -ps-IncludeVerseInHeaderReferences-string:"yes";
+    ps-NonConsecutiveReferenceSeparator-string:",";
+}
+
+
+.Chapter_Number {
+    font-weight: bolder;
+    vertical-align: top;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-right: 2pt;
+    float: left;
+    string-set: chapter content() ":";
+}
+
+.Paragraph {
+    text-indent: 12pt;
+    margin-left: 0pt;
+	orphans: 2;
+    widows:2;
+}
+
+.scrBody {
+}
+.scrBook {
+    column-count: 1;
+    clear: both;
+}
+.scrBookCode {
+    display: none;
+}
+.scrBookName {
+    string-set: bookname content();
+    display: none;
+}
+.scrIntroSection {
+    text-align: left;
+}
+.scrSection {
+    text-align: left;
+}
+
+.Verse_Number {
+    font-size:6pt;
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: verse content();
+}
+
+@page {
+    size: 5.25in 8.25in;
+    margin: .5in;
+    counter-increment: page;
+}
+
+/* The following formats the scripture text into 2 columns */
+
+.columns {
+	column-count: 2; -moz-column-count: 2;
+	column-gap: 12pt; -moz-column-gap: 12pt;
+	column-fill: balance;
+}
+
+.Chapter_Number {
+    color: rgb(0,0,0);
+}
+
+.Emphasis {
+    color: rgb(0,0,0);
+}
+
+
+
+.Chapter_Number {
+    font-size: 250%;
+}
+
+
+.Paragraph {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+
+.Verse_Number {
+    font-size: 6pt;
+}
+
+
+@page :left {
+    
+
+@top-left {
+           
+content: string( guideword, first);
+           
+direction: ltr;
+           
+           
+font-size: 12pt;
+               }
+  
+
+  
+@top-center    { content: ''; }
+    
+
+@top-right  { content: ''; }
+    
+
+
+@bottom-left   { content: ''; }
+    
+@bottom-center { content: ''; }
+    
+@bottom-right  { content: ''; }
+}
+
+
+
+@page :right {
+    
+@top-left   { content: ''; }
+    
+@top-center { content: ''; }
+    
+
+@top-right  {
+           
+content: string( guideword, last);
+           
+direction: ltr;
+                      
+font-size: 12pt;
+               }
+    
+
+
+@bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+
+
+
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :left {
+    @top-left {
+        -ps-referenceFormat: "Genesis 1:1";
+        content: string(bookname, first) " "  string(chapter, first) string(verse, first);
+    }
+    @top-center { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left { content: ''; }
+    @top-center { content: ''; }
+    @top-right     {
+        -ps-referenceFormat: "Genesis 1:1";
+        content: string(bookname, last) " "  string(chapter, last) string(verse, last);
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+/* Page number  Top Inside.css */
+@page :left {
+    @top-right {
+          content: counter( page);
+    }
+}
+
+@page :right {
+    @top-left {
+           content: counter( page);
+    }
+}
+
+
+
+.border {
+    border-top: .5pt solid #808080;
+    text-align: center;
+    margin-left: 1in;
+    margin-right: 1in;
+    margin-top: 9pt;
+    margin-bottom: 18pt;
+    content: "\00A0";
+}
+.columns {
+       column-rule: solid 1pt #808080;
+}
+
+

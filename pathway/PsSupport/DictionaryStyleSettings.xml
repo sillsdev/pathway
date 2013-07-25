@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="29">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="31">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -367,9 +367,10 @@
         <styleProperty name="Contributor" value=" " />
         <styleProperty name="Relation" value=" " />
         <styleProperty name="Coverage" value=" " />
-		<styleProperty name="IncludeImage" value="Yes" />
+		<styleProperty name="IncludeImage" value="Yes" />		
         <styleProperty name="Information" value="DRAFT Dictionary." />
         <styleProperty name="Copyright" value="© 2013 SIL International®." />
+		<styleProperty name="PageBreak" value="No" />
       </style>
     </others>
   </styles>
@@ -408,8 +409,8 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2012_x0020_SIL_x0020_International_x00AE_.</organizationDefault>
-      <defaultValue>_x00A9__x0020_2012_x0020_SIL_x0020_International_x00AE_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2013_x0020_SIL_x0020_International_x00AE_.</organizationDefault>
+      <defaultValue>_x00A9__x0020_2013_x0020_SIL_x0020_International_x00AE_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
     </meta>
     <meta name="Type" outputTypes="all">
       <defaultValue></defaultValue>

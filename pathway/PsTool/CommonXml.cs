@@ -271,7 +271,7 @@ namespace SIL.Tool
                 string metaName = node.Attributes[0].Value;
                 if (metaDataList.Contains(metaName))
                 {
-                    _metaDataDic[metaName] = node.LastChild.InnerText;
+                    _metaDataDic[metaName] = XmlConvert.DecodeName(node.LastChild.InnerText.Trim());
                 }
             }
             return _metaDataDic;
