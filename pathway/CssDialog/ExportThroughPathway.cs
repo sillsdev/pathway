@@ -1194,11 +1194,11 @@ namespace SIL.PublishingSolution
 
         private void ddlStyle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _publicationName = ddlStyle.Text;
-            txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, ddlStyle.Text);
+            _publicationName = ddlStyle.Text.Replace(" ", "_");
+            txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, ddlStyle.Text.Replace(" ", "_"));
             if (_newSaveInFolderPath.Length > 0)
             {
-                txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + ddlStyle.Text + "_" + _sDateTime;
+                txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + ddlStyle.Text.Replace(" ", "_") + "_" + _sDateTime;
             }
         }
 
