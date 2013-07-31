@@ -448,7 +448,8 @@ namespace SIL.PublishingSolution
             // copyright holder
             if (_settingsHelper.Value.TryGetValue("Copyright", out valueFromSettings))
             {
-                CopyrightHolder = valueFromSettings;
+                //CopyrightHolder = valueFromSettings;
+                CopyrightHolder = Param.GetMetadataValue(Param.CopyrightHolder, Organization);
             }
         }
 
