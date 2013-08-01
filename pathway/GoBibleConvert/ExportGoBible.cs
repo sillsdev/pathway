@@ -350,11 +350,6 @@ namespace SIL.PublishingSolution
         /// <param name="goBibleCreatorPath"></param>
         protected void BuildApplication(string goBibleCreatorPath)
         {
-            if (Directory.Exists(processFolder))
-            {
-                Directory.Move(processFolder, processFolder.Replace("Go Bible", "GoBible"));
-            }
-            processFolder = processFolder.Replace("Go Bible", "GoBible");
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
             var creatorFullPath = Path.Combine(goBibleCreatorPath, Creator);
