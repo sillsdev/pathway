@@ -95,6 +95,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XslProcess", "XslProcess\Xs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictionaryForMIDsConvert", "DictionaryForMIDsConvert\DictionaryForMIDsConvert.csproj", "{D4AFCA5B-4C8A-4478-A08F-75540BE0D3B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplyPDFLicenseInfo", "ApplyPDFLicenseInfo\ApplyPDFLicenseInfo.csproj", "{2B00A4D8-D9C7-4F7F-9CC8-776C9B84AD9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Checking|Any CPU = Checking|Any CPU
@@ -1188,7 +1190,7 @@ Global
 		{D4AFCA5B-4C8A-4478-A08F-75540BE0D3B0}.Release7SE|Any CPU.ActiveCfg = Release7SE|Any CPU
 		{D4AFCA5B-4C8A-4478-A08F-75540BE0D3B0}.Release7SE|Any CPU.Build.0 = Release7SE|Any CPU
 		{D4AFCA5B-4C8A-4478-A08F-75540BE0D3B0}.Release7SE|x86.ActiveCfg = Release7SE|x86
-		{D4AFCA5B-4C8A-4478-A08F-75540BE0D3B0}.Release7SE|x86.Build.0 = Release7SE|x86
+		{D4AFCA5B-4C8A-4478-A08F-75540BE0D3B0}.Release7SE|x86.Build.0 = Release7SE|x86		
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

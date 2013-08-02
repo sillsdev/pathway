@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jul-26-2013 for TD-3596
-Private Declare Sub Sleep Lib &quot;kernel32.dll&quot; (ByVal dwMilliseconds As Long)
+&apos;Changed On Aug-02-2013 for TD-3601
+
 Dim CanSave as Boolean
 
 &apos;This procedure set the dialgue to correct Update References 
@@ -123,17 +123,13 @@ On Error GoTo MyError:
 			Shell(&quot;xdg-open &quot; + FileName)
 		Else
 			oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
-			
 		  	MyArray = Split(FilePath,&quot;\&quot;)
-		  	FileName =  MyArray(UBound(MyArray)) + &quot;.pdf&quot;
-			FilePathWithName = Replace(FilePathWithName,FileName,&quot;License.bat&quot;)
-			&apos;msgbox &quot;Batch File: &quot; &amp; FilePathWithName
-			Shell(ConvertToURL(FilePathWithName), 1, &quot;&quot;)
-			&apos;FilePathWithName = FilePath &amp; &quot;1.&quot; &amp; OutputFormat
-			FilePathWithName = FilePath &amp; &quot;1.&quot; &amp; OutputFormat
-			Sleep 3000 &apos; to sleep for 1 second
-						
-			oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
+		  	FileName =  MyArray(UBound(MyArray))
+			FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;ApplyPDFLicenseInfo.exe&quot;)
+			&apos;msgbox FilePathWithName  			  			 
+			oSvc.execute(ConvertToURL(FilePathWithName), &quot;&quot;, 1)
+			
+			&apos;oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
 		End If
 	End If
 

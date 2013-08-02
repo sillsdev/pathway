@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jul-25-2013 for TD-3593
-Private Declare Sub Sleep Lib &quot;kernel32.dll&quot; (ByVal dwMilliseconds As Long)
+&apos;Changed On Aug-02-2013 for TD-3601
+
 Dim CanSave as Boolean
 
 &apos;This procedure set the dialgue to correct Update References 
@@ -145,30 +145,11 @@ On Error GoTo MyError:
 			Shell(&quot;xdg-open &quot; + FileName)
 		Else
 			oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
-		&apos;	msgbox FilePathWithName 
-    		&apos;oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
-			&apos;oSvc.execute(ConvertToUrl(&quot;C:\Users\James\Documents\Publications\Buang-Test\Dictionary\FieldWorksA4Styles_2013-07-24_122410\Batch.bat&quot;), &quot;&quot;, 0) 
-			&apos;Call Shell(Environ$(&quot;COMSPEC&quot;) &amp; &quot; /c C:\Users\James\Documents\Publications\Buang-Test\Dictionary\FieldWorksA4Styles_2013-07-24_122410\Batch.bat&quot;, vbNormalFocus)
-			
-			&apos;oSvc.execute(&quot;Batch.bat&quot;)
-			&apos;oSvc.execute(&quot;C:\Users\James\Documents\Publications\Buang-Test\Dictionary\FieldWorksA4Styles_2013-07-24_122410\Batch.bat&quot;, &quot;&quot;, 0) 
-			&apos;oSvc.execute(&quot;java -jar pdflicensemanager-2.3.jar putXMP Preservemain.pdf Amain1.pdf xmpLicense4.xml&quot;, &quot;&quot;, 0) 
-			&apos;Shell(ConvertToURL(&quot;C:\Users\James\Documents\Publications\Buang-Test\Dictionary\FieldWorksA4Styles_2013-07-24_122410\Batch.bat&quot;), 1, &quot;&gt;D:\temp\result.txt&quot;)
-
 		  	MyArray = Split(FilePath,&quot;\&quot;)
-		  	FileName =  MyArray(UBound(MyArray)) + &quot;.pdf&quot;
-			&apos;msgbox &quot;File Name &quot; &amp; FileName
-			
-			FilePathWithName = Replace(FilePathWithName,FileName,&quot;License.bat&quot;)
-			&apos;msgbox &quot;Batch File: &quot; &amp; FilePathWithName
-			Shell(ConvertToURL(FilePathWithName), 1, &quot;&quot;)
-			FilePathWithName = FilePath &amp; &quot;1.&quot; &amp; OutputFormat
-			&apos;msgbox &quot;New File: &quot; &amp; FilePathWithName
-
-			
-			Sleep 3000 &apos; to sleep for 1 second
-
-			oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
+		  	FileName =  MyArray(UBound(MyArray))
+			FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;ApplyPDFLicenseInfo.exe&quot;)
+			&apos;msgbox FilePathWithName  			  			 
+			oSvc.execute(ConvertToURL(FilePathWithName), &quot;&quot;, 1)
 		End If
 		
 &apos;		java -jar pdflicensemanager-2.3.jar putXMP Preservemain.pdf new.pdf xmpLicense4.xml
