@@ -139,7 +139,8 @@ namespace SIL.PublishingSolution
                     if (dialogResult == DialogResult.Yes)
                     {
                         string dirPath = Path.GetDirectoryName(jarFile);
-                        Process.Start("explorer.exe", dirPath);
+                        Process.Start(dirPath);
+                        //Process.Start("explorer.exe", dirPath);
                     }
 
                 }
