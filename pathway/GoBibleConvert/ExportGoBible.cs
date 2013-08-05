@@ -133,8 +133,15 @@ namespace SIL.PublishingSolution
                 if (File.Exists(jarFile))
                 {
                     // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
-                    string msg = string.Format("Please copy the file {0} to your phone", jarFile);
-                    MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string msg = string.Format("Please copy the file {0} to your phone.\n\nDo you want to open the folder?", jarFile);
+                    DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        string dirPath = Path.GetDirectoryName(jarFile);
+                        Process.Start("explorer.exe", dirPath);
+                    }
+
                 }
                 else
                 {
