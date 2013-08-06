@@ -405,7 +405,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "secondary title font size", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleSecondary_TitleMain_scrBook_scrBody']//@fo:font-size", "16pt"),
                 new ODet(ODet.Chk, "secondary title complex font size", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleSecondary_TitleMain_scrBook_scrBody']//@style:font-size-complex", "16pt"),
                 new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics1']//@style:vertical-pos", "from-top"),
-                new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='Graphics1']//@xlink:href", "Pictures/2.jpg"),
+                new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='Graphics1']//@xlink:href", "Pictures/2.tif"),
             };
 
             ExportTest("T4", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);

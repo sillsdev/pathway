@@ -275,7 +275,7 @@ namespace SIL.PublishingSolution
             }
             using (StreamWriter sw = new StreamWriter(fileLoc))
             {
-                var info = "Bible text exported from Paratext.";
+                var info = "Bible text exported from Paratext, " + GetInfo(Param.CopyrightHolder);
                 sw.WriteLine("Info: " + info);
                 sw.WriteLine(@"Source-Text: \SFM");
                 sw.WriteLine("Source-Format: usfm");
@@ -283,6 +283,7 @@ namespace SIL.PublishingSolution
                 sw.WriteLine("Phone-Icon-Filepath: Icon.png");
                 sw.WriteLine("Application-Name: " + GetInfo(Param.Title));
                 sw.WriteLine("MIDlet-Vendor: " + GetInfo(Param.Title) + " Vendor");
+                sw.WriteLine("MIDlet-Description: " + " Sample text for GoBible description");
                 sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org");
                 sw.WriteLine("Codepage: UTF-8");
                 sw.WriteLine("RedLettering: false");
