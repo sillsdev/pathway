@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Aug-02-2013 for TD-3601
+&apos;Changed On Aug-06-2013 for TD-3601
 
 Dim CanSave as Boolean
 
@@ -139,20 +139,24 @@ On Error GoTo MyError:
    	oDoc.storeToURL(fileURL, Array(MakePropertyValue(&quot;FilterName&quot;,filterType)) 
 
 	If Lcase(IsPreview) = &quot;false&quot; And Len(Trim(FilePath)) &gt; 4  Then
+		oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
 		If(mid(FilePath,1,5) = &quot;/home&quot;) Then
 		  	MyArray = Split(FilePath,&quot;/&quot;)
-		  	FileName =  MyArray(UBound(MyArray)) + &quot;.pdf&quot;
-			Shell(&quot;xdg-open &quot; + FileName)
+		  	FileName =  MyArray(UBound(MyArray))
+			FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;ApplyPDFLicenseInfo.exe&quot;)
+			Shell(&quot;chmod a+x &quot; &amp; FilePathWithName, &quot;&quot;,1)
+			Shell(ConvertToURL(FilePathWithName), &quot;&quot;,1)
+			&apos;Shell(&quot;xdg-open &quot; + FilePathWithName)
+
 		Else
-			oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
 		  	MyArray = Split(FilePath,&quot;\&quot;)
 		  	FileName =  MyArray(UBound(MyArray))
 			FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;ApplyPDFLicenseInfo.exe&quot;)
-			&apos;msgbox FilePathWithName  			  			 
+			  			 
 			oSvc.execute(ConvertToURL(FilePathWithName), &quot;&quot;, 1)
+			
+			&apos;oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
 		End If
-		
-&apos;		java -jar pdflicensemanager-2.3.jar putXMP Preservemain.pdf new.pdf xmpLicense4.xml
 	End If
 
 	&apos;msgbox(&quot;dispose&quot;)
