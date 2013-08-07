@@ -672,8 +672,8 @@ namespace SIL.PublishingSolution
                     _tocStartingPage = content;
                     _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
                     TocPageStock++;
-                    _toc.Add("PageStock_" + TocPageStock.ToString(), "\\" + _childName + "{" + _tocStartingPage + "}");
-                    _xetexFile.Write("\r\n \\label{PageStock_" + TocPageStock.ToString() + "} ");
+                    _toc.Add("PageStock_" + _dicMainReversal + TocPageStock.ToString(), "\\" + _childName + "{" + _tocStartingPage + "}");
+                    _xetexFile.Write("\r\n \\label{PageStock_" + _dicMainReversal + TocPageStock.ToString() + "} ");
                 }
 
 
