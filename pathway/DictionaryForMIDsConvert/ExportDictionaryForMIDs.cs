@@ -120,6 +120,7 @@ namespace SIL.PublishingSolution
             inProcess.Close();
             Environment.CurrentDirectory = curdir;
             Cursor.Current = myCursor;
+            Common.CleanupExportFolder(curdir);
             return success;
         }
 

@@ -201,6 +201,7 @@ namespace SIL.PublishingSolution
                     if (!Common.Testing)
                         Process.Start(pdfFIleName);
                     Environment.CurrentDirectory = curdir;
+                    Common.CleanupExportFolder(Environment.CurrentDirectory);
                     success = true;
                 }
                 else
