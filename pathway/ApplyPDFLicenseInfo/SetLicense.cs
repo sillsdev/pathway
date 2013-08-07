@@ -102,7 +102,59 @@ namespace ApplyPDFLicenseInfo
             string returnPath = path.Replace('/', Path.DirectorySeparatorChar);
             returnPath = returnPath.Replace('\\', Path.DirectorySeparatorChar);
             return returnPath;
+        }
 
+        public static bool UnixVersionCheck()
+        {
+            bool isRecentVersion = false;
+            try
+            {
+                string getOSName = GetOsName();
+                string majorVersion = string.Empty;
+                if (getOSName.IndexOf("Unix") >= 0)
+                {
+                    isRecentVersion = true;
+                    majorVersion = getOSName.Substring(0, 11);
+                }
+                if (majorVersion == "Unix 3.2.0.")
+                {
+                    isRecentVersion = true;
+                }
+            }
+            catch { }
+            return isRecentVersion;
+        }
+
+        public static string GetOsName()
+        {
+            OperatingSystem osInfo = Environment.OSVersion;
+
+            switch (osInfo.Platform)
+            {
+                case System.PlatformID.Win32NT:
+                    switch (osInfo.Version.Major)
+                    {
+                        case 3:
+                            return "Windows NT 3.51";
+                            break;
+                        case 4:
+                            return "Windows NT 4.0";
+                            break;
+                        case 5:
+                            if (osInfo.Version.Minor == 0)
+                                return "Windows 2000";
+                            else
+                                return "Windows XP";
+                            break;
+                        case 6:
+                            if (osInfo.Version.Minor == 1)
+                                return "Windows7";
+                            break;
+                    }
+                    break;
+
+            }
+            return osInfo.VersionString.ToString();
         }
     }
 }

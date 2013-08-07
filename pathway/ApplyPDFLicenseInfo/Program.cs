@@ -11,58 +11,71 @@ namespace ApplyPDFLicenseInfo
     {
         static void Main(string[] args)
         {
-            // Console.WriteLine("running.....");
-
+            bool isUnix = false;
+            Console.WriteLine("running.....");
             //Thread.Sleep(2500);
-
             string allUserPath = GetAllUserPath();
-            var executePath = ReadPathinLicenseFile(allUserPath);
+            string executePath = ReadPathinLicenseFile(allUserPath);
+            //Console.WriteLine(executePath);
             string pdfFileName = string.Empty;
-            string[] pdfFiles = Directory.GetFiles(executePath, "*.pdf");
+            string[] pdfFiles = Directory.GetFiles(executePath +"/", "*.pdf");
             string getFileName = string.Empty;
             string getCopyrightPdfFileName = string.Empty;
-
-            //   Console.WriteLine(pdfFiles.Length.ToString());
-
-            //  Thread.Sleep(2500);
-
-            //   Console.WriteLine(pdfFiles[0].ToString());
-
-            //    Thread.Sleep(500);
-
+            //Console.WriteLine(pdfFiles.Length.ToString());
+            //Thread.Sleep(2500);
+            //Console.WriteLine(pdfFiles[0].ToString());
+            //Thread.Sleep(500);
             if (pdfFiles.Length > 0)
             {
                 pdfFileName = pdfFiles[0];
-
-                //   Console.WriteLine("pdfFileName = pdfFiles[0];");
+            //    Console.WriteLine("pdfFileName = pdfFiles[0];");
             }
             if (pdfFileName != string.Empty || pdfFileName != null)
             {
                 getFileName = Path.GetFileName(pdfFileName);
-                //     Console.WriteLine("getFileName = Path.GetFileName(pdfFileName);");
-
-                //    Console.WriteLine(getFileName);
-
+             //   Console.WriteLine("getFileName = Path.GetFileName(pdfFileName);");
+             //   Console.WriteLine(getFileName);
                 if (File.Exists(pdfFileName))
                 {
+                    isUnix = SetLicense.UnixVersionCheck();
 
-                    Console.WriteLine(getFileName.ToString());
-                    Console.WriteLine("Java Command Executing");
+                    if (isUnix)
+                    {
+                        Console.WriteLine(getFileName.ToString());
+                        Console.WriteLine("Java Command Executing");
 
-                    getCopyrightPdfFileName = getFileName.Replace(".pdf", "1.pdf");
-                    string argumentValue = "-jar pdflicensemanager-2.3.jar putXMP " + getFileName.ToString() + " " +
-                                           getCopyrightPdfFileName + " SIL_License.xml";
-                    Console.WriteLine(argumentValue.ToString());
-                    SetLicense.RunCommand(executePath, "java", argumentValue, true);
+                        getCopyrightPdfFileName = getFileName.Replace(".pdf", "1.pdf");
+                        string argumentValue = "-jar 'pdflicensemanager-2.3.jar' 'putXMP' '" + getFileName.ToString() + "' '" +
+                                               getCopyrightPdfFileName + "' 'SIL_License.xml'";
+                        Console.WriteLine(argumentValue.ToString());
+                        SetLicense.RunCommand(executePath, "java", argumentValue, true);
 
-                    Console.WriteLine(executePath.ToString());
+                        Console.WriteLine(executePath.ToString());
 
-                    //      Thread.Sleep(1500);
-                    Console.WriteLine("Java Command Executed");
-                    Console.WriteLine("Done");
+                        //Thread.Sleep(1500);
+                        Console.WriteLine("Java Command Executed");
+                        Console.WriteLine("Done");
+                    }
+                    else
+                    {
+                        Console.WriteLine(getFileName.ToString());
+                        Console.WriteLine("Java Command Executing");
+
+                        getCopyrightPdfFileName = getFileName.Replace(".pdf", "1.pdf");
+                        string argumentValue = "-jar pdflicensemanager-2.3.jar putXMP " + getFileName.ToString() + " " +
+                                               getCopyrightPdfFileName + " SIL_License.xml";
+                        Console.WriteLine(argumentValue.ToString());
+                        SetLicense.RunCommand(executePath, "java", argumentValue, true);
+
+                        Console.WriteLine(executePath.ToString());
+
+                        //Thread.Sleep(1500);
+                        Console.WriteLine("Java Command Executed");
+                        Console.WriteLine("Done");
+                    }
                 }
             }
-            //  Thread.Sleep(2500);
+            //Thread.Sleep(2500);
             if (File.Exists(pdfFileName.Replace(".pdf", "1.pdf")))
             {
                 using (Process process = new Process())
@@ -71,36 +84,7 @@ namespace ApplyPDFLicenseInfo
                     process.Start();
                 }
             }
-            //  Thread.Sleep(500);
-            //if (args.Length < 1)
-            //{
-            //    return;
-            //}
-
-            //string fileLoc = Path.Combine(Directory.GetCurrentDirectory(), "sample" + DateTime.Now.Ticks + "1.txt");
-
-
-            //FileStream fs = null;
-            //if (!File.Exists(fileLoc))
-            //{
-            //    using (fs = File.Create(fileLoc))
-            //    {
-
-            //    }
-            //}
-
-            //if (File.Exists(fileLoc))
-            //{
-            //    using (StreamWriter sw = new StreamWriter(fileLoc))
-            //    {
-            //        sw.Write("Some sample text for the file");
-            //    }
-            //}
-
-            //SetLicense.RunCommand(output.Directory, processFullPath, output.Directory, true);
-
-            //XsltProcess xsltProcess = new XsltProcess();
-            //xsltProcess.XsltTransform(args[0], args[1], args[2], args[3]);
+            //Thread.Sleep(500);
         }
 
         private static string ReadPathinLicenseFile(string allUserPath)
