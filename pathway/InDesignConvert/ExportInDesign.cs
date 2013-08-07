@@ -119,6 +119,7 @@ namespace SIL.PublishingSolution
             if (projInfo.IsOpenOutput)
                 Launch(ldmlFullName);
 
+            Common.CleanupExportFolder(projInfo.DictionaryPath);
             return true;
         }
 

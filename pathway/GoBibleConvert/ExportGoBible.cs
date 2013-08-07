@@ -149,7 +149,8 @@ namespace SIL.PublishingSolution
                     MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                DeleteTempFiles(exportGoBibleInputPath);
+                //DeleteTempFiles(exportGoBibleInputPath);
+                Common.CleanupExportFolder(exportGoBibleInputPath);
                 Common.DeleteDirectory(tempGoBibleCreatorPath);
             }
             catch (Exception ex)
