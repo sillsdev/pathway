@@ -405,7 +405,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "secondary title font size", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleSecondary_TitleMain_scrBook_scrBody']//@fo:font-size", "16pt"),
                 new ODet(ODet.Chk, "secondary title complex font size", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='TitleSecondary_TitleMain_scrBook_scrBody']//@style:font-size-complex", "16pt"),
                 new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics1']//@style:vertical-pos", "from-top"),
-                new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='Graphics1']//@xlink:href", "Pictures/hk00166b.tif"),
+                new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='Graphics1']//@xlink:href", "Pictures/2.tif"),
             };
 
             ExportTest("T4", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
@@ -561,8 +561,8 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "letter header complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-name-complex", "Charis SIL"),
                 new ODet(ODet.Chk, "letter header font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-weight", "700"),
                 new ODet(ODet.Chk, "letter header complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-weight-complex", "700"),
-                new ODet(ODet.Chk, "letter header font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-size", "24pt"),
-                new ODet(ODet.Chk, "letter header complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-size-complex", "24pt"),
+                new ODet(ODet.Chk, "letter header font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-size", "18pt"),
+                new ODet(ODet.Chk, "letter header complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-size-complex", "18pt"),
                 new ODet(ODet.Chk, "entry background", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:background-color", "transparent"),
                 new ODet(ODet.Chk, "entry alignment", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-align", "left"),
                 new ODet(ODet.Chk, "entry left margin", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "12pt"),
@@ -661,8 +661,8 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "letter header complex font", ODet.Rev, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-name-complex", "Charis SIL"),
                 new ODet(ODet.Chk, "letter header font weight", ODet.Rev, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-weight", "700"),
                 new ODet(ODet.Chk, "letter header complex font weight", ODet.Rev, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-weight-complex", "700"),
-                new ODet(ODet.Chk, "letter header font size", ODet.Rev, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-size", "24pt"),
-                new ODet(ODet.Chk, "letter header complex font size", ODet.Rev, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-size-complex", "24pt"),
+                new ODet(ODet.Chk, "letter header font size", ODet.Rev, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-size", "18pt"),
+                new ODet(ODet.Chk, "letter header complex font size", ODet.Rev, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-size-complex", "18pt"),
                 new ODet(ODet.Chk, "entry background", ODet.Rev, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:background-color", "transparent"),
                 new ODet(ODet.Chk, "entry alignment", ODet.Rev, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-align", "left"),
                 new ODet(ODet.Chk, "entry left margin", ODet.Rev, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "12pt"),
