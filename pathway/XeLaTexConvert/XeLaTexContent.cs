@@ -1447,6 +1447,7 @@ namespace SIL.PublishingSolution
             SetHeadwordTrue();
             StartElementBase(_IsHeadword);
             _imageInserted = InsertImage();
+            ListBegin();
             SetClassCounter();
             Psuedo();
             DropCaps();
@@ -1474,6 +1475,32 @@ namespace SIL.PublishingSolution
                     //if (!_columnClass.Contains(_childName))
                     //    _columnClass.Add(_childName);
                 }
+            }
+        }
+
+        private void ListBegin()
+        {
+            if (_tagType == "ol")
+            {
+                //ClosePara(false);
+                //string listClassName = Common.LeftString(_paragraphName, "_");
+                //if (listClassName.IndexOf(_tagType) == -1 || !IdAllClass.ContainsKey(listClassName))
+                //{
+                //    listClassName = _tagType;
+                //}
+                //_writer.WriteStartElement("text:list");
+                //_writer.WriteAttributeString("text:style-name", listClassName);
+                _xetexFile.WriteLine();
+                _xetexFile.WriteLine("\\begin{enumerate}");
+            }
+            else if (_tagType == "ul")
+            {
+                _xetexFile.WriteLine();
+                _xetexFile.WriteLine("\\begin{itemize}");
+            }
+            else if (_tagType == "li")
+            {
+                _xetexFile.Write("\\item");
             }
         }
 
@@ -1828,6 +1855,15 @@ namespace SIL.PublishingSolution
                 }
             }
 
+            if (_reader.Name == "ul")
+            {
+                _xetexFile.WriteLine("\\end{itemize}");
+            }
+            else if (_reader.Name == "ol")
+            {
+                _xetexFile.WriteLine("\\end{enumerate}");
+            }
+            
             EndElementBase(false);
 
             if (_closeChildName.IndexOf("scrBookName") == 0)
