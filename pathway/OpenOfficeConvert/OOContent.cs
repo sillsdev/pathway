@@ -1611,7 +1611,7 @@ namespace SIL.PublishingSolution
             {
                 //string paraSpan = _reader.Name == "div" ? "text:p" : "text:span";
                 // Currently Empty Div Tag is allowed. If Span is allowed remove the comment
-                if (_reader.Name == "div")
+                if (_reader.Name == "div" && _projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") < 0)
                 {
                     const string paraSpan = "text:p";
                     _writer.WriteStartElement(paraSpan);
@@ -3188,12 +3188,23 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void WriteLeftGuidewordOnFlexRev()
         {
-            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0)
+            //MessageBox.Show(_projInfo.IsODM.ToString());
+            //Param myParam = new Param();
+
+            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 )
             {
                 firstRevHeadWord = ReadXHTMLFirstData(_projInfo.DefaultXhtmlFileWithPath);
                 if (firstRevHeadWord.Trim().Length > 0)
                 {
                     _writer.WriteStartElement("text:p");
+                    if (_projInfo.IsODM)
+                    {
+                        _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
+                    }
+                    else
+                    {
+                        _writer.WriteAttributeString("text:style-name", "P4");
+                    }
                     _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
                     _writer.WriteStartElement("text:variable-set");
                     _writer.WriteAttributeString("text:name", "Left_Guideword_L");
@@ -3202,6 +3213,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("office:value-type", "string");
                     _writer.WriteAttributeString("office:string-value", firstRevHeadWord);
                     _writer.WriteEndElement();
+
                     _writer.WriteEndElement();
                     firstRevHeadWord = string.Empty;
                 }

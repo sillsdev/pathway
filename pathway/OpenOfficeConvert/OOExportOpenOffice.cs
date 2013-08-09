@@ -473,9 +473,10 @@ namespace SIL.PublishingSolution
             _odtFiles.Clear();
             var exportProcess = new ExportLibreOffice();
             string LexiconFileName = string.Empty;
-
+            publicationInfo.IsODM = true;
             foreach (KeyValuePair<int, Dictionary<string, string>> keyvalue in _dictSorderSection)
             {
+                
                 var Sections = keyvalue.Value;
                 foreach (var subSection in Sections)
                 {
