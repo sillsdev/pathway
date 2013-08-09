@@ -1611,7 +1611,7 @@ namespace SIL.PublishingSolution
             {
                 //string paraSpan = _reader.Name == "div" ? "text:p" : "text:span";
                 // Currently Empty Div Tag is allowed. If Span is allowed remove the comment
-                if (_reader.Name == "div" && _projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") < 0)
+                if (_reader.Name == "div" && _projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") < 0)// 
                 {
                     const string paraSpan = "text:p";
                     _writer.WriteStartElement(paraSpan);
@@ -3205,7 +3205,6 @@ namespace SIL.PublishingSolution
                     {
                         _writer.WriteAttributeString("text:style-name", "P4");
                     }
-                    _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
                     _writer.WriteStartElement("text:variable-set");
                     _writer.WriteAttributeString("text:name", "Left_Guideword_L");
                     _writer.WriteAttributeString("text:display", "none");
