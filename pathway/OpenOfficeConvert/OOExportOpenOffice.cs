@@ -663,7 +663,7 @@ namespace SIL.PublishingSolution
                 Common.CreateLicenseFileForRunningPdfApplyCopyright(Path.GetDirectoryName(publicationInfo.DefaultXhtmlFileWithPath));
                 IncludeCopyrightForPdf(defaultXhtml);
             }
-            Common.CleanupExportFolder(publicationInfo.ProjectFileWithPath);
+            Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath);
             return returnValue;
         }
 
