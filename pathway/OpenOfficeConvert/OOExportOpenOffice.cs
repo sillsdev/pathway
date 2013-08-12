@@ -663,7 +663,7 @@ namespace SIL.PublishingSolution
                 Common.CreateLicenseFileForRunningPdfApplyCopyright(Path.GetDirectoryName(publicationInfo.DefaultXhtmlFileWithPath));
                 IncludeCopyrightForPdf(defaultXhtml);
             }
-            Common.CleanupExportFolder(publicationInfo.ProjectPath);
+            Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath);
             return returnValue;
         }
 
@@ -882,6 +882,7 @@ namespace SIL.PublishingSolution
             preProcessor.GetfigureNode();
             preProcessor.GetDefaultLanguage(projInfo);
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
+            preProcessor.InsertBookPageBreak();
             //preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
             //preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
