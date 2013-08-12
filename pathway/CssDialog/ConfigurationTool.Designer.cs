@@ -74,6 +74,7 @@ namespace SIL.PublishingSolution
             this.lblFont = new System.Windows.Forms.Label();
             this.ddlFontSize = new System.Windows.Forms.ComboBox();
             this.pnlReferenceFormat = new System.Windows.Forms.Panel();
+            this.chkHideSpaceVerseNo = new System.Windows.Forms.CheckBox();
             this.txtXrefCusSymbol = new System.Windows.Forms.TextBox();
             this.chkXrefCusSymbol = new System.Windows.Forms.CheckBox();
             this.chkTurnOffFirstVerse = new System.Windows.Forms.CheckBox();
@@ -219,7 +220,6 @@ namespace SIL.PublishingSolution
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.chkHideSpaceVerseNo = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -825,6 +825,17 @@ namespace SIL.PublishingSolution
             this.pnlReferenceFormat.Name = "pnlReferenceFormat";
             this.pnlReferenceFormat.Size = new System.Drawing.Size(292, 102);
             this.pnlReferenceFormat.TabIndex = 102;
+            // 
+            // chkHideSpaceVerseNo
+            // 
+            this.chkHideSpaceVerseNo.AutoSize = true;
+            this.chkHideSpaceVerseNo.Location = new System.Drawing.Point(107, 86);
+            this.chkHideSpaceVerseNo.Name = "chkHideSpaceVerseNo";
+            this.chkHideSpaceVerseNo.Size = new System.Drawing.Size(175, 17);
+            this.chkHideSpaceVerseNo.TabIndex = 111;
+            this.chkHideSpaceVerseNo.Text = "Remove Space After Verse No.";
+            this.chkHideSpaceVerseNo.UseVisualStyleBackColor = true;
+            this.chkHideSpaceVerseNo.CheckStateChanged += new System.EventHandler(this.chkHideSpaceVerseNo_CheckStateChanged);
             // 
             // txtXrefCusSymbol
             // 
@@ -2472,17 +2483,6 @@ namespace SIL.PublishingSolution
             this.lblType.TabIndex = 0;
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // chkHideSpaceVerseNo
-            // 
-            this.chkHideSpaceVerseNo.AutoSize = true;
-            this.chkHideSpaceVerseNo.Location = new System.Drawing.Point(107, 86);
-            this.chkHideSpaceVerseNo.Name = "chkHideSpaceVerseNo";
-            this.chkHideSpaceVerseNo.Size = new System.Drawing.Size(175, 17);
-            this.chkHideSpaceVerseNo.TabIndex = 111;
-            this.chkHideSpaceVerseNo.Text = "Remove Space After Verse No.";
-            this.chkHideSpaceVerseNo.UseVisualStyleBackColor = true;
-            this.chkHideSpaceVerseNo.CheckStateChanged += new System.EventHandler(this.chkHideSpaceVerseNo_CheckStateChanged);
             // 
             // ConfigurationTool
             // 
