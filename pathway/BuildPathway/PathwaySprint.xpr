@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="14.1">
+<project version="15.0">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="14.1" xml:space="preserve">
+            <serialized version="15.0" xml:space="preserve">
                 <map>
                     <entry>
                         <String>scenario.associations</String>
@@ -255,6 +255,7 @@
         <file name="InstallXeLaTeX-tpl.wxs"/>
         <file name="InstallYouVersion-tpl.wxs"/>
         <file name="../pathway.build"/>
+        <file name="../Test/Test.csproj"/>
         <file name="UserInterface-tpl.wxs"/>
         <file name="Wix/UserInterface.wxs"/>
     </projectTree>
