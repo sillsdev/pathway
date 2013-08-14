@@ -203,7 +203,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                SubProcess.RunCommand(output.Directory, processFullPath, output.Directory, true);
+                SubProcess.RunCommand(output.Directory, processFullPath, ".", true);
             }
         }
 

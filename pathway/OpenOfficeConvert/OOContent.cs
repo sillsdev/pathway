@@ -2561,6 +2561,8 @@ namespace SIL.PublishingSolution
                         rectHeight = "72";
                     }
 
+                    if(imageClass.ToLower().IndexOf("picturecenter") == 0)
+                        HoriAlignment = "center";
 
                     string strFrameCount = "Graphics" + _frameCount;
                     _imageGraphicsName = strFrameCount;

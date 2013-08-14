@@ -266,3 +266,12 @@ margin-left : 48pt;
 margin-right: 48pt;
 text-align: justify;
 }
+
+.pictureCenter {
+    float:center;
+    clear: both;
+    margin: 0pt 0pt 4pt 4pt;
+    padding: 2pt;
+    text-indent: 0pt;
+    text-align: center;
+}
