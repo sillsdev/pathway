@@ -40,6 +40,7 @@ namespace Test.DictionaryForMIDsConvert
         public void Setup()
         {
             _testFiles = new TestFiles("DictionaryForMIDsConvert");
+            Common.ProgInstall = Environment.CurrentDirectory;
         }
         #endregion Setup
 
