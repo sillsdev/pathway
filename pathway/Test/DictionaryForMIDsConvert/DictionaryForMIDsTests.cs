@@ -193,6 +193,7 @@ namespace Test.DictionaryForMIDsConvert
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void CreateDictionaryForMIDsTest()
         {
             var outDir = _testFiles.Output("CreateDictionaryForMIDs");
