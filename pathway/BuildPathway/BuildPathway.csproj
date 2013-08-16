@@ -463,6 +463,7 @@
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(PdfLicenseManager)" DestinationFiles="@(PdfLicenseManager->'Files\ConfigurationTool\%(Filename)%(Extension)')"/>
+    <Copy SourceFiles="@(ApplyPdfLicense)" DestinationFiles="@(ApplyPdfLicense->'Files\ConfigurationTool\%(Filename)%(Extension)')"/>
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'Files\ConfigurationTool\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -490,6 +491,7 @@
     <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
     <PdfLicenseManager Include="..\PsSupport\pdflicensemanager-2.3.jar" />
+    <ApplyPdfLicense Include="..\ApplyPDFLicenseInfo\$(OutputPath)\ApplyPDFLicenseInfo.*" />
     <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
     <BatchProcess Include="..\HelpImprove\$(OutputPath)\HelpImprove.*" />
     <LiftPrepare Include="..\LiftPrepare\$(OutputPath)\LiftPrepare.*" />
