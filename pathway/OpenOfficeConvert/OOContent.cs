@@ -811,6 +811,12 @@ namespace SIL.PublishingSolution
         }
         private void Write()
         {
+
+            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && !_projInfo.IsODM && _childName.ToLower() == "hidediv_dicbody" && !_projInfo.IsFrontMatterEnabled)
+            {
+                return;
+            }
+
             //if (!_isWhiteSpace && (_characterName != null) && _characterName.IndexOf("xhomographnumber") != 0)
             //{
             //    InsertWhiteSpace();
@@ -3202,18 +3208,26 @@ namespace SIL.PublishingSolution
                     if (_projInfo.IsODM)
                     {
                         _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
+                        _writer.WriteStartElement("text:variable-set");
+                        _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                        _writer.WriteAttributeString("text:display", "none");
+                        _writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
+                        _writer.WriteAttributeString("office:value-type", "string");
+                        _writer.WriteAttributeString("office:string-value", firstRevHeadWord);
+                        _writer.WriteEndElement();
                     }
                     else
                     {
+                        //_writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
                         _writer.WriteAttributeString("text:style-name", "P4");
                     }
-                    _writer.WriteStartElement("text:variable-set");
-                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                    _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
-                    _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", firstRevHeadWord);
-                    _writer.WriteEndElement();
+                    //_writer.WriteStartElement("text:variable-set");
+                    //_writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                    //_writer.WriteAttributeString("text:display", "none");
+                    //_writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
+                    //_writer.WriteAttributeString("office:value-type", "string");
+                    //_writer.WriteAttributeString("office:string-value", firstRevHeadWord);
+                    //_writer.WriteEndElement();
 
                     _writer.WriteEndElement();
                     firstRevHeadWord = string.Empty;
