@@ -18,6 +18,7 @@ namespace SIL.PublishingSolution
         {
             string _xPath;
             _contentXMLdoc = new XmlDocument();
+            _contentXMLdoc.PreserveWhitespace = true;
             _contentXMLdoc.Load(contentFilePath);
             XmlElement _root = _contentXMLdoc.DocumentElement;
             var nsmgr = new XmlNamespaceManager(_contentXMLdoc.NameTable);
