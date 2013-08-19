@@ -1338,6 +1338,8 @@ namespace SIL.PublishingSolution
             ddlCopyrightStatement.Enabled = rdoStandardCopyright.Checked;
             txtColophonFile.Enabled = rdoCustomCopyright.Checked;
             btnBrowseColophon.Enabled = rdoCustomCopyright.Checked;
+            var copyrightDir = Path.Combine(Common.GetPSApplicationPath(), "Copyrights");
+            txtColophonFile.Text = Path.Combine(copyrightDir, "SIL_Custom_Template.xhtml");
         }
 
         private void lnkChooseCopyright_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1370,8 +1372,8 @@ namespace SIL.PublishingSolution
                         {
                             // this is our item - set the CopyrightFilename
                             var copyrightDir = Path.Combine(Common.GetPSApplicationPath(), "Copyrights");
-                            //CopyrightPagePath = Path.Combine(copyrightDir, subnode.Attributes["file"].Value);
-                            CopyrightPagePath = Path.Combine(copyrightDir, "SIL_Custom_Template.xhtml");
+                            CopyrightPagePath = Path.Combine(copyrightDir, subnode.Attributes["file"].Value);
+                            //CopyrightPagePath = Path.Combine(copyrightDir, "SIL_Custom_Template.xhtml");
                         }
                     }
                 }
