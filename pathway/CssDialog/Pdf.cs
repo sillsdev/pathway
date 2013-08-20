@@ -84,7 +84,12 @@ namespace SIL.PublishingSolution
             {
                 regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
                 if (regPrinceKey == null)
+                    regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\{3AC28E9C-8F06-4E2C-ADDA-726E2230A03A}");
+                if (regPrinceKey == null)
                     regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
+                if (regPrinceKey == null)
+                    regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\{3AC28E9C-8F06-4E2C-ADDA-726E2230A03A}");
+
             }
             catch (Exception)
             {
