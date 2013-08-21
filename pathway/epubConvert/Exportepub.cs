@@ -595,6 +595,7 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
+                Common.CleanupExportFolder(outputPathWithFileName);
             }
             return success;
         }

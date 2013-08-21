@@ -560,6 +560,8 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
+                tableOfContent += "\r\n";
+                tableOfContent += "\\newpage \r\n";
             }
             //tableOfContent += "\\thispagestyle{empty} \r\n";
             tableOfContent += "\\pagestyle{plain} \r\n";

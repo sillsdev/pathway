@@ -98,7 +98,17 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void ListSmallTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "ListSmall";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextColorTest()

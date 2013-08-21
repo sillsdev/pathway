@@ -832,10 +832,10 @@ namespace SIL.PublishingSolution
                     }
                     Object[] argsConvert = new object[2];
                     argsConvert[0] = scrBooksDoc.InnerXml;
-                    argsConvert[1] = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+                    argsConvert[1] = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ","_") + ".xhtml");
                     var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsConvert);
                 }
-                projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+                projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ", "_") + ".xhtml");
 
             }
             catch (FileNotFoundException)

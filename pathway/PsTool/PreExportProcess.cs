@@ -3845,6 +3845,94 @@ namespace SIL.Tool
             tw.Close();
         }
 
+        public void ArrangeImages()
+        {
+            //div[@class='entry']/div[2]/img
+            if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
+            string xPath = "//div[@class='entry']/div[2]/img"; //Find the second image entry
+            XmlNodeList entryLists = xDoc.SelectNodes(xPath, namespaceManager);
+            if (entryLists.Count > 0)
+            {
+                for (int i = 0; i < entryLists.Count; i++)
+                {
+                    XmlNode pictureNode = entryLists[i].ParentNode;
+                    XmlNode entryXmlNode = pictureNode.ParentNode;
+                    xPath = ".//div/img"; //Find the second image entry
+                    XmlNodeList imageLists = entryXmlNode.SelectNodes(xPath, namespaceManager);
+                    if (imageLists.Count > 0)
+                    {
+                        for (int j = 0; j < imageLists.Count; j++)
+                        {
+                            var parentNode = imageLists[j].ParentNode;
+                            if (parentNode != null)
+                            {
+                                if (parentNode.Attributes != null)
+                                    parentNode.Attributes["class"].Value = "pictureCenter";
+                                entryXmlNode.InsertAfter(parentNode.Clone(), entryXmlNode.LastChild);
+                                if (parentNode.ParentNode != null) parentNode.ParentNode.RemoveChild(parentNode);
+                            }
+                        }
+                    }
+                }
+            }
+
+            //Remove empty pictureCaption
+            //xPath = "//div[@class='entry']/*/div[@class='pictureCaption']";
+            //XmlNodeList pictureCaptionLists = xDoc.SelectNodes(xPath, namespaceManager);
+            //if (pictureCaptionLists != null && pictureCaptionLists.Count > 0)
+            //{
+            //    for (int j = 0; j < pictureCaptionLists.Count; j++)
+            //    {
+            //        if (!pictureCaptionLists[j].HasChildNodes)
+            //        {
+            //            var parentNode = pictureCaptionLists[j].ParentNode;
+            //            if (parentNode != null)
+            //                parentNode.RemoveChild(pictureCaptionLists[j]);
+            //        }
+            //    }
+            //}
+            
+            xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
+        }
+
+        public void InsertBookPageBreak()
+        {
+            if (_projInfo.ProjectInputType.ToLower() != "scripture")
+            { return; }
+
+            if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
+            string xPath = "//div[@class='scrBook']";
+            XmlNodeList bookLists = xDoc.SelectNodes(xPath, namespaceManager);
+            if (bookLists.Count > 0)
+            {
+                for (int i = 0; i < bookLists.Count; i++)
+                {
+                    XmlNode divNode = xDoc.CreateElement("div");
+                    XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
+                    xmlAttribute.Value = "bookPageBreak";
+                    if (divNode.Attributes != null) divNode.Attributes.Append(xmlAttribute);
+                    divNode.InnerText = " ";
+                    bookLists[i].InsertBefore(divNode, bookLists[i].FirstChild);
+                }
+            }
+            xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
+
+            TextWriter tw = new StreamWriter(_projInfo.DefaultCssFileWithPath, true);
+            tw.WriteLine(".bookPageBreak {");
+            tw.WriteLine("page-break-before: always;");
+            tw.WriteLine("}");
+            tw.Close();
+
+        }
+
         public void InsertEmptyDiv(string fileName)
         {
             string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");

@@ -133,15 +133,24 @@ namespace SIL.PublishingSolution
                 if (File.Exists(jarFile))
                 {
                     // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
-                    string msg = string.Format("Please copy the file {0} to your phone", jarFile);
-                    MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string msg = string.Format("Please copy the file {0} to your phone.\n\nDo you want to open the folder?", jarFile);
+                    DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        string dirPath = Path.GetDirectoryName(jarFile);
+                        Process.Start(dirPath);
+                        //Process.Start("explorer.exe", dirPath);
+                    }
+
                 }
                 else
                 {
                     MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                DeleteTempFiles(exportGoBibleInputPath);
+                //DeleteTempFiles(exportGoBibleInputPath);
+                Common.CleanupExportFolder(exportGoBibleInputPath);
                 Common.DeleteDirectory(tempGoBibleCreatorPath);
             }
             catch (Exception ex)
@@ -267,7 +276,7 @@ namespace SIL.PublishingSolution
             }
             using (StreamWriter sw = new StreamWriter(fileLoc))
             {
-                var info = "Bible text exported from Paratext.";
+                var info = "Bible text exported from Paratext, " + GetInfo(Param.CopyrightHolder);
                 sw.WriteLine("Info: " + info);
                 sw.WriteLine(@"Source-Text: \SFM");
                 sw.WriteLine("Source-Format: usfm");
@@ -275,6 +284,7 @@ namespace SIL.PublishingSolution
                 sw.WriteLine("Phone-Icon-Filepath: Icon.png");
                 sw.WriteLine("Application-Name: " + GetInfo(Param.Title));
                 sw.WriteLine("MIDlet-Vendor: " + GetInfo(Param.Title) + " Vendor");
+                sw.WriteLine("MIDlet-Description: " + " Sample text for GoBible description");
                 sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org");
                 sw.WriteLine("Codepage: UTF-8");
                 sw.WriteLine("RedLettering: false");
@@ -350,11 +360,6 @@ namespace SIL.PublishingSolution
         /// <param name="goBibleCreatorPath"></param>
         protected void BuildApplication(string goBibleCreatorPath)
         {
-            if (Directory.Exists(processFolder))
-            {
-                Directory.Move(processFolder, processFolder.Replace("Go Bible", "GoBible"));
-            }
-            processFolder = processFolder.Replace("Go Bible", "GoBible");
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
             var creatorFullPath = Path.Combine(goBibleCreatorPath, Creator);

@@ -223,6 +223,7 @@ namespace SIL.PublishingSolution
             }
             UpdateXeLaTexFontCacheIfNecessary();
             CallXeLaTex(xeLatexFullFile, true, imgPath);
+            Common.CleanupExportFolder(projInfo.ProjectPath);
             return true;
         }
 

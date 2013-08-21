@@ -473,9 +473,10 @@ namespace SIL.PublishingSolution
             _odtFiles.Clear();
             var exportProcess = new ExportLibreOffice();
             string LexiconFileName = string.Empty;
-
+            publicationInfo.IsODM = true;
             foreach (KeyValuePair<int, Dictionary<string, string>> keyvalue in _dictSorderSection)
             {
+                
                 var Sections = keyvalue.Value;
                 foreach (var subSection in Sections)
                 {
@@ -659,9 +660,10 @@ namespace SIL.PublishingSolution
 
             if (publicationInfo.FinalOutput.ToLower() == "pdf")
             {
+                Common.CreateLicenseFileForRunningPdfApplyCopyright(Path.GetDirectoryName(publicationInfo.DefaultXhtmlFileWithPath));
                 IncludeCopyrightForPdf(defaultXhtml);
             }
-            
+            Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath);
             return returnValue;
         }
 
@@ -784,15 +786,24 @@ namespace SIL.PublishingSolution
                 File.Copy(sourceJarFile, destJarFile, true);
             }
 
-            //Creating bat file macro use
-            string pdfFilename = "Preserve" + Path.GetFileNameWithoutExtension(defaultXhtml);
-            StreamWriter sw = new StreamWriter(Common.PathCombine(Path.GetDirectoryName(defaultXhtml), "License.bat"));
 
-            sw.WriteLine("cd " + Path.GetDirectoryName(defaultXhtml));
-            sw.WriteLine("dir");
-            sw.WriteLine("java -jar pdflicensemanager-2.3.jar putXMP " + pdfFilename + ".pdf " + pdfFilename + "1.pdf " +
-                         "SIL_License.xml ");
-            sw.Close();
+            string sourceExeFile = Path.Combine(getPsApplicationPath, "ApplyPDFLicenseInfo.exe");
+            string destExeFile = Path.Combine(Path.GetDirectoryName(defaultXhtml), "ApplyPDFLicenseInfo.exe");
+
+            if (!File.Exists(destExeFile))
+            {
+                File.Copy(sourceExeFile, destExeFile, true);
+            }
+
+            ////Creating bat file macro use
+            //string pdfFilename = "Preserve" + Path.GetFileNameWithoutExtension(defaultXhtml);
+            //StreamWriter sw = new StreamWriter(Common.PathCombine(Path.GetDirectoryName(defaultXhtml), "License.bat"));
+
+            //sw.WriteLine("cd " + Path.GetDirectoryName(defaultXhtml));
+            //sw.WriteLine("dir");
+            //sw.WriteLine("java -jar pdflicensemanager-2.3.jar putXMP " + pdfFilename + ".pdf " + pdfFilename + "1.pdf " +
+            //             "SIL_License.xml ");
+            //sw.Close();
         }
 
         private void InsertFrontMatter(PublicationInformation projInfo)
@@ -871,6 +882,8 @@ namespace SIL.PublishingSolution
             preProcessor.GetfigureNode();
             preProcessor.GetDefaultLanguage(projInfo);
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
+            preProcessor.InsertBookPageBreak();
+            preProcessor.ArrangeImages();
             //preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
             //preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();

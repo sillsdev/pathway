@@ -1066,6 +1066,7 @@
     <!-- Copy SourceFiles="@(UsfmConvert)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " / -->
     <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'$(OutputPath)\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'$(OutputPath)\Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="@(DictionaryForMIDs->'$(OutputPath)\Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'$(OutputPath)\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'$(OutputPath)\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'$(OutputPath)\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -1139,6 +1140,7 @@
     <BteBackend Include="..\LogosConvert\$(OutputPath)\LogosConvert.*" />
     <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <DictionaryForMIDs Include="..\PsSupport\Dic4Mid\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Icons Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />

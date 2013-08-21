@@ -3,22 +3,20 @@ SETTING UP GIT CLIENT
 In order to make git work on Linux, I had to use
 sudo apt-get -y install git git-gui gitk git-flow
 This installs the git client. (Note that on Lucid git-arch must be used instead of git.)
-Then you can create a .netrc file in your home folder as described on the google code site.
-Then you can use the command on the google code site to clone a copy of the repo.
-For my machine I created a folder called git
-mkdir git
-and then
-cd git
-and cloned the pathway repo there and use git flow init.
+Create a .netrc file in your home folder: http://code.google.com/p/pathway/source/checkout.
+Clone the repo (described at the same location)
+Then used: git flow init.
 
 SETTING UP BUILD SYSTEM
 -----------------------
 To set up Linux for building packages, I used:
 sudo apt-get -y install devscripts debhelper autotools-dev mono-complete
+Edit .git/config to include the BuildPathway/Add2Config
 
 BUILDING PATHWAY
 ----------------
-If the packages has already been installed it can be removed with
+You can use the gui by launching a terminal and using git gui, the build commands are on the Tools menu. Or you can perform the commands from a terminal window:
+If the package has already been installed it can be removed with
 make clean clean-build
 Once this is all setup, the command to build the package is:
 debuild -eBUILD_NUMBER=1.1.2.2205 -etarget=Daily -i -us -uc -b
@@ -35,7 +33,8 @@ parameter should be given to the build.
 INSTALLING
 ----------
 The .deb package will be built in the ~/git/pathway folder (the parent of the one that executed the debuild command).
-If you launch this file (double click on it), you can install Pathway.
+If you launch this file (double click on it), you can install Pathway or you can use:
+dpkg -i *.deb
 After installing Pathway, create the CurrentUser registry key by typing:
 ConfigurationTool
 at the terminal prompt (CTRL-ALT-T).
@@ -56,4 +55,30 @@ INSTALLING PATHWAY XELATEX
 --------------------------
 The .deb package will be build in the ~/git/pathway/pathway folder (the parent of the XeLaTexConvert that executed the debuild command).
 If you launch this file (double click on it), you will install pathway-xelatex
+
+SETTING UP THE DEBUGGER
+-----------------------
+Install nightly build using these instructions:
+http://linux.lsdev.sil.org/wiki/index.php/FieldWorks_Nightly
+Review the instructions at:
+http://linux.lsdev.sil.org/wiki/index.php/Install_and_use_Monodevelop
+a simple way to create the desktop icon:
+http://askubuntu.com/questions/13758/how-can-i-edit-create-new-launcher-items-in-unity-by-hand#answer-128284
+After creating the file, and making it executable, right click on it and set the command:
+bash -c 'cd /usr/lib/fieldworks; RUNMODE="INSTALLED" . environ; PATH=/usr/bin:$PATH; export FIELDWORKS_ENVIRON="$HOME/fwrepo/fw/environ"; monodevelop'
+Launch Monodevelop Fw using this short cut icon open publishing solution.
+Right click on the Startup project (bolded). Choose Properties. Under Run, General create a variale PATH with this value:
+/usr/lib/fieldworks/icu-bin:/usr/local/bin:/usr/lib/fieldworks/mono/bin:/usr/lib/fieldworks/Output_i686/Debug:/usr/lib/fieldworks/Lib/src/icu/installi686/bin:/usr/lib/fieldworks/Lib/src/icu/source/buildi686/bin:/usr/lib/fieldworks/Bin/nant/bin:/usr/lib/libcom/COM/buildi686/bin:$PATH
+(if you execute cd /usr/lib/fieldworks; RUNMODE="INSTALLED" . environ in a terminal window and type export, you can examine the PATH variable to see what was added on the front. This is what needs to be set here.)
+Under Run, Custom, create an Execute task with this commands:
+/usr/lib/fieldworks/FieldWorks.exe -app flex
+You can set the current folder to your home folder.
+In the Run, Exceptions dialog you can control which exceptions are trapped. Often if you are trapping all exceptions, you can note the exception and continue after closing the dialoge.
+
+
+
+(This assumes flex has been launched at least once so the initial setup is done.)
+
+
+
 

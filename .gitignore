@@ -21,6 +21,8 @@ pathway/XeLaTexConvert/debian/pathway-xelatex-etc/values.xml
 pathway/XeLaTexConvert/debian/pathway-xelatex.*
 pathway/XeLaTexConvert/debian/pathway-xelatex/*
 pathway/pathway-xelatex_*
+pathway/ApplyPDFLicenseInfo/bin/*
+pathway/ApplyPDFLicenseInfo/obj/*
 pathway/ApplyXslt/bin/*
 pathway/ApplyXslt/obj/*
 pathway/BookletBuilder/bin/*
