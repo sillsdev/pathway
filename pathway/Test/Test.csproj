@@ -237,8 +237,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CssParser\ThirdParty\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="GuiTestDriver, Version=5.5.3391.27786, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="GuiTestDriver">
       <HintPath>..\ThirdParty\GuiTestDriver.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build.Framework" />
@@ -290,6 +289,9 @@
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsTests.cs" />
     <Compile Include="GoBibleConvert\UsxToSFMTest.cs" />
     <Compile Include="PathwayB\PathwayBTest.cs" />
+    <Compile Include="PublishingSolutionExeUi\PsUiScenarioTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="XeLatex\XeLaTexContentTest.cs" />
     <Compile Include="CssDialog\ContentsTest.cs">
       <SubType>Form</SubType>
@@ -360,7 +362,6 @@
     <Compile Include="PsTool\FileDataTest.cs" />
     <Compile Include="PsTool\ZipFolderTest.cs" />
     <Compile Include="PublishingSolutionExeUi\BuangScenarioTests.cs" />
-    <Compile Include="PublishingSolutionExeUi\PsUiScenarioTests.cs" />
     <Compile Include="PublishingSolutionExeUi\PsUiTests.cs" />
     <Compile Include="TestFiles.cs" />
     <Compile Include="TextFileAssert.cs" />
@@ -1117,12 +1118,12 @@
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\Palaso.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfConvert.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfConvert.pdb" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfToImage.dll" />
+    <!-- ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfToImage.dll" / -->
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\Prince.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PsTool.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PsTool.pdb" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
-    <GhostScript Include="..\ThirdParty\gsdll32.dll" />
+    <!--GhostScript Include="..\ThirdParty\gsdll32.dll" / -->
     <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
     <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />

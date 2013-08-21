@@ -241,9 +241,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="PdfToImage, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\ThirdParty\PdfToImage.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutPw.cs">
@@ -346,7 +343,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PDFtoImageConverter.cs" />
-    <Compile Include="PdftoJpg.cs" />
     <Compile Include="PopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
