@@ -18,10 +18,10 @@
 
 ;Global $StableVersionDate = '-0.7.1-2011-04-12'
 Global $StableVersionDate = ''
-Global $LatestSuffix = 'Testing-1.3.7.3290'
+Global $LatestSuffix = 'Testing-1.4.0.3397'
 Global $XeLaTexSuffix = 'Testing-1.7.0.3077'
 Global $DEL_Installer = True
-Global $Bootstrap_version = "Version 1.22c"
+Global $Bootstrap_version = "Version 1.23"
 
 Opt('MustDeclareVars', 1)
 
