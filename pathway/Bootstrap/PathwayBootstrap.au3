@@ -1,4 +1,19 @@
-;PathwayBootstrap.au3 - 12/2/2011 greg_trihus@sil.org License: LGPL
+;PathwayBootstrap.au3 - main script, setup globals - 12/2/2011 greg_trihus@sil.org
+;Copyright (c) 2013 SIL International(R)
+;
+;This program is free software: you can redistribute it and/or modify
+;it under the terms of the GNU General Public License as published by
+;the Free Software Foundation, either version 3 of the License, or
+;(at your option) any later version.
+;
+;This program is distributed in the hope that it will be useful,
+;but WITHOUT ANY WARRANTY; without even the implied warranty of
+;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;GNU General Public License for more details.
+;
+;You should have received a copy of the GNU General Public License
+;along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;
 #include "Welcome.au3"
 
 ;Global $StableVersionDate = '-0.7.1-2011-04-12'
@@ -20,8 +35,8 @@ Func DoUI()
 	If not FileExists("sil.jpg") Then
 		FileInstall("res\sil.jpg", "sil.jpg")
 	EndIf
-	If not FileExists("PWIcon1.jpg") Then
-		FileInstall("res\PWIcon1.jpg", "PWIcon1.jpg")
+	If not FileExists("icon.ico") Then
+		FileInstall("res\icon.ico", "icon.ico")
 	EndIf
 	If not FileExists("License.rtf") Then
 		FileInstall("res\License.rtf", "License.rtf")
@@ -36,7 +51,7 @@ Func DoUI()
 	Endif
 	$DEL_Installer = True
 	CleanUp("sil.jpg")
-	CleanUp("PWIcon1.jpg")
+	CleanUp("icon.ico")
 	CleanUp("License.rtf")
 	CleanUp("PathwayBootstrap.ini")
 EndFunc
