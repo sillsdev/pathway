@@ -198,9 +198,9 @@ namespace SIL.PublishingSolution
                     //Copyright information added in PDF files
                     string pdfFIleName = Common.InsertCopyrightInPdf(Common.PathCombine(Environment.CurrentDirectory, xhtmlFileName + ".pdf"), "Prince XML");
 
-                    //string pdfFIleName = xhtmlFileName + ".pdf";
-                    if (!Common.Testing)
-                        Process.Start(pdfFIleName);
+                    ////string pdfFIleName = xhtmlFileName + ".pdf";
+                    //if (!Common.Testing)
+                    //    Process.Start(pdfFIleName);
                     Environment.CurrentDirectory = curdir;
                     Common.CleanupExportFolder(Environment.CurrentDirectory);
                     success = true;

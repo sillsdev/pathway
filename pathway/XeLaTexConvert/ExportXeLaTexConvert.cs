@@ -591,6 +591,7 @@ namespace SIL.PublishingSolution
                         //Common.OpenOutput(pdfFullName);
                         if (File.Exists(pdfFullName))
                         {
+                            
                             pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex");
                             Common.OpenOutput(pdfFullName);
                         }
