@@ -227,7 +227,24 @@ namespace SIL.PublishingSolution
             _includePackageList = includePackageList;
             _inlineInnerStyle = inlineText;
 
-            if (className.IndexOf("scrBookName") == -1)
+
+            if (_langFontDictionary.Count > 0)
+            {
+                foreach (var selectFontName in _langFontDictionary)
+                {
+                    if (selectFontName.Key.ToLower() == "fontname" || selectFontName.Key.ToLower() == "en")
+                    {
+                        _fontName = selectFontName.Value;
+                        break;
+                    }
+                }                
+            }
+            else
+            {
+                _fontName = string.Empty;
+            }
+
+            if (string.IsNullOrEmpty(_fontName))
                 _fontName = "Times New Roman";
 
             foreach (KeyValuePair<string, string> property in cssProperty)
@@ -719,12 +736,18 @@ namespace SIL.PublishingSolution
 
             if (_langFontDictionary.Count != 0)
             {
-                foreach (string langCode in _langFontDictionary.Keys)
+                string[] splitClassNameMeta = _className.Split('.');
+                if (splitClassNameMeta.Length > 1)
                 {
-                    if (_className.Contains("." + langCode))
+                    splitClassNameMeta[1] = "." + splitClassNameMeta[1];
+                    foreach (string langCode in _langFontDictionary.Keys)
                     {
-                        fontName = _langFontDictionary[langCode];
-                        propertyValue = fontName;
+                        if (splitClassNameMeta[1].Contains("." + langCode))
+                        {
+                            fontName = _langFontDictionary[langCode];
+                            propertyValue = fontName;
+                            break;
+                        }
                     }
                 }
             }

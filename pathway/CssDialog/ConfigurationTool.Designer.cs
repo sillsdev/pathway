@@ -74,6 +74,7 @@ namespace SIL.PublishingSolution
             this.lblFont = new System.Windows.Forms.Label();
             this.ddlFontSize = new System.Windows.Forms.ComboBox();
             this.pnlReferenceFormat = new System.Windows.Forms.Panel();
+            this.chkHideSpaceVerseNo = new System.Windows.Forms.CheckBox();
             this.txtXrefCusSymbol = new System.Windows.Forms.TextBox();
             this.chkXrefCusSymbol = new System.Windows.Forms.CheckBox();
             this.chkTurnOffFirstVerse = new System.Windows.Forms.CheckBox();
@@ -121,6 +122,7 @@ namespace SIL.PublishingSolution
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.mobileIcon = new System.Windows.Forms.PictureBox();
             this.tabOthers = new System.Windows.Forms.TabPage();
+            this.chkPageBreaks = new System.Windows.Forms.CheckBox();
             this.chkIncludeImage = new System.Windows.Forms.CheckBox();
             this.ddlReferences = new System.Windows.Forms.ComboBox();
             this.lblReferences = new System.Windows.Forms.Label();
@@ -218,7 +220,6 @@ namespace SIL.PublishingSolution
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.chkPageBreaks = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -695,7 +696,7 @@ namespace SIL.PublishingSolution
             this.pnlOtherFormat.Controls.Add(this.ddlRules);
             this.pnlOtherFormat.Controls.Add(this.lblFont);
             this.pnlOtherFormat.Controls.Add(this.ddlFontSize);
-            this.pnlOtherFormat.Location = new System.Drawing.Point(9, 377);
+            this.pnlOtherFormat.Location = new System.Drawing.Point(9, 387);
             this.pnlOtherFormat.Name = "pnlOtherFormat";
             this.pnlOtherFormat.Size = new System.Drawing.Size(275, 123);
             this.pnlOtherFormat.TabIndex = 103;
@@ -812,6 +813,7 @@ namespace SIL.PublishingSolution
             // 
             // pnlReferenceFormat
             // 
+            this.pnlReferenceFormat.Controls.Add(this.chkHideSpaceVerseNo);
             this.pnlReferenceFormat.Controls.Add(this.txtXrefCusSymbol);
             this.pnlReferenceFormat.Controls.Add(this.chkXrefCusSymbol);
             this.pnlReferenceFormat.Controls.Add(this.chkTurnOffFirstVerse);
@@ -821,12 +823,23 @@ namespace SIL.PublishingSolution
             this.pnlReferenceFormat.Controls.Add(this.lblReferenceFormat);
             this.pnlReferenceFormat.Location = new System.Drawing.Point(0, 281);
             this.pnlReferenceFormat.Name = "pnlReferenceFormat";
-            this.pnlReferenceFormat.Size = new System.Drawing.Size(292, 93);
+            this.pnlReferenceFormat.Size = new System.Drawing.Size(292, 102);
             this.pnlReferenceFormat.TabIndex = 102;
+            // 
+            // chkHideSpaceVerseNo
+            // 
+            this.chkHideSpaceVerseNo.AutoSize = true;
+            this.chkHideSpaceVerseNo.Location = new System.Drawing.Point(107, 86);
+            this.chkHideSpaceVerseNo.Name = "chkHideSpaceVerseNo";
+            this.chkHideSpaceVerseNo.Size = new System.Drawing.Size(175, 17);
+            this.chkHideSpaceVerseNo.TabIndex = 111;
+            this.chkHideSpaceVerseNo.Text = "Remove Space After Verse No.";
+            this.chkHideSpaceVerseNo.UseVisualStyleBackColor = true;
+            this.chkHideSpaceVerseNo.CheckStateChanged += new System.EventHandler(this.chkHideSpaceVerseNo_CheckStateChanged);
             // 
             // txtXrefCusSymbol
             // 
-            this.txtXrefCusSymbol.Location = new System.Drawing.Point(239, 54);
+            this.txtXrefCusSymbol.Location = new System.Drawing.Point(239, 52);
             this.txtXrefCusSymbol.Name = "txtXrefCusSymbol";
             this.txtXrefCusSymbol.Size = new System.Drawing.Size(44, 20);
             this.txtXrefCusSymbol.TabIndex = 110;
@@ -835,7 +848,7 @@ namespace SIL.PublishingSolution
             // chkXrefCusSymbol
             // 
             this.chkXrefCusSymbol.AutoSize = true;
-            this.chkXrefCusSymbol.Location = new System.Drawing.Point(107, 54);
+            this.chkXrefCusSymbol.Location = new System.Drawing.Point(107, 50);
             this.chkXrefCusSymbol.Name = "chkXrefCusSymbol";
             this.chkXrefCusSymbol.Size = new System.Drawing.Size(117, 17);
             this.chkXrefCusSymbol.TabIndex = 109;
@@ -846,11 +859,11 @@ namespace SIL.PublishingSolution
             // chkTurnOffFirstVerse
             // 
             this.chkTurnOffFirstVerse.AutoSize = true;
-            this.chkTurnOffFirstVerse.Location = new System.Drawing.Point(107, 76);
+            this.chkTurnOffFirstVerse.Location = new System.Drawing.Point(107, 68);
             this.chkTurnOffFirstVerse.Name = "chkTurnOffFirstVerse";
-            this.chkTurnOffFirstVerse.Size = new System.Drawing.Size(113, 17);
+            this.chkTurnOffFirstVerse.Size = new System.Drawing.Size(107, 17);
             this.chkTurnOffFirstVerse.TabIndex = 107;
-            this.chkTurnOffFirstVerse.Text = "Hide Verse num. 1";
+            this.chkTurnOffFirstVerse.Text = "Hide Verse No. 1";
             this.chkTurnOffFirstVerse.UseVisualStyleBackColor = true;
             this.chkTurnOffFirstVerse.CheckStateChanged += new System.EventHandler(this.chkTurnOffFirstVerse_CheckStateChanged);
             // 
@@ -858,7 +871,7 @@ namespace SIL.PublishingSolution
             // 
             this.txtFnCallerSymbol.AccessibleName = "txtPageGutterWidth";
             this.txtFnCallerSymbol.Enabled = false;
-            this.txtFnCallerSymbol.Location = new System.Drawing.Point(239, 31);
+            this.txtFnCallerSymbol.Location = new System.Drawing.Point(239, 29);
             this.txtFnCallerSymbol.MaxLength = 1;
             this.txtFnCallerSymbol.Name = "txtFnCallerSymbol";
             this.txtFnCallerSymbol.Size = new System.Drawing.Size(44, 20);
@@ -1395,6 +1408,18 @@ namespace SIL.PublishingSolution
             this.tabOthers.TabIndex = 3;
             this.tabOthers.Text = "Properties";
             this.tabOthers.UseVisualStyleBackColor = true;
+            // 
+            // chkPageBreaks
+            // 
+            this.chkPageBreaks.AutoSize = true;
+            this.chkPageBreaks.Location = new System.Drawing.Point(51, 239);
+            this.chkPageBreaks.Name = "chkPageBreaks";
+            this.chkPageBreaks.Size = new System.Drawing.Size(163, 17);
+            this.chkPageBreaks.TabIndex = 40;
+            this.chkPageBreaks.Text = "No page breaks within letters";
+            this.chkPageBreaks.UseVisualStyleBackColor = true;
+            this.chkPageBreaks.Visible = false;
+            this.chkPageBreaks.CheckedChanged += new System.EventHandler(this.chkPageBreaks_CheckedChanged);
             // 
             // chkIncludeImage
             // 
@@ -2459,18 +2484,6 @@ namespace SIL.PublishingSolution
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // chkPageBreaks
-            // 
-            this.chkPageBreaks.AutoSize = true;
-            this.chkPageBreaks.Location = new System.Drawing.Point(51, 239);
-            this.chkPageBreaks.Name = "chkPageBreaks";
-            this.chkPageBreaks.Size = new System.Drawing.Size(163, 17);
-            this.chkPageBreaks.TabIndex = 40;
-            this.chkPageBreaks.Text = "No page breaks within letters";
-            this.chkPageBreaks.UseVisualStyleBackColor = true;
-            this.chkPageBreaks.Visible = false;
-            this.chkPageBreaks.CheckedChanged += new System.EventHandler(this.chkPageBreaks_CheckedChanged);
-            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2722,5 +2735,6 @@ namespace SIL.PublishingSolution
         private CheckBox chkXrefCusSymbol;
         private TabPage tabDict4Mids;
         private CheckBox chkPageBreaks;
+        private CheckBox chkHideSpaceVerseNo;
     }
 }

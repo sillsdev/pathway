@@ -811,6 +811,12 @@ namespace SIL.PublishingSolution
         }
         private void Write()
         {
+
+            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && !_projInfo.IsODM && _childName.ToLower() == "hidediv_dicbody" && !_projInfo.IsFrontMatterEnabled)
+            {
+                return;
+            }
+
             //if (!_isWhiteSpace && (_characterName != null) && _characterName.IndexOf("xhomographnumber") != 0)
             //{
             //    InsertWhiteSpace();
@@ -999,7 +1005,22 @@ namespace SIL.PublishingSolution
                 //{
                 //    content = content.TrimEnd() + " ";
                 //}
-                if (_allCharacter.Peek().IndexOf("span_TitleMain") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0)
+                if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) || (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0))
+                //if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen") == 0) || (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat.ToLower().IndexOf("gen") == 0))
+                {
+                    //_strBook = content;
+                    content = content.TrimEnd() + " ";
+                    if (_strBook.Length > 0)
+                    {
+                        _strBook2ndBook = content;
+                    }
+                    _strBook = content;
+                    //else
+                    //{
+                    //    _strBook = content;
+                    //}
+                }
+                else if (_allCharacter.Peek().IndexOf("span_TitleMain") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0 && _strBook.Trim().Length == 0)
                 {
                     //_strBook = content;
                     content = content.TrimEnd() + " ";
@@ -1013,20 +1034,6 @@ namespace SIL.PublishingSolution
                         _strBook = content;
                         _is1stBookFound = true;
                     }
-                }
-                else if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) || (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0))
-                {
-                    //_strBook = content;
-                    content = content.TrimEnd() + " ";
-                    if (_strBook.Length > 0)
-                    {
-                        _strBook2ndBook = content;
-                    }
-                    _strBook = content;
-                    //else
-                    //{
-                    //    _strBook = content;
-                    //}
                 }
                 else if (_allCharacter.Peek().ToLower().IndexOf("versenumber") == 0 || _allCharacter.Peek().ToLower().IndexOf("versenumber1") == 0)
                 {
@@ -1308,7 +1315,10 @@ namespace SIL.PublishingSolution
                 else
                 {
                     _verseContent.Append(" <text:span text:style-name=\"" + characterStyle + "\">");
-                    content = content.Replace("-", "‑") + " ";
+                    if (_projInfo.HideSpaceVerseNumber.ToLower() == "false")
+                    {
+                        content = content.Replace("-", "‑") + " ";
+                    }
                 }
             }
 
@@ -1607,7 +1617,7 @@ namespace SIL.PublishingSolution
             {
                 //string paraSpan = _reader.Name == "div" ? "text:p" : "text:span";
                 // Currently Empty Div Tag is allowed. If Span is allowed remove the comment
-                if (_reader.Name == "div")
+                if (_reader.Name == "div" && _projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") < 0)// 
                 {
                     const string paraSpan = "text:p";
                     _writer.WriteStartElement(paraSpan);
@@ -2557,6 +2567,8 @@ namespace SIL.PublishingSolution
                         rectHeight = "72";
                     }
 
+                    if(imageClass.ToLower().IndexOf("picturecenter") == 0)
+                        HoriAlignment = "center";
 
                     string strFrameCount = "Graphics" + _frameCount;
                     _imageGraphicsName = strFrameCount;
@@ -3184,20 +3196,39 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void WriteLeftGuidewordOnFlexRev()
         {
-            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0)
+            //MessageBox.Show(_projInfo.IsODM.ToString());
+            //Param myParam = new Param();
+
+            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 )
             {
                 firstRevHeadWord = ReadXHTMLFirstData(_projInfo.DefaultXhtmlFileWithPath);
                 if (firstRevHeadWord.Trim().Length > 0)
                 {
                     _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
-                    _writer.WriteStartElement("text:variable-set");
-                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                    _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
-                    _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", firstRevHeadWord);
-                    _writer.WriteEndElement();
+                    if (_projInfo.IsODM)
+                    {
+                        _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
+                        _writer.WriteStartElement("text:variable-set");
+                        _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                        _writer.WriteAttributeString("text:display", "none");
+                        _writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
+                        _writer.WriteAttributeString("office:value-type", "string");
+                        _writer.WriteAttributeString("office:string-value", firstRevHeadWord);
+                        _writer.WriteEndElement();
+                    }
+                    else
+                    {
+                        //_writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
+                        _writer.WriteAttributeString("text:style-name", "P4");
+                    }
+                    //_writer.WriteStartElement("text:variable-set");
+                    //_writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                    //_writer.WriteAttributeString("text:display", "none");
+                    //_writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
+                    //_writer.WriteAttributeString("office:value-type", "string");
+                    //_writer.WriteAttributeString("office:string-value", firstRevHeadWord);
+                    //_writer.WriteEndElement();
+
                     _writer.WriteEndElement();
                     firstRevHeadWord = string.Empty;
                 }
@@ -3371,9 +3402,9 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void ModifyContentXML(string targetPath)
         {
-            //string targetFile = targetPath + "content.xml";
-            //ModifyLOContent modifyContentXML = new ModifyLOContent();
-            //modifyContentXML.SetTableColumnCount(targetFile, _tableColumnModify);
+            string targetFile = targetPath + "content.xml";
+            ModifyLOContent modifyContentXML = new ModifyLOContent();
+            modifyContentXML.SetTableColumnCount(targetFile, _tableColumnModify);
         }
 
 

@@ -1,4 +1,19 @@
-;License.au3 - 12/2/2011 greg_trihus@sil.org License: LGPL
+;License.au3 - display license and ask for acceptance - 12/2/2011 greg_trihus@sil.org
+;Copyright (c) 2013 SIL International(R)
+;
+;This program is free software: you can redistribute it and/or modify
+;it under the terms of the GNU General Public License as published by
+;the Free Software Foundation, either version 3 of the License, or
+;(at your option) any later version.
+;
+;This program is distributed in the hope that it will be useful,
+;but WITHOUT ANY WARRANTY; without even the implied warranty of
+;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;GNU General Public License for more details.
+;
+;You should have received a copy of the GNU General Public License
+;along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;
 ; Needs: MSCOMCT2.OCX in system32 but it's probably already there
 #include <GuiRichEdit.au3>
 #include "Options.au3"
@@ -9,7 +24,7 @@ Func License($left, $top)
 	
 	$license = GUICreate("License", 660, 550, $left, $top)
 	$sil = GUICtrlCreatePic("sil.jpg", 8, 40, 224, 191, $SS_CENTERIMAGE)
-	$pathway = GUICtrlCreatePic("PWIcon1.jpg", 40, 272, 146, 152, $SS_CENTERIMAGE)
+	$pathway = GUICtrlCreateIcon("icon.ico", -1, 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
 	$back = GUICtrlCreateButton("Back", 328, 464, 87, 28)
 	$cancel = GUICtrlCreateButton("Cancel", 432, 464, 87, 28)

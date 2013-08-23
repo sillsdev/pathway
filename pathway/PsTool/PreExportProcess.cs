@@ -1307,8 +1307,10 @@ namespace SIL.Tool
                                                    GetCopyrightInfoForLO());
                         Common.StreamReplaceInFile(draftTempFileName, "<h1>", "<span class='LHeading'>");
                         Common.StreamReplaceInFile(draftTempFileName, "</h1>", "</span>");
-                        Common.StreamReplaceInFile(draftTempFileName, "<p><em>", "<span class='LText'>");
-                        Common.StreamReplaceInFile(draftTempFileName, "</em></p>", "</span>");
+                        Common.StreamReplaceInFile(draftTempFileName, "<p>", "<span class='LText'>");
+                        Common.StreamReplaceInFile(draftTempFileName, "</p>", "</span>");
+                        Common.StreamReplaceInFile(draftTempFileName, "<em>", "<span>");
+                        Common.StreamReplaceInFile(draftTempFileName, "</em>", "</span>");
 
                         XmlDocument xDoc = Common.DeclareXMLDocument(false);
                         XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
@@ -1860,17 +1862,17 @@ namespace SIL.Tool
 
                                         string toFileName = Common.PathCombine(tempFolder, counter + ext);
                                         File.Copy(fromFileName, toFileName, true);
-
-                                        if (ext != null && ext.Contains("tif"))
-                                        {
-                                            ext = ".jpg";
-                                            string tiffFileName = toFileName;
-                                            toFileName = Common.ConvertTifftoImage(toFileName, "jpg");
-                                            if (File.Exists(tiffFileName))
-                                            {
-                                                File.Delete(tiffFileName);
-                                            }
-                                        }
+                                        //No need this conversion logic
+                                        //if (ext != null && ext.Contains("tif"))
+                                        //{
+                                        //    ext = ".jpg";
+                                        //    string tiffFileName = toFileName;
+                                        //    toFileName = Common.ConvertTifftoImage(toFileName, "jpg");
+                                        //    if (File.Exists(tiffFileName))
+                                        //    {
+                                        //        File.Delete(tiffFileName);
+                                        //    }
+                                        //}
 
                                         XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
                                         xa.Value = name.Value;
@@ -3831,7 +3833,104 @@ namespace SIL.Tool
             tw.WriteLine("display: none;");
             tw.WriteLine("}");
 
+
+            if (_projInfo.ProjectInputType.ToLower() == "scripture")
+            {
+                tw.WriteLine(".scrBookName {");
+                tw.WriteLine("display: inline;");
+                tw.WriteLine("font-size: 0pt;");
+                //tw.WriteLine("text-indent:5cm;");//padding-left: -5pt;
+                tw.WriteLine("}");
+            }
             tw.Close();
+        }
+
+        public void ArrangeImages()
+        {
+            //div[@class='entry']/div[2]/img
+            if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
+            string xPath = "//div[@class='entry']/div[2]/img"; //Find the second image entry
+            XmlNodeList entryLists = xDoc.SelectNodes(xPath, namespaceManager);
+            if (entryLists.Count > 0)
+            {
+                for (int i = 0; i < entryLists.Count; i++)
+                {
+                    XmlNode pictureNode = entryLists[i].ParentNode;
+                    XmlNode entryXmlNode = pictureNode.ParentNode;
+                    xPath = ".//div/img"; //Find the second image entry
+                    XmlNodeList imageLists = entryXmlNode.SelectNodes(xPath, namespaceManager);
+                    if (imageLists.Count > 0)
+                    {
+                        for (int j = 0; j < imageLists.Count; j++)
+                        {
+                            var parentNode = imageLists[j].ParentNode;
+                            if (parentNode != null)
+                            {
+                                if (parentNode.Attributes != null)
+                                    parentNode.Attributes["class"].Value = "pictureCenter";
+                                entryXmlNode.InsertAfter(parentNode.Clone(), entryXmlNode.LastChild);
+                                if (parentNode.ParentNode != null) parentNode.ParentNode.RemoveChild(parentNode);
+                            }
+                        }
+                    }
+                }
+            }
+
+            //Remove empty pictureCaption
+            //xPath = "//div[@class='entry']/*/div[@class='pictureCaption']";
+            //XmlNodeList pictureCaptionLists = xDoc.SelectNodes(xPath, namespaceManager);
+            //if (pictureCaptionLists != null && pictureCaptionLists.Count > 0)
+            //{
+            //    for (int j = 0; j < pictureCaptionLists.Count; j++)
+            //    {
+            //        if (!pictureCaptionLists[j].HasChildNodes)
+            //        {
+            //            var parentNode = pictureCaptionLists[j].ParentNode;
+            //            if (parentNode != null)
+            //                parentNode.RemoveChild(pictureCaptionLists[j]);
+            //        }
+            //    }
+            //}
+            
+            xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
+        }
+
+        public void InsertBookPageBreak()
+        {
+            if (_projInfo.ProjectInputType.ToLower() != "scripture")
+            { return; }
+
+            if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
+            string xPath = "//div[@class='scrBook']";
+            XmlNodeList bookLists = xDoc.SelectNodes(xPath, namespaceManager);
+            if (bookLists.Count > 0)
+            {
+                for (int i = 0; i < bookLists.Count; i++)
+                {
+                    XmlNode divNode = xDoc.CreateElement("div");
+                    XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
+                    xmlAttribute.Value = "bookPageBreak";
+                    if (divNode.Attributes != null) divNode.Attributes.Append(xmlAttribute);
+                    divNode.InnerText = " ";
+                    bookLists[i].InsertBefore(divNode, bookLists[i].FirstChild);
+                }
+            }
+            xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
+
+            TextWriter tw = new StreamWriter(_projInfo.DefaultCssFileWithPath, true);
+            tw.WriteLine(".bookPageBreak {");
+            tw.WriteLine("page-break-before: always;");
+            tw.WriteLine("}");
+            tw.Close();
+
         }
 
         public void InsertEmptyDiv(string fileName)

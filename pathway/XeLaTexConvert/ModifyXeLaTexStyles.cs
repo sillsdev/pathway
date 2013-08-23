@@ -181,12 +181,12 @@ namespace SIL.PublishingSolution
             {
                 _tocList = newProperty;
 
-                if (_projectType != null && _projectType != "Scripture")
-                {
-                    _firstString = newProperty["TableofContent"]["first"];
-                    _lastString = newProperty["TableofContent"]["last"];
-                    _headWordStyleName = newProperty["TableofContent"]["stylename"];
-                }
+                //if (_projectType != null && _projectType != "Scripture")
+                //{
+                //    _firstString = newProperty["TableofContent"]["first"];
+                //    _lastString = newProperty["TableofContent"]["last"];
+                //    _headWordStyleName = newProperty["TableofContent"]["stylename"];
+                //}
             }
         }
 
@@ -279,7 +279,21 @@ namespace SIL.PublishingSolution
                 sw.WriteLine(@"\usepackage{multicol}");
                 sw.WriteLine(@"\usepackage{calc}");
                 sw.WriteLine(@"\usepackage{lettrine}");
-                sw.WriteLine(@"\usepackage[margin=1cm,includeheadfoot]{geometry}");
+
+
+                if (pageTopMargin != 0 || pageBottomMargin != 0 || pageLeftMargin != 0 || pageRightMargin != 0)
+                {
+                    pageTopMargin = (pageTopMargin / 28.346456693F) + 1.5;
+                    pageBottomMargin = (pageBottomMargin / 28.346456693F) + 1.5;
+
+                    pageLeftMargin = Convert.ToDouble(Common.UnitConverter(pageLeftMargin.ToString() + "pt", "cm"));
+                    pageRightMargin = Convert.ToDouble(Common.UnitConverter(pageRightMargin.ToString() + "pt", "cm"));
+                    sw.WriteLine(@"\usepackage[left=" + Math.Round(pageLeftMargin, 2) + "cm,right=" + Math.Round(pageRightMargin, 2) + "cm,top=" + Math.Round(pageTopMargin, 2) + "cm,bottom=" + Math.Round(pageBottomMargin, 2) + "cm,includeheadfoot]{geometry}");
+                }
+                else
+                {
+                    sw.WriteLine(@"\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm,includeheadfoot]{geometry}");
+                }
 
                 if (Convert.ToBoolean(CoverImage))
                     sw.WriteLine(@"\usepackage{eso-pic}");
@@ -288,19 +302,6 @@ namespace SIL.PublishingSolution
 
                 sw.WriteLine(@"\begin{document} ");
                 sw.WriteLine(@"\pagestyle{plain} ");
-                if (pageTopMargin != 0 || pageBottomMargin != 0 || pageLeftMargin != 0 || pageRightMargin != 0)
-                {
-                    pageTopMargin = (pageTopMargin / 28.346456693F) + 1.5;
-                    pageBottomMargin = (pageBottomMargin / 28.346456693F) + 1.5;
-
-                    pageLeftMargin = Convert.ToDouble(Common.UnitConverter(pageLeftMargin.ToString() + "pt", "cm"));
-                    pageRightMargin = Convert.ToDouble(Common.UnitConverter(pageRightMargin.ToString() + "pt", "cm"));
-                    sw.WriteLine(@"\newgeometry{left=" + Math.Round(pageLeftMargin, 2) + "cm, right=" + Math.Round(pageRightMargin, 2) + "cm, bottom=" + Math.Round(pageBottomMargin, 2) + "cm, top=" + Math.Round(pageTopMargin, 2) + "cm}");
-                }
-                else
-                {
-                    sw.WriteLine(@"\newgeometry{left=1cm}{right=1cm}");
-                }
             }
 
             foreach (var prop in xeLaTexProperty)
@@ -520,31 +521,24 @@ namespace SIL.PublishingSolution
         private void InsertTableOfContent(StreamWriter sw)
         {
             String tableOfContent = string.Empty;
-
-            ////Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true") ||
-            ////        Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true") ||
-            ////        Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true") ||
-            ////        Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("true"))
-
-            //tableOfContent += "\\title{" + Param.GetMetadataValue(Param.TitlePage) + "} \r\n";
-            //tableOfContent += "\\author{" + Param.GetMetadataValue(Param.CopyrightHolder) + "} \r\n";
-
-            //tableOfContent += "\\maketitle \r\n";
-
-            //tableOfContent += "\\pagebreak[1] \r\n";
             if (_projectType.ToLower() == "dictionary")
             {
-                if (_firstString != null)
+                if (_tocList.ContainsKey("TableofContent") && _tocList["TableofContent"].Count > 0)
                 {
-                    _firstString = _firstString.ToUpper();
-                    _lastString = _lastString.ToUpper();
-                    _firstString = _firstString.Replace("~", "\\textasciitilde{~}");
-                    _lastString = _lastString.Replace("~", "\\textasciitilde{~}");
+                    foreach (var tocSection in _tocList["TableofContent"])
+                    {
+                        if (tocSection.Key.Contains("PageStock"))
+                        {
+                            //tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} " + tocSection.Value + "}{\\pageref{" + tocSection.Key.Replace(" ", "") + "}}{}} \r\n ";
+                            tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{" +
+                                              tocSection.Value + " \\Large }{{\\protect \\pageref{" + tocSection.Key + "}}}{}}" +
+                                              "\r\n";
 
-                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + _firstString + " - " + _lastString + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
-
-                    //For other Font style apply the below line
-                    //tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + "\\" + _headWordStyleName + " " + _firstString.ToUpper() + " - " + "\\" + _headWordStyleName + " " + _lastString.ToUpper() + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
+                            //tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{ \\Large " +
+                            //                  tocSection.Value + " \\Large }{{\\protect \\pageref{" + tocSection.Key + "}}}{}}" +
+                            //                  "\r\n";
+                        }
+                    }
                 }
 
                 tableOfContent += "\r\n";
@@ -558,17 +552,16 @@ namespace SIL.PublishingSolution
                 {
                     foreach (var tocSection in _tocList["TableofContent"])
                     {
-                        if (tocSection.Key.Contains("bookname"))
+                        if (tocSection.Key.Contains("PageStock"))
                         {
-                            //tableOfContent += "\r\n" + tocSection.Value;
-                            //tableOfContent += @"\addtocontents{toc}{\contentsline {chapter}{\numberline{} " + tocSection.Value + "}{\\pageref{" + tocSection.Value + "}}{}} ";
-
                             tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{" +
-                                              tocSection.Value + "}{{\\protect \\pageref{" + tocSection.Value + "}}}{}}" +
+                                              tocSection.Value + "}{{\\protect \\pageref{" + tocSection.Key + "}}}{}}" +
                                               "\r\n";
                         }
                     }
                 }
+                tableOfContent += "\r\n";
+                tableOfContent += "\\newpage \r\n";
             }
             //tableOfContent += "\\thispagestyle{empty} \r\n";
             tableOfContent += "\\pagestyle{plain} \r\n";

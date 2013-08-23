@@ -37,15 +37,6 @@
 .entrytypeabbr { }
 .entry-type-abbr-sub { }
 .entrytypeabbrminor { }
-.example {
-        font-weight: bold;
-}
-.example-minor {
-        font-weight: bold;
-}
-.example-sub {
-        font-weight: bold;
-}
 .examples { }
 .examples-minor { }
 .examples-sub { }
@@ -250,15 +241,6 @@
         padding-top: 1pt;
 }
 .subentry-type { }
-.translation {
-        font-style: italic;
-}
-.translation-minor {
-        font-style: italic;
-}
-.translation-sub {
-        font-style: italic;
-}
 .translations { }
 .translations-minor { }
 .translations-sub { }
@@ -283,4 +265,13 @@
 margin-left : 48pt;
 margin-right: 48pt;
 text-align: justify;
+}
+
+.pictureCenter {
+    float:center;
+    clear: both;
+    margin: 0pt 0pt 4pt 4pt;
+    padding: 2pt;
+    text-indent: 0pt;
+    text-align: center;
 }

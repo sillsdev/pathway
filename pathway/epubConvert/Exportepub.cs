@@ -490,7 +490,10 @@ namespace SIL.PublishingSolution
 
                 // copy over the XHTML and CSS files
                 string cssPath = Common.PathCombine(contentFolder, defaultCSS);
-                File.Copy(mergedCSS, cssPath);
+                
+                if(File.Exists(mergedCSS))
+                    File.Copy(mergedCSS, cssPath, true);
+
                 string tocFiletoUpdate = string.Empty;
                 // copy the xhtml files into the content directory
                 SplitPageSections(htmlFiles, contentFolder, tocFiletoUpdate);
@@ -592,6 +595,7 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
+                Common.CleanupExportFolder(outputPathWithFileName);
             }
             return success;
         }
@@ -2646,7 +2650,7 @@ namespace SIL.PublishingSolution
             var g = Graphics.FromImage((Image)b);
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.DrawImage(image, 0, 0, destW, destH);
-            g.Dispose();
+            //g.Dispose();
             return (Image)b;
         }
 

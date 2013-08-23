@@ -49,7 +49,15 @@ namespace SIL.PublishingSolution
         public string referenceFormat = string.Empty;
         private Dictionary<string, string> _langFontDictionary = new Dictionary<string, string>();
 
+        #endregion
 
+        #region Public Variables
+
+        public Dictionary<string, string> LangFontDictionary
+        {
+            get { return _langFontDictionary; }
+            set { _langFontDictionary = value; }
+        }
 
         #endregion
 
@@ -319,7 +327,7 @@ namespace SIL.PublishingSolution
                 _inlineStyle = new List<string>();
                 _inlineText = new List<string>();
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
-                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList, _inlineText, _langFontDictionary);
+                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList, _inlineText, LangFontDictionary);
 
                 //if (_inlineStyle.Count > 0)
                 {

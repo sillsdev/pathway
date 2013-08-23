@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
 
@@ -74,11 +75,12 @@ namespace SIL.PublishingSolution
                     regPrinceKey =
                         Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
                     if (regPrinceKey == null)
-                    {
-                        regPrinceKey =
-                            Registry.LocalMachine.OpenSubKey(
-                                @"SOFTWARE\Wow6432Node\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
-                    }
+                        regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\{3AC28E9C-8F06-4E2C-ADDA-726E2230A03A}");
+                    if (regPrinceKey == null)
+                        regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
+                    if (regPrinceKey == null)
+                        regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\{3AC28E9C-8F06-4E2C-ADDA-726E2230A03A}");
+
                 }
                 catch (Exception)
                 {
@@ -193,9 +195,14 @@ namespace SIL.PublishingSolution
                         //Common.RunCommand("prince ", _processedXhtml + " -o, " + xhtmlFileName + ".pdf", 1);
                     }
 
-                    if (!Common.Testing)
-                        Process.Start(xhtmlFileName + ".pdf");
+                    //Copyright information added in PDF files
+                    string pdfFIleName = Common.InsertCopyrightInPdf(Common.PathCombine(Environment.CurrentDirectory, xhtmlFileName + ".pdf"), "Prince XML");
+
+                    ////string pdfFIleName = xhtmlFileName + ".pdf";
+                    //if (!Common.Testing)
+                    //    Process.Start(pdfFIleName);
                     Environment.CurrentDirectory = curdir;
+                    Common.CleanupExportFolder(Environment.CurrentDirectory);
                     success = true;
                 }
                 else

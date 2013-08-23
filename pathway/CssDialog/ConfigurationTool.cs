@@ -756,6 +756,11 @@ namespace SIL.PublishingSolution
         {
             get { return chkTurnOffFirstVerse; }
         }
+
+        public CheckBox ChkHideSpaceVerseNo
+        {
+            get { return chkHideSpaceVerseNo; }
+        }
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
@@ -845,7 +850,7 @@ namespace SIL.PublishingSolution
 
         private void txtDesc_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtDesc_ValidatedBL(sender);
+            //_CToolBL.txtDesc_ValidatedBL(sender);
         }
 
         private void chkAvailable_Validated(object sender, EventArgs e)
@@ -855,7 +860,7 @@ namespace SIL.PublishingSolution
 
         private void txtComment_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtComment_ValidatedBL(sender);
+            //_CToolBL.txtComment_ValidatedBL(sender);
         }
 
         private void chkAvailable_CheckedChanged(object sender, EventArgs e)
@@ -930,11 +935,13 @@ namespace SIL.PublishingSolution
         private void txtDesc_KeyUp(object sender, KeyEventArgs e)
         {
             _CToolBL.txtDesc_KeyUpBL();
+            _CToolBL.txtDesc_ValidatedBL(sender, txtDesc.Modified);
         }
 
         private void txtComment_KeyUp(object sender, KeyEventArgs e)
         {
             _CToolBL.txtComment_KeyUpBL();
+            _CToolBL.txtComment_ValidatedBL(sender, txtComment.Modified );
         }
 
         private void txtName_KeyUp(object sender, KeyEventArgs e)
@@ -1409,6 +1416,12 @@ namespace SIL.PublishingSolution
         {
             EditCSS(sender, e);
             _CToolBL.chkPageBreaks_CheckedChangedBL(sender, e);
+        }
+
+        private void chkHideSpaceVerseNo_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkHideSpaceVerseNo_CheckStateChangedBL(sender, e);
         }
     }
 }

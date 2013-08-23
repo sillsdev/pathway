@@ -98,7 +98,17 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void ListSmallTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "ListSmall";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextColorTest()
@@ -113,7 +123,7 @@ namespace Test.XeLatex
         [Category("SkipOnTeamCity")]
         public void ChapterNumberTest()
         {
-            _projInfo.ProjectInputType = "Dictionary";
+            _projInfo.ProjectInputType = "Scripture";
             const string file = "ChapterNumber";
             ExportProcess(file);
             FileCompare(file);
@@ -128,7 +138,16 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void DropCapTest()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "DropCap";
+            ExportProcess(file);
+            FileCompare(file);
+        }
 
         [Test]
         [Category("SkipOnTeamCity")]
@@ -352,6 +371,18 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void GautamiFontTest()
+        {
+            //Added with Unicode
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "GautamiFontTest";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+        
 
         //[Test]
         //[Category("SkipOnTeamCity")]
@@ -987,6 +1018,16 @@ namespace Test.XeLatex
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "FootNoteMarker";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TOCLetters()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TOCLetters";
             ExportProcess(file);
             FileCompare(file);
         }

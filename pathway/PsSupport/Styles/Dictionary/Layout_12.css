@@ -1,3 +1,4 @@
+@import "Dictionary.css";
 @import "Justified_No.css";
 @import "Page_size_C5.css";
 @import "Columns_2.css";
@@ -16,3 +17,9 @@
 @import "Rules_Yes.css";
 @import "PageNumber_TopInside.css"; 
 @import "Reversal_Reference_Numbers.css";
+
+.minorentry {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}

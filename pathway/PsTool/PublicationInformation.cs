@@ -59,6 +59,7 @@ namespace SIL.Tool
         private string _DefaultRevCssFileWithPath;
         private string _DefaultCssFileWithPath;
         private string _DefaultXhtmlFileWithPath;
+        private string _hideSpaceVerseNumber;
         private XmlDocument _DeXml = new XmlDocument();
         private bool _fromPlugin = false;
         public string FinalOutput;
@@ -68,6 +69,7 @@ namespace SIL.Tool
         public string DefaultFontName = "Times New Roman";
         public float DefaultFontSize = 12;
         private bool _isFrontMatterEnabled = false;
+        private bool _isODM;
         public string _headerFontName = "GenericFont";
         public string _selectedTemplateStyle = string.Empty;
 
@@ -281,11 +283,24 @@ namespace SIL.Tool
             set { _includeXRefSymbol = value; }
         }
 
+        public string HideSpaceVerseNumber
+        {
+            get { return _hideSpaceVerseNumber; }
+            set { _hideSpaceVerseNumber = value; }
+        }
+
         public string IncludeFootnoteSymbol
         {
             get { return _includeFootnoteSymbol; }
             set { _includeFootnoteSymbol = value; }
         }
+
+        public bool IsODM
+        {
+            get { return _isODM; }
+            set { _isODM = value; }
+        }
+
         #endregion
 
 

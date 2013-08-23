@@ -55,7 +55,7 @@ namespace SIL.PublishingSolution
         public List<string> XsltFile = new List<string>();
         public static bool isFromConfigurationTool = false;
         private bool _isUnixOS = false;
-
+        private string _sDateTime = string.Empty;
         public ExportThroughPathway()
         {
             InitializeComponent();
@@ -322,6 +322,8 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                AssignFolderDateTime();
+
                 if (!Common.isRightFieldworksVersion())
                 {
                     MessageBox.Show("Please download and install a Pathway version compatible with your software", "Incompatible Pathway Version", MessageBoxButtons.OK,
@@ -402,6 +404,11 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
+        private void AssignFolderDateTime()
+        {
+            _sDateTime = DateTime.Now.ToString("yyyy-MM-dd_HHmmss");
+        }
+
 
         private void PopulateFilesFromPreprocessingFolder()
         {
@@ -441,7 +448,8 @@ namespace SIL.PublishingSolution
             // copyright holder
             if (_settingsHelper.Value.TryGetValue("Copyright", out valueFromSettings))
             {
-                CopyrightHolder = valueFromSettings;
+                //CopyrightHolder = valueFromSettings;
+                CopyrightHolder = Param.GetMetadataValue(Param.CopyrightHolder, Organization);
             }
         }
 
@@ -1187,11 +1195,11 @@ namespace SIL.PublishingSolution
 
         private void ddlStyle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _publicationName = ddlStyle.Text;
-            txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, ddlStyle.Text);
+            _publicationName = ddlStyle.Text.Replace(" ", "_");
+            txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, ddlStyle.Text.Replace(" ", "_"));
             if (_newSaveInFolderPath.Length > 0)
             {
-                txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + ddlStyle.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
+                txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + ddlStyle.Text.Replace(" ", "_") + "_" + _sDateTime;
             }
         }
 
@@ -1295,7 +1303,8 @@ namespace SIL.PublishingSolution
                 directoryInfo.Create();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                string folderName = ddlStyle.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
+
+                string folderName = ddlStyle.Text + "_" + _sDateTime;
                 _newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
                 Param.SetValue(Param.PublicationLocation, _newSaveInFolderPath);
                 txtSaveInFolder.Text = _newSaveInFolderPath;
@@ -1329,6 +1338,8 @@ namespace SIL.PublishingSolution
             ddlCopyrightStatement.Enabled = rdoStandardCopyright.Checked;
             txtColophonFile.Enabled = rdoCustomCopyright.Checked;
             btnBrowseColophon.Enabled = rdoCustomCopyright.Checked;
+            var copyrightDir = Path.Combine(Common.GetPSApplicationPath(), "Copyrights");
+            txtColophonFile.Text = Path.Combine(copyrightDir, "SIL_Custom_Template.xhtml");
         }
 
         private void lnkChooseCopyright_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1362,6 +1373,7 @@ namespace SIL.PublishingSolution
                             // this is our item - set the CopyrightFilename
                             var copyrightDir = Path.Combine(Common.GetPSApplicationPath(), "Copyrights");
                             CopyrightPagePath = Path.Combine(copyrightDir, subnode.Attributes["file"].Value);
+                            //CopyrightPagePath = Path.Combine(copyrightDir, "SIL_Custom_Template.xhtml");
                         }
                     }
                 }
