@@ -52,7 +52,7 @@ namespace SIL.PublishingSolution
                         FontVariant(propertyValue);
                         break;
                     case "text-indent":
-                        TextIndent(propertyValue, className);
+                        TextIndent(propertyValue, className, cssProperty);
                         break;
                     case "margin-left":
                     case "class-margin-left":
@@ -810,21 +810,34 @@ namespace SIL.PublishingSolution
             return fontSize;
         }
 
-        public void TextIndent(string propertyValue, string className)
+        public void TextIndent(string propertyValue, string className, Dictionary<string, string> cssProperty)
         {
             if (propertyValue == string.Empty)
             {
                 return;
             }
 
-            if (propertyValue != "0" && (className == "entry" || className.Contains("IntroList")))
+            if (propertyValue != "0" && (className == "entry" || className.Contains("IntroList") || (className.IndexOf("Line") == 0)))
             {
                 //propertyValue = "text-indent hangpara";
 
                 int hangParaValue = 0;
+                propertyValue = propertyValue.Replace("-", "");
                 hangParaValue = -(Convert.ToInt32(propertyValue));
 
-                propertyValue = "text-indent {hanglist}" + "[" + hangParaValue + "pt]";
+                if (cssProperty.ContainsKey("class-margin-left"))
+                {
+                    propertyValue = @"\leftskip " + cssProperty["class-margin-left"] + "pt ";
+                }
+
+                propertyValue = "text-indent " + propertyValue + @"\parindent " + hangParaValue + "pt ";
+
+                // propertyValue = "text-indent {hanglist}" + "[" + hangParaValue + "pt]";
+
+                //if(cssProperty.ContainsKey("font-size"))
+                //{
+                //    propertyValue = "text-indent {hanglist}" + "[" + hangParaValue + "pt]";
+                //}
             }
 
             if (propertyValue == "0")
@@ -833,15 +846,21 @@ namespace SIL.PublishingSolution
                 //propertyValue = "\\noindent";
             }
 
-            if (propertyValue.IndexOf("hanglist") > 0)
+            //if (propertyValue.IndexOf("hanglist") > 0)
+            //{
+            //    _inlineStyle.Add(propertyValue);
+            //    //propertyValue = Common.SetPropertyValue("\\parindent", propertyValue);
+            //}
+
+            if (propertyValue.IndexOf("text-indent") == 0)
             {
                 _inlineStyle.Add(propertyValue);
                 //propertyValue = Common.SetPropertyValue("\\parindent", propertyValue);
             }
 
-            propertyValue = "\\usepackage{texthanglist}";
-            if (!_includePackageList.Contains(propertyValue))
-                _includePackageList.Add(propertyValue);
+            //propertyValue = "\\usepackage{texthanglist}";
+            //if (!_includePackageList.Contains(propertyValue))
+            //    _includePackageList.Add(propertyValue);
 
         }
         public void Color(string propertyValue)
