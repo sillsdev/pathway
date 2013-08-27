@@ -462,6 +462,7 @@
     <Copy SourceFiles="@(PdfLicenseManager)" DestinationFiles="@(PdfLicenseManager->'Files\ConfigurationTool\%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(ApplyPdfLicense)" DestinationFiles="@(ApplyPdfLicense->'Files\ConfigurationTool\%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'Files\ConfigurationTool\TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'Files\ConfigurationTool\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="Files\ConfigurationTool\" />
@@ -508,6 +509,7 @@
     <!-- TestBackend Include="..\CadreBibleConvert\$(OutputPath)\CadreBibleConvert.*" / -->
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
     <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
+    <BteBackend Include="..\theWordConvert\$(OutputPath)\theWordConvert.*" />
     <BteBackend Include="..\LogosConvert\$(OutputPath)\LogosConvert.*" />
     <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
@@ -539,6 +541,7 @@
     <epubValid Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
     <!-- Validator is referenced even if not called -->
     <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <AllTransform Include="..\PsSupport\pxhtml2xpw-dict.xsl" />

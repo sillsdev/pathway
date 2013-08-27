@@ -83,6 +83,8 @@ pathway/Test/obj/*
 pathway/Test*.xml
 pathway/TestBed/bin/*
 pathway/TestBed/obj/*
+pathway/theWordConvert/bin/*
+pathway/theWordConvert/obj/*
 pathway/ThirdParty/bin/*
 pathway/ThirdParty/obj/*
 pathway/WordPress/bin/*
@@ -115,6 +117,7 @@ pathway/Test/OpenOfficeConvert/TestFiles/output/*
 pathway/Test/PathwayB/TestFiles/output/*
 pathway/Test/PsExport/TestFiles/Output/*
 pathway/Test/PsTool/TestFiles/output/*
+pathway/Test/theWordConvert/TestFiles/output/*
 pathway/Test/WordPressConvert/TestFiles/output/*
 pathway/Test/XeLatex/TestFiles/output/*
 pathway/Test/XhtmlExport/TestFiles/output/*
