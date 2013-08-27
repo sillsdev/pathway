@@ -1,0 +1,844 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- #############################################################
+    # Name:        theWord.xsl
+    # Purpose:     process USX into theWord format
+    #
+    # Author:      Greg Trihus <greg_trihus@sil.org>
+    #
+    # Created:     2013/07/27
+    # Copyright:   (c) 2013 SIL International
+    # Licence:     <LPGL>
+    ################################################################-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    version="1.0">
+    
+    <xsl:param name="missing">(-)</xsl:param>
+    <xsl:param name="refPunc">.</xsl:param>
+    <xsl:param name="bridgePunc">-</xsl:param>
+    <xsl:param name="bookNames">BookNames.xml</xsl:param>
+    <xsl:param name="noStar" select="false()"/>
+    <xsl:param name="noSaltillo" select="false()"/>
+    <xsl:param name="refPref">
+        <xsl:text disable-output-escaping="yes"><![CDATA[http:tw://bible.*?=]]></xsl:text>
+    </xsl:param>
+    
+    <xsl:output  encoding="UTF-8" method="text"/>
+    
+    <xsl:variable name="code" select="//book/@code"/>
+    <xsl:variable name="verseRefs" select="document('vrs.xml')//bk"/>
+    <xsl:variable name="vrs" select="$verseRefs[@code=$code]"/>
+    <xsl:variable name="bookNamesBook" select="document($bookNames)//book"/>
+    
+    <xsl:template match="/">
+        <xsl:text disable-output-escaping="yes"><![CDATA[<TS1>]]></xsl:text>
+        <xsl:value-of select="//para[@style='mt'] | //para[@style='mt1']"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<Ts>]]></xsl:text>
+        <xsl:if test="count(//para[@style='mt2']) = 1">
+            <xsl:text disable-output-escaping="yes"><![CDATA[<TS2><font size=-1><b>]]></xsl:text>
+            <xsl:value-of select="//para[@style='mt2']"/>
+            <xsl:text disable-output-escaping="yes"><![CDATA[</b></font><Ts>]]></xsl:text>
+        </xsl:if>
+        <xsl:call-template name="nextChapter">
+            <xsl:with-param name="cvData" select="$vrs/text()"/>
+        </xsl:call-template>
+    </xsl:template>
+    
+    <xsl:template name="nextChapter">
+        <xsl:param name="cvData"/>
+        <xsl:choose>
+            <xsl:when test="contains($cvData, ' ')">
+                <xsl:call-template name="chapter">
+                    <xsl:with-param name="data" select="substring-before($cvData, ' ')"/>
+                </xsl:call-template>
+                <xsl:call-template name="nextChapter">
+                    <xsl:with-param name="cvData" select="substring-after($cvData, ' ')"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="chapter">
+                    <xsl:with-param name="data" select="$cvData"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="chapter">
+        <xsl:param name="data"/>
+        <xsl:variable name="thisC" select="substring-before($data, ':')"/>
+        <xsl:variable name="cVtotal" select="substring-after($data, ':')"/>
+        <xsl:call-template name="vIter">
+            <xsl:with-param name="c" select="$thisC"/>
+            <xsl:with-param name="v" select="1"/>
+            <xsl:with-param name="total" select="$cVtotal"/>
+        </xsl:call-template>
+    </xsl:template>
+    
+    <xsl:template name="vIter">
+        <xsl:param name="c"/>
+        <xsl:param name="v"/>
+        <xsl:param name="total"/>
+        <xsl:call-template name="VerseLookup">
+            <xsl:with-param name="c" select="$c"/>
+            <xsl:with-param name="v" select="$v"/>
+        </xsl:call-template>
+        <xsl:if test="$v &lt; $total">
+            <xsl:call-template name="vIter">
+                <xsl:with-param name="c" select="$c"/>
+                <xsl:with-param name="v" select="$v + 1"/>
+                <xsl:with-param name="total" select="$total"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="VerseLookup">
+        <xsl:param name="c"/>
+        <xsl:param name="v"/>
+        <xsl:variable name="verse" select="//verse[@number=string($v)][preceding::chapter[1]/@number=$c]"/>
+        <!-- Modern translations have 3JN 14 and REV 12:18 but KJV doesn't have it so we combine if necessary. -->
+        <xsl:choose>
+            <xsl:when test="$code = '3JN' and $v = 14 and count($verse) = 1">
+                <xsl:call-template name="CombineVerses">
+                    <xsl:with-param name="c" select="$c"/>
+                    <xsl:with-param name="v" select="$v"/>
+                    <xsl:with-param name="verse" select="$verse"/>
+                    <xsl:with-param name="nextVerse" select="string(15)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$code = 'REV' and $c = '12' and $v = 17 and count($verse) = 1">
+                <xsl:call-template name="CombineVerses">
+                    <xsl:with-param name="c" select="$c"/>
+                    <xsl:with-param name="v" select="$v"/>
+                    <xsl:with-param name="verse" select="$verse"/>
+                    <xsl:with-param name="nextVerse" select="string(18)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="$verse" mode="v"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="count($verse) = 0">
+            <!-- verse bridges -->
+            <xsl:variable name="firstVerse"
+                select="//verse[starts-with(@number,concat(string($v), $bridgePunc))][preceding::chapter[1]/@number=$c]"/>
+            <xsl:choose>
+                <xsl:when test="count($firstVerse) != 0">
+                    <xsl:apply-templates select="$firstVerse" mode="v">
+                        <xsl:with-param name="bridge" select="$firstVerse/@number"/>
+                    </xsl:apply-templates>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- missing verses -->
+                    <xsl:value-of select="$missing"/>
+                    <xsl:text>&#13;&#10;</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template name="CombineVerses">
+        <xsl:param name="c"/>
+        <xsl:param name="v"/>
+        <xsl:param name="verse"/>
+        <xsl:param name="nextVerse"/>
+        <xsl:variable name="nextVerseNode" select="//verse[@number=$nextVerse][preceding::chapter[1]/@number=$c]"/>
+        <xsl:choose>
+            <xsl:when test="count($nextVerseNode) = 1">
+                <xsl:text disable-output-escaping="yes"><![CDATA[<sup>(]]></xsl:text>
+                <xsl:value-of select="$v"/>
+                <xsl:text>-</xsl:text>
+                <xsl:value-of select="$nextVerse"/>
+                <xsl:text disable-output-escaping="yes"><![CDATA[)</sup> ]]></xsl:text>
+                <xsl:apply-templates select="$verse" mode="v">
+                    <xsl:with-param name="combine" select="1"/>
+                </xsl:apply-templates>
+                <xsl:text> </xsl:text>
+                <xsl:apply-templates select="$nextVerseNode" mode="v"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="$verse" mode="v"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="*" mode="v">
+        <xsl:param name="combine" select="0"/>
+        <xsl:param name="bridge"/>
+        <xsl:apply-templates select="preceding::*[1]" mode="s"/>
+        <xsl:choose>
+            <!-- Not first verse in Paragraph -->
+            <xsl:when test="count(preceding-sibling::verse)">
+                <xsl:apply-templates select="following::node()[1]" mode="t"/>
+            </xsl:when>
+            <!-- It is the first verse in the Paragraph -->
+            <xsl:otherwise>
+                <xsl:call-template name="FirstVerseInParagraph">
+                    <xsl:with-param name="bridge" select="$bridge"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+        <!-- book ends with paragraph end -->
+        <xsl:if test="count(following::*) = 0">
+            <xsl:text disable-output-escaping="yes"><![CDATA[<CM>]]></xsl:text>
+        </xsl:if>
+        <xsl:if test="$combine = 0">
+            <xsl:text>&#13;&#10;</xsl:text>
+        </xsl:if>
+    </xsl:template>
+    
+    <!-- Recurse backwards to previous verse (or start of chapter), process elements as the come off the stack -->
+    <xsl:template match="*" mode="s">
+        <xsl:choose>
+            <xsl:when test="local-name() = 'verse' or count(child::verse) != 0"/>
+            <xsl:when test="local-name() = 'chapter'"/>
+            <xsl:otherwise>
+                <xsl:apply-templates select="preceding::*[1]/ancestor-or-self::para" mode="s"/>
+                <xsl:choose>
+                    <xsl:when test="@style = 's' or @style = 's1' or @style = 's2' or starts-with(@style,'ms')">
+                        <xsl:call-template name="SectionHead"/>
+                    </xsl:when>
+                    <xsl:when test="@style = 'r' or @style = 'mr' or @style = 'd' or @style = 'qa'">
+                        <xsl:call-template name="ParallelReference"/>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="SectionHead">
+        <xsl:text disable-output-escaping="yes"><![CDATA[<TS1>]]></xsl:text>
+        <xsl:if test="@style = 's2'">
+            <xsl:text disable-output-escaping="yes"><![CDATA[<font size=-1>]]></xsl:text>
+        </xsl:if>
+        <xsl:for-each select="child::node()">
+            <xsl:choose>
+                <xsl:when test="@style='f'">
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<RF>]]></xsl:text>
+                    <xsl:value-of select="normalize-space(*[@style = 'ft'])"/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
+                </xsl:when>
+                <xsl:when test="@style = 'it'">
+                    <xsl:if test="normalize-space(preceding-sibling::node()[1]) != ''">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<i>]]></xsl:text>
+                    <xsl:value-of select="normalize-space(.)"/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[</i>]]></xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:if test="normalize-space(preceding-sibling::node()[1]) != ''">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                    <xsl:value-of select="normalize-space(.)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
+        <xsl:if test="@style = 's2'">
+            <xsl:text disable-output-escaping="yes"><![CDATA[</font>]]></xsl:text>
+        </xsl:if>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<Ts>]]></xsl:text>
+    </xsl:template>
+    
+    <xsl:template name="ParallelReference">
+        <xsl:text disable-output-escaping="yes"><![CDATA[<TS3><i>]]></xsl:text>
+        <xsl:value-of select="normalize-space(text())"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</i><Ts>]]></xsl:text>
+    </xsl:template>
+    
+    <xsl:template name="FirstVerseInParagraph">
+        <xsl:param name="bridge"/>
+        <xsl:choose>
+            <!-- verse at q1 indent -->
+            <xsl:when
+                test="parent::node()/@style = 'q' or parent::node()/@style = 'q1' or parent::node()/@style = 'li' or parent::node()/@style = 'li1' or parent::node()/@style = 'qm' or parent::node()/@style = 'qm1'">
+                <xsl:text disable-output-escaping="yes"><![CDATA[<PI>]]></xsl:text>
+                <xsl:if test="$bridge != ''">
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<sup>(]]></xsl:text>
+                    <xsl:value-of select="$bridge"/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[)</sup> ]]></xsl:text>
+                </xsl:if>
+                <xsl:apply-templates select="following::node()[1]" mode="t">
+                    <xsl:with-param name="indent" select="3"/>
+                    <xsl:with-param name="bullet" select="contains(parent::node()/@style, 'li')"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <!-- verse at q2 indent -->
+            <xsl:when
+                test="starts-with(parent::node()/@style, 'q') or starts-with(parent::node()/@style, 'li')">
+                <xsl:text disable-output-escaping="yes"><![CDATA[<PI2>]]></xsl:text>
+                <xsl:if test="$bridge != ''">
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<sup>(]]></xsl:text>
+                    <xsl:value-of select="$bridge"/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[)</sup> ]]></xsl:text>
+                </xsl:if>
+                <xsl:apply-templates select="following::node()[1]" mode="t">
+                    <xsl:with-param name="indent" select="4"/>
+                    <xsl:with-param name="bullet" select="contains(parent::node()/@style, 'li')"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <!-- normal verse -->
+            <xsl:otherwise>
+                <xsl:if test="$bridge != ''">
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<sup>(]]></xsl:text>
+                    <xsl:value-of select="$bridge"/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[)</sup> ]]></xsl:text>
+                </xsl:if>
+                <xsl:apply-templates select="following::node()[1]" mode="t"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <!-- This mode handles the text nodes. -->
+    <xsl:template match="node()" mode="t">
+        <xsl:param name="space" select="0"/>
+        <xsl:param name="indent" select="0"/>
+        <xsl:param name="bullet" select="false()"/>
+        <xsl:choose>
+            <xsl:when test="local-name() = '' and normalize-space() != ''">
+                <xsl:call-template name="NormalText">
+                    <xsl:with-param name="indent" select="$indent"/>
+                    <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="bullet" select="$bullet"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@style = 'it'">
+                <xsl:call-template name="Italic-char">
+                    <xsl:with-param name="space" select="$space"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@style = 'bd' or @style = 'em'">
+                <xsl:call-template name="Bold-char">
+                    <xsl:with-param name="space" select="$space"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@style = 'bdit'">
+                <xsl:call-template name="BoldItalic-char">
+                    <xsl:with-param name="space" select="$space"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@style = 'sc'">
+                <xsl:call-template name="SmallCap-char">
+                    <xsl:with-param name="space" select="$space"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@style = 'sup'">
+                <xsl:call-template name="Sup-char">
+                    <xsl:with-param name="space" select="$space"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@style = 'nd'">
+                <xsl:call-template name="NameOfDiety">
+                    <xsl:with-param name="space" select="$space"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@style = 'sp'">
+                <xsl:call-template name="Speaker"/>
+            </xsl:when>
+            <xsl:when test="@style = 'm' or @style = 'b' or @style = 'tr'">
+                <xsl:if test="not(contains(preceding-sibling::verse[1]/@number | preceding::verse[1]/@number, $bridgePunc))">
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<CL>]]></xsl:text>
+                </xsl:if>
+                <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t"/>
+            </xsl:when>
+            <xsl:when test="starts-with(@style, 'p') or @style = 'sig'">
+                <xsl:if test="not(contains(preceding-sibling::verse[1]/@number | preceding::verse[1]/@number, $bridgePunc))">
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<CM>]]></xsl:text>
+                </xsl:if>
+                <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t"/>
+            </xsl:when>
+            <xsl:when test="@style = 'q' or @style = 'q1' or @style = 'li' or @style = 'li1' or @style = 'qm' or @style = 'qm1'">
+                <xsl:call-template name="Quote-1">
+                    <xsl:with-param name="indent" select="$indent"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="starts-with(@style, 'q') or starts-with(@style, 'li')">
+                <xsl:call-template name="Quote-2">
+                    <xsl:with-param name="indent" select="$indent"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@style = 'f'">
+                <xsl:call-template name="Footnotes">
+                    <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="indent" select="$indent"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@style = 'x'">
+                <xsl:call-template name="CrossReferences">
+                    <xsl:with-param name="caller" select="@caller"/>
+                    <xsl:with-param name="xt" select="*[@style='xt']/text()"/>
+                    <xsl:with-param name="indent" select="$indent"/>
+                </xsl:call-template>
+            </xsl:when>
+            <!-- stop at verse or chapter -->
+            <xsl:when test="local-name() = 'verse'"/>
+            <xsl:when test="local-name() = 'chapter'">
+                <xsl:text disable-output-escaping="yes"><![CDATA[<CM>]]></xsl:text>
+            </xsl:when>
+            <!-- include contents -->                        
+            <xsl:when test="local-name() = 'table'">
+                <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t"/>
+            </xsl:when>
+            <xsl:when test="starts-with(@style, 'tc')">
+                <xsl:if test="preceding-sibling::*[contains(@style, 'tc')]">
+                    <xsl:text> &#x2014; </xsl:text> <!-- em-dash -->
+                </xsl:if>
+                <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t"/>
+            </xsl:when>
+            <xsl:when test="local-name() = 'optbreak'">
+                <xsl:text> </xsl:text>
+                <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t"/>
+            </xsl:when>
+            <!-- skip all other content -->                        
+            <xsl:otherwise>
+                <xsl:apply-templates select="following::node()[1]" mode="t">
+                    <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="indent" select="$indent"/>
+                </xsl:apply-templates>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="NormalText">
+        <xsl:param name="indent"/> <!-- 1=q (or q1), 2=q2 (or q3-4), 3=continue q, 4=continue q2 -->
+        <xsl:param name="space"/>
+        <xsl:param name="bullet"/>
+        <xsl:if test="$indent = 1">
+            <xsl:text disable-output-escaping="yes"><![CDATA[<PI>]]></xsl:text>
+        </xsl:if>
+        <xsl:if test="$indent = 2">
+            <xsl:text disable-output-escaping="yes"><![CDATA[<PI2>]]></xsl:text>
+        </xsl:if>
+        <xsl:if test="$bullet">
+            <xsl:text>&#x2022; </xsl:text> <!-- bullet -->
+        </xsl:if>
+        <xsl:if test="$space = 1">
+            <!-- check if text begins with a space -->
+            <xsl:if test="contains(., ' ') and string-length(substring-before(., ' ')) = 0">
+                <xsl:text> </xsl:text>
+            </xsl:if>
+        </xsl:if>
+        <xsl:call-template name="OutputText"/>
+        <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
+            <xsl:with-param name="space" select="1"/>
+            <xsl:with-param name="indent" select="$indent"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="OutputText">
+        <xsl:choose>
+            <xsl:when test="$noStar = false() and $noSaltillo = false()">
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:when>
+            <xsl:when test="$noStar = false() and $noSaltillo != false()">
+                <xsl:variable name="apos">&apos;</xsl:variable>
+                <xsl:value-of select="normalize-space(translate(., 'ꞌ', $apos))"/>
+            </xsl:when>
+            <xsl:when test="$noStar != false() and $noSaltillo = false()">
+                <xsl:value-of select="normalize-space(translate(., '*', ''))"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="apos">&apos;</xsl:variable>
+                <xsl:value-of select="normalize-space(translate(., 'ꞌ*', $apos))"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="Italic-char">
+        <xsl:param name="space"/>
+        <xsl:if test="$space = 1">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<i>]]></xsl:text>
+        <xsl:call-template name="OutputText"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</i>]]></xsl:text>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="1"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="NameOfDiety">
+        <xsl:param name="space"/>
+        <xsl:if test="$space = 1">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<font color=green>]]></xsl:text>
+        <xsl:call-template name="OutputText"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</font>]]></xsl:text>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="1"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="SmallCap-char">
+        <xsl:param name="space"/>
+        <xsl:if test="$space = 1">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<font size=-1>]]></xsl:text>
+        <xsl:call-template name="OutputText"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</font>]]></xsl:text>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="1"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="Bold-char">
+        <xsl:param name="space"/>
+        <xsl:if test="$space = 1">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<b>]]></xsl:text>
+        <xsl:call-template name="OutputText"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</b>]]></xsl:text>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="1"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="BoldItalic-char">
+        <xsl:param name="space"/>
+        <xsl:if test="$space = 1">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<b><i>]]></xsl:text>
+        <xsl:call-template name="OutputText"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</i></b>]]></xsl:text>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="1"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="Sup-char">
+        <xsl:param name="space"/>
+        <xsl:if test="$space = 1">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<sup>]]></xsl:text>
+        <xsl:call-template name="OutputText"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</sup>]]></xsl:text>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="1"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="Quote-1">
+        <xsl:param name="indent"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<CI>]]></xsl:text>
+        <xsl:choose>
+            <xsl:when test="$indent = 1 or $indent = 3">
+                <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
+                    <xsl:with-param name="indent" select="3"/>
+                    <xsl:with-param name="bullet" select="contains(@style, 'li')"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
+                    <xsl:with-param name="indent" select="1"/>
+                    <xsl:with-param name="bullet" select="contains(@style, 'li')"/>
+                </xsl:apply-templates>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="Quote-2">
+        <xsl:param name="indent"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<CI>]]></xsl:text>
+        <xsl:choose>
+            <xsl:when test="$indent = 2 or $indent = 4">
+                <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
+                    <xsl:with-param name="indent" select="4"/>
+                    <xsl:with-param name="bullet" select="contains(@style, 'li')"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
+                    <xsl:with-param name="indent" select="2"/>
+                    <xsl:with-param name="bullet" select="contains(@style, 'li')"/>
+                </xsl:apply-templates>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="Speaker">
+        <xsl:text disable-output-escaping="yes"><![CDATA[<CM><PI0>]]></xsl:text>
+        <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t"/>
+    </xsl:template>
+    
+    <xsl:template name="Footnotes">
+        <xsl:param name="space"/>
+        <xsl:param name="indent"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<RF>]]></xsl:text>
+        <xsl:for-each select="child::node()">
+            <xsl:choose>
+                <xsl:when test="@style = 'fr'"/>
+                <xsl:when test="@style = 'it' or @style = 'fq'">
+                    <xsl:if test="normalize-space(preceding-sibling::*[@style !='fr']/text()) != ''">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<i>]]></xsl:text>
+                    <xsl:value-of select="text()"/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[</i>]]></xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:if test="normalize-space(preceding-sibling::*[@style != 'fr']/text()) != ''">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                    <xsl:call-template name="OutputText"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="$space"/>
+            <xsl:with-param name="indent" select="$indent"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="CrossReferences">
+        <xsl:param name="caller">*</xsl:param>
+        <xsl:param name="xt"/>
+        <xsl:param name="indent"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<RF q=]]></xsl:text>
+        <xsl:value-of select="@caller"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text>
+        <xsl:call-template name="CrossReferenceIter">
+            <xsl:with-param name="xt" select="$xt"/>
+        </xsl:call-template>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="indent" select="$indent"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="CrossReferenceIter">
+        <xsl:param name="xt"/>
+        <xsl:param name="book"/>
+        <xsl:choose>
+            <xsl:when test="contains($xt, ';')">
+                <xsl:call-template name="CrossRefVerseListIter">
+                    <xsl:with-param name="ref" select="substring-before($xt, ';')"/>
+                    <xsl:with-param name="book" select="$book"/>
+                    <xsl:with-param name="xtr" select="normalize-space(substring-after($xt, ';'))"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="CrossRefVerseListIter">
+                    <xsl:with-param name="ref" select="$xt"/>
+                    <xsl:with-param name="book" select="$book"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="CrossRefVerseListIter">
+        <xsl:param name="ref"/>
+        <xsl:param name="book"/>
+        <xsl:param name="chap"/>
+        <xsl:param name="xtr" />
+        <xsl:choose>
+            <xsl:when test="contains($ref, ',')">
+                <xsl:call-template name="ReferenceFindBook">
+                    <xsl:with-param name="ref" select="substring-before($ref, ',')"/>
+                    <xsl:with-param name="book" select="$book"/>
+                    <xsl:with-param name="chap" select="$chap"/>
+                    <xsl:with-param name="xtv" select="normalize-space(substring-after($ref, ','))"/>
+                    <xsl:with-param name="xtr" select="$xtr"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="ReferenceFindBook">
+                    <xsl:with-param name="ref" select="$ref"/>
+                    <xsl:with-param name="book" select="$book"/>
+                    <xsl:with-param name="chap" select="$chap"/>
+                    <xsl:with-param name="xtr" select="$xtr"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="ReferenceFindBook">
+        <xsl:param name="ref"/>
+        <xsl:param name="book"/>
+        <xsl:param name="chap"/>
+        <xsl:param name="xtv" />
+        <xsl:param name="xtr"/>        
+        <xsl:variable name="refAbbr" select="substring-before($ref, ' ')"/>
+        <xsl:variable name="refBook" select="$bookNamesBook[@abbr=$refAbbr]"/>
+        <xsl:variable name="refNAbbr">
+            <xsl:value-of select="$refAbbr"/>
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="substring-before(substring-after($ref, ' '), ' ')"/>
+        </xsl:variable>
+        <xsl:variable name="refNBook" select="$bookNamesBook[@abbr=$refNAbbr]"/>
+        <xsl:choose>
+            <!-- No book abbr, continue in the same book -->
+            <xsl:when test="not(contains($ref, ' '))">
+                <xsl:call-template name="ReferenceFindChapter">
+                    <xsl:with-param name="ref" select="$ref"/>
+                    <xsl:with-param name="refCV" select="$ref"/>
+                    <xsl:with-param name="refBook" select="$book"/>
+                    <xsl:with-param name="chap" select="$chap"/>
+                    <xsl:with-param name="xtv" select="$xtv"/>
+                </xsl:call-template>
+                <xsl:if test="$xtr != ''">
+                    <xsl:text>; </xsl:text>
+                    <xsl:call-template name="CrossReferenceIter">
+                        <xsl:with-param name="xt" select="$xtr"/>
+                        <xsl:with-param name="book" select="$book"/>
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:when>
+            <!-- New book abbrevation given -->    
+            <xsl:when test="count($refBook) = 1">
+                <xsl:call-template name="ReferenceFindChapter">
+                    <xsl:with-param name="ref" select="$ref"/>
+                    <xsl:with-param name="refCV" select="substring($ref, string-length($refAbbr) + 2)"/>
+                    <xsl:with-param name="refBook" select="$refBook"/>
+                    <xsl:with-param name="chap" select="$chap"/>
+                    <xsl:with-param name="xtv" select="$xtv"/>
+                </xsl:call-template>
+                <xsl:if test="$xtr != ''">
+                    <xsl:text>; </xsl:text>
+                    <xsl:call-template name="CrossReferenceIter">
+                        <xsl:with-param name="xt" select="$xtr"/>
+                        <xsl:with-param name="book" select="$refBook"/>
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:when>
+            <!-- book name is a digit followed by a space and then the rest of book abbr -->
+            <xsl:when test="count($refNBook) = 1">
+                <xsl:call-template name="ReferenceFindChapter">
+                    <xsl:with-param name="ref" select="$ref"/>
+                    <xsl:with-param name="refCV" select="substring($ref, string-length($refNAbbr) + 2)"/>
+                    <xsl:with-param name="refBook" select="$refNBook"/>
+                    <xsl:with-param name="chap" select="$chap"/>
+                    <xsl:with-param name="xtv" select="$xtv"/>
+                </xsl:call-template>
+                <xsl:if test="$xtr != ''">
+                    <xsl:text>; </xsl:text>
+                    <xsl:call-template name="CrossReferenceIter">
+                        <xsl:with-param name="xt" select="$xtr"/>
+                        <xsl:with-param name="book" select="$refNBook"/>
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message terminate="no">
+                    <xsl:text>Book abbreviation </xsl:text>
+                    <xsl:value-of select="$refAbbr"/>
+                    <xsl:text> not found in </xsl:text>
+                    <xsl:value-of select="$bookNames"/>
+                </xsl:message>
+                <xsl:value-of select="$ref"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="ReferenceFindChapter">
+        <xsl:param name="ref"/>
+        <xsl:param name="refCV"/>
+        <xsl:param name="refBook"/>
+        <xsl:param name="chap"/>
+        <xsl:param name="xtv"/>
+        <xsl:variable name="refCode" select="$refBook/@code"/>
+        <xsl:variable name="c" select="substring-before($refCV, $refPunc)"/>
+        <xsl:choose>
+            <xsl:when test="$c != ''">
+                <xsl:call-template name="Reference">
+                    <xsl:with-param name="ref" select="$ref"/>
+                    <xsl:with-param name="refBook" select="$refBook"/>
+                    <xsl:with-param name="c" select="$c"/>
+                    <xsl:with-param name="v" select="substring-after($refCV, $refPunc)"/>
+                </xsl:call-template>
+                <xsl:if test="$xtv != ''">
+                    <xsl:text>, </xsl:text>
+                    <xsl:call-template name="CrossRefVerseListIter">
+                        <xsl:with-param name="ref" select="$xtv"/>
+                        <xsl:with-param name="book" select="$refBook"/>
+                        <xsl:with-param name="chap" select="$c"/>
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:when>
+            <xsl:when test="$chap = '' and not(contains($verseRefs[@code = $refCode]/text(), ' '))">
+                <xsl:call-template name="Reference">
+                    <xsl:with-param name="ref" select="$ref"/>
+                    <xsl:with-param name="refBook" select="$refBook"/>
+                    <xsl:with-param name="c" select="1"/>
+                    <xsl:with-param name="v" select="$refCV"/>
+                </xsl:call-template>
+                <xsl:if test="$xtv != ''">
+                    <xsl:text>, </xsl:text>
+                    <xsl:call-template name="CrossRefVerseListIter">
+                        <xsl:with-param name="ref" select="$xtv"/>
+                        <xsl:with-param name="book" select="$refBook"/>
+                        <xsl:with-param name="chap" select="1"/>
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:when>
+            <xsl:when test="$chap = ''">
+                <xsl:call-template name="Reference">
+                    <xsl:with-param name="ref" select="$ref"/>
+                    <xsl:with-param name="refBook" select="$refBook"/>
+                    <xsl:with-param name="c" select="$refCV"/>
+                    <xsl:with-param name="v" select="1"/>
+                </xsl:call-template>
+                <xsl:if test="$xtv != ''">
+                    <xsl:text>, </xsl:text>
+                    <xsl:call-template name="CrossRefVerseListIter">
+                        <xsl:with-param name="ref" select="$xtv"/>
+                        <xsl:with-param name="book" select="$refBook"/>
+                        <xsl:with-param name="chap" select="$refCV"/>
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="Reference">
+                    <xsl:with-param name="ref" select="$ref"/>
+                    <xsl:with-param name="refBook" select="$refBook"/>
+                    <xsl:with-param name="c" select="$chap"/>
+                    <xsl:with-param name="v" select="$refCV"/>
+                </xsl:call-template>
+                <xsl:if test="$xtv != ''">
+                    <xsl:text>, </xsl:text>
+                    <xsl:call-template name="CrossRefVerseListIter">
+                        <xsl:with-param name="ref" select="$xtv"/>
+                        <xsl:with-param name="book" select="$refBook"/>
+                        <xsl:with-param name="chap" select="$chap"/>
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="Reference">
+        <xsl:param name="ref"/>
+        <xsl:param name="refBook"/>
+        <xsl:param name="c"/>
+        <xsl:param name="v"/>
+        <xsl:variable name="refCode" select="$refBook/@code"/>
+        <xsl:variable name="b" select="count($verseRefs[@code=$refCode]/preceding-sibling::*) + 1"/>
+        <xsl:choose>
+            <xsl:when test="$c != ''">
+                <xsl:text disable-output-escaping="yes"><![CDATA[<a href="]]></xsl:text>
+                <xsl:value-of select="$refPref"/>
+                <xsl:value-of select="$b"/>
+                <xsl:text>.</xsl:text>
+                <xsl:value-of select="$c"/>
+                <xsl:text>.</xsl:text>
+                <xsl:value-of select="$v"/>
+                <xsl:text disable-output-escaping="yes"><![CDATA[">]]></xsl:text>
+                <xsl:value-of select="$ref"/>
+                <xsl:text disable-output-escaping="yes"><![CDATA[</a>]]></xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message terminate="no">
+                    <xsl:text>Reference punctuation (</xsl:text>
+                    <xsl:value-of select="$refPunc"/>
+                    <xsl:text>) not found in reference </xsl:text>
+                    <xsl:value-of select="$ref"/>
+                </xsl:message>
+                <xsl:value-of select="$ref"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+</xsl:stylesheet>

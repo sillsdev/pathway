@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<usx version="2.0">
+  <book code="GEN" style="id">English-US: New International Version 1984</book>
+  <para style="ide">65001 - Unicode (UTF-8)</para>
+  <para style="rem">Copyright Information: For any non-Paratext use of this text, permission must be obtained from the copyright holder</para>
+  <para style="rem">CAP Information: checked/corrected 2009 Barb Penner</para>
+  <para style="h">GENESIS</para>
+  <para style="toc1">Genesis</para>
+  <para style="toc2">Genesis</para>
+  <para style="toc3">Ge</para>
+  <para style="mt1">Genesis</para>
+  <chapter number="1" style="c" />
+  <para style="s1">The Beginning</para>
+  <para style="pi">
+    <verse number="1" style="v" />In the beginning God created the heavens and the earth. <verse number="2" style="v" />Now the earth was <note caller="+" style="f"><char style="fr" closed="false">1.2 </char><char style="ft" closed="false">Or possibly </char><char style="fq" closed="false">became</char></note> formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.</para>
+  <para style="b" />
+  <para style="li1">
+    <verse number="3" style="v" />And God said, “Let there be light,” and there was light. <verse number="4" style="v" />God saw that the light was good, and he separated the light from the darkness. <verse number="5" style="v" />God called the light “day,” and the darkness he called “night.” And there was evening, and there was morning–the first day.</para>
+  <para style="li1">
+    <verse number="6" style="v" />And God said, “Let there be an expanse between the waters to separate water from water.” <verse number="7" style="v" />So God made the expanse and separated the water under the expanse from the water above it. And it was so. <verse number="8" style="v" />God called the expanse “sky.” And there was evening, and there was morning–the second day.</para>
+  <para style="li1">
+    <verse number="9" style="v" />And God said, “Let the water under the sky be gathered to one place, and let dry ground appear.” And it was so. <verse number="10" style="v" />God called the dry ground “land,” and the gathered waters he called “seas.” And God saw that it was good.</para>
+  <para style="pi">
+    <verse number="11" style="v" />Then God said, “Let the land produce vegetation: seed-bearing plants and trees on the land that bear fruit with seed in it, according to their various kinds.” And it was so. <verse number="12" style="v" />The land produced vegetation: plants bearing seed according to their kinds and trees bearing fruit with seed in it according to their kinds. And God saw that it was good. <verse number="13" style="v" />And there was evening, and there was morning–the third day.</para>
+  <para style="li1">
+    <verse number="14" style="v" />And God said, “Let there be lights in the expanse of the sky to separate the day from the night, and let them serve as signs to mark seasons and days and years, <verse number="15" style="v" />and let them be lights in the expanse of the sky to give light on the earth.” And it was so. <verse number="16" style="v" />God made two great lights–the greater light to govern the day and the lesser light to govern the night. He also made the stars. <verse number="17" style="v" />God set them in the expanse of the sky to give light on the earth, <verse number="18" style="v" />to govern the day and the night, and to separate light from darkness. And God saw that it was good. <verse number="19" style="v" />And there was evening, and there was morning–the fourth day.</para>
+  <para style="li1">
+    <verse number="20" style="v" />And God said, “Let the water teem with living creatures, and let birds fly above the earth across the expanse of the sky.” <verse number="21" style="v" />So God created the great creatures of the sea and every living and moving thing with which the water teems, according to their kinds, and every winged bird according to its kind. And God saw that it was good. <verse number="22" style="v" />God blessed them and said, “Be fruitful and increase in number and fill the water in the seas, and let the birds increase on the earth.” <verse number="23" style="v" />And there was evening, and there was morning–the fifth day.</para>
+  <para style="li1">
+    <verse number="24" style="v" />And God said, “Let the land produce living creatures according to their kinds: livestock, creatures that move along the ground, and wild animals, each according to its kind.” And it was so. <verse number="25" style="v" />God made the wild animals according to their kinds, the livestock according to their kinds, and all the creatures that move along the ground according to their kinds. And God saw that it was good.</para>
+  <para style="pi">
+    <verse number="26" style="v" />Then God said, “Let us make man in our image, in our likeness, and let them rule over the fish of the sea and the birds of the air, over the livestock, over all the earth, <note caller="+" style="f"><char style="fr" closed="false">1.26 </char><char style="ft" closed="false">Hebrew; Syriac </char><char style="fq" closed="false">all the wild animals</char></note> and over all the creatures that move along the ground.”</para>
+  <para style="q1">
+    <verse number="27" style="v" />So God created man in his own image,</para>
+  <para style="q2">in the image of God he created him;</para>
+  <para style="q2">male and female he created them.</para>
+  <para style="b" />
+  <para style="pi">
+    <verse number="28" style="v" />God blessed them and said to them, “Be fruitful and increase in number; fill the earth and subdue it. Rule over the fish of the sea and the birds of the air and over every living creature that moves on the ground.”</para>
+  <para style="pi">
+    <verse number="29" style="v" />Then God said, “I give you every seed-bearing plant on the face of the whole earth and every tree that has fruit with seed in it. They will be yours for food. <verse number="30" style="v" />And to all the beasts of the earth and all the birds of the air and all the creatures that move on the ground–everything that has the breath of life in it–I give every green plant for food.” And it was so.</para>
+  <para style="pi">
+    <verse number="31" style="v" />God saw all that he had made, and it was very good. And there was evening, and there was morning–the sixth day.</para>
+  <chapter number="2" style="c" />
+  <para style="pi">
+    <verse number="1" style="v" />Thus the heavens and the earth were completed in all their vast array.</para>
+  <para style="b" />
+  <para style="li1">
+    <verse number="2" style="v" />By the seventh day God had finished the work he had been doing; so on the seventh day he rested <note caller="+" style="f"><char style="fr" closed="false">2.2 </char><char style="ft" closed="false">Or </char><char style="fq" closed="false">ceased; </char><char style="ft" closed="false">also in verse 3</char></note> from all his work. <verse number="3" style="v" />And God blessed the seventh day and made it holy, because on it he rested from all the work of creating that he had done.</para>
+  <para style="s1">Adam and Eve</para>
+  <para style="p">
+    <verse number="4" style="v" />This is the account of the heavens and the earth when they were created.</para>
+  <para style="p">When the <char style="nd">Lord</char> God made the earth and the heavens– <verse number="5" style="v" />and no shrub of the field had yet appeared on the earth <note caller="+" style="f"><char style="fr" closed="false">2.5 </char><char style="ft" closed="false">Or </char><char style="fq" closed="false">land; </char><char style="ft" closed="false">also in verse 6</char></note> and no plant of the field had yet sprung up, for the <char style="nd">Lord</char> God had not sent rain on the earth <note caller="+" style="f"><char style="fr" closed="false">2.5 </char><char style="ft" closed="false">Or </char><char style="fq" closed="false">land; </char><char style="ft" closed="false">also in verse 6</char></note> and there was no man to work the ground, <verse number="6" style="v" />but streams <note caller="+" style="f"><char style="fr" closed="false">2.6 </char><char style="ft" closed="false">Or </char><char style="fq" closed="false">mist</char></note> came up from the earth and watered the whole surface of the ground– <verse number="7" style="v" />the <char style="nd">Lord</char> God formed the man <note caller="+" style="f"><char style="fr" closed="false">2.7 </char><char style="ft" closed="false">The Hebrew for </char><char style="fq" closed="false">man (adam ) </char><char style="ft" closed="false">sounds like and may be related to the Hebrew for </char><char style="fq" closed="false">ground (adamah;) </char><char style="ft" closed="false">it is also the name </char><char style="fq" closed="false">Adam </char><char style="ft" closed="false">(see GEN 2.20 ).</char></note> from the dust of the ground and breathed into his nostrils the breath of life, and the man became a living being.</para>
+  <chapter number="10" style="c" />
+  <para style="s1">The Table of Nations</para>
+  <para style="p">
+    <verse number="1" style="v" />This is the account of Shem, Ham and Japheth, Noah's sons, who themselves had sons after the flood.</para>
+  <para style="s2">The Japhethites</para>
+  <para style="li1">
+    <verse number="2" style="v" />The sons <note caller="+" style="f"><char style="fr" closed="false">10.2 </char><char style="ft" closed="false" /><char style="fq" closed="false">Sons </char><char style="ft" closed="false">may mean </char><char style="fq" closed="false">descendants </char><char style="ft" closed="false">or </char><char style="fq" closed="false">successors </char><char style="ft" closed="false">or </char><char style="fq" closed="false">nations; </char><char style="ft" closed="false">also in verses 3, 4, 6, 7, 20-23, 29 and 31.</char></note> of Japheth:</para>
+  <para style="li2">Gomer, Magog, Madai, Javan, Tubal, Meshech and Tiras.</para>
+  <para style="li1">
+    <verse number="3" style="v" />The sons of Gomer:</para>
+  <para style="li2">Ashkenaz, Riphath and Togarmah.</para>
+  <para style="li1">
+    <verse number="4" style="v" />The sons of Javan:</para>
+  <para style="li2">Elishah, Tarshish, the Kittim and the Rodanim. <note caller="+" style="f"><char style="fr" closed="false">10.4 </char><char style="ft" closed="false">Some manuscripts of the Masoretic Text and Samaritan Pentateuch (see also Septuagint and 1CH 1.7 ); most manuscripts of the Masoretic Text </char><char style="fq" closed="false">Dodanim</char></note> <verse number="5" style="v" />(From these the maritime peoples spread out into their territories by their clans within their nations, each with its own language.)</para>
+  <para style="s2">The Hamites</para>
+  <para style="li1">
+    <verse number="6" style="v" />The sons of Ham:</para>
+  <para style="li2">Cush, Mizraim, <note caller="+" style="f"><char style="fr" closed="false">10.6 </char><char style="ft" closed="false">That is, Egypt; also in verse 13</char></note> Put and Canaan.</para>
+  <para style="li1">
+    <verse number="7" style="v" />The sons of Cush:</para>
+  <para style="li2">Seba, Havilah, Sabtah, Raamah and Sabteca.</para>
+  <para style="li1">The sons of Raamah:</para>
+  <para style="li2">Sheba and Dedan.</para>
+  <chapter number="46" style="c" />
+  <para style="p">
+    <verse number="8" style="v" />These are the names of the sons of Israel (Jacob and his descendants) who went to Egypt:</para>
+  <para style="b" />
+  <para style="li1">Reuben the firstborn of Jacob.</para>
+  <para style="li1">
+    <verse number="9" style="v" />The sons of Reuben:</para>
+  <para style="li2">Hanoch, Pallu, Hezron and Carmi.</para>
+  <para style="li1">
+    <verse number="10" style="v" />The sons of Simeon:</para>
+  <para style="li2">Jemuel, Jamin, Ohad, Jakin, Zohar and Shaul the son of a Canaanite woman.</para>
+  <para style="li1">
+    <verse number="11" style="v" />The sons of Levi:</para>
+  <para style="li2">Gershon, Kohath and Merari.</para>
+  <para style="li1">
+    <verse number="12" style="v" />The sons of Judah:</para>
+  <para style="li2">Er, Onan, Shelah, Perez and Zerah (but Er and Onan had died in the land of Canaan).</para>
+  <para style="li2">The sons of Perez:</para>
+  <para style="li3">Hezron and Hamul.</para>
+  <para style="li1">
+    <verse number="13" style="v" />The sons of Issachar:</para>
+  <para style="li2">Tola, Puah, <note caller="+" style="f"><char style="fr" closed="false">46.13 </char><char style="ft" closed="false">Samaritan Pentateuch and Syriac (see also 1CH 7.1 ); Masoretic Text </char><char style="fq" closed="false">Puvah</char></note> Jashub <note caller="+" style="f"><char style="fr" closed="false">46.13 </char><char style="ft" closed="false">Samaritan Pentateuch and some Septuagint manuscripts (see also NUM 26.24 and 1CH 7.1 ); Masoretic Text </char><char style="fq" closed="false">Iob</char></note> and Shimron.</para>
+  <para style="li1">
+    <verse number="14" style="v" />The sons of Zebulun:</para>
+  <para style="li2">Sered, Elon and Jahleel.</para>
+  <para style="p">
+    <verse number="15" style="v" />These were the sons Leah bore to Jacob in Paddan Aram, <note caller="+" style="f"><char style="fr" closed="false">46.15 </char><char style="ft" closed="false">That is, Northwest Mesopotamia</char></note> besides his daughter Dinah. These sons and daughters of his were thirty-three in all.</para>
+  <para style="b" />
+  <para style="li1">
+    <verse number="16" style="v" />The sons of Gad:</para>
+  <para style="li2">Zephon, <note caller="+" style="f"><char style="fr" closed="false">46.16 </char><char style="ft" closed="false">Samaritan Pentateuch and Septuagint (see also Num 26.15); Masoretic Text </char><char style="fq" closed="false">Ziphion</char></note> Haggi, Shuni, Ezbon, Eri, Arodi and Areli.</para>
+  <para style="li1">
+    <verse number="17" style="v" />The sons of Asher:</para>
+  <para style="li2">Imnah, Ishvah, Ishvi and Beriah.</para>
+  <para style="li2">Their sister was Serah.</para>
+  <para style="li2">The sons of Beriah:</para>
+  <para style="li2">Heber and Malkiel.</para>
+  <para style="p">
+    <verse number="18" style="v" />These were the children born to Jacob by Zilpah, whom Laban had given to his daughter Leah–sixteen in all.</para>
+</usx>

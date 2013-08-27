@@ -1,0 +1,28 @@
+MySword for Android Migration Tools v.1.0 License Agreement
+Copyright © 2010-2011
+by Jomin N Yu & Esmy C Yu
+Riversoft Systems
+All rights reserved.
+
+This Software is provided by the Authors "as is." Any express or implied
+warranties, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose are disclaimed. In no
+event shall the Authors or contributors be liable for any direct, indirect,
+incidental, special, exemplary, or consequential damages (including, but not
+limited to, procurement of substitute goods or services; loss of use, data, or
+profits; or business interruption) however caused and on any theory of
+liability, whether in contract, strict liability, or tort (including negligence
+or otherwise) arising in any way out of the use of, or inability to use, this
+Software, even if advised of the possibility of such damage.
+
+Permission is granted to anyone to use this software for the purpose of
+migrating unencrypted TheWord modules to MySword, subject to the following
+restrictions:
+
+1. The copyright of the modules that will migrated must be respected.
+
+2. The origin of this software must not be misrepresented; you must not claim
+that you wrote the original software. If you distribute this yourself,
+an acknowledgment in the product documentation is required.
+
+3. This notice may not be removed or altered from any distribution.
