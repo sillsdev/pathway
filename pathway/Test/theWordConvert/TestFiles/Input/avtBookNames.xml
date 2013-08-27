@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BookNames>
+  <book code="MAT" abbr="Mt" short="Tɨwei Matyu kewisɨk" long="Hɨm Yaaim Me Krais Matyu Kewisɨm Mau Tɨwei" />
+  <book code="MRK" abbr="Mk" short="Tɨwei Mak kewisɨk" long="Hɨm Yaaim Me Jisas Krais Mak Kewisɨm Mau Tɨwei" />
+  <book code="LUK" abbr="Lu" short="Tɨwei Luk kewisɨk" long="Hɨm Yaaim Me Krais Luk Kewisɨm Mau Tɨwei" />
+  <book code="JHN" abbr="Jo" short="Tɨwei Jon kewisɨk" long="Hɨm Yaaim Me Krais Jon Kewisɨm Mau Tɨwei" />
+  <book code="ACT" abbr="Ap" short="Tɨwei kerek Luk kewisɨk ken mɨtɨk Tiofilas - Aposel" long="Menmen Mɨt Aposel Hɨr Nɨrɨakem" />
+  <book code="ROM" abbr="Ro" short="Tɨwei Pol kewisɨk ken mɨt ne Rom" long="Tɨwei Pol Kewisɨk Ken Mɨt Ne Rom" />
+  <book code="1CO" abbr="1Ko" short="Tɨwei 1 Pol kewisɨk ken mɨt ne Korin" long="Tɨwei Pol Kewisɨk Ken Mɨt Ne Wit Korin - 1" />
+  <book code="2CO" abbr="2Ko" short="Tɨwei 2 Pol kewisɨk ken mɨt ne Korin" long="Tɨwei Pol Kewisɨk Ken Mɨt Ne Wit Korin - 2" />
+  <book code="GAL" abbr="Ga" short="Tɨwei Pol kewisɨk ken mɨt ne Galesia" long="Tɨwei Pol Kewisɨk Ken Mɨt Ne Galesia" />
+  <book code="EPH" abbr="Ef" short="Tɨwei Pol kewisɨk ken mɨt ne Efesas" long="Tɨwei Pol Kewisɨk Ken Mɨt Ne Wit Efesas" />
+  <book code="PHP" abbr="Fl" short="Tɨwei Pol kewisɨk ken mɨt ne Filipai" long="Tɨwei Pol Kewisɨk Ken Wit Filipai" />
+  <book code="COL" abbr="Kl" short="Tɨwei Pol kewisɨk ken mɨt ne Kolosi" long="Tɨwei Pol Kewisɨk Ken Mɨt Ne Wit Kolosi" />
+  <book code="1TH" abbr="1Te" short="Tɨwei 1 Pol kewisɨk ken mɨt ne Tesalonaika" long="Tɨwei Pol Kewisɨk Ken Mɨt Ne Wit Tesalonaika - 1" />
+  <book code="2TH" abbr="2Te" short="Tɨwei 2 Pol kewisɨk ken mɨt ne Tesalonaika" long="Tɨwei Pol Kewisɨk Ken Mɨt Ne Wit Tesalonaika - 2" />
+  <book code="1TI" abbr="1Ti" short="Tɨwei 1 Pol kewisɨk ken Timoti" long="Tɨwei Pol Kewisɨk Ken Timoti-1" />
+  <book code="2TI" abbr="2Ti" short="Tɨwei 2 Pol kewisɨk ken Timoti" long="Tɨwei Pol Kewisɨk Ken Timoti - 2" />
+  <book code="TIT" abbr="Ta" short="Tɨwei Pol kewisɨk ken Taitas" long="Tɨwei Pol Kewisɨk Ken Mɨtɨk Taitas" />
+  <book code="PHM" abbr="Fm" short="Tɨwei Pol kewisɨk ken Failimon" long="Tɨwei Pol Kewisɨk Ken Failimon" />
+  <book code="HEB" abbr="Hi" short="Tɨwei mɨtɨk kewɨsɨk ken mɨt ne Hibru" long="Tɨwei Mɨtɨk Kewisɨk Ken Mɨt Ne Isrel - Hibru" />
+  <book code="JAS" abbr="Je" short="Tɨwei Jems kewɨsɨk ken mɨt ne sios" long="Tɨwei Jems Kewisɨk" />
+  <book code="1PE" abbr="1Pi" short="Tɨwei 1 Pita kewɨsɨk ken mɨt ne sios" long="Tɨwei Pita Kewisɨk - 1" />
+  <book code="2PE" abbr="2Pi" short="Tɨwei 2 Pita kewɨsɨk ken mɨt ne sios" long="Tɨwei Pita Kewisɨk - 2" />
+  <book code="1JN" abbr="1Jo" short="Tɨwei 1 Jon kewɨsɨk ken mɨt ne sios" long="Tɨwei Jon Kewisɨk - 1" />
+  <book code="2JN" abbr="2Jo" short="Tɨwei 2 Jon kewɨsɨk ken mɨt ne sios" long="Tɨwei Jon Kewisɨk - 2" />
+  <book code="3JN" abbr="3Jo" short="Tɨwei 3 Jon kewɨsɨk ken mɨt ne sios" long="Tɨwei Jon Kewisɨk - 3" />
+  <book code="JUD" abbr="Ju" short="Tɨwei Jut kewɨsɨk ken mɨt ne sios" long="Tɨwei Jut Kewisɨk" />
+  <book code="REV" abbr="Rev" short="Tɨwei Jon kewɨsɨk ken mɨt ne sios - Revelesen" long="Menmen Jon Kɨtyak Kɨrem - Revelesen" />
+  <book code="XXA" abbr="" short="" long="" />
+  <book code="FRT" abbr="" short="" long="" />
+  <book code="GEN" abbr="Jen" short="Jenesis" long="Jenesis" />
+  <book code="EXO" abbr="Eks" short="Eksodas" long="Eksodas" />
+  <book code="LEV" abbr="Lev" short="Levitikas" long="Levitikas" />
+  <book code="NUM" abbr="Nam" short="Nambas" long="Nambas" />
+  <book code="DEU" abbr="Diu" short="Diuteronomi" long="Diuteronomi" />
+  <book code="JOS" abbr="Jos" short="Josua" long="Josua" />
+  <book code="JDG" abbr="Het" short="Ol Hetman" long="Ol Hetman" />
+  <book code="RUT" abbr="Rut" short="Rut" long="Rut" />
+  <book code="1SA" abbr="1Sml" short="1 Samyuel" long="1 Samyuel" />
+  <book code="2SA" abbr="2Sml" short="2 Samyuel" long="2 Samyuel" />
+  <book code="1KI" abbr="1Kin" short="1 King" long="1 King" />
+  <book code="2KI" abbr="2Kin" short="2 King" long="2 King" />
+  <book code="1CH" abbr="1Kro" short="1 Kronikel" long="1 Kronikel" />
+  <book code="2CH" abbr="2Kro" short="2 Kronikel" long="2 Kronikel" />
+  <book code="EZR" abbr="Esr" short="Esra" long="Esra" />
+  <book code="NEH" abbr="Nia" short="Naimaia" long="Naimaia" />
+  <book code="EST" abbr="Est" short="Esta" long="Esta" />
+  <book code="JOB" abbr="Jop" short="Jop" long="Jop" />
+  <book code="PSA" abbr="Sam" short="Sam" long="Sam" />
+  <book code="PRO" abbr="Pro" short="Provep" long="Provep" />
+  <book code="ECC" abbr="Ekl" short="Eklisiastis" long="Eklisiastis" />
+  <book code="SNG" abbr="Sol" short="Song Bilong Solomon" long="Song Bilong Solomon" />
+  <book code="ISA" abbr="Ais" short="Aisaia" long="Aisaia" />
+  <book code="JER" abbr="Jer" short="Jeremaia" long="Jeremaia" />
+  <book code="LAM" abbr="Kra" short="Krai Bilong Jeremaia" long="Krai Bilong Jeremaia" />
+  <book code="EZK" abbr="Esi" short="Esikiel" long="Esikiel" />
+  <book code="DAN" abbr="Dan" short="Danyel" long="Danyel" />
+  <book code="HOS" abbr="Hos" short="Hosea" long="Hosea" />
+  <book code="JOL" abbr="Joe" short="Joel" long="Joel" />
+  <book code="AMO" abbr="Emo" short="Emos" long="Emos" />
+  <book code="OBA" abbr="Oba" short="Obadaia" long="Obadaia" />
+  <book code="JON" abbr="Jna" short="Jona" long="Jona" />
+  <book code="MIC" abbr="Mai" short="Maika" long="Maika" />
+  <book code="NAM" abbr="Nea" short="Neam" long="Neam" />
+  <book code="HAB" abbr="Hab" short="Habakak" long="Habakak" />
+  <book code="ZEP" abbr="Sef" short="Sefanaia" long="Sefanaia" />
+  <book code="HAG" abbr="Hag" short="Hagai" long="Hagai" />
+  <book code="ZEC" abbr="Sek" short="Sekaraia" long="Sekaraia" />
+  <book code="MAL" abbr="Mal" short="Malakai" long="Malakai" />
+  <book code="TOB" abbr="" short="" long="" />
+  <book code="JDT" abbr="" short="" long="" />
+  <book code="ESG" abbr="" short="" long="" />
+  <book code="WIS" abbr="" short="" long="" />
+  <book code="SIR" abbr="" short="" long="" />
+  <book code="BAR" abbr="" short="" long="" />
+  <book code="LJE" abbr="" short="" long="" />
+  <book code="S3Y" abbr="" short="" long="" />
+  <book code="SUS" abbr="" short="" long="" />
+  <book code="BEL" abbr="" short="" long="" />
+  <book code="1MA" abbr="" short="" long="" />
+  <book code="2MA" abbr="" short="" long="" />
+  <book code="3MA" abbr="" short="" long="" />
+  <book code="4MA" abbr="" short="" long="" />
+  <book code="1ES" abbr="" short="" long="" />
+  <book code="2ES" abbr="" short="" long="" />
+  <book code="MAN" abbr="" short="" long="" />
+  <book code="PS2" abbr="" short="" long="" />
+  <book code="ODA" abbr="" short="" long="" />
+  <book code="PSS" abbr="" short="" long="" />
+  <book code="JSA" abbr="" short="" long="" />
+  <book code="JDB" abbr="" short="" long="" />
+  <book code="TBS" abbr="" short="" long="" />
+  <book code="SST" abbr="" short="" long="" />
+  <book code="DNT" abbr="" short="" long="" />
+  <book code="BLT" abbr="" short="" long="" />
+  <book code="3ES" abbr="" short="" long="" />
+  <book code="EZA" abbr="" short="" long="" />
+  <book code="5EZ" abbr="" short="" long="" />
+  <book code="6EZ" abbr="" short="" long="" />
+  <book code="DAG" abbr="" short="" long="" />
+  <book code="PS3" abbr="" short="" long="" />
+  <book code="2BA" abbr="" short="" long="" />
+  <book code="LBA" abbr="" short="" long="" />
+  <book code="JUB" abbr="" short="" long="" />
+  <book code="ENO" abbr="" short="" long="" />
+  <book code="1MQ" abbr="" short="" long="" />
+  <book code="2MQ" abbr="" short="" long="" />
+  <book code="3MQ" abbr="" short="" long="" />
+  <book code="REP" abbr="" short="" long="" />
+  <book code="4BA" abbr="" short="" long="" />
+  <book code="LAO" abbr="" short="" long="" />
+</BookNames>

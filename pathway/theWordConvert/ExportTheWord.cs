@@ -17,13 +17,17 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Xsl;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
     public class ExportTheWord : IExportProcess
     {
+        private static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
         protected string processFolder;
         protected string restructuredFullName;
         protected string collectionFullName;
@@ -71,6 +75,8 @@ namespace SIL.PublishingSolution
                 
                 inProcess.Show();
                 inProcess.PerformStep();
+                var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
+                TheWord.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("theWordConvert.theWord.xsl")), xsltSettings, null);
                 var exportTheWordInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
 
                 Param.LoadSettings();
