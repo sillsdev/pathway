@@ -32,7 +32,7 @@
     @top-center    { content: ''; }
     @top-right     { content: ''; }
     @bottom-left   { content: ''; }
-    @bottom-center { content: ''; }
+    @bottom-center { content: counter(page); }
     @bottom-right  { content: ''; }
 }
 
