@@ -13,13 +13,11 @@
 // ---------------------------------------------------------------------------------------------
 using System;
 using System.IO;
-using System.Text.RegularExpressions;
-using System.Xml;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
 
-namespace Test.WordPressConvert
+namespace Test.ExportTheWordTest
 {
     /// ----------------------------------------------------------------------------------------
     /// <summary>
@@ -27,7 +25,7 @@ namespace Test.WordPressConvert
     /// </summary>
     /// ----------------------------------------------------------------------------------------
     [TestFixture]
-    public class TheWordConvertTest: TheWordConvert
+    public class ExportTheWordTest: ExportTheWord
     {
         #region setup
         private string _inputPath;
@@ -53,23 +51,23 @@ namespace Test.WordPressConvert
         [Test]
         public void ExportTypeTest()
         {
-            var target = new ExportWordPress();
+            var target = new ExportTheWord();
             var actual = target.ExportType;
             Assert.AreEqual("theWord", actual);
         }
 
         [Test]
-        public void HandleDictionaryTest()
+        public void HandleScriptureTest()
         {
-            var target = new ExportWordPress();
+            var target = new ExportTheWord();
             var actual = target.Handle("Scripture");
             Assert.IsTrue(actual);
         }
 
         [Test]
-        public void HandleScriptureTest()
+        public void HandleDictionaryTest()
         {
-            var target = new ExportWordPress();
+            var target = new ExportTheWord();
             var actual = target.Handle("Dictionary");
             Assert.IsFalse(actual);
         }
@@ -80,7 +78,7 @@ namespace Test.WordPressConvert
         [Test]
         public void ExportNullTest()
         {
-            var target = new ExportWordPress();
+            var target = new ExportTheWord();
             PublicationInformation projInfo = null;
             var actual = target.Export(projInfo);
             Assert.IsFalse(actual);

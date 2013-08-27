@@ -292,6 +292,7 @@
     <Compile Include="PublishingSolutionExeUi\PsUiScenarioTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="theWordConvert\ExportTheWordTest.cs" />
     <Compile Include="XeLatex\XeLaTexContentTest.cs" />
     <Compile Include="CssDialog\ContentsTest.cs">
       <SubType>Form</SubType>
