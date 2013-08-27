@@ -76,7 +76,9 @@ namespace SIL.PublishingSolution
                 inProcess.Show();
                 inProcess.PerformStep();
                 var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
-                TheWord.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream("theWordConvert.theWord.xsl")), xsltSettings, null);
+                var inputXsl = Assembly.GetExecutingAssembly().GetManifestResourceStream("SIL.PublishingSolution.theWord.xsl");
+                Debug.Assert(inputXsl != null);
+                TheWord.Load(XmlReader.Create(inputXsl), xsltSettings, null);
                 var exportTheWordInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
 
                 Param.LoadSettings();
