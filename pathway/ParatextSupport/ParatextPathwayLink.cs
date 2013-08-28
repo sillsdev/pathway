@@ -192,6 +192,10 @@ namespace SIL.PublishingSolution
 
                 // Get the file name as set on the dialog.
                 m_outputLocationPath = dlg.OutputLocationPath;
+                if (m_format == "theWord")
+                {
+                    ExportUsx(usxBooksToExport);
+                }
                 string cssFullPath = Path.Combine(m_outputLocationPath, pubName + ".css");
                 StyToCSS styToCss = new StyToCSS();
                 styToCss.ConvertStyToCSS(m_projectName, cssFullPath);
@@ -226,6 +230,26 @@ namespace SIL.PublishingSolution
                 PsExport exporter = new PsExport();
                 exporter.DataType = "Scripture";
                 exporter.Export(fileName);
+            }
+        }
+
+        /// <summary>
+        /// Write the USX files to the output folder in a sub folder called USX
+        /// </summary>
+        /// <param name="usxBooksToExport"></param>
+        private void ExportUsx(List<XmlDocument> usxBooksToExport)
+        {
+            var usxDir = Path.Combine(m_outputLocationPath, "USX");
+            Directory.CreateDirectory(usxDir);
+            foreach (XmlDocument xmlDocument in usxBooksToExport)
+            {
+                var codeNode = xmlDocument.SelectSingleNode("//@code");
+                Debug.Assert(codeNode != null);
+                var name = codeNode.InnerText + ".usx";
+                var fullName = Path.Combine(usxDir, name);
+                var fw = new StreamWriter(fullName);
+                xmlDocument.Save(fw);
+                fw.Close();
             }
         }
 
