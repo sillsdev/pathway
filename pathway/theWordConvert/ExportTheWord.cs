@@ -30,6 +30,8 @@ namespace SIL.PublishingSolution
     public class ExportTheWord : IExportProcess
     {
         static int _verbosity = 0;
+        static object _paratextData;
+        private static string _ssf;
 
         private static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
         protected string processFolder;
@@ -94,16 +96,16 @@ namespace SIL.PublishingSolution
 
                 //string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
 
-                FindParatextProject(exportTheWordInputPath);
+                FindParatextProject();
                 var xsltArgs = new XsltArgumentList();
-                xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator"));
+                xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
                 xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
 
                 var otBooks = new List<string>();
                 var ntBooks = new List<string>();
                 CollectTestamentBooks(otBooks, ntBooks);
 
-                var output = GetSsfValue("//EthnologueCode");
+                var output = GetSsfValue("//EthnologueCode", "zxx");
                 var fullName = UsxDir(exportTheWordInputPath);
                 LogStatus("Processing: {0}", fullName);
                 var codeNames = new Dictionary<string, string>();
@@ -146,9 +148,11 @@ namespace SIL.PublishingSolution
                     });
                 myProc.WaitForExit();
                 var mySwordFiles = Directory.GetFiles(tempTheWordCreatorPath, "*.mybible");
+                var mySwordResult = "<No MySword Result>";
                 if (mySwordFiles.Length >= 1)
                 {
-                    File.Copy(mySwordFiles[0], Path.Combine(exportTheWordInputPath, Path.GetFileNameWithoutExtension(mySwordFiles[0])));
+                    mySwordResult = Path.Combine(exportTheWordInputPath, Path.GetFileNameWithoutExtension(mySwordFiles[0]));
+                    File.Copy(mySwordFiles[0], mySwordResult);
                 }
 
                 Directory.Delete(tempTheWordCreatorPath, true);
@@ -162,7 +166,7 @@ namespace SIL.PublishingSolution
                 {
                     // Tell the user to do it manually.
                     var theWordFolder = @"C:\ProgramData\The Word\Bibles";
-                    string msg = string.Format("Please copy the file {0} to {1} for theWord.\nCopy {2} to your the Bibles folder of MySword on your Phone. You can also send pathway@sil.org for uploading.\n\nDo you want to launch theWord?", resultFullName, theWordFolder, mySwordFullName);
+                    string msg = string.Format("Please copy the file {0} to {1} for theWord.\nCopy {2} to your the Bibles folder of MySword on your Phone. You can also send pathway@sil.org for uploading.\n\nDo you want to launch theWord?", resultFullName, theWordFolder, mySwordResult);
                     DialogResult dialogResult = MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
 
                     if (dialogResult == DialogResult.Yes)
@@ -242,7 +246,7 @@ about={1} \
 <p>— Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.\
 <p><b>Notice</b> — For any reuse or distribution, you must make clear to others the license terms of this work.\
 ";
-            var langCode = GetSsfValue("//EthnologueCode");
+            var langCode = GetSsfValue("//EthnologueCode", "zxx");
             const bool isConfigurationTool = false;
             var title = Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool);
             var description = Param.GetMetadataValue("Description");
@@ -251,7 +255,7 @@ about={1} \
             var publisher = Param.GetMetadataValue("Publisher");
             var publishDate = createDate;
             var creator = Param.GetMetadataValue("Creator");
-            var font = GetSsfValue("//DefaultFont");
+            var font = GetSsfValue("//DefaultFont", "Charis SIL");
             sw.Write(string.Format(format, langCode, title, description, copyright, createDate, publisher, publishDate, creator, font));
         }
 
@@ -325,54 +329,21 @@ about={1} \
             return otFlag;
         }
 
-        static XmlDocument _ssfDoc;
-        static object _paratextData;
-        private static bool FindParatextProject(string exportTheWordInputPath)
+        private static void FindParatextProject()
         {
-            _ssfDoc = Common.DeclareXMLDocument(true);
-            Debug.Assert(exportTheWordInputPath != null);
-            var usxDir = UsxDir(exportTheWordInputPath);
-            var usxFiles = Directory.GetFiles(usxDir, "*.usx");
-            if (usxFiles.Length < 1)
-            {
-                throw new FileNotFoundException("No usx files.");
-            }
-            var xDoc = Common.DeclareXMLDocument(true);
-            xDoc.Load(usxFiles[0]);
-            var idNode = xDoc.SelectSingleNode("//*[@style='id']");
-            if (idNode == null)
-            {
-                throw new FileLoadException("No id node");
-            }
-            string idText = idNode.InnerText;
-            if (idText.StartsWith("- "))
-            {
-                idText = idText.Substring(2);
-            }
             RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out _paratextData);
-            foreach (string ssf in Directory.GetFiles((string)_paratextData, "*.ssf"))
-            {
-                var sr = new StreamReader(ssf);
-                _ssfDoc.Load(sr);
-                sr.Close();
-                var fullNameNode = _ssfDoc.SelectSingleNode("//FullName");
-                if (fullNameNode == null)
-                {
-                    continue;
-                }
-                if (fullNameNode.InnerText == idText)
-                {
-                    return true;
-                }
-            }
-            return false;
+            var sh = new SettingsHelper(Param.DatabaseName);
+            _ssf = sh.GetSettingsFilename();
         }
 
         private static string GetSsfValue(string xpath)
         {
-            var node = _ssfDoc.SelectSingleNode(xpath);
-            Debug.Assert(node != null);
-            return node.InnerText;
+            return GetSsfValue(xpath, null);
+        }
+        private static string GetSsfValue(string xpath, string def)
+        {
+            var node = Common.GetXmlNode(_ssf, xpath);
+            return (node != null)? node.InnerText : def;
         }
 
         private static string GetBookNamesUri()
