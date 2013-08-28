@@ -15,9 +15,11 @@
 // --------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Xsl;
@@ -27,6 +29,8 @@ namespace SIL.PublishingSolution
 {
     public class ExportTheWord : IExportProcess
     {
+        static int _verbosity = 0;
+
         private static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
         protected string processFolder;
         protected string restructuredFullName;
@@ -67,11 +71,14 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             bool success;
+            var myCursor = Cursor.Current;
+            var originalDir = Environment.CurrentDirectory;
             var inProcess = new InProcess(0, 6);
             try
             {
-                var myCursor = Cursor.Current;
                 Cursor.Current = Cursors.WaitCursor;
+                var assemblyLocation = Assembly.GetExecutingAssembly().Location;
+                Environment.CurrentDirectory = Path.GetDirectoryName(assemblyLocation);
                 
                 inProcess.Show();
                 inProcess.PerformStep();
@@ -85,34 +92,101 @@ namespace SIL.PublishingSolution
                 Param.SetValue(Param.InputType, "Scripture");
                 Param.LoadSettings();
 
-                string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+                //string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+
+                FindParatextProject(exportTheWordInputPath);
+                var xsltArgs = new XsltArgumentList();
+                xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator"));
+                xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
+
+                var otBooks = new List<string>();
+                var ntBooks = new List<string>();
+                CollectTestamentBooks(otBooks, ntBooks);
+
+                var output = GetSsfValue("//EthnologueCode");
+                var fullName = UsxDir(exportTheWordInputPath);
+                LogStatus("Processing: {0}", fullName);
+                var codeNames = new Dictionary<string, string>();
+                var otFlag = OtFlag(fullName, codeNames, otBooks);
+                var resultName = output + (otFlag ? ".ont" : ".nt");
+                var resultFullName = Path.Combine(exportTheWordInputPath, resultName);
+                LogStatus("Creating: {0}", resultName);
+                // false = do not append but overwrite instead
+                var sw = new StreamWriter(resultFullName, false, new UTF8Encoding(true));
+                if (otFlag)
+                {
+                    ProcessTestament(otBooks, codeNames, xsltArgs, sw);
+                }
+                ProcessTestament(ntBooks, codeNames, xsltArgs, sw);
+                AttachMetadata(sw);
+                sw.Close();
 
                 string TheWordFullPath = Common.FromRegistry("TheWord");
                 string tempTheWordCreatorPath = TheWordCreatorTempDirectory(TheWordFullPath);
+                xsltArgs.AddParam("refPref", "", "b");
 
+                var mySwordFullName = Path.Combine(tempTheWordCreatorPath, resultName);
+                LogStatus("Creating MySword: {0}", resultName);
+                // false = do not append but overwrite instead
+                sw = new StreamWriter(mySwordFullName, false, new UTF8Encoding(true));
+                if (otFlag)
+                {
+                    ProcessTestament(otBooks, codeNames, xsltArgs, sw);
+                }
+                ProcessTestament(ntBooks, codeNames, xsltArgs, sw);
+                AttachMetadata(sw);
+                sw.Close();
+
+                var myProc = Process.Start(new ProcessStartInfo
+                    {
+                        Arguments = resultName,
+                        FileName = "TheWordBible2MySword.exe",
+                        WorkingDirectory = tempTheWordCreatorPath,
+                        CreateNoWindow = true
+                    });
+                myProc.WaitForExit();
+                var mySwordFiles = Directory.GetFiles(tempTheWordCreatorPath, "*.mybible");
+                if (mySwordFiles.Length >= 1)
+                {
+                    File.Copy(mySwordFiles[0], Path.Combine(exportTheWordInputPath, Path.GetFileNameWithoutExtension(mySwordFiles[0])));
+                }
+
+                Directory.Delete(tempTheWordCreatorPath, true);
                 success = true;
 
                 inProcess.Close();
+                Environment.CurrentDirectory = originalDir;
                 Cursor.Current = myCursor;
 
-                var jarFile = string.Empty;
-                if (File.Exists(jarFile))
+                if (File.Exists(resultFullName))
                 {
-                    // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
-                    string msg = string.Format("Please copy the file {0} to your phone.\n\nDo you want to open the folder?", jarFile);
-                    DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    // Tell the user to do it manually.
+                    var theWordFolder = @"C:\ProgramData\The Word\Bibles";
+                    string msg = string.Format("Please copy the file {0} to {1} for theWord.\nCopy {2} to your the Bibles folder of MySword on your Phone. You can also send pathway@sil.org for uploading.\n\nDo you want to launch theWord?", resultFullName, theWordFolder, mySwordFullName);
+                    DialogResult dialogResult = MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
 
                     if (dialogResult == DialogResult.Yes)
                     {
-                        string dirPath = Path.GetDirectoryName(jarFile);
-                        Process.Start(dirPath);
-                        //Process.Start("explorer.exe", dirPath);
+                        File.Copy(resultFullName, Path.Combine(theWordFolder, resultName));
+                        Process.Start(@"C:\Program Files (x86)\The Word\theword.exe");
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        const bool noWait = false;
+                        if (Common.IsUnixOS())
+                        {
+                            SubProcess.Run(exportTheWordInputPath, "nautilus", exportTheWordInputPath, noWait);
+                        }
+                        else
+                        {
+                            SubProcess.Run(exportTheWordInputPath, "explorer.exe", exportTheWordInputPath, noWait);
+                        }
                     }
 
                 }
                 else
                 {
-                    MessageBox.Show("Failed Exporting TheWord Process.", "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Failed Exporting TheWord Process.", "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 //DeleteTempFiles(exportTheWordInputPath);
@@ -125,8 +199,196 @@ namespace SIL.PublishingSolution
                 success = false;
                 inProcess.PerformStep();
                 inProcess.Close();
+                Environment.CurrentDirectory = originalDir;
+                Cursor.Current = myCursor;
             }
             return success;
+        }
+
+        private void AttachMetadata(StreamWriter sw)
+        {
+            var format = @"id=W{0}
+charset=0
+lang={0}
+font={8}
+short.title={0}
+title={1}
+description={2} \
+{3}
+version.major=1
+version.minor=0
+version.date={4}
+publisher={5}
+publish.date={6}
+author={5}
+creator={7}
+source={5}
+about={1} \
+<p>{3} \
+<p>\
+<p> . . . . . . . . . . . . . . . . . . .\
+<p><b>Creative Commons</b> <i>Atribution-Non Comercial-No Derivatives 3.0</i>\
+<p><font color=blue><i>http://creativecommons.org/licenses/by-nc-nd/3.0</i></font>\
+<p><b>Your are free: <i>To Share</i></b>  — to copy, distribute and transmit the work\
+<p><b><i>Under the following conditions:</i></b>\
+<p><b>• Attribution.</b> You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).\
+<p><b>• Noncommercial.</b> You may not use this work for commercial purposes.\
+<p><b>• No Derivative Works.</b> You may not alter, transform, or build upon this work.\
+<p><b><i>With the understanding:</i></b>\
+<p><b>• Waiver.</b> Any of the above conditions can be waived if you get permission from the copyright holder.\
+<p><b>• Other Rights.</b> In no way are any of the following rights affected by the license:\
+<p>— Your fair dealing or fair use rights;\
+<p>— The author's moral rights;\
+<p>— Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.\
+<p><b>Notice</b> — For any reuse or distribution, you must make clear to others the license terms of this work.\
+";
+            var langCode = GetSsfValue("//EthnologueCode");
+            const bool isConfigurationTool = false;
+            var title = Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool);
+            var description = Param.GetMetadataValue("Description");
+            var copyright = Param.GetMetadataValue("Copyright Holder");
+            var createDate = DateTime.Now.ToString("yyyy.M.d");
+            var publisher = Param.GetMetadataValue("Publisher");
+            var publishDate = createDate;
+            var creator = Param.GetMetadataValue("Creator");
+            var font = GetSsfValue("//DefaultFont");
+            sw.Write(string.Format(format, langCode, title, description, copyright, createDate, publisher, publishDate, creator, font));
+        }
+
+        private static void CollectTestamentBooks(List<string> otBooks, List<string> ntBooks)
+        {
+            var xmlDoc = Common.DeclareXMLDocument(true);
+            var vfs = new StreamReader("vrs.xml");
+            xmlDoc.Load(vfs);
+            vfs.Close();
+            var codeNodes = xmlDoc.SelectNodes("//@code");
+            var bkCount = 0;
+            foreach (XmlNode node in codeNodes)
+            {
+                if (++bkCount <= 39)
+                {
+                    otBooks.Add(node.InnerText);
+                }
+                else
+                {
+                    ntBooks.Add(node.InnerText);
+                }
+            }
+        }
+
+        private static void ProcessTestament(IEnumerable<string> books, Dictionary<string, string> codeNames, XsltArgumentList xsltArgs,
+                                             StreamWriter sw)
+        {
+            foreach (string book in books)
+            {
+                if (codeNames.ContainsKey(book))
+                {
+                    LogStatus("Processing {0}", codeNames[book]);
+                    TheWord.Transform(codeNames[book], xsltArgs, sw);
+                }
+                else
+                {
+                    LogStatus("Creating empty {0}", book);
+                    var tempName = TempName(book);
+                    TheWord.Transform(tempName, xsltArgs, sw);
+                    File.Delete(tempName);
+                }
+            }
+        }
+
+        private static string TempName(string book)
+        {
+            var tempName = Path.GetTempFileName();
+            var tempStream = new StreamWriter(tempName);
+            tempStream.Write(string.Format("<usx><book code= \"{0}\"/></usx>", book));
+            tempStream.Close();
+            return tempName;
+        }
+
+        private static bool OtFlag(string fullName, Dictionary<string, string> codeNames, List<string> otBooks)
+        {
+            var codeStart = -1;
+            var otFlag = false;
+            foreach (string file in Directory.GetFiles(fullName, "*.usx"))
+            {
+                if (codeStart == -1)
+                {
+                    codeStart = Path.GetDirectoryName(file).Length + 1;
+                }
+                var curCode = file.Substring(codeStart, 3);
+                codeNames[curCode] = file;
+                if (otBooks.Contains(curCode))
+                {
+                    otFlag = true;
+                }
+            }
+            return otFlag;
+        }
+
+        static XmlDocument _ssfDoc;
+        static object _paratextData;
+        private static bool FindParatextProject(string exportTheWordInputPath)
+        {
+            _ssfDoc = Common.DeclareXMLDocument(true);
+            Debug.Assert(exportTheWordInputPath != null);
+            var usxDir = UsxDir(exportTheWordInputPath);
+            var usxFiles = Directory.GetFiles(usxDir, "*.usx");
+            if (usxFiles.Length < 1)
+            {
+                throw new FileNotFoundException("No usx files.");
+            }
+            var xDoc = Common.DeclareXMLDocument(true);
+            xDoc.Load(usxFiles[0]);
+            var idNode = xDoc.SelectSingleNode("//*[@style='id']");
+            if (idNode == null)
+            {
+                throw new FileLoadException("No id node");
+            }
+            string idText = idNode.InnerText;
+            if (idText.StartsWith("- "))
+            {
+                idText = idText.Substring(2);
+            }
+            RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out _paratextData);
+            foreach (string ssf in Directory.GetFiles((string)_paratextData, "*.ssf"))
+            {
+                var sr = new StreamReader(ssf);
+                _ssfDoc.Load(sr);
+                sr.Close();
+                var fullNameNode = _ssfDoc.SelectSingleNode("//FullName");
+                if (fullNameNode == null)
+                {
+                    continue;
+                }
+                if (fullNameNode.InnerText == idText)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static string GetSsfValue(string xpath)
+        {
+            var node = _ssfDoc.SelectSingleNode(xpath);
+            Debug.Assert(node != null);
+            return node.InnerText;
+        }
+
+        private static string GetBookNamesUri()
+        {
+            var myProj = Path.Combine((string) _paratextData, GetSsfValue("//Name"));
+            return "file:///" + Path.Combine(myProj, "BookNames.xml");
+        }
+
+        private static string UsxDir(string exportTheWordInputPath)
+        {
+            var usxDir = Path.Combine(exportTheWordInputPath, "USX");
+            if (!Directory.Exists(usxDir))
+            {
+                throw new FileNotFoundException("No USX folder");
+            }
+            return usxDir;
         }
 
         private string TheWordCreatorTempDirectory(string theWordFullPath)
@@ -137,18 +399,31 @@ namespace SIL.PublishingSolution
             if (Directory.Exists(folder))
                 Directory.Delete(folder, true);
 
-            CopyTheWordCreatorFolderToTemp(theWordFullPath, folder);
+            CopyTheWordFolderToTemp(theWordFullPath, folder);
+            if (Directory.Exists(@"C:\Program Files (x86)"))
+            {
+                CopyFolderContents(Path.Combine(folder, "x64"), folder);
+            }
+            else
+            {
+                CopyFolderContents(Path.Combine(folder, "x32"), folder);
+            }
 
             return folder;
         }
 
-        private void CopyTheWordCreatorFolderToTemp(string sourceFolder, string destFolder)
+        private void CopyTheWordFolderToTemp(string sourceFolder, string destFolder)
         {
             if (Directory.Exists(destFolder))
             {
                 Common.DeleteDirectory(destFolder);
             }
             Directory.CreateDirectory(destFolder);
+            CopyFolderContents(sourceFolder, destFolder);
+        }
+
+        private void CopyFolderContents(string sourceFolder, string destFolder)
+        {
             string[] files = Directory.GetFiles(sourceFolder);
             try
             {
@@ -164,15 +439,11 @@ namespace SIL.PublishingSolution
                 {
                     string name = Path.GetFileName(folder);
                     string dest = Common.PathCombine(destFolder, name);
-                    if (name != "User Interface")
-                    {
-                        CopyTheWordCreatorFolderToTemp(folder, dest);
-                    }
+                    CopyTheWordFolderToTemp(folder, dest);
                 }
             }
             catch
             {
-                
             }
         }
 
@@ -198,6 +469,15 @@ namespace SIL.PublishingSolution
 
             SubProcess.RedirectOutput = RedirectOutputFileName;
             SubProcess.RunCommand(processFolder, "java", args, true);
+        }
+
+        static void LogStatus(string format, params object[] args)
+        {
+            if (_verbosity > 0)
+            {
+                Console.Write("# ");
+                Console.WriteLine(format, args);
+            }
         }
 
     }
