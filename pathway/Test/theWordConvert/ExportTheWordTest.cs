@@ -16,6 +16,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Xml;
+using System.Xml.Xsl;
+using NMock2;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -31,6 +34,7 @@ namespace Test.TheWordConvertTest
     public class ExportTheWordTest: ExportTheWord
     {
         #region setup
+        private Mockery mocks = new Mockery();
         private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
@@ -132,6 +136,32 @@ namespace Test.TheWordConvertTest
             var actual = OtFlag(fullName, codeNames, otBooks);
             Assert.False(actual);
             Assert.AreEqual(2, codeNames.Count);
+        }
+
+        [Test]
+        public void ProcessTestamentTest()
+        {
+            var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
+            string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
+            TheWord.Load(XmlReader.Create(Path.Combine(codePath, "theWord.xsl")), xsltSettings, null);
+            IEnumerable<string> books = new List<string>(2) { "MAT", "MRK" };
+            var codeNames = new Dictionary<string, string>(2);
+            codeNames["MAT"] = FileInput(@"USX\040MAT.usx");
+            codeNames["MRK"] = FileInput(@"USX\041MRK.usx");
+            var xsltArgs = new XsltArgumentList();
+            xsltArgs.AddParam("bookNames", "", "file:///" + FileInput("BookNames.xml"));
+            var temp = Path.GetTempFileName();
+            var sw = new StreamWriter(temp);
+            var inProcess = (IInProcess) mocks.NewMock(typeof (IInProcess));
+            Expect.Exactly(2).On(inProcess).Method("PerformStep");
+            ProcessTestament(books, codeNames, xsltArgs, sw, inProcess);
+            sw.Close();
+            var sr = new StreamReader(temp);
+            var data = sr.ReadToEnd();
+            sr.Close();
+            File.Delete(temp);
+            Assert.AreEqual(1750, data.Split(new[] { '\n' }).Length);
+            mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
 
