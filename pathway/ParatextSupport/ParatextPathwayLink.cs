@@ -192,7 +192,7 @@ namespace SIL.PublishingSolution
 
                 // Get the file name as set on the dialog.
                 m_outputLocationPath = dlg.OutputLocationPath;
-                if (m_format == "theWord")
+                if (m_format.StartsWith("theWord"))
                 {
                     ExportUsx(usxBooksToExport);
                 }

@@ -39,7 +39,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "theWord";
+                return "theWord/MySword";
             }
         }
 
