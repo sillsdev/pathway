@@ -11,7 +11,7 @@
    <rdf:Description rdf:about=""
     xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
     <pdf:Producer>LibreOffice 4.0</pdf:Producer>
-    <pdf:Keywords/>
+    <pdf:Keywords>Foreign Literatures and Linguistics; Language Documentation; Dictionary; Reference</pdf:Keywords>
    </rdf:Description>
    <rdf:Description rdf:about='' xmlns:xapRights='http://ns.adobe.com/xap/1.0/rights/'>
     <xapRights:Marked>True</xapRights:Marked>
@@ -35,6 +35,14 @@
       <rdf:li xml:lang="x-default">Gondwana Sample</rdf:li>
      </rdf:Alt>
     </dc:title>
+    <dc:subject>
+	<rdf:Bag>
+	   <rdf:li>Foreign Literatures and Linguistics</rdf:li>
+	   <rdf:li>Language Documentation</rdf:li>
+	   <rdf:li>Dictionary</rdf:li>
+	   <rdf:li>Reference</rdf:li>
+	</rdf:Bag>
+	 </dc:subject>
     <dc:rights>
      <rdf:Alt>
       <rdf:li xml:lang="x-default">© SIL International® 2013</rdf:li>
