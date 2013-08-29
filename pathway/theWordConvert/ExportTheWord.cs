@@ -75,7 +75,7 @@ namespace SIL.PublishingSolution
             bool success;
             var myCursor = Cursor.Current;
             var originalDir = Environment.CurrentDirectory;
-            var inProcess = new InProcess(0, 6);
+            var inProcess = new InProcess(0, 7);
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -83,77 +83,49 @@ namespace SIL.PublishingSolution
                 Environment.CurrentDirectory = Path.GetDirectoryName(assemblyLocation);
                 
                 inProcess.Show();
+
+                LoadXslt();
                 inProcess.PerformStep();
-                var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
-                var inputXsl = Assembly.GetExecutingAssembly().GetManifestResourceStream("SIL.PublishingSolution.theWord.xsl");
-                Debug.Assert(inputXsl != null);
-                TheWord.Load(XmlReader.Create(inputXsl), xsltSettings, null);
+
                 var exportTheWordInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
 
-                Param.LoadSettings();
-                Param.SetValue(Param.InputType, "Scripture");
-                Param.LoadSettings();
-
-                //string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+                LoadMetadata();
+                inProcess.PerformStep();
 
                 FindParatextProject();
-                var xsltArgs = new XsltArgumentList();
-                xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
-                xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
+                inProcess.PerformStep();
+
+                var xsltArgs = LoadXsltParameters();
+                inProcess.PerformStep();
 
                 var otBooks = new List<string>();
                 var ntBooks = new List<string>();
                 CollectTestamentBooks(otBooks, ntBooks);
+                inProcess.PerformStep();
 
                 var output = GetSsfValue("//EthnologueCode", "zxx");
                 var fullName = UsxDir(exportTheWordInputPath);
                 LogStatus("Processing: {0}", fullName);
+
                 var codeNames = new Dictionary<string, string>();
                 var otFlag = OtFlag(fullName, codeNames, otBooks);
+                inProcess.AddToMaximum(codeNames.Count * 2);
+                inProcess.PerformStep();
+
                 var resultName = output + (otFlag ? ".ont" : ".nt");
                 var resultFullName = Path.Combine(exportTheWordInputPath, resultName);
-                LogStatus("Creating: {0}", resultName);
-                // false = do not append but overwrite instead
-                var sw = new StreamWriter(resultFullName, false, new UTF8Encoding(true));
-                if (otFlag)
-                {
-                    ProcessTestament(otBooks, codeNames, xsltArgs, sw);
-                }
-                ProcessTestament(ntBooks, codeNames, xsltArgs, sw);
-                AttachMetadata(sw);
-                sw.Close();
+                ProcessAllBooks(resultFullName, otFlag, otBooks, ntBooks, codeNames, xsltArgs, inProcess);
 
                 string TheWordFullPath = Common.FromRegistry("TheWord");
                 string tempTheWordCreatorPath = TheWordCreatorTempDirectory(TheWordFullPath);
                 xsltArgs.AddParam("refPref", "", "b");
+                inProcess.PerformStep();
 
                 var mySwordFullName = Path.Combine(tempTheWordCreatorPath, resultName);
-                LogStatus("Creating MySword: {0}", resultName);
-                // false = do not append but overwrite instead
-                sw = new StreamWriter(mySwordFullName, false, new UTF8Encoding(true));
-                if (otFlag)
-                {
-                    ProcessTestament(otBooks, codeNames, xsltArgs, sw);
-                }
-                ProcessTestament(ntBooks, codeNames, xsltArgs, sw);
-                AttachMetadata(sw);
-                sw.Close();
+                ProcessAllBooks(mySwordFullName, otFlag, otBooks, ntBooks, codeNames, xsltArgs, inProcess);
 
-                var myProc = Process.Start(new ProcessStartInfo
-                    {
-                        Arguments = resultName,
-                        FileName = "TheWordBible2MySword.exe",
-                        WorkingDirectory = tempTheWordCreatorPath,
-                        CreateNoWindow = true
-                    });
-                myProc.WaitForExit();
-                var mySwordFiles = Directory.GetFiles(tempTheWordCreatorPath, "*.mybible");
-                var mySwordResult = "<No MySword Result>";
-                if (mySwordFiles.Length >= 1)
-                {
-                    mySwordResult = Path.Combine(exportTheWordInputPath, Path.GetFileNameWithoutExtension(mySwordFiles[0]));
-                    File.Copy(mySwordFiles[0], mySwordResult);
-                }
+                var mySwordResult = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
+                inProcess.PerformStep();
 
                 Directory.Delete(tempTheWordCreatorPath, true);
                 success = true;
@@ -165,8 +137,8 @@ namespace SIL.PublishingSolution
                 if (File.Exists(resultFullName))
                 {
                     // Tell the user to do it manually.
-                    var theWordFolder = @"C:\ProgramData\The Word\Bibles";
-                    string msg = string.Format("Please copy the file {0} to {1} for theWord.\nCopy {2} to your the Bibles folder of MySword on your Phone. You can also send pathway@sil.org for uploading.\n\nDo you want to launch theWord?", resultFullName, theWordFolder, mySwordResult);
+                    const string theWordFolder = @"C:\ProgramData\The Word\Bibles";
+                    string msg = string.Format("Please copy the file {0} to {1} for theWord.\nCopy {2} to your the Bibles folder of MySword on your Phone. You can also send pathway@sil.org for uploading.\n\nDo you want to launch theWord (No to open folder, Cancel to finish)?", resultFullName, theWordFolder, mySwordResult);
                     DialogResult dialogResult = MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
 
                     if (dialogResult == DialogResult.Yes)
@@ -193,9 +165,7 @@ namespace SIL.PublishingSolution
                     MessageBox.Show("Failed Exporting TheWord Process.", "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                //DeleteTempFiles(exportTheWordInputPath);
                 Common.CleanupExportFolder(exportTheWordInputPath);
-                Common.DeleteDirectory(tempTheWordCreatorPath);
             }
             catch (Exception ex)
             {
@@ -207,6 +177,50 @@ namespace SIL.PublishingSolution
                 Cursor.Current = myCursor;
             }
             return success;
+        }
+
+        private static void LoadMetadata()
+        {
+            Param.LoadSettings();
+            Param.SetValue(Param.InputType, "Scripture");
+            Param.LoadSettings();
+            //string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+        }
+
+        private static string ConvertToMySword(string resultName, string tempTheWordCreatorPath, string exportTheWordInputPath)
+        {
+            var myProc = Process.Start(new ProcessStartInfo
+                {
+                    Arguments = resultName,
+                    FileName = "TheWordBible2MySword.exe",
+                    WorkingDirectory = tempTheWordCreatorPath,
+                    CreateNoWindow = true
+                });
+            myProc.WaitForExit();
+            var mySwordFiles = Directory.GetFiles(tempTheWordCreatorPath, "*.mybible");
+            var mySwordResult = "<No MySword Result>";
+            if (mySwordFiles.Length >= 1)
+            {
+                mySwordResult = Path.Combine(exportTheWordInputPath, Path.GetFileNameWithoutExtension(mySwordFiles[0]));
+                File.Copy(mySwordFiles[0], mySwordResult);
+            }
+            return mySwordResult;
+        }
+
+        private static XsltArgumentList LoadXsltParameters()
+        {
+            var xsltArgs = new XsltArgumentList();
+            xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
+            xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
+            return xsltArgs;
+        }
+
+        private static void LoadXslt()
+        {
+            var xsltSettings = new XsltSettings() {EnableDocumentFunction = true};
+            var inputXsl = Assembly.GetExecutingAssembly().GetManifestResourceStream("SIL.PublishingSolution.theWord.xsl");
+            Debug.Assert(inputXsl != null);
+            TheWord.Load(XmlReader.Create(inputXsl), xsltSettings, null);
         }
 
         private void AttachMetadata(StreamWriter sw)
@@ -280,8 +294,22 @@ about={1} \
             }
         }
 
+        private void ProcessAllBooks(string fullName, bool otFlag, List<string> otBooks, List<string> ntBooks, Dictionary<string, string> codeNames, XsltArgumentList xsltArgs, InProcess inProcess)
+        {
+            LogStatus("Creating MySword: {0}", Path.GetFileName(fullName));
+            // false = do not append but overwrite instead
+            StreamWriter sw = new StreamWriter(fullName, false, new UTF8Encoding(true));
+            if (otFlag)
+            {
+                ProcessTestament(otBooks, codeNames, xsltArgs, sw, inProcess);
+            }
+            ProcessTestament(ntBooks, codeNames, xsltArgs, sw, inProcess);
+            AttachMetadata(sw);
+            sw.Close();
+        }
+
         private static void ProcessTestament(IEnumerable<string> books, Dictionary<string, string> codeNames, XsltArgumentList xsltArgs,
-                                             StreamWriter sw)
+                                             StreamWriter sw, InProcess inProcess)
         {
             foreach (string book in books)
             {
@@ -289,6 +317,7 @@ about={1} \
                 {
                     LogStatus("Processing {0}", codeNames[book]);
                     TheWord.Transform(codeNames[book], xsltArgs, sw);
+                    inProcess.PerformStep();
                 }
                 else
                 {
@@ -416,30 +445,6 @@ about={1} \
             catch
             {
             }
-        }
-
-        /// <summary>
-        /// Uses Java to create TheWord application
-        /// </summary>
-        /// <param name="theWordCreatorPath"></param>
-        protected void BuildApplication(string theWordCreatorPath)
-        {
-            const string creator = "TheWordCreator.jar";
-            const string prog = "java";
-            var creatorFullPath = Path.Combine(theWordCreatorPath, creator);
-            var progFolder = SubProcess.JavaLocation(prog);
-            var progFullName = Common.PathCombine(progFolder, prog);
-            if (progFullName.EndsWith(".exe"))
-            {
-                progFullName = progFullName.Substring(0, progFullName.Length - 4);
-            }
-            collectionFullName = Common.PathCombine(processFolder, "Collections.txt");
-            var args = string.Format(@" -Xmx128m -jar ""{0}""  ""{1}""", creatorFullPath, collectionFullName);
-
-            //var args = "-Xmx128m -jar " + @"""" + creatorFullPath + @"""" + " " + @"""" + collectionFullName + @"""";
-
-            SubProcess.RedirectOutput = RedirectOutputFileName;
-            SubProcess.RunCommand(processFolder, "java", args, true);
         }
 
         static void LogStatus(string format, params object[] args)
