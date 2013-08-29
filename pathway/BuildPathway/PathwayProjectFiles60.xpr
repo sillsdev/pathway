@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="13.2">
+<project version="15.0">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options/>
@@ -24,6 +24,7 @@
         <file name="../PublishingSolution60.sln"/>
         <file name="../Test/Test60.csproj"/>
         <file name="../TestBed/TestBed60.csproj"/>
+        <file name="../theWordConvert/TheWordConvert60.csproj"/>
         <file name="../WordPressConvert/WordPressConvert60.csproj"/>
     </projectTree>
 </project>

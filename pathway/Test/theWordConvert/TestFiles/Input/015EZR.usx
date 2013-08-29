@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<usx version="2.0">
+  <book code="EZR" style="id">English-US: New International Version 1984</book>
+  <para style="ide">65001 - Unicode (UTF-8)</para>
+  <para style="rem">Copyright Information: For any non-Paratext use of this text, permission must be obtained from the copyright holder</para>
+  <para style="rem">CAP Information: checked/corrected 2009 Barb Penner</para>
+  <para style="h">EZRA</para>
+  <para style="toc1">Ezra</para>
+  <para style="toc2">Ezra</para>
+  <para style="toc3">Ezr</para>
+  <para style="mt1">Ezra</para>
+  <chapter number="1" style="c" />
+  <para style="s1">Cyrus Helps the Exiles to Return</para>
+  <para style="p">
+    <verse number="1" style="v" />In the first year of Cyrus king of Persia, in order to fulfill the word of the <char style="nd">Lord</char> spoken by Jeremiah, the <char style="nd">Lord</char> moved the heart of Cyrus king of Persia to make a proclamation throughout his realm and to put it in writing:</para>
+  <para style="p">
+    <verse number="9" style="v" />This was the inventory:</para>
+  <para style="b" />
+  <table>
+    <row style="tr">
+      <cell style="tc1" align="start">gold dishes </cell>
+      <cell style="tc2" align="start">30</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc1" align="start">silver dishes </cell>
+      <cell style="tc2" align="start">1,000</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc1" align="start">silver pans <note caller="+" style="f"><char style="fr" closed="false">1.9 </char><char style="ft" closed="false">The meaning of the Hebrew for this word is uncertain.</char></note> </cell>
+      <cell style="tc2" align="start">29</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc1" align="start">
+        <verse number="10" style="v" />gold bowls </cell>
+      <cell style="tc2" align="start">30</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc1" align="start">matching silver bowls </cell>
+      <cell style="tc2" align="start">410</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc1" align="start">other articles </cell>
+      <cell style="tc2" align="start">1,000</cell>
+    </row>
+  </table>
+  <para style="p">
+    <verse number="11" style="v" />In all, there were 5,400 articles of gold and of silver. Sheshbazzar brought all these along when the exiles came up from Babylon to Jerusalem.</para>
+  <chapter number="2" style="c" />
+  <para style="s1">The List of the Exiles Who Returned</para>
+  <para style="p">
+    <verse number="1" style="v" />Now these are the people of the province who came up from the captivity of the exiles, whom Nebuchadnezzar king of Babylon had taken captive to Babylon (they returned to Jerusalem and Judah, each to his own town, <verse number="2" style="v" />in company with Zerubbabel, Jeshua, Nehemiah, Seraiah, Reelaiah, Mordecai, Bilshan, Mispar, Bigvai, Rehum and Baanah):</para>
+  <para style="p">The list of the men of the people of Israel:</para>
+  <para style="b" />
+  <table>
+    <row style="tr">
+      <cell style="tc1" align="start">
+        <verse number="3" style="v" />the descendants of Parosh </cell>
+      <cell style="tc3" align="start">2,172</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="4" style="v" />of Shephatiah </cell>
+      <cell style="tc3" align="start">372</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="5" style="v" />of Arah </cell>
+      <cell style="tc3" align="start">775</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="6" style="v" />of Pahath-Moab (through the line of Jeshua and Joab) </cell>
+      <cell style="tc3" align="start">2,812</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="7" style="v" />of Elam </cell>
+      <cell style="tc3" align="start">1,254</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="8" style="v" />of Zattu </cell>
+      <cell style="tc3" align="start">945</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="9" style="v" />of Zaccai </cell>
+      <cell style="tc3" align="start">760</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="10" style="v" />of Bani </cell>
+      <cell style="tc3" align="start">642</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="11" style="v" />of Bebai </cell>
+      <cell style="tc3" align="start">623</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="12" style="v" />of Azgad </cell>
+      <cell style="tc3" align="start">1,222</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="13" style="v" />of Adonikam </cell>
+      <cell style="tc3" align="start">666</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="14" style="v" />of Bigvai </cell>
+      <cell style="tc3" align="start">2,056</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="15" style="v" />of Adin </cell>
+      <cell style="tc3" align="start">454</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="16" style="v" />of Ater (through Hezekiah) </cell>
+      <cell style="tc3" align="start">98</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="17" style="v" />of Bezai </cell>
+      <cell style="tc3" align="start">323</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="18" style="v" />of Jorah </cell>
+      <cell style="tc3" align="start">112</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="19" style="v" />of Hashum </cell>
+      <cell style="tc3" align="start">223</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="20" style="v" />of Gibbar </cell>
+      <cell style="tc3" align="start">95</cell>
+    </row>
+  </table>
+  <para style="b" />
+  <table>
+    <row style="tr">
+      <cell style="tc1" align="start">
+        <verse number="21" style="v" />the men of Bethlehem </cell>
+      <cell style="tc3" align="start">123</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="22" style="v" />of Netophah </cell>
+      <cell style="tc3" align="start">56</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="23" style="v" />of Anathoth </cell>
+      <cell style="tc3" align="start">128</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="24" style="v" />of Azmaveth </cell>
+      <cell style="tc3" align="start">42</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="25" style="v" />of Kiriath Jearim,<note caller="+" style="f"><char style="fr" closed="false">2.25 </char><char style="ft" closed="false">See Septuagint (see also NEH 7.29 ); Hebrew </char><char style="fq" closed="false">Kiriath Arim.</char></note> Kephirah and Beeroth </cell>
+      <cell style="tc3" align="start">743</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="26" style="v" />of Ramah and Geba </cell>
+      <cell style="tc3" align="start">621</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="27" style="v" />of Micmash </cell>
+      <cell style="tc3" align="start">122</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="28" style="v" />of Bethel and Ai </cell>
+      <cell style="tc3" align="start">223</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="29" style="v" />of Nebo </cell>
+      <cell style="tc3" align="start">52</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="30" style="v" />of Magbish </cell>
+      <cell style="tc3" align="start">156</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="31" style="v" />of the other Elam </cell>
+      <cell style="tc3" align="start">1,254</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="32" style="v" />of Harim </cell>
+      <cell style="tc3" align="start">320</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="33" style="v" />of Lod, Hadid and Ono </cell>
+      <cell style="tc3" align="start">725</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="34" style="v" />of Jericho </cell>
+      <cell style="tc3" align="start">345</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="35" style="v" />of Senaah </cell>
+      <cell style="tc3" align="start">3,630</cell>
+    </row>
+  </table>
+  <para style="p">
+    <verse number="36" style="v" />The priests:</para>
+  <para style="b" />
+  <table>
+    <row style="tr">
+      <cell style="tc2" align="start">the descendants of Jedaiah (through the family of Jeshua) </cell>
+      <cell style="tc3" align="start">973</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="37" style="v" />of Immer </cell>
+      <cell style="tc3" align="start">1,052</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="38" style="v" />of Pashhur </cell>
+      <cell style="tc3" align="start">1,247</cell>
+    </row>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="39" style="v" />of Harim </cell>
+      <cell style="tc3" align="start">1,017</cell>
+    </row>
+  </table>
+  <para style="p">
+    <verse number="40" style="v" />The Levites:</para>
+  <para style="b" />
+  <table>
+    <row style="tr">
+      <cell style="tc2" align="start">the descendants of Jeshua and Kadmiel (through the line of Hodaviah) </cell>
+      <cell style="tc3" align="start">74</cell>
+    </row>
+  </table>
+  <para style="p">
+    <verse number="41" style="v" />The singers:</para>
+  <para style="b" />
+  <table>
+    <row style="tr">
+      <cell style="tc2" align="start">the descendants of Asaph </cell>
+      <cell style="tc3" align="start">128</cell>
+    </row>
+  </table>
+  <para style="p">
+    <verse number="42" style="v" />The gatekeepers of the temple:</para>
+  <para style="b" />
+  <table>
+    <row style="tr">
+      <cell style="tc2" align="start">the descendants of <optbreak />Shallum, Ater, Talmon, <optbreak />Akkub, Hatita and Shobai </cell>
+      <cell style="tc3" align="start">139</cell>
+    </row>
+  </table>
+  <para style="p">
+    <verse number="43" style="v" />The temple servants:</para>
+  <para style="b" />
+  <para style="li1">the descendants of</para>
+  <para style="li2">Ziha, Hasupha, Tabbaoth,</para>
+  <para style="li2">
+    <verse number="44" style="v" />Keros, Siaha, Padon,</para>
+  <para style="li2">
+    <verse number="45" style="v" />Lebanah, Hagabah, Akkub,</para>
+  <para style="li2">
+    <verse number="46" style="v" />Hagab, Shalmai, Hanan,</para>
+  <para style="li2">
+    <verse number="47" style="v" />Giddel, Gahar, Reaiah,</para>
+  <para style="li2">
+    <verse number="48" style="v" />Rezin, Nekoda, Gazzam,</para>
+  <para style="li2">
+    <verse number="49" style="v" />Uzza, Paseah, Besai,</para>
+  <para style="li2">
+    <verse number="50" style="v" />Asnah, Meunim, Nephussim,</para>
+  <para style="li2">
+    <verse number="51" style="v" />Bakbuk, Hakupha, Harhur,</para>
+  <para style="li2">
+    <verse number="52" style="v" />Bazluth, Mehida, Harsha,</para>
+  <para style="li2">
+    <verse number="53" style="v" />Barkos, Sisera, Temah,</para>
+  <para style="li2">
+    <verse number="54" style="v" />Neziah and Hatipha</para>
+  <para style="p">
+    <verse number="55" style="v" />The descendants of the servants of Solomon:</para>
+  <para style="b" />
+  <para style="li1">the descendants of</para>
+  <para style="li2">Sotai, Hassophereth, Peruda,</para>
+  <para style="li2">
+    <verse number="56" style="v" />Jaala, Darkon, Giddel,</para>
+  <para style="li2">
+    <verse number="57" style="v" />Shephatiah, Hattil,</para>
+  <para style="li2">Pokereth-Hazzebaim and Ami</para>
+  <para style="b" />
+  <table>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="58" style="v" />The temple servants and the descendants of the servants of Solomon </cell>
+      <cell style="tc3" align="start">392</cell>
+    </row>
+  </table>
+  <para style="b" />
+  <para style="pi">
+    <verse number="59" style="v" />The following came up from the towns of Tel Melah, Tel Harsha, Kerub, Addon and Immer, but they could not show that their families were descended from Israel:</para>
+  <para style="b" />
+  <table>
+    <row style="tr">
+      <cell style="tc2" align="start">
+        <verse number="60" style="v" />The descendants of <optbreak />Delaiah, Tobiah and Nekoda </cell>
+      <cell style="tc3" align="start">652</cell>
+    </row>
+  </table>
+  <para style="p">
+    <verse number="61" style="v" />And from among the priests:</para>
+  <para style="b" />
+  <para style="li1">The descendants of</para>
+  <para style="li2">Hobaiah, Hakkoz and Barzillai (a man who had married a daughter of Barzillai the Gileadite and was called by that name).</para>
+  <para style="pi">
+    <verse number="62" style="v" />These searched for their family records, but they could not find them and so were excluded from the priesthood as unclean. <verse number="63" style="v" />The governor ordered them not to eat any of the most sacred food until there was a priest ministering with the Urim and Thummim.</para>
+  <para style="b" />
+  <para style="pi">
+    <verse number="64" style="v" />The whole company numbered 42,360, <verse number="65" style="v" />besides their 7,337 menservants and maidservants; and they also had 200 men and women singers. <verse number="66" style="v" />They had 736 horses, 245 mules, <verse number="67" style="v" />435 camels and 6,720 donkeys.</para>
+  <para style="p">
+    <verse number="68" style="v" />When they arrived at the house of the <char style="nd">Lord</char> in Jerusalem, some of the heads of the families gave freewill offerings toward the rebuilding of the house of God on its site. <verse number="69" style="v" />According to their ability they gave to the treasury for this work 61,000 drachmas<note caller="+" style="f"><char style="fr" closed="false">2.69 </char><char style="ft" closed="false">That is, about 1,100 pounds (about 500 kilograms)</char></note> of gold, 5,000 minas<note caller="+" style="f"><char style="fr" closed="false">2.69 </char><char style="ft" closed="false">That is, about 3 tons (about 2.9 metric tons)</char></note> of silver and 100 priestly garments.</para>
+  <para style="p">
+    <verse number="70" style="v" />The priests, the Levites, the singers, the gatekeepers and the temple servants settled in their own towns, along with some of the other people, and the rest of the Israelites settled in their towns.</para>
+  <chapter number="7" style="c" />
+  <para style="s1">King Artaxerxes' Letter to Ezra</para>
+  <para style="p">
+    <verse number="11" style="v" />This is a copy of the letter King Artaxerxes had given to Ezra the priest and teacher, a man learned in matters concerning the commands and decrees of the <char style="nd">Lord</char> for Israel:</para>
+  <para style="p">
+    <verse number="12" style="v" />
+    <note caller="+" style="f">
+      <char style="fr" closed="false">7.12 </char>
+      <char style="ft" closed="false">The text of EZR 7.12 is in Aramaic.</char>
+    </note> Artaxerxes, king of kings,</para>
+  <para style="p">To Ezra the priest, a teacher of the Law of the God of heaven:</para>
+  <para style="p">Greetings.</para>
+  <para style="b" />
+  <para style="pi">
+    <verse number="13" style="v" />Now I decree that any of the Israelites in my kingdom, including priests and Levites, who wish to go to Jerusalem with you, may go. <verse number="14" style="v" />You are sent by the king and his seven advisers to inquire about Judah and Jerusalem with regard to the Law of your God, which is in your hand. <verse number="15" style="v" />Moreover, you are to take with you the silver and gold that the king and his advisers have freely given to the God of Israel, whose dwelling is in Jerusalem, <verse number="16" style="v" />together with all the silver and gold you may obtain from the province of Babylon, as well as the freewill offerings of the people and priests for the temple of their God in Jerusalem. <verse number="17" style="v" />With this money be sure to buy bulls, rams and male lambs, together with their grain offerings and drink offerings, and sacrifice them on the altar of the temple of your God in Jerusalem.</para>
+  <para style="pi">
+    <verse number="18" style="v" />You and your brother Jews may then do whatever seems best with the rest of the silver and gold, in accordance with the will of your God. <verse number="19" style="v" />Deliver to the God of Jerusalem all the articles entrusted to you for worship in the temple of your God. <verse number="20" style="v" />And anything else needed for the temple of your God that you may have occasion to supply, you may provide from the royal treasury.</para>
+</usx>

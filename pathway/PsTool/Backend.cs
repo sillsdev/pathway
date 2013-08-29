@@ -81,6 +81,7 @@ namespace SIL.PublishingSolution
         {
             string xhtmlFile = publicationInformation.DefaultXhtmlFileWithPath;
             CreateVerbose(publicationInformation);
+            var localType = type.Replace(@"\", "/").ToLower();
             try
             {
                 foreach (IExportProcess process in _backend)
@@ -88,7 +89,7 @@ namespace SIL.PublishingSolution
                     if (process.ExportType.ToLower() == "openoffice/libreoffice")
                         type = OpenOfficeClassifier(publicationInformation, type); // Cross checking for OpenOffice
 
-                    if (process.ExportType.ToLower() == type.ToLower())
+                    if (process.ExportType.ToLower() == localType)
                         return process.Export(publicationInformation);
                 }
             }
