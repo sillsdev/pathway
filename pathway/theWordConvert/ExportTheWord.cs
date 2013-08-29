@@ -224,8 +224,8 @@ namespace SIL.PublishingSolution
             sw.Close();
         }
 
-        private static void ProcessTestament(IEnumerable<string> books, Dictionary<string, string> codeNames, XsltArgumentList xsltArgs,
-                                             StreamWriter sw, InProcess inProcess)
+        protected static void ProcessTestament(IEnumerable<string> books, Dictionary<string, string> codeNames, XsltArgumentList xsltArgs,
+                                             StreamWriter sw, IInProcess inProcess)
         {
             foreach (string book in books)
             {
