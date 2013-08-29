@@ -1,4 +1,4 @@
-// ---------------------------------------------------------------------------------------------
+﻿// ---------------------------------------------------------------------------------------------
 #region // Copyright (c) 2013, SIL International. All Rights Reserved.
 // <copyright from='2013' to='2013' company='SIL International'>
 //		Copyright (c) 2013, SIL International. All Rights Reserved.
@@ -34,10 +34,10 @@ namespace Test.TheWordConvertTest
     public class ExportTheWordTest: ExportTheWord
     {
         #region setup
-        private Mockery mocks = new Mockery();
-        private string _inputPath;
-        private string _outputPath;
-        private string _expectedPath;
+        private static Mockery mocks = new Mockery();
+        private static string _inputPath;
+        private static string _outputPath;
+        private static string _expectedPath;
 
         [TestFixtureSetUp]
         public void Setup()
@@ -139,6 +139,20 @@ namespace Test.TheWordConvertTest
         }
 
         [Test]
+        public void TempNameTest()
+        {
+            string book = "MAT";
+            string expected = @"<usx><book code= ""MAT""/></usx>";
+            string actualTempName = TempName(book);
+            var sr = new StreamReader(actualTempName);
+            string actual = sr.ReadToEnd();
+            sr.Close();
+            File.Delete(actualTempName);
+            Assert.AreEqual(expected, actual);
+        }
+
+
+        [Test]
         public void ProcessTestamentTest()
         {
             var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
@@ -164,24 +178,229 @@ namespace Test.TheWordConvertTest
             mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
+        private static void TestDataCase(string code, string fileName, int rec, string expectedResult)
+        {
+            TestDataCase(code, fileName, rec, expectedResult, null, null, false);
+        }
+
+        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc)
+        {
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false);
+        }
+
+        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo)
+        {
+            var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
+            string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
+            TheWord.Load(XmlReader.Create(Path.Combine(codePath, "theWord.xsl")), xsltSettings, null);
+            IEnumerable<string> books = new List<string>(1) { code };
+            var codeNames = new Dictionary<string, string>(2);
+            codeNames[code] = FileInput(fileName);
+            var xsltArgs = new XsltArgumentList();
+            if (bookNames != null)
+            {
+                xsltArgs.AddParam("bookNames", "", bookNames);
+            }
+            else
+            {
+                xsltArgs.AddParam("bookNames", "", "file:///" + FileInput("BookNames.xml"));
+            }
+            if (punc != null)
+            {
+                xsltArgs.AddParam("refPunc", "", punc);
+            }
+            if (starSaltillo)
+            {
+                xsltArgs.AddParam("noStar", "", "1");
+                xsltArgs.AddParam("noSaltilla", "", "1");
+            }
+            var temp = Path.GetTempFileName();
+            var sw = new StreamWriter(temp);
+            var inProcess = (IInProcess)mocks.NewMock(typeof(IInProcess));
+            Expect.Once.On(inProcess).Method("PerformStep");
+            ProcessTestament(books, codeNames, xsltArgs, sw, inProcess);
+            sw.Close();
+            var sr = new StreamReader(temp);
+            var data = string.Empty;
+            for (int i = 0; i < rec; i++)
+            {
+                data = sr.ReadLine();
+            }
+            sr.Close();
+            File.Delete(temp);
+            Assert.AreEqual(expectedResult, data);
+            mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        [Test]
+        public void NoMt2()
+        {
+            var bookNames = "file:///" + FileInput("avtBookNames.xml");
+            TestDataCase("MAT", "040MAT.usx", 1, "<TS1>Hɨm Yaaim Me Krais Matyu Kewisɨm Mau Tɨwei<Ts><TS1>Niuk me maamrer ne weiwɨk me Jisas<Ts><TS3><i>(Lu 3:23-38)</i><Ts><RF q=*><a href=\"http:tw://bible.*?=1.22.18\">Jen 22:18</a>; <a href=\"http:tw://bible.*?=13.17.11\">1Kro 17:11</a><Rf>Menmen im hi hewisɨm hɨram niuk me maamrer yapɨrwe ne weiwɨk miutɨp me Jisas Krais, kerek hɨrak nepenyek ke mɨtɨk iuwe Devit, hɨrak nepenyek hak ke maam nɨpu kaiu Ebraham.<CI>", bookNames, ":");
+        }
+
+        [Test]
+        public void ItalicInFootnote()
+        {
+            TestDataCase("JHN", "043JHN.usx", 459, "<TS1>Jew Men Hitumatum Imih Jesu Hikwahir<Ts>Nati rarabkokou wanawanan Tafaror Bar ana hiyuw wabin Koksouwen<RF>I baise <i>Hanukkah</i> teo<Rf> i Jerusalemamaim hibogaigiwas.");
+        }
+
+        [Test]
+        public void NdTest()
+        {
+            TestDataCase("EZR", "015EZR.usx", 1, "<TS1>Ezra<Ts><TS1>Cyrus Helps the Exiles to Return<Ts>In the first year of Cyrus king of Persia, in order to fulfill the word of the <font color=green>Lord</font> spoken by Jeremiah, the <font color=green>Lord</font> moved the heart of Cyrus king of Persia to make a proclamation throughout his realm and to put it in writing:<CM>");
+        }
+
+        [Test]
+        public void TableWithFootnote()
+        {
+            TestDataCase("EZR", "015EZR.usx", 9, "This was the inventory:<CL><CL>gold dishes — 30<CL>silver dishes — 1,000<CL>silver pans<RF>The meaning of the Hebrew for this word is uncertain.<Rf> — 29<CL>");
+        }
+
+        [Test]
+        public void TableLineVerse()
+        {
+            TestDataCase("EZR", "015EZR.usx", 15, "of Shephatiah — 372<CL>");
+        }
+
+        [Test]
+        public void OptionalBreakTest()
+        {
+            TestDataCase("EZR", "015EZR.usx", 53, "The gatekeepers of the temple:<CL><CL>the descendants of Shallum, Ater, Talmon, Akkub, Hatita and Shobai — 139<CM>");
+        }
+
+        [Test]
+        public void BullettedListTest()
+        {
+            TestDataCase("EZR", "015EZR.usx", 54, "The temple servants:<CL><CI><PI>• the descendants of<CI><PI2>• Ziha, Hasupha, Tabbaoth,<CI>");
+        }
+
+        [Test]
+        public void SubsequentVerseInBulletParaTest()
+        {
+            TestDataCase("GEN", "001GEN.usx", 4, "God saw that the light was good, and he separated the light from the darkness.");
+        }
+
+        [Test]
+        public void S2Test()
+        {
+            TestDataCase("GEN", "001GEN.usx", 237, "<TS1><font size=-1>The Japhethites</font><Ts><PI>• The sons<RF><i>Sons </i> may mean <i>descendants </i> or <i>successors </i> or <i>nations; </i> also in verses 3, 4, 6, 7, 20-23, 29 and 31.<Rf> of Japheth:<CI><PI2>• Gomer, Magog, Madai, Javan, Tubal, Meshech and Tiras.<CI>");
+        }
+
+        [Test]
+        public void Li3Test()
+        {
+            TestDataCase("GEN", "001GEN.usx", 1399, "<PI>• The sons of Judah:<CI><PI2>• Er, Onan, Shelah, Perez and Zerah (but Er and Onan had died in the land of Canaan).<CI>• The sons of Perez:<CI>• Hezron and Hamul.<CI>");
+        }
+
+        [Test]
+        public void Ms1MrTest()
+        {
+            TestDataCase("PSA", "019PSA.usx", 1, "<TS1>Psalms<Ts><TS1>BOOK I<Ts><TS3><i>Psalms 1-41</i><Ts><PI>Blessed is the man<CI><PI2>who does not walk in the counsel of the wicked<CI><PI>or stand in the way of sinners<CI><PI2>or sit in the seat of mockers.<CI>");
+        }
+
+        [Test]
+        public void DescriptiveIntroTest()
+        {
+            TestDataCase("PSA", "019PSA.usx", 19, "<TS3><i>A psalm of David. When he fled from his son Absalom.</i><Ts><PI>O <font color=green>Lord</font>, how many are my foes!<CI><PI2>How many rise up against me!<CI>");
+        }
+
+        [Test]
+        public void PoetryLetterIntroTest()
+        {
+            TestDataCase("PSA", "019PSA.usx", 1960, "<TS3><i>Aleph</i><Ts><PI>Blessed are they whose ways are blameless,<CI><PI2>who walk according to the law of the <font color=green>Lord</font>.<CI>");
+        }
+
+        [Test]
+        public void SpeakerTest()
+        {
+            TestDataCase("SNG", "022SNG.usx", 4, "<PI>Take me away with you–let us hurry!<CI><PI2>Let the king bring me into his chambers.<CL><CM><PI0>Friends<CL><CI><PI>We rejoice and delight in you;<RF>The Hebrew is masculine singular.<Rf><CI><PI2>we will praise your love more than wine.<CL><CM><PI0>Beloved<CL><CI><PI>How right they are to adore you!<CL><CI>");
+        }
+
+        [Test]
+        public void SpaceInCrossRefNameTest()
+        {
+            var bookNames = "file:///" + FileInput("aauBookNames.xml");
+            TestDataCase("PHM", "057PHM.usx", 2, "Hrorkwe mamey okukwe seyr, hromo ine Apia o, hromo wayh Arkipus, hrere nion ma non-orok ono o, seyr uwrsa sios ko, hno a mon ma hokruw sohom o, hme mey kow.<RF q=*><a href=\"http:tw://bible.*?=51.4.17\">Kol 4:17</a>; <a href=\"http:tw://bible.*?=55.2.3\">2 Ti 2:3</a><Rf><CM>", bookNames, ":");
+        }
+
+        [Test]
+        public void WithoutBookNameTest()
+        {
+            var bookNames = "file:///" + FileInput("aauBookNames.xml");
+            TestDataCase("PHM", "057PHM.usx", 22, "Hano me-nonkway ok kamon kokwe senkin, hunkwe ampok, ha liawon ey se kwa lonhan naruok koruay. Payhokuaw, hano uron hokwe hyohyo senkin lon, hom God se ma mesopok me hokuaw, God hiykwe ha hme nion manon-wak e ipan ya lon a.<RF q=*><a href=\"http:tw://bible.*?=50.1.25\">Fl 1:25</a>; <a href=\"http:tw://bible.*?=50.2.24\">2:24</a><Rf><CM>", bookNames, ":");
+        }
+
+        [Test]
+        public void Verse1BridgeTest()
+        {
+            TestDataCase("PHM", "0552TI.usx", 1, "<TS1>2 TIMOTI<Ts><TS2><font size=-1><b>Timoti ꞌina leta heluwena Paulo ꞌileleya</b></font><Ts><TS1>Loyauwedo<Ts><sup>(1-2)</sup> Yauwedo Timoti ꞌowa natugu moisa, ꞌino leta bewa taugu Paulo ꞌoiguwega. Taugu Yesu Keliso ꞌana tohepwaila, Yehoba ꞌina nuwatuhu gide ta yahepwaila yawasida bwebweꞌana weyahina, beno Yesu Keliso ꞌoinega. Tamada Yehoba ma ꞌida Bada Yesu Keliso sihelauwego ta siꞌatemuyamuyaego ma ꞌoinega ꞌumiya daumwala.");
+        }
+
+        [Test]
+        public void BridgeB4PTest()
+        {
+            TestDataCase("MAT", "040MAT-bridgeB4.usx", 1, "<TS1><Ts><sup>(1-2)</sup> Verse one text. Verse two text");
+        }
+
+        [Test]
+        public void BridgeB4P2Test()
+        {
+            TestDataCase("MAT", "040MAT-bridgeB4P.usx", 1, "<TS1><Ts><sup>(1-2)</sup> Verse one text. Verse two text");
+        }
+
+        [Test]
+        public void RefListTest()
+        {
+            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            TestDataCase("MAT", "040MAT-refList.usx", 26, "<TS1>complex xref test<Ts><RF q=*><a href=\"http:tw://bible.*?=19.2.7\">Pal 2:7</a>; <a href=\"http:tw://bible.*?=19.22.2\">22:2</a>, <a href=\"http:tw://bible.*?=19.22.14\">14</a><Rf>Verse one.", bookNames, ":");
+        }
+
+        [Test]
+        public void RefList2Test()
+        {
+            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            TestDataCase("MAT", "040MAT-refList.usx", 27, "<RF q=*><a href=\"http:tw://bible.*?=2.37.11\">Tav 37:11</a>, <a href=\"http:tw://bible.*?=2.37.28\">28</a>; <a href=\"http:tw://bible.*?=2.39.2\">39:2</a>, <a href=\"http:tw://bible.*?=2.39.21-23\">21-23</a><Rf>Verse two.", bookNames, ":");
+        }
+
+        [Test]
+        public void RefSingleChapterTest()
+        {
+            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            TestDataCase("MAT", "040MAT-refList.usx", 30, "<RF q=*><a href=\"http:tw://bible.*?=1.18.20–19:28\">Jen 18:20–19:28</a>; <a href=\"http:tw://bible.*?=40.11.24\">Mt 11:24</a>; <a href=\"http:tw://bible.*?=61.2.6\">2Pi 2:6</a>; <a href=\"http:tw://bible.*?=65.1.7\">Ju 7</a><Rf>Hi hetpi werek. Maain wɨ God skelim mɨt, hɨrak God kaknep mɨt miyapɨr enun nɨpaa nau Sodom ketike wit Gomora kaknɨp kike. Te mɨt miyapɨr kerek nanweikɨn sip nanwet hɨm mi, maain God kaknɨp iuwe kaknepi.", bookNames, ":");
+        }
+
+        [Test]
+        public void StarSaltilloTest()
+        {
+            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            TestDataCase("MAT", "040MAT-refList.usx", 31, "<i>Judá tusha chumu, ñu Belén pebulu,</i><CI><i>vee mujtu aa pebulu chumulaba buuteꞌ pensangue keeñu, ne balejtuu pebulu jutyuve;</i><CI><i>matyu ñu junuren main bale chachi fale,</i><CI><i>kumuinchi in Israel chachillanu washkenu juñu mitya,</i><RF>Miqueas 5.2 <Rf> ti pillave, tila bale rukula.", bookNames, ":", true);
+        }
+
+        [Test]
+        public void RefNoVerseTest()
+        {
+            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            TestDataCase("MAT", "040MAT-refList.usx", 47, "<RF q=*><a href=\"http:tw://bible.*?=23.23.1\">Ais 23</a>; <a href=\"http:tw://bible.*?=26.26.1–28:26\">Esi 26:1–28:26</a>; <a href=\"http:tw://bible.*?=29.3.4-8\">Joe 3:4-8</a>; <a href=\"http:tw://bible.*?=30.1.9-10\">Emo 1:9-10</a>; <a href=\"http:tw://bible.*?=36.9.2-4\">Sek 9:2-4</a><Rf>Hi hetpi werek. Maain wɨ kerek God skelim mɨt, hɨrak kaknep mɨt ne Taia netike mɨt ne Saidon kaknɨp kike, te yi mɨt au hɨrak kakiwep iuwe.", bookNames, ":");
+        }
 
         #region Private Functions
-        private string FileProg(string fileName)
+        private static string FileProg(string fileName)
         {
             return Common.PathCombine(Common.GetPSApplicationPath(), fileName);
         }
 
-        private string FileInput(string fileName)
+        private static string FileInput(string fileName)
         {
             return Common.PathCombine(_inputPath, fileName);
         }
 
-        private string FileOutput(string fileName)
+        private static string FileOutput(string fileName)
         {
             return Common.PathCombine(_outputPath, fileName);
         }
 
-        private string FileExpected(string fileName)
+        private static string FileExpected(string fileName)
         {
             return Common.PathCombine(_expectedPath, fileName);
         }
@@ -189,7 +408,7 @@ namespace Test.TheWordConvertTest
         /// <summary>
         /// Create a simple PublicationInformation instance
         /// </summary>
-        private PublicationInformation GetProjInfo(string XhtmlName, string BlankName)
+        private static PublicationInformation GetProjInfo(string XhtmlName, string BlankName)
         {
             PublicationInformation projInfo = new PublicationInformation();
             File.Copy(FileInput(XhtmlName), FileOutput(XhtmlName), true);
