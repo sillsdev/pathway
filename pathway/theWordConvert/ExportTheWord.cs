@@ -245,7 +245,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static string TempName(string book)
+        protected static string TempName(string book)
         {
             var tempName = Path.GetTempFileName();
             var tempStream = new StreamWriter(tempName);
