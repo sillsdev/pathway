@@ -254,7 +254,7 @@ namespace SIL.PublishingSolution
             return tempName;
         }
 
-        private static bool OtFlag(string fullName, Dictionary<string, string> codeNames, List<string> otBooks)
+        protected static bool OtFlag(string fullName, Dictionary<string, string> codeNames, List<string> otBooks)
         {
             var codeStart = -1;
             var otFlag = false;

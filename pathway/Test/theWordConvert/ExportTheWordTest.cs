@@ -123,6 +123,17 @@ namespace Test.TheWordConvertTest
             Assert.AreEqual(@"file:///C:\MP1\BookNames.xml", actual.GetParam("bookNames", ""));
         }
 
+        [Test]
+        public void OtFlagTest()
+        {
+            var fullName = FileInput("USX");
+            var codeNames = new Dictionary<string, string>();
+            var otBooks = new List<string>();
+            var actual = OtFlag(fullName, codeNames, otBooks);
+            Assert.False(actual);
+            Assert.AreEqual(2, codeNames.Count);
+        }
+
 
         #region Private Functions
         private string FileProg(string fileName)
