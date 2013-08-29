@@ -142,5 +142,17 @@ namespace SIL.Tool
                 return scrChecksKey;
             }
         }
-	}
+        /// ------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the registry key for theWord application.
+        /// </summary>
+        /// ------------------------------------------------------------------------------------
+        public static RegistryKey TheWordKey
+        {
+            get
+            {
+                return Registry.ClassesRoot.OpenSubKey("theWordModule");
+            }
+        }
+    }
 }
