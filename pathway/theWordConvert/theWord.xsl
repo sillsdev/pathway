@@ -15,6 +15,8 @@
     <xsl:param name="missing">(-)</xsl:param>
     <xsl:param name="refPunc">.</xsl:param>
     <xsl:param name="bridgePunc">-</xsl:param>
+    <xsl:param name="sequencePunc">,</xsl:param>
+    <xsl:param name="bookSequencePunc">;</xsl:param>
     <xsl:param name="bookNames">BookNames.xml</xsl:param>
     <xsl:param name="noStar" select="false()"/>
     <xsl:param name="noSaltillo" select="false()"/>
@@ -145,7 +147,7 @@
             <xsl:when test="count($nextVerseNode) = 1">
                 <xsl:text disable-output-escaping="yes"><![CDATA[<sup>(]]></xsl:text>
                 <xsl:value-of select="$v"/>
-                <xsl:text>-</xsl:text>
+                <xsl:value-of select="$bridgePunc"/>
                 <xsl:value-of select="$nextVerse"/>
                 <xsl:text disable-output-escaping="yes"><![CDATA[)</sup> ]]></xsl:text>
                 <xsl:apply-templates select="$verse" mode="v">
@@ -364,7 +366,7 @@
             <xsl:when test="@style = 'x'">
                 <xsl:call-template name="CrossReferences">
                     <xsl:with-param name="caller" select="@caller"/>
-                    <xsl:with-param name="xt" select="*[@style='xt']/text()"/>
+                    <xsl:with-param name="text" select="*[@style='xt']/text()"/>
                     <xsl:with-param name="indent" select="$indent"/>
                 </xsl:call-template>
             </xsl:when>
@@ -430,14 +432,14 @@
             </xsl:when>
             <xsl:when test="$noStar = false() and $noSaltillo != false()">
                 <xsl:variable name="apos">&apos;</xsl:variable>
-                <xsl:value-of select="normalize-space(translate(., 'ꞌ', $apos))"/>
+                <xsl:value-of select="normalize-space(translate(., '&#xa78c;', $apos))"/>
             </xsl:when>
             <xsl:when test="$noStar != false() and $noSaltillo = false()">
                 <xsl:value-of select="normalize-space(translate(., '*', ''))"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="apos">&apos;</xsl:variable>
-                <xsl:value-of select="normalize-space(translate(., 'ꞌ*', $apos))"/>
+                <xsl:value-of select="normalize-space(translate(., '&#xa78c;*', $apos))"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -595,13 +597,13 @@
     
     <xsl:template name="CrossReferences">
         <xsl:param name="caller">*</xsl:param>
-        <xsl:param name="xt"/>
+        <xsl:param name="text"/>
         <xsl:param name="indent"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[<RF q=]]></xsl:text>
         <xsl:value-of select="@caller"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text>
         <xsl:call-template name="CrossReferenceIter">
-            <xsl:with-param name="xt" select="$xt"/>
+            <xsl:with-param name="textLeft" select="$text"/>
         </xsl:call-template>
         <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">
@@ -610,19 +612,19 @@
     </xsl:template>
     
     <xsl:template name="CrossReferenceIter">
-        <xsl:param name="xt"/>
+        <xsl:param name="textLeft"/>
         <xsl:param name="book"/>
         <xsl:choose>
-            <xsl:when test="contains($xt, ';')">
+            <xsl:when test="contains($textLeft, $bookSequencePunc)">
                 <xsl:call-template name="CrossRefVerseListIter">
-                    <xsl:with-param name="ref" select="substring-before($xt, ';')"/>
+                    <xsl:with-param name="ref" select="substring-before($textLeft, $bookSequencePunc)"/>
                     <xsl:with-param name="book" select="$book"/>
-                    <xsl:with-param name="xtr" select="normalize-space(substring-after($xt, ';'))"/>
+                    <xsl:with-param name="remains" select="normalize-space(substring-after($textLeft, $bookSequencePunc))"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="CrossRefVerseListIter">
-                    <xsl:with-param name="ref" select="$xt"/>
+                    <xsl:with-param name="ref" select="$textLeft"/>
                     <xsl:with-param name="book" select="$book"/>
                 </xsl:call-template>
             </xsl:otherwise>
@@ -633,15 +635,15 @@
         <xsl:param name="ref"/>
         <xsl:param name="book"/>
         <xsl:param name="chap"/>
-        <xsl:param name="xtr" />
+        <xsl:param name="remains" />
         <xsl:choose>
-            <xsl:when test="contains($ref, ',')">
+            <xsl:when test="contains($ref, $sequencePunc)">
                 <xsl:call-template name="ReferenceFindBook">
-                    <xsl:with-param name="ref" select="substring-before($ref, ',')"/>
+                    <xsl:with-param name="ref" select="substring-before($ref, $sequencePunc)"/>
                     <xsl:with-param name="book" select="$book"/>
                     <xsl:with-param name="chap" select="$chap"/>
-                    <xsl:with-param name="xtv" select="normalize-space(substring-after($ref, ','))"/>
-                    <xsl:with-param name="xtr" select="$xtr"/>
+                    <xsl:with-param name="verseListLeft" select="normalize-space(substring-after($ref, $sequencePunc))"/>
+                    <xsl:with-param name="refsLeft" select="$remains"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -649,7 +651,7 @@
                     <xsl:with-param name="ref" select="$ref"/>
                     <xsl:with-param name="book" select="$book"/>
                     <xsl:with-param name="chap" select="$chap"/>
-                    <xsl:with-param name="xtr" select="$xtr"/>
+                    <xsl:with-param name="refsLeft" select="$remains"/>
                 </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
@@ -659,8 +661,8 @@
         <xsl:param name="ref"/>
         <xsl:param name="book"/>
         <xsl:param name="chap"/>
-        <xsl:param name="xtv" />
-        <xsl:param name="xtr"/>        
+        <xsl:param name="verseListLeft" />
+        <xsl:param name="refsLeft"/>        
         <xsl:variable name="refAbbr" select="substring-before($ref, ' ')"/>
         <xsl:variable name="refBook" select="$bookNamesBook[@abbr=$refAbbr]"/>
         <xsl:variable name="refNAbbr">
@@ -677,12 +679,12 @@
                     <xsl:with-param name="refCV" select="$ref"/>
                     <xsl:with-param name="refBook" select="$book"/>
                     <xsl:with-param name="chap" select="$chap"/>
-                    <xsl:with-param name="xtv" select="$xtv"/>
+                    <xsl:with-param name="verseListLeft" select="$verseListLeft"/>
                 </xsl:call-template>
-                <xsl:if test="$xtr != ''">
+                <xsl:if test="$refsLeft != ''">
                     <xsl:text>; </xsl:text>
                     <xsl:call-template name="CrossReferenceIter">
-                        <xsl:with-param name="xt" select="$xtr"/>
+                        <xsl:with-param name="textLeft" select="$refsLeft"/>
                         <xsl:with-param name="book" select="$book"/>
                     </xsl:call-template>
                 </xsl:if>
@@ -694,12 +696,12 @@
                     <xsl:with-param name="refCV" select="substring($ref, string-length($refAbbr) + 2)"/>
                     <xsl:with-param name="refBook" select="$refBook"/>
                     <xsl:with-param name="chap" select="$chap"/>
-                    <xsl:with-param name="xtv" select="$xtv"/>
+                    <xsl:with-param name="verseListLeft" select="$verseListLeft"/>
                 </xsl:call-template>
-                <xsl:if test="$xtr != ''">
+                <xsl:if test="$refsLeft != ''">
                     <xsl:text>; </xsl:text>
                     <xsl:call-template name="CrossReferenceIter">
-                        <xsl:with-param name="xt" select="$xtr"/>
+                        <xsl:with-param name="textLeft" select="$refsLeft"/>
                         <xsl:with-param name="book" select="$refBook"/>
                     </xsl:call-template>
                 </xsl:if>
@@ -711,12 +713,12 @@
                     <xsl:with-param name="refCV" select="substring($ref, string-length($refNAbbr) + 2)"/>
                     <xsl:with-param name="refBook" select="$refNBook"/>
                     <xsl:with-param name="chap" select="$chap"/>
-                    <xsl:with-param name="xtv" select="$xtv"/>
+                    <xsl:with-param name="verseListLeft" select="$verseListLeft"/>
                 </xsl:call-template>
-                <xsl:if test="$xtr != ''">
+                <xsl:if test="$refsLeft != ''">
                     <xsl:text>; </xsl:text>
                     <xsl:call-template name="CrossReferenceIter">
-                        <xsl:with-param name="xt" select="$xtr"/>
+                        <xsl:with-param name="textLeft" select="$refsLeft"/>
                         <xsl:with-param name="book" select="$refNBook"/>
                     </xsl:call-template>
                 </xsl:if>
@@ -738,10 +740,11 @@
         <xsl:param name="refCV"/>
         <xsl:param name="refBook"/>
         <xsl:param name="chap"/>
-        <xsl:param name="xtv"/>
+        <xsl:param name="verseListLeft"/>
         <xsl:variable name="refCode" select="$refBook/@code"/>
         <xsl:variable name="c" select="substring-before($refCV, $refPunc)"/>
         <xsl:choose>
+            <!-- Found Chapter -->
             <xsl:when test="$c != ''">
                 <xsl:call-template name="Reference">
                     <xsl:with-param name="ref" select="$ref"/>
@@ -749,15 +752,16 @@
                     <xsl:with-param name="c" select="$c"/>
                     <xsl:with-param name="v" select="substring-after($refCV, $refPunc)"/>
                 </xsl:call-template>
-                <xsl:if test="$xtv != ''">
+                <xsl:if test="$verseListLeft != ''">
                     <xsl:text>, </xsl:text>
                     <xsl:call-template name="CrossRefVerseListIter">
-                        <xsl:with-param name="ref" select="$xtv"/>
+                        <xsl:with-param name="ref" select="$verseListLeft"/>
                         <xsl:with-param name="book" select="$refBook"/>
                         <xsl:with-param name="chap" select="$c"/>
                     </xsl:call-template>
                 </xsl:if>
             </xsl:when>
+            <!-- Single chapter book -->
             <xsl:when test="$chap = '' and not(contains($verseRefs[@code = $refCode]/text(), ' '))">
                 <xsl:call-template name="Reference">
                     <xsl:with-param name="ref" select="$ref"/>
@@ -765,15 +769,16 @@
                     <xsl:with-param name="c" select="1"/>
                     <xsl:with-param name="v" select="$refCV"/>
                 </xsl:call-template>
-                <xsl:if test="$xtv != ''">
+                <xsl:if test="$verseListLeft != ''">
                     <xsl:text>, </xsl:text>
                     <xsl:call-template name="CrossRefVerseListIter">
-                        <xsl:with-param name="ref" select="$xtv"/>
+                        <xsl:with-param name="ref" select="$verseListLeft"/>
                         <xsl:with-param name="book" select="$refBook"/>
                         <xsl:with-param name="chap" select="1"/>
                     </xsl:call-template>
                 </xsl:if>
             </xsl:when>
+            <!-- Chapter range (chapter without verse number -->
             <xsl:when test="$chap = ''">
                 <xsl:call-template name="Reference">
                     <xsl:with-param name="ref" select="$ref"/>
@@ -781,15 +786,16 @@
                     <xsl:with-param name="c" select="$refCV"/>
                     <xsl:with-param name="v" select="1"/>
                 </xsl:call-template>
-                <xsl:if test="$xtv != ''">
+                <xsl:if test="$verseListLeft != ''">
                     <xsl:text>, </xsl:text>
                     <xsl:call-template name="CrossRefVerseListIter">
-                        <xsl:with-param name="ref" select="$xtv"/>
+                        <xsl:with-param name="ref" select="$verseListLeft"/>
                         <xsl:with-param name="book" select="$refBook"/>
                         <xsl:with-param name="chap" select="$refCV"/>
                     </xsl:call-template>
                 </xsl:if>
             </xsl:when>
+            <!-- Continue verse list in previously given chapter -->
             <xsl:otherwise>
                 <xsl:call-template name="Reference">
                     <xsl:with-param name="ref" select="$ref"/>
@@ -797,10 +803,10 @@
                     <xsl:with-param name="c" select="$chap"/>
                     <xsl:with-param name="v" select="$refCV"/>
                 </xsl:call-template>
-                <xsl:if test="$xtv != ''">
+                <xsl:if test="$verseListLeft != ''">
                     <xsl:text>, </xsl:text>
                     <xsl:call-template name="CrossRefVerseListIter">
-                        <xsl:with-param name="ref" select="$xtv"/>
+                        <xsl:with-param name="ref" select="$verseListLeft"/>
                         <xsl:with-param name="book" select="$refBook"/>
                         <xsl:with-param name="chap" select="$chap"/>
                     </xsl:call-template>

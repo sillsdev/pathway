@@ -12,12 +12,15 @@
 // Responsibility: Trihus
 // ---------------------------------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
 
-namespace Test.ExportTheWordTest
+namespace Test.TheWordConvertTest
 {
     /// ----------------------------------------------------------------------------------------
     /// <summary>
@@ -38,7 +41,7 @@ namespace Test.ExportTheWordTest
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
-            string testPath = PathPart.Bin(Environment.CurrentDirectory, "/theWordConvertConvert/TestFiles");
+            string testPath = PathPart.Bin(Environment.CurrentDirectory, "/theWordConvert/TestFiles");
             _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
             _expectedPath = Common.PathCombine(testPath, "Expected");
@@ -82,6 +85,42 @@ namespace Test.ExportTheWordTest
             PublicationInformation projInfo = null;
             var actual = target.Export(projInfo);
             Assert.IsFalse(actual);
+        }
+
+        [Test]
+        public void LoadXsltTest()
+        {
+            LoadXslt();
+            Assert.AreEqual("System.Text.UTF8Encoding", TheWord.OutputSettings.Encoding.ToString());
+        }
+
+        [Test]
+        public void CollectTestamentBooksTest()
+        {
+            var curDir = Environment.CurrentDirectory;
+            string vrsPath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
+            Environment.CurrentDirectory = vrsPath;
+            var otBooks = new List<string> ();
+            var ntBooks = new List<string> ();
+            CollectTestamentBooks(otBooks, ntBooks);
+            Environment.CurrentDirectory = curDir;
+            Assert.AreEqual(39, otBooks.Count);
+            Assert.AreEqual(27, ntBooks.Count);
+            Assert.AreEqual("GEN", otBooks[0]);
+            Assert.AreEqual("MAL", otBooks[38]);
+            Assert.AreEqual("MAT", ntBooks[0]);
+            Assert.AreEqual("REV", ntBooks[26]);
+
+        }
+
+        [Test]
+        public void LoadXsltParametersTest()
+        {
+            ParatextData = @"C:\";
+            Ssf = FileInput("MP1.ssf");
+            var actual = LoadXsltParameters();
+            Assert.AreEqual(":", actual.GetParam("refPunc", ""));
+            Assert.AreEqual(@"file:///C:\MP1\BookNames.xml", actual.GetParam("bookNames", ""));
         }
 
 

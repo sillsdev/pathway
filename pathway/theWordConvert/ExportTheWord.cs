@@ -30,16 +30,10 @@ namespace SIL.PublishingSolution
     public class ExportTheWord : IExportProcess
     {
         static int _verbosity = 0;
-        static object _paratextData;
-        private static string _ssf;
+        protected static object ParatextData;
+        protected static string Ssf;
 
-        private static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
-        protected string processFolder;
-        protected string restructuredFullName;
-        protected string collectionFullName;
-        protected string collectionName;
-        protected static ProgressBar _pb;
-        private const string RedirectOutputFileName = "Convert.log";
+        protected static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
 
         public string ExportType
         {
@@ -179,7 +173,7 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        private static void LoadMetadata()
+        protected static void LoadMetadata()
         {
             Param.LoadSettings();
             Param.SetValue(Param.InputType, "Scripture");
@@ -187,93 +181,15 @@ namespace SIL.PublishingSolution
             //string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
         }
 
-        private static string ConvertToMySword(string resultName, string tempTheWordCreatorPath, string exportTheWordInputPath)
+        protected static void LoadXslt()
         {
-            var myProc = Process.Start(new ProcessStartInfo
-                {
-                    Arguments = resultName,
-                    FileName = "TheWordBible2MySword.exe",
-                    WorkingDirectory = tempTheWordCreatorPath,
-                    CreateNoWindow = true
-                });
-            myProc.WaitForExit();
-            var mySwordFiles = Directory.GetFiles(tempTheWordCreatorPath, "*.mybible");
-            var mySwordResult = "<No MySword Result>";
-            if (mySwordFiles.Length >= 1)
-            {
-                mySwordResult = Path.Combine(exportTheWordInputPath, Path.GetFileNameWithoutExtension(mySwordFiles[0]));
-                File.Copy(mySwordFiles[0], mySwordResult);
-            }
-            return mySwordResult;
-        }
-
-        private static XsltArgumentList LoadXsltParameters()
-        {
-            var xsltArgs = new XsltArgumentList();
-            xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
-            xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
-            return xsltArgs;
-        }
-
-        private static void LoadXslt()
-        {
-            var xsltSettings = new XsltSettings() {EnableDocumentFunction = true};
+            var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
             var inputXsl = Assembly.GetExecutingAssembly().GetManifestResourceStream("SIL.PublishingSolution.theWord.xsl");
             Debug.Assert(inputXsl != null);
             TheWord.Load(XmlReader.Create(inputXsl), xsltSettings, null);
         }
 
-        private void AttachMetadata(StreamWriter sw)
-        {
-            var format = @"id=W{0}
-charset=0
-lang={0}
-font={8}
-short.title={0}
-title={1}
-description={2} \
-{3}
-version.major=1
-version.minor=0
-version.date={4}
-publisher={5}
-publish.date={6}
-author={5}
-creator={7}
-source={5}
-about={1} \
-<p>{3} \
-<p>\
-<p> . . . . . . . . . . . . . . . . . . .\
-<p><b>Creative Commons</b> <i>Atribution-Non Comercial-No Derivatives 3.0</i>\
-<p><font color=blue><i>http://creativecommons.org/licenses/by-nc-nd/3.0</i></font>\
-<p><b>Your are free: <i>To Share</i></b>  — to copy, distribute and transmit the work\
-<p><b><i>Under the following conditions:</i></b>\
-<p><b>• Attribution.</b> You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).\
-<p><b>• Noncommercial.</b> You may not use this work for commercial purposes.\
-<p><b>• No Derivative Works.</b> You may not alter, transform, or build upon this work.\
-<p><b><i>With the understanding:</i></b>\
-<p><b>• Waiver.</b> Any of the above conditions can be waived if you get permission from the copyright holder.\
-<p><b>• Other Rights.</b> In no way are any of the following rights affected by the license:\
-<p>— Your fair dealing or fair use rights;\
-<p>— The author's moral rights;\
-<p>— Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.\
-<p><b>Notice</b> — For any reuse or distribution, you must make clear to others the license terms of this work.\
-";
-            var langCode = GetSsfValue("//EthnologueCode", "zxx");
-            const bool isConfigurationTool = false;
-            var title = Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool);
-            var description = Param.GetMetadataValue("Description");
-            var copyright = Param.GetMetadataValue("Copyright Holder");
-            var createDate = DateTime.Now.ToString("yyyy.M.d");
-            var publisher = Param.GetMetadataValue("Publisher");
-            var publishDate = createDate;
-            var creator = Param.GetMetadataValue("Creator");
-            var font = GetSsfValue("//DefaultFont", "Charis SIL");
-            sw.Write(string.Format(format, langCode, title, description, copyright, createDate, publisher, publishDate, creator, font));
-        }
-
-        private static void CollectTestamentBooks(List<string> otBooks, List<string> ntBooks)
+        protected static void CollectTestamentBooks(List<string> otBooks, List<string> ntBooks)
         {
             var xmlDoc = Common.DeclareXMLDocument(true);
             var vfs = new StreamReader("vrs.xml");
@@ -360,9 +276,9 @@ about={1} \
 
         private static void FindParatextProject()
         {
-            RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out _paratextData);
+            RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out ParatextData);
             var sh = new SettingsHelper(Param.DatabaseName);
-            _ssf = sh.GetSettingsFilename();
+            Ssf = sh.GetSettingsFilename();
         }
 
         private static string GetSsfValue(string xpath)
@@ -371,13 +287,21 @@ about={1} \
         }
         private static string GetSsfValue(string xpath, string def)
         {
-            var node = Common.GetXmlNode(_ssf, xpath);
+            var node = Common.GetXmlNode(Ssf, xpath);
             return (node != null)? node.InnerText : def;
+        }
+
+        protected static XsltArgumentList LoadXsltParameters()
+        {
+            var xsltArgs = new XsltArgumentList();
+            xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
+            xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
+            return xsltArgs;
         }
 
         private static string GetBookNamesUri()
         {
-            var myProj = Path.Combine((string) _paratextData, GetSsfValue("//Name"));
+            var myProj = Path.Combine((string) ParatextData, GetSsfValue("//Name"));
             return "file:///" + Path.Combine(myProj, "BookNames.xml");
         }
 
@@ -445,6 +369,76 @@ about={1} \
             catch
             {
             }
+        }
+
+        private static string ConvertToMySword(string resultName, string tempTheWordCreatorPath, string exportTheWordInputPath)
+        {
+            var myProc = Process.Start(new ProcessStartInfo
+            {
+                Arguments = resultName,
+                FileName = "TheWordBible2MySword.exe",
+                WorkingDirectory = tempTheWordCreatorPath,
+                CreateNoWindow = true
+            });
+            myProc.WaitForExit();
+            var mySwordFiles = Directory.GetFiles(tempTheWordCreatorPath, "*.mybible");
+            var mySwordResult = "<No MySword Result>";
+            if (mySwordFiles.Length >= 1)
+            {
+                mySwordResult = Path.Combine(exportTheWordInputPath, Path.GetFileName(mySwordFiles[0]));
+                File.Copy(mySwordFiles[0], mySwordResult);
+            }
+            return mySwordResult;
+        }
+
+        private void AttachMetadata(StreamWriter sw)
+        {
+            var format = @"id=W{0}
+charset=0
+lang={0}
+font={8}
+short.title={0}
+title={1}
+description={2} \
+{3}
+version.major=1
+version.minor=0
+version.date={4}
+publisher={5}
+publish.date={6}
+author={5}
+creator={7}
+source={5}
+about={1} \
+<p>{3} \
+<p>\
+<p> . . . . . . . . . . . . . . . . . . .\
+<p><b>Creative Commons</b> <i>Atribution-Non Comercial-No Derivatives 3.0</i>\
+<p><font color=blue><i>http://creativecommons.org/licenses/by-nc-nd/3.0</i></font>\
+<p><b>Your are free: <i>To Share</i></b>  — to copy, distribute and transmit the work\
+<p><b><i>Under the following conditions:</i></b>\
+<p><b>• Attribution.</b> You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).\
+<p><b>• Noncommercial.</b> You may not use this work for commercial purposes.\
+<p><b>• No Derivative Works.</b> You may not alter, transform, or build upon this work.\
+<p><b><i>With the understanding:</i></b>\
+<p><b>• Waiver.</b> Any of the above conditions can be waived if you get permission from the copyright holder.\
+<p><b>• Other Rights.</b> In no way are any of the following rights affected by the license:\
+<p>— Your fair dealing or fair use rights;\
+<p>— The author's moral rights;\
+<p>— Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.\
+<p><b>Notice</b> — For any reuse or distribution, you must make clear to others the license terms of this work.\
+";
+            var langCode = GetSsfValue("//EthnologueCode", "zxx");
+            const bool isConfigurationTool = false;
+            var title = Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool);
+            var description = Param.GetMetadataValue("Description");
+            var copyright = Param.GetMetadataValue("Copyright Holder");
+            var createDate = DateTime.Now.ToString("yyyy.M.d");
+            var publisher = Param.GetMetadataValue("Publisher");
+            var publishDate = createDate;
+            var creator = Param.GetMetadataValue("Creator");
+            var font = GetSsfValue("//DefaultFont", "Charis SIL");
+            sw.Write(string.Format(format, langCode, title, description, copyright, createDate, publisher, publishDate, creator, font));
         }
 
         static void LogStatus(string format, params object[] args)
