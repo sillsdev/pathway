@@ -1,0 +1,42 @@
+﻿<ScriptureText>
+  <Versification>4</Versification>
+  <CreatedWithPTW6>T</CreatedWithPTW6>
+  <Name>MP1</Name>
+  <Encoding>65001</Encoding>
+  <Language>English</Language>
+  <DefaultFont>Sylfaen</DefaultFont>
+  <DefaultFontSize>14</DefaultFontSize>
+  <FileNamePostPart>MP1.SFM</FileNamePostPart>
+  <FileNameBookNameForm>41MAT</FileNameBookNameForm>
+  <StyleSheet>usfm.sty</StyleSheet>
+  <ChapterMarker>c</ChapterMarker>
+  <VerseMarker>v</VerseMarker>
+  <TranslationInfo>Standard::</TranslationInfo>
+  <FullName>My Project 1</FullName>
+  <LanguageIsoCode>niv:::</LanguageIsoCode>
+  <EthnologueCode>niv</EthnologueCode>
+  <BiblicalTermsListSetting>Major::BiblicalTerms.xml</BiblicalTermsListSetting>
+  <Editable>T</Editable>
+  <NeedsEnglishLanguageFix>No</NeedsEnglishLanguageFix>
+  <NeedsPortugueseLanguageFix>No</NeedsPortugueseLanguageFix>
+  <Guid>f168dd08700fe213470c49ff2d38ce759698eddd</Guid>
+  <Directory>E:\My Paratext Projects\MP1</Directory>
+  <BooksPresent>000000000000000000000000000000000000000110000000000000000000000000000000000000000000000000000000000000000000000000000000000</BooksPresent>
+  <TextHasChanged>F</TextHasChanged>
+  <LastBackedUp>2013Aug20</LastBackedUp>
+  <CrossReferenceSettingsHaveBeenReviewed>T</CrossReferenceSettingsHaveBeenReviewed>
+  <RangeIndicator>-</RangeIndicator>
+  <SequenceIndicator>,</SequenceIndicator>
+  <ChapterVerseSeparator>:</ChapterVerseSeparator>
+  <ChapterRangeSeparator>—</ChapterRangeSeparator>
+  <BookSequenceSeparator>; </BookSequenceSeparator>
+  <ChapterNumberSeparator>; </ChapterNumberSeparator>
+  <ReferenceFinalPunctuation>.</ReferenceFinalPunctuation>
+  <BookSourceForMarkerXt>Abbreviation</BookSourceForMarkerXt>
+  <BookSourceForMarkerR>ShortName</BookSourceForMarkerR>
+  <SegmentOrder>a b c d e f g h i j k l m n o p q r s t u v w x y z aa bb cc dd ee ff gg hh ii jj kk ll mm nn oo pp qq rr ss tt uu vv ww xx yy zz</SegmentOrder>
+  <FileNamePrePart />
+  <FileNameChapterNumberForm />
+  <ReferenceExtraMaterial />
+  <Naming PrePart="" PostPart="MP1.SFM" BookNameForm="41MAT" ChapterNumberForm="" />
+</ScriptureText>
