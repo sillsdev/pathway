@@ -56,7 +56,7 @@ namespace Test.TheWordConvertTest
         {
             var target = new ExportTheWord();
             var actual = target.ExportType;
-            Assert.AreEqual("theWord", actual);
+            Assert.AreEqual("theWord/MySword", actual);
         }
 
         [Test]
