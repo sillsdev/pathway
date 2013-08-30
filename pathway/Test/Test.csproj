@@ -288,6 +288,9 @@
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsRecTest.cs" />
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsTests.cs" />
     <Compile Include="GoBibleConvert\UsxToSFMTest.cs" />
+    <Compile Include="ParatextSupport\EncloseParasInSectionsTests.cs" />
+    <Compile Include="ParatextSupport\ParatextSupportExtensions.cs" />
+    <Compile Include="ParatextSupport\UsxToUsfmTests.cs" />
     <Compile Include="PathwayB\PathwayBTest.cs" />
     <Compile Include="PublishingSolutionExeUi\PsUiScenarioTests.cs">
       <SubType>Code</SubType>
