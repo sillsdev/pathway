@@ -132,31 +132,7 @@ namespace SIL.PublishingSolution
                 Environment.CurrentDirectory = originalDir;
                 Cursor.Current = myCursor;
 
-                if (File.Exists(resultFullName))
-                {
-                    var appData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-                    var theWordFolder = Path.Combine(Path.Combine(appData, "The Word"), "Bibles");
-                    if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.TheWordKey, "RegisteredLocation", "", out _theWorProgPath))
-                    {
-                        if (!File.Exists((string)_theWorProgPath))
-                        {
-                            _theWorProgPath = null;
-                        }
-                    }
-                    if (Directory.Exists(theWordFolder) && _theWorProgPath != null)
-                    {
-                        ReportWhenTheWordInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
-                    }
-                    else
-                    {
-                        ReportWhenTheWordNotInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Failed Exporting TheWord Process.", "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    success = false;
-                }
+                success = ReportResults(resultFullName, mySwordResult, exportTheWordInputPath);
 
                 Common.CleanupExportFolder(exportTheWordInputPath);
             }
@@ -167,14 +143,55 @@ namespace SIL.PublishingSolution
                 inProcess.Close();
                 Environment.CurrentDirectory = originalDir;
                 Cursor.Current = myCursor;
-                if (ex.Message.Contains("BookNames"))
+                ReportFailure(ex);
+            }
+            return success;
+        }
+
+        private static void ReportFailure(Exception ex)
+        {
+            if (ex.Message.Contains("BookNames"))
+            {
+                MessageBox.Show("Please run the References basic check.", "theWord Export", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show(ex.Message, "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private static bool ReportResults(string resultFullName, string mySwordResult, string exportTheWordInputPath)
+        {
+            bool success;
+
+            if (File.Exists(resultFullName))
+            {
+                var appData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var theWordFolder = Path.Combine(Path.Combine(appData, "The Word"), "Bibles");
+                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.TheWordKey, "RegisteredLocation", "",
+                                                      out _theWorProgPath))
                 {
-                    MessageBox.Show("Please run the References basic check.", "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (!File.Exists((string) _theWorProgPath))
+                    {
+                        _theWorProgPath = null;
+                    }
+                }
+                if (Directory.Exists(theWordFolder) && _theWorProgPath != null)
+                {
+                    ReportWhenTheWordInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
                 }
                 else
                 {
-                    MessageBox.Show(ex.Message, "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ReportWhenTheWordNotInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
                 }
+                success = true;
+            }
+            else
+            {
+                MessageBox.Show("Failed Exporting TheWord Process.", "theWord Export", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                success = false;
             }
             return success;
         }
