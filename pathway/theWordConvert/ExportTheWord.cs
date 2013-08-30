@@ -132,44 +132,66 @@ namespace SIL.PublishingSolution
                 Environment.CurrentDirectory = originalDir;
                 Cursor.Current = myCursor;
 
-                if (File.Exists(resultFullName))
-                {
-                    var appData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-                    var theWordFolder = Path.Combine(Path.Combine(appData, "The Word"), "Bibles");
-                    if (Directory.Exists(theWordFolder))
-                    {
-                        ReportWhenTheWordInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
-                    }
-                    else
-                    {
-                        ReportWhenTheWordNotInstalled(resultFullName, theWordFolder, mySwordResult,
-                                                      exportTheWordInputPath);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Failed Exporting TheWord Process.", "theWord Export", MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error);
-                    success = false;
-                }
+                success = ReportResults(resultFullName, mySwordResult, exportTheWordInputPath);
 
                 Common.CleanupExportFolder(exportTheWordInputPath);
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("BookNames"))
-                {
-                    MessageBox.Show("Please run the References basic check.", "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    MessageBox.Show(ex.Message, "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
                 success = false;
                 inProcess.PerformStep();
                 inProcess.Close();
                 Environment.CurrentDirectory = originalDir;
                 Cursor.Current = myCursor;
+                ReportFailure(ex);
+            }
+            return success;
+        }
+
+        private static void ReportFailure(Exception ex)
+        {
+            if (ex.Message.Contains("BookNames"))
+            {
+                MessageBox.Show("Please run the References basic check.", "theWord Export", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show(ex.Message, "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private static bool ReportResults(string resultFullName, string mySwordResult, string exportTheWordInputPath)
+        {
+            bool success;
+
+            if (File.Exists(resultFullName))
+            {
+                var appData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var theWordFolder = Path.Combine(Path.Combine(appData, "The Word"), "Bibles");
+                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.TheWordKey, "RegisteredLocation", "",
+                                                      out _theWorProgPath))
+                {
+                    if (!File.Exists((string) _theWorProgPath))
+                    {
+                        _theWorProgPath = null;
+                    }
+                }
+                if (Directory.Exists(theWordFolder) && _theWorProgPath != null)
+                {
+                    ReportWhenTheWordInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
+                }
+                else
+                {
+                    ReportWhenTheWordNotInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
+                }
+                success = true;
+            }
+            else
+            {
+                MessageBox.Show("Failed Exporting TheWord Process.", "theWord Export", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                success = false;
             }
             return success;
         }
@@ -204,7 +226,7 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
 
 ● Click Yes.
 
-The program will copy the ""{0}"" file to {1} and it start theWord. 
+The program will copy the ""{0}"" file to {1} and start theWord. 
 
 ● Click No. 
 
@@ -223,14 +245,7 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
             {
                 const bool overwrite = true;
                 File.Copy(resultFullName, Path.Combine(theWordFolder, resultName), overwrite);
-                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.TheWordKey, "RegisteredLocation", "",
-                                                      out _theWorProgPath))
-                {
-                    if (File.Exists((string) _theWorProgPath))
-                    {
-                        Process.Start((string) _theWorProgPath);
-                    }
-                }
+                Process.Start((string) _theWorProgPath);
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -241,8 +256,7 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
         private static void LaunchFileNavigator(string exportTheWordInputPath)
         {
             const bool noWait = false;
-            SubProcess.Run(exportTheWordInputPath, Common.IsUnixOS() ? "nautilus" : "explorer.exe", exportTheWordInputPath,
-                           noWait);
+            SubProcess.Run(exportTheWordInputPath, Common.IsUnixOS() ? "nautilus" : "explorer.exe", exportTheWordInputPath, noWait);
         }
 
         protected static void LoadMetadata()
