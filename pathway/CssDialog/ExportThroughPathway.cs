@@ -586,6 +586,15 @@ namespace SIL.PublishingSolution
             }
             // if there is only 1 stylesheet, disable the dropdown
             ddlStyle.Enabled = ddlStyle.Items.Count != 1;
+            if (ddlLayout.Text.Contains("theWord"))
+            {
+                ddlStyle.Enabled = false;
+                BtnBrwsLayout.Enabled = false;
+            }
+            else
+            {
+                BtnBrwsLayout.Enabled = true;
+            }
         }
 
         private void ShownValidation()
