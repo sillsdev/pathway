@@ -1,5 +1,64 @@
-pathway (1.3.7.3293-1) unstable; urgency=high
+pathway (1.4.0.3399-1) unstable; urgency=high
 
+  * pathway sprint 1.4.0
+    - Common:TD-1875 Removing extra files (leaves xhtml,css, pictures)
+    - Common:TD-3581 Ensure meta data in all PDF files 
+    - Common:TD-3584 Wycliffe publishes when SIL is rights holder.
+    - Common:TD-3585 update copyright year
+    - Common:TD-3591 Update logo
+    - Common:TD-3593 Ensure meta data for pdf in "pdf using LibreOffice option"
+    - Common:TD-3614 Enable Prince 9.0 destination
+    - Common:Don't force examples to bold
+    - Common:Insert space after verse number
+    - Common:go to folder after changes
+    - Common:Update bootstrap to use latest XeLaTex
+    - LibreOffice:TD-3105 cause each book to start on a new page 
+    - LibreOffice:TD-3494 Default copyright info page appears when Selecting custom. 
+    - LibreOffice:TD-3498 Title and the contents are displayed in separate
+    - LibreOffice:TD-3523 Front page is missing for scripture with custom stylesheet 
+    - LibreOffice:TD-3539 Picture is corrupted and appears in between the texts
+    - LibreOffice:TD-3546 Picture comes in between the texts while exporting Single Coloumn 
+    - LibreOffice:TD-3565 Time in folder name
+    - LibreOffice:TD-3577 letter not decoded meta data 
+    - LibreOffice:TD-3594 Create Batch file for Macro to produce License Information for PDF 
+    - LibreOffice:TD-3595 Preview displays unformatted
+    - LibreOffice:TD-3596 Copyright Information not added in Scripture
+    - LibreOffice:TD-3596 Fixed the Path issue in Scripture Output
+    - LibreOffice:TD-3601 Add copyright information for linux
+    - LibreOffice:TD-3603 Reversal export has no headers
+    - LibreOffice:TD-3608 Reversal document produces empty pages
+    - Linux:TD-3622 Update icon on menu in Ubuntu 12.04
+    - Paratext:TD-3588 Guideword problem solved
+    - Paratext:TD-3575 Cross references at beginning of verse cause verse break to be lost 
+    - Paratext:TD-3588 main title not displayed
+    - Paratext:TD-3612 support tables with three columns
+    - Epub:TD-3267 Go Bible export hanging
+    - Epub:TD-3394 Dictionary For MID export option
+    - Epub:TD-3489 Go Bible "go to folder"
+    - Epub:TD-3573 OutOfMemoryException for ResizeImages 
+    - Epub:TD-3600 Go Bible copyright statement missing
+    - Epub:TD-3604 GoBible export failed. Jar file not created
+    - Epub:TD-3611 DictonaryForMIDs output not created
+    - StyleSheet:TD-3053 Background color
+    - StyleSheet:TD-3178 Remove second page number in PDF
+    - StyleSheet:TD-3590 Minor entry indents not reflecting flex settings 
+    - UI:TD-2749 Claims it isn't responding when its actually working
+    - UI:TD-3272 Change text for Insert space after verse number
+    - UI:TD-3518 First customstylesheet accepts the properties of the Second customstylesheet 
+    - UI:TD-3550 Change icon
+    - UI:TD-3592 Fieldworks and Paratext export show "TaskStyle" Error Dialog
+    - UI:TD-3598 Copyright symbol and year missing from default copyright in Scripture 
+    - UI:TD-3605 Clicking on edit layout button
+    - UI:TD-3613, TD-3618, TD-3619 License choice retained
+    - XeLaTeX:TD-2296 Handle Nested list 
+    - XeLaTeX:TD-2968 Headers not present
+    - XeLaTeX:TD-3537 Book name isn't appear in "Table of content" page for scripture.
+    - XeLaTeX:TD-3567 Chapter number is missing at Content
+    - XeLaTeX:TD-3580 Table of Contents doesn't have the starting page of each letter.
+    - XeLaTeX:TD-3582 DropCap is not correct
+    - XeLaTeX:TD-3583 Project shows Box character for Xelatex
+    - XeLaTeX:TD-3587 TOC Letter list for Reversal in Xelatex
+    - XeLaTeX:TD-3606 Book number is missing from in toc
   * pathway sprint 1.3.7
     - Build:TD3496 Pathway Export Error in DicMid in Linux
     - Build:TD-3522 Getting a Crash, when clicking on "Send" button.

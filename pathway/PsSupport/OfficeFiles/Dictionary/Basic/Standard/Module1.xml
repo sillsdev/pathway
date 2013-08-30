@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Aug-06-2013 for TD-3601
+&apos;Changed On Aug-30-2013 for TD-1497
 
 Dim CanSave as Boolean
 
@@ -136,7 +136,18 @@ On Error GoTo MyError:
 	else
 		filterType = &quot;writer_pdf_Export&quot;
 	End If 
-   	oDoc.storeToURL(fileURL, Array(MakePropertyValue(&quot;FilterName&quot;,filterType)) 
+  &apos;===================================================================================	
+  Dim aFilterData (1) as new com.sun.star.beans.PropertyValue 
+  	aFilterData(1).Name  = &quot;Quality&quot;
+   	aFilterData(1).Value = 40
+  Dim aArgs(2) as new com.sun.star.beans.PropertyValue 
+  aArgs(0).Name = &quot;FilterName&quot;
+  aArgs(0).Value = &quot;writer_pdf_Export&quot; 
+  aArgs(1).Name = &quot;FilterData&quot;
+  aArgs(1).Value = aFilterData
+  &apos;===================================================================================		
+   	&apos;oDoc.storeToURL(fileURL, Array(MakePropertyValue(&quot;FilterName&quot;,filterType)) 
+	oDoc.storeToURL(fileURL, aArgs)
 
 	If Lcase(IsPreview) = &quot;false&quot; And Len(Trim(FilePath)) &gt; 4  Then
 		oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 

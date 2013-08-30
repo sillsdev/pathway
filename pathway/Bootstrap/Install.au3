@@ -1,4 +1,18 @@
-;Install.au3 - 12/2/2011 greg_trihus@sil.org License: LGPL
+;Install.au3 - actually do installation as per user's options - 12/2/2011 greg_trihus@sil.org
+;Copyright (c) 2013 SIL International(R)
+;
+;This program is free software: you can redistribute it and/or modify
+;it under the terms of the GNU General Public License as published by
+;the Free Software Foundation, either version 3 of the License, or
+;(at your option) any later version.
+;
+;This program is distributed in the hope that it will be useful,
+;but WITHOUT ANY WARRANTY; without even the implied warranty of
+;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;GNU General Public License for more details.
+;
+;You should have received a copy of the GNU General Public License
+;along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;DoInstall()
 
@@ -29,8 +43,8 @@ Func DoInstall($bar)
 	GUICtrlSetData($bar, 70)
 	InstallXeLaTeXIfNecessary()
 	GUICtrlSetData($bar, 80)
-	InstallYouVersionIfNecessary()
-	GUICtrlSetData($bar, 85)
+	;InstallYouVersionIfNecessary()
+	;GUICtrlSetData($bar, 85)
 	RemoveAllUserFolder()
 	GUICtrlSetData($bar, 90)
 	RemoveLocalFolder()
@@ -330,10 +344,16 @@ Func PrinceInstalled($size)
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
 	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
+		if @error Then
+			$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{3AC28E9C-8F06-4E2C-ADDA-726E2230A03A}", "InstallLocation")
+			if @error Then
+				$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{3AC28E9C-8F06-4E2C-ADDA-726E2230A03A}", "InstallLocation")
+			EndIf
+		EndIf
 	EndIf
 	if not @error Then
 		;MsgBox(4096,"Status","PrinceXml path " & $path)
-		if FileExists( $path & "Prince.exe") Then
+		if FileExists( $path & "Engine\bin\Prince.exe") Then
 			return True
 		EndIf
 	EndIf
@@ -394,7 +414,8 @@ Func InstallPdfReaderIfNecessary()
 		CleanUp($pkg)
 	Else
 		MsgBox(4096,"Status","Please Install a Pdf Reader")
-		LaunchSite("http://get.adobe.com/reader/")
+		;LaunchSite("http://get.adobe.com/reader/")
+		LaunchSite("http://www.tracker-software.com/product/pdf-xchange-lite")
 	EndIf
 EndFunc
 
@@ -482,45 +503,45 @@ Func InstallXeLaTeXIfNecessary()
 	LaunchInstaller($name)
 EndFunc
 
-Func YouVersionInstalled($size)
-	Global $INS_Num, $INS_Size
-	Local $path, $ver, $latest
+;~ Func YouVersionInstalled($size)
+;~ 	Global $INS_Num, $INS_Size
+;~ 	Local $path, $ver, $latest
 
-	return True
-	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayYouVersion", "YouVersionDir")
-	if @error Then
-		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayYouVersion", "YouVersionDir")
-	EndIf
-	if not @error Then
-		;MsgBox(4096,"Status","XeLaTeX path " & $path)
-		if FileExists( $path & "cygwin\bin\bash.exe") Then
-			$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayYouVersion", "YouVersionVer")
-			if @error Then
-				$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayYouVersion", "YouVersionVer")
-			EndIf
-			$latest = IniRead("PathwayBootstrap.Ini", "Versions", "YouVersion", "1.0")
-			if $ver = $latest Then
-				Return True
-			EndIf
-		EndIf
-	EndIf
-	$INS_Num = $INS_Num + 1
-	$INS_Size = $INS_Size + $size
-	Return False
-EndFunc
+;~ 	return True
+;~ 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayYouVersion", "YouVersionDir")
+;~ 	if @error Then
+;~ 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayYouVersion", "YouVersionDir")
+;~ 	EndIf
+;~ 	if not @error Then
+;~ 		;MsgBox(4096,"Status","XeLaTeX path " & $path)
+;~ 		if FileExists( $path & "cygwin\bin\bash.exe") Then
+;~ 			$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayYouVersion", "YouVersionVer")
+;~ 			if @error Then
+;~ 				$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayYouVersion", "YouVersionVer")
+;~ 			EndIf
+;~ 			$latest = IniRead("PathwayBootstrap.Ini", "Versions", "YouVersion", "1.0")
+;~ 			if $ver = $latest Then
+;~ 				Return True
+;~ 			EndIf
+;~ 		EndIf
+;~ 	EndIf
+;~ 	$INS_Num = $INS_Num + 1
+;~ 	$INS_Size = $INS_Size + $size
+;~ 	Return False
+;~ EndFunc
 
-Func InstallYouVersionIfNecessary()
-	Global $InstallStable, $INS_YouVersion
-	
-	Return
-	if $InstallStable or Not $INS_YouVersion Then
-		Return
-	Endif
-	Local $name = "SetupYouVersionTesting-1.1.0.2018.msi"
-	CleanUp($name)
-	GetInstaller($name)
-	LaunchInstaller($name)
-EndFunc
+;~ Func InstallYouVersionIfNecessary()
+;~ 	Global $InstallStable, $INS_YouVersion
+;~ 	
+;~ 	Return
+;~ 	if $InstallStable or Not $INS_YouVersion Then
+;~ 		Return
+;~ 	Endif
+;~ 	Local $name = "SetupYouVersionTesting-1.1.0.2018.msi"
+;~ 	CleanUp($name)
+;~ 	GetInstaller($name)
+;~ 	LaunchInstaller($name)
+;~ EndFunc
 
 Func IsAssociation($ext)
 	Local $ver, $cmd, $endPath, $serverApp
@@ -611,7 +632,10 @@ Func Fw73orLater()
 	if @error Then
 		$fwDir = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\FieldWorks\7.0", "RootCodeDir")
 		if @error Then
-			Return False
+			$fwDir = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\FieldWorks\8", "RootCodeDir")
+			if @error Then
+				Return False
+			EndIf
 		EndIf
 	EndIf
 	$ver = FileGetVersion( $fwDir & "Fieldworks.exe" )
@@ -621,6 +645,8 @@ Func Fw73orLater()
 			return True
 		EndIf
 	ElseIf StringInStr($ver, "7.3") Then
+		Return True
+	ElseIf StringLeft($ver, 2) = "8." Then
 		Return True
 	EndIf
 	Return False

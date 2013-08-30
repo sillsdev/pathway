@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<usx version="2.0">
+  <book code="SNG" style="id">English-US: New International Version 1984</book>
+  <para style="ide">65001 - Unicode (UTF-8)</para>
+  <para style="rem">Copyright Information: For any non-Paratext use of this text, permission must be obtained from the copyright holder</para>
+  <para style="rem">CAP Information: checked/corrected 2009 Barb Penner</para>
+  <para style="h">SONG OF SONGS</para>
+  <para style="toc1">Song of Songs</para>
+  <para style="toc2">Song of Songs</para>
+  <para style="toc3">SS</para>
+  <para style="mt1">Song of Songs</para>
+  <chapter number="1" style="c" />
+  <para style="p">
+    <verse number="1" style="v" />Solomon's Song of Songs.</para>
+  <para style="sp">Beloved<note caller="+" style="f"><char style="fr" closed="false">1.1 </char><char style="ft" closed="false">Primarily on the basis of the gender of the Hebrew pronouns used, male and female speakers are indicated in the margins by the captions </char><char style="fq" closed="false">Lover </char><char style="ft" closed="false">and </char><char style="fq" closed="false">Beloved </char><char style="ft" closed="false">respectively. The words of others are marked </char><char style="fq" closed="false">Friends. </char><char style="ft" closed="false">In some instances the divisions and their captions are debatable.</char></note></para>
+  <para style="q1">
+    <verse number="2" style="v" />Let him kiss me with the kisses of his mouth–</para>
+  <para style="q2">for your love is more delightful than wine.</para>
+  <para style="q1">
+    <verse number="3" style="v" />Pleasing is the fragrance of your perfumes;</para>
+  <para style="q2">your name is like perfume poured out.</para>
+  <para style="q2">No wonder the maidens love you!</para>
+  <para style="q1">
+    <verse number="4" style="v" />Take me away with you–let us hurry!</para>
+  <para style="q2">Let the king bring me into his chambers.</para>
+  <para style="b" />
+  <para style="sp">Friends</para>
+  <para style="b" />
+  <para style="q1">We rejoice and delight in you;<note caller="+" style="f"><char style="fr" closed="false">1.4 </char><char style="ft" closed="false">The Hebrew is masculine singular.</char></note></para>
+  <para style="q2">we will praise your love more than wine.</para>
+  <para style="b" />
+  <para style="sp">Beloved</para>
+  <para style="b" />
+  <para style="q1">How right they are to adore you!</para>
+  <para style="b" />
+  <para style="q1">
+    <verse number="5" style="v" />Dark am I, yet lovely,</para>
+  <para style="q2">O daughters of Jerusalem,</para>
+  <para style="q2">dark like the tents of Kedar,</para>
+  <para style="q2">like the tent curtains of Solomon.<note caller="+" style="f"><char style="fr" closed="false">1.5 </char><char style="ft" closed="false">Or </char><char style="fq" closed="false">Salma</char></note></para>
+</usx>

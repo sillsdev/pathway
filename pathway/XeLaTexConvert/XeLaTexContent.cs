@@ -1528,6 +1528,7 @@ namespace SIL.PublishingSolution
                 string displayNoneEnd = string.Empty;
                 string widows = string.Empty;
                 string orphans = string.Empty;
+                string textIndent = string.Empty;
 
                 foreach (string property in _classInlineStyle[childClass])
                 {
@@ -1583,13 +1584,12 @@ namespace SIL.PublishingSolution
                         {
                             if (property.IndexOf("hanglist") > 0)
                             {
-
-                                //propertyValue = "text-indent hanglist} " + "[" + hangParaValue + "pt]";
                                 txtAlignStart = "\r\n \\begin" + Common.RightString(property, " ") + " \\item ";
                                 txtAlignEnd = "\\end{hanglist} ";
-
-                                //txtAlignStart = "\\begin{hanglist}" + "[12pt] \\item ";
-                                //txtAlignEnd = "\\end{hanglist} ";
+                            }
+                            else if (property.IndexOf("parindent") > 0)
+                            {
+                                textIndent = property.Replace("text-indent ", "");
                             }
                         }
                         else if (propName == "display-none")
@@ -1645,7 +1645,8 @@ namespace SIL.PublishingSolution
                 //    _xetexFile.Write("\\subsection*{");
                 //}
 
-                if (paddingLeft.Length > 0 || paddingRight.Length > 0 || paddingTop.Length > 0 || paddingBottom.Length > 0)
+               
+                if ((childClass.ToLower().IndexOf("line") == -1) && (paddingLeft.Length > 0 || paddingRight.Length > 0 || paddingTop.Length > 0 || paddingBottom.Length > 0 ))
                 {
                     if (paddingLeft.Length == 0)
                     {
@@ -1692,6 +1693,7 @@ namespace SIL.PublishingSolution
                     endParagraphString = "\\end{mdframed}}" + endParagraphString;
                 }
 
+               
                 if (txtLineSpaceStart != string.Empty)
                 {
                     _xetexFile.Write(txtLineSpaceStart);
@@ -1703,6 +1705,8 @@ namespace SIL.PublishingSolution
                     _xetexFile.Write(txtAlignStart);
                     endParagraphString = txtAlignEnd + endParagraphString;
                 }
+
+
                 if (displayNoneStart != string.Empty)
                 {
                     _xetexFile.WriteLine(displayNoneStart);
@@ -1723,6 +1727,12 @@ namespace SIL.PublishingSolution
                 if (orphans != string.Empty)
                 {
                     _xetexFile.WriteLine(orphans);
+                }
+
+
+                if (textIndent != string.Empty)
+                {
+                    _xetexFile.Write(textIndent);
                 }
 
             }

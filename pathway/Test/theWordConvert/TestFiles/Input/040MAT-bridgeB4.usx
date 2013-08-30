@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<usx version="2.0">
+  <book code="MAT" style="id">- My Project 1</book>
+  <chapter number="1" style="c" />
+  <verse number="1-2" style="v" />Verse one text. Verse two text
+  <para style="s">new heading</para>
+  <para style="p"><verse number="3" style="v" />Verse three text <verse number="4" style="v" />Verse four </para>
+</usx>
