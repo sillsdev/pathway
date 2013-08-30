@@ -415,17 +415,17 @@
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
-			<xsl:when test="@style = 'tc'">
-				<p class="Table_Cell" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
-				</p>
-			</xsl:when>
-			<xsl:when test="@style = 'th' or @style = 'th1'">
-				<p class="Table_Cell_Head" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
-				</p>
-			</xsl:when>
-			<xsl:when test="@style = 'thr'">
+      <xsl:when test="starts-with(@style, 'tc')">
+        <p class="Table_Cell" xmlns="http://www.w3.org/1999/xhtml">
+          <xsl:apply-templates/>
+        </p>
+      </xsl:when>
+      <xsl:when test="starts-with(@style, 'th')">
+        <p class="Table_Cell_Head" xmlns="http://www.w3.org/1999/xhtml">
+          <xsl:apply-templates/>
+        </p>
+      </xsl:when>
+      <xsl:when test="@style = 'thr'">
 				<p class="Table_Cell_Head_Last" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
