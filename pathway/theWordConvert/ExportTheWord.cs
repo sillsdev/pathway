@@ -67,6 +67,7 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
+            if (projInfo == null) return false;
             bool success;
             var myCursor = Cursor.Current;
             var originalDir = Environment.CurrentDirectory;
