@@ -15,10 +15,11 @@ namespace ApplyPDFLicenseInfo
             Console.WriteLine("running.....");
             //Thread.Sleep(2500);
             string allUserPath = GetAllUserPath();
-            string executePath = ReadPathinLicenseFile(allUserPath);
+            string executePath = ReadPathinLicenseFile(allUserPath, 0);
+            string workingDirectory = ReadPathinLicenseFile(allUserPath, 1);
             //Console.WriteLine(executePath);
             string pdfFileName = string.Empty;
-            string[] pdfFiles = Directory.GetFiles(executePath +"/", "*.pdf");
+            string[] pdfFiles = Directory.GetFiles(executePath + "/", "*.pdf");
             string getFileName = string.Empty;
             string getCopyrightPdfFileName = string.Empty;
             //Console.WriteLine(pdfFiles.Length.ToString());
@@ -28,13 +29,13 @@ namespace ApplyPDFLicenseInfo
             if (pdfFiles.Length > 0)
             {
                 pdfFileName = pdfFiles[0];
-            //    Console.WriteLine("pdfFileName = pdfFiles[0];");
+                //    Console.WriteLine("pdfFileName = pdfFiles[0];");
             }
             if (pdfFileName != string.Empty || pdfFileName != null)
             {
                 getFileName = Path.GetFileName(pdfFileName);
-             //   Console.WriteLine("getFileName = Path.GetFileName(pdfFileName);");
-             //   Console.WriteLine(getFileName);
+                //   Console.WriteLine("getFileName = Path.GetFileName(pdfFileName);");
+                //   Console.WriteLine(getFileName);
                 if (File.Exists(pdfFileName))
                 {
                     isUnix = SetLicense.UnixVersionCheck();
@@ -75,35 +76,46 @@ namespace ApplyPDFLicenseInfo
                     }
                 }
             }
+
+            
+
             //Thread.Sleep(2500);
             if (File.Exists(pdfFileName.Replace(".pdf", "1.pdf")))
             {
+                File.Copy(pdfFileName.Replace(".pdf", "1.pdf"), Path.Combine(workingDirectory, Path.GetFileName(pdfFileName.Replace(".pdf", "1.pdf"))), true);
+
+                //if (File.Exists(pdfFileName.Replace(".pdf", "1.pdf")))
+                //    File.Delete(pdfFileName.Replace(".pdf", "1.pdf"));
+
                 using (Process process = new Process())
                 {
-                    process.StartInfo.FileName = pdfFileName.Replace(".pdf", "1.pdf");
+                    process.StartInfo.FileName = Path.Combine(workingDirectory, Path.GetFileName(pdfFileName.Replace(".pdf", "1.pdf")));
                     process.Start();
                 }
             }
             //Thread.Sleep(500);
         }
 
-        private static string ReadPathinLicenseFile(string allUserPath)
+        private static string ReadPathinLicenseFile(string allUserPath, int readLineNumber)
         {
             string fileLoc = Path.Combine(allUserPath, "License.txt");
             string executePath = string.Empty;
-
+            int countRead = 0;
+            List<string> lines = new List<string>();
             if (File.Exists(fileLoc))
             {
                 using (StreamReader reader = new StreamReader(fileLoc))
                 {
                     string line;
-
+                    
                     while ((line = reader.ReadLine()) != null)
                     {
-                        executePath = line;
+                        lines.Add(line);
                     }
 
                     reader.Close();
+
+                    executePath = lines[readLineNumber].ToString();
                 }
             }
             return executePath;
