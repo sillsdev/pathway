@@ -78,7 +78,7 @@ namespace SIL.PublishingSolution
                 var codePath = Path.GetDirectoryName(assemblyLocation);
                 Debug.Assert(codePath != null);
                 Environment.CurrentDirectory = codePath;
-                
+
                 inProcess.Show();
 
                 LoadXslt();
@@ -107,7 +107,7 @@ namespace SIL.PublishingSolution
 
                 var codeNames = new Dictionary<string, string>();
                 var otFlag = OtFlag(fullName, codeNames, otBooks);
-                inProcess.AddToMaximum(codeNames.Count * 2);
+                inProcess.AddToMaximum(codeNames.Count*2);
                 inProcess.PerformStep();
 
                 var resultName = output + (otFlag ? ".ont" : ".nt");
@@ -138,22 +138,33 @@ namespace SIL.PublishingSolution
                     var theWordFolder = Path.Combine(Path.Combine(appData, "The Word"), "Bibles");
                     if (Directory.Exists(theWordFolder))
                     {
-                        ReportWhenTheWordInstalled(resultFullName, theWordFolder, mySwordResult, resultName, exportTheWordInputPath);
+                        ReportWhenTheWordInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
                     }
                     else
                     {
-                        ReportWhenTheWordNotInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
+                        ReportWhenTheWordNotInstalled(resultFullName, theWordFolder, mySwordResult,
+                                                      exportTheWordInputPath);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Failed Exporting TheWord Process.", "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed Exporting TheWord Process.", "theWord Export", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    success = false;
                 }
 
                 Common.CleanupExportFolder(exportTheWordInputPath);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                if (ex.Message.Contains("BookNames"))
+                {
+                    MessageBox.Show("Please run the References basic check.", "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 success = false;
                 inProcess.PerformStep();
                 inProcess.Close();
@@ -163,13 +174,21 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        private static void ReportWhenTheWordNotInstalled(string resultFullName, string theWordFolder, string mySwordResult,
-                                                          string exportTheWordInputPath)
+        private static void ReportWhenTheWordNotInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
         {
-            string msg =
-                string.Format(
-                    "Please install theWord and copy the file {0} to {1} for theWord.\nCopy {2} to your the Bibles folder of MySword on your Phone. You can also send pathway@sil.org for uploading.\n\nDo you want to open the results folder?",
-                    resultFullName, theWordFolder, mySwordResult);
+            string msgFormat = @"Do you want to open the folder with the results?
+
+● Click Yes.
+
+The folder with the ""{0}"" file ({2}) will open so you can manually copy it to {1}.
+
+The MySword file ""{3}"" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. 
+
+● Click Cancel to do neither of the above.
+";
+            string resultName = Path.GetFileName(resultFullName);
+            string resultDir = Path.GetDirectoryName(resultFullName);
+            string msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
             DialogResult dialogResult = MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNo,
                                                         MessageBoxIcon.Information);
 
@@ -179,15 +198,26 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static void ReportWhenTheWordInstalled(string resultFullName, string theWordFolder, string mySwordResult,
-                                                       string resultName, string exportTheWordInputPath)
+        private static void ReportWhenTheWordInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
         {
-            string msg =
-                string.Format(
-                    "Please copy the file {0} to {1} for theWord.\nCopy {2} to your the Bibles folder of MySword on your Phone. You can also send pathway@sil.org for uploading.\n\nDo you want to launch theWord (No to open folder, Cancel to finish)?",
-                    resultFullName, theWordFolder, mySwordResult);
-            DialogResult dialogResult = MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNoCancel,
-                                                        MessageBoxIcon.Information);
+            string msgFormat = @"Do you want to start theWord?
+
+● Click Yes.
+
+The program will copy the ""{0}"" file to {1} and it start theWord. 
+
+● Click No. 
+
+The folder with the ""{0}"" file ({2}) will open so you can manually copy it to {1}.
+
+The MySword file ""{3}"" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. 
+
+● Click Cancel to do neither of the above.
+";
+            string resultName = Path.GetFileName(resultFullName);
+            string resultDir = Path.GetDirectoryName(resultFullName);
+            string msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
+            DialogResult dialogResult = MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
 
             if (dialogResult == DialogResult.Yes)
             {
