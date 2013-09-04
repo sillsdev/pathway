@@ -167,8 +167,18 @@ namespace SIL.PublishingSolution
 
         private void RenderTextNode(XmlNode node)
         {
+            if (IsHomographNumber(node))
+                return;
+
             AddStyleTag(node);
             Rec += Quote(node.InnerText);
+        }
+
+        private bool IsHomographNumber(XmlNode node)
+        {
+            bool resultFound = node.ParentNode != null && (node.ParentNode.Attributes != null && node.ParentNode.Attributes["class"] != null 
+                && node.ParentNode.Attributes["class"].Value.IndexOf("xhomographnumber", StringComparison.Ordinal) == 0);
+            return resultFound;
         }
 
         private string Quote(string p)
