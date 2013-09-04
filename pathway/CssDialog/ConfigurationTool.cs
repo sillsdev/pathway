@@ -1423,5 +1423,10 @@ namespace SIL.PublishingSolution
             EditCSS(sender, e);
             _CToolBL.chkHideSpaceVerseNo_CheckStateChangedBL(sender, e);
         }
+
+        private void stylesGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            _CToolBL.stylesGrid_SelectionChanged(sender, e);
+        }
     }
 }
