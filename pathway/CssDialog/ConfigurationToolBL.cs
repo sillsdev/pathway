@@ -3705,41 +3705,41 @@ namespace SIL.PublishingSolution
 
         public void stylesGrid_RowEnterBL(DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add or Edit
-                {
-                    WriteCss();
-                }
+            //try
+            //{
+            //    if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add or Edit
+            //    {
+            //        WriteCss();
+            //    }
 
-                _screenMode = ScreenMode.View;
-                SelectedRowIndex = e.RowIndex;
-                ShowInfoValue();
-                //_screenMode = ScreenMode.Edit;
-                //if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add
-                //{
+            //    _screenMode = ScreenMode.View;
+            //    SelectedRowIndex = e.RowIndex;
+            //    ShowInfoValue();
+            //    //_screenMode = ScreenMode.Edit;
+            //    //if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add
+            //    //{
 
-                //    ShowInfoValue();
-                //    //WriteCss();
-                //    _screenMode = ScreenMode.Edit;
-                //}
-                //else
-                //{
-                //    ShowInfoValue();
-                //}
+            //    //    ShowInfoValue();
+            //    //    //WriteCss();
+            //    //    _screenMode = ScreenMode.Edit;
+            //    //}
+            //    //else
+            //    //{
+            //    //    ShowInfoValue();
+            //    //}
 
-                //if (!AddMode)
-                //{
-                //    SelectedRowIndex = e.RowIndex;
-                //    ShowInfoValue();
-                //}
-                //else
-                //{
-                //    AddMode = false;
-                //}
-                //_isCreatePreview = false;
-            }
-            catch { }
+            //    //if (!AddMode)
+            //    //{
+            //    //    SelectedRowIndex = e.RowIndex;
+            //    //    ShowInfoValue();
+            //    //}
+            //    //else
+            //    //{
+            //    //    AddMode = false;
+            //    //}
+            //    //_isCreatePreview = false;
+            //}
+            //catch { }
         }
 
         public void txtApproved_ValidatedBL(object sender)
@@ -4675,7 +4675,7 @@ namespace SIL.PublishingSolution
         {
             string preview;
 
-            if (!File.Exists(PreviewFileName1) || _screenMode == ScreenMode.Modify)
+            if (!File.Exists(PreviewFileName1) || _screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit)
             {
                 CreatePreviewFile();
                 cTool.PicPreview.Visible = false;
@@ -4795,6 +4795,22 @@ namespace SIL.PublishingSolution
                 pageType = cTool.DdlRunningHead.Items[0].ToString();
             }
             return pageType;
+        }
+
+        public void stylesGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add or Edit
+                {
+                    WriteCss();
+                }
+
+                _screenMode = ScreenMode.View;
+                SelectedRowIndex = cTool.StylesGrid.CurrentRow.Index;
+                ShowInfoValue();
+            }
+            catch { }
         }
 
         #endregion
