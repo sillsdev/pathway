@@ -3701,45 +3701,48 @@ namespace SIL.PublishingSolution
             }
             catch { }
         }
-
-
+        
         public void stylesGrid_RowEnterBL(DataGridViewCellEventArgs e)
         {
-            //try
-            //{
-            //    if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add or Edit
-            //    {
-            //        WriteCss();
-            //    }
+            try
+            {
 
-            //    _screenMode = ScreenMode.View;
-            //    SelectedRowIndex = e.RowIndex;
-            //    ShowInfoValue();
-            //    //_screenMode = ScreenMode.Edit;
-            //    //if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add
-            //    //{
+                if (IsUnixOs)
+                {
+                    if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add or Edit
+                    {
+                        WriteCss();
+                    }
 
-            //    //    ShowInfoValue();
-            //    //    //WriteCss();
-            //    //    _screenMode = ScreenMode.Edit;
-            //    //}
-            //    //else
-            //    //{
-            //    //    ShowInfoValue();
-            //    //}
+                    _screenMode = ScreenMode.View;
+                    SelectedRowIndex = cTool.StylesGrid.CurrentRow.Index;
+                    ShowInfoValue();
+                }
+                //_screenMode = ScreenMode.Edit;
+                //if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add
+                //{
+                
+                //    ShowInfoValue();
+                //    //WriteCss();
+                //    _screenMode = ScreenMode.Edit;
+                //}
+                //else
+                //{
+                //    ShowInfoValue();
+                //}
 
-            //    //if (!AddMode)
-            //    //{
-            //    //    SelectedRowIndex = e.RowIndex;
-            //    //    ShowInfoValue();
-            //    //}
-            //    //else
-            //    //{
-            //    //    AddMode = false;
-            //    //}
-            //    //_isCreatePreview = false;
-            //}
-            //catch { }
+                //if (!AddMode)
+                //{
+                //    SelectedRowIndex = e.RowIndex;
+                //    ShowInfoValue();
+                //}
+                //else
+                //{
+                //    AddMode = false;
+                //}
+                //_isCreatePreview = false;
+            }
+            catch { }
         }
 
         public void txtApproved_ValidatedBL(object sender)
@@ -4807,7 +4810,9 @@ namespace SIL.PublishingSolution
                 }
 
                 _screenMode = ScreenMode.View;
-                SelectedRowIndex = cTool.StylesGrid.CurrentRow.Index;
+                if (cTool.StylesGrid.CurrentRow != null) 
+                    SelectedRowIndex = cTool.StylesGrid.CurrentRow.Index;
+                
                 ShowInfoValue();
             }
             catch { }
