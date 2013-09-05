@@ -68,10 +68,6 @@
       <style:paragraph-properties fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:text-indent="-36pt" fo:margin-left="36pt" style:line-spacing="100%" fo:padding-bottom="2pt" fo:padding-top="1pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" />
     </style:style>
-    <style:style style:name="revData" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="revHeader" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:border-bottom="solid .5pt #808080 " fo:margin-top="18pt" fo:margin-right="9pt" fo:margin-bottom="18pt" fo:margin-left="9pt" />
-    </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
       <style:text-properties fo:font-weight="700" fo:font-size="24pt" />
