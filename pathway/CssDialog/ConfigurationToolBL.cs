@@ -944,7 +944,7 @@ namespace SIL.PublishingSolution
                             value["-ps-hide-versenumber-one"] = "\"" + cTool.ChkTurnOffFirstVerse.Checked + "\"";
                             value["-ps-hide-space-versenumber"] = "\"" + cTool.ChkHideSpaceVerseNo.Checked + "\"";
                         }
-                        
+
                         WriteCssClass(writeCss, "page", value);
                     }
                     // write out the changes
@@ -1041,7 +1041,7 @@ namespace SIL.PublishingSolution
                 {
                     EnableDisablePanel(true);
                     if (cTool.TxtName.Text.ToLower() == "oneweb") { cTool.TsDelete.Enabled = false; }
-                    if(cTool.BtnMobile.Text.ToLower() == "dictformids"){EnableDisablePanel(false);}
+                    if (cTool.BtnMobile.Text.ToLower() == "dictformids") { EnableDisablePanel(false); }
                     //tsPreview.Enabled = false;
                     cTool.TxtApproved.Visible = false;
                     cTool.LblApproved.Visible = false;
@@ -1100,7 +1100,7 @@ namespace SIL.PublishingSolution
             if (inputTypeBL.ToLower() == "scripture")
             {
                 cTool.DdlReferenceFormat.SelectedItem = ReferenceFormat;
-                if(CustomFootnoteCaller.ToLower() == "default")
+                if (CustomFootnoteCaller.ToLower() == "default")
                 {
                     cTool.ChkIncludeCusFnCaller.Checked = false;
                     cTool.TxtFnCallerSymbol.Text = "";
@@ -1712,7 +1712,7 @@ namespace SIL.PublishingSolution
             {
                 case "mobile":
                     //cTool.TabControl1.TabPages.Add(tabmob);
-                    if(inputTypeBL.ToLower() == "dictionary")
+                    if (inputTypeBL.ToLower() == "dictionary")
                     {
                         cTool.TabControl1.TabPages.Insert(1, tabDict4Mids);
                         return;
@@ -1907,7 +1907,7 @@ namespace SIL.PublishingSolution
         /// <param name="showScriptureControls"></param>
         private void SetEpubUIControls(bool showScriptureControls)
         {
-            
+
             // show/hide chapter numbers and references UI
             cTool.LblChapterNumbers.Visible = showScriptureControls;
             cTool.DdlChapterNumbers.Visible = showScriptureControls;
@@ -1926,7 +1926,7 @@ namespace SIL.PublishingSolution
                 cTool.LblEpubFontsSection.Top = (showScriptureControls) ? cTool.DdlReferences.Bottom + 30 : cTool.DdlTocLevel.Bottom + 30;
             }
 
-            
+
             cTool.PicFonts.Top = cTool.LblEpubFontsSection.Bottom + 3;
             cTool.ChkEmbedFonts.Top = cTool.PicFonts.Top;
             cTool.ChkIncludeFontVariants.Top = cTool.ChkEmbedFonts.Bottom + 6;
@@ -2959,10 +2959,10 @@ namespace SIL.PublishingSolution
                 string fileName = Path.GetFileName(filePath);
                 if (fileName.IndexOf(".xml") > 0 || fileName.IndexOf(".xsd") > 0)
                 {
-					if(File.Exists(filePath) && Directory.Exists(toPath))
-					{
-						File.Copy(filePath, Path.Combine(toPath, fileName));
-					}
+                    if (File.Exists(filePath) && Directory.Exists(toPath))
+                    {
+                        File.Copy(filePath, Path.Combine(toPath, fileName));
+                    }
                 }
             }
         }
@@ -3147,7 +3147,7 @@ namespace SIL.PublishingSolution
 
         public void ShowMobileSummaryBL()
         {
-            if(inputTypeBL.ToLower() == "dictionary")
+            if (inputTypeBL.ToLower() == "dictionary")
             {
                 cTool.TxtCss.Text = @"No custom properties for DictionaryForMIDs";
             }
@@ -3440,8 +3440,11 @@ namespace SIL.PublishingSolution
 
                     if (isPreviewFileExist == false || IsPropertyModified())
                     {
-                        WriteCss();
-                        ShowCSSValue();
+                        if (!IsUnixOs)
+                        {
+                            WriteCss();
+                            ShowCSSValue();
+                        }
                         _screenMode = ScreenMode.Edit;
 
                         string cssMergeFullFileName = Param.StylePath(FileName);
@@ -3701,46 +3704,31 @@ namespace SIL.PublishingSolution
             }
             catch { }
         }
-        
+
         public void stylesGrid_RowEnterBL(DataGridViewCellEventArgs e)
         {
             try
             {
-
                 if (IsUnixOs)
                 {
-                    if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add or Edit
+                    if (cTool.TabControl1.SelectedTab.Text == "Preview")
                     {
-                        WriteCss();
+                        SelectedRowIndex = e.RowIndex;
+                        ShowInfoValue();
+                        ShowPreview(1);
                     }
-
-                    _screenMode = ScreenMode.View;
-                    SelectedRowIndex = cTool.StylesGrid.CurrentRow.Index;
-                    ShowInfoValue();
+                    else
+                    {
+                        if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add or Edit
+                        {
+                            FileName = cTool.StylesGrid[ColumnFile, SelectedRowIndex].Value.ToString();
+                            WriteCss();
+                        }
+                        _screenMode = ScreenMode.View;
+                        SelectedRowIndex = e.RowIndex;
+                        ShowInfoValue();
+                    }
                 }
-                //_screenMode = ScreenMode.Edit;
-                //if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add
-                //{
-                
-                //    ShowInfoValue();
-                //    //WriteCss();
-                //    _screenMode = ScreenMode.Edit;
-                //}
-                //else
-                //{
-                //    ShowInfoValue();
-                //}
-
-                //if (!AddMode)
-                //{
-                //    SelectedRowIndex = e.RowIndex;
-                //    ShowInfoValue();
-                //}
-                //else
-                //{
-                //    AddMode = false;
-                //}
-                //_isCreatePreview = false;
             }
             catch { }
         }
@@ -4339,8 +4327,8 @@ namespace SIL.PublishingSolution
                     {
                     }
 
-                        Process.Start(string.Format("mailto:{0}?Subject={1}&Body={2}", MailTo,
-                                               MailSubject, MailBody));
+                    Process.Start(string.Format("mailto:{0}?Subject={1}&Body={2}", MailTo,
+                                           MailSubject, MailBody));
                 }
                 catch (Exception ex)
                 {
@@ -4810,9 +4798,9 @@ namespace SIL.PublishingSolution
                 }
 
                 _screenMode = ScreenMode.View;
-                if (cTool.StylesGrid.CurrentRow != null) 
+                if (cTool.StylesGrid.CurrentRow != null)
                     SelectedRowIndex = cTool.StylesGrid.CurrentRow.Index;
-                
+
                 ShowInfoValue();
             }
             catch { }
