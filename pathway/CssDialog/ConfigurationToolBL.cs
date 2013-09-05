@@ -3715,7 +3715,6 @@ namespace SIL.PublishingSolution
                     {
                         SelectedRowIndex = e.RowIndex;
                         ShowInfoValue();
-                        ShowPreview(1);
                     }
                     else
                     {
