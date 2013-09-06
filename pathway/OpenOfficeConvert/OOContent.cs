@@ -109,6 +109,7 @@ namespace SIL.PublishingSolution
         readonly Dictionary<string, string> _counterVolantryReset = new Dictionary<string, string>();
         readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
         readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");
+        readonly string _thinSpace = Common.ConvertUnicodeToString("\u2006");
 
         ArrayList _anchor = new ArrayList();
         private XmlDocument _xmldoc;
@@ -1346,6 +1347,10 @@ namespace SIL.PublishingSolution
                     if (_projInfo.HideSpaceVerseNumber.ToLower() == "false")
                     {
                         content = content.Replace("-", "‑") + " ";
+                    }
+                    else
+                    {
+                        content = content.Replace("-", "‑") + _thinSpace;
                     }
                 }
             }
