@@ -87,9 +87,9 @@ namespace SIL.PublishingSolution
                 foreach (IExportProcess process in _backend)
                 {
                     if (process.ExportType.ToLower() == "openoffice/libreoffice")
-                        type = OpenOfficeClassifier(publicationInformation, type); // Cross checking for OpenOffice
+                        localType = OpenOfficeClassifier(publicationInformation, localType); // Cross checking for OpenOffice
 
-                    if (process.ExportType.ToLower() == localType)
+                    if (process.ExportType.ToLower() == localType.ToLower())
                         return process.Export(publicationInformation);
                 }
             }
