@@ -82,10 +82,9 @@ namespace ApplyPDFLicenseInfo
             //Thread.Sleep(2500);
             if (File.Exists(pdfFileName.Replace(".pdf", "1.pdf")))
             {
-                File.Copy(pdfFileName.Replace(".pdf", "1.pdf"), Path.Combine(workingDirectory, Path.GetFileName(pdfFileName.Replace(".pdf", "1.pdf"))), true);
-
-                //if (File.Exists(pdfFileName.Replace(".pdf", "1.pdf")))
-                //    File.Delete(pdfFileName.Replace(".pdf", "1.pdf"));
+                //File.Copy(pdfFileName.Replace(".pdf", "1.pdf"), Path.Combine(workingDirectory, Path.GetFileName(pdfFileName.Replace(".pdf", "1.pdf"))), true);
+                //if (File.Exists(pdfFileName))
+                //    File.Delete(pdfFileName);
 
                 using (Process process = new Process())
                 {
