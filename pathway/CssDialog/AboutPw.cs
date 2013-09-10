@@ -16,6 +16,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -178,23 +179,22 @@ namespace SIL.PublishingSolution
             //LocDB.Localize(this, null);     // Form Controls
 
             Text = String.Format("About {0}", AssemblyProduct);
-            labelProductName.Text = AssemblyProduct;
-            labelVersion.Text = String.Format("Version {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
-            labelCopyright.Text = AssemblyCopyright;
-            labelCompanyName.Text = AssemblyCompany;
-            textBoxDescription.Text = AssemblyDescription;
+            //labelProductName.Text = AssemblyProduct;
+            //labelVersion.Text = String.Format("Version {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
+            //labelCopyright.Text = AssemblyCopyright;
+            //labelCompanyName.Text = AssemblyCompany;
+            //textBoxDescription.Text = AssemblyDescription;
+            //HelpImproveGetValue(chkbHelpImprove); 
 
-            HelpImproveGetValue(chkbHelpImprove);
+            lblProductName.Text = AssemblyProduct;
+            lblVersion.Text = String.Format("Version {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
+            lblCopyright.Text = AssemblyCopyright;
+            lblCompany.Text = AssemblyCompany;
+
+            HelpImproveGetValue(chkHelpToImprove); 
+
         }
 
-        /// <summary>
-        /// Close dialog on ok button
-        /// </summary>
-        private void okButton_Click(object sender, EventArgs e)
-        {
-            HelpImproveSetValue(chkbHelpImprove);
-            Close();
-        }
 
         private const string HelpImproveSubKeyName = "SOFTWARE\\SIL\\Pathway";
         private const string HelpImproveValueName = "HelpImprove";
@@ -235,12 +235,33 @@ namespace SIL.PublishingSolution
         private void AboutPw_Activated(object sender, EventArgs e)
         {
             Common.SetFont(this);
-
+            lblProductName.Font = new Font("Arial", 12, FontStyle.Bold); ;
         }
 
         private void lnkLblUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://pathway.sil.org/");
+        }
+
+        private void lnkProj_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://pathway.sil.org/");
+        }
+
+        private void lnkGPL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.gnu.org/licenses/gpl.html");
+        }
+
+        private void chkbHelpImprove_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            HelpImproveSetValue(chkHelpToImprove);
+            Close();
         }
     }
 }

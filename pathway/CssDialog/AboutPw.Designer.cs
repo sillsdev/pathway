@@ -28,200 +28,150 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutPw));
-            this.okButton = new System.Windows.Forms.Button();
-            this.textBoxDescription = new System.Windows.Forms.TextBox();
-            this.labelCompanyName = new System.Windows.Forms.Label();
-            this.labelCopyright = new System.Windows.Forms.Label();
-            this.labelVersion = new System.Windows.Forms.Label();
-            this.labelProductName = new System.Windows.Forms.Label();
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
-            this.lblProjectUrl = new System.Windows.Forms.Label();
-            this.chkbHelpImprove = new System.Windows.Forms.CheckBox();
-            this.lnkLblUrl = new System.Windows.Forms.LinkLabel();
-            this.tableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            this.lblProductName = new System.Windows.Forms.Label();
+            this.lblVersion = new System.Windows.Forms.Label();
+            this.lblCopyright = new System.Windows.Forms.Label();
+            this.lblCompany = new System.Windows.Forms.Label();
+            this.lblProjUrl = new System.Windows.Forms.Label();
+            this.chkHelpToImprove = new System.Windows.Forms.CheckBox();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.lnkProj = new System.Windows.Forms.LinkLabel();
+            this.lnkGPL = new System.Windows.Forms.LinkLabel();
+            this.lblGPL = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // okButton
+            // lblProductName
             // 
-            this.okButton.AccessibleName = "okButton";
-            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(368, 276);
-            this.okButton.Margin = new System.Windows.Forms.Padding(4);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(100, 25);
-            this.okButton.TabIndex = 24;
-            this.okButton.Text = "&OK";
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            this.lblProductName.AutoSize = true;
+            this.lblProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductName.Location = new System.Drawing.Point(173, 23);
+            this.lblProductName.Name = "lblProductName";
+            this.lblProductName.Size = new System.Drawing.Size(121, 20);
+            this.lblProductName.TabIndex = 1;
+            this.lblProductName.Text = "lblProductName";
             // 
-            // textBoxDescription
+            // lblVersion
             // 
-            this.textBoxDescription.AccessibleName = "textBoxDescription";
-            this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxDescription.Location = new System.Drawing.Point(157, 172);
-            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(8, 4, 4, 4);
-            this.textBoxDescription.Multiline = true;
-            this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.ReadOnly = true;
-            this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDescription.Size = new System.Drawing.Size(311, 28);
-            this.textBoxDescription.TabIndex = 23;
-            this.textBoxDescription.TabStop = false;
-            this.textBoxDescription.Visible = false;
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(174, 53);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(52, 13);
+            this.lblVersion.TabIndex = 2;
+            this.lblVersion.Text = "lblVersion";
             // 
-            // labelCompanyName
+            // lblCopyright
             // 
-            this.labelCompanyName.AccessibleName = "labelCompanyName";
-            this.labelCompanyName.AutoSize = true;
-            this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCompanyName.Location = new System.Drawing.Point(157, 108);
-            this.labelCompanyName.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
-            this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 42);
-            this.labelCompanyName.Name = "labelCompanyName";
-            this.labelCompanyName.Size = new System.Drawing.Size(311, 42);
-            this.labelCompanyName.TabIndex = 22;
-            this.labelCompanyName.Text = "SIL International";
-            this.labelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCopyright.AutoSize = true;
+            this.lblCopyright.Location = new System.Drawing.Point(174, 76);
+            this.lblCopyright.Name = "lblCopyright";
+            this.lblCopyright.Size = new System.Drawing.Size(197, 13);
+            this.lblCopyright.TabIndex = 3;
+            this.lblCopyright.Text = "Copyright © 2008-2013 SIL International";
             // 
-            // labelCopyright
+            // lblCompany
             // 
-            this.labelCopyright.AccessibleName = "labelCopyright";
-            this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.Location = new System.Drawing.Point(157, 72);
-            this.labelCopyright.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
-            this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 21);
-            this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(311, 21);
-            this.labelCopyright.TabIndex = 21;
-            this.labelCopyright.Text = "Copyright © 2008-2013 SIL International";
-            this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompany.AutoSize = true;
+            this.lblCompany.Location = new System.Drawing.Point(174, 131);
+            this.lblCompany.Name = "lblCompany";
+            this.lblCompany.Size = new System.Drawing.Size(84, 13);
+            this.lblCompany.TabIndex = 4;
+            this.lblCompany.Text = "SIL International";
             // 
-            // labelVersion
+            // lblProjUrl
             // 
-            this.labelVersion.AccessibleName = "labelVersion";
-            this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelVersion.Location = new System.Drawing.Point(157, 36);
-            this.labelVersion.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
-            this.labelVersion.MaximumSize = new System.Drawing.Size(0, 21);
-            this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(311, 21);
-            this.labelVersion.TabIndex = 0;
-            this.labelVersion.Text = "Version";
-            this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblProjUrl.AutoSize = true;
+            this.lblProjUrl.Location = new System.Drawing.Point(174, 170);
+            this.lblProjUrl.Name = "lblProjUrl";
+            this.lblProjUrl.Size = new System.Drawing.Size(227, 13);
+            this.lblProjUrl.TabIndex = 5;
+            this.lblProjUrl.Text = "Other project related information is available at:";
             // 
-            // labelProductName
+            // chkHelpToImprove
             // 
-            this.labelProductName.AccessibleName = "labelProductName";
-            this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelProductName.Location = new System.Drawing.Point(157, 0);
-            this.labelProductName.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
-            this.labelProductName.MaximumSize = new System.Drawing.Size(0, 21);
-            this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(311, 21);
-            this.labelProductName.TabIndex = 19;
-            this.labelProductName.Text = "Product Name";
-            this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.chkHelpToImprove.AutoSize = true;
+            this.chkHelpToImprove.Location = new System.Drawing.Point(177, 198);
+            this.chkHelpToImprove.Name = "chkHelpToImprove";
+            this.chkHelpToImprove.Size = new System.Drawing.Size(89, 17);
+            this.chkHelpToImprove.TabIndex = 6;
+            this.chkHelpToImprove.Text = "Help Improve";
+            this.chkHelpToImprove.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel
+            // btnOk
             // 
-            this.tableLayoutPanel.AccessibleName = "tableLayoutPanel";
-            this.tableLayoutPanel.ColumnCount = 3;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.04527F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.79424F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27F));
-            this.tableLayoutPanel.Controls.Add(this.logoPictureBox, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.labelProductName, 1, 0);
-            this.tableLayoutPanel.Controls.Add(this.labelVersion, 1, 1);
-            this.tableLayoutPanel.Controls.Add(this.labelCopyright, 1, 2);
-            this.tableLayoutPanel.Controls.Add(this.labelCompanyName, 1, 3);
-            this.tableLayoutPanel.Controls.Add(this.textBoxDescription, 1, 4);
-            this.tableLayoutPanel.Controls.Add(this.lblProjectUrl, 1, 5);
-            this.tableLayoutPanel.Controls.Add(this.chkbHelpImprove, 1, 6);
-            this.tableLayoutPanel.Controls.Add(this.okButton, 1, 7);
-            this.tableLayoutPanel.Controls.Add(this.lnkLblUrl, 2, 5);
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(12, 11);
-            this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 7;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.03623F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.03623F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.03623F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.75846F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.09662F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.03623F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(648, 305);
-            this.tableLayoutPanel.TabIndex = 0;
+            this.btnOk.Location = new System.Drawing.Point(430, 198);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.TabIndex = 7;
+            this.btnOk.Text = "Ok";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // logoPictureBox
+            // lnkProj
             // 
-            this.logoPictureBox.AccessibleName = "logoPictureBox";
-            this.logoPictureBox.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.SIL_Color_Logo;
-            this.logoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.logoPictureBox.Location = new System.Drawing.Point(4, 4);
-            this.logoPictureBox.Margin = new System.Windows.Forms.Padding(4);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 4);
-            this.logoPictureBox.Size = new System.Drawing.Size(140, 135);
-            this.logoPictureBox.TabIndex = 12;
-            this.logoPictureBox.TabStop = false;
+            this.lnkProj.AutoSize = true;
+            this.lnkProj.Location = new System.Drawing.Point(397, 170);
+            this.lnkProj.Name = "lnkProj";
+            this.lnkProj.Size = new System.Drawing.Size(108, 13);
+            this.lnkProj.TabIndex = 8;
+            this.lnkProj.TabStop = true;
+            this.lnkProj.Text = "http://pathway.sil.org";
+            this.lnkProj.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProj_LinkClicked);
             // 
-            // lblProjectUrl
+            // lnkGPL
             // 
-            this.lblProjectUrl.AutoSize = true;
-            this.lblProjectUrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblProjectUrl.Location = new System.Drawing.Point(153, 204);
-            this.lblProjectUrl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblProjectUrl.Name = "lblProjectUrl";
-            this.lblProjectUrl.Size = new System.Drawing.Size(315, 36);
-            this.lblProjectUrl.TabIndex = 26;
-            this.lblProjectUrl.Text = "Other project related information is available at:";
+            this.lnkGPL.AutoSize = true;
+            this.lnkGPL.Location = new System.Drawing.Point(241, 105);
+            this.lnkGPL.Name = "lnkGPL";
+            this.lnkGPL.Size = new System.Drawing.Size(70, 13);
+            this.lnkGPL.TabIndex = 10;
+            this.lnkGPL.TabStop = true;
+            this.lnkGPL.Text = "GNU GPL v3";
+            this.lnkGPL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkGPL_LinkClicked);
             // 
-            // chkbHelpImprove
+            // lblGPL
             // 
-            this.chkbHelpImprove.AutoSize = true;
-            this.chkbHelpImprove.Location = new System.Drawing.Point(153, 244);
-            this.chkbHelpImprove.Margin = new System.Windows.Forms.Padding(4);
-            this.chkbHelpImprove.Name = "chkbHelpImprove";
-            this.chkbHelpImprove.Size = new System.Drawing.Size(113, 21);
-            this.chkbHelpImprove.TabIndex = 25;
-            this.chkbHelpImprove.Text = "Help Improve";
-            this.chkbHelpImprove.UseVisualStyleBackColor = true;
+            this.lblGPL.AutoSize = true;
+            this.lblGPL.Location = new System.Drawing.Point(174, 105);
+            this.lblGPL.Name = "lblGPL";
+            this.lblGPL.Size = new System.Drawing.Size(71, 13);
+            this.lblGPL.TabIndex = 9;
+            this.lblGPL.Text = "Code license:";
             // 
-            // lnkLblUrl
+            // pictureBox1
             // 
-            this.lnkLblUrl.AutoSize = true;
-            this.lnkLblUrl.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lnkLblUrl.LinkArea = new System.Windows.Forms.LinkArea(0, 23);
-            this.lnkLblUrl.Location = new System.Drawing.Point(476, 204);
-            this.lnkLblUrl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lnkLblUrl.Name = "lnkLblUrl";
-            this.lnkLblUrl.Size = new System.Drawing.Size(142, 36);
-            this.lnkLblUrl.TabIndex = 27;
-            this.lnkLblUrl.TabStop = true;
-            this.lnkLblUrl.Text = "http://pathway.sil.org/";
-            this.lnkLblUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLblUrl_LinkClicked);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(34, 23);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(118, 137);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
             // 
             // AboutPw
             // 
-            this.AcceptButton = this.okButton;
             this.AccessibleName = "AboutPw";
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(672, 327);
-            this.Controls.Add(this.tableLayoutPanel);
+            this.ClientSize = new System.Drawing.Size(535, 245);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lnkGPL);
+            this.Controls.Add(this.lblGPL);
+            this.Controls.Add(this.lnkProj);
+            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.chkHelpToImprove);
+            this.Controls.Add(this.lblProjUrl);
+            this.Controls.Add(this.lblCompany);
+            this.Controls.Add(this.lblCopyright);
+            this.Controls.Add(this.lblVersion);
+            this.Controls.Add(this.lblProductName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutPw";
-            this.Padding = new System.Windows.Forms.Padding(12, 11, 12, 11);
+            this.Padding = new System.Windows.Forms.Padding(9, 9, 9, 9);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -229,26 +179,25 @@
             this.Activated += new System.EventHandler(this.AboutPw_Activated);
             this.Load += new System.EventHandler(this.AboutPw_Load);
             this.DoubleClick += new System.EventHandler(this.AboutPw_DoubleClick);
-            this.tableLayoutPanel.ResumeLayout(false);
-            this.tableLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.Label labelCompanyName;
-        private System.Windows.Forms.Label labelCopyright;
-        private System.Windows.Forms.Label labelVersion;
-        private System.Windows.Forms.Label labelProductName;
-        private System.Windows.Forms.PictureBox logoPictureBox;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.CheckBox chkbHelpImprove;
-        private System.Windows.Forms.Label lblProjectUrl;
-        private System.Windows.Forms.LinkLabel lnkLblUrl;
+        private System.Windows.Forms.Label lblProductName;
+        private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.Label lblCopyright;
+        private System.Windows.Forms.Label lblCompany;
+        private System.Windows.Forms.Label lblProjUrl;
+        private System.Windows.Forms.CheckBox chkHelpToImprove;
+        private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.LinkLabel lnkProj;
+        private System.Windows.Forms.LinkLabel lnkGPL;
+        private System.Windows.Forms.Label lblGPL;
+        private System.Windows.Forms.PictureBox pictureBox1;
 
     }
 }
