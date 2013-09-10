@@ -137,6 +137,25 @@ namespace SIL.PublishingSolution
                     }
                 }
 
+                if (!string.IsNullOrEmpty(projectInfo.ProjectPath))
+                {
+                    if (!string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) && !Path.IsPathRooted(projectInfo.DefaultXhtmlFileWithPath))
+                    {
+                        projectInfo.DefaultXhtmlFileWithPath = Path.Combine(projectInfo.ProjectPath, projectInfo.DefaultXhtmlFileWithPath);
+                    }
+                    if (!string.IsNullOrEmpty(projectInfo.DefaultCssFileWithPath) && !Path.IsPathRooted(projectInfo.DefaultCssFileWithPath))
+                    {
+                        projectInfo.DefaultRevCssFileWithPath = Path.Combine(projectInfo.ProjectPath, projectInfo.DefaultCssFileWithPath);
+                    }
+                    for (int n = 0; n < files.Count; n++)
+                    {
+                        if (!Path.IsPathRooted(files[n]))
+                        {
+                            files[n] = Path.Combine(projectInfo.ProjectPath, files[n]);
+                        }
+                    }
+                }
+
                 Common.ProgBase = Common.GetPSApplicationPath();
                 // load settings from the settings file
                 Param.LoadSettings();
@@ -386,8 +405,8 @@ namespace SIL.PublishingSolution
 
             foreach (var file in files)
             {
-                string filename = Path.Combine(projInfo.ProjectPath, file);
-                if (File.Exists(filename))
+                string filepattern = Path.IsPathRooted(file)? file: Path.Combine(projInfo.ProjectPath, file);
+                foreach (string filename in Directory.GetFiles(Path.GetDirectoryName(filepattern), Path.GetFileName(filepattern)))
                 {
                     System.IO.StringWriter stringWriter = new System.IO.StringWriter();
                     System.Xml.XmlTextWriter xmlTextWriter = new System.Xml.XmlTextWriter(stringWriter); 
