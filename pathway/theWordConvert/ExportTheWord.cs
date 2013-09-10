@@ -135,7 +135,7 @@ namespace SIL.PublishingSolution
 
                 success = ReportResults(resultFullName, mySwordResult, exportTheWordInputPath);
 
-                Common.CleanupExportFolder(exportTheWordInputPath);
+                Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout", string.Empty);
             }
             catch (Exception ex)
             {

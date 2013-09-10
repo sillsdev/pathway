@@ -116,10 +116,12 @@ namespace SIL.PublishingSolution
             string ldmlFullName = Common.PathCombine(projInfo.DictionaryPath, fileName + ".idml");
             Compress(projInfo.TempOutputFolder, ldmlFullName);
 
+            Common.CleanupExportFolder(ldmlFullName, ".tmp,.de", "layout", string.Empty);
+
             if (projInfo.IsOpenOutput)
                 Launch(ldmlFullName);
 
-            Common.CleanupExportFolder(projInfo.DictionaryPath);
+            
             return true;
         }
 

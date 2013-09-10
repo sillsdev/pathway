@@ -150,7 +150,7 @@ namespace SIL.PublishingSolution
                 }
 
                 //DeleteTempFiles(exportGoBibleInputPath);
-                Common.CleanupExportFolder(exportGoBibleInputPath);
+                Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", string.Empty, string.Empty);
                 Common.DeleteDirectory(tempGoBibleCreatorPath);
             }
             catch (Exception ex)
