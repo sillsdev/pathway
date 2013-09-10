@@ -202,7 +202,7 @@ namespace SIL.PublishingSolution
                     //if (!Common.Testing)
                     //    Process.Start(pdfFIleName);
                     Environment.CurrentDirectory = curdir;
-                    Common.CleanupExportFolder(Environment.CurrentDirectory);
+                    Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout", string.Empty);
                     success = true;
                 }
                 else
