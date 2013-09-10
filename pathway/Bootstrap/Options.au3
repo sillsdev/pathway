@@ -26,7 +26,7 @@ Func Options($left, $top)
 	Local $stable, $latest, $message, $options, $sil, $pathway, $line, $back, $advanced, $cancel, $install, $msg, $note, $minimal
 	
 	$options = GUICreate("Options", 660, 550, $left, $top, 1)
-	$sil = GUICtrlCreatePic("sil.jpg", 8, 40, 224, 191, $SS_CENTERIMAGE)
+	$sil = GUICtrlCreatePic("sil.jpg", 37, 40, 165, 213, $SS_CENTERIMAGE)
 	$pathway = GUICtrlCreateIcon("icon.ico", -1, 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
 	$advanced = GUICtrlCreateButton("Advanced", 224, 464, 87, 28)
