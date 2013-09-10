@@ -347,6 +347,13 @@ namespace Test
             var projPath = Path.Combine(_inputPath, "KFY");
             //if (Directory.Exists(Path.Combine(projPath, "gather")))
             DirectoryCopy(projPath, _outputPath, true);
+            // Copy Settings
+            var targetSettings = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pathway");
+            if (Directory.Exists(targetSettings))
+            {
+                Directory.Delete(targetSettings, true);
+            }
+            DirectoryCopy(Path.Combine(_inputPath, "Pathway"), targetSettings, true);
             // run the test
             RunPathwayB(InputFormat.USFM, "*", "KFY", "KFY", "Scripture", "E-Book (.epub)", "usfmTest");
         }
