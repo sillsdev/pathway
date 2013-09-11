@@ -1,4 +1,4 @@
-pathway (1.4.0.3399-1) unstable; urgency=high
+pathway (1.4.0.3447-1) unstable; urgency=high
 
   * pathway sprint 1.4.0
     - Common:TD-1875 Removing extra files (leaves xhtml,css, pictures)
