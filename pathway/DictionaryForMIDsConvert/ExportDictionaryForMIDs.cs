@@ -120,7 +120,7 @@ namespace SIL.PublishingSolution
             inProcess.Close();
             Environment.CurrentDirectory = curdir;
             Cursor.Current = myCursor;
-            Common.CleanupExportFolder(curdir);
+            Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.jar,.zip,.bat,.de", string.Empty, "Empty_Jar-Jad,dictionary");
             return success;
         }
 

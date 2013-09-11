@@ -24,7 +24,7 @@ Func Advanced($left, $top)
 	Local $message, $size, $dotnet, $java, $office, $epub, $pdf, $prince, $xelatex, $dic4mid, $pdflicense, $youversion, $delIns, $advanced, $sil, $pathway, $line, $close, $cancel, $msg
 	
 	$advanced = GUICreate("License", 660, 550, $left, $top)
-	$sil = GUICtrlCreatePic("sil.jpg", 8, 40, 224, 191, $SS_CENTERIMAGE)
+	$sil = GUICtrlCreatePic("sil.jpg", 37, 40, 165, 213, $SS_CENTERIMAGE)
 	$pathway = GUICtrlCreateIcon("icon.ico", -1, 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
 	$cancel = GUICtrlCreateButton("Cancel", 432, 464, 87, 28)

@@ -21,7 +21,7 @@ Func Improve($left, $top)
 	Local $helpImprove, $message, $improve, $sil, $pathway, $line, $back, $cancel, $next, $msg
 	
 	$improve = GUICreate("Improve", 660, 550, $left, $top, 1)
-	$sil = GUICtrlCreatePic("sil.jpg", 8, 40, 224, 191, $SS_CENTERIMAGE)
+	$sil = GUICtrlCreatePic("sil.jpg", 37, 40, 165, 213, $SS_CENTERIMAGE)
 	$pathway = GUICtrlCreateIcon("icon.ico", -1, 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
 	$back = GUICtrlCreateButton("Back", 328, 464, 87, 28)

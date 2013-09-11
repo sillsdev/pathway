@@ -44,7 +44,12 @@ namespace SIL.PublishingSolution
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ConfigurationTool());
+            frmSplash objSplash = new frmSplash();
+            objSplash.ShowDialog();
+            if (objSplash.dr == DialogResult.OK)
+            {
+                Application.Run(new ConfigurationTool());
+            }
         }
     }
 }

@@ -223,7 +223,7 @@ namespace SIL.PublishingSolution
             }
             UpdateXeLaTexFontCacheIfNecessary();
             CallXeLaTex(xeLatexFullFile, true, imgPath);
-            Common.CleanupExportFolder(projInfo.ProjectPath);
+            Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif", "layout,mergedmain1,preserve", string.Empty);
             return true;
         }
 
@@ -593,7 +593,7 @@ namespace SIL.PublishingSolution
                         {
                             
                             pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex");
-                            Common.OpenOutput(pdfFullName);
+                           // Common.OpenOutput(pdfFullName);
                         }
                     }
                     catch { }
@@ -613,7 +613,6 @@ namespace SIL.PublishingSolution
                         if (File.Exists(pdfFullName))
                         {
                             pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex");
-                            Common.OpenOutput(pdfFullName);
                         }
                     }
                     catch (System.ComponentModel.Win32Exception ex)

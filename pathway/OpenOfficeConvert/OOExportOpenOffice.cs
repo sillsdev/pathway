@@ -664,7 +664,7 @@ namespace SIL.PublishingSolution
                 Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice");
             }
 
-            Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath);
+            Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout", string.Empty);
             return returnValue;
         }
 
