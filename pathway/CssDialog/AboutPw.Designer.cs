@@ -30,7 +30,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutPw));
             this.lblProductName = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
-            this.lblCopyright = new System.Windows.Forms.Label();
             this.lblCompany = new System.Windows.Forms.Label();
             this.lblProjUrl = new System.Windows.Forms.Label();
             this.chkHelpToImprove = new System.Windows.Forms.CheckBox();
@@ -38,69 +37,67 @@
             this.lnkProj = new System.Windows.Forms.LinkLabel();
             this.lnkGPL = new System.Windows.Forms.LinkLabel();
             this.lblGPL = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProductName
             // 
             this.lblProductName.AutoSize = true;
-            this.lblProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductName.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProductName.Location = new System.Drawing.Point(173, 23);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(121, 20);
+            this.lblProductName.Size = new System.Drawing.Size(158, 22);
             this.lblProductName.TabIndex = 1;
             this.lblProductName.Text = "lblProductName";
             // 
             // lblVersion
             // 
             this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(174, 53);
+            this.lblVersion.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.Location = new System.Drawing.Point(174, 89);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(52, 13);
+            this.lblVersion.Size = new System.Drawing.Size(54, 14);
             this.lblVersion.TabIndex = 2;
             this.lblVersion.Text = "lblVersion";
-            // 
-            // lblCopyright
-            // 
-            this.lblCopyright.AutoSize = true;
-            this.lblCopyright.Location = new System.Drawing.Point(174, 76);
-            this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Size = new System.Drawing.Size(197, 13);
-            this.lblCopyright.TabIndex = 3;
-            this.lblCopyright.Text = "Copyright © 2008-2013 SIL International";
             // 
             // lblCompany
             // 
             this.lblCompany.AutoSize = true;
-            this.lblCompany.Location = new System.Drawing.Point(174, 131);
+            this.lblCompany.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompany.Location = new System.Drawing.Point(174, 179);
             this.lblCompany.Name = "lblCompany";
-            this.lblCompany.Size = new System.Drawing.Size(84, 13);
+            this.lblCompany.Size = new System.Drawing.Size(83, 14);
             this.lblCompany.TabIndex = 4;
             this.lblCompany.Text = "SIL International";
             // 
             // lblProjUrl
             // 
             this.lblProjUrl.AutoSize = true;
-            this.lblProjUrl.Location = new System.Drawing.Point(174, 170);
+            this.lblProjUrl.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProjUrl.Location = new System.Drawing.Point(174, 218);
             this.lblProjUrl.Name = "lblProjUrl";
-            this.lblProjUrl.Size = new System.Drawing.Size(227, 13);
+            this.lblProjUrl.Size = new System.Drawing.Size(233, 14);
             this.lblProjUrl.TabIndex = 5;
             this.lblProjUrl.Text = "Other project related information is available at:";
             // 
             // chkHelpToImprove
             // 
             this.chkHelpToImprove.AutoSize = true;
-            this.chkHelpToImprove.Location = new System.Drawing.Point(177, 198);
+            this.chkHelpToImprove.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkHelpToImprove.Location = new System.Drawing.Point(177, 246);
             this.chkHelpToImprove.Name = "chkHelpToImprove";
-            this.chkHelpToImprove.Size = new System.Drawing.Size(89, 17);
+            this.chkHelpToImprove.Size = new System.Drawing.Size(88, 18);
             this.chkHelpToImprove.TabIndex = 6;
             this.chkHelpToImprove.Text = "Help Improve";
             this.chkHelpToImprove.UseVisualStyleBackColor = true;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(430, 198);
+            this.btnOk.Location = new System.Drawing.Point(430, 246);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 7;
@@ -111,7 +108,7 @@
             // lnkProj
             // 
             this.lnkProj.AutoSize = true;
-            this.lnkProj.Location = new System.Drawing.Point(397, 170);
+            this.lnkProj.Location = new System.Drawing.Point(405, 218);
             this.lnkProj.Name = "lnkProj";
             this.lnkProj.Size = new System.Drawing.Size(108, 13);
             this.lnkProj.TabIndex = 8;
@@ -122,9 +119,10 @@
             // lnkGPL
             // 
             this.lnkGPL.AutoSize = true;
-            this.lnkGPL.Location = new System.Drawing.Point(241, 105);
+            this.lnkGPL.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkGPL.Location = new System.Drawing.Point(244, 142);
             this.lnkGPL.Name = "lnkGPL";
-            this.lnkGPL.Size = new System.Drawing.Size(70, 13);
+            this.lnkGPL.Size = new System.Drawing.Size(67, 14);
             this.lnkGPL.TabIndex = 10;
             this.lnkGPL.TabStop = true;
             this.lnkGPL.Text = "GNU GPL v3";
@@ -133,29 +131,62 @@
             // lblGPL
             // 
             this.lblGPL.AutoSize = true;
-            this.lblGPL.Location = new System.Drawing.Point(174, 105);
+            this.lblGPL.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGPL.Location = new System.Drawing.Point(174, 142);
             this.lblGPL.Name = "lblGPL";
-            this.lblGPL.Size = new System.Drawing.Size(71, 13);
+            this.lblGPL.Size = new System.Drawing.Size(72, 14);
             this.lblGPL.TabIndex = 9;
             this.lblGPL.Text = "Code license:";
             // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(420, 122);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(12, 11);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "®";
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(174, 125);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(249, 17);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "© 2008 - 2013 SIL International. All rights reserved";
+            // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(34, 23);
+            this.pictureBox1.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.SIL_Logo_No_Tag_Color;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(22, 24);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(118, 137);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.Size = new System.Drawing.Size(123, 128);
+            this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(173, 55);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(195, 24);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Configuration Tool";
             // 
             // AboutPw
             // 
             this.AccessibleName = "AboutPw";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(535, 245);
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ClientSize = new System.Drawing.Size(535, 290);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lnkGPL);
             this.Controls.Add(this.lblGPL);
             this.Controls.Add(this.lnkProj);
@@ -163,7 +194,6 @@
             this.Controls.Add(this.chkHelpToImprove);
             this.Controls.Add(this.lblProjUrl);
             this.Controls.Add(this.lblCompany);
-            this.Controls.Add(this.lblCopyright);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.lblProductName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -171,11 +201,11 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutPw";
-            this.Padding = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.Padding = new System.Windows.Forms.Padding(9);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "About Pathway";
+            this.Text = "About Pathway Configuration Tool";
             this.Activated += new System.EventHandler(this.AboutPw_Activated);
             this.Load += new System.EventHandler(this.AboutPw_Load);
             this.DoubleClick += new System.EventHandler(this.AboutPw_DoubleClick);
@@ -189,7 +219,6 @@
 
         private System.Windows.Forms.Label lblProductName;
         private System.Windows.Forms.Label lblVersion;
-        private System.Windows.Forms.Label lblCopyright;
         private System.Windows.Forms.Label lblCompany;
         private System.Windows.Forms.Label lblProjUrl;
         private System.Windows.Forms.CheckBox chkHelpToImprove;
@@ -197,7 +226,10 @@
         private System.Windows.Forms.LinkLabel lnkProj;
         private System.Windows.Forms.LinkLabel lnkGPL;
         private System.Windows.Forms.Label lblGPL;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
 
     }
 }

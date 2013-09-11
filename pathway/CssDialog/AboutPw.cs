@@ -178,7 +178,7 @@ namespace SIL.PublishingSolution
         {
             //LocDB.Localize(this, null);     // Form Controls
 
-            Text = String.Format("About {0}", AssemblyProduct);
+            //Text = String.Format("About {0}", AssemblyProduct);
             //labelProductName.Text = AssemblyProduct;
             //labelVersion.Text = String.Format("Version {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
             //labelCopyright.Text = AssemblyCopyright;
@@ -188,7 +188,7 @@ namespace SIL.PublishingSolution
 
             lblProductName.Text = AssemblyProduct;
             lblVersion.Text = String.Format("Version {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
-            lblCopyright.Text = AssemblyCopyright;
+            //lblCopyright.Text = AssemblyCopyright;
             lblCompany.Text = AssemblyCompany;
 
             HelpImproveGetValue(chkHelpToImprove); 
@@ -234,8 +234,8 @@ namespace SIL.PublishingSolution
 
         private void AboutPw_Activated(object sender, EventArgs e)
         {
-            Common.SetFont(this);
-            lblProductName.Font = new Font("Arial", 12, FontStyle.Bold); ;
+            //Common.SetFont(this);
+            //lblProductName.Font = new Font("Arial", 12, FontStyle.Bold);
         }
 
         private void lnkLblUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -53,8 +53,6 @@ namespace SIL.PublishingSolution
 
             string versionDate = String.Format("Version {0} ({1})", version, AssemblyFileDate);
 
-            lblVersion.Text = "Version: " + version.Substring(0, 5);
-
             lblVersionwithDate.Text = "Version: " + versionDate;
             tSplash.Start();
         }
