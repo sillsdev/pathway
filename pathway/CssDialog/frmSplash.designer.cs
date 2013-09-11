@@ -32,11 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSplash));
             this.tSplash = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblCompany = new System.Windows.Forms.Label();
+            this.lblGPL = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblVersionwithDate = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblVersion = new System.Windows.Forms.Label();
             this.lblSilPathway = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
@@ -53,11 +55,13 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.lblCompany);
+            this.panel1.Controls.Add(this.lblGPL);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.lblVersionwithDate);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lblVersion);
             this.panel1.Controls.Add(this.lblSilPathway);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -65,6 +69,36 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(513, 296);
             this.panel1.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(407, 160);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(12, 11);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "®";
+            // 
+            // lblCompany
+            // 
+            this.lblCompany.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblCompany.AutoSize = true;
+            this.lblCompany.Location = new System.Drawing.Point(160, 215);
+            this.lblCompany.Name = "lblCompany";
+            this.lblCompany.Size = new System.Drawing.Size(344, 13);
+            this.lblCompany.TabIndex = 12;
+            this.lblCompany.Text = "SIL International in collaboration with EC Group Datasoft Private Limited";
+            this.lblCompany.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblGPL
+            // 
+            this.lblGPL.AutoSize = true;
+            this.lblGPL.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGPL.Location = new System.Drawing.Point(160, 186);
+            this.lblGPL.Name = "lblGPL";
+            this.lblGPL.Size = new System.Drawing.Size(135, 14);
+            this.lblGPL.TabIndex = 11;
+            this.lblGPL.Text = "Code license: GNU GPL v3";
             // 
             // label3
             // 
@@ -78,19 +112,18 @@
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(189, 210);
+            this.label2.Location = new System.Drawing.Point(160, 163);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(252, 14);
+            this.label2.Size = new System.Drawing.Size(249, 17);
             this.label2.TabIndex = 5;
-            this.label2.Text = "©2012 - 2013, SIL International. All rights reserved.";
+            this.label2.Text = "© 2008 - 2013 SIL International. All rights reserved";
             // 
             // lblVersionwithDate
             // 
             this.lblVersionwithDate.AutoSize = true;
             this.lblVersionwithDate.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersionwithDate.Location = new System.Drawing.Point(189, 166);
+            this.lblVersionwithDate.Location = new System.Drawing.Point(159, 98);
             this.lblVersionwithDate.Name = "lblVersionwithDate";
             this.lblVersionwithDate.Size = new System.Drawing.Size(74, 14);
             this.lblVersionwithDate.TabIndex = 4;
@@ -100,39 +133,29 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(188, 128);
+            this.label1.Location = new System.Drawing.Point(155, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(195, 24);
             this.label1.TabIndex = 3;
             this.label1.Text = "Configuration Tool";
             // 
-            // lblVersion
-            // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersion.Location = new System.Drawing.Point(189, 77);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(74, 14);
-            this.lblVersion.TabIndex = 2;
-            this.lblVersion.Text = "Version: 1.4.0";
-            // 
             // lblSilPathway
             // 
             this.lblSilPathway.AutoSize = true;
             this.lblSilPathway.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSilPathway.Location = new System.Drawing.Point(188, 44);
+            this.lblSilPathway.Location = new System.Drawing.Point(155, 33);
             this.lblSilPathway.Name = "lblSilPathway";
-            this.lblSilPathway.Size = new System.Drawing.Size(132, 24);
+            this.lblSilPathway.Size = new System.Drawing.Size(94, 24);
             this.lblSilPathway.TabIndex = 1;
-            this.lblSilPathway.Text = "SIL Pathway";
+            this.lblSilPathway.Text = "Pathway";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.SIL_Logo_No_Tag_Color;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(20, 22);
+            this.pictureBox1.Location = new System.Drawing.Point(19, 22);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(147, 158);
+            this.pictureBox1.Size = new System.Drawing.Size(123, 128);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -169,9 +192,11 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblVersionwithDate;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.Label lblSilPathway;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblGPL;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblCompany;
     }
 }
