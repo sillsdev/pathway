@@ -16,18 +16,24 @@
 ;
 #include <GUIConstantsEx.au3>
 #include <StaticConstants.au3>
+#include <WinAPI.au3>
+#include <GDIPlus.au3>
 #include <WindowsConstants.au3>
 #include "Improve.au3"
 
 Func Welcome()
 	Global $closeUp = False
 	Global $Bootstrap_version
-	Local $welcome, $line, $sil, $pathway, $back, $next, $cancel, $message, $version, $msg
+	Global $welcome
+	Local $line, $pathway, $back, $next, $cancel, $message, $version, $msg
 	
 	Opt("GUIResizeMode", 1)
 	
 	$welcome = GUICreate("Welcome", 660, 550, 573, 281, 1, $WS_EX_TOPMOST)
-	$sil = GUICtrlCreatePic("sil.jpg", 37, 40, 165, 213, $SS_CENTERIMAGE)
+
+
+	;MsgBox( 4096, "status", "context: " & $dc)
+
 	$pathway = GUICtrlCreateIcon("icon.ico", -1, 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
 	$cancel = GUICtrlCreateButton("Cancel", 432, 464, 87, 28)
@@ -37,6 +43,12 @@ Func Welcome()
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
 
 	$version = GUICtrlCreateLabel($Bootstrap_version, 0, 0, 350, 28)
+
+	; Load PNG image
+	_GDIPlus_Startup()
+	GLobal $silImage = _GDIPlus_ImageLoadFromFile("sil.png")
+	Global $welcomeGraphic = _GDIPlus_GraphicsCreateFromHWND($welcome)
+	GUIRegisterMsg($WM_PAINT, "WELCOME_WM_PAINT")
 
 	GUISetState(@SW_SHOW)
 	While $closeUp == False
@@ -53,7 +65,19 @@ Func Welcome()
 		EndSwitch
 		
 	Wend
+    ; Clean up resources
+	_GDIPlus_GraphicsDispose($welcomeGraphic)
+	_GDIPlus_ImageDispose($silImage)
+	_GDIPlus_Shutdown()
+
 	GUIDelete($welcome)
+EndFunc
+
+Func WELCOME_WM_PAINT($hWnd, $Msg, $wParam, $lParam)
+	_WinAPI_RedrawWindow($welcome, 0, 0, $RDW_UPDATENOW)
+	_GDIPlus_GraphicsDrawImage($welcomeGraphic, $silImage, 52, 40)
+	_WinAPI_RedrawWindow($welcome, 0, 0, $RDW_VALIDATE)
+	Return $GUI_RUNDEFMSG
 EndFunc
 
 Func Welcome_OnNext($title)

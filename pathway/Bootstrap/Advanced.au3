@@ -20,11 +20,11 @@
 
 Func Advanced($left, $top)
 	Global $closeUp
+	Global $advanced
 	Global $INS_Num, $INS_Size, $INS_DotNet, $INS_Java, $INS_Office, $INS_Epub, $INS_Pdf, $INS_Prince, $INS_XeLaTex, $INS_Dic4MID, $INS_PdfLicense, $INS_YouVersion, $DEL_Installer
-	Local $message, $size, $dotnet, $java, $office, $epub, $pdf, $prince, $xelatex, $dic4mid, $pdflicense, $youversion, $delIns, $advanced, $sil, $pathway, $line, $close, $cancel, $msg
+	Local $message, $size, $dotnet, $java, $office, $epub, $pdf, $prince, $xelatex, $dic4mid, $pdflicense, $youversion, $delIns, $pathway, $line, $close, $cancel, $msg
 	
 	$advanced = GUICreate("License", 660, 550, $left, $top)
-	$sil = GUICtrlCreatePic("sil.jpg", 37, 40, 165, 213, $SS_CENTERIMAGE)
 	$pathway = GUICtrlCreateIcon("icon.ico", -1, 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
 	$cancel = GUICtrlCreateButton("Cancel", 432, 464, 87, 28)
@@ -71,6 +71,12 @@ Func Advanced($left, $top)
 	;Advanced_SetTip($pdflicense, "Pathway will use PdfLicenseManager if installed to add copyright and license information to PDF files.", $INS_PdfLicense)
 	;MsgBox(0, "Controls", "AcceptLicense=" & $acceptLicense & " Next=" & $next)
 
+	; Load PNG image
+;~ 	_GDIPlus_Startup()
+;~ 	GLobal $silImage = _GDIPlus_ImageLoadFromFile("sil.png")
+	Global $advancedGraphic = _GDIPlus_GraphicsCreateFromHWND($advanced)
+	GUIRegisterMsg($WM_PAINT, "ADVANCED_WM_PAINT")
+
 	GUISetState(@SW_SHOW)
 	While $closeUp == False
 		$msg = GUIGetMsg()
@@ -91,6 +97,7 @@ Func Advanced($left, $top)
 			;$INS_PdfLicense = Advanced_State($pdflicense, 3.5)
 			;$INS_YouVersion = Advanced_State($youversion, 20.4)
 			$DEL_Installer = Advanced_State($delins, 0)
+			GUIRegisterMsg($WM_PAINT, "OPTIONS_WM_PAINT")
 			WinSetState("Options", "", @SW_SHOW)
 			ExitLoop
 		;Case $dotnetinfo
@@ -101,7 +108,18 @@ Func Advanced($left, $top)
 			EndIf
 		EndSwitch
 	Wend
+    ; Clean up resources
+	_GDIPlus_GraphicsDispose($advancedGraphic)
+;~ 	_GDIPlus_ImageDispose($helpImproveImage)
+;~ 	_GDIPlus_Shutdown()
 	GUIDelete($advanced)
+EndFunc
+
+Func ADVANCED_WM_PAINT($hWnd, $Msg, $wParam, $lParam)
+	_WinAPI_RedrawWindow($advanced, 0, 0, $RDW_UPDATENOW)
+	_GDIPlus_GraphicsDrawImage($advancedGraphic, $silImage, 52, 40)
+	_WinAPI_RedrawWindow($advanced, 0, 0, $RDW_VALIDATE)
+	Return $GUI_RUNDEFMSG
 EndFunc
 
 Func Advanced_SetDefault($value, $control)

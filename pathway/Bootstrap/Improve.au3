@@ -18,10 +18,10 @@
 
 Func Improve($left, $top)
 	Global $closeUp
-	Local $helpImprove, $message, $improve, $sil, $pathway, $line, $back, $cancel, $next, $msg
+	Global $improve
+	Local $helpImprove, $message, $pathway, $line, $back, $cancel, $next, $msg
 	
 	$improve = GUICreate("Improve", 660, 550, $left, $top, 1)
-	$sil = GUICtrlCreatePic("sil.jpg", 37, 40, 165, 213, $SS_CENTERIMAGE)
 	$pathway = GUICtrlCreateIcon("icon.ico", -1, 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
 	$back = GUICtrlCreateButton("Back", 328, 464, 87, 28)
@@ -36,6 +36,12 @@ Func Improve($left, $top)
 		GUICtrlSetState($helpImprove, $GUI_UNCHECKED)
 	EndIf
 
+	; Load PNG image
+;~ 	_GDIPlus_Startup()
+;~ 	GLobal $silImage = _GDIPlus_ImageLoadFromFile("sil.png")
+	Global $improveGraphic = _GDIPlus_GraphicsCreateFromHWND($improve)
+	GUIRegisterMsg($WM_PAINT, "IMPROVE_WM_PAINT")
+
 	GUISetState(@SW_SHOW)
 	While $closeUp == False
 		$msg = GUIGetMsg()
@@ -43,6 +49,7 @@ Func Improve($left, $top)
 		Case $GUI_EVENT_CLOSE, $cancel
 			$closeUp = True
 		Case $back
+			GUIRegisterMsg($WM_PAINT, "WELCOME_WM_PAINT")
 			WinSetState("Welcome", "", @SW_SHOW)
 			ExitLoop
 		Case $next
@@ -55,7 +62,18 @@ Func Improve($left, $top)
 			EndIf
 		EndSwitch
 	Wend
+    ; Clean up resources
+	_GDIPlus_GraphicsDispose($improveGraphic)
+;~ 	_GDIPlus_ImageDispose($helpImproveImage)
+;~ 	_GDIPlus_Shutdown()
 	GUIDelete($improve)
+EndFunc
+
+Func IMPROVE_WM_PAINT($hWnd, $Msg, $wParam, $lParam)
+	_WinAPI_RedrawWindow($improve, 0, 0, $RDW_UPDATENOW)
+	_GDIPlus_GraphicsDrawImage($improveGraphic, $silImage, 52, 40)
+	_WinAPI_RedrawWindow($improve, 0, 0, $RDW_VALIDATE)
+	Return $GUI_RUNDEFMSG
 EndFunc
 
 Func Improve_OnNext($title)

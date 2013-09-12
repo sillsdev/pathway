@@ -30,8 +30,8 @@ Exit
 Func DoUI()
 	Global $DEL_Installer
 	
-	If not FileExists("sil.jpg") Then
-		FileInstall("res\sil.jpg", "sil.jpg")
+	If not FileExists("sil.png") Then
+		FileInstall("res\sil.png", "sil.png")
 	EndIf
 	If not FileExists("icon.ico") Then
 		FileInstall("res\icon.ico", "icon.ico")
@@ -55,7 +55,7 @@ Func DoUI()
 		MsgBox(4096, "Priviledge error", "Please rerun the bootstrap program with Administrative priviledges.")
 	Endif
 	$DEL_Installer = True
-	CleanUp("sil.jpg")
+	CleanUp("sil.png")
 	CleanUp("icon.ico")
 	CleanUp("License.rtf")
 	CleanUp("PathwayBootstrap.ini")

@@ -20,13 +20,13 @@
 
 Func Options($left, $top)
 	Global $closeUp
+	Global $options
 	Global $INS_Num, $INS_Size
 	Options_Defaults()
 ;~ 	Global $INS_YouVersion = Not YouVersionInstalled(20.4)
-	Local $stable, $latest, $message, $options, $sil, $pathway, $line, $back, $advanced, $cancel, $install, $msg, $note, $minimal
+	Local $stable, $latest, $message, $pathway, $line, $back, $advanced, $cancel, $install, $msg, $note, $minimal
 	
 	$options = GUICreate("Options", 660, 550, $left, $top, 1)
-	$sil = GUICtrlCreatePic("sil.jpg", 37, 40, 165, 213, $SS_CENTERIMAGE)
 	$pathway = GUICtrlCreateIcon("icon.ico", -1, 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
 	$advanced = GUICtrlCreateButton("Advanced", 224, 464, 87, 28)
@@ -50,6 +50,12 @@ Func Options($left, $top)
 	GUICtrlSetFont($note, 8.5, 400, 0, "Tahoma")
 	$minimal = GUICtrlCreateCheckbox( "Minimal install", 506, 375, 100, 25)
 
+	; Load PNG image
+;~ 	_GDIPlus_Startup()
+;~ 	GLobal $silImage = _GDIPlus_ImageLoadFromFile("sil.png")
+	Global $optionsGraphic = _GDIPlus_GraphicsCreateFromHWND($options)
+	GUIRegisterMsg($WM_PAINT, "OPTIONS_WM_PAINT")
+
 	GUISetState(@SW_SHOW)
 	While $closeUp == False
 		$msg = GUIGetMsg()
@@ -57,6 +63,7 @@ Func Options($left, $top)
 		Case $GUI_EVENT_CLOSE, $cancel
 			$closeUp = True
 		Case $back
+			GUIRegisterMsg($WM_PAINT, "LICENSE_WM_PAINT")
 			WinSetState("License", "", @SW_SHOW)
 			ExitLoop
 		Case $advanced
@@ -73,7 +80,18 @@ Func Options($left, $top)
 			EndIf
 		EndSwitch
 	Wend
+    ; Clean up resources
+	_GDIPlus_GraphicsDispose($optionsGraphic)
+;~ 	_GDIPlus_ImageDispose($helpImproveImage)
+;~ 	_GDIPlus_Shutdown()
 	GUIDelete($options)
+EndFunc
+
+Func OPTIONS_WM_PAINT($hWnd, $Msg, $wParam, $lParam)
+	_WinAPI_RedrawWindow($options, 0, 0, $RDW_UPDATENOW)
+	_GDIPlus_GraphicsDrawImage($optionsGraphic, $silImage, 52, 40)
+	_WinAPI_RedrawWindow($options, 0, 0, $RDW_VALIDATE)
+	Return $GUI_RUNDEFMSG
 EndFunc
 
 Func Options_OnMinimal($control)
