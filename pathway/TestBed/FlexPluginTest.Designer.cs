@@ -44,6 +44,7 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnEpubValidator = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.btnPrinceExport = new System.Windows.Forms.Button();
             this.btnSfm2Usx = new System.Windows.Forms.Button();
@@ -75,7 +76,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnEpubValidator = new System.Windows.Forms.Button();
+            this.btnJson = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -238,6 +239,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnJson);
             this.groupBox1.Controls.Add(this.btnEpubValidator);
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Controls.Add(this.btnPrinceExport);
@@ -271,6 +273,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // btnEpubValidator
+            // 
+            this.btnEpubValidator.BackColor = System.Drawing.Color.Cyan;
+            this.btnEpubValidator.Location = new System.Drawing.Point(380, 188);
+            this.btnEpubValidator.Name = "btnEpubValidator";
+            this.btnEpubValidator.Size = new System.Drawing.Size(140, 33);
+            this.btnEpubValidator.TabIndex = 79;
+            this.btnEpubValidator.Text = "EPubValidator";
+            this.btnEpubValidator.UseVisualStyleBackColor = false;
+            this.btnEpubValidator.Click += new System.EventHandler(this.btnEpubValidator_Click);
             // 
             // button8
             // 
@@ -370,7 +383,7 @@
             // 
             this.btnWordPress.AccessibleName = "BtnWordPress";
             this.btnWordPress.BackColor = System.Drawing.Color.Plum;
-            this.btnWordPress.Location = new System.Drawing.Point(227, 158);
+            this.btnWordPress.Location = new System.Drawing.Point(210, 160);
             this.btnWordPress.Name = "btnWordPress";
             this.btnWordPress.Size = new System.Drawing.Size(95, 28);
             this.btnWordPress.TabIndex = 69;
@@ -405,9 +418,9 @@
             // btnDotNet
             // 
             this.btnDotNet.AccessibleName = "BtnFlexTest";
-            this.btnDotNet.Location = new System.Drawing.Point(403, 158);
+            this.btnDotNet.Location = new System.Drawing.Point(380, 160);
             this.btnDotNet.Name = "btnDotNet";
-            this.btnDotNet.Size = new System.Drawing.Size(114, 28);
+            this.btnDotNet.Size = new System.Drawing.Size(125, 28);
             this.btnDotNet.TabIndex = 66;
             this.btnDotNet.Text = "DotNet 2.0 Installed";
             this.btnDotNet.UseVisualStyleBackColor = true;
@@ -415,7 +428,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(110, 160);
+            this.button12.Location = new System.Drawing.Point(92, 160);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(112, 26);
             this.button12.TabIndex = 65;
@@ -452,7 +465,7 @@
             this.button7.AccessibleName = "BtnFlexTest";
             this.button7.Location = new System.Drawing.Point(10, 159);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(95, 28);
+            this.button7.Size = new System.Drawing.Size(76, 28);
             this.button7.TabIndex = 58;
             this.button7.Text = ".&Sty to .CSS";
             this.button7.UseVisualStyleBackColor = true;
@@ -473,9 +486,9 @@
             // button6
             // 
             this.button6.AccessibleName = "BtnLogos";
-            this.button6.Location = new System.Drawing.Point(328, 158);
+            this.button6.Location = new System.Drawing.Point(311, 162);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(68, 28);
+            this.button6.Size = new System.Drawing.Size(63, 28);
             this.button6.TabIndex = 56;
             this.button6.Text = "&Logos";
             this.button6.UseVisualStyleBackColor = true;
@@ -627,16 +640,17 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnEpubValidator
+            // btnJson
             // 
-            this.btnEpubValidator.BackColor = System.Drawing.Color.Cyan;
-            this.btnEpubValidator.Location = new System.Drawing.Point(380, 188);
-            this.btnEpubValidator.Name = "btnEpubValidator";
-            this.btnEpubValidator.Size = new System.Drawing.Size(140, 33);
-            this.btnEpubValidator.TabIndex = 79;
-            this.btnEpubValidator.Text = "EPubValidator";
-            this.btnEpubValidator.UseVisualStyleBackColor = false;
-            this.btnEpubValidator.Click += new System.EventHandler(this.btnEpubValidator_Click);
+            this.btnJson.AccessibleName = "BtnFlexTest";
+            this.btnJson.BackColor = System.Drawing.Color.Yellow;
+            this.btnJson.Location = new System.Drawing.Point(512, 160);
+            this.btnJson.Name = "btnJson";
+            this.btnJson.Size = new System.Drawing.Size(78, 28);
+            this.btnJson.TabIndex = 80;
+            this.btnJson.Text = "JSON";
+            this.btnJson.UseVisualStyleBackColor = false;
+            this.btnJson.Click += new System.EventHandler(this.btnJson_Click);
             // 
             // FlexPluginTest
             // 
@@ -716,5 +730,6 @@
         private System.Windows.Forms.Button btnPrinceExport;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button btnEpubValidator;
+        private System.Windows.Forms.Button btnJson;
     }
 }
