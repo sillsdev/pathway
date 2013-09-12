@@ -17,10 +17,10 @@
 
 Func Complete($left, $top)
 	Global $closeUp
-	Local $helpComplete, $message, $complete, $sil, $pathway, $line, $back, $cancel, $finish, $msg
+	Global $complete
+	Local $helpComplete, $message, $pathway, $line, $back, $cancel, $finish, $msg
 	
 	$complete = GUICreate("Complete", 660, 550, $left, $top, 1)
-	$sil = GUICtrlCreatePic("sil.jpg", 37, 40, 165, 213, $SS_CENTERIMAGE)
 	$pathway = GUICtrlCreateIcon("icon.ico", -1, 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
 	$back = GUICtrlCreateButton("Back", 328, 464, 87, 28)
@@ -29,6 +29,12 @@ Func Complete($left, $top)
 	$message = GUICtrlCreateLabel("Congratulations! The process is Complete!", 256, 24, 350, 400, $SS_CENTER)
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
 
+	; Load PNG image
+;~ 	_GDIPlus_Startup()
+;~ 	GLobal $silImage = _GDIPlus_ImageLoadFromFile("sil.png")
+	Global $completeGraphic = _GDIPlus_GraphicsCreateFromHWND($complete)
+	GUIRegisterMsg($WM_PAINT, "COMPLETE_WM_PAINT")
+
 	GUISetState(@SW_SHOW)
 	While $closeUp == False
 		$msg = GUIGetMsg()
@@ -36,6 +42,7 @@ Func Complete($left, $top)
 		Case $GUI_EVENT_CLOSE, $cancel, $finish
 			$closeUp = True
 		Case $back
+			GUIRegisterMsg($WM_PAINT, "OPTIONS_WM_PAINT")
 			WinSetState("Options", "", @SW_SHOW)
 			ExitLoop
 		Case Else
@@ -44,5 +51,17 @@ Func Complete($left, $top)
 			EndIf
 		EndSwitch
 	Wend
+    ; Clean up resources
+	_GDIPlus_GraphicsDispose($completeGraphic)
+;~ 	_GDIPlus_ImageDispose($helpImproveImage)
+;~ 	_GDIPlus_Shutdown()
 	GUIDelete($complete)
 EndFunc
+
+Func COMPLETE_WM_PAINT($hWnd, $Msg, $wParam, $lParam)
+	_WinAPI_RedrawWindow($complete, 0, 0, $RDW_UPDATENOW)
+	_GDIPlus_GraphicsDrawImage($completeGraphic, $silImage, 52, 40)
+	_WinAPI_RedrawWindow($complete, 0, 0, $RDW_VALIDATE)
+	Return $GUI_RUNDEFMSG
+EndFunc
+

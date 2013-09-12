@@ -20,10 +20,10 @@
 
 Func License($left, $top)
 	Global $closeUp
-	Local $acceptLicense, $richText, $license, $sil, $pathway, $line, $back, $cancel, $next, $msg
+	Global $license
+	Local $acceptLicense, $richText, $pathway, $line, $back, $cancel, $next, $msg
 	
 	$license = GUICreate("License", 660, 550, $left, $top)
-	$sil = GUICtrlCreatePic("sil.jpg", 37, 40, 165, 213, $SS_CENTERIMAGE)
 	$pathway = GUICtrlCreateIcon("icon.ico", -1, 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
 	$back = GUICtrlCreateButton("Back", 328, 464, 87, 28)
@@ -43,6 +43,12 @@ Func License($left, $top)
 	GUICtrlSetState($next, $GUI_DISABLE)
 	;MsgBox(0, "Controls", "AcceptLicense=" & $acceptLicense & " Next=" & $next)
 
+	; Load PNG image
+;~ 	_GDIPlus_Startup()
+;~ 	GLobal $silImage = _GDIPlus_ImageLoadFromFile("sil.png")
+	Global $licenseGraphic = _GDIPlus_GraphicsCreateFromHWND($license)
+	GUIRegisterMsg($WM_PAINT, "LICENSE_WM_PAINT")
+
 	GUISetState(@SW_SHOW)
 	While $closeUp == False
 		$msg = GUIGetMsg()
@@ -50,6 +56,7 @@ Func License($left, $top)
 		Case $GUI_EVENT_CLOSE, $cancel
 			$closeUp = True
 		Case $back
+			GUIRegisterMsg($WM_PAINT, "IMPROVE_WM_PAINT")
 			WinSetState("Improve", "", @SW_SHOW)
 			ExitLoop
 		Case $next
@@ -64,7 +71,18 @@ Func License($left, $top)
 			EndIf
 		EndSwitch
 	Wend
+    ; Clean up resources
+	_GDIPlus_GraphicsDispose($licenseGraphic)
+;~ 	_GDIPlus_ImageDispose($helpImproveImage)
+;~ 	_GDIPlus_Shutdown()
 	GUIDelete($license)
+EndFunc
+
+Func LICENSE_WM_PAINT($hWnd, $Msg, $wParam, $lParam)
+	_WinAPI_RedrawWindow($license, 0, 0, $RDW_UPDATENOW)
+	_GDIPlus_GraphicsDrawImage($licenseGraphic, $silImage, 52, 40)
+	_WinAPI_RedrawWindow($license, 0, 0, $RDW_VALIDATE)
+	Return $GUI_RUNDEFMSG
 EndFunc
 
 Func License_OnNext($title)
