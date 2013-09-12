@@ -1245,5 +1245,22 @@ namespace TestBed
             validationDialog.FileName = outputPathWithFileName;
             validationDialog.ShowDialog();
         }
+
+        private void btnJson_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XML file");
+                return;
+            }
+
+            SFMtoUsx sfMtoUsx = new SFMtoUsx();
+            sfMtoUsx.ConvertSFMtoUsx(txtInputPath.Text, Path.GetDirectoryName(txtInputPath.Text) + "\\output.usx");
+
+
+            Json json = new Json();
+            json.XmlToJSON(txtInputPath.Text, Path.GetDirectoryName(txtInputPath.Text) + "\\output.json");
+            MessageBox.Show("Done");
+        }
     }
 }
