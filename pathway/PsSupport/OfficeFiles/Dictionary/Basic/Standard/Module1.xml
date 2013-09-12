@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Aug-30-2013 for TD-1497
+&apos;Changed On Sep-12-2013 for TD-3616
 
 Dim CanSave as Boolean
 
@@ -171,12 +171,37 @@ On Error GoTo MyError:
 	End If
 
 	&apos;msgbox(&quot;dispose&quot;)
+	wait 5000 
+	CleanUp()
 	oDoc.dispose()
 	&apos;msgbox(&quot;disposeEnd&quot;)
 	&apos;wait 5000 
 Exit Sub
 MyError:
 &apos;	msgbox &quot;Same file has been opened already&quot; , 0 + 64,  &quot;File Error&quot;	
+End Sub
+
+&apos;CleanUp Unwanted Files
+Sub CleanUp
+Dim s As String 
+Dim Path As String
+MyArray = Split(FilePath,&quot;\&quot;)
+FileName =  MyArray(UBound(MyArray))
+Path = Replace(FilePath,FileName,&quot;&quot;)
+&apos;Path = &quot;D:\SIL\Task\YearV\TD-3616\FieldWorksA5Styles_2013-09-06_110256\Work\&quot;
+  NextFile = Dir(Path, 0)
+ 
+  While NextFile  &lt;&gt; &quot;&quot;
+	If(InStr(NextFile, &quot;xhtml&quot;) &gt; 0 Or InStr(NextFile, &quot;merge&quot;) &gt; 0 Or (InStr(NextFile, &quot;1.pdf&quot;) &gt; 0) Or (InStr(NextFile, &quot;.odm&quot;) &gt; 0) ) Then
+	Else
+		If(Right(Trim(ThisComponent.Title),4) &lt;&gt; &quot;.odm&quot; And InStr(NextFile,&quot;.odt&quot;) &gt; 0 ) Then
+		Else
+			Kill Path &amp; NextFile
+		End If
+	End if
+	NextFile = Dir
+  Wend
+  &apos;Msgbox &quot;Killed&quot;
 End Sub
 
 
