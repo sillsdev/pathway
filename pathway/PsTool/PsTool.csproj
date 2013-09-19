@@ -288,6 +288,8 @@
     <Compile Include="PleaseWait.Designer.cs">
       <DependentUpon>PleaseWait.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ramp.cs" />
+    <Compile Include="RampFile.cs" />
     <Compile Include="RegistryHelperLite.cs" />
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="StyleCategories.cs">
