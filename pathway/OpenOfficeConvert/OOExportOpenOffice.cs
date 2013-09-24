@@ -663,8 +663,8 @@ namespace SIL.PublishingSolution
                 //Common.CreateLicenseFileForRunningPdfApplyCopyright(Path.GetDirectoryName(publicationInfo.DefaultXhtmlFileWithPath));
                 Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice");
             }
-
             Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout", string.Empty);
+            //CreateRAMP();
             return returnValue;
         }
 
@@ -883,6 +883,104 @@ namespace SIL.PublishingSolution
                 }
             }
             return returnValue;
+        }
+
+        private void CreateRAMP()
+        {
+            Ramp ramp = new Ramp();
+            SetRampData(ramp);
+            ramp.Create(Path.Combine(publicationInfo.DefaultXhtmlFileWithPath, "MyTest"), publicationInfo.DefaultXhtmlFileWithPath);
+        }
+
+        private void SetRampData(Ramp ramp)
+        {
+            RampFile rampFile;
+
+            //ramp.RampId = "ykmb9i6zlh";
+            ramp.CreatedOn = DateTime.Now.ToString("r");
+            ramp.Ready = "Y";
+            ramp.Title = "Gondwana / English / Telegu / Hindi";//
+            ramp.BroadType = "wider_audience";
+            ramp.TypeMode = "Text,Photograph,Software application";
+            ramp.FormatMedium = "Paper,Other";
+            ramp.DescStage = "rough_draft";
+            ramp.VersionType = "first";
+            ramp.TypeScholarlyWork = "Other";
+            ramp.AddSubjLanguage("gon: Gondi");//
+            ramp.CoverageSpacialRegionHas = "Y";//
+            ramp.AddCoverageSpacialCountry("IN: India, Andhra Pradesh");//
+            ramp.SubjectLanguageHas = "Y";//
+            ramp.AddLanguageIso("eng: English");//
+            ramp.AddLanguageIso("tel: Telugu");//
+            ramp.AddLanguageIso("hin: Hindi");//
+            ramp.AddLanguageScript("Latn: Latin");//
+            ramp.AddLanguageScript("Telu: Telugu");//
+            ramp.AddLanguageScript("Deva: Devanagari(Nagari)");//
+            ramp.AddContributor("Mark Penny,researcher");//
+            //ramp.FormatExtentText = "8";
+            ramp.FormatExtentImages = "2";//
+            ramp.DescSponsership = "SIL International";//
+            ramp.DescTableofContentsHas = " ";//
+            ramp.SilDomain = "LING: Linguistics";//
+            ramp.DomainSubTypeLing = "language documentation(LING)";//
+            ramp.AddSubject("foreign languages and literature;dictionary;lexicon;,eng");//
+            ramp.RelRequiresHas = "Y";
+            ramp.AddRelRequires("OFL");
+            ramp.RelConformsto = "odf";
+            ramp.AddRightsHolder("© 2013 SIL International®");//
+            ramp.Rights = "creative commons share alike";//
+            ramp.SilSensitivityMetaData = "Public";
+            ramp.SilSensitivityPresentation = "Public";
+            ramp.SilSensitivitySource = "Insite users";
+
+            rampFile = new RampFile();
+            rampFile.FileName = "main.odm";
+            rampFile.FileDescription = "Master document";
+            rampFile.FileRelationship = "presentation";
+            rampFile.FileIsPrimary = "Y";
+            rampFile.FileSilPublic = "Y";
+            ramp.AddFile(rampFile);
+
+            rampFile = new RampFile();
+            rampFile.FileName = "main.odt";
+            rampFile.FileDescription = "main";
+            rampFile.FileRelationship = "presentation";
+            rampFile.FileSilPublic = "Y";
+            ramp.AddFile(rampFile);
+
+            rampFile = new RampFile();
+            rampFile.FileName = "FlexRev.odt";
+            rampFile.FileDescription = "English Reversal Index";
+            rampFile.FileRelationship = "presentation";
+            rampFile.FileSilPublic = "Y";
+            ramp.AddFile(rampFile);
+
+            rampFile = new RampFile();
+            rampFile.FileName = "main.xhtml";
+            rampFile.FileDescription = "main";
+            rampFile.FileRelationship = "source";
+            ramp.AddFile(rampFile);
+
+            rampFile = new RampFile();
+            rampFile.FileName = "FlexRev.xhtml";
+            rampFile.FileDescription = "English Reversal Index";
+            rampFile.FileRelationship = "source";
+            ramp.AddFile(rampFile);
+
+            rampFile = new RampFile();
+            rampFile.FileName = "2087191251mergedmain.css";
+            rampFile.FileDescription = "main stylesheet";
+            rampFile.FileRelationship = "source";
+            ramp.AddFile(rampFile);
+
+            rampFile = new RampFile();
+            rampFile.FileName = "119888425mergedFlexRev.css";
+            rampFile.FileDescription = "Reversal stylesheet";
+            rampFile.FileRelationship = "source";
+            ramp.AddFile(rampFile);
+
+            ramp.Status = "ready";
+
         }
 
         private void HandledInCss(ref PublicationInformation projInfo, ref Dictionary<string, Dictionary<string, string>> cssClass)

@@ -67,10 +67,11 @@ namespace SIL.PublishingSolution
         private string _silSensitivityMetaData;
         private string _silSensitivityPresentation;
         private string _silSensitivitySource;
-        private List<string> _rampFiles = new List<string>();
+        private List<string> _rampFile = new List<string>();
         private string _status;
         private List<string> _languageIso = new List<string>();
         private List<string> _contributor = new List<string>();
+        private Dictionary<string, string> _fileList = new Dictionary<string, string>(); 
         #endregion
 
         #region Private variable
@@ -271,10 +272,10 @@ namespace SIL.PublishingSolution
             set { _silSensitivitySource = value; }
         }
 
-        public List<string> RampFiles
+        public List<string> RampFile
         {
-            get { return _rampFiles; }
-            set { _rampFiles = value; }
+            get { return _rampFile; }
+            set { _rampFile = value; }
         }
 
         public string Status
@@ -291,7 +292,7 @@ namespace SIL.PublishingSolution
 
 
             string encodedKey = GetEncodedKey(folderPath);
-            InsertEncodeValueToXML(folderPath, encodedKey);
+            UpdateMetsXML(folderPath, encodedKey);
             CompressToRamp(rampName, folderPath);
         }
 
@@ -365,7 +366,17 @@ namespace SIL.PublishingSolution
             {
                 newFile = newFile + "\", \"silPublic\": \"" + file.FileSilPublic;
             }
-            RampFiles.Add(newFile);
+            RampFile.Add(newFile);
+            
+            if (file.FileName != null)
+            {
+                string isPrimary = string.Empty;
+                if (file.FileIsPrimary != null)
+                {
+                    isPrimary = "preferred";
+                }
+                _fileList.Add(file.FileName, isPrimary);
+            }
         }
 
         #endregion Public Methods
@@ -451,17 +462,17 @@ namespace SIL.PublishingSolution
 
         private void CreateRampFiles(Json json)
         {
-            if (RampFiles.Count > 0)
+            if (RampFile.Count > 0)
             {
                 json.WriteTag("files");
                 json.StartTag();
-                for (int i = 0; i < RampFiles.Count; i++)
+                for (int i = 0; i < RampFile.Count; i++)
                 {
                     json.WriteTag(i.ToString(CultureInfo.InvariantCulture));
                     json.StartTag();
-                    json.WriteText(RampFiles[i]);
+                    json.WriteText(RampFile[i]);
                     json.EndTag();
-                    if (i < RampFiles.Count - 1)
+                    if (i < RampFile.Count - 1)
                         json.WriteComma();
                 }
                 json.EndTag();
@@ -985,9 +996,16 @@ namespace SIL.PublishingSolution
         }
 
 
-
-        private void InsertEncodeValueToXML(string folderPath, string encodedKey)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="folderPath"></param>
+        /// <param name="encodedKey"></param>
+        private void UpdateMetsXML(string folderPath, string encodedKey)
         {
+            string fileGroup = CreateFileGroup();
+            string structMap = CreateStructMap();
+
             Param.LoadSettings();
             string xmlSettings = Path.Combine(Path.GetDirectoryName(Param.SettingPath), "mets.xml");
             if (File.Exists(xmlSettings))
@@ -1000,8 +1018,56 @@ namespace SIL.PublishingSolution
                 File.Copy(xmlSettings, xmlFileNewPath);
 
                 File.WriteAllText(xmlFileNewPath, File.ReadAllText(xmlFileNewPath).Replace("<binData>abc1defg", "<binData>" + encodedKey));
+                File.WriteAllText(xmlFileNewPath, File.ReadAllText(xmlFileNewPath).Replace("<file>ecgroupFileUpdate1</file>", fileGroup));
+                File.WriteAllText(xmlFileNewPath, File.ReadAllText(xmlFileNewPath).Replace("<div>ecgroupFileUpdate2</div>", structMap));
             }
+
+
         } 
+
+        /// <summary>
+        /// <file GROUPID="sword-mets-fgid-0" ID="sword-mets-file-0">
+        /// <FLocat LOCTYPE="URL" xlink:href="main.odm" USE="preferred"/>
+        /// </file>
+        /// </summary>
+        /// <returns></returns>
+        private string CreateFileGroup()
+        { 
+            StringBuilder fileGrp = new StringBuilder();
+            int i = 0;
+            foreach (KeyValuePair<string, string> data in _fileList)
+            {
+                string firstLine = string.Format("<file GROUPID=\"sword-mets-fgid-{0}\" ID=\"sword-mets-file-{0}\">", i);
+                fileGrp.AppendLine(firstLine);
+                string secondLine = string.Format("<FLocat LOCTYPE=\"URL\" xlink:href=\"{0}\" USE=\"{1}\"/>", data.Key, data.Value);
+                fileGrp.AppendLine(secondLine);
+                fileGrp.AppendLine("</file>");
+                i++;
+            }
+            return fileGrp.ToString();
+        }
+
+        /// <summary>
+        ///  <div TYPE="File" ID="sword-mets-div-2">
+        ///  <fptr FILEID="sword-mets-file-0"/>
+        ///   </div>
+        /// </summary>
+        /// <returns></returns>
+        private string CreateStructMap()
+        {
+            StringBuilder structMap = new StringBuilder();
+            for (int i = 0; i < _fileList.Count; i++)
+            {
+                string firstLine = string.Format("<div TYPE=\"File\" ID=\"sword-mets-div-{0}\">", i + 2);
+                structMap.AppendLine(firstLine);
+                string secondLine = string.Format("<fptr FILEID=\"sword-mets-file-{0}\"/>", i);
+                structMap.AppendLine(secondLine);
+                structMap.AppendLine("</div>");
+            }
+            return structMap.ToString();
+        }
+
+
         #endregion
     }
 }
