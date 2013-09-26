@@ -568,6 +568,22 @@ namespace Test.UIConfigurationToolTest
             //Assert.IsNotNullOrEmpty(userInfo.GeoLocation);
         }
 
+        [Test] public void MergeStyleSetting()
+        {
+            Common.Testing = true;
+            SettingsVersionControl settingsVersion = new SettingsVersionControl();
+            settingsVersion.UpdateSettingsFile(string.Empty);
+
+            string expectedFileWithPath = Common.PathCombine(_expectBasePath, "DictionaryStyleSettings.xml");
+            string outputFileWithPath = Common.PathCombine(_outputBasePath, "DictionaryStyleSettings.xml");
+            TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "Dictionary Setting file fails");
+
+            expectedFileWithPath = Common.PathCombine(_expectBasePath, "ScriptureStyleSettings.xml");
+            outputFileWithPath = Common.PathCombine(_outputBasePath, "ScriptureStyleSettings.xml");
+            TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "Scripture Setting file fails");
+        }
+
+
         #endregion
 
         #region Methods
