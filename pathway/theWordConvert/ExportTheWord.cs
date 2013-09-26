@@ -456,29 +456,30 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
             var format = @"id=W{0}
 charset=0
 lang={0}
-font={8}
-short.title={0}
-title={1}
-description={2} \
-{3}
+font={9}
+short.title={1}
+title={2}
+description={3} \
+{4}
 version.major=1
 version.minor=0
-version.date={4}
-publisher={5}
-publish.date={6}
-author={5}
-creator={7}
-source={5}
-about={1} \
-<p>{3} \
+version.date={5}
+publisher={6}
+publish.date={7}
+author={6}
+creator={8}
+source={6}
+about={2} \
+<p>{4} \
 <p>\
 <p> . . . . . . . . . . . . . . . . . . .\
 <p><b>Creative Commons</b> <i>Atribution-Non Comercial-No Derivatives 3.0</i>\
-<p>For details, see: <font color=blue><i>http://creativecommons.org/licenses/by-nc-nd/3.0</i></font>.\
+<p><font color=blue><i>http://creativecommons.org/licenses/by-nc-nd/3.0</i></font>\
 ";
             var langCode = GetSsfValue("//EthnologueCode", "zxx");
             const bool isConfigurationTool = false;
-            var title = Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool);
+            var shortTitle = Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool);
+            var FullTitle = GetSsfValue("//FullName", shortTitle);
             var description = Param.GetMetadataValue("Description");
             var copyright = Param.GetMetadataValue("Copyright Holder");
             var createDate = DateTime.Now.ToString("yyyy.M.d");
@@ -486,7 +487,22 @@ about={1} \
             var publishDate = createDate;
             var creator = Param.GetMetadataValue("Creator");
             var font = GetSsfValue("//DefaultFont", "Charis SIL");
-            sw.Write(string.Format(format, langCode, title, description, copyright, createDate, publisher, publishDate, creator, font));
+            var myFormat = GetFormat("theWordFormat.txt", format);
+            sw.Write(string.Format(myFormat, langCode, shortTitle, FullTitle, description, copyright, createDate, publisher, publishDate, creator, font));
+        }
+
+        private string GetFormat(string thewordformatTxt, string format)
+        {
+            var folder = Common.GetAllUserPath();
+            var fullPath = Path.Combine(Path.Combine(folder, "Scripture"), thewordformatTxt);
+            if (File.Exists(fullPath))
+            {
+                return FileData.Get(fullPath);
+            }
+            var sw = new StreamWriter(fullPath);
+            sw.Write(format);
+            sw.Close();
+            return format;
         }
 
         static void LogStatus(string format, params object[] args)
