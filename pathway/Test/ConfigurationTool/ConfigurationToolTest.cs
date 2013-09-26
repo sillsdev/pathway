@@ -568,7 +568,9 @@ namespace Test.UIConfigurationToolTest
             //Assert.IsNotNullOrEmpty(userInfo.GeoLocation);
         }
 
-        [Test] public void MergeStyleSetting()
+        [Ignore]
+        [Test] 
+        public void MergeStyleSetting()
         {
             Common.Testing = true;
             SettingsVersionControl settingsVersion = new SettingsVersionControl();
