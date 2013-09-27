@@ -949,11 +949,11 @@ namespace SIL.PublishingSolution
             Param.UpdateMetadataValue(Param.Identifier, dlg.Identifier);
 
             // Front Matter tab
-            if (dlg.chkCoverImage.Enabled == false)
-            {
-                // user can't create a cover image - make sure this isn't checked
-                dlg.CoverPage = false;
-            }
+            //if (dlg.chkCoverImage.Enabled == false)
+            //{
+            //    // user can't create a cover image - make sure this isn't checked
+            //    dlg.CoverPage = false;
+            //}
             Param.UpdateMetadataValue(Param.CoverPage, dlg.CoverPage.ToString());
             Param.UpdateMetadataValue(Param.CoverPageFilename, dlg.CoverPageImagePath);
             Param.UpdateMetadataValue(Param.CoverPageTitle, dlg.CoverPageTitle.ToString());
@@ -969,11 +969,11 @@ namespace SIL.PublishingSolution
                 dlg.txtBookTitle.Focus();
                 return false;
             }
-            if (dlg.chkColophon.Enabled == false)
-            {
-                // user can't create a copyright page - make sure this isn't checked
-                dlg.CopyrightPage = false;
-            }
+            //if (dlg.chkColophon.Enabled == false)
+            //{
+            //    // user can't create a copyright page - make sure this isn't checked
+            //    dlg.CopyrightPage = false;
+            //}
             Param.UpdateMetadataValue(Param.CopyrightPage, dlg.CopyrightPage.ToString());
             Param.UpdateMetadataValue(Param.CopyrightPageFilename, dlg.CopyrightPagePath);
             Param.UpdateMetadataValue(Param.TableOfContents, dlg.TableOfContents.ToString());
