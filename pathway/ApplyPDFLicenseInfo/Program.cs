@@ -9,23 +9,58 @@ namespace ApplyPDFLicenseInfo
 {
     class Program
     {
+        static List<string> _readLicenseFilesBylines = new List<string>();
+
         static void Main(string[] args)
         {
             bool isUnix = false;
             Console.WriteLine("running.....");
             //Thread.Sleep(2500);
             string allUserPath = GetAllUserPath();
-            string executePath = ReadPathinLicenseFile(allUserPath, 0);
-            string workingDirectory = ReadPathinLicenseFile(allUserPath, 1);
+            string licenseFileName = ReadPathinLicenseFile(allUserPath);
+
+            if (_readLicenseFilesBylines.Count < 0)
+            {
+                return;
+            }
+            string executePath = _readLicenseFilesBylines[0];
+            string workingDirectory = _readLicenseFilesBylines[1];
+            string exportTitle = _readLicenseFilesBylines[2];
             //Console.WriteLine(executePath);
             string pdfFileName = string.Empty;
-            string[] pdfFiles = Directory.GetFiles(executePath + "/", "*.pdf");
-            string getFileName = string.Empty;
-            string getCopyrightPdfFileName = string.Empty;
+            string[] pdfFiles = Directory.GetFiles(executePath + "\\", "*.pdf");
             //Console.WriteLine(pdfFiles.Length.ToString());
             //Thread.Sleep(2500);
             //Console.WriteLine(pdfFiles[0].ToString());
             //Thread.Sleep(500);
+            pdfFileName = ProcessLicensePdf(pdfFiles, pdfFileName, executePath);
+
+            exportTitle = exportTitle.Replace(" ", "_") + ".pdf";
+            exportTitle = Path.Combine(workingDirectory, exportTitle);
+            string licencePdfFile = pdfFileName.Replace(".pdf", "1.pdf");
+
+            //Thread.Sleep(2500);
+            if (File.Exists(licencePdfFile))
+            {
+                File.Move(licencePdfFile, exportTitle);
+                using (Process process = new Process())
+                {
+                    process.StartInfo.FileName = exportTitle;
+                    process.Start();
+                }
+            }
+
+            if (File.Exists(pdfFileName) && File.Exists(exportTitle))
+                File.Delete(pdfFileName);
+            
+            //Thread.Sleep(500);
+        }
+
+        private static string ProcessLicensePdf(string[] pdfFiles, string pdfFileName, string executePath)
+        {
+            string getFileName;
+            bool isUnix;
+            string getCopyrightPdfFileName;
             if (pdfFiles.Length > 0)
             {
                 pdfFileName = pdfFiles[0];
@@ -76,32 +111,40 @@ namespace ApplyPDFLicenseInfo
                     }
                 }
             }
-
-            
-
-            //Thread.Sleep(2500);
-            if (File.Exists(pdfFileName.Replace(".pdf", "1.pdf")))
-            {
-                //File.Copy(pdfFileName.Replace(".pdf", "1.pdf"), Path.Combine(workingDirectory, Path.GetFileName(pdfFileName.Replace(".pdf", "1.pdf"))), true);
-                using (Process process = new Process())
-                {
-                    process.StartInfo.FileName = Path.Combine(workingDirectory, Path.GetFileName(pdfFileName.Replace(".pdf", "1.pdf")));
-                    process.Start();
-                }
-            }
-
-            if (File.Exists(pdfFileName) && File.Exists(pdfFileName.Replace(".pdf", "1.pdf")))
-                File.Delete(pdfFileName);
-            
-            //Thread.Sleep(500);
+            return pdfFileName;
         }
 
-        private static string ReadPathinLicenseFile(string allUserPath, int readLineNumber)
+        private static string ReadPathinLicenseFile(string allUserPath)
         {
             string fileLoc = Path.Combine(allUserPath, "License.txt");
             string executePath = string.Empty;
             int countRead = 0;
-            List<string> lines = new List<string>();
+
+            if (File.Exists(fileLoc))
+            {
+                using (StreamReader reader = new StreamReader(fileLoc))
+                {
+                    string line;
+
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        _readLicenseFilesBylines.Add(line);
+                    }
+
+                    reader.Close();
+
+                    executePath = fileLoc;
+                }
+            }
+            return executePath;
+        }
+
+        private string ReadPathinLicenseFile(string allUserPath, int readLineNumber)
+        {
+            string fileLoc = Path.Combine(allUserPath, "License.txt");
+            string executePath = string.Empty;
+            int countRead = 0;
+            
             if (File.Exists(fileLoc))
             {
                 using (StreamReader reader = new StreamReader(fileLoc))
@@ -110,12 +153,12 @@ namespace ApplyPDFLicenseInfo
                     
                     while ((line = reader.ReadLine()) != null)
                     {
-                        lines.Add(line);
+                        _readLicenseFilesBylines.Add(line);
                     }
 
                     reader.Close();
 
-                    executePath = lines[readLineNumber].ToString();
+                    executePath = _readLicenseFilesBylines[readLineNumber].ToString();
                 }
             }
             return executePath;
