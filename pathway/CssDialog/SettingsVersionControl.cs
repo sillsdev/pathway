@@ -17,7 +17,7 @@ namespace SIL.PublishingSolution
         protected string _xmlFileWithPath;
         protected string ProjSchemaPath;
 
-        private string _userFilePath, _pathwayFilePath;
+        private string _userFilePath, _pathwayFilePath, _pathwayApplicationPath;
         private XmlDocument _userXml, _pathwayXml;
         private XmlElement _userRoot, _pathwayRoot;
 
@@ -72,21 +72,25 @@ namespace SIL.PublishingSolution
 
                 if (!Common.Testing)
                 {
-                    File.Copy(_pathwayFilePath, _userFilePath, true);
+                    File.Delete(_userFilePath);
                 }
             }
-            const string settingFile = "StyleSettings.xsd";
+            
 
             if (!Common.Testing)
             {
-                File.Copy(Common.PathCombine(Path.GetDirectoryName(_pathwayFilePath), settingFile),
-                          Common.PathCombine(Path.GetDirectoryName(_userFilePath), settingFile), true);
+                const string settingFile = "StyleSettings.xsd";
+                string userPath = Common.GetAllUserAppPath();
+                File.Copy(Common.PathCombine(Path.GetDirectoryName(appPath), settingFile),
+                          Common.PathCombine(Path.GetDirectoryName(userPath), settingFile), true);
             }
 
         }
 
         private void SetPath(string appPath, KeyValuePair<string, string> data)
         {
+            string filePath;
+            string appFilePath;
             if (Common.Testing)
             {
                 string testPath = Environment.CurrentDirectory;
@@ -96,14 +100,32 @@ namespace SIL.PublishingSolution
 
                 _userFilePath = Common.PathCombine(input, data.Value);
                 _pathwayFilePath = Path.Combine(output, data.Value);
-
                 File.Copy(_userFilePath, _pathwayFilePath, true);
 
+                filePath = _pathwayFilePath;
+
+                _userFilePath = _userFilePath.Replace(".", "Temp.");
+                _pathwayFilePath = _pathwayFilePath.Replace(".", "Temp.");
+                File.Copy(_userFilePath, _pathwayFilePath, true);
+
+                _pathwayFilePath = filePath;
+                // in - op
             }
             else
             {
-                _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
+
                 _pathwayFilePath = Path.Combine(Path.GetDirectoryName(appPath), data.Value);
+                _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
+                filePath = _userFilePath;
+                if (!File.Exists(_userFilePath))
+                {
+                    File.Copy(_pathwayFilePath, _userFilePath, true);
+                    return;
+                }
+                _userFilePath = _userFilePath.Replace(".", "Temp.");
+                File.Copy(filePath, _userFilePath, true);
+                File.Copy(_pathwayFilePath, filePath, true);
+                _pathwayFilePath = filePath;
             }
         }
 
@@ -143,7 +165,7 @@ namespace SIL.PublishingSolution
                 XmlNode pathwayNode = _pathwayRoot.SelectSingleNode(parent);
                 if (userNode.ParentNode.Name.ToLower() == "web")
                 {
-                    pathwayNode.InnerXml = userNode.InnerXml;
+                    pathwayNode.InnerXml = userNode.OuterXml;
                 }
                 else
                 {
