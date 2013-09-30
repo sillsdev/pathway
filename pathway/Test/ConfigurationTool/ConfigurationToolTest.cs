@@ -72,7 +72,8 @@ namespace Test.UIConfigurationToolTest
             string toFileName = Common.PathCombine(_inputBasePath, fileName);
             File.Copy(fromFileName, toFileName, true);
             toFileName = Common.PathCombine(_outputBasePath, fileName);
-            File.Copy(fromFileName, toFileName, true);
+            if (Directory.Exists(_outputBasePath))
+                File.Copy(fromFileName, toFileName, true);
         }
 
         private void CopyFolderSupportToIO(string fileName)
