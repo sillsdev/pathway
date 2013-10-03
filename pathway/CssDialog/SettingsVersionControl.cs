@@ -85,7 +85,7 @@ namespace SIL.PublishingSolution
                 const string settingFile = "StyleSettings.xsd";
                 string userPath = Common.GetAllUserAppPath();
                 File.Copy(Common.PathCombine(Path.GetDirectoryName(appPath), settingFile),
-                          Common.PathCombine(Path.GetDirectoryName(userPath), settingFile), true);
+                          Common.PathCombine(Path.GetDirectoryName(_userFilePath), settingFile), true);
             }
 
         }
@@ -119,28 +119,21 @@ namespace SIL.PublishingSolution
 
                 _pathwayFilePath = Path.Combine(Path.GetDirectoryName(appPath), data.Value);
                 _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
+                string pathwayFolder = Common.PathCombine(Common.GetAllUserAppPath(),"SIL/Pathway");
+                if (!Directory.Exists(pathwayFolder))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
+                }
                 if (!Directory.Exists(Path.GetDirectoryName(_userFilePath)))
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
                 }
+                
                 filePath = _userFilePath;
 
                 if (!File.Exists(_userFilePath))
                 {
-                    //if (_userFilePath.Contains("linux"))
-                    //{
-                    //    string _path = string.Empty;
-                    //    //_userFilePath = "/home/linux/.local/share/SIL/Pathway/Scripture1/ScriptureStyleSettings.xml";
-                    //    _path = _userFilePath.Replace("/ScriptureStyleSettings.xml", "").Replace("/DictionaryStyleSettings.xml", "");
-                    //    if (Directory.Exists(_path))
-                    //    {
-                    //        File.Copy(_pathwayFilePath, _userFilePath, true);
-                    //    }
-                    //}
-                    //else
-                    //{
-                        File.Copy(_pathwayFilePath, _userFilePath, true);
-                    //}
+                    File.Copy(_pathwayFilePath, _userFilePath, true);
                     return false;
                 }
                 _userFilePath = _userFilePath.Replace(".xml", "Temp.xml");
