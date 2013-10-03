@@ -119,9 +119,20 @@ namespace SIL.PublishingSolution
                 filePath = _userFilePath;
                 if (!File.Exists(_userFilePath))
                 {
-                    //Commented for TD-3654, Because Scripture folder not created in Linux("/home/linux/.local/share/SIL/Pathway/Scripture/ScriptureStyleSettings.xml")
-                    //Once confirm Scripture there in above path, comment should be removed
-                    //File.Copy(_pathwayFilePath, _userFilePath, true);
+                    if (_userFilePath.Contains("linux"))
+                    {
+                        string _path = string.Empty;
+                        //_userFilePath = "/home/linux/.local/share/SIL/Pathway/Scripture1/ScriptureStyleSettings.xml";
+                        _path = _userFilePath.Replace("/ScriptureStyleSettings.xml", "").Replace("/DictionaryStyleSettings.xml", "");
+                        if (Directory.Exists(_path))
+                        {
+                            File.Copy(_pathwayFilePath, _userFilePath, true);
+                        }
+                    }
+                    else
+                    {
+                        File.Copy(_pathwayFilePath, _userFilePath, true);
+                    }
                     return;
                 }
                 _userFilePath = _userFilePath.Replace(".xml", "Temp.xml");
