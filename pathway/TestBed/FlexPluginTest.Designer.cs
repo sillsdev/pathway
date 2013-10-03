@@ -44,6 +44,7 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnJson = new System.Windows.Forms.Button();
             this.btnEpubValidator = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.btnPrinceExport = new System.Windows.Forms.Button();
@@ -76,7 +77,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnJson = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -239,6 +240,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button13);
             this.groupBox1.Controls.Add(this.btnJson);
             this.groupBox1.Controls.Add(this.btnEpubValidator);
             this.groupBox1.Controls.Add(this.button8);
@@ -274,12 +276,24 @@
             this.groupBox1.Text = "Export";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // btnJson
+            // 
+            this.btnJson.AccessibleName = "BtnFlexTest";
+            this.btnJson.BackColor = System.Drawing.Color.Yellow;
+            this.btnJson.Location = new System.Drawing.Point(512, 160);
+            this.btnJson.Name = "btnJson";
+            this.btnJson.Size = new System.Drawing.Size(78, 28);
+            this.btnJson.TabIndex = 80;
+            this.btnJson.Text = "JSON";
+            this.btnJson.UseVisualStyleBackColor = false;
+            this.btnJson.Click += new System.EventHandler(this.btnJson_Click);
+            // 
             // btnEpubValidator
             // 
             this.btnEpubValidator.BackColor = System.Drawing.Color.Cyan;
             this.btnEpubValidator.Location = new System.Drawing.Point(380, 188);
             this.btnEpubValidator.Name = "btnEpubValidator";
-            this.btnEpubValidator.Size = new System.Drawing.Size(140, 33);
+            this.btnEpubValidator.Size = new System.Drawing.Size(125, 33);
             this.btnEpubValidator.TabIndex = 79;
             this.btnEpubValidator.Text = "EPubValidator";
             this.btnEpubValidator.UseVisualStyleBackColor = false;
@@ -640,17 +654,17 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnJson
+            // button13
             // 
-            this.btnJson.AccessibleName = "BtnFlexTest";
-            this.btnJson.BackColor = System.Drawing.Color.Yellow;
-            this.btnJson.Location = new System.Drawing.Point(512, 160);
-            this.btnJson.Name = "btnJson";
-            this.btnJson.Size = new System.Drawing.Size(78, 28);
-            this.btnJson.TabIndex = 80;
-            this.btnJson.Text = "JSON";
-            this.btnJson.UseVisualStyleBackColor = false;
-            this.btnJson.Click += new System.EventHandler(this.btnJson_Click);
+            this.button13.AccessibleName = "BtnFlexTest";
+            this.button13.BackColor = System.Drawing.Color.Sienna;
+            this.button13.Location = new System.Drawing.Point(511, 190);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(78, 28);
+            this.button13.TabIndex = 81;
+            this.button13.Text = "Progress Bar";
+            this.button13.UseVisualStyleBackColor = false;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // FlexPluginTest
             // 
@@ -665,6 +679,7 @@
             this.Name = "FlexPluginTest";
             this.Text = "FlexPluginTest";
             this.Load += new System.EventHandler(this.FlexPluginTest_Load);
+            this.Click += new System.EventHandler(this.FlexPluginTest_Click);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -731,5 +746,6 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button btnEpubValidator;
         private System.Windows.Forms.Button btnJson;
+        private System.Windows.Forms.Button button13;
     }
 }
