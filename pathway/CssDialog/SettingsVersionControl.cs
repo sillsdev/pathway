@@ -47,7 +47,10 @@ namespace SIL.PublishingSolution
             foreach (KeyValuePair<string, string> data in inputType)
             {
 
-                SetPath(appPath, data);
+                if (!SetPath(appPath, data))
+                {
+                    continue;
+                }
 
                 if (!OpenFile())
                 {
@@ -87,7 +90,7 @@ namespace SIL.PublishingSolution
 
         }
 
-        private void SetPath(string appPath, KeyValuePair<string, string> data)
+        private bool SetPath(string appPath, KeyValuePair<string, string> data)
         {
             string filePath;
             string appFilePath;
@@ -116,24 +119,29 @@ namespace SIL.PublishingSolution
 
                 _pathwayFilePath = Path.Combine(Path.GetDirectoryName(appPath), data.Value);
                 _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
+                if (!Directory.Exists(Path.GetDirectoryName(_userFilePath)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
+                }
                 filePath = _userFilePath;
+
                 if (!File.Exists(_userFilePath))
                 {
-                    if (_userFilePath.Contains("linux"))
-                    {
-                        string _path = string.Empty;
-                        //_userFilePath = "/home/linux/.local/share/SIL/Pathway/Scripture1/ScriptureStyleSettings.xml";
-                        _path = _userFilePath.Replace("/ScriptureStyleSettings.xml", "").Replace("/DictionaryStyleSettings.xml", "");
-                        if (Directory.Exists(_path))
-                        {
-                            File.Copy(_pathwayFilePath, _userFilePath, true);
-                        }
-                    }
-                    else
-                    {
+                    //if (_userFilePath.Contains("linux"))
+                    //{
+                    //    string _path = string.Empty;
+                    //    //_userFilePath = "/home/linux/.local/share/SIL/Pathway/Scripture1/ScriptureStyleSettings.xml";
+                    //    _path = _userFilePath.Replace("/ScriptureStyleSettings.xml", "").Replace("/DictionaryStyleSettings.xml", "");
+                    //    if (Directory.Exists(_path))
+                    //    {
+                    //        File.Copy(_pathwayFilePath, _userFilePath, true);
+                    //    }
+                    //}
+                    //else
+                    //{
                         File.Copy(_pathwayFilePath, _userFilePath, true);
-                    }
-                    return;
+                    //}
+                    return false;
                 }
                 _userFilePath = _userFilePath.Replace(".xml", "Temp.xml");
                 //_userFilePath = _userFilePath.Replace(".", "Temp.");
@@ -141,6 +149,7 @@ namespace SIL.PublishingSolution
                 File.Copy(_pathwayFilePath, filePath, true);
                 _pathwayFilePath = filePath;
             }
+            return true;
         }
 
         private void CopyOrganization(string xPath)
