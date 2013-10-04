@@ -151,6 +151,7 @@ namespace SIL.PublishingSolution
 
                 //DeleteTempFiles(exportGoBibleInputPath);
                 Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", string.Empty, string.Empty);
+                CreateRAMP(projInfo);
                 Common.DeleteDirectory(tempGoBibleCreatorPath);
             }
             catch (Exception ex)
@@ -161,6 +162,12 @@ namespace SIL.PublishingSolution
                 inProcess.Close();
             }
             return success;
+        }
+
+        private void CreateRAMP(PublicationInformation projInfo)
+        {
+            Ramp ramp = new Ramp();
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".jad,.jar");
         }
 
         private static string NoSp(string p)
