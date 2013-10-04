@@ -150,6 +150,7 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             //projInfo.IsReversalExist = true;
+            //projInfo.OutputExtension = "pdf";
             var fixPlayorderStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.fixPlayorder.xsl");
             Debug.Assert(fixPlayorderStream != null);
             _fixPlayOrder.Load(XmlReader.Create(fixPlayorderStream));
@@ -596,8 +597,15 @@ namespace SIL.PublishingSolution
                     }
                 }
                 Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1", string.Empty);
+                CreateRAMP(projInfo);
             }
             return success;
+        }
+
+        private void CreateRAMP(PublicationInformation projInfo)
+        {
+            Ramp ramp = new Ramp();
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".epub");
         }
 
         protected void SplitPageSections(List<string> htmlFiles, string contentFolder, string tocFiletoUpdate)

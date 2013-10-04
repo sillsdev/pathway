@@ -1258,9 +1258,9 @@ namespace TestBed
 
             var folderPath = Path.GetDirectoryName(txtInputPath.Text);
 
-            Ramp ramp = new Ramp();
-            SetRampData(ramp);
-            ramp.Create(Path.Combine(folderPath, "MyTest"), folderPath);
+            //Ramp ramp = new Ramp();
+            //SetRampData(ramp);
+            //ramp.Create(Path.Combine(folderPath, "MyTest"), folderPath);
 
             MessageBox.Show("Done");
         }

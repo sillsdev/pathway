@@ -113,6 +113,7 @@ namespace SIL.PublishingSolution
                 if (regPrinceKey != null || isUnixOS)
                 {
                     var curdir = Environment.CurrentDirectory;
+                    projInfo.OutputExtension = "pdf";
                     PreExportProcess preProcessor = new PreExportProcess(projInfo);
                     if (isUnixOS)
                     {
@@ -202,7 +203,8 @@ namespace SIL.PublishingSolution
                     //if (!Common.Testing)
                     //    Process.Start(pdfFIleName);
                     Environment.CurrentDirectory = curdir;
-                    Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout", string.Empty);
+                    Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.jar,.xml", "layout", string.Empty);
+                    CreateRAMP(projInfo);
                     success = true;
                 }
                 else
@@ -218,6 +220,12 @@ namespace SIL.PublishingSolution
                 success = false;
             }
             return success;
+        }
+
+        private void CreateRAMP(PublicationInformation projInfo)
+        {
+            Ramp ramp = new Ramp();
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".pdf");
         }
     }
 }

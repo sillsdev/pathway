@@ -84,6 +84,7 @@ namespace SIL.PublishingSolution
             _langFontDictionary = new Dictionary<string, string>();
             _langFontCodeandName = new Dictionary<string, string>();
             string mainXhtmlFileWithPath = projInfo.DefaultXhtmlFileWithPath;
+            projInfo.OutputExtension = "pdf";
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             if (Common.IsUnixOS())
             {
@@ -223,8 +224,15 @@ namespace SIL.PublishingSolution
             }
             UpdateXeLaTexFontCacheIfNecessary();
             CallXeLaTex(xeLatexFullFile, true, imgPath);
-            Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif", "layout,mergedmain1,preserve", string.Empty);
+            Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif,.tex,.log,.exe,.xml,.jar", "layout,mergedmain1,preserve", string.Empty);
+            CreateRAMP(projInfo);
             return true;
+        }
+
+        private void CreateRAMP(PublicationInformation projInfo)
+        {
+            Ramp ramp = new Ramp();
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".pdf");
         }
 
         public bool ExportCopyright(PublicationInformation projInfo, string mainXhtmlFileWithPath)

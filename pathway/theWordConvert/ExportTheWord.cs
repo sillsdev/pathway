@@ -136,6 +136,7 @@ namespace SIL.PublishingSolution
                 success = ReportResults(resultFullName, mySwordResult, exportTheWordInputPath);
 
                 Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout", string.Empty);
+                CreateRAMP(projInfo);
             }
             catch (Exception ex)
             {
@@ -147,6 +148,12 @@ namespace SIL.PublishingSolution
                 ReportFailure(ex);
             }
             return success;
+        }
+
+        private void CreateRAMP(PublicationInformation projInfo)
+        {
+            Ramp ramp = new Ramp();
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".mybible");
         }
 
         private static void ReportFailure(Exception ex)

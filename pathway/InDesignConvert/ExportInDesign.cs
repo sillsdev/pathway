@@ -117,12 +117,18 @@ namespace SIL.PublishingSolution
             Compress(projInfo.TempOutputFolder, ldmlFullName);
 
             Common.CleanupExportFolder(ldmlFullName, ".tmp,.de", "layout", string.Empty);
-
+            //CreateRAMP(projInfo);
             if (projInfo.IsOpenOutput)
                 Launch(ldmlFullName);
 
             
             return true;
+        }
+
+        private void CreateRAMP(PublicationInformation projInfo)
+        {
+            Ramp ramp = new Ramp();
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".ldml");
         }
 
         private Dictionary<string, Dictionary<string, string>> MergeProcessInCSSforMasterPage(string fileName, Dictionary<string, Dictionary<string, string>> cssClass)
