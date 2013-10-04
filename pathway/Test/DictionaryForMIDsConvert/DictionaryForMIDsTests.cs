@@ -196,6 +196,7 @@ namespace Test.DictionaryForMIDsConvert
         [Category("SkipOnTeamCity")]
         public void CreateDictionaryForMIDsTest()
         {
+            Common.Testing = true;
             var outDir = _testFiles.Output("CreateDictionaryForMIDs");
             if (Directory.Exists(outDir))
             {

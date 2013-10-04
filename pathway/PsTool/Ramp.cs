@@ -71,11 +71,15 @@ namespace SIL.PublishingSolution
         private string _status;
         private List<string> _languageIso = new List<string>();
         private List<string> _contributor = new List<string>();
-        private Dictionary<string, string> _fileList = new Dictionary<string, string>(); 
+        private Dictionary<string, string> _fileList = new Dictionary<string, string>();
+        private string _folderPath = string.Empty;
+        private string _outputExtension = string.Empty;
         #endregion
 
         #region Private variable
-        private RampFile rampFile; 
+        private RampFile rampFile;
+        private Dictionary<string, string> _isoLanguageCode = new Dictionary<string, string>();
+        private Dictionary<string, string> _isoLanguageCodeandName = new Dictionary<string, string>();
         #endregion
 
         #region Property
@@ -282,34 +286,146 @@ namespace SIL.PublishingSolution
         {
             get { return _status; }
             set { _status = value; }
-        } 
+        }
+
+        public Dictionary<string, string> IsoLanguageCode
+        {
+            get { return _isoLanguageCode; }
+            set { _isoLanguageCode = value; }
+        }
+
+        public Dictionary<string, string> IsoLanguageCodeandName
+        {
+            get { return _isoLanguageCodeandName; }
+            set { _isoLanguageCodeandName = value; }
+        }
         #endregion
+
+        public Ramp()
+        {
+            LoadIsoLanguageCode();
+            LoadIsoLanguageCodeToName();
+        }
 
         #region Public Methods
 
-        public void Create(string rampName, string folderPath)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="folderPath"></param>
+        /// <param name="outputExtension"></param>
+        public void Create(string folderPath, string outputExtension)
         {
-
-
-            string encodedKey = GetEncodedKey(folderPath);
-            UpdateMetsXML(folderPath, encodedKey);
-            CompressToRamp(rampName, folderPath);
+            _folderPath = folderPath;
+            _outputExtension = outputExtension;
+            SetRampData();
+            string encodedKey = GetEncodedKey();
+            UpdateMetsXML(encodedKey);
+            CompressToRamp();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void LoadIsoLanguageCode()
+        {
+            _isoLanguageCode.Add("en","eng");
+            _isoLanguageCode.Add("hi", "hin");
+            _isoLanguageCode.Add("ru", "rus");
+            _isoLanguageCode.Add("ta", "tam");
+            _isoLanguageCode.Add("te", "tel");
+            _isoLanguageCode.Add("ur", "urd");
+            _isoLanguageCode.Add("ml", "mal");
+            _isoLanguageCode.Add("pt", "por");
+            _isoLanguageCode.Add("es", "spa");
+            _isoLanguageCode.Add("th", "tha");
+            _isoLanguageCode.Add("tr", "tur");
+            _isoLanguageCode.Add("km", "khm");
+            _isoLanguageCode.Add("fr", "fra");
+            _isoLanguageCode.Add("la", "lat");
+            _isoLanguageCode.Add("id", "ind");
+            _isoLanguageCode.Add("lv", "lav");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void LoadIsoLanguageCodeToName()
+        {
+            _isoLanguageCodeandName.Add("eng", "English");
+            _isoLanguageCodeandName.Add("hin", "Hindi");
+            _isoLanguageCodeandName.Add("rus", "Russian");
+            _isoLanguageCodeandName.Add("tam", "Tamil");
+            _isoLanguageCodeandName.Add("tel", "Telugu");
+            _isoLanguageCodeandName.Add("urd", "Urdu");
+            _isoLanguageCodeandName.Add("mal", "Malayalam");
+            _isoLanguageCodeandName.Add("por", "Portuguese");
+            _isoLanguageCodeandName.Add("spa", "Spanish");
+            _isoLanguageCodeandName.Add("tha", "Thai");
+            _isoLanguageCodeandName.Add("tur", "Turkish");
+            _isoLanguageCodeandName.Add("khm", "Khmer");
+            _isoLanguageCodeandName.Add("gon", "Gondi");
+            _isoLanguageCodeandName.Add("bzh", "Buang, Mapos");
+            _isoLanguageCodeandName.Add("tpi", "Tok Pisin");
+            _isoLanguageCodeandName.Add("fra", "French");
+            _isoLanguageCodeandName.Add("kup", "Kunimaipa");
+            _isoLanguageCodeandName.Add("lat", "Latin");
+            _isoLanguageCodeandName.Add("tsi", "Tsimshian");
+            _isoLanguageCodeandName.Add("slu", "Selaru");
+            _isoLanguageCodeandName.Add("abs","Malay, Ambonese");
+            _isoLanguageCodeandName.Add("ind", "Indonesian");
+            _isoLanguageCodeandName.Add("ggo", "Gondi, Southern");
+            _isoLanguageCodeandName.Add("lav", "Latvian");
+            _isoLanguageCodeandName.Add("seh", "Sena");
+            _isoLanguageCodeandName.Add("flr", "Fuliiru");
+            _isoLanguageCodeandName.Add("pis", "Pijin");
+            _isoLanguageCodeandName.Add("lgr", "Lengo");
+            _isoLanguageCodeandName.Add("mgo", "Meta'");
+            _isoLanguageCodeandName.Add("bss", "Akoose");
+            _isoLanguageCodeandName.Add("grc", "Greek, Ancient");
+            _isoLanguageCodeandName.Add("bdu", "Oroko");
+            _isoLanguageCodeandName.Add("nko", "Nkonya");
+            _isoLanguageCodeandName.Add("baz", "Tunen");
+            _isoLanguageCodeandName.Add("khb", "Lü");
+        }
+
 
         /// <summary>
         /// 
         /// </summary>
         public void AddSubjLanguage(string lang)
         {
-            SubjectLanguage.Add(lang);
+            if(lang.IndexOf('-') > 0)
+            {
+                lang = lang.Substring(0, lang.IndexOf('-'));
+            }
+            if (lang.Trim().Length > 0 && _isoLanguageCodeandName.ContainsKey(lang))
+            {
+                string format = lang + ":" + _isoLanguageCodeandName[lang]; //"eng:English"
+                SubjectLanguage.Add(format);
+            }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void AddLanguageIso(string lang)
+        public void AddLanguageIso(string langCollection)
         {
-            LanguageIso.Add(lang);
+            string[] languageCode = langCollection.Split(',');
+            foreach (string s in languageCode)
+            {
+                string langCode = s;
+                if (langCode.Length == 2 && _isoLanguageCode.ContainsKey(langCode))
+                {
+                    langCode = _isoLanguageCode[langCode];
+                }
+                if (langCode.Trim().Length > 0 && _isoLanguageCodeandName.ContainsKey(langCode))
+                {
+                    string format = langCode + ":" + _isoLanguageCodeandName[langCode]; //"eng:English"
+                    LanguageIso.Add(format);
+                }
+
+            }
         }
 
         public void AddCoverageSpacialCountry(string country)
@@ -382,11 +498,11 @@ namespace SIL.PublishingSolution
         #endregion Public Methods
 
         #region Private Methods
-        private string GetEncodedKey(string folderPath)
+        private string GetEncodedKey()
         {
-            CreateRampJSON(Path.GetDirectoryName(folderPath));
+            CreateRampJSON(Path.GetDirectoryName(_folderPath));
 
-            string metcFileName = Path.Combine(Path.GetDirectoryName(folderPath), "temp.json");
+            string metcFileName = Path.Combine(Path.GetDirectoryName(_folderPath), "temp.json");
 
             string text = File.ReadAllText(metcFileName);
 
@@ -400,9 +516,92 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="xhtmlFileName"></param>
+        /// <param name="outputExtension"></param>
+        private void SetRampData()
+        {
+            Param.LoadSettings();
+            //ramp.RampId = "ykmb9i6zlh";
+            CreatedOn = DateTime.Now.ToString("r");
+            Ready = "Y";
+            Title = Param.GetMetadataValue(Param.Title, Param.GetOrganization());
+            BroadType = "wider_audience";
+            TypeMode = "Text,Photograph,Software application";
+            //FormatMedium = "Paper,Other";
+            //DescStage = "rough_draft";
+            //VersionType = "first";
+            TypeScholarlyWork = "Book";
+            AddSubjLanguage(Common.GetLanguageCode(_folderPath, "Dictionary"));
+            //CoverageSpacialRegionHas = "Y";//
+            //AddCoverageSpacialCountry("IN:India, Andhra Pradesh");//
+            SubjectLanguageHas = "Y";//
+            AddLanguageIso(Common.GetLanguageCodeList(_folderPath));
+            //AddLanguageScript("Latn:Latin");//
+            //AddLanguageScript("Telu:Telugu");//
+            //AddLanguageScript("Deva:Devanagari (Nagari)");//
+            AddContributor(Param.GetMetadataValue(Param.Creator) + ",compiler");//
+            //FormatExtentText = "8";
+            //FormatExtentImages = GetImageCount(publicationInfo.DefaultXhtmlFileWithPath);//
+            //DescSponsership = Param.GetOrganization();
+            //DescTableofContentsHas = " ";//
+            SilDomain = "LING:Linguistics";//
+            DomainSubTypeLing = "lexicon (LING)";//
+            AddSubject(Param.GetMetadataValue(Param.Subject) + ",eng");//
+            //RelRequiresHas = "Y";
+            //AddRelRequires("OFL");
+            RelConformsto = "odf";
+            AddRightsHolder(Param.GetMetadataValue(Param.CopyrightHolder));//
+            //Rights = GetLicenseFileName();//
+            SilSensitivityMetaData = "Public";
+            SilSensitivityPresentation = "Public";
+            SilSensitivitySource = "Insite users";
+
+            if (_folderPath != null)
+            {
+                string[] files = Directory.GetFiles(Path.GetDirectoryName(_folderPath));
+                foreach (string file in files)
+                {
+                    RampFile rFile = new RampFile();
+                    rFile.FileName = Path.GetFileName(file);
+                    string fileExtn = Path.GetExtension(file);
+                    if (fileExtn == ".odm" || fileExtn == ".jar" || fileExtn == ".epub" || fileExtn == ".mybible")
+                    {
+
+                        rFile.FileDescription = Path.GetFileNameWithoutExtension(file) + " " + fileExtn.Replace(".", "") + " document";
+                        rFile.FileRelationship = "presentation";
+                        rFile.FileIsPrimary = "Y";
+                        rFile.FileSilPublic = "Y";
+                    }
+                    else if (fileExtn == ".odt" || fileExtn == ".pdf" || fileExtn == ".jad")
+                    {
+                        rFile.FileDescription =  Path.GetFileNameWithoutExtension(file) + " " + fileExtn.Replace(".", "") + " document";
+                        rFile.FileRelationship = "presentation";
+                        rFile.FileSilPublic = "Y";
+                        if (_outputExtension.IndexOf(".odt") == 0 || _outputExtension.IndexOf(".pdf") == 0)
+                        {
+                            rFile.FileIsPrimary = "Y";
+                        }
+                    }
+                    else if (fileExtn == ".xhtml")
+                    {
+                        rFile.FileDescription = Path.GetFileNameWithoutExtension(file) + " XHTML file";
+                        rFile.FileRelationship = "source";
+                    }
+                    else if (fileExtn == ".css")
+                    {
+                        rFile.FileDescription = Path.GetFileNameWithoutExtension(file) + " stylesheet";
+                        rFile.FileRelationship = "source";
+                    }
+                    AddFile(rFile);
+                }
+            }
+            Status = "ready";
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="folderPath"></param>
-        /// <param name="filePattern"></param>
         private void CreateRampJSON(string folderPath)
         {
             string metcFileName = Path.Combine(folderPath, "temp.json");
@@ -414,29 +613,29 @@ namespace SIL.PublishingSolution
             CreateRampTitle(json);
             CreateRampBroadType(json);
             CreateRampTypeMode(json);
-            CreateRampFormatMedium(json);
-            CreateRampDescStage(json);
-            CreateRampVersionType(json);
+            //CreateRampFormatMedium(json);
+            //CreateRampDescStage(json);
+            //CreateRampVersionType(json);
             CreateRampTypeScholarlyWork(json);
             CreateRampSubjectLanguage(json);
-            CreateRampCoverageSpacialRegionHas(json);
-            CreateRampCoverageSpacialCountry(json);
+            //CreateRampCoverageSpacialRegionHas(json);
+            //CreateRampCoverageSpacialCountry(json);
             CreateRampSubjectLanguageHas(json);
             CreateRampLanguageIso(json);
-            CreateRampLanguageScript(json);
+            //CreateRampLanguageScript(json);
             CreateRampContributor(json);
-            CreateRampFormatExtentText(json);
-            CreateRampFormatExtentImages(json);
-            CreateRampDescSponsership(json);
-            CreateRampDescTableofContentsHas(json);
+            //CreateRampFormatExtentText(json);
+            //CreateRampFormatExtentImages(json);
+            //CreateRampDescSponsership(json);
+            //CreateRampDescTableofContentsHas(json);
             CreateRampSilDomain(json);
             CreateRampDomainSubTypeLing(json);
             CreateRampSubject(json);
-            CreateRampRelRequiresHas(json);
-            CreateRampRelRequires(json);
+            //CreateRampRelRequiresHas(json);
+            //CreateRampRelRequires(json);
             CreateRampRelConformsto(json);
             CreateRampRightsHolder(json);
-            CreateRampRights(json);
+            //CreateRampRights(json);
             CreateRampSilSensitivityMetaData(json);
             CreateRampSilSensitivityPresentation(json);
             CreateRampSilSensitivitySource(json);
@@ -919,7 +1118,7 @@ namespace SIL.PublishingSolution
         /// 
         /// </summary>
         /// <returns></returns>
-        private string GetLicenseFileName()
+        public string GetLicenseFileName()
         {
             string licFileName = String.Empty;
             string licenseFileName = Path.GetFileName(Param.CopyrightPageFilename);
@@ -938,14 +1137,12 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="xhtmlFileName"></param>
         /// <returns></returns>
-        private string GetImageCount(string xhtmlFileName)
+        public string GetImageCount(string xhtmlFileName)
         {
             string imageCount = "0";
             XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xmlDocument.Load(xhtmlFileName);
-            XmlNodeList nodes = xmlDocument.SelectNodes("//xhtml:/img", namespaceManager);
+            XmlNodeList nodes = xmlDocument.SelectNodes("//img");
             if (nodes.Count > 0)
             {
                 imageCount = nodes.Count.ToString();
@@ -958,16 +1155,14 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="rampName"></param>
-        /// <param name="folderPath"> </param>
-        private void CompressToRamp(string rampName, string folderPath)
+        private void CompressToRamp()
         {
             List<string> filesCollection = new List<string>();
-            filesCollection.AddRange(Directory.GetFiles(folderPath));
-            
-            using (ZipFile zipFile = ZipFile.Create(rampName + ".ramp"))
+            filesCollection.AddRange(Directory.GetFiles(Path.GetDirectoryName(_folderPath)));
+
+            using (ZipFile zipFile = ZipFile.Create(Common.PathCombine(Path.GetDirectoryName(_folderPath), Param.GetMetadataValue(Param.Title)) + ".ramp"))
             {
-                zipFile.NameTransform = new ZipNameTransform(folderPath);
+                zipFile.NameTransform = new ZipNameTransform(Path.GetDirectoryName(_folderPath));
                 zipFile.BeginUpdate();
                 foreach (string file in filesCollection)
                 {
@@ -976,13 +1171,14 @@ namespace SIL.PublishingSolution
                 zipFile.CommitUpdate();
             }
 
-            CleanUpFolder(filesCollection, ".odt,.odm");
+            CleanUpFolder(filesCollection);
         }
 
-        private void CleanUpFolder(List<string> files, string pattern)
+        private void CleanUpFolder(List<string> files)
         {
+            
             List<string> validExtension = new List<string>();
-            validExtension.AddRange(pattern.Split(','));
+            validExtension.AddRange(_outputExtension.Split(','));
             foreach (var file in files)
             {
                 string ext = Path.GetExtension(file);
@@ -999,9 +1195,8 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="folderPath"></param>
         /// <param name="encodedKey"></param>
-        private void UpdateMetsXML(string folderPath, string encodedKey)
+        private void UpdateMetsXML(string encodedKey)
         {
             string fileGroup = CreateFileGroup();
             string structMap = CreateStructMap();
@@ -1010,7 +1205,7 @@ namespace SIL.PublishingSolution
             string xmlSettings = Path.Combine(Path.GetDirectoryName(Param.SettingPath), "mets.xml");
             if (File.Exists(xmlSettings))
             {
-                string xmlFileNewPath = Path.Combine(folderPath, Path.GetFileName(xmlSettings));
+                string xmlFileNewPath = Path.Combine(Path.GetDirectoryName(_folderPath), Path.GetFileName(xmlSettings));
                 if (File.Exists(xmlFileNewPath))
                 {
                     File.Delete(xmlFileNewPath);

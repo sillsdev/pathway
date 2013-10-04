@@ -47,7 +47,10 @@ namespace SIL.PublishingSolution
             foreach (KeyValuePair<string, string> data in inputType)
             {
 
-                SetPath(appPath, data);
+                if (!SetPath(appPath, data))
+                {
+                    continue;
+                }
 
                 if (!OpenFile())
                 {
@@ -82,12 +85,12 @@ namespace SIL.PublishingSolution
                 const string settingFile = "StyleSettings.xsd";
                 string userPath = Common.GetAllUserAppPath();
                 File.Copy(Common.PathCombine(Path.GetDirectoryName(appPath), settingFile),
-                          Common.PathCombine(Path.GetDirectoryName(userPath), settingFile), true);
+                          Common.PathCombine(Path.GetDirectoryName(_userFilePath), settingFile), true);
             }
 
         }
 
-        private void SetPath(string appPath, KeyValuePair<string, string> data)
+        private bool SetPath(string appPath, KeyValuePair<string, string> data)
         {
             string filePath;
             string appFilePath;
@@ -116,13 +119,22 @@ namespace SIL.PublishingSolution
 
                 _pathwayFilePath = Path.Combine(Path.GetDirectoryName(appPath), data.Value);
                 _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
+                string pathwayFolder = Common.PathCombine(Common.GetAllUserAppPath(),"SIL/Pathway");
+                if (!Directory.Exists(pathwayFolder))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
+                }
+                if (!Directory.Exists(Path.GetDirectoryName(_userFilePath)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
+                }
+                
                 filePath = _userFilePath;
+
                 if (!File.Exists(_userFilePath))
                 {
-                    //Commented for TD-3654, Because Scripture folder not created in Linux("/home/linux/.local/share/SIL/Pathway/Scripture/ScriptureStyleSettings.xml")
-                    //Once confirm Scripture there in above path, comment should be removed
-                    //File.Copy(_pathwayFilePath, _userFilePath, true);
-                    return;
+                    File.Copy(_pathwayFilePath, _userFilePath, true);
+                    return false;
                 }
                 _userFilePath = _userFilePath.Replace(".xml", "Temp.xml");
                 //_userFilePath = _userFilePath.Replace(".", "Temp.");
@@ -130,6 +142,7 @@ namespace SIL.PublishingSolution
                 File.Copy(_pathwayFilePath, filePath, true);
                 _pathwayFilePath = filePath;
             }
+            return true;
         }
 
         private void CopyOrganization(string xPath)

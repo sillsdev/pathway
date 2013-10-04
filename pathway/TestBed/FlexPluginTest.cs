@@ -48,7 +48,7 @@ namespace TestBed
         private static string designerPath = "c:/AccessName/";
         private static List<string> fileNames = new List<string>();
         private static string sourceFolder = "c:\\temp";
-
+        private Progress pb;
 
         public FlexPluginTest()
         {
@@ -1258,9 +1258,9 @@ namespace TestBed
 
             var folderPath = Path.GetDirectoryName(txtInputPath.Text);
 
-            Ramp ramp = new Ramp();
-            SetRampData(ramp);
-            ramp.Create(Path.Combine(folderPath, "MyTest"), folderPath);
+            //Ramp ramp = new Ramp();
+            //SetRampData(ramp);
+            //ramp.Create(Path.Combine(folderPath, "MyTest"), folderPath);
 
             MessageBox.Show("Done");
         }
@@ -1354,6 +1354,17 @@ namespace TestBed
 
             ramp.Status = "ready";
 
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            pb = new Progress();
+            pb.Show();
+        }
+
+        private void FlexPluginTest_Click(object sender, EventArgs e)
+        {
+            pb.Close();
         }
     }
 }
