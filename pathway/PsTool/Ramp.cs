@@ -571,12 +571,12 @@ namespace SIL.PublishingSolution
                         rFile.FileIsPrimary = "Y";
                         rFile.FileSilPublic = "Y";
                     }
-                    else if (fileExtn == ".odt" || fileExtn == ".pdf" || fileExtn == ".jad")
+                    else if (fileExtn == ".odt" || fileExtn == ".pdf" || fileExtn == ".jad" || fileExtn == ".nt")
                     {
                         rFile.FileDescription =  Path.GetFileNameWithoutExtension(file) + " " + fileExtn.Replace(".", "") + " document";
                         rFile.FileRelationship = "presentation";
                         rFile.FileSilPublic = "Y";
-                        if (_outputExtension.IndexOf(".odt") == 0 || _outputExtension.IndexOf(".pdf") == 0)
+                        if (_outputExtension.IndexOf(".odt") == 0 || _outputExtension.IndexOf(".pdf") == 0 || fileExtn == ".nt")
                         {
                             rFile.FileIsPrimary = "Y";
                         }
