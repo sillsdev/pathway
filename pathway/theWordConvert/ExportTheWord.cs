@@ -153,7 +153,7 @@ namespace SIL.PublishingSolution
         private void CreateRAMP(PublicationInformation projInfo)
         {
             Ramp ramp = new Ramp();
-            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".mybible");
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".mybible,.nt");
         }
 
         private static void ReportFailure(Exception ex)
