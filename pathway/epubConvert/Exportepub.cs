@@ -533,10 +533,14 @@ namespace SIL.PublishingSolution
                 }
 
                 inProcess.PerformStep();
-
+                
                 // Done adding content - now zip the whole thing up and name it
                 inProcess.SetStatus("Cleaning up");
-                string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                string fileName = Title.ToString();
+                if (Title.ToString() == string.Empty || Title == null)
+                {
+                    fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                }
                 Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
 #if (TIME_IT)
                 TimeSpan tsTotal = DateTime.Now - dt1;
