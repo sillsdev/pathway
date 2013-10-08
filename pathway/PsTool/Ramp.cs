@@ -1160,6 +1160,10 @@ namespace SIL.PublishingSolution
             List<string> filesCollection = new List<string>();
             filesCollection.AddRange(Directory.GetFiles(Path.GetDirectoryName(_folderPath)));
 
+            List<string> dirCollection = new List<string>();
+            dirCollection.Add(Path.Combine(Path.GetDirectoryName(_folderPath),"USX"));
+            dirCollection.Add(Path.Combine(Path.GetDirectoryName(_folderPath),"SFM"));
+
             using (ZipFile zipFile = ZipFile.Create(Common.PathCombine(Path.GetDirectoryName(_folderPath), Param.GetMetadataValue(Param.Title)) + ".ramp"))
             {
                 zipFile.NameTransform = new ZipNameTransform(Path.GetDirectoryName(_folderPath));
@@ -1168,17 +1172,28 @@ namespace SIL.PublishingSolution
                 {
                     zipFile.Add(file, CompressionMethod.Stored);
                 }
+
+                foreach (var dirPath in dirCollection)
+                {
+                    if (Directory.Exists(dirPath))
+                    {
+                        zipFile.AddDirectory(dirPath);
+                    }
+                }
                 zipFile.CommitUpdate();
             }
-
-            CleanUpFolder(filesCollection);
+            CleanUpFolder(filesCollection, Path.GetDirectoryName(_folderPath));
         }
 
-        private void CleanUpFolder(List<string> files)
+        private void CleanUpFolder(List<string> files, string folderPath)
         {
-            
             List<string> validExtension = new List<string>();
+            DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
+
             validExtension.AddRange(_outputExtension.Split(','));
+            if(validExtension.Count == 1 && validExtension.Contains(".pdf"))
+                return;
+
             foreach (var file in files)
             {
                 string ext = Path.GetExtension(file);
@@ -1187,6 +1202,11 @@ namespace SIL.PublishingSolution
                 {
                     File.Delete(file);
                 }
+            }
+
+            foreach (DirectoryInfo subfolder in directoryInfo.GetDirectories())
+            {
+                subfolder.Delete(true);
             }
 
         }
