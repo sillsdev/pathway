@@ -12,6 +12,7 @@
 // ---------------------------------------------------------------------------------------------
 using System.Text.RegularExpressions;
 using System.Xml;
+using SIL.Tool;
 
 namespace RevHomographNum
 {
@@ -39,7 +40,9 @@ namespace RevHomographNum
         {
             if (!_insertHomographClass && !_insertSenseNumClass)
                 return;
-            var xmlDoc = new XmlDocument { XmlResolver = null };
+
+            var xmlDoc = new XmlDocument();
+            xmlDoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             var nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
             const string xhtmlns = "http://www.w3.org/1999/xhtml";
             nsmgr.AddNamespace("x", xhtmlns);

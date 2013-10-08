@@ -183,6 +183,7 @@ namespace SIL.PublishingSolution
         public bool IsMirrorPage;
         public string _ChapterNo = "1";
         public bool IsFirstEntry;
+        private bool isPageBreak;
 
         public LOContent()
         {
@@ -842,6 +843,21 @@ namespace SIL.PublishingSolution
         private void Write()
         {
 
+            //if (_reader.Value == "Filemón")
+            //{
+            //    //string content = _strBook + " 1";
+            //    string content = "Filemón 1";
+            //    _writer.WriteStartElement("text:p");
+            //    _writer.WriteStartElement("text:variable-set");
+            //    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+            //    _writer.WriteAttributeString("text:display", "none");
+            //    _writer.WriteAttributeString("text:formula", "ooow:" + content);
+            //    _writer.WriteAttributeString("office:value-type", "string");
+            //    _writer.WriteAttributeString("office:string-value", content);
+            //    _writer.WriteEndElement();
+            //    _writer.WriteEndElement();
+            //}
+
             if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && !_projInfo.IsODM && _childName.ToLower() == "hidediv_dicbody" && !_projInfo.IsFrontMatterEnabled)
             {
                 return;
@@ -919,8 +935,20 @@ namespace SIL.PublishingSolution
 
 
                     // Note: Paragraph Start Element
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
+                   
+
+
+                        _writer.WriteStartElement("text:p");
+                        _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
+                        isPageBreak = false;
+                        if (_paragraphName.IndexOf("bookPageBreak_") == 0)
+                        {
+                            isPageBreak = true;
+                        }
+
+                    //                <text:variable-set text:name="Left_Guideword_L"
+                    //text:display="none" text:formula="ooow:Filemón 1" office:value-type="string"
+                    //office:string-value="Filemón 1"/>
 
                     if (_imageInserted)
                         _imageParaForCaption = true;
@@ -958,6 +986,8 @@ namespace SIL.PublishingSolution
                 return;
             }
             content = InsertSpaceInTextforMacro(content); //TD-2034
+            InsertBookNameBeforeBookIntroduction(content);
+
             //TD-2448
             //if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             //{
@@ -1809,6 +1839,7 @@ namespace SIL.PublishingSolution
 
         private void EndElement()
         {
+            if (isPageBreak) return;
             if (_reader.Name == "a" && _anchorWrite)
             {
                 _anchorWrite = false;
@@ -3236,10 +3267,10 @@ namespace SIL.PublishingSolution
             //return;
             if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && !_projInfo.IsODM)
             {
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", "P4");
-                    _writer.WriteEndElement();
-               
+                _writer.WriteStartElement("text:p");
+                _writer.WriteAttributeString("text:style-name", "P4");
+                _writer.WriteEndElement();
+
                 //firstRevHeadWord = ReadXHTMLFirstData(_projInfo.DefaultXhtmlFileWithPath);
                 //if (firstRevHeadWord.Trim().Length > 0)
                 //{
@@ -3527,9 +3558,30 @@ namespace SIL.PublishingSolution
                 LanguageFontCheck(content, "headerFontStyleName");
             }
         }
+
+        private void InsertBookNameBeforeBookIntroduction(string content)
+        {
+            if (_classNameWithLang.IndexOf("scrBookName") == 0)// == "scrBook_scrBody"
+            {
+                content += "1";
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                _writer.WriteStartElement("text:variable-set");
+                _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                _writer.WriteAttributeString("text:display", "none");
+                _writer.WriteAttributeString("text:formula", "ooow:" + content);
+                _writer.WriteAttributeString("office:value-type", "string");
+                _writer.WriteAttributeString("office:string-value", content);
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+            }
+        }
+
         private void WriteGuidewordValueToVariable(string content)
         {
             bool fillHeadword = false;
+
             if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 //if (content == "inde")

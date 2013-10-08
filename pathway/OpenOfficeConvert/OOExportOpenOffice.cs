@@ -662,9 +662,13 @@ namespace SIL.PublishingSolution
             {
                 //Common.CreateLicenseFileForRunningPdfApplyCopyright(Path.GetDirectoryName(publicationInfo.DefaultXhtmlFileWithPath));
                 Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice");
+                publicationInfo.OutputExtension = "pdf";
             }
-
-            Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout", string.Empty);
+            else
+            {
+                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.jar,.xml", "layout", string.Empty);
+                CreateRAMP();
+            }
             return returnValue;
         }
 
@@ -883,6 +887,21 @@ namespace SIL.PublishingSolution
                 }
             }
             return returnValue;
+        }
+
+        private void CreateRAMP()
+        {
+            string outputExtn = ".odt";
+            if (publicationInfo.OutputExtension == "odm")
+            {
+                outputExtn = ".odm," + outputExtn;
+            }
+            else if (publicationInfo.OutputExtension == "pdf")
+            {
+                outputExtn = ".pdf";
+            }
+            Ramp ramp = new Ramp();
+            ramp.Create(publicationInfo.DefaultXhtmlFileWithPath, outputExtn);
         }
 
         private void HandledInCss(ref PublicationInformation projInfo, ref Dictionary<string, Dictionary<string, string>> cssClass)

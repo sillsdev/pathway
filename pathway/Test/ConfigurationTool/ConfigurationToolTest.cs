@@ -72,7 +72,8 @@ namespace Test.UIConfigurationToolTest
             string toFileName = Common.PathCombine(_inputBasePath, fileName);
             File.Copy(fromFileName, toFileName, true);
             toFileName = Common.PathCombine(_outputBasePath, fileName);
-            File.Copy(fromFileName, toFileName, true);
+            if (Directory.Exists(_outputBasePath))
+                File.Copy(fromFileName, toFileName, true);
         }
 
         private void CopyFolderSupportToIO(string fileName)
@@ -567,6 +568,24 @@ namespace Test.UIConfigurationToolTest
             //Assert.IsNotNullOrEmpty(userInfo.FrameworkVersion);
             //Assert.IsNotNullOrEmpty(userInfo.GeoLocation);
         }
+
+        [Ignore]
+        [Test] 
+        public void MergeStyleSetting()
+        {
+            Common.Testing = true;
+            SettingsVersionControl settingsVersion = new SettingsVersionControl();
+            settingsVersion.UpdateSettingsFile(string.Empty);
+
+            string expectedFileWithPath = Common.PathCombine(_expectBasePath, "DictionaryStyleSettings.xml");
+            string outputFileWithPath = Common.PathCombine(_outputBasePath, "DictionaryStyleSettings.xml");
+            TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "Dictionary Setting file fails");
+
+            expectedFileWithPath = Common.PathCombine(_expectBasePath, "ScriptureStyleSettings.xml");
+            outputFileWithPath = Common.PathCombine(_outputBasePath, "ScriptureStyleSettings.xml");
+            TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "Scripture Setting file fails");
+        }
+
 
         #endregion
 

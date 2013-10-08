@@ -69,6 +69,7 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             bool success = false;
+            projInfo.OutputExtension = "jar";
             if (projInfo == null || string.IsNullOrEmpty(projInfo.DefaultXhtmlFileWithPath) ||
                 string.IsNullOrEmpty(projInfo.DefaultCssFileWithPath))
             {
@@ -121,7 +122,35 @@ namespace SIL.PublishingSolution
             Environment.CurrentDirectory = curdir;
             Cursor.Current = myCursor;
             Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.jar,.zip,.bat,.de", string.Empty, "Empty_Jar-Jad,dictionary");
+            if (Common.Testing == false)
+            {
+                MoveJarFile(projInfo);
+                CreateRAMP(projInfo);
+            }
             return success;
+        }
+
+        private void MoveJarFile(PublicationInformation projInfo)
+        {
+            var folder = Directory.GetDirectories(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "DfM_*");
+            if (folder.Length == 0) {
+                return;
+            }
+            for (int i = 0; i < folder.Length; i++)
+            {
+                var file = Directory.GetFiles(folder[i]);
+                foreach (var s1 in file)
+                {
+                    File.Move(s1, Path.Combine(Path.GetDirectoryName(folder[i]), Path.GetFileName(s1)));
+                }
+                Directory.Delete(folder[i]);
+            }
+        }
+
+        private void CreateRAMP(PublicationInformation projInfo)
+        {
+            Ramp ramp = new Ramp();
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".jad,.jar");
         }
 
         protected void LoadCss(PublicationInformation projInfo)

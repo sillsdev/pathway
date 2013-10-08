@@ -150,6 +150,7 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             //projInfo.IsReversalExist = true;
+            //projInfo.OutputExtension = "pdf";
             var fixPlayorderStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.fixPlayorder.xsl");
             Debug.Assert(fixPlayorderStream != null);
             _fixPlayOrder.Load(XmlReader.Create(fixPlayorderStream));
@@ -532,10 +533,14 @@ namespace SIL.PublishingSolution
                 }
 
                 inProcess.PerformStep();
-
+                
                 // Done adding content - now zip the whole thing up and name it
                 inProcess.SetStatus("Cleaning up");
-                string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                string fileName = Title.ToString();
+                if (Title.ToString() == string.Empty || Title == null)
+                {
+                    fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                }
                 Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
 #if (TIME_IT)
                 TimeSpan tsTotal = DateTime.Now - dt1;
@@ -596,8 +601,15 @@ namespace SIL.PublishingSolution
                     }
                 }
                 Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1", string.Empty);
+                CreateRAMP(projInfo);
             }
             return success;
+        }
+
+        private void CreateRAMP(PublicationInformation projInfo)
+        {
+            Ramp ramp = new Ramp();
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".epub");
         }
 
         protected void SplitPageSections(List<string> htmlFiles, string contentFolder, string tocFiletoUpdate)

@@ -473,6 +473,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InProcess.resx">
       <DependentUpon>InProcess.cs</DependentUpon>

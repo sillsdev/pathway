@@ -27,146 +27,217 @@ namespace SIL.PublishingSolution
     /// </summary>
     public class Json
     {
-        public void XmlToJSON(string xml, string outputFile)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(xml);
+        private StringBuilder sbJSON;
+        private StreamWriter writer;
 
-            XmlToJSON(doc, outputFile);
+        private string _outputFile;
+        private int _tagcount = 0;
+
+        public void Create(string outputFile)
+        {
+            _outputFile = outputFile;
+            sbJSON = new StringBuilder();
         }
-        public void XmlToJSON(XmlDocument xmlDoc, string outputFile)
-        {
-            StringBuilder sbJSON = new StringBuilder();
-            sbJSON.Append("{ ");
-            XmlToJSONnode(sbJSON, xmlDoc.DocumentElement, true);
-            sbJSON.Append("}");
 
-            using (StreamWriter writer = new StreamWriter(outputFile, true))
+        public void Close()
+        {
+            using (StreamWriter writer = new StreamWriter(_outputFile, true))
             {
                 writer.Write(sbJSON.ToString());
             }
         }
 
-        //  XmlToJSONnode:  Output an XmlElement, possibly as part of a higher array
-        private void XmlToJSONnode(StringBuilder sbJSON, XmlElement node, bool showNodeName)
+        public void StartTag()
         {
-            if (showNodeName)
-                sbJSON.Append("\"" + SafeJSON(node.Name) + "\": ");
             sbJSON.Append("{");
-            // Build a sorted list of key-value pairs
-            //  where   key is case-sensitive nodeName
-            //          value is an ArrayList of string or XmlElement
-            //  so that we know whether the nodeName is an array or not.
-            SortedList<string, object> childNodeNames = new SortedList<string, object>();
-
-            //  Add in all node attributes
-            if (node.Attributes != null)
-                foreach (XmlAttribute attr in node.Attributes)
-                    StoreChildNode(childNodeNames, attr.Name, attr.InnerText);
-
-            //  Add in all nodes
-            foreach (XmlNode cnode in node.ChildNodes)
-            {
-                if (cnode is XmlText)
-                    StoreChildNode(childNodeNames, "value", cnode.InnerText);
-                else if (cnode is XmlElement)
-                    StoreChildNode(childNodeNames, cnode.Name, cnode);
-            }
-
-            // Now output all stored info
-            foreach (string childname in childNodeNames.Keys)
-            {
-                List<object> alChild = (List<object>)childNodeNames[childname];
-                if (alChild.Count == 1)
-                    OutputNode(childname, alChild[0], sbJSON, true);
-                else
-                {
-                    sbJSON.Append(" \"" + SafeJSON(childname) + "\": [ ");
-                    foreach (object Child in alChild)
-                        OutputNode(childname, Child, sbJSON, false);
-                    sbJSON.Remove(sbJSON.Length - 2, 2);
-                    sbJSON.Append(" ], ");
-                }
-            }
-            sbJSON.Remove(sbJSON.Length - 2, 2);
-            sbJSON.Append(" }");
+            _tagcount++;
         }
 
-        //  StoreChildNode: Store data associated with each nodeName
-        //                  so that we know whether the nodeName is an array or not.
-        private void StoreChildNode(SortedList<string, object> childNodeNames, string nodeName, object nodeValue)
+        public void EndTag()
         {
-            // Pre-process contraction of XmlElement-s
-            if (nodeValue is XmlElement)
-            {
-                // Convert  <aa></aa> into "aa":null
-                //          <aa>xx</aa> into "aa":"xx"
-                XmlNode cnode = (XmlNode)nodeValue;
-                if (cnode.Attributes.Count == 0)
-                {
-                    XmlNodeList children = cnode.ChildNodes;
-                    if (children.Count == 0)
-                        nodeValue = null;
-                    else if (children.Count == 1 && (children[0] is XmlText))
-                        nodeValue = ((XmlText)(children[0])).InnerText;
-                }
-            }
-            // Add nodeValue to ArrayList associated with each nodeName
-            // If nodeName doesn't exist then add it
-            List<object> ValuesAL;
-
-            if (childNodeNames.ContainsKey(nodeName))
-            {
-                ValuesAL = (List<object>)childNodeNames[nodeName];
-            }
-            else
-            {
-                ValuesAL = new List<object>();
-                childNodeNames[nodeName] = ValuesAL;
-            }
-            ValuesAL.Add(nodeValue);
+            sbJSON.Append("}");
+            _tagcount--;
         }
 
-        private void OutputNode(string childname, object alChild, StringBuilder sbJSON, bool showNodeName)
+        public void WriteTag(string tag)
         {
-            if (alChild == null)
-            {
-                if (showNodeName)
-                    sbJSON.Append("\"" + SafeJSON(childname) + "\": ");
-                sbJSON.Append("null");
-            }
-            else if (alChild is string)
-            {
-                if (showNodeName)
-                    sbJSON.Append("\"" + SafeJSON(childname) + "\": ");
-                string sChild = (string)alChild;
-                sChild = sChild.Trim();
-                sbJSON.Append("\"" + SafeJSON(sChild) + "\"");
-            }
-            else
-                XmlToJSONnode(sbJSON, (XmlElement)alChild, showNodeName);
-            sbJSON.Append(", ");
+            sbJSON.Append("\"");
+            sbJSON.Append(tag);
+            sbJSON.Append("\":");
         }
 
-        // Make a string safe for JSON
-        private string SafeJSON(string sIn)
+        public void WriteText(string txt)
         {
-            StringBuilder sbOut = new StringBuilder(sIn.Length);
-            foreach (char ch in sIn)
+            sbJSON.Append("\"");
+            sbJSON.Append(txt);
+            sbJSON.Append("\"");
+            if (_tagcount == 1)
             {
-                if (Char.IsControl(ch) || ch == '\'')
-                {
-                    int ich = (int)ch;
-                    sbOut.Append(@"\u" + ich.ToString("x4"));
-                    continue;
-                }
-                else if (ch == '\"' || ch == '\\' || ch == '/')
-                {
-                    sbOut.Append('\\');
-                }
-                sbOut.Append(ch);
+                sbJSON.Append(",");
             }
-            return sbOut.ToString();
         }
+
+        public void WriteRaw(string txt)
+        {
+            sbJSON.Append(txt);
+            if (_tagcount == 1)
+            {
+                sbJSON.Append(",");
+            }
+        }
+
+        public void WriteTextNoComma(string txt)
+        {
+            sbJSON.Append("\"");
+            sbJSON.Append(txt);
+            sbJSON.Append("\"");
+        }
+
+        public void WriteComma()
+        {
+            sbJSON.Append(",");
+        }
+
+        //public void XmlToJSON(string xml, string outputFile)
+        //{
+        //    XmlDocument doc = new XmlDocument();
+        //    doc.Load(xml);
+
+        //    XmlToJSON(doc, outputFile);
+        //}
+        //public void XmlToJSON(XmlDocument xmlDoc, string outputFile)
+        //{
+        //    StringBuilder sbJSON = new StringBuilder();
+        //    sbJSON.Append("{ ");
+        //    XmlToJSONnode(sbJSON, xmlDoc.DocumentElement, true);
+        //    sbJSON.Append("}");
+
+        //    using (StreamWriter writer = new StreamWriter(outputFile, true))
+        //    {
+        //        writer.Write(sbJSON.ToString());
+        //    }
+        //}
+
+        ////  XmlToJSONnode:  Output an XmlElement, possibly as part of a higher array
+        //private void XmlToJSONnode(StringBuilder sbJSON, XmlElement node, bool showNodeName)
+        //{
+        //    if (showNodeName)
+        //        sbJSON.Append("\"" + SafeJSON(node.Name) + "\": ");
+        //    sbJSON.Append("{");
+        //    // Build a sorted list of key-value pairs
+        //    //  where   key is case-sensitive nodeName
+        //    //          value is an ArrayList of string or XmlElement
+        //    //  so that we know whether the nodeName is an array or not.
+        //    SortedList<string, object> childNodeNames = new SortedList<string, object>();
+
+        //    //  Add in all node attributes
+        //    if (node.Attributes != null)
+        //        foreach (XmlAttribute attr in node.Attributes)
+        //            StoreChildNode(childNodeNames, attr.Name, attr.InnerText);
+
+        //    //  Add in all nodes
+        //    foreach (XmlNode cnode in node.ChildNodes)
+        //    {
+        //        if (cnode is XmlText)
+        //            StoreChildNode(childNodeNames, "value", cnode.InnerText);
+        //        else if (cnode is XmlElement)
+        //            StoreChildNode(childNodeNames, cnode.Name, cnode);
+        //    }
+
+        //    // Now output all stored info
+        //    foreach (string childname in childNodeNames.Keys)
+        //    {
+        //        List<object> alChild = (List<object>)childNodeNames[childname];
+        //        if (alChild.Count == 1)
+        //            OutputNode(childname, alChild[0], sbJSON, true);
+        //        else
+        //        {
+        //            sbJSON.Append(" \"" + SafeJSON(childname) + "\": [ ");
+        //            foreach (object Child in alChild)
+        //                OutputNode(childname, Child, sbJSON, false);
+        //            sbJSON.Remove(sbJSON.Length - 2, 2);
+        //            sbJSON.Append(" ], ");
+        //        }
+        //    }
+        //    sbJSON.Remove(sbJSON.Length - 2, 2);
+        //    sbJSON.Append(" }");
+        //}
+
+        ////  StoreChildNode: Store data associated with each nodeName
+        ////                  so that we know whether the nodeName is an array or not.
+        //private void StoreChildNode(SortedList<string, object> childNodeNames, string nodeName, object nodeValue)
+        //{
+        //    // Pre-process contraction of XmlElement-s
+        //    if (nodeValue is XmlElement)
+        //    {
+        //        // Convert  <aa></aa> into "aa":null
+        //        //          <aa>xx</aa> into "aa":"xx"
+        //        XmlNode cnode = (XmlNode)nodeValue;
+        //        if (cnode.Attributes.Count == 0)
+        //        {
+        //            XmlNodeList children = cnode.ChildNodes;
+        //            if (children.Count == 0)
+        //                nodeValue = null;
+        //            else if (children.Count == 1 && (children[0] is XmlText))
+        //                nodeValue = ((XmlText)(children[0])).InnerText;
+        //        }
+        //    }
+        //    // Add nodeValue to ArrayList associated with each nodeName
+        //    // If nodeName doesn't exist then add it
+        //    List<object> ValuesAL;
+
+        //    if (childNodeNames.ContainsKey(nodeName))
+        //    {
+        //        ValuesAL = (List<object>)childNodeNames[nodeName];
+        //    }
+        //    else
+        //    {
+        //        ValuesAL = new List<object>();
+        //        childNodeNames[nodeName] = ValuesAL;
+        //    }
+        //    ValuesAL.Add(nodeValue);
+        //}
+
+        //private void OutputNode(string childname, object alChild, StringBuilder sbJSON, bool showNodeName)
+        //{
+        //    if (alChild == null)
+        //    {
+        //        if (showNodeName)
+        //            sbJSON.Append("\"" + SafeJSON(childname) + "\": ");
+        //        sbJSON.Append("null");
+        //    }
+        //    else if (alChild is string)
+        //    {
+        //        if (showNodeName)
+        //            sbJSON.Append("\"" + SafeJSON(childname) + "\": ");
+        //        string sChild = (string)alChild;
+        //        sChild = sChild.Trim();
+        //        sbJSON.Append("\"" + SafeJSON(sChild) + "\"");
+        //    }
+        //    else
+        //        XmlToJSONnode(sbJSON, (XmlElement)alChild, showNodeName);
+        //    sbJSON.Append(", ");
+        //}
+
+        //// Make a string safe for JSON
+        //private string SafeJSON(string sIn)
+        //{
+        //    StringBuilder sbOut = new StringBuilder(sIn.Length);
+        //    foreach (char ch in sIn)
+        //    {
+        //        if (Char.IsControl(ch) || ch == '\'')
+        //        {
+        //            int ich = (int)ch;
+        //            sbOut.Append(@"\u" + ich.ToString("x4"));
+        //            continue;
+        //        }
+        //        else if (ch == '\"' || ch == '\\' || ch == '/')
+        //        {
+        //            sbOut.Append('\\');
+        //        }
+        //        sbOut.Append(ch);
+        //    }
+        //    return sbOut.ToString();
+        //}
     }
 }

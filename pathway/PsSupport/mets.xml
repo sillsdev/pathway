@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mets ID="sort-mets_mets" OBJID="sword-mets" LABEL="DSpace SWORD Item" PROFILE="DSpace SIL SIP Profile 1.0" xmlns="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/METS/ http://www.loc.gov/standards/mets/mets.xsd">
+  <metsHdr/>
+  <dmdSec ID="sword-mets-dmd-1" GROUPID="sword-mets-dmd-1_group-1">
+    <mdWrap LABEL="SWAP Metadata" MDTYPE="OTHER" OTHERMDTYPE="SIL" MIMETYPE="text/xml">
+      <xmlData>
+        <epdcx:descriptionSet xmlns:epdcx="http://purl.org/eprint/epdcx/2006-11-16/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://purl.org/eprint/epdcx/2006-11-16/ http://purl.org/eprint/epdcx/xsd/2006-11-16/epdcx.xsd">
+          <epdcx:description epdcx:resourceId="sword-mets-epdcx-1">
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/contributor/researcher">
+              <epdcx:valueString>Mark Penny</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/coverage/spatial">
+              <epdcx:valueString>IN:India</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/coverage/spatial">
+              <epdcx:valueString>Andhra Pradesh</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/description/sponsorship">
+              <epdcx:valueString>SIL International</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/description/stage">
+              <epdcx:valueString>rough_draft</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/format/extent">
+              <epdcx:valueString>8</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/format/extent">
+              <epdcx:valueString>2</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/format/medium">
+              <epdcx:valueString>Paper</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/format/medium">
+              <epdcx:valueString>Other</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/language/iso">
+              <epdcx:valueString>eng:English</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/language/iso">
+              <epdcx:valueString>tel:Telugu</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/language/iso">
+              <epdcx:valueString>hin:Hindi</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/language/script">
+              <epdcx:valueString>Latn:Latin</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/language/script">
+              <epdcx:valueString>Telu:Telugu</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/language/script">
+              <epdcx:valueString>Deva:Devanagari (Nagari)</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/relation/conformsto">
+              <epdcx:valueString>odf</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/relation/requires">
+              <epdcx:valueString>OFL</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/rights">
+              <epdcx:valueString>creative commons share alike</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/rightsHolder">
+              <epdcx:valueString>© 2013 SIL International®</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/subject" epdcx:valueURI="eng">
+              <epdcx:valueString>foreign languages and literature</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/subject" epdcx:valueURI="eng">
+              <epdcx:valueString> dictionary</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/subject" epdcx:valueURI="eng">
+              <epdcx:valueString> lexicon</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/subject/silDomain">
+              <epdcx:valueString>LING:Linguistics</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/subject/subjectLanguage">
+              <epdcx:valueString>gon:Gondi</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/title">
+              <epdcx:valueString>Gondwana/English/Telegu/Hindi</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/type/domainSubtype">
+              <epdcx:valueString>language documentation (LING)</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/type/mode">
+              <epdcx:valueString>Text</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/type/mode">
+              <epdcx:valueString>Photograph</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/type/mode">
+              <epdcx:valueString>Software application</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/dc/type/scholarlyWork">
+              <epdcx:valueString>Other</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/internal/metadata/defaultLang">
+              <epdcx:valueString>eng:English</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/internal/metadata/defaultLang">
+              <epdcx:valueString>tel:Telugu</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/internal/metadata/defaultLang">
+              <epdcx:valueString>hin:Hindi</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/sensitivity/metadata">
+              <epdcx:valueString>Public</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/sensitivity/presentation">
+              <epdcx:valueString>Public</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/sensitivity/source">
+              <epdcx:valueString>Insite users</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/note/entity">
+              <epdcx:valueString>presentation file: main.odm (description: Master document)</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/note/entity">
+              <epdcx:valueString>presentation file: main.odt (description: main)</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/note/entity">
+              <epdcx:valueString>presentation file: FlexRev.odt (description: English Reversal Index)</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/note/entity">
+              <epdcx:valueString>source file: main.xhtml (description: main)</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/note/entity">
+              <epdcx:valueString>source file: FlexRev.xhtml (description: English Reversal Index)</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/note/entity">
+              <epdcx:valueString>source file: 1468080898mergedmain.css (description: main stylesheet)</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/note/entity">
+              <epdcx:valueString>source file: 929437253mergedFlexRev.css (description: Reversal stylesheet)</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/website/silPublic">
+              <epdcx:valueString>main.odm</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/website/silPublic">
+              <epdcx:valueString>main.odt</epdcx:valueString>
+            </epdcx:statement>
+            <epdcx:statement epdcx:propertyURI="http://purl.org/net/sword-types/SIL/metadata/sil/website/silPublic">
+              <epdcx:valueString>FlexRev.odt</epdcx:valueString>
+            </epdcx:statement>
+          </epdcx:description>
+        </epdcx:descriptionSet>
+      </xmlData>
+    </mdWrap>
+  </dmdSec>
+  <dmdSec ID="ramp-mets-dmd-2" GROUPID="ramp-mets-dmd-2_group-1">
+    <mdWrap LABEL="RAMP Metadata" MDTYPE="OTHER" OTHERMDTYPE="SIL.RAMP" MIMETYPE="text/json">
+      <binData>abc1defg</binData>
+    </mdWrap>
+  </dmdSec>
+  <fileSec>
+    <fileGrp ID="sword-mets-fgrp-1" USE="CONTENT">
+      <file>ecgroupFileUpdate1</file>
+    </fileGrp>
+  </fileSec>
+  <structMap ID="sword-mets-struct-1" LABEL="structure" TYPE="LOGICAL">
+    <div ID="sword-mets-div-1" DMDID="sword-mets-dmd-1" TYPE="SWORD Object">
+      <div>ecgroupFileUpdate2</div>
+    </div>
+  </structMap>
+</mets>
