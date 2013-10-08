@@ -14,8 +14,10 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -66,8 +68,12 @@ namespace SIL.PublishingSolution
             preProcessor.InsertHiddenChapterNumber();
             preProcessor.InsertHiddenVerseNumber();
             preProcessor.GetDefinitionLanguage();
-
-            string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            var exportTitle = GetExportTitle();
+            string fileName = exportTitle.ToString();
+            if (exportTitle.ToString() == string.Empty)
+            {
+                fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            }
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
             projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
@@ -123,6 +129,23 @@ namespace SIL.PublishingSolution
 
             
             return true;
+        }
+
+        private static string GetExportTitle()
+        {
+            Param.LoadSettings();
+            string organization;
+            try
+            {
+                organization = Param.Value.ContainsKey("Organization") ? Param.Value["Organization"] : "SIL International";
+            }
+            catch (Exception)
+            {
+                organization = "SIL International";
+            }
+            string exportTitle = string.Empty;
+            exportTitle = Param.GetMetadataValue(Param.Title, organization);
+            return exportTitle;
         }
 
         private void CreateRAMP(PublicationInformation projInfo)
