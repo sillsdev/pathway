@@ -1191,8 +1191,6 @@ namespace SIL.PublishingSolution
             DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
 
             validExtension.AddRange(_outputExtension.Split(','));
-            if(validExtension.Count == 1 && validExtension.Contains(".pdf"))
-                return;
 
             foreach (var file in files)
             {
