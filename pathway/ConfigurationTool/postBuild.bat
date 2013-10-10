@@ -20,6 +20,8 @@ if "%1" == "Corporate7BTE" goto justgobible
 if "%1" == "CorporateSE" goto nogobible
 if "%1" == "Corporate7SE" goto nogobible
 xcopy %base2%\PdfConvert\%cfg2%\PdfConvert.* . /y
+xcopy %base2%\PdfLicense\%cfg2%\PdfLicense.* . /y
+xcopy %base2%\ApplyPdfLicenseInfo\%cfg2%\ApplyPdfLicenseInfo.* . /y
 xcopy %base2%\DictionaryForMIDsConvert\%cfg2%\DictionaryForMIDsConvert.* . /y
 xcopy %base2%\WordPressConvert\%cfg2%\WordPressConvert.* . /y
 xcopy %base2%\WordPressConvert\%cfg2%\MySql*.dll . /y

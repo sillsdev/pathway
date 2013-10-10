@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="15.0">
+<project version="15.1">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options/>
     </meta>
     <projectTree name="PathwayProjectFiles.xpr">
         <file name="../ApplyPDFLicenseInfo/ApplyPDFLicenseInfo.csproj"/>
+        <file name="../ApplyXslt/ApplyXslt.csproj"/>
         <file name="../BookletBuilder/BookletBuilder.csproj"/>
         <file name="BuildPathway.csproj"/>
         <file name="../BuildTasks/BuildTasks.csproj"/>
@@ -25,6 +26,7 @@
         <file name="../ParatextSupport/ParatextSupport.csproj"/>
         <file name="../PathwayB/PathwayB.csproj"/>
         <file name="../PdfConvert/PdfConvert.csproj"/>
+        <file name="../PdfLicense/PdfLicense.csproj"/>
         <file name="../PrincessConvert/PrincessConvert.csproj"/>
         <file name="../PsExport/PsExport.csproj"/>
         <file name="../PsTool/PsTool.csproj"/>

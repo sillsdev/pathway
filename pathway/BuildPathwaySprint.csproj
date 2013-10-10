@@ -293,8 +293,9 @@
   </Target>
   <ItemGroup>
     <TestOutput Include="**\TestFiles\output\**"/>
-    <PathwayProjects Include="ApplyPDFLicenseInfo;ApplyXslt;BookletBuilder;BuildPathway;BuildTasks;ConfigurationTool;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;epubValidator;GoBibleConvert;HelpImprove;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExe;TestBed;Test;theWordConvert;WordPressConvert;XeLaTexConvert;YouVersionConvert" />
-    <PathwayTests Include="ApplyXslt;Build;ConfigurationTool;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;GoBibleConvert;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;PathwayB;PsExport;PsTool;PublishingSolutionExeUi;theWordConvert;WordPressConvert;XeLatex;XhtmlExport"/>
+    <PathwayProjects Include="PdfLicense;ApplyPDFLicenseInfo;ApplyXslt;BookletBuilder;BuildPathway;BuildTasks;ConfigurationTool;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;epubValidator;GoBibleConvert;HelpImprove;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExe;TestBed;Test;theWordConvert;WordPressConvert;XeLaTexConvert;YouVersionConvert" />
+    <PathwayTests Include="PdfLicense;ApplyPDFLicenseInfo;ApplyXslt;Build;ConfigurationTool;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;GoBibleConvert;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;PathwayB;PsExport;PsTool;PublishingSolutionExeUi;theWordConvert;WordPressConvert;XeLatex;XhtmlExport"/>
+    <RampTests Include="PathwayB;epubConvert" />
   </ItemGroup>
   <Target Name="RemoveSprint">
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Sprint" Condition="Exists(Sprint)"/>
@@ -327,6 +328,7 @@
     <RemoveDir Directories="Test\%(PathwayTests.Identity)\TestFiles\output" Condition="Exists('Test\%(PathwayTests.Identity)\TestFiles\output')"/>
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Test\%(PathwayTests.Identity)\TestFiles\Output" Condition="Exists('Test\%(PathwayTests.Identity)\TestFiles\Output')"/>
     <RemoveDir Directories="Test\%(PathwayTests.Identity)\TestFiles\Output" Condition="Exists('Test\%(PathwayTests.Identity)\TestFiles\Output')"/>
+    <Delete Files="Test\%(RampTests.Identity)\TestFiles\Output.ramp" />
   </Target>
   <Target Name="Corporate7BTE">
     <Message Text="Status: $(Status)" Importance="high" />
