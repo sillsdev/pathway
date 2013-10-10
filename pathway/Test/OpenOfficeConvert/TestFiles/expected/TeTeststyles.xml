@@ -610,6 +610,46 @@
       </style:footer>
     </style:master-page>
     <style:master-page style:name="Dummy1_20_Page" style:display-name="Dummy1 Page" style:next-style-name="First_20_Page" style:page-layout-name="pm13" />
-    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3" />
+    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3">
+      <style:footer>
+        <text:p text:style-name="Footer">
+          <text:tab />
+          <text:page-number text:select-page="current">4</text:page-number>
+        </text:p>
+      </style:footer>
+    </style:master-page>
+    <style:master-page style:name="Left_20_Page" style:display-name="Left Page" style:page-layout-name="pm4" style:next-style-name="Right_20_Page">
+      <style:header>
+        <text:p text:style-name="Header">
+          <text:page-number text:select-page="current">4</text:page-number>
+          <text:tab />
+          <text:span text:style-name="MT1">
+            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+          </text:span>
+        </text:p>
+      </style:header>
+    </style:master-page>
+    <style:master-page style:name="Right_20_Page" style:display-name="Right Page" style:page-layout-name="pm5" style:next-style-name="Left_20_Page">
+      <style:footer>
+        <text:p text:style-name="Footer">
+          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="71.25pt" fo:min-width="135pt" draw:z-index="1">
+            <draw:text-box fo:min-height="14.14pt">
+              <text:p text:style-name="MP1">
+                <text:span text:style-name="MT1">
+                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
+                </text:span>
+              </text:p>
+            </draw:text-box>
+          </draw:frame>
+        </text:p>
+      </style:footer>
+      <style:header>
+        <text:p text:style-name="Header">
+          <text:tab />
+          <text:tab />
+          <text:page-number text:select-page="current">4</text:page-number>
+        </text:p>
+      </style:header>
+    </style:master-page>
   </office:master-styles>
 </office:document-styles>
