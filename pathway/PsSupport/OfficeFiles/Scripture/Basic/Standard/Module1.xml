@@ -132,7 +132,7 @@ On Error GoTo MyError:
 		If(mid(FilePath,1,5) = &quot;/home&quot;) Then
 		  	MyArray = Split(FilePath,&quot;/&quot;)
 		  	FileName =  MyArray(UBound(MyArray))
-			FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;ApplyPDFLicenseInfo.exe&quot;)
+			FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;PdfLicense.exe&quot;)
 			Shell(&quot;chmod a+x &quot; &amp; FilePathWithName, &quot;&quot;,1)
 			Shell(ConvertToURL(FilePathWithName), &quot;&quot;,1)
 			&apos;Shell(&quot;xdg-open &quot; + FilePathWithName)
@@ -140,7 +140,7 @@ On Error GoTo MyError:
 		Else
 		  	MyArray = Split(FilePath,&quot;\&quot;)
 		  	FileName =  MyArray(UBound(MyArray))
-			FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;ApplyPDFLicenseInfo.exe&quot;)
+			FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;PdfLicense.exe&quot;)
 			  			 
 			oSvc.execute(ConvertToURL(FilePathWithName), &quot;&quot;, 1)
 			
@@ -149,8 +149,8 @@ On Error GoTo MyError:
 	End If
 
 	&apos;msgbox(&quot;dispose&quot;)
-	wait 5000
-	CleanUp()
+	&apos;wait 5000
+	&apos;CleanUp()
 	oDoc.dispose()
 	&apos;msgbox(&quot;disposeEnd&quot;)
 	&apos;wait 5000 

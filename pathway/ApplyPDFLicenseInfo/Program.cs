@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
+using SIL.PublishingSolution;
+using SIL.Tool;
 
 namespace ApplyPDFLicenseInfo
 {
@@ -24,8 +26,10 @@ namespace ApplyPDFLicenseInfo
                 return;
             }
             string executePath = _readLicenseFilesBylines[0];
-            string workingDirectory = _readLicenseFilesBylines[1];
+            string workingDirectory = Path.GetDirectoryName(_readLicenseFilesBylines[1]);
+            string xhtmlFile = _readLicenseFilesBylines[1];
             string exportTitle = _readLicenseFilesBylines[2];
+            string creatorTool = _readLicenseFilesBylines[3];
             //Console.WriteLine(executePath);
             string pdfFileName = string.Empty;
             string[] pdfFiles = Directory.GetFiles(executePath + "\\", "*.pdf");
@@ -52,8 +56,21 @@ namespace ApplyPDFLicenseInfo
 
             if (File.Exists(pdfFileName) && File.Exists(exportTitle))
                 File.Delete(pdfFileName);
-            
+
+            if (creatorTool == "LibreOffice")
+            {
+                Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout", string.Empty);
+                CreateRAMP(xhtmlFile);
+            }
             //Thread.Sleep(500);
+        }
+
+        private static void CreateRAMP(string executePath)
+        {
+            string outputExtn = string.Empty;
+            outputExtn = ".pdf";
+            Ramp ramp = new Ramp();
+            ramp.Create(executePath, outputExtn);
         }
 
         private static string ProcessLicensePdf(string[] pdfFiles, string pdfFileName, string executePath)
@@ -144,13 +161,13 @@ namespace ApplyPDFLicenseInfo
             string fileLoc = Path.Combine(allUserPath, "License.txt");
             string executePath = string.Empty;
             int countRead = 0;
-            
+
             if (File.Exists(fileLoc))
             {
                 using (StreamReader reader = new StreamReader(fileLoc))
                 {
                     string line;
-                    
+
                     while ((line = reader.ReadLine()) != null)
                     {
                         _readLicenseFilesBylines.Add(line);
