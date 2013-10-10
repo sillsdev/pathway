@@ -661,8 +661,8 @@ namespace SIL.PublishingSolution
             if (publicationInfo.FinalOutput.ToLower() == "pdf")
             {
                 //Common.CreateLicenseFileForRunningPdfApplyCopyright(Path.GetDirectoryName(publicationInfo.DefaultXhtmlFileWithPath));
-                Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice");
                 publicationInfo.OutputExtension = "pdf";
+                Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice");
             }
             else
             {
