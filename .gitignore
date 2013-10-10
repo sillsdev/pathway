@@ -64,6 +64,8 @@ pathway/PathwayB/bin/*
 pathway/PathwayB/obj/*
 pathway/PdfConvert/bin/*
 pathway/PdfConvert/obj/*
+pathway/PdfLicense/bin/*
+pathway/PdfLicense/obj/*
 pathway/PrincessConvert/bin/*
 pathway/PrincessConvert/obj/*
 pathway/PsExport/bin/*
@@ -115,6 +117,7 @@ pathway/Test/InDesignConvert/TestFiles/output/*
 pathway/Test/LiftPrepare/TestFiles/output/*
 pathway/Test/OpenOfficeConvert/TestFiles/output/*
 pathway/Test/PathwayB/TestFiles/output/*
+pathway/Test/PathwayB/TestFiles/Output.ramp
 pathway/Test/PsExport/TestFiles/Output/*
 pathway/Test/PsTool/TestFiles/output/*
 pathway/Test/theWordConvert/TestFiles/output/*
@@ -122,6 +125,7 @@ pathway/Test/WordPressConvert/TestFiles/output/*
 pathway/Test/XeLatex/TestFiles/output/*
 pathway/Test/XhtmlExport/TestFiles/output/*
 pathway/Test/epubConvert/TestFiles/output/*
+pathway/Test/epubConvert/TestFiles/Output.ramp
 pathway/Test/ConfigurationTool/TestFiles/input/*
 pathway/Test/Files/*
 pathway/Test/PsTool/TestFiles/InputFiles/DestinationFolder/*
