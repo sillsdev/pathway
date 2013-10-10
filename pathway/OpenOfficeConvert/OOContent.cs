@@ -3574,7 +3574,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("office:string-value", content);
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
-                _writer.WriteEndElement();
             }
         }
 
