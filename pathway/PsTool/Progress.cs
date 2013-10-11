@@ -8,21 +8,21 @@ using System.Windows.Forms;
 
 namespace SIL.Tool
 {
+    // Simplified Progess.cs class replaced to ProgressBar.cs
     public partial class Progress : Form
     {
         public Progress()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
 
-                        Shown += new EventHandler(Form1_Shown);
+            Shown += new EventHandler(Form1_Shown);
 
             // To report progress from the background worker we need to set this property
             backgroundWorker1.WorkerReportsProgress = true;
             // This event will be raised on the worker thread when the worker starts
             backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
             // This event will be raised when we call ReportProgress
-            backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
+            //backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
 
             progressBar1.Style = ProgressBarStyle.Marquee;
             progressBar1.MarqueeAnimationSpeed = 30;
@@ -34,20 +34,14 @@ namespace SIL.Tool
             // Start the background worker
             backgroundWorker1.RunWorkerAsync();
         }
-        // On worker thread so do our thing!
-        void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            //for (int i = 0; i <= 100; i++)
-            //{
-            //    backgroundWorker1.ReportProgress(i);
-            //    System.Threading.Thread.Sleep(100);
-            //}
+            for (int i = 0; i <= 100; i++)
+            {
+                backgroundWorker1.ReportProgress(i);
+            }
         }
-        // Back on the 'UI' thread so we can update the progress bar
-        void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            // The progress percentage is a property of e
-            progressBar1.Value = e.ProgressPercentage;
-        }
+
     }
 }

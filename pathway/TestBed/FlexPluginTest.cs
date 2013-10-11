@@ -1364,7 +1364,10 @@ namespace TestBed
 
         private void FlexPluginTest_Click(object sender, EventArgs e)
         {
-            pb.Close();
+            if (pb != null)
+            {
+                pb.Close();
+            }
         }
     }
 }

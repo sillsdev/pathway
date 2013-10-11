@@ -35,6 +35,7 @@ namespace SIL.PublishingSolution
         private const bool _Wait = true;
         public bool _fromNUnit = false;
         private string _selectedCssFromTemplate = string.Empty;
+        private Progress pb;
 
         #region Properties
         /// <summary>Gets or sets Output format (ODT, PDF, INX, TeX, HTM, PDB, etc.)</summary>
@@ -70,6 +71,8 @@ namespace SIL.PublishingSolution
             try
 
             {
+                pb = new Progress();
+                //pb.Show();
                 //get xsltFile from ExportThroughPathway.cs
                 XsltPreProcess(outFullName);
 
@@ -167,6 +170,13 @@ namespace SIL.PublishingSolution
                 //var msg = new[] { ex.ToString() };
                 //LocDB.Message("defErrMsg", ex.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
                 return;
+            }
+            finally
+            {
+                if (pb != null)
+                {
+                    pb.Close();
+                }
             }
         }
 
@@ -483,9 +493,9 @@ namespace SIL.PublishingSolution
         {
             var projInfo = new PublicationInformation();
 
-            if (ProgressBar == null)
-                ProgressBar = new ProgressBar();
-            projInfo.ProgressBar = ProgressBar;
+            //if (ProgressBar == null)
+            //    ProgressBar = new ProgressBar();
+            //projInfo.ProgressBar = ProgressBar;
             projInfo.ProjectFileWithPath = _projectFile;
             projInfo.IsLexiconSectionExist = File.Exists(lexiconFull);
             //projInfo.IsReversalExist = File.Exists(revFull);
@@ -558,7 +568,7 @@ namespace SIL.PublishingSolution
         {
             Debug.Assert(mainXhtml.IndexOf(Path.DirectorySeparatorChar) < 0, mainXhtml + " should be just name");
             Debug.Assert(jobFileName.IndexOf(Path.DirectorySeparatorChar) < 0, jobFileName + " should be just name");
-            var pb = new ProgressBar();
+            //var pb = new ProgressBar();
             Common.ShowMessage = !Common.Testing;
 
             var projInfo = new PublicationInformation();
@@ -573,7 +583,7 @@ namespace SIL.PublishingSolution
                 projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outPath, mainXhtml);
                 string DictionaryName = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath));
                 projInfo.DictionaryOutputName = DictionaryName;
-                projInfo.ProgressBar = pb;
+                //projInfo.ProgressBar = pb;
                 projInfo.IsOpenOutput = !Common.Testing;
                 projInfo.ProjectName = Path.GetFileNameWithoutExtension(mainXhtml);
                 SetExtraProcessingValue(projInfo);
