@@ -23,6 +23,7 @@
 	<property name="LayoutSelected" value="C5 Cols ApplicationStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="Media" value="mobile" />
+	<property name="Organization" value="" />
   </settings>
   <defaultSettings>
     <property name="PrintVia" value="OpenOffice/LibreOffice" />
