@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections;
+using System.IO;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -29,14 +30,34 @@ namespace Test.CssDialog
         [TestFixtureSetUp]
         protected void SetUp()
         {
+            string pathwayDirectory = PathwayPath.GetPathwayDir();
+            string styleSettingFile = Path.Combine(pathwayDirectory, "StyleSettings.xml");
+            ValidateXMLVersion(styleSettingFile);
             Common.Testing = true;
             InputType = "Dictionary";
-            Common.ProgInstall = PathwayPath.GetPathwayDir();
+            Common.ProgInstall = pathwayDirectory;
             Param.LoadSettings();
             Param.SetValue(Param.InputType, InputType);
             Param.LoadSettings();
         }
         #endregion Setup
+
+        #region ValidateXMLVersion
+        private void ValidateXMLVersion(string filePath)
+        {
+            var versionControl = new SettingsVersionControl();
+            var Validator = new SettingsValidator();
+            if (File.Exists(filePath))
+            {
+                versionControl.UpdateSettingsFile(filePath);
+                bool isValid = Validator.ValidateSettingsFile(filePath, true);
+                if (!isValid)
+                {
+                    this.Close();
+                }
+            }
+        }
+        #endregion
 
         #region TearDown
         [TestFixtureTearDown]
