@@ -47,38 +47,45 @@ namespace SIL.PublishingSolution
             foreach (KeyValuePair<string, string> data in inputType)
             {
 
-                if (!SetPath(appPath, data))
+                if (CreateSettingsFile(appPath, data))
                 {
                     continue;
                 }
-
-                if (!OpenFile())
+                else
                 {
-                    continue;
-                }
+                    if (!SetPath(appPath, data))
+                    {
+                        continue;
+                    }
 
-                if (CompareVersion())
-                {
-                    continue;
-                }
+                    if (!OpenFile())
+                    {
+                        continue;
+                    }
 
-                CopyXmlAttribute("//stylePick/settings/property");
-                CopyXmlAttribute("//stylePick/defaultSettings/property");
+                    if (CompareVersion())
+                    {
+                        continue;
+                    }
 
-                CopyXmlNode("//styles/*/style[@type='Custom']", "//styles/");
+                    CopyXmlAttribute("//stylePick/settings/property");
+                    CopyXmlAttribute("//stylePick/defaultSettings/property");
 
-                CopyOrganization("//Organizations/Organization");
+                    CopyXmlNode("//styles/*/style[@type='Custom']", "//styles/");
 
-                CopyXmlMatadata("//Metadata/meta", "//Metadata/");
+                    CopyOrganization("//Organizations/Organization");
 
-                CloseFile();
+                    CopyXmlMatadata("//Metadata/meta", "//Metadata/");
 
-                if (!Common.Testing)
-                {
-                    File.Delete(_userFilePath);
+                    CloseFile();
+
+                    if (!Common.Testing)
+                    {
+                        File.Delete(_userFilePath);
+                    }
                 }
             }
-            
+
 
             if (!Common.Testing)
             {
@@ -90,36 +97,59 @@ namespace SIL.PublishingSolution
 
         }
 
+        private bool CreateSettingsFile(string appPath, KeyValuePair<string, string> data)
+        {
+            bool fileSettingFileCreated = false;
+            _pathwayFilePath = Path.Combine(Path.GetDirectoryName(appPath), data.Value);
+            _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
+            string pathwayFolder = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
+            pathwayFolder = Common.PathCombine(pathwayFolder, "Pathway");
+            if (!Directory.Exists(pathwayFolder))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
+            }
+            if (!Directory.Exists(Path.GetDirectoryName(_userFilePath)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
+            }
+            if (!File.Exists(_userFilePath))
+            {
+                File.Copy(_pathwayFilePath, _userFilePath, true);
+                fileSettingFileCreated = true;
+            }
+            return fileSettingFileCreated;
+        }
+
         private bool SetPath(string appPath, KeyValuePair<string, string> data)
         {
             string filePath;
             string appFilePath;
-            if (Common.Testing)
-            {
-                string testPath = Environment.CurrentDirectory;
-                testPath = Common.LeftString(testPath, "\\bin\\Debug");
-                string input = Common.PathCombine(testPath, "ConfigurationTool\\TestFiles\\input");
-                string output = Common.PathCombine(testPath, "ConfigurationTool\\TestFiles\\Output");
+            //if (Common.Testing)
+            //{
+            //    string testPath = Environment.CurrentDirectory;
+            //    testPath = Common.LeftString(testPath, "\\bin\\Debug");
+            //    string input = Common.PathCombine(testPath, "ConfigurationTool\\TestFiles\\input");
+            //    string output = Common.PathCombine(testPath, "ConfigurationTool\\TestFiles\\Output");
 
-                _userFilePath = Common.PathCombine(input, data.Value);
-                _pathwayFilePath = Path.Combine(output, data.Value);
-                File.Copy(_userFilePath, _pathwayFilePath, true);
+            //    _userFilePath = Common.PathCombine(input, data.Value);
+            //    _pathwayFilePath = Path.Combine(output, data.Value);
+            //    File.Copy(_userFilePath, _pathwayFilePath, true);
 
-                filePath = _pathwayFilePath;
+            //    filePath = _pathwayFilePath;
 
-                _userFilePath = _userFilePath.Replace(".", "Temp.");
-                _pathwayFilePath = _pathwayFilePath.Replace(".", "Temp.");
-                File.Copy(_userFilePath, _pathwayFilePath, true);
+            //    _userFilePath = _userFilePath.Replace(".", "Temp.");
+            //    _pathwayFilePath = _pathwayFilePath.Replace(".", "Temp.");
+            //    File.Copy(_userFilePath, _pathwayFilePath, true);
 
-                _pathwayFilePath = filePath;
-                // in - op
-            }
-            else
-            {
-
+            //    _pathwayFilePath = filePath;
+            //    // in - op
+            //}
+            //else
+            //{
                 _pathwayFilePath = Path.Combine(Path.GetDirectoryName(appPath), data.Value);
                 _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
-                string pathwayFolder = Common.PathCombine(Common.GetAllUserAppPath(),"SIL/Pathway");
+                string pathwayFolder = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
+                pathwayFolder = Common.PathCombine(pathwayFolder, "Pathway");
                 if (!Directory.Exists(pathwayFolder))
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
@@ -128,20 +158,7 @@ namespace SIL.PublishingSolution
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
                 }
-                
-                filePath = _userFilePath;
-
-                if (!File.Exists(_userFilePath))
-                {
-                    File.Copy(_pathwayFilePath, _userFilePath, true);
-                    return false;
-                }
-                _userFilePath = _userFilePath.Replace(".xml", "Temp.xml");
-                //_userFilePath = _userFilePath.Replace(".", "Temp.");
-                File.Copy(filePath, _userFilePath, true);
-                File.Copy(_pathwayFilePath, filePath, true);
-                _pathwayFilePath = filePath;
-            }
+            //}
             return true;
         }
 
@@ -242,6 +259,13 @@ namespace SIL.PublishingSolution
             }
             else
             {
+                string filePath;
+                filePath = _userFilePath;
+                _userFilePath = _userFilePath.Replace(".xml", "Temp.xml");
+                File.Copy(filePath, _userFilePath, true);
+                File.Copy(_pathwayFilePath, filePath, true);
+                _pathwayFilePath = filePath;
+
                 return false;
             }
         }
