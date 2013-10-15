@@ -58,6 +58,18 @@ namespace SIL.Tool
         }
 
         /// <summary>
+        /// Override - returns 
+        /// </summary>
+        /// <returns>the path and filename to the currently selected language descrptions settings</returns>
+        public string GetLanguageFilename()
+        {
+            var ssf = GetSettingsFilename(Database);
+            var languageFileName = Common.GetXmlNode(ssf, "//Language").InnerText + ".lds";
+            var folder = Path.GetDirectoryName(ssf);
+            return Path.Combine(folder, languageFileName);
+        }
+
+        /// <summary>
         /// Override - returns the path and filename to the currently selected database name
         /// </summary>
         /// <returns></returns>
