@@ -321,7 +321,8 @@ namespace SIL.PublishingSolution
 	    private static void WriteLanguageFontDirection(TextWriter cssFile)
 	    {
 	        var settingsHelper = new SettingsHelper(Param.DatabaseName);
-	        var languageCodeNode = Common.GetXmlNode(settingsHelper.GetSettingsFilename(), "//EthnologueCode");
+	        var settingsFile = settingsHelper.GetSettingsFilename();
+	        var languageCodeNode = Common.GetXmlNode(settingsFile, "//EthnologueCode");
 	        var languageCode = "";
 	        var languageDirection = "ltr";
 	        var textAlign = "left";
@@ -338,12 +339,18 @@ namespace SIL.PublishingSolution
                     textAlign = "right";
                 }
             }
-	        var fontNode = Common.GetXmlNode(settingsHelper.GetSettingsFilename(), "//DefaultFont");
+	        var fontNode = Common.GetXmlNode(settingsFile, "//DefaultFont");
 	        var fontFamily = "";
 	        if (fontNode != null)
 	        {
 	            fontFamily = fontNode.InnerText;
 	        }
+	        var fontSizeNode = Common.GetXmlNode(settingsFile, "//DefaultFontSize");
+	        var fontSize = "10";
+            if (fontSizeNode != null)
+            {
+                fontSize = fontSizeNode.InnerText;
+            }
 	        if (languageCode != "" && (fontFamily != "" || languageDirection != "ltr"))
 	        {
 	            cssFile.Write("div[lang='{0}']", languageCode);
@@ -352,6 +359,7 @@ namespace SIL.PublishingSolution
 	            {
 	                cssFile.Write(" font-family: \"{0}\";", fontFamily);
 	            }
+                cssFile.Write(" font-size: \"{0}pt\";", fontSize);
 	            if (languageDirection != "ltr")
 	            {
 	                cssFile.Write(" direction: {0}; text-align: {1};", languageDirection, textAlign);
@@ -363,6 +371,7 @@ namespace SIL.PublishingSolution
 	            {
 	                cssFile.Write(" font-family: \"{0}\";", fontFamily);
 	            }
+                cssFile.Write(" font-size: \"{0}pt\";", fontSize);
                 cssFile.WriteLine("}");
                 cssFile.WriteLine();
             }
