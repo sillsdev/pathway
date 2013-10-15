@@ -1839,7 +1839,11 @@ namespace SIL.PublishingSolution
 
         private void EndElement()
         {
-            if (isPageBreak) return;
+            if (_closeChildName.IndexOf("scrBookName") == 0)
+            {
+                if (isPageBreak) return;
+            }
+            //if (isPageBreak) return;
             if (_reader.Name == "a" && _anchorWrite)
             {
                 _anchorWrite = false;
