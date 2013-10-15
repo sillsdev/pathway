@@ -318,11 +318,15 @@ namespace SIL.PublishingSolution
             cssFile.Close();
         }
 
-	    private static void WriteLanguageFontDirection(TextWriter cssFile)
+        protected static string WriterSettingsFile = null;
+	    protected static void WriteLanguageFontDirection(TextWriter cssFile)
 	    {
-	        var settingsHelper = new SettingsHelper(Param.DatabaseName);
-	        var settingsFile = settingsHelper.GetSettingsFilename();
-	        var languageCodeNode = Common.GetXmlNode(settingsFile, "//EthnologueCode");
+            if (WriterSettingsFile == null)
+            {
+                var settingsHelper = new SettingsHelper(Param.DatabaseName);
+                WriterSettingsFile = settingsHelper.GetSettingsFilename();
+            }
+	        var languageCodeNode = Common.GetXmlNode(WriterSettingsFile, "//EthnologueCode");
 	        var languageCode = "";
 	        var languageDirection = "ltr";
 	        var textAlign = "left";
@@ -339,13 +343,13 @@ namespace SIL.PublishingSolution
                     textAlign = "right";
                 }
             }
-	        var fontNode = Common.GetXmlNode(settingsFile, "//DefaultFont");
+	        var fontNode = Common.GetXmlNode(WriterSettingsFile, "//DefaultFont");
 	        var fontFamily = "";
 	        if (fontNode != null)
 	        {
 	            fontFamily = fontNode.InnerText;
 	        }
-	        var fontSizeNode = Common.GetXmlNode(settingsFile, "//DefaultFontSize");
+	        var fontSizeNode = Common.GetXmlNode(WriterSettingsFile, "//DefaultFontSize");
 	        var fontSize = "10";
             if (fontSizeNode != null)
             {
@@ -375,6 +379,7 @@ namespace SIL.PublishingSolution
                 cssFile.WriteLine("}");
                 cssFile.WriteLine();
             }
+	        WriterSettingsFile = null;
 	    }
 
 	    /// <summary>
