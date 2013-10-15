@@ -34,7 +34,7 @@ namespace SIL.PublishingSolution
             MapClassName();
             ParseFile();
             SetFontAndDirection();
-		    WriteCSS();
+            WriteCSS();
         }
 
 	    /// <summary>
@@ -299,7 +299,9 @@ namespace SIL.PublishingSolution
         {
             TextWriter cssFile = new StreamWriter(_cssFullPath);
 
-            foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _styleInfo)
+            WriteLanguageFontDirection(cssFile);
+
+		    foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _styleInfo)
             {
                 if (cssClass.Key != "\\Name")
                 {
@@ -316,7 +318,57 @@ namespace SIL.PublishingSolution
             cssFile.Close();
         }
 
-            /// <summary>
+	    private static void WriteLanguageFontDirection(TextWriter cssFile)
+	    {
+	        var settingsHelper = new SettingsHelper(Param.DatabaseName);
+	        var languageCodeNode = Common.GetXmlNode(settingsHelper.GetSettingsFilename(), "//EthnologueCode");
+	        var languageCode = "";
+	        var languageDirection = "ltr";
+	        var textAlign = "left";
+	        if (languageCodeNode != null)
+	        {
+	            languageCode = languageCodeNode.InnerText;
+                languageDirection = Common.GetTextDirection(languageCode);
+                if (languageCode.Contains("-"))
+	            {
+	                languageCode = languageCode.Split(new [] {'-'})[0];
+	            }
+                if (languageDirection == "rtl")
+                {
+                    textAlign = "right";
+                }
+            }
+	        var fontNode = Common.GetXmlNode(settingsHelper.GetSettingsFilename(), "//DefaultFont");
+	        var fontFamily = "";
+	        if (fontNode != null)
+	        {
+	            fontFamily = fontNode.InnerText;
+	        }
+	        if (languageCode != "" && (fontFamily != "" || languageDirection != "ltr"))
+	        {
+	            cssFile.Write("div[lang='{0}']", languageCode);
+	            cssFile.Write("{");
+	            if (fontFamily != "")
+	            {
+	                cssFile.Write(" font-family: \"{0}\";", fontFamily);
+	            }
+	            if (languageDirection != "ltr")
+	            {
+	                cssFile.Write(" direction: {0}; text-align: {1};", languageDirection, textAlign);
+	            }
+	            cssFile.WriteLine("}");
+	            cssFile.Write("span[lang='{0}']", languageCode);
+	            cssFile.Write("{");
+	            if (fontFamily != "")
+	            {
+	                cssFile.Write(" font-family: \"{0}\";", fontFamily);
+	            }
+                cssFile.WriteLine("}");
+                cssFile.WriteLine();
+            }
+	    }
+
+	    /// <summary>
             /// Convert paratext unit to css unit
             /// </summary>
             /// <param name="value">0/1/2</param>
