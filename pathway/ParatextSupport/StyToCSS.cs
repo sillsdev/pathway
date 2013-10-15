@@ -33,10 +33,11 @@ namespace SIL.PublishingSolution
             FindStyFile(database);
             MapClassName();
             ParseFile();
-            WriteCSS();
+            SetFontAndDirection();
+		    WriteCSS();
         }
 
-        /// <summary>
+	    /// <summary>
         /// Override to convert the sty file to CSS, assuming the
         /// sty file is already set for this class.
         /// </summary>
@@ -46,10 +47,26 @@ namespace SIL.PublishingSolution
             _cssFullPath = cssFullPath;
             MapClassName();
             ParseFile();
+            SetFontAndDirection();
             WriteCSS();
         }
 
-		/// ------------------------------------------------------------
+        /// <summary>
+        /// Add Properties for font and direction
+        /// </summary>
+        private void SetFontAndDirection()
+        {
+            CreateClass("\\Marker scrBody");
+            _cssProp.Add("direction", Common.GetTextDirection(""));
+            var settingsHelper = new SettingsHelper(Param.DatabaseName);
+            var fontNode = Common.GetXmlNode(settingsHelper.GetSettingsFilename(), "//DefaultFont");
+            if (fontNode != null)
+            {
+                _cssProp.Add("font-family", "\"" + fontNode.InnerText + "\"");
+            }
+        }
+
+        /// ------------------------------------------------------------
 		/// <summary>
 		/// Finds the sty file for a Paratext project.
 		/// </summary>
