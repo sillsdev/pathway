@@ -117,6 +117,7 @@ pathway/Test/InDesignConvert/TestFiles/output/*
 pathway/Test/LiftPrepare/TestFiles/output/*
 pathway/Test/OpenOfficeConvert/TestFiles/output/*
 pathway/Test/PathwayB/TestFiles/output/*
+pathway/Test/ParatextSupport/TestFiles/output/*
 pathway/Test/PathwayB/TestFiles/Output.ramp
 pathway/Test/PsExport/TestFiles/Output/*
 pathway/Test/PsTool/TestFiles/output/*
