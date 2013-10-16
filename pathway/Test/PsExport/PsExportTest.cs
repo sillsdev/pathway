@@ -239,6 +239,11 @@ namespace Test.PsExport
             CopyExistingFile(cssName);
             if (Directory.Exists(FileInput("Pictures")))
                 FolderTree.Copy(FileInput("Pictures"), FileOutput("Pictures"));
+            foreach (string fullPath in Directory.GetFiles(_inputTestPath, "*.jpg"))
+            {
+                var fileName = Path.GetFileName(fullPath);
+                File.Copy(fullPath, Path.Combine(_outputTestPath, fileName), true);
+            }
             CopyExistingFile("FlexRev.xhtml");
             CopyExistingFile("FlexRev.css");
 
@@ -276,6 +281,11 @@ namespace Test.PsExport
         {
             Common.PublishingSolutionsEnvironmentReset();
             TestPathSetup(testName);
+            var settingsFolder = Path.Combine(_inputTestPath, "Pathway");
+            if (Directory.Exists(settingsFolder))
+            {
+                FolderTree.Copy(settingsFolder, Common.GetAllUserPath());
+            }
 
             var di = new DirectoryInfo(_outputTestPath);
             //if (di.Exists)
@@ -723,6 +733,32 @@ namespace Test.PsExport
         {
             ExportTest("T8", "main.xhtml", "Dictionary", "OpenOffice", "T8: Flex ODT Export Test");
         }
+
+        #region T4
+        /// <summary>
+        /// Test TE Export test
+        /// </summary>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TD3661LineSpace24()
+        {
+            var tests = new ArrayList
+            {
+                new ODet(ODet.Chk, "Line1 line-height", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'Line1_')]//@fo:line-height", "24pt"),
+                new ODet(ODet.Chk, "Line2 line-height", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'Line2_')]//@fo:line-height", "24pt"),
+                new ODet(ODet.Chk, "Paragraph line-height", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'Paragraph_')]//@fo:line-height", "24pt"),
+                new ODet(ODet.Chk, "ParagraphContinuation line-height", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'ParagraphContinuation_')]//@fo:line-height", "24pt"),
+                new ODet(ODet.Chk, "ParallelPassageReference line-height", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'ParallelPassageReference_')]//@fo:line-height", "24pt"),
+                new ODet(ODet.Chk, "ChapterNumber line-height", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'ChapterNumber')]//@fo:line-height", "24pt"),
+                new ODet(ODet.Chk, "ChapterNumber2 line-height", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'ChapterNumber2')]//@fo:line-height", "24pt"),
+                new ODet(ODet.Chk, "SectionHead line-height", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'SectionHead_')]//@fo:line-height", "24pt"),
+                new ODet(ODet.Chk, "Title line-height", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'TitleMain_')]//@fo:line-height", "24pt"),
+                new ODet(ODet.Chk, "TitleSecondary line-height", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'TitleSecondary_')]//@fo:line-height", "24pt"),
+            };
+
+            ExportTest("TD3661", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
+        }
+        #endregion T11
 
         [Test]
         public void AddHomographAndSenseNumClassNamesTest()
