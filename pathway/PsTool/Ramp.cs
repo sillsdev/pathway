@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -316,12 +317,29 @@ namespace SIL.PublishingSolution
         /// <param name="outputExtension"></param>
         public void Create(string folderPath, string outputExtension)
         {
+            if (IsFromTestBed())
+            {
+                return;
+            }
+
             _folderPath = folderPath;
             _outputExtension = outputExtension;
             SetRampData();
             string encodedKey = GetEncodedKey();
             UpdateMetsXML(encodedKey);
             CompressToRamp();
+        }
+
+        private bool IsFromTestBed()
+        {
+            bool result = false;
+            if (Common.Testing) return true;
+            string exeAssemblyName = Assembly.GetEntryAssembly().GetName().Name;
+            if(exeAssemblyName == "TestBed")
+            {
+                result = true;
+            }
+            return result;
         }
 
         /// <summary>
