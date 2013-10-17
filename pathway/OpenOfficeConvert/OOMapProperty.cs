@@ -276,7 +276,10 @@ namespace SIL.PublishingSolution
             if (propertyValue == "rtl")
             {
                 _IDProperty["writing-mode"] = "rl-tb";
-                _IDProperty["text-align"] = "end";
+                if (!_IDProperty.ContainsKey("text-align") || _IDProperty["text-align"] != "center")
+                {
+                    _IDProperty["text-align"] = "end";
+                }
             }
             else if (propertyValue == "ltr")
             {

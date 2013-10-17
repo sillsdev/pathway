@@ -734,7 +734,7 @@ namespace Test.PsExport
             ExportTest("T8", "main.xhtml", "Dictionary", "OpenOffice", "T8: Flex ODT Export Test");
         }
 
-        #region T4
+        #region TD3661LineSpace24
         /// <summary>
         /// Test TE Export test
         /// </summary>
@@ -757,6 +757,30 @@ namespace Test.PsExport
             };
 
             ExportTest("TD3661", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
+        }
+        #endregion TD3661LineSpace24
+
+        #region T11
+        /// <summary>
+        /// Test TE Export test
+        /// </summary>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void T11()
+        {
+            var tests = new ArrayList
+            {
+                new ODet(ODet.Chk, "Line1 writing-mode", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'Line1_')]//@style:writing-mode", "rl-tb"),
+                new ODet(ODet.Chk, "Line2 writing-mode", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'Line2_')]//@style:writing-mode", "rl-tb"),
+                new ODet(ODet.Chk, "Paragraph writing-mode", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'Paragraph_')]//@style:writing-mode", "rl-tb"),
+                new ODet(ODet.Chk, "Paragraph align", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'Paragraph_')]//@fo:text-align", "end"),
+                new ODet(ODet.Chk, "ChapterNumber writing-mode", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'ChapterNumber')]//@style:writing-mode", "rl-tb"),
+                new ODet(ODet.Chk, "SectionHead writing-mode", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'SectionHead_')]//@style:writing-mode", "rl-tb"),
+                new ODet(ODet.Chk, "Title writing-mode", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'TitleMain_')]//@style:writing-mode", "rl-tb"),
+                new ODet(ODet.Chk, "Title align", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'TitleMain_')]//@fo:text-align", "center"),
+            };
+
+            ExportTest("T11", "D33.xhtml", "Scripture", "OpenOffice", "", tests);
         }
         #endregion T11
 
