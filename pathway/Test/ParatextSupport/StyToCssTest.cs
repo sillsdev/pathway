@@ -21,7 +21,7 @@ using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
 
-namespace Test.StyToCssTest
+namespace Test.ParatextSupport
 {
     /// ----------------------------------------------------------------------------------------
     /// <summary>
@@ -63,7 +63,7 @@ namespace Test.StyToCssTest
             Common.TextDirectionLanguageFile = FileInput("Dhivehi.lds");
             WriteLanguageFontDirection(sw);
             sw.Close();
-            FileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile));
+            TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
         }
 
         #region Private Functions
