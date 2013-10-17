@@ -290,6 +290,7 @@
     <Compile Include="GoBibleConvert\UsxToSFMTest.cs" />
     <Compile Include="ParatextSupport\EncloseParasInSectionsTests.cs" />
     <Compile Include="ParatextSupport\ParatextSupportExtensions.cs" />
+    <Compile Include="ParatextSupport\StyToCssTest.cs" />
     <Compile Include="ParatextSupport\UsxToUsfmTests.cs" />
     <Compile Include="PathwayB\PathwayBTest.cs" />
     <Compile Include="PublishingSolutionExeUi\PsUiScenarioTests.cs">

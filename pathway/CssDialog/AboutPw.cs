@@ -188,8 +188,6 @@ namespace SIL.PublishingSolution
 
             lblProductName.Text = AssemblyProduct;
             lblVersion.Text = String.Format("Version {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
-            //lblCopyright.Text = AssemblyCopyright;
-            lblCompany.Text = AssemblyCompany;
 
             HelpImproveGetValue(chkHelpToImprove); 
 
@@ -262,6 +260,11 @@ namespace SIL.PublishingSolution
         {
             HelpImproveSetValue(chkHelpToImprove);
             Close();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
