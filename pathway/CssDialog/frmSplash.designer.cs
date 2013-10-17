@@ -73,7 +73,8 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(407, 160);
+            this.label5.Location = new System.Drawing.Point(311, 160);
+            this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(12, 11);
             this.label5.TabIndex = 14;
@@ -114,10 +115,11 @@
             // 
             this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(160, 163);
+            this.label2.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(249, 17);
+            this.label2.Size = new System.Drawing.Size(157, 17);
             this.label2.TabIndex = 5;
-            this.label2.Text = "© 2008 - 2013 SIL International. All rights reserved";
+            this.label2.Text = "© 2008 - 2013 SIL International";
             // 
             // lblVersionwithDate
             // 

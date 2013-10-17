@@ -30,7 +30,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutPw));
             this.lblProductName = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
-            this.lblCompany = new System.Windows.Forms.Label();
             this.lblProjUrl = new System.Windows.Forms.Label();
             this.chkHelpToImprove = new System.Windows.Forms.CheckBox();
             this.btnOk = new System.Windows.Forms.Button();
@@ -63,16 +62,6 @@
             this.lblVersion.Size = new System.Drawing.Size(54, 14);
             this.lblVersion.TabIndex = 2;
             this.lblVersion.Text = "lblVersion";
-            // 
-            // lblCompany
-            // 
-            this.lblCompany.AutoSize = true;
-            this.lblCompany.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCompany.Location = new System.Drawing.Point(174, 179);
-            this.lblCompany.Name = "lblCompany";
-            this.lblCompany.Size = new System.Drawing.Size(83, 14);
-            this.lblCompany.TabIndex = 4;
-            this.lblCompany.Text = "SIL International";
             // 
             // lblProjUrl
             // 
@@ -141,7 +130,8 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(420, 122);
+            this.label5.Location = new System.Drawing.Point(325, 122);
+            this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(12, 11);
             this.label5.TabIndex = 16;
@@ -152,9 +142,10 @@
             this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(174, 125);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(249, 17);
+            this.label2.Size = new System.Drawing.Size(157, 17);
             this.label2.TabIndex = 15;
-            this.label2.Text = "© 2008 - 2013 SIL International. All rights reserved";
+            this.label2.Text = "© 2008 - 2013 SIL International";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // pictureBox1
             // 
@@ -193,7 +184,6 @@
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.chkHelpToImprove);
             this.Controls.Add(this.lblProjUrl);
-            this.Controls.Add(this.lblCompany);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.lblProductName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -219,7 +209,6 @@
 
         private System.Windows.Forms.Label lblProductName;
         private System.Windows.Forms.Label lblVersion;
-        private System.Windows.Forms.Label lblCompany;
         private System.Windows.Forms.Label lblProjUrl;
         private System.Windows.Forms.CheckBox chkHelpToImprove;
         private System.Windows.Forms.Button btnOk;
