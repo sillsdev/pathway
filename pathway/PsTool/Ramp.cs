@@ -335,7 +335,7 @@ namespace SIL.PublishingSolution
             bool result = false;
             if (Common.Testing) return true;
             string exeAssemblyName = Assembly.GetEntryAssembly().GetName().Name;
-            if(exeAssemblyName == "TestBed")
+            if (exeAssemblyName == "TestBed" || exeAssemblyName == "ConfigurationTool")
             {
                 result = true;
             }
