@@ -365,9 +365,19 @@ namespace SIL.PublishingSolution
 
         public void LineHeight(string propertyValue, Dictionary<string, string> cssProperty)
           {
-            _propertyKey = "line-spacing";
+            //_propertyKey = "line-spacing";
+            //if (_isFixedLineHeightEnable)
+            //    _propertyKey = "line-height";
+
             if (_isFixedLineHeightEnable)
+            {
                 _propertyKey = "line-height";
+            }
+            else
+            {
+                _propertyKey = "line-height-at-least";
+            }
+
 
             if (cssProperty.ContainsKey("position") && cssProperty["position"] == "footnote")
                 _propertyKey = "line-height-at-least";
