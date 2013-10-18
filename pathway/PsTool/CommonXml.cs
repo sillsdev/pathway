@@ -1058,7 +1058,7 @@ namespace SIL.Tool
         public static void GetCountryCode(out string language, out string country, string langCountry, Dictionary<string, ArrayList> spellCheck)
         {
             country = "none";
-            language = "none";
+            language = "zxx";   //Disable spelling checking in Libre Office - this code means language is unknown.
             string[] langCoun = langCountry.Split('-');
 
             try
