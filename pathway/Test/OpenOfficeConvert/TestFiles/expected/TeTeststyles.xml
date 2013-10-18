@@ -31,7 +31,7 @@
       <style:text-properties text:display="none" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="TitleMain_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBook_scrBody">
-      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" style:line-spacing="2pt" fo:padding-bottom="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" />
+      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="24pt" fo:padding-bottom="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="20pt" style:font-size-complex="20pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_TitleMain_scrBook_scrBody" style:family="text" style:parent-style-name="TitleMain_scrBook_scrBody">
@@ -41,14 +41,14 @@
       <style:paragraph-properties fo:text-align="left" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="IntroSectionHead_scrIntroSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrIntroSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-align="left" fo:text-indent="0pt" fo:margin-left="0pt" style:line-spacing="1.5pt" />
+      <style:paragraph-properties fo:text-align="left" fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="11pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="8pt" style:font-size-complex="8pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_IntroSectionHead_scrIntroSection_scrBook_scrBody" style:family="text" style:parent-style-name="IntroSectionHead_scrIntroSection_scrBook_scrBody">
       <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="IntroParagraph_scrIntroSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrIntroSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-spacing="1pt" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="11pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="9pt" style:font-size-complex="9pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_IntroParagraph_scrIntroSection_scrBook_scrBody" style:family="text" style:parent-style-name="IntroParagraph_scrIntroSection_scrBook_scrBody">
@@ -172,11 +172,11 @@
       <style:text-properties fo:font-family="Times New Roman" fo:font-style="italic" />
     </style:style>
     <style:style style:name="IntroParagraph" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-spacing="11pt" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="11pt" />
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="9pt" />
     </style:style>
     <style:style style:name="IntroSectionHead" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="left" fo:text-indent="0pt" fo:margin-left="0pt" style:line-spacing="11pt" />
+      <style:paragraph-properties fo:text-align="left" fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="11pt" />
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="8pt" fo:font-weight="700" fo:font-style="normal" />
     </style:style>
     <style:style style:name="Line1" style:family="paragraph" style:parent-style-name="none">
@@ -228,7 +228,7 @@
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="9pt" fo:font-weight="700" fo:font-style="normal" />
     </style:style>
     <style:style style:name="TitleMain" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" style:line-spacing="24pt" fo:padding-bottom="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" />
+      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="24pt" fo:padding-bottom="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" />
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="20pt" fo:font-weight="700" fo:font-style="normal" />
     </style:style>
     <style:style style:name="VerseNumber" style:family="paragraph" style:parent-style-name="none">
