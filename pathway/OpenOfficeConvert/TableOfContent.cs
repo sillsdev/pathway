@@ -53,6 +53,11 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("text:table-of-content-entry-template");
             _writer.WriteAttributeString("text:outline-level", "1");
             _writer.WriteAttributeString("text:style-name", "Contents_20_1");
+            //TD-3106
+            _writer.WriteStartElement("text:index-entry-link-start");
+            _writer.WriteAttributeString("text:style-name", "Index_20_Link");
+            _writer.WriteEndElement();
+
             _writer.WriteStartElement("text:index-entry-chapter");
             _writer.WriteEndElement();
             _writer.WriteStartElement("text:index-entry-text");
@@ -63,6 +68,10 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteStartElement("text:index-entry-page-number");
             _writer.WriteEndElement();
+            //TD-3106
+            _writer.WriteStartElement("text:index-entry-link-end");
+            _writer.WriteEndElement();
+
             _writer.WriteEndElement();
 
             _writer.WriteStartElement("text:index-source-styles");
