@@ -57,7 +57,7 @@ namespace ApplyPDFLicenseInfo
             if (File.Exists(pdfFileName) && File.Exists(exportTitle))
                 File.Delete(pdfFileName);
 
-            if (creatorTool == "LibreOffice")
+            if (creatorTool.ToLower() == "libreoffice")
             {
                 Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout", string.Empty);
                 CreateRAMP(xhtmlFile);

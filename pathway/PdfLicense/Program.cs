@@ -15,16 +15,30 @@ namespace PdfLicense
         private static Process myProcess = new Process();
         private static int _elapsedTime;
         private static bool _eventHandled;
-
+        static List<string> _readLicenseFilesBylines = new List<string>();
 
         static void Main(string[] args)
         {
+
+            string allUserPath = GetAllUserPath();
+            string licenseFileName = ReadPathinLicenseFile(allUserPath);
+            if (_readLicenseFilesBylines.Count < 0)
+            {
+                return;
+            }
+            string creatorTool = _readLicenseFilesBylines[3];
             string getPsApplicationPath = GetPSApplicationPath();
             getPsApplicationPath = Path.Combine(getPsApplicationPath, "ApplyPDFLicenseInfo.exe");
-
             if (File.Exists(getPsApplicationPath))
             {
-                RunCommand(getPsApplicationPath, "", 0);
+                if (creatorTool.ToLower() == "libreoffice")
+                {
+                    RunCommand(getPsApplicationPath, "", 0);
+                }
+                else
+                {
+                    RunCommand(getPsApplicationPath, "", 1);
+                }
             }
         }
 
@@ -169,6 +183,95 @@ namespace PdfLicense
             else return false;
         }
 
+        private static string ReadPathinLicenseFile(string allUserPath)
+        {
+            string fileLoc = Path.Combine(allUserPath, "License.txt");
+            string executePath = string.Empty;
+            int countRead = 0;
+
+            if (File.Exists(fileLoc))
+            {
+                using (StreamReader reader = new StreamReader(fileLoc))
+                {
+                    string line;
+
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        _readLicenseFilesBylines.Add(line);
+                    }
+
+                    reader.Close();
+
+                    executePath = fileLoc;
+                }
+            }
+            return executePath;
+        }
+
+        private string ReadPathinLicenseFile(string allUserPath, int readLineNumber)
+        {
+            string fileLoc = Path.Combine(allUserPath, "License.txt");
+            string executePath = string.Empty;
+            int countRead = 0;
+
+            if (File.Exists(fileLoc))
+            {
+                using (StreamReader reader = new StreamReader(fileLoc))
+                {
+                    string line;
+
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        _readLicenseFilesBylines.Add(line);
+                    }
+
+                    reader.Close();
+
+                    executePath = _readLicenseFilesBylines[readLineNumber].ToString();
+                }
+            }
+            return executePath;
+        }
+
+        /// <summary>
+        /// Get all user path
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAllUserPath()
+        {
+            string allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            allUserPath += "/SIL/Pathway";
+            return DirectoryPathReplace(allUserPath);
+        }
+
+        /// <summary>
+        /// Make sure the path contains the proper / for the operating system.
+        /// </summary>
+        /// <param name="path1"></param>
+        /// <param name="path2"></param>
+        /// <returns>normalized path</returns>
+        public static string PathCombine(string path1, string path2)
+        {
+            //if (path1 == null) throw new ArgumentNullException("path1");
+            //if (path2 == null) throw new ArgumentNullException("path2");
+            path1 = DirectoryPathReplace(path1);
+            path2 = DirectoryPathReplace(path2);
+            return Path.Combine(path1, path2);
+        }
+
+        /// <summary>
+        /// Make sure the path contains the proper / for the operating system.
+        /// </summary>
+        /// <param name="path">input path</param>
+        /// <returns>normalized path</returns>
+        public static string DirectoryPathReplace(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return path;
+
+            string returnPath = path.Replace('/', Path.DirectorySeparatorChar);
+            returnPath = returnPath.Replace('\\', Path.DirectorySeparatorChar);
+            return returnPath;
+        }
 
         // Handle Exited event and display process information. 
         private static void myProcess_Exited(object sender, System.EventArgs e)

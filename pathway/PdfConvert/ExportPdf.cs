@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -196,15 +197,21 @@ namespace SIL.PublishingSolution
                         //Common.RunCommand("prince ", _processedXhtml + " -o, " + xhtmlFileName + ".pdf", 1);
                     }
 
-                    //Copyright information added in PDF files
-                    string pdfFIleName = Common.InsertCopyrightInPdf(Common.PathCombine(Environment.CurrentDirectory, xhtmlFileName + ".pdf"), "Prince XML");
-
+                    
                     ////string pdfFIleName = xhtmlFileName + ".pdf";
                     //if (!Common.Testing)
                     //    Process.Start(pdfFIleName);
                     Environment.CurrentDirectory = curdir;
-                    Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.jar,.xml", "layout", string.Empty);
-                    CreateRAMP(projInfo);
+
+                    if (!projInfo.DefaultXhtmlFileWithPath.ToLower().Contains("local"))
+                    {
+                        //Copyright information added in PDF files
+                        string pdfFIleName = Common.InsertCopyrightInPdf(Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), xhtmlFileName + ".pdf"), "Prince XML");
+
+                        string cleanExtn = ".tmp,.de,.exe,.jar,.xml";
+                        Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, cleanExtn, "layout", string.Empty);
+                        CreateRAMP(projInfo);
+                    }
                     success = true;
                 }
                 else
