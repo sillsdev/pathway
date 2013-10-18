@@ -85,7 +85,7 @@ namespace Test.PsTool
             string familyName = "Charis SIL";
             string style = "Regular";
             string actual = FontInternals.GetFontFileName(familyName, style);
-            string expected = "CharisSILR.ttf";
+            string expected = "CharisSIL-R.ttf";
             Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
@@ -97,7 +97,7 @@ namespace Test.PsTool
             string familyName = "Charis SIL";
             string style = "Bold";
             string actual = FontInternals.GetFontFileName(familyName, style);
-            string expected = "CharisSILB.ttf";
+            string expected = "CharisSIL-B.ttf";
             Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
@@ -109,7 +109,7 @@ namespace Test.PsTool
             string familyName = "Doulos SIL";
             string style = "Regular";
             string actual = FontInternals.GetFontFileName(familyName, style);
-            string expected = "DoulosSILR.ttf";
+            string expected = "DoulosSIL-R.ttf";
             if (Common.IsUnixOS())
             {
                 expected = "DoulosSIL-R.ttf";

@@ -778,6 +778,8 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "SectionHead writing-mode", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'SectionHead_')]//@style:writing-mode", "rl-tb"),
                 new ODet(ODet.Chk, "Title writing-mode", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'TitleMain_')]//@style:writing-mode", "rl-tb"),
                 new ODet(ODet.Chk, "Title align", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'TitleMain_')]//@fo:text-align", "center"),
+                new ODet(ODet.Chk, "main title font size", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'TitleMain_')]//@fo:font-size", "22pt"),
+                new ODet(ODet.Chk, "Paragraph font size", "D33.odt", ODet.Styles, "//style:style[starts-with(@style:name,'Paragraph_scrSection')]//@fo:font-size", "11pt"),
             };
 
             ExportTest("T11", "D33.xhtml", "Scripture", "OpenOffice", "", tests);
