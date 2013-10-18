@@ -760,6 +760,32 @@ namespace Test.PsExport
         }
         #endregion TD3661LineSpace24
 
+        #region TD3661vLineSpace24
+        /// <summary>
+        /// Test TE Export test
+        /// </summary>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TD3661vLineSpace24()
+        {
+            var tests = new ArrayList
+            {
+                new ODet(ODet.Chk, "Line1 line-height-at-least", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'Line1_')]//@style:line-height-at-least", "24pt"),
+                new ODet(ODet.Chk, "Line2 line-height-at-least", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'Line2_')]//@style:line-height-at-least", "13pt"),
+                new ODet(ODet.Chk, "Paragraph line-height-at-least", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'Paragraph_')]//@style:line-height-at-least", "24pt"),
+                new ODet(ODet.Chk, "ParagraphContinuation line-height-at-least", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'ParagraphContinuation_')]//@style:line-height-at-least", "24pt"),
+                new ODet(ODet.Chk, "ParallelPassageReference line-height-at-least", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'ParallelPassageReference_')]//@style:line-height-at-least", "24pt"),
+                new ODet(ODet.Chk, "ChapterNumber line-height-at-least", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'ChapterNumber')]//@style:line-height-at-least", "24pt"),
+                new ODet(ODet.Chk, "ChapterNumber2 line-height-at-least", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'ChapterNumber2')]//@style:line-height-at-least", "24pt"),
+                new ODet(ODet.Chk, "SectionHead line-height-at-least", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'SectionHead_')]//@style:line-height-at-least", "24pt"),
+                new ODet(ODet.Chk, "Title line-height-at-least", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'TitleMain_')]//@style:line-height-at-least", "24pt"),
+                //new ODet(ODet.Chk, "TitleSecondary line-height-at-least", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'TitleSecondary_')]//@style:line-height-at-least", "24pt"),
+            };
+
+            ExportTest("TD3661v", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
+        }
+        #endregion TD3661vLineSpace24
+
         #region T11
         /// <summary>
         /// Test TE Export test
