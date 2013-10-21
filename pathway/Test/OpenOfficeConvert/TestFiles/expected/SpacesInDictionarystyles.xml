@@ -39,20 +39,20 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
-      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:font-weight="700" style:font-weight-complex="700" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headerFontStyleName" style:family="paragraph" style:parent-style-name="Standard">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciation_.ggo-fonipa-x-emic_pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciations_entry_letData_dicBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_pronunciation_.ggo-fonipa-x-emic_pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciation_.ggo-fonipa-x-emic_pronunciations_entry_letData_dicBody">
       <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.ggo-fonipa-x-emic_pronunciation_.ggo-fonipa-x-emic_pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciation_.ggo-fonipa-x-emic_pronunciations_entry_letData_dicBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensepara_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="grammaticalinfo_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="sensepara_entry_letData_dicBody" />
@@ -72,24 +72,24 @@
       <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.te_definitionL3_.en_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="definitionL3_.en_sensepara_entry_letData_dicBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.te_xitem_.te_definitionL3_.en_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.te_definitionL3_.en_sensepara_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examples_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="sensepara_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="example_.ggo-Telu-IN_examples_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="examples_sensepara_entry_letData_dicBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.ggo-Telu-IN_example_.ggo-Telu-IN_examples_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="example_.ggo-Telu-IN_examples_sensepara_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translations_examples_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="examples_sensepara_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationL3_.te_translations_examples_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_examples_sensepara_entry_letData_dicBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.te_translationL3_.te_translations_examples_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="translationL3_.te_translations_examples_sensepara_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
