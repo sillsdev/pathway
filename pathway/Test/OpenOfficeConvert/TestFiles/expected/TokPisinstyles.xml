@@ -35,7 +35,7 @@
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="20pt" style:font-size-complex="20pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.tpi_TitleMain_scrBook_scrBody" style:family="text" style:parent-style-name="TitleMain_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrIntroSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBook_scrBody">
       <style:paragraph-properties fo:text-align="left" />
@@ -45,14 +45,14 @@
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="8pt" style:font-size-complex="8pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.tpi_IntroSectionHead_scrIntroSection_scrBook_scrBody" style:family="text" style:parent-style-name="IntroSectionHead_scrIntroSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="IntroParagraph_scrIntroSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrIntroSection_scrBook_scrBody">
       <style:paragraph-properties style:line-height-at-least="11pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="9pt" style:font-size-complex="9pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.tpi_IntroParagraph_scrIntroSection_scrBook_scrBody" style:family="text" style:parent-style-name="IntroParagraph_scrIntroSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBook_scrBody">
       <style:paragraph-properties fo:text-align="left" />
@@ -62,27 +62,27 @@
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="20pt" style:font-size-complex="20pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.tpi_ChapterHead_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="ChapterHead_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="SectionHead_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_scrBook_scrBody">
       <style:paragraph-properties fo:text-align="center" style:line-height-at-least="20pt" fo:padding-bottom="4pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="8pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="20pt" style:font-size-complex="20pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.tpi_SectionHead_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="SectionHead_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Paragraph_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_scrBook_scrBody">
       <style:paragraph-properties fo:text-indent="12pt" style:line-height-at-least="20pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="18pt" style:font-size-complex="18pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.tpi_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:country="none" fo:language="none" fo:font-weight="700" style:font-weight-complex="700" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:country="none" fo:language="zxx" fo:font-weight="700" style:font-weight-complex="700" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="13.5pt" style:font-size-complex="13.5pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="13.5pt" style:font-size-complex="13.5pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
       <style:text-properties fo:font-size="13.5" style:font-size-complex="13.5" fo:font-weight="700" style:font-weight-complex="700" style:text-position="super 55%" />
@@ -92,7 +92,7 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="pictureCenter_Paragraph_scrSection_scrBook_scrBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.tpi_pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteGeneralParagraph_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_scrBook_scrBody">
       <style:paragraph-properties style:line-height-at-least="8pt" />
@@ -102,17 +102,17 @@
       <style:text-properties fo:font-size="13.5" style:font-size-complex="13.5" fo:font-weight="700" style:font-weight-complex="700" style:text-position="super 55%" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.tpi_NoteGeneralParagraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="SectionHeadMajor_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_scrBook_scrBody">
       <style:paragraph-properties fo:text-align="center" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="20pt" style:font-size-complex="20pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.tpi_SectionHeadMajor_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="SectionHeadMajor_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumberAlternate_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="13.5pt" style:font-size-complex="13.5pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="13.5pt" style:font-size-complex="13.5pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
