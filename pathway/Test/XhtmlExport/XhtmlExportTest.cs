@@ -54,11 +54,13 @@ namespace Test.XhtmlExport
         protected void SetUp()
         {
             Common.Testing = true;
-            RegistryKey myKey = Registry.LocalMachine.OpenSubKey("Software\\Classes\\AutoItScript\\Shell\\Run\\Command", false);
+            RegistryKey myKey = Registry.LocalMachine.OpenSubKey("Software\\Classes\\AutoIt3Script\\Shell\\Run\\Command", false);
             if (myKey != null)
             {
                 _autoIt = myKey.GetValue("", "").ToString();
-                if (_autoIt.Length > 5)
+                if (_autoIt.EndsWith(@" ""%1"" %*"))
+                    _autoIt = _autoIt.Substring(0, _autoIt.Length - 8);
+                else if (_autoIt.EndsWith(@" ""%1"""))
                     _autoIt = _autoIt.Substring(0, _autoIt.Length - 5);     // Remove "%1" at end
             }
             _scriptPath = PathPart.Bin(Environment.CurrentDirectory, "/XhtmlExport");
@@ -90,7 +92,7 @@ namespace Test.XhtmlExport
             p1.StartInfo.EnvironmentVariables.Add("InputPath", _tf.Input(null));
             p1.StartInfo.EnvironmentVariables.Add("OutputPath", _tf.Output(null));
             p1.StartInfo.EnvironmentVariables.Add("IncOpt", incOpt);
-            p1.StartInfo.Arguments = Common.PathCombine(_scriptPath, app + "XhtmlExport.aut");
+            p1.StartInfo.Arguments = Common.PathCombine(_scriptPath, app + "XhtmlExport.au3");
             p1.StartInfo.WorkingDirectory = _scriptPath;
             p1.StartInfo.FileName = _autoIt;
             p1.Start();
@@ -244,6 +246,7 @@ namespace Test.XhtmlExport
         /// Export Nkonya Sample TE data from Fieldworks, compare results to previous exports
         /// </summary>
         [Test]
+        [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void NkonyaSampleExportTest()
