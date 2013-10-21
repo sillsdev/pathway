@@ -28,37 +28,37 @@
     <style:style style:name="scrBody" style:family="paragraph" style:parent-style-name="" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrBookName_.zxx_scrBook_scrBody" style:family="text" style:parent-style-name="scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrBookCode_.zxx_scrBook_scrBody" style:family="text" style:parent-style-name="scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="TitleMain_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBook_scrBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="TitleSecondary_.zxx_TitleMain_scrBook_scrBody" style:family="text" style:parent-style-name="TitleMain_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_TitleMain_scrBook_scrBody" style:family="text" style:parent-style-name="TitleMain_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBook_scrBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="columns_scrBook_scrBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="SectionHeadMinor_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook_scrBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_SectionHeadMinor_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="SectionHeadMinor_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ParallelPassageReference_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook_scrBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_ParallelPassageReference_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="ParallelPassageReference_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Paragraph_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook_scrBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ChapterNumber_.zxx_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_.zxx_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
