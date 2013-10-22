@@ -609,7 +609,8 @@ namespace SIL.PublishingSolution
         private void CreateRAMP(PublicationInformation projInfo)
         {
             Ramp ramp = new Ramp();
-            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".epub");
+            ramp.ProjInputType = projInfo.ProjectInputType;
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".epub", projInfo.ProjectInputType);
         }
 
         protected void SplitPageSections(List<string> htmlFiles, string contentFolder, string tocFiletoUpdate)

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageCode>
+    <IsoLanguageCodeTwoLetters>
+		<Language name="en" value="eng"></Language>
+		<Language name="hi" value="hin"></Language>
+		<Language name="ru" value="rus"></Language>
+		<Language name="ta" value="tam"></Language>
+		<Language name="te" value="tel"></Language>
+		<Language name="ur" value="urd"></Language>
+		<Language name="ml" value="mal"></Language>
+		<Language name="pt" value="por"></Language>
+		<Language name="es" value="spa"></Language>
+		<Language name="th" value="tha"></Language>
+		<Language name="tr" value="tur"></Language>
+		<Language name="km" value="khm"></Language>
+		<Language name="fr" value="fra"></Language>
+		<Language name="la" value="lat"></Language>
+		<Language name="id" value="ind"></Language>
+		<Language name="lv" value="lav"></Language>
+    </IsoLanguageCodeTwoLetters>
+    <IsoLanguageCodeThreeLetters>
+		<Language name="eng" value="English"></Language>
+		<Language name="hin" value="Hindi"></Language>
+		<Language name="rus" value="Russian"></Language>
+		<Language name="tam" value="Tamil"></Language>
+		<Language name="tel" value="Telugu"></Language>
+		<Language name="urd" value="Urdu"></Language>
+		<Language name="mal" value="Malayalam"></Language>
+		<Language name="por" value="Portuguese"></Language>
+		<Language name="spa" value="Spanish"></Language>
+		<Language name="tha" value="Thai"></Language>
+		<Language name="tur" value="Turkish"></Language>
+		<Language name="khm" value="Khmer"></Language>
+		<Language name="gon" value="Gondi"></Language>
+		<Language name="bzh" value="Buang, Mapos"></Language>
+		<Language name="tpi" value="Tok Pisin"></Language>
+		<Language name="fra" value="French"></Language>
+		<Language name="kup" value="Kunimaipa"></Language>
+		<Language name="lat" value="Latin"></Language>
+		<Language name="tsi" value="Tsimshian"></Language>
+		<Language name="slu" value="Selaru"></Language>
+		<Language name="abs" value="Malay, Ambonese"></Language>
+		<Language name="ind" value="Indonesian"></Language>
+		<Language name="ggo" value="Gondi, Southern"></Language>
+		<Language name="lav" value="Latvian"></Language>
+		<Language name="seh" value="Sena"></Language>
+		<Language name="flr" value="Fuliiru"></Language>
+		<Language name="pis" value="Pijin"></Language>
+		<Language name="lgr" value="Lengo"></Language>
+		<Language name="mgo" value="Meta'"></Language>
+		<Language name="bss" value="Akoose"></Language>
+		<Language name="grc" value="Greek, Ancient"></Language>
+		<Language name="bdu" value="Oroko"></Language>
+		<Language name="nko" value="Nkonya"></Language>
+		<Language name="baz" value="Tunen"></Language>
+		<Language name="khb" value="Lü"></Language>
+    </IsoLanguageCodeThreeLetters>
+	<LanguageScript>
+		<Language name="Afak" scriptname="Afaka"/>
+		<Language name="Aghb" scriptname="Caucasian Albanian"/>
+		<Language name="Arab" scriptname="Arabic"/>
+		<Language name="Armi" scriptname="Imperial Aramaic"/>
+		<Language name="Armn" scriptname="Armenian"/>
+		<Language name="Avst" scriptname="Avestan"/>
+		<Language name="Bali" scriptname="Balinese"/>
+		<Language name="Bamu" scriptname="Bamum"/>
+		<Language name="Bass" scriptname="Bassa Vah"/>
+		<Language name="Batk" scriptname="Batak"/>
+		<Language name="Beng" scriptname="Bengali"/>
+		<Language name="Blis" scriptname="Blissymbols"/>
+		<Language name="Bopo" scriptname="Bopomofo"/>
+		<Language name="Brah" scriptname="Brahmi"/>
+		<Language name="Brai" scriptname="Braille"/>
+		<Language name="Bugi" scriptname="Buginese"/>
+		<Language name="Buhd" scriptname="Buhid"/>
+		<Language name="Cakm" scriptname="Chakma"/>
+		<Language name="Cans" scriptname="Unified Canadian Aboriginal Syllabics"/>
+		<Language name="Cari" scriptname="Carian"/>
+		<Language name="Cham" scriptname="Cham"/>
+		<Language name="Cher" scriptname="Cherokee"/>
+		<Language name="Cirt" scriptname="Cirth"/>
+		<Language name="Copt" scriptname="Coptic"/>
+		<Language name="Cprt" scriptname="Cypriot"/>
+		<Language name="Cyrl" scriptname="Cyrillic"/>
+		<Language name="Cyrs" scriptname="Cyrillic (Old Church Slavonic variant)"/>
+		<Language name="Deva" scriptname="Devanagari (Nagari)"/>
+		<Language name="Dsrt" scriptname="Deseret (Mormon)"/>
+		<Language name="Dupl" scriptname="Duployan shorthand, Duployan stenography"/>
+		<Language name="Egyd" scriptname="Egyptian demotic"/>
+		<Language name="Egyh" scriptname="Egyptian hieratic"/>
+		<Language name="Egyp" scriptname="Egyptian hieroglyphs"/>
+		<Language name="Elba" scriptname="Elbasan"/>
+		<Language name="Ethi" scriptname="Ethiopic (Geʻez)"/>
+		<Language name="Geok" scriptname="Khutsuri (Asomtavruli and Nuskhuri)"/>
+		<Language name="Geor" scriptname="Georgian (Mkhedruli)"/>
+		<Language name="Glag" scriptname="Glagolitic"/>
+		<Language name="Goth" scriptname="Gothic"/>
+		<Language name="Gran" scriptname="Grantha"/>
+		<Language name="Grek" scriptname="Greek"/>
+		<Language name="Gujr" scriptname="Gujarati"/>
+		<Language name="Guru" scriptname="Gurmukhi"/>
+		<Language name="Hang" scriptname="Hangul (Hangŭl, Hangeul)"/>
+		<Language name="Hani" scriptname="Han (Hanzi, Kanji, Hanja)"/>
+		<Language name="Hano" scriptname="Hanunoo (Hanunóo)"/>
+		<Language name="Hans" scriptname="Han (Simplified variant)"/>
+		<Language name="Hant" scriptname="Han (Traditional variant)"/>
+		<Language name="Hebr" scriptname="Hebrew"/>
+		<Language name="Hira" scriptname="Hiragana"/>
+		<Language name="Hluw" scriptname="Anatolian Hieroglyphs (Luwian Hieroglyphs, Hittite Hieroglyphs)"/>
+		<Language name="Hmng" scriptname="Pahawh Hmong"/>
+		<Language name="Hrkt" scriptname="Japanese syllabaries (alias for Hiragana + Katakana)"/>
+		<Language name="Hung" scriptname="Old Hungarian (Hungarian Runic)"/>
+		<Language name="Inds" scriptname="Indus (Harappan)"/>
+		<Language name="Ital" scriptname="Old Italic (Etruscan, Oscan, etc.)"/>
+		<Language name="Java" scriptname="Javanese"/>
+		<Language name="Jpan" scriptname="Japanese (alias for Han + Hiragana + Katakana)"/>
+		<Language name="Jurc" scriptname="Jurchen"/>
+		<Language name="Kali" scriptname="Kayah Li"/>
+		<Language name="Kana" scriptname="Katakana"/>
+		<Language name="Khar" scriptname="Kharoshthi"/>
+		<Language name="Khmr" scriptname="Khmer"/>
+		<Language name="Khoj" scriptname="Khojki"/>
+		<Language name="Knda" scriptname="Kannada"/>
+		<Language name="Kore" scriptname="Korean (alias for Hangul + Han)"/>
+		<Language name="Kpel" scriptname="Kpelle"/>
+		<Language name="Kthi" scriptname="Kaithi"/>
+		<Language name="Lana" scriptname="Tai Tham (Lanna)"/>
+		<Language name="Laoo" scriptname="Lao"/>
+		<Language name="Latf" scriptname="Latin (Fraktur variant)"/>
+		<Language name="Latg" scriptname="Latin (Gaelic variant)"/>
+		<Language name="Latn" scriptname="Latin"/>
+		<Language name="Lepc" scriptname="Lepcha (Róng)"/>
+		<Language name="Limb" scriptname="Limbu"/>
+		<Language name="Lina" scriptname="Linear A"/>
+		<Language name="Linb" scriptname="Linear B"/>
+		<Language name="Lisu" scriptname="Lisu (Fraser)"/>
+		<Language name="Loma" scriptname="Loma"/>
+		<Language name="Lyci" scriptname="Lycian"/>
+		<Language name="Lydi" scriptname="Lydian"/>
+		<Language name="Mahj" scriptname="Mahajani"/>
+		<Language name="Mand" scriptname="Mandaic, Mandaean"/>
+		<Language name="Mani" scriptname="Manichaean"/>
+		<Language name="Maya" scriptname="Mayan hieroglyphs"/>
+		<Language name="Mend" scriptname="Mende"/>
+		<Language name="Merc" scriptname="Meroitic Cursive"/>
+		<Language name="Mero" scriptname="Meroitic Hieroglyphs"/>
+		<Language name="Mlym" scriptname="Malayalam"/>
+		<Language name="Mong" scriptname="Mongolian"/>
+		<Language name="Moon" scriptname="Moon (Moon code, Moon script, Moon type)"/>
+		<Language name="Mroo" scriptname="Mro, Mru"/>
+		<Language name="Mtei" scriptname="Meitei Mayek (Meithei, Meetei)"/>
+		<Language name="Mymr" scriptname="Myanmar (Burmese)"/>
+		<Language name="Narb" scriptname="Old North Arabian (Ancient North Arabian)"/>
+		<Language name="Nbat" scriptname="Nabataean"/>
+		<Language name="Nkgb" scriptname="Nakhi Geba ('Na-'Khi ²Ggŏ-¹baw, Naxi Geba)"/>
+		<Language name="Nkoo" scriptname="N’Ko"/>
+		<Language name="Nshu" scriptname="Nüshu"/>
+		<Language name="Ogam" scriptname="Ogham"/>
+		<Language name="Olck" scriptname="Ol Chiki (Ol Cemet’, Ol, Santali)"/>
+		<Language name="Orkh" scriptname="Old Turkic, Orkhon Runic"/>
+		<Language name="Orya" scriptname="Oriya"/>
+		<Language name="Osma" scriptname="Osmanya"/>
+		<Language name="Palm" scriptname="Palmyrene"/>
+		<Language name="Perm" scriptname="Old Permic"/>
+		<Language name="Phag" scriptname="Phags-pa"/>
+		<Language name="Phli" scriptname="Inscriptional Pahlavi"/>
+		<Language name="Phlp" scriptname="Psalter Pahlavi"/>
+		<Language name="Phlv" scriptname="Book Pahlavi"/>
+		<Language name="Phnx" scriptname="Phoenician"/>
+		<Language name="Plrd" scriptname="Miao (Pollard)"/>
+		<Language name="Prti" scriptname="Inscriptional Parthian"/>
+		<Language name="Qaaa" scriptname="Reserved for private use (start)"/>
+		<Language name="Qabx" scriptname="Reserved for private use (end)"/>
+		<Language name="Rjng" scriptname="Rejang (Redjang, Kaganga)"/>
+		<Language name="Roro" scriptname="Rongorongo"/>
+		<Language name="Runr" scriptname="Runic"/>
+		<Language name="Samr" scriptname="Samaritan"/>
+		<Language name="Sara" scriptname="Sarati"/>
+		<Language name="Sarb" scriptname="Old South Arabian"/>
+		<Language name="Saur" scriptname="Saurashtra"/>
+		<Language name="Sgnw" scriptname="SignWriting"/>
+		<Language name="Shaw" scriptname="Shavian (Shaw)"/>
+		<Language name="Shrd" scriptname="Sharada, Śāradā"/>
+		<Language name="Sind" scriptname="Khudawadi, Sindhi"/>
+		<Language name="Sinh" scriptname="Sinhala"/>
+		<Language name="Sora" scriptname="Sora Sompeng"/>
+		<Language name="Sund" scriptname="Sundanese"/>
+		<Language name="Sylo" scriptname="Syloti Nagri"/>
+		<Language name="Syrc" scriptname="Syriac"/>
+		<Language name="Syre" scriptname="Syriac (Estrangelo variant)"/>
+		<Language name="Syrj" scriptname="Syriac (Western variant)"/>
+		<Language name="Syrn" scriptname="Syriac (Eastern variant)"/>
+		<Language name="Tagb" scriptname="Tagbanwa"/>
+		<Language name="Takr" scriptname="Takri, Ṭākrī, Ṭāṅkrī"/>
+		<Language name="Tale" scriptname="Tai Le"/>
+		<Language name="Talu" scriptname="New Tai Lue"/>
+		<Language name="Taml" scriptname="Tamil"/>
+		<Language name="Tang" scriptname="Tangut"/>
+		<Language name="Tavt" scriptname="Tai Viet"/>
+		<Language name="Telu" scriptname="Telugu"/>
+		<Language name="Teng" scriptname="Tengwar"/>
+		<Language name="Tfng" scriptname="Tifinagh (Berber)"/>
+		<Language name="Tglg" scriptname="Tagalog (Baybayin, Alibata)"/>
+		<Language name="Thaa" scriptname="Thaana"/>
+		<Language name="Thai" scriptname="Thai"/>
+		<Language name="Tibt" scriptname="Tibetan"/>
+		<Language name="Tirh" scriptname="Tirhuta"/>
+		<Language name="Ugar" scriptname="Ugaritic"/>
+		<Language name="Vaii" scriptname="Vai"/>
+		<Language name="Visp" scriptname="Visible Speech"/>
+		<Language name="Wara" scriptname="Warang Citi (Varang Kshiti)"/>
+		<Language name="Wole" scriptname="Woleai"/>
+		<Language name="Xpeo" scriptname="Old Persian"/>
+		<Language name="Xsux" scriptname="Cuneiform, Sumero-Akkadian"/>
+		<Language name="Yiii" scriptname="Yi"/>
+		<Language name="Zinh" scriptname="Code for inherited script"/>
+		<Language name="Zmth" scriptname="Mathematical notation"/>
+		<Language name="Zsym" scriptname="Symbols"/>
+		<Language name="Zxxx" scriptname="Code for unwritten documents"/>
+		<Language name="Zyyy" scriptname="Code for undetermined script"/>
+		<Language name="Zzzz" scriptname="Code for uncoded script"/>
+	</LanguageScript>
+</LanguageCode>

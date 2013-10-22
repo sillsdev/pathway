@@ -79,6 +79,7 @@ namespace TestBed
             }
             treeView1.Nodes.Clear();
             treeView1.Nodes.Add((TreeNode)_nodeTemp.Clone());
+            treeView1.ExpandAll();
         }
 
         private static void AddSubTree(TreeNode n, CommonTree t, CssTreeParser ctp)

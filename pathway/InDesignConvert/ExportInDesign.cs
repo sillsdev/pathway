@@ -151,7 +151,7 @@ namespace SIL.PublishingSolution
         private void CreateRAMP(PublicationInformation projInfo)
         {
             Ramp ramp = new Ramp();
-            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".ldml");
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".ldml", projInfo.ProjectInputType);
         }
 
         private Dictionary<string, Dictionary<string, string>> MergeProcessInCSSforMasterPage(string fileName, Dictionary<string, Dictionary<string, string>> cssClass)

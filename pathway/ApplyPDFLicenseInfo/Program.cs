@@ -70,7 +70,7 @@ namespace ApplyPDFLicenseInfo
             string outputExtn = string.Empty;
             outputExtn = ".pdf";
             Ramp ramp = new Ramp();
-            ramp.Create(executePath, outputExtn);
+            ramp.Create(executePath, outputExtn, "Dictionary");
         }
 
         private static string ProcessLicensePdf(string[] pdfFiles, string pdfFileName, string executePath)
