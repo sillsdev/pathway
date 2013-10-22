@@ -12,6 +12,7 @@
 	<xsl:param name="altFigurePath"/> <!-- Alternate path to figures folder with a final directory separator character -->
 	<xsl:param name="fontName" select="'Charis SIL'"/>	<!-- Font used for the vernacular in the Paratext project -->
 	<xsl:param name="fontSize" select="12"/>	<!-- Font size for the vernacular in the Paratext project -->
+  <xsl:param name="langInfo" >en:English</xsl:param> <!-- langauge and script information in Paratext project -->
 
 	<!-- The templates matching * and @* match and copy unhandled elements/attributes. -->
 	<xsl:template match="*">
@@ -33,11 +34,14 @@
 			<head>
 				<title/>
 				<link rel="stylesheet" href="{$projName}.css" type="text/css"/>
-				<meta name="description" content="{$projName} exported by {$user} on {$dateTime}"/>
+        <link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
+        <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+        <meta name="description" content="{$projName} exported by {$user} on {$dateTime}"/>
 				<meta name="filename" content="{$projName}.xhtml"/>
 				<meta name="stylesheet" content="{$stylesheet}"/>
 				<meta name="fontName" content="{$fontName}"/>
 				<meta name="fontSize" content="{$fontSize}"/>
+        <meta name="dc.language" content="{$langInfo}" scheme="DCTERMS.RFC5646"/>
 			</head>
 			<body class="scrBody">
 				<xsl:apply-templates/>
