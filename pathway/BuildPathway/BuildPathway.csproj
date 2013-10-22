@@ -537,6 +537,7 @@
     <AllSettings Include="..\PsSupport\DictionaryStyleSettings.xml" />
     <AllSettings Include="..\PsSupport\StyleSettings.xml" />
     <AllSettings Include="..\PsSupport\StyleSettings.xsd" />
+    <AllSettings Include="..\PsSupport\RampLangCode.xml" />
     <BteSettings Include="..\PsSupport\ScriptureStyleSettings.xml" />
     <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
     <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
