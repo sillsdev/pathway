@@ -138,20 +138,29 @@ namespace SIL.PublishingSolution
                     preProcessor.ReplaceStringInCss(mergedCSS);
                     preProcessor.InsertPropertyInCSS(mergedCSS);
                     preProcessor.RemoveTextIntent(mergedCSS);
-                    
+
 
                     Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
                     CssTree cssTree = new CssTree();
                     cssTree.OutputType = Common.OutputType.ODT;
                     cssClass = cssTree.CreateCssProperty(mergedCSS, true);
-                    if(cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-hide-versenumber-one"))
+                    if (cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-hide-versenumber-one"))
                     {
                         string value = cssClass["@page"]["-ps-hide-versenumber-one"];
-                        if(value.ToLower() == "true")
+                        if (value.ToLower() == "true")
                         {
                             preProcessor.RemoveVerseNumberOne(preProcessor.ProcessedXhtml, mergedCSS);
                         }
                     }
+                    if (cssClass.ContainsKey("@page:left-top-left") && cssClass["@page:left-top-left"].ContainsKey("-ps-referenceformat"))
+                    {
+                        string value = cssClass["@page:left-top-left"]["-ps-referenceformat"];
+                        if (value.ToLower().Contains("gen 1"))
+                        {
+                            ReplaceBookNametoBookCode(preProcessor.ProcessedXhtml);
+                        }
+                    }
+
 
                     string xhtmlFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                     string defaultCSS = Path.GetFileName(mergedCSS);
@@ -197,12 +206,7 @@ namespace SIL.PublishingSolution
                         //Common.RunCommand("prince ", _processedXhtml + " -o, " + xhtmlFileName + ".pdf", 1);
                     }
 
-                    
-                    ////string pdfFIleName = xhtmlFileName + ".pdf";
-                    //if (!Common.Testing)
-                    //    Process.Start(pdfFIleName);
                     Environment.CurrentDirectory = curdir;
-
                     if (!projInfo.DefaultXhtmlFileWithPath.ToLower().Contains("local"))
                     {
                         //Copyright information added in PDF files
@@ -211,6 +215,17 @@ namespace SIL.PublishingSolution
                         string cleanExtn = ".tmp,.de,.exe,.jar,.xml";
                         Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, cleanExtn, "layout", string.Empty);
                         CreateRAMP(projInfo);
+                    }
+                    else
+                    {
+                        string pdfFileName = xhtmlFileName + ".pdf";
+                        pdfFileName = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), pdfFileName);
+                        
+                        if (!Common.Testing && File.Exists(pdfFileName))
+                        {
+                            success = true;
+                            Process.Start(pdfFileName);
+                        }
                     }
                     success = true;
                 }
@@ -227,6 +242,36 @@ namespace SIL.PublishingSolution
                 success = false;
             }
             return success;
+        }
+
+
+        /// <summary>
+        /// Replace Bookname to Bookcode. if the css style have -ps-referenceFormat: Gen 1
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void ReplaceBookNametoBookCode(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            string xPath = "//xhtml:span[@class='scrBookName']";
+            XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if (SectionNodeList == null) return;
+            for (int i = 0; i < SectionNodeList.Count; i++)
+            {
+                XmlNode paraNode = SectionNodeList[i].ParentNode;
+                xPath = ".//xhtml:span[@class='scrBookCode']";
+                XmlNodeList verseNodeList = paraNode.SelectNodes(xPath, namespaceManager);
+                if (verseNodeList == null) return;
+                for (int j = 0; j < verseNodeList.Count; j++)
+                {
+                    SectionNodeList.Item(i).InnerText = verseNodeList[j].InnerText;
+                    break;
+                }
+            }
+            xDoc.Save(fileName);
         }
 
         private void CreateRAMP(PublicationInformation projInfo)

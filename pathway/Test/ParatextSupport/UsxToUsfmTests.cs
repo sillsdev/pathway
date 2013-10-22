@@ -43,11 +43,14 @@ namespace Test.ParatextSupport
 
         private const string htmlOpen = "<?xml version=\"1.0\" encoding=\"utf-16\"?><html xml:lang=\"utf-8\" xmlns=\"http://www.w3.org/1999/xhtml\">";
         private const string htmlHeader = "<head><title /><link rel=\"stylesheet\" href=\"TestProj.css\" type=\"text/css\" />" +
+            "<link rel=\"schema.DCTERMS\" href=\"http://purl.org/dc/terms/\" />" +
+            "<link rel=\"schema.DC\" href=\"http://purl.org/dc/elements/1.1/\" />" +
             "<meta name=\"description\" content=\"TestProj exported by Tester on 2013-08-27T00:00:00\" />" +
             "<meta name=\"filename\" content=\"TestProj.xhtml\" />" +
             "<meta name=\"stylesheet\" content=\"usfm\" />" + 
             "<meta name=\"fontName\" content=\"Times\" />" +
-            "<meta name=\"fontSize\" content=\"12\" /></head>";
+            "<meta name=\"fontSize\" content=\"12\" />" +
+            "<meta name=\"dc.language\" content=\"\" scheme=\"DCTERMS.RFC5646\" /></head>";
         private const string bookOpen = "<body class=\"scrBody\"><div class=\"scrBook\"><span class=\"scrBookName\" lang=\"zxx\">Judges</span>" +
             "<span class=\"scrBookCode\" lang=\"zxx\">JDG</span>";
         private const string title = "<div class=\"Title_Main\"><span class=\"Title_Secondary\" lang=\"zxx\">OT: Narrative</span><span lang=\"zxx\">Judges</span></div>";
