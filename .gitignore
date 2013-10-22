@@ -119,6 +119,7 @@ pathway/Test/OpenOfficeConvert/TestFiles/output/*
 pathway/Test/PathwayB/TestFiles/output/*
 pathway/Test/ParatextSupport/TestFiles/output/*
 pathway/Test/PathwayB/TestFiles/Output.ramp
+pathway/Test/PdfConvert/TestFiles/Output/*
 pathway/Test/PsExport/TestFiles/Output/*
 pathway/Test/PsTool/TestFiles/output/*
 pathway/Test/theWordConvert/TestFiles/output/*
