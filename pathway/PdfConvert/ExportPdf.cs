@@ -232,7 +232,7 @@ namespace SIL.PublishingSolution
         private void CreateRAMP(PublicationInformation projInfo)
         {
             Ramp ramp = new Ramp();
-            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".pdf");
+            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".pdf", projInfo.ProjectInputType);
         }
     }
 }

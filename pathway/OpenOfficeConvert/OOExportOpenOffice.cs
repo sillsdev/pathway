@@ -901,7 +901,7 @@ namespace SIL.PublishingSolution
                 outputExtn = ".pdf";
             }
             Ramp ramp = new Ramp();
-            ramp.Create(publicationInfo.DefaultXhtmlFileWithPath, outputExtn);
+            ramp.Create(publicationInfo.DefaultXhtmlFileWithPath, outputExtn, publicationInfo.ProjectInputType);
         }
 
         private void HandledInCss(ref PublicationInformation projInfo, ref Dictionary<string, Dictionary<string, string>> cssClass)

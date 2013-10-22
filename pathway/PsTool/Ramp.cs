@@ -75,12 +75,14 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _fileList = new Dictionary<string, string>();
         private string _folderPath = string.Empty;
         private string _outputExtension = string.Empty;
+        private string _projInputType = string.Empty;
         #endregion
 
         #region Private variable
         private RampFile rampFile;
         private Dictionary<string, string> _isoLanguageCode = new Dictionary<string, string>();
         private Dictionary<string, string> _isoLanguageCodeandName = new Dictionary<string, string>();
+        private Dictionary<string, string> _isoLanguageScriptandName = new Dictionary<string, string>();
         #endregion
 
         #region Property
@@ -289,24 +291,25 @@ namespace SIL.PublishingSolution
             set { _status = value; }
         }
 
-        public Dictionary<string, string> IsoLanguageCode
+        //public Dictionary<string, string> IsoLanguageCode
+        //{
+        //    get { return _isoLanguageCode; }
+        //    set { _isoLanguageCode = value; }
+        //}
+
+        //public Dictionary<string, string> IsoLanguageCodeandName
+        //{
+        //    get { return _isoLanguageCodeandName; }
+        //    set { _isoLanguageCodeandName = value; }
+        //}
+
+        public string ProjInputType
         {
-            get { return _isoLanguageCode; }
-            set { _isoLanguageCode = value; }
+            get { return _projInputType; }
+            set { _projInputType = value; }
         }
 
-        public Dictionary<string, string> IsoLanguageCodeandName
-        {
-            get { return _isoLanguageCodeandName; }
-            set { _isoLanguageCodeandName = value; }
-        }
         #endregion
-
-        public Ramp()
-        {
-            LoadIsoLanguageCode();
-            LoadIsoLanguageCodeToName();
-        }
 
         #region Public Methods
 
@@ -315,19 +318,56 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="folderPath"></param>
         /// <param name="outputExtension"></param>
-        public void Create(string folderPath, string outputExtension)
+        /// <param name="inputType"> </param>
+        public void Create(string folderPath, string outputExtension, string inputType)
         {
             if (IsFromTestBed())
             {
                 return;
             }
 
+            _projInputType = inputType;
             _folderPath = folderPath;
             _outputExtension = outputExtension;
+            LoadLanguagefromXML();
             SetRampData();
             string encodedKey = GetEncodedKey();
             UpdateMetsXML(encodedKey);
             CompressToRamp();
+        }
+
+        private void LoadLanguagefromXML()
+        {
+            string xmlFilePath = Common.PathCombine(Common.GetApplicationPath(), "RampLangCode.xml"); ;
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            xDoc.Load(xmlFilePath);
+            const string twoLetterLangXPath = "//LanguageCode/IsoLanguageCodeTwoLetters/Language";
+            const string threeLetterLangXPath = "//LanguageCode/IsoLanguageCodeThreeLetters/Language";
+            const string scriptLangXPath = "//LanguageCode/LanguageScript/Language";
+            XmlNodeList twoLetterLangList = xDoc.SelectNodes(twoLetterLangXPath);
+            if(twoLetterLangList != null && twoLetterLangList.Count > 0)
+            {
+                foreach (XmlNode node in twoLetterLangList)
+                {
+                    _isoLanguageCode.Add(node.Attributes["name"].Value, node.Attributes["value"].Value);
+                }
+            }
+            XmlNodeList threeLetterLangList = xDoc.SelectNodes(threeLetterLangXPath);
+            if (threeLetterLangList != null && threeLetterLangList.Count > 0)
+            {
+                foreach (XmlNode node in threeLetterLangList)
+                {
+                    _isoLanguageCodeandName.Add(node.Attributes["name"].Value, node.Attributes["value"].Value);
+                }
+            }
+            XmlNodeList scriptLangList = xDoc.SelectNodes(scriptLangXPath);
+            if (scriptLangList != null && scriptLangList.Count > 0)
+            {
+                foreach (XmlNode node in scriptLangList)
+                {
+                    _isoLanguageScriptandName.Add(node.Attributes["name"].Value, node.Attributes["scriptname"].Value);
+                }
+            }
         }
 
         private bool IsFromTestBed()
@@ -345,83 +385,26 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// 
         /// </summary>
-        private void LoadIsoLanguageCode()
-        {
-            _isoLanguageCode.Add("en","eng");
-            _isoLanguageCode.Add("hi", "hin");
-            _isoLanguageCode.Add("ru", "rus");
-            _isoLanguageCode.Add("ta", "tam");
-            _isoLanguageCode.Add("te", "tel");
-            _isoLanguageCode.Add("ur", "urd");
-            _isoLanguageCode.Add("ml", "mal");
-            _isoLanguageCode.Add("pt", "por");
-            _isoLanguageCode.Add("es", "spa");
-            _isoLanguageCode.Add("th", "tha");
-            _isoLanguageCode.Add("tr", "tur");
-            _isoLanguageCode.Add("km", "khm");
-            _isoLanguageCode.Add("fr", "fra");
-            _isoLanguageCode.Add("la", "lat");
-            _isoLanguageCode.Add("id", "ind");
-            _isoLanguageCode.Add("lv", "lav");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void LoadIsoLanguageCodeToName()
-        {
-            _isoLanguageCodeandName.Add("eng", "English");
-            _isoLanguageCodeandName.Add("hin", "Hindi");
-            _isoLanguageCodeandName.Add("rus", "Russian");
-            _isoLanguageCodeandName.Add("tam", "Tamil");
-            _isoLanguageCodeandName.Add("tel", "Telugu");
-            _isoLanguageCodeandName.Add("urd", "Urdu");
-            _isoLanguageCodeandName.Add("mal", "Malayalam");
-            _isoLanguageCodeandName.Add("por", "Portuguese");
-            _isoLanguageCodeandName.Add("spa", "Spanish");
-            _isoLanguageCodeandName.Add("tha", "Thai");
-            _isoLanguageCodeandName.Add("tur", "Turkish");
-            _isoLanguageCodeandName.Add("khm", "Khmer");
-            _isoLanguageCodeandName.Add("gon", "Gondi");
-            _isoLanguageCodeandName.Add("bzh", "Buang, Mapos");
-            _isoLanguageCodeandName.Add("tpi", "Tok Pisin");
-            _isoLanguageCodeandName.Add("fra", "French");
-            _isoLanguageCodeandName.Add("kup", "Kunimaipa");
-            _isoLanguageCodeandName.Add("lat", "Latin");
-            _isoLanguageCodeandName.Add("tsi", "Tsimshian");
-            _isoLanguageCodeandName.Add("slu", "Selaru");
-            _isoLanguageCodeandName.Add("abs","Malay, Ambonese");
-            _isoLanguageCodeandName.Add("ind", "Indonesian");
-            _isoLanguageCodeandName.Add("ggo", "Gondi, Southern");
-            _isoLanguageCodeandName.Add("lav", "Latvian");
-            _isoLanguageCodeandName.Add("seh", "Sena");
-            _isoLanguageCodeandName.Add("flr", "Fuliiru");
-            _isoLanguageCodeandName.Add("pis", "Pijin");
-            _isoLanguageCodeandName.Add("lgr", "Lengo");
-            _isoLanguageCodeandName.Add("mgo", "Meta'");
-            _isoLanguageCodeandName.Add("bss", "Akoose");
-            _isoLanguageCodeandName.Add("grc", "Greek, Ancient");
-            _isoLanguageCodeandName.Add("bdu", "Oroko");
-            _isoLanguageCodeandName.Add("nko", "Nkonya");
-            _isoLanguageCodeandName.Add("baz", "Tunen");
-            _isoLanguageCodeandName.Add("khb", "Lü");
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
         public void AddSubjLanguage(string lang)
         {
-            if(lang.IndexOf('-') > 0)
+            if(lang.IndexOf(':') > 0)
             {
-                lang = lang.Substring(0, lang.IndexOf('-'));
+                SubjectLanguage.Add(lang);
             }
-            if (lang.Trim().Length > 0 && _isoLanguageCodeandName.ContainsKey(lang))
+            else
             {
-                string format = lang + ":" + _isoLanguageCodeandName[lang]; //"eng:English"
-                SubjectLanguage.Add(format);
+                string langCode = string.Empty;
+                if (lang.Length == 2 && _isoLanguageCode.ContainsKey(lang))
+                {
+                    langCode = _isoLanguageCode[lang];
+                }
+                if (langCode.Trim().Length > 0 && _isoLanguageCodeandName.ContainsKey(langCode))
+                {
+                    string format = langCode + ":" + _isoLanguageCodeandName[langCode]; //"eng:English"
+                    SubjectLanguage.Add(format);
+                }
             }
+            
         }
 
         /// <summary>
@@ -432,17 +415,40 @@ namespace SIL.PublishingSolution
             string[] languageCode = langCollection.Split(',');
             foreach (string s in languageCode)
             {
-                string langCode = s;
-                if (langCode.Length == 2 && _isoLanguageCode.ContainsKey(langCode))
-                {
-                    langCode = _isoLanguageCode[langCode];
-                }
-                if (langCode.Trim().Length > 0 && _isoLanguageCodeandName.ContainsKey(langCode))
-                {
-                    string format = langCode + ":" + _isoLanguageCodeandName[langCode]; //"eng:English"
-                    LanguageIso.Add(format);
-                }
+                if(s.Trim().Length == 0)
+                    continue;
 
+                if(s.IndexOf(':') > 0)
+                {
+                    string[] val = s.Split(':');
+                    string code = val[0];
+                    string codeName = val[1];
+
+                    if (code.Trim().Length == 2)
+                    {
+                        if (_isoLanguageCode.ContainsKey(code))
+                        {
+                            code = _isoLanguageCode[code];
+                        }
+                        //if (code.Trim().Length > 0 && _isoLanguageCodeandName.ContainsKey(code))
+                        if (code.Trim().Length > 0)
+                        {
+                            string format = code + ":" + codeName; //"eng:English"
+                            LanguageIso.Add(format);
+                        }
+                    }
+                    else
+                    {
+                        LanguageIso.Add(s);
+                    }
+                }
+                else
+                {
+                    if(s.Length == 3)
+                    {
+                        LanguageIso.Add(s + ":" + _isoLanguageCodeandName[s]);
+                    }
+                }
             }
         }
 
@@ -451,9 +457,27 @@ namespace SIL.PublishingSolution
             CoverageSpacialCountry.Add(country);
         }
 
-        public void AddLanguageScript(string script)
+        public void AddLanguageScript(string langCollection)
         {
-            LanguageScript.Add(script);
+            string[] languageCode = langCollection.Split(',');
+            foreach (string s in languageCode)
+            {
+                if (s.Trim().Length == 0)
+                    continue;
+
+                if (s.IndexOf(':') > 0 && s.IndexOf('-') > 0)
+                {
+                    string[] val = s.Split('-');
+                    if (_isoLanguageScriptandName.ContainsKey(val[1]))
+                    {
+                        LanguageScript.Add(val[1] + ":" + _isoLanguageScriptandName[val[1]]);
+                    }
+                }
+                else if (_isoLanguageScriptandName.ContainsKey(s))
+                {
+                    LanguageScript.Add(s + ":" + _isoLanguageScriptandName[s]);
+                }
+            }
         }
 
         public void AddContributor(string contrib)
@@ -548,12 +572,12 @@ namespace SIL.PublishingSolution
             //DescStage = "rough_draft";
             //VersionType = "first";
             TypeScholarlyWork = "Book";
-            AddSubjLanguage(Common.GetLanguageCode(_folderPath, "Dictionary"));
+            AddSubjLanguage(Common.GetLanguageCode(_folderPath, _projInputType));
             //CoverageSpacialRegionHas = "Y";//
             //AddCoverageSpacialCountry("IN:India, Andhra Pradesh");//
             SubjectLanguageHas = "Y";//
-            AddLanguageIso(Common.GetLanguageCodeList(_folderPath));
-            //AddLanguageScript("Latn:Latin");//
+            AddLanguageIso(Common.GetLanguageCodeList(_folderPath, _projInputType));
+            AddLanguageScript(Common.GetLanguageScriptList(_folderPath, _projInputType));//
             //AddLanguageScript("Telu:Telugu");//
             //AddLanguageScript("Deva:Devanagari (Nagari)");//
             AddContributor(Param.GetMetadataValue(Param.Creator) + ",compiler");//
@@ -616,6 +640,7 @@ namespace SIL.PublishingSolution
 
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -640,7 +665,7 @@ namespace SIL.PublishingSolution
             //CreateRampCoverageSpacialCountry(json);
             CreateRampSubjectLanguageHas(json);
             CreateRampLanguageIso(json);
-            //CreateRampLanguageScript(json);
+            CreateRampLanguageScript(json);
             CreateRampContributor(json);
             //CreateRampFormatExtentText(json);
             //CreateRampFormatExtentImages(json);
