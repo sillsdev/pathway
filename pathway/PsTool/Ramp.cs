@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="MergeCss.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="ramp.cs" from='2009' to='2013' company='SIL International'>
+//      Copyright © 2013, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -70,6 +70,8 @@ namespace SIL.PublishingSolution
         private string _silSensitivitySource;
         private List<string> _rampFile = new List<string>();
         private string _status;
+        private string _rampDescriptionHas;
+        private string _rampDescription;
         private List<string> _languageIso = new List<string>();
         private List<string> _contributor = new List<string>();
         private Dictionary<string, string> _fileList = new Dictionary<string, string>();
@@ -291,6 +293,18 @@ namespace SIL.PublishingSolution
             set { _status = value; }
         }
 
+        public string RampDescriptionHas
+        {
+            get { return _rampDescriptionHas; }
+            set { _rampDescriptionHas = value; }
+        }
+
+        public string RampDescription
+        {
+            get { return _rampDescription;  }
+            set { _rampDescription = value; }
+        }
+
         //public Dictionary<string, string> IsoLanguageCode
         //{
         //    get { return _isoLanguageCode; }
@@ -412,7 +426,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void AddLanguageIso(string langCollection)
         {
-            string[] languageCode = langCollection.Split(',');
+            string[] languageCode = langCollection.Split(';');
             foreach (string s in languageCode)
             {
                 if(s.Trim().Length == 0)
@@ -424,22 +438,32 @@ namespace SIL.PublishingSolution
                     string code = val[0];
                     string codeName = val[1];
 
+                    var dashPosition = code.IndexOf('-');
+                    if (dashPosition > 0)
+                    {
+                        code = code.Substring(0, dashPosition);
+                    }
+
                     if (code.Trim().Length == 2)
                     {
                         if (_isoLanguageCode.ContainsKey(code))
                         {
                             code = _isoLanguageCode[code];
                         }
-                        //if (code.Trim().Length > 0 && _isoLanguageCodeandName.ContainsKey(code))
-                        if (code.Trim().Length > 0)
+                    }
+                    var parenthesisPosition = codeName.IndexOf('(');
+                    if (parenthesisPosition > 0)
+                    {
+                        codeName = codeName.Substring(0, parenthesisPosition).Trim();
+                    }
+
+                    if (code.Trim().Length > 0)
+                    {
+                        string format = code + ":" + codeName; //"eng:English"
+                        if (!LanguageIso.Contains(format))
                         {
-                            string format = code + ":" + codeName; //"eng:English"
                             LanguageIso.Add(format);
                         }
-                    }
-                    else
-                    {
-                        LanguageIso.Add(s);
                     }
                 }
                 else
@@ -567,7 +591,7 @@ namespace SIL.PublishingSolution
             Ready = "Y";
             Title = Param.GetMetadataValue(Param.Title, Param.GetOrganization());
             BroadType = "wider_audience";
-            TypeMode = "Text,Photograph,Software application";
+            TypeMode = "Text,Software application";
             //FormatMedium = "Paper,Other";
             //DescStage = "rough_draft";
             //VersionType = "first";
@@ -596,6 +620,11 @@ namespace SIL.PublishingSolution
             SilSensitivityMetaData = "Public";
             SilSensitivityPresentation = "Public";
             SilSensitivitySource = "Insite users";
+            RampDescription = Param.GetMetadataCurrentValue(Param.Description);
+            if (RampDescription.Trim().Length > 0)
+            {
+                RampDescriptionHas = "Y";
+            }
 
             if (_folderPath != null)
             {
@@ -683,6 +712,8 @@ namespace SIL.PublishingSolution
             CreateRampSilSensitivityPresentation(json);
             CreateRampSilSensitivitySource(json);
             CreateRampFiles(json);
+            CreateRampDescriptionHas(json);
+            CreateRampDescription(json);
             CreateRampStatus(json);
             CloseRampFile(json);
         }
@@ -1112,6 +1143,31 @@ namespace SIL.PublishingSolution
             {
                 json.WriteTag("id");
                 json.WriteText(RampId);
+            }
+        }
+
+        private void CreateRampDescriptionHas(Json json)
+        {
+            if (RampDescriptionHas.Trim().Length > 0)
+            {
+                json.WriteTag("description.has");
+                json.WriteText(RampDescriptionHas);
+            }
+        }
+
+        private void CreateRampDescription(Json json)
+        {
+            if (RampDescription.Trim().Length > 0)
+            {
+                json.WriteTag("dc.description");
+                json.StartTag();
+                int i = 0;
+                json.WriteTag(i.ToString());
+                json.StartTag();
+                json.WriteText(" \" : \"" + RampDescription.Replace("\n", " ").Replace("\r", "") + "\", \"lang\": \"eng");
+                json.EndTag();
+                json.EndTag();
+                json.WriteComma();
             }
         }
 
