@@ -293,6 +293,7 @@
     <Compile Include="ParatextSupport\StyToCssTest.cs" />
     <Compile Include="ParatextSupport\UsxToUsfmTests.cs" />
     <Compile Include="PathwayB\PathwayBTest.cs" />
+    <Compile Include="PdfConvert\ExportPdfTest.cs" />
     <Compile Include="PublishingSolutionExeUi\PsUiScenarioTests.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -382,6 +383,10 @@
     <Compile Include="GoBibleConvert\GoBibleTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApplyPDFLicenseInfo\ApplyPDFLicenseInfo.csproj">
+      <Project>{2B00A4D8-D9C7-4F7F-9CC8-776C9B84AD9E}</Project>
+      <Name>ApplyPDFLicenseInfo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BuildTasks\BuildTasks.csproj">
       <Project>{B0B420FE-6E6C-421C-A6F2-A9E349FC3EA9}</Project>
       <Name>BuildTasks</Name>
@@ -433,6 +438,14 @@
     <ProjectReference Include="..\ParatextSupport\ParatextSupport.csproj">
       <Project>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</Project>
       <Name>ParatextSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PdfConvert\PdfConvert.csproj">
+      <Project>{E75BC85C-6240-45F0-ADBF-F0F80EEFD6D8}</Project>
+      <Name>PdfConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PdfLicense\PdfLicense.csproj">
+      <Project>{FB9DD8CF-B05E-4E83-A987-42F639BB9840}</Project>
+      <Name>PdfLicense</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsExport\PsExport.csproj">
       <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
