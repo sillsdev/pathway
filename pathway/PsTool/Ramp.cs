@@ -626,7 +626,7 @@ namespace SIL.PublishingSolution
             AddLanguageScript(Common.GetLanguageScriptList(_folderPath, _projInputType));
             //AddLanguageScript("Telu:Telugu");//
             //AddLanguageScript("Deva:Devanagari (Nagari)");//
-            AddContributor(Param.GetMetadataValue(Param.Creator) + ",compiler");
+            AddContributor(Param.GetMetadataValue(Param.Creator).Replace(",", "--") + ",compiler");
             //FormatExtentText = "8";
             //FormatExtentImages = GetImageCount(publicationInfo.DefaultXhtmlFileWithPath);//
             //DescSponsership = Param.GetOrganization();
@@ -643,7 +643,7 @@ namespace SIL.PublishingSolution
             SilSensitivityPresentation = "Public";
             SilSensitivitySource = "Insite users";
             RampDescription = Param.GetMetadataCurrentValue(Param.Description);
-            if (RampDescription.Trim().Length > 0)
+            if (RampDescription != null && RampDescription.Trim().Length > 0)
             {
                 RampDescriptionHas = "Y";
             }
@@ -1170,7 +1170,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampDescriptionHas(Json json)
         {
-            if (RampDescriptionHas.Trim().Length > 0)
+            if (RampDescriptionHas != null && RampDescriptionHas.Trim().Length > 0)
             {
                 json.WriteTag("description.has");
                 json.WriteText(RampDescriptionHas);
@@ -1179,7 +1179,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampDescription(Json json)
         {
-            if (RampDescription.Trim().Length > 0)
+            if (RampDescription != null && RampDescription.Trim().Length > 0)
             {
                 json.WriteTag("dc.description");
                 json.StartTag();
