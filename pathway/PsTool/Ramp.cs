@@ -352,7 +352,7 @@ namespace SIL.PublishingSolution
 
         protected void LoadLanguagefromXML()
         {
-            string xmlFilePath = Common.PathCombine(Common.GetApplicationPath(), "RampLangCode.xml"); ;
+            string xmlFilePath = Common.PathCombine(Common.GetBinPath(), "RampLangCode.xml"); ;
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(xmlFilePath);
             const string twoLetterLangXPath = "//LanguageCode/IsoLanguageCodeTwoLetters/Language";
