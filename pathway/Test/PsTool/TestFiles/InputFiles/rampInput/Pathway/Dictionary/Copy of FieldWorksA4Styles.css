@@ -1,0 +1,23 @@
+@import "Layout_15.css";
+@import "Justified_No.css";
+@import "VerticalJustify_Top.css";
+@import "Page_size_A4.css";
+@import "Columns_2.css";
+@import "Font_Size_nc.css";
+@import "Leading_nc.css";
+@import "Pictures_Yes.css";
+@import "Running_Head_Mirrored.css";
+@import "PageNumber_TopInside.css";
+@import "Rules_Yes.css";
+@import "Sense_nc.css";
+.letData{
+column-gap:12pt;
+}
+@page{
+margin-top:43pt;
+margin-right:52pt;
+margin-bottom:43pt;
+margin-left:52pt;
+-ps-fileproduce:"One";
+-ps-fixed-line-height:"False";
+}
