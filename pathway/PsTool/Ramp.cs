@@ -74,17 +74,17 @@ namespace SIL.PublishingSolution
         private string _rampDescription;
         private List<string> _languageIso = new List<string>();
         private List<string> _contributor = new List<string>();
-        private Dictionary<string, string> _fileList = new Dictionary<string, string>();
-        private string _folderPath = string.Empty;
-        private string _outputExtension = string.Empty;
-        private string _projInputType = string.Empty;
+        protected Dictionary<string, string> _fileList = new Dictionary<string, string>();
+        protected string _folderPath = string.Empty;
+        protected string _outputExtension = string.Empty;
+        protected string _projInputType = string.Empty;
         #endregion
 
         #region Private variable
         private RampFile rampFile;
-        private Dictionary<string, string> _isoLanguageCode = new Dictionary<string, string>();
-        private Dictionary<string, string> _isoLanguageCodeandName = new Dictionary<string, string>();
-        private Dictionary<string, string> _isoLanguageScriptandName = new Dictionary<string, string>();
+        protected Dictionary<string, string> _isoLanguageCode = new Dictionary<string, string>();
+        protected Dictionary<string, string> _isoLanguageCodeandName = new Dictionary<string, string>();
+        protected Dictionary<string, string> _isoLanguageScriptandName = new Dictionary<string, string>();
         #endregion
 
         #region Property
@@ -350,7 +350,7 @@ namespace SIL.PublishingSolution
             CompressToRamp();
         }
 
-        private void LoadLanguagefromXML()
+        protected void LoadLanguagefromXML()
         {
             string xmlFilePath = Common.PathCombine(Common.GetApplicationPath(), "RampLangCode.xml"); ;
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
@@ -399,26 +399,36 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// 
         /// </summary>
-        public void AddSubjLanguage(string lang)
+        public void AddSubjLanguage(string langList)
         {
-            if(lang.IndexOf(':') > 0)
+            foreach (string lang in langList.Split(new[] {';'}))
             {
-                SubjectLanguage.Add(lang);
-            }
-            else
-            {
-                string langCode = string.Empty;
-                if (lang.Length == 2 && _isoLanguageCode.ContainsKey(lang))
+                var colonPosition = lang.IndexOf(':');
+                if (colonPosition > 0)
                 {
-                    langCode = _isoLanguageCode[lang];
-                }
-                if (langCode.Trim().Length > 0 && _isoLanguageCodeandName.ContainsKey(langCode))
-                {
-                    string format = langCode + ":" + _isoLanguageCodeandName[langCode]; //"eng:English"
+                    var langCode = lang.Substring(0, colonPosition).Trim();
+                    var langName = lang.Substring(colonPosition + 1).Trim();
+                    if (langCode.Length == 2 && _isoLanguageCode.ContainsKey(langCode))
+                    {
+                        langCode = _isoLanguageCode[langCode];
+                    }
+                    string format = langCode + ":" + langName;
                     SubjectLanguage.Add(format);
                 }
+                else
+                {
+                    string langCode = string.Empty;
+                    if (lang.Length == 2 && _isoLanguageCode.ContainsKey(lang))
+                    {
+                        langCode = _isoLanguageCode[lang];
+                    }
+                    if (langCode.Trim().Length > 0 && _isoLanguageCodeandName.ContainsKey(langCode))
+                    {
+                        string format = langCode + ":" + _isoLanguageCodeandName[langCode]; //"eng:English"
+                        SubjectLanguage.Add(format);
+                    }
+                }
             }
-            
         }
 
         /// <summary>
@@ -583,7 +593,7 @@ namespace SIL.PublishingSolution
         /// 
         /// </summary>
         /// <param name="outputExtension"></param>
-        private void SetRampData()
+        protected void SetRampData()
         {
             Param.LoadSettings();
             //ramp.RampId = "ykmb9i6zlh";
@@ -591,31 +601,31 @@ namespace SIL.PublishingSolution
             Ready = "Y";
             Title = Param.GetMetadataValue(Param.Title, Param.GetOrganization());
             BroadType = "wider_audience";
-            TypeMode = "Text,Software application";
+            TypeMode = "Text";
             //FormatMedium = "Paper,Other";
             //DescStage = "rough_draft";
             //VersionType = "first";
             TypeScholarlyWork = "Book";
-            AddSubjLanguage(Common.GetLanguageCode(_folderPath, _projInputType));
+            AddSubjLanguage(Common.GetLanguageCode(_folderPath, _projInputType, true));
             //CoverageSpacialRegionHas = "Y";//
             //AddCoverageSpacialCountry("IN:India, Andhra Pradesh");//
-            SubjectLanguageHas = "Y";//
+            SubjectLanguageHas = "Y";
             AddLanguageIso(Common.GetLanguageCodeList(_folderPath, _projInputType));
-            AddLanguageScript(Common.GetLanguageScriptList(_folderPath, _projInputType));//
+            AddLanguageScript(Common.GetLanguageScriptList(_folderPath, _projInputType));
             //AddLanguageScript("Telu:Telugu");//
             //AddLanguageScript("Deva:Devanagari (Nagari)");//
-            AddContributor(Param.GetMetadataValue(Param.Creator) + ",compiler");//
+            AddContributor(Param.GetMetadataValue(Param.Creator) + ",compiler");
             //FormatExtentText = "8";
             //FormatExtentImages = GetImageCount(publicationInfo.DefaultXhtmlFileWithPath);//
             //DescSponsership = Param.GetOrganization();
             //DescTableofContentsHas = " ";//
-            SilDomain = "LING:Linguistics";//
-            DomainSubTypeLing = "lexicon (LING)";//
-            AddSubject(Param.GetMetadataValue(Param.Subject) + ",eng");//
+            SilDomain = "LING:Linguistics";
+            DomainSubTypeLing = "lexicon (LING)";
+            AddSubject(Param.GetMetadataValue(Param.Subject) + ",eng");
             //RelRequiresHas = "Y";
             //AddRelRequires("OFL");
             RelConformsto = "odf";
-            AddRightsHolder(Param.GetMetadataValue(Param.CopyrightHolder));//
+            AddRightsHolder(Param.GetMetadataValue(Param.CopyrightHolder));
             //Rights = GetLicenseFileName();//
             SilSensitivityMetaData = "Public";
             SilSensitivityPresentation = "Public";
