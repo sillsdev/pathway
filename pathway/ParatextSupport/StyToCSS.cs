@@ -363,7 +363,7 @@ namespace SIL.PublishingSolution
 	            {
 	                cssFile.Write(" font-family: \"{0}\";", fontFamily);
 	            }
-                cssFile.Write(" font-size: \"{0}pt\";", fontSize);
+                cssFile.Write(" font-size: {0}pt;", fontSize);
 	            if (languageDirection != "ltr")
 	            {
 	                cssFile.Write(" direction: {0}; text-align: {1};", languageDirection, textAlign);
