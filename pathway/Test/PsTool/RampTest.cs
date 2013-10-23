@@ -87,7 +87,7 @@ namespace Test.PsTool
             _projInputType = "Dictionary";
             LoadLanguagefromXML();
             AddSubjLanguage(Common.GetLanguageCode(_folderPath, _projInputType, true));
-            Assert.True(SubjectLanguage.Contains("ggo-Telu-IN:Gondi, Southern (Telugu, India)"), "missing Gondwana");
+            Assert.True(SubjectLanguage.Contains("ggo:Gondi, Southern"), "missing Gondwana");
         }
 
         [Test]

@@ -406,8 +406,8 @@ namespace SIL.PublishingSolution
                 var colonPosition = lang.IndexOf(':');
                 if (colonPosition > 0)
                 {
-                    var langCode = lang.Substring(0, colonPosition).Trim();
-                    var langName = lang.Substring(colonPosition + 1).Trim();
+                    var langCode = JustLangCode(lang.Substring(0, colonPosition).Trim());
+                    var langName = JustLangName(lang.Substring(colonPosition + 1).Trim());
                     if (langCode.Length == 2 && _isoLanguageCode.ContainsKey(langCode))
                     {
                         langCode = _isoLanguageCode[langCode];
@@ -417,7 +417,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    string langCode = string.Empty;
+                    string langCode = JustLangCode(lang);
                     if (lang.Length == 2 && _isoLanguageCode.ContainsKey(lang))
                     {
                         langCode = _isoLanguageCode[lang];
@@ -448,11 +448,7 @@ namespace SIL.PublishingSolution
                     string code = val[0];
                     string codeName = val[1];
 
-                    var dashPosition = code.IndexOf('-');
-                    if (dashPosition > 0)
-                    {
-                        code = code.Substring(0, dashPosition);
-                    }
+                    code = JustLangCode(code);
 
                     if (code.Trim().Length == 2)
                     {
@@ -461,11 +457,7 @@ namespace SIL.PublishingSolution
                             code = _isoLanguageCode[code];
                         }
                     }
-                    var parenthesisPosition = codeName.IndexOf('(');
-                    if (parenthesisPosition > 0)
-                    {
-                        codeName = codeName.Substring(0, parenthesisPosition).Trim();
-                    }
+                    codeName = JustLangName(codeName);
 
                     if (code.Trim().Length > 0)
                     {
@@ -484,6 +476,26 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
+        }
+
+        private static string JustLangName(string codeName)
+        {
+            var parenthesisPosition = codeName.IndexOf('(');
+            if (parenthesisPosition > 0)
+            {
+                codeName = codeName.Substring(0, parenthesisPosition).Trim();
+            }
+            return codeName;
+        }
+
+        private static string JustLangCode(string code)
+        {
+            var dashPosition = code.IndexOf('-');
+            if (dashPosition > 0)
+            {
+                code = code.Substring(0, dashPosition);
+            }
+            return code;
         }
 
         public void AddCoverageSpacialCountry(string country)
