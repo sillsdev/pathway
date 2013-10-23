@@ -1,0 +1,27 @@
+@import "GPS12J10.css";
+@import "Justified_Yes.css";
+@import "VerticalJustify_Top.css";
+@import "Page_size_GPS1.css";
+@import "Columns_2.css";
+@import "font_size_10_12.css";
+@import "Leading_12.css";
+@import "Pictures_Yes.css";
+@import "Running_Head_Mirrored.css";
+@import "Running_Head_Mirrored_Verse.css";
+@import "PageNumber_TopInside.css";
+@import "Rules_Yes.css";
+.letData{
+column-gap:12pt;
+}
+@page{
+margin-top:36pt;
+margin-right:36pt;
+margin-bottom:36pt;
+margin-left:36pt;
+-ps-fileproduce:"One";
+-ps-fixed-line-height:"False";
+-ps-custom-footnote-caller:"";
+-ps-custom-XRef-caller:"";
+-ps-hide-versenumber-one:"False";
+-ps-hide-space-versenumber:"False";
+}

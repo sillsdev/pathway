@@ -1,29 +1,27 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="ramp.cs" from='2009' to='2013' company='SIL International'>
-//      Copyright © 2013, SIL International. All Rights Reserved.   
+#region // Copyright (c) 2013, SIL International. LGPL
+// <copyright file="ramp.cs" from='2013' to='2013' company='SIL International'>
+//      Copyright © 2013, SIL International. 
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-// <author>Greg Trihus</author>
+#endregion
+// <author>V. Karthikeyan</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed: 
 // 
 // <remarks>
-// Combines all css into a single file by implementing @import
+// Prepare RAMP packaging putting meta data into JSON format.
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
 using SIL.Tool;
