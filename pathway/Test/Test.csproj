@@ -294,6 +294,7 @@
     <Compile Include="ParatextSupport\UsxToUsfmTests.cs" />
     <Compile Include="PathwayB\PathwayBTest.cs" />
     <Compile Include="PdfConvert\ExportPdfTest.cs" />
+    <Compile Include="PsTool\RampTest.cs" />
     <Compile Include="PublishingSolutionExeUi\PsUiScenarioTests.cs">
       <SubType>Code</SubType>
     </Compile>
