@@ -129,6 +129,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void AddContributorTest()
         {
             const string TestFolder = "rampInput";
@@ -140,6 +141,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void RampDescriptionTest()
         {
             const string TestFolder = "rampInput";
