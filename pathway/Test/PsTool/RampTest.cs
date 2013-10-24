@@ -59,6 +59,11 @@ namespace Test.PsTool
             LanguageIso.Clear();
             RampDescriptionHas = null;
             RampDescription = null;
+            var settingsFolder = Path.Combine(Common.GetAllUserPath(), "Pathway");
+            if (Directory.Exists(settingsFolder))
+            {
+                Directory.Delete(settingsFolder, true);
+            }
         }
         #endregion setup
 
