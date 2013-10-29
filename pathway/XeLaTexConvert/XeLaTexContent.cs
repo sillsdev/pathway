@@ -43,7 +43,7 @@ namespace SIL.PublishingSolution
         private bool _nextContent;
         private int _incrementDropCap = 0;
 
-
+        private bool _hasImgCloseTag;
         private bool isImageAvailable;
         private bool isHomographNumber = false;
         private string columnCount = string.Empty;
@@ -384,6 +384,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                _reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true);
                 bool headXML = true;
                 while (_reader.Read())
                 {
@@ -403,6 +404,19 @@ namespace SIL.PublishingSolution
                         }
                     }
 
+                    if (_reader.Name == "img")
+                    {
+                        _hasImgCloseTag = true;
+                    }
+                    // _hasImgCloseTag = _imageInsert; 
+                    if (_reader.IsEmptyElement)
+                    {
+                        if (_reader.Name == "img")
+                        {
+                            _hasImgCloseTag = false;
+                        }
+                    }
+
                     switch (_reader.NodeType)
                     {
                         case XmlNodeType.Element:
@@ -416,10 +430,6 @@ namespace SIL.PublishingSolution
                             break;
                         case XmlNodeType.SignificantWhitespace:
                             InsertWhiteSpace();
-                            //if (_reader.Value.Replace(" ", "") == "")
-                            //{
-                            //    Write();
-                            //}
                             break;
                     }
                 }
@@ -1031,10 +1041,14 @@ namespace SIL.PublishingSolution
 
                 isImageAvailable = true;
                 inserted = true;
-                string[] cc = _allParagraph.ToArray();
 
-                if (cc.Length < 1)
-                    imageClass = cc[1];
+                string[] cc = _allStyle.ToArray(); //_allParagraph.ToArray();
+                imageClass = cc[0]; //cc[1];
+
+                //string[] cc = _allParagraph.ToArray();
+
+                //if (cc.Length < 1)
+                //    imageClass = cc[1];
 
                 srcFile = _imageSource.ToLower();
 
@@ -1208,6 +1222,7 @@ namespace SIL.PublishingSolution
                 _imageInsert = false;
                 _imageSource = string.Empty;
                 _isNewParagraph = false;
+                _isParagraphClosed = true;
             }
             return inserted;
         }
@@ -1846,8 +1861,17 @@ namespace SIL.PublishingSolution
         private void EndElement()
         {
             _characterName = null;
+            if (_hasImgCloseTag && _imageInserted)
+            {
+                _hasImgCloseTag = false;
+            }
+            else
+            {
+                _closeChildName = StackPop(_allStyle);
+            }
+
             //WriteEmptyHomographStyle();
-            _closeChildName = StackPop(_allStyle);
+            //_closeChildName = StackPop(_allStyle);
             CloseBrace(_closeChildName);
             DoNotInheritClassEnd(_closeChildName);
             SetHeadwordFalse();
@@ -1937,7 +1961,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void EndElementForImage()
         {
-            if (_imageInsert && !_imageInserted)
+            if (!_imageInsert && _imageInserted)
             {
                 if (_closeChildName == _imageClass) // Without Caption
                 {
@@ -1955,7 +1979,7 @@ namespace SIL.PublishingSolution
                 {
                     isImageAvailable = false;
                     imageClass = "";
-                    _isParagraphClosed = true;
+                    _isParagraphClosed = false;
                 }
             }
         }
