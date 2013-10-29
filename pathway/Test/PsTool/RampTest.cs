@@ -12,6 +12,7 @@
 // Responsibility: Trihus
 // ---------------------------------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 using System.IO;
 using NMock2;
 using NUnit.Framework;
@@ -88,6 +89,7 @@ namespace Test.PsTool
         [Test]
         public void AddSubjLanguageTest()
         {
+            SubjectLanguage = new List<string>();
             _folderPath = FileInput(Path.Combine("rampInput", "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             LoadLanguagefromXML();
@@ -156,12 +158,13 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void RampRelRequiresTest()
         {
+            RelRequires = new List<string>();
             const string TestFolder = "rampInput";
             _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
-            Assert.True(RelRequires.Count == 5, "should be 5 fonts!");
+            Assert.True(RelRequires.Count == 4, "should be 4 fonts!");
         }
 
         [Test]

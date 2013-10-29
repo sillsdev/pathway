@@ -651,7 +651,6 @@ namespace SIL.PublishingSolution
         /// </summary>
         protected void SetRampData()
         {
-
             Param.LoadSettings();
             //ramp.RampId = "ykmb9i6zlh";
             CreatedOn = DateTime.Now.ToString("r");
