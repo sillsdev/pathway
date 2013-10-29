@@ -1576,7 +1576,7 @@ namespace SIL.PublishingSolution
             try
             {
                 node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/currentValue");
-                if(node.InnerText.Length == 0)
+                if(node != null && node.InnerText.Length == 0)
                 {
                     node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/defaultValue");
                 }
