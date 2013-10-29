@@ -78,7 +78,7 @@ namespace Test.XeLatex
         /// Multi Parent Test - .subsenses > .sense > .xsensenumber { font-size:10pt;}
         /// Parent comes as multiple times
         /// </summary>
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextAlignTest()
@@ -88,7 +88,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextIndentTest()
@@ -168,7 +168,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontStyleNormalTest()
@@ -188,7 +188,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontVariantSmallCapTest()
@@ -248,7 +248,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontSizeXXSmallTest()
@@ -258,7 +258,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeightBoldTest()
@@ -268,7 +268,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeightNormalTest()
@@ -279,7 +279,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeightBoldRegular()  // TD-2330()
@@ -290,7 +290,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontBoldItalicTest()  // TD-2188()
@@ -300,7 +300,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeight400Test()
@@ -310,7 +310,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeight700Test()
@@ -330,7 +330,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void MarginTopTest()
@@ -340,7 +340,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void DisplayBlockTest()
@@ -350,7 +350,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextAlignRightTest()
@@ -382,7 +382,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
 
         //[Test]
         //[Category("SkipOnTeamCity")]
@@ -395,7 +395,7 @@ namespace Test.XeLatex
         //}
 
         #region NestedDiv
-        
+
         [Test]
         public void NestedDiv1()
         {
@@ -405,7 +405,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
+
         [Test]
         public void NestedDiv2()
         {
@@ -414,7 +414,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         public void NestedDiv3()
         {
@@ -424,7 +424,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
+
         [Test]
         public void NestedDiv4()
         {
@@ -433,7 +433,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         public void NestedDiv5()
         {
@@ -442,7 +442,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         public void NestedDiv6()
         {
@@ -452,7 +452,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
+
         [Test]
         public void NestedSpan1()
         {
@@ -462,7 +462,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
         #endregion
-        
+
         [Test]
         public void EMTest1()
         {
@@ -471,7 +471,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         public void Font1()
         {
@@ -480,7 +480,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         public void FontParent()
         {
@@ -510,7 +510,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextIndentPcTest()
@@ -520,8 +520,8 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
-       [Test]
+
+        [Test]
         [Category("SkipOnTeamCity")]
         public void MarginRightTest()
         {
@@ -531,18 +531,18 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
-       [Test]
-       [Category("SkipOnTeamCity")]
-       public void UnderlineTest()
-       {
-           _projInfo.ProjectInputType = "Dictionary";
-           const string file = "Underline";
-           ExportProcess(file);
-           FileCompare(file);
-       }
-        
- 		[Test]
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void UnderlineTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Underline";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
         public void DisplayNone()
         {
             const string file = "DisplayNone";
@@ -550,7 +550,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         public void Larger()
         {
@@ -560,7 +560,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
+
         [Test]
         //TD-2302 font-family: Sans-Serif;
         public void FontFamily2()
@@ -570,7 +570,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         //TD-2302 font-family: Sans-Serif;
         public void FontFamily4()
@@ -580,7 +580,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         //TD-2303 font-family: Gentium
         public void FontFamily1()
@@ -590,7 +590,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
@@ -601,7 +601,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
@@ -612,7 +612,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         //TD-2303 font-family: Gentium
         public void FontFamily4a()
@@ -622,7 +622,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
@@ -633,7 +633,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         //TD-2059 font-family: "<default serif>", serif;
         public void FontFamily6()
@@ -643,7 +643,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextAlignJustifyTest()
@@ -654,7 +654,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void Counter1Test()
@@ -664,7 +664,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void Counter2Test()
@@ -674,7 +674,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void Counter3Test()
@@ -704,7 +704,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void LineHeightNoneTest()
@@ -764,7 +764,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FootNote1Test()
@@ -797,7 +797,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void ReplaceStringTest()
@@ -808,7 +808,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void VerticalAlignTest()
@@ -829,7 +829,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void HashSymbolTest()
@@ -984,7 +984,7 @@ namespace Test.XeLatex
         [Category("SkipOnTeamCity")]
         public void XeLaTexPath()
         {
-            Assert.AreEqual(@":\pwtex\", XeLaTexInstallation.GetXeLaTexDir().Substring(1)); 
+            Assert.AreEqual(@":\pwtex\", XeLaTexInstallation.GetXeLaTexDir().Substring(1));
         }
 
         [Ignore]
@@ -1039,6 +1039,17 @@ namespace Test.XeLatex
             UpdateXeLaTexFontCacheIfNecessary();
             var systemFontList = System.Drawing.FontFamily.Families;
             Assert.AreEqual(systemFontList.Length, XeLaTexInstallation.GetXeLaTexFontCount());
+        }
+
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TwoColumnInputCase()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TwoColumnInputCase";
+            ExportProcess(file);
+            FileCompare(file);
         }
         #endregion
 
