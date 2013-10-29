@@ -1,0 +1,25 @@
+.scrBookCode
+{
+display: none;
+font-size: 12pt;
+font-style: italic;
+font-weight: bold;
+color: #400000;
+}
+.scrBookName
+{
+display: none;
+font-size: 12pt;
+font-style: italic;
+color: #400000;
+string-set: bookname content();
+}.Chapter_Number {
+font-size: 199%;
+}
+.Note_CrossHYPHENReference_Paragraph::footnote-marker {
+content: attr(title);
+}
+.Note_General_Paragraph::footnote-marker {
+content: attr(title);
+}
+.scrBookName { display: block; font-size: 0pt; string-set: bookname content();}

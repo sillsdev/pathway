@@ -3717,6 +3717,8 @@ namespace SIL.Tool
             tw.WriteLine("content: attr(title);");
             tw.WriteLine("}");
 
+            tw.WriteLine(".scrBookName { display: block; font-size: 0pt; string-set: bookname content();}");
+
             tw.Close();
         }
 
