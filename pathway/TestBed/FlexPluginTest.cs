@@ -1262,7 +1262,32 @@ namespace TestBed
             //SetRampData(ramp);
             //ramp.Create(Path.Combine(folderPath, "MyTest"), folderPath);
 
+            string x = "eyJjcmVhdGVkX2F0IjoiVHVlLCAyOSBPY3QgMjAxMyAxMzozMzoxOCBHTVQiLCJyYW1wLmlzX3JlYWR5IjoiWSIsImRjLnRpdGxlIjoiRGVmYXVsdCBUaXRsZSIsImJyb2FkX3R5cGUiOiJ2ZXJuYWN1bGFyIiwiZGMudHlwZS5tb2RlIjpbIlRleHQiLCAiR3JhcGhpYyJdLCJkYy5mb3JtYXQubWVkaXVtIjpbIlBhcGVyIl0sImRjLmRlc2NyaXB0aW9uLnN0YWdlIjoicm91Z2hfZHJhZnQiLCJ2ZXJzaW9uLnR5cGUiOiJmaXJzdCIsInJhbXAudmVybmFjdWxhcm1hdGVyaWFsc3R5cGUiOiJzY3JpcHR1cmUiLCJkYy50eXBlLnNjcmlwdHVyZVR5cGUiOiJCaWJsZSB0ZXh0IGNvbXBsZXRlIiwiZGMudGl0bGUuc2NyaXB0dXJlU2NvcGUiOlsiSkFTOkphbWVzIiwgIjFQRToxIFBldGVyIiwgIjJQRToyIFBldGVyIiwgIjFKTjoxIEpvaG4iLCAiMkpOOjIgSm9obiIsICJdLCJkYy50eXBlLnNjaG9sYXJseVdvcmsiOiJCb29rIiwiZGMuc3ViamVjdC5zdWJqZWN0TGFuZ3VhZ2UiOnsiMCI6eyJkaWFsZWN0IiA6ICIiLCAiICI6ICJhYWk6YWFpIn19LCJzdWJqZWN0LnN1YmplY3RMYW5ndWFnZS5oYXMiOiJZIiwiZGMubGFuZ3VhZ2UuaXNvIjp7IjAiOnsiZGlhbGVjdCIgOiAiIiwgIiAiOiAiYWFpOmFhaSJ9fSwiZGMuY29udHJpYnV0b3IiOnsiMCI6eyIgIjogIkdUZXN0IiwgInJvbGUiOiAiY29tcGlsZXIifX0sImRjLmRhdGUubW9kaWZpZWQiOiIyMDEzLTEwLTI5IiwiZm9ybWF0LmV4dGVudC50ZXh0IjoiMCIsImZvcm1hdC5leHRlbnQuaW1hZ2VzIjoiMyIsImRjLnN1YmplY3Quc2lsRG9tYWluIjpbIkxJTkc6TGluZ3Vpc3RpY3MiXSwidHlwZS5kb21haW5TdWJ0eXBlLkxJTkciOlsibGV4aWNvbiAoTElORykiXSwiZGMuc3ViamVjdCI6eyIwIjp7IiAiOiAiQmlibGUiLCAibGFuZyI6ICJlbmcifX0sInJlbGF0aW9uLnJlcXVpcmVzLmhhcyI6IlkiLCJkYy5yZWxhdGlvbi5yZXF1aXJlcyI6eyIwIjp7IiAiOiAiIn19LCJkYy5yZWxhdGlvbi5jb25mb3Jtc3RvIjoiVFRGIiwiZGMucmlnaHRzSG9sZGVyIjp7IjAiOnsiICI6ICJXeWNsaWZmZSBCaWJsZSBUcmFuc2xhdG9ycyJ9fSwiZGMucmlnaHRzIjoiwqkgMjAxMiBXeWNsaWZmZSBCaWJsZSBUcmFuc2xhdG9ycywgSW5jLiAgVGhpcyB3b3JrIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSBDcmVhdGl2ZSBDb21tb25zIEF0dHJpYnV0aW9uLU5vbkNvbW1lcmNpYWwtTm9EZXJpdnMgMy4wIFVucG9ydGVkIExpY2Vuc2UuVG8gdmlldyBhIGNvcHkgb2YgdGhpcyBsaWNlbnNlLCB2aXNpdCBodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9saWNlbnNlcy9ieS1uYy1uZC8zLjAvIiwic2lsLnNlbnNpdGl2aXR5Lm1ldGFkYXRhIjoiUHVibGljIiwic2lsLnNlbnNpdGl2aXR5LnByZXNlbnRhdGlvbiI6IlB1YmxpYyIsInNpbC5zZW5zaXRpdml0eS5zb3VyY2UiOiJJbnNpdGUgdXNlcnMiLCJmaWxlcyI6eyIwIjp7IiAiOiAiMTkxNjU3MjAyNm1lcmdlZEE1QXBwbGljYXRpb25TdHlsZXMuY3NzIiwgImRlc2NyaXB0aW9uIjogIjE5MTY1NzIwMjZtZXJnZWRBNUFwcGxpY2F0aW9uU3R5bGVzIHN0eWxlc2hlZXQiLCAicmVsYXRpb25zaGlwIjogInNvdXJjZSJ9LCIxIjp7IiAiOiAiQTVBcHBsaWNhdGlvblN0eWxlcy5vZHQiLCAiZGVzY3JpcHRpb24iOiAiQTVBcHBsaWNhdGlvblN0eWxlcyBvZHQgZG9jdW1lbnQiLCAicmVsYXRpb25zaGlwIjogInByZXNlbnRhdGlvbiIsICJpc19wcmltYXJ5IjogIlkiLCAic2lsUHVibGljIjogIlkifSwiMiI6eyIgIjogIkE1QXBwbGljYXRpb25TdHlsZXMueGh0bWwiLCAiZGVzY3JpcHRpb24iOiAiQTVBcHBsaWNhdGlvblN0eWxlcyBYSFRNTCBmaWxlIiwgInJlbGF0aW9uc2hpcCI6ICJzb3VyY2UifX0sInN0YXR1cyI6InJlYWR5In0=";
+            string y = EncodeDecodeBase64(x, "decode");
+
             MessageBox.Show("Done");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputText">string to encode / decode</param>
+        /// <param name="operation">encode/decode</param>
+        /// <returns></returns>
+        private string EncodeDecodeBase64(string inputText, string operation)
+        {
+            string convertedText = string.Empty;
+            if (operation == "encode")
+            {
+                byte[] bytesToEncode = Encoding.UTF8.GetBytes(inputText);
+                convertedText = Convert.ToBase64String(bytesToEncode);
+            }
+            else if (operation == "decode")
+            {
+                byte[] decodedBytes = Convert.FromBase64String(inputText);
+                convertedText = Encoding.UTF8.GetString(decodedBytes);
+            }
+            return convertedText;
         }
 
         private void SetRampData(Ramp ramp)

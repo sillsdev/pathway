@@ -73,7 +73,7 @@ namespace Test.PsTool
             _folderPath = FileInput(Path.Combine("rampInput", "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             SetRampData();
-            Assert.AreEqual("Text", TypeMode);
+            Assert.AreEqual("Text,Graphic", TypeMode);
         }
 
         [Test]
@@ -138,6 +138,67 @@ namespace Test.PsTool
             SettingsInput(TestFolder);
             SetRampData();
             Assert.True(Contributor.Contains("GOD,compiler"), "should be GOD!");
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void RampFormatExtentImagesTest()
+        {
+            const string TestFolder = "rampInput";
+            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _projInputType = "Dictionary";
+            SettingsInput(TestFolder);
+            SetRampData();
+            Assert.True(FormatExtentImages.Contains("2"), "should be 2!");
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void RampRelRequiresTest()
+        {
+            const string TestFolder = "rampInput";
+            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _projInputType = "Dictionary";
+            SettingsInput(TestFolder);
+            SetRampData();
+            Assert.True(RelRequires.Count == 5, "should be 5 fonts!");
+        }
+
+        [Test]
+        [Ignore]
+        [Category("SkipOnTeamCity")]
+        public void RampRightsTest()
+        {
+            const string TestFolder = "rampInput";
+            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _projInputType = "Dictionary";
+            SettingsInput(TestFolder);
+            SetRampData();
+            Assert.True(Rights == "© 2013 SIL International®. DRAFT DOCUMENTPlease note that this document is not in its final form. This document was printed during the normal course of a review process by the creator or editor, and will likely be superceded in both content and format by a...", "CopyRight Information is wrong!");
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void RampCreatedOnTest()
+        {
+            const string TestFolder = "rampInput";
+            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _projInputType = "Dictionary";
+            SettingsInput(TestFolder);
+            SetRampData();
+            Assert.True(CreatedOn == DateTime.Now.ToString("r"), "Created on is incorrect!");
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void RampModifiedDateTest()
+        {
+            const string TestFolder = "rampInput";
+            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _projInputType = "Dictionary";
+            SettingsInput(TestFolder);
+            SetRampData();
+            Assert.True(ModifiedDate == DateTime.Now.ToString("yyyy-MM-dd"), "Modified on is incorrect!");
         }
 
         [Test]
