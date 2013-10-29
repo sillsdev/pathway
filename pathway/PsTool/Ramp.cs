@@ -22,6 +22,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
 using SIL.Tool;
@@ -38,6 +39,7 @@ namespace SIL.PublishingSolution
 
         private string _rampId;
         private string _createdOn;
+        private string _modifiedDate;
         private string _ready;
         private string _title;
         private string _broadType;
@@ -70,6 +72,10 @@ namespace SIL.PublishingSolution
         private string _status;
         private string _rampDescriptionHas;
         private string _rampDescription;
+        private string _vernacularmaterialsType;
+        private string _typeScriptureType;
+        private string _titleScriptureScope;
+        private string _helperVernacularContent;
         private List<string> _languageIso = new List<string>();
         private List<string> _contributor = new List<string>();
         protected Dictionary<string, string> _fileList = new Dictionary<string, string>();
@@ -83,6 +89,9 @@ namespace SIL.PublishingSolution
         protected Dictionary<string, string> _isoLanguageCode = new Dictionary<string, string>();
         protected Dictionary<string, string> _isoLanguageCodeandName = new Dictionary<string, string>();
         protected Dictionary<string, string> _isoLanguageScriptandName = new Dictionary<string, string>();
+        protected Dictionary<string, string> _oldTestament = new Dictionary<string, string>();
+        protected Dictionary<string, string> _newTestament = new Dictionary<string, string>();
+        protected Dictionary<string, string> _apocryphaTestament = new Dictionary<string, string>();
         #endregion
 
         #region Property
@@ -299,7 +308,7 @@ namespace SIL.PublishingSolution
 
         public string RampDescription
         {
-            get { return _rampDescription;  }
+            get { return _rampDescription; }
             set { _rampDescription = value; }
         }
 
@@ -319,6 +328,36 @@ namespace SIL.PublishingSolution
         {
             get { return _projInputType; }
             set { _projInputType = value; }
+        }
+
+        public string VernacularmaterialsType
+        {
+            get { return _vernacularmaterialsType; }
+            set { _vernacularmaterialsType = value; }
+        }
+
+        public string TypeScriptureType
+        {
+            get { return _typeScriptureType; }
+            set { _typeScriptureType = value; }
+        }
+
+        public string TitleScriptureScope
+        {
+            get { return _titleScriptureScope; }
+            set { _titleScriptureScope = value; }
+        }
+
+        public string HelperVernacularContent
+        {
+            get { return _helperVernacularContent; }
+            set { _helperVernacularContent = value; }
+        }
+
+        public string ModifiedDate
+        {
+            get { return _modifiedDate; }
+            set { _modifiedDate = value; }
         }
 
         #endregion
@@ -350,14 +389,17 @@ namespace SIL.PublishingSolution
 
         protected void LoadLanguagefromXML()
         {
-            string xmlFilePath = Common.PathCombine(Common.GetBinPath(), "RampLangCode.xml"); ;
+            string xmlFilePath = Common.PathCombine(Common.GetApplicationPath(), "RampLangCode.xml");
+            if (!File.Exists(xmlFilePath))
+                return;
+
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(xmlFilePath);
             const string twoLetterLangXPath = "//LanguageCode/IsoLanguageCodeTwoLetters/Language";
             const string threeLetterLangXPath = "//LanguageCode/IsoLanguageCodeThreeLetters/Language";
             const string scriptLangXPath = "//LanguageCode/LanguageScript/Language";
             XmlNodeList twoLetterLangList = xDoc.SelectNodes(twoLetterLangXPath);
-            if(twoLetterLangList != null && twoLetterLangList.Count > 0)
+            if (twoLetterLangList != null && twoLetterLangList.Count > 0)
             {
                 foreach (XmlNode node in twoLetterLangList)
                 {
@@ -399,7 +441,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void AddSubjLanguage(string langList)
         {
-            foreach (string lang in langList.Split(new[] {';'}))
+            foreach (string lang in langList.Split(new[] { ';' }))
             {
                 var colonPosition = lang.IndexOf(':');
                 if (colonPosition > 0)
@@ -437,10 +479,10 @@ namespace SIL.PublishingSolution
             string[] languageCode = langCollection.Split(';');
             foreach (string s in languageCode)
             {
-                if(s.Trim().Length == 0)
+                if (s.Trim().Length == 0)
                     continue;
 
-                if(s.IndexOf(':') > 0)
+                if (s.IndexOf(':') > 0)
                 {
                     string[] val = s.Split(':');
                     string code = val[0];
@@ -468,7 +510,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    if(s.Length == 3)
+                    if (s.Length == 3)
                     {
                         LanguageIso.Add(s + ":" + _isoLanguageCodeandName[s]);
                     }
@@ -536,7 +578,12 @@ namespace SIL.PublishingSolution
 
         public void AddRelRequires(string text)
         {
-            RelRequires.Add(text);
+            string[] fontList = text.Split(';');
+            foreach (string font in fontList)
+            {
+                if (font.Trim().Length > 0)
+                    RelRequires.Add(font);
+            }
         }
 
         public void AddRightsHolder(string value)
@@ -569,7 +616,7 @@ namespace SIL.PublishingSolution
                 newFile = newFile + "\", \"silPublic\": \"" + file.FileSilPublic;
             }
             RampFile.Add(newFile);
-            
+
             if (file.FileName != null)
             {
                 string isPrimary = string.Empty;
@@ -602,19 +649,26 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="outputExtension"></param>
         protected void SetRampData()
         {
+
             Param.LoadSettings();
             //ramp.RampId = "ykmb9i6zlh";
             CreatedOn = DateTime.Now.ToString("r");
             Ready = "Y";
             Title = Param.GetMetadataValue(Param.Title, Param.GetOrganization());
-            BroadType = "wider_audience";
+            BroadType = _projInputType.ToLower() == "dictionary" ? "wider_audience" : "vernacular";
             TypeMode = "Text";
-            //FormatMedium = "Paper,Other";
-            //DescStage = "rough_draft";
-            //VersionType = "first";
+            FormatMedium = "Paper";
+            DescStage = "rough_draft";
+            VersionType = "first";
+            if (_projInputType.ToLower() == "scripture")
+            {
+                VernacularmaterialsType = "scripture";
+                TypeScriptureType = "Bible text complete";
+                TitleScriptureScope = GetScriptureScope(_folderPath);
+                HelperVernacularContent = "shell_none";
+            }
             TypeScholarlyWork = "Book";
             AddSubjLanguage(Common.GetLanguageCode(_folderPath, _projInputType, true));
             //CoverageSpacialRegionHas = "Y";//
@@ -622,21 +676,24 @@ namespace SIL.PublishingSolution
             SubjectLanguageHas = "Y";
             AddLanguageIso(Common.GetLanguageCodeList(_folderPath, _projInputType));
             AddLanguageScript(Common.GetLanguageScriptList(_folderPath, _projInputType));
-            //AddLanguageScript("Telu:Telugu");//
-            //AddLanguageScript("Deva:Devanagari (Nagari)");//
             AddContributor(Param.GetMetadataValue(Param.Creator).Replace(",", "--") + ",compiler");
-            //FormatExtentText = "8";
-            //FormatExtentImages = GetImageCount(publicationInfo.DefaultXhtmlFileWithPath);//
+            FormatExtentText = GetNumberOfPdfPages(_folderPath);
+            FormatExtentImages = GetImageCount(_folderPath);//
+            if (Int32.Parse(FormatExtentImages) > 0)
+            {
+                TypeMode = TypeMode + ",Graphic";
+            }
+            ModifiedDate = DateTime.Now.ToString("yyyy-MM-dd");
             //DescSponsership = Param.GetOrganization();
             //DescTableofContentsHas = " ";//
             SilDomain = "LING:Linguistics";
             DomainSubTypeLing = "lexicon (LING)";
             AddSubject(Param.GetMetadataValue(Param.Subject) + ",eng");
-            //RelRequiresHas = "Y";
-            //AddRelRequires("OFL");
-            RelConformsto = "odf";
-            AddRightsHolder(Param.GetMetadataValue(Param.CopyrightHolder));
-            //Rights = GetLicenseFileName();//
+            RelRequiresHas = "Y";
+            AddRelRequires(Common.GetFontList(_folderPath, _projInputType));
+            RelConformsto = "TTF";
+            AddRightsHolder(Param.GetMetadataValue(Param.Publisher));
+            Rights = GetLicenseFileName();//
             SilSensitivityMetaData = "Public";
             SilSensitivityPresentation = "Public";
             SilSensitivitySource = "Insite users";
@@ -664,7 +721,7 @@ namespace SIL.PublishingSolution
                     }
                     else if (fileExtn == ".odt" || fileExtn == ".pdf" || fileExtn == ".jad" || fileExtn == ".nt")
                     {
-                        rFile.FileDescription =  Path.GetFileNameWithoutExtension(file) + " " + fileExtn.Replace(".", "") + " document";
+                        rFile.FileDescription = Path.GetFileNameWithoutExtension(file) + " " + fileExtn.Replace(".", "") + " document";
                         rFile.FileRelationship = "presentation";
                         rFile.FileSilPublic = "Y";
                         if (_outputExtension.IndexOf(".odt") == 0 || _outputExtension.IndexOf(".pdf") == 0 || fileExtn == ".nt")
@@ -689,6 +746,244 @@ namespace SIL.PublishingSolution
 
         }
 
+        private string GetScriptureScope(string filename)
+        {
+            string scriptureScope = string.Empty;
+            List<string> books = Common.GetInputBooks(filename);
+
+            string wholeOldTestament = CheckOldTestament(books);
+            if (wholeOldTestament.Length > 0)
+            {
+                scriptureScope = scriptureScope.Trim().Length > 0
+                                     ? scriptureScope + "," + wholeOldTestament
+                                     : wholeOldTestament;
+            }
+
+            string wholeNewTestament = CheckNewTestament(books);
+            if (wholeNewTestament.Length > 0)
+            {
+                scriptureScope = scriptureScope.Trim().Length > 0
+                                     ? scriptureScope + "," + wholeNewTestament
+                                     : wholeNewTestament;
+            }
+
+            string apocryphaTestament = CheckApocrypha(books);
+            if (apocryphaTestament.Length > 0)
+            {
+                scriptureScope = scriptureScope.Trim().Length > 0
+                                     ? scriptureScope + "," + apocryphaTestament
+                                     : apocryphaTestament;
+            }
+
+            if (scriptureScope.IndexOf("WOT:Old Testament") > 0 && scriptureScope.IndexOf("WNT:New Testament") > 0 && scriptureScope.IndexOf("WAP:Apocrypha") > 0)
+            {
+                scriptureScope = "WBI:Bible";
+            }
+            return scriptureScope;
+        }
+
+
+        private string CheckOldTestament(List<string> books)
+        {
+            bool result = true;
+            string booklist = string.Empty;
+            LoadOldTestament();
+            foreach (KeyValuePair<string, string> book in _oldTestament)
+            {
+                if(!books.Contains(book.Key))
+                {
+                    result = false;
+                    break;
+                }
+            }
+
+            if (result)
+            {
+                booklist = "WOT:Old Testament";
+            }
+            else
+            {
+                for (int i = 0; i < books.Count; i++)
+                {
+                    if (_oldTestament.ContainsKey(books[i]))
+                    {
+                        booklist = booklist + books[i] + ":" + _oldTestament[books[i]];
+                        if (i < books.Count - 1)
+                            booklist = booklist + ",";
+                    }
+
+                }
+            }
+            return booklist;
+        }
+
+        private string CheckNewTestament(List<string> books)
+        {
+            bool result = true;
+            string booklist = string.Empty;
+            LoadNewTestament();
+            foreach (KeyValuePair<string, string> book in _newTestament)
+            {
+                if (!books.Contains(book.Key))
+                {
+                    result = false;
+                    break;
+                }
+            }
+
+            if (result)
+            {
+                booklist = "WNT:New Testament";
+            }
+            else
+            {
+                for (int i = 0; i < books.Count; i++)
+                {
+                    if (_newTestament.ContainsKey(books[i]))
+                    {
+                        booklist = booklist + books[i] + ":" + _newTestament[books[i]];
+                        if (i < books.Count - 1)
+                            booklist = booklist + ",";
+                    }
+                    
+                }
+            }
+            return booklist;
+        }
+
+        private string CheckApocrypha(List<string> books)
+        {
+            bool result = true;
+            string booklist = string.Empty;
+            LoadApocrypha();
+            foreach (KeyValuePair<string, string> book in _apocryphaTestament)
+            {
+                if (!books.Contains(book.Key))
+                {
+                    result = false;
+                    break;
+                }
+            }
+
+            if (result)
+            {
+                booklist = "WAP:Apocrypha";
+            }
+            else
+            {
+                for (int i = 0; i < books.Count; i++)
+                {
+                    if (_apocryphaTestament.ContainsKey(books[i]))
+                    {
+                        booklist = booklist + books[i] + ":" + _apocryphaTestament[books[i]];
+                        if (i < books.Count - 1)
+                            booklist = booklist + ",";
+                    }
+
+                }
+            }
+            return booklist;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void LoadApocrypha()
+        {
+            _apocryphaTestament.Add("1ES", "1 Esdras");
+            _apocryphaTestament.Add("2ES", "2 Esdras");
+            _apocryphaTestament.Add("TOB", "Tobit");
+            _apocryphaTestament.Add("JDT", "Judith");
+            _apocryphaTestament.Add("ESG", "Additions to Esther");
+            _apocryphaTestament.Add("WIS", "Wisdom");
+            _apocryphaTestament.Add("SIR", "Ecclesiasticus");
+            _apocryphaTestament.Add("BAR", "Baruch");
+            _apocryphaTestament.Add("LJE", "Letter of Jeremiah");
+            _apocryphaTestament.Add("SYM", "Song of the Three Young Men");
+            _apocryphaTestament.Add("PAZ", "Prayer of Azariah");
+            _apocryphaTestament.Add("SUS", "Susanna");
+            _apocryphaTestament.Add("BEL", "Bel and the Dragon");
+            _apocryphaTestament.Add("MAN", "Prayer of Manasseh");
+            _apocryphaTestament.Add("1MA", "1 Maccabees");
+            _apocryphaTestament.Add("2MA", "2 Maccabees");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void LoadOldTestament()
+        {
+            _oldTestament.Add("GEN", "Genesis");
+            _oldTestament.Add("EXO", "Exodus");
+            _oldTestament.Add("LEV", "Leviticus");
+            _oldTestament.Add("NUM", "Numbers");
+            _oldTestament.Add("DEU", "Deuteronomy");
+            _oldTestament.Add("JOS", "Joshua");
+            _oldTestament.Add("JDG", "Judges");
+            _oldTestament.Add("RUT", "Ruth");
+            _oldTestament.Add("1SA", "1 Samuel");
+            _oldTestament.Add("2SA", "2 Samuel");
+            _oldTestament.Add("1KI", "1 Kings");
+            _oldTestament.Add("2KI", "2 Kings");
+            _oldTestament.Add("1CH", "1 Chronicles");
+            _oldTestament.Add("2CH", "2 Chronicles");
+            _oldTestament.Add("EZR", "Ezra");
+            _oldTestament.Add("NEH", "Nehemiah");
+            _oldTestament.Add("EST", "Esther");
+            _oldTestament.Add("JOB", "Job");
+            _oldTestament.Add("PSA", "Psalms");
+            _oldTestament.Add("PRO", "Proverbs");
+            _oldTestament.Add("ECC", "Ecclesiastes");
+            _oldTestament.Add("SNG", "Song of  Solomon");
+            _oldTestament.Add("ISA", "Isaiah");
+            _oldTestament.Add("JER", "Jeremiah");
+            _oldTestament.Add("LAM", "Lamentations");
+            _oldTestament.Add("EZK", "Ezekiel");
+            _oldTestament.Add("DAN", "Daniel");
+            _oldTestament.Add("HOS", "Hosea");
+            _oldTestament.Add("JOL", "Joel");
+            _oldTestament.Add("AMO", "Amos");
+            _oldTestament.Add("OBA", "Obadiah");
+            _oldTestament.Add("JON", "Jonah");
+            _oldTestament.Add("MIC", "Micah");
+            _oldTestament.Add("NAM", "Nahum");
+            _oldTestament.Add("HAB", "Habakkuk");
+            _oldTestament.Add("ZEP", "Zephaniah");
+            _oldTestament.Add("HAG", "Haggai");
+            _oldTestament.Add("ZEC", "Zechariah");
+            _oldTestament.Add("MAL", "Malachi");
+        }
+
+        private void LoadNewTestament()
+        {
+            _newTestament.Add("MAT", "Matthew");
+            _newTestament.Add("MRK", "Mark");
+            _newTestament.Add("LUK", "Luke");
+            _newTestament.Add("JHN", "John");
+            _newTestament.Add("ACT", "Acts");
+            _newTestament.Add("ROM", "Romans");
+            _newTestament.Add("1CO", "1 Corinthians");
+            _newTestament.Add("2CO", "2 Corinthians");
+            _newTestament.Add("GAL", "Galatians");
+            _newTestament.Add("EPH", "Ephesians");
+            _newTestament.Add("PHP", "Philippians");
+            _newTestament.Add("COL", "Colossians");
+            _newTestament.Add("1TH", "1 Thessalonians");
+            _newTestament.Add("2TH", "2 Thessalonians");
+            _newTestament.Add("1TI", "1 Timothy");
+            _newTestament.Add("2TI", "2 Timothy");
+            _newTestament.Add("TIT", "Titus");
+            _newTestament.Add("PHM", "Philemon");
+            _newTestament.Add("HEB", "Hebrews");
+            _newTestament.Add("JAS", "James");
+            _newTestament.Add("1PE", "1 Peter");
+            _newTestament.Add("2PE", "2 Peter");
+            _newTestament.Add("1JN", "1 John");
+            _newTestament.Add("2JN", "2 John");
+            _newTestament.Add("3JN", "3 John");
+            _newTestament.Add("JUD", "Jude");
+            _newTestament.Add("REV", "Revelation");
+        }
 
         /// <summary>
         /// 
@@ -705,9 +1000,12 @@ namespace SIL.PublishingSolution
             CreateRampTitle(json);
             CreateRampBroadType(json);
             CreateRampTypeMode(json);
-            //CreateRampFormatMedium(json);
-            //CreateRampDescStage(json);
-            //CreateRampVersionType(json);
+            CreateRampFormatMedium(json);
+            CreateRampDescStage(json);
+            CreateRampVersionType(json);
+            CreateVernacularMaterialType(json);
+            CreateTypeScriptureType(json);
+            CreateRampScriptureScope(json);
             CreateRampTypeScholarlyWork(json);
             CreateRampSubjectLanguage(json);
             //CreateRampCoverageSpacialRegionHas(json);
@@ -716,18 +1014,19 @@ namespace SIL.PublishingSolution
             CreateRampLanguageIso(json);
             CreateRampLanguageScript(json);
             CreateRampContributor(json);
-            //CreateRampFormatExtentText(json);
-            //CreateRampFormatExtentImages(json);
+            CreateRampModifiedDate(json);
+            CreateRampFormatExtentText(json);
+            CreateRampFormatExtentImages(json);
             //CreateRampDescSponsership(json);
             //CreateRampDescTableofContentsHas(json);
             CreateRampSilDomain(json);
             CreateRampDomainSubTypeLing(json);
             CreateRampSubject(json);
-            //CreateRampRelRequiresHas(json);
-            //CreateRampRelRequires(json);
+            CreateRampRelRequiresHas(json);
+            CreateRampRelRequires(json);
             CreateRampRelConformsto(json);
             CreateRampRightsHolder(json);
-            //CreateRampRights(json);
+            CreateRampRights(json);
             CreateRampSilSensitivityMetaData(json);
             CreateRampSilSensitivityPresentation(json);
             CreateRampSilSensitivitySource(json);
@@ -746,7 +1045,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampStatus(Json json)
         {
-            if (Status.Trim().Length > 0)
+            if (Status != null && Status.Trim().Length > 0)
             {
                 json.WriteTag("status");
                 json.WriteTextNoComma(Status);
@@ -775,7 +1074,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampSilSensitivitySource(Json json)
         {
-            if (SilSensitivitySource.Trim().Length > 0)
+            if (SilSensitivitySource != null && SilSensitivitySource.Trim().Length > 0)
             {
                 json.WriteTag("sil.sensitivity.source");
                 json.WriteText(SilSensitivitySource);
@@ -784,7 +1083,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampSilSensitivityPresentation(Json json)
         {
-            if (SilSensitivityPresentation.Trim().Length > 0)
+            if (SilSensitivityPresentation != null && SilSensitivityPresentation.Trim().Length > 0)
             {
                 json.WriteTag("sil.sensitivity.presentation");
                 json.WriteText(SilSensitivityPresentation);
@@ -793,7 +1092,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampSilSensitivityMetaData(Json json)
         {
-            if (SilSensitivityMetaData.Trim().Length > 0)
+            if (SilSensitivityMetaData != null && SilSensitivityMetaData.Trim().Length > 0)
             {
                 json.WriteTag("sil.sensitivity.metadata");
                 json.WriteText(SilSensitivityMetaData);
@@ -802,7 +1101,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampRights(Json json)
         {
-            if (Rights.Trim().Length > 0)
+            if (Rights != null && Rights.Trim().Length > 0)
             {
                 json.WriteTag("dc.rights");
                 json.WriteText(Rights);
@@ -831,7 +1130,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampRelConformsto(Json json)
         {
-            if (RelConformsto.Trim().Length > 0)
+            if (RelConformsto != null && RelConformsto.Trim().Length > 0)
             {
                 json.WriteTag("dc.relation.conformsto");
                 json.WriteText(RelConformsto);
@@ -859,12 +1158,19 @@ namespace SIL.PublishingSolution
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
         private void CreateRampRelRequiresHas(Json json)
         {
-            if (RelRequiresHas.Trim().Length > 0)
+            if (RelRequiresHas != null && RelRequiresHas.Trim().Length > 0)
             {
-                json.WriteTag("relation.requires.has");
-                json.WriteText(RelRequiresHas);
+                if (RelRequires.Count > 0)
+                {
+                    json.WriteTag("relation.requires.has");
+                    json.WriteText(RelRequiresHas);
+                }
             }
         }
 
@@ -892,7 +1198,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampDomainSubTypeLing(Json json)
         {
-            if (DomainSubTypeLing.Trim().Length > 0)
+            if (DomainSubTypeLing != null && DomainSubTypeLing.Trim().Length > 0)
             {
                 json.WriteTag("type.domainSubtype.LING");
                 json.WriteRaw(StringWithComma(DomainSubTypeLing));
@@ -901,7 +1207,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampSilDomain(Json json)
         {
-            if (SilDomain.Trim().Length > 0)
+            if (SilDomain != null && SilDomain.Trim().Length > 0)
             {
                 json.WriteTag("dc.subject.silDomain");
                 json.WriteRaw(StringWithComma(SilDomain));
@@ -910,7 +1216,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampDescTableofContentsHas(Json json)
         {
-            if (DescTableofContentsHas.Trim().Length > 0)
+            if (DescTableofContentsHas != null && DescTableofContentsHas.Trim().Length > 0)
             {
                 json.WriteTag("description.tableofcontents.has");
                 json.WriteText(DescTableofContentsHas);
@@ -919,7 +1225,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampDescSponsership(Json json)
         {
-            if (DescSponsership.Trim().Length > 0)
+            if (DescSponsership != null && DescSponsership.Trim().Length > 0)
             {
                 json.WriteTag("dc.description.sponsorship");
                 json.WriteText(DescSponsership);
@@ -928,16 +1234,16 @@ namespace SIL.PublishingSolution
 
         private void CreateRampFormatExtentImages(Json json)
         {
-            if (FormatExtentImages.Trim().Length > 0)
+            if (FormatExtentImages != null && FormatExtentImages.Trim().Length > 0)
             {
                 json.WriteTag("format.extent.images");
-                json.WriteText(FormatExtentText);
+                json.WriteText(FormatExtentImages);
             }
         }
 
         private void CreateRampFormatExtentText(Json json)
         {
-            if (FormatExtentText.Trim().Length > 0)
+            if (FormatExtentText != null && FormatExtentText.Trim().Length > 0)
             {
                 json.WriteTag("format.extent.text");
                 json.WriteText(FormatExtentText);
@@ -963,6 +1269,15 @@ namespace SIL.PublishingSolution
                 }
                 json.EndTag();
                 json.WriteComma();
+            }
+        }
+
+        private void CreateRampModifiedDate(Json json)
+        {
+            if (ModifiedDate != null && ModifiedDate.Trim().Length > 0)
+            {
+                json.WriteTag("dc.date.modified");
+                json.WriteText(ModifiedDate);
             }
         }
 
@@ -1009,7 +1324,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampSubjectLanguageHas(Json json)
         {
-            if (SubjectLanguageHas.Trim().Length > 0)
+            if (SubjectLanguageHas != null && SubjectLanguageHas.Trim().Length > 0)
             {
                 json.WriteTag("subject.subjectLanguage.has");
                 json.WriteText(SubjectLanguageHas);
@@ -1040,7 +1355,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampCoverageSpacialRegionHas(Json json)
         {
-            if (CoverageSpacialRegionHas.Trim().Length > 0)
+            if (CoverageSpacialRegionHas != null && CoverageSpacialRegionHas.Trim().Length > 0)
             {
                 json.WriteTag("coverage.spatial.region.has");
                 json.WriteText(CoverageSpacialRegionHas);
@@ -1069,16 +1384,44 @@ namespace SIL.PublishingSolution
 
         private void CreateRampTypeScholarlyWork(Json json)
         {
-            if (TypeScholarlyWork.Trim().Length > 0)
+            if (TypeScholarlyWork != null && TypeScholarlyWork.Trim().Length > 0)
             {
                 json.WriteTag("dc.type.scholarlyWork");
                 json.WriteText(TypeScholarlyWork);
             }
         }
 
+        private void CreateVernacularMaterialType(Json json)
+        {
+            if (VernacularmaterialsType != null && VernacularmaterialsType.Trim().Length > 0)
+            {
+                json.WriteTag("ramp.vernacularmaterialstype");
+                json.WriteText(VernacularmaterialsType);
+            }
+        }
+
+        private void CreateTypeScriptureType(Json json)
+        {
+            if (TypeScriptureType != null && TypeScriptureType.Trim().Length > 0)
+            {
+                json.WriteTag("dc.type.scriptureType");
+                json.WriteText(TypeScriptureType);
+            }
+
+        }
+
+        private void CreateRampScriptureScope(Json json)
+        {
+            if (TitleScriptureScope != null && TitleScriptureScope.Trim().Length > 0)
+            {
+                json.WriteTag("dc.title.scriptureScope");
+                json.WriteRaw(StringWithComma(TitleScriptureScope));
+            }
+        }
+
         private void CreateRampVersionType(Json json)
         {
-            if (VersionType.Trim().Length > 0)
+            if (VersionType != null && VersionType.Trim().Length > 0)
             {
                 json.WriteTag("version.type");
                 json.WriteText(VersionType);
@@ -1087,7 +1430,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampDescStage(Json json)
         {
-            if (DescStage.Trim().Length > 0)
+            if (DescStage != null && DescStage.Trim().Length > 0)
             {
                 json.WriteTag("dc.description.stage");
                 json.WriteText(DescStage);
@@ -1096,7 +1439,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampFormatMedium(Json json)
         {
-            if (FormatMedium.Trim().Length > 0)
+            if (FormatMedium != null && FormatMedium.Trim().Length > 0)
             {
                 json.WriteTag("dc.format.medium");
                 json.WriteRaw(StringWithComma(FormatMedium));
@@ -1105,7 +1448,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampTypeMode(Json json)
         {
-            if (TypeMode.Trim().Length > 0)
+            if (TypeMode != null && TypeMode.Trim().Length > 0)
             {
                 json.WriteTag("dc.type.mode");
                 json.WriteRaw(StringWithComma(TypeMode));
@@ -1114,7 +1457,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampBroadType(Json json)
         {
-            if (BroadType.Trim().Length > 0)
+            if (BroadType != null && BroadType.Trim().Length > 0)
             {
                 json.WriteTag("broad_type");
                 json.WriteText(BroadType);
@@ -1123,7 +1466,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampTitle(Json json)
         {
-            if (Title.Trim().Length > 0)
+            if (Title != null && Title.Trim().Length > 0)
             {
                 json.WriteTag("dc.title");
                 json.WriteText(Title);
@@ -1132,7 +1475,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampReady(Json json)
         {
-            if (Ready.Trim().Length > 0)
+            if (Ready != null && Ready.Trim().Length > 0)
             {
                 json.WriteTag("ramp.is_ready");
                 json.WriteText(Ready);
@@ -1149,7 +1492,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampCreatedOn(Json json)
         {
-            if (CreatedOn.Trim().Length > 0)
+            if (CreatedOn != null && CreatedOn.Trim().Length > 0)
             {
                 json.WriteTag("created_at");
                 json.WriteText(CreatedOn);
@@ -1159,7 +1502,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRampId(Json json)
         {
-            if (RampId.Length > 0)
+            if (RampId != null && RampId.Trim().Length > 0)
             {
                 json.WriteTag("id");
                 json.WriteText(RampId);
@@ -1203,6 +1546,7 @@ namespace SIL.PublishingSolution
             result = "[";
             for (int i = 0; i < values.Length; i++)
             {
+                if(values[i].Trim().Length == 0) continue;
                 result = result + "\"" + values[i];
                 if (i < values.Length - 1)
                     result = result + "\", ";
@@ -1239,16 +1583,34 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         public string GetLicenseFileName()
         {
-            string licFileName = String.Empty;
-            string licenseFileName = Path.GetFileName(Param.CopyrightPageFilename);
-            XmlNode node =
-                Param.GetItem("//features/feature[@name='Lic_SIL_x0020_International'/option[@file=' " + licenseFileName +
-                              "']");
+            Param.LoadSettings();
+            string firstPart = Param.GetMetadataValue(Param.CopyrightHolder);
+            string secondPart = GetLicenseInformation(Param.GetMetadataValue(Param.CopyrightPageFilename));
+            return firstPart + " " + secondPart; ;
+        }
+
+
+        private string GetLicenseInformation(string filename)
+        {
+            string text = string.Empty;
+            string getPsApplicationPath = Common.GetPSApplicationPath();
+            string licenseXml = getPsApplicationPath;
+            if (!filename.Contains("Copyrights"))
+            {
+                licenseXml = Path.Combine(getPsApplicationPath, "Copyrights");
+            }
+            licenseXml = Path.Combine(licenseXml, filename);
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(licenseXml);
+            string xPath = "//x:div[@id='LicenseInformation']";
+            XmlNode node = xDoc.SelectSingleNode(xPath, namespaceManager);
             if (node != null)
             {
-                licFileName = node.Attributes["name"].Value;
+                text = node.InnerText;
             }
-            return licFileName;
+            return text;
         }
 
         /// <summary>
@@ -1261,7 +1623,7 @@ namespace SIL.PublishingSolution
             string imageCount = "0";
             XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             xmlDocument.Load(xhtmlFileName);
-            XmlNodeList nodes = xmlDocument.SelectNodes("//img");
+            XmlNodeList nodes = xmlDocument.GetElementsByTagName("img");
             if (nodes.Count > 0)
             {
                 imageCount = nodes.Count.ToString();
@@ -1280,8 +1642,8 @@ namespace SIL.PublishingSolution
             filesCollection.AddRange(Directory.GetFiles(Path.GetDirectoryName(_folderPath)));
 
             List<string> dirCollection = new List<string>();
-            dirCollection.Add(Path.Combine(Path.GetDirectoryName(_folderPath),"USX"));
-            dirCollection.Add(Path.Combine(Path.GetDirectoryName(_folderPath),"SFM"));
+            dirCollection.Add(Path.Combine(Path.GetDirectoryName(_folderPath), "USX"));
+            dirCollection.Add(Path.Combine(Path.GetDirectoryName(_folderPath), "SFM"));
 
             using (ZipFile zipFile = ZipFile.Create(Common.PathCombine(Path.GetDirectoryName(_folderPath), Param.GetMetadataValue(Param.Title)) + ".ramp"))
             {
@@ -1355,7 +1717,7 @@ namespace SIL.PublishingSolution
             }
 
 
-        } 
+        }
 
         /// <summary>
         /// <file GROUPID="sword-mets-fgid-0" ID="sword-mets-file-0">
@@ -1364,7 +1726,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <returns></returns>
         private string CreateFileGroup()
-        { 
+        {
             StringBuilder fileGrp = new StringBuilder();
             int i = 0;
             foreach (KeyValuePair<string, string> data in _fileList)
@@ -1399,6 +1761,20 @@ namespace SIL.PublishingSolution
             return structMap.ToString();
         }
 
+        private string GetNumberOfPdfPages(string fileName)
+        {
+            string pageCount = "0";
+            if (Path.GetExtension(fileName).ToLower() != "pdf")
+                return pageCount;
+
+            using (StreamReader sr = new StreamReader(File.OpenRead(fileName)))
+            {
+                Regex regex = new Regex(@"/Type\s*/Page[^s]");
+                MatchCollection matches = regex.Matches(sr.ReadToEnd());
+                pageCount = matches.Count.ToString();
+            }
+            return pageCount;
+        }
 
         #endregion
     }
