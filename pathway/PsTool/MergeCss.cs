@@ -132,10 +132,10 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="name">name of css file to read</param>
         /// <param name="sw">output stream to write contents</param>
-        public void ImportFile(string name, TextWriter sw)
+        public void ImportFile(string cssFileName, TextWriter sw)
         {
             ArrayList arrayCssFile = new ArrayList();
-            string validName = Common.PathCombine(_cssPath, name);
+            string validName = Common.PathCombine(_cssPath, cssFileName);
             arrayCssFile = GetCssNameList(validName, arrayCssFile);
             //if(arrayCSSFile.Count == 0) return validName; //
             //if (arrayCssFile.Contains(validName))

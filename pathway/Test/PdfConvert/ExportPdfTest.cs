@@ -60,18 +60,35 @@ namespace Test.PdfConvert
             ExportPdf pdfObj = new ExportPdf();
             pdfObj.ReplaceBookNametoBookCode(outputXhtmlFile);
 
-            FileCompare(file);
+            FileCompare(file, ".xhtml");
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void CSSStyleForHeaderShowInPrincePdfTest()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "CSSStyleForHeaderShowInPrincePdf";
+            ExportProcess(file);
+
+            string outputCSSFile = Path.Combine(_outputPath, file + ".css");
+            File.Copy(_projInfo.DefaultCssFileWithPath, outputCSSFile, true);
+
+            PreExportProcess pdfObj = new PreExportProcess();
+            pdfObj.InsertPropertyInCSS(outputCSSFile);
+
+            FileCompare(file, ".css");
         }
 
         #endregion
 
         #region Private Functions
 
-        private void FileCompare(string file)
+        private void FileCompare(string fileName, string fileExtension)
         {
-            string texOutput = FileOutput(file + ".xhtml");
-            string texExpected = FileExpected(file + ".xhtml");
-            TextFileAssert.AreEqual(texOutput, texExpected, file + " in xhtml ");
+            string output = FileOutput(fileName + fileExtension);
+            string expected = FileExpected(fileName + fileExtension);
+            TextFileAssert.AreEqual(output, expected, fileName + " in " + fileExtension);
         }
 
         private void ExportProcess(string file)
