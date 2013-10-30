@@ -340,7 +340,6 @@
     <Compile Include="LiftPrepare\TestEnvironment.cs" />
     <Compile Include="LiftPrepare\TransformTests\TransformTester.cs" />
     <Compile Include="LiftPrepare\WritingSystemSorterTester.cs" />
-    <Compile Include="LogosConvert\ExportLogosTest.cs" />
     <Compile Include="OdtTest.cs" />
     <Compile Include="CssDialog\CommonTestMethod.cs" />
     <Compile Include="CssDialog\FeatureSheetTest.cs" />
@@ -427,10 +426,6 @@
     <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
       <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
       <Name>LiftPrepare</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LogosConvert\LogosConvert.csproj">
-      <Project>{E6F68329-4BCE-44C2-A9F0-C5055F42CA39}</Project>
-      <Name>LogosConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
       <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
@@ -599,7 +594,6 @@
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
     <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
     <BteBackend Include="..\theWordConvert\$(OutputPath)\theWordConvert.*" />
-    <BteBackend Include="..\LogosConvert\$(OutputPath)\LogosConvert.*" />
     <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <DictionaryForMIDs Include="..\PsSupport\Dic4Mid\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />

@@ -756,12 +756,7 @@ namespace TestBed
 
         private void button6_Click_1(object sender, EventArgs e)
         {
-            var target = new ExportLogos();
-            PublicationInformation projInfo = new PublicationInformation();
-            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
-            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
-
-            var actual = target.Export(projInfo);
+            throw new NotImplementedException();
         }
 
         protected static void LocalizationSetup()
