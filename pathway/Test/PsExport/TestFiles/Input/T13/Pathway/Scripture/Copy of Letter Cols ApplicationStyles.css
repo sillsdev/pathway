@@ -1,0 +1,28 @@
+@import "Layout_14.css";
+@import "Justified_No.css";
+@import "VerticalJustify_Top.css";
+@import "Page_size_Letter.css";
+@import "Columns_1.css";
+@import "font_size_11_13.css";
+@import "Leading_13.css";
+@import "Pictures_Yes.css";
+@import "Running_Head_Mirrored.css";
+@import "Running_Head_Mirrored_Chapter.css";
+@import "PageNumber_TopCenter_Mirrored.css";
+@import "Rules_Yes.css";
+@import "Sense_nc.css";
+.letData{
+column-gap:12pt;
+}
+@page{
+margin-top:54pt;
+margin-right:54pt;
+margin-bottom:54pt;
+margin-left:54pt;
+-ps-fileproduce:"One";
+-ps-fixed-line-height:"False";
+-ps-custom-footnote-caller:"";
+-ps-custom-XRef-caller:"";
+-ps-hide-versenumber-one:"False";
+-ps-hide-space-versenumber:"False";
+}
