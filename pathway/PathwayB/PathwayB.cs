@@ -312,7 +312,6 @@ namespace SIL.PublishingSolution
             Console.Write("   --target | -t <format>    (required) desired output format. Can be one of:\r\n");
             Console.Write("                             \"E-Book (.epub)\"           .epub format.\r\n");
             Console.Write("                             \"Go Bible\"                 Go Bible .jar format.\r\n");
-            Console.Write("                             \"Logos Alpha\"              Libronix format.\r\n");
             Console.Write("                             \"PDF (using OpenOffice/LibreOffice)\" \r\n");
             Console.Write("                                                          .pdf format.\r\n");
             Console.Write("                             \"PDF (using Prince)\"       .pdf format.\r\n");

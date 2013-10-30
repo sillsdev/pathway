@@ -49,7 +49,6 @@ if "%1" == "ReleaseSE" goto nogobible
 if "%1" == "Release7SE" goto nogobible
 xcopy %base%\GoBibleConvert\%cfg%\GoBibleConvert.* . /y
 xcopy %base%\YouVersionConvert\%cfg%\YouVersionConvert.* . /y
-xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
 xcopy %base%\ParatextSupport\%cfg%\ParatextSupport.* . /y
 goto done
 :nogobible

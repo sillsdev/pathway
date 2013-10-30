@@ -1064,10 +1064,6 @@ namespace SIL.PublishingSolution
                 case "InDesign":
                     value = "application/x-indesign";
                     break;
-                case "Logos Alpha":
-                    // generic archive
-                    value = "application/zip";
-                    break;
                 case "OpenOffice/LibreOffice":
                     value = "application/vnd.oasis.opendocument.text";
                     break;
