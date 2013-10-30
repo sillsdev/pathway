@@ -630,7 +630,9 @@
     <AllTransform Include="..\PsSupport\pxhtml2xpw-dict.xsl" />
     <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
-    <BteTransform Include="..\PsSupport\*.xslt" />
+    <BteTransform Include="..\PsSupport\punct_XHTML.xslt" />
+    <BteTransform Include="..\PsSupport\TE_FixChapters_XHTML.xslt" />
+    <BteTransform Include="..\PsSupport\TE_XHTML-to-Phone_XHTML.xslt" />
     <BteTransform Include="..\PsSupport\pxhtml2xpw-scr.xsl" />
     <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
