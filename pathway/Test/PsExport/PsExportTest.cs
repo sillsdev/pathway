@@ -871,6 +871,58 @@ namespace Test.PsExport
             Assert.AreEqual(8, nodes.Count);
         }
 
+        #region T14
+        /// <summary>
+        /// Test TE Export test
+        /// </summary>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void T14FieldWorksA4()
+        {
+            var tests = new ArrayList
+            {
+                new ODet(ODet.Def, "1st master", "mat21-23.odt", ODet.Content, "//style:style[1]/@style:master-page-name", "masterPage"),
+                new ODet(ODet.Def, "page layout", "mat21-23.odt", ODet.Styles, "//style:master-page[@style:name='{masterPage}']/@style:page-layout-name", "pageLayout"),
+                new ODet(ODet.Chk, "page height TD-3690", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:page-height", "842pt"),
+                new ODet(ODet.Chk, "page width TD-3690", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:page-width", "595pt"),
+                new ODet(ODet.Chk, "page top margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-top", "1.15cm"),
+                new ODet(ODet.Chk, "page left margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-left", "1.5cm"),
+                new ODet(ODet.Chk, "page right margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-right", "1.5cm"),
+                new ODet(ODet.Chk, "page bottom margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-bottom", "1.15cm"),
+                new ODet(ODet.Chk, "title section", "mat21-23.odt", ODet.Content, "//office:body/office:text/*[4]/@text:name", "Sect_scrBook"),
+                new ODet(ODet.Chk, "book title", "mat21-23.odt", ODet.Content, "(//text:span[substring-before(@text:style-name, '_') = 'scrBookName'])[2]", "Mateo"),
+                new ODet(ODet.Chk, "book code", "mat21-23.odt", ODet.Content, "//text:span[substring-before(@text:style-name, '_') = 'scrBookCode']", "MAT"),
+                new ODet(ODet.Chk, "main title", "mat21-23.odt", ODet.Content, "//text:p[substring-before(@text:style-name, '_') = 'TitleMain']/text:span", "Mateo"),
+                new ODet(ODet.Chk, "main title center", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@fo:text-align", "center"),
+                //new ODet(ODet.Chk, "main title keep with next", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@fo:keep-with-next", "always"),
+                new ODet(ODet.Chk, "main title top pad", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@fo:padding-top", "36pt"),
+                new ODet(ODet.Chk, "main title bottom pad", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@fo:padding-bottom", "12pt"),
+                new ODet(ODet.Chk, "main title left margin", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@fo:margin-left", "0pt"),
+                new ODet(ODet.Chk, "main title indent", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@fo:text-indent", "0pt"),
+                new ODet(ODet.Chk, "main title orphans", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@fo:orphans", "5"),
+                new ODet(ODet.Chk, "main title font weight", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@fo:font-weight", "700"),
+                new ODet(ODet.Chk, "main title complex font weight", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@style:font-weight-complex", "700"),
+                new ODet(ODet.Chk, "main title style", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@fo:font-style", "normal"),
+                new ODet(ODet.Chk, "main title font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@fo:font-size", "22pt"),
+                new ODet(ODet.Chk, "main title complex font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleMain']//@style:font-size-complex", "22pt"),
+                new ODet(ODet.Chk, "2nd secondary title", "mat21-23.odt", ODet.Content, "//text:p[substring-before(@text:style-name, '_') = 'TitleSecondary'][2]", "Lɔ́wanlɩ́n"),
+                new ODet(ODet.Chk, "secondary title center", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:text-align", "center"),
+                new ODet(ODet.Chk, "secondary title bottom pad", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:padding-bottom", "2pt"),
+                new ODet(ODet.Chk, "secondary title display", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@text:display", "block"),
+                new ODet(ODet.Chk, "secondary title style", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:font-style", "italic"),
+                new ODet(ODet.Chk, "secondary title font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:font-size", "16pt"),
+                new ODet(ODet.Chk, "secondary title complex font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@style:font-size-complex", "16pt"),
+                new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics1']//@style:vertical-pos", "from-top"),
+                new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='Graphics1']//@xlink:href", "Pictures/2.jpg"),
+                new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_TitleMain_')]//@fo:language", "zxx"),
+                new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_Paragraph_scrSection_')]//@fo:language", "zxx"),
+                
+            };
+
+            ExportTest("T14", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
+        }
+        #endregion T14
+
         [Test]
         public void XsltPreProcess0Test()
         {
