@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Guids associated with files exported from TE as XHTML. -->
-<!-- 08Sept2010: Added 'SL_BI_Bughotu'. -->
-<files>
-	<file name='Bughotu-gospels' guid='5E3F1979-D267-4781-A4D0-1E86188EA6E4' />
-	<file name='SL_BI_Bughotu' guid='75B27C0C-A231-4d94-BFF9-E3741FE79775' />
-</files>
