@@ -396,7 +396,7 @@ namespace SIL.PublishingSolution
 
         protected void LoadLanguagefromXML()
         {
-            string xmlFilePath = Common.PathCombine(Common.GetApplicationPath(), "RampLangCode.xml");
+            string xmlFilePath = Common.PathCombine(Common.GetBinPath(), "RampLangCode.xml");
             if (!File.Exists(xmlFilePath))
                 return;
 
