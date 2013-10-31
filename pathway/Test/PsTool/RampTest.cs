@@ -116,8 +116,8 @@ namespace Test.PsTool
             AddLanguageIso(Common.GetLanguageCodeList(_folderPath, _projInputType));
             Assert.AreEqual(3, LanguageIso.Count);
             Assert.True(LanguageIso.Contains("seh:Sena"), "missing Sena");
-            Assert.True(LanguageIso.Contains("eng:English"), "missing Sena");
-            Assert.True(LanguageIso.Contains("por:Portuguese"), "missing Sena");
+            Assert.True(LanguageIso.Contains("eng:English"), "missing English");
+            Assert.True(LanguageIso.Contains("por:Portuguese"), "missing Portuguese");
         }
 
         [Test]
