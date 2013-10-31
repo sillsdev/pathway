@@ -76,6 +76,7 @@ namespace SIL.PublishingSolution
         private string _typeScriptureType;
         private string _titleScriptureScope;
         private string _helperVernacularContent;
+        private string _publisher;
         private List<string> _languageIso = new List<string>();
         private List<string> _contributor = new List<string>();
         protected Dictionary<string, string> _fileList = new Dictionary<string, string>();
@@ -358,6 +359,12 @@ namespace SIL.PublishingSolution
         {
             get { return _modifiedDate; }
             set { _modifiedDate = value; }
+        }
+
+        public string Publisher
+        {
+            get { return _publisher; }
+            set { _publisher = value; }
         }
 
         #endregion
@@ -661,13 +668,7 @@ namespace SIL.PublishingSolution
             FormatMedium = "Paper";
             DescStage = "rough_draft";
             VersionType = "first";
-            if (_projInputType.ToLower() == "scripture")
-            {
-                VernacularmaterialsType = "scripture";
-                TypeScriptureType = "Bible text complete";
-                TitleScriptureScope = GetScriptureScope(_folderPath);
-                HelperVernacularContent = "shell_none";
-            }
+            IncludeScriptureProperty();
             TypeScholarlyWork = "Book";
             AddSubjLanguage(Common.GetLanguageCode(_folderPath, _projInputType, true));
             //CoverageSpacialRegionHas = "Y";//
@@ -675,7 +676,8 @@ namespace SIL.PublishingSolution
             SubjectLanguageHas = "Y";
             AddLanguageIso(Common.GetLanguageCodeList(_folderPath, _projInputType));
             AddLanguageScript(Common.GetLanguageScriptList(_folderPath, _projInputType));
-            AddContributor(Param.GetMetadataValue(Param.Creator).Replace(",", "--") + ",compiler");
+            string role = _projInputType.ToLower() == "scripture" ? "translator" : "compiler";
+            AddContributor(Param.GetMetadataValue(Param.Creator).Replace(",", "--") + "," + role);
             FormatExtentText = GetNumberOfPdfPages(_folderPath);
             FormatExtentImages = GetImageCount(_folderPath);//
             if (Int32.Parse(FormatExtentImages) > 0)
@@ -683,6 +685,7 @@ namespace SIL.PublishingSolution
                 TypeMode = TypeMode + ",Graphic";
             }
             ModifiedDate = DateTime.Now.ToString("yyyy-MM-dd");
+            Publisher = Param.GetMetadataValue(Param.Publisher);
             //DescSponsership = Param.GetOrganization();
             //DescTableofContentsHas = " ";//
             SilDomain = "LING:Linguistics";
@@ -742,7 +745,19 @@ namespace SIL.PublishingSolution
                 }
             }
             Status = "ready";
+        }
 
+
+
+        private void IncludeScriptureProperty()
+        {
+            if (_projInputType.ToLower() == "scripture")
+            {
+                VernacularmaterialsType = "scripture";
+                TypeScriptureType = "Bible text complete";
+                TitleScriptureScope = GetScriptureScope(_folderPath);
+                HelperVernacularContent = "shell_none";
+            }
         }
 
         private string GetScriptureScope(string filename)
@@ -1005,6 +1020,7 @@ namespace SIL.PublishingSolution
             CreateVernacularMaterialType(json);
             CreateTypeScriptureType(json);
             CreateRampScriptureScope(json);
+            CreateRampHelperVernacularContent(json);
             CreateRampTypeScholarlyWork(json);
             CreateRampSubjectLanguage(json);
             //CreateRampCoverageSpacialRegionHas(json);
@@ -1014,6 +1030,7 @@ namespace SIL.PublishingSolution
             CreateRampLanguageScript(json);
             CreateRampContributor(json);
             CreateRampModifiedDate(json);
+            CreateRampPublisher(json);
             CreateRampFormatExtentText(json);
             CreateRampFormatExtentImages(json);
             //CreateRampDescSponsership(json);
@@ -1021,7 +1038,7 @@ namespace SIL.PublishingSolution
             CreateRampSilDomain(json);
             CreateRampDomainSubTypeLing(json);
             CreateRampSubject(json);
-            CreateRampRelRequiresHas(json);
+            //CreateRampRelRequiresHas(json);
             CreateRampRelRequires(json);
             CreateRampRelConformsto(json);
             CreateRampRightsHolder(json);
@@ -1127,6 +1144,21 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private void CreateRampPublisher(Json json)
+        {
+            if (Publisher != null && Publisher.Trim().Length > 0)
+            {
+                json.WriteTag("dc.publisher");
+                json.WriteText(Publisher);
+
+                if (Publisher.Trim().ToLower() == "wycliffe bible translators")
+                {
+                    json.WriteTag("dc.identifier.uri");
+                    json.WriteText("www.wycliffe.org");
+                }
+            }
+        }
+
         private void CreateRampRelConformsto(Json json)
         {
             if (RelConformsto != null && RelConformsto.Trim().Length > 0)
@@ -1141,6 +1173,8 @@ namespace SIL.PublishingSolution
             //" \": \"OFL"
             if (RelRequires.Count > 0)
             {
+                CreateRampRelRequiresHas(json);
+
                 json.WriteTag("dc.relation.requires");
                 json.StartTag();
                 for (int i = 0; i < RelRequires.Count; i++)
@@ -1418,6 +1452,15 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private void CreateRampHelperVernacularContent(Json json)
+        {
+            if (HelperVernacularContent != null && HelperVernacularContent.Trim().Length > 0)
+            {
+                json.WriteTag("helper.subject.vernacularContent");
+                json.WriteRaw(StringWithComma(HelperVernacularContent));
+            }
+        }
+
         private void CreateRampVersionType(Json json)
         {
             if (VersionType != null && VersionType.Trim().Length > 0)
@@ -1585,7 +1628,7 @@ namespace SIL.PublishingSolution
             Param.LoadSettings();
             string firstPart = Param.GetMetadataValue(Param.CopyrightHolder);
             string secondPart = GetLicenseInformation(Param.GetMetadataValue(Param.CopyrightPageFilename));
-            return firstPart + " " + secondPart; ;
+            return firstPart + " " + secondPart.Replace("\r", "").Replace("\n", "").Replace("\t", "");
         }
 
 
@@ -1604,10 +1647,14 @@ namespace SIL.PublishingSolution
             namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
             xDoc.Load(licenseXml);
             string xPath = "//x:div[@id='LicenseInformation']";
-            XmlNode node = xDoc.SelectSingleNode(xPath, namespaceManager);
-            if (node != null)
+            //XmlNode node = xDoc.SelectSingleNode(xPath, namespaceManager);
+            XmlNodeList nodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if(nodeList != null && nodeList.Count > 0)
             {
-                text = node.InnerText;
+                if(nodeList[nodeList.Count - 1] != null)
+                {
+                    text = nodeList[nodeList.Count - 1].InnerText;
+                }
             }
             return text;
         }
