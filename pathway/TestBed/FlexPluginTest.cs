@@ -948,25 +948,6 @@ namespace TestBed
 
         }
 
-        private void btnYouVersion_Click(object sender, EventArgs e)
-        {
-            if (!File.Exists(txtInputPath.Text))
-            {
-                MessageBox.Show("Please enter the valid XHTML path");
-                return;
-            }
-
-            ExportYouVersion exportYouVersion = new ExportYouVersion();
-            PublicationInformation projInfo = new PublicationInformation();
-
-            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
-            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
-            projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
-            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
-            projInfo.DictionaryPath = projInfo.ProjectPath;
-            exportYouVersion.Export(projInfo);
-        }
-
         private void button8_Click(object sender, EventArgs e)
         {
             if (!File.Exists(txtInputPath.Text))
@@ -1111,28 +1092,6 @@ namespace TestBed
             Exportepub epubConvert = new Exportepub();
             epubConvert.TocLevel = "1";
             epubConvert.Export(projInfo);
-        }
-
-        private void btnSty2XML_Click(object sender, EventArgs e)
-        {
-#if !Not7
-            StyToXML styToCss = new StyToXML();
-            styToCss.StyFullPath = txtCSSInput.Text;
-            string outputCSS = txtCSSInput.Text.Replace(".sty", ".XML");
-            styToCss.ConvertStyToXML("TestBed", outputCSS);
-            MessageBox.Show("Exported in " + outputCSS);
-#endif
-        }
-
-        private void btnDBL_Metadata_Click(object sender, EventArgs e)
-        {
-#if !Not7
-            DBLMetadata dblMetadata = new DBLMetadata();
-            dblMetadata.StyFullPath = txtCSSInput.Text;
-            string outputCSS = Path.Combine(Path.GetDirectoryName(txtCSSInput.Text), "metadata.XML");
-            dblMetadata.CreateMetadata("TestBed", outputCSS);
-            MessageBox.Show("Exported in " + outputCSS);
-#endif
         }
 
         private void btnUsx2SFM_Click(object sender, EventArgs e)

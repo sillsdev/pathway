@@ -10,8 +10,6 @@ using System.Xml;
 using System.Xml.Xsl;
 using Microsoft.Win32;
 
-//using Saxon.Api;
-
 namespace SIL.Tool
 {
     public static partial class Common

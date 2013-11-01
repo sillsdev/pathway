@@ -237,9 +237,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CssParser\ThirdParty\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="GuiTestDriver">
-      <HintPath>..\ThirdParty\GuiTestDriver.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities" />
     <Reference Include="NMock2, Version=2.0.0.44, Culture=neutral, PublicKeyToken=37d3be0adc87c2b7">
@@ -252,10 +249,6 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Security" />
-    <Reference Include="XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\xmldiffpatch.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -295,9 +288,6 @@
     <Compile Include="PathwayB\PathwayBTest.cs" />
     <Compile Include="PdfConvert\ExportPdfTest.cs" />
     <Compile Include="PsTool\RampTest.cs" />
-    <Compile Include="PublishingSolutionExeUi\PsUiScenarioTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="theWordConvert\ExportTheWordTest.cs" />
     <Compile Include="XeLatex\XeLaTexContentTest.cs" />
     <Compile Include="CssDialog\ContentsTest.cs">
@@ -367,8 +357,6 @@
     <Compile Include="PsTool\SubProcessTest.cs" />
     <Compile Include="PsTool\FileDataTest.cs" />
     <Compile Include="PsTool\ZipFolderTest.cs" />
-    <Compile Include="PublishingSolutionExeUi\BuangScenarioTests.cs" />
-    <Compile Include="PublishingSolutionExeUi\PsUiTests.cs" />
     <Compile Include="TestFiles.cs" />
     <Compile Include="TextFileAssert.cs" />
     <Compile Include="ValidateXMLFile.cs" />
