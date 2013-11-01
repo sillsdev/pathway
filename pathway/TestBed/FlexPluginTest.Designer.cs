@@ -44,6 +44,7 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button13 = new System.Windows.Forms.Button();
             this.btnJson = new System.Windows.Forms.Button();
             this.btnEpubValidator = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -51,11 +52,8 @@
             this.btnSfm2Usx = new System.Windows.Forms.Button();
             this.btnRemoveBom = new System.Windows.Forms.Button();
             this.btnUsx2SFM = new System.Windows.Forms.Button();
-            this.btnDBL_Metadata = new System.Windows.Forms.Button();
-            this.btnSty2XML = new System.Windows.Forms.Button();
             this.btnEpub = new System.Windows.Forms.Button();
             this.btnWordPress = new System.Windows.Forms.Button();
-            this.btnYouVersion = new System.Windows.Forms.Button();
             this.btnGetSoftwareData = new System.Windows.Forms.Button();
             this.btnDotNet = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -77,7 +75,6 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -248,11 +245,8 @@
             this.groupBox1.Controls.Add(this.btnSfm2Usx);
             this.groupBox1.Controls.Add(this.btnRemoveBom);
             this.groupBox1.Controls.Add(this.btnUsx2SFM);
-            this.groupBox1.Controls.Add(this.btnDBL_Metadata);
-            this.groupBox1.Controls.Add(this.btnSty2XML);
             this.groupBox1.Controls.Add(this.btnEpub);
             this.groupBox1.Controls.Add(this.btnWordPress);
-            this.groupBox1.Controls.Add(this.btnYouVersion);
             this.groupBox1.Controls.Add(this.btnGetSoftwareData);
             this.groupBox1.Controls.Add(this.btnDotNet);
             this.groupBox1.Controls.Add(this.button12);
@@ -275,6 +269,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button13
+            // 
+            this.button13.AccessibleName = "BtnFlexTest";
+            this.button13.BackColor = System.Drawing.Color.Sienna;
+            this.button13.Location = new System.Drawing.Point(511, 190);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(78, 28);
+            this.button13.TabIndex = 81;
+            this.button13.Text = "Progress Bar";
+            this.button13.UseVisualStyleBackColor = false;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // btnJson
             // 
@@ -359,28 +365,6 @@
             this.btnUsx2SFM.UseVisualStyleBackColor = false;
             this.btnUsx2SFM.Click += new System.EventHandler(this.btnUsx2SFM_Click);
             // 
-            // btnDBL_Metadata
-            // 
-            this.btnDBL_Metadata.AccessibleName = "BtnFlexTest";
-            this.btnDBL_Metadata.Location = new System.Drawing.Point(110, 193);
-            this.btnDBL_Metadata.Name = "btnDBL_Metadata";
-            this.btnDBL_Metadata.Size = new System.Drawing.Size(95, 28);
-            this.btnDBL_Metadata.TabIndex = 73;
-            this.btnDBL_Metadata.Text = "DBL Metadata";
-            this.btnDBL_Metadata.UseVisualStyleBackColor = true;
-            this.btnDBL_Metadata.Click += new System.EventHandler(this.btnDBL_Metadata_Click);
-            // 
-            // btnSty2XML
-            // 
-            this.btnSty2XML.AccessibleName = "BtnFlexTest";
-            this.btnSty2XML.Location = new System.Drawing.Point(8, 193);
-            this.btnSty2XML.Name = "btnSty2XML";
-            this.btnSty2XML.Size = new System.Drawing.Size(95, 28);
-            this.btnSty2XML.TabIndex = 72;
-            this.btnSty2XML.Text = ".Sty to .XML";
-            this.btnSty2XML.UseVisualStyleBackColor = true;
-            this.btnSty2XML.Click += new System.EventHandler(this.btnSty2XML_Click);
-            // 
             // btnEpub
             // 
             this.btnEpub.AccessibleName = "BtnFlexTest";
@@ -404,18 +388,6 @@
             this.btnWordPress.Text = "Word Press";
             this.btnWordPress.UseVisualStyleBackColor = false;
             this.btnWordPress.Click += new System.EventHandler(this.btnWordPress_Click);
-            // 
-            // btnYouVersion
-            // 
-            this.btnYouVersion.AccessibleName = "BtnGoBibleTest";
-            this.btnYouVersion.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnYouVersion.Location = new System.Drawing.Point(428, 128);
-            this.btnYouVersion.Name = "btnYouVersion";
-            this.btnYouVersion.Size = new System.Drawing.Size(78, 28);
-            this.btnYouVersion.TabIndex = 68;
-            this.btnYouVersion.Text = "You Version";
-            this.btnYouVersion.UseVisualStyleBackColor = false;
-            this.btnYouVersion.Click += new System.EventHandler(this.btnYouVersion_Click);
             // 
             // btnGetSoftwareData
             // 
@@ -654,18 +626,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button13
-            // 
-            this.button13.AccessibleName = "BtnFlexTest";
-            this.button13.BackColor = System.Drawing.Color.Sienna;
-            this.button13.Location = new System.Drawing.Point(511, 190);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(78, 28);
-            this.button13.TabIndex = 81;
-            this.button13.Text = "Progress Bar";
-            this.button13.UseVisualStyleBackColor = false;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
             // FlexPluginTest
             // 
             this.AcceptButton = this.button1;
@@ -734,11 +694,8 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button btnDotNet;
         private System.Windows.Forms.Button btnGetSoftwareData;
-        private System.Windows.Forms.Button btnYouVersion;
         private System.Windows.Forms.Button btnWordPress;
         private System.Windows.Forms.Button btnEpub;
-        private System.Windows.Forms.Button btnSty2XML;
-        private System.Windows.Forms.Button btnDBL_Metadata;
         private System.Windows.Forms.Button btnUsx2SFM;
         private System.Windows.Forms.Button btnRemoveBom;
         private System.Windows.Forms.Button btnSfm2Usx;

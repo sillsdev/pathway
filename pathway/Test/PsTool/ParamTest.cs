@@ -25,7 +25,6 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
 using SIL.Tool;
-using Microsoft.XmlDiffPatch;
 
 namespace Test.CssDialog
 {
