@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dummy>
-    <style:column style:rel-width="4*" fo:start-indent="0in" fo:end-indent="0.125in"
-        xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
-        xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"/>
-    <style:column style:rel-width="4*" fo:start-indent="0.125in" fo:end-indent="0in"
-        xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
-        xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"/>
-</dummy>
