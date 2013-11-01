@@ -1,8 +1,0 @@
-
-.entry:before { content: " ENTRY";}
-.headword:before { content: " HEAD"; color:red;font-weight:bold}
-.xhomographnumber { color:green; font-size:15pt;}
-.xhomographnumber:before { content: " No:"; }
-
-.number { color:violet; font-size:25pt;}
-.number:before { content: " No:"; color:Orange;}

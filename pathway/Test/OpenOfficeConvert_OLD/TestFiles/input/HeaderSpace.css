@@ -1,9 +1,0 @@
-@page {
-	size: letter;
-     	padding-top: 72pt;
-	@top-left 
-                 {
-		content: "Header";
-                                     border:3pt solid red;
-	}
-}
