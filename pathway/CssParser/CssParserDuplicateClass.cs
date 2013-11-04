@@ -107,12 +107,15 @@ namespace SIL.PublishingSolution
                 }
                 catch{}
                 string file = Common.MakeSingleCSS(inputCSSPath, "_MergedCSS.css");
-                var fileSize = new FileInfo(_mergepath);
+                var fileSize = new FileInfo(file);
                 if (fileSize.Length > 0)
                 {
-                    string tempCSS = _mergepath;
+                    string tempCSS = file;
                     ParseCSS(tempCSS);
-                    //File.Delete(tempCSS);
+                    if (File.Exists(tempCSS))
+                    {
+                        File.Delete(tempCSS);
+                    }
                     return _nodeFinal;
                 }
                 return emptyTree;
