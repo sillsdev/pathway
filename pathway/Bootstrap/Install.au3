@@ -99,7 +99,7 @@ Func GetInstaller($name)
 		;$urlPath = 'http://pathway.googlecode.com/files/'
 		$urlPath = 'http://pathway.sil.org/wp-content/stable/'
 	Else
-		$urlPath = 'http://pathway.googlecode.com/files/'
+		$urlPath = 'http://build.palaso.org/repository/download/bt84/' & $BuildSequenceId & ':id/' & $name & '?guest=1'
 	EndIf
 	if not FileExists($name) Then
 		;MsgBox(4096,"Status","Downloading " & $urlPath & $name)

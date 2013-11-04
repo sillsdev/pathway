@@ -18,10 +18,8 @@
 
 ;Global $StableVersionDate = '-0.7.1-2011-04-12'
 Global $StableVersionDate = ''
-Global $LatestSuffix = 'Testing-1.4.0.3397'
 Global $XeLaTexSuffix = 'Testing-1.7.0.3077'
 Global $DEL_Installer = True
-Global $Bootstrap_version = "Version 1.23"
 
 Opt('MustDeclareVars', 1)
 
@@ -44,6 +42,13 @@ Func DoUI()
 	If not FileExists("PathwayBootstrap.ini") Then
 		FileInstall("res\PathwayBootstrap.ini", "PathwayBootstrap.ini")
 	EndIf
+	If not FileExists("PathwayBuild.ini") Then
+		FileInstall("res\PathwayBuild.ini", "PathwayBuild.ini")
+	EndIf
+	Global $LatestSuffix = 'Testing-' & IniRead("PathwayBuild.ini", "PathwayVersion", "buildNumber", "1.4.0.3429")
+	Global $Bootstrap_version = 'Version ' & IniRead("PathwayBuild.ini", "PathwayVersion", "buildNumber", "1.4.0.3429")
+	Global $BuildSequenceId = IniRead("PathwayBuild.ini", "PathwayVersion", "buildId", "29984")
+
 	If FileExists("License.rtf") Then
 		Welcome()
 	Else
@@ -54,6 +59,7 @@ Func DoUI()
 	CleanUp("icon.ico")
 	CleanUp("License.rtf")
 	CleanUp("PathwayBootstrap.ini")
+	CleanUp("PathwayBuild.ini")
 EndFunc
 
 Func CleanUp($name)
