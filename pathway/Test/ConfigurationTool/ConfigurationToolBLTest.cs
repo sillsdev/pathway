@@ -12,7 +12,7 @@ using SIL.Tool;
 namespace Test.UIConfigurationToolBLTest
 {
     [TestFixture]
-    public class ConfigurationToolBLTest
+    public class ConfigurationToolBLTest : ConfigurationToolBL
     {
         private ConfigurationTool cTool;
         private ConfigurationToolBL cToolBL;
@@ -316,6 +316,14 @@ namespace Test.UIConfigurationToolBLTest
             returnValue = cToolBL.GenerateStylesString();
             Assert.IsTrue(returnValue == "Styles", "Values not equal");
 
+        }
+
+        [Test]
+        public void GetMailBodyTest()
+        {
+            string returnValue = GetMailBody("Dictionary", "Extract Zip contents to an appropriate folder.%0D%0A%0D%0A");
+            Assert.IsTrue(returnValue.Contains("Ubuntu"), "missing Ubuntu");
+            Assert.IsTrue(returnValue.Contains("7 and 8"), "Missing 8");
         }
 
         private void AssignNewTest()
