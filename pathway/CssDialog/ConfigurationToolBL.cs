@@ -660,20 +660,20 @@ namespace SIL.PublishingSolution
             MailBody += "Copy the settings file (" + projType + "StyleSettings.xml and StyleSettings.xsd) to the path" + "%0D";
             MailBody += "-------------------------------------------------------------------------------------------------------------" + "%0D%0A";
             MailBody += "Windows XP:" + "%0D%0A";
-            MailBody += @"C:\Program Files\SIL\Pathway" + "%0D%0A";
             MailBody += @"C:\Documents and Settings\All Users\Application Data\SIL\Pathway\" + projType + "%0D%0A";
-            MailBody += "Windows Vista or Windows 7:" + "%0D%0A";
-            MailBody += @"C:\Program Files\SIL\Pathway" + "%0D%0A";
-            MailBody += @"C:\Users\All Users\Application Data\SIL\Pathway\" + projType + "%0D%0A" + "%0D%0A";
+            MailBody += "Windows Vista or Windows 7 and 8:" + "%0D%0A";
+            MailBody += @"C:\Users\All Users\Application Data\SIL\Pathway\" + projType + "%0D%0A";
+            MailBody += "Ubuntu 12.04 (precise):" + "%0D%0A";
+            MailBody += @"~/.local/share/SIL/Pathway/" + projType + "%0D%0A" + "%0D%0A";
 
             MailBody += "Copy the all css files to the path" + "%0D%0A";
             MailBody += "------------------------------------------" + "%0D%0A";
             MailBody += "Windows XP:" + "%0D%0A";
-            MailBody += @"C:\Program Files\SIL\Pathway\Styles\" + projType + "%0D%0A";
             MailBody += @"C:\Documents and Settings\All Users\Application Data\SIL\Pathway\" + projType + "%0D%0A";
-            MailBody += "Windows Vista or Windows 7:" + "%0D%0A";
-            MailBody += @"C:\Program Files\SIL\Pathway\Styles\" + projType + "%0D%0A";
+            MailBody += "Windows Vista or Windows 7 and 8:" + "%0D%0A";
             MailBody += @"C:\Users\All Users\Application Data\SIL\Pathway\" + projType + "%0D%0A";
+            MailBody += "Ubuntu 12.04 (precise):" + "%0D%0A";
+            MailBody += @"~/.local/share/SIL/Pathway/" + projType + "%0D%0A";
             return MailBody;
         }
 
