@@ -33,7 +33,12 @@ namespace Test.PsTool
             string input = GetFileNameWithPath("Merge_KeyFile.css");
             string output = GetFileNameWithOutputPath(fileName);
             string expected = GetFileNameWithExpectedPath(fileName);
-            Common.MakeSingleCSS(input, output);
+            fileName = Common.MakeSingleCSS(input, fileName);
+            if (File.Exists(fileName))
+            {
+                File.Copy(fileName, output, true);
+            }
+
             TextFileAssert.AreEqual(expected, output);
             Common.Testing = true;
         }
@@ -48,14 +53,18 @@ namespace Test.PsTool
             string input = GetFileNameWithPath("Layout_02.css");
             string output = GetFileNameWithOutputPath(fileName);
             string expected = GetFileNameWithExpectedPath(fileName);
-            Common.MakeSingleCSS(input, output);
+            fileName = Common.MakeSingleCSS(input, fileName);
+            if (File.Exists(fileName))
+            {
+                File.Copy(fileName, output, true);
+            }
             TextFileAssert.AreEqual(expected, output);
         }
 
         /// <summary>
         ///A test for MakeSingleCSS
         ///</summary>
-        
+
         [Test]
         [Ignore]
         public void MakeSingleCSSTest3()
@@ -63,7 +72,7 @@ namespace Test.PsTool
             string fileName = "MergedLayout_02.css";
             string input = GetFileNameWithPath("NoFile.css");
             string output = GetFileNameWithOutputPath(fileName);
-            string expected = Common.MakeSingleCSS(input, output);
+            string expected = Common.MakeSingleCSS(input, fileName);
             Assert.AreEqual(expected, input);
         }
 
@@ -78,9 +87,16 @@ namespace Test.PsTool
             string output = GetFileNameWithOutputPath(fileName);
             string expected = "tempcssfile.css";
 
-            string returnValue = Common.MakeSingleCSS(input, output);
+            string returnValue = Common.MakeSingleCSS(input, "tempcssfile.css");
             returnValue = Path.GetFileName(returnValue);
-            Assert.AreEqual(expected, returnValue);
+            if (returnValue.Contains(expected))
+            {
+                Assert.Pass("MakeSingleCssTest4 Passed");
+            }
+            else
+            {
+                Assert.Fail("MakeSingleCssTest4 Failed");
+            }
         }
 
         /// <summary>
@@ -95,11 +111,11 @@ namespace Test.PsTool
             string output = GetFileNameWithOutputPath(fileName);
             string expected = "";
 
-            string returnValue = Common.MakeSingleCSS(input, output);
+            string returnValue = Common.MakeSingleCSS(input, fileName);
             returnValue = Path.GetFileName(returnValue);
             Assert.AreEqual(expected, returnValue);
-        }  
-   
+        }
+
         /// <summary>
         ///A test for GetCSSFileNames
         ///</summary>
@@ -157,8 +173,8 @@ namespace Test.PsTool
         {
             string fileName = "ProjectTypeS.css";
             string xhtmlPath = SetupXhtml(fileName);
-            string expected = "scripture"; 
-            
+            string expected = "scripture";
+
             string actual = Common.GetProjectType(xhtmlPath);
             actual = actual.ToLower();
             Assert.AreEqual(expected, actual);
@@ -172,7 +188,7 @@ namespace Test.PsTool
         {
             string fileName = "ProjectTypeD.css";
             string sourceFile = SetupXhtml(fileName);
-            string expected = "dictionary"; 
+            string expected = "dictionary";
             string actual = Common.GetProjectType(sourceFile);
             Assert.AreEqual(expected, actual.ToLower());
         }
