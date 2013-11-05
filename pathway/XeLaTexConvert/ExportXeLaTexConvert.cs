@@ -130,7 +130,7 @@ namespace SIL.PublishingSolution
             projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
             preProcessor.InsertPropertyForXelatexCss(projInfo.DefaultCssFileWithPath);
-            preProcessor.RemoveTextIntent(projInfo.DefaultCssFileWithPath);
+            projInfo.DefaultCssFileWithPath = preProcessor.RemoveTextIndent(projInfo.DefaultCssFileWithPath);
             ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
             modifyXeLaTexStyles.LangFontDictionary = _langFontCodeandName;
 

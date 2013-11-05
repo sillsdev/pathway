@@ -3422,7 +3422,7 @@ namespace SIL.Tool
 
         //SetNonBreakInVerseNumberSetNonBreakInVerseNumber
 
-        public void RemoveTextIntent(string fileName)
+        public string RemoveTextIndent(string fileName)
         {            
             string fileNameExtension = Path.GetExtension(fileName);
             string newFileName = fileName.Replace(fileNameExtension, "1" + fileNameExtension);
@@ -3454,7 +3454,7 @@ namespace SIL.Tool
 
             read.Close();
             write.Close();
-
+            return newFileName;
         }
 
         #endregion
