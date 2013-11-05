@@ -692,7 +692,7 @@ namespace SIL.PublishingSolution
             DomainSubTypeLing = "lexicon (LING)";
             AddSubject(Param.GetMetadataValue(Param.Subject) + ",eng");
             RelRequiresHas = "Y";
-            AddRelRequires(Common.GetFontList(_folderPath, _projInputType));
+            AddRelRequires(Common.GetFontList(_folderPath, _projInputType, _outputExtension));
             RelConformsto = "TTF";
             AddRightsHolder(Param.GetMetadataValue(Param.Publisher));
             Rights = GetLicenseFileName();//
