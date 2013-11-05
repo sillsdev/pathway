@@ -97,13 +97,13 @@ Func GetInstaller($name)
 	Local $urlPath
 	if $InstallStable Then
 		;$urlPath = 'http://pathway.googlecode.com/files/'
-		$urlPath = 'http://pathway.sil.org/wp-content/stable/'
+		$urlPath = 'http://pathway.sil.org/wp-content/stable/' & $name
 	Else
 		$urlPath = 'http://build.palaso.org/repository/download/bt84/' & $BuildSequenceId & ':id/' & $name & '?guest=1'
 	EndIf
 	if not FileExists($name) Then
 		;MsgBox(4096,"Status","Downloading " & $urlPath & $name)
-		RunWait("wget.exe " & $urlPath & $name)
+		RunWait("wget.exe --output-document=" & $name & " " & $urlPath)
 	EndIf
 	Sleep( 500 )
 EndFunc
