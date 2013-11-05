@@ -3057,22 +3057,42 @@ namespace SIL.Tool
                 XmlNodeList nodeList = xDoc.GetElementsByTagName("meta");
                 if (nodeList.Count > 0)
                 {
-                    for (int i = 0; i < nodeList.Count; i++)
+                    if (projInfo.ProjectInputType.ToLower() == "dictionary")
                     {
-                        isNodeFound = false;
-                        XmlNode node = nodeList[i];
-                        if (node.Attributes != null)
+                        for (int i = 0; i < nodeList.Count; i++)
                         {
-                            if (node.Attributes["name"] == null) continue;
-                            string className = node.Attributes["name"].Value;
-                            if (className == "fontName")
+                            XmlNode node = nodeList[i];
+                            if (node.Attributes != null)
                             {
-                                projInfo.DefaultFontName = node.Attributes["content"].Value;
+                                if (node.Attributes["scheme"] == null) continue;
+                                string className = node.Attributes["scheme"].Value;
+                                if (className == "language to font")
+                                {
+                                    projInfo.DefaultFontName = node.Attributes["content"].Value;
+                                }
                             }
-                            else if (className == "fontSize")
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < nodeList.Count; i++)
+                        {
+
+                            isNodeFound = false;
+                            XmlNode node = nodeList[i];
+                            if (node.Attributes != null)
                             {
-                                if (float.Parse(node.Attributes["content"].Value) < projInfo.DefaultFontSize)
-                                    projInfo.DefaultFontSize = float.Parse(node.Attributes["content"].Value);
+                                if (node.Attributes["name"] == null) continue;
+                                string className = node.Attributes["name"].Value;
+                                if (className == "fontName")
+                                {
+                                    projInfo.DefaultFontName = node.Attributes["content"].Value;
+                                }
+                                else if (className == "fontSize")
+                                {
+                                    if (float.Parse(node.Attributes["content"].Value) < projInfo.DefaultFontSize)
+                                        projInfo.DefaultFontSize = float.Parse(node.Attributes["content"].Value);
+                                }
                             }
                         }
                     }
