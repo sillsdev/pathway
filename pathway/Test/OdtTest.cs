@@ -138,12 +138,12 @@ namespace Test
             {   // convert centimeters to points and round to 4 places
                 var v = double.Parse(p.Substring(0, p.Length - 2));
                 v *= 72.0 / 2.54;
-                return string.Format("{0:0.0000}pt", v);
+                return string.Format("{0:0.}pt", v);
             }
             if (p.EndsWith("pt"))
             {   // return value rounded to 4 places
                 var v = double.Parse(p.Substring(0, p.Length - 2));
-                return string.Format("{0:0.0000}pt", v);
+                return string.Format("{0:0.}pt", v);
             }
             return p.Trim();
         }
