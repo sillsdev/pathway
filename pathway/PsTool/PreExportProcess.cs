@@ -756,6 +756,8 @@ namespace SIL.Tool
                 sb.Append("), ");
             }
             string rights = Param.GetMetadataValue(Param.CopyrightHolder);
+            //http://stackoverflow.com/questions/501671/superscript-in-css-only
+            rights = rights.Replace("\u00ae", "<span style='position: relative; top: -0.5em; font-size: 80%;'>\u00ae</span>");
             if (rights.Trim().Length > 0)
             {
                 sb.Append(rights);
