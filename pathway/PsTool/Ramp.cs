@@ -1662,9 +1662,9 @@ namespace SIL.PublishingSolution
                 XmlNodeList nodeList = xDoc.SelectNodes(xPath, namespaceManager);
                 if (nodeList != null && nodeList.Count > 0)
                 {
-                    foreach (XmlNode node in nodeList)
+                    if (nodeList[nodeList.Count - 1] != null)
                     {
-                        text = text + node.InnerText.Trim();
+                        text = nodeList[nodeList.Count - 1].InnerText;
                     }
                 }
             }
