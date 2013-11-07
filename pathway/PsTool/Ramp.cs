@@ -754,7 +754,7 @@ namespace SIL.PublishingSolution
             if (_projInputType.ToLower() == "scripture")
             {
                 VernacularmaterialsType = "scripture";
-                TypeScriptureType = "Bible text complete";
+                TypeScriptureType = "Bible text selection";
                 TitleScriptureScope = GetScriptureScope(_folderPath);
                 HelperVernacularContent = "shell_none";
             }
@@ -792,6 +792,12 @@ namespace SIL.PublishingSolution
             if (scriptureScope.IndexOf("WOT:Old Testament") > 0 && scriptureScope.IndexOf("WNT:New Testament") > 0 && scriptureScope.IndexOf("WAP:Apocrypha") > 0)
             {
                 scriptureScope = "WBI:Bible";
+            }
+
+            if (scriptureScope.IndexOf("WOT:Old Testament") >= 0 || scriptureScope.IndexOf("WNT:New Testament") >= 0 || scriptureScope.IndexOf("WAP:Apocrypha") >= 0
+                || scriptureScope.IndexOf("WBI:Bible") >= 0)
+            {
+                TypeScriptureType = "Bible text complete";
             }
             return scriptureScope;
         }
