@@ -239,7 +239,10 @@ namespace SIL.PublishingSolution
         {
             if (_copyrightInformation)
             {
-                string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename);
+                var preProcess = new PreExportProcess(projInfo);
+                var processFolder = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+                preProcess.CopyCopyrightPage(processFolder);
+                string copyRightFilePath = Path.Combine(processFolder, "File2Cpy.xhtml");
 
                 // **    string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 if (copyRightFilePath.Trim().Length <= 0 && !File.Exists(copyRightFilePath))
