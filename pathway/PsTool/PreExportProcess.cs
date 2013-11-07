@@ -3839,6 +3839,12 @@ namespace SIL.Tool
                 tw.WriteLine("font-size: 0pt;");
                 //tw.WriteLine("text-indent:5cm;");//padding-left: -5pt;
                 tw.WriteLine("}");
+                //if (IsPictureColumnWidthChange())
+                //{
+                    tw.WriteLine(".pictureColumn {");
+                    tw.WriteLine("width: 99%;");
+                    tw.WriteLine("}");
+                //}
             }
             tw.Close();
         }
@@ -3895,6 +3901,24 @@ namespace SIL.Tool
             //}
             
             xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
+        }
+
+        /// <summary>
+        /// Calculate Column width of Picture
+        /// </summary>
+        /// <param name="pictureWidth"></param>
+        /// <param name="columnWidth"></param>
+        /// <param name="columnCount"></param>
+        /// <param name="columnGap"></param>
+        /// <returns></returns>
+        private bool IsPictureColumnWidthChange(double pictureWidth, double columnWidth, byte columnCount, byte columnGap)
+        {
+            bool isColumnWidthChange = false;
+            if (pictureWidth > ((columnWidth - (columnGap * columnCount)) / 2))
+            {
+                isColumnWidthChange = true;
+            }
+            return isColumnWidthChange;
         }
 
         public void InsertBookPageBreak()
