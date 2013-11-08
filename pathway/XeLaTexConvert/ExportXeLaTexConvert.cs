@@ -130,7 +130,7 @@ namespace SIL.PublishingSolution
             projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
             preProcessor.InsertPropertyForXelatexCss(projInfo.DefaultCssFileWithPath);
-            preProcessor.RemoveTextIntent(projInfo.DefaultCssFileWithPath);
+            projInfo.DefaultCssFileWithPath = preProcessor.RemoveTextIndent(projInfo.DefaultCssFileWithPath);
             ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
             modifyXeLaTexStyles.LangFontDictionary = _langFontCodeandName;
 
@@ -239,7 +239,10 @@ namespace SIL.PublishingSolution
         {
             if (_copyrightInformation)
             {
-                string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename);
+                var preProcess = new PreExportProcess(projInfo);
+                var processFolder = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+                preProcess.CopyCopyrightPage(processFolder);
+                string copyRightFilePath = Path.Combine(processFolder, "File2Cpy.xhtml");
 
                 // **    string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 if (copyRightFilePath.Trim().Length <= 0 && !File.Exists(copyRightFilePath))

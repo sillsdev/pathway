@@ -20,9 +20,7 @@
         <file name="../HelpImprove/HelpImprove.csproj"/>
         <file name="../InDesignConvert/InDesignConvert.csproj"/>
         <file name="../LiftPrepare/LiftPrepare.csproj"/>
-        <file name="../LogosConvert/LogosConvert.csproj"/>
         <file name="../OpenOfficeConvert/OpenOfficeConvert.csproj"/>
-        <file name="../OpenOfficeConvert_OLD/OpenOfficeConvert_OLD.csproj"/>
         <file name="../ParatextSupport/ParatextSupport.csproj"/>
         <file name="../PathwayB/PathwayB.csproj"/>
         <file name="../PdfConvert/PdfConvert.csproj"/>
@@ -37,6 +35,5 @@
         <file name="../WordPressConvert/WordPressConvert.csproj"/>
         <file name="../XeLaTexConvert/XeLaTexConvert.csproj"/>
         <file name="../XslProcess/XslProcess.csproj"/>
-        <file name="../YouVersionConvert/YouVersionConvert.csproj"/>
     </projectTree>
 </project>

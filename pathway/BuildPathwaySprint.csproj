@@ -570,6 +570,8 @@ portable 1
 
     <Exec Command="echo y| $(InstallerWorkProp)\install-tl-advanced.bat -profile tlpw.profile -repository %(repo.Identity)" WorkingDirectory="$(InstallerWorkProp)"/>
     <CallTarget Targets="TlWinPkgInstall"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-ka.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-th.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-zh-latn-pinyin.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-pms.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-uk.hyp.txt"/>

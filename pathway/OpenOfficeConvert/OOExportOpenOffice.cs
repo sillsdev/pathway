@@ -743,10 +743,11 @@ namespace SIL.PublishingSolution
                 preProcessor.InsertEmptyDiv(preProcessor.ProcessedXhtml);
             }
             preProcessor.GetTempFolderPath();
+            preProcessor.GetDefaultLanguage(projInfo); //Here
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
             InsertFrontMatter(projInfo);
             preProcessor.GetfigureNode();
-            preProcessor.GetDefaultLanguage(projInfo);
+            //preProcessor.GetDefaultLanguage(projInfo);
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
             preProcessor.InsertBookPageBreak();
             preProcessor.ArrangeImages();

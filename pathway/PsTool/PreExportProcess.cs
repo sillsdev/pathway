@@ -587,7 +587,11 @@ namespace SIL.Tool
                 Common.RemoveDTDForLinuxProcess(destFile);
             }
             InsertCopyrightImageFiles(destFile, strCopyrightFile);
-            Common.StreamReplaceInFile(destFile, "div id='LanguageInformation' class='Front_Matter' dir='ltr'>", GetLanguageInfo());
+            //Common.StreamReplaceInFile(destFile, "div id='LanguageInformation' class='Front_Matter' dir='ltr'>", GetLanguageInfo());
+            var languageCode = JustLanguageCode();
+            Common.StreamReplaceInFile(destFile, "<span class='LanguageName'></span>", Common.GetLanguageName(languageCode));
+            Common.StreamReplaceInFile(destFile, "<span class='LanguageCode'></span>", languageCode);
+            Common.StreamReplaceInFile(destFile, "<span class='LanguageUrl'></span>", GetLanguageUrl(languageCode));
             Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>", GetCopyrightInfo());
             if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
@@ -595,6 +599,16 @@ namespace SIL.Tool
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
             }
             Common.SetDefaultCSS(destFile, Path.GetFileName(_cssFileNameWithPath));
+        }
+
+        private string JustLanguageCode()
+        {
+            string languageCode = Common.GetLanguageCode(_xhtmlFileNameWithPath, _projInfo.ProjectInputType, true);
+            if (languageCode.Contains(":"))
+            {
+                languageCode = languageCode.Substring(0, languageCode.IndexOf(':'));
+            }
+            return languageCode;
         }
 
         private void InsertCopyrightImageFiles(string copyrighthtmlfile, string copyFromLocation)
@@ -679,65 +693,23 @@ namespace SIL.Tool
             {
                 s0 = outData.ToString();
             }
-            var s1 = Regex.Replace(s0, "div id='LanguageInformation' class='Front_Matter'>", GetLanguageInfo());
-            return (Regex.Replace(s1, "div id='OtherCopyrights' class='Front_Matter'>", GetCopyrightInfo()));
+            //var s1 = Regex.Replace(s0, "div id='LanguageInformation' class='Front_Matter'>", GetLanguageInfo());
+            string languageCode = JustLanguageCode();
+            var s1 = Regex.Replace(s0, "<span class='LanguageName'></span>", Common.GetLanguageName(languageCode));
+            var s2 = Regex.Replace(s1, "<span class='LanguageCode'></span>", languageCode);
+            var s3 = Regex.Replace(s2, "<span class='LanguageUrl'></span>", GetLanguageUrl(languageCode));
+            return (Regex.Replace(s3, "div id='OtherCopyrights' class='Front_Matter'>", GetCopyrightInfo()));
         }
 
-        // Returns the language information for this document as an XHTML snippet (not well formed). This is meant to be used
-        // in conjunction with the StreamReplaceInFile() call in CreateCopyrightPage().
-        private string GetLanguageInfo()
+        private string GetLanguageUrl(string languageCode)
         {
             var sb = new StringBuilder();
-            sb.Append("div id='LanguageInformation' class='Front_Matter' dir='ltr'>");
-            // append what we know about this language, including a hyperlink to the ethnologue.
-            string languageCode = Common.GetLanguageCode(_xhtmlFileNameWithPath, _projInfo.ProjectInputType);
-            if (languageCode.Length > 0)
-            {
-                var languageName = Common.GetLanguageName(languageCode);
-                sb.Append("<h1>ABOUT THIS DOCUMENT</h1>");
-                sb.Append("<p><em>This document contains data written in ");
-                if (languageName.Length > 0)
-                {
-                    sb.Append(languageName);
-                }
-                sb.Append("[");
-                sb.Append(languageCode);
-                sb.Append("]. For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
-                var codeLen = languageCode.Length > 3 ? 3 : languageCode.Length;
-                sb.Append(languageCode.Substring(0, codeLen));
-                sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
-                sb.Append(languageCode.Substring(0, codeLen));
-                sb.Append("</a>.</em></p> ");
-            }
-            return sb.ToString();
-        }
-
-        // Returns the language information for this document as an XHTML snippet (not well formed). This is meant to be used
-        // in conjunction with the StreamReplaceInFile() call in CreateCopyrightPage().
-        private string GetLanguageInfoForLO()
-        {
-            var sb = new StringBuilder();
-            sb.Append("div id='LanguageInformation' class='Front_Matter' dir='ltr'>");
-            // append what we know about this language, including a hyperlink to the ethnologue.
-            string languageCode = GetLanguageCodeForLO();
-            if (languageCode.Length > 0)
-            {
-                var languageName = Common.GetLanguageName(languageCode);
-                sb.Append("<span class='LHeading'>ABOUT THIS DOCUMENT</span>");
-                sb.Append("<span class='LText'>This document contains data written in ");
-                if (languageName.Length > 0)
-                {
-                    sb.Append(languageName);
-                }
-                sb.Append("[");
-                sb.Append(languageCode);
-                sb.Append("]. For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
-                var codeLen = languageCode.Length > 3 ? 3 : languageCode.Length;
-                sb.Append(languageCode.Substring(0, codeLen));
-                sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
-                sb.Append(languageCode.Substring(0, codeLen));
-                sb.Append("</a>.</span> ");
-            }
+            sb.Append("<a href='http://www.ethnologue.com/language/");
+            var codeLen = languageCode.Length > 3 ? 3 : languageCode.Length;
+            sb.Append(languageCode.Substring(0, codeLen));
+            sb.Append("'>http://www.ethnologue.com/language/");
+            sb.Append(languageCode.Substring(0, codeLen));
+            sb.Append("</a>");
             return sb.ToString();
         }
 
@@ -756,6 +728,8 @@ namespace SIL.Tool
                 sb.Append("), ");
             }
             string rights = Param.GetMetadataValue(Param.CopyrightHolder);
+            //http://stackoverflow.com/questions/501671/superscript-in-css-only
+            rights = rights.Replace("\u00ae", "<span style='position: relative; top: -0.5em; font-size: 80%;'>\u00ae</span>");
             if (rights.Trim().Length > 0)
             {
                 sb.Append(rights);
@@ -1299,9 +1273,11 @@ namespace SIL.Tool
                         string draftTempFileName = Path.Combine(Path.GetTempPath(), Path.GetFileName(copyRightFilePath));
 
                         File.Copy(copyRightFilePath, draftTempFileName, true);
-                        Common.StreamReplaceInFile(draftTempFileName,
-                                                   "div id='LanguageInformation' class='Front_Matter' dir='ltr'>",
-                                                   GetLanguageInfoForLO());
+                        //Common.StreamReplaceInFile(draftTempFileName, "div id='LanguageInformation' class='Front_Matter' dir='ltr'>", GetLanguageInfoForLO());
+                        var languageCode = JustLanguageCode();
+                        Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageName'></span>", Common.GetLanguageName(languageCode));
+                        Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageCode'></span>", languageCode);
+                        Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageUrl'></span>", GetLanguageUrl(languageCode));
                         Common.StreamReplaceInFile(draftTempFileName,
                                                    "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>",
                                                    GetCopyrightInfoForLO());
@@ -3057,22 +3033,42 @@ namespace SIL.Tool
                 XmlNodeList nodeList = xDoc.GetElementsByTagName("meta");
                 if (nodeList.Count > 0)
                 {
-                    for (int i = 0; i < nodeList.Count; i++)
+                    if (projInfo.ProjectInputType.ToLower() == "dictionary")
                     {
-                        isNodeFound = false;
-                        XmlNode node = nodeList[i];
-                        if (node.Attributes != null)
+                        for (int i = 0; i < nodeList.Count; i++)
                         {
-                            if (node.Attributes["name"] == null) continue;
-                            string className = node.Attributes["name"].Value;
-                            if (className == "fontName")
+                            XmlNode node = nodeList[i];
+                            if (node.Attributes != null)
                             {
-                                projInfo.DefaultFontName = node.Attributes["content"].Value;
+                                if (node.Attributes["scheme"] == null) continue;
+                                string className = node.Attributes["scheme"].Value;
+                                if (className == "language to font")
+                                {
+                                    projInfo.DefaultFontName = node.Attributes["content"].Value;
+                                }
                             }
-                            else if (className == "fontSize")
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < nodeList.Count; i++)
+                        {
+
+                            isNodeFound = false;
+                            XmlNode node = nodeList[i];
+                            if (node.Attributes != null)
                             {
-                                if (float.Parse(node.Attributes["content"].Value) < projInfo.DefaultFontSize)
-                                    projInfo.DefaultFontSize = float.Parse(node.Attributes["content"].Value);
+                                if (node.Attributes["name"] == null) continue;
+                                string className = node.Attributes["name"].Value;
+                                if (className == "fontName")
+                                {
+                                    projInfo.DefaultFontName = node.Attributes["content"].Value;
+                                }
+                                else if (className == "fontSize")
+                                {
+                                    if (float.Parse(node.Attributes["content"].Value) < projInfo.DefaultFontSize)
+                                        projInfo.DefaultFontSize = float.Parse(node.Attributes["content"].Value);
+                                }
                             }
                         }
                     }
@@ -3402,7 +3398,7 @@ namespace SIL.Tool
 
         //SetNonBreakInVerseNumberSetNonBreakInVerseNumber
 
-        public void RemoveTextIntent(string fileName)
+        public string RemoveTextIndent(string fileName)
         {            
             string fileNameExtension = Path.GetExtension(fileName);
             string newFileName = fileName.Replace(fileNameExtension, "1" + fileNameExtension);
@@ -3434,7 +3430,7 @@ namespace SIL.Tool
 
             read.Close();
             write.Close();
-
+            return newFileName;
         }
 
         #endregion
@@ -3843,6 +3839,12 @@ namespace SIL.Tool
                 tw.WriteLine("font-size: 0pt;");
                 //tw.WriteLine("text-indent:5cm;");//padding-left: -5pt;
                 tw.WriteLine("}");
+                //if (IsPictureColumnWidthChange())
+                //{
+                    tw.WriteLine(".pictureColumn {");
+                    tw.WriteLine("width: 99%;");
+                    tw.WriteLine("}");
+                //}
             }
             tw.Close();
         }
@@ -3899,6 +3901,24 @@ namespace SIL.Tool
             //}
             
             xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
+        }
+
+        /// <summary>
+        /// Calculate Column width of Picture
+        /// </summary>
+        /// <param name="pictureWidth"></param>
+        /// <param name="columnWidth"></param>
+        /// <param name="columnCount"></param>
+        /// <param name="columnGap"></param>
+        /// <returns></returns>
+        private bool IsPictureColumnWidthChange(double pictureWidth, double columnWidth, byte columnCount, byte columnGap)
+        {
+            bool isColumnWidthChange = false;
+            if (pictureWidth > ((columnWidth - (columnGap * columnCount)) / 2))
+            {
+                isColumnWidthChange = true;
+            }
+            return isColumnWidthChange;
         }
 
         public void InsertBookPageBreak()

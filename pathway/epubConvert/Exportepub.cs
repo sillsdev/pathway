@@ -1621,7 +1621,7 @@ namespace SIL.PublishingSolution
                     }
                     sb.AppendLine("@font-face {");
                     sb.Append(" font-family : ");
-                    sb.Append(embeddedFont.Name);
+                    sb.Append("\"" + embeddedFont.Name + "\"");
                     sb.AppendLine(";");
                     sb.AppendLine(" font-weight : normal;");
                     sb.AppendLine(" font-style : normal;");
@@ -1638,8 +1638,8 @@ namespace SIL.PublishingSolution
                         if (embeddedFont.HasItalic)
                         {
                             sb.AppendLine("@font-face {");
-                            sb.Append(" font-family : i_");
-                            sb.Append(embeddedFont.Name);
+                            sb.Append(" font-family : \"i_");
+                            sb.Append(embeddedFont.Name + "\"");
                             sb.AppendLine(";");
                             sb.AppendLine(" font-weight : normal;");
                             sb.AppendLine(" font-style : italic;");
@@ -1654,8 +1654,8 @@ namespace SIL.PublishingSolution
                         if (embeddedFont.HasBold)
                         {
                             sb.AppendLine("@font-face {");
-                            sb.Append(" font-family : b_");
-                            sb.Append(embeddedFont.Name);
+                            sb.Append(" font-family : \"b_");
+                            sb.Append(embeddedFont.Name + "\"");
                             sb.AppendLine(";");
                             sb.AppendLine(" font-weight : bold;");
                             sb.AppendLine(" font-style : normal;");

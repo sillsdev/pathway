@@ -684,6 +684,7 @@ namespace SIL.PublishingSolution
                     {
 
                         case XmlNodeType.Element:
+                            InsertEmptySpanForPicture();
                             StartElement(targetPath);
                             break;
                         case XmlNodeType.EndElement:
@@ -724,6 +725,23 @@ namespace SIL.PublishingSolution
                     pb.Value = pb.Maximum;
                     pb.Visible = false;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Insert Empty Span if Picture comes first for a LetHead in Dictionary
+        /// </summary>
+        private void InsertEmptySpanForPicture()
+        {
+            if (_childName.ToLower().IndexOf("pictureright_entry") == 0 && _previousParagraphName == "letter_letHead_dicBody")
+            {
+                _writer.WriteStartElement("text:p");
+                _writer.WriteAttributeString("text:style-name", "entry_letData_dicBody");
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", "span_entry_letData_dicBody");
+                _writer.WriteString(" ");
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
             }
         }
 

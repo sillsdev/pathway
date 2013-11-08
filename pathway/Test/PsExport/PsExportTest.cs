@@ -885,11 +885,11 @@ namespace Test.PsExport
                 new ODet(ODet.Def, "page layout", "mat21-23.odt", ODet.Styles, "//style:master-page[@style:name='{masterPage}']/@style:page-layout-name", "pageLayout"),
                 new ODet(ODet.Chk, "page height TD-3690", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:page-height", "842pt"),
                 new ODet(ODet.Chk, "page width TD-3690", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:page-width", "595pt"),
-                new ODet(ODet.Chk, "page top margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-top", "1.15cm"),
-                new ODet(ODet.Chk, "page left margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-left", "1.5cm"),
-                new ODet(ODet.Chk, "page right margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-right", "1.5cm"),
-                new ODet(ODet.Chk, "page bottom margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-bottom", "1.15cm"),
-                new ODet(ODet.Chk, "title section", "mat21-23.odt", ODet.Content, "//office:body/office:text/*[4]/@text:name", "Sect_scrBook"),
+                new ODet(ODet.Chk, "page top margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-top", "43pt"),
+                new ODet(ODet.Chk, "page left margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-left", "52pt"),
+                new ODet(ODet.Chk, "page right margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-right", "52pt"),
+                new ODet(ODet.Chk, "page bottom margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-bottom", "43pt"),
+                new ODet(ODet.Chk, "title section", "mat21-23.odt", ODet.Content, "//text:section[1]/@text:name", "Sect_scrBook"),
                 new ODet(ODet.Chk, "book title", "mat21-23.odt", ODet.Content, "(//text:span[substring-before(@text:style-name, '_') = 'scrBookName'])[2]", "Mateo"),
                 new ODet(ODet.Chk, "book code", "mat21-23.odt", ODet.Content, "//text:span[substring-before(@text:style-name, '_') = 'scrBookCode']", "MAT"),
                 new ODet(ODet.Chk, "main title", "mat21-23.odt", ODet.Content, "//text:p[substring-before(@text:style-name, '_') = 'TitleMain']/text:span", "Mateo"),
@@ -912,7 +912,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "secondary title style", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:font-style", "italic"),
                 new ODet(ODet.Chk, "secondary title font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:font-size", "16pt"),
                 new ODet(ODet.Chk, "secondary title complex font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@style:font-size-complex", "16pt"),
-                new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics1']//@style:vertical-pos", "from-top"),
+                new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics1']//@style:vertical-pos", "top"),
                 new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='Graphics1']//@xlink:href", "Pictures/2.jpg"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_TitleMain_')]//@fo:language", "zxx"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_Paragraph_scrSection_')]//@fo:language", "zxx"),
@@ -922,6 +922,81 @@ namespace Test.PsExport
             ExportTest("T14", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
         }
         #endregion T14
+
+        #region T15
+        /// <summary>
+        /// Test Dictionary Rights page
+        /// </summary>
+        /// <remarks>For language, see: http://www.w3schools.com/xslfo/prop_language.asp
+        /// and http://www.ietf.org/rfc/rfc3066.txt
+        /// For country see: http://www.iso.org/iso/iso-3166-1_decoding_table.html
+        /// </remarks>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void T15DictionaryRights()
+        {
+            var tests = new ArrayList
+            {
+                new ODet(ODet.Def, "1st master", ODet.Main, ODet.Content, "//style:style[1]/@style:master-page-name", "masterPage"),
+                new ODet(ODet.Def, "page layout", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{masterPage}']/@style:page-layout-name", "pageLayout"),
+                new ODet(ODet.Chk, "page top margin", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-top", "2cm"),
+                new ODet(ODet.Chk, "page left margin", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-left", "2cm"),
+                new ODet(ODet.Chk, "page right margin", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-right", "2cm"),
+                new ODet(ODet.Chk, "page bottom margin", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-bottom", "2cm"),
+                new ODet(ODet.Chk, "1st Page empty header", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:header-style", ""),
+                new ODet(ODet.Chk, "1st Page empty footer", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:footer-style", ""),
+                new ODet(ODet.Def, "left master", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{masterPage}']/@style:next-style-name", "leftMaster"),
+                new ODet(ODet.Chk, "left header variable", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{leftMaster}']//text:variable-get/@text:name", "Left_Guideword_L"),
+                new ODet(ODet.Def, "left header style", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{leftMaster}']//text:span/@text:style-name", "headerTextStyle"),
+                new ODet(ODet.Def, "right master", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{leftMaster}']/@style:next-style-name", "rightMaster"),
+                new ODet(ODet.Chk, "right footer variable", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{rightMaster}']//style:footer//draw:frame//text:variable-get/@text:name", "Right_Guideword_R"),
+                new ODet(ODet.Chk, "single column letter header", ODet.Main, ODet.Content, "//style:style[@style:name='Sect_letHead']//@fo:column-count", "1"),
+                new ODet(ODet.Chk, "double column data", ODet.Main, ODet.Content, "//style:style[@style:name='Sect_letData']//@fo:column-count", "2"),
+                new ODet(ODet.Chk, "letter header center", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:text-align", "center"),
+                new ODet(ODet.Chk, "letter header top margin", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:margin-top", "18pt"),
+                new ODet(ODet.Chk, "letter header bottom margin", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:margin-bottom", "18pt"),
+                new ODet(ODet.Chk, "letter header font", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-family", "Doulos SIL"),
+                new ODet(ODet.Chk, "letter header complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-name-complex", "Doulos SIL"),
+                new ODet(ODet.Chk, "letter header font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-weight", "700"),
+                new ODet(ODet.Chk, "letter header complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-weight-complex", "700"),
+                new ODet(ODet.Chk, "letter header font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-size", "18pt"),
+                new ODet(ODet.Chk, "letter header complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-size-complex", "18pt"),
+                new ODet(ODet.Chk, "entry background", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:background-color", "transparent"),
+                new ODet(ODet.Chk, "entry alignment", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-align", "left"),
+                new ODet(ODet.Chk, "entry left margin", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "12pt"),
+                new ODet(ODet.Chk, "entry indent", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-indent", "-12pt"),
+                new ODet(ODet.Chk, "headword font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-family", "Doulos SIL"),
+                new ODet(ODet.Chk, "headword complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-name-complex", "Doulos SIL"),
+                new ODet(ODet.Chk, "headword font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-weight", "700"),
+                new ODet(ODet.Chk, "headword complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-weight-complex", "700"),
+                new ODet(ODet.Chk, "headword font size", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-size", "10pt"),
+                new ODet(ODet.Chk, "headword complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-size-complex", "10pt"),
+                new ODet(ODet.Chk, "headword left variable", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[2]//@text:name", "Left_Guideword_L"),
+                new ODet(ODet.Chk, "headword right variable", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[3]//@text:name", "Right_Guideword_R"),
+                new ODet(ODet.Chk, "headword left variable value", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[2]//@office:string-value", "congäñe"),
+                new ODet(ODet.Chk, "headword right variable value", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[3]//@office:string-value", "congäñe"),
+                new ODet(ODet.Chk, "part of speech", ODet.Main, ODet.Content, "//*[starts-with(@text:style-name, 'span_.es_partofspeech')]", "sus"),
+                new ODet(ODet.Def, "part of speech parent style", ODet.Main, ODet.Styles, "//*[substring-before(@style:name, '_') = 'partofspeech']//@style:parent-style-name", "partofspeechParent"),
+                new ODet(ODet.Chk, "part of speech font", ODet.Main, ODet.Styles, "//*[@style:name='{partofspeechParent}']//@fo:font-family", "Times New Roman"),
+                new ODet(ODet.Chk, "part of speech complex font", ODet.Main, ODet.Styles, "//*[@style:name='{partofspeechParent}']//@style:font-name-complex", "Times New Roman"),
+                new ODet(ODet.Chk, "part of speech font style", ODet.Main, ODet.Styles, "//*[@style:name='{partofspeechParent}']//@fo:font-style", "italic"),
+                new ODet(ODet.Chk, "part of speech font size", ODet.Main, ODet.Styles, "//*[@style:name='{partofspeechParent}']//@fo:font-size", "10pt"),
+                new ODet(ODet.Chk, "part of speech complex font size", ODet.Main, ODet.Styles, "//*[@style:name='{partofspeechParent}']//@style:font-size-complex", "10pt"),
+                new ODet(ODet.Chk, "part of speech language", ODet.Main, ODet.Styles, "//*[substring-before(@style:name, '_') = 'partofspeech']//@fo:language", "es"),
+                new ODet(ODet.Chk, "part of speech country", ODet.Main, ODet.Styles, "//*[substring-before(@style:name, '_') = 'partofspeech']//@fo:country", "ES"),
+                new ODet(ODet.Chk, "definition", ODet.Main, ODet.Content, "//*[starts-with(@text:style-name, 'span_.es_xitem_.es_definitionL2')]", "zarigüeya"),
+                new ODet(ODet.Chk, "definition language", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_xitem_.es_definitionL2')]//@fo:language", "es"),
+                new ODet(ODet.Chk, "definition country", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_xitem_.es_definitionL2')]//@fo:country", "ES"),
+                new ODet(ODet.Chk, "rights page header", ODet.Main, ODet.Content, "//text:span[starts-with(@text:style-name, 'LHeading')]", "ABOUT THIS DOCUMENT"),
+                new ODet(ODet.Chk, "rights text", ODet.Main, ODet.Content, "//text:span[starts-with(@text:style-name, 'span_LText')]", "This document contains data written in Waorani[auc]. For more information about this language, visit "),
+                new ODet(ODet.Chk, "rights url", ODet.Main, ODet.Content, "//text:span[starts-with(@text:style-name, 'span_LText')][2]", "http://www.ethnologue.com/show_language.asp?code=auc"),
+                new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "(//text:span[starts-with(@text:style-name, 'LText')])[2]", "\u00a9 2013 John Doe\u00ae."),
+                new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "//*[starts-with(@text:style-name, 'div_FrontMatter')]", "This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License."),
+                new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "(//*[starts-with(@text:style-name, 'div_FrontMatter')])[2]", "To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/"),
+            };
+            ExportTest("T15", "main.xhtml", "Dictionary", "OpenOffice", "", tests);
+        }
+        #endregion T15
 
         [Test]
         public void XsltPreProcess0Test()

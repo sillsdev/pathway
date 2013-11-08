@@ -1,0 +1,59 @@
+div[lang='nko']{ font-family: "Doulos SIL"; font-size: 11pt;}
+span[lang='nko']{ font-family: "Doulos SIL";}
+
+
+.Verse_Number
+{
+font-size: 12pt;
+vertical-align: super;
+}
+
+
+.Paragraph
+{
+font-size: 12pt;
+text-indent: .125pt;
+}
+.scrBody
+{
+direction: ltr;
+font-family: "Doulos SIL";
+}
+
+
+.Chapter_Number {
+    font-weight: bolder;
+    vertical-align: top;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-right: 2pt;
+    float: left;
+    string-set: chapter content() ":";
+}
+
+
+@page {
+    size: 8.5in 11in;
+    margin: .75in;
+    counter-increment: page;
+}
+
+/* The following formats the scripture text into 2 columns */
+
+.columns {
+	column-count: 1; -moz-column-count: 1;
+	column-gap: 12pt; -moz-column-gap: 12pt;
+	column-fill: balance;
+}
+
+.pictureColumn {
+    float: right;
+    width: 99%;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+
+
+

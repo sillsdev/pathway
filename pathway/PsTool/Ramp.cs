@@ -692,7 +692,7 @@ namespace SIL.PublishingSolution
             DomainSubTypeLing = "lexicon (LING)";
             AddSubject(Param.GetMetadataValue(Param.Subject) + ",eng");
             RelRequiresHas = "Y";
-            AddRelRequires(Common.GetFontList(_folderPath, _projInputType));
+            AddRelRequires(Common.GetFontList(_folderPath, _projInputType, _outputExtension));
             RelConformsto = "TTF";
             AddRightsHolder(Param.GetMetadataValue(Param.Publisher));
             Rights = GetLicenseFileName();//
@@ -754,7 +754,7 @@ namespace SIL.PublishingSolution
             if (_projInputType.ToLower() == "scripture")
             {
                 VernacularmaterialsType = "scripture";
-                TypeScriptureType = "Bible text complete";
+                TypeScriptureType = "Bible text selection";
                 TitleScriptureScope = GetScriptureScope(_folderPath);
                 HelperVernacularContent = "shell_none";
             }
@@ -792,6 +792,12 @@ namespace SIL.PublishingSolution
             if (scriptureScope.IndexOf("WOT:Old Testament") > 0 && scriptureScope.IndexOf("WNT:New Testament") > 0 && scriptureScope.IndexOf("WAP:Apocrypha") > 0)
             {
                 scriptureScope = "WBI:Bible";
+            }
+
+            if (scriptureScope.IndexOf("WOT:Old Testament") >= 0 || scriptureScope.IndexOf("WNT:New Testament") >= 0 || scriptureScope.IndexOf("WAP:Apocrypha") >= 0
+                || scriptureScope.IndexOf("WBI:Bible") >= 0)
+            {
+                TypeScriptureType = "Bible text complete";
             }
             return scriptureScope;
         }
@@ -1631,30 +1637,46 @@ namespace SIL.PublishingSolution
             return firstPart + " " + secondPart.Replace("\r", "").Replace("\n", "").Replace("\t", "");
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         private string GetLicenseInformation(string filename)
         {
             string text = string.Empty;
-            string getPsApplicationPath = Common.GetPSApplicationPath();
-            string licenseXml = getPsApplicationPath;
-            if (!filename.Contains("Copyrights"))
+            string licenseXml = Common.GetPSApplicationPath();
+            if(File.Exists(filename))
             {
-                licenseXml = Path.Combine(getPsApplicationPath, "Copyrights");
-            }
-            licenseXml = Path.Combine(licenseXml, filename);
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-            namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
-            xDoc.Load(licenseXml);
-            string xPath = "//x:div[@id='LicenseInformation']";
-            //XmlNode node = xDoc.SelectSingleNode(xPath, namespaceManager);
-            XmlNodeList nodeList = xDoc.SelectNodes(xPath, namespaceManager);
-            if(nodeList != null && nodeList.Count > 0)
-            {
-                if(nodeList[nodeList.Count - 1] != null)
+                if(filename.ToLower().IndexOf("pathway7") > 0)
                 {
-                    text = nodeList[nodeList.Count - 1].InnerText;
+                    if (!filename.Contains("Copyrights"))
+                    {
+                        licenseXml = Path.Combine(licenseXml, "Copyrights");
+                    }
+                    licenseXml = Path.Combine(licenseXml, filename);
                 }
+                else
+                {
+                    licenseXml = filename;
+                }
+                XmlDocument xDoc = Common.DeclareXMLDocument(false);
+                var namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+                namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
+                xDoc.Load(licenseXml);
+                const string xPath = "//x:div[@id='LicenseInformation']";
+                XmlNodeList nodeList = xDoc.SelectNodes(xPath, namespaceManager);
+                if (nodeList != null && nodeList.Count > 0)
+                {
+                    if (nodeList[nodeList.Count - 1] != null)
+                    {
+                        text = nodeList[nodeList.Count - 1].InnerText;
+                    }
+                }
+            }
+            else
+            {
+                text = string.Empty;
             }
             return text;
         }

@@ -11,7 +11,7 @@
     <property name="BaseStyles" value="Base_Styles.css" />
     <property name="DefaultIcon" value="Graphic/book.png" />
     <property name="CurrentInput" value="Samples/Bughotu-1pe.xhtml" />
-    <property name="InputType" value="Dictionary" />
+    <property name="InputType" value="Scripture" />
     <property name="LastTask" value="Village Check" />
     <property name="PreviewType" value="Prince" />
     <property name="CssEditor" value="C:/Windows/Notepad.exe" />

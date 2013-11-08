@@ -137,12 +137,12 @@ namespace SIL.PublishingSolution
                     string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
                     preProcessor.ReplaceStringInCss(mergedCSS);
                     preProcessor.InsertPropertyInCSS(mergedCSS);
-                    preProcessor.RemoveTextIntent(mergedCSS);
+                    mergedCSS = preProcessor.RemoveTextIndent(mergedCSS);
 
 
                     Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
                     CssTree cssTree = new CssTree();
-                    cssTree.OutputType = Common.OutputType.ODT;
+                    cssTree.OutputType = Common.OutputType.PDF;
                     cssClass = cssTree.CreateCssProperty(mergedCSS, true);
                     if (cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-hide-versenumber-one"))
                     {
