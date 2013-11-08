@@ -704,10 +704,10 @@ namespace SIL.Tool
         private string GetLanguageUrl(string languageCode)
         {
             var sb = new StringBuilder();
-            sb.Append("<a href='http://www.ethnologue.com/show_language.asp?code=");
+            sb.Append("<a href='http://www.ethnologue.com/language/");
             var codeLen = languageCode.Length > 3 ? 3 : languageCode.Length;
             sb.Append(languageCode.Substring(0, codeLen));
-            sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
+            sb.Append("'>http://www.ethnologue.com/language/");
             sb.Append(languageCode.Substring(0, codeLen));
             sb.Append("</a>");
             return sb.ToString();
