@@ -17,27 +17,27 @@
 <ol>
   <li>Make sure Debug build works and tests pass</li>
   <li>Make sure CorporateBTE7 build works and install it and run through at least one test pass</li>
-  <li>Find the last sprint <a href="http://code.google.com/p/pathway/source/browse/pathway/ConfigurationTool/Properties/AssemblyInfo.cs" target="_blank">hash</a></li>
+  <li>from git bash use> git flow release start 1.1.1</li>
+  <li>Find the last sprint <a href="https://github.com/sillsdev/pathway/commits/develop/pathway/ConfigurationTool/Properties/AssemblyInfo.cs" target="_blank">Click History</a></li>
   <li>Use git bash <code>git log 1e24079d0996.. >sprint-1.1.1.txt</code> (where 1e24079d0996 is replaced with the hash of the change and 1.1.1 is the version).</li>
-  <li>Use <code>git log --until="today" |grep ^commit |wc</code> to get issues in git db and add 88 for those in btai</li>
+  <li>From git gui, use Tools, Version</li>
   <li>Create the corresponding sprint-1.1.1.xml by exporting the Jira rss xml feed of issues updated since last sprint release date.</li>
   <li>Drop sprint-1.1.1.txt onto SprintIssues.py. Then edit sprint-1.1.1.htm to create a list of issues for the post and to update the readme file.</li>
+  <li>Create sprint-1.1.1.log in format needed for Linux</li>
   <li>Update the BuildPathway/ReadmePw.rtf file with the new version # and list of changes</li>
   <li>Update BuildPathway/BuildPathway.csproj and BuildPathway60.csproj with new version #. Minimal change in 2nd # for auto upgrades.</li>
   <li><code>PathwaySprint.bat 1.1.1.2124</code> where 1.1.1.2124 is replaced by current version number</li>
   <li>Rename Sprint folder and move to Releases folder as a subfolder (ex. Sprint-1.1.1.2124)</li>
   <li>Uninstall any old versions and install SetupPw7BTE-1.1.1.2124.msi and make sure default export works.</li>
-  <li>Make sure Firefox is the default browser and <a href="http://code.google.com/p/pathway/downloads/list" target="_blank">downloads page</a> is displayed. Use <a href="file:///C:/Users/Trihus.DALLAS/Documents/work/Outsourcing/Engagement/pathway-sil-org/Upload2Google.au3"><code>Upload2Google</code></a></li>
   <li>Check version numbers of third party software in PathwayBootstrap.ini</li>
   <li>Edit the PathwayBootstrap.au3 so the GetInstaller will point to the right URL location. Change it's version number and compile.</li>
   <li>Digitally sign PathwayBootstrap-1.19.exe and other .msi files</li>
+  <li>git flow release finish 1.1.1</li>
+  <li>git push origin master develop</li>
+  <li>Update the version number in Team city <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt75" target="_blank">daily</a> and <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt84" target="_blank">sprint</a> build configuration</li>
+  <li><a href="http://build.palaso.org/project.html?projectId=project18" target="_blank">Launch Team City</a> Sprint Build</li>
   <li>Use fciv (console tool) to calculate the checksum for the new bootstrap program.</li>
   <li>Change the first page of <a href="http://pathway.sil.org/wp-admin/edit.php?post_type=page" target="_blank">pathway.sil.org</a> to reference this new bootstrap program google code link.</li>
-  <li>Check in changes for this sprint.</li>
-  <li>Update the version number in Team city <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt75" target="_blank">daily</a> and <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt84" target="_blank">sprint</a> build configuration</li>
-  <li>Edit sprint-1.1.1.htm produced above to create entry for changelog</li>
-  <li>Commit Changes</li>
-  <li><a href="http://build.palaso.org/project.html?projectId=project18" target="_blank">Launch Team City</a> Sprint Build</li>
   <li><a href="http://pathway.sil.org/wp-admin/post-new.php?post_type=post" target="_blank">Add a "Release" post</a> to pathway.sil.org web site with the list of changes and a link to the sprint build page. (The "Release" category is checked before the post is added. This will add the post to the Release feed that is picked up by lingtransoft.info and perhaps others.)</li>
   <li>Save download statistics from <a href="http://pathway.sil.org/wp-admin/tools.php?page=simple-download-monitor.php" target="_blank">Download monitor and reset statistics</a></li>
   <li>On precise 32 virtual machine: git gui to clean, pull, get version, update log, build, tag, and clean up</li>
@@ -46,16 +46,12 @@
   <li>On precise 64 virtual machine: git gui to clean, pull, get version, update log, build, tag, and clean up</li>
   <li>Upload to downloads page</li>
   <li>Compute md5sum, save this is updated on <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> page</li>
-  <li>On lucid 32 virtual machine: git gui to clean, pull, get version, update log, build, tag, and clean up</li>
-  <li>Upload to downloads page</li>
-  <li>Compute md5sum, save this is updated on <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> page</li>
   <li>Update the <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">latest downloads</a> page changing the names of the download files as well as the name of the bootstrap. You will also need to change the md5sums for each download that has changed.
   <li>Update the link at the bottom of <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> to point to the artifacts on Team city of the <a href="http://build.palaso.org/viewType.html?buildTypeId=bt84&tab=buildTypeStatusDiv" target="_blank">latest sprint</a>.</li>
   <li><a href="http://pathway.sil.org/wp-admin/export.php" target="_blank">Back up</a> the pathway.sil.org web site.</li>
   <li>Mark previous release downloads as deprecated.</li>
   <li>Update <a href="http://lingtransoft.info" target="_blank">lingtransoft.info</a></li>
   <li>Jira update: add completed issues to sprint, move uncompleted to new sprint, mark sprint as released</li>
-  <li>Inform <a href="mailto:richard_young@wycliffe.org">Richard Young</a> (LangTran) of the new build</li>
   <li>Review <a href="http://myphpapps.com.cws10.my-hosting-panel.com/getdata.php" target="_blank">usage data</a></li>
 </ol>
 
