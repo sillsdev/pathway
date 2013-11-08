@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <title>sprint-1.5.0</title>
+  </head>
+  <body>
+    <p>The key changes in this sprint were to add the creation of Reap archive packages, including
+      checking the rights statements and cleaning up the folder. theWord/MySword output was also
+      added in this sprint. We also moved the repo to a new location on github.</p>
+    <h3>Here is a detailed list of the changes:</h3>
+    <ul>
+      <li>Common Code <ul>
+          <li>TD-3218 Add archive entry creation</li>
+          <li>TD-3591 Updated Logo - Image size reduced</li>
+          <li>TD-3615 Adding Keyword metadata</li>
+          <li>TD-3616 Cleanup PDF production.</li>
+          <li>TD-3623 Preview failed to create formatted output</li>
+          <li>TD-3648 Output file name based on Title</li>
+          <li>TD-3652 Create RAMP from TestBed </li>
+          <li>TD-3653 Create RAMP file on each Pathway output format </li>
+          <li>TD-3669 Include Font Info in Ramp package </li>
+          <li>TD-3670 Ramp package Graphics info.</li>
+          <li>TD-3671 Ramp package creation date</li>
+          <li>TD-3672 Scripture meta data modification </li>
+          <li>TD-3682 Add rights statements</li>
+          <li>TD-3685 RAMP package does not pick up on substituted fonts </li>
+          <li>TD-3688 Add custom templates</li>
+          <li>TD-3693 Send Stylesheets email to include Linux and Windows 8</li>
+          <li>Intended for Sale does not correctly appear in RAMP </li>
+          <li>TD-3631 Move copyright settings to Temp folder</li>
+          <li>TD-3658 Add scipt files for languages in RAMP file </li>
+          <li>TD-3686 font not showing up in Pathway output </li>
+          <li>TD-3692 Add Scripture type</li>
+          <li>Added Copyright and License document</li>
+          <li>Added topic for RAMP</li>
+          <li>Adjust subject language to make it valid to RAMP</li>
+          <li>Clean up folder</li>
+          <li>Don't rename settings to Old</li>
+          <li>Edits Create a custom rights statement</li>
+          <li>FB-17459 handle tables in introduction and Scripture text.</li>
+          <li>Handle right-to-left formatting</li>
+          <li>Include text in template Use vernacular for about this document</li>
+          <li>Update copy to copy empty br tags.</li>
+          <li>Update templates to avoid validation error Superscript (R) at least in epub.</li>
+        </ul>
+      </li>
+      <li>Build <ul>
+          <li>TD-3624 Using Preview from within Flex Fails</li>
+          <li>TD-3645 Identify license for each icon </li>
+          <li>TD-3646 Export from Fieldworks in Linux it fails</li>
+          <li>Don't include theWord in SE build</li>
+          <li>Include DictionaryForMIDs in SE testing build</li>
+          <li>Install vrs.xml</li>
+          <li>Remove Logos Alpha</li>
+          <li>Update to build XeLaTeX</li>
+        </ul>
+      </li>
+      <li>Open Office Writer <ul>
+          <li>TD-1497 Reduce size of OO PDF output</li>
+          <li>TD-3106 Page numbers dynamic links</li>
+          <li>TD-3564 dictionary, first page has no page number nor footer</li>
+          <li>TD-3610 Space between the paragraph in LibreOffice </li>
+          <li>TD-3626 Blank page before reversal</li>
+          <li>TD-3633 Reversal Document's Cover page shows Page Number</li>
+          <li>TD-3636 Header mismatch</li>
+          <li>TD-3655 Path Too Long Exception </li>
+          <li>TD-3660 Call Ramp in ApplyPDFLicenseInfo</li>
+          <li>TD-3666 Book with Header based on Reference format</li>
+          <li>TD-3689 Single column leave text next to image </li>
+          <li>Insert space after verse number</li>
+          <li>Update information about MySword Result</li>
+          <li>no spelling checking on unrecognized languages</li>
+        </ul>
+      </li>
+      <li>Smart Device <ul>
+          <li>TD-3617 No homograph numbers for Dictionary for MIDs output </li>
+          <li>TD-3684 Header shows always first Bookname in Prince PDF</li>
+          <li>Change from theWord to theWord/MySword</li>
+          <li>Handle text direction in epub</li>
+          <li>Handle the case where theWord has been uninstalled</li>
+          <li>Initial TheWord</li>
+          <li>see if theWord installed.</li>
+          <li>theWord: Use short title fullname and allow description override</li>
+        </ul>
+      </li>
+      <li>Stylesheet <ul>
+          <li>TD-3334 Previews do not seem to match Right Header and Right Footer</li>
+          <li>TD-3635 1st para of every chapter has left alignment instead of justified</li>
+          <li>TD-3559 Stylesheet editor without Save option is unintuitive, needs explanation </li>
+          <li>TD-3647 Merge custom styles into latest style sheet </li>
+          <li>Updated Sending Stylesheets topics</li>
+          <li>Updated to not force font size</li>
+        </ul>
+      </li>
+      <li>User Interface <ul>
+          <li>TD-3272 propose ui for checkbox for Insert space Test failure</li>
+          <li>TD-3488 update bootstrap logo</li>
+          <li>TD-3637 Update help icon in ConfigurationTool</li>
+          <li>TD-3638 Update About Us dialog </li>
+          <li>TD-3639 Show Splash Screen for Configuration Tool</li>
+          <li>TD-3649 Progress bar for Paratext conversion </li>
+          <li>TD-3650 Check boxes on front matter tab deselect themselves</li>
+          <li>TD-3654 Nothing displayed anything in Export Through Pathway dialog</li>
+          <li>TD-3659 Defaults from Configuration Tool not remembered</li>
+          <li>TD-3661 Double spacing not working </li>
+          <li>TD-3668 Paratext and fw export invalid value</li>
+          <li>TD-3690 Update settings and test for Paratext</li>
+          <li>Disable style sheets in ConfigurationTool when theWord is selected</li>
+          <li>Edits to About Pathway dialog box</li>
+          <li>Properties tab updates topics added</li>
+          <li>Update results dialogs, test for missing booknames</li>
+          <li>Use PNG SIL icon with transparency</li>
+          <li>only require folder once with PathwayB.</li>
+        </ul>
+      </li>
+      <li>XeTeX <ul>
+          <li>TD-2605 poetry section not formatted correctly </li>
+          <li>TD-3161 Two column output switches to single column</li>
+          <li>TD-3634 PDF was not created for xelatex</li>
+          <li>TD-3695 fix rights templates for XeLaTeX</li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+</html>
