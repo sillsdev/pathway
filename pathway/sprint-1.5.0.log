@@ -1,0 +1,91 @@
+  * Pathway 1.5.0
+    - Common: TD-3218 Add archive entry creation
+    - Common: TD-3591 Updated Logo - Image size reduced
+    - Common: TD-3615 Adding Keyword metadata
+    - Common: TD-3616 Cleanup PDF production.
+    - Common: TD-3623 Preview failed to create formatted output
+    - Common: TD-3648 Output file name based on Title
+    - Common: TD-3652 Create RAMP from TestBed
+    - Common: TD-3653 Create RAMP file on each Pathway output format
+    - Common: TD-3669 Include Font Info in Ramp package
+    - Common: TD-3670 Ramp package Graphics info.
+    - Common: TD-3671 Ramp package creation date
+    - Common: TD-3672 Scripture meta data modification
+    - Common: TD-3682 Add rights statements
+    - Common: TD-3685 RAMP package does not pick up on substituted fonts
+    - Common: TD-3688 Add custom templates
+    - Common: TD-3693 Send Stylesheets email to include Linux and Windows 8
+    - Common: Intended for Sale does not correctly appear in RAMP
+    - Common: TD-3631 Move copyright settings to Temp folder
+    - Common: TD-3658 Add scipt files for languages in RAMP file
+    - Common: TD-3686 font not showing up in Pathway output
+    - Common: TD-3692 Add Scripture type
+    - Common: Added Copyright and License document
+    - Common: Added topic for RAMP
+    - Common: Adjust subject language to make it valid to RAMP
+    - Common: Clean up folder
+    - Common: Don't rename settings to Old
+    - Common: Edits Create a custom rights statement
+    - Common: FB-17459 handle tables in introduction and Scripture text.
+    - Common: Handle right-to-left formatting
+    - Common: Include text in template Use vernacular for about this document
+    - Common: Update copy to copy empty br tags.
+    - Common: Update templates to avoid validation error Superscript (R) at least in epub.
+    - Build: TD-3624 Using Preview from within Flex Fails
+    - Build: TD-3645 Identify license for each icon
+    - Build: TD-3646 Export from Fieldworks in Linux it fails
+    - Build: Don't include theWord in SE build
+    - Build: Include DictionaryForMIDs in SE testing build
+    - Build: Install vrs.xml
+    - Build: Remove Logos Alpha
+    - Build: Update to build XeLaTeX
+    - LibreOffice: TD-1497 Reduce size of OO PDF output
+    - LibreOffice: TD-3106 Page numbers dynamic links
+    - LibreOffice: TD-3564 dictionary, first page has no page number nor footer
+    - LibreOffice: TD-3610 Space between the paragraph in LibreOffice
+    - LibreOffice: TD-3626 Blank page before reversal
+    - LibreOffice: TD-3633 Reversal Document's Cover page shows Page Number
+    - LibreOffice: TD-3636 Header mismatch
+    - LibreOffice: TD-3655 Path Too Long Exception
+    - LibreOffice: TD-3660 Call Ramp in ApplyPDFLicenseInfo
+    - LibreOffice: TD-3666 Book with Header based on Reference format
+    - LibreOffice: TD-3689 Single column leave text next to image
+    - LibreOffice: Insert space after verse number
+    - LibreOffice: Update information about MySword Result
+    - LibreOffice: no spelling checking on unrecognized languages
+    - E-Pub: TD-3617 No homograph numbers for Dictionary for MIDs output
+    - E-Pub: TD-3684 Header shows always first Bookname in Prince PDF
+    - E-Pub: Change from theWord to theWord/MySword
+    - E-Pub: Handle text direction in epub
+    - E-Pub: Handle the case where theWord has been uninstalled
+    - E-Pub: Initial TheWord
+    - E-Pub: see if theWord installed.
+    - E-Pub: theWord: Use short title fullname and allow description override
+    - Stylesheet: TD-3334 Previews do not seem to match Right Header and Right Footer
+    - Stylesheet: TD-3635 1st para of every chapter has left alignment instead of justified
+    - Stylesheet: TD-3559 Stylesheet editor without Save option is unintuitive, needs explanation
+    - Stylesheet: TD-3647 Merge custom styles into latest style sheet
+    - Stylesheet: Updated Sending Stylesheets topics
+    - Stylesheet: Updated to not force font size
+    - UserInterface: TD-3272 propose ui for checkbox for Insert space Test failure
+    - UserInterface: TD-3488 update bootstrap logo
+    - UserInterface: TD-3637 Update help icon in ConfigurationTool
+    - UserInterface: TD-3638 Update About Us dialog
+    - UserInterface: TD-3639 Show Splash Screen for Configuration Tool
+    - UserInterface: TD-3649 Progress bar for Paratext conversion
+    - UserInterface: TD-3650 Check boxes on front matter tab deselect themselves
+    - UserInterface: TD-3654 Nothing displayed anything in Export Through Pathway dialog
+    - UserInterface: TD-3659 Defaults from Configuration Tool not remembered
+    - UserInterface: TD-3661 Double spacing not working
+    - UserInterface: TD-3668 Paratext and fw export invalid value
+    - UserInterface: TD-3690 Update settings and test for Paratext
+    - UserInterface: Disable style sheets in ConfigurationTool when theWord is selected
+    - UserInterface: Edits to About Pathway dialog box
+    - UserInterface: Properties tab updates topics added
+    - UserInterface: Update results dialogs, test for missing booknames
+    - UserInterface: Use PNG SIL icon with transparency
+    - UserInterface: only require folder once with PathwayB.
+    - XeLaTeX: TD-2605 poetry section not formatted correctly
+    - XeLaTeX: TD-3161 Two column output switches to single column
+    - XeLaTeX: TD-3634 PDF was not created for xelatex
+    - XeLaTeX: TD-3695 fix rights templates for XeLaTeX
