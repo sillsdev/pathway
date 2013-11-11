@@ -38,16 +38,18 @@ namespace SIL.PublishingSolution
             WriteCSS();
 
             // Create custom.css from custom.sty
-		    SetCustomPath();
+		    SetCustomPath(database);
             ParseFile();
             SetFontAndDirection();
             WriteCSS();
         }
 
-        private void SetCustomPath()
+        private void SetCustomPath(string database)
         {
             _styFolder = Path.GetDirectoryName(StyFullPath);
             _cssFolder = Path.GetDirectoryName(_cssFullPath);
+
+            _styFolder = Common.PathCombine(_styFolder, database);
 
             StyFullPath = Path.Combine(_styFolder, "custom.sty"); 
             _cssFullPath = Path.Combine(_cssFolder, "custom.css");
