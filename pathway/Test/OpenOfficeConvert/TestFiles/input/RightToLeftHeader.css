@@ -1,0 +1,51 @@
+
+div[lang='zxx']{ font-family: "Faruma";}
+span[lang='zxx']{ font-family: "Faruma";}
+
+div[lang='dv']{ font-family: "Faruma"; font-size: "14pt"; direction: rtl; text-align: right;}
+span[lang='dv']{ font-family: "Faruma";}
+
+.scrBookName
+{
+display: none;
+font-size: 12pt;
+font-style: italic;
+color: #400000;
+}
+
+@page :left {
+    @top-left {
+        -ps-referenceFormat: "Genesis 1";
+        content: string(bookname, first) " "  string(chapter, first);
+    }
+    @top-center  { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left { content: ''; }
+    @top-center  { content: ''; }
+    @top-right     {
+        -ps-referenceFormat: "Genesis 1";
+        content: string(bookname, last) " "  string(chapter, last);
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+/* scripture ruling lines */
+@page {
+    @footnotes {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+    @footnote {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+}
+
