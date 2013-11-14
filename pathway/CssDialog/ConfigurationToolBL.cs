@@ -3440,13 +3440,9 @@ namespace SIL.PublishingSolution
 
                     if (isPreviewFileExist == false || IsPropertyModified())
                     {
-                        if (!IsUnixOs)
-                        {
-                            WriteCss();
-                            ShowCSSValue();
-                        }
+                        WriteCss();
+                        ShowCSSValue();
                         _screenMode = ScreenMode.Edit;
-
                         string cssMergeFullFileName = Param.StylePath(FileName);
                         string PsSupportPath = Path.Combine(Common.LeftString(cssMergeFullFileName, "Pathway"),
                                                             "Pathway");
