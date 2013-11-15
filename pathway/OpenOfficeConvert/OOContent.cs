@@ -1003,6 +1003,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+
             content = InsertSpaceInTextforMacro(content); //TD-2034
             InsertBookNameBeforeBookIntroduction(content);
 
@@ -1116,6 +1117,10 @@ namespace SIL.PublishingSolution
                 else if (_allCharacter.Peek().ToLower().IndexOf("versenumber") == 0 || _allCharacter.Peek().ToLower().IndexOf("versenumber1") == 0)
                 {
                     content = " " + content.TrimStart();
+                }
+                else if (_allCharacter.Peek().ToLower().IndexOf("seeinglossary") == 0)//TD-3665
+                {
+                    content = content.TrimEnd() + " ";
                 }
             }
             return content;
