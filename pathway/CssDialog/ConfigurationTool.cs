@@ -336,6 +336,22 @@ namespace SIL.PublishingSolution
             get { return txtPageGutterWidth; }
         }
 
+        //TD-3607
+        public TextBox TxtGuidewordLength
+        {
+            get { return txtGuidewordLength; }
+        }
+
+        public Panel PnlGuidewordLength
+        {
+            get { return pnlGuidewordLength; }
+        }
+
+        public Label LblGuidewordLength
+        {
+            get { return lblGuidewordLength; }
+        }
+
         public Label LblPageGutter
         {
             get { return lblPageGutter; }
@@ -1034,6 +1050,12 @@ namespace SIL.PublishingSolution
             //{
             //    txtPageGutterWidth.Text = "";
             //}
+            _CToolBL.SetModifyMode(true);
+        }
+
+        //TD-3607
+        private void txtGuidewordLength_KeyUp(object sender, KeyEventArgs e)
+        {
             _CToolBL.SetModifyMode(true);
         }
 

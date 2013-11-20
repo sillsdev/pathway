@@ -429,6 +429,21 @@ namespace SIL.PublishingSolution
                 return result.Length > 0 ? result : "18";
             }
         }
+        //TD-3607
+        public string GuidewordLength
+        {
+            get
+            {
+                string task = "guidewordLength";
+                //if (_loadType == "Dictionary")
+                //{
+                //    task = "guidewordLength";
+                //}
+                string key = "guideword-length";
+                string result = GetValue(task, key, "99");
+                return Convert.ToInt32(result) > 0 ? result : "99";
+            }
+        }
 
         public string PageSize
         {
@@ -929,6 +944,18 @@ namespace SIL.PublishingSolution
                             value["column-gap"] = cTool.TxtPageGutterWidth.Text;
                             WriteCssClass(writeCss, "letData", value);
                         }
+                        value.Clear();
+                        //TD-3607
+                        if (cTool.TxtGuidewordLength.Text.Length > 0 && inputTypeBL.ToLower() == "dictionary")
+                        {
+                            int a;
+                            if (int.TryParse(cTool.TxtGuidewordLength.Text, out a))
+                            {
+                                value["guideword-length"] = Convert.ToInt16(cTool.TxtGuidewordLength.Text).ToString();
+                            }
+                            WriteCssClass(writeCss, "guidewordLength", value);
+                        }
+
 
                         value.Clear();
                         value["margin-top"] = cTool.TxtPageTop.Text;
@@ -1079,6 +1106,8 @@ namespace SIL.PublishingSolution
             cTool.TxtPageBottom.Text = bottom + "pt";
 
             cTool.TxtPageGutterWidth.Text = GutterWidth;
+            cTool.TxtGuidewordLength.Text = GuidewordLength;
+
             if (GutterWidth.IndexOf('%') == -1)
             {
                 if (cTool.TxtPageGutterWidth.Text.Length > 0)
@@ -4589,17 +4618,23 @@ namespace SIL.PublishingSolution
             {
                 if (inputTypeBL.ToLower() == "dictionary")
                 {
+                    cTool.PnlGuidewordLength.Visible = true;
                     cTool.PnlReferenceFormat.Visible = false;
                     _cToolPnlOtherFormatTop = cTool.PnlOtherFormat.Top;
-                    cTool.PnlOtherFormat.Top = cTool.PnlReferenceFormat.Top;
+                    //cTool.PnlOtherFormat.Top = cTool.PnlReferenceFormat.Top;
+                    cTool.PnlOtherFormat.Top = cTool.PnlGuidewordLength.Location.Y + cTool.PnlGuidewordLength.Height;
                 }
                 else
                 {
                     if (_cToolPnlOtherFormatTop > 0)
                     {
+                        cTool.PnlGuidewordLength.Visible = false;
                         cTool.PnlReferenceFormat.Visible = true;
+                        
                         //cTool.PnlOtherFormat.Top = _cToolPnlOtherFormatTop;
+                        cTool.PnlReferenceFormat.Top = cTool.PnlGuidewordLength.Top;
                         cTool.PnlOtherFormat.Top = cTool.PnlReferenceFormat.Location.Y + cTool.PnlReferenceFormat.Height;
+                        
                     }
                 }
 
