@@ -4626,9 +4626,9 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
+                    GuidewordPnlAlignment();
                     if (_cToolPnlOtherFormatTop > 0)
                     {
-                        cTool.PnlGuidewordLength.Visible = false;
                         cTool.PnlReferenceFormat.Visible = true;
                         
                         //cTool.PnlOtherFormat.Top = _cToolPnlOtherFormatTop;
@@ -4652,6 +4652,13 @@ namespace SIL.PublishingSolution
             {
                 ShowPreview(1);
             }
+        }
+
+        private void GuidewordPnlAlignment()
+        {
+            cTool.PnlGuidewordLength.Visible = false;
+            cTool.PnlReferenceFormat.Top = cTool.PnlGuidewordLength.Top;
+            cTool.PnlOtherFormat.Top = cTool.PnlReferenceFormat.Location.Y + cTool.PnlReferenceFormat.Height;
         }
 
         public void ddlFileProduceDict_ValidatedBL(object sender)
