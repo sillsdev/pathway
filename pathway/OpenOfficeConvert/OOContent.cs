@@ -175,6 +175,7 @@ namespace SIL.PublishingSolution
         private string _customXRefSymbol = string.Empty;
         private string firstRevHeadWord = string.Empty;
         Dictionary<string, string> FirstDataOnEntry = new Dictionary<string, string>();
+        private int _guidewordLength;
         #endregion
 
         #region Public Variable
@@ -260,9 +261,30 @@ namespace SIL.PublishingSolution
 
         }
 
+        /// <summary>
+        /// Get Guideword Length
+        /// </summary>
+        private void GetGuidewordLength()
+        {
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                if (IdAllClass.ContainsKey("guidewordLength") && IdAllClass["guidewordLength"].ContainsKey("guideword-length"))
+                {
+                    int a;
+                    if (int.TryParse(IdAllClass["guidewordLength"]["guideword-length"], out a))
+                    {
+                        _guidewordLength = Convert.ToInt16(IdAllClass["guidewordLength"]["guideword-length"]);
+                    }
+                }
+                _guidewordLength = _guidewordLength > 0 ? _guidewordLength : 99;
+            }
+        }
+
         private void ProcessProperty()
         {
             Common.ColumnWidth = 0.0;
+
+            GetGuidewordLength();
 
             foreach (string className in IdAllClass.Keys)
             {
@@ -3637,6 +3659,12 @@ namespace SIL.PublishingSolution
 
                 if (_classNameWithLang.IndexOf("headword") >= 0)
                 {
+                    if (content.Trim().Length > _guidewordLength)
+                    {
+                        content = content.Trim().Substring(0, _guidewordLength) + "...";
+                        leftHeadword = content;
+                    }
+
                     if (_headwordVariable.Count - 1 > _headwordIndex + 1)
                     {
                         if (IsFirstEntry)
