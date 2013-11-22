@@ -135,9 +135,21 @@ namespace Test
         private static string ToPt(string p)
         {
             if (p.EndsWith("cm"))
-            {   // convert centimeters to points and round to 4 places
+            {   // convert centimeters to points and round
                 var v = double.Parse(p.Substring(0, p.Length - 2));
                 v *= 72.0 / 2.54;
+                return string.Format("{0:0.}pt", v);
+            }
+            if (p.EndsWith("mm"))
+            {   // convert milimeters to points and round
+                var v = double.Parse(p.Substring(0, p.Length - 2));
+                v *= 72.0 / 25.4;
+                return string.Format("{0:0.}pt", v);
+            }
+            if (p.EndsWith("in"))
+            {   // convert centimeters to points and round
+                var v = double.Parse(p.Substring(0, p.Length - 2));
+                v *= 72.0;
                 return string.Format("{0:0.}pt", v);
             }
             if (p.EndsWith("pt"))

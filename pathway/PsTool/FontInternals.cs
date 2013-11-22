@@ -119,8 +119,8 @@ namespace SIL.Tool
 
         public static string GetPostscriptName(string fontFullName)
         {
-			if (!File.Exists(fontFullName)) return string.Empty;
-			
+            if (!File.Exists(fontFullName)) return string.Empty;
+
             FileStream fs = new FileStream(fontFullName, FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fs);
             TT_OFFSET_TABLE ttResult = GetOffsetTable(r);
@@ -195,7 +195,7 @@ namespace SIL.Tool
                     if (ttNMResult.uNameID == PostscriptNameId)
                     {
                         fs.Position = tbName.uOffset + ttNMResult.uStringOffset + ttNTResult.uStorageOffset;
-                        char [] szResult = r.ReadChars(ttNMResult.uStringLength);
+                        char[] szResult = r.ReadChars(ttNMResult.uStringLength);
                         string result = "";
                         // Usually the uEncodingID will tell us whether we're using single or double-byte encoding,
                         // but sometimes it lies. Verify by testing the first character in the array for '\0'
@@ -252,27 +252,27 @@ namespace SIL.Tool
         private static TT_TABLE_DIRECTORY GetNameTable(BinaryReader r)
         {
             TT_TABLE_DIRECTORY tbName;
-			if (Common.UsingMonoVM)
-			{
-				// char size is 1 byte in TTF file for Mono?
-				// try copying the structure over manually
-    	        byte[] bNameTable = r.ReadBytes(4); // chars
-				tbName.szTag1 = Convert.ToChar(bNameTable[0]);
-				tbName.szTag2 = Convert.ToChar(bNameTable[1]);
-				tbName.szTag3 = Convert.ToChar(bNameTable[2]);
-				tbName.szTag4 = Convert.ToChar(bNameTable[3]);
-				tbName.uCheckSum = r.ReadUInt32();
-				tbName.uOffset = r.ReadUInt32();
-				tbName.uLength = r.ReadUInt32();
-			}
-			else 
-			{
-	            byte[] bNameTable = r.ReadBytes(Marshal.SizeOf(tblDir));
-				IntPtr ptrName = Marshal.AllocHGlobal(bNameTable.Length);
-	            Marshal.Copy(bNameTable, 0x0, ptrName, bNameTable.Length);
-	            tbName = (TT_TABLE_DIRECTORY)Marshal.PtrToStructure(ptrName, typeof(TT_TABLE_DIRECTORY));
-	            Marshal.FreeHGlobal(ptrName);
-			}
+            if (Common.UsingMonoVM)
+            {
+                // char size is 1 byte in TTF file for Mono?
+                // try copying the structure over manually
+                byte[] bNameTable = r.ReadBytes(4); // chars
+                tbName.szTag1 = Convert.ToChar(bNameTable[0]);
+                tbName.szTag2 = Convert.ToChar(bNameTable[1]);
+                tbName.szTag3 = Convert.ToChar(bNameTable[2]);
+                tbName.szTag4 = Convert.ToChar(bNameTable[3]);
+                tbName.uCheckSum = r.ReadUInt32();
+                tbName.uOffset = r.ReadUInt32();
+                tbName.uLength = r.ReadUInt32();
+            }
+            else
+            {
+                byte[] bNameTable = r.ReadBytes(Marshal.SizeOf(tblDir));
+                IntPtr ptrName = Marshal.AllocHGlobal(bNameTable.Length);
+                Marshal.Copy(bNameTable, 0x0, ptrName, bNameTable.Length);
+                tbName = (TT_TABLE_DIRECTORY)Marshal.PtrToStructure(ptrName, typeof(TT_TABLE_DIRECTORY));
+                Marshal.FreeHGlobal(ptrName);
+            }
             return tbName;
         }
 
@@ -328,7 +328,7 @@ namespace SIL.Tool
             IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(uIntOffset));
             for (int i = 0; i < numFonts; i++)
             {
-                Marshal.Copy(buff, i*Marshal.SizeOf(uIntOffset), ptr, Marshal.SizeOf(uIntOffset));
+                Marshal.Copy(buff, i * Marshal.SizeOf(uIntOffset), ptr, Marshal.SizeOf(uIntOffset));
                 ttcOffsets[i] = (UInt32)Marshal.PtrToStructure(ptr, typeof(UInt32));
                 ttcOffsets[i] = BigEndianValue(ttcOffsets[i]);
             }
@@ -388,51 +388,51 @@ namespace SIL.Tool
 
         public static string GetFontFileName(string familyName, string style)
         {
-			// Linux lookup
-			if (Common.UsingMonoVM)
-			{
-				// Linux fonts are not listed in the registry; instead, linux (and mono) use the fontconfig library to
-				// provide support. 
-				// To find the font, we'll make a call to fc-list (one of the fontconfig commands) for the font, and parse the
-				// results for the filename
-            	const string prog = "fc-list";
-				var args = new StringBuilder();
-				args.Append("-v \"");
-				args.Append(familyName);
-				if (style.Length == 0 || style.ToLower().Equals("normal"))
-				{
-					args.Append(":style=Regular\"");
-				}
-				else
-				{
-					args.Append(":style=");
-					args.Append(style);
-					args.Append("\"");
-				}
-			    string stdOut = string.Empty;
-			    string stdErr = string.Empty;
-            	SubProcess.Run(Directory.GetCurrentDirectory(), prog, args.ToString(), out stdOut, out stdErr);
-	            if (stdOut.Length < 1)
-				{
-					return string.Empty;
-				}
-				// call returned successfully -- read the results
+            // Linux lookup
+            if (Common.UsingMonoVM)
+            {
+                // Linux fonts are not listed in the registry; instead, linux (and mono) use the fontconfig library to
+                // provide support. 
+                // To find the font, we'll make a call to fc-list (one of the fontconfig commands) for the font, and parse the
+                // results for the filename
+                const string prog = "fc-list";
+                var args = new StringBuilder();
+                args.Append("-v \"");
+                args.Append(familyName);
+                if (style.Length == 0 || style.ToLower().Equals("normal"))
+                {
+                    args.Append(":style=Regular\"");
+                }
+                else
+                {
+                    args.Append(":style=");
+                    args.Append(style);
+                    args.Append("\"");
+                }
+                string stdOut = string.Empty;
+                string stdErr = string.Empty;
+                SubProcess.Run(Directory.GetCurrentDirectory(), prog, args.ToString(), out stdOut, out stdErr);
+                if (stdOut.Length < 1)
+                {
+                    return string.Empty;
+                }
+                // call returned successfully -- read the results
                 var start = stdOut.IndexOf("file: \"");
-				if (start > 0) 
-				{
-					start += 7;
+                if (start > 0)
+                {
+                    start += 7;
                     var stop = stdOut.IndexOf("\"", start);
-					if (stop > 0) 
-					{
+                    if (stop > 0)
+                    {
                         return stdOut.Substring(start, (stop - start));
-					}
-					return string.Empty;
-				}
-				
-				return string.Empty;
-			}
-			
-			// Windows lookup
+                    }
+                    return string.Empty;
+                }
+
+                return string.Empty;
+            }
+
+            // Windows lookup
             RegistryKey fontsKey;
             Dictionary<string, string> fontFileNames = new Dictionary<string, string>();
             try
@@ -606,32 +606,45 @@ namespace SIL.Tool
         /// </summary>
         /// <param name="fontFullName"></param>
         /// <returns></returns>
-        public static bool IsFreeFont (string fontFullName)
+        public static bool IsFreeFont(string fontFullName)
         {
-            // try looking at the copyright
-            string copyright = GetFontCopyright(fontFullName);
-            if (copyright.Length > 0)
+            Dictionary<string, string> _dt = new Dictionary<string, string>();
+            using (InstalledFontCollection col = new InstalledFontCollection())
             {
-                if (copyright.Contains("SIL") || copyright.Contains("Summer Institute of Linguistics"))
+                foreach (FontFamily fa in col.Families)
                 {
-                    // SIL fonts
-                    return true;
-                }
-                // GPL / OFL license
-                if (copyright.ToLower().Contains("general public license") || copyright.ToLower().Contains("open font license"))
-                {
-                    return true;
-                }
-                // redistributable Creative Commons licenses
-                if (copyright.ToLower().Contains("cc by-sa") || copyright.ToLower().Contains("cc by ") ||
-                    copyright.ToLower().Contains("cc by-nd") || copyright.ToLower().Contains("cc by-nc") ||
-                    copyright.ToLower().Contains("cc by-nc-sa") || copyright.ToLower().Contains("cc by-nc-nd") ||
-                    copyright.ToLower().Contains("cc0"))
-                {
-                    return true;
+                    _dt.Add(fa.Name,fa.Name);
                 }
             }
 
+            // try looking at the copyright
+            CheckUserFileAccessRights rights = new CheckUserFileAccessRights(fontFullName);
+            if (rights.canRead())
+            {
+                string copyright = GetFontCopyright(fontFullName);
+                if (copyright.Length > 0)
+                {
+                    if (copyright.Contains("SIL") || copyright.Contains("Summer Institute of Linguistics"))
+                    {
+                        // SIL fonts
+                        return true;
+                    }
+                    // GPL / OFL license
+                    if (copyright.ToLower().Contains("general public license") ||
+                        copyright.ToLower().Contains("open font license"))
+                    {
+                        return true;
+                    }
+                    // redistributable Creative Commons licenses
+                    if (copyright.ToLower().Contains("cc by-sa") || copyright.ToLower().Contains("cc by ") ||
+                        copyright.ToLower().Contains("cc by-nd") || copyright.ToLower().Contains("cc by-nc") ||
+                        copyright.ToLower().Contains("cc by-nc-sa") || copyright.ToLower().Contains("cc by-nc-nd") ||
+                        copyright.ToLower().Contains("cc0"))
+                    {
+                        return true;
+                    }
+                }
+            }
             // TODO: known free fonts that don't match the copyright string tests above can be tested here by looking for their
             // font names. This will probably be done on an as-needed basis.
 
@@ -644,15 +657,19 @@ namespace SIL.Tool
         /// </summary>
         /// <param name="fontFullName"></param>
         /// <returns></returns>
-        public static bool IsSILFont (string fontFullName)
+        public static bool IsSILFont(string fontFullName)
         {
-            string result = GetFontCopyright(fontFullName);
-            if (result != "")
+            CheckUserFileAccessRights rights = new CheckUserFileAccessRights(fontFullName);
+            if (rights.canRead())
             {
-                // we got something out of the CopyrightId slot - does it contain "SIL" or "Summer Institute of Linguistics"?
-                if (result.Contains("SIL") || result.Contains("Summer Institute of Linguistics"))
+                string result = GetFontCopyright(fontFullName);
+                if (result != "")
                 {
-                    return true;
+                    // we got something out of the CopyrightId slot - does it contain "SIL" or "Summer Institute of Linguistics"?
+                    if (result.Contains("SIL") || result.Contains("Summer Institute of Linguistics"))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

@@ -42,7 +42,6 @@ div.pictureLeft > img.picture {
     font-style : italic;
     display : block;
     text-align : center;
-    text-transform : capitalize;
     margin-bottom : .5%;
 }
 span.reference :before {

@@ -16,6 +16,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, Dictionary<string, string>> _styleInfo = new Dictionary<string, Dictionary<string, string>>();
 		private Dictionary<string, string> _cssProp;
 		private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
+        private string _styFolder, _cssFolder;
 
 		/// ------------------------------------------------------------
 		/// <summary>
@@ -35,7 +36,24 @@ namespace SIL.PublishingSolution
             ParseFile();
             SetFontAndDirection();
             WriteCSS();
+
+            // Create custom.css from custom.sty
+		    SetCustomPath(database);
+            ParseFile();
+            SetFontAndDirection();
+            WriteCSS();
         }
+
+        private void SetCustomPath(string database)
+        {
+            _styFolder = Path.GetDirectoryName(StyFullPath);
+            _cssFolder = Path.GetDirectoryName(_cssFullPath);
+
+            _styFolder = Common.PathCombine(_styFolder, database);
+
+            StyFullPath = Path.Combine(_styFolder, "custom.sty"); 
+            _cssFullPath = Path.Combine(_cssFolder, "custom.css");
+	    }
 
 	    /// <summary>
         /// Override to convert the sty file to CSS, assuming the

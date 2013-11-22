@@ -704,10 +704,10 @@ namespace SIL.Tool
         private string GetLanguageUrl(string languageCode)
         {
             var sb = new StringBuilder();
-            sb.Append("<a href='http://www.ethnologue.com/show_language.asp?code=");
+            sb.Append("<a href='http://www.ethnologue.com/language/");
             var codeLen = languageCode.Length > 3 ? 3 : languageCode.Length;
             sb.Append(languageCode.Substring(0, codeLen));
-            sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
+            sb.Append("'>http://www.ethnologue.com/language/");
             sb.Append(languageCode.Substring(0, codeLen));
             sb.Append("</a>");
             return sb.ToString();
@@ -2567,7 +2567,13 @@ namespace SIL.Tool
                 {
                     if (value.Length > 1)
                     {
-                        tw.WriteLine("." +  value[0].Substring(0, value[0].IndexOf('.')) + ":" + value[0].Substring(value[0].IndexOf('.') + 2) + " {");
+                        string className = value[0].Substring(0, value[0].LastIndexOf("..", StringComparison.Ordinal));
+                        string pseudoName = value[0].Substring(value[0].LastIndexOf("..", StringComparison.Ordinal) + 2);
+                        if(className.ToLower().IndexOf("span", StringComparison.Ordinal) != 0)
+                        {
+                            className = "." + className;
+                        }
+                        tw.WriteLine(className + " :" + pseudoName + " {");
                         tw.WriteLine("content: '';" );
                         tw.WriteLine("}");
                     }

@@ -175,6 +175,7 @@ namespace SIL.PublishingSolution
         private string _customXRefSymbol = string.Empty;
         private string firstRevHeadWord = string.Empty;
         Dictionary<string, string> FirstDataOnEntry = new Dictionary<string, string>();
+        private int _guidewordLength;
         #endregion
 
         #region Public Variable
@@ -260,9 +261,30 @@ namespace SIL.PublishingSolution
 
         }
 
+        /// <summary>
+        /// Get Guideword Length
+        /// </summary>
+        private void GetGuidewordLength()
+        {
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                if (IdAllClass.ContainsKey("guidewordLength") && IdAllClass["guidewordLength"].ContainsKey("guideword-length"))
+                {
+                    int a;
+                    if (int.TryParse(IdAllClass["guidewordLength"]["guideword-length"], out a))
+                    {
+                        _guidewordLength = Convert.ToInt16(IdAllClass["guidewordLength"]["guideword-length"]);
+                    }
+                }
+                _guidewordLength = _guidewordLength > 0 ? _guidewordLength : 99;
+            }
+        }
+
         private void ProcessProperty()
         {
             Common.ColumnWidth = 0.0;
+
+            GetGuidewordLength();
 
             foreach (string className in IdAllClass.Keys)
             {
@@ -1003,6 +1025,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+
             content = InsertSpaceInTextforMacro(content); //TD-2034
             InsertBookNameBeforeBookIntroduction(content);
 
@@ -1116,6 +1139,10 @@ namespace SIL.PublishingSolution
                 else if (_allCharacter.Peek().ToLower().IndexOf("versenumber") == 0 || _allCharacter.Peek().ToLower().IndexOf("versenumber1") == 0)
                 {
                     content = " " + content.TrimStart();
+                }
+                else if (_allCharacter.Peek().ToLower().IndexOf("seeinglossary") == 0)//TD-3665
+                {
+                    content = content.TrimEnd() + " ";
                 }
             }
             return content;
@@ -3612,6 +3639,10 @@ namespace SIL.PublishingSolution
                     && (_previousParagraphName.IndexOf("minorentries_") == 0 || _previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0 || _previousParagraphName.IndexOf("picture") >= 0))
                 {
                     fillHeadword = true;
+                    if (content.Trim().Length > _guidewordLength)
+                    {
+                        content = content.Trim().Substring(0, _guidewordLength) + "...";
+                    }
                 }
             }
             else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture
@@ -3646,7 +3677,6 @@ namespace SIL.PublishingSolution
                             leftHeadword = content;// _headwordVariable[++_headwordIndex];
                         }
                     }
-
                 }
 
                 string chapterNo = content;

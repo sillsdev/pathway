@@ -44,6 +44,7 @@ namespace SIL.PublishingSolution
         private string _iconFile;
         private const string RedirectOutputFileName = "Convert.log";
         List<string> DuplicateBooks;
+        private bool _isLinux;
 
         public string ExportType
         {
@@ -83,9 +84,11 @@ namespace SIL.PublishingSolution
                 var curdir = Environment.CurrentDirectory;
                 var myCursor = Cursor.Current;
                 Cursor.Current = Cursors.WaitCursor;
-                
+
                 inProcess.Show();
                 inProcess.PerformStep();
+                _isLinux = Common.UnixVersionCheck();
+
                 string exportGoBibleInputPath = string.Empty;
                 exportGoBibleInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
                 processFolder = exportGoBibleInputPath;
@@ -96,7 +99,7 @@ namespace SIL.PublishingSolution
                 const bool overwrite = true;
                 if (iconDirectory != exportGoBibleInputPath)
                     File.Copy(iconFullName, Path.Combine(exportGoBibleInputPath, _iconFile), overwrite);
-                
+
                 Param.LoadSettings();
                 Param.SetValue(Param.InputType, "Scripture");
                 Param.LoadSettings();
@@ -269,7 +272,7 @@ namespace SIL.PublishingSolution
             }
             catch
             {
-                
+
             }
         }
 
@@ -285,13 +288,22 @@ namespace SIL.PublishingSolution
             {
                 var info = "Bible text exported from Paratext, " + GetInfo(Param.CopyrightHolder);
                 sw.WriteLine("Info: " + info);
-                sw.WriteLine(@"Source-Text: \SFM");
+
+                if (_isLinux)
+                {
+                    sw.WriteLine(@"Source-Text: /SFM");
+                }
+                else
+                {
+                    sw.WriteLine(@"Source-Text: \SFM");
+                }
+
                 sw.WriteLine("Source-Format: usfm");
                 sw.WriteLine("Source-FileExtension: sfm");
                 sw.WriteLine("Phone-Icon-Filepath: Icon.png");
                 sw.WriteLine("Application-Name: " + GetInfo(Param.Title));
                 sw.WriteLine("MIDlet-Vendor: " + GetInfo(Param.Title) + " Vendor");
-                sw.WriteLine("MIDlet-Description: " + " Sample text for GoBible description");
+                //sw.WriteLine("MIDlet-Description: " + " Sample text for GoBible description");
                 sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org");
                 sw.WriteLine("Codepage: UTF-8");
                 sw.WriteLine("RedLettering: false");
@@ -370,6 +382,12 @@ namespace SIL.PublishingSolution
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
             var creatorFullPath = Path.Combine(goBibleCreatorPath, Creator);
+
+            if (_isLinux)
+            {
+                creatorFullPath = "/usr/share/gobiblecreator/GoBibleCreator.244/GoBibleCreator.jar";
+            }
+
             var progFolder = SubProcess.JavaLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);
             if (progFullName.EndsWith(".exe"))
