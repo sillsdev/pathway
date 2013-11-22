@@ -2567,7 +2567,13 @@ namespace SIL.Tool
                 {
                     if (value.Length > 1)
                     {
-                        tw.WriteLine("." +  value[0].Substring(0, value[0].IndexOf('.')) + ":" + value[0].Substring(value[0].IndexOf('.') + 2) + " {");
+                        string className = value[0].Substring(0, value[0].LastIndexOf("..", StringComparison.Ordinal));
+                        string pseudoName = value[0].Substring(value[0].LastIndexOf("..", StringComparison.Ordinal) + 2);
+                        if(className.ToLower().IndexOf("span", StringComparison.Ordinal) != 0)
+                        {
+                            className = "." + className;
+                        }
+                        tw.WriteLine(className + " :" + pseudoName + " {");
                         tw.WriteLine("content: '';" );
                         tw.WriteLine("}");
                     }
