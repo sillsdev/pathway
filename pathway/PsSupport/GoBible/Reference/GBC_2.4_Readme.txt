@@ -1,6 +1,17 @@
 ===========================================================================
 Go Bible Software Release Notes - History of Changes since version 2.2.6
 ===========================================================================
+GoBibleCreator 2.4.4 Notes 
+
+December 14, 2012
+
+GoBibleCreator updated as follows.
+ BUG FIX: (Issue 168 - see below)
+  - Processing of tag pair \w_...\w* corrected 
+    to prevent interference with tag pairs \wg_...\wg*, \wh_...\wh*, \wj_...\wj*
+ BUG FIX: (Issues 165,167 - see below)
+  - Merged patch to fix processing of the file separator in Unix style OS
+
 GoBibleCreator 2.4.3 Notes 
 
 August 26, 2012
