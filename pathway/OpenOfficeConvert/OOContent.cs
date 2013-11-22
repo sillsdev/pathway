@@ -3639,6 +3639,10 @@ namespace SIL.PublishingSolution
                     && (_previousParagraphName.IndexOf("minorentries_") == 0 || _previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0 || _previousParagraphName.IndexOf("picture") >= 0))
                 {
                     fillHeadword = true;
+                    if (content.Trim().Length > _guidewordLength)
+                    {
+                        content = content.Trim().Substring(0, _guidewordLength) + "...";
+                    }
                 }
             }
             else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture
@@ -3659,12 +3663,6 @@ namespace SIL.PublishingSolution
 
                 if (_classNameWithLang.IndexOf("headword") >= 0)
                 {
-                    if (content.Trim().Length > _guidewordLength)
-                    {
-                        content = content.Trim().Substring(0, _guidewordLength) + "...";
-                        leftHeadword = content;
-                    }
-
                     if (_headwordVariable.Count - 1 > _headwordIndex + 1)
                     {
                         if (IsFirstEntry)
@@ -3679,7 +3677,6 @@ namespace SIL.PublishingSolution
                             leftHeadword = content;// _headwordVariable[++_headwordIndex];
                         }
                     }
-
                 }
 
                 string chapterNo = content;
