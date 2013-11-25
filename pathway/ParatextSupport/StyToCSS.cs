@@ -9,24 +9,24 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-	public class StyToCSS
-	{
-	    public string StyFullPath { get; set; }
+    public class StyToCSS
+    {
+        public string StyFullPath { get; set; }
         private string _cssFullPath;
         private Dictionary<string, Dictionary<string, string>> _styleInfo = new Dictionary<string, Dictionary<string, string>>();
-		private Dictionary<string, string> _cssProp;
-		private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
+        private Dictionary<string, string> _cssProp;
+        private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
         private string _styFolder, _cssFolder;
 
-		/// ------------------------------------------------------------
-		/// <summary>
-		/// Convert a Paratext sty file to a CSS.
-		/// </summary>
-		/// <param name="database">The settings for the Paratext database.
-		/// </param>
-		/// <param name="cssFullPath">The CSS full path.</param>
         /// ------------------------------------------------------------
-		public void ConvertStyToCSS(string database, string cssFullPath)
+        /// <summary>
+        /// Convert a Paratext sty file to a CSS.
+        /// </summary>
+        /// <param name="database">The settings for the Paratext database.
+        /// </param>
+        /// <param name="cssFullPath">The CSS full path.</param>
+        /// ------------------------------------------------------------
+        public void ConvertStyToCSS(string database, string cssFullPath)
         {
 
             //StyFullPath = styFullPath;
@@ -38,7 +38,7 @@ namespace SIL.PublishingSolution
             WriteCSS();
 
             // Create custom.css from custom.sty
-		    SetCustomPath(database);
+            SetCustomPath(database);
             ParseFile();
             SetFontAndDirection();
             WriteCSS();
@@ -51,11 +51,11 @@ namespace SIL.PublishingSolution
 
             _styFolder = Common.PathCombine(_styFolder, database);
 
-            StyFullPath = Path.Combine(_styFolder, "custom.sty"); 
+            StyFullPath = Path.Combine(_styFolder, "custom.sty");
             _cssFullPath = Path.Combine(_cssFolder, "custom.css");
-	    }
+        }
 
-	    /// <summary>
+        /// <summary>
         /// Override to convert the sty file to CSS, assuming the
         /// sty file is already set for this class.
         /// </summary>
@@ -85,13 +85,13 @@ namespace SIL.PublishingSolution
         }
 
         /// ------------------------------------------------------------
-		/// <summary>
-		/// Finds the sty file for a Paratext project.
-		/// </summary>
-		/// <param name="database">The settings for the Paratext database.
-		/// </param>
-		/// ------------------------------------------------------------
-		private void FindStyFile(string database)
+        /// <summary>
+        /// Finds the sty file for a Paratext project.
+        /// </summary>
+        /// <param name="database">The settings for the Paratext database.
+        /// </param>
+        /// ------------------------------------------------------------
+        private void FindStyFile(string database)
         {
             string ssfFile = database + ".ssf";
             string ssfFullPath = string.Empty;
@@ -104,12 +104,16 @@ namespace SIL.PublishingSolution
             {
                 ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Settings_Directory", "");
             }
-
+            else
+            {
+                ssfFullPath = Common.GetParatextProjectPath();
+                StyFullPath = Common.PathCombine(ssfFullPath, ssfFile);
+            }
             ssfFullPath = ssfFullPath + ssfFile;
-           
+
             bool isStylesheet = false;
 
-            if(!File.Exists(ssfFullPath))
+            if (!File.Exists(ssfFullPath))
             {
                 Debug.WriteLine(ssfFile + " does not exist.");
                 return;
@@ -132,16 +136,16 @@ namespace SIL.PublishingSolution
             StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), ssfFile);
         }
 
-		/// ------------------------------------------------------------------------
-		/// <summary>
-		/// Parses all the lines in an sty file converting the settings to 
-		/// properties in a CSS.
-		/// </summary>
-	    /// ------------------------------------------------------------------------
-		private void ParseFile()
+        /// ------------------------------------------------------------------------
+        /// <summary>
+        /// Parses all the lines in an sty file converting the settings to 
+        /// properties in a CSS.
+        /// </summary>
+        /// ------------------------------------------------------------------------
+        private void ParseFile()
         {
             _styleInfo.Clear();
-            if(!File.Exists(StyFullPath))
+            if (!File.Exists(StyFullPath))
             {
                 Debug.WriteLine(StyFullPath + " does not exist.");
                 return;
@@ -155,13 +159,13 @@ namespace SIL.PublishingSolution
             file.Close();
         }
 
-		/// ------------------------------------------------------------
-		/// <summary>
-		/// Parses a line in an Paratext sty file.
-		/// </summary>
-		/// <param name="line">The line in a Paratext sty file.</param>
         /// ------------------------------------------------------------
-		private void ParseLine(string line)
+        /// <summary>
+        /// Parses a line in an Paratext sty file.
+        /// </summary>
+        /// <param name="line">The line in a Paratext sty file.</param>
+        /// ------------------------------------------------------------
+        private void ParseLine(string line)
         {
             string value;
             string word = Common.LeftString(line, " ");
@@ -177,8 +181,8 @@ namespace SIL.PublishingSolution
                     break;
                 case "\\color":
                     value = PropertyValue(line);
-                    string strHex =     String.Format("{0:x2}", Convert.ToUInt32(value));
-                    if (strHex.Length <6)
+                    string strHex = String.Format("{0:x2}", Convert.ToUInt32(value));
+                    if (strHex.Length < 6)
                     {
                         strHex = strHex.PadRight(6, '0');
                     }
@@ -237,28 +241,28 @@ namespace SIL.PublishingSolution
             }
         }
 
-		/// ------------------------------------------------------------
-		/// <summary>
-		/// Creates CSS style from the \Marker line.
-		/// </summary>
-		/// <param name="line">A line from the sty file which should
-		/// contain the name of the style.</param>
         /// ------------------------------------------------------------
-		private void CreateClass(string line)
+        /// <summary>
+        /// Creates CSS style from the \Marker line.
+        /// </summary>
+        /// <param name="line">A line from the sty file which should
+        /// contain the name of the style.</param>
+        /// ------------------------------------------------------------
+        private void CreateClass(string line)
         {
             int start = line.IndexOf(" ") + 1;
-			int iSecondSpace = line.IndexOf(" ", start);
+            int iSecondSpace = line.IndexOf(" ", start);
             int end = (iSecondSpace > start) ? iSecondSpace : line.Length;
             string className = line.Substring(start, end - start);
 
-		    className = RemoveMultiClass(className);
+            className = RemoveMultiClass(className);
 
             if (className.ToLower() == "nd")
             {
                 className = "NameOfGod";
             }
 
-		    string mapClassName = className;
+            string mapClassName = className;
             if (_mapClassName.ContainsKey(className))
                 mapClassName = _mapClassName[className];
 
@@ -273,31 +277,31 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="className"></param>
         /// <returns></returns>
-	    private string RemoveMultiClass(string className)
-	    {
-	        int pos = className.IndexOf("...", 1);
-	        if (pos > 0)
-	        {
-	            className = className.Substring(0, pos);
-	        }
-	        return className.Replace("(","");
-	    }
+        private string RemoveMultiClass(string className)
+        {
+            int pos = className.IndexOf("...", 1);
+            if (pos > 0)
+            {
+                className = className.Substring(0, pos);
+            }
+            return className.Replace("(", "");
+        }
 
-	    /// ------------------------------------------------------------
-		/// <summary>
-		/// Gets the value from a line in the sty file.
-		/// </summary>
-		/// <param name="line">A line from the sty file which should
-		/// contain property values for a style.</param>
-		/// <returns></returns>
         /// ------------------------------------------------------------
-		private string PropertyValue(string line)
+        /// <summary>
+        /// Gets the value from a line in the sty file.
+        /// </summary>
+        /// <param name="line">A line from the sty file which should
+        /// contain property values for a style.</param>
+        /// <returns></returns>
+        /// ------------------------------------------------------------
+        private string PropertyValue(string line)
         {
             string propertyVal;
             try
             {
                 propertyVal = Common.RightString(line, " ").ToLower();
-                propertyVal = Common.RightRemove(propertyVal,"#");
+                propertyVal = Common.RightRemove(propertyVal, "#");
             }
             catch (Exception)
             {
@@ -307,19 +311,19 @@ namespace SIL.PublishingSolution
             return propertyVal;
         }
 
-		/// ------------------------------------------------------------
-		/// <summary>
-		/// Writes the Cascading Style Sheet given properties determined
-		/// from the Paratext sty file.
-		/// </summary>
         /// ------------------------------------------------------------
-		public void WriteCSS()
+        /// <summary>
+        /// Writes the Cascading Style Sheet given properties determined
+        /// from the Paratext sty file.
+        /// </summary>
+        /// ------------------------------------------------------------
+        public void WriteCSS()
         {
             TextWriter cssFile = new StreamWriter(_cssFullPath);
 
             WriteLanguageFontDirection(cssFile);
 
-		    foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _styleInfo)
+            foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _styleInfo)
             {
                 if (cssClass.Key != "\\Name")
                 {
@@ -337,82 +341,82 @@ namespace SIL.PublishingSolution
         }
 
         protected static string WriterSettingsFile = null;
-	    protected static void WriteLanguageFontDirection(TextWriter cssFile)
-	    {
+        protected static void WriteLanguageFontDirection(TextWriter cssFile)
+        {
             if (WriterSettingsFile == null)
             {
                 var settingsHelper = new SettingsHelper(Param.DatabaseName);
                 WriterSettingsFile = settingsHelper.GetSettingsFilename();
             }
-	        var languageCodeNode = Common.GetXmlNode(WriterSettingsFile, "//EthnologueCode");
-	        var languageCode = "";
-	        var languageDirection = "ltr";
-	        var textAlign = "left";
-	        if (languageCodeNode != null)
-	        {
-	            languageCode = languageCodeNode.InnerText;
+            var languageCodeNode = Common.GetXmlNode(WriterSettingsFile, "//EthnologueCode");
+            var languageCode = "";
+            var languageDirection = "ltr";
+            var textAlign = "left";
+            if (languageCodeNode != null)
+            {
+                languageCode = languageCodeNode.InnerText;
                 languageDirection = Common.GetTextDirection(languageCode);
                 if (languageCode.Contains("-"))
-	            {
-	                languageCode = languageCode.Split(new [] {'-'})[0];
-	            }
+                {
+                    languageCode = languageCode.Split(new[] { '-' })[0];
+                }
                 if (languageDirection == "rtl")
                 {
                     textAlign = "right";
                 }
             }
-	        var fontNode = Common.GetXmlNode(WriterSettingsFile, "//DefaultFont");
-	        var fontFamily = "";
-	        if (fontNode != null)
-	        {
-	            fontFamily = fontNode.InnerText;
-	        }
-	        var fontSizeNode = Common.GetXmlNode(WriterSettingsFile, "//DefaultFontSize");
-	        var fontSize = "10";
+            var fontNode = Common.GetXmlNode(WriterSettingsFile, "//DefaultFont");
+            var fontFamily = "";
+            if (fontNode != null)
+            {
+                fontFamily = fontNode.InnerText;
+            }
+            var fontSizeNode = Common.GetXmlNode(WriterSettingsFile, "//DefaultFontSize");
+            var fontSize = "10";
             if (fontSizeNode != null)
             {
                 fontSize = fontSizeNode.InnerText;
             }
-	        if (languageCode != "" && (fontFamily != "" || languageDirection != "ltr"))
-	        {
-	            cssFile.Write("div[lang='{0}']", languageCode);
-	            cssFile.Write("{");
-	            if (fontFamily != "")
-	            {
-	                cssFile.Write(" font-family: \"{0}\";", fontFamily);
-	            }
+            if (languageCode != "" && (fontFamily != "" || languageDirection != "ltr"))
+            {
+                cssFile.Write("div[lang='{0}']", languageCode);
+                cssFile.Write("{");
+                if (fontFamily != "")
+                {
+                    cssFile.Write(" font-family: \"{0}\";", fontFamily);
+                }
                 cssFile.Write(" font-size: {0}pt;", fontSize);
-	            if (languageDirection != "ltr")
-	            {
-	                cssFile.Write(" direction: {0}; text-align: {1};", languageDirection, textAlign);
-	            }
-	            cssFile.WriteLine("}");
-	            cssFile.Write("span[lang='{0}']", languageCode);
-	            cssFile.Write("{");
-	            if (fontFamily != "")
-	            {
-	                cssFile.Write(" font-family: \"{0}\";", fontFamily);
-	            }
+                if (languageDirection != "ltr")
+                {
+                    cssFile.Write(" direction: {0}; text-align: {1};", languageDirection, textAlign);
+                }
+                cssFile.WriteLine("}");
+                cssFile.Write("span[lang='{0}']", languageCode);
+                cssFile.Write("{");
+                if (fontFamily != "")
+                {
+                    cssFile.Write(" font-family: \"{0}\";", fontFamily);
+                }
                 //cssFile.Write(" font-size: \"{0}pt\";", fontSize);
                 cssFile.WriteLine("}");
                 cssFile.WriteLine();
             }
-	        WriterSettingsFile = null;
-	    }
+            WriterSettingsFile = null;
+        }
 
-	    /// <summary>
-            /// Convert paratext unit to css unit
-            /// </summary>
-            /// <param name="value">0/1/2</param>
-            /// <returns>100%/150%/200%</returns>
+        /// <summary>
+        /// Convert paratext unit to css unit
+        /// </summary>
+        /// <param name="value">0/1/2</param>
+        /// <returns>100%/150%/200%</returns>
         private string LineSpace(string value)
         {
-		    string result = string.Empty; 
+            string result = string.Empty;
             if (value == "0")
             {
                 result = "100%";
             }
-            else if(value == "1")
+            else if (value == "1")
             {
                 result = "150%";
             }
@@ -420,7 +424,7 @@ namespace SIL.PublishingSolution
             {
                 result = "200%";
             }
-		    return result;
+            return result;
         }
 
         private void MapClassName()
@@ -446,5 +450,5 @@ namespace SIL.PublishingSolution
             _mapClassName["fqa"] = "fqa";
             _mapClassName["sc"] = "Inscription";
         }
-	}
+    }
 }
