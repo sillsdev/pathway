@@ -118,9 +118,11 @@
 	
 	<!-- Include any title paragraphs preceding the main title -->
 	<xsl:template match="para" mode="preceding-sibling-title">
-		<xsl:apply-templates select="preceding-sibling::*[1][self::para][@style='mt2' or @style='mt3' or @style='mt4']" 
-			mode="preceding-sibling-title"/>
-		<xsl:call-template name="span-title"/>
+		<xsl:if test="count(preceding-sibling::*[1][@style='mt' or @style='mt1']) = 0">
+			<xsl:apply-templates select="preceding-sibling::*[1][self::para][@style='mt2' or @style='mt3' or @style='mt4']" 
+				mode="preceding-sibling-title"/>
+			<xsl:call-template name="span-title"/>
+		</xsl:if>
 	</xsl:template>
 	
 	<!-- Include any title paragraphs following the main title -->
