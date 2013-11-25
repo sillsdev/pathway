@@ -942,7 +942,15 @@ namespace SIL.PublishingSolution
                         if (cTool.TxtPageGutterWidth.Text.Length > 0)
                         {
                             value["column-gap"] = cTool.TxtPageGutterWidth.Text;
-                            WriteCssClass(writeCss, "letData", value);
+                            if (_loadType == "Scripture")
+                            {
+                                WriteCssClass(writeCss, "columns", value);
+                            }
+                            else
+                            {
+                                WriteCssClass(writeCss, "letData", value);
+                            }
+                            
                         }
                         value.Clear();
                         //TD-3607
