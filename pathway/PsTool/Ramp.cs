@@ -1736,26 +1736,28 @@ namespace SIL.PublishingSolution
 
         private void CleanUpFolder(List<string> files, string folderPath)
         {
-            List<string> validExtension = new List<string>();
-            DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
-
-            validExtension.AddRange(_outputExtension.Split(','));
-
-            foreach (var file in files)
+            try
             {
-                string ext = Path.GetExtension(file);
+                List<string> validExtension = new List<string>();
+                DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
 
-                if (!validExtension.Contains(ext))
+                validExtension.AddRange(_outputExtension.Split(','));
+
+                foreach (var file in files)
                 {
-                    File.Delete(file);
+                    string ext = Path.GetExtension(file);
+
+                    if (!validExtension.Contains(ext))
+                    {
+                        File.Delete(file);
+                    }
                 }
-            }
 
-            foreach (DirectoryInfo subfolder in directoryInfo.GetDirectories())
-            {
-                subfolder.Delete(true);
-            }
-
+                foreach (DirectoryInfo subfolder in directoryInfo.GetDirectories())
+                {
+                    subfolder.Delete(true);
+                }
+            }catch{}
         }
 
 

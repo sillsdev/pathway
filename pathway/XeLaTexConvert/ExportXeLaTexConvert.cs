@@ -223,9 +223,22 @@ namespace SIL.PublishingSolution
                 imgPath = newProperty["ImagePath"];
             }
             UpdateXeLaTexFontCacheIfNecessary();
+            
             CallXeLaTex(xeLatexFullFile, true, imgPath);
-            Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif,.tex,.log,.exe,.xml,.jar", "layout,mergedmain1,preserve", string.Empty);
-            CreateRAMP(projInfo);
+
+            string pdfFullName = string.Empty;
+            string texNameOnly = Path.GetFileNameWithoutExtension(xeLatexFullFile);
+            string userFolder = Path.GetDirectoryName(xeLatexFullFile);
+            
+            if (userFolder != null)
+                pdfFullName = Path.Combine(userFolder, texNameOnly + ".pdf");
+
+            if (File.Exists(pdfFullName))
+            {
+                Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif,.tex,.log,.exe,.xml,.jar", "layout,mergedmain1,preserve", string.Empty);
+                CreateRAMP(projInfo);
+            }
+           
             return true;
         }
 
