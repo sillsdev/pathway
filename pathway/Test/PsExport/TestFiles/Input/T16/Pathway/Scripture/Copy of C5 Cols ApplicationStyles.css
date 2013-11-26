@@ -11,7 +11,7 @@
 @import "PageNumber_TopOutside.css";
 @import "Rules_Yes.css";
 @import "Sense_nc.css";
-.letData{
+.columns{
 column-gap:36pt;
 }
 @page{
