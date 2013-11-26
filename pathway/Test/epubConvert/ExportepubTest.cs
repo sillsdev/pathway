@@ -100,6 +100,12 @@ namespace Test.epubConvert
                 if (File.Exists(file))
                     File.Delete(file);
             }
+            string appDataDir = Common.GetAllUserPath();
+            if (Directory.Exists(appDataDir))
+            {
+                Directory.Delete(appDataDir, true);
+            }
+
 
             const string XhtmlName = "main.xhtml";
             const string CssName = "main.css";
