@@ -1312,7 +1312,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:style-name", "Illustration");
                 _writer.WriteStartElement("draw:frame");
                 _writer.WriteAttributeString("draw:style-name", "GraphicsI2");
-                _writer.WriteAttributeString("draw:name", "Graphics1");
+                _writer.WriteAttributeString("draw:name", "graphics1");
                 _writer.WriteAttributeString("text:anchor-type", "paragraph");
                 _writer.WriteAttributeString("svg:height", height);
                 _writer.WriteAttributeString("svg:width", width);
