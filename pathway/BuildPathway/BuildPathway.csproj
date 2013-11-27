@@ -469,6 +469,7 @@
     <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
     <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'Files\ConfigurationTool\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
     <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\ConfigurationTool\Paratexmf\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
+    <Copy SourceFiles="@(InstallTex)" DestinationFiles="@(InstallTex->'Files\ConfigurationTool\%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
     <!-- Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles->'Files\ConfigurationTool\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " / -->
   </Target>
   <Target Name="AfterBuild">
@@ -499,6 +500,7 @@
     <AllBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
     <AllBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" />
+    <InstallTex Include="..\XeLaTexConvert\InstallPathwayXeLaTeX.sh" />
     <epubBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
     <TestBackend Include="..\DictionaryForMIDsConvert\$(OutputPath)\DictionaryForMIDsConvert.*" />
     <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
