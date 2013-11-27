@@ -669,6 +669,7 @@ namespace SIL.Tool
                 for (int i = 0; i < countChild; i++)
                 {
                     headnode.RemoveChild(findnodes[0]);
+                    break;
                 }
             }
             else

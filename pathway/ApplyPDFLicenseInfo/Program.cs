@@ -32,12 +32,12 @@ namespace ApplyPDFLicenseInfo
             string creatorTool = _readLicenseFilesBylines[3];
             //Console.WriteLine(executePath);
             string pdfFileName = string.Empty;
-            string[] pdfFiles = Directory.GetFiles(executePath + "\\", "*.pdf");
+            
             //Console.WriteLine(pdfFiles.Length.ToString());
             //Thread.Sleep(2500);
             //Console.WriteLine(pdfFiles[0].ToString());
             //Thread.Sleep(500);
-            pdfFileName = ProcessLicensePdf(pdfFiles, pdfFileName, executePath);
+            pdfFileName = ProcessLicensePdf(pdfFileName, executePath);
 
             exportTitle = exportTitle.Replace(" ", "_") + ".pdf";
             exportTitle = Path.Combine(workingDirectory, exportTitle);
@@ -73,10 +73,11 @@ namespace ApplyPDFLicenseInfo
             ramp.Create(executePath, outputExtn, "Dictionary");
         }
 
-        private static string ProcessLicensePdf(string[] pdfFiles, string pdfFileName, string executePath)
+        private static string ProcessLicensePdf(string pdfFileName, string executePath)
         {
             string getFileName;
-            bool isUnix;
+            bool isUnix = false;
+            string[] pdfFiles = Directory.GetFiles(executePath, "*.pdf");
             string getCopyrightPdfFileName;
             if (pdfFiles.Length > 0)
             {
