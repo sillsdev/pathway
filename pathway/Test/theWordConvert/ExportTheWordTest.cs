@@ -382,6 +382,13 @@ namespace Test.TheWordConvertTest
             TestDataCase("MAT", "040MAT-refList.usx", 47, "<RF q=*><a href=\"http:tw://bible.*?=23.23.1\">Ais 23</a>; <a href=\"http:tw://bible.*?=26.26.1–28:26\">Esi 26:1–28:26</a>; <a href=\"http:tw://bible.*?=29.3.4-8\">Joe 3:4-8</a>; <a href=\"http:tw://bible.*?=30.1.9-10\">Emo 1:9-10</a>; <a href=\"http:tw://bible.*?=36.9.2-4\">Sek 9:2-4</a><Rf>Hi hetpi werek. Maain wɨ kerek God skelim mɨt, hɨrak kaknep mɨt ne Taia netike mɨt ne Saidon kaknɨp kike, te yi mɨt au hɨrak kakiwep iuwe.", bookNames, ":");
         }
 
+        [Test]
+        public void ShortNameTest()
+        {
+            var bookNames = "file:///" + FileInput("akeBookNames.xml");
+            TestDataCase("1CO", "0461CO.usx", 2, "Papa soꞌsii, Koren pon enakan, kamoro Kʉrai Sises winɨ iyekonekasaꞌ kon wakʉ pe teꞌton kon pe, kamoro mɨ awɨrɨ naꞌneꞌ nan amʉtʉ pe esiiꞌma Sises Kʉrai, uyepuru kon esakʉ pɨꞌ naꞌneꞌ nan, toꞌ epuru mɨrɨ awonsiꞌkɨ uyepuru kon nɨ nɨrɨ:<RF q=*><a href=\"http:tw://bible.*?=44.18.1\">Inkupʉꞌpʉ 18:1</a><Rf>", bookNames, ":");
+        }
+
         //[Test]
         //public void myTest()
         //{

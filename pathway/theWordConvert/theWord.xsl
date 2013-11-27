@@ -664,13 +664,13 @@
         <xsl:param name="verseListLeft" />
         <xsl:param name="refsLeft"/>        
         <xsl:variable name="refAbbr" select="substring-before($ref, ' ')"/>
-        <xsl:variable name="refBook" select="$bookNamesBook[@abbr=$refAbbr]"/>
+        <xsl:variable name="refBook" select="$bookNamesBook[@short=$refAbbr] | $bookNamesBook[@abbr=$refAbbr]"/>
         <xsl:variable name="refNAbbr">
             <xsl:value-of select="$refAbbr"/>
             <xsl:text> </xsl:text>
             <xsl:value-of select="substring-before(substring-after($ref, ' '), ' ')"/>
         </xsl:variable>
-        <xsl:variable name="refNBook" select="$bookNamesBook[@abbr=$refNAbbr]"/>
+        <xsl:variable name="refNBook" select="$bookNamesBook[@short=$refNAbbr] | $bookNamesBook[@abbr=$refNAbbr]"/>
         <xsl:choose>
             <!-- No book abbr, continue in the same book -->
             <xsl:when test="not(contains($ref, ' '))">
