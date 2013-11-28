@@ -2721,7 +2721,21 @@ namespace SIL.PublishingSolution
                             _allParagraph.CopyTo(tempStyle, 0);
                             divTagName = counter > 1 ? tempStyle[1] : tempStyle[0];
                         }
-                        _writer.WriteStartElement("text:p");
+                        //if (_projInfo.IsODM)
+                        //{
+                        //    if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0)
+                        //        _writer.WriteStartElement("text:p");
+                        //    else
+                        //        _writer.WriteStartElement("text:P");
+                        //}
+                        //else
+                        //{
+                        //    _writer.WriteStartElement("text:P");
+                        //}
+                        //_writer.WriteStartElement("text:P");
+
+                        _writer.WriteStartElement("text:P");
+
                         //_writer.WriteAttributeString("text:style-name", _util.ParentName);
                         _writer.WriteAttributeString("text:style-name", divTagName);
 
