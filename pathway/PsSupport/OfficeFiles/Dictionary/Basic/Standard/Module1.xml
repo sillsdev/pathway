@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Sep-12-2013 for TD-3616
-
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Nov-30-2013 for TD-3697
 Dim CanSave as Boolean
 
 &apos;This procedure set the dialgue to correct Update References 
@@ -49,7 +47,7 @@ End Sub
 Sub UpdateTOC
 On Error GoTo MyError:
    oDoc = ThisComponent
-   oDoc.refresh() 
+   &apos;oDoc.refresh() 
    oIndexes = oDoc.getDocumentIndexes() 
    oIndex = oIndexes.getByName(&quot;Table of Contents1&quot;) 
    oIndex.update() 
