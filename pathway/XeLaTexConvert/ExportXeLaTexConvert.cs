@@ -226,20 +226,34 @@ namespace SIL.PublishingSolution
             
             CallXeLaTex(xeLatexFullFile, true, imgPath);
 
+            ProcessRampFile(projInfo, xeLatexFullFile, organization);
+
+            return true;
+        }
+
+        private void ProcessRampFile(PublicationInformation projInfo, string xeLatexFullFile, string organization)
+        {
             string pdfFullName = string.Empty;
             string texNameOnly = Path.GetFileNameWithoutExtension(xeLatexFullFile);
             string userFolder = Path.GetDirectoryName(xeLatexFullFile);
-            
+
+            string exportTitle = string.Empty;
+            exportTitle = Param.GetMetadataValue(Param.Title, organization);
+
+            if (exportTitle == string.Empty)
+            {
+                exportTitle = texNameOnly;
+            }
+
             if (userFolder != null)
-                pdfFullName = Path.Combine(userFolder, texNameOnly + ".pdf");
+                pdfFullName = Path.Combine(userFolder, exportTitle + ".pdf");
 
             if (File.Exists(pdfFullName))
             {
-                Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif,.tex,.log,.exe,.xml,.jar", "layout,mergedmain1,preserve", string.Empty);
+                Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif,.tex,.log,.exe,.xml,.jar",
+                                           "layout,mergedmain1,preserve", string.Empty);
                 CreateRAMP(projInfo);
             }
-           
-            return true;
         }
 
         private void CreateRAMP(PublicationInformation projInfo)
