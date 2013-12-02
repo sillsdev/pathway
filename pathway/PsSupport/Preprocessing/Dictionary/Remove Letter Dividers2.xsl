@@ -15,6 +15,17 @@
     <xsl:output encoding="UTF-8" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" 
         doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"/>
     
+    <!-- Recursive copy template -->   
+    <xsl:template match="node() | @*">
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="x:a/@shape"/>
+    <xsl:template match="x:head/@profile"/>
+    <xsl:template match="x:html/@version"/>
+
     <!-- Handle letHead, letter, and letData element-->
     <xsl:template match="x:div[@class = 'letHead' or @class = 'letData']" >
         <xsl:apply-templates/>
@@ -39,17 +50,6 @@
                 <xsl:attribute name="class">letData</xsl:attribute>
                 <xsl:apply-templates/>
             </xsl:element>
-        </xsl:copy>
-    </xsl:template>
-    
-    <!-- Copy unaffected non-span elements-->
-    <xsl:template match="x:html | x:head | x:span | x:div[@class != 'letHead' and @class != 'letter' and @class != 'letData'] | 
-        x:link | x:meta | x:a | x:img | x:title | x:style | comment()">
-        <xsl:copy>
-            <xsl:for-each select="@*">
-                <xsl:copy/>
-            </xsl:for-each>
-            <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
     
