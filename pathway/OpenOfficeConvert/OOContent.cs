@@ -109,6 +109,7 @@ namespace SIL.PublishingSolution
         readonly Dictionary<string, string> _counterVolantryReset = new Dictionary<string, string>();
         readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
         readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");
+        readonly string _zeroWidthNoBreakSpace = Common.ConvertUnicodeToString("\uFEFF"); 
         readonly string _fixedSpace = Common.ConvertUnicodeToString("\u2002");
         readonly string _thinSpace = Common.ConvertUnicodeToString("\u2009");
 
@@ -1422,11 +1423,11 @@ namespace SIL.PublishingSolution
                     _verseContent.Append(" <text:span text:style-name=\"" + characterStyle + "\">");
                     if (_projInfo.HideSpaceVerseNumber.ToLower() == "false")
                     {
-                        content = content.Replace("-", "‑") + _fixedSpace;
+                        content = content.Replace("-", "‑") + _hardSpace;
                     }
                     else
                     {
-                        content = content.Replace("-", "‑") + _thinSpace;
+                        content = content.Replace("-", "‑") + _zeroWidthNoBreakSpace;
                     }
                 }
             }

@@ -418,7 +418,9 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='Graphics1']//@xlink:href", "Pictures/2.jpg"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_TitleMain_')]//@fo:language", "zxx"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_Paragraph_scrSection_')]//@fo:language", "zxx"),
-                new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5 “Mlɩbla Sionfɔ mlɩaa,"),
+                new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5\u00A0“Mlɩbla Sionfɔ mlɩaa,"),
+                new ODet(ODet.Chk, "Punctuation after Glossary entry (TD-3719)", "mat21-23.odt", ODet.Content, "//text:p[26]", "24 Yesu lɛ́lɛ mʋ́ ɔnɔ́ ɔbɛ́ɛ, “Mɩ́ ɛ́ nfɩ́tɛ mlɩ asʋn kua kʋlɛ. Nɩ́ mlɛlɛ́ mʋ́ ɔnɔ́ á, nɛ́bláa mlɩ túmi oduá ndɛpʋbwɛ́ ntobí ánfɩ. 25 Bulu wá Asú Ɔbɔpʋ́ Yohane lénya túmi pʋ́bɔ́ ahá asú, ntɛ́ɛ nyankpʋsa?”"),
+                new ODet(ODet.Chk, "Space after verse", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Verse')]", "1\u20112\u00A0"),
                 
             };
 
@@ -1058,6 +1060,25 @@ namespace Test.PsExport
             ExportTest("T16", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
         }
         #endregion T16
+
+        #region T17
+        /// <summary>
+        /// Test TE Export test
+        /// </summary>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void T17NoSpaceAfterVerse()
+        {
+            var tests = new ArrayList
+            {
+                new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5\uFEFF“Mlɩbla Sionfɔ mlɩaa,"),
+                new ODet(ODet.Chk, "Space after verse", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Verse')]", "1\u20112\u00A0"),
+                
+            };
+
+            ExportTest("T17", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
+        }
+        #endregion T17
 
         [Test]
         public void XsltPreProcess0Test()
