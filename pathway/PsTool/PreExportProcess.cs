@@ -3825,7 +3825,7 @@ namespace SIL.Tool
             //tw.WriteLine("}");
 
             tw.WriteLine(".Front_Matter {");
-            tw.WriteLine("margin-left : 12pt;margin-right: 12pt;text-align: left;");
+            tw.WriteLine("margin-left : 12pt;margin-right: 12pt;direction: ltr;text-align: left;");
             tw.WriteLine("}");
 
             //tw.WriteLine(".Parallel_Passage_Reference {");

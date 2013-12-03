@@ -1,0 +1,13 @@
+
+
+.cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} .title{margin-top: 112pt; text-align: center; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;} .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}.copyright{text-align: left; font-size:1pt;visibility:hidden;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;}.LText{font-size:12pt;font-style:italic}.LText:before{content: "\2028"}.dummyTOC{text-align: left; font-size:1pt;visibility:hidden;page-break-after: always;} .TableOfContentLO{visibility:hidden;}.dummypage{page-break-after: always;} 
+div[lang='zxx']{ font-family: "Faruma";}
+span[lang='zxx']{ font-family: "Faruma";}
+
+div[lang='dv']{ font-family: "Faruma"; font-size: 14pt; direction: rtl; text-align: right;}
+span[lang='dv']{ font-family: "Faruma";}
+
+.Front_Matter {
+tw.WriteLine("margin-left : 12pt;margin-right: 12pt;direction: ltr;text-align: left;");
+}
+

@@ -36,7 +36,7 @@ End Sub
 Sub UpdateTOC
 On Error GoTo MyError:
    oDoc = ThisComponent
-   oDoc.refresh() 
+   &apos;oDoc.refresh() 
    oIndexes = oDoc.getDocumentIndexes() 
    oIndex = oIndexes.getByName(&quot;Table of Contents1&quot;) 
    oIndex.update() 
