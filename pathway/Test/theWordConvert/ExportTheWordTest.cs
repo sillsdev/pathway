@@ -155,7 +155,7 @@ namespace Test.TheWordConvertTest
         {
             var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
             string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
-            TheWord.Load(XmlReader.Create(Path.Combine(codePath, "theWord.xsl")), xsltSettings, null);
+            TheWord.Load(XmlReader.Create(Common.PathCombine(codePath, "theWord.xsl")), xsltSettings, null);
             IEnumerable<string> books = new List<string>(2) { "MAT", "MRK" };
             var codeNames = new Dictionary<string, string>(2);
             codeNames["MAT"] = FileInput(@"USX\040MAT.usx");
@@ -190,7 +190,7 @@ namespace Test.TheWordConvertTest
         {
             var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
             string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
-            TheWord.Load(XmlReader.Create(Path.Combine(codePath, "theWord.xsl")), xsltSettings, null);
+            TheWord.Load(XmlReader.Create(Common.PathCombine(codePath, "theWord.xsl")), xsltSettings, null);
             IEnumerable<string> books = new List<string>(1) { code };
             var codeNames = new Dictionary<string, string>(2);
             codeNames[code] = FileInput(fileName);

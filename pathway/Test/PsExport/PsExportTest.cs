@@ -62,7 +62,7 @@ namespace Test.PsExport
             //DoBatch("ConfigurationTool", "postBuild.bat", "Debug");
             //Common.ProgInstall = Environment.CurrentDirectory.Replace("Test", "ConfigurationTool");
             Common.ProgInstall = Environment.CurrentDirectory;
-            //FolderTree.Copy(Common.PathCombine(testPath, "../../../PsSupport/OfficeFiles"),Path.Combine(Common.ProgInstall,"OfficeFiles"));
+            //FolderTree.Copy(Common.PathCombine(testPath, "../../../PsSupport/OfficeFiles"),Common.PathCombine(Common.ProgInstall,"OfficeFiles"));
             Backend.Load(Common.ProgInstall);
         }
 
@@ -242,7 +242,7 @@ namespace Test.PsExport
             foreach (string fullPath in Directory.GetFiles(_inputTestPath, "*.jpg"))
             {
                 var fileName = Path.GetFileName(fullPath);
-                File.Copy(fullPath, Path.Combine(_outputTestPath, fileName), true);
+                File.Copy(fullPath, Common.PathCombine(_outputTestPath, fileName), true);
             }
             CopyExistingFile("FlexRev.xhtml");
             CopyExistingFile("FlexRev.css");
@@ -281,7 +281,7 @@ namespace Test.PsExport
         {
             Common.PublishingSolutionsEnvironmentReset();
             TestPathSetup(testName);
-            var settingsFolder = Path.Combine(_inputTestPath, "Pathway");
+            var settingsFolder = Common.PathCombine(_inputTestPath, "Pathway");
             if (Directory.Exists(settingsFolder))
             {
                 FolderTree.Copy(settingsFolder, Common.GetAllUserPath());
@@ -1080,7 +1080,7 @@ namespace Test.PsExport
             XsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
             Assert.AreEqual(2, files.Length);
-            XmlAssert.AreEqual(Path.Combine(_expectTestPath, data), infile, "Empty Entries Preprocess produced different results");
+            XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "Empty Entries Preprocess produced different results");
         }
 
         [Test]
@@ -1093,7 +1093,7 @@ namespace Test.PsExport
             XsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
             Assert.AreEqual(3, files.Length);
-            XmlAssert.AreEqual(Path.Combine(_expectTestPath, data), infile, "Preprocess produced different results");
+            XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "Preprocess produced different results");
         }
     }
 }

@@ -60,7 +60,7 @@ namespace Test
         {
             const bool overwrite = true;
             var arg = new StringBuilder();
-            var inPath = Path.Combine(_inputPath, project);
+            var inPath = Common.PathCombine(_inputPath, project);
             if (project.Length < 1 || layout.Length < 1 || inputType.Length < 1 || backend.Length < 1)
             {
                 // missing some args -- call usage on PathwayB
@@ -214,7 +214,7 @@ namespace Test
             foreach (FileInfo file in files)
             {
                 // Create the path to the new copy of the file.
-                string temppath = Path.Combine(destDirName, file.Name);
+                string temppath = Common.PathCombine(destDirName, file.Name);
 
                 // Copy the file.
                 file.CopyTo(temppath, false);
@@ -227,7 +227,7 @@ namespace Test
                 foreach (DirectoryInfo subdir in dirs)
                 {
                     // Create the subdirectory.
-                    string temppath = Path.Combine(destDirName, subdir.Name);
+                    string temppath = Common.PathCombine(destDirName, subdir.Name);
 
                     // Copy the subdirectories.
                     DirectoryCopy(subdir.FullName, temppath, copySubDirs);
@@ -242,7 +242,7 @@ namespace Test
         /// <param name="message"></param>
         private void epubCheck(string layout, string message)
         {
-            Test.epubConvert.ExportepubTest.IsValid(Path.Combine(_outputPath, layout + ".epub"), message);
+            Test.epubConvert.ExportepubTest.IsValid(Common.PathCombine(_outputPath, layout + ".epub"), message);
         }
 
         /// <summary>
@@ -252,8 +252,8 @@ namespace Test
         /// <param name="message"></param>
         private void IdmlCheck(string project, string message)
         {
-            var expectedPath = Path.Combine(_expectedPath, project);
-            IdmlTest.AreEqual(Path.Combine(expectedPath, project + ".idml"), Path.Combine(_outputPath, project + ".idml"), message);
+            var expectedPath = Common.PathCombine(_expectedPath, project);
+            IdmlTest.AreEqual(Common.PathCombine(expectedPath, project + ".idml"), Common.PathCombine(_outputPath, project + ".idml"), message);
         }
 
         /// <summary>
@@ -263,8 +263,8 @@ namespace Test
         /// <param name="message"></param>
         private void OdtCheck(string project, string message)
         {
-            var expectedPath = Path.Combine(_expectedPath, project);
-            OdtTest.AreEqual(Path.Combine(expectedPath, project + ".odt"), Path.Combine(_outputPath, project + ".odt"), message);
+            var expectedPath = Common.PathCombine(_expectedPath, project);
+            OdtTest.AreEqual(Common.PathCombine(expectedPath, project + ".odt"), Common.PathCombine(_outputPath, project + ".odt"), message);
         }
 
         /// <summary>
@@ -289,9 +289,9 @@ namespace Test
                 File.Delete(file);
             }
             // make a copy of the xhtml and CSS files
-            File.Copy(Path.Combine(Path.Combine(_inputPath, "Sena 3-01"), "main.xhtml"), Path.Combine(_outputPath, "main.xhtml"), true);
-            File.Copy(Path.Combine(Path.Combine(_inputPath, "Sena 3-01"), "FlexRev.xhtml"), Path.Combine(_outputPath, "FlexRev.xhtml"), true);
-            File.Copy(Path.Combine(Path.Combine(_inputPath, "Sena 3-01"), "main.css"), Path.Combine(_outputPath, "main.css"), true);
+            File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "main.xhtml"), Common.PathCombine(_outputPath, "main.xhtml"), true);
+            File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "FlexRev.xhtml"), Common.PathCombine(_outputPath, "FlexRev.xhtml"), true);
+            File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "main.css"), Common.PathCombine(_outputPath, "main.css"), true);
             // run the test
             RunPathwayB(InputFormat.XHTML, "\"main.xhtml\", \"FlexRev.xhtml\"", "Sena 3-01", "main", "Dictionary", "E-Book (.epub)", "MainAndRevTest");
         }
@@ -315,8 +315,8 @@ namespace Test
                     File.Delete(file);
             } 
             // make a copy of the xhtml and CSS files
-            File.Copy(Path.Combine(Path.Combine(_inputPath, "Sena 3-01"), "Sena 3-01.xhtml"), Path.Combine(_outputPath, "Scripture Draft.xhtml"), true);
-            File.Copy(Path.Combine(Path.Combine(_inputPath, "Sena 3-01"), "Sena 3-01.css"), Path.Combine(_outputPath, "Scripture Draft.css"), true);
+            File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "Sena 3-01.xhtml"), Common.PathCombine(_outputPath, "Scripture Draft.xhtml"), true);
+            File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "Sena 3-01.css"), Common.PathCombine(_outputPath, "Scripture Draft.css"), true);
             // run the test
             RunPathwayB(InputFormat.XHTML, "\"Scripture Draft.xhtml\"", "Sena 3-01", "Scripture Draft", "Scripture", "E-Book (.epub)", "xhtmlTest");
         }
@@ -335,25 +335,25 @@ namespace Test
                 if (File.Exists(file))
                     File.Delete(file);
             }
-            if (Directory.Exists(Path.Combine(_outputPath, "gather")))
+            if (Directory.Exists(Common.PathCombine(_outputPath, "gather")))
             {
                 // delete the gather subdirectory files as well
-                foreach (var file in Directory.GetFiles(Path.Combine(_outputPath, "gather")))
+                foreach (var file in Directory.GetFiles(Common.PathCombine(_outputPath, "gather")))
                 {
                     File.Delete(file);
                 }
             }
             // Copy the files
-            var projPath = Path.Combine(_inputPath, "KFY");
-            //if (Directory.Exists(Path.Combine(projPath, "gather")))
+            var projPath = Common.PathCombine(_inputPath, "KFY");
+            //if (Directory.Exists(Common.PathCombine(projPath, "gather")))
             DirectoryCopy(projPath, _outputPath, true);
             // Copy Settings
-            var targetSettings = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pathway");
+            var targetSettings = Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pathway");
             if (Directory.Exists(targetSettings))
             {
                 Directory.Delete(targetSettings, true);
             }
-            DirectoryCopy(Path.Combine(_inputPath, "Pathway"), targetSettings, true);
+            DirectoryCopy(Common.PathCombine(_inputPath, "Pathway"), targetSettings, true);
             // run the test
             RunPathwayB(InputFormat.USFM, "*", "KFY", "KFY", "Scripture", "E-Book (.epub)", "usfmTest");
         }
@@ -367,10 +367,10 @@ namespace Test
             {
                 File.Delete(file);
             }
-            if (Directory.Exists(Path.Combine(_outputPath, "gather")))
+            if (Directory.Exists(Common.PathCombine(_outputPath, "gather")))
             {
                 // delete the gather subdirectory files as well
-                foreach (var file in Directory.GetFiles(Path.Combine(_outputPath, "gather")))
+                foreach (var file in Directory.GetFiles(Common.PathCombine(_outputPath, "gather")))
                 {
                     File.Delete(file);
                 }

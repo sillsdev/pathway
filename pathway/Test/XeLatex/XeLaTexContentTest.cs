@@ -1080,7 +1080,7 @@ namespace Test.XeLatex
             cssClass = cssTree.CreateCssProperty(input, true);
             int pageWidth = Common.GetPictureWidth(cssClass, _projInfo.ProjectInputType);
 
-            string xetexFullFile = Path.Combine(_outputPath, file + ".tex");
+            string xetexFullFile = Common.PathCombine(_outputPath, file + ".tex");
             StreamWriter xetexFile = new StreamWriter(xetexFullFile);
 
             XeLaTexStyles styles = new XeLaTexStyles();

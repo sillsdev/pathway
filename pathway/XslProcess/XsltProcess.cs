@@ -129,7 +129,7 @@ namespace PSXslProcess
             //if (path2 == null) throw new ArgumentNullException("path2");
             path1 = DirectoryPathReplace(path1);
             path2 = DirectoryPathReplace(path2);
-            return Path.Combine(path1, path2);
+            return Common.PathCombine(path1, path2);
         }
 
         /// <summary>

@@ -60,7 +60,7 @@ namespace Test.PsTool
             LanguageIso.Clear();
             RampDescriptionHas = null;
             RampDescription = null;
-            var settingsFolder = Path.Combine(Common.GetAllUserPath(), "Pathway");
+            var settingsFolder = Common.PathCombine(Common.GetAllUserPath(), "Pathway");
             if (Directory.Exists(settingsFolder))
             {
                 Directory.Delete(settingsFolder, true);
@@ -71,7 +71,7 @@ namespace Test.PsTool
         [Test]
         public void SetRampDataModeTest()
         {
-            _folderPath = FileInput(Path.Combine("rampInput", "Gondwana Sample.xhtml"));
+            _folderPath = FileInput(Common.PathCombine("rampInput", "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             SetRampData();
             Assert.AreEqual("Text,Graphic", TypeMode);
@@ -80,7 +80,7 @@ namespace Test.PsTool
         [Test]
         public void SetRampDataAudienceTest()
         {
-            _folderPath = FileInput(Path.Combine("rampInput", "Gondwana Sample.xhtml"));
+            _folderPath = FileInput(Common.PathCombine("rampInput", "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             SetRampData();
             Assert.AreEqual("wider_audience", BroadType);
@@ -90,7 +90,7 @@ namespace Test.PsTool
         public void AddSubjLanguageTest()
         {
             SubjectLanguage = new List<string>();
-            _folderPath = FileInput(Path.Combine("rampInput", "Gondwana Sample.xhtml"));
+            _folderPath = FileInput(Common.PathCombine("rampInput", "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             LoadLanguagefromXML();
             AddSubjLanguage(Common.GetLanguageCode(_folderPath, _projInputType, true));
@@ -100,7 +100,7 @@ namespace Test.PsTool
         [Test]
         public void SetRampDataSubjectLanguage2Test()
         {
-            _folderPath = FileInput(Path.Combine("rampInput2", "sena3.xhtml"));
+            _folderPath = FileInput(Common.PathCombine("rampInput2", "sena3.xhtml"));
             _projInputType = "Dictionary";
             LoadLanguagefromXML();
             SetRampData();
@@ -110,7 +110,7 @@ namespace Test.PsTool
         [Test]
         public void AddLanguagIsoTest()
         {
-            _folderPath = FileInput(Path.Combine("rampInput2", "sena3.xhtml"));
+            _folderPath = FileInput(Common.PathCombine("rampInput2", "sena3.xhtml"));
             _projInputType = "Dictionary";
             LoadLanguagefromXML();
             AddLanguageIso(Common.GetLanguageCodeList(_folderPath, _projInputType));
@@ -123,7 +123,7 @@ namespace Test.PsTool
         [Test]
         public void AddLanguageScriptTest()
         {
-            _folderPath = FileInput(Path.Combine("rampInput", "Gondwana Sample.xhtml"));
+            _folderPath = FileInput(Common.PathCombine("rampInput", "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             LoadLanguagefromXML();
             AddLanguageScript(Common.GetLanguageScriptList(_folderPath, _projInputType));
@@ -135,7 +135,7 @@ namespace Test.PsTool
         public void AddContributorTest()
         {
             const string TestFolder = "rampInput";
-            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
@@ -147,7 +147,7 @@ namespace Test.PsTool
         public void RampFormatExtentImagesTest()
         {
             const string TestFolder = "rampInput";
-            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
@@ -160,7 +160,7 @@ namespace Test.PsTool
         {
             RelRequires = new List<string>();
             const string TestFolder = "rampInput";
-            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
@@ -173,7 +173,7 @@ namespace Test.PsTool
         public void RampRightsTest()
         {
             const string TestFolder = "rampInput";
-            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
@@ -185,7 +185,7 @@ namespace Test.PsTool
         public void RampCreatedOnTest()
         {
             const string TestFolder = "rampInput";
-            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
@@ -197,7 +197,7 @@ namespace Test.PsTool
         public void RampModifiedDateTest()
         {
             const string TestFolder = "rampInput";
-            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
@@ -209,7 +209,7 @@ namespace Test.PsTool
         public void RampDescriptionTest()
         {
             const string TestFolder = "rampInput";
-            _folderPath = FileInput(Path.Combine(TestFolder, "Gondwana Sample.xhtml"));
+            _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
@@ -221,7 +221,7 @@ namespace Test.PsTool
         public void RampDescriptionEmptyTest()
         {
             const string TestFolder = "rampInput2";
-            _folderPath = FileInput(Path.Combine(TestFolder, "sena3.xhtml"));
+            _folderPath = FileInput(Common.PathCombine(TestFolder, "sena3.xhtml"));
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
@@ -232,7 +232,7 @@ namespace Test.PsTool
         #region Private Functions
         private static void SettingsInput(string TestFolder)
         {
-            var settingsFolder = FileInput(Path.Combine(TestFolder, "Pathway"));
+            var settingsFolder = FileInput(Common.PathCombine(TestFolder, "Pathway"));
             if (Directory.Exists(settingsFolder))
             {
                 FolderTree.Copy(settingsFolder, Common.GetAllUserPath());

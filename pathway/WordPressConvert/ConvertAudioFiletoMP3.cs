@@ -39,8 +39,8 @@ namespace SIL.PublishingSolution
             directoryLocalfiles = Directory.GetFiles(audioFilePath);
 
             string getApplicationPath = Common.GetApplicationPath();
-            getApplicationPath = Path.Combine(getApplicationPath, "Wordpress");
-            string lameEXE = Path.Combine(getApplicationPath, "lame");
+            getApplicationPath = Common.PathCombine(getApplicationPath, "Wordpress");
+            string lameEXE = Common.PathCombine(getApplicationPath, "lame");
             string lameArgs = "-b 128";
             foreach (string fileName in directoryLocalfiles)
             {

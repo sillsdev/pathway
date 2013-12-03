@@ -54,7 +54,7 @@ namespace PdfLicense
         {
             if (ProgInstall == string.Empty)
                 ProgInstall = GetApplicationPath();
-            return SupportFolder == "" ? ProgInstall : Path.Combine(ProgInstall, SupportFolder);
+            return SupportFolder == "" ? ProgInstall : Common.PathCombine(ProgInstall, SupportFolder);
         }
         #endregion
 
@@ -99,7 +99,7 @@ namespace PdfLicense
                     // The next line helps those using the developer version of FieldWorks
                     pathwayDir = pathwayDir.Replace("DistFiles", @"Output\Debug").Replace("distfiles", @"Output\Debug");
                 }
-                if (!File.Exists(Path.Combine(pathwayDir, "PsExport.dll")))
+                if (!File.Exists(Common.PathCombine(pathwayDir, "PsExport.dll")))
                     pathwayDir = string.Empty;
                 if (pathwayDir == string.Empty)
                 {
@@ -136,7 +136,7 @@ namespace PdfLicense
                 if (!string.IsNullOrEmpty(RedirectOutput))
                 {
                     string result = string.Empty;
-                    StreamWriter streamWriter = new StreamWriter(Path.Combine(instPath, RedirectOutput));
+                    StreamWriter streamWriter = new StreamWriter(Common.PathCombine(instPath, RedirectOutput));
                     var errorArgs = string.Format("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
                     result += errorArgs;
                     streamWriter.Write(result);
@@ -185,7 +185,7 @@ namespace PdfLicense
 
         private static string ReadPathinLicenseFile(string allUserPath)
         {
-            string fileLoc = Path.Combine(allUserPath, "License.txt");
+            string fileLoc = Common.PathCombine(allUserPath, "License.txt");
             string executePath = string.Empty;
             int countRead = 0;
 
@@ -210,7 +210,7 @@ namespace PdfLicense
 
         private string ReadPathinLicenseFile(string allUserPath, int readLineNumber)
         {
-            string fileLoc = Path.Combine(allUserPath, "License.txt");
+            string fileLoc = Common.PathCombine(allUserPath, "License.txt");
             string executePath = string.Empty;
             int countRead = 0;
 
@@ -256,7 +256,7 @@ namespace PdfLicense
             //if (path2 == null) throw new ArgumentNullException("path2");
             path1 = DirectoryPathReplace(path1);
             path2 = DirectoryPathReplace(path2);
-            return Path.Combine(path1, path2);
+            return Common.PathCombine(path1, path2);
         }
 
         /// <summary>

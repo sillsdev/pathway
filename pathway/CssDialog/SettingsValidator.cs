@@ -86,20 +86,20 @@ namespace SIL.PublishingSolution
         {
             _fromPlugin = fromPlugin;
             string fileName = Path.GetFileName(settingsFilewithPath);
-            allUserSettingsPath = Path.Combine(Common.GetAllUserPath(), fileName);
+            allUserSettingsPath = Common.PathCombine(Common.GetAllUserPath(), fileName);
 
             if (File.Exists(allUserSettingsPath)) ProcessSettingsFile(allUserSettingsPath);
             string inputtype = GetInputType(allUserSettingsPath);
-            string allUsersPathWithoutFileName = Path.Combine(Common.GetAllUserPath(), inputtype);
+            string allUsersPathWithoutFileName = Common.PathCombine(Common.GetAllUserPath(), inputtype);
 
             if (inputtype == Common.ProjectType.Dictionary.ToString())
             {
-                fileNamewithPath = Path.Combine(allUsersPathWithoutFileName, FileName.DictionaryStyleSettings + ".xml");
+                fileNamewithPath = Common.PathCombine(allUsersPathWithoutFileName, FileName.DictionaryStyleSettings + ".xml");
                 if (File.Exists(fileNamewithPath)) ProcessDictionarySettingFile(fileNamewithPath, inputtype);
             }
             else
             {
-                fileNamewithPath = Path.Combine(allUsersPathWithoutFileName, FileName.ScriptureStyleSettings + ".xml");
+                fileNamewithPath = Common.PathCombine(allUsersPathWithoutFileName, FileName.ScriptureStyleSettings + ".xml");
                 if (File.Exists(fileNamewithPath)) ProcessScriptureSettingFile(fileNamewithPath, inputtype);
             }
             return isProcessSucess;
@@ -266,8 +266,8 @@ namespace SIL.PublishingSolution
                     allUsersFolder = Common.PathCombine(allUsersFolder, supportPath);
                 }
                 string programPath = Common.PathCombine(programFolder, fileName + ".xml");
-                //File.Copy(programPath, Path.Combine(allUsersFolder, fileName + ".xml"), true);
-                Common.MigrateCustomSheet(Path.Combine(allUsersFolder, fileName + ".xml"), programPath);
+                //File.Copy(programPath, Common.PathCombine(allUsersFolder, fileName + ".xml"), true);
+                Common.MigrateCustomSheet(Common.PathCombine(allUsersFolder, fileName + ".xml"), programPath);
                 isProcessSucess = true;
             }
             else
@@ -1270,7 +1270,7 @@ namespace SIL.PublishingSolution
                             if (path.ToLower().IndexOf("dictionary") > 0 && oValue.ToLower() == "gobible.css")
                                 return true;
 
-                            if (oType != "Custom" && !File.Exists(path) && !File.Exists(Path.Combine(outputPath, oValue)))
+                            if (oType != "Custom" && !File.Exists(path) && !File.Exists(Common.PathCombine(outputPath, oValue)))
                             {
                                 errorTag = methodname;
                                 return false;

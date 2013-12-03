@@ -132,8 +132,8 @@ namespace Test.WordPressConvert
         public void AudioFileConversion()
         {
             string[] directoryLocalfiles;
-            string _inputAudioPath = Path.Combine(_inputPath, "AudioFiles");
-            string _outputAudioPath = Path.Combine(_outputPath, "AudioFiles");
+            string _inputAudioPath = Common.PathCombine(_inputPath, "AudioFiles");
+            string _outputAudioPath = Common.PathCombine(_outputPath, "AudioFiles");
             directoryLocalfiles = Directory.GetFiles(_inputAudioPath);
             if (!Directory.Exists(_outputAudioPath))
                 Directory.CreateDirectory(_outputAudioPath);

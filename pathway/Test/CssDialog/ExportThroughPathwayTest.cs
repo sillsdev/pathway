@@ -31,7 +31,7 @@ namespace Test.CssDialog
         protected void SetUp()
         {
             string pathwayDirectory = PathwayPath.GetPathwayDir();
-            string styleSettingFile = Path.Combine(pathwayDirectory, "StyleSettings.xml");
+            string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
             ValidateXMLVersion(styleSettingFile);
             Common.Testing = true;
             InputType = "Dictionary";

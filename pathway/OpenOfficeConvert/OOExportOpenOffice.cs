@@ -114,17 +114,17 @@ namespace SIL.PublishingSolution
             string entryFilterXpath = "true()";
             string senseFilterXpath = "true()";
             string languageFilterXpath = "true()";
-            string liftSupportPath = Path.Combine(Common.GetPSApplicationPath(), "LiftSupport");
+            string liftSupportPath = Common.PathCombine(Common.GetPSApplicationPath(), "LiftSupport");
 
             string inputFile = pubInfo.DefaultXhtmlFileWithPath;
             string xhtmlFile = inputFile;
-            string transFormfile = Path.Combine(liftSupportPath, "liftTransform.xsl");
-            string filterFile = Path.Combine(liftSupportPath, "liftEntryAndSenseFilter.xsl");
-            string newTempXslfile = Path.Combine(Path.GetTempPath(), "tempFilter.xsl");
-            string newTempXslfile1 = Path.Combine(Path.GetTempPath(), "tempFilter1.xsl");
+            string transFormfile = Common.PathCombine(liftSupportPath, "liftTransform.xsl");
+            string filterFile = Common.PathCombine(liftSupportPath, "liftEntryAndSenseFilter.xsl");
+            string newTempXslfile = Common.PathCombine(Path.GetTempPath(), "tempFilter.xsl");
+            string newTempXslfile1 = Common.PathCombine(Path.GetTempPath(), "tempFilter1.xsl");
 
 
-            string languageSortFile = Path.Combine(Path.GetTempPath(), "langSortedFile.xhtml");
+            string languageSortFile = Common.PathCombine(Path.GetTempPath(), "langSortedFile.xhtml");
             try
             {
                 // Transformation files
@@ -158,7 +158,7 @@ namespace SIL.PublishingSolution
                 if (pubInfo.IsLanguageFilter)
                 {
                     ReplaceNamespace(xmlFile);
-                    string langFilterFile = Path.Combine(liftSupportPath, "liftLangFilter.xsl");
+                    string langFilterFile = Common.PathCombine(liftSupportPath, "liftLangFilter.xsl");
                     File.Copy(langFilterFile, newTempXslfile1, true);
 
                     ReplaceFilters("language", newTempXslfile1, languageFilterXpath);
@@ -967,7 +967,7 @@ namespace SIL.PublishingSolution
 
         public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
         {
-            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1019,7 +1019,7 @@ namespace SIL.PublishingSolution
         public static void InsertGuidewordAfterLetter(string tempOutputFolder)
         {
 
-            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = new XmlDocument();
             xdoc.PreserveWhitespace = false;
             xdoc.Load(filename);
@@ -1057,7 +1057,7 @@ namespace SIL.PublishingSolution
         public static void ContentPostProcess(string tempOutputFolder)
         {
             
-            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1134,7 +1134,7 @@ namespace SIL.PublishingSolution
 
         public static void InsertPublisherOnTitlePage(string tempOutputFolder)
         {
-            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = new XmlDocument();
             xdoc.PreserveWhitespace = false;
             xdoc.Load(filename);
@@ -1173,7 +1173,7 @@ namespace SIL.PublishingSolution
 
         public static void ChangeTitleNameasBookName(string tempOutputFolder)
         {
-            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1216,7 +1216,7 @@ namespace SIL.PublishingSolution
 
         private static void RenameContentStyleOnCondition(string tempFolder)
         {
-            string filename = Path.Combine(tempFolder, "content.xml");
+            string filename = Common.PathCombine(tempFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1252,7 +1252,7 @@ namespace SIL.PublishingSolution
         /// <param name="directoryPath">File Directory path</param>
         public static void InsertKeepWithNextinEntryStyle(string directoryPath, string styleFilename)
         {
-            string filename = Path.Combine(directoryPath, styleFilename);
+            string filename = Common.PathCombine(directoryPath, styleFilename);
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1376,7 +1376,7 @@ namespace SIL.PublishingSolution
         private static void InsertChapterNumber(string tempFolder)
         {
 
-            string filename = Path.Combine(tempFolder, "content.xml");
+            string filename = Common.PathCombine(tempFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1425,7 +1425,7 @@ namespace SIL.PublishingSolution
         private static void InsertVariableOnLetHead(string tempFolder)
         {
 
-            string filename = Path.Combine(tempFolder, "content.xml");
+            string filename = Common.PathCombine(tempFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);

@@ -1935,7 +1935,7 @@ namespace Test.InDesignConvert
             _designmapXML.CreateIDDesignMap(_outputPath, 4, new ArrayList(), test, StyleName["CrossRef"], string.Empty);
             classname = "Name_namenema3";
 
-            FileNameWithPath = Path.Combine(_outputPath,"designmap.xml");
+            FileNameWithPath = Common.PathCombine(_outputPath,"designmap.xml");
             foreach (string crossref in StyleName["CrossRef"])
             {
                 XPath = "//Hyperlink[@Name = \"" + crossref + "\"]";
@@ -2054,7 +2054,7 @@ namespace Test.InDesignConvert
             InGraphic inGraphic = new InGraphic();
             inGraphic.CreateIDGraphic(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), cssClass, cssTree.cssBorderColor);
 
-            //string fileName = Path.Combine(projInfo.ProjectPath, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
+            //string fileName = Common.PathCombine(projInfo.ProjectPath, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
             //projInfo.DefaultXhtmlFileWithPath = Common.ImagePreprocess(fileName);
 
             InStory inStory = new InStory();

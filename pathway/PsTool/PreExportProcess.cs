@@ -168,7 +168,7 @@ namespace SIL.Tool
                         else
                         {
                             // write to a separate file
-                            var outFilename = Path.Combine(outputFolder, CoverPageFilename);
+                            var outFilename = Common.PathCombine(outputFolder, CoverPageFilename);
                             var outFile = new StreamWriter(outFilename);
                             outFile.Write(sbPreamble.ToString());
                             outFile.Write(CoverImagePage());
@@ -188,7 +188,7 @@ namespace SIL.Tool
                         else
                         {
                             // write to a separate file
-                            var outFilename = Path.Combine(outputFolder, TitlePageFilename);
+                            var outFilename = Common.PathCombine(outputFolder, TitlePageFilename);
                             var outFile = new StreamWriter(outFilename);
                             outFile.Write(sbPreamble.ToString());
                             outFile.Write(TitlePage());
@@ -208,7 +208,7 @@ namespace SIL.Tool
                         else
                         {
                             // write to a separate file
-                            var outFilename = Path.Combine(outputFolder, CopyrightPageFilename);
+                            var outFilename = Common.PathCombine(outputFolder, CopyrightPageFilename);
                             CopyCopyrightPage(outputFolder); // copyright page is a full xhtml file -- this method copies it over
                             files.Add(outFilename);
                         }
@@ -223,7 +223,7 @@ namespace SIL.Tool
                         else
                         {
                             // write to a separate file
-                            var outFilename = Path.Combine(outputFolder, TableOfContentsFilename);
+                            var outFilename = Common.PathCombine(outputFolder, TableOfContentsFilename);
                             var outFile = new StreamWriter(outFilename);
                             outFile.Write(sbPreamble.ToString());
                             outFile.Write(TableOfContents());
@@ -317,14 +317,14 @@ namespace SIL.Tool
             {
                 // no image file specified -- use the default image in the Graphic directory
                 string strImageFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Graphic");
-                strImageFile = Path.Combine(strImageFolder, "cover.png");
+                strImageFile = Common.PathCombine(strImageFolder, "cover.png");
             }
             if (!File.Exists(strImageFile))
             {
                 return;
             }
             // copy the image file to the destination folder as "cover.png"
-            string dest = Path.Combine(outputFolder, "cover.png");
+            string dest = Common.PathCombine(outputFolder, "cover.png");
             var img = new Bitmap(strImageFile);
             img.Save(dest, System.Drawing.Imaging.ImageFormat.Png);
             // if we don't want a title, we're done
@@ -374,7 +374,7 @@ namespace SIL.Tool
                 new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width / 2)), 100f), size), strFormat);
 
             // save this puppy
-            string strCoverImageFile = Path.Combine(outputFolder, "cover.png");
+            string strCoverImageFile = Common.PathCombine(outputFolder, "cover.png");
             bmp.Save(strCoverImageFile, System.Drawing.Imaging.ImageFormat.Png);
         }
 
@@ -532,28 +532,28 @@ namespace SIL.Tool
             // rights logos - copyright page only
             if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
             {
-                File.Copy(Path.Combine(strCopyrightFolder, "by.png"), Path.Combine(outputFolder, "by.png"), true);
-                File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"), true);
-                File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"), true);
-                File.Copy(Path.Combine(strCopyrightFolder, "nd.png"), Path.Combine(outputFolder, "nd.png"), true);
+                File.Copy(Common.PathCombine(strCopyrightFolder, "by.png"), Common.PathCombine(outputFolder, "by.png"), true);
+                File.Copy(Common.PathCombine(strCopyrightFolder, "sa.png"), Common.PathCombine(outputFolder, "sa.png"), true);
+                File.Copy(Common.PathCombine(strCopyrightFolder, "nc.png"), Common.PathCombine(outputFolder, "nc.png"), true);
+                File.Copy(Common.PathCombine(strCopyrightFolder, "nd.png"), Common.PathCombine(outputFolder, "nd.png"), true);
             }
             // logo - both Title and Copyright page
             if (Param.GetOrganization().StartsWith("SIL"))
             {
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
-                    File.Copy(Path.Combine(strCopyrightFolder, "sil-bw-logo.jpg"), Path.Combine(outputFolder, "sil-bw-logo.jpg"), true);
+                    File.Copy(Common.PathCombine(strCopyrightFolder, "sil-bw-logo.jpg"), Common.PathCombine(outputFolder, "sil-bw-logo.jpg"), true);
                 }
                 else
                 {
-                    File.Copy(Path.Combine(strCopyrightFolder, "WBT_H_RGB_red.png"), Path.Combine(outputFolder, "WBT_H_RGB_red.png"), true);
+                    File.Copy(Common.PathCombine(strCopyrightFolder, "WBT_H_RGB_red.png"), Common.PathCombine(outputFolder, "WBT_H_RGB_red.png"), true);
                 }
             }
             else if (Param.GetOrganization().StartsWith("Wycliffe"))
             {
-                File.Copy(Path.Combine(strCopyrightFolder, "WBT_H_RGB_red.png"), Path.Combine(outputFolder, "WBT_H_RGB_red.png"), true);
+                File.Copy(Common.PathCombine(strCopyrightFolder, "WBT_H_RGB_red.png"), Common.PathCombine(outputFolder, "WBT_H_RGB_red.png"), true);
             }
-            File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"), true);
+            File.Copy(Common.PathCombine(strCopyrightFolder, "Copy.css"), Common.PathCombine(outputFolder, "Copy.css"), true);
         }
 
         public void CopyCopyrightPage(string outputFolder)
@@ -570,12 +570,12 @@ namespace SIL.Tool
             {
                 return;
             }
-            string strCopyrightFile = Path.Combine(strCopyrightFolder, strFilename);
+            string strCopyrightFile = Common.PathCombine(strCopyrightFolder, strFilename);
             if (!File.Exists(strCopyrightFile))
             {
                 return; // something went wrong -- get out
             }
-            string destFile = Path.Combine(outputFolder, "File2Cpy.xhtml");
+            string destFile = Common.PathCombine(outputFolder, "File2Cpy.xhtml");
             if (File.Exists(destFile))
             {
                 File.Delete(destFile);
@@ -629,13 +629,13 @@ namespace SIL.Tool
                             {
                                 var sourceFile = srcValue;
                                 string pictureDirectory = Path.GetDirectoryName(copyFromLocation);
-                                sourceFile = Path.Combine(pictureDirectory, sourceFile);
+                                sourceFile = Common.PathCombine(pictureDirectory, sourceFile);
                                 if (sourceFile.Length > 0)
                                 {
                                     if (File.Exists(sourceFile))
                                     {
                                         string destinationFile = Path.GetDirectoryName(copyrighthtmlfile);
-                                        destinationFile = Path.Combine(destinationFile, srcValue);
+                                        destinationFile = Common.PathCombine(destinationFile, srcValue);
                                         File.Copy(sourceFile, destinationFile, true);
                                     }
                                 }
@@ -665,7 +665,7 @@ namespace SIL.Tool
             {
                 return string.Empty;
             }
-            string strCopyrightFile = Path.Combine(strCopyrightFolder, strFilename);
+            string strCopyrightFile = Common.PathCombine(strCopyrightFolder, strFilename);
             if (!File.Exists(strCopyrightFile))
             {
                 return string.Empty; // something went wrong -- get out
@@ -765,7 +765,7 @@ namespace SIL.Tool
         {
             //Reversal XHTML file
             if (_xhtmlFileNameWithPath != null)
-                _xhtmlRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_xhtmlFileNameWithPath), "FlexRev.xhtml");
+                _xhtmlRevFileNameWithPath = Common.PathCombine(Path.GetDirectoryName(_xhtmlFileNameWithPath), "FlexRev.xhtml");
 
             // sanity checks
             if (Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("false")) { return string.Empty; }
@@ -1270,7 +1270,7 @@ namespace SIL.Tool
                     if (_copyrightInformation)
                     {
 
-                        string draftTempFileName = Path.Combine(Path.GetTempPath(), Path.GetFileName(copyRightFilePath));
+                        string draftTempFileName = Common.PathCombine(Path.GetTempPath(), Path.GetFileName(copyRightFilePath));
 
                         File.Copy(copyRightFilePath, draftTempFileName, true);
                         //Common.StreamReplaceInFile(draftTempFileName, "div id='LanguageInformation' class='Front_Matter' dir='ltr'>", GetLanguageInfoForLO());
@@ -1769,7 +1769,7 @@ namespace SIL.Tool
                             if (name != null)
                             {
                                 var src = name.Value;
-                                src = Path.Combine(paraTextprojectPath, src);
+                                src = Common.PathCombine(paraTextprojectPath, src);
                                 if (src.Length > 0)
                                 {
                                     string fromFileName = Common.GetPictureFromPath(src, metaname, sourcePicturePath);
@@ -1953,7 +1953,7 @@ namespace SIL.Tool
             Directory.CreateDirectory(tempFolder);
 
             if (_xhtmlFileNameWithPath != null)
-                _xhtmlRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_xhtmlFileNameWithPath), "FlexRev.xhtml");
+                _xhtmlRevFileNameWithPath = Common.PathCombine(Path.GetDirectoryName(_xhtmlFileNameWithPath), "FlexRev.xhtml");
 
             string tempRevFile = Common.PathCombine(tempFolder, Path.GetFileName(_xhtmlRevFileNameWithPath));
 
@@ -1975,7 +1975,7 @@ namespace SIL.Tool
                 File.Copy(_xhtmlRevFileNameWithPath, tempRevFile, true);
 
             if (_cssFileNameWithPath != null)
-                _cssRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_cssFileNameWithPath), "FlexRev.css");
+                _cssRevFileNameWithPath = Common.PathCombine(Path.GetDirectoryName(_cssFileNameWithPath), "FlexRev.css");
 
             string tempCssFile = Common.PathCombine(tempFolder, Path.GetFileName(_cssRevFileNameWithPath));
 
@@ -2180,7 +2180,7 @@ namespace SIL.Tool
         {
             string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
             string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
-            string newfile = Path.Combine(fileDir, fileName);
+            string newfile = Common.PathCombine(fileDir, fileName);
 
             File.Copy(_xhtmlFileNameWithPath, newfile);
 
@@ -2216,7 +2216,7 @@ namespace SIL.Tool
             XmlTextReader reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
             string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
             string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
-            string Newfile = Path.Combine(fileDir, fileName);
+            string Newfile = Common.PathCombine(fileDir, fileName);
 
             XmlTextWriter writer = new XmlTextWriter(Newfile, null);
 
@@ -2315,7 +2315,7 @@ namespace SIL.Tool
 
             string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
             string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
-            string Newfile = Path.Combine(fileDir, fileName);
+            string Newfile = Common.PathCombine(fileDir, fileName);
 
             var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
             var sw2 = new StreamWriter(fs2);
@@ -2363,7 +2363,7 @@ namespace SIL.Tool
 
             string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
             string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
-            string Newfile = Path.Combine(fileDir, fileName);
+            string Newfile = Common.PathCombine(fileDir, fileName);
 
             var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
             var sw2 = new StreamWriter(fs2);

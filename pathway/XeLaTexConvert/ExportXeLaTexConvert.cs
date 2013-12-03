@@ -140,7 +140,7 @@ namespace SIL.PublishingSolution
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
             int pageWidth = Common.GetPictureWidth(cssClass, projInfo.ProjectInputType);
 
-            string xeLatexFullFile = Path.Combine(projInfo.ProjectPath, fileName + ".tex");
+            string xeLatexFullFile = Common.PathCombine(projInfo.ProjectPath, fileName + ".tex");
             StreamWriter xeLatexFile = new StreamWriter(xeLatexFullFile);
 
             Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
@@ -157,7 +157,7 @@ namespace SIL.PublishingSolution
 
             if (projInfo.IsReversalExist)
             {
-                var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
                 string reversalFileName = fileNameXhtml + ".tex";
 
@@ -190,10 +190,10 @@ namespace SIL.PublishingSolution
             if (ExportReversalIndex(projInfo))
             {
                 _reversalIndexTexCreated = true;
-                var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-                //var revCSSFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
+                var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                //var revCSSFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
-                string xeLatexCopyrightFile = Path.Combine(projInfo.ProjectPath, fileNameXhtml + ".tex");
+                string xeLatexCopyrightFile = Common.PathCombine(projInfo.ProjectPath, fileNameXhtml + ".tex");
 
                 modifyXeLaTexStyles.ReversalIndexExist = true;
                 modifyXeLaTexStyles.ReversalIndexTexFilename = Path.GetFileName(xeLatexCopyrightFile);
@@ -246,7 +246,7 @@ namespace SIL.PublishingSolution
             }
 
             if (userFolder != null)
-                pdfFullName = Path.Combine(userFolder, exportTitle + ".pdf");
+                pdfFullName = Common.PathCombine(userFolder, exportTitle + ".pdf");
 
             if (File.Exists(pdfFullName))
             {
@@ -269,7 +269,7 @@ namespace SIL.PublishingSolution
                 var preProcess = new PreExportProcess(projInfo);
                 var processFolder = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                 preProcess.CopyCopyrightPage(processFolder);
-                string copyRightFilePath = Path.Combine(processFolder, "File2Cpy.xhtml");
+                string copyRightFilePath = Common.PathCombine(processFolder, "File2Cpy.xhtml");
 
                 // **    string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 if (copyRightFilePath.Trim().Length <= 0 && !File.Exists(copyRightFilePath))
@@ -281,7 +281,7 @@ namespace SIL.PublishingSolution
                     if (Common.UnixVersionCheck())
                     {
                         string draftTempFileName = Path.GetFileName(copyRightFilePath);
-                        draftTempFileName = Path.Combine(Path.GetTempPath(), draftTempFileName);
+                        draftTempFileName = Common.PathCombine(Path.GetTempPath(), draftTempFileName);
                         if (!File.Exists(draftTempFileName))
                         {
                             File.Copy(copyRightFilePath, draftTempFileName, true);
@@ -306,9 +306,9 @@ namespace SIL.PublishingSolution
                     new Dictionary<string, Dictionary<string, string>>();
                 CssTree cssTree = new CssTree();
                 cssTree.OutputType = Common.OutputType.XELATEX;
-                cssClass = cssTree.CreateCssProperty(Path.Combine(filepath, "copy.css"), true);
+                cssClass = cssTree.CreateCssProperty(Common.PathCombine(filepath, "copy.css"), true);
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(copyRightFilePath);
-                string xeLatexCopyrightFile = Path.Combine(projInfo.ProjectPath, fileNameXhtml + ".tex");
+                string xeLatexCopyrightFile = Common.PathCombine(projInfo.ProjectPath, fileNameXhtml + ".tex");
                 _copyrightTexFileName = xeLatexCopyrightFile;
                 int pageWidth = Common.GetPictureWidth(cssClass, projInfo.ProjectInputType);
 
@@ -351,7 +351,7 @@ namespace SIL.PublishingSolution
         static public void InsertInFile(string filePath, string searchText, string insertText)
         {
             if (!File.Exists(filePath)) return;
-            string tempFile = Path.Combine(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath) + "1.tex");
+            string tempFile = Common.PathCombine(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath) + "1.tex");
             File.Copy(filePath, tempFile, true);
             var reader = new StreamReader(tempFile);
             string contentWriter;
@@ -422,7 +422,7 @@ namespace SIL.PublishingSolution
 
             if (projInfo.IsReversalExist)
             {
-                var revFile = Path.Combine(projInfo.ProjectPath, "FlexRev.xhtml");
+                var revFile = Common.PathCombine(projInfo.ProjectPath, "FlexRev.xhtml");
                 if (!File.Exists(revFile))
                 {
                     return false;
@@ -443,7 +443,7 @@ namespace SIL.PublishingSolution
                 cssTree.OutputType = Common.OutputType.XELATEX;
                 cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
                 string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
-                string xeLatexRevesalIndexFile = Path.Combine(projInfo.ProjectPath, fileNameXhtml + ".tex");
+                string xeLatexRevesalIndexFile = Common.PathCombine(projInfo.ProjectPath, fileNameXhtml + ".tex");
                 _reversalIndexTexFileName = xeLatexRevesalIndexFile;
                 StreamWriter xeLatexFile = new StreamWriter(xeLatexRevesalIndexFile);
                 Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
@@ -501,8 +501,8 @@ namespace SIL.PublishingSolution
                     var xelatexPath = XeLaTexInstallation.GetXeLaTexDir();
                     if (!Common.IsUnixOS())
                     {
-                        xelatexPath = Path.Combine(xelatexPath, "bin");
-                        xelatexPath = Path.Combine(xelatexPath, "win32");
+                        xelatexPath = Common.PathCombine(xelatexPath, "bin");
+                        xelatexPath = Common.PathCombine(xelatexPath, "win32");
                     }
                     p2.StartInfo.WorkingDirectory = xelatexPath;
                     p2.StartInfo.FileName = "fc-cache";
@@ -620,7 +620,7 @@ namespace SIL.PublishingSolution
             if (isUnixOs)
             {
                 if (userFolder != null)
-                    pdfFullName = Path.Combine(userFolder, texNameOnly + ".pdf");
+                    pdfFullName = Common.PathCombine(userFolder, texNameOnly + ".pdf");
 
                 if (File.Exists(pdfFullName))
                 {
@@ -691,8 +691,8 @@ namespace SIL.PublishingSolution
         {
             const bool overwrite = true;
             string logName = texNameOnly + ext;
-            string tmpLogFullName = Path.Combine(instPath, logName);
-            string logFullName = Path.Combine(userFolder, logName);
+            string tmpLogFullName = Common.PathCombine(instPath, logName);
+            string logFullName = Common.PathCombine(userFolder, logName);
             if (File.Exists(tmpLogFullName))
                 File.Copy(tmpLogFullName, logFullName, overwrite);
             return logFullName;

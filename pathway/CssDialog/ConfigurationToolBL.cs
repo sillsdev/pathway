@@ -2246,7 +2246,7 @@ namespace SIL.PublishingSolution
             if (!File.Exists(xmlPath))
             {
                 settingPath = Path.GetDirectoryName(Param.SettingPath);
-                xmlPath = Path.Combine(settingPath, "StyleSettings.xml");
+                xmlPath = Common.PathCombine(settingPath, "StyleSettings.xml");
             }
             if (!File.Exists(xmlPath)) return inputType;
 
@@ -2277,7 +2277,7 @@ namespace SIL.PublishingSolution
             if (!File.Exists(allUserXmlPath))
             {
                 string settingPath = Path.GetDirectoryName(Param.SettingPath);
-                string xmlPath = Path.Combine(settingPath, "StyleSettings.xml");
+                string xmlPath = Common.PathCombine(settingPath, "StyleSettings.xml");
                 File.Copy(xmlPath, allUserXmlPath, true);
                 File.Copy(xmlPath.Replace(".xml", ".xsd"), allUserXmlPath.Replace(".xml", ".xsd"), true);
             }
@@ -2953,14 +2953,14 @@ namespace SIL.PublishingSolution
                 XmlAttribute file = xml.Attributes[AttribFile];
                 if (file != null)
                 {
-                    string path = Path.Combine(Path.GetDirectoryName(Param.SettingPath), Path.Combine(GenerateStylesString(), Param.Value["InputType"]));
+                    string path = Common.PathCombine(Path.GetDirectoryName(Param.SettingPath), Common.PathCombine(GenerateStylesString(), Param.Value["InputType"]));
                     if (type != null && type.Value == TypeCustom)
                     {
                         string OutputPath = Path.GetDirectoryName(Path.GetDirectoryName(Param.SettingOutputPath));
-                        path = Path.Combine(OutputPath, Param.Value["InputType"]);
+                        path = Common.PathCombine(OutputPath, Param.Value["InputType"]);
                     }
 
-                    string fromFile = Path.Combine(path, file.Value);
+                    string fromFile = Common.PathCombine(path, file.Value);
                     if (File.Exists(fromFile))
                     {
                         if (!directoryCreated)
@@ -2973,7 +2973,7 @@ namespace SIL.PublishingSolution
                             directoryCreated = true;
                         }
 
-                        string toFile = Path.Combine(folderPath, file.Value);
+                        string toFile = Common.PathCombine(folderPath, file.Value);
                         File.Copy(fromFile, toFile, true);
                     }
                 }
@@ -2988,7 +2988,7 @@ namespace SIL.PublishingSolution
         protected static void BackUpUserSettingFiles(string toPath)
         {
             string projType = Param.Value["InputType"];
-            string sourcePath = Path.Combine(Common.GetAllUserPath(), projType);
+            string sourcePath = Common.PathCombine(Common.GetAllUserPath(), projType);
             if (!Directory.Exists(sourcePath)) return;
             string[] filePaths = Directory.GetFiles(sourcePath);
             foreach (string filePath in filePaths)
@@ -2998,7 +2998,7 @@ namespace SIL.PublishingSolution
                 {
                     if (File.Exists(filePath) && Directory.Exists(toPath))
                     {
-                        File.Copy(filePath, Path.Combine(toPath, fileName));
+                        File.Copy(filePath, Common.PathCombine(toPath, fileName));
                     }
                 }
             }
@@ -3273,7 +3273,7 @@ namespace SIL.PublishingSolution
                     }
                     string userPath = (Param.Value["UserSheetPath"]);
                     string imgFileName = Path.GetFileName(filename);
-                    string toPath = Path.Combine(userPath, imgFileName);
+                    string toPath = Common.PathCombine(userPath, imgFileName);
                     File.Copy(filename, toPath, true);
                     Param.UpdateMobileAtrrib("Icon", toPath, StyleName);
                     cTool.MobileIcon.Image = iconImage;
@@ -3481,12 +3481,12 @@ namespace SIL.PublishingSolution
                         ShowCSSValue();
                         _screenMode = ScreenMode.Edit;
                         string cssMergeFullFileName = Param.StylePath(FileName);
-                        string PsSupportPath = Path.Combine(Common.LeftString(cssMergeFullFileName, "Pathway"),
+                        string PsSupportPath = Common.PathCombine(Common.LeftString(cssMergeFullFileName, "Pathway"),
                                                             "Pathway");
                         string PsSupportPathfrom = Common.GetApplicationPath();
                         string previewFile = _loadType + "Preview.xhtml";
-                        string xhtmlPreviewFilePath = Path.Combine(PsSupportPath, previewFile);
-                        string xhtmlPreviewFile_fromPath = Path.Combine(PsSupportPathfrom, previewFile);
+                        string xhtmlPreviewFilePath = Common.PathCombine(PsSupportPath, previewFile);
+                        string xhtmlPreviewFile_fromPath = Common.PathCombine(PsSupportPathfrom, previewFile);
                         if (!File.Exists(xhtmlPreviewFilePath))
                         {
                             if (File.Exists(xhtmlPreviewFile_fromPath))
@@ -4333,7 +4333,7 @@ namespace SIL.PublishingSolution
             WriteCss();
             string tempfolder = Path.GetTempPath();
             string folderName = Path.GetFileNameWithoutExtension(Path.GetTempFileName());
-            string folderPath = Path.Combine(tempfolder, folderName);
+            string folderPath = Common.PathCombine(tempfolder, folderName);
             bool directoryCreated = CopyCustomStyleToSend(folderPath);
             if (directoryCreated)
             {
@@ -4343,7 +4343,7 @@ namespace SIL.PublishingSolution
                     string projType = GetProjType();
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                     string zipFileName = Path.GetFileNameWithoutExtension(Path.GetTempFileName());
-                    string zipOutput = Path.Combine(path, zipFileName + ".zip");
+                    string zipOutput = Common.PathCombine(path, zipFileName + ".zip");
                     zf.CreateZip(folderPath, zipOutput, 0);
                     const string MailTo = "ToAddress";
                     string MailSubject = projType + " Style Sheets and Setting file";

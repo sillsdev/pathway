@@ -106,9 +106,9 @@ namespace Test
 
             foreach (ODet detail in tests)
             {
-                var fileKey = Path.Combine(detail.File, detail.Part);
+                var fileKey = Common.PathCombine(detail.File, detail.Part);
                 if (!parts.ContainsKey(fileKey))
-                    parts[fileKey] = LoadXml(Path.Combine(outDi.FullName, detail.File), detail.Part);
+                    parts[fileKey] = LoadXml(Common.PathCombine(outDi.FullName, detail.File), detail.Part);
                 var spath = SubstituteVariables(detail.XPath, variables);
                 var xDoc = parts[fileKey];
                 var nsMgr = XmlDocumentNamespaceManager(xDoc);

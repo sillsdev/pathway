@@ -216,10 +216,10 @@ namespace SIL.PublishingSolution
         private void FtpProcessing()
         {
             string dictionaryDirectoryPath =
-                Path.Combine(Path.Combine(Path.Combine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
+                Common.PathCombine(Common.PathCombine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
             //string[] filePaths = Directory.GetFiles(dictionaryDirectoryPath, "*.zip");
-            txtSourceFileLocation.Text = Path.Combine(dictionaryDirectoryPath, "Wordpress\\");
-            string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
+            txtSourceFileLocation.Text = Common.PathCombine(dictionaryDirectoryPath, "Wordpress\\");
+            string webonaryZipFile = Common.PathCombine(dictionaryDirectoryPath, "PathwayWebonary.zip");
             string sourceDirectory = txtSourceFileLocation.Text;
             DirectoryInfo di = new DirectoryInfo(sourceDirectory);
             if (di.Exists)
@@ -227,7 +227,7 @@ namespace SIL.PublishingSolution
 
             if (File.Exists(webonaryZipFile))
             {
-                ZipUtil.UnZipFiles(webonaryZipFile, Path.Combine(dictionaryDirectoryPath, "Wordpress"), "", false);
+                ZipUtil.UnZipFiles(webonaryZipFile, Common.PathCombine(dictionaryDirectoryPath, "Wordpress"), "", false);
             }
             di = new DirectoryInfo(Common.PathCombine(sourceDirectory, "Webonary"));
 
@@ -306,7 +306,7 @@ namespace SIL.PublishingSolution
             {
                 txtTargetFileLocation.Text = txtTargetFileLocation.Text + "/";
             }
-            targetFileLocation = Path.Combine(txtTargetFileLocation.Text, txtWebFtpFldrNme.Text);   
+            targetFileLocation = Common.PathCombine(txtTargetFileLocation.Text, txtWebFtpFldrNme.Text);   
             if (directoryLocalfiles.Length > 0)
             {
                 foreach (string fileName in directoryLocalfiles)
@@ -330,7 +330,7 @@ namespace SIL.PublishingSolution
             foreach (string directoryName in directories)
             {
                 string subDirectory = Common.LeftRemove(directoryName, txtSourceFileLocation.Text);
-                targetFileLocation = Path.Combine(txtTargetFileLocation.Text, subDirectory);
+                targetFileLocation = Common.PathCombine(txtTargetFileLocation.Text, subDirectory);
                 CreateFTPDirectoryToUpload(targetFileLocation, txtUsername.Text, txtPassword.Text);
                 string filePath = txtSourceFileLocation.Text + subDirectory;
                 string[] files;
@@ -585,10 +585,10 @@ namespace SIL.PublishingSolution
             {
                 projInfo.ProjectInputType = "Dictionary";
 
-                string dictionaryDirectoryPath = Path.Combine(Path.Combine(Path.Combine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
+                string dictionaryDirectoryPath = Common.PathCombine(Common.PathCombine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
                 //string[] filePaths = Directory.GetFiles(dictionaryDirectoryPath, "*.zip");
-                txtSourceFileLocation.Text = Path.Combine(dictionaryDirectoryPath, "Wordpress\\");
-                string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
+                txtSourceFileLocation.Text = Common.PathCombine(dictionaryDirectoryPath, "Wordpress\\");
+                string webonaryZipFile = Common.PathCombine(dictionaryDirectoryPath, "PathwayWebonary.zip");
                 long size = 0;
                 if(File.Exists(webonaryZipFile))
                 {
@@ -647,15 +647,15 @@ namespace SIL.PublishingSolution
         private void StartedFileTransferToFTPLocation()
         {
             GetDirectoryFileCount(txtSourceFileLocation.Text);
-            SetPHPConfigFile(Path.Combine(txtSourceFileLocation.Text, txtWebFtpFldrNme.Text));
+            SetPHPConfigFile(Common.PathCombine(txtSourceFileLocation.Text, txtWebFtpFldrNme.Text));
             StartBackgroundWork();
             progressBar.Value = 2;
 
             //Step-3 Automated the PHP wordpress page setup for Administrative username and password
             string getPhpSetupFileNamewithLocation = Common.GetApplicationPath();
-            getPhpSetupFileNamewithLocation = Path.Combine(getPhpSetupFileNamewithLocation, "Wordpress\\setup_wp.php");
-            string movingPhpSetupFileLocation = Path.Combine(txtSourceFileLocation.Text, txtWebFtpFldrNme.Text);
-            movingPhpSetupFileLocation = Path.Combine(movingPhpSetupFileLocation, "wp-admin\\setup_wp.php");
+            getPhpSetupFileNamewithLocation = Common.PathCombine(getPhpSetupFileNamewithLocation, "Wordpress\\setup_wp.php");
+            string movingPhpSetupFileLocation = Common.PathCombine(txtSourceFileLocation.Text, txtWebFtpFldrNme.Text);
+            movingPhpSetupFileLocation = Common.PathCombine(movingPhpSetupFileLocation, "wp-admin\\setup_wp.php");
             File.Copy(getPhpSetupFileNamewithLocation, movingPhpSetupFileLocation, true);
 
             WordPressFileTransfertoFtpUpload();

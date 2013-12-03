@@ -658,18 +658,18 @@ namespace SIL.PublishingSolution
                 }
 
 
-                copyRightFilePath = Path.Combine(copyRightFilePath, logoFileName);
+                copyRightFilePath = Common.PathCombine(copyRightFilePath, logoFileName);
                 if (File.Exists(copyRightFilePath))
                 {
                     if (Common.UnixVersionCheck())
                     {
                         string logoTitleFileName = logoFileName;
-                        logoTitleFileName = Path.Combine(Path.GetTempPath(), logoTitleFileName);
+                        logoTitleFileName = Common.PathCombine(Path.GetTempPath(), logoTitleFileName);
                         if (File.Exists(copyRightFilePath))
                         {
                             File.Copy(copyRightFilePath, logoTitleFileName, true);
-                            File.Copy(copyRightFilePath, Path.Combine(_projectPath, logoFileName), true);
-                            File.Copy(copyRightFilePath, Path.Combine(xeLaTexInstallationPath, logoFileName), true);
+                            File.Copy(copyRightFilePath, Common.PathCombine(_projectPath, logoFileName), true);
+                            File.Copy(copyRightFilePath, Common.PathCombine(xeLaTexInstallationPath, logoFileName), true);
                         }
                     }
                     else
@@ -683,26 +683,26 @@ namespace SIL.PublishingSolution
                                 System.Drawing.Image image1 = System.Drawing.Image.FromFile(copyRightFilePath);
                                 // Save the image in JPEG format.
                                 logoFileName = logoFileName.Replace(".gif", ".jpg");
-                                image1.Save(Path.Combine(Path.GetTempPath(), logoFileName), System.Drawing.Imaging.ImageFormat.Jpeg);
+                                image1.Save(Common.PathCombine(Path.GetTempPath(), logoFileName), System.Drawing.Imaging.ImageFormat.Jpeg);
                             }
                             catch { }
 
-                            if (File.Exists(Path.Combine(Path.GetTempPath(), logoFileName)))
+                            if (File.Exists(Common.PathCombine(Path.GetTempPath(), logoFileName)))
                             {
-                                File.Copy(Path.Combine(Path.GetTempPath(), logoFileName), Path.Combine(_projectPath, logoFileName), true);
-                                File.Copy(Path.Combine(Path.GetTempPath(), logoFileName), Path.Combine(xeLaTexInstallationPath, logoFileName), true);
+                                File.Copy(Common.PathCombine(Path.GetTempPath(), logoFileName), Common.PathCombine(_projectPath, logoFileName), true);
+                                File.Copy(Common.PathCombine(Path.GetTempPath(), logoFileName), Common.PathCombine(xeLaTexInstallationPath, logoFileName), true);
                             }
                         }
                         else
                         {
                             string logoTitleFileName = logoFileName;
-                            logoTitleFileName = Path.Combine(Path.GetTempPath(), logoTitleFileName);
+                            logoTitleFileName = Common.PathCombine(Path.GetTempPath(), logoTitleFileName);
                             if (File.Exists(copyRightFilePath))
                             {
                                 File.Copy(copyRightFilePath, logoTitleFileName, true);
-                                File.Copy(copyRightFilePath, Path.Combine(_projectPath, logoFileName), true);
+                                File.Copy(copyRightFilePath, Common.PathCombine(_projectPath, logoFileName), true);
 
-                                File.Copy(copyRightFilePath, Path.Combine(xeLaTexInstallationPath, logoFileName), true);
+                                File.Copy(copyRightFilePath, Common.PathCombine(xeLaTexInstallationPath, logoFileName), true);
                             }
                         }
                     }

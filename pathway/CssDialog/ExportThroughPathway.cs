@@ -805,7 +805,7 @@ namespace SIL.PublishingSolution
         private static void ProcessSendingHelpImprove()
         {
             string getApplicationPath = Common.GetApplicationPath();
-            string helpImproveCommand = Path.Combine(getApplicationPath, "HelpImprove.exe");
+            string helpImproveCommand = Common.PathCombine(getApplicationPath, "HelpImprove.exe");
             string registryPath = "Software\\SIL\\Pathway";
 
             if (File.Exists(helpImproveCommand))
@@ -1148,7 +1148,7 @@ namespace SIL.PublishingSolution
                     return true;
                 }
 
-                if (File.Exists(Path.Combine(pathwayPath, "ConfigurationTool.exe")))
+                if (File.Exists(Common.PathCombine(pathwayPath, "ConfigurationTool.exe")))
                 {
                     return true;
                 }
@@ -1289,7 +1289,7 @@ namespace SIL.PublishingSolution
                     CoverPageImagePath = filename;
                     //string userPath = (Param.Value["UserSheetPath"]);
                     //string imgFileName = Path.GetFileName(filename);
-                    //string toPath = Path.Combine(userPath, imgFileName);
+                    //string toPath = Common.PathCombine(userPath, imgFileName);
                     //File.Copy(filename, toPath, true);
                     imgCoverImage.Image = iconImage;
                 }
@@ -1343,8 +1343,8 @@ namespace SIL.PublishingSolution
             ddlCopyrightStatement.Enabled = rdoStandardCopyright.Checked;
             txtColophonFile.Enabled = rdoCustomCopyright.Checked;
             btnBrowseColophon.Enabled = rdoCustomCopyright.Checked;
-            var copyrightDir = Path.Combine(Common.GetPSApplicationPath(), "Copyrights");
-            txtColophonFile.Text = Path.Combine(copyrightDir, "SIL_Custom_Template.xhtml");
+            var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+            txtColophonFile.Text = Common.PathCombine(copyrightDir, "SIL_Custom_Template.xhtml");
         }
 
         private void lnkChooseCopyright_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1376,9 +1376,9 @@ namespace SIL.PublishingSolution
                         if (ddlCopyrightStatement.SelectedItem.Equals(value))
                         {
                             // this is our item - set the CopyrightFilename
-                            var copyrightDir = Path.Combine(Common.GetPSApplicationPath(), "Copyrights");
-                            CopyrightPagePath = Path.Combine(copyrightDir, subnode.Attributes["file"].Value);
-                            //CopyrightPagePath = Path.Combine(copyrightDir, "SIL_Custom_Template.xhtml");
+                            var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+                            CopyrightPagePath = Common.PathCombine(copyrightDir, subnode.Attributes["file"].Value);
+                            //CopyrightPagePath = Common.PathCombine(copyrightDir, "SIL_Custom_Template.xhtml");
                         }
                     }
                 }

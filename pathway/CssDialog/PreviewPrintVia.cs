@@ -351,12 +351,12 @@ namespace SIL.PublishingSolution
                     {
                         string FileName = grid.SelectedRows[0].Cells[5].Value.ToString();
                         string cssMergeFullFileName = Param.StylePath(FileName);
-                        string PsSupportPath = Path.Combine(Common.LeftString(cssMergeFullFileName, "Pathway"),
+                        string PsSupportPath = Common.PathCombine(Common.LeftString(cssMergeFullFileName, "Pathway"),
                                                             "Pathway");
                         string PsSupportPathfrom = Common.GetApplicationPath();
                         string previewFile = _loadType + "Preview.xhtml";
-                        string xhtmlPreviewFilePath = Path.Combine(PsSupportPath, previewFile);
-                        string xhtmlPreviewFile_fromPath = Path.Combine(PsSupportPathfrom, previewFile);
+                        string xhtmlPreviewFilePath = Common.PathCombine(PsSupportPath, previewFile);
+                        string xhtmlPreviewFile_fromPath = Common.PathCombine(PsSupportPathfrom, previewFile);
                         if (!File.Exists(xhtmlPreviewFilePath))
                         {
                             if (File.Exists(xhtmlPreviewFile_fromPath))
@@ -425,8 +425,8 @@ namespace SIL.PublishingSolution
         //        string cssFile = Param.StylePath(_cssFile);
         //        pd.ConvertPdftoJpg(cssFile, false);
 
-        //        _previewFileName1 = Path.Combine(Path.GetTempPath(), "Preview.pdf1.jpg");
-        //        _previewFileName2 = Path.Combine(Path.GetTempPath(), "Preview.pdf2.jpg");
+        //        _previewFileName1 = Common.PathCombine(Path.GetTempPath(), "Preview.pdf1.jpg");
+        //        _previewFileName2 = Common.PathCombine(Path.GetTempPath(), "Preview.pdf2.jpg");
         //    }
         //}
 

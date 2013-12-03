@@ -141,7 +141,7 @@ namespace SIL.PublishingSolution
                 var file = Directory.GetFiles(folder[i]);
                 foreach (var s1 in file)
                 {
-                    File.Move(s1, Path.Combine(Path.GetDirectoryName(folder[i]), Path.GetFileName(s1)));
+                    File.Move(s1, Common.PathCombine(Path.GetDirectoryName(folder[i]), Path.GetFileName(s1)));
                 }
                 Directory.Delete(folder[i]);
             }
@@ -220,9 +220,9 @@ namespace SIL.PublishingSolution
         {
             var output = new DictionaryForMIDsStreamWriter(projInfo);
             Debug.Assert(output.Directory != null);
-            var processFullPath = Path.Combine(output.Directory, "go.bat");
+            var processFullPath = Common.PathCombine(output.Directory, "go.bat");
             var DictionaryForMIDsPath = Common.FromRegistry("Dic4Mid");
-            var creatorPath = Path.Combine(DictionaryForMIDsPath, "DfM-Creator");
+            var creatorPath = Common.PathCombine(DictionaryForMIDsPath, "DfM-Creator");
             FolderTree.Copy(creatorPath, output.Directory);
             const string redirectOutputFileName = LogName;
             SubProcess.RedirectOutput = redirectOutputFileName;
@@ -246,7 +246,7 @@ namespace SIL.PublishingSolution
             var date = DateTime.Now.ToString("y.M.d");
             var folderParts = folderName.Split('_');
             var submissionName = string.Format("DictionaryForMIDs_{0}_{1}_{2}.zip", date, folderParts[1], folderParts[2]);
-            var submissionFullName = Path.Combine(output.Directory, submissionName);
+            var submissionFullName = Common.PathCombine(output.Directory, submissionName);
             var zip = new FastZip();
             const bool recurse = true;
             zip.CreateZip(submissionFullName, folder[0], recurse, ".*");

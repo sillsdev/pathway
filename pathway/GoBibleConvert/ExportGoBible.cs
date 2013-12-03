@@ -98,7 +98,7 @@ namespace SIL.PublishingSolution
                 _iconFile = Path.GetFileName(iconFullName);
                 const bool overwrite = true;
                 if (iconDirectory != exportGoBibleInputPath)
-                    File.Copy(iconFullName, Path.Combine(exportGoBibleInputPath, _iconFile), overwrite);
+                    File.Copy(iconFullName, Common.PathCombine(exportGoBibleInputPath, _iconFile), overwrite);
 
                 Param.LoadSettings();
                 Param.SetValue(Param.InputType, "Scripture");
@@ -116,12 +116,12 @@ namespace SIL.PublishingSolution
 
                 string tempGoBibleCreatorPath = GoBibleCreatorTempDirectory(goBibleFullPath);
 
-                string goBibleCreatorPath = Path.Combine(tempGoBibleCreatorPath, "GoBibleCore");
+                string goBibleCreatorPath = Common.PathCombine(tempGoBibleCreatorPath, "GoBibleCore");
                 inProcess.PerformStep();
-                string languageLocationPath = Path.Combine(goBibleFullPath, "User Interface");
-                languageLocationPath = Path.Combine(languageLocationPath, languageSelection);
+                string languageLocationPath = Common.PathCombine(goBibleFullPath, "User Interface");
+                languageLocationPath = Common.PathCombine(languageLocationPath, languageSelection);
                 string[] filePaths = Directory.GetFiles(languageLocationPath, "*.properties");
-                goBibleCreatorPath = Path.Combine(goBibleCreatorPath, "ui.properties");
+                goBibleCreatorPath = Common.PathCombine(goBibleCreatorPath, "ui.properties");
 
                 UIPropertiesCopyToTempFolder(goBibleCreatorPath, filePaths);
 
@@ -131,7 +131,7 @@ namespace SIL.PublishingSolution
                 inProcess.Close();
                 Cursor.Current = myCursor;
                 inProcess.PerformStep();
-                string jarFile = Path.Combine(processFolder, NoSp(GetInfo(Param.Title)) + ".jar");
+                string jarFile = Common.PathCombine(processFolder, NoSp(GetInfo(Param.Title)) + ".jar");
 
                 if (File.Exists(jarFile))
                 {
@@ -192,9 +192,9 @@ namespace SIL.PublishingSolution
 
         private void DeleteTempFiles(string exportGoBibleInputPath)
         {
-            if (File.Exists(Path.Combine(exportGoBibleInputPath, _iconFile)))
+            if (File.Exists(Common.PathCombine(exportGoBibleInputPath, _iconFile)))
             {
-                File.Delete(Path.Combine(exportGoBibleInputPath, _iconFile));
+                File.Delete(Common.PathCombine(exportGoBibleInputPath, _iconFile));
             }
 
             var outputFiles = Directory.GetFiles(processFolder);
@@ -233,7 +233,7 @@ namespace SIL.PublishingSolution
         {
             var goBibleDirectoryName = Path.GetFileNameWithoutExtension(goBibleFullPath);
             var tempFolder = Path.GetTempPath();
-            var folder = Path.Combine(tempFolder, goBibleDirectoryName);
+            var folder = Common.PathCombine(tempFolder, goBibleDirectoryName);
             if (Directory.Exists(folder))
                 Directory.Delete(folder, true);
 
@@ -278,7 +278,7 @@ namespace SIL.PublishingSolution
 
         private void CreateCollectionsTextFile(string exportGoBiblePath)
         {
-            string fileLoc = Path.Combine(exportGoBiblePath, "Collections.txt");
+            string fileLoc = Common.PathCombine(exportGoBiblePath, "Collections.txt");
 
             if (File.Exists(fileLoc))
             {
@@ -310,7 +310,7 @@ namespace SIL.PublishingSolution
                 sw.WriteLine(@"USFM-TitleTag: \id"); // + Common.BookNameTag);
                 sw.WriteLine("Collection: " + GetInfo(Param.Title));
 
-                string sfmFiles = Path.Combine(exportGoBiblePath, "SFM");
+                string sfmFiles = Common.PathCombine(exportGoBiblePath, "SFM");
 
                 if (Directory.Exists(sfmFiles))
                 {
@@ -381,7 +381,7 @@ namespace SIL.PublishingSolution
         {
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
-            var creatorFullPath = Path.Combine(goBibleCreatorPath, Creator);
+            var creatorFullPath = Common.PathCombine(goBibleCreatorPath, Creator);
 
             if (_isLinux)
             {

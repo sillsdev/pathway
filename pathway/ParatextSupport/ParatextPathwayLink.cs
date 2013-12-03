@@ -139,10 +139,10 @@ namespace SIL.PublishingSolution
                 // Get the file name as set on the dialog.
                 m_outputLocationPath = dlg.OutputLocationPath;
 
-                string cssFullPath = Path.Combine(m_outputLocationPath, pubName + ".css");
+                string cssFullPath = Common.PathCombine(m_outputLocationPath, pubName + ".css");
                 StyToCSS styToCss = new StyToCSS();
                 styToCss.ConvertStyToCSS(m_projectName, cssFullPath);
-                string fileName = Path.Combine(m_outputLocationPath, pubName + ".xhtml");
+                string fileName = Common.PathCombine(m_outputLocationPath, pubName + ".xhtml");
 
                 if (File.Exists(fileName))
                 {
@@ -151,7 +151,7 @@ namespace SIL.PublishingSolution
                         " already exists. Overwrite?", fileName), string.Empty,
                         MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
-                        fileName = Path.Combine(m_outputLocationPath, pubName + "-" + DateTime.Now.Second + ".xhtml");
+                        fileName = Common.PathCombine(m_outputLocationPath, pubName + "-" + DateTime.Now.Second + ".xhtml");
                     else if (result == DialogResult.No)
                         return;
                 }
@@ -197,10 +197,10 @@ namespace SIL.PublishingSolution
                 {
                     ExportUsx(usxBooksToExport);
                 }
-                string cssFullPath = Path.Combine(m_outputLocationPath, pubName + ".css");
+                string cssFullPath = Common.PathCombine(m_outputLocationPath, pubName + ".css");
                 StyToCSS styToCss = new StyToCSS();
                 styToCss.ConvertStyToCSS(m_projectName, cssFullPath);
-                string fileName = Path.Combine(m_outputLocationPath, pubName + ".xhtml");
+                string fileName = Common.PathCombine(m_outputLocationPath, pubName + ".xhtml");
 
                 if (File.Exists(fileName))
                 {
@@ -210,7 +210,7 @@ namespace SIL.PublishingSolution
                         MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
-                        fileName = Path.Combine(m_outputLocationPath, pubName + "-" + DateTime.Now.Second + ".xhtml");
+                        fileName = Common.PathCombine(m_outputLocationPath, pubName + "-" + DateTime.Now.Second + ".xhtml");
                     }
                     else if (result == DialogResult.No)
                     {
@@ -240,14 +240,14 @@ namespace SIL.PublishingSolution
         /// <param name="usxBooksToExport"></param>
         private void ExportUsx(List<XmlDocument> usxBooksToExport)
         {
-            var usxDir = Path.Combine(m_outputLocationPath, "USX");
+            var usxDir = Common.PathCombine(m_outputLocationPath, "USX");
             Directory.CreateDirectory(usxDir);
             foreach (XmlDocument xmlDocument in usxBooksToExport)
             {
                 var codeNode = xmlDocument.SelectSingleNode("//@code");
                 Debug.Assert(codeNode != null);
                 var name = codeNode.InnerText + ".usx";
-                var fullName = Path.Combine(usxDir, name);
+                var fullName = Common.PathCombine(usxDir, name);
                 var fw = new StreamWriter(fullName);
                 xmlDocument.Save(fw);
                 fw.Close();
@@ -293,8 +293,8 @@ namespace SIL.PublishingSolution
         {
             if (m_format != "Go Bible")
             {
-                string vrsFileDest = Path.Combine(m_outputLocationPath, "versification.vrs");
-                string ldsFileDest = Path.Combine(m_outputLocationPath, "English.lds");
+                string vrsFileDest = Common.PathCombine(m_outputLocationPath, "versification.vrs");
+                string ldsFileDest = Common.PathCombine(m_outputLocationPath, "English.lds");
 
                 string paratextProjectLocation = string.Empty;
                 object paraTextprojectPath;
@@ -302,8 +302,8 @@ namespace SIL.PublishingSolution
                                                       "Settings_Directory", "", out paraTextprojectPath))
                 {
                     paratextProjectLocation = (string) paraTextprojectPath;
-                    paratextProjectLocation = Path.Combine(paratextProjectLocation, m_projectName);
-                    paratextProjectLocation = Path.Combine(paratextProjectLocation, "gather");
+                    paratextProjectLocation = Common.PathCombine(paratextProjectLocation, m_projectName);
+                    paratextProjectLocation = Common.PathCombine(paratextProjectLocation, "gather");
 
                     string vrsFileName = "eng";
                     string ldsFileName = "*"; //project file name associate file.
@@ -312,7 +312,7 @@ namespace SIL.PublishingSolution
                     {
                         paratextProjectLocation = (string) paraTextprojectPath;
                     }
-                    string ssfFileName = Path.Combine(paratextProjectLocation, Common.databaseName + ".ssf");
+                    string ssfFileName = Common.PathCombine(paratextProjectLocation, Common.databaseName + ".ssf");
                     XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
                     xmlDoc.Load(ssfFileName);
                     string xPath = "//Language";
@@ -322,19 +322,19 @@ namespace SIL.PublishingSolution
                         ldsFileName = list.InnerText;
                     }
 
-                    if (File.Exists(Path.Combine(paratextProjectLocation, vrsFileName + ".vrs")))
-                        File.Copy(Path.Combine(paratextProjectLocation, vrsFileName + ".vrs"), vrsFileDest);
+                    if (File.Exists(Common.PathCombine(paratextProjectLocation, vrsFileName + ".vrs")))
+                        File.Copy(Common.PathCombine(paratextProjectLocation, vrsFileName + ".vrs"), vrsFileDest);
 
-                    if (File.Exists(Path.Combine(paratextProjectLocation, ldsFileName + ".lds")))
-                        File.Copy(Path.Combine(paratextProjectLocation, ldsFileName + ".lds"), ldsFileDest);
+                    if (File.Exists(Common.PathCombine(paratextProjectLocation, ldsFileName + ".lds")))
+                        File.Copy(Common.PathCombine(paratextProjectLocation, ldsFileName + ".lds"), ldsFileDest);
 
                 }
 
-                m_outputLocationPath = Path.Combine(m_outputLocationPath, "USX");
+                m_outputLocationPath = Common.PathCombine(m_outputLocationPath, "USX");
             }
             else
             {
-                m_outputLocationPath = Path.Combine(m_outputLocationPath, "SFM");
+                m_outputLocationPath = Common.PathCombine(m_outputLocationPath, "SFM");
             }
 
             
@@ -399,7 +399,7 @@ namespace SIL.PublishingSolution
                 cleanUsx = cleanUsx.Replace("<usfm>", "<USX>");
                 cleanUsx = cleanUsx.Replace("</usfm>", "</USX>");
                 
-                string bookFileName = Path.Combine(m_outputLocationPath, bookName + ".usx");
+                string bookFileName = Common.PathCombine(m_outputLocationPath, bookName + ".usx");
                 XmlDocument doc = new XmlDocument();
                 XmlTextWriter txtWriter = new XmlTextWriter(bookFileName, null);
                 txtWriter.Formatting = Formatting.Indented;

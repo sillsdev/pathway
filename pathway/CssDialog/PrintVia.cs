@@ -584,7 +584,7 @@ namespace SIL.PublishingSolution
                 string pathwayPath = (fullPathwayPath.StartsWith("file"))
                                          ? fullPathwayPath.Substring(6)
                                          : fullPathwayPath;
-                if (File.Exists(Path.Combine(pathwayPath, "ConfigurationTool.exe")))
+                if (File.Exists(Common.PathCombine(pathwayPath, "ConfigurationTool.exe")))
                 {
                     return true;
                 }

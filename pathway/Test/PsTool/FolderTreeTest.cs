@@ -42,8 +42,8 @@ namespace Test.PsTool
         [Test]
         public void CopyTest()
         {
-            string source = Path.Combine(sourceFolder, "CopyFolder");
-            string destination = Path.Combine(sourceFolder, "DestinationFolder");
+            string source = Common.PathCombine(sourceFolder, "CopyFolder");
+            string destination = Common.PathCombine(sourceFolder, "DestinationFolder");
             
             if(Directory.Exists(destination))
                 Directory.Delete(destination,true);
@@ -52,13 +52,13 @@ namespace Test.PsTool
             Assert.IsTrue(Directory.Exists(destination));
 
             //string[] files = Directory.GetFiles(destination);
-            string path1 = Path.Combine(Path.Combine(destination, "Folder1"),"New1.txt");
+            string path1 = Common.PathCombine(Common.PathCombine(destination, "Folder1"),"New1.txt");
             Assert.IsTrue(File.Exists(path1));
 
-            path1 = Path.Combine(Path.Combine(destination, "Folder2"), "New1.txt");
+            path1 = Common.PathCombine(Common.PathCombine(destination, "Folder2"), "New1.txt");
             Assert.IsTrue(File.Exists(path1));
 
-            path1 = Path.Combine(Path.Combine(destination, "Folder2"), "New2.txt");
+            path1 = Common.PathCombine(Common.PathCombine(destination, "Folder2"), "New2.txt");
             Assert.IsTrue(File.Exists(path1));
 
         }

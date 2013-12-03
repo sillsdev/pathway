@@ -112,7 +112,7 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
 
                 var resultName = output + (otFlag ? ".ont" : ".nt");
-                var resultFullName = Path.Combine(exportTheWordInputPath, resultName);
+                var resultFullName = Common.PathCombine(exportTheWordInputPath, resultName);
                 ProcessAllBooks(resultFullName, otFlag, otBooks, ntBooks, codeNames, xsltArgs, inProcess);
 
                 string theWordFullPath = Common.FromRegistry("TheWord");
@@ -120,7 +120,7 @@ namespace SIL.PublishingSolution
                 xsltArgs.AddParam("refPref", "", "b");
                 inProcess.PerformStep();
 
-                var mySwordFullName = Path.Combine(tempTheWordCreatorPath, resultName);
+                var mySwordFullName = Common.PathCombine(tempTheWordCreatorPath, resultName);
                 ProcessAllBooks(mySwordFullName, otFlag, otBooks, ntBooks, codeNames, xsltArgs, inProcess);
 
                 var mySwordResult = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
@@ -176,7 +176,7 @@ namespace SIL.PublishingSolution
             if (File.Exists(resultFullName))
             {
                 var appData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-                var theWordFolder = Path.Combine(Path.Combine(appData, "The Word"), "Bibles");
+                var theWordFolder = Common.PathCombine(Common.PathCombine(appData, "The Word"), "Bibles");
                 if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.TheWordKey, "RegisteredLocation", "",
                                                       out _theWorProgPath))
                 {
@@ -252,7 +252,7 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
             if (dialogResult == DialogResult.Yes)
             {
                 const bool overwrite = true;
-                File.Copy(resultFullName, Path.Combine(theWordFolder, resultName), overwrite);
+                File.Copy(resultFullName, Common.PathCombine(theWordFolder, resultName), overwrite);
                 Process.Start((string) _theWorProgPath);
             }
             else if (dialogResult == DialogResult.No)
@@ -398,13 +398,13 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
 
         private static string GetBookNamesUri()
         {
-            var myProj = Path.Combine((string) ParatextData, GetSsfValue("//Name"));
-            return "file:///" + Path.Combine(myProj, "BookNames.xml");
+            var myProj = Common.PathCombine((string) ParatextData, GetSsfValue("//Name"));
+            return "file:///" + Common.PathCombine(myProj, "BookNames.xml");
         }
 
         private static string UsxDir(string exportTheWordInputPath)
         {
-            var usxDir = Path.Combine(exportTheWordInputPath, "USX");
+            var usxDir = Common.PathCombine(exportTheWordInputPath, "USX");
             if (!Directory.Exists(usxDir))
             {
                 throw new FileNotFoundException("No USX folder");
@@ -417,12 +417,12 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
             var theWordDirectoryName = Path.GetFileNameWithoutExtension(theWordFullPath);
             Debug.Assert(theWordDirectoryName != null);
             var tempFolder = Path.GetTempPath();
-            var folder = Path.Combine(tempFolder, theWordDirectoryName);
+            var folder = Common.PathCombine(tempFolder, theWordDirectoryName);
             if (Directory.Exists(folder))
                 Directory.Delete(folder, true);
 
             CopyTheWordFolderToTemp(theWordFullPath, folder);
-            FolderTree.Copy(Path.Combine(folder, Directory.Exists(@"C:\Program Files (x86)") ? "x64" : "x32"), folder);
+            FolderTree.Copy(Common.PathCombine(folder, Directory.Exists(@"C:\Program Files (x86)") ? "x64" : "x32"), folder);
             return folder;
         }
 
@@ -452,7 +452,7 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
             {
                 var mySwordName = Path.GetFileName(mySwordFiles[0]);
                 Debug.Assert(mySwordName != null);
-                mySwordResult = Path.Combine(exportTheWordInputPath, mySwordName);
+                mySwordResult = Common.PathCombine(exportTheWordInputPath, mySwordName);
                 File.Copy(mySwordFiles[0], mySwordResult);
             }
             return mySwordResult;
@@ -501,7 +501,7 @@ about={2} \
         private string GetFormat(string thewordformatTxt, string format)
         {
             var folder = Common.GetAllUserPath();
-            var fullPath = Path.Combine(Path.Combine(folder, "Scripture"), thewordformatTxt);
+            var fullPath = Common.PathCombine(Common.PathCombine(folder, "Scripture"), thewordformatTxt);
             if (File.Exists(fullPath))
             {
                 return FileData.Get(fullPath);
