@@ -1195,7 +1195,10 @@ namespace SIL.PublishingSolution
 
                 if (_isPreviousGlossary)
                 {
-                    if (content.IndexOf(',') != 0)
+                    if (content.IndexOf(',') == 0 || content.IndexOf('.') == 0 || content.IndexOf(';') == 0)
+                    {
+                    }
+                    else
                     {
                         content = " " + content.TrimStart();
                     }
