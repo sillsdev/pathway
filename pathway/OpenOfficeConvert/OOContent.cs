@@ -177,6 +177,7 @@ namespace SIL.PublishingSolution
         private string firstRevHeadWord = string.Empty;
         Dictionary<string, string> FirstDataOnEntry = new Dictionary<string, string>();
         private int _guidewordLength;
+        private bool _isPreviousGlossary;//3719
         #endregion
 
         #region Public Variable
@@ -1141,10 +1142,11 @@ namespace SIL.PublishingSolution
                 {
                     content = " " + content.TrimStart();
                 }
-                else if (_allCharacter.Peek().ToLower().IndexOf("seeinglossary") == 0)//TD-3665
-                {
-                    content = content.TrimEnd() + " ";
-                }
+                //else if (_allCharacter.Peek().ToLower().IndexOf("seeinglossary") == 0)//TD-3665
+                //{
+                //    //content = content.TrimEnd() + " ";
+                //    _isPreviousGlossary = true;
+                //}
             }
             return content;
         }
@@ -1190,6 +1192,21 @@ namespace SIL.PublishingSolution
                 }
 
                 content = SignificantSpace(content);
+
+                if (_isPreviousGlossary)
+                {
+                    if (content.IndexOf(',') != 0)
+                    {
+                        content = " " + content.TrimStart();
+                    }
+                    _isPreviousGlossary = false;
+                }
+
+                if (_classNameWithLang.ToLower().IndexOf("seeinglossary") == 0)
+                {
+                    _isPreviousGlossary = true;
+                }
+                
                 if (_imageClass.Length > 0)
                 {
                     //if (!_imageParaForCaption)
