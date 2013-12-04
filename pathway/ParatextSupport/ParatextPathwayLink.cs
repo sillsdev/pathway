@@ -52,7 +52,10 @@ namespace SIL.PublishingSolution
             object projObj;
             if (m_xslParams.TryGetValue("projName", out projObj))
                 m_projectName = (string)projObj;
-            m_xslParams.Add("langInfo", Common.ParaTextDcLanguage(databaseName));
+            if (!m_xslParams.ContainsKey("langInfo"))
+            {
+                m_xslParams.Add("langInfo", Common.ParaTextDcLanguage(databaseName));
+            }
             LoadStyleSheets();
         }
 

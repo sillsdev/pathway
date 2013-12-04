@@ -13,9 +13,12 @@
 // ---------------------------------------------------------------------------------------------
 using System;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Reflection;
+using System.Xml.Xsl;
+using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Win32;
 using SIL.Tool;
 using System.Collections.Generic;
@@ -66,14 +69,7 @@ namespace SIL.PublishingSolution
                             break;
                         case "--files":
                         case "-f":
-                            // store the files in our internal list for now 
-                            // (single filenames and * will end up as a single element in the list)
-                            while (args[i].EndsWith(","))
-                            {
-                                files.Add(args[i].Substring(0, args[i].Length - 1));
-                                i++;
-                            }
-                            files.Add(args[i++]);
+                            i = CaptureFileList(args, i, files);
                             break;
                         case "--inputformat":
                         case "-if":
@@ -132,11 +128,39 @@ namespace SIL.PublishingSolution
                             Environment.Exit(0);
                             break;
                         default:
+                            i = CaptureFileList(args, --i, files);
+                            if (files.Count > 0)
+                            {
+                                var lcName = files[0].ToLower();
+                                if (lcName.EndsWith(".zip"))
+                                {
+                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.PTBUNDLE, projectInfo, lcName);
+                                    break;
+                                }
+                                if (lcName.EndsWith(".xhtml"))
+                                {
+                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.XHTML, projectInfo, lcName, "Dictionary");
+                                    break;
+                                }
+                                if (lcName.EndsWith(".usx"))
+                                {
+                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USX, projectInfo, lcName);
+                                    break;
+                                }
+                                if (lcName.EndsWith(".usfm") || lcName.EndsWith(".sfm"))
+                                {
+                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USFM, projectInfo, lcName);
+                                    break;
+                                }
+                            }
                             Usage();
                             throw new ArgumentException("Invalid Command Line Argument: " + args[i]);
                     }
                 }
-
+                if (string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) && files.Count > 0)
+                {
+                    projectInfo.DefaultXhtmlFileWithPath = files[0];
+                }
                 if (!string.IsNullOrEmpty(projectInfo.ProjectPath))
                 {
                     if (!string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) && !Path.IsPathRooted(projectInfo.DefaultXhtmlFileWithPath))
@@ -189,6 +213,56 @@ namespace SIL.PublishingSolution
                 // run headless from the command line
                 Common.Testing = true;
                 //_projectInfo.ProgressBar = null;
+                if (inFormat == InputFormat.PTBUNDLE)
+                {
+                    var zf = new FastZip();
+                    zf.ExtractZip(files[0], projectInfo.ProjectPath, ".*");
+                    var metadata = Common.DeclareXMLDocument(false);
+                    metadata.Load(Common.PathCombine(projectInfo.ProjectPath, "metadata.xml"));
+                    var titleNode = metadata.SelectSingleNode("//bookList[@id='default']/name");
+                    Param.UpdateTitleMetadataValue(Param.Title, titleNode.InnerText, false);
+                    var descriptionNode = metadata.SelectSingleNode("//bookList[@id='default']//range");
+                    Param.UpdateMetadataValue(Param.Description, descriptionNode.InnerText);
+                    var rightsHolderNode = metadata.SelectSingleNode("//rightsHolder");
+                    Param.UpdateMetadataValue(Param.Publisher, rightsHolderNode.InnerText);
+                    var copyrightNode = metadata.SelectSingleNode("//statement");
+                    Param.UpdateMetadataValue(Param.CopyrightHolder, copyrightNode.InnerText);
+                    var bookNodes = metadata.SelectNodes("//bookList[@id='default']//book");
+                    var usxFolder = Common.PathCombine(projectInfo.ProjectPath, "USX");
+                    var xmlText = new StringBuilder(@"<usx version=""2.0"">");
+                    var oneBook = Common.DeclareXMLDocument(false);
+                    foreach (XmlElement bookNode in bookNodes)
+                    {
+                        oneBook.Load(Common.PathCombine(usxFolder, bookNode.SelectSingleNode("@code").InnerText + ".usx"));
+                        xmlText.Append(oneBook.DocumentElement.InnerXml);
+                        oneBook.RemoveAll();
+                    }
+                    xmlText.Append(@"</usx>" + "\r\n");
+                    var fileName = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".xhtml");
+                    var databaseName = metadata.SelectSingleNode("//identification/abbreviation");
+                    var linkParam = new Dictionary<string, object>();
+                    linkParam["dateTime"] = DateTime.Now.ToShortDateString();
+                    linkParam["user"] = "ukn";
+                    var wsNode = metadata.SelectSingleNode("//language/iso");
+                    linkParam["ws"] = wsNode.InnerText;
+                    linkParam["userWs"] = wsNode.InnerText;
+                    var nameNode = metadata.SelectSingleNode("//identification/description");
+                    linkParam["projName"] = nameNode.InnerText;
+                    var langNameNode = metadata.SelectSingleNode("//language/name");
+                    linkParam["langInfo"] = string.Format("{0}:{1}", wsNode.InnerText, langNameNode.InnerText);
+                    var ppl = new ParatextPathwayLink(databaseName.InnerText, linkParam);
+                    ppl.ConvertUsxToPathwayXhtmlFile(xmlText.ToString(), fileName);
+                    projectInfo.DefaultXhtmlFileWithPath = fileName;
+                    var ptxStyle2Css = new XslCompiledTransform();
+                    ptxStyle2Css.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                        "PathwayB.ptx2css.xsl")));
+                    projectInfo.DefaultCssFileWithPath = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".css");
+                    var writer = new XmlTextWriter(projectInfo.DefaultCssFileWithPath, Encoding.UTF8);
+                    ptxStyle2Css.Transform(Common.PathCombine(projectInfo.ProjectPath, "styles.xml"), null, writer);
+                    writer.Close();
+                    metadata.RemoveAll();
+                    inFormat = InputFormat.XHTML;
+                }
                 if (inFormat == InputFormat.USFM)
                 {
                     // convert from USFM to xhtml
@@ -230,7 +304,10 @@ namespace SIL.PublishingSolution
                     }
                     else if (projectInfo.ProjectInputType == "Scripture")
                     {
-                        projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, files[0]);
+                        if (projectInfo.DefaultXhtmlFileWithPath == null)
+                        {
+                            projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, files[0]);
+                        }
                     }
                 }
 
@@ -263,7 +340,7 @@ namespace SIL.PublishingSolution
                     Param.Write();
                 }
 
-                var tpe = new PsExport { Destination = exportType, DataType = projectInfo.ProjectInputType };
+                var tpe = new PsExport { Destination = Param.PrintVia, DataType = projectInfo.ProjectInputType };
                 tpe.ProgressBar = null;
                 tpe.Export(projectInfo.DefaultXhtmlFileWithPath);
 
@@ -290,6 +367,33 @@ namespace SIL.PublishingSolution
                 Environment.Exit(-1);
             }
             Environment.Exit(0);
+        }
+
+        private static InputFormat SetDefaultsBasedOnInputFormat(InputFormat inFormat, PublicationInformation projectInfo, string lcName)
+        {
+            return SetDefaultsBasedOnInputFormat(inFormat, projectInfo, lcName, "Scripture");
+        }
+        private static InputFormat SetDefaultsBasedOnInputFormat(InputFormat inFormat, PublicationInformation projectInfo, string lcName, string inputType)
+        {
+            if (string.IsNullOrEmpty(projectInfo.ProjectPath))
+            {
+                projectInfo.ProjectPath = Path.GetDirectoryName(lcName);
+            }
+            projectInfo.ProjectInputType = inputType;
+            return inFormat;
+        }
+
+        private static int CaptureFileList(string[] args, int i, List<string> files)
+        {
+// store the files in our internal list for now 
+            // (single filenames and * will end up as a single element in the list)
+            while (args[i].EndsWith(","))
+            {
+                files.Add(args[i].Substring(0, args[i].Length - 1));
+                i++;
+            }
+            files.Add(args[i++]);
+            return i;
         }
 
         private static void Usage()
