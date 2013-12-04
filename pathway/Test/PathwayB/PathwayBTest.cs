@@ -288,6 +288,11 @@ namespace Test
             {
                 File.Delete(file);
             }
+            var settingsFolder = Common.PathCombine(Common.GetAllUserPath(), "Pathway");
+            if (Directory.Exists(settingsFolder))
+            {
+                Directory.Delete(settingsFolder,true);
+            }
             // make a copy of the xhtml and CSS files
             File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "main.xhtml"), Common.PathCombine(_outputPath, "main.xhtml"), true);
             File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "FlexRev.xhtml"), Common.PathCombine(_outputPath, "FlexRev.xhtml"), true);
