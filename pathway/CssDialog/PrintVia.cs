@@ -421,7 +421,11 @@ namespace SIL.PublishingSolution
             try
             {
                 Directory.CreateDirectory(txtSaveInFolder.Text);
-                Directory.Delete(txtSaveInFolder.Text);
+                if (Directory.Exists(txtSaveInFolder.Text))
+                {
+                    DirectoryInfo di = new DirectoryInfo(txtSaveInFolder.Text);
+                    Common.CleanDirectory(di);
+                }
                 BtnOk.Enabled = false; 
             }
             catch (Exception)

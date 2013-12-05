@@ -677,7 +677,11 @@ namespace SIL.PublishingSolution
                             {
                                 return;
                             }
-                            Directory.Delete(_projectInfo.FullPath, true);  // Recursive Delete
+                            if (Directory.Exists(_projectInfo.FullPath))
+                            {
+                                DirectoryInfo di = new DirectoryInfo(_projectInfo.FullPath);
+                                Common.CleanDirectory(di);
+                            }
                         }
                         else if (fileType == Common.FileType.File || fileType == Common.FileType.FileExcluded)
                         {

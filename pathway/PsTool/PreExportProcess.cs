@@ -1943,7 +1943,8 @@ namespace SIL.Tool
             {
                 try
                 {
-                    Directory.Delete(tempFolder, true);
+                    DirectoryInfo di = new DirectoryInfo(tempFolder);
+                    Common.CleanDirectory(di);
                 }
                 catch
                 {
@@ -2153,17 +2154,6 @@ namespace SIL.Tool
 
         private string OpenFile()
         {
-            //string tempFolder = Common.PathCombine(Path.GetTempPath(), "IDPreprocess");
-            //if (Directory.Exists(tempFolder))
-            //{
-            //    Directory.Delete(tempFolder, true);
-            //}
-            //Directory.CreateDirectory(tempFolder);
-
-            //string OutputFile = Common.PathCombine(tempFolder, Path.GetFileName(_xhtmlFileNameWithPath));
-            ////string OutputFile = _xhtmlFileNameWithPath;
-            //File.Copy(Common.DirectoryPathReplace(_xhtmlFileNameWithPath), OutputFile, true);
-
             string OutputFile = _xhtmlFileNameWithPath;
             var reader = new StreamReader(OutputFile, Encoding.UTF8);
             _fileContent.Remove(0, _fileContent.Length);
@@ -3030,7 +3020,9 @@ namespace SIL.Tool
                 if (fileNameWithoutExtension != null)
                 {
                     string fileName = fileNameWithoutExtension.ToLower();
-                    if (fileName == "flexrev" || fileName.IndexOf("preserve") == 0)
+                    //if (fileName == "flexrev" || fileName.IndexOf("preserve") == 0)
+                    //    return;
+                    if (fileName != "main" && fileName != "main1")
                         return;
                 }
 
@@ -3088,45 +3080,51 @@ namespace SIL.Tool
 
         public void GetReferenceList(string xhtmlFileNameWithPath, List<string> sourceList, List<string> targetList)
         {
-
             XmlTextReader _reader = Common.DeclareXmlTextReader(xhtmlFileNameWithPath, true);
-            while (_reader.Read())
+            try
             {
-                if (_reader.NodeType == XmlNodeType.Element)
+                while (_reader.Read())
                 {
-                    // bool found = Regex.IsMatch(_reader.ToString(), "<a\\shref.*?>");
-                    string st;
-                    if (_reader.Name == "a")
+                    if (_reader.NodeType == XmlNodeType.Element)
                     {
-                        string href = _reader.GetAttribute("href");
-                        if (href != null)
+                        // bool found = Regex.IsMatch(_reader.ToString(), "<a\\shref.*?>");
+                        string st;
+                        if (_reader.Name == "a")
                         {
-                            st = href.Replace("#", "").ToLower();
-                            if (sourceList.Contains(st)) continue;
-                            sourceList.Add(st);
-                            continue;
+                            string href = _reader.GetAttribute("href");
+                            if (href != null)
+                            {
+                                st = href.Replace("#", "").ToLower();
+                                if (sourceList.Contains(st)) continue;
+                                sourceList.Add(st);
+                                continue;
+                            }
                         }
-                    }
-                    if (_reader.Name == "div" || _reader.Name == "span" || _reader.Name == "a")
-                    {
-
-                        string id = _reader.GetAttribute("id");
-                        if (id != null)
+                        if (_reader.Name == "div" || _reader.Name == "span" || _reader.Name == "a")
                         {
-                            if (targetList.Contains(id.ToLower())) continue;
-                            targetList.Add(id.ToLower());
-                            continue;
-                        }
 
-                        string name = _reader.GetAttribute("name");
-                        if (name != null)
-                        {
-                            if (targetList.Contains(name.ToLower())) continue;
-                            targetList.Add(name.ToLower());
-                            continue;
+                            string id = _reader.GetAttribute("id");
+                            if (id != null)
+                            {
+                                if (targetList.Contains(id.ToLower())) continue;
+                                targetList.Add(id.ToLower());
+                                continue;
+                            }
+
+                            string name = _reader.GetAttribute("name");
+                            if (name != null)
+                            {
+                                if (targetList.Contains(name.ToLower())) continue;
+                                targetList.Add(name.ToLower());
+                                continue;
+                            }
                         }
                     }
                 }
+            }
+            catch
+            {
+                Console.WriteLine("GetReferenceList");
             }
             _reader.Close();
         }
@@ -3335,12 +3333,12 @@ namespace SIL.Tool
             for (int i = 0; i < verseNodeList.Count; i++)
             {
                 XmlNode nextNode = verseNodeList[i].NextSibling;
-                if(nextNode == null) continue;
-                if(nextNode.OuterXml.IndexOf("span") == -1)
+                if (nextNode == null) continue;
+                if (nextNode.OuterXml.IndexOf("span") == -1)
                 {
                     nextNode = nextNode.NextSibling;
                 }
-                verseNodeList[i].InnerText = verseNodeList[i].InnerText.Trim() +  " ";
+                verseNodeList[i].InnerText = verseNodeList[i].InnerText.Trim() + " ";
                 nextNode.InnerXml = verseNodeList[i].OuterXml + nextNode.InnerXml;
                 nextNode.ParentNode.RemoveChild(verseNodeList[i]);
             }
@@ -3367,7 +3365,7 @@ namespace SIL.Tool
                 {
                     SectionNodeList[i].InnerXml = SectionNodeList[i].InnerXml.Replace(" // ", " <br/>");
                 }
-                
+
             }
             xDoc.Save(fileName);
         }
@@ -3379,33 +3377,33 @@ namespace SIL.Tool
         /// <param name="mergedCSS"> </param>
         public void RemoveVerseNumberOne(string fileName, string mergedCSS)
         {
-               if (!File.Exists(fileName)) return;
-                XmlDocument xDoc = Common.DeclareXMLDocument(true);
-                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                xDoc.Load(fileName);
-                string xPath = "//xhtml:span[@class='Chapter_Number']";
-                XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
-                if (SectionNodeList == null) return;
-                for (int i = 0; i < SectionNodeList.Count; i++)
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            string xPath = "//xhtml:span[@class='Chapter_Number']";
+            XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if (SectionNodeList == null) return;
+            for (int i = 0; i < SectionNodeList.Count; i++)
+            {
+                XmlNode paraNode = SectionNodeList[i].ParentNode;
+                xPath = ".//xhtml:span[@class='Verse_Number']";
+                XmlNodeList verseNodeList = paraNode.SelectNodes(xPath, namespaceManager);
+                if (verseNodeList == null) return;
+                for (int j = 0; j < verseNodeList.Count; j++)
                 {
-                    XmlNode paraNode = SectionNodeList[i].ParentNode;
-                    xPath = ".//xhtml:span[@class='Verse_Number']";
-                    XmlNodeList verseNodeList = paraNode.SelectNodes(xPath, namespaceManager);
-                    if (verseNodeList == null) return;
-                    for (int j = 0; j < verseNodeList.Count; j++)
-                    {
-                        verseNodeList[j].InnerText = "";
-                        break;
-                    }
+                    verseNodeList[j].InnerText = "";
+                    break;
                 }
-                xDoc.Save(fileName);
+            }
+            xDoc.Save(fileName);
         }
 
         //SetNonBreakInVerseNumberSetNonBreakInVerseNumber
 
         public string RemoveTextIndent(string fileName)
-        {            
+        {
             string fileNameExtension = Path.GetExtension(fileName);
             string newFileName = fileName.Replace(fileNameExtension, "1" + fileNameExtension);
             string line;
@@ -3418,7 +3416,7 @@ namespace SIL.Tool
                 if (isPicture || line.Contains(".picture"))
                 {
                     isPicture = true;
-                    
+
                     if (!line.Contains("text-indent"))
                     {
                         write.WriteLine(line);
@@ -3847,9 +3845,9 @@ namespace SIL.Tool
                 tw.WriteLine("}");
                 //if (IsPictureColumnWidthChange())
                 //{
-                    tw.WriteLine(".pictureColumn {");
-                    tw.WriteLine("width: 99%;");
-                    tw.WriteLine("}");
+                tw.WriteLine(".pictureColumn {");
+                tw.WriteLine("width: 99%;");
+                tw.WriteLine("}");
                 //}
             }
             tw.Close();
@@ -3859,6 +3857,7 @@ namespace SIL.Tool
         {
             //div[@class='entry']/div[2]/img
             if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
+            if (_projInfo.SplitFileByLetter != null && _projInfo.SplitFileByLetter.ToLower() == "true") return;
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
@@ -3905,7 +3904,7 @@ namespace SIL.Tool
             //        }
             //    }
             //}
-            
+
             xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
         }
 

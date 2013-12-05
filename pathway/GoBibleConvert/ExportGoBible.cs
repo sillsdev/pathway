@@ -235,8 +235,10 @@ namespace SIL.PublishingSolution
             var tempFolder = Path.GetTempPath();
             var folder = Common.PathCombine(tempFolder, goBibleDirectoryName);
             if (Directory.Exists(folder))
-                Directory.Delete(folder, true);
-
+            {
+                DirectoryInfo di = new DirectoryInfo(folder);
+                Common.CleanDirectory(di);
+            }
             CopyGoBibleCreatorFolderToTemp(goBibleFullPath, folder);
 
             return folder;

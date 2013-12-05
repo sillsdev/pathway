@@ -93,7 +93,8 @@ namespace TestBed
             designerPath = TxtOutput.Text;
             if (Directory.Exists(designerPath))
             {
-                Directory.Delete(designerPath, true);
+                DirectoryInfo di = new DirectoryInfo(designerPath);
+                Common.CleanDirectory(di);
             }
             Directory.CreateDirectory(designerPath);
             PutAccessibleName(mypath);

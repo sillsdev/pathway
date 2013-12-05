@@ -144,6 +144,7 @@ namespace SIL.PublishingSolution
         protected string _includeFootnoteCaller;
         protected string _includeXRefCaller;
         protected bool _hideVerseNumberOne;
+        protected bool _splitFileByLetter = false;
 
         #endregion
 
@@ -579,6 +580,20 @@ namespace SIL.PublishingSolution
             }
         }
 
+        public bool SplitFileByLetter
+        {
+             get
+            {
+                string task = "@page";
+                string key = "-ps-split-file-by-letter";
+                if (_cssClass.ContainsKey("@page") && _cssClass[task].ContainsKey(key))
+                {
+                    return Convert.ToBoolean(_cssClass["@page"][key]);
+                }
+                return false;
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -972,6 +987,7 @@ namespace SIL.PublishingSolution
                         value["margin-left"] = cTool.TxtPageInside.Text;
                         value["-ps-fileproduce"] = "\"" + cTool.DdlFileProduceDict.Text + "\"";
                         value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
+                        value["-ps-split-file-by-letter"] = "\"" + _splitFileByLetter + "\"";
                         if (inputTypeBL.ToLower() == "scripture")
                         {
                             value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
@@ -1129,6 +1145,7 @@ namespace SIL.PublishingSolution
             cTool.DdlJustified.SelectedItem = JustifyUI;
             cTool.DdlPagePageSize.SelectedItem = PageSize;
             cTool.DdlRunningHead.SelectedItem = RunningHeader;
+            cTool.ChkSplitFileByLetter.Checked = SplitFileByLetter;
 
             string pageType;
             pageType = GetDdlRunningHead();
@@ -2967,7 +2984,8 @@ namespace SIL.PublishingSolution
                         {
                             if (Directory.Exists(folderPath))
                             {
-                                Directory.Delete(folderPath);
+                                DirectoryInfo di = new DirectoryInfo(folderPath);
+                                Common.CleanDirectory(di);
                             }
                             Directory.CreateDirectory(folderPath);
                             directoryCreated = true;
@@ -3984,6 +4002,15 @@ namespace SIL.PublishingSolution
                 if (cTool.ChkIncludeCusFnCaller.Checked == false)
                     cTool.TxtFnCallerSymbol.Text = "";
                 _includeFootnoteCaller = cTool.TxtFnCallerSymbol.Text;
+            }
+            catch { }
+        }
+
+        public void chkSplitFileByLetter_CheckStateChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _splitFileByLetter = cTool.ChkSplitFileByLetter.Checked;
             }
             catch { }
         }

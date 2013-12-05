@@ -644,6 +644,7 @@ namespace SIL.PublishingSolution
                 case "-ps-hide-space-versenumber":
                 case "prince-hyphenate-patterns":
                 case "guideword-length":
+                case "-ps-split-file-by-letter":
                     _cssProperty[styleAttributeInfo.Name] = value;
                     break;
 

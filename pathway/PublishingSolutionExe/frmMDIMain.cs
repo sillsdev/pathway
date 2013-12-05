@@ -54,7 +54,7 @@ namespace SIL.PublishingSolution
         public frmMDIParent()
         {
             InitializeComponent();
-           
+
         }
         #endregion
 
@@ -67,7 +67,7 @@ namespace SIL.PublishingSolution
         private void frmMDIParent_Load(object sender, EventArgs e)
         {
             Common.fromPlugin = false;
-            ExcerptPreview_Click(sender,e);
+            ExcerptPreview_Click(sender, e);
             try
             {
                 SettingsValidation(Param.SettingPath);
@@ -78,25 +78,25 @@ namespace SIL.PublishingSolution
             {
                 MessageBox.Show(string.Format(err.ToString(), err.FullFilePath), "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
             Param.SetFontNameSize(); // Global Font Name and Size for all UI Forms
 
             if (Param.Value.Count > 0)
             {
-//                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-//                {
-//                    //this.Icon = new Icon("Graphic/BOOK.ico");
-//                }
-//                else
-//                {
-//                    using (MemoryStream memoryStream = new MemoryStream())
-//                    {
-////                        var image = Image.FromFile("Graphic/book.png");
-////                        image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Icon);
-////                        memoryStream.Position = 0;
-////                        this.Icon = new Icon(memoryStream);
-//                    }
-//                }
+                //                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                //                {
+                //                    //this.Icon = new Icon("Graphic/BOOK.ico");
+                //                }
+                //                else
+                //                {
+                //                    using (MemoryStream memoryStream = new MemoryStream())
+                //                    {
+                ////                        var image = Image.FromFile("Graphic/book.png");
+                ////                        image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Icon);
+                ////                        memoryStream.Position = 0;
+                ////                        this.Icon = new Icon(memoryStream);
+                //                    }
+                //                }
                 JW_Registry.RootKey = @"SOFTWARE\The Seed Company\Dictionary Express!";
                 LocDB.SetAppTitle();
                 LocDB.BaseName = "PsLocalization.xml";
@@ -150,7 +150,7 @@ namespace SIL.PublishingSolution
 
             if (currentRole.Length == 0)
                 currentRole = "Output User";
-            
+
             if (roles.Count <= 0 && roleIcon.Count <= 0)
             {
                 roleIcon.Add("Graphic/user.png");
@@ -164,13 +164,13 @@ namespace SIL.PublishingSolution
                 ImageList imageList = new ImageList { ImageSize = new Size(32, 32) };
                 foreach (var iconName in roleIcon)
                 {
-					var icon = new Bitmap(Common.FromRegistry(iconName));
+                    var icon = new Bitmap(Common.FromRegistry(iconName));
                     imageList.Images.Add(icon);
                 }
             }
             catch
             {
-            } 
+            }
             menuRole.DropDownItems.Clear();
             for (int i = 0; i < roleIcon.Count; i++)
             {
@@ -189,12 +189,15 @@ namespace SIL.PublishingSolution
         {
             if (Control.ModifierKeys == Keys.Shift)
             {
-                string[] projType = new[] {"Dictionary", "Scripture"};
+                string[] projType = new[] { "Dictionary", "Scripture" };
                 foreach (string pType in projType)
                 {
                     string settingsPath = Common.PathCombine(Param.Value["OutputPath"].Replace('/', Path.DirectorySeparatorChar), pType);
                     if (Directory.Exists(settingsPath))
-                        Directory.Delete(settingsPath, true);
+                    {
+                        DirectoryInfo di = new DirectoryInfo(settingsPath);
+                        Common.CleanDirectory(di);
+                    }
                 }
             }
         }
@@ -257,7 +260,7 @@ namespace SIL.PublishingSolution
         {
             openToolStripMenuItem_Click(sender, e);
         }
-        
+
         /// <summary>
         /// Mail reply button tool strip event
         /// </summary>
@@ -309,7 +312,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void menuReleaseNotes_Click(object sender, EventArgs e)
         {
-			SubProcess.Run(Common.FromRegistry("Help"), "SetupPs.rtf", false);
+            SubProcess.Run(Common.FromRegistry("Help"), "SetupPs.rtf", false);
         }
 
         /// <summary>
@@ -388,7 +391,7 @@ namespace SIL.PublishingSolution
         {
             var setup = new LocalizationSetup();
             setup.ShowDialog();
-            if(setup.Localization)
+            if (setup.Localization)
             {
                 LocDB.Localize(menuMain); // Menu Controls
             }
@@ -427,7 +430,7 @@ namespace SIL.PublishingSolution
         {
             var objConverter = new Converter
                                    {
-                                       MdiParent = this, 
+                                       MdiParent = this,
                                        ExcerptPreview = menuExcerptPreview.Checked
                                    };
             _count++;
@@ -493,7 +496,7 @@ namespace SIL.PublishingSolution
 
         protected void MenuRoleChild_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem menuItem = (ToolStripMenuItem) sender;
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
             Param.UserRole = menuItem.Text;
             //Param.SetRole(menuItem.Text);
             SetRoleChecked(menuItem.Text);
@@ -619,7 +622,7 @@ namespace SIL.PublishingSolution
 
         private void menushowErrorLog_Click(object sender, EventArgs e)
         {
-            
+
             menushowErrorLog.Checked = !menushowErrorLog.Checked;
             SetVerbose();
 
@@ -662,7 +665,7 @@ namespace SIL.PublishingSolution
         private void tsStylePick_Click(object sender, EventArgs e)
         {
             menuDicFormat_Click(sender, e);
-            
+
         }
 
         private void UpdateMenu(bool isChildFormExist)
@@ -738,14 +741,14 @@ namespace SIL.PublishingSolution
         {
             menuExcerptPreview.Checked = !menuExcerptPreview.Checked;
             string previewText = "Preview : ";
-                if(menuExcerptPreview.Checked)
-                {
-                    previewText += "Excerpt";
-                }
-                else
-                {
-                    previewText += "Full";
-                }
+            if (menuExcerptPreview.Checked)
+            {
+                previewText += "Excerpt";
+            }
+            else
+            {
+                previewText += "Full";
+            }
             StatusPreview.Text = previewText;
         }
 

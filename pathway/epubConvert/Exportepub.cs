@@ -491,8 +491,8 @@ namespace SIL.PublishingSolution
 
                 // copy over the XHTML and CSS files
                 string cssPath = Common.PathCombine(contentFolder, defaultCSS);
-                
-                if(File.Exists(mergedCSS))
+
+                if (File.Exists(mergedCSS))
                     File.Copy(mergedCSS, cssPath, true);
 
                 string tocFiletoUpdate = string.Empty;
@@ -533,7 +533,7 @@ namespace SIL.PublishingSolution
                 }
 
                 inProcess.PerformStep();
-                
+
                 // Done adding content - now zip the whole thing up and name it
                 inProcess.SetStatus("Cleaning up");
                 string fileName = Title.ToString();
@@ -629,10 +629,10 @@ namespace SIL.PublishingSolution
                 // split the file into smaller pieces if needed
                 List<string> files = new List<string>();
 
-                if(!pageBreak && _inputType.ToLower() == "dictionary")
+                if (!pageBreak && _inputType.ToLower() == "dictionary")
                     files = SplitBook(dest);
-                
-                if(_inputType.ToLower() == "scripture")
+
+                if (_inputType.ToLower() == "scripture")
                 {
                     files = SplitBook(dest);
                 }
@@ -3307,7 +3307,8 @@ namespace SIL.PublishingSolution
         {
             if (Directory.Exists(destFolder))
             {
-                Directory.Delete(destFolder, true);
+                DirectoryInfo di = new DirectoryInfo(destFolder);
+                Common.CleanDirectory(di);
             }
             Directory.CreateDirectory(destFolder);
             string[] files = Directory.GetFiles(sourceFolder);

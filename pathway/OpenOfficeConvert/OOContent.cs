@@ -657,78 +657,80 @@ namespace SIL.PublishingSolution
             //DateTime startTime = DateTime.Now;
             try
             {
-                _reader = Common.DeclareXmlTextReader(Sourcefile, true);
-                //CreateBody();
-                bool headXML = true;
-                while (_reader.Read())
+                using (_reader = Common.DeclareXmlTextReader(Sourcefile, true))
                 {
-                    if (headXML) // skip previous parts of <body> tag
+                    //CreateBody();
+                    bool headXML = true;
+                    while (_reader.Read())
                     {
-                        if (_reader.Name == "body")
+                        if (headXML) // skip previous parts of <body> tag
                         {
-                            headXML = false;
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-
-                    if (_reader.Name == "img")
-                    {
-                        _hasImgCloseTag = true;
-                    }
-                    // _hasImgCloseTag = _imageInsert; 
-                    if (_reader.IsEmptyElement)
-                    {
-                        if (_reader.Name == "img")
-                        {
-                            _hasImgCloseTag = false;
-                        }
-                        else if (_reader.Name == "br")
-                        {
-                            _writer.WriteRaw(@"<text:line-break/>");
-                            continue;
-                        }
-                        else
-                        {
-                            if (_reader.Name == "a")
+                            if (_reader.Name == "body")
+                            {
+                                headXML = false;
+                            }
+                            else
                             {
                                 continue;
                             }
-                            if (_metaValue.Length <= 0)
+                        }
+
+                        if (_reader.Name == "img")
+                        {
+                            _hasImgCloseTag = true;
+                        }
+                        // _hasImgCloseTag = _imageInsert; 
+                        if (_reader.IsEmptyElement)
+                        {
+                            if (_reader.Name == "img")
                             {
-                                CheckMetaRootDirectory();
+                                _hasImgCloseTag = false;
                             }
-                            AllowEmptyTag();
-                            continue;
+                            else if (_reader.Name == "br")
+                            {
+                                _writer.WriteRaw(@"<text:line-break/>");
+                                continue;
+                            }
+                            else
+                            {
+                                if (_reader.Name == "a")
+                                {
+                                    continue;
+                                }
+                                if (_metaValue.Length <= 0)
+                                {
+                                    CheckMetaRootDirectory();
+                                }
+                                AllowEmptyTag();
+                                continue;
+                            }
+                        }
+                        switch (_reader.NodeType)
+                        {
+
+                            case XmlNodeType.Element:
+                                InsertEmptySpanForPicture();
+                                StartElement(targetPath);
+                                break;
+                            case XmlNodeType.EndElement:
+                                EndElement();
+                                break;
+                            case XmlNodeType.Text: // Text.Write
+                                Write();
+                                Application.DoEvents();
+                                break;
+                            case XmlNodeType.SignificantWhitespace:
+                                InsertWhiteSpace();
+                                break;
+                            case XmlNodeType.EntityReference:
+                                IncludeWhiteSpace();
+                                break;
                         }
                     }
-                    switch (_reader.NodeType)
-                    {
 
-                        case XmlNodeType.Element:
-                            InsertEmptySpanForPicture();
-                            StartElement(targetPath);
-                            break;
-                        case XmlNodeType.EndElement:
-                            EndElement();
-                            break;
-                        case XmlNodeType.Text: // Text.Write
-                            Write();
-                            break;
-                        case XmlNodeType.SignificantWhitespace:
-                            InsertWhiteSpace();
-                            break;
-                        case XmlNodeType.EntityReference:
-                            IncludeWhiteSpace();
-                            break;
-
-                    }
+                    InsertFlexRevFirstGuidewordOnMainForOdm();
+                    _reader.Close();
                 }
-
-                InsertFlexRevFirstGuidewordOnMainForOdm();
-
                 //TimeSpan totalTime = DateTime.Now - startTime;
                 //System.Windows.Forms.MessageBox.Show(totalTime.ToString());
             }
@@ -740,7 +742,7 @@ namespace SIL.PublishingSolution
                     LocDB.Message("errProcessXHTML", Sourcefile + " is Not Valid. " + "\n" + e.Message, msg,
                                   LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
                 }
-                CloseFile(targetPath);
+
             }
             finally
             {
@@ -774,22 +776,28 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void InsertFlexRevFirstGuidewordOnMainForOdm()
         {
-            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") <= 0 && _projInfo.IsODM)
+            if (_projInfo.MainLastFileName != null && _projInfo.MainLastFileName.Length > 0 && _projInfo.IsODM)
             {
-                //MessageBox.Show(_projInfo.DefaultXhtmlFileWithPath);
-                firstRevHeadWord = ReadXHTMLFirstData(_projInfo.DefaultXhtmlFileWithPath.Replace("Preservemain", "FlexRev"));
-                if (firstRevHeadWord.Trim().Length > 0)
+                if (Path.GetFileNameWithoutExtension(_projInfo.MainLastFileName) == Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath.Replace("Preservemain", "main")))
                 {
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
-                    _writer.WriteStartElement("text:variable-set");
-                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                    _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
-                    _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", firstRevHeadWord);
-                    _writer.WriteEndElement();
-                    _writer.WriteEndElement();
+                    string flexFileName = Common.PathCombine(Path.GetDirectoryName(_projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                    if (File.Exists(flexFileName))
+                    {
+                        firstRevHeadWord = ReadXHTMLFirstData(flexFileName);
+                        if (firstRevHeadWord.Trim().Length > 0)
+                        {
+                            _writer.WriteStartElement("text:p");
+                            _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
+                            _writer.WriteStartElement("text:variable-set");
+                            _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                            _writer.WriteAttributeString("text:display", "none");
+                            _writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
+                            _writer.WriteAttributeString("office:value-type", "string");
+                            _writer.WriteAttributeString("office:string-value", firstRevHeadWord);
+                            _writer.WriteEndElement();
+                            _writer.WriteEndElement();
+                        }
+                    }
                 }
             }
         }
@@ -977,16 +985,16 @@ namespace SIL.PublishingSolution
 
 
                     // Note: Paragraph Start Element
-                   
 
 
-                        _writer.WriteStartElement("text:p");
-                        _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
-                        isPageBreak = false;
-                        if (_paragraphName.IndexOf("bookPageBreak_") == 0)
-                        {
-                            isPageBreak = true;
-                        }
+
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
+                    isPageBreak = false;
+                    if (_paragraphName.IndexOf("bookPageBreak_") == 0)
+                    {
+                        isPageBreak = true;
+                    }
 
                     //                <text:variable-set text:name="Left_Guideword_L"
                     //text:display="none" text:formula="ooow:Filemón 1" office:value-type="string"
@@ -3509,9 +3517,6 @@ namespace SIL.PublishingSolution
                 _writer.Flush();
                 _writer.Close();
 
-                if (_reader != null)
-                    _reader.Close();
-
                 if (_dictColumnGapEm != null && _dictColumnGapEm.Count > 0)
                 {
                     var xmlDoc = new XmlDocument { PreserveWhitespace = true };
@@ -3948,7 +3953,7 @@ namespace SIL.PublishingSolution
                     break;
                 }
             }
-
+            reader.Close();
             return content;
         }
 
@@ -3985,87 +3990,87 @@ namespace SIL.PublishingSolution
         /// <param name="searchText">Text to be search</param>
         public static void ReadAllFirstEntryData(string filePath, Dictionary<string, string> XHTMLData)
         {
-            XmlTextReader reader = Common.DeclareXmlTextReader(filePath, true);
-
-            string className = "div";
-            bool isLetter = false;
-            bool isEntry = false;
-            bool isReadData = false;
-            string letter = string.Empty;
-            string entry = string.Empty;
-            bool headXML = true;
-            while (reader.Read())
+            XmlTextReader reader;
+            using (reader = Common.DeclareXmlTextReader(filePath, true))
             {
-                if (headXML) // skip previous parts of <body> tag
+                string className = "div";
+                bool isLetter = false;
+                bool isEntry = false;
+                bool isReadData = false;
+                string letter = string.Empty;
+                string entry = string.Empty;
+                bool headXML = true;
+                while (reader.Read())
                 {
-                    if (reader.Name == "body")
+                    if (headXML) // skip previous parts of <body> tag
                     {
-                        headXML = false;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-
-                if (reader.IsEmptyElement)
-                {
-                    if (reader.Name == "br")
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        if (reader.Name == "a")
+                        if (reader.Name == "body")
+                        {
+                            headXML = false;
+                        }
+                        else
                         {
                             continue;
                         }
-                        continue;
+                    }
+
+                    if (reader.IsEmptyElement)
+                    {
+                        if (reader.Name == "br")
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (reader.Name == "a")
+                            {
+                                continue;
+                            }
+                            continue;
+                        }
+                    }
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            className = StartElement(reader);
+                            if (className != string.Empty)
+                            {
+                                if (className == "letter")
+                                {
+                                    isLetter = true;
+                                    isReadData = true;
+                                }
+                                else if (isReadData && className == "entry")
+                                {
+                                    isEntry = true;
+                                }
+                            }
+                            break;
+                        case XmlNodeType.Text: // Text.Write
+                            if (isLetter)
+                            {
+                                if (reader.Value.Trim() != string.Empty)
+                                {
+                                    letter = reader.Value;
+                                    isLetter = false;
+                                }
+                            }
+                            else if (isEntry && isReadData)
+                            {
+                                if (reader.Value.Trim() != string.Empty)
+                                {
+                                    entry = reader.Value;
+                                    isEntry = false;
+                                    isReadData = false;
+                                    XHTMLData[letter] = entry;
+                                }
+                            }
+                            break;
                     }
                 }
-                switch (reader.NodeType)
-                {
-                    case XmlNodeType.Element:
-                        className = StartElement(reader);
-                        if (className != string.Empty)
-                        {
-                            if (className == "letter")
-                            {
-                                isLetter = true;
-                                isReadData = true;
-                            }
-                            else if (isReadData && className == "entry")
-                            {
-                                isEntry = true;
-                            }
-                        }
-                        break;
-                    case XmlNodeType.Text: // Text.Write
-                        if (isLetter)
-                        {
-                            if (reader.Value.Trim() != string.Empty)
-                            {
-                                letter = reader.Value;
-                                isLetter = false;
-                            }
-                        }
-                        else if (isEntry && isReadData)
-                        {
-                            if (reader.Value.Trim() != string.Empty)
-                            {
-                                entry = reader.Value;
-                                isEntry = false;
-                                isReadData = false;
-                                XHTMLData[letter] = entry;
-                            }
-                        }
-                        break;
-                }
             }
+            reader.Close();
         }
-
-
-
         #endregion
     }
 }

@@ -168,32 +168,36 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                while (_reader.Read())
+                using (_reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true))
                 {
-                    if (IsEmptyNode())
+                    while (_reader.Read())
                     {
-                        continue;
-                    }
+                        if (IsEmptyNode())
+                        {
+                            continue;
+                        }
 
-                    switch (_reader.NodeType)
-                    {
-                        case XmlNodeType.Element:
-                            StartElement();
-                            break;
-                        case XmlNodeType.Text:
-                            Write();
-                            break;
-                        case XmlNodeType.EndElement:
-                            EndElement();
-                            break;
-                        case XmlNodeType.SignificantWhitespace:
-                            if (_reader.Value.Replace(" ", "") == "")
-                            {
+                        switch (_reader.NodeType)
+                        {
+                            case XmlNodeType.Element:
+                                StartElement();
+                                break;
+                            case XmlNodeType.Text:
                                 Write();
-                            }
-                            break;
+                                break;
+                            case XmlNodeType.EndElement:
+                                EndElement();
+                                break;
+                            case XmlNodeType.SignificantWhitespace:
+                                if (_reader.Value.Replace(" ", "") == "")
+                                {
+                                    Write();
+                                }
+                                break;
+                        }
                     }
                 }
+                _reader.Close();
             }
             catch (XmlException e)
             {

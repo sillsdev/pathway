@@ -77,6 +77,8 @@ namespace SIL.Tool
         private string _includeXRefSymbol;
         private string _hideVerseNumberOne;
         private string _includeFootnoteSymbol;
+        private string _splitFileByLetter;
+        private string _mainLastFileName;
 
         #endregion
 
@@ -283,6 +285,18 @@ namespace SIL.Tool
             set { _includeXRefSymbol = value; }
         }
 
+        public string SplitFileByLetter
+        {
+            get { return _splitFileByLetter; }
+            set { _splitFileByLetter = value; }
+        }
+
+        public string MainLastFileName
+        {
+            get { return _mainLastFileName; }
+            set { _mainLastFileName = value; }
+        }
+        
         public string HideSpaceVerseNumber
         {
             get { return _hideSpaceVerseNumber; }
@@ -822,7 +836,10 @@ namespace SIL.Tool
                     {
                         RemoveFile(Path.GetFileName(fileNamePath));
                     }
-                    File.Copy(fullFileName, fileNamePath, true);
+                    if (fullFileName != fileNamePath)
+                    {
+                        File.Copy(fullFileName, fileNamePath, true);
+                    }
                     // File
                     bool returnValue = XMLOperation(fileName, 'F', setDefault, addToParentFolder, "", destPathParent, visible);
                     if (destPathParent == "")

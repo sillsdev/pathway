@@ -274,6 +274,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CommonXml.cs" />
+    <Compile Include="FileSplit.cs" />
     <Compile Include="FileStreamXmlResolver.cs" />
     <Compile Include="Json.cs" />
     <Compile Include="FontInternals.cs">

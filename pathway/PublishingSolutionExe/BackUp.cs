@@ -42,7 +42,7 @@ namespace SIL.PublishingSolution
 
         }
 
-        
+
 
         private void BackUp_Load(object sender, EventArgs e)
         {
@@ -66,7 +66,7 @@ namespace SIL.PublishingSolution
                 BackUpFontsinCSS();
                 //BackUpUserSettingFiles();
             }
-            catch{}
+            catch { }
         }
 
         /// <summary>
@@ -77,7 +77,8 @@ namespace SIL.PublishingSolution
             string destPath = Common.PathCombine(ProjectPath, "fonts");
             if (Directory.Exists(destPath))
             {
-                Directory.Delete(destPath, true);
+                DirectoryInfo di = new DirectoryInfo(destPath);
+                Common.CleanDirectory(di);
             }
             Directory.CreateDirectory(destPath);
 
@@ -101,7 +102,8 @@ namespace SIL.PublishingSolution
             string destPath = Common.PathCombine(ProjectPath, "SettingFiles");
             if (Directory.Exists(destPath))
             {
-                Directory.Delete(destPath, true);
+                DirectoryInfo di = new DirectoryInfo(destPath);
+                Common.CleanDirectory(di);
             }
             Directory.CreateDirectory(destPath);
 

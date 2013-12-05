@@ -73,7 +73,7 @@ namespace SIL.PublishingSolution
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(publicationInformation.DefaultCssFileWithPath, true);
 
-            if(cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
+            if (cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
             {
                 publicationInformation.FileToProduce = cssClass["@page"]["-ps-fileproduce"];
             }
@@ -81,25 +81,31 @@ namespace SIL.PublishingSolution
 
         private Dictionary<string, string> SplitXhtmlAsMultiplePart(PublicationInformation publicationInformation, Dictionary<string, string> dictSecName)
         {
+            var fileNameWithPath = new List<string>();
             if (publicationInformation.FileToProduce.ToLower() != "one")
             {
-                List<string> fileNameWithPath = new List<string>();
-                if(publicationInformation.FileToProduce.ToLower() == "one per book")
+
+                if (publicationInformation.FileToProduce.ToLower() == "one per book")
                 {
                     fileNameWithPath = Common.SplitXhtmlFile(publicationInfo.DefaultXhtmlFileWithPath,
-                                                             "scrbook", false);
+                                        "scrbook", false);
                 }
-                else if(publicationInformation.FileToProduce.ToLower() == "one per letter")
-                {
-                    fileNameWithPath = Common.SplitXhtmlFile(publicationInfo.DefaultXhtmlFileWithPath,
-                                                             "letHead", true);
-                }
-                 
-                if (fileNameWithPath.Count > 0)
-                {
-                    dictSecName = CreateJoiningForSplited(fileNameWithPath);
-                    publicationInformation.DictionaryOutputName = null;
-                }
+            }
+            else if (publicationInformation.SplitFileByLetter != null && publicationInformation.SplitFileByLetter.ToLower() == "true")
+            {
+                var fs = new FileSplit();
+                fileNameWithPath = fs.SplitFile(publicationInformation.DefaultXhtmlFileWithPath);
+                string flexRevFile =
+                    Common.PathCombine(Path.GetDirectoryName(publicationInformation.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                if(File.Exists(flexRevFile))
+                    fileNameWithPath.Add(flexRevFile);
+            }
+
+            if (fileNameWithPath.Count > 0)
+            {
+                dictSecName = CreateJoiningForSplited(fileNameWithPath);
+                publicationInformation.DictionaryOutputName = null;
+                publicationInformation.MainLastFileName = fileNameWithPath[fileNameWithPath.Count - 1];
             }
             return dictSecName;
         }
@@ -776,6 +782,7 @@ namespace SIL.PublishingSolution
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
             projInfo.IncludeFootnoteSymbol = inStyles._customFootnoteCaller;
             projInfo.IncludeXRefSymbol = inStyles._customXRefCaller;
+            projInfo.SplitFileByLetter = inStyles._splitFileByLetter;
             projInfo.HideSpaceVerseNumber = inStyles._hideSpaceVerseNumber;
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
@@ -800,7 +807,7 @@ namespace SIL.PublishingSolution
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)
                 preProcessor.SwapHeadWordAndReversalForm();
-            
+
             //preProcessor.InsertKeepWithNextOnStyles();
 
             //if (_isFromExe)
@@ -880,11 +887,13 @@ namespace SIL.PublishingSolution
                 //projInfo.DictionaryOutputName = null;
                 if (preProcessor != null)
                 {
-                    Common.DeleteDirectory(preProcessor.GetCreatedTempFolderPath);
+                    DirectoryInfo di = new DirectoryInfo(preProcessor.GetCreatedTempFolderPath);
+                    Common.CleanDirectory(di);
                 }
                 if (projInfo.TempOutputFolder != null)
                 {
-                    Common.DeleteDirectory(projInfo.TempOutputFolder);
+                    DirectoryInfo di = new DirectoryInfo(projInfo.TempOutputFolder);
+                    Common.CleanDirectory(di);
                 }
             }
             return returnValue;
@@ -1607,11 +1616,11 @@ namespace SIL.PublishingSolution
         /// <param name="destFolder"></param>
         private void CopyOfficeFolder(string sourceFolder, string destFolder)
         {
-            //if (Directory.Exists(destFolder))
-            //{
-            //    Directory.Delete(destFolder, true);
-            //}
-            Common.DeleteDirectory(destFolder);
+            if (Directory.Exists(destFolder))
+            {
+                DirectoryInfo di = new DirectoryInfo(destFolder);
+                Common.CleanDirectory(di);
+            }
             Directory.CreateDirectory(destFolder);
             string[] files = Directory.GetFiles(sourceFolder);
             try

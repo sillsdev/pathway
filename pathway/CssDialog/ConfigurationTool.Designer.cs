@@ -66,6 +66,7 @@ namespace SIL.PublishingSolution
             this.txtGuidewordLength = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.pnlOtherFormat = new System.Windows.Forms.Panel();
+            this.chkSplitFileByLetter = new System.Windows.Forms.CheckBox();
             this.lblPageNumber = new System.Windows.Forms.Label();
             this.ddlPageNumber = new System.Windows.Forms.ComboBox();
             this.ddlFileProduceDict = new System.Windows.Forms.ComboBox();
@@ -723,6 +724,7 @@ namespace SIL.PublishingSolution
             // 
             // pnlOtherFormat
             // 
+            this.pnlOtherFormat.Controls.Add(this.chkSplitFileByLetter);
             this.pnlOtherFormat.Controls.Add(this.lblPageNumber);
             this.pnlOtherFormat.Controls.Add(this.ddlPageNumber);
             this.pnlOtherFormat.Controls.Add(this.ddlFileProduceDict);
@@ -737,6 +739,17 @@ namespace SIL.PublishingSolution
             this.pnlOtherFormat.Name = "pnlOtherFormat";
             this.pnlOtherFormat.Size = new System.Drawing.Size(275, 156);
             this.pnlOtherFormat.TabIndex = 103;
+            // 
+            // chkSplitFileByLetter
+            // 
+            this.chkSplitFileByLetter.AutoSize = true;
+            this.chkSplitFileByLetter.Location = new System.Drawing.Point(98, 125);
+            this.chkSplitFileByLetter.Name = "chkSplitFileByLetter";
+            this.chkSplitFileByLetter.Size = new System.Drawing.Size(109, 17);
+            this.chkSplitFileByLetter.TabIndex = 109;
+            this.chkSplitFileByLetter.Text = "Split File by Letter";
+            this.chkSplitFileByLetter.UseVisualStyleBackColor = true;
+            this.chkSplitFileByLetter.CheckStateChanged += new System.EventHandler(this.chkSplitFileByLetter_CheckStateChanged);
             // 
             // lblPageNumber
             // 
@@ -968,7 +981,7 @@ namespace SIL.PublishingSolution
             this.ddlVerticalJustify.FormattingEnabled = true;
             this.ddlVerticalJustify.Location = new System.Drawing.Point(107, 163);
             this.ddlVerticalJustify.Name = "ddlVerticalJustify";
-            this.ddlVerticalJustify.Size = new System.Drawing.Size(180, 21);
+            this.ddlVerticalJustify.Size = new System.Drawing.Size(164, 21);
             this.ddlVerticalJustify.TabIndex = 8;
             this.ddlVerticalJustify.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -991,7 +1004,7 @@ namespace SIL.PublishingSolution
             this.ddlPicture.FormattingEnabled = true;
             this.ddlPicture.Location = new System.Drawing.Point(107, 187);
             this.ddlPicture.Name = "ddlPicture";
-            this.ddlPicture.Size = new System.Drawing.Size(180, 21);
+            this.ddlPicture.Size = new System.Drawing.Size(164, 21);
             this.ddlPicture.TabIndex = 9;
             this.ddlPicture.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -1024,7 +1037,7 @@ namespace SIL.PublishingSolution
             this.ddlLeading.FormattingEnabled = true;
             this.ddlLeading.Location = new System.Drawing.Point(107, 211);
             this.ddlLeading.Name = "ddlLeading";
-            this.ddlLeading.Size = new System.Drawing.Size(180, 21);
+            this.ddlLeading.Size = new System.Drawing.Size(164, 21);
             this.ddlLeading.TabIndex = 10;
             this.ddlLeading.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -1037,7 +1050,7 @@ namespace SIL.PublishingSolution
             this.ddlRunningHead.FormattingEnabled = true;
             this.ddlRunningHead.Location = new System.Drawing.Point(107, 259);
             this.ddlRunningHead.Name = "ddlRunningHead";
-            this.ddlRunningHead.Size = new System.Drawing.Size(180, 21);
+            this.ddlRunningHead.Size = new System.Drawing.Size(164, 21);
             this.ddlRunningHead.TabIndex = 12;
             this.ddlRunningHead.SelectedIndexChanged += new System.EventHandler(this.ddlRunningHead_SelectedIndexChanged);
             // 
@@ -1185,7 +1198,7 @@ namespace SIL.PublishingSolution
             this.ddlJustified.FormattingEnabled = true;
             this.ddlJustified.Location = new System.Drawing.Point(107, 138);
             this.ddlJustified.Name = "ddlJustified";
-            this.ddlJustified.Size = new System.Drawing.Size(180, 21);
+            this.ddlJustified.Size = new System.Drawing.Size(164, 21);
             this.ddlJustified.TabIndex = 7;
             this.ddlJustified.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlJustified.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -1209,7 +1222,7 @@ namespace SIL.PublishingSolution
             this.ddlPageColumn.FormattingEnabled = true;
             this.ddlPageColumn.Location = new System.Drawing.Point(107, 90);
             this.ddlPageColumn.Name = "ddlPageColumn";
-            this.ddlPageColumn.Size = new System.Drawing.Size(180, 21);
+            this.ddlPageColumn.Size = new System.Drawing.Size(164, 21);
             this.ddlPageColumn.TabIndex = 5;
             this.ddlPageColumn.SelectedIndexChanged += new System.EventHandler(this.ddlPageColumn_SelectedIndexChanged);
             this.ddlPageColumn.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -1233,7 +1246,7 @@ namespace SIL.PublishingSolution
             this.ddlPagePageSize.FormattingEnabled = true;
             this.ddlPagePageSize.Location = new System.Drawing.Point(107, 11);
             this.ddlPagePageSize.Name = "ddlPagePageSize";
-            this.ddlPagePageSize.Size = new System.Drawing.Size(180, 21);
+            this.ddlPagePageSize.Size = new System.Drawing.Size(164, 21);
             this.ddlPagePageSize.TabIndex = 0;
             this.ddlPagePageSize.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlPagePageSize.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -1266,7 +1279,7 @@ namespace SIL.PublishingSolution
             this.tabMobile.Location = new System.Drawing.Point(4, 22);
             this.tabMobile.Name = "tabMobile";
             this.tabMobile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMobile.Size = new System.Drawing.Size(300, 516);
+            this.tabMobile.Size = new System.Drawing.Size(301, 516);
             this.tabMobile.TabIndex = 2;
             this.tabMobile.Text = "Properties";
             this.tabMobile.UseVisualStyleBackColor = true;
@@ -1441,7 +1454,7 @@ namespace SIL.PublishingSolution
             this.tabOthers.Controls.Add(this.pictureBox1);
             this.tabOthers.Location = new System.Drawing.Point(4, 22);
             this.tabOthers.Name = "tabOthers";
-            this.tabOthers.Size = new System.Drawing.Size(300, 516);
+            this.tabOthers.Size = new System.Drawing.Size(301, 516);
             this.tabOthers.TabIndex = 3;
             this.tabOthers.Text = "Properties";
             this.tabOthers.UseVisualStyleBackColor = true;
@@ -1800,7 +1813,7 @@ namespace SIL.PublishingSolution
             this.tabWeb.Controls.Add(this.groupBox1);
             this.tabWeb.Location = new System.Drawing.Point(4, 22);
             this.tabWeb.Name = "tabWeb";
-            this.tabWeb.Size = new System.Drawing.Size(300, 516);
+            this.tabWeb.Size = new System.Drawing.Size(301, 516);
             this.tabWeb.TabIndex = 6;
             this.tabWeb.Text = "Properties";
             this.tabWeb.UseVisualStyleBackColor = true;
@@ -2088,7 +2101,7 @@ namespace SIL.PublishingSolution
             // 
             this.tabDict4Mids.Location = new System.Drawing.Point(4, 22);
             this.tabDict4Mids.Name = "tabDict4Mids";
-            this.tabDict4Mids.Size = new System.Drawing.Size(300, 516);
+            this.tabDict4Mids.Size = new System.Drawing.Size(301, 516);
             this.tabDict4Mids.TabIndex = 7;
             this.tabDict4Mids.Text = "Properties";
             this.tabDict4Mids.UseVisualStyleBackColor = true;
@@ -2101,7 +2114,7 @@ namespace SIL.PublishingSolution
             this.tabPreview.Controls.Add(this.picPreview);
             this.tabPreview.Location = new System.Drawing.Point(4, 22);
             this.tabPreview.Name = "tabPreview";
-            this.tabPreview.Size = new System.Drawing.Size(300, 516);
+            this.tabPreview.Size = new System.Drawing.Size(301, 516);
             this.tabPreview.TabIndex = 4;
             this.tabPreview.Text = "Preview";
             this.tabPreview.UseVisualStyleBackColor = true;
@@ -2147,7 +2160,7 @@ namespace SIL.PublishingSolution
             this.tabPicture.Controls.Add(this.GrpPicture);
             this.tabPicture.Location = new System.Drawing.Point(4, 22);
             this.tabPicture.Name = "tabPicture";
-            this.tabPicture.Size = new System.Drawing.Size(300, 516);
+            this.tabPicture.Size = new System.Drawing.Size(301, 516);
             this.tabPicture.TabIndex = 5;
             this.tabPicture.Text = "Pictures";
             this.tabPicture.UseVisualStyleBackColor = true;
@@ -2572,6 +2585,7 @@ namespace SIL.PublishingSolution
             this.pnlGuidewordLength.ResumeLayout(false);
             this.pnlGuidewordLength.PerformLayout();
             this.pnlOtherFormat.ResumeLayout(false);
+            this.pnlOtherFormat.PerformLayout();
             this.pnlReferenceFormat.ResumeLayout(false);
             this.pnlReferenceFormat.PerformLayout();
             this.tabMobile.ResumeLayout(false);
@@ -2807,5 +2821,6 @@ namespace SIL.PublishingSolution
         private Panel pnlGuidewordLength;
         private TextBox txtGuidewordLength;
         private Label label9;
+        private CheckBox chkSplitFileByLetter;
     }
 }

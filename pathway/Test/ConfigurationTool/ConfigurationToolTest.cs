@@ -40,7 +40,10 @@ namespace Test.UIConfigurationToolTest
             _outputBasePath = Common.PathCombine(testPath, "Output");
             const bool recursiveDelete = true;
             if (Directory.Exists(_outputBasePath))
-                Directory.Delete(_outputBasePath, recursiveDelete);
+            {
+                DirectoryInfo di = new DirectoryInfo(_outputBasePath);
+                Common.CleanDirectory(di);
+            }
             Directory.CreateDirectory(_outputBasePath);
 
             _supportSource = Common.DirectoryPathReplace(testPath + "/../../../PsSupport");
@@ -570,7 +573,7 @@ namespace Test.UIConfigurationToolTest
         }
 
         [Ignore]
-        [Test] 
+        [Test]
         public void MergeStyleSetting()
         {
             Common.Testing = true;
