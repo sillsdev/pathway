@@ -2312,7 +2312,7 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("style:style");
             _writer.WriteAttributeString("style:name", "P4");
             _writer.WriteAttributeString("style:family", "paragraph");
-            _writer.WriteAttributeString("style:parent-style-name", "hide");
+            //_writer.WriteAttributeString("style:parent-style-name", "hide");
             _writer.WriteAttributeString("style:master-page-name", "First_20_Page");
             _writer.WriteStartElement("style:paragraph-properties");
             _writer.WriteAttributeString("style:page-number", "auto");
@@ -3277,11 +3277,11 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("text:style-name", "cover");
                     _writer.WriteString(titleName);
                     _writer.WriteEndElement();
-                }
 
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "dummypage");
-                _writer.WriteEndElement();
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "dummypage");
+                    _writer.WriteEndElement();
+                }
 
                 //TITLE PAGE
                 if (includeTitlePage)
@@ -3379,9 +3379,9 @@ namespace SIL.PublishingSolution
             //return;
             if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && !_projInfo.IsODM)
             {
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "P4");
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("text:p");
+                //_writer.WriteAttributeString("text:style-name", "P4");
+                //_writer.WriteEndElement();
 
                 //firstRevHeadWord = ReadXHTMLFirstData(_projInfo.DefaultXhtmlFileWithPath);
                 //if (firstRevHeadWord.Trim().Length > 0)

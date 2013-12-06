@@ -5,3 +5,10 @@
     }
     
 }
+
+
+@page :first {
+    @bottom-center {
+           content: counter( page);
+    }
+}

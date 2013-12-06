@@ -1235,7 +1235,7 @@ namespace SIL.Tool
                 {
                     frontMatterXHTMLContent = coverTitleNode.OuterXml;
                     _projInfo.IsFrontMatterEnabled = true;
-                    frontMatterCSSStyle = frontMatterCSSStyle + ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
+                    frontMatterCSSStyle = frontMatterCSSStyle + ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;font-family: 'Times New Roman', serif; } ";
                 }
                 //END OF COVER TITLE
                 if (coverImageNode != null)
@@ -1260,7 +1260,7 @@ namespace SIL.Tool
                         frontMatterXHTMLContent = frontMatterXHTMLContent;
                     }
                     _projInfo.IsFrontMatterEnabled = true;
-                    frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;} .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}";
+                    frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-family: 'Times New Roman', serif; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;font-family: 'Times New Roman', serif; } .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}";
                 }
                 //END OF TITLE
                 //COPYRIGHT 
@@ -1306,7 +1306,7 @@ namespace SIL.Tool
                         frontMatterXHTMLContent = frontMatterXHTMLContent + "<div id='copyright' class='copyright' dir='ltr'>.</div>" + copyRightContentNode.OuterXml + "<div id='dummyTOC' class='dummyTOC' dir='ltr'>.</div>";
                         _projInfo.IsFrontMatterEnabled = true;
 
-                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:1pt;visibility:hidden;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;}.LText{font-size:12pt;font-style:italic}.LText:before{content: \"\\2028\"}.dummyTOC{text-align: left; font-size:1pt;visibility:hidden;page-break-after: always;} ";
+                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:1pt;visibility:hidden;font-family: 'Times New Roman', serif;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;font-family: 'Times New Roman', serif;}.LText{font-size:12pt;font-style:italic;font-family: 'Times New Roman', serif;}.LText:before{content: \"\\2028\"}.dummyTOC{font-size:1pt; page-break-after: always;} ";
                     }
                 }
                 //END OF COPYRIGHT 
