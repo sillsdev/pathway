@@ -836,7 +836,7 @@ namespace SIL.PublishingSolution
                 //{
                 //    _footnoteSpace = false;  &&_significant == false
                 //}
-                //IsLastPronunciationform();
+                IsLastPronunciationform();
                 if (_footnoteSpace == false && _projInfo.ProjectInputType.ToLower() == "dictionary" && _isNonPronunciationform)
                 {
                     _writer.WriteStartElement("text:s");
