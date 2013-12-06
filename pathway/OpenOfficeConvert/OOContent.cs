@@ -178,6 +178,8 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> FirstDataOnEntry = new Dictionary<string, string>();
         private int _guidewordLength;
         private bool _isPreviousGlossary;//3719
+        private int _pronunciationformCount;//3718
+        private bool _isNonPronunciationform = true;
         #endregion
 
         #region Public Variable
@@ -834,7 +836,8 @@ namespace SIL.PublishingSolution
                 //{
                 //    _footnoteSpace = false;  &&_significant == false
                 //}
-                if (_footnoteSpace == false && _projInfo.ProjectInputType.ToLower() == "dictionary")
+                //IsLastPronunciationform();
+                if (_footnoteSpace == false && _projInfo.ProjectInputType.ToLower() == "dictionary" && _isNonPronunciationform)
                 {
                     _writer.WriteStartElement("text:s");
                     _writer.WriteAttributeString("text:c", "1");
@@ -843,6 +846,23 @@ namespace SIL.PublishingSolution
                     _significant = true;
                 }
                 //_writer.WriteString(" ");
+            }
+        }
+
+        private void IsLastPronunciationform()
+        {
+            if (_classNameWithLang.ToLower() == "pronunciationform")
+            {
+                _isNonPronunciationform = false;
+                if (_pronunciationformCount == 2)
+                {
+                    _pronunciationformCount = 0;
+                    _isNonPronunciationform = true;
+                }
+                else
+                {
+                    _pronunciationformCount += 1;
+                }
             }
         }
 
