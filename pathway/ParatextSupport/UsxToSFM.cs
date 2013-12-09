@@ -31,6 +31,7 @@ namespace SIL.PublishingSolution
         private string _tagName, _style, _number, _code, _caller, _content;
         private string _parentTagName = string.Empty, _parentStyleName = string.Empty;
         private string _verseNumber = string.Empty;
+        private string _para = string.Empty;
 
         private string _desc, _file, _size, _loc, _copy, _ref;
         private bool _significant, _isEmptyNode, _isParaWritten;
@@ -172,9 +173,9 @@ namespace SIL.PublishingSolution
         private void Para()
         {
             string prefix = string.Empty;
-            if (_style != string.Empty)
+            if (_para != string.Empty)
             {
-                prefix = "\\" + _style + Space;
+                prefix = "\\" + _para + Space;
             }
             string line = prefix + _content + EndText();
 
@@ -354,10 +355,15 @@ namespace SIL.PublishingSolution
             string style = StackPop(_allStyle);
             string tag = StackPop(_alltagName);
 
-            if (tag == "para" || tag == "verse")
+            if (tag == "verse")
             {
                 _sfmFile.WriteLine();
                 _verseNumber = string.Empty;
+            }
+            else if (tag == "para")
+            {
+                _sfmFile.WriteLine();
+                _para = string.Empty;
             }
             else if (tag == "note")
             {
@@ -447,6 +453,7 @@ namespace SIL.PublishingSolution
             {
                 if (_tagName == "para")
                 {
+                    _para = _style;
                     _isParaWritten = false;
                 }
 
