@@ -32,6 +32,7 @@ namespace SIL.PublishingSolution
         static int Verbosity = 0;
         protected static object ParatextData;
         protected static string Ssf;
+        protected static bool R2l;
         private static object _theWorProgPath;
 
         protected static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
@@ -393,7 +394,40 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
             var xsltArgs = new XsltArgumentList();
             xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
             xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
+            GetRtlParam(xsltArgs);
             return xsltArgs;
+        }
+
+        private static void GetRtlParam(XsltArgumentList xsltArgs)
+        {
+            R2l = false;
+            var language = GetSsfValue("//Language", "English");
+            var languagePath = Path.GetDirectoryName(Ssf);
+            var languageFile = Common.PathCombine(languagePath, language);
+            if (File.Exists(languageFile + ".LDS"))
+            {
+                languageFile += ".LDS";
+            }
+            else if (File.Exists(languageFile + ".lds"))
+            {
+                languageFile += ".lds";
+            }
+            else
+            {
+                return;
+            }
+            foreach (string line in FileData.Get(languageFile).Split(new[] {'\n'}))
+            {
+                var cleanLine = line.ToLower().Trim();
+                if (cleanLine.StartsWith("rtl="))
+                {
+                    if (cleanLine.Substring(4, 1) == "t")
+                    {
+                        xsltArgs.AddParam("rtl", "", "1");
+                        R2l = true;
+                    }
+                }
+            }
         }
 
         private static string GetBookNamesUri()
@@ -464,7 +498,7 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
 charset=0
 lang={0}
 font={9}
-short.title={1}
+{10}short.title={1}
 title={2}
 description={3} \
 {4}
@@ -495,6 +529,10 @@ about={2} \
             var creator = Param.GetMetadataValue("Creator");
             var font = GetSsfValue("//DefaultFont", "Charis SIL");
             var myFormat = GetFormat("theWordFormat.txt", format);
+            if (R2l)
+            {
+                font += "\r\nr2l=1";
+            }
             sw.Write(string.Format(myFormat, langCode, shortTitle, FullTitle, description, copyright, createDate, publisher, publishDate, creator, font));
         }
 

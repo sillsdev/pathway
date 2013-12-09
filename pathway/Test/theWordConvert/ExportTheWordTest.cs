@@ -176,17 +176,27 @@ namespace Test.TheWordConvertTest
             mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
+        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, bool rtl)
+        {
+            TestDataCase(code, fileName, rec, expectedResult, null, null, false, rtl);
+        }
+
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult)
         {
-            TestDataCase(code, fileName, rec, expectedResult, null, null, false);
+            TestDataCase(code, fileName, rec, expectedResult, null, null, false, false);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc)
         {
-            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false);
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false, false);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo)
+        {
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, starSaltillo, false);
+        }
+
+        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo, bool rtl)
         {
             var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
             string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
@@ -211,6 +221,10 @@ namespace Test.TheWordConvertTest
             {
                 xsltArgs.AddParam("noStar", "", "1");
                 xsltArgs.AddParam("noSaltilla", "", "1");
+            }
+            if (rtl)
+            {
+                xsltArgs.AddParam("rtl", "", "1");
             }
             var temp = Path.GetTempFileName();
             var sw = new StreamWriter(temp);
@@ -394,6 +408,12 @@ namespace Test.TheWordConvertTest
         {
             var bookNames = "file:///" + FileInput("aauBookNames.xml");
             TestDataCase("MRK", "041MRK.usx", 647, "Hmo prueyn hiy laplap kopi non nak-sau nok nok, wain ma laroray non sakeyn prouk nok, now-ho mon piynay nok, sa Jisas se seyn arnak-nakray, hiy lowswa e.<RF q=*><a href=\"tw://bible.*?19.69.21\">Sng 69:21</a><Rf> Uwr sohiy nak-me, “Pereipia, hromkwe lira ey, Elaija po pankaw laye pakane, hye now ko se kandieys kow se.”", bookNames, ":");
+        }
+
+        [Test]
+        public void RightToLeftBridgeTest()
+        {
+            TestDataCase("3JN", "0643JN.usx", 14, "<sup>(<rtl>14</rtl>-15)</sup> بَسْ لي رَجا خَفيفْ تَ اراك، وْثمْ لَثمْ نحْكي. <sup>15</sup> السَّلام يكونْ مَعك. يسَلمونْ عَلَيك الّمْحبّينْ. سَلّم عَ الّمْحبّينْ كلْ واِحدْ باسْمو.<CM>", true);
         }
 
         //[Test]

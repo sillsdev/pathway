@@ -20,6 +20,7 @@
     <xsl:param name="bookNames">BookNames.xml</xsl:param>
     <xsl:param name="noStar" select="false()"/>
     <xsl:param name="noSaltillo" select="false()"/>
+    <xsl:param name="rtl" select="false()"/>
     <xsl:param name="refPref">
         <xsl:text disable-output-escaping="yes"><![CDATA[tw://bible.*?]]></xsl:text>
     </xsl:param>
@@ -146,14 +147,22 @@
         <xsl:choose>
             <xsl:when test="count($nextVerseNode) = 1">
                 <xsl:text disable-output-escaping="yes"><![CDATA[<sup>(]]></xsl:text>
+                <xsl:if test="$rtl">
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<rtl>]]></xsl:text>
+                </xsl:if>
                 <xsl:value-of select="$v"/>
+                <xsl:if test="$rtl">
+                    <xsl:text disable-output-escaping="yes"><![CDATA[</rtl>]]></xsl:text>
+                </xsl:if>
                 <xsl:value-of select="$bridgePunc"/>
                 <xsl:value-of select="$nextVerse"/>
                 <xsl:text disable-output-escaping="yes"><![CDATA[)</sup> ]]></xsl:text>
                 <xsl:apply-templates select="$verse" mode="v">
                     <xsl:with-param name="combine" select="1"/>
                 </xsl:apply-templates>
-                <xsl:text> </xsl:text>
+                <xsl:text disable-output-escaping="yes"><![CDATA[ <sup>]]></xsl:text>
+                <xsl:value-of select="$nextVerse"/>
+                <xsl:text disable-output-escaping="yes"><![CDATA[</sup> ]]></xsl:text>
                 <xsl:apply-templates select="$nextVerseNode" mode="v"/>
             </xsl:when>
             <xsl:otherwise>
@@ -253,11 +262,9 @@
             <xsl:when
                 test="parent::node()/@style = 'q' or parent::node()/@style = 'q1' or parent::node()/@style = 'li' or parent::node()/@style = 'li1' or parent::node()/@style = 'qm' or parent::node()/@style = 'qm1'">
                 <xsl:text disable-output-escaping="yes"><![CDATA[<PI>]]></xsl:text>
-                <xsl:if test="$bridge != ''">
-                    <xsl:text disable-output-escaping="yes"><![CDATA[<sup>(]]></xsl:text>
-                    <xsl:value-of select="$bridge"/>
-                    <xsl:text disable-output-escaping="yes"><![CDATA[)</sup> ]]></xsl:text>
-                </xsl:if>
+                <xsl:call-template name="BridgeVerseNumbers">
+                    <xsl:with-param name="bridge" select="$bridge"/>
+                </xsl:call-template>
                 <xsl:apply-templates select="following::node()[1]" mode="t">
                     <xsl:with-param name="indent" select="3"/>
                     <xsl:with-param name="bullet" select="contains(parent::node()/@style, 'li')"/>
@@ -267,11 +274,9 @@
             <xsl:when
                 test="starts-with(parent::node()/@style, 'q') or starts-with(parent::node()/@style, 'li')">
                 <xsl:text disable-output-escaping="yes"><![CDATA[<PI2>]]></xsl:text>
-                <xsl:if test="$bridge != ''">
-                    <xsl:text disable-output-escaping="yes"><![CDATA[<sup>(]]></xsl:text>
-                    <xsl:value-of select="$bridge"/>
-                    <xsl:text disable-output-escaping="yes"><![CDATA[)</sup> ]]></xsl:text>
-                </xsl:if>
+                <xsl:call-template name="BridgeVerseNumbers">
+                    <xsl:with-param name="bridge" select="$bridge"/>
+                </xsl:call-template>
                 <xsl:apply-templates select="following::node()[1]" mode="t">
                     <xsl:with-param name="indent" select="4"/>
                     <xsl:with-param name="bullet" select="contains(parent::node()/@style, 'li')"/>
@@ -279,14 +284,32 @@
             </xsl:when>
             <!-- normal verse -->
             <xsl:otherwise>
-                <xsl:if test="$bridge != ''">
-                    <xsl:text disable-output-escaping="yes"><![CDATA[<sup>(]]></xsl:text>
-                    <xsl:value-of select="$bridge"/>
-                    <xsl:text disable-output-escaping="yes"><![CDATA[)</sup> ]]></xsl:text>
-                </xsl:if>
+                <xsl:call-template name="BridgeVerseNumbers">
+                    <xsl:with-param name="bridge" select="$bridge"/>
+                </xsl:call-template>
                 <xsl:apply-templates select="following::node()[1]" mode="t"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="BridgeVerseNumbers">
+        <xsl:param name="bridge"/>
+        <xsl:if test="$bridge != ''">
+            <xsl:text disable-output-escaping="yes"><![CDATA[<sup>(]]></xsl:text>
+            <xsl:choose>
+                <xsl:when test="$rtl">
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<rtl>]]></xsl:text>
+                    <xsl:value-of select="substring-before($bridge, $bridgePunc)"/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[</rtl>]]></xsl:text>
+                    <xsl:value-of select="$bridgePunc"/>
+                    <xsl:value-of select="substring-after($bridge, $bridgePunc)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$bridge"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:text disable-output-escaping="yes"><![CDATA[)</sup> ]]></xsl:text>
+        </xsl:if>
     </xsl:template>
     
     <!-- This mode handles the text nodes. -->
