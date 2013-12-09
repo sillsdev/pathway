@@ -389,6 +389,13 @@ namespace Test.TheWordConvertTest
             TestDataCase("1CO", "0461CO.usx", 2, "Papa soꞌsii, Koren pon enakan, kamoro Kʉrai Sises winɨ iyekonekasaꞌ kon wakʉ pe teꞌton kon pe, kamoro mɨ awɨrɨ naꞌneꞌ nan amʉtʉ pe esiiꞌma Sises Kʉrai, uyepuru kon esakʉ pɨꞌ naꞌneꞌ nan, toꞌ epuru mɨrɨ awonsiꞌkɨ uyepuru kon nɨ nɨrɨ:<RF q=*><a href=\"http:tw://bible.*?=44.18.1\">Inkupʉꞌpʉ 18:1</a><Rf>", bookNames, ":");
         }
 
+        [Test]
+        public void SpaceAfterRefTest()
+        {
+            var bookNames = "file:///" + FileInput("aauBookNames.xml");
+            TestDataCase("MRK", "041MRK.usx", 647, "Hmo prueyn hiy laplap kopi non nak-sau nok nok, wain ma laroray non sakeyn prouk nok, now-ho mon piynay nok, sa Jisas se seyn arnak-nakray, hiy lowswa e.<RF q=*><a href=\"http:tw://bible.*?=19.69.21\">Sng 69:21</a><Rf> Uwr sohiy nak-me, “Pereipia, hromkwe lira ey, Elaija po pankaw laye pakane, hye now ko se kandieys kow se.”", bookNames, ":");
+        }
+
         //[Test]
         //public void myTest()
         //{

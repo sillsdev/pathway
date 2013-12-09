@@ -367,6 +367,7 @@
                 <xsl:call-template name="CrossReferences">
                     <xsl:with-param name="caller" select="@caller"/>
                     <xsl:with-param name="text" select="*[@style='xt']/text()"/>
+                    <xsl:with-param name="space" select="$space"/>
                     <xsl:with-param name="indent" select="$indent"/>
                 </xsl:call-template>
             </xsl:when>
@@ -598,6 +599,7 @@
     <xsl:template name="CrossReferences">
         <xsl:param name="caller">*</xsl:param>
         <xsl:param name="text"/>
+        <xsl:param name="space"/>
         <xsl:param name="indent"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[<RF q=]]></xsl:text>
         <xsl:value-of select="@caller"/>
@@ -607,6 +609,7 @@
         </xsl:call-template>
         <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="$space"/>
             <xsl:with-param name="indent" select="$indent"/>
         </xsl:apply-templates>
     </xsl:template>
