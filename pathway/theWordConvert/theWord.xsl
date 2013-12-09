@@ -21,7 +21,7 @@
     <xsl:param name="noStar" select="false()"/>
     <xsl:param name="noSaltillo" select="false()"/>
     <xsl:param name="refPref">
-        <xsl:text disable-output-escaping="yes"><![CDATA[http:tw://bible.*?=]]></xsl:text>
+        <xsl:text disable-output-escaping="yes"><![CDATA[tw://bible.*?]]></xsl:text>
     </xsl:param>
     
     <xsl:output  encoding="UTF-8" method="text"/>
