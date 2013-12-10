@@ -31,6 +31,9 @@ namespace SIL.PublishingSolution
     {
         public void CreateTOC(XmlTextWriter _writer, string inputType)
         {
+            _writer.WriteStartElement("text:p");
+            _writer.WriteAttributeString("text:style-name", "copyright_dicBody"); //To give page break
+            _writer.WriteEndElement();
 
             _writer.WriteStartElement("text:table-of-content");
             _writer.WriteAttributeString("text:style-name", "toc_revAppendix");

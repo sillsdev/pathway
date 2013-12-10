@@ -487,6 +487,7 @@
     <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
     <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7" />
     <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7" />
+    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
     <style:master-page style:name="CopyRight_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7">
       <style:footer>
         <text:p text:style-name="Footer">
@@ -495,7 +496,7 @@
         </text:p>
       </style:footer>
     </style:master-page>
-    <style:master-page style:name="Dummy1_20_Page" style:display-name="Dummy1 Page" style:next-style-name="First_20_Page" style:page-layout-name="pm13" />
+    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
     <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3">
       <style:footer>
         <text:p text:style-name="Footer">
