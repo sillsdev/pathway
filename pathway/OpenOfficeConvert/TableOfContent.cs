@@ -115,6 +115,10 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+
+            _writer.WriteStartElement("text:p");
+            _writer.WriteAttributeString("text:style-name", "copyright_dicBody"); //To give page break
+            _writer.WriteEndElement();
             
         }
     }

@@ -180,6 +180,7 @@ namespace SIL.PublishingSolution
         private bool _isPreviousGlossary;//3719
         private int _pronunciationformCount;//3718
         private bool _isNonPronunciationform = true;
+        private bool _isEmptyPageInserted;
         #endregion
 
         #region Public Variable
@@ -937,14 +938,20 @@ namespace SIL.PublishingSolution
             //{
             //    InsertWhiteSpace();
             //}
+
+            
+
             if (_childName.ToLower().Contains("tableofcontents"))
             {
                 CallTOC();
+                
                 //_writer.WriteStartElement("text:p");
                 //_writer.WriteAttributeString("text:style-name", "P4");
                 //_writer.WriteEndElement();
                 return;
             }
+
+            InsertEmptyPageForFrontmatter(_childName.ToLower());
 
             if (_isDisplayNone)
             {
@@ -3196,6 +3203,7 @@ namespace SIL.PublishingSolution
             //To be insert left guideword on flexrev file
             WriteLeftGuidewordOnFlexRev();
 
+            //InsertEmptyPageForFrontmatter();
             //Fornt Matter added here//
             //WriteFrontMatter();
         }
@@ -3365,6 +3373,53 @@ namespace SIL.PublishingSolution
 
                 InsertLoFrontMatterCss(_projInfo.DefaultCssFileWithPath);
                 //End Front Matter//
+            }
+        }
+
+        private void InsertEmptyPageForFrontmatter(string ChildName)
+        {
+            if (!_isEmptyPageInserted) return;
+            //if (_childName.ToLower().Contains("tableofcontents"))
+            //{
+            //    _isEmptyPageInserted = true;
+            //    return;
+            //}
+
+            //if (_isEmptyPageInserted) return;
+            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && _projInfo.IsODM) return;
+
+            //if (ChildName.IndexOf("cover") == 0) return;
+
+            //if (ChildName.IndexOf("title") == 0 && (IdAllClass.ContainsKey("copyright") || IdAllClass.ContainsKey("TableOfContentLO")))
+            //    return;
+
+            //if (ChildName.IndexOf("copyright") == 0 && IdAllClass.ContainsKey("TableOfContentLO"))
+            //    return;
+
+            //if (ChildName.IndexOf("title") == 0 || ChildName.IndexOf("copyright") == 0 || ChildName.IndexOf("letter_lethead_dicbody") == 0)
+            if (ChildName.IndexOf("letter_lethead_dicbody") == 0)
+            {
+                _isEmptyPageInserted = true;
+                byte count = 0;
+                //IdAllClass["guidewordLength"].ContainsKey("guideword-length")
+                if (IdAllClass.ContainsKey("cover"))
+                    count += 2;
+
+                if (IdAllClass.ContainsKey("title"))
+                    count += 1;
+
+                if (IdAllClass.ContainsKey("copyright"))
+                    count += 1;
+
+                if (IdAllClass.ContainsKey("TableOfContentLO"))
+                    count += 1;
+
+                if (count > 0 && (count % 2) == 1)
+                {
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "copyright_dicBody");
+                    _writer.WriteEndElement();
+                }
             }
         }
 
