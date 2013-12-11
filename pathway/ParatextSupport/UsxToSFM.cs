@@ -354,7 +354,7 @@ namespace SIL.PublishingSolution
             string style = StackPop(_allStyle);
             string tag = StackPop(_alltagName);
 
-            if (tag == "para" || tag == "verse")
+            if (tag == "para")
             {
                 _sfmFile.WriteLine();
                 _verseNumber = string.Empty;
@@ -364,10 +364,11 @@ namespace SIL.PublishingSolution
                 string line = "\\" + style + "*";
                 _sfmFile.Write(line);
             }
-
-            //_style = StackPeek(_allStyle);
-            _style = string.Empty;
-            _tagName = StackPeek(_alltagName);
+            else if (tag != "verse")
+            {
+                _style = string.Empty;
+                _tagName = StackPeek(_alltagName);
+            }
         }
 
         /// <summary>
@@ -427,6 +428,7 @@ namespace SIL.PublishingSolution
 
             Note();
             Book();
+
             if (_isEmptyNode)
             {
                 if (_tagName != "verse")
@@ -445,7 +447,13 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                if (_tagName == "para")
+                if (_tagName == "chapter")
+                {
+                    WriteStyle(_style);
+                    _sfmFile.WriteLine();
+                    _isEmptyNode = false;
+                }
+                else if (_tagName == "para")
                 {
                     _isParaWritten = false;
                 }
@@ -547,6 +555,7 @@ namespace SIL.PublishingSolution
                 _sfmFile.Write(line);
             }
         }
+
 
         ///// <summary>
         ///// Write Para Tag Information
