@@ -328,11 +328,19 @@ namespace SIL.PublishingSolution
                 case "marks":
                     Marks(styleAttributeInfo);
                     break;
+                case "-ps-outline-level":
+                    CommomProperty(styleAttributeInfo);
+                    break;
                 default:
                     SimpleProperty(styleAttributeInfo);
                     break;
             }
             return _cssProperty;
+        }
+
+        private void CommomProperty(StyleAttribute styleAttributeInfo)
+        {
+            _cssProperty[styleAttributeInfo.Name] = styleAttributeInfo.StringValue;
         }
 
         private void Marks(StyleAttribute styleAttributeInfo)

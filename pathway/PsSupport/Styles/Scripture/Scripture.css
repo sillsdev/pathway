@@ -188,6 +188,7 @@
 .scrBook {
     column-count: 1;
     clear: both;
+    -ps-outline-level:2;
 }
 .scrBookCode {
     display: none;
