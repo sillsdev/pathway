@@ -3364,7 +3364,7 @@ namespace SIL.PublishingSolution
                 if (includeTOCPage)
                 {
                     TableOfContent toc = new TableOfContent();
-                    toc.CreateTOC(_writer, _projInfo.ProjectInputType);
+                    //toc.CreateTOC(_writer, _projInfo.ProjectInputType);
 
                     _writer.WriteStartElement("text:p");
                     _writer.WriteAttributeString("text:style-name", "dummypage");
@@ -3499,7 +3499,19 @@ namespace SIL.PublishingSolution
             if (tableOfContent.ToLower() == "true")
             {
                 TableOfContent toc = new TableOfContent();
-                toc.CreateTOC(_writer, _projInfo.ProjectInputType);
+                string strOutlineLevel = "1";
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    if (IdAllClass["letter"].ContainsKey("-ps-outline-level"))
+                        strOutlineLevel = IdAllClass["letter"]["-ps-outline-level"];
+                }
+                else
+                {
+                    if (IdAllClass["srcbook"].ContainsKey("-ps-outline-level"))
+                        strOutlineLevel = IdAllClass["srcbook"]["-ps-outline-level"];
+                }
+
+                toc.CreateTOC(_writer, _projInfo.ProjectInputType, strOutlineLevel);
             }
         }
 
