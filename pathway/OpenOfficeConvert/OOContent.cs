@@ -3507,8 +3507,8 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    if (IdAllClass["srcbook"].ContainsKey("-ps-outline-level"))
-                        strOutlineLevel = IdAllClass["srcbook"]["-ps-outline-level"];
+                    if (IdAllClass["scrBook"].ContainsKey("-ps-outline-level"))
+                        strOutlineLevel = IdAllClass["scrBook"]["-ps-outline-level"];
                 }
 
                 toc.CreateTOC(_writer, _projInfo.ProjectInputType, strOutlineLevel);
