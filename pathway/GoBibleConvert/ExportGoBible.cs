@@ -78,21 +78,28 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             bool success;
+#if (TIME_IT)
+                DateTime dt1 = DateTime.Now;    // time this thing
+#endif
             var inProcess = new InProcess(0, 6);
             try
             {
                 var curdir = Environment.CurrentDirectory;
                 var myCursor = Cursor.Current;
                 Cursor.Current = Cursors.WaitCursor;
-
+                inProcess.Text = "GoBible Export";
                 inProcess.Show();
                 inProcess.PerformStep();
+                inProcess.ShowStatus = true;
+                inProcess.SetStatus("Processing GoBible Export");
+
                 _isLinux = Common.UnixVersionCheck();
 
                 string exportGoBibleInputPath = string.Empty;
                 exportGoBibleInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
                 processFolder = exportGoBibleInputPath;
                 CreateCollectionsTextFile(exportGoBibleInputPath);
+                inProcess.PerformStep();
                 var iconFullName = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore", "Icon.png"));
                 var iconDirectory = Path.GetDirectoryName(iconFullName);
                 _iconFile = Path.GetFileName(iconFullName);
@@ -126,15 +133,22 @@ namespace SIL.PublishingSolution
                 UIPropertiesCopyToTempFolder(goBibleCreatorPath, filePaths);
 
                 BuildApplication(tempGoBibleCreatorPath);
-                success = true;
-                inProcess.PerformStep();
-                inProcess.Close();
-                Cursor.Current = myCursor;
-                inProcess.PerformStep();
+                
                 string jarFile = Common.PathCombine(processFolder, NoSp(GetInfo(Param.Title)) + ".jar");
-
+                inProcess.PerformStep();
                 if (File.Exists(jarFile))
                 {
+
+                    //DeleteTempFiles(exportGoBibleInputPath);
+                    Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", string.Empty, string.Empty);
+                    CreateRAMP(projInfo);
+                    Common.DeleteDirectory(tempGoBibleCreatorPath);
+
+                    success = true;
+                    Cursor.Current = myCursor;
+                    inProcess.PerformStep();
+                    inProcess.Close();
+
                     // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
                     string msg = string.Format("Please copy the file {0} to your phone.\n\nDo you want to open the folder?", jarFile);
                     DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -145,17 +159,14 @@ namespace SIL.PublishingSolution
                         Process.Start(dirPath);
                         //Process.Start("explorer.exe", dirPath);
                     }
-
+                    
                 }
                 else
                 {
                     MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    success = false;
                 }
-
-                //DeleteTempFiles(exportGoBibleInputPath);
-                Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", string.Empty, string.Empty);
-                CreateRAMP(projInfo);
-                Common.DeleteDirectory(tempGoBibleCreatorPath);
+                
             }
             catch (Exception ex)
             {
