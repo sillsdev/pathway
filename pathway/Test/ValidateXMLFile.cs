@@ -358,7 +358,7 @@ namespace Test
             else
             {
                 string subpath = paraSpan.ToLower() == "para"
-                                     ? "//text:P[@text:style-name='" + ClassName + "']"
+                                     ? "//text:p[@text:style-name='" + ClassName + "']"
                                      : "//text:span[@text:style-name='" + ClassName + "']";
                 XPath = subpath;
                 node = ValidateGetNodeNS(node);
