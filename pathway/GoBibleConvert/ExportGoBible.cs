@@ -163,8 +163,11 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     success = false;
+                    Cursor.Current = myCursor;
+                    inProcess.PerformStep();
+                    inProcess.Close();
+                    MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 
             }
@@ -396,10 +399,10 @@ namespace SIL.PublishingSolution
             const string prog = "java";
             var creatorFullPath = Common.PathCombine(goBibleCreatorPath, Creator);
 
-            if (_isLinux)
-            {
-                creatorFullPath = "/usr/share/gobiblecreator/GoBibleCreator.244/GoBibleCreator.jar";
-            }
+            //if (_isLinux)
+            //{
+            //    creatorFullPath = "/usr/share/gobiblecreator/GoBibleCreator.244/GoBibleCreator.jar";
+            //}
 
             var progFolder = SubProcess.JavaLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);
