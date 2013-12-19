@@ -498,7 +498,7 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
 charset=0
 lang={0}
 font={9}
-{10}short.title={1}
+short.title={1}
 title={2}
 description={3} \
 {4}
