@@ -11,47 +11,47 @@
         <Content>Pita</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/TitleMain_1">
         <Content>Pita</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroSectionHead_1">
         <Content>Na Titiono Eigna Na Letasi Iaani</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroParagraph_1">
         <Content>A Pita sina mane vaovarongo nigna a Jisas. Leghugna a Jisas ke vula hadi i popo, a Pita na mane vetula mi sikei itadia mara kena baubatu tadia na komi tinoni kiloau i Jerusalem. Reghia Buka Tango 15:7-11.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_4">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroParagraph_1">
         <Content>A Pita ke risoa na letasi iaani vanira na komi tinoni kena vaututuni kena mono tadia kekeha provins kena vunaghi pungusira mara Rom. Tadia na komi provins irangeni, mara kena boi vaututunia a Jisas, imarea kena bosi magnahaghinira na komi tinoni kiloau mena vaparara.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_4">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroParagraph_1">
         <Content>A Pita ke risoa na letasi iaani bali vaheta na ghaghanadia na komi tinoni kiloau eigna kedana sokara ngasi kori vido kena papara kori havidia. Na vunegna imarea kena adoa a Krais ke papara kori havigna, e toke gi imarea kedana sasaa na papara mua eigna kena vaututunia. A Pita ke velera na komi papara ke padara bali pipilia nidia na vaututuni. Gi kedana sokara ngasi mena jufu kori vagovugna, a God keda hera na komi fata ke toke ke kaikaliti vanira nigna na komi tinoni.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_4">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroParagraph_1">
         <Content>Kori letasi iaani a Pita ke velera mua na komi tinoni kiloau eigna kedana leghu hahalia na komi puhi ke jino ke nabadia na komi tinoni nigna a Jisas Krais.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroSectionHead_2">
         <Content>Na Komi Fata Ke Nagho Kori Letasi Iaani:</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroListItem1_1">
         <Content>Na komi fata a God ke kaikalitia vanira nigna na komi tinoni (1:1-12)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_7">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroListItem1_1">
         <Content>Na komi tinoni kena vaututuni kedana mono tabu (1:13--2:10)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_7">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroListItem1_1">
         <Content>Na komi puhi na komi tinoni kiloau kedana leghura (2:11--4:19)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_7">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroListItem1_1">
         <Content>Na velepuhi eidia arahai kena baubatu tadia na komi tinoni kiloau (5:1-14)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
   </Story>

@@ -1013,6 +1013,19 @@ namespace SIL.PublishingSolution
             //if (styleName == "ChapterNumber") return styleName;
             //if (styleName == "VerseNumber") return styleName;
             if (_headwordStyles) return styleName;
+            while (styleName.StartsWith("span") || styleName.StartsWith("xitem"))
+            {
+                if (string.IsNullOrEmpty(_parentStyleName))
+                {
+                    break;
+                }
+                styleName = _parentStyleName;
+                if (styleName.Contains("_"))
+                {
+                    styleName = styleName.Substring(0, styleName.IndexOf("_"));
+                }
+                _parentStyleName = StackPeek(_allStyle);
+            }
             int suffix = 1;
             string newname;
             while (true)
@@ -1021,6 +1034,23 @@ namespace SIL.PublishingSolution
                 if (!_newProperty.ContainsKey(newname))
                 {
                     break;
+                }
+                var props = _newProperty[newname];
+                if (props.Count == _tempStyle.Count)
+                {
+                    var allPopsEqual = true;
+                    foreach (string prop in props.Keys)
+                    {
+                        if (!_tempStyle.ContainsKey(prop) || props[prop] != _tempStyle[prop])
+                        {
+                            allPopsEqual = false;
+                            break;
+                        }
+                    }
+                    if (allPopsEqual)
+                    {
+                        break;
+                    }
                 }
             }
             return newname;

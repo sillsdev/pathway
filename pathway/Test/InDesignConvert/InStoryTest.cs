@@ -106,8 +106,8 @@ namespace Test.InDesignConvert
             string content = "1.2";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, classname + " test Failed");
-            classname = "sense..before_2";
-            XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"]";
+            classname = "sense..before_1";
+            XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"][2]";
 
             content = "1.4";
             result = ValidateNodeContent(_outputStory, content);
@@ -127,8 +127,8 @@ namespace Test.InDesignConvert
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, classname + " test Failed");
 
-            classname = "sense..before_3";
-            XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"]";
+            classname = "sense..before_1";
+            XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"][3]";
 
             content = "2.0.4";
             result = ValidateNodeContent(_outputStory, content);
@@ -147,8 +147,8 @@ namespace Test.InDesignConvert
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, classname + " test Failed");
 
-            classname = "sense..before_2";
-            XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"]";
+            classname = "sense..before_1";
+            XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"][2]";
 
             content = "1.2";
             result = ValidateNodeContent(_outputStory, content);
@@ -369,7 +369,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
             //_expected.Clear();
-            styleName = "t4_2";
+            styleName = "t4_1";
             //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[6][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T4 class ";
@@ -377,7 +377,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
             //_expected.Clear();
-            styleName = "t4_3";
+            styleName = "t4_1";
             //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[7][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T4 class ";
@@ -561,51 +561,51 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Add("FillColor", "Color/#008000");
-            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"xitem_.en_.level1_.level22_1\"]";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"main_2\"]";
             bool result = StyleXmlNodeTest(true);
             Assert.IsTrue(result, _inputCSS + " test Failed");
             
             //1
             _expected.Clear();
             _expected.Add("FillColor", "Color/#ffa500");
-            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"xitem_.en_.level1_1\"]";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"main_3\"]";
             result = ValidateNodeAttribute();
             Assert.IsTrue(result, _inputCSS + " 1test Failed");
             //2
             _expected.Clear();
             _expected.Add("FillColor", "Color/#00ffff");
-            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"xitem_.en_.level22_1\"]";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"main_4\"]";
             result = ValidateNodeAttribute();
             Assert.IsTrue(result, _inputCSS + " 2test Failed");
             //3
             _expected.Clear();
             _expected.Add("FillColor", "Color/#ffff00");
-            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"xitem_.level1_.level22_1\"]";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"main_5\"]";
             result = ValidateNodeAttribute();
             Assert.IsTrue(result, _inputCSS + " 3test Failed");
 
             //4
             _expected.Clear();
             _expected.Add("FillColor", "Color/#a52a2a");
-            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"xitem_.en_1\"]";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"main_6\"]";
             result = ValidateNodeAttribute();
             Assert.IsTrue(result, _inputCSS + " 4test Failed");
             //5
             _expected.Clear();
             _expected.Add("FillColor", "Color/#0000ff");
-            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"xitem_.level1_1\"]";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"main_7\"]";
             result = ValidateNodeAttribute();
             Assert.IsTrue(result, _inputCSS + " 5test Failed");
             //6
             _expected.Clear();
             _expected.Add("FillColor", "Color/#ff0000");
-            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"xitem_.level22_1\"]";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"main_8\"]";
             result = ValidateNodeAttribute();
             Assert.IsTrue(result, _inputCSS + " 6test Failed");
             //7
             _expected.Clear();
             _expected.Add("FillColor", "Color/#ee82ee");
-            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"xitem_1\"]";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"main_9\"]";
             result = ValidateNodeAttribute();
             Assert.IsTrue(result, _inputCSS + " 7test Failed");
 
@@ -619,14 +619,14 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Add("FillColor", "Color/#0000ff");
-            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"xitem_.en_1\"]";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"main_2\"]";
             bool result = StyleXmlNodeTest(true);
             Assert.IsTrue(result, _inputCSS + " test Failed");
 
             //1
             _expected.Clear();
             _expected.Add("FillColor", "Color/#ff0000");
-            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"xitem_1\"]";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"main_3\"]";
             result = ValidateNodeAttribute();
             Assert.IsTrue(result, _inputCSS + " 1test Failed");
         }
@@ -664,15 +664,15 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "span_1";
+            string styleName = "Paragraph_1";
             XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
             string content = "ámʋ asɩ wie tá á, ɔlɔwa mʋ akasɩ́pʋ́ abanyɔ́ gyankpá. Ɔlɛbláa amʋ́ ɔbɛ́ɛ, “Mlɩyɔ wúlu amʋ ɔnɔ́ á, ";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "span_3";
-            XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
+            styleName = "Paragraph_1";
+            XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"][2]//Content";
             content = "Nɩ́ ɔkʋ ɔfɩ́tɛ́ mlɩ asʋankʋ á, mlɩbla mʋ mlɩaa, ‘Anɩ Wíe dɛ́ amʋ́ hián.’ Ɩnʋnʋ ɔbɛ́ha mlɔ́pʋ amʋ́ ba mɩ.”";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
@@ -702,7 +702,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "span_2";
+            styleName = "NoteGeneralParagraph_1";
             XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
             content = "igyi obubwí kʋá ɩbʋ mantáa Yerusalem, bʋtɛtɩ́ mʋ́ Olifbʋ.";
             result = ValidateNodeContent(_outputStory, content);
@@ -734,14 +734,14 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "xitem_main_1";
+            string styleName = "main_2";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[1][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             bool result = StoryXmlNodeTest(true);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "xitem-xitem_1";
+            styleName = "main_3";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
@@ -749,28 +749,28 @@ namespace Test.InDesignConvert
 
 
             _expected.Clear();
-            styleName = "xitem_.en-xitem_1";
+            styleName = "main_4";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[3][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "xitem-xitem_2";
+            styleName = "main_3";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[6][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "xitem-xitem_3";
+            styleName = "main_3";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[7][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "xitem-xitem_1";
+            styleName = "main_3";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[8][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
@@ -791,14 +791,14 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "xitem_.en_1";
+            string styleName = "main_2";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[1][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             bool result = StoryXmlNodeTest(true);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "xitem-xitem_1";
+            styleName = "main_3";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
@@ -806,28 +806,28 @@ namespace Test.InDesignConvert
 
 
             _expected.Clear();
-            styleName = "xitem_.en-xitem_1";
+            styleName = "main_4";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[3][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "xitem-xitem_2";
+            styleName = "main_3";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[6][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "xitem-xitem_3";
+            styleName = "main_3";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[7][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "xitem-xitem_1";
+            styleName = "main_3";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[8][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
@@ -870,14 +870,14 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "xitem..contains_1";
+            string styleName = "main_3";
             _expected.Add("AppliedCharacterStyle", "CharacterStyle/" + styleName);
             XPath = "//CharacterStyleRange[1][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             bool result = StoryXmlNodeTest(true);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "xitem-xitem..contains_1";
+            styleName = "main_3";
             _expected.Add("AppliedCharacterStyle", "CharacterStyle/" + styleName);
             XPath = "//CharacterStyleRange[1][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
@@ -938,14 +938,14 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "letter.-locator_2";
+            styleName = "letter.-locator_1";
             _expected.Add(styleName, "b");
             XPath = "//ParagraphStyleRange[2]/CharacterStyleRange[2][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "letter.-locator_4";
+            styleName = "letter.-locator_1";
             _expected.Add(styleName, "d");
             XPath = "//ParagraphStyleRange[2]/CharacterStyleRange[5][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(false);
@@ -972,28 +972,28 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "span_1";
+            string styleName = "main_2";
             _expected.Add(styleName, "span Tag - Red");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[1][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             bool result = StoryXmlNodeTestForTag(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "span_.en_1";
+            styleName = "main_3";
             _expected.Add(styleName, " span Header with lang - Orange");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[2][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTestForTag(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "span.header_1";
+            styleName = "main_4";
             _expected.Add(styleName, " span Header - Blue");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[3][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTestForTag(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "span.header_.en_1";
+            styleName = "main_5";
             _expected.Add(styleName, " span Header with lang - Green");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[4][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTestForTag(false);
@@ -1041,7 +1041,7 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "span_.mcb_1";
+            string styleName = "letData_2";
             _expected.Add(styleName, "chomi");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[1][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             bool result = StoryXmlNodeTest(false);
@@ -1055,21 +1055,21 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "span_.mcb_2";
+            styleName = "letData_2";
             _expected.Add(styleName, "tagantsi");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[3][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "span_.es_1";
+            styleName = "letData_3";
             _expected.Add(styleName, "chuparse la mano");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[4][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "span_.es_2";
+            styleName = "letData_3";
             _expected.Add(styleName, ").");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[5][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(false);
@@ -1732,7 +1732,7 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Add("Position", "Superscript");
-            XPath = "//ParagraphStyleRange[30]/CharacterStyleRange[3]";
+            XPath = "//ParagraphStyleRange[32]/CharacterStyleRange";
             bool result = StoryXmlNodeTest(true);
             Assert.IsTrue(result, _inputCSS + " test Failed");
 
@@ -1747,7 +1747,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, _inputCSS + " test Failed");
 
             _expected.Add("Content", " Reghia kori Diksonari.");
-            XPath = "//ParagraphStyleRange/CharacterStyleRange/Footnote/ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/span_7\"]";
+            XPath = "//ParagraphStyleRange/CharacterStyleRange/Footnote/ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/NoteGeneralParagraph_1\"]";
             result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, _inputCSS + " test Failed");
         }
@@ -1763,7 +1763,7 @@ namespace Test.InDesignConvert
             _storyXML = new InStory();
             _inputCSS= Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case1.css");
             ExportProcess();
-            string styleName = "h1_2";
+            string styleName = "h1_1";
             //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             string content = "h1 lang";
@@ -2290,7 +2290,7 @@ namespace Test.InDesignConvert
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
             projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
             _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
-            XPath = "//ParagraphStyleRange[@AppliedParagraphStyle = \"ParagraphStyle/letter_2\"]/CharacterStyleRange";
+            XPath = "//ParagraphStyleRange[@AppliedParagraphStyle = \"ParagraphStyle/letter_1\"]/CharacterStyleRange";
             string _fileNameWithPath = Common.PathCombine(_outputStory, "Story_4.xml");
             XmlNodeList nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, XPath);
             XmlNode node = nodesList[0];
