@@ -75,6 +75,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnOsis = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -85,7 +86,7 @@
             // BtnFlexTest
             // 
             this.BtnFlexTest.AccessibleName = "BtnFlexTest";
-            this.BtnFlexTest.Location = new System.Drawing.Point(207, 156);
+            this.BtnFlexTest.Location = new System.Drawing.Point(190, 156);
             this.BtnFlexTest.Name = "BtnFlexTest";
             this.BtnFlexTest.Size = new System.Drawing.Size(75, 28);
             this.BtnFlexTest.TabIndex = 46;
@@ -102,9 +103,9 @@
             this.panel1.Controls.Add(this.BtnBrowse);
             this.panel1.Controls.Add(this.TxtInput);
             this.panel1.Controls.Add(this.button9);
-            this.panel1.Location = new System.Drawing.Point(41, 28);
+            this.panel1.Location = new System.Drawing.Point(24, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(513, 122);
+            this.panel1.Size = new System.Drawing.Size(500, 122);
             this.panel1.TabIndex = 47;
             // 
             // button10
@@ -169,7 +170,7 @@
             // BtnTETest
             // 
             this.BtnTETest.AccessibleName = "BtnFlexTest";
-            this.BtnTETest.Location = new System.Drawing.Point(288, 156);
+            this.BtnTETest.Location = new System.Drawing.Point(271, 156);
             this.BtnTETest.Name = "BtnTETest";
             this.BtnTETest.Size = new System.Drawing.Size(98, 28);
             this.BtnTETest.TabIndex = 48;
@@ -181,9 +182,9 @@
             // 
             this.InDesign.AccessibleName = "BtnFlexTest";
             this.InDesign.BackColor = System.Drawing.Color.MediumOrchid;
-            this.InDesign.Location = new System.Drawing.Point(176, 128);
+            this.InDesign.Location = new System.Drawing.Point(234, 155);
             this.InDesign.Name = "InDesign";
-            this.InDesign.Size = new System.Drawing.Size(78, 28);
+            this.InDesign.Size = new System.Drawing.Size(100, 40);
             this.InDesign.TabIndex = 49;
             this.InDesign.Text = "&InDesign ";
             this.InDesign.UseVisualStyleBackColor = false;
@@ -196,7 +197,7 @@
             this.panel2.Controls.Add(this.txtCSSInput);
             this.panel2.Controls.Add(this.txtInputPath);
             this.panel2.Controls.Add(this.Btn_InputPath);
-            this.panel2.Location = new System.Drawing.Point(10, 24);
+            this.panel2.Location = new System.Drawing.Point(38, 24);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(513, 98);
             this.panel2.TabIndex = 50;
@@ -237,6 +238,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnOsis);
             this.groupBox1.Controls.Add(this.button13);
             this.groupBox1.Controls.Add(this.btnJson);
             this.groupBox1.Controls.Add(this.btnEpubValidator);
@@ -264,7 +266,7 @@
             this.groupBox1.Controls.Add(this.InDesign);
             this.groupBox1.Location = new System.Drawing.Point(13, 247);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(623, 270);
+            this.groupBox1.Size = new System.Drawing.Size(672, 349);
             this.groupBox1.TabIndex = 51;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
@@ -274,9 +276,9 @@
             // 
             this.button13.AccessibleName = "BtnFlexTest";
             this.button13.BackColor = System.Drawing.Color.Sienna;
-            this.button13.Location = new System.Drawing.Point(511, 190);
+            this.button13.Location = new System.Drawing.Point(557, 247);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(78, 28);
+            this.button13.Size = new System.Drawing.Size(100, 40);
             this.button13.TabIndex = 81;
             this.button13.Text = "Progress Bar";
             this.button13.UseVisualStyleBackColor = false;
@@ -286,9 +288,9 @@
             // 
             this.btnJson.AccessibleName = "BtnFlexTest";
             this.btnJson.BackColor = System.Drawing.Color.Yellow;
-            this.btnJson.Location = new System.Drawing.Point(512, 160);
+            this.btnJson.Location = new System.Drawing.Point(557, 201);
             this.btnJson.Name = "btnJson";
-            this.btnJson.Size = new System.Drawing.Size(78, 28);
+            this.btnJson.Size = new System.Drawing.Size(100, 40);
             this.btnJson.TabIndex = 80;
             this.btnJson.Text = "JSON";
             this.btnJson.UseVisualStyleBackColor = false;
@@ -297,9 +299,9 @@
             // btnEpubValidator
             // 
             this.btnEpubValidator.BackColor = System.Drawing.Color.Cyan;
-            this.btnEpubValidator.Location = new System.Drawing.Point(380, 188);
+            this.btnEpubValidator.Location = new System.Drawing.Point(451, 247);
             this.btnEpubValidator.Name = "btnEpubValidator";
-            this.btnEpubValidator.Size = new System.Drawing.Size(125, 33);
+            this.btnEpubValidator.Size = new System.Drawing.Size(100, 40);
             this.btnEpubValidator.TabIndex = 79;
             this.btnEpubValidator.Text = "EPubValidator";
             this.btnEpubValidator.UseVisualStyleBackColor = false;
@@ -309,11 +311,11 @@
             // 
             this.button8.AccessibleName = "BtnFlexTest";
             this.button8.BackColor = System.Drawing.Color.LimeGreen;
-            this.button8.Location = new System.Drawing.Point(458, 234);
+            this.button8.Location = new System.Drawing.Point(557, 293);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(84, 27);
+            this.button8.Size = new System.Drawing.Size(100, 40);
             this.button8.TabIndex = 78;
-            this.button8.Text = "DictionaryForMIDs";
+            this.button8.Text = "DictionaryForMID";
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 
@@ -321,9 +323,9 @@
             // 
             this.btnPrinceExport.AccessibleName = "BtnFlexTest";
             this.btnPrinceExport.BackColor = System.Drawing.Color.GreenYellow;
-            this.btnPrinceExport.Location = new System.Drawing.Point(512, 128);
+            this.btnPrinceExport.Location = new System.Drawing.Point(557, 155);
             this.btnPrinceExport.Name = "btnPrinceExport";
-            this.btnPrinceExport.Size = new System.Drawing.Size(78, 28);
+            this.btnPrinceExport.Size = new System.Drawing.Size(100, 40);
             this.btnPrinceExport.TabIndex = 77;
             this.btnPrinceExport.Text = "Prince Export";
             this.btnPrinceExport.UseVisualStyleBackColor = false;
@@ -333,9 +335,9 @@
             // 
             this.btnSfm2Usx.AccessibleName = "btnSfm2Usx";
             this.btnSfm2Usx.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnSfm2Usx.Location = new System.Drawing.Point(290, 234);
+            this.btnSfm2Usx.Location = new System.Drawing.Point(340, 293);
             this.btnSfm2Usx.Name = "btnSfm2Usx";
-            this.btnSfm2Usx.Size = new System.Drawing.Size(72, 28);
+            this.btnSfm2Usx.Size = new System.Drawing.Size(100, 40);
             this.btnSfm2Usx.TabIndex = 76;
             this.btnSfm2Usx.Text = "SFM to Usx";
             this.btnSfm2Usx.UseVisualStyleBackColor = false;
@@ -345,9 +347,9 @@
             // 
             this.btnRemoveBom.AccessibleName = "BtnFlexTest";
             this.btnRemoveBom.BackColor = System.Drawing.Color.Aquamarine;
-            this.btnRemoveBom.Location = new System.Drawing.Point(368, 234);
+            this.btnRemoveBom.Location = new System.Drawing.Point(451, 293);
             this.btnRemoveBom.Name = "btnRemoveBom";
-            this.btnRemoveBom.Size = new System.Drawing.Size(84, 27);
+            this.btnRemoveBom.Size = new System.Drawing.Size(100, 40);
             this.btnRemoveBom.TabIndex = 75;
             this.btnRemoveBom.Text = "Rem BOM";
             this.btnRemoveBom.UseVisualStyleBackColor = false;
@@ -357,9 +359,9 @@
             // 
             this.btnUsx2SFM.AccessibleName = "BtnFlexTest";
             this.btnUsx2SFM.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.btnUsx2SFM.Location = new System.Drawing.Point(212, 234);
+            this.btnUsx2SFM.Location = new System.Drawing.Point(234, 293);
             this.btnUsx2SFM.Name = "btnUsx2SFM";
-            this.btnUsx2SFM.Size = new System.Drawing.Size(72, 28);
+            this.btnUsx2SFM.Size = new System.Drawing.Size(100, 40);
             this.btnUsx2SFM.TabIndex = 74;
             this.btnUsx2SFM.Text = "Usx to SFM";
             this.btnUsx2SFM.UseVisualStyleBackColor = false;
@@ -369,9 +371,9 @@
             // 
             this.btnEpub.AccessibleName = "BtnFlexTest";
             this.btnEpub.BackColor = System.Drawing.Color.Pink;
-            this.btnEpub.Location = new System.Drawing.Point(110, 234);
+            this.btnEpub.Location = new System.Drawing.Point(128, 293);
             this.btnEpub.Name = "btnEpub";
-            this.btnEpub.Size = new System.Drawing.Size(95, 28);
+            this.btnEpub.Size = new System.Drawing.Size(100, 40);
             this.btnEpub.TabIndex = 71;
             this.btnEpub.Text = "Epub";
             this.btnEpub.UseVisualStyleBackColor = false;
@@ -381,9 +383,9 @@
             // 
             this.btnWordPress.AccessibleName = "BtnWordPress";
             this.btnWordPress.BackColor = System.Drawing.Color.Plum;
-            this.btnWordPress.Location = new System.Drawing.Point(210, 160);
+            this.btnWordPress.Location = new System.Drawing.Point(22, 201);
             this.btnWordPress.Name = "btnWordPress";
-            this.btnWordPress.Size = new System.Drawing.Size(95, 28);
+            this.btnWordPress.Size = new System.Drawing.Size(100, 40);
             this.btnWordPress.TabIndex = 69;
             this.btnWordPress.Text = "Word Press";
             this.btnWordPress.UseVisualStyleBackColor = false;
@@ -393,9 +395,9 @@
             // 
             this.btnGetSoftwareData.AccessibleName = "BtnFlexTest";
             this.btnGetSoftwareData.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.btnGetSoftwareData.Location = new System.Drawing.Point(8, 236);
+            this.btnGetSoftwareData.Location = new System.Drawing.Point(128, 201);
             this.btnGetSoftwareData.Name = "btnGetSoftwareData";
-            this.btnGetSoftwareData.Size = new System.Drawing.Size(95, 28);
+            this.btnGetSoftwareData.Size = new System.Drawing.Size(100, 40);
             this.btnGetSoftwareData.TabIndex = 67;
             this.btnGetSoftwareData.Text = "Usage Report";
             this.btnGetSoftwareData.UseVisualStyleBackColor = false;
@@ -404,9 +406,9 @@
             // btnDotNet
             // 
             this.btnDotNet.AccessibleName = "BtnFlexTest";
-            this.btnDotNet.Location = new System.Drawing.Point(380, 160);
+            this.btnDotNet.Location = new System.Drawing.Point(451, 201);
             this.btnDotNet.Name = "btnDotNet";
-            this.btnDotNet.Size = new System.Drawing.Size(125, 28);
+            this.btnDotNet.Size = new System.Drawing.Size(100, 40);
             this.btnDotNet.TabIndex = 66;
             this.btnDotNet.Text = "DotNet 2.0 Installed";
             this.btnDotNet.UseVisualStyleBackColor = true;
@@ -414,9 +416,9 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(92, 160);
+            this.button12.Location = new System.Drawing.Point(128, 247);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(112, 26);
+            this.button12.Size = new System.Drawing.Size(100, 40);
             this.button12.TabIndex = 65;
             this.button12.Text = "WritingStoreTo CSS";
             this.button12.UseVisualStyleBackColor = true;
@@ -426,9 +428,9 @@
             // 
             this.btnXeLaTex.AccessibleName = "BtnFlexTest";
             this.btnXeLaTex.BackColor = System.Drawing.Color.Orange;
-            this.btnXeLaTex.Location = new System.Drawing.Point(92, 128);
+            this.btnXeLaTex.Location = new System.Drawing.Point(128, 155);
             this.btnXeLaTex.Name = "btnXeLaTex";
-            this.btnXeLaTex.Size = new System.Drawing.Size(78, 28);
+            this.btnXeLaTex.Size = new System.Drawing.Size(100, 40);
             this.btnXeLaTex.TabIndex = 62;
             this.btnXeLaTex.Text = "XeLaTex";
             this.btnXeLaTex.UseVisualStyleBackColor = false;
@@ -438,9 +440,9 @@
             // 
             this.button11.AccessibleName = "BtnGoBibleTest";
             this.button11.BackColor = System.Drawing.Color.Green;
-            this.button11.Location = new System.Drawing.Point(260, 128);
+            this.button11.Location = new System.Drawing.Point(340, 155);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(78, 28);
+            this.button11.Size = new System.Drawing.Size(100, 40);
             this.button11.TabIndex = 61;
             this.button11.Text = "Go Bible";
             this.button11.UseVisualStyleBackColor = false;
@@ -449,11 +451,11 @@
             // button7
             // 
             this.button7.AccessibleName = "BtnFlexTest";
-            this.button7.Location = new System.Drawing.Point(10, 159);
+            this.button7.Location = new System.Drawing.Point(22, 247);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(76, 28);
+            this.button7.Size = new System.Drawing.Size(100, 40);
             this.button7.TabIndex = 58;
-            this.button7.Text = ".&Sty to .CSS";
+            this.button7.Text = "&Sty to CSS";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.StyConvert_Click);
             // 
@@ -461,9 +463,9 @@
             // 
             this.btnParaText.AccessibleName = "BtnFlexTest";
             this.btnParaText.BackColor = System.Drawing.Color.Salmon;
-            this.btnParaText.Location = new System.Drawing.Point(344, 128);
+            this.btnParaText.Location = new System.Drawing.Point(451, 155);
             this.btnParaText.Name = "btnParaText";
-            this.btnParaText.Size = new System.Drawing.Size(78, 28);
+            this.btnParaText.Size = new System.Drawing.Size(100, 40);
             this.btnParaText.TabIndex = 57;
             this.btnParaText.Text = "&ParaText";
             this.btnParaText.UseVisualStyleBackColor = false;
@@ -472,9 +474,9 @@
             // button6
             // 
             this.button6.AccessibleName = "BtnLogos";
-            this.button6.Location = new System.Drawing.Point(311, 162);
+            this.button6.Location = new System.Drawing.Point(340, 201);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(63, 28);
+            this.button6.Size = new System.Drawing.Size(100, 40);
             this.button6.TabIndex = 56;
             this.button6.Text = "&Logos";
             this.button6.UseVisualStyleBackColor = true;
@@ -485,7 +487,7 @@
             this.chkPage.AutoSize = true;
             this.chkPage.Checked = true;
             this.chkPage.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPage.Location = new System.Drawing.Point(528, 75);
+            this.chkPage.Location = new System.Drawing.Point(564, 87);
             this.chkPage.Name = "chkPage";
             this.chkPage.Size = new System.Drawing.Size(93, 17);
             this.chkPage.TabIndex = 55;
@@ -496,7 +498,7 @@
             // 
             this.panel3.Controls.Add(this.radDictionary);
             this.panel3.Controls.Add(this.radScripture);
-            this.panel3.Location = new System.Drawing.Point(528, 24);
+            this.panel3.Location = new System.Drawing.Point(564, 32);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(80, 49);
             this.panel3.TabIndex = 54;
@@ -505,7 +507,7 @@
             // 
             this.radDictionary.AutoSize = true;
             this.radDictionary.Checked = true;
-            this.radDictionary.Location = new System.Drawing.Point(3, 3);
+            this.radDictionary.Location = new System.Drawing.Point(5, 3);
             this.radDictionary.Name = "radDictionary";
             this.radDictionary.Size = new System.Drawing.Size(72, 17);
             this.radDictionary.TabIndex = 2;
@@ -526,9 +528,9 @@
             // button5
             // 
             this.button5.AccessibleName = "BtnFlexTest";
-            this.button5.Location = new System.Drawing.Point(208, 193);
+            this.button5.Location = new System.Drawing.Point(234, 247);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(68, 28);
+            this.button5.Size = new System.Drawing.Size(100, 40);
             this.button5.TabIndex = 53;
             this.button5.Text = "&Builder";
             this.button5.UseVisualStyleBackColor = true;
@@ -538,9 +540,9 @@
             // 
             this.button4.AccessibleName = "BtnFlexTest";
             this.button4.BackColor = System.Drawing.SystemColors.Highlight;
-            this.button4.Location = new System.Drawing.Point(8, 128);
+            this.button4.Location = new System.Drawing.Point(22, 155);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(78, 28);
+            this.button4.Size = new System.Drawing.Size(100, 40);
             this.button4.TabIndex = 52;
             this.button4.Text = "&OpenOffice";
             this.button4.UseVisualStyleBackColor = false;
@@ -549,9 +551,9 @@
             // button1
             // 
             this.button1.AccessibleName = "BtnFlexTest";
-            this.button1.Location = new System.Drawing.Point(283, 192);
+            this.button1.Location = new System.Drawing.Point(340, 247);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 28);
+            this.button1.Size = new System.Drawing.Size(100, 40);
             this.button1.TabIndex = 51;
             this.button1.Text = "&OLD_OpenOffice";
             this.button1.UseVisualStyleBackColor = true;
@@ -567,18 +569,18 @@
             this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.BtnFlexTest);
             this.groupBox2.Controls.Add(this.BtnTETest);
-            this.groupBox2.Location = new System.Drawing.Point(26, 11);
+            this.groupBox2.Location = new System.Drawing.Point(23, 11);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(591, 230);
+            this.groupBox2.Size = new System.Drawing.Size(647, 230);
             this.groupBox2.TabIndex = 52;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Flex and TE Test";
             // 
             // btnFlexTest2
             // 
-            this.btnFlexTest2.Location = new System.Drawing.Point(41, 190);
+            this.btnFlexTest2.Location = new System.Drawing.Point(485, 156);
             this.btnFlexTest2.Name = "btnFlexTest2";
-            this.btnFlexTest2.Size = new System.Drawing.Size(96, 36);
+            this.btnFlexTest2.Size = new System.Drawing.Size(139, 28);
             this.btnFlexTest2.TabIndex = 55;
             this.btnFlexTest2.Text = "Flex (&Export Through PW)";
             this.btnFlexTest2.UseVisualStyleBackColor = true;
@@ -587,7 +589,7 @@
             // chkIncrease
             // 
             this.chkIncrease.AutoSize = true;
-            this.chkIncrease.Location = new System.Drawing.Point(393, 190);
+            this.chkIncrease.Location = new System.Drawing.Point(24, 190);
             this.chkIncrease.Name = "chkIncrease";
             this.chkIncrease.Size = new System.Drawing.Size(109, 17);
             this.chkIncrease.TabIndex = 54;
@@ -597,7 +599,7 @@
             // btnFileSizeZero
             // 
             this.btnFileSizeZero.AccessibleName = "BtnFlexTest";
-            this.btnFileSizeZero.Location = new System.Drawing.Point(392, 156);
+            this.btnFileSizeZero.Location = new System.Drawing.Point(375, 156);
             this.btnFileSizeZero.Name = "btnFileSizeZero";
             this.btnFileSizeZero.Size = new System.Drawing.Size(109, 28);
             this.btnFileSizeZero.TabIndex = 51;
@@ -607,7 +609,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(41, 156);
+            this.button3.Location = new System.Drawing.Point(24, 156);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(82, 28);
             this.button3.TabIndex = 50;
@@ -618,7 +620,7 @@
             // button2
             // 
             this.button2.AccessibleName = "BtnFlexTest";
-            this.button2.Location = new System.Drawing.Point(128, 156);
+            this.button2.Location = new System.Drawing.Point(111, 156);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(73, 28);
             this.button2.TabIndex = 49;
@@ -626,13 +628,25 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // btnOsis
+            // 
+            this.btnOsis.AccessibleName = "BtnLogos";
+            this.btnOsis.BackColor = System.Drawing.Color.LightSlateGray;
+            this.btnOsis.Location = new System.Drawing.Point(22, 293);
+            this.btnOsis.Name = "btnOsis";
+            this.btnOsis.Size = new System.Drawing.Size(100, 40);
+            this.btnOsis.TabIndex = 82;
+            this.btnOsis.Text = "&USX to Osis";
+            this.btnOsis.UseVisualStyleBackColor = false;
+            this.btnOsis.Click += new System.EventHandler(this.btnOsis_Click);
+            // 
             // FlexPluginTest
             // 
             this.AcceptButton = this.button1;
             this.AccessibleName = "FlexPluginTest";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 532);
+            this.ClientSize = new System.Drawing.Size(697, 608);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -704,5 +718,6 @@
         private System.Windows.Forms.Button btnEpubValidator;
         private System.Windows.Forms.Button btnJson;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button btnOsis;
     }
 }

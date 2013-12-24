@@ -1349,5 +1349,20 @@ namespace TestBed
                 pb.Close();
             }
         }
+
+        private void btnOsis_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid USX file");
+                return;
+            }
+
+            UsxToOSIS usxToSfm = new UsxToOSIS();
+            string output = txtInputPath.Text.Replace(".usx", ".xml");
+            usxToSfm.ConvertUsxToOSIS(txtInputPath.Text, output);
+            MessageBox.Show("Done");
+        
+        }
     }
 }
