@@ -109,7 +109,7 @@ namespace SIL.PublishingSolution
         readonly Dictionary<string, string> _counterVolantryReset = new Dictionary<string, string>();
         readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
         readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");
-        readonly string _zeroWidthNoBreakSpace = Common.ConvertUnicodeToString("\uFEFF"); 
+        readonly string _zeroWidthNoBreakSpace = Common.ConvertUnicodeToString("\uFEFF");
         readonly string _fixedSpace = Common.ConvertUnicodeToString("\u2002");
         readonly string _thinSpace = Common.ConvertUnicodeToString("\u2009");
 
@@ -180,6 +180,8 @@ namespace SIL.PublishingSolution
         private bool _isPreviousGlossary;//3719
         private int _pronunciationformCount;//3718
         private bool _isNonPronunciationform = true;
+        private bool _isPrimaryrefs;
+        private bool _isAllowWhiteSpace = true;
         private bool _isEmptyPageInserted;
         #endregion
 
@@ -190,7 +192,8 @@ namespace SIL.PublishingSolution
         public string _ChapterNo = "1";
         public bool IsFirstEntry;
         private bool isPageBreak;
-
+        private string _previousContent = "Reversal";
+        private bool _isWhiteSpaceSkipped = true;
         public LOContent()
         {
             _outputType = Common.OutputType.ODT;
@@ -838,7 +841,7 @@ namespace SIL.PublishingSolution
                 //    _footnoteSpace = false;  &&_significant == false
                 //}
                 IsLastPronunciationform();
-                if (_footnoteSpace == false && _projInfo.ProjectInputType.ToLower() == "dictionary" && _isNonPronunciationform)
+                if (_footnoteSpace == false && _projInfo.ProjectInputType.ToLower() == "dictionary" && _isAllowWhiteSpace)//&& _isNonPronunciationform
                 {
                     _writer.WriteStartElement("text:s");
                     _writer.WriteAttributeString("text:c", "1");
@@ -852,19 +855,85 @@ namespace SIL.PublishingSolution
 
         private void IsLastPronunciationform()
         {
-            if (_classNameWithLang.ToLower() == "pronunciationform")
+            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") < 0) return;
+
+            _isAllowWhiteSpace = true;
+
+            if (_previousContent.Trim().Length > 0)
             {
-                _isNonPronunciationform = false;
-                if (_pronunciationformCount == 2)
+                if (_previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == ")" ||
+                    _previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == "(" ||
+                    _previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == "]")
                 {
-                    _pronunciationformCount = 0;
-                    _isNonPronunciationform = true;
-                }
-                else
-                {
-                    _pronunciationformCount += 1;
+                    _isWhiteSpaceSkipped = true;
+                    _isAllowWhiteSpace = false;
+                    return;
                 }
             }
+
+            //if (_classNameWithLang.ToLower() == "pronunciationform")
+            //{
+            //    _isNonPronunciationform = false;
+            //    if (_pronunciationformCount == 2)
+            //    {
+            //        _pronunciationformCount = 0;
+            //        _isNonPronunciationform = true;
+            //    }
+            //    else
+            //    {
+            //        _pronunciationformCount += 1;
+            //    }
+            //}
+
+            if (_characterNameAlways == null)
+            {
+                _isAllowWhiteSpace = false;
+                return;
+            }
+            
+            //if (_characterNameAlways != null)
+            //{
+            //    if (_characterNameAlways.ToLower().IndexOf("span_.en_primaryrefs") == 0)
+            //    {
+            //        if (_isPrimaryrefs)
+            //            _isPrimaryrefs = false;
+            //        else
+            //            _isPrimaryrefs = true;
+
+            //        if (_isPrimaryrefs)
+            //            _isAllowWhiteSpace = false;
+            //    }
+            //}
+            
+            if (_characterNameAlways.IndexOf("span_.en_semanticdomains_senses_entry_letData_dicBody") == 0)
+            {
+                if (_previousContent.Trim().Length > 0)
+                {
+                    if (_previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == ")")
+                    {
+                        _isAllowWhiteSpace = false;
+                    }
+                }
+                return;
+            }
+            
+            if (_characterNameAlways.ToLower().IndexOf("span_.en_mainentryref") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("mainentryref_a_complexformcomponents") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.en_lexreftypeabbr_lexref") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.bzh_sensecrossrefheadword") == 0 ||
+                    _characterNameAlways.IndexOf("span_.en_lexreftypeabbr_lexref_LexSenseLink") == 0 ||
+                    _characterNameAlways.IndexOf("span_.en_CmSemanticDomainpublishSemDomForReversalenNamePub") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.en_span_.en_semanticdomains") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.en_semanticdomains_senses") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.en_pronunciationform_pronunciation") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.ggo-fonipa-x-emic_pronunciationform_pronunciation") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.bzh-fonipa_pronunciationform_pronunciation") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("complexformrefheadword_complexformref_xitem_complexformrefs") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.en_span_.en_xitem_semanticdomains") == 0)
+                {
+                    _isAllowWhiteSpace = false;
+                }
+            
         }
 
         private string SignificantSpace(string content)
@@ -939,12 +1008,12 @@ namespace SIL.PublishingSolution
             //    InsertWhiteSpace();
             //}
 
-            
+
 
             if (_childName.ToLower().Contains("tableofcontents"))
             {
                 CallTOC();
-                
+
                 //_writer.WriteStartElement("text:p");
                 //_writer.WriteAttributeString("text:style-name", "P4");
                 //_writer.WriteEndElement();
@@ -1055,7 +1124,6 @@ namespace SIL.PublishingSolution
         private void WriteText()
         {
             string content = _reader.Value;
-
             content = ReplaceString(content);
             if (CollectFootNoteChapterVerse(content, Common.OutputType.ODT.ToString())) return;
             if (_isPictureDisplayNone)
@@ -1082,6 +1150,7 @@ namespace SIL.PublishingSolution
             if (_characterName == null)
             {
                 _characterName = StackPeekCharStyle(_allCharacter);
+                _characterNameAlways = _characterName;
             }
             //content = whiteSpacePre(content);
             //bool contains = false;
@@ -1240,11 +1309,40 @@ namespace SIL.PublishingSolution
                     _isPreviousGlossary = false;
                 }
 
+                if(_isWhiteSpaceSkipped)
+                {
+                    if (_previousContent.Trim().Length > 0)
+                    {
+                        if (_previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == ")" ||
+                            _previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == "]")
+                        {
+                            if (content.IndexOf(',') == 0 || content.IndexOf('.') == 0 || content.IndexOf(':') == 0 ||
+                                content.IndexOf(';') == 0 || content.IndexOf(']') == 0 || content.IndexOf(')') == 0)
+                            {
+                            }
+                            else
+                            {
+                                content = " " + content.TrimStart();
+                            }
+                        }
+                    }
+                    _isWhiteSpaceSkipped = false;
+                }
+
                 if (_classNameWithLang.ToLower().IndexOf("seeinglossary") == 0)
                 {
                     _isPreviousGlossary = true;
                 }
-                
+                _previousContent = content;
+                if (_characterNameAlways != null)
+                {
+                    if (_characterNameAlways.ToLower().IndexOf("span_.en_span_.en_xitem_semanticdomains") == 0 ||
+                        _characterNameAlways.IndexOf("span_.en_CmSemanticDomainpublishSemDomForReversalenNamePub") == 0)
+                    {
+                        content = content.Trim();
+                    }
+                }
+
                 if (_imageClass.Length > 0)
                 {
                     //if (!_imageParaForCaption)
@@ -1950,7 +2048,9 @@ namespace SIL.PublishingSolution
                 _anchorWrite = false;
             }
 
+            _characterNameAlways = _characterName;
             _characterName = null;
+
             if (_hasImgCloseTag && _imageInserted)
             {
                 _hasImgCloseTag = false;

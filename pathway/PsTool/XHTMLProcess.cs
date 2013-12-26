@@ -125,6 +125,7 @@ namespace SIL.PublishingSolution
         protected string _paragraphName;
         protected string _previousParagraphName;
         protected string _characterName;
+        public string _characterNameAlways = string.Empty;
         protected string _lang = string.Empty;
         protected Dictionary<string, string> _languageStyleName = new Dictionary<string, string>();
         ArrayList _xhtmlAttribute = new ArrayList();
