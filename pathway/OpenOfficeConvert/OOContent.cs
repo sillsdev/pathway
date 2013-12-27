@@ -2429,7 +2429,7 @@ namespace SIL.PublishingSolution
             if (_isFromExe)
             {
                 _writer.WriteStartElement("style:style");
-                _writer.WriteAttributeString("style:name", "fr11");
+                _writer.WriteAttributeString("style:name", "fr0");
                 _writer.WriteAttributeString("style:family", "graphic");
                 _writer.WriteAttributeString("style:parent-style-name", "Graphics");
                 _writer.WriteStartElement("style:graphic-properties");
@@ -2479,45 +2479,46 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "fr2");
-            _writer.WriteAttributeString("style:family", "graphic");
-            _writer.WriteAttributeString("style:parent-style-name", "Frame");
-            _writer.WriteStartElement("style:graphic-properties");
-            _writer.WriteAttributeString("style:run-through", "foreground");
-            _writer.WriteAttributeString("style:vertical-pos", "from-top");
-            _writer.WriteAttributeString("style:vertical-rel", "paragraph");
-            _writer.WriteAttributeString("style:horizontal-pos", "center");
-            _writer.WriteAttributeString("style:horizontal-rel", "paragraph");
-            _writer.WriteAttributeString("fo:padding", "0pt");
-            _writer.WriteAttributeString("fo:border", "none");
-            _writer.WriteAttributeString("style:flow-with-text", "false");
-            _writer.WriteAttributeString("style:wrap", "none");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
+            //_writer.WriteStartElement("style:style");
+            //_writer.WriteAttributeString("style:name", "fr2");
+            //_writer.WriteAttributeString("style:family", "graphic");
+            //_writer.WriteAttributeString("style:parent-style-name", "Frame");
+            //_writer.WriteStartElement("style:graphic-properties");
+            //_writer.WriteAttributeString("style:run-through", "foreground");
+            //_writer.WriteAttributeString("style:vertical-pos", "from-top");
+            //_writer.WriteAttributeString("style:vertical-rel", "paragraph");
+            //_writer.WriteAttributeString("style:horizontal-pos", "center");
+            //_writer.WriteAttributeString("style:horizontal-rel", "paragraph");
+            //_writer.WriteAttributeString("fo:padding", "0pt");
+            //_writer.WriteAttributeString("fo:border", "none");
+            //_writer.WriteAttributeString("style:flow-with-text", "false");
+            //_writer.WriteAttributeString("style:wrap", "none");
+            //_writer.WriteEndElement();
+            //_writer.WriteEndElement();
 
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "gr2");
-            _writer.WriteAttributeString("style:family", "graphic");
-            _writer.WriteAttributeString("style:parent-style-name", "Graphics");
-            _writer.WriteStartElement("style:graphic-properties");
-            _writer.WriteAttributeString("style:run-through", "foreground");
-            _writer.WriteAttributeString("style:wrap", "none");
-            _writer.WriteAttributeString("style:number-wrapped-paragraphs", "no-limit");
-            _writer.WriteAttributeString("style:horizontal-pos", "center");
-            _writer.WriteAttributeString("style:horizontal-rel", "paragraph");
-            _writer.WriteAttributeString("fo:clip", "rect(0pt, 0pt, 0pt, 0pt)");
-            _writer.WriteAttributeString("draw:luminance", "0%");
-            _writer.WriteAttributeString("draw:contrast", "0%");
-            _writer.WriteAttributeString("draw:red", "0%");
-            _writer.WriteAttributeString("draw:green", "0%");
-            _writer.WriteAttributeString("draw:blue", "0%");
-            _writer.WriteAttributeString("draw:gamma", "100%");
-            _writer.WriteAttributeString("draw:color-inversion", "false");
-            _writer.WriteAttributeString("draw:image-opacity", "100%");
-            _writer.WriteAttributeString("draw:color-mode", "standard");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
+   
+            //_writer.WriteStartElement("style:style");
+            //_writer.WriteAttributeString("style:name", "gr2");
+            //_writer.WriteAttributeString("style:family", "graphic");
+            //_writer.WriteAttributeString("style:parent-style-name", "Graphics");
+            //_writer.WriteStartElement("style:graphic-properties");
+            //_writer.WriteAttributeString("style:run-through", "foreground");
+            //_writer.WriteAttributeString("style:wrap", "none");
+            //_writer.WriteAttributeString("style:number-wrapped-paragraphs", "no-limit");
+            //_writer.WriteAttributeString("style:horizontal-pos", "center");
+            //_writer.WriteAttributeString("style:horizontal-rel", "paragraph");
+            //_writer.WriteAttributeString("fo:clip", "rect(0pt, 0pt, 0pt, 0pt)");
+            //_writer.WriteAttributeString("draw:luminance", "0%");
+            //_writer.WriteAttributeString("draw:contrast", "0%");
+            //_writer.WriteAttributeString("draw:red", "0%");
+            //_writer.WriteAttributeString("draw:green", "0%");
+            //_writer.WriteAttributeString("draw:blue", "0%");
+            //_writer.WriteAttributeString("draw:gamma", "100%");
+            //_writer.WriteAttributeString("draw:color-inversion", "false");
+            //_writer.WriteAttributeString("draw:image-opacity", "100%");
+            //_writer.WriteAttributeString("draw:color-mode", "standard");
+            //_writer.WriteEndElement();
+            //_writer.WriteEndElement();
 
             //}
 
@@ -2881,8 +2882,9 @@ namespace SIL.PublishingSolution
                     if (imageClass.ToLower().IndexOf("picturecenter") == 0)
                         HoriAlignment = "center";
 
-                    string strGraphicsCount = "Graphics" + _frameCount + 1;
-                    string strFrameCount = "Frame" + _frameCount + 1;
+                    string strGraphicsCount = "Graphics" + (_frameCount + 1);
+                    string strFrameCount = "Frame" + (_frameCount + 1);
+                    string strFrameStyCount = "fr" + (_frameCount + 1);
                     _imageGraphicsName = strFrameCount;
                     ////TODO Make it function 
                     ////To get Image details
@@ -2942,9 +2944,11 @@ namespace SIL.PublishingSolution
                         _isNewParagraph = false;
                     }
 
+                    
                     // 1st frame
+                   
                     _writer.WriteStartElement("draw:frame");
-                    _writer.WriteAttributeString("draw:style-name", "fr2");
+                    _writer.WriteAttributeString("draw:style-name", strFrameStyCount);
                     _writer.WriteAttributeString("draw:name", strFrameCount);
 
                     _imageZindexCounter++;
@@ -3029,11 +3033,13 @@ namespace SIL.PublishingSolution
                     }
 
                     ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
-                    modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strFrameCount, _util.ParentName, HoriAlignment,
+                    modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strGraphicsCount, _util.ParentName, HoriAlignment,
                                                        wrapSide);
+                    modifyIDStyles.CreateFrameStyle(_styleFilePath, strFrameStyCount, _util.ParentName, HoriAlignment,
+                                                       wrapSide, strGraphicsCount);
 
                     _writer.WriteStartElement("draw:frame");
-                    _writer.WriteAttributeString("draw:style-name", "gr2");
+                    _writer.WriteAttributeString("draw:style-name", "gr" + (_frameCount));
                     _writer.WriteAttributeString("draw:name", strGraphicsCount);
                     _writer.WriteAttributeString("text:anchor-type", "paragraph");
                     // _writer.WriteAttributeString("text:anchor-type", anchorType);
@@ -3158,7 +3164,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("text:p");
                     _writer.WriteAttributeString("text:style-name", "Standard");
                     _writer.WriteStartElement("draw:frame");
-                    _writer.WriteAttributeString("draw:style-name", "fr11");
+                    _writer.WriteAttributeString("draw:style-name", "fr0");
                     _writer.WriteAttributeString("draw:name", strFrameCount);
                     if (_projInfo.DefaultRevCssFileWithPath != null && _projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
                     {
