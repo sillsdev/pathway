@@ -119,7 +119,7 @@
 }
 .Endnote_General_Paragraph,
 .Note_General_Paragraph {
-    text-indent: 0pt;
+    text-indent: 1pt;
     margin-left: 0pt;
     display: inline;
     display: footnote;
