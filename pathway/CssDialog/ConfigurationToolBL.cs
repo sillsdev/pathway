@@ -582,7 +582,7 @@ namespace SIL.PublishingSolution
 
         public bool SplitFileByLetter
         {
-             get
+            get
             {
                 string task = "@page";
                 string key = "-ps-split-file-by-letter";
@@ -684,26 +684,40 @@ namespace SIL.PublishingSolution
         /// <param name="projType">Dictionary / Scipture</param>
         /// <param name="MailBody">Existing content</param>
         /// <returns></returns>
-        protected static string GetMailBody(string projType, string MailBody)
+        protected string GetMailBody(string projType, string MailBody)
         {
             if (projType.Length <= 0) return MailBody;
             MailBody += "Copy the settings file (" + projType + "StyleSettings.xml and StyleSettings.xsd) to the path" + "%0D";
             MailBody += "-------------------------------------------------------------------------------------------------------------" + "%0D%0A";
-            MailBody += "Windows XP:" + "%0D%0A";
-            MailBody += @"C:\Documents and Settings\All Users\Application Data\SIL\Pathway\" + projType + "%0D%0A";
-            MailBody += "Windows Vista or Windows 7 and 8:" + "%0D%0A";
-            MailBody += @"C:\Users\All Users\Application Data\SIL\Pathway\" + projType + "%0D%0A";
-            MailBody += "Ubuntu 12.04 (precise):" + "%0D%0A";
-            MailBody += @"~/.local/share/SIL/Pathway/" + projType + "%0D%0A" + "%0D%0A";
+            if (!IsUnixOs)
+            {
+                MailBody += "Windows Vista or Windows 7 and 8:" + "%0D%0A";
+                MailBody += @"C:\Users\All Users\Application Data\SIL\Pathway\" + projType + "%0D" + "%0D%0A";
+                MailBody += "Windows XP:" + "%0D%0A";
+                MailBody += @"C:\Documents and Settings\All Users\Application Data\SIL\Pathway\" + projType + "%0D%0A";
+            }
+            else
+            {
+                MailBody += "Ubuntu 12.04 (precise) or later version:" + "%0D%0A";
+                MailBody += @"~/.local/share/SIL/Pathway/" + projType + "%0D%0A" + "%0D%0A";
+            }
 
             MailBody += "Copy the all css files to the path" + "%0D%0A";
             MailBody += "------------------------------------------" + "%0D%0A";
-            MailBody += "Windows XP:" + "%0D%0A";
-            MailBody += @"C:\Documents and Settings\All Users\Application Data\SIL\Pathway\" + projType + "%0D%0A";
-            MailBody += "Windows Vista or Windows 7 and 8:" + "%0D%0A";
-            MailBody += @"C:\Users\All Users\Application Data\SIL\Pathway\" + projType + "%0D%0A";
-            MailBody += "Ubuntu 12.04 (precise):" + "%0D%0A";
-            MailBody += @"~/.local/share/SIL/Pathway/" + projType + "%0D%0A";
+
+            if (!IsUnixOs)
+            {
+                MailBody += "Windows Vista or Windows 7 and 8:" + "%0D%0A";
+                MailBody += @"C:\Users\All Users\Application Data\SIL\Pathway\" + projType + "%0D" + "%0D%0A";
+
+                MailBody += "Windows XP:" + "%0D%0A";
+                MailBody += @"C:\Documents and Settings\All Users\Application Data\SIL\Pathway\" + projType + "%0D%0A";
+            }
+            else
+            {
+                MailBody += "Ubuntu 12.04 (precise) or later version:" + "%0D%0A";
+                MailBody += @"~/.local/share/SIL/Pathway/" + projType + "%0D%0A";
+            }
             return MailBody;
         }
 
@@ -965,7 +979,7 @@ namespace SIL.PublishingSolution
                             {
                                 WriteCssClass(writeCss, "letData", value);
                             }
-                            
+
                         }
                         value.Clear();
                         //TD-3607
@@ -4372,7 +4386,7 @@ namespace SIL.PublishingSolution
                     string zipFileName = Path.GetFileNameWithoutExtension(Path.GetTempFileName());
                     string zipOutput = Common.PathCombine(path, zipFileName + ".zip");
                     zf.CreateZip(folderPath, zipOutput, 0);
-                    const string MailTo = "ToAddress";
+                    const string MailTo = "Pathway@sil.org";
                     string MailSubject = projType + " Style Sheets and Setting file";
                     string MailBody = "(Please attach the exported " + "%20" + zipOutput + " with this mail.)" +
                                       "%0D%0A" + "%0D%0A";
@@ -4665,11 +4679,11 @@ namespace SIL.PublishingSolution
                     if (_cToolPnlOtherFormatTop > 0)
                     {
                         cTool.PnlReferenceFormat.Visible = true;
-                        
+
                         //cTool.PnlOtherFormat.Top = _cToolPnlOtherFormatTop;
                         cTool.PnlReferenceFormat.Top = cTool.PnlGuidewordLength.Top;
                         cTool.PnlOtherFormat.Top = cTool.PnlReferenceFormat.Location.Y + cTool.PnlReferenceFormat.Height;
-                        
+
                     }
                 }
 
