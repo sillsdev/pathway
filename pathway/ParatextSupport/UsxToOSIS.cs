@@ -112,7 +112,22 @@ namespace SIL.PublishingSolution
         private void WriteElement()
         {
             _content = SignificantSpace(_reader.Value);
-            _writer.WriteString(_content);
+            if (_tagName == "para" && _style == "h")
+            {
+                _writer.WriteAttributeString("short", _content);
+                _style = string.Empty;
+            }
+            else if (_tagName == "char" && _style == "bk")
+            {
+                _writer.WriteAttributeString("type", "x-bookName");
+                _writer.WriteString(_content); 
+                _style = string.Empty;
+            }
+            else
+            {
+                _writer.WriteString(_content);    
+            }
+            
         }
 
         /// <summary>
@@ -411,7 +426,7 @@ namespace SIL.PublishingSolution
                 {
                     _writer.WriteStartElement("title");
                 }
-                else if (_style == "mt" || _style == "mt1")
+                else if (_style == "mt" || _style == "mt1" || _style == "imt")
                 {
                     _writer.WriteStartElement("title");
                     _writer.WriteAttributeString("level", "1");
@@ -466,8 +481,15 @@ namespace SIL.PublishingSolution
             }
             else if (_tagName == "char")
             {
-                //if()
-                _writer.WriteStartElement("char");
+                if (_style == "bk" )
+                {
+                    _writer.WriteStartElement("reference");
+                }
+                else
+                {
+                    _writer.WriteStartElement("char");    
+                }
+                
                 //_writer.WriteAttributeString("type", "source");
             }
 
@@ -726,12 +748,14 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("xsi:schemaLocation",
                                          "http://www.bibletechnologies.net/2003/OSIS/namespace http://www.bibletechnologies.net/osisCore.2.1.1.xsd");
             _writer.WriteStartElement("osisText");
-            _writer.WriteAttributeString("osisIDWork", "{NAME}");
+            _writer.WriteAttributeString("osisIDWork", "thisWork");
             _writer.WriteAttributeString("osisRefWork", "bible");
             _writer.WriteAttributeString("xml:lang", "{LANG}");
-            _writer.WriteAttributeString("canonical", "true");
+            //_writer.WriteAttributeString("canonical", "true");
             _writer.WriteStartElement("header");
-            _writer.WriteString("HEADER");
+            _writer.WriteStartElement("work");
+            _writer.WriteAttributeString("osisWork","thisWork");
+            _writer.WriteEndElement();
             _writer.WriteEndElement();
             _writer.WriteStartElement("div");
             _writer.WriteAttributeString("type", "bookGroup");

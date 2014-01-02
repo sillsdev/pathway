@@ -1358,9 +1358,9 @@ namespace TestBed
                 return;
             }
 
-            UsxToOSIS usxToSfm = new UsxToOSIS();
+            UsxToOSIS usxToSis = new UsxToOSIS();
             string output = txtInputPath.Text.Replace(".usx", ".xml");
-            usxToSfm.ConvertUsxToOSIS(txtInputPath.Text, output);
+            usxToSis.ConvertUsxToOSIS(txtInputPath.Text, output);
             MessageBox.Show("Done");
         
         }
