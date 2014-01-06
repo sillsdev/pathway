@@ -841,7 +841,7 @@ namespace SIL.PublishingSolution
                 }
                 //if (position != "center")
                 //    SetAttributeNS("fo:margin-left", "fo", "5.7pt");
-                SetAttributeNS("fo:margin-left", "fo", "5.7pt");
+                //SetAttributeNS("fo:margin-left", "fo", "5.7pt");
             }
             _styleXMLdoc.Save(styleFilePath);
         }
@@ -898,25 +898,26 @@ namespace SIL.PublishingSolution
                     _nameElement = (XmlElement)node.ChildNodes[0];
                     //nameGraphicElement.SetAttribute("style:run-through", "foreground");
                     SetAttribute("foreground", "style:run-through");
-                    if (side == "Invalid")
-                    {
+                    //if (side == "Invalid")
+                    //{
 
-                    }
-                    else if (side == "right" || side == "left")
-                    {
-                        //nameGraphicElement.SetAttribute("style:wrap", side);
-                        SetAttribute("side", "style:wrap");
-                    }
-                    else if (side == "center")
-                    {
-                        //nameGraphicElement.SetAttribute("style:wrap", "none");
-                        SetAttribute("none", "style:wrap");
-                    }
-                    else
-                    {
-                        //nameGraphicElement.SetAttribute("style:wrap", "dynamic");
-                        SetAttribute("parallel", "style:wrap");
-                    }
+                    //}
+                    //else if (side == "right" || side == "left")
+                    //{
+                    //    //nameGraphicElement.SetAttribute("style:wrap", side);
+                    //    SetAttribute("side", "style:wrap");
+                    //}
+                    //else if (side == "center")
+                    //{
+                    //    //nameGraphicElement.SetAttribute("style:wrap", "none");
+                    //    SetAttribute("none", "style:wrap");
+                    //}
+                    //else
+                    //{
+                    //    //nameGraphicElement.SetAttribute("style:wrap", "dynamic");
+                    //    SetAttribute("parallel", "style:wrap");
+                    //}
+                    SetAttribute("dynamic", "style:wrap");
                     //nameGraphicElement.SetAttribute("style:number-wrapped-paragraphs", "no-limit");
                     SetAttribute("no-limit", "style:number-wrapped-paragraphs");
                     //nameGraphicElement.SetAttribute("style:wrap-contour", "false");
@@ -927,6 +928,7 @@ namespace SIL.PublishingSolution
                     SetAttribute("paragraph", "style:vertical-rel");
                     //nameGraphicElement.SetAttribute("style:horizontal-pos", position);
                     SetAttribute(position, "style:horizontal-pos");
+                    
                     //nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
                     // this is for text flow
                     //nameGraphicElement.SetAttribute("style:flow-with-text", "true");
