@@ -11,7 +11,7 @@ namespace SIL.PublishingSolution
         private string _property;
         private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
         private bool _IsKeepLineWrittern = false;
-
+        private bool _isLinux = false;
         private string _className;
         private Int32 _hangparaPropertyValue;
         private string _fontName;
@@ -27,6 +27,7 @@ namespace SIL.PublishingSolution
         public string XeLaTexProperty(Dictionary<string, string> cssProperty, string className, List<string> inlineStyle, List<string> includePackageList, List<string> inlineInnerStyle, Dictionary<string, string> langFontDictionary)
         {
             _langFontDictionary = langFontDictionary;
+            _isLinux = Common.IsUnixOS();
             Initialize(className, cssProperty, inlineStyle, includePackageList, inlineInnerStyle);
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
@@ -759,6 +760,10 @@ namespace SIL.PublishingSolution
                 {
                     fontName = propertyValue;
                     break;
+                }
+                if (_isLinux)
+                {
+                    fontName = propertyValue;
                 }
             }
 
