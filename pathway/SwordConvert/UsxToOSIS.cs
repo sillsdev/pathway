@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Windows.Forms;
 using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
