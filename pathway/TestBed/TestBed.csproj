@@ -228,9 +228,6 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SwordConvert">
-      <HintPath>..\SwordConvert\bin\Debug\SwordConvert.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -362,6 +359,10 @@
     <ProjectReference Include="..\CssParser\CssParser.csproj">
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SwordConvert\SwordConvert.csproj">
+      <Project>{448FDD03-71C0-4C86-9878-BC81ACC440C0}</Project>
+      <Name>SwordConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\WordPressConvert\WordPressConvert.csproj">
       <Project>{12FE8988-5957-427D-BA6C-B4C601F5A558}</Project>
