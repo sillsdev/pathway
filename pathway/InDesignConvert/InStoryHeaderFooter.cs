@@ -138,19 +138,6 @@ namespace SIL.PublishingSolution
             return fileName;
         }
 
-        private void WritePageCount(string className)
-        {
-            _writer.WriteStartElement("CharacterStyleRange");
-            _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/" + className);
-            if (_contentType == "PageCount")
-            {
-                _writer.WriteStartElement("Content");
-                _writer.WriteRaw("<?ACE 18?>");
-                _writer.WriteEndElement();
-            }
-            _writer.WriteEndElement();
-        }
-
         private void WriteVerseVariable(string styleName, string position)
         {
             // Note: Verse Character Start Element
@@ -217,6 +204,21 @@ namespace SIL.PublishingSolution
             }
             _writer.WriteEndElement();
         }
+
+
+        private void WritePageCount(string className)
+        {
+            _writer.WriteStartElement("CharacterStyleRange");
+            _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/headword");// + className
+            if (_contentType == "PageCount")
+            {
+                _writer.WriteStartElement("Content");
+                _writer.WriteRaw("<?ACE 18?>");
+                _writer.WriteEndElement();
+            }
+            _writer.WriteEndElement();
+        }
+
 
         //private void WriteGuidewordVariable(string styleName)
         private void WriteGuidewordVariable(ArrayList GuideWordStyle, string PageStyleName)
