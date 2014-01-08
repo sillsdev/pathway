@@ -106,6 +106,8 @@ pathway/YouVersionConvert/obj/*
 pathway/epubConvert/bin/*
 pathway/epubConvert/obj/*
 pathway/epubValidator/*
+pathway/SwordConvert/bin/*
+pathway/SwordConvert/obj/*
 pathway/Test/ApplyXslt/TestFiles/output/*
 pathway/Test/Build/TestFiles/output/*
 pathway/Test/ConfigurationTool/TestFiles/output/*
@@ -129,6 +131,7 @@ pathway/Test/XhtmlExport/TestFiles/output/*
 pathway/Test/epubConvert/TestFiles/output/*
 pathway/Test/epubConvert/TestFiles/Output.ramp
 pathway/Test/ConfigurationTool/TestFiles/input/*
+pathway/Test/SwordConvert/TestFiles/output/*
 pathway/Test/Files/*
 pathway/Test/PsTool/TestFiles/InputFiles/DestinationFolder/*
 pathway/Test/PsTool/TestFiles/InputFiles/Image*
