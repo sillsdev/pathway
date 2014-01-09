@@ -352,13 +352,13 @@ namespace Test.TheWordConvertTest
         [Test]
         public void BridgeB4PTest()
         {
-            TestDataCase("MAT", "040MAT-bridgeB4.usx", 1, "<TS1><Ts><sup>(1-2)</sup> Verse one text. Verse two text");
+            TestDataCase("MAT", "040MAT-bridgeB4.usx", 1, "<sup>(1-2)</sup> Verse one text. Verse two text");
         }
 
         [Test]
         public void BridgeB4P2Test()
         {
-            TestDataCase("MAT", "040MAT-bridgeB4P.usx", 1, "<TS1><Ts><sup>(1-2)</sup> Verse one text. Verse two text");
+            TestDataCase("MAT", "040MAT-bridgeB4P.usx", 1, "<sup>(1-2)</sup> Verse one text. Verse two text");
         }
 
         [Test]
@@ -414,6 +414,12 @@ namespace Test.TheWordConvertTest
         public void RightToLeftBridgeTest()
         {
             TestDataCase("3JN", "0643JN.usx", 14, "<sup>(<rtl>14</rtl>-15)</sup> بَسْ لي رَجا خَفيفْ تَ اراك، وْثمْ لَثمْ نحْكي. <sup>15</sup> السَّلام يكونْ مَعك. يسَلمونْ عَلَيك الّمْحبّينْ. سَلّم عَ الّمْحبّينْ كلْ واِحدْ باسْمو.<CM>", true);
+        }
+
+        [Test]
+        public void mt2b4mt1Test()
+        {
+            TestDataCase("GAL", "048GAL.usx", 1, "<TS2><font size=-1><b>To Suyat ni Pablo diya to mgo Taga-</b></font><Ts><TS1>GALACIA<Ts><sup>(1,2)</sup> Siak si Pablo iyan migsuyat to seini diyan iyu no mgo magtutuu no oghihimun duon to mgo kayunsudan no sakup to Galacia.<CM>Igpadomdom ku iyu no seini katongdanan ku to pagka-apustul, kona no otow to migpili dow migsugu kanay ko kona no si Jesu-Cristo yagboy dow to Diyus no Amoy no iyan migbanhaw kandin.<CM>Siak dow to tibo mgo suun ta kani duon ki Cristo nangumusta iyu.");
         }
 
         //[Test]

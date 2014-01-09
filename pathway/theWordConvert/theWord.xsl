@@ -33,14 +33,20 @@
     <xsl:variable name="bookNamesBook" select="document($bookNames)//book"/>
     
     <xsl:template match="/">
-        <xsl:text disable-output-escaping="yes"><![CDATA[<TS1>]]></xsl:text>
-        <xsl:value-of select="//para[@style='mt'] | //para[@style='mt1']"/>
-        <xsl:text disable-output-escaping="yes"><![CDATA[<Ts>]]></xsl:text>
-        <xsl:if test="count(//para[@style='mt2']) = 1">
-            <xsl:text disable-output-escaping="yes"><![CDATA[<TS2><font size=-1><b>]]></xsl:text>
-            <xsl:value-of select="//para[@style='mt2']"/>
-            <xsl:text disable-output-escaping="yes"><![CDATA[</b></font><Ts>]]></xsl:text>
-        </xsl:if>
+        <xsl:for-each select="//para[starts-with(@style, 'mt')]">
+            <xsl:choose>
+                <xsl:when test="@style='mt2'">
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<TS2><font size=-1><b>]]></xsl:text>
+                    <xsl:value-of select="."/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[</b></font><Ts>]]></xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<TS1>]]></xsl:text>
+                    <xsl:value-of select="."/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<Ts>]]></xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
         <xsl:call-template name="nextChapter">
             <xsl:with-param name="cvData" select="$vrs/text()"/>
         </xsl:call-template>
@@ -122,7 +128,7 @@
         <xsl:if test="count($verse) = 0">
             <!-- verse bridges -->
             <xsl:variable name="firstVerse"
-                select="//verse[starts-with(@number,concat(string($v), $bridgePunc))][preceding::chapter[1]/@number=$c]"/>
+                select="//verse[starts-with(@number,concat(string($v), $bridgePunc))][preceding::chapter[1]/@number=$c] | //verse[starts-with(@number,concat(string($v), $sequencePunc))][preceding::chapter[1]/@number=$c]"/>
             <xsl:choose>
                 <xsl:when test="count($firstVerse) != 0">
                     <xsl:apply-templates select="$firstVerse" mode="v">
