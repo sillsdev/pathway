@@ -3583,9 +3583,10 @@ namespace SIL.PublishingSolution
             //return;
             if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && !_projInfo.IsODM)
             {
-                //_writer.WriteStartElement("text:p");
-                //_writer.WriteAttributeString("text:style-name", "P4");
-                //_writer.WriteEndElement();
+
+                _writer.WriteStartElement("text:p");
+                _writer.WriteAttributeString("text:style-name", "P4");
+                _writer.WriteEndElement();
 
                 //firstRevHeadWord = ReadXHTMLFirstData(_projInfo.DefaultXhtmlFileWithPath);
                 //if (firstRevHeadWord.Trim().Length > 0)
@@ -3643,6 +3644,7 @@ namespace SIL.PublishingSolution
                 organization = "SIL International";
             }
             string tableOfContent = Param.GetMetadataValue(Param.TableOfContents, organization) ?? "";
+
             // empty string if null / not found
 
             if (tableOfContent.ToLower() == "true")
