@@ -370,7 +370,7 @@
         <styleProperty name="Coverage" value=" " />
 		<styleProperty name="IncludeImage" value="Yes" />		
         <styleProperty name="Information" value="DRAFT Dictionary." />
-        <styleProperty name="Copyright" value="© 2013 SIL International®." />
+        <styleProperty name="Copyright" value="© 2014 SIL International®." />
 		<styleProperty name="PageBreak" value="No" />
       </style>
     </others>
@@ -410,8 +410,8 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2013_x0020_SIL_x0020_International_x00AE_.</organizationDefault>
-      <defaultValue>_x00A9__x0020_2013_x0020_SIL_x0020_International_x00AE_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2014_x0020_SIL_x0020_International_x00AE_.</organizationDefault>
+      <defaultValue>_x00A9__x0020_2014_x0020_SIL_x0020_International_x00AE_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
     </meta>
     <meta name="Type" outputTypes="all">
       <defaultValue></defaultValue>
