@@ -400,7 +400,7 @@ namespace SIL.PublishingSolution
             if (!File.Exists(xmlFilePath))
                 return;
 
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             xDoc.Load(xmlFilePath);
             const string twoLetterLangXPath = "//LanguageCode/IsoLanguageCodeTwoLetters/Language";
             const string threeLetterLangXPath = "//LanguageCode/IsoLanguageCodeThreeLetters/Language";
@@ -1660,7 +1660,7 @@ namespace SIL.PublishingSolution
                 {
                     licenseXml = filename;
                 }
-                XmlDocument xDoc = Common.DeclareXMLDocument(false);
+                XmlDocument xDoc = Common.DeclareXMLDocument(true);
                 var namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
                 namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
                 xDoc.Load(licenseXml);
@@ -1689,7 +1689,7 @@ namespace SIL.PublishingSolution
         public string GetImageCount(string xhtmlFileName)
         {
             string imageCount = "0";
-            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             xmlDocument.Load(xhtmlFileName);
             XmlNodeList nodes = xmlDocument.GetElementsByTagName("img");
             if (nodes.Count > 0)

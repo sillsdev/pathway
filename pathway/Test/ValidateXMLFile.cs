@@ -741,7 +741,16 @@ namespace Test
             {
                 foreach (string propertyKey in ClassProperty.Keys)
                 {
-                    string value = node.ChildNodes[0].InnerText;
+                    string value = string.Empty;
+                    if(node.ChildNodes[0].NodeType.ToString() == "Whitespace")
+                    {
+                        value = node.ChildNodes[1].InnerText;
+                    }
+                    else
+                    {
+                        value = node.ChildNodes[0].InnerText;
+                    }
+                    
                     if (value != ClassProperty[propertyKey])
                     {
                         match = false;
@@ -762,7 +771,15 @@ namespace Test
                 string value = string.Empty;
                 if (node.HasChildNodes)
                 {
-                    value = node.ChildNodes[0].InnerText;
+                    if (node.ChildNodes[0].NodeType.ToString() == "Whitespace")
+                    {
+                        value = node.ChildNodes[1].InnerText;
+                    }
+                    else
+                    {
+                        value = node.ChildNodes[0].InnerText;
+                    }
+                    
                 }
                 match = value == content;
             }
@@ -775,7 +792,14 @@ namespace Test
                     string value = string.Empty;
                     if (node.HasChildNodes)
                     {
-                        value = node.ChildNodes[0].InnerText;
+                        if (node.ChildNodes[0].NodeType.ToString() == "Whitespace")
+                        {
+                            value = node.ChildNodes[1].InnerText;
+                        }
+                        else
+                        {
+                            value = node.ChildNodes[0].InnerText;
+                        }
                     }
                     match = value == content;
                 }
@@ -791,9 +815,9 @@ namespace Test
             if (node != null)
             {
                 string value = string.Empty;
-                if (node.ParentNode.ChildNodes.Count > 1)
+                if (node.ParentNode.ChildNodes.Count >= 2)
                 {
-                    value = node.NextSibling.InnerText;
+                    value = node.ParentNode.ChildNodes[1].InnerText;
                 }
 
                 match = value == content;

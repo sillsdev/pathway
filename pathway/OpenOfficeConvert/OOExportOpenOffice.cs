@@ -758,6 +758,7 @@ namespace SIL.PublishingSolution
             preProcessor.InsertBookPageBreak();
             preProcessor.ArrangeImages();
             //preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
+            //preProcessor.MoveImmediatePictureOnEntry(projInfo.DefaultXhtmlFileWithPath);
             //preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
             //if (_isFromExe)
@@ -977,8 +978,8 @@ namespace SIL.PublishingSolution
         public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
         {
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = Common.DeclareXMLDocument(false);
-            xdoc.PreserveWhitespace = false;
+            XmlDocument xdoc = Common.DeclareXMLDocument(true);
+            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1030,7 +1031,7 @@ namespace SIL.PublishingSolution
 
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = new XmlDocument();
-            xdoc.PreserveWhitespace = false;
+            //xdoc.PreserveWhitespace = false;
             xdoc.Load(filename);
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
@@ -1067,8 +1068,8 @@ namespace SIL.PublishingSolution
         {
             
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = Common.DeclareXMLDocument(false);
-            xdoc.PreserveWhitespace = false;
+            XmlDocument xdoc = Common.DeclareXMLDocument(true);
+            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1145,7 +1146,7 @@ namespace SIL.PublishingSolution
         {
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = new XmlDocument();
-            xdoc.PreserveWhitespace = false;
+            //xdoc.PreserveWhitespace = false;
             xdoc.Load(filename);
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
@@ -1183,8 +1184,8 @@ namespace SIL.PublishingSolution
         public static void ChangeTitleNameasBookName(string tempOutputFolder)
         {
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = Common.DeclareXMLDocument(false);
-            xdoc.PreserveWhitespace = false;
+            XmlDocument xdoc = Common.DeclareXMLDocument(true);
+            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1226,8 +1227,8 @@ namespace SIL.PublishingSolution
         private static void RenameContentStyleOnCondition(string tempFolder)
         {
             string filename = Common.PathCombine(tempFolder, "content.xml");
-            XmlDocument xdoc = Common.DeclareXMLDocument(false);
-            xdoc.PreserveWhitespace = false;
+            XmlDocument xdoc = Common.DeclareXMLDocument(true);
+            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1262,8 +1263,8 @@ namespace SIL.PublishingSolution
         public static void InsertKeepWithNextinEntryStyle(string directoryPath, string styleFilename)
         {
             string filename = Common.PathCombine(directoryPath, styleFilename);
-            XmlDocument xdoc = Common.DeclareXMLDocument(false);
-            xdoc.PreserveWhitespace = false;
+            XmlDocument xdoc = Common.DeclareXMLDocument(true);
+            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1386,8 +1387,8 @@ namespace SIL.PublishingSolution
         {
 
             string filename = Common.PathCombine(tempFolder, "content.xml");
-            XmlDocument xdoc = Common.DeclareXMLDocument(false);
-            xdoc.PreserveWhitespace = false;
+            XmlDocument xdoc = Common.DeclareXMLDocument(true);
+            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1435,8 +1436,8 @@ namespace SIL.PublishingSolution
         {
 
             string filename = Common.PathCombine(tempFolder, "content.xml");
-            XmlDocument xdoc = Common.DeclareXMLDocument(false);
-            xdoc.PreserveWhitespace = false;
+            XmlDocument xdoc = Common.DeclareXMLDocument(true);
+            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1570,7 +1571,7 @@ namespace SIL.PublishingSolution
 
         private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime, string isCoverImageInserted)
         {
-    	    var xmldoc = Common.DeclareXMLDocument(false);
+    	    var xmldoc = Common.DeclareXMLDocument(true);
             xmldoc.Load(strMacroPath);
             XmlElement ele = xmldoc.DocumentElement;
             string autoMacro = "False";

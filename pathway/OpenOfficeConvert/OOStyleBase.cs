@@ -567,10 +567,10 @@ namespace SIL.PublishingSolution
                     {
                         if (xmlNode.Attributes != null)
                         {
-                            fontName = xmlNode.InnerText;
+                            fontName = xmlNode.InnerText.Trim();
                             _writer.WriteStartElement("style:font-face");
                             _writer.WriteAttributeString("style:name", fontName);
-                            fontName = "'" + xmlNode.InnerText + "'";
+                            fontName = "'" + xmlNode.InnerText.Trim() + "'";
                             _writer.WriteAttributeString("svg:font-family", fontName);
                             _writer.WriteAttributeString("style:font-pitch", "variable");
                             _writer.WriteEndElement();

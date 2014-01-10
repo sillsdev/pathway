@@ -708,8 +708,8 @@ namespace SIL.Tool
         /// <returns></returns>
         public static XmlNode GetXmlNode(string xmlFileNameWithPath, string xPath)
         {
-            XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
-
+            XmlDocument xmlDoc = Common.DeclareXMLDocument(true);
+            xmlDoc.PreserveWhitespace = false;
             xmlFileNameWithPath = DirectoryPathReplace(xmlFileNameWithPath);
             if (!File.Exists(xmlFileNameWithPath))
             {
@@ -777,6 +777,7 @@ namespace SIL.Tool
             {
                 foreach (XmlNode node in resultNode.ChildNodes)
                 {
+                    if (node.NodeType.ToString() == "Whitespace") continue;
                     dataList.Add(node.InnerText);
                 }
             }
@@ -1067,7 +1068,7 @@ namespace SIL.Tool
                     var wsPath = PathCombine(GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
                     if (File.Exists(wsPath))
                     {
-                        var ldml = Common.DeclareXMLDocument(false); //new XmlDocument { XmlResolver = null };
+                        var ldml = Common.DeclareXMLDocument(true); //new XmlDocument { XmlResolver = null };
                         ldml.Load(wsPath);
                         var nsmgr = new XmlNamespaceManager(ldml.NameTable);
                         nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
