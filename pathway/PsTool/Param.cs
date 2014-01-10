@@ -191,7 +191,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         private static void ReplacePStoPathWay()
         {
-            string publishingSolutionsDirectory = Path.Combine(Path.GetDirectoryName(Value[OutputPath]), "PublishingSolutions");
+            string publishingSolutionsDirectory = Common.PathCombine(Path.GetDirectoryName(Value[OutputPath]), "PublishingSolutions");
             if (Directory.Exists(publishingSolutionsDirectory))
             {
                 string oldPath = publishingSolutionsDirectory;
@@ -1260,11 +1260,11 @@ namespace SIL.PublishingSolution
         {
             if (!File.Exists(filePath))
             {
-                string stylesPath = Path.Combine(Value["MasterSheetPath"], fileName);
-                filePath = Path.Combine(Path.GetDirectoryName(SettingPath), stylesPath);
+                string stylesPath = Common.PathCombine(Value["MasterSheetPath"], fileName);
+                filePath = Common.PathCombine(Path.GetDirectoryName(SettingPath), stylesPath);
                 if (!File.Exists(filePath))
                 {
-                    filePath = Path.Combine(Param.Value["UserSheetPath"], fileName);
+                    filePath = Common.PathCombine(Param.Value["UserSheetPath"], fileName);
                 }
             }
             return filePath;

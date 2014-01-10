@@ -105,6 +105,7 @@
 		page-break-inside:avoid;
 		orphans:5;
 		widows:5;
+        -ps-outline-level:2;
 }
 .LexEntrypublishStemParaHomographNumber {
         font-size: 8pt;

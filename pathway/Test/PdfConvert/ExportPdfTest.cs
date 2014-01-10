@@ -54,7 +54,7 @@ namespace Test.PdfConvert
             const string file = "ScripturePreview";
             ExportProcess(file);
 
-            string outputXhtmlFile = Path.Combine(_outputPath, file + ".xhtml");
+            string outputXhtmlFile = Common.PathCombine(_outputPath, file + ".xhtml");
             File.Copy(_projInfo.DefaultXhtmlFileWithPath, outputXhtmlFile, true);
 
             ExportPdf pdfObj = new ExportPdf();
@@ -71,7 +71,7 @@ namespace Test.PdfConvert
             const string file = "CSSStyleForHeaderShowInPrincePdf";
             ExportProcess(file);
 
-            string outputCSSFile = Path.Combine(_outputPath, file + ".css");
+            string outputCSSFile = Common.PathCombine(_outputPath, file + ".css");
             File.Copy(_projInfo.DefaultCssFileWithPath, outputCSSFile, true);
 
             PreExportProcess pdfObj = new PreExportProcess();

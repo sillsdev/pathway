@@ -194,15 +194,15 @@ namespace Test.GoBibleConvert
         //    if (Directory.Exists(folderWithSpace))
         //        Directory.Delete(folderWithSpace, true);
         //    Directory.CreateDirectory(folderWithSpace);
-        //    restructuredFullName = Path.Combine(folderWithSpace, fileName);
+        //    restructuredFullName = Common.PathCombine(folderWithSpace, fileName);
         //    File.Copy(inputFullName, restructuredFullName, true);
         //    string collectionInputFullName = _testFiles.Input(collections);
-        //    collectionFullName = Path.Combine(folderWithSpace, collections);
+        //    collectionFullName = Common.PathCombine(folderWithSpace, collections);
         //    File.Copy(collectionInputFullName, collectionFullName, true);
         //    processFolder = _testFiles.Output("");
         //    Common.ProgBase = GetSupportPath();
         //    BuildApplication();
-        //    string actualFullName = Path.Combine(folderWithSpace, jarFile);
+        //    string actualFullName = Common.PathCombine(folderWithSpace, jarFile);
         //    string exepectedFullName = _testFiles.Expected(jarFile);
         //    Assert.IsTrue(File.Exists(actualFullName));
         //    // TODO: for mono, FastZip is not creating subdirectories correctly when unpacking

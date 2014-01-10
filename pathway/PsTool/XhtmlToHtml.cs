@@ -185,7 +185,7 @@ namespace SIL.Tool
 
         private void CreateBook(string title)
         {
-            string newBook = Path.Combine(_fileDir, _bookNumber.ToString() + ".html");
+            string newBook = Common.PathCombine(_fileDir, _bookNumber.ToString() + ".html");
             _writer = new XmlTextWriter(newBook, null);
             _writer.WriteStartElement("html");
                 _writer.WriteStartElement("head");
@@ -225,7 +225,7 @@ namespace SIL.Tool
 
         private void CreateIndexPage()
         {
-            string newBook = Path.Combine(_fileDir,"index.html");
+            string newBook = Common.PathCombine(_fileDir,"index.html");
             _writer = new XmlTextWriter(newBook, null);
             _writer.WriteStartElement("html");
             _writer.WriteStartElement("head");

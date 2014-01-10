@@ -131,7 +131,7 @@ namespace Test.CssDialog
         public void MakeTest3()
         {
             MergeCss target = new MergeCss { OutputLocation = "Preprocess" };
-            var workDir = Path.Combine(Path.GetTempPath(), "Preprocess");
+            var workDir = Common.PathCombine(Path.GetTempPath(), "Preprocess");
             if (Directory.Exists(workDir))
                 Directory.Delete(workDir,true);
             string css = Common.PathCombine(_inputBasePath, "MergeFile4.css"); // TODO: Initialize to an appropriate value
@@ -147,7 +147,7 @@ namespace Test.CssDialog
         public void MakeTest4()
         {
             MergeCss target = new MergeCss { OutputLocation = "Preprocess" };
-            var workDir = Path.Combine(Path.GetTempPath(), "Preprocess");
+            var workDir = Common.PathCombine(Path.GetTempPath(), "Preprocess");
             if (Directory.Exists(workDir))
                 Directory.Delete(workDir, true);
             string css = Common.PathCombine(_inputBasePath, "MergeFile7.css"); // TODO: Initialize to an appropriate value

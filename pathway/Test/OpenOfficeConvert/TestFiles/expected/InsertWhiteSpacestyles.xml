@@ -273,8 +273,8 @@
     <style:style style:name="GraphicsI2" style:family="graphic" style:parent-style-name="Graphics1">
       <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" />
     </style:style>
-    <style:style style:name="Frame" style:family="graphic">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0pt" svg:y="0pt" fo:margin-left="0pt" fo:margin-right="0pt" fo:margin-bottom="0pt" fo:margin-top="0pt" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" fo:padding="4.25pt" fo:border="0.06pt solid #000000" />
+    <style:style style:name="Frame" style:family="graphic" style:parent-style-name="Graphics">
+      <style:graphic-properties text:anchor-type="paragraph" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" style:flow-with-text="false" />
     </style:style>
     <text:outline-style>
       <text:outline-level-style text:level="1" style:num-format="">
@@ -467,6 +467,7 @@
     <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
     <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7" />
     <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7" />
+    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
     <style:master-page style:name="CopyRight_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7">
       <style:footer>
         <text:p text:style-name="Footer">
@@ -475,7 +476,7 @@
         </text:p>
       </style:footer>
     </style:master-page>
-    <style:master-page style:name="Dummy1_20_Page" style:display-name="Dummy1 Page" style:next-style-name="First_20_Page" style:page-layout-name="pm13" />
+    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
     <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3" />
     <style:master-page style:name="Left_20_Page" style:display-name="Left Page" style:page-layout-name="pm4" style:next-style-name="Right_20_Page">
       <style:header>

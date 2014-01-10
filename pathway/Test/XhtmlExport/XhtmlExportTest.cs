@@ -65,7 +65,7 @@ namespace Test.XhtmlExport
             }
             _scriptPath = PathPart.Bin(Environment.CurrentDirectory, "/XhtmlExport");
             _tf = new TestFiles("XhtmlExport");
-            var pwf = Path.Combine(Common.GetAllUserAppPath(), "SIL");
+            var pwf = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
             var zf = new FastZip();
             zf.ExtractZip(_tf.Input("Pathway.zip"), pwf, ".*");
         }
@@ -138,8 +138,8 @@ namespace Test.XhtmlExport
             var workingFolder = Path.GetDirectoryName(xhtmlInput);
             if (format == "usx")
             {
-                FolderTree.Copy(_tf.Input("gather"), Path.Combine(_tf.Output("NKOu3"), "gather"));
-                FolderTree.Copy(_tf.Input("figures"), Path.Combine(_tf.Output("NKOu3"), "figures"));
+                FolderTree.Copy(_tf.Input("gather"), Common.PathCombine(_tf.Output("NKOu3"), "gather"));
+                FolderTree.Copy(_tf.Input("figures"), Common.PathCombine(_tf.Output("NKOu3"), "figures"));
                 workingFolder = Path.GetDirectoryName(xhtmlOutput);
             }
             var p1 = new Process();

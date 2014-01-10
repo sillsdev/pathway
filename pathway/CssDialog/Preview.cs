@@ -107,7 +107,7 @@ namespace SIL.PublishingSolution
             string PreviewCSSPath = css;
             if (!string.IsNullOrEmpty(DefaultCSS) && File.Exists(DefaultCSS))
             {
-                PreviewCSSPath = Path.Combine(Common.GetAllUserPath(), "Preview.css");
+                PreviewCSSPath = Common.PathCombine(Common.GetAllUserPath(), "Preview.css");
                 if (File.Exists(PreviewCSSPath)) { File.Delete(PreviewCSSPath); }
                 if (File.Exists(css))
                 File.Copy(css, PreviewCSSPath, true);

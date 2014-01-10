@@ -217,6 +217,26 @@ namespace Test.GoBibleConvert
             FileAssert.AreEqual(expected, output, file + " test fails");
         }
 
+
+        ///<summary>
+        ///Compare files
+        /// </summary>      
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void EmptyTag()
+        {
+            UsxToSFM _usxToSfm = new UsxToSFM();
+            const string file = "EmptyTag";
+
+            string input = Common.PathCombine(_inputPath, file + ".usx");
+            string output = Common.PathCombine(_outputPath, file + ".sfm");
+            string expected = Common.PathCombine(_expectedPath, file + ".sfm");
+
+            _usxToSfm.ConvertUsxToSFM(input, output);
+
+            FileAssert.AreEqual(expected, output, file + " test fails");
+        }
+
         ///<summary>
         /// Input case are taken from BM2 and NKOU3
         /// and cases are "1-2" and "3a", "3b"

@@ -72,11 +72,11 @@ namespace SIL.PublishingSolution
 
                 //if (!File.Exists(TxtCSSFileName.Text))
                 //{
-                //    string stylesPath = Path.Combine(Param.Value["MasterSheetPath"], TxtCSSFileName.Text);
-                //    filePath = Path.Combine(Path.GetDirectoryName(Param.SettingPath), stylesPath);
+                //    string stylesPath = Common.PathCombine(Param.Value["MasterSheetPath"], TxtCSSFileName.Text);
+                //    filePath = Common.PathCombine(Path.GetDirectoryName(Param.SettingPath), stylesPath);
                 //    if(!File.Exists(filePath))
                 //    {
-                //        filePath = Path.Combine(Param.Value["UserSheetPath"], TxtCSSFileName.Text);
+                //        filePath = Common.PathCombine(Param.Value["UserSheetPath"], TxtCSSFileName.Text);
                 //    }
                 //}
 

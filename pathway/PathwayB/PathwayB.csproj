@@ -229,6 +229,10 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -241,6 +245,10 @@
     <ProjectReference Include="..\CssDialog\CssDialog.csproj">
       <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
       <Name>CssDialog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParatextSupport\ParatextSupport.csproj">
+      <Project>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</Project>
+      <Name>ParatextSupport</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsExport\PsExport.csproj">
       <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
@@ -267,6 +275,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ptx2css.xsl" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

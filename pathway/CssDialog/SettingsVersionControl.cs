@@ -52,7 +52,7 @@ namespace SIL.PublishingSolution
                     continue;
                 }
 
-                _pathwayFilePath = Path.Combine(Path.GetDirectoryName(appPath), data.Value);
+                _pathwayFilePath = Common.PathCombine(Path.GetDirectoryName(appPath), data.Value);
                 _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
                 
                 
@@ -106,7 +106,7 @@ namespace SIL.PublishingSolution
         private bool CreateSettingsFile(string appPath, KeyValuePair<string, string> data)
         {
             bool fileSettingFileCreated = false;
-            _pathwayFilePath = Path.Combine(Path.GetDirectoryName(appPath), data.Value);
+            _pathwayFilePath = Common.PathCombine(Path.GetDirectoryName(appPath), data.Value);
             _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
             string pathwayFolder = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
             pathwayFolder = Common.PathCombine(pathwayFolder, "Pathway");
@@ -136,7 +136,7 @@ namespace SIL.PublishingSolution
             //    string output = Common.PathCombine(testPath, "ConfigurationTool\\TestFiles\\Output");
 
             //    _userFilePath = Common.PathCombine(input, data.Value);
-            //    _pathwayFilePath = Path.Combine(output, data.Value);
+            //    _pathwayFilePath = Common.PathCombine(output, data.Value);
             //    File.Copy(_userFilePath, _pathwayFilePath, true);
 
             //    filePath = _pathwayFilePath;
@@ -150,7 +150,7 @@ namespace SIL.PublishingSolution
             //}
             //else
             //{
-            _pathwayFilePath = Path.Combine(Path.GetDirectoryName(appPath), data.Value);
+            _pathwayFilePath = Common.PathCombine(Path.GetDirectoryName(appPath), data.Value);
             _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
             
             //}
@@ -265,8 +265,8 @@ namespace SIL.PublishingSolution
                 const string settingFileXsd = "StyleSettings.xsd";
                 string localFilePath = Path.GetDirectoryName(_userFilePath);
                 string insallerFilePath = Path.GetDirectoryName(_pathwayFilePath);
-                localFilePath = Path.Combine(localFilePath, settingFileXsd);
-                insallerFilePath = Path.Combine(insallerFilePath, settingFileXsd);
+                localFilePath = Common.PathCombine(localFilePath, settingFileXsd);
+                insallerFilePath = Common.PathCombine(insallerFilePath, settingFileXsd);
                 File.Copy(insallerFilePath, localFilePath, true);
 
                 _pathwayFilePath = filePath;

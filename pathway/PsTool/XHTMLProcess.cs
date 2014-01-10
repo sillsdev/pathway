@@ -125,6 +125,7 @@ namespace SIL.PublishingSolution
         protected string _paragraphName;
         protected string _previousParagraphName;
         protected string _characterName;
+        public string _characterNameAlways = string.Empty;
         protected string _lang = string.Empty;
         protected Dictionary<string, string> _languageStyleName = new Dictionary<string, string>();
         ArrayList _xhtmlAttribute = new ArrayList();
@@ -171,11 +172,11 @@ namespace SIL.PublishingSolution
         {
             _psuedoBeforeStyle = _psuedoAfterStyle = _psuedoContainsStyle = null;
             //_reader = new XmlTextReader(xhtmlFileWithPath)
-                          //{
-                              //XmlResolver = null,
-                              //WhitespaceHandling = WhitespaceHandling.Significant
-                          //};
-	     _reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true);
+            //{
+            //XmlResolver = null,
+            //WhitespaceHandling = WhitespaceHandling.Significant
+            //};
+            //_reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true);
         }
 
         protected bool IsEmptyNode()
@@ -334,7 +335,7 @@ namespace SIL.PublishingSolution
                     {
                         _headwordStyleName.Add(styleName);
                     }
-                    
+
                 }
             }
         }
@@ -342,7 +343,7 @@ namespace SIL.PublishingSolution
         private void BlockInline()
         {
             string imgTag = Common.LeftString(_className, Common.SepParent);
-            if(imgTag == "img") 
+            if (imgTag == "img")
                 return;
 
             string value = GetDisplayBlock(_className, "display");
@@ -527,7 +528,7 @@ namespace SIL.PublishingSolution
             {
                 _isNewParagraph = true;
                 _isParagraphClosed = true;
-                
+
                 if (_outputType == Common.OutputType.XETEX || _outputType == Common.OutputType.XELATEX)
                 {
                     _xetexFile.WriteLine();
@@ -554,7 +555,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteEndElement();
                 }
             }
-            if(_forcedPara)
+            if (_forcedPara)
             {
                 _writer.WriteEndElement();
                 _isNewParagraph = true;
@@ -844,16 +845,16 @@ namespace SIL.PublishingSolution
                         }
                         else
                         {
-                           //footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">");
+                            //footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">");
                         }
                         //footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">" + footnoteText + "</text:span>");
-                        
+
                     }
                     else
                     {
                         footnoteContent.Append(footnoteText);
                     }
-                    
+
                     //if (outputType == Common.OutputType.XETEX.ToString())
                     //{
                     //    footnoteContent.Append(footnoteText);
@@ -862,7 +863,7 @@ namespace SIL.PublishingSolution
                     //{
                     //    footnoteContent.Append("<CharacterStyleRange AppliedCharacterStyle=\"" + "CharacterStyle/" + footerMarkerClassName + "\"><Content>" + footnoteText + "</Content></CharacterStyleRange>");
                     //}
-                    
+
                     //if (outputType == Common.OutputType.XELATEX.ToString())
                     //{
                     //    footnoteContent.Append(footnoteText);
@@ -885,7 +886,7 @@ namespace SIL.PublishingSolution
 
         private string FindStyleName()
         {
-           // if (_allStyle.Count == 0) return _classNameWithLang;
+            // if (_allStyle.Count == 0) return _classNameWithLang;
 
             //string styleName = _precedeClassAttrib.ClassName + _classNameWithLang + Common.SepParent + StackPeek(_allStyle);
             string styleName = _precedeClassAttrib.ClassName + _tagType + _classNameWithLang + Common.SepParent + StackPeek(_allStyle);
@@ -1013,6 +1014,19 @@ namespace SIL.PublishingSolution
             //if (styleName == "ChapterNumber") return styleName;
             //if (styleName == "VerseNumber") return styleName;
             if (_headwordStyles) return styleName;
+            while (styleName.StartsWith("span") || styleName.StartsWith("xitem"))
+            {
+                if (string.IsNullOrEmpty(_parentStyleName))
+                {
+                    break;
+                }
+                styleName = _parentStyleName;
+                if (styleName.Contains("_"))
+                {
+                    styleName = styleName.Substring(0, styleName.IndexOf("_"));
+                }
+                _parentStyleName = StackPeek(_allStyle);
+            }
             int suffix = 1;
             string newname;
             while (true)
@@ -1021,6 +1035,23 @@ namespace SIL.PublishingSolution
                 if (!_newProperty.ContainsKey(newname))
                 {
                     break;
+                }
+                var props = _newProperty[newname];
+                if (props.Count == _tempStyle.Count)
+                {
+                    var allPopsEqual = true;
+                    foreach (string prop in props.Keys)
+                    {
+                        if (!_tempStyle.ContainsKey(prop) || props[prop] != _tempStyle[prop])
+                        {
+                            allPopsEqual = false;
+                            break;
+                        }
+                    }
+                    if (allPopsEqual)
+                    {
+                        break;
+                    }
                 }
             }
             return newname;
@@ -1170,7 +1201,7 @@ namespace SIL.PublishingSolution
                     {
                         if (_tempStyle.ContainsKey(property.Key) || property.Key == "TextColumnCount")
                         {
-                             continue;
+                            continue;
                         }
                         _tempStyle[property.Key] = property.Value;
                     }
@@ -1299,7 +1330,7 @@ namespace SIL.PublishingSolution
                 else
                 {
                     if (property.Key != "prince-text-replace")
-                    _tempStyle[property.Key] = property.Value;
+                        _tempStyle[property.Key] = property.Value;
                 }
             }
             WordCharSpace(ancestorFontSize);

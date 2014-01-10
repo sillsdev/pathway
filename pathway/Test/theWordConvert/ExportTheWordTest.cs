@@ -155,7 +155,7 @@ namespace Test.TheWordConvertTest
         {
             var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
             string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
-            TheWord.Load(XmlReader.Create(Path.Combine(codePath, "theWord.xsl")), xsltSettings, null);
+            TheWord.Load(XmlReader.Create(Common.PathCombine(codePath, "theWord.xsl")), xsltSettings, null);
             IEnumerable<string> books = new List<string>(2) { "MAT", "MRK" };
             var codeNames = new Dictionary<string, string>(2);
             codeNames["MAT"] = FileInput(@"USX\040MAT.usx");
@@ -176,21 +176,31 @@ namespace Test.TheWordConvertTest
             mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
+        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, bool rtl)
+        {
+            TestDataCase(code, fileName, rec, expectedResult, null, null, false, rtl);
+        }
+
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult)
         {
-            TestDataCase(code, fileName, rec, expectedResult, null, null, false);
+            TestDataCase(code, fileName, rec, expectedResult, null, null, false, false);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc)
         {
-            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false);
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false, false);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo)
         {
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, starSaltillo, false);
+        }
+
+        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo, bool rtl)
+        {
             var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
             string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
-            TheWord.Load(XmlReader.Create(Path.Combine(codePath, "theWord.xsl")), xsltSettings, null);
+            TheWord.Load(XmlReader.Create(Common.PathCombine(codePath, "theWord.xsl")), xsltSettings, null);
             IEnumerable<string> books = new List<string>(1) { code };
             var codeNames = new Dictionary<string, string>(2);
             codeNames[code] = FileInput(fileName);
@@ -211,6 +221,10 @@ namespace Test.TheWordConvertTest
             {
                 xsltArgs.AddParam("noStar", "", "1");
                 xsltArgs.AddParam("noSaltilla", "", "1");
+            }
+            if (rtl)
+            {
+                xsltArgs.AddParam("rtl", "", "1");
             }
             var temp = Path.GetTempFileName();
             var sw = new StreamWriter(temp);
@@ -234,7 +248,7 @@ namespace Test.TheWordConvertTest
         public void NoMt2()
         {
             var bookNames = "file:///" + FileInput("avtBookNames.xml");
-            TestDataCase("MAT", "040MAT.usx", 1, "<TS1>Hɨm Yaaim Me Krais Matyu Kewisɨm Mau Tɨwei<Ts><TS1>Niuk me maamrer ne weiwɨk me Jisas<Ts><TS3><i>(Lu 3:23-38)</i><Ts><RF q=*><a href=\"http:tw://bible.*?=1.22.18\">Jen 22:18</a>; <a href=\"http:tw://bible.*?=13.17.11\">1Kro 17:11</a><Rf>Menmen im hi hewisɨm hɨram niuk me maamrer yapɨrwe ne weiwɨk miutɨp me Jisas Krais, kerek hɨrak nepenyek ke mɨtɨk iuwe Devit, hɨrak nepenyek hak ke maam nɨpu kaiu Ebraham.<CI>", bookNames, ":");
+            TestDataCase("MAT", "040MAT.usx", 1, "<TS1>Hɨm Yaaim Me Krais Matyu Kewisɨm Mau Tɨwei<Ts><TS1>Niuk me maamrer ne weiwɨk me Jisas<Ts><TS3><i>(Lu 3:23-38)</i><Ts><RF q=*><a href=\"tw://bible.*?1.22.18\">Jen 22:18</a>; <a href=\"tw://bible.*?13.17.11\">1Kro 17:11</a><Rf>Menmen im hi hewisɨm hɨram niuk me maamrer yapɨrwe ne weiwɨk miutɨp me Jisas Krais, kerek hɨrak nepenyek ke mɨtɨk iuwe Devit, hɨrak nepenyek hak ke maam nɨpu kaiu Ebraham.<CI>", bookNames, ":");
         }
 
         [Test]
@@ -319,14 +333,14 @@ namespace Test.TheWordConvertTest
         public void SpaceInCrossRefNameTest()
         {
             var bookNames = "file:///" + FileInput("aauBookNames.xml");
-            TestDataCase("PHM", "057PHM.usx", 2, "Hrorkwe mamey okukwe seyr, hromo ine Apia o, hromo wayh Arkipus, hrere nion ma non-orok ono o, seyr uwrsa sios ko, hno a mon ma hokruw sohom o, hme mey kow.<RF q=*><a href=\"http:tw://bible.*?=51.4.17\">Kol 4:17</a>; <a href=\"http:tw://bible.*?=55.2.3\">2 Ti 2:3</a><Rf><CM>", bookNames, ":");
+            TestDataCase("PHM", "057PHM.usx", 2, "Hrorkwe mamey okukwe seyr, hromo ine Apia o, hromo wayh Arkipus, hrere nion ma non-orok ono o, seyr uwrsa sios ko, hno a mon ma hokruw sohom o, hme mey kow.<RF q=*><a href=\"tw://bible.*?51.4.17\">Kol 4:17</a>; <a href=\"tw://bible.*?55.2.3\">2 Ti 2:3</a><Rf><CM>", bookNames, ":");
         }
 
         [Test]
         public void WithoutBookNameTest()
         {
             var bookNames = "file:///" + FileInput("aauBookNames.xml");
-            TestDataCase("PHM", "057PHM.usx", 22, "Hano me-nonkway ok kamon kokwe senkin, hunkwe ampok, ha liawon ey se kwa lonhan naruok koruay. Payhokuaw, hano uron hokwe hyohyo senkin lon, hom God se ma mesopok me hokuaw, God hiykwe ha hme nion manon-wak e ipan ya lon a.<RF q=*><a href=\"http:tw://bible.*?=50.1.25\">Fl 1:25</a>; <a href=\"http:tw://bible.*?=50.2.24\">2:24</a><Rf><CM>", bookNames, ":");
+            TestDataCase("PHM", "057PHM.usx", 22, "Hano me-nonkway ok kamon kokwe senkin, hunkwe ampok, ha liawon ey se kwa lonhan naruok koruay. Payhokuaw, hano uron hokwe hyohyo senkin lon, hom God se ma mesopok me hokuaw, God hiykwe ha hme nion manon-wak e ipan ya lon a.<RF q=*><a href=\"tw://bible.*?50.1.25\">Fl 1:25</a>; <a href=\"tw://bible.*?50.2.24\">2:24</a><Rf><CM>", bookNames, ":");
         }
 
         [Test]
@@ -338,34 +352,34 @@ namespace Test.TheWordConvertTest
         [Test]
         public void BridgeB4PTest()
         {
-            TestDataCase("MAT", "040MAT-bridgeB4.usx", 1, "<TS1><Ts><sup>(1-2)</sup> Verse one text. Verse two text");
+            TestDataCase("MAT", "040MAT-bridgeB4.usx", 1, "<sup>(1-2)</sup> Verse one text. Verse two text");
         }
 
         [Test]
         public void BridgeB4P2Test()
         {
-            TestDataCase("MAT", "040MAT-bridgeB4P.usx", 1, "<TS1><Ts><sup>(1-2)</sup> Verse one text. Verse two text");
+            TestDataCase("MAT", "040MAT-bridgeB4P.usx", 1, "<sup>(1-2)</sup> Verse one text. Verse two text");
         }
 
         [Test]
         public void RefListTest()
         {
             var bookNames = "file:///" + FileInput("BookNames-refList.xml");
-            TestDataCase("MAT", "040MAT-refList.usx", 26, "<TS1>complex xref test<Ts><RF q=*><a href=\"http:tw://bible.*?=19.2.7\">Pal 2:7</a>; <a href=\"http:tw://bible.*?=19.22.2\">22:2</a>, <a href=\"http:tw://bible.*?=19.22.14\">14</a><Rf>Verse one.", bookNames, ":");
+            TestDataCase("MAT", "040MAT-refList.usx", 26, "<TS1>complex xref test<Ts><RF q=*><a href=\"tw://bible.*?19.2.7\">Pal 2:7</a>; <a href=\"tw://bible.*?19.22.2\">22:2</a>, <a href=\"tw://bible.*?19.22.14\">14</a><Rf>Verse one.", bookNames, ":");
         }
 
         [Test]
         public void RefList2Test()
         {
             var bookNames = "file:///" + FileInput("BookNames-refList.xml");
-            TestDataCase("MAT", "040MAT-refList.usx", 27, "<RF q=*><a href=\"http:tw://bible.*?=2.37.11\">Tav 37:11</a>, <a href=\"http:tw://bible.*?=2.37.28\">28</a>; <a href=\"http:tw://bible.*?=2.39.2\">39:2</a>, <a href=\"http:tw://bible.*?=2.39.21-23\">21-23</a><Rf>Verse two.", bookNames, ":");
+            TestDataCase("MAT", "040MAT-refList.usx", 27, "<RF q=*><a href=\"tw://bible.*?2.37.11\">Tav 37:11</a>, <a href=\"tw://bible.*?2.37.28\">28</a>; <a href=\"tw://bible.*?2.39.2\">39:2</a>, <a href=\"tw://bible.*?2.39.21-23\">21-23</a><Rf>Verse two.", bookNames, ":");
         }
 
         [Test]
         public void RefSingleChapterTest()
         {
             var bookNames = "file:///" + FileInput("BookNames-refList.xml");
-            TestDataCase("MAT", "040MAT-refList.usx", 30, "<RF q=*><a href=\"http:tw://bible.*?=1.18.20–19:28\">Jen 18:20–19:28</a>; <a href=\"http:tw://bible.*?=40.11.24\">Mt 11:24</a>; <a href=\"http:tw://bible.*?=61.2.6\">2Pi 2:6</a>; <a href=\"http:tw://bible.*?=65.1.7\">Ju 7</a><Rf>Hi hetpi werek. Maain wɨ God skelim mɨt, hɨrak God kaknep mɨt miyapɨr enun nɨpaa nau Sodom ketike wit Gomora kaknɨp kike. Te mɨt miyapɨr kerek nanweikɨn sip nanwet hɨm mi, maain God kaknɨp iuwe kaknepi.", bookNames, ":");
+            TestDataCase("MAT", "040MAT-refList.usx", 30, "<RF q=*><a href=\"tw://bible.*?1.18.20–19:28\">Jen 18:20–19:28</a>; <a href=\"tw://bible.*?40.11.24\">Mt 11:24</a>; <a href=\"tw://bible.*?61.2.6\">2Pi 2:6</a>; <a href=\"tw://bible.*?65.1.7\">Ju 7</a><Rf>Hi hetpi werek. Maain wɨ God skelim mɨt, hɨrak God kaknep mɨt miyapɨr enun nɨpaa nau Sodom ketike wit Gomora kaknɨp kike. Te mɨt miyapɨr kerek nanweikɨn sip nanwet hɨm mi, maain God kaknɨp iuwe kaknepi.", bookNames, ":");
         }
 
         [Test]
@@ -379,7 +393,33 @@ namespace Test.TheWordConvertTest
         public void RefNoVerseTest()
         {
             var bookNames = "file:///" + FileInput("BookNames-refList.xml");
-            TestDataCase("MAT", "040MAT-refList.usx", 47, "<RF q=*><a href=\"http:tw://bible.*?=23.23.1\">Ais 23</a>; <a href=\"http:tw://bible.*?=26.26.1–28:26\">Esi 26:1–28:26</a>; <a href=\"http:tw://bible.*?=29.3.4-8\">Joe 3:4-8</a>; <a href=\"http:tw://bible.*?=30.1.9-10\">Emo 1:9-10</a>; <a href=\"http:tw://bible.*?=36.9.2-4\">Sek 9:2-4</a><Rf>Hi hetpi werek. Maain wɨ kerek God skelim mɨt, hɨrak kaknep mɨt ne Taia netike mɨt ne Saidon kaknɨp kike, te yi mɨt au hɨrak kakiwep iuwe.", bookNames, ":");
+            TestDataCase("MAT", "040MAT-refList.usx", 47, "<RF q=*><a href=\"tw://bible.*?23.23.1\">Ais 23</a>; <a href=\"tw://bible.*?26.26.1–28:26\">Esi 26:1–28:26</a>; <a href=\"tw://bible.*?29.3.4-8\">Joe 3:4-8</a>; <a href=\"tw://bible.*?30.1.9-10\">Emo 1:9-10</a>; <a href=\"tw://bible.*?36.9.2-4\">Sek 9:2-4</a><Rf>Hi hetpi werek. Maain wɨ kerek God skelim mɨt, hɨrak kaknep mɨt ne Taia netike mɨt ne Saidon kaknɨp kike, te yi mɨt au hɨrak kakiwep iuwe.", bookNames, ":");
+        }
+
+        [Test]
+        public void ShortNameTest()
+        {
+            var bookNames = "file:///" + FileInput("akeBookNames.xml");
+            TestDataCase("1CO", "0461CO.usx", 2, "Papa soꞌsii, Koren pon enakan, kamoro Kʉrai Sises winɨ iyekonekasaꞌ kon wakʉ pe teꞌton kon pe, kamoro mɨ awɨrɨ naꞌneꞌ nan amʉtʉ pe esiiꞌma Sises Kʉrai, uyepuru kon esakʉ pɨꞌ naꞌneꞌ nan, toꞌ epuru mɨrɨ awonsiꞌkɨ uyepuru kon nɨ nɨrɨ:<RF q=*><a href=\"tw://bible.*?44.18.1\">Inkupʉꞌpʉ 18:1</a><Rf>", bookNames, ":");
+        }
+
+        [Test]
+        public void SpaceAfterRefTest()
+        {
+            var bookNames = "file:///" + FileInput("aauBookNames.xml");
+            TestDataCase("MRK", "041MRK.usx", 647, "Hmo prueyn hiy laplap kopi non nak-sau nok nok, wain ma laroray non sakeyn prouk nok, now-ho mon piynay nok, sa Jisas se seyn arnak-nakray, hiy lowswa e.<RF q=*><a href=\"tw://bible.*?19.69.21\">Sng 69:21</a><Rf> Uwr sohiy nak-me, “Pereipia, hromkwe lira ey, Elaija po pankaw laye pakane, hye now ko se kandieys kow se.”", bookNames, ":");
+        }
+
+        [Test]
+        public void RightToLeftBridgeTest()
+        {
+            TestDataCase("3JN", "0643JN.usx", 14, "<sup>(<rtl>14</rtl>-15)</sup> بَسْ لي رَجا خَفيفْ تَ اراك، وْثمْ لَثمْ نحْكي. <sup>15</sup> السَّلام يكونْ مَعك. يسَلمونْ عَلَيك الّمْحبّينْ. سَلّم عَ الّمْحبّينْ كلْ واِحدْ باسْمو.<CM>", true);
+        }
+
+        [Test]
+        public void mt2b4mt1Test()
+        {
+            TestDataCase("GAL", "048GAL.usx", 1, "<TS2><font size=-1><b>To Suyat ni Pablo diya to mgo Taga-</b></font><Ts><TS1>GALACIA<Ts><sup>(1,2)</sup> Siak si Pablo iyan migsuyat to seini diyan iyu no mgo magtutuu no oghihimun duon to mgo kayunsudan no sakup to Galacia.<CM>Igpadomdom ku iyu no seini katongdanan ku to pagka-apustul, kona no otow to migpili dow migsugu kanay ko kona no si Jesu-Cristo yagboy dow to Diyus no Amoy no iyan migbanhaw kandin.<CM>Siak dow to tibo mgo suun ta kani duon ki Cristo nangumusta iyu.");
         }
 
         //[Test]

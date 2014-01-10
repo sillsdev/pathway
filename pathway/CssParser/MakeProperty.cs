@@ -328,11 +328,19 @@ namespace SIL.PublishingSolution
                 case "marks":
                     Marks(styleAttributeInfo);
                     break;
+                case "-ps-outline-level":
+                    CommomProperty(styleAttributeInfo);
+                    break;
                 default:
                     SimpleProperty(styleAttributeInfo);
                     break;
             }
             return _cssProperty;
+        }
+
+        private void CommomProperty(StyleAttribute styleAttributeInfo)
+        {
+            _cssProperty[styleAttributeInfo.Name] = styleAttributeInfo.StringValue;
         }
 
         private void Marks(StyleAttribute styleAttributeInfo)
@@ -618,6 +626,7 @@ namespace SIL.PublishingSolution
                 case "white-space":
                 case "list-style-position":
                 case "list-style-type":
+                case "list-style":
                 case "direction":
                 case "float":
                 case "clear":
@@ -643,6 +652,7 @@ namespace SIL.PublishingSolution
                 case "-ps-hide-space-versenumber":
                 case "prince-hyphenate-patterns":
                 case "guideword-length":
+                case "-ps-split-file-by-letter":
                     _cssProperty[styleAttributeInfo.Name] = value;
                     break;
 

@@ -62,7 +62,7 @@ namespace Test.PsExport
             //DoBatch("ConfigurationTool", "postBuild.bat", "Debug");
             //Common.ProgInstall = Environment.CurrentDirectory.Replace("Test", "ConfigurationTool");
             Common.ProgInstall = Environment.CurrentDirectory;
-            //FolderTree.Copy(Common.PathCombine(testPath, "../../../PsSupport/OfficeFiles"),Path.Combine(Common.ProgInstall,"OfficeFiles"));
+            //FolderTree.Copy(Common.PathCombine(testPath, "../../../PsSupport/OfficeFiles"),Common.PathCombine(Common.ProgInstall,"OfficeFiles"));
             Backend.Load(Common.ProgInstall);
         }
 
@@ -242,7 +242,7 @@ namespace Test.PsExport
             foreach (string fullPath in Directory.GetFiles(_inputTestPath, "*.jpg"))
             {
                 var fileName = Path.GetFileName(fullPath);
-                File.Copy(fullPath, Path.Combine(_outputTestPath, fileName), true);
+                File.Copy(fullPath, Common.PathCombine(_outputTestPath, fileName), true);
             }
             CopyExistingFile("FlexRev.xhtml");
             CopyExistingFile("FlexRev.css");
@@ -281,7 +281,7 @@ namespace Test.PsExport
         {
             Common.PublishingSolutionsEnvironmentReset();
             TestPathSetup(testName);
-            var settingsFolder = Path.Combine(_inputTestPath, "Pathway");
+            var settingsFolder = Common.PathCombine(_inputTestPath, "Pathway");
             if (Directory.Exists(settingsFolder))
             {
                 FolderTree.Copy(settingsFolder, Common.GetAllUserPath());
@@ -414,11 +414,13 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "secondary title style", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:font-style", "italic"),
                 new ODet(ODet.Chk, "secondary title font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:font-size", "16pt"),
                 new ODet(ODet.Chk, "secondary title complex font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@style:font-size-complex", "16pt"),
-                new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics1']//@style:vertical-pos", "from-top"),
-                new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='Graphics1']//@xlink:href", "Pictures/2.jpg"),
+                new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics2']//@style:vertical-pos", "from-top"),
+                new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='gr2']//@xlink:href", "Pictures/2.jpg"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_TitleMain_')]//@fo:language", "zxx"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_Paragraph_scrSection_')]//@fo:language", "zxx"),
-                new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5 “Mlɩbla Sionfɔ mlɩaa,"),
+                new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5\u00A0“Mlɩbla Sionfɔ mlɩaa,"),
+                new ODet(ODet.Chk, "Punctuation after Glossary entry (TD-3719)", "mat21-23.odt", ODet.Content, "//text:p[26]", "24\u00A0Yesu lɛ́lɛ mʋ́ ɔnɔ́ ɔbɛ́ɛ, “Mɩ́ ɛ́ nfɩ́tɛ mlɩ asʋn kua kʋlɛ. Nɩ́ mlɛlɛ́ mʋ́ ɔnɔ́ á, nɛ́bláa mlɩ túmi oduá ndɛpʋbwɛ́ ntobí ánfɩ. 25\u00A0Bulu wá Asú Ɔbɔpʋ́ Yohane lénya túmi pʋ́bɔ́ ahá asú, ntɛ́ɛ nyankpʋsa?”"),
+                new ODet(ODet.Chk, "Space after verse", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Verse')]", "1\u20112\u00A0"),
                 
             };
 
@@ -912,8 +914,8 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "secondary title style", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:font-style", "italic"),
                 new ODet(ODet.Chk, "secondary title font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:font-size", "16pt"),
                 new ODet(ODet.Chk, "secondary title complex font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@style:font-size-complex", "16pt"),
-                new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics1']//@style:vertical-pos", "top"),
-                new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='Graphics1']//@xlink:href", "Pictures/2.jpg"),
+                new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics2']//@style:vertical-pos", "top"),
+                new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:name='Graphics2']//@xlink:href", "Pictures/2.jpg"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_TitleMain_')]//@fo:language", "zxx"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_Paragraph_scrSection_')]//@fo:language", "zxx"),
                 
@@ -1038,8 +1040,8 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "secondary title style", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:font-style", "italic"),
                 new ODet(ODet.Chk, "secondary title font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@fo:font-size", "16pt"),
                 new ODet(ODet.Chk, "secondary title complex font size", "mat21-23.odt", ODet.Styles, "//*[substring-before(@style:name, '_') = 'TitleSecondary']//@style:font-size-complex", "16pt"),
-                new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics1']//@style:vertical-pos", "top"),
-                new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='Graphics1']//@xlink:href", "Pictures/2.jpg"),
+                new ODet(ODet.Chk, "position graphics from top", "mat21-23.odt", ODet.Styles, "//style:style[@style:name='Graphics2']//@style:vertical-pos", "top"),
+                new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:style-name='gr2']//@xlink:href", "Pictures/2.jpg"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_TitleMain_')]//@fo:language", "zxx"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_Paragraph_scrSection_')]//@fo:language", "zxx"),
                 new ODet(ODet.Chk, "column count", "mat21-23.odt", ODet.Content, "//*[@style:name='Sect_columns']//@fo:column-count", "2"),
@@ -1058,6 +1060,25 @@ namespace Test.PsExport
             ExportTest("T16", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
         }
         #endregion T16
+
+        #region T17
+        /// <summary>
+        /// Test TE Export test
+        /// </summary>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void T17NoSpaceAfterVerse()
+        {
+            var tests = new ArrayList
+            {
+                new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5\uFEFF“Mlɩbla Sionfɔ mlɩaa,"),
+                new ODet(ODet.Chk, "Space after verse", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Verse')]", "1\u20112\u00A0"),
+                
+            };
+
+            ExportTest("T17", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
+        }
+        #endregion T17
 
         [Test]
         public void XsltPreProcess0Test()
@@ -1080,7 +1101,7 @@ namespace Test.PsExport
             XsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
             Assert.AreEqual(2, files.Length);
-            XmlAssert.AreEqual(Path.Combine(_expectTestPath, data), infile, "Empty Entries Preprocess produced different results");
+            XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "Empty Entries Preprocess produced different results");
         }
 
         [Test]
@@ -1093,7 +1114,7 @@ namespace Test.PsExport
             XsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
             Assert.AreEqual(3, files.Length);
-            XmlAssert.AreEqual(Path.Combine(_expectTestPath, data), infile, "Preprocess produced different results");
+            XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "Preprocess produced different results");
         }
     }
 }

@@ -66,7 +66,7 @@ namespace SIL.Tool
             var ssf = GetSettingsFilename(Database);
             var languageFileName = Common.GetXmlNode(ssf, "//Language").InnerText + ".lds";
             var folder = Path.GetDirectoryName(ssf);
-            return Path.Combine(folder, languageFileName);
+            return Common.PathCombine(folder, languageFileName);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace SIL.Tool
                     if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey,
                                                           "Settings_Directory", "", out paraTextprojectPath))
                     {
-                        string settingFilePath = Path.Combine((string) paraTextprojectPath, ssfFile);
+                        string settingFilePath = Common.PathCombine((string) paraTextprojectPath, ssfFile);
                         if (File.Exists(settingFilePath))
                             return settingFilePath;
                         else

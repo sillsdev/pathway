@@ -12,7 +12,7 @@ namespace SIL.PublishingSolution
 
         public void OpenDefaultSetting(ListBox lstSection)
         {
-            string bookletSettingFullPath = Path.Combine(_sectionPath,"BookletSettings.xml");
+            string bookletSettingFullPath = Common.PathCombine(_sectionPath,"BookletSettings.xml");
             XmlNodeList nodeList = Common.GetXmlNodes(bookletSettingFullPath, "//sections");
             foreach (XmlNode data in nodeList)
             {

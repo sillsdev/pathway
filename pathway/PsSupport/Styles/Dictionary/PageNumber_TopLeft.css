@@ -5,3 +5,10 @@
            margin-top: 1cm;
     }
 }
+
+
+@page :first {
+    @bottom-center {
+           content: counter( page);
+    }
+}

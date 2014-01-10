@@ -360,6 +360,10 @@
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SwordConvert\SwordConvert.csproj">
+      <Project>{448FDD03-71C0-4C86-9878-BC81ACC440C0}</Project>
+      <Name>SwordConvert</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WordPressConvert\WordPressConvert.csproj">
       <Project>{12FE8988-5957-427D-BA6C-B4C601F5A558}</Project>
       <Name>WordPressConvert</Name>

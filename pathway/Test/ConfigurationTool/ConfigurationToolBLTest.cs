@@ -37,9 +37,11 @@ namespace Test.UIConfigurationToolBLTest
 
             const bool recursive = true;
             if (Directory.Exists(_outputBasePath))
-                Directory.Delete(_outputBasePath, recursive);
+            {
+                DirectoryInfo di = new DirectoryInfo(_outputBasePath);
+                Common.CleanDirectory(di);
+            }
             Directory.CreateDirectory(_outputBasePath);
-
             _supportSource = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
 
             string folderName = "Graphic";
@@ -91,9 +93,11 @@ namespace Test.UIConfigurationToolBLTest
             File.Copy(fromFileName, Common.PathCombine(_outputBasePath, fileName), true);
             string partialPath = Common.PathCombine(_pathwayPath, type);
             string toFileName = Common.PathCombine(partialPath, fileName);
-            //if (Directory.Exists(partialPath))
-            //    Directory.Delete(partialPath, true);
-            Common.DeleteDirectory(partialPath);
+            if (Directory.Exists(partialPath))
+            {
+                DirectoryInfo di = new DirectoryInfo(partialPath);
+                Common.CleanDirectory(di);
+            }
             Directory.CreateDirectory(partialPath);
             File.Copy(fromFileName, toFileName, true);
 
@@ -123,7 +127,7 @@ namespace Test.UIConfigurationToolBLTest
             Param.SetLoadType = "Dictionary";
             Param.Value["OutputPath"] = _outputBasePath;
             Param.Value["UserSheetPath"] = _outputBasePath;
-        } 
+        }
         #endregion
 
 
@@ -322,8 +326,15 @@ namespace Test.UIConfigurationToolBLTest
         public void GetMailBodyTest()
         {
             string returnValue = GetMailBody("Dictionary", "Extract Zip contents to an appropriate folder.%0D%0A%0D%0A");
-            Assert.IsTrue(returnValue.Contains("Ubuntu"), "missing Ubuntu");
-            Assert.IsTrue(returnValue.Contains("7 and 8"), "Missing 8");
+            bool isUnix = Common.IsUnixOS();
+            if (isUnix)
+            {
+                Assert.IsTrue(returnValue.Contains("Ubuntu"), "missing Ubuntu");
+            }
+            else
+            {
+                Assert.IsTrue(returnValue.Contains("7 and 8"), "Missing 8");
+            }
         }
 
         private void AssignNewTest()

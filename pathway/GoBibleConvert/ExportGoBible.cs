@@ -78,27 +78,34 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             bool success;
+#if (TIME_IT)
+                DateTime dt1 = DateTime.Now;    // time this thing
+#endif
             var inProcess = new InProcess(0, 6);
             try
             {
                 var curdir = Environment.CurrentDirectory;
                 var myCursor = Cursor.Current;
                 Cursor.Current = Cursors.WaitCursor;
-
+                inProcess.Text = "GoBible Export";
                 inProcess.Show();
                 inProcess.PerformStep();
+                inProcess.ShowStatus = true;
+                inProcess.SetStatus("Processing GoBible Export");
+
                 _isLinux = Common.UnixVersionCheck();
 
                 string exportGoBibleInputPath = string.Empty;
                 exportGoBibleInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
                 processFolder = exportGoBibleInputPath;
                 CreateCollectionsTextFile(exportGoBibleInputPath);
+                inProcess.PerformStep();
                 var iconFullName = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore", "Icon.png"));
                 var iconDirectory = Path.GetDirectoryName(iconFullName);
                 _iconFile = Path.GetFileName(iconFullName);
                 const bool overwrite = true;
                 if (iconDirectory != exportGoBibleInputPath)
-                    File.Copy(iconFullName, Path.Combine(exportGoBibleInputPath, _iconFile), overwrite);
+                    File.Copy(iconFullName, Common.PathCombine(exportGoBibleInputPath, _iconFile), overwrite);
 
                 Param.LoadSettings();
                 Param.SetValue(Param.InputType, "Scripture");
@@ -116,25 +123,32 @@ namespace SIL.PublishingSolution
 
                 string tempGoBibleCreatorPath = GoBibleCreatorTempDirectory(goBibleFullPath);
 
-                string goBibleCreatorPath = Path.Combine(tempGoBibleCreatorPath, "GoBibleCore");
+                string goBibleCreatorPath = Common.PathCombine(tempGoBibleCreatorPath, "GoBibleCore");
                 inProcess.PerformStep();
-                string languageLocationPath = Path.Combine(goBibleFullPath, "User Interface");
-                languageLocationPath = Path.Combine(languageLocationPath, languageSelection);
+                string languageLocationPath = Common.PathCombine(goBibleFullPath, "User Interface");
+                languageLocationPath = Common.PathCombine(languageLocationPath, languageSelection);
                 string[] filePaths = Directory.GetFiles(languageLocationPath, "*.properties");
-                goBibleCreatorPath = Path.Combine(goBibleCreatorPath, "ui.properties");
+                goBibleCreatorPath = Common.PathCombine(goBibleCreatorPath, "ui.properties");
 
                 UIPropertiesCopyToTempFolder(goBibleCreatorPath, filePaths);
 
                 BuildApplication(tempGoBibleCreatorPath);
-                success = true;
+                
+                string jarFile = Common.PathCombine(processFolder, NoSp(GetInfo(Param.Title)) + ".jar");
                 inProcess.PerformStep();
-                inProcess.Close();
-                Cursor.Current = myCursor;
-                inProcess.PerformStep();
-                string jarFile = Path.Combine(processFolder, NoSp(GetInfo(Param.Title)) + ".jar");
-
                 if (File.Exists(jarFile))
                 {
+
+                    //DeleteTempFiles(exportGoBibleInputPath);
+                    Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", string.Empty, string.Empty);
+                    CreateRAMP(projInfo);
+                    Common.DeleteDirectory(tempGoBibleCreatorPath);
+
+                    success = true;
+                    Cursor.Current = myCursor;
+                    inProcess.PerformStep();
+                    inProcess.Close();
+
                     // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
                     string msg = string.Format("Please copy the file {0} to your phone.\n\nDo you want to open the folder?", jarFile);
                     DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -145,17 +159,17 @@ namespace SIL.PublishingSolution
                         Process.Start(dirPath);
                         //Process.Start("explorer.exe", dirPath);
                     }
-
+                    
                 }
                 else
                 {
+                    success = false;
+                    Cursor.Current = myCursor;
+                    inProcess.PerformStep();
+                    inProcess.Close();
                     MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                //DeleteTempFiles(exportGoBibleInputPath);
-                Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", string.Empty, string.Empty);
-                CreateRAMP(projInfo);
-                Common.DeleteDirectory(tempGoBibleCreatorPath);
+                
             }
             catch (Exception ex)
             {
@@ -192,9 +206,9 @@ namespace SIL.PublishingSolution
 
         private void DeleteTempFiles(string exportGoBibleInputPath)
         {
-            if (File.Exists(Path.Combine(exportGoBibleInputPath, _iconFile)))
+            if (File.Exists(Common.PathCombine(exportGoBibleInputPath, _iconFile)))
             {
-                File.Delete(Path.Combine(exportGoBibleInputPath, _iconFile));
+                File.Delete(Common.PathCombine(exportGoBibleInputPath, _iconFile));
             }
 
             var outputFiles = Directory.GetFiles(processFolder);
@@ -233,10 +247,12 @@ namespace SIL.PublishingSolution
         {
             var goBibleDirectoryName = Path.GetFileNameWithoutExtension(goBibleFullPath);
             var tempFolder = Path.GetTempPath();
-            var folder = Path.Combine(tempFolder, goBibleDirectoryName);
+            var folder = Common.PathCombine(tempFolder, goBibleDirectoryName);
             if (Directory.Exists(folder))
-                Directory.Delete(folder, true);
-
+            {
+                DirectoryInfo di = new DirectoryInfo(folder);
+                Common.CleanDirectory(di);
+            }
             CopyGoBibleCreatorFolderToTemp(goBibleFullPath, folder);
 
             return folder;
@@ -278,7 +294,7 @@ namespace SIL.PublishingSolution
 
         private void CreateCollectionsTextFile(string exportGoBiblePath)
         {
-            string fileLoc = Path.Combine(exportGoBiblePath, "Collections.txt");
+            string fileLoc = Common.PathCombine(exportGoBiblePath, "Collections.txt");
 
             if (File.Exists(fileLoc))
             {
@@ -310,7 +326,7 @@ namespace SIL.PublishingSolution
                 sw.WriteLine(@"USFM-TitleTag: \id"); // + Common.BookNameTag);
                 sw.WriteLine("Collection: " + GetInfo(Param.Title));
 
-                string sfmFiles = Path.Combine(exportGoBiblePath, "SFM");
+                string sfmFiles = Common.PathCombine(exportGoBiblePath, "SFM");
 
                 if (Directory.Exists(sfmFiles))
                 {
@@ -381,12 +397,12 @@ namespace SIL.PublishingSolution
         {
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
-            var creatorFullPath = Path.Combine(goBibleCreatorPath, Creator);
+            var creatorFullPath = Common.PathCombine(goBibleCreatorPath, Creator);
 
-            if (_isLinux)
-            {
-                creatorFullPath = "/usr/share/gobiblecreator/GoBibleCreator.244/GoBibleCreator.jar";
-            }
+            //if (_isLinux)
+            //{
+            //    creatorFullPath = "/usr/share/gobiblecreator/GoBibleCreator.244/GoBibleCreator.jar";
+            //}
 
             var progFolder = SubProcess.JavaLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);

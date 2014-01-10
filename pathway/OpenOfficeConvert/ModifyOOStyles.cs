@@ -841,7 +841,133 @@ namespace SIL.PublishingSolution
                 }
                 //if (position != "center")
                 //    SetAttributeNS("fo:margin-left", "fo", "5.7pt");
-                SetAttributeNS("fo:margin-left", "fo", "5.7pt");
+                //SetAttributeNS("fo:margin-left", "fo", "5.7pt");
+            }
+            _styleXMLdoc.Save(styleFilePath);
+        }
+
+        public void CreateFrameStyle(string styleFilePath, string makeClassName, string parentName, string position, string side, string graphicStyle)
+        {
+
+            const string className = "Frame";
+            _styleXMLdoc = Common.DeclareXMLDocument(false);
+            _styleXMLdoc.Load(styleFilePath);
+
+            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+
+            // if new stylename exists
+            XmlElement root = _styleXMLdoc.DocumentElement;
+            string style = "//st:style[@st:name='" + makeClassName + "']";
+            if (root != null)
+            {
+                XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                if (node != null)
+                {
+                    return;
+                }
+                style = "//st:style[@st:name='" + className + "']";
+                node = root.SelectSingleNode(style, nsmgr); // work
+
+                XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
+                styleNode.InnerXml = node.OuterXml;
+                node.ParentNode.InsertAfter(styleNode, node);
+
+                _nameElement = (XmlElement)node;
+                SetAttribute(makeClassName, "style:name");
+                SetAttribute(graphicStyle, "style:parent-style-name");
+                if (side == "none" || side == "NoClear")
+                {
+                    if (position == "left")
+                    {
+                        side = "right";
+                    }
+                    else if (position == "right")
+                    {
+                        side = "left";
+                    }
+                }
+                else if (side == "both")
+                {
+                    side = position;
+                }
+
+                if (position == "right" || position == "left" || position == "center")
+                {
+                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    //nameGraphicElement.SetAttribute("style:run-through", "foreground");
+                    SetAttribute("foreground", "style:run-through");
+                    //if (side == "Invalid")
+                    //{
+
+                    //}
+                    //else if (side == "right" || side == "left")
+                    //{
+                    //    //nameGraphicElement.SetAttribute("style:wrap", side);
+                    //    SetAttribute("side", "style:wrap");
+                    //}
+                    //else if (side == "center")
+                    //{
+                    //    //nameGraphicElement.SetAttribute("style:wrap", "none");
+                    //    SetAttribute("none", "style:wrap");
+                    //}
+                    //else
+                    //{
+                    //    //nameGraphicElement.SetAttribute("style:wrap", "dynamic");
+                    //    SetAttribute("parallel", "style:wrap");
+                    //}
+                    SetAttribute("dynamic", "style:wrap");
+                    //nameGraphicElement.SetAttribute("style:number-wrapped-paragraphs", "no-limit");
+                    SetAttribute("no-limit", "style:number-wrapped-paragraphs");
+                    //nameGraphicElement.SetAttribute("style:wrap-contour", "false");
+                    SetAttribute("false", "style:wrap-contour");
+                    //nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
+                    SetAttribute("from-top", "style:vertical-pos");
+                    //nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
+                    SetAttribute("paragraph", "style:vertical-rel");
+                    //nameGraphicElement.SetAttribute("style:horizontal-pos", position);
+                    SetAttribute(position, "style:horizontal-pos");
+                    
+                    //nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
+                    // this is for text flow
+                    //nameGraphicElement.SetAttribute("style:flow-with-text", "true");
+                }
+                else if (position == "both")
+                {
+                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    if (side != "")
+                    {
+                        SetAttribute(side, "style:wrap");
+                    }
+                    else
+                    {
+                        SetAttribute("none", "style:wrap");
+                    }
+                    SetAttribute("false", "style:wrap-contour");
+                    SetAttribute("from-top", "style:vertical-pos");
+                    SetAttribute("paragraph", "style:vertical-rel");
+                    SetAttribute("right", "style:horizontal-pos");
+                    SetAttribute("paragraph", "style:horizontal-rel");
+                }
+                else if (position == "top" || position == "bottom")
+                {
+                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    SetAttribute("none", "style:wrap");
+                    SetAttribute("false", "style:wrap-contour");
+                    SetAttribute(position, "style:vertical-pos");
+                    SetAttribute("page-content", "style:vertical-rel");
+                    SetAttribute("center", "style:horizontal-pos");
+                    SetAttribute("page-content", "style:horizontal-rel");
+                }
+                else
+                {
+                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    SetAttribute("top", "style:vertical-pos");
+                    SetAttribute("baseline", "style:vertical-rel");
+                    SetAttribute("from-left", "style:horizontal-pos");
+                    SetAttribute("paragraph", "style:horizontal-rel");
+                }
             }
             _styleXMLdoc.Save(styleFilePath);
         }

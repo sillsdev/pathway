@@ -51,8 +51,8 @@ namespace SIL.PublishingSolution
 
             _styFolder = Common.PathCombine(_styFolder, database);
 
-            StyFullPath = Path.Combine(_styFolder, "custom.sty");
-            _cssFullPath = Path.Combine(_cssFolder, "custom.css");
+            StyFullPath = Common.PathCombine(_styFolder, "custom.sty");
+            _cssFullPath = Common.PathCombine(_cssFolder, "custom.css");
         }
 
         /// <summary>

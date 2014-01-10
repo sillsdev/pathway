@@ -135,7 +135,7 @@ namespace SIL.Tool
                         string result = p1.StandardOutput.ReadToEnd();
                         LastError = p1.StandardError.ReadToEnd();
                         result += LastError;
-                        StreamWriter streamWriter = new StreamWriter(Path.Combine(instPath, RedirectOutput));
+                        StreamWriter streamWriter = new StreamWriter(Common.PathCombine(instPath, RedirectOutput));
                         streamWriter.Write(result);
                         streamWriter.Close();
                         RedirectOutput = null;
@@ -171,7 +171,7 @@ namespace SIL.Tool
                 if (!string.IsNullOrEmpty(RedirectOutput))
                 {
                     string result = string.Empty;
-                    StreamWriter streamWriter = new StreamWriter(Path.Combine(instPath, RedirectOutput));
+                    StreamWriter streamWriter = new StreamWriter(Common.PathCombine(instPath, RedirectOutput));
                     var errorArgs = string.Format("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
                     result += errorArgs;
                     streamWriter.Write(result);
@@ -236,7 +236,7 @@ namespace SIL.Tool
                 {
                     var myDirectory = directory.Replace("\"", "");
                     if (!Directory.Exists(myDirectory)) continue;
-                    if (File.Exists(Path.Combine(myDirectory, name)))
+                    if (File.Exists(Common.PathCombine(myDirectory, name)))
                     {
                         Location = myDirectory;
                         return true;
@@ -258,7 +258,7 @@ namespace SIL.Tool
         public static string JavaLocation(string name)
         {
             string progFolder = GetLocation(name);
-            if (string.IsNullOrEmpty(progFolder) || !File.Exists(Path.Combine(progFolder, "java.exe")))
+            if (string.IsNullOrEmpty(progFolder) || !File.Exists(Common.PathCombine(progFolder, "java.exe")))
             {
                 foreach (string progBases in new ArrayList { "C:\\Program Files", "C:\\Program Files (x86)" })
                 {
@@ -269,8 +269,8 @@ namespace SIL.Tool
                         var info = new DirectoryInfo(javaPath);
                         foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
                         {
-                            progFolder = Path.Combine(directoryInfo.FullName, "bin");
-                            if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                            progFolder = Common.PathCombine(directoryInfo.FullName, "bin");
+                            if (File.Exists(Common.PathCombine(progFolder, "java.exe")))
                                 return progFolder;
                         }
                     }
@@ -278,16 +278,16 @@ namespace SIL.Tool
                     //var info = new DirectoryInfo(progBases + "\\Java\\");
                     //foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
                     //{
-                    //    progFolder = Path.Combine(directoryInfo.FullName, "bin");
-                    //    if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                    //    progFolder = Common.PathCombine(directoryInfo.FullName, "bin");
+                    //    if (File.Exists(Common.PathCombine(progFolder, "java.exe")))
                     //        return progFolder;
                     //}
                     //if (string.IsNullOrEmpty(progFolder))
                     //{
                     //    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
                     //    {
-                    //        progFolder = Path.Combine(directoryInfo.FullName, "bin");
-                    //        if (File.Exists(Path.Combine(progFolder, "java.exe")))
+                    //        progFolder = Common.PathCombine(directoryInfo.FullName, "bin");
+                    //        if (File.Exists(Common.PathCombine(progFolder, "java.exe")))
                     //            return progFolder;
                     //    }
                     //}
@@ -316,7 +316,7 @@ namespace SIL.Tool
         {
             const string BeforeProcess = "BeforePwConvert.bat";
             string processFolder = GetProcessFolder(outFullName);
-            if (File.Exists(Path.Combine(processFolder, BeforeProcess)))
+            if (File.Exists(Common.PathCombine(processFolder, BeforeProcess)))
                 Run(processFolder, BeforeProcess, '"' + outFullName + '"', true);
         }
 
@@ -327,7 +327,7 @@ namespace SIL.Tool
         {
             var folder = Path.GetDirectoryName(outFullName);
             var parent = Path.GetDirectoryName(folder);
-            return Path.Combine(parent, "Process");
+            return Common.PathCombine(parent, "Process");
         }
 
         /// <summary>
@@ -339,7 +339,7 @@ namespace SIL.Tool
             try
             {
                 string processFolder = GetProcessFolder(outFullName);
-                if (File.Exists(Path.Combine(processFolder, AfterProcess)))
+                if (File.Exists(Common.PathCombine(processFolder, AfterProcess)))
                     Run(processFolder, AfterProcess, '"' + outFullName + '"', true);
             }
             catch (Exception)

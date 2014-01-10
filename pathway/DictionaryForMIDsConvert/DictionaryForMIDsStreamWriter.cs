@@ -31,7 +31,7 @@ namespace SIL.PublishingSolution
             var name = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             Directory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             Debug.Assert(Directory != null);
-            FullPath = Path.Combine(Directory, name + ".txt");
+            FullPath = Common.PathCombine(Directory, name + ".txt");
         }
 
         public void Open()

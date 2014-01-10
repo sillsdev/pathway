@@ -345,6 +345,71 @@ namespace Test
             }
             return match;
         }
+
+        public bool ValidateOfficeTextNodeForPicture(string value, string paraSpan)
+        {
+            bool match = true;
+
+            XmlNode node = GetOfficeNode();
+            if (node == null)
+            {
+                match = false;
+            }
+            else
+            {
+                string subpath = paraSpan.ToLower() == "para"
+                                     ? "//text:p[@text:style-name='" + ClassName + "']"
+                                     : "//text:span[@text:style-name='" + ClassName + "']";
+                XPath = subpath;
+                node = ValidateGetNodeNS(node);
+                if (node != null)
+                {
+                    if (ChildClassName.Length > 0 && ChildClassType.Length > 0)
+                    {
+                        subpath = ChildClassType.ToLower() == "para"
+                                     ? "//text:p[@text:style-name='" + ChildClassName + "']"
+                                     : "//text:span[@text:style-name='" + ChildClassName + "']";
+                        XPath = subpath;
+                        node = ValidateGetNodeNS(node);
+                        if (node != null)
+                        {
+                            string innerText = GetReplacedInnerXml(node);
+                            if (innerText != value)
+                            {
+                                match = false;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        string inner;
+                        if (GetOuterXml)
+                        {
+                            inner = GetReplacedOuterXml(node);
+                        }
+                        else if (GetInnerText)
+                        {
+                            inner = GetReplacedInnerText(node);
+                        }
+                        else
+                        {
+                            inner = GetReplacedInnerXml(node);
+                        }
+                        if (inner != value)
+                        {
+                            match = false;
+                        }
+                    }
+                }
+                else
+                {
+                    match = false;
+                }
+            }
+            return match;
+        }
+
         public bool ValidateOfficeTextNode(string value, string paraSpan)
         {
             bool match = true;

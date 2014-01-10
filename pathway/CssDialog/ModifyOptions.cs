@@ -195,7 +195,7 @@ namespace SIL.PublishingSolution
             var bfn = GetBestName();
             if (bfn == "") return;
             var upath = Param.Value[Param.UserSheetPath];
-            var ifn = Path.Combine(upath, bfn);
+            var ifn = Common.PathCombine(upath, bfn);
             CreateCustomSnippet(ifn);
             OpenSnippet.DefaultExt = ".css";
             OpenSnippet.FileName = bfn;
@@ -207,7 +207,7 @@ namespace SIL.PublishingSolution
             var fn = Path.GetFileName(OpenSnippet.FileName);
             TbCssSnippet.Text = fn;
             if (Path.GetDirectoryName(OpenSnippet.FileName) != upath)
-                File.Copy(OpenSnippet.FileName, Path.Combine(upath, fn));
+                File.Copy(OpenSnippet.FileName, Common.PathCombine(upath, fn));
         }
 
         private void TbOptionName_KeyPress(object sender, KeyPressEventArgs e)

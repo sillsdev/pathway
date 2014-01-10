@@ -219,7 +219,7 @@ namespace SIL.PublishingSolution
                     else
                     {
                         string pdfFileName = xhtmlFileName + ".pdf";
-                        pdfFileName = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), pdfFileName);
+                        pdfFileName = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), pdfFileName);
                         
                         if (!Common.Testing && File.Exists(pdfFileName))
                         {

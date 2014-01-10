@@ -31,7 +31,7 @@ namespace SIL.PublishingSolution
         public void SetDateTimeinMetaDataXML(string contentFilePath)
         {
             string getDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz");
-            string metaDataXMLPath = Path.Combine(contentFilePath, "META-INF");
+            string metaDataXMLPath = Common.PathCombine(contentFilePath, "META-INF");
             metaDataXMLPath = Common.PathCombine(metaDataXMLPath, "metadata.xml");
 
             string _xPath;

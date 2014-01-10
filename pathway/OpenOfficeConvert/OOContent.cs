@@ -109,6 +109,7 @@ namespace SIL.PublishingSolution
         readonly Dictionary<string, string> _counterVolantryReset = new Dictionary<string, string>();
         readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
         readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");
+        readonly string _zeroWidthNoBreakSpace = Common.ConvertUnicodeToString("\uFEFF");
         readonly string _fixedSpace = Common.ConvertUnicodeToString("\u2002");
         readonly string _thinSpace = Common.ConvertUnicodeToString("\u2009");
 
@@ -176,6 +177,12 @@ namespace SIL.PublishingSolution
         private string firstRevHeadWord = string.Empty;
         Dictionary<string, string> FirstDataOnEntry = new Dictionary<string, string>();
         private int _guidewordLength;
+        private bool _isPreviousGlossary;//3719
+        private int _pronunciationformCount;//3718
+        private bool _isNonPronunciationform = true;
+        private bool _isPrimaryrefs;
+        private bool _isAllowWhiteSpace = true;
+        private bool _isEmptyPageInserted;
         #endregion
 
         #region Public Variable
@@ -185,7 +192,8 @@ namespace SIL.PublishingSolution
         public string _ChapterNo = "1";
         public bool IsFirstEntry;
         private bool isPageBreak;
-
+        private string _previousContent = "Reversal";
+        private bool _isWhiteSpaceSkipped = true;
         public LOContent()
         {
             _outputType = Common.OutputType.ODT;
@@ -655,78 +663,80 @@ namespace SIL.PublishingSolution
             //DateTime startTime = DateTime.Now;
             try
             {
-                _reader = Common.DeclareXmlTextReader(Sourcefile, true);
-                //CreateBody();
-                bool headXML = true;
-                while (_reader.Read())
+                using (_reader = Common.DeclareXmlTextReader(Sourcefile, true))
                 {
-                    if (headXML) // skip previous parts of <body> tag
+                    //CreateBody();
+                    bool headXML = true;
+                    while (_reader.Read())
                     {
-                        if (_reader.Name == "body")
+                        if (headXML) // skip previous parts of <body> tag
                         {
-                            headXML = false;
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-
-                    if (_reader.Name == "img")
-                    {
-                        _hasImgCloseTag = true;
-                    }
-                    // _hasImgCloseTag = _imageInsert; 
-                    if (_reader.IsEmptyElement)
-                    {
-                        if (_reader.Name == "img")
-                        {
-                            _hasImgCloseTag = false;
-                        }
-                        else if (_reader.Name == "br")
-                        {
-                            _writer.WriteRaw(@"<text:line-break/>");
-                            continue;
-                        }
-                        else
-                        {
-                            if (_reader.Name == "a")
+                            if (_reader.Name == "body")
+                            {
+                                headXML = false;
+                            }
+                            else
                             {
                                 continue;
                             }
-                            if (_metaValue.Length <= 0)
+                        }
+
+                        if (_reader.Name == "img")
+                        {
+                            _hasImgCloseTag = true;
+                        }
+                        // _hasImgCloseTag = _imageInsert; 
+                        if (_reader.IsEmptyElement)
+                        {
+                            if (_reader.Name == "img")
                             {
-                                CheckMetaRootDirectory();
+                                _hasImgCloseTag = false;
                             }
-                            AllowEmptyTag();
-                            continue;
+                            else if (_reader.Name == "br")
+                            {
+                                _writer.WriteRaw(@"<text:line-break/>");
+                                continue;
+                            }
+                            else
+                            {
+                                if (_reader.Name == "a")
+                                {
+                                    continue;
+                                }
+                                if (_metaValue.Length <= 0)
+                                {
+                                    CheckMetaRootDirectory();
+                                }
+                                AllowEmptyTag();
+                                continue;
+                            }
+                        }
+                        switch (_reader.NodeType)
+                        {
+
+                            case XmlNodeType.Element:
+                                InsertEmptySpanForPicture();
+                                StartElement(targetPath);
+                                break;
+                            case XmlNodeType.EndElement:
+                                EndElement();
+                                break;
+                            case XmlNodeType.Text: // Text.Write
+                                Write();
+                                Application.DoEvents();
+                                break;
+                            case XmlNodeType.SignificantWhitespace:
+                                InsertWhiteSpace();
+                                break;
+                            case XmlNodeType.EntityReference:
+                                IncludeWhiteSpace();
+                                break;
                         }
                     }
-                    switch (_reader.NodeType)
-                    {
 
-                        case XmlNodeType.Element:
-                            InsertEmptySpanForPicture();
-                            StartElement(targetPath);
-                            break;
-                        case XmlNodeType.EndElement:
-                            EndElement();
-                            break;
-                        case XmlNodeType.Text: // Text.Write
-                            Write();
-                            break;
-                        case XmlNodeType.SignificantWhitespace:
-                            InsertWhiteSpace();
-                            break;
-                        case XmlNodeType.EntityReference:
-                            IncludeWhiteSpace();
-                            break;
-
-                    }
+                    InsertFlexRevFirstGuidewordOnMainForOdm();
+                    _reader.Close();
                 }
-
-                InsertFlexRevFirstGuidewordOnMainForOdm();
-
                 //TimeSpan totalTime = DateTime.Now - startTime;
                 //System.Windows.Forms.MessageBox.Show(totalTime.ToString());
             }
@@ -738,7 +748,7 @@ namespace SIL.PublishingSolution
                     LocDB.Message("errProcessXHTML", Sourcefile + " is Not Valid. " + "\n" + e.Message, msg,
                                   LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
                 }
-                CloseFile(targetPath);
+
             }
             finally
             {
@@ -772,22 +782,28 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void InsertFlexRevFirstGuidewordOnMainForOdm()
         {
-            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") <= 0 && _projInfo.IsODM)
+            if (_projInfo.MainLastFileName != null && _projInfo.MainLastFileName.Length > 0 && _projInfo.IsODM)
             {
-                //MessageBox.Show(_projInfo.DefaultXhtmlFileWithPath);
-                firstRevHeadWord = ReadXHTMLFirstData(_projInfo.DefaultXhtmlFileWithPath.Replace("Preservemain", "FlexRev"));
-                if (firstRevHeadWord.Trim().Length > 0)
+                if (Path.GetFileNameWithoutExtension(_projInfo.MainLastFileName) == Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath.Replace("Preservemain", "main")))
                 {
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
-                    _writer.WriteStartElement("text:variable-set");
-                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                    _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
-                    _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", firstRevHeadWord);
-                    _writer.WriteEndElement();
-                    _writer.WriteEndElement();
+                    string flexFileName = Common.PathCombine(Path.GetDirectoryName(_projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                    if (File.Exists(flexFileName))
+                    {
+                        firstRevHeadWord = ReadXHTMLFirstData(flexFileName);
+                        if (firstRevHeadWord.Trim().Length > 0)
+                        {
+                            _writer.WriteStartElement("text:p");
+                            _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
+                            _writer.WriteStartElement("text:variable-set");
+                            _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                            _writer.WriteAttributeString("text:display", "none");
+                            _writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
+                            _writer.WriteAttributeString("office:value-type", "string");
+                            _writer.WriteAttributeString("office:string-value", firstRevHeadWord);
+                            _writer.WriteEndElement();
+                            _writer.WriteEndElement();
+                        }
+                    }
                 }
             }
         }
@@ -824,7 +840,8 @@ namespace SIL.PublishingSolution
                 //{
                 //    _footnoteSpace = false;  &&_significant == false
                 //}
-                if (_footnoteSpace == false && _projInfo.ProjectInputType.ToLower() == "dictionary")
+                IsLastPronunciationform();
+                if (_footnoteSpace == false && _projInfo.ProjectInputType.ToLower() == "dictionary" && _isAllowWhiteSpace)//&& _isNonPronunciationform
                 {
                     _writer.WriteStartElement("text:s");
                     _writer.WriteAttributeString("text:c", "1");
@@ -834,6 +851,89 @@ namespace SIL.PublishingSolution
                 }
                 //_writer.WriteString(" ");
             }
+        }
+
+        private void IsLastPronunciationform()
+        {
+            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") < 0) return;
+
+            _isAllowWhiteSpace = true;
+
+            if (_previousContent.Trim().Length > 0)
+            {
+                if (_previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == ")" ||
+                    _previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == "(" ||
+                    _previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == "]")
+                {
+                    _isWhiteSpaceSkipped = true;
+                    _isAllowWhiteSpace = false;
+                    return;
+                }
+            }
+
+            //if (_classNameWithLang.ToLower() == "pronunciationform")
+            //{
+            //    _isNonPronunciationform = false;
+            //    if (_pronunciationformCount == 2)
+            //    {
+            //        _pronunciationformCount = 0;
+            //        _isNonPronunciationform = true;
+            //    }
+            //    else
+            //    {
+            //        _pronunciationformCount += 1;
+            //    }
+            //}
+
+            if (_characterNameAlways == null)
+            {
+                _isAllowWhiteSpace = false;
+                return;
+            }
+            
+            //if (_characterNameAlways != null)
+            //{
+            //    if (_characterNameAlways.ToLower().IndexOf("span_.en_primaryrefs") == 0)
+            //    {
+            //        if (_isPrimaryrefs)
+            //            _isPrimaryrefs = false;
+            //        else
+            //            _isPrimaryrefs = true;
+
+            //        if (_isPrimaryrefs)
+            //            _isAllowWhiteSpace = false;
+            //    }
+            //}
+            
+            if (_characterNameAlways.IndexOf("span_.en_semanticdomains_senses_entry_letData_dicBody") == 0)
+            {
+                if (_previousContent.Trim().Length > 0)
+                {
+                    if (_previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == ")")
+                    {
+                        _isAllowWhiteSpace = false;
+                    }
+                }
+                return;
+            }
+            
+            if (_characterNameAlways.ToLower().IndexOf("span_.en_mainentryref") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("mainentryref_a_complexformcomponents") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.en_lexreftypeabbr_lexref") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.bzh_sensecrossrefheadword") == 0 ||
+                    _characterNameAlways.IndexOf("span_.en_lexreftypeabbr_lexref_LexSenseLink") == 0 ||
+                    _characterNameAlways.IndexOf("span_.en_CmSemanticDomainpublishSemDomForReversalenNamePub") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.en_span_.en_semanticdomains") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.en_semanticdomains_senses") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.en_pronunciationform_pronunciation") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.ggo-fonipa-x-emic_pronunciationform_pronunciation") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.bzh-fonipa_pronunciationform_pronunciation") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("complexformrefheadword_complexformref_xitem_complexformrefs") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.en_span_.en_xitem_semanticdomains") == 0)
+                {
+                    _isAllowWhiteSpace = false;
+                }
+            
         }
 
         private string SignificantSpace(string content)
@@ -907,14 +1007,20 @@ namespace SIL.PublishingSolution
             //{
             //    InsertWhiteSpace();
             //}
+
+
+
             if (_childName.ToLower().Contains("tableofcontents"))
             {
                 CallTOC();
+
                 //_writer.WriteStartElement("text:p");
                 //_writer.WriteAttributeString("text:style-name", "P4");
                 //_writer.WriteEndElement();
                 return;
             }
+
+            InsertEmptyPageForFrontmatter(_childName.ToLower());
 
             if (_isDisplayNone)
             {
@@ -975,16 +1081,16 @@ namespace SIL.PublishingSolution
 
 
                     // Note: Paragraph Start Element
-                   
 
 
-                        _writer.WriteStartElement("text:p");
-                        _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
-                        isPageBreak = false;
-                        if (_paragraphName.IndexOf("bookPageBreak_") == 0)
-                        {
-                            isPageBreak = true;
-                        }
+
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
+                    isPageBreak = false;
+                    if (_paragraphName.IndexOf("bookPageBreak_") == 0)
+                    {
+                        isPageBreak = true;
+                    }
 
                     //                <text:variable-set text:name="Left_Guideword_L"
                     //text:display="none" text:formula="ooow:Filemón 1" office:value-type="string"
@@ -1018,7 +1124,6 @@ namespace SIL.PublishingSolution
         private void WriteText()
         {
             string content = _reader.Value;
-
             content = ReplaceString(content);
             if (CollectFootNoteChapterVerse(content, Common.OutputType.ODT.ToString())) return;
             if (_isPictureDisplayNone)
@@ -1045,6 +1150,7 @@ namespace SIL.PublishingSolution
             if (_characterName == null)
             {
                 _characterName = StackPeekCharStyle(_allCharacter);
+                _characterNameAlways = _characterName;
             }
             //content = whiteSpacePre(content);
             //bool contains = false;
@@ -1140,10 +1246,11 @@ namespace SIL.PublishingSolution
                 {
                     content = " " + content.TrimStart();
                 }
-                else if (_allCharacter.Peek().ToLower().IndexOf("seeinglossary") == 0)//TD-3665
-                {
-                    content = content.TrimEnd() + " ";
-                }
+                //else if (_allCharacter.Peek().ToLower().IndexOf("seeinglossary") == 0)//TD-3665
+                //{
+                //    //content = content.TrimEnd() + " ";
+                //    _isPreviousGlossary = true;
+                //}
             }
             return content;
         }
@@ -1189,6 +1296,53 @@ namespace SIL.PublishingSolution
                 }
 
                 content = SignificantSpace(content);
+
+                if (_isPreviousGlossary)
+                {
+                    if (content.IndexOf(',') == 0 || content.IndexOf('.') == 0 || content.IndexOf(';') == 0)
+                    {
+                    }
+                    else
+                    {
+                        content = " " + content.TrimStart();
+                    }
+                    _isPreviousGlossary = false;
+                }
+
+                if(_isWhiteSpaceSkipped)
+                {
+                    if (_previousContent.Trim().Length > 0)
+                    {
+                        if (_previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == ")" ||
+                            _previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == "]")
+                        {
+                            if (content.IndexOf(',') == 0 || content.IndexOf('.') == 0 || content.IndexOf(':') == 0 ||
+                                content.IndexOf(';') == 0 || content.IndexOf(']') == 0 || content.IndexOf(')') == 0)
+                            {
+                            }
+                            else
+                            {
+                                content = " " + content.TrimStart();
+                            }
+                        }
+                    }
+                    _isWhiteSpaceSkipped = false;
+                }
+
+                if (_classNameWithLang.ToLower().IndexOf("seeinglossary") == 0)
+                {
+                    _isPreviousGlossary = true;
+                }
+                _previousContent = content;
+                if (_characterNameAlways != null)
+                {
+                    if (_characterNameAlways.ToLower().IndexOf("span_.en_span_.en_xitem_semanticdomains") == 0 ||
+                        _characterNameAlways.IndexOf("span_.en_CmSemanticDomainpublishSemDomForReversalenNamePub") == 0)
+                    {
+                        content = content.Trim();
+                    }
+                }
+
                 if (_imageClass.Length > 0)
                 {
                     //if (!_imageParaForCaption)
@@ -1312,7 +1466,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:style-name", "Illustration");
                 _writer.WriteStartElement("draw:frame");
                 _writer.WriteAttributeString("draw:style-name", "GraphicsI2");
-                _writer.WriteAttributeString("draw:name", "Graphics1");
+                _writer.WriteAttributeString("draw:name", "graphics1");
                 _writer.WriteAttributeString("text:anchor-type", "paragraph");
                 _writer.WriteAttributeString("svg:height", height);
                 _writer.WriteAttributeString("svg:width", width);
@@ -1422,11 +1576,11 @@ namespace SIL.PublishingSolution
                     _verseContent.Append(" <text:span text:style-name=\"" + characterStyle + "\">");
                     if (_projInfo.HideSpaceVerseNumber.ToLower() == "false")
                     {
-                        content = content.Replace("-", "‑") + _fixedSpace;
+                        content = content.Replace("-", "‑") + _hardSpace;
                     }
                     else
                     {
-                        content = content.Replace("-", "‑") + _thinSpace;
+                        content = content.Replace("-", "‑") + _zeroWidthNoBreakSpace;
                     }
                 }
             }
@@ -1894,7 +2048,9 @@ namespace SIL.PublishingSolution
                 _anchorWrite = false;
             }
 
+            _characterNameAlways = _characterName;
             _characterName = null;
+
             if (_hasImgCloseTag && _imageInserted)
             {
                 _hasImgCloseTag = false;
@@ -2263,7 +2419,7 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("style:style");
             _writer.WriteAttributeString("style:name", "P4");
             _writer.WriteAttributeString("style:family", "paragraph");
-            _writer.WriteAttributeString("style:parent-style-name", "hide");
+            //_writer.WriteAttributeString("style:parent-style-name", "hide");
             _writer.WriteAttributeString("style:master-page-name", "First_20_Page");
             _writer.WriteStartElement("style:paragraph-properties");
             _writer.WriteAttributeString("style:page-number", "auto");
@@ -2273,7 +2429,7 @@ namespace SIL.PublishingSolution
             if (_isFromExe)
             {
                 _writer.WriteStartElement("style:style");
-                _writer.WriteAttributeString("style:name", "fr11");
+                _writer.WriteAttributeString("style:name", "fr0");
                 _writer.WriteAttributeString("style:family", "graphic");
                 _writer.WriteAttributeString("style:parent-style-name", "Graphics");
                 _writer.WriteStartElement("style:graphic-properties");
@@ -2322,6 +2478,48 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:flow-with-text", "false");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+
+            //_writer.WriteStartElement("style:style");
+            //_writer.WriteAttributeString("style:name", "fr2");
+            //_writer.WriteAttributeString("style:family", "graphic");
+            //_writer.WriteAttributeString("style:parent-style-name", "Frame");
+            //_writer.WriteStartElement("style:graphic-properties");
+            //_writer.WriteAttributeString("style:run-through", "foreground");
+            //_writer.WriteAttributeString("style:vertical-pos", "from-top");
+            //_writer.WriteAttributeString("style:vertical-rel", "paragraph");
+            //_writer.WriteAttributeString("style:horizontal-pos", "center");
+            //_writer.WriteAttributeString("style:horizontal-rel", "paragraph");
+            //_writer.WriteAttributeString("fo:padding", "0pt");
+            //_writer.WriteAttributeString("fo:border", "none");
+            //_writer.WriteAttributeString("style:flow-with-text", "false");
+            //_writer.WriteAttributeString("style:wrap", "none");
+            //_writer.WriteEndElement();
+            //_writer.WriteEndElement();
+
+   
+            //_writer.WriteStartElement("style:style");
+            //_writer.WriteAttributeString("style:name", "gr2");
+            //_writer.WriteAttributeString("style:family", "graphic");
+            //_writer.WriteAttributeString("style:parent-style-name", "Graphics");
+            //_writer.WriteStartElement("style:graphic-properties");
+            //_writer.WriteAttributeString("style:run-through", "foreground");
+            //_writer.WriteAttributeString("style:wrap", "none");
+            //_writer.WriteAttributeString("style:number-wrapped-paragraphs", "no-limit");
+            //_writer.WriteAttributeString("style:horizontal-pos", "center");
+            //_writer.WriteAttributeString("style:horizontal-rel", "paragraph");
+            //_writer.WriteAttributeString("fo:clip", "rect(0pt, 0pt, 0pt, 0pt)");
+            //_writer.WriteAttributeString("draw:luminance", "0%");
+            //_writer.WriteAttributeString("draw:contrast", "0%");
+            //_writer.WriteAttributeString("draw:red", "0%");
+            //_writer.WriteAttributeString("draw:green", "0%");
+            //_writer.WriteAttributeString("draw:blue", "0%");
+            //_writer.WriteAttributeString("draw:gamma", "100%");
+            //_writer.WriteAttributeString("draw:color-inversion", "false");
+            //_writer.WriteAttributeString("draw:image-opacity", "100%");
+            //_writer.WriteAttributeString("draw:color-mode", "standard");
+            //_writer.WriteEndElement();
+            //_writer.WriteEndElement();
+
             //}
 
             if (_outputExtension == "odm")
@@ -2684,7 +2882,9 @@ namespace SIL.PublishingSolution
                     if (imageClass.ToLower().IndexOf("picturecenter") == 0)
                         HoriAlignment = "center";
 
-                    string strFrameCount = "Graphics" + _frameCount;
+                    string strGraphicsCount = "Graphics" + (_frameCount + 1);
+                    string strFrameCount = "Frame" + (_frameCount + 1);
+                    string strFrameStyCount = "fr" + (_frameCount + 1);
                     _imageGraphicsName = strFrameCount;
                     ////TODO Make it function 
                     ////To get Image details
@@ -2721,17 +2921,34 @@ namespace SIL.PublishingSolution
                             _allParagraph.CopyTo(tempStyle, 0);
                             divTagName = counter > 1 ? tempStyle[1] : tempStyle[0];
                         }
+                        //if (_projInfo.IsODM)
+                        //{
+                        //    if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0)
+                        //        _writer.WriteStartElement("text:p");
+                        //    else
+                        //        _writer.WriteStartElement("text:P");
+                        //}
+                        //else
+                        //{
+                        //    _writer.WriteStartElement("text:P");
+                        //}
+                        //_writer.WriteStartElement("text:P");
+
+                        //_writer.WriteStartElement("text:P");
                         _writer.WriteStartElement("text:p");
+
                         //_writer.WriteAttributeString("text:style-name", _util.ParentName);
-                        _writer.WriteAttributeString("text:style-name", divTagName);
+                        //_writer.WriteAttributeString("text:style-name", divTagName); //06-Jan
 
                         _isParagraphClosed = false;
                         _isNewParagraph = false;
                     }
 
+                    
                     // 1st frame
+                   
                     _writer.WriteStartElement("draw:frame");
-                    _writer.WriteAttributeString("draw:style-name", strFrameCount);
+                    _writer.WriteAttributeString("draw:style-name", strFrameStyCount);
                     _writer.WriteAttributeString("draw:name", strFrameCount);
 
                     _imageZindexCounter++;
@@ -2816,12 +3033,14 @@ namespace SIL.PublishingSolution
                     }
 
                     ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
-                    modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strFrameCount, _util.ParentName, HoriAlignment,
+                    modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strGraphicsCount, _util.ParentName, HoriAlignment,
                                                        wrapSide);
+                    modifyIDStyles.CreateFrameStyle(_styleFilePath, strFrameStyCount, _util.ParentName, HoriAlignment,
+                                                       wrapSide, strGraphicsCount);
 
                     _writer.WriteStartElement("draw:frame");
-                    _writer.WriteAttributeString("draw:style-name", strFrameCount);
-                    _writer.WriteAttributeString("draw:name", strFrameCount);
+                    _writer.WriteAttributeString("draw:style-name", "gr" + (_frameCount));
+                    _writer.WriteAttributeString("draw:name", strGraphicsCount);
                     _writer.WriteAttributeString("text:anchor-type", "paragraph");
                     // _writer.WriteAttributeString("text:anchor-type", anchorType);
 
@@ -2945,7 +3164,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("text:p");
                     _writer.WriteAttributeString("text:style-name", "Standard");
                     _writer.WriteStartElement("draw:frame");
-                    _writer.WriteAttributeString("draw:style-name", "fr11");
+                    _writer.WriteAttributeString("draw:style-name", "fr0");
                     _writer.WriteAttributeString("draw:name", strFrameCount);
                     if (_projInfo.DefaultRevCssFileWithPath != null && _projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
                     {
@@ -3133,6 +3352,7 @@ namespace SIL.PublishingSolution
             //To be insert left guideword on flexrev file
             WriteLeftGuidewordOnFlexRev();
 
+            //InsertEmptyPageForFrontmatter();
             //Fornt Matter added here//
             //WriteFrontMatter();
         }
@@ -3214,11 +3434,11 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("text:style-name", "cover");
                     _writer.WriteString(titleName);
                     _writer.WriteEndElement();
-                }
 
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "dummypage");
-                _writer.WriteEndElement();
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "dummypage");
+                    _writer.WriteEndElement();
+                }
 
                 //TITLE PAGE
                 if (includeTitlePage)
@@ -3293,7 +3513,7 @@ namespace SIL.PublishingSolution
                 if (includeTOCPage)
                 {
                     TableOfContent toc = new TableOfContent();
-                    toc.CreateTOC(_writer, _projInfo.ProjectInputType);
+                    //toc.CreateTOC(_writer, _projInfo.ProjectInputType);
 
                     _writer.WriteStartElement("text:p");
                     _writer.WriteAttributeString("text:style-name", "dummypage");
@@ -3302,6 +3522,53 @@ namespace SIL.PublishingSolution
 
                 InsertLoFrontMatterCss(_projInfo.DefaultCssFileWithPath);
                 //End Front Matter//
+            }
+        }
+
+        private void InsertEmptyPageForFrontmatter(string ChildName)
+        {
+            if (!_isEmptyPageInserted) return;
+            //if (_childName.ToLower().Contains("tableofcontents"))
+            //{
+            //    _isEmptyPageInserted = true;
+            //    return;
+            //}
+
+            //if (_isEmptyPageInserted) return;
+            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && _projInfo.IsODM) return;
+
+            //if (ChildName.IndexOf("cover") == 0) return;
+
+            //if (ChildName.IndexOf("title") == 0 && (IdAllClass.ContainsKey("copyright") || IdAllClass.ContainsKey("TableOfContentLO")))
+            //    return;
+
+            //if (ChildName.IndexOf("copyright") == 0 && IdAllClass.ContainsKey("TableOfContentLO"))
+            //    return;
+
+            //if (ChildName.IndexOf("title") == 0 || ChildName.IndexOf("copyright") == 0 || ChildName.IndexOf("letter_lethead_dicbody") == 0)
+            if (ChildName.IndexOf("letter_lethead_dicbody") == 0)
+            {
+                _isEmptyPageInserted = true;
+                byte count = 0;
+                //IdAllClass["guidewordLength"].ContainsKey("guideword-length")
+                if (IdAllClass.ContainsKey("cover"))
+                    count += 2;
+
+                if (IdAllClass.ContainsKey("title"))
+                    count += 1;
+
+                if (IdAllClass.ContainsKey("copyright"))
+                    count += 1;
+
+                if (IdAllClass.ContainsKey("TableOfContentLO"))
+                    count += 1;
+
+                if (count > 0 && (count % 2) == 1)
+                {
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "copyright_dicBody");
+                    _writer.WriteEndElement();
+                }
             }
         }
 
@@ -3316,6 +3583,7 @@ namespace SIL.PublishingSolution
             //return;
             if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && !_projInfo.IsODM)
             {
+
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "P4");
                 _writer.WriteEndElement();
@@ -3376,12 +3644,25 @@ namespace SIL.PublishingSolution
                 organization = "SIL International";
             }
             string tableOfContent = Param.GetMetadataValue(Param.TableOfContents, organization) ?? "";
+
             // empty string if null / not found
 
             if (tableOfContent.ToLower() == "true")
             {
                 TableOfContent toc = new TableOfContent();
-                toc.CreateTOC(_writer, _projInfo.ProjectInputType);
+                string strOutlineLevel = "1";
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    if (IdAllClass["letter"].ContainsKey("-ps-outline-level"))
+                        strOutlineLevel = IdAllClass["letter"]["-ps-outline-level"];
+                }
+                else
+                {
+                    if (IdAllClass["scrBook"].ContainsKey("-ps-outline-level"))
+                        strOutlineLevel = IdAllClass["scrBook"]["-ps-outline-level"];
+                }
+
+                toc.CreateTOC(_writer, _projInfo.ProjectInputType, strOutlineLevel);
             }
         }
 
@@ -3473,9 +3754,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteEndDocument();
                 _writer.Flush();
                 _writer.Close();
-
-                if (_reader != null)
-                    _reader.Close();
 
                 if (_dictColumnGapEm != null && _dictColumnGapEm.Count > 0)
                 {
@@ -3913,7 +4191,7 @@ namespace SIL.PublishingSolution
                     break;
                 }
             }
-
+            reader.Close();
             return content;
         }
 
@@ -3950,87 +4228,87 @@ namespace SIL.PublishingSolution
         /// <param name="searchText">Text to be search</param>
         public static void ReadAllFirstEntryData(string filePath, Dictionary<string, string> XHTMLData)
         {
-            XmlTextReader reader = Common.DeclareXmlTextReader(filePath, true);
-
-            string className = "div";
-            bool isLetter = false;
-            bool isEntry = false;
-            bool isReadData = false;
-            string letter = string.Empty;
-            string entry = string.Empty;
-            bool headXML = true;
-            while (reader.Read())
+            XmlTextReader reader;
+            using (reader = Common.DeclareXmlTextReader(filePath, true))
             {
-                if (headXML) // skip previous parts of <body> tag
+                string className = "div";
+                bool isLetter = false;
+                bool isEntry = false;
+                bool isReadData = false;
+                string letter = string.Empty;
+                string entry = string.Empty;
+                bool headXML = true;
+                while (reader.Read())
                 {
-                    if (reader.Name == "body")
+                    if (headXML) // skip previous parts of <body> tag
                     {
-                        headXML = false;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-
-                if (reader.IsEmptyElement)
-                {
-                    if (reader.Name == "br")
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        if (reader.Name == "a")
+                        if (reader.Name == "body")
+                        {
+                            headXML = false;
+                        }
+                        else
                         {
                             continue;
                         }
-                        continue;
+                    }
+
+                    if (reader.IsEmptyElement)
+                    {
+                        if (reader.Name == "br")
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (reader.Name == "a")
+                            {
+                                continue;
+                            }
+                            continue;
+                        }
+                    }
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            className = StartElement(reader);
+                            if (className != string.Empty)
+                            {
+                                if (className == "letter")
+                                {
+                                    isLetter = true;
+                                    isReadData = true;
+                                }
+                                else if (isReadData && className == "entry")
+                                {
+                                    isEntry = true;
+                                }
+                            }
+                            break;
+                        case XmlNodeType.Text: // Text.Write
+                            if (isLetter)
+                            {
+                                if (reader.Value.Trim() != string.Empty)
+                                {
+                                    letter = reader.Value;
+                                    isLetter = false;
+                                }
+                            }
+                            else if (isEntry && isReadData)
+                            {
+                                if (reader.Value.Trim() != string.Empty)
+                                {
+                                    entry = reader.Value;
+                                    isEntry = false;
+                                    isReadData = false;
+                                    XHTMLData[letter] = entry;
+                                }
+                            }
+                            break;
                     }
                 }
-                switch (reader.NodeType)
-                {
-                    case XmlNodeType.Element:
-                        className = StartElement(reader);
-                        if (className != string.Empty)
-                        {
-                            if (className == "letter")
-                            {
-                                isLetter = true;
-                                isReadData = true;
-                            }
-                            else if (isReadData && className == "entry")
-                            {
-                                isEntry = true;
-                            }
-                        }
-                        break;
-                    case XmlNodeType.Text: // Text.Write
-                        if (isLetter)
-                        {
-                            if (reader.Value.Trim() != string.Empty)
-                            {
-                                letter = reader.Value;
-                                isLetter = false;
-                            }
-                        }
-                        else if (isEntry && isReadData)
-                        {
-                            if (reader.Value.Trim() != string.Empty)
-                            {
-                                entry = reader.Value;
-                                isEntry = false;
-                                isReadData = false;
-                                XHTMLData[letter] = entry;
-                            }
-                        }
-                        break;
-                }
             }
+            reader.Close();
         }
-
-
-
         #endregion
     }
 }

@@ -43,7 +43,7 @@ namespace Test.PsTool
         public void GetTest1()
         {
             string fileName = "";
-            string fileData = FileData.Get(Path.Combine(sourceFolder,fileName));
+            string fileData = FileData.Get(Common.PathCombine(sourceFolder,fileName));
             Assert.IsEmpty(fileData, "GetTest1 Failed");
         }
 
@@ -55,7 +55,7 @@ namespace Test.PsTool
                               "@import \"Columns_1.css\";\r\n\r\n\r\n";
                 
             string fileName = "Layout_02.css";
-            string output = FileData.Get(Path.Combine(sourceFolder, fileName));
+            string output = FileData.Get(Common.PathCombine(sourceFolder, fileName));
             Assert.AreEqual(expected,output, "GetTest2 Failed");
         }
     }

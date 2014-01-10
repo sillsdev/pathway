@@ -469,7 +469,7 @@ namespace SIL.Tool
                     resultFileName = SearchFontFileNames(familyName, fontFileNames);
                     break;
             }
-            return Path.Combine(GetFontFolderPath(), resultFileName);
+            return Common.PathCombine(GetFontFolderPath(), resultFileName);
         }
 
         private static string SearchFontFileNames(string partialName, Dictionary<string, string> fontFileNames)
@@ -701,7 +701,7 @@ namespace SIL.Tool
                     return (stdOut.Length > 0);
                 }
                 // Windows / first check - this font should reside in the fonts folder
-                String fullFilename = Path.Combine(GetFontFolderPath(), font);
+                String fullFilename = Common.PathCombine(GetFontFolderPath(), font);
                 return (File.Exists(fullFilename));
             }
             // second check - look up the filename and see if the file exists

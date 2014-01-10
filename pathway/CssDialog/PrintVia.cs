@@ -421,7 +421,11 @@ namespace SIL.PublishingSolution
             try
             {
                 Directory.CreateDirectory(txtSaveInFolder.Text);
-                Directory.Delete(txtSaveInFolder.Text);
+                if (Directory.Exists(txtSaveInFolder.Text))
+                {
+                    DirectoryInfo di = new DirectoryInfo(txtSaveInFolder.Text);
+                    Common.CleanDirectory(di);
+                }
                 BtnOk.Enabled = false; 
             }
             catch (Exception)
@@ -584,7 +588,7 @@ namespace SIL.PublishingSolution
                 string pathwayPath = (fullPathwayPath.StartsWith("file"))
                                          ? fullPathwayPath.Substring(6)
                                          : fullPathwayPath;
-                if (File.Exists(Path.Combine(pathwayPath, "ConfigurationTool.exe")))
+                if (File.Exists(Common.PathCombine(pathwayPath, "ConfigurationTool.exe")))
                 {
                     return true;
                 }

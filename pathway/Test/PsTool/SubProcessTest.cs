@@ -74,8 +74,8 @@ namespace Test.PsTool
             const string EchoLog = "JavaVersion.log";
             var progFolder = SubProcess.JavaLocation(name);
             SubProcess.RedirectOutput = EchoLog;
-            SubProcess.Run(instPath, Path.Combine(progFolder,name), arg, wait);
-            string logFullName = Path.Combine(instPath, EchoLog);
+            SubProcess.Run(instPath, Common.PathCombine(progFolder,name), arg, wait);
+            string logFullName = Common.PathCombine(instPath, EchoLog);
             Assert.IsTrue(File.Exists(logFullName));
             File.Delete(logFullName);
         }

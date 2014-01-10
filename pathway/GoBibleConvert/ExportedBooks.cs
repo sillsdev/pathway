@@ -69,7 +69,7 @@ namespace SIL.PublishingSolution
             var baseFileName = Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath);
             var folder = Path.GetDirectoryName(_projInfo.DefaultXhtmlFileWithPath);
             Debug.Assert(folder != null);
-            var fileName = Path.Combine(folder, string.Format("{0}_{1}.xhtml", baseFileName, code));
+            var fileName = Common.PathCombine(folder, string.Format("{0}_{1}.xhtml", baseFileName, code));
             return fileName;
         }
 
@@ -80,7 +80,7 @@ namespace SIL.PublishingSolution
             Debug.Assert(folder != null);
             if (code != string.Empty)
                 code += "_";
-            var fileName = Path.Combine(folder, string.Format("{0}_{1}cv.xhtml", baseFileName, code));
+            var fileName = Common.PathCombine(folder, string.Format("{0}_{1}cv.xhtml", baseFileName, code));
             return fileName;
         }
 

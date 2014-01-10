@@ -262,7 +262,7 @@ namespace SIL.PublishingSolution
                 preProcessor.InsertPseudoContentProperty(mergedCSS, _pseudoClass);
                 string defaultCSS = Path.GetFileName(mergedCSS);
                 // rename the CSS file to something readable
-                string niceNameCSS = Path.Combine(tempFolder, "book.css");
+                string niceNameCSS = Common.PathCombine(tempFolder, "book.css");
                 projInfo.DefaultCssFileWithPath = niceNameCSS;
                 if (niceNameCSS != mergedCSS)
                 {
@@ -352,7 +352,7 @@ namespace SIL.PublishingSolution
                 // If we are working with a dictionary and have a reversal index, process it now)
                 if (projInfo.IsReversalExist)
                 {
-                    var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                    var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
                     // EDB 10/20/2010 - TD-1629 - remove when merged CSS passes validation
                     // (note that the rev file uses a "FlexRev.css", not "main.css"
 
@@ -395,7 +395,7 @@ namespace SIL.PublishingSolution
                 CustomizeCSS(mergedCSS);
 
                 string getPsApplicationPath = Common.GetPSApplicationPath();
-                string xsltProcessExe = Path.Combine(getPsApplicationPath, "XslProcess.exe");
+                string xsltProcessExe = Common.PathCombine(getPsApplicationPath, "XslProcess.exe");
                 inProcess.SetStatus("Apply Xslt Process in html file");
                 if (File.Exists(xsltProcessExe))
                 {
@@ -407,13 +407,13 @@ namespace SIL.PublishingSolution
                             {
                                 string copyRightpage = file.Replace(".xhtml", "_.xhtml");
                                 File.Copy(file, copyRightpage);
-                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
+                                htmlFiles.Add(Common.PathCombine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
                                 File.Delete(file);
                             }
                             else
                             {
                                 Common.XsltProcess(file, xsltFullName, "_.xhtml");
-                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
+                                htmlFiles.Add(Common.PathCombine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
                                 File.Delete(file);
                             }
                         }
@@ -425,7 +425,7 @@ namespace SIL.PublishingSolution
                                 string xhtmlOutputFile = Path.GetFileNameWithoutExtension(file) + "_.xhtml";
                                 //Common.XsltProcess(file, xsltFullName, "_.xhtml");
                                 // add this file to the html files list
-                                htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), xhtmlOutputFile));
+                                htmlFiles.Add(Common.PathCombine(Path.GetDirectoryName(file), xhtmlOutputFile));
 
                                 if (File.Exists(xhtmlOutputFile))
                                 {
@@ -465,7 +465,7 @@ namespace SIL.PublishingSolution
                 {
                     inProcess.SetStatus("Creating endnote references file");
                     CreateReferencesFile(contentFolder, preProcessor.ProcessedXhtml);
-                    splitFiles.Add(Path.Combine(contentFolder, ReferencesFilename));
+                    splitFiles.Add(Common.PathCombine(contentFolder, ReferencesFilename));
                 }
 
                 // -- Font handling --
@@ -486,13 +486,14 @@ namespace SIL.PublishingSolution
                 }
                 // update the CSS file to reference any fonts used by the writing systems
                 // (if they aren't embedded in the .epub, we'll still link to them here)
-                ReferenceFonts(mergedCSS);
+
+                ReferenceFonts(mergedCSS, projInfo);
                 inProcess.PerformStep();
 
                 // copy over the XHTML and CSS files
                 string cssPath = Common.PathCombine(contentFolder, defaultCSS);
-                
-                if(File.Exists(mergedCSS))
+
+                if (File.Exists(mergedCSS))
                     File.Copy(mergedCSS, cssPath, true);
 
                 string tocFiletoUpdate = string.Empty;
@@ -533,7 +534,7 @@ namespace SIL.PublishingSolution
                 }
 
                 inProcess.PerformStep();
-                
+
                 // Done adding content - now zip the whole thing up and name it
                 inProcess.SetStatus("Cleaning up");
                 string fileName = Title.ToString();
@@ -586,7 +587,7 @@ namespace SIL.PublishingSolution
                         {
                             string epubFileName = fileName.Replace(" ", "") + ".epub";
                             string replaceEmptyCharacterinFileName = Path.GetDirectoryName(outputPathWithFileName);
-                            replaceEmptyCharacterinFileName = Path.Combine(outputFolder, epubFileName);
+                            replaceEmptyCharacterinFileName = Common.PathCombine(outputFolder, epubFileName);
                             if (outputPathWithFileName != replaceEmptyCharacterinFileName && File.Exists(outputPathWithFileName))
                             {
                                 File.Copy(outputPathWithFileName, replaceEmptyCharacterinFileName, true);
@@ -629,10 +630,10 @@ namespace SIL.PublishingSolution
                 // split the file into smaller pieces if needed
                 List<string> files = new List<string>();
 
-                if(!pageBreak && _inputType.ToLower() == "dictionary")
+                if (!pageBreak && _inputType.ToLower() == "dictionary")
                     files = SplitBook(dest);
-                
-                if(_inputType.ToLower() == "scripture")
+
+                if (_inputType.ToLower() == "scripture")
                 {
                     files = SplitBook(dest);
                 }
@@ -742,7 +743,7 @@ namespace SIL.PublishingSolution
 
         private string UsersXsl(string xslName)
         {
-            var myPath = Path.Combine(Common.GetAllUserPath(), xslName);
+            var myPath = Common.PathCombine(Common.GetAllUserPath(), xslName);
             if (File.Exists(myPath))
                 return myPath;
             return Common.FromRegistry(xslName);
@@ -771,7 +772,7 @@ namespace SIL.PublishingSolution
             {
                 cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
                 string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
-                projInfo.DefaultXhtmlFileWithPath = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
                 AfterBeforeProcessEpub afterBeforeProcessReversal = new AfterBeforeProcessEpub();
                 afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
                 Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", Common.NonBreakingSpace);
@@ -987,7 +988,7 @@ namespace SIL.PublishingSolution
         private string GetXsltFile()
         {
             string xsltFullName = Common.FromRegistry("TE_XHTML-to-epub_XHTML.xslt");
-            var tempXslt = Path.Combine(Path.GetTempPath(), Path.GetFileName(xsltFullName));
+            var tempXslt = Common.PathCombine(Path.GetTempPath(), Path.GetFileName(xsltFullName));
             File.Copy(xsltFullName, tempXslt, true);
             xsltFullName = tempXslt;
 
@@ -1143,7 +1144,7 @@ namespace SIL.PublishingSolution
             if (!File.Exists(cssFile)) { return; }
             string xsltFullName = Common.FromRegistry("punct_XHTML.xslt");
             if (!File.Exists(xsltFullName)) { return; }
-            var tempXslt = Path.Combine(Path.GetTempPath(), Path.GetFileName(xsltFullName));
+            var tempXslt = Common.PathCombine(Path.GetTempPath(), Path.GetFileName(xsltFullName));
             File.Copy(xsltFullName, tempXslt, true);
 
             // copy the CSS rules into a Dictionary and iterate through it
@@ -1592,7 +1593,7 @@ namespace SIL.PublishingSolution
         /// - Sets the font-family for the body:lang selector to the referenced font
         /// </summary>
         /// <param name="cssFile"></param>
-        private void ReferenceFonts(string cssFile)
+        private void ReferenceFonts(string cssFile, IPublicationInformation projInfo)
         {
             if (!File.Exists(cssFile)) return;
             // read in the CSS file
@@ -1638,7 +1639,7 @@ namespace SIL.PublishingSolution
                         if (embeddedFont.HasItalic)
                         {
                             sb.AppendLine("@font-face {");
-                            sb.Append(" font-family : \"i_");
+                            sb.Append(" font-family : \"");
                             sb.Append(embeddedFont.Name + "\"");
                             sb.AppendLine(";");
                             sb.AppendLine(" font-weight : normal;");
@@ -1654,7 +1655,7 @@ namespace SIL.PublishingSolution
                         if (embeddedFont.HasBold)
                         {
                             sb.AppendLine("@font-face {");
-                            sb.Append(" font-family : \"b_");
+                            sb.Append(" font-family : \"");
                             sb.Append(embeddedFont.Name + "\"");
                             sb.AppendLine(";");
                             sb.AppendLine(" font-weight : bold;");
@@ -1685,12 +1686,12 @@ namespace SIL.PublishingSolution
                     sb.Append("', ");
                     if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                     {
-                        sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                        sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
                     }
                     else
                     {
                         // fall back on a serif font if we can't find it (shouldn't happen)
-                        sb.AppendLine("Times, serif;");
+                        sb.AppendLine("'Times', 'serif';");
                     }
                     // also insert the text direction for this language
                     sb.Append("direction: ");
@@ -1714,18 +1715,18 @@ namespace SIL.PublishingSolution
                                 }
                                 else
                                 {
-                                    sb.Append("font-family: 'i_");
+                                    sb.Append("font-family: '");
                                     sb.Append(language.Value);
                                 }
                                 sb.Append("', ");
                                 if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                                 {
-                                    sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                                    sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
                                 }
                                 else
                                 {
                                     // fall back on a serif font if we can't find it (shouldn't happen)
-                                    sb.AppendLine("Times, serif;");
+                                    sb.AppendLine("'Times', 'serif';");
                                 }
                                 sb.AppendLine("}");
                             }
@@ -1752,22 +1753,37 @@ namespace SIL.PublishingSolution
                                 }
                                 else
                                 {
-                                    sb.Append("font-family: 'b_");
+                                    sb.Append("font-family: '");
                                     sb.Append(language.Value);
                                 }
                                 sb.Append("', ");
                                 if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                                 {
-                                    sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                                    sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
                                 }
                                 else
                                 {
                                     // fall back on a serif font if we can't find it (shouldn't happen)
-                                    sb.AppendLine("Times, serif;");
+                                    sb.AppendLine("'Times', 'serif';");
                                 }
                                 sb.AppendLine("}");
                             }
                     }
+
+                    var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+
+                    if (File.Exists(revFile))
+                    {
+                        string reverseSenseNumberFont = GetLanguageForReversalNumber(revFile, language.Key);
+                        sb.Append(".revsensenumber {");
+                        sb.Append("font-family: '");
+                        if (language.Key == reverseSenseNumberFont)
+                        {
+                            sb.Append(language.Value);
+                        }
+                        sb.Append("';}");
+                    }
+
                     // finished processing - clear the flag
                     firstLang = false;
                 }
@@ -1781,12 +1797,12 @@ namespace SIL.PublishingSolution
                 sb.Append("', ");
                 if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                 {
-                    sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                    sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
                 }
                 else
                 {
                     // fall back on a serif font if we can't find it (shouldn't happen)
-                    sb.AppendLine("Times, serif;");
+                    sb.AppendLine("'Times', 'serif';");
                 }
                 // also insert the text direction for this language
                 sb.Append("direction: ");
@@ -1820,18 +1836,20 @@ namespace SIL.PublishingSolution
                             sb.Append(language.Key);
                             sb.Append("), .Section_Range_Paragraph:lang(");
                             sb.Append(language.Key);
+                            sb.Append("), .revsensenumber:lang(");
+                            sb.Append(language.Key);
                             sb.AppendLine(") {");
-                            sb.Append("font-family: 'i_");
+                            sb.Append("font-family: '");
                             sb.Append(language.Value);
                             sb.Append("', ");
                             if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                             {
-                                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                                sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
                             }
                             else
                             {
                                 // fall back on a serif font if we can't find it (shouldn't happen)
-                                sb.AppendLine("Times, serif;");
+                                sb.AppendLine("'Times', 'serif';");
                             }
                             sb.AppendLine("}");
                         }
@@ -1883,23 +1901,28 @@ namespace SIL.PublishingSolution
                             sb.Append(language.Key);
                             sb.Append("), .iot:lang(");
                             sb.Append(language.Key);
+                            sb.Append("), .revsensenumber:lang(");
+                            sb.Append(language.Key);
                             sb.AppendLine(") {");
-                            sb.Append("font-family: 'b_");
+                            sb.Append("font-family: '");
                             sb.Append(language.Value);
                             sb.Append("', ");
                             if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                             {
-                                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                                sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
                             }
                             else
                             {
                                 // fall back on a serif font if we can't find it (shouldn't happen)
-                                sb.AppendLine("Times, serif;");
+                                sb.AppendLine("'Times', 'serif';");
                             }
                             sb.AppendLine("}");
                         }
                 }
             }
+
+
+
             sb.AppendLine("/* end auto-generated font info */");
             sb.AppendLine();
             // nuke the @import statement (we're going off one CSS file here)
@@ -1932,6 +1955,50 @@ namespace SIL.PublishingSolution
                 Common.StreamReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
             }
         }
+
+
+        private string GetLanguageForReversalNumber(string xhtmlFileName, string languageCode)
+        {
+            string language = languageCode;
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xdoc.Load(xhtmlFileName);
+            // now go check to see if we're working on scripture or dictionary data
+            XmlNodeList nodes = xdoc.SelectNodes("//xhtml:span[@class='revsensenumber']", namespaceManager);
+            if (nodes == null || nodes.Count == 0)
+            {
+                nodes = xdoc.SelectNodes("//span[@class='revsensenumber']", namespaceManager);
+            }
+            if (nodes.Count > 0)
+            {
+                for (int i = 0; i < nodes.Count; i++)
+                {
+                    var xmlAttributeCollection = nodes[i].Attributes;
+                    if (xmlAttributeCollection != null)
+                        if (xmlAttributeCollection["lang"] != null)
+                        {
+                            if (xmlAttributeCollection["lang"].Value == language)
+                            {
+                                language = xmlAttributeCollection["lang"].Value;
+                                break;
+                            }
+                        }
+
+                    if (xmlAttributeCollection != null)
+                        if (xmlAttributeCollection["xml:lang"] != null)
+                        {
+                            if (xmlAttributeCollection["xml:lang"].Value == language)
+                            {
+                                language = xmlAttributeCollection["xml:lang"].Value;
+                                break;
+                            }
+                        }
+                }
+            }
+            return language;
+        }
+
 
         /// <summary>
         /// Returns the font families for the languages in _langFontDictionary.
@@ -2354,7 +2421,7 @@ namespace SIL.PublishingSolution
                     // trouble of searching through all the files, see if the target ended up in our references file.
                     if (References.Contains("End") && _inputType == "scripture")
                     {
-                        if (IsStringInFile(Path.Combine(contentFolder, ReferencesFilename), relativeID))
+                        if (IsStringInFile(Common.PathCombine(contentFolder, ReferencesFilename), relativeID))
                         {
                             dictHyperlinks.Add(relativeID, ReferencesFilename + "#" + relativeID);
                             continue;
@@ -2901,7 +2968,7 @@ namespace SIL.PublishingSolution
         /// <param name="inProcess"></param>
         private void UpdateReferenceHyperlinks(string contentFolder, InProcess inProcess)
         {
-            var outFilename = Path.Combine(contentFolder, ReferencesFilename);
+            var outFilename = Common.PathCombine(contentFolder, ReferencesFilename);
             var hrefs = FindBrokenRelativeHrefIds(outFilename);
             //inProcess.AddToMaximum(hrefs.Count + 1);
             var reader = new StreamReader(outFilename);
@@ -2951,7 +3018,7 @@ namespace SIL.PublishingSolution
         /// <param name="inProcess"></param>
         private void UpdateReferenceSourcelinks(string contentFolder, InProcess inProcess)
         {
-            //var hrefs = FindBrokenRelativeHrefIds(Path.Combine(contentFolder, "zzReferences.xhtml"));
+            //var hrefs = FindBrokenRelativeHrefIds(Common.PathCombine(contentFolder, "zzReferences.xhtml"));
             string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
             foreach (var file in files)
             {
@@ -3024,7 +3091,7 @@ namespace SIL.PublishingSolution
             //sbPreamble.Append(projInfo.ProjectName);
             sbPreamble.AppendLine("</title><link rel='stylesheet' href='book.css' type='text/css' /></head>");
             sbPreamble.Append("<body class='scrBody'><div class='Front_Matter'>");
-            var outFilename = Path.Combine(outputFolder, ReferencesFilename);
+            var outFilename = Common.PathCombine(outputFolder, ReferencesFilename);
             var outFile = new StreamWriter(outFilename);
             outFile.WriteLine(sbPreamble.ToString());
             // iterate through the files and pull out each reference hyperlink
@@ -3211,7 +3278,7 @@ namespace SIL.PublishingSolution
             while (!done)
             {
                 // look for a good breaking point after our soft maximum size
-                string outFile = Path.Combine(Path.GetDirectoryName(xhtmlFilename), (Path.GetFileNameWithoutExtension(xhtmlFilename) + fileIndex.ToString().PadLeft(2, '0') + ".xhtml"));
+                string outFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFilename), (Path.GetFileNameWithoutExtension(xhtmlFilename) + fileIndex.ToString().PadLeft(2, '0') + ".xhtml"));
                 softMax = startIndex + (int)(maxSize / 2); // UTF-16
                 if (softMax > content.Length)
                 {
@@ -3307,7 +3374,8 @@ namespace SIL.PublishingSolution
         {
             if (Directory.Exists(destFolder))
             {
-                Directory.Delete(destFolder, true);
+                DirectoryInfo di = new DirectoryInfo(destFolder);
+                Common.CleanDirectory(di);
             }
             Directory.CreateDirectory(destFolder);
             string[] files = Directory.GetFiles(sourceFolder);
@@ -3356,8 +3424,8 @@ namespace SIL.PublishingSolution
             string outputPathWithFileName = outputPath + ".epub";
 
             // add the content to the existing epub.zip file
-            string zipFile = Path.Combine(sourceFolder, "epub.zip");
-            string contentFolder = Path.Combine(sourceFolder, "OEBPS");
+            string zipFile = Common.PathCombine(sourceFolder, "epub.zip");
+            string contentFolder = Common.PathCombine(sourceFolder, "OEBPS");
             string[] files = Directory.GetFiles(contentFolder);
             mODT.AddToZip(files, zipFile);
             var sb = new StringBuilder();
@@ -3959,7 +4027,7 @@ namespace SIL.PublishingSolution
         {
             var folder = Path.GetDirectoryName(fileFullPath);
             var name = Path.GetFileNameWithoutExtension(fileFullPath);
-            var tempFullName = Path.Combine(folder, name) + "-1.xml";
+            var tempFullName = Common.PathCombine(folder, name) + "-1.xml";
             File.Copy(fileFullPath, tempFullName);
 
             XmlTextReader reader = Common.DeclareXmlTextReader(tempFullName, true);

@@ -28,8 +28,8 @@ namespace Test
         public static void AreEqual(string expectPath, string outputPath)
         {
             const string BibleData = "Bible Data";
-            var outTmpDir = Path.Combine(Path.GetTempPath(),Path.GetRandomFileName());
-            var expTmpDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            var outTmpDir = Common.PathCombine(Path.GetTempPath(),Path.GetRandomFileName());
+            var expTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName());
             Directory.CreateDirectory(outTmpDir);
             Directory.CreateDirectory(expTmpDir);
             FastZip fastZip = new FastZip();
@@ -49,7 +49,7 @@ namespace Test
             Assert.AreEqual(expDirs.Length, outDirs.Length);
             foreach (DirectoryInfo directoryInfo in expDirs)
             {
-                var outFullName = Path.Combine(outDir, directoryInfo.Name);
+                var outFullName = Common.PathCombine(outDir, directoryInfo.Name);
                 if (!Directory.Exists(outFullName))
                     Assert.Fail();
                 DirectoryCompare(directoryInfo.FullName, outFullName);
@@ -59,7 +59,7 @@ namespace Test
             Assert.AreEqual(expFiles.Length, outFiles.Length);
             foreach (FileInfo fileInfo in expFiles)
             {
-                var outFullName = Path.Combine(outDir, fileInfo.Name);
+                var outFullName = Common.PathCombine(outDir, fileInfo.Name);
                 FileAssert.AreEqual(fileInfo.FullName, outFullName);
             }
         }

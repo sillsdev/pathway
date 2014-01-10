@@ -279,7 +279,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="theWord.xsl" />
+    <EmbeddedResource Include="theWord.xsl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="vrs.xml">

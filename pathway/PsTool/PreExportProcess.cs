@@ -168,7 +168,7 @@ namespace SIL.Tool
                         else
                         {
                             // write to a separate file
-                            var outFilename = Path.Combine(outputFolder, CoverPageFilename);
+                            var outFilename = Common.PathCombine(outputFolder, CoverPageFilename);
                             var outFile = new StreamWriter(outFilename);
                             outFile.Write(sbPreamble.ToString());
                             outFile.Write(CoverImagePage());
@@ -188,7 +188,7 @@ namespace SIL.Tool
                         else
                         {
                             // write to a separate file
-                            var outFilename = Path.Combine(outputFolder, TitlePageFilename);
+                            var outFilename = Common.PathCombine(outputFolder, TitlePageFilename);
                             var outFile = new StreamWriter(outFilename);
                             outFile.Write(sbPreamble.ToString());
                             outFile.Write(TitlePage());
@@ -208,7 +208,7 @@ namespace SIL.Tool
                         else
                         {
                             // write to a separate file
-                            var outFilename = Path.Combine(outputFolder, CopyrightPageFilename);
+                            var outFilename = Common.PathCombine(outputFolder, CopyrightPageFilename);
                             CopyCopyrightPage(outputFolder); // copyright page is a full xhtml file -- this method copies it over
                             files.Add(outFilename);
                         }
@@ -223,7 +223,7 @@ namespace SIL.Tool
                         else
                         {
                             // write to a separate file
-                            var outFilename = Path.Combine(outputFolder, TableOfContentsFilename);
+                            var outFilename = Common.PathCombine(outputFolder, TableOfContentsFilename);
                             var outFile = new StreamWriter(outFilename);
                             outFile.Write(sbPreamble.ToString());
                             outFile.Write(TableOfContents());
@@ -317,14 +317,14 @@ namespace SIL.Tool
             {
                 // no image file specified -- use the default image in the Graphic directory
                 string strImageFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Graphic");
-                strImageFile = Path.Combine(strImageFolder, "cover.png");
+                strImageFile = Common.PathCombine(strImageFolder, "cover.png");
             }
             if (!File.Exists(strImageFile))
             {
                 return;
             }
             // copy the image file to the destination folder as "cover.png"
-            string dest = Path.Combine(outputFolder, "cover.png");
+            string dest = Common.PathCombine(outputFolder, "cover.png");
             var img = new Bitmap(strImageFile);
             img.Save(dest, System.Drawing.Imaging.ImageFormat.Png);
             // if we don't want a title, we're done
@@ -374,7 +374,7 @@ namespace SIL.Tool
                 new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width / 2)), 100f), size), strFormat);
 
             // save this puppy
-            string strCoverImageFile = Path.Combine(outputFolder, "cover.png");
+            string strCoverImageFile = Common.PathCombine(outputFolder, "cover.png");
             bmp.Save(strCoverImageFile, System.Drawing.Imaging.ImageFormat.Png);
         }
 
@@ -532,28 +532,28 @@ namespace SIL.Tool
             // rights logos - copyright page only
             if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
             {
-                File.Copy(Path.Combine(strCopyrightFolder, "by.png"), Path.Combine(outputFolder, "by.png"), true);
-                File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"), true);
-                File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"), true);
-                File.Copy(Path.Combine(strCopyrightFolder, "nd.png"), Path.Combine(outputFolder, "nd.png"), true);
+                File.Copy(Common.PathCombine(strCopyrightFolder, "by.png"), Common.PathCombine(outputFolder, "by.png"), true);
+                File.Copy(Common.PathCombine(strCopyrightFolder, "sa.png"), Common.PathCombine(outputFolder, "sa.png"), true);
+                File.Copy(Common.PathCombine(strCopyrightFolder, "nc.png"), Common.PathCombine(outputFolder, "nc.png"), true);
+                File.Copy(Common.PathCombine(strCopyrightFolder, "nd.png"), Common.PathCombine(outputFolder, "nd.png"), true);
             }
             // logo - both Title and Copyright page
             if (Param.GetOrganization().StartsWith("SIL"))
             {
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
-                    File.Copy(Path.Combine(strCopyrightFolder, "sil-bw-logo.jpg"), Path.Combine(outputFolder, "sil-bw-logo.jpg"), true);
+                    File.Copy(Common.PathCombine(strCopyrightFolder, "sil-bw-logo.jpg"), Common.PathCombine(outputFolder, "sil-bw-logo.jpg"), true);
                 }
                 else
                 {
-                    File.Copy(Path.Combine(strCopyrightFolder, "WBT_H_RGB_red.png"), Path.Combine(outputFolder, "WBT_H_RGB_red.png"), true);
+                    File.Copy(Common.PathCombine(strCopyrightFolder, "WBT_H_RGB_red.png"), Common.PathCombine(outputFolder, "WBT_H_RGB_red.png"), true);
                 }
             }
             else if (Param.GetOrganization().StartsWith("Wycliffe"))
             {
-                File.Copy(Path.Combine(strCopyrightFolder, "WBT_H_RGB_red.png"), Path.Combine(outputFolder, "WBT_H_RGB_red.png"), true);
+                File.Copy(Common.PathCombine(strCopyrightFolder, "WBT_H_RGB_red.png"), Common.PathCombine(outputFolder, "WBT_H_RGB_red.png"), true);
             }
-            File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"), true);
+            File.Copy(Common.PathCombine(strCopyrightFolder, "Copy.css"), Common.PathCombine(outputFolder, "Copy.css"), true);
         }
 
         public void CopyCopyrightPage(string outputFolder)
@@ -570,12 +570,12 @@ namespace SIL.Tool
             {
                 return;
             }
-            string strCopyrightFile = Path.Combine(strCopyrightFolder, strFilename);
+            string strCopyrightFile = Common.PathCombine(strCopyrightFolder, strFilename);
             if (!File.Exists(strCopyrightFile))
             {
                 return; // something went wrong -- get out
             }
-            string destFile = Path.Combine(outputFolder, "File2Cpy.xhtml");
+            string destFile = Common.PathCombine(outputFolder, "File2Cpy.xhtml");
             if (File.Exists(destFile))
             {
                 File.Delete(destFile);
@@ -629,13 +629,13 @@ namespace SIL.Tool
                             {
                                 var sourceFile = srcValue;
                                 string pictureDirectory = Path.GetDirectoryName(copyFromLocation);
-                                sourceFile = Path.Combine(pictureDirectory, sourceFile);
+                                sourceFile = Common.PathCombine(pictureDirectory, sourceFile);
                                 if (sourceFile.Length > 0)
                                 {
                                     if (File.Exists(sourceFile))
                                     {
                                         string destinationFile = Path.GetDirectoryName(copyrighthtmlfile);
-                                        destinationFile = Path.Combine(destinationFile, srcValue);
+                                        destinationFile = Common.PathCombine(destinationFile, srcValue);
                                         File.Copy(sourceFile, destinationFile, true);
                                     }
                                 }
@@ -665,7 +665,7 @@ namespace SIL.Tool
             {
                 return string.Empty;
             }
-            string strCopyrightFile = Path.Combine(strCopyrightFolder, strFilename);
+            string strCopyrightFile = Common.PathCombine(strCopyrightFolder, strFilename);
             if (!File.Exists(strCopyrightFile))
             {
                 return string.Empty; // something went wrong -- get out
@@ -765,7 +765,7 @@ namespace SIL.Tool
         {
             //Reversal XHTML file
             if (_xhtmlFileNameWithPath != null)
-                _xhtmlRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_xhtmlFileNameWithPath), "FlexRev.xhtml");
+                _xhtmlRevFileNameWithPath = Common.PathCombine(Path.GetDirectoryName(_xhtmlFileNameWithPath), "FlexRev.xhtml");
 
             // sanity checks
             if (Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("false")) { return string.Empty; }
@@ -1235,7 +1235,7 @@ namespace SIL.Tool
                 {
                     frontMatterXHTMLContent = coverTitleNode.OuterXml;
                     _projInfo.IsFrontMatterEnabled = true;
-                    frontMatterCSSStyle = frontMatterCSSStyle + ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
+                    frontMatterCSSStyle = frontMatterCSSStyle + ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;font-family: 'Times New Roman', serif; } ";
                 }
                 //END OF COVER TITLE
                 if (coverImageNode != null)
@@ -1260,7 +1260,7 @@ namespace SIL.Tool
                         frontMatterXHTMLContent = frontMatterXHTMLContent;
                     }
                     _projInfo.IsFrontMatterEnabled = true;
-                    frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;} .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}";
+                    frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-family: 'Times New Roman', serif; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;font-family: 'Times New Roman', serif; } .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}";
                 }
                 //END OF TITLE
                 //COPYRIGHT 
@@ -1270,7 +1270,7 @@ namespace SIL.Tool
                     if (_copyrightInformation)
                     {
 
-                        string draftTempFileName = Path.Combine(Path.GetTempPath(), Path.GetFileName(copyRightFilePath));
+                        string draftTempFileName = Common.PathCombine(Path.GetTempPath(), Path.GetFileName(copyRightFilePath));
 
                         File.Copy(copyRightFilePath, draftTempFileName, true);
                         //Common.StreamReplaceInFile(draftTempFileName, "div id='LanguageInformation' class='Front_Matter' dir='ltr'>", GetLanguageInfoForLO());
@@ -1306,7 +1306,7 @@ namespace SIL.Tool
                         frontMatterXHTMLContent = frontMatterXHTMLContent + "<div id='copyright' class='copyright' dir='ltr'>.</div>" + copyRightContentNode.OuterXml + "<div id='dummyTOC' class='dummyTOC' dir='ltr'>.</div>";
                         _projInfo.IsFrontMatterEnabled = true;
 
-                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:1pt;visibility:hidden;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;}.LText{font-size:12pt;font-style:italic}.LText:before{content: \"\\2028\"}.dummyTOC{text-align: left; font-size:1pt;visibility:hidden;page-break-after: always;} ";
+                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:1pt;visibility:hidden;font-family: 'Times New Roman', serif;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;font-family: 'Times New Roman', serif;}.LText{font-size:12pt;font-style:italic;font-family: 'Times New Roman', serif;}.LText:before{content: \"\\2028\"}.dummyTOC{font-size:1pt; page-break-after: always;} ";
                     }
                 }
                 //END OF COPYRIGHT 
@@ -1769,7 +1769,7 @@ namespace SIL.Tool
                             if (name != null)
                             {
                                 var src = name.Value;
-                                src = Path.Combine(paraTextprojectPath, src);
+                                src = Common.PathCombine(paraTextprojectPath, src);
                                 if (src.Length > 0)
                                 {
                                     string fromFileName = Common.GetPictureFromPath(src, metaname, sourcePicturePath);
@@ -1943,7 +1943,8 @@ namespace SIL.Tool
             {
                 try
                 {
-                    Directory.Delete(tempFolder, true);
+                    DirectoryInfo di = new DirectoryInfo(tempFolder);
+                    Common.CleanDirectory(di);
                 }
                 catch
                 {
@@ -1953,7 +1954,7 @@ namespace SIL.Tool
             Directory.CreateDirectory(tempFolder);
 
             if (_xhtmlFileNameWithPath != null)
-                _xhtmlRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_xhtmlFileNameWithPath), "FlexRev.xhtml");
+                _xhtmlRevFileNameWithPath = Common.PathCombine(Path.GetDirectoryName(_xhtmlFileNameWithPath), "FlexRev.xhtml");
 
             string tempRevFile = Common.PathCombine(tempFolder, Path.GetFileName(_xhtmlRevFileNameWithPath));
 
@@ -1975,7 +1976,7 @@ namespace SIL.Tool
                 File.Copy(_xhtmlRevFileNameWithPath, tempRevFile, true);
 
             if (_cssFileNameWithPath != null)
-                _cssRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_cssFileNameWithPath), "FlexRev.css");
+                _cssRevFileNameWithPath = Common.PathCombine(Path.GetDirectoryName(_cssFileNameWithPath), "FlexRev.css");
 
             string tempCssFile = Common.PathCombine(tempFolder, Path.GetFileName(_cssRevFileNameWithPath));
 
@@ -2153,17 +2154,6 @@ namespace SIL.Tool
 
         private string OpenFile()
         {
-            //string tempFolder = Common.PathCombine(Path.GetTempPath(), "IDPreprocess");
-            //if (Directory.Exists(tempFolder))
-            //{
-            //    Directory.Delete(tempFolder, true);
-            //}
-            //Directory.CreateDirectory(tempFolder);
-
-            //string OutputFile = Common.PathCombine(tempFolder, Path.GetFileName(_xhtmlFileNameWithPath));
-            ////string OutputFile = _xhtmlFileNameWithPath;
-            //File.Copy(Common.DirectoryPathReplace(_xhtmlFileNameWithPath), OutputFile, true);
-
             string OutputFile = _xhtmlFileNameWithPath;
             var reader = new StreamReader(OutputFile, Encoding.UTF8);
             _fileContent.Remove(0, _fileContent.Length);
@@ -2180,7 +2170,7 @@ namespace SIL.Tool
         {
             string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
             string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
-            string newfile = Path.Combine(fileDir, fileName);
+            string newfile = Common.PathCombine(fileDir, fileName);
 
             File.Copy(_xhtmlFileNameWithPath, newfile);
 
@@ -2216,7 +2206,7 @@ namespace SIL.Tool
             XmlTextReader reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
             string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
             string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
-            string Newfile = Path.Combine(fileDir, fileName);
+            string Newfile = Common.PathCombine(fileDir, fileName);
 
             XmlTextWriter writer = new XmlTextWriter(Newfile, null);
 
@@ -2315,7 +2305,7 @@ namespace SIL.Tool
 
             string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
             string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
-            string Newfile = Path.Combine(fileDir, fileName);
+            string Newfile = Common.PathCombine(fileDir, fileName);
 
             var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
             var sw2 = new StreamWriter(fs2);
@@ -2363,7 +2353,7 @@ namespace SIL.Tool
 
             string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
             string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
-            string Newfile = Path.Combine(fileDir, fileName);
+            string Newfile = Common.PathCombine(fileDir, fileName);
 
             var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
             var sw2 = new StreamWriter(fs2);
@@ -3030,7 +3020,9 @@ namespace SIL.Tool
                 if (fileNameWithoutExtension != null)
                 {
                     string fileName = fileNameWithoutExtension.ToLower();
-                    if (fileName == "flexrev" || fileName.IndexOf("preserve") == 0)
+                    //if (fileName == "flexrev" || fileName.IndexOf("preserve") == 0)
+                    //    return;
+                    if (fileName != "main" && fileName != "main1")
                         return;
                 }
 
@@ -3088,45 +3080,51 @@ namespace SIL.Tool
 
         public void GetReferenceList(string xhtmlFileNameWithPath, List<string> sourceList, List<string> targetList)
         {
-
             XmlTextReader _reader = Common.DeclareXmlTextReader(xhtmlFileNameWithPath, true);
-            while (_reader.Read())
+            try
             {
-                if (_reader.NodeType == XmlNodeType.Element)
+                while (_reader.Read())
                 {
-                    // bool found = Regex.IsMatch(_reader.ToString(), "<a\\shref.*?>");
-                    string st;
-                    if (_reader.Name == "a")
+                    if (_reader.NodeType == XmlNodeType.Element)
                     {
-                        string href = _reader.GetAttribute("href");
-                        if (href != null)
+                        // bool found = Regex.IsMatch(_reader.ToString(), "<a\\shref.*?>");
+                        string st;
+                        if (_reader.Name == "a")
                         {
-                            st = href.Replace("#", "").ToLower();
-                            if (sourceList.Contains(st)) continue;
-                            sourceList.Add(st);
-                            continue;
+                            string href = _reader.GetAttribute("href");
+                            if (href != null)
+                            {
+                                st = href.Replace("#", "").ToLower();
+                                if (sourceList.Contains(st)) continue;
+                                sourceList.Add(st);
+                                continue;
+                            }
                         }
-                    }
-                    if (_reader.Name == "div" || _reader.Name == "span" || _reader.Name == "a")
-                    {
-
-                        string id = _reader.GetAttribute("id");
-                        if (id != null)
+                        if (_reader.Name == "div" || _reader.Name == "span" || _reader.Name == "a")
                         {
-                            if (targetList.Contains(id.ToLower())) continue;
-                            targetList.Add(id.ToLower());
-                            continue;
-                        }
 
-                        string name = _reader.GetAttribute("name");
-                        if (name != null)
-                        {
-                            if (targetList.Contains(name.ToLower())) continue;
-                            targetList.Add(name.ToLower());
-                            continue;
+                            string id = _reader.GetAttribute("id");
+                            if (id != null)
+                            {
+                                if (targetList.Contains(id.ToLower())) continue;
+                                targetList.Add(id.ToLower());
+                                continue;
+                            }
+
+                            string name = _reader.GetAttribute("name");
+                            if (name != null)
+                            {
+                                if (targetList.Contains(name.ToLower())) continue;
+                                targetList.Add(name.ToLower());
+                                continue;
+                            }
                         }
                     }
                 }
+            }
+            catch
+            {
+                Console.WriteLine("GetReferenceList");
             }
             _reader.Close();
         }
@@ -3335,12 +3333,12 @@ namespace SIL.Tool
             for (int i = 0; i < verseNodeList.Count; i++)
             {
                 XmlNode nextNode = verseNodeList[i].NextSibling;
-                if(nextNode == null) continue;
-                if(nextNode.OuterXml.IndexOf("span") == -1)
+                if (nextNode == null) continue;
+                if (nextNode.OuterXml.IndexOf("span") == -1)
                 {
                     nextNode = nextNode.NextSibling;
                 }
-                verseNodeList[i].InnerText = verseNodeList[i].InnerText.Trim() +  " ";
+                verseNodeList[i].InnerText = verseNodeList[i].InnerText.Trim() + " ";
                 nextNode.InnerXml = verseNodeList[i].OuterXml + nextNode.InnerXml;
                 nextNode.ParentNode.RemoveChild(verseNodeList[i]);
             }
@@ -3367,7 +3365,7 @@ namespace SIL.Tool
                 {
                     SectionNodeList[i].InnerXml = SectionNodeList[i].InnerXml.Replace(" // ", " <br/>");
                 }
-                
+
             }
             xDoc.Save(fileName);
         }
@@ -3379,33 +3377,33 @@ namespace SIL.Tool
         /// <param name="mergedCSS"> </param>
         public void RemoveVerseNumberOne(string fileName, string mergedCSS)
         {
-               if (!File.Exists(fileName)) return;
-                XmlDocument xDoc = Common.DeclareXMLDocument(true);
-                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                xDoc.Load(fileName);
-                string xPath = "//xhtml:span[@class='Chapter_Number']";
-                XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
-                if (SectionNodeList == null) return;
-                for (int i = 0; i < SectionNodeList.Count; i++)
+            if (!File.Exists(fileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            string xPath = "//xhtml:span[@class='Chapter_Number']";
+            XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+            if (SectionNodeList == null) return;
+            for (int i = 0; i < SectionNodeList.Count; i++)
+            {
+                XmlNode paraNode = SectionNodeList[i].ParentNode;
+                xPath = ".//xhtml:span[@class='Verse_Number']";
+                XmlNodeList verseNodeList = paraNode.SelectNodes(xPath, namespaceManager);
+                if (verseNodeList == null) return;
+                for (int j = 0; j < verseNodeList.Count; j++)
                 {
-                    XmlNode paraNode = SectionNodeList[i].ParentNode;
-                    xPath = ".//xhtml:span[@class='Verse_Number']";
-                    XmlNodeList verseNodeList = paraNode.SelectNodes(xPath, namespaceManager);
-                    if (verseNodeList == null) return;
-                    for (int j = 0; j < verseNodeList.Count; j++)
-                    {
-                        verseNodeList[j].InnerText = "";
-                        break;
-                    }
+                    verseNodeList[j].InnerText = "";
+                    break;
                 }
-                xDoc.Save(fileName);
+            }
+            xDoc.Save(fileName);
         }
 
         //SetNonBreakInVerseNumberSetNonBreakInVerseNumber
 
         public string RemoveTextIndent(string fileName)
-        {            
+        {
             string fileNameExtension = Path.GetExtension(fileName);
             string newFileName = fileName.Replace(fileNameExtension, "1" + fileNameExtension);
             string line;
@@ -3418,7 +3416,7 @@ namespace SIL.Tool
                 if (isPicture || line.Contains(".picture"))
                 {
                     isPicture = true;
-                    
+
                     if (!line.Contains("text-indent"))
                     {
                         write.WriteLine(line);
@@ -3825,7 +3823,7 @@ namespace SIL.Tool
             //tw.WriteLine("}");
 
             tw.WriteLine(".Front_Matter {");
-            tw.WriteLine("margin-left : 12pt;margin-right: 12pt;text-align: left;");
+            tw.WriteLine("margin-left : 12pt;margin-right: 12pt;direction: ltr;text-align: left;");
             tw.WriteLine("}");
 
             //tw.WriteLine(".Parallel_Passage_Reference {");
@@ -3847,9 +3845,9 @@ namespace SIL.Tool
                 tw.WriteLine("}");
                 //if (IsPictureColumnWidthChange())
                 //{
-                    tw.WriteLine(".pictureColumn {");
-                    tw.WriteLine("width: 99%;");
-                    tw.WriteLine("}");
+                tw.WriteLine(".pictureColumn {");
+                tw.WriteLine("width: 99%;");
+                tw.WriteLine("}");
                 //}
             }
             tw.Close();
@@ -3859,6 +3857,7 @@ namespace SIL.Tool
         {
             //div[@class='entry']/div[2]/img
             if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
+            if (_projInfo.SplitFileByLetter != null && _projInfo.SplitFileByLetter.ToLower() == "true") return;
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
@@ -3905,7 +3904,7 @@ namespace SIL.Tool
             //        }
             //    }
             //}
-            
+
             xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
         }
 

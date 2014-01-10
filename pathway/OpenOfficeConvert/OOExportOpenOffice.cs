@@ -73,7 +73,7 @@ namespace SIL.PublishingSolution
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(publicationInformation.DefaultCssFileWithPath, true);
 
-            if(cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
+            if (cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
             {
                 publicationInformation.FileToProduce = cssClass["@page"]["-ps-fileproduce"];
             }
@@ -81,25 +81,31 @@ namespace SIL.PublishingSolution
 
         private Dictionary<string, string> SplitXhtmlAsMultiplePart(PublicationInformation publicationInformation, Dictionary<string, string> dictSecName)
         {
+            var fileNameWithPath = new List<string>();
             if (publicationInformation.FileToProduce.ToLower() != "one")
             {
-                List<string> fileNameWithPath = new List<string>();
-                if(publicationInformation.FileToProduce.ToLower() == "one per book")
+
+                if (publicationInformation.FileToProduce.ToLower() == "one per book")
                 {
                     fileNameWithPath = Common.SplitXhtmlFile(publicationInfo.DefaultXhtmlFileWithPath,
-                                                             "scrbook", false);
+                                        "scrbook", false);
                 }
-                else if(publicationInformation.FileToProduce.ToLower() == "one per letter")
-                {
-                    fileNameWithPath = Common.SplitXhtmlFile(publicationInfo.DefaultXhtmlFileWithPath,
-                                                             "letHead", true);
-                }
-                 
-                if (fileNameWithPath.Count > 0)
-                {
-                    dictSecName = CreateJoiningForSplited(fileNameWithPath);
-                    publicationInformation.DictionaryOutputName = null;
-                }
+            }
+            else if (publicationInformation.SplitFileByLetter != null && publicationInformation.SplitFileByLetter.ToLower() == "true")
+            {
+                var fs = new FileSplit();
+                fileNameWithPath = fs.SplitFile(publicationInformation.DefaultXhtmlFileWithPath);
+                string flexRevFile =
+                    Common.PathCombine(Path.GetDirectoryName(publicationInformation.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                if(File.Exists(flexRevFile))
+                    fileNameWithPath.Add(flexRevFile);
+            }
+
+            if (fileNameWithPath.Count > 0)
+            {
+                dictSecName = CreateJoiningForSplited(fileNameWithPath);
+                publicationInformation.DictionaryOutputName = null;
+                publicationInformation.MainLastFileName = fileNameWithPath[fileNameWithPath.Count - 1];
             }
             return dictSecName;
         }
@@ -114,17 +120,17 @@ namespace SIL.PublishingSolution
             string entryFilterXpath = "true()";
             string senseFilterXpath = "true()";
             string languageFilterXpath = "true()";
-            string liftSupportPath = Path.Combine(Common.GetPSApplicationPath(), "LiftSupport");
+            string liftSupportPath = Common.PathCombine(Common.GetPSApplicationPath(), "LiftSupport");
 
             string inputFile = pubInfo.DefaultXhtmlFileWithPath;
             string xhtmlFile = inputFile;
-            string transFormfile = Path.Combine(liftSupportPath, "liftTransform.xsl");
-            string filterFile = Path.Combine(liftSupportPath, "liftEntryAndSenseFilter.xsl");
-            string newTempXslfile = Path.Combine(Path.GetTempPath(), "tempFilter.xsl");
-            string newTempXslfile1 = Path.Combine(Path.GetTempPath(), "tempFilter1.xsl");
+            string transFormfile = Common.PathCombine(liftSupportPath, "liftTransform.xsl");
+            string filterFile = Common.PathCombine(liftSupportPath, "liftEntryAndSenseFilter.xsl");
+            string newTempXslfile = Common.PathCombine(Path.GetTempPath(), "tempFilter.xsl");
+            string newTempXslfile1 = Common.PathCombine(Path.GetTempPath(), "tempFilter1.xsl");
 
 
-            string languageSortFile = Path.Combine(Path.GetTempPath(), "langSortedFile.xhtml");
+            string languageSortFile = Common.PathCombine(Path.GetTempPath(), "langSortedFile.xhtml");
             try
             {
                 // Transformation files
@@ -158,7 +164,7 @@ namespace SIL.PublishingSolution
                 if (pubInfo.IsLanguageFilter)
                 {
                     ReplaceNamespace(xmlFile);
-                    string langFilterFile = Path.Combine(liftSupportPath, "liftLangFilter.xsl");
+                    string langFilterFile = Common.PathCombine(liftSupportPath, "liftLangFilter.xsl");
                     File.Copy(langFilterFile, newTempXslfile1, true);
 
                     ReplaceFilters("language", newTempXslfile1, languageFilterXpath);
@@ -776,6 +782,7 @@ namespace SIL.PublishingSolution
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
             projInfo.IncludeFootnoteSymbol = inStyles._customFootnoteCaller;
             projInfo.IncludeXRefSymbol = inStyles._customXRefCaller;
+            projInfo.SplitFileByLetter = inStyles._splitFileByLetter;
             projInfo.HideSpaceVerseNumber = inStyles._hideSpaceVerseNumber;
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
@@ -800,7 +807,7 @@ namespace SIL.PublishingSolution
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)
                 preProcessor.SwapHeadWordAndReversalForm();
-            
+
             //preProcessor.InsertKeepWithNextOnStyles();
 
             //if (_isFromExe)
@@ -880,11 +887,13 @@ namespace SIL.PublishingSolution
                 //projInfo.DictionaryOutputName = null;
                 if (preProcessor != null)
                 {
-                    Common.DeleteDirectory(preProcessor.GetCreatedTempFolderPath);
+                    DirectoryInfo di = new DirectoryInfo(preProcessor.GetCreatedTempFolderPath);
+                    Common.CleanDirectory(di);
                 }
                 if (projInfo.TempOutputFolder != null)
                 {
-                    Common.DeleteDirectory(projInfo.TempOutputFolder);
+                    DirectoryInfo di = new DirectoryInfo(projInfo.TempOutputFolder);
+                    Common.CleanDirectory(di);
                 }
             }
             return returnValue;
@@ -967,7 +976,7 @@ namespace SIL.PublishingSolution
 
         public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
         {
-            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1019,7 +1028,7 @@ namespace SIL.PublishingSolution
         public static void InsertGuidewordAfterLetter(string tempOutputFolder)
         {
 
-            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = new XmlDocument();
             xdoc.PreserveWhitespace = false;
             xdoc.Load(filename);
@@ -1057,7 +1066,7 @@ namespace SIL.PublishingSolution
         public static void ContentPostProcess(string tempOutputFolder)
         {
             
-            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1134,7 +1143,7 @@ namespace SIL.PublishingSolution
 
         public static void InsertPublisherOnTitlePage(string tempOutputFolder)
         {
-            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = new XmlDocument();
             xdoc.PreserveWhitespace = false;
             xdoc.Load(filename);
@@ -1173,7 +1182,7 @@ namespace SIL.PublishingSolution
 
         public static void ChangeTitleNameasBookName(string tempOutputFolder)
         {
-            string filename = Path.Combine(tempOutputFolder, "content.xml");
+            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1216,7 +1225,7 @@ namespace SIL.PublishingSolution
 
         private static void RenameContentStyleOnCondition(string tempFolder)
         {
-            string filename = Path.Combine(tempFolder, "content.xml");
+            string filename = Common.PathCombine(tempFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1252,7 +1261,7 @@ namespace SIL.PublishingSolution
         /// <param name="directoryPath">File Directory path</param>
         public static void InsertKeepWithNextinEntryStyle(string directoryPath, string styleFilename)
         {
-            string filename = Path.Combine(directoryPath, styleFilename);
+            string filename = Common.PathCombine(directoryPath, styleFilename);
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1376,7 +1385,7 @@ namespace SIL.PublishingSolution
         private static void InsertChapterNumber(string tempFolder)
         {
 
-            string filename = Path.Combine(tempFolder, "content.xml");
+            string filename = Common.PathCombine(tempFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1425,7 +1434,7 @@ namespace SIL.PublishingSolution
         private static void InsertVariableOnLetHead(string tempFolder)
         {
 
-            string filename = Path.Combine(tempFolder, "content.xml");
+            string filename = Common.PathCombine(tempFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
@@ -1607,11 +1616,11 @@ namespace SIL.PublishingSolution
         /// <param name="destFolder"></param>
         private void CopyOfficeFolder(string sourceFolder, string destFolder)
         {
-            //if (Directory.Exists(destFolder))
-            //{
-            //    Directory.Delete(destFolder, true);
-            //}
-            Common.DeleteDirectory(destFolder);
+            if (Directory.Exists(destFolder))
+            {
+                DirectoryInfo di = new DirectoryInfo(destFolder);
+                Common.CleanDirectory(di);
+            }
             Directory.CreateDirectory(destFolder);
             string[] files = Directory.GetFiles(sourceFolder);
             try

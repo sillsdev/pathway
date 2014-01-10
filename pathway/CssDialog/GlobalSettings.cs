@@ -135,7 +135,7 @@ namespace SIL.PublishingSolution
             }
             else if (fieldName == "MasterSheetPath" || fieldName == "IconPath" || fieldName == "SamplePath")
             {
-                string fieldNewValue = Path.Combine(relativePath, fieldValue);
+                string fieldNewValue = Common.PathCombine(relativePath, fieldValue);
                 if (fieldValue.Length == 0)
                 {
                     errorMessage = "Please enter the " + fieldName + " value";
@@ -147,8 +147,8 @@ namespace SIL.PublishingSolution
             }
             else if(fieldName == "BaseStyles")
             {
-                string  masterSheetPath = Path.Combine(relativePath, TlSettings.Controls["MasterSheetPath"].Text);
-                string fieldNewValue = Path.Combine(masterSheetPath, fieldValue);
+                string  masterSheetPath = Common.PathCombine(relativePath, TlSettings.Controls["MasterSheetPath"].Text);
+                string fieldNewValue = Common.PathCombine(masterSheetPath, fieldValue);
                 string fileType = Path.GetFileName(fieldNewValue);
                 if (fieldValue.Length == 0)
                 {
@@ -161,7 +161,7 @@ namespace SIL.PublishingSolution
             }
             else if (fieldName == "DefaultIcon" || fieldName == "SelectedIcon" || fieldName == "MissingIcon")
             {
-                string fieldNewValue = Path.Combine(relativePath, fieldValue);
+                string fieldNewValue = Common.PathCombine(relativePath, fieldValue);
                 fieldNewValue = Common.DirectoryPathReplaceWithSlash(fieldNewValue);
                 string fileType = Path.GetFileName(fieldNewValue);
                 if (fieldValue.Length == 0)
@@ -175,7 +175,7 @@ namespace SIL.PublishingSolution
             }
             else if (fieldName == "Help")
             {
-                string fieldNewValue = Path.Combine(relativePath + "\\Help\\", fieldValue);
+                string fieldNewValue = Common.PathCombine(relativePath + "\\Help\\", fieldValue);
                 string fileType = Path.GetFileName(fieldValue);
                 if (fieldValue.Length == 0)
                 {

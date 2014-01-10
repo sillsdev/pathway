@@ -206,13 +206,13 @@ namespace Test.DictionaryForMIDsConvert
 
             const string main = "main.txt";
             const string props = "DictionaryForMIDs.properties";
-            File.Copy(_testFiles.Input(main), Path.Combine(outDir, main));
-            File.Copy(_testFiles.Input(props), Path.Combine(outDir, props));
+            File.Copy(_testFiles.Input(main), Common.PathCombine(outDir, main));
+            File.Copy(_testFiles.Input(props), Common.PathCombine(outDir, props));
 
             PublicationInformation projInfo = new PublicationInformation();
-            projInfo.DefaultXhtmlFileWithPath = Path.Combine(outDir, "main.xhtml");
+            projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outDir, "main.xhtml");
             CreateDictionaryForMIDs(projInfo);
-            Assert.True(Directory.Exists(Path.Combine(outDir, "DfM_lojen_SIL")));
+            Assert.True(Directory.Exists(Common.PathCombine(outDir, "DfM_lojen_SIL")));
         }
 
         #region private Methods

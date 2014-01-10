@@ -990,7 +990,7 @@ namespace Test.PsTool
             string path1 = Path.GetTempPath();
             string path2 = "combine";
 
-            string expected = Path.Combine(path1, path2);
+            string expected = Common.PathCombine(path1, path2);
             expected = expected.Replace("\\", dirSep);
             expected = expected.Replace("/", dirSep);
 
@@ -1006,7 +1006,7 @@ namespace Test.PsTool
             string path1 = Path.GetTempPath();
             string path2 = "..\\combine";
 
-            string expected = Path.Combine(path1, path2);
+            string expected = Common.PathCombine(path1, path2);
             expected = expected.Replace("\\", dirSep);
             expected = expected.Replace("/", dirSep);
 
@@ -1022,7 +1022,7 @@ namespace Test.PsTool
             path1 = path1.Replace('\\', '/'); // for Linux Test
             string path2 = "combine";
 
-            string expected = Path.Combine(path1, path2);
+            string expected = Common.PathCombine(path1, path2);
             expected = expected.Replace("\\", dirSep);
             expected = expected.Replace("/", dirSep);
 
@@ -1039,7 +1039,7 @@ namespace Test.PsTool
             path1 = path1.Replace('\\', '/'); // for Linux Test
             string path2 = "../combine";
 
-            string expected = Path.Combine(path1, path2);
+            string expected = Common.PathCombine(path1, path2);
             expected = expected.Replace("\\", dirSep);
             expected = expected.Replace("/", dirSep);
 

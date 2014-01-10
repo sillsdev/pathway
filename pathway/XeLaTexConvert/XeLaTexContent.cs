@@ -1160,7 +1160,7 @@ namespace SIL.PublishingSolution
                 if (File.Exists(fromPath))
                 {
                     picFile = Path.GetFileName(fromPath);
-                    string toPath = Path.Combine(_inputPath, picFile);
+                    string toPath = Common.PathCombine(_inputPath, picFile);
                     string installedDirectory = XeLaTexInstallation.GetXeLaTexDir();
                     string destination = string.Empty;
 

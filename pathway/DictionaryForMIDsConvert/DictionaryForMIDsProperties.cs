@@ -46,7 +46,7 @@ namespace SIL.PublishingSolution
             var myPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             Debug.Assert(myPath != null);
             Styles = contentStyles;
-            Sw = new StreamWriter(Path.Combine(myPath, "DictionaryForMIDs.properties"));
+            Sw = new StreamWriter(Common.PathCombine(myPath, "DictionaryForMIDs.properties"));
             DictionaryAbbreviation = "SIL";
             NumberOfAvailableLanguages = 2;
             Language1NumberOfContentDeclarations = Styles.NumStyles;

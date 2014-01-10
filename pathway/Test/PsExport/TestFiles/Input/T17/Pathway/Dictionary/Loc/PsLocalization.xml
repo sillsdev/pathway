@@ -1,0 +1,1580 @@
+﻿<LocDB>
+  <Group ID="Messages" Title="004 - Messages" Des="These are various error messages that OurWord displays. The vast majority occur during setup. If you see anything enclosed by braces (e.g., {n}, {0}, etc., take care to reproduce these exactly in the error message. The {n} represents a new line, so that the error message does not spread across the entire with of the screen. The numbers ({0}, {1}, etc.,) are substitutions. Thus &quot;You do not have permission to write the file {0}&quot; will become, at runtime, &quot;You do not have permission to write the file MyFile.db.&quot; " Translator="false">
+    <Item ID="msgbackup">
+      <English>File  Backup is done</English>
+    </Item>
+    <Item ID="msgConfirmNoteDeletion">
+      <English>Are you sure you want to delete the note:{n}  {0}?</English>
+    </Item>
+    <Item ID="msgConfirmFileDeletion">
+      <English>Are you sure you want to delete the file:{n}    {0}?</English>
+    </Item>
+    <Item ID="msgSaveSucess">
+      <English>File saved successfully</English>
+    </Item>
+    <Item ID="defErrMsg">
+      <English>{0}</English>
+    </Item>
+    <Item ID="errUnauthorized">
+      <English>Sorry! You might not have permission to use this resource.</English>
+    </Item>
+    <Item ID="errDictAlreadyExists">
+      <English>The Output Dictionary Name and the Input Dicttionary Name you specified already exist.{n} Specify a Different Dictionary name.</English>
+    </Item>
+    <Item ID="errGtr10Char">
+      <English>Symbols should not be greater than 10 characters, Please try again.</English>
+    </Item>
+    <Item ID="errInstallFile">
+      <English>Please Install the {0}.</English>
+    </Item>
+    <Item ID="errDellFile">
+      <English>You Cannot Delete the  {0}.</English>
+    </Item>
+    <Item ID="errSelectandEdit">
+      <English>Please Select and then Edit</English>
+    </Item>
+    <Item ID="errCannotEdit">
+      <English>You Cannot edit this {0}</English>
+    </Item>
+    <Item ID="errFileAlreadyExits">
+      <English>File Already Exists. Do you want to replace it?</English>
+    </Item>
+    <Item ID="errWantToSave">
+      <English>Do you want to save the changes?</English>
+    </Item>
+    <Item ID="errInstallPrinceXML">
+      <English>PrinceXML must be downloaded and installed from www.PrinceXML.com</English>
+    </Item>
+    <Item ID="errCannotbeSame">
+      <English>Reference and Page number {0} cannot be same. Please change.</English>
+    </Item>
+    <Item ID="errSaveEvenOutofRange">
+      <English>{0} Do you want to save the values even though they are out of range?</English>
+    </Item>
+    <Item ID="errReplaceStyleSheet">
+      <English>Replace {0} style sheet?</English>
+    </Item>
+    <Item ID="errVersionNumberFormat">
+      <English>Please Enter 4 numbers separated by periods for the version number.</English>
+    </Item>
+    <Item ID="errUpdateReleaseNotes">
+      <English>Elements of version number other than revision have changed\r\nPlease update release notes</English>
+    </Item>
+    <Item ID="errInvalidEntry">
+      <English>Invalid Entry.\nThe label cannot be blank</English>
+    </Item>
+    <Item ID="errFileEditedandWanttoSave">
+      <English>Invalid Entry.\nThe label cannot be blank</English>
+    </Item>
+    <Item ID="errFileExistsRemoveManualy">
+      <English>XHTML File Already Exist - Remove it Manually</English>
+    </Item>
+    <Item ID="errSelectFile">
+      <English>Please Select the File</English>
+    </Item>
+    <Item ID="errFileBackUpTo">
+      <English>File has been Backup to {0}</English>
+    </Item>
+    <Item ID="errCreateorOpenDict">
+      <English>Please Create/Open Dictionary or Add XHTML File</English>
+    </Item>
+    <Item ID="errSetDefaultCSS">
+      <English>Please set default CSS file</English>
+    </Item>
+    <Item ID="errContentsDelete">
+      <English>{0} and all its contents will be deleted permanently</English>
+    </Item>
+    <Item ID="errRemoveDefaultCSS">
+      <English>{0} is the default CSS file for this Publication. Do You want to remove anyway?</English>
+    </Item>
+    <Item ID="errRemoveDefaultXHTML">
+      <English>{0} is the default XHTML file for this Publication. Do You want to remove anyway?</English>
+    </Item>
+    <Item ID="errDeletePermanent">
+      <English>{0}  will be deleted permanently</English>
+    </Item>
+    <Item ID="errExcludeDefaultCSS">
+      <English>{0} is the default CSS file for this Publication. Do You want to exclude anyway?</English>
+    </Item>
+    <Item ID="errExcludeDefaultXHTML">
+      <English>{0}  is the default XHTML file for this Publication. Do You want to exclude anyway?</English>
+    </Item>
+    <Item ID="errSelectValidXHTML">
+      <English>Please select the valid XHTML file</English>
+    </Item>
+    <Item ID="errNoDefaultCSSApplyTemplates">
+      <English>No default css found, Do you want to apply styles from Template?</English>
+    </Item>
+    <Item ID="errIsReversalIndex">
+      <English>Is this the Reversal Index File?</English>
+    </Item>
+    <Item ID="errEnterDictName">
+      <English>Please type Dictionary Name</English>
+    </Item>
+    <Item ID="errSelectDictLoc">
+      <English>Please select Dictionary location</English>
+    </Item>
+    <Item ID="errSelectDictLoc">
+      <English>Please select Dictionary location</English>
+    </Item>
+    <Item ID="errSelectXHTMLFile">
+      <English>Please select XHTML filename with path</English>
+    </Item>
+    <Item ID="errProcessXHTML">
+      <English>{1} is Not Valid. \n {0}</English>
+    </Item>
+    <Item ID="errNotValidXml">
+      <English>{0} is Not a valid Xml File. </English>
+    </Item>
+    <Group ID="FileStructureMessages" Title="005 - File Structure Messages" Translator="false">
+      <Item ID="picture">
+        <English>Picture</English>
+      </Item>
+    </Group>
+  </Group>
+  <Group ID="menuMain" Title="menuMain" Translator="false">
+    <Item ID="menuFile" Tip="true">
+      <English>&amp;File</English>
+      <Tip>File to be opened</Tip>
+    </Item>
+    <Item ID="menuNew" Tip="true">
+      <English>&amp;New...</English>
+      <Key>Ctrl+N</Key>
+      <Tip>Create New Publication</Tip>
+    </Item>
+    <Item ID="menuOpen" Tip="true">
+      <English>&amp;Open Publication... </English>
+      <Key>Ctrl+O</Key>
+      <Tip>Open Existing Publication</Tip>
+    </Item>
+    <Item ID="menuExport" Tip="true">
+      <English>Expor&amp;t...</English>
+      <Tip>Export</Tip>
+    </Item>
+    <Item ID="menuClose" Tip="true">
+      <English>&amp;Close</English>
+      <Tip>Close Active Dictionary</Tip>
+    </Item>
+    <Item ID="menuExit" Tip="true">
+      <English>E&amp;xit</English>
+      <Tip>Exit  Application</Tip>
+    </Item>
+    <Item ID="editToolStripMenuItem" Tip="true">
+      <English>&amp;Edit</English>
+      <Tip>Edit </Tip>
+    </Item>
+    <Item ID="menuExport" Tip="true">
+      <English>Expor&amp;t</English>
+      <Tip>Export</Tip>
+    </Item>
+    <Item ID="editToolStripMenuItem1" Tip="true">
+      <English>E&amp;dit CSS</English>
+      <Key>Ctrl+E</Key>
+      <Tip>Edit CSS </Tip>
+    </Item>
+    <Item ID="menuDicFormat" Tip="true">
+      <English>St&amp;yle Pick</English>
+    </Item>
+    <Item ID="saveToolStripMenuItem" Tip="true">
+      <English>&amp;Save CSS</English>
+      <Key>Ctrl+S</Key>
+      <Tip>Save CSS</Tip>
+    </Item>
+    <Item ID="menuFormat" Tip="true">
+      <English>&amp;Format</English>
+      <Tip>Format </Tip>
+    </Item>
+    <Item ID="menuDicSetting" Tip="true">
+      <English>&amp;Task Pick</English>
+      <Tip>Task Pick</Tip>
+    </Item>
+    <Item ID="menuApplyStyle" Tip="true">
+      <English>&amp;Apply Template Style...</English>
+      <Tip>Apply Template Style</Tip>
+    </Item>
+    <Item ID="menuPreview" Tip="true">
+      <English>Pre&amp;view</English>
+      <Tip>Refresh Preview</Tip>
+    </Item>
+    <Item ID="menuTools" Tip="true">
+      <English>&amp;Tools</English>
+      <Tip>Tools</Tip>
+    </Item>
+    <Item ID="menuLocalization" Tip="true">
+      <English>&amp;Localization Tool...</English>
+      <Tip>Localization Tool</Tip>
+    </Item>
+    <Item ID="menuLocalizationSetup" Tip="true">
+      <English>Localization &amp;Setup...</English>
+      <Tip>Localization Setup</Tip>
+    </Item>
+    <Item ID="backupPublicationToolStripMenuItem" Tip="true">
+      <English>&amp;Backup Publication...</English>
+      <Tip>Backup Publication</Tip>
+    </Item>
+    <Item ID="menushowErrorLog">
+      <English>S&amp;how Error Log</English>
+    </Item>
+    <Item ID="menuWindow" Tip="true">
+      <English>&amp;Window</English>
+    </Item>
+    <Item ID="menuCascade" Tip="true">
+      <English>&amp;Cascade</English>
+      <Tip>Arrange Active Publications in Cascade </Tip>
+    </Item>
+    <Item ID="menuTileVertical" Tip="true">
+      <English>Tile &amp;Vertical</English>
+      <Tip>Arrange Active Publications in Vertical </Tip>
+    </Item>
+    <Item ID="menuTileHorizontal" Tip="true">
+      <English>Tile &amp;Horizontal</English>
+      <Tip>Arrange Active Publications in Horizontal</Tip>
+    </Item>
+    <Item ID="menuHelp" Tip="true">
+      <English>&amp;Help</English>
+      <Tip>Help</Tip>
+    </Item>
+    <Item ID="menuContents" Tip="true">
+      <English>&amp;Contents...</English>
+      <Tip>Contents</Tip>
+    </Item>
+    <Item ID="menuInterfaceFlex" Tip="true">
+      <English>&amp;Interface to Flex...</English>
+      <Tip>Interface to Flex</Tip>
+    </Item>
+    <Item ID="menuFeedBack" Tip="true">
+      <English>&amp;Feedback...</English>
+      <Tip>Send Feedback through the mail</Tip>
+    </Item>
+    <Item ID="menuAbout" Tip="true">
+      <English>&amp;About Publishing Solutions...</English>
+      <Tip>About Publishing Solutions</Tip>
+    </Item>
+    <Item ID="editToolStripMenuItem" Tip="true">
+      <English>&amp;Edit</English>
+      <Tip>Edit </Tip>
+    </Item>
+    <Item ID="editToolStripMenuItem1" Tip="true">
+      <English>E&amp;dit CSS</English>
+      <Key>Ctrl+E</Key>
+      <Tip>Edit CSS </Tip>
+    </Item>
+    <Item ID="saveToolStripMenuItem" Tip="true">
+      <English>&amp;Save CSS</English>
+      <Key>Ctrl+S</Key>
+      <Tip>Save CSS</Tip>
+    </Item>
+    <Item ID="menuDicSetting" Tip="true">
+      <English>St&amp;yle Pick</English>
+    </Item>
+    <Item ID="menuDicFormat" Tip="true">
+      <English>&amp;Task Pick</English>
+      <Tip>Task Pick</Tip>
+    </Item>
+    <Item ID="backupProjectToolStripMenuItem" Tip="true">
+      <English>&amp;Backup Publication...</English>
+      <Tip>Backup Publication</Tip>
+    </Item>
+    <Item ID="menuMain">
+      <English>menuStrip1</English>
+    </Item>
+    <Item ID="menushowErrorLog">
+      <English>S&amp;how Error Log</English>
+    </Item>
+    <Item ID="menuEdit">
+      <English>E&amp;dit</English>
+      <Key>Ctrl+E</Key>
+    </Item>
+    <Item ID="menuSave">
+      <English>&amp;Save</English>
+      <Key>Ctrl+S</Key>
+    </Item>
+    <Item ID="menuBackup">
+      <English>&amp;Backup Publication...</English>
+    </Item>
+    <Item ID="menuLicense">
+      <English>&amp;License...</English>
+    </Item>
+    <Item ID="menuReleaseNotes">
+      <English>&amp;Release Notes...</English>
+    </Item>
+    <Item ID="menuReadMe">
+      <English>Latest Changes...</English>
+    </Item>
+    <Item ID="menuTaskPick">
+      <English>&amp;Task Pick</English>
+    </Item>
+    <Group ID="toolStripMain" Title="toolStripMain" Translator="false">
+      <Item ID="tsNew" Tip="true">
+        <English>New Publication</English>
+        <Tip>Create New Publication</Tip>
+      </Item>
+      <Item ID="tsOpen" Tip="true">
+        <English>Open Publication</English>
+        <Tip>Open Existing Publication</Tip>
+      </Item>
+      <Item ID="tsPreview" Tip="true">
+        <English>Preview</English>
+        <Tip>Refresh Preview</Tip>
+      </Item>
+      <Item ID="tsExport" Tip="true">
+        <English>Export</English>
+        <Tip>Export</Tip>
+      </Item>
+      <Item ID="tsClose" Tip="true">
+        <English>Close</English>
+        <Tip>Close Active Dictionary</Tip>
+      </Item>
+      <Item ID="tsFormat" Tip="true">
+        <English>Task Pick</English>
+        <Tip>Task Pick</Tip>
+      </Item>
+      <Item ID="tsEdit" Tip="true">
+        <English>Edit CSS</English>
+        <Tip>Edit CSS</Tip>
+      </Item>
+      <Item ID="tsSave" Tip="true">
+        <English>Save CSS</English>
+        <Tip>Save CSS</Tip>
+      </Item>
+      <Item ID="tsMail" Tip="true">
+        <English>Send Mail</English>
+        <Tip>Send Mail</Tip>
+      </Item>
+      <Item ID="tsHelp" Tip="true">
+        <English>Help</English>
+        <Tip>Help</Tip>
+      </Item>
+      <Item ID="tsExit" Tip="true">
+        <English>Exit</English>
+        <Tip>Exit</Tip>
+      </Item>
+      <Item ID="tsExportNew" Tip="true">
+        <English>Export</English>
+        <Tip>Export</Tip>
+      </Item>
+      <Item ID="toolStripMain">
+        <English>New</English>
+      </Item>
+      <Item ID="tsTaskPick" Tip="true">
+        <English>Task Pick</English>
+        <Tip>Task Pick</Tip>
+      </Item>
+      <Item ID="tsTaskPick" Tip="true">
+        <English>Task Pick</English>
+        <Tip>Task Pick</Tip>
+      </Item>
+    </Group>
+  </Group>
+  <Group ID="LocalizationSetup" Title="LocalizationSetup" Translator="false">
+    <Item ID="Title">
+      <English>Localization Setup</English>
+    </Item>
+    <Item ID="cmdOK" Tip="true">
+      <English>&amp;Apply</English>
+      <Tip>Apply Setting</Tip>
+    </Item>
+    <Item ID="cmdClose" Tip="true">
+      <English>&amp;Close</English>
+      <Tip>Close</Tip>
+    </Item>
+    <Item ID="label1" Tip="true">
+      <English>Primary Language</English>
+    </Item>
+    <Item ID="label2" Tip="true">
+      <English>Font Name</English>
+    </Item>
+    <Item ID="label3" Tip="true">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="CmdClose">
+      <English>&amp;Close</English>
+    </Item>
+  </Group>
+  <Group ID="statusMain" Title="statusMain" Translator="false">
+    <Item ID="statusMain">
+      <English>statusStrip1</English>
+    </Item>
+  </Group>
+  <Group ID="frmMDIParent" Title="frmMDIParent" Translator="false">
+    <Item ID="Title">
+      <English>Publishing Solutions 1.0</English>
+    </Item>
+  </Group>
+  <Group ID="NewDictionary" Title="New Publication" Translator="false">
+    <Item ID="Title">
+      <English>New Publication</English>
+    </Item>
+    <Item ID="lblPreview">
+      <English>Preview</English>
+    </Item>
+    <Item ID="lblTemplate">
+      <English>Template</English>
+    </Item>
+    <Item ID="btnLocationBrowse">
+      <English>Brows&amp;e</English>
+    </Item>
+    <Item ID="btnXHTMLBrowse">
+      <English>&amp;Browse</English>
+    </Item>
+    <Item ID="btnOk">
+      <English>&amp;Ok</English>
+    </Item>
+    <Item ID="btnCancel">
+      <English>&amp;Cancel</English>
+    </Item>
+    <Item ID="lblLocation">
+      <English>Publication Location</English>
+    </Item>
+    <Item ID="lblXHTML">
+      <English>Select XHTML File</English>
+    </Item>
+    <Item ID="lblName">
+      <English>Publication Name</English>
+    </Item>
+    <Item ID="btnTemplate">
+      <English>Show Template</English>
+    </Item>
+  </Group>
+  <Group ID="Converter" Title="Converter" Translator="false">
+    <Item ID="Title">
+      <English>bce</English>
+    </Item>
+    <Item ID="lblProjectType">
+      <English> </English>
+    </Item>
+    <Item ID="lblCaption">
+      <English>Preview</English>
+    </Item>
+    <Item ID="button1">
+      <English>&amp;Open</English>
+    </Item>
+  </Group>
+  <Group ID="ExportDlg" Title="ExportDlg" Translator="false">
+    <Item ID="Title">
+      <English>Export</English>
+    </Item>
+    <Item ID="btnCancel">
+      <English>&amp;Cancel</English>
+    </Item>
+    <Item ID="btn_Ok">
+      <English>&amp;Ok</English>
+    </Item>
+    <Item ID="lblExportType">
+      <English>Export Type</English>
+    </Item>
+  </Group>
+  <Group ID="TaskStyles" Title="TaskStyles" Translator="false">
+    <Item ID="Title">
+      <English>Task Styles</English>
+    </Item>
+    <Item ID="LbDescription">
+      <English>Description</English>
+    </Item>
+    <Item ID="BtApply">
+      <English>&amp;Apply</English>
+    </Item>
+    <Item ID="BtCategories">
+      <English>Ca&amp;tegories</English>
+    </Item>
+    <Item ID="BtFeatures">
+      <English>&amp;Features</English>
+    </Item>
+    <Item ID="BtPreview">
+      <English>&amp;Preview</English>
+    </Item>
+    <Item ID="BtCancel">
+      <English>&amp;Cancel</English>
+    </Item>
+    <Item ID="BtSave">
+      <English>&amp;Save</English>
+    </Item>
+    <Item ID="LbStyles">
+      <English>Styles</English>
+    </Item>
+    <Item ID="LbSummary">
+      <English>SummaryLabel</English>
+    </Item>
+    <Item ID="LbTask">
+      <English>Task</English>
+    </Item>
+  </Group>
+  <Group ID="Categories" Title="Categories" Translator="false">
+    <Item ID="Title">
+      <English>Categories</English>
+    </Item>
+    <Item ID="BtSettings">
+      <English>Se&amp;ttings</English>
+    </Item>
+    <Item ID="BtCancel">
+      <English>&amp;Cancel</English>
+    </Item>
+    <Item ID="BtSave">
+      <English>&amp;Save</English>
+    </Item>
+    <Item ID="LbCategories">
+      <English>Categories</English>
+    </Item>
+  </Group>
+  <Group ID="StyleFeatures" Title="StyleFeatures" Translator="false">
+    <Item ID="Title">
+      <English>Style Features</English>
+    </Item>
+    <Item ID="BtCategories">
+      <English>Ca&amp;tegories</English>
+    </Item>
+    <Item ID="BtCustom">
+      <English>C&amp;ustom</English>
+    </Item>
+    <Item ID="BtEdit">
+      <English>&amp;Edit</English>
+    </Item>
+    <Item ID="BtPreview">
+      <English>&amp;Preview</English>
+    </Item>
+    <Item ID="LbSummary">
+      <English>SummaryLabel</English>
+    </Item>
+    <Item ID="BtCancel">
+      <English>&amp;Cancel</English>
+    </Item>
+    <Item ID="BtSave">
+      <English>&amp;Save</English>
+    </Item>
+    <Item ID="LbFeatures">
+      <English>Features</English>
+    </Item>
+    <Item ID="LbDescription">
+      <English>Description</English>
+    </Item>
+    <Item ID="TbStyleSheet">
+      <English>Trial</English>
+    </Item>
+    <Item ID="LbStyleSheet">
+      <English>Style Sheet</English>
+    </Item>
+  </Group>
+  <Group ID="StyleCategories" Title="StyleCategories" Translator="false">
+    <Item ID="Title">
+      <English>Style Categories</English>
+    </Item>
+    <Item ID="BtCancel">
+      <English>&amp;Cancel</English>
+    </Item>
+    <Item ID="BtSave">
+      <English>&amp;Save</English>
+    </Item>
+  </Group>
+  <Group ID="FeatureEdit" Title="FeatureEdit" Translator="false">
+    <Item ID="Title">
+      <English>Feature Edit</English>
+    </Item>
+    <Item ID="BtHelp">
+      <English>&amp;Help</English>
+    </Item>
+    <Item ID="BtEdit">
+      <English>&amp;Edit</English>
+    </Item>
+    <Item ID="BtDown">
+      <English>↓</English>
+    </Item>
+    <Item ID="BtUp">
+      <English>↑</English>
+    </Item>
+    <Item ID="BtApply">
+      <English>&amp;Apply</English>
+    </Item>
+    <Item ID="BtCancel">
+      <English>Ca&amp;ncel</English>
+    </Item>
+    <Item ID="BtClose">
+      <English>&amp;Close</English>
+    </Item>
+    <Item ID="LbOptionName">
+      <English>Option Name</English>
+    </Item>
+    <Item ID="LbFeatureName">
+      <English>Feature Name</English>
+    </Item>
+    <Item ID="BtIcon">
+      <English>&amp;Browse</English>
+    </Item>
+    <Item ID="BtSnippet">
+      <English>B&amp;rowse</English>
+    </Item>
+    <Item ID="LbCssSnippet">
+      <English>Css Snippet</English>
+    </Item>
+    <Item ID="LbFeatures">
+      <English>Features</English>
+    </Item>
+  </Group>
+  <Group ID="GlobalSettings" Title="GlobalSettings" Translator="false">
+    <Item ID="Title">
+      <English>Global Settings</English>
+    </Item>
+    <Item ID="BtReset">
+      <English>&amp;Reset</English>
+    </Item>
+    <Item ID="BtCancel">
+      <English>&amp;Cancel</English>
+    </Item>
+    <Item ID="BtOk">
+      <English>&amp;OK</English>
+    </Item>
+  </Group>
+  <Group ID="DictionarySetting" Title="DictionarySetting" Translator="false">
+    <Item ID="Title">
+      <English>Dictionary Settings</English>
+    </Item>
+    <Item ID="CssBrowse">
+      <English>Browse</English>
+    </Item>
+    <Item ID="lblShowProperty">
+      <English>ShowProperty</English>
+    </Item>
+    <Item ID="btnSave">
+      <English>&amp;Save</English>
+    </Item>
+    <Item ID="btnDone">
+      <English>&amp;Done</English>
+    </Item>
+    <Item ID="chkDefaultCSS">
+      <English>Set modified file as default CSS</English>
+    </Item>
+    <Item ID="btnPrevious">
+      <English>&amp;Previous</English>
+    </Item>
+    <Item ID="btnNext">
+      <English>&amp;Next</English>
+    </Item>
+    <Item ID="lblCSS">
+      <English>Source CSS</English>
+    </Item>
+    <Item ID="lvwDocumentSection_col0">
+      <English>Sections</English>
+    </Item>
+    <Item ID="lvwDocumentSection_col1">
+      <English>File Names</English>
+    </Item>
+    <Item ID="label59">
+      <English>Sections</English>
+    </Item>
+    <Item ID="label83">
+      <English>Steps</English>
+    </Item>
+    <Item ID="lvwPreparationSteps_col0">
+      <English>Steps</English>
+    </Item>
+    <Item ID="lvwPreparationSteps_col1">
+      <English>File Names</English>
+    </Item>
+    <Item ID="tabDocument">
+      <English>Document</English>
+    </Item>
+    <Item ID="txtPageAutomaticVerticalJustification">
+      <English>Automatic Vertical Justification</English>
+    </Item>
+    <Item ID="lblPagePageFormat">
+      <English>Page Format</English>
+    </Item>
+    <Item ID="lblPageMargin">
+      <English>Page Margins</English>
+    </Item>
+    <Item ID="lblPageLayoutSetting">
+      <English>Layout Settings</English>
+    </Item>
+    <Item ID="chkPageVerticalRule">
+      <English>Vertical Rule in Gutter</English>
+    </Item>
+    <Item ID="lblPageInside">
+      <English>Inside</English>
+    </Item>
+    <Item ID="lblPagePaperSize">
+      <English>Paper Size</English>
+    </Item>
+    <Item ID="lblPageHeight">
+      <English>Height</English>
+    </Item>
+    <Item ID="lblPageWidth">
+      <English>Width</English>
+    </Item>
+    <Item ID="lblPageOutside">
+      <English>Outside</English>
+    </Item>
+    <Item ID="lblPageBottom">
+      <English>Bottom</English>
+    </Item>
+    <Item ID="lblPageTop">
+      <English>Top</English>
+    </Item>
+    <Item ID="lblPageGutter">
+      <English>Gutter Width</English>
+    </Item>
+    <Item ID="lblPageColumn">
+      <English>Columns</English>
+    </Item>
+    <Item ID="chkPageCropMark">
+      <English>Crop Marks</English>
+    </Item>
+    <Item ID="lblPagePageSize">
+      <English>Page Size</English>
+    </Item>
+    <Item ID="tabPage">
+      <English>Page</English>
+    </Item>
+    <Item ID="btnHeadingsFontName">
+      <English>...</English>
+    </Item>
+    <Item ID="label23">
+      <English>Divider Line</English>
+    </Item>
+    <Item ID="label24">
+      <English>Space After</English>
+    </Item>
+    <Item ID="label25">
+      <English>Space Before</English>
+    </Item>
+    <Item ID="label26">
+      <English>Line Spacing (Leading)</English>
+    </Item>
+    <Item ID="label20">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="label21">
+      <English>Centered</English>
+    </Item>
+    <Item ID="label22">
+      <English>Font Style</English>
+    </Item>
+    <Item ID="label19">
+      <English>Main Title Font Size</English>
+    </Item>
+    <Item ID="label17">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="label16">
+      <English>Page Number Location</English>
+    </Item>
+    <Item ID="label15">
+      <English>Include Inside Guide Words</English>
+    </Item>
+    <Item ID="label14">
+      <English>Include Homonym Number</English>
+    </Item>
+    <Item ID="label13">
+      <English>Divider Line</English>
+    </Item>
+    <Item ID="label12">
+      <English>Space After</English>
+    </Item>
+    <Item ID="label11">
+      <English>Space Before</English>
+    </Item>
+    <Item ID="label10">
+      <English>Line Spacing (Leading)</English>
+    </Item>
+    <Item ID="label9">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="label8">
+      <English>Centered</English>
+    </Item>
+    <Item ID="label7">
+      <English>Font Style</English>
+    </Item>
+    <Item ID="label6">
+      <English>Font Weight</English>
+    </Item>
+    <Item ID="label5">
+      <English>Font Name</English>
+    </Item>
+    <Item ID="label4">
+      <English>String</English>
+    </Item>
+    <Item ID="label3">
+      <English>Major Section Headings</English>
+    </Item>
+    <Item ID="label2">
+      <English>Running Head</English>
+    </Item>
+    <Item ID="label1">
+      <English>Letter Headings</English>
+    </Item>
+    <Item ID="tabHeading">
+      <English>Headings</English>
+    </Item>
+    <Item ID="label71">
+      <English>-</English>
+    </Item>
+    <Item ID="label70">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="chkEntriesUseGloss">
+      <English>    Use Gloss if no Definition</English>
+    </Item>
+    <Item ID="label31">
+      <English>Filter</English>
+    </Item>
+    <Item ID="label27">
+      <English>Space After</English>
+    </Item>
+    <Item ID="label28">
+      <English>Space Before</English>
+    </Item>
+    <Item ID="label29">
+      <English>Line Spacing (Leading)</English>
+    </Item>
+    <Item ID="label18">
+      <English>Hanging Indent</English>
+    </Item>
+    <Item ID="tabEntry">
+      <English>Entries</English>
+    </Item>
+    <Item ID="label36">
+      <English>Filter</English>
+    </Item>
+    <Item ID="btnSymbolBrowse">
+      <English>...</English>
+    </Item>
+    <Item ID="txtSensesPunctuation">
+      <English>)</English>
+    </Item>
+    <Item ID="label35">
+      <English>Senses Paragraphs</English>
+    </Item>
+    <Item ID="label34">
+      <English>Punctuation</English>
+    </Item>
+    <Item ID="lblSennsesSymbols">
+      <English>Symbols</English>
+    </Item>
+    <Item ID="label32">
+      <English>Number Senses</English>
+    </Item>
+    <Item ID="tabSense">
+      <English>Senses</English>
+    </Item>
+    <Item ID="label38">
+      <English>Order</English>
+    </Item>
+    <Item ID="tbnFieldsStyles">
+      <English>Styles</English>
+    </Item>
+    <Item ID="label42">
+      <English>After</English>
+    </Item>
+    <Item ID="label41">
+      <English>Between</English>
+    </Item>
+    <Item ID="label40">
+      <English>Before</English>
+    </Item>
+    <Item ID="label39">
+      <English>Field Style</English>
+    </Item>
+    <Item ID="label37">
+      <English>Basis</English>
+    </Item>
+    <Item ID="tabField">
+      <English>Fields</English>
+    </Item>
+    <Item ID="label80">
+      <English>Letter Minimum %</English>
+    </Item>
+    <Item ID="label79">
+      <English>Letter Maximum %</English>
+    </Item>
+    <Item ID="btnTextTagFontColor">
+      <English>...</English>
+    </Item>
+    <Item ID="label30">
+      <English>Regular</English>
+    </Item>
+    <Item ID="label69">
+      <English>BoldItalic</English>
+    </Item>
+    <Item ID="label65">
+      <English>Typeface Names</English>
+    </Item>
+    <Item ID="label68">
+      <English>Italic</English>
+    </Item>
+    <Item ID="label72">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="label33">
+      <English>Bold</English>
+    </Item>
+    <Item ID="label73">
+      <English>Preferred Style</English>
+    </Item>
+    <Item ID="label74">
+      <English>Font Color</English>
+    </Item>
+    <Item ID="label75">
+      <English>Justified Paragraphs</English>
+    </Item>
+    <Item ID="btnTextFontColor">
+      <English>...</English>
+    </Item>
+    <Item ID="label66">
+      <English>Between Words</English>
+    </Item>
+    <Item ID="label76">
+      <English>Desired (Optimal) %</English>
+    </Item>
+    <Item ID="label77">
+      <English>Minimum %</English>
+    </Item>
+    <Item ID="label78">
+      <English>Maximum %</English>
+    </Item>
+    <Item ID="label84">
+      <English>Hyphenation Language</English>
+    </Item>
+    <Item ID="lblTextKerning">
+      <English>Kerning</English>
+    </Item>
+    <Item ID="label81">
+      <English>Letter Desired (Optimal) %</English>
+    </Item>
+    <Item ID="label67">
+      <English>Between Letters</English>
+    </Item>
+    <Item ID="label61">
+      <English>Include Language Tags</English>
+    </Item>
+    <Item ID="label64">
+      <English>Tag Font Color</English>
+    </Item>
+    <Item ID="label63">
+      <English>Tag Font Size</English>
+    </Item>
+    <Item ID="label62">
+      <English>Tag Font Name</English>
+    </Item>
+    <Item ID="label60">
+      <English>Writing System</English>
+    </Item>
+    <Item ID="tabText">
+      <English>Text</English>
+    </Item>
+    <Item ID="label50">
+      <English>Import</English>
+    </Item>
+    <Item ID="label55">
+      <English>Rules</English>
+    </Item>
+    <Item ID="label56">
+      <English>Data Font Size</English>
+    </Item>
+    <Item ID="label57">
+      <English>Header Font Style</English>
+    </Item>
+    <Item ID="label54">
+      <English>Size</English>
+    </Item>
+    <Item ID="label53">
+      <English>Position</English>
+    </Item>
+    <Item ID="label52">
+      <English>Filter</English>
+    </Item>
+    <Item ID="label51">
+      <English>Tables</English>
+    </Item>
+    <Item ID="label49">
+      <English>Illustrations</English>
+    </Item>
+    <Item ID="tabMedia">
+      <English>Media</English>
+    </Item>
+    <Item ID="lblIndexesSenseSeperator">
+      <English>Reversal Senses Seperator</English>
+    </Item>
+    <Item ID="label45">
+      <English>Create Indexes for these languages</English>
+    </Item>
+    <Item ID="label48">
+      <English>Vertical Rule in Gutter</English>
+    </Item>
+    <Item ID="label47">
+      <English>Gutter Width</English>
+    </Item>
+    <Item ID="label46">
+      <English>Columns</English>
+    </Item>
+    <Item ID="tabIndex">
+      <English>Index(es)</English>
+    </Item>
+    <Item ID="label43">
+      <English>Optical Margin Alignment</English>
+    </Item>
+    <Item ID="label44">
+      <English>Composer</English>
+    </Item>
+    <Item ID="tabAdvanced">
+      <English>Advanced</English>
+    </Item>
+  </Group>
+  <Group ID="toolStrip12" Title="toolStrip12" Translator="false">
+    <Item ID="toolStrip12">
+      <English>New</English>
+    </Item>
+  </Group>
+  <Group ID="toolStrip13" Title="toolStrip13" Translator="false">
+    <Item ID="toolStrip13">
+      <English>New</English>
+    </Item>
+  </Group>
+  <Group ID="toolStrip6" Title="toolStrip6" Translator="false">
+    <Item ID="toolStrip6">
+      <English>New</English>
+    </Item>
+  </Group>
+  <Group ID="toolStrip3" Title="toolStrip3" Translator="false">
+    <Item ID="toolStrip3">
+      <English>New</English>
+    </Item>
+  </Group>
+  <Group ID="toolStrip8" Title="toolStrip8" Translator="false">
+    <Item ID="toolStrip8">
+      <English>New</English>
+    </Item>
+  </Group>
+  <Group ID="tsTextDown" Title="tsTextDown" Translator="false">
+    <Item ID="tsTextDown">
+      <English>New</English>
+    </Item>
+  </Group>
+  <Group ID="toolStrip4" Title="toolStrip4" Translator="false">
+    <Item ID="toolStrip4">
+      <English>New</English>
+    </Item>
+  </Group>
+  <Group ID="toolStrip5" Title="toolStrip5" Translator="false">
+    <Item ID="toolStrip5">
+      <English>New</English>
+    </Item>
+  </Group>
+  <Group ID="ScriptureSetting" Title="ScriptureSetting" Translator="false">
+    <Item ID="Title">
+      <English>Scripture Settings</English>
+    </Item>
+    <Item ID="chkDefaultCSS">
+      <English>Set modified file as default CSS</English>
+    </Item>
+    <Item ID="btnSave">
+      <English>&amp;Save</English>
+    </Item>
+    <Item ID="btnDone">
+      <English>&amp;Done</English>
+    </Item>
+    <Item ID="btnPrevious">
+      <English>&amp;Previous</English>
+    </Item>
+    <Item ID="btnNext">
+      <English>&amp;Next</English>
+    </Item>
+    <Item ID="lvwDocumentSteps_col0">
+      <English>Steps</English>
+    </Item>
+    <Item ID="lvwDocumentSteps_col1">
+      <English>File Names</English>
+    </Item>
+    <Item ID="label71">
+      <English>Sections</English>
+    </Item>
+    <Item ID="label82">
+      <English>Steps</English>
+    </Item>
+    <Item ID="lvwDocumentSection_col0">
+      <English>Sections</English>
+    </Item>
+    <Item ID="lvwDocumentSection_col1">
+      <English>File Names</English>
+    </Item>
+    <Item ID="tabDocument">
+      <English>Document</English>
+    </Item>
+    <Item ID="label96">
+      <English>Vertical Rule in Gutter</English>
+    </Item>
+    <Item ID="lblPageGutter">
+      <English>Gutter Width</English>
+    </Item>
+    <Item ID="lblPageLayoutSetting">
+      <English>Layout Settings</English>
+    </Item>
+    <Item ID="lblPageColumn">
+      <English>Columns</English>
+    </Item>
+    <Item ID="lblPageMargin">
+      <English>Page Margins</English>
+    </Item>
+    <Item ID="lblPageInside">
+      <English>Inside</English>
+    </Item>
+    <Item ID="lblPageOutside">
+      <English>Outside</English>
+    </Item>
+    <Item ID="lblPageBottom">
+      <English>Bottom</English>
+    </Item>
+    <Item ID="lblPageTop">
+      <English>Top</English>
+    </Item>
+    <Item ID="lblPageHeight">
+      <English>Height</English>
+    </Item>
+    <Item ID="lblPageWidth">
+      <English>Width</English>
+    </Item>
+    <Item ID="chkBasicsCropMark">
+      <English>Crop Marks</English>
+    </Item>
+    <Item ID="label7">
+      <English>Paper Size</English>
+    </Item>
+    <Item ID="label6">
+      <English>Page Size</English>
+    </Item>
+    <Item ID="chkBasicsJustifyParagraphs">
+      <English>Justify Paragraphs?    </English>
+    </Item>
+    <Item ID="label5">
+      <English>Line Spacing (Leading)</English>
+    </Item>
+    <Item ID="label4">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="label3">
+      <English>Font Name</English>
+    </Item>
+    <Item ID="tabBasics">
+      <English>Basics</English>
+    </Item>
+    <Item ID="chkChapterIncludeVerseNumber">
+      <English>Include Verse Number 1  </English>
+    </Item>
+    <Item ID="chkChapterRaised">
+      <English>Raised       </English>
+    </Item>
+    <Item ID="chkChapterBold">
+      <English>Bold       </English>
+    </Item>
+    <Item ID="label12">
+      <English>Verse Number Format</English>
+    </Item>
+    <Item ID="label11">
+      <English>Position String</English>
+    </Item>
+    <Item ID="label10">
+      <English>Chapter String</English>
+    </Item>
+    <Item ID="label9">
+      <English>Position Chapter Numbers</English>
+    </Item>
+    <Item ID="label8">
+      <English>Chapter Numbers</English>
+    </Item>
+    <Item ID="tabChapter">
+      <English>Chapter / Verse</English>
+    </Item>
+    <Item ID="label56">
+      <English>Space After</English>
+    </Item>
+    <Item ID="label57">
+      <English>Space Before</English>
+    </Item>
+    <Item ID="label59">
+      <English>Line Spacing (Leading)</English>
+    </Item>
+    <Item ID="label60">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="label61">
+      <English>Centered</English>
+    </Item>
+    <Item ID="label62">
+      <English>Font Style</English>
+    </Item>
+    <Item ID="label63">
+      <English>New Section Headings (s1)</English>
+    </Item>
+    <Item ID="label43">
+      <English>Font Style</English>
+    </Item>
+    <Item ID="label44">
+      <English>Reference</English>
+    </Item>
+    <Item ID="label45">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="label46">
+      <English>Space After</English>
+    </Item>
+    <Item ID="label47">
+      <English>Space Before</English>
+    </Item>
+    <Item ID="label48">
+      <English>Line Spacing (Leading)</English>
+    </Item>
+    <Item ID="label49">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="label50">
+      <English>Centered</English>
+    </Item>
+    <Item ID="label51">
+      <English>Font Style</English>
+    </Item>
+    <Item ID="label52">
+      <English>Major Section Headings (\ms \ms1)</English>
+    </Item>
+    <Item ID="label39">
+      <English>Space After</English>
+    </Item>
+    <Item ID="label38">
+      <English>Space Before</English>
+    </Item>
+    <Item ID="label37">
+      <English>Line Spacing (Leading)</English>
+    </Item>
+    <Item ID="label36">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="label35">
+      <English>Centered</English>
+    </Item>
+    <Item ID="label34">
+      <English>Font Style</English>
+    </Item>
+    <Item ID="label33">
+      <English>Section Headings (\s \s1)</English>
+    </Item>
+    <Item ID="label32">
+      <English>Main Title Font Size</English>
+    </Item>
+    <Item ID="tabHeadings">
+      <English>Headings</English>
+    </Item>
+    <Item ID="label18">
+      <English>Footnote Frame</English>
+    </Item>
+    <Item ID="chkFootnotesFootnoteFrameGutterRule">
+      <English>Gutter Rule      </English>
+    </Item>
+    <Item ID="label21">
+      <English>Style</English>
+    </Item>
+    <Item ID="chkFootnotesRuleBetweenBodyAndNotes">
+      <English>Rule Between Body and Notes         </English>
+    </Item>
+    <Item ID="chkFootnotesStartEachFootnoteOnANewLine">
+      <English>Start Each Footnote on a New Line   </English>
+    </Item>
+    <Item ID="label19">
+      <English>Font Style</English>
+    </Item>
+    <Item ID="label20">
+      <English>Inside?</English>
+    </Item>
+    <Item ID="label16">
+      <English>Cross Reference Caller Font Style</English>
+    </Item>
+    <Item ID="label17">
+      <English>Footnote Caller Font Style</English>
+    </Item>
+    <Item ID="label13">
+      <English>Reference in Footnote</English>
+    </Item>
+    <Item ID="label14">
+      <English>Line Spacing (Leading) for Notes</English>
+    </Item>
+    <Item ID="label15">
+      <English>Font Size for Notes</English>
+    </Item>
+    <Item ID="tabFootnotes">
+      <English>Footnotes</English>
+    </Item>
+    <Item ID="lblTextKerning">
+      <English>Kerning</English>
+    </Item>
+    <Item ID="label84">
+      <English>Hyphenation Language</English>
+    </Item>
+    <Item ID="chkTextSpacingAutomaticVerticalJustification">
+      <English>Automatic Vertical Justification?</English>
+    </Item>
+    <Item ID="label80">
+      <English>Minimum %</English>
+    </Item>
+    <Item ID="label79">
+      <English>Maximum %</English>
+    </Item>
+    <Item ID="label77">
+      <English>Minimum %</English>
+    </Item>
+    <Item ID="label78">
+      <English>Maximum %</English>
+    </Item>
+    <Item ID="label66">
+      <English>Between Words</English>
+    </Item>
+    <Item ID="label76">
+      <English>Desired (Optimal) %</English>
+    </Item>
+    <Item ID="label81">
+      <English>Desired (Optimal) %</English>
+    </Item>
+    <Item ID="label67">
+      <English>Between Letters</English>
+    </Item>
+    <Item ID="tabTextSpacing">
+      <English>Text Spacing</English>
+    </Item>
+    <Item ID="label2">
+      <English>Reference Format</English>
+    </Item>
+    <Item ID="label70">
+      <English>Ultra XML</English>
+    </Item>
+    <Item ID="label93">
+      <English>Launch Ultra XML</English>
+    </Item>
+    <Item ID="label90">
+      <English>Import Illustrations?</English>
+    </Item>
+    <Item ID="label94">
+      <English>Add Stylesheet comments?</English>
+    </Item>
+    <Item ID="label91">
+      <English>Use Arabic-Indic Numbers </English>
+    </Item>
+    <Item ID="label95">
+      <English>Reverse Diacritic GPOS?</English>
+    </Item>
+    <Item ID="label92">
+      <English>Reverse Chapter GPOS?</English>
+    </Item>
+    <Item ID="label69">
+      <English>Typeface Names</English>
+    </Item>
+    <Item ID="label83">
+      <English>Italic</English>
+    </Item>
+    <Item ID="label85">
+      <English>Bold</English>
+    </Item>
+    <Item ID="label86">
+      <English>Bold Italic</English>
+    </Item>
+    <Item ID="label89">
+      <English>Non-consecutive Reference Sep</English>
+    </Item>
+    <Item ID="label88">
+      <English>Consecutive Reference Separator</English>
+    </Item>
+    <Item ID="label87">
+      <English>Chapter Verse Separator</English>
+    </Item>
+    <Item ID="label75">
+      <English>Font Size</English>
+    </Item>
+    <Item ID="label74">
+      <English>Page Number Location</English>
+    </Item>
+    <Item ID="label73">
+      <English>Reference Location</English>
+    </Item>
+    <Item ID="label68">
+      <English>Running Head / Foot</English>
+    </Item>
+    <Item ID="label64">
+      <English>Table Headers Font Style</English>
+    </Item>
+    <Item ID="label65">
+      <English>Table Columns</English>
+    </Item>
+    <Item ID="tabOther">
+      <English>Other</English>
+    </Item>
+    <Item ID="label31">
+      <English>InDesign Middle East</English>
+    </Item>
+    <Item ID="label29">
+      <English>Horizontal Scaling</English>
+    </Item>
+    <Item ID="label30">
+      <English>Experimental</English>
+    </Item>
+    <Item ID="chkLayoutStudyBibleLayout">
+      <English>Study Bible Layout?              </English>
+    </Item>
+    <Item ID="chkLayoutInDesignMiddleEastInstalled">
+      <English>InDesign Middle East Installed</English>
+    </Item>
+    <Item ID="chkLayoutOpticalMarginAlignment">
+      <English>Optical margin Alignment         </English>
+    </Item>
+    <Item ID="label28">
+      <English>Chiness / Japanese Layout</English>
+    </Item>
+    <Item ID="label27">
+      <English>Paragraph Justification</English>
+    </Item>
+    <Item ID="label26">
+      <English>Diacritic Positioning</English>
+    </Item>
+    <Item ID="label25">
+      <English>Character Direction</English>
+    </Item>
+    <Item ID="label24">
+      <English>Kashidas</English>
+    </Item>
+    <Item ID="label23">
+      <English>Digits</English>
+    </Item>
+    <Item ID="label22">
+      <English>Composer</English>
+    </Item>
+    <Item ID="tabLayout">
+      <English>Layout</English>
+    </Item>
+    <Item ID="lblShowProperty">
+      <English>S&amp;how Property</English>
+    </Item>
+    <Item ID="lblCSS">
+      <English>Source CSS</English>
+    </Item>
+  </Group>
+  <Group ID="tsDocumentSteps" Title="tsDocumentSteps" Translator="false">
+    <Item ID="tsDocumentSteps">
+      <English>New</English>
+    </Item>
+  </Group>
+  <Group ID="tSDocumentSections" Title="tSDocumentSections" Translator="false">
+    <Item ID="tSDocumentSections">
+      <English>New</English>
+    </Item>
+  </Group>
+  <Group ID="PopupForm" Title="PopupForm" Translator="false">
+    <Item ID="Title">
+      <English>PopupForm</English>
+    </Item>
+    <Item ID="btnBrowse">
+      <English>&amp;Browse</English>
+    </Item>
+    <Item ID="lblNote">
+      <English>Note : Empty File Name will be treated as Blank Page</English>
+    </Item>
+    <Item ID="btnCancel">
+      <English>&amp;Cancel</English>
+    </Item>
+    <Item ID="lblFileName">
+      <English>File Name </English>
+    </Item>
+    <Item ID="lblName">
+      <English>Section name </English>
+    </Item>
+    <Item ID="btnOk">
+      <English>&amp;Ok</English>
+    </Item>
+  </Group>
+  <Group ID="AboutPs" Title="AboutPs" Translator="false">
+    <Item ID="Title">
+      <English>About PublishingSolution</English>
+    </Item>
+    <Item ID="labelProductName">
+      <English>Product Name</English>
+    </Item>
+    <Item ID="labelVersion">
+      <English>Version</English>
+    </Item>
+    <Item ID="labelCopyright">
+      <English>Copyright © 2008 SIL International</English>
+    </Item>
+    <Item ID="labelCompanyName">
+      <English>SIL International</English>
+    </Item>
+    <Item ID="okButton">
+      <English>&amp;OK</English>
+    </Item>
+  </Group>
+  <Group ID="Localizer" Title="Localizer" Translator="false">
+    <Item ID="Title">
+      <English>Localizer</English>
+    </Item>
+    <Item ID="m_labelNeedsAttention">
+      <English>(attention needed)</English>
+    </Item>
+    <Item ID="m_lblToolTip">
+      <English>ToolTip:</English>
+    </Item>
+    <Item ID="m_lblShortcutKey">
+      <English>Shortcut Key:</English>
+    </Item>
+    <Item ID="m_rtbInfo">
+      <English>(info)</English>
+    </Item>
+    <Item ID="m_labelYourLanguage">
+      <English>Your Language:</English>
+    </Item>
+    <Item ID="m_textYourLanguage">
+      <English>(Your Language)</English>
+    </Item>
+    <Item ID="m_labelGroups">
+      <English>Groups of Settings:</English>
+    </Item>
+  </Group>
+  <Group ID="toolStrip1" Title="toolStrip1" Translator="false">
+    <Item ID="toolStrip1">
+      <English>toolStrip1</English>
+    </Item>
+  </Group>
+  <Group ID="StylePick" Title="StylePick" Translator="false">
+    <Item ID="Title">
+      <English>Choose Configure Tasks...</English>
+    </Item>
+    <Item ID="BtCancel">
+      <English>&amp;Cancel</English>
+    </Item>
+    <Item ID="LbDescription">
+      <English>The selected task produces the following results:</English>
+    </Item>
+    <Item ID="BtOK">
+      <English>&amp;OK</English>
+    </Item>
+    <Item ID="BtPreview">
+      <English>&amp;Preview</English>
+    </Item>
+    <Item ID="BtStyles">
+      <English>&amp;Styles</English>
+    </Item>
+    <Item ID="lbTaskStyle">
+      <English>Publication Task:</English>
+    </Item>
+  </Group>
+  <Group ID="BackUp" Title="BackUp" Translator="false">
+    <Item ID="Title">
+      <English>Backup</English>
+    </Item>
+    <Item ID="btnBrowse">
+      <English>&amp;Browse</English>
+    </Item>
+    <Item ID="lblXHTML">
+      <English>Select Backup Path</English>
+    </Item>
+    <Item ID="label1">
+      <English>Include the following fonts in backup folder</English>
+    </Item>
+    <Item ID="Btn_Cancel">
+      <English>&amp;Cancel</English>
+    </Item>
+    <Item ID="Btn_BackUp">
+      <English>B&amp;ackup</English>
+    </Item>
+  </Group>
+</LocDB>

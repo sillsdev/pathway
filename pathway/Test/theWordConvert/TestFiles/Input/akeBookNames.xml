@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BookNames>
+  <book code="MAT" abbr="Ms" short="Maꞌsiu" long="Sises Ekareei Maꞌsiu Nʉmenukaꞌpʉ" />
+  <book code="MRK" abbr="Ma" short="Maꞌ" long="Sises Ekareei Maꞌ Nʉmenukaꞌpʉ" />
+  <book code="LUK" abbr="Ʉr" short="Ʉruꞌ" long="Sises Ekareei Ʉruꞌ Nʉmenukaꞌpʉ" />
+  <book code="JHN" abbr="Isa" short="Isaan" long="Sises Ekareei Isaan Nʉmenukaꞌpʉ" />
+  <book code="ACT" abbr="Ink" short="Inkupʉꞌpʉ" long="Papa Aꞌkwarʉ Nʉkupʉꞌpʉ Sises Nennokoꞌsan Itekare Ekamaiꞌ Yawɨrɨ" />
+  <book code="ROM" abbr="Ron" short="Ron" long="Kareta Paarʉ Nennokoꞌpʉ Ron Pon Kon Enaꞌ" />
+  <book code="1CO" abbr="1Ko" short="1 Koren" long="Wapiyaroꞌ Kareta Paarʉ Nennokoꞌpʉ Koren Pon Kon Enaꞌ" />
+  <book code="2CO" abbr="2Ko" short="2 Koren" long="Iyakon Iteꞌkwaroꞌ Kareta Paarʉ Nennokoꞌpʉ Koren Pon Kon Enaꞌ" />
+  <book code="GAL" abbr="Kar" short="Kareꞌsiya" long="Kareta Paarʉ Nennokoꞌpʉ Kareꞌsiya Pon Kon Enaꞌ" />
+  <book code="EPH" abbr="Ep" short="Eꞌpeꞌsas" long="Kareta Paarʉ Nennokoꞌpʉ Eꞌpeꞌsas Pon Kon Enaꞌ" />
+  <book code="PHP" abbr="Pir" short="Piriꞌpai" long="Kareta Paarʉ Nennokoꞌpʉ Piriꞌpai Pon Kon Enaꞌ" />
+  <book code="COL" abbr="Kor" short="Koroꞌse" long="Kareta Paarʉ Nennokoꞌpʉ Koroꞌse Pon Kon Enaꞌ" />
+  <book code="1TH" abbr="1Ts" short="1 Tesaroniꞌka" long="Wapiyaroꞌ Kareta Paarʉ Nennokoꞌpʉ Tesaroniꞌka Pon Kon Enaꞌ" />
+  <book code="2TH" abbr="2Ts" short="2 Tesaroniꞌka" long="Iyakon Iteꞌkwaroꞌ Kareta Paarʉ Nennokoꞌpʉ Tesaroniꞌka Pon Kon Enaꞌ" />
+  <book code="1TI" abbr="1Tm" short="1 Temuꞌti" long="Wapiyaroꞌ Kareta Paarʉ Nennokoꞌpʉ Temuꞌti Enaꞌ" />
+  <book code="2TI" abbr="2Tm" short="2 Temuꞌti" long="Iyakon Iteꞌkwaroꞌ Kareta Paarʉ Nennokoꞌpʉ Temuꞌti Enaꞌ" />
+  <book code="TIT" abbr="Tai" short="Taiꞌtas" long="Kareta Paarʉ Nennokoꞌpʉ Taiꞌtas Enaꞌ" />
+  <book code="PHM" abbr="Pair" short="Pairiman" long="Kareta Paarʉ Nennokoꞌpʉ Pairiman Enaꞌ" />
+  <book code="HEB" abbr="Ipu" short="Ipuru" long="Ennoꞌsaꞌ Kareta Ipuru Amʉꞌ Enaꞌ" />
+  <book code="JAS" abbr="Is" short="Isens" long="Ennoꞌsaꞌ Kareta Isens Winɨpaino" />
+  <book code="1PE" abbr="1Pi" short="1 Piꞌta" long="Wapiyaroꞌ Kareta Piꞌta Winɨpaino" />
+  <book code="2PE" abbr="2Pi" short="2 Piꞌta" long="Iyakon Iteꞌkwaroꞌ Kareta Piꞌta Winɨpaino" />
+  <book code="1JN" abbr="1Ise" short="1 Isaan" long="Wapiyaroꞌ Kareta Isaan Winɨpaino" />
+  <book code="2JN" abbr="2Ise" short="2 Isaan" long="Iyakon Iteꞌkwaroꞌ Kareta Isaan Winɨpaino" />
+  <book code="3JN" abbr="3Isa" short="3 Isaan" long="Itosorʉwano Kareta Isaan Winɨpaino" />
+  <book code="JUD" abbr="Isu" short="Isutʉ" long="Ennoꞌsaꞌ Kareta Isutʉ Winɨpaino" />
+  <book code="REV" abbr="Isen" short="Isenpoikasaꞌ" long="Isenpoikasaꞌ Rʉꞌpʉ Isaan Enaꞌ" />
+  <book code="XXA" abbr="" short="" long="" />
+  <book code="XXB" abbr="" short="" long="" />
+  <book code="FRT" abbr="" short="" long="" />
+  <book code="OTH" abbr="" short="" long="" />
+  <book code="GLO" abbr="" short="Main Asi" long="" />
+  <book code="NDX" abbr="" short="Eseꞌ Ton Asiꞌ" long="" />
+  <book code="GEN" abbr="" short="Iseneses" long="Iseneses" />
+  <book code="EXO" abbr="" short="Eꞌsotas" long="Eꞌsotas" />
+  <book code="LEV" abbr="" short="Ripaitiꞌkas" long="Ripaitiꞌkas" />
+  <book code="NUM" abbr="" short="Nonpa" long="Nonpa" />
+  <book code="DEU" abbr="" short="Isuꞌtaronomi" long="Isuꞌtaronomi" />
+  <book code="JOS" abbr="" short="Isaꞌsuwa" long="Isaꞌsuwa" />
+  <book code="JDG" abbr="" short="Eseru Aimenkanin Nan" long="Eseru Aimenkanin Nan" />
+  <book code="RUT" abbr="" short="Ruꞌ" long="Ruꞌ" />
+  <book code="1SA" abbr="" short="1 Sanwerʉ" long="1 Sanwerʉ" />
+  <book code="2SA" abbr="" short="2 Sanwerʉ" long="2 Sanwerʉ" />
+  <book code="1KI" abbr="" short="1 Kin Amʉꞌ" long="1 Kin Amʉꞌ" />
+  <book code="2KI" abbr="" short="2 Kin Amʉꞌ" long="2 Kin Amʉꞌ" />
+  <book code="1CH" abbr="" short="1 Kʉronoꞌkʉrʉs" long="1 Kʉronoꞌkʉrʉs" />
+  <book code="2CH" abbr="" short="2 Kʉronoꞌkʉrʉs" long="2 Kʉronoꞌkʉrʉs" />
+  <book code="EZR" abbr="" short="Esʉra" long="Esʉra" />
+  <book code="NEH" abbr="" short="Neꞌimaya" long="Neꞌimaya" />
+  <book code="EST" abbr="" short="Esta" long="Esta" />
+  <book code="JOB" abbr="" short="Isopu" long="Isopu" />
+  <book code="PSA" abbr="" short="Eren" long="Eren" />
+  <book code="PRO" abbr="" short="Ipuꞌketʉ" long="Ipuꞌketʉ" />
+  <book code="ECC" abbr="" short="Eꞌkʉrisiyastes" long="Eꞌkʉrisiyastes" />
+  <book code="SNG" abbr="" short="Saraman Eremu" long="Saraman Eremu" />
+  <book code="ISA" abbr="" short="Aisaya" long="Aisaya" />
+  <book code="JER" abbr="" short="Iseremaya" long="Iseremaya" />
+  <book code="LAM" abbr="" short="Ikarantoꞌ" long="Ikarantoꞌ" />
+  <book code="EZK" abbr="" short="Isiꞌkiyerʉ" long="Isiꞌkiyerʉ" />
+  <book code="DAN" abbr="" short="Taniyerʉ" long="Taniyerʉ" />
+  <book code="HOS" abbr="" short="Oseya" long="Oseya" />
+  <book code="JOL" abbr="" short="Isowerʉ" long="Isowerʉ" />
+  <book code="AMO" abbr="" short="Emas" long="Emas" />
+  <book code="OBA" abbr="" short="Opataya" long="Opataya" />
+  <book code="JON" abbr="" short="Isona" long="Isona" />
+  <book code="MIC" abbr="" short="Maiꞌka" long="Maiꞌka" />
+  <book code="NAM" abbr="" short="Neꞌan" long="Neꞌan" />
+  <book code="HAB" abbr="" short="Apaꞌkaꞌ" long="Apaꞌkaꞌ" />
+  <book code="ZEP" abbr="" short="Seꞌpanaya" long="Seꞌpanaya" />
+  <book code="HAG" abbr="" short="Akiyai" long="Akiyai" />
+  <book code="ZEC" abbr="" short="Sakaraya" long="Sakaraya" />
+  <book code="MAL" abbr="" short="Maraꞌkai" long="Maraꞌkai" />
+  <book code="TOB" abbr="" short="Topayas" long="Topayas" />
+  <book code="JDT" abbr="" short="Isutiꞌ" long="Isutiꞌ" />
+  <book code="ESG" abbr="" short="" long="" />
+  <book code="WIS" abbr="" short="" long="" />
+  <book code="SIR" abbr="" short="Sairaꞌ" long="Sairaꞌ" />
+  <book code="BAR" abbr="" short="Paruꞌ" long="Paruꞌ" />
+  <book code="LJE" abbr="" short="" long="" />
+  <book code="S3Y" abbr="" short="" long="" />
+  <book code="SUS" abbr="" short="Susana" long="Susana" />
+  <book code="BEL" abbr="" short="" long="" />
+  <book code="1MA" abbr="" short="1 Maꞌkapis" long="1 Maꞌkapis" />
+  <book code="2MA" abbr="" short="2 Maꞌkapis" long="2 Maꞌkapis" />
+  <book code="3MA" abbr="" short="3 Maꞌkapis" long="3 Maꞌkapis" />
+  <book code="4MA" abbr="" short="4 Maꞌkapis" long="4 Maꞌkapis" />
+  <book code="1ES" abbr="" short="1 Estʉras" long="1 Estʉras" />
+  <book code="2ES" abbr="" short="2 Estʉras" long="2 Estʉras" />
+  <book code="MAN" abbr="" short="Manaꞌsa" long="Manaꞌsa" />
+  <book code="PS2" abbr="" short="" long="" />
+  <book code="ODA" abbr="" short="" long="" />
+  <book code="PSS" abbr="" short="" long="" />
+  <book code="JSA" abbr="" short="" long="" />
+  <book code="JDB" abbr="" short="" long="" />
+  <book code="TBS" abbr="" short="" long="" />
+  <book code="SST" abbr="" short="" long="" />
+  <book code="DNT" abbr="" short="" long="" />
+  <book code="BLT" abbr="" short="" long="" />
+  <book code="3ES" abbr="" short="" long="" />
+  <book code="EZA" abbr="" short="" long="" />
+  <book code="5EZ" abbr="" short="" long="" />
+  <book code="6EZ" abbr="" short="" long="" />
+  <book code="DAG" abbr="" short="" long="" />
+  <book code="PS3" abbr="" short="" long="" />
+  <book code="2BA" abbr="" short="" long="" />
+  <book code="LBA" abbr="" short="" long="" />
+  <book code="JUB" abbr="" short="" long="" />
+  <book code="ENO" abbr="" short="" long="" />
+  <book code="1MQ" abbr="" short="" long="" />
+  <book code="2MQ" abbr="" short="" long="" />
+  <book code="3MQ" abbr="" short="" long="" />
+  <book code="REP" abbr="" short="" long="" />
+  <book code="4BA" abbr="" short="" long="" />
+  <book code="LAO" abbr="" short="" long="" />
+  <book code="XXC" abbr="" short="" long="" />
+  <book code="XXD" abbr="" short="" long="" />
+  <book code="XXE" abbr="" short="" long="" />
+  <book code="XXF" abbr="" short="" long="" />
+  <book code="XXG" abbr="" short="" long="" />
+  <book code="BAK" abbr="" short="" long="" />
+  <book code="INT" abbr="" short="" long="" />
+  <book code="CNC" abbr="" short="" long="" />
+  <book code="TDX" abbr="" short="" long="" />
+</BookNames>

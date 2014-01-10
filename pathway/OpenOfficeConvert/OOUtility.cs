@@ -1115,7 +1115,7 @@ namespace SIL.PublishingSolution
             string file;
             if (!Common.Testing)
             {
-                file = Path.Combine(contentFilePath, "content.xml");
+                file = Common.PathCombine(contentFilePath, "content.xml");
             }
             else
             {

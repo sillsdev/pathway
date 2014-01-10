@@ -67,17 +67,17 @@ namespace SIL.Tool
                     // The next line helps those using the developer version of FieldWorks
                     pathwayDir = pathwayDir.Replace("DistFiles", @"Output\Debug").Replace("distfiles", @"Output\Debug");
                 }
-                if (!File.Exists(Path.Combine(pathwayDir, "PsExport.dll")))
+                if (!File.Exists(Common.PathCombine(pathwayDir, "PsExport.dll")))
                     pathwayDir = string.Empty;
                 if (pathwayDir == string.Empty)
                 {
                     pathwayDir = Path.GetDirectoryName(Application.ExecutablePath);
                 }
                 // If after all this fall back code, we can't find PsExport in the resulting folder, we're in trouble
-                //if (!File.Exists(Path.Combine(pathwayDir, "PsExport.dll")) && !Common.Testing)
+                //if (!File.Exists(Common.PathCombine(pathwayDir, "PsExport.dll")) && !Common.Testing)
                 //    Debug.Fail("Unable to find Pathway directory in registry.");
                 // If the Support folder exists, it should be used.
-                Common.SupportFolder = Directory.Exists(Path.Combine(pathwayDir, "PathwaySupport")) ? "PathwaySupport" : "";
+                Common.SupportFolder = Directory.Exists(Common.PathCombine(pathwayDir, "PathwaySupport")) ? "PathwaySupport" : "";
             }
             catch { }
             return pathwayDir;

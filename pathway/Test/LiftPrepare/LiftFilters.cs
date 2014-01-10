@@ -44,11 +44,11 @@ namespace Test.LiftPrepare
             string inputLift = "EntryFilter.lift";
             string inputXhtml= "EntryFilter1.xhtml";
 
-            string input =Path.Combine(_inputPath,inputLift);
-            string expected = Path.Combine(_expectedPath, inputXhtml);
-            string output = Path.Combine(_outputPath, inputXhtml);
+            string input =Common.PathCombine(_inputPath,inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputXhtml);
+            string output = Common.PathCombine(_outputPath, inputXhtml);
 
-            string ouputCopy = Path.Combine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
+            string ouputCopy = Common.PathCombine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
             File.Copy(input, ouputCopy, true);
             _projInfo = new PublicationInformation();
 
@@ -69,11 +69,11 @@ namespace Test.LiftPrepare
             string inputLift = "EntryFilter.lift";
             string inputXhtml = "EntryFilter2.xhtml";
 
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputXhtml);
-            string output = Path.Combine(_outputPath, inputXhtml);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputXhtml);
+            string output = Common.PathCombine(_outputPath, inputXhtml);
 
-            string ouputCopy = Path.Combine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
+            string ouputCopy = Common.PathCombine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
             File.Copy(input, ouputCopy, true);
             _projInfo = new PublicationInformation();
 
@@ -93,11 +93,11 @@ namespace Test.LiftPrepare
             string inputLift = "EntryFilter.lift";
             string inputXhtml = "EntryFilter3.xhtml";
 
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputXhtml);
-            string output = Path.Combine(_outputPath, inputXhtml);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputXhtml);
+            string output = Common.PathCombine(_outputPath, inputXhtml);
 
-            string ouputCopy = Path.Combine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
+            string ouputCopy = Common.PathCombine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
             File.Copy(input, ouputCopy, true);
             _projInfo = new PublicationInformation();
 
@@ -117,11 +117,11 @@ namespace Test.LiftPrepare
             string inputLift = "EntryFilter.lift";
             string inputXhtml = "EntryFilter4.xhtml";
 
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputXhtml);
-            string output = Path.Combine(_outputPath, inputXhtml);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputXhtml);
+            string output = Common.PathCombine(_outputPath, inputXhtml);
 
-            string ouputCopy = Path.Combine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
+            string ouputCopy = Common.PathCombine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
             File.Copy(input, ouputCopy, true);
             _projInfo = new PublicationInformation();
 
@@ -141,11 +141,11 @@ namespace Test.LiftPrepare
             string inputLift = "EntryFilter.lift";
             string inputXhtml = "EntryFilter5.xhtml";
 
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputXhtml);
-            string output = Path.Combine(_outputPath, inputXhtml);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputXhtml);
+            string output = Common.PathCombine(_outputPath, inputXhtml);
 
-            string ouputCopy = Path.Combine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
+            string ouputCopy = Common.PathCombine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
             File.Copy(input, ouputCopy, true);
             _projInfo = new PublicationInformation();
 
@@ -165,11 +165,11 @@ namespace Test.LiftPrepare
             string inputLift = "EntryFilter.lift";
             string inputXhtml = "EntryFilter6.xhtml";
 
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputXhtml);
-            string output = Path.Combine(_outputPath, inputXhtml);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputXhtml);
+            string output = Common.PathCombine(_outputPath, inputXhtml);
 
-            string ouputCopy = Path.Combine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
+            string ouputCopy = Common.PathCombine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
             File.Copy(input, ouputCopy, true);
             _projInfo = new PublicationInformation();
 
@@ -189,11 +189,11 @@ namespace Test.LiftPrepare
             string inputLift = "EntryFilter.lift";
             string inputXhtml = "SenseFilter1.xhtml";
 
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputXhtml);
-            string output = Path.Combine(_outputPath, inputXhtml);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputXhtml);
+            string output = Common.PathCombine(_outputPath, inputXhtml);
 
-            string ouputCopy = Path.Combine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
+            string ouputCopy = Common.PathCombine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
             File.Copy(input, ouputCopy, true);
             _projInfo = new PublicationInformation();
 
@@ -214,11 +214,11 @@ namespace Test.LiftPrepare
             string inputLift = "EntryFilter.lift";
             string inputXhtml = "SenseFilter2.xhtml";
 
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputXhtml);
-            string output = Path.Combine(_outputPath, inputXhtml);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputXhtml);
+            string output = Common.PathCombine(_outputPath, inputXhtml);
 
-            string ouputCopy = Path.Combine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
+            string ouputCopy = Common.PathCombine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
             File.Copy(input, ouputCopy, true);
             _projInfo = new PublicationInformation();
 
@@ -239,11 +239,11 @@ namespace Test.LiftPrepare
             string inputLift = "EntryFilter.lift";
             string inputXhtml = "EntrySenseFilter1.xhtml";
 
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputXhtml);
-            string output = Path.Combine(_outputPath, inputXhtml);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputXhtml);
+            string output = Common.PathCombine(_outputPath, inputXhtml);
 
-            string ouputCopy = Path.Combine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
+            string ouputCopy = Common.PathCombine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
             File.Copy(input, ouputCopy, true);
             _projInfo = new PublicationInformation();
 
@@ -269,11 +269,11 @@ namespace Test.LiftPrepare
             string inputLift = "EntryFilter.lift";
             string inputXhtml = "EntrySenseFilter2.xhtml";
 
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputXhtml);
-            string output = Path.Combine(_outputPath, inputXhtml);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputXhtml);
+            string output = Common.PathCombine(_outputPath, inputXhtml);
 
-            string outputCopy = Path.Combine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
+            string outputCopy = Common.PathCombine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
             File.Copy(input, outputCopy, true);
             _projInfo = new PublicationInformation();
 
@@ -299,11 +299,11 @@ namespace Test.LiftPrepare
             string inputLift = "EntryFilter.lift";
             string inputXhtml = "LanguageFilter1.xhtml";
 
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputXhtml);
-            string output = Path.Combine(_outputPath, inputXhtml);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputXhtml);
+            string output = Common.PathCombine(_outputPath, inputXhtml);
 
-            string outputCopy = Path.Combine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
+            string outputCopy = Common.PathCombine(_outputPath, Path.ChangeExtension(inputXhtml, ".lift"));
             File.Copy(input, outputCopy, true);
             _projInfo = new PublicationInformation();
 
@@ -323,9 +323,9 @@ namespace Test.LiftPrepare
         {
             string inputLift = "LanguageSort.lift";
 
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputLift);
-            string output = Path.Combine(_outputPath, inputLift);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputLift);
+            string output = Common.PathCombine(_outputPath, inputLift);
 
             File.Copy(input, output, true);
 
@@ -338,9 +338,9 @@ namespace Test.LiftPrepare
         public void AkooseSorting()
         {
             string inputLift = "EntrySort.lift";
-            string input = Path.Combine(_inputPath, inputLift);
-            string expected = Path.Combine(_expectedPath, inputLift);
-            string output = Path.Combine(_outputPath, inputLift);
+            string input = Common.PathCombine(_inputPath, inputLift);
+            string expected = Common.PathCombine(_expectedPath, inputLift);
+            string output = Common.PathCombine(_outputPath, inputLift);
 
             File.Copy(input, output, true);
 

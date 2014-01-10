@@ -1080,7 +1080,7 @@ namespace Test.XeLatex
             cssClass = cssTree.CreateCssProperty(input, true);
             int pageWidth = Common.GetPictureWidth(cssClass, _projInfo.ProjectInputType);
 
-            string xetexFullFile = Path.Combine(_outputPath, file + ".tex");
+            string xetexFullFile = Common.PathCombine(_outputPath, file + ".tex");
             StreamWriter xetexFile = new StreamWriter(xetexFullFile);
 
             XeLaTexStyles styles = new XeLaTexStyles();
@@ -1100,7 +1100,7 @@ namespace Test.XeLatex
         private void GetXhtmlFileFontCodeandFontName(string xhtmlFileName)
         {
             if (!File.Exists(xhtmlFileName)) return;
-            XmlDocument xdoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xdoc = Common.DeclareXMLDocument(false);
             xdoc.Load(xhtmlFileName);
             XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
             if (metaNodes != null && metaNodes.Count > 0)

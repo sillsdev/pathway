@@ -29,8 +29,11 @@ namespace SIL.PublishingSolution
 {
     public class TableOfContent
     {
-        public void CreateTOC(XmlTextWriter _writer, string inputType)
+        public void CreateTOC(XmlTextWriter _writer, string inputType, string outlineLevel)
         {
+            _writer.WriteStartElement("text:p");
+            _writer.WriteAttributeString("text:style-name", "copyright_dicBody"); //To give page break
+            _writer.WriteEndElement();
 
             _writer.WriteStartElement("text:table-of-content");
             _writer.WriteAttributeString("text:style-name", "toc_revAppendix");
@@ -75,7 +78,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
 
             _writer.WriteStartElement("text:index-source-styles");
-            _writer.WriteAttributeString("text:outline-level", "1");
+            _writer.WriteAttributeString("text:outline-level", outlineLevel);//"1"
             _writer.WriteStartElement("text:index-source-style");
 
             if (inputType.ToLower() == "dictionary")
@@ -111,6 +114,10 @@ namespace SIL.PublishingSolution
             _writer.WriteString("1");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+            _writer.WriteStartElement("text:p");
+            _writer.WriteAttributeString("text:style-name", "copyright_dicBody"); //To give page break
             _writer.WriteEndElement();
             
         }

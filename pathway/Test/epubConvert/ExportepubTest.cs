@@ -100,6 +100,12 @@ namespace Test.epubConvert
                 if (File.Exists(file))
                     File.Delete(file);
             }
+            string appDataDir = Common.GetAllUserPath();
+            if (Directory.Exists(appDataDir))
+            {
+                Directory.Delete(appDataDir, true);
+            }
+
 
             const string XhtmlName = "main.xhtml";
             const string CssName = "main.css";
@@ -110,7 +116,7 @@ namespace Test.epubConvert
             projInfo.IsReversalExist = true;
             projInfo.IsLexiconSectionExist = true;
             projInfo.ProjectInputType = "Dictionary";
-            projInfo.DefaultRevCssFileWithPath = Path.Combine(_inputPath, "FlexRev.css");
+            projInfo.DefaultRevCssFileWithPath = Common.PathCombine(_inputPath, "FlexRev.css");
             projInfo.ProjectName = "EBook (epub)_" + DateTime.Now.Date.ToShortDateString() + "_" +
                                    DateTime.Now.Date.ToShortTimeString();
             var target = new Exportepub();
@@ -154,7 +160,7 @@ namespace Test.epubConvert
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
-            var filePath = Path.Combine(FolderName, "PartFile00001_.xhtml");
+            var filePath = Common.PathCombine(FolderName, "PartFile00001_.xhtml");
             XmlReader xmlReader = XmlReader.Create(FileOutput(filePath), xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -175,7 +181,7 @@ namespace Test.epubConvert
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
-            var filePath = Path.Combine(FolderName, "PartFile00002_.xhtml");
+            var filePath = Common.PathCombine(FolderName, "PartFile00002_.xhtml");
             XmlReader xmlReader = XmlReader.Create(FileOutput(filePath), xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();

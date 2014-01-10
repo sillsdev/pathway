@@ -13,9 +13,12 @@
 // ---------------------------------------------------------------------------------------------
 using System;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Reflection;
+using System.Xml.Xsl;
+using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Win32;
 using SIL.Tool;
 using System.Collections.Generic;
@@ -66,14 +69,7 @@ namespace SIL.PublishingSolution
                             break;
                         case "--files":
                         case "-f":
-                            // store the files in our internal list for now 
-                            // (single filenames and * will end up as a single element in the list)
-                            while (args[i].EndsWith(","))
-                            {
-                                files.Add(args[i].Substring(0, args[i].Length - 1));
-                                i++;
-                            }
-                            files.Add(args[i++]);
+                            i = CaptureFileList(args, i, files);
                             break;
                         case "--inputformat":
                         case "-if":
@@ -132,26 +128,54 @@ namespace SIL.PublishingSolution
                             Environment.Exit(0);
                             break;
                         default:
+                            i = CaptureFileList(args, --i, files);
+                            if (files.Count > 0)
+                            {
+                                var lcName = files[0].ToLower();
+                                if (lcName.EndsWith(".zip"))
+                                {
+                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.PTBUNDLE, projectInfo, lcName);
+                                    break;
+                                }
+                                if (lcName.EndsWith(".xhtml"))
+                                {
+                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.XHTML, projectInfo, lcName, "Dictionary");
+                                    break;
+                                }
+                                if (lcName.EndsWith(".usx"))
+                                {
+                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USX, projectInfo, lcName);
+                                    break;
+                                }
+                                if (lcName.EndsWith(".usfm") || lcName.EndsWith(".sfm"))
+                                {
+                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USFM, projectInfo, lcName);
+                                    break;
+                                }
+                            }
                             Usage();
                             throw new ArgumentException("Invalid Command Line Argument: " + args[i]);
                     }
                 }
-
+                if (string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) && files.Count > 0)
+                {
+                    projectInfo.DefaultXhtmlFileWithPath = files[0];
+                }
                 if (!string.IsNullOrEmpty(projectInfo.ProjectPath))
                 {
                     if (!string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) && !Path.IsPathRooted(projectInfo.DefaultXhtmlFileWithPath))
                     {
-                        projectInfo.DefaultXhtmlFileWithPath = Path.Combine(projectInfo.ProjectPath, projectInfo.DefaultXhtmlFileWithPath);
+                        projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, projectInfo.DefaultXhtmlFileWithPath);
                     }
                     if (!string.IsNullOrEmpty(projectInfo.DefaultCssFileWithPath) && !Path.IsPathRooted(projectInfo.DefaultCssFileWithPath))
                     {
-                        projectInfo.DefaultRevCssFileWithPath = Path.Combine(projectInfo.ProjectPath, projectInfo.DefaultCssFileWithPath);
+                        projectInfo.DefaultRevCssFileWithPath = Common.PathCombine(projectInfo.ProjectPath, projectInfo.DefaultCssFileWithPath);
                     }
                     for (int n = 0; n < files.Count; n++)
                     {
                         if (!Path.IsPathRooted(files[n]))
                         {
-                            files[n] = Path.Combine(projectInfo.ProjectPath, files[n]);
+                            files[n] = Common.PathCombine(projectInfo.ProjectPath, files[n]);
                         }
                     }
                 }
@@ -189,6 +213,56 @@ namespace SIL.PublishingSolution
                 // run headless from the command line
                 Common.Testing = true;
                 //_projectInfo.ProgressBar = null;
+                if (inFormat == InputFormat.PTBUNDLE)
+                {
+                    var zf = new FastZip();
+                    zf.ExtractZip(files[0], projectInfo.ProjectPath, ".*");
+                    var metadata = Common.DeclareXMLDocument(false);
+                    metadata.Load(Common.PathCombine(projectInfo.ProjectPath, "metadata.xml"));
+                    var titleNode = metadata.SelectSingleNode("//bookList[@id='default']/name");
+                    Param.UpdateTitleMetadataValue(Param.Title, titleNode.InnerText, false);
+                    var descriptionNode = metadata.SelectSingleNode("//bookList[@id='default']//range");
+                    Param.UpdateMetadataValue(Param.Description, descriptionNode.InnerText);
+                    var rightsHolderNode = metadata.SelectSingleNode("//rightsHolder");
+                    Param.UpdateMetadataValue(Param.Publisher, rightsHolderNode.InnerText);
+                    var copyrightNode = metadata.SelectSingleNode("//statement");
+                    Param.UpdateMetadataValue(Param.CopyrightHolder, copyrightNode.InnerText);
+                    var bookNodes = metadata.SelectNodes("//bookList[@id='default']//book");
+                    var usxFolder = Common.PathCombine(projectInfo.ProjectPath, "USX");
+                    var xmlText = new StringBuilder(@"<usx version=""2.0"">");
+                    var oneBook = Common.DeclareXMLDocument(false);
+                    foreach (XmlElement bookNode in bookNodes)
+                    {
+                        oneBook.Load(Common.PathCombine(usxFolder, bookNode.SelectSingleNode("@code").InnerText + ".usx"));
+                        xmlText.Append(oneBook.DocumentElement.InnerXml);
+                        oneBook.RemoveAll();
+                    }
+                    xmlText.Append(@"</usx>" + "\r\n");
+                    var fileName = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".xhtml");
+                    var databaseName = metadata.SelectSingleNode("//identification/abbreviation");
+                    var linkParam = new Dictionary<string, object>();
+                    linkParam["dateTime"] = DateTime.Now.ToShortDateString();
+                    linkParam["user"] = "ukn";
+                    var wsNode = metadata.SelectSingleNode("//language/iso");
+                    linkParam["ws"] = wsNode.InnerText;
+                    linkParam["userWs"] = wsNode.InnerText;
+                    var nameNode = metadata.SelectSingleNode("//identification/description");
+                    linkParam["projName"] = nameNode.InnerText;
+                    var langNameNode = metadata.SelectSingleNode("//language/name");
+                    linkParam["langInfo"] = string.Format("{0}:{1}", wsNode.InnerText, langNameNode.InnerText);
+                    var ppl = new ParatextPathwayLink(databaseName.InnerText, linkParam);
+                    ppl.ConvertUsxToPathwayXhtmlFile(xmlText.ToString(), fileName);
+                    projectInfo.DefaultXhtmlFileWithPath = fileName;
+                    var ptxStyle2Css = new XslCompiledTransform();
+                    ptxStyle2Css.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                        "PathwayB.ptx2css.xsl")));
+                    projectInfo.DefaultCssFileWithPath = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".css");
+                    var writer = new XmlTextWriter(projectInfo.DefaultCssFileWithPath, Encoding.UTF8);
+                    ptxStyle2Css.Transform(Common.PathCombine(projectInfo.ProjectPath, "styles.xml"), null, writer);
+                    writer.Close();
+                    metadata.RemoveAll();
+                    inFormat = InputFormat.XHTML;
+                }
                 if (inFormat == InputFormat.USFM)
                 {
                     // convert from USFM to xhtml
@@ -210,9 +284,9 @@ namespace SIL.PublishingSolution
                             something => (something.ToLower().Equals("main.xhtml"))
                             );
                         projectInfo.DefaultXhtmlFileWithPath = (index >= 0)
-                                                                   ? Path.Combine(projectInfo.ProjectPath,
+                                                                   ? Common.PathCombine(projectInfo.ProjectPath,
                                                                                   files[index])
-                                                                   : Path.Combine(projectInfo.ProjectPath, files[0]);
+                                                                   : Common.PathCombine(projectInfo.ProjectPath, files[0]);
                         // reversal index - needs to be named "flexrev.xhtml" 
                         // (for compatibility with transforms in Pathway)
                         index = files.FindIndex(
@@ -225,12 +299,15 @@ namespace SIL.PublishingSolution
                         projectInfo.SwapHeadword = false;
                         projectInfo.FromPlugin = true;
                         projectInfo.DefaultRevCssFileWithPath =
-                            Path.Combine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
+                            Common.PathCombine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
                         projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.ProjectPath);
                     }
                     else if (projectInfo.ProjectInputType == "Scripture")
                     {
-                        projectInfo.DefaultXhtmlFileWithPath = Path.Combine(projectInfo.ProjectPath, files[0]);
+                        if (projectInfo.DefaultXhtmlFileWithPath == null)
+                        {
+                            projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, files[0]);
+                        }
                     }
                 }
 
@@ -263,7 +340,7 @@ namespace SIL.PublishingSolution
                     Param.Write();
                 }
 
-                var tpe = new PsExport { Destination = exportType, DataType = projectInfo.ProjectInputType };
+                var tpe = new PsExport { Destination = Param.PrintVia, DataType = projectInfo.ProjectInputType };
                 tpe.ProgressBar = null;
                 tpe.Export(projectInfo.DefaultXhtmlFileWithPath);
 
@@ -290,6 +367,33 @@ namespace SIL.PublishingSolution
                 Environment.Exit(-1);
             }
             Environment.Exit(0);
+        }
+
+        private static InputFormat SetDefaultsBasedOnInputFormat(InputFormat inFormat, PublicationInformation projectInfo, string lcName)
+        {
+            return SetDefaultsBasedOnInputFormat(inFormat, projectInfo, lcName, "Scripture");
+        }
+        private static InputFormat SetDefaultsBasedOnInputFormat(InputFormat inFormat, PublicationInformation projectInfo, string lcName, string inputType)
+        {
+            if (string.IsNullOrEmpty(projectInfo.ProjectPath))
+            {
+                projectInfo.ProjectPath = Path.GetDirectoryName(lcName);
+            }
+            projectInfo.ProjectInputType = inputType;
+            return inFormat;
+        }
+
+        private static int CaptureFileList(string[] args, int i, List<string> files)
+        {
+// store the files in our internal list for now 
+            // (single filenames and * will end up as a single element in the list)
+            while (args[i].EndsWith(","))
+            {
+                files.Add(args[i].Substring(0, args[i].Length - 1));
+                i++;
+            }
+            files.Add(args[i++]);
+            return i;
         }
 
         private static void Usage()
@@ -363,25 +467,25 @@ namespace SIL.PublishingSolution
             if (tmpFiles.Length == 0)
             {
                 // not here - check in the "gather" subdirectory
-                if (Directory.Exists(Path.Combine(projInfo.ProjectPath, "gather")))
+                if (Directory.Exists(Common.PathCombine(projInfo.ProjectPath, "gather")))
                 // edb 3/30/12 - make sure gather subdirectory exists
                 {
-                    tmpFiles = Directory.GetFiles(Path.Combine(projInfo.ProjectPath, "gather"), "*.sty");
+                    tmpFiles = Directory.GetFiles(Common.PathCombine(projInfo.ProjectPath, "gather"), "*.sty");
                     if (tmpFiles.Length > 0)
                     {
-                        styFile = Path.Combine(Path.Combine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
+                        styFile = Common.PathCombine(Common.PathCombine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
                     }
                 }
             }
             else
             {
-                styFile = Path.Combine(projInfo.ProjectPath, tmpFiles[0]);
+                styFile = Common.PathCombine(projInfo.ProjectPath, tmpFiles[0]);
             }
             if (styFile == null)
             {
                 // edb 3/30/12 - no usfm stylesheet (*.sty) found - use the default.sty file
                 string defaultStyPath = Common.FromRegistry("default.sty");
-                var targetStyPath = Path.Combine(projInfo.ProjectPath, "default.sty");
+                var targetStyPath = Common.PathCombine(projInfo.ProjectPath, "default.sty");
                 File.Copy(defaultStyPath, targetStyPath, true);
                 styFile = targetStyPath;
             }
@@ -404,7 +508,7 @@ namespace SIL.PublishingSolution
 
             foreach (var file in files)
             {
-                string filepattern = Path.IsPathRooted(file)? file: Path.Combine(projInfo.ProjectPath, file);
+                string filepattern = Path.IsPathRooted(file)? file: Common.PathCombine(projInfo.ProjectPath, file);
                 foreach (string filename in Directory.GetFiles(Path.GetDirectoryName(filepattern), Path.GetFileName(filepattern)))
                 {
                     System.IO.StringWriter stringWriter = new System.IO.StringWriter();
@@ -414,7 +518,7 @@ namespace SIL.PublishingSolution
                     {
                         // load the ParatextSupport DLL dynamically
                         Assembly asmPTSupport =
-                            Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+                            Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
                         Type tSfmToUsx = asmPTSupport.GetType("SIL.PublishingSolution.SFMtoUsx");
                         Object objSFMtoUsx = null;
                         if (tSfmToUsx != null)
@@ -453,7 +557,7 @@ namespace SIL.PublishingSolution
             {
                 // load the ParatextSupport DLL dynamically
                 Assembly asmPTSupport =
-                    Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+                    Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
 
                 // Convert the stylesheet to css
                 // new ScrStylesheet(styFile)
@@ -467,14 +571,14 @@ namespace SIL.PublishingSolution
                     PropertyInfo piStyFullPath = tStyToCSS.GetProperty("StyFullPath",
                                                                        BindingFlags.Public | BindingFlags.Instance);
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
-                    // styToCss.ConvertStyToCSS(Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
+                    // styToCss.ConvertStyToCSS(Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
                     Object[] args = new object[1];
-                    args[0] = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+                    args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
                     Object oResult = tStyToCSS.InvokeMember("ConvertStyToCSS",
                                                             BindingFlags.Default | BindingFlags.InvokeMethod, null,
                                                             oScrStylesheet, args);
                 }
-                projInfo.DefaultCssFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+                projInfo.DefaultCssFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
 
                 // now convert to xhtml
                 Type tPPL = asmPTSupport.GetType("SIL.PublishingSolution.ParatextPathwayLink");
@@ -499,12 +603,12 @@ namespace SIL.PublishingSolution
                     }
                     Object[] argsConvert = new object[2];
                     argsConvert[0] = scrBooksDoc.InnerXml;
-                    argsConvert[1] = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+                    argsConvert[1] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
                     var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile",
                                                  BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL,
                                                  argsConvert);
                 }
-                projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath,
+                projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projInfo.ProjectPath,
                                                                  projInfo.ProjectName + ".xhtml");
             }
             catch (FileNotFoundException)
@@ -539,24 +643,24 @@ namespace SIL.PublishingSolution
             if (tmpFiles.Length == 0)
             {
                 // not here - check in the "gather" subdirectory
-                if (Directory.Exists(Path.Combine(projInfo.ProjectPath, "gather"))) // edb 3/30/12 - make sure gather subdirectory exists
+                if (Directory.Exists(Common.PathCombine(projInfo.ProjectPath, "gather"))) // edb 3/30/12 - make sure gather subdirectory exists
                 {
-                    tmpFiles = Directory.GetFiles(Path.Combine(projInfo.ProjectPath, "gather"), "*.sty");
+                    tmpFiles = Directory.GetFiles(Common.PathCombine(projInfo.ProjectPath, "gather"), "*.sty");
                     if (tmpFiles.Length > 0)
                     {
-                        styFile = Path.Combine(Path.Combine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
+                        styFile = Common.PathCombine(Common.PathCombine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
                     }
                 }
             }
             else
             {
-                styFile = Path.Combine(projInfo.ProjectPath, tmpFiles[0]);
+                styFile = Common.PathCombine(projInfo.ProjectPath, tmpFiles[0]);
             }
             if (styFile == null)
             {
                 // edb 3/30/12 - no usfm stylesheet (*.sty) found - use the default.sty file
                 string defaultStyPath = Common.FromRegistry("default.sty");
-                var targetStyPath = Path.Combine(projInfo.ProjectPath, "default.sty");
+                var targetStyPath = Common.PathCombine(projInfo.ProjectPath, "default.sty");
                 File.Copy(defaultStyPath, targetStyPath, true);
                 styFile = targetStyPath;
             }
@@ -578,7 +682,7 @@ namespace SIL.PublishingSolution
             }
             foreach (var file in files)
             {
-                string filename = Path.Combine(projInfo.ProjectPath, file);
+                string filename = Common.PathCombine(projInfo.ProjectPath, file);
                 if (File.Exists(filename))
                 {
                     var streamReader = new StreamReader(filename);
@@ -600,7 +704,7 @@ namespace SIL.PublishingSolution
                         {
                             // dynamically load the ParatextShared DLL
                             var asmLoc = ParatextInstallDir();
-                            //Assembly asm = Assembly.LoadFrom(Path.Combine((asmLoc.Length == 0 ? PathwayPath.GetPathwayDir() : asmLoc), "ParatextShared.dll"));
+                            //Assembly asm = Assembly.LoadFrom(Common.PathCombine((asmLoc.Length == 0 ? PathwayPath.GetPathwayDir() : asmLoc), "ParatextShared.dll"));
                             Assembly asm = Assembly.Load("ParatextShared, Version=7.3.0.0, Culture=neutral, PublicKeyToken=null");
 
                             // Try to load the UsfmToUsx class. Thie will tell us if we're using the older API (PT 7.1).
@@ -698,7 +802,7 @@ namespace SIL.PublishingSolution
             try
             {
                 // load the ParatextSupport DLL dynamically
-                Assembly asmPTSupport = Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+                Assembly asmPTSupport = Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
 
                 // Convert the stylesheet to css
                 // new ScrStylesheet(styFile)
@@ -711,12 +815,12 @@ namespace SIL.PublishingSolution
                     // styToCss.StyFullPath = styFile
                     PropertyInfo piStyFullPath = tStyToCSS.GetProperty("StyFullPath", BindingFlags.Public | BindingFlags.Instance);
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
-                    // styToCss.ConvertStyToCSS(Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
+                    // styToCss.ConvertStyToCSS(Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
                     Object[] args = new object[1];
-                    args[0] = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+                    args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
                     Object oResult = tStyToCSS.InvokeMember("ConvertStyToCSS", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);
                 }
-                projInfo.DefaultCssFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+                projInfo.DefaultCssFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
 
                 // now convert to xhtml
                 Type tPPL = asmPTSupport.GetType("SIL.PublishingSolution.ParatextPathwayLink");
@@ -739,10 +843,10 @@ namespace SIL.PublishingSolution
                     }
                     Object[] argsConvert = new object[2];
                     argsConvert[0] = scrBooksDoc.InnerXml;
-                    argsConvert[1] = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+                    argsConvert[1] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
                     var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsConvert);
                 }
-                projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+                projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
             }
             catch (FileNotFoundException)
             {
@@ -772,18 +876,18 @@ namespace SIL.PublishingSolution
             if (tmpFiles.Length == 0)
             {
                 // not here - check in the "gather" subdirectory
-                tmpFiles = Directory.GetFiles(Path.Combine(projInfo.ProjectPath, "gather"), "*.sty");
-                styFile = Path.Combine(Path.Combine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
+                tmpFiles = Directory.GetFiles(Common.PathCombine(projInfo.ProjectPath, "gather"), "*.sty");
+                styFile = Common.PathCombine(Common.PathCombine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
             }
             else
             {
-                styFile = Path.Combine(projInfo.ProjectPath, tmpFiles[0]);
+                styFile = Common.PathCombine(projInfo.ProjectPath, tmpFiles[0]);
             }
 
             try
             {
                 // load the ParatextSupport DLL dynamically
-                Assembly asm = Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+                Assembly asm = Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
 
                 // Convert the .sty stylesheet to css
                 // new ScrStylesheet(styFile)
@@ -796,12 +900,12 @@ namespace SIL.PublishingSolution
                     // styToCss.StyFullPath = styFile
                     PropertyInfo piStyFullPath = tStyToCSS.GetProperty("StyFullPath", BindingFlags.Public | BindingFlags.Instance);
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
-                    // styToCss.ConvertStyToCSS(Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
+                    // styToCss.ConvertStyToCSS(Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
                     Object[] args = new object[1];
-                    args[0] = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+                    args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
                     Object oResult = tStyToCSS.InvokeMember("ConvertStyToCSS", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);
                 }
-                projInfo.DefaultCssFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+                projInfo.DefaultCssFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
 
                 // collect the files and convert them to XmlDocuments
                 if (files[0] == "*")
@@ -821,10 +925,10 @@ namespace SIL.PublishingSolution
                 var docs = new List<XmlDocument>();
                 foreach (var file in files)
                 {
-                    if (File.Exists(Path.Combine(projInfo.ProjectPath, file)))
+                    if (File.Exists(Common.PathCombine(projInfo.ProjectPath, file)))
                     {
                         var xmlDoc = new XmlDocument { XmlResolver = null };
-                        xmlDoc.Load(Path.Combine(projInfo.ProjectPath, file));
+                        xmlDoc.Load(Common.PathCombine(projInfo.ProjectPath, file));
                         docs.Add(xmlDoc);
                     }
                 }
@@ -850,10 +954,10 @@ namespace SIL.PublishingSolution
                     }
                     Object[] argsConvert = new object[2];
                     argsConvert[0] = scrBooksDoc.InnerXml;
-                    argsConvert[1] = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ","_") + ".xhtml");
+                    argsConvert[1] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ","_") + ".xhtml");
                     var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsConvert);
                 }
-                projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ", "_") + ".xhtml");
+                projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ", "_") + ".xhtml");
 
             }
             catch (FileNotFoundException)

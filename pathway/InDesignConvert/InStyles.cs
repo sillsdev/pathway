@@ -72,6 +72,10 @@ namespace SIL.PublishingSolution
             {
                 headerFontName = _cssProperty["div_.zxx"]["font-family"];
             }
+            else if (_cssProperty.ContainsKey("headword") && _cssProperty["headword"].ContainsKey("font-family"))
+            {
+                headerFontName = _cssProperty["headword"]["font-family"];
+            }
             return headerFontName;
         }
 

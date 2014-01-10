@@ -16,6 +16,9 @@ namespace SIL.PublishingSolution
         private XmlDocument _contentXMLdoc;
         public void SetTableColumnCount(string contentFilePath, Dictionary<string, int> tableColumnModify)
         {
+            if(tableColumnModify == null || tableColumnModify.Count == 0)
+                return;
+
             string _xPath;
             _contentXMLdoc = new XmlDocument();
             _contentXMLdoc.PreserveWhitespace = true;

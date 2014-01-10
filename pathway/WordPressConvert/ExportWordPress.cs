@@ -156,7 +156,7 @@ namespace SIL.PublishingSolution
             //{
             //    cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
             //    string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
-            //    projInfo.DefaultXhtmlFileWithPath = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+            //    projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
             //    AfterBeforeProcessEpub afterBeforeProcessReversal = new AfterBeforeProcessEpub();
             //    afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
             //    Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", "&#x2007;");

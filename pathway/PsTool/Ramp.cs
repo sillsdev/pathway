@@ -642,7 +642,7 @@ namespace SIL.PublishingSolution
         {
             CreateRampJSON(Path.GetDirectoryName(_folderPath));
 
-            string metcFileName = Path.Combine(Path.GetDirectoryName(_folderPath), "temp.json");
+            string metcFileName = Common.PathCombine(Path.GetDirectoryName(_folderPath), "temp.json");
 
             string text = File.ReadAllText(metcFileName);
 
@@ -1011,7 +1011,7 @@ namespace SIL.PublishingSolution
         /// <param name="folderPath"></param>
         private void CreateRampJSON(string folderPath)
         {
-            string metcFileName = Path.Combine(folderPath, "temp.json");
+            string metcFileName = Common.PathCombine(folderPath, "temp.json");
 
             var json = CreateRampFile(metcFileName);
             //CreateRampId(json);
@@ -1652,9 +1652,9 @@ namespace SIL.PublishingSolution
                 {
                     if (!filename.Contains("Copyrights"))
                     {
-                        licenseXml = Path.Combine(licenseXml, "Copyrights");
+                        licenseXml = Common.PathCombine(licenseXml, "Copyrights");
                     }
-                    licenseXml = Path.Combine(licenseXml, filename);
+                    licenseXml = Common.PathCombine(licenseXml, filename);
                 }
                 else
                 {
@@ -1710,8 +1710,8 @@ namespace SIL.PublishingSolution
             filesCollection.AddRange(Directory.GetFiles(Path.GetDirectoryName(_folderPath)));
 
             List<string> dirCollection = new List<string>();
-            dirCollection.Add(Path.Combine(Path.GetDirectoryName(_folderPath), "USX"));
-            dirCollection.Add(Path.Combine(Path.GetDirectoryName(_folderPath), "SFM"));
+            dirCollection.Add(Common.PathCombine(Path.GetDirectoryName(_folderPath), "USX"));
+            dirCollection.Add(Common.PathCombine(Path.GetDirectoryName(_folderPath), "SFM"));
 
             using (ZipFile zipFile = ZipFile.Create(Common.PathCombine(Path.GetDirectoryName(_folderPath), Param.GetMetadataValue(Param.Title)) + ".ramp"))
             {
@@ -1736,26 +1736,28 @@ namespace SIL.PublishingSolution
 
         private void CleanUpFolder(List<string> files, string folderPath)
         {
-            List<string> validExtension = new List<string>();
-            DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
-
-            validExtension.AddRange(_outputExtension.Split(','));
-
-            foreach (var file in files)
+            try
             {
-                string ext = Path.GetExtension(file);
+                List<string> validExtension = new List<string>();
+                DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
 
-                if (!validExtension.Contains(ext))
+                validExtension.AddRange(_outputExtension.Split(','));
+
+                foreach (var file in files)
                 {
-                    File.Delete(file);
+                    string ext = Path.GetExtension(file);
+
+                    if (!validExtension.Contains(ext))
+                    {
+                        File.Delete(file);
+                    }
                 }
-            }
 
-            foreach (DirectoryInfo subfolder in directoryInfo.GetDirectories())
-            {
-                subfolder.Delete(true);
-            }
-
+                foreach (DirectoryInfo subfolder in directoryInfo.GetDirectories())
+                {
+                    subfolder.Delete(true);
+                }
+            }catch{}
         }
 
 
@@ -1769,10 +1771,10 @@ namespace SIL.PublishingSolution
             string structMap = CreateStructMap();
 
             Param.LoadSettings();
-            string xmlSettings = Path.Combine(Path.GetDirectoryName(Param.SettingPath), "mets.xml");
+            string xmlSettings = Common.PathCombine(Path.GetDirectoryName(Param.SettingPath), "mets.xml");
             if (File.Exists(xmlSettings))
             {
-                string xmlFileNewPath = Path.Combine(Path.GetDirectoryName(_folderPath), Path.GetFileName(xmlSettings));
+                string xmlFileNewPath = Common.PathCombine(Path.GetDirectoryName(_folderPath), Path.GetFileName(xmlSettings));
                 if (File.Exists(xmlFileNewPath))
                 {
                     File.Delete(xmlFileNewPath);

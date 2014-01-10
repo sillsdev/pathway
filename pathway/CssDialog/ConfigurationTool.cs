@@ -56,7 +56,8 @@ namespace SIL.PublishingSolution
             {
                 if (Directory.Exists(allUsersPath))
                 {
-                    Directory.Delete(allUsersPath, true);
+                    DirectoryInfo di = new DirectoryInfo(allUsersPath);
+                    Common.CleanDirectory(di);
                 }
             }
         }
@@ -777,6 +778,11 @@ namespace SIL.PublishingSolution
         {
             get { return chkHideSpaceVerseNo; }
         }
+
+        public CheckBox ChkSplitFileByLetter
+        {
+            get { return chkSplitFileByLetter; }
+        }
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
@@ -1403,7 +1409,8 @@ namespace SIL.PublishingSolution
                     {
                         if (Directory.Exists(allUsersPath))
                         {
-                            Directory.Delete(allUsersPath, true);
+                            DirectoryInfo di = new DirectoryInfo(allUsersPath);
+                            Common.CleanDirectory(di);
                         }
                     }
                 }
@@ -1449,6 +1456,12 @@ namespace SIL.PublishingSolution
         private void stylesGrid_SelectionChanged(object sender, EventArgs e)
         {
             _CToolBL.stylesGrid_SelectionChanged(sender, e);
+        }
+
+        private void chkSplitFileByLetter_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkSplitFileByLetter_CheckStateChangedBL(sender, e);
         }
     }
 }

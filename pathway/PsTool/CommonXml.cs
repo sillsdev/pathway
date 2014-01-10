@@ -146,8 +146,8 @@ namespace SIL.Tool
                                     {
                                         metaName = Common.GetAllUserAppPath();
                                         metaName = Common.RightRemove(metaName, "sil");
-                                        metaName = Path.Combine(metaName, "fieldworks");
-                                        //metaName = Path.Combine(metaName, "Projects");
+                                        metaName = Common.PathCombine(metaName, "fieldworks");
+                                        //metaName = Common.PathCombine(metaName, "Projects");
                                     }
                                     else if (metaName.IndexOf("file://") >= 0) // from the file access
                                     {
@@ -191,8 +191,8 @@ namespace SIL.Tool
                                         {
                                             metaName = Common.GetAllUserAppPath();
                                             metaName = Common.RightRemove(metaName, "sil");
-                                            metaName = Path.Combine(metaName, "fieldworks");
-                                            //metaName = Path.Combine(metaName, "Projects");
+                                            metaName = Common.PathCombine(metaName, "fieldworks");
+                                            //metaName = Common.PathCombine(metaName, "Projects");
                                         }
                                         else if (metaName.IndexOf("file://") >= 0) // from the file access
                                         {
@@ -252,7 +252,7 @@ namespace SIL.Tool
 
             if (metaDataFull == string.Empty)
             {
-                metaDataFull = Path.Combine(Path.Combine(Path.Combine(Path.Combine(GetAllUserAppPath(), "SIL"), "Pathway"), _projectInputType), metaData);
+                metaDataFull = Common.PathCombine(Common.PathCombine(Common.PathCombine(Common.PathCombine(GetAllUserAppPath(), "SIL"), "Pathway"), _projectInputType), metaData);
             }
 
             if (!File.Exists(metaDataFull)) return _metaDataDic;
@@ -525,7 +525,7 @@ namespace SIL.Tool
                 {
                     string dataPath = Path.GetDirectoryName(src);
                     fileName = Path.GetFileName(src); // para + database + fileName
-                    dataPath = Path.Combine(dataPath, databaseName);
+                    dataPath = Common.PathCombine(dataPath, databaseName);
                     string pictureFileName = PathCombine(dataPath, fileName);
                     if (File.Exists(pictureFileName))
                     {
@@ -669,6 +669,7 @@ namespace SIL.Tool
                 for (int i = 0; i < countChild; i++)
                 {
                     headnode.RemoveChild(findnodes[0]);
+                    break;
                 }
             }
             else
@@ -1199,7 +1200,7 @@ namespace SIL.Tool
             string allUserPath = Path.GetTempPath();
             for (int i = 0; i < counter; i++)
             {
-                string fileName = Path.Combine(allUserPath, filenamePrefix + (i + 1) + ".xhtml");
+                string fileName = Common.PathCombine(allUserPath, filenamePrefix + (i + 1) + ".xhtml");
                 DeleteFile(fileName);
                 XmlTextWriter writer = null;
                 try

@@ -123,7 +123,7 @@ namespace SIL.PublishingSolution
             foreach (var className in _cssClass)
             {
                 bool isvalidProperty = false;
-                
+
                 list.Clear();
                 GetMarginValue(className.Key, list, "top");
                 GetMarginValue(className.Key, list, "right");
@@ -157,7 +157,7 @@ namespace SIL.PublishingSolution
                     bottomValue + "\", \"" + leftValue + "\", \"";
 
                     //margin = margin + pair.Key + "\", \"" + pair.Value[0] + "\", \"" + pair.Value[1] + "\", \"" +
-                             //pair.Value[2] + "\", \"" + pair.Value[3] + "\", \"";
+                    //pair.Value[2] + "\", \"" + pair.Value[3] + "\", \"";
                     break;
                 }
             }
@@ -316,10 +316,10 @@ namespace SIL.PublishingSolution
 
         private void GetMarginValue(string className, IList list, string dimension)
         {
-            string styleName = "class-margin-" + dimension ;
+            string styleName = "class-margin-" + dimension;
             string margin = _cssClass[className].ContainsKey(styleName) ? _cssClass[className][styleName] : "0";
 
-            if (margin != "0" )
+            if (margin != "0")
             {
                 list.Add(margin);
             }
@@ -364,13 +364,8 @@ namespace SIL.PublishingSolution
         {
             if (Directory.Exists(destFolder))
             {
-                try
-                {
-                    Directory.Delete(destFolder, true);
-                }
-                catch 
-                {
-                }
+                DirectoryInfo di = new DirectoryInfo(destFolder);
+                Common.CleanDirectory(di);
             }
             Directory.CreateDirectory(destFolder);
             string[] files = Directory.GetFiles(sourceFolder);
