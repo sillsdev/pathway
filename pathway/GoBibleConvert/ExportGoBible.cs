@@ -302,7 +302,7 @@ namespace SIL.PublishingSolution
             }
             using (StreamWriter sw = new StreamWriter(fileLoc))
             {
-                var info = "Bible text exported from Paratext, " + GetInfo(Param.CopyrightHolder);
+                var info = "Bible text exported from Paratext, " + GetInfo(Common.UpdateCopyrightYear(Param.CopyrightHolder));
                 sw.WriteLine("Info: " + info);
 
                 if (_isLinux)

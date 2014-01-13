@@ -1633,6 +1633,7 @@ namespace SIL.PublishingSolution
         {
             Param.LoadSettings();
             string firstPart = Param.GetMetadataValue(Param.CopyrightHolder);
+            firstPart = Common.UpdateCopyrightYear(firstPart);
             string secondPart = GetLicenseInformation(Param.GetMetadataValue(Param.CopyrightPageFilename));
             return firstPart + " " + secondPart.Replace("\r", "").Replace("\n", "").Replace("\t", "");
         }

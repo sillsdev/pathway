@@ -154,7 +154,7 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("rdf:Alt");
             _writer.WriteStartElement("rdf:li");
             _writer.WriteAttributeString("xml:lang", "x-default");
-            _writer.WriteString(_metaDataDic["Copyright Holder"]);
+            _writer.WriteString(Common.UpdateCopyrightYear(_metaDataDic["Copyright Holder"]));
             _writer.WriteEndElement();
             _writer.WriteEndElement();
             _writer.WriteEndElement();

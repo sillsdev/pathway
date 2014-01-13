@@ -370,7 +370,7 @@ namespace SIL.PublishingSolution
                     {
                         st = "(" + contributors + "), ";
                     }
-                    string rights = Param.GetMetadataValue(Param.CopyrightHolder);
+                    string rights = Common.UpdateCopyrightYear(Param.GetMetadataValue(Param.CopyrightHolder));
                     if (rights.Trim().Length > 0)
                     {
                         st = st + rights;
