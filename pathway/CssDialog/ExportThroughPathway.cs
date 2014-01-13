@@ -450,6 +450,7 @@ namespace SIL.PublishingSolution
             {
                 //CopyrightHolder = valueFromSettings;
                 CopyrightHolder = Param.GetMetadataValue(Param.CopyrightHolder, Organization);
+                CopyrightHolder = Common.UpdateCopyrightYear(CopyrightHolder);
             }
         }
 
@@ -833,6 +834,7 @@ namespace SIL.PublishingSolution
             if (CopyrightHolder.Trim().Length < 1)
             {
                 CopyrightHolder = Param.GetMetadataValue(Param.CopyrightHolder, Organization);
+                CopyrightHolder = Common.UpdateCopyrightYear(CopyrightHolder);
             }
             Type = Param.GetMetadataValue(Param.Type, Organization);
             Source = Param.GetMetadataValue(Param.Source, Organization);
@@ -934,7 +936,7 @@ namespace SIL.PublishingSolution
             Param.UpdateMetadataValue(Param.Description, dlg.Description);
             Param.UpdateMetadataValue(Param.Creator, dlg.Creator);
             Param.UpdateMetadataValue(Param.Publisher, dlg.Publisher);
-            Param.UpdateMetadataValue(Param.CopyrightHolder, dlg.CopyrightHolder);
+            Param.UpdateMetadataValue(Param.CopyrightHolder, Common.UpdateCopyrightYear(dlg.CopyrightHolder));
             // also persist the other DC elements
             Param.UpdateMetadataValue(Param.Type, dlg.Type);
             Param.UpdateMetadataValue(Param.Source, dlg.Source);
