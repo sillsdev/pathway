@@ -1364,5 +1364,23 @@ namespace TestBed
             MessageBox.Show("Done");
         
         }
+
+        private void btnSword_Click(object sender, EventArgs e)
+        {
+
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid Usx path");
+                return;
+            }
+
+            ExportSword swordObj= new ExportSword();
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            swordObj.Export(projInfo);
+            MessageBox.Show("Done");
+        }
     }
 }

@@ -288,6 +288,7 @@
     <Compile Include="PathwayB\PathwayBTest.cs" />
     <Compile Include="PdfConvert\ExportPdfTest.cs" />
     <Compile Include="PsTool\RampTest.cs" />
+    <Compile Include="SwordConvert\SwordTest.cs" />
     <Compile Include="theWordConvert\ExportTheWordTest.cs" />
     <Compile Include="XeLatex\XeLaTexContentTest.cs" />
     <Compile Include="CssDialog\ContentsTest.cs">
@@ -438,6 +439,10 @@
     <ProjectReference Include="..\PsTool\PsTool.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SwordConvert\SwordConvert.csproj">
+      <Project>{448FDD03-71C0-4C86-9878-BC81ACC440C0}</Project>
+      <Name>SwordConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\theWordConvert\TheWordConvert.csproj">
       <Project>{C08B9A1C-C204-4FDE-A290-AE567688D67D}</Project>
