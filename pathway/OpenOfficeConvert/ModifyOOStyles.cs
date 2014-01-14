@@ -322,7 +322,7 @@ namespace SIL.PublishingSolution
                     if (!_textProperty.ContainsKey(prop.Key))
                     {
                         string keyName = _allTextProperty[propName] + prop.Key;
-                        _textProperty[keyName] = prop.Value;
+                        _textProperty[keyName] = prop.Value.Trim();
 
                         // adding complex attribute
                         if (keyName == "fo:font-weight" || keyName == "fo:font-size" || keyName == "fo:font-family")
@@ -331,7 +331,7 @@ namespace SIL.PublishingSolution
                             propertyName = propertyName == "fo:font-family"
                                                ? "style:font-name"
                                                : propertyName.Replace("fo:", "style:");
-                            _textProperty[propertyName + "-complex"] = prop.Value;
+                            _textProperty[propertyName + "-complex"] = prop.Value.Trim();
                         }
                     }
 
@@ -723,7 +723,7 @@ namespace SIL.PublishingSolution
         public void CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string position, string side)
         {
             const string className = "Graphics";
-	        _styleXMLdoc = Common.DeclareXMLDocument(false);
+	        _styleXMLdoc = Common.DeclareXMLDocument(true);
             _styleXMLdoc.Load(styleFilePath);
 
             var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
@@ -768,7 +768,7 @@ namespace SIL.PublishingSolution
 
                 if (position == "right" || position == "left" || position == "center")
                 {
-                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    _nameElement = (XmlElement)node.ChildNodes[1];
                     //nameGraphicElement.SetAttribute("style:run-through", "foreground");
                     SetAttribute( "foreground","style:run-through");
                     if (side == "Invalid")
@@ -806,7 +806,7 @@ namespace SIL.PublishingSolution
                 }
                 else if (position == "both")
                 {
-                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    _nameElement = (XmlElement)node.ChildNodes[1];
                     if (side != "")
                     {
                         SetAttribute( side,"style:wrap");
@@ -823,7 +823,7 @@ namespace SIL.PublishingSolution
                 }
                 else if (position == "top" || position == "bottom")
                 {
-                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    _nameElement = (XmlElement)node.ChildNodes[1];
                     SetAttribute("none", "style:wrap");
                     SetAttribute("false", "style:wrap-contour");
                     SetAttribute(position, "style:vertical-pos");
@@ -833,7 +833,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    _nameElement = (XmlElement)node.ChildNodes[1];
                     SetAttribute( "top","style:vertical-pos");
                     SetAttribute("baseline", "style:vertical-rel");
                     SetAttribute("from-left", "style:horizontal-pos");
@@ -850,7 +850,7 @@ namespace SIL.PublishingSolution
         {
 
             const string className = "Frame";
-            _styleXMLdoc = Common.DeclareXMLDocument(false);
+            _styleXMLdoc = Common.DeclareXMLDocument(true);
             _styleXMLdoc.Load(styleFilePath);
 
             var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
@@ -895,7 +895,7 @@ namespace SIL.PublishingSolution
 
                 if (position == "right" || position == "left" || position == "center")
                 {
-                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    _nameElement = (XmlElement)node.ChildNodes[1];
                     //nameGraphicElement.SetAttribute("style:run-through", "foreground");
                     SetAttribute("foreground", "style:run-through");
                     //if (side == "Invalid")
@@ -935,7 +935,7 @@ namespace SIL.PublishingSolution
                 }
                 else if (position == "both")
                 {
-                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    _nameElement = (XmlElement)node.ChildNodes[1];
                     if (side != "")
                     {
                         SetAttribute(side, "style:wrap");
@@ -952,7 +952,7 @@ namespace SIL.PublishingSolution
                 }
                 else if (position == "top" || position == "bottom")
                 {
-                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    _nameElement = (XmlElement)node.ChildNodes[1];
                     SetAttribute("none", "style:wrap");
                     SetAttribute("false", "style:wrap-contour");
                     SetAttribute(position, "style:vertical-pos");
@@ -962,7 +962,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    _nameElement = (XmlElement)node.ChildNodes[1];
                     SetAttribute("top", "style:vertical-pos");
                     SetAttribute("baseline", "style:vertical-rel");
                     SetAttribute("from-left", "style:horizontal-pos");

@@ -30,7 +30,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Entry point for GoBible export
+        /// Entry point for Sword export
         /// </summary>
         /// <param name="exportType">scripture / dictionary</param>
         /// <param name="publicationInformation">structure with other necessary information about project.</param>
@@ -41,18 +41,131 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Entry point for GoBible converter
+        /// Entry point for Sword converter
         /// </summary>
         /// <param name="projInfo">values passed including xhtml and css names</param>
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
             bool success = false;
+            string swordFullPath = Common.FromRegistry("Sword");
+            string usxFilePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            string osisFilePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            string tempSwordCreatorPath = SwordCreatorTempDirectory(swordFullPath);
+            string swordTempFolder = tempSwordCreatorPath;
+            osisFilePath = Common.PathCombine(osisFilePath, "OSIS");
+            CreateDirectoryForSwordOutput(osisFilePath);
+            UsxToOSIS usxToOsis = new UsxToOSIS();
+            string[] usxFilesList = Directory.GetFiles(usxFilePath, "*.usx");
+            
+            foreach (var usxfile in usxFilesList)
+            {
+                string osisFileName = Path.GetFileNameWithoutExtension(usxfile) + ".xml";
+                osisFileName = Common.PathCombine(osisFilePath, osisFileName);
+                usxToOsis.ConvertUsxToOSIS(usxfile, osisFileName);
+            }
+            osisFilePath = Path.GetDirectoryName(osisFilePath);
+            tempSwordCreatorPath = Common.PathCombine(tempSwordCreatorPath, "OSIS");
+            osisFilePath = Common.PathCombine(osisFilePath, "OSIS");
+            CopySwordCreatorFolderToTemp(osisFilePath, tempSwordCreatorPath);
+          
+            string swordOutputLocation = SwordOutputLocation(Path.GetDirectoryName(tempSwordCreatorPath));
+            string[] osisFilesList = Directory.GetFiles(tempSwordCreatorPath, "*.xml");
+            SwordOutputBuildProcess(swordTempFolder, swordOutputLocation, osisFilesList, usxFilePath);
+
+            CopySwordCreatorFolderToTemp(swordTempFolder, projInfo.ProjectPath);
 
             return success;
         }
 
-        
+        private string SwordCreatorTempDirectory(string swordFullPath)
+        {
+            var swordDirectoryName = Path.GetFileNameWithoutExtension(swordFullPath);
+            var tempFolder = Path.GetTempPath();
+            var folder = Common.PathCombine(tempFolder, swordDirectoryName);
+            if (Directory.Exists(folder))
+            {
+                DirectoryInfo di = new DirectoryInfo(folder);
+                Common.CleanDirectory(di);
+            }
+            CopySwordCreatorFolderToTemp(swordFullPath, folder);
+            return folder;
+        }
+
+        public void CopySwordCreatorFolderToTemp(string sourceFolder, string destFolder)
+        {
+            if (Directory.Exists(destFolder))
+            {
+                Common.DeleteDirectory(destFolder);
+            }
+            Directory.CreateDirectory(destFolder);
+            string[] files = Directory.GetFiles(sourceFolder);
+            try
+            {
+                foreach (string file in files)
+                {
+                    string name = Path.GetFileName(file);
+                    string dest = Common.PathCombine(destFolder, name);
+                    
+                        File.Copy(file, dest);
+                    
+                }
+
+                string[] folders = Directory.GetDirectories(sourceFolder);
+                foreach (string folder in folders)
+                {
+                    string name = Path.GetFileName(folder);
+                    string dest = Common.PathCombine(destFolder, name);
+                    CopySwordCreatorFolderToTemp(folder, dest);
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private static string SwordOutputLocation(string swordOutputLocation)
+        {
+            swordOutputLocation = Common.PathCombine(swordOutputLocation, "modules");
+            swordOutputLocation = Common.PathCombine(swordOutputLocation, "texts");
+            swordOutputLocation = Common.PathCombine(swordOutputLocation, "ztext");
+            swordOutputLocation = Common.PathCombine(swordOutputLocation, "kjv");
+            return swordOutputLocation;
+        }
+
+        private static void CreateDirectoryForSwordOutput(string swordOutputLocation)
+        {
+            if (!Directory.Exists(swordOutputLocation))
+            {
+                Directory.CreateDirectory(swordOutputLocation);
+            }
+        }
+
+        /// <summary>
+        /// Uses Sword Output Execute Process
+        /// </summary>
+        /// <param name="Sword Output"></param>
+        protected void SwordOutputBuildProcess(string processFolder, string swordOutputPath, string[] osisFilesList, string projectPath)
+        {
+            string Creator = "osis2mod";
+            //Creator = Common.PathCombine(processFolder, Creator);
+            string moreArguments = "-z -v KJV"; //"-z -v KJV -d 0";
+            foreach (var osisFile in osisFilesList)
+            {
+                var args = string.Format(@"""{0}"" ""{1}"" {2}", swordOutputPath, osisFile, moreArguments);
+                //SubProcess.RunCommandWithErrorLog(processFolder, Creator, args, true , projectPath);
+
+                const bool noWait = false;
+                string stdOutput = string.Empty;
+                string stdOutErr = string.Empty;
+                SubProcess.Run(processFolder, Creator, args, true);
+                //SubProcess.RunCommandWithErrorLog(processFolder, Creator, args, true, projectPath);
+                moreArguments = "-a -z -v KJV";
+
+            }
+        }
+
         private string GetInfo(string metadataValue)
         {
             string organization;
@@ -78,7 +191,7 @@ namespace SIL.PublishingSolution
             return sb.ToString();
         }
 
-       
+
         /// <summary>
         /// returns the project name from the path
         /// </summary>

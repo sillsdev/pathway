@@ -44,6 +44,7 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnOsis = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.btnJson = new System.Windows.Forms.Button();
             this.btnEpubValidator = new System.Windows.Forms.Button();
@@ -75,7 +76,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnOsis = new System.Windows.Forms.Button();
+            this.btnSword = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -238,6 +239,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSword);
             this.groupBox1.Controls.Add(this.btnOsis);
             this.groupBox1.Controls.Add(this.button13);
             this.groupBox1.Controls.Add(this.btnJson);
@@ -271,6 +273,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // btnOsis
+            // 
+            this.btnOsis.AccessibleName = "BtnLogos";
+            this.btnOsis.BackColor = System.Drawing.Color.LightSlateGray;
+            this.btnOsis.Location = new System.Drawing.Point(22, 293);
+            this.btnOsis.Name = "btnOsis";
+            this.btnOsis.Size = new System.Drawing.Size(100, 40);
+            this.btnOsis.TabIndex = 82;
+            this.btnOsis.Text = "&USX to Osis";
+            this.btnOsis.UseVisualStyleBackColor = false;
+            this.btnOsis.Click += new System.EventHandler(this.btnOsis_Click);
             // 
             // button13
             // 
@@ -628,17 +642,20 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnOsis
+            // btnSword
             // 
-            this.btnOsis.AccessibleName = "BtnLogos";
-            this.btnOsis.BackColor = System.Drawing.Color.LightSlateGray;
-            this.btnOsis.Location = new System.Drawing.Point(22, 293);
-            this.btnOsis.Name = "btnOsis";
-            this.btnOsis.Size = new System.Drawing.Size(100, 40);
-            this.btnOsis.TabIndex = 82;
-            this.btnOsis.Text = "&USX to Osis";
-            this.btnOsis.UseVisualStyleBackColor = false;
-            this.btnOsis.Click += new System.EventHandler(this.btnOsis_Click);
+            this.btnSword.AccessibleName = "btnSword";
+            this.btnSword.BackColor = System.Drawing.Color.Crimson;
+            this.btnSword.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSword.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSword.Location = new System.Drawing.Point(234, 201);
+            this.btnSword.Name = "btnSword";
+            this.btnSword.Size = new System.Drawing.Size(100, 40);
+            this.btnSword.TabIndex = 83;
+            this.btnSword.Text = "Swor&d";
+            this.btnSword.UseCompatibleTextRendering = true;
+            this.btnSword.UseVisualStyleBackColor = false;
+            this.btnSword.Click += new System.EventHandler(this.btnSword_Click);
             // 
             // FlexPluginTest
             // 
@@ -719,5 +736,6 @@
         private System.Windows.Forms.Button btnJson;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button btnOsis;
+        private System.Windows.Forms.Button btnSword;
     }
 }

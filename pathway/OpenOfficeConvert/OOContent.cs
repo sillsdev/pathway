@@ -613,7 +613,7 @@ namespace SIL.PublishingSolution
             if (_xmldoc == null)
             {
                 File.Copy(sourceFile, _tempFile, true);
-                _xmldoc = Common.DeclareXMLDocument(false);
+                _xmldoc = Common.DeclareXMLDocument(true);
                 _xmldoc.Load(_tempFile);
             }
         }
@@ -871,53 +871,28 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            //if (_classNameWithLang.ToLower() == "pronunciationform")
-            //{
-            //    _isNonPronunciationform = false;
-            //    if (_pronunciationformCount == 2)
-            //    {
-            //        _pronunciationformCount = 0;
-            //        _isNonPronunciationform = true;
-            //    }
-            //    else
-            //    {
-            //        _pronunciationformCount += 1;
-            //    }
-            //}
-
             if (_characterNameAlways == null)
             {
-                _isAllowWhiteSpace = false;
-                return;
-            }
-            
-            //if (_characterNameAlways != null)
-            //{
-            //    if (_characterNameAlways.ToLower().IndexOf("span_.en_primaryrefs") == 0)
-            //    {
-            //        if (_isPrimaryrefs)
-            //            _isPrimaryrefs = false;
-            //        else
-            //            _isPrimaryrefs = true;
-
-            //        if (_isPrimaryrefs)
-            //            _isAllowWhiteSpace = false;
-            //    }
-            //}
-            
-            if (_characterNameAlways.IndexOf("span_.en_semanticdomains_senses_entry_letData_dicBody") == 0)
-            {
-                if (_previousContent.Trim().Length > 0)
+                if (_previousContent.Trim().Length == 0)
                 {
-                    if (_previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == ")")
-                    {
-                        _isAllowWhiteSpace = false;
-                    }
+                    _isAllowWhiteSpace = false;
                 }
-                return;
             }
-            
-            if (_characterNameAlways.ToLower().IndexOf("span_.en_mainentryref") == 0 ||
+            else
+            {
+                if (_characterNameAlways.IndexOf("span_.en_semanticdomains_senses_entry_letData_dicBody") == 0)
+                {
+                    if (_previousContent.Trim().Length > 0)
+                    {
+                        if (_previousContent.Trim().Substring(_previousContent.Trim().Length - 1, 1) == ")")
+                        {
+                            _isAllowWhiteSpace = false;
+                        }
+                    }
+                    return;
+                }
+
+                if (_characterNameAlways.ToLower().IndexOf("span_.en_mainentryref") == 0 ||
                     _characterNameAlways.ToLower().IndexOf("mainentryref_a_complexformcomponents") == 0 ||
                     _characterNameAlways.ToLower().IndexOf("span_.en_lexreftypeabbr_lexref") == 0 ||
                     _characterNameAlways.ToLower().IndexOf("span_.bzh_sensecrossrefheadword") == 0 ||
@@ -926,14 +901,17 @@ namespace SIL.PublishingSolution
                     _characterNameAlways.ToLower().IndexOf("span_.en_span_.en_semanticdomains") == 0 ||
                     _characterNameAlways.ToLower().IndexOf("span_.en_semanticdomains_senses") == 0 ||
                     _characterNameAlways.ToLower().IndexOf("span_.en_pronunciationform_pronunciation") == 0 ||
-                    _characterNameAlways.ToLower().IndexOf("span_.ggo-fonipa-x-emic_pronunciationform_pronunciation") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("span_.ggo-fonipa-x-emic_pronunciationform_pronunciation") ==
+                    0 ||
                     _characterNameAlways.ToLower().IndexOf("span_.bzh-fonipa_pronunciationform_pronunciation") == 0 ||
-                    _characterNameAlways.ToLower().IndexOf("complexformrefheadword_complexformref_xitem_complexformrefs") == 0 ||
+                    _characterNameAlways.ToLower().IndexOf("complexformrefheadword_complexformref_xitem_complexformrefs") ==
+                    0 ||
                     _characterNameAlways.ToLower().IndexOf("span_.en_span_.en_xitem_semanticdomains") == 0)
                 {
                     _isAllowWhiteSpace = false;
                 }
-            
+            }
+
         }
 
         private string SignificantSpace(string content)
@@ -2938,7 +2916,7 @@ namespace SIL.PublishingSolution
                         _writer.WriteStartElement("text:p");
 
                         //_writer.WriteAttributeString("text:style-name", _util.ParentName);
-                        //_writer.WriteAttributeString("text:style-name", divTagName); //06-Jan
+                        //_writer.WriteAttributeString("text:style-name", divTagName);
 
                         _isParagraphClosed = false;
                         _isNewParagraph = false;
@@ -2946,7 +2924,9 @@ namespace SIL.PublishingSolution
 
                     
                     // 1st frame
-                   
+                    //_writer.WriteStartElement("text:p"); //08-Jan
+                    //_writer.WriteAttributeString("text:style-name", "Standard"); 
+
                     _writer.WriteStartElement("draw:frame");
                     _writer.WriteAttributeString("draw:style-name", strFrameStyCount);
                     _writer.WriteAttributeString("draw:name", strFrameCount);
@@ -3074,7 +3054,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteString(fileName);
                     _writer.WriteEndElement();
                     _writer.WriteEndElement();
-
+                    //_writer.WriteEndElement(); //08-Jan
 
                     _imageInsert = false;
                     _imageSource = string.Empty;

@@ -819,6 +819,7 @@ namespace SIL.PublishingSolution
             Coverage = Param.GetMetadataValue(Param.Coverage, organization) ?? ""; // empty string if null / not found
             // Rights (dc:rights)
             Rights = Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
+            Rights = Common.UpdateCopyrightYear(Rights);
             // embed fonts
             if (othersfeature.ContainsKey("EmbedFonts"))
             {

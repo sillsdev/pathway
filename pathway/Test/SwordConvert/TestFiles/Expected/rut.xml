@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<osis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" xmlns:osis="http://www.bibletechnologies.net/2003/OSIS/namespace" xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace http://www.bibletechnologies.net/osisCore.2.1.1.xsd">
+  <osisText osisIDWork="thisWork" osisRefWork="bible" xml:lang="{LANG}">
+    <header>
+      <work osisWork="thisWork" />
+    </header>
+    <div type="bookGroup">
+      <book>- Perjanjian Lama Melayu Ambon</book>
+      <title short="Rut" />
+      <title level="1">Kata-Kata Partama</title>
+      <p>Kitab <reference type="x-bookName">Rut</reference> ni carita soal Rut, parampuang Moab yang kaweng deng laki-laki Israel satu. Laki-laki tu mati kasi tinggal Rut yang masi muda deng balong pung ana. Abis Rut pung laki mati, Rut pung mama mantu Naomi suru Rut pulang ka dia pung orang tatua. Mar Rut seng mau kasi tinggal dia pung mama mantu tagal dia paleng sayang antua. Dia iko antua tarus deng jaga sombayang par orang Israel pung Tuhan biar kata dia ni bukang orang Israel. Di carita ni pung laste, Tuhan kasi berkat basar par Rut. Dia kaweng lai deng laki-laki Israel satu dari dia pung laki yang su mati pung famili la ada pung ana laki-laki satu. La dari Rut pung turunang ni, Daud lahir. Antua yang nanti jadi raja par orang Israel.</p>
+      <p>Dari carita ni katong bisa tau soal bagemana Allah pake orang Yahudi deng orang bukang Yahudi par biking Antua pung mau yang Antua su ator par dunya. Dari carita ni jua katong tau kalo Allah tarima samua orang. Antua seng pili-pili muka biar kata orang-orang tu asal dari bangsa, suku, bahasa, deng cara hidop yang seng sama. Jadi, bukang cuma orang Yahudi sa yang bisa jadi Antua pung orang-orang.</p>
+      <p>Carita Rut ni jadi kira-kira taong 1375-1050 Waktu Yesus Balong Lahir. Waktu itu hakim-hakim yang pegang parenta par orang Israel tagal balong ada raja. Seng ada yang tau sapa yang tulis kitab <reference type="x-bookName">Rut</reference>ni tagal orang yang tulis buku ni seng tulis dia pung nama.</p>
+      <p />
+      <p>Kitab <reference type="x-bookName">Rut</reference> ni tabage jadi babarapa bagiang:</p>
+      <p>Pasal 1:1-5 bicara soal Elimelek deng dia pung famili pinda ka Moab.</p>
+      <p>Pasal 1:6-22 bicara soal Rut iko Naomi bale ka Israel.</p>
+      <p>Pasal 2:1-23 bicara soal Rut baku dapa deng Boas.</p>
+      <p>Pasal 3:1-18 bicara soal Rut deng Boas di tampa pukul jelai.</p>
+      <p>Pasal 4:1-12 bicara soal Rut jadi Boas pung bini.</p>
+      <p>Pasal 4:13-17 bicara soal Rut deng Boas pung ana lahir.</p>
+      <p>Pasal 4:18-22 bicara soal Daud pung tete nene moyang.</p>
+      <p>
+        <figure>Israel deng Moab waktu Rut hidop</figure>
+      </p>
+      <title level="1">Rut</title>
+      <chapter n="1" osisID="Matt." />
+      <title>Elimelek deng dia pung famili pinda ka Moab</title>
+      <p>1:1-5</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.1-2.1-2" n="1-2" osisID="Matt.1-2.1-2" />Dolo-dolo, waktu orang Israel balong ada raja, <note type="crossReference" n=""><char>1.1-2 </char><char>Waktu itu, ada orang yang pimping deng parenta orang Israel macang deng raja. Orang tu, dong panggel ‘hakim’.</char></note> ada bapa satu nama Elimelek. Antua pung bini nama Naomi. Dong pung ana laki-laki dua orang, satu nama Mahlon deng satu lai nama Kilyon. Dong tu anana cucu Efrata. <note type="crossReference" n=""><char>1.1-2 </char><char /><char>Efrata</char> ni, Kalep pung bini pung nama (I Taw 2:19). Orang jaga panggel dia pung anana cucu ‘orang-orang Efrata’. <char>Efrata</char> jua nama laeng dari kota Betlehem waktu dolo.</note> Dong asal dari kota Betlehem. Betlehem tu ada di tana Yehuda. Waktu itu, di negri Israel su seng ada makanang lai. Tagal itu, Elimelek pi sama-sama deng dia pung bini deng ana laki-laki dua orang ka negri Moab. Dong tinggal di sana jadi orang asing. <figure>Elimelek, Naomi, deng dong pung ana laki-laki dua orang pi ka negri Moab</figure></p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.3.3" n="3" osisID="Matt.3.3" />Tarus, akang pung barapa taong bagini, Elimelek mati kasi tinggal Naomi deng antua pung ana laki-laki dua orang. <verse subType="x-embedded" sID="Matt.4.4" n="4" osisID="Matt.4.4" />Ana laki-laki dua tu kaweng deng parampuang Moab. Mahlon kaweng deng Rut la Kilyon kaweng deng Orpa. Dong samua tinggal di Moab kurang labe sapulu taong. <verse subType="x-embedded" sID="Matt.5.5" n="5" osisID="Matt.5.5" />La Naomi pung ana laki-laki dua tu mati. Jadi, antua su seng ada laki deng anana lai.</p>
+      <p>Rut iko Naomi bale ka Israel</p>
+      <p>1:6-22</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.6.6" n="6" osisID="Matt.6.6" />Waktu Naomi masi tinggal di Moab, antua dengar kalo <char>Tuhan</char> su tolong Antua pung orang-orang Israel. Antua kasi hasil par dong pung kabong sampe dong ada pung makanang. Jadi, Naomi deng antua pung ana mantu dua orang siap-siap par pulang kombali ka negri Israel. <verse subType="x-embedded" sID="Matt.7.7" n="7" osisID="Matt.7.7" />Dong tiga ni pi ka daera Yehuda di Israel. Waktu di tenga jalang, <verse subType="x-embedded" sID="Matt.8.8" n="8" osisID="Matt.8.8" />Naomi bilang par Orpa deng Rut kata, “Sio anana e, pulang jua ka kamong dua pung orang tatua.<note type="crossReference" n=""><char>1.8 </char><char>Dalang bahasa Ibrani, </char><char>orang tatua</char> pung arti ‘mama pung ruma’.</note> Beta minta biar <char>Tuhan</char> sayang kamong dua macang deng kamong dua sayang beta deng beta pung anana yang su seng ada lai. <verse subType="x-embedded" sID="Matt.9.9" n="9" osisID="Matt.9.9" />Beta minta lai dari <char>Tuhan</char> biar Antua tolong kamong dua la kamong dua bisa kaweng kombali deng hidop tanang.”</p>
+      <p>Abis bilang bagitu, Naomi ciong Orpa deng Rut la dong manangis basar-basar. <verse subType="x-embedded" sID="Matt.10.10" n="10" osisID="Matt.10.10" />Orpa deng Rut bilang, “Seng mama, katong seng mau pulang lai. Katong mau iko mama sa. Katong mau iko mama ka mama pung orang-orang jua.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.11.11" n="11" osisID="Matt.11.11" />Mar Naomi bilang, “Sio anana e, pulang jua! Mangapa kong kamong mau iko beta la? Beta ni su seng ada ana laki-laki lai par jadi kamong pung laki. <verse subType="x-embedded" sID="Matt.12.12" n="12" osisID="Matt.12.12" />Dong pulang jua! Beta ni su talalu tua par kaweng lai. Biar kata malam ini beta dapa laki la bisa barana anana laki-laki<note type="crossReference" n=""><char>1.12 </char><char>Dalang orang Yahudi pung budaya, kalo ada parampuang yang su kaweng pung laki mati, mar balong ada pung ana laki-laki, dia pung laki pung sudara laki-laki musti kaweng deng dia. Dong biking bagini iko Musa pung ajarang (Ul 25: 5-10).</char></note> par kamong, <verse subType="x-embedded" sID="Matt.13.13" n="13" osisID="Matt.13.13" />mar seng mungkin kamong dua bisa tunggu sampe anana tu basar to? La masa tagal ini sampe kamong dua seng mau kaweng lai? Jang bagitu anana e! Beta ni pung hidop paleng susa dari kamong dua. Beta hidop susa tagal <char>Tuhan</char> su biking beta sengsara.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.14.14" n="14" osisID="Matt.14.14" />Dengar bagitu, dong manangis basar-basar kombali. Tarus, Orpa ciong dia pung mama mantu par bapisa. Mar Rut tinggal kong polo Naomi rapat-rapat. <verse subType="x-embedded" sID="Matt.15.15" n="15" osisID="Matt.15.15" />Tarus, Naomi bilang par Rut kata, “Rut e, pasang talinga la dengar bae-bae. Orpa tu ada mau pulang kombali ka dia pung orang-orang deng dia pung dewa-dewa. Ose pulang iko dia jua.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.16.16" n="16" osisID="Matt.16.16" />Mar Rut bilang, “Mama e, jang paksa beta par pi kasi tinggal mama! Beta mau iko mama sa. Mama pi ka mana, beta iko lai. Mama tinggal di mana, beta jua tinggal di situ lai. Mama pung orang-orang tu, beta pung lai. La <char>Tuhan</char> Allah yang mama somba tu, beta somba lai. <verse subType="x-embedded" sID="Matt.17.17" n="17" osisID="Matt.17.17" />Mama mati deng dapa kubur di mana, beta mati deng dapa kubur di situ lai. Nanti <char>Tuhan</char> hukum beta paleng barat kalo beta kasi tinggal mama. Yang bisa pisa beta deng mama cuma kalo satu dari katong dua mati.” <figure>Orpa pulang ka dia pung negri, Rut seng mau kasi tinggal Naomi</figure></p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.18.18" n="18" osisID="Matt.18.18" />Naomi seng bisa bilang apapa lai waktu antua sadar kalo Rut mau iko antua sa. <verse subType="x-embedded" sID="Matt.19.19" n="19" osisID="Matt.19.19" />Tarus, dong dua bajalang sampe di kota Betlehem. <figure>Naomi deng Rut bale ka Betlehem</figure></p>
+      <p>Bagitu dong dua sampe, orang-orang yang ada di situ hebo paskali. La parampuang-parampuang Betlehem laeng bilang par laeng kata, “E! Dia tu Naomi ka?”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.20.20" n="20" osisID="Matt.20.20" />Tarus Naomi bilang par dong, “Jang panggel beta Naomi<note type="crossReference" n=""><char>1.20 </char><char /><char>Naomi</char> tu dalang bahasa Ibrani pung arti ‘sanang’.</note> lai. Panggel beta Mara<note type="crossReference" n=""><char>1.20 </char><char /><char>Mara</char> tu dalang bahasa Ibrani pung arti ‘pait’.</note> sa. Barang, <char>Tuhan</char> yang pung Kuasa Paleng Basar biking beta pung hidop paleng susa paskali. <verse subType="x-embedded" sID="Matt.21.21" n="21" osisID="Matt.21.21" />Waktu beta pi dari sini, beta pi sama-sama deng beta pung laki deng anana. Mar sakarang ni, <char>Tuhan</char> kasi pulang beta sandiri. Jadi, jang kamong panggel beta Naomi lai. Barang, <char>Tuhan</char> hukum beta. Antua yang pung Kuasa Paleng Basar tu yang biking beta hidop susa deng sangsara.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.22.22" n="22" osisID="Matt.22.22" />Jadi, itu tu carita soal Naomi pulang dari Moab sama-sama deng Rut, antua pung ana mantu. Dong dua sampe di Betlehem pas su mulai musing orang-orang pi ambe jelai. <figure>Jelai</figure></p>
+      <chapter n="2" osisID="Matt.22" />
+      <title>Rut baku dapa deng Boas</title>
+      <p>2:1-23</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.1.1" n="1" osisID="Matt.1.1" />Di kota Betlehem, Naomi pung laki Elimelek yang su mati tu ada pung famili nama Boas. Boas ni orang kaya. Orang jaga taru hormat par antua. <verse subType="x-embedded" sID="Matt.2.2" n="2" osisID="Matt.2.2" />Satu kali bagini, Rut, parampuang Moab tu, bilang par Naomi kata, “Mama, kasi tinggal beta pi jua di orang yang pung hati bae pung kabong par punggul sisa-sisa jelai yang jatu dari orang-orang karja pung tangang.”</p>
+      <p>La Naomi bilang, “Ana e, pi suda.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.3.3" n="3" osisID="Matt.3.3" />Jadi, Rut pi ka kabong satu. Sampe di kabong tu, dia punggul jelai di balakang orang-orang karja yang potong jelai. Dia baruntung paskali tagal yang pung kabong tu Boas, Elimelek pung famili. <figure>Rut punggul sisa-sisa jelai</figure></p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.4.4" n="4" osisID="Matt.4.4" />Seng lama bagini, Boas datang dari Betlehem. Antua kasi suara par orang-orang karja kata, “Beta minta biar <char>Tuhan</char> ada sama-sama deng kamong.”</p>
+      <p>Dong bilang par antua, “Katong minta biar <char>Tuhan</char> kasi berkat par bapa lai.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.5.5" n="5" osisID="Matt.5.5" />Tarus, antua tanya par mandor kabong kata, “Parampuang itu tu sapa la?”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.6.6" n="6" osisID="Matt.6.6" />Mandor kabong bilang par antua, “Dia tu parampuang Moab. Dia datang sama-sama deng Naomi dari negri Moab. <verse subType="x-embedded" sID="Matt.7.7" n="7" osisID="Matt.7.7" />Dia tadi minta dari beta kasi biar dia iko lai par punggul sisa-sisa jelai yang jatu di balakang orang-orang karja. Dia jua minta lai par punggul jelai-jelai yang tacecer di dekat jelai-jelai yang dong su tambong tu. Dia su datang dari pagi la karja tarus. Dia cuma istirahat sadiki sa di walang.” <figure>Boas tanya soal Rut dari mandor</figure></p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.8.8" n="8" osisID="Matt.8.8" />Abis itu, Boas bilang par Rut kata, “Ana e, dengar bae-bae apa yang beta mau bilang ni. Ale jang pi punggul jelai di orang laeng pung kabong lai. Ale tinggal di sini sa deng parampuang-parampuang yang karja par beta. <verse subType="x-embedded" sID="Matt.9.9" n="9" osisID="Matt.9.9" />Ale taru kira bae-bae ka mana laki-laki yang karja par beta pi potong jelai. Tarus, ale iko parampuang-parampuang tu dari balakang. Beta su pasang par dong laki-laki tu seng bole paskali baganggu ale. Kalo ale rasa aos, pi sa ka tampayang aer la minong aer yang dong su isi akang.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.10.10" n="10" osisID="Matt.10.10" />Dengar bagitu, Rut tikang lutu di muka Boas sampe dia pung muka kana tana la bilang, “Sio bapa e, beta ni bukang orang sini. Mangapa bapa bagitu bae par beta sampe bapa mau tolong beta?”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.11.11" n="11" osisID="Matt.11.11" />Mar Boas bilang, “Beta ni su dengar samua-samua soal bagemana ale pung hidop deng ale pung mama mantu. Ale tolong antua dari waktu ale pung laki mati. Ale kasi tinggal ale pung orang tatua deng ale pung negri par datang tinggal deng orang-orang yang dolo ale seng kanal. <verse subType="x-embedded" sID="Matt.12.12" n="12" osisID="Matt.12.12" />Beta minta biar <char>Tuhan</char> balas samua yang bae yang ale su biking. Beta minta biar ale dapa berkat basar dari <char>Tuhan</char>, Allah yang orang Israel somba, yang jadi ale pung tampa batado.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.13.13" n="13" osisID="Matt.13.13" />Tarus Rut bilang, “Sio bapa e, maski beta ni orang yang seng pung arti apapa deng beta ni labe kacil lai dari bapa pung orang-orang karja parampuang, mar bapa paleng bae par beta. Sio, bapa pung bae tu biking beta pung hati sanang.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.14.14" n="14" osisID="Matt.14.14" />Waktu dong mau makang, Boas bilang par Rut kata, “Ana e, mari datang kamari. Ambe roti ni la colo akang di kua asang<note type="crossReference" n=""><char>2.14 </char><char /><char>Kua asang</char> ni, akang macang deng anggor asang. Orang Israel jaga makang roti la colo di akang.</note> baru makang.”</p>
+      <p>Tarus, Rut dudu di pinggir orang-orang karja la Boas kasi gandum yang dong su bakar tu par dia. Rut makang sampe kanyang, mar masi ada akang pung sisa lai.</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.15.15" n="15" osisID="Matt.15.15" />Abis itu, Rut pi punggul jelai kombali. Tarus, Boas bilang par antua pung orang-orang karja kata, “Biar dia pi punggul jelai yang su takumpul tu. Jang kamong biking malu dia. <verse subType="x-embedded" sID="Matt.16.16" n="16" osisID="Matt.16.16" />Labe bae kamong sangaja kasi jatu jelai babarapa tangke dari yang su taika tu, biar dia punggul akang. Jang larang dia.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.17.17" n="17" osisID="Matt.17.17" />Jadi, Rut punggul jelai di kabong sampe sore. Tarus, dia pukol-pukol batang jelai tu par kasi lapas akang pung biji-biji. Dia kumpul akang samua kurang labe dua balas kilo. <verse subType="x-embedded" sID="Matt.18.18" n="18" osisID="Matt.18.18" />Tarus, Rut bawa jelai tu la pulang ka kota. Waktu sampe di ruma, dia kasi unju jelai yang dia ada bawa tu par Naomi. Dia jua kasi kaluar dia pung makanang labe par antua lai. <verse subType="x-embedded" sID="Matt.19.19" n="19" osisID="Matt.19.19" />Antua bilang par Rut kata, “Ose punggul jelai ni di mana? Hari ini ose karja di sapa pung kabong? Beta minta biar <char>Tuhan</char> kasi berkat par orang yang su biking bae par ose.” <figure>Rut kasi unju par Naomi jelai yang dia bawa pulang</figure></p>
+      <p>Tarus, Rut carita samua tu par antua. Rut bilang kata, “Mama e, hari ini beta karja di bapa Boas pung kabong.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.20.20" n="20" osisID="Matt.20.20" />Naomi bilang, “Hoe, ana e! Boas tu katong pung famili. Antua tu orang satu yang musti tolong katong. Beta minta biar <char>Tuhan</char> jua yang kasi berkat par antua. <char>Tuhan</char> seng parna lupa Antua pung janji par katong yang masi hidop deng par orang-orang yang su mati.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.21.21" n="21" osisID="Matt.21.21" />Tarus, Rut, parampuang Moab tu, bilang lai kata, “Mama, bapa Boas bilang kalo beta bisa pi tarus-tarus punggul jelai yang jatu di kabong sama-sama deng antua pung orang-orang karja sampe abis musing.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.22.22" n="22" osisID="Matt.22.22" />Naomi bilang, “Ana e, labe bae bagitu. Ose karja di situ sa deng Boas pung orang-orang karja parampuang. Barang, kalo ose pi di orang laeng pung kabong, mangkali dong biking susa ose.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.23.23" n="23" osisID="Matt.23.23" />Jadi, Rut iko tarus parampuang-parampuang yang karja par Boas sampe abis musing jelai deng gandum.<note type="crossReference" n=""><char>2.23 </char><char>Dari bulang April sampe Mei muda, orang Yahudi jaga ambe jelai. La dari Mei tua sampe bulang Juni, orang Yahudi jaga ambe gandum.</char></note> Dia tinggal tarus deng dia pung mama mantu. <figure>Gandum</figure></p>
+      <chapter n="3" osisID="Matt.23" />
+      <title>Rut deng Boas di tampa pukul jelai</title>
+      <p>3:1-18</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.1.1" n="1" osisID="Matt.1.1" />Satu kali bagini, Naomi bilang par Rut, antua pung ana mantu kata, “Ana e, beta ni musti tolong ose biar ose bisa kaweng kombali. Ose kaweng biar ose hidop tanang deng seng lala karja sandiri. <verse subType="x-embedded" sID="Matt.2.2" n="2" osisID="Matt.2.2" />Ose karja sama-sama deng Boas pung orang-orang karja parampuang to? Boas tu katong pung famili. Malam ini ni, antua mau pi ka tampa pukul jelai par kasi pisa biji jelai dari akang pung kuli. <verse subType="x-embedded" sID="Matt.3.3" n="3" osisID="Matt.3.3" />Jadi sakarang ni, ose pi mandi, pake minya bobou sadap, deng pake baju bagus la pi suda ka tampa tu. Ose tunggu sampe Boas abis makang, mar jang sampe antua tau kalo ose su ada di situ. <verse subType="x-embedded" sID="Matt.4.4" n="4" osisID="Matt.4.4" />Kalo antua pi tidor, ose musti taru kira bae-bae tampa antua tidor. Tarus, ose datang ka situ, buka salimong dari antua pung kaki la tidor di situ. Waktu antua bangong, antua nanti kasi tau par ose apa yang ose musti biking.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.5.5" n="5" osisID="Matt.5.5" />Rut bilang par Naomi kata, “Nanti beta biking samua yang mama su bilang tu.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.6.6" n="6" osisID="Matt.6.6" />Abis itu, Rut pi ka tampa pukul jelai. Dia biking samua yang Naomi su bilang par dia.</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.7.7" n="7" osisID="Matt.7.7" />Waktu Boas abis makang, antua pung hati paleng sanang. La antua pi tidor di dekat biji-biji jelai yang su takumpul.</p>
+      <p>Seng lama bagini, Rut datang tado-tado la buka salimong dari Boas pung kaki la tidor di situ.</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.8.8" n="8" osisID="Matt.8.8" />Bagitu tenga malam, Boas tacigi bangong. Waktu antua bale badang, antua taherang-herang lia parampuang satu ada tidor dekat antua pung kaki. <verse subType="x-embedded" sID="Matt.9.9" n="9" osisID="Matt.9.9" />Boas tanya kata, “Ose ni sapa?”</p>
+      <p>Rut bilang, “Bapa e, beta ni Rut, orang yang seng pung arti apapa. Beta harap bapa mau ambe beta jua par jadi bapa pung bini.<note type="crossReference" n=""><char>3.9 </char><char>Dalam bahasa Ibrani Rut bilang, “Taru beta di bawa bapa pung sayap.” Akang pung arti, Rut minta Boas ambe dia par jadi antua pung bini biar antua jaga dia.</char></note> Barang, bapa ni beta pung laki pung famili dekat yang musti tolong beta pung hidop.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.10.10" n="10" osisID="Matt.10.10" />La Boas bilang kata, “Ana e, beta minta biar <char>Tuhan</char> kasi berkat par ale. Sakarang ni, ale su kasi unju ale pung hati bae labe dari yang ale su kasi unju par ale pung mama mantu. Barang, ale seng pi cari paitua muda yang kaya ka miskin. <verse subType="x-embedded" sID="Matt.11.11" n="11" osisID="Matt.11.11" />Tagal itu, ale seng usa taku. Samua yang ale su bilang tu, beta nanti biking akang. Barang, samua orang yang ada dalang kota ni su tau kalo ale tu, parampuang yang pung kalakuang paleng bae. <verse subType="x-embedded" sID="Matt.12.12" n="12" osisID="Matt.12.12" />Memang batul, beta musti tolong ale pung hidop, tagal beta ni ale pung famili dekat. Mar masi ada laki-laki satu lai dari ale pung famili yang labe dekat dari beta yang musti tolong ale pung hidop kamuka. <verse subType="x-embedded" sID="Matt.13.13" n="13" osisID="Matt.13.13" />Sakarang ni su malam jadi jang pulang lai. Tidor di sini sa. Eso pagi beta nanti tanya dia kalo dia mau ka seng par tolong ale. Kalo dia mau, itu jua bae. Mar kalo dia seng mau, beta janji deng nama <char>Tuhan</char> yang hidop, beta nanti tolong ale. Sakarang tidor suda di sini sampe pagi.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.14.14" n="14" osisID="Matt.14.14" />Jadi, Rut tidor dekat Boas pung kaki sampe pagi. Dia bangong amper siang biar orang-orang seng kanal dia. Barang Boas bilang, “Seng bole paskali orang tau kalo ale datang ka tampa pukul jelai ni.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.15.15" n="15" osisID="Matt.15.15" />Boas bilang lai, “Buka ale pung salendang lebar-lebar.”</p>
+      <p>Jadi, Rut buka dia pung salendang la tada jelai. Tarus, Boas tuang jelai kurang labe tiga pulu kilo ka dalang salendang tu, la angka akang taru di Rut pung kapala. Abis itu, antua pi ka kota.</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.16.16" n="16" osisID="Matt.16.16" />Waktu Rut sampe di ruma, Naomi bilang kata, “Ana e, bagemana deng Boas?”</p>
+      <p>Tarus, Rut carita samua yang Boas su biking par dia. <verse subType="x-embedded" sID="Matt.17.17" n="17" osisID="Matt.17.17" />La Rut bilang, “Mama, jelai tiga pulu kilo ni, bapa Boas yang kasi akang par beta. Antua bilang kalo beta seng bole pulang ka ruma deng tangang kosong. Beta musti bawa apapa par mama.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.18.18" n="18" osisID="Matt.18.18" />Naomi bilang, “Ana e, tunggu sa sampe katong dengar apa yang nanti jadi. Barang, Boas seng barenti cari jalang sampe parkara ni abis hari ini.”</p>
+      <chapter n="4" osisID="Matt.18" />
+      <title>Rut jadi Boas pung bini</title>
+      <p>4:1-12</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.1.1" n="1" osisID="Matt.1.1" />Hari itu jua, Boas pi ka tampa satu yang ada di kota pung pintu maso. Tampa tu, orang-orang jaga dudu par bakumpul. Boas pi ka situ par tunggu laki-laki satu. Laki-laki tu orang yang musti tolong Rut pung hidop. Bagitu Boas ada dudu, antua lia laki-laki tu lewat. Tarus Boas bilang, “Bu e, mari dudu di sini do.”</p>
+      <p>Tarus, laki-laki tu datang la dudu.</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.2.2" n="2" osisID="Matt.2.2" />Abis itu, Boas panggel sapulu orang dari pamimping-pamimping yang ada di kota tu la bilang, “Bapa-bapa e, mari dudu di sini do.”</p>
+      <p>Tarus, dong samua datang la dudu.</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.3.3" n="3" osisID="Matt.3.3" />Boas bilang par laki-laki yang musti tolong Rut pung hidop tu kata, “Bu e, beta mau bicara soal katong pung famili Elimelek yang su mati tu pung tana. Antua pung bini Naomi yang baru datang dari negri Moab mau jual akang. <verse subType="x-embedded" sID="Matt.4.4" n="4" osisID="Matt.4.4" />Beta pikir bu musti tau soal ini. Kalo bu mau bali akang, bali suda, biar pamimping-pamimping kota deng orang-orang yang dudu di sini jadi saksi. Mar kalo bu seng mau, bilang par beta biar beta tau. Bu ni, orang yang musti bali akang kamuka. Kalo bu seng mau, baru beta bisa bali akang.”</p>
+      <p>Laki-laki tu bilang, “Beta mau bali akang.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.5.5" n="5" osisID="Matt.5.5" />Boas bilang lai, “Kalo bu bali tana tu dari Naomi, bu jua musti kaweng deng Rut. Rut tu, Mahlon yang su mati pung bini. Dia asal dari Moab. Bu kaweng deng dia biar dia bisa barana ana laki-laki. La ana laki-laki tu yang nanti jaga dong pung tana biar orang laeng seng bisa ambe akang.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.6.6" n="6" osisID="Matt.6.6" />La laki-laki tu bilang, “Kalo musti macang bagitu, beta seng jadi bali tana tu lai. Barang kalo beta bali akang, nanti beta pung harta yang beta mau kasi par beta pung anana, akang takor lai. Ale bali akang suda. Beta seng mau lai.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.7.7" n="7" osisID="Matt.7.7" />(Waktu itu di Israel, kalo orang mau jual ka mau tukar apapa satu, dia musti kasi lapas dia pung sandal la kasi akang par orang yang mau bali. Cara bagini ni yang orang Israel pake akang par jual bali apapa satu.)</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.8.8" n="8" osisID="Matt.8.8" />Jadi, laki-laki tu bilang, “Ale sa yang bali akang.”</p>
+      <p>Tarus, dia lapas dia pung sandal la kasi akang par Boas. <figure>Laki-laki yang musti tolong Rut pung hidop lapas dia pung sandal sabala la kasi par Boas</figure></p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.9.9" n="9" osisID="Matt.9.9" />Abis itu, Boas bilang par pamimping-pamimping kota deng samua orang yang ada di situ kata, “Hari ini bapa-bapa dong samua su jadi saksi kalo beta su bali Elimelek, Kilyon, deng Mahlon pung tana deng harta dari Naomi. <verse subType="x-embedded" sID="Matt.10.10" n="10" osisID="Matt.10.10" />Beta mau ambe Rut lai par jadi beta pung bini. Dia tu parampuang Moab. Dia tu Mahlon yang su mati pung bini. Beta nanti kaweng deng dia biar orang laeng seng bisa ambe Mahlon pung tana deng harta. La deng cara bagitu, Mahlon pung famili deng orang-orang yang ada di kota inga dia tarus. Hari ini, bapa-bapa dong samua su jadi saksi.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.11.11" n="11" osisID="Matt.11.11" />Pamimping-pamimping kota deng samua orang yang ada di situ bilang, “Iyo, katong samua su jadi saksi. Katong minta <char>Tuhan</char> biking Rut yang nanti jadi ale pung bini tu macang Rahel deng Lea yang su barana ana banya par Yakup. Katong minta biar ale labe tamba kaya dari ale pung orang-orang Efrata deng banya orang kanal ale di kota Betlehem. <verse subType="x-embedded" sID="Matt.12.12" n="12" osisID="Matt.12.12" />Katong minta lai biar <char>Tuhan</char> nanti kasi anana yang banya par Rut, parampuang muda tu, biar kamong jadi famili basar macang deng Peres. Peres ni Yehuda deng Tamar pung ana.”</p>
+      <title>Boas deng Rut pung ana lahir</title>
+      <p>4:13-17</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.13.13" n="13" osisID="Matt.13.13" />Jadi Boas kaweng deng Rut. Antua tidor deng Rut la <char>Tuhan</char> kasi berkat basar par Rut sampe dia bisa deng badang la barana ana laki-laki satu. <figure>Rut deng dia pung ana</figure></p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.14.14" n="14" osisID="Matt.14.14" />Waktu ana laki-laki tu lahir, parampuang-parampuang bilang par Naomi kata, “Puji <char>Tuhan</char>! Antua seng kasi tinggal ale. Antua su kasi par ale cucu laki-laki yang nanti tolong ale pung hidop. Katong minta biar samua orang di Israel kanal ana tu. <verse subType="x-embedded" sID="Matt.15.15" n="15" osisID="Matt.15.15" />Ana tu yang nanti biking sanang ale pung hati deng tolong ale pung hidop waktu ale su tua. Ale pung ana mantu tu paleng sayang ale. Dia tu labe bae dari ana laki-laki tuju orang. Dia su kasi cucu laki-laki satu par ale.”</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.16.16" n="16" osisID="Matt.16.16" />Tarus, Naomi ambe ana tu la gendong dia. Antua piara dia bae-bae sampe basar. <verse subType="x-embedded" sID="Matt.17.17" n="17" osisID="Matt.17.17" />Parampuang-parampuang yang tinggal dekat-dekat situ bilang kata, “Naomi su pung ana laki-laki satu.”</p>
+      <p>Dong kasi nama ana tu Obet. Obet ni Isai pung bapa. La Isai ni pung ana laki-laki par Daud.</p>
+      <title>Daud pung tete nene moyang</title>
+      <p>4:18-22</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.18.18" n="18" osisID="Matt.18.18" />Ini Peres pung anana cucu.</p>
+      <p>Peres tu pung ana par Hesron.</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.19.19" n="19" osisID="Matt.19.19" />Hesron ni pung ana par Ram.</p>
+      <p>Ram tu pung ana par Aminadap.</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.20.20" n="20" osisID="Matt.20.20" />Tarus, Aminadap ni pung ana par Nahason.</p>
+      <p>Nahason tu pung ana par Salmon.</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.21.21" n="21" osisID="Matt.21.21" />Salmon ni pung ana par Boas.</p>
+      <p>Boas tu pung ana par Obet.</p>
+      <p>
+        <verse subType="x-embedded" sID="Matt.22.22" n="22" osisID="Matt.22.22" />La Obet ni pung ana par Isai.</p>
+      <p>Isai ni pung ana par Daud.</p>
+    </div>
+  </osisText>
+</osis>

@@ -250,8 +250,7 @@ namespace SIL.PublishingSolution
                     linkParam["projName"] = nameNode.InnerText;
                     var langNameNode = metadata.SelectSingleNode("//language/name");
                     linkParam["langInfo"] = string.Format("{0}:{1}", wsNode.InnerText, langNameNode.InnerText);
-                    var ppl = new ParatextPathwayLink(databaseName.InnerText, linkParam);
-                    ppl.ConvertUsxToPathwayXhtmlFile(xmlText.ToString(), fileName);
+                    ConvertUsx2Xhtml(databaseName, linkParam, xmlText, fileName);
                     projectInfo.DefaultXhtmlFileWithPath = fileName;
                     var ptxStyle2Css = new XslCompiledTransform();
                     ptxStyle2Css.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
@@ -367,6 +366,34 @@ namespace SIL.PublishingSolution
                 Environment.Exit(-1);
             }
             Environment.Exit(0);
+        }
+
+        private static void ConvertUsx2Xhtml(XmlNode databaseName, Dictionary<string, object> linkParam, StringBuilder xmlText, string fileName)
+        {
+            try
+            {
+                // load the ParatextSupport DLL dynamically
+                Assembly asmPtSupport = Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+                Type tParatextPathwayLink = asmPtSupport.GetType("SIL.PublishingSolution.ParatextPathwayLink");
+                Object objParatextPathwayLink = null;
+                if (tParatextPathwayLink != null)
+                {
+                    // var ppl = new ParatextPathwayLink(databaseName.InnerText, linkParam);
+                    Object[] instanceArgs = new object[2];
+                    instanceArgs[0] = databaseName.InnerText;
+                    instanceArgs[1] = linkParam;
+                    objParatextPathwayLink = Activator.CreateInstance(tParatextPathwayLink, instanceArgs);
+                    // ppl.ConvertUsxToPathwayXhtmlFile(xmlText.ToString(), fileName);
+                    Object[] args = new object[2];
+                    args[0] = xmlText.ToString();
+                    args[1] = fileName;
+                    tParatextPathwayLink.InvokeMember("ConvertUsxToPathwayXhtmlFile", BindingFlags.Default | BindingFlags.InvokeMethod, null, objParatextPathwayLink, args);
+                }
+            }
+            catch (Exception)
+            {
+            }
+
         }
 
         private static InputFormat SetDefaultsBasedOnInputFormat(InputFormat inFormat, PublicationInformation projectInfo, string lcName)
@@ -511,8 +538,8 @@ namespace SIL.PublishingSolution
                 string filepattern = Path.IsPathRooted(file)? file: Common.PathCombine(projInfo.ProjectPath, file);
                 foreach (string filename in Directory.GetFiles(Path.GetDirectoryName(filepattern), Path.GetFileName(filepattern)))
                 {
-                    System.IO.StringWriter stringWriter = new System.IO.StringWriter();
-                    System.Xml.XmlTextWriter xmlTextWriter = new System.Xml.XmlTextWriter(stringWriter); 
+                    StringWriter stringWriter = new StringWriter();
+                    XmlTextWriter xmlTextWriter = new XmlTextWriter(stringWriter); 
                     XmlDocument doc = new XmlDocument();
                     try
                     {

@@ -732,7 +732,7 @@ namespace SIL.Tool
             rights = rights.Replace("\u00ae", "<span style='position: relative; top: -0.5em; font-size: 80%;'>\u00ae</span>");
             if (rights.Trim().Length > 0)
             {
-                sb.Append(rights);
+                sb.Append(Common.UpdateCopyrightYear(rights));
                 sb.Append("</p> ");
             }
             return sb.ToString();
@@ -755,7 +755,7 @@ namespace SIL.Tool
             string rights = Param.GetMetadataValue(Param.CopyrightHolder);
             if (rights.Trim().Length > 0)
             {
-                sb.Append(rights);
+                sb.Append(Common.UpdateCopyrightYear(rights));
                 sb.Append("</span> ");
             }
             return sb.ToString();
@@ -772,7 +772,7 @@ namespace SIL.Tool
             if (!File.Exists(_xhtmlFileNameWithPath)) return string.Empty; // can't obtain list of books / letters
             // load the xhtml file we're working with
 
-            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
@@ -1288,7 +1288,7 @@ namespace SIL.Tool
                         Common.StreamReplaceInFile(draftTempFileName, "<em>", "<span>");
                         Common.StreamReplaceInFile(draftTempFileName, "</em>", "</span>");
 
-                        XmlDocument xDoc = Common.DeclareXMLDocument(false);
+                        XmlDocument xDoc = Common.DeclareXMLDocument(true);
                         XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
                         namespaceManager.AddNamespace("html", "http://www.w3.org/1999/xhtml");
                         xDoc.Load(draftTempFileName);
@@ -2109,7 +2109,7 @@ namespace SIL.Tool
             try
             {
                 const string tag = "a";
-                XmlDocument xDoc = Common.DeclareXMLDocument(false);
+                XmlDocument xDoc = Common.DeclareXMLDocument(true);
                 xDoc.Load(sourceFile);
                 XmlNodeList nodeList = xDoc.GetElementsByTagName(tag);
                 if (nodeList.Count > 0)
@@ -2398,7 +2398,7 @@ namespace SIL.Tool
 
         public string GoBibleRearrangeVerseNumbers(string fileName)
         {
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             xDoc.Load(fileName);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
             XmlNode nodeContent = xDoc.CreateElement("div");
@@ -2576,7 +2576,7 @@ namespace SIL.Tool
 
         public string InsertHiddenChapterNumber()
         {
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("span");
             if (nodeList.Count > 0)
@@ -2615,7 +2615,7 @@ namespace SIL.Tool
         {
             string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
             if (!File.Exists(flexRevFileName)) return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(flexRevFileName);
@@ -2633,7 +2633,7 @@ namespace SIL.Tool
         public void ChangeEntryMultiPictClassName(string fileName)
         {
             if (!File.Exists(fileName)) return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             FileStream fs = File.OpenRead(fileName);
@@ -2663,7 +2663,7 @@ namespace SIL.Tool
         public void RemoveEmptySpan(string fileName)
         {
             if (!File.Exists(fileName)) return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(fileName);
@@ -2684,7 +2684,7 @@ namespace SIL.Tool
         {
             string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
             if (!File.Exists(flexRevFileName)) return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(flexRevFileName);
@@ -2711,7 +2711,7 @@ namespace SIL.Tool
 
         public string InsertHiddenVerseNumber()
         {
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("span");
             if (nodeList.Count > 0)
@@ -2755,7 +2755,7 @@ namespace SIL.Tool
         /// <returns></returns>
         public string GetLanguageCodeForLO()
         {
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
             xDoc.Load(_xhtmlFileNameWithPath);
@@ -2821,7 +2821,7 @@ namespace SIL.Tool
         {
             if (_projInfo.ProjectInputType.ToLower() == "dictionary") return false;
             bool isFound = false;
-            var xDoc = Common.DeclareXMLDocument(false);
+            var xDoc = Common.DeclareXMLDocument(true);
             FileStream fs = File.OpenRead(_xhtmlFileNameWithPath);
             xDoc.Load(fs);
             fs.Close();
@@ -2864,7 +2864,7 @@ namespace SIL.Tool
         /// <returns></returns>
         public string GetDefinitionLanguage()
         {
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
             if (nodeList.Count > 0)
@@ -2910,7 +2910,7 @@ namespace SIL.Tool
         {
             try
             {
-                XmlDocument xDoc = Common.DeclareXMLDocument(false);
+                XmlDocument xDoc = Common.DeclareXMLDocument(true);
                 xDoc.Load(_xhtmlFileNameWithPath);
                 XmlNodeList nodeList = xDoc.GetElementsByTagName("figure");
                 if (nodeList.Count > 0)
@@ -3026,7 +3026,7 @@ namespace SIL.Tool
                         return;
                 }
 
-                var xDoc = Common.DeclareXMLDocument(false);
+                var xDoc = Common.DeclareXMLDocument(true);
                 xDoc.Load(_xhtmlFileNameWithPath);
                 XmlNodeList nodeList = xDoc.GetElementsByTagName("meta");
                 if (nodeList.Count > 0)
@@ -3268,7 +3268,7 @@ namespace SIL.Tool
             XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            xDoc.PreserveWhitespace = false;
+            //xDoc.PreserveWhitespace = false;
             xDoc.Load(fileName);
             const string xPath = "//xhtml:span[@class='scrFootnoteMarker']";
             XmlNodeList markerNodeList = xDoc.SelectNodes(xPath, namespaceManager);
@@ -3592,7 +3592,7 @@ namespace SIL.Tool
         public string GetDictionaryLetterCountOLD()
         {
             string lastLetterString = string.Empty;
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
             if (nodeList.Count > 0)
@@ -3858,7 +3858,7 @@ namespace SIL.Tool
             //div[@class='entry']/div[2]/img
             if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
             if (_projInfo.SplitFileByLetter != null && _projInfo.SplitFileByLetter.ToLower() == "true") return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
@@ -3932,7 +3932,7 @@ namespace SIL.Tool
             { return; }
 
             if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
@@ -3964,7 +3964,7 @@ namespace SIL.Tool
         {
             string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
             if (!File.Exists(flexRevFileName)) return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(flexRevFileName);
