@@ -465,7 +465,10 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("GradientStrokeHiliteLength", "0");
             _writer.WriteAttributeString("GradientStrokeHiliteAngle", "0");
             _writer.WriteAttributeString("AppliedObjectStyle", "ObjectStyle/$ID/[None]");
-            _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 0");
+            if (frameName.IndexOf("bottom") == 0)
+                _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 -7.5");
+            else
+                _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 0");
         }
 
         private void CreateMarginPreferenceforMasterPage()
