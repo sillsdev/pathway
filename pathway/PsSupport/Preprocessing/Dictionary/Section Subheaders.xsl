@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- #############################################################
-    # Name:        Adjust Title.xsl
-    # Purpose:     Put in Title before first letter divider
+    # Name:        Section Subheaders.xsl
+    # Purpose:     Add section sub header with the name of the
+	#              writing systems.
     #
     # Author:      Greg Trihus <greg_trihus@sil.org>
     #
