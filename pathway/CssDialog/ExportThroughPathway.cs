@@ -29,6 +29,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -412,6 +413,13 @@ namespace SIL.PublishingSolution
 
         private void PopulateFilesFromPreprocessingFolder()
         {
+            foreach (string filePath in Directory.GetFiles(Path.Combine(Common.GetAllUserPath(), InputType), "*.xsl"))
+            {
+                var processName = Path.GetFileNameWithoutExtension(filePath);
+                Debug.Assert(processName != null);
+                chkLbPreprocess.Items.Add(processName, false);
+            }
+
             string xsltFullName = Common.PathCombine(Common.GetApplicationPath(), "Preprocessing\\");// + xsltFile[0]
             xsltFullName = Common.PathCombine(xsltFullName, InputType + "\\"); //TD-2871 - separate dictionary and Scripture xslt
 
@@ -423,7 +431,12 @@ namespace SIL.PublishingSolution
 
                 foreach (var filePath in filePaths)
                 {
-                    chkLbPreprocess.Items.Add(Path.GetFileNameWithoutExtension(filePath), false);
+                    var processName = Path.GetFileNameWithoutExtension(filePath);
+                    Debug.Assert(processName != null);
+                    if (!chkLbPreprocess.Items.Contains(processName))
+                    {
+                        chkLbPreprocess.Items.Add(processName, false);
+                    }
                 }
             }
         }

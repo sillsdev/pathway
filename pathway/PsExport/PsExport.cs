@@ -194,12 +194,13 @@ namespace SIL.PublishingSolution
             File.Copy(outFullName, curInput, true);
             for (int i = 0; i < preProcessList.Length; i++)
             {
-                string xsltFullName =
-                    Common.PathCombine(
-                        Common.PathCombine(
-                            Common.PathCombine(Common.GetPSApplicationPath(), "Preprocessing"),
-                            DataType),
-                        preProcessList[i] + ".xsl");
+
+                var processName = Common.PathCombine(DataType, preProcessList[i] + ".xsl");
+                string xsltFullName = Common.PathCombine(Common.GetAllUserPath(), processName);
+                if (!File.Exists(xsltFullName))
+                {
+                    xsltFullName = Common.PathCombine(Common.PathCombine(Common.GetPSApplicationPath(), "Preprocessing"), processName);
+                }
                 Debug.Print("xsltFullName: {0}", xsltFullName);
                 string resultExtention = string.Format("{0}.xhtml", i);
                 Common.XsltProcess(curInput, xsltFullName, resultExtention);
