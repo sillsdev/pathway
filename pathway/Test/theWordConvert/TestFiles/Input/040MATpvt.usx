@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<usx version="2.0">
+  <book code="MAT" style="id">- Partial Verse Test</book>
+  <chapter number="1" style="c" />
+  <para style="p">
+    <verse number="1a" style="v" />Mamey okukwe Jisas Krais so nopwey-om me ma mey hok non. Jisas Krais hiykwe Devit so ney-nona. <verse number="1b" style="v" />Devit hiykwe Abraham so ney-nona.</para>
+  <para style="li">
+    <verse number="2" style="v" />Abraham hiykwe Aisak so orih.</para>
+  <para style="li">Aisak hiykwe Jekop so orih. Jekop hiykwe Juda o, hyo nay-ih-nayh o, hmo orih-nawp. <verse number="3" style="v" /><verse number="4" style="v" /><verse number="5" style="v" /><verse number="6" style="v" /><verse number="7" style="v" /><verse number="8" style="v" /><verse number="9" style="v" /><verse number="10" style="v" /><verse number="11" style="v" /><verse number="12" style="v" /><verse number="13" style="v" /><verse number="14" style="v" /><verse number="15" style="v" /><verse number="16" style="v" /><verse number="17" style="v" /><verse number="18" style="v" /><verse number="19" style="v" /><verse number="20" style="v" /><verse number="21" style="v" /><verse number="22" style="v" /><verse number="23" style="v" /><verse number="24" style="v" /><verse number="25" style="v" /></para>
+</usx>

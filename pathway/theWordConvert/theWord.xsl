@@ -126,21 +126,40 @@
             </xsl:otherwise>
         </xsl:choose>
         <xsl:if test="count($verse) = 0">
-            <!-- verse bridges -->
-            <xsl:variable name="firstVerse"
-                select="//verse[starts-with(@number,concat(string($v), $bridgePunc))][preceding::chapter[1]/@number=$c] | //verse[starts-with(@number,concat(string($v), $sequencePunc))][preceding::chapter[1]/@number=$c]"/>
-            <xsl:choose>
-                <xsl:when test="count($firstVerse) != 0">
-                    <xsl:apply-templates select="$firstVerse" mode="v">
-                        <xsl:with-param name="bridge" select="$firstVerse/@number"/>
-                    </xsl:apply-templates>
-                </xsl:when>
-                <xsl:otherwise>
-                    <!-- missing verses -->
-                    <xsl:value-of select="$missing"/>
-                    <xsl:text>&#13;&#10;</xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:call-template name="VerseBridgeLookup">
+                <xsl:with-param name="c" select="$c"/>
+                <xsl:with-param name="v" select="$v"/>
+                <xsl:with-param name="missing" select="$missing"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="VerseBridgeLookup">
+        <xsl:param name="c"/>
+        <xsl:param name="v"/>
+        <xsl:param name="missing"/>
+        <!-- verse bridges -->
+        <xsl:variable name="bridgeVerse" select="//verse[starts-with(@number,concat(string($v), $bridgePunc))][preceding::chapter[1]/@number=$c]"/>
+        <xsl:apply-templates select="$bridgeVerse" mode="v">
+            <xsl:with-param name="bridge" select="$bridgeVerse/@number"/>
+        </xsl:apply-templates>
+        <xsl:variable name="seqVerse" select="//verse[starts-with(@number,concat(string($v), $sequencePunc))][preceding::chapter[1]/@number=$c]"/>
+        <xsl:apply-templates select="$seqVerse" mode="v">
+            <xsl:with-param name="bridge" select="$seqVerse/@number"/>
+        </xsl:apply-templates>
+        <xsl:variable name="partVerse" select="//verse[starts-with(@number,concat(string($v), 'a'))][preceding::chapter[1]/@number=$c]"/>
+        <xsl:if test="count($partVerse) != 0">
+            <xsl:call-template name="CombineVerses">
+                <xsl:with-param name="c" select="$c"/>
+                <xsl:with-param name="v" select="concat($v, 'a')"/>
+                <xsl:with-param name="verse" select="$partVerse"/>
+                <xsl:with-param name="nextVerse" select="concat($v, 'b')"/>
+            </xsl:call-template>
+        </xsl:if>
+        <xsl:if test="count($bridgeVerse) + count($seqVerse) + count($partVerse) = 0">
+            <!-- missing verses -->
+            <xsl:value-of select="$missing"/>
+            <xsl:text>&#13;&#10;</xsl:text>
         </xsl:if>
     </xsl:template>
 

@@ -422,6 +422,12 @@ namespace Test.TheWordConvertTest
             TestDataCase("GAL", "048GAL.usx", 1, "<TS2><font size=-1><b>To Suyat ni Pablo diya to mgo Taga-</b></font><Ts><TS1>GALACIA<Ts><sup>(1,2)</sup> Siak si Pablo iyan migsuyat to seini diyan iyu no mgo magtutuu no oghihimun duon to mgo kayunsudan no sakup to Galacia.<CM>Igpadomdom ku iyu no seini katongdanan ku to pagka-apustul, kona no otow to migpili dow migsugu kanay ko kona no si Jesu-Cristo yagboy dow to Diyus no Amoy no iyan migbanhaw kandin.<CM>Siak dow to tibo mgo suun ta kani duon ki Cristo nangumusta iyu.");
         }
 
+        [Test]
+        public void VerseAbBridgeTest()
+        {
+            TestDataCase("MAT", "040MATpvt.usx", 1, "<sup>(1a-1b)</sup> Mamey okukwe Jisas Krais so nopwey-om me ma mey hok non. Jisas Krais hiykwe Devit so ney-nona. <sup>1b</sup> Devit hiykwe Abraham so ney-nona.<CI>");
+        }
+
         //[Test]
         //public void myTest()
         //{
