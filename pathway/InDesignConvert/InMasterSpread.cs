@@ -104,7 +104,7 @@ namespace SIL.PublishingSolution
             string headerFooterWidth = GetHeaderFooterWidth();
             ArrayList ReferenceNames = new ArrayList { "top-left", "top-center", "top-right", "bottom-left", "bottom-center", "bottom-right" };
 
-            float frameHeight = 15f;
+            float frameHeight = 20f;
             Dictionary<string, string> classValues = _cssProperty[_pageClass];
 
             float halfWidth = float.Parse(classValues["Page-Width"], CultureInfo.GetCultureInfo("en-US")) / 2;
@@ -120,9 +120,9 @@ namespace SIL.PublishingSolution
             float yb1 = y + float.Parse(classValues["Margin-Bottom"], CultureInfo.GetCultureInfo("en-US")) / 2;  // 4 inch = place header in 2 inch - Heade to center
             float yb2 = yb1 + frameHeight;
 
-            float x2 = _x1 - float.Parse(headerFooterWidth);
-            float x3 = float.Parse(headerFooterWidth) - x2;
-            float x4 = x3 + float.Parse(headerFooterWidth);
+            float x2 = 22;// _x1 - float.Parse(headerFooterWidth);
+            float x3 = 40;// float.Parse(headerFooterWidth) - (_x1 - float.Parse(headerFooterWidth));//x2
+            float x4 = _x1 + 18;// (_x1 - float.Parse(headerFooterWidth));// x3 + float.Parse(headerFooterWidth);
 
             //      x1,y1       x2,y2    
             //
@@ -182,7 +182,9 @@ namespace SIL.PublishingSolution
                 CreateMainFrameStaticMethod1(FrameName, parentStory);
                 CreateReferenceFrameProperties(sign[i, 0], sign[i, 1], sign[i, 2], sign[i, 3], sign[i, 4],
                                                sign[i, 5], sign[i, 6], sign[i, 7]);
+
                 CreateReferenceFramePreferenceforReferences(headerFooterWidth);
+
                 CreateMainFrameStaticMethod2();
             }
         }
@@ -263,6 +265,8 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("PathOpen", "false");
             _writer.WriteStartElement("PathPointArray");
             _writer.WriteStartElement("PathPointType"); // Top-Left
+            //x3 = 396;
+            //x4 = 396;
             _writer.WriteAttributeString("Anchor", x1 + " " + y1);
             _writer.WriteAttributeString("LeftDirection", x1 + " " + y1);
             _writer.WriteAttributeString("RightDirection", x1 + " " + y1);
@@ -298,6 +302,7 @@ namespace SIL.PublishingSolution
 
         private void CreateReferenceFramePreferenceforReferences(string headerFooterWidth)
         {
+            //headerFooterWidth = "396";
             _writer.WriteStartElement("TextFramePreference");
             _writer.WriteAttributeString("TextColumnFixedWidth", headerFooterWidth);
             _writer.WriteAttributeString("VerticalJustification", "CenterAlign");

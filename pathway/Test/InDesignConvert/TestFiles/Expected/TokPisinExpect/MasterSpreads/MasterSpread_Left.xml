@@ -35,9 +35,9 @@
           <GeometryPathType PathOpen="false">
             <PathPointArray>
               <PathPointType Anchor="-234 -360" LeftDirection="-234 -360" RightDirection="-234 -360" />
-              <PathPointType Anchor="-234 -375" LeftDirection="-234 -375" RightDirection="-234 -375" />
-              <PathPointType Anchor="-78 -375" LeftDirection="-78 -375" RightDirection="-78 -375" />
-              <PathPointType Anchor="-78 -360" LeftDirection="-78 -360" RightDirection="-78 -360" />
+              <PathPointType Anchor="-234 -380" LeftDirection="-234 -380" RightDirection="-234 -380" />
+              <PathPointType Anchor="-22 -380" LeftDirection="-22 -380" RightDirection="-22 -380" />
+              <PathPointType Anchor="-22 -360" LeftDirection="-22 -360" RightDirection="-22 -360" />
             </PathPointArray>
           </GeometryPathType>
         </PathGeometry>
@@ -57,10 +57,10 @@
         <PathGeometry>
           <GeometryPathType PathOpen="false">
             <PathPointArray>
-              <PathPointType Anchor="-78 -360" LeftDirection="-78 -360" RightDirection="-78 -360" />
-              <PathPointType Anchor="-78 -375" LeftDirection="-78 -375" RightDirection="-78 -375" />
-              <PathPointType Anchor="78 -375" LeftDirection="78 -375" RightDirection="78 -375" />
-              <PathPointType Anchor="78 -360" LeftDirection="78 -360" RightDirection="78 -360" />
+              <PathPointType Anchor="-22 -360" LeftDirection="-22 -360" RightDirection="-22 -360" />
+              <PathPointType Anchor="-22 -380" LeftDirection="-22 -380" RightDirection="-22 -380" />
+              <PathPointType Anchor="40 -380" LeftDirection="40 -380" RightDirection="40 -380" />
+              <PathPointType Anchor="40 -360" LeftDirection="40 -360" RightDirection="40 -360" />
             </PathPointArray>
           </GeometryPathType>
         </PathGeometry>
@@ -80,10 +80,10 @@
         <PathGeometry>
           <GeometryPathType PathOpen="false">
             <PathPointArray>
-              <PathPointType Anchor="78 -360" LeftDirection="78 -360" RightDirection="78 -360" />
-              <PathPointType Anchor="78 -375" LeftDirection="78 -375" RightDirection="78 -375" />
-              <PathPointType Anchor="234 -375" LeftDirection="234 -375" RightDirection="234 -375" />
-              <PathPointType Anchor="234 -360" LeftDirection="234 -360" RightDirection="234 -360" />
+              <PathPointType Anchor="40 -360" LeftDirection="40 -360" RightDirection="40 -360" />
+              <PathPointType Anchor="40 -380" LeftDirection="40 -380" RightDirection="40 -380" />
+              <PathPointType Anchor="252 -380" LeftDirection="252 -380" RightDirection="252 -380" />
+              <PathPointType Anchor="252 -360" LeftDirection="252 -360" RightDirection="252 -360" />
             </PathPointArray>
           </GeometryPathType>
         </PathGeometry>
@@ -104,9 +104,9 @@
           <GeometryPathType PathOpen="false">
             <PathPointArray>
               <PathPointType Anchor="-234 360" LeftDirection="-234 360" RightDirection="-234 360" />
-              <PathPointType Anchor="-234 375" LeftDirection="-234 375" RightDirection="-234 375" />
-              <PathPointType Anchor="-78 375" LeftDirection="-78 375" RightDirection="-78 375" />
-              <PathPointType Anchor="-78 360" LeftDirection="-78 360" RightDirection="-78 360" />
+              <PathPointType Anchor="-234 380" LeftDirection="-234 380" RightDirection="-234 380" />
+              <PathPointType Anchor="-22 380" LeftDirection="-22 380" RightDirection="-22 380" />
+              <PathPointType Anchor="-22 360" LeftDirection="-22 360" RightDirection="-22 360" />
             </PathPointArray>
           </GeometryPathType>
         </PathGeometry>
@@ -126,10 +126,10 @@
         <PathGeometry>
           <GeometryPathType PathOpen="false">
             <PathPointArray>
-              <PathPointType Anchor="78 360" LeftDirection="78 360" RightDirection="78 360" />
-              <PathPointType Anchor="78 375" LeftDirection="78 375" RightDirection="78 375" />
-              <PathPointType Anchor="-78 375" LeftDirection="-78 375" RightDirection="-78 375" />
-              <PathPointType Anchor="-78 360" LeftDirection="-78 360" RightDirection="-78 360" />
+              <PathPointType Anchor="40 360" LeftDirection="40 360" RightDirection="40 360" />
+              <PathPointType Anchor="40 380" LeftDirection="40 380" RightDirection="40 380" />
+              <PathPointType Anchor="-22 380" LeftDirection="-22 380" RightDirection="-22 380" />
+              <PathPointType Anchor="-22 360" LeftDirection="-22 360" RightDirection="-22 360" />
             </PathPointArray>
           </GeometryPathType>
         </PathGeometry>
@@ -149,10 +149,10 @@
         <PathGeometry>
           <GeometryPathType PathOpen="false">
             <PathPointArray>
-              <PathPointType Anchor="78 360" LeftDirection="78 360" RightDirection="78 360" />
-              <PathPointType Anchor="78 375" LeftDirection="78 375" RightDirection="78 375" />
-              <PathPointType Anchor="234 375" LeftDirection="234 375" RightDirection="234 375" />
-              <PathPointType Anchor="234 360" LeftDirection="234 360" RightDirection="234 360" />
+              <PathPointType Anchor="40 360" LeftDirection="40 360" RightDirection="40 360" />
+              <PathPointType Anchor="40 380" LeftDirection="40 380" RightDirection="40 380" />
+              <PathPointType Anchor="252 380" LeftDirection="252 380" RightDirection="252 380" />
+              <PathPointType Anchor="252 360" LeftDirection="252 360" RightDirection="252 360" />
             </PathPointArray>
           </GeometryPathType>
         </PathGeometry>
