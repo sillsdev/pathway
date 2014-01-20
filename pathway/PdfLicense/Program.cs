@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
-using SIL.Tool;
 
 namespace PdfLicense
 {
@@ -55,7 +54,7 @@ namespace PdfLicense
         {
             if (ProgInstall == string.Empty)
                 ProgInstall = GetApplicationPath();
-            return SupportFolder == "" ? ProgInstall : Common.PathCombine(ProgInstall, SupportFolder);
+            return SupportFolder == "" ? ProgInstall : PathCombine(ProgInstall, SupportFolder);
         }
         #endregion
 
@@ -100,7 +99,7 @@ namespace PdfLicense
                     // The next line helps those using the developer version of FieldWorks
                     pathwayDir = pathwayDir.Replace("DistFiles", @"Output\Debug").Replace("distfiles", @"Output\Debug");
                 }
-                if (!File.Exists(Common.PathCombine(pathwayDir, "PsExport.dll")))
+                if (!File.Exists(PathCombine(pathwayDir, "PsExport.dll")))
                     pathwayDir = string.Empty;
                 if (pathwayDir == string.Empty)
                 {
@@ -137,7 +136,7 @@ namespace PdfLicense
                 if (!string.IsNullOrEmpty(RedirectOutput))
                 {
                     string result = string.Empty;
-                    StreamWriter streamWriter = new StreamWriter(Common.PathCombine(instPath, RedirectOutput));
+                    StreamWriter streamWriter = new StreamWriter(PathCombine(instPath, RedirectOutput));
                     var errorArgs = string.Format("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
                     result += errorArgs;
                     streamWriter.Write(result);
@@ -186,7 +185,7 @@ namespace PdfLicense
 
         private static string ReadPathinLicenseFile(string allUserPath)
         {
-            string fileLoc = Common.PathCombine(allUserPath, "License.txt");
+            string fileLoc = PathCombine(allUserPath, "License.txt");
             string executePath = string.Empty;
             int countRead = 0;
 
@@ -209,30 +208,30 @@ namespace PdfLicense
             return executePath;
         }
 
-        private string ReadPathinLicenseFile(string allUserPath, int readLineNumber)
-        {
-            string fileLoc = Common.PathCombine(allUserPath, "License.txt");
-            string executePath = string.Empty;
-            int countRead = 0;
+        //private string ReadPathinLicenseFile(string allUserPath, int readLineNumber)
+        //{
+        //    string fileLoc = Common.PathCombine(allUserPath, "License.txt");
+        //    string executePath = string.Empty;
+        //    int countRead = 0;
 
-            if (File.Exists(fileLoc))
-            {
-                using (StreamReader reader = new StreamReader(fileLoc))
-                {
-                    string line;
+        //    if (File.Exists(fileLoc))
+        //    {
+        //        using (StreamReader reader = new StreamReader(fileLoc))
+        //        {
+        //            string line;
 
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        _readLicenseFilesBylines.Add(line);
-                    }
+        //            while ((line = reader.ReadLine()) != null)
+        //            {
+        //                _readLicenseFilesBylines.Add(line);
+        //            }
 
-                    reader.Close();
+        //            reader.Close();
 
-                    executePath = _readLicenseFilesBylines[readLineNumber].ToString();
-                }
-            }
-            return executePath;
-        }
+        //            executePath = _readLicenseFilesBylines[readLineNumber].ToString();
+        //        }
+        //    }
+        //    return executePath;
+        //}
 
         /// <summary>
         /// Get all user path
@@ -257,7 +256,18 @@ namespace PdfLicense
             //if (path2 == null) throw new ArgumentNullException("path2");
             path1 = DirectoryPathReplace(path1);
             path2 = DirectoryPathReplace(path2);
-            return Common.PathCombine(path1, path2);
+            if (path1 == null)
+            {
+                return path2;
+            }
+            else if (path2 == null)
+            {
+                return path1;
+            }
+            else
+            {
+                return Path.Combine(path1, path2);
+            }
         }
 
         /// <summary>

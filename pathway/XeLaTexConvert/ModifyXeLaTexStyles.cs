@@ -283,8 +283,8 @@ namespace SIL.PublishingSolution
 
                 if (pageTopMargin != 0 || pageBottomMargin != 0 || pageLeftMargin != 0 || pageRightMargin != 0)
                 {
-                    pageTopMargin = (pageTopMargin / 28.346456693F) + 1.5;
-                    pageBottomMargin = (pageBottomMargin / 28.346456693F) + 1.5;
+                    pageTopMargin = (pageTopMargin * 0.03514598035);
+                    pageBottomMargin = (pageBottomMargin * 0.03514598035);
 
                     pageLeftMargin = Convert.ToDouble(Common.UnitConverter(pageLeftMargin.ToString() + "pt", "cm"));
                     pageRightMargin = Convert.ToDouble(Common.UnitConverter(pageRightMargin.ToString() + "pt", "cm"));

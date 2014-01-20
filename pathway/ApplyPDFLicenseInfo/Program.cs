@@ -46,7 +46,7 @@ namespace ApplyPDFLicenseInfo
             //Thread.Sleep(2500);
             if (File.Exists(licencePdfFile))
             {
-                File.Move(licencePdfFile, exportTitle);
+                File.Copy(licencePdfFile, exportTitle, true);
                 using (Process process = new Process())
                 {
                     process.StartInfo.FileName = exportTitle;

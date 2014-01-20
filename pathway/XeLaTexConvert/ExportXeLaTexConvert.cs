@@ -226,7 +226,7 @@ namespace SIL.PublishingSolution
             
             CallXeLaTex(xeLatexFullFile, true, imgPath);
 
-            ProcessRampFile(projInfo, xeLatexFullFile, organization);
+            //ProcessRampFile(projInfo, xeLatexFullFile, organization);
 
             return true;
         }
