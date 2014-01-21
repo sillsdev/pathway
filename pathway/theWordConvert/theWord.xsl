@@ -203,6 +203,9 @@
         <xsl:choose>
             <!-- Not first verse in Paragraph -->
             <xsl:when test="count(preceding-sibling::verse)">
+                <xsl:call-template name="BridgeVerseNumbers">
+                    <xsl:with-param name="bridge" select="$bridge"/>
+                </xsl:call-template>
                 <xsl:apply-templates select="following::node()[1]" mode="t"/>
             </xsl:when>
             <!-- It is the first verse in the Paragraph -->

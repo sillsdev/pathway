@@ -428,6 +428,12 @@ namespace Test.TheWordConvertTest
             TestDataCase("MAT", "040MATpvt.usx", 1, "<sup>(1a-1b)</sup> Mamey okukwe Jisas Krais so nopwey-om me ma mey hok non. Jisas Krais hiykwe Devit so ney-nona. <sup>1b</sup> Devit hiykwe Abraham so ney-nona.<CI>");
         }
 
+        [Test]
+        public void VerseBridgeInsideParaTest()
+        {
+            TestDataCase("MAT", "040MATtvb.usx", 4, "<sup>(4-5)</sup> Dungure Yesu maan iru di tongwa, “Omilin gi dungwa ibal pilaa dire kanungure, te kawn kebil sungwa u wai pire kol warungure, te seki egilungwa ibal gain wiige sungure, te kiraan gi dungwa ibal kwi pilaa dire ka pirungure, te gulungwa ibal alere u kwi pire mile paingure, te kal aa te nekungwa ibal na guunan kanan pirungure, kal iru erungwa main i kane pire, pi Yon di tenana po.");
+        }
+
         //[Test]
         //public void myTest()
         //{
