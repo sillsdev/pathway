@@ -104,7 +104,7 @@ namespace SIL.PublishingSolution
             string headerFooterWidth = GetHeaderFooterWidth();
             ArrayList ReferenceNames = new ArrayList { "top-left", "top-center", "top-right", "bottom-left", "bottom-center", "bottom-right" };
 
-            float frameHeight = 20f;
+            float frameHeight = 24f;//20.0f
             Dictionary<string, string> classValues = _cssProperty[_pageClass];
 
             float halfWidth = float.Parse(classValues["Page-Width"], CultureInfo.GetCultureInfo("en-US")) / 2;
@@ -139,10 +139,10 @@ namespace SIL.PublishingSolution
                                   {1 * x3, 1 * yb1, 1 * x3, 1 * yb2, 1 * x4, 1 * yb2, 1 * x4, 1 * yb1}
                               };
 
-            CreateMainFrameStaticMethod1("MainFrame", "u19c");
-            CreatePathPointArray();
-            SetTextFramePreference();
-            CreateMainFrameStaticMethod2();
+            //CreateMainFrameStaticMethod1("MainFrame", "u19c");
+            //CreatePathPointArray();
+            //SetTextFramePreference();
+            //CreateMainFrameStaticMethod2();
 
             for (int i = 0; i < ReferenceNames.Count; i++)
             {
@@ -302,10 +302,9 @@ namespace SIL.PublishingSolution
 
         private void CreateReferenceFramePreferenceforReferences(string headerFooterWidth)
         {
-            //headerFooterWidth = "396";
             _writer.WriteStartElement("TextFramePreference");
             _writer.WriteAttributeString("TextColumnFixedWidth", headerFooterWidth);
-            _writer.WriteAttributeString("VerticalJustification", "CenterAlign");
+            _writer.WriteAttributeString("VerticalJustification", "TopAlign");//CenterAlign
             _writer.WriteEndElement();
         }
 
@@ -473,7 +472,7 @@ namespace SIL.PublishingSolution
             if (frameName.IndexOf("bottom") == 0)
                 _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 -7.5");
             else
-                _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 0");
+                _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 21");//0
         }
 
         private void CreateMarginPreferenceforMasterPage()

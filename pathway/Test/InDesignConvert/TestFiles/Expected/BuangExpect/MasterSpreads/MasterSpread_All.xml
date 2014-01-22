@@ -9,34 +9,14 @@
         </Properties>
       </GridDataInformation>
     </Page>
-    <TextFrame Self="MainFrame" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 0">
-      <Properties>
-        <PathGeometry>
-          <GeometryPathType PathOpen="false">
-            <PathPointArray>
-              <PathPointType Anchor="-249.3071 -339.3071" LeftDirection="-249.3071 -339.3071" RightDirection="-249.3071 -339.3071" />
-              <PathPointType Anchor="-249.3071 339.3071" LeftDirection="-249.3071 339.3071" RightDirection="-249.3071 339.3071" />
-              <PathPointType Anchor="249.3071 339.3071" LeftDirection="249.3071 339.3071" RightDirection="249.3071 339.3071" />
-              <PathPointType Anchor="249.3071 -339.3071" LeftDirection="249.3071 -339.3071" RightDirection="249.3071 -339.3071" />
-            </PathPointArray>
-          </GeometryPathType>
-        </PathGeometry>
-      </Properties>
-      <TextFramePreference TextColumnFixedWidth="498.6142" />
-      <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
-        <Properties>
-          <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
-        </Properties>
-      </TextWrapPreference>
-    </TextFrame>
-    <TextFrame Self="topleft" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 0">
+    <TextFrame Self="topleft" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 21">
       <Properties>
         <PathGeometry>
           <GeometryPathType PathOpen="false">
             <PathPointArray>
               <PathPointType Anchor="-249.3071 -367.6536" LeftDirection="-249.3071 -367.6536" RightDirection="-249.3071 -367.6536" />
-              <PathPointType Anchor="-249.3071 -387.6536" LeftDirection="-249.3071 -387.6536" RightDirection="-249.3071 -387.6536" />
-              <PathPointType Anchor="-22 -387.6536" LeftDirection="-22 -387.6536" RightDirection="-22 -387.6536" />
+              <PathPointType Anchor="-249.3071 -391.6536" LeftDirection="-249.3071 -391.6536" RightDirection="-249.3071 -391.6536" />
+              <PathPointType Anchor="-22 -391.6536" LeftDirection="-22 -391.6536" RightDirection="-22 -391.6536" />
               <PathPointType Anchor="-22 -367.6536" LeftDirection="-22 -367.6536" RightDirection="-22 -367.6536" />
             </PathPointArray>
           </GeometryPathType>
@@ -45,21 +25,21 @@
           <KeyValuePair Key="Label" Value="Master" />
         </Label>
       </Properties>
-      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="CenterAlign" />
+      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="TopAlign" />
       <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
         <Properties>
           <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
         </Properties>
       </TextWrapPreference>
     </TextFrame>
-    <TextFrame Self="topcenter" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 0">
+    <TextFrame Self="topcenter" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 21">
       <Properties>
         <PathGeometry>
           <GeometryPathType PathOpen="false">
             <PathPointArray>
               <PathPointType Anchor="-22 -367.6536" LeftDirection="-22 -367.6536" RightDirection="-22 -367.6536" />
-              <PathPointType Anchor="-22 -387.6536" LeftDirection="-22 -387.6536" RightDirection="-22 -387.6536" />
-              <PathPointType Anchor="40 -387.6536" LeftDirection="40 -387.6536" RightDirection="40 -387.6536" />
+              <PathPointType Anchor="-22 -391.6536" LeftDirection="-22 -391.6536" RightDirection="-22 -391.6536" />
+              <PathPointType Anchor="40 -391.6536" LeftDirection="40 -391.6536" RightDirection="40 -391.6536" />
               <PathPointType Anchor="40 -367.6536" LeftDirection="40 -367.6536" RightDirection="40 -367.6536" />
             </PathPointArray>
           </GeometryPathType>
@@ -68,21 +48,21 @@
           <KeyValuePair Key="Label" Value="Master" />
         </Label>
       </Properties>
-      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="CenterAlign" />
+      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="TopAlign" />
       <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
         <Properties>
           <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
         </Properties>
       </TextWrapPreference>
     </TextFrame>
-    <TextFrame Self="topright" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 0">
+    <TextFrame Self="topright" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 21">
       <Properties>
         <PathGeometry>
           <GeometryPathType PathOpen="false">
             <PathPointArray>
               <PathPointType Anchor="40 -367.6536" LeftDirection="40 -367.6536" RightDirection="40 -367.6536" />
-              <PathPointType Anchor="40 -387.6536" LeftDirection="40 -387.6536" RightDirection="40 -387.6536" />
-              <PathPointType Anchor="267.3071 -387.6536" LeftDirection="267.3071 -387.6536" RightDirection="267.3071 -387.6536" />
+              <PathPointType Anchor="40 -391.6536" LeftDirection="40 -391.6536" RightDirection="40 -391.6536" />
+              <PathPointType Anchor="267.3071 -391.6536" LeftDirection="267.3071 -391.6536" RightDirection="267.3071 -391.6536" />
               <PathPointType Anchor="267.3071 -367.6536" LeftDirection="267.3071 -367.6536" RightDirection="267.3071 -367.6536" />
             </PathPointArray>
           </GeometryPathType>
@@ -91,7 +71,7 @@
           <KeyValuePair Key="Label" Value="Master" />
         </Label>
       </Properties>
-      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="CenterAlign" />
+      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="TopAlign" />
       <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
         <Properties>
           <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
@@ -104,8 +84,8 @@
           <GeometryPathType PathOpen="false">
             <PathPointArray>
               <PathPointType Anchor="-249.3071 367.6536" LeftDirection="-249.3071 367.6536" RightDirection="-249.3071 367.6536" />
-              <PathPointType Anchor="-249.3071 387.6536" LeftDirection="-249.3071 387.6536" RightDirection="-249.3071 387.6536" />
-              <PathPointType Anchor="-22 387.6536" LeftDirection="-22 387.6536" RightDirection="-22 387.6536" />
+              <PathPointType Anchor="-249.3071 391.6536" LeftDirection="-249.3071 391.6536" RightDirection="-249.3071 391.6536" />
+              <PathPointType Anchor="-22 391.6536" LeftDirection="-22 391.6536" RightDirection="-22 391.6536" />
               <PathPointType Anchor="-22 367.6536" LeftDirection="-22 367.6536" RightDirection="-22 367.6536" />
             </PathPointArray>
           </GeometryPathType>
@@ -114,7 +94,7 @@
           <KeyValuePair Key="Label" Value="Master" />
         </Label>
       </Properties>
-      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="CenterAlign" />
+      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="TopAlign" />
       <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
         <Properties>
           <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
@@ -127,8 +107,8 @@
           <GeometryPathType PathOpen="false">
             <PathPointArray>
               <PathPointType Anchor="40 367.6536" LeftDirection="40 367.6536" RightDirection="40 367.6536" />
-              <PathPointType Anchor="40 387.6536" LeftDirection="40 387.6536" RightDirection="40 387.6536" />
-              <PathPointType Anchor="-22 387.6536" LeftDirection="-22 387.6536" RightDirection="-22 387.6536" />
+              <PathPointType Anchor="40 391.6536" LeftDirection="40 391.6536" RightDirection="40 391.6536" />
+              <PathPointType Anchor="-22 391.6536" LeftDirection="-22 391.6536" RightDirection="-22 391.6536" />
               <PathPointType Anchor="-22 367.6536" LeftDirection="-22 367.6536" RightDirection="-22 367.6536" />
             </PathPointArray>
           </GeometryPathType>
@@ -137,7 +117,7 @@
           <KeyValuePair Key="Label" Value="Master" />
         </Label>
       </Properties>
-      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="CenterAlign" />
+      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="TopAlign" />
       <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
         <Properties>
           <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
@@ -150,8 +130,8 @@
           <GeometryPathType PathOpen="false">
             <PathPointArray>
               <PathPointType Anchor="40 367.6536" LeftDirection="40 367.6536" RightDirection="40 367.6536" />
-              <PathPointType Anchor="40 387.6536" LeftDirection="40 387.6536" RightDirection="40 387.6536" />
-              <PathPointType Anchor="267.3071 387.6536" LeftDirection="267.3071 387.6536" RightDirection="267.3071 387.6536" />
+              <PathPointType Anchor="40 391.6536" LeftDirection="40 391.6536" RightDirection="40 391.6536" />
+              <PathPointType Anchor="267.3071 391.6536" LeftDirection="267.3071 391.6536" RightDirection="267.3071 391.6536" />
               <PathPointType Anchor="267.3071 367.6536" LeftDirection="267.3071 367.6536" RightDirection="267.3071 367.6536" />
             </PathPointArray>
           </GeometryPathType>
@@ -160,7 +140,7 @@
           <KeyValuePair Key="Label" Value="Master" />
         </Label>
       </Properties>
-      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="CenterAlign" />
+      <TextFramePreference TextColumnFixedWidth="166.2047" VerticalJustification="TopAlign" />
       <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
         <Properties>
           <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />

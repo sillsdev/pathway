@@ -366,51 +366,51 @@ namespace Test.InDesignConvert
             ************/
             _fileNameWithPath = Common.PathCombine(_outputSpread, "MasterSpread_Left.xml");
 
-            _xPath = "//TextFrame[@Self=\"MainFrame\"]//PathPointArray";
-            nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
-            XmlNode node = nodesList[0];
-            string expected = "<PathPointType Anchor=\"-98.07875 -183.1181\" LeftDirection=\"-98.07875 -183.1181\" RightDirection=\"-98.07875 -183.1181\" /><PathPointType Anchor=\"-98.07875 219.1181\" LeftDirection=\"-98.07875 219.1181\" RightDirection=\"-98.07875 219.1181\" /><PathPointType Anchor=\"98.07875 219.1181\" LeftDirection=\"98.07875 219.1181\" RightDirection=\"98.07875 219.1181\" /><PathPointType Anchor=\"98.07875 -183.1181\" LeftDirection=\"98.07875 -183.1181\" RightDirection=\"98.07875 -183.1181\" />";
-            Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
+            //_xPath = "//TextFrame[@Self=\"MainFrame\"]//PathPointArray";
+            //nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
+            //XmlNode node = nodesList[0];
+            //string expected = "<PathPointType Anchor=\"-98.07875 -183.1181\" LeftDirection=\"-98.07875 -183.1181\" RightDirection=\"-98.07875 -183.1181\" /><PathPointType Anchor=\"-98.07875 219.1181\" LeftDirection=\"-98.07875 219.1181\" RightDirection=\"-98.07875 219.1181\" /><PathPointType Anchor=\"98.07875 219.1181\" LeftDirection=\"98.07875 219.1181\" RightDirection=\"98.07875 219.1181\" /><PathPointType Anchor=\"98.07875 -183.1181\" LeftDirection=\"98.07875 -183.1181\" RightDirection=\"98.07875 -183.1181\" />";
+            //Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             _xPath = "//TextFrame[@Self=\"topleft\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
-            node = nodesList[0];
-            expected = "<PathPointType Anchor=\"-98.07875 -219.1181\" LeftDirection=\"-98.07875 -219.1181\" RightDirection=\"-98.07875 -219.1181\" /><PathPointType Anchor=\"-98.07875 -239.1181\" LeftDirection=\"-98.07875 -239.1181\" RightDirection=\"-98.07875 -239.1181\" /><PathPointType Anchor=\"-22 -239.1181\" LeftDirection=\"-22 -239.1181\" RightDirection=\"-22 -239.1181\" /><PathPointType Anchor=\"-22 -219.1181\" LeftDirection=\"-22 -219.1181\" RightDirection=\"-22 -219.1181\" />";
+            XmlNode node = nodesList[0];
+            string expected = "<PathPointType Anchor=\"-98.07875 -219.1181\" LeftDirection=\"-98.07875 -219.1181\" RightDirection=\"-98.07875 -219.1181\" /><PathPointType Anchor=\"-98.07875 -243.1181\" LeftDirection=\"-98.07875 -243.1181\" RightDirection=\"-98.07875 -243.1181\" /><PathPointType Anchor=\"-22 -243.1181\" LeftDirection=\"-22 -243.1181\" RightDirection=\"-22 -243.1181\" /><PathPointType Anchor=\"-22 -219.1181\" LeftDirection=\"-22 -219.1181\" RightDirection=\"-22 -219.1181\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             //topcenter
             _xPath = "//TextFrame[@Self=\"topcenter\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             node = nodesList[0];
-            expected = "<PathPointType Anchor=\"-22 -219.1181\" LeftDirection=\"-22 -219.1181\" RightDirection=\"-22 -219.1181\" /><PathPointType Anchor=\"-22 -239.1181\" LeftDirection=\"-22 -239.1181\" RightDirection=\"-22 -239.1181\" /><PathPointType Anchor=\"40 -239.1181\" LeftDirection=\"40 -239.1181\" RightDirection=\"40 -239.1181\" /><PathPointType Anchor=\"40 -219.1181\" LeftDirection=\"40 -219.1181\" RightDirection=\"40 -219.1181\" />";
+            expected = "<PathPointType Anchor=\"-22 -219.1181\" LeftDirection=\"-22 -219.1181\" RightDirection=\"-22 -219.1181\" /><PathPointType Anchor=\"-22 -243.1181\" LeftDirection=\"-22 -243.1181\" RightDirection=\"-22 -243.1181\" /><PathPointType Anchor=\"40 -243.1181\" LeftDirection=\"40 -243.1181\" RightDirection=\"40 -243.1181\" /><PathPointType Anchor=\"40 -219.1181\" LeftDirection=\"40 -219.1181\" RightDirection=\"40 -219.1181\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             //topright
             _xPath = "//TextFrame[@Self=\"topright\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             node = nodesList[0];
-            expected = "<PathPointType Anchor=\"40 -219.1181\" LeftDirection=\"40 -219.1181\" RightDirection=\"40 -219.1181\" /><PathPointType Anchor=\"40 -239.1181\" LeftDirection=\"40 -239.1181\" RightDirection=\"40 -239.1181\" /><PathPointType Anchor=\"116.0788 -239.1181\" LeftDirection=\"116.0788 -239.1181\" RightDirection=\"116.0788 -239.1181\" /><PathPointType Anchor=\"116.0788 -219.1181\" LeftDirection=\"116.0788 -219.1181\" RightDirection=\"116.0788 -219.1181\" />";
+            expected = "<PathPointType Anchor=\"40 -219.1181\" LeftDirection=\"40 -219.1181\" RightDirection=\"40 -219.1181\" /><PathPointType Anchor=\"40 -243.1181\" LeftDirection=\"40 -243.1181\" RightDirection=\"40 -243.1181\" /><PathPointType Anchor=\"116.0788 -243.1181\" LeftDirection=\"116.0788 -243.1181\" RightDirection=\"116.0788 -243.1181\" /><PathPointType Anchor=\"116.0788 -219.1181\" LeftDirection=\"116.0788 -219.1181\" RightDirection=\"116.0788 -219.1181\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             //bottomleft
             _xPath = "//TextFrame[@Self=\"bottomleft\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             node = nodesList[0];
-            expected = "<PathPointType Anchor=\"-98.07875 237.1181\" LeftDirection=\"-98.07875 237.1181\" RightDirection=\"-98.07875 237.1181\" /><PathPointType Anchor=\"-98.07875 257.1181\" LeftDirection=\"-98.07875 257.1181\" RightDirection=\"-98.07875 257.1181\" /><PathPointType Anchor=\"-22 257.1181\" LeftDirection=\"-22 257.1181\" RightDirection=\"-22 257.1181\" /><PathPointType Anchor=\"-22 237.1181\" LeftDirection=\"-22 237.1181\" RightDirection=\"-22 237.1181\" />";
+            expected = "<PathPointType Anchor=\"-98.07875 237.1181\" LeftDirection=\"-98.07875 237.1181\" RightDirection=\"-98.07875 237.1181\" /><PathPointType Anchor=\"-98.07875 261.1181\" LeftDirection=\"-98.07875 261.1181\" RightDirection=\"-98.07875 261.1181\" /><PathPointType Anchor=\"-22 261.1181\" LeftDirection=\"-22 261.1181\" RightDirection=\"-22 261.1181\" /><PathPointType Anchor=\"-22 237.1181\" LeftDirection=\"-22 237.1181\" RightDirection=\"-22 237.1181\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             //bottomcenter
             _xPath = "//TextFrame[@Self=\"bottomcenter\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             node = nodesList[0];
-            expected = "<PathPointType Anchor=\"40 237.1181\" LeftDirection=\"40 237.1181\" RightDirection=\"40 237.1181\" /><PathPointType Anchor=\"40 257.1181\" LeftDirection=\"40 257.1181\" RightDirection=\"40 257.1181\" /><PathPointType Anchor=\"-22 257.1181\" LeftDirection=\"-22 257.1181\" RightDirection=\"-22 257.1181\" /><PathPointType Anchor=\"-22 237.1181\" LeftDirection=\"-22 237.1181\" RightDirection=\"-22 237.1181\" />";
+            expected = "<PathPointType Anchor=\"40 237.1181\" LeftDirection=\"40 237.1181\" RightDirection=\"40 237.1181\" /><PathPointType Anchor=\"40 261.1181\" LeftDirection=\"40 261.1181\" RightDirection=\"40 261.1181\" /><PathPointType Anchor=\"-22 261.1181\" LeftDirection=\"-22 261.1181\" RightDirection=\"-22 261.1181\" /><PathPointType Anchor=\"-22 237.1181\" LeftDirection=\"-22 237.1181\" RightDirection=\"-22 237.1181\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             //bottomright
             _xPath = "//TextFrame[@Self=\"bottomright\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             node = nodesList[0];
-            expected = "<PathPointType Anchor=\"40 237.1181\" LeftDirection=\"40 237.1181\" RightDirection=\"40 237.1181\" /><PathPointType Anchor=\"40 257.1181\" LeftDirection=\"40 257.1181\" RightDirection=\"40 257.1181\" /><PathPointType Anchor=\"116.0788 257.1181\" LeftDirection=\"116.0788 257.1181\" RightDirection=\"116.0788 257.1181\" /><PathPointType Anchor=\"116.0788 237.1181\" LeftDirection=\"116.0788 237.1181\" RightDirection=\"116.0788 237.1181\" />";
+            expected = "<PathPointType Anchor=\"40 237.1181\" LeftDirection=\"40 237.1181\" RightDirection=\"40 237.1181\" /><PathPointType Anchor=\"40 261.1181\" LeftDirection=\"40 261.1181\" RightDirection=\"40 261.1181\" /><PathPointType Anchor=\"116.0788 261.1181\" LeftDirection=\"116.0788 261.1181\" RightDirection=\"116.0788 261.1181\" /><PathPointType Anchor=\"116.0788 237.1181\" LeftDirection=\"116.0788 237.1181\" RightDirection=\"116.0788 237.1181\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             /***********
@@ -418,51 +418,51 @@ namespace Test.InDesignConvert
             ************/
             _fileNameWithPath = Common.PathCombine(_outputSpread, "MasterSpread_First.xml");
 
-            _xPath = "//TextFrame[@Self=\"MainFrame\"]//PathPointArray";
-            nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
-            node = nodesList[0];
-            expected = "<PathPointType Anchor=\"-69.7323 -69.7323\" LeftDirection=\"-69.7323 -69.7323\" RightDirection=\"-69.7323 -69.7323\" /><PathPointType Anchor=\"-69.7323 105.7323\" LeftDirection=\"-69.7323 105.7323\" RightDirection=\"-69.7323 105.7323\" /><PathPointType Anchor=\"105.7323 105.7323\" LeftDirection=\"105.7323 105.7323\" RightDirection=\"105.7323 105.7323\" /><PathPointType Anchor=\"105.7323 -69.7323\" LeftDirection=\"105.7323 -69.7323\" RightDirection=\"105.7323 -69.7323\" />";
-            Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
+            //_xPath = "//TextFrame[@Self=\"MainFrame\"]//PathPointArray";
+            //nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
+            //node = nodesList[0];
+            //expected = "<PathPointType Anchor=\"-69.7323 -69.7323\" LeftDirection=\"-69.7323 -69.7323\" RightDirection=\"-69.7323 -69.7323\" /><PathPointType Anchor=\"-69.7323 105.7323\" LeftDirection=\"-69.7323 105.7323\" RightDirection=\"-69.7323 105.7323\" /><PathPointType Anchor=\"105.7323 105.7323\" LeftDirection=\"105.7323 105.7323\" RightDirection=\"105.7323 105.7323\" /><PathPointType Anchor=\"105.7323 -69.7323\" LeftDirection=\"105.7323 -69.7323\" RightDirection=\"105.7323 -69.7323\" />";
+            //Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             _xPath = "//TextFrame[@Self=\"topleft\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             node = nodesList[0];
-            expected = "<PathPointType Anchor=\"-69.7323 -105.7323\" LeftDirection=\"-69.7323 -105.7323\" RightDirection=\"-69.7323 -105.7323\" /><PathPointType Anchor=\"-69.7323 -125.7323\" LeftDirection=\"-69.7323 -125.7323\" RightDirection=\"-69.7323 -125.7323\" /><PathPointType Anchor=\"-22 -125.7323\" LeftDirection=\"-22 -125.7323\" RightDirection=\"-22 -125.7323\" /><PathPointType Anchor=\"-22 -105.7323\" LeftDirection=\"-22 -105.7323\" RightDirection=\"-22 -105.7323\" />";
+            expected = "<PathPointType Anchor=\"-69.7323 -105.7323\" LeftDirection=\"-69.7323 -105.7323\" RightDirection=\"-69.7323 -105.7323\" /><PathPointType Anchor=\"-69.7323 -129.7323\" LeftDirection=\"-69.7323 -129.7323\" RightDirection=\"-69.7323 -129.7323\" /><PathPointType Anchor=\"-22 -129.7323\" LeftDirection=\"-22 -129.7323\" RightDirection=\"-22 -129.7323\" /><PathPointType Anchor=\"-22 -105.7323\" LeftDirection=\"-22 -105.7323\" RightDirection=\"-22 -105.7323\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             //topcenter
             _xPath = "//TextFrame[@Self=\"topcenter\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             node = nodesList[0];
-            expected = "<PathPointType Anchor=\"-22 -105.7323\" LeftDirection=\"-22 -105.7323\" RightDirection=\"-22 -105.7323\" /><PathPointType Anchor=\"-22 -125.7323\" LeftDirection=\"-22 -125.7323\" RightDirection=\"-22 -125.7323\" /><PathPointType Anchor=\"40 -125.7323\" LeftDirection=\"40 -125.7323\" RightDirection=\"40 -125.7323\" /><PathPointType Anchor=\"40 -105.7323\" LeftDirection=\"40 -105.7323\" RightDirection=\"40 -105.7323\" />";
+            expected = "<PathPointType Anchor=\"-22 -105.7323\" LeftDirection=\"-22 -105.7323\" RightDirection=\"-22 -105.7323\" /><PathPointType Anchor=\"-22 -129.7323\" LeftDirection=\"-22 -129.7323\" RightDirection=\"-22 -129.7323\" /><PathPointType Anchor=\"40 -129.7323\" LeftDirection=\"40 -129.7323\" RightDirection=\"40 -129.7323\" /><PathPointType Anchor=\"40 -105.7323\" LeftDirection=\"40 -105.7323\" RightDirection=\"40 -105.7323\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             //topright
             _xPath = "//TextFrame[@Self=\"topright\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             node = nodesList[0];
-            expected = "<PathPointType Anchor=\"40 -105.7323\" LeftDirection=\"40 -105.7323\" RightDirection=\"40 -105.7323\" /><PathPointType Anchor=\"40 -125.7323\" LeftDirection=\"40 -125.7323\" RightDirection=\"40 -125.7323\" /><PathPointType Anchor=\"87.7323 -125.7323\" LeftDirection=\"87.7323 -125.7323\" RightDirection=\"87.7323 -125.7323\" /><PathPointType Anchor=\"87.7323 -105.7323\" LeftDirection=\"87.7323 -105.7323\" RightDirection=\"87.7323 -105.7323\" />";
+            expected = "<PathPointType Anchor=\"40 -105.7323\" LeftDirection=\"40 -105.7323\" RightDirection=\"40 -105.7323\" /><PathPointType Anchor=\"40 -129.7323\" LeftDirection=\"40 -129.7323\" RightDirection=\"40 -129.7323\" /><PathPointType Anchor=\"87.7323 -129.7323\" LeftDirection=\"87.7323 -129.7323\" RightDirection=\"87.7323 -129.7323\" /><PathPointType Anchor=\"87.7323 -105.7323\" LeftDirection=\"87.7323 -105.7323\" RightDirection=\"87.7323 -105.7323\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             //bottomleft
             _xPath = "//TextFrame[@Self=\"bottomleft\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             node = nodesList[0];
-            expected = "<PathPointType Anchor=\"-69.7323 123.7323\" LeftDirection=\"-69.7323 123.7323\" RightDirection=\"-69.7323 123.7323\" /><PathPointType Anchor=\"-69.7323 143.7323\" LeftDirection=\"-69.7323 143.7323\" RightDirection=\"-69.7323 143.7323\" /><PathPointType Anchor=\"-22 143.7323\" LeftDirection=\"-22 143.7323\" RightDirection=\"-22 143.7323\" /><PathPointType Anchor=\"-22 123.7323\" LeftDirection=\"-22 123.7323\" RightDirection=\"-22 123.7323\" />";
+            expected = "<PathPointType Anchor=\"-69.7323 123.7323\" LeftDirection=\"-69.7323 123.7323\" RightDirection=\"-69.7323 123.7323\" /><PathPointType Anchor=\"-69.7323 147.7323\" LeftDirection=\"-69.7323 147.7323\" RightDirection=\"-69.7323 147.7323\" /><PathPointType Anchor=\"-22 147.7323\" LeftDirection=\"-22 147.7323\" RightDirection=\"-22 147.7323\" /><PathPointType Anchor=\"-22 123.7323\" LeftDirection=\"-22 123.7323\" RightDirection=\"-22 123.7323\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             //bottomcenter
             _xPath = "//TextFrame[@Self=\"bottomcenter\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             node = nodesList[0];
-            expected = "<PathPointType Anchor=\"40 123.7323\" LeftDirection=\"40 123.7323\" RightDirection=\"40 123.7323\" /><PathPointType Anchor=\"40 143.7323\" LeftDirection=\"40 143.7323\" RightDirection=\"40 143.7323\" /><PathPointType Anchor=\"-22 143.7323\" LeftDirection=\"-22 143.7323\" RightDirection=\"-22 143.7323\" /><PathPointType Anchor=\"-22 123.7323\" LeftDirection=\"-22 123.7323\" RightDirection=\"-22 123.7323\" />";
+            expected = "<PathPointType Anchor=\"40 123.7323\" LeftDirection=\"40 123.7323\" RightDirection=\"40 123.7323\" /><PathPointType Anchor=\"40 147.7323\" LeftDirection=\"40 147.7323\" RightDirection=\"40 147.7323\" /><PathPointType Anchor=\"-22 147.7323\" LeftDirection=\"-22 147.7323\" RightDirection=\"-22 147.7323\" /><PathPointType Anchor=\"-22 123.7323\" LeftDirection=\"-22 123.7323\" RightDirection=\"-22 123.7323\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             //bottomright
             _xPath = "//TextFrame[@Self=\"bottomright\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             node = nodesList[0];
-            expected = "<PathPointType Anchor=\"40 123.7323\" LeftDirection=\"40 123.7323\" RightDirection=\"40 123.7323\" /><PathPointType Anchor=\"40 143.7323\" LeftDirection=\"40 143.7323\" RightDirection=\"40 143.7323\" /><PathPointType Anchor=\"87.7323 143.7323\" LeftDirection=\"87.7323 143.7323\" RightDirection=\"87.7323 143.7323\" /><PathPointType Anchor=\"87.7323 123.7323\" LeftDirection=\"87.7323 123.7323\" RightDirection=\"87.7323 123.7323\" />";
+            expected = "<PathPointType Anchor=\"40 123.7323\" LeftDirection=\"40 123.7323\" RightDirection=\"40 123.7323\" /><PathPointType Anchor=\"40 147.7323\" LeftDirection=\"40 147.7323\" RightDirection=\"40 147.7323\" /><PathPointType Anchor=\"87.7323 147.7323\" LeftDirection=\"87.7323 147.7323\" RightDirection=\"87.7323 147.7323\" /><PathPointType Anchor=\"87.7323 123.7323\" LeftDirection=\"87.7323 123.7323\" RightDirection=\"87.7323 123.7323\" />";
             Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
 
