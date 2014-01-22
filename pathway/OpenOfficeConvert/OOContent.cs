@@ -2860,6 +2860,11 @@ namespace SIL.PublishingSolution
                     if (imageClass.ToLower().IndexOf("picturecenter") == 0)
                         HoriAlignment = "center";
 
+                    if(_frameCount == 0) //
+                    { 
+                        _frameCount = 1;
+                    }
+
                     string strGraphicsCount = "Graphics" + (_frameCount + 1);
                     string strFrameCount = "Frame" + (_frameCount + 1);
                     string strFrameStyCount = "fr" + (_frameCount + 1);

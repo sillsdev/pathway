@@ -1333,8 +1333,10 @@ namespace SIL.Tool
                     _projInfo.IsFrontMatterEnabled = true;
                 }
                 //END OF TABLE OF CONTENTS
-
-                mainXhtmlFile[0].InnerXml = frontMatterXHTMLContent + pNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                if (frontMatterXHTMLContent.Trim().Length > 0)
+                {
+                    mainXhtmlFile[0].InnerXml = frontMatterXHTMLContent + pNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                }
 
                 xmldoc.Save(inputXhtmlFilePath);
 
