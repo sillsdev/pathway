@@ -300,6 +300,10 @@ namespace SIL.PublishingSolution
 
                 sw.WriteLine(_pageStyleFormat);
 
+                sw.WriteLine(@"\parindent=0pt");
+                sw.WriteLine(@"\parskip=\medskipamount");
+
+
                 sw.WriteLine(@"\begin{document} ");
                 sw.WriteLine(@"\pagestyle{plain} ");
             }

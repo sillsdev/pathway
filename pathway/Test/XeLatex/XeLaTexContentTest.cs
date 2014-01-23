@@ -1051,6 +1051,17 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void HangingIndent()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "HangingIndent";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         #endregion
 
         #region Private Functions

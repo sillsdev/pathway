@@ -655,21 +655,21 @@ namespace SIL.PublishingSolution
         }
         public void MarginLeft(string propertyValue)
         {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            _IDProperty["Margin-Left"] = propertyValue;
+            //if (propertyValue == string.Empty)
+            //{
+            //    return;
+            //}
+            //_IDProperty["Margin-Left"] = propertyValue;
 
-            propertyValue = Common.SetPropertyValue("\\leftmargin", propertyValue);
+            //propertyValue = Common.SetPropertyValue("\\leftmargin", propertyValue);
 
-            //propertyValue = Common.SetPropertyValue("margin leftmargin=", propertyValue);
-            _IDProperty["margin-left"] = propertyValue;
-            _inlineStyle.Add(propertyValue);
+            ////propertyValue = Common.SetPropertyValue("margin leftmargin=", propertyValue);
+            //_IDProperty["margin-left"] = propertyValue;
+            //_inlineStyle.Add(propertyValue);
 
-            propertyValue = "\\usepackage{changepage}";
-            if (!_includePackageList.Contains(propertyValue))
-                _includePackageList.Add(propertyValue);
+            //propertyValue = "\\usepackage{changepage}";
+            //if (!_includePackageList.Contains(propertyValue))
+            //    _includePackageList.Add(propertyValue);
         }
         public void MarginRight(string propertyValue)
         {
@@ -826,17 +826,18 @@ namespace SIL.PublishingSolution
             {
                 //propertyValue = "text-indent hangpara";
 
-                int hangParaValue = 0;
+                //int hangParaValue = 0;
                 propertyValue = propertyValue.Replace("-", "");
-                hangParaValue = -(Convert.ToInt32(propertyValue));
+                //hangParaValue = -(Convert.ToInt32(propertyValue));
 
                 if (cssProperty.ContainsKey("class-margin-left"))
                 {
-                    propertyValue = @"\leftskip " + cssProperty["class-margin-left"] + "pt ";
+                    //propertyValue = @"\leftskip " + cssProperty["class-margin-left"] + "pt ";
+                    propertyValue = cssProperty["class-margin-left"] + "pt";
                 }
 
-                propertyValue = "text-indent " + propertyValue + @"\parindent " + hangParaValue + "pt ";
-
+                propertyValue = "text-indent " + propertyValue;
+                //propertyValue = "text-indent " + propertyValue + @"\parindent " + hangParaValue + "pt ";
                 // propertyValue = "text-indent {hanglist}" + "[" + hangParaValue + "pt]";
 
                 //if(cssProperty.ContainsKey("font-size"))

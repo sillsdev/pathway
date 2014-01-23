@@ -85,7 +85,7 @@ namespace SIL.PublishingSolution
         private int _tocPageStock = 0;
         private string _tocStyleName;
         private Dictionary<string, string> _toc = new Dictionary<string, string>();
-
+        private bool _isHeadwordInsertedAfterImage = false;
         private string _bookName = string.Empty;
         public string _dicMainReversal = string.Empty;
         private string _chapterStyleforHeader = string.Empty;
@@ -644,7 +644,7 @@ namespace SIL.PublishingSolution
 
         private void WriteCharacterStyle(string content, string characterStyle)
         {
-            
+
             //_imageInserted = InsertImage();
             SetHomographNumber(false);
             string footerClassName = string.Empty;
@@ -675,7 +675,7 @@ namespace SIL.PublishingSolution
                 content = Common.ReplaceSymbolToXelatexText(content);
                 List<string> value = CreateInlineInnerStyle(characterStyle);
 
-                
+
 
                 if (_childName.IndexOf("scrBookName") == 0 && content != null)
                 {
@@ -901,6 +901,20 @@ namespace SIL.PublishingSolution
                             _tocStyleName = mergedParaStyle;
                             string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
                             headerFormat = headerFormat.Replace("~", "\\textasciitilde{~}");
+                            if (_isHeadwordInsertedAfterImage)
+                            {
+                                string hangingLength = string.Empty;
+                                foreach (string property in _classInlineStyle["entry"])
+                                {
+                                    if (property.Contains("text-indent"))
+                                    {
+                                        hangingLength = property.Replace("text-indent", "");
+                                        hangingLength = "\r\n\\hangindent=" + hangingLength + "\r\n\\hangafter=1";
+                                    }
+                                }
+                                headerFormat = hangingLength + headerFormat;
+                                _isHeadwordInsertedAfterImage = false;
+                            }
                             _xetexFile.Write(headerFormat);
                             _headerContent = content;
                         }
@@ -1595,17 +1609,23 @@ namespace SIL.PublishingSolution
                                 txtAlignEnd = " ";
                             }
                         }
-                        else if (propName == "text-indent")
+                        else if (propName.Contains("text-indent"))
                         {
-                            if (property.IndexOf("hanglist") > 0)
+                            if (property.Contains("text-indent"))
                             {
-                                txtAlignStart = "\r\n \\begin" + Common.RightString(property, " ") + " \\item ";
-                                txtAlignEnd = "\\end{hanglist} ";
+                                string hangingLength = property.Replace("text-indent", "");
+                                txtAlignStart = "\r\n\\hangindent=" + hangingLength + "\r\n\\hangafter=1";
                             }
-                            else if (property.IndexOf("parindent") > 0)
-                            {
-                                textIndent = property.Replace("text-indent ", "");
-                            }
+
+                            //if (property.IndexOf("hanglist") > 0)
+                            //{
+                            //    txtAlignStart = "\r\n \\begin" + Common.RightString(property, " ") + " \\item ";
+                            //    txtAlignEnd = "\\end{hanglist} ";
+                            //}
+                            //else if (property.IndexOf("parindent") > 0)
+                            //{
+                            //    textIndent = property.Replace("text-indent ", "");
+                            //}
                         }
                         else if (propName == "display-none")
                         {
@@ -1660,8 +1680,8 @@ namespace SIL.PublishingSolution
                 //    _xetexFile.Write("\\subsection*{");
                 //}
 
-               
-                if ((childClass.ToLower().IndexOf("line") == -1) && (paddingLeft.Length > 0 || paddingRight.Length > 0 || paddingTop.Length > 0 || paddingBottom.Length > 0 ))
+
+                if ((childClass.ToLower().IndexOf("line") == -1) && (paddingLeft.Length > 0 || paddingRight.Length > 0 || paddingTop.Length > 0 || paddingBottom.Length > 0))
                 {
                     if (paddingLeft.Length == 0)
                     {
@@ -1680,20 +1700,20 @@ namespace SIL.PublishingSolution
                         paddingBottom = "0pt";
                     }
 
-                    //\begin{adjustwidth}{ 9pt}{ 9pt}
-                    string paddingStart = "\\begin{adjustwidth}{" + paddingTop + "}{" + paddingRight + "}{" + paddingBottom + "}{" + paddingLeft + "}";
-                    _xetexFile.Write(paddingStart);
-                    endParagraphString = "\\end{adjustwidth} " + endParagraphString;
+                    ////\begin{adjustwidth}{ 9pt}{ 9pt}
+                    //string paddingStart = "\\begin{adjustwidth}{" + paddingTop + "}{" + paddingRight + "}{" + paddingBottom + "}{" + paddingLeft + "}";
+                    //_xetexFile.Write(paddingStart);
+                    //endParagraphString = "\\end{adjustwidth} " + endParagraphString;
 
-                    //if (_classNameWithLang.ToLower().IndexOf("sectionhead") == 0)
-                    //{
-                    //    endParagraphString = endParagraphString + "}";
-                    //}
+                    ////if (_classNameWithLang.ToLower().IndexOf("sectionhead") == 0)
+                    ////{
+                    ////    endParagraphString = endParagraphString + "}";
+                    ////}
 
-                    //if (_classNameWithLang.ToLower().IndexOf("parallelpassagereference") == 0)
-                    //{
-                    //    endParagraphString = endParagraphString + "}";
-                    //}
+                    ////if (_classNameWithLang.ToLower().IndexOf("parallelpassagereference") == 0)
+                    ////{
+                    ////    endParagraphString = endParagraphString + "}";
+                    ////}
                 }
 
 
@@ -1708,7 +1728,7 @@ namespace SIL.PublishingSolution
                     endParagraphString = "\\end{mdframed}}" + endParagraphString;
                 }
 
-               
+
                 if (txtLineSpaceStart != string.Empty)
                 {
                     _xetexFile.Write(txtLineSpaceStart);
@@ -1897,12 +1917,12 @@ namespace SIL.PublishingSolution
             {
                 _xetexFile.WriteLine("\\end{enumerate}");
             }
-            
+
             EndElementBase(false);
 
             if (_closeChildName.IndexOf("scrBookName") == 0)
             {
-                _xetexFile.Write("\r\n \\label{PageStock_"  + _dicMainReversal  + TocPageStock.ToString() + "} ");
+                _xetexFile.Write("\r\n \\label{PageStock_" + _dicMainReversal + TocPageStock.ToString() + "} ");
                 _bookName = string.Empty;
                 _bookPageBreak = false;
             }
@@ -1978,6 +1998,7 @@ namespace SIL.PublishingSolution
                 if (imageClass.Length > 0 && _closeChildName == imageClass)
                 {
                     isImageAvailable = false;
+                    _isHeadwordInsertedAfterImage = true;
                     imageClass = "";
                     _isParagraphClosed = false;
                 }
