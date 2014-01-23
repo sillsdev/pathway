@@ -980,7 +980,7 @@ namespace SIL.PublishingSolution
                     nameGraphicElement.SetAttribute("style:horizontal-pos", position);
                     nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
                     // this is for text flow
-                    //nameGraphicElement.SetAttribute("style:flow-with-text", "true");
+                    nameGraphicElement.SetAttribute("style:flow-with-text", "true");
                 }
                 else if (position == "both")
                 {

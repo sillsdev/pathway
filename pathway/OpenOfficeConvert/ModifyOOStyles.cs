@@ -797,12 +797,14 @@ namespace SIL.PublishingSolution
                     //nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
                     SetAttribute( "from-top","style:vertical-pos");
                     //nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
-                    SetAttribute("paragraph", "style:vertical-rel");
+                    SetAttribute("paragraph-content", "style:vertical-rel");
                     //nameGraphicElement.SetAttribute("style:horizontal-pos", position);
                     SetAttribute(position,"style:horizontal-pos" );
                     //nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
+                    SetAttribute("paragraph", "style:horizontal-rel");
                     // this is for text flow
                     //nameGraphicElement.SetAttribute("style:flow-with-text", "true");
+                    SetAttribute("true", "style:flow-with-text");
                 }
                 else if (position == "both")
                 {
@@ -925,13 +927,14 @@ namespace SIL.PublishingSolution
                     //nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
                     SetAttribute("from-top", "style:vertical-pos");
                     //nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
-                    SetAttribute("paragraph", "style:vertical-rel");
+                    SetAttribute("paragraph-content", "style:vertical-rel");
                     //nameGraphicElement.SetAttribute("style:horizontal-pos", position);
                     SetAttribute(position, "style:horizontal-pos");
-                    
                     //nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
+                    SetAttribute("paragraph", "style:horizontal-rel");
                     // this is for text flow
                     //nameGraphicElement.SetAttribute("style:flow-with-text", "true");
+                    SetAttribute("true", "style:flow-with-text");
                 }
                 else if (position == "both")
                 {

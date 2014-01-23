@@ -2921,7 +2921,7 @@ namespace SIL.PublishingSolution
                         _writer.WriteStartElement("text:p");
 
                         //_writer.WriteAttributeString("text:style-name", _util.ParentName);
-                        //_writer.WriteAttributeString("text:style-name", divTagName);
+                        _writer.WriteAttributeString("text:style-name", divTagName);
 
                         _isParagraphClosed = false;
                         _isNewParagraph = false;
