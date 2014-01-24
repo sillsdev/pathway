@@ -39,13 +39,12 @@ Func Options($left, $top)
 	$stable = GUICtrlCreateRadio("Stable", 384, 244, 64, 16)
 	$latest = GUICtrlCreateRadio("Latest", 384, 268, 64, 16)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
-	if Fw73orLater() Then
-		GUICtrlSetState($stable, $GUI_DISABLE)
-		GUICtrlSetState($latest, $GUI_CHECKED)
-		GUICtrlCreateLabel("Fieldworks Version incompatible with stable", 344, 310)
-	Else
-		GUICtrlSetState($stable, $GUI_CHECKED)
-	EndIf
+	GUICtrlSetState($stable, $GUI_CHECKED)
+;~ 	if Fw73orLater() Then
+;~ 		GUICtrlSetState($stable, $GUI_DISABLE)
+;~ 		GUICtrlSetState($latest, $GUI_CHECKED)
+;~ 		GUICtrlCreateLabel("Fieldworks Version incompatible with stable", 344, 310)
+;~ 	EndIf
 	$note = GUICtrlCreateLabel("NOTE: Bootstrap will install " & $INS_Num & " support program(s) amounting to " & $INS_Size & "MB. (See Advanced button for details.)", 256, 400, 350, 40)
 	GUICtrlSetFont($note, 8.5, 400, 0, "Tahoma")
 	$minimal = GUICtrlCreateCheckbox( "Minimal install", 506, 375, 100, 25)
