@@ -215,19 +215,14 @@ namespace SIL.PublishingSolution
             }
             
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include, _langFontCodeandName);
-
-            //CallXeTex(Path.GetFileName(xeLatexFullFile));
             Dictionary<string, string> imgPath = new Dictionary<string, string>();
             if (newProperty.ContainsKey("ImagePath"))
             {
                 imgPath = newProperty["ImagePath"];
             }
             UpdateXeLaTexFontCacheIfNecessary();
-            
             CallXeLaTex(xeLatexFullFile, true, imgPath);
-
-            //ProcessRampFile(projInfo, xeLatexFullFile, organization);
-
+            ProcessRampFile(projInfo, xeLatexFullFile, organization);
             return true;
         }
 
@@ -516,6 +511,18 @@ namespace SIL.PublishingSolution
 
         public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
+
+            string[] pdfFiles = Directory.GetFiles(Path.GetDirectoryName(xeLatexFullFile), "*.pdf");
+            foreach (string pdfFile in pdfFiles)
+            {
+                try
+                {
+                    File.Delete(pdfFile);
+                }
+                catch{}
+            }
+
+
             bool isUnixOs = Common.IsUnixOS();
             string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
 

@@ -415,6 +415,11 @@ namespace SIL.PublishingSolution
                         {
                             _hasImgCloseTag = false;
                         }
+                        if (_reader.Name == "br")
+                        {
+                            _xetexFile.Write(" \\\\ ");
+                            continue;
+                        }
                     }
 
                     switch (_reader.NodeType)
@@ -1805,7 +1810,6 @@ namespace SIL.PublishingSolution
                     _endParagraphStringDic[getStyleName] = endParagraphString;
                 }
             }
-
         }
 
         private void SetHeadwordTrue()

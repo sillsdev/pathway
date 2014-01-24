@@ -39,6 +39,9 @@ namespace ApplyPDFLicenseInfo
             //Thread.Sleep(500);
             pdfFileName = ProcessLicensePdf(pdfFileName, executePath);
 
+            if (exportTitle == string.Empty)
+                exportTitle = "ExportPdf";
+
             exportTitle = exportTitle.Replace(" ", "_") + ".pdf";
             exportTitle = Path.Combine(workingDirectory, exportTitle);
             string licencePdfFile = pdfFileName.Replace(".pdf", "1.pdf");
@@ -55,7 +58,13 @@ namespace ApplyPDFLicenseInfo
             }
 
             if (File.Exists(pdfFileName) && File.Exists(exportTitle))
+            {
                 File.Delete(pdfFileName);
+            }
+            if (File.Exists(licencePdfFile) && File.Exists(exportTitle))
+            {
+                File.Delete(licencePdfFile);
+            }
 
             if (creatorTool.ToLower() == "libreoffice")
             {

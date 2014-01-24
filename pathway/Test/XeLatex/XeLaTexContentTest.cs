@@ -1062,6 +1062,16 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void BRTagInputCase()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "BRTag";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         #endregion
 
         #region Private Functions

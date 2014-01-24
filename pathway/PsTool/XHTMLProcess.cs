@@ -184,7 +184,11 @@ namespace SIL.PublishingSolution
             bool result = false;
             if (_reader.IsEmptyElement)
             {
-                if (_reader.Name != "img")
+                if (_reader.Name == "br")
+                {
+                    return false;
+                }
+                else if (_reader.Name != "img")
                 {
                     result = true;
                 }
