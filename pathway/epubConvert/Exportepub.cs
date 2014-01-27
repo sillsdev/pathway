@@ -226,7 +226,7 @@ namespace SIL.PublishingSolution
                 // XHTML preprocessing
                 Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "&nbsp;", Common.NonBreakingSpace);
                 preProcessor.GetTempFolderPath();
-                preProcessor.ImagePreprocess();
+                preProcessor.ImagePreprocess(false);
                 preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
                 if (projInfo.SwapHeadword)
                 {

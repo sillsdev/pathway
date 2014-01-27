@@ -60,7 +60,7 @@ namespace SIL.PublishingSolution
             preProcessor.InsertEmptyHeadwordForReversal(preProcessor.ProcessedXhtml);
             MergeProcessInXHTMLforMasterPage(preProcessor.ProcessedXhtml);
             preProcessor.PreserveSpace();
-            preProcessor.ImagePreprocess();
+            preProcessor.ImagePreprocess(true);
             //preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
             //preProcessor.InsertInDesignFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
 

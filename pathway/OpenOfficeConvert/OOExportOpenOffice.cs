@@ -803,7 +803,7 @@ namespace SIL.PublishingSolution
             var cXML = new LOContent();
             //preProcessor.GetTempFolderPath();
             //preProcessor.GetfigureNode();
-            preProcessor.ImagePreprocess();
+            preProcessor.ImagePreprocess(false);
             //preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)

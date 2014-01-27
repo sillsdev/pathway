@@ -34,7 +34,8 @@ namespace SIL.Tool
         /// <summary>
         /// FileOpen used for Preprocessing temp File
         /// </summary>
-        string ImagePreprocess();
+        /// <param name="isInDesign"> </param>
+        string ImagePreprocess(bool isInDesign);
 
         void GetTempFolderPath();
 
@@ -1736,7 +1737,8 @@ namespace SIL.Tool
         /// <summary>
         /// FileOpen used for Preprocessing temp File
         /// </summary>
-        public string ImagePreprocess()
+        /// <param name="isInDesign"> </param>
+        public string ImagePreprocess(bool isInDesign)
         {
             //if (string.IsNullOrEmpty(sourceFile) || !File.Exists(sourceFile)) return string.Empty;
             //Temp folder and file copy
@@ -1840,6 +1842,16 @@ namespace SIL.Tool
 
                                         string toFileName = Common.PathCombine(tempFolder, counter + ext);
                                         File.Copy(fromFileName, toFileName, true);
+                                        if (isInDesign)
+                                        {
+                                            string pictureFolderPath = Common.PathCombine(sourcePicturePath, "Pictures");
+                                            if (!Directory.Exists(pictureFolderPath))
+                                            {
+                                                Directory.CreateDirectory(pictureFolderPath);
+                                            }
+                                            toFileName = Common.PathCombine(pictureFolderPath, counter + ext);
+                                            File.Copy(fromFileName, toFileName, true);
+                                        }
                                         //No need this conversion logic
                                         //if (ext != null && ext.Contains("tif"))
                                         //{

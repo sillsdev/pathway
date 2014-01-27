@@ -135,7 +135,7 @@ namespace SIL.PublishingSolution
             const int stopAtLineNo = 100;
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
-            preProcessor.ImagePreprocess();
+            preProcessor.ImagePreprocess(false);
             xhtmlFile = preProcessor.ProcessedXhtml;
             string linkCss = outputFileName + ".css";
             string previewPath = Path.GetDirectoryName(xhtmlFile);

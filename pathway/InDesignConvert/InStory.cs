@@ -61,7 +61,7 @@ namespace SIL.PublishingSolution
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
             _projInfo = projInfo;
-            _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            Common.PathCombine(projInfo.DictionaryPath, "Pictures");
             InitializeData(Common.PathCombine(projInfo.TempOutputFolder, "Stories"), idAllClass, classFamily, cssClassOrder);
             ProcessCounterProperty();
             OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath);
@@ -503,7 +503,12 @@ namespace SIL.PublishingSolution
                 string[] cc = _allParagraph.ToArray();
                 imageClass = cc[1];
                 srcFile = _imageSource.ToLower();
-                string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _inputPath);
+                if(srcFile.ToLower().IndexOf("pictures") == -1)
+                {
+                    srcFile = "Pictures/" + srcFile;
+                }
+                //string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _inputPath);
+                string fileName = "file://" + srcFile;
                 string fileName1 = Common.GetPictureFromPath(srcFile, "", _inputPath);
                 //if (IdAllClass.ContainsKey(srcFile))
                 //To get Image details
@@ -845,7 +850,7 @@ namespace SIL.PublishingSolution
                     _dupParagraph.Pop();
                     if (_dupParagraph.Count > 0)
                     {
-                        pictureCaption = _dupParagraph.Peek().ToString();
+                        pictureCaption = _dupParagraph.Peek();
                         int countCharacter = 0;
                         countCharacter = pictureCaption.Length;
                         pictureCaption = pictureCaption.Substring(0, countCharacter - 2);

@@ -78,6 +78,12 @@ namespace SIL.PublishingSolution
             WriteFile(textContent, insertVariable);
 
             CopySupportFolder(projInfo);
+
+            //Copy pictures to IndesignFiles folder (inside Stories folder)
+           
+            var pictureFolder = Common.PathCombine(projInfo.DictionaryPath, "Pictures");
+            if (File.Exists(pictureFolder))
+                CopyFolderWithFiles(pictureFolder, Common.PathCombine(projInfo.TempOutputFolder, "Pictures"));
         }
 
         private static void WriteFile(StringBuilder textContent, ArrayList insertVariables)
