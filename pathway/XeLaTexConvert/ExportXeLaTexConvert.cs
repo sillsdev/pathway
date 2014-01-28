@@ -51,7 +51,7 @@ namespace SIL.PublishingSolution
         private bool _isFileFontCodeandFontNameFound = false;
         private Dictionary<string, string> _tocPropertyList = new Dictionary<string, string>();
         private Dictionary<string, string> _langFontCodeandName;
-
+        private Dictionary<string, string> _fontLangMap = new Dictionary<string, string>();
         #region Public Functions
         public string ExportType
         {
@@ -91,6 +91,7 @@ namespace SIL.PublishingSolution
                 Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
             }
             // preProcessor.GetTempFolderPath();
+            preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
             preProcessor.XelatexImagePreprocess();
             //preProcessor.MovePictureAsLastChild(projInfo.DefaultXhtmlFileWithPath);
             Param.LoadSettings();
@@ -121,11 +122,14 @@ namespace SIL.PublishingSolution
 
             _tableOfContent = (Param.GetMetadataValue(Param.TableOfContents, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TableOfContents, organization));
 
-
             BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
-            //GetXhtmlFileFontCodeandFontName(projInfo.DefaultXhtmlFileWithPath);
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-            //projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
+            
+            if (projInfo.DefaultXhtmlFileWithPath.Contains("FlexRev.xhtml"))
+            {
+                projInfo.IsReversalExist = false;
+            }
+
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
             projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
@@ -187,16 +191,20 @@ namespace SIL.PublishingSolution
                 modifyXeLaTexStyles.CopyrightTexFilename = Path.GetFileName(_copyrightTexFileName);
             }
 
-            if (ExportReversalIndex(projInfo))
+            if (projInfo.IsReversalExist)
             {
-                _reversalIndexTexCreated = true;
-                var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-                //var revCSSFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
-                string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
-                string xeLatexCopyrightFile = Common.PathCombine(projInfo.ProjectPath, fileNameXhtml + ".tex");
+                if (ExportReversalIndex(projInfo))
+                {
+                    _reversalIndexTexCreated = true;
+                    var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
+                                                     "FlexRev.xhtml");
+                    //var revCSSFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
+                    string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
+                    string xeLatexCopyrightFile = Common.PathCombine(projInfo.ProjectPath, fileNameXhtml + ".tex");
 
-                modifyXeLaTexStyles.ReversalIndexExist = true;
-                modifyXeLaTexStyles.ReversalIndexTexFilename = Path.GetFileName(xeLatexCopyrightFile);
+                    modifyXeLaTexStyles.ReversalIndexExist = true;
+                    modifyXeLaTexStyles.ReversalIndexTexFilename = Path.GetFileName(xeLatexCopyrightFile);
+                }
             }
 
             modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = false;
@@ -432,6 +440,8 @@ namespace SIL.PublishingSolution
                 }
 
                 projInfo.DefaultXhtmlFileWithPath = revFile;
+                PreExportProcess preProcessor = new PreExportProcess(projInfo);
+                preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
                 Dictionary<string, Dictionary<string, string>> cssClass =
                     new Dictionary<string, Dictionary<string, string>>();
                 CssTree cssTree = new CssTree();
@@ -757,12 +767,41 @@ namespace SIL.PublishingSolution
                 }
             }
             _reader.Close();
+            CreateFontLanguageMap();
+
         }
+
+        private void CreateFontLanguageMap()
+        {
+            Common.FillMappedFonts(_fontLangMap);
+
+            foreach (var fontName in _fontLangMap)
+            {
+                if (_langFontCodeandName.ContainsKey(fontName.Key))
+                {
+                    if (fontName.Key.ToLower() != "en")
+                    {
+                        _langFontCodeandName.Remove(fontName.Key);
+                        _langFontCodeandName.Add(fontName.Key, fontName.Value);
+                    }
+                }
+
+                if (_langFontDictionary.ContainsKey(fontName.Key))
+                {
+                    if (fontName.Key.ToLower() != "en")
+                    {
+                        _langFontDictionary.Remove(fontName.Key);
+                        _langFontDictionary.Add(fontName.Key, fontName.Value);
+                    }
+                }
+            }
+        }
+
         #endregion
 
         private void GetXhtmlFileFontCodeandFontName(XmlTextReader _reader)
         {
-
+            
             if (_isFileFontCodeandFontNameFound)
             {
                 return;

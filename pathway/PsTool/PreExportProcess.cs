@@ -1649,6 +1649,48 @@ namespace SIL.Tool
             //Common.ReplaceInCssFile(_xhtmlFileNameWithPath, searchText, replaceText);
         }
 
+        public string SetLangforLetter(string xhtmlFileName)
+        {
+            //div[@class='letData']/div[@class='entry']
+            string letterLang = "en";
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.PreserveWhitespace = false;
+            xDoc.Load(xhtmlFileName);
+            //xDoc.Load(_xhtmlFileNameWithPath);
+
+            XmlNodeList nodeList = xDoc.SelectNodes("//xhtml:div[@class='letHead']/xhtml:div[@class='letter']", namespaceManager);
+            if (nodeList.Count > 0)
+            {
+                for (int i = 0; i < nodeList.Count; i++)
+                {
+                    XmlNode letterNode = nodeList[i];
+                    XmlNode parentLetterNode = letterNode.ParentNode;
+                    if (parentLetterNode != null)
+                    {
+                        XmlNode letDataNode = parentLetterNode.NextSibling;
+                        string xPath = ".//xhtml:div[@class='entry'][1]/xhtml:span[@lang]";
+                        if (letDataNode != null)
+                        {
+                            XmlNode spanNode = letDataNode.SelectSingleNode(xPath, namespaceManager);
+                            if (spanNode != null)
+                            {
+                                letterLang = spanNode.Attributes["lang"].Value;
+                            }
+                        }
+                        
+                    }
+                    XmlAttribute attribute = xDoc.CreateAttribute("lang");
+                    attribute.Value = letterLang;
+                    if (letterNode.Attributes != null) letterNode.Attributes.Append(attribute);
+                }
+            }
+            xDoc.Save(xhtmlFileName);
+
+            return xhtmlFileName;
+        }        
+
         /// <summary>
         /// FileOpen used for Preprocessing temp File For Xelatex
         /// </summary>

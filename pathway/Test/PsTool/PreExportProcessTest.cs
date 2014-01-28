@@ -84,6 +84,26 @@ namespace Test.PsTool
             XmlAssert.AreEqual(expected, output, "");
         }
 
+
+        /// <summary>
+        ///A test for XelatexXhtmlFileDivLetterAddingLangAttributeTest
+        ///</summary>
+        [Test]
+        public void XelatexXhtmlFileDivLetterAddingLangAttributeTest()
+        {
+            string filename = "XelatexXhtmlFileDivLetterAddingLangAttribute.xhtml";
+            string input = GetFileNameWithPath(filename);
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = input;
+            preExportProcess = new PreExportProcess(projInfo);
+            string expected = GetFileNameWithExpectedPath(filename);
+            string outputFile = projInfo.DefaultXhtmlFileWithPath.Replace("InputFiles", "output");
+            File.Copy(projInfo.DefaultXhtmlFileWithPath, outputFile, true);
+            string output = preExportProcess.SetLangforLetter(outputFile);
+            XmlAssert.AreEqual(expected, output, "");
+        }
+
+
         /// <summary>
         ///A test for ParagraphVerserSetUp
         ///</summary>

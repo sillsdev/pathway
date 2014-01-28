@@ -33,6 +33,7 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> _tempStyle;
         Dictionary<string, Dictionary<string, string>> mergedStyle = new Dictionary<string, Dictionary<string, string>>();
         Dictionary<string, Dictionary<string, string>> _cssClass = new Dictionary<string, Dictionary<string, string>>();
+        
         XeLaTexMapProperty mapProperty = new XeLaTexMapProperty();
         string _firstString = string.Empty;
         string _lastString = string.Empty;
@@ -53,6 +54,7 @@ namespace SIL.PublishingSolution
         private bool _isMirrored = false;
         private Dictionary<string, string> _langFontDictionary;
         private Dictionary<string, Dictionary<string, string>> _tocList;
+        
         public string ProjectType
         {
             get { return _projectType; }
@@ -147,7 +149,7 @@ namespace SIL.PublishingSolution
             get { return _langFontDictionary; }
             set { _langFontDictionary = value; }
         }
-
+        
         #endregion
 
         public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty,
