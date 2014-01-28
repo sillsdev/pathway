@@ -27,7 +27,7 @@
   <office:styles>
     <style:style style:name="dicBody" style:family="paragraph" style:parent-style-name="" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letHead_dicBody" style:family="paragraph" style:parent-style-name="dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letter_letHead_dicBody" style:family="paragraph" style:parent-style-name="letHead_dicBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letter_letHead_dicBody" style:family="paragraph" style:parent-style-name="letHead_dicBody" style:default-outline-level="2">
       <style:paragraph-properties style:writing-mode="lr-tb" fo:margin-bottom="18pt" fo:margin-top="18pt" fo:text-align="center" fo:keep-with-next="always" fo:orphans="5" fo:widows="5" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="18pt" style:font-size-complex="18pt" fo:font-weight="700" style:font-weight-complex="700" />
     </style:style>

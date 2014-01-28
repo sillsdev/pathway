@@ -233,6 +233,12 @@ namespace SIL.PublishingSolution
             attribute = "style:parent-style-name";
             SetAttribute(parent_Type[0], attribute);
 
+            if (className.Value.ContainsKey("-ps-outline-level"))
+            {
+                attribute = "style:default-outline-level";
+                SetAttribute(className.Value["-ps-outline-level"], attribute);
+            }
+
             attribute = "master-page-name";
             if (newClassName.ToLower().IndexOf("coverimage") == 0)
             {
