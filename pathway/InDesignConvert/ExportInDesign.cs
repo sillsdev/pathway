@@ -122,8 +122,12 @@ namespace SIL.PublishingSolution
             string ldmlFullName = Common.PathCombine(projInfo.DictionaryPath, fileName + ".idml");
             Compress(projInfo.TempOutputFolder, ldmlFullName);
 
-            Common.CleanupExportFolder(ldmlFullName, ".tmp,.de", "layout", string.Empty);
-            //CreateRAMP(projInfo);
+            Common.CleanupExportFolder(ldmlFullName, ".tmp,.de", "layout", String.Empty);
+
+            CreateRAMP(projInfo);
+
+            Common.CleanupExportFolder(ldmlFullName, ".css,.xhtml,.xml", String.Empty, "Pictures");
+
             if (projInfo.IsOpenOutput)
                 Launch(ldmlFullName);
 
@@ -151,7 +155,7 @@ namespace SIL.PublishingSolution
         private void CreateRAMP(PublicationInformation projInfo)
         {
             Ramp ramp = new Ramp();
-            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".ldml", projInfo.ProjectInputType);
+            ramp.Create(Common.PathCombine(projInfo.DictionaryPath, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath.Replace("Preserve",""))), ".ldml", projInfo.ProjectInputType);
         }
 
         private Dictionary<string, Dictionary<string, string>> MergeProcessInCSSforMasterPage(string fileName, Dictionary<string, Dictionary<string, string>> cssClass)

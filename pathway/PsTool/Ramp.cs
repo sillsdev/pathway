@@ -713,7 +713,7 @@ namespace SIL.PublishingSolution
                     RampFile rFile = new RampFile();
                     rFile.FileName = Path.GetFileName(file);
                     string fileExtn = Path.GetExtension(file);
-                    if (fileExtn == ".odm" || fileExtn == ".jar" || fileExtn == ".epub" || fileExtn == ".mybible")
+                    if (fileExtn == ".odm" || fileExtn == ".jar" || fileExtn == ".epub" || fileExtn == ".mybible" || fileExtn == ".ldml")
                     {
 
                         rFile.FileDescription = Path.GetFileNameWithoutExtension(file) + " " + fileExtn.Replace(".", "") + " document";
@@ -1713,6 +1713,7 @@ namespace SIL.PublishingSolution
             List<string> dirCollection = new List<string>();
             dirCollection.Add(Common.PathCombine(Path.GetDirectoryName(_folderPath), "USX"));
             dirCollection.Add(Common.PathCombine(Path.GetDirectoryName(_folderPath), "SFM"));
+            dirCollection.Add(Common.PathCombine(Path.GetDirectoryName(_folderPath), "Pictures"));
 
             using (ZipFile zipFile = ZipFile.Create(Common.PathCombine(Path.GetDirectoryName(_folderPath), Param.GetMetadataValue(Param.Title)) + ".ramp"))
             {
@@ -1728,11 +1729,17 @@ namespace SIL.PublishingSolution
                     if (Directory.Exists(dirPath))
                     {
                         zipFile.AddDirectory(dirPath);
+                        List<string> subfilesCollection = new List<string>();
+                        subfilesCollection.AddRange(Directory.GetFiles(dirPath));
+                        foreach (string subfile in subfilesCollection)
+                        {
+                            zipFile.Add(subfile, CompressionMethod.Stored);
+                        }
                     }
                 }
                 zipFile.CommitUpdate();
             }
-            CleanUpFolder(filesCollection, Path.GetDirectoryName(_folderPath));
+            //CleanUpFolder(filesCollection, Path.GetDirectoryName(_folderPath));
         }
 
         private void CleanUpFolder(List<string> files, string folderPath)
