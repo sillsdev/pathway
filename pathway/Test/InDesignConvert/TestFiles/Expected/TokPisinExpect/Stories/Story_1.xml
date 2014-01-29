@@ -158,7 +158,7 @@
             </Properties>
             <ContourOption ContourType="SameAsClipping" IncludeInsideEdges="false" ContourPathName="$ID/" />
           </TextWrapPreference>
-          <Link Self="u225" AssetURL="$ID/" AssetID="$ID/" LinkResourceURI="file://pictures/j0384909.jpg" StoredState="Normal" LinkClassID="35906" LinkClientID="257" LinkResourceModified="false" LinkObjectModified="false" ShowInUI="true" CanEmbed="true" CanUnembed="true" CanPackage="true" ImportPolicy="NoAutoImport" ExportPolicy="NoAutoExport" LinkImportStamp="file 128811558721632778 187452" LinkImportModificationTime="2009-03-10T16:21:12" LinkImportTime="2009-12-17T16:28:20" />
+          <Link Self="u225" AssetURL="$ID/" AssetID="$ID/" LinkResourceURI="file:" StoredState="Normal" LinkClassID="35906" LinkClientID="257" LinkResourceModified="false" LinkObjectModified="false" ShowInUI="true" CanEmbed="true" CanUnembed="true" CanPackage="true" ImportPolicy="NoAutoImport" ExportPolicy="NoAutoExport" LinkImportStamp="file 128811558721632778 187452" LinkImportModificationTime="2009-03-10T16:21:12" LinkImportTime="2009-12-17T16:28:20" />
           <ClippingPathSettings ClippingType="None" InvertPath="false" IncludeInsideEdges="false" RestrictToFrame="false" UseHighResolutionImage="true" Threshold="25" Tolerance="2" InsetFrame="0" AppliedPathName="$ID/" Index="-1" />
           <ImageIOPreference ApplyPhotoshopClippingPath="true" AllowAutoEmbedding="true" AlphaChannelName="$ID/" />
         </Image>
@@ -366,7 +366,7 @@
             </Properties>
             <ContourOption ContourType="SameAsClipping" IncludeInsideEdges="false" ContourPathName="$ID/" />
           </TextWrapPreference>
-          <Link Self="u225" AssetURL="$ID/" AssetID="$ID/" LinkResourceURI="file://pictures/nativity.jpg" StoredState="Normal" LinkClassID="35906" LinkClientID="257" LinkResourceModified="false" LinkObjectModified="false" ShowInUI="true" CanEmbed="true" CanUnembed="true" CanPackage="true" ImportPolicy="NoAutoImport" ExportPolicy="NoAutoExport" LinkImportStamp="file 128811558721632778 187452" LinkImportModificationTime="2009-03-10T16:21:12" LinkImportTime="2009-12-17T16:28:20" />
+          <Link Self="u225" AssetURL="$ID/" AssetID="$ID/" LinkResourceURI="file:" StoredState="Normal" LinkClassID="35906" LinkClientID="257" LinkResourceModified="false" LinkObjectModified="false" ShowInUI="true" CanEmbed="true" CanUnembed="true" CanPackage="true" ImportPolicy="NoAutoImport" ExportPolicy="NoAutoExport" LinkImportStamp="file 128811558721632778 187452" LinkImportModificationTime="2009-03-10T16:21:12" LinkImportTime="2009-12-17T16:28:20" />
           <ClippingPathSettings ClippingType="None" InvertPath="false" IncludeInsideEdges="false" RestrictToFrame="false" UseHighResolutionImage="true" Threshold="25" Tolerance="2" InsetFrame="0" AppliedPathName="$ID/" Index="-1" />
           <ImageIOPreference ApplyPhotoshopClippingPath="true" AllowAutoEmbedding="true" AlphaChannelName="$ID/" />
         </Image>

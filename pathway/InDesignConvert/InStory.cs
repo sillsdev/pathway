@@ -508,8 +508,9 @@ namespace SIL.PublishingSolution
                     srcFile = "Pictures/" + srcFile;
                 }
                 //string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _inputPath);
-                string fileName = "file://" + srcFile;
-                string fileName1 = Common.GetPictureFromPath(srcFile, "", _inputPath);
+                //string fileName = "file://" + srcFile;
+                string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _projInfo.DictionaryPath);
+                string fileName1 = Common.GetPictureFromPath(srcFile, "", _projInfo.DictionaryPath);
                 //if (IdAllClass.ContainsKey(srcFile))
                 //To get Image details
                 if (File.Exists(fileName1))

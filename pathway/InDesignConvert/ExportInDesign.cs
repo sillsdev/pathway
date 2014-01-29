@@ -126,7 +126,7 @@ namespace SIL.PublishingSolution
 
             CreateRAMP(projInfo);
 
-            Common.CleanupExportFolder(ldmlFullName, ".css,.xhtml,.xml", String.Empty, "Pictures");
+            Common.CleanupExportFolder(ldmlFullName, ".css,.xhtml,.xml", String.Empty, String.Empty);
 
             if (projInfo.IsOpenOutput)
                 Launch(ldmlFullName);
