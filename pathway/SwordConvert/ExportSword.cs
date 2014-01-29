@@ -57,25 +57,40 @@ namespace SIL.PublishingSolution
             CreateDirectoryForSwordOutput(osisFilePath);
             UsxToOSIS usxToOsis = new UsxToOSIS();
             string[] usxFilesList = Directory.GetFiles(usxFilePath, "*.usx");
-            
+
+            //Usx to Osis Conversion Process Step
+            UsxtoOsisConvertProcess(usxFilesList, osisFilePath, usxToOsis);
+
+
+            osisFilePath = Path.GetDirectoryName(osisFilePath);
+            tempSwordCreatorPath = Common.PathCombine(tempSwordCreatorPath, "OSIS");
+            osisFilePath = Common.PathCombine(osisFilePath, "OSIS");
+            CopySwordCreatorFolderToTemp(osisFilePath, tempSwordCreatorPath, null);
+
+            string swordOutputLocation = SwordOutputLocation(Path.GetDirectoryName(tempSwordCreatorPath));
+            string[] osisFilesList = Directory.GetFiles(tempSwordCreatorPath, "*.xml");
+
+            //Start Process to Osis To Osis2Mod Conversion
+            SwordOutputBuildProcess(swordTempFolder, swordOutputLocation, osisFilesList, usxFilePath);
+
+            string swordOutputExportLocation = Common.PathCombine(projInfo.ProjectPath, "SwordOutput");
+            List<string> restricttoCopyExtensions = new List<string>();
+            restricttoCopyExtensions.Add(".exe");
+            restricttoCopyExtensions.Add(".dll");
+
+            CopySwordCreatorFolderToTemp(swordTempFolder, swordOutputExportLocation, restricttoCopyExtensions);
+
+            return success;
+        }
+
+        private static void UsxtoOsisConvertProcess(string[] usxFilesList, string osisFilePath, UsxToOSIS usxToOsis)
+        {
             foreach (var usxfile in usxFilesList)
             {
                 string osisFileName = Path.GetFileNameWithoutExtension(usxfile) + ".xml";
                 osisFileName = Common.PathCombine(osisFilePath, osisFileName);
                 usxToOsis.ConvertUsxToOSIS(usxfile, osisFileName);
             }
-            osisFilePath = Path.GetDirectoryName(osisFilePath);
-            tempSwordCreatorPath = Common.PathCombine(tempSwordCreatorPath, "OSIS");
-            osisFilePath = Common.PathCombine(osisFilePath, "OSIS");
-            CopySwordCreatorFolderToTemp(osisFilePath, tempSwordCreatorPath);
-          
-            string swordOutputLocation = SwordOutputLocation(Path.GetDirectoryName(tempSwordCreatorPath));
-            string[] osisFilesList = Directory.GetFiles(tempSwordCreatorPath, "*.xml");
-            SwordOutputBuildProcess(swordTempFolder, swordOutputLocation, osisFilesList, usxFilePath);
-
-            CopySwordCreatorFolderToTemp(swordTempFolder, projInfo.ProjectPath);
-
-            return success;
         }
 
         private string SwordCreatorTempDirectory(string swordFullPath)
@@ -88,40 +103,61 @@ namespace SIL.PublishingSolution
                 DirectoryInfo di = new DirectoryInfo(folder);
                 Common.CleanDirectory(di);
             }
-            CopySwordCreatorFolderToTemp(swordFullPath, folder);
+            CopySwordCreatorFolderToTemp(swordFullPath, folder, null);
             return folder;
         }
 
-        public void CopySwordCreatorFolderToTemp(string sourceFolder, string destFolder)
+        public void CopySwordCreatorFolderToTemp(string sourceFolder, string destFolder, List<string> restricttoCopyExtensions)
         {
             if (Directory.Exists(destFolder))
             {
                 Common.DeleteDirectory(destFolder);
             }
             Directory.CreateDirectory(destFolder);
-            string[] files = Directory.GetFiles(sourceFolder);
-            try
-            {
-                foreach (string file in files)
-                {
-                    string name = Path.GetFileName(file);
-                    string dest = Common.PathCombine(destFolder, name);
-                    
-                        File.Copy(file, dest);
-                    
-                }
 
-                string[] folders = Directory.GetDirectories(sourceFolder);
-                foreach (string folder in folders)
-                {
-                    string name = Path.GetFileName(folder);
-                    string dest = Common.PathCombine(destFolder, name);
-                    CopySwordCreatorFolderToTemp(folder, dest);
-                }
-            }
-            catch
+            if (Directory.Exists(sourceFolder))
             {
+                string[] files = Directory.GetFiles(sourceFolder);
+                try
+                {
+                    foreach (string file in files)
+                    {
+                        if (restricttoCopyExtensions != null && restricttoCopyExtensions.Count > 1)
+                        {
+                            bool isExtensionAvailable = false;
+                            foreach (var extensions in restricttoCopyExtensions)
+                            {
+                                if (file.Contains(extensions))
+                                {
+                                    isExtensionAvailable = true;
+                                    break;
+                                }
+                            }
 
+                            if (!isExtensionAvailable)
+                            {
+                                string name = Path.GetFileName(file);
+                                string dest = Common.PathCombine(destFolder, name);
+                                File.Copy(file, dest, true);
+                            }
+                        }
+                        else
+                        {
+                            string name = Path.GetFileName(file);
+                            string dest = Common.PathCombine(destFolder, name);
+                            File.Copy(file, dest, true);
+                        }
+                    }
+
+                    string[] folders = Directory.GetDirectories(sourceFolder);
+                    foreach (string folder in folders)
+                    {
+                        string name = Path.GetFileName(folder);
+                        string dest = Common.PathCombine(destFolder, name);
+                        CopySwordCreatorFolderToTemp(folder, dest, restricttoCopyExtensions);
+                    }
+                }
+                catch{}
             }
         }
 

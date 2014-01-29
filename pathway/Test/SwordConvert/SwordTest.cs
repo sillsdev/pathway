@@ -163,7 +163,63 @@ namespace Test.SwordConvert
 
             if (Directory.Exists(swordTmpDir))
             {
-                swordObj.CopySwordCreatorFolderToTemp(swordTmpDir, Common.PathCombine(_outputPath, file));
+                swordObj.CopySwordCreatorFolderToTemp(swordTmpDir, Common.PathCombine(_outputPath, file), null);
+            }
+            string swordOutputPath = Common.PathCombine(_outputPath, file);
+            Common.CleanupExportFolder(Common.PathCombine(swordOutputPath, file + ".xml"), ".exe,.dll", string.Empty, string.Empty);
+
+            if (Directory.Exists(inputTmpDir))
+            {
+                DirectoryInfo di = new DirectoryInfo(inputTmpDir);
+                Common.CleanDirectory(di);
+            }
+
+            if (Directory.Exists(swordTmpDir))
+            {
+                DirectoryInfo di = new DirectoryInfo(swordTmpDir);
+                Common.CleanDirectory(di);
+            }
+
+            FileAssert.AreEqual(expected, output, file + " test fails");
+        }
+
+        ///<summary>
+        ///Compare files
+        /// </summary>      
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void JN2BookTest()
+        {
+            const string file = "2JN";
+
+            string input = Common.PathCombine(_inputPath, file + ".usx");
+            string output = Common.PathCombine(_outputPath, file + ".xml");
+            string expected = Common.PathCombine(_expectedPath, file + ".xml");
+
+            var inputTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName().Replace(".", "_"));
+            Directory.CreateDirectory(inputTmpDir);
+            string inputTmpDirFileName = string.Empty;
+            inputTmpDirFileName = Common.PathCombine(inputTmpDir, Path.GetFileName(input));
+            File.Copy(input, inputTmpDirFileName, true);
+
+            ExportSword swordObj = new ExportSword();
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.ProjectPath = Path.GetDirectoryName(inputTmpDirFileName);
+            projInfo.DefaultXhtmlFileWithPath = inputTmpDirFileName;
+            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            swordObj.Export(projInfo);
+
+            string osisOutputFile = Common.PathCombine(inputTmpDir, "OSIS");
+            var swordTmpDir = Common.PathCombine(Path.GetTempPath(), "Sword");
+            osisOutputFile = Common.PathCombine(osisOutputFile, Path.GetFileName(output));
+            if (File.Exists(osisOutputFile))
+            {
+                File.Copy(osisOutputFile, output, true);
+            }
+
+            if (Directory.Exists(swordTmpDir))
+            {
+                swordObj.CopySwordCreatorFolderToTemp(swordTmpDir, Common.PathCombine(_outputPath, file), null);
             }
             string swordOutputPath = Common.PathCombine(_outputPath, file);
             Common.CleanupExportFolder(Common.PathCombine(swordOutputPath, file + ".xml"), ".exe,.dll", string.Empty, string.Empty);
