@@ -237,6 +237,8 @@ namespace SIL.PublishingSolution
             {
                 attribute = "style:default-outline-level";
                 SetAttribute(className.Value["-ps-outline-level"], attribute);
+                SetAttribute("", "style:list-style-name");
+                SetAttribute("", "style:master-page-name");
             }
 
             attribute = "master-page-name";

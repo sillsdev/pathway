@@ -1061,9 +1061,18 @@ namespace SIL.PublishingSolution
                     // Note: Paragraph Start Element
 
 
+                    if ((_childName == "letter_letHead_dicBody" || _childName == "scrBookName_scrBook_scrBody") && IsTocExists())
+                    {
+                        _writer.WriteStartElement("text:h");
+                        _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
+                        _writer.WriteAttributeString("text:outline-level", GetOutlineLevel());
+                    }
+                    else
+                    {
+                        _writer.WriteStartElement("text:p");
+                        _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass                        
+                    }
 
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
                     isPageBreak = false;
                     if (_paragraphName.IndexOf("bookPageBreak_") == 0)
                     {
@@ -1086,6 +1095,45 @@ namespace SIL.PublishingSolution
             }
             WriteText();
             isFileEmpty = false;
+        }
+
+        private string GetOutlineLevel()
+        {
+            string strOutlineLevel = "1";
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                if (IdAllClass["letter"].ContainsKey("-ps-outline-level"))
+                    strOutlineLevel = IdAllClass["letter"]["-ps-outline-level"];
+            }
+            else
+            {
+                if (IdAllClass["scrBook"].ContainsKey("-ps-outline-level"))
+                    strOutlineLevel = IdAllClass["scrBook"]["-ps-outline-level"];
+            }
+            return strOutlineLevel;
+        }
+
+        private bool IsTocExists()
+        {
+            Param.LoadSettings();
+            string organization;
+            try
+            {
+                organization = "SIL International";
+                // get the organization
+                if (Param.Value.ContainsKey("Organization"))
+                {
+                    organization = Param.Value["Organization"];
+                }
+            }
+            catch (Exception)
+            {
+                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                // but just in case, specify a default org.
+                organization = "SIL International";
+            }
+            string tableOfContent =Param.GetMetadataValue(Param.TableOfContents, organization) ?? "";
+            return (tableOfContent.ToLower() == "true");
         }
 
         private void DropCapsParagraph()
