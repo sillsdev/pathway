@@ -254,7 +254,7 @@ namespace Test.TheWordConvertTest
         [Test]
         public void ItalicInFootnote()
         {
-            TestDataCase("JHN", "043JHN.usx", 459, "<TS1>Jew Men Hitumatum Imih Jesu Hikwahir<Ts>Nati rarabkokou wanawanan Tafaror Bar ana hiyuw wabin Koksouwen<RF>I baise <i>Hanukkah</i> teo<Rf> i Jerusalemamaim hibogaigiwas.");
+            TestDataCase("JHN", "043JHN.usx", 459, "<TS1>Jew Men Hitumatum Imih Jesu Hikwahir<Ts>Nati rarabkokou wanawanan Tafaror Bar ana hiyuw wabin Koksouwen<RF q=+>I baise <i>Hanukkah</i> teo<Rf> i Jerusalemamaim hibogaigiwas.");
         }
 
         [Test]
@@ -266,7 +266,7 @@ namespace Test.TheWordConvertTest
         [Test]
         public void TableWithFootnote()
         {
-            TestDataCase("EZR", "015EZR.usx", 9, "This was the inventory:<CL><CL>gold dishes — 30<CL>silver dishes — 1,000<CL>silver pans<RF>The meaning of the Hebrew for this word is uncertain.<Rf> — 29<CL>");
+            TestDataCase("EZR", "015EZR.usx", 9, "This was the inventory:<CL><CL>gold dishes — 30<CL>silver dishes — 1,000<CL>silver pans<RF q=+>The meaning of the Hebrew for this word is uncertain.<Rf> — 29<CL>");
         }
 
         [Test]
@@ -296,7 +296,7 @@ namespace Test.TheWordConvertTest
         [Test]
         public void S2Test()
         {
-            TestDataCase("GEN", "001GEN.usx", 237, "<TS1><font size=-1>The Japhethites</font><Ts><PI>• The sons<RF><i>Sons </i> may mean <i>descendants </i> or <i>successors </i> or <i>nations; </i> also in verses 3, 4, 6, 7, 20-23, 29 and 31.<Rf> of Japheth:<CI><PI2>• Gomer, Magog, Madai, Javan, Tubal, Meshech and Tiras.<CI>");
+            TestDataCase("GEN", "001GEN.usx", 237, "<TS1><font size=-1>The Japhethites</font><Ts><PI>• The sons<RF q=+><i>Sons </i> may mean <i>descendants </i> or <i>successors </i> or <i>nations; </i> also in verses 3, 4, 6, 7, 20-23, 29 and 31.<Rf> of Japheth:<CI><PI2>• Gomer, Magog, Madai, Javan, Tubal, Meshech and Tiras.<CI>");
         }
 
         [Test]
@@ -326,7 +326,7 @@ namespace Test.TheWordConvertTest
         [Test]
         public void SpeakerTest()
         {
-            TestDataCase("SNG", "022SNG.usx", 4, "<PI>Take me away with you–let us hurry!<CI><PI2>Let the king bring me into his chambers.<CL><CM><PI0>Friends<CL><CI><PI>We rejoice and delight in you;<RF>The Hebrew is masculine singular.<Rf><CI><PI2>we will praise your love more than wine.<CL><CM><PI0>Beloved<CL><CI><PI>How right they are to adore you!<CL><CI>");
+            TestDataCase("SNG", "022SNG.usx", 4, "<PI>Take me away with you–let us hurry!<CI><PI2>Let the king bring me into his chambers.<CL><CM><PI0>Friends<CL><CI><PI>We rejoice and delight in you;<RF q=+>The Hebrew is masculine singular.<Rf><CI><PI2>we will praise your love more than wine.<CL><CM><PI0>Beloved<CL><CI><PI>How right they are to adore you!<CL><CI>");
         }
 
         [Test]
@@ -386,7 +386,7 @@ namespace Test.TheWordConvertTest
         public void StarSaltilloTest()
         {
             var bookNames = "file:///" + FileInput("BookNames-refList.xml");
-            TestDataCase("MAT", "040MAT-refList.usx", 31, "<i>Judá tusha chumu, ñu Belén pebulu,</i><CI><i>vee mujtu aa pebulu chumulaba buuteꞌ pensangue keeñu, ne balejtuu pebulu jutyuve;</i><CI><i>matyu ñu junuren main bale chachi fale,</i><CI><i>kumuinchi in Israel chachillanu washkenu juñu mitya,</i><RF>Miqueas 5.2 <Rf> ti pillave, tila bale rukula.", bookNames, ":", true);
+            TestDataCase("MAT", "040MAT-refList.usx", 31, "<i>Judá tusha chumu, ñu Belén pebulu,</i><CI><i>vee mujtu aa pebulu chumulaba buuteꞌ pensangue keeñu, ne balejtuu pebulu jutyuve;</i><CI><i>matyu ñu junuren main bale chachi fale,</i><CI><i>kumuinchi in Israel chachillanu washkenu juñu mitya,</i><RF q=+>Miqueas 5.2 <Rf> ti pillave, tila bale rukula.", bookNames, ":", true);
         }
 
         [Test]

@@ -251,7 +251,9 @@
         <xsl:for-each select="child::node()">
             <xsl:choose>
                 <xsl:when test="@style='f'">
-                    <xsl:text disable-output-escaping="yes"><![CDATA[<RF>]]></xsl:text>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<RF q=]]></xsl:text>
+                    <xsl:value-of select="@caller"/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text>
                     <xsl:value-of select="normalize-space(*[@style = 'ft'])"/>
                     <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
                 </xsl:when>
@@ -620,7 +622,9 @@
     <xsl:template name="Footnotes">
         <xsl:param name="space"/>
         <xsl:param name="indent"/>
-        <xsl:text disable-output-escaping="yes"><![CDATA[<RF>]]></xsl:text>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<RF q=]]></xsl:text>
+        <xsl:value-of select="@caller"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text>
         <xsl:for-each select="child::node()">
             <xsl:choose>
                 <xsl:when test="@style = 'fr'"/>
