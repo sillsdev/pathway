@@ -50,6 +50,8 @@ namespace SIL.PublishingSolution
             bool success = false;
             string swordFullPath = Common.FromRegistry("Sword");
             string usxFilePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            projInfo.ProjectPath = usxFilePath;
+            usxFilePath = Common.PathCombine(usxFilePath, "usx");
             string osisFilePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             string tempSwordCreatorPath = SwordCreatorTempDirectory(swordFullPath);
             string swordTempFolder = tempSwordCreatorPath;
@@ -71,7 +73,7 @@ namespace SIL.PublishingSolution
             string[] osisFilesList = Directory.GetFiles(tempSwordCreatorPath, "*.xml");
 
             //Start Process to Osis To Osis2Mod Conversion
-            SwordOutputBuildProcess(swordTempFolder, swordOutputLocation, osisFilesList, usxFilePath);
+            SwordOutputBuildProcess(swordTempFolder, swordOutputLocation, osisFilesList, Path.GetDirectoryName(usxFilePath));
 
             string swordOutputExportLocation = Common.PathCombine(projInfo.ProjectPath, "SwordOutput");
             List<string> restricttoCopyExtensions = new List<string>();
@@ -80,7 +82,71 @@ namespace SIL.PublishingSolution
 
             CopySwordCreatorFolderToTemp(swordTempFolder, swordOutputExportLocation, restricttoCopyExtensions);
 
+            string sLanguageCode = JustLanguageCode(projInfo.DefaultXhtmlFileWithPath, projInfo.ProjectInputType);
+
+            WriteModConfigFile(swordOutputExportLocation, sLanguageCode);
+
             return success;
+        }
+
+        
+
+        private string JustLanguageCode(string xhtmlFileNameWithPath, string projectInputType)
+        {
+            string languageCode = Common.GetLanguageCode(xhtmlFileNameWithPath, projectInputType);
+            if (languageCode.Contains(":"))
+            {
+                languageCode = languageCode.Substring(0, languageCode.IndexOf(':'));
+            }
+            return languageCode;
+        }
+
+        private void WriteModConfigFile(string swordOutputLocation, string languageCode)
+        {
+            swordOutputLocation = Common.PathCombine(swordOutputLocation, "mods.d");
+
+            if (Directory.Exists(swordOutputLocation))
+            {
+                Common.DeleteDirectory(swordOutputLocation);
+            }
+            Directory.CreateDirectory(swordOutputLocation);
+
+            string Newfile = Common.PathCombine(swordOutputLocation, languageCode + ".conf");
+            var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
+            var sw2 = new StreamWriter(fs2);
+            
+
+            WriteConfig(sw2, "[KJV]");
+            WriteConfig(sw2, "DataPath=./modules/texts/ztext/kjv/");
+            WriteConfig(sw2, "ModDrv=zText");
+            WriteConfig(sw2, "Encoding=UTF-8");
+            WriteConfig(sw2, "BlockType=BOOK");
+            WriteConfig(sw2, "CompressType=ZIP");
+            WriteConfig(sw2, "SourceType=OSIS");
+            WriteConfig(sw2, "Lang=en");
+            WriteConfig(sw2, "GlobalOptionFilter=OSISStrongs");
+            WriteConfig(sw2, "GlobalOptionFilter=OSISMorph");
+            WriteConfig(sw2, "GlobalOptionFilter=OSISFootnotes");
+            WriteConfig(sw2, "GlobalOptionFilter=OSISHeadings");
+            WriteConfig(sw2, "GlobalOptionFilter=OSISRedLetterWords");
+            WriteConfig(sw2, "OSISqToTick=false");
+            WriteConfig(sw2, "Feature=StrongsNumbers");
+            WriteConfig(sw2, "MinimumVersion=1.5.9");
+            WriteConfig(sw2, "SwordVersionDate=2006-10-09");
+            WriteConfig(sw2, "Version=2.3");
+            WriteConfig(sw2, "Description=King James Version (1769) with Strongs Numbers and Morphology");
+            WriteConfig(sw2, "About=");
+            WriteConfig(sw2, "TextSource=bf.org, eBible.org, crosswire.org");
+            WriteConfig(sw2, "LCSH=Bible. English.");
+            WriteConfig(sw2, "DistributionLicense=General public license for distribution for any purpose");
+
+            sw2.Close();
+            fs2.Close();
+        }
+
+        private static void WriteConfig(StreamWriter sw2, string content)
+        {
+            sw2.WriteLine(content);
         }
 
         private static void UsxtoOsisConvertProcess(string[] usxFilesList, string osisFilePath, UsxToOSIS usxToOsis)
@@ -120,34 +186,7 @@ namespace SIL.PublishingSolution
                 string[] files = Directory.GetFiles(sourceFolder);
                 try
                 {
-                    foreach (string file in files)
-                    {
-                        if (restricttoCopyExtensions != null && restricttoCopyExtensions.Count > 1)
-                        {
-                            bool isExtensionAvailable = false;
-                            foreach (var extensions in restricttoCopyExtensions)
-                            {
-                                if (file.Contains(extensions))
-                                {
-                                    isExtensionAvailable = true;
-                                    break;
-                                }
-                            }
-
-                            if (!isExtensionAvailable)
-                            {
-                                string name = Path.GetFileName(file);
-                                string dest = Common.PathCombine(destFolder, name);
-                                File.Copy(file, dest, true);
-                            }
-                        }
-                        else
-                        {
-                            string name = Path.GetFileName(file);
-                            string dest = Common.PathCombine(destFolder, name);
-                            File.Copy(file, dest, true);
-                        }
-                    }
+                    CopyFilesSourceToDestLocation(destFolder, restricttoCopyExtensions, files);
 
                     string[] folders = Directory.GetDirectories(sourceFolder);
                     foreach (string folder in folders)
@@ -157,7 +196,39 @@ namespace SIL.PublishingSolution
                         CopySwordCreatorFolderToTemp(folder, dest, restricttoCopyExtensions);
                     }
                 }
-                catch{}
+                catch { }
+            }
+        }
+
+        private static void CopyFilesSourceToDestLocation(string destFolder, List<string> restricttoCopyExtensions, string[] files)
+        {
+            foreach (string file in files)
+            {
+                if (restricttoCopyExtensions != null && restricttoCopyExtensions.Count > 1)
+                {
+                    bool isExtensionAvailable = false;
+                    foreach (var extensions in restricttoCopyExtensions)
+                    {
+                        if (file.Contains(extensions))
+                        {
+                            isExtensionAvailable = true;
+                            break;
+                        }
+                    }
+
+                    if (!isExtensionAvailable)
+                    {
+                        string name = Path.GetFileName(file);
+                        string dest = Common.PathCombine(destFolder, name);
+                        File.Copy(file, dest, true);
+                    }
+                }
+                else
+                {
+                    string name = Path.GetFileName(file);
+                    string dest = Common.PathCombine(destFolder, name);
+                    File.Copy(file, dest, true);
+                }
             }
         }
 
@@ -166,7 +237,7 @@ namespace SIL.PublishingSolution
             swordOutputLocation = Common.PathCombine(swordOutputLocation, "modules");
             swordOutputLocation = Common.PathCombine(swordOutputLocation, "texts");
             swordOutputLocation = Common.PathCombine(swordOutputLocation, "ztext");
-            swordOutputLocation = Common.PathCombine(swordOutputLocation, "kjv");
+            swordOutputLocation = Common.PathCombine(swordOutputLocation, "sil");
             return swordOutputLocation;
         }
 
