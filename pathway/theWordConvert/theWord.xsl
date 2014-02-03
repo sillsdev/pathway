@@ -33,23 +33,36 @@
     <xsl:variable name="bookNamesBook" select="document($bookNames)//book"/>
     
     <xsl:template match="/">
-        <xsl:for-each select="//para[starts-with(@style, 'mt')]">
-            <xsl:choose>
-                <xsl:when test="@style='mt2'">
-                    <xsl:text disable-output-escaping="yes"><![CDATA[<TS2><font size=-1><b>]]></xsl:text>
-                    <xsl:value-of select="."/>
-                    <xsl:text disable-output-escaping="yes"><![CDATA[</b></font><Ts>]]></xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text disable-output-escaping="yes"><![CDATA[<TS1>]]></xsl:text>
-                    <xsl:value-of select="."/>
-                    <xsl:text disable-output-escaping="yes"><![CDATA[<Ts>]]></xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each>
+        <xsl:choose>
+            <xsl:when test="count(//para[@style='toc1'])">
+                <xsl:for-each select="//para[@style='toc1']">
+                    <xsl:call-template name="FormatHeader"/>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="//para[starts-with(@style, 'mt')]">
+                    <xsl:call-template name="FormatHeader"/>
+                </xsl:for-each>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:call-template name="nextChapter">
             <xsl:with-param name="cvData" select="$vrs/text()"/>
         </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="FormatHeader">
+        <xsl:choose>
+            <xsl:when test="@style='mt2'">
+                <xsl:text disable-output-escaping="yes"><![CDATA[<TS2><font color=teal size=-1><b>]]></xsl:text>
+                <xsl:value-of select="."/>
+                <xsl:text disable-output-escaping="yes"><![CDATA[</b></font><Ts>]]></xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text disable-output-escaping="yes"><![CDATA[<TS1><font color=teal>]]></xsl:text>
+                <xsl:value-of select="."/>
+                <xsl:text disable-output-escaping="yes"><![CDATA[</font><Ts>]]></xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template name="nextChapter">
