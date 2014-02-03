@@ -248,7 +248,7 @@ namespace Test.TheWordConvertTest
         public void NoMt2()
         {
             var bookNames = "file:///" + FileInput("avtBookNames.xml");
-            TestDataCase("MAT", "040MAT.usx", 1, "<TS1><font color=teal>Hɨm Yaaim Me Krais Matyu Kewisɨm Mau Tɨwei</font><Ts><TS1>Niuk me maamrer ne weiwɨk me Jisas<Ts><TS3><i>(Lu 3:23-38)</i><Ts><RF q=*><a href=\"tw://bible.*?1.22.18\">Jen 22:18</a>; <a href=\"tw://bible.*?13.17.11\">1Kro 17:11</a><Rf>Menmen im hi hewisɨm hɨram niuk me maamrer yapɨrwe ne weiwɨk miutɨp me Jisas Krais, kerek hɨrak nepenyek ke mɨtɨk iuwe Devit, hɨrak nepenyek hak ke maam nɨpu kaiu Ebraham.<CI>", bookNames, ":");
+            TestDataCase("MAT", "040MAT.usx", 1, "<TS1><font color=teal>Hɨm Yaaim Me Krais Matyu Kewisɨm Mau Tɨwei</font><Ts><TS1>Niuk me maamrer ne weiwɨk me Jisas<Ts><TS3><i>(<a href=\"tw://bible.*?42.3.23-38\">Lu 3:23-38</a>)</i><Ts><RF q=*><a href=\"tw://bible.*?1.22.18\">Jen 22:18</a>; <a href=\"tw://bible.*?13.17.11\">1Kro 17:11</a><Rf>Menmen im hi hewisɨm hɨram niuk me maamrer yapɨrwe ne weiwɨk miutɨp me Jisas Krais, kerek hɨrak nepenyek ke mɨtɨk iuwe Devit, hɨrak nepenyek hak ke maam nɨpu kaiu Ebraham.<CI>", bookNames, ":");
         }
 
         [Test]

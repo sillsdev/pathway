@@ -248,8 +248,11 @@
                     <xsl:when test="@style = 's' or @style = 's1' or @style = 's2' or starts-with(@style,'ms')">
                         <xsl:call-template name="SectionHead"/>
                     </xsl:when>
-                    <xsl:when test="@style = 'r' or @style = 'mr' or @style = 'd' or @style = 'qa'">
+                    <xsl:when test="@style = 'r'">
                         <xsl:call-template name="ParallelReference"/>
+                    </xsl:when>
+                    <xsl:when test="@style = 'mr' or @style = 'd' or @style = 'qa'">
+                        <xsl:call-template name="OtherReference"/>
                     </xsl:when>
                 </xsl:choose>
             </xsl:otherwise>
@@ -293,6 +296,26 @@
     </xsl:template>
     
     <xsl:template name="ParallelReference">
+        <xsl:text disable-output-escaping="yes"><![CDATA[<TS3><i>]]></xsl:text>
+        <xsl:variable name="normText" select="normalize-space(text())"/>
+        <xsl:choose>
+            <xsl:when test="starts-with($normText, '(')">
+                <xsl:text>(</xsl:text>
+                <xsl:call-template name="CrossReferenceIter">
+                    <xsl:with-param name="textLeft" select="substring-before(substring-after($normText, '('), ')')"/>
+                </xsl:call-template>
+                <xsl:text>)</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="CrossReferenceIter">
+                    <xsl:with-param name="textLeft" select="$normText"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</i><Ts>]]></xsl:text>
+    </xsl:template>
+    
+    <xsl:template name="OtherReference">
         <xsl:text disable-output-escaping="yes"><![CDATA[<TS3><i>]]></xsl:text>
         <xsl:value-of select="normalize-space(text())"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[</i><Ts>]]></xsl:text>
