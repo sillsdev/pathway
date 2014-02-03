@@ -1011,6 +1011,19 @@ namespace SIL.PublishingSolution
                         }
 
                         WriteCssClass(writeCss, "page", value);
+
+                        if (cTool.DdlRunningHead.Text.ToLower() == "mirrored")
+                        {
+                            value.Clear();
+                            value["margin-right"] = cTool.TxtPageInside.Text;
+                            value["margin-left"] = cTool.TxtPageOutside.Text;
+                            WriteCssClass(writeCss, "page :left", value);
+
+                            value.Clear();
+                            value["margin-right"] = cTool.TxtPageOutside.Text;
+                            value["margin-left"] = cTool.TxtPageInside.Text;
+                            WriteCssClass(writeCss, "page :right", value);
+                        }
                     }
                     // write out the changes
                     writeCss.Flush();
@@ -2621,7 +2634,8 @@ namespace SIL.PublishingSolution
 
         public void WriteCssClass(StreamWriter writeCss, string className, Dictionary<string, string> value)
         {
-            string precedeChar = className.ToLower() == "page" ? "@" : ".";
+            //string precedeChar = className.ToLower() == "page" ? "@" : ".";
+            string precedeChar = className.ToLower().IndexOf("page") == 0 ? "@" : ".";
             if (value.Count > 0)
             {
                 writeCss.WriteLine(precedeChar + className + "{");

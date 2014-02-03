@@ -292,7 +292,7 @@ namespace SIL.PublishingSolution
         {
             Debug.Assert(usxBooksToExport != null && usxBooksToExport.Count > 0);
 
-            if (m_format == "CadreBible" || m_format == "Go Bible")
+            if (m_format == "CadreBible" || m_format == "Go Bible" || m_format == "Sword")
                 ExportUSXRawToUSX(usxBooksToExport);
 
             XmlDocument allBooks = usxBooksToExport[0];
