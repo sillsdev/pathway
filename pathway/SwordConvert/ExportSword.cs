@@ -60,8 +60,9 @@ namespace SIL.PublishingSolution
             UsxToOSIS usxToOsis = new UsxToOSIS();
             string[] usxFilesList = Directory.GetFiles(usxFilePath, "*.usx");
 
+            string xhtmlLang = JustLanguageCode(projInfo.DefaultXhtmlFileWithPath, projInfo.ProjectInputType);
             //Usx to Osis Conversion Process Step
-            UsxtoOsisConvertProcess(usxFilesList, osisFilePath, usxToOsis);
+            UsxtoOsisConvertProcess(usxFilesList, osisFilePath, usxToOsis, xhtmlLang);
 
 
             osisFilePath = Path.GetDirectoryName(osisFilePath);
@@ -82,9 +83,7 @@ namespace SIL.PublishingSolution
 
             CopySwordCreatorFolderToTemp(swordTempFolder, swordOutputExportLocation, restricttoCopyExtensions);
 
-            string sLanguageCode = JustLanguageCode(projInfo.DefaultXhtmlFileWithPath, projInfo.ProjectInputType);
-
-            WriteModConfigFile(swordOutputExportLocation, sLanguageCode);
+            WriteModConfigFile(swordOutputExportLocation, xhtmlLang);
 
             return success;
         }
@@ -149,13 +148,13 @@ namespace SIL.PublishingSolution
             sw2.WriteLine(content);
         }
 
-        private static void UsxtoOsisConvertProcess(string[] usxFilesList, string osisFilePath, UsxToOSIS usxToOsis)
+        private static void UsxtoOsisConvertProcess(string[] usxFilesList, string osisFilePath, UsxToOSIS usxToOsis, string xhtmlLang)
         {
             foreach (var usxfile in usxFilesList)
             {
                 string osisFileName = Path.GetFileNameWithoutExtension(usxfile) + ".xml";
                 osisFileName = Common.PathCombine(osisFilePath, osisFileName);
-                usxToOsis.ConvertUsxToOSIS(usxfile, osisFileName);
+                usxToOsis.ConvertUsxToOSIS(usxfile, osisFileName, xhtmlLang);
             }
         }
 

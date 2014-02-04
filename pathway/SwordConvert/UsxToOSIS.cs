@@ -47,12 +47,12 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Entry method to convert USX to OSIS
         /// </summary>
-        public void ConvertUsxToOSIS(string usxFullPath, string OSISFullPath)
+        public void ConvertUsxToOSIS(string usxFullPath, string OSISFullPath, string xhtmlLang)
         {
             _usxFullPath = usxFullPath;
             _osisFullPath = OSISFullPath;
             OpenFile();
-            CreateHead();
+            CreateHead(xhtmlLang);
             ProcessUsx();
             CloseFile();
         }
@@ -738,7 +738,7 @@ namespace SIL.PublishingSolution
             
         }
 
-        private void CreateHead()
+        private void CreateHead(string xhtmlLang)
         {
             _writer.WriteStartElement("osis");
             _writer.WriteAttributeString("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
@@ -749,7 +749,7 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("osisText");
             _writer.WriteAttributeString("osisIDWork", "thisWork");
             _writer.WriteAttributeString("osisRefWork", "bible");
-            _writer.WriteAttributeString("xml:lang", "{LANG}");
+            _writer.WriteAttributeString("xml:lang", xhtmlLang);
             //_writer.WriteAttributeString("canonical", "true");
             _writer.WriteStartElement("header");
             _writer.WriteStartElement("work");

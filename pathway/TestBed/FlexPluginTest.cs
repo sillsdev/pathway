@@ -1360,7 +1360,7 @@ namespace TestBed
 
             UsxToOSIS usxToSis = new UsxToOSIS();
             string output = txtInputPath.Text.Replace(".usx", ".xml");
-            usxToSis.ConvertUsxToOSIS(txtInputPath.Text, output);
+            usxToSis.ConvertUsxToOSIS(txtInputPath.Text, output, "{LANG}");
             MessageBox.Show("Done");
         
         }
