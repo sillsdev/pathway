@@ -700,7 +700,6 @@ namespace SIL.PublishingSolution
                 //_writer.WriteEndElement();
 
 
-                //Task TD-2346 By Samdoss - 2
                 _writer.WriteStartElement("AnchoredObjectSetting");
                 _writer.WriteAttributeString("AnchoredPosition", "Anchored");
                 _writer.WriteAttributeString("SpineRelative", "false");

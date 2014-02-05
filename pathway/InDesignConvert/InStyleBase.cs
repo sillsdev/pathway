@@ -325,7 +325,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("Position", "Normal");
             _writer.WriteAttributeString("StrikeThru", "false");
             _writer.WriteAttributeString("CharacterAlignment", "AlignEmCenter");
-            _writer.WriteAttributeString("KeepLinesTogether", "true"); //Samdoss
+            _writer.WriteAttributeString("KeepLinesTogether", "false"); 
             _writer.WriteAttributeString("StrokeTint", "-1");
             _writer.WriteAttributeString("FillTint", "-1");
             _writer.WriteAttributeString("OverprintStroke", "false");
@@ -928,7 +928,6 @@ namespace SIL.PublishingSolution
             //_writer.WriteAttributeString("AnchorSpaceAbove", "0");
             //_writer.WriteEndElement();
 
-            //Task TD-2346 By Samdoss - 3
             _writer.WriteStartElement("AnchoredObjectSetting");
             _writer.WriteAttributeString("AnchoredPosition", "Anchored");
             _writer.WriteAttributeString("SpineRelative", "false");

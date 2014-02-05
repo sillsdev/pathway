@@ -783,6 +783,11 @@ namespace SIL.PublishingSolution
         {
             get { return chkSplitFileByLetter; }
         }
+
+        public CheckBox ChkDisableWO
+        {
+            get { return chkDisableWO; }
+        }
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
@@ -1462,6 +1467,12 @@ namespace SIL.PublishingSolution
         {
             EditCSS(sender, e);
             _CToolBL.chkSplitFileByLetter_CheckStateChangedBL(sender, e);
+        }
+
+        private void chkDisableWO_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkDisableWO_CheckStateChangedBL(sender, e);
         }
     }
 }

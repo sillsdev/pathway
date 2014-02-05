@@ -316,6 +316,9 @@ namespace SIL.PublishingSolution
                 case "-ps-fixed-line-height":
                     FixedLineHeight(styleAttributeInfo);
                     break;
+                case "-ps-disable-widow-orphan":
+                    DisableWidowandOrphan(styleAttributeInfo);
+                    break;
                 case "counter-increment":
                     CounterIncrement(styleAttributeInfo);
                     break;
@@ -372,6 +375,11 @@ namespace SIL.PublishingSolution
         {
             ValidateFixedLineHeight(styleAttributeInfo);
         }
+
+         private void DisableWidowandOrphan(StyleAttribute styleAttributeInfo)
+         {
+             _cssProperty[styleAttributeInfo.Name] = styleAttributeInfo.StringValue;
+         }
 
         private void BorderMethod2(StyleAttribute styleAttributeInfo)
         {
@@ -683,6 +691,7 @@ namespace SIL.PublishingSolution
                     _cssProperty[styleAttributeInfo.Name] = value;
                     break;
                 case "-ps-fixed-line-height":
+                case "-ps-disable-widow-orphan":
                 case "string-set":
                 case "unicode-bidi":
                 case "pathway":

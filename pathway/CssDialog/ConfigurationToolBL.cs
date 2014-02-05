@@ -145,6 +145,7 @@ namespace SIL.PublishingSolution
         protected string _includeXRefCaller;
         protected bool _hideVerseNumberOne;
         protected bool _splitFileByLetter = false;
+        protected bool _disableWidowOrphan;
 
         #endregion
 
@@ -572,6 +573,20 @@ namespace SIL.PublishingSolution
             {
                 string task = "@page";
                 string key = "-ps-fixed-line-height";
+                if (_cssClass.ContainsKey("@page") && _cssClass[task].ContainsKey(key))
+                {
+                    return Convert.ToBoolean(_cssClass["@page"][key]);
+                }
+                return false;
+            }
+        }
+
+        public bool DisableWidowOrphan
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-disable-widow-orphan";
                 if (_cssClass.ContainsKey("@page") && _cssClass[task].ContainsKey(key))
                 {
                     return Convert.ToBoolean(_cssClass["@page"][key]);
@@ -1009,7 +1024,7 @@ namespace SIL.PublishingSolution
                             value["-ps-hide-versenumber-one"] = "\"" + cTool.ChkTurnOffFirstVerse.Checked + "\"";
                             value["-ps-hide-space-versenumber"] = "\"" + cTool.ChkHideSpaceVerseNo.Checked + "\"";
                         }
-
+                        value["-ps-disable-widow-orphan"] = "\"" + _disableWidowOrphan + "\"";
                         WriteCssClass(writeCss, "page", value);
 
                         if (cTool.DdlRunningHead.Text.ToLower() == "mirrored")
@@ -1167,6 +1182,7 @@ namespace SIL.PublishingSolution
             cTool.DdlPageColumn.SelectedItem = ColumnCount;
             cTool.DdlFontSize.SelectedItem = FontSize;
             cTool.DdlLeading.SelectedItem = Leading;
+            cTool.ChkDisableWO.Checked = DisableWidowOrphan;
             cTool.ChkFixedLineHeight.Checked = FixedLineHeight;
             cTool.DdlPicture.SelectedItem = Picture;
             cTool.DdlJustified.SelectedItem = JustifyUI;
@@ -4039,6 +4055,15 @@ namespace SIL.PublishingSolution
             try
             {
                 _splitFileByLetter = cTool.ChkSplitFileByLetter.Checked;
+            }
+            catch { }
+        }
+
+        public void chkDisableWO_CheckStateChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _disableWidowOrphan = cTool.ChkDisableWO.Checked;
             }
             catch { }
         }

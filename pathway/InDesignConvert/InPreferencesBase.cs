@@ -1008,7 +1008,6 @@ namespace SIL.PublishingSolution
             //_writer.WriteAttributeString("AnchorSpaceAbove", "0");
             //_writer.WriteEndElement();
 
-            //Task TD-2346 By Samdoss
             _writer.WriteStartElement("AnchoredObjectSetting");
             _writer.WriteAttributeString("AnchoredPosition", "Anchored");
             _writer.WriteAttributeString("SpineRelative", "false");
@@ -1062,7 +1061,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("AutoLeading", "120");
             _writer.WriteAttributeString("DropCapLines", "0");
             _writer.WriteAttributeString("DropCapCharacters", "0");
-            _writer.WriteAttributeString("KeepLinesTogether", "true"); //samdoss
+            _writer.WriteAttributeString("KeepLinesTogether", "false"); 
             _writer.WriteAttributeString("KeepAllLinesTogether", "false");
             _writer.WriteAttributeString("KeepWithNext", "0");
             _writer.WriteAttributeString("KeepFirstLines", "2");

@@ -35,7 +35,7 @@ namespace SIL.PublishingSolution
         InMapProperty mapProperty = new InMapProperty();
         //public InDesignStyles InDesignStyles;
         //public ArrayList _FootNote;
-
+        private bool _isWidowOrphanDisabled;
         #endregion
 
 
@@ -44,8 +44,8 @@ namespace SIL.PublishingSolution
             try
             {
                 _cssProperty = cssProperty;
+                CheckPropertyForWidowsOrphans();
                 CreateFile(projectPath);
-
                 string headerFontName = GetHeaderFontName();
                 CreateRootCharacterStyleGroup(headerFontName);
                 CreateCharacterStyle();
@@ -63,6 +63,14 @@ namespace SIL.PublishingSolution
                 Console.Write(ex.Message);
             }
             return _IDAllClass;
+        }
+
+        private void CheckPropertyForWidowsOrphans()
+        {
+            if (_cssProperty["@page"].ContainsKey("-ps-disable-widow-orphan"))
+            {
+                _isWidowOrphanDisabled = bool.Parse(_cssProperty["@page"]["-ps-disable-widow-orphan"]);
+            }
         }
 
         private string GetHeaderFontName()
@@ -127,6 +135,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("Imported", "false");
                 _writer.WriteAttributeString("NextStyle", "ParagraphStyle/" + cssClass.Key);
                 _writer.WriteAttributeString("KeyboardShortcut", "0 0");
+                DisableWidowsandOrphans(cssClass, _isWidowOrphanDisabled);
                 _IDProperty = mapProperty.IDProperty(cssClass.Value);
                 InsertKeepWithNextForSectionHead(cssClass);
                 SuperscriptSubscriptIncreaseFontSize(false);
@@ -176,6 +185,22 @@ namespace SIL.PublishingSolution
             }
             _writer.WriteEndElement(); //End RootParagraphStyleGroup
             CalcColumnWidth();
+        }
+
+        private static void DisableWidowsandOrphans(KeyValuePair<string, Dictionary<string, string>> cssClass, bool disableWidowOrphan)
+        {
+            if (disableWidowOrphan)
+            {
+                if (cssClass.Value.ContainsKey("widows"))
+                {
+                    cssClass.Value.Remove("widows");
+                }
+
+                if (cssClass.Value.ContainsKey("orphans"))
+                {
+                    cssClass.Value.Remove("orphans");
+                }
+            }
         }
 
         private void CalcColumnWidth()
