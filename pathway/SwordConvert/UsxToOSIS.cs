@@ -20,28 +20,31 @@ namespace SIL.PublishingSolution
 
         private XmlTextReader _reader;
         private XmlTextWriter _writer;
-        
+
         private Dictionary<string, Dictionary<string, string>> _styleInfo =
             new Dictionary<string, Dictionary<string, string>>();
+
+        private Dictionary<string, string> _bookCode = new Dictionary<string, string>();
+
+        private string _bookCodeName;
 
         private Dictionary<string, string> _cssProp;
         private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
 
         private string _tagName, _style, _number, _code, _caller, _content;
         private string _parentTagName = string.Empty, _parentStyleName = string.Empty;
-        private string _verseNumber = string.Empty;
+        private string _verseNumber, _chapterNumber;
         private string _paraStyle = string.Empty;
 
 
         private string _desc, _file, _size, _loc, _copy, _ref;
         private bool _significant, _isEmptyNode, _isParaWritten;
-
         private const string Space = " ";
         private const string Bar = "|";
 
         private bool _isclassNameExist;
         private List<string> _xhtmlAttribute = new List<string>();
-
+        private bool _listItemOpen = false;
         #endregion
 
         /// <summary>
@@ -51,10 +54,12 @@ namespace SIL.PublishingSolution
         {
             _usxFullPath = usxFullPath;
             _osisFullPath = OSISFullPath;
+            SetBookCode();
             OpenFile();
             CreateHead(xhtmlLang);
             ProcessUsx();
             CloseFile();
+            _bookCode.Clear();
         }
 
         /// ------------------------------------------------------------------------
@@ -71,15 +76,20 @@ namespace SIL.PublishingSolution
                 {
                     if (headXML) // skip previous parts of <body> tag
                     {
-                        if (_reader.Name == "book")
+                        if (_reader.Name == "para")
                         {
                             headXML = false;
                         }
                         else
                         {
+                            if (_reader.Name == "book")
+                            {
+                                Book();
+                            }
                             continue;
                         }
                     }
+
                     if (_reader.IsEmptyElement)
                     {
                         _isEmptyNode = true;
@@ -119,14 +129,25 @@ namespace SIL.PublishingSolution
             else if (_tagName == "char" && _style == "bk")
             {
                 _writer.WriteAttributeString("type", "x-bookName");
-                _writer.WriteString(_content); 
+                _writer.WriteString(_content);
+                _style = string.Empty;
+            }
+            else if (_tagName == "para" && _style == "rem")
+            {
+                _writer.WriteComment("\\" + _style + " " + _content);
+                _style = string.Empty;
+            }
+            else if (_tagName == "para" && (_style == "mr" || _style == "r"))
+            {
+                _writer.WriteString(_content);
+                _writer.WriteEndElement();
                 _style = string.Empty;
             }
             else
             {
-                _writer.WriteString(_content);    
+                _writer.WriteString(_content);
             }
-            
+
         }
 
         /// <summary>
@@ -135,20 +156,25 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void Book()
         {
-            if (_tagName == "book")
+            if (_reader.HasAttributes)
             {
-                string line = "\\" + _style + Space + _code + Space + _content;
-                _writer.WriteString(line);
-                if (_style == "id")
+                while (_reader.MoveToNextAttribute())
                 {
-                    Common.BookNameTag = "id";
-                    if (Common.BookNameCollection.Contains(_code) == false && _code != null)
+                    if (_reader.Name == "code" || _reader.Name == "id")
                     {
-                        Common.BookNameCollection.Add(_code);
+                        if (_bookCode.ContainsKey(_reader.Value.ToLower()))
+                        {
+                            _bookCodeName = _bookCode[_reader.Value.ToLower()];
+                        }
+                        else
+                        {
+                            _bookCodeName = _reader.Value;
+                        }
+                        _writer.WriteAttributeString("osisID", _bookCodeName);
+                        break;
                     }
                 }
             }
-
         }
 
 
@@ -215,7 +241,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteString(line);
                 _verseNumber = string.Empty;
             }
-            
+
         }
 
         private bool HandleBridgeVerseNumbers(string verseNumber)
@@ -348,7 +374,22 @@ namespace SIL.PublishingSolution
         {
             string style = StackPop(_allStyle);
             string tag = StackPop(_alltagName);
-            _writer.WriteEndElement();
+
+            if (_tagName == "verse")
+            {
+                string booksID = _bookCodeName + "." + _chapterNumber + "." + _verseNumber;
+                _writer.WriteStartElement("verse");
+                _writer.WriteAttributeString("eID", booksID);
+                _writer.WriteEndElement();
+            }
+            if (_paraStyle != "rem")
+            {
+                _writer.WriteEndElement();
+            }
+
+
+
+
             //if (tag == "para")
             //{
             //    //_writer.WriteString();
@@ -400,6 +441,10 @@ namespace SIL.PublishingSolution
                             _verseNumber = _number;
                             //_writer.WriteAttributeString("osisID", _reader.Value);
                         }
+                        else
+                        {
+                            _chapterNumber = _number;
+                        }
                     }
                     else if (_reader.Name == "code")
                     {
@@ -416,6 +461,11 @@ namespace SIL.PublishingSolution
                 }
             }
 
+            if (_listItemOpen && _style != "io1")
+            {
+                _writer.WriteEndElement();
+                _listItemOpen = false;
+            }
 
             //Write Start Element
             if (_tagName == "para")
@@ -442,17 +492,38 @@ namespace SIL.PublishingSolution
                 }
                 else if (_style == "io1")
                 {
+                    if (_listItemOpen == false)
+                    {
+                        _writer.WriteStartElement("list");
+                        _listItemOpen = true;
+                    }
                     _writer.WriteStartElement("item");
-                } 
+                }
                 else if (_style == "r")
                 {
+                    _writer.WriteStartElement("title");
+                    _writer.WriteAttributeString("type", "parallel");
                     _writer.WriteStartElement("reference");
                 }
                 else if (_style == "p")
                 {
                     _writer.WriteStartElement("p");
                 }
-                else 
+                else if (_style == "rem")
+                {
+                    //_writer.WriteStartElement("p");
+                }
+                else if (_style == "ms")
+                {
+                    _writer.WriteStartElement("title");
+                }
+                else if (_style == "mr")
+                {
+                    _writer.WriteStartElement("title");
+                    _writer.WriteAttributeString("type", "scope");
+                    _writer.WriteStartElement("reference");
+                }
+                else
                 {
                     _writer.WriteStartElement("p");
                 }
@@ -460,17 +531,25 @@ namespace SIL.PublishingSolution
             else if (_tagName == "chapter")
             {
                 _writer.WriteStartElement("chapter");
-                _writer.WriteAttributeString("n", _number);
-                _writer.WriteAttributeString("osisID", "Matt." + _verseNumber);
+                _writer.WriteAttributeString("n", _chapterNumber);
+                _writer.WriteAttributeString("osisID", _bookCodeName + "." + _chapterNumber);
             }
             else if (_tagName == "verse")
             {
-                string verseNo = "Matt." + _verseNumber + "." + _number;
+                string booksID = _bookCodeName + "." + _chapterNumber + "." + _verseNumber;
                 _writer.WriteStartElement("verse");
-                _writer.WriteAttributeString("subType", "x-embedded");
-                _writer.WriteAttributeString("sID", verseNo);
-                _writer.WriteAttributeString("n", _number);
-                _writer.WriteAttributeString("osisID", verseNo);
+
+                if (_verseNumber == "1")
+                {
+                    _writer.WriteAttributeString("subType", "x-first");
+                }
+                else
+                {
+                    _writer.WriteAttributeString("subType", "x-embedded");
+                }
+                _writer.WriteAttributeString("sID", booksID);
+                _writer.WriteAttributeString("n", _verseNumber);
+                _writer.WriteAttributeString("osisID", booksID);
             }
             else if (_tagName == "note")
             {
@@ -480,15 +559,15 @@ namespace SIL.PublishingSolution
             }
             else if (_tagName == "char")
             {
-                if (_style == "bk" )
+                if (_style == "bk")
                 {
                     _writer.WriteStartElement("reference");
                 }
                 else
                 {
-                    _writer.WriteStartElement("char");    
+                    _writer.WriteStartElement("char");
                 }
-                
+
                 //_writer.WriteAttributeString("type", "source");
             }
 
@@ -735,7 +814,7 @@ namespace SIL.PublishingSolution
             _writer = new XmlTextWriter(_osisFullPath, null);
             _writer.Formatting = Formatting.Indented;
             _writer.WriteStartDocument();
-            
+
         }
 
         private void CreateHead(string xhtmlLang)
@@ -743,9 +822,8 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("osis");
             _writer.WriteAttributeString("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
             _writer.WriteAttributeString("xmlns", "http://www.bibletechnologies.net/2003/OSIS/namespace");
-            _writer.WriteAttributeString("xmlns:osis", "http://www.bibletechnologies.net/2003/OSIS/namespace");
-            _writer.WriteAttributeString("xsi:schemaLocation",
-                                         "http://www.bibletechnologies.net/2003/OSIS/namespace http://www.bibletechnologies.net/osisCore.2.1.1.xsd");
+            //_writer.WriteAttributeString("xmlns:osis", "http://www.bibletechnologies.net/2003/OSIS/namespace");
+            _writer.WriteAttributeString("xsi:schemaLocation", "http://www.bibletechnologies.net/2003/OSIS/namespace file:../osisCore.2.0_UBS_SIL_BestPractice.xsd");
             _writer.WriteStartElement("osisText");
             _writer.WriteAttributeString("osisIDWork", "thisWork");
             _writer.WriteAttributeString("osisRefWork", "bible");
@@ -753,19 +831,49 @@ namespace SIL.PublishingSolution
             //_writer.WriteAttributeString("canonical", "true");
             _writer.WriteStartElement("header");
             _writer.WriteStartElement("work");
-            _writer.WriteAttributeString("osisWork","thisWork");
+            _writer.WriteAttributeString("osisWork", "thisWork");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
             _writer.WriteStartElement("div");
-            _writer.WriteAttributeString("type", "bookGroup");
-
+            _writer.WriteAttributeString("type", "book");
         }
 
+
+        private void SetBookCode() ////////////////////////// Complete it
+        {
+            _bookCode.Add("1co", "1Cor");
+            _bookCode.Add("1jn", "1John");
+            _bookCode.Add("1pe", "1Pet");
+            _bookCode.Add("1th", "1Thess");
+            _bookCode.Add("1ti", "1Tim");
+            _bookCode.Add("2co", "2Cor");
+            _bookCode.Add("2jn", "2John");
+            _bookCode.Add("2pe", "2Pet");
+            _bookCode.Add("2th", "2Thess");
+            _bookCode.Add("2ti", "2Tim");
+            _bookCode.Add("3jn", "3John");
+            _bookCode.Add("act", "Acts");
+            _bookCode.Add("col", "Col");
+            _bookCode.Add("eph", "Eph");
+            _bookCode.Add("gal", "Gal");
+            _bookCode.Add("heb", "Heb");
+            _bookCode.Add("jas", "Jas");
+            _bookCode.Add("jhn", "John");
+            _bookCode.Add("jud", "Jude");
+            _bookCode.Add("luk", "Luke");
+            _bookCode.Add("mat", "MATT");
+            _bookCode.Add("mrk", "MARK");
+            _bookCode.Add("phm", "Phlm");
+            _bookCode.Add("php", "Phil");
+            _bookCode.Add("rev", "Rev");
+            _bookCode.Add("rom", "Rom");
+            _bookCode.Add("tit", "Titus");
+        }
 
         private void CloseFile()
         {
             _writer.WriteEndElement();
-            _writer.WriteEndElement();
+            //_writer.WriteEndElement();
             //_writer.WriteEndElement();
 
             _writer.WriteEndDocument();

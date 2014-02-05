@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
-<osis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" xmlns:osis="http://www.bibletechnologies.net/2003/OSIS/namespace" xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace http://www.bibletechnologies.net/osisCore.2.1.1.xsd">
-  <osisText osisIDWork="thisWork" osisRefWork="bible" xml:lang="{LANG}">
+<osis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace file:../osisCore.2.0_UBS_SIL_BestPractice.xsd">
+  <osisText osisIDWork="thisWork" osisRefWork="bible" xml:lang="eng">
     <header>
       <work osisWork="thisWork" />
     </header>
-    <div type="bookGroup">
-      <book>- Miniafia (Arifama) NT [aai] -Papua New Guinea 2009 (web version -2012 bd)</book>
+    <div type="book" osisID="2John">
       <title short="2 John" />
       <p>2 John</p>
       <p>2 John</p>
@@ -14,23 +13,26 @@
       <title level="1">Roube’aten Ana Tur</title>
       <p>John ana fef bairou’abin i Babin natunatun bairi isah, ana itinin ekaleisia kikimin nati i ana baremaim bairi hima’am isah. Iti tur an kabumin i ana fefeyan naatu ana baimatnuwen tur, sabuw baifuwenamaim bai’obaiyen kakafih tibi’obaibiyih isan, hina’itin saise matah toniwa’an hinama.</p>
       <title>Fef wanawanan tur iti na’atube hi’asgidigid</title>
-      <item>Merarayow naatu yoyoban (1-3)</item>
-      <item>Turobe naatu yabow (4-6)</item>
-      <item>Baibaiyen kakafih ana bai baimatnuwen (7-11)</item>
-      <item>Yomanin ana merarayow (12-13)</item>
-      <chapter n="1" osisID="Matt." />
+      <list>
+        <item>Merarayow naatu yoyoban (1-3)</item>
+        <item>Turobe naatu yabow (4-6)</item>
+        <item>Baibaiyen kakafih ana bai baimatnuwen (7-11)</item>
+        <item>Yomanin ana merarayow (12-13)</item>
+      </list>
+      <chapter n="1" osisID="2John.1" />
       <p>
-        <verse subType="x-embedded" sID="Matt.1.1" n="1" osisID="Matt.1.1" />Tuwat ain biyanane, Kou’ay Bar kafai wanawananamaim natunatun bairi isah abiyabow men kafaita. Men ayu akisu kwa isa abiyabowamih, baise sabuw iyab tur obe hisoso’ob auman isa tibiyabow. <verse subType="x-embedded" sID="Matt.2.2" n="2" osisID="Matt.2.2" />Ana yabin tur obe it wanawanatamaim ema’am, naatu boro mar etei bairit tana ma wanatowan. <verse subType="x-embedded" sID="Matt.3.3" n="3" osisID="Matt.3.3" />Tamat God, naatu Jesu Keriso Tamat Natun, baiwan babanen, kabeber, tufuw hinitit. It nowatamih, tur obe’emaim naatu yabowamaim.</p>
+        <verse subType="x-first" sID="2John.1.1" n="1" osisID="2John.1.1" />Tuwat ain biyanane, Kou’ay Bar kafai wanawananamaim natunatun bairi isah abiyabow men kafaita. Men ayu akisu kwa isa abiyabowamih, baise sabuw iyab tur obe hisoso’ob auman isa tibiyabow. <verse subType="x-embedded" sID="2John.1.2" n="2" osisID="2John.1.2" />Ana yabin tur obe it wanawanatamaim ema’am, naatu boro mar etei bairit tana ma wanatowan. <verse subType="x-embedded" sID="2John.1.3" n="3" osisID="2John.1.3" />Tamat God, naatu Jesu Keriso Tamat Natun, baiwan babanen, kabeber, tufuw hinitit. It nowatamih, tur obe’emaim naatu yabowamaim.<verse eID="2John.1.3" /></p>
       <title>Turobe Naatu Yabow</title>
       <p>
-        <verse subType="x-embedded" sID="Matt.4.4" n="4" osisID="Matt.4.4" />
+        <verse subType="x-embedded" sID="2John.1.4" n="4" osisID="2John.1.4" />
         <note type="crossReference" n="">
           <char>4 </char>
           <char>3Jn 3</char>
-        </note>Tamat iu’uwit na’atube, natunat Kirisiyan ana efamaim hai yawas hibabatun hima’am ana atit aitih yau sisir gagamin maiyow. <verse subType="x-embedded" sID="Matt.5.5" n="5" osisID="Matt.5.5" /><note type="crossReference" n=""><char>5 </char><char>1Jn 2.7</char></note>Imih are au yabow babin, akokok it etei’imak taniyabowbonen. Iti obaiyunen tur i men boubun. Iti obaiyunen tur i marasika anamaim tanowar. <verse subType="x-embedded" sID="Matt.6.6" n="6" osisID="Matt.6.6" />Imih God tanabiyabuw boro fanan tanab ana ofafar tanakaif. Naatu taniyabowbonen tanama. Ana yabin iti obaiyunen tur i marasika anamaim hibinan kwanowar. <verse subType="x-embedded" sID="Matt.7.7" n="7" osisID="Matt.7.7" /><note type="crossReference" n=""><char>7 </char><char>1Jn 4.1-3</char></note>Ana yabin yabowamaim kwanama sabuw baikubibiruwenayah afa Jesu Keriso na orot babin biyah baib isan, men tibibabatun i moumurih na’in hitit tafaram awan kakaratan. Imih orot ta nati na’atube nao men nibibabatun i baikubibiruwenayan, naatu Keriso ana rakit wairafin. <verse subType="x-embedded" sID="Matt.8.8" n="8" osisID="Matt.8.8" />Mata toniwa’an abisa isan tabowabow men kwanabohamiy. Baise kwana bukikin kwanabow, saise a baiyan tutufin kwanab. <verse subType="x-embedded" sID="Matt.9.9" n="9" osisID="Matt.9.9" />Orot yait men Keriso ana bai’obaiyenamaim ebi’obaibiyen, i men God bai. Ana yabin i Keriso ana bai’obaiyen nasair rabon me’at. Orot yait Keriso ana bai’obaiyenamaim ema’am i Tamat God Natun hairi buwih. <verse subType="x-embedded" sID="Matt.10.10" n="10" osisID="Matt.10.10" />Isan imih orot yait men Keriso ana bai’obaiyen bai enan, abaremaim men ana merar kwanay kwanabaimih. O men tufuw kwanitin. <verse subType="x-embedded" sID="Matt.11.11" n="11" osisID="Matt.11.11" />Ana yabin orot yait tufuw ebitin, nati orot i ana ofomih matar naatu abisa kakafin esisinaf boro ana ubar turin nab.</p>
+        </note>Tamat iu’uwit na’atube, natunat Kirisiyan ana efamaim hai yawas hibabatun hima’am ana atit aitih yau sisir gagamin maiyow. <verse subType="x-embedded" sID="2John.1.5" n="5" osisID="2John.1.5" /><note type="crossReference" n=""><char>5 </char><char>1Jn 2.7</char></note>Imih are au yabow babin, akokok it etei’imak taniyabowbonen. Iti obaiyunen tur i men boubun. Iti obaiyunen tur i marasika anamaim tanowar. <verse subType="x-embedded" sID="2John.1.6" n="6" osisID="2John.1.6" />Imih God tanabiyabuw boro fanan tanab ana ofafar tanakaif. Naatu taniyabowbonen tanama. Ana yabin iti obaiyunen tur i marasika anamaim hibinan kwanowar. <verse subType="x-embedded" sID="2John.1.7" n="7" osisID="2John.1.7" /><note type="crossReference" n=""><char>7 </char><char>1Jn 4.1-3</char></note>Ana yabin yabowamaim kwanama sabuw baikubibiruwenayah afa Jesu Keriso na orot babin biyah baib isan, men tibibabatun i moumurih na’in hitit tafaram awan kakaratan. Imih orot ta nati na’atube nao men nibibabatun i baikubibiruwenayan, naatu Keriso ana rakit wairafin. <verse subType="x-embedded" sID="2John.1.8" n="8" osisID="2John.1.8" />Mata toniwa’an abisa isan tabowabow men kwanabohamiy. Baise kwana bukikin kwanabow, saise a baiyan tutufin kwanab. <verse subType="x-embedded" sID="2John.1.9" n="9" osisID="2John.1.9" />Orot yait men Keriso ana bai’obaiyenamaim ebi’obaibiyen, i men God bai. Ana yabin i Keriso ana bai’obaiyen nasair rabon me’at. Orot yait Keriso ana bai’obaiyenamaim ema’am i Tamat God Natun hairi buwih. <verse subType="x-embedded" sID="2John.1.10" n="10" osisID="2John.1.10" />Isan imih orot yait men Keriso ana bai’obaiyen bai enan, abaremaim men ana merar kwanay kwanabaimih. O men tufuw kwanitin. <verse subType="x-embedded" sID="2John.1.11" n="11" osisID="2John.1.11" />Ana yabin orot yait tufuw ebitin, nati orot i ana ofomih matar naatu abisa kakafin esisinaf boro ana ubar turin nab.<verse eID="2John.1.11" /></p>
       <title>Tur Yomanin</title>
       <p>
-        <verse subType="x-embedded" sID="Matt.12.12" n="12" osisID="Matt.12.12" />Ayu akokok boro tur moumurih na’in atao kwatanowar, baise men akokok fefemaim ana kirum, imih anotanot boro ayu taiyuwu anan aninanawani, yumatau kwana’itin bairi tanao. Saise boro bairit taniyasisir gewas. <verse subType="x-embedded" sID="Matt.13.13" n="13" osisID="Matt.13.13" />God akisin iti tai a yabow babin rubin, i natunatun iti tema’am kwa etei a merar tiyiy.</p>
+        <verse subType="x-embedded" sID="2John.1.12" n="12" osisID="2John.1.12" />Ayu akokok boro tur moumurih na’in atao kwatanowar, baise men akokok fefemaim ana kirum, imih anotanot boro ayu taiyuwu anan aninanawani, yumatau kwana’itin bairi tanao. Saise boro bairit taniyasisir gewas. <verse subType="x-embedded" sID="2John.1.13" n="13" osisID="2John.1.13" />God akisin iti tai a yabow babin rubin, i natunatun iti tema’am kwa etei a merar tiyiy.<verse eID="2John.1.13" /></p>
+      <verse eID="2John.1.13" />
     </div>
   </osisText>
 </osis>

@@ -15,7 +15,7 @@ namespace SIL.PublishingSolution
         protected string _processFolder;
         private const string RedirectOutputFileName = "Convert.log";
         private bool _isLinux;
-
+        private string _languageName;
         public string ExportType
         {
             get
@@ -47,7 +47,6 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
-            bool success = false;
             string swordFullPath = Common.FromRegistry("Sword");
             string usxFilePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             projInfo.ProjectPath = usxFilePath;
@@ -60,17 +59,24 @@ namespace SIL.PublishingSolution
             UsxToOSIS usxToOsis = new UsxToOSIS();
             string[] usxFilesList = Directory.GetFiles(usxFilePath, "*.usx");
 
-            string xhtmlLang = JustLanguageCode(projInfo.DefaultXhtmlFileWithPath, projInfo.ProjectInputType);
+            string xhtmlLang = string.Empty;
+            if (File.Exists(projInfo.DefaultXhtmlFileWithPath))
+            {
+                xhtmlLang = JustLanguageCode(projInfo.DefaultXhtmlFileWithPath, projInfo.ProjectInputType);
+            }
+            if (xhtmlLang == string.Empty)
+            {
+                xhtmlLang = "eng";
+            }
             //Usx to Osis Conversion Process Step
             UsxtoOsisConvertProcess(usxFilesList, osisFilePath, usxToOsis, xhtmlLang);
-
 
             osisFilePath = Path.GetDirectoryName(osisFilePath);
             tempSwordCreatorPath = Common.PathCombine(tempSwordCreatorPath, "OSIS");
             osisFilePath = Common.PathCombine(osisFilePath, "OSIS");
             CopySwordCreatorFolderToTemp(osisFilePath, tempSwordCreatorPath, null);
 
-            string swordOutputLocation = SwordOutputLocation(Path.GetDirectoryName(tempSwordCreatorPath));
+            string swordOutputLocation = SwordOutputLocation(Path.GetDirectoryName(tempSwordCreatorPath), xhtmlLang);
             string[] osisFilesList = Directory.GetFiles(tempSwordCreatorPath, "*.xml");
 
             //Start Process to Osis To Osis2Mod Conversion
@@ -82,21 +88,23 @@ namespace SIL.PublishingSolution
             restricttoCopyExtensions.Add(".dll");
 
             CopySwordCreatorFolderToTemp(swordTempFolder, swordOutputExportLocation, restricttoCopyExtensions);
-
             WriteModConfigFile(swordOutputExportLocation, xhtmlLang);
 
-            return success;
+            return true;
         }
 
-        
+
 
         private string JustLanguageCode(string xhtmlFileNameWithPath, string projectInputType)
         {
             string languageCode = Common.GetLanguageCode(xhtmlFileNameWithPath, projectInputType);
+            string languageName = languageCode;
+            _languageName = Common.LeftRemove(languageName, ":");
             if (languageCode.Contains(":"))
             {
                 languageCode = languageCode.Substring(0, languageCode.IndexOf(':'));
             }
+
             return languageCode;
         }
 
@@ -113,16 +121,20 @@ namespace SIL.PublishingSolution
             string Newfile = Common.PathCombine(swordOutputLocation, languageCode + ".conf");
             var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
             var sw2 = new StreamWriter(fs2);
-            
 
-            WriteConfig(sw2, "[KJV]");
-            WriteConfig(sw2, "DataPath=./modules/texts/ztext/kjv/");
+
+            WriteConfig(sw2, "[" + languageCode.ToUpper() + "]");
+            WriteConfig(sw2, "DataPath=./modules/texts/ztext/" + languageCode + "/");
             WriteConfig(sw2, "ModDrv=zText");
             WriteConfig(sw2, "Encoding=UTF-8");
             WriteConfig(sw2, "BlockType=BOOK");
             WriteConfig(sw2, "CompressType=ZIP");
             WriteConfig(sw2, "SourceType=OSIS");
-            WriteConfig(sw2, "Lang=en");
+            if (_languageName == string.Empty)
+            {
+                _languageName = "UNKNOWN";
+            }
+            WriteConfig(sw2, "Lang=" + _languageName);
             WriteConfig(sw2, "GlobalOptionFilter=OSISStrongs");
             WriteConfig(sw2, "GlobalOptionFilter=OSISMorph");
             WriteConfig(sw2, "GlobalOptionFilter=OSISFootnotes");
@@ -133,10 +145,10 @@ namespace SIL.PublishingSolution
             WriteConfig(sw2, "MinimumVersion=1.5.9");
             WriteConfig(sw2, "SwordVersionDate=2006-10-09");
             WriteConfig(sw2, "Version=2.3");
-            WriteConfig(sw2, "Description=King James Version (1769) with Strongs Numbers and Morphology");
-            WriteConfig(sw2, "About=");
-            WriteConfig(sw2, "TextSource=bf.org, eBible.org, crosswire.org");
-            WriteConfig(sw2, "LCSH=Bible. English.");
+            WriteConfig(sw2, "Description=" + GetInfo(Param.Description));
+            WriteConfig(sw2, "About=" + GetInfo(Param.CopyrightHolder));
+            WriteConfig(sw2, "TextSource=" + GetInfo(Param.Publisher));
+            WriteConfig(sw2, "LCSH=Bible. " + _languageName + ".");
             WriteConfig(sw2, "DistributionLicense=General public license for distribution for any purpose");
 
             sw2.Close();
@@ -231,12 +243,28 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static string SwordOutputLocation(string swordOutputLocation)
+        private static string SwordOutputLocation(string swordOutputLocation, string languageCode)
         {
             swordOutputLocation = Common.PathCombine(swordOutputLocation, "modules");
+            if (!Directory.Exists(swordOutputLocation))
+            {
+                Directory.CreateDirectory(swordOutputLocation);
+            }
             swordOutputLocation = Common.PathCombine(swordOutputLocation, "texts");
+            if (!Directory.Exists(swordOutputLocation))
+            {
+                Directory.CreateDirectory(swordOutputLocation);
+            }
             swordOutputLocation = Common.PathCombine(swordOutputLocation, "ztext");
-            swordOutputLocation = Common.PathCombine(swordOutputLocation, "sil");
+            if (!Directory.Exists(swordOutputLocation))
+            {
+                Directory.CreateDirectory(swordOutputLocation);
+            }
+            swordOutputLocation = Common.PathCombine(swordOutputLocation, languageCode);
+            if (!Directory.Exists(swordOutputLocation))
+            {
+                Directory.CreateDirectory(swordOutputLocation);
+            }
             return swordOutputLocation;
         }
 
@@ -277,8 +305,16 @@ namespace SIL.PublishingSolution
             string organization;
             try
             {
-                // get the organization
-                organization = Param.Value["Organization"];
+                if (Param.Value.Count == 0)
+                {
+                    organization = "SIL International";
+                }
+                else
+                {
+                    // get the organization
+                    organization = Param.Value["Organization"];
+                }
+
             }
             catch (Exception)
             {

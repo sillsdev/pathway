@@ -1360,9 +1360,9 @@ namespace TestBed
 
             UsxToOSIS usxToSis = new UsxToOSIS();
             string output = txtInputPath.Text.Replace(".usx", ".xml");
-            usxToSis.ConvertUsxToOSIS(txtInputPath.Text, output, "{LANG}");
+            usxToSis.ConvertUsxToOSIS(txtInputPath.Text, output, "eng");
             MessageBox.Show("Done");
-        
+
         }
 
         private void btnSword_Click(object sender, EventArgs e)
@@ -1370,14 +1370,37 @@ namespace TestBed
 
             if (!File.Exists(txtInputPath.Text))
             {
-                MessageBox.Show("Please enter the valid Usx path");
+                MessageBox.Show("Please select the valid usx file");
                 return;
             }
 
-            ExportSword swordObj= new ExportSword();
+            if (Path.GetExtension(txtInputPath.Text) != ".usx")
+            {
+                MessageBox.Show("Please select the valid usx file");
+                return;
+            }
+
+            string directoryName = string.Empty;
+            directoryName = Path.GetFileName(Path.GetDirectoryName(txtInputPath.Text));
+            if (directoryName.ToLower() != "usx")
+            {
+                MessageBox.Show("Folder name should be [usx]");
+                return;
+            }
+
+
+            string xhtmlFile = string.Empty;
+            if (File.Exists(txtInputPath.Text))
+            {
+                xhtmlFile = Path.GetDirectoryName(txtInputPath.Text);
+                xhtmlFile = Path.GetDirectoryName(xhtmlFile);
+                xhtmlFile = Common.PathCombine(xhtmlFile, "Test.xhtml");
+            }
+
+            ExportSword swordObj = new ExportSword();
             PublicationInformation projInfo = new PublicationInformation();
-            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
-            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.ProjectPath = Path.GetDirectoryName(xhtmlFile);
+            projInfo.DefaultXhtmlFileWithPath = xhtmlFile;
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             swordObj.Export(projInfo);
             MessageBox.Show("Done");
