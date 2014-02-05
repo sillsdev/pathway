@@ -494,7 +494,8 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
 
         private void AttachMetadata(StreamWriter sw)
         {
-            var format = @"id=W{0}
+            var format = @"verse.rule=""(<a href[^>]+>)(.*?)(</a>)"" ""$1<font color=defclr6>$2</font>$3""
+id=W{0}
 charset=0
 lang={0}
 font={9}
@@ -542,7 +543,11 @@ about={2} \
             var fullPath = Common.PathCombine(Common.PathCombine(folder, "Scripture"), thewordformatTxt);
             if (File.Exists(fullPath))
             {
-                return FileData.Get(fullPath);
+                var curFormat = FileData.Get(fullPath);
+                if (curFormat.StartsWith("verse.rule")) //TD-3785 verse rule is necessary
+                {
+                    return curFormat;
+                }
             }
             var sw = new StreamWriter(fullPath);
             sw.Write(format);
