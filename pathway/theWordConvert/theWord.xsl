@@ -33,23 +33,36 @@
     <xsl:variable name="bookNamesBook" select="document($bookNames)//book"/>
     
     <xsl:template match="/">
-        <xsl:for-each select="//para[starts-with(@style, 'mt')]">
-            <xsl:choose>
-                <xsl:when test="@style='mt2'">
-                    <xsl:text disable-output-escaping="yes"><![CDATA[<TS2><font size=-1><b>]]></xsl:text>
-                    <xsl:value-of select="."/>
-                    <xsl:text disable-output-escaping="yes"><![CDATA[</b></font><Ts>]]></xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text disable-output-escaping="yes"><![CDATA[<TS1>]]></xsl:text>
-                    <xsl:value-of select="."/>
-                    <xsl:text disable-output-escaping="yes"><![CDATA[<Ts>]]></xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each>
+        <xsl:choose>
+            <xsl:when test="count(//para[@style='toc1'])">
+                <xsl:for-each select="//para[@style='toc1']">
+                    <xsl:call-template name="FormatHeader"/>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="//para[starts-with(@style, 'mt')]">
+                    <xsl:call-template name="FormatHeader"/>
+                </xsl:for-each>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:call-template name="nextChapter">
             <xsl:with-param name="cvData" select="$vrs/text()"/>
         </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="FormatHeader">
+        <xsl:choose>
+            <xsl:when test="@style='mt2'">
+                <xsl:text disable-output-escaping="yes"><![CDATA[<TS2><font color=teal size=-1><b>]]></xsl:text>
+                <xsl:value-of select="."/>
+                <xsl:text disable-output-escaping="yes"><![CDATA[</b></font><Ts>]]></xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text disable-output-escaping="yes"><![CDATA[<TS1><font color=teal>]]></xsl:text>
+                <xsl:value-of select="."/>
+                <xsl:text disable-output-escaping="yes"><![CDATA[</font><Ts>]]></xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template name="nextChapter">
@@ -235,8 +248,11 @@
                     <xsl:when test="@style = 's' or @style = 's1' or @style = 's2' or starts-with(@style,'ms')">
                         <xsl:call-template name="SectionHead"/>
                     </xsl:when>
-                    <xsl:when test="@style = 'r' or @style = 'mr' or @style = 'd' or @style = 'qa'">
+                    <xsl:when test="@style = 'r'">
                         <xsl:call-template name="ParallelReference"/>
+                    </xsl:when>
+                    <xsl:when test="@style = 'mr' or @style = 'd' or @style = 'qa'">
+                        <xsl:call-template name="OtherReference"/>
                     </xsl:when>
                 </xsl:choose>
             </xsl:otherwise>
@@ -251,7 +267,9 @@
         <xsl:for-each select="child::node()">
             <xsl:choose>
                 <xsl:when test="@style='f'">
-                    <xsl:text disable-output-escaping="yes"><![CDATA[<RF>]]></xsl:text>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[<RF q=]]></xsl:text>
+                    <xsl:value-of select="@caller"/>
+                    <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text>
                     <xsl:value-of select="normalize-space(*[@style = 'ft'])"/>
                     <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
                 </xsl:when>
@@ -278,6 +296,26 @@
     </xsl:template>
     
     <xsl:template name="ParallelReference">
+        <xsl:text disable-output-escaping="yes"><![CDATA[<TS3><i>]]></xsl:text>
+        <xsl:variable name="normText" select="normalize-space(text())"/>
+        <xsl:choose>
+            <xsl:when test="starts-with($normText, '(')">
+                <xsl:text>(</xsl:text>
+                <xsl:call-template name="CrossReferenceIter">
+                    <xsl:with-param name="textLeft" select="substring-before(substring-after($normText, '('), ')')"/>
+                </xsl:call-template>
+                <xsl:text>)</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="CrossReferenceIter">
+                    <xsl:with-param name="textLeft" select="$normText"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</i><Ts>]]></xsl:text>
+    </xsl:template>
+    
+    <xsl:template name="OtherReference">
         <xsl:text disable-output-escaping="yes"><![CDATA[<TS3><i>]]></xsl:text>
         <xsl:value-of select="normalize-space(text())"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[</i><Ts>]]></xsl:text>
@@ -620,7 +658,9 @@
     <xsl:template name="Footnotes">
         <xsl:param name="space"/>
         <xsl:param name="indent"/>
-        <xsl:text disable-output-escaping="yes"><![CDATA[<RF>]]></xsl:text>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<RF q=]]></xsl:text>
+        <xsl:value-of select="@caller"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text>
         <xsl:for-each select="child::node()">
             <xsl:choose>
                 <xsl:when test="@style = 'fr'"/>

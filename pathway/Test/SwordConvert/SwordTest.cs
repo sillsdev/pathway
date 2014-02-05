@@ -143,13 +143,15 @@ namespace Test.SwordConvert
             var inputTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName().Replace(".", "_"));
             Directory.CreateDirectory(inputTmpDir);
             string inputTmpDirFileName = string.Empty;
-            inputTmpDirFileName = Common.PathCombine(inputTmpDir, Path.GetFileName(input));
+            inputTmpDirFileName = Common.PathCombine(inputTmpDir, "usx");
+            Directory.CreateDirectory(inputTmpDirFileName);
+            inputTmpDirFileName = Common.PathCombine(inputTmpDirFileName, Path.GetFileName(input));
             File.Copy(input, inputTmpDirFileName, true);
 
             ExportSword swordObj = new ExportSword();
             PublicationInformation projInfo = new PublicationInformation();
-            projInfo.ProjectPath = Path.GetDirectoryName(inputTmpDirFileName);
-            projInfo.DefaultXhtmlFileWithPath = inputTmpDirFileName;
+            projInfo.ProjectPath = inputTmpDir;
+            projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(inputTmpDir, "Test.xhtml");
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             swordObj.Export(projInfo);
 
@@ -199,13 +201,15 @@ namespace Test.SwordConvert
             var inputTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName().Replace(".", "_"));
             Directory.CreateDirectory(inputTmpDir);
             string inputTmpDirFileName = string.Empty;
-            inputTmpDirFileName = Common.PathCombine(inputTmpDir, Path.GetFileName(input));
+            inputTmpDirFileName = Common.PathCombine(inputTmpDir, "usx");
+            Directory.CreateDirectory(inputTmpDirFileName);
+            inputTmpDirFileName = Common.PathCombine(inputTmpDirFileName, Path.GetFileName(input));
             File.Copy(input, inputTmpDirFileName, true);
 
             ExportSword swordObj = new ExportSword();
             PublicationInformation projInfo = new PublicationInformation();
-            projInfo.ProjectPath = Path.GetDirectoryName(inputTmpDirFileName);
-            projInfo.DefaultXhtmlFileWithPath = inputTmpDirFileName;
+            projInfo.ProjectPath = inputTmpDir;
+            projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(inputTmpDir, "Test.xhtml");
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             swordObj.Export(projInfo);
 
