@@ -14,10 +14,10 @@ var indexTab = false;
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu           
-// Modified On:  Jan 24 2014
-// TD-3734("Reversal guide words don't appear")
+// Modified On:  Feb 06 2014 
+// TD-3735("First page divider lines missing") 
 // <remarks> 
-// Fix FG_1,LG_1 - Reversal Guideword issue
+// Grouping()
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -1232,8 +1232,8 @@ function Grouping()
 		{
 			myStory = myDocument.textFrames[storyLength];
 			//alert("my count " + myStory.parent.name);
-			if(myStory.parent.name  > activePageNumber)
-			{
+			//if(myStory.parent.name  > activePageNumber)
+			//{
 				if(myStory.textFramePreferences.textColumnCount > 1)
 				{
 					makeGroup(myStory);
@@ -1248,7 +1248,7 @@ function Grouping()
 						DrawBorderLine(myStory);
 					}
 				}
-		    }
+		    //}
 
 		}
 	}
@@ -1716,6 +1716,7 @@ function FitFrameToPage100(myStory)
 
 	}	
 }
+
 
 
 
