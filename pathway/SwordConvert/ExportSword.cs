@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
 using System.Threading;
@@ -14,14 +15,21 @@ namespace SIL.PublishingSolution
     {
         protected string _processFolder;
         private const string RedirectOutputFileName = "Convert.log";
-        private bool _isLinux;
+        private bool _isUnixOS;
         private string _languageName;
+        private bool _openOutputDirectory = true;
         public string ExportType
         {
             get
             {
                 return "Sword";
             }
+        }
+
+        public bool OpenOutputDirectory
+        {
+            get { return _openOutputDirectory; }
+            set { _openOutputDirectory = value; }
         }
 
         public bool Handle(string inputDataType)
@@ -47,6 +55,7 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
+            _isUnixOS = Common.IsUnixOS();
             string swordFullPath = Common.FromRegistry("Sword");
             string usxFilePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             projInfo.ProjectPath = usxFilePath;
@@ -90,9 +99,36 @@ namespace SIL.PublishingSolution
             CopySwordCreatorFolderToTemp(swordTempFolder, swordOutputExportLocation, restricttoCopyExtensions);
             WriteModConfigFile(swordOutputExportLocation, xhtmlLang);
 
+            if (_openOutputDirectory)
+            {
+                var output = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+                var result =
+                    MessageBox.Show(
+                        string.Format("Dictionary for Mid output successfully created in {0}. Display output?", output),
+                        "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+                if (result == DialogResult.Yes)
+                {
+                    if (Directory.Exists(output))
+                    {
+                        DisplayOutput(output);
+                    }
+                }
+            }
             return true;
         }
 
+        private void DisplayOutput(string outputDirectory)
+        {
+            const bool noWait = false;
+            if (_isUnixOS)
+            {
+                SubProcess.Run(outputDirectory, "nautilus", outputDirectory, noWait);
+            }
+            else
+            {
+                SubProcess.Run(outputDirectory, "explorer.exe", outputDirectory, noWait);
+            }
+        }
 
 
         private string JustLanguageCode(string xhtmlFileNameWithPath, string projectInputType)
@@ -284,7 +320,7 @@ namespace SIL.PublishingSolution
         {
             string Creator = "osis2mod";
             //Creator = Common.PathCombine(processFolder, Creator);
-            string moreArguments = "-z -v KJV"; //"-z -v KJV -d 0";
+            string moreArguments = "-z -N -v NRSV";
             foreach (var osisFile in osisFilesList)
             {
                 var args = string.Format(@"""{0}"" ""{1}"" {2}", swordOutputPath, osisFile, moreArguments);
@@ -295,7 +331,7 @@ namespace SIL.PublishingSolution
                 string stdOutErr = string.Empty;
                 SubProcess.Run(processFolder, Creator, args, true);
                 //SubProcess.RunCommandWithErrorLog(processFolder, Creator, args, true, projectPath);
-                moreArguments = "-a -z -v KJV";
+                moreArguments = "-a -z -N -v NRSV";
 
             }
         }

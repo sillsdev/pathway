@@ -35,7 +35,7 @@ namespace SIL.PublishingSolution
         private string _parentTagName = string.Empty, _parentStyleName = string.Empty;
         private string _verseNumber, _chapterNumber;
         private string _paraStyle = string.Empty;
-
+        private bool _skipTag = false;
 
         private string _desc, _file, _size, _loc, _copy, _ref;
         private bool _significant, _isEmptyNode, _isParaWritten;
@@ -45,6 +45,11 @@ namespace SIL.PublishingSolution
         private bool _isclassNameExist;
         private List<string> _xhtmlAttribute = new List<string>();
         private bool _listItemOpen = false;
+        private int _openDivCount = 0;
+        private bool _isFirstScope = true;
+        private Dictionary<string, string> _mappingScopeChapterandVerse = new Dictionary<string, string>();
+        private string _scopeKey = string.Empty;
+        private List<string> _scopeChapterandVerse = new List<string>();
         #endregion
 
         /// <summary>
@@ -59,7 +64,7 @@ namespace SIL.PublishingSolution
             CreateHead(xhtmlLang);
             ProcessUsx();
             CloseFile();
-            _bookCode.Clear();
+            UpdateScopeProcess();
         }
 
         /// ------------------------------------------------------------------------
@@ -120,7 +125,13 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void WriteElement()
         {
+            if (_skipTag)
+            {
+                return;
+            }
+
             _content = SignificantSpace(_reader.Value);
+
             if (_tagName == "para" && _style == "h")
             {
                 _writer.WriteAttributeString("short", _content);
@@ -137,7 +148,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteComment("\\" + _style + " " + _content);
                 _style = string.Empty;
             }
-            else if (_tagName == "para" && (_style == "mr" || _style == "r"))
+            else if (_tagName == "para" && (_style == "mr" || _style == "r" || _style == "imt" || _style == "mt" || _style == "mt1"))
             {
                 _writer.WriteString(_content);
                 _writer.WriteEndElement();
@@ -374,6 +385,17 @@ namespace SIL.PublishingSolution
         {
             string style = StackPop(_allStyle);
             string tag = StackPop(_alltagName);
+            if (_skipTag)
+            {
+                _skipTag = false;
+                return;
+            }
+
+            if (_tagName == "char" && _style == "xt")
+            {
+                _style = string.Empty;
+                return;
+            }
 
             if (_tagName == "verse")
             {
@@ -381,14 +403,12 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("verse");
                 _writer.WriteAttributeString("eID", booksID);
                 _writer.WriteEndElement();
+                _tagName = string.Empty;
             }
             if (_paraStyle != "rem")
             {
                 _writer.WriteEndElement();
             }
-
-
-
 
             //if (tag == "para")
             //{
@@ -456,6 +476,7 @@ namespace SIL.PublishingSolution
                     }
                     else if (_reader.Name == "caller")
                     {
+                        _caller = _reader.Value;
                         //_writer.WriteAttributeString(_reader.Name, _reader.Value);
                     }
                 }
@@ -466,17 +487,64 @@ namespace SIL.PublishingSolution
                 _writer.WriteEndElement();
                 _listItemOpen = false;
             }
-
             //Write Start Element
             if (_tagName == "para")
             {
                 _paraStyle = _style;
-                if (_style == "h" || _style == "is" || _style == "iot" || _style == "title" || _style == "s")
+
+                if (_style == "s")
+                {
+                    string booksID = _bookCodeName + "." + _chapterNumber + "." + _verseNumber;
+                    if (!_isFirstScope)
+                    {
+                        _writer.WriteEndElement();
+
+                        _mappingScopeChapterandVerse.Add(_scopeKey, _scopeChapterandVerse[0].ToString() + "-" + _scopeChapterandVerse[_scopeChapterandVerse.Count - 1].ToString());
+                        _scopeKey = string.Empty;
+                        _scopeChapterandVerse.Clear();
+                    }
+                    _scopeKey = booksID;
+                    _writer.WriteStartElement("div");
+                    _writer.WriteAttributeString("scope", booksID);
+                    _writer.WriteAttributeString("type", "section");
+                    
+                    _writer.WriteStartElement("title");
+                    _isFirstScope = false;
+                }
+
+                else if (_style == "h" || _style == "is" || _style == "title")
                 {
                     _writer.WriteStartElement("title");
                 }
-                else if (_style == "mt" || _style == "mt1" || _style == "imt")
+                else if (_style == "iot")
                 {
+                    _writer.WriteStartElement("div");
+                    _writer.WriteAttributeString("type", "outline");
+                    _openDivCount++;
+
+                    _writer.WriteStartElement("title");
+                }
+                else if (_style == "toc1" || _style == "toc2" || _style == "toc3")
+                {
+                    _skipTag = true;
+                }
+                else if (_style == "imt")
+                {
+                    _writer.WriteStartElement("div");
+                    _writer.WriteAttributeString("type", "introduction");
+                    _writer.WriteAttributeString("canonical", "false");
+                    _openDivCount++;
+
+                    _writer.WriteStartElement("title");
+                    _writer.WriteAttributeString("type", "main");
+                    _writer.WriteStartElement("title");
+                    _writer.WriteAttributeString("level", "1");
+                }
+                else if (_style == "mt" || _style == "mt1")
+                {
+                    _writer.WriteStartElement("title");
+                    _writer.WriteAttributeString("type", "main");
+
                     _writer.WriteStartElement("title");
                     _writer.WriteAttributeString("level", "1");
                 }
@@ -530,6 +598,12 @@ namespace SIL.PublishingSolution
             }
             else if (_tagName == "chapter")
             {
+                for (int i = 1; i <= _openDivCount; i++)
+                {
+                    _writer.WriteEndElement();
+                }
+                _openDivCount = 0;
+
                 _writer.WriteStartElement("chapter");
                 _writer.WriteAttributeString("n", _chapterNumber);
                 _writer.WriteAttributeString("osisID", _bookCodeName + "." + _chapterNumber);
@@ -537,6 +611,7 @@ namespace SIL.PublishingSolution
             else if (_tagName == "verse")
             {
                 string booksID = _bookCodeName + "." + _chapterNumber + "." + _verseNumber;
+                _scopeChapterandVerse.Add(booksID);
                 _writer.WriteStartElement("verse");
 
                 if (_verseNumber == "1")
@@ -562,6 +637,15 @@ namespace SIL.PublishingSolution
                 if (_style == "bk")
                 {
                     _writer.WriteStartElement("reference");
+                }
+                else if (_style == "xo")
+                {
+                    _writer.WriteStartElement("reference");
+                    _writer.WriteAttributeString("type", "source");
+                }
+                else if (_style == "xt")
+                {
+                    return;
                 }
                 else
                 {
@@ -839,35 +923,87 @@ namespace SIL.PublishingSolution
         }
 
 
-        private void SetBookCode() ////////////////////////// Complete it
+        private void SetBookCode()
         {
-            _bookCode.Add("1co", "1Cor");
-            _bookCode.Add("1jn", "1John");
-            _bookCode.Add("1pe", "1Pet");
-            _bookCode.Add("1th", "1Thess");
-            _bookCode.Add("1ti", "1Tim");
-            _bookCode.Add("2co", "2Cor");
-            _bookCode.Add("2jn", "2John");
-            _bookCode.Add("2pe", "2Pet");
-            _bookCode.Add("2th", "2Thess");
-            _bookCode.Add("2ti", "2Tim");
-            _bookCode.Add("3jn", "3John");
-            _bookCode.Add("act", "Acts");
-            _bookCode.Add("col", "Col");
-            _bookCode.Add("eph", "Eph");
-            _bookCode.Add("gal", "Gal");
-            _bookCode.Add("heb", "Heb");
-            _bookCode.Add("jas", "Jas");
-            _bookCode.Add("jhn", "John");
-            _bookCode.Add("jud", "Jude");
-            _bookCode.Add("luk", "Luke");
-            _bookCode.Add("mat", "MATT");
-            _bookCode.Add("mrk", "MARK");
-            _bookCode.Add("phm", "Phlm");
-            _bookCode.Add("php", "Phil");
-            _bookCode.Add("rev", "Rev");
+            _bookCode.Clear();
+            _bookCode.Add("gen", "Gen");
+            _bookCode.Add("exo", "Exod");
+            _bookCode.Add("lev", "Lev"); 
+            _bookCode.Add("num", "Num"); 
+            _bookCode.Add("deu", "Deut"); 
+            _bookCode.Add("jos", "Josh");
+            _bookCode.Add("jdg", "Judg"); 
+            _bookCode.Add("rut", "Ruth"); 
+            _bookCode.Add("1sa", "1Sam"); 
+            _bookCode.Add("2sa", "2Sam"); 
+            _bookCode.Add("1ki", "1Kgs"); 
+            _bookCode.Add("2ki", "2Kgs"); 
+            _bookCode.Add("1ch", "1Chr"); 
+            _bookCode.Add("2ch", "2Chr"); 
+            _bookCode.Add("ezr", "Ezra"); 
+            _bookCode.Add("neh", "Neh"); 
+            _bookCode.Add("est", "Esth"); 
+            _bookCode.Add("job", "Job"); 
+            _bookCode.Add("psa", "Ps"); 
+            _bookCode.Add("pro", "Prov");
+            _bookCode.Add("ecc", "Eccl");
+            _bookCode.Add("sng", "Song");
+            _bookCode.Add("isa", "Isa"); 
+            _bookCode.Add("jer", "Jer"); 
+            _bookCode.Add("lam", "Lam"); 
+            _bookCode.Add("dan", "Dan"); 
+            _bookCode.Add("ezk", "Ezek");
+            _bookCode.Add("hos", "Hos"); 
+            _bookCode.Add("jol", "Joel");
+            _bookCode.Add("amo", "Amos");
+            _bookCode.Add("oba", "Obad");
+            _bookCode.Add("jon", "Jonah");
+            _bookCode.Add("mic", "Mic"); 
+            _bookCode.Add("nah", "Nah"); 
+            _bookCode.Add("hab", "Hab"); 
+            _bookCode.Add("zep", "Zeph"); 
+            _bookCode.Add("hag", "Hag");
+            _bookCode.Add("zec", "Zech"); 
+            _bookCode.Add("mal", "Mal"); 
+            _bookCode.Add("jdt", "Jdt"); 
+            _bookCode.Add("wis", "Wis");
+            _bookCode.Add("tob", "Tob"); 
+            _bookCode.Add("sir", "Sir");
+            _bookCode.Add("bar", "Bar");
+            _bookCode.Add("1mac", "1Macc");
+            _bookCode.Add("2mac", "2Macc");
+            _bookCode.Add("aes", "AddEsth"); 
+            _bookCode.Add("sus", "Sus"); 
+            _bookCode.Add("bel", "Bel"); 
+            _bookCode.Add("paz", "PrAzar");
+            _bookCode.Add("pma", "PrMan"); 
+            _bookCode.Add("mat", "Matt"); 
+            _bookCode.Add("mrk", "Mark");
+            _bookCode.Add("luk", "Luke"); 
+            _bookCode.Add("jhn", "John"); 
+            _bookCode.Add("act", "Acts"); 
             _bookCode.Add("rom", "Rom");
-            _bookCode.Add("tit", "Titus");
+            _bookCode.Add("1co", "1Cor");
+            _bookCode.Add("2co", "2Cor"); 
+            _bookCode.Add("gal", "Gal"); 
+            _bookCode.Add("eph", "Eph"); 
+            _bookCode.Add("php", "Phil");
+            _bookCode.Add("col", "Col"); 
+            _bookCode.Add("1th", "1Thess");
+            _bookCode.Add("2th", "2Thess");
+            _bookCode.Add("1ti", "1Tim"); 
+            _bookCode.Add("2ti", "2Tim");
+            _bookCode.Add("tit", "Titus"); 
+            _bookCode.Add("phm", "Phlm"); 
+            _bookCode.Add("heb", "Heb");
+            _bookCode.Add("jas", "Jas"); 
+            _bookCode.Add("1pe", "1Pet");
+            _bookCode.Add("2pe", "2Pet"); 
+            _bookCode.Add("1jn", "1John"); 
+            _bookCode.Add("2jn", "2John");
+            _bookCode.Add("3jn", "3John"); 
+            _bookCode.Add("jud", "Jude"); 
+            _bookCode.Add("rev", "Rev");
         }
 
         private void CloseFile()
@@ -879,6 +1015,38 @@ namespace SIL.PublishingSolution
             _writer.WriteEndDocument();
             _writer.Flush();
             _writer.Close();
+            ClearScope();
         }
+
+        private void ClearScope()
+        {
+            _mappingScopeChapterandVerse.Add(_scopeKey,
+                                             _scopeChapterandVerse[0].ToString() + "-" +
+                                             _scopeChapterandVerse[_scopeChapterandVerse.Count - 1].ToString());
+            _scopeKey = string.Empty;
+            _scopeChapterandVerse.Clear();
+        }
+
+        private void UpdateScopeProcess()
+        {
+            string scope;
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(_osisFullPath);
+            XmlNodeList entryNodes = xmlDocument.GetElementsByTagName("div");
+            foreach (XmlNode node in entryNodes)
+            {
+                if (node.Attributes != null && node.Attributes["scope"] != null)
+                {
+                    string scopeData = node.Attributes["scope"].Value;
+                    if (_mappingScopeChapterandVerse.ContainsKey(scopeData))
+                    {
+                        scope = _mappingScopeChapterandVerse[scopeData];
+                        node.Attributes["scope"].Value = scope;
+                    }
+                }
+            }
+            xmlDocument.Save(_osisFullPath);
+        }
+        
     }
 }

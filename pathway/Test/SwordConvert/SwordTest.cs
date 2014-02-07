@@ -135,7 +135,7 @@ namespace Test.SwordConvert
         public void RutBookTest()
         {
             const string file = "rut";
-
+            
             string input = Common.PathCombine(_inputPath, file + ".usx");
             string output = Common.PathCombine(_outputPath, file + ".xml");
             string expected = Common.PathCombine(_expectedPath, file + ".xml");
@@ -153,6 +153,7 @@ namespace Test.SwordConvert
             projInfo.ProjectPath = inputTmpDir;
             projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(inputTmpDir, "Test.xhtml");
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            swordObj.OpenOutputDirectory = false;
             swordObj.Export(projInfo);
 
             string osisOutputFile = Common.PathCombine(inputTmpDir, "OSIS");
@@ -211,6 +212,7 @@ namespace Test.SwordConvert
             projInfo.ProjectPath = inputTmpDir;
             projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(inputTmpDir, "Test.xhtml");
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            swordObj.OpenOutputDirectory = false;
             swordObj.Export(projInfo);
 
             string osisOutputFile = Common.PathCombine(inputTmpDir, "OSIS");
