@@ -33,6 +33,7 @@ if "%1" == "ReleaseSE" goto nogobible
 if "%1" == "Release7SE" goto nogobible
 xcopy %base2%\YouVersionConvert\%cfg2%\YouVersionConvert.* . /y
 xcopy %base2%\CadreBibleConvert\%cfg2%\CadreBibleConvert.* . /y
+xcopy %base2%\SwordConvert\%cfg2%\SwordConvert.* . /y
 :justgobible
 xcopy %base2%\GoBibleConvert\%cfg2%\GoBibleConvert.* . /y
 xcopy %base2%\theWordConvert\%cfg2%\theWordConvert.* . /y
