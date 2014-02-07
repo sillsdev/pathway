@@ -121,8 +121,8 @@ namespace SIL.PublishingSolution
             float yb2 = yb1 + frameHeight;
 
             float x2 = 22;// _x1 - float.Parse(headerFooterWidth);
-            float x3 = 40;// float.Parse(headerFooterWidth) - (_x1 - float.Parse(headerFooterWidth));//x2
-            float x4 = _x1 + 18;// (_x1 - float.Parse(headerFooterWidth));// x3 + float.Parse(headerFooterWidth);
+            float x3 = 22;// float.Parse(headerFooterWidth) - (_x1 - float.Parse(headerFooterWidth));//x2 40
+            float x4 = _x1 + 1;// (_x1 - float.Parse(headerFooterWidth));// x3 + float.Parse(headerFooterWidth); + 18
 
             //      x1,y1       x2,y2    
             //
@@ -470,7 +470,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("GradientStrokeHiliteAngle", "0");
             _writer.WriteAttributeString("AppliedObjectStyle", "ObjectStyle/$ID/[None]");
             if (frameName.IndexOf("bottom") == 0)
-                _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 -7.5");
+                _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 -21.25977");//0 -7.5
             else
                 _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 21");//0
         }

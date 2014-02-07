@@ -14,10 +14,10 @@ var indexTab = false;
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu           
-// Modified On:  Feb 06 2014 
-// TD-3735("First page divider lines missing") 
+// Modified On:  Feb 07 2014 
+// TD-3737("Position footer frame") 
 // <remarks> 
-// Grouping()
+// PlaceFrames()
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -547,7 +547,7 @@ function PlaceFrames()
      //alert(pageHeight);
      //alert(myDocument.documentPreferences.pageHeight + "\n" + myPage.marginPreferences.top + "\n" + myPage.marginPreferences.bottom);	
 	pageWidth= myDocument.documentPreferences.pageWidth;
-	currentMarginTop = marginTop;
+	currentMarginTop = marginTop - 0.7;
 
     DrawPictureCaption();
 	//return 0;
@@ -1716,6 +1716,7 @@ function FitFrameToPage100(myStory)
 
 	}	
 }
+
 
 
 
