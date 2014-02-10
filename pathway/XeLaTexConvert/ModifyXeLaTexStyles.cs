@@ -304,10 +304,10 @@ namespace SIL.PublishingSolution
 
                 sw.WriteLine(@"\parindent=0pt");
                 sw.WriteLine(@"\parskip=\medskipamount");
-
-
+                
                 sw.WriteLine(@"\begin{document} ");
                 sw.WriteLine(@"\pagestyle{plain} ");
+                sw.WriteLine(@"\sloppy ");
             }
 
             foreach (var prop in xeLaTexProperty)
