@@ -33,7 +33,6 @@ namespace SIL.PublishingSolution
         {
             LocDB.Localize(this, null);
             Param.LoadCategories("categories/category", TvCategories);
-            //BtSettings.Visible = true;// Param.GetRole() == "System Designer";
             BtSettings.Visible = Param.UserRole == "System Designer";
             Param.SetupHelp(this);
         }

@@ -445,10 +445,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        //<property name="ReversalIndexes" value="False" />
-        //<property name="RemoveEmptyDiv" value="false" />
-
-
         /// <summary>
         /// Attempts to pull in values from the Settings helper (either from the .ldml or
         /// .ssf file) that should override the StyleSettings.xml defaults. There are only
@@ -535,27 +531,7 @@ namespace SIL.PublishingSolution
                 lnkChooseCopyright.Enabled = true;
             }
 
-            //if (ddlLayout.Text.ToLower() == "xelatex")
-            //{
-            //    tabPage2.Enabled = true;
-            //    chkCoverImage.Enabled = true;
-            //    chkCoverImageTitle.Enabled = true;
-            //    btnCoverImage.Enabled = true;
-            //    imgCoverImage.Enabled = true;
-            //    chkColophon.Enabled = true;
-            //    rdoCustomCopyright.Enabled = true;
-            //    rdoStandardCopyright.Enabled = true;
-            //    txtColophonFile.Enabled = true;
-            //    btnBrowseColophon.Enabled = true;
-            //    chkTitlePage.Enabled = true;
-            //    ddlCopyrightStatement.Enabled = true;
-            //    lnkChooseCopyright.Enabled = true;
-            //}
-
-
-
             // Processing Options tab
-            //chkRunningHeader.Enabled = (FindMedia() == "paper");
             chkOOReduceStyleNames.Enabled = (ddlLayout.Text.Contains("LibreOffice"));
             if (InputType != "Dictionary")
             {
@@ -617,7 +593,6 @@ namespace SIL.PublishingSolution
 
         private void ShownValidation()
         {
-            //string xPathLayouts = "//styles/" + _media + "/style[@approvedBy='GPS' or @shown='Yes']";
             string xPathLayouts = "//styles/" + _media + "/style[@shown='Yes']";
             XmlNodeList stylenames = Param.GetItems(xPathLayouts);
             foreach (XmlNode stylename in stylenames)
@@ -699,8 +674,6 @@ namespace SIL.PublishingSolution
             {
                 DialogResult dialogResult = MessageBox.Show("Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.", "Pathway", MessageBoxButtons.AbortRetryIgnore,
                                 MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-                //var msg = new[] { "Please Install the Plugin Backends" };
-                //LocDB.Message("defErrMsg", "Please Install the Plugin Backends", msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                 if (dialogResult == DialogResult.Ignore)
                     return;
                 if (dialogResult == DialogResult.Abort)
@@ -782,8 +755,6 @@ namespace SIL.PublishingSolution
                 CoverPageImagePath = Common.PathCombine(Common.GetApplicationPath(), "Graphic\\cover.png");
             }
 
-            //if (Format != "YouVersion")
-            //{
             // attempt to save the properties - if it doesn't work, leave the dialog open
             if (!SaveProperty(this))
             {
@@ -816,7 +787,6 @@ namespace SIL.PublishingSolution
                 Param.SetValue(Param.Preprocessing, preprocessing);
             }
             Param.Write();
-            //}
             this.Close();
         }
 
@@ -841,10 +811,6 @@ namespace SIL.PublishingSolution
             // publication info tab
             Param.DatabaseName = DatabaseName;
             Title = Param.GetTitleMetadataValue(Param.Title, Organization, isFromConfigurationTool);
-            //if (Title.Trim().Length < 1)
-            //{
-            //    Title = Param.GetMetadataValue(Param.Title, Organization);
-            //}
             Description = Param.GetMetadataValue(Param.Description, Organization);
             Creator = Param.GetMetadataValue(Param.Creator, Organization);
             Publisher = Param.GetMetadataValue(Param.Publisher, Organization);
@@ -928,7 +894,6 @@ namespace SIL.PublishingSolution
                     ExportGrammar = Param.DefaultValue[Param.GrammarSketch] == "True";
             }
             DictionaryName = Param.DefaultValue[Param.LayoutSelected];
-            //RunningHeader = Param.DefaultValue[Param.ExtraProcessing] == "True";
             Media = Param.DefaultValue[Param.Media];
 
             //Fillup XSLT Processing Checkboxes
@@ -967,12 +932,6 @@ namespace SIL.PublishingSolution
             Param.UpdateMetadataValue(Param.Language, dlg.Language);
             Param.UpdateMetadataValue(Param.Identifier, dlg.Identifier);
 
-            // Front Matter tab
-            //if (dlg.chkCoverImage.Enabled == false)
-            //{
-            //    // user can't create a cover image - make sure this isn't checked
-            //    dlg.CoverPage = false;
-            //}
             Param.UpdateMetadataValue(Param.CoverPage, dlg.CoverPage.ToString());
             Param.UpdateMetadataValue(Param.CoverPageFilename, dlg.CoverPageImagePath);
             Param.UpdateMetadataValue(Param.CoverPageTitle, dlg.CoverPageTitle.ToString());
@@ -988,11 +947,6 @@ namespace SIL.PublishingSolution
                 dlg.txtBookTitle.Focus();
                 return false;
             }
-            //if (dlg.chkColophon.Enabled == false)
-            //{
-            //    // user can't create a copyright page - make sure this isn't checked
-            //    dlg.CopyrightPage = false;
-            //}
             Param.UpdateMetadataValue(Param.CopyrightPage, dlg.CopyrightPage.ToString());
             Param.UpdateMetadataValue(Param.CopyrightPageFilename, dlg.CopyrightPagePath);
             Param.UpdateMetadataValue(Param.TableOfContents, dlg.TableOfContents.ToString());
@@ -1015,7 +969,6 @@ namespace SIL.PublishingSolution
                 Param.SetValue(Param.GrammarSketch, dlg.ExportGrammar.ToString());
             }
 
-            //Param.SetValue(Param.ExtraProcessing, dlg.RunningHeader.ToString());
             Param.SetValue(Param.Media, _media);
             Param.SetValue(Param.PublicationLocation, dlg.OutputFolder);
             Param.Write();
@@ -1042,10 +995,6 @@ namespace SIL.PublishingSolution
         {
             Param.SetDefaultValue(Param.PrintVia, dlg.Format);
             Param.SetDefaultValue(Param.LayoutSelected, dlg.Style);
-            // TODO: reimplement the persistence here
-            // Publication Information tab
-            // Front Matter tab
-
             // Processing Options tab
             if (string.IsNullOrEmpty(dlg.InputType) || dlg.InputType == "Dictionary")
             {
@@ -1053,7 +1002,6 @@ namespace SIL.PublishingSolution
                 Param.SetDefaultValue(Param.ReversalIndex, dlg.ExportReversal.ToString());
                 Param.SetDefaultValue(Param.GrammarSketch, dlg.ExportGrammar.ToString());
             }
-            //Param.SetDefaultValue(Param.ExtraProcessing, dlg.RunningHeader.ToString());
             Param.SetDefaultValue(Param.Media, _media);
             if (Common.CustomSaveInFolder(dlg.OutputFolder))
                 Param.SetValue(Param.PublicationLocation, dlg.OutputFolder);
@@ -1276,13 +1224,9 @@ namespace SIL.PublishingSolution
 
         private void lnkIP_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //_helpTopic = "Concepts/Intellectual_Property.htm";
             _helpTopic = "Concepts/Intellectual_Property.htm";
-            //Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             SetTabbedHelpTopic();
             SendKeys.Send("{F1}");
-            //Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-            //btnHelp_Click(sender, e);
         }
 
         private void btnCoverImage_Click(object sender, EventArgs e)
@@ -1306,10 +1250,6 @@ namespace SIL.PublishingSolution
                         return;
                     }
                     CoverPageImagePath = filename;
-                    //string userPath = (Param.Value["UserSheetPath"]);
-                    //string imgFileName = Path.GetFileName(filename);
-                    //string toPath = Common.PathCombine(userPath, imgFileName);
-                    //File.Copy(filename, toPath, true);
                     imgCoverImage.Image = iconImage;
                 }
                 catch { }
@@ -1397,7 +1337,6 @@ namespace SIL.PublishingSolution
                             // this is our item - set the CopyrightFilename
                             var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
                             CopyrightPagePath = Common.PathCombine(copyrightDir, subnode.Attributes["file"].Value);
-                            //CopyrightPagePath = Common.PathCombine(copyrightDir, "SIL_Custom_Template.xhtml");
                         }
                     }
                 }
@@ -1437,7 +1376,6 @@ namespace SIL.PublishingSolution
             {
                 Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
                 Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-                // SendKeys.Send("{F1}");
             }
 
         }

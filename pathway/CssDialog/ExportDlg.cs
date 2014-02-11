@@ -41,8 +41,6 @@ namespace SIL.PublishingSolution
             LocDB.Localize(this, null);     // Form Controls
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, "Exporting.htm");
-
-            //ArrayList exportType = Common.GetExportType();
             ArrayList exportType = Backend.GetExportType(ExportType);
             if (exportType.Count > 0)
             {

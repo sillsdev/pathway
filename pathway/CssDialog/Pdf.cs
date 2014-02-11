@@ -70,7 +70,6 @@ namespace SIL.PublishingSolution
         public void Create(string outName)
         {
             Debug.Assert(!string.IsNullOrEmpty(Xhtml), "xhtml not set");
-            //Debug.Assert(!string.IsNullOrEmpty(Css), "css not set");
 
             if (Common.UnixVersionCheck())
             {

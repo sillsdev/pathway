@@ -173,19 +173,9 @@ namespace SIL.PublishingSolution
             ValidateDirectoryLocation();
         }
 
-        //private void SectionFilter_Activated(object sender, EventArgs e)
-        //{
-        //    Common.SetFont(this);
-        //}
-
         private void TxtName_TextChanged(object sender, EventArgs e)
         {
             ValidateDirectoryLocation();
         }
-
-        //private void ChkFilterLexicon_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    ValidateDirectoryLocation();
-        //}
     }
 }

@@ -396,8 +396,6 @@ namespace SIL.PublishingSolution
             {
                 DialogResult dialogResult = MessageBox.Show("Please Install the Plugin Backends", "Pathway", MessageBoxButtons.AbortRetryIgnore,
                                 MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-                //var msg = new[] { "Please Install the Plugin Backends" };
-                //LocDB.Message("defErrMsg", "Please Install the Plugin Backends", msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                 if (dialogResult == DialogResult.Ignore)
                     return;
                 if (dialogResult == DialogResult.Abort)
@@ -503,7 +501,6 @@ namespace SIL.PublishingSolution
             }
             DictionaryName = Param.DefaultValue[Param.LayoutSelected];
             ExtraProcessing = Param.DefaultValue[Param.ExtraProcessing] == "True";
-            //Media = Param.DefaultValue[Param.Media];
         }
 
         private static void SaveProperty(PrintVia dlg)
@@ -645,7 +642,6 @@ namespace SIL.PublishingSolution
 
         private void chkPolicy_CheckedChanged(object sender, EventArgs e)
         {
-            //btnPolicy.Enabled = chkPolicy.Checked;
             SetOkStatus();
         }
 

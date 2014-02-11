@@ -126,37 +126,6 @@ namespace SIL.PublishingSolution
             return fileSettingFileCreated;
         }
 
-        private void SetPath(string appPath, KeyValuePair<string, string> data)
-        {
-            //if (Common.Testing)
-            //{
-            //    string testPath = Environment.CurrentDirectory;
-            //    testPath = Common.LeftString(testPath, "\\bin\\Debug");
-            //    string input = Common.PathCombine(testPath, "ConfigurationTool\\TestFiles\\input");
-            //    string output = Common.PathCombine(testPath, "ConfigurationTool\\TestFiles\\Output");
-
-            //    _userFilePath = Common.PathCombine(input, data.Value);
-            //    _pathwayFilePath = Common.PathCombine(output, data.Value);
-            //    File.Copy(_userFilePath, _pathwayFilePath, true);
-
-            //    filePath = _pathwayFilePath;
-
-            //    _userFilePath = _userFilePath.Replace(".", "Temp.");
-            //    _pathwayFilePath = _pathwayFilePath.Replace(".", "Temp.");
-            //    File.Copy(_userFilePath, _pathwayFilePath, true);
-
-            //    _pathwayFilePath = filePath;
-            //    // in - op
-            //}
-            //else
-            //{
-            _pathwayFilePath = Common.PathCombine(Path.GetDirectoryName(appPath), data.Value);
-            _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
-            
-            //}
-            
-        }
-
         private void CopyOrganization(string xPath)
         {
             XmlNode userNode = _userRoot.SelectSingleNode(xPath);
@@ -176,7 +145,6 @@ namespace SIL.PublishingSolution
                 string parent = targetXPath + "meta[@name='" + propName + "']";
 
                 XmlNode pathwayNode = _pathwayRoot.SelectSingleNode(parent);
-                //pathwayNode.ParentNode.RemoveChild(pathwayNode);
                 if (pathwayNode != null)
                 {
                     pathwayNode.InnerXml = userNode.InnerXml;
@@ -227,7 +195,6 @@ namespace SIL.PublishingSolution
 
         private void CloseFile()
         {
-            //_userXml.Save(_userFilePath);
             _pathwayXml.Save(_pathwayFilePath);
         }
 

@@ -112,7 +112,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -136,7 +135,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -163,7 +161,6 @@ namespace SIL.PublishingSolution
                     ddlShowProperty.Items.Add("ALL");
                 }
                 // Source CSS
-                //_commonSettings.LoadSourceCSS(_dicPath, _cssPath, ddlCSS, "scripture", false);
                 _commonSettings.LoadSourceCSS(_dicPath, _cssPath, ddlCSS, "scripture", _plugin);
                 //Load CSS
                 _cssTree = _commonSettings.LoadCss(_dicPath, ddlCSS.Text);
@@ -187,7 +184,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -214,7 +210,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -336,7 +331,6 @@ namespace SIL.PublishingSolution
                             SetStringCSSValue(txtOtherFontSize, "PAGE/PSEUDO/left/REGION/" + _pageHeaderFooterPos, "PAGE/PSEUDO/left/REGION/" + _pageHeaderFooterPos + "/PROPERTY/font-size");
                             SetStringCSSValue(txtOtherNonConsecutiveReferenceSeparator, "PAGE/PROPERTY/-ps-NonConsecutiveReferenceSeparator-string");
                             txtOtherChapterVerseSeparator.Text = refleft[11].Replace("\"", "").Replace("\'", "");
-                            //txtOtherConsecutiveReferenceSeparator.Text = refleft[17].Replace("\"", "").Replace("\'", "");
                         }
                         else if (refleft.Length == 0)
                         {
@@ -447,7 +441,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -507,14 +500,7 @@ namespace SIL.PublishingSolution
             string[] val = GetDefault(classXPath, propertyXPath);
             if (val.Length > 0)
             {
-                //if (string.Compare(ctl.Name, "chkFootnotesReferenceInFootnoteInside") == 0)
-                //{
-                //    ctl.Text = string.Compare(val[0], "inside") == 0 ? true : false;
-                //}
-                //else
-                //{
-                    ctl.Text = val[0].Replace("\"", "");
-                //}
+                ctl.Text = val[0].Replace("\"", "");
             }
         }
 
@@ -585,7 +571,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion LayoutPanelDefaults
@@ -629,7 +614,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion OtherPanelDefaults
@@ -665,7 +649,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -682,15 +665,12 @@ namespace SIL.PublishingSolution
                 _commonSettings.SetFontStyle(ddlFootnotesFootnoteCallerFontStyle, 0);
                 _commonSettings.SetFontStyle(ddlFootnotesCrossReferenceCallerFontStyle, 0);
                 _commonSettings.SetFontStyle(ddlFootnotesReferenceInFootnoteFontStyle, 0);
-
-                //LoadYesNo(ddlFootnotesReferenceInFootnoteInside, 0);
             }
             catch (Exception ex)
             {
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -714,7 +694,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -738,7 +717,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -763,7 +741,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-               // MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -787,7 +764,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -905,7 +881,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -1103,7 +1078,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1121,7 +1095,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -1138,7 +1111,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -1184,7 +1156,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -1241,7 +1212,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return false;
         }
@@ -1267,7 +1237,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -1289,7 +1258,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -1342,7 +1310,7 @@ namespace SIL.PublishingSolution
                         _dicMap["mirroredReference"] = InsertReference(_dicMap["ddlOtherReferenceLocation"], pageloc, true);
                     }
                 }
-                //Dictionary<string, string> dicMap = new Dictionary<string, string>();
+
                 _dicMap["link"] = ddlCSS.Text;
                 _dicMap["PagePageSize"] = ddlBasicsPageSize.Text;
                 _dicMap["PagePaperSize"] = ddlBasicsPaperSize.Text;
@@ -1422,7 +1390,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1655,54 +1622,6 @@ namespace SIL.PublishingSolution
 
         #endregion
 
-        //#region GoToNextControl
-        ///// <summary>
-        ///// We send the focus to next tab's first control
-        ///// </summary>
-        ///// <param name="TabName">Next Tab Name</param>
-        ///// <param name="TargetControl">First Control of the First Tab</param>
-        //private void GoToNextControl(string tabName, Control targetControl)
-        //{
-        //    tabScriptureSettings.SelectTab(tabName);
-        //    targetControl.Focus();
-        //}
-        //#endregion GoToNextControl
-        //#region chkBasicsVerticalRule_Validating
-        //private void chkBasicsVerticalRule_Validating(object sender, CancelEventArgs e)
-        //{
-        //    GoToNextControl("tabChapter", txtChapterChapterNumbers);
-        //}
-        //#endregion
-        //#region chkBasicsVerticalRule_Validating
-        //private void chkChapterIncludeVerseNumber_Validating(object sender, CancelEventArgs e)
-        //{
-        //    GoToNextControl("tabHeadings", txtHeadingsMainTitleFontSize);
-        //}
-        //#endregion
-        //#region txtNewHeadingsSectionHeadingsReferenceFontSize_Validating
-        //private void txtNewHeadingsSectionHeadingsReferenceFontSize_Validating(object sender, CancelEventArgs e)
-        //{
-        //    GoToNextControl("tabFootnotes", txtFootnotesFontSizeforNotes);
-        //}
-        //#endregion
-        //#region chkFootnotesFootnoteFrameGutterRule_Validating
-        //private void chkFootnotesFootnoteFrameGutterRule_Validating(object sender, CancelEventArgs e)
-        //{
-        //    GoToNextControl("tabTextSpacing", txtTextSpacingBetweenWordsDesired);
-        //}
-        //#endregion
-        //#region ddlTextSpacingHyphenationLanguage_Validating
-        //private void ddlTextSpacingHyphenationLanguage_Validating(object sender, CancelEventArgs e)
-        //{
-        //    GoToNextControl("tabOther", ddlOtherTableHeadersFontStyle);
-        //}
-        //#endregion
-        //#region chkOtherLaunchUltraXML_Validating
-        //private void chkOtherLaunchUltraXML_Validating(object sender, CancelEventArgs e)
-        //{
-        //    GoToNextControl("tabLayout", ddlLayoutComposer);
-        //}
-        //#endregion
         #region ddlBasicsPageSize_SelectedIndexChanged
         private void ddlBasicsPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1715,7 +1634,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -1734,7 +1652,7 @@ namespace SIL.PublishingSolution
                 {
                     DialogResult dr = LocDB.Message("errWantToSave", "Do you want to save the changes?", null, LocDB.MessageTypes.YN,
                     LocDB.MessageDefault.First);
-                    //DialogResult dr = MessageBox.Show("Do you want to save the changes?", "Scripture Settings", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    
                     if (dr == DialogResult.Yes)
                     {
                         btnSave_Click(sender, e);
@@ -1754,7 +1672,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         /// <summary>
@@ -1790,7 +1707,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -1807,7 +1723,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -1900,7 +1815,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1926,7 +1840,6 @@ namespace SIL.PublishingSolution
                         var msg = new[] { "Lexicon Section" };
                         LocDB.Message("errDellFile", "You Cannot Delete the Lexicon Section", msg, LocDB.MessageTypes.Error,
                         LocDB.MessageDefault.First);
-                        //MessageBox.Show("You Cannot Delete the Lexicon Section", "Dictionary Express");
                         return;
                     }
                 }
@@ -1952,7 +1865,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -1969,7 +1881,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -1986,7 +1897,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -2003,7 +1913,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -2020,7 +1929,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -2066,7 +1974,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -2083,7 +1990,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -2100,7 +2006,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Scripture Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -2192,7 +2097,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion AddEditListViewItems
@@ -2246,7 +2150,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -2267,7 +2170,6 @@ namespace SIL.PublishingSolution
                     var msg = new[] { "SectionTypes.xml" };
                     LocDB.Message("errInstallFile", "Please Install the SectionTypes.xml", msg, LocDB.MessageTypes.Error,
                     LocDB.MessageDefault.First);
-                    //MessageBox.Show("Please Install the SectionTypes.xml");
                     return;
                 }
                 projXml.Load(sectionXmlPath);
@@ -2316,7 +2218,6 @@ namespace SIL.PublishingSolution
                                             var msg = new[] { ex.Message };
                                             LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                                             LocDB.MessageDefault.First);
-                                            //MessageBox.Show(ex.Message, "Dictionary Setting: ReadPreparationTabSteps", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         }
                                     }
                                 }
@@ -2354,7 +2255,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting: ReadPreparationTabSteps", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion ReadPreparationTabSteps
@@ -2512,7 +2412,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting: MakeDocumentPreparation", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion MakeDocumentPreparation
@@ -2612,10 +2511,6 @@ namespace SIL.PublishingSolution
                                         }
                                         tempDict[attChildName] = attChildValue;
                                         _dictStepFilenames[attName] = tempDict;
-                                        //ListViewItem tempChild = new ListViewItem();
-                                        //tempChild.Text = attChildName;
-                                        //tempChild.SubItems.Add(attChildValue);
-                                        //lvwPreparationSteps.Items.Add(tempChild);
                                     }
                                 }
                             }
@@ -2628,7 +2523,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting: GetPageSectionSteps", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion GetPageSectionSteps
@@ -2685,7 +2579,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting: AddFileToSolutinExplorer", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion AddFileToSolutinExplorer
@@ -2709,7 +2602,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting GetDefault", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return null;
         }
@@ -2737,7 +2629,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting: GetDefaultx2", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return null;
         }
@@ -2830,7 +2721,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting: DoXPath", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return null;
         }
@@ -2903,7 +2793,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting: AccumulateResult", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return null;
         }
@@ -2921,7 +2810,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting: ddlPagePageSize", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -2958,7 +2846,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting: ddlShowProperty", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -2975,7 +2862,6 @@ namespace SIL.PublishingSolution
                     var msg = new[] { "location"};
                     LocDB.Message("errCannotbeSame", "Reference and Page number location cannot be same. Please change.", msg, LocDB.MessageTypes.Error,
                     LocDB.MessageDefault.First);
-                    //MessageBox.Show("Page Number Location and Reference Location cannot be same.", "Scripture Settings", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     location1.Focus();
                 }
                 else if (ValidatePosition(loc1, loc2))
@@ -2983,7 +2869,6 @@ namespace SIL.PublishingSolution
                     var msg = new[] { "position"};
                     LocDB.Message("errCannotbeSame", "Reference and Page number position cannot be same. Please change.", msg, LocDB.MessageTypes.Error,
                     LocDB.MessageDefault.First);
-                    //MessageBox.Show("Reference and Page number position are same. Please change.", "Scripture Settings", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     location1.Focus();
                 }
             }
@@ -3055,7 +2940,6 @@ namespace SIL.PublishingSolution
                 txtOtherChapterVerseSeparator.Focus();
                 txtOtherFontSize.Focus();
                 ddlOtherPageNumberLocation.Focus();
-                //FillReferenceFormat();
             }
             FillReferenceFormat();
         }
@@ -3098,11 +2982,6 @@ namespace SIL.PublishingSolution
                 Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
                 Common.HelpProv.SetHelpKeyword(this, "FootnotesTab.htm");
             }
-            //else if (tabScriptureSettings.SelectedIndex == 5)
-            //{
-            //Common.help.SetHelpNavigator(this, HelpNavigator.Topic);
-            //Common.help.SetHelpKeyword(this, "PageTab.htm");
-            //}
             else if (tabScriptureSettings.SelectedIndex == 5)
             {
                 Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
@@ -3127,7 +3006,5 @@ namespace SIL.PublishingSolution
         {
             Common.SetFont(this);
         }
-
-
     }
 }

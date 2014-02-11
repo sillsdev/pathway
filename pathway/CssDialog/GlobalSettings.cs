@@ -37,7 +37,6 @@ namespace SIL.PublishingSolution
         {
             InitializeComponent();
             var count = Param.Value.Count;
-            //TlSettings.Height = 26 * count;
             TlSettings.Height = 27 * count;
             Height = TlSettings.Height + 100;
             BtOk.Location = new Point(BtOk.Location.X, Height - 70);
@@ -218,22 +217,6 @@ namespace SIL.PublishingSolution
         {
             Close();
         }
-
-        //private void BtReset_Click(object sender, EventArgs e)
-        //{
-        //    File.Delete(Param.SettingOutputPath);
-        //    try
-        //    {
-        //        Param.LoadSettings();
-        //    }
-        //    catch (InvalidStyleSettingsException err)
-        //    {
-        //        var msg = new[] { err.FullFilePath };
-        //        LocDB.Message("errNotValidXml", err.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
-        //        return;
-        //    }
-        //    DoLoad();
-        //}
 
         private void Settings_DoubleClick(object sender, EventArgs e)
         {

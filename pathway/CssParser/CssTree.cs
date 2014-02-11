@@ -13,7 +13,6 @@ namespace SIL.PublishingSolution
     public class CssTree
     {
         private Dictionary<string, Dictionary<string, string>> _cssClass = new Dictionary<string, Dictionary<string, string>>();
-        //private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
         private Dictionary<string, string> _cssProperty;
         private ClassInfo _classInfo;
         private VerboseClass _verboseWriter = VerboseClass.GetInstance();
@@ -39,8 +38,6 @@ namespace SIL.PublishingSolution
             cssTree.OutputType = OutputType;
             Common._outputType = OutputType;
             TreeNode node = cssTree.BuildTree(cssSourceFile);
-            //To show errors to user to edit and save the CSS file.
-            //node = CssErrorHandler(cssTree, cssSourceFile, node);  // Error Handling.
             _cssClass.Clear();
             ProcessCSSTree(node);
             if (OutputType != Common.OutputType.EPUB)
@@ -125,7 +122,6 @@ namespace SIL.PublishingSolution
                     _classInfo.TagName = _classInfo.Tag.ClassName; 
                     _classInfo.SpecificityWeightage = 1;
                     _classInfo.StyleName = pair.Key;
-                    //CssClassOrder.Add(_classInfo.CoreClass.ClassName);
                     SetSpecificityClass(pair.Key, _classInfo);
 
                 }
@@ -194,8 +190,6 @@ namespace SIL.PublishingSolution
             _cssProperty = new Dictionary<string, string>();
             if (_setDefaultPageValue)
             {
-                //_cssProperty["height"] = "792";
-                //_cssProperty["width"] = "612";
                 _cssProperty["page-height"] = "792";
                 _cssProperty["page-width"] = "612";
                 _cssProperty["margin-left"] = "56.7";
@@ -249,19 +243,6 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-
-        //private TreeNode CssErrorHandler(CSSParser.CSSParser cssTree, string cssSourceFile, TreeNode node)
-        //{
-        //if (cssTree.ErrorList.Count > 0)
-        //{
-        //    var errForm = new CSSError(cssTree.ErrorList, Path.GetDirectoryName(cssSourceFile));
-        //    errForm.ShowDialog();
-        //    cssTree = new CSSParser.CSSParser();
-        //    node = cssTree.BuildTree(cssSourceFile);
-        //}
-        //return node;
-        //}
-
 
         /// -------------------------------------------------------------------------------------------
         /// <summary>
@@ -408,13 +389,6 @@ namespace SIL.PublishingSolution
                 CssClassOrder.Add(_classInfo.CoreClass.ClassName);
                 if (_baseClassName != null)
                     SetSpecificityClass(_baseClassName,_classInfo);
-
-                //// Todo :remove the PseduoBefore class
-                //if(_classInfo.Pseudo.Length > 0 )
-                //  PseduoBefore.SelectorClass[className] =_classInfo;
-
-                //_styleName.AllCSSName.Add(className);
-                
             }
             catch (Exception ex)
             {
@@ -606,16 +580,6 @@ namespace SIL.PublishingSolution
             return clsAtt;
         }
 
-        /// <summary>
-        /// To replace the symbol to text
-        /// </summary>
-        /// <param name="value">input symbol</param>
-        /// <returns>Replaced text</returns>
-        private void ReplaceSymbolToText(string value)
-        {
-            // refer stylesXML.cs
-        }
-
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Map _attributeInfo to MapPropertys.cs
@@ -657,88 +621,6 @@ namespace SIL.PublishingSolution
             {
                 Console.WriteLine(ex.Message);
                 _verboseWriter.WriteError(styleAttributeInfo.ClassName, styleAttributeInfo.Name, ex.Message, styleAttributeInfo.StringValue);
-            }
-            //return styleAttributeInfo;
-        }
-
-        #region SplitValue
-
-        private void SplitValue(string attributeStringValue, string keyName)
-        {
-            string attribVal = string.Empty;
-            try
-            {
-                int attribCount = 0;
-                string[] parameter = attributeStringValue.Split(',');
-                foreach (string param in parameter)
-                {
-                    attribVal = attribVal + param;
-                    if (param == "0" || Common.ValidateAlphabets(param) == true || param.IndexOf('#') > -1)
-                    {
-                        attribCount++;
-                        if (attribCount != parameter.Length)
-                        {
-                            attribVal = attribVal + "+";
-                        }
-                    }
-                }
-                if (attribCount == 1)
-                {
-                    string[] splitPlus = attribVal.Split('+');
-                    //_styleName.BorderProperty[keyName] = splitPlus[0];
-                }
-                else if (attribCount == 2)
-                {
-                    string[] splitPlus = attribVal.Split('+');
-                    //_styleName.BorderProperty[keyName] = splitPlus[0] + "," + splitPlus[1] + ","
-                    //+ splitPlus[0] + "," + splitPlus[1];
-                }
-                else if (attribCount == 3)
-                {
-                    string[] splitPlus = attribVal.Split('+');
-                    //_styleName.BorderProperty[keyName] = splitPlus[0] + "," + splitPlus[1] + ","
-                    //+ splitPlus[2] + "," + splitPlus[1];
-                }
-                else if (attribCount == 4)
-                {
-                    string[] splitPlus = attribVal.Split('+');
-                    //_styleName.BorderProperty[keyName] = splitPlus[0] + "," + splitPlus[1] + ","
-                    //+ splitPlus[2] + "," + splitPlus[3];
-                }
-            }
-            catch
-            {
-                //_styleName.BorderProperty[keyName] = "0pt";
-            }
-        }
-        #endregion
-
-
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Get className from the node
-        /// 
-        /// <list> 
-        /// </list>
-        /// </summary>
-        /// <param name="tree">Antlr Tree</param>
-        /// <param name="tree">Antlr tree collection</param>
-        /// <returns>class Name</returns>
-        /// -------------------------------------------------------------------------------------------        
-        /// 
-        private string GetClassName(TreeNode tree)
-        {
-            string className = string.Empty;
-            try
-            {
-                //TODO - Remove NEST classNames
-                className = tree.FirstNode.Text;
-                return (className);
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.Message);
-                return (className);
             }
         }
 
@@ -789,7 +671,6 @@ namespace SIL.PublishingSolution
 
                                 string convertedValueWithUnit = convertedValue.ToString() + "," + targetUnit + ",";
 
-                                //attributeVal = attributeVal.Remove( (0, numericPropertyPosition);
                                 attributeVal = attributeVal.Remove(numericPropertyPosition, attributeVal.Length - numericPropertyPosition);
 
                                 attributeVal = attributeVal.Append(convertedValueWithUnit);

@@ -39,7 +39,6 @@ namespace SIL.PublishingSolution
         {
             LocDB.Localize(this, null);
             Param.SetupHelp(this);
-            //LsTasks.Items.AddRange(Param.GetListofAttr("tasks/task", "name").ToArray());
             SetTasks();
             LsTasks.Text = Task;
             SetStyles();
@@ -125,10 +124,6 @@ namespace SIL.PublishingSolution
 
         private void BtFeatures_Click(object sender, EventArgs e)
         {
-            //ConfigurationTool ct = new ConfigurationTool();
-            //ct.Show();
-            //return;
-            
             if (!CheckStyleSelected()) return;
             var dlg = new ConfigureStylesheet { StyleSheet = LsStyles.Text, ProjectName = this.ProjectName};
             if (dlg.ShowDialog() == DialogResult.OK)
@@ -163,8 +158,6 @@ namespace SIL.PublishingSolution
 
         private void DoApply()
         {
-            //if (LsTasks.SelectedItems.Count == 0 || LsStyles.SelectedItems.Count == 0)
-            //    return;
             if (!CheckStyleSelected() || !CheckTaskSelected()) return;
 
             var task = Param.InsertKind("task", LsTasks.Text);
@@ -174,10 +167,8 @@ namespace SIL.PublishingSolution
 
         private void SetDynamic()
         {
-            //LbSummary.Text = Param.GetAttrSummary("categories/category", "select");
             LbSummary.Text = "Select a publication task and then the stylesheet it should use.";
             BtConfigure.Visible = (Param.UserRole == "Consultant" || Param.UserRole == "System Designer");
-            //BtConfigure.Visible = (Param.GetRole() == "Consultant" || Param.GetRole() == "System Designer");
             BtAdvanced.Visible = BtConfigure.Visible;
         }
 
@@ -191,7 +182,6 @@ namespace SIL.PublishingSolution
         private void SetDescription()
         {
             RtDescription.Text = "";
-            //var sheet = Param.GetAttrByName("tasks/task", LsTasks.Text, "style");
             var sheet = LsStyles.Text;
             if (LsStyles.Items.Contains(sheet))
                 RtDescription.Text = Param.GetElemByName("styles/paper/style", sheet, "Description");
@@ -212,11 +202,6 @@ namespace SIL.PublishingSolution
 
         private void BtAdvanced_Click(object sender, EventArgs e)
         {
-            //bool dlgOk = SaveCancel();
-            //if (dlgOk == false)
-            //{
-            //    return;
-            //}
             if (!CheckStyleSelected()) return;
             var mergeCss = new MergeCss();
             var myCss = mergeCss.Make(Param.StylePath(LsStyles.Text), "Temp1.css");
@@ -252,16 +237,11 @@ namespace SIL.PublishingSolution
                 if (dlg.ShowDialog() != DialogResult.OK) return;
                 cssResult = dlg.JobName;
             }
-            //StyleSheet = Path.GetFileNameWithoutExtension(cssResult);
-            //TvFeatures.Enabled = false;
-            //TbStyleSheet.Enabled = false;
         }
 
         private void BtTaskAdd_Click(object sender, EventArgs e)
         {
             string currTask = string.Empty;
-            //if (LsTasks.Items.Count > 0)
-            //    currTask = LsTasks.SelectedItem.ToString();
             if (!CheckTaskSelected()) return;
             var cdialog = new ConfigureTaskDialog("Add", LsTasks.SelectedItem.ToString());
             cdialog.ShowDialog();
@@ -286,9 +266,6 @@ namespace SIL.PublishingSolution
         private void BtTaskModify_Click(object sender, EventArgs e)
         {
             if (!CheckTaskSelected()) return;
-
-            //if (LsTasks.SelectedItem == null)
-            //    LsTasks.SelectedIndex = LsTasks.Items.Count - 1;
             int currIndex = LsTasks.SelectedIndex;
             var cdialog = new ConfigureTaskDialog("Modify", LsTasks.SelectedItem.ToString());
             cdialog.ShowDialog();
@@ -298,8 +275,6 @@ namespace SIL.PublishingSolution
 
         private void BtStylesheetModify_Click(object sender, EventArgs e)
         {
-            //if (LsStyles.SelectedItem == null)
-            //    LsStyles.SelectedIndex = LsStyles.Items.Count - 1;
             if (!CheckStyleSelected()) return;
 
             int currIndex = LsStyles.SelectedIndex;

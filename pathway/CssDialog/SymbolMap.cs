@@ -110,7 +110,6 @@ namespace SIL.PublishingSolution
                     if (cellCount < listBox1.Items.Count)
                     {
                         var regex = new Regex(@"\\[uU]([0-9A-F]{4})", RegexOptions.IgnoreCase);
-                        //string line = regex.Replace(listBox1.Items[cellCount].ToString(), delegate(Match match) { return ((char)Int32.Parse(match.Value.Substring(2), NumberStyles.HexNumber)).ToString(); });
                         string line = regex.Replace(listBox1.Items[cellCount].ToString(),
                                                     match =>
                                                     ((char)
@@ -164,19 +163,6 @@ namespace SIL.PublishingSolution
 
             ctl.ForeColor = Color.Black;
         }
-
-/*
-        /// <summary>
-        /// To set the current cell position at top when i loads new page
-        /// </summary>
-        private void SetDefaultCell()
-        {
-            SymbolViewer.CurrentCell.Selected = false;
-            SymbolViewer.Rows[0].Cells[0].Selected = true;
-            SymbolViewer.CurrentCell = SymbolViewer.SelectedCells[0];
-            SymbolViewer.Focus();
-        }
-*/
 
         /// <summary>
         /// To load symbol to the label based on logic

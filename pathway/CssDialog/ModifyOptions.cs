@@ -135,7 +135,6 @@ namespace SIL.PublishingSolution
             openIcon.FileName = "";
             openIcon.InitialDirectory = ipath;
             openIcon.Filter = "Image (*.png)|*.png";
-            //openIcon.Filter = "Icon (*.ico)|*.ico|Bitmap (*.bmp)|*.bmp";
             openIcon.AddExtension = true;
             if (openIcon.ShowDialog() != DialogResult.OK) return;
             var rfn = openIcon.FileName;

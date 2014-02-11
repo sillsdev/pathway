@@ -308,23 +308,6 @@ namespace SIL.PublishingSolution
         {
             output.Append(e.Data);
         }
-
-        //public System.Drawing.Image Convert(string inputFile) 
-        //{ 
-        //    _bRedirectIO = true; 
-        //    if (Convert(inputFile, "%stdout", _bThrowOnlyException)) 
-        //    { 
-        //        if ((output != null) && (output.Length > 0)) 
-        //        { 
-        //            //StringReader sr = new StringReader(output.ToString()); 
-        //            //MemoryStream ms = new MemoryStream(UTF8Encoding.Default.GetBytes(output.ToString())); 
-        //            System.Drawing.Image returnImage = System.Drawing.Image.FromStream(myProcess.StandardOutput.BaseStream).Clone() as System.Drawing.Image; 
-        //            //ms.Close(); 
-        //            return returnImage; 
-        //        } 
-        //    } 
-        //    return null; 
-        //} 
         #endregion
         #endregion
 

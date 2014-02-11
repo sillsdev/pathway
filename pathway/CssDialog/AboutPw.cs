@@ -45,8 +45,6 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                //object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-                //object[] attributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
                 object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
                 if (attributes.Length > 0)
                 {
@@ -57,7 +55,6 @@ namespace SIL.PublishingSolution
                     }
                 }
                 return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetCallingAssembly().CodeBase);
-                //System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
             }
         }
 
@@ -68,15 +65,12 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                //object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
-                //object[] attributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
                 object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
                 return ((AssemblyFileVersionAttribute) attributes[0]).Version;
-                //return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
 
@@ -104,8 +98,6 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                //object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-                //object[] attributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
                 object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
                 if (attributes.Length == 0)
                 {
@@ -122,8 +114,6 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                //object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-                //object[] attributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
                 object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
                 if (attributes.Length == 0)
                 {
@@ -140,8 +130,6 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                //object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                //object[] attributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
                 object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
                 if (attributes.Length == 0)
                 {
@@ -158,8 +146,6 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                //object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                //object[] attributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
                 object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
                 if (attributes.Length == 0)
                 {
@@ -176,21 +162,10 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void AboutPw_Load(object sender, EventArgs e)
         {
-            //LocDB.Localize(this, null);     // Form Controls
-
-            //Text = String.Format("About {0}", AssemblyProduct);
-            //labelProductName.Text = AssemblyProduct;
-            //labelVersion.Text = String.Format("Version {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
-            //labelCopyright.Text = AssemblyCopyright;
-            //labelCompanyName.Text = AssemblyCompany;
-            //textBoxDescription.Text = AssemblyDescription;
-            //HelpImproveGetValue(chkbHelpImprove); 
-
             lblProductName.Text = AssemblyProduct;
             lblVersion.Text = String.Format("Version {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
 
             HelpImproveGetValue(chkHelpToImprove); 
-
         }
 
 
@@ -232,8 +207,7 @@ namespace SIL.PublishingSolution
 
         private void AboutPw_Activated(object sender, EventArgs e)
         {
-            //Common.SetFont(this);
-            //lblProductName.Font = new Font("Arial", 12, FontStyle.Bold);
+
         }
 
         private void lnkLblUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

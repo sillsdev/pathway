@@ -31,11 +31,7 @@ namespace SIL.PublishingSolution
 
         public ScriptureContents()
         {
-            //Common.SupportFolder = "PathwaySupport";
 			Common.ProgBase = Common.GetPSApplicationPath();
-            // EDB TEST only
-            //_realClass = new PrintVia();
-            //((PrintVia)_realClass).InputType = "Scripture";
             _realClass = new ExportThroughPathway();
             ((ExportThroughPathway)_realClass).InputType = "Scripture";
         }

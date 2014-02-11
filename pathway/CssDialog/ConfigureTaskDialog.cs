@@ -146,7 +146,6 @@ namespace SIL.PublishingSolution
             {
                 if (prevValues[0] == txtTaskName.Text && prevValues[1] == CmbStyleName.SelectedItem.ToString())
                 {
-                    //return false;
                     this.Close();
                 }
             }

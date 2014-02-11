@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Globalization;
-using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
 using SIL.Tool;
@@ -37,15 +36,12 @@ namespace SIL.PublishingSolution
         readonly ArrayList _unit = new ArrayList();
         private readonly VerboseClass _verboseWriter = VerboseClass.GetInstance();
         private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
-        //private ArrayList fontsizeList;
         #endregion
 
         #region Private Variable
         public string PsSupportPath = Common.GetPSApplicationPath();
         public ArrayList CssBorderColor = new ArrayList();
         #endregion
-
-        //public ArrayList NewFonts = new ArrayList();
 
         #region Constructor Function
         public MakeProperty()
@@ -212,8 +208,6 @@ namespace SIL.PublishingSolution
             _dictFontSize.Add("xx-large", "24");
             _dictFontSize.Add("larger", "larger");
             _dictFontSize.Add("smaller", "smaller");
-
-            //fontsizeList = new ArrayList { "xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large" };
         }
 
 
@@ -240,7 +234,6 @@ namespace SIL.PublishingSolution
             _cssProperty.Clear();
             styleAttributeInfo.Name = styleAttributeInfo.Name.ToLower();
             styleAttributeInfo.StringValueLower = styleAttributeInfo.StringValue.ToLower();
-            //string value = DeleteSeperator(styleAttributeInfo.StringValue);
             switch (styleAttributeInfo.Name)
             {
                 case "padding":
@@ -534,14 +527,6 @@ namespace SIL.PublishingSolution
             {
                 _cssProperty["font-weight"] = "bold";
             }
-            //else if (attrValue == "inherit")
-            //{
-            //    _cssProperty["font-weight"] = "inherit";
-            //}
-
-            //if (attrValue == "normal" || attrValue == "bold" || attrValue == "inherit")
-            //{
-            //}
         }
 
         private void FontStyle(StyleAttribute styleAttributeInfo)
@@ -730,7 +715,6 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                //ArrayList propertyValues = GetMarginValue(styleAttributeInfo);
                 ArrayList propertyValues = GetPropertyValue(styleAttributeInfo);
 
                 if (propertyValues.Count == 1)
@@ -899,7 +883,6 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            //var familyName = new[] { "serif", "sans-serif", "cursive", "fantasy", "monospace" };
             string fontName; // Gentium 
             FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
             for (int counter = 0; counter < fontLength; counter++)
@@ -929,7 +912,6 @@ namespace SIL.PublishingSolution
 
                 if (genericFamilyList.Contains(fontName.ToLower()))
                 {
-                    //string xmlFileNameWithPath = Common.PathCombine(Common.GetPSApplicationPath(), "GenericFont.xml");
                     string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
                     string xPath = "//font-preference/generic-family [@name = \"" + fontName.ToLower() + "\"]";
                     ArrayList fontList = new ArrayList();
@@ -1037,7 +1019,6 @@ namespace SIL.PublishingSolution
             }
             catch (Exception ex)
             {
-                //Console.Write(ex.Message);
                 throw new Exception(ex.Message);
             }
         }
@@ -1126,8 +1107,6 @@ namespace SIL.PublishingSolution
                         newValue /= 100;
                         newValue -= 1;
                         unit = "em";
-                        //m_strVal = newValue.ToString() + "-em";
-                        //return (m_strVal);
                     }
                     else if (lineHeight && unit == "pt")
                     {
@@ -1168,7 +1147,6 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         public string ColorRGB(string attributeStringValue)
         {
-            //string StringValue = "rgb(125,255,255)";
             try
             {
 
@@ -1196,31 +1174,6 @@ namespace SIL.PublishingSolution
                 throw new Exception(ex.Message);
             }
         }
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Converts #f00 to "#ff0000" format
-        /// 
-        /// <list>
-        /// </list>
-        /// </summary>
-        /// <param name="AttributeStringValue">attribute value like #f00</param>
-        /// <returns>"#ff0000" format data</returns>
-        /// -------------------------------------------------------------------------------------------
-        //private string ColorHash(string StringValue)
-        //{
-        //    string retValue;
-        //    int colorLen = StringValue.Length;
-        //    if (colorLen == 4)
-        //    {
-        //        retValue = "#" + StringValue[1] + StringValue[1] + StringValue[2] + StringValue[2] + StringValue[3] + StringValue[3] ;
-        //        return retValue;
-        //    }
-        //    else
-        //    {
-        //        return StringValue;
-        //    }
-        //}
-        ///// -------------------------------------------------------------------------------------------
 
         public string ColorHash(string attributeStringValue)
         {
@@ -1294,8 +1247,6 @@ namespace SIL.PublishingSolution
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
-                //return "rgb" + ",(," + "0" + "," + "0" + "," + "0" + ",)"; // black color
                 throw new Exception("Parameter Length - Not Valid");
             }
         }

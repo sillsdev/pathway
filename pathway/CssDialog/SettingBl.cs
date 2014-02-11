@@ -23,7 +23,6 @@
     using System.IO;
     using System.Xml;
     using System.Collections;
-    using SIL.PublishingSolution;
     using SIL.Tool;
     using SIL.Tool.Localization;
 
@@ -49,18 +48,6 @@ namespace SIL.PublishingSolution
             "Index", "Reversal", "Bibliography" 
         };
         public string SolutionName;
-
-/*
-        /// <summary>
-        /// Values to load in steps listview of Document Tab
-        /// </summary>
-        string[] arrMainPrepSteps = new string[12] 
-        { 
-            "Filter Entries", "Filter Senses", "Filter Media", "Filter Text", "Make Minor Entries", 
-            "Make Homographs", "Sort Entries", "Make Letter Headers", "Make Grammatical Categories", 
-            "Make Cross References", "Order Writing Systems", "Order Fields"
-        };
-*/
 
         #endregion
 
@@ -272,8 +259,6 @@ namespace SIL.PublishingSolution
         /// <param name="selectedIndex">Default selection Index</param>
         public void SetFontStyle(ComboBox cmbCtl, sbyte selectedIndex)
         {
-            //cmbCtl.Items.Add("Regular");
-            //cmbCtl.Items.Add("Bold");
             cmbCtl.Items.Add("Normal");
             cmbCtl.Items.Add("Italic");
             cmbCtl.SelectedIndex = selectedIndex;
@@ -487,7 +472,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { showMessage + "\r\n" };
                 DialogResult dr = LocDB.Message("errSaveEvenOutofRange", showMessage + "\r\n" + "Do you want to save the values even though they are out of range?", msg, LocDB.MessageTypes.YN,
                 LocDB.MessageDefault.First);
-                //DialogResult dr = MessageBox.Show(showMessage + "\r\n" + "Do you want to save the values even though they are out of range?", "Save", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dr == DialogResult.Yes)
                 {
                     return true;
@@ -614,10 +598,6 @@ namespace SIL.PublishingSolution
             else
             {
                 string dicSolution = SolutionName;
-
-                //if (!Path.IsPathRooted(dicSolution))
-                //    return;
-
                 var doc = new XmlDocument();
                 doc.Load(dicSolution);
                 XmlNodeList fileList = doc.SelectNodes("/Project/SolutionExplorer/File");
@@ -754,7 +734,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Setting: SwapListView", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -817,7 +796,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Express: NonstandardSize", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -837,7 +815,6 @@ namespace SIL.PublishingSolution
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error,
                 LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message, "Dictionary Express: RemoveTab", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

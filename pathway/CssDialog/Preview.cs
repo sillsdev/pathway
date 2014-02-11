@@ -71,16 +71,11 @@ namespace SIL.PublishingSolution
             var xhtml = Param.Value[Param.CurrentInput];
 
             if (string.IsNullOrEmpty(xhtml) || !File.Exists(xhtml)) return string.Empty;
-
-            //var css = Param.StylePath(Sheet);
-            //string PreviewCSSPath = InsertMainCSS(Param.StylePath(Sheet));
             string PreviewCSSPath = Param.StylePath(Sheet);
             var mergedCss = new MergeCss();
-            //string cssCombine = mergedCss.Make(css);
             string cssCombine = mergedCss.Make(PreviewCSSPath, "Temp1.css");
 
             var returnXhtml = CreatePreviewFile(xhtml, cssCombine, "preview", true);
-            //var pdf = new Pdf(xhtml, Param.StylePath(Sheet));
             var pdf = new Pdf(returnXhtml, cssCombine);
             var outName = Common.PathCombine(Param.Value[Param.OutputPath], Path.GetFileNameWithoutExtension(xhtml) + ".pdf");
             try

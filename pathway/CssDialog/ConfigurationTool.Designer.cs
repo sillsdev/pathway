@@ -364,7 +364,6 @@ namespace SIL.PublishingSolution
             this.tsUndo.Text = " &Undo";
             this.tsUndo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsUndo.ToolTipText = "Undo the last change (Alt+U)";
-            this.tsUndo.Click += new System.EventHandler(this.tsUndo_Click);
             // 
             // tsRedo
             // 
@@ -379,7 +378,6 @@ namespace SIL.PublishingSolution
             this.tsRedo.Text = " &Redo";
             this.tsRedo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsRedo.ToolTipText = "Redo the last change (Alt+R)";
-            this.tsRedo.Click += new System.EventHandler(this.tsRedo_Click);
             // 
             // tsPreview
             // 
@@ -581,7 +579,6 @@ namespace SIL.PublishingSolution
             this.chkAvailable.CheckedChanged += new System.EventHandler(this.chkAvailable_CheckedChanged);
             this.chkAvailable.CheckStateChanged += new System.EventHandler(this.chkAvailable_CheckStateChanged);
             this.chkAvailable.Enter += new System.EventHandler(this.SetGotFocusValue);
-            this.chkAvailable.Validated += new System.EventHandler(this.chkAvailable_Validated);
             // 
             // txtComment
             // 
@@ -596,7 +593,6 @@ namespace SIL.PublishingSolution
             this.txtComment.TabIndex = 4;
             this.txtComment.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtComment.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtComment_KeyUp);
-            this.txtComment.Validated += new System.EventHandler(this.txtComment_Validated);
             // 
             // lblAvailable
             // 
@@ -620,7 +616,6 @@ namespace SIL.PublishingSolution
             this.txtDesc.TabIndex = 2;
             this.txtDesc.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtDesc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDesc_KeyUp);
-            this.txtDesc.Validated += new System.EventHandler(this.txtDesc_Validated);
             // 
             // lblDesc
             // 
@@ -643,7 +638,6 @@ namespace SIL.PublishingSolution
             this.txtName.Enter += new System.EventHandler(this.txtName_Enter);
             this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyUp);
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
-            this.txtName.Validated += new System.EventHandler(this.txtName_Validated);
             // 
             // lblName
             // 

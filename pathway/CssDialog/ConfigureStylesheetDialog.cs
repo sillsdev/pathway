@@ -36,8 +36,6 @@ namespace SIL.PublishingSolution
             if(ValidateInput())
             {
                 const string xPath = "styles/paper/style";
-                //if(ValidateSheetName(TxtStyleSheetName.Text, xPath))
-                //Close();
                 ValidateSheetName(TxtStyleSheetName.Text, xPath);
                 Close();
 
@@ -46,12 +44,6 @@ namespace SIL.PublishingSolution
 
         private bool ValidateSheetName(string newName, string xPath)
         {
-            //if (!Common.ValidateStartsWithAlphabet(newName))
-            //{
-            //    MessageBox.Show("Please enter the Name starts with Alphabet");
-            //    return false;
-            //}
-
             List<string> styleList = Param.GetListofAttr(xPath, "name");
             if (styleList.Contains(newName) && _buttonType == "Add")
             {
@@ -68,22 +60,6 @@ namespace SIL.PublishingSolution
                                         "/stylePick/styles/paper/style[@name='" + prevValues[0] + "']");
                 }
                 Param.SaveSheet(TxtStyleSheetName.Text, filePath, TxtDescription.Text);
-
-
-                //if (!File.Exists(TxtCSSFileName.Text))
-                //{
-                //    string stylesPath = Common.PathCombine(Param.Value["MasterSheetPath"], TxtCSSFileName.Text);
-                //    filePath = Common.PathCombine(Path.GetDirectoryName(Param.SettingPath), stylesPath);
-                //    if(!File.Exists(filePath))
-                //    {
-                //        filePath = Common.PathCombine(Param.Value["UserSheetPath"], TxtCSSFileName.Text);
-                //    }
-                //}
-
-                //if (File.Exists(filePath))
-                //{
-                //    Param.SaveSheet(TxtStyleSheetName.Text, filePath, TxtDescription.Text);
-                //}
             }
             return true;
         }
@@ -136,14 +112,6 @@ namespace SIL.PublishingSolution
 
         private void TxtStyleSheetName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //if(!Common.ValidateStartsWithAlphabet(TxtStyleSheetName.Text))
-            //{
-            //    MessageBox.Show("Please enter the Name starts with Alphabet");
-            //}
         }
-
-
-
-
     }
 }
