@@ -792,8 +792,12 @@ namespace SIL.PublishingSolution
             if (idAllClass.ContainsKey("cover"))
                 isCoverImageInserted = "true";
 
+            string isToc = "false";
+            if (idAllClass.ContainsKey("TableOfContentLO"))
+                isToc = "true";
+
             _refFormat = GetReferenceFormat(idAllClass, _refFormat);
-            IncludeTextinMacro(strMacroPath, _refFormat, macroFileName, projInfo.IsExtraProcessing, isCoverImageInserted);
+            IncludeTextinMacro(strMacroPath, _refFormat, macroFileName, projInfo.IsExtraProcessing, isCoverImageInserted, isToc);
 
             // BEGIN Generate Meta.Xml File
             var metaXML = new LOMetaXML(projInfo.ProjectInputType);
@@ -1569,7 +1573,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime, string isCoverImageInserted)
+        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime, string isCoverImageInserted, string isToc)
         {
     	    var xmldoc = Common.DeclareXMLDocument(true);
             xmldoc.Load(strMacroPath);
@@ -1598,7 +1602,8 @@ namespace SIL.PublishingSolution
                                publicationInfo.JpgPreview + "\"";
                 string line3 = "\nConst RunMacroFirstTime = \"" + runMacroFirstTime + "\"";
                 string line4 = "\nConst IsCoverImageInserted = \"" + isCoverImageInserted + "\"";
-                string combined = line1 + line2 + line3 + line4 + seperator;
+                string line5 = "\nConst IsTOC = \"" + isToc + "\"";
+                string combined = line1 + line2 + line3 + line4 + line5 + seperator;
 
                 ele.InnerText = combined + ele.InnerText;
             }

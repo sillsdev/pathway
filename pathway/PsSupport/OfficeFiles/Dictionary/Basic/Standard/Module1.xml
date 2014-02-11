@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Nov-30-2013 for TD-3697
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Feb-11-2014 for TD-3781
 Dim CanSave as Boolean
 
 &apos;This procedure set the dialgue to correct Update References 
@@ -126,6 +126,24 @@ On Error GoTo MyError:
 	Dim MyArray, FileName
    	oDoc = ThisComponent 
 	
+	
+If IsTOC = "false" Then
+  oText = oDoc.getText() 
+  oEnd = oText.getEnd() 
+  oIndex = oDoc.createInstance("com.sun.star.text.ContentIndex") 
+  oIndex.CreateFromOutline = True 
+  oIndex.CreateFromLevelParagraphStyles = True ' use custom para styles 
+
+  ' Adds "Heading a" style to level 2 in this case. 
+  oLevelParaStyles = oIndex.LevelParagraphStyles 
+  oLevelParaStyles.replaceByIndex(1, Array("Test")) 
+  
+  oText.insertTextContent(oEnd,oIndex,False) 
+
+  oIndex.Title = ""
+  oIndex.update() 
+End If
+  
 	FilePathWithName = FilePath &amp; &quot;.&quot; &amp; OutputFormat
    	fileURL = ConvertToURL(FilePathWithName)
    	
