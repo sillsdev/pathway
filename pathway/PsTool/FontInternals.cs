@@ -59,13 +59,6 @@ namespace SIL.Tool
         public ushort uMinorVersion;
         public UInt32 uNumFonts;  //C# uint = spec ulong
     }
-    //[StructLayout(LayoutKind.Sequential, Pack = 0x1)]
-    //struct TTC_HEADER_2Ext
-    //{
-    //    public UInt32 ulDsigTag;
-    //    public UInt32 ulDsigLenth;
-    //    public UInt32 ulDsigOffset;
-    //}
     [StructLayout(LayoutKind.Sequential, Pack = 0x1)]
     struct TT_TABLE_DIRECTORY
     {
@@ -106,7 +99,6 @@ namespace SIL.Tool
         private static TTC_HEADER_1 ttcHeader;
         private static UInt32 uIntOffset;
         private static UInt32[] ttcOffsets;
-        //private static TTC_HEADER_2Ext ttcHeaderExt;
         private static TT_TABLE_DIRECTORY tblDir;
         private static TT_NAME_TABLE_HEADER ttNTHeader;
         private static TT_NAME_RECORD ttNMRecord;
@@ -147,10 +139,6 @@ namespace SIL.Tool
                         if ((ttcHeader.uMajorVersion != 1 && ttcHeader.uMajorVersion != 2) || ttcHeader.uMinorVersion != 0)
                             return string.Empty;
                         GetTtcOffsets(r, ttcHeader.uNumFonts);
-                        //if (ttcHeader.uMajorVersion == 2 && ttcHeader.uMinorVersion == 0)
-                        //{
-                        //    ttcHeaderExt = GetTtcHeaderExt(r);
-                        //}
                         fs.Position = long.Parse(ttcOffsets[0].ToString());
                         ttResult = GetOffsetTable(r);
                         if (ttResult.uMajorVersion == 1 && ttResult.uMinorVersion == 0)
@@ -336,17 +324,6 @@ namespace SIL.Tool
             return ttcOffsets;
         }
 
-        //private static TTC_HEADER_2Ext GetTtcHeaderExt(BinaryReader r)
-        //{
-        //    byte[] buff = r.ReadBytes(Marshal.SizeOf(otOffsetTable));
-        //    buff = BigEndian(buff);
-        //    IntPtr ptr = Marshal.AllocHGlobal(buff.Length);
-        //    Marshal.Copy(buff, 0x0, ptr, buff.Length);
-        //    TTC_HEADER_2Ext ttcResult = (TTC_HEADER_2Ext)Marshal.PtrToStructure(ptr, typeof(TTC_HEADER_2Ext));
-        //    Marshal.FreeHGlobal(ptr);
-        //    return ttcResult;
-        //}
-
         private static byte[] BigEndian(byte[] bLittle)
         {
             byte[] bBig = new byte[bLittle.Length];
@@ -374,11 +351,6 @@ namespace SIL.Tool
             Array.Reverse(btValue);
             return BitConverter.ToUInt32(btValue, 0);
         }
-
-        //public static string GetFontFamily(string fontFullName)
-        //{
-
-        //}
 
         public static string[] GetInstalledFontFiles()
         {

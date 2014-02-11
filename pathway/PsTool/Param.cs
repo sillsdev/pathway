@@ -293,27 +293,6 @@ namespace SIL.PublishingSolution
         private static readonly StringBuilder _validateXmlError = new StringBuilder();
 
         /// <summary>
-        /// Validates the Xml File with Schema file 
-        /// </summary>
-        /// <param name="inputFile">The Input Xml File</param>
-        /// <returns>true/false based on the validation</returns>
-//        private static XmlValidatingReader validatexml(string inputFile)
-//        {
-            //First we create the xmltextreader 
-//            var xmlr = new XmlTextReader(inputFile);
-            //We pass the xmltextreader into the xmlvalidatingreader 
-            //This will validate the xml doc with the schema file 
-            //NOTE the xml file it self points to the schema file 
-//            var xmlvread = new XmlValidatingReader(xmlr);
-
-            // Set the validation event handler 
-//            xmlvread.ValidationEventHandler += ValidationCallBack;
-//            _validateXmlSuccess = true;
-
-//            return xmlvread;
-//        }
-
-        /// <summary>
         /// Validation Event Argument added to the Validate Xml Method
         /// </summary>
         /// <param name="sender">sender object </param>
@@ -336,11 +315,6 @@ namespace SIL.PublishingSolution
             foreach (var key in startValue.Keys)
                 Value[key] = mySub.DoSubstitute(startValue[key], @"%\(([^)]*)\)s", RegexOptions.None, deleg.myValue);
         }
-
-        //public static void StyleSettingsValidation(object sender, ValidationEventArgs e)
-        //{
-        //    throw new XmlSchemaValidationException(e.Message);
-        //}
 
         public static void LoadDictionary(IDictionary<string, string> target, string xmlPath, string attr)
         {
@@ -654,10 +628,7 @@ namespace SIL.PublishingSolution
             Debug.Assert(node != null, "Null node value");
             if (node.Parent == null)
             {
-                //node.Checked = false;
                 node.Checked = true;
-                //node.StateImageIndex = _UnSelectedIndex;
-                //node.StateImageIndex = 10;
                 node.SelectedImageIndex = -1;
             }
             else
@@ -951,43 +922,6 @@ namespace SIL.PublishingSolution
             SaveSheet(sheet, fileNamewithPath, description);
         }
 
-        //public static void SaveSheet_OLD(string sheet, string description)
-        //{
-        //    Debug.Assert(sheet != "", "Missing sheet name");
-        //    var baseNode = xmlMap.SelectSingleNode("stylePick/styles");
-        //    Debug.Assert(baseNode != null);
-        //    var style = baseNode.SelectSingleNode(string.Format("style[@name=\"{0}\"]", sheet));
-        //    if (style == null)
-        //    {
-        //        style = xmlMap.CreateElement("style");
-        //        AddAttrValue(style, "name", sheet);
-        //        var fn = Common.PathCombine(Value[UserSheetPath], sheet + ".css");
-        //        if (File.Exists(fn))
-        //        {
-        //            var i = 0;
-        //            do
-        //            {
-        //                fn = Common.PathCombine(Value[UserSheetPath], string.Format("{0}{1}.css", sheet, ++i));
-        //            } while (File.Exists(fn));
-        //        }
-        //        StyleFile.Add(sheet, Path.GetFileName(fn));
-        //        AddAttrValue(style, "file", Path.GetFileName(fn));
-        //        baseNode.AppendChild(style);
-        //    }
-        //    var descNode = style.SelectSingleNode("description");
-        //    if (descNode == null)
-        //    {
-        //        descNode = xmlMap.CreateElement("description");
-        //        descNode.InnerText = description;
-        //        style.AppendChild(descNode);
-        //    }
-        //    else
-        //    {
-        //        descNode.InnerText = description;
-        //    }
-        //    Write();
-        //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -1099,7 +1033,6 @@ namespace SIL.PublishingSolution
             if (!File.Exists(fPath))
             {
 				fPath = Common.FromRegistry(Common.PathCombine(Value[MasterSheetPath], fn));
-                //Debug.Assert(File.Exists(fPath),string.Format("StyleSheet file {0} missing", fPath));
             }
             return fPath;
         }
@@ -1224,7 +1157,6 @@ namespace SIL.PublishingSolution
                 return ls[0];
 
             return string.Empty;
-            //return GetListofAttr("roles", "select")[0];
         }
 
         /// <summary>
@@ -1628,7 +1560,6 @@ namespace SIL.PublishingSolution
             lv.SmallImageList = imageListSmall;
 			var di = new DirectoryInfo(Common.FromRegistry(Value[IconPath]));
             var exts = new List<string> { ".png" };
-            //var exts = new List<string> { ".ico", ".bmp" };
             foreach (var fi in di.GetFiles())
             {
                 var lcName = fi.Name.ToLower();
@@ -1650,13 +1581,6 @@ namespace SIL.PublishingSolution
 			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[SelectedIcon])), GetBitmap(Common.FromRegistry(Value[SelectedIcon])));
 			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[DefaultIcon])), GetBitmap(Common.FromRegistry(Value[DefaultIcon])));
 			var di = new DirectoryInfo(Common.FromRegistry(Value[IconPath]));
-            //var icoList = di.GetFiles("*.ico");
-            //foreach (var ico in icoList)
-            //{
-            //    var icon = new Icon(ico.FullName);
-            //    var bmp = icon.ToBitmap();
-            //    AddBmpIcon(ico, bmp);
-            //}
             var bmpList = di.GetFiles("*.png");
             foreach (var bmp in bmpList)
                 AddBmpIcon(bmp, GetBitmap(bmp.FullName));

@@ -429,7 +429,6 @@ namespace SIL.Tool
         /// }
         /// 
         /// <span class="code-SummaryComment"></xmp></span>
-        /// 
         /// <span class="code-SummaryComment"></summary></span>
         /// <span class="code-SummaryComment"><returns></returns></span>
         public override String ToString()
@@ -567,22 +566,5 @@ namespace SIL.Tool
         {
             return (((int)right & (int)rule.FileSystemRights) == (int)right);
         }
-
-
-        //Declaration in Businesslogic
-        //CheckUserFileAccessRights rights = new CheckUserFileAccessRights(fontFullName);
-        //if (rights.canWrite() && rights.canRead()) {
-        //    lblLogMsg.Text = "R/W access";
-        //} else {
-        //    if (rights.canWrite()) {
-        //       lblLogMsg.Text = "Only Write access";
-        //    } else if (rights.canRead()) {
-        //        lblLogMsg.Text = "Only Read access";
-        //    } else {
-        //        lblLogMsg.CssClass = "error";
-        //        lblLogMsg.Text = rights.ToString()
-        //    }
-        //}
-
     }
 }

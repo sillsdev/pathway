@@ -14,7 +14,6 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
 using System.Collections;
 
 namespace SIL.PublishingSolution
@@ -89,12 +88,6 @@ namespace SIL.PublishingSolution
             set { precede.SetClassAttrib(value.ClassName, value.Attribute); }
             get { return precede; }
         }
-
-        //public ClassAttrib Parent
-        //{
-        //    set { parent.SetClassAttrib(value.ClassName, value.Attribute); }
-        //    get { return parent; }
-        //}
 
         public ClassAttrib Ancestor
         {

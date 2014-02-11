@@ -436,8 +436,6 @@ namespace SIL.Tool
         /// <param name="dictionaryExplorer">The Solution Explorer</param>
         public void OpenProjectFile(TreeView dictionaryExplorer)
         {
-            //projectXML.XmlResolver = null;
-            //projectXML.Load(projectFile);
             UpdateProjectFile();
             _dictExplorer = dictionaryExplorer;
             XmlElement type = GetRootNode();
@@ -558,11 +556,6 @@ namespace SIL.Tool
 
             ArrayList al = new ArrayList();
             al.AddRange(fileExtension);
-            //foreach (var item in fileExtension)
-            //{
-            //    al.Add(item.ToLower());
-            //}
-            
             foreach (XmlNode childNode in root)
             {
 
@@ -677,10 +670,6 @@ namespace SIL.Tool
                     try
                     {
                         fileName = xn.Attributes["Name"].Value;
-                        //if (_userRole != "System Designer" && fileName.IndexOf(".css") >= 0 )
-                        //{
-                        //    continue;
-                        //}
                     }
                     catch
                     {
@@ -1054,6 +1043,7 @@ namespace SIL.Tool
             _DeXml.Save(_projectFileWithPath);
             return true;
         }
+        
         #region Image Files Copy to Local Folder
 
         /// <summary>
@@ -1225,8 +1215,6 @@ namespace SIL.Tool
         /// <param name="attributeValue">Attribute Value</param>
         public void DESetAttribute(string xPath, string attributeName, string attributeValue)
         {
-            //string xPath = "//" + nodeName;
-            //xPath = xPath.Replace("///", "//");
             XmlNode returnNode = GetRootNode().SelectSingleNode(xPath);
             if (returnNode == null) return;
             var nameElement = (XmlElement)returnNode;

@@ -154,7 +154,6 @@ namespace SIL.Tool
             {
                 // Start a process to print a file and raise an event when done.
                 myProcess.StartInfo.FileName = name;
-                //myProcess.StartInfo.Verb = name;
                 myProcess.StartInfo.Arguments = arg;
                 myProcess.StartInfo.CreateNoWindow = true;
                 myProcess.EnableRaisingEvents = true;
@@ -178,7 +177,6 @@ namespace SIL.Tool
                     streamWriter.Close();
                     RedirectOutput = null;
                 }
-                //Console.WriteLine("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
                 return;
             }
 
@@ -205,7 +203,6 @@ namespace SIL.Tool
             {
                 // Start a process to print a file and raise an event when done.
                 myProcess.StartInfo.FileName = name;
-                //myProcess.StartInfo.Verb = name;
                 myProcess.StartInfo.Arguments = arg;
                 myProcess.StartInfo.CreateNoWindow = true;
                 myProcess.EnableRaisingEvents = true;
@@ -229,7 +226,6 @@ namespace SIL.Tool
                     streamWriter.Close();
                     RedirectOutput = null;
                 }
-                //Console.WriteLine("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
                 return;
             }
 
@@ -252,7 +248,6 @@ namespace SIL.Tool
         {
 
             eventHandled = true;
-            //Console.WriteLine("Exit time:    {0}\r\n" + "Exit code:    {1}\r\nElapsed time: {2}", myProcess.ExitTime, myProcess.ExitCode, elapsedTime);
         }
 
         #endregion RunProcess
@@ -325,23 +320,6 @@ namespace SIL.Tool
                                 return progFolder;
                         }
                     }
-
-                    //var info = new DirectoryInfo(progBases + "\\Java\\");
-                    //foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
-                    //{
-                    //    progFolder = Common.PathCombine(directoryInfo.FullName, "bin");
-                    //    if (File.Exists(Common.PathCombine(progFolder, "java.exe")))
-                    //        return progFolder;
-                    //}
-                    //if (string.IsNullOrEmpty(progFolder))
-                    //{
-                    //    foreach (DirectoryInfo directoryInfo in info.GetDirectories("jre*"))
-                    //    {
-                    //        progFolder = Common.PathCombine(directoryInfo.FullName, "bin");
-                    //        if (File.Exists(Common.PathCombine(progFolder, "java.exe")))
-                    //            return progFolder;
-                    //    }
-                    //}
                 }
             }
             return progFolder;

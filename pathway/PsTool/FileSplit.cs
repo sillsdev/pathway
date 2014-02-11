@@ -16,11 +16,9 @@
 
 #region Using
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Windows.Forms;
 
 #endregion Using
 
@@ -69,8 +67,6 @@ namespace SIL.Tool
             {
                 _splitFile.Close();
             }
-           // File.Delete(fileFullPath);
-
             return _filenameLists;
         }
 

@@ -24,7 +24,6 @@ using System.Xml;
 using SIL.PublishingSolution.Sort;
 using SIL.Tool;
 using SIL.Tool.Localization;
-using Test;
 
 namespace SIL.PublishingSolution
 {
@@ -42,11 +41,7 @@ namespace SIL.PublishingSolution
 
         public bool Handle(string inputDataType)
         {
-            bool returnValue = false;
-            if (inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture")
-            {
-                returnValue = true;
-            }
+            bool returnValue = inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture";
             return returnValue;
         }
 
@@ -197,7 +192,6 @@ namespace SIL.PublishingSolution
             {
                 Console.Write(ex.Message);
             }
-            //MessageBox.Show("Finished");
             return xhtmlFile;
         }
 
@@ -278,7 +272,6 @@ namespace SIL.PublishingSolution
 
             string searchKeyValue;
 
-            //if (!publicationInfo.FilterMatchCase)
             if (!matchCase)
             {
                 mid = SubstitueTranslateWithLowerCase(mid);
@@ -290,14 +283,12 @@ namespace SIL.PublishingSolution
                 searchKeyValue = _singleQuote + filterString + _singleQuote;
             }
 
-            //switch (publicationInfo.SenseFilterKey.ToLower())
             switch (searchKey.ToLower())
             {
                 case "at start":
                     searchKey = "starts-with(";
                     break;
                 case "at end": // not working in 1.0 works in 2.0
-                    //substring(length- e.length,e.length)
                     mid = "substring(" + mid + ", string-length(" + mid + ") - string-length(" + searchKeyValue + ") +1,string-length(" +
                           searchKeyValue + "))";
                     searchKey = "starts-with(";
@@ -372,7 +363,6 @@ namespace SIL.PublishingSolution
             {
                 bool mainAdded = false;
                 int fileCount = 1;
-                //_dictSorderSection.Clear();
                 foreach (string s in fileNames)
                 {
                     if (!mainAdded)
@@ -581,7 +571,6 @@ namespace SIL.PublishingSolution
 
             if (returnFileName != "")
             {
-                //generated = exportLibreOffice.Export(statusProgressBar, projectInfo.DictionaryPath, returnFileName, projectInfo.DefaultCssFileWithPath, false, null, projectInfo.ProjectInputType);
                 publicationInfo.ProgressBar = statusProgressBar;
                 publicationInfo.IsOpenOutput = false;
                 generated = ExportODT(publicationInfo);
@@ -609,25 +598,10 @@ namespace SIL.PublishingSolution
             _isFromExe = Common.CheckExecutionPath();
 
             Common.DeleteDirectoryWildCard(Path.GetTempPath(), "SilPathwaytmp*"); 
-			
-            //Common.SupportFolder = "";
-            //Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
+
             string strFromOfficeFolder = Common.FromRegistry("OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
             projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
-
-            //todo comment this
-            //string strStylePath = Common.PathCombine(projInfo.TempOutputFolder, "styles.xml");
-            //string strContentPath = Common.PathCombine(projInfo.TempOutputFolder, "content.xml");
-
-
             CopyOfficeFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
-
-
-            //string strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Basic/Standard/Module1.xml");
-            //string strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Basic/Standard/Module1.xml");
-            //string outputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-
-
             Dictionary<string, string> dictSecName = new Dictionary<string, string>();
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
@@ -647,10 +621,6 @@ namespace SIL.PublishingSolution
             {
                 dictSecName = GetPageSectionSteps();
             }
-
-            //AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
-            //afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder, 0, null);
-
             dictSecName = SplitXhtmlAsMultiplePart(projInfo, dictSecName);
             
             if (dictSecName.Count > 1)
@@ -666,7 +636,6 @@ namespace SIL.PublishingSolution
 
             if (publicationInfo.FinalOutput.ToLower() == "pdf")
             {
-                //Common.CreateLicenseFileForRunningPdfApplyCopyright(Path.GetDirectoryName(publicationInfo.DefaultXhtmlFileWithPath));
                 publicationInfo.OutputExtension = "pdf";
                 Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice");
             }
@@ -735,7 +704,6 @@ namespace SIL.PublishingSolution
             var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(defaultXhtml);
             if(projInfo.DefaultRevCssFileWithPath != null && projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
             {
-                //var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(defaultXhtml);
                 if (fileNameWithoutExtension != null && fileNameWithoutExtension.ToLower() == "flexrev")
                 {
                     cssFile = projInfo.DefaultRevCssFileWithPath;
@@ -749,26 +717,14 @@ namespace SIL.PublishingSolution
                 preProcessor.InsertEmptyDiv(preProcessor.ProcessedXhtml);
             }
             preProcessor.GetTempFolderPath();
-            preProcessor.GetDefaultLanguage(projInfo); //Here
+            preProcessor.GetDefaultLanguage(projInfo);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
             InsertFrontMatter(projInfo);
             preProcessor.GetfigureNode();
-            //preProcessor.GetDefaultLanguage(projInfo);
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
             preProcessor.InsertBookPageBreak();
             preProcessor.ArrangeImages();
-            //preProcessor.ChangeEntryMultiPictClassName(projInfo.DefaultXhtmlFileWithPath);
-            //preProcessor.MoveImmediatePictureOnEntry(projInfo.DefaultXhtmlFileWithPath);
-            //preProcessor.InsertDummyTitleSecondary(projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
-            //if (_isFromExe)
-            //{
-            //    //Preprocess for FrontMatter CSS
-            //    if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) != "FlexRev")
-            //    {
-            //        preProcessor.InsertLoFrontMatterCssFile(projInfo.DefaultCssFileWithPath);
-            //    }
-            //}
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
@@ -802,27 +758,12 @@ namespace SIL.PublishingSolution
             // BEGIN Generate Meta.Xml File
             var metaXML = new LOMetaXML(projInfo.ProjectInputType);
             metaXML.CreateMeta(projInfo);
-            //PreExportProcess preProcessor = new PreExportProcess(projInfo);
             // BEGIN Generate Content.Xml File 
             var cXML = new LOContent();
-            //preProcessor.GetTempFolderPath();
-            //preProcessor.GetfigureNode();
             preProcessor.ImagePreprocess(false);
-            //preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)
                 preProcessor.SwapHeadWordAndReversalForm();
-
-            //preProcessor.InsertKeepWithNextOnStyles();
-
-            //if (_isFromExe)
-            //{
-            //    //Preprocess for FrontMatter XHTML
-            //    if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) != "FlexRev")
-            //    {
-            //        preProcessor.InsertLoFrontMatterContent(preProcessor.ProcessedXhtml);
-            //    }
-            //}
 
             Dictionary<string, string> pageSize = new Dictionary<string, string>();
             pageSize["height"] = cssClass["@page"]["page-height"];
@@ -889,7 +830,6 @@ namespace SIL.PublishingSolution
             finally
             {
                 projInfo.DefaultXhtmlFileWithPath = defaultXhtml;
-                //projInfo.DictionaryOutputName = null;
                 if (preProcessor != null)
                 {
                     DirectoryInfo di = new DirectoryInfo(preProcessor.GetCreatedTempFolderPath);
@@ -962,19 +902,13 @@ namespace SIL.PublishingSolution
 
         private static void PostProcess(PublicationInformation projInfo)
         {
-            //InsertPublisherOnTitlePage(projInfo.TempOutputFolder);
             if (projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 InsertKeepWithNextinEntryStyle(projInfo.TempOutputFolder, "styles.xml");
-                //InsertGuidewordAfterLetter(projInfo.TempOutputFolder);
-                //InsertFirstGuidewordForReversal(projInfo.TempOutputFolder);
-                //InsertVariableOnLetHead(projInfo.TempOutputFolder);
-                //InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
             }
             else if (projInfo.ProjectInputType.ToLower() == "scripture")
             {
                 InsertChapterNumber(projInfo.TempOutputFolder);
-                //ChangeTitleNameasBookName(projInfo.TempOutputFolder);
                 ContentPostProcess(projInfo.TempOutputFolder);
             }
         }
@@ -983,7 +917,6 @@ namespace SIL.PublishingSolution
         {
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -994,7 +927,7 @@ namespace SIL.PublishingSolution
             nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
 
             //CopyChapterVariableBeforeSectionHead
-            string xpath = "//text:p[@text:style-name='letter_letHead_dicBody']";//letter_letHead_body
+            string xpath = "//text:p[@text:style-name='letter_letHead_dicBody']"; //letter_letHead_body
 
             XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
             if (list != null)
@@ -1020,7 +953,6 @@ namespace SIL.PublishingSolution
                                 list1[0].AppendChild(leftGuidewordList[0].Clone());
                             }
                             break;
-                            //xmlNode.AppendChild(leftGuidewordList[0].Clone());
                         }
                     }
                 }
@@ -1035,7 +967,6 @@ namespace SIL.PublishingSolution
 
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = new XmlDocument();
-            //xdoc.PreserveWhitespace = false;
             xdoc.Load(filename);
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
@@ -1073,7 +1004,6 @@ namespace SIL.PublishingSolution
             
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1117,31 +1047,6 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-
-            ////Move the crossrefernce to previous node TD--3346
-            //xpath = "//text:note";
-
-            //XmlNodeList noteList = xdoc.SelectNodes(xpath, nsmgr1);
-            //if (noteList != null)
-            //{
-            //    foreach (XmlNode note in noteList)
-            //    {
-            //        if (note.PreviousSibling != null)
-            //        {
-            //            XmlNode prevNode = note.PreviousSibling;
-            //            if (prevNode.InnerText.Trim().Length == 0)
-            //            {
-            //                prevNode = prevNode.PreviousSibling;
-            //            }
-            //            if (prevNode != null)
-            //            {
-            //                prevNode.InnerText = prevNode.InnerText.TrimEnd();
-            //                prevNode.AppendChild(note);
-            //            }
-            //        }
-            //    }
-            //}
-
             xdoc.PreserveWhitespace = true;
             xdoc.Save(filename);
         }
@@ -1150,7 +1055,6 @@ namespace SIL.PublishingSolution
         {
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = new XmlDocument();
-            //xdoc.PreserveWhitespace = false;
             xdoc.Load(filename);
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
@@ -1189,7 +1093,6 @@ namespace SIL.PublishingSolution
         {
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1222,17 +1125,10 @@ namespace SIL.PublishingSolution
             xdoc.Save(filename);
         }
 
-        //private static void InsertKeepWithNextForEntryOnCondition(string tempOutputFolder)
-        //{
-        //    DuplicateEntryStyle(tempOutputFolder, "style.xml");
-        //   //RenameContentStyleOnCondition(tempOutputFolder);
-        //}
-
         private static void RenameContentStyleOnCondition(string tempFolder)
         {
             string filename = Common.PathCombine(tempFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1268,7 +1164,6 @@ namespace SIL.PublishingSolution
         {
             string filename = Common.PathCombine(directoryPath, styleFilename);
             XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1277,25 +1172,6 @@ namespace SIL.PublishingSolution
             nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
             nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
-
-            //string xpath = "//style:style[@style:name='entry_letData_dicBody']";
-            //XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
-            //if (list.Count > 0)
-            //{
-            //    XmlNode copyNode = list[0].Clone();
-            //    if (copyNode.Attributes != null)
-            //    {
-            //        string copyAttr = copyNode.Attributes["style:name"].Value;
-            //        copyNode.Attributes["style:name"].Value = copyAttr.Replace("entry", "entry1");
-            //    }
-            //    string xPath = "//style:paragraph-properties";
-            //    XmlAttribute attribute = xdoc.CreateAttribute("keep-with-next", nsmgr1.LookupNamespace("fo"));
-            //    attribute.Value = "always";
-            //    XmlNode paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
-            //    if (paraAttriblist != null && paraAttriblist.Attributes != null)
-            //        paraAttriblist.Attributes.Append(attribute);
-            //    list[0].ParentNode.AppendChild(copyNode);
-            //}
 
             string xpath = "//style:style[@style:name='letter_letHead_dicBody']";
             XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
@@ -1313,13 +1189,6 @@ namespace SIL.PublishingSolution
                 XmlNode paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
                 if (paraAttriblist != null && paraAttriblist.Attributes != null)
                     paraAttriblist.Attributes.Append(attribute);
-
-                //attribute = xdoc.CreateAttribute("orphans", nsmgr1.LookupNamespace("fo"));
-                //attribute.Value = "2";
-                //paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
-                //if (paraAttriblist != null && paraAttriblist.Attributes != null)
-                //    paraAttriblist.Attributes.Append(attribute);
-
 
                 attribute = xdoc.CreateAttribute("widows", nsmgr1.LookupNamespace("fo"));
                 attribute.Value = "3";
@@ -1392,7 +1261,6 @@ namespace SIL.PublishingSolution
 
             string filename = Common.PathCombine(tempFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1416,7 +1284,6 @@ namespace SIL.PublishingSolution
                     if (list1.Count > 0)
                     {
                         VARIABLE.AppendChild(list1[0].CloneNode(true));
-                        //break;
                     }
 
                     xpath1 = "//text:span/text:variable-set[@text:name=\"Left_Guideword_R\"]";
@@ -1441,7 +1308,6 @@ namespace SIL.PublishingSolution
 
             string filename = Common.PathCombine(tempFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            //xdoc.PreserveWhitespace = false;
             FileStream fs = File.OpenRead(filename);
             xdoc.Load(fs);
             fs.Close();
@@ -1470,7 +1336,6 @@ namespace SIL.PublishingSolution
                             if (list1.Count > 0)
                             {
                                 VARIABLE.AppendChild(list1[0].CloneNode(true));
-                                //break;
                             }
                     }
                 }
@@ -1523,7 +1388,6 @@ namespace SIL.PublishingSolution
             XmlElement root1 = doc.DocumentElement;
             string officeNode = "//of:styles";
             string allStyles = string.Empty;
-            //string style = "//st:style[@st:name='" + makeClassName + "']";
 
             XmlNode node = root1.SelectSingleNode(officeNode, nsmgr); // work
 
@@ -1548,8 +1412,6 @@ namespace SIL.PublishingSolution
                 }
             }
             doc.Save(strStylePath);
-
-            /////
 
             var docContent = new XmlDocument();
             docContent.Load(strContentPath);

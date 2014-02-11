@@ -67,7 +67,6 @@ namespace SIL.Tool
             if (Empty)
             {
                 if (Directory.GetDirectories(Dir).Length == 0)
-                    // if directory is completely empty, add it
                 {
                     fils.Add(Dir + @"/");
                 }

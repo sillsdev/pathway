@@ -18,7 +18,6 @@
 using System;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
-using SIL.Tool;
 using SIL.Tool.Localization;
 
 #endregion
@@ -99,7 +98,6 @@ namespace SIL.Tool
                     {
                         msg = new[] {strMessage + " with " + errCount + "error(s)."};
                     }
-                    //LocDB.Message("defErrMsg", "File has been exported successfully.", msg, LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
                 }
             }
             catch (Exception e)
@@ -107,7 +105,6 @@ namespace SIL.Tool
                 if (e.Message != null)
                 {
                     var msg = new[] {e.Message};
-                    //LocDB.Message("defErrMsg", e.Message, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                 }
             }
         }

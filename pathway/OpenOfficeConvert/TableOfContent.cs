@@ -14,16 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml;
-using Microsoft.Win32;
-using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
@@ -87,7 +78,6 @@ namespace SIL.PublishingSolution
             }
             else if (inputType.ToLower() == "scripture")
             {
-                //_writer.WriteAttributeString("text:style-name", "TitleMain_scrBook_scrBody");
                 _writer.WriteAttributeString("text:style-name", "scrBook_scrBody");
             }
             

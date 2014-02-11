@@ -313,18 +313,6 @@ namespace SIL.PublishingSolution
             set { _rampDescription = value; }
         }
 
-        //public Dictionary<string, string> IsoLanguageCode
-        //{
-        //    get { return _isoLanguageCode; }
-        //    set { _isoLanguageCode = value; }
-        //}
-
-        //public Dictionary<string, string> IsoLanguageCodeandName
-        //{
-        //    get { return _isoLanguageCodeandName; }
-        //    set { _isoLanguageCodeandName = value; }
-        //}
-
         public string ProjInputType
         {
             get { return _projInputType; }
@@ -600,7 +588,6 @@ namespace SIL.PublishingSolution
 
         public void AddFile(RampFile file)
         {
-            //\" \": \"main.odm\", \"description\": \"Master document\", \"relationship\": \"presentation\", \"is_primary\": \"Y\", \"silPublic\": \"Y\"
             string newFile = string.Empty;
             if (file.FileName != null)
             {
@@ -1291,7 +1278,6 @@ namespace SIL.PublishingSolution
 
         private void CreateRampContributor(Json json)
         {
-            //" \": \"Mark Penny\", \"role\": \"researcher"
             if (Contributor.Count > 0)
             {
                 json.WriteTag("dc.contributor");
@@ -1322,7 +1308,6 @@ namespace SIL.PublishingSolution
 
         private void CreateRampLanguageScript(Json json)
         {
-            //" \": \"Latn: Latin"
             if (LanguageScript.Count > 0)
             {
                 json.WriteTag("dc.language.script");
@@ -1372,7 +1357,6 @@ namespace SIL.PublishingSolution
 
         private void CreateRampCoverageSpacialCountry(Json json)
         {
-            //" \": \"IN: India\", \"place\": \"Andhra Pradesh\""
             if (CoverageSpacialCountry.Count > 0)
             {
                 json.WriteTag("coverage.spatial.country");
@@ -1544,7 +1528,6 @@ namespace SIL.PublishingSolution
             {
                 json.WriteTag("created_at");
                 json.WriteText(CreatedOn);
-                //json.WriteText(DateTime.Now.ToString("r"));
             }
         }
 
@@ -1739,7 +1722,6 @@ namespace SIL.PublishingSolution
                 }
                 zipFile.CommitUpdate();
             }
-            //CleanUpFolder(filesCollection, Path.GetDirectoryName(_folderPath));
         }
 
         private void CleanUpFolder(List<string> files, string folderPath)

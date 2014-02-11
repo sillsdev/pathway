@@ -98,11 +98,6 @@ namespace SIL.Tool
             {
                 return null;
             }
-            //if (_RedoStack.Count == 0 && controlText != string.Empty)
-            //{
-            //    modifyData = new ModifyData(action, controlName, editStyleName, controlText);
-            //    _RedoStack.Push(modifyData);
-            //}
             undoData = (ModifyData) _UndoStack.Pop();
             _RedoStack.Push(undoData);
             if (undoData.Action != Common.Action.Edit)

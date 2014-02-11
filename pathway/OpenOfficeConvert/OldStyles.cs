@@ -23,7 +23,6 @@ namespace SIL.PublishingSolution
     {
         public IDictionary<string, IDictionary<string, string>> CssClassName;
         public ArrayList SectionName;
-        //public Dictionary<string, string> _dispClassName;
         public Dictionary<string, string> PseudoClassAfter;
         public Dictionary<string, string> PseudoClassBefore;
         public Dictionary<string, string> PseudoAncestorBefore;

@@ -69,7 +69,7 @@ namespace SIL.Tool
                         break;
 
                     case XmlNodeType.Text:
-                        Write();  // Code here ************
+                        Write(); 
                         break;
 
                     case XmlNodeType.Whitespace:
@@ -113,7 +113,7 @@ namespace SIL.Tool
                         break;
 
                     case XmlNodeType.EndElement:
-                        EndElement(); // Code here ************
+                        EndElement(); 
                         break;
 
                 }
@@ -275,11 +275,6 @@ namespace SIL.Tool
 
         private void OpenFile(string filePath)
         {
-            //_reader = new XmlTextReader(filePath)
-            //                           {
-            //                               XmlResolver = null,
-            //                               WhitespaceHandling = WhitespaceHandling.Significant
-            //                           };
             XmlTextReader _reader = Common.DeclareXmlTextReader(filePath, true);
             _fileDir = Path.GetDirectoryName(filePath);
         }

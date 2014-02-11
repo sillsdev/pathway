@@ -69,11 +69,5 @@ namespace SIL.PublishingSolution
             get { return _fileSilPublic; }
             set { _fileSilPublic = value; }
         }
-
-
-
-
-
-
     }
 }
