@@ -21,7 +21,7 @@ namespace SIL.PublishingSolution
 
         private void Booklet_Load(object sender, EventArgs e)
         {
-            //bookletBL.LoadSection(lstSection);
+
         }
 
         private void openSavedSettingsToolStripMenuItem_Click(object sender, EventArgs e)

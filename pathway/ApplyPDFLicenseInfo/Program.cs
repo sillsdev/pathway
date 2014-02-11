@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
-using System.Threading;
 using SIL.PublishingSolution;
 using SIL.Tool;
 
@@ -17,7 +15,6 @@ namespace ApplyPDFLicenseInfo
         {
             bool isUnix = false;
             Console.WriteLine("running.....");
-            //Thread.Sleep(2500);
             string allUserPath = GetAllUserPath();
             string licenseFileName = ReadPathinLicenseFile(allUserPath);
 
@@ -30,13 +27,8 @@ namespace ApplyPDFLicenseInfo
             string xhtmlFile = _readLicenseFilesBylines[1];
             string exportTitle = _readLicenseFilesBylines[2];
             string creatorTool = _readLicenseFilesBylines[3];
-            //Console.WriteLine(executePath);
             string pdfFileName = string.Empty;
             
-            //Console.WriteLine(pdfFiles.Length.ToString());
-            //Thread.Sleep(2500);
-            //Console.WriteLine(pdfFiles[0].ToString());
-            //Thread.Sleep(500);
             pdfFileName = ProcessLicensePdf(pdfFileName, executePath);
 
             if (exportTitle == string.Empty)
@@ -46,7 +38,6 @@ namespace ApplyPDFLicenseInfo
             exportTitle = Path.Combine(workingDirectory, exportTitle);
             string licencePdfFile = pdfFileName.Replace(".pdf", "1.pdf");
 
-            //Thread.Sleep(2500);
             if (File.Exists(licencePdfFile))
             {
                 File.Copy(licencePdfFile, exportTitle, true);
@@ -71,7 +62,6 @@ namespace ApplyPDFLicenseInfo
                 Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout", string.Empty);
                 CreateRAMP(xhtmlFile);
             }
-            //Thread.Sleep(500);
         }
 
         private static void CreateRAMP(string executePath)
@@ -91,13 +81,10 @@ namespace ApplyPDFLicenseInfo
             if (pdfFiles.Length > 0)
             {
                 pdfFileName = pdfFiles[0];
-                //    Console.WriteLine("pdfFileName = pdfFiles[0];");
             }
             if (pdfFileName != string.Empty || pdfFileName != null)
             {
                 getFileName = Path.GetFileName(pdfFileName);
-                //   Console.WriteLine("getFileName = Path.GetFileName(pdfFileName);");
-                //   Console.WriteLine(getFileName);
                 if (File.Exists(pdfFileName))
                 {
                     isUnix = SetLicense.UnixVersionCheck();
@@ -112,10 +99,7 @@ namespace ApplyPDFLicenseInfo
                                                getCopyrightPdfFileName + "' 'SIL_License.xml'";
                         Console.WriteLine(argumentValue.ToString());
                         SetLicense.RunCommand(executePath, "java", argumentValue, true);
-
                         Console.WriteLine(executePath.ToString());
-
-                        //Thread.Sleep(1500);
                         Console.WriteLine("Java Command Executed");
                         Console.WriteLine("Done");
                     }
@@ -123,7 +107,6 @@ namespace ApplyPDFLicenseInfo
                     {
                         Console.WriteLine(getFileName.ToString());
                         Console.WriteLine("Java Command Executing");
-
                         getCopyrightPdfFileName = getFileName.Replace(".pdf", "1.pdf");
                         string argumentValue = "-jar pdflicensemanager-2.3.jar putXMP " + getFileName.ToString() + " " +
                                                getCopyrightPdfFileName + " SIL_License.xml";
@@ -131,8 +114,6 @@ namespace ApplyPDFLicenseInfo
                         SetLicense.RunCommand(executePath, "java", argumentValue, true);
 
                         Console.WriteLine(executePath.ToString());
-
-                        //Thread.Sleep(1500);
                         Console.WriteLine("Java Command Executed");
                         Console.WriteLine("Done");
                     }
