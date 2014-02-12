@@ -642,8 +642,16 @@ namespace SIL.PublishingSolution
                     _isDropCaps = false;
                     _incrementDropCap++;
                 }
-
-                if (_childName.IndexOf("letterletHead") == 0 && content != null)
+                string classNameWOLang = _classNameWithLang;
+                if (classNameWOLang.IndexOf("_.") > 0)
+                    classNameWOLang = Common.RightString(classNameWOLang, ".");
+                string letterletHeadStyle = "letter";
+                if (classNameWOLang != null || classNameWOLang != string.Empty)
+                {
+                    letterletHeadStyle = letterletHeadStyle + classNameWOLang;
+                }
+                letterletHeadStyle = letterletHeadStyle.Replace("-", "") + "letHead";
+                if (_childName.IndexOf(letterletHeadStyle) == 0 && content != null)
                 {
                     _tocStartingPage = content;
                     _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
@@ -1866,7 +1874,7 @@ namespace SIL.PublishingSolution
 
             //Text-Indent
             _paragraphPropertyList.Add("text-indent");
-            
+
             //Display-None
             _paragraphPropertyList.Add("display-none");
 

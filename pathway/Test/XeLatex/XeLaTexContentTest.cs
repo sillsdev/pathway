@@ -808,6 +808,16 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FlexRevTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FlexRev";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+        
 
         [Test]
         [Category("SkipOnTeamCity")]

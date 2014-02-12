@@ -117,7 +117,7 @@ namespace SIL.PublishingSolution
 
             BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-            
+
             if (projInfo.DefaultXhtmlFileWithPath.Contains("FlexRev.xhtml"))
             {
                 projInfo.IsReversalExist = false;
@@ -191,10 +191,10 @@ namespace SIL.PublishingSolution
                     var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
                                                      "FlexRev.xhtml");
                     string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
-                    string xeLatexCopyrightFile = Common.PathCombine(projInfo.ProjectPath, fileNameXhtml + ".tex");
+                    string xeLatexReversalFile = Common.PathCombine(projInfo.ProjectPath, fileNameXhtml + ".tex");
 
                     modifyXeLaTexStyles.ReversalIndexExist = true;
-                    modifyXeLaTexStyles.ReversalIndexTexFilename = Path.GetFileName(xeLatexCopyrightFile);
+                    modifyXeLaTexStyles.ReversalIndexTexFilename = Path.GetFileName(xeLatexReversalFile);
                 }
             }
 
@@ -212,7 +212,7 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            
+
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include, _langFontCodeandName);
             Dictionary<string, string> imgPath = new Dictionary<string, string>();
             if (newProperty.ContainsKey("ImagePath"))
@@ -517,7 +517,7 @@ namespace SIL.PublishingSolution
                 {
                     File.Delete(pdfFile);
                 }
-                catch{}
+                catch { }
             }
 
 
@@ -631,7 +631,7 @@ namespace SIL.PublishingSolution
                     {
                         if (File.Exists(pdfFullName))
                         {
-                            
+
                             pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex");
                         }
                     }
@@ -782,7 +782,7 @@ namespace SIL.PublishingSolution
 
         private void GetXhtmlFileFontCodeandFontName(XmlTextReader _reader)
         {
-            
+
             if (_isFileFontCodeandFontNameFound)
             {
                 return;

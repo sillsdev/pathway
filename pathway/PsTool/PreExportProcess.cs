@@ -1004,7 +1004,7 @@ namespace SIL.Tool
                     }
                 }
                 //END OF COPYRIGHT 
-                
+
                 mainXhtmlFile[0].InnerXml = frontMatterXHTMLContent + pNode.OuterXml + mainXhtmlFile[0].InnerXml;
 
                 xmldoc.Save(inputXhtmlFilePath);
@@ -1200,7 +1200,7 @@ namespace SIL.Tool
                 {
                     frontMatterCSSStyle = frontMatterCSSStyle +
                                           ".TableOfContentLO{visibility:hidden;}";
-                    
+
                     frontMatterXHTMLContent = frontMatterXHTMLContent + tocNode.OuterXml + dummyNode.OuterXml;
                     _projInfo.IsFrontMatterEnabled = true;
                 }
@@ -1322,12 +1322,10 @@ namespace SIL.Tool
 
         public string SetLangforLetter(string xhtmlFileName)
         {
-            //div[@class='letData']/div[@class='entry']
             string letterLang = "en";
             XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            xDoc.PreserveWhitespace = false;
             xDoc.Load(xhtmlFileName);
 
             XmlNodeList nodeList = xDoc.SelectNodes("//xhtml:div[@class='letHead']/xhtml:div[@class='letter']", namespaceManager);
@@ -1348,8 +1346,18 @@ namespace SIL.Tool
                             {
                                 letterLang = spanNode.Attributes["lang"].Value;
                             }
+                            else
+                            {
+                                xPath = "//xhtml:div[@class='entry'][1]/xhtml:span[@lang]";
+                                XmlNodeList spanNodeList = letDataNode.SelectNodes(xPath, namespaceManager);
+                                if (spanNodeList.Count > 0)
+                                {
+                                    var xmlAttributeCollection = spanNodeList[0].Attributes;
+                                    if (xmlAttributeCollection != null)
+                                        letterLang = xmlAttributeCollection["lang"].Value;
+                                }
+                            }
                         }
-                        
                     }
                     XmlAttribute attribute = xDoc.CreateAttribute("lang");
                     attribute.Value = letterLang;
@@ -1359,7 +1367,7 @@ namespace SIL.Tool
             xDoc.Save(xhtmlFileName);
 
             return xhtmlFileName;
-        }        
+        }
 
         /// <summary>
         /// FileOpen used for Preprocessing temp File For Xelatex
@@ -2241,19 +2249,19 @@ namespace SIL.Tool
                     {
                         string className = value[0].Substring(0, value[0].LastIndexOf("..", StringComparison.Ordinal));
                         string pseudoName = value[0].Substring(value[0].LastIndexOf("..", StringComparison.Ordinal) + 2);
-                        if(className.ToLower().IndexOf("span", StringComparison.Ordinal) != 0)
+                        if (className.ToLower().IndexOf("span", StringComparison.Ordinal) != 0)
                         {
                             className = "." + className;
                         }
                         tw.WriteLine(className + " :" + pseudoName + " {");
-                        tw.WriteLine("content: '';" );
+                        tw.WriteLine("content: '';");
                         tw.WriteLine("}");
                     }
                 }
-                catch{}
+                catch { }
             }
             tw.Close();
-            
+
         }
 
         public string InsertHiddenChapterNumber()
