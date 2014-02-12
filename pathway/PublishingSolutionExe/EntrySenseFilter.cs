@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="EntrySenseFilter.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright © 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Implements Fieldworks Utility Interface for Pathway
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Windows.Forms;
 using SIL.Tool;
 using SIL.Tool.Localization;

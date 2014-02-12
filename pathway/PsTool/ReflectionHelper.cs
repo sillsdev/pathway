@@ -1,19 +1,19 @@
-// ---------------------------------------------------------------------------------------------
-#region // Copyright (c) 2008, SIL International. All Rights Reserved.
-// <copyright from='2003' to='2008' company='SIL International'>
-//		Copyright (c) 2008, SIL International. All Rights Reserved.   
+// --------------------------------------------------------------------------------------------
+// <copyright file="ReflectionHelper.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright © 2014, SIL International. All Rights Reserved.   
 //    
-//		Distributable under the terms of either the Common Public License or the
-//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-#endregion
-// 
-// File: ReflectionHelper.cs
-// Responsibility: TE Team
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
 // 
 // <remarks>
+
 // </remarks>
-// ---------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
+
 using System;
 using System.Reflection;
 using System.IO;

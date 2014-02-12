@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="ConfiguraionTool.cs" from='2010' to='2011' company='SIL International'>
+// <copyright file="ConfiguraionTool.cs" from='2010' to='2014' company='SIL International'>
 //      Copyright © 2010, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the

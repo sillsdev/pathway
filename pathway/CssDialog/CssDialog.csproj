@@ -332,7 +332,6 @@
       <DependentUpon>ModifyOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="FeatureSheet.cs" />
-    <Compile Include="FileHead.cs" />
     <Compile Include="GlobalSettings.cs">
       <SubType>Form</SubType>
     </Compile>

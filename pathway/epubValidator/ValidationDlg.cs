@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------
-// <copyright file="ValidationDlg.cs" from='2010' to='2011' company='SIL International'>
-//      Copyright © 2010, 2011 SIL International. All Rights Reserved.
+// <copyright file="ValidationDlg.cs" from='2010' to='2014' company='SIL International'>
+//      Copyright © 2014 SIL International. All Rights Reserved.
 //
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.

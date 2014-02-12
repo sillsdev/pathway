@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="GoBibleTest.cs" from='2009' to='2014' company='SIL International'>
+// <copyright file="SwordTest.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright © 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the

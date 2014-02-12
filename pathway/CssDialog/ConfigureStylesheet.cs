@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="StyleFeatures.cs" from='2009' to='2009' company='SIL International'>
+// <copyright file="ConfigureStylesheet.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright © 2009, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// used in Css Setting for Features of Styles used for Css format
+// 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 

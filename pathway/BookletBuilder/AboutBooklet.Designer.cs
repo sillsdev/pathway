@@ -176,9 +176,9 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About Pathway Booklet Builder";
+            this.Activated += new System.EventHandler(this.AboutDE_Activated);
             this.Load += new System.EventHandler(this.AboutDE_Load);
             this.DoubleClick += new System.EventHandler(this.AboutDE_DoubleClick);
-            this.Activated += new System.EventHandler(this.AboutDE_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();

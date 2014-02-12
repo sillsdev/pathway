@@ -1,13 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------
-#region // Copyright (c) 2013, SIL International. LGPL
-// <copyright file="ramp.cs" from='2013' to='2013' company='SIL International'>
-//      Copyright © 2013, SIL International. 
+// <copyright file="ramp.cs" from='2013' to='2014' company='SIL International'>
+//      Copyright © 2014, SIL International. 
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-#endregion
-// <author>V. Karthikeyan</author>
+// <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed: 
 // 

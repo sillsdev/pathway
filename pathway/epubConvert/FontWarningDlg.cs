@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------
-// <copyright file="FontWarningDialog.cs" from='2009' to='2011' company='SIL International'>
-//      Copyright © 2010, 2011 SIL International. All Rights Reserved.
+// <copyright file="FontWarningDialog.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright © 2014 SIL International. All Rights Reserved.
 //
 //      Distributable under the terms specified in the LICENSING.txt file.
 // </copyright>

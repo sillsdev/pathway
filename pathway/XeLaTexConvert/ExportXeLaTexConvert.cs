@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="ExportProcess.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="ExportXeLaTexConvert.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright © 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Export process used to Export the ODT and Prince PDF output
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -117,7 +117,7 @@ namespace SIL.PublishingSolution
 
             BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-
+            
             if (projInfo.DefaultXhtmlFileWithPath.Contains("FlexRev.xhtml"))
             {
                 projInfo.IsReversalExist = false;

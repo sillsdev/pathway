@@ -1,16 +1,19 @@
-﻿// ---------------------------------------------------------------------------------------------
-#region // Copyright (c) 2013, SIL International. All Rights Reserved.
-// <copyright from='2013' to='2013' company='SIL International'>
-//		Copyright (c) 2013, SIL International. All Rights Reserved.
-//
-//		Distributable under the terms of either the Common Public License or the
-//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright>
-#endregion
-//
-// File: TheWordConvertTest.cs
-// Responsibility: Trihus
-// ---------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="ExportTheWordTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright © 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// TheWord Test Support
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="AboutDE.cs" from='2009' to='2009' company='SIL International'>
+// <copyright file="AboutBooklet.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright © 2009, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Displays the properties of the Current Application
+// About Booklet
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
