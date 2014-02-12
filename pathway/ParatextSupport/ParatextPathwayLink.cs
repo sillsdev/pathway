@@ -398,11 +398,11 @@ namespace SIL.PublishingSolution
                         {
                             try
                             {
-                                bookName = xmlNode.Attributes["id"].Value;
+                                bookName = xmlNode.Attributes["code"].Value;
                             }
                             catch (NullReferenceException)
                             {
-                                bookName = xmlNode.Attributes["code"].Value;
+                                bookName = xmlNode.Attributes["id"].Value;
                             }
                         }
                     }
