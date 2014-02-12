@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -347,89 +345,6 @@ namespace Test.CssParserTest
             _expected["@page:first-bottom-right"] = _expectedProperty;
             _expectedProperty["font-family"] = "System";
             _expectedProperty["font-size"] = "7";
-
-            //// @page:left :left 
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:left"] = _expectedProperty;
-            //_expectedProperty["margin-top"] = "2";
-            //_expectedProperty["margin-right"] = "4";
-            //_expectedProperty["margin-bottom"] = "6";
-            //_expectedProperty["margin-left"] = "8";
-            //_expectedProperty["height"] = "792";
-            //_expectedProperty["width"] = "612";
-            //_expectedProperty["mirror"] = "true";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:left-top-left"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "Arial";
-            //_expectedProperty["font-size"] = "2";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:left-top-center"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "Courier";
-            //_expectedProperty["font-size"] = "3";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:left-top-right"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "Georgia";
-            //_expectedProperty["font-size"] = "4";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:left-bottom-left"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "Kartika";
-            //_expectedProperty["font-size"] = "5";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:left-bottom-center"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "Latha";
-            //_expectedProperty["font-size"] = "6";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:left-bottom-right"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "System";
-            //_expectedProperty["font-size"] = "7";
-
-            //// @page :right
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:right"] = _expectedProperty;
-            //_expectedProperty["margin-top"] = "2";
-            //_expectedProperty["margin-right"] = "4";
-            //_expectedProperty["margin-bottom"] = "6";
-            //_expectedProperty["margin-left"] = "8";
-            //_expectedProperty["height"] = "792";
-            //_expectedProperty["width"] = "612";
-            //_expectedProperty["mirror"] = "true";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:right-top-left"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "Arial";
-            //_expectedProperty["font-size"] = "2";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:right-top-center"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "Courier";
-            //_expectedProperty["font-size"] = "3";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:right-top-right"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "Georgia";
-            //_expectedProperty["font-size"] = "4";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:right-bottom-left"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "Kartika";
-            //_expectedProperty["font-size"] = "5";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:right-bottom-center"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "Latha";
-            //_expectedProperty["font-size"] = "6";
-
-            //_expectedProperty = new Dictionary<string, string>();
-            //_expected["@page:right-bottom-right"] = _expectedProperty;
-            //_expectedProperty["font-family"] = "System";
-            //_expectedProperty["font-size"] = "7";
-
             Assert.IsTrue(CompareNestetedDictionary(), _errorMsg + " test Failed");
         }
         private bool CompareNestetedDictionary()

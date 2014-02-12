@@ -43,7 +43,7 @@ namespace SIL.PublishingSolution
                 StaticMethod1(projectPath, textVariable);
                 CreateSpread();
                 CreateSection();
-                createCrossReferenceFormat(); // Static code
+                createCrossReferenceFormat();
                 CreateStory();
                 CrossRef();
                 StaticMethod2();

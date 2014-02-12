@@ -59,8 +59,6 @@ namespace SIL.PublishingSolution
                 {
                     webTemplatePreview.Visible = true;
                     string CSSFile = Common.PathCombine(_supportFolder, lstSourceCSS.Text);
-
-                    //Library lib = new Library(); 
                     _mergedCSS = Common.MakeSingleCSS(CSSFile,"");
                     string xhtmlPreviewFilePath = Preview.CreatePreviewFile(XHTMLFile, _mergedCSS, "Template", true);
                     webTemplatePreview.Navigate(xhtmlPreviewFilePath);

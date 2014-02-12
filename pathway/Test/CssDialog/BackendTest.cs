@@ -15,7 +15,6 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
 using System.Collections;
 using NUnit.Framework;
 using SIL.PublishingSolution;

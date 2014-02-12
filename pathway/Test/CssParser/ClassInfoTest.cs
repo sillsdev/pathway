@@ -34,7 +34,6 @@ namespace Test.CssParserTest
             attribute.Add("eng");
             attribute.Add("US1");
             _classAttrib.SetClassAttrib(className, attribute);
-            //attribute.Clear(); 
             Assert.AreEqual(className, _classAttrib.ClassName, "SetClassAttrib test Failed");
             Assert.AreEqual(attribute, _classAttrib.Attribute, "SetClassAttrib test Failed");
         }

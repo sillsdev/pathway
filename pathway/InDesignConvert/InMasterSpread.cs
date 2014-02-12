@@ -138,12 +138,6 @@ namespace SIL.PublishingSolution
                                   {1 * x3, 1 * yb1, 1 * x3, 1 * yb2, -1 * x2, 1 * yb2, -1 * x2, 1 * yb1},
                                   {1 * x3, 1 * yb1, 1 * x3, 1 * yb2, 1 * x4, 1 * yb2, 1 * x4, 1 * yb1}
                               };
-
-            //CreateMainFrameStaticMethod1("MainFrame", "u19c");
-            //CreatePathPointArray();
-            //SetTextFramePreference();
-            //CreateMainFrameStaticMethod2();
-
             for (int i = 0; i < ReferenceNames.Count; i++)
             {
                 string parentStory = "u19c";
@@ -237,22 +231,6 @@ namespace SIL.PublishingSolution
                     result = "ubr" + pageType;
                     break;
             }
-            //if(pageName == "@page:first")
-            //{
-            //    result = "u00f";
-            //}
-            //else if (pageName == "@page:left")
-            //{
-            //    result = "u00l";
-            //}
-            //else if (pageName == "@page:right")
-            //{
-            //    result = "u00r";
-            //}
-            //else
-            //{
-            //    result = "u00a";
-            //}
             return result;
         }
 

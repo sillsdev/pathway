@@ -15,8 +15,6 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Reflection;
-using System.Threading;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
@@ -72,7 +70,6 @@ namespace SIL.PublishingSolution
 
             {
                 pb = new Progress();
-                //pb.Show();
                 //get xsltFile from ExportThroughPathway.cs
                 XsltPreProcess(outFullName);
 
@@ -86,7 +83,6 @@ namespace SIL.PublishingSolution
                 SubProcess.BeforeProcess(outFullName);
 
                 var mainXhtml = Path.GetFileNameWithoutExtension(outFullName) + ".xhtml";
-                //var mainXhtml = Path.GetFileNameWithoutExtension(outFullName) + "_cv.xhtml";
                 var mainFullName = Common.PathCombine(outDir, mainXhtml);
                 Debug.Assert(mainFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "Path for input file missing");
                 if (string.IsNullOrEmpty(mainFullName) || !File.Exists(mainFullName))
@@ -139,8 +135,6 @@ namespace SIL.PublishingSolution
                     MessageBox.Show(string.Format(err.ToString(), err.FullFilePath), "Pathway Export",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                //var msg = new[] { err.FullFilePath };
-                //LocDB.Message("errNotValidXml", err.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
                 return;
             }
             catch (UnauthorizedAccessException err)
@@ -153,8 +147,6 @@ namespace SIL.PublishingSolution
                 {
                     MessageBox.Show(string.Format(err.ToString(), "Sorry! You might not have permission to use this resource."), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                //var msg = new[] { "Sorry! You might not have permission to use this resource." };
-                //LocDB.Message("errUnauthorized", err.ToString(), msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                 return;
             }
             catch (Exception ex)
@@ -167,8 +159,6 @@ namespace SIL.PublishingSolution
                 {
                     MessageBox.Show(ex.ToString(), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                //var msg = new[] { ex.ToString() };
-                //LocDB.Message("defErrMsg", ex.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
                 return;
             }
             finally
@@ -238,10 +228,6 @@ namespace SIL.PublishingSolution
             {
                 Common.TeLanguageSettings(fluffedCssFullName);
             }
-
-            //string[] args = Environment.GetCommandLineArgs();
-            //for (int i = 0; i < args.Length; i++)
-            //{MessageBox.Show(args[i].ToString());}
         }
 
 
@@ -252,7 +238,6 @@ namespace SIL.PublishingSolution
         /// <returns>Reversal name with path</returns>
         protected static string GetRevFullName(string outDir)
         {
-            //string revFullName = Common.PathCombine(Path.GetDirectoryName(outDir), "FlexRev.xhtml");
             if(File.Exists(outDir))
             {
                 outDir = Path.GetDirectoryName(outDir);
@@ -270,25 +255,6 @@ namespace SIL.PublishingSolution
                 AddHomographAndSenseNumClassNames.Execute(revFullName, revFullName);
             }
             return revFullName;
-
-
-            //string tmpOutDir = outDir;
-            //string fileName = Path.GetFileName(tmpOutDir);
-            //if (fileName.Length > 1)
-            //    tmpOutDir = Path.GetDirectoryName(outDir);
-            //string revFullName = Common.PathCombine(tmpOutDir, "FlexRev.xhtml");
-            //if (!File.Exists(revFullName))
-            //    revFullName = "";
-            //else
-            //{
-            //    Common.StreamReplaceInFile(revFullName, "<ReversalIndexEntry_Self>", "");
-            //    Common.StreamReplaceInFile(revFullName, "</ReversalIndexEntry_Self>", "");
-            //    Common.StreamReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
-            //    string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
-            //    Common.StreamReplaceInFile(revCssFullName, ".headword", ".headref");
-            //    AddHomographAndSenseNumClassNames.Execute(revFullName, revFullName);
-            //}
-            //return revFullName;
         }
 
         /// <summary>
@@ -493,14 +459,8 @@ namespace SIL.PublishingSolution
         public void DeExport(string lexiconFull, string lexiconCSS, string revFull, string revCSS, string gramFull)
         {
             var projInfo = new PublicationInformation();
-
-            //if (ProgressBar == null)
-            //    ProgressBar = new ProgressBar();
-            //projInfo.ProgressBar = ProgressBar;
             projInfo.ProjectFileWithPath = _projectFile;
             projInfo.IsLexiconSectionExist = File.Exists(lexiconFull);
-            //projInfo.IsReversalExist = File.Exists(revFull);
-            //projInfo.IsReversalExist = Param.Value[Param.ReversalIndex] == "True";
             SetReverseExistValue(projInfo);
             projInfo.SwapHeadword = false;
             projInfo.FromPlugin = true;
@@ -511,8 +471,6 @@ namespace SIL.PublishingSolution
             projInfo.DictionaryPath = Path.GetDirectoryName(lexiconFull);
             projInfo.ProjectName = Path.GetFileNameWithoutExtension(lexiconFull);
             projInfo.SelectedTemplateStyle = _selectedCssFromTemplate;
-            //if (lexiconFull == revFull || lexiconFull == gramFull)
-            //    projInfo.IsLexiconSectionExist = false;
 
             string lexiconFileName = Path.GetFileName(lexiconFull);
             string revFileName = Path.GetFileName(revFull);
@@ -569,7 +527,6 @@ namespace SIL.PublishingSolution
         {
             Debug.Assert(mainXhtml.IndexOf(Path.DirectorySeparatorChar) < 0, mainXhtml + " should be just name");
             Debug.Assert(jobFileName.IndexOf(Path.DirectorySeparatorChar) < 0, jobFileName + " should be just name");
-            //var pb = new ProgressBar();
             Common.ShowMessage = !Common.Testing;
 
             var projInfo = new PublicationInformation();
@@ -584,7 +541,6 @@ namespace SIL.PublishingSolution
                 projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outPath, mainXhtml);
                 string DictionaryName = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath));
                 projInfo.DictionaryOutputName = DictionaryName;
-                //projInfo.ProgressBar = pb;
                 projInfo.IsOpenOutput = !Common.Testing;
                 projInfo.ProjectName = Path.GetFileNameWithoutExtension(mainXhtml);
                 SetExtraProcessingValue(projInfo);

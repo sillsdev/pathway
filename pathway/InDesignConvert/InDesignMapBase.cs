@@ -101,12 +101,6 @@ namespace SIL.PublishingSolution
 
             Dictionary<string, string> _metaDataDic = new Dictionary<string, string>();
             _metaDataDic = Common.GetMetaData(ProjectInputType, string.Empty);
-            //metaDataList["Title"];
-            //metaDataList["Creator"];
-            //metaDataList["Publisher"];
-            //metaDataList["Description"];
-            //metaDataList["Copyright Holder"];
-            //metaDataList["Subject"];
             _writer.WriteRaw("<![CDATA[<?xpacket begin=\"?\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?>");
             _writer.WriteStartElement("x:xmpmeta");
             _writer.WriteAttributeString("xmlns:x", "adobe:ns:meta/");
@@ -611,7 +605,6 @@ namespace SIL.PublishingSolution
             int i = 1;
             foreach (string sName in _textVariables)
             {
-                //if (_textVariables.Count > 2 && sName.IndexOf("headword") >= 0) continue;
                 if (sName.IndexOf("Guideword") == 0)
                 {
                     string styleName = Common.RightString(sName, "_");
@@ -683,13 +676,11 @@ namespace SIL.PublishingSolution
         private string GetStyleNameforVariable(string name)
         {
             string styleName = name;
-            //_textVariables.Add("Guideword_CharacterStyle/headword_entry_letData_dicBody");
             foreach (string sName in _textVariables)
             {
                 if (sName.IndexOf(name) == 0)
                 {
                     styleName = Common.RightString(sName, "_");
-                    //styleName = sName.Substring((name.Length) + 1, (sName.Length - ((name.Length) + 1)));
                     styleName = "CharacterStyle/" + styleName;
                     break;
                 }

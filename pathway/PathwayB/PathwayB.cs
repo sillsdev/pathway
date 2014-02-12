@@ -188,7 +188,6 @@ namespace SIL.PublishingSolution
                 if (bOutputSpecified)
                 {
                     // the user has specified an output -- update the settings so we export to that output
-                    //Param.SetDefaultValue(Param.PrintVia, exportType);
                     Param.SetValue(Param.PrintVia, exportType);
                     Param.Write();
                 }
@@ -212,7 +211,6 @@ namespace SIL.PublishingSolution
 
                 // run headless from the command line
                 Common.Testing = true;
-                //_projectInfo.ProgressBar = null;
                 if (inFormat == InputFormat.PTBUNDLE)
                 {
                     var zf = new FastZip();
@@ -310,11 +308,6 @@ namespace SIL.PublishingSolution
                     }
                 }
 
-                // troubleshooting... remove
-                //Console.WriteLine("xhtml: " + projectInfo.DefaultXhtmlFileWithPath);
-                //Console.WriteLine("css: " + projectInfo.DefaultCssFileWithPath);
-                //Console.WriteLine("Reversal:" + projectInfo.IsReversalExist);
-
                 if (projectInfo.DefaultXhtmlFileWithPath == null)
                 {
                     Usage();
@@ -335,22 +328,12 @@ namespace SIL.PublishingSolution
                 {
                     Param.SetValue(Param.ReversalIndex, projectInfo.IsReversalExist ? "True" : "False");
                     Param.SetValue(Param.InputType, projectInfo.ProjectInputType);
-                    //Param.SetValue(Param.OutputPath, projectInfo.DictionaryPath);
                     Param.Write();
                 }
 
                 var tpe = new PsExport { Destination = Param.PrintVia, DataType = projectInfo.ProjectInputType };
                 tpe.ProgressBar = null;
                 tpe.Export(projectInfo.DefaultXhtmlFileWithPath);
-
-                //Backend.Load(backendPath);
-                //Common.ShowMessage = false;
-                //projectInfo.DictionaryOutputName = projectInfo.ProjectName;
-                //bool result = Backend.Launch(exportType, projectInfo);
-                //if (result == true)
-                //{
-                //    Console.WriteLine("PathwayB: export process succeeded at " + DateTime.Now);
-                //}
             }
             catch (ArgumentException ex)
             {
@@ -378,12 +361,10 @@ namespace SIL.PublishingSolution
                 Object objParatextPathwayLink = null;
                 if (tParatextPathwayLink != null)
                 {
-                    // var ppl = new ParatextPathwayLink(databaseName.InnerText, linkParam);
                     Object[] instanceArgs = new object[2];
                     instanceArgs[0] = databaseName.InnerText;
                     instanceArgs[1] = linkParam;
                     objParatextPathwayLink = Activator.CreateInstance(tParatextPathwayLink, instanceArgs);
-                    // ppl.ConvertUsxToPathwayXhtmlFile(xmlText.ToString(), fileName);
                     Object[] args = new object[2];
                     args[0] = xmlText.ToString();
                     args[1] = fileName;
@@ -412,7 +393,7 @@ namespace SIL.PublishingSolution
 
         private static int CaptureFileList(string[] args, int i, List<string> files)
         {
-// store the files in our internal list for now 
+            // store the files in our internal list for now 
             // (single filenames and * will end up as a single element in the list)
             while (args[i].EndsWith(","))
             {
@@ -550,9 +531,7 @@ namespace SIL.PublishingSolution
                         Object objSFMtoUsx = null;
                         if (tSfmToUsx != null)
                         {
-                            // SFMtoUsx objSFMtoUsx = new SFMtoUsx();
                             objSFMtoUsx = Activator.CreateInstance(tSfmToUsx);
-                            // objSFMtoUsx.ConvertSFMtoUsx(xmlTextWriter, filename, filename.Replace(".SFM", ".usx"));
                             Object[] args = new object[3];
                             args[0] = xmlTextWriter;
                             args[1] = filename;
@@ -598,7 +577,6 @@ namespace SIL.PublishingSolution
                     PropertyInfo piStyFullPath = tStyToCSS.GetProperty("StyFullPath",
                                                                        BindingFlags.Public | BindingFlags.Instance);
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
-                    // styToCss.ConvertStyToCSS(Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
                     Object[] args = new object[1];
                     args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
                     Object oResult = tStyToCSS.InvokeMember("ConvertStyToCSS",
@@ -731,7 +709,6 @@ namespace SIL.PublishingSolution
                         {
                             // dynamically load the ParatextShared DLL
                             var asmLoc = ParatextInstallDir();
-                            //Assembly asm = Assembly.LoadFrom(Common.PathCombine((asmLoc.Length == 0 ? PathwayPath.GetPathwayDir() : asmLoc), "ParatextShared.dll"));
                             Assembly asm = Assembly.Load("ParatextShared, Version=7.3.0.0, Culture=neutral, PublicKeyToken=null");
 
                             // Try to load the UsfmToUsx class. Thie will tell us if we're using the older API (PT 7.1).
@@ -740,10 +717,6 @@ namespace SIL.PublishingSolution
                             {
                                 // -- OLDER API --
                                 // For PT 7.1, we're making the following calls dynamically:
-                                // UsfmToUsx converter = new UsfmToUsx(xmlw, usfm, new ScrStylesheet(styFile), false);
-                                // converter.Convert();
-
-                                // new ScrStylesheet(styFile)
                                 Type tScrStylesheet = asm.GetType("Paratext.ScrStylesheet");
                                 Object oScrStylesheet = null;
                                 if (tScrStylesheet != null)
@@ -770,11 +743,6 @@ namespace SIL.PublishingSolution
                                 if (tUsfmToXml != null)
                                 {
                                     // For PT 7.2, we're making the following calls dynamically:
-                                    //Paratext.ScrTextCollection.Initialize();
-                                    //Paratext.ScrText scrtext = Paratext.ScrTextCollection.Get("T4T");
-                                    //Paratext.UsfmToXml converter = new Paratext.UsfmToXml(xmlw, usfm, scrtext, false);
-                                    //converter.Convert();
-
                                     // ScrTextCollection.Initialize()
                                     Type tScrTextCollection = asm.GetType("Paratext.ScrTextCollection");
                                     tScrTextCollection.InvokeMember("Initialize", BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.Public, null, null, null);
@@ -842,7 +810,6 @@ namespace SIL.PublishingSolution
                     // styToCss.StyFullPath = styFile
                     PropertyInfo piStyFullPath = tStyToCSS.GetProperty("StyFullPath", BindingFlags.Public | BindingFlags.Instance);
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
-                    // styToCss.ConvertStyToCSS(Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
                     Object[] args = new object[1];
                     args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
                     Object oResult = tStyToCSS.InvokeMember("ConvertStyToCSS", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);
@@ -927,7 +894,6 @@ namespace SIL.PublishingSolution
                     // styToCss.StyFullPath = styFile
                     PropertyInfo piStyFullPath = tStyToCSS.GetProperty("StyFullPath", BindingFlags.Public | BindingFlags.Instance);
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
-                    // styToCss.ConvertStyToCSS(Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
                     Object[] args = new object[1];
                     args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
                     Object oResult = tStyToCSS.InvokeMember("ConvertStyToCSS", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);

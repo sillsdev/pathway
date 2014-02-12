@@ -73,15 +73,6 @@ namespace SIL.PublishingSolution
             {
                 nodeX.InnerText = getDate;
             }
-            //foreach (KeyValuePair<string, int> kvp in tableColumnModify)
-            //{
-            //    //table:table[@table:name="Table1"]/table:table-column
-            //    _xPath = "//table:table[@table:name=\"" + kvp.Key + "\"]/table:table-column";
-            //    XmlNode node = _root.SelectSingleNode(_xPath, nsmgr);
-            //    if (node == null) return;
-
-            //    node.Attributes[1].Value = kvp.Value.ToString();
-            //}
             _contentXMLdoc.Save(metaDataXMLPath);
         }
 

@@ -366,12 +366,6 @@ namespace Test.InDesignConvert
             ************/
             _fileNameWithPath = Common.PathCombine(_outputSpread, "MasterSpread_Left.xml");
 
-            //_xPath = "//TextFrame[@Self=\"MainFrame\"]//PathPointArray";
-            //nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
-            //XmlNode node = nodesList[0];
-            //string expected = "<PathPointType Anchor=\"-98.07875 -183.1181\" LeftDirection=\"-98.07875 -183.1181\" RightDirection=\"-98.07875 -183.1181\" /><PathPointType Anchor=\"-98.07875 219.1181\" LeftDirection=\"-98.07875 219.1181\" RightDirection=\"-98.07875 219.1181\" /><PathPointType Anchor=\"98.07875 219.1181\" LeftDirection=\"98.07875 219.1181\" RightDirection=\"98.07875 219.1181\" /><PathPointType Anchor=\"98.07875 -183.1181\" LeftDirection=\"98.07875 -183.1181\" RightDirection=\"98.07875 -183.1181\" />";
-            //Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
-
             _xPath = "//TextFrame[@Self=\"topleft\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             XmlNode node = nodesList[0];
@@ -417,12 +411,6 @@ namespace Test.InDesignConvert
             //First Page
             ************/
             _fileNameWithPath = Common.PathCombine(_outputSpread, "MasterSpread_First.xml");
-
-            //_xPath = "//TextFrame[@Self=\"MainFrame\"]//PathPointArray";
-            //nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
-            //node = nodesList[0];
-            //expected = "<PathPointType Anchor=\"-69.7323 -69.7323\" LeftDirection=\"-69.7323 -69.7323\" RightDirection=\"-69.7323 -69.7323\" /><PathPointType Anchor=\"-69.7323 105.7323\" LeftDirection=\"-69.7323 105.7323\" RightDirection=\"-69.7323 105.7323\" /><PathPointType Anchor=\"105.7323 105.7323\" LeftDirection=\"105.7323 105.7323\" RightDirection=\"105.7323 105.7323\" /><PathPointType Anchor=\"105.7323 -69.7323\" LeftDirection=\"105.7323 -69.7323\" RightDirection=\"105.7323 -69.7323\" />";
-            //Assert.AreEqual(expected, node.InnerXml, _methodName + " failed ");
 
             _xPath = "//TextFrame[@Self=\"topleft\"]//PathPointArray";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);

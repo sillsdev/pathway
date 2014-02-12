@@ -19,11 +19,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using NUnit.Framework;
 using SIL.PublishingSolution;
-using SIL.Tool;
 
 #endregion Using
 
@@ -468,7 +465,6 @@ namespace Test.CssParserTest
             _expected.Add("font-size", "864");
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
-
 
         /// <summary>
         ///A test for GetRgbConcat

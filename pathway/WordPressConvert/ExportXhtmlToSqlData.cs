@@ -116,7 +116,6 @@ namespace SIL.PublishingSolution
             searchTable += @"INSERT INTO `sil_multilingual_search` (`post_id`, `language_code`, `relevance`, `search_strings`) VALUES " + "\n";
             searchTable += SetSemiColon(_searchValue);
 
-            //_textWriter = new StreamWriter(_projInfo.ProjectPath + @"\" + MysqlDataFileName);
             _textWriter = new StreamWriter(Common.PathCombine(_projInfo.ProjectPath, MysqlDataFileName));
             _textWriter.WriteLine(postTable);
             _textWriter.WriteLine(termTable);

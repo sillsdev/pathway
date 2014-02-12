@@ -34,8 +34,6 @@ namespace SIL.PublishingSolution
             XmlReader xmlReader = XmlReader.Create(xhtmlFullName, xmlReaderSettings);
             _xmlDocument.Load(xmlReader);
             xmlReader.Close();
-            //XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(_xmlDocument.NameTable);
-            //xmlNamespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             _bookNodes = _xmlDocument.SelectNodes("//*[@class='scrBook']");
         }
 

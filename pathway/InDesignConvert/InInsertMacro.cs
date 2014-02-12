@@ -80,7 +80,6 @@ namespace SIL.PublishingSolution
             CopySupportFolder(projInfo);
 
             //Copy pictures to IndesignFiles folder (inside Stories folder)
-           
             var pictureFolder = Common.PathCombine(projInfo.DictionaryPath, "Pictures");
             if (File.Exists(pictureFolder))
                 CopyFolderWithFiles(pictureFolder, Common.PathCombine(projInfo.TempOutputFolder, "Pictures"));
@@ -161,9 +160,6 @@ namespace SIL.PublishingSolution
 
                     margin = margin + pair.Key + "\", \"" + topValue + "\", \"" + rightValue + "\", \"" +
                     bottomValue + "\", \"" + leftValue + "\", \"";
-
-                    //margin = margin + pair.Key + "\", \"" + pair.Value[0] + "\", \"" + pair.Value[1] + "\", \"" +
-                    //pair.Value[2] + "\", \"" + pair.Value[3] + "\", \"";
                     break;
                 }
             }
@@ -246,8 +242,6 @@ namespace SIL.PublishingSolution
             }
             return indexTab + isLocatorExists.ToLower() + ";";
         }
-
-
 
         public string GetColumnRule()
         {

@@ -18,7 +18,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -181,7 +180,6 @@ namespace SIL.PublishingSolution
                             if (!Directory.Exists("/usr/lib/prince/bin"))
                             {
                                 return success = false;
-                                //MessageBox.Show(@"Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", "Pathway Configuration Tool" , MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                             }
                         }
                         Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
@@ -203,7 +201,6 @@ namespace SIL.PublishingSolution
                             p1.WaitForExit();
                             p1Error = p1.StandardError.ReadToEnd();
                         }
-                        //Common.RunCommand("prince ", _processedXhtml + " -o, " + xhtmlFileName + ".pdf", 1);
                     }
 
                     Environment.CurrentDirectory = curdir;
@@ -231,9 +228,6 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    //if (Common.Testing) return;
-                    //var msg = new[] { "PrinceXML not installed in this system" };
-                    //LocDB.Message("defErrMsg", "PrinceXML not installed in this system", msg, LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
                     success = false;
                 }
             }

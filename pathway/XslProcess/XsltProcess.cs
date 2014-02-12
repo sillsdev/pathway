@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -60,18 +59,6 @@ namespace PSXslProcess
                 //Create an XsltArgumentList.
                 var xslArg = new XsltArgumentList();
 
-                //Add an object 
-                //var obj = new FlexString();
-                //var fun = new XmlFun(); // string-length replaed with stringLength
-                //xslArg.AddExtensionObject("urn:reversal-conv", obj);
-                //xslArg.AddExtensionObject("http://www.w3.org/2005/xpath-functions", fun);
-
-                //if (myParams != null)
-                //    foreach (string param in myParams.Keys)
-                //    {
-                //        xslArg.AddParam(param, "", myParams[param]);
-                //    }
-
                 //Transform the file. and writing to temporary File
                 var setting = new XmlReaderSettings { ProhibitDtd = false, XmlResolver = null };
                 XmlReader reader = XmlReader.Create(inputFile, setting);
@@ -95,12 +82,9 @@ namespace PSXslProcess
                     XsltFormat = Formatting.None;       // reset to None for next time if it has been changed
                 }
                 var writer = XmlWriter.Create(result, writerSettings);
-                //var writer = new XmlTextWriter(result, Encoding.UTF8) {Namespaces = true};
-                //writer.Formatting = XsltFormat;
                 if (ext.ToLower().Contains("xhtml"))
                 {
                     writer.WriteStartDocument();
-                    //writer.WriteDocType("html", "-//W3C//DTD XHTML 1.0 Strict//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", null);
                 }
                 xslt.Transform(reader, xslArg, writer);
                 writer.Close();
@@ -126,8 +110,6 @@ namespace PSXslProcess
         /// <returns>normalized path</returns>
         public string PathCombine(string path1, string path2)
         {
-            //if (path1 == null) throw new ArgumentNullException("path1");
-            //if (path2 == null) throw new ArgumentNullException("path2");
             path1 = DirectoryPathReplace(path1);
             path2 = DirectoryPathReplace(path2);
             return Common.PathCombine(path1, path2);

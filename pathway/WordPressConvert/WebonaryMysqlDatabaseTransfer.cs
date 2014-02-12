@@ -248,11 +248,7 @@ namespace SIL.PublishingSolution
 
         public void Data(string fileName, string userName, string password, string hostAddress, string port, string databaseName, string websiteAddress, string directoryName)
         {
-            //string getCreateDatabaseFile = Common.GetApplicationPath();
-            //getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, "wordpress");
-            //getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, fileName);
             string mysqlScriptFileName = Common.PathCombine(projInfo.ProjectPath, fileName);
-            //File.Copy(getCreateDatabaseFile, mysqlScriptFileName, true);
             ModifyDatabasenameInDataDbSqlFile(mysqlScriptFileName, databaseName, websiteAddress, directoryName);
             mysqlScriptFileName = mysqlScriptFileName.Replace(".sql", "1.sql");
             RunScript(mysqlScriptFileName, userName, password, hostAddress, port, databaseName);
@@ -356,14 +352,7 @@ namespace SIL.PublishingSolution
 
                 if (line.IndexOf("http://localhost/wordpress") >= 0)
                 {
-                    //if(websiteAddress.Substring(websiteAddress.Length-2, websiteAddress.Length-1) == "/")
-                    //{
                     line = line.Replace("http://localhost/wordpress", websiteAddress + "/" + directoryName);
-                    //}
-                    //else
-                    //{
-                    //    line = line.Replace("http://localhost/wordpress", websiteAddress + directoryName);
-                    //}
                 }
                 if (line.IndexOf("FROM `wordpress`.") >= 0)
                 {
@@ -414,14 +403,7 @@ namespace SIL.PublishingSolution
 
                 if (line.IndexOf("http://localhost/wordpress") >= 0)
                 {
-                    //if (websiteAddress.Substring(websiteAddress.Length - 1, websiteAddress.Length) == "/")
-                    //{
                     line = line.Replace("http://localhost/wordpress", websiteAddress + "/" + directoryName);
-                    //}
-                    //else
-                    //{
-                    //    line = line.Replace("http://localhost/wordpress", websiteAddress + directoryName);
-                    //}
                 }
                 if (line.IndexOf("FROM `wordpress`.") >= 0)
                 {
@@ -430,7 +412,7 @@ namespace SIL.PublishingSolution
 
                 if (line.IndexOf("AudioVisual/") >= 0)
                 {
-                    //  line = line.Replace("AudioVisual/", websiteAddress + "/" + directoryName + "/" + "AudioVisual/");
+                   
                 }
 
                 sw2.WriteLine(line);

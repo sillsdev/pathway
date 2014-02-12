@@ -18,7 +18,6 @@
 // --------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using SIL.PublishingSolution;
-using System;
 
 namespace FlexDePluginTests
 {

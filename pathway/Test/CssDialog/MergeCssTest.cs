@@ -18,9 +18,7 @@
 using System;
 using SIL.PublishingSolution;
 using NUnit.Framework;
-using System.Windows.Forms;
 using System.IO;
-using System.Collections.Generic;
 using SIL.Tool;
 
 namespace Test.CssDialog

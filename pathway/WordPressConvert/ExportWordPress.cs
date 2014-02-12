@@ -16,8 +16,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
-using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
 
@@ -83,23 +81,6 @@ namespace SIL.PublishingSolution
                 preProcessor.InsertFolderNameForAudioFilesinXhtml();
                 InsertBeforeAfterInXHTML(projInfo);
 
-                //const string prog = "WordPress.bat";
-                //GetParameters();
-                //var processFolder = Common.PathCombine(Common.GetAllUserPath(), "WordPress");
-                //if (!Directory.Exists(processFolder))
-                //    processFolder = Common.FromRegistry("WordPress");
-                //var progFullPath = Common.PathCombine(processFolder, prog);
-                //var args = string.Format("-u{0} -n{1} \"{2}\"", _WebUrl + '/' + _WebFtpFldrNme, _DbName, xhtml);
-                //SubProcess.Run(processFolder, progFullPath, args, true);
-                ////if (projInfo.IsOpenOutput)
-                ////{
-                ////    string dataResult = Common.PathCombine(Path.GetDirectoryName(xhtml), "data.sql");
-                ////    string msg = string.Format("Please import the file {0} to your WordPress MySql database. Would you like more details?", dataResult);
-                ////    DialogResult dialogResult = MessageBox.Show(msg, "WordPress Export", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                ////    if (dialogResult == DialogResult.Yes)
-                ////        SubProcess.Run(processFolder, @"""WordPress site setup.txt""");
-                ////}
-
                 ExportXhtmlToSqlData xhtmlToSqlData = new ExportXhtmlToSqlData();
                 xhtmlToSqlData._projInfo = projInfo;
                 xhtmlToSqlData.MysqlDataFileName = "data.sql";
@@ -152,16 +133,6 @@ namespace SIL.PublishingSolution
             Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", Common.NonBreakingSpace);
 
             RemovePagedStylesFromCss(cssFilePath);
-            //if (projInfo.IsReversalExist)
-            //{
-            //    cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
-            //    string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
-            //    projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-            //    AfterBeforeProcessEpub afterBeforeProcessReversal = new AfterBeforeProcessEpub();
-            //    afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
-            //    Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", "&#x2007;");
-            //    projInfo.DefaultXhtmlFileWithPath = originalDefaultXhtmlFileName;
-            //}
         }
         #endregion
         

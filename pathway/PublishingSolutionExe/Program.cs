@@ -15,7 +15,6 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SIL.PublishingSolution
@@ -33,7 +32,6 @@ namespace SIL.PublishingSolution
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new OpenOfficeConverter());
             Application.Run(new frmMDIParent());
         }
     }

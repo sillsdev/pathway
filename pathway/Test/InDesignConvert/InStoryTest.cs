@@ -178,41 +178,31 @@ namespace Test.InDesignConvert
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/NestedDivCase1.xhtml");
             ExportProcess();
 
-            //_expected.Clear();
             string styleName = "t1_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[1][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             string content = "T1 class ";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t2_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T2 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t3_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[3][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T3 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t2_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[4][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T2 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t1_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[5][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T1 class ";
             result = ValidateNodeContent(_outputStory, content);
@@ -227,49 +217,37 @@ namespace Test.InDesignConvert
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/NestedDivCase2.xhtml");
             ExportProcess();
 
-            //_expected.Clear();
             string styleName = "t1_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[1][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             string content = "T1 class ";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t2_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T2 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t3_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[3][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T3 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t2_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[4][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T2 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t4_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[5][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T4 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t1_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[6][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T1 class ";
             result = ValidateNodeContent(_outputStory, content);
@@ -285,33 +263,25 @@ namespace Test.InDesignConvert
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/NestedDivCase3.xhtml");
             ExportProcess();
 
-            //_expected.Clear();
             string styleName = "t1_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[1][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             string content = "T1 class ";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t3_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T3 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t4_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[3][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T4 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t1_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[4][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T1 class ";
             result = ValidateNodeContent(_outputStory, content);
@@ -328,65 +298,49 @@ namespace Test.InDesignConvert
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/NestedDivCase4.xhtml");
             ExportProcess();
 
-            //_expected.Clear();
             string styleName = "t1_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[1][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             string content = "T1 class ";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t2_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T2 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t3_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[3][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T3 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t4_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[4][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T4 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t2_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[5][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T2 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t4_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[6][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T4 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t4_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[7][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T4 class ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //_expected.Clear();
             styleName = "t1_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[8][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "T1 class ";
             result = ValidateNodeContent(_outputStory, content);
@@ -709,22 +663,6 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
         }
 
-        //[Test]
-        //public void PseudoBefore()
-        //{
-        //    _storyXML = new InStory();
-        //    _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/PsudoBefore.css");
-        //    _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/PsudoBefore.xhtml");
-        //    ExportProcess();
-
-        //    _expected.Clear();
-        //    string styleName = "sense-sense..before_senses_entry_letData";
-        //    XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
-        //    string content = "before";
-        //    bool result = ValidateNodeContent(_outputStory, content);
-        //    Assert.IsTrue(result, styleName + " test Failed");
-        //}
-
         [Test]
         public void Parent1()
         {
@@ -1020,13 +958,6 @@ namespace Test.InDesignConvert
             string content = " ";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
-
-            //_expected.Clear();
-            //string styleName = "[No character style]";
-            //_expected.Add(styleName, " ");
-            //XPath = "//ParagraphStyleRange/CharacterStyleRange[2][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
-            //bool result = StoryXmlNodeTest(false);
-            //Assert.IsTrue(result, styleName + " test Failed");
         }
 
         /// <summary>
@@ -1247,14 +1178,12 @@ namespace Test.InDesignConvert
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //styleName = "olFirst.li_b_section_body";
             styleName = "olFirst.li_2";
             XPath = "//ParagraphStyleRange[@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "one1 ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            //styleName = "ol4Next.li_b_section_body";
             styleName = "ol4Next.li_2";
             XPath = "//ParagraphStyleRange[@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "two2 ";
@@ -1765,7 +1694,6 @@ namespace Test.InDesignConvert
             _inputCSS= Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case1.css");
             ExportProcess();
             string styleName = "h1_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             string content = "h1 lang";
             bool result = ValidateNodeContent(_outputStory, content);
@@ -1776,7 +1704,6 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case2.css");
             ExportProcess();
             styleName = "h1_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[1][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "h1 only ";
             result = ValidateNodeContent(_outputStory, content);
@@ -1786,7 +1713,6 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case3.css");
             ExportProcess();
             styleName = "h1_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[1][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "h1 only ";
             result = ValidateNodeContent(_outputStory, content);
@@ -1796,7 +1722,6 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case4.css");
             ExportProcess();
             styleName = "h1_.en_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "h1 lang";
             result = ValidateNodeContent(_outputStory, content);
@@ -1807,7 +1732,6 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case5.css");
             ExportProcess();
             styleName = "h1.a_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[3][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = " h1 class ";
             result = ValidateNodeContent(_outputStory, content);
@@ -1818,7 +1742,6 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case6.css");
             ExportProcess();
             styleName = "h1.a_.en_1";
-            //_expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[4][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "h1 class lang ";
             result = ValidateNodeContent(_outputStory, content);
@@ -2039,14 +1962,6 @@ namespace Test.InDesignConvert
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
             preProcessor.InsertEmptyXHomographNumber(cssClass);
 
-            ////To insert the variable for macro use
-            //InInsertMacro insertMacro = new InInsertMacro();
-            //insertMacro.InsertMacroVariable(projInfo, cssClass);
-
-            //string outputStory2 = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_2.xml");
-            //Common.DeleteFile(outputStory2);
-            //File.Create(outputStory2);
-
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             InStyles inStyles = new InStyles();
             projInfo.TempOutputFolder = _outputPath;
@@ -2054,9 +1969,6 @@ namespace Test.InDesignConvert
 
             InGraphic inGraphic = new InGraphic();
             inGraphic.CreateIDGraphic(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), cssClass, cssTree.cssBorderColor);
-
-            //string fileName = Common.PathCombine(projInfo.ProjectPath, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
-            //projInfo.DefaultXhtmlFileWithPath = Common.ImagePreprocess(fileName);
 
             InStory inStory = new InStory();
             Dictionary<string, ArrayList> StyleName = inStory.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
@@ -2074,12 +1986,7 @@ namespace Test.InDesignConvert
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
 
             // Compare files
-            
-            //string expectedFolder = Common.PathCombine(_testFolderPath, "Expected\\BuangExpect");
             string expectedFolder = Common.PathCombine(_testFolderPath, "Expected\\" + fileName);
-            //string output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
-            //string expected = Common.PathCombine(expectedFolder, "designmap.xml");
-            //XmlAssert.AreEqual(output, expected, " designmap.xml is not matching");
 
             string output = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_" + fileNo + ".xml");
             string expected = Common.PathCombine(expectedFolder, "Stories\\Story_" + fileNo + ".xml");
@@ -2115,15 +2022,6 @@ namespace Test.InDesignConvert
             output = Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads\\MasterSpread_First.xml");
             expected = Common.PathCombine(expectedFolder, "MasterSpreads\\MasterSpread_First.xml");
             XmlAssert.AreEqual(output, expected, " MasterSpread_First.xml is not matching");
-
-            //output = Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads\\MasterSpread_Left.xml");
-            //expected = Common.PathCombine(expectedFolder, "MasterSpreads\\MasterSpread_Left.xml");
-            //XmlAssert.AreEqual(output, expected, " MasterSpread_Left.xml is not matching");
-            
-            //output = Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads\\MasterSpread_Right.xml");
-            //expected = Common.PathCombine(expectedFolder, "MasterSpreads\\MasterSpread_Right.xml");
-            //XmlAssert.AreEqual(output, expected, " MasterSpread_Right.xml is not matching");
-
         }
 
         [Test]

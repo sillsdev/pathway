@@ -40,13 +40,8 @@ namespace SIL.PublishingSolution
 
         public bool Handle(string inputDataType)
         {
-            bool returnValue = false;
-            if (inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture")
-            {
-                returnValue = true;
-            }
+            bool returnValue = inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture";
             return returnValue;
-
         }   
 
         /// <summary>
@@ -56,14 +51,10 @@ namespace SIL.PublishingSolution
         {
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
-            //preProcessor.RemoveEmptySpanHeadword(preProcessor.ProcessedXhtml);
             preProcessor.InsertEmptyHeadwordForReversal(preProcessor.ProcessedXhtml);
             MergeProcessInXHTMLforMasterPage(preProcessor.ProcessedXhtml);
             preProcessor.PreserveSpace();
             preProcessor.ImagePreprocess(true);
-            //preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
-            //preProcessor.InsertInDesignFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
-
             preProcessor.ReplaceInvalidTagtoSpan("_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes", "span");
             preProcessor.InsertHiddenChapterNumber();
             preProcessor.InsertHiddenVerseNumber();
@@ -81,11 +72,7 @@ namespace SIL.PublishingSolution
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            
             cssClass = MergeProcessInCSSforMasterPage(projInfo.DefaultCssFileWithPath, cssClass);
-
-            //return false;
             preProcessor.InsertEmptyXHomographNumber(cssClass);
 
             //To insert the variable for macro use
@@ -220,7 +207,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-
         private bool ValidateXHTMLFiles(string[] fileNames)
         {
             bool result = false;
@@ -237,12 +223,9 @@ namespace SIL.PublishingSolution
             return result;
         }
 
-
-
         private void Compress(string sourceFolder, string ldmlFullName)
         {
             var mODT = new ZipFolder();
-            //string outputPathWithFileName = DefaultXhtmlFileWithPath.Replace(".xhtml", ".idml");
             mODT.CreateZip(sourceFolder, ldmlFullName, 0);
         }
 
@@ -268,7 +251,6 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-
         #endregion
     }
 }

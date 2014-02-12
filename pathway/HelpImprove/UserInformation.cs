@@ -206,12 +206,6 @@ namespace SIL.PublishingSolution
             frameworkVersion = GetFrameworkVersion(OSName);
             geoLocation = "Unknown";
             userSystemGuid = GetUserSystemGuid(OSName);
-
-            //if (IsDeveloperInfo())
-            //{
-            //    return;
-            //}
-
             if (sendUserInfo)
             {
                 SetToPHP(userSystemGuid, oSName, oSServicePack, pathwayVersion, javaVersion, paratext, tEVersion, libraofficeVersion, prince, xelatexVersion,
@@ -686,22 +680,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string GetFontLists()
-        {
-            //InstalledFontCollection Required System.Drawing.Text Assembly
-
-            //string listOfFont = string.Empty;
-            //// Create an instance of the InstalledFontCollection class
-            //InstalledFontCollection fonts = new InstalledFontCollection();
-            ////Loop through all the fonts in the system.
-            //foreach (FontFamily family in fonts.Families)
-            //{
-            //    listOfFont += family.Name + ",";
-            //}
-            //return listOfFont;
-            return string.Empty;
-        }
-
         public string GetOsName()
         {
             try
@@ -793,8 +771,6 @@ namespace SIL.PublishingSolution
 
                 // grab te response and print it out to the console along with the status code
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                //Console.WriteLine(new StreamReader(response.GetResponseStream()).ReadToEnd());
-                //Console.WriteLine(response.StatusCode);
 
                 var consoleString = (new StreamReader(response.GetResponseStream()).ReadToEnd());
                 var consoleStatusString = (response.StatusCode);

@@ -67,7 +67,6 @@ namespace SIL.PublishingSolution
                     return "";
                 }
                 return ((AssemblyFileVersionAttribute) attributes[0]).Version;
-                //return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
 

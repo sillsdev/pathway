@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using System.Text;
 using System.Xml;
-using System.Xml.Schema;
-using SIL.PublishingSolution;
 
 namespace SIL.PublishingSolution
 {

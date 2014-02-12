@@ -273,7 +273,6 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
             Param.LoadSettings();
             Param.SetValue(Param.InputType, "Scripture");
             Param.LoadSettings();
-            //string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
         }
 
         protected static void LoadXslt()

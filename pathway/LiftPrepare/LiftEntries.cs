@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-
-using System.Text;
 using System.Xml;
 
 namespace SIL.PublishingSolution
@@ -90,11 +87,6 @@ namespace SIL.PublishingSolution
 
         public LiftEntries(XmlNodeList entries)
         {
-            //this.entries = new LiftEntry[entries.Count];
-            //for (int i = 0; i < entries.Count; i++)
-            //{
-            //    this.entries[i] = new LiftEntry(entries[i]);
-            //}
             foreach (XmlNode entry in entries)
             {
                 this.entries.Add(new LiftEntry(entry));

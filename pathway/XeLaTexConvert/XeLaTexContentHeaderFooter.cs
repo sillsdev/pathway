@@ -16,15 +16,8 @@
 
 #region Using
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Threading;
 using System.Xml;
-using System.Drawing;
-using System.IO;
 using SIL.Tool;
 
 #endregion Using
@@ -82,7 +75,6 @@ namespace SIL.PublishingSolution
             }
             else if (_contentType == "GF" || _contentType == "GL")
             {
-                //WriteGuidewordVariable(className);
                 WriteGuidewordVariable(headwordStyle, className);
             }
             else if (_contentType == "BL CL:VL" || _contentType == "BF CF:VF")
@@ -227,7 +219,6 @@ namespace SIL.PublishingSolution
                     styleName = "CharacterStyle/" + styleName;
                     // Note: GuideWord Character Start Element
                     _writer.WriteStartElement("CharacterStyleRange");
-                    //_writer.WriteAttributeString("AppliedCharacterStyle", styleName);
                     _writer.WriteAttributeString("AppliedCharacterStyle", PageStyleName);
                     if (_contentType == "GF")
                     {
@@ -257,8 +248,6 @@ namespace SIL.PublishingSolution
                         _writer.WriteStartElement("CharacterStyleRange");
                         _writer.WriteAttributeString("AppliedCharacterStyle",
                                                      "CharacterStyle/xhomographnumber_headword_entry_letData_dicBody");
-                        //_writer.WriteAttributeString("AppliedCharacterStyle",
-                        //                            homoStyleName);
                         if (_contentType == "GF")
                         {
                             _writer.WriteAttributeString("PageNumberType", "TextVariable");

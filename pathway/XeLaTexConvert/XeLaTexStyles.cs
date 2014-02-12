@@ -27,13 +27,10 @@ namespace SIL.PublishingSolution
     {
         #region Private Variables
 
-        //XmlTextWriter _writer;
-
         Dictionary<string, Dictionary<string, string>> _cssProperty = new Dictionary<string, Dictionary<string, string>>();
         Dictionary<string, Dictionary<string, string>> _IDAllClass = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, string> _IDProperty = new Dictionary<string, string>();
         private Dictionary<string, string> _IDClass = new Dictionary<string, string>();
-        //CSSTree _cssTree = new CSSTree();
         XeLaTexMapProperty mapProperty = new XeLaTexMapProperty();
         private StreamWriter _xetexFile;
         private List<string> _inlineStyle;
@@ -41,8 +38,6 @@ namespace SIL.PublishingSolution
         private List<string> _includePackageList;
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
         public Dictionary<string, List<string>> _classInlineText = new Dictionary<string, List<string>>();
-        //public InDesignStyles InDesignStyles;
-        //public ArrayList _FootNote;
         protected bool IsMirrored = false;
         public StringBuilder PageStyle = new StringBuilder();
         readonly Dictionary<string, string> _pageStyleFormat = new Dictionary<string, string>();
@@ -73,13 +68,12 @@ namespace SIL.PublishingSolution
                 _projInfo = projInfo;
                 LoadPageStyleFormat();
                 CreatePageStyle();
-                CreateStyle();  // CODE HERE
+                CreateStyle();
             }
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
             }
-            //return _IDAllClass;
             return _classInlineStyle;
         }
 
@@ -155,7 +149,6 @@ namespace SIL.PublishingSolution
                 SetPageHeaderFooter(pageName);
             }
             PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \\renewcommand{\\footrulewidth}{0.4pt}");
-            //PageStyle.AppendLine("\\fancyfoot{}");
         }
 
         private void SetPageHeaderFooter(string pageName)
@@ -167,9 +160,6 @@ namespace SIL.PublishingSolution
                 if (_cssProperty.ContainsKey(currentPagePosition))
                 {
                     Dictionary<string, string> cssProp = _cssProperty[currentPagePosition];
-                    
-
-                    //_LOProperty = mapProperty.IDProperty(cssProp););
                     foreach (KeyValuePair<string, string> para in cssProp)
                     {
                         if (para.Key == "content" && _pageStyleFormat.ContainsKey(currentPagePosition))
@@ -201,15 +191,13 @@ namespace SIL.PublishingSolution
                         }
                         else if (para.Key.ToLower() == "-ps-referenceformat")
                         {
-                            //if (_projInfo.HeaderReferenceFormat.Trim().Length == 0)
-                                _projInfo.HeaderReferenceFormat = para.Value;
+                            _projInfo.HeaderReferenceFormat = para.Value;
                         }
                     }
 
 
                 }
             }
-           // PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \\renewcommand{\\footrulewidth}{0.4pt}");
         }
 
         private void CreatePageFirstPage()
@@ -241,81 +229,13 @@ namespace SIL.PublishingSolution
             if (_cssProperty.ContainsKey(pageName))
             {
                 Dictionary<string, string> cssClass1 = _cssProperty[pageName];
-                //_LOProperty = mapProperty.IDProperty(cssClass1);
-                //foreach (KeyValuePair<string, string> para in _LOProperty)
-                //    if (para.Key.ToLower() == "-ps-referenceformat-string")
-                //    {
-                //        _styleName.ReferenceFormat = para.Value.Replace("\"", "");
-                //    }
-                //    else if (para.Key == "border-top"
-                //             || para.Key == "border-top-style"
-                //             || para.Key == "border-top-width"
-                //             || para.Key == "border-top-color"
-                //             || para.Key == "border-bottom"
-                //             || para.Key == "border-left"
-                //             || para.Key == "border-right"
-                //             || para.Key == "margin-top"
-                //             || para.Key == "margin-bottom"
-                //             || para.Key == "margin-left"
-                //             || para.Key == "margin-right"
-                //             || para.Key == "padding-top"
-                //             || para.Key == "padding-bottom"
-                //             || para.Key == "padding-left"
-                //             || para.Key == "padding-right"
-                //             || para.Key == "visibility")
-                //    {
-                //        pageLayoutProperty[_allPageLayoutProperty[para.Key].ToString() + para.Key] =
-
-                //            para.Value;
-                //    }
-                //    else if (para.Key == "size" || para.Key == "page-width" || para.Key == "page-height")
-                //    {
-                //        if (para.Value.ToLower() == "landscape" || para.Value.ToLower() == "portrait" ||
-                //            para.Value.ToLower() == "auto")
-                //        {
-                //            pageLayoutProperty["style:print-orientation"] = para.Value.ToLower();
-                //        }
-                //        else
-                //        {
-                //            pageLayoutProperty[_allPageLayoutProperty[para.Key].ToString() + para.Key] = para.Value;
-                //        }
-                //    }
-                //    else if (para.Key == "color" || para.Key == "background-color")
-                //    {
-                //        pageLayoutProperty[_allPageLayoutProperty[para.Key].ToString() + para.Key] = para.Value;
-                //    }
-                //    else if (para.Key == "marks" && para.Value == "crop")
-                //    {
-                //        //StylesXML.IsCropMarkChecked = true;
-                //    }
-                //    else if (para.Key.ToLower() == "dictionary")
-                //    {
-                //        if (para.Value == "true")
-                //        {
-                //            //_isDictionary = true;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        //styleAttributeInfo = _mapProperty.MapSingleValue(styleAttributeInfo);
-                //    }
+                
             }
             return pageLayoutProperty;
         }
 
         private void CreateStyle()
         {
-            //foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssProperty)
-            //{
-            //    if (cssClass.Key.IndexOf("@page") >= 0 && (cssClass.Key.IndexOf("@page-") == -1 && cssClass.Key.IndexOf("@page:") == -1))
-            //    {
-            //        _inlineStyle = new List<string>();
-            //        _includePackageList = new List<string>();
-            //        string xeLaTexProperty = mapProperty.XeLaTexPageProperty(cssClass.Value, cssClass.Key, _inlineStyle, _includePackageList);
-            //        _classInlineStyle[cssClass.Key] = _includePackageList;
-            //    }
-
-            //}
             //\font\hoefler="Hoefler Text/B:Letter Case=Small Caps" at 12pt
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssProperty)
             {
@@ -328,43 +248,11 @@ namespace SIL.PublishingSolution
                 _inlineText = new List<string>();
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
                 string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList, _inlineText, LangFontDictionary);
-
-                //if (_inlineStyle.Count > 0)
-                {
-                    _classInlineStyle[replaceNumberInStyle] = _inlineStyle;
-                    if (_inlineText.Count > 0)
-                        _classInlineText[replaceNumberInStyle] = _inlineText;
-                }
-                if (xeLaTexProperty.Trim().Length > 0 && Common.Testing)
-                {
-                    //_xetexFile.WriteLine(xeTexProperty);
-                }
-                //_IDClass = new Dictionary<string, string>(); // note: ToDo seperate the process
-                //_IDAllClass[cssClass.Key] = _IDClass;
-
-                //_xetexFile.WriteLine("nopagenumbers");
-
-                //foreach (KeyValuePair<string, string> property in _IDProperty)
-                //{
-                //    if (property.Key == "AppliedFont")
-                //    {
-                //        _IDClass[property.Key] = property.Value;
-                //        continue;
-                //    }
-                //    if (property.Key == "StrokeColor")
-                //    {
-                //        _IDClass[property.Key] = property.Value;
-                //        InsertBackgroundColor(property.Value);
-                //    }
-                //    else
-                //    {
-                //        _IDClass[property.Key] = property.Value;
-                //        _writer.WriteAttributeString(property.Key, property.Value);
-                //    }
-                //}
-
+                
+                _classInlineStyle[replaceNumberInStyle] = _inlineStyle;
+                if (_inlineText.Count > 0)
+                    _classInlineText[replaceNumberInStyle] = _inlineText;
             }
-            //_writer.WriteEndElement(); //End RootParagraphStyleGroup
         }
 
         private void DeleteRelativeInFootnote(KeyValuePair<string, Dictionary<string, string>> cssClass)

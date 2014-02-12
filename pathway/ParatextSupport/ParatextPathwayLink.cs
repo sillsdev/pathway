@@ -22,7 +22,6 @@ namespace SIL.PublishingSolution
         private XslCompiledTransform m_separateIntoBooks = new XslCompiledTransform();
         private XslCompiledTransform m_usxToXhtml = new XslCompiledTransform();
         private XslCompiledTransform m_encloseParasInSections = new XslCompiledTransform();
-        //private XslCompiledTransform m_encloseScrInColumns = new XslCompiledTransform();
 
         /// ------------------------------------------------------------------------------------
         /// <summary>
@@ -122,8 +121,6 @@ namespace SIL.PublishingSolution
         public void ExportToPathway(XmlDocument usxDoc)
         {
             //// TestBed Code
-            //// Save Paratext usxDoc file.
-            // usfxDoc.Save("d:\\usxDoc.xml");
             if (string.IsNullOrEmpty(usxDoc.InnerText))
             {
                 // TODO: Localize string
@@ -301,10 +298,6 @@ namespace SIL.PublishingSolution
 
             for (int iDoc = 1; iDoc < usxBooksToExport.Count; iDoc++)
             {
-                //bool usxRootNode
-                //XmlNode bookUsx = usxBooksToExport[iDoc].SelectSingleNode("/usfm") ??
-                //    usxBooksToExport[iDoc].SelectSingleNode("/usx");
-
                 foreach (XmlNode nodeToAdd in usxBooksToExport[iDoc].SelectSingleNode("/usfm|/usx").ChildNodes)
                 {
                     XmlNode prevNode = allBooks.SelectSingleNode("usfm|usx").LastChild;
@@ -372,8 +365,6 @@ namespace SIL.PublishingSolution
             {
                 XmlDocument scrBooksDoc = usxBooksToExport[iDoc];
                 string usx = scrBooksDoc.InnerXml;
-
-                //string prevNode = scrBooksDoc.SelectNodes("book").ToString();
 
                 var nsmgr1 = new XmlNamespaceManager(scrBooksDoc.NameTable);
                 nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");

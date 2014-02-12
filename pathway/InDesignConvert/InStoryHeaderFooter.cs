@@ -16,15 +16,8 @@
 
 #region Using
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Threading;
 using System.Xml;
-using System.Drawing;
-using System.IO;
 using SIL.Tool;
 
 #endregion Using
@@ -86,13 +79,10 @@ namespace SIL.PublishingSolution
             }
             else if (_contentType == "GF" || _contentType == "GL")
             {
-                //WriteGuidewordVariable(className);
                 WriteGuidewordVariable(headwordStyle, className);
             }
             else if (_contentType == "BL CL:VL" || _contentType == "BF CF:VF")
             {
-                //string stylename = "xhomographnumber_headword_entry_letData_dicBody";
-                
                 string position = _contentType.IndexOf("F") > 0 ? ReferencePosition.first.ToString() : ReferencePosition.last.ToString();
                 WriteBooknameVariable("CharacterStyle/" + stylename, position);
                 WriteSpecialCharacter(" ");
@@ -102,7 +92,6 @@ namespace SIL.PublishingSolution
             }
             else if (_contentType == "BF CF" || _contentType == "BL CL")
             {
-                //string stylename = "xhomographnumber_headword_entry_letData_dicBody";
                 string position = _contentType.IndexOf("F") > 0 ? "first" : "last";
                 WriteBooknameVariable("CharacterStyle/" + stylename, position);
                 WriteSpecialCharacter(" ");
@@ -110,7 +99,6 @@ namespace SIL.PublishingSolution
             }
             else if (_contentType == "BF CF:VF-CL:VL")
             {
-                //string stylename = "xhomographnumber_headword_entry_letData_dicBody";
                 WriteBooknameVariable("CharacterStyle/" + stylename, ReferencePosition.first.ToString());
                 WriteSpecialCharacter(" ");
                 WriteChapterVariable("CharacterStyle/" + stylename, ReferencePosition.first.ToString());
@@ -123,7 +111,6 @@ namespace SIL.PublishingSolution
             }
             else if (_contentType == "BF CF-CL")
             {
-                //string stylename = "xhomographnumber_headword_entry_letData_dicBody";
                 WriteBooknameVariable("CharacterStyle/" + stylename, ReferencePosition.first.ToString());
                 WriteSpecialCharacter(" ");
                 WriteChapterVariable("CharacterStyle/" + stylename, ReferencePosition.first.ToString());
@@ -227,7 +214,6 @@ namespace SIL.PublishingSolution
             bool isHomographExist = FindHomographNumber(GuideWordStyle);
             foreach (string sName in GuideWordStyle)
             {
-                //if (GuideWordStyle.Count > 2 && (sName.IndexOf("headword") >= 0 || sName.ToLower() == "reversal-form")) continue;
                 if (sName.IndexOf("Guideword") == 0)
                 {
                     string styleName = Common.RightString(sName, "_");
@@ -235,7 +221,6 @@ namespace SIL.PublishingSolution
                     // Note: GuideWord Character Start Element
                     _writer.WriteStartElement("CharacterStyleRange");
                     _writer.WriteAttributeString("AppliedCharacterStyle", styleName);
-                    //_writer.WriteAttributeString("AppliedCharacterStyle", PageStyleName);
                     if (_contentType == "GF")
                     {
                         _writer.WriteAttributeString("PageNumberType", "TextVariable");
@@ -264,8 +249,6 @@ namespace SIL.PublishingSolution
                         _writer.WriteStartElement("CharacterStyleRange");
                         _writer.WriteAttributeString("AppliedCharacterStyle",
                                                      "CharacterStyle/xhomographnumber_headword_entry_letData_dicBody");
-                        //_writer.WriteAttributeString("AppliedCharacterStyle",
-                        //                            homoStyleName);
                         if (_contentType == "GF")
                         {
                             _writer.WriteAttributeString("PageNumberType", "TextVariable");
@@ -298,7 +281,6 @@ namespace SIL.PublishingSolution
                     // Note: GuideWord Character Start Element
                     _writer.WriteStartElement("CharacterStyleRange");
                     _writer.WriteAttributeString("AppliedCharacterStyle", styleName);
-                    //_writer.WriteAttributeString("AppliedCharacterStyle", PageStyleName);
                     if (_contentType == "GF")
                     {
                         _writer.WriteAttributeString("PageNumberType", "TextVariable");

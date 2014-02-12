@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
 using SIL.Tool;
-using System.Threading;
 
 
 namespace SIL.PublishingSolution
@@ -319,18 +316,15 @@ namespace SIL.PublishingSolution
         protected void SwordOutputBuildProcess(string processFolder, string swordOutputPath, string[] osisFilesList, string projectPath)
         {
             string Creator = "osis2mod";
-            //Creator = Common.PathCombine(processFolder, Creator);
             string moreArguments = "-z -N -v NRSV";
             foreach (var osisFile in osisFilesList)
             {
                 var args = string.Format(@"""{0}"" ""{1}"" {2}", swordOutputPath, osisFile, moreArguments);
-                //SubProcess.RunCommandWithErrorLog(processFolder, Creator, args, true , projectPath);
 
                 const bool noWait = false;
                 string stdOutput = string.Empty;
                 string stdOutErr = string.Empty;
                 SubProcess.Run(processFolder, Creator, args, true);
-                //SubProcess.RunCommandWithErrorLog(processFolder, Creator, args, true, projectPath);
                 moreArguments = "-a -z -N -v NRSV";
 
             }

@@ -63,7 +63,6 @@ namespace SIL.PublishingSolution
             {
                 if (lstSourceCSS.SelectedIndex > 0)
                 {
-                    //Library lib = new Library();
                     webTemplatePreview.Visible = true;
                     cssFile = Common.PathCombine(Common.PathCombine(_supportFolder, _projectType), lstSourceCSS.Text);
                     _mergedCSS = Common.MakeSingleCSS(cssFile,"");
@@ -134,7 +133,6 @@ namespace SIL.PublishingSolution
              
                 XhtmlFile = txtXHTML.Text;
                 ProjectName = txtDicName.Text;
-                //m_projectName = Common.GetNewFolderName(m_dicPath, projectType, _projectName);
                 DicPath = txtLocation.Text;
                 if (!Directory.Exists(DicPath))
                 {
@@ -156,11 +154,6 @@ namespace SIL.PublishingSolution
                 if (numberIndex > 0)
                     fileName = fileName.Substring(0, numberIndex);
             }
-            //else
-            //{
-            //    fileName = "Dictionary";
-            //}
-            //txtDicName.Text = Common.GetNewFolderName(DicPath, fileName);
         }
 
         private void txtDicName_KeyPress(object sender, KeyPressEventArgs e)

@@ -57,25 +57,6 @@ namespace TestBed
                         AddSubTree(_nodeTemp, child, ctp);
                     }
                 }
-
-
-                ////if (r.Text != "nil")
-                ////{
-                ////    _nodeTemp.Nodes.Add("nil");
-                ////    AddSubTree(_nodeTemp, r, ctp);
-                ////}
-                ////else
-                ////{
-                //_nodeTemp.Text = r.Text;
-                //if (r.Text != "nil" || r.Text == "")
-                //{
-                //    _nodeTemp.Text = "nil";
-                //}
-                //foreach (CommonTree child in ctp.Children(r))
-                //{
-                //    AddSubTree(_nodeTemp, child, ctp);
-                //}
-                ////}
             }
             treeView1.Nodes.Clear();
             treeView1.Nodes.Add((TreeNode)_nodeTemp.Clone());

@@ -19,14 +19,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Reflection;
 using System.Windows.Forms;
-using System.Xml;
 using System.IO;
 using System.Text.RegularExpressions;
 using JWTools;
 using System.Collections;
-using System.Text;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -71,18 +68,6 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region Event(s)
-
-        private void btnGenerate_Click(object sender, EventArgs e)
-        {
-            //ExportOpenOffice ui = new ExportOpenOffice();
-            //ProgressBar pb = pbProcess.ProgressBar;
-            //ui.Process(pb, txtXHTML, txtCSS);
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
         private void OpenOfficeConverter_Load(object sender, EventArgs e)
         {
@@ -132,20 +117,16 @@ namespace SIL.PublishingSolution
             PanelFile.Visible = false;
 
             BtnScripture.BackColor = Color.LightSteelBlue;
-            //BtnScripture.ForeColor = Color.RoyalBlue;
             BtnPublishingFile.BackColor = Color.LightSteelBlue;
-            //BtnPublishingFile.ForeColor = Color.RoyalBlue;
             if (index == 1)
             {
                 PanelTask.Visible = true;
                 BtnScripture.BackColor = Color.Orange;
-                //BtnScripture.ForeColor = Color.Black;
             }
             else if (index == 3)
             {
                 PanelFile.Visible = true;
                 BtnPublishingFile.BackColor = Color.Orange;
-                //BtnPublishingFile.ForeColor = Color.Black;
             }
         }
 
@@ -200,7 +181,6 @@ namespace SIL.PublishingSolution
                 this.DictionaryExplorer.LabelEdit = false;
             }
             this.DictionaryExplorer.LabelEdit = false;
-            //projectInfo.PopulateTreeViewXML(projectInfo.m_dicPath, DictionaryExplorer);  // no need to populate 
         }
 
         private void DictionaryExplorer_MouseDown(object sender, MouseEventArgs e)
@@ -434,7 +414,6 @@ namespace SIL.PublishingSolution
             {
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message.ToString());
                 return;
             }
 
@@ -447,7 +426,6 @@ namespace SIL.PublishingSolution
 
         private void includeInProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //IncludeInProject();
             _projectInfo.XMLOperation(_mySelectedNode.Text, 'X', "False", false, "Include", "", true);
             _projectInfo.PopulateDicExplorer(DictionaryExplorer);
         }
@@ -460,7 +438,7 @@ namespace SIL.PublishingSolution
 
         public void ShowCSS(object sender, EventArgs e)
         {
-            _projectInfo._userRole = Param.UserRole; //.GetRole();
+            _projectInfo._userRole = Param.UserRole;
             _projectInfo.PopulateDicExplorer(DictionaryExplorer);
         }
 
@@ -484,13 +462,11 @@ namespace SIL.PublishingSolution
             else
             {
                 LocDB.Message("errSelectFile", "Please Select the File", null, LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
-                //MessageBox.Show("Please Select the File ", "Invalid selection");
             }
         }
 
         private void setAsDefaultCSSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //setAsDefaultCSS(m_mySelectedNode.Text, false);
             _projectInfo.XMLOperation(_mySelectedNode.Text, 'X', "False", false, "SetAsDefault", "", true);
             _projectInfo.PopulateDicExplorer(DictionaryExplorer);
         }
@@ -534,9 +510,6 @@ namespace SIL.PublishingSolution
         public void backupToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             var frmFont = new BackUp(_projectInfo.DictionaryPath, _projectInfo.ProjectInputType);
-            //TODO: Eliminate dependance on OpenOffice backend for project backup
-            //ICssFonts cssFonts = Backend.CreateObject(Common.PathCombine(_backendPath, "OpenOfficeConvert.dll"), "SIL.PublishingSolution.StylesXML") as ICssFonts;
-            //ArrayList fontList = cssFonts.GetFontList("BackupProcess", _projectInfo.DefaultCssFileWithPath);
             CssTree cssTree = new CssTree();
             ArrayList fontList = cssTree.GetFontList(_projectInfo.DefaultCssFileWithPath);
             for (int i = 0; i < fontList.Count; i++)
@@ -614,13 +587,11 @@ namespace SIL.PublishingSolution
             if (_projectInfo.DefaultXhtmlFileWithPath == null)
             {
                 LocDB.Message("errCreateorOpenDict", "Please Create/Open Dictionary or Add XHTML File", null, LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
-                //MessageBox.Show("Please Create/Open Dictionary or Add XHTML File", "Dictionary Express 1.0");
                 return false;
             }
             if (_projectInfo.DefaultCssFileWithPath == null)
             {
                 LocDB.Message("errSetDefaultCSS", "Please set default CSS file", null, LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
-                //MessageBox.Show("Please set default CSS file");
                 return false;
             }
             return true;
@@ -637,7 +608,6 @@ namespace SIL.PublishingSolution
             else
             {
                 _projectInfo.OpenProjectFile(DictionaryExplorer);
-                //projectInfo.ProjectProperty("fromOpen");
             }
             lblProjectType.Text = _projectInfo.ProjectInputType;
             ProjectType = _projectInfo.ProjectInputType;
@@ -651,20 +621,17 @@ namespace SIL.PublishingSolution
             if (_mySelectedNode == null)
             {
                 LocDB.Message("errSelectFile", "Please Select the File", null, LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
-                //MessageBox.Show("Please Select the File");
                 return;
             }
 
             if (_mySelectedNode.Text != _projectInfo.ProjectName)
             {
-                //MessageBox.Show(m_mySelectedNode.Tag.ToString());
                 Common.FileType fileType = (Common.FileType)_mySelectedNode.Tag;
                 if (Remove)
                 {
                     removeOrDelete = "Remove";
                     try
                     {
-                        //if (m_mySelectedNode.Tag.ToString() == "D" || mySelectedNode.Tag.ToString() == "DE")
                         if (fileType == Common.FileType.Directory || fileType == Common.FileType.DirectoryExcluded)
                         {
                             var msg = new[] { _mySelectedNode.Text };
@@ -775,7 +742,6 @@ namespace SIL.PublishingSolution
             if (_projectInfo.DefaultXhtmlFileWithPath == null)
             {
                 LocDB.Message("errSelectValidXHTML", "Please select the valid XHTML file", null, LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
-                //MessageBox.Show("Please select the valid XHTML file");
                 invalidFile = true;
             }
             else if (_projectInfo.DefaultCssFileWithPath == null)
@@ -810,15 +776,6 @@ namespace SIL.PublishingSolution
         {
             webPreview.Dispose();
             txtCSS.Visible = true;
-            //var stylePick = new PublicationTask
-            //                    {
-            //                        InputPath = _projectInfo.DictionaryPath,
-            //                        CurrentInput = _projectInfo.DefaultXhtmlFileWithPath,
-            //                        InputType = _projectInfo.ProjectInputType,
-            //                        ProjectName = _projectInfo.ProjectName,
-            //                        ExcerptPreview = this.ExcerptPreview
-            //                    };
-            //stylePick.ShowDialog();
             Param.SetValue(Param.InputPath, _projectInfo.DictionaryPath);
             Param.SetValue(Param.CurrentInput, _projectInfo.DefaultXhtmlFileWithPath);
             Param.SetValue(Param.InputType, _projectInfo.ProjectInputType);
@@ -837,8 +794,6 @@ namespace SIL.PublishingSolution
             }
 
             var sheet = Param.TaskSheet(_currentTask);
-            //_projectInfo.PopulateDicExplorer(DictionaryExplorer);
-            //string cssFile = stylePick.cssFile;
             string cssFile = Param.GetAttrByName("styles/paper/style", sheet, "file");
             if (cssFile == null)
             {
@@ -902,10 +857,7 @@ namespace SIL.PublishingSolution
 
                 }
             }
-            //if (_backendPath.Length == 0)
-            //{
-            //    _backendPath = Common.PathCombine(Common.GetPSApplicationPath(), "BackEnds");
-            //}
+
             if (_backendPath.Length == 0)
             {
                 _backendPath = Common.GetPSApplicationPath();
@@ -987,9 +939,7 @@ namespace SIL.PublishingSolution
         {
             if (_cssEdited)
             {
-                //File.WriteAllText(projectInfo.m_cssFile, txtCSS.Text);
                 File.WriteAllText(_projectInfo.FullPath, txtCSS.Text);
-                //txtCSS.BackColor = Color.White;
             }
             CSSReadOnly(true);
             _cssEdited = false;
@@ -1023,7 +973,6 @@ namespace SIL.PublishingSolution
             {
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message.ToString());
             }
             return projectName;
         }
@@ -1122,15 +1071,11 @@ namespace SIL.PublishingSolution
                 webPreview.Dispose();
                 webPreview = new WebBrowser();
                 this.webPreview.Location = new Point(83, 120);
-                //this.webPreview.Size = new Size(63, 68);
                 this.webPreview.TabIndex = 40;
                 this.webPreview.AccessibleName = "webPreview";
                 webPreview.Dock = DockStyle.Fill;
                 this.panel3.Controls.Add(this.webPreview);
                 string mergedCSS = string.Empty;
-                //this.Controls.Add(webPreview);
-                //webPreview.Left = 215;
-                //webPreview.Top = 30;
                 string outputFileName = Common.PathCombine(Path.GetDirectoryName(_projectInfo.DefaultXhtmlFileWithPath), "Pdfpreview.pdf");
                 if (File.Exists(_projectInfo.DefaultCssFileWithPath))
                     mergedCSS = Common.MakeSingleCSS(_projectInfo.DefaultCssFileWithPath, "");
@@ -1151,7 +1096,6 @@ namespace SIL.PublishingSolution
             {
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
-                //MessageBox.Show(ex.Message.ToString());
                 return;
             }
         }
@@ -1317,7 +1261,6 @@ namespace SIL.PublishingSolution
                 button.FlatAppearance.MouseDownBackColor = _selectedColor;
                 button.FlatAppearance.MouseOverBackColor = _mouseOverColor;
                 button.FlatStyle = FlatStyle.Flat;
-                //button.TabIndex = 0;
                 button.UseVisualStyleBackColor = true;
 
                 locationY += height;

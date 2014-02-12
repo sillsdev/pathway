@@ -14,11 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
-using System.IO;
 using System.Xml;
-using System.Collections.Generic;
-using System.Collections;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -185,8 +181,6 @@ namespace SIL.PublishingSolution
         {
             _writer.WriteStartElement("TinDocumentDataObject");
             _writer.WriteStartElement("Properties");
-            //_writer.WriteStartElement("GaijiRefMaps");
-            //_writer.WriteEndElement();
             _writer.WriteEndElement();
             _writer.WriteEndElement();
         }
@@ -993,21 +987,6 @@ namespace SIL.PublishingSolution
 
         public void CreateAnchoredObjectSetting()
         {
-            //_writer.WriteStartElement("AnchoredObjectSetting");
-            //_writer.WriteAttributeString("AnchoredPosition", "InlinePosition");
-            //_writer.WriteAttributeString("SpineRelative", "false");
-            //_writer.WriteAttributeString("LockPosition", "false");
-            //_writer.WriteAttributeString("PinPosition", "true");
-            //_writer.WriteAttributeString("AnchorPoint", "BottomRightAnchor");
-            //_writer.WriteAttributeString("HorizontalAlignment", "LeftAlign");
-            //_writer.WriteAttributeString("HorizontalReferencePoint", "TextFrame");
-            //_writer.WriteAttributeString("VerticalAlignment", "TopAlign");
-            //_writer.WriteAttributeString("VerticalReferencePoint", "LineBaseline");
-            //_writer.WriteAttributeString("AnchorXoffset", "0");
-            //_writer.WriteAttributeString("AnchorYoffset", "0");
-            //_writer.WriteAttributeString("AnchorSpaceAbove", "0");
-            //_writer.WriteEndElement();
-
             _writer.WriteStartElement("AnchoredObjectSetting");
             _writer.WriteAttributeString("AnchoredPosition", "Anchored");
             _writer.WriteAttributeString("SpineRelative", "false");

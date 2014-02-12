@@ -36,7 +36,7 @@ namespace SIL.PublishingSolution
                 StaticMethod1(projectPath);
                 CreateFootnoteOption();
                 StaticMethod2();
-                CreateDocumentPreference(); // CODE HERE
+                CreateDocumentPreference();
                 StaticMethod3();
                 return true;
             }

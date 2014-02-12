@@ -15,15 +15,12 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using JWTools;
 using System.IO;
-using System.Xml;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -83,20 +80,6 @@ namespace SIL.PublishingSolution
 
             if (Param.Value.Count > 0)
             {
-                //                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                //                {
-                //                    //this.Icon = new Icon("Graphic/BOOK.ico");
-                //                }
-                //                else
-                //                {
-                //                    using (MemoryStream memoryStream = new MemoryStream())
-                //                    {
-                ////                        var image = Image.FromFile("Graphic/book.png");
-                ////                        image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Icon);
-                ////                        memoryStream.Position = 0;
-                ////                        this.Icon = new Icon(memoryStream);
-                //                    }
-                //                }
                 JW_Registry.RootKey = @"SOFTWARE\The Seed Company\Dictionary Express!";
                 LocDB.SetAppTitle();
                 LocDB.BaseName = "PsLocalization.xml";
@@ -177,7 +160,6 @@ namespace SIL.PublishingSolution
                 ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem(roles[i])
                                                           {
                                                               Name = roles[i],
-                                                              //Image = imageList.Images[i]
                                                           };
                 toolStripMenuItem.Click += this.MenuRoleChild_Click;
                 menuRole.DropDownItems.Add(toolStripMenuItem);
@@ -442,8 +424,7 @@ namespace SIL.PublishingSolution
                 RefreshWindowMenu();
                 objConverter.ShowPreview(sender, e, menuExcerptPreview.Checked);
 
-                string currentRole = Param.UserRole; //.GetRole();
-                //string currentRole = "System manager";// For Testing
+                string currentRole = Param.UserRole;
                 SetRoleChecked(currentRole);
                 ShowCSSBasedOnRole(sender, e);
             }
@@ -498,7 +479,6 @@ namespace SIL.PublishingSolution
         {
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
             Param.UserRole = menuItem.Text;
-            //Param.SetRole(menuItem.Text);
             SetRoleChecked(menuItem.Text);
             ShowCSSBasedOnRole(sender, e);
         }
@@ -508,8 +488,6 @@ namespace SIL.PublishingSolution
             if (this.ActiveMdiChild != null)
             {
                 Form activeChild = this.ActiveMdiChild;
-
-                //ActivateMdiChild(null);
                 ActivateMdiChild(activeChild);
             }
         }
@@ -537,7 +515,6 @@ namespace SIL.PublishingSolution
                                        ExcerptPreview = menuExcerptPreview.Checked
                                    };
             _count++;
-            //objConverter.Text = "Dictionary" + _count;
             objConverter.Text = "";
             string projectName = objConverter.New(_count);
             if (projectName != null)
@@ -812,9 +789,6 @@ namespace SIL.PublishingSolution
                 frmChild.EntrySort(entrySortToolStripMenuItem.Checked);
             }
         }
-
-
-
     }
     #endregion
 }

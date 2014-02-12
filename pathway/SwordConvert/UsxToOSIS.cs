@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Text;
 using System.Xml;
-using Microsoft.Win32;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -409,22 +406,6 @@ namespace SIL.PublishingSolution
             {
                 _writer.WriteEndElement();
             }
-
-            //if (tag == "para")
-            //{
-            //    //_writer.WriteString();
-            //    _verseNumber = string.Empty;
-            //}
-            //else if (tag == "note")
-            //{
-            //    string line = "\\" + style + "*";
-            //    _writer.WriteString(line);
-            //}
-            //else if (tag != "verse")
-            //{
-            //    _style = string.Empty;
-            //    _tagName = StackPeek(_alltagName);
-            //}
         }
 
         /// <summary>
@@ -451,7 +432,6 @@ namespace SIL.PublishingSolution
                     {
                         _isclassNameExist = true;
                         _style = _reader.Value;
-                        //_writer.WriteAttributeString(_reader.Name, _reader.Value);
                     }
                     else if (_reader.Name == "number")
                     {
@@ -459,7 +439,6 @@ namespace SIL.PublishingSolution
                         if (_tagName == "verse")
                         {
                             _verseNumber = _number;
-                            //_writer.WriteAttributeString("osisID", _reader.Value);
                         }
                         else
                         {
@@ -651,16 +630,12 @@ namespace SIL.PublishingSolution
                 {
                     _writer.WriteStartElement("char");
                 }
-
-                //_writer.WriteAttributeString("type", "source");
             }
 
             else
             {
                 _writer.WriteStartElement(_tagName);
             }
-
-
             //Write Attributes
 
             if (_isEmptyNode)
@@ -673,37 +648,6 @@ namespace SIL.PublishingSolution
                 _allStyle.Push(_style);
                 _alltagName.Push(_tagName);
             }
-
-
-
-            //if (_isEmptyNode)
-            //{
-            //    if (_tagName != "verse")
-            //    {
-            //        WriteStyle(_style);
-            //        if (_tagName == "char")
-            //        {
-            //            _writer.WriteString(Space);
-            //        }
-            //    }
-            //    _isEmptyNode = false;
-            //}
-            //else
-            //{
-            //    if (_tagName == "chapter")
-            //    {
-            //        WriteStyle(_style);
-            //        //_writer.WriteString();
-            //        _isEmptyNode = false;
-            //    }
-            //    else if (_tagName == "para")
-            //    {
-            //        _isParaWritten = false;
-            //    }
-
-            //    _allStyle.Push(_style);
-            //    _alltagName.Push(_tagName);
-            //}
         }
 
         private void WriteStyle(string style)
@@ -799,17 +743,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-
-        ///// <summary>
-        ///// Write Para Tag Information
-        ///// </summary>
-        //private void Para()
-        //{
-        //    string line = "\\" + _style + Space;
-        //    _writer.WriteString(line);
-        //    _tagName = "others";
-        //}
-
         private void MapClassName()
         {
             _mapClassName["toc1"] = "scrBookCode";
@@ -837,16 +770,11 @@ namespace SIL.PublishingSolution
         private string SignificantSpace(string content)
         {
             if (content == null) return "";
-            //string content = _reader.Value;
             content = content.Replace("\r\n", "");
             content = content.Replace("\n", "");
             content = content.Replace("\t", "");
             Char[] charac = content.ToCharArray();
             StringBuilder builder = new StringBuilder();
-            //if (charac.Length == 1)
-            //{
-            //    return content;
-            //}
             foreach (char var in charac)
             {
                 if (var == ' ' || var == '\b')
@@ -865,7 +793,6 @@ namespace SIL.PublishingSolution
             }
             content = builder.ToString();
             return content;
-            //_writer.WriteString(content);
         }
 
         private string StackPop(Stack<string> stack)
@@ -906,13 +833,11 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("osis");
             _writer.WriteAttributeString("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
             _writer.WriteAttributeString("xmlns", "http://www.bibletechnologies.net/2003/OSIS/namespace");
-            //_writer.WriteAttributeString("xmlns:osis", "http://www.bibletechnologies.net/2003/OSIS/namespace");
             _writer.WriteAttributeString("xsi:schemaLocation", "http://www.bibletechnologies.net/2003/OSIS/namespace file:../osisCore.2.0_UBS_SIL_BestPractice.xsd");
             _writer.WriteStartElement("osisText");
             _writer.WriteAttributeString("osisIDWork", "thisWork");
             _writer.WriteAttributeString("osisRefWork", "bible");
             _writer.WriteAttributeString("xml:lang", xhtmlLang);
-            //_writer.WriteAttributeString("canonical", "true");
             _writer.WriteStartElement("header");
             _writer.WriteStartElement("work");
             _writer.WriteAttributeString("osisWork", "thisWork");
@@ -1009,9 +934,6 @@ namespace SIL.PublishingSolution
         private void CloseFile()
         {
             _writer.WriteEndElement();
-            //_writer.WriteEndElement();
-            //_writer.WriteEndElement();
-
             _writer.WriteEndDocument();
             _writer.Flush();
             _writer.Close();

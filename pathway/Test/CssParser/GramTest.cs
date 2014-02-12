@@ -17,7 +17,6 @@
 using System;
 using System.IO;
 using ANTLR_CSS;
-using Antlr.Runtime.Tree;
 using NUnit.Framework;
 using SIL.Tool;
 

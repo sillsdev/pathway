@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Windows.Forms;
 using System.Xml;
-using Microsoft.Win32;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -397,7 +395,6 @@ namespace SIL.PublishingSolution
                 {
                     cssFile.Write(" font-family: \"{0}\";", fontFamily);
                 }
-                //cssFile.Write(" font-size: \"{0}pt\";", fontSize);
                 cssFile.WriteLine("}");
                 cssFile.WriteLine();
             }

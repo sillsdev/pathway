@@ -15,18 +15,14 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
-using Test;
 
 namespace SIL.PublishingSolution
 {
@@ -90,10 +86,8 @@ namespace SIL.PublishingSolution
             {
                 Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
             }
-            // preProcessor.GetTempFolderPath();
             preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
             preProcessor.XelatexImagePreprocess();
-            //preProcessor.MovePictureAsLastChild(projInfo.DefaultXhtmlFileWithPath);
             Param.LoadSettings();
             string organization;
             try
@@ -107,7 +101,6 @@ namespace SIL.PublishingSolution
                 // but just in case, specify a default org.
                 organization = "SIL International";
             }
-            //_tableOfContent = Param.GetMetadataValue(Param.TableOfContents, organization) ?? ""; // empty string if null / not found
             _coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, organization));
             _coverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, organization);
 
@@ -155,7 +148,6 @@ namespace SIL.PublishingSolution
 
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
-            //xeLaTexContent.TocEndingPage = preProcessor.GetDictionaryLetterCount();
             Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle,
                 cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 
@@ -198,7 +190,6 @@ namespace SIL.PublishingSolution
                     _reversalIndexTexCreated = true;
                     var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
                                                      "FlexRev.xhtml");
-                    //var revCSSFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
                     string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
                     string xeLatexCopyrightFile = Common.PathCombine(projInfo.ProjectPath, fileNameXhtml + ".tex");
 
@@ -274,7 +265,6 @@ namespace SIL.PublishingSolution
                 preProcess.CopyCopyrightPage(processFolder);
                 string copyRightFilePath = Common.PathCombine(processFolder, "File2Cpy.xhtml");
 
-                // **    string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 if (copyRightFilePath.Trim().Length <= 0 && !File.Exists(copyRightFilePath))
                 {
                     return false;
@@ -364,8 +354,6 @@ namespace SIL.PublishingSolution
                 if (contentWriter.ToLower().IndexOf(searchText) >= 0)
                 {
                     writer.WriteLine(insertText);
-                    //writer.WriteLine("\\mbox{}");
-                    //writer.WriteLine("\\mbox{}");
                     writer.WriteLine(contentWriter);
                     string st = string.Empty;
                     string contributors = Param.GetMetadataValue(Param.Contributor);
@@ -611,7 +599,6 @@ namespace SIL.PublishingSolution
                     p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
                     p1.Start();
                     p1.WaitForExit();
-                    //p1Output = p1.StandardOutput.ReadToEnd();
                     p1Error = p1.StandardError.ReadToEnd();
                 }
 
@@ -625,7 +612,6 @@ namespace SIL.PublishingSolution
                     p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
                     p1.Start();
                     p1.WaitForExit();
-                    //p1Output = p1.StandardOutput.ReadToEnd();
                     p1Error = p1.StandardError.ReadToEnd();
                 }
 
@@ -643,12 +629,10 @@ namespace SIL.PublishingSolution
                 {
                     try
                     {
-                        //Common.OpenOutput(pdfFullName);
                         if (File.Exists(pdfFullName))
                         {
                             
                             pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex");
-                           // Common.OpenOutput(pdfFullName);
                         }
                     }
                     catch { }
@@ -664,7 +648,6 @@ namespace SIL.PublishingSolution
                 {
                     try
                     {
-                        //Common.OpenOutput(pdfFullName);
                         if (File.Exists(pdfFullName))
                         {
                             pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex");
@@ -723,8 +706,6 @@ namespace SIL.PublishingSolution
 
                 xeLatexFile.WriteLine();
                 ReversalIndexContent += "\\input{" + reversalFileName + "} \r\n";
-                //ReversalIndexContent += "\\thispagestyle{empty} \r\n";
-                //ReversalIndexContent += "\\newpage \r\n";
                 xeLatexFile.WriteLine(ReversalIndexContent);
             }
 
@@ -935,11 +916,6 @@ namespace SIL.PublishingSolution
                                 break;
                             }
                         }
-                        //if (metaNode.Attributes["name"].Value == "linkedFilesRootDir")
-                        //{
-                        //    imageRootPath = metaNode.Attributes["content"].Value;
-                        //    break;
-                        //}
                     }
                 }
                 catch { }

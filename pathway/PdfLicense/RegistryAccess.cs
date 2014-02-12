@@ -16,7 +16,6 @@
 
 using System.Diagnostics;
 using Microsoft.Win32;
-using System.Windows.Forms;
 
 namespace PdfLicense
 {
@@ -82,8 +81,6 @@ namespace PdfLicense
         {
             RegistryKey rkCompany;
             RegistryKey rkApplication;
-            //RegistryKey rkFieldWorks;
-
             // The generic Company Name is SIL International, but in the registry we want this
             // to use SIL. If we want to keep a generic approach, we probably need another member
             // variable
@@ -99,22 +96,17 @@ namespace PdfLicense
             }
             if (rkCompany != null)
             {
-                //rkFieldWorks = rkCompany.OpenSubKey("FieldWorks", false);
-                //if (rkFieldWorks != null)
-                //{
-                //    rkApplication = rkFieldWorks.OpenSubKey(ProductName, false);
-                    rkApplication = rkCompany.OpenSubKey(ProductName, false);
-                    if (rkApplication != null)
+                rkApplication = rkCompany.OpenSubKey(ProductName, false);
+                if (rkApplication != null)
+                {
+                    foreach (string sKey in rkApplication.GetValueNames())
                     {
-                        foreach (string sKey in rkApplication.GetValueNames())
+                        if (sKey == key)
                         {
-                            if (sKey == key)
-                            {
-                                return rkApplication.GetValue(sKey);
-                            }
+                            return rkApplication.GetValue(sKey);
                         }
                     }
-                //}
+                }
             }
             return defaultValue;
         }
@@ -147,14 +139,12 @@ namespace PdfLicense
         {
             RegistryKey rkSoftware;
             RegistryKey rkCompany;
-            //RegistryKey rkFieldWorks;
             RegistryKey rkApplication;
 
             rkSoftware = Registry.CurrentUser.OpenSubKey(SOFTWARE_KEY, true);
             // The generic Company Name is SIL International, but in the registry we want this to use
             // SIL. If we want to keep a generic approach, we probably need another member variable
             // for ShortCompanyName, or something similar.
-            //rkCompany = rkSoftware.CreateSubKey(Application.CompanyName);
             try
             {
                 rkCompany = rkSoftware.CreateSubKey("SIL");
@@ -165,16 +155,11 @@ namespace PdfLicense
             }
             if (rkCompany != null)
             {
-                //rkFieldWorks = rkCompany.CreateSubKey("FieldWorks");
-                //if (rkFieldWorks != null)
-                //{
-                //    rkApplication = rkFieldWorks.CreateSubKey(ProductName);
-                    rkApplication = rkCompany.CreateSubKey(ProductName);
-                    if (rkApplication != null)
-                    {
-                        rkApplication.SetValue(key, val);
-                    }
-                //}
+                rkApplication = rkCompany.CreateSubKey(ProductName);
+                if (rkApplication != null)
+                {
+                    rkApplication.SetValue(key, val);
+                }
             }
 
         }

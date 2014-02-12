@@ -277,7 +277,6 @@ namespace Test.UIConfigurationToolBLTest
             cTool._CToolBL.tsDelete_ClickBL();
             int afterDelete = cTool.StylesGrid.RowCount;
             Assert.AreEqual(8, afterDelete, "New Count Test Fails");
-            //cTool._CToolBL.ConfigurationTool_LoadBL();
             cTool.Close();
         }
 
@@ -364,11 +363,6 @@ namespace Test.UIConfigurationToolBLTest
             cTool.DdlFontSize.Text = "11";
             cTool.DdlFileProduceDict.Text = "One";
             cTool.DdlSense.Text = "Bullet";
-            //Mobile Properties
-            //cTool.DdlFiles.Text = "";
-            //cTool.DdlRedLetter.Text = "";
-            //cTool.TxtInformation.Text = "";
-            //cTool.TxtCopyright.Text = "";
             cTool.Close();
         }
 

@@ -64,7 +64,6 @@ namespace SIL.PublishingSolution
             try
             {
                 BackUpFontsinCSS();
-                //BackUpUserSettingFiles();
             }
             catch { }
         }
@@ -116,10 +115,6 @@ namespace SIL.PublishingSolution
                 {
                     File.Copy(filePath, Common.PathCombine(destPath, fileName));
                 }
-                //if (File.Exists(Common.PathCombine(windowsFontPath, selItem)) && !File.Exists(Common.PathCombine(destPath, selItem)))
-                //{
-                //    File.Copy(Common.PathCombine(windowsFontPath, selItem), Common.PathCombine(destPath, selItem));
-                //}
             }
         }
 

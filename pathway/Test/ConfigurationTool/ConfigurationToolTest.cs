@@ -63,10 +63,6 @@ namespace Test.UIConfigurationToolTest
             string folderName = "styles";
             CopyFolderSupportToIO(folderName);
             LoadParam();
-
-
-            //Common.ProgBase = _outputBasePath;
-            //Param.Value["UserSheetPath"] = _outputBasePath; 
         }
 
         private void CopyFilesSupportToIO(string fileName)
@@ -189,8 +185,6 @@ namespace Test.UIConfigurationToolTest
         [Test]
         public void RemoveXMLNode()
         {
-            //LoadParam();
-
             string styleName = "Draft";  // Style Name
             string xPath = "//styles/" + "paper" + "/style[@name='" + styleName + "']";
             XmlNode removableNode = Param.GetItem(xPath);
@@ -221,8 +215,6 @@ namespace Test.UIConfigurationToolTest
         [Test]
         public void AddNew()
         {
-            //LoadParam();
-
             string styleName = "MyyStyyle98765";
             _configTool._CToolBL.MediaType = "paper";
             _configTool._CToolBL.StyleName = styleName;
@@ -295,8 +287,6 @@ namespace Test.UIConfigurationToolTest
         [Test]
         public void SaveColumnWidthTest()
         {
-            //LoadParam();
-
             DataGridView grid = PopulateGrid2();
             string[] value = { "5", "10", "15", "20", "25" };
 
@@ -511,7 +501,6 @@ namespace Test.UIConfigurationToolTest
         public void CopyCustomStyleToSend()
         {
             _configTool._CToolBL.MediaType = "paper";
-            //LoadParam();
             string folderPath = Common.PathCombine(_outputBasePath, "NewFolderPath");
             if (Directory.Exists(folderPath))
                 Directory.Delete(folderPath, true);
