@@ -429,6 +429,7 @@
     <Compile Include="ConfigureTasks.Designer.cs">
       <DependentUpon>ConfigureTasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="UndoRedo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutPw.resx">

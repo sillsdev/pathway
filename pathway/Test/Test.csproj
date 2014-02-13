@@ -280,6 +280,7 @@
     </Compile>
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsRecTest.cs" />
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsTests.cs" />
+    <Compile Include="FileUtils.cs" />
     <Compile Include="GoBibleConvert\UsxToSFMTest.cs" />
     <Compile Include="ParatextSupport\EncloseParasInSectionsTests.cs" />
     <Compile Include="ParatextSupport\ParatextSupportExtensions.cs" />
