@@ -2838,13 +2838,12 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Insert the first headword in Reversal as first line
+        /// Insert the first headword in Main / Reversal as first line
         /// </summary>
         private void WriteLeftGuidewordOnFlexRev()
         {
-            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && !_projInfo.IsODM)
+            if (!_projInfo.IsODM)
             {
-
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "P4");
                 _writer.WriteEndElement();
