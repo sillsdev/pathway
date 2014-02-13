@@ -653,7 +653,7 @@ namespace SIL.PublishingSolution
             {
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 //Preprocess XHTML & CSS for FrontMatter
-                preProcessor.InsertLoFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
+                preProcessor.InsertLoFrontMatterContent(projInfo.DefaultXhtmlFileWithPath, projInfo.IsODM);
                 _isFirstODT = false;
             }
         }

@@ -979,12 +979,12 @@ namespace SIL.PublishingSolution
             string strOutlineLevel = "1";
             if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
-                if (IdAllClass["letter"].ContainsKey("-ps-outline-level"))
+                if (IdAllClass.ContainsKey("letter") && IdAllClass["letter"].ContainsKey("-ps-outline-level"))
                     strOutlineLevel = IdAllClass["letter"]["-ps-outline-level"];
             }
             else
             {
-                if (IdAllClass["scrBook"].ContainsKey("-ps-outline-level"))
+                if (IdAllClass.ContainsKey("scrBook") && IdAllClass["scrBook"].ContainsKey("-ps-outline-level"))
                     strOutlineLevel = IdAllClass["scrBook"]["-ps-outline-level"];
             }
             return strOutlineLevel;
@@ -2803,7 +2803,7 @@ namespace SIL.PublishingSolution
             ReadAllFirstEntryData(_projInfo.DefaultXhtmlFileWithPath, FirstDataOnEntry);
 
             //To be insert left guideword on flexrev file
-            WriteLeftGuidewordOnFlexRev();
+            WriteLeftGuidewordOnODT();
         }
 
         private void InsertEmptyPageForFrontmatter(string ChildName)
@@ -2840,10 +2840,12 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Insert the first headword in Main / Reversal as first line
         /// </summary>
-        private void WriteLeftGuidewordOnFlexRev()
+        private void WriteLeftGuidewordOnODT()
         {
-            if (!_projInfo.IsODM)
+            if (!_projInfo.IsFrontMatterEnabled && _projInfo.OutputExtension == "odt")
             {
+                if (_projInfo.IsODM && Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath).ToLower() == "preserveflexrev") return;
+
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "P4");
                 _writer.WriteEndElement();
