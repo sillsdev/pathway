@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Feb-11-2014 for TD-3781
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Feb-14-2014 for TD-3809
 Dim CanSave as Boolean
 
 &apos;This procedure set the dialgue to correct Update References 
@@ -19,9 +19,9 @@ On Error GoTo MyError:
 	
 	KeepLastGuidewordRight()
 	
-	If Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
+	&apos;If Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
 		HideODMVariable()
-	End If
+	&apos;End If
 	
 	If CanSave Then
 		oDoc = ThisComponent 
