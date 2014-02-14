@@ -3322,6 +3322,14 @@ namespace SIL.Tool
             tw.WriteLine("text-align: center;");
             tw.WriteLine("}");
 
+            tw.WriteLine(".Line1 {");
+            tw.WriteLine("text-indent: 30pt;");
+            tw.WriteLine("}");
+
+            tw.WriteLine(".Line2 {");
+            tw.WriteLine("text-indent: 60pt;");
+            tw.WriteLine("}");
+
             tw.Close();
         }
 
