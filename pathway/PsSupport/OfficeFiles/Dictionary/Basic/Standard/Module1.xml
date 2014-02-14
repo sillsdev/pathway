@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Feb-11-2014 for TD-3781
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Feb-14-2014 for TD-3809
 Dim CanSave as Boolean
 
 &apos;This procedure set the dialgue to correct Update References 
@@ -19,6 +19,10 @@ On Error GoTo MyError:
 	
 	KeepLastGuidewordRight()
 	
+	&apos;If Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
+		HideODMVariable()
+	&apos;End If
+	
 	If CanSave Then
 		oDoc = ThisComponent 
 		oDoc.store() 
@@ -31,6 +35,32 @@ On Error GoTo MyError:
 	Exit Sub
 MyError:
 End Sub
+
+Sub HideODMVariable
+PageCount = TotalPages
+ThisComponent.currentController.getViewCursor().jumpToPage(PageCount)
+
+
+dim document   as object
+dim dispatcher as object
+
+document   = ThisComponent.CurrentController.Frame
+dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+
+dim args1(0) as new com.sun.star.beans.PropertyValue
+args1(0).Name = &quot;Text&quot;
+args1(0).Value = &quot; &quot;
+
+dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 0, args1())
+
+dispatcher.executeDispatch(document, &quot;.uno:SwBackspace&quot;, &quot;&quot;, 0, Array())
+ThisComponent.currentController.getViewCursor().jumpToPage(1)
+&apos;msgbox PageCount
+
+&apos;oDoc = ThisComponent 
+&apos;LGuide = oDoc.getTextFieldMasters().getByName(&quot;com.sun.star.text.fieldmaster.SetExpression.Right_Guideword_R&quot;)
+&apos;LGuide.DependentTextFields(1).Content = &quot;Changed&quot;
+end sub
 
 &apos;This procedure set RightGuideword on Right align in Header
 Sub KeepLastGuidewordRight

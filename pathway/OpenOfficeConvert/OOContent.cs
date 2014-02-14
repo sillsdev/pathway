@@ -746,9 +746,11 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void InsertFlexRevFirstGuidewordOnMainForOdm()
         {
-            if (_projInfo.MainLastFileName != null && _projInfo.MainLastFileName.Length > 0 && _projInfo.IsODM)
+            //if (_projInfo.MainLastFileName != null && _projInfo.MainLastFileName.Length > 0 && _projInfo.IsODM)
+            if (_projInfo.IsODM)
             {
-                if (Path.GetFileNameWithoutExtension(_projInfo.MainLastFileName) == Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath.Replace("Preservemain", "main")))
+                //if (Path.GetFileNameWithoutExtension(_projInfo.MainLastFileName) == Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath.Replace("Preservemain", "main")))
+                if (Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath).IndexOf("main") >= 0)
                 {
                     string flexFileName = Common.PathCombine(Path.GetDirectoryName(_projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
                     if (File.Exists(flexFileName))
