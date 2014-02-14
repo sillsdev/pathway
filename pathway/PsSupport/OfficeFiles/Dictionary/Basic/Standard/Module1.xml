@@ -19,6 +19,8 @@ On Error GoTo MyError:
 	
 	KeepLastGuidewordRight()
 	
+	HideODMVariable()
+	
 	If CanSave Then
 		oDoc = ThisComponent 
 		oDoc.store() 
@@ -31,6 +33,32 @@ On Error GoTo MyError:
 	Exit Sub
 MyError:
 End Sub
+
+Sub HideODMVariable
+PageCount = TotalPages
+ThisComponent.currentController.getViewCursor().jumpToPage(PageCount)
+
+
+dim document   as object
+dim dispatcher as object
+
+document   = ThisComponent.CurrentController.Frame
+dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+
+dim args1(0) as new com.sun.star.beans.PropertyValue
+args1(0).Name = &quot;Text&quot;
+args1(0).Value = &quot; &quot;
+
+dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 0, args1())
+
+dispatcher.executeDispatch(document, &quot;.uno:SwBackspace&quot;, &quot;&quot;, 0, Array())
+ThisComponent.currentController.getViewCursor().jumpToPage(1)
+&apos;msgbox PageCount
+
+&apos;oDoc = ThisComponent 
+&apos;LGuide = oDoc.getTextFieldMasters().getByName(&quot;com.sun.star.text.fieldmaster.SetExpression.Right_Guideword_R&quot;)
+&apos;LGuide.DependentTextFields(1).Content = &quot;Changed&quot;
+end sub
 
 &apos;This procedure set RightGuideword on Right align in Header
 Sub KeepLastGuidewordRight
