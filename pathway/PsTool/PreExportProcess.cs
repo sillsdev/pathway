@@ -1027,7 +1027,7 @@ namespace SIL.Tool
         #endregion InDesign Front Matter
 
         #region LibreOfficeFrontMatter
-        public void InsertLoFrontMatterContent(string inputXhtmlFilePath)
+        public void InsertLoFrontMatterContent(string inputXhtmlFilePath, bool isMainAlone)
         {
             Param.LoadSettings();
             string organization;
@@ -1072,10 +1072,13 @@ namespace SIL.Tool
                 dummyNode.Attributes.Append(xmlDAttribute);
 
                 XmlNode pNode = null;
-                pNode = xmldoc.CreateElement("div");
-                xmlDAttribute = xmldoc.CreateAttribute("class");
-                xmlDAttribute.Value = "P4";
-                pNode.Attributes.Append(xmlDAttribute);
+                if (isMainAlone)
+                {
+                    pNode = xmldoc.CreateElement("div");
+                    xmlDAttribute = xmldoc.CreateAttribute("class");
+                    xmlDAttribute.Value = "P4";
+                    pNode.Attributes.Append(xmlDAttribute);
+                }
 
                 //COVER IMAGE
                 if (_coverImage && File.Exists(_coverPageImagePath))
@@ -1207,7 +1210,11 @@ namespace SIL.Tool
                 //END OF TABLE OF CONTENTS
                 if (frontMatterXHTMLContent.Trim().Length > 0)
                 {
-                    mainXhtmlFile[0].InnerXml = frontMatterXHTMLContent + pNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                    if (pNode != null)
+                    {
+                        frontMatterXHTMLContent = frontMatterXHTMLContent + pNode.OuterXml;
+                    }
+                    mainXhtmlFile[0].InnerXml = frontMatterXHTMLContent + mainXhtmlFile[0].InnerXml;
                 }
 
                 xmldoc.Save(inputXhtmlFilePath);
