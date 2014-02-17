@@ -3111,6 +3111,12 @@ namespace SIL.PublishingSolution
             if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 if (_previousParagraphName == null) _previousParagraphName = string.Empty;
+
+                if (_childName.IndexOf("reversalform") >= 0 && _previousChildName.IndexOf("headword") >= 0)
+                {
+                    _previousChildName = "This_is_some_blabla_text";
+                }
+
                 if ((_classNameWithLang.IndexOf("headwordminor") == 0 || _classNameWithLang.IndexOf("headword") == 0 ||
                      (_classNameWithLang.IndexOf("reversalform") == 0 ||
                       _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0 ||
