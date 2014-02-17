@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Feb-14-2014 for TD-3809
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Feb-11-2014 for TD-3781
 Dim CanSave as Boolean
 
 &apos;This procedure set the dialgue to correct Update References 
@@ -35,6 +35,13 @@ On Error GoTo MyError:
 	Exit Sub
 MyError:
 End Sub
+
+'This function gives the Total Pages of the current file
+Function TotalPages()
+	Dim cont
+	cont = ThisComponent.getCurrentController()
+	TotalPages = cont.PageCount
+End Function
 
 Sub HideODMVariable
 PageCount = TotalPages
