@@ -696,7 +696,7 @@
         <xsl:value-of select="@caller"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text>
         <xsl:call-template name="CrossReferenceIter">
-            <xsl:with-param name="textLeft" select="$text"/>
+            <xsl:with-param name="textLeft" select="normalize-space($text)"/>
         </xsl:call-template>
         <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">
