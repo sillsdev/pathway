@@ -124,6 +124,7 @@ namespace SIL.PublishingSolution
 
         protected string _paragraphName;
         protected string _previousParagraphName;
+        protected string _previousChildName = string.Empty;
         protected string _characterName;
         public string _characterNameAlways = string.Empty;
         protected string _lang = string.Empty;
