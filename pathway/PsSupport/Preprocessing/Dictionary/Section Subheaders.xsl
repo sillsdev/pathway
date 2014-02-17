@@ -34,7 +34,7 @@
         <xsl:choose>
             <xsl:when test="count(following::*[contains(@class,'reversal-form')][1])">
                 <!-- Reversal -->
-                <xsl:variable name="l1" select="following::*[@class='headref'][1]/@lang"/>
+                <xsl:variable name="l1" select="following::*[starts-with(@class,'headref')][1]/@lang"/>
                 <xsl:variable name="l2" select="following::*[contains(@class,'reversal-form')][1]/@lang"/>
                 <xsl:variable name="l1Name" select="//x:meta[substring-before(@content, ':') = $l1]"/>
                 <xsl:variable name="l2Name" select="//x:meta[substring-before(@content, ':') = $l2]"/>
@@ -49,8 +49,8 @@
                 </xsl:copy>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:variable name="l1" select="following::*[@class='headword'][1]/@lang"/>
-                <xsl:variable name="l2" select="following::*[@class='definition'][1]/@lang"/>
+                <xsl:variable name="l1" select="following::*[starts-with(@class,'headword')][1]/@lang"/>
+                <xsl:variable name="l2" select="following::*[starts-with(@class,'definition')][1]/@lang"/>
                 <xsl:variable name="l1Name" select="//x:meta[substring-before(@content, ':') = $l1]"/>
                 <xsl:variable name="l2Name" select="//x:meta[substring-before(@content, ':') = $l2]"/>
                 <xsl:copy>

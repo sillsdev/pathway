@@ -990,7 +990,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "definition language", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_xitem_.es_definitionL2')]//@fo:language", "es"),
                 new ODet(ODet.Chk, "definition country", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_xitem_.es_definitionL2')]//@fo:country", "ES"),
                 new ODet(ODet.Chk, "rights page header", ODet.Main, ODet.Content, "//text:span[starts-with(@text:style-name, 'LHeading')]", "ABOUT THIS DOCUMENT"),
-                new ODet(ODet.Chk, "rights text", ODet.Main, ODet.Content, "//text:span[starts-with(@text:style-name, 'span_LText')]", "This document contains data written in Waorani[auc]. For more information about this language, visit "),
+                new ODet(ODet.Chk, "rights text", ODet.Main, ODet.Content, "//text:span[starts-with(@text:style-name, 'span_LText')]", "This document contains data written in Wao Tededö[auc]. For more information about this language, visit "),
                 new ODet(ODet.Chk, "rights url", ODet.Main, ODet.Content, "//text:span[starts-with(@text:style-name, 'span_LText')][2]", "http://www.ethnologue.com/language/auc"),
                 new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "(//text:span[starts-with(@text:style-name, 'LText')])[2]", "\u00a9 2014 John Doe\u00ae."),
                 new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "//*[starts-with(@text:style-name, 'div_FrontMatter')]", "This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License."),
