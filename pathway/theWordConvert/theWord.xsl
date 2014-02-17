@@ -728,7 +728,7 @@
     <xsl:template name="CrossRefVerseListIter">
         <xsl:param name="ref"/>
         <xsl:param name="book"/>
-        <xsl:param name="chap" select="./preceding::chapter/@number"/>
+        <xsl:param name="chap"/>
         <xsl:param name="remains" />
         <xsl:choose>
             <xsl:when test="contains($ref, $sequencePunc)">
