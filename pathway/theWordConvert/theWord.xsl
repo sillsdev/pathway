@@ -707,7 +707,7 @@
     
     <xsl:template name="CrossReferenceIter">
         <xsl:param name="textLeft"/>
-        <xsl:param name="book"/>
+        <xsl:param name="book" select="./preceding::book"/>
         <xsl:choose>
             <xsl:when test="contains($textLeft, $bookSequencePunc)">
                 <xsl:call-template name="CrossRefVerseListIter">
@@ -728,7 +728,7 @@
     <xsl:template name="CrossRefVerseListIter">
         <xsl:param name="ref"/>
         <xsl:param name="book"/>
-        <xsl:param name="chap"/>
+        <xsl:param name="chap" select="./preceding::chapter/@number"/>
         <xsl:param name="remains" />
         <xsl:choose>
             <xsl:when test="contains($ref, $sequencePunc)">
@@ -823,6 +823,10 @@
                     <xsl:value-of select="$refAbbr"/>
                     <xsl:text> not found in </xsl:text>
                     <xsl:value-of select="$bookNames"/>
+                    <xsl:text> at </xsl:text>
+                    <xsl:value-of select="./preceding::book/@code"/>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="./*/text()[1]"/>
                 </xsl:message>
                 <xsl:value-of select="$ref"/>
             </xsl:otherwise>

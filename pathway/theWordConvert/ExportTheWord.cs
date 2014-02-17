@@ -34,6 +34,8 @@ namespace SIL.PublishingSolution
         protected static string Ssf;
         protected static bool R2l;
         private static object _theWorProgPath;
+        protected static bool _hasMessages = false;
+        protected static string _messageFullName;
 
         protected static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
 
@@ -106,6 +108,8 @@ namespace SIL.PublishingSolution
                 var output = GetSsfValue("//EthnologueCode", "zxx");
                 var fullName = UsxDir(exportTheWordInputPath);
                 LogStatus("Processing: {0}", fullName);
+                xsltArgs.XsltMessageEncountered += XsltMessage;
+                _messageFullName = Common.PathCombine(exportTheWordInputPath, "Messages.html");
 
                 var codeNames = new Dictionary<string, string>();
                 var otFlag = OtFlag(fullName, codeNames, otBooks);
@@ -115,6 +119,13 @@ namespace SIL.PublishingSolution
                 var resultName = output + (otFlag ? ".ont" : ".nt");
                 var resultFullName = Common.PathCombine(exportTheWordInputPath, resultName);
                 ProcessAllBooks(resultFullName, otFlag, otBooks, ntBooks, codeNames, xsltArgs, inProcess);
+
+                if (_hasMessages)
+                {
+                    XsltMessageClose();
+                    DisplayMessageReport();
+                }
+                xsltArgs.XsltMessageEncountered -= XsltMessage;
 
                 string theWordFullPath = Common.FromRegistry("TheWord");
                 string tempTheWordCreatorPath = TheWordCreatorTempDirectory(theWordFullPath);
@@ -149,6 +160,24 @@ namespace SIL.PublishingSolution
                 ReportFailure(ex);
             }
             return success;
+        }
+
+        private void DisplayMessageReport()
+        {
+            var result = MessageBox.Show("Display issues encountered during conversion?", "theWord Conversion Messages",
+                                         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error,
+                                         MessageBoxDefaultButton.Button1);
+            switch (result)
+            {
+                case DialogResult.Yes:
+                    Process.Start(_messageFullName);
+                    break;
+                case DialogResult.No:
+                    break;
+                case DialogResult.Cancel:
+                    File.Delete(_messageFullName);
+                    break;
+            }
         }
 
         private void CreateRAMP(PublicationInformation projInfo)
@@ -317,6 +346,26 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
             ProcessTestament(ntBooks, codeNames, xsltArgs, sw, inProcess);
             AttachMetadata(sw);
             sw.Close();
+        }
+
+        protected static StreamWriter MessageStream;
+        public static void XsltMessage(object o, XsltMessageEncounteredEventArgs a)
+        {
+            LogStatus("Message {0}", a.Message);
+            if (!_hasMessages)
+            {
+                _hasMessages = true;
+                MessageStream = new StreamWriter(_messageFullName);
+                MessageStream.WriteLine("<html><head><title>theWord conversion messages</title></head>\n<body>\n<ul>");
+            }
+            MessageStream.WriteLine("<li>{0}</li>", a.Message);
+        }
+
+        public static void XsltMessageClose()
+        {
+            MessageStream.WriteLine("</ul>\n</body>\n");
+            MessageStream.Close();
+            _hasMessages = false;
         }
 
         protected static void ProcessTestament(IEnumerable<string> books, Dictionary<string, string> codeNames, XsltArgumentList xsltArgs,
