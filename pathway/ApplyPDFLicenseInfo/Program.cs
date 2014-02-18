@@ -27,6 +27,7 @@ namespace ApplyPDFLicenseInfo
             string xhtmlFile = _readLicenseFilesBylines[1];
             string exportTitle = _readLicenseFilesBylines[2];
             string creatorTool = _readLicenseFilesBylines[3];
+            string inputType = _readLicenseFilesBylines[4];
             string pdfFileName = string.Empty;
             
             pdfFileName = ProcessLicensePdf(pdfFileName, executePath);
@@ -56,20 +57,29 @@ namespace ApplyPDFLicenseInfo
             {
                 File.Delete(licencePdfFile);
             }
-
+            System.Globalization.TextInfo myTI = new System.Globalization.CultureInfo("en-US", false).TextInfo;
+            inputType = myTI.ToTitleCase(inputType);
             if (creatorTool.ToLower() == "libreoffice")
             {
                 Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout", string.Empty);
-                CreateRAMP(xhtmlFile);
+                LoadParameters(inputType);
+                CreateRAMP(xhtmlFile, inputType);
             }
         }
 
-        private static void CreateRAMP(string executePath)
+        private static void LoadParameters(string inputType)
+        {
+            Param.LoadSettings();
+            Param.SetValue(Param.InputType, inputType);
+            Param.LoadSettings();
+        }
+
+        private static void CreateRAMP(string executePath, string inputType)
         {
             string outputExtn = string.Empty;
             outputExtn = ".pdf";
             Ramp ramp = new Ramp();
-            ramp.Create(executePath, outputExtn, "Dictionary");
+            ramp.Create(executePath, outputExtn, inputType);
         }
 
         private static string ProcessLicensePdf(string pdfFileName, string executePath)

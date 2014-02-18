@@ -637,7 +637,7 @@ namespace SIL.PublishingSolution
             if (publicationInfo.FinalOutput.ToLower() == "pdf")
             {
                 publicationInfo.OutputExtension = "pdf";
-                Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice");
+                Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice", projInfo.ProjectInputType);
             }
             else
             {

@@ -32,8 +32,7 @@ namespace SIL.PublishingSolution
     /// </summary>
     public class Ramp
     {
-
-        #region Public Variables
+        #region Private variable
 
         private string _rampId;
         private string _createdOn;
@@ -81,9 +80,7 @@ namespace SIL.PublishingSolution
         protected string _folderPath = string.Empty;
         protected string _outputExtension = string.Empty;
         protected string _projInputType = string.Empty;
-        #endregion
-
-        #region Private variable
+        private string _outputFileTitle = string.Empty;
         private RampFile rampFile;
         protected Dictionary<string, string> _isoLanguageCode = new Dictionary<string, string>();
         protected Dictionary<string, string> _isoLanguageCodeandName = new Dictionary<string, string>();
@@ -91,9 +88,10 @@ namespace SIL.PublishingSolution
         protected Dictionary<string, string> _oldTestament = new Dictionary<string, string>();
         protected Dictionary<string, string> _newTestament = new Dictionary<string, string>();
         protected Dictionary<string, string> _apocryphaTestament = new Dictionary<string, string>();
+
         #endregion
 
-        #region Property
+        #region Public Variables
         public string RampId
         {
             get { return _rampId; }
@@ -351,6 +349,12 @@ namespace SIL.PublishingSolution
         {
             get { return _publisher; }
             set { _publisher = value; }
+        }
+
+        public string OutputFileTitle
+        {
+            get { return _outputFileTitle; }
+            set { _outputFileTitle = value; }
         }
 
         #endregion
@@ -1614,6 +1618,7 @@ namespace SIL.PublishingSolution
         {
             Param.LoadSettings();
             string firstPart = Param.GetMetadataValue(Param.CopyrightHolder);
+            _outputFileTitle = Param.GetMetadataValue(Param.Title);
             firstPart = Common.UpdateCopyrightYear(firstPart);
             string secondPart = GetLicenseInformation(Param.GetMetadataValue(Param.CopyrightPageFilename));
             return firstPart + " " + secondPart.Replace("\r", "").Replace("\n", "").Replace("\t", "");
@@ -1696,7 +1701,12 @@ namespace SIL.PublishingSolution
             dirCollection.Add(Common.PathCombine(Path.GetDirectoryName(_folderPath), "SFM"));
             dirCollection.Add(Common.PathCombine(Path.GetDirectoryName(_folderPath), "Pictures"));
 
-            using (ZipFile zipFile = ZipFile.Create(Common.PathCombine(Path.GetDirectoryName(_folderPath), Param.GetMetadataValue(Param.Title)) + ".ramp"))
+            if (_outputFileTitle == string.Empty)
+            {
+                _outputFileTitle = "Default Title";
+            }
+
+            using (ZipFile zipFile = ZipFile.Create(Common.PathCombine(Path.GetDirectoryName(_folderPath), _outputFileTitle) + ".ramp"))
             {
                 zipFile.NameTransform = new ZipNameTransform(Path.GetDirectoryName(_folderPath));
                 zipFile.BeginUpdate();
