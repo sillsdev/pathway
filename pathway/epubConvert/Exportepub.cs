@@ -2879,7 +2879,7 @@ namespace SIL.PublishingSolution
             }
             // file preamble
             var sbPreamble = new StringBuilder();
-            sbPreamble.Append("<?xml version='1.0' encoding='utf-8'?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'[]>");
+            sbPreamble.Append("<?xml version='1.0' encoding='utf-8'?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>");
             sbPreamble.Append("<html xmlns='http://www.w3.org/1999/xhtml'><head><title>");
             sbPreamble.AppendLine("</title><link rel='stylesheet' href='book.css' type='text/css' /></head>");
             sbPreamble.Append("<body class='scrBody'><div class='Front_Matter'>");
@@ -3756,10 +3756,7 @@ namespace SIL.PublishingSolution
             {
                 ApplyXslt(tocFullPath, _fixEpubToc);
             }
-            else
-            {
-                FixPlayOrder(tocFullPath);
-            }
+            FixPlayOrder(tocFullPath);
         }
 
         private void AddDtdInXhtml(PublicationInformation projInfo, string contentFolder)
@@ -4128,8 +4125,8 @@ namespace SIL.PublishingSolution
                                             {
                                                 textString = textString + "-" + currentChapterNumber + ":" +
                                                                lastVerseNumber + ")";
-                                            }
-                                            if (textString.Trim().Length > 4)
+                                            }                                            
+                                            if (textString.Trim().Length >= 4)
                                             {
                                                 // write out the node
                                                 ncx.WriteStartElement("navPoint");
@@ -4150,7 +4147,7 @@ namespace SIL.PublishingSolution
                                                 sb.Append("#");
                                                 sb.Append(reader.GetAttribute("id"));
                                             }
-                                            if (textString.Trim().Length > 4)
+                                            if (textString.Trim().Length >= 4)
                                             {
                                                 ncx.WriteEndElement(); // navPoint
                                             }

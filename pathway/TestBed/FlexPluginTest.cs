@@ -742,7 +742,7 @@ namespace TestBed
             inputHtmlFileName = Path.GetFileName(inputHtmlFileName);
             if (!inputHtmlFileName.ToLower().Contains("main"))
             {
-                File.Copy(xhtmlFileName, xhtmlFileName.Replace(".", "main."));
+                File.Copy(xhtmlFileName, xhtmlFileName.Replace(".", "main."), true);
                 xhtmlFileName = xhtmlFileName.Replace(".", "main.");
                 projInfo.DefaultXhtmlFileWithPath = xhtmlFileName;
             }
@@ -751,7 +751,7 @@ namespace TestBed
             inputCssFileName = Path.GetFileName(inputCssFileName);
             if (!inputCssFileName.ToLower().Contains("main"))
             {
-                File.Copy(cssFileName, cssFileName.Replace(".css", "main.css"));
+                File.Copy(cssFileName, cssFileName.Replace(".css", "main.css"), true);
                 cssFileName = cssFileName.Replace(".css", "main.css");
                 projInfo.DefaultCssFileWithPath = cssFileName;
             }
