@@ -1325,6 +1325,27 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
         }
 
+        ///<summary>
+        ///TD-3807 Page ends with Parallel reference
+        /// <summary>
+        /// Add Keep with next paragraph property for parallel reference class
+        /// </summary> 
+        [Test]
+        public void ParallerReferenceKeepWith_Node()
+        {
+            const string file = "ParallerReferenceKeepWith";
+            string input = FileInput(file + ".css");
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
+
+            string xpath = "//style:style[@style:name='ParallelPassageReference']";
+            _validate = new ValidateXMLFile(output);
+            _validate.ClassName = string.Empty;
+            _validate.ClassProperty.Add("fo:keep-with-next", "always");
+
+            returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
+            Assert.IsTrue(returnValue);
+        }
 
 
     }

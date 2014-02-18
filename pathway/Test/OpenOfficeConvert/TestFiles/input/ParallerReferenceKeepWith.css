@@ -1,0 +1,9 @@
+.Paragraph
+{
+font-size: 12pt;
+text-indent: .125pt;
+}
+
+.Parallel_Passage_Reference{
+page-break-after: avoid;
+}

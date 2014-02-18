@@ -294,3 +294,7 @@ margin-right: 48pt;
 text-align: justify;
 }
 
+.Parallel_Passage_Reference{
+page-break-after: avoid;
+}
+

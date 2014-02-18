@@ -643,6 +643,7 @@ namespace SIL.PublishingSolution
             {
                 Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.jar,.xml", "layout", string.Empty);
                 CreateRAMP();
+                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".css,.xhtml,.xml", String.Empty, String.Empty);
             }
             return returnValue;
         }
