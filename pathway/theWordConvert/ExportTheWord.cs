@@ -236,16 +236,7 @@ namespace SIL.PublishingSolution
 
         private static void ReportWhenTheWordNotInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
         {
-            string msgFormat = @"Do you want to open the folder with the results?
-
-● Click Yes.
-
-The folder with the ""{0}"" file ({2}) will open so you can manually copy it to {1}.
-
-The MySword file ""{3}"" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. 
-
-● Click Cancel to do neither of the above.
-";
+            string msgFormat = "Do you want to open the folder with the results?\n\n\u25CF Click Yes.\n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n";
             string resultName = Path.GetFileName(resultFullName);
             string resultDir = Path.GetDirectoryName(resultFullName);
             string msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
@@ -260,20 +251,7 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
 
         private static void ReportWhenTheWordInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
         {
-            string msgFormat = @"Do you want to start theWord?
-
-● Click Yes.
-
-The program will copy the ""{0}"" file to {1} and start theWord. 
-
-● Click No. 
-
-The folder with the ""{0}"" file ({2}) will open so you can manually copy it to {1}.
-
-The MySword file ""{3}"" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. 
-
-● Click Cancel to do neither of the above.
-";
+            string msgFormat = "Do you want to start theWord?\n\n\u25CF Click Yes.\n\nThe program will copy the \"{0}\" file to {1} and start theWord. \n\n\u25CF Click No. \n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n";
             string resultName = Path.GetFileName(resultFullName);
             string resultDir = Path.GetDirectoryName(resultFullName);
             string msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
