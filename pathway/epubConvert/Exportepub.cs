@@ -4373,8 +4373,11 @@ namespace SIL.PublishingSolution
                     if (nodes.Count > 0)
                     {
                         var next = nodes[0].NextSibling;
-                        while (next.Attributes.GetNamedItem("class").InnerText.ToLower().Contains("title"))
-                            next = next.NextSibling;
+                        if (next.Attributes != null)
+                        {
+                            while (next.Attributes.GetNamedItem("class").InnerText.ToLower().Contains("title"))
+                                next = next.NextSibling;
+                        }
                         foreach (string VARIABLE in chapterIdList)
                         {
                             string[] valueList = VARIABLE.Split('_');
