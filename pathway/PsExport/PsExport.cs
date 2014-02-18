@@ -120,8 +120,7 @@ namespace SIL.PublishingSolution
                 {
                     
                     string revFullName = GetRevFullName(outDir);
-                    string gramFullName = MakeXhtml(outDir, "sketch.xml", "XLingPap.xsl", supportPath);
-                    DeExport(outFullName, fluffedCssFullName, revFullName, fluffedRevCssFullName, gramFullName);
+                    DeExport(outFullName, fluffedCssFullName, revFullName, fluffedRevCssFullName);
                 }
             }
             catch (InvalidStyleSettingsException err)
@@ -379,74 +378,6 @@ namespace SIL.PublishingSolution
         #endregion Export
 
         #region Protected Function
-        #region MakeXhtml
-        /// <summary>
-        /// If XML file exists, transform it to XHTML
-        /// </summary>
-        /// <param name="outPath">path to XML</param>
-        /// <param name="xmlName">XML file name</param>
-        /// <param name="transform">Name of transform</param>
-        /// <param name="dicPath">If dtds required for Xsl, it is a path, otherwise null</param>
-        /// <returns>xhtmlFile full name or empty string if no XML file available</returns>
-        protected static string MakeXhtml(string outPath, string xmlName, string transform, string dicPath)
-        {
-            string xhtmlFile = "";
-            string xmlPath = Common.PathCombine(outPath, xmlName);
-            if (File.Exists(xmlPath))
-            {
-                if (dicPath != null)
-                    CopyDtds(dicPath, outPath);
-                xhtmlFile = Common.XsltProcess(xmlPath, transform, ".xhtml");
-                if (!Path.IsPathRooted(xhtmlFile))
-                {
-                    var msg = new[] { xhtmlFile };
-                    LocDB.Message("defErrMsg", xhtmlFile, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
-                }
-                if (dicPath != null)
-                    RemoveDtds(dicPath, outPath);
-            }
-            return xhtmlFile;
-        }
-
-        #region CopyDtds
-        /// <summary>
-        /// Copy all DTDs from DictionaryExpress folder to Temp folder
-        /// </summary>
-        /// <param name="dicPath">DictionaryExpress Folder name</param>
-        /// <param name="outPath">Output path</param>
-        protected static void CopyDtds(string dicPath, string outPath)
-        {
-            var dir = new DirectoryInfo(dicPath);
-            FileInfo[] dtdFiles = dir.GetFiles("*.dtd");
-            foreach (FileInfo fl in dtdFiles)
-            {
-                string outFile = Common.PathCombine(outPath, fl.Name);
-                if (!File.Exists(outFile))
-                    File.Copy(Common.PathCombine(dicPath, fl.Name), outFile);
-            }
-        }
-        #endregion CopyDtds
-
-        #region RemoveDtds
-        /// <summary>
-        /// Remove all DTDs from Temp folder that exist in DictionaryExpress folder
-        /// </summary>
-        /// <param name="dicPath">DictionaryExpress Folder name</param>
-        /// <param name="outPath">Output path</param>
-        protected static void RemoveDtds(string dicPath, string outPath)
-        {
-            var dir = new DirectoryInfo(dicPath);
-            FileInfo[] dtdFiles = dir.GetFiles("*.dtd");
-            foreach (FileInfo fl in dtdFiles)
-            {
-                string outFile = Common.PathCombine(outPath, fl.Name);
-                if (File.Exists(outFile))
-                    File.Delete(outFile);
-            }
-        }
-        #endregion RemoveDtds
-        #endregion MakeXhtml
-
         #region DeExport
         /// <summary>
         /// Exports the input files to the chosen destination
@@ -456,7 +387,7 @@ namespace SIL.PublishingSolution
         /// <param name="revFull">reversal content</param>
         /// <param name="revCSS">rev CSS file with style info</param>
         /// <param name="gramFull">grammar content</param>
-        public void DeExport(string lexiconFull, string lexiconCSS, string revFull, string revCSS, string gramFull)
+        public void DeExport(string lexiconFull, string lexiconCSS, string revFull, string revCSS)
         {
             var projInfo = new PublicationInformation();
             projInfo.ProjectFileWithPath = _projectFile;
@@ -474,8 +405,7 @@ namespace SIL.PublishingSolution
 
             string lexiconFileName = Path.GetFileName(lexiconFull);
             string revFileName = Path.GetFileName(revFull);
-            string gramFileName = Path.GetFileName(gramFull);
-            if (lexiconFileName == revFileName || lexiconFileName == gramFileName)
+            if (lexiconFileName == revFileName)
                 projInfo.IsLexiconSectionExist = false;
             if (projInfo.IsLexiconSectionExist && !projInfo.IsReversalExist)
             {

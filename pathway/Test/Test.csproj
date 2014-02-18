@@ -267,7 +267,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplyXslt\ApplyXsltTest.cs" />
     <Compile Include="Build\FileComponentsTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolBLTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
@@ -465,8 +464,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ApplyXslt\TestFiles\Expected\" />
-    <Folder Include="ApplyXslt\TestFiles\Input\" />
     <Folder Include="Properties\" />
     <Folder Include="PsExport\TestFiles\Input\T5\Pictures\" />
     <Folder Include="PsExport\TestFiles\Input\T6\Pictures\" />
@@ -519,9 +516,6 @@
     <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'$(OutputPath)\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'$(OutputPath)\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'$(OutputPath)\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(DicSamples)" DestinationFiles="@(DicSamples->'$(OutputPath)\Samples\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(ScrSamples)" DestinationFiles="@(ScrSamples->'$(OutputPath)\Samples\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(MiscSupport)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(FwVersion)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BteHelpFile)" DestinationFolder="$(OutputPath)\Help" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(SeHelpFile)" DestinationFolder="$(OutputPath)\Help" Condition=" '$(Edition)' == 'SE' " />
@@ -534,6 +528,8 @@
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(AllSamples)" DestinationFiles="@(AllSamples->'$(OutputPath)\Samples\Dictionary\%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'$(OutputPath)\Samples\Scripture\%(Filename)%(Extension)')"  Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'$(OutputPath)\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'$(OutputPath)\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -596,9 +592,6 @@
     <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <DicSamples Include="..\PsSupport\Samples\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <ScrSamples Include="..\PsSupport\Samples\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <MiscSupport Include="..\PsSupport\FileGuids.xml;..\PsSupport\GenericFont.xml" />
     <FwVersion Include="..\BuildPathway\FieldworksVersions.txt" />
     <BteHelpFile Include="..\BuildPathway\Pathway_Configuration_Tool_BTE.chm" />
     <SeHelpFile Include="..\BuildPathway\Pathway_Configuration_Tool_SE.chm" />
@@ -614,6 +607,8 @@
     <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
     <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
     <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <AllSamples Include="..\PsSupport\Samples\Dictionary\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <BteSamples Include="..\PsSupport\Samples\Scripture\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <AllBackend Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
@@ -621,13 +616,8 @@
     <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <AllTransform Include="..\PsSupport\pxhtml2xpw-dict.xsl" />
     <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
-    <BteTransform Include="..\PsSupport\punct_XHTML.xslt" />
-    <BteTransform Include="..\PsSupport\TE_FixChapters_XHTML.xslt" />
-    <BteTransform Include="..\PsSupport\TE_XHTML-to-Phone_XHTML.xslt" />
-    <BteTransform Include="..\PsSupport\pxhtml2xpw-scr.xsl" />
     <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
     <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />

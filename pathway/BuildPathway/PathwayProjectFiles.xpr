@@ -6,7 +6,6 @@
     </meta>
     <projectTree name="PathwayProjectFiles.xpr">
         <file name="../ApplyPDFLicenseInfo/ApplyPDFLicenseInfo.csproj"/>
-        <file name="../ApplyXslt/ApplyXslt.csproj"/>
         <file name="../BookletBuilder/BookletBuilder.csproj"/>
         <file name="BuildPathway.csproj"/>
         <file name="../BuildTasks/BuildTasks.csproj"/>
