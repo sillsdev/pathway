@@ -3458,7 +3458,7 @@ namespace SIL.Tool
                 tw.WriteLine(".scrBookName {");
                 tw.WriteLine("display: inline;");
                 tw.WriteLine("font-size: 0pt;");
-                tw.WriteLine("}");
+                tw.WriteLine("color: #ffffff;");                tw.WriteLine("}");
                 tw.WriteLine(".pictureColumn {");
                 tw.WriteLine("width: 99%;");
                 tw.WriteLine("}");
