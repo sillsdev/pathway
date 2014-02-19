@@ -451,8 +451,8 @@
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
-    <Copy SourceFiles="@(AllSamples)" DestinationFiles="@(AllSamples->'$(OutputPath)\Samples\Dictionary\%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'$(OutputPath)\Samples\Scripture\%(Filename)%(Extension)')"  Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(AllSamples)" DestinationFiles="@(AllSamples->'Files\ConfigurationTool\Samples\Dictionary\%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'Files\ConfigurationTool\Samples\Scripture\%(Filename)%(Extension)')"  Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
