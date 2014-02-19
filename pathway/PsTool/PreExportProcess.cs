@@ -1072,13 +1072,11 @@ namespace SIL.Tool
                 dummyNode.Attributes.Append(xmlDAttribute);
 
                 XmlNode pNode = null;
-                if (isMainAlone)
-                {
-                    pNode = xmldoc.CreateElement("div");
-                    xmlDAttribute = xmldoc.CreateAttribute("class");
-                    xmlDAttribute.Value = "P4";
-                    pNode.Attributes.Append(xmlDAttribute);
-                }
+                pNode = xmldoc.CreateElement("div");
+                xmlDAttribute = xmldoc.CreateAttribute("class");
+                xmlDAttribute.Value = "P4";
+                pNode.Attributes.Append(xmlDAttribute);
+
 
                 //COVER IMAGE
                 if (_coverImage && File.Exists(_coverPageImagePath))
@@ -1204,13 +1202,13 @@ namespace SIL.Tool
                     frontMatterCSSStyle = frontMatterCSSStyle +
                                           ".TableOfContentLO{visibility:hidden;}";
 
-                    frontMatterXHTMLContent = frontMatterXHTMLContent + tocNode.OuterXml + dummyNode.OuterXml;
+                    frontMatterXHTMLContent = frontMatterXHTMLContent + tocNode.OuterXml + pNode.OuterXml;
                     _projInfo.IsFrontMatterEnabled = true;
                 }
                 //END OF TABLE OF CONTENTS
                 if (frontMatterXHTMLContent.Trim().Length > 0)
                 {
-                    if (pNode != null)
+                    if (isMainAlone)
                     {
                         frontMatterXHTMLContent = frontMatterXHTMLContent + pNode.OuterXml;
                     }
