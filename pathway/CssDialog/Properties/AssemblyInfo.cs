@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SIL International in collaboration with \nEC Group Datasoft Private Limited")]
 [assembly: AssemblyProduct("Pathway")]
-[assembly: AssemblyCopyright("Copyright © 2008-2012 SIL International")]
+[assembly: AssemblyCopyright("Copyright (C) 2008-2012 SIL International")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
