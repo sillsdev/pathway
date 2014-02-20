@@ -119,7 +119,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(157, 17);
             this.label2.TabIndex = 5;
-            this.label2.Text = "© 2008 - 2014 SIL International";
+            this.label2.Text = "(C) 2008 - 2014 SIL International";
             // 
             // lblVersionwithDate
             // 

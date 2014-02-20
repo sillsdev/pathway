@@ -446,83 +446,83 @@ namespace Test.PsTool
             Assert.AreEqual(Common.UIFont, frm.Controls[0].Font);
         }
 
-        /// <summary>
-        ///A test for ConvertUnicodeToString
-        ///</summary>
-        [Test]
-        public void ConvertUnicodeToStringTest1()
-        {
-            string parameter = "'\u0B85'"; // TODO: Initialize to an appropriate value
-            string expected = "அ"; // TODO: Initialize to an appropriate value
-            string actual = Common.ConvertUnicodeToString(parameter);
-            Assert.AreEqual(expected, actual);
+        ///// <summary>
+        /////A test for ConvertUnicodeToString
+        /////</summary>
+        //[Test]
+        //public void ConvertUnicodeToStringTest1()
+        //{
+        //    string parameter = "'\u0B85'"; // TODO: Initialize to an appropriate value
+        //    string expected = "அ"; // TODO: Initialize to an appropriate value
+        //    string actual = Common.ConvertUnicodeToString(parameter);
+        //    Assert.AreEqual(expected, actual);
 
-        }
+        //}
 
-        /// <summary>
-        ///A test for ConvertUnicodeToString
-        ///</summary>
-        [Test]
-        public void ConvertUnicodeToStringTest2()
-        {
-            string parameter = @", \2666h "; // TODO: Initialize to an appropriate value
-            string expected = ", ♦h "; // TODO: Initialize to an appropriate value
-            string actual = Common.ConvertUnicodeToString(parameter);
-            Assert.AreEqual(expected, actual);
+        ///// <summary>
+        /////A test for ConvertUnicodeToString
+        /////</summary>
+        //[Test]
+        //public void ConvertUnicodeToStringTest2()
+        //{
+        //    string parameter = @", \2666h "; // TODO: Initialize to an appropriate value
+        //    string expected = ", ♦h "; // TODO: Initialize to an appropriate value
+        //    string actual = Common.ConvertUnicodeToString(parameter);
+        //    Assert.AreEqual(expected, actual);
 
-        }
+        //}
 
-        /// <summary>
-        ///A test for ConvertUnicodeToString
-        ///</summary>
-        [Test]
-        public void ConvertUnicodeToStringTest3()
-        {
-            string parameter = @"<\2666>&"; // TODO: Initialize to an appropriate value
-            string expected = "&lt;♦&gt;&amp;"; // TODO: Initialize to an appropriate value
-            string actual = Common.ConvertUnicodeToString(parameter);
-            Assert.AreEqual(expected, actual);
+        ///// <summary>
+        /////A test for ConvertUnicodeToString
+        /////</summary>
+        //[Test]
+        //public void ConvertUnicodeToStringTest3()
+        //{
+        //    string parameter = @"<\2666>&"; // TODO: Initialize to an appropriate value
+        //    string expected = "&lt;♦&gt;&amp;"; // TODO: Initialize to an appropriate value
+        //    string actual = Common.ConvertUnicodeToString(parameter);
+        //    Assert.AreEqual(expected, actual);
 
-        }
+        //}
 
-        /// <summary>
-        ///A test for ConvertUnicodeToString
-        ///</summary>
-        [Test]
-        public void ConvertUnicodeToStringTest4()
-        {
-            string parameter = "'\"\\2666\"'";// Double quote between the single quote
-            string expected = "\"♦\""; 
-            string actual = Common.ConvertUnicodeToString(parameter);
-            Assert.AreEqual(expected, actual);
-        }
-        /// <summary>
-        ///A test for ConvertUnicodeToString
-        ///</summary>
-        [Test]
-        public void ConvertUnicodeToStringTest5()
-        {
-            string parameter = "\"'\\2666'\""; // single quote between the Double quote
-            string expected = "'♦'"; 
-            string actual = Common.ConvertUnicodeToString(parameter);
-            Assert.AreEqual(expected, actual);
-        }
+        ///// <summary>
+        /////A test for ConvertUnicodeToString
+        /////</summary>
+        //[Test]
+        //public void ConvertUnicodeToStringTest4()
+        //{
+        //    string parameter = "'\"\\2666\"'";// Double quote between the single quote
+        //    string expected = "\"♦\""; 
+        //    string actual = Common.ConvertUnicodeToString(parameter);
+        //    Assert.AreEqual(expected, actual);
+        //}
+        ///// <summary>
+        /////A test for ConvertUnicodeToString
+        /////</summary>
+        //[Test]
+        //public void ConvertUnicodeToStringTest5()
+        //{
+        //    string parameter = "\"'\\2666'\""; // single quote between the Double quote
+        //    string expected = "'♦'"; 
+        //    string actual = Common.ConvertUnicodeToString(parameter);
+        //    Assert.AreEqual(expected, actual);
+        //}
 
-        /// <summary>
-        ///A test for ConvertUnicodeToString
-        ///</summary>
-        [Test]
-        public void ConvertUnicodeToStringTest6()
-        {
-            string parameter = "\"\\2666h";// Double quote is wrong
-            string expected = "";
-            string actual = Common.ConvertUnicodeToString(parameter);
-            Assert.AreEqual(expected, actual);
+        ///// <summary>
+        /////A test for ConvertUnicodeToString
+        /////</summary>
+        //[Test]
+        //public void ConvertUnicodeToStringTest6()
+        //{
+        //    string parameter = "\"\\2666h";// Double quote is wrong
+        //    string expected = "";
+        //    string actual = Common.ConvertUnicodeToString(parameter);
+        //    Assert.AreEqual(expected, actual);
 
-            parameter = "''\\2666'";// Single quote is wrong
-            actual = Common.ConvertUnicodeToString(parameter);
-            Assert.AreEqual(expected, actual);
-        }
+        //    parameter = "''\\2666'";// Single quote is wrong
+        //    actual = Common.ConvertUnicodeToString(parameter);
+        //    Assert.AreEqual(expected, actual);
+        //}
 
         /// <summary>
         ///A test for ConvertUnicodeToString
