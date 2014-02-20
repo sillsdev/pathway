@@ -1381,11 +1381,11 @@ namespace SIL.PublishingSolution
                     _verseContent.Append(" <text:span text:style-name=\"" + characterStyle + "\">");
                     if (_projInfo.HideSpaceVerseNumber.ToLower() == "false")
                     {
-                        content = content.Replace("-", "‑") + _hardSpace;
+                        content = content.Replace("-", Common.ConvertUnicodeToString("\\2011")) + _hardSpace;
                     }
                     else
                     {
-                        content = content.Replace("-", "‑") + _zeroWidthNoBreakSpace;
+                        content = content.Replace("-", Common.ConvertUnicodeToString("\\2011")) + _zeroWidthNoBreakSpace;
                     }
                 }
             }

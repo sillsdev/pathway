@@ -651,7 +651,7 @@ namespace SIL.PublishingSolution
                                 }
                                 else if (var1 == "sensedisc")
                                 {
-                                    ConcatContent = ConcatContent + "•";
+                                    ConcatContent = ConcatContent + Common.ConvertUnicodeToString("\\2022");
                                 }
                                 else if (ContentCounter.ContainsKey(var2))
                                 {

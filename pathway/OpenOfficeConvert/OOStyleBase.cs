@@ -736,7 +736,7 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("text:level", "1");
                         _writer.WriteAttributeString("text:style-name", "Bullet_20_Symbols");
                         _writer.WriteAttributeString("style:num-suffix", ".");
-                        _writer.WriteAttributeString("text:bullet-char", "•");
+                        _writer.WriteAttributeString("text:bullet-char", Common.ConvertUnicodeToString("\\2022"));
                         _writer.WriteStartElement("style:list-level-properties");
                         _writer.WriteAttributeString("text:list-level-position-and-space-mode", "label-alignment");
                         _writer.WriteStartElement("style:list-level-label-alignment");
@@ -755,7 +755,7 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("text:level", "2");
                         _writer.WriteAttributeString("text:style-name", "Bullet_20_Symbols");
                         _writer.WriteAttributeString("style:num-suffix", ".");
-                        _writer.WriteAttributeString("text:bullet-char", "•");
+                        _writer.WriteAttributeString("text:bullet-char", Common.ConvertUnicodeToString("\\2022"));
                         _writer.WriteStartElement("style:list-level-properties");
                         _writer.WriteAttributeString("text:list-level-position-and-space-mode", "label-alignment");
                         _writer.WriteStartElement("style:list-level-label-alignment");
