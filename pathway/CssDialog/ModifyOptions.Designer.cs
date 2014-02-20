@@ -1,4 +1,6 @@
-﻿namespace SIL.PublishingSolution
+﻿using SIL.Tool;
+
+namespace SIL.PublishingSolution
 {
     partial class ModifyOptions
     {
@@ -195,7 +197,7 @@
             this.BtUp.Name = "BtUp";
             this.BtUp.Size = new System.Drawing.Size(23, 23);
             this.BtUp.TabIndex = 8;
-            this.BtUp.Text = "↑";
+            this.BtUp.Text = Common.ConvertUnicodeToString("\\2191");
             this.BtUp.UseVisualStyleBackColor = true;
             this.BtUp.Visible = false;
             // 
@@ -207,7 +209,7 @@
             this.BtDown.Name = "BtDown";
             this.BtDown.Size = new System.Drawing.Size(23, 23);
             this.BtDown.TabIndex = 9;
-            this.BtDown.Text = "↓";
+            this.BtDown.Text = Common.ConvertUnicodeToString("\\2193");
             this.BtDown.UseVisualStyleBackColor = true;
             this.BtDown.Visible = false;
             // 

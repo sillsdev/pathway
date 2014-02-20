@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------
 // <copyright file="Exportepub.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright � 2014, SIL International. All Rights Reserved.
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
 //
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -20,7 +20,7 @@
 //   |-content.opf
 //   |-toc.ncx
 //   |-<any fonts and other files embedded into the archive>
-//   |-<list of files in book � xhtml format + .css for styling>
+//   |-<list of files in book (C) xhtml format + .css for styling>
 //   '-<any images referenced in book files>
 //
 // See also http://www.openebook.org/2007/ops/OPS_2.0_final_spec.html

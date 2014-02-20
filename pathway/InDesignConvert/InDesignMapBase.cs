@@ -712,8 +712,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/English%3a USA");
             _writer.WriteAttributeString("Name", "$ID/English: USA");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/English");
             _writer.WriteAttributeString("SublanguageName", "$ID/USA");
             _writer.WriteAttributeString("Id", "269");
@@ -723,8 +725,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/English%3a USA Medical");
             _writer.WriteAttributeString("Name", "$ID/English: USA Medical");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/English");
             _writer.WriteAttributeString("SublanguageName", "$ID/USA Medical");
             _writer.WriteAttributeString("Id", "269");
@@ -734,8 +738,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/English%3a USA Legal");
             _writer.WriteAttributeString("Name", "$ID/English: USA Legal");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/English");
             _writer.WriteAttributeString("SublanguageName", "$ID/USA Legal");
             _writer.WriteAttributeString("Id", "269");
@@ -745,7 +751,7 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/French");
             _writer.WriteAttributeString("Name", "$ID/French");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
             _writer.WriteAttributeString("DoubleQuotes", "«»");
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/French");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
@@ -756,8 +762,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Spanish%3a Castilian");
             _writer.WriteAttributeString("Name", "$ID/Spanish: Castilian");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Spanish");
             _writer.WriteAttributeString("SublanguageName", "$ID/Castilian");
             _writer.WriteAttributeString("Id", "294");
@@ -767,8 +775,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Italian");
             _writer.WriteAttributeString("Name", "$ID/Italian");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Italian");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "281");
@@ -778,8 +788,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/English%3a UK");
             _writer.WriteAttributeString("Name", "$ID/English: UK");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/English");
             _writer.WriteAttributeString("SublanguageName", "$ID/UK");
             _writer.WriteAttributeString("Id", "525");
@@ -789,8 +801,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Swedish");
             _writer.WriteAttributeString("Name", "$ID/Swedish");
-            _writer.WriteAttributeString("SingleQuotes", "’’");
-            _writer.WriteAttributeString("DoubleQuotes", "””");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2019") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201d") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Swedish");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "295");
@@ -800,8 +814,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Danish");
             _writer.WriteAttributeString("Name", "$ID/Danish");
-            _writer.WriteAttributeString("SingleQuotes", "’’");
-            _writer.WriteAttributeString("DoubleQuotes", "””");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2019") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201d") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Danish");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "267");
@@ -811,8 +827,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Norwegian%3a Bokmal");
             _writer.WriteAttributeString("Name", "$ID/Norwegian: Bokmal");
-            _writer.WriteAttributeString("SingleQuotes", "’’");
-            _writer.WriteAttributeString("DoubleQuotes", "””");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2019") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201d") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Norwegian");
             _writer.WriteAttributeString("SublanguageName", "$ID/Bokmal");
             _writer.WriteAttributeString("Id", "286");
@@ -822,8 +840,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Portuguese");
             _writer.WriteAttributeString("Name", "$ID/Portuguese");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Portuguese");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "288");
@@ -833,8 +853,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Portuguese%3a Brazilian");
             _writer.WriteAttributeString("Name", "$ID/Portuguese: Brazilian");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Portuguese");
             _writer.WriteAttributeString("SublanguageName", "$ID/Brazilian");
             _writer.WriteAttributeString("Id", "544");
@@ -844,7 +866,7 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/French%3a Canadian");
             _writer.WriteAttributeString("Name", "$ID/French: Canadian");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
             _writer.WriteAttributeString("DoubleQuotes", "«»");
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/French");
             _writer.WriteAttributeString("SublanguageName", "$ID/Canadian");
@@ -855,8 +877,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Norwegian%3a Nynorsk");
             _writer.WriteAttributeString("Name", "$ID/Norwegian: Nynorsk");
-            _writer.WriteAttributeString("SingleQuotes", "’’");
-            _writer.WriteAttributeString("DoubleQuotes", "””");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2019") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201d") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Norwegian");
             _writer.WriteAttributeString("SublanguageName", "$ID/Nynorsk");
             _writer.WriteAttributeString("Id", "542");
@@ -866,8 +890,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Finnish");
             _writer.WriteAttributeString("Name", "$ID/Finnish");
-            _writer.WriteAttributeString("SingleQuotes", "’’");
-            _writer.WriteAttributeString("DoubleQuotes", "””");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2019") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201d") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Finnish");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "273");
@@ -877,8 +903,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Catalan");
             _writer.WriteAttributeString("Name", "$ID/Catalan");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Catalan");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "263");
@@ -899,8 +927,12 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Bulgarian");
             _writer.WriteAttributeString("Name", "$ID/Bulgarian");
-            _writer.WriteAttributeString("SingleQuotes", "‚‘");
-            _writer.WriteAttributeString("DoubleQuotes", "„“");
+            _writer.WriteAttributeString("SingleQuotes",
+                                         Common.ConvertUnicodeToString("\\201a") +
+                                         Common.ConvertUnicodeToString("\\2018"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201e") +
+                                         Common.ConvertUnicodeToString("\\201c"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Bulgarian");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "261");
@@ -910,8 +942,12 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Czech");
             _writer.WriteAttributeString("Name", "$ID/Czech");
-            _writer.WriteAttributeString("SingleQuotes", "‚‘");
-            _writer.WriteAttributeString("DoubleQuotes", "„“");
+            _writer.WriteAttributeString("SingleQuotes",
+                                         Common.ConvertUnicodeToString("\\201a") +
+                                         Common.ConvertUnicodeToString("\\2018"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201e") +
+                                         Common.ConvertUnicodeToString("\\201c"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Czech");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "266");
@@ -921,8 +957,12 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Polish");
             _writer.WriteAttributeString("Name", "$ID/Polish");
-            _writer.WriteAttributeString("SingleQuotes", "‚’");
-            _writer.WriteAttributeString("DoubleQuotes", "„”");
+            _writer.WriteAttributeString("SingleQuotes",
+                                         Common.ConvertUnicodeToString("\\201a") +
+                                         Common.ConvertUnicodeToString("\\2018"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201e") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Polish");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "287");
@@ -932,8 +972,12 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Romanian");
             _writer.WriteAttributeString("Name", "$ID/Romanian");
-            _writer.WriteAttributeString("SingleQuotes", "‚’");
-            _writer.WriteAttributeString("DoubleQuotes", "„”");
+            _writer.WriteAttributeString("SingleQuotes",
+                                         Common.ConvertUnicodeToString("\\201a") +
+                                         Common.ConvertUnicodeToString("\\2018"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201e") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Romanian");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "289");
@@ -943,7 +987,7 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Greek");
             _writer.WriteAttributeString("Name", "$ID/Greek");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
             _writer.WriteAttributeString("DoubleQuotes", "«»");
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Greek");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
@@ -954,8 +998,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Turkish");
             _writer.WriteAttributeString("Name", "$ID/Turkish");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Turkish");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "297");
@@ -965,8 +1011,12 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Hungarian");
             _writer.WriteAttributeString("Name", "$ID/Hungarian");
-            _writer.WriteAttributeString("SingleQuotes", "‚’");
-            _writer.WriteAttributeString("DoubleQuotes", "„”");
+            _writer.WriteAttributeString("SingleQuotes",
+                                         Common.ConvertUnicodeToString("\\201a") +
+                                         Common.ConvertUnicodeToString("\\2018"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201e") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Hungarian");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "278");
@@ -976,8 +1026,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/English%3a Canadian");
             _writer.WriteAttributeString("Name", "$ID/English: Canadian");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/English");
             _writer.WriteAttributeString("SublanguageName", "$ID/Canadian");
             _writer.WriteAttributeString("Id", "1037");
@@ -987,8 +1039,12 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Slovak");
             _writer.WriteAttributeString("Name", "$ID/Slovak");
-            _writer.WriteAttributeString("SingleQuotes", "‚‘");
-            _writer.WriteAttributeString("DoubleQuotes", "„“");
+            _writer.WriteAttributeString("SingleQuotes",
+                                         Common.ConvertUnicodeToString("\\201a") +
+                                         Common.ConvertUnicodeToString("\\2018"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201e") +
+                                         Common.ConvertUnicodeToString("\\201c"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Slovak");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "291");
@@ -998,8 +1054,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Croatian");
             _writer.WriteAttributeString("Name", "$ID/Croatian");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Croatian");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "265");
@@ -1009,8 +1067,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Estonian");
             _writer.WriteAttributeString("Name", "$ID/Estonian");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Estonian");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "270");
@@ -1020,8 +1080,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Latvian");
             _writer.WriteAttributeString("Name", "$ID/Latvian");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Latvian");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "284");
@@ -1031,8 +1093,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Lithuanian");
             _writer.WriteAttributeString("Name", "$ID/Lithuanian");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Lithuanian");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "285");
@@ -1053,8 +1117,12 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/German%3a Traditional");
             _writer.WriteAttributeString("Name", "$ID/German: Traditional");
-            _writer.WriteAttributeString("SingleQuotes", "‚‘");
-            _writer.WriteAttributeString("DoubleQuotes", "„“");
+            _writer.WriteAttributeString("SingleQuotes",
+                                         Common.ConvertUnicodeToString("\\201a") +
+                                         Common.ConvertUnicodeToString("\\2018"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201e") +
+                                         Common.ConvertUnicodeToString("\\201c"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/German");
             _writer.WriteAttributeString("SublanguageName", "$ID/Traditional");
             _writer.WriteAttributeString("Id", "275");
@@ -1064,8 +1132,12 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/German%3a Reformed");
             _writer.WriteAttributeString("Name", "$ID/German: Reformed");
-            _writer.WriteAttributeString("SingleQuotes", "‚‘");
-            _writer.WriteAttributeString("DoubleQuotes", "„“");
+            _writer.WriteAttributeString("SingleQuotes",
+                                         Common.ConvertUnicodeToString("\\201a") +
+                                         Common.ConvertUnicodeToString("\\2018"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201e") +
+                                         Common.ConvertUnicodeToString("\\201c"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/German");
             _writer.WriteAttributeString("SublanguageName", "$ID/Reformed");
             _writer.WriteAttributeString("Id", "275");
@@ -1075,8 +1147,12 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/de_DE_2006");
             _writer.WriteAttributeString("Name", "$ID/de_DE_2006");
-            _writer.WriteAttributeString("SingleQuotes", "‚‘");
-            _writer.WriteAttributeString("DoubleQuotes", "„“");
+            _writer.WriteAttributeString("SingleQuotes",
+                                         Common.ConvertUnicodeToString("\\201a") +
+                                         Common.ConvertUnicodeToString("\\2018"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201e") +
+                                         Common.ConvertUnicodeToString("\\201c"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/de_DE_2006");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "275");
@@ -1086,8 +1162,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Dutch");
             _writer.WriteAttributeString("Name", "$ID/Dutch");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Dutch");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "268");
@@ -1097,8 +1175,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/nl_NL_2005");
             _writer.WriteAttributeString("Name", "$ID/nl_NL_2005");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/nl_NL_2005");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "268");
@@ -1108,7 +1188,9 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/German%3a Swiss");
             _writer.WriteAttributeString("Name", "$ID/German: Swiss");
-            _writer.WriteAttributeString("SingleQuotes", "‹›");
+            _writer.WriteAttributeString("SingleQuotes",
+                                         Common.ConvertUnicodeToString("\\2039") +
+                                         Common.ConvertUnicodeToString("\\203a"));
             _writer.WriteAttributeString("DoubleQuotes", "«»");
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/German");
             _writer.WriteAttributeString("SublanguageName", "$ID/Swiss");
@@ -1119,7 +1201,9 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/de_CH_2006");
             _writer.WriteAttributeString("Name", "$ID/de_CH_2006");
-            _writer.WriteAttributeString("SingleQuotes", "‹›");
+            _writer.WriteAttributeString("SingleQuotes",
+                                         Common.ConvertUnicodeToString("\\2039") +
+                                         Common.ConvertUnicodeToString("\\203a"));
             _writer.WriteAttributeString("DoubleQuotes", "«»");
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/de_CH_2006");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
@@ -1130,8 +1214,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Language");
             _writer.WriteAttributeString("Self", "Language/$ID/Ukrainian");
             _writer.WriteAttributeString("Name", "$ID/Ukrainian");
-            _writer.WriteAttributeString("SingleQuotes", "‘’");
-            _writer.WriteAttributeString("DoubleQuotes", "“”");
+            _writer.WriteAttributeString("SingleQuotes", Common.ConvertUnicodeToString("\\2018") + Common.ConvertUnicodeToString("\\2019"));
+            _writer.WriteAttributeString("DoubleQuotes",
+                                         Common.ConvertUnicodeToString("\\201c") +
+                                         Common.ConvertUnicodeToString("\\201d"));
             _writer.WriteAttributeString("PrimaryLanguageName", "$ID/Ukrainian");
             _writer.WriteAttributeString("SublanguageName", "$ID/");
             _writer.WriteAttributeString("Id", "298");

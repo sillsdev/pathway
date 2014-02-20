@@ -239,7 +239,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// To Convert the string / symbol to unicode value
         /// </summary>
-        /// <param name="inputString">String value for example "‡"</param>
+        /// <param name="inputString">String value for example Tamil char</param>
         /// <returns>unicode Value</returns>
         private static string ConvertStringToUnicode(string inputString)
         {
