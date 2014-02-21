@@ -103,7 +103,7 @@
     <!-- Special handling of text. -->
     <xsl:template match="text()">
 		<!-- Replace curly quotes with straight quotes. -->
-		<xsl:value-of select="translate(.,'“”','&quot;&quot;')"/>
+		<xsl:value-of select="translate(.,'&#x201c;&#x201d;','&quot;&quot;')"/>
     </xsl:template>
     
     <!-- Process the chapters. -->
