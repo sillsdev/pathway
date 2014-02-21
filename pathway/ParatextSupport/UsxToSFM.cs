@@ -539,12 +539,12 @@ namespace SIL.PublishingSolution
         /// input: 
         /// <note caller="+" style="f">
         /// <char style="fr" closed="false">1.1-2 </char>
-        /// <char style="ft" closed="false">‘hakim’.</char>
+        /// <char style="ft" closed="false">hakim.</char>
         /// </note>
         /// output: 
         /// \f + 
         /// \fr 1.1-2 
-        /// \ft ‘hakim’.
+        /// \ft hakim.
         /// \f*
         /// </summary>
         private void Note()

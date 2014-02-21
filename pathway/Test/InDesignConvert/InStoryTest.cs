@@ -636,15 +636,8 @@ namespace Test.InDesignConvert
             _expected.Clear();
             string styleName = "Paragraph_1";
             XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
-            string content = "ámʋ asɩ wie tá á, ɔlɔwa mʋ akasɩ́pʋ́ abanyɔ́ gyankpá. Ɔlɛbláa amʋ́ ɔbɛ́ɛ, “Mlɩyɔ wúlu amʋ ɔnɔ́ á, ";
+            string content = "You can (( wrap text (around any object) in InDesign )). ";
             bool result = ValidateNodeContent(_outputStory, content);
-            Assert.IsTrue(result, styleName + " test Failed");
-
-            _expected.Clear();
-            styleName = "Paragraph_1";
-            XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"][2]//Content";
-            content = "Nɩ́ ɔkʋ ɔfɩ́tɛ́ mlɩ asʋankʋ á, mlɩbla mʋ mlɩaa, ‘Anɩ Wíe dɛ́ amʋ́ hián.’ Ɩnʋnʋ ɔbɛ́ha mlɔ́pʋ amʋ́ ba mɩ.”";
-            result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
         }
 
@@ -667,14 +660,14 @@ namespace Test.InDesignConvert
             _expected.Clear();
             styleName = "AlternateReading_1";
             XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
-            content = "Nfɔ-nyíbʋ ";
+            content = "runaround text ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
             styleName = "NoteGeneralParagraph_1";
             XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
-            content = "igyi obubwí kʋá ɩbʋ mantáa Yerusalem, bʋtɛtɩ́ mʋ́ Olifbʋ.";
+            content = "Keep in mind that text wrap options apply to the object being wrapped.";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
         }

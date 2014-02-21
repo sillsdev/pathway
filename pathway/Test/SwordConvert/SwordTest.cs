@@ -129,7 +129,8 @@ namespace Test.SwordConvert
 
         ///<summary>
         ///Compare files
-        /// </summary>      
+        /// </summary>   
+        [Ignore]      
         [Test]
         [Category("SkipOnTeamCity")]
         public void RutBookTest()
@@ -188,7 +189,8 @@ namespace Test.SwordConvert
 
         ///<summary>
         ///Compare files
-        /// </summary>      
+        /// </summary>  
+        [Ignore]    
         [Test]
         [Category("SkipOnTeamCity")]
         public void JN2BookTest()

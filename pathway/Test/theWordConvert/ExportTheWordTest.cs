@@ -389,7 +389,7 @@ namespace Test.TheWordConvertTest
         public void StarSaltilloTest()
         {
             var bookNames = "file:///" + FileInput("BookNames-refList.xml");
-            TestDataCase("MAT", "040MAT-refList.usx", 31, "<i>Judá tusha chumu, ñu Belén pebulu,</i><CI><i>vee mujtu aa pebulu chumulaba buute\uA78C pensangue keeñu, ne balejtuu pebulu jutyuve;</i><CI><i>matyu ñu junuren main bale chachi fale,</i><CI><i>kumuinchi in Israel chachillanu washkenu juñu mitya,</i><RF q=+>Miqueas 5.2 <Rf> ti pillave, tila bale rukula.", bookNames, ":", true);
+            TestDataCase("MAT", "040MAT-refList.usx", 31, "<i>Judá tusha chumu, ñu Belén pebulu,</i><CI><i>vee mujtu aa pebulu chumulaba buute\uA78C pensangue keeñu, ne balejtuu pebulu jutyuve;</i><CI><i>matyu ñu junuren main bale chachi fale,</i><CI><i>kumuinchi in Israel chachillanu washkenu juñu mitya,</i><RF q=+>Miqueas 5.2 <Rf> ti pillave, tila bale rukula.", bookNames, ":", true);
         }
 
         [Test]

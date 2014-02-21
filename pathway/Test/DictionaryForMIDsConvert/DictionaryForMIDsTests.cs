@@ -85,7 +85,7 @@ namespace Test.DictionaryForMIDsConvert
             var sense = input.SelectNodes("//*[@class = 'entry']//*[@id]")[0];
             var rec = new DictionaryForMIDsRec();
             rec.AddHeadword(sense);
-            Assert.AreEqual("daġöl  ", rec.Rec);
+            Assert.AreEqual("dagol  ", rec.Rec);
         }
 
         [Test]
@@ -97,7 +97,7 @@ namespace Test.DictionaryForMIDsConvert
             var sense = input.SelectNodes("//*[@class = 'entry']//*[@id]")[0];
             var rec = new DictionaryForMIDsRec();
             rec.AddBeforeSense(sense);
-            Assert.AreEqual(@"{{\[ⁿda.ˈᵑɢɔl̪\] ", rec.Rec);
+            Assert.AreEqual(@"{{\[sample \] ", rec.Rec);
         }
 
         [Test]
