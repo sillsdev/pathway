@@ -2539,6 +2539,45 @@ namespace SIL.Tool
             return isFound;
         }
 
+        /// <summary>
+        /// For scripture data, move the Paratext FRT before all content.
+        /// TD-3786
+        /// </summary>
+        /// <returns></returns>
+        public void MoveBookcodeFRTtoFront(string ProcessedXhtml)
+        {
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary"){ return; }
+
+            if (!File.Exists(ProcessedXhtml)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
+            string xPath = "//div[@class='scrBook']//span[@class='scrBookCode']";
+            XmlNodeList bookLists = xDoc.SelectNodes(xPath, namespaceManager);
+            if (bookLists.Count > 0)
+            {
+                for (int i = 0; i < bookLists.Count; i++)
+                {
+                    string x1 = bookLists[i].InnerText;
+                    if(x1.ToLower() == "frt")
+                    {
+                        XmlNode frtNode = bookLists[i].ParentNode;
+                        string bookName = string.Empty;
+                        bookName = Regex.Replace(frtNode.InnerXml, "<div class=\"columns\">", "<div  class=\"frtColumns\">");
+                        //bookName = Regex.Replace(bookName, "<div class=\"pictureColumn\">", "<div>");
+                        frtNode.InnerXml = bookName;
+
+                        xPath = "//div[@class='scrBook'][1]";
+                        XmlNode firstBookNode = xDoc.SelectSingleNode(xPath, namespaceManager);
+                        if (frtNode != null) firstBookNode.ParentNode.InsertBefore(frtNode.CloneNode(true), firstBookNode);
+                        firstBookNode.ParentNode.RemoveChild(frtNode);
+                    }
+                }
+            }
+            xDoc.Save(ProcessedXhtml);
+        }
+
 
 
         /// <summary>
@@ -3452,6 +3491,7 @@ namespace SIL.Tool
             tw.WriteLine("display: none;");
             tw.WriteLine("}");
 
+           
 
             if (_projInfo.ProjectInputType.ToLower() == "scripture")
             {
@@ -3460,8 +3500,15 @@ namespace SIL.Tool
                 tw.WriteLine("font-size: 0pt;");
                 tw.WriteLine("color: #ffffff;");
                 tw.WriteLine("}");
+
                 tw.WriteLine(".pictureColumn {");
                 tw.WriteLine("width: 99%;");
+                tw.WriteLine("}");
+
+                tw.WriteLine(".frtColumns {");
+                tw.WriteLine("column-count: 1;");
+                tw.WriteLine("column-gap: 12pt;");
+                tw.WriteLine("column-fill: balance;");
                 tw.WriteLine("}");
             }
             tw.Close();

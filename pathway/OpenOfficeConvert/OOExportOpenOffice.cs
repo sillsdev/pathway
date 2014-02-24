@@ -721,6 +721,7 @@ namespace SIL.PublishingSolution
             preProcessor.GetDefaultLanguage(projInfo);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
             InsertFrontMatter(projInfo);
+            preProcessor.MoveBookcodeFRTtoFront(projInfo.DefaultXhtmlFileWithPath);
             preProcessor.GetfigureNode();
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
             preProcessor.InsertBookPageBreak();

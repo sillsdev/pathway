@@ -2884,12 +2884,12 @@ namespace SIL.PublishingSolution
                 string strOutlineLevel = "1";
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
-                    if (IdAllClass["letter"].ContainsKey("-ps-outline-level"))
+                    if (IdAllClass.ContainsKey("letter") && IdAllClass["letter"].ContainsKey("-ps-outline-level"))
                         strOutlineLevel = IdAllClass["letter"]["-ps-outline-level"];
                 }
                 else
                 {
-                    if (IdAllClass["scrBook"].ContainsKey("-ps-outline-level"))
+                    if (IdAllClass.ContainsKey("scrBook") && IdAllClass["scrBook"].ContainsKey("-ps-outline-level"))
                         strOutlineLevel = IdAllClass["scrBook"]["-ps-outline-level"];
                 }
 
