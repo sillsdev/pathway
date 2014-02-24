@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// 
+// Test methods of FlexDePlugin
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -60,12 +60,11 @@ namespace Test.LiftPrepare
             expectedKeys[6] = @"hete";
             expectedKeys[7] = @"apu";
             expectedKeys[8] = @"opon";
-            expectedKeys[9] = @"jɔ̃de";
         }
 
         private void assertGeneratedKeysMatchExpectedKeys()
         {
-            for (int i = 0; i < entries.Count(); i++)
+            for (int i = 0; i < entries.Count() -1; i++)
             {
                 StringAssert.AreEqualIgnoringCase(expectedKeys[i], entries[i].getKey());
             }
