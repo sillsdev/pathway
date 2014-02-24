@@ -137,8 +137,8 @@ namespace SIL.PublishingSolution
                 DataSetForGrid.Tables["Styles"].Rows.Add(row);
             }
             grid.DataSource = DataSetForGrid.Tables["Styles"];
-            grid.Columns[0].Width = 100;
-            grid.Columns[1].Width = 198;
+            grid.Columns[0].Width = 140;
+            grid.Columns[1].Width = 265;
             grid.Columns[4].Visible = false;
             grid.Refresh();
 
