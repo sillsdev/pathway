@@ -65,7 +65,6 @@
             this.txtColophonFile = new System.Windows.Forms.TextBox();
             this.chkColophon = new System.Windows.Forms.CheckBox();
             this.btnCoverImage = new System.Windows.Forms.Button();
-            this.imgCoverImage = new System.Windows.Forms.PictureBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkLbPreprocess = new System.Windows.Forms.CheckedListBox();
@@ -77,15 +76,17 @@
             this.btnBrowseSaveInFolder = new System.Windows.Forms.Button();
             this.txtSaveInFolder = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.btnHelpShow = new System.Windows.Forms.Button();
             this.BtnBrwsLayout = new System.Windows.Forms.Button();
+            this.imgCoverImage = new System.Windows.Forms.PictureBox();
             this.btnMoreLessOptions = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCoverImage)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grpInclude.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgCoverImage)).BeginInit();
             this.SuspendLayout();
             // 
             // lnkIP
@@ -210,7 +211,7 @@
             this.tabPage1.Controls.Add(this.txtPublisher);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(365, 238);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Publication Info";
@@ -333,7 +334,7 @@
             this.tabPage2.Controls.Add(this.imgCoverImage);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(365, 238);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Front Matter";
@@ -476,19 +477,6 @@
             this.btnCoverImage.UseVisualStyleBackColor = true;
             this.btnCoverImage.Click += new System.EventHandler(this.btnCoverImage_Click);
             // 
-            // imgCoverImage
-            // 
-            this.imgCoverImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.imgCoverImage.Enabled = false;
-            this.imgCoverImage.Image = ((System.Drawing.Image)(resources.GetObject("imgCoverImage.Image")));
-            this.imgCoverImage.InitialImage = ((System.Drawing.Image)(resources.GetObject("imgCoverImage.InitialImage")));
-            this.imgCoverImage.Location = new System.Drawing.Point(133, 26);
-            this.imgCoverImage.Name = "imgCoverImage";
-            this.imgCoverImage.Size = new System.Drawing.Size(32, 32);
-            this.imgCoverImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgCoverImage.TabIndex = 54;
-            this.imgCoverImage.TabStop = false;
-            // 
             // tabPage3
             // 
             this.tabPage3.AutoScroll = true;
@@ -607,6 +595,19 @@
             this.label8.TabIndex = 22;
             this.label8.Text = "Save in Folder :";
             // 
+            // btnHelpShow
+            // 
+            this.btnHelpShow.AccessibleName = "Preview";
+            this.btnHelpShow.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnHelpShow.BackgroundImage")));
+            this.btnHelpShow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnHelpShow.Image = global::SIL.PublishingSolution.Properties.Resources.Help_Image;
+            this.btnHelpShow.Location = new System.Drawing.Point(302, 12);
+            this.btnHelpShow.Name = "btnHelpShow";
+            this.btnHelpShow.Size = new System.Drawing.Size(24, 24);
+            this.btnHelpShow.TabIndex = 12;
+            this.btnHelpShow.UseVisualStyleBackColor = true;
+            this.btnHelpShow.Click += new System.EventHandler(this.btnHelpShow_Click);
+            // 
             // BtnBrwsLayout
             // 
             this.BtnBrwsLayout.AccessibleName = "Preview";
@@ -618,6 +619,19 @@
             this.BtnBrwsLayout.TabIndex = 4;
             this.BtnBrwsLayout.UseVisualStyleBackColor = true;
             this.BtnBrwsLayout.Click += new System.EventHandler(this.BtnBrwsLayout_Click);
+            // 
+            // imgCoverImage
+            // 
+            this.imgCoverImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.imgCoverImage.Enabled = false;
+            this.imgCoverImage.Image = ((System.Drawing.Image)(resources.GetObject("imgCoverImage.Image")));
+            this.imgCoverImage.InitialImage = ((System.Drawing.Image)(resources.GetObject("imgCoverImage.InitialImage")));
+            this.imgCoverImage.Location = new System.Drawing.Point(133, 26);
+            this.imgCoverImage.Name = "imgCoverImage";
+            this.imgCoverImage.Size = new System.Drawing.Size(32, 32);
+            this.imgCoverImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgCoverImage.TabIndex = 54;
+            this.imgCoverImage.TabStop = false;
             // 
             // btnMoreLessOptions
             // 
@@ -639,6 +653,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(397, 461);
+            this.Controls.Add(this.btnHelpShow);
             this.Controls.Add(this.BtnBrwsLayout);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnMoreLessOptions);
@@ -662,12 +677,12 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCoverImage)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.grpInclude.ResumeLayout(false);
             this.grpInclude.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgCoverImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -725,5 +740,6 @@
         private System.Windows.Forms.CheckBox chkTOC;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckedListBox chkLbPreprocess;
+        private System.Windows.Forms.Button btnHelpShow;
     }
 }

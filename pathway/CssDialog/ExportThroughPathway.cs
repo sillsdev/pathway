@@ -1385,5 +1385,28 @@ namespace SIL.PublishingSolution
             if (!_isUnixOS)
                 SetTabbedHelpTopic();
         }
+
+        private void btnHelpShow_Click(object sender, EventArgs e)
+        {
+            CallHelp();
+        }
+
+        private void CallHelp()
+        {
+            Common.PathwayHelpSetup();
+            if (_isUnixOS)
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "chmsee";
+                startInfo.Arguments = Common.HelpProv.HelpNamespace;
+                Process.Start(startInfo);
+            }
+            else
+            {
+                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+                Common.HelpProv.SetHelpKeyword(this, @"User_Interface\Dialog_boxes\Export_Through_Pathway_dialog_box.htm");
+                SendKeys.Send("{F1}");
+            }
+        }
     }
 }
