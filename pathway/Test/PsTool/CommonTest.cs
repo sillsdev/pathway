@@ -892,6 +892,8 @@ namespace Test.PsTool
         #region LanguageTests
         [Test]
         [Category("SkipOnTeamCity")]
+        // If unit fails, please confirm the below file exist,
+        // C:\ProgramData\SIL\WritingSystemStore\ur.ldml
         public void GetTextDirection()
         {
             string expected = "ltr";
