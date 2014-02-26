@@ -139,7 +139,45 @@ namespace SIL.PublishingSolution
                 File.Copy(_pathwayFilePath, _userFilePath, true);
                 fileSettingFileCreated = true;
             }
+            CopySamplePictureFiles(pathwayFolder);
             return fileSettingFileCreated;
+        }
+
+        private void CopySamplePictureFiles(string allUserAppPath)
+        {
+            string picturePath = Common.PathCombine(allUserAppPath, "Pictures");
+            if(Directory.Exists(allUserAppPath))
+            {
+                if (!Directory.Exists(picturePath))
+                {
+                    Directory.CreateDirectory(picturePath);
+                }
+                string applicationInsalledLocation = Common.GetPSApplicationPath();
+                applicationInsalledLocation = Common.PathCombine(applicationInsalledLocation, "Samples");
+                applicationInsalledLocation = Common.PathCombine(applicationInsalledLocation, "Dictionary");
+                applicationInsalledLocation = Common.PathCombine(applicationInsalledLocation, "Pictures");
+
+                if (Directory.Exists(applicationInsalledLocation))
+                {
+                    string[] pictureFilesList = Directory.GetFiles(applicationInsalledLocation, "*.jpg");
+                    CopyPictureFiles(pictureFilesList, picturePath);
+                    pictureFilesList = Directory.GetFiles(applicationInsalledLocation, "*.tif");
+                    CopyPictureFiles(pictureFilesList, picturePath);
+                }
+            }
+        }
+
+        private static void CopyPictureFiles(string[] pictureFilesList, string picturePath)
+        {
+            foreach (var pictureFile in pictureFilesList)
+            {
+                string pictureFileName = Path.GetFileName(pictureFile);
+                string pictureFileNamewithDirectory = Common.PathCombine(picturePath, pictureFileName);
+                if (!File.Exists(pictureFileNamewithDirectory))
+                {
+                    File.Copy(pictureFile, pictureFileNamewithDirectory, true);
+                }
+            }
         }
 
         private void CopyOrganization(string xPath)
