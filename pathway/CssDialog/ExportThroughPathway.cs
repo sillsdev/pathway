@@ -1404,7 +1404,7 @@ namespace SIL.PublishingSolution
             else
             {
                 Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, @"User_Interface\Dialog_boxes\Export_Through_Pathway_dialog_box.htm");
+                Common.HelpProv.SetHelpKeyword(this, @"Concepts\Destination.htm");
                 SendKeys.Send("{F1}");
             }
         }
