@@ -63,7 +63,8 @@ namespace Test.PsTool
             LanguageIso.Clear();
             RampDescriptionHas = null;
             RampDescription = null;
-            var settingsFolder = Common.PathCombine(Common.GetAllUserPath(), "Pathway");
+            //var settingsFolder = Common.PathCombine(Common.GetAllUserPath(), "Pathway");
+            var settingsFolder = Common.GetAllUserPath();
             if (Directory.Exists(settingsFolder))
             {
                 Directory.Delete(settingsFolder, true);
@@ -139,7 +140,7 @@ namespace Test.PsTool
         {
             const string TestFolder = "rampInput";
             _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
-            _projInputType = "Dictionary";
+            Param.Value[Param.InputType] = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
             Assert.True(Contributor.Contains("GOD,compiler"), "should be GOD!");
@@ -225,7 +226,7 @@ namespace Test.PsTool
         {
             const string TestFolder = "rampInput2";
             _folderPath = FileInput(Common.PathCombine(TestFolder, "sena3.xhtml"));
-            _projInputType = "Dictionary";
+            Param.Value[Param.InputType] = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
             Assert.AreEqual(null, RampDescription);
