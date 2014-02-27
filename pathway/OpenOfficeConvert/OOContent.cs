@@ -170,6 +170,8 @@ namespace SIL.PublishingSolution
         private bool _isPrimaryrefs;
         private bool _isAllowWhiteSpace = true;
         private bool _isEmptyPageInserted;
+        private bool _isH2Complaint;
+        private string _h3Book = string.Empty;
         #endregion
 
         #region Public Variable
@@ -235,6 +237,8 @@ namespace SIL.PublishingSolution
 
             return new Dictionary<string, ArrayList>();
         }
+
+        
 
         private void Preprocess()
         {
@@ -1071,7 +1075,20 @@ namespace SIL.PublishingSolution
             WriteGuidewordValueToVariable(content);
         }
 
-
+        private void InsertLeftRightReference(string bookName, string referenceStyle)
+        {
+            bookName += "1";
+            _writer.WriteStartElement("text:span");
+            _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+            _writer.WriteStartElement("text:variable-set");
+            _writer.WriteAttributeString("text:name", referenceStyle);
+            _writer.WriteAttributeString("text:display", "none");
+            _writer.WriteAttributeString("text:formula", "ooow:" + bookName);
+            _writer.WriteAttributeString("office:value-type", "string");
+            _writer.WriteAttributeString("office:string-value", bookName);
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+        }
 
         /// <summary>
         /// For TD-2034
@@ -1086,34 +1103,65 @@ namespace SIL.PublishingSolution
         {
             if (_allCharacter.Count > 0)
             {
-                if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) || (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0))
+                if (_allCharacter.Peek().IndexOf("h2_scrSection") >= 0)
                 {
-                    //_strBook = content;
-                    content = content.TrimEnd() + " ";
-                    if (_strBook.Length > 0)
-                    {
-                        _strBook2ndBook = content;
-                    }
-                    _strBook = content;
+                    _isH2Complaint = true;
                 }
-                else if (_allCharacter.Peek().IndexOf("span_TitleMain") == 0 && RefFormat.ToLower().IndexOf("genesis 1") == 0 && _strBook.Trim().Length == 0)
+
+                if (_isH2Complaint)
                 {
-                    //_strBook = content;
-                    content = content.TrimEnd() + " ";
-                    if (_strBook.Length > 0 && _is1stBookFound)
+                    if ((_allCharacter.Peek().IndexOf("h2_scrSection") >= 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) || 
+                        (_allCharacter.Peek().IndexOf("h2_scrSection") >= 0 &&
+                            RefFormat.ToLower().IndexOf("genesis 1") == 0))
                     {
-                        _strBook2ndBook = content;
-                        _is1stBookFound = false;
-                    }
-                    else
-                    {
+                        content = content.TrimEnd() + " ";
                         _strBook = content;
-                        _is1stBookFound = true;
+                        InsertLeftRightReference(_strBook, "Left_Guideword_L");
+                    }
+                    else if ((_allCharacter.Peek().IndexOf("h3_scrSection") >= 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) ||
+                        (_allCharacter.Peek().IndexOf("h3_scrSection") >= 0 &&
+                            RefFormat.ToLower().IndexOf("genesis 1") == 0))
+                    {
+                        content = content.TrimEnd() + " ";
+                        _h3Book = content;
+                        InsertLeftRightReference(_h3Book, "Right_Guideword_R");
                     }
                 }
-                else if (_allCharacter.Peek().ToLower().IndexOf("versenumber") == 0 || _allCharacter.Peek().ToLower().IndexOf("versenumber1") == 0)
+                else
                 {
-                    content = " " + content.TrimStart();
+                    if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) ||
+                        (_allCharacter.Peek().IndexOf("scrBookName") == 0 &&
+                         RefFormat.ToLower().IndexOf("genesis 1") == 0))
+                    {
+                        //_strBook = content;
+                        content = content.TrimEnd() + " ";
+                        if (_strBook.Length > 0)
+                        {
+                            _strBook2ndBook = content;
+                        }
+                        _strBook = content;
+                    }
+                    else if (_allCharacter.Peek().IndexOf("span_TitleMain") == 0 &&
+                             RefFormat.ToLower().IndexOf("genesis 1") == 0 && _strBook.Trim().Length == 0)
+                    {
+                        //_strBook = content;
+                        content = content.TrimEnd() + " ";
+                        if (_strBook.Length > 0 && _is1stBookFound)
+                        {
+                            _strBook2ndBook = content;
+                            _is1stBookFound = false;
+                        }
+                        else
+                        {
+                            _strBook = content;
+                            _is1stBookFound = true;
+                        }
+                    }
+                    else if (_allCharacter.Peek().ToLower().IndexOf("versenumber") == 0 ||
+                             _allCharacter.Peek().ToLower().IndexOf("versenumber1") == 0)
+                    {
+                        content = " " + content.TrimStart();
+                    }
                 }
             }
             return content;
@@ -3088,19 +3136,22 @@ namespace SIL.PublishingSolution
 
         private void InsertBookNameBeforeBookIntroduction(string content)
         {
-            if (_classNameWithLang.IndexOf("scrBookName") == 0)// == "scrBook_scrBody"
+            if (!_isH2Complaint)
             {
-                content += "1";
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                _writer.WriteStartElement("text:variable-set");
-                _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                _writer.WriteAttributeString("text:display", "none");
-                _writer.WriteAttributeString("text:formula", "ooow:" + content);
-                _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("office:string-value", content);
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
+                if (_classNameWithLang.IndexOf("scrBookName") == 0) // == "scrBook_scrBody"
+                {
+                    content += "1";
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow:" + content);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", content);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                }
             }
         }
 
@@ -3168,11 +3219,12 @@ namespace SIL.PublishingSolution
                 }
 
                 string chapterNo = content;
-
+                string rightContent = string.Empty;
                 if (_strBook.Length > 0)
                 {
                     content = _strBook + chapterNo;
                     leftHeadword = content;
+                    rightContent = _h3Book + chapterNo;
                 }
 
                 _writer.WriteStartElement("text:span");
@@ -3185,7 +3237,10 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("office:string-value", leftHeadword);//leftHeadword
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
-
+                if (_isH2Complaint)
+                {
+                    content = rightContent;
+                }
                 _writer.WriteStartElement("text:span");
                 _writer.WriteAttributeString("text:style-name", _classNameWithLang);
                 _writer.WriteStartElement("text:variable-set");

@@ -3510,6 +3510,14 @@ namespace SIL.Tool
                 tw.WriteLine("column-gap: 12pt;");
                 tw.WriteLine("column-fill: balance;");
                 tw.WriteLine("}");
+
+                tw.WriteLine(".h2 {");
+                tw.WriteLine("display: none;");
+                tw.WriteLine("}");
+
+                tw.WriteLine(".h3 {");
+                tw.WriteLine("display: none;");
+                tw.WriteLine("}");
             }
             tw.Close();
         }
