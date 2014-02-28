@@ -210,7 +210,7 @@ namespace SIL.PublishingSolution
                         string pdfFIleName = Common.InsertCopyrightInPdf(Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), xhtmlFileName + ".pdf"), "Prince XML", projInfo.ProjectInputType);
 
                         string cleanExtn = ".tmp,.de,.exe,.jar,.xml";
-                        Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, cleanExtn, "layout", string.Empty);
+                        Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, cleanExtn, "layout.css", string.Empty);
                         CreateRAMP(projInfo);
                     }
                     else

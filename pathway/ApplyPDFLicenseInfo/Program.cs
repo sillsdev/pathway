@@ -61,7 +61,7 @@ namespace ApplyPDFLicenseInfo
             inputType = myTI.ToTitleCase(inputType);
             if (creatorTool.ToLower() == "libreoffice")
             {
-                Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout", string.Empty);
+                Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout.css", string.Empty);
                 LoadParameters(inputType);
                 CreateRAMP(xhtmlFile, inputType);
             }

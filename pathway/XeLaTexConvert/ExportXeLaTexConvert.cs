@@ -245,7 +245,7 @@ namespace SIL.PublishingSolution
             if (File.Exists(pdfFullName))
             {
                 Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif,.tex,.log,.exe,.xml,.jar",
-                                           "layout,mergedmain1,preserve", string.Empty);
+                                           "layout.css,mergedmain1,preserve", string.Empty);
                 CreateRAMP(projInfo);
             }
         }

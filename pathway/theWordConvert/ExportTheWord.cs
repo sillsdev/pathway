@@ -147,7 +147,7 @@ namespace SIL.PublishingSolution
 
                 success = ReportResults(resultFullName, mySwordResult, exportTheWordInputPath);
 
-                Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout", string.Empty);
+                Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout.css", string.Empty);
                 CreateRAMP(projInfo);
             }
             catch (Exception ex)

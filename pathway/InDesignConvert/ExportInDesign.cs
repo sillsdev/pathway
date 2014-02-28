@@ -109,7 +109,7 @@ namespace SIL.PublishingSolution
             string ldmlFullName = Common.PathCombine(projInfo.DictionaryPath, fileName + ".idml");
             Compress(projInfo.TempOutputFolder, ldmlFullName);
 
-            Common.CleanupExportFolder(ldmlFullName, ".tmp,.de", "layout", String.Empty);
+            Common.CleanupExportFolder(ldmlFullName, ".tmp,.de", "layout.css", String.Empty);
 
             CreateRAMP(projInfo);
 
