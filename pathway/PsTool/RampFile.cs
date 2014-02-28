@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="RampFile.cs" from='2013' to='2014' company='SIL International'>
-//      Copyright © 2014, SIL International. 
+//      Copyright ( c ) 2014, SIL International. 
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.

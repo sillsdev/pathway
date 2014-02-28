@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SIL")]
 [assembly: AssemblyProduct("DictionaryForMIDsConvert")]
-[assembly: AssemblyCopyright("Copyright © 2013 SIL International")]
+[assembly: AssemblyCopyright("Copyright ( c ) 2013 SIL International")]
 [assembly: AssemblyTrademark("SIL International")]
 [assembly: AssemblyCulture("")]
 

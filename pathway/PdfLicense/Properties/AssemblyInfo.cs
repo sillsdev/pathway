@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SIL International")]
 [assembly: AssemblyProduct("PdfLicense")]
-[assembly: AssemblyCopyright("Copyright © 2013 SIL International")]
+[assembly: AssemblyCopyright("Copyright ( c ) 2013 SIL International")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

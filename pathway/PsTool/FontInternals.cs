@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="FontInternals.cs" from='2010' to='2014' company='SIL International'>
-//      Copyright © 2014, SIL International. All Rights Reserved.   
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 // </copyright> 
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>

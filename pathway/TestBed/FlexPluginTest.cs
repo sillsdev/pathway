@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="FlexPluginTest.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+//      Copyright ( c ) 2009, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -976,7 +976,7 @@ namespace TestBed
             ramp.RelRequiresHas = "Y";
             ramp.AddRelRequires("OFL");
             ramp.RelConformsto = "odf";
-            ramp.AddRightsHolder("© 2013 SIL International®");
+            ramp.AddRightsHolder("( c ) 2013 SIL International®");
             ramp.Rights = "creative commons share alike";
             ramp.SilSensitivityMetaData = "Public";
             ramp.SilSensitivityPresentation = "Public";

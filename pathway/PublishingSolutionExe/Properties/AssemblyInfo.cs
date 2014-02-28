@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("FLEx 5.4 XHTML export to Open Office 2.4")]
 [assembly: AssemblyCompany("EC Group India for SIL International")]
 [assembly: AssemblyProduct("Pathway")]
-[assembly: AssemblyCopyright("Copyright © 2008-2012 SIL International")]
+[assembly: AssemblyCopyright("Copyright ( c ) 2008-2012 SIL International")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

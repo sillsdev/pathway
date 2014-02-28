@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="CommonXmlTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright © 2014, SIL International. All Rights Reserved.   
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -109,7 +109,7 @@ namespace Test.PsTool
             metaDataDicExpected["Creator"] = "sams creator";
             metaDataDicExpected["Publisher"] = "sams publisher";
             metaDataDicExpected["Description"] = "sams book";
-            metaDataDicExpected["Copyright Holder"] = "sams international © 2011. All Rights Reserved.";
+            metaDataDicExpected["Copyright Holder"] = "sams international ( c ) 2011. All Rights Reserved.";
             metaDataDicExpected["Subject"] = "Foreign Literatures and Linguistics; Language Documentation; Dictionary; Reference";
 
             Assert.AreEqual(_metaDataDic,metaDataDicExpected);

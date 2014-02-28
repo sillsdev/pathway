@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("EC-Group")]
 [assembly: AssemblyProduct("BookletBuilder")]
-[assembly: AssemblyCopyright("Copyright © EC-Group 2012")]
+[assembly: AssemblyCopyright("Copyright ( c ) EC-Group 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SIL International")]
 [assembly: AssemblyProduct("WordPressConvert")]
-[assembly: AssemblyCopyright("Copyright © 2012 SIL International")]
+[assembly: AssemblyCopyright("Copyright ( c ) 2012 SIL International")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
