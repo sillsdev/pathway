@@ -109,7 +109,7 @@ namespace Test.PsTool
             metaDataDicExpected["Creator"] = "sams creator";
             metaDataDicExpected["Publisher"] = "sams publisher";
             metaDataDicExpected["Description"] = "sams book";
-            metaDataDicExpected["Copyright Holder"] = "sams international ( c ) 2011. All Rights Reserved.";
+            metaDataDicExpected["Copyright Holder"] = "sams international " +  Common.ConvertUnicodeToString("\\00a9") + " 2011. All Rights Reserved.";
             metaDataDicExpected["Subject"] = "Foreign Literatures and Linguistics; Language Documentation; Dictionary; Reference";
 
             Assert.AreEqual(_metaDataDic,metaDataDicExpected);
