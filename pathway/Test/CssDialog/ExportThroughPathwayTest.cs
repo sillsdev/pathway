@@ -29,8 +29,8 @@ namespace Test.CssDialog
         {
             string pathwayDirectory = PathwayPath.GetPathwayDir();
             string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
-            ValidateXMLVersion(styleSettingFile);
             Common.Testing = true;
+            ValidateXMLVersion(styleSettingFile);
             InputType = "Dictionary";
             Common.ProgInstall = pathwayDirectory;
             Param.LoadSettings();
@@ -73,6 +73,8 @@ namespace Test.CssDialog
         public void LoadAvailFormatsTest()
         {
             LoadAvailFormats();
+            var backends = Backend.GetExportType("Scripture");
+            Assert.Less(0, backends.Count);
             string lastItem = string.Empty;
             foreach (string item in DdlLayout.Items)
             {
