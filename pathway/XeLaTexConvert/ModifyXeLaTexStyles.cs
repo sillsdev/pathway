@@ -600,6 +600,14 @@ namespace SIL.PublishingSolution
                     tableOfContent += "\\CoverPageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
                     tableOfContent += "\\end{center} \r\n";
                 }
+                else
+                {
+                    tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
+                    tableOfContent += "\\vskip 60pt \r\n";
+                    tableOfContent += "\\begin{center} \r\n";
+                    tableOfContent += "\\CoverPageHeading{" + " " + "} \r\n";
+                    tableOfContent += "\\end{center} \r\n";
+                }
 
                 tableOfContent += "\\newpage \r\n";
                 tableOfContent += "\\newpage \r\n";
