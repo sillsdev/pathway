@@ -4126,7 +4126,7 @@ namespace SIL.PublishingSolution
                                             {
                                                 textString = textString + "-" + currentChapterNumber + ":" +
                                                                lastVerseNumber + ")";
-                                            }                                            
+                                            }
                                             if (textString.Trim().Length >= 4)
                                             {
                                                 // write out the node
@@ -4368,15 +4368,21 @@ namespace SIL.PublishingSolution
                     XmlReader xmlReader = XmlReader.Create(sourceFile, xmlReaderSettings);
                     xmlDocument.Load(xmlReader);
                     xmlReader.Close();
-                    const string xPath = ".//xhtml:div[@class='Title_Main']";
+                    string xPath = ".//xhtml:div[@class='Title_Secondary']";
                     XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
+
+                    if (nodes.Count == 0)
+                    {
+                        xPath = ".//xhtml:div[@class='Title_Main']";
+                        nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
+                    }
 
                     if (nodes.Count > 0)
                     {
-                        var next = nodes[0].NextSibling;
+                        var next = nodes[nodes.Count - 1].NextSibling;
                         if (next.Attributes != null)
                         {
-                            while (next.Attributes.GetNamedItem("class").InnerText.ToLower().Contains("title"))
+                            while (next.Attributes != null && next.Attributes.GetNamedItem("class").InnerText.ToLower().Contains("title"))
                                 next = next.NextSibling;
                         }
                         foreach (string VARIABLE in chapterIdList)
