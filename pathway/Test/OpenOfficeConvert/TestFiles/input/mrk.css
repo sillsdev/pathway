@@ -24,22 +24,6 @@ border-color: #abcdef;
 border-width: 0 1px 0;
 }
 
-/*div.img caption p{
-  text-align: center;
-  font-size:8pt;
-  font-weight: normal;
-border-style:dashed;
-border-color: #00ff00;
-border-width: 0 1px;
-position:relative;
-  margin: 0px;
-  width:12pc;
-  padding: 0;
-  font-family:arial, helvetica, sans-serif;
-}
-*/
-
-
 /* span class="chapterNumber" */
 .chapterNumber {
   string-set: chapterx content();

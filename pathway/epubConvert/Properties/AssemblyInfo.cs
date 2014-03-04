@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("epubExport")]
-[assembly: AssemblyCopyright("Copyright © 2008-2012 SIL International")]
+[assembly: AssemblyCopyright("Copyright ( c ) 2008-2012 SIL International")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

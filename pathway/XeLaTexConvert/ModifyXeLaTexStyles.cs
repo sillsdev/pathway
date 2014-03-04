@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ModifyXeLaTexStyles.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright © 2014, SIL International. All Rights Reserved.   
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -49,7 +49,7 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> _tempStyle;
         Dictionary<string, Dictionary<string, string>> mergedStyle = new Dictionary<string, Dictionary<string, string>>();
         Dictionary<string, Dictionary<string, string>> _cssClass = new Dictionary<string, Dictionary<string, string>>();
-        
+
         XeLaTexMapProperty mapProperty = new XeLaTexMapProperty();
         string _firstString = string.Empty;
         string _lastString = string.Empty;
@@ -70,7 +70,7 @@ namespace SIL.PublishingSolution
         private bool _isMirrored = false;
         private Dictionary<string, string> _langFontDictionary;
         private Dictionary<string, Dictionary<string, string>> _tocList;
-        
+
         public string ProjectType
         {
             get { return _projectType; }
@@ -165,7 +165,7 @@ namespace SIL.PublishingSolution
             get { return _langFontDictionary; }
             set { _langFontDictionary = value; }
         }
-        
+
         #endregion
 
         public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty,
@@ -309,7 +309,7 @@ namespace SIL.PublishingSolution
 
                 sw.WriteLine(@"\parindent=0pt");
                 sw.WriteLine(@"\parskip=\medskipamount");
-                
+
                 sw.WriteLine(@"\begin{document} ");
                 sw.WriteLine(@"\pagestyle{plain} ");
                 sw.WriteLine(@"\sloppy ");
@@ -545,6 +545,11 @@ namespace SIL.PublishingSolution
             tableOfContent += "\\pagestyle{plain} \r\n";
             tableOfContent += "\\tableofcontents \r\n";
             tableOfContent += "\\newpage \r\n";
+            tableOfContent += "\\thispagestyle{empty} \r\n";
+            tableOfContent += "\\mbox{} \r\n";
+            tableOfContent += "\\newpage \r\n";
+            tableOfContent += "\\newpage \r\n";
+            
             tableOfContent += "\\setcounter{page}{1} \r\n";
             tableOfContent += "\\pagenumbering{arabic}  \r\n";
             sw.WriteLine(tableOfContent);
@@ -593,6 +598,14 @@ namespace SIL.PublishingSolution
                     tableOfContent += "\\vskip 60pt \r\n";
                     tableOfContent += "\\begin{center} \r\n";
                     tableOfContent += "\\CoverPageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
+                    tableOfContent += "\\end{center} \r\n";
+                }
+                else
+                {
+                    tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
+                    tableOfContent += "\\vskip 60pt \r\n";
+                    tableOfContent += "\\begin{center} \r\n";
+                    tableOfContent += "\\CoverPageHeading{" + " " + "} \r\n";
                     tableOfContent += "\\end{center} \r\n";
                 }
 
@@ -684,8 +697,6 @@ namespace SIL.PublishingSolution
                     }
 
                 }
-
-
                 tableOfContent += "\\begin{titlepage}\r\n";
                 tableOfContent += "\\begin{center}\r\n";
                 tableOfContent += "\\textsc{\\LARGE " + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
@@ -701,11 +712,6 @@ namespace SIL.PublishingSolution
                 }
                 tableOfContent += "\\end{center} \r\n";
                 tableOfContent += "\\end{titlepage} \r\n";
-
-                tableOfContent += "\\newpage \r\n";
-                tableOfContent += "\\newpage \r\n";
-                tableOfContent += "\\mbox{} \r\n";
-
             }
 
 
@@ -713,13 +719,22 @@ namespace SIL.PublishingSolution
             {
                 tableOfContent += "\\pagenumbering{roman}  \r\n";
                 tableOfContent += "\\setcounter{page}{3} \r\n";
-
                 tableOfContent += "\\input{" + CopyrightTexFilename + "} \r\n";
                 tableOfContent += "\\pagestyle{plain} \r\n";
                 tableOfContent += "\\newpage \r\n";
-                tableOfContent += "\\newpage \r\n";
-                tableOfContent += "\\thispagestyle{empty} \r\n";
-                tableOfContent += "\\mbox{} \r\n";
+            }
+            else
+            {
+                if (tableOfContent != string.Empty)
+                {
+                    tableOfContent += "\\pagenumbering{roman}  \r\n";
+                    tableOfContent += "\\setcounter{page}{3} \r\n";
+                    tableOfContent += "\\pagestyle{plain} \r\n";
+                    tableOfContent += "\\newpage \r\n";
+                    tableOfContent += "\\newpage \r\n";
+                    tableOfContent += "\\thispagestyle{empty} \r\n";
+                    tableOfContent += "\\mbox{} \r\n";
+                }
             }
             sw.WriteLine(tableOfContent);
         }

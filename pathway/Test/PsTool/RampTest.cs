@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="RampTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright © 2014, SIL International. All Rights Reserved.   
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -181,7 +181,7 @@ namespace Test.PsTool
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
-            Assert.True(Rights == "© 2013 SIL International®. DRAFT DOCUMENTPlease note that this document is not in its final form. This document was printed during the normal course of a review process by the creator or editor, and will likely be superceded in both content and format by a...", "CopyRight Information is wrong!");
+            Assert.True(Rights == "( c ) 2013 SIL International®. DRAFT DOCUMENTPlease note that this document is not in its final form. This document was printed during the normal course of a review process by the creator or editor, and will likely be superceded in both content and format by a...", "CopyRight Information is wrong!");
         }
 
         [Test]

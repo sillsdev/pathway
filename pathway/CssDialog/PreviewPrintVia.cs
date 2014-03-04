@@ -35,7 +35,7 @@ namespace SIL.PublishingSolution
         public string AttribPreviewFile2 = "previewfile2";
         public string AttribCSSName = "file";
         public string StyleName = "type";
-
+        private bool _isUnixOS = false;
         public string SelectedStyle = string.Empty;
 
         DataSet DataSetForGrid = new DataSet();
@@ -66,6 +66,7 @@ namespace SIL.PublishingSolution
 
         private void PreviewPrintVia_Load(object sender, EventArgs e)
         {
+            _isUnixOS = Common.IsUnixOS();
             CreateColumn();
             LoadGridValues(sender);
             Common.PathwayHelpSetup();
@@ -425,9 +426,19 @@ namespace SIL.PublishingSolution
         private void BtnHelp_Click(object sender, EventArgs e)
         {
             Common.PathwayHelpSetup();
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-            SendKeys.Send("{F1}");
+            if (_isUnixOS)
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "chmsee";
+                startInfo.Arguments = Common.HelpProv.HelpNamespace;
+                Process.Start(startInfo);
+            }
+            else
+            {
+                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+                Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+                SendKeys.Send("{F1}");
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

@@ -69,6 +69,20 @@
     text-indent: .2in;
     margin-left: 0pt;
 }
+.Intro_Title_Main {
+	font-size: 14pt;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 8pt;
+	padding-bottom: 4pt;
+}
+.Intro_Title_Secondary {
+	font-size: 13pt;
+	font-style: italic;
+	text-align: center;
+	padding-top: 6pt;
+	padding-bottom: 3pt;
+}
 .Intro_Section_Head {
     font-weight: bold;	/* cascaded environment */
     font-style: normal;	/* cascaded environment */

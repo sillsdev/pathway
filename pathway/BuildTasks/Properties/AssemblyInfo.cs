@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("BuildTasks")]
-[assembly: AssemblyCopyright("Copyright © SIL International 2012")]
+[assembly: AssemblyCopyright("Copyright ( c ) SIL International 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

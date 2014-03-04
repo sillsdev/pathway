@@ -672,8 +672,16 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.", "Pathway", MessageBoxButtons.AbortRetryIgnore,
-                                MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                DialogResult dialogResult;
+                if (!Common.Testing)
+                {
+                    dialogResult = MessageBox.Show("Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.", "Pathway", MessageBoxButtons.AbortRetryIgnore,
+                                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                }
+                else
+                {
+                    dialogResult = DialogResult.Abort;
+                }
                 if (dialogResult == DialogResult.Ignore)
                     return;
                 if (dialogResult == DialogResult.Abort)

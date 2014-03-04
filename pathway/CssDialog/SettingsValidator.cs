@@ -253,8 +253,16 @@ namespace SIL.PublishingSolution
                 msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errorTag + "\" property has an invalid value.)";
             }
 
-            DialogResult result = MessageBox.Show(msg, "Information",
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            DialogResult result;
+            if (!Common.Testing)
+            {
+                result = MessageBox.Show(msg, "Information",
+                                    MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            }
+            else
+            {
+                result = DialogResult.Yes;
+            }
 
             if (result == DialogResult.Yes)
             {
