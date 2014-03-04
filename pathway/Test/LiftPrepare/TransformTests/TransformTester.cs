@@ -35,6 +35,7 @@ namespace Test.LiftPrepare.TransformTests
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void testTransform()
         {
             var documentToTransform = new LiftDocument(TestEnvironment.InputRoot + @"buang/buang-small.lift");
