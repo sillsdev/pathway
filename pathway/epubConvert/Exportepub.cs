@@ -492,6 +492,7 @@ namespace SIL.PublishingSolution
                 string tocFiletoUpdate = string.Empty;
                 // copy the xhtml files into the content directory
                 SplitPageSections(htmlFiles, contentFolder, tocFiletoUpdate);
+                RemoveDuplicateBookName(contentFolder);
                 // fix any relative hyperlinks that might have broken when we split the .xhtml up
 #if (TIME_IT)
                 DateTime dtRefStart = DateTime.Now;
@@ -4343,6 +4344,7 @@ namespace SIL.PublishingSolution
                 XmlReader xmlReader = XmlReader.Create(sourceFile, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
+
                 if (_inputType.Equals("scripture"))
                 {
                     XmlNodeList nodes = xmlDocument.SelectNodes(".//xhtml:div[@class='Chapter_Number']", namespaceManager);
@@ -4404,9 +4406,48 @@ namespace SIL.PublishingSolution
                             next.ParentNode.InsertBefore(spaceNode, next);
                         }
                     }
-
                     xmlDocument.Save(sourceFile);
                 }
+            }
+        }
+
+        protected void RemoveDuplicateBookName(string contentFolder)
+        {
+            string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
+            string fileName = string.Empty;
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };//Common.DeclareXmlReaderSettings(false);
+            foreach (string sourceFile in files)
+            {
+                if (!File.Exists(sourceFile)) return;
+                fileName = Path.GetFileName(sourceFile);
+                XmlReader xmlReader = XmlReader.Create(sourceFile, xmlReaderSettings);
+                xmlDocument.Load(xmlReader);
+                xmlReader.Close();
+
+                if (_inputType.Equals("scripture"))
+                {
+                    string xPath = ".//xhtml:div[@class='scrBook']";
+                    XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
+                    if (nodes.Count > 0)
+                    {
+                        string titleMainInnerText = string.Empty;
+                        string xPathValue = ".//xhtml:div[@class='Title_Main']";
+                        XmlNodeList titleNodes = xmlDocument.SelectNodes(xPathValue, namespaceManager);
+                        if (titleNodes.Count > 0)
+                        {
+                            titleMainInnerText = titleNodes[0].InnerText;
+                        }
+
+                        StringBuilder  nodeInnerText = new StringBuilder();
+                        nodeInnerText.Append(nodes[0].InnerXml);
+                        nodeInnerText = nodeInnerText.Replace(titleMainInnerText + "</div>" + titleMainInnerText, titleMainInnerText + "</div>");
+                        nodes[0].InnerXml = nodeInnerText.ToString();
+                    }
+                }
+                xmlDocument.Save(sourceFile);
             }
         }
 
