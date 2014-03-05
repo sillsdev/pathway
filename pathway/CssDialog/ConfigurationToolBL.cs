@@ -1707,6 +1707,7 @@ namespace SIL.PublishingSolution
                 SetSideBar();
                 ShowDataInGrid();
                 SetPropertyTab();
+                ShowInfoValue();
             }
             catch (Exception ex)
             {
@@ -2829,7 +2830,7 @@ namespace SIL.PublishingSolution
                 grid.Columns[8].Visible = false; // Preview File 2      
 
             }
-
+            
             if (grid.SelectedRows.Count <= 0 && IsUnixOs)
             {
                 Param.LoadSettings();
