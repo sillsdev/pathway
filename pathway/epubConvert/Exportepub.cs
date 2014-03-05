@@ -335,12 +335,15 @@ namespace SIL.PublishingSolution
                     }
                 }
 
-                foreach (string file in splitFiles)
+                if (isIncludeImage == false)
                 {
-                    string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-                    if (fileNameWithoutExtension != null && fileNameWithoutExtension.IndexOf(@"PartFile") == 0)
+                    foreach (string file in splitFiles)
                     {
-                        RemoveNodeInXhtmlFile(file);
+                        string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
+                        if (fileNameWithoutExtension != null && fileNameWithoutExtension.IndexOf(@"PartFile") == 0)
+                        {
+                            RemoveNodeInXhtmlFile(file);
+                        }
                     }
                 }
 
@@ -657,7 +660,7 @@ namespace SIL.PublishingSolution
                 XmlDocument xDoc = Common.DeclareXMLDocument(false);
                 string path = Param.SettingOutputPath;
                 xDoc.Load(path);
-                string xPath = "//stylePick/styles/others/style[@name='" + cssFileName + "']/styleProperty[@name='IncludeImage']/@value";
+                string xPath = "//stylePick/styles/others/style[@file='" + cssFileName + ".css']/styleProperty[@name='IncludeImage']/@value";
                 XmlNode includeImageNode = xDoc.SelectSingleNode(xPath);
                 if (includeImageNode != null && includeImageNode.InnerText == "No")
                     isIncludeImage = false;
@@ -701,11 +704,12 @@ namespace SIL.PublishingSolution
                     XmlNodeList imgNodes = elmRoot.GetElementsByTagName("img");
                     if (imgNodes.Count > 0)
                     {
-                        for (int i = 0; i < imgNodes.Count; i++)
+                        int imgCount = imgNodes.Count;
+                        for (int i = 0; i < imgCount; i++)
                         {
-                            var parentNode = imgNodes[i].ParentNode;
+                            var parentNode = imgNodes[0].ParentNode;
                             if (parentNode != null)
-                                parentNode.RemoveChild(imgNodes[i]);
+                                parentNode.RemoveChild(imgNodes[0]);
                         }
                     }
                 }
