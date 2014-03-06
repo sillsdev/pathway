@@ -45,10 +45,13 @@ namespace Test.PsTool
             string filename = "ImagePreProcess.xhtml";
             string input = GetFileNameWithPath(filename);
             PublicationInformation projInfo = new PublicationInformation();
-            projInfo.DefaultXhtmlFileWithPath = input;
-            preExportProcess = new PreExportProcess(projInfo);
+            
             string expected = GetFileNameWithExpectedPath(filename);
-            string output = preExportProcess.ImagePreprocess(false);
+            string output = input.Replace("InputFiles\\", "Output\\");
+            CopyToOutput(input, output);
+            projInfo.DefaultXhtmlFileWithPath = output;
+            preExportProcess = new PreExportProcess(projInfo);
+            output = preExportProcess.ImagePreprocess(false);
             XmlAssert.AreEqual(expected, output, "");
 
         }

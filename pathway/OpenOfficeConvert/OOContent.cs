@@ -152,6 +152,7 @@ namespace SIL.PublishingSolution
         private bool _isEmptyTitleExist;
         private int _titleCounter = 1;
         private int _pageWidth;
+        private bool _isEmptyPageInsertedForDic = false;
 
         Dictionary<string, string> _pageSize = new Dictionary<string, string>();
         private bool _isFromExe = false;
@@ -915,6 +916,8 @@ namespace SIL.PublishingSolution
                 return;
             }
 
+            
+
             if (_childName.ToLower().Contains("tableofcontents"))
             {
                 CallTOC();
@@ -936,7 +939,10 @@ namespace SIL.PublishingSolution
                 {
                     _paragraphName = StackPeek(_allParagraph); // _allParagraph.Pop();
                 }
-
+                if (_paragraphName.IndexOf("bookPageBreak_") == 0 && _childName.IndexOf("bookPageBreak_") == 0)
+                {
+                    return;
+                }
                 ClosePara(false);
                 WriteTable();
 
@@ -946,6 +952,8 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
+                    if (_paragraphName.IndexOf("bookPageBreak_") == 0)
+                        _paragraphName = _paragraphName.Replace("bookPageBreak_", "");
                     // Note: Paragraph Start Element
                     if ((_childName == "letter_letHead_dicBody" || _childName == "scrBookName_scrBook_scrBody") && IsTocExists())
                     {
@@ -1627,9 +1635,31 @@ namespace SIL.PublishingSolution
             if (_reader.Name == "div" && _projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") < 0)// 
             {
                 const string paraSpan = "text:p";
-                _writer.WriteStartElement(paraSpan);
-                _writer.WriteAttributeString("text:style-name", tempClassName);
-                _writer.WriteEndElement();
+
+                if (tempClassName == "P4" && IsTocExists() && _projInfo.ProjectInputType.ToLower() == "scripture")
+                {
+                    _writer.WriteStartElement(paraSpan);
+                    _writer.WriteAttributeString("text:style-name", tempClassName);
+                    _writer.WriteEndElement();
+
+                    _writer.WriteStartElement(paraSpan);
+                    _writer.WriteAttributeString("text:style-name", tempClassName);
+                    _writer.WriteEndElement();
+                }
+                else if (tempClassName == "P4" && IsTocExists() && _projInfo.ProjectInputType.ToLower() == "dictionary" && !_isEmptyPageInsertedForDic)
+                {
+                    _isEmptyPageInsertedForDic = true;
+                    _writer.WriteStartElement(paraSpan);
+                    _writer.WriteAttributeString("text:style-name", tempClassName);
+                    _writer.WriteEndElement();
+                }
+                else if (tempClassName != "P4")
+                {
+                    _writer.WriteStartElement(paraSpan);
+                    _writer.WriteAttributeString("text:style-name", tempClassName);
+                    _writer.WriteEndElement();
+                }
+
             }
         }
 

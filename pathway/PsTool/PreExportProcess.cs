@@ -1549,8 +1549,10 @@ namespace SIL.Tool
                     if (nodeList.Count > 0)
                     {
                         var counter = 1;
-                        foreach (XmlNode item in nodeList)
+                        int imgCount = nodeList.Count;
+                        for (int i = 0; i < imgCount; i++)
                         {
+                            XmlNode item = nodeList[counter - 1];
                             var name = item.Attributes.GetNamedItem("src");
                             if (name != null)
                             {
@@ -1578,10 +1580,22 @@ namespace SIL.Tool
                                         xa.Value = name.Value;
                                         item.Attributes.Append(xa);
                                         name.Value = counter + ext;
+                                        counter++;
+                                    }
+                                    else
+                                    {
+                                        var parentNode = nodeList[counter - 1].ParentNode;
+                                        if (parentNode != null)
+                                        {
+                                            parentNode.RemoveChild(nodeList[counter - 1]);
+                                        }
+                                        if (parentNode != null)
+                                        {
+                                            parentNode.RemoveAll();
+                                        }
                                     }
                                 }
                             }
-                            counter++;
                         }
                     }
                     try
@@ -2546,7 +2560,7 @@ namespace SIL.Tool
         /// <returns></returns>
         public void MoveBookcodeFRTtoFront(string ProcessedXhtml)
         {
-            if (_projInfo.ProjectInputType.ToLower() == "dictionary"){ return; }
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary") { return; }
 
             if (!File.Exists(ProcessedXhtml)) return;
             XmlDocument xDoc = Common.DeclareXMLDocument(true);
@@ -2560,7 +2574,7 @@ namespace SIL.Tool
                 for (int i = 0; i < bookLists.Count; i++)
                 {
                     string x1 = bookLists[i].InnerText;
-                    if(x1.ToLower() == "frt")
+                    if (x1.ToLower() == "frt")
                     {
                         XmlNode frtNode = bookLists[i].ParentNode;
                         string bookName = string.Empty;
@@ -3491,7 +3505,7 @@ namespace SIL.Tool
             tw.WriteLine("display: none;");
             tw.WriteLine("}");
 
-           
+
 
             if (_projInfo.ProjectInputType.ToLower() == "scripture")
             {

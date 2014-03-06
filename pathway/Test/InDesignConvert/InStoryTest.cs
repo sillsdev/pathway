@@ -1999,7 +1999,7 @@ namespace Test.InDesignConvert
 
             string output = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_" + fileNo + ".xml");
             string expected = Common.PathCombine(expectedFolder, "Stories\\Story_" + fileNo + ".xml");
-            XmlAssert.AreEqual(output, expected, " Story_2.xml is not matching");
+            XmlAssert.AreEqual(output, expected, " Story_"+ fileNo + ".xml is not matching");
 
             output = Common.PathCombine(projInfo.TempOutputFolder, "Resources\\styles.xml");
             expected = Common.PathCombine(expectedFolder, "Resources\\styles.xml");

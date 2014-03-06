@@ -1,32 +1,12 @@
 /* Page number  Top Inside.css */
-
-
 @page :left {
-@top-left {
-           content: counter( page);
-    }
-
-    @top-center     { content: ''; }
     @top-right {
-        -ps-referenceFormat: "Genesis 1";
-        content: string(bookname, first) " "  string(chapter, first);
-        font-weight: bold;
+          content: counter( page);
     }
-    @bottom-left   { content: ''; }
-    @bottom-center { content: ''; }
-    @bottom-right  { content: ''; }
 }
+
 @page :right {
-    @top-left     {
-        -ps-referenceFormat: "Genesis 1";
-        content: string(bookname, last) " "  string(chapter, last);
-        font-weight: bold;
-    }
-	@top-center { content: ''; }
-    @top-right {
+    @top-left {
            content: counter( page);
     }
-    @bottom-left   { content: ''; }
-    @bottom-center { content: ''; }
-    @bottom-right  { content: ''; }
 }

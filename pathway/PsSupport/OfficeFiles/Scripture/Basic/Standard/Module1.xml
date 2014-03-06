@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Sep-12-2013 for TD-3616
+&apos;Changed On Mar-06-2014 for TD-3804
 
 Dim CanSave as Boolean
 
@@ -18,6 +18,8 @@ On Error GoTo MyError:
 		&apos;SetImageToCoverPage()
 	&apos;End If
 	
+	HideODMVariable()
+	
 	If CanSave Then
 		oDoc = ThisComponent 
 		oDoc.store() 
@@ -30,6 +32,37 @@ On Error GoTo MyError:
 	Exit Sub
 MyError:
 End Sub
+
+&apos;This function gives the Total Pages of the current file
+Function TotalPages()
+	Dim cont
+	cont = ThisComponent.getCurrentController()
+	TotalPages = cont.PageCount
+End Function
+
+Sub HideODMVariable
+PageCount = TotalPages
+ThisComponent.currentController.getViewCursor().jumpToPage(PageCount)
+
+
+dim document   as object
+dim dispatcher as object
+
+document   = ThisComponent.CurrentController.Frame
+dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+
+dim args1(0) as new com.sun.star.beans.PropertyValue
+args1(0).Name = &quot;Text&quot;
+args1(0).Value = &quot; &quot;
+
+dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 0, args1())
+
+dispatcher.executeDispatch(document, &quot;.uno:SwBackspace&quot;, &quot;&quot;, 0, Array())
+ThisComponent.currentController.getViewCursor().jumpToPage(1)
+&apos;msgbox PageCount
+
+
+end sub
 
 
 &apos;Update the Table of Content
