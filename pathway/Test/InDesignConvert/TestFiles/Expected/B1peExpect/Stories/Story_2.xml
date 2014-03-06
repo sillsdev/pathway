@@ -1510,53 +1510,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ParagraphContinuation_1">
         <Content>Kori vido ke horuhaihadi na ghaghanamiu eigna sa fata, oti vaututunia a God keda hatheghamu, eigna imanea ke toghaghamu me reireghighamu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/pictureCaption_1">
-      <Rectangle Self="u1fa" StoryTitle="$ID/" ContentType="GraphicType" StrokeWeight="0" StrokeColor="Swatch/None" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[Normal Graphics Frame]" ItemTransform="1 0 0 1 171 -0">
-        <Properties>
-          <PathGeometry>
-            <GeometryPathType PathOpen="false">
-              <PathPointArray>
-                <PathPointType Anchor="-171 -0" LeftDirection="-171 -0" RightDirection="-171 -0" />
-                <PathPointType Anchor="-171 0" LeftDirection="-171 0" RightDirection="-171 0" />
-                <PathPointType Anchor="171 0" LeftDirection="171 0" RightDirection="171 0" />
-                <PathPointType Anchor="171 -0" LeftDirection="171 -0" RightDirection="171 -0" />
-              </PathPointArray>
-            </GeometryPathType>
-          </PathGeometry>
-        </Properties>
-        <AnchoredObjectSetting AnchoredPosition="Anchored" SpineRelative="false" LockPosition="false" PinPosition="false" AnchorPoint="TopRightAnchor" HorizontalAlignment="RightAlign" HorizontalReferencePoint="ColumnEdge" VerticalAlignment="CenterAlign" VerticalReferencePoint="LineBaseline" AnchorXoffset="0" AnchorYoffset="0" AnchorSpaceAbove="4" />
-        <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="none" TextWrapMode="BoundingBoxTextWrap">
-          <Properties>
-            <TextWrapOffset Top="0" Left="0" Bottom="0" Right="0" />
-          </Properties>
-          <ContourOption ContourType="SameAsClipping" IncludeInsideEdges="false" ContourPathName="$ID/" />
-        </TextWrapPreference>
-        <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
-        <FrameFittingOption LeftCrop="0" TopCrop="0" RightCrop="0" BottomCrop="0" FittingOnEmptyFrame="ContentToFrame" FittingAlignment="CenterAnchor" />
-        <Image Self="u222" Space="$ID/#Links_RGB" ActualPpi="342 0" EffectivePpi="72 72" ImageRenderingIntent="UseColorSettings" LocalDisplaySetting="Default" ImageTypeName="$ID/JPEG" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="4.75 0 0 0 -171 -0">
-          <Properties>
-            <Profile type="string">$ID/None</Profile>
-            <GraphicBounds Left="0" Top="0" Right="72" Bottom="72" />
-          </Properties>
-          <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
-            <Properties>
-              <TextWrapOffset Top="0" Left="0" Bottom="0" Right="0" />
-            </Properties>
-            <ContourOption ContourType="SameAsClipping" IncludeInsideEdges="false" ContourPathName="$ID/" />
-          </TextWrapPreference>
-          <Link Self="u225" AssetURL="$ID/" AssetID="$ID/" LinkResourceURI="file:" StoredState="Normal" LinkClassID="35906" LinkClientID="257" LinkResourceModified="false" LinkObjectModified="false" ShowInUI="true" CanEmbed="true" CanUnembed="true" CanPackage="true" ImportPolicy="NoAutoImport" ExportPolicy="NoAutoExport" LinkImportStamp="file 128811558721632778 187452" LinkImportModificationTime="2009-03-10T16:21:12" LinkImportTime="2009-12-17T16:28:20" />
-          <ClippingPathSettings ClippingType="None" InvertPath="false" IncludeInsideEdges="false" RestrictToFrame="false" UseHighResolutionImage="true" Threshold="25" Tolerance="2" InsetFrame="0" AppliedPathName="$ID/" Index="-1" />
-          <ImageIOPreference ApplyPhotoshopClippingPath="true" AllowAutoEmbedding="true" AlphaChannelName="$ID/" />
-        </Image>
-        <TextFrame Self="u">
-          <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/pictureCaption_1">
-            <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/pictureCaption_1">
-              <Content>Satan Ke Vaghagna Na Laion Ke Nguru</Content>
-            </CharacterStyleRange>
-          </ParagraphStyleRange>
-        </TextFrame>
-      </Rectangle><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/div_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>5</Content>
       </CharacterStyleRange>
