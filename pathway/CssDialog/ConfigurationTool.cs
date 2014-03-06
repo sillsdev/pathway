@@ -886,24 +886,28 @@ namespace SIL.PublishingSolution
 
         private void btnPaper_Click(object sender, EventArgs e)
         {
+            _CToolBL.MediaTypeEXE = "paper";
             _CToolBL.MediaType = "paper";
             _CToolBL.SideBar();
         }
 
         private void btnMobile_Click(object sender, EventArgs e)
         {
+            _CToolBL.MediaTypeEXE = "mobile";
             _CToolBL.MediaType = "mobile";
             _CToolBL.SideBar();
         }
 
         private void btnWeb_Click(object sender, EventArgs e)
         {
+            _CToolBL.MediaTypeEXE = "web";
             _CToolBL.MediaType = "web";
             _CToolBL.SideBar();
         }
 
         private void btnOthers_Click(object sender, EventArgs e)
         {
+            _CToolBL.MediaTypeEXE = "others";
             _CToolBL.MediaType = "others";
             _CToolBL.SideBar();
         }
