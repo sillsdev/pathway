@@ -1473,7 +1473,8 @@ namespace SIL.Tool
             {
                 metaname = Common.GetMetaValue(tempFile);
             }
-            if (Common.UnixVersionCheck() && _projInfo.ProjectInputType.ToLower() == "scripture")
+            
+            if (_projInfo.ProjectInputType != null && _projInfo.ProjectInputType.ToLower() == "scripture")
             {
                 string paraTextprojectPath;
                 paraTextprojectPath = Common.GetParatextProjectPath();
@@ -2566,7 +2567,7 @@ namespace SIL.Tool
             XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
+            xDoc.Load(ProcessedXhtml);
             string xPath = "//div[@class='scrBook']//span[@class='scrBookCode']";
             XmlNodeList bookLists = xDoc.SelectNodes(xPath, namespaceManager);
             if (bookLists.Count > 0)

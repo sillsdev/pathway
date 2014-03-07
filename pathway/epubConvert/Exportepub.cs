@@ -226,7 +226,6 @@ namespace SIL.PublishingSolution
                 preProcessor.GetTempFolderPath();
                 preProcessor.ImagePreprocess(false);
                 preProcessor.MoveBookcodeFRTtoFront(preProcessor.ProcessedXhtml);
-                preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
                 if (projInfo.SwapHeadword)
                 {
                     preProcessor.SwapHeadWordAndReversalForm();

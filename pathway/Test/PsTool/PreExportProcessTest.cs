@@ -50,6 +50,7 @@ namespace Test.PsTool
             string output = input.Replace("InputFiles\\", "Output\\");
             CopyToOutput(input, output);
             projInfo.DefaultXhtmlFileWithPath = output;
+            projInfo.ProjectInputType = "Scripture";
             preExportProcess = new PreExportProcess(projInfo);
             output = preExportProcess.ImagePreprocess(false);
             XmlAssert.AreEqual(expected, output, "");

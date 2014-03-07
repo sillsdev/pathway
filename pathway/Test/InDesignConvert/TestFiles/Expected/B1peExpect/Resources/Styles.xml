@@ -170,7 +170,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/div_1" Name="div_1" Imported="false" NextStyle="CharacterStyle/div_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="11" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/pictureCaption_1" Name="pictureCaption_1" Imported="false" NextStyle="CharacterStyle/pictureCaption_1" KeyboardShortcut="0 0" display="block" Justification="CenterAlign" TextTransform="capitalize" float="top" clear="both" width="342" RightIndent="3.75" LeftIndent="0" FirstLineIndent="0" AppliedFont="Charis SIL" PointSize="11" TextColumnGutter="14.17323" SpaceBefore="0">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -435,7 +435,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/div_1" Name="div_1" Imported="false" NextStyle="ParagraphStyle/div_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="11" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/pictureCaption_1" Name="pictureCaption_1" Imported="false" NextStyle="ParagraphStyle/pictureCaption_1" KeyboardShortcut="0 0" display="block" Justification="CenterAlign" TextTransform="capitalize" float="top" clear="both" width="342" RightIndent="3.75" LeftIndent="0" FirstLineIndent="0" AppliedFont="Charis SIL" PointSize="11" TextColumnGutter="14.17323" SpaceBefore="0" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
