@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Feb-11-2014 for TD-3781
-Dim CanSave as Boolean
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
+&apos;Changed On Mar-10-2014 for TD-3867(Add descriptions to the macros)
 
-&apos;This procedure set the dialgue to correct Update References 
+
+&apos;This is main method, which will be called when document opened. It calls other mothods to perform 
 Sub StartDontForget
 On Error GoTo MyError:
 
 	TurnOffNonPrintingCharacters() 
 	
-	&apos;AlingOverlappingImages()
-
 	UpdateTOC()
 	
 	If IsCoverImageInserted = &quot;true&quot; And Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
@@ -19,15 +18,8 @@ On Error GoTo MyError:
 	
 	KeepLastGuidewordRight()
 	
-	&apos;If Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
-		HideODMVariable()
-	&apos;End If
-	
-	If CanSave Then
-		oDoc = ThisComponent 
-		oDoc.store() 
-	End If
-	
+	HideODMVariable()
+
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
 		ExportToDOC_PDF
 	End IF
@@ -36,13 +28,16 @@ On Error GoTo MyError:
 MyError:
 End Sub
 
-'This function gives the Total Pages of the current file
+&apos;This function gives the Total Pages of the current file, this method called by HideODMVariable method.
 Function TotalPages()
 	Dim cont
 	cont = ThisComponent.getCurrentController()
 	TotalPages = cont.PageCount
 End Function
 
+&apos;For some documents, some pages will not show the correct guideword, 
+&apos;So this method leaves small space and remove that text in end of the document. 
+&apos;Because of this change, guideword will be shown correctly in all the pages.
 Sub HideODMVariable
 PageCount = TotalPages
 ThisComponent.currentController.getViewCursor().jumpToPage(PageCount)
@@ -62,11 +57,6 @@ dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 
 
 dispatcher.executeDispatch(document, &quot;.uno:SwBackspace&quot;, &quot;&quot;, 0, Array())
 ThisComponent.currentController.getViewCursor().jumpToPage(1)
-&apos;msgbox PageCount
-
-&apos;oDoc = ThisComponent 
-&apos;LGuide = oDoc.getTextFieldMasters().getByName(&quot;com.sun.star.text.fieldmaster.SetExpression.Right_Guideword_R&quot;)
-&apos;LGuide.DependentTextFields(1).Content = &quot;Changed&quot;
 end sub
 
 &apos;This procedure set RightGuideword on Right align in Header
@@ -80,7 +70,7 @@ Sub KeepLastGuidewordRight
   Next
 End Sub
 
-&apos;Update the Table of Content
+&apos;This method will update the Table of Content
 Sub UpdateTOC
 On Error GoTo MyError:
    oDoc = ThisComponent
@@ -94,7 +84,7 @@ MyError:
 End Sub
 
 
-&apos;This procedure align Cover page Image
+&apos;This method aligns Cover page Image to Page Align(Full Page)
 Sub SetImageToCoverPage
 
   For i = 0 To ThisComponent.getDrawPage().GetCount -1
@@ -104,14 +94,10 @@ Sub SetImageToCoverPage
 		oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
 	End IF
   Next
-  
-	&apos;if ThisComponent.getDrawPage().GetCount &gt; 0 Then
-		&apos;oGraphic  = ThisComponent.getDrawPage().getByIndex(0)
-		&apos;oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
-	&apos;End If
+
 End Sub
 
-&apos;This procedure turn off non-printing characters
+&apos;This method turn off non-printing characters in document.
 Sub TurnOffNonPrintingCharacters
 	dim document   as object
 	dim dispatcher as object
@@ -126,33 +112,7 @@ Sub TurnOffNonPrintingCharacters
 	dispatcher.executeDispatch(document, &quot;.uno:ControlCodes&quot;, &quot;&quot;, 0, args1())
 end sub
 
-&apos;This procedure align the overlapping images
-Sub AlingOverlappingImages 
-dim frameCount, lclNo 
-oGraphics = ThisComponent.getTextFrames
 
-frameCount = oGraphics.getCount() -1
-lclNo = 0
-  For i = 0 To oGraphics.getCount() -1 step 1 
-    	oGraphic = oGraphics.getByIndex(i)
-    	If frameCount &gt; i Then
-	    	nxt = oGraphics.getByIndex(i + 1)
-			If nxt.HoriOrientPosition = oGraphic.HoriOrientPosition Then
-				lclNo = lclNo + 1
-				If lclNo = 1 Then
-				 	oGraphic.HoriOrient = 3
-				 	nxt.HoriOrient = 2
-				elseif lclNo = 2 Then
-				 	oGraphic.HoriOrient = 2
-				 	nxt.HoriOrient = 1	
-				End If
-				if lclNo = 3 Then lclNo = 0
-				
-				CanSave = True
-			End If
-		End If
-  Next    
-End Sub
 
 &apos;This procedure exports Odt file into Word/PDF based on the OutputFormat in given FilePath
 Sub ExportToDOC_PDF
@@ -164,20 +124,20 @@ On Error GoTo MyError:
    	oDoc = ThisComponent 
 	
 	
-If IsTOC = "false" Then
+If IsTOC = &quot;false&quot; Then
   oText = oDoc.getText() 
   oEnd = oText.getEnd() 
-  oIndex = oDoc.createInstance("com.sun.star.text.ContentIndex") 
+  oIndex = oDoc.createInstance(&quot;com.sun.star.text.ContentIndex&quot;) 
   oIndex.CreateFromOutline = True 
-  oIndex.CreateFromLevelParagraphStyles = True ' use custom para styles 
+  oIndex.CreateFromLevelParagraphStyles = True &apos; use custom para styles 
 
-  ' Adds "Heading a" style to level 2 in this case. 
+  &apos; Adds &quot;Heading a&quot; style to level 2 in this case. 
   oLevelParaStyles = oIndex.LevelParagraphStyles 
-  oLevelParaStyles.replaceByIndex(1, Array("Test")) 
+  oLevelParaStyles.replaceByIndex(1, Array(&quot;Test&quot;)) 
   
   oText.insertTextContent(oEnd,oIndex,False) 
 
-  oIndex.Title = ""
+  oIndex.Title = &quot;&quot;
   oIndex.update() 
 End If
   
@@ -233,30 +193,6 @@ Exit Sub
 MyError:
 &apos;	msgbox &quot;Same file has been opened already&quot; , 0 + 64,  &quot;File Error&quot;	
 End Sub
-
-&apos;CleanUp Unwanted Files
-Sub CleanUp
-Dim s As String 
-Dim Path As String
-MyArray = Split(FilePath,&quot;\&quot;)
-FileName =  MyArray(UBound(MyArray))
-Path = Replace(FilePath,FileName,&quot;&quot;)
-&apos;Path = &quot;D:\SIL\Task\YearV\TD-3616\FieldWorksA5Styles_2013-09-06_110256\Work\&quot;
-  NextFile = Dir(Path, 0)
- 
-  While NextFile  &lt;&gt; &quot;&quot;
-	If(InStr(NextFile, &quot;xhtml&quot;) &gt; 0 Or InStr(NextFile, &quot;merge&quot;) &gt; 0 Or (InStr(NextFile, &quot;1.pdf&quot;) &gt; 0) Or (InStr(NextFile, &quot;.odm&quot;) &gt; 0) ) Then
-	Else
-		If(Right(Trim(ThisComponent.Title),4) &lt;&gt; &quot;.odm&quot; And InStr(NextFile,&quot;.odt&quot;) &gt; 0 ) Then
-		Else
-			Kill Path &amp; NextFile
-		End If
-	End if
-	NextFile = Dir
-  Wend
-  &apos;Msgbox &quot;Killed&quot;
-End Sub
-
 
 &apos;This function sets the Property Value as Word or PDF
 Function MakePropertyValue( Optional cName As String, Optional uValue ) As com.sun.star.beans.PropertyValue 
