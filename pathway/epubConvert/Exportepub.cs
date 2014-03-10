@@ -257,6 +257,7 @@ namespace SIL.PublishingSolution
                 preProcessor.SetDropCapInCSS(mergedCSS);
                 preProcessor.InsertCoverPageImageStyleInCSS(mergedCSS);
                 preProcessor.InsertSectionHeadID();
+                /* Modify the content in css file for before after css style process */
                 preProcessor.InsertPseudoContentProperty(mergedCSS, _pseudoClass);
                 string defaultCSS = Path.GetFileName(mergedCSS);
                 // rename the CSS file to something readable

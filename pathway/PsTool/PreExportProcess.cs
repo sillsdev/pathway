@@ -2273,7 +2273,7 @@ namespace SIL.Tool
                         {
                             className = "." + className;
                         }
-                        tw.WriteLine(className + " :" + pseudoName + " {");
+                        tw.WriteLine(className + ":" + pseudoName + " {");
                         tw.WriteLine("content: '';");
                         tw.WriteLine("}");
                     }
