@@ -152,16 +152,27 @@ namespace SIL.PublishingSolution
                 {
                     Directory.CreateDirectory(picturePath);
                 }
-                string applicationInsalledLocation = Common.GetPSApplicationPath();
-                applicationInsalledLocation = Common.PathCombine(applicationInsalledLocation, "Samples");
-                applicationInsalledLocation = Common.PathCombine(applicationInsalledLocation, "Dictionary");
-                applicationInsalledLocation = Common.PathCombine(applicationInsalledLocation, "Pictures");
+                string samplePicturePath = Common.GetPSApplicationPath();
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Samples");
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Dictionary");
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Pictures");
 
-                if (Directory.Exists(applicationInsalledLocation))
+                if (Directory.Exists(samplePicturePath))
                 {
-                    string[] pictureFilesList = Directory.GetFiles(applicationInsalledLocation, "*.jpg");
+                    string[] pictureFilesList = Directory.GetFiles(samplePicturePath, "*.jpg");
                     CopyPictureFiles(pictureFilesList, picturePath);
-                    pictureFilesList = Directory.GetFiles(applicationInsalledLocation, "*.tif");
+                    pictureFilesList = Directory.GetFiles(samplePicturePath, "*.tif");
+                    CopyPictureFiles(pictureFilesList, picturePath);
+                }
+
+                samplePicturePath = Common.GetPSApplicationPath();
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Samples");
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Scripture");
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Pictures");
+
+                if (Directory.Exists(samplePicturePath))
+                {
+                    string[] pictureFilesList = Directory.GetFiles(samplePicturePath, "*.jpg");
                     CopyPictureFiles(pictureFilesList, picturePath);
                 }
             }
