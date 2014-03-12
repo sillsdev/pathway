@@ -472,5 +472,19 @@ namespace SIL.PublishingSolution
                 }
             }
         }
+
+        private void PreviewPrintVia_Activated(object sender, EventArgs e)
+        {
+            if (grid.RowCount > 0)
+            {
+                try
+                {
+                    ShowPreview(1);
+                }
+                catch
+                {
+                }
+            }
+        }
     }
 }

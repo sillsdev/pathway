@@ -162,6 +162,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Select Layout";
+            this.Activated += new System.EventHandler(this.PreviewPrintVia_Activated);
             this.Load += new System.EventHandler(this.PreviewPrintVia_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
