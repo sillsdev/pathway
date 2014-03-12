@@ -3758,10 +3758,7 @@ namespace SIL.PublishingSolution
             {
                 ApplyXslt(tocFullPath, _addDicTocHeads);
             }
-            if (!_isUnixOS)
-            {
-                ApplyXslt(tocFullPath, _fixEpubToc);
-            }
+            ApplyXslt(tocFullPath, _fixEpubToc);
             FixPlayOrder(tocFullPath);
         }
 
@@ -3788,6 +3785,19 @@ namespace SIL.PublishingSolution
                 node.InnerText = n.ToString();
                 n += 1;
             }
+
+            if (_isUnixOS)
+            {
+                nodes = tocDoc.SelectNodes("//@id");
+                Debug.Assert(nodes != null);
+                n = 1;
+                foreach (XmlAttribute node in nodes)
+                {
+                    node.InnerText = node.InnerText + n.ToString();
+                    n += 1;
+                }
+            }
+
             FileStream xmlFile = new FileStream(tocFullPath, FileMode.Create);
             XmlWriter writer = XmlWriter.Create(xmlFile);
             tocDoc.Save(writer);
