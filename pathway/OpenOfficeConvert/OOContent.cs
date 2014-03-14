@@ -3202,6 +3202,7 @@ namespace SIL.PublishingSolution
                      (_classNameWithLang.IndexOf("reversalform") == 0 ||
                       _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0 ||
                       _childName.Replace(_classNameWithLang + "_", "").IndexOf("headword") == 0 ||
+                      _childName.Replace("span_", "").IndexOf("headword") == 0 ||
                       _childName.Replace("span_", "").IndexOf("reversalform") == 0))
                     &&
                     (_previousParagraphName.IndexOf("minorentries_") == 0 ||
