@@ -1,0 +1,68 @@
+  * pathway 1.7.0 sprint
+    - Common:TD-3275 create custom outline level property
+    - Common:TD-3780 test for folder existance when loading preprocessing
+    - Common:TD-3786 Always move book code FRT to front 
+    - Common:TD-3810 Make Roman Numeral Homograph numbers full size
+    - Common:TD-3868 Settings not migrated properly
+    - Common:chapter needs to default to 1 for 1 chapter books
+    - InDesign:TD-3733 Ability to control widows and orphans 
+    - InDesign:TD-3735 First page divider lines missing
+    - InDesign:TD-3736 Mirrored margins not correct. 
+    - InDesign:TD-3737 Position footer frame
+    - InDesign:TD-3742 Save pictures in output folder 
+    - InDesign:TD-3779 Missing pictures in Indesign output. 
+    - Installer:TD-3777 Update XeLaTeX name &amp; allow stable
+    - Installer:fix copy of samples
+    - LibreOffice:TD-3298 Handle h2 and h3 tags
+    - LibreOffice:TD-3781 Hang when creating PDF
+    - LibreOffice:TD-3802 Ramp Package missing for pdf via Libreoffice
+    - LibreOffice:TD-3804 page number is actually top outside
+    - LibreOffice:TD-3805 Removing front matter removes guide words too. 
+    - LibreOffice:TD-3807 Page ends with Parallel reference 
+    - LibreOffice:TD-3808 \toc2 text should be hidden. 
+    - LibreOffice:TD-3809 Wrong guideword in LibreOffice output
+    - LibreOffice:TD-3811 Tag error reported when Wycliffe front matter used.
+    - LibreOffice:TD-3822 Crash when layout setup from Export 
+    - LibreOffice:TD-3823 Introduction Main title formatting
+    - LibreOffice:TD-3849 epub and Libreoffice shows Right-to-Left as Left-to-Right
+    - LibreOffice:TD-3851 RTL texts beyond the Margins
+    - LibreOffice:TD-3856 Page number problem in Custom stylesheet
+    - LibreOffice:TD-3867 Add descriptions to the macros
+    - LibreOffice:TD-3869 Entries with pictures are indented one space
+    - LibreOffice:TD-3870 Setting migration issue
+    - Epub:TD-2657 Validation Error Occurs while validate for epub
+    - Epub:TD-3771 2JN Sword Export
+    - Epub:TD-3774 Language code error
+    - Epub:TD-3782 add footnote caller
+    - Epub:TD-3783 use toc1 if present instead of mt, mt1 or mt2 combinations.
+    - Epub:TD-3784 preprocessing option to move FRT book to Font
+    - Epub:TD-3785 add verse rule for parallel hyperlinks
+    - Epub:TD-3796 Header epub style adjustments
+    - Epub:TD-3797 Epub quotes
+    - Epub:TD-3798 Epub Indents
+    - Epub:TD-3799 Epub Parallel Reference Font Size 
+    - Epub:TD-3801 formatting the \li in epub
+    - Epub:TD-3813 Add error reporting on messages.
+    - Epub:TD-3813 normalize-space on cross reference text.
+    - Epub:TD-3819 Output shows blank image
+    - Epub:TD-3824 The main title is added a second time in epub
+    - Epub:TD-3825 Chapter Link placement
+    - Epub:TD-3831 adjust wording of dialog
+    - Epub:TD-3848 Two brackets appears after the sense
+    - Epub:TD-3850 Picture appers in ebook output when include image
+    - Epub:TD-3852 Picture doesnot appear in ebook output
+    - Epub:theWord / MySword parallel reference links
+    - UI:TD-3763 Add a Sword Export option to the ETP Dialog
+    - UI:TD-3816 Add Help Link for Destinations
+    - UI:TD-3817 Resize controls on Select Layout when dialog is resized
+    - UI:TD-3818 Increase amount of sample data, include pictures
+    - UI:TD-3820 Crash in Copyright holder field
+    - UI:TD-3826 display full company name.
+    - UI:TD-3845 Help Button is not working in Linux
+    - UI:TD-3857 Navigating between web and others tab
+    - UI:Configuration Tool Alignment changed
+    - XeLaTeX:TD-3745 Program Produces boxed in output(Xelatex)
+    - XeLaTeX:TD-3787 Spaces inserted inside square brackets
+    - XeLaTeX:TD-3788 Copyrights page doesn't put content inside margin
+    - XeLaTeX:TD-3828 Copyright information appears on the cover image
+    - XeLaTeX:TD-3832 Blank page appears before the TOC page

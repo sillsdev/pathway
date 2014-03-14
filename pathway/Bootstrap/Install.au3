@@ -101,7 +101,7 @@ Func GetInstaller($name)
 	Elseif StringInStr($name, "XeLaTeX") Then
 		$urlPath = 'http://pathway.sil.org/wp-content/sprint/' & $name
 	Else
-		$urlPath = 'http://build.palaso.org/repository/download/bt84/' & $BuildSequenceId & ':id/' & $name & '?guest=1'
+		$urlPath = 'http://build.palaso.org/repository/download/bt84/.lastSuccessful/' & $name & '?guest=1'
 	EndIf
 	if not FileExists($name) Then
 		;MsgBox(4096,"Status","Downloading " & $urlPath & " " & $name)
@@ -407,10 +407,13 @@ Func InstallPdfReaderIfNecessary()
 	;if MsgBox(35,"No Pdf Reader","The Pdf Reader displays Pdf results after they are produced by various destinations. None installed in your computer. Would you like to install a Pdf Reader?") = 6 Then
 	;	LaunchSite("http://get.adobe.com/reader/")
 	;EndIf
-	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "FoxitReader", "542.0901")
-	$pkg = "FoxitReader" & $latest & "_enu_Setup.exe"
-	GetFromUrl($pkg, "http://cdn04.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/" & $pkg)
-	$pkg = "reader_lastest.exe"
+	;$latest = IniRead("PathwayBootstrap.Ini", "Versions", "FoxitReader", "542.0901")
+	;$pkg = "FoxitReader" & $latest & "_enu_Setup.exe"
+	;GetFromUrl($pkg, "http://cdn04.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/" & $pkg)
+	;$pkg = "reader_lastest.exe"
+	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "PdfXChange", "PDFVwer.exe")
+	$pkg = $latest[1]
+	GetFromURL($pkg, "http://www.tracker-software.com/downloads/" & $pkg & "?key=" & $latest[2])
 	If FileExists($pkg) Then
 		RunWait($pkg)
 		CleanUp($pkg)

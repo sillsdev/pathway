@@ -30,8 +30,9 @@
   <li>Rename Sprint folder and move to Releases folder as a subfolder (ex. Sprint-1.1.1.2124)</li>
   <li>Uninstall any old versions and install SetupPw7BTE-1.1.1.2124.msi and make sure default export works.</li>
   <li>Check version numbers of third party software in PathwayBootstrap.ini</li>
-  <li>Edit the PathwayBootstrap.au3 so the GetInstaller will point to the right URL location. Change it's version number and compile.</li>
+  <li>Edit the PathwayBuild.ini so the GetInstaller will point to the right URL location. Change it's version number and compile.</li>
   <li>Digitally sign PathwayBootstrap-1.19.exe and other .msi files</li>
+  <li>check in changes with git gui</li>
   <li>git flow release finish 1.1.1</li>
   <li>git push origin master develop</li>
   <li>Update the version number in Team city <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt75" target="_blank">daily</a> and <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt84" target="_blank">sprint</a> build configuration</li>
