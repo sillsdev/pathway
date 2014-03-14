@@ -46,7 +46,7 @@ namespace SIL.PublishingSolution
         private string _media;
         private bool _showEdit = false;
         private string _path;
-        private string _cssFile=string.Empty;
+        private string _cssFile = string.Empty;
 
         public string InputType;
         public PreviewPrintVia()
