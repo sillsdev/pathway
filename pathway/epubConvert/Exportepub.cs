@@ -1563,6 +1563,15 @@ namespace SIL.PublishingSolution
             return true;
         }
 
+        private string IncludeQuoteOnFontName(string fontname)
+        {
+            if(fontname.Trim().IndexOf(' ') > 0)
+            {
+                fontname = "'" + fontname + "'";
+            }
+            return fontname;
+        }
+
         /// <summary>
         /// Inserts links in the CSS file to the fonts used by the writing systems:
         /// - If the fonts are embedded, adds a @font-face declaration referencing the .ttf file 
@@ -1658,17 +1667,17 @@ namespace SIL.PublishingSolution
                 {
                     sb.AppendLine("/* default language font info */");
                     sb.AppendLine("body {");
-                    sb.Append("font-family: '");
-                    sb.Append(language.Value);
-                    sb.Append("', ");
+                    sb.Append("font-family: ");
+                    sb.Append(IncludeQuoteOnFontName(language.Value));
+                    sb.Append(", ");
                     if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                     {
-                        sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
+                        sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
                     }
                     else
                     {
                         // fall back on a serif font if we can't find it (shouldn't happen)
-                        sb.AppendLine("'Times', 'serif';");
+                        sb.AppendLine("Times, serif;");
                     }
                     // also insert the text direction for this language
                     sb.Append("direction: ");
@@ -1689,21 +1698,22 @@ namespace SIL.PublishingSolution
                                 {
                                     sb.Append("font-family: '" + language.Value.Trim());
                                     sb.Append("-i");
+                                    sb.Append("', ");
                                 }
                                 else
                                 {
-                                    sb.Append("font-family: '");
-                                    sb.Append(language.Value);
+                                    sb.Append("font-family: ");
+                                    sb.Append(IncludeQuoteOnFontName(language.Value));
+                                    sb.Append(", ");
                                 }
-                                sb.Append("', ");
                                 if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                                 {
-                                    sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
+                                    sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
                                 }
                                 else
                                 {
                                     // fall back on a serif font if we can't find it (shouldn't happen)
-                                    sb.AppendLine("'Times', 'serif';");
+                                    sb.AppendLine("Times, serif;");
                                 }
                                 sb.AppendLine("}");
                             }
@@ -1726,21 +1736,22 @@ namespace SIL.PublishingSolution
                                 {
                                     sb.Append("font-family: '" + language.Value.Trim());
                                     sb.Append("-b");
+                                    sb.Append("', ");
                                 }
                                 else
                                 {
-                                    sb.Append("font-family: '");
-                                    sb.Append(language.Value);
+                                    sb.Append("font-family: ");
+                                    sb.Append(IncludeQuoteOnFontName(language.Value));
+                                    sb.Append(", ");
                                 }
-                                sb.Append("', ");
                                 if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                                 {
-                                    sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
+                                    sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
                                 }
                                 else
                                 {
                                     // fall back on a serif font if we can't find it (shouldn't happen)
-                                    sb.AppendLine("'Times', 'serif';");
+                                    sb.AppendLine("Times, serif;");
                                 }
                                 sb.AppendLine("}");
                             }
@@ -1768,17 +1779,17 @@ namespace SIL.PublishingSolution
                 sb.Append("*:lang(");
                 sb.Append(language.Key);
                 sb.AppendLine(") {");
-                sb.Append("font-family: '");
-                sb.Append(language.Value);
-                sb.Append("', ");
+                sb.Append("font-family: ");
+                sb.Append(IncludeQuoteOnFontName(language.Value));
+                sb.Append(", ");
                 if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                 {
-                    sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
+                    sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
                 }
                 else
                 {
                     // fall back on a serif font if we can't find it (shouldn't happen)
-                    sb.AppendLine("'Times', 'serif';");
+                    sb.AppendLine("Times, serif;");
                 }
                 // also insert the text direction for this language
                 sb.Append("direction: ");
@@ -1815,17 +1826,17 @@ namespace SIL.PublishingSolution
                             sb.Append("), .revsensenumber:lang(");
                             sb.Append(language.Key);
                             sb.AppendLine(") {");
-                            sb.Append("font-family: '");
-                            sb.Append(language.Value);
-                            sb.Append("', ");
+                            sb.Append("font-family: ");
+                            sb.Append(IncludeQuoteOnFontName(language.Value));
+                            sb.Append(", ");
                             if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                             {
-                                sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
+                                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
                             }
                             else
                             {
                                 // fall back on a serif font if we can't find it (shouldn't happen)
-                                sb.AppendLine("'Times', 'serif';");
+                                sb.AppendLine("Times, serif;");
                             }
                             sb.AppendLine("}");
                         }
@@ -1880,17 +1891,17 @@ namespace SIL.PublishingSolution
                             sb.Append("), .revsensenumber:lang(");
                             sb.Append(language.Key);
                             sb.AppendLine(") {");
-                            sb.Append("font-family: '");
-                            sb.Append(language.Value);
-                            sb.Append("', ");
+                            sb.Append("font-family: ");
+                            sb.Append(IncludeQuoteOnFontName(language.Value));
+                            sb.Append(", ");
                             if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                             {
-                                sb.AppendLine((embeddedFont.Serif) ? "'Times', 'serif';" : "'Arial', 'sans-serif';");
+                                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
                             }
                             else
                             {
                                 // fall back on a serif font if we can't find it (shouldn't happen)
-                                sb.AppendLine("'Times', 'serif';");
+                                sb.AppendLine("Times, serif;");
                             }
                             sb.AppendLine("}");
                         }
