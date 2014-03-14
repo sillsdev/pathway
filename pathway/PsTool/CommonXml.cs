@@ -1,10 +1,25 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="CommonXml.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+//
+// <remarks>
+// Library for Pathway
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Xsl;
@@ -104,15 +119,6 @@ namespace SIL.Tool
                 }
                 reader.Dispose();
             }
-            if (cssFile.Length > 0)
-            {
-                string directoryPath = Path.GetDirectoryName(xhtmlName);
-                string cssFilewithPath = PathCombine(directoryPath, cssFile);
-                if (!File.Exists(cssFilewithPath))
-                {
-                    //cssFile = string.Empty;
-                }
-            }
             return cssFile;
         }
         #endregion
@@ -126,7 +132,6 @@ namespace SIL.Tool
         {
             if (!File.Exists(fileName)) return string.Empty;
             string metaName = string.Empty;
-            //var reader = new XmlTextReader(fileName) { XmlResolver = null, WhitespaceHandling = WhitespaceHandling.Significant };
             XmlTextReader reader = Common.DeclareXmlTextReader(fileName, true);
             if (Common.IsUnixOS())
             {
@@ -147,7 +152,6 @@ namespace SIL.Tool
                                         metaName = Common.GetAllUserAppPath();
                                         metaName = Common.RightRemove(metaName, "sil");
                                         metaName = Common.PathCombine(metaName, "fieldworks");
-                                        //metaName = Common.PathCombine(metaName, "Projects");
                                     }
                                     else if (metaName.IndexOf("file://") >= 0) // from the file access
                                     {
@@ -192,7 +196,6 @@ namespace SIL.Tool
                                             metaName = Common.GetAllUserAppPath();
                                             metaName = Common.RightRemove(metaName, "sil");
                                             metaName = Common.PathCombine(metaName, "fieldworks");
-                                            //metaName = Common.PathCombine(metaName, "Projects");
                                         }
                                         else if (metaName.IndexOf("file://") >= 0) // from the file access
                                         {
@@ -646,7 +649,6 @@ namespace SIL.Tool
             }
 
             string cssFileName = GetLinkedCSS(xhtmlFile);
-            //defaultCSS = Path.GetFileName(defaultCSS);
             if (string.Compare(cssFileName, defaultCSS, true) == 0)
             {
                 return;
@@ -690,14 +692,12 @@ namespace SIL.Tool
             xmlAttrib.Value = defaultCSS;
             newNode.Attributes.Append(xmlAttrib);
 
-            //XmlAttribute xmlAttrib1 = newNode.Attributes["xmlns"];
-            //newNode.Attributes.Remove(xmlAttrib1);
-
             headnode.AppendChild(newNode);
 
             xmldoc.Save(xhtmlFile);
 
         }
+
         #region GetXmlNode
         /// <summary>
         /// Returns XML Node in the file based on the xpath
@@ -735,8 +735,6 @@ namespace SIL.Tool
         /// <returns>Returns XmlNodeList</returns>
         public static XmlNodeList GetXmlNodes(string xmlFileNameWithPath, string xPath)
         {
-            //XmlNodeList resultNode = GetXmlNode(xmlFileNameWithPath, xPath).ChildNodes;
-            //return resultNode;
             XmlNodeList resultNodeList = null;
             XmlNode resultNode = GetXmlNode(xmlFileNameWithPath, xPath);
             if (resultNode != null)
@@ -859,6 +857,7 @@ namespace SIL.Tool
                 {
                     writerSettings.ConformanceLevel = ConformanceLevel.Fragment;
                 }
+                
                 if (IncludeUtf8BomIdentifier)
                 {
                     writerSettings.Encoding = Encoding.UTF8;
@@ -868,19 +867,19 @@ namespace SIL.Tool
                     writerSettings.Encoding = new UTF8Encoding(IncludeUtf8BomIdentifier);
                     IncludeUtf8BomIdentifier = true;   // reset to true for next time if it has been changed
                 }
+                
                 if (XsltFormat == Formatting.Indented)
                 {
                     writerSettings.Indent = true;
                     XsltFormat = Formatting.None;       // reset to None for next time if it has been changed
                 }
+                
                 var writer = XmlWriter.Create(result, writerSettings);
-                //var writer = new XmlTextWriter(result, Encoding.UTF8) {Namespaces = true};
-                //writer.Formatting = XsltFormat;
                 if (ext.ToLower().Contains("xhtml"))
                 {
                     writer.WriteStartDocument();
-                    //writer.WriteDocType("html", "-//W3C//DTD XHTML 1.0 Strict//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", null);
                 }
+               
                 xslt.Transform(reader, xslArg, writer);
                 writer.Close();
                 reader.Close();
@@ -897,61 +896,6 @@ namespace SIL.Tool
             }
         }
         #endregion
-
-        //#region Xslt2Process
-        //public static string Xslt2Process(string inputFile, string xsltFile, string ext)
-        //{
-        //    if (!File.Exists(inputFile))
-        //        return string.Empty;
-
-        //    if (!File.Exists(xsltFile))
-        //        return inputFile;
-
-        //    if (string.IsNullOrEmpty(ext))
-        //        ext = ".xhtml";
-
-        //    //try
-        //    //{
-        //        string path = GetPSApplicationPath();
-        //        string outputPath = Path.GetDirectoryName(inputFile);
-        //        string result = PathCombine(outputPath, Path.GetFileNameWithoutExtension(inputFile) + ext);
-
-        //        if (File.Exists(result))
-        //        {
-        //            File.Delete(result);
-        //        }
-
-        //        string xsltPath = PathCombine(path, xsltFile);
-        //        var proc = new Processor();
-        //        var xslt = proc.NewXsltCompiler();
-        //        //xslt.XmlResolver = null;
-        //        TextReader xsltTextReader = new StreamReader(xsltPath);
-        //        var executer = xslt.Compile(xsltTextReader);
-        //        var transformer = executer.Load();
-        //        var textReader = new StreamReader(inputFile);
-        //        var xhtmlUri = new Uri(inputFile);
-        //        transformer.SetInputStream(textReader.BaseStream, xhtmlUri);
-        //        //transformer.InputXmlResolver = 
-        //        var dest = new DomDestination();
-        //        transformer.Run(dest);
-        //        var doc = dest.XmlDocument;
-        //        var writer = new XmlTextWriter(result, Encoding.UTF8) { Namespaces = true };
-        //        if (ext.ToLower().Contains("html"))
-        //        {
-        //            writer.WriteStartDocument();
-        //            writer.WriteDocType("html", "-//W3C//DTD XHTML 1.0 Strict//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", null);
-        //        }
-        //        doc.WriteTo(writer);
-        //        writer.Close();
-        //        return result;
-        //    //}
-        //    //catch (Exception ex)
-        //    //{
-        //    //    MessageBox.Show(ex.Message);
-        //    //    return ex.Message;
-        //    //}
-        //}
-        //#endregion
 
         #region GetProjectType
         /// <summary>
@@ -1068,7 +1012,7 @@ namespace SIL.Tool
                     var wsPath = PathCombine(GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
                     if (File.Exists(wsPath))
                     {
-                        var ldml = Common.DeclareXMLDocument(true); //new XmlDocument { XmlResolver = null };
+                        var ldml = Common.DeclareXMLDocument(true);
                         ldml.Load(wsPath);
                         var nsmgr = new XmlNamespaceManager(ldml.NameTable);
                         nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
@@ -1175,10 +1119,6 @@ namespace SIL.Tool
             string content = reader.ReadToEnd().ToLower();
             reader.Close();
 
-            //XmlDocument xmlDocument = new XmlDocument();
-            //xmlDocument.Load(xhtmlFileWithPath);
-            //string content = xmlDocument.OuterXml.ToLower();
-
             var match = Regex.Matches(content, "\"" + bookSplitterClass + "\"");
             int counter = match.Count;
 
@@ -1197,7 +1137,6 @@ namespace SIL.Tool
 
             Dictionary<string, XmlWriter> writers = new Dictionary<string, XmlWriter>();
 
-            //string allUserPath = GetAllUserPath();
             string allUserPath = Path.GetTempPath();
             for (int i = 0; i < counter; i++)
             {
@@ -1229,7 +1168,6 @@ namespace SIL.Tool
                     writerClose.Flush();
                     writerClose.Close();
                 }
-                //MessageBox.Show("Completed");
             }
             catch (XmlException ex)
             {
@@ -1256,10 +1194,7 @@ namespace SIL.Tool
             {
                 throw new ArgumentNullException("reader");
             }
-            //if (writer == null)
-            //{
-            //    throw new ArgumentNullException("writer");
-            //}
+
             while (reader.Read())
             {
             srcWritten:
@@ -1420,10 +1355,6 @@ namespace SIL.Tool
             {
                 throw new ArgumentNullException("reader");
             }
-            //if (writer == null)
-            //{
-            //    throw new ArgumentNullException("writer");
-            //}
             while (reader.Read())
             {
             srcWritten:

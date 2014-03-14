@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="WebonaryFileTransfer.cs" from='2010' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Create Wordpress blog 
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -217,7 +233,6 @@ namespace SIL.PublishingSolution
         {
             string dictionaryDirectoryPath =
                 Common.PathCombine(Common.PathCombine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
-            //string[] filePaths = Directory.GetFiles(dictionaryDirectoryPath, "*.zip");
             txtSourceFileLocation.Text = Common.PathCombine(dictionaryDirectoryPath, "Wordpress\\");
             string webonaryZipFile = Common.PathCombine(dictionaryDirectoryPath, "PathwayWebonary.zip");
             string sourceDirectory = txtSourceFileLocation.Text;
@@ -357,17 +372,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        //private void createDirectoryToUpload(string ftpLocation, string userName, string password)
-        //{
-        //    WebRequest request = WebRequest.Create(ftpLocation);
-        //    request.Method = WebRequestMethods.Ftp.MakeDirectory;
-        //    request.Credentials = new NetworkCredential(userName, password);
-        //    using (var resp = (FtpWebResponse)request.GetResponse())
-        //    {
-        //        Console.WriteLine(resp.StatusCode);
-        //    }
-        //}
-
         private bool CreateFTPDirectoryToUpload(string ftpLocation, string userName, string password)
         {
             try
@@ -378,7 +382,6 @@ namespace SIL.PublishingSolution
                 requestDir.UsePassive = true;
                 requestDir.UseBinary = true;
                 requestDir.KeepAlive = false;
-                //requestDir.UseDefaultCredentials = true;
                 requestDir.Credentials = new NetworkCredential(userName, password);
                 requestDir.Proxy = WebRequest.DefaultWebProxy;
                 requestDir.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
@@ -429,7 +432,6 @@ namespace SIL.PublishingSolution
                 {
                     return false;
                 }
-                //  MessageBox.Show("Upload complete");
             }catch
             {
                 return false;
@@ -473,7 +475,6 @@ namespace SIL.PublishingSolution
                 //Close the streams.
                 file.Close();
                 ftpStream.Close();
-                //  MessageBox.Show("Upload complete");
             }catch
             {
             }
@@ -586,7 +587,6 @@ namespace SIL.PublishingSolution
                 projInfo.ProjectInputType = "Dictionary";
 
                 string dictionaryDirectoryPath = Common.PathCombine(Common.PathCombine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
-                //string[] filePaths = Directory.GetFiles(dictionaryDirectoryPath, "*.zip");
                 txtSourceFileLocation.Text = Common.PathCombine(dictionaryDirectoryPath, "Wordpress\\");
                 string webonaryZipFile = Common.PathCombine(dictionaryDirectoryPath, "PathwayWebonary.zip");
                 long size = 0;

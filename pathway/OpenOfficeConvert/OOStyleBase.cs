@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="OOStyleBase.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Creates the OOStyle base file
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -57,10 +73,6 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region public Variable
-        //public static bool ShowError = false;
-        //public static StreamWriter ErrorFile = null;
-        //public static bool ErrorWritten = false;
-        //private static string fileName;
         public bool isMirrored = false; //TD-410
         public bool IsPosition = false;
         public static bool IsCropMarkChecked; // TD-190(marks:crop)
@@ -81,34 +93,6 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         protected void InitializeObject(string outputFile)
         {
-            //try
-            //{
-            //    _verboseWriter.ErrorFileName = Path.GetFileNameWithoutExtension(outputFile) + "_err.html";
-            //    if (File.Exists(_verboseWriter.ErrorFileName))
-            //    {
-            //        File.Delete(_verboseWriter.ErrorFileName);
-            //    }
-
-            //    _verboseWriter.ShowError = false;
-            //    DirectoryInfo folder = new DirectoryInfo(Path.GetDirectoryName(outputFile));
-            //    FileInfo[] deFiles = folder.GetFiles("*.de");
-            //    string deFile;
-            //    if (deFiles.Length > 0)
-            //    {
-            //        deFile = deFiles[0].FullName;
-            //        XmlNode deNode = Common.GetXmlNode(deFile, "//Project");
-            //        XmlAttribute errAttrib = deNode.Attributes["ShowError"];
-            //        if (errAttrib != null)
-            //        {
-            //            _verboseWriter.ShowError = bool.Parse(errAttrib.Value);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    _verboseWriter.ShowError = false;
-            //}
-
             // Creating new Objects
             _columnProperty = new Dictionary<string, string>();
             _sectionProperty = new Dictionary<string, string>();
@@ -190,7 +174,6 @@ namespace SIL.PublishingSolution
                 _allParagraphProperty.Add("margin-bottom", "fo:");
                 _allParagraphProperty.Add("auto-text-indent", "style:");
                 _allParagraphProperty.Add("padding", "fo:");
-                //_allParagraphProperty.Add("display", "fo:"); // Commented for TD-172 (Same key name)
                 _allParagraphProperty.Add("background-color", "fo:");
                 _allParagraphProperty.Add("break-before", "fo:");
                 _allParagraphProperty.Add("line-spacing", "style:");
@@ -215,7 +198,6 @@ namespace SIL.PublishingSolution
                 _allParagraphProperty.Add("float", "fo:"); //TD-416
                 _allParagraphProperty.Add("page-number", "style:");
 
-                //_allTextProperty = new Dictionary<string, string>();
                 _allTextProperty.Add("font-weight", "fo:");
                 _allTextProperty.Add("font-size", "fo:");
                 _allTextProperty.Add("font-family", "fo:");
@@ -231,7 +213,6 @@ namespace SIL.PublishingSolution
                 _allTextProperty.Add("text-decoration", "style:");
                 _allTextProperty.Add("text-underline-style", "style:");
                 _allTextProperty.Add("background-color", "fo:");
-                //_allTextProperty.Add("content", ""); // for @page header and footer
                 _allTextProperty.Add("text-position", "style:");
                 //TD-172
                 _allTextProperty.Add("display", "text:");
@@ -242,7 +223,6 @@ namespace SIL.PublishingSolution
                 _allTextProperty.Add("hyphenation-remain-char-count", "fo:");
                 _allTextProperty.Add("hyphenation-push-char-count", "fo:");
 
-                //_allColumnProperty = new Dictionary<string, string>();
                 _allColumnProperty.Add("column-count", "fo:");
                 _allColumnProperty.Add("column-gap", "fo:");
                 _allColumnProperty.Add("column-fill", "fo:");
@@ -252,9 +232,6 @@ namespace SIL.PublishingSolution
                 _allColumnProperty.Add("column-rule-color", "style:");
                 _allColumnProperty.Add("dont-balance-text-columns", "text:");
 
-
-
-                //_allPageLayoutProperty = new Dictionary<string, string>();
                 _allPageLayoutProperty.Add("page-width", "fo:");
                 _allPageLayoutProperty.Add("page-height", "fo:");
                 _allPageLayoutProperty.Add("num-format", "style:");
@@ -278,7 +255,6 @@ namespace SIL.PublishingSolution
                 _allPageLayoutProperty.Add("padding-left", "fo:");
                 _allPageLayoutProperty.Add("padding-right", "fo:");
 
-                //_pageLayoutProperty = new Dictionary<string, string>();
                 _pageLayoutProperty.Add("fo:page-width", "8.5in");
                 _pageLayoutProperty.Add("fo:page-height", "11in");
                 _pageLayoutProperty.Add("style:num-format", "1");
@@ -289,8 +265,6 @@ namespace SIL.PublishingSolution
                 _pageLayoutProperty.Add("fo:margin-left", "0.7874in");
                 _pageLayoutProperty.Add("style:writing-mode", "lr-tb");
                 _pageLayoutProperty.Add("style:footnote-max-height", "0in");
-
-                //_firstPageLayoutProperty = new Dictionary<string, string>();
 
                 // Add all tag property
                 _baseTagName.Add("h1");
@@ -345,14 +319,10 @@ namespace SIL.PublishingSolution
                 _tagProperty["h6"] = tagProp;
 
                 tagProp = new Dictionary<string, string>();
-                //tagProp.Add("fo:margin-left", "0pt");
                 _tagProperty["ol"] = tagProp;
                 _tagProperty["ul"] = tagProp;
                 _tagProperty["li"] = tagProp;
 
-                //tagProp = new Dictionary<string, string>();
-                //tagProp.Add("fo:margin-top", "0.1598in");
-                //tagProp.Add("fo:margin-bottom", "0.1598in");
                 _tagProperty["p"] = tagProp;
 
                 tagProp = new Dictionary<string, string>();
@@ -426,7 +396,6 @@ namespace SIL.PublishingSolution
                     else
                     {
                         ArrayList arLang = new ArrayList();
-                        //arLang = _styleName.AttribAncestor[coun];
                         arLang.Add(coun);
                         _styleName.SpellCheck[lang] = arLang;
                     }
@@ -514,8 +483,6 @@ namespace SIL.PublishingSolution
 
 
                 //TD-2566
-                //<style:font-face style:name="Gautami1" svg:font-family="Gautami" style:font-pitch="variable"/>
-
                 _writer.WriteStartElement("style:font-face");
                 _writer.WriteAttributeString("style:name", "Gautami1");
                 _writer.WriteAttributeString("svg:font-family", "'Gautami'");
@@ -625,12 +592,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("style:parent-style-name", "Standard");//Standard
                 _writer.WriteAttributeString("style:class", "extra");
 
-                ////<style:text-properties style:font-name="Charis SIL Compact1" fo:font-weight="bold"/>
-                //_writer.WriteStartElement("style:text-properties");
-                //_writer.WriteAttributeString("style:font-name", "Charis SIL Compact");
-                //_writer.WriteAttributeString("fo:font-weight", "bold");
-                //_writer.WriteEndElement();
-
                 _writer.WriteEndElement();
             }
             catch (Exception ex)
@@ -658,7 +619,6 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("style:family", "paragraph");
                         _writer.WriteAttributeString("style:parent-style-name", "none");
                         _writer.WriteStartElement("style:paragraph-properties");
-                        //_writer.WriteAttributeString("style:line-spacing", "12pt");
                         _writer.WriteAttributeString("fo:margin-top", "0.1in");
                         _writer.WriteAttributeString("fo:margin-bottom", "0.1in");
                         _writer.WriteAttributeString("style:line-spacing", "100%");
@@ -776,7 +736,7 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("text:level", "1");
                         _writer.WriteAttributeString("text:style-name", "Bullet_20_Symbols");
                         _writer.WriteAttributeString("style:num-suffix", ".");
-                        _writer.WriteAttributeString("text:bullet-char", "•");
+                        _writer.WriteAttributeString("text:bullet-char", Common.ConvertUnicodeToString("\\2022"));
                         _writer.WriteStartElement("style:list-level-properties");
                         _writer.WriteAttributeString("text:list-level-position-and-space-mode", "label-alignment");
                         _writer.WriteStartElement("style:list-level-label-alignment");
@@ -795,7 +755,7 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("text:level", "2");
                         _writer.WriteAttributeString("text:style-name", "Bullet_20_Symbols");
                         _writer.WriteAttributeString("style:num-suffix", ".");
-                        _writer.WriteAttributeString("text:bullet-char", "•");
+                        _writer.WriteAttributeString("text:bullet-char", Common.ConvertUnicodeToString("\\2022"));
                         _writer.WriteStartElement("style:list-level-properties");
                         _writer.WriteAttributeString("text:list-level-position-and-space-mode", "label-alignment");
                         _writer.WriteStartElement("style:list-level-label-alignment");
@@ -815,7 +775,6 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("style:parent-style-name", "none");
                         _writer.WriteAttributeString("style:list-style-name", "ol");
                         _writer.WriteStartElement("style:paragraph-properties");
-                        //_writer.WriteAttributeString("fo:margin-left", "2pt");
                         _writer.WriteEndElement();
                         _writer.WriteEndElement();
                         break;
@@ -825,8 +784,6 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("style:family", "paragraph");
                         _writer.WriteAttributeString("style:parent-style-name", "none");
                         _writer.WriteStartElement("style:paragraph-properties");
-                        //_writer.WriteAttributeString("fo:margin-top", "0.1598in");
-                        //_writer.WriteAttributeString("fo:margin-bottom", "0.1598in");
                         _writer.WriteAttributeString("fo:margin-top", "0.1in");
                         _writer.WriteAttributeString("fo:margin-bottom", "0.1in");
                         _writer.WriteAttributeString("style:line-spacing", "100%");

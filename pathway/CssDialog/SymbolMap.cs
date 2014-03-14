@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="SymbolMap.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="SymbolMap.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright (C) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -110,7 +110,6 @@ namespace SIL.PublishingSolution
                     if (cellCount < listBox1.Items.Count)
                     {
                         var regex = new Regex(@"\\[uU]([0-9A-F]{4})", RegexOptions.IgnoreCase);
-                        //string line = regex.Replace(listBox1.Items[cellCount].ToString(), delegate(Match match) { return ((char)Int32.Parse(match.Value.Substring(2), NumberStyles.HexNumber)).ToString(); });
                         string line = regex.Replace(listBox1.Items[cellCount].ToString(),
                                                     match =>
                                                     ((char)
@@ -164,19 +163,6 @@ namespace SIL.PublishingSolution
 
             ctl.ForeColor = Color.Black;
         }
-
-/*
-        /// <summary>
-        /// To set the current cell position at top when i loads new page
-        /// </summary>
-        private void SetDefaultCell()
-        {
-            SymbolViewer.CurrentCell.Selected = false;
-            SymbolViewer.Rows[0].Cells[0].Selected = true;
-            SymbolViewer.CurrentCell = SymbolViewer.SelectedCells[0];
-            SymbolViewer.Focus();
-        }
-*/
 
         /// <summary>
         /// To load symbol to the label based on logic
@@ -253,7 +239,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// To Convert the string / symbol to unicode value
         /// </summary>
-        /// <param name="inputString">String value for example "‡"</param>
+        /// <param name="inputString">String value for example Tamil char</param>
         /// <returns>unicode Value</returns>
         private static string ConvertStringToUnicode(string inputString)
         {

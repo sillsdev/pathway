@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SIL International")]
 [assembly: AssemblyProduct("Pathway")]
-[assembly: AssemblyCopyright("Copyright © 2012 SIL International")]
+[assembly: AssemblyCopyright("Copyright ( c ) 2012 SIL International")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,6 +31,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.5.0.3183*")]
-[assembly: AssemblyVersion("1.5.0.3183")]
-[assembly: AssemblyFileVersion("1.5.0.3183")]
+// [assembly: AssemblyVersion("1.7.0.3636*")]
+[assembly: AssemblyVersion("1.7.0.3636")]
+[assembly: AssemblyFileVersion("1.7.0.3636")]

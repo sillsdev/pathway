@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="XeLaTexStyleBase.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+//
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -1576,37 +1592,6 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
             _writer.WriteEndElement();
-
-            ////Style for ChapterNumber which is used for InDesig reference and hide the content.
-            //_writer.WriteStartElement("CharacterStyle");
-            //_writer.WriteAttributeString("Self", "CharacterStyle/hideChapterNumber_Paragraph_scrSection_columns_scrBook_scrBody");
-            //_writer.WriteAttributeString("Name", "$ID/NormalCharacterStyle");
-            //_writer.WriteAttributeString("Imported", "false");
-            //_writer.WriteAttributeString("NextStyle", "CharacterStyle/hideChapterNumber_Paragraph_scrSection_columns_scrBook_scrBody");
-            //_writer.WriteAttributeString("KeyboardShortcut", "0 0");
-            //_writer.WriteAttributeString("PointSize", "0.1");
-            //_writer.WriteAttributeString("FillColor", "Color/Paper");
-            //_writer.WriteStartElement("Properties");
-            //_writer.WriteStartElement("BasedOn");
-            //_writer.WriteAttributeString("type", "object");
-            //_writer.WriteString("CharacterStyle/Paragraph_scrSection_columns_scrBook_scrBody");
-            //_writer.WriteEndElement();
-            //_writer.WriteStartElement("AppliedFont");
-            //_writer.WriteAttributeString("type", "string");
-            //_writer.WriteString("Times New Roman");
-            //_writer.WriteEndElement();
-            //_writer.WriteStartElement("PreviewColor");
-            //_writer.WriteAttributeString("type", "enumeration");
-            //_writer.WriteString("Nothing");
-            //_writer.WriteEndElement();
-            //_writer.WriteStartElement("Leading");
-            //_writer.WriteAttributeString("type", "unit");
-            //_writer.WriteString("Auto");
-            //_writer.WriteEndElement();
-            //_writer.WriteEndElement();
-            //_writer.WriteEndElement();
-
-           // _writer.WriteEndElement(); // End of RootCharacterStyleGroup
         }
 
         public void CreateFile(string projectPath)

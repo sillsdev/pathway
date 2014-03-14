@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="Template.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="Template.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -59,8 +59,6 @@ namespace SIL.PublishingSolution
                 {
                     webTemplatePreview.Visible = true;
                     string CSSFile = Common.PathCombine(_supportFolder, lstSourceCSS.Text);
-
-                    //Library lib = new Library(); 
                     _mergedCSS = Common.MakeSingleCSS(CSSFile,"");
                     string xhtmlPreviewFilePath = Preview.CreatePreviewFile(XHTMLFile, _mergedCSS, "Template", true);
                     webTemplatePreview.Navigate(xhtmlPreviewFilePath);

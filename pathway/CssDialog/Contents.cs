@@ -1,19 +1,17 @@
 ﻿// --------------------------------------------------------------------------------------------
-#region // Copyright (c) 2010, SIL International. All Rights Reserved.
-// <copyright file="Contents.cs" from='2010' to='2010' company='SIL International'>
-//		Copyright (c) 2010, SIL International. All Rights Reserved.   
+// <copyright file="Contents.cs" from='2010' to='2014' company='SIL International'>
+//		Copyright (c) 2014, SIL International. All Rights Reserved.   
 //    
 //		Distributable under the terms of either the Common Public License or the
 //		GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-#endregion
 // 
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed: 
 // 
 // <remarks>
-// Satisfies Flex / TE interface and directs execution to appropriate class in PublishingSolution
+// Satisfies Flex / TE interface and directs execution to appropriate class in Pathway
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -32,8 +30,6 @@ namespace SIL.PublishingSolution
             // EDB - for testing only
             _realClass = new ExportThroughPathway();
             ((ExportThroughPathway)_realClass).InputType = "Dictionary";
-            //_realClass = new PrintVia();
-            //((PrintVia)_realClass).InputType = "Dictionary";
         }
 
         #region Properties

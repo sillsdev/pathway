@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="AboutDE.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="AboutBooklet.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2009, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Displays the properties of the Current Application
+// About Booklet
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -64,7 +64,6 @@ namespace SIL.PublishingSolution
                     return "";
                 }
                 return ((AssemblyFileVersionAttribute) attributes[0]).Version;
-                //return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
 
@@ -139,8 +138,6 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void AboutDE_Load(object sender, EventArgs e)
         {
-            //LocDB.Localize(this, null);     // Form Controls
-
             Text = String.Format("About {0}", AssemblyTitle);
             labelProductName.Text = AssemblyProduct;
             labelVersion.Text = String.Format("Version {0}", AssemblyFileVersion);
@@ -160,10 +157,10 @@ namespace SIL.PublishingSolution
 
         private void AboutDE_DoubleClick(object sender, EventArgs e)
         {
-//#if DEBUG
-//            var dlg = new Localizer(LocDB.DB);
-//            dlg.ShowDialog();
-//#endif
+        //#if DEBUG
+            //var dlg = new Localizer(LocDB.DB);
+            //dlg.ShowDialog();
+        //#endif
         }
 
         private void AboutDE_Activated(object sender, EventArgs e)

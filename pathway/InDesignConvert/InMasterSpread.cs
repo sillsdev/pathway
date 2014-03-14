@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="InMasterPage.cs" from='2009' to='2010' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="InMasterSpread.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Creates the InMasterPage file 
+// Creates the InMasterSread file 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -104,7 +104,7 @@ namespace SIL.PublishingSolution
             string headerFooterWidth = GetHeaderFooterWidth();
             ArrayList ReferenceNames = new ArrayList { "top-left", "top-center", "top-right", "bottom-left", "bottom-center", "bottom-right" };
 
-            float frameHeight = 15f;
+            float frameHeight = 24f;//20.0f
             Dictionary<string, string> classValues = _cssProperty[_pageClass];
 
             float halfWidth = float.Parse(classValues["Page-Width"], CultureInfo.GetCultureInfo("en-US")) / 2;
@@ -120,9 +120,9 @@ namespace SIL.PublishingSolution
             float yb1 = y + float.Parse(classValues["Margin-Bottom"], CultureInfo.GetCultureInfo("en-US")) / 2;  // 4 inch = place header in 2 inch - Heade to center
             float yb2 = yb1 + frameHeight;
 
-            float x2 = _x1 - float.Parse(headerFooterWidth);
-            float x3 = float.Parse(headerFooterWidth) - x2;
-            float x4 = x3 + float.Parse(headerFooterWidth);
+            float x2 = 22;// _x1 - float.Parse(headerFooterWidth);
+            float x3 = 22;// float.Parse(headerFooterWidth) - (_x1 - float.Parse(headerFooterWidth));//x2 40
+            float x4 = _x1 + 1;// (_x1 - float.Parse(headerFooterWidth));// x3 + float.Parse(headerFooterWidth); + 18
 
             //      x1,y1       x2,y2    
             //
@@ -138,12 +138,6 @@ namespace SIL.PublishingSolution
                                   {1 * x3, 1 * yb1, 1 * x3, 1 * yb2, -1 * x2, 1 * yb2, -1 * x2, 1 * yb1},
                                   {1 * x3, 1 * yb1, 1 * x3, 1 * yb2, 1 * x4, 1 * yb2, 1 * x4, 1 * yb1}
                               };
-
-            CreateMainFrameStaticMethod1("MainFrame", "u19c");
-            CreatePathPointArray();
-            SetTextFramePreference();
-            CreateMainFrameStaticMethod2();
-
             for (int i = 0; i < ReferenceNames.Count; i++)
             {
                 string parentStory = "u19c";
@@ -182,7 +176,9 @@ namespace SIL.PublishingSolution
                 CreateMainFrameStaticMethod1(FrameName, parentStory);
                 CreateReferenceFrameProperties(sign[i, 0], sign[i, 1], sign[i, 2], sign[i, 3], sign[i, 4],
                                                sign[i, 5], sign[i, 6], sign[i, 7]);
+
                 CreateReferenceFramePreferenceforReferences(headerFooterWidth);
+
                 CreateMainFrameStaticMethod2();
             }
         }
@@ -235,22 +231,6 @@ namespace SIL.PublishingSolution
                     result = "ubr" + pageType;
                     break;
             }
-            //if(pageName == "@page:first")
-            //{
-            //    result = "u00f";
-            //}
-            //else if (pageName == "@page:left")
-            //{
-            //    result = "u00l";
-            //}
-            //else if (pageName == "@page:right")
-            //{
-            //    result = "u00r";
-            //}
-            //else
-            //{
-            //    result = "u00a";
-            //}
             return result;
         }
 
@@ -263,6 +243,8 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("PathOpen", "false");
             _writer.WriteStartElement("PathPointArray");
             _writer.WriteStartElement("PathPointType"); // Top-Left
+            //x3 = 396;
+            //x4 = 396;
             _writer.WriteAttributeString("Anchor", x1 + " " + y1);
             _writer.WriteAttributeString("LeftDirection", x1 + " " + y1);
             _writer.WriteAttributeString("RightDirection", x1 + " " + y1);
@@ -300,7 +282,7 @@ namespace SIL.PublishingSolution
         {
             _writer.WriteStartElement("TextFramePreference");
             _writer.WriteAttributeString("TextColumnFixedWidth", headerFooterWidth);
-            _writer.WriteAttributeString("VerticalJustification", "CenterAlign");
+            _writer.WriteAttributeString("VerticalJustification", "TopAlign");//CenterAlign
             _writer.WriteEndElement();
         }
 
@@ -465,7 +447,10 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("GradientStrokeHiliteLength", "0");
             _writer.WriteAttributeString("GradientStrokeHiliteAngle", "0");
             _writer.WriteAttributeString("AppliedObjectStyle", "ObjectStyle/$ID/[None]");
-            _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 0");
+            if (frameName.IndexOf("bottom") == 0)
+                _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 -21.25977");//0 -7.5
+            else
+                _writer.WriteAttributeString("ItemTransform", "1 0 0 1 0 21");//0
         }
 
         private void CreateMarginPreferenceforMasterPage()

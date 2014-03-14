@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="UIConfigurationToolTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// 
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -63,10 +79,6 @@ namespace Test.UIConfigurationToolTest
             string folderName = "styles";
             CopyFolderSupportToIO(folderName);
             LoadParam();
-
-
-            //Common.ProgBase = _outputBasePath;
-            //Param.Value["UserSheetPath"] = _outputBasePath; 
         }
 
         private void CopyFilesSupportToIO(string fileName)
@@ -189,8 +201,6 @@ namespace Test.UIConfigurationToolTest
         [Test]
         public void RemoveXMLNode()
         {
-            //LoadParam();
-
             string styleName = "Draft";  // Style Name
             string xPath = "//styles/" + "paper" + "/style[@name='" + styleName + "']";
             XmlNode removableNode = Param.GetItem(xPath);
@@ -221,8 +231,6 @@ namespace Test.UIConfigurationToolTest
         [Test]
         public void AddNew()
         {
-            //LoadParam();
-
             string styleName = "MyyStyyle98765";
             _configTool._CToolBL.MediaType = "paper";
             _configTool._CToolBL.StyleName = styleName;
@@ -295,8 +303,6 @@ namespace Test.UIConfigurationToolTest
         [Test]
         public void SaveColumnWidthTest()
         {
-            //LoadParam();
-
             DataGridView grid = PopulateGrid2();
             string[] value = { "5", "10", "15", "20", "25" };
 
@@ -511,7 +517,6 @@ namespace Test.UIConfigurationToolTest
         public void CopyCustomStyleToSend()
         {
             _configTool._CToolBL.MediaType = "paper";
-            //LoadParam();
             string folderPath = Common.PathCombine(_outputBasePath, "NewFolderPath");
             if (Directory.Exists(folderPath))
                 Directory.Delete(folderPath, true);

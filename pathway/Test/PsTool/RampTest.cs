@@ -1,16 +1,19 @@
-﻿// ---------------------------------------------------------------------------------------------
-#region // Copyright (c) 2013, SIL International. LGPL
-// <copyright from='2013' to='2013' company='SIL International'>
-//		Copyright (c) 2013, SIL International. LGPL
-//
-//		Distributable under the terms of either the Common Public License or the
-//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright>
-#endregion
-//
-// File: RampTest.cs
-// Responsibility: Trihus
-// ---------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="RampTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Test Ramp files
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -60,7 +63,8 @@ namespace Test.PsTool
             LanguageIso.Clear();
             RampDescriptionHas = null;
             RampDescription = null;
-            var settingsFolder = Common.PathCombine(Common.GetAllUserPath(), "Pathway");
+            //var settingsFolder = Common.PathCombine(Common.GetAllUserPath(), "Pathway");
+            var settingsFolder = Common.GetAllUserPath();
             if (Directory.Exists(settingsFolder))
             {
                 Directory.Delete(settingsFolder, true);
@@ -136,7 +140,7 @@ namespace Test.PsTool
         {
             const string TestFolder = "rampInput";
             _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
-            _projInputType = "Dictionary";
+            Param.Value[Param.InputType] = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
             Assert.True(Contributor.Contains("GOD,compiler"), "should be GOD!");
@@ -177,7 +181,7 @@ namespace Test.PsTool
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
-            Assert.True(Rights == "© 2013 SIL International®. DRAFT DOCUMENTPlease note that this document is not in its final form. This document was printed during the normal course of a review process by the creator or editor, and will likely be superceded in both content and format by a...", "CopyRight Information is wrong!");
+            Assert.True(Rights == "( c ) 2013 SIL International®. DRAFT DOCUMENTPlease note that this document is not in its final form. This document was printed during the normal course of a review process by the creator or editor, and will likely be superceded in both content and format by a...", "CopyRight Information is wrong!");
         }
 
         [Test]
@@ -222,7 +226,7 @@ namespace Test.PsTool
         {
             const string TestFolder = "rampInput2";
             _folderPath = FileInput(Common.PathCombine(TestFolder, "sena3.xhtml"));
-            _projInputType = "Dictionary";
+            Param.Value[Param.InputType] = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
             Assert.AreEqual(null, RampDescription);

@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("FLEx 5.4 XHTML export to Open Office 2.4")]
 [assembly: AssemblyCompany("EC Group India for SIL International")]
 [assembly: AssemblyProduct("Pathway")]
-[assembly: AssemblyCopyright("Copyright © 2008-2012 SIL International")]
+[assembly: AssemblyCopyright("Copyright ( c ) 2008-2012 SIL International")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,6 +30,6 @@ using System.Resources;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.5.0.3183")]
-[assembly: AssemblyFileVersion("1.5.0.3183")]
+[assembly: AssemblyVersion("1.7.0.3636")]
+[assembly: AssemblyFileVersion("1.7.0.3636")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]

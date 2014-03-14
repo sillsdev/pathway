@@ -1,9 +1,22 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="LiftEntry.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// 
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-
-using System.Text;
 using System.Xml;
 
 namespace SIL.PublishingSolution
@@ -90,11 +103,6 @@ namespace SIL.PublishingSolution
 
         public LiftEntries(XmlNodeList entries)
         {
-            //this.entries = new LiftEntry[entries.Count];
-            //for (int i = 0; i < entries.Count; i++)
-            //{
-            //    this.entries[i] = new LiftEntry(entries[i]);
-            //}
             foreach (XmlNode entry in entries)
             {
                 this.entries.Add(new LiftEntry(entry));

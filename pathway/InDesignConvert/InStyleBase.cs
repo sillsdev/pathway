@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="InStyleBase.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Creates the InDesign InStyleBase file
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.IO;
 using System.Xml;
@@ -325,7 +341,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("Position", "Normal");
             _writer.WriteAttributeString("StrikeThru", "false");
             _writer.WriteAttributeString("CharacterAlignment", "AlignEmCenter");
-            _writer.WriteAttributeString("KeepLinesTogether", "true"); //Samdoss
+            _writer.WriteAttributeString("KeepLinesTogether", "false"); 
             _writer.WriteAttributeString("StrokeTint", "-1");
             _writer.WriteAttributeString("FillTint", "-1");
             _writer.WriteAttributeString("OverprintStroke", "false");
@@ -913,22 +929,6 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
-            //_writer.WriteStartElement("AnchoredObjectSetting");
-            //_writer.WriteAttributeString("AnchoredPosition", "InlinePosition");
-            //_writer.WriteAttributeString("SpineRelative", "false");
-            //_writer.WriteAttributeString("LockPosition", "false");
-            //_writer.WriteAttributeString("PinPosition", "true");
-            //_writer.WriteAttributeString("AnchorPoint", "BottomRightAnchor");
-            //_writer.WriteAttributeString("HorizontalAlignment", "LeftAlign");
-            //_writer.WriteAttributeString("HorizontalReferencePoint", "TextFrame");
-            //_writer.WriteAttributeString("VerticalAlignment", "BottomAlign");
-            //_writer.WriteAttributeString("VerticalReferencePoint", "LineBaseline");
-            //_writer.WriteAttributeString("AnchorXoffset", "0");
-            //_writer.WriteAttributeString("AnchorYoffset", "0");
-            //_writer.WriteAttributeString("AnchorSpaceAbove", "0");
-            //_writer.WriteEndElement();
-
-            //Task TD-2346 By Samdoss - 3
             _writer.WriteStartElement("AnchoredObjectSetting");
             _writer.WriteAttributeString("AnchoredPosition", "Anchored");
             _writer.WriteAttributeString("SpineRelative", "false");
@@ -946,8 +946,6 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("AnchorSpaceAbove", "4");
 
             _writer.WriteEndElement();
-
-
 
             _writer.WriteStartElement("TextWrapPreference");
             _writer.WriteAttributeString("Inverse", "false");
@@ -1605,37 +1603,6 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
             _writer.WriteEndElement();
-
-            ////Style for ChapterNumber which is used for InDesig reference and hide the content.
-            //_writer.WriteStartElement("CharacterStyle");
-            //_writer.WriteAttributeString("Self", "CharacterStyle/hideChapterNumber_Paragraph_scrSection_columns_scrBook_scrBody");
-            //_writer.WriteAttributeString("Name", "$ID/NormalCharacterStyle");
-            //_writer.WriteAttributeString("Imported", "false");
-            //_writer.WriteAttributeString("NextStyle", "CharacterStyle/hideChapterNumber_Paragraph_scrSection_columns_scrBook_scrBody");
-            //_writer.WriteAttributeString("KeyboardShortcut", "0 0");
-            //_writer.WriteAttributeString("PointSize", "0.1");
-            //_writer.WriteAttributeString("FillColor", "Color/Paper");
-            //_writer.WriteStartElement("Properties");
-            //_writer.WriteStartElement("BasedOn");
-            //_writer.WriteAttributeString("type", "object");
-            //_writer.WriteString("CharacterStyle/Paragraph_scrSection_columns_scrBook_scrBody");
-            //_writer.WriteEndElement();
-            //_writer.WriteStartElement("AppliedFont");
-            //_writer.WriteAttributeString("type", "string");
-            //_writer.WriteString("Times New Roman");
-            //_writer.WriteEndElement();
-            //_writer.WriteStartElement("PreviewColor");
-            //_writer.WriteAttributeString("type", "enumeration");
-            //_writer.WriteString("Nothing");
-            //_writer.WriteEndElement();
-            //_writer.WriteStartElement("Leading");
-            //_writer.WriteAttributeString("type", "unit");
-            //_writer.WriteString("Auto");
-            //_writer.WriteEndElement();
-            //_writer.WriteEndElement();
-            //_writer.WriteEndElement();
-
-           // _writer.WriteEndElement(); // End of RootCharacterStyleGroup
         }
 
         public void CreateFile(string projectPath)

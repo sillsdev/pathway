@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="DictionaryForMIDsStyle.cs" from='2013' to='2013' company='SIL International'>
-//      Copyright © 2013, SIL International. All Rights Reserved.   
+// <copyright file="DictionaryForMIDsStyle.cs" from='2013' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -43,7 +43,6 @@ namespace SIL.PublishingSolution
 
         private void AddIndex(int styleNum)
         {
-            //var key = Styles[styleNum - 1].ContentStyle + ":" + Styles[styleNum - 1].FontColor;
             var key = Styles[styleNum - 1].DisplayText;
             Index[key] = styleNum;
         }
@@ -71,7 +70,6 @@ namespace SIL.PublishingSolution
 
         public int Add(string text, string color, string style)
         {
-            //var key = style + ":" + color;
             var key = text;
             if (Index.ContainsKey(key))
             {

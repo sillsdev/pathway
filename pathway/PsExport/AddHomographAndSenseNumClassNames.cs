@@ -1,15 +1,19 @@
-﻿#region // Copyright (c) 2012, SIL International. All Rights Reserved.
-// <copyright from='2011' to='2012' company='SIL International'>
-//		Copyright (c) 2011, SIL International. All Rights Reserved.
-//
-//		Distributable under the terms of either the Common Public License or the
-//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright>
-#endregion
-//
-// File: AddHomographAndSenseNumClassNames.cs
-// Responsibility: Greg Trihus
-// ---------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="AddHomographAndSenseNumClassNames.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// 
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
 using System.Text.RegularExpressions;
 using System.Xml;
 using SIL.Tool;

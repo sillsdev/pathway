@@ -275,14 +275,6 @@
 			</xsl:copy>
 		</xsl:if>
 	</xsl:template>
-    
-	<!-- Special handling of text. -->
-	<xsl:template match="text()">
-		<xsl:if test="not(ancestor::xhtml:div[@class='Title_Main']/xhtml:span[not(@class)])">
-			<!-- Replace curly quotes with straight quotes. -->
-			<xsl:value-of select="translate(.,'“”','&quot;&quot;')"/>
-		</xsl:if>
-	</xsl:template>
 
 	<!-- Default element and attribute templates. -->
 	<xsl:template match="*">

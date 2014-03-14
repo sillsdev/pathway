@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="ParatextPathwayLink.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// 
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -22,7 +38,6 @@ namespace SIL.PublishingSolution
         private XslCompiledTransform m_separateIntoBooks = new XslCompiledTransform();
         private XslCompiledTransform m_usxToXhtml = new XslCompiledTransform();
         private XslCompiledTransform m_encloseParasInSections = new XslCompiledTransform();
-        //private XslCompiledTransform m_encloseScrInColumns = new XslCompiledTransform();
 
         /// ------------------------------------------------------------------------------------
         /// <summary>
@@ -122,8 +137,6 @@ namespace SIL.PublishingSolution
         public void ExportToPathway(XmlDocument usxDoc)
         {
             //// TestBed Code
-            //// Save Paratext usxDoc file.
-            // usfxDoc.Save("d:\\usxDoc.xml");
             if (string.IsNullOrEmpty(usxDoc.InnerText))
             {
                 // TODO: Localize string
@@ -292,7 +305,7 @@ namespace SIL.PublishingSolution
         {
             Debug.Assert(usxBooksToExport != null && usxBooksToExport.Count > 0);
 
-            if (m_format == "CadreBible" || m_format == "Go Bible")
+            if (m_format == "CadreBible" || m_format == "Go Bible" || m_format == "Sword")
                 ExportUSXRawToUSX(usxBooksToExport);
 
             XmlDocument allBooks = usxBooksToExport[0];
@@ -301,10 +314,6 @@ namespace SIL.PublishingSolution
 
             for (int iDoc = 1; iDoc < usxBooksToExport.Count; iDoc++)
             {
-                //bool usxRootNode
-                //XmlNode bookUsx = usxBooksToExport[iDoc].SelectSingleNode("/usfm") ??
-                //    usxBooksToExport[iDoc].SelectSingleNode("/usx");
-
                 foreach (XmlNode nodeToAdd in usxBooksToExport[iDoc].SelectSingleNode("/usfm|/usx").ChildNodes)
                 {
                     XmlNode prevNode = allBooks.SelectSingleNode("usfm|usx").LastChild;
@@ -373,8 +382,6 @@ namespace SIL.PublishingSolution
                 XmlDocument scrBooksDoc = usxBooksToExport[iDoc];
                 string usx = scrBooksDoc.InnerXml;
 
-                //string prevNode = scrBooksDoc.SelectNodes("book").ToString();
-
                 var nsmgr1 = new XmlNamespaceManager(scrBooksDoc.NameTable);
                 nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
                 nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
@@ -391,11 +398,11 @@ namespace SIL.PublishingSolution
                         {
                             try
                             {
-                                bookName = xmlNode.Attributes["id"].Value;
+                                bookName = xmlNode.Attributes["code"].Value;
                             }
                             catch (NullReferenceException)
                             {
-                                bookName = xmlNode.Attributes["code"].Value;
+                                bookName = xmlNode.Attributes["id"].Value;
                             }
                         }
                     }

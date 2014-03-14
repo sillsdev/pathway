@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="ExportPdf.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="ExportPdf.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Stylepick FeatureSheet
+// Export to pdf output
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -18,7 +18,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -123,7 +122,7 @@ namespace SIL.PublishingSolution
                     }
                     Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                     preProcessor.GetTempFolderPath();
-                    preProcessor.ImagePreprocess();
+                    preProcessor.ImagePreprocess(false);
                     preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
                     if (projInfo.SwapHeadword)
                         preProcessor.SwapHeadWordAndReversalForm();
@@ -181,7 +180,6 @@ namespace SIL.PublishingSolution
                             if (!Directory.Exists("/usr/lib/prince/bin"))
                             {
                                 return success = false;
-                                //MessageBox.Show(@"Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", "Pathway Configuration Tool" , MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                             }
                         }
                         Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
@@ -203,17 +201,16 @@ namespace SIL.PublishingSolution
                             p1.WaitForExit();
                             p1Error = p1.StandardError.ReadToEnd();
                         }
-                        //Common.RunCommand("prince ", _processedXhtml + " -o, " + xhtmlFileName + ".pdf", 1);
                     }
 
                     Environment.CurrentDirectory = curdir;
                     if (!projInfo.DefaultXhtmlFileWithPath.ToLower().Contains("local"))
                     {
                         //Copyright information added in PDF files
-                        string pdfFIleName = Common.InsertCopyrightInPdf(Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), xhtmlFileName + ".pdf"), "Prince XML");
+                        string pdfFIleName = Common.InsertCopyrightInPdf(Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), xhtmlFileName + ".pdf"), "Prince XML", projInfo.ProjectInputType);
 
                         string cleanExtn = ".tmp,.de,.exe,.jar,.xml";
-                        Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, cleanExtn, "layout", string.Empty);
+                        Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, cleanExtn, "layout.css", string.Empty);
                         CreateRAMP(projInfo);
                     }
                     else
@@ -231,9 +228,6 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    //if (Common.Testing) return;
-                    //var msg = new[] { "PrinceXML not installed in this system" };
-                    //LocDB.Message("defErrMsg", "PrinceXML not installed in this system", msg, LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
                     success = false;
                 }
             }

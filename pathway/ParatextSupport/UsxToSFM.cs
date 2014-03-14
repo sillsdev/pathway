@@ -1,11 +1,24 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="UsxToSFM.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Convert USX to SFM format
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Windows.Forms;
 using System.Xml;
-using Microsoft.Win32;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -52,7 +65,6 @@ namespace SIL.PublishingSolution
             _usxFullPath = usxFullPath;
             _sfmFullPath = sfmFullPath;
             OpenFile();
-            //MapClassName();
             ProcessUsx();
         }
 
@@ -99,11 +111,6 @@ namespace SIL.PublishingSolution
         private void WriteElement()
         {
             _content = SignificantSpace(_reader.Value);
-            //if (_tagName == "book")
-            //{
-            //    Book();
-            //}
-            //else 
             if (_tagName == "para")
             {
                 Para();
@@ -532,12 +539,12 @@ namespace SIL.PublishingSolution
         /// input: 
         /// <note caller="+" style="f">
         /// <char style="fr" closed="false">1.1-2 </char>
-        /// <char style="ft" closed="false">‘hakim’.</char>
+        /// <char style="ft" closed="false">hakim.</char>
         /// </note>
         /// output: 
         /// \f + 
         /// \fr 1.1-2 
-        /// \ft ‘hakim’.
+        /// \ft hakim.
         /// \f*
         /// </summary>
         private void Note()
@@ -555,17 +562,6 @@ namespace SIL.PublishingSolution
                 _sfmFile.Write(line);
             }
         }
-
-
-        ///// <summary>
-        ///// Write Para Tag Information
-        ///// </summary>
-        //private void Para()
-        //{
-        //    string line = "\\" + _style + Space;
-        //    _sfmFile.Write(line);
-        //    _tagName = "others";
-        //}
 
         private void MapClassName()
         {
@@ -594,16 +590,11 @@ namespace SIL.PublishingSolution
         private string SignificantSpace(string content)
         {
             if (content == null) return "";
-            //string content = _reader.Value;
             content = content.Replace("\r\n", "");
             content = content.Replace("\n", "");
             content = content.Replace("\t", "");
             Char[] charac = content.ToCharArray();
             StringBuilder builder = new StringBuilder();
-            //if (charac.Length == 1)
-            //{
-            //    return content;
-            //}
             foreach (char var in charac)
             {
                 if (var == ' ' || var == '\b')
@@ -622,7 +613,6 @@ namespace SIL.PublishingSolution
             }
             content = builder.ToString();
             return content;
-            //_writer.WriteString(content);
         }
 
         private string StackPop(Stack<string> stack)

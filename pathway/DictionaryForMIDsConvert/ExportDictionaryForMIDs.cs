@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="ExportDictionaryForMIDs.cs" from='2013' to='2013' company='SIL International'>
-//      Copyright © 2013, SIL International. All Rights Reserved.   
+// <copyright file="ExportDictionaryForMIDs.cs" from='2013' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -255,7 +255,7 @@ namespace SIL.PublishingSolution
         protected void ReportReults(PublicationInformation projInfo)
         {
             var output = new DictionaryForMIDsStreamWriter(projInfo);
-            var result = MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display output?", output.Directory), "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+            var result = MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display output files?", output.Directory), "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
             {
                 DisplayOutput(projInfo);

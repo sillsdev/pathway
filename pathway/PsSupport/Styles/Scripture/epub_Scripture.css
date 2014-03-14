@@ -80,14 +80,28 @@ the user's preferences from the Configuration Tool:
     margin-left : 4%;
     margin-right: 4%;
 }
+
+.Intro_Title_Main {
+	font-size: 14pt;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 8pt;
+	padding-bottom: 4pt;
+}
+
+.Intro_Title_Secondary {
+	font-size: 13pt;
+	font-style: italic;
+	text-align: center;
+	padding-top: 6pt;
+	padding-bottom: 3pt;
+}
 .Intro_Section_Head {
-    font-weight : bold;
-    font-style : normal;
-    text-align:left;
-    text-indent : 0;
-    margin-left : 0;
-    margin-top : 3pt;
-    margin-bottom : 3pt;
+	font-size: 14pt;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 8pt;
+	padding-bottom: 4pt;
 }
 .REVERSE_SOLIDUSCitation_Line1, .Citation_Line1, .Line1 {
     margin-left : 6%;
@@ -155,13 +169,13 @@ the user's preferences from the Configuration Tool:
     margin-right: 4%;
 }
 
-.Parallel_Passage_Reference, .Parallel_Passage_Reference {
+.Parallel_Passage_Reference, .Parallel_Passage_Reference {  
     font-style: italic;
     text-align: center;
     text-indent: 0pt;
     margin-left: 0pt;
     margin-top: 0pt;
-    margin-bottom: 3pt;
+    margin-bottom: 3pt;	
 }
 .scrBook {
     clear: both;
@@ -260,3 +274,8 @@ margin-right: 4%;
 text-align: left;
 }
 
+.li
+{
+margin-left: .5pt;
+text-indent: 33pt;
+}

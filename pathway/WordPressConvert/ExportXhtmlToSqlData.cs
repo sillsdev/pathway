@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="ExportXhtmlToSqlData.cs" from='2010' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Create Wordpress blog 
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.IO;
 using System.Xml;
 using SIL.Tool;
@@ -116,7 +132,6 @@ namespace SIL.PublishingSolution
             searchTable += @"INSERT INTO `sil_multilingual_search` (`post_id`, `language_code`, `relevance`, `search_strings`) VALUES " + "\n";
             searchTable += SetSemiColon(_searchValue);
 
-            //_textWriter = new StreamWriter(_projInfo.ProjectPath + @"\" + MysqlDataFileName);
             _textWriter = new StreamWriter(Common.PathCombine(_projInfo.ProjectPath, MysqlDataFileName));
             _textWriter.WriteLine(postTable);
             _textWriter.WriteLine(termTable);
@@ -269,11 +284,16 @@ namespace SIL.PublishingSolution
             string post_type = "post";
             string post_mime_type = "";
             int comment_count = 0;
-            _postValue += "(" + ID + "," + post_author + ",'" + post_date + "','" + post_date_gmt + "','" + post_content.Replace(" "," ") + "','" +
-                post_title + "','" + post_excerpt + "','" + post_status + "','" + comment_status + "','" + ping_status + "','" + post_password +
-                "','" + post_name + "','" + to_ping + "','" + pinged + "','" + post_modified + "','" + post_modified_gmt + "','" +
-                post_content_filtered + "'," + post_parent + ",'" + guid + "'," + menu_order + ",'" + post_type + "','" +
-                post_mime_type + "'," + comment_count + ")," + "\n";
+            _postValue += "(" + ID + "," + post_author + ",'" + post_date + "','" + post_date_gmt + "','" +
+                          post_content.Replace(
+                              Common.ConvertUnicodeToString("\\2007"), " ") + "','" +
+                          post_title + "','" + post_excerpt + "','" + post_status + "','" + comment_status + "','" +
+                          ping_status + "','" + post_password +
+                          "','" + post_name + "','" + to_ping + "','" + pinged + "','" + post_modified + "','" +
+                          post_modified_gmt + "','" +
+                          post_content_filtered + "'," + post_parent + ",'" + guid + "'," + menu_order + ",'" +
+                          post_type + "','" +
+                          post_mime_type + "'," + comment_count + ")," + "\n";
         }
 
         private void InsertMetaTags()

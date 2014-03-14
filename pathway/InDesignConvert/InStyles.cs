@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="InStyles.cs" from='2009' to='2010' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="InStyles.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -25,32 +25,27 @@ namespace SIL.PublishingSolution
     {
         #region Private Variables
 
-        //XmlTextWriter _writer;
-
         Dictionary<string, Dictionary<string, string>> _cssProperty = new Dictionary<string, Dictionary<string, string>>();
         Dictionary<string, Dictionary<string, string>> _IDAllClass = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, string> _IDProperty = new Dictionary<string, string>();
         private Dictionary<string, string> _IDClass = new Dictionary<string, string>();
-        //CSSTree _cssTree = new CSSTree();
         InMapProperty mapProperty = new InMapProperty();
-        //public InDesignStyles InDesignStyles;
-        //public ArrayList _FootNote;
-
+        private bool _isWidowOrphanDisabled;
+        
         #endregion
-
 
         public Dictionary<string, Dictionary<string, string>> CreateIDStyles(string projectPath, Dictionary<string, Dictionary<string, string>> cssProperty)
         {
             try
             {
                 _cssProperty = cssProperty;
+                CheckPropertyForWidowsOrphans();
                 CreateFile(projectPath);
-
                 string headerFontName = GetHeaderFontName();
                 CreateRootCharacterStyleGroup(headerFontName);
                 CreateCharacterStyle();
                 CreateRootParagraphStyleGroup(headerFontName);
-                CreateParagraphStyle();  // CODE HERE
+                CreateParagraphStyle();
                 CreateTOCStyle();
                 CreateRootCellStyleGroup();
                 CreateRootTableStyleGroup();
@@ -63,6 +58,14 @@ namespace SIL.PublishingSolution
                 Console.Write(ex.Message);
             }
             return _IDAllClass;
+        }
+
+        private void CheckPropertyForWidowsOrphans()
+        {
+            if (_cssProperty["@page"].ContainsKey("-ps-disable-widow-orphan"))
+            {
+                _isWidowOrphanDisabled = bool.Parse(_cssProperty["@page"]["-ps-disable-widow-orphan"]);
+            }
         }
 
         private string GetHeaderFontName()
@@ -85,11 +88,7 @@ namespace SIL.PublishingSolution
         /// <param name="isIncrease">to increase font-size even the property is not super/sub script</param>
         private void SuperscriptSubscriptIncreaseFontSize(bool isIncrease)
         {
-            bool isSuperSub = false;
-            if (_IDProperty.ContainsKey("Position") && (_IDProperty["Position"] == "Subscript" || _IDProperty["Position"] == "Superscript"))
-            {
-                isSuperSub  = true;
-            }
+            bool isSuperSub = _IDProperty.ContainsKey("Position") && (_IDProperty["Position"] == "Subscript" || _IDProperty["Position"] == "Superscript");
 
             if (isSuperSub || isIncrease) // increase font-size for superscipt & subscript
             {
@@ -127,6 +126,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("Imported", "false");
                 _writer.WriteAttributeString("NextStyle", "ParagraphStyle/" + cssClass.Key);
                 _writer.WriteAttributeString("KeyboardShortcut", "0 0");
+                DisableWidowsandOrphans(cssClass, _isWidowOrphanDisabled);
                 _IDProperty = mapProperty.IDProperty(cssClass.Value);
                 InsertKeepWithNextForSectionHead(cssClass);
                 SuperscriptSubscriptIncreaseFontSize(false);
@@ -143,10 +143,6 @@ namespace SIL.PublishingSolution
                         _IDClass[property.Key] = property.Value;
                         continue;
                     }
-                    //if (property.Key == "prince-text-replace")
-                    //{
-                    //    continue;
-                    //}
                     if (property.Key == "StrokeColor")
                     {
                         _IDClass[property.Key] = property.Value;
@@ -178,6 +174,22 @@ namespace SIL.PublishingSolution
             CalcColumnWidth();
         }
 
+        private static void DisableWidowsandOrphans(KeyValuePair<string, Dictionary<string, string>> cssClass, bool disableWidowOrphan)
+        {
+            if (disableWidowOrphan)
+            {
+                if (cssClass.Value.ContainsKey("widows"))
+                {
+                    cssClass.Value.Remove("widows");
+                }
+
+                if (cssClass.Value.ContainsKey("orphans"))
+                {
+                    cssClass.Value.Remove("orphans");
+                }
+            }
+        }
+
         private void CalcColumnWidth()
         {
             try
@@ -198,11 +210,6 @@ namespace SIL.PublishingSolution
                     }
                     else if (columnCount == "2")
                     {
-                        
-                        //if (_cssProperty["columns"].ContainsKey("column-gap"))
-                        //{
-                        //    columnGap = _cssProperty["columns"]["column-gap"];
-                        //}
                         Common.ColumnWidth = ((Convert.ToDouble(pageWidth)/2) -
                                               (Convert.ToDouble(pageLeftMargins) + Convert.ToDouble(columnGap) +
                                                Convert.ToDouble(pageRightMargins)));

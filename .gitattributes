@@ -1,0 +1,6 @@
+*.cs    diff
+*.au3   diff
+*.xml   diff
+*.reg   diff
+*.xhtml diff
+*.tex   diff

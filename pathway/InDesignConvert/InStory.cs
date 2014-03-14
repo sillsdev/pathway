@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="InStory.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="InStory.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Creates the Contentxml in ODT Export
+// Creates the InDesign InStory file
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ namespace SIL.PublishingSolution
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
             _projInfo = projInfo;
-            _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            Common.PathCombine(projInfo.DictionaryPath, "Pictures");
             InitializeData(Common.PathCombine(projInfo.TempOutputFolder, "Stories"), idAllClass, classFamily, cssClassOrder);
             ProcessCounterProperty();
             OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath);
@@ -128,7 +128,6 @@ namespace SIL.PublishingSolution
                         if (values[i].Length > 0)
                         {
                             string key = values[i].Replace("\"", "");
-                            //key = Common.ReplaceSymbolToText(key);
                             i++;
                             i++;
                             string value = values[i].Replace("\"", "");
@@ -217,7 +216,7 @@ namespace SIL.PublishingSolution
             {
                 if (_paragraphName == null)
                 {
-                    _paragraphName = StackPeek(_allParagraph); // _allParagraph.Pop();
+                    _paragraphName = StackPeek(_allParagraph); 
                 }
 
                 ClosePara(false);
@@ -293,7 +292,6 @@ namespace SIL.PublishingSolution
             {
                 _characterName = StackPeekCharStyle(_allCharacter);
             }
-            //content = whiteSpacePre(content);
             if (_psuedoContainsStyle != null)
             {
                 if (content.IndexOf(_psuedoContainsStyle.Contains) > -1)
@@ -314,7 +312,6 @@ namespace SIL.PublishingSolution
         /// <param name="data">XML Content</param>
         private string ReplaceString(string data)
         {
-            //data = Common.ReplaceSymbolToText(data);
             if (_replaceSymbolToText.Count > 0)
             {
                 foreach (string srchKey in _replaceSymbolToText.Keys)
@@ -390,8 +387,6 @@ namespace SIL.PublishingSolution
             }
             AnchorBookMark();
             _writer.WriteEndElement();
-            //if (_tagType == "li")
-            //    _writer.WriteRaw("<Br/>");
         }
 
         private string GetFooterClassName(string characterStyle)
@@ -421,17 +416,14 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("Content");
             _writer.WriteRaw("<?ACE 4?> ");
             string replace = content.Replace("\r\n", " ");
-            //string leftPart = Common.LeftString(, "<");
             string leftPart = Common.LeftString(replace, "<");
             _writer.WriteString(leftPart);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
             string replaceLeft = content;
-            //content.Replace(leftPart, "");
             if (leftPart.Length > 0)
                 replaceLeft = content.Replace(leftPart, "");
             replace = replaceLeft.Replace("\r\n", " ");
-            //_writer.WriteRaw(content.Replace(leftPart, "").Replace("\r\n", " "));
             _writer.WriteRaw(replace);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
@@ -503,9 +495,12 @@ namespace SIL.PublishingSolution
                 string[] cc = _allParagraph.ToArray();
                 imageClass = cc[1];
                 srcFile = _imageSource.ToLower();
-                string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _inputPath);
-                string fileName1 = Common.GetPictureFromPath(srcFile, "", _inputPath);
-                //if (IdAllClass.ContainsKey(srcFile))
+                if(srcFile.ToLower().IndexOf("pictures") == -1)
+                {
+                    srcFile = "Pictures/" + srcFile;
+                }
+                string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _projInfo.DictionaryPath);
+                string fileName1 = Common.GetPictureFromPath(srcFile, "", _projInfo.DictionaryPath);
                 //To get Image details
                 if (File.Exists(fileName1))
                 {
@@ -517,15 +512,6 @@ namespace SIL.PublishingSolution
                 if (IdAllClass.ContainsKey(imgCls))
                 {
                     rectWidth = GetPropertyValue(imgCls, "width", rectWidth);
-                    //if(rectWidth.IndexOf('%') > 0)
-                    //{
-                    //    CalculateImageDimension();
-                    //    rectWidth = ((Convert.ToDouble(rectWidth.Replace("%", ""))*width)/100).ToString();
-                    //    if(IdAllClass.ContainsKey("columns"))
-                    //    {
-
-                    //    }
-                    //}
                     rectHeight = GetPropertyValue(imgCls, "height", rectHeight);
                     GetAlignment(alignment, ref HoriAlignment, ref AnchorPoint, imgCls);
                 }
@@ -551,7 +537,6 @@ namespace SIL.PublishingSolution
                 else
                 {
                     //Default value is 72 However the line draws 36pt in X-axis and 36pt in y-axis.
-                    //rectHeight = "36";
                     rectWidth = "36"; // fixed the width as 1 in;
                     rectHeight = Common.CalcDimension(fileName1, ref rectWidth, 'H');
                     if (rectHeight == "0")
@@ -569,16 +554,7 @@ namespace SIL.PublishingSolution
                 string yPlus = y.ToString();
                 string yMinus = "-" + yPlus;
 
-               
-
-                //TODO Make it function 
                 //To get Image details
-                //if (File.Exists(fileName1))
-                //{
-                //    Image fullimage = Image.FromFile(fileName1);
-                //    height = fullimage.Height;
-                //    width = fullimage.Width;
-                //}
                 int xx = GCD(width, height);
                 string xxw = string.Format("{0}:{1}", width/xx, height/xx);
 ;
@@ -642,7 +618,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("GradientStrokeHiliteLength", "0");
                 _writer.WriteAttributeString("GradientStrokeHiliteAngle", "0");
                 _writer.WriteAttributeString("AppliedObjectStyle", "ObjectStyle/$ID/[Normal Graphics Frame]");
-                //_writer.WriteAttributeString("ItemTransform", "1 0 0 1 36 -36");
                 _writer.WriteAttributeString("ItemTransform", "1 0 0 1 " + xPlus + " " + yMinus); // 36 -36 
                 _writer.WriteStartElement("Properties");
                 _writer.WriteStartElement("PathGeometry");
@@ -674,27 +649,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
 
-
-                //_writer.WriteStartElement("AnchoredObjectSetting");
-                //// Anchored, InlinePosition, AboveLine
-                //_writer.WriteAttributeString("AnchoredPosition", "Anchored");
-                //_writer.WriteAttributeString("SpineRelative", "false");
-                //_writer.WriteAttributeString("LockPosition", "false");
-                //_writer.WriteAttributeString("PinPosition", "true");
-                //_writer.WriteAttributeString("AnchorPoint", AnchorPoint);
-                ////CenterAlign, RightAlign , LeftAlign
-                //_writer.WriteAttributeString("HorizontalAlignment", HoriAlignment);
-                //_writer.WriteAttributeString("HorizontalReferencePoint", HoriRefPoint);
-                //_writer.WriteAttributeString("VerticalAlignment", VertAlignment);
-                //_writer.WriteAttributeString("VerticalReferencePoint", VertRefPoint);
-                ////InLIne  //AboveLine
-                //_writer.WriteAttributeString("AnchorXoffset", "0");
-                //_writer.WriteAttributeString("AnchorYoffset", "25");
-                //_writer.WriteAttributeString("AnchorSpaceAbove", "4");
-                //_writer.WriteEndElement();
-
-
-                //Task TD-2346 By Samdoss - 2
                 _writer.WriteStartElement("AnchoredObjectSetting");
                 _writer.WriteAttributeString("AnchoredPosition", "Anchored");
                 _writer.WriteAttributeString("SpineRelative", "false");
@@ -710,9 +664,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("AnchorXoffset", "0");
                 _writer.WriteAttributeString("AnchorYoffset", "0");
                 _writer.WriteAttributeString("AnchorSpaceAbove", "4");
-
                 _writer.WriteEndElement();
-
 
                 _writer.WriteStartElement("TextWrapPreference");
                 _writer.WriteAttributeString("Inverse", "false");
@@ -845,7 +797,7 @@ namespace SIL.PublishingSolution
                     _dupParagraph.Pop();
                     if (_dupParagraph.Count > 0)
                     {
-                        pictureCaption = _dupParagraph.Peek().ToString();
+                        pictureCaption = _dupParagraph.Peek();
                         int countCharacter = 0;
                         countCharacter = pictureCaption.Length;
                         pictureCaption = pictureCaption.Substring(0, countCharacter - 2);
@@ -910,7 +862,6 @@ namespace SIL.PublishingSolution
                 allClasses[0] = _imageSrcClass; // including current Class
                 if (allClasses.Length > 0)
                 {
-                    //for (int i = splitedClassName.Length -1; i >= 0; i--)  // From Begining to Recent Class
                     for (int i = 0; i < allClasses.Length; i++) // // From Recent to Begining Class
                     {
                         string clsName = allClasses[i];
@@ -937,10 +888,6 @@ namespace SIL.PublishingSolution
         {
             string valueOfProperty = defaultValue;
             string excludeParent = Common.LeftString(clsName, "_");
-            //if (IdAllClass.ContainsKey(clsName) && IdAllClass[clsName].ContainsKey(property))
-            //{
-            //    valueOfProperty = IdAllClass[clsName][property];
-            //}
             if (IdAllClass.ContainsKey(excludeParent) && IdAllClass[excludeParent].ContainsKey(property))
             {
                 valueOfProperty = IdAllClass[excludeParent][property];
@@ -998,16 +945,10 @@ namespace SIL.PublishingSolution
         {
             if (_allParagraph.Count > 0)
             {
-                //string stackClass2 = _allStyle.Peek();
-                //string stackClass1 = _allParagraph.Peek();
-                //string stackClass = _allCharacter.Peek();
-                //string[] splitedClassName = stackClass.Split('_');
-
-                string[] splitedClassName = _allParagraph.ToArray(); ; // _allStyle.ToArray();
+                string[] splitedClassName = _allParagraph.ToArray();
 
                 if (splitedClassName.Length > 0)
                 {
-                    //for (int i = splitedClassName.Length -1; i >= 0; i--)  // From Begining to Recent Class
                     for (int i = 0; i < splitedClassName.Length; i++) // // From Recent to Begining Class
                     {
                         string clsName = splitedClassName[i];
@@ -1190,8 +1131,6 @@ namespace SIL.PublishingSolution
                     {
                         mystyle["BaselineShift"] = IdAllClass[classNameWOLang]["PointSize"];
                     }
-                    //mystyle["BaselineShift"] = IdAllClass[classNameWOLang]["PointSize"];
-                    
                 }
                 _paragraphName = classNameWOLang + _chapterNo.Length.ToString();
                 _newProperty[_paragraphName] = mystyle;
@@ -1211,7 +1150,6 @@ namespace SIL.PublishingSolution
         private void EndElement()
         {
             _characterName = null;
-            //WriteEmptyHomographStyle();
             _closeChildName = StackPop(_allStyle);
             DoNotInheritClassEnd(_closeChildName);
             SetHeadwordFalse();
@@ -1281,7 +1219,6 @@ namespace SIL.PublishingSolution
                     _allCharacter.Pop();    // retrieving it again.
                     isImage = false;
                     imageClass = "";
-                    //_isParagraphClosed = true;
                     _isImageParagraphClosed = true;
 
                 }
@@ -1297,7 +1234,6 @@ namespace SIL.PublishingSolution
 
                     isImage = false;
                     imageClass = "";
-                    //_isParagraphClosed = true;
                     _isImageParagraphClosed = true;
                 }
             }
@@ -1360,7 +1296,6 @@ namespace SIL.PublishingSolution
             ParentClass = new Dictionary<string, string>();
             _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
-            //_classFamily = new Dictionary<string, ArrayList>();
 
             IdAllClass = idAllClass;
             _projectPath = projectPath;

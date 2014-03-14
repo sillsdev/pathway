@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="ExportDlg.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="ExportDlg.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright (C) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -41,8 +41,6 @@ namespace SIL.PublishingSolution
             LocDB.Localize(this, null);     // Form Controls
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, "Exporting.htm");
-
-            //ArrayList exportType = Common.GetExportType();
             ArrayList exportType = Backend.GetExportType(ExportType);
             if (exportType.Count > 0)
             {

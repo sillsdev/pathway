@@ -1,11 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="SettingsValidator.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="SettingsValidator.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright (C) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-// <author>Kathikeyan</author>
+// <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed: 
 // 
@@ -13,6 +13,7 @@
 // Validation of settings file
 // </remarks>
 // --------------------------------------------------------------------------------------------
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -144,8 +145,6 @@ namespace SIL.PublishingSolution
             {
                 CopyCustomStyles(fileNamewithPath);
                 CopySettingsFile(FileName.DictionaryStyleSettings.ToString(), inputtype, fileNamewithPath);
-                //if (isProcessSucess)
-                //RestoreCustomStyles(fileNamewithPath);
             }
         }
 
@@ -254,8 +253,16 @@ namespace SIL.PublishingSolution
                 msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errorTag + "\" property has an invalid value.)";
             }
 
-            DialogResult result = MessageBox.Show(msg, "Information",
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            DialogResult result;
+            if (!Common.Testing)
+            {
+                result = MessageBox.Show(msg, "Information",
+                                    MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            }
+            else
+            {
+                result = DialogResult.Yes;
+            }
 
             if (result == DialogResult.Yes)
             {
@@ -266,7 +273,6 @@ namespace SIL.PublishingSolution
                     allUsersFolder = Common.PathCombine(allUsersFolder, supportPath);
                 }
                 string programPath = Common.PathCombine(programFolder, fileName + ".xml");
-                //File.Copy(programPath, Common.PathCombine(allUsersFolder, fileName + ".xml"), true);
                 Common.MigrateCustomSheet(Common.PathCombine(allUsersFolder, fileName + ".xml"), programPath);
                 isProcessSucess = true;
             }
@@ -290,17 +296,14 @@ namespace SIL.PublishingSolution
             // edb 9/6/2011 (mono) -- CssEditor contains a Windows path. The editor looks like it only gets called from
             // ModifyOptions, which looks like a PublishingSolutions dialog (at least, I can't see any place to
             // get to it from the ConfigurationTool or ExportThroughPathway dialog). Removing the validation for now.
-            //if (!ValidateCssEditor(parentNode)) return false;
             if (!ValidateSelectedIcon(parentNode)) return false;
             if (!ValidateMisingIcon(parentNode)) return false;
-            //if (!ValidatePrintVia(parentNode)) return false;
             if (!ValidateConfigureDictionary(parentNode)) return false;
             if (!ValidateReversalIndexes(parentNode)) return false;
             if (!ValidateGrammerSketch(parentNode)) return false;
             if (!ValidateExtraProcessing(parentNode)) return false;
             if (!ValidateLayoutSelected(parentNode)) return false;
             if (!ValidateMedia(parentNode)) return false;
-            //if (!ValidateDefaultPrintVia(parentNode)) return false;
             if (!ValidateDefaultConfigureDictionary(parentNode)) return false;
             if (!ValidateDefaultReversalIndexes(parentNode)) return false;
             if (!ValidateDefaultGrammerSketch(parentNode)) return false;
@@ -364,34 +367,6 @@ namespace SIL.PublishingSolution
             }
             catch { }
             return isWritePermission;
-            //bool isWritePermission = false;
-            //try
-            //{
-            //    if (!Directory.Exists(outputPath))
-            //    {
-            //        return isWritePermission;
-            //    }
-
-            //    var dInfo = new DirectoryInfo(outputPath);
-            //    DirectorySecurity dSecurity = dInfo.GetAccessControl();
-            //    AuthorizationRuleCollection rules = dSecurity.GetAccessRules(
-            //    true,
-            //    true,
-            //    typeof(SecurityIdentifier));
-
-            //    foreach (FileSystemAccessRule rule in rules)
-            //    {
-            //        string rights = rule.FileSystemRights.ToString();
-            //        if (rights == "Write")
-            //        {
-            //            isWritePermission = true;
-            //            break;
-            //        }
-
-            //    }
-            //}
-            //catch { }
-            //return isWritePermission;
         }
 
 
@@ -432,12 +407,6 @@ namespace SIL.PublishingSolution
             try
             {
                 const string methodname = "PublicationLocation";
-                //const string xPath = "//stylePick/settings/property[@name=\"PublicationLocation\"]";
-                //XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                //string path = childNode.Attributes["value"].Value;
-                //path = path.Replace("%(Documents)s", replaceString["%(Documents)s"]);
-                //path = path.Replace("%(CurrentProject)s", replaceString["%(CurrentProject)s"]);
-                //path = path.Replace("%(Base)s", replaceString["%(Base)s"]);
                 string defaultPath = "%(Documents)s\\Publications";
                 defaultPath = defaultPath.Replace("%(Documents)s", replaceString["%(Documents)s"]);
 
@@ -619,7 +588,6 @@ namespace SIL.PublishingSolution
             try
             {
                 const string methodname = "CssEditor";
-                //Environment.GetEnvironmentVariable("windir");
                 const string xPath = "//stylePick/settings/property[@name=\"CssEditor\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string path = childNode.Attributes["value"].Value;
@@ -719,8 +687,6 @@ namespace SIL.PublishingSolution
             string path = Path.GetDirectoryName(Param.SettingPath);
             if (path.Contains("PathwaySupport"))
                 path = path.Replace("PathwaySupport", "");
-            //string path = Common.ProgInstall;
-            //string path = Common.PathCombine(Common.GetApplicationPath(), "PathwaySupport\\BackEnds");
             var _backend = new List<IExportProcess>();
             var directoryInfo = new DirectoryInfo(path);
             _backend.Clear();
@@ -1451,27 +1417,5 @@ namespace SIL.PublishingSolution
             catch { }
             return true;
         }
-
-        /// <summary>
-        /// Method to find the file is editable or not
-        /// </summary>
-        /// <param name="fileNameWithPath">Filepath with fileName</param>
-        /// <returns></returns>
-        //protected static bool isFileInUse(string fileNameWithPath)
-        //{
-        //    try
-        //    {
-        //        var fs = new FileStream(fileNameWithPath, FileMode.OpenOrCreate);
-        //        return false;
-        //    }
-        //    catch (IOException)
-        //    {
-        //        return true;
-        //    }
-        //    catch (UnauthorizedAccessException)
-        //    {
-        //        return true;
-        //    }
-        //}
     }
 }

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="ZipFolder.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="ZipFolder.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -18,7 +18,6 @@
 using System;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
-using SIL.Tool;
 using SIL.Tool.Localization;
 
 #endregion
@@ -99,7 +98,6 @@ namespace SIL.Tool
                     {
                         msg = new[] {strMessage + " with " + errCount + "error(s)."};
                     }
-                    //LocDB.Message("defErrMsg", "File has been exported successfully.", msg, LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
                 }
             }
             catch (Exception e)
@@ -107,7 +105,6 @@ namespace SIL.Tool
                 if (e.Message != null)
                 {
                     var msg = new[] {e.Message};
-                    //LocDB.Message("defErrMsg", e.Message, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                 }
             }
         }

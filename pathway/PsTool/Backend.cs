@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="Backend.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="Backend.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,9 +10,10 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Library for Dictionary Express
+// Library for Pathway
 // </remarks>
 // --------------------------------------------------------------------------------------------
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,8 +22,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using SIL.Tool;
-
-
 
 namespace SIL.PublishingSolution
 
@@ -68,7 +67,6 @@ namespace SIL.PublishingSolution
                 {
                     if (process.ExportType.ToLower() == "openoffice/libreoffice")
                     {
-                        //_exportType.Add("Word (Using OpenOffice)");  // TD-1818 
                         _exportType.Add("Pdf (Using OpenOffice/LibreOffice) ");
                     }
                     _exportType.Add(process.ExportType);
@@ -127,10 +125,6 @@ namespace SIL.PublishingSolution
             if (type.ToLower().IndexOf("libreoffice") >= 0)
             {
                 publicationInformation.FinalOutput = "odt";
-                //if(type.ToLower().IndexOf("word") >= 0)   // TD-1818 
-                //{
-                //    publicationInformation.FinalOutput = "doc";
-                //}
                 if (type.ToLower().IndexOf("pdf") >= 0)
                 {
                     publicationInformation.FinalOutput = "pdf";
@@ -176,21 +170,6 @@ namespace SIL.PublishingSolution
             Object thing = null;
             try
             {
-                //Module[] a =  assembly.GetLoadedModules();
-                //foreach (var module in a)
-                //{
-                //    MethodInfo[] b = module.GetMethods();
-                //    foreach (var info in b)
-                //    {
-                //        string c = info.ToString();   
-                //    }
-                //}
-
-                //FileStream[] f = assembly.GetFiles();
-                //Type[] t =  assembly.GetExportedTypes();
-
-                //make the object
-                //Object thing = assembly.CreateInstance(className);
                 thing = assembly.CreateInstance(className, false, BindingFlags.Instance | BindingFlags.Public,
                     null, args, null, null);
             }

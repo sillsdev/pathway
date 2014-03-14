@@ -1,22 +1,19 @@
 ﻿// --------------------------------------------------------------------------------------------
-#region // Copyright © 2011, SIL International. All Rights Reserved.
-// <copyright file="ExportThroughPathwayTest.cs" from='2011' to='2011' company='SIL International'>
-//		Copyright © 2011, SIL International. All Rights Reserved.   
+// <copyright file="ExportThroughPathwayTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
-//		Distributable under the terms of either the Common Public License or the
-//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-#endregion
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed: 
 // 
 // <remarks>
+// 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections;
 using System.IO;
 using NUnit.Framework;
 using SIL.PublishingSolution;
@@ -32,8 +29,8 @@ namespace Test.CssDialog
         {
             string pathwayDirectory = PathwayPath.GetPathwayDir();
             string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
-            ValidateXMLVersion(styleSettingFile);
             Common.Testing = true;
+            ValidateXMLVersion(styleSettingFile);
             InputType = "Dictionary";
             Common.ProgInstall = pathwayDirectory;
             Param.LoadSettings();
@@ -76,6 +73,8 @@ namespace Test.CssDialog
         public void LoadAvailFormatsTest()
         {
             LoadAvailFormats();
+            var backends = Backend.GetExportType("Scripture");
+            Assert.Less(0, backends.Count);
             string lastItem = string.Empty;
             foreach (string item in DdlLayout.Items)
             {

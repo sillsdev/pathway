@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="Utility.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="OOUtility.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -20,9 +20,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Windows.Forms;
 using System.Xml;
-using SIL.PublishingSolution;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -569,8 +567,6 @@ namespace SIL.PublishingSolution
             var doc = new XmlDocument();
             doc.Load(styleFilePath);
             var nsmgr = new XmlNamespaceManager(doc.NameTable);
-            //nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-            //nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
             nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
             nsmgr.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
             nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
@@ -578,7 +574,6 @@ namespace SIL.PublishingSolution
 
             // if new stylename exists
             XmlElement root = doc.DocumentElement;
-            //string style = "//st:style[@st:name='" + makeClassName + "']";
             string style = "//office:text";
             if (root != null)
             {
@@ -590,9 +585,6 @@ namespace SIL.PublishingSolution
                     {
                         string outputFile = odtFiles[i].ToString();
                         outputFile = Path.ChangeExtension(outputFile, "odt");
-                        //Path.GetFileNameWithoutExtension(outputFile);
-                        //outputFile = Common.PathCombine(outputFile)
-                        //string outputFile = odtFiles[i].ToString().Replace("xhtml", "odt");
                         XmlNode newNode;
                         newNode = doc.CreateNode("element", "text:section", nsmgr.LookupNamespace("text"));
                         //attribute
@@ -737,7 +729,6 @@ namespace SIL.PublishingSolution
                             {
                                 return;
                             }
-                            //attribHyphen.Value = "true";  // to Overwrite the false property to true , use this.
                         }
                         else
                         {
@@ -798,12 +789,6 @@ namespace SIL.PublishingSolution
                         {
                             if (chNode.Name == "style:drop-cap")
                             {
-                                //if (childNode.Attributes.GetNamedItem("style:lines") != null)  // if needed we can use this for no of lines.
-                                //{
-                                //    attribToBeChanged = childNode.Attributes["style:lines"];
-                                //    attribToBeChanged.Value = noOfChar.ToString();
-                                //}
-
                                 if (chNode.Attributes.GetNamedItem("style:length") != null)
                                 {
                                     attribToBeChanged = chNode.Attributes["style:length"];
@@ -980,7 +965,7 @@ namespace SIL.PublishingSolution
                     nameGraphicElement.SetAttribute("style:horizontal-pos", position);
                     nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
                     // this is for text flow
-                    //nameGraphicElement.SetAttribute("style:flow-with-text", "true");
+                    nameGraphicElement.SetAttribute("style:flow-with-text", "true");
                 }
                 else if (position == "both")
                 {
@@ -1145,13 +1130,10 @@ namespace SIL.PublishingSolution
 
                     XmlDocumentFragment styleNode = doc.CreateDocumentFragment();
                     styleNode.InnerXml = node.FirstChild.FirstChild.OuterXml;
-                    //styleNode.RemoveChild(styleNode.FirstChild);
-                    //node.ParentNode.InsertAfter(styleNode, node);
                     node.ParentNode.ReplaceChild(styleNode, node);
                 }
             }
             doc.Save(file);
-            // if new stylename exists
         }
         }
         #endregion

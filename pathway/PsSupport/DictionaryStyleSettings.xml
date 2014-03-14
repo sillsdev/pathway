@@ -238,7 +238,7 @@
           writing system separator, embedded spans marked according to writing system, mirrored
           headers and rule lines.</description>
       </style>
-      <style name="FieldWorksArabicBased" file="Layout_13.css" approvedBy="GPS" previewfile1="FieldworksArabicBased_Layout_13 p1.jpg" previewfile2="FieldworksArabicBased_Layout_13 p2.jpg" shown="Yes">
+      <style name="FieldWorksRightToLeft" file="Layout_13.css" approvedBy="GPS" previewfile1="FieldworksArabicBased_Layout_13 p1.jpg" previewfile2="FieldworksArabicBased_Layout_13 p2.jpg" shown="Yes">
         <description>C5 ruled double column with Flex formatting for Arabic based font</description>
       </style>
       <style name="Draft" file="Layout_01.css" approvedBy="GPS" previewfile1="Draft_Layout_01 p1.jpg" previewfile2="Draft_Layout_01 p2.jpg" shown="Yes">

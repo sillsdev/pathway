@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="ConfigurationToolBLTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// 
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -277,7 +293,6 @@ namespace Test.UIConfigurationToolBLTest
             cTool._CToolBL.tsDelete_ClickBL();
             int afterDelete = cTool.StylesGrid.RowCount;
             Assert.AreEqual(8, afterDelete, "New Count Test Fails");
-            //cTool._CToolBL.ConfigurationTool_LoadBL();
             cTool.Close();
         }
 
@@ -364,11 +379,6 @@ namespace Test.UIConfigurationToolBLTest
             cTool.DdlFontSize.Text = "11";
             cTool.DdlFileProduceDict.Text = "One";
             cTool.DdlSense.Text = "Bullet";
-            //Mobile Properties
-            //cTool.DdlFiles.Text = "";
-            //cTool.DdlRedLetter.Text = "";
-            //cTool.TxtInformation.Text = "";
-            //cTool.TxtCopyright.Text = "";
             cTool.Close();
         }
 

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="Styles.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="OldStyles.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Styles Type Initialization for stylesxml 
+// 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -23,7 +23,6 @@ namespace SIL.PublishingSolution
     {
         public IDictionary<string, IDictionary<string, string>> CssClassName;
         public ArrayList SectionName;
-        //public Dictionary<string, string> _dispClassName;
         public Dictionary<string, string> PseudoClassAfter;
         public Dictionary<string, string> PseudoClassBefore;
         public Dictionary<string, string> PseudoAncestorBefore;

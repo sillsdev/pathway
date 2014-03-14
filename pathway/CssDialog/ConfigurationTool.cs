@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="ConfiguraionTool.cs" from='2010' to='2011' company='SIL International'>
-//      Copyright © 2010, SIL International. All Rights Reserved.   
+// <copyright file="ConfiguraionTool.cs" from='2010' to='2014' company='SIL International'>
+//      Copyright (C) 2010, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -553,12 +553,6 @@ namespace SIL.PublishingSolution
             get { return txtDefaultLineHeight; }
         }
 
-        //**EDB MOVE THIS**
-        //public CheckBox ChkColophon
-        //{
-        //    get { return chkColophon; }
-        //}
-
         public ComboBox DdlDefaultAlignment
         {
             get { return ddlDefaultAlignment; }
@@ -783,13 +777,11 @@ namespace SIL.PublishingSolution
         {
             get { return chkSplitFileByLetter; }
         }
-        //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
-        //private System.Windows.Forms.TableLayoutPanel TLPanel1;
-        //private System.Windows.Forms.TableLayoutPanel TLPanel2;
-        //private System.Windows.Forms.TableLayoutPanel TLPanel3;
-        //private System.Windows.Forms.Panel panel1;
-        //private System.Windows.Forms.Panel panel2;
-        //private System.Windows.Forms.Panel panel3; 
+
+        public CheckBox ChkDisableWO
+        {
+            get { return chkDisableWO; }
+        }
         #endregion
 
         #region Event Method
@@ -865,39 +857,9 @@ namespace SIL.PublishingSolution
             _CToolBL.btnScripture_ClickBL();
         }
 
-        private void txtName_Validated(object sender, EventArgs e)
-        {
-            // _CToolBL.txtName_ValidatedBL(sender);
-        }
-
-        private void txtDesc_Validated(object sender, EventArgs e)
-        {
-            //_CToolBL.txtDesc_ValidatedBL(sender);
-        }
-
-        private void chkAvailable_Validated(object sender, EventArgs e)
-        {
-            //_CToolBL.chkAvailable_ValidatedBL(sender);
-        }
-
-        private void txtComment_Validated(object sender, EventArgs e)
-        {
-            //_CToolBL.txtComment_ValidatedBL(sender);
-        }
-
         private void chkAvailable_CheckedChanged(object sender, EventArgs e)
         {
             _CToolBL.chkAvailable_CheckedChangedBL(sender);
-        }
-
-        private void tsUndo_Click(object sender, EventArgs e)
-        {
-            //_CToolBL.tsUndo_ClickBL(sender, e);
-        }
-
-        private void tsRedo_Click(object sender, EventArgs e)
-        {
-            //_CToolBL.tsRedo_ClickBL(sender, e);
         }
 
         private void txtApproved_Validated(object sender, EventArgs e)
@@ -913,10 +875,7 @@ namespace SIL.PublishingSolution
         private void stylesGrid_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             Cursor.Current = Cursors.Hand;
-
-            //stylesGrid.Enabled = false;
             _CToolBL.stylesGrid_RowEnterBL(e);
-            //stylesGrid.Enabled = true;
         }
 
         private void txtName_Enter(object sender, EventArgs e)
@@ -927,24 +886,28 @@ namespace SIL.PublishingSolution
 
         private void btnPaper_Click(object sender, EventArgs e)
         {
+            _CToolBL.MediaTypeEXE = "paper";
             _CToolBL.MediaType = "paper";
             _CToolBL.SideBar();
         }
 
         private void btnMobile_Click(object sender, EventArgs e)
         {
+            _CToolBL.MediaTypeEXE = "mobile";
             _CToolBL.MediaType = "mobile";
             _CToolBL.SideBar();
         }
 
         private void btnWeb_Click(object sender, EventArgs e)
         {
+            _CToolBL.MediaTypeEXE = "web";
             _CToolBL.MediaType = "web";
             _CToolBL.SideBar();
         }
 
         private void btnOthers_Click(object sender, EventArgs e)
         {
+            _CToolBL.MediaTypeEXE = "others";
             _CToolBL.MediaType = "others";
             _CToolBL.SideBar();
         }
@@ -1010,11 +973,6 @@ namespace SIL.PublishingSolution
             _CToolBL.tsSaveAs_ClickBL();
         }
 
-        //public void Set(object sender, EventArgs e)
-        //{
-        //    _CToolBL.SetBL();
-        //}
-
         public void SetGotFocusValue(object sender, EventArgs e)
         {
             _CToolBL.SetGotFocusValueBL(sender);
@@ -1035,7 +993,6 @@ namespace SIL.PublishingSolution
 
         private void EditOthersCSS(object sender, EventArgs e)
         {
-            //_CToolBL.SetModifyMode(false);
             _CToolBL.ShowOthersSummaryBL();
         }
 
@@ -1052,10 +1009,6 @@ namespace SIL.PublishingSolution
 
         private void txtPageGutterWidth_KeyUp(object sender, KeyEventArgs e)
         {
-            //if (!RangeCheck(txtPageGutterWidth.Text))
-            //{
-            //    txtPageGutterWidth.Text = "";
-            //}
             _CToolBL.SetModifyMode(true);
         }
 
@@ -1067,10 +1020,6 @@ namespace SIL.PublishingSolution
 
         private void txtPageInside_KeyUp(object sender, KeyEventArgs e)
         {
-            //if (!RangeCheck(txtPageInside.Text))
-            //{
-            //    txtPageInside.Text = "";
-            //}
             _CToolBL.SetModifyMode(true);
         }
 
@@ -1101,28 +1050,16 @@ namespace SIL.PublishingSolution
 
         private void txtPageOutside_KeyUp(object sender, KeyEventArgs e)
         {
-            //if (!RangeCheck(txtPageOutside.Text))
-            //{
-            //    txtPageOutside.Text = "";
-            //}
             _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageTop_KeyUp(object sender, KeyEventArgs e)
         {
-            //if (!RangeCheck(txtPageTop.Text))
-            //{
-            //    txtPageTop.Text = "";
-            //}
             _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageBottom_KeyUp(object sender, KeyEventArgs e)
         {
-            //if (!RangeCheck(txtPageBottom.Text))
-            //{
-            //    txtPageBottom.Text = "";
-            //}
             _CToolBL.SetModifyMode(true);
         }
 
@@ -1137,13 +1074,6 @@ namespace SIL.PublishingSolution
             _CToolBL.ddlLanguage_SelectedIndexChangedBL(sender, e);
             EditMobileCSS(sender, e);
         }
-
-        //**EDB MOVE THIS**
-        //private void chkColophon_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    _CToolBL.chkColophon_CheckedChangedBL(sender, e);
-        //    EditOthersCSS(sender, e);
-        //}
 
         private void chkIncludeFontVariants_CheckedChanged(object sender, EventArgs e)
         {
@@ -1226,53 +1156,6 @@ namespace SIL.PublishingSolution
             EditOthersCSS(sender, e);
         }
 
-        //**EDB MOVE THIS**
-        //private void txtDescription_Validated(object sender, EventArgs e)
-        //{
-        //    _CToolBL.txtDescription_ValidatedBL(sender);
-        //    EditOthersCSS(sender, e);
-        //}
-        //private void txtPublisher_Validated(object sender, EventArgs e)
-        //{
-        //    _CToolBL.txtPublisher_ValidatedBL(sender);
-        //    EditOthersCSS(sender, e);
-        //}
-        //private void txtSource_Validated(object sender, EventArgs e)
-        //{
-        //    _CToolBL.txtSource_ValidatedBL(sender);
-        //    EditOthersCSS(sender, e);
-        //}
-        //private void txtFormat_Validated(object sender, EventArgs e)
-        //{
-        //    _CToolBL.txtFormat_ValidatedBL(sender);
-        //    EditOthersCSS(sender, e);
-        //}
-        //private void txtRelation_Validated(object sender, EventArgs e)
-        //{
-        //    _CToolBL.txtRelation_ValidatedBL(sender);
-        //    EditOthersCSS(sender, e);
-        //}
-        //private void txtCoverage_Validated(object sender, EventArgs e)
-        //{
-        //    _CToolBL.txtCoverage_ValidatedBL(sender);
-        //    EditOthersCSS(sender, e);
-        //}
-        //private void txtRights_Validated(object sender, EventArgs e)
-        //{
-        //    _CToolBL.txtRights_ValidatedBL(sender);
-        //    EditOthersCSS(sender, e);
-        //}
-        //private void txtBookTitle_Validated(object sender, EventArgs e)
-        //{
-        //    _CToolBL.txtBookTitle_ValidatedBL(sender);
-        //    EditOthersCSS(sender, e);
-        //}
-        //private void txtCreator_Validated(object sender, EventArgs e)
-        //{
-        //    _CToolBL.txtCreator_ValidatedBL(sender);
-        //    EditOthersCSS(sender, e);
-        //}
-
         private void btnPrevious_Click(object sender, EventArgs e)
         {
             _CToolBL.ShowPreview(1);
@@ -1294,13 +1177,6 @@ namespace SIL.PublishingSolution
             string pageType = ddlRunningHead.SelectedItem.ToString();
             _CToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType);
         }
-
-        //**EDB MOVE THIS**
-        //private void btnCoverImage_Click(object sender, EventArgs e)
-        //{
-        //    _CToolBL.btnCoverImage_ClickBL();
-        //    EditOthersCSS(sender, e);
-        //}
 
         private void ddlTocLevel_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1400,8 +1276,6 @@ namespace SIL.PublishingSolution
             {
                 if (e.KeyCode == Keys.ShiftKey)
                 {
-                    //bool noKey = (int)ModifierKeys == 0;
-                    //bool controlKey = (ModifierKeys & Keys.Control) == Keys.Control;
                     bool shiftKey = (ModifierKeys & Keys.Shift) == Keys.Shift;
 
                     string allUsersPath = Common.GetAllUserPath();
@@ -1462,6 +1336,12 @@ namespace SIL.PublishingSolution
         {
             EditCSS(sender, e);
             _CToolBL.chkSplitFileByLetter_CheckStateChangedBL(sender, e);
+        }
+
+        private void chkDisableWO_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkDisableWO_CheckStateChangedBL(sender, e);
         }
     }
 }

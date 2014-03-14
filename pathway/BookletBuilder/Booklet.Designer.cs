@@ -1,4 +1,6 @@
-﻿namespace SIL.PublishingSolution
+﻿using SIL.Tool;
+
+namespace SIL.PublishingSolution
 {
     partial class Booklet
     {
@@ -107,7 +109,7 @@
             this.openSavedSettingsToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+O";
             this.openSavedSettingsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openSavedSettingsToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
-            this.openSavedSettingsToolStripMenuItem.Text = "&Open Saved Settings…";
+            this.openSavedSettingsToolStripMenuItem.Text = "&Open Saved Settings" + Common.ConvertUnicodeToString("\\2026");
             this.openSavedSettingsToolStripMenuItem.ToolTipText = "Open and load booklet settings you have saved previously";
             this.openSavedSettingsToolStripMenuItem.Click += new System.EventHandler(this.openSavedSettingsToolStripMenuItem_Click);
             // 
@@ -132,7 +134,7 @@
             // 
             this.saveSettingsAsToolStripMenuItem.Name = "saveSettingsAsToolStripMenuItem";
             this.saveSettingsAsToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
-            this.saveSettingsAsToolStripMenuItem.Text = "Sa&ve Settings as…";
+            this.saveSettingsAsToolStripMenuItem.Text = "Sa&ve Settings as" + Common.ConvertUnicodeToString("\\2026");
             this.saveSettingsAsToolStripMenuItem.ToolTipText = "Save the current booklet settings as";
             this.saveSettingsAsToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsAsToolStripMenuItem_Click);
             // 

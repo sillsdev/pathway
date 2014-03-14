@@ -1,16 +1,19 @@
-// ---------------------------------------------------------------------------------------------
-#region // Copyright (c) 2010, SIL International. All Rights Reserved.
-// <copyright from='2010' to='2010' company='SIL International'>
-//		Copyright (c) 2010, SIL International. All Rights Reserved.
-//
-//		Distributable under the terms of either the Common Public License or the
-//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright>
-#endregion
-//
-// File: XeLaTexInstallation.cs
-// Responsibility: Trihus
-// ---------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
+// <copyright file="XeLaTexInstallation.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// 
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
 using System.IO;
 using System.Windows.Forms;
 
@@ -48,10 +51,14 @@ namespace SIL.Tool
             }
             else if (Common.IsUnixOS())
             {
-                if (Common.ReadingCommandPromptOutputValue("uname", "-m").IndexOf("i686") >= 0)
-                   pathwayXeLaTeXPath = "/usr/lib/pwtex/bin/i386-linux";
-                else if (Common.ReadingCommandPromptOutputValue("uname", "-m").IndexOf("x86_64") >= 0)
-                    pathwayXeLaTeXPath = "/usr/lib/pwtex/bin/x86_64-linux";
+                pathwayXeLaTeXPath = Common.GetValueFromRegistryFromCurrentUser("SOFTWARE\\SIL\\PathwayXeLaTeX", "XeLaTexDir");
+				if (string.IsNullOrEmpty(pathwayXeLaTeXPath))
+				{
+		            if (Common.ReadingCommandPromptOutputValue("uname", "-m").IndexOf("i686") >= 0)
+		               pathwayXeLaTeXPath = "/usr/lib/pwtex/bin/i386-linux";
+		            else if (Common.ReadingCommandPromptOutputValue("uname", "-m").IndexOf("x86_64") >= 0)
+		                pathwayXeLaTeXPath = "/usr/lib/pwtex/bin/x86_64-linux";
+				}
             }
             return pathwayXeLaTeXPath;
         }

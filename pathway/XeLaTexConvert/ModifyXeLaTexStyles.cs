@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="ModifyXeLaTexStyles.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+//
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -33,6 +49,7 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> _tempStyle;
         Dictionary<string, Dictionary<string, string>> mergedStyle = new Dictionary<string, Dictionary<string, string>>();
         Dictionary<string, Dictionary<string, string>> _cssClass = new Dictionary<string, Dictionary<string, string>>();
+
         XeLaTexMapProperty mapProperty = new XeLaTexMapProperty();
         string _firstString = string.Empty;
         string _lastString = string.Empty;
@@ -53,6 +70,7 @@ namespace SIL.PublishingSolution
         private bool _isMirrored = false;
         private Dictionary<string, string> _langFontDictionary;
         private Dictionary<string, Dictionary<string, string>> _tocList;
+
         public string ProjectType
         {
             get { return _projectType; }
@@ -158,10 +176,6 @@ namespace SIL.PublishingSolution
             _cssClass = cssClass;
             _xetexFullFile = xetexFullFile;
             _pageStyleFormat = pageStyleFormat;
-            //foreach (KeyValuePair<string, Dictionary<string, string>> cssStyle in newProperty)
-            //{
-            //    MergeCssStyle(cssStyle.Key);
-            //}
             ValidatePageType();
             GetTableofContent(newProperty);
             MapProperty();
@@ -180,13 +194,6 @@ namespace SIL.PublishingSolution
             if (newProperty.ContainsKey("TableofContent"))
             {
                 _tocList = newProperty;
-
-                //if (_projectType != null && _projectType != "Scripture")
-                //{
-                //    _firstString = newProperty["TableofContent"]["first"];
-                //    _lastString = newProperty["TableofContent"]["last"];
-                //    _headWordStyleName = newProperty["TableofContent"]["stylename"];
-                //}
             }
         }
 
@@ -283,8 +290,8 @@ namespace SIL.PublishingSolution
 
                 if (pageTopMargin != 0 || pageBottomMargin != 0 || pageLeftMargin != 0 || pageRightMargin != 0)
                 {
-                    pageTopMargin = (pageTopMargin / 28.346456693F) + 1.5;
-                    pageBottomMargin = (pageBottomMargin / 28.346456693F) + 1.5;
+                    pageTopMargin = (pageTopMargin * 0.03514598035);
+                    pageBottomMargin = (pageBottomMargin * 0.03514598035);
 
                     pageLeftMargin = Convert.ToDouble(Common.UnitConverter(pageLeftMargin.ToString() + "pt", "cm"));
                     pageRightMargin = Convert.ToDouble(Common.UnitConverter(pageRightMargin.ToString() + "pt", "cm"));
@@ -300,8 +307,12 @@ namespace SIL.PublishingSolution
 
                 sw.WriteLine(_pageStyleFormat);
 
+                sw.WriteLine(@"\parindent=0pt");
+                sw.WriteLine(@"\parskip=\medskipamount");
+
                 sw.WriteLine(@"\begin{document} ");
                 sw.WriteLine(@"\pagestyle{plain} ");
+                sw.WriteLine(@"\sloppy ");
             }
 
             foreach (var prop in xeLaTexProperty)
@@ -415,14 +426,6 @@ namespace SIL.PublishingSolution
                     pageStyleText = "[a6paper,twoside]{article} ";
                 }
             }
-            //else if (paperSize == "Letter")
-            //{
-            //    pageStyleText = "[Letter]{article} ";
-            //    if (isMirrored)
-            //    {
-            //        pageStyleText = "[HalfLetter,twoside]{article} ";
-            //    }
-            //}
             else if (paperSize == "halfletter")
             {
                 pageStyleText = "[HalfLetter]{article} ";
@@ -457,25 +460,6 @@ namespace SIL.PublishingSolution
             }
 
             return pageStyleText;
-            //if (Math.Round(pageWidth) == 595 && Math.Round(pageHeight) == 842) //A4 Size
-            //    pageStyleText = "[a4paper]{article} ";
-            //if (Math.Round(pageWidth) == 420 && Math.Round(pageHeight) == 595) //A5 Size
-            //    pageStyleText = "[a5paper]{article} ";
-            //if (Math.Round(pageWidth) == 459 && Math.Round(pageHeight) == 649) //C5 Size
-            //    pageStyleText = "[c5paper]{article} ";
-            ////\special{papersize=148mm,210mm}% it is A5 paper size, I got from Wikipedia.
-            //if (Math.Round(pageWidth) == 298 && Math.Round(pageHeight) == 420) //A6 Size
-            //    pageStyleText = "[a6paper]{article} ";
-            //if (Math.Round(pageWidth) == 612 && Math.Round(pageHeight) == 792) //Letter
-            //    pageStyleText = "[letter]{article} ";
-            //if (Math.Round(pageWidth) == 396 && Math.Round(pageHeight) == 612) //Half Letter
-            //    pageStyleText = "[halfletter]{article} ";
-            //if (Math.Round(pageWidth) == 432 && Math.Round(pageHeight) == 648) //6in 9in paper
-            //    pageStyleText = @"[a4paper]{article}  \usepackage[margin=1in, paperwidth=6in, paperheight=9in]{geometry}";
-            //if (Math.Round(pageWidth) == 378 && Math.Round(pageHeight) == 594) //5.25in 8.25in paper
-            //    pageStyleText = "[gps1]{article} ";
-            //if (Math.Round(pageWidth) == 418 && Math.Round(pageHeight) == 626) //5.8in 8.7in paper
-            //    pageStyleText = "[gps2]{article} ";
         }
 
         private string GetPaperSize(double paperWidth, double paperHeight)
@@ -529,14 +513,9 @@ namespace SIL.PublishingSolution
                     {
                         if (tocSection.Key.Contains("PageStock"))
                         {
-                            //tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} " + tocSection.Value + "}{\\pageref{" + tocSection.Key.Replace(" ", "") + "}}{}} \r\n ";
                             tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{" +
                                               tocSection.Value + " \\Large }{{\\protect \\pageref{" + tocSection.Key + "}}}{}}" +
                                               "\r\n";
-
-                            //tableOfContent += "\r\n" + "\\addtocontents{toc}{\\protect \\contentsline{section}{ \\Large " +
-                            //                  tocSection.Value + " \\Large }{{\\protect \\pageref{" + tocSection.Key + "}}}{}}" +
-                            //                  "\r\n";
                         }
                     }
                 }
@@ -563,14 +542,16 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\r\n";
                 tableOfContent += "\\newpage \r\n";
             }
-            //tableOfContent += "\\thispagestyle{empty} \r\n";
             tableOfContent += "\\pagestyle{plain} \r\n";
             tableOfContent += "\\tableofcontents \r\n";
-            //tableOfContent += "\\pagebreak[2] \r\n";
             tableOfContent += "\\newpage \r\n";
+            tableOfContent += "\\thispagestyle{empty} \r\n";
+            tableOfContent += "\\mbox{} \r\n";
+            tableOfContent += "\\newpage \r\n";
+            tableOfContent += "\\newpage \r\n";
+            
             tableOfContent += "\\setcounter{page}{1} \r\n";
             tableOfContent += "\\pagenumbering{arabic}  \r\n";
-            // Common.FileInsertText(_xetexFullFile, tableOfContent);
             sw.WriteLine(tableOfContent);
         }
 
@@ -617,6 +598,14 @@ namespace SIL.PublishingSolution
                     tableOfContent += "\\vskip 60pt \r\n";
                     tableOfContent += "\\begin{center} \r\n";
                     tableOfContent += "\\CoverPageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
+                    tableOfContent += "\\end{center} \r\n";
+                }
+                else
+                {
+                    tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
+                    tableOfContent += "\\vskip 60pt \r\n";
+                    tableOfContent += "\\begin{center} \r\n";
+                    tableOfContent += "\\CoverPageHeading{" + " " + "} \r\n";
                     tableOfContent += "\\end{center} \r\n";
                 }
 
@@ -708,8 +697,6 @@ namespace SIL.PublishingSolution
                     }
 
                 }
-
-
                 tableOfContent += "\\begin{titlepage}\r\n";
                 tableOfContent += "\\begin{center}\r\n";
                 tableOfContent += "\\textsc{\\LARGE " + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
@@ -725,12 +712,6 @@ namespace SIL.PublishingSolution
                 }
                 tableOfContent += "\\end{center} \r\n";
                 tableOfContent += "\\end{titlepage} \r\n";
-
-                tableOfContent += "\\newpage \r\n";
-                tableOfContent += "\\newpage \r\n";
-                //tableOfContent += "\\thispagestyle{empty} \r\n";
-                tableOfContent += "\\mbox{} \r\n";
-
             }
 
 
@@ -738,17 +719,24 @@ namespace SIL.PublishingSolution
             {
                 tableOfContent += "\\pagenumbering{roman}  \r\n";
                 tableOfContent += "\\setcounter{page}{3} \r\n";
-
                 tableOfContent += "\\input{" + CopyrightTexFilename + "} \r\n";
-                //tableOfContent += "\\thispagestyle{empty} \r\n";
                 tableOfContent += "\\pagestyle{plain} \r\n";
                 tableOfContent += "\\newpage \r\n";
-                tableOfContent += "\\newpage \r\n";
-                tableOfContent += "\\thispagestyle{empty} \r\n";
-                tableOfContent += "\\mbox{} \r\n";
+            }
+            else
+            {
+                if (tableOfContent != string.Empty)
+                {
+                    tableOfContent += "\\pagenumbering{roman}  \r\n";
+                    tableOfContent += "\\setcounter{page}{3} \r\n";
+                    tableOfContent += "\\pagestyle{plain} \r\n";
+                    tableOfContent += "\\newpage \r\n";
+                    tableOfContent += "\\newpage \r\n";
+                    tableOfContent += "\\thispagestyle{empty} \r\n";
+                    tableOfContent += "\\mbox{} \r\n";
+                }
             }
             sw.WriteLine(tableOfContent);
-            //Common.FileInsertText(_xetexFullFile, tableOfContent);
         }
 
         private void InsertReversalIndex(StreamWriter sw)
@@ -758,17 +746,14 @@ namespace SIL.PublishingSolution
             if (ReversalIndexExist)
             {
                 ReversalIndexContent += "\\input{" + ReversalIndexTexFilename + "} \r\n";
-                //tableOfContent += "\\thispagestyle{empty} \r\n";
                 ReversalIndexContent += "\\pagestyle{plain} \r\n";
                 ReversalIndexContent += "\\newpage \r\n";
             }
             sw.WriteLine(ReversalIndexContent);
-            //Common.FileInsertText(_xetexFullFile, ReversalIndexContent);
         }
 
         private string RemoveBody(string paraStyle)
         {
-            //if (paraStyle.IndexOf("_body") == -1 && paraStyle != "@page")
             if (paraStyle.IndexOf("_") == -1 && paraStyle != "@page")
             {
                 return string.Empty;
@@ -849,23 +834,12 @@ namespace SIL.PublishingSolution
             {
                 _textVariables.Add("hideVerseNumber_" + className);
             }
-            //else if (className.IndexOf("headword") == 0)
-            //{
-            //    _textVariables.Add("Guideword_" + className);
-            //}
-            //else if (className.IndexOf("xhomographnumber") == 0)
-            //{
-            //    _textVariables.Add("HomoGraphNumber_" + className);
-            //}
         }
 
         private void InsertNode(KeyValuePair<string, Dictionary<string, string>> className)
         {
             string newClassName = className.Key;
-            //string parentClassName = Common.RightString(newClassName, _styleSeperator);
-
             _node = _root.SelectSingleNode(_xPath, nsmgr);
-            //if (_node == null) return;
             XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
             styleNode.InnerXml = _node.OuterXml;
             _node.ParentNode.InsertAfter(styleNode, _node);
@@ -1049,7 +1023,6 @@ namespace SIL.PublishingSolution
                         string pointSize = className["PointSize"];
                         string point2 = Common.LeftString(pointSize, ".");
                         int pt = int.Parse(point2);
-                        //int baseshift = pt - 12;
                         int baseshift = pt * 2 / 3;
                         int point = pt * 2 / 3;
                         nameElement.SetAttribute("BaselineShift", "-" + baseshift);
@@ -1063,7 +1036,6 @@ namespace SIL.PublishingSolution
         private string OpenIDStyles()
         {
             string projType = "scripture";
-            //string targetFolder = Common.PathCombine(Common.GetTempFolderPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projType);
             string targetFolder = Common.RightRemove(_projectPath, Path.DirectorySeparatorChar.ToString());
             targetFolder = Common.PathCombine(targetFolder, "Resources");
             string styleFilePath = Common.PathCombine(targetFolder, "Styles.xml");

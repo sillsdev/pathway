@@ -1,1 +1,0 @@
-Sword output file location

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="CommonXmlTest.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="PreExportProcessTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -13,6 +13,7 @@
 // Test methods of FlexDePlugin
 // </remarks>
 // --------------------------------------------------------------------------------------------
+
 using System;
 using System.IO;
 using System.Xml;
@@ -44,10 +45,14 @@ namespace Test.PsTool
             string filename = "ImagePreProcess.xhtml";
             string input = GetFileNameWithPath(filename);
             PublicationInformation projInfo = new PublicationInformation();
-            projInfo.DefaultXhtmlFileWithPath = input;
-            preExportProcess = new PreExportProcess(projInfo);
+            
             string expected = GetFileNameWithExpectedPath(filename);
-            string output = preExportProcess.ImagePreprocess();
+            string output = input.Replace("InputFiles\\", "Output\\");
+            CopyToOutput(input, output);
+            projInfo.DefaultXhtmlFileWithPath = output;
+            projInfo.ProjectInputType = "Scripture";
+            preExportProcess = new PreExportProcess(projInfo);
+            output = preExportProcess.ImagePreprocess(false);
             XmlAssert.AreEqual(expected, output, "");
 
         }
@@ -83,6 +88,26 @@ namespace Test.PsTool
             string output = preExportProcess.GoBibleRearrangeVerseNumbers(projInfo.DefaultXhtmlFileWithPath);
             XmlAssert.AreEqual(expected, output, "");
         }
+
+
+        /// <summary>
+        ///A test for XelatexXhtmlFileDivLetterAddingLangAttributeTest
+        ///</summary>
+        [Test]
+        public void XelatexXhtmlFileDivLetterAddingLangAttributeTest()
+        {
+            string filename = "XelatexXhtmlFileDivLetterAddingLangAttribute.xhtml";
+            string input = GetFileNameWithPath(filename);
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = input;
+            preExportProcess = new PreExportProcess(projInfo);
+            string expected = GetFileNameWithExpectedPath(filename);
+            string outputFile = projInfo.DefaultXhtmlFileWithPath.Replace("InputFiles", "output");
+            File.Copy(projInfo.DefaultXhtmlFileWithPath, outputFile, true);
+            string output = preExportProcess.SetLangforLetter(outputFile);
+            XmlAssert.AreEqual(expected, output, "");
+        }
+
 
         /// <summary>
         ///A test for ParagraphVerserSetUp

@@ -10,8 +10,11 @@ Package: pathway
 Architecture: any
 Depends: default-jre-headless, mono-runtime, libmono-winforms2.0-cil, mono-csharp-shell, lame, mono-gmcs
 Recommends: libreoffice-writer, prince, calibre, evince
-Description: Prepare language data (Fieldworks & Paratext) for publication
- Pathway appears as a menu item in Fieldworks and Paratext. PathwayB also
- allows it to run from the Terminal. It takes language data frequently
- presented in XHTML & CSS format and converts it to one of several destin-
- ations: LibreOffice (Open Office), E-Book (.epub), Pdf, etc.
+Description: Pathway prepares dictionary and Scripture data in open
+ document (odf), e-book (epub 2.0), portable document (pdf), TeX and
+ J2ME (jar) formats. Print and electronic publications can be distributed
+ on web sites, Android cell phones, and Java feature phones. Indirectly
+ Pathway can be used for doc, docx, Kindle®, and Nook®. The epub format
+ will also work on tablets using software for reading e-books.
+    Pathway installs as an add-on of SIL FieldWorks and Paratext, or it
+ can be launched in batch process.

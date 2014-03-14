@@ -1,4 +1,7 @@
-﻿//    
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="ZipUtil.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
@@ -7,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Implementation for zip file folder
+// Utilities for zip file folder
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -67,7 +70,6 @@ namespace SIL.Tool
             if (Empty)
             {
                 if (Directory.GetDirectories(Dir).Length == 0)
-                    // if directory is completely empty, add it
                 {
                     fils.Add(Dir + @"/");
                 }

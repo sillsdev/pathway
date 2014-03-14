@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="Pdf.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="Pdf.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright (C) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -70,7 +70,6 @@ namespace SIL.PublishingSolution
         public void Create(string outName)
         {
             Debug.Assert(!string.IsNullOrEmpty(Xhtml), "xhtml not set");
-            //Debug.Assert(!string.IsNullOrEmpty(Css), "css not set");
 
             if (Common.UnixVersionCheck())
             {

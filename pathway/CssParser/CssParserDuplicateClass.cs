@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="CSSParser.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="CssParserDuplicateClass.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Css Parser
+// Handling duplicate classes
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -163,24 +163,6 @@ namespace SIL.PublishingSolution
                     AddSubTree(_nodeTemp, child, ctp);
                 }
             }
-
-            ////if (r.Text != "nil")
-            ////{
-            ////    _nodeTemp.Nodes.Add("nil");
-            ////    AddSubTree(_nodeTemp, r, ctp);
-            ////}
-            ////else
-            ////{
-            //if (r.Text != "nil")
-            //{
-            //    _nodeTemp.Text = "nil";
-            //}
-            //_nodeTemp.Text = r.Text;
-            //foreach (CommonTree child in ctp.Children(r))
-            //{
-            //    AddSubTree(_nodeTemp, child, ctp);
-            //}
-            ////}
 
             // To validate the nodes in nodeTemp has copied to nodeFine
             if (_isReCycle == false)
@@ -800,14 +782,6 @@ namespace SIL.PublishingSolution
                                 break;
                             }
                         }
-                        //else
-                        //{
-                        //    if (!_checkRuleNode.Contains(newRuleNode.ClassName))
-                        //    {
-                        //        _checkRuleNode.Add(newRuleNode.ClassName);
-                        //        nodeFine.Nodes.Add((TreeNode)node.Clone());
-                        //    }
-                        //}
                     }
                     else
                     {
@@ -828,16 +802,9 @@ namespace SIL.PublishingSolution
                                 parentClass[parentClass.Length - 1] = parentClass[parentClass.Length - 1].Substring(0, parentClass[parentClass.Length - 1].IndexOf(":"));
                                 InsertNewRuleProperty(node, "." + parentClass[parentClass.Length - 1], 'd', false);
                             }
-                            //InsertNewRuleProperty(node, "." + parentClass[parentClass.Length - 1], 'd', false);
                         }
                         else if (parentClass.Length >= 2)
                         {
-                            //if (parentClass[1].IndexOf("=") > 0)
-                            //{
-                            //    parentClass[1] = parentClass[1].Substring(0, parentClass[1].IndexOf("="));
-                            //    InsertNewRuleProperty(node, "." + parentClass[1], 'd', false);
-                            //}
-                            //else if (parentClass[1].IndexOf(":") > 0)
                             if (parentClass[1].IndexOf(":") > 0)
                             {
                                 parentClass[1] = parentClass[1].Substring(0, parentClass[1].IndexOf(":"));
@@ -895,13 +862,6 @@ namespace SIL.PublishingSolution
                         InsertInfoNode(repNode, repProperty);                        
                         foreach (TreeNode childNode in repNode.Nodes)
                         {
-                            //if (childNode.Text == "PROPERTY")
-                            //{
-                            //    if (isSameClass || !repProperty.Contains(childNode.FirstNode.Text))
-                            //    {
-                            //        RuleNode.Nodes.Add(childNode);
-                            //    }
-                            //}
                             if (childNode.Text == "PROPERTY" && isSameClass)
                             {
                                 if (!repProperty.Contains(childNode.FirstNode.Text))
@@ -925,7 +885,6 @@ namespace SIL.PublishingSolution
                             {
                                 if (isSameClass || !repProperty.Contains(childNode.FirstNode.Text))
                                 {
-                                    //repNode.Nodes.Add(childNode);
                                     repNode.Nodes.Add((TreeNode)childNode.Clone());
                                 }
                             }
@@ -1098,10 +1057,6 @@ namespace SIL.PublishingSolution
                     ruleNode.Nodes.Add((TreeNode)subNode.Clone());
                 }
             }
-            //ruleNode.Text = "RULE";
-            //var newRule1 = new Rule();
-            //GetRuleContains(ruleNode, ref newRule1);
-            //_checkRuleNode.Add(newRule1.ClassName);
             ParseRule((TreeNode)ruleNode.Clone(), nodeFine);
         }
 
@@ -1261,7 +1216,7 @@ namespace SIL.PublishingSolution
             }
             finally
             {
-                //File.Delete(Path.GetTempPath() + Path.GetFileName(path));
+              
             }
 
         }

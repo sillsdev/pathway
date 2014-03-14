@@ -8,6 +8,7 @@
 *.pidb
 *.resources
 *.userprefs
+*Thumbs.db
 ./pathway_*
 pathway/_*
 pathway/Releases

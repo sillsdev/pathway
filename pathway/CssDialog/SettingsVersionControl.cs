@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="SettingsVersionControl.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright (C) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Validation of settings version
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -123,38 +139,56 @@ namespace SIL.PublishingSolution
                 File.Copy(_pathwayFilePath, _userFilePath, true);
                 fileSettingFileCreated = true;
             }
+            CopySamplePictureFiles(pathwayFolder);
             return fileSettingFileCreated;
         }
 
-        private void SetPath(string appPath, KeyValuePair<string, string> data)
+        private void CopySamplePictureFiles(string allUserAppPath)
         {
-            //if (Common.Testing)
-            //{
-            //    string testPath = Environment.CurrentDirectory;
-            //    testPath = Common.LeftString(testPath, "\\bin\\Debug");
-            //    string input = Common.PathCombine(testPath, "ConfigurationTool\\TestFiles\\input");
-            //    string output = Common.PathCombine(testPath, "ConfigurationTool\\TestFiles\\Output");
+            string picturePath = Common.PathCombine(allUserAppPath, "Pictures");
+            if(Directory.Exists(allUserAppPath))
+            {
+                if (!Directory.Exists(picturePath))
+                {
+                    Directory.CreateDirectory(picturePath);
+                }
+                string samplePicturePath = Common.GetPSApplicationPath();
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Samples");
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Dictionary");
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Pictures");
 
-            //    _userFilePath = Common.PathCombine(input, data.Value);
-            //    _pathwayFilePath = Common.PathCombine(output, data.Value);
-            //    File.Copy(_userFilePath, _pathwayFilePath, true);
+                if (Directory.Exists(samplePicturePath))
+                {
+                    string[] pictureFilesList = Directory.GetFiles(samplePicturePath, "*.jpg");
+                    CopyPictureFiles(pictureFilesList, picturePath);
+                    pictureFilesList = Directory.GetFiles(samplePicturePath, "*.tif");
+                    CopyPictureFiles(pictureFilesList, picturePath);
+                }
 
-            //    filePath = _pathwayFilePath;
+                samplePicturePath = Common.GetPSApplicationPath();
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Samples");
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Scripture");
+                samplePicturePath = Common.PathCombine(samplePicturePath, "Pictures");
 
-            //    _userFilePath = _userFilePath.Replace(".", "Temp.");
-            //    _pathwayFilePath = _pathwayFilePath.Replace(".", "Temp.");
-            //    File.Copy(_userFilePath, _pathwayFilePath, true);
+                if (Directory.Exists(samplePicturePath))
+                {
+                    string[] pictureFilesList = Directory.GetFiles(samplePicturePath, "*.jpg");
+                    CopyPictureFiles(pictureFilesList, picturePath);
+                }
+            }
+        }
 
-            //    _pathwayFilePath = filePath;
-            //    // in - op
-            //}
-            //else
-            //{
-            _pathwayFilePath = Common.PathCombine(Path.GetDirectoryName(appPath), data.Value);
-            _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
-            
-            //}
-            
+        private static void CopyPictureFiles(string[] pictureFilesList, string picturePath)
+        {
+            foreach (var pictureFile in pictureFilesList)
+            {
+                string pictureFileName = Path.GetFileName(pictureFile);
+                string pictureFileNamewithDirectory = Common.PathCombine(picturePath, pictureFileName);
+                if (!File.Exists(pictureFileNamewithDirectory))
+                {
+                    File.Copy(pictureFile, pictureFileNamewithDirectory, true);
+                }
+            }
         }
 
         private void CopyOrganization(string xPath)
@@ -176,7 +210,6 @@ namespace SIL.PublishingSolution
                 string parent = targetXPath + "meta[@name='" + propName + "']";
 
                 XmlNode pathwayNode = _pathwayRoot.SelectSingleNode(parent);
-                //pathwayNode.ParentNode.RemoveChild(pathwayNode);
                 if (pathwayNode != null)
                 {
                     pathwayNode.InnerXml = userNode.InnerXml;
@@ -227,7 +260,6 @@ namespace SIL.PublishingSolution
 
         private void CloseFile()
         {
-            //_userXml.Save(_userFilePath);
             _pathwayXml.Save(_pathwayFilePath);
         }
 

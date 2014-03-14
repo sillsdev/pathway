@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="InInsertMacro.cs" from='2009' to='2010' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="InInsertMacro.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -78,6 +78,11 @@ namespace SIL.PublishingSolution
             WriteFile(textContent, insertVariable);
 
             CopySupportFolder(projInfo);
+
+            //Copy pictures to IndesignFiles folder (inside Stories folder)
+            var pictureFolder = Common.PathCombine(projInfo.DictionaryPath, "Pictures");
+            if (File.Exists(pictureFolder))
+                CopyFolderWithFiles(pictureFolder, Common.PathCombine(projInfo.TempOutputFolder, "Pictures"));
         }
 
         private static void WriteFile(StringBuilder textContent, ArrayList insertVariables)
@@ -155,9 +160,6 @@ namespace SIL.PublishingSolution
 
                     margin = margin + pair.Key + "\", \"" + topValue + "\", \"" + rightValue + "\", \"" +
                     bottomValue + "\", \"" + leftValue + "\", \"";
-
-                    //margin = margin + pair.Key + "\", \"" + pair.Value[0] + "\", \"" + pair.Value[1] + "\", \"" +
-                    //pair.Value[2] + "\", \"" + pair.Value[3] + "\", \"";
                     break;
                 }
             }
@@ -240,8 +242,6 @@ namespace SIL.PublishingSolution
             }
             return indexTab + isLocatorExists.ToLower() + ";";
         }
-
-
 
         public string GetColumnRule()
         {

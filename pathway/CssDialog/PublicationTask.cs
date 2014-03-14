@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="StylePick.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="PublicationTask.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright (C) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -74,9 +74,6 @@ namespace SIL.PublishingSolution
             Param.SetValue(Param.CurrentInput, CurrentInput);
             Param.SetValue(Param.InputType, InputType);
 
-            //CbTask.Items.AddRange(Param.GetListofAttr("tasks/task", "name").ToArray());
-            //CbTask.Text = Param.Value[Param.LastTask];
-            //_currentTask = CbTask.Text;
             _currentTask = Param.Value[Param.LastTask];
             if (_currentTask.Length == 0)
                 _currentTask = "Final print";
@@ -97,7 +94,6 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void DoAccept()
         {
-            //string selectedStyle = Param.TaskSheet(CbTask.Text);
             string selectedStyle = Param.TaskSheet(_currentTask);
 
 			cssFile = Common.FromRegistry(Param.StylePath(Param.StyleFile[selectedStyle]));
@@ -139,7 +135,6 @@ namespace SIL.PublishingSolution
             var dlg = new ConfigureTasks { Task = _currentTask, ProjectName = this.ProjectName };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                //CbTask.Text = dlg.Task;
                 _currentTask = dlg.Task;
             }
         }
@@ -224,7 +219,6 @@ namespace SIL.PublishingSolution
                 button.FlatAppearance.MouseDownBackColor = _selectedColor;
                 button.FlatAppearance.MouseOverBackColor = _mouseOverColor;
                 button.FlatStyle = FlatStyle.Flat;
-                //button.TabIndex = 0;
                 button.UseVisualStyleBackColor = true;
 
                 locationY += height;
@@ -253,8 +247,6 @@ namespace SIL.PublishingSolution
                 }
                 catch (Exception)
                 {
-                    //Icon sysIcon = new Icon(SystemIcons.WinLogo, 32, 32);
-                    //icon = sysIcon.ToBitmap();
 					icon = new Bitmap(Common.FromRegistry("Graphic/userTask.png"));
                 }
                     imageListTask.Images.Add(icon);
@@ -286,7 +278,6 @@ namespace SIL.PublishingSolution
                 button.FlatAppearance.MouseDownBackColor = _selectedColor;
                 button.FlatAppearance.MouseOverBackColor = _mouseOverColor;
                 button.FlatStyle = FlatStyle.Flat;
-                //button.TabIndex = 0;
                 button.UseVisualStyleBackColor = true;
 
                 locationY += height;
@@ -300,7 +291,6 @@ namespace SIL.PublishingSolution
         private void Role_Click(object sender, EventArgs e)
         {
             Button bt = (Button) sender;
-            //Param.SetRole(bt.Text);
             Param.UserRole = bt.Text;
             ShowConfigure(bt.Text);
             foreach(Control control in PanelRole.Controls)

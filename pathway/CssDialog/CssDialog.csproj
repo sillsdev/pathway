@@ -307,6 +307,7 @@
     <Compile Include="ExportThroughPathway.Designer.cs">
       <DependentUpon>ExportThroughPathway.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileHead.cs" />
     <Compile Include="frmSplash.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,7 +333,6 @@
       <DependentUpon>ModifyOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="FeatureSheet.cs" />
-    <Compile Include="FileHead.cs" />
     <Compile Include="GlobalSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -429,6 +429,7 @@
     <Compile Include="ConfigureTasks.Designer.cs">
       <DependentUpon>ConfigureTasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="UndoRedo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutPw.resx">
@@ -611,6 +612,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\sil-bw-logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Help.Image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

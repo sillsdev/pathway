@@ -1,13 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------
-#region // Copyright (c) 2009, SIL International. All Rights Reserved.
-// <copyright file="PrintVia.cs" from='2010' to='2010' company='SIL International'>
-//		Copyright (c) 2010, SIL International. All Rights Reserved.   
+// <copyright file="PrintVia.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright (C) 2014, SIL International. All Rights Reserved.   
 //    
-//		Distributable under the terms of either the Common Public License or the
-//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-#endregion
-// 
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed: 
@@ -16,6 +13,7 @@
 // Dialog to enter the settings for printing Dictionaries from Flex (or orthers)
 // </remarks>
 // --------------------------------------------------------------------------------------------
+
 
 using System;
 using System.Collections;
@@ -396,8 +394,6 @@ namespace SIL.PublishingSolution
             {
                 DialogResult dialogResult = MessageBox.Show("Please Install the Plugin Backends", "Pathway", MessageBoxButtons.AbortRetryIgnore,
                                 MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-                //var msg = new[] { "Please Install the Plugin Backends" };
-                //LocDB.Message("defErrMsg", "Please Install the Plugin Backends", msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                 if (dialogResult == DialogResult.Ignore)
                     return;
                 if (dialogResult == DialogResult.Abort)
@@ -503,7 +499,6 @@ namespace SIL.PublishingSolution
             }
             DictionaryName = Param.DefaultValue[Param.LayoutSelected];
             ExtraProcessing = Param.DefaultValue[Param.ExtraProcessing] == "True";
-            //Media = Param.DefaultValue[Param.Media];
         }
 
         private static void SaveProperty(PrintVia dlg)
@@ -645,7 +640,6 @@ namespace SIL.PublishingSolution
 
         private void chkPolicy_CheckedChanged(object sender, EventArgs e)
         {
-            //btnPolicy.Enabled = chkPolicy.Checked;
             SetOkStatus();
         }
 

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="ContentXML.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="AfterBeforeProcess.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,13 +10,12 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Creates the Contentxml in ODT Export
+// 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
 #region Using
 using System.Collections.Generic;
-using System.Text;
 using System.Xml;
 using System.Collections;
 using System.IO;
@@ -90,22 +89,8 @@ namespace SIL.PublishingSolution
         private string SourceTargetFile(PublicationInformation projInfo)
         {
             string sourceFile = "";
-            //if (projInfo.FinalOutput == "epub")
-            //{
-                sourceFile = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", "_1.xhtml");
-                File.Copy(projInfo.DefaultXhtmlFileWithPath, sourceFile,true);
-            //}
-            //else if (projInfo.FinalOutput == "odt" || projInfo.FinalOutput == "idml")
-            //{
-            //    sourceFile = projInfo.DefaultXhtmlFileWithPath;
-
-            //    //string tempFolder = Common.PathCombine(Path.GetTempPath(), "Preprocess");
-            //    string tempFolder = Path.GetTempPath();
-            //    string targetFile = Path.GetFileName(projInfo.DefaultXhtmlFileWithPath);
-            //    string targetFileWithPath = Common.PathCombine(tempFolder, targetFile);
-
-            //    projInfo.DefaultXhtmlFileWithPath = targetFileWithPath;
-            //}
+            sourceFile = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", "_1.xhtml");
+            File.Copy(projInfo.DefaultXhtmlFileWithPath, sourceFile,true);
             return sourceFile;
         }
 
@@ -124,8 +109,7 @@ namespace SIL.PublishingSolution
             _newProperty = new Dictionary<string, Dictionary<string, string>>();
             _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
-            //_classFamily = new Dictionary<string, ArrayList>();
-            
+           
             _sourcePicturePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             _projectPath = projInfo.TempOutputFolder;
 
@@ -136,24 +120,12 @@ namespace SIL.PublishingSolution
             _characterName = "None";
         }
 
-        ///// <summary>
-        ///// Cleanup Process
-        ///// </summary>
-        //public void CleanUp()
-        //{
-        //    if (File.Exists(_tempFile))
-        //    {
-        //        File.Delete(_tempFile);
-        //    }
-        //}
-
         /// <summary>
         /// To replace the symbol string if the symbol matches with the text
         /// </summary>
         /// <param name="data">XML Content</param>
         private string ReplaceString(string data)
         {
-            //data = Common.ReplaceSymbolToText(data);
             if (_replaceSymbolToText.Count > 0)
             {
                 foreach (string srchKey in _replaceSymbolToText.Keys)
@@ -328,25 +300,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteRaw(beforeContent);
             }
 
-            //// Psuedo Before
-            //foreach (ClassInfo psuedoBefore in _psuedoBefore)
-            //{
-            //    //WriteCharacterStyle(psuedoBefore.Content, psuedoBefore.StyleName, true);
-            //    if (psuedoBefore.Content.Trim().Length ==0)
-            //    {
-            //        if (!_isWhiteSpace)
-            //        {
-            //            _writer.WriteString(psuedoBefore.Content);
-            //            _isWhiteSpace = true;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        _writer.WriteString(psuedoBefore.Content);
-            //        _isWhiteSpace = false;
-            //    }
-            //}
-
             // Text Write
             if (_characterName == null)
             {
@@ -364,12 +317,6 @@ namespace SIL.PublishingSolution
             }
 
             _writer.WriteString(content);
-            //string modifiedContent = ModifiedContent(content, _previousParagraphName, _characterName);
-            //WriteCharacterStyle(modifiedContent, _characterName, contains);
-            //if (_isDropCap) // until the next paragraph
-            //{
-            //    _isDropCap = false;
-            //}
             _psuedoBefore.Clear();
 
         }
@@ -476,9 +423,6 @@ namespace SIL.PublishingSolution
                 if (uniCode.IndexOf("2028") > 0)
                 {
                     return "text:line-break/";
-                    //return "&lt;text:line-break/&gt;";
-                    //return "<text:line-break/>";
-                    //return "<br>";
                 }
             }
             return content;

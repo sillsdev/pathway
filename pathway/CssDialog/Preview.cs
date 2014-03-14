@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="Preview.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="Preview.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright (C) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -71,16 +71,11 @@ namespace SIL.PublishingSolution
             var xhtml = Param.Value[Param.CurrentInput];
 
             if (string.IsNullOrEmpty(xhtml) || !File.Exists(xhtml)) return string.Empty;
-
-            //var css = Param.StylePath(Sheet);
-            //string PreviewCSSPath = InsertMainCSS(Param.StylePath(Sheet));
             string PreviewCSSPath = Param.StylePath(Sheet);
             var mergedCss = new MergeCss();
-            //string cssCombine = mergedCss.Make(css);
             string cssCombine = mergedCss.Make(PreviewCSSPath, "Temp1.css");
 
             var returnXhtml = CreatePreviewFile(xhtml, cssCombine, "preview", true);
-            //var pdf = new Pdf(xhtml, Param.StylePath(Sheet));
             var pdf = new Pdf(returnXhtml, cssCombine);
             var outName = Common.PathCombine(Param.Value[Param.OutputPath], Path.GetFileNameWithoutExtension(xhtml) + ".pdf");
             try
@@ -135,7 +130,7 @@ namespace SIL.PublishingSolution
             const int stopAtLineNo = 100;
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
-            preProcessor.ImagePreprocess();
+            preProcessor.ImagePreprocess(false);
             xhtmlFile = preProcessor.ProcessedXhtml;
             string linkCss = outputFileName + ".css";
             string previewPath = Path.GetDirectoryName(xhtmlFile);

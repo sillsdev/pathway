@@ -69,6 +69,20 @@
     text-indent: .2in;
     margin-left: 0pt;
 }
+.Intro_Title_Main {
+	font-size: 14pt;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 8pt;
+	padding-bottom: 4pt;
+}
+.Intro_Title_Secondary {
+	font-size: 13pt;
+	font-style: italic;
+	text-align: center;
+	padding-top: 6pt;
+	padding-bottom: 3pt;
+}
 .Intro_Section_Head {
     font-weight: bold;	/* cascaded environment */
     font-style: normal;	/* cascaded environment */
@@ -212,7 +226,6 @@
     padding-bottom: 0pt;
     padding-top: 0pt;
     margin-top: 12pt;
-    //margin-bottom:6pt;
     margin-bottom:0pt;
 }
 
@@ -292,5 +305,9 @@ span {
 margin-left : 48pt;
 margin-right: 48pt;
 text-align: justify;
+}
+
+.Parallel_Passage_Reference{
+page-break-after: avoid;
 }
 

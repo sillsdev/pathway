@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="SetLicense.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2009, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Set PDF License
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -25,7 +41,6 @@ namespace ApplyPDFLicenseInfo
             {
                 // Start a process to print a file and raise an event when done.
                 myProcess.StartInfo.FileName = name;
-                //myProcess.StartInfo.Verb = name;
                 myProcess.StartInfo.Arguments = arg;
                 myProcess.StartInfo.CreateNoWindow = true;
                 myProcess.EnableRaisingEvents = true;
@@ -49,7 +64,6 @@ namespace ApplyPDFLicenseInfo
                     streamWriter.Close();
                     RedirectOutput = null;
                 }
-                //Console.WriteLine("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
                 return;
             }
 
@@ -72,7 +86,6 @@ namespace ApplyPDFLicenseInfo
         {
 
             _eventHandled = true;
-            //  Console.WriteLine("Exit time:    {0}\r\n" + "Exit code:    {1}\r\nElapsed time: {2}", myProcess.ExitTime, myProcess.ExitCode, elapsedTime);
         }
 
         /// <summary>
@@ -83,8 +96,6 @@ namespace ApplyPDFLicenseInfo
         /// <returns>normalized path</returns>
         public static string PathCombine(string path1, string path2)
         {
-            //if (path1 == null) throw new ArgumentNullException("path1");
-            //if (path2 == null) throw new ArgumentNullException("path2");
             path1 = DirectoryPathReplace(path1);
             path2 = DirectoryPathReplace(path2);
             return Path.Combine(path1, path2);

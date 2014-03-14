@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="GlobalSettings.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="GlobalSettings.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright (C) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -37,7 +37,6 @@ namespace SIL.PublishingSolution
         {
             InitializeComponent();
             var count = Param.Value.Count;
-            //TlSettings.Height = 26 * count;
             TlSettings.Height = 27 * count;
             Height = TlSettings.Height + 100;
             BtOk.Location = new Point(BtOk.Location.X, Height - 70);
@@ -218,22 +217,6 @@ namespace SIL.PublishingSolution
         {
             Close();
         }
-
-        //private void BtReset_Click(object sender, EventArgs e)
-        //{
-        //    File.Delete(Param.SettingOutputPath);
-        //    try
-        //    {
-        //        Param.LoadSettings();
-        //    }
-        //    catch (InvalidStyleSettingsException err)
-        //    {
-        //        var msg = new[] { err.FullFilePath };
-        //        LocDB.Message("errNotValidXml", err.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
-        //        return;
-        //    }
-        //    DoLoad();
-        //}
 
         private void Settings_DoubleClick(object sender, EventArgs e)
         {

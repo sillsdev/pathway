@@ -403,7 +403,7 @@
   </Target>
   <Target Name="Wix">
     <RemoveDir Directories="Wix" />
-    <UpdateVersion Product="$(ProductName) " Version="1.6.0" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
+    <UpdateVersion Product="$(ProductName) " Version="1.7.0" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
     <ZeroCheck />
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs" />
@@ -438,9 +438,6 @@
     <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'Files\ConfigurationTool\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'Files\ConfigurationTool\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(DicSamples)" DestinationFiles="@(DicSamples->'Files\ConfigurationTool\Samples\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(ScrSamples)" DestinationFiles="@(ScrSamples->'Files\ConfigurationTool\Samples\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
-    <Copy SourceFiles="@(MiscSupport)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(FwVersion)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BteHelpFile)" DestinationFolder="Files\ConfigurationTool\Help" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
     <Copy SourceFiles="@(SeHelpFile)" DestinationFolder="Files\ConfigurationTool\Help" Condition=" '$(Edition)' == 'SE' " />
@@ -454,6 +451,8 @@
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
+    <Copy SourceFiles="@(AllSamples)" DestinationFiles="@(AllSamples->'Files\ConfigurationTool\Samples\Dictionary\%(RecursiveDir)\%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'Files\ConfigurationTool\Samples\Scripture\%(RecursiveDir)\%(Filename)%(Extension)')"  Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -469,6 +468,7 @@
     <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
     <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'Files\ConfigurationTool\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
     <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\ConfigurationTool\Paratexmf\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
+    <Copy SourceFiles="@(InstallTex)" DestinationFiles="@(InstallTex->'Files\ConfigurationTool\%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
     <!-- Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles->'Files\ConfigurationTool\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " / -->
   </Target>
   <Target Name="AfterBuild">
@@ -499,6 +499,7 @@
     <AllBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
     <AllBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" />
+    <InstallTex Include="..\XeLaTexConvert\InstallPathwayXeLaTeX.sh" />
     <epubBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
     <TestBackend Include="..\DictionaryForMIDsConvert\$(OutputPath)\DictionaryForMIDsConvert.*" />
     <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
@@ -519,9 +520,6 @@
     <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <DicSamples Include="..\PsSupport\Samples\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <ScrSamples Include="..\PsSupport\Samples\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <MiscSupport Include="..\PsSupport\FileGuids.xml;..\PsSupport\GenericFont.xml" />
     <FwVersion Include="FieldworksVersions.txt" />
     <BteHelpFile Include="Pathway_Configuration_Tool_BTE.chm" />
     <SeHelpFile Include="Pathway_Configuration_Tool_SE.chm" />
@@ -538,6 +536,8 @@
     <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
     <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
     <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <AllSamples Include="..\PsSupport\Samples\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <BteSamples Include="..\PsSupport\Samples\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <epubValid Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
@@ -546,14 +546,12 @@
     <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <AllTransform Include="..\PsSupport\pxhtml2xpw-dict.xsl" />
     <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\addDicTocHeads.xsl" />
     <AllTransform Include="..\PsSupport\FixEpub.xsl" />
     <AllTransform Include="..\PsSupport\FixEpubToc.xsl" />
     <BteTransform Include="..\PsSupport\*.xslt" />
-    <BteTransform Include="..\PsSupport\pxhtml2xpw-scr.xsl" />
     <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
     <!-- XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" / -->

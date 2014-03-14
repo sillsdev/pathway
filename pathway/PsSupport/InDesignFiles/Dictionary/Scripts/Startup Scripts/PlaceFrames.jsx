@@ -1,6 +1,6 @@
-﻿var columnRule=new Array("columns 1 Solid #808080");
-var borderRule=new Array("@page-footnotes", ".5 solid #000000", "none", "none", "none", "@page-footnote", ".5 solid #000000", "none", "none", "none", "border", ".5 solid #808080", "none", "none", "none", "@page:first-footnotes", ".5 solid #000000", "none", "none", "none", "@page:first-footnote", ".5 solid #000000", "none", "none", "none");
-var margin=new Array("");
+﻿var columnRule=new Array("letData 1 Solid #808080","revData 1 Solid #808080");
+var borderRule=new Array("letHead", "none", "none", ".5 solid #808080", "none", "revHeader", "none", "none", ".5 solid #808080", "none");
+var margin=new Array("letHead", "1.5", "0.75", "1.5", "0.75");
 var cropMarks = false;
 var indexTab = false;
 // --------------------------------------------------------------------------------------------
@@ -14,10 +14,10 @@ var indexTab = false;
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu           
-// Modified On:  Mar 28 2013 
-// TD-3440(Some letters begin a new page and others do not)
+// Modified On:  Feb 07 2014 
+// TD-3737("Position footer frame") 
 // <remarks> 
-// Format the FrontMatter based on User Selection
+// PlaceFrames()
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -220,10 +220,30 @@ function main()
 	times=times + "\n" + d;
 	TOC();
 	//CreatePageNumberStyles();
+	
+	ReversalGuideword();
+	
 	SaveDocument();
 
-
+	
 	//alert(times);
+}
+
+function ReversalGuideword()
+{
+	try
+	{
+		//alert(myDocument.textVariables.item('FG_1').variableOptions.appliedCharacterStyle); 
+		if(myDocument.textVariables.item('FG_1').variableOptions.appliedCharacterStyle == null)
+		{
+			myDocument.textVariables.item('FG_1').variableOptions.appliedCharacterStyle="span_.en";
+			myDocument.textVariables.item('LG_1').variableOptions.appliedCharacterStyle="span_.en";
+		}
+		//alert(myDocument.textVariables.item('FG_1').variableOptions.appliedCharacterStyle);
+	}
+	catch(myError)
+	{
+	}
 }
 
 //This mothod creates two sections for two Page Number Styles (Roman and Arabic)
@@ -527,7 +547,7 @@ function PlaceFrames()
      //alert(pageHeight);
      //alert(myDocument.documentPreferences.pageHeight + "\n" + myPage.marginPreferences.top + "\n" + myPage.marginPreferences.bottom);	
 	pageWidth= myDocument.documentPreferences.pageWidth;
-	currentMarginTop = marginTop;
+	currentMarginTop = marginTop - 0.7;
 
     DrawPictureCaption();
 	//return 0;
@@ -1212,8 +1232,8 @@ function Grouping()
 		{
 			myStory = myDocument.textFrames[storyLength];
 			//alert("my count " + myStory.parent.name);
-			if(myStory.parent.name  > activePageNumber)
-			{
+			//if(myStory.parent.name  > activePageNumber)
+			//{
 				if(myStory.textFramePreferences.textColumnCount > 1)
 				{
 					makeGroup(myStory);
@@ -1228,7 +1248,7 @@ function Grouping()
 						DrawBorderLine(myStory);
 					}
 				}
-		    }
+		    //}
 
 		}
 	}
@@ -1696,6 +1716,10 @@ function FitFrameToPage100(myStory)
 
 	}	
 }
+
+
+
+
 
 
 

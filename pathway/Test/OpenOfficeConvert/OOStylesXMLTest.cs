@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="StylesXMLTest.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="StylesXMLTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -1325,6 +1325,27 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
         }
 
+        ///<summary>
+        ///TD-3807 Page ends with Parallel reference
+        /// <summary>
+        /// Add Keep with next paragraph property for parallel reference class
+        /// </summary> 
+        [Test]
+        public void ParallerReferenceKeepWith_Node()
+        {
+            const string file = "ParallerReferenceKeepWith";
+            string input = FileInput(file + ".css");
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
+
+            string xpath = "//style:style[@style:name='ParallelPassageReference']";
+            _validate = new ValidateXMLFile(output);
+            _validate.ClassName = string.Empty;
+            _validate.ClassProperty.Add("fo:keep-with-next", "always");
+
+            returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
+            Assert.IsTrue(returnValue);
+        }
 
 
     }

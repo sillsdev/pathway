@@ -1464,7 +1464,7 @@ namespace PrincessConvert
 			sw.WriteLine(Constants.vbTab + "margin-outside: " + sMarginOutside + " ;");
 			sw.WriteLine();
 			sw.WriteLine("  @top-center {");
-			sw.WriteLine(Constants.vbTab + "content: string(bookx, start)  ' '  string(chapterx, start) ':' string(versex, start)  ' — '  string(chapterx, last) ':' string(versex, last) ;");
+            sw.WriteLine(Constants.vbTab + "content: string(bookx, start)  ' '  string(chapterx, start) ':' string(versex, start)  ' " + Common.ConvertUnicodeToString("\\2014") + " '  string(chapterx, last) ':' string(versex, last) ;");
 			sw.WriteLine(Constants.vbTab + "}");
 			// closing marker for top-center
 			sw.WriteLine();

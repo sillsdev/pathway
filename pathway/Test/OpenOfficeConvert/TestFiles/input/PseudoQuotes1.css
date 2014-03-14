@@ -12,24 +12,24 @@ font-size:32pt;font-wight:bold;
 .c:before  { content: "  \"  ";}
 .c:after { content: '\'';}
 
-.d:after { content: '\25ba v " v \25ba';color:red;} 
+.d:after { content: '# v " v =';color:red;} 
 .d:before  { content: '  ** \' **  ';;color:red;}
 
 .e:after { content: "\"";}
 .e:before  { content: "\"\" \\ \' ";}
 
 .f:after {
-    content: "\2665";
+    content: "$";
 }
 .f:before {
-    content:  "\2663";
+    content:  "^";
 }
 
 .g:before {
-    content: "\2660";
+    content: "@";
 }
 .g:after {
-    content: "\266B ";
+    content: "! ";
 }
 
 

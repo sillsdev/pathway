@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="XHTMLProcess.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="AfterBeforeXHTMLProcess.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Creates the Contentxml in ODT Export
+// 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -64,7 +64,6 @@ namespace SIL.PublishingSolution
         protected Dictionary<string, string> ParentClass;
         protected Dictionary<string, string> _listTypeDictionary = new Dictionary<string, string>();
         protected Dictionary<string, ArrayList> _classFamily;
-        //protected ClassInfo _classInfo = new ClassInfo();
         protected Dictionary<string, Dictionary<string, string>> _dictColumnGapEm = new Dictionary<string, Dictionary<string, string>>();
         protected string _className;
         protected ArrayList _attribute;
@@ -156,11 +155,6 @@ namespace SIL.PublishingSolution
         protected void OpenXhtmlFile(string xhtmlFileWithPath)
         {
             _psuedoBeforeStyle = _psuedoAfterStyle = _psuedoContainsStyle = null;
-            //_reader = new XmlTextReader(xhtmlFileWithPath)
-            //              {
-            //                  XmlResolver = null,
-            //                  WhitespaceHandling = WhitespaceHandling.Significant
-            //              };
             _reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true);
         }
 
@@ -226,10 +220,7 @@ namespace SIL.PublishingSolution
                 _imageLongDesc = _imageLongDesc.ToLower();
 
                 _imageAltText = _reader.GetAttribute("alt") ?? string.Empty;
-                //_characterName = _childName;
-                //_allCharacter.Push(_characterName);
                 _imageInsert = true;
-                //_imageClass = StackPeek(_allParagraph);
                 _imageClass = StackPeek(_allStyle);
                 _imageSrcClass = _className;
             }
@@ -238,10 +229,6 @@ namespace SIL.PublishingSolution
                 _anchorBookMarkName = Common.RightString(_classNameWithLang, Common.SepTag);
                 _anchorStart = true;
             }
-            //else if (_tagType == "table" || _tagType == "th" || _tagType == "tr" || _tagType == "td")
-            //{
-            //    // need to handle styles
-            //}
             else
             {
                 if (_reader.Name == "title" || _reader.Name == "style") // skip the node
@@ -251,8 +238,6 @@ namespace SIL.PublishingSolution
                 else
                 {
                     _tagType = "O";
-                    //_allStyle.Push(_childName);
-                    //return;
                 }
             }
             if (_tagType != "img")
@@ -398,8 +383,6 @@ namespace SIL.PublishingSolution
                     else if (_reader.Name == "lang")
                     {
                         _lang = _reader.Value;
-                        //if (_lang == "zxx") continue;
-                        //classNameWithLang = classNameWithLang + Common.SepAttrib + _lang;
                         _xhtmlAttribute.Add(_lang);
                         AddEntryLanguage();
                     }
@@ -423,8 +406,6 @@ namespace SIL.PublishingSolution
                 string tagType = string.Empty;
                 if (_tagType == "ol" || _tagType == "ul")
                 {
-                    //classNameWithLang = _tagType + Common.SepTag + _className;
-                    //_className = _tagType;
                     _listType = _tagType;
                 }
                 else if (_tagType == "li")
@@ -452,8 +433,7 @@ namespace SIL.PublishingSolution
 
                 else if (_tagType == "p")
                 {
-                    //classNameWithLang = _tagType + Common.SepTag + _className;
-                    //_className = _tagType;
+
                 }
                 _className = classNameWithLang;
             }
@@ -478,9 +458,7 @@ namespace SIL.PublishingSolution
 
         protected void EndElementBase(bool isImage)
         {
-            //_closeChildName = StackPop(_allStyle);
             _precedeClassAttrib = GetPreced();
-            //if (_closeChildName == string.Empty) return;
 
             if (StackPeek(_allParagraph).CompareTo(_closeChildName) == 0)
             {
@@ -507,8 +485,6 @@ namespace SIL.PublishingSolution
                 }
                 else if (_outputType == Common.OutputType.IDML)
                 {
-                    //_writerNew.WriteRaw("<Br/>");
-                    //_writerNew.WriteEndElement();
                 }
                 else if (_outputType == Common.OutputType.ODT)
                 {
@@ -519,17 +495,16 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                       // _writerNew.WriteEndElement();
+
                     }
                 }
                 else
                 {
-                   // _writerNew.WriteEndElement();
+
                 }
             }
             if(_forcedPara)
             {
-                //_writerNew.WriteEndElement();
                 _isNewParagraph = true;
                 _isParagraphClosed = true;
                 _forcedPara = false;
@@ -589,9 +564,6 @@ namespace SIL.PublishingSolution
 
         private string FindStyleName()
         {
-           // if (_allStyle.Count == 0) return _classNameWithLang;
-
-            //string styleName = _precedeClassAttrib.ClassName + _classNameWithLang + Common.SepParent + StackPeek(_allStyle);
             string styleName = _precedeClassAttrib.ClassName + _tagType + _classNameWithLang + Common.SepParent + StackPeek(_allStyle);
             string newStyleName;
             if (_childStyle.ContainsKey(styleName)) // note: Child Style already created
@@ -611,10 +583,6 @@ namespace SIL.PublishingSolution
                 if (_lang.Length > 0)
                     _languageStyleName[newStyleName] = _lang;
             }
-            //if (SkipEmptyIDChapterNumber())
-            //{
-            //    newStyleName = "hide" + newStyleName;
-            //}
             return newStyleName;
         }
 
@@ -639,10 +607,8 @@ namespace SIL.PublishingSolution
                 }
 
             }
-            //string newStyleName = styleName + Common.SepParent + parentStyle;
             string newStyleName = GetStyleNumber(styleName);
 
-            //_newProperty[newStyleName] = _tempStyle;
             if (_newProperty.ContainsKey(newStyleName) == false)
             {
                 _newProperty[newStyleName] = _tempStyle;
@@ -658,7 +624,6 @@ namespace SIL.PublishingSolution
             if (styleBefore != string.Empty)
             {
                 string tag = "span"; //  always character styles
-                //string newStyleBefore = styleBefore + Common.SepParent + parentStyle;
                 string newStyleBefore = GetStyleNumber(styleBefore);
                 _newProperty[newStyleBefore] = _tempStyle;
                 IdAllClass[newStyleBefore] = _tempStyle;
@@ -671,7 +636,6 @@ namespace SIL.PublishingSolution
             if (styleAfter != string.Empty)
             {
                 string tag = "span"; //  always character styles
-                //string newStyleAfter = styleAfter + Common.SepParent + parentStyle;
                 string newStyleAfter = GetStyleNumber(styleAfter);
                 _newProperty[newStyleAfter] = _tempStyle;
                 IdAllClass[newStyleAfter] = _tempStyle;
@@ -682,7 +646,6 @@ namespace SIL.PublishingSolution
             string styleContains = MatchCssStyle(ancestorFontSize, "contains", multiClassList);
             if (styleContains != string.Empty)
             {
-                //string newStyleContains = styleContains + Common.SepParent + parentStyle;
                 string newStyleContains = GetStyleNumber(styleContains);
                 _newProperty[newStyleContains] = _tempStyle;
                 IdAllClass[newStyleContains] = _tempStyle;
@@ -707,8 +670,6 @@ namespace SIL.PublishingSolution
             if (styleName == "hideChapterNumber") return styleName;
             if (styleName == "hideVerseNumber") return styleName;
             if (styleName == "hideVerseNumber1") return styleName;
-            //if (styleName == "ChapterNumber") return styleName;
-            //if (styleName == "VerseNumber") return styleName;
             if (_headwordStyles) return styleName;
             int suffix = 1;
             string newname;
@@ -747,13 +708,8 @@ namespace SIL.PublishingSolution
 
                     resultCoreClass = CompareCoreClass(cssClassInfo.CoreClass, _xhtmlClassAttrib, multiClass);
                     resultTagClass = true;
-                    //if (_isTagClass != string.Empty && cssClassInfo.Tag.ClassName != string.Empty)
                     if (cssClassInfo.TagName != string.Empty)
                     {
-                        //string xhtmlTag = _tagType;
-                        //if(_lang.Length > 0)
-                        //    xhtmlTag =  _tagType + Common.SepAttrib + _lang;
-                        //if (cssClassInfo.TagName != xhtmlTag)
                         if (cssClassInfo.TagName != _tagType)
                         {
                             resultTagClass = false;
@@ -774,17 +730,14 @@ namespace SIL.PublishingSolution
                             _matchedCssStyleName = cssClassInfo.StyleName;
                             if (psuedo == "before")
                             {
-                                //_psuedoBeforeStyle = cssClassInfo;
                                 _psuedoBeforeStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
                             }
                             else if (psuedo == "after")
                             {
-                                //_psuedoAfterStyle = cssClassInfo;
                                 _psuedoAfterStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
                             }
                             else if (psuedo == "contains")
                             {
-                                //_psuedoContainsStyle = cssClassInfo;
                                 _psuedoContainsStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
                             }
                         }
@@ -795,10 +748,7 @@ namespace SIL.PublishingSolution
             {
                 AppendParentProperty();
             }
-            //else if (_outputType == Common.OutputType.ODT)
-            //{
-            //    ParentClass[_matchedCssStyleName] = _parentStyleName + "||" + _tagType;
-            //}
+
             if (_outputType != Common.OutputType.XETEX || _outputType != Common.OutputType.XELATEX)
             {
                 _matchedCssStyleName.Replace(Common.sepPrecede, "");
@@ -837,7 +787,6 @@ namespace SIL.PublishingSolution
         {
             ClassInfo cssClassInfoTag;
             cssClassInfoTag = new ClassInfo();
-            //cssClassInfoTag.CoreClass.ClassName = multiClass;
 
             cssClassInfoTag.StyleName = cssClassInfo.StyleName;
             cssClassInfoTag.CoreClass.SetClassAttrib(multiClass, cssClassInfo.CoreClass.Attribute);
@@ -954,7 +903,6 @@ namespace SIL.PublishingSolution
 
                                 if (true)
                                 {
-                                    //Common.ConvertToInch(columnGap) 
                                     int counter;
                                     string colGapValue = _dictColumnGapEm[secClass]["columnGap"];
                                     string columnGap = Common.GetNumericChar(colGapValue, out counter);
@@ -1182,33 +1130,6 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-
-
-        //private float FindAncestorFontSize()
-        //{
-        //    // TODO find from the current style ex: font-size:20pt; line-height: 1em;
-        //    string[] ancestorStyleName = _allStyle.ToArray();
-        //    float fontSize = _projInfo.DefaultFontSize;
-
-        //    string fontPointSize = "font-size";
-        //    if (_outputType == Common.OutputType.IDML)
-        //        fontPointSize = "PointSize";
-
-        //    // Search in ancestor class
-        //    foreach (string ancestor in ancestorStyleName)
-        //    {
-        //        if (IdAllClass.ContainsKey(ancestor))
-        //        {
-        //            if (IdAllClass[ancestor].ContainsKey(fontPointSize))
-        //            {
-        //                fontSize = float.Parse(IdAllClass[ancestor][fontPointSize].Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
-        //                break;
-        //            }
-        //        }
-        //    }
-        //    fontSize = 12;
-        //    return fontSize;
-        //}
 
         protected string StackPeek(Stack<string> stack)
         {

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="DictionaryForMIDsProperties.cs" from='2013' to='2013' company='SIL International'>
-//      Copyright © 2013, SIL International. All Rights Reserved.   
+// <copyright file="DictionaryForMIDsProperties.cs" from='2013' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.

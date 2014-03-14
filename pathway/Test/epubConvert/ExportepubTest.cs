@@ -1,16 +1,19 @@
-// ---------------------------------------------------------------------------------------------
-#region // Copyright (c) 2010, SIL International. All Rights Reserved.
-// <copyright from='2010' to='2010' company='SIL International'>
-//		Copyright (c) 2010, SIL International. All Rights Reserved.
-//
-//		Distributable under the terms of either the Common Public License or the
-//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright>
-#endregion
-//
-// File: ExportepubTest.cs
-// Responsibility: Trihus
-// ---------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
+// <copyright file="EmbeddedFontTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Erik Brommers</author>
+// <email>erik_brommers@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Test methods of EmbeddedFont class
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using System.IO;

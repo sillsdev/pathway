@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="ExportProcess.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="ExportXeLaTexConvert.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,23 +10,19 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Export process used to Export the ODT and Prince PDF output
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
-using Test;
 
 namespace SIL.PublishingSolution
 {
@@ -51,7 +47,7 @@ namespace SIL.PublishingSolution
         private bool _isFileFontCodeandFontNameFound = false;
         private Dictionary<string, string> _tocPropertyList = new Dictionary<string, string>();
         private Dictionary<string, string> _langFontCodeandName;
-
+        private Dictionary<string, string> _fontLangMap = new Dictionary<string, string>();
         #region Public Functions
         public string ExportType
         {
@@ -90,9 +86,8 @@ namespace SIL.PublishingSolution
             {
                 Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
             }
-            // preProcessor.GetTempFolderPath();
+            preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
             preProcessor.XelatexImagePreprocess();
-            //preProcessor.MovePictureAsLastChild(projInfo.DefaultXhtmlFileWithPath);
             Param.LoadSettings();
             string organization;
             try
@@ -106,7 +101,6 @@ namespace SIL.PublishingSolution
                 // but just in case, specify a default org.
                 organization = "SIL International";
             }
-            //_tableOfContent = Param.GetMetadataValue(Param.TableOfContents, organization) ?? ""; // empty string if null / not found
             _coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, organization));
             _coverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, organization);
 
@@ -121,11 +115,14 @@ namespace SIL.PublishingSolution
 
             _tableOfContent = (Param.GetMetadataValue(Param.TableOfContents, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TableOfContents, organization));
 
-
             BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
-            //GetXhtmlFileFontCodeandFontName(projInfo.DefaultXhtmlFileWithPath);
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-            //projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
+            
+            if (projInfo.DefaultXhtmlFileWithPath.Contains("FlexRev.xhtml"))
+            {
+                projInfo.IsReversalExist = false;
+            }
+
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
             projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
@@ -151,7 +148,6 @@ namespace SIL.PublishingSolution
 
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
-            //xeLaTexContent.TocEndingPage = preProcessor.GetDictionaryLetterCount();
             Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle,
                 cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 
@@ -187,16 +183,19 @@ namespace SIL.PublishingSolution
                 modifyXeLaTexStyles.CopyrightTexFilename = Path.GetFileName(_copyrightTexFileName);
             }
 
-            if (ExportReversalIndex(projInfo))
+            if (projInfo.IsReversalExist)
             {
-                _reversalIndexTexCreated = true;
-                var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-                //var revCSSFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
-                string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
-                string xeLatexCopyrightFile = Common.PathCombine(projInfo.ProjectPath, fileNameXhtml + ".tex");
+                if (ExportReversalIndex(projInfo))
+                {
+                    _reversalIndexTexCreated = true;
+                    var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
+                                                     "FlexRev.xhtml");
+                    string fileNameXhtml = Path.GetFileNameWithoutExtension(revFile);
+                    string xeLatexReversalFile = Common.PathCombine(projInfo.ProjectPath, fileNameXhtml + ".tex");
 
-                modifyXeLaTexStyles.ReversalIndexExist = true;
-                modifyXeLaTexStyles.ReversalIndexTexFilename = Path.GetFileName(xeLatexCopyrightFile);
+                    modifyXeLaTexStyles.ReversalIndexExist = true;
+                    modifyXeLaTexStyles.ReversalIndexTexFilename = Path.GetFileName(xeLatexReversalFile);
+                }
             }
 
             modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = false;
@@ -213,21 +212,16 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            
-            modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include, _langFontCodeandName);
 
-            //CallXeTex(Path.GetFileName(xeLatexFullFile));
+            modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include, _langFontCodeandName);
             Dictionary<string, string> imgPath = new Dictionary<string, string>();
             if (newProperty.ContainsKey("ImagePath"))
             {
                 imgPath = newProperty["ImagePath"];
             }
             UpdateXeLaTexFontCacheIfNecessary();
-            
             CallXeLaTex(xeLatexFullFile, true, imgPath);
-
             ProcessRampFile(projInfo, xeLatexFullFile, organization);
-
             return true;
         }
 
@@ -251,7 +245,7 @@ namespace SIL.PublishingSolution
             if (File.Exists(pdfFullName))
             {
                 Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif,.tex,.log,.exe,.xml,.jar",
-                                           "layout,mergedmain1,preserve", string.Empty);
+                                           "layout.css,mergedmain1,preserve", string.Empty);
                 CreateRAMP(projInfo);
             }
         }
@@ -271,7 +265,6 @@ namespace SIL.PublishingSolution
                 preProcess.CopyCopyrightPage(processFolder);
                 string copyRightFilePath = Common.PathCombine(processFolder, "File2Cpy.xhtml");
 
-                // **    string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 if (copyRightFilePath.Trim().Length <= 0 && !File.Exists(copyRightFilePath))
                 {
                     return false;
@@ -361,8 +354,6 @@ namespace SIL.PublishingSolution
                 if (contentWriter.ToLower().IndexOf(searchText) >= 0)
                 {
                     writer.WriteLine(insertText);
-                    //writer.WriteLine("\\mbox{}");
-                    //writer.WriteLine("\\mbox{}");
                     writer.WriteLine(contentWriter);
                     string st = string.Empty;
                     string contributors = Param.GetMetadataValue(Param.Contributor);
@@ -437,6 +428,8 @@ namespace SIL.PublishingSolution
                 }
 
                 projInfo.DefaultXhtmlFileWithPath = revFile;
+                PreExportProcess preProcessor = new PreExportProcess(projInfo);
+                preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
                 Dictionary<string, Dictionary<string, string>> cssClass =
                     new Dictionary<string, Dictionary<string, string>>();
                 CssTree cssTree = new CssTree();
@@ -516,6 +509,18 @@ namespace SIL.PublishingSolution
 
         public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
+
+            string[] pdfFiles = Directory.GetFiles(Path.GetDirectoryName(xeLatexFullFile), "*.pdf");
+            foreach (string pdfFile in pdfFiles)
+            {
+                try
+                {
+                    File.Delete(pdfFile);
+                }
+                catch { }
+            }
+
+
             bool isUnixOs = Common.IsUnixOS();
             string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
 
@@ -594,7 +599,6 @@ namespace SIL.PublishingSolution
                     p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
                     p1.Start();
                     p1.WaitForExit();
-                    //p1Output = p1.StandardOutput.ReadToEnd();
                     p1Error = p1.StandardError.ReadToEnd();
                 }
 
@@ -608,7 +612,6 @@ namespace SIL.PublishingSolution
                     p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
                     p1.Start();
                     p1.WaitForExit();
-                    //p1Output = p1.StandardOutput.ReadToEnd();
                     p1Error = p1.StandardError.ReadToEnd();
                 }
 
@@ -626,12 +629,10 @@ namespace SIL.PublishingSolution
                 {
                     try
                     {
-                        //Common.OpenOutput(pdfFullName);
                         if (File.Exists(pdfFullName))
                         {
-                            
-                            pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex");
-                           // Common.OpenOutput(pdfFullName);
+
+                            pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex", _inputType);
                         }
                     }
                     catch { }
@@ -647,10 +648,9 @@ namespace SIL.PublishingSolution
                 {
                     try
                     {
-                        //Common.OpenOutput(pdfFullName);
                         if (File.Exists(pdfFullName))
                         {
-                            pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex");
+                            pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex", _inputType);
                         }
                     }
                     catch (System.ComponentModel.Win32Exception ex)
@@ -706,8 +706,6 @@ namespace SIL.PublishingSolution
 
                 xeLatexFile.WriteLine();
                 ReversalIndexContent += "\\input{" + reversalFileName + "} \r\n";
-                //ReversalIndexContent += "\\thispagestyle{empty} \r\n";
-                //ReversalIndexContent += "\\newpage \r\n";
                 xeLatexFile.WriteLine(ReversalIndexContent);
             }
 
@@ -750,7 +748,36 @@ namespace SIL.PublishingSolution
                 }
             }
             _reader.Close();
+            CreateFontLanguageMap();
+
         }
+
+        private void CreateFontLanguageMap()
+        {
+            Common.FillMappedFonts(_fontLangMap);
+
+            foreach (var fontName in _fontLangMap)
+            {
+                if (_langFontCodeandName.ContainsKey(fontName.Key))
+                {
+                    if (fontName.Key.ToLower() != "en")
+                    {
+                        _langFontCodeandName.Remove(fontName.Key);
+                        _langFontCodeandName.Add(fontName.Key, fontName.Value);
+                    }
+                }
+
+                if (_langFontDictionary.ContainsKey(fontName.Key))
+                {
+                    if (fontName.Key.ToLower() != "en")
+                    {
+                        _langFontDictionary.Remove(fontName.Key);
+                        _langFontDictionary.Add(fontName.Key, fontName.Value);
+                    }
+                }
+            }
+        }
+
         #endregion
 
         private void GetXhtmlFileFontCodeandFontName(XmlTextReader _reader)
@@ -889,11 +916,6 @@ namespace SIL.PublishingSolution
                                 break;
                             }
                         }
-                        //if (metaNode.Attributes["name"].Value == "linkedFilesRootDir")
-                        //{
-                        //    imageRootPath = metaNode.Attributes["content"].Value;
-                        //    break;
-                        //}
                     }
                 }
                 catch { }

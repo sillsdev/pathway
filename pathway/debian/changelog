@@ -1,5 +1,69 @@
-pathway (1.5.0.3369-1) unstable; urgency=high
+pathway (1.6.0.3470-1) unstable; urgency=high
 
+  * pathway 1.6.0 sprint
+    - Common: TD-3623 Ubuntu Preview doesn't have paragraph style
+    - Common: TD-3663 Linux details are not included in send button
+    - Common: TD-3683 list-style not recognized
+    - Common: TD-3720 Implement Paratext Bundle export in PathwayB
+    - Common: TD-3756 Update copyright year in About dialog and splash screen
+    - Common: TD-3757 update copyright year in settings
+    - Common: TD-3758 Updated copyright date not migrated to new settings file 
+    - Common: -ps-outline-level custom style in CSS for TOC 
+    - Common: Add test for A5, column gap 36pt, and page numbers on outside margins
+    - Common: Certain settings crash the test, start clean
+    - Common: Preprocessing option to add header above A a
+    - InDesign: Header font and size
+    - InDesign: Simplify InDesign Stylesheet
+    - LibreOffice: TD-3171 Add a checkbox that splits LO Output by Letter
+    - LibreOffice: TD-3189 Word are merged in PDF and Openoffice files
+    - LibreOffice: TD-3546 Picture comes in between the texts with Single Coloumn 
+    - LibreOffice: TD-3547 Pictures are always appear in the default place ... 
+    - LibreOffice: TD-3665 Glossary entry missing space after it. 
+    - LibreOffice: TD-3676 Make sure usfm &amp; custom styles are implemented 
+    - LibreOffice: TD-3680 Styles on rights page 
+    - LibreOffice: TD-3681 headers on even page don't look correct 
+    - LibreOffice: TD-3686 Tai dam font not showing up in pathway output
+    - LibreOffice: TD-3697 Libre Office hangs after Pathway creates output 
+    - LibreOffice: TD-3701 reference included to correct error
+    - LibreOffice: TD-3705 Remove the center tab stop for Dictionary 
+    - LibreOffice: TD-3706 Libre Office 4.1.3.2 compatibility 
+    - LibreOffice: TD-3708 columns ignore request to increase column gap 
+    - LibreOffice: TD-3716 Content starts on even page 
+    - LibreOffice: TD-3717 Blank page at beginning for reversal only export 
+    - LibreOffice: TD-3718 Spaces inserted inside square brackets in reversal 
+    - LibreOffice: TD-3719 Space inserted before punctuation following glossary entry 
+    - LibreOffice: TD-3719: Update test result
+    - LibreOffice: Reversal has spaces added inside parenthesis and before ; and :&" 
+    - LibreOffice: TD-3730 Footnote export error 
+    - LibreOffice: TD-3752 Tunen data TD-3754 space before homograph subscript 
+    - LibreOffice: guideword-length for guideword variables for Dictionary 
+    - LibreOffice: Read-Error in LibreOffice 4.1.3 
+    - LibreOffice: No header on reversal output
+    - LibreOffice: Changes for non-breaking spaces after verse number
+    - Paratext: TD-3698 Epub Export Error
+    - Paratext: TD-3709 Accessing Custom Style sheet crashes
+    - EReaders: TD-1360 Report Progress during GoBible Conversion
+    - EReaders: TD-3145 Get PathwayB working for GoBible Export
+    - EReaders: TD-3145 GoBible Output for Linux
+    - EReaders: TD-3491 Unrequested capitalization of captions
+    - EReaders: TD-3640 verse number increases the line spacing in EPUB
+    - EReaders: TD-3700 Scripture Epub not validating 
+    - EReaders: TD-3712 theWord Handle ShortNames as well as Abbreviations
+    - EReaders: TD-3721 GoBible sfm file doesn't have style tags, Handled empty tag
+    - EReaders: TD-3724 theWord Adjust link to not include http: or =
+    - EReaders: TD-3724 theWord space after footnote ref
+    - EReaders: TD-3725 theWord Handle right to left and bridges
+    - EReaders: TD-3747 theWord mt2 before mt1
+    - EReaders: TD-3748 theWord verse bridge with sequence seperator
+    - EReaders: TD-3750 Export Osis2mod conversion process for sword
+    - EReaders: TD-3755 theWord Don't remove .ont file
+    - EReaders: mySword Template revised to reflect arguments
+    - EReaders: theWord Remove duplicate mt2
+    - UI: TD-3699 Add Guideword Length in Configuration tool 
+    - XeLaTeX: TD-3696 adjust ethnologue link to work in xelatex
+    - XeLaTeX: TD-3710 Xelatex Crashes on Ramp Cleanup
+    - XeLaTeX: TD-3714 Xelatex PDF file automatically not open in linux
+    - XeLaTeX: Update rights statement expected output for XeLaTeX
   * pathway sprint 1.5.0
     - Common: TD-3218 Add archive entry creation
     - Common: TD-3591 Updated Logo - Image size reduced

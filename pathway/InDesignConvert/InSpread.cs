@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="InSpread.cs" from='2009' to='2010' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="InSpread.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -14,10 +14,8 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
 using System.Collections;
 using System.Globalization;
-using System.IO;
 using System.Collections.Generic;
 
 namespace SIL.PublishingSolution
@@ -105,7 +103,7 @@ namespace SIL.PublishingSolution
             {
                 GetPageClassName();
                 StartTextFrame(counter);
-                CreatePathPointArray(); // CODE HERE
+                CreatePathPointArray();
                 CreateTextFramePreference(_textFrameColumnClass[counter-1].ToString());
                 EndTextFrame();
                 _page++;
@@ -285,7 +283,6 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    //_pageClass = "@page:right";
                     _pageClass = "@page";
                 }
             }
@@ -337,7 +334,6 @@ namespace SIL.PublishingSolution
             {
                 masterSpreadName = "MasterLeft";
             }
-            //else if (_pageClass == "@page:right" && (_page % 2 == 1))
             else if (_pageClass == "@page" && (_page % 2 == 1))
             {
                 masterSpreadName = "MasterRight";
@@ -388,7 +384,6 @@ namespace SIL.PublishingSolution
                         string top = pageProperty[propertyName];
                         if(_useMasterGrid)
                         {
-                            //top = (float.Parse(_idAllClass[_pageClass]["Margin-Top"]) + 35F).ToString();
                             top = (float.Parse(_idAllClass[_pageClass]["Margin-Top"], CultureInfo.GetCultureInfo("en-US"))).ToString();
                         }
                         _writer.WriteAttributeString("Top", top);
@@ -397,7 +392,6 @@ namespace SIL.PublishingSolution
                         string bottom = pageProperty[propertyName];
                         if (_useMasterGrid)
                         {
-                            //bottom = (float.Parse(_idAllClass[_pageClass]["Margin-Bottom"]) + 35F).ToString();
                             bottom = (float.Parse(_idAllClass[_pageClass]["Margin-Bottom"], CultureInfo.GetCultureInfo("en-US"))).ToString();
                         }
                         _writer.WriteAttributeString("Bottom", bottom);

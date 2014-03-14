@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="MergeCss.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="MergeCss.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -122,7 +121,6 @@ namespace SIL.PublishingSolution
                     continue;
                 }
                 sw.WriteLine(line);
-                //sw.Write(sr.ReadToEnd());
             }
             sr.Close();
         }
@@ -137,12 +135,6 @@ namespace SIL.PublishingSolution
             ArrayList arrayCssFile = new ArrayList();
             string validName = Common.PathCombine(_cssPath, cssFileName);
             arrayCssFile = GetCssNameList(validName, arrayCssFile);
-            //if(arrayCSSFile.Count == 0) return validName; //
-            //if (arrayCssFile.Contains(validName))
-            //{
-            //    arrayCssFile.RemoveAt(arrayCssFile.IndexOf(validName));
-            //    arrayCssFile.Add(validName);
-            //}
             Common.RemovePreviousMirroredPage(arrayCssFile);
             for (int i = 0; i <= arrayCssFile.Count - 1; i++)
             {

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="Form1.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+//      Copyright ( c ) 2009, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -54,7 +54,7 @@ namespace TestBed
             dlg.Filter = "Cascading Style Sheet (*.css)|*.css";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                var clsBL = new CssParser();
+                var clsBL = new CssParserDuplicateClass();
                 TreeNode node = clsBL.BuildTree(dlg.FileName);
                 treeView1.Nodes.Clear();
                 treeView1.Nodes.Add((TreeNode)node.Clone());

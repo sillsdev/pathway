@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="InMetaData.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="InMetaData.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Export process used to Export the ODT and Prince PDF output
+// Creates the InMetaData file 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -73,15 +73,6 @@ namespace SIL.PublishingSolution
             {
                 nodeX.InnerText = getDate;
             }
-            //foreach (KeyValuePair<string, int> kvp in tableColumnModify)
-            //{
-            //    //table:table[@table:name="Table1"]/table:table-column
-            //    _xPath = "//table:table[@table:name=\"" + kvp.Key + "\"]/table:table-column";
-            //    XmlNode node = _root.SelectSingleNode(_xPath, nsmgr);
-            //    if (node == null) return;
-
-            //    node.Attributes[1].Value = kvp.Value.ToString();
-            //}
             _contentXMLdoc.Save(metaDataXMLPath);
         }
 

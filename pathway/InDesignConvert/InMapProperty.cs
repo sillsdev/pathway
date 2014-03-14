@@ -1,4 +1,19 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="InMapProperty.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Mapping with Indesign tags
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using SIL.Tool;
 
@@ -9,7 +24,6 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _IDProperty = new Dictionary<string, string>();
         private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
         private bool _IsKeepLineWrittern = false;
-        //TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
         public Dictionary<string, string> IDProperty(Dictionary<string, string> cssProperty)
         {
             _IDProperty.Clear();
@@ -195,12 +209,6 @@ namespace SIL.PublishingSolution
                 _IDProperty["ParagraphJustification"] = "ArabicJustification";
                 _IDProperty["Justification"] = "RightAlign";
             }
-            //_IDProperty["Composer"] = "HL Composer Optyca";
-            //_IDProperty["DigitsType"] = "DefaultDigits";
-            //_IDProperty["CharacterDirection"] = "LeftToRightDirection";
-            //_IDProperty["ParagraphDirection"] = "LeftToRightDirection";
-            //_IDProperty["ParagraphJustification"] = "DefaultJustification";
-            //_IDProperty["Justification"] = "LeftAlign";
         }
 
         private void Widows(string propertyValue)
@@ -319,7 +327,6 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            //if (propertyValue == "normal" || propertyValue == "100%")
             if (propertyValue == "normal")
                 propertyValue = "Auto";
 

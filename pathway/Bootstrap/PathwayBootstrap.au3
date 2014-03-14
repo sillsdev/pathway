@@ -47,7 +47,6 @@ Func DoUI()
 	EndIf
 	Global $LatestSuffix = 'Testing-' & IniRead("PathwayBuild.ini", "PathwayVersion", "buildNumber", "1.4.0.3429")
 	Global $Bootstrap_version = 'Version ' & IniRead("PathwayBuild.ini", "PathwayVersion", "buildNumber", "1.4.0.3429")
-	Global $BuildSequenceId = IniRead("PathwayBuild.ini", "PathwayVersion", "buildId", "29984")
 
 	If FileExists("License.rtf") Then
 		Welcome()

@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="ModifyIDStyles.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Modifying the styles
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -45,10 +61,6 @@ namespace SIL.PublishingSolution
             string paraStyle = "$ID/NormalParagraphStyle";
             string charStyle = "$ID/NormalCharacterStyle";
 
-            //if(baseStyle.Length > 0)
-            //{
-            //    paraStyle =  baseStyle;
-            //}
             CreateStyle(paraStyle, charStyle, usedStyleName);
             _styleXMLdoc.Save(styleFilePath);
             return _textVariables;
@@ -98,23 +110,13 @@ namespace SIL.PublishingSolution
             {
                 _textVariables.Add("hideVerseNumber_" + className);
             }
-            //else if (className.IndexOf("headword") == 0)
-            //{
-            //    _textVariables.Add("Guideword_" + className);
-            //}
-            //else if (className.IndexOf("xhomographnumber") == 0)
-            //{
-            //    _textVariables.Add("HomoGraphNumber_" + className);
-            //}
         }
 
         private void InsertNode(KeyValuePair<string, Dictionary<string, string>> className)
         {
             string newClassName = className.Key;
-            //string parentClassName = Common.RightString(newClassName, _styleSeperator);
 
             _node = _root.SelectSingleNode(_xPath, nsmgr);
-            //if (_node == null) return;
             XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
             styleNode.InnerXml = _node.OuterXml;
             _node.ParentNode.InsertAfter(styleNode, _node);
@@ -303,9 +305,6 @@ namespace SIL.PublishingSolution
                         int baseshift = 0;// pt * 2 / 3;
                         //int point = pt * 2/3;
                         nameElement.SetAttribute("BaselineShift", baseshift.ToString());
-
-                        //nameElement.SetAttribute("BaselineShift", "-" + baseshift);
-                        //nameElement.SetAttribute("PointSize", "-" + point);
                     }
                 }
             }
@@ -314,7 +313,6 @@ namespace SIL.PublishingSolution
         private string OpenIDStyles()
         {
             string projType = "scripture";
-            //string targetFolder = Common.PathCombine(Common.GetTempFolderPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projType);
             string targetFolder = Common.RightRemove(_projectPath, Path.DirectorySeparatorChar.ToString());
             targetFolder = Common.PathCombine(targetFolder, "Resources");
             string styleFilePath = Common.PathCombine(targetFolder, "Styles.xml");

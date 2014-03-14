@@ -138,6 +138,14 @@ namespace SIL.PublishingSolution.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
+        internal static System.Drawing.Bitmap Help_Image
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Help.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="ExportProcess.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="ExportInDesign.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Export process used to Export the ODT and Prince PDF output
+// Export process for Indesign
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -40,13 +40,8 @@ namespace SIL.PublishingSolution
 
         public bool Handle(string inputDataType)
         {
-            bool returnValue = false;
-            if (inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture")
-            {
-                returnValue = true;
-            }
+            bool returnValue = inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture";
             return returnValue;
-
         }   
 
         /// <summary>
@@ -56,14 +51,10 @@ namespace SIL.PublishingSolution
         {
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
-            //preProcessor.RemoveEmptySpanHeadword(preProcessor.ProcessedXhtml);
             preProcessor.InsertEmptyHeadwordForReversal(preProcessor.ProcessedXhtml);
             MergeProcessInXHTMLforMasterPage(preProcessor.ProcessedXhtml);
             preProcessor.PreserveSpace();
-            preProcessor.ImagePreprocess();
-            //preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
-            //preProcessor.InsertInDesignFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
-
+            preProcessor.ImagePreprocess(true);
             preProcessor.ReplaceInvalidTagtoSpan("_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes", "span");
             preProcessor.InsertHiddenChapterNumber();
             preProcessor.InsertHiddenVerseNumber();
@@ -81,11 +72,7 @@ namespace SIL.PublishingSolution
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            
             cssClass = MergeProcessInCSSforMasterPage(projInfo.DefaultCssFileWithPath, cssClass);
-
-            //return false;
             preProcessor.InsertEmptyXHomographNumber(cssClass);
 
             //To insert the variable for macro use
@@ -122,8 +109,12 @@ namespace SIL.PublishingSolution
             string ldmlFullName = Common.PathCombine(projInfo.DictionaryPath, fileName + ".idml");
             Compress(projInfo.TempOutputFolder, ldmlFullName);
 
-            Common.CleanupExportFolder(ldmlFullName, ".tmp,.de", "layout", string.Empty);
-            //CreateRAMP(projInfo);
+            Common.CleanupExportFolder(ldmlFullName, ".tmp,.de", "layout.css", String.Empty);
+
+            CreateRAMP(projInfo);
+
+            Common.CleanupExportFolder(ldmlFullName, ".css,.xhtml,.xml", String.Empty, String.Empty);
+
             if (projInfo.IsOpenOutput)
                 Launch(ldmlFullName);
 
@@ -151,7 +142,7 @@ namespace SIL.PublishingSolution
         private void CreateRAMP(PublicationInformation projInfo)
         {
             Ramp ramp = new Ramp();
-            ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".ldml", projInfo.ProjectInputType);
+            ramp.Create(Common.PathCombine(projInfo.DictionaryPath, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath.Replace("Preserve",""))), ".ldml", projInfo.ProjectInputType);
         }
 
         private Dictionary<string, Dictionary<string, string>> MergeProcessInCSSforMasterPage(string fileName, Dictionary<string, Dictionary<string, string>> cssClass)
@@ -216,7 +207,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-
         private bool ValidateXHTMLFiles(string[] fileNames)
         {
             bool result = false;
@@ -233,12 +223,9 @@ namespace SIL.PublishingSolution
             return result;
         }
 
-
-
         private void Compress(string sourceFolder, string ldmlFullName)
         {
             var mODT = new ZipFolder();
-            //string outputPathWithFileName = DefaultXhtmlFileWithPath.Replace(".xhtml", ".idml");
             mODT.CreateZip(sourceFolder, ldmlFullName, 0);
         }
 
@@ -264,7 +251,6 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-
         #endregion
     }
 }

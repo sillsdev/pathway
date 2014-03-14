@@ -1,13 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------
-#region // Copyright (c) 2010, SIL International. All Rights Reserved.
-// <copyright file="ScriptureContents.cs" from='2010' to='2010' company='SIL International'>
-//		Copyright (c) 2010, SIL International. All Rights Reserved.   
+// <copyright file="ScriptureContents.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright (C) 2014, SIL International. All Rights Reserved.   
 //    
-//		Distributable under the terms of either the Common Public License or the
-//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-#endregion
-// 
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed: 
@@ -31,11 +28,7 @@ namespace SIL.PublishingSolution
 
         public ScriptureContents()
         {
-            //Common.SupportFolder = "PathwaySupport";
 			Common.ProgBase = Common.GetPSApplicationPath();
-            // EDB TEST only
-            //_realClass = new PrintVia();
-            //((PrintVia)_realClass).InputType = "Scripture";
             _realClass = new ExportThroughPathway();
             ((ExportThroughPathway)_realClass).InputType = "Scripture";
         }

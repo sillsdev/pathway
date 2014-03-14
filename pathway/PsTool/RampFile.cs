@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="MergeCss.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="RampFile.cs" from='2013' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. 
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Combines all css into a single file by implementing @import
+// Prepare RAMP file objects
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -69,11 +69,5 @@ namespace SIL.PublishingSolution
             get { return _fileSilPublic; }
             set { _fileSilPublic = value; }
         }
-
-
-
-
-
-
     }
 }

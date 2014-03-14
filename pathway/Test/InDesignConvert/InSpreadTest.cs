@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="InSpreadTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// 
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -157,74 +173,6 @@ namespace Test.InDesignConvert
         }
 
         //[Test]
-        //public void PreviousFrameNameTest1()
-        //{
-        //    ClearFiles();
-        //    _spreadXML = new InSpread();
-        //    _methodName = "PreviousFrameNameTest1";
-        //    _cssProperty = _cssTree.CreateCssProperty(_inputCSS1);
-        //    _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-        //    _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, _columnClass);
-        //    _xPath = "//TextFrame";
-        //    _fileNameWithPath = Common.PathCombine(_outputSpread, "Spread_1.xml");
-        //    XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
-        //    XmlAttributeCollection attrb = node.Attributes;
-        //    string result = attrb["PreviousTextFrame"].Value;
-        //    Assert.AreEqual(result, "TF0", _methodName + " failed");
-        //}
-
-        //[Test]
-        //public void PreviousFrameNameTest2()
-        //{
-        //    ClearFiles();
-        //    _spreadXML = new InSpread();
-        //    _methodName = "PreviousFrameNameTest2";
-        //    _cssProperty = _cssTree.CreateCssProperty(_inputCSS1);
-        //    _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-        //    _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, _columnClass);
-        //    _xPath = "//TextFrame";
-        //    _fileNameWithPath = Common.PathCombine(_outputSpread, "Spread_2.xml");
-        //    XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
-        //    XmlAttributeCollection attrb = node.Attributes;
-        //    string result = attrb["PreviousTextFrame"].Value;
-        //    Assert.AreEqual(result, "TF1", _methodName + " failed");
-        //}
-
-        //[Test]
-        //public void NextFrameNameTest1()
-        //{
-        //    ClearFiles();
-        //    _spreadXML = new InSpread();
-        //    _methodName = "NextFrameNameTest1";
-        //    _cssProperty = _cssTree.CreateCssProperty(_inputCSS1);
-        //    _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-        //    _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, _columnClass);
-        //    _xPath = "//TextFrame";
-        //    _fileNameWithPath = Common.PathCombine(_outputSpread, "Spread_1.xml");
-        //    XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
-        //    XmlAttributeCollection attrb = node.Attributes;
-        //    string result = attrb["NextTextFrame"].Value;
-        //    Assert.AreEqual(result, "TF2", _methodName + " failed");
-        //}
-
-        //[Test]
-        //public void NextFrameNameTest2()
-        //{
-        //    ClearFiles();
-        //    _spreadXML = new InSpread();
-        //    _methodName = "NextFrameNameTest2";
-        //    _cssProperty = _cssTree.CreateCssProperty(_inputCSS2);
-        //    _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-        //    _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, _columnClass);
-        //    _xPath = "//TextFrame";
-        //    _fileNameWithPath = Common.PathCombine(_outputSpread, "Spread_2.xml");
-        //    XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
-        //    XmlAttributeCollection attrb = node.Attributes;
-        //    string result = attrb["NextTextFrame"].Value;
-        //    Assert.AreEqual(result, "TF3", _methodName + " failed");
-        //}
-
-        //[Test]
         public void MarginPreferenceTest()
         {
             ClearFiles();
@@ -264,21 +212,6 @@ namespace Test.InDesignConvert
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             Assert.IsTrue(nodesList.Count == 2, _methodName + " failed");
         }
-
-        //[Test]
-        //public void TextFrameCountTest()
-        //{
-        //    ClearFiles();
-        //    _spreadXML = new InSpread();
-        //    _methodName = "TextFrameCountTest";
-        //    _cssProperty = _cssTree.CreateCssProperty(_inputCSS2);
-        //    _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-        //    _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, _columnClass);
-        //    _xPath = "//TextFrame";
-        //    _fileNameWithPath = Common.PathCombine(_outputSpread, "Spread_2.xml");
-        //    nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
-        //    Assert.IsTrue(nodesList.Count == 2, _methodName + " failed");
-        //}
 
         [Test]
         public void PathPointTypeTest1()

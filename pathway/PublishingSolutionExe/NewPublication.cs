@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="NewDictionary.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="NewPublication.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -63,7 +63,6 @@ namespace SIL.PublishingSolution
             {
                 if (lstSourceCSS.SelectedIndex > 0)
                 {
-                    //Library lib = new Library();
                     webTemplatePreview.Visible = true;
                     cssFile = Common.PathCombine(Common.PathCombine(_supportFolder, _projectType), lstSourceCSS.Text);
                     _mergedCSS = Common.MakeSingleCSS(cssFile,"");
@@ -134,7 +133,6 @@ namespace SIL.PublishingSolution
              
                 XhtmlFile = txtXHTML.Text;
                 ProjectName = txtDicName.Text;
-                //m_projectName = Common.GetNewFolderName(m_dicPath, projectType, _projectName);
                 DicPath = txtLocation.Text;
                 if (!Directory.Exists(DicPath))
                 {
@@ -156,11 +154,6 @@ namespace SIL.PublishingSolution
                 if (numberIndex > 0)
                     fileName = fileName.Substring(0, numberIndex);
             }
-            //else
-            //{
-            //    fileName = "Dictionary";
-            //}
-            //txtDicName.Text = Common.GetNewFolderName(DicPath, fileName);
         }
 
         private void txtDicName_KeyPress(object sender, KeyPressEventArgs e)

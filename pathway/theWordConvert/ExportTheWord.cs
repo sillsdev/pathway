@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------
-// <copyright file="ExportTheWord.cs" from='2012' to='2012' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.
+// <copyright file="ExportTheWord.cs" from='2012' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
 //
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -34,6 +34,8 @@ namespace SIL.PublishingSolution
         protected static string Ssf;
         protected static bool R2l;
         private static object _theWorProgPath;
+        protected static bool _hasMessages = false;
+        protected static string _messageFullName;
 
         protected static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
 
@@ -106,6 +108,8 @@ namespace SIL.PublishingSolution
                 var output = GetSsfValue("//EthnologueCode", "zxx");
                 var fullName = UsxDir(exportTheWordInputPath);
                 LogStatus("Processing: {0}", fullName);
+                xsltArgs.XsltMessageEncountered += XsltMessage;
+                _messageFullName = Common.PathCombine(exportTheWordInputPath, "Messages.html");
 
                 var codeNames = new Dictionary<string, string>();
                 var otFlag = OtFlag(fullName, codeNames, otBooks);
@@ -115,6 +119,13 @@ namespace SIL.PublishingSolution
                 var resultName = output + (otFlag ? ".ont" : ".nt");
                 var resultFullName = Common.PathCombine(exportTheWordInputPath, resultName);
                 ProcessAllBooks(resultFullName, otFlag, otBooks, ntBooks, codeNames, xsltArgs, inProcess);
+
+                if (_hasMessages)
+                {
+                    XsltMessageClose();
+                    DisplayMessageReport();
+                }
+                xsltArgs.XsltMessageEncountered -= XsltMessage;
 
                 string theWordFullPath = Common.FromRegistry("TheWord");
                 string tempTheWordCreatorPath = TheWordCreatorTempDirectory(theWordFullPath);
@@ -136,7 +147,7 @@ namespace SIL.PublishingSolution
 
                 success = ReportResults(resultFullName, mySwordResult, exportTheWordInputPath);
 
-                Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout", string.Empty);
+                Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout.css", string.Empty);
                 CreateRAMP(projInfo);
             }
             catch (Exception ex)
@@ -149,6 +160,24 @@ namespace SIL.PublishingSolution
                 ReportFailure(ex);
             }
             return success;
+        }
+
+        private void DisplayMessageReport()
+        {
+            var result = MessageBox.Show("Display issues encountered during conversion?", "theWord Conversion Messages",
+                                         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error,
+                                         MessageBoxDefaultButton.Button1);
+            switch (result)
+            {
+                case DialogResult.Yes:
+                    Process.Start(_messageFullName);
+                    break;
+                case DialogResult.No:
+                    break;
+                case DialogResult.Cancel:
+                    File.Delete(_messageFullName);
+                    break;
+            }
         }
 
         private void CreateRAMP(PublicationInformation projInfo)
@@ -207,16 +236,7 @@ namespace SIL.PublishingSolution
 
         private static void ReportWhenTheWordNotInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
         {
-            string msgFormat = @"Do you want to open the folder with the results?
-
-● Click Yes.
-
-The folder with the ""{0}"" file ({2}) will open so you can manually copy it to {1}.
-
-The MySword file ""{3}"" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. 
-
-● Click Cancel to do neither of the above.
-";
+            string msgFormat = "Do you want to open the folder with the results?\n\n\u25CF Click Yes.\n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n";
             string resultName = Path.GetFileName(resultFullName);
             string resultDir = Path.GetDirectoryName(resultFullName);
             string msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
@@ -231,20 +251,7 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
 
         private static void ReportWhenTheWordInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
         {
-            string msgFormat = @"Do you want to start theWord?
-
-● Click Yes.
-
-The program will copy the ""{0}"" file to {1} and start theWord. 
-
-● Click No. 
-
-The folder with the ""{0}"" file ({2}) will open so you can manually copy it to {1}.
-
-The MySword file ""{3}"" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. 
-
-● Click Cancel to do neither of the above.
-";
+            string msgFormat = "Do you want to start theWord?\n\n\u25CF Click Yes.\n\nThe program will copy the \"{0}\" file to {1} and start theWord. \n\n\u25CF Click No. \n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n";
             string resultName = Path.GetFileName(resultFullName);
             string resultDir = Path.GetDirectoryName(resultFullName);
             string msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
@@ -273,7 +280,6 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
             Param.LoadSettings();
             Param.SetValue(Param.InputType, "Scripture");
             Param.LoadSettings();
-            //string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
         }
 
         protected static void LoadXslt()
@@ -318,6 +324,26 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
             ProcessTestament(ntBooks, codeNames, xsltArgs, sw, inProcess);
             AttachMetadata(sw);
             sw.Close();
+        }
+
+        protected static StreamWriter MessageStream;
+        public static void XsltMessage(object o, XsltMessageEncounteredEventArgs a)
+        {
+            LogStatus("Message {0}", a.Message);
+            if (!_hasMessages)
+            {
+                _hasMessages = true;
+                MessageStream = new StreamWriter(_messageFullName);
+                MessageStream.WriteLine("<html><head><title>theWord conversion messages</title></head>\n<body>\n<ul>");
+            }
+            MessageStream.WriteLine("<li>{0}</li>", a.Message);
+        }
+
+        public static void XsltMessageClose()
+        {
+            MessageStream.WriteLine("</ul>\n</body>\n");
+            MessageStream.Close();
+            _hasMessages = false;
         }
 
         protected static void ProcessTestament(IEnumerable<string> books, Dictionary<string, string> codeNames, XsltArgumentList xsltArgs,
@@ -494,7 +520,8 @@ The MySword file ""{3}"" is also there so you can copy it to your Android device
 
         private void AttachMetadata(StreamWriter sw)
         {
-            var format = @"id=W{0}
+            var format = @"verse.rule=""(<a href[^>]+>)(.*?)(</a>)"" ""$1<font color=defclr6>$2</font>$3""
+id=W{0}
 charset=0
 lang={0}
 font={9}
@@ -542,7 +569,11 @@ about={2} \
             var fullPath = Common.PathCombine(Common.PathCombine(folder, "Scripture"), thewordformatTxt);
             if (File.Exists(fullPath))
             {
-                return FileData.Get(fullPath);
+                var curFormat = FileData.Get(fullPath);
+                if (curFormat.StartsWith("verse.rule")) //TD-3785 verse rule is necessary
+                {
+                    return curFormat;
+                }
             }
             var sw = new StreamWriter(fullPath);
             sw.Write(format);

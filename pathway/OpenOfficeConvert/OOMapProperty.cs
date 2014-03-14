@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="OOMapProperty.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Mapping with Libre Office property
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -23,7 +39,6 @@ namespace SIL.PublishingSolution
             CreateUnit();
         }
 
-        //TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
         public Dictionary<string, string> IDProperty(Dictionary<string, string> cssProperty, bool isFixedLineHeightEnable)
         {
             _IDProperty.Clear();
@@ -147,7 +162,6 @@ namespace SIL.PublishingSolution
                     case "vertical-align":
                         VerticalAlign(property.Value);
                         break;
-                    //case "-ps-fixed-line-height":
                     case "line-height":
                         LineHeight(property.Value, cssProperty);
                         break;
@@ -205,10 +219,6 @@ namespace SIL.PublishingSolution
                     case "pathway":
                         Pathway(property.Value);
                         break;
-                    //case "list-style-position":
-                    //    ListStyle(property.Value);
-                    //    break;
-
                     default:
                         SimpleProperty(property);
                         break;
@@ -220,21 +230,17 @@ namespace SIL.PublishingSolution
 
         private void ColumnRule(string propertyValue)
         {
-            //_propertyKey = ""
             _IDProperty[_propertyKey] = propertyValue;
         }
 
         private void ColumnColor(string propertyValue)
         {
             propertyValue = ColorConversion(propertyValue);
-            //_propertyKey = "color";
-
             _IDProperty[_propertyKey] = propertyValue;
         }
 
         private void ColumnWidth(string propertyValue)
         {
-            //_propertyKey = "width";
             _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
 
@@ -295,8 +301,6 @@ namespace SIL.PublishingSolution
         private void Orphans(string propertyValue)
         {
             _IDProperty[_propertyKey] = propertyValue;
-
-            //AddKeepLinesTogetherProperty();
         }
 
         private void AddKeepLinesTogetherProperty()
@@ -339,36 +343,10 @@ namespace SIL.PublishingSolution
         public void SimpleProperty(KeyValuePair<string, string> property)
         {
             _IDProperty[property.Key.ToLower()] = property.Value;
-            //switch (property.Key.ToLower())
-            //{
-            //        case "text-align":
-            //        //case "clear":
-            //        //case "white-space":
-            //        //case "counter-increment":
-            //        //case "counter-reset":
-            //        //case "content":
-            //        //case "position":
-            //        //case "left":
-            //        //case "right":
-            //        //case "width":
-            //        //case "height":
-            //        //case "visibility":
-            //        _IDProperty[property.Key.ToLower()] = property.Value;
-            //        break;
-
-            //    default:
-            //        _IDProperty[property.Key.ToLower()] = property.Value;
-            //        break;
-            //        //throw new Exception("Not a valid CSS Command");
-            //}
         }
 
         public void LineHeight(string propertyValue, Dictionary<string, string> cssProperty)
           {
-            //_propertyKey = "line-spacing";
-            //if (_isFixedLineHeightEnable)
-            //    _propertyKey = "line-height";
-
             if (_isFixedLineHeightEnable)
             {
                 _propertyKey = "line-height";
@@ -593,14 +571,12 @@ namespace SIL.PublishingSolution
         {
             string PsSupportPath = Common.GetPSApplicationPath();
             string[] font = propertyValue.Split(',');
-            string familyName = string.Empty;
             int fontLength = font.Length;
             if (fontLength == 0)
             {
                 return;
             }
 
-            //var familyName = new[] { "serif", "sans-serif", "cursive", "fantasy", "monospace" };
             string fontName = string.Empty;
             System.Drawing.FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
             for (int counter = 0; counter < fontLength; counter++)
@@ -617,12 +593,6 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            //if (font[0].Length > 0)
-            //    _verboseWriter.WriteError(attributeInfo.ClassName, attributeInfo.Name, "Missing Font",
-            //                              font[0].Replace("\"", "").Replace("'", ""));
-
-
-
             string genericFamily = font[fontLength - 1];
             genericFamily = genericFamily.Replace("\"", "").Trim().ToLower();
             ArrayList genericFamilyList = new ArrayList(new[] { "serif", "sans-serif", "cursive", "fantasy", "monospace" });
@@ -630,7 +600,6 @@ namespace SIL.PublishingSolution
             fontName = font[0];
             if (genericFamilyList.Contains(genericFamily))
             {
-                //string xmlFileNameWithPath = Common.PathCombine(Common.GetPSApplicationPath(), "GenericFont.xml");
                 string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
                 string xPath = "//font-preference/generic-family [@name = \"" + genericFamily + "\"]";
                 ArrayList fontList = new ArrayList();
@@ -689,11 +658,6 @@ namespace SIL.PublishingSolution
 
         public void ColumnCount(string propertyValue)
         {
-            //if (propertyValue == string.Empty || Common.ValidateAlphabets(propertyValue) //Note - good validation
-            //    || propertyValue.IndexOf('-') > -1)
-            //{
-            //    _IDProperty["TextColumnCount"] = "1";
-            //}
             if (_propertyKey == "columns")
             {
                 _propertyKey = "column-count";
@@ -748,7 +712,6 @@ namespace SIL.PublishingSolution
             else
             {
                 return;
-                //throw new Exception("Input is not valid");
             }
             _IDProperty[propertyName] = propertyValue;
         }
@@ -793,13 +756,8 @@ namespace SIL.PublishingSolution
             }
             else if (propertyValue == "smaller" || propertyValue == "larger")
             {
-                propertyValue = propertyValue;
                 _IDProperty[_propertyKey] = propertyValue;
                 return;
-            }
-            else
-            {
-                propertyValue = propertyValue;
             }
             _IDProperty[_propertyKey] = Add_pt(propertyValue); 
         }
@@ -870,8 +828,6 @@ namespace SIL.PublishingSolution
 
         public void Display(string propertyValue)
         {
-            //propertyValue = propertyValue == "none" ? "true" : "false";
-            //if(propertyValue == "none") propertyValue = "true";
             _IDProperty[_propertyKey] = propertyValue;
         }
 
@@ -940,7 +896,6 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         private static string ColorRGB(string attributeStringValue)
         {
-            //string StringValue = "rgb(125,255,255)";
             try
             {
 
@@ -968,31 +923,6 @@ namespace SIL.PublishingSolution
                 throw new Exception(ex.Message);
             }
         }
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Converts #f00 to "#ff0000" format
-        /// 
-        /// <list>
-        /// </list>
-        /// </summary>
-        /// <param name="AttributeStringValue">attribute value like #f00</param>
-        /// <returns>"#ff0000" format data</returns>
-        /// -------------------------------------------------------------------------------------------
-        //private string ColorHash(string StringValue)
-        //{
-        //    string retValue;
-        //    int colorLen = StringValue.Length;
-        //    if (colorLen == 4)
-        //    {
-        //        retValue = "#" + StringValue[1] + StringValue[1] + StringValue[2] + StringValue[2] + StringValue[3] + StringValue[3] ;
-        //        return retValue;
-        //    }
-        //    else
-        //    {
-        //        return StringValue;
-        //    }
-        //}
-        ///// -------------------------------------------------------------------------------------------
 
         private static string ColorHash(string attributeStringValue)
         {
@@ -1059,7 +989,6 @@ namespace SIL.PublishingSolution
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
-                //return "rgb" + ",(," + "0" + "," + "0" + "," + "0" + ",)"; // black color
                 throw new Exception("Parameter Length - Not Valid");
             }
         }
@@ -1276,8 +1205,6 @@ namespace SIL.PublishingSolution
                         newValue /= 100;
                         newValue -= 1;
                         unit = "em";
-                        //m_strVal = newValue.ToString() + "-em";
-                        //return (m_strVal);
                     }
                     else if (lineHeight && unit == "pt")
                     {

@@ -1,10 +1,25 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="ModifyLOStyles.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Modify the OOStyle file
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -47,8 +62,6 @@ namespace SIL.PublishingSolution
             _parentClass = parentClass;
             string styleFilePath = OpenIDStyles(); //todo change name
             SetHeaderFontName(styleFilePath, odmMTFont);
-            //nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
-            //nsmgr.AddNamespace("idPkg", "http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging");
             nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             nsmgr.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
@@ -60,13 +73,9 @@ namespace SIL.PublishingSolution
                 return null;
             }
 
-            string paraStyle = "Empty";// "$ID/NormalParagraphStyle";
-            string charStyle = "Empty";//"$ID/NormalCharacterStyle";
+            string paraStyle = "Empty";
+            string charStyle = "Empty";
 
-            //if(baseStyle.Length > 0)
-            //{
-            //    paraStyle =  baseStyle;
-            //}
             CreateStyle(paraStyle, charStyle, usedStyleName);
             _styleXMLdoc.Save(styleFilePath);
 
@@ -77,8 +86,6 @@ namespace SIL.PublishingSolution
 
         public void SetHeaderFontName(string styleFilePath, string odmMTFont)
         {
-            //headword_entry_letData_dicBody
-
             if (styleFilePath.ToLower().IndexOf("dictionary") > 0)
             {
                 _styleXMLdoc = new XmlDocument();
@@ -113,7 +120,7 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            else//Scripture
+            else //Scripture
             {
                 _styleXMLdoc = new XmlDocument();
                 _styleXMLdoc.Load(styleFilePath);
@@ -142,7 +149,6 @@ namespace SIL.PublishingSolution
             _styleXMLdoc.Load(styleFilePath);
             var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
-            //office:font-face-decls
             // if new stylename exists
             XmlElement root = _styleXMLdoc.DocumentElement;
             string style = "//office:font-face-decls";
@@ -155,7 +161,6 @@ namespace SIL.PublishingSolution
                 }
                 foreach (string s in font)
                 {
-                    //style:font-face style:name="Gautami" svg:font-family="'Gautami'"
                     XmlNode styleNode = node.FirstChild.CloneNode(true);
                     node.AppendChild(styleNode);
                     XmlAttributeCollection attrColl = styleNode.Attributes;
@@ -171,18 +176,15 @@ namespace SIL.PublishingSolution
             if (Common.Testing) return;
             string f7Path = Common.PathCombine(Common.GetFiledWorksPathVersion(), "Projects\\" + Common.databaseName + "\\WritingSystemStore");
             fontLangMap = Common.FillMappedFonts(f7Path, fontLangMap);
-            //MessageBox.Show("Common.databaseName -> " + Common.databaseName + " = " + f7Path + fontLangMap.Count);
 
             if (fontLangMap.Count == 0)
             {
                 string wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore");
                 fontLangMap = Common.FillMappedFonts(wsPath, fontLangMap);
-                //MessageBox.Show("SIL/WritingSystemStore -> " + fontLangMap.Count);
             }
             if (fontLangMap.Count == 0)
             {
                 fontLangMap = Common.FillMappedFonts(fontLangMap);
-                //MessageBox.Show("GenericFont -> " + fontLangMap.Count);
             }
         }
 
@@ -194,16 +196,8 @@ namespace SIL.PublishingSolution
             {
                 if (!usedStyleName.Contains(className.Key))
                     continue;
-                //SetVisibilityColor(className);
-                //_tagType = "paragraph";
-                //_xPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + paraStyle + "\"]";
-                //_xPath = "//st:style[@st:name=\"" + paraStyle + "\"]";
                 _xPath = "//style:style[@style:name=\"" + paraStyle + "\"]";
                 InsertNode(className);
-                //_tagType = "text";
-                //_xPath = "//st:style[@st:name=\"" + charStyle + "\"]";
-                //InsertNode(className);
-                //GetVariableClassName(className.Key);
             }
         }
 
@@ -211,7 +205,7 @@ namespace SIL.PublishingSolution
         private void InsertNode(KeyValuePair<string, Dictionary<string, string>> className)
         {
             string newClassName = className.Key;
-            //string parentClassName = Common.RightString(newClassName, _styleSeperator);
+
             string[] parent_Type = _parentClass[newClassName].Split('|');
 
             string familyType = parent_Type[1] == "div" ? "paragraph" : "text";
@@ -232,6 +226,14 @@ namespace SIL.PublishingSolution
 
             attribute = "style:parent-style-name";
             SetAttribute(parent_Type[0], attribute);
+
+            if (className.Value.ContainsKey("-ps-outline-level"))
+            {
+                attribute = "style:default-outline-level";
+                SetAttribute(className.Value["-ps-outline-level"], attribute);
+                SetAttribute("", "style:list-style-name");
+                SetAttribute("", "style:master-page-name");
+            }
 
             attribute = "master-page-name";
             if (newClassName.ToLower().IndexOf("coverimage") == 0)
@@ -256,7 +258,6 @@ namespace SIL.PublishingSolution
                 SetAttribute("Dummy_20_Page", attribute);
             }
 
-            //style:family="paragraph" style:parent-style-name="none">
             SetTagProperty(className.Key);
             AddParaTextNode(className, _node, familyType);
         }
@@ -294,13 +295,12 @@ namespace SIL.PublishingSolution
         /// <param name="familyType"></param>
         private void BackgroundColorSpan(Dictionary<string, string> para, Dictionary<string, string> text,string familyType)
         {
-            string backColorKey = "fo:background-color";
+            const string backColorKey = "fo:background-color";
             if (para.ContainsKey(backColorKey) && familyType == "text")
             {
                 text[backColorKey] = para[backColorKey];
                 para.Remove(backColorKey);
             }
-            
         }
 
         private void AddParaTextNode(KeyValuePair<string, Dictionary<string, string>> className, XmlNode node, string familyType)
@@ -345,11 +345,11 @@ namespace SIL.PublishingSolution
 
             BackgroundColorSpan(_paragraphProperty, _textProperty, familyType);
             DropCaps(_paragraphProperty, _textProperty);
+            string _lang = string.Empty;
             if (_languageStyleName.ContainsKey(className.Key))
             {
                 string language, country;
                 Common.GetCountryCode(out language, out country, _languageStyleName[className.Key], _spellCheck);
-                string _lang = string.Empty;
 
                 string lg = Common.RightString(className.Key,"_");
                 if (lg.StartsWith("."))
@@ -362,8 +362,6 @@ namespace SIL.PublishingSolution
                     {
                         string fname = fontLangMap[_lang];
                         if (!_textProperty.ContainsKey("fo:font-family") || (_textProperty.ContainsKey("fo:font-family") && _textProperty["fo:font-family"] != fname))
-                        //if (!_textProperty.ContainsKey("fo:font-family") ||
-                          //(_textProperty.ContainsKey("fo:font-family") && _textProperty["fo:font-family"] == _defaultFont))
                         {
                             _textProperty["fo:font-family"] = fname;
                             _textProperty["style:font-name-complex"] = fname;
@@ -402,7 +400,6 @@ namespace SIL.PublishingSolution
                     string[] property = para.Key.Split(':');
                     string ns = property[0];
                     string prop = property[1];
-                    //_nameElement.SetAttribute(prop, nsmgr.LookupNamespace(ns), para.Value);
                     SetAttributeNS(prop,ns,para.Value);
                 }
 
@@ -430,9 +427,7 @@ namespace SIL.PublishingSolution
                 {
                     string[] property = para.Key.Split(':');
                     string ns = property[0];
-                    //if (ns == "st") ns = "style";
                     string prop = property[1];
-                    //_nameElement.SetAttribute(prop, nsmgr.LookupNamespace(ns), para.Value);
                     SetAttributeNS(prop, ns, para.Value);
                 }
             }
@@ -473,7 +468,6 @@ namespace SIL.PublishingSolution
 
         private void CreateColumnXMLFile(string className)
         {
-            //_styleName.SectionName.Add(className.Trim());
             string path = Common.PathCombine(Path.GetTempPath(), "_" + className.Trim() + ".xml");
 
             XmlTextWriter writerCol = new XmlTextWriter(path, null);
@@ -695,7 +689,6 @@ namespace SIL.PublishingSolution
                     else
                     {
                         ArrayList arLang = new ArrayList();
-                        //arLang = _styleName.AttribAncestor[coun];
                         arLang.Add(coun);
                         _spellCheck[lang] = arLang;
                     }
@@ -748,7 +741,6 @@ namespace SIL.PublishingSolution
                 node.ParentNode.InsertAfter(styleNode, node);
 
                 _nameElement = (XmlElement)node;
-                //nameElement.SetAttribute("style:name", makeClassName);
                 SetAttribute(makeClassName, "style:name");
                 if (side == "none" || side == "NoClear")
                 {
@@ -769,7 +761,6 @@ namespace SIL.PublishingSolution
                 if (position == "right" || position == "left" || position == "center")
                 {
                     _nameElement = (XmlElement)node.ChildNodes[1];
-                    //nameGraphicElement.SetAttribute("style:run-through", "foreground");
                     SetAttribute( "foreground","style:run-through");
                     if (side == "Invalid")
                     {
@@ -777,32 +768,23 @@ namespace SIL.PublishingSolution
                     }
                     else if (side == "right" || side == "left")
                     {
-                        //nameGraphicElement.SetAttribute("style:wrap", side);
                         SetAttribute("side","style:wrap");
                     }
                     else if (side == "center")
                     {
-                        //nameGraphicElement.SetAttribute("style:wrap", "none");
                         SetAttribute("none","style:wrap");
                     }
                     else
                     {
-                        //nameGraphicElement.SetAttribute("style:wrap", "dynamic");
                         SetAttribute("parallel", "style:wrap");
                     }
-                    //nameGraphicElement.SetAttribute("style:number-wrapped-paragraphs", "no-limit");
                     SetAttribute("no-limit","style:number-wrapped-paragraphs");
-                    //nameGraphicElement.SetAttribute("style:wrap-contour", "false");
                     SetAttribute("false", "style:wrap-contour");
-                    //nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
                     SetAttribute( "from-top","style:vertical-pos");
-                    //nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
-                    SetAttribute("paragraph", "style:vertical-rel");
-                    //nameGraphicElement.SetAttribute("style:horizontal-pos", position);
+                    SetAttribute("paragraph-content", "style:vertical-rel");
                     SetAttribute(position,"style:horizontal-pos" );
-                    //nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
-                    // this is for text flow
-                    //nameGraphicElement.SetAttribute("style:flow-with-text", "true");
+                    SetAttribute("paragraph", "style:horizontal-rel");
+                    SetAttribute("true", "style:flow-with-text");
                 }
                 else if (position == "both")
                 {
@@ -839,9 +821,6 @@ namespace SIL.PublishingSolution
                     SetAttribute("from-left", "style:horizontal-pos");
                     SetAttribute("paragraph","style:horizontal-rel");
                 }
-                //if (position != "center")
-                //    SetAttributeNS("fo:margin-left", "fo", "5.7pt");
-                //SetAttributeNS("fo:margin-left", "fo", "5.7pt");
             }
             _styleXMLdoc.Save(styleFilePath);
         }
@@ -896,42 +875,15 @@ namespace SIL.PublishingSolution
                 if (position == "right" || position == "left" || position == "center")
                 {
                     _nameElement = (XmlElement)node.ChildNodes[1];
-                    //nameGraphicElement.SetAttribute("style:run-through", "foreground");
                     SetAttribute("foreground", "style:run-through");
-                    //if (side == "Invalid")
-                    //{
-
-                    //}
-                    //else if (side == "right" || side == "left")
-                    //{
-                    //    //nameGraphicElement.SetAttribute("style:wrap", side);
-                    //    SetAttribute("side", "style:wrap");
-                    //}
-                    //else if (side == "center")
-                    //{
-                    //    //nameGraphicElement.SetAttribute("style:wrap", "none");
-                    //    SetAttribute("none", "style:wrap");
-                    //}
-                    //else
-                    //{
-                    //    //nameGraphicElement.SetAttribute("style:wrap", "dynamic");
-                    //    SetAttribute("parallel", "style:wrap");
-                    //}
                     SetAttribute("dynamic", "style:wrap");
-                    //nameGraphicElement.SetAttribute("style:number-wrapped-paragraphs", "no-limit");
                     SetAttribute("no-limit", "style:number-wrapped-paragraphs");
-                    //nameGraphicElement.SetAttribute("style:wrap-contour", "false");
                     SetAttribute("false", "style:wrap-contour");
-                    //nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
                     SetAttribute("from-top", "style:vertical-pos");
-                    //nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
-                    SetAttribute("paragraph", "style:vertical-rel");
-                    //nameGraphicElement.SetAttribute("style:horizontal-pos", position);
+                    SetAttribute("paragraph-content", "style:vertical-rel");
                     SetAttribute(position, "style:horizontal-pos");
-                    
-                    //nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
-                    // this is for text flow
-                    //nameGraphicElement.SetAttribute("style:flow-with-text", "true");
+                    SetAttribute("paragraph", "style:horizontal-rel");
+                    SetAttribute("true", "style:flow-with-text");
                 }
                 else if (position == "both")
                 {
@@ -1018,12 +970,6 @@ namespace SIL.PublishingSolution
                         {
                             if (chNode.Name == "style:drop-cap")
                             {
-                                //if (childNode.Attributes.GetNamedItem("style:lines") != null)  // if needed we can use this for no of lines.
-                                //{
-                                //    attribToBeChanged = childNode.Attributes["style:lines"];
-                                //    attribToBeChanged.Value = noOfChar.ToString();
-                                //}
-
                                 if (chNode.Attributes.GetNamedItem("style:length") != null)
                                 {
                                     attribToBeChanged = chNode.Attributes["style:length"];
@@ -1055,7 +1001,6 @@ namespace SIL.PublishingSolution
                 parentName = parentName.Replace("1", "");
                 _nameElement = (XmlElement)node;
                 SetAttribute(makeClassName, "style:name");
-                //SetAttribute(parentName, "style:parent-style-name");
                 SetAttribute(className, "style:parent-style-name");
                 SetAttribute("", "style:master-page-name");
             }
@@ -1225,10 +1170,7 @@ namespace SIL.PublishingSolution
         private string OpenIDStyles()
         {
             string projType = "scripture";
-            //string targetFolder = Common.PathCombine(Common.GetTempFolderPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projType);
             string targetFolder = Common.RightRemove(_projectPath, Path.DirectorySeparatorChar.ToString());
-            //targetFolder = Common.PathCombine(targetFolder, "Resources");
-            //string styleFilePath = Common.PathCombine(targetFolder, "Styles.xml");
             string fileName = Path.GetFileNameWithoutExtension(_projectPath);
             string styleFilePath = Common.PathCombine(targetFolder, fileName + "styles.xml");
 
@@ -1242,7 +1184,7 @@ namespace SIL.PublishingSolution
             _tagName = Common.IsTagClass(newClassName);
             if (_tagName != string.Empty)
             {
-                if (_tagName == "ul" || _tagName == "ol") // ul or ol
+                if (_tagName == "ul" || _tagName == "ol")
                 {
                     _nameElement.SetAttribute("text:level", "1");
                     _nameElement.SetAttribute("text:style-name", "Bullet_20_Symbols");

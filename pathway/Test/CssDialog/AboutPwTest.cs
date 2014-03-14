@@ -1,17 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
-#region // Copyright © 2012, SIL International. All Rights Reserved.
-// <copyright file="AboutPwTest.cs" from='2012' to='2012' company='SIL International'>
-//		Copyright © 2012, SIL International. All Rights Reserved.   
+// <copyright file="AboutPwTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
-//		Distributable under the terms of either the Common Public License or the
-//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-#endregion
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed: 
 // 
 // <remarks>
+// 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 

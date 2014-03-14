@@ -236,6 +236,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileSplit.cs" />
     <Compile Include="ModifyOOContent.cs" />
     <Compile Include="ModifyOOStyles.cs" />
     <Compile Include="OldStyles.cs">

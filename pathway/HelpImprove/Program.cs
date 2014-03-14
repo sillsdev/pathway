@@ -48,16 +48,6 @@ namespace SIL.PublishingSolution
             Console.Write("Exit \r\n");
 
             System.Environment.Exit(1);
-
-            //string sendUsageData = Common.GetValueFromRegistryFromCurrentUser("Software\\Wow6432Node\\SIL\\Pathway", "HelpImprove");
-            //UserInformation user = new UserInformation();
-            //if (sendUsageData != null && sendUsageData.ToLower() == "yes")
-            //{
-            //    if (user.CheckInternetAvailability("204.93.172.30"))
-            //    {
-            //        user.GetUserInformation(true);
-            //    }
-            //}
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------
-// <copyright file="ExportGoBible.cs" from='2012' to='2012' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.
+// <copyright file="ExportGoBible.cs" from='2012' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
 //
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -138,8 +138,6 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
                 if (File.Exists(jarFile))
                 {
-
-                    //DeleteTempFiles(exportGoBibleInputPath);
                     Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", string.Empty, string.Empty);
                     CreateRAMP(projInfo);
                     Common.DeleteDirectory(tempGoBibleCreatorPath);
@@ -157,7 +155,6 @@ namespace SIL.PublishingSolution
                     {
                         string dirPath = Path.GetDirectoryName(jarFile);
                         Process.Start(dirPath);
-                        //Process.Start("explorer.exe", dirPath);
                     }
                     
                 }
@@ -319,7 +316,6 @@ namespace SIL.PublishingSolution
                 sw.WriteLine("Phone-Icon-Filepath: Icon.png");
                 sw.WriteLine("Application-Name: " + GetInfo(Param.Title));
                 sw.WriteLine("MIDlet-Vendor: " + GetInfo(Param.Title) + " Vendor");
-                //sw.WriteLine("MIDlet-Description: " + " Sample text for GoBible description");
                 sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org");
                 sw.WriteLine("Codepage: UTF-8");
                 sw.WriteLine("RedLettering: false");
@@ -398,12 +394,6 @@ namespace SIL.PublishingSolution
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
             var creatorFullPath = Common.PathCombine(goBibleCreatorPath, Creator);
-
-            //if (_isLinux)
-            //{
-            //    creatorFullPath = "/usr/share/gobiblecreator/GoBibleCreator.244/GoBibleCreator.jar";
-            //}
-
             var progFolder = SubProcess.JavaLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);
             if (progFullName.EndsWith(".exe"))
@@ -412,9 +402,6 @@ namespace SIL.PublishingSolution
             }
             collectionFullName = Common.PathCombine(processFolder, "Collections.txt");
             var args = string.Format(@" -Xmx128m -jar ""{0}""  ""{1}""", creatorFullPath, collectionFullName);
-
-            //var args = "-Xmx128m -jar " + @"""" + creatorFullPath + @"""" + " " + @"""" + collectionFullName + @"""";
-
             SubProcess.RedirectOutput = RedirectOutputFileName;
             SubProcess.RunCommand(processFolder, "java", args, true);
         }

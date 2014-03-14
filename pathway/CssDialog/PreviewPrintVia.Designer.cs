@@ -44,7 +44,8 @@
             // 
             // BtnOk
             // 
-            this.BtnOk.Location = new System.Drawing.Point(396, 417);
+            this.BtnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnOk.Location = new System.Drawing.Point(535, 518);
             this.BtnOk.Name = "BtnOk";
             this.BtnOk.Size = new System.Drawing.Size(75, 23);
             this.BtnOk.TabIndex = 2;
@@ -54,7 +55,8 @@
             // 
             // BtnCancel
             // 
-            this.BtnCancel.Location = new System.Drawing.Point(477, 417);
+            this.BtnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCancel.Location = new System.Drawing.Point(616, 518);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
             this.BtnCancel.TabIndex = 3;
@@ -64,7 +66,8 @@
             // 
             // BtnHelp
             // 
-            this.BtnHelp.Location = new System.Drawing.Point(558, 417);
+            this.BtnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnHelp.Location = new System.Drawing.Point(697, 518);
             this.BtnHelp.Name = "BtnHelp";
             this.BtnHelp.Size = new System.Drawing.Size(75, 23);
             this.BtnHelp.TabIndex = 4;
@@ -74,9 +77,12 @@
             // 
             // lblPreview
             // 
+            this.lblPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPreview.AutoSize = true;
             this.lblPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPreview.Location = new System.Drawing.Point(321, 20);
+            this.lblPreview.Location = new System.Drawing.Point(414, 21);
             this.lblPreview.Name = "lblPreview";
             this.lblPreview.Size = new System.Drawing.Size(157, 13);
             this.lblPreview.TabIndex = 6;
@@ -87,30 +93,37 @@
             this.grid.AllowUserToAddRows = false;
             this.grid.AllowUserToDeleteRows = false;
             this.grid.AllowUserToResizeRows = false;
+            this.grid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.grid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid.Location = new System.Drawing.Point(14, 15);
+            this.grid.Location = new System.Drawing.Point(11, 15);
             this.grid.MultiSelect = false;
             this.grid.Name = "grid";
             this.grid.ReadOnly = true;
             this.grid.RowHeadersVisible = false;
             this.grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grid.Size = new System.Drawing.Size(301, 395);
+            this.grid.Size = new System.Drawing.Size(393, 497);
             this.grid.TabIndex = 7;
             this.grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellContentClick);
             this.grid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_RowEnter);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(321, 40);
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Location = new System.Drawing.Point(414, 44);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(310, 369);
+            this.pictureBox1.Size = new System.Drawing.Size(358, 468);
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
             // btnNext
             // 
+            this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNext.Enabled = false;
-            this.btnNext.Location = new System.Drawing.Point(603, 15);
+            this.btnNext.Location = new System.Drawing.Point(747, 15);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(25, 23);
             this.btnNext.TabIndex = 9;
@@ -120,8 +133,9 @@
             // 
             // btnPrevious
             // 
+            this.btnPrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrevious.Enabled = false;
-            this.btnPrevious.Location = new System.Drawing.Point(576, 15);
+            this.btnPrevious.Location = new System.Drawing.Point(720, 15);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(25, 23);
             this.btnPrevious.TabIndex = 10;
@@ -131,7 +145,8 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(14, 417);
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEdit.Location = new System.Drawing.Point(12, 518);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 13;
@@ -143,7 +158,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 452);
+            this.ClientSize = new System.Drawing.Size(784, 549);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.btnNext);
@@ -154,12 +169,12 @@
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnOk);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PreviewPrintVia";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Select Layout";
+            this.Activated += new System.EventHandler(this.PreviewPrintVia_Activated);
             this.Load += new System.EventHandler(this.PreviewPrintVia_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

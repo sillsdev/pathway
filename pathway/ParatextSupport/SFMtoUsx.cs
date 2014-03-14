@@ -1,11 +1,23 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="SFMtoUsx.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Convert SFM to USX format
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
-using System.Windows.Forms;
 using System.Xml;
-using Microsoft.Win32;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -214,25 +226,6 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void Figure(string style, string content)
         {
-
-            //int start,end;
-            //string sourcePart, extractPart;
-            //FindStartEnd(data, "\\fig", "\\fig*", out start, out end);
-
-            //if (start < 0 || end < 0)
-            //{
-            //    return data;
-            //}
-            //BreakNode(data, start, end, out sourcePart, out extractPart);
-            //if (data.Length > 0)
-            //{
-            //    _writer.WriteString(sourcePart);
-            //    sourcePart = string.Empty;
-            //}
-
-            //extractPart = extractPart.Replace("\\fig*", "");
-            //extractPart = extractPart.Replace("\\fig", "");
-
             string[] fig = content.Split('|');
 
             string desc = fig[0];
@@ -250,7 +243,6 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("copy", copy);
             _writer.WriteAttributeString("ref", refer);
             _writer.WriteEndElement();
-            //return sourcePart;
         }
 
         private void Chapter(string style, string content)
@@ -325,8 +317,6 @@ namespace SIL.PublishingSolution
             };
             _writer.WriteStartDocument();
             _writer.WriteStartElement("USX");
-            //_writer.WriteAttributeString("version", "2.0");
-
             _sfmFile = new StreamReader(_sfmFullPath,true);
         }
 
@@ -335,10 +325,6 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void OpenFileDirectText()
         {
-            //xmlw = new XmlTextWriter(_usxFullPath, null)
-            //{
-            //    Formatting = Formatting.Indented
-            //};
             _writer.WriteStartDocument();
             _writer.WriteStartElement("usx");
             _sfmFile = new StreamReader(_sfmFullPath, true);

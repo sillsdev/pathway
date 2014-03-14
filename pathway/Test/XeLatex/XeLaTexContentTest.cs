@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="XeLaTexContentTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// WordPress Test Support
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -808,6 +824,16 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FlexRevTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FlexRev";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+        
 
         [Test]
         [Category("SkipOnTeamCity")]
@@ -1051,6 +1077,27 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void HangingIndent()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "HangingIndent";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void BRTagInputCase()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "BRTag";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         #endregion
 
         #region Private Functions

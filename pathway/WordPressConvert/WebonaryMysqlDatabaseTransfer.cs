@@ -1,4 +1,20 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="WebonaryMysqlDatabaseTransfer.cs" from='2010' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Create Wordpress blog 
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -248,11 +264,7 @@ namespace SIL.PublishingSolution
 
         public void Data(string fileName, string userName, string password, string hostAddress, string port, string databaseName, string websiteAddress, string directoryName)
         {
-            //string getCreateDatabaseFile = Common.GetApplicationPath();
-            //getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, "wordpress");
-            //getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, fileName);
             string mysqlScriptFileName = Common.PathCombine(projInfo.ProjectPath, fileName);
-            //File.Copy(getCreateDatabaseFile, mysqlScriptFileName, true);
             ModifyDatabasenameInDataDbSqlFile(mysqlScriptFileName, databaseName, websiteAddress, directoryName);
             mysqlScriptFileName = mysqlScriptFileName.Replace(".sql", "1.sql");
             RunScript(mysqlScriptFileName, userName, password, hostAddress, port, databaseName);
@@ -356,14 +368,7 @@ namespace SIL.PublishingSolution
 
                 if (line.IndexOf("http://localhost/wordpress") >= 0)
                 {
-                    //if(websiteAddress.Substring(websiteAddress.Length-2, websiteAddress.Length-1) == "/")
-                    //{
                     line = line.Replace("http://localhost/wordpress", websiteAddress + "/" + directoryName);
-                    //}
-                    //else
-                    //{
-                    //    line = line.Replace("http://localhost/wordpress", websiteAddress + directoryName);
-                    //}
                 }
                 if (line.IndexOf("FROM `wordpress`.") >= 0)
                 {
@@ -414,14 +419,7 @@ namespace SIL.PublishingSolution
 
                 if (line.IndexOf("http://localhost/wordpress") >= 0)
                 {
-                    //if (websiteAddress.Substring(websiteAddress.Length - 1, websiteAddress.Length) == "/")
-                    //{
                     line = line.Replace("http://localhost/wordpress", websiteAddress + "/" + directoryName);
-                    //}
-                    //else
-                    //{
-                    //    line = line.Replace("http://localhost/wordpress", websiteAddress + directoryName);
-                    //}
                 }
                 if (line.IndexOf("FROM `wordpress`.") >= 0)
                 {
@@ -430,7 +428,7 @@ namespace SIL.PublishingSolution
 
                 if (line.IndexOf("AudioVisual/") >= 0)
                 {
-                    //  line = line.Replace("AudioVisual/", websiteAddress + "/" + directoryName + "/" + "AudioVisual/");
+                   
                 }
 
                 sw2.WriteLine(line);

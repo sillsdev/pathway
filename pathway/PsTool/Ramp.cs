@@ -1,13 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------
-#region // Copyright (c) 2013, SIL International. LGPL
-// <copyright file="ramp.cs" from='2013' to='2013' company='SIL International'>
-//      Copyright © 2013, SIL International. 
+// <copyright file="ramp.cs" from='2013' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. 
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-#endregion
-// <author>V. Karthikeyan</author>
+// <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed: 
 // 
@@ -34,8 +32,7 @@ namespace SIL.PublishingSolution
     /// </summary>
     public class Ramp
     {
-
-        #region Public Variables
+        #region Private variable
 
         private string _rampId;
         private string _createdOn;
@@ -83,9 +80,7 @@ namespace SIL.PublishingSolution
         protected string _folderPath = string.Empty;
         protected string _outputExtension = string.Empty;
         protected string _projInputType = string.Empty;
-        #endregion
-
-        #region Private variable
+        private string _outputFileTitle = string.Empty;
         private RampFile rampFile;
         protected Dictionary<string, string> _isoLanguageCode = new Dictionary<string, string>();
         protected Dictionary<string, string> _isoLanguageCodeandName = new Dictionary<string, string>();
@@ -93,9 +88,10 @@ namespace SIL.PublishingSolution
         protected Dictionary<string, string> _oldTestament = new Dictionary<string, string>();
         protected Dictionary<string, string> _newTestament = new Dictionary<string, string>();
         protected Dictionary<string, string> _apocryphaTestament = new Dictionary<string, string>();
+
         #endregion
 
-        #region Property
+        #region Public Variables
         public string RampId
         {
             get { return _rampId; }
@@ -313,18 +309,6 @@ namespace SIL.PublishingSolution
             set { _rampDescription = value; }
         }
 
-        //public Dictionary<string, string> IsoLanguageCode
-        //{
-        //    get { return _isoLanguageCode; }
-        //    set { _isoLanguageCode = value; }
-        //}
-
-        //public Dictionary<string, string> IsoLanguageCodeandName
-        //{
-        //    get { return _isoLanguageCodeandName; }
-        //    set { _isoLanguageCodeandName = value; }
-        //}
-
         public string ProjInputType
         {
             get { return _projInputType; }
@@ -365,6 +349,12 @@ namespace SIL.PublishingSolution
         {
             get { return _publisher; }
             set { _publisher = value; }
+        }
+
+        public string OutputFileTitle
+        {
+            get { return _outputFileTitle; }
+            set { _outputFileTitle = value; }
         }
 
         #endregion
@@ -600,7 +590,6 @@ namespace SIL.PublishingSolution
 
         public void AddFile(RampFile file)
         {
-            //\" \": \"main.odm\", \"description\": \"Master document\", \"relationship\": \"presentation\", \"is_primary\": \"Y\", \"silPublic\": \"Y\"
             string newFile = string.Empty;
             if (file.FileName != null)
             {
@@ -658,6 +647,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         protected void SetRampData()
         {
+            Param.UnLoadValues(); 
             Param.LoadSettings();
             //ramp.RampId = "ykmb9i6zlh";
             CreatedOn = DateTime.Now.ToString("r");
@@ -713,7 +703,7 @@ namespace SIL.PublishingSolution
                     RampFile rFile = new RampFile();
                     rFile.FileName = Path.GetFileName(file);
                     string fileExtn = Path.GetExtension(file);
-                    if (fileExtn == ".odm" || fileExtn == ".jar" || fileExtn == ".epub" || fileExtn == ".mybible")
+                    if (fileExtn == ".odm" || fileExtn == ".jar" || fileExtn == ".epub" || fileExtn == ".mybible" || fileExtn == ".ldml")
                     {
 
                         rFile.FileDescription = Path.GetFileNameWithoutExtension(file) + " " + fileExtn.Replace(".", "") + " document";
@@ -1291,7 +1281,6 @@ namespace SIL.PublishingSolution
 
         private void CreateRampContributor(Json json)
         {
-            //" \": \"Mark Penny\", \"role\": \"researcher"
             if (Contributor.Count > 0)
             {
                 json.WriteTag("dc.contributor");
@@ -1322,7 +1311,6 @@ namespace SIL.PublishingSolution
 
         private void CreateRampLanguageScript(Json json)
         {
-            //" \": \"Latn: Latin"
             if (LanguageScript.Count > 0)
             {
                 json.WriteTag("dc.language.script");
@@ -1372,7 +1360,6 @@ namespace SIL.PublishingSolution
 
         private void CreateRampCoverageSpacialCountry(Json json)
         {
-            //" \": \"IN: India\", \"place\": \"Andhra Pradesh\""
             if (CoverageSpacialCountry.Count > 0)
             {
                 json.WriteTag("coverage.spatial.country");
@@ -1544,7 +1531,6 @@ namespace SIL.PublishingSolution
             {
                 json.WriteTag("created_at");
                 json.WriteText(CreatedOn);
-                //json.WriteText(DateTime.Now.ToString("r"));
             }
         }
 
@@ -1633,6 +1619,7 @@ namespace SIL.PublishingSolution
         {
             Param.LoadSettings();
             string firstPart = Param.GetMetadataValue(Param.CopyrightHolder);
+            _outputFileTitle = Param.GetMetadataValue(Param.Title);
             firstPart = Common.UpdateCopyrightYear(firstPart);
             string secondPart = GetLicenseInformation(Param.GetMetadataValue(Param.CopyrightPageFilename));
             return firstPart + " " + secondPart.Replace("\r", "").Replace("\n", "").Replace("\t", "");
@@ -1713,8 +1700,14 @@ namespace SIL.PublishingSolution
             List<string> dirCollection = new List<string>();
             dirCollection.Add(Common.PathCombine(Path.GetDirectoryName(_folderPath), "USX"));
             dirCollection.Add(Common.PathCombine(Path.GetDirectoryName(_folderPath), "SFM"));
+            dirCollection.Add(Common.PathCombine(Path.GetDirectoryName(_folderPath), "Pictures"));
 
-            using (ZipFile zipFile = ZipFile.Create(Common.PathCombine(Path.GetDirectoryName(_folderPath), Param.GetMetadataValue(Param.Title)) + ".ramp"))
+            if (_outputFileTitle == string.Empty)
+            {
+                _outputFileTitle = "Default Title";
+            }
+
+            using (ZipFile zipFile = ZipFile.Create(Common.PathCombine(Path.GetDirectoryName(_folderPath), _outputFileTitle) + ".ramp"))
             {
                 zipFile.NameTransform = new ZipNameTransform(Path.GetDirectoryName(_folderPath));
                 zipFile.BeginUpdate();
@@ -1728,11 +1721,16 @@ namespace SIL.PublishingSolution
                     if (Directory.Exists(dirPath))
                     {
                         zipFile.AddDirectory(dirPath);
+                        List<string> subfilesCollection = new List<string>();
+                        subfilesCollection.AddRange(Directory.GetFiles(dirPath));
+                        foreach (string subfile in subfilesCollection)
+                        {
+                            zipFile.Add(subfile, CompressionMethod.Stored);
+                        }
                     }
                 }
                 zipFile.CommitUpdate();
             }
-            CleanUpFolder(filesCollection, Path.GetDirectoryName(_folderPath));
         }
 
         private void CleanUpFolder(List<string> files, string folderPath)

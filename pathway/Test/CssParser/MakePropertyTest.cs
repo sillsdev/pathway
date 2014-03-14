@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="MakePropertyTest.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="MakePropertyTest.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -19,11 +19,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using NUnit.Framework;
 using SIL.PublishingSolution;
-using SIL.Tool;
 
 #endregion Using
 
@@ -468,7 +465,6 @@ namespace Test.CssParserTest
             _expected.Add("font-size", "864");
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
-
 
         /// <summary>
         ///A test for GetRgbConcat

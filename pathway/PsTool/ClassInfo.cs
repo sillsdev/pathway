@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="SelectorClass.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="ClassInfo.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,11 +10,10 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Used for Stylesxml
+// 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
 using System.Collections;
 
 namespace SIL.PublishingSolution
@@ -89,12 +88,6 @@ namespace SIL.PublishingSolution
             set { precede.SetClassAttrib(value.ClassName, value.Attribute); }
             get { return precede; }
         }
-
-        //public ClassAttrib Parent
-        //{
-        //    set { parent.SetClassAttrib(value.ClassName, value.Attribute); }
-        //    get { return parent; }
-        //}
 
         public ClassAttrib Ancestor
         {

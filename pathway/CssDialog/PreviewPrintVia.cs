@@ -1,13 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------
-#region // Copyright (c) 2009, SIL International. All Rights Reserved.
-// <copyright file="PrintVia.cs" from='2010' to='2010' company='SIL International'>
-//		Copyright (c) 2010, SIL International. All Rights Reserved.   
+// <copyright file="PreviewPrintVia.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright (C) 2014, SIL International. All Rights Reserved.   
 //    
-//		Distributable under the terms of either the Common Public License or the
-//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-#endregion
-// 
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed: 
@@ -38,7 +35,7 @@ namespace SIL.PublishingSolution
         public string AttribPreviewFile2 = "previewfile2";
         public string AttribCSSName = "file";
         public string StyleName = "type";
-
+        private bool _isUnixOS = false;
         public string SelectedStyle = string.Empty;
 
         DataSet DataSetForGrid = new DataSet();
@@ -49,7 +46,7 @@ namespace SIL.PublishingSolution
         private string _media;
         private bool _showEdit = false;
         private string _path;
-        private string _cssFile=string.Empty;
+        private string _cssFile = string.Empty;
 
         public string InputType;
         public PreviewPrintVia()
@@ -69,6 +66,7 @@ namespace SIL.PublishingSolution
 
         private void PreviewPrintVia_Load(object sender, EventArgs e)
         {
+            _isUnixOS = Common.IsUnixOS();
             CreateColumn();
             LoadGridValues(sender);
             Common.PathwayHelpSetup();
@@ -95,7 +93,6 @@ namespace SIL.PublishingSolution
             if (grid.Rows.Count > 0)
             {
                 DataSetForGrid.Tables["Styles"].Clear();
-                //Param.LoadSettings();
             }
             DataRow row;
             string xPathLayouts = "//styles/*/style[@approvedBy='GPS' or @shown='Yes']";
@@ -140,12 +137,9 @@ namespace SIL.PublishingSolution
 
                 DataSetForGrid.Tables["Styles"].Rows.Add(row);
             }
-            //DataView dataView = DataSetForGrid.Tables["Styles"].DefaultView;
-            //dataView.Sort = "Name";
-            //grid.DataSource = dataView.Table;
             grid.DataSource = DataSetForGrid.Tables["Styles"];
-            grid.Columns[0].Width = 100;
-            grid.Columns[1].Width = 198;
+            grid.Columns[0].Width = 140;
+            grid.Columns[1].Width = 265;
             grid.Columns[4].Visible = false;
             grid.Refresh();
 
@@ -278,7 +272,6 @@ namespace SIL.PublishingSolution
                     SelectedStyle = grid[0, rowid].Value.ToString();
                     string file2 = grid[3, rowid].Value.ToString();
                     _previewFileName2 = Common.PathCombine(_path, file2);
-                    //lnkEdit.Enabled = true;
                 }
                 catch
                 {
@@ -295,7 +288,6 @@ namespace SIL.PublishingSolution
 
             if (page == 1)
             {
-                //CreatePreview();
                 if (grid.SelectedRows[0].Cells[6].Value.ToString().ToLower() == "custom")
                     ShowPreview(ref _previewFileName1);
                 preview = _previewFileName1;
@@ -403,7 +395,6 @@ namespace SIL.PublishingSolution
         private bool PrincePreview(PublicationInformation projInfo)
         {
             bool success = false;
-            //string destination = "Pdf (using Prince)";
             ExportPdf exportPdf = new ExportPdf();
             success = exportPdf.Export(projInfo);
             // copy to preview folder *******************
@@ -417,18 +408,6 @@ namespace SIL.PublishingSolution
             success = openOffice.Export(projInfo);
             return success;
         }
-        //private void CreatePreview()
-        //{
-        //    if (!File.Exists(_previewFileName1))
-        //    {
-        //        PdftoJpg pd = new PdftoJpg();
-        //        string cssFile = Param.StylePath(_cssFile);
-        //        pd.ConvertPdftoJpg(cssFile, false);
-
-        //        _previewFileName1 = Common.PathCombine(Path.GetTempPath(), "Preview.pdf1.jpg");
-        //        _previewFileName2 = Common.PathCombine(Path.GetTempPath(), "Preview.pdf2.jpg");
-        //    }
-        //}
 
         private void btnNext_Click(object sender, EventArgs e)
         {
@@ -444,48 +423,26 @@ namespace SIL.PublishingSolution
             ShowPreview(1);
         }
 
-        private void lnkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            //PleaseWait st = new PleaseWait();
-            //st.ShowDialog();
-            //string ProgFilesPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            //string ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway7\ConfigurationTool.exe");
-            //if(!File.Exists(ConfigToolPath))
-            //    ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway\ConfigurationTool.exe");
-            ////string ConfigToolPath = @"E:\RapidSVN\PublishingSolution\ConfigurationTool\bin\Debug\ConfigurationTool.exe";
-            //var startInfo = new ProcessStartInfo { FileName = ConfigToolPath };
-            //startInfo.Arguments = InputType + " " + grid.SelectedRows[0].Cells[4].Value + " " + grid.SelectedRows[0].Cells[0].Value.ToString().Replace(' ', '&');
-            //Param.SetValue(Param.LayoutSelected, grid.SelectedRows[0].Cells[0].Value.ToString());
-            //Param.DefaultValue[Param.LayoutSelected] = grid.SelectedRows[0].Cells[0].Value.ToString();
-            //Param.Write();
-            //Process.Start(startInfo);
-            //lnkEdit.Enabled = false;
-            
-        }
-
-        //private void PreviewPrintVia_Activated(object sender, EventArgs e)
-        //{
-        //    Param.LoadSettings();
-        //    LoadGridValues(sender);
-        //}
-
         private void BtnHelp_Click(object sender, EventArgs e)
         {
             Common.PathwayHelpSetup();
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-            SendKeys.Send("{F1}");
+            if (_isUnixOS)
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "chmsee";
+                startInfo.Arguments = Common.HelpProv.HelpNamespace;
+                Process.Start(startInfo);
+            }
+            else
+            {
+                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+                Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+                SendKeys.Send("{F1}");
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //string ProgFilesPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            //string ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway7\ConfigurationTool.exe");
-            //if (!File.Exists(ConfigToolPath))
-                //ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway\ConfigurationTool.exe");
-            ////string ConfigToolPath = @"E:\RapidSVN\PublishingSolution\ConfigurationTool\bin\Debug\ConfigurationTool.exe";
-            //var startInfo = new ProcessStartInfo { FileName = ConfigToolPath };
-            //startInfo.Arguments = InputType + " " + grid.SelectedRows[0].Cells[4].Value + " " + grid.SelectedRows[0].Cells[0].Value.ToString().Replace(' ', '&');
             Param.SetValue(Param.LayoutSelected, grid.SelectedRows[0].Cells[0].Value.ToString());
             Param.DefaultValue[Param.LayoutSelected] = grid.SelectedRows[0].Cells[0].Value.ToString();
             Param.Write();
@@ -500,11 +457,23 @@ namespace SIL.PublishingSolution
 
             Param.LoadSettings();
             LoadGridValues(sender);
-            //Process.Start(startInfo);
-            ////lnkEdit.Enabled = false;
         }
 
         private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (grid.RowCount > 0)
+            {
+                try
+                {
+                    ShowPreview(1);
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private void PreviewPrintVia_Activated(object sender, EventArgs e)
         {
             if (grid.RowCount > 0)
             {

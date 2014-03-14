@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="InPreferences.cs" from='2009' to='2010' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="InPreferencesBase.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -10,15 +10,11 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Creates the InDesign Preferences file 
+// Creates the InDesign Preferences base file 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
-using System.IO;
 using System.Xml;
-using System.Collections.Generic;
-using System.Collections;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -185,8 +181,6 @@ namespace SIL.PublishingSolution
         {
             _writer.WriteStartElement("TinDocumentDataObject");
             _writer.WriteStartElement("Properties");
-            //_writer.WriteStartElement("GaijiRefMaps");
-            //_writer.WriteEndElement();
             _writer.WriteEndElement();
             _writer.WriteEndElement();
         }
@@ -993,22 +987,6 @@ namespace SIL.PublishingSolution
 
         public void CreateAnchoredObjectSetting()
         {
-            //_writer.WriteStartElement("AnchoredObjectSetting");
-            //_writer.WriteAttributeString("AnchoredPosition", "InlinePosition");
-            //_writer.WriteAttributeString("SpineRelative", "false");
-            //_writer.WriteAttributeString("LockPosition", "false");
-            //_writer.WriteAttributeString("PinPosition", "true");
-            //_writer.WriteAttributeString("AnchorPoint", "BottomRightAnchor");
-            //_writer.WriteAttributeString("HorizontalAlignment", "LeftAlign");
-            //_writer.WriteAttributeString("HorizontalReferencePoint", "TextFrame");
-            //_writer.WriteAttributeString("VerticalAlignment", "TopAlign");
-            //_writer.WriteAttributeString("VerticalReferencePoint", "LineBaseline");
-            //_writer.WriteAttributeString("AnchorXoffset", "0");
-            //_writer.WriteAttributeString("AnchorYoffset", "0");
-            //_writer.WriteAttributeString("AnchorSpaceAbove", "0");
-            //_writer.WriteEndElement();
-
-            //Task TD-2346 By Samdoss
             _writer.WriteStartElement("AnchoredObjectSetting");
             _writer.WriteAttributeString("AnchoredPosition", "Anchored");
             _writer.WriteAttributeString("SpineRelative", "false");
@@ -1062,7 +1040,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("AutoLeading", "120");
             _writer.WriteAttributeString("DropCapLines", "0");
             _writer.WriteAttributeString("DropCapCharacters", "0");
-            _writer.WriteAttributeString("KeepLinesTogether", "true"); //samdoss
+            _writer.WriteAttributeString("KeepLinesTogether", "false"); 
             _writer.WriteAttributeString("KeepAllLinesTogether", "false");
             _writer.WriteAttributeString("KeepWithNext", "0");
             _writer.WriteAttributeString("KeepFirstLines", "2");

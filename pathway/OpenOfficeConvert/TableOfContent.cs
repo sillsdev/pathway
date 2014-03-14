@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="OOTOC.cs" from='2009' to='2010' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="TableOfContent.cs" from='2009' to='2014' company='SIL International'>
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -14,16 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml;
-using Microsoft.Win32;
-using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
@@ -87,7 +78,6 @@ namespace SIL.PublishingSolution
             }
             else if (inputType.ToLower() == "scripture")
             {
-                //_writer.WriteAttributeString("text:style-name", "TitleMain_scrBook_scrBody");
                 _writer.WriteAttributeString("text:style-name", "scrBook_scrBody");
             }
             
