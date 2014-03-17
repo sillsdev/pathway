@@ -532,6 +532,7 @@
     <AllSettings Include="..\PsSupport\StyleSettings.xml" />
     <AllSettings Include="..\PsSupport\StyleSettings.xsd" />
     <AllSettings Include="..\PsSupport\RampLangCode.xml" />
+    <AllSettings Include="..\PsSupport\GenericFont.xml" />
     <BteSettings Include="..\PsSupport\ScriptureStyleSettings.xml" />
     <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
     <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
@@ -552,9 +553,8 @@
     <AllTransform Include="..\PsSupport\FixEpub.xsl" />
     <AllTransform Include="..\PsSupport\FixEpubToc.xsl" />
     <BteTransform Include="..\PsSupport\*.xslt" />
-    <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
-    <!-- XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" / -->
     <WixSoftware Include="WixSoftware\**\*.*" Exclude="WixSoftware\**\.svn\**\*.*" />
     <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
   </ItemGroup>
