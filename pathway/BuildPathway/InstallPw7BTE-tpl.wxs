@@ -11,64 +11,31 @@
 		<Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
 			<![CDATA[(NOT Version9X) OR (NOT VersionNT OR (VersionNT >= 500))]]>
 		</Condition>
-		<!--Condition Message="[ProductName] will only run with SIL FieldWorks 5.4 or later. You must first install a suitable version of FieldWorks.">
-			<![CDATA[FWDATE >= "2008-09-30"]]>
-		</Condition-->
 
+		<!-- http://stackoverflow.com/questions/114165/how-to-implement-wix-installer-upgrade -->
 		<Upgrade Id="$(var.UpgradeCode)">
 			<!--  Detext any newer version of this product -->
 			<UpgradeVersion Minimum="$(var.Version)"
 				IncludeMinimum="no"
 				OnlyDetect="yes"
 				Language="1033"
-				Property="NEWPRODUCTFOUND" />
+				Property="NEWERVERSIONDETECTED" />
 			<!--  Detect and remove any older version of this product -->
 			<UpgradeVersion Maximum="$(var.Version)"
-				IncludeMaximum="yes"
+				IncludeMaximum="no"
 				OnlyDetect="no"
 				Language="1033"
-				Property="OLDPRODUCTFOUND" />
+				Property="OLDERVERSIONBEINGUPGRADED" />
 		</Upgrade>
 		
 		<Media Id="1" Cabinet="pathway.cab" EmbedCab="yes" CompressionLevel="high"/>
 
-		<Property Id="FWDIR60" Value="null">
-			<RegistrySearch Id="FindFwInstallDir60" Key="SOFTWARE\SIL\FieldWorks" Name="RootCodeDir"
-				Root="HKLM" Type="directory"/>
-		</Property>
-		<Property Id="FWDIR70" Value="null">
-			<RegistrySearch Id="FindFwInstallDir70" Key="SOFTWARE\SIL\FieldWorks\7.0"
-				Name="RootCodeDir" Root="HKLM" Type="directory"/>
-		</Property>
-		<Property Id="FWDIR80" Value="null">
-			<RegistrySearch Id="FindFwInstallDir80" Key="SOFTWARE\SIL\FieldWorks\8.0"
-				Name="RootCodeDir" Root="HKLM" Type="directory"/>
-		</Property>
 		<Property Id="ALLUSERS"><![CDATA[1]]></Property>
-		
-		<CustomAction Id="PreventDowngrading" Error="Newer version already installed." />
-		
-		<CustomAction Id="SetFwDir60" Property="FWDIR" Value="[FWDIR60]"/>
-		<CustomAction Id="SetFwDir70" Property="FWDIR" Value="[FWDIR70]"/>
-		<CustomAction Id="SetFwDir80" Property="FWDIR" Value="[FWDIR80]"/>
-		
+	
 		<InstallExecuteSequence>
-			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
-			<RemoveExistingProducts After="InstallFinalize" />
+			<RemoveExistingProducts After="InstallInitialize" />
 		</InstallExecuteSequence>
 		
-		<InstallUISequence>
-			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
-			<Custom Action="SetFwDir60" After="AppSearch"><![CDATA[FWDIR60 <> "null"]]></Custom>
-			<Custom Action="SetFwDir70" After="SetFwDir60"><![CDATA[FWDIR70 <> "null"]]></Custom>
-			<Custom Action="SetFwDir80" After="SetFwDir70"><![CDATA[FWDIR80 <> "null"]]></Custom>
-		</InstallUISequence>
-
-		<Property Id="FWDATE">
-			<RegistrySearch Id="FindFwDate" Key="SOFTWARE\SIL\FieldWorks\CoreInstallation"
-				Root="HKLM" Type="raw"/>
-		</Property>
-
 		<FragmentRef Id="pathwayUI"/>
 		<FragmentRef Id="FilesFragment"/>
 		<FragmentRef Id="FeaturesFragment"/>
