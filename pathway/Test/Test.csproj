@@ -497,7 +497,6 @@
        Other similar extension points exist, see Microsoft.Common.targets.
          -->
   <Target Name="BeforeBuild">
-    <!-- Copy SourceFiles="@(ConfigurationTool)" DestinationFolder="$(OutputPath)\" /-->
     <Copy SourceFiles="@(Plugin)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(GhostScript)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(Icu)" DestinationFolder="$(OutputPath)\" />
@@ -507,7 +506,6 @@
     <Copy SourceFiles="@(AllBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(BteBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TestBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
-    <!-- Copy SourceFiles="@(UsfmConvert)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " / -->
     <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'$(OutputPath)\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'$(OutputPath)\Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="@(DictionaryForMIDs->'$(OutputPath)\Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -561,12 +559,10 @@
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\Palaso.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfConvert.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfConvert.pdb" />
-    <!-- ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfToImage.dll" / -->
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\Prince.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PsTool.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PsTool.pdb" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
-    <!--GhostScript Include="..\ThirdParty\gsdll32.dll" / -->
     <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
     <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
@@ -603,6 +599,7 @@
     <AllSettings Include="..\PsSupport\StyleSettings.xml" />
     <AllSettings Include="..\PsSupport\StyleSettings.xsd" />
     <AllSettings Include="..\PsSupport\RampLangCode.xml" />
+    <AllSettings Include="..\PsSupport\GenericFont.xml" />
     <BteSettings Include="..\PsSupport\ScriptureStyleSettings.xml" />
     <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
     <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
@@ -618,7 +615,7 @@
     <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
-    <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
     <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <WixSoftware Include="..\BuildPathway\WixSoftware\**\*.*" Exclude="WixSoftware\**\.svn\**\*.*" />

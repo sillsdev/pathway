@@ -134,6 +134,7 @@ xcopy %SRC%\PsTool.pdb "%DST%" /y
 
 :nopdb
 xcopy %BASE%\PsSupport\*.* "%DST%" /s /q /y
+xcopy %BASE%\XslProcess%cfg%\XslProcess.* "%DST%" /q /y
 xcopy %BASE%\XeTex\xetexExe "%DST%\xetexExe" /i /s /q /y
 
 :doneConvert
