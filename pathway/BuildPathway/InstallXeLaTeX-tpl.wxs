@@ -10,36 +10,30 @@
 		<Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
 			<![CDATA[(NOT Version9X) OR (NOT VersionNT OR (VersionNT >= 500))]]>
 		</Condition>
-
+		
+		<!-- http://stackoverflow.com/questions/114165/how-to-implement-wix-installer-upgrade -->
 		<Upgrade Id="$(var.UpgradeCode)">
 			<!--  Detext any newer version of this product -->
-			<UpgradeVersion Minimum="$(var.XeLaTexVersion)"
+			<UpgradeVersion Minimum="$(var.Version)"
 				IncludeMinimum="no"
 				OnlyDetect="yes"
 				Language="1033"
-				Property="NEWPRODUCTFOUND" />
+				Property="NEWERVERSIONDETECTED" />
 			<!--  Detect and remove any older version of this product -->
-			<UpgradeVersion Maximum="$(var.XeLaTexVersion)"
-				IncludeMaximum="yes"
+			<UpgradeVersion Maximum="$(var.Version)"
+				IncludeMaximum="no"
 				OnlyDetect="no"
 				Language="1033"
-				Property="OLDPRODUCTFOUND" />
+				Property="OLDERVERSIONBEINGUPGRADED" />
 		</Upgrade>
 		
-		<Media Id='1' Cabinet='XeLaTeX.cab' EmbedCab='yes' CompressionLevel='high'/>
-
-		<CustomAction Id="PreventDowngrading" Error="Newer version already installed." />
+		<Media Id="1" Cabinet="xelatex.cab" EmbedCab="yes" CompressionLevel="high"/>
+		
+		<Property Id="ALLUSERS"><![CDATA[1]]></Property>
 		
 		<InstallExecuteSequence>
-			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
-			<RemoveExistingProducts After="InstallFinalize" />
+			<RemoveExistingProducts After="InstallInitialize" />
 		</InstallExecuteSequence>
-		
-		<InstallUISequence>
-			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
-		</InstallUISequence>
-
-		<Property Id="ALLUSERS"><![CDATA[1]]></Property>
 		
 		<FragmentRef Id='pathwayUI'/>
 		<FragmentRef Id='FilesFragment'/>
