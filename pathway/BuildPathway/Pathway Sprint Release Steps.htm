@@ -23,6 +23,7 @@
   <li>From git gui, use Tools, Version</li>
   <li>Create the corresponding sprint-1.1.1.xml by exporting the Jira rss xml feed of issues updated since last sprint release date.</li>
   <li>Drop sprint-1.1.1.txt onto SprintIssues.py. Then edit sprint-1.1.1.htm to create a list of issues for the post and to update the readme file.</li>
+  <li>Update debian/changelog with changes from previous step.</li>
   <li>Create sprint-1.1.1.log in format needed for Linux</li>
   <li>Update the BuildPathway/ReadmePw.rtf file with the new version # and list of changes</li>
   <li>Update BuildPathway/BuildPathway.csproj and BuildPathway60.csproj with new version #. Minimal change in 2nd # for auto upgrades.</li>
@@ -30,25 +31,16 @@
   <li>Rename Sprint folder and move to Releases folder as a subfolder (ex. Sprint-1.1.1.2124)</li>
   <li>Uninstall any old versions and install SetupPw7BTE-1.1.1.2124.msi and make sure default export works.</li>
   <li>Check version numbers of third party software in PathwayBootstrap.ini</li>
-  <li>Edit the PathwayBuild.ini so the GetInstaller will point to the right URL location. Change it's version number and compile.</li>
-  <li>Digitally sign PathwayBootstrap-1.19.exe and other .msi files</li>
   <li>check in changes with git gui</li>
   <li>git flow release finish 1.1.1</li>
   <li>git push origin master develop</li>
-  <li>Update the version number in Team city <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt75" target="_blank">daily</a> and <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt84" target="_blank">sprint</a> build configuration</li>
-  <li><a href="http://build.palaso.org/project.html?projectId=project18" target="_blank">Launch Team City</a> Sprint Build</li>
-  <li>Use fciv (console tool) to calculate the checksum for the new bootstrap program.</li>
+  <li>Update the version number in Team city <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt75" target="_blank">daily</a> and <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt84" target="_blank">sprint</a> build configuration. (Also update version numbers for Ubuntu daily and sprint builds.</li>
+  <li><a href="http://build.palaso.org/project.html?projectId=project18" target="_blank">Launch Team City</a> Sprint Build. (Also Ubuntu 32 and Ubuntu 64 builds.)</li>
+  <li>Download artifacts and use fciv (console tool) to calculate the checksum for the new bootstrap program.</li>
   <li>Change the first page of <a href="http://pathway.sil.org/wp-admin/edit.php?post_type=page" target="_blank">pathway.sil.org</a> to reference this new bootstrap program google code link.</li>
+  <li>Change the <a href="http://pathway.sil.org/wp-admin/post.php?post=465&action=edit" target="_blank">latest sprint download</a> page.</li>
   <li><a href="http://pathway.sil.org/wp-admin/post-new.php?post_type=post" target="_blank">Add a "Release" post</a> to pathway.sil.org web site with the list of changes and a link to the sprint build page. (The "Release" category is checked before the post is added. This will add the post to the Release feed that is picked up by lingtransoft.info and perhaps others.)</li>
   <li>Save download statistics from <a href="http://pathway.sil.org/wp-admin/tools.php?page=simple-download-monitor.php" target="_blank">Download monitor and reset statistics</a></li>
-  <li>On precise 32 virtual machine: git gui to clean, pull, get version, update log, build, tag, and clean up</li>
-  <li>Upload to downloads page</li>
-  <li>Compute md5sum, save this is updated on <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> page</li>
-  <li>On precise 64 virtual machine: git gui to clean, pull, get version, update log, build, tag, and clean up</li>
-  <li>Upload to downloads page</li>
-  <li>Compute md5sum, save this is updated on <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> page</li>
-  <li>Update the <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">latest downloads</a> page changing the names of the download files as well as the name of the bootstrap. You will also need to change the md5sums for each download that has changed.
-  <li>Update the link at the bottom of <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> to point to the artifacts on Team city of the <a href="http://build.palaso.org/viewType.html?buildTypeId=bt84&tab=buildTypeStatusDiv" target="_blank">latest sprint</a>.</li>
   <li>Update the <a href="http://pathway.sil.org/download/installing-offline/" target="_blank">offline installation instructions</a> with the link to the latest <a href="http://build.palaso.org/viewType.html?buildTypeId=bt84" target="_blank">Pathway Bootstrap</a> and the latest <a href="file://c:/Users/Trihus/git/pathway/pathway/Bootstrap/res/PathwayBootstrap.ini" target="_blank">.ini file</a>.</li>
   <li><a href="http://pathway.sil.org/wp-admin/export.php" target="_blank">Back up</a> the pathway.sil.org web site.</li>
   <li>Mark previous release downloads as deprecated.</li>
