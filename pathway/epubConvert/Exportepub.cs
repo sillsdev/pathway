@@ -248,11 +248,21 @@ namespace SIL.PublishingSolution
                     cssFullPath = projInfo.DefaultCssFileWithPath;
                 }
 
+                Common.WriteDefaultLanguages(projInfo, cssFullPath);
+
                 var mc = new MergeCss { OutputLocation = tempFolderName };
                 string mergedCSS = mc.Make(cssFullPath, "book.css");
                 preProcessor.RemoveDeclaration(mergedCSS, "@top-");
                 preProcessor.RemoveDeclaration(mergedCSS, "@bottom-");
                 preProcessor.RemoveDeclaration(mergedCSS, "@footnote");
+                preProcessor.RemoveDeclaration(mergedCSS, "@page");
+                preProcessor.RemoveStringInCss(mergedCSS, "string-set:");
+                preProcessor.RemoveStringInCss(mergedCSS, "-moz-column-");
+                preProcessor.RemoveStringInCss(mergedCSS, "column-fill:");
+                preProcessor.RemoveStringInCss(mergedCSS, "-ps-outline-");
+                preProcessor.RemoveStringInCss(mergedCSS, "float:");
+                preProcessor.RemoveStringInCss(mergedCSS, "-ps-fixed-line-height:");
+                preProcessor.RemoveStringInCss(mergedCSS, "content: leader(");
                 preProcessor.ReplaceStringInCss(mergedCSS);
                 preProcessor.SetDropCapInCSS(mergedCSS);
                 preProcessor.InsertCoverPageImageStyleInCSS(mergedCSS);
