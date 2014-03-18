@@ -313,6 +313,7 @@ namespace SIL.PublishingSolution
                 sw.WriteLine(@"\begin{document} ");
                 sw.WriteLine(@"\pagestyle{plain} ");
                 sw.WriteLine(@"\sloppy ");
+                sw.WriteLine(@"\setlength{\parfillskip}{0pt plus 1fil} ");
             }
 
             foreach (var prop in xeLaTexProperty)
@@ -700,7 +701,7 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\begin{titlepage}\r\n";
                 tableOfContent += "\\begin{center}\r\n";
                 tableOfContent += "\\textsc{\\LARGE " + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
-                tableOfContent += "\\vspace{130 mm} \r\n";
+                tableOfContent += "\\vspace{120 mm} \r\n";
                 tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Publisher) + "}\\\\[0.5cm] \r\n";
                 if (logoFileName.Contains(".png"))
                 {
