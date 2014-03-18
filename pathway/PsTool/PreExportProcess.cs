@@ -3340,6 +3340,28 @@ namespace SIL.Tool
             }
         }
 
+        public void RemoveStringInCss(string cssFileName, string match)
+        {
+            var sr = new StreamReader(cssFileName);
+            string fileContent = sr.ReadToEnd();
+            sr.Close();
+            int searchPos = fileContent.Length;
+            while (true)
+            {
+                int findFrom = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
+                if (findFrom == -1)
+                {
+                    break;
+                }
+                int closingbracePos = fileContent.IndexOf(";", findFrom) + 1;
+                fileContent = fileContent.Substring(0, findFrom) + fileContent.Substring(closingbracePos);
+                searchPos = findFrom - 1;
+            }
+            var sw = new StreamWriter(cssFileName);
+            sw.Write(fileContent);
+            sw.Close();
+        }
+
         public void RemoveDeclaration(string cssFileName, string match)
         {
             var sr = new StreamReader(cssFileName);
