@@ -101,7 +101,7 @@ Func GetInstaller($name)
 	Elseif StringInStr($name, "XeLaTeX") Then
 		$urlPath = 'http://pathway.sil.org/wp-content/sprint/' & $name
 	Else
-		$urlPath = 'http://build.palaso.org/repository/download/bt84/.lastSuccessful/' & $name & '?guest=1'
+		$urlPath = 'http://build.palaso.org/repository/download/bt84/.lastPinned/' & $name & '?guest=1'
 	EndIf
 	if not FileExists($name) Then
 		;MsgBox(4096,"Status","Downloading " & $urlPath & " " & $name)
