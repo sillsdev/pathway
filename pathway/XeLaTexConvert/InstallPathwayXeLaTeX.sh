@@ -17,7 +17,7 @@ export TEXBIN=$PWD
 ./tlmgr install lm fontspec euenc tipa xkeyval xunicode
 ./tlmgr install fancyhdr float graphics hanging mdframed oberdiek
 ./tlmgr install setspace tools xcolor eso-pic geometry lettrine
-./tlmgr install xetex xetex-def
+./tlmgr install bidi xetex xetex-def
 mkdir -p $HOME/bin
 echo export PWDTEMP=\$PWD >$HOME/bin/xelatex
 echo cd \$HOME/PwTex/bin/\*  >>$HOME/bin/xelatex
