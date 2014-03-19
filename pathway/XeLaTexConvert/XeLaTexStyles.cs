@@ -175,7 +175,10 @@ namespace SIL.PublishingSolution
                             }
                             else if (writingString.IndexOf("counter(page)") >= 0)
                             {
-                                PageStyle.AppendLine(_pageStyleFormat[currentPagePosition] + "{\\thepage}");
+                                if (!_cssProperty.ContainsKey("@page:none-none"))
+                                {
+                                    PageStyle.AppendLine(_pageStyleFormat[currentPagePosition] + "{\\thepage}");
+                                }
                             }
                             if (writingString.IndexOf("booknamefirst") >= 0)
                             {
