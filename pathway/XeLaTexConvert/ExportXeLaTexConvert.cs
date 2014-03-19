@@ -331,8 +331,6 @@ namespace SIL.PublishingSolution
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
                 modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
-                modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
-                                                    xeLatexCopyrightFile, include, _langFontCodeandName);
 
                 string copyright = GetLanguageInfo(mainXhtmlFileWithPath, projInfo);
                 InsertInFile(xeLatexCopyrightFile, "copyright information", copyright);
