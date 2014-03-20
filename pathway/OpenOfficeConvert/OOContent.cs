@@ -1608,8 +1608,15 @@ namespace SIL.PublishingSolution
         {
             if (_anchorStart)
             {
-                string val = _anchorBookMarkName.Replace("href#", "").Replace("name", "");
-                if ((_sourceList.Contains(val.ToLower()) && _targetList.Contains(val.ToLower())))
+                if (_anchorBookMarkName.IndexOf("href#") == 0 || _anchorBookMarkName.IndexOf("name") == 0)
+                {
+                    string val = _anchorBookMarkName.Replace("href#", "").Replace("name", "");
+                    if ((_sourceList.Contains(val.ToLower()) && _targetList.Contains(val.ToLower())))
+                    {
+                        _anchorWrite = true;
+                    }
+                }
+                else if (_anchorBookMarkName.IndexOf("href") == 0)
                 {
                     _anchorWrite = true;
                 }
