@@ -1328,8 +1328,9 @@ namespace SIL.PublishingSolution
                     width = "50pt";
                 }
 
-                string logoFromPath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
-                logoFromPath = Common.PathCombine(Path.GetDirectoryName(logoFromPath), logoName);
+                var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+                string logoFromPath = Common.PathCombine(copyrightDir, logoName);
+
                 string normalTargetFile = _projInfo.TempOutputFolder;
                 string basePath = normalTargetFile.Substring(0,
                                                              normalTargetFile.LastIndexOf(Path.DirectorySeparatorChar));
