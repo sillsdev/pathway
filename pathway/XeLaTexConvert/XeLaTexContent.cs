@@ -89,6 +89,7 @@ namespace SIL.PublishingSolution
         private string _chapterStyleforHeader = string.Empty;
         private int _bookCount = 0;
         private bool _bookPageBreak;
+        private bool _hideFirstVerseNo;
 
         #endregion
 
@@ -618,6 +619,11 @@ namespace SIL.PublishingSolution
 
 
                 content = content.Replace("~", "\\textasciitilde{~}");
+
+                if(_hideFirstVerseNo && _childName.ToLower().IndexOf("verse") == 0)
+                {
+                    content = string.Empty;
+                }
 
                 _xetexFile.Write(content);
 
@@ -1890,7 +1896,13 @@ namespace SIL.PublishingSolution
             _paragraphPropertyList.Add("widows");
             _paragraphPropertyList.Add("orphans");
 
-
+            if(IdAllClass.ContainsKey("@page"))
+            {
+                if(IdAllClass["@page"].ContainsKey("-ps-hide-versenumber-one"))
+                {
+                    _hideFirstVerseNo = bool.Parse(IdAllClass["@page"]["-ps-hide-versenumber-one"]);
+                }
+            }
         }
 
         /// -------------------------------------------------------------------------------------------
