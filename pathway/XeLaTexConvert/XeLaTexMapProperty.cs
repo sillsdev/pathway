@@ -147,6 +147,9 @@ namespace SIL.PublishingSolution
                     case "marks":
                         Marks(propertyValue);
                         break;
+                    case "direction":
+                        Direction(propertyValue);
+                        break;
                 }
             }
             string style = ComposeStyle();
@@ -284,23 +287,6 @@ namespace SIL.PublishingSolution
                 value = "BottomAlign";
             }
             _IDProperty["VerticalJustification"] = value;
-        }
-
-        public void Direction(string propertyValue)
-        {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            if (propertyValue == "rtl")
-            {
-                _IDProperty["Composer"] = "HL Composer Optyca";
-                _IDProperty["DigitsType"] = "ArabicDigits";
-                _IDProperty["CharacterDirection"] = "RightToLeftDirection";
-                _IDProperty["ParagraphDirection"] = "RightToLeftDirection";
-                _IDProperty["ParagraphJustification"] = "ArabicJustification";
-                _IDProperty["Justification"] = "RightAlign";
-            }
         }
 
         private void Widows(string propertyValue)
@@ -801,6 +787,29 @@ namespace SIL.PublishingSolution
             if (!_includePackageList.Contains(propertyValue))
                 _includePackageList.Add(propertyValue);
         }
+
+        public void Direction(string propertyValue)
+        {
+            if (propertyValue == string.Empty)
+            {
+                return;
+            }
+
+            if (propertyValue.ToLower() == "rtl")
+            {
+                propertyValue = "RTL %direction";
+                _inlineStyle.Add(propertyValue);
+            }
+            else
+            {
+                return;
+            }
+            _IDProperty["direction"] = propertyValue;
+            propertyValue = "\\usepackage{bidi} ";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
+        }
+
         public void ColumnCount(string propertyValue)
         {
             if (propertyValue == string.Empty || Common.ValidateAlphabets(propertyValue)

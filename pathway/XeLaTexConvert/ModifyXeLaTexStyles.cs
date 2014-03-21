@@ -272,11 +272,6 @@ namespace SIL.PublishingSolution
                     }
                 }
 
-                foreach (var package in includePackageList)
-                {
-                    sw.WriteLine(package);
-                }
-
                 sw.WriteLine(@"\usepackage{float}");
                 sw.WriteLine(@"\usepackage{grffile}");
                 sw.WriteLine(@"\usepackage{graphicx}");
@@ -287,6 +282,10 @@ namespace SIL.PublishingSolution
                 sw.WriteLine(@"\usepackage{calc}");
                 sw.WriteLine(@"\usepackage{lettrine}");
 
+                foreach (var package in includePackageList)
+                {
+                    sw.WriteLine(package);
+                }
 
                 if (pageTopMargin != 0 || pageBottomMargin != 0 || pageLeftMargin != 0 || pageRightMargin != 0)
                 {
