@@ -1648,18 +1648,25 @@ namespace SIL.PublishingSolution
                 {
                     licenseXml = filename;
                 }
-                XmlDocument xDoc = Common.DeclareXMLDocument(true);
-                var namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-                namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
-                xDoc.Load(licenseXml);
-                const string xPath = "//x:div[@id='LicenseInformation']";
-                XmlNodeList nodeList = xDoc.SelectNodes(xPath, namespaceManager);
-                if (nodeList != null && nodeList.Count > 0)
+                try
                 {
-                    if (nodeList[nodeList.Count - 1] != null)
+                    XmlDocument xDoc = Common.DeclareXMLDocument(true);
+                    var namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+                    namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
+                    xDoc.Load(licenseXml);
+                    const string xPath = "//x:div[@id='LicenseInformation']";
+                    XmlNodeList nodeList = xDoc.SelectNodes(xPath, namespaceManager);
+                    if (nodeList != null && nodeList.Count > 0)
                     {
-                        text = nodeList[nodeList.Count - 1].InnerText;
+                        if (nodeList[nodeList.Count - 1] != null)
+                        {
+                            text = nodeList[nodeList.Count - 1].InnerText;
+                        }
                     }
+                }
+                catch
+                {
+                    text = string.Empty;
                 }
             }
             else
