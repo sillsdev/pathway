@@ -559,7 +559,8 @@
     <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
-    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" Condition="$(OS) != 'Linux'" />
+    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" Condition="$(OS) == 'Linux'" />
     <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig->'Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -569,7 +570,8 @@
     <MakeDir Directories="Files\pwtex\temp" />
     <Exec Command="echo This file is a place holder&gt;Files\pwtex\temp\readme.txt" />
     <Delete Files="@(XeLaTexCache)" />
-    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" Condition="$(OS) != 'Linux'" />
+    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" Condition="$(OS) == 'Linux'" />
     <Exec Command="mktexlsr ..\..\texmf" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
     <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
     <Exec Command="mktexlsr ..\..\texmf-dist" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
