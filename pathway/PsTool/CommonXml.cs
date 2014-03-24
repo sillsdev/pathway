@@ -462,6 +462,18 @@ namespace SIL.Tool
                     }
                 }
             }
+            // Pathway7 Copyrights folder
+            if (fromPath == string.Empty)
+            {
+                // sil + fileName with exact sourceFolder path
+                var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+                string flexPict = PathCombine(copyrightDir, src);
+                if (File.Exists(flexPict))
+                {
+                    fromPath = flexPict;
+                }
+            }
+            
 
             if (Testing) return fromPath; // Linux Test, Registry error
 
