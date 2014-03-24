@@ -1,0 +1,13 @@
+#Notes on building pathway-xelatex:
+#put build number in XelatexConvert/debian/pathwayXelatexValues.xml
+#cd to XelatexConvert
+export Platform=x86
+export OS=Linux
+export DEB_BUILD_OPTIONS=nostrip
+export OutputPath=.
+export target=PathwayXeLaTeX
+export binsrc=.
+export BUILD_NUMBER=1.8.0
+make clean clean-build
+dpkg-buildpackage -d -i -us -uc -b
+

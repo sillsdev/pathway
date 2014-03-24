@@ -33,6 +33,9 @@ install:
 	#sudo chmod 777 $(DESTDIR)$(prefix)/share/python-support
 	sudo mkdir -p $(DESTDIR)$(prefix)/share/doc/pathway-xelatex
 	sudo chmod 777 $(DESTDIR)$(prefix)/share/doc/pathway-xelatex
+	sudo mkdir -p $(DESTDIR)$(prefix)/share/pwtex
+	sudo chmod 777 $(DESTDIR)$(prefix)/share/pwtex
+	sudo cp -r debian/pathwayXelatexRegistryKeys.sh $(DESTDIR)$(prefix)/share/pwtex/pathwayXelatexRegistryKeys.sh
 	#sudo mkdir -p $(DESTDIR)$(prefix)/share/pwtex
 	#sudo chmod 777 $(DESTDIR)$(prefix)/share/pwtex
 	#sudo cp -r debian/WritePathwayKeys.cs $(DESTDIR)$(prefix)/share/pwtex/WritePathwayKeys.cs
@@ -48,7 +51,8 @@ install:
 	#sudo gzip -c debian/pathwayB.7.manpages >$(DESTDIR)$(prefix)/share/man/man7/pathwayB.7.gz
 	sudo mkdir -p $(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX
 	sudo chmod 777 $(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX
-	sudo python -c 'print "<values><value name=\"XeLaTexDir\" type=\"string\">/usr$(bininst)/</value><value name=\"XeLaTexVer\" type=\"string\">1.9</value></values>"' >$(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml
+	sudo python -c 'print "<values><value name=\"XeLaTexDir\" type=\"string\">/usr$(bininst)/</value><value name=\"XeLaTexVer\" type=\"string\">$(BUILD_NUMBER)</value></values>"' >$(DESTDIR)$(prefix)/share/pwtex/pathwayXelatexValues.xml
+	sudo cp $(DESTDIR)$(prefix)/share/pwtex/pathwayXelatexValues.xml $(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml
 
 binary:
 	exit 0
@@ -68,6 +72,7 @@ clean:
 	#-xdg-desktop-menu uninstall /etc/pathway/sil-ConfigurationTool.desktop
 	#sudo rm -rf $(DESTDIR)/etc/pathway
 	-rm -rf ~/.mono/registry/CurrentUser/software/sil/PathwayXeLaTeX
+	-rm -rf ~/.config/fieldworks/registry/LocalMachine/software/sil/PathwayXeLaTeX
 	sudo rm -rf $(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX
 
 clean-build:
