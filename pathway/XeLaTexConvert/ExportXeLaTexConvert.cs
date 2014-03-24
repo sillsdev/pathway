@@ -221,7 +221,7 @@ namespace SIL.PublishingSolution
             }
             UpdateXeLaTexFontCacheIfNecessary();
             CallXeLaTex(xeLatexFullFile, true, imgPath);
-            ProcessRampFile(projInfo, xeLatexFullFile, organization);
+            //ProcessRampFile(projInfo, xeLatexFullFile, organization);
             return true;
         }
 
@@ -331,8 +331,6 @@ namespace SIL.PublishingSolution
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
                 modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
-                modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
-                                                    xeLatexCopyrightFile, include, _langFontCodeandName);
 
                 string copyright = GetLanguageInfo(mainXhtmlFileWithPath, projInfo);
                 InsertInFile(xeLatexCopyrightFile, "copyright information", copyright);

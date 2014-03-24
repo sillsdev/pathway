@@ -1145,35 +1145,41 @@ namespace SIL.Tool
                 {
                     if (_copyrightInformation)
                     {
+                        try
+                        {
+                            string draftTempFileName = Common.PathCombine(Path.GetTempPath(), Path.GetFileName(copyRightFilePath));
+                            File.Copy(copyRightFilePath, draftTempFileName, true);
+                            var languageCode = JustLanguageCode();
+                            Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageName'></span>", Common.GetLanguageName(languageCode));
+                            Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageCode'></span>", languageCode);
+                            Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageUrl'></span>", GetLanguageUrl(languageCode));
+                            Common.StreamReplaceInFile(draftTempFileName,
+                                                       "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>",
+                                                       GetCopyrightInfoForLO());
+                            Common.StreamReplaceInFile(draftTempFileName, "<h1>", "<span class='LHeading'>");
+                            Common.StreamReplaceInFile(draftTempFileName, "</h1>", "</span>");
+                            Common.StreamReplaceInFile(draftTempFileName, "<p>", "<span class='LText'>");
+                            Common.StreamReplaceInFile(draftTempFileName, "</p>", "</span>");
+                            Common.StreamReplaceInFile(draftTempFileName, "<em>", "<span>");
+                            Common.StreamReplaceInFile(draftTempFileName, "</em>", "</span>");
 
-                        string draftTempFileName = Common.PathCombine(Path.GetTempPath(), Path.GetFileName(copyRightFilePath));
+                            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+                            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
+                            namespaceManager.AddNamespace("html", "http://www.w3.org/1999/xhtml");
+                            xDoc.Load(draftTempFileName);
+                            XmlNode bodyNode = xDoc.SelectSingleNode("//html:body", namespaceManager);
 
-                        File.Copy(copyRightFilePath, draftTempFileName, true);
-                        var languageCode = JustLanguageCode();
-                        Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageName'></span>", Common.GetLanguageName(languageCode));
-                        Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageCode'></span>", languageCode);
-                        Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageUrl'></span>", GetLanguageUrl(languageCode));
-                        Common.StreamReplaceInFile(draftTempFileName,
-                                                   "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>",
-                                                   GetCopyrightInfoForLO());
-                        Common.StreamReplaceInFile(draftTempFileName, "<h1>", "<span class='LHeading'>");
-                        Common.StreamReplaceInFile(draftTempFileName, "</h1>", "</span>");
-                        Common.StreamReplaceInFile(draftTempFileName, "<p>", "<span class='LText'>");
-                        Common.StreamReplaceInFile(draftTempFileName, "</p>", "</span>");
-                        Common.StreamReplaceInFile(draftTempFileName, "<em>", "<span>");
-                        Common.StreamReplaceInFile(draftTempFileName, "</em>", "</span>");
+                            copyRightContentNode = xmldoc.CreateElement("div");
 
-                        XmlDocument xDoc = Common.DeclareXMLDocument(true);
-                        XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
-                        namespaceManager.AddNamespace("html", "http://www.w3.org/1999/xhtml");
-                        xDoc.Load(draftTempFileName);
-                        XmlNode bodyNode = xDoc.SelectSingleNode("//html:body", namespaceManager);
+                            XmlNode importNode = copyRightContentNode.OwnerDocument.ImportNode(bodyNode, true);
 
-                        copyRightContentNode = xmldoc.CreateElement("div");
-
-                        XmlNode importNode = copyRightContentNode.OwnerDocument.ImportNode(bodyNode, true);
-
-                        copyRightContentNode.InnerXml = importNode.InnerXml;
+                            copyRightContentNode.InnerXml = importNode.InnerXml;
+                        }
+                        catch
+                        {
+                            copyRightContentNode = xmldoc.CreateElement("div");
+                            copyRightContentNode.InnerXml = " ";
+                        }
                     }
 
                     if (copyRightContentNode != null && _copyrightInformation)
@@ -3338,6 +3344,28 @@ namespace SIL.Tool
                 }
                 searchPos = findFrom - 1;
             }
+        }
+
+        public void RemoveStringInCss(string cssFileName, string match)
+        {
+            var sr = new StreamReader(cssFileName);
+            string fileContent = sr.ReadToEnd();
+            sr.Close();
+            int searchPos = fileContent.Length;
+            while (true)
+            {
+                int findFrom = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
+                if (findFrom == -1)
+                {
+                    break;
+                }
+                int closingbracePos = fileContent.IndexOf(";", findFrom) + 1;
+                fileContent = fileContent.Substring(0, findFrom) + fileContent.Substring(closingbracePos);
+                searchPos = findFrom - 1;
+            }
+            var sw = new StreamWriter(cssFileName);
+            sw.Write(fileContent);
+            sw.Close();
         }
 
         public void RemoveDeclaration(string cssFileName, string match)

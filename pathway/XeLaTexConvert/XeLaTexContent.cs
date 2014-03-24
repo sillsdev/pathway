@@ -89,7 +89,8 @@ namespace SIL.PublishingSolution
         private string _chapterStyleforHeader = string.Empty;
         private int _bookCount = 0;
         private bool _bookPageBreak;
-
+        private bool _hideFirstVerseNo;
+		private bool _directionEnd = false;
         #endregion
 
         #region Private Variables
@@ -481,6 +482,8 @@ namespace SIL.PublishingSolution
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
             {
+                if (psuedoBefore.Content == "2023")
+                    psuedoBefore.Content = @"\char""2665";
                 WriteCharacterStyle(psuedoBefore.Content, psuedoBefore.StyleName);
             }
 
@@ -577,6 +580,9 @@ namespace SIL.PublishingSolution
         private void WriteCharacterStyle(string content, string characterStyle)
         {
             SetHomographNumber(false);
+
+            
+
             string footerClassName = string.Empty;
             if (_isDropCaps)
             {
@@ -617,8 +623,25 @@ namespace SIL.PublishingSolution
 
                 content = content.Replace("~", "\\textasciitilde{~}");
 
+                if(_hideFirstVerseNo && _childName.ToLower().IndexOf("verse") == 0)
+                {
+                    content = string.Empty;
+                }
+                if (_characterName != null && IdAllClass.ContainsKey(_characterName) && IdAllClass[_characterName].ContainsKey("direction"))
+                {
+                    if (IdAllClass[_characterName]["direction"] == "rtl")
+                    {
+                        _xetexFile.Write("\\RL{");
+                        _directionEnd = true;
+                    }
+                }
                 _xetexFile.Write(content);
-
+                if (_directionEnd)
+                {
+                    string directionEnd = "}";
+                    _xetexFile.Write(directionEnd);
+                    _directionEnd = false;
+                }
                 CloseInlineInnerStyle(value);
                 for (int i = 1; i <= _inlineCount; i++) // close braces for inline style
                 {
@@ -626,8 +649,10 @@ namespace SIL.PublishingSolution
 
                 }
                 _inlineCount = 0;
+
                 _xetexFile.Write("}");
 
+                
                 if (_incrementDropCap != 0)
                 {
                     _xetexFile.Write("}");
@@ -1378,6 +1403,8 @@ namespace SIL.PublishingSolution
 
             string paraStyle = _childName.Replace("_body", ""); ;
             string childClass = Common.LeftString(paraStyle, "_");
+            string directionStart = string.Empty;
+            string directionEnd = string.Empty;
             if (_divType.Contains(_tagType) && _classInlineStyle.ContainsKey(childClass))
             {
                 string endParagraphString = string.Empty;
@@ -1461,6 +1488,11 @@ namespace SIL.PublishingSolution
                             displayNoneStart = "\\begin{comment}";
                             displayNoneEnd = "\\end{comment}\r\n";
                         }
+                        else if (propName == "RTL")
+                        {
+                            directionStart = "\\begin{RTLitems} \\item";
+                            directionEnd = "\\end{RTLitems}";
+                        }
                         else if (propName == "padding-left")
                         {
                             paddingLeft = Common.RightString(property, " ");
@@ -1485,6 +1517,7 @@ namespace SIL.PublishingSolution
                         {
                             orphans = "\\clubpenalty=300";
                         }
+
                     }
                 }
 
@@ -1516,8 +1549,6 @@ namespace SIL.PublishingSolution
                     }
                 }
 
-
-
                 if (mdFrameStart != string.Empty)
                 {
                     string prop = "{\\begin{mdframed}[linecolor=white";
@@ -1540,12 +1571,15 @@ namespace SIL.PublishingSolution
                     _xetexFile.Write(txtAlignStart);
                     endParagraphString = txtAlignEnd + endParagraphString;
                 }
-
-
                 if (displayNoneStart != string.Empty)
                 {
                     _xetexFile.WriteLine(displayNoneStart);
                     endParagraphString = displayNoneEnd + " " + endParagraphString;
+                }
+                if (directionStart != string.Empty)
+                {
+                    _xetexFile.WriteLine(directionStart);
+                    endParagraphString = directionEnd + " " + endParagraphString;
                 }
                 if (endParagraphString != string.Empty)
                 {
@@ -1562,13 +1596,10 @@ namespace SIL.PublishingSolution
                 {
                     _xetexFile.WriteLine(orphans);
                 }
-
-
                 if (textIndent != string.Empty)
                 {
                     _xetexFile.Write(textIndent);
                 }
-
             }
             else if ((_tagType == "span") && _classInlineStyle.ContainsKey(childClass))
             {
@@ -1586,6 +1617,11 @@ namespace SIL.PublishingSolution
                             displayNoneStart = "\\begin{comment}";
                             displayNoneEnd = "\\end{comment}\r\n";
                         }
+                        else if (propName == "RTL")
+                        {
+                            directionStart = "\\begin{RTLitems} \\item";
+                            directionEnd = "\\end{RTLitems}";
+                        }
                     }
                 }
 
@@ -1594,6 +1630,11 @@ namespace SIL.PublishingSolution
 
                     _xetexFile.WriteLine(displayNoneStart);
                     endParagraphString = displayNoneEnd + " " + endParagraphString;
+                }
+                if (directionStart != string.Empty)
+                {
+                    _xetexFile.WriteLine(directionStart);
+                    endParagraphString = directionEnd + " " + endParagraphString;
                 }
                 if (endParagraphString != string.Empty)
                 {
@@ -1888,7 +1929,16 @@ namespace SIL.PublishingSolution
             _paragraphPropertyList.Add("widows");
             _paragraphPropertyList.Add("orphans");
 
+            //Direction right to left
+            _paragraphPropertyList.Add("RTL");
 
+            if(IdAllClass.ContainsKey("@page"))
+            {
+                if(IdAllClass["@page"].ContainsKey("-ps-hide-versenumber-one"))
+                {
+                    _hideFirstVerseNo = bool.Parse(IdAllClass["@page"]["-ps-hide-versenumber-one"]);
+                }
+            }
         }
 
         /// -------------------------------------------------------------------------------------------

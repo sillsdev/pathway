@@ -1274,7 +1274,8 @@ namespace SIL.PublishingSolution
                     content = content.Replace(" // ", @"text:line-break/");
                     if (content.IndexOf(@"text:line-break/") >= 0)
                     {
-                        _writer.WriteRaw(content.Replace(@"text:line-break/", @"<text:line-break/>"));
+                        content = content.Replace(@"text:line-break/", @"<text:line-break/>");
+                        _writer.WriteRaw(content);
                     }
                     else
                     {
@@ -1328,8 +1329,9 @@ namespace SIL.PublishingSolution
                     width = "50pt";
                 }
 
-                string logoFromPath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
-                logoFromPath = Common.PathCombine(Path.GetDirectoryName(logoFromPath), logoName);
+                var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+                string logoFromPath = Common.PathCombine(copyrightDir, logoName);
+
                 string normalTargetFile = _projInfo.TempOutputFolder;
                 string basePath = normalTargetFile.Substring(0,
                                                              normalTargetFile.LastIndexOf(Path.DirectorySeparatorChar));
@@ -1607,8 +1609,15 @@ namespace SIL.PublishingSolution
         {
             if (_anchorStart)
             {
-                string val = _anchorBookMarkName.Replace("href#", "").Replace("name", "");
-                if ((_sourceList.Contains(val.ToLower()) && _targetList.Contains(val.ToLower())))
+                if (_anchorBookMarkName.IndexOf("href#") == 0 || _anchorBookMarkName.IndexOf("name") == 0)
+                {
+                    string val = _anchorBookMarkName.Replace("href#", "").Replace("name", "");
+                    if ((_sourceList.Contains(val.ToLower()) && _targetList.Contains(val.ToLower())))
+                    {
+                        _anchorWrite = true;
+                    }
+                }
+                else if (_anchorBookMarkName.IndexOf("href") == 0)
                 {
                     _anchorWrite = true;
                 }
@@ -2458,7 +2467,7 @@ namespace SIL.PublishingSolution
                     else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0, 
                     {
                         double value = .9;
-                        if (_allStyle.Peek().IndexOf("logo") == 0)
+                        if (_allStyle.Peek().IndexOf("logo") == 0 || _allStyle.Peek().IndexOf("LText_FrontMatter") == 0)
                         {
                             if (_projInfo.ProjectInputType.ToLower() == "scripture")
                             {
@@ -2562,6 +2571,10 @@ namespace SIL.PublishingSolution
                     {
                         _writer.WriteAttributeString("svg:width", "2.3063in");
                     }
+                    else if (_allStyle.Peek().IndexOf("LText_FrontMatter") == 0)
+                    {
+                        _writer.WriteAttributeString("svg:width", ".7in");
+                    }
                     else
                     {
                         if (width != "100%")
@@ -2587,10 +2600,19 @@ namespace SIL.PublishingSolution
                         HoriAlignment = "center";
                         wrapSide = "none";
                     }
+                    else if (_allStyle.Peek().IndexOf("LText_FrontMatter") == 0)
+                    {
+                        HoriAlignment = "left";
+                        wrapSide = "center";
+                    }
 
                     ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
                     modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strGraphicsCount, _util.ParentName, HoriAlignment,
                                                        wrapSide);
+                    if (_allStyle.Peek().IndexOf("LText_FrontMatter") == 0)
+                    {
+                        wrapSide = "logo";
+                    }
                     modifyIDStyles.CreateFrameStyle(_styleFilePath, strFrameStyCount, _util.ParentName, HoriAlignment,
                                                        wrapSide, strGraphicsCount);
 

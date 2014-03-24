@@ -1,6 +1,4 @@
 \documentclass[a4paper]{article} 
-\usepackage{changepage}
-\usepackage{setspace}
 \usepackage{float}
 \usepackage{grffile}
 \usepackage{graphicx}
@@ -10,6 +8,8 @@
 \usepackage{multicol}
 \usepackage{calc}
 \usepackage{lettrine}
+\usepackage{changepage}
+\usepackage{setspace}
 \usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
 
 \parindent=0pt
@@ -17,6 +17,7 @@
 \begin{document} 
 \pagestyle{plain} 
 \sloppy 
+\setlength{\parfillskip}{0pt plus 1fil} 
 \font\ta="Times New Roman":color=ff0000 at 32pt
 \font\tbta="Times New Roman":color=0000ff at 16pt
 \font\tctbta="Times New Roman":color=008000 at 8pt

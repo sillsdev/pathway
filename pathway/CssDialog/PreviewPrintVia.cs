@@ -289,10 +289,17 @@ namespace SIL.PublishingSolution
             if (page == 1)
             {
                 if (grid.SelectedRows[0].Cells[6].Value.ToString().ToLower() == "custom")
+                {
                     ShowPreview(ref _previewFileName1);
+                    btnPrevious.Enabled = false;
+                    btnNext.Enabled = false;
+                }
+                else
+                {
+                    btnPrevious.Enabled = false;
+                    btnNext.Enabled = true;
+                }
                 preview = _previewFileName1;
-                btnPrevious.Enabled = false;
-                btnNext.Enabled = true;
             }
             else
             {

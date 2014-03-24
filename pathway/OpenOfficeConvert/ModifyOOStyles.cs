@@ -768,7 +768,7 @@ namespace SIL.PublishingSolution
                     }
                     else if (side == "right" || side == "left")
                     {
-                        SetAttribute("side","style:wrap");
+                        SetAttribute(side,"style:wrap");
                     }
                     else if (side == "center")
                     {
@@ -876,7 +876,7 @@ namespace SIL.PublishingSolution
                 {
                     _nameElement = (XmlElement)node.ChildNodes[1];
                     SetAttribute("foreground", "style:run-through");
-                    SetAttribute("dynamic", "style:wrap");
+                    SetAttribute(side == "logo" ? "none" : "dynamic", "style:wrap");
                     SetAttribute("no-limit", "style:number-wrapped-paragraphs");
                     SetAttribute("false", "style:wrap-contour");
                     SetAttribute("from-top", "style:vertical-pos");
