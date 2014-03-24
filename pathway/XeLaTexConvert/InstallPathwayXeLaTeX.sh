@@ -17,7 +17,7 @@ export TEXBIN=$PWD
 ./tlmgr install lm fontspec euenc tipa xkeyval xunicode
 ./tlmgr install fancyhdr float graphics hanging mdframed oberdiek
 ./tlmgr install setspace tools xcolor eso-pic geometry lettrine
-./tlmgr install bidi xetex xetex-def
+./tlmgr install bidi iftex xetex xetex-def
 mkdir -p $HOME/bin
 echo export PWDTEMP=\$PWD >$HOME/bin/xelatex
 echo cd \$HOME/PwTex/bin/\*  >>$HOME/bin/xelatex
@@ -27,9 +27,10 @@ echo xelatex \$1 \$2 \$3 \$4 >>$HOME/bin/xelatex
 chmod 775 $HOME/bin/xelatex
 mkdir -p $HOME/.mono/registry/CurrentUser/software/sil/pathwayxelatex
 echo import os >value.py
-echo print "'<values><value name=\"XELATEXDIR\" type=\"string\">' + os.environ[\"TEXBIN\"] + '</value><value name=\"XeLaTexVer\" type=\"string\">1.9</value></values>'" >>value.py
-python value.py >$HOME/.mono/registry/CurrentUser/software/sil/pathwayxelatex/values.xml
-./fmtutil --all
+echo print "'<values><value name=\"XELATEXDIR\" type=\"string\">' + os.environ[\"TEXBIN\"] + '</value><value name=\"XeLaTexVer\" type=\"string\">1.8.1</value></values>'" >>value.py
+python value.py >$HOME/.mono/registry/CurrentUser/software/sil/PathwayXeLaTeX/values.xml
+python value.py >$HOME/.config/fieldworks/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml
+l./fmtutil --all
 ./mktexlsr
 }
 
