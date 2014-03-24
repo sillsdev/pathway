@@ -616,6 +616,9 @@
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\tex" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\mk*" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\fmt*" />
+    <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\luatex" />
+    <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\pdftex" />
+    <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\mf-nowin" />
     <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\*.cache-3" />
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" Exclude="..\XeLaTexConvert\Paratexmf\**\.svn\**\**" />
   </ItemGroup>
