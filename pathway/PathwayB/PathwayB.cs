@@ -923,7 +923,8 @@ namespace SIL.PublishingSolution
                 {
                     if (File.Exists(Common.PathCombine(projInfo.ProjectPath, file)))
                     {
-                        var xmlDoc = new XmlDocument { XmlResolver = null };
+                        var xmlDoc = new XmlDocument();
+                        xmlDoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
                         xmlDoc.Load(Common.PathCombine(projInfo.ProjectPath, file));
                         docs.Add(xmlDoc);
                     }

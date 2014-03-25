@@ -367,7 +367,8 @@ namespace SIL.Tool
         private static string RemoveEmptyAnchorTag(string sourceFile)
         {
             const string tag = "a";
-            var xDoc = new XmlDocument { XmlResolver = null };
+            var xDoc = new XmlDocument();
+            xDoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             xDoc.Load(sourceFile);
             XmlNodeList nodeList = xDoc.GetElementsByTagName(tag);
             if (nodeList.Count > 0)

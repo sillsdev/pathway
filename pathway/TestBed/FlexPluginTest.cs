@@ -557,6 +557,13 @@ namespace TestBed
 
         private void btnXeLaTex_Click(object sender, EventArgs e)
         {
+
+            char c = '\u25C6';
+            string hex = ((int)c).ToString("X4"); // Now hex = "0123"
+            string a = "\u25C6";
+
+            MessageBox.Show(a); 
+
             if (!File.Exists(txtInputPath.Text))
             {
                 MessageBox.Show("Please enter the valid XHTML path");

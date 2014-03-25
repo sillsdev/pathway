@@ -846,7 +846,8 @@ namespace SIL.PublishingSolution
         /// <param name="xhtmlFileName">File name to parse</param>
         private void BuildLanguagesListOLD(string xhtmlFileName)
         {
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
@@ -896,7 +897,8 @@ namespace SIL.PublishingSolution
         private void GetXhtmlFileFontCodeandFontNameOLD(string xhtmlFileName)
         {
             if (!File.Exists(xhtmlFileName)) return;
-            XmlDocument xdoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             xdoc.Load(xhtmlFileName);
             XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
             if (metaNodes != null && metaNodes.Count > 0)

@@ -70,13 +70,14 @@ namespace SIL.PublishingSolution
 
             List<string> imageList = new List<string>();
 
-            if (!File.Exists(projInfo.DefaultXhtmlFileWithPath)) 
+            if (!File.Exists(projInfo.DefaultXhtmlFileWithPath))
                 return string.Empty;
 
             var xmldoc = new XmlDocument();
             try
             {
-                xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                xmldoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
+                xmldoc.PreserveWhitespace = true;
                 xmldoc.Load(projInfo.DefaultXhtmlFileWithPath);
                 string tag = "img";
                 XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
@@ -121,7 +122,7 @@ namespace SIL.PublishingSolution
                                     string audioFile = item.InnerText.Trim();
                                     audioFile = Common.RightRemove(audioFile, "\" o");
                                     audioFile = Common.LeftRemove(audioFile, "AudioVisual/");
-                                    audioFile = audioFile.Replace("%20", " ");                                    
+                                    audioFile = audioFile.Replace("%20", " ");
                                     string audioPath = Common.PathCombine(imageAudioRootPath, "AudioVisual");
                                     string audioFullPath = Common.PathCombine(audioPath, audioFile);
                                     if (File.Exists(audioFullPath))
@@ -154,7 +155,8 @@ namespace SIL.PublishingSolution
         {
             string imageRootPath = string.Empty;
             if (!File.Exists(projInfo.DefaultXhtmlFileWithPath)) return imageRootPath;
-            XmlDocument xdoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             xdoc.Load(projInfo.DefaultXhtmlFileWithPath);
             XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
             if (metaNodes != null && metaNodes.Count > 0)
@@ -321,7 +323,7 @@ namespace SIL.PublishingSolution
             {
                 txtTargetFileLocation.Text = txtTargetFileLocation.Text + "/";
             }
-            targetFileLocation = Common.PathCombine(txtTargetFileLocation.Text, txtWebFtpFldrNme.Text);   
+            targetFileLocation = Common.PathCombine(txtTargetFileLocation.Text, txtWebFtpFldrNme.Text);
             if (directoryLocalfiles.Length > 0)
             {
                 foreach (string fileName in directoryLocalfiles)
@@ -330,7 +332,7 @@ namespace SIL.PublishingSolution
                     Int64 fileLength = f2.Length;
                     progressBar.Value = Convert.ToInt32(_filesCount++ * 100 / _totalFiles);
 
-                    if(!CheckFileAlreadyExists(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text))
+                    if (!CheckFileAlreadyExists(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text))
                     {
                         UploadFileToFtpLocation(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text);
                     }
@@ -357,7 +359,7 @@ namespace SIL.PublishingSolution
                     Int64 fileLength = f2.Length;
                     progressBar.Value = Convert.ToInt32(_filesCount++ * 100 / _totalFiles);
 
-                    if(fileName.IndexOf(".css") > 0)
+                    if (fileName.IndexOf(".css") > 0)
                     {
                         UploadFileToFtpLocation(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text);
                     }
@@ -366,7 +368,7 @@ namespace SIL.PublishingSolution
                         if (!CheckFileAlreadyExists(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text))
                         {
                             UploadFileToFtpLocation(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text);
-                        }    
+                        }
                     }
                 }
             }
@@ -419,7 +421,7 @@ namespace SIL.PublishingSolution
                 FileInfo toUpload = new FileInfo(uploadDirectoryFiles);
 
                 //Get a new FtpWebRequest object.
-                FtpWebRequest request = (FtpWebRequest) WebRequest.Create(ftpLocation + "/" + toUpload.Name);
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpLocation + "/" + toUpload.Name);
                 //Method will be UploadFile.
                 request.Method = WebRequestMethods.Ftp.GetFileSize;
                 //Set our credentials.
@@ -432,7 +434,8 @@ namespace SIL.PublishingSolution
                 {
                     return false;
                 }
-            }catch
+            }
+            catch
             {
                 return false;
             }
@@ -448,7 +451,7 @@ namespace SIL.PublishingSolution
 
 
                 //Get a new FtpWebRequest object.
-                FtpWebRequest request = (FtpWebRequest) WebRequest.Create(ftpLocation + "/" + toUpload.Name);
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpLocation + "/" + toUpload.Name);
                 //Method will be UploadFile.
                 request.Method = WebRequestMethods.Ftp.UploadFile;
                 //Set our credentials.
@@ -475,7 +478,8 @@ namespace SIL.PublishingSolution
                 //Close the streams.
                 file.Close();
                 ftpStream.Close();
-            }catch
+            }
+            catch
             {
             }
         }
@@ -492,7 +496,7 @@ namespace SIL.PublishingSolution
                 FtpWebResponse response = (FtpWebResponse)ex.Response;
                 if (response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
                 {
-                    
+
                     return false;
                 }
                 else
@@ -542,7 +546,7 @@ namespace SIL.PublishingSolution
                         txtWebUrl.Text = attribValue;
                         break;
                     case "webadminusrnme":
-                        if(attribValue.Trim().Length == 0)
+                        if (attribValue.Trim().Length == 0)
                         {
                             attribValue = "webuser";
                         }
@@ -590,7 +594,7 @@ namespace SIL.PublishingSolution
                 txtSourceFileLocation.Text = Common.PathCombine(dictionaryDirectoryPath, "Wordpress\\");
                 string webonaryZipFile = Common.PathCombine(dictionaryDirectoryPath, "PathwayWebonary.zip");
                 long size = 0;
-                if(File.Exists(webonaryZipFile))
+                if (File.Exists(webonaryZipFile))
                 {
                     size = new FileInfo(webonaryZipFile).Length / 1024;
                 }
@@ -672,7 +676,8 @@ namespace SIL.PublishingSolution
                 address = address.Replace("ftp", "http");
                 address = Common.PathCombine(address, txtWebFtpFldrNme.Text);
                 Process.Start(address + "/");
-            }catch{}
+            }
+            catch { }
             this.Close();
         }
 
@@ -827,6 +832,6 @@ namespace SIL.PublishingSolution
         {
 
         }
-        
+
     }
 }

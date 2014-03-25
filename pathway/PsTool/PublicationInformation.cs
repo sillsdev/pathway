@@ -370,14 +370,8 @@ namespace SIL.Tool
                 projFile.WriteEndElement(); // Project End
                 projFile.Close();
             }
-            if (Common.IsUnixOS())
-            {
-                _DeXml.XmlResolver = new XmlUrlResolver();
-            }
-            else
-            {
-                _DeXml.XmlResolver = null;
-            }
+
+            _DeXml.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             _DeXml.Load(_projectFileWithPath);
             _dictExplorer = dictionaryExplorer;
             AddInitialFiles();
@@ -386,15 +380,7 @@ namespace SIL.Tool
         public void LoadProjectFile(string projFile)
         {
             ProjectFileWithPath = projFile;
-
-            if (Common.IsUnixOS())
-            {
-                _DeXml.XmlResolver = new XmlUrlResolver();
-            }
-            else
-            {
-                _DeXml.XmlResolver = null;
-            }
+            _DeXml.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             _DeXml.Load(projFile);
         }
 
@@ -403,14 +389,7 @@ namespace SIL.Tool
         /// </summary>
         private void UpdateProjectFile()
         {
-            if (Common.IsUnixOS())
-            {
-                _DeXml.XmlResolver = new XmlUrlResolver();
-            }
-            else
-            {
-                _DeXml.XmlResolver = null;
-            }
+            _DeXml.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             _DeXml.Load(_projectFileWithPath);
             XmlElement root = GetRootNode();
             const string xPath = "/Project/SolutionExplorer";

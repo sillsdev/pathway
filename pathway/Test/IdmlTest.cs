@@ -18,6 +18,7 @@ using System.Security.Cryptography.Xml;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
+using SIL.Tool;
 
 namespace Test
 {
@@ -41,10 +42,10 @@ namespace Test
                     string outputEntry = new StreamReader(outFl.GetInputStream(outFl.GetEntry(zipEntry.Name).ZipFileIndex)).ReadToEnd();
                     string expectEntry = new StreamReader(expFl.GetInputStream(expFl.GetEntry(zipEntry.Name).ZipFileIndex)).ReadToEnd();
                     XmlDocument outputDocument = new XmlDocument();
-                    outputDocument.XmlResolver = new XmlUrlResolver();
+                    outputDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
                     outputDocument.LoadXml(outputEntry);
                     XmlDocument expectDocument = new XmlDocument();
-                    expectDocument.XmlResolver = new XmlUrlResolver();
+                    outputDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
                     expectDocument.LoadXml(expectEntry);
                     XmlDsigC14NTransform outputCanon = new XmlDsigC14NTransform();
                     outputCanon.Resolver = new XmlUrlResolver();
@@ -83,7 +84,7 @@ namespace Test
             reader.Close();
             idmlFile.Close();
             var xmlDocument = new XmlDocument();
-            xmlDocument.XmlResolver = new XmlUrlResolver();
+            xmlDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             xmlDocument.LoadXml(text);
             return xmlDocument;
         }
