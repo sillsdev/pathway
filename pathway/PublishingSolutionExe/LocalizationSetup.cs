@@ -180,7 +180,8 @@ namespace SIL.PublishingSolution
         public static void GetFontNameSizeFromLoc(string language)
         {
             LocLanguage langID = LocDB.DB.FindLanguageByName(language);
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             string folderPath = Common.PathCombine(Common.GetAllUserPath(), "Loc");
 
             var localPath = "";
@@ -217,7 +218,8 @@ namespace SIL.PublishingSolution
         public static void SetFontNameSizeLoc(Font newFont, string language)
         {
             LocLanguage langID = LocDB.DB.FindLanguageByName(language);
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             string folderPath = Common.PathCombine(Common.GetAllUserPath(), "Loc");
 
             var localPath = Common.PathCombine(folderPath, langID.ID + ".xml");

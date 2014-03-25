@@ -29,7 +29,8 @@ namespace SIL.PublishingSolution
         {
             _projInfo = projInfo;
             var xhtmlFullName = projInfo.DefaultXhtmlFileWithPath;
-            _xmlDocument = new XmlDocument { XmlResolver = null };
+            _xmlDocument = new XmlDocument();
+            _xmlDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
             XmlReader xmlReader = XmlReader.Create(xhtmlFullName, xmlReaderSettings);
             _xmlDocument.Load(xmlReader);
@@ -37,8 +38,9 @@ namespace SIL.PublishingSolution
             _bookNodes = _xmlDocument.SelectNodes("//*[@class='scrBook']");
         }
 
-        public int Length {
-            get { return _bookNodes.Count; } 
+        public int Length
+        {
+            get { return _bookNodes.Count; }
         }
 
         internal void MakeBook(int i)
@@ -46,7 +48,8 @@ namespace SIL.PublishingSolution
             var code = GetCode(_bookNodes[i]);
             var fileName = MakeFileName(code);
             File.Copy(_projInfo.DefaultXhtmlFileWithPath, fileName);
-            var xDoc = new XmlDocument {XmlResolver = null};
+            var xDoc = new XmlDocument();
+            xDoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
             var xmlReader = XmlReader.Create(fileName, xmlReaderSettings);
             xDoc.Load(xmlReader);
@@ -105,7 +108,8 @@ namespace SIL.PublishingSolution
         {
             var code = GetCode(_bookNodes[0]);
             var firstCvName = MakeCvFileName(code);
-            var xDoc = new XmlDocument { XmlResolver = null };
+            var xDoc = new XmlDocument();
+            xDoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
             var xmlReader = XmlReader.Create(firstCvName, xmlReaderSettings);
             xDoc.Load(xmlReader);
@@ -118,7 +122,8 @@ namespace SIL.PublishingSolution
             {
                 code = GetCode(_bookNodes[i]);
                 var nextReader = XmlReader.Create(MakeCvFileName(code), xmlReaderSettings);
-                var nextDoc = new XmlDocument {XmlResolver = null};
+                var nextDoc = new XmlDocument();
+                nextDoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
                 nextDoc.Load(nextReader);
                 nextReader.Close();
                 var nextBookNode = nextDoc.SelectSingleNode("//*[@class='scrBook']");
