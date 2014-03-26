@@ -323,7 +323,7 @@ namespace SIL.PublishingSolution
                 return false;
             }
 
-            _pathwayXml = Common.DeclareXMLDocument(false);
+            _pathwayXml = new XmlDocument();
             _pathwayXml.Load(_pathwayFilePath);
             _pathwayRoot = _pathwayXml.DocumentElement;
             if (_pathwayRoot == null)

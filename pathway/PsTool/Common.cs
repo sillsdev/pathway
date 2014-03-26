@@ -4172,16 +4172,27 @@ namespace SIL.Tool
                 resolver.Credentials = CredentialCache.DefaultCredentials;
 
                 if (applyWhitespace)
-                    reader = new XmlTextReader(fileName) { XmlResolver = resolver, WhitespaceHandling = WhitespaceHandling.Significant };
+                {
+                    reader = new XmlTextReader(fileName);
+                    reader.XmlResolver = FileStreamXmlResolver.GetNullResolver();
+                    reader.WhitespaceHandling = WhitespaceHandling.Significant;
+                }
                 else
-                    reader = new XmlTextReader(fileName) { XmlResolver = resolver };
+                {
+                    reader = new XmlTextReader(fileName);
+                    reader.XmlResolver = FileStreamXmlResolver.GetNullResolver();
+                }
             }
             else
             {
                 if (applyWhitespace)
-                    reader = new XmlTextReader(fileName) { XmlResolver = null, WhitespaceHandling = WhitespaceHandling.Significant };
+                    reader = new XmlTextReader(fileName)
+                        {
+                            XmlResolver = null,
+                            WhitespaceHandling = WhitespaceHandling.Significant
+                        };
                 else
-                    reader = new XmlTextReader(fileName) { XmlResolver = null };
+                    reader = new XmlTextReader(fileName) {XmlResolver = null};
 
             }
             return reader;
@@ -4196,9 +4207,18 @@ namespace SIL.Tool
                 resolver.Credentials = CredentialCache.DefaultCredentials;
 
                 if (applyWhitespace)
-                    reader = new XmlTextReader(fileName) { XmlResolver = resolver, ProhibitDtd = true, WhitespaceHandling = WhitespaceHandling.None };
+                {
+                    reader = new XmlTextReader(fileName);
+                    reader.XmlResolver = FileStreamXmlResolver.GetNullResolver();
+                    reader.ProhibitDtd = true;
+                    reader.WhitespaceHandling = WhitespaceHandling.None;
+                }
                 else
-                    reader = new XmlTextReader(fileName) { XmlResolver = resolver, ProhibitDtd = true };
+                {
+                    reader = new XmlTextReader(fileName);
+                    reader.XmlResolver = FileStreamXmlResolver.GetNullResolver();
+                    reader.ProhibitDtd = true;
+                }
             }
             else
             {
@@ -4699,5 +4719,17 @@ namespace SIL.Tool
                 throw;
             }
         }
+
+        /// <summary>
+        /// Replace symbols(/$#@!%&^**_)) to space in the input string
+        /// </summary>
+        public static string ReplaceSymbolToUnderline(string inputText)
+        {
+            Regex regex = new Regex(@"[^a-zA-Z0-9\s]", (RegexOptions)0);
+            inputText = regex.Replace(inputText, "_");
+            return inputText;
+        }
+
+
     }
 }
