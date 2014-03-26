@@ -4699,5 +4699,17 @@ namespace SIL.Tool
                 throw;
             }
         }
+
+        /// <summary>
+        /// Replace symbols(/$#@!%&^**_)) to space in the input string
+        /// </summary>
+        public static string ReplaceSymbolToUnderline(string inputText)
+        {
+            Regex regex = new Regex(@"[^a-zA-Z0-9\s]", (RegexOptions)0);
+            inputText = regex.Replace(inputText, "_");
+            return inputText;
+        }
+
+
     }
 }

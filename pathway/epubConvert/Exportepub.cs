@@ -549,6 +549,7 @@ namespace SIL.PublishingSolution
                 {
                     fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 }
+                fileName = Common.ReplaceSymbolToUnderline(fileName);
                 Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
 #if (TIME_IT)
                 TimeSpan tsTotal = DateTime.Now - dt1;

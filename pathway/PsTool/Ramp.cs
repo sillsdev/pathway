@@ -1713,6 +1713,7 @@ namespace SIL.PublishingSolution
             {
                 _outputFileTitle = "Default Title";
             }
+            _outputFileTitle = Common.ReplaceSymbolToUnderline(_outputFileTitle);
 
             using (ZipFile zipFile = ZipFile.Create(Common.PathCombine(Path.GetDirectoryName(_folderPath), _outputFileTitle) + ".ramp"))
             {
