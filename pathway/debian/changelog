@@ -1,5 +1,8 @@
-pathway (1.7.2.3641-1) unstable; urgency=high
+pathway (1.7.3.3707-1) unstable; urgency=high
 
+  * pathway 1.7.3 daily
+    - handle install when launched from Firefox
+  * pathway 1.7.2 daily
   * pathway 1.7.0 sprint
     - Common:TD-3275 create custom outline level property
     - Common:TD-3780 test for folder existance when loading preprocessing
