@@ -666,49 +666,52 @@ namespace SIL.Tool
             {
                 return;
             }
-            var xmldoc = Common.DeclareXMLDocument(true);
-            xmldoc.Load(xhtmlFile);
-            XmlNodeList headnodes = xmldoc.GetElementsByTagName("head");
-            XmlNode headnode = headnodes[0];
-            XmlNode newNode;
-            XmlNodeList findnodes = xmldoc.GetElementsByTagName("link");
-            if (findnodes.Count > 0)
+            try
             {
-                newNode = findnodes[0].Clone();
-                if (newNode.Attributes.Count > 0)
-                    newNode.Attributes.RemoveAll();
-                if (newNode.ChildNodes.Count > 0)
-                    newNode.RemoveAll();
-
-                int countChild = findnodes.Count;
-                for (int i = 0; i < countChild; i++)
+                var xmldoc = Common.DeclareXMLDocument(true);
+                xmldoc.Load(xhtmlFile);
+                XmlNodeList headnodes = xmldoc.GetElementsByTagName("head");
+                XmlNode headnode = headnodes[0];
+                XmlNode newNode;
+                XmlNodeList findnodes = xmldoc.GetElementsByTagName("link");
+                if (findnodes.Count > 0)
                 {
-                    headnode.RemoveChild(findnodes[0]);
-                    break;
+                    newNode = findnodes[0].Clone();
+                    if (newNode.Attributes.Count > 0)
+                        newNode.Attributes.RemoveAll();
+                    if (newNode.ChildNodes.Count > 0)
+                        newNode.RemoveAll();
+
+                    int countChild = findnodes.Count;
+                    for (int i = 0; i < countChild; i++)
+                    {
+                        headnode.RemoveChild(findnodes[0]);
+                        break;
+                    }
                 }
+                else
+                {
+
+                    newNode = xmldoc.CreateElement("link");
+                }
+
+                XmlAttribute xmlAttrib = xmldoc.CreateAttribute("type");
+                xmlAttrib.Value = "text/css";
+                newNode.Attributes.Append(xmlAttrib);
+
+                xmlAttrib = xmldoc.CreateAttribute("rel");
+                xmlAttrib.Value = "stylesheet";
+                newNode.Attributes.Append(xmlAttrib);
+
+                xmlAttrib = xmldoc.CreateAttribute("href");
+                xmlAttrib.Value = defaultCSS;
+                newNode.Attributes.Append(xmlAttrib);
+
+                headnode.AppendChild(newNode);
+
+                xmldoc.Save(xhtmlFile);
             }
-            else
-            {
-
-                newNode = xmldoc.CreateElement("link");
-            }
-
-            XmlAttribute xmlAttrib = xmldoc.CreateAttribute("type");
-            xmlAttrib.Value = "text/css";
-            newNode.Attributes.Append(xmlAttrib);
-
-            xmlAttrib = xmldoc.CreateAttribute("rel");
-            xmlAttrib.Value = "stylesheet";
-            newNode.Attributes.Append(xmlAttrib);
-
-            xmlAttrib = xmldoc.CreateAttribute("href");
-            xmlAttrib.Value = defaultCSS;
-            newNode.Attributes.Append(xmlAttrib);
-
-            headnode.AppendChild(newNode);
-
-            xmldoc.Save(xhtmlFile);
-
+            catch {}
         }
 
         #region GetXmlNode
