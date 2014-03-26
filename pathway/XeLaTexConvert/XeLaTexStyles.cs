@@ -105,7 +105,10 @@ namespace SIL.PublishingSolution
                 _pageStyleFormat.Add("@page-top-center", "\\chead");
                 _pageStyleFormat.Add("@page-top-right", "\\rhead");
                 _pageStyleFormat.Add("@page-bottom-left", "\\lfoot");
-                _pageStyleFormat.Add("@page-bottom-center", "\\cfoot");
+                if (_cssProperty.ContainsKey("@page-bottom-center") && _cssProperty["@page-bottom-center"]["content"] == "|counter(page)|")
+                {
+                    _pageStyleFormat.Add("@page-bottom-center", "\\cfoot");
+                }
                 _pageStyleFormat.Add("@page-bottom-right", "\\rfoot");
                 _pageStyleFormat.Add("@page:first-top-left", "\\lhead");
                 _pageStyleFormat.Add("@page:first-top-center", "\\chead");
