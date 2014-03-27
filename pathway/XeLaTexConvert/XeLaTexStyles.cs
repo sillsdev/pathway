@@ -151,7 +151,9 @@ namespace SIL.PublishingSolution
                 pageName = "@page:right";
                 SetPageHeaderFooter(pageName);
             }
-            PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \\renewcommand{\\footrulewidth}{0.4pt}");
+            PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \r\n \\renewcommand{\\footrulewidth}{0.4pt} \r\n");
+            PageStyle.AppendLine("\\renewcommand{\\thefootnote}{\\alphalph{\\value{footnote}}} \r\n");
+            
         }
 
         private void SetPageHeaderFooter(string pageName)
@@ -234,8 +236,18 @@ namespace SIL.PublishingSolution
             Dictionary<string, string> pageLayoutProperty = new Dictionary<string, string>();
             if (_cssProperty.ContainsKey(pageName))
             {
-                Dictionary<string, string> cssClass1 = _cssProperty[pageName];
-                
+                Dictionary<string, string> cssClassProperty = _cssProperty[pageName];
+
+                if (cssClassProperty.ContainsKey("-ps-custom-footnote-caller"))
+                {
+                    foreach (KeyValuePair<string, string> para in cssClassProperty)
+                    {
+                        if (para.Key == "-ps-custom-footnote-caller" && para.Value != string.Empty)
+                        {
+                            PageStyle.AppendLine("\\renewcommand{\\thefootnote}{\\textit{\\"+ para.Value +"{}\\value{footnote}}} \r\n");
+                        }
+                    }
+                }
             }
             return pageLayoutProperty;
         }
