@@ -281,6 +281,7 @@ namespace SIL.PublishingSolution
                 sw.WriteLine(@"\usepackage{multicol}");
                 sw.WriteLine(@"\usepackage{calc}");
                 sw.WriteLine(@"\usepackage{lettrine}");
+                sw.WriteLine(@"\usepackage{alphalph}");
 
                 foreach (var package in includePackageList)
                 {
