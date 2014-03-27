@@ -673,10 +673,30 @@
                     <xsl:text disable-output-escaping="yes"><![CDATA[</i>]]></xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:if test="normalize-space(preceding-sibling::*[@style != 'fr']/text()) != ''">
-                        <xsl:text> </xsl:text>
+                    <xsl:for-each select="node()">
+                        <xsl:choose>
+                            <xsl:when test="@style = 'it' or @style = 'fq'">
+                                <xsl:if test="normalize-space(preceding-sibling::*[@style !='fr']/text()) != ''">
+                                    <xsl:text> </xsl:text>
+                                </xsl:if>
+                                <xsl:text disable-output-escaping="yes"><![CDATA[<i>]]></xsl:text>
+                                <xsl:value-of select="text()"/>
+                                <xsl:text disable-output-escaping="yes"><![CDATA[</i>]]></xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:if test="normalize-space(preceding-sibling::*[@style != 'fr']/text()) != ''">
+                                    <xsl:text> </xsl:text>
+                                </xsl:if>
+                                <xsl:call-template name="OutputText"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:for-each>
+                    <xsl:if test="count(node()) = 0">
+                        <xsl:if test="normalize-space(preceding-sibling::*[@style != 'fr']/text()) != ''">
+                            <xsl:text> </xsl:text>
+                        </xsl:if>
+                        <xsl:call-template name="OutputText"/>
                     </xsl:if>
-                    <xsl:call-template name="OutputText"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>

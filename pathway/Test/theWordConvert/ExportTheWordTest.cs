@@ -299,7 +299,7 @@ namespace Test.TheWordConvertTest
         [Test]
         public void S2Test()
         {
-            TestDataCase("GEN", "001GEN.usx", 237, "<TS1><font size=-1>The Japhethites</font><Ts><PI>\u2022 The sons<RF q=+><i>Sons </i> may mean <i>descendants </i> or <i>successors </i> or <i>nations; </i> also in verses 3, 4, 6, 7, 20-23, 29 and 31.<Rf> of Japheth:<CI><PI2>\u2022 Gomer, Magog, Madai, Javan, Tubal, Meshech and Tiras.<CI>");
+            TestDataCase("GEN", "001GEN.usx", 237, "<TS1><font size=-1>The Japhethites</font><Ts><PI>\u2022 The sons<RF q=+><i>Sons </i>may mean <i>descendants </i>or <i>successors </i>or <i>nations; </i>also in verses 3, 4, 6, 7, 20-23, 29 and 31.<Rf> of Japheth:<CI><PI2>\u2022 Gomer, Magog, Madai, Javan, Tubal, Meshech and Tiras.<CI>");
         }
 
         [Test]
@@ -435,6 +435,12 @@ namespace Test.TheWordConvertTest
         public void VerseBridgeInsideParaTest()
         {
             TestDataCase("MAT", "040MATtvb.usx", 4, "<sup>(4-5)</sup> Dungure Yesu maan iru di tongwa, \u201COmilin gi dungwa ibal pilaa dire kanungure, te kawn kebil sungwa u wai pire kol warungure, te seki egilungwa ibal gain wiige sungure, te kiraan gi dungwa ibal kwi pilaa dire ka pirungure, te gulungwa ibal alere u kwi pire mile paingure, te kal aa te nekungwa ibal na guunan kanan pirungure, kal iru erungwa main i kane pire, pi Yon di tenana po.");
+        }
+
+        [Test]
+        public void FootnoteEmbeddedItalicTest()
+        {
+            TestDataCase("GEN", "001GENheg.usx", 23, "Net bihatang na kon, atuling nga tek noan,<CI><PI>“Eli le! Ni halas-sam tom nol au!<CI><PI2>Un seen na banansila el auk seen ni kon.<CI>Nol un sisin na kon banansila el auk sising ngia.<CI>Undeng un daid deng biklobe lia, tiata auk ngali un ngala ka noan ‘bihata’.”<RF q=+>Se dais Ibranin nam, biklobe li noken ‘<i>ish</i> ’. Nol bihata li ‘ <i>isha</i> ’. Tiata se nia, oen kuti dais noan “ <i>isha</i> (bihata) daid deng <i>ish</i> (biklobe).”<Rf><CI>");
         }
 
         //[Test]
