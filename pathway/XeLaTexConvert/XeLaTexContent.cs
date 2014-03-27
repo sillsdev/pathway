@@ -90,6 +90,7 @@ namespace SIL.PublishingSolution
         private int _bookCount = 0;
         private bool _bookPageBreak;
         private bool _hideFirstVerseNo;
+        private bool _removeSpaceAfterVerse;
 		private bool _directionEnd = false;
         #endregion
 
@@ -570,7 +571,7 @@ namespace SIL.PublishingSolution
                 content = builder.ToString();
             }
             // No space after versenumber
-            if (_classNameWithLang.IndexOf("VerseNumber") == 0)
+            if (_removeSpaceAfterVerse && _classNameWithLang.IndexOf("VerseNumber") == 0)
             {
                 _isWhiteSpace = true;
             }
@@ -950,7 +951,11 @@ namespace SIL.PublishingSolution
             {
                 string styleName = _childName;
                 styleName = Common.ReplaceSeperators(styleName);
-                _xetexFile.Write(" \\footnote {\\" + styleName + "{" + content + "} } ");
+                if (_removeSpaceAfterVerse)
+                {
+                    _xetexFile.Write(" ");
+                }
+                _xetexFile.Write("\\footnote {\\" + styleName + "{" + content + "}}");
             }
         }
 
