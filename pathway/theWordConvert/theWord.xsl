@@ -776,15 +776,10 @@
         <xsl:param name="book"/>
         <xsl:param name="chap"/>
         <xsl:param name="verseListLeft" />
-        <xsl:param name="refsLeft"/>        
-        <xsl:variable name="refAbbr" select="substring-before($ref, ' ')"/>
+        <xsl:param name="refsLeft"/>
+        <xsl:param name="bookSoFar"/>
+        <xsl:variable name="refAbbr" select="concat($bookSoFar, substring-before(substring-after($ref, $bookSoFar), ' '))"/>
         <xsl:variable name="refBook" select="$bookNamesBook[@short=$refAbbr] | $bookNamesBook[@abbr=$refAbbr]"/>
-        <xsl:variable name="refNAbbr">
-            <xsl:value-of select="$refAbbr"/>
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="substring-before(substring-after($ref, ' '), ' ')"/>
-        </xsl:variable>
-        <xsl:variable name="refNBook" select="$bookNamesBook[@short=$refNAbbr] | $bookNamesBook[@abbr=$refNAbbr]"/>
         <xsl:choose>
             <!-- No book abbr, continue in the same book -->
             <xsl:when test="not(contains($ref, ' '))">
@@ -821,21 +816,15 @@
                 </xsl:if>
             </xsl:when>
             <!-- book name is a digit followed by a space and then the rest of book abbr -->
-            <xsl:when test="count($refNBook) = 1">
-                <xsl:call-template name="ReferenceFindChapter">
-                    <xsl:with-param name="ref" select="$ref"/>
-                    <xsl:with-param name="refCV" select="substring($ref, string-length($refNAbbr) + 2)"/>
-                    <xsl:with-param name="refBook" select="$refNBook"/>
+            <xsl:when test="contains(substring-after($ref, concat($refAbbr, ' ')), ' ')">
+                <xsl:call-template name="ReferenceFindBook">
+                    <xsl:with-param name="book" select="$book"/>
                     <xsl:with-param name="chap" select="$chap"/>
+                    <xsl:with-param name="ref" select="$ref"/>
+                    <xsl:with-param name="refsLeft" select="$refsLeft"/>
                     <xsl:with-param name="verseListLeft" select="$verseListLeft"/>
+                    <xsl:with-param name="bookSoFar" select="concat($refAbbr, ' ')"/>
                 </xsl:call-template>
-                <xsl:if test="$refsLeft != ''">
-                    <xsl:text>; </xsl:text>
-                    <xsl:call-template name="CrossReferenceIter">
-                        <xsl:with-param name="textLeft" select="$refsLeft"/>
-                        <xsl:with-param name="book" select="$refNBook"/>
-                    </xsl:call-template>
-                </xsl:if>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:message terminate="no">

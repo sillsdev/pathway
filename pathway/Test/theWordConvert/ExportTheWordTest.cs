@@ -443,6 +443,13 @@ namespace Test.TheWordConvertTest
             TestDataCase("GEN", "001GENheg.usx", 23, "Net bihatang na kon, atuling nga tek noan,<CI><PI>“Eli le! Ni halas-sam tom nol au!<CI><PI2>Un seen na banansila el auk seen ni kon.<CI>Nol un sisin na kon banansila el auk sising ngia.<CI>Undeng un daid deng biklobe lia, tiata auk ngali un ngala ka noan ‘bihata’.”<RF q=+>Se dais Ibranin nam, biklobe li noken ‘<i>ish</i> ’. Nol bihata li ‘ <i>isha</i> ’. Tiata se nia, oen kuti dais noan “ <i>isha</i> (bihata) daid deng <i>ish</i> (biklobe).”<Rf><CI>");
         }
 
+        [Test]
+        public void MultiWordBookNameTest()
+        {
+            var bookNames = "file:///" + FileInput("hegBookNames.xml");
+            TestDataCase("GEN", "001GENheg2.usx", 4, "<sup>(4a-4b)</sup> Ama Lamtua Allah in koet apan-dapa kua nol apan-kloma kia ka, un dehet ta ela.<CM> <sup>4b</sup> <TS1>Ama Lamtua Allah koet biklobe nol bihata<Ts><TS3><i>(<a href=\"tw://bible.*?40.19:4-6.1\">Matius 19:4-6</a>; <a href=\"tw://bible.*?41.10:4-9.1\">Markus 10:4-9</a>; <a href=\"tw://bible.*?46.6:16.1\">Korintus mesa la 6:16</a>; <a href=\"tw://bible.*?46.15:45.1\">15:45</a>, <a href=\"tw://bible.*?46.15:45.47\">47</a>; <a href=\"tw://bible.*?49.5:31-33.1\">Efesus 5:31-33</a>)</i><Ts>Dedeng AMA LAMTUA Allah halas-sam mana le koet apan-dapa ku nol apan-kloma kia ka,", bookNames, ".");
+        }
+
         //[Test]
         //public void myTest()
         //{
