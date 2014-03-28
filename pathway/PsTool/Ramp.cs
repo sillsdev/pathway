@@ -386,7 +386,7 @@ namespace SIL.PublishingSolution
 
         protected void LoadLanguagefromXML()
         {
-            string xmlFilePath = Common.PathCombine(Common.GetBinPath(), "RampLangCode.xml");
+            string xmlFilePath = CopiedToTempRampLangXMLFile();
             if (!File.Exists(xmlFilePath))
                 return;
 
@@ -419,6 +419,32 @@ namespace SIL.PublishingSolution
                     _isoLanguageScriptandName.Add(node.Attributes["name"].Value, node.Attributes["scriptname"].Value);
                 }
             }
+        }
+
+        private string CopiedToTempRampLangXMLFile()
+        {
+            string fileName = "RampLangCode.xml";
+            string PsSupportPath = Common.GetBinPath();
+            string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, fileName);
+            string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
+            if (Directory.Exists(tempFolder))
+            {
+                try
+                {
+                    DirectoryInfo di = new DirectoryInfo(tempFolder);
+                    Common.CleanDirectory(di);
+                }
+                catch
+                {
+                    tempFolder = Common.PathCombine(Path.GetTempPath(),
+                                                    "SilPathWay" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
+                }
+            }
+            Directory.CreateDirectory(tempFolder);
+            string tempGenericFontFile = Common.PathCombine(tempFolder, fileName);
+
+            File.Copy(xmlFileNameWithPath, tempGenericFontFile, true);
+            return tempGenericFontFile;
         }
 
         private bool IsFromTestBed()

@@ -3198,10 +3198,10 @@ namespace SIL.Tool
 
         public static Dictionary<string, string> FillMappedFonts(Dictionary<string, string> fontLangMapTemp)
         {
-            string PsSupportPath = GetPSApplicationPath();
-            string xmlFileNameWithPath = PathCombine(PsSupportPath, "GenericFont.xml");
+            var tempGenericFontFile = CopiedToTempGenericFontFile();
+
             string xPath = "//font-language-mapping";
-            XmlNodeList fontList = GetXmlNodes(xmlFileNameWithPath, xPath);
+            XmlNodeList fontList = GetXmlNodes(tempGenericFontFile, xPath);
             if (fontList != null && fontList.Count > 0)
             {
                 foreach (XmlNode xmlNode in fontList)
@@ -3211,6 +3211,32 @@ namespace SIL.Tool
                 }
             }
             return fontLangMapTemp;
+        }
+
+        private static string CopiedToTempGenericFontFile()
+        {
+            string fileName = "GenericFont.xml";
+            string PsSupportPath = GetPSApplicationPath();
+            string xmlFileNameWithPath = PathCombine(PsSupportPath, fileName);
+            string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
+            if (Directory.Exists(tempFolder))
+            {
+                try
+                {
+                    DirectoryInfo di = new DirectoryInfo(tempFolder);
+                    Common.CleanDirectory(di);
+                }
+                catch
+                {
+                    tempFolder = Common.PathCombine(Path.GetTempPath(),
+                                                    "SilPathWay" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
+                }
+            }
+            Directory.CreateDirectory(tempFolder);
+            string tempGenericFontFile = PathCombine(tempFolder, fileName);
+
+            File.Copy(xmlFileNameWithPath, tempGenericFontFile, true);
+            return tempGenericFontFile;
         }
 
         public static Dictionary<string, string> FillMappedFonts(string wsPath, Dictionary<string, string> fontLangMapTemp)
@@ -3398,8 +3424,7 @@ namespace SIL.Tool
             int unicodeDecimal = 0;
             unicodeString = unicodeString.Trim();
             string fontName = string.Empty;
-            string PsSupportPath = GetPSApplicationPath();
-            string xmlFileNameWithPath = PathCombine(PsSupportPath, "GenericFont.xml");
+            string xmlFileNameWithPath = CopiedToTempGenericFontFile();
             string xPath = "//font-language-unicode-map";
             XmlNodeList fontList = GetXmlNodes(xmlFileNameWithPath, xPath);
             if (fontList != null && fontList.Count > 0)
