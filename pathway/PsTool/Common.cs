@@ -907,7 +907,15 @@ namespace SIL.Tool
             }
             if (value.IndexOf("2666") >= 0)
             {
-                value = value.Replace("2666", "$" + Common.ConvertUnicodeToString("\\2666") + "$");
+                value = value.Replace("2666", Common.ConvertUnicodeToString("\\2666")) + " ";
+            }
+            if (value.IndexOf("2023") >= 0)
+            {
+                value = value.Replace("2023", Common.ConvertUnicodeToString("\\2665")) + " ";
+            }
+            if (value.IndexOf("25C6") >= 0)
+            {
+                value = value.Replace("25C6", Common.ConvertUnicodeToString("\\2666")) + " ";
             }
             return value;
         }
