@@ -483,8 +483,6 @@ namespace SIL.PublishingSolution
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
             {
-                if (psuedoBefore.Content == "2023")
-                    psuedoBefore.Content = @"\char""2665";
                 WriteCharacterStyle(psuedoBefore.Content, psuedoBefore.StyleName);
             }
 

@@ -562,7 +562,7 @@ namespace TestBed
             string hex = ((int)c).ToString("X4"); // Now hex = "0123"
             string a = "\u25C6";
 
-            MessageBox.Show(a); 
+            //MessageBox.Show(a); 
 
             if (!File.Exists(txtInputPath.Text))
             {
