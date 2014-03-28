@@ -224,7 +224,7 @@
     </style:default-style>
     <style:default-style style:family="paragraph">
       <style:paragraph-properties fo:hyphenation-ladder-count="no-limit" style:text-autospace="ideograph-alpha" style:punctuation-wrap="hanging" style:line-break="strict" style:tab-stop-distance="0.4925in" style:writing-mode="page" />
-      <style:text-properties style:use-window-font-color="true" style:font-name="Times New Roman" fo:font-size="12pt" fo:language="none" fo:country="none" style:letter-kerning="true" style:font-name-asian="Yi plus Phonetics" style:font-size-asian="12pt" style:language-asian="none" style:country-asian="none" style:font-name-complex="Tahoma" style:font-size-complex="12pt" style:language-complex="zxx" style:country-complex="none" fo:hyphenate="false" fo:hyphenation-remain-char-count="2" fo:hyphenation-push-char-count="2" />
+      <style:text-properties style:use-window-font-color="true" style:font-name="Times New Roman" fo:font-size="12pt" fo:language="none" fo:country="none" style:letter-kerning="true" style:font-name-asian="Times New Roman" style:font-size-asian="12pt" style:language-asian="none" style:country-asian="none" style:font-name-complex="Times New Roman" style:font-size-complex="12pt" style:language-complex="zxx" style:country-complex="none" fo:hyphenate="false" fo:hyphenation-remain-char-count="2" fo:hyphenation-push-char-count="2" />
     </style:default-style>
     <style:default-style style:family="table">
       <style:table-properties table:border-model="collapsing" />
@@ -264,15 +264,15 @@
       <style:paragraph-properties fo:margin-top="0in" fo:margin-bottom="0.0835in" />
     </style:style>
     <style:style style:name="List" style:family="paragraph" style:parent-style-name="Text_20_body" style:class="list">
-      <style:text-properties style:font-name-asian="Yi plus Phonetics" style:font-name-complex="Tahoma1" />
+      <style:text-properties style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" />
     </style:style>
     <style:style style:name="Caption" style:family="paragraph" style:parent-style-name="Standard" style:class="extra">
       <style:paragraph-properties fo:margin-top="0.0835in" fo:margin-bottom="0.0835in" text:number-lines="false" text:line-number="0" />
-      <style:text-properties fo:font-size="12pt" fo:font-style="italic" style:font-name-asian="Yi plus Phonetics" style:font-size-asian="12pt" style:font-style-asian="italic" style:font-name-complex="Tahoma1" style:font-size-complex="12pt" style:font-style-complex="italic" />
+      <style:text-properties fo:font-size="12pt" fo:font-style="italic" style:font-name-asian="Times New Roman" style:font-size-asian="12pt" style:font-style-asian="italic" style:font-name-complex="Times New Roman" style:font-size-complex="12pt" style:font-style-complex="italic" />
     </style:style>
     <style:style style:name="Index" style:family="paragraph" style:parent-style-name="Standard" style:class="index">
       <style:paragraph-properties text:number-lines="false" text:line-number="0" />
-      <style:text-properties style:font-name-asian="Yi plus Phonetics" style:font-name-complex="Tahoma1" />
+      <style:text-properties style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" />
     </style:style>
     <style:style style:name="Frame_20_contents" style:display-name="Frame contents" style:family="paragraph" style:parent-style-name="headerFontStyleName" style:class="extra">
       <style:paragraph-properties fo:text-align="center" style:justify-single-word="false" />
@@ -288,7 +288,7 @@
           <style:tab-stop style:position="4.8028in" style:type="right" style:leader-style="dotted" style:leader-text="." />
         </style:tab-stops>
       </style:paragraph-properties>
-      <style:text-properties style:font-name="GenericFont" fo:language="zxx" fo:country="none" style:font-name-complex="GenericFont" />
+      <style:text-properties style:font-name="Times New Roman" fo:language="zxx" fo:country="none" style:font-name-complex="Times New Roman" />
     </style:style>
     <style:style style:name="Graphics" style:family="graphic">
       <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" />

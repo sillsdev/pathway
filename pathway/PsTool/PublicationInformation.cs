@@ -71,7 +71,7 @@ namespace SIL.Tool
         public float DefaultFontSize = 12;
         private bool _isFrontMatterEnabled = false;
         private bool _isODM;
-        public string _headerFontName = "GenericFont";
+        public string _headerFontName = "Times New Roman";
         public string _selectedTemplateStyle = string.Empty;
 
         private string _headerReferenceFormat = string.Empty;
