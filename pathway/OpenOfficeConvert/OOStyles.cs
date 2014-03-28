@@ -1251,8 +1251,8 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:parent-style-name", "Text_20_body");
             _writer.WriteAttributeString("style:class", "list");
             _writer.WriteStartElement("style:text-properties");
-            _writer.WriteAttributeString("style:font-name-asian", "Yi plus Phonetics");
-            _writer.WriteAttributeString("style:font-name-complex", "Tahoma1");
+            _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
+            _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
@@ -1272,10 +1272,10 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("style:text-properties");
             _writer.WriteAttributeString("fo:font-size", "12pt");
             _writer.WriteAttributeString("fo:font-style", "italic");
-            _writer.WriteAttributeString("style:font-name-asian", "Yi plus Phonetics");
+            _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-size-asian", "12pt");
             _writer.WriteAttributeString("style:font-style-asian", "italic");
-            _writer.WriteAttributeString("style:font-name-complex", "Tahoma1");
+            _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-size-complex", "12pt");
             _writer.WriteAttributeString("style:font-style-complex", "italic");
             _writer.WriteEndElement();
@@ -1293,8 +1293,8 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:line-number", "0");
             _writer.WriteEndElement();
             _writer.WriteStartElement("style:text-properties");
-            _writer.WriteAttributeString("style:font-name-asian", "Yi plus Phonetics");
-            _writer.WriteAttributeString("style:font-name-complex", "Tahoma1");
+            _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
+            _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
@@ -1635,11 +1635,11 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("fo:language", "none");
             _writer.WriteAttributeString("fo:country", "none");
             _writer.WriteAttributeString("style:letter-kerning", _enableKerning);
-            _writer.WriteAttributeString("style:font-name-asian", "Yi plus Phonetics");
+            _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-size-asian", "12pt");
             _writer.WriteAttributeString("style:language-asian", "none");
             _writer.WriteAttributeString("style:country-asian", "none");
-            _writer.WriteAttributeString("style:font-name-complex", "Tahoma");
+            _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-size-complex", "12pt");
             _writer.WriteAttributeString("style:language-complex", "zxx");
             _writer.WriteAttributeString("style:country-complex", "none");

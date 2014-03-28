@@ -733,6 +733,7 @@ namespace SIL.PublishingSolution
             cssTree.OutputType = Common.OutputType.ODT;
             cssClass = cssTree.CreateCssProperty(cssFile, true);
             HandledInCss(ref projInfo, ref cssClass);
+            SetHeaderFontName(projInfo, cssClass);
             int pageWidth = GetPictureWidth(cssClass);
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
@@ -780,7 +781,6 @@ namespace SIL.PublishingSolution
             cXML._multiLanguageHeader = isMultiLanguageHeader;
             cXML.RefFormat = this._refFormat;
 
-            SetHeaderFontName(projInfo, idAllClass);
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize);
             PostProcess(projInfo);
 
@@ -898,6 +898,13 @@ namespace SIL.PublishingSolution
                 if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
                 {
                     projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
+                }
+            }
+            else if (projInfo.ProjectInputType == "Scripture")
+            {
+                if (idAllClass.ContainsKey("scrBody") && idAllClass["scrBody"].ContainsKey("font-family"))
+                {
+                    projInfo.HeaderFontName = idAllClass["scrBody"]["font-family"];
                 }
             }
         }
