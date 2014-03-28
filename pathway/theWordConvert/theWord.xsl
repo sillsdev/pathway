@@ -676,7 +676,9 @@
                     <xsl:for-each select="node()">
                         <xsl:choose>
                             <xsl:when test="@style = 'it' or @style = 'fq'">
-                                <xsl:if test="normalize-space(preceding-sibling::*[@style !='fr']/text()) != ''">
+                                <xsl:variable name="precChar" select="substring(preceding::node()[1], string-length(preceding::node()[1]))"/>
+                                <!-- check that preceding character was not an open single quote (U+2018) or an open double quote (U+201C) -->
+                                <xsl:if test="normalize-space(preceding-sibling::*[@style !='fr']/text()) != '' and $precChar != '&#x2018;' and $precChar != '&#x201c;'">
                                     <xsl:text> </xsl:text>
                                 </xsl:if>
                                 <xsl:text disable-output-escaping="yes"><![CDATA[<i>]]></xsl:text>
@@ -684,7 +686,8 @@
                                 <xsl:text disable-output-escaping="yes"><![CDATA[</i>]]></xsl:text>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:if test="normalize-space(preceding-sibling::*[@style != 'fr']/text()) != ''">
+                                <!-- the next text should not begin with a closing single quote (U+2019) or a closing double quote (U+201D) -->
+                                <xsl:if test="normalize-space(preceding-sibling::*[@style != 'fr']/text()) != '' and not(starts-with(.,'&#x2019;')) and not(starts-with(.,'&#x201d;'))">
                                     <xsl:text> </xsl:text>
                                 </xsl:if>
                                 <xsl:call-template name="OutputText"/>
