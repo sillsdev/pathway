@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BookNames>
+  <book code="MAT" abbr="Mat" short="Matius" long="Dehet Banan deng Lamtua Yesus muding Matius" />
+  <book code="MRK" abbr="Mrk" short="Markus" long="Dehet Dais Banan deng Yesus Kristus muding Markus" />
+  <book code="LUK" abbr="Luk" short="Lukas" long="Dehet Banan deng Lamtua Yesus, muding Lukas" />
+  <book code="JHN" abbr="Yoh" short="Yuhanis" long="Lamtua Yesus Dehet Dais Banan na muding Yuhanis" />
+  <book code="ACT" abbr="Kis" short="Dehet deng Aan in Nutus sas" long="Dehet deng Lamtua Yesus anan in nutus sas" />
+  <book code="ROM" abbr="Rm" short="Roma" long="Surat deng Paulus bel atuil in parsai se kota Roma" />
+  <book code="1CO" abbr="1Kor" short="Korintus mesa la" long="Paulus surat laih hmunan na bel atuil in parsai se kota Korintus" />
+  <book code="2CO" abbr="2Kor" short="Korintus dua la" long="Paulus surat lalis dua in bel atuil man parsai se kota Korintus" />
+  <book code="GAL" abbr="Gal" short="Galatia" long="Paulus surat in bel totoang jemaat se propinsi Galatia" />
+  <book code="EPH" abbr="Ef" short="Efesus" long="Paulus surat in bel atuil man parsai se kota Efesus" />
+  <book code="PHP" abbr="Flp" short="Filipi" long="Paulus surat in bel atuil man parsai se kota Filipi" />
+  <book code="COL" abbr="Kol" short="Kolose" long="Paulus surat man bel atuil in parsai se kota Kolose" />
+  <book code="1TH" abbr="1Tes" short="Tesalonika mesa la" long="Surat laih hmunan deng Paulus bel jamaat se kota Tesalonika" />
+  <book code="2TH" abbr="2Tes" short="Tesalonika dua la" long="Paulus surat lalis dua in bel jemaat se kota Tesalonika ka" />
+  <book code="1TI" abbr="1Tim" short="Timutius mesa la" long="Surat laih hmunan deng Paulus bel un tapa Timutius" />
+  <book code="2TI" abbr="2Tim" short="Timutius dua la" long="Paulus surat dua in bel un tapa Timutius sa" />
+  <book code="TIT" abbr="Tit" short="Titus" long="Surat deng Paulus bel un tapa Titus" />
+  <book code="PHM" abbr="Flm" short="Filemon" long="Surat deng Paulus bel Filemon" />
+  <book code="HEB" abbr="Ibr" short="Ibrani" long="Surat bel atuil Ibrani las man halas-sam nang oen upu kia-kaon nas agama la le parsai se Yesus Kristus" />
+  <book code="JAS" abbr="Yak" short="Yakobus" long="Surat deng tulu in kil grija se Yerusalem, ngala Yakobus" />
+  <book code="1PE" abbr="1Pet" short="Petrus mesa la" long="Petrus surat laih hmunan na" />
+  <book code="2PE" abbr="2Pet" short="Petrus dua la" long="Petrus surat dua la" />
+  <book code="1JN" abbr="1Yoh" short="Yuhanis mesa la" long="Yuhanis surat mesa la" />
+  <book code="2JN" abbr="2Yoh" short="Yuhanis dua la" long="Yuhanis surat dua la" />
+  <book code="3JN" abbr="3Yoh" short="Yuhanis tilu la" long="Yuhanis surat tilu la" />
+  <book code="JUD" abbr="Yud" short="Yudas" long="Surat deng Yudas" />
+  <book code="REV" abbr="Why" short="Apan-kloma Hnika Balu" long="Yuhanis dul deng, mam asa man daid se leol kiamat tia — Apan-kloma Hnika Balu" />
+  <book code="FRT" abbr="" short="" long="" />
+  <book code="GEN" abbr="Kej" short="Dehet deng Apan-kloma ki in Dadi ka" long="Dehet Hmunan Hesa Kua — Ama Lamtua Allah koet apan-dapa kua nol apan-kloma kia" />
+  <book code="EXO" abbr="" short="Dehet in Puit deng Dale Mesir" long="" />
+  <book code="LEV" abbr="" short="Atorang deng Tulu Agama las" long="" />
+  <book code="NUM" abbr="" short="Buk in Kahi" long="" />
+  <book code="DEU" abbr="" short="Dehet Ulang deng Lalan in Nuli" long="" />
+  <book code="JOS" abbr="" short="Yosua" long="" />
+  <book code="JDG" abbr="" short="Atuil in Nutus Dasi ngas" long="" />
+  <book code="RUT" abbr="" short="" long="" />
+  <book code="1SA" abbr="" short="Samuel mesa la" long="" />
+  <book code="2SA" abbr="" short="Samuel dua la" long="" />
+  <book code="1KI" abbr="" short="Lahi-lahi las Buk laih hmunan na" long="" />
+  <book code="2KI" abbr="" short="Lahi-lahi las Buk nomer dua la" long="" />
+  <book code="1CH" abbr="" short="Dehet deng Bangsa Israel nol Bangsa Yahuda lalis mesa la" long="" />
+  <book code="2CH" abbr="" short="Dehet deng Bangsa Israel nol Bangsa Yahuda lalis dua la" long="" />
+  <book code="EZR" abbr="" short="Esra" long="" />
+  <book code="NEH" abbr="" short="Nehemia" long="" />
+  <book code="EST" abbr="" short="" long="" />
+  <book code="JOB" abbr="" short="Ayub" long="" />
+  <book code="PSA" abbr="" short="Buk in Naka-nahalit" long="" />
+  <book code="PRO" abbr="" short="Dasi-dais Lila" long="" />
+  <book code="ECC" abbr="" short="" long="" />
+  <book code="SNG" abbr="" short="" long="" />
+  <book code="ISA" abbr="" short="Yesaya" long="" />
+  <book code="JER" abbr="" short="Yermia" long="" />
+  <book code="LAM" abbr="" short="In Lilu Kamusang" long="" />
+  <book code="EZK" abbr="" short="Yeskial" long="" />
+  <book code="DAN" abbr="" short="Danial" long="" />
+  <book code="HOS" abbr="" short="Hosea" long="" />
+  <book code="JOL" abbr="" short="Yoel" long="" />
+  <book code="AMO" abbr="" short="Amos" long="" />
+  <book code="OBA" abbr="" short="" long="" />
+  <book code="JON" abbr="" short="Yunus" long="" />
+  <book code="MIC" abbr="" short="Mika" long="" />
+  <book code="NAM" abbr="" short="" long="" />
+  <book code="HAB" abbr="" short="Habakuk" long="" />
+  <book code="ZEP" abbr="" short="Sefanya" long="" />
+  <book code="HAG" abbr="" short="Hagai" long="" />
+  <book code="ZEC" abbr="" short="Sakarias" long="" />
+  <book code="MAL" abbr="" short="Meliaki" long="" />
+  <book code="TOB" abbr="" short="" long="" />
+  <book code="JDT" abbr="" short="" long="" />
+  <book code="ESG" abbr="" short="" long="" />
+  <book code="WIS" abbr="" short="" long="" />
+  <book code="SIR" abbr="" short="" long="" />
+  <book code="BAR" abbr="" short="" long="" />
+  <book code="LJE" abbr="" short="" long="" />
+  <book code="S3Y" abbr="" short="" long="" />
+  <book code="SUS" abbr="" short="" long="" />
+  <book code="BEL" abbr="" short="" long="" />
+  <book code="1MA" abbr="" short="" long="" />
+  <book code="2MA" abbr="" short="" long="" />
+  <book code="3MA" abbr="" short="" long="" />
+  <book code="4MA" abbr="" short="" long="" />
+  <book code="1ES" abbr="" short="" long="" />
+  <book code="2ES" abbr="" short="" long="" />
+  <book code="MAN" abbr="" short="" long="" />
+  <book code="PS2" abbr="" short="" long="" />
+  <book code="ODA" abbr="" short="" long="" />
+  <book code="PSS" abbr="" short="" long="" />
+  <book code="JSA" abbr="" short="" long="" />
+  <book code="JDB" abbr="" short="" long="" />
+  <book code="TBS" abbr="" short="" long="" />
+  <book code="SST" abbr="" short="" long="" />
+  <book code="DNT" abbr="" short="" long="" />
+  <book code="BLT" abbr="" short="" long="" />
+  <book code="3ES" abbr="" short="" long="" />
+  <book code="EZA" abbr="" short="" long="" />
+  <book code="5EZ" abbr="" short="" long="" />
+  <book code="6EZ" abbr="" short="" long="" />
+  <book code="DAG" abbr="" short="" long="" />
+  <book code="PS3" abbr="" short="" long="" />
+  <book code="2BA" abbr="" short="" long="" />
+  <book code="LBA" abbr="" short="" long="" />
+  <book code="JUB" abbr="" short="" long="" />
+  <book code="ENO" abbr="" short="" long="" />
+  <book code="1MQ" abbr="" short="" long="" />
+  <book code="2MQ" abbr="" short="" long="" />
+  <book code="3MQ" abbr="" short="" long="" />
+  <book code="REP" abbr="" short="" long="" />
+  <book code="4BA" abbr="" short="" long="" />
+  <book code="LAO" abbr="" short="" long="" />
+  <book code="XXA" abbr="" short="" long="" />
+  <book code="XXB" abbr="" short="" long="" />
+  <book code="XXC" abbr="" short="" long="" />
+  <book code="XXD" abbr="" short="" long="" />
+  <book code="XXE" abbr="" short="" long="" />
+  <book code="XXF" abbr="" short="" long="" />
+  <book code="XXG" abbr="" short="" long="" />
+  <book code="BAK" abbr="" short="" long="" />
+  <book code="OTH" abbr="" short="" long="" />
+  <book code="INT" abbr="" short="" long="" />
+  <book code="CNC" abbr="" short="" long="" />
+  <book code="GLO" abbr="" short="" long="" />
+  <book code="TDX" abbr="" short="" long="" />
+  <book code="NDX" abbr="" short="" long="" />
+</BookNames>
