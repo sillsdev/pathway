@@ -22,6 +22,7 @@ using SIL.Tool;
 namespace Test.GoBibleConvert
 {
     [TestFixture]
+    [Category("ShortTest")]
     public class UsxToSFMTest
     {
 

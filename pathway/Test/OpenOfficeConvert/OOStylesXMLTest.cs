@@ -1231,6 +1231,7 @@ namespace Test.OpenOfficeConvert
         /// <summary>
         /// </summary>      
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void CharisSILFont_Node()
         {
@@ -1253,6 +1254,7 @@ namespace Test.OpenOfficeConvert
         /// <summary>
         /// </summary>      
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void DoulosSILFont_Node()
         {

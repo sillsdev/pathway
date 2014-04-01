@@ -26,6 +26,7 @@ namespace Test.epubConvert
     ///to contain all FontInternals Unit Tests
     ///</summary>
     [TestFixture]
+    [Category("ShortTest")]
     public class EmbeddedFontTest
     {
         /// <summary>

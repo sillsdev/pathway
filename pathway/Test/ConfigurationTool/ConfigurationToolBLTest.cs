@@ -148,6 +148,7 @@ namespace Test.UIConfigurationToolBLTest
 
 
         [Test]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void NewWithDefaultTest()
         {
@@ -212,6 +213,7 @@ namespace Test.UIConfigurationToolBLTest
         }
 
         [Test]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void SaveAsWithDefaultTest()
         {
@@ -275,6 +277,7 @@ namespace Test.UIConfigurationToolBLTest
         }
 
         [Test]
+        [Category("LongTest")]
         public void DeleteWithDefaultTest()
         {
             SetUp();
@@ -312,6 +315,7 @@ namespace Test.UIConfigurationToolBLTest
 
 
         [Test]
+        [Category("LongTest")]
         public void SaveInputTypeTest()
         {
             SetUp();

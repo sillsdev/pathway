@@ -135,6 +135,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontFamily3()
         {

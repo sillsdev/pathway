@@ -891,6 +891,7 @@ namespace Test.PsTool
 
         #region LanguageTests
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         // If unit fails, please confirm the below file exist,
         // C:\ProgramData\SIL\WritingSystemStore\ur.ldml
@@ -1132,6 +1133,7 @@ namespace Test.PsTool
 
         #region SaveInFolderTests
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void GetSaveInFolderTest()
         {

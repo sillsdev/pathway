@@ -35,6 +35,7 @@ namespace Test.LiftPrepare.TransformTests
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void testTransform()
         {

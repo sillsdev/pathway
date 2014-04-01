@@ -94,6 +94,7 @@ namespace Test.WordPressConvert
         ///</summary>
         [Ignore]
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void ExportPassTest()
         {

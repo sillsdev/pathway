@@ -1759,6 +1759,7 @@ namespace Test.OpenOfficeConvert
         /// TD-227 Set language for data. 
         /// </summary>      
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void Language_Node()
         {
@@ -2314,6 +2315,7 @@ namespace Test.OpenOfficeConvert
         /// TD-654 
         /// </summary>      
         [Test]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void VerseNumber_Node()
         {
@@ -2818,6 +2820,7 @@ namespace Test.OpenOfficeConvert
         /// </summary>
         [Ignore]
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void PageTest9()
         {
@@ -2843,6 +2846,7 @@ namespace Test.OpenOfficeConvert
         /// DictionaryT9Test
         /// </summary>      
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void DictionaryT9Test()
         {
@@ -3118,6 +3122,7 @@ namespace Test.OpenOfficeConvert
 
         ///TD-2739
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void UserIndicFont()
         {
@@ -3576,7 +3581,7 @@ namespace Test.OpenOfficeConvert
         ///B1pe Full Scripture Test
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void B1peExport()
         {
@@ -3598,6 +3603,7 @@ namespace Test.OpenOfficeConvert
         ///Table structure Test
         /// </summary>      
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void Table1Test()
         {
@@ -3668,7 +3674,7 @@ namespace Test.OpenOfficeConvert
         ///B1pe Full Scripture Test
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void ImageNoCaptionFileTest()
         {
@@ -3686,7 +3692,7 @@ namespace Test.OpenOfficeConvert
         ///B1pe Full Scripture Test
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TeTestExport()
         {
@@ -3736,7 +3742,7 @@ namespace Test.OpenOfficeConvert
         /// TD-3560
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void WhiteSpaceTest()
         {
@@ -3758,7 +3764,7 @@ namespace Test.OpenOfficeConvert
         /// TD-3554
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void IsBookNameChanged()
         {
@@ -3780,7 +3786,7 @@ namespace Test.OpenOfficeConvert
         /// TD-3563
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void SpacesInDictionary()
         {
@@ -3802,7 +3808,7 @@ namespace Test.OpenOfficeConvert
         /// TD-3607
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void GuidewordLength()
         {
@@ -3824,7 +3830,7 @@ namespace Test.OpenOfficeConvert
         /// TD-3275
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void OutlineLevel()
         {
@@ -3847,7 +3853,7 @@ namespace Test.OpenOfficeConvert
         /// TD-3680
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FrontMatterDirection()
         {
@@ -3869,7 +3875,7 @@ namespace Test.OpenOfficeConvert
         /// TD-3603
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RevarsalHeader()
         {
@@ -3891,7 +3897,7 @@ namespace Test.OpenOfficeConvert
         /// TD-3681
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RightToLeftHeader()
         {
@@ -3914,7 +3920,7 @@ namespace Test.OpenOfficeConvert
         /// TD-3608
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RevarsalEmptyPage()
         {
@@ -3937,7 +3943,7 @@ namespace Test.OpenOfficeConvert
         /// TD-3563
         /// </summary>      
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void MainTitleDisplay()
         {
@@ -3960,6 +3966,7 @@ namespace Test.OpenOfficeConvert
         /// TD-3498
         /// </summary>      
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void KeepWithNextTest()
         {

@@ -26,6 +26,7 @@ namespace Test.PsTool
     ///to contain all FontInternals Unit Tests
     ///</summary>
     [TestFixture]
+    [Category("ShortTest")]
     public class FontTest
     {
         /// <summary>
@@ -86,7 +87,7 @@ namespace Test.PsTool
             string familyName = "Charis SIL";
             string style = "Regular";
             string actual = FontInternals.GetFontFileName(familyName, style);
-            string expected = "CharisSIL-R.ttf";
+            string expected = "CharisSILR.ttf";
             Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
@@ -98,7 +99,7 @@ namespace Test.PsTool
             string familyName = "Charis SIL";
             string style = "Bold";
             string actual = FontInternals.GetFontFileName(familyName, style);
-            string expected = "CharisSIL-B.ttf";
+            string expected = "CharisSILB.ttf";
             Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
