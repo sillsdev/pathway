@@ -153,6 +153,7 @@ namespace SIL.PublishingSolution
         private int _titleCounter = 1;
         private int _pageWidth;
         private bool _isEmptyPageInsertedForDic = false;
+        private bool _isPageSpaceGiven;
 
         Dictionary<string, string> _pageSize = new Dictionary<string, string>();
         private bool _isFromExe = false;
@@ -1645,8 +1646,10 @@ namespace SIL.PublishingSolution
             {
                 const string paraSpan = "text:p";
 
-                if (tempClassName == "P4" && IsTocExists() && _projInfo.ProjectInputType.ToLower() == "scripture")
+                if (tempClassName == "P4" && IsTocExists() && _projInfo.ProjectInputType.ToLower() == "scripture" && !_isPageSpaceGiven)
                 {
+                    _isPageSpaceGiven = true;
+
                     _writer.WriteStartElement(paraSpan);
                     _writer.WriteAttributeString("text:style-name", tempClassName);
                     _writer.WriteEndElement();
@@ -2736,7 +2739,8 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("draw:frame");
                     _writer.WriteAttributeString("draw:style-name", "fr0");
                     _writer.WriteAttributeString("draw:name", strFrameCount);
-                    if (_projInfo.DefaultRevCssFileWithPath != null && _projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
+                    if ((_projInfo.DefaultRevCssFileWithPath != null && _projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
+                        || _projInfo.FileToProduce == "One Per Book" || _projInfo.FileToProduce == "One Per Letter")
                     {
                         _writer.WriteAttributeString("text:anchor-type", "paragraph");
                     }
