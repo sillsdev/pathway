@@ -135,6 +135,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void AddContributorTest()
         {
@@ -147,6 +148,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampFormatExtentImagesTest()
         {
@@ -159,6 +161,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampRelRequiresTest()
         {
@@ -173,6 +176,7 @@ namespace Test.PsTool
 
         [Test]
         [Ignore]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampRightsTest()
         {
@@ -185,6 +189,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampCreatedOnTest()
         {
@@ -197,6 +202,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampModifiedDateTest()
         {
@@ -209,6 +215,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampDescriptionTest()
         {

@@ -65,6 +65,7 @@ namespace Test.PsTool
         ///A test for Run
         ///</summary>
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RunTest()
         {
@@ -85,6 +86,7 @@ namespace Test.PsTool
         ///A test for ExistsOnPath
         ///</summary>
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void ExistsOnPathTest()
         {

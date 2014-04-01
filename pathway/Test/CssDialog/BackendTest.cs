@@ -44,6 +44,7 @@ namespace Test.CssDialog
         #endregion TearDown
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void GetExportTypeTest()
         {

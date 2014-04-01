@@ -1878,7 +1878,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TokPisin()
         {
@@ -1890,7 +1890,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TeTest()
         {
@@ -1902,7 +1902,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         [Ignore]
         public void Bughotugospels()
@@ -1915,7 +1915,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void B1pe()
         {
@@ -1929,7 +1929,7 @@ namespace Test.InDesignConvert
         [Ignore]
         // Sankar
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void Kabwa()
         {

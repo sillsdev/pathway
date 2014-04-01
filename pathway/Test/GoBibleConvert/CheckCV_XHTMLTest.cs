@@ -46,6 +46,7 @@ namespace Test.GoBibleConvert
         ///A test for DuplicateBooks 
         ///</summary>
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void IsDuplicateBooksTest()
         {
@@ -60,6 +61,7 @@ namespace Test.GoBibleConvert
         ///A test for DuplicateBooks is false
         ///</summary>
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void NotIsDuplicateBooksTest()
         {
@@ -74,6 +76,7 @@ namespace Test.GoBibleConvert
         /// Test if project name can be estracted from PublicationInformation
         /// </summary>
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void GetProjectNameTest()
         {

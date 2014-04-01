@@ -552,6 +552,7 @@ namespace Test.UIConfigurationToolTest
 
         [Ignore]
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void GetUserInformationTest()
         {
