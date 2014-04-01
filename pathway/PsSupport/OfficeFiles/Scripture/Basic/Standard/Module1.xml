@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Mar-24-2014 for TD-3888
+&apos;Changed On Apr-01-2014 for TD-3893
 
 &apos;This is main method, which will be called when document opened. It calls other mothods to perform 
 Sub StartDontForget
 On Error GoTo MyError:
 	TurnOffNonPrintingCharacters() 
+	
+	If IsCoverImageInserted = &quot;true&quot; And Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
+		SetImageToCoverPage()
+	End If	
 	
 	UpdateTOC()
 	
@@ -18,6 +22,19 @@ On Error GoTo MyError:
 	
 	Exit Sub
 MyError:
+End Sub
+
+&apos;This method aligns Cover page Image to Page Align(Full Page)
+Sub SetImageToCoverPage
+
+  For i = 0 To ThisComponent.getDrawPage().GetCount -1
+  	oGraphic  = ThisComponent.getDrawPage().getByIndex(i)
+	&apos;&apos;msgbox  	oGraphic.Width  &amp; &quot;   &quot; &amp; oGraphic.Height
+	if oGraphic.Height &gt; 10000 Then
+		oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
+	End IF
+  Next
+
 End Sub
 
 &apos;This function gives the Total Pages of the current file, this method called by HideODMVariable method.
