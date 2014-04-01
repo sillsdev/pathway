@@ -362,6 +362,35 @@
         <styleProperty name="Information" value="DRAFT Bible text." />
         <styleProperty name="Copyright" value="© 2014 Wycliffe Bible Translators, Inc." />
       </style>
+	  <style name="EBook (epub) Right Align" file="epubRightAlign.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
+        <description>1 column flowed text, right align for use in e-books</description>
+        <styleProperty name="CoverImage" value="cover.png"/>
+        <styleProperty name="TOCLevel" value="1 - Book Only"/>
+        <styleProperty name="AddColophonPage" value="Yes" />
+        <styleProperty name="BaseFontSize" value="13" />
+        <styleProperty name="DefaultLineHeight" value="125" />
+        <styleProperty name="DefaultAlignment" value="Right" />
+        <styleProperty name="ChapterNumbers" value="Drop Cap" />
+        <styleProperty name="References" value="After Each Section" />
+        <styleProperty name="MaxImageWidth" value="600" />
+        <styleProperty name="EmbedFonts" value="Yes"/>
+        <styleProperty name="IncludeFontVariants" value="Yes" />
+        <styleProperty name="DefaultFont" value="Charis SIL" />
+        <styleProperty name="MissingFont" value="Prompt User"/>
+        <styleProperty name="NonSILFont" value="Prompt User" />
+        <styleProperty name="Title" value=" "/>
+        <styleProperty name="Creator" value=" " />
+        <styleProperty name="Publisher" value=" " />
+        <styleProperty name="Type" value=" " />
+        <styleProperty name="Source" value=" " />
+        <styleProperty name="Format" value=" " />
+        <styleProperty name="Contributor" value=" " />
+        <styleProperty name="Relation" value=" " />
+        <styleProperty name="Coverage" value=" " />
+		<styleProperty name="IncludeImage" value="Yes" />
+        <styleProperty name="Information" value="DRAFT Bible text." />
+        <styleProperty name="Copyright" value="© 2014 Wycliffe Bible Translators, Inc." />
+      </style>
     </others>
   </styles>
   <tasks>
