@@ -164,7 +164,7 @@ namespace Test.TheWordConvertTest
             codeNames["MAT"] = FileInput(@"USX\040MAT.usx");
             codeNames["MRK"] = FileInput(@"USX\041MRK.usx");
             var xsltArgs = new XsltArgumentList();
-            xsltArgs.AddParam("bookNames", "", "file:///" + FileInput("BookNames.xml"));
+            xsltArgs.AddParam("bookNames", "", "file://" + FileInput("BookNames.xml"));
             var temp = Path.GetTempFileName();
             var sw = new StreamWriter(temp);
             var inProcess = (IInProcess) mocks.NewMock(typeof (IInProcess));
@@ -214,7 +214,7 @@ namespace Test.TheWordConvertTest
             }
             else
             {
-                xsltArgs.AddParam("bookNames", "", "file:///" + FileInput("BookNames.xml"));
+                xsltArgs.AddParam("bookNames", "", "file://" + FileInput("BookNames.xml"));
             }
             if (punc != null)
             {
@@ -250,7 +250,7 @@ namespace Test.TheWordConvertTest
         [Test]
         public void NoMt2()
         {
-            var bookNames = "file:///" + FileInput("avtBookNames.xml");
+            var bookNames = "file://" + FileInput("avtBookNames.xml");
             TestDataCase("MAT", "040MAT.usx", 1, "<TS1><font color=teal>H\u0268m Yaaim Me Krais Matyu Kewis\u0268m Mau T\u0268wei</font><Ts><TS1>Niuk me maamrer ne weiw\u0268k me Jisas<Ts><TS3><i>(<a href=\"tw://bible.*?42.3.23-38\">Lu 3:23-38</a>)</i><Ts><RF q=*><a href=\"tw://bible.*?1.22.18\">Jen 22:18</a>; <a href=\"tw://bible.*?13.17.11\">1Kro 17:11</a><Rf>Menmen im hi hewis\u0268m h\u0268ram niuk me maamrer yap\u0268rwe ne weiw\u0268k miut\u0268p me Jisas Krais, kerek h\u0268rak nepenyek ke m\u0268t\u0268k iuwe Devit, h\u0268rak nepenyek hak ke maam n\u0268pu kaiu Ebraham.<CI>", bookNames, ":");
         }
 
@@ -335,14 +335,14 @@ namespace Test.TheWordConvertTest
         [Test]
         public void SpaceInCrossRefNameTest()
         {
-            var bookNames = "file:///" + FileInput("aauBookNames.xml");
+            var bookNames = "file://" + FileInput("aauBookNames.xml");
             TestDataCase("PHM", "057PHM.usx", 2, "Hrorkwe mamey okukwe seyr, hromo ine Apia o, hromo wayh Arkipus, hrere nion ma non-orok ono o, seyr uwrsa sios ko, hno a mon ma hokruw sohom o, hme mey kow.<RF q=*><a href=\"tw://bible.*?51.4.17\">Kol 4:17</a>; <a href=\"tw://bible.*?55.2.3\">2 Ti 2:3</a><Rf><CM>", bookNames, ":");
         }
 
         [Test]
         public void WithoutBookNameTest()
         {
-            var bookNames = "file:///" + FileInput("aauBookNames.xml");
+            var bookNames = "file://" + FileInput("aauBookNames.xml");
             TestDataCase("PHM", "057PHM.usx", 22, "Hano me-nonkway ok kamon kokwe senkin, hunkwe ampok, ha liawon ey se kwa lonhan naruok koruay. Payhokuaw, hano uron hokwe hyohyo senkin lon, hom God se ma mesopok me hokuaw, God hiykwe ha hme nion manon-wak e ipan ya lon a.<RF q=*><a href=\"tw://bible.*?50.1.25\">Fl 1:25</a>; <a href=\"tw://bible.*?50.2.24\">2:24</a><Rf><CM>", bookNames, ":");
         }
 
@@ -367,49 +367,49 @@ namespace Test.TheWordConvertTest
         [Test]
         public void RefListTest()
         {
-            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            var bookNames = "file://" + FileInput("BookNames-refList.xml");
             TestDataCase("MAT", "040MAT-refList.usx", 26, "<TS1>complex xref test<Ts><RF q=*><a href=\"tw://bible.*?19.2.7\">Pal 2:7</a>; <a href=\"tw://bible.*?19.22.2\">22:2</a>, <a href=\"tw://bible.*?19.22.14\">14</a><Rf>Verse one.", bookNames, ":");
         }
 
         [Test]
         public void RefList2Test()
         {
-            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            var bookNames = "file://" + FileInput("BookNames-refList.xml");
             TestDataCase("MAT", "040MAT-refList.usx", 27, "<RF q=*><a href=\"tw://bible.*?2.37.11\">Tav 37:11</a>, <a href=\"tw://bible.*?2.37.28\">28</a>; <a href=\"tw://bible.*?2.39.2\">39:2</a>, <a href=\"tw://bible.*?2.39.21-23\">21-23</a><Rf>Verse two.", bookNames, ":");
         }
 
         [Test]
         public void RefSingleChapterTest()
         {
-            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            var bookNames = "file://" + FileInput("BookNames-refList.xml");
             TestDataCase("MAT", "040MAT-refList.usx", 30, "<RF q=*><a href=\"tw://bible.*?1.18.20\u201319:28\">Jen 18:20\u201319:28</a>; <a href=\"tw://bible.*?40.11.24\">Mt 11:24</a>; <a href=\"tw://bible.*?61.2.6\">2Pi 2:6</a>; <a href=\"tw://bible.*?65.1.7\">Ju 7</a><Rf>Hi hetpi werek. Maain w\u0268 God skelim m\u0268t, h\u0268rak God kaknep m\u0268t miyap\u0268r enun n\u0268paa nau Sodom ketike wit Gomora kakn\u0268p kike. Te m\u0268t miyap\u0268r kerek nanweik\u0268n sip nanwet h\u0268m mi, maain God kakn\u0268p iuwe kaknepi.", bookNames, ":");
         }
 
         [Test]
         public void StarSaltilloTest()
         {
-            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            var bookNames = "file://" + FileInput("BookNames-refList.xml");
             TestDataCase("MAT", "040MAT-refList.usx", 31, "<i>Judá tusha chumu, ñu Belén pebulu,</i><CI><i>vee mujtu aa pebulu chumulaba buute\uA78C pensangue keeñu, ne balejtuu pebulu jutyuve;</i><CI><i>matyu ñu junuren main bale chachi fale,</i><CI><i>kumuinchi in Israel chachillanu washkenu juñu mitya,</i><RF q=+>Miqueas 5.2 <Rf> ti pillave, tila bale rukula.", bookNames, ":", true);
         }
 
         [Test]
         public void RefNoVerseTest()
         {
-            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            var bookNames = "file://" + FileInput("BookNames-refList.xml");
             TestDataCase("MAT", "040MAT-refList.usx", 47, "<RF q=*><a href=\"tw://bible.*?23.23.1\">Ais 23</a>; <a href=\"tw://bible.*?26.26.1\u201328:26\">Esi 26:1\u201328:26</a>; <a href=\"tw://bible.*?29.3.4-8\">Joe 3:4-8</a>; <a href=\"tw://bible.*?30.1.9-10\">Emo 1:9-10</a>; <a href=\"tw://bible.*?36.9.2-4\">Sek 9:2-4</a><Rf>Hi hetpi werek. Maain w\u0268 kerek God skelim m\u0268t, h\u0268rak kaknep m\u0268t ne Taia netike m\u0268t ne Saidon kakn\u0268p kike, te yi m\u0268t au h\u0268rak kakiwep iuwe.", bookNames, ":");
         }
 
         [Test]
         public void ShortNameTest()
         {
-            var bookNames = "file:///" + FileInput("akeBookNames.xml");
+            var bookNames = "file://" + FileInput("akeBookNames.xml");
             TestDataCase("1CO", "0461CO.usx", 2, "Papa so\uA78Csii, Koren pon enakan, kamoro K\u0289rai Sises win\u0268 iyekonekasa\uA78C kon wak\u0289 pe te\uA78Cton kon pe, kamoro m\u0268 aw\u0268r\u0268 na\uA78Cne\uA78C nan am\u0289t\u0289 pe esii\uA78Cma Sises K\u0289rai, uyepuru kon esak\u0289 p\u0268\uA78C na\uA78Cne\uA78C nan, to\uA78C epuru m\u0268r\u0268 awonsi\uA78Ck\u0268 uyepuru kon n\u0268 n\u0268r\u0268:<RF q=*><a href=\"tw://bible.*?44.18.1\">Inkup\u0289\uA78Cp\u0289 18:1</a><Rf>", bookNames, ":");
         }
 
         [Test]
         public void SpaceAfterRefTest()
         {
-            var bookNames = "file:///" + FileInput("aauBookNames.xml");
+            var bookNames = "file://" + FileInput("aauBookNames.xml");
             TestDataCase("MRK", "041MRK.usx", 647, "Hmo prueyn hiy laplap kopi non nak-sau nok nok, wain ma laroray non sakeyn prouk nok, now-ho mon piynay nok, sa Jisas se seyn arnak-nakray, hiy lowswa e.<RF q=*><a href=\"tw://bible.*?19.69.21\">Sng 69:21</a><Rf> Uwr sohiy nak-me, \u201CPereipia, hromkwe lira ey, Elaija po pankaw laye pakane, hye now ko se kandieys kow se.\u201D", bookNames, ":");
         }
 
@@ -446,7 +446,7 @@ namespace Test.TheWordConvertTest
         [Test]
         public void MultiWordBookNameTest()
         {
-            var bookNames = "file:///" + FileInput("hegBookNames.xml");
+            var bookNames = "file://" + FileInput("hegBookNames.xml");
             TestDataCase("GEN", "001GENheg2.usx", 4, "<sup>(4a-4b)</sup> Ama Lamtua Allah in koet apan-dapa kua nol apan-kloma kia ka, un dehet ta ela.<CM> <sup>4b</sup> <TS1>Ama Lamtua Allah koet biklobe nol bihata<Ts><TS3><i>(<a href=\"tw://bible.*?40.19:4-6.1\">Matius 19:4-6</a>; <a href=\"tw://bible.*?41.10:4-9.1\">Markus 10:4-9</a>; <a href=\"tw://bible.*?46.6:16.1\">Korintus mesa la 6:16</a>; <a href=\"tw://bible.*?46.15:45.1\">15:45</a>, <a href=\"tw://bible.*?46.15:45.47\">47</a>; <a href=\"tw://bible.*?49.5:31-33.1\">Efesus 5:31-33</a>)</i><Ts>Dedeng AMA LAMTUA Allah halas-sam mana le koet apan-dapa ku nol apan-kloma kia ka,", bookNames, ".");
         }
 
