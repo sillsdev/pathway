@@ -287,7 +287,9 @@ namespace SIL.PublishingSolution
             var xsltSettings = new XsltSettings { EnableDocumentFunction = true };
             var inputXsl = Assembly.GetExecutingAssembly().GetManifestResourceStream("SIL.PublishingSolution.theWord.xsl");
             Debug.Assert(inputXsl != null);
-            TheWord.Load(XmlReader.Create(inputXsl), xsltSettings, null);
+            var readerSettings = new XmlReaderSettings {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
+            var reader = XmlReader.Create(inputXsl, readerSettings);
+            TheWord.Load(reader, xsltSettings, null);
         }
 
         protected static void CollectTestamentBooks(List<string> otBooks, List<string> ntBooks)
@@ -354,17 +356,24 @@ namespace SIL.PublishingSolution
                 if (codeNames.ContainsKey(book))
                 {
                     LogStatus("Processing {0}", codeNames[book]);
-                    TheWord.Transform(codeNames[book], xsltArgs, sw);
+                    Transform(codeNames[book], xsltArgs, sw);
                     inProcess.PerformStep();
                 }
                 else
                 {
                     LogStatus("Creating empty {0}", book);
                     var tempName = TempName(book);
-                    TheWord.Transform(tempName, xsltArgs, sw);
+                    Transform(tempName, xsltArgs, sw);
                     File.Delete(tempName);
                 }
             }
+        }
+
+        private static void Transform(string name, XsltArgumentList xsltArgs, StreamWriter sw)
+        {
+            var readerSettings = new XmlReaderSettings {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
+            var reader = XmlReader.Create(name, readerSettings);
+            TheWord.Transform(reader, xsltArgs, sw);
         }
 
         protected static string TempName(string book)

@@ -156,9 +156,7 @@ namespace Test.TheWordConvertTest
         [Test]
         public void ProcessTestamentTest()
         {
-            var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
-            string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
-            TheWord.Load(XmlReader.Create(Common.PathCombine(codePath, "theWord.xsl")), xsltSettings, null);
+            LoadMyXslt();
             IEnumerable<string> books = new List<string>(2) { "MAT", "MRK" };
             var codeNames = new Dictionary<string, string>(2);
             codeNames["MAT"] = FileInput(@"USX\040MAT.usx");
@@ -177,6 +175,16 @@ namespace Test.TheWordConvertTest
             File.Delete(temp);
             Assert.AreEqual(1750, data.Split(new[] { '\n' }).Length);
             mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        private static void LoadMyXslt()
+        {
+            var xsltSettings = new XsltSettings() {EnableDocumentFunction = true};
+            string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
+            var name = Common.PathCombine(codePath, "theWord.xsl");
+            var readerSettings = new XmlReaderSettings {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
+            var reader = XmlReader.Create(name, readerSettings);
+            TheWord.Load(reader, xsltSettings, null);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, bool rtl)
@@ -201,9 +209,7 @@ namespace Test.TheWordConvertTest
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo, bool rtl)
         {
-            var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
-            string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
-            TheWord.Load(XmlReader.Create(Common.PathCombine(codePath, "theWord.xsl")), xsltSettings, null);
+            LoadMyXslt();
             IEnumerable<string> books = new List<string>(1) { code };
             var codeNames = new Dictionary<string, string>(2);
             codeNames[code] = FileInput(fileName);
