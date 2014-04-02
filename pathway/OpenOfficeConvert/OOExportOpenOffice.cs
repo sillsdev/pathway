@@ -747,13 +747,10 @@ namespace SIL.PublishingSolution
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
-            string isCoverImageInserted = "false";
-            if (idAllClass.ContainsKey("cover"))
-                isCoverImageInserted = "true";
 
-            string isToc = "false";
-            if (idAllClass.ContainsKey("TableOfContentLO"))
-                isToc = "true";
+            string isToc;
+            var isCoverImageInserted = EditCSSValues(idAllClass, out isToc);
+
 
             _refFormat = GetReferenceFormat(idAllClass, _refFormat);
             IncludeTextinMacro(strMacroPath, _refFormat, macroFileName, projInfo.IsExtraProcessing, isCoverImageInserted, isToc);
@@ -844,6 +841,37 @@ namespace SIL.PublishingSolution
                 }
             }
             return returnValue;
+        }
+
+        private static string EditCSSValues(Dictionary<string, Dictionary<string, string>> idAllClass, out string isToc)
+        {
+            // Enable Table of content for macro
+            isToc = "false";
+            if (idAllClass.ContainsKey("TableOfContentLO"))
+            {
+                isToc = "true";
+            }
+
+            // Enable Cover Image for macro
+            string isCoverImageInserted = "false";
+            if (idAllClass.ContainsKey("cover"))
+            {
+                isCoverImageInserted = "true";
+            }
+
+            // If chapternumber found in css, vertical-align = "auto"
+            foreach (string cls in idAllClass.Keys)
+            {
+                if (cls.ToLower().IndexOf("chapternumber") == 0 && cls.ToLower().IndexOf("chapternumber_") != 0)
+                {
+                    if (idAllClass.ContainsKey(cls) && idAllClass[cls].ContainsKey("vertical-align"))
+                    {
+                        //idAllClass[cls]["vertical-align"] = "auto";
+                    }
+                }
+            }
+
+            return isCoverImageInserted;
         }
 
         private void CreateRAMP()

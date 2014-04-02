@@ -976,6 +976,12 @@ namespace SIL.PublishingSolution
                                     attribToBeChanged.Value = noOfChar.ToString();
                                 }
                             }
+
+                            var nameAttribute = childNode.Attributes["style:vertical-align"];
+                            if (nameAttribute != null)
+                            {
+                                childNode.Attributes["style:vertical-align"].Value = "auto";
+                            }
                         }
                     }
                 }
