@@ -182,7 +182,8 @@ namespace Test.TheWordConvertTest
             var xsltSettings = new XsltSettings() {EnableDocumentFunction = true};
             string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
             var name = Common.PathCombine(codePath, "theWord.xsl");
-            var readerSettings = new XmlReaderSettings {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
+            //var readerSettings = new XmlReaderSettings {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
+            var readerSettings = new XmlReaderSettings {};
             var reader = XmlReader.Create(name, readerSettings);
             TheWord.Load(reader, xsltSettings, null);
         }

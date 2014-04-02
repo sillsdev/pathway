@@ -371,7 +371,8 @@ namespace SIL.PublishingSolution
 
         private static void Transform(string name, XsltArgumentList xsltArgs, StreamWriter sw)
         {
-            var readerSettings = new XmlReaderSettings {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
+            //var readerSettings = new XmlReaderSettings {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
+            var readerSettings = new XmlReaderSettings {};
             var reader = XmlReader.Create(name, readerSettings);
             TheWord.Transform(reader, xsltArgs, sw);
         }
