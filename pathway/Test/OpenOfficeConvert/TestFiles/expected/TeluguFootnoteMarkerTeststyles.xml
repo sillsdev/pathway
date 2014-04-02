@@ -184,17 +184,17 @@
       <style:paragraph-properties fo:padding-top="21pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="21pt" fo:line-height="16pt" />
     </style:style>
     <style:style style:family="paragraph" style:name="ChapterNumber1" style:parent-style-name="ChapterNumber" style:master-page-name="">
-      <style:paragraph-properties style:vertical-align="top" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:float="left" fo:line-height="13pt" fo:keep-with-next="always">
+      <style:paragraph-properties style:vertical-align="auto" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:float="left" fo:line-height="13pt" fo:keep-with-next="always">
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="1" />
       </style:paragraph-properties>
     </style:style>
     <style:style style:family="paragraph" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ChapterNumber2" style:parent-style-name="ChapterNumber" style:master-page-name="">
-      <style:paragraph-properties style:vertical-align="top" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:float="left" fo:line-height="13pt" fo:keep-with-next="always" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
+      <style:paragraph-properties style:vertical-align="auto" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:float="left" fo:line-height="13pt" fo:keep-with-next="always" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="2" />
       </style:paragraph-properties>
     </style:style>
     <style:style style:name="ChapterNumber" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties style:vertical-align="top" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:float="left" fo:line-height="13pt" fo:keep-with-next="always" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
+      <style:paragraph-properties style:vertical-align="auto" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:float="left" fo:line-height="13pt" fo:keep-with-next="always" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="2" />
       </style:paragraph-properties>
     </style:style>

@@ -2138,7 +2138,7 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(styleOutput);
             string xpath = "//style:style[@style:name='ChapterNumber1']";
             _validate.ClassName = string.Empty;
-            string inner = "<style:paragraph-properties style:vertical-align=\"top\" fo:float=\"left\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\">" +
+            string inner = "<style:paragraph-properties style:vertical-align=\"auto\" fo:float=\"left\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\">" +
             "<style:drop-cap style:lines=\"2\" style:distance=\"0.20cm\" style:length=\"1\" />" +
             "</style:paragraph-properties>";
 
