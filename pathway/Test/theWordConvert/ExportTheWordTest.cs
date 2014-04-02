@@ -125,7 +125,7 @@ namespace Test.TheWordConvertTest
             Ssf = FileInput("MP1.ssf");
             var actual = LoadXsltParameters();
             Assert.AreEqual(":", actual.GetParam("refPunc", ""));
-            Assert.AreEqual(@"file:///C:\MP1\BookNames.xml", actual.GetParam("bookNames", ""));
+            Assert.AreEqual("file:///" + Common.PathCombine(@"C:\MP1", "BookNames.xml"), actual.GetParam("bookNames", ""));
         }
 
         [Test]
