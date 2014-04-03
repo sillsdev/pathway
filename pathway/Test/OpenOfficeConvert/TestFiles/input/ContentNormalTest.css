@@ -86,7 +86,7 @@
     color:teal;
 }
 .xitem[class=others]:before {
-    content: "\2666";
+    content: "\26";
     color:navy;
 }
 .xitem:after {
