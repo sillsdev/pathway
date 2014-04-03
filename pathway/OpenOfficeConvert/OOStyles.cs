@@ -35,9 +35,9 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> _LOClass = new Dictionary<string, string>();
         private Dictionary<string, string> _LOProperty = new Dictionary<string, string>();
         OOMapProperty mapProperty = new OOMapProperty();
-        public bool IsMacroEnable =  false;
+        public bool IsMacroEnable = false;
         protected bool isFixedLengthEnabled = false;
-        
+
         //Marks_crop - Declaration
         private const double _lineLength = 0.8;
         private const double _gapToMargin = .2;
@@ -69,7 +69,7 @@ namespace SIL.PublishingSolution
 
         public Dictionary<string, Dictionary<string, string>> CreateStyles(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssProperty, string outputFileName)
         {
-            
+
             try
             {
                 string outputFile = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
@@ -84,8 +84,8 @@ namespace SIL.PublishingSolution
                 LoadAllProperty();  // Loads all properties
                 LoadSpellCheck();
                 FixedLineHeightStatus();
-                CreateODTStyles(strStylePath,_cssProperty); 
-                CreateCssStyle(); 
+                CreateODTStyles(strStylePath, _cssProperty);
+                CreateCssStyle();
                 CreatePageStyle();
                 AddTagStyle(); // Add missing tags in styles.xml (h1,h2,..)
                 CloseODTStyles();  // Close Styles.xml for odt
@@ -118,7 +118,7 @@ namespace SIL.PublishingSolution
 
         private void EnableKerning()
         {
-            if(Common.IsUnixOS())
+            if (Common.IsUnixOS())
             {
                 _enableKerning = "false";
             }
@@ -134,20 +134,20 @@ namespace SIL.PublishingSolution
             xdoc.Load(_projInfo.DefaultXhtmlFileWithPath);
             string xPath = "//span[@class='revsensenumber']";
             XmlNodeList nodes = xdoc.SelectNodes(xPath);
-            if(nodes.Count > 0)
+            if (nodes.Count > 0)
             {
                 for (int i = 0; i < nodes.Count; i++)
                 {
                     var xmlAttributeCollection = nodes[i].Attributes;
                     if (xmlAttributeCollection != null)
-                    if(xmlAttributeCollection["lang"] != null)
-                    {
-                        if (xmlAttributeCollection["lang"].Value != language)
+                        if (xmlAttributeCollection["lang"] != null)
                         {
-                            language = xmlAttributeCollection["lang"].Value;
-                            break;
+                            if (xmlAttributeCollection["lang"].Value != language)
+                            {
+                                language = xmlAttributeCollection["lang"].Value;
+                                break;
+                            }
                         }
-                    }
                 }
             }
             return language;
@@ -253,7 +253,7 @@ namespace SIL.PublishingSolution
 
                         }
                     }
-                    else if (_allColumnProperty.ContainsKey(propName)) 
+                    else if (_allColumnProperty.ContainsKey(propName))
                     {
                         MapColumnProperty(property, propName);
                     }
@@ -291,12 +291,12 @@ namespace SIL.PublishingSolution
                     CreateColumnXMLFile(className);
                 }
                 _writer.WriteEndElement();
-                
+
             }
 
             foreach (KeyValuePair<string, string> property in beforeCounter)
             {
-                if(_LOAllClass.ContainsKey(property.Key))
+                if (_LOAllClass.ContainsKey(property.Key))
                 {
                     _LOAllClass[property.Key]["counter-increment"] = property.Value;
                 }
@@ -305,7 +305,7 @@ namespace SIL.PublishingSolution
 
         private Dictionary<string, string> PropertyReplace(string className, Dictionary<string, string> OOProperty)
         {
-            ListReplace(className,OOProperty);
+            ListReplace(className, OOProperty);
             PositionReplace(OOProperty);
             BorderReplace(OOProperty);
             return OOProperty;
@@ -353,7 +353,7 @@ namespace SIL.PublishingSolution
         {
             string key = "list-style-type";
             if (OOProperty.ContainsKey(key))  //List type - li,ol,ul
-                CreateListType(className,OOProperty[key]);
+                CreateListType(className, OOProperty[key]);
         }
 
         private void PositionReplace(Dictionary<string, string> OOProperty)
@@ -380,7 +380,7 @@ namespace SIL.PublishingSolution
                         OOProperty["margin-left"] = "-" + OOProperty["right"];
                     }
                     OOProperty.Remove("right");
-                }        
+                }
             }
         }
 
@@ -394,14 +394,14 @@ namespace SIL.PublishingSolution
                     if (para.Key == "style:line-spacing")
                     {
                         string result = AdjustLineHeight(para.Value);
-                        if (result != string.Empty )
+                        if (result != string.Empty)
                         {
-                            _writer.WriteAttributeString(para.Key, result); 
+                            _writer.WriteAttributeString(para.Key, result);
                         }
                     }
                     else
                     {
-                        _writer.WriteAttributeString(para.Key, para.Value);    
+                        _writer.WriteAttributeString(para.Key, para.Value);
                     }
                 }
                 _writer.WriteStartElement("style:drop-cap");
@@ -614,7 +614,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                writerCol.WriteAttributeString("text:dont-balance-text-columns", "false");
+                    writerCol.WriteAttributeString("text:dont-balance-text-columns", "false");
                 }
 
                 if (_sectionProperty != null && _sectionProperty.ContainsKey("style:writing-mode"))
@@ -668,7 +668,7 @@ namespace SIL.PublishingSolution
                     {
                         colWidth = (pageWidth - spacing - marginLeft - marginRight) / 2.0F;
 
-                        var width = Common.UnitConverter(String.Format(CultureInfo.GetCultureInfo("en-US"), "{0}{1}",colWidth,"in"), "pt");
+                        var width = Common.UnitConverter(String.Format(CultureInfo.GetCultureInfo("en-US"), "{0}{1}", colWidth, "in"), "pt");
                         colWidth = float.Parse(width, CultureInfo.GetCultureInfo("en-US"));
                         Dictionary<string, string> columnWidth = new Dictionary<string, string>();
                         columnWidth["ColumnWidth"] = colWidth.ToString();
@@ -1129,7 +1129,7 @@ namespace SIL.PublishingSolution
 
             _writer.WriteStartElement("style:tab-stops");//style:tab-stops
 
-            if(_isCenterTabStopNeeded)
+            if (_isCenterTabStopNeeded)
             {
                 _writer.WriteStartElement("style:tab-stop");//style:tab-stop
             }
@@ -1187,7 +1187,7 @@ namespace SIL.PublishingSolution
             //TD-2819
             string headerFontSize = Common.GetHeaderFontSize(_cssProperty);
             _writer.WriteAttributeString("fo:font-size", headerFontSize);
-            
+
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
@@ -1308,10 +1308,10 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("fo:text-align", "center");
             _writer.WriteAttributeString("style:justify-single-word", "false");
             _writer.WriteEndElement();
-            
+
             //TD-2682
             _writer.WriteStartElement("style:text-properties");//style:text-properties
-            headerFontName = Common.GetHeaderFontName(_cssProperty,_projInfo.DefaultCssFileWithPath);
+            headerFontName = Common.GetHeaderFontName(_cssProperty, _projInfo.DefaultCssFileWithPath);
             _writer.WriteAttributeString("style:font-name", headerFontName);
 
             //TD-2815
@@ -1417,7 +1417,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:vertical-rel", "page-content");
             _writer.WriteAttributeString("style:horizontal-pos", "center");
             _writer.WriteAttributeString("style:horizontal-rel", "page");
-             _writer.WriteEndElement();
+            _writer.WriteEndElement();
             _writer.WriteEndElement();
 
             _writer.WriteStartElement("style:style");
@@ -1537,11 +1537,11 @@ namespace SIL.PublishingSolution
 
             foreach (string keyValue in _cssProperty.Keys)
             {
-                if(keyValue.IndexOf("..footnote-marker") > 0)
+                if (keyValue.IndexOf("..footnote-marker") > 0)
                 {
                     string className = Common.LeftString(keyValue, "..");
                     string callclassName = Common.LeftString(keyValue, "..") + "..footnote-call";
-                    string markerclassName = Common.LeftString(keyValue, "..")+ "..footnote-marker";
+                    string markerclassName = Common.LeftString(keyValue, "..") + "..footnote-marker";
                     _writer.WriteStartElement("text:notes-configuration");
                     _writer.WriteAttributeString("text:note-class", className);
                     _writer.WriteAttributeString("text:citation-style-name", callclassName);
@@ -1820,15 +1820,15 @@ namespace SIL.PublishingSolution
             bool isRightGuideword = false;
             for (int i = PageIndex; i <= PageIndex + 5; i++)
             {
-                if(_pageHeaderFooter[i].ContainsKey("content"))
+                if (_pageHeaderFooter[i].ContainsKey("content"))
                 {
-                    if (_pageHeaderFooter[i]["content"].IndexOf("first)") > 0) 
+                    if (_pageHeaderFooter[i]["content"].IndexOf("first)") > 0)
                     {
                         if (!isHeaderCreated)
                         {
                             CreateHeaderFooter(i, "first", ref isHeaderCreated, ref isFooterCreated, ref isHeaderClosed, ref isFooterClosed);
                         }
-                        CreateLeftGuidewordPageNumber(i,"LeftGuideword");
+                        CreateLeftGuidewordPageNumber(i, "LeftGuideword");
                     }
                     else if (_pageHeaderFooter[i]["content"].IndexOf("last)") > 0)
                     {
@@ -1856,7 +1856,7 @@ namespace SIL.PublishingSolution
             if (isFooterCreated && isFooterClosed == false)
                 HeaderFooterEndElement();
 
-            if(!isPageNumber && isRightGuideword && isMirrored)
+            if (!isPageNumber && isRightGuideword && isMirrored)
             {
                 CreateEmptyHeader(true);
             }
@@ -1867,16 +1867,16 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();//text:p
             _writer.WriteEndElement();//style:
         }
-        private void CreateHeaderFooter(int i,string variableType,ref bool isHeaderCreated,
+        private void CreateHeaderFooter(int i, string variableType, ref bool isHeaderCreated,
                 ref bool isFooterCreated, ref bool isHeaderClosed, ref bool isFooterClosed)
         {
             string type;
-            if(variableType == "first")
+            if (variableType == "first")
             {
                 type = "Header";
                 isHeaderCreated = true;
-            }   
-            else if(variableType == "last")
+            }
+            else if (variableType == "last")
             {
                 type = "Footer";
                 isFooterCreated = true;
@@ -1905,7 +1905,7 @@ namespace SIL.PublishingSolution
                         if (isFooterCreated) return;
                         type = "Footer";
                         isFooterCreated = true;
-                        break; 
+                        break;
                 }
             }
 
@@ -1925,7 +1925,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:style-name", type);
         }
 
-        
+
         private void SetTab()
         {
             _writer.WriteStartElement("text:tab");
@@ -1946,7 +1946,7 @@ namespace SIL.PublishingSolution
         private void CreateRightGuideword(int i)
         {
             string mainFrameName = "Mfr1";
-            
+
             _writer.WriteStartElement("draw:frame");
             _writer.WriteAttributeString("draw:style-name", mainFrameName);
             _writer.WriteAttributeString("draw:name", "Frame1");
@@ -1960,7 +1960,7 @@ namespace SIL.PublishingSolution
                 Array arValue = value.Split('p');
                 value = Convert.ToDouble(arValue.GetValue(0)) - 0.75 + "pt";
             }
-            _writer.WriteAttributeString("svg:y", value);   
+            _writer.WriteAttributeString("svg:y", value);
 
             _writer.WriteAttributeString("fo:min-width", "145pt");
             _writer.WriteAttributeString("draw:z-index", "1");
@@ -2058,7 +2058,7 @@ namespace SIL.PublishingSolution
                     case 2:
                     case 5:
                     case 8:
-                      case 11:
+                    case 11:
                     case 14:
                     case 17:
                     case 20:
@@ -2138,114 +2138,114 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:style-name", hf);
             if (hf.ToLower() == "header")
             {
-                    int maxCount = index + 3;
-                    for (int i = index; i < maxCount; i++)
+                int maxCount = index + 3;
+                for (int i = index; i < maxCount; i++)
+                {
+                    if (_pageHeaderFooter[i].Count > 0 && _pageHeaderFooter[i]["content"].IndexOf("first)") > 0)
                     {
-                        if (_pageHeaderFooter[i].Count > 0 && _pageHeaderFooter[i]["content"].IndexOf("first)") > 0)
+                        //Left Side - Left Guideword
+                        //TD-2566
+                        _writer.WriteStartElement("text:span");
+                        _writer.WriteAttributeString("text:style-name", "MT1");
+
+                        _writer.WriteStartElement("text:variable-get");
+                        _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                        _writer.WriteAttributeString("office:value-type", "string");
+                        _writer.WriteEndElement();
+
+                        _writer.WriteEndElement();
+
+
+                        if (_multiLanguageHeader)
                         {
-                            //Left Side - Left Guideword
-                            //TD-2566
-                            _writer.WriteStartElement("text:span");
-                            _writer.WriteAttributeString("text:style-name", "MT1");
-
-                            _writer.WriteStartElement("text:variable-get");
-                            _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                            _writer.WriteAttributeString("office:value-type", "string");
-                            _writer.WriteEndElement();
-
-                            _writer.WriteEndElement();
-
-
-                            if (_multiLanguageHeader)
-                            {
-                                //Left Side - Right Guideword
-                                _writer.WriteStartElement("draw:frame");
-                                _writer.WriteAttributeString("draw:style-name", "Mfr1");
-                                _writer.WriteAttributeString("draw:name", "Frame1");
-                                _writer.WriteAttributeString("text:anchor-type", "paragraph");
-                                string value = "56.89pt";
-                                if (isMirrored && !String.IsNullOrEmpty(_leftPageLayoutProperty["fo:margin-top"]))
-                                {
-                                    value = _leftPageLayoutProperty["fo:margin-top"];
-                                }
-                                else if (!String.IsNullOrEmpty(_pageLayoutProperty["fo:margin-top"]))
-                                {
-                                    value = _pageLayoutProperty["fo:margin-top"];
-                                }
-                                _writer.WriteAttributeString("svg:y", value);
-                                _writer.WriteAttributeString("fo:min-width", "35pt");
-                                _writer.WriteAttributeString("svg:height", "14.14pt");
-                                _writer.WriteAttributeString("draw:z-index", "1");
-                                _writer.WriteStartElement("draw:text-box");
-                                _writer.WriteStartElement("text:p");
-                                _writer.WriteAttributeString("text:style-name", "MP1");
-                                _writer.WriteStartElement("text:variable-get");
-                                _writer.WriteAttributeString("text:name", "Left_Guideword_R");
-                                _writer.WriteAttributeString("office:value-type", "string");
-                                _writer.WriteEndElement();
-                                _writer.WriteEndElement();
-                                _writer.WriteEndElement();
-                                _writer.WriteEndElement();
-                            }
-                        }
-                        else if (_pageHeaderFooter[i].Count > 0 && _pageHeaderFooter[i]["content"].IndexOf("last)") > 0)
-                        {
-                            //Right Side - Right Guideword
-                            string mainFrameName = "Mfr1";
-                            string value = "56.89pt";
+                            //Left Side - Right Guideword
                             _writer.WriteStartElement("draw:frame");
-                            _writer.WriteAttributeString("draw:style-name", mainFrameName);
+                            _writer.WriteAttributeString("draw:style-name", "Mfr1");
                             _writer.WriteAttributeString("draw:name", "Frame1");
                             _writer.WriteAttributeString("text:anchor-type", "paragraph");
-                            if (i == 18 || i == 19)
+                            string value = "56.89pt";
+                            if (isMirrored && !String.IsNullOrEmpty(_leftPageLayoutProperty["fo:margin-top"]))
                             {
-                                _writer.WriteAttributeString("svg:x", "0pt");
+                                value = _leftPageLayoutProperty["fo:margin-top"];
                             }
-
-                            //TD-2631 for adjust the Frame Top
-                            if (value.IndexOf("pt") > 0)
+                            else if (!String.IsNullOrEmpty(_pageLayoutProperty["fo:margin-top"]))
                             {
-                                value = value.Replace("pt", "");
-                                double top = Convert.ToDouble(value, CultureInfo.GetCultureInfo("en-US")) - 0.70;
-                                value = top.ToString() + "pt";
+                                value = _pageLayoutProperty["fo:margin-top"];
                             }
-
                             _writer.WriteAttributeString("svg:y", value);
-                            _writer.WriteAttributeString("fo:min-width", "135pt");
+                            _writer.WriteAttributeString("fo:min-width", "35pt");
+                            _writer.WriteAttributeString("svg:height", "14.14pt");
                             _writer.WriteAttributeString("draw:z-index", "1");
                             _writer.WriteStartElement("draw:text-box");
-                            _writer.WriteAttributeString("fo:min-height", "14.14pt");//added for TD-2579
                             _writer.WriteStartElement("text:p");
                             _writer.WriteAttributeString("text:style-name", "MP1");
-
-                            //TD-2566
-                            _writer.WriteStartElement("text:span");
-                            _writer.WriteAttributeString("text:style-name", "MT1");
-
                             _writer.WriteStartElement("text:variable-get");
-                            _writer.WriteAttributeString("text:name", "Right_Guideword_R");
+                            _writer.WriteAttributeString("text:name", "Left_Guideword_R");
                             _writer.WriteAttributeString("office:value-type", "string");
-
-                            _writer.WriteEndElement();
-
                             _writer.WriteEndElement();
                             _writer.WriteEndElement();
                             _writer.WriteEndElement();
-                        }
-                        else if (_pageHeaderFooter[i].Count > 0 && (_pageHeaderFooter[i]["content"].IndexOf("page") > 0 &&
-                                  _pageHeaderFooter[i]["content"].IndexOf("counter") >= 0))
-                        {
-                            _writer.WriteStartElement("text:page-number");
-                            _writer.WriteAttributeString("text:select-page", "current");
-                            _writer.WriteString("4");
-                            _writer.WriteEndElement();
-                        }
-                        if (i != maxCount-1)
-                        {
-                            _writer.WriteStartElement("text:tab");
                             _writer.WriteEndElement();
                         }
                     }
+                    else if (_pageHeaderFooter[i].Count > 0 && _pageHeaderFooter[i]["content"].IndexOf("last)") > 0)
+                    {
+                        //Right Side - Right Guideword
+                        string mainFrameName = "Mfr1";
+                        string value = "56.89pt";
+                        _writer.WriteStartElement("draw:frame");
+                        _writer.WriteAttributeString("draw:style-name", mainFrameName);
+                        _writer.WriteAttributeString("draw:name", "Frame1");
+                        _writer.WriteAttributeString("text:anchor-type", "paragraph");
+                        if (i == 18 || i == 19)
+                        {
+                            _writer.WriteAttributeString("svg:x", "0pt");
+                        }
+
+                        //TD-2631 for adjust the Frame Top
+                        if (value.IndexOf("pt") > 0)
+                        {
+                            value = value.Replace("pt", "");
+                            double top = Convert.ToDouble(value, CultureInfo.GetCultureInfo("en-US")) - 0.70;
+                            value = top.ToString() + "pt";
+                        }
+
+                        _writer.WriteAttributeString("svg:y", value);
+                        _writer.WriteAttributeString("fo:min-width", "135pt");
+                        _writer.WriteAttributeString("draw:z-index", "1");
+                        _writer.WriteStartElement("draw:text-box");
+                        _writer.WriteAttributeString("fo:min-height", "14.14pt");//added for TD-2579
+                        _writer.WriteStartElement("text:p");
+                        _writer.WriteAttributeString("text:style-name", "MP1");
+
+                        //TD-2566
+                        _writer.WriteStartElement("text:span");
+                        _writer.WriteAttributeString("text:style-name", "MT1");
+
+                        _writer.WriteStartElement("text:variable-get");
+                        _writer.WriteAttributeString("text:name", "Right_Guideword_R");
+                        _writer.WriteAttributeString("office:value-type", "string");
+
+                        _writer.WriteEndElement();
+
+                        _writer.WriteEndElement();
+                        _writer.WriteEndElement();
+                        _writer.WriteEndElement();
+                    }
+                    else if (_pageHeaderFooter[i].Count > 0 && (_pageHeaderFooter[i]["content"].IndexOf("page") > 0 &&
+                              _pageHeaderFooter[i]["content"].IndexOf("counter") >= 0))
+                    {
+                        _writer.WriteStartElement("text:page-number");
+                        _writer.WriteAttributeString("text:select-page", "current");
+                        _writer.WriteString("4");
+                        _writer.WriteEndElement();
+                    }
+                    if (i != maxCount - 1)
+                    {
+                        _writer.WriteStartElement("text:tab");
+                        _writer.WriteEndElement();
+                    }
+                }
             }//Footer
             else
             {
@@ -2258,7 +2258,6 @@ namespace SIL.PublishingSolution
                                        _pageHeaderFooter[17].Count + _pageHeaderFooter[21].Count +
                                        _pageHeaderFooter[22].Count + _pageHeaderFooter[23].Count;
                 for (int i = index; i < maxCount; i++)
-                
                 {
                     if (i != maxCount - 1)
                     {
@@ -2266,7 +2265,7 @@ namespace SIL.PublishingSolution
                     if (_pageHeaderFooter[i].Count > 0 && _pageHeaderFooter[i].ContainsKey("content") &&
                         _pageHeaderFooter[i]["content"].IndexOf("last)") > 0)
                     {
-                        
+
                         _writer.WriteStartElement("text:tab");
                         _writer.WriteEndElement();
 
@@ -2277,7 +2276,7 @@ namespace SIL.PublishingSolution
                             mainFrameName = "Mfr2";
                             value = "0pt";
                         }
-                        else if(i == 19)
+                        else if (i == 19)
                         {
                             mainFrameName = "Mfr3";
                             value = "0pt";
@@ -2294,13 +2293,13 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("draw:style-name", mainFrameName);
                         _writer.WriteAttributeString("draw:name", "Frame1");
                         _writer.WriteAttributeString("text:anchor-type", "paragraph");
-                        if(i == 18 || i == 19)
+                        if (i == 18 || i == 19)
                         {
                             _writer.WriteAttributeString("svg:x", "0pt");
                         }
 
                         //TD-2631 for adjust the Frame Top
-                        if(value.IndexOf("pt") > 0)
+                        if (value.IndexOf("pt") > 0)
                         {
                             value = value.Replace("pt", "");
                             double top = Convert.ToDouble(value, CultureInfo.GetCultureInfo("en-US")) - 0.70;
@@ -2337,7 +2336,7 @@ namespace SIL.PublishingSolution
                             _pageHeaderFooter[i].ContainsKey("content") &&
                             (_pageHeaderFooter[i]["content"].IndexOf("page") > 0 &&
                              _pageHeaderFooter[i]["content"].IndexOf("counter") >= 0))
-                        {   
+                        {
                             //left 
                             _writer.WriteStartElement("text:page-number");
                             _writer.WriteAttributeString("text:select-page", "current");
@@ -2349,7 +2348,7 @@ namespace SIL.PublishingSolution
                                  _pageHeaderFooter[i + 1].ContainsKey("content") &&
                                  (_pageHeaderFooter[i + 1]["content"].IndexOf("page") > 0 &&
                                   _pageHeaderFooter[i + 1]["content"].IndexOf("counter") >= 0))
-                        {   
+                        {
                             //center
                             _writer.WriteStartElement("text:tab");
                             _writer.WriteEndElement();
@@ -2364,7 +2363,7 @@ namespace SIL.PublishingSolution
                                  _pageHeaderFooter[i + 2].ContainsKey("content") &&
                                  (_pageHeaderFooter[i + 2]["content"].IndexOf("page") > 0 &&
                                   _pageHeaderFooter[i + 2]["content"].IndexOf("counter") >= 0))
-                        {   
+                        {
                             //right
                             _writer.WriteStartElement("text:tab");
                             _writer.WriteEndElement();
@@ -2666,7 +2665,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("style:display-name", "Right Page"); // Right PageProperty
                 _writer.WriteAttributeString("style:page-layout-name", "pm5");
                 _writer.WriteAttributeString("style:next-style-name", "Left_20_Page");
-                
+
                 CreateHeaderFooterVariables(18);
                 _writer.WriteEndElement(); // Close of Master Page
 
@@ -2862,6 +2861,67 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private string GetHeaderFont(string strHeaderFont)
+        {
+            foreach (string font in _cssProperty.Keys)
+            {
+                if (font.IndexOf("reversalform") == 0 && _cssProperty[font].ContainsKey("font-family"))
+                {
+                    string languageCode = string.Empty;
+                    XmlDocument xdoc = Common.DeclareXMLDocument(true);
+                    xdoc.Load(_projInfo.DefaultXhtmlFileWithPath);
+                    string xhtmlPath = "//span[@class='reversal-form_L4']";
+                    XmlNodeList nodes = xdoc.SelectNodes(xhtmlPath);
+                    if (nodes.Count > 0)
+                    {
+                        for (int i = 0; i < nodes.Count; i++)
+                        {
+                            var xmlAttributeCollection = nodes[i].Attributes;
+                            if (xmlAttributeCollection != null)
+                                if (xmlAttributeCollection["lang"] != null)
+                                {
+                                    if (xmlAttributeCollection["lang"].Value != null)
+                                    {
+                                        languageCode = xmlAttributeCollection["lang"].Value;
+                                        break;
+                                    }
+                                }
+                        }
+                    }
+
+
+                    string fontName = string.Empty;
+                    string PsSupportPath = Common.GetPSApplicationPath();
+                    string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
+                    string xPath = "//font-language-mapping";
+                    XmlNodeList fontList = Common.GetXmlNodes(xmlFileNameWithPath, xPath);
+                    if (fontList != null && fontList.Count > 0)
+                    {
+                        foreach (XmlNode xmlNode in fontList)
+                        {
+                            if (xmlNode.Attributes != null)
+                            {
+                                foreach (XmlAttribute attribute in xmlNode.Attributes) // open it'line attributes
+                                {
+                                    if (attribute.Value == languageCode)
+                                    {
+                                        fontName = xmlNode.InnerText.Trim();
+                                        break;
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+
+
+                    strHeaderFont = fontName; // _cssProperty[font]["font-family"];
+                    break;
+                }
+            }
+            return strHeaderFont;
+        }
+
         private void CreateHeaderFrame()
         {
             _writer.WriteStartElement("style:style");
@@ -2872,7 +2932,7 @@ namespace SIL.PublishingSolution
 
             //TD-2640 Right guideword alignment in Frame
             FrameAlignment("Variable");//TD-2802
-            
+
             _writer.WriteAttributeString("style:justify-single-word", "false");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
@@ -2885,15 +2945,8 @@ namespace SIL.PublishingSolution
 
             //TD-3854
             string strHeaderFont = "GenericFont";
-            foreach (string font in _cssProperty.Keys)
-            {
-                if (font.IndexOf("reversalform") == 0 && _cssProperty[font].ContainsKey("font-family"))
-                {
-                    strHeaderFont = _cssProperty[font]["font-family"];
-                    break;
-                }
-            }
 
+            strHeaderFont = GetHeaderFont(strHeaderFont);
 
             _writer.WriteAttributeString("style:font-name-complex", strHeaderFont);
 
@@ -2994,7 +3047,7 @@ namespace SIL.PublishingSolution
             {
 
                 _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
-                if(attProperty.Key == "fo:font-family")
+                if (attProperty.Key == "fo:font-family")
                     _writer.WriteAttributeString("style:font-name-complex", attProperty.Value);
             }
             _writer.WriteEndElement();
@@ -3004,13 +3057,13 @@ namespace SIL.PublishingSolution
         private bool FirstPageHeaderRuler(int index)
         {
             bool drawRuler = false;
-             for(int i=index;i<index+3;i++)
+            for (int i = index; i < index + 3; i++)
             {
-                 if(_pageHeaderFooter[i].ContainsKey("content") && _pageHeaderFooter[i]["content"] != string.Empty)
-                 {
-                     drawRuler = true;
-                     break;
-                 }
+                if (_pageHeaderFooter[i].ContainsKey("content") && _pageHeaderFooter[i]["content"] != string.Empty)
+                {
+                    drawRuler = true;
+                    break;
+                }
             }
             return drawRuler;
         }
