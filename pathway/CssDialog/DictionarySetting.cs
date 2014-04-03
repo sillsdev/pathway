@@ -108,8 +108,7 @@ namespace SIL.PublishingSolution
         private void DictionarySetting_Load(object sender, EventArgs e)
         {
             LocDB.Localize(this, null);     // Form Controls
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "DictionaryDocumentTab.htm");
+            ShowHelp.ShowHelpTopic(this, "DictionaryDocumentTab.htm", Common.IsUnixOS());
             try
             {
                 DoLoad();
@@ -3182,45 +3181,36 @@ namespace SIL.PublishingSolution
         {
             if (tabDicSetting.SelectedIndex == 0)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "DictionaryDocumentTab.htm");
+                ShowHelp.ShowHelpTopic(this, "DictionaryDocumentTab.htm", Common.IsUnixOS());
             }
             else if (tabDicSetting.SelectedIndex == 1)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "PageTab.htm");
+                ShowHelp.ShowHelpTopic(this, "PageTab.htm", Common.IsUnixOS());
             }
             else if (tabDicSetting.SelectedIndex == 2)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "DictionaryHeadingsTab.htm");
+                ShowHelp.ShowHelpTopic(this, "DictionaryHeadingsTab.htm", Common.IsUnixOS());
             }
             else if (tabDicSetting.SelectedIndex == 3)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "EntriesTab.htm");
+                ShowHelp.ShowHelpTopic(this, "EntriesTab.htm", Common.IsUnixOS());
             }
             else if (tabDicSetting.SelectedIndex == 4)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "SensesTab.htm");
+                ShowHelp.ShowHelpTopic(this, "SensesTab.htm", Common.IsUnixOS());
             }
             else if (tabDicSetting.SelectedIndex == 5)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "DictionaryTextTab.htm");
+                ShowHelp.ShowHelpTopic(this, "DictionaryTextTab.htm", Common.IsUnixOS());
             }
             else if (tabDicSetting.SelectedIndex == 6)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "MediaTab.htm");
+                ShowHelp.ShowHelpTopic(this, "MediaTab.htm", Common.IsUnixOS());
             }
             else if (tabDicSetting.SelectedIndex == 7)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "IndexesTab.htm");
+                ShowHelp.ShowHelpTopic(this, "IndexesTab.htm", Common.IsUnixOS());
             }
-            
         }
 
         private void DictionarySetting_DoubleClick(object sender, EventArgs e)

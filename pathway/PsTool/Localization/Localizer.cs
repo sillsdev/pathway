@@ -63,7 +63,7 @@ namespace JWTools
                     }
                     Item = null;
                 }
-                
+
             }
         }
         LocGroup m_Group;
@@ -251,7 +251,7 @@ namespace JWTools
                     return true;
             }
 
-            foreach(LocGroup sub in group.Groups)
+            foreach (LocGroup sub in group.Groups)
             {
                 if (GroupNeedsAttention(sub))
                     return true;
@@ -293,7 +293,7 @@ namespace JWTools
         #endregion
         #region Method: bool ShouldDisplayInTree(LocItem item)
         bool ShouldDisplayInTree(LocItem item)
-            // Assume the parent Group has already been filtered
+        // Assume the parent Group has already been filtered
         {
             // Filter Option: All Needing Attention
             if (FilterCombo.Text == c_ThoseNeedingAttention)
@@ -358,7 +358,7 @@ namespace JWTools
             // Determine whether this node is needed
             if (!ShouldDisplayInTree(group))
                 return;
-            
+
             // Add the node for this group
             TreeNode node = nodes.Add(group.Title);
             node.Name = group.ID;
@@ -407,7 +407,7 @@ namespace JWTools
             {
                 _PopulateTree(Tree.Nodes, group);
 
-                if(ShouldDisplayInTree(group) && null == FirstGroup)
+                if (ShouldDisplayInTree(group) && null == FirstGroup)
                     FirstGroup = group;
             }
 
@@ -469,7 +469,7 @@ namespace JWTools
             sRTF += "{\\fonttbl" +
                 "{\\f0\\fswiss\\fprq2\\fcharset0 Arial;}" +
                 "{\\f1\\fswiss\\fprq2\\fcharset0 Arial Narrow;}" +
-                "{\\f2\\fswiss\\fprq2\\fcharset0 Microsoft Sans Serif;}" + 
+                "{\\f2\\fswiss\\fprq2\\fcharset0 Microsoft Sans Serif;}" +
                 "}";
             sRTF += "{\\colortbl ;\\red0\\green0\\blue128;}";
 
@@ -624,7 +624,7 @@ namespace JWTools
         #endregion
         #region Method: void UpdateNeedsAttentionStatus()
         void UpdateNeedsAttentionStatus()
-            // Assumes changes have been Harvested to the LocAlternative
+        // Assumes changes have been Harvested to the LocAlternative
         {
             if (null == Item)
                 return;
@@ -651,8 +651,7 @@ namespace JWTools
         private void cmdLoad(object sender, EventArgs e)
         {
             LocDB.Localize(this, null);     // Form Controls
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "Localization.htm");
+            ShowHelp.ShowHelpTopic(this, "Localization.htm", Common.IsUnixOS());
 
             // Populate the Filter Combo
             FilterCombo.Items.Add(c_ShowAll);

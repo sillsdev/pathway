@@ -39,8 +39,7 @@ namespace SIL.PublishingSolution
         private void ExportDlg_Load(object sender, EventArgs e)
         {
             LocDB.Localize(this, null);     // Form Controls
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "Exporting.htm");
+            ShowHelp.ShowHelpTopic(this, "Exporting.htm", Common.IsUnixOS());
             ArrayList exportType = Backend.GetExportType(ExportType);
             if (exportType.Count > 0)
             {

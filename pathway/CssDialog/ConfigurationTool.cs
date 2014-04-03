@@ -1186,7 +1186,7 @@ namespace SIL.PublishingSolution
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _CToolBL.HelpButton_Clicked();
+            _CToolBL.HelpButton_Clicked(this);
         }
 
         private void studentManualToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1201,7 +1201,7 @@ namespace SIL.PublishingSolution
 
         private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
         {
-            _CToolBL.HelpButton_Clicked();
+            _CToolBL.HelpButton_Clicked(this);
         }
 
         private void chkFixedLineHeight_CheckStateChanged(object sender, EventArgs e)

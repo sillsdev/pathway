@@ -603,7 +603,7 @@ namespace SIL.PublishingSolution
         /// <param name="f"></param>
         public static void SetupHelp(Control f)
         {
-            var hp = Common.HelpProv;
+            var hp = ShowHelp.HelpProv;
             try
             {
                 hp.HelpNamespace = Value["Help"];
