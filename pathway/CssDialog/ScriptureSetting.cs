@@ -120,8 +120,7 @@ namespace SIL.PublishingSolution
         #region ScriptureSetting_Load
         private void ScriptureSetting_Load(object sender, EventArgs e)
         {
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "DocumentTab.htm");
+            ShowHelp.ShowHelpTopic(this, "DocumentTab.htm", Common.IsUnixOS());
             try
             {
                 // Localize Controls.
@@ -2959,38 +2958,31 @@ namespace SIL.PublishingSolution
         {
             if (tabScriptureSettings.SelectedIndex == 0)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "DocumentTab.htm");
+                ShowHelp.ShowHelpTopic(this, "DocumentTab.htm", Common.IsUnixOS());
             }
             else if (tabScriptureSettings.SelectedIndex == 1)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "BasicsTab.htm");
+                ShowHelp.ShowHelpTopic(this, "BasicsTab.htm", Common.IsUnixOS());
             }
             else if (tabScriptureSettings.SelectedIndex == 2)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "ChapterVerseTab.htm");
+                ShowHelp.ShowHelpTopic(this, "ChapterVerseTab.htm", Common.IsUnixOS());
             }
             else if (tabScriptureSettings.SelectedIndex == 3)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "HeadingsTab.htm");
+                ShowHelp.ShowHelpTopic(this, "HeadingsTab.htm", Common.IsUnixOS());
             }
             else if (tabScriptureSettings.SelectedIndex == 4)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "FootnotesTab.htm");
+                ShowHelp.ShowHelpTopic(this, "FootnotesTab.htm", Common.IsUnixOS());
             }
             else if (tabScriptureSettings.SelectedIndex == 5)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "TextSpacingTab.htm");
+                ShowHelp.ShowHelpTopic(this, "TextSpacingTab.htm", Common.IsUnixOS());
             }
             else if (tabScriptureSettings.SelectedIndex == 6)
             {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, "OtherTab.htm");
+                ShowHelp.ShowHelpTopic(this, "OtherTab.htm", Common.IsUnixOS());
             }
         }
 

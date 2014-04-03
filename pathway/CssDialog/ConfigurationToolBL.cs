@@ -4303,9 +4303,9 @@ namespace SIL.PublishingSolution
                         cTool.tsDelete_Click(sender, null);
                     }
                 }
-                else if (e.KeyCode == Keys.F1 && !IsUnixOs)
+                else if (e.KeyCode == Keys.F1)
                 {
-                    CallHelp();
+                    CallHelp(new Label());
                 }
 
                 //Show Version when Ctrl+F12
@@ -4317,27 +4317,14 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        public void HelpButton_Clicked()
+        public void HelpButton_Clicked(Control ctrl)
         {
-            CallHelp();
+            CallHelp(ctrl);
         }
 
-        private void CallHelp()
+        private void CallHelp(Control ctrl)
         {
-            Common.PathwayHelpSetup();
-            if (IsUnixOs)
-            {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "chmsee";
-                startInfo.Arguments = Common.HelpProv.HelpNamespace;
-                Process.Start(startInfo);
-            }
-            else
-            {
-                Common.HelpProv.SetHelpNavigator(cTool, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(cTool, "Overview.htm");
-                SendKeys.Send("{F1}");
-            }
+            ShowHelp.ShowHelpTopicKeyPress(ctrl, "Overview.htm", _isUnixOS);
         }
 
         public void StudentManual()

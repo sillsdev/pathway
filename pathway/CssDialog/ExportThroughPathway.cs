@@ -390,13 +390,7 @@ namespace SIL.PublishingSolution
                 LoadProperty();
                 EnableUIElements();
 
-                if (!_isUnixOS)
-                {
-                    Common.PathwayHelpSetup();
-                    Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                    Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-                }
-
+                ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS);
                 if (AppDomain.CurrentDomain.FriendlyName.ToLower().IndexOf("configurationtool") == -1)
                 {
                     Common.databaseName = DatabaseName;
@@ -1330,10 +1324,7 @@ namespace SIL.PublishingSolution
 
         private void lnkChooseCopyright_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            // TODO: replace with correct help topic
-
-            _helpTopic = "Tasks/Basic_Tasks/Choosing_a_rights_statement_overview.htm";
-            btnHelp_Click(sender, e);
+            ShowHelp.ShowHelpTopicKeyPress(this, "User_Interface/User_Interface_Terms/Copyright_Information_Page.htm", Common.IsUnixOS());
         }
 
         private void ddlCopyrightStatement_SelectedIndexChanged(object sender, EventArgs e)
@@ -1368,10 +1359,13 @@ namespace SIL.PublishingSolution
         private void SetTabbedHelpTopic()
         {
             if (!IsExpanded)
+            {
                 _helpTopic = (Text.Contains("Set Defaults"))
-                                ? "User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm"
-                                : "User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm";
+                                 ? "User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm"
+                                 : "User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm";
+            }
             else
+            {
                 switch (tabControl1.SelectedIndex)
                 {
                     case 0:
@@ -1384,28 +1378,13 @@ namespace SIL.PublishingSolution
                         _helpTopic = "User_Interface/Dialog_boxes/Processing_Options_tab.htm";
                         break;
                 }
-            //_helpTopic = "Concepts/Intellectual_Property.htm";
-            //_helpTopic = "/Concepts/Intellectual_Property_(Copyright)_Info.htm";//Concepts/Intellectual_Property.htm
-            if (_isUnixOS)
-            {
-                Common.PathwayHelpSetup();
-                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-                startInfo.FileName = "chmsee";
-                startInfo.Arguments = Common.HelpProv.HelpNamespace;
-                System.Diagnostics.Process.Start(startInfo);
             }
-            else
-            {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-            }
-
+            ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!_isUnixOS)
-                SetTabbedHelpTopic();
+            SetTabbedHelpTopic();
         }
 
         private void btnHelpShow_Click(object sender, EventArgs e)
@@ -1415,20 +1394,7 @@ namespace SIL.PublishingSolution
 
         private void CallHelp()
         {
-            Common.PathwayHelpSetup();
-            if (_isUnixOS)
-            {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "chmsee";
-                startInfo.Arguments = Common.HelpProv.HelpNamespace;
-                Process.Start(startInfo);
-            }
-            else
-            {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, @"Concepts\Destination.htm");
-                SendKeys.Send("{F1}");
-            }
+            ShowHelp.ShowHelpTopicKeyPress(this, @"Concepts\Destination.htm", _isUnixOS);
         }
     }
 }

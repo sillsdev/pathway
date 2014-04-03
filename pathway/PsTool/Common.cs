@@ -64,8 +64,6 @@ namespace SIL.Tool
 
         static readonly ArrayList _units = new ArrayList();
         public static ErrorProvider _errProvider = new ErrorProvider();
-
-        public static HelpProvider HelpProv = new HelpProvider();
         public static Font UIFont;
         public static OdtType OdType;
         public static double ColumnWidth = 0.0;
@@ -3108,27 +3106,7 @@ namespace SIL.Tool
             return s.Substring(length - 17, 10) != DateTime.Now.ToString("yyyy-MM-dd");
         }
         #endregion SaveInFolder
-
-        #region PathwayHelpSetup
-        /// <summary>
-        /// setup help file
-        /// </summary>
-        public static void PathwayHelpSetup()
-        {
-            try
-            {
-                var helpFolder = FromRegistry("Help");
-                var directoryInfo = new DirectoryInfo(helpFolder);
-                var fileInfoList = directoryInfo.GetFiles("*.chm");
-                HelpProv.HelpNamespace = fileInfoList[0].FullName;
-            }
-            catch
-            {
-            }
-
-        }
-        #endregion PathwayHelpSetup
-
+        
         #region PathwayHelpFileDirectory
         /// <summary>
         /// PathwayHelpFileDirectory help file
