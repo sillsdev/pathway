@@ -113,7 +113,7 @@
     text-indent: 0pt;
     margin-left: 0pt;
 }
-.complexform-form:before { content: "‣ " }
+.complexform-form:before { content: "* " }
 .complexform-form>.xitem + .xitem:before { content: " " }
 .complexformrefs {
 }
