@@ -154,6 +154,7 @@ namespace SIL.PublishingSolution
         private int _pageWidth;
         private bool _isEmptyPageInsertedForDic = false;
         private bool _isPageSpaceGiven;
+        private bool _isPageSpaceSingle;
 
         Dictionary<string, string> _pageSize = new Dictionary<string, string>();
         private bool _isFromExe = false;
@@ -182,7 +183,7 @@ namespace SIL.PublishingSolution
         public bool IsMirrorPage;
         public string _ChapterNo = "1";
         public bool IsFirstEntry;
-        private bool isPageBreak;
+        //private bool isPageBreak;
         private string _previousContent = "Reversal";
         private bool _isWhiteSpaceSkipped = true;
         
@@ -223,6 +224,7 @@ namespace SIL.PublishingSolution
             _isFromExe = Common.CheckExecutionPath();
             _customFootnoteSymbol = projInfo.IncludeFootnoteSymbol;
             _customXRefSymbol = projInfo.IncludeXRefSymbol;
+            _isPageSpaceSingle = PageBreakSpace(idAllClass);
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             ProcessProperty();
@@ -240,7 +242,16 @@ namespace SIL.PublishingSolution
             return new Dictionary<string, ArrayList>();
         }
 
-        
+        private bool PageBreakSpace(Dictionary<string, Dictionary<string, string>> idAllClass)
+        {
+            if (idAllClass.ContainsKey("TitleMain") && idAllClass["TitleMain"].ContainsKey("break-before"))
+            {
+                string val = idAllClass["TitleMain"]["break-before"];
+                if (val.ToLower() == "page")
+                    return true;
+            }
+            return true;
+        }
 
         private void Preprocess()
         {
@@ -940,10 +951,10 @@ namespace SIL.PublishingSolution
                 {
                     _paragraphName = StackPeek(_allParagraph); // _allParagraph.Pop();
                 }
-                if (_paragraphName.IndexOf("bookPageBreak_") == 0 && _childName.IndexOf("bookPageBreak_") == 0)
-                {
-                    return;
-                }
+                //if (_paragraphName.IndexOf("bookPageBreak_") == 0 && _childName.IndexOf("bookPageBreak_") == 0)
+                //{
+                //    return;
+                //}
                 ClosePara(false);
                 WriteTable();
 
@@ -953,8 +964,8 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    if (_paragraphName.IndexOf("bookPageBreak_") == 0)
-                        _paragraphName = _paragraphName.Replace("bookPageBreak_", "");
+                    //if (_paragraphName.IndexOf("bookPageBreak_") == 0)
+                    //    _paragraphName = _paragraphName.Replace("bookPageBreak_", "");
                     // Note: Paragraph Start Element
                     if ((_childName == "letter_letHead_dicBody" || _childName == "scrBookName_scrBook_scrBody") && IsTocExists())
                     {
@@ -968,12 +979,12 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass                        
                     }
 
-                    isPageBreak = false;
+                    //isPageBreak = false;
                     
-                    if (_paragraphName.IndexOf("bookPageBreak_") == 0)
-                    {
-                        isPageBreak = true;
-                    }
+                    //if (_paragraphName.IndexOf("bookPageBreak_") == 0)
+                    //{
+                        //isPageBreak = true;
+                    //}
 
                     if (_imageInserted)
                         _imageParaForCaption = true;
@@ -1650,13 +1661,24 @@ namespace SIL.PublishingSolution
                 {
                     _isPageSpaceGiven = true;
 
-                    _writer.WriteStartElement(paraSpan);
-                    _writer.WriteAttributeString("text:style-name", tempClassName);
-                    _writer.WriteEndElement();
+                    if (_isPageSpaceSingle)
+                    {
+                        _writer.WriteStartElement(paraSpan);
+                        _writer.WriteAttributeString("text:style-name", tempClassName);
+                        _writer.WriteEndElement();
+                        _isPageSpaceSingle = false;
+                    }
+                    else
+                    {
+                        _writer.WriteStartElement(paraSpan);
+                        _writer.WriteAttributeString("text:style-name", tempClassName);
+                        _writer.WriteEndElement();
 
-                    _writer.WriteStartElement(paraSpan);
-                    _writer.WriteAttributeString("text:style-name", tempClassName);
-                    _writer.WriteEndElement();
+                        _writer.WriteStartElement(paraSpan);
+                        _writer.WriteAttributeString("text:style-name", tempClassName);
+                        _writer.WriteEndElement();
+                    }
+
                 }
                 else if (tempClassName == "P4" && IsTocExists() && _projInfo.ProjectInputType.ToLower() == "dictionary" && !_isEmptyPageInsertedForDic)
                 {
@@ -1671,7 +1693,6 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("text:style-name", tempClassName);
                     _writer.WriteEndElement();
                 }
-
             }
         }
 
@@ -1820,10 +1841,10 @@ namespace SIL.PublishingSolution
 
         private void EndElement()
         {
-            if (_closeChildName.IndexOf("scrBookName") == 0)
-            {
-                if (isPageBreak) return;
-            }
+            //if (_closeChildName.IndexOf("scrBookName") == 0)
+            //{
+            //    if (isPageBreak) return;
+            //}
 
             if (_reader.Name == "a" && _anchorWrite)
             {
