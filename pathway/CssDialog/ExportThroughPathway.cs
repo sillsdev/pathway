@@ -1162,9 +1162,7 @@ namespace SIL.PublishingSolution
             // expand / collapse the dialog (Toggle)
             IsExpanded = !IsExpanded;
             ResizeDialog();
-
-            if (!_isUnixOS)
-                SetTabbedHelpTopic();
+            SetTabbedHelpTopic();
         }
 
         private void ddlStyle_SelectedIndexChanged(object sender, EventArgs e)
@@ -1228,7 +1226,7 @@ namespace SIL.PublishingSolution
         {
             _helpTopic = "Concepts/Intellectual_Property.htm";
             SetTabbedHelpTopic();
-            SendKeys.Send("{F1}");
+            ShowHelp.ShowHelpTopicKeyPress(this, _helpTopic, Common.IsUnixOS());
         }
 
         private void btnCoverImage_Click(object sender, EventArgs e)
@@ -1379,7 +1377,6 @@ namespace SIL.PublishingSolution
                         break;
                 }
             }
-            ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS, false);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
