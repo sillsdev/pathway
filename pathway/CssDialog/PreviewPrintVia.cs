@@ -69,7 +69,7 @@ namespace SIL.PublishingSolution
             _isUnixOS = Common.IsUnixOS();
             CreateColumn();
             LoadGridValues(sender);
-            ShowHelp.ShowHelpTopic(this, _helpTopic, Common.IsUnixOS());
+            ShowHelp.ShowHelpTopic(this, _helpTopic, Common.IsUnixOS(), false);
             CreateToolTip();
             btnEdit.Visible = _showEdit;
             btnPrevious.Visible = false;
@@ -477,6 +477,18 @@ namespace SIL.PublishingSolution
                 {
                 }
             }
+        }
+
+        private void PreviewPrintVia_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.F1)
+                {
+                    ShowHelp.ShowHelpTopic(this, _helpTopic, Common.IsUnixOS(), true);
+                }
+            }
+            catch { }
         }
     }
 }

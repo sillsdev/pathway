@@ -651,7 +651,7 @@ namespace JWTools
         private void cmdLoad(object sender, EventArgs e)
         {
             LocDB.Localize(this, null);     // Form Controls
-            ShowHelp.ShowHelpTopic(this, "Localization.htm", Common.IsUnixOS());
+            ShowHelp.ShowHelpTopic(this, "Localization.htm", Common.IsUnixOS(), false);
 
             // Populate the Filter Combo
             FilterCombo.Items.Add(c_ShowAll);

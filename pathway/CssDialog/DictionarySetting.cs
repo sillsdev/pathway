@@ -108,7 +108,7 @@ namespace SIL.PublishingSolution
         private void DictionarySetting_Load(object sender, EventArgs e)
         {
             LocDB.Localize(this, null);     // Form Controls
-            ShowHelp.ShowHelpTopic(this, "DictionaryDocumentTab.htm", Common.IsUnixOS());
+            ShowHelp.ShowHelpTopic(this, "DictionaryDocumentTab.htm", Common.IsUnixOS(), false);
             try
             {
                 DoLoad();
@@ -3181,35 +3181,35 @@ namespace SIL.PublishingSolution
         {
             if (tabDicSetting.SelectedIndex == 0)
             {
-                ShowHelp.ShowHelpTopic(this, "DictionaryDocumentTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "DictionaryDocumentTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabDicSetting.SelectedIndex == 1)
             {
-                ShowHelp.ShowHelpTopic(this, "PageTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "PageTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabDicSetting.SelectedIndex == 2)
             {
-                ShowHelp.ShowHelpTopic(this, "DictionaryHeadingsTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "DictionaryHeadingsTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabDicSetting.SelectedIndex == 3)
             {
-                ShowHelp.ShowHelpTopic(this, "EntriesTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "EntriesTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabDicSetting.SelectedIndex == 4)
             {
-                ShowHelp.ShowHelpTopic(this, "SensesTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "SensesTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabDicSetting.SelectedIndex == 5)
             {
-                ShowHelp.ShowHelpTopic(this, "DictionaryTextTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "DictionaryTextTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabDicSetting.SelectedIndex == 6)
             {
-                ShowHelp.ShowHelpTopic(this, "MediaTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "MediaTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabDicSetting.SelectedIndex == 7)
             {
-                ShowHelp.ShowHelpTopic(this, "IndexesTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "IndexesTab.htm", Common.IsUnixOS(), false);
             }
         }
 

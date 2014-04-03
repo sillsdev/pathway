@@ -235,7 +235,7 @@ namespace SIL.PublishingSolution
             LoadExtraProcessing();
             LoadProperty();
             txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, cmbSelectLayout.Text);
-            ShowHelp.ShowHelpTopic(this, _helpTopic, Common.IsUnixOS());
+            ShowHelp.ShowHelpTopic(this, _helpTopic, Common.IsUnixOS(), false);
             Common.databaseName = DatabaseName;
         }
 
