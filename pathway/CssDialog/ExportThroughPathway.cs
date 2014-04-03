@@ -390,7 +390,7 @@ namespace SIL.PublishingSolution
                 LoadProperty();
                 EnableUIElements();
 
-                ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS);
+                ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS, false);
                 if (AppDomain.CurrentDomain.FriendlyName.ToLower().IndexOf("configurationtool") == -1)
                 {
                     Common.databaseName = DatabaseName;
@@ -1379,7 +1379,7 @@ namespace SIL.PublishingSolution
                         break;
                 }
             }
-            ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS);
+            ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS, false);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1395,6 +1395,18 @@ namespace SIL.PublishingSolution
         private void CallHelp()
         {
             ShowHelp.ShowHelpTopicKeyPress(this, @"Concepts\Destination.htm", _isUnixOS);
+        }
+
+        private void ExportThroughPathway_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.F1)
+                {
+                    ShowHelp.ShowHelpTopicKeyPress(this, _helpTopic, _isUnixOS);
+                }
+            }
+            catch { }
         }
     }
 }

@@ -120,7 +120,7 @@ namespace SIL.PublishingSolution
         #region ScriptureSetting_Load
         private void ScriptureSetting_Load(object sender, EventArgs e)
         {
-            ShowHelp.ShowHelpTopic(this, "DocumentTab.htm", Common.IsUnixOS());
+            ShowHelp.ShowHelpTopic(this, "DocumentTab.htm", Common.IsUnixOS(), false);
             try
             {
                 // Localize Controls.
@@ -2958,31 +2958,31 @@ namespace SIL.PublishingSolution
         {
             if (tabScriptureSettings.SelectedIndex == 0)
             {
-                ShowHelp.ShowHelpTopic(this, "DocumentTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "DocumentTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabScriptureSettings.SelectedIndex == 1)
             {
-                ShowHelp.ShowHelpTopic(this, "BasicsTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "BasicsTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabScriptureSettings.SelectedIndex == 2)
             {
-                ShowHelp.ShowHelpTopic(this, "ChapterVerseTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "ChapterVerseTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabScriptureSettings.SelectedIndex == 3)
             {
-                ShowHelp.ShowHelpTopic(this, "HeadingsTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "HeadingsTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabScriptureSettings.SelectedIndex == 4)
             {
-                ShowHelp.ShowHelpTopic(this, "FootnotesTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "FootnotesTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabScriptureSettings.SelectedIndex == 5)
             {
-                ShowHelp.ShowHelpTopic(this, "TextSpacingTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "TextSpacingTab.htm", Common.IsUnixOS(), false);
             }
             else if (tabScriptureSettings.SelectedIndex == 6)
             {
-                ShowHelp.ShowHelpTopic(this, "OtherTab.htm", Common.IsUnixOS());
+                ShowHelp.ShowHelpTopic(this, "OtherTab.htm", Common.IsUnixOS(), false);
             }
         }
 

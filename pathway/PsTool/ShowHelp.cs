@@ -27,9 +27,9 @@ namespace SIL.Tool
     {
         public static HelpProvider HelpProv = new HelpProvider();
 
-        public static void ShowHelpTopic(Control ctrl, string helpKeyword, bool isLinux)
+        public static void ShowHelpTopic(Control ctrl, string helpKeyword, bool isLinux, bool isKeyPress)
         {
-            if (isLinux)
+            if (isLinux && isKeyPress)
             {
                 helpKeyword = ModifySlashForLinuxProcess(helpKeyword);
                 ProcessStartInfo startInfo = new ProcessStartInfo();
