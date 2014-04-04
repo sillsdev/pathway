@@ -243,6 +243,7 @@ namespace SIL.Tool
 
         #endregion
 
+
         #region FillName(string cssFileWithPath)
         /// -------------------------------------------------------------------------------------------
         /// <summary>
@@ -272,29 +273,34 @@ namespace SIL.Tool
                     if (strText.Contains("@import"))
                     {
                         string cssFile = strText.Substring((strText.IndexOf('"') + 1), strText.LastIndexOf('"') - (strText.IndexOf('"') + 1));
+
+                        string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+
+                        if (executablePath.Contains("ReSharper") || executablePath.Contains("NUnit"))
+                        {
+                            //This code will work when this method call from NUnit Test case
+                            int binFolderPart = Environment.CurrentDirectory.IndexOf(Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar);
+                            executablePath = DirectoryPathReplace(Environment.CurrentDirectory.Substring(0, binFolderPart) + "/ConfigurationTool/TestFiles/input");
+                        }
+                        else if (executablePath.ToLower().Contains("fieldworks") || executablePath.ToLower().Contains("configurationtool") || executablePath.ToLower().Contains("testbed"))
+                        {
+                            executablePath = Common.GetPSApplicationPath();
+                            if (SamplePath == String.Empty)
+                            {
+                                SamplePath = "Styles//Dictionary";
+                            }
+                        }
+                        else if (executablePath.ToLower().Contains("paratext"))
+                        {
+                            executablePath = Common.GetPSApplicationPath();
+                            if (SamplePath == String.Empty)
+                            {
+                                SamplePath = "Styles//Scripture";
+                            }
+                        }
+
                         if (!File.Exists(PathCombine(cssPath, cssFile)) && SamplePath.Length > 0)
                         {
-                            string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
-                            if (executablePath.Contains("ReSharper") || executablePath.Contains("NUnit"))
-                            {
-                                //This code will work when this method call from NUnit Test case
-                                int binFolderPart = Environment.CurrentDirectory.IndexOf(Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar);
-                                executablePath = DirectoryPathReplace(Environment.CurrentDirectory.Substring(0, binFolderPart) + "/ConfigurationTool/TestFiles/input");
-                            }
-                            else if (executablePath.Contains("FieldWorks 7") || executablePath.Contains("FieldWorks") || executablePath.Contains("ConfigurationTool"))
-                            {
-                                //Change the path which have the default styles
-                                if (!File.Exists(executablePath))
-                                {
-                                    executablePath = Common.GetPSApplicationPath();
-                                }
-                            }
-                            else if (executablePath.Contains("Paratext 7"))
-                            {
-                                //Change the path which have the default styles
-                                string folderName = LeftString(executablePath, "Paratext 7");
-                                executablePath = DirectoryPathReplace(PathCombine(folderName, "SIL\\Pathway7"));
-                            }
                             cssPath = PathCombine(executablePath, SamplePath);
                         }
                         arrayCSSFile.AddRange(GetCSSFileNames(PathCombine(cssPath, cssFile), BaseCssFileWithPath));
@@ -309,6 +315,75 @@ namespace SIL.Tool
             return arrayCSSFile;
         }
         #endregion
+
+
+
+        //#region FillName(string cssFileWithPath)
+        ///// -------------------------------------------------------------------------------------------
+        ///// <summary>
+        ///// This method collects css files names into ArrayList based on base CSS File.
+        ///// <param name="cssFileWithPath">Its gets the file path of the CSS File</param>
+        ///// <returns>ArrayList contains CSS filenames which are used</returns>
+        ///// -------------------------------------------------------------------------------------------
+        //public static ArrayList GetCSSFileNames(string cssFileWithPath, string BaseCssFileWithPath)
+        //{
+        //    ArrayList arrayCSSFile = new ArrayList();
+        //    if (!File.Exists(cssFileWithPath))
+        //    {
+        //        return arrayCSSFile;
+        //    }
+        //    string cssPath = Path.GetDirectoryName(cssFileWithPath);
+        //    string strText;
+        //    var fs = new FileStream(cssFileWithPath, FileMode.Open, FileAccess.Read);
+        //    var sr = new StreamReader(fs);
+        //    try
+        //    {
+        //        if (BaseCssFileWithPath != cssFileWithPath)
+        //        {
+        //            arrayCSSFile.Add(cssFileWithPath);
+        //        }
+        //        while ((strText = sr.ReadLine()) != null)
+        //        {
+        //            if (strText.Contains("@import"))
+        //            {
+        //                string cssFile = strText.Substring((strText.IndexOf('"') + 1), strText.LastIndexOf('"') - (strText.IndexOf('"') + 1));
+        //                if (!File.Exists(PathCombine(cssPath, cssFile)) && SamplePath.Length > 0)
+        //                {
+        //                    string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+        //                    if (executablePath.Contains("ReSharper") || executablePath.Contains("NUnit"))
+        //                    {
+        //                        //This code will work when this method call from NUnit Test case
+        //                        int binFolderPart = Environment.CurrentDirectory.IndexOf(Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar);
+        //                        executablePath = DirectoryPathReplace(Environment.CurrentDirectory.Substring(0, binFolderPart) + "/ConfigurationTool/TestFiles/input");
+        //                    }
+        //                    else if (executablePath.Contains("FieldWorks 7") || executablePath.Contains("FieldWorks") || executablePath.Contains("ConfigurationTool"))
+        //                    {
+        //                        //Change the path which have the default styles
+        //                        if (!File.Exists(executablePath))
+        //                        {
+        //                            executablePath = Common.GetPSApplicationPath();
+        //                        }
+        //                    }
+        //                    else if (executablePath.Contains("Paratext 7"))
+        //                    {
+        //                        //Change the path which have the default styles
+        //                        string folderName = LeftString(executablePath, "Paratext 7");
+        //                        executablePath = DirectoryPathReplace(PathCombine(folderName, "SIL\\Pathway7"));
+        //                    }
+        //                    cssPath = PathCombine(executablePath, SamplePath);
+        //                }
+        //                arrayCSSFile.AddRange(GetCSSFileNames(PathCombine(cssPath, cssFile), BaseCssFileWithPath));
+        //            }
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        sr.Close();
+        //        fs.Close();
+        //    }
+        //    return arrayCSSFile;
+        //}
+        //#endregion
 
         #region GetTextDirection(string languageCode)
 
