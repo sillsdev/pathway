@@ -1421,11 +1421,37 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private string CopiedToTempLanguageXMLFile(string languageXmlFile)
+        {
+            string fileName = "Languages.xml";
+            string xmlFileNameWithPath = languageXmlFile;
+            string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
+            if (Directory.Exists(tempFolder))
+            {
+                try
+                {
+                    DirectoryInfo di = new DirectoryInfo(tempFolder);
+                    Common.CleanDirectory(di);
+                }
+                catch
+                {
+                    tempFolder = Common.PathCombine(Path.GetTempPath(),
+                                                    "SilPathWay" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
+                }
+            }
+            Directory.CreateDirectory(tempFolder);
+            string tempFile = Common.PathCombine(tempFolder, fileName);
+
+            File.Copy(xmlFileNameWithPath, tempFile, true);
+            return tempFile;
+        }
+
         private void LoadData()
         {
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             string executablePath = Common.GetApplicationPath();
             executablePath = Common.PathCombine(executablePath, @"GoBible\Localizations\Languages.xml");
+            executablePath = CopiedToTempLanguageXMLFile(executablePath);
             if (!File.Exists(executablePath)) return;
             xDoc.Load(executablePath);
             string XPath = "//Languages/language";
