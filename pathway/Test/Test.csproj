@@ -527,7 +527,7 @@
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(AllSamples)" DestinationFiles="@(AllSamples->'$(OutputPath)\Samples\Dictionary\%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'$(OutputPath)\Samples\Scripture\%(Filename)%(Extension)')"  Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'$(OutputPath)\Samples\Scripture\%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'$(OutputPath)\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'$(OutputPath)\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -543,9 +543,6 @@
   </Target>
   <Target Name="AfterBuild" />
   <ItemGroup>
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\ConfigurationTool.exe" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\ConfigurationTool.exe.config" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\ConfigurationTool.pdb" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssDialog.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssDialog.pdb" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssParser.dll" />
