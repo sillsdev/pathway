@@ -29,6 +29,10 @@ namespace Test.CssDialog
         {
             const string keyName = "SOFTWARE\\SIL\\Pathway";
             const string valueName = "HelpImprove";
+	    if (Common.IsUnixOS())
+            {
+                return;
+            }
             var cbHelpImprove = new CheckBox();
             RegistryKey subKey = Registry.CurrentUser.OpenSubKey(keyName);
             string curValue = null;
