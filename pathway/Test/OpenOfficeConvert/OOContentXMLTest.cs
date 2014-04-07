@@ -3046,7 +3046,7 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue1, "Footnote versenumber special case '1.19-1' test failed");
 
             xpath = "//text:note[@text:id='ftn2']/text:note-body";
-            content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteGeneralParagraph\"><text:span text:style-name=\"span_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">Bahasa Yunani bilang \"Badiri di Allah pung muka\". Ini bisa pung arti \"karja par Tuhan\". Mar bisa pung arti lai ‘Badiri di Allah pung muka’. Malekat yang badiri di Allah pung muka pung kuasa labe dari malekat laeng. Jadi, Gabriel bukang malekat biasa.</text:span></text:p></text:note-body>";
+            content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteGeneralParagraph\"><text:span text:style-name=\"span_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">Bahasa Yunani bilang \"Badiri di Allah pung muka\". Ini bisa pung arti \"karja par Tuhan\". Mar bisa pung arti lai \u2018Badiri di Allah pung muka\u2019. Malekat yang badiri di Allah pung muka pung kuasa labe dari malekat laeng. Jadi, Gabriel bukang malekat biasa.</text:span></text:p></text:note-body>";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Footnote versenumber special case '1.19-2' test failed");
 

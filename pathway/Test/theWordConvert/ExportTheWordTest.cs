@@ -447,7 +447,7 @@ namespace Test.TheWordConvertTest
         [Test]
         public void FootnoteEmbeddedItalicTest()
         {
-            TestDataCase("GEN", "001GENheg.usx", 23, "Net bihatang na kon, atuling nga tek noan,<CI><PI>“Eli le! Ni halas-sam tom nol au!<CI><PI2>Un seen na banansila el auk seen ni kon.<CI>Nol un sisin na kon banansila el auk sising ngia.<CI>Undeng un daid deng biklobe lia, tiata auk ngali un ngala ka noan ‘bihata’.”<RF q=+>Se dais Ibranin nam, biklobe li noken ‘<i>ish</i>’. Nol bihata li ‘<i>isha</i>’. Tiata se nia, oen kuti dais noan “<i>isha</i> (bihata) daid deng <i>ish</i> (biklobe).”<Rf><CI>");
+            TestDataCase("GEN", "001GENheg.usx", 23, "Net bihatang na kon, atuling nga tek noan,<CI><PI>\u201cEli le! Ni halas-sam tom nol au!<CI><PI2>Un seen na banansila el auk seen ni kon.<CI>Nol un sisin na kon banansila el auk sising ngia.<CI>Undeng un daid deng biklobe lia, tiata auk ngali un ngala ka noan \u2018bihata\u2019.\u201d<RF q=+>Se dais Ibranin nam, biklobe li noken \u2018<i>ish</i>\u2019. Nol bihata li \u2018<i>isha</i>\u2019. Tiata se nia, oen kuti dais noan \u201c<i>isha</i> (bihata) daid deng <i>ish</i> (biklobe).\u201d<Rf><CI>");
         }
 
         [Test]
