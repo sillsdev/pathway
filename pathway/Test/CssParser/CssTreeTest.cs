@@ -59,15 +59,13 @@ namespace Test.CssParserTest
 			if (Common.UsingMonoVM)
 			{
 				// Microsoft font packaging for linux has some different file names (and less choices)
-	            expectedFontList.Add("ARIAL.TTF");
-	            expectedFontList.Add("ARIAL_BLACK.TTF");
-	            expectedFontList.Add("ARIAL_BOLD.TTF");
-	            expectedFontList.Add("ARIAL_BOLD_ITALIC.TTF");
-	            expectedFontList.Add("ARIALI.TTF");
-	            expectedFontList.Add("TIMES.TTF");
-	            expectedFontList.Add("TIMES_NEW_ROMAN_BOLD_ITALIC.TTF");
-			    expectedFontList.Add(Common.IsUnixOS() ? "TIMES_NEW_ROMAN_BOLD.TTF" : "TIMESBD.TTF");
-			    expectedFontList.Add("TIMESI.TTF");
+	            expectedFontList.Add("DEJAVUSERIF-BOLD.TTF");
+	            expectedFontList.Add("LIBERATIONSERIF-REGULAR.TTF");
+	            expectedFontList.Add("LIBERATIONSERIF-BOLD.TTF");
+	            expectedFontList.Add("LIBERATIONSERIF-ITALIC.TTF");
+                expectedFontList.Add("LIBERATIONSERIF-BOLDITALIC.TTF");
+	            expectedFontList.Add("FREESERIFBOLD.TTF");
+	            expectedFontList.Add("FREESERIFITALIC.TTF");
 			}
 			else 
 			{
