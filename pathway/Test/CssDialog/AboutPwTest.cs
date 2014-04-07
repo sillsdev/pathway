@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using NUnit.Framework;
 using SIL.PublishingSolution;
+using SIL.Tool;
 
 namespace Test.CssDialog
 {
