@@ -759,8 +759,14 @@ namespace SIL.PublishingSolution
                 {
                     List<string> inlineStyle = _classInlineStyle[mergedParaStyle];
                     int paraStyleCount = 0;
+                    int letterInlineCount = 0;
                     foreach (string property in inlineStyle)
                     {
+                        if (property.Contains("\\section*{\\needspace"))
+                        {
+                            letterInlineCount++;
+                        }
+
                         string propName = Common.LeftString(property, " ");
                         if (_paragraphPropertyList.Contains(propName))
                         {
@@ -775,7 +781,7 @@ namespace SIL.PublishingSolution
                         _xetexFile.Write(property);
                         _xetexFile.Write("{");
                     }
-                    _inlineCount = inlineStyle.Count - paraStyleCount;
+                    _inlineCount = (inlineStyle.Count - paraStyleCount) + letterInlineCount;
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
                     if (_projInfo.ProjectInputType.ToLower() == "scripture")
                     {

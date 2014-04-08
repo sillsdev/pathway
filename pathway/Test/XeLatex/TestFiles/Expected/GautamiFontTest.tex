@@ -11,6 +11,7 @@
 \usepackage{alphalph}
 \usepackage{setspace}
 \usepackage{changepage}
+\usepackage{needspace}
 \usepackage{multicol}
 \usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
 
@@ -115,7 +116,7 @@
 
 \pagestyle{fancy} 
 \begin{spacing}{0.916666666666667}\begin{center}
-\topskip 18pt{\baselineskip 18pt{\letterletHeaddicBody{అ}}}\end{center}
+\topskip 18pt{\section*{\needspace {8\baselineskip}{\letterletHeaddicBody{అ}}}}\end{center}
 \end{spacing}\setlength{\columnsep}{12pt} 
 \setlength\columnseprule{0.4pt} 
 \begin{multicols}{2}\begin{spacing}{0.458333333333333}{\raggedright} \begin{spacing}{0.458333333333333}
