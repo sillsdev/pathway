@@ -651,12 +651,13 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["Margin-Bottom"] = propertyValue;
-            propertyValue = Common.SetPropertyValue("\\baselineskip", propertyValue);
-
+            //propertyValue = Common.SetPropertyValue("\\needspace\\baselineskip","");//propertyValue
+            //\section*{\needspace {3\baselineskip}{\topskip 18pt{\letterhiletHeaddicBody{र sam}}}}
+            propertyValue = "\\section*{\\needspace {8\\baselineskip}";
             _IDProperty["margin-bottom"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
-            propertyValue = "\\usepackage{changepage}";
+            propertyValue = "\\usepackage{needspace}";
             if (!_includePackageList.Contains(propertyValue))
                 _includePackageList.Add(propertyValue);
         }
