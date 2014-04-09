@@ -60,7 +60,7 @@ namespace SIL.Tool
         public static string SepPseudo = "..";
         public static string Space = " ";
         /* Non Breaking Space. It has differerence from normal space and the non breaking space */
-        public static string NonBreakingSpace =  Common.ConvertUnicodeToString("\\00a0");
+        public static string NonBreakingSpace = Common.ConvertUnicodeToString("\\00a0");
 
         static readonly ArrayList _units = new ArrayList();
         public static ErrorProvider _errProvider = new ErrorProvider();
@@ -950,13 +950,13 @@ namespace SIL.Tool
             {
                 value = value.Replace("2260", "$\\neq$");
             }
-            if (value.IndexOf( Common.ConvertUnicodeToString("\\2020")) >= 0)
+            if (value.IndexOf(Common.ConvertUnicodeToString("\\2020")) >= 0)
             {
-                value = value.Replace( Common.ConvertUnicodeToString("\\2020"), "$\\dagger$");
+                value = value.Replace(Common.ConvertUnicodeToString("\\2020"), "$\\dagger$");
             }
-            if (value.IndexOf( Common.ConvertUnicodeToString("\\2021")) >= 0)
+            if (value.IndexOf(Common.ConvertUnicodeToString("\\2021")) >= 0)
             {
-                value = value.Replace( Common.ConvertUnicodeToString("\\2021"), "$\\ddagger$");
+                value = value.Replace(Common.ConvertUnicodeToString("\\2021"), "$\\ddagger$");
             }
             if (value.IndexOf("201C") >= 0)
             {
@@ -2155,22 +2155,25 @@ namespace SIL.Tool
         public static string ConvertStringToUnicode(string inputString)
         {
             string unicode = string.Empty;
-            TextElementEnumerator enumerator = StringInfo.GetTextElementEnumerator(inputString);
-            while (enumerator.MoveNext())
+            if (inputString != string.Empty)
             {
-                string textElement = enumerator.GetTextElement();
-                int index = Char.ConvertToUtf32(textElement, 0);
-                if (string.Format("{0:X}", index).Length == 2)
+                TextElementEnumerator enumerator = StringInfo.GetTextElementEnumerator(inputString);
+                while (enumerator.MoveNext())
                 {
-                    unicode = "\\" + "00" + string.Format("{0:X}", index);
-                }
-                else if (string.Format("{0:X}", index).Length == 3)
-                {
-                    unicode = "\\" + "0" + string.Format("{0:X}", index);
-                }
-                else if (string.Format("{0:X}", index).Length == 4)
-                {
-                    unicode = "\\" + string.Format("{0:X}", index);
+                    string textElement = enumerator.GetTextElement();
+                    int index = Char.ConvertToUtf32(textElement, 0);
+                    if (string.Format("{0:X}", index).Length == 2)
+                    {
+                        unicode = "\\" + "00" + string.Format("{0:X}", index);
+                    }
+                    else if (string.Format("{0:X}", index).Length == 3)
+                    {
+                        unicode = "\\" + "0" + string.Format("{0:X}", index);
+                    }
+                    else if (string.Format("{0:X}", index).Length == 4)
+                    {
+                        unicode = "\\" + string.Format("{0:X}", index);
+                    }
                 }
             }
             return unicode;
@@ -3181,7 +3184,7 @@ namespace SIL.Tool
             return s.Substring(length - 17, 10) != DateTime.Now.ToString("yyyy-MM-dd");
         }
         #endregion SaveInFolder
-        
+
         #region PathwayHelpFileDirectory
         /// <summary>
         /// PathwayHelpFileDirectory help file
@@ -3197,7 +3200,7 @@ namespace SIL.Tool
             }
             catch
             {
-                
+
             }
             return string.Empty;
         }
@@ -3995,7 +3998,7 @@ namespace SIL.Tool
                 if (root != null)
                 {
                     XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-                    returnNode.InnerText =  Common.ConvertUnicodeToString("\\00a9") + " " + organization + Common.ConvertUnicodeToString("\\00ae") + " " + DateTime.Now.Year;
+                    returnNode.InnerText = Common.ConvertUnicodeToString("\\00a9") + " " + organization + Common.ConvertUnicodeToString("\\00ae") + " " + DateTime.Now.Year;
                 }
 
                 xPath = "//cc:license";
@@ -4278,7 +4281,7 @@ namespace SIL.Tool
                             WhitespaceHandling = WhitespaceHandling.Significant
                         };
                 else
-                    reader = new XmlTextReader(fileName) {XmlResolver = null};
+                    reader = new XmlTextReader(fileName) { XmlResolver = null };
 
             }
             return reader;
@@ -4655,7 +4658,7 @@ namespace SIL.Tool
         {
             if (textFromXML.Trim().Length == 0) return string.Empty;
 
-            string currentYear =  Common.ConvertUnicodeToString("\\00a9") + " " + DateTime.Now.Year.ToString() + " SIL International" +  Common.ConvertUnicodeToString("\\00ae") + ".";
+            string currentYear = Common.ConvertUnicodeToString("\\00a9") + " " + DateTime.Now.Year.ToString() + " SIL International" + Common.ConvertUnicodeToString("\\00ae") + ".";
             string[] value = textFromXML.Split(' ');
             if (value.Length > 1)
             {
@@ -4754,7 +4757,7 @@ namespace SIL.Tool
                                 string className = node.Attributes["scheme"].Value;
                                 if (className == "language to font")
                                 {
-                                    xhtmlMetaLanguage.Add(node.Attributes["name"].Value, node.Attributes["content"].Value); 
+                                    xhtmlMetaLanguage.Add(node.Attributes["name"].Value, node.Attributes["content"].Value);
                                 }
                             }
                         }
@@ -4770,7 +4773,7 @@ namespace SIL.Tool
                                 string className = node.Attributes["name"].Value;
                                 if (className == "fontName")
                                 {
-                                    xhtmlMetaLanguage.Add(node.Attributes["name"].Value, node.Attributes["content"].Value); 
+                                    xhtmlMetaLanguage.Add(node.Attributes["name"].Value, node.Attributes["content"].Value);
                                 }
                                 else if (className == "fontSize")
                                 {

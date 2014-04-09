@@ -1248,6 +1248,7 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("style:text-position", "super 55%");
             _validate.ClassProperty.Add("text:display", "prince-footnote");
             _validate.ClassProperty.Add("fo:font-family", "Arial");
+            _validate.ClassProperty.Add("fo:font-family", Common.IsUnixOS() ? "Verdana" : "Arial");
             _validate.ClassProperty.Add("fo:font-weight", "400");
             bool returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue, "Footnote cal - Style Failure");
@@ -1257,7 +1258,7 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:color", "#ff0000");
             _validate.ClassProperty.Add("fo:font-size", "10pt");
             _validate.ClassProperty.Add("text:display", "prince-footnote");
-            _validate.ClassProperty.Add("fo:font-family", "Arial");
+            _validate.ClassProperty.Add("fo:font-family", Common.IsUnixOS() ? "Verdana" : "Arial");
             _validate.ClassProperty.Add("fo:font-weight", "700");
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue, "Footnote Marker - Style Failure");
@@ -2953,10 +2954,7 @@ namespace Test.OpenOfficeConvert
 
             string xpath = "//office:automatic-styles/style:page-layout[@style:name='pm1']/style:page-layout-properties/style:footnote-sep";
 
-            bool result = false;
-            if (Common.UnixVersionCheck())
-                result = true;
-
+            bool result = Common.UnixVersionCheck();
 
             if (result)  // from the file access
             {
@@ -2970,14 +2968,14 @@ namespace Test.OpenOfficeConvert
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "FootnoteSeperator test failed");
 
-            xpath = "//office:automatic-styles/style:page-layout[@style:name='pm5']/style:page-layout-properties/style:footnote-sep";
             if (result)  // from the file access
             {
+                xpath = "//office:automatic-styles/style:page-layout[@style:name='pm6']/style:page-layout-properties/style:footnote-sep";
                 content = "<style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" />";
             }
             else
             {
-
+                xpath = "//office:automatic-styles/style:page-layout[@style:name='pm5']/style:page-layout-properties/style:footnote-sep";
                 content = "<style:footnote-sep style:width=\"0.0071in\" style:line-style=\"solid\" style:distance-before-sep=\"30%\" style:distance-after-sep=\"30%\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" />";
             }
             _validate.GetOuterXml = true;

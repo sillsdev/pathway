@@ -30,7 +30,7 @@ namespace Test.CssDialog
         {
             const string keyName = "SOFTWARE\\SIL\\Pathway";
             const string valueName = "HelpImprove";
-	    if (Common.IsUnixOS())
+            if (Common.IsUnixOS())
             {
                 return;
             }
