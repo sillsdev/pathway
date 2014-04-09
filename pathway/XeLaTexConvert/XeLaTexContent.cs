@@ -634,6 +634,11 @@ namespace SIL.PublishingSolution
                         _directionEnd = true;
                     }
                 }
+
+                if (_childName == "spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody")
+                {
+                    _inlineCount++;
+                }
                 _xetexFile.Write(content);
                 if (_directionEnd)
                 {
@@ -881,8 +886,10 @@ namespace SIL.PublishingSolution
                             _headerContent = content;
                         }
                     }
-
-                    _xetexFile.Write("\\" + mergedParaStyle + "{");
+                    if (mergedParaStyle == "spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody")
+                        _xetexFile.Write("\\section*{\\needspace {8\\baselineskip}\\" + mergedParaStyle + "{");
+                    else
+                        _xetexFile.Write("\\" + mergedParaStyle + "{");
                 }
                 AddUsedStyleName(characterStyle);
             }
