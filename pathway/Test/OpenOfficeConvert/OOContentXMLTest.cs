@@ -1247,7 +1247,6 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:font-size", "12pt");
             _validate.ClassProperty.Add("style:text-position", "super 55%");
             _validate.ClassProperty.Add("text:display", "prince-footnote");
-            _validate.ClassProperty.Add("fo:font-family", "Arial");
             _validate.ClassProperty.Add("fo:font-family", Common.IsUnixOS() ? "Verdana" : "Arial");
             _validate.ClassProperty.Add("fo:font-weight", "400");
             bool returnValue = _validate.ValidateNodeAttributesNS(false);
