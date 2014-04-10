@@ -634,6 +634,11 @@ namespace SIL.PublishingSolution
                         _directionEnd = true;
                     }
                 }
+
+                if (_childName == "spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody")
+                {
+                    _inlineCount++;
+                }
                 _xetexFile.Write(content);
                 if (_directionEnd)
                 {
@@ -759,8 +764,14 @@ namespace SIL.PublishingSolution
                 {
                     List<string> inlineStyle = _classInlineStyle[mergedParaStyle];
                     int paraStyleCount = 0;
+                    int letterInlineCount = 0;
                     foreach (string property in inlineStyle)
                     {
+                        if (property.Contains("\\section*{\\needspace"))
+                        {
+                            letterInlineCount++;
+                        }
+
                         string propName = Common.LeftString(property, " ");
                         if (_paragraphPropertyList.Contains(propName))
                         {
@@ -775,7 +786,7 @@ namespace SIL.PublishingSolution
                         _xetexFile.Write(property);
                         _xetexFile.Write("{");
                     }
-                    _inlineCount = inlineStyle.Count - paraStyleCount;
+                    _inlineCount = (inlineStyle.Count - paraStyleCount) + letterInlineCount;
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
                     if (_projInfo.ProjectInputType.ToLower() == "scripture")
                     {
@@ -875,8 +886,10 @@ namespace SIL.PublishingSolution
                             _headerContent = content;
                         }
                     }
-
-                    _xetexFile.Write("\\" + mergedParaStyle + "{");
+                    if (mergedParaStyle == "spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody")
+                        _xetexFile.Write("\\section*{\\needspace {8\\baselineskip}\\" + mergedParaStyle + "{");
+                    else
+                        _xetexFile.Write("\\" + mergedParaStyle + "{");
                 }
                 AddUsedStyleName(characterStyle);
             }

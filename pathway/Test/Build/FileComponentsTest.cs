@@ -50,6 +50,10 @@ namespace Test.Build
         [Test]
         public void ShortNameTest()
         {
+            if (Common.IsUnixOS())
+            {
+                return;
+            }
             var actual = ShortName(_tf.Input("Files/ConfigurationTool"));
             Assert.AreEqual("CONFIG~1", Path.GetFileName(actual));
         }
@@ -57,6 +61,10 @@ namespace Test.Build
         [Test]
         public void ProcessTreeTest()
         {
+            if (Common.IsUnixOS())
+            {
+                return;
+            }
             ResetIds();
             var inputGuids = _tf.Input("FileLibrary.xml");
             LoadGuids(inputGuids);
@@ -88,7 +96,10 @@ namespace Test.Build
             BasePath = _tf.Output("");
             FilesTemplate = "FilesPw7-tpl.wxs";
             FeaturesTemplate = "FeaturesPw7-tpl.wxs";
-            Execute();
+            if (!Common.IsUnixOS())
+            {
+                Execute();
+            }
         }
     }
 }

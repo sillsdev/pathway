@@ -229,9 +229,13 @@ namespace Test.CssDialog
         {
             _methodName = "SetFontNameTest1";
             ComboBox cmbCtl = new ComboBox();
-            const string fontname = "Arial";
+            string fontname = "Arial";
+            if (Common.IsUnixOS())
+            {
+                fontname = "Ubuntu";
+            }
             target.SetFontName(cmbCtl, fontname);
-            Assert.IsTrue(cmbCtl.Items.Count > 0 && cmbCtl.SelectedItem.ToString() == "Arial", _methodName + " test failed");
+            Assert.IsTrue(cmbCtl.Items.Count > 0 && cmbCtl.SelectedItem.ToString() == fontname, _methodName + " test failed");
         }
 
         /// <summary>

@@ -80,7 +80,6 @@ namespace SIL.PublishingSolution
                 _cssProperty = cssProperty;
                 GetGuidewordLength(cssProperty);
                 InitializeObject(outputFile); // Creates new Objects
-                EnableKerning();
                 LoadAllProperty();  // Loads all properties
                 LoadSpellCheck();
                 FixedLineHeightStatus();
@@ -115,15 +114,6 @@ namespace SIL.PublishingSolution
                 _guidewordLength = _guidewordLength > 0 ? _guidewordLength : 99;
             }
         }
-
-        private void EnableKerning()
-        {
-            if (Common.IsUnixOS())
-            {
-                _enableKerning = "false";
-            }
-        }
-
 
         private string GetLanguageForReversalNumber()
         {
