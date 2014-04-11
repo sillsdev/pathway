@@ -47,8 +47,8 @@ namespace SIL.PublishingSolution
         private void BackUp_Load(object sender, EventArgs e)
         {
             LocDB.Localize(this, null);     // Form Controls
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "Archiving.htm");
+            ShowHelp.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+            ShowHelp.HelpProv.SetHelpKeyword(this, "Archiving.htm");
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
