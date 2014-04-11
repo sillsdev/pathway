@@ -8,6 +8,8 @@
 .Alternate_Reading {
     font-style: italic;
     display: inline;
+    /* http://dev.w3.org/csswg/css-gcpm/#creating-footnotes */
+    float: footnote;
     display: footnote;
     display: prince-footnote;
     position: footnote;
@@ -114,6 +116,8 @@
     text-indent: 0pt;
     margin-left: 0pt;
     display: inline;
+    /* http://dev.w3.org/csswg/css-gcpm/#creating-footnotes */
+    float: footnote;
     display: footnote;
     display: prince-footnote;
     position: footnote;
@@ -136,6 +140,8 @@
     text-indent: 1pt;
     margin-left: 0pt;
     display: inline;
+    /* http://dev.w3.org/csswg/css-gcpm/#creating-footnotes */
+    float: footnote;
     display: footnote;
     display: prince-footnote;
     position: footnote;
