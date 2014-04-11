@@ -80,8 +80,8 @@ namespace SIL.PublishingSolution
         private void NewPublication_Load(object sender, EventArgs e)
         {
             LocDB.Localize(this, null);     // Form Controls
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "NewPublication.htm");
+            ShowHelp.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+            ShowHelp.HelpProv.SetHelpKeyword(this, "NewPublication.htm");
             txtLocation.Text = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
             // load CSS Templates

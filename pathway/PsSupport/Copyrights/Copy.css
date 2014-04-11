@@ -21,13 +21,13 @@
         border-top: thin solid black;
         padding: 0.3em 0;
         margin-top: 0.6em;
-        margin-left: 2pi;
+        margin-left: 2pc;
     }
     @footnote {
         border-top: thin solid black;
         padding: 0.3em 0;
         margin-top: 0.6em;
-        margin-left: 2pi;
+        margin-left: 2pc;
     }
 }
 
@@ -59,7 +59,7 @@ table {
     margin-bottom: 0em;
 }
 td {
-    vertical-align: center;
+    vertical-align: middle;
     padding: 8px;
 }
 h1 {

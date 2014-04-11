@@ -72,8 +72,8 @@ namespace SIL.PublishingSolution
         private void OpenOfficeConverter_Load(object sender, EventArgs e)
         {
             LocDB.Localize(this, null);     // Form Controls
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "ProjectTree.htm");
+            ShowHelp.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+            ShowHelp.HelpProv.SetHelpKeyword(this, "ProjectTree.htm");
 
             ScreenAdjustment();
 

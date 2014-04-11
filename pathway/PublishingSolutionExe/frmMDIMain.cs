@@ -103,7 +103,7 @@ namespace SIL.PublishingSolution
             try
             {
                 string helpPath = Common.PathCombine(_hlpPath, "PsDoc.chm");
-                Common.HelpProv.HelpNamespace = helpPath;
+                ShowHelp.HelpProv.HelpNamespace = helpPath;
             }
             catch
             {
@@ -276,8 +276,8 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "Introduction.htm");
+            ShowHelp.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+            ShowHelp.HelpProv.SetHelpKeyword(this, "Introduction.htm");
             SendKeys.Send("{F1}");
         }
 
@@ -310,8 +310,8 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "FlexAdd-on.htm");
+            ShowHelp.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+            ShowHelp.HelpProv.SetHelpKeyword(this, "FlexAdd-on.htm");
             SendKeys.Send("{F1}");
         }
 
@@ -635,8 +635,8 @@ namespace SIL.PublishingSolution
 
         private void frmMDIParent_Activated(object sender, EventArgs e)
         {
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "Introduction.htm");
+            ShowHelp.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+            ShowHelp.HelpProv.SetHelpKeyword(this, "Introduction.htm");
         }
 
         private void tsStylePick_Click(object sender, EventArgs e)
