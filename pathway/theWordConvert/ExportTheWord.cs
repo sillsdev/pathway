@@ -457,7 +457,7 @@ namespace SIL.PublishingSolution
                 var cleanLine = line.ToLower().Trim();
                 if (cleanLine.StartsWith("rtl="))
                 {
-                    if (cleanLine.Substring(4, 1) == "t")
+                    if (cleanLine.Length > 4 && cleanLine.Substring(4, 1) == "t")
                     {
                         xsltArgs.AddParam("rtl", "", "1");
                         R2l = true;
