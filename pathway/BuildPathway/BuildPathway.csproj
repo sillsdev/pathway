@@ -559,8 +559,7 @@
     <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
-    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" Condition="$(OS) != 'Linux'" />
-    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" Condition="$(OS) == 'Linux'" />
+    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig->'Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
