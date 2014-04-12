@@ -1952,7 +1952,19 @@ namespace SIL.PublishingSolution
             }
             _writer.WriteAttributeString("svg:y", value);
 
-            _writer.WriteAttributeString("fo:min-width", "145pt");
+
+            string frameWidth = "145pt";
+
+            if (!String.IsNullOrEmpty(_pageLayoutProperty["fo:page-width"]))
+            {
+                if (Convert.ToDouble(_pageLayoutProperty["fo:page-width"].Replace("pt", "")) < 400)
+                {
+                    frameWidth = "100pt";
+                }
+            }
+
+            _writer.WriteAttributeString("fo:min-width", frameWidth);
+            
             _writer.WriteAttributeString("draw:z-index", "1");
             _writer.WriteStartElement("draw:text-box");
             _writer.WriteAttributeString("fo:min-height", "14.14pt");//added for TD-2579
