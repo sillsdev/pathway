@@ -282,6 +282,7 @@
   <ItemGroup>
     <Content Include="icon.ico" />
     <Content Include="myIcon.ico" />
+    <Content Include="Resources\Reset.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

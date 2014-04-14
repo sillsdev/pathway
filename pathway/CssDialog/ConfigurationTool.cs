@@ -151,6 +151,11 @@ namespace SIL.PublishingSolution
             get { return tsSend; }
         }
 
+        public ToolStripButton TsReset
+        {
+            get { return tsReset; }
+        }
+
         public TabControl TabControl1
         {
             get { return tabControl1; }
@@ -1270,27 +1275,6 @@ namespace SIL.PublishingSolution
             _CToolBL.ddlPageNumber_SelectedIndexChange();
         }
 
-        private void ConfigurationTool_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (_CToolBL.IsUnixOs)
-            {
-                if (e.KeyCode == Keys.ShiftKey)
-                {
-                    bool shiftKey = (ModifierKeys & Keys.Shift) == Keys.Shift;
-
-                    string allUsersPath = Common.GetAllUserPath();
-                    if (ModifierKeys == Keys.Shift && shiftKey)
-                    {
-                        if (Directory.Exists(allUsersPath))
-                        {
-                            DirectoryInfo di = new DirectoryInfo(allUsersPath);
-                            Common.CleanDirectory(di);
-                        }
-                    }
-                }
-            }
-        }
-
         private void txtFnCallerSymbol_KeyUp(object sender, KeyEventArgs e)
         {
             _CToolBL.txtFnCallerSymbol_KeyUpBL();
@@ -1342,6 +1326,11 @@ namespace SIL.PublishingSolution
         {
             EditCSS(sender, e);
             _CToolBL.chkDisableWO_CheckStateChangedBL(sender, e);
+        }
+
+        private void tsReset_Click(object sender, EventArgs e)
+        {
+            _CToolBL.tsReset_ClickBL();
         }
     }
 }
