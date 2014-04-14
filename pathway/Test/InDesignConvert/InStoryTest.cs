@@ -1666,8 +1666,8 @@ namespace Test.InDesignConvert
         public void FootNote()
         {
             _storyXML = new InStory();
-            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/FootNote.css");
-            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/FootNote.xhtml");
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/Footnote.css");
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/Footnote.xhtml");
             ExportProcess();
 
             _expected.Add("Position", "Superscript");

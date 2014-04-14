@@ -73,7 +73,7 @@ namespace Test
                     reader = new XmlNodeReader(node);
                     reader.Read();
                     propertyValue = reader.GetAttribute(propertyKey);
-                    if (propertyValue != ClassProperty[propertyKey])
+                    if (propertyValue != null && propertyValue != ClassProperty[propertyKey])
                     {
                         match = false;
                     }
