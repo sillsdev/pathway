@@ -635,7 +635,7 @@ namespace SIL.PublishingSolution
                     }
                 }
 
-                if (_childName == "spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody")
+                if (_childName.ToLower().Contains("sectionhead"))//spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody
                 {
                     _inlineCount++;
                 }
@@ -886,7 +886,7 @@ namespace SIL.PublishingSolution
                             _headerContent = content;
                         }
                     }
-                    if (mergedParaStyle == "spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody")
+                    if (mergedParaStyle.ToLower().Contains("sectionhead"))//spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody
                         _xetexFile.Write("\\section*{\\needspace {8\\baselineskip}\\" + mergedParaStyle + "{");
                     else
                         _xetexFile.Write("\\" + mergedParaStyle + "{");

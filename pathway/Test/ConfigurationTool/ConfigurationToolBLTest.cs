@@ -423,6 +423,7 @@ namespace Test.UIConfigurationToolBLTest
             PreviewButtonEnable();
             DefaultButtonEnable();
             SendButtonEnable();
+            ResetButtonEnable();
             PaperButtonEnable();
             MobileButtonEnable();
             WebButtonEnable();
@@ -513,6 +514,13 @@ namespace Test.UIConfigurationToolBLTest
             //To check the new button enable property
             bool buttonNew = cTool.TsNew.Enabled;
             Assert.IsTrue(buttonNew, "New button enable Test failed");
+        }
+
+        private void ResetButtonEnable()
+        {
+            //To check the Preview button enable property
+            bool buttonPreview = cTool.TsReset.Enabled;
+            Assert.IsTrue(buttonPreview, "Reset button enable Test failed");
         }
 
         private void DisplayTabEnable()
