@@ -2778,6 +2778,8 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void ClearPropertyTab(TabPage tabPage)
         {
+            if (tabPage == null) return;
+
             foreach (Control ctl in tabPage.Controls)
             {
                 if (ctl is TextBox)
@@ -4254,11 +4256,15 @@ namespace SIL.PublishingSolution
                 tabweb = cTool.TabControl1.TabPages["tabweb"];
                 tabDict4Mids = cTool.TabControl1.TabPages["tabDict4Mids"];
 
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabmobile"]);
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabothers"]);
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabweb"]);
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabDict4Mids"]);
+                string[] removeTabs = { "tabmobile", "tabothers", "tabweb", "tabPicture", "tabDict4Mids" };
+
+                foreach (var removeTab in removeTabs)
+                {
+                    if (cTool.TabControl1.TabPages[removeTab] != null)
+                    {
+                        cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[removeTab]);
+                    }
+                }
             }
 
             if (IsUnixOs)
@@ -4518,6 +4524,34 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+        }
+
+        public void tsReset_ClickBL()
+        {
+            try
+            {
+                const string msg = "Are you sure you want to delete the current settings file and reset to default settings?";
+                const string caption = "Reset Settings";
+                if (!cTool._fromNunit)
+                {
+                    DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
+                                                          MessageBoxDefaultButton.Button2);
+                    if (result != DialogResult.OK) return;
+                }
+
+                string allUsersPath = Common.GetAllUserPath();
+                if (Directory.Exists(allUsersPath))
+                {
+                    DirectoryInfo di = new DirectoryInfo(allUsersPath);
+                    Common.CleanDirectory(di);
+                }
+                ConfigurationTool_LoadBL();
+                MessageBox.Show("Settings files are reset successfully.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Settings files cannot be reset.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         public void ShowPreview(int page)
