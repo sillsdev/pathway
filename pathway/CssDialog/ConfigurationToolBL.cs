@@ -4545,6 +4545,7 @@ namespace SIL.PublishingSolution
                     DirectoryInfo di = new DirectoryInfo(allUsersPath);
                     Common.CleanDirectory(di);
                 }
+                SelectedRowIndex = 0;
                 ConfigurationTool_LoadBL();
                 MessageBox.Show("Settings files are reset successfully.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
