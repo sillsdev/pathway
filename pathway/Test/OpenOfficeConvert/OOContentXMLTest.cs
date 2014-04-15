@@ -42,7 +42,7 @@ namespace Test.OpenOfficeConvert
         ProgressBar _progressBar;
         private TimeSpan _totalTime;
         private PublicationInformation _projInfo;
-        
+
         private ValidateXMLFile _validate;
         private string _styleFile;
         private string _contentFile;
@@ -206,7 +206,7 @@ namespace Test.OpenOfficeConvert
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = "t1_body";
-            string content =  "T1 class";
+            string content = "T1 class";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1);
 
@@ -602,12 +602,12 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue1);
 
             _validate.ClassName = "translation..before_translations_xitem_examples_sense_senses_entry_letData_dicBody";
-            content = "''"+ Common.ConvertUnicodeToString("\\2565")+"'' two single with uni";
+            content = "''" + Common.ConvertUnicodeToString("\\2565") + "'' two single with uni";
             returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
 
             _validate.ClassName = "translation..after_translations_xitem_examples_sense_senses_entry_letData_dicBody";
-            content = "\"\""+ Common.ConvertUnicodeToString("\\2115") +"\"\" two double with uni";
+            content = "\"\"" + Common.ConvertUnicodeToString("\\2115") + "\"\" two double with uni";
             returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
 
@@ -957,44 +957,20 @@ namespace Test.OpenOfficeConvert
             returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
             Assert.IsTrue(returnValue);
 
-
             _validate.ClassProperty.Add("style:rel-width", "1.555556*");
-            if (Common.UnixVersionCheck())
-            {
-                _validate.ClassProperty.Add("fo:start-indent", "0.2222222in");
-            }
-            else
-            {
-                _validate.ClassProperty.Add("fo:start-indent", "0in");
-            }
+            _validate.ClassProperty.Add("fo:start-indent", "0in");
             _validate.ClassProperty.Add("fo:end-indent", "0.2222222in");
             returnValue = _validate.ValidateNodeAttributesNS(2, xpath);
             Assert.IsTrue(returnValue);
 
             _validate.ClassProperty.Add("style:rel-width", "1.555556*");
-            if (Common.UnixVersionCheck())
-            {
-                _validate.ClassProperty.Add("fo:start-indent", "0.2222222in");
-                _validate.ClassProperty.Add("fo:end-indent", "0in");
-            }
-            else
-            {
-                _validate.ClassProperty.Add("fo:start-indent", "0.2222222in");
-                _validate.ClassProperty.Add("fo:end-indent", "0.2222222in");
-            }
-
+            _validate.ClassProperty.Add("fo:start-indent", "0.2222222in");
+            _validate.ClassProperty.Add("fo:end-indent", "0.2222222in");
             returnValue = _validate.ValidateNodeAttributesNS(3, xpath);
             Assert.IsTrue(returnValue);
 
             _validate.ClassProperty.Add("style:rel-width", "1.555556*");
-            if (Common.UnixVersionCheck())
-            {
-                _validate.ClassProperty.Add("fo:start-indent", "0in");
-            }
-            else
-            {
-                _validate.ClassProperty.Add("fo:start-indent", "0.2222222in");
-            }
+            _validate.ClassProperty.Add("fo:start-indent", "0.2222222in");
             _validate.ClassProperty.Add("fo:end-indent", "0in");
             returnValue = _validate.ValidateNodeAttributesNS(4, xpath);
             Assert.IsTrue(returnValue);
@@ -1012,7 +988,7 @@ namespace Test.OpenOfficeConvert
             LoadParam("Scripture", "true");
             _projInfo.ProjectInputType = "Scripture";
             const string fileCallTOCScriptureTrue = "CallTOCScripture";
-            
+
             string styleOutput = GetStyleOutput(fileCallTOCScriptureTrue);
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
@@ -1024,7 +1000,7 @@ namespace Test.OpenOfficeConvert
             LoadParam("Scripture", "false");
             _projInfo.ProjectInputType = "Scripture";
             const string fileCallTOCScriptureFalse = "CallTOCScripture";
-            
+
             styleOutput = GetStyleOutput(fileCallTOCScriptureFalse);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -1034,7 +1010,7 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("text:outline-level", "10");
             returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
             Assert.IsFalse(returnValue);
-            
+
             //For Dictionary
             LoadParam("Dictionary", "true");
             _projInfo.ProjectInputType = "Dictionary";
@@ -1078,7 +1054,7 @@ namespace Test.OpenOfficeConvert
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = "xsensenumber_sense_senses_entry_letData_dicBody";
-            string content =  Common.ConvertUnicodeToString("\\25ba") + "1)";
+            string content = Common.ConvertUnicodeToString("\\25ba") + "1)";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
 
@@ -1689,7 +1665,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         /// TD-222   Image width:50%
         /// </summary>  
-        [Ignore]    
+        [Ignore]
         [Test]
         public void Picture_Width_Node()
         {
@@ -1719,7 +1695,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         /// TD-1855 Picture / PictureBox error
         /// </summary>
-        [Ignore]      
+        [Ignore]
         [Test]
         public void Picture_Mrk_Node()
         {
@@ -2248,7 +2224,7 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = "revEntry_revData_revAppendix";
             _validate.ClassNameTrim = false;
-            string content ="<text:span text:style-name=\"headword_.en_revEntry_revData_revAppendix\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">??</text:span><text:span text:style-name=\"revSense_.bss_revEntry_revData_revAppendix\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">booy</text:span><text:span text:style-name=\"revSense_.bss_revEntry_revData_revAppendix\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">; the</text:span><text:span text:style-name=\"revSense_.bss_revEntry_revData_revAppendix\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">; child</text:span><text:span text:style-name=\"revSense_.bss_revEntry_revData_revAppendix\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">; went</text:span>";
+            string content = "<text:span text:style-name=\"headword_.en_revEntry_revData_revAppendix\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">??</text:span><text:span text:style-name=\"revSense_.bss_revEntry_revData_revAppendix\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">booy</text:span><text:span text:style-name=\"revSense_.bss_revEntry_revData_revAppendix\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">; the</text:span><text:span text:style-name=\"revSense_.bss_revEntry_revData_revAppendix\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">; child</text:span><text:span text:style-name=\"revSense_.bss_revEntry_revData_revAppendix\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">; went</text:span>";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1, "spacebefore - Content 1 Failure");
         }
@@ -3776,7 +3752,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         /// Space Issue fixed, before any modification pls contact sankar
         /// </summary>     
-        [Test] 
+        [Test]
         public void CrossRefSpaceTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -3793,7 +3769,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         /// Space Issue fixed, before any modification pls contact sankar
         /// </summary>
-        [Test]      
+        [Test]
         public void WhiteSpaceNextLineTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -4274,7 +4250,7 @@ namespace Test.OpenOfficeConvert
             File.Copy(fromFileName, toFileName, true);
         }
 
-        private static void LoadParam(string inputType,string tocTrueFalse)
+        private static void LoadParam(string inputType, string tocTrueFalse)
         {
             // Verifying the input setting file and css file - in Input Folder
             string settingFile = inputType + "StyleSettings.xml";
@@ -4287,13 +4263,13 @@ namespace Test.OpenOfficeConvert
             // setup - ensure that there is a current organization in the StyleSettings xml
             Param.UpdateMetadataValue(Param.TableOfContents, tocTrueFalse);
             Param.Write();
-            
-            
+
+
             Param.LoadValues(sFileName);
             Param.SetLoadType = inputType;
             Param.Value["OutputPath"] = _outputBasePath;
             Param.Value["UserSheetPath"] = _outputBasePath;
-        } 
+        }
 
         /*
 

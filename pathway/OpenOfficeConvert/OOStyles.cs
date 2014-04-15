@@ -118,26 +118,27 @@ namespace SIL.PublishingSolution
         private string GetLanguageForReversalNumber()
         {
             string language = "en";
-            Dictionary<string, string> AllStyles = new Dictionary<string, string>();
-
-            XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            xdoc.Load(_projInfo.DefaultXhtmlFileWithPath);
-            string xPath = "//span[@class='revsensenumber']";
-            XmlNodeList nodes = xdoc.SelectNodes(xPath);
-            if (nodes.Count > 0)
+            if (_projInfo.DefaultXhtmlFileWithPath != null && File.Exists(_projInfo.DefaultXhtmlFileWithPath))
             {
-                for (int i = 0; i < nodes.Count; i++)
+                XmlDocument xdoc = Common.DeclareXMLDocument(true);
+                xdoc.Load(_projInfo.DefaultXhtmlFileWithPath);
+                string xPath = "//span[@class='revsensenumber']";
+                XmlNodeList nodes = xdoc.SelectNodes(xPath);
+                if (nodes.Count > 0)
                 {
-                    var xmlAttributeCollection = nodes[i].Attributes;
-                    if (xmlAttributeCollection != null)
-                        if (xmlAttributeCollection["lang"] != null)
-                        {
-                            if (xmlAttributeCollection["lang"].Value != language)
+                    for (int i = 0; i < nodes.Count; i++)
+                    {
+                        var xmlAttributeCollection = nodes[i].Attributes;
+                        if (xmlAttributeCollection != null)
+                            if (xmlAttributeCollection["lang"] != null)
                             {
-                                language = xmlAttributeCollection["lang"].Value;
-                                break;
+                                if (xmlAttributeCollection["lang"].Value != language)
+                                {
+                                    language = xmlAttributeCollection["lang"].Value;
+                                    break;
+                                }
                             }
-                        }
+                    }
                 }
             }
             return language;

@@ -89,7 +89,7 @@ namespace Test.ParatextSupport
         {
             xslParams = new Dictionary<string, object>();
             DateTime dateTime = new DateTime(2013, 8, 27);
-            xslParams.Add("dateTime", dateTime.Date);
+            xslParams.Add("dateTime", String.Format("{0:s}", dateTime));
             xslParams.Add("user", "Tester");
             xslParams.Add("projName", "TestProj");
             xslParams.Add("stylesheet", "usfm");

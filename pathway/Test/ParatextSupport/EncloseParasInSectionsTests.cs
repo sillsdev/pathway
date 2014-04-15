@@ -22,6 +22,7 @@ using System.Xml;
 using System.Xml.Xsl;
 using NUnit.Framework;
 using SIL.PublishingSolution;
+using SIL.Tool;
 
 namespace Test.ParatextSupport
 {
@@ -35,7 +36,7 @@ namespace Test.ParatextSupport
         #region Constants
         private const string divider = "------------------------------------------------------------";
         private const string htmlOpen = "<?xml version=\"1.0\" encoding=\"utf-16\"?><html xml:lang=\"utf-8\" xmlns=\"http://www.w3.org/1999/xhtml\">";
-        private const string htmlHeader = "<head><title /></head>";
+        private string htmlHeader = "<head><title /></head>";
         private const string bookOpen = "<body class=\"scrBody\"><div class=\"scrBook\"><span class=\"scrBookName\" lang=\"zxx\">Genesis</span>" +
             "<span class=\"scrBookCode\" lang=\"zxx\">GEN</span>";
         private const string bookClose = "</div></body></html>";
@@ -76,6 +77,11 @@ namespace Test.ParatextSupport
 			xslParams.Add("ws", "en");
             xslParams.Add("fontName", "Times");
             xslParams.Add("fontSize", "12");
+
+            if (Common.IsUnixOS())
+            {
+                htmlHeader = "<head><title></title></head>";
+            }
 
             ParatextPathwayLink converter = new ParatextPathwayLink("testDb", xslParams);
             encloseParasInSections = ParatextSupportExtensions.EncloseParasInSectionsXslt(converter);
