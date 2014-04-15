@@ -411,7 +411,7 @@ Func InstallPdfReaderIfNecessary()
 	;$pkg = "FoxitReader" & $latest & "_enu_Setup.exe"
 	;GetFromUrl($pkg, "http://cdn04.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/" & $pkg)
 	;$pkg = "reader_lastest.exe"
-	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "PdfXChange", "PDFVwer.exe")
+	$latest = StringSplit(IniRead("PathwayBootstrap.Ini", "Versions", "PdfXChange", "PDFX5SA_LE_H.zip,e09d4db35d58ebc7f532d75e54dc814a"), ",")
 	$pkg = $latest[1]
 	GetFromURL($pkg, "http://www.tracker-software.com/downloads/" & $pkg & "?key=" & $latest[2])
 	If FileExists($pkg) Then
