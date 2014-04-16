@@ -29,16 +29,23 @@ namespace Test.PsTool
     [Category("ShortTest")]
     public class FontTest
     {
+        private bool isLinux = Common.IsUnixOS();
         /// <summary>
         ///A test Arial Postscript font name
         ///</summary>
         [Test]
         public void ArialTest()
         {
-			var fontFullName = FontInternals.GetFontFileName("Arial", "normal");
-            var actual = FontInternals.GetPostscriptName(fontFullName);
+            string fontName = "Arial";
             var expected = "ArialMT";
-            Assert.AreEqual(expected,actual);
+            if (isLinux)
+            {
+                fontName = "Ubuntu";
+                expected = "Ubuntu";
+            }
+            var fontFullName = FontInternals.GetFontFileName(fontName, "normal");
+            var actual = FontInternals.GetPostscriptName(fontFullName);
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -47,9 +54,16 @@ namespace Test.PsTool
         [Test]
         public void TimesTest()
         {
-			var fontFullName = FontInternals.GetFontFileName("Times New Roman", "normal");
-            var actual = FontInternals.GetPostscriptName(fontFullName);
+            string fontName = "Times New Roman";
             var expected = "TimesNewRomanPSMT";
+            if (isLinux)
+            {
+                fontName = "Liberation Serif";
+                expected = "LiberationSerif";
+            }
+            var fontFullName = FontInternals.GetFontFileName(fontName, "normal");
+            var actual = FontInternals.GetPostscriptName(fontFullName);
+            
             Assert.AreEqual(expected, actual);
         }
 
@@ -60,7 +74,7 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void AbyssinicaTest()
         {
-			var fontFullName = FontInternals.GetFontFileName("Abyssinica SIL", "normal");
+            var fontFullName = FontInternals.GetFontFileName("Abyssinica SIL", "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
             var expected = "AbyssinicaSIL";
             Assert.AreEqual(expected, actual);
@@ -73,7 +87,7 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void ScheherazadeTest()
         {
-			var fontFullName = FontInternals.GetFontFileName("Scheherazade", "normal");
+            var fontFullName = FontInternals.GetFontFileName("Scheherazade", "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
             var expected = "Scheherazade";
             Assert.AreEqual(expected, actual);
@@ -119,7 +133,7 @@ namespace Test.PsTool
             Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
-        
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void CharisBoldTest()
@@ -166,7 +180,7 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void ScheherazadeGraphiteTest()
         {
-			var fontFullName = FontInternals.GetFontFileName("Scheherazade", "normal");
+            var fontFullName = FontInternals.GetFontFileName("Scheherazade", "normal");
             var actual = FontInternals.IsGraphite(fontFullName);
             Assert.IsFalse(actual);
         }

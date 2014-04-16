@@ -132,12 +132,20 @@ namespace SIL.Tool
         {
             if (!File.Exists(fileName)) return string.Empty;
             string metaName = string.Empty;
+            bool isLinux = Common.IsUnixOS();
             XmlTextReader reader = Common.DeclareXmlTextReader(fileName, true);
-            if (Common.IsUnixOS())
+            metaName = isLinux ? ReadMetaNameValueForLinux(reader, metaName, true) : ReadMetaNameValue(reader, metaName);
+            reader.Close();
+            return metaName;
+        }
+
+        private static string ReadMetaNameValue(XmlTextReader reader, string metaName)
+        {
+            while (reader.Read())
             {
-                while (reader.Read())
+                if (reader.IsEmptyElement)
                 {
-                    if (reader.Name == "meta")
+                    if (string.Compare(reader.Name, "meta", true) >= 0)
                     {
                         if (reader.GetAttribute("name") != null)
                         {
@@ -147,13 +155,7 @@ namespace SIL.Tool
                                 if (reader.GetAttribute("content") != null)
                                 {
                                     metaName = reader.GetAttribute("content");
-                                    if (Common.UnixVersionCheck() && metaName == null)
-                                    {
-                                        metaName = Common.GetAllUserAppPath();
-                                        metaName = Common.RightRemove(metaName, "sil");
-                                        metaName = Common.PathCombine(metaName, "fieldworks");
-                                    }
-                                    else if (metaName.IndexOf("file://") >= 0) // from the file access
+                                    if (metaName.IndexOf("file://") >= 0) // from the file access
                                     {
                                         const int designatorLength = 7;
                                         metaName = metaName.Substring(designatorLength,
@@ -161,70 +163,63 @@ namespace SIL.Tool
                                     }
                                     break;
                                 }
-
                             }
                         }
                     }
-                    // Check only in the header and retrun 
-                    if (reader.NodeType == XmlNodeType.EndElement)
-                    {
-                        if (reader.Name == "head")
-                        {
-                            break;
-                        }
-                    }
                 }
-            }
-            else
-            {
-                while (reader.Read())
+                // Check only in the header and retrun 
+                if (reader.NodeType == XmlNodeType.EndElement)
                 {
-                    if (reader.IsEmptyElement)
+                    if (string.Compare(reader.Name, "head", true) >= 0)
                     {
-                        if (string.Compare(reader.Name, "meta", true) >= 0)
-                        {
-                            if (reader.GetAttribute("name") != null)
-                            {
-                                metaName = reader.GetAttribute("name");
-                                if (metaName.IndexOf("RootDir") >= 0)
-                                {
-                                    if (reader.GetAttribute("content") != null)
-                                    {
-                                        metaName = reader.GetAttribute("content");
-                                        if (Common.UnixVersionCheck())
-                                        {
-                                            metaName = Common.GetAllUserAppPath();
-                                            metaName = Common.RightRemove(metaName, "sil");
-                                            metaName = Common.PathCombine(metaName, "fieldworks");
-                                        }
-                                        else if (metaName.IndexOf("file://") >= 0) // from the file access
-                                        {
-                                            const int designatorLength = 7;
-                                            metaName = metaName.Substring(designatorLength,
-                                                                          metaName.Length - designatorLength);
-                                        }
-                                        break;
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                    // Check only in the header and retrun 
-                    if (reader.NodeType == XmlNodeType.EndElement)
-                    {
-                        if (string.Compare(reader.Name, "head", true) >= 0)
-                        {
-                            break;
-                        }
+                        break;
                     }
                 }
             }
-            reader.Close();
             return metaName;
         }
 
-
+        private static string ReadMetaNameValueForLinux(XmlTextReader reader, string metaName, bool isLinux)
+        {
+            while (reader.Read())
+            {
+                if (reader.Name == "meta")
+                {
+                    if (reader.GetAttribute("name") != null)
+                    {
+                        metaName = reader.GetAttribute("name");
+                        if (metaName.IndexOf("RootDir") >= 0)
+                        {
+                            if (reader.GetAttribute("content") != null)
+                            {
+                                metaName = reader.GetAttribute("content");
+                                if (isLinux && metaName == null)
+                                {
+                                    metaName = Common.PathCombine(Common.GetAllUserAppPath(), "fieldworks");
+                                }
+                                else if (metaName.IndexOf("file://") >= 0) // from the file access
+                                {
+                                    const int designatorLength = 7;
+                                    metaName = metaName.Substring(designatorLength,
+                                                                  metaName.Length - designatorLength);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+                // Check only in the header and retrun 
+                if (reader.NodeType == XmlNodeType.EndElement)
+                {
+                    if (reader.Name == "head")
+                    {
+                        break;
+                    }
+                }
+            }
+            return metaName;
+        }
+        
         private static Dictionary<string, string> _metaDataDic = null;
         /// <summary>
         /// Get MetaData information from DictionaryStyleSettings.xml/ScriptureStyleSettings.xml

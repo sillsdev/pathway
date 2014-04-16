@@ -98,6 +98,12 @@ namespace SIL.PublishingSolution
         public int ColumnFile = 6;
         public int PreviewFile1 = 7;
         public int PreviewFile2 = 8;
+        protected bool IsUnixOs
+        {
+            get { return _isUnixOS; }
+            set { _isUnixOS = value; }
+        }
+
         #endregion
 
         #region Protected Variables
@@ -662,13 +668,7 @@ namespace SIL.PublishingSolution
                 return ((AssemblyFileVersionAttribute)attributes[0]).Version;
             }
         }
-
-        public bool IsUnixOs
-        {
-            get { return _isUnixOS; }
-            set { _isUnixOS = value; }
-        }
-
+        
         /// <summary>
         /// Method to add the file location to copy the attached files.
         /// </summary>

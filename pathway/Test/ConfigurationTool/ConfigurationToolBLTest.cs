@@ -344,9 +344,9 @@ namespace Test.UIConfigurationToolBLTest
         [Test]
         public void GetMailBodyTest()
         {
+            IsUnixOs = Common.IsUnixOS();
             string returnValue = GetMailBody("Dictionary", "Extract Zip contents to an appropriate folder.%0D%0A%0D%0A");
-            bool isUnix = Common.IsUnixOS();
-            if (isUnix)
+            if (IsUnixOs)
             {
                 Assert.IsTrue(returnValue.Contains("Ubuntu"), "missing Ubuntu");
             }

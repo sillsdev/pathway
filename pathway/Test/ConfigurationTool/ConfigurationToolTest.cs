@@ -51,7 +51,7 @@ namespace Test.UIConfigurationToolTest
             _configTool = new ConfigurationTool();
 
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles");
-            _inputBasePath = Common.PathCombine(testPath, "Input");
+            _inputBasePath = Common.PathCombine(testPath, "input");
             _expectBasePath = Common.PathCombine(testPath, "Expected");
             _outputBasePath = Common.PathCombine(testPath, "Output");
             const bool recursiveDelete = true;
@@ -76,7 +76,7 @@ namespace Test.UIConfigurationToolTest
             fileName = "StyleSettings.xsd";
             CopyFilesSupportToIO(fileName);
 
-            string folderName = "styles";
+            string folderName = "Styles";
             CopyFolderSupportToIO(folderName);
             LoadParam();
         }
