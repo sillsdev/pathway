@@ -54,7 +54,7 @@ namespace Test.PsExport
             Common.Testing = true;
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/PsExport/TestFiles");
             _inputBasePath = Common.PathCombine(testPath, "Input");
-            _expectBasePath = Common.PathCombine(testPath, "Expect");
+            _expectBasePath = Common.PathCombine(testPath, "Expected");
             _outputBasePath = Common.PathCombine(testPath, "Output");
             Common.DeleteDirectory(_outputBasePath);
             Directory.CreateDirectory(_outputBasePath);
@@ -1098,7 +1098,7 @@ namespace Test.PsExport
         public void XsltPreProcess0Test()
         {
             DataType = "Dictionary";
-            var infile = TestDataSetup("Pre0", "predict.xhtml");
+            var infile = TestDataSetup("Pre0", "Predict.xhtml");
             Param.Value["Preprocessing"] = string.Empty;
             XsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
@@ -1109,7 +1109,7 @@ namespace Test.PsExport
         public void XsltPreProcess1Test()
         {
             DataType = "Dictionary";
-            const string  data = "predict.xhtml";
+            const string  data = "Predict.xhtml";
             var infile = TestDataSetup("Pre1", data);
             Param.Value["Preprocessing"] = "Filter Empty Entries";
             XsltPreProcess(infile);
@@ -1122,7 +1122,7 @@ namespace Test.PsExport
         public void XsltPreProcess2Test()
         {
             DataType = "Dictionary";
-            const string data = "predict.xhtml";
+            const string data = "Predict.xhtml";
             var infile = TestDataSetup("Pre2", data);
             Param.Value["Preprocessing"] = "Filter Empty Entries,Fix Duplicate ids";
             XsltPreProcess(infile);

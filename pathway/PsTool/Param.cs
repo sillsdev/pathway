@@ -708,8 +708,11 @@ namespace SIL.PublishingSolution
                 Value[id] = val;
                 var node = xmlMap.SelectSingleNode(string.Format("stylePick/settings/property[@name=\"{0}\"]", id));
                 Debug.Assert(node != null && node.Attributes != null);
-                var valueAttr = node.Attributes.GetNamedItem("value");
-                valueAttr.Value = val;
+                if (node != null)
+                {
+                    var valueAttr = node.Attributes.GetNamedItem("value");
+                    valueAttr.Value = val;
+                }
             }
             catch (Exception ex)
             {

@@ -1,0 +1,463 @@
+@page {
+    -ps-positionchapternumbers-string: "Drop Capital";
+    -ps-IncludeVersenumber-string: "True";
+    -ps-IncludeVerseInHeaderReferences-string:"yes";
+    ps-NonConsecutiveReferenceSeparator-string:",";
+}
+
+.Chapter_Head {
+    padding-top:21pt;
+    padding-bottom:21pt;
+}
+
+.Chapter_Number {
+    font-weight: bolder;
+    vertical-align: top;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-right: 2pt;
+    float: left;
+    string-set: chapter content() ":";
+}
+
+.crossHYPHENReference::footnote-call {
+    font-style:Italic;
+}
+
+
+.Emphasis {
+    font-style: italic;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Intro_List_Item1 {
+    text-indent: -18pt;
+    margin-left: 36pt;
+}
+.Intro_Paragraph {
+    text-indent: .2in;
+    margin-left: 0pt;
+}
+.Intro_Section_Head {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: left;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 3pt;
+    margin-bottom: 3pt;
+}
+.Line1 {
+    text-align: left;
+    text-indent: -18pt;
+    margin-left: 18pt;
+    padding-left: 0pt;
+}
+.Note_CrossHYPHENReference_Paragraph {
+    text-indent: 0pt;
+    margin-left: 0pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Note_CrossHYPHENReference_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    vertical-align: top;
+    line-height: none;
+}
+.Note_CrossHYPHENReference_Paragraph::footnote-marker {
+    font-weight: bold;
+    content: string(chapter) string(verse) ' ';
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
+    text-align: left;
+}
+.Note_General_Paragraph {
+    text-indent: 0pt;
+    margin-left: 0pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Note_General_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    vertical-align: top;
+    line-height: none;
+}
+.Note_General_Paragraph::footnote-marker {
+    font-weight: bold;
+    content: string(chapter) string(verse) ' ';
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
+    text-align: left;
+}
+.Paragraph {
+    text-indent: 12pt;
+    margin-left: 0pt;
+}
+.Paragraph_Continuation {
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Paragraph1 {
+    margin-left: 0pt;
+}
+
+.parallel_passage_reference {
+    font-style:Italic;
+}
+
+.scrBody {
+}
+.scrBook {
+    column-count: 1;
+    clear: both;
+}
+.scrBookName {
+    string-set: bookname content();
+    display: none;
+}
+.scrFootnoteMarker {
+}
+.scrIntroSection {
+    text-align: left;
+}
+.scrSection {
+    text-align: left;
+}
+.Section_Head {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 0pt;
+    padding-top: 0pt;
+    margin-top: 12pt;
+    margin-bottom:6pt;
+}
+.Section_Head_Major {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 8pt;
+}
+
+span {
+    prince-text-replace: "<<" "\201C" ">>" "\201D" "<" "\2018" ">" "\2019";
+}
+
+.Title_Main {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+}
+.Title_Secondary {
+    display: block;
+}
+.Verse_Number {
+    vertical-align: super;
+    vertical-align: top;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: verse content();
+}
+.Verse_Number1 {
+    display: none;
+}
+
+/* justify text */
+
+.Intro_Section_Head {
+    text-align: justify;
+}
+.Line1 {
+    text-align: justify;
+}
+.scrIntroSection {
+    text-align: justify;
+}
+.scrSection {
+    text-align: justify;
+}
+@page {
+    size: 21cm 29.7cm;
+    counter-increment: page;
+    margin: 1.5cm 1.85cm;
+}
+/* The following formats the scripture text into 2 columns */
+
+.columns {
+	column-count: 2; -moz-column-count: 2;
+	column-gap: 1.5em; -moz-column-gap: 1.5em;
+	column-fill: balance;
+}
+
+.Chapter_Number {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Emphasis {
+    font-family: "Charis SIL", serif;	/* default Serif font */
+}
+
+.Intro_List_Item1 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Intro_Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Intro_Section_Head {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Line1 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Note_CrossHYPHENReference_Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Note_General_Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Paragraph_Continuation {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Paragraph1 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Section_Head {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Section_Head_Major {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Title_Main {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+}
+
+.Verse_Number {
+    font-family: "Charis SIL", serif;	/* default Serif font */
+}
+
+.Chapter_Head {
+    font-size:14pt;
+    line-height:16pt;
+}
+
+.Chapter_Number {
+    font-size: 250%;
+    line-height: 26pt;
+    -ps-fixed-line-height: 26pt;
+}
+
+.Intro_List_Item1 {
+    font-size: 10pt;	/* cascaded environment */
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Intro_Paragraph {
+    font-size: 10pt;	/* cascaded environment */
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Intro_Section_Head {
+    font-size: 10pt;
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Line1 {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Note_CrossHYPHENReference_Paragraph {
+    font-size: 9pt;	/* cascaded environment */
+    line-height: 9pt;
+    -ps-fixed-line-height: 9pt;
+}
+
+.Note_CrossHYPHENReference_Paragraph::footnote-call {
+    font-size: 6pt;
+    vertical-align: super;
+    line-height: none;
+}
+
+.Note_CrossHYPHENReference_Paragraph::footnote-marker {
+    font-size: 6pt;
+}
+
+.Note_General_Paragraph {
+    font-size: 9pt;	/* cascaded environment */
+    line-height: 9pt;
+    -ps-fixed-line-height: 9pt;
+}
+
+.Note_General_Paragraph::footnote-call {
+    font-size: 6pt;
+    vertical-align: super;
+    line-height: none;
+}
+
+.Note_General_Paragraph::footnote-marker {
+    font-size: 6pt;
+}
+
+.Paragraph {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph_Continuation {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph1 {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.parallel_passage_reference {
+    font-size:11pt;
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Section_Head {
+    font-size: 10pt;
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Section_Head_Major {
+    font-size: 11pt;
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Title_Main {
+    font-size: 20pt;	/* cascaded environment */
+    line-height: 24pt;
+    -ps-fixed-line-height: 24pt;
+}
+
+.Verse_Number {
+    font-size: 6pt;
+}
+.pictureRight {
+    float: right;
+    width: 99px;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureLeft {
+    float: left;
+    position: relative;
+    left: -2pc;
+    width: 99px;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureCenter {
+    float: top;
+    clear: both;
+    width: 4.75in;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureRight > .picture {
+    width: 95px;
+    height: 84px;
+}
+div.pictureLeft > img.picture {
+    width: 95px;
+    height: 84px;
+}
+.pictureCaption {
+    display: block;
+    text-align: center;
+    text-transform:capitalize;
+}
+
+@page {
+    @top-left      { content: ''; }
+    @top-center {
+    content: string(bookname, first) " "  string(chapter, first) " � "  string(chapter, last);
+    }    
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: counter(page); }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: counter(page); }
+    @bottom-right  { content: ''; }
+}
+/* scripture ruling lines */
+@page {
+    @footnotes {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+    @footnote {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+}
+.border {
+    border-top: .5pt solid #000;
+    text-align: center;
+    margin-left: 1in;
+    margin-right: 1in;
+    margin-top: 9pt;
+    margin-bottom: 18pt;
+    content: "\00A0";
+}
+.columns {
+       column-rule: solid 1pt #aa0000;
+}
