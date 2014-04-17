@@ -20,6 +20,9 @@ Func DoInstall($bar)
 	If not FileExists("wget.exe") Then
 		FileInstall("res\wget.exe", "wget.exe")
 	EndIf
+	If not FileExists("unzip.exe") Then
+		FileInstall("res\unzip.exe", "unzip.exe")
+	EndIf
 	InstallDotNetIfNecessary()
 	GUICtrlSetData($bar, 10)
 	if BteVersion() Then
@@ -50,6 +53,7 @@ Func DoInstall($bar)
 	;RemoveLocalFolder()
 	GUICtrlSetData($bar, 100)
 	FileDelete("wget.exe")
+	FileDelete("unzip.exe")
 EndFunc
 
 Func BteVersion()
@@ -415,12 +419,29 @@ Func InstallPdfReaderIfNecessary()
 	$pkg = $latest[1]
 	GetFromURL($pkg, "http://www.tracker-software.com/downloads/" & $pkg & "?key=" & $latest[2])
 	If FileExists($pkg) Then
-		RunWait($pkg)
-		CleanUp($pkg)
+		If StringRight($pkg, 4) = ".zip" Then
+			RunFromZip($pkg)
+		Else
+			RunWait($pkg)
+		EndIf
+		If IsAssociation(".pdf") Then
+			CleanUp($pkg)
+		Else
+			MsgBox(64, "Pathway Bootstrap", $pkg & " has been downloaded. After the Pathway installer completes, you can install it.")
+		EndIf
 	Else
 		MsgBox(4096,"Status","Please Install a Pdf Reader")
 		;LaunchSite("http://get.adobe.com/reader/")
 		LaunchSite("http://www.tracker-software.com/product/pdf-xchange-lite")
+	EndIf
+EndFunc
+
+Func RunFromZip($pkg)
+	RunWait("unzip " & $pkg)
+	Local $exeName = StringReplace($pkg, ".zip", ".exe")
+	If FileExists($exeName) Then
+		RunWait($exeName)
+		CleanUp($exeName)
 	EndIf
 EndFunc
 
