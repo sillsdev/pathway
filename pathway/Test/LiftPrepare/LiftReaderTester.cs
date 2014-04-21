@@ -25,6 +25,7 @@ namespace Test.LiftPrepare
         private LiftReader liftReader;
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void testValidLift()
         {
             liftReader = new LiftReader(TestEnvironment.InputRoot + @"simple/validLift.lift"); 

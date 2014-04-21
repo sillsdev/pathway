@@ -36,6 +36,7 @@ namespace Test.LiftPrepare.FullTests
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void testFullAkooseTransform()
         {
             liftPreparer = new LiftPreparer(TestEnvironment.ActualOutputRoot + @"akoose/");

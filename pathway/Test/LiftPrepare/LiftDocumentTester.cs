@@ -36,6 +36,7 @@ namespace Test.LiftPrepare
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void testGetLiftNode()
         {
             var liftReader = new LiftReader(TestEnvironment.InputRoot + @"simple/validLift.lift");

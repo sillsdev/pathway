@@ -35,6 +35,7 @@ namespace Test.LiftPrepare
         private static string ExpectedOutputDirectory = TestingDirectory + @"Expected/";
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void sortTest()
         {
             var liftReader = new LiftReader(InputDirectory+@"yi/yi.lift");

@@ -335,6 +335,7 @@ namespace Test.LiftPrepare
             XmlAssert.AreEqual(expected, output, "Language Filter Failed");
         }
         [Test]
+        [Category("SkipOnTeamCity")]
         public void LanguageSort()
         {
             string inputLift = "LanguageSort.lift";
@@ -350,6 +351,7 @@ namespace Test.LiftPrepare
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         //[Ignore] //Palaso library fails when loading coallator LiftEntrySorter.cs line 32 (prepLiftForSort)
         public void AkooseSorting()
         {
@@ -368,6 +370,7 @@ namespace Test.LiftPrepare
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void LoadCoallator()
         {
             var collator = new Palaso.WritingSystems.Collation.IcuRulesCollator("[alternate shifted]");
