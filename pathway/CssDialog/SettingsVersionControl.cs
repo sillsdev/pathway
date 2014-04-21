@@ -62,7 +62,11 @@ namespace SIL.PublishingSolution
 
             foreach (KeyValuePair<string, string> data in inputType)
             {
-
+                string styleSettingsFile = Common.PathCombine(Path.GetDirectoryName(appPath), data.Value);
+                if (!File.Exists(styleSettingsFile))
+                {
+                    continue;
+                }
                 if (CreateSettingsFile(appPath, data))
                 {
                     continue;
@@ -70,8 +74,7 @@ namespace SIL.PublishingSolution
 
                 _pathwayFilePath = Common.PathCombine(Path.GetDirectoryName(appPath), data.Value);
                 _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
-                
-                
+
                 if (!OpenFile())
                 {
                     continue;
@@ -102,7 +105,6 @@ namespace SIL.PublishingSolution
                 {
                     File.Delete(_userFilePath);
                 }
-
             }
 
             if (!_compareVersion)
