@@ -205,16 +205,6 @@ namespace SIL.PublishingSolution
         #endif
         }
 
-        private void AboutPw_Activated(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lnkLblUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("http://pathway.sil.org/");
-        }
-
         private void lnkProj_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://pathway.sil.org/");
@@ -225,20 +215,10 @@ namespace SIL.PublishingSolution
             System.Diagnostics.Process.Start("http://www.gnu.org/licenses/gpl.html");
         }
 
-        private void chkbHelpImprove_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnOk_Click(object sender, EventArgs e)
         {
             HelpImproveSetValue(chkHelpToImprove);
             Close();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
