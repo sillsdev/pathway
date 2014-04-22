@@ -375,6 +375,7 @@ namespace SIL.PublishingSolution
             var readerSettings = new XmlReaderSettings {};
             var reader = XmlReader.Create(name, readerSettings);
             TheWord.Transform(reader, xsltArgs, sw);
+            reader.Close();
         }
 
         protected static string TempName(string book)
