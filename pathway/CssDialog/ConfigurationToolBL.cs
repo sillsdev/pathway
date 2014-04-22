@@ -1183,23 +1183,7 @@ namespace SIL.PublishingSolution
                         filePath = Param.SettingPath;
                     }
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                    foreach (XmlNode VARIABLE in baseNode1)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value;
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        if (attribName.ToLower() == "fileproduced")
-                        {
-                            cTool.DdlFiles.SelectedItem = attribValue;
-                        }
-                        else if (attribName.ToLower() == "redletter")
-                        {
-                            cTool.DdlRedLetter.SelectedItem = attribValue;
-                        }
-                        else if (attribName.ToLower() == "language")
-                        {
-                            cTool.DdlLanguage.SelectedItem = attribValue;
-                        }
-                    }
+                    ShowMoblieCSS(baseNode1);
                     SetMobileSummary(null, null);
                 }
                 else if (MediaType.ToLower() == "others")
@@ -1208,63 +1192,7 @@ namespace SIL.PublishingSolution
                     // show/hide epub UI controls based on the input type
                     SetEpubUIControls(inputTypeBL == "Scripture");
 
-                    foreach (XmlNode VARIABLE in baseNode1)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        switch (attribName)
-                        {
-                            case "embedfonts":
-                                cTool.ChkEmbedFonts.Checked = (attribValue == "Yes") ? true : false;
-                                bool bEnabled = cTool.ChkEmbedFonts.Checked;
-                                cTool.ChkIncludeFontVariants.Enabled = bEnabled;
-                                cTool.DdlDefaultFont.Enabled = bEnabled;
-                                cTool.DdlMissingFont.Enabled = bEnabled;
-                                cTool.DdlNonSILFont.Enabled = bEnabled;
-                                break;
-                            case "includefontvariants":
-                                cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "includeimage":
-                                cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "pagebreak":
-                                cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "maximagewidth":
-                                cTool.TxtMaxImageWidth.Text = attribValue;
-                                break;
-                            case "toclevel":
-                                cTool.DdlTocLevel.SelectedItem = attribValue;
-                                break;
-                            case "basefontsize":
-                                cTool.TxtBaseFontSize.Text = attribValue;
-                                break;
-                            case "defaultlineheight":
-                                cTool.TxtDefaultLineHeight.Text = attribValue;
-                                break;
-                            case "defaultalignment":
-                                cTool.DdlDefaultAlignment.SelectedItem = attribValue;
-                                break;
-                            case "chapternumbers":
-                                cTool.DdlChapterNumbers.SelectedItem = attribValue;
-                                break;
-                            case "references":
-                                cTool.DdlReferences.SelectedItem = attribValue;
-                                break;
-                            case "defaultfont":
-                                cTool.DdlDefaultFont.SelectedItem = attribValue;
-                                break;
-                            case "missingfont":
-                                cTool.DdlMissingFont.SelectedItem = attribValue;
-                                break;
-                            case "nonsilfont":
-                                cTool.DdlNonSILFont.SelectedItem = attribValue;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                    ShowOthersCSS(baseNode1);
                     SetOthersSummary(null, null);
                 }
                 else if (MediaType.ToLower() == "web")
@@ -1276,79 +1204,7 @@ namespace SIL.PublishingSolution
                     // show/hide web UI controls based on the input type
                     SetWebUIControls(inputTypeBL == "Dictionary");
 
-                    foreach (XmlNode VARIABLE in baseNode1)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        switch (attribName)
-                        {
-                            case "ftpaddress":
-                                cTool.TxtFtpAddress.Text = attribValue;
-                                break;
-                            case "ftpuserid":
-                                cTool.TxtFtpUsername.Text = attribValue;
-                                break;
-                            case "ftppwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtFtpPassword.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                else
-                                {
-                                    cTool.TxtFtpPassword.Text = "";
-                                }
-                                break;
-                            case "dbservername":
-                                cTool.TxtSqlServerName.Text = attribValue;
-                                break;
-                            case "dbname":
-                                cTool.TxtSqlDBName.Text = attribValue;
-                                break;
-                            case "dbuserid":
-                                cTool.TxtSqlUsername.Text = attribValue;
-                                break;
-                            case "dbpwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                else
-                                {
-                                    cTool.TxtSqlPassword.Text = "";
-                                }
-                                break;
-                            case "weburl":
-                                cTool.TxtWebUrl.Text = attribValue;
-                                break;
-                            case "webadminusrnme":
-                                cTool.TxtWebAdminUsrNme.Text = attribValue;
-                                break;
-                            case "webadminpwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                else
-                                {
-                                    cTool.TxtWebAdminPwd.Text = "";
-                                }
-                                break;
-                            case "webadminsitenme":
-                                cTool.TxtWebAdminSiteNme.Text = attribValue;
-                                break;
-                            case "webemailid":
-                                cTool.TxtWebEmailId.Text = attribValue;
-                                break;
-                            case "webftpfldrnme":
-                                cTool.TxtWebFtpFldrNme.Text = attribValue;
-                                break;
-                            case "comment":
-                                cTool.TxtComment.Text = attribValue;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                    ShowWebCSS(baseNode1, hashUtil);
                     SetWebSummary(null, null);
                 }
                 else
@@ -1366,6 +1222,165 @@ namespace SIL.PublishingSolution
             {
             }
             _screenMode = ScreenMode.Edit;
+        }
+
+        private void ShowMoblieCSS(XmlNodeList baseNode1)
+        {
+            foreach (XmlNode VARIABLE in baseNode1)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value;
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                if (attribName.ToLower() == "fileproduced")
+                {
+                    cTool.DdlFiles.SelectedItem = attribValue;
+                }
+                else if (attribName.ToLower() == "redletter")
+                {
+                    cTool.DdlRedLetter.SelectedItem = attribValue;
+                }
+                else if (attribName.ToLower() == "language")
+                {
+                    cTool.DdlLanguage.SelectedItem = attribValue;
+                }
+            }
+        }
+
+        private void ShowOthersCSS(XmlNodeList baseNode1)
+        {
+            foreach (XmlNode VARIABLE in baseNode1)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                switch (attribName)
+                {
+                    case "embedfonts":
+                        cTool.ChkEmbedFonts.Checked = (attribValue == "Yes") ? true : false;
+                        bool bEnabled = cTool.ChkEmbedFonts.Checked;
+                        cTool.ChkIncludeFontVariants.Enabled = bEnabled;
+                        cTool.DdlDefaultFont.Enabled = bEnabled;
+                        cTool.DdlMissingFont.Enabled = bEnabled;
+                        cTool.DdlNonSILFont.Enabled = bEnabled;
+                        break;
+                    case "includefontvariants":
+                        cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "includeimage":
+                        cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "pagebreak":
+                        cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "maximagewidth":
+                        cTool.TxtMaxImageWidth.Text = attribValue;
+                        break;
+                    case "toclevel":
+                        cTool.DdlTocLevel.SelectedItem = attribValue;
+                        break;
+                    case "basefontsize":
+                        cTool.TxtBaseFontSize.Text = attribValue;
+                        break;
+                    case "defaultlineheight":
+                        cTool.TxtDefaultLineHeight.Text = attribValue;
+                        break;
+                    case "defaultalignment":
+                        cTool.DdlDefaultAlignment.SelectedItem = attribValue;
+                        break;
+                    case "chapternumbers":
+                        cTool.DdlChapterNumbers.SelectedItem = attribValue;
+                        break;
+                    case "references":
+                        cTool.DdlReferences.SelectedItem = attribValue;
+                        break;
+                    case "defaultfont":
+                        cTool.DdlDefaultFont.SelectedItem = attribValue;
+                        break;
+                    case "missingfont":
+                        cTool.DdlMissingFont.SelectedItem = attribValue;
+                        break;
+                    case "nonsilfont":
+                        cTool.DdlNonSILFont.SelectedItem = attribValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void ShowWebCSS(XmlNodeList baseNode1, HashUtilities hashUtil)
+        {
+            foreach (XmlNode VARIABLE in baseNode1)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                switch (attribName)
+                {
+                    case "ftpaddress":
+                        cTool.TxtFtpAddress.Text = attribValue;
+                        break;
+                    case "ftpuserid":
+                        cTool.TxtFtpUsername.Text = attribValue;
+                        break;
+                    case "ftppwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtFtpPassword.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        else
+                        {
+                            cTool.TxtFtpPassword.Text = "";
+                        }
+                        break;
+                    case "dbservername":
+                        cTool.TxtSqlServerName.Text = attribValue;
+                        break;
+                    case "dbname":
+                        cTool.TxtSqlDBName.Text = attribValue;
+                        break;
+                    case "dbuserid":
+                        cTool.TxtSqlUsername.Text = attribValue;
+                        break;
+                    case "dbpwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        else
+                        {
+                            cTool.TxtSqlPassword.Text = "";
+                        }
+                        break;
+                    case "weburl":
+                        cTool.TxtWebUrl.Text = attribValue;
+                        break;
+                    case "webadminusrnme":
+                        cTool.TxtWebAdminUsrNme.Text = attribValue;
+                        break;
+                    case "webadminpwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        else
+                        {
+                            cTool.TxtWebAdminPwd.Text = "";
+                        }
+                        break;
+                    case "webadminsitenme":
+                        cTool.TxtWebAdminSiteNme.Text = attribValue;
+                        break;
+                    case "webemailid":
+                        cTool.TxtWebEmailId.Text = attribValue;
+                        break;
+                    case "webftpfldrnme":
+                        cTool.TxtWebFtpFldrNme.Text = attribValue;
+                        break;
+                    case "comment":
+                        cTool.TxtComment.Text = attribValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         /// <summary>
@@ -1763,23 +1778,7 @@ namespace SIL.PublishingSolution
                     cTool.TabControl1.TabPages.Insert(2, tabpreview);
 
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                    foreach (XmlNode VARIABLE in baseNode1)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value;
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        if (attribName.ToLower() == "fileproduced")
-                        {
-                            cTool.DdlFiles.SelectedItem = attribValue;
-                        }
-                        else if (attribName.ToLower() == "redletter")
-                        {
-                            cTool.DdlRedLetter.SelectedItem = attribValue;
-                        }
-                        else if (attribName.ToLower() == "language")
-                        {
-                            cTool.DdlLanguage.SelectedItem = attribValue;
-                        }
-                    }
+                    SetMobileProperty(baseNode1);
                     SetMobileSummary(null, null);
                     break;
                 case "others":
@@ -1790,60 +1789,7 @@ namespace SIL.PublishingSolution
                     // show/hide chapter numbers and references UI
                     SetEpubUIControls(inputTypeBL == "Scripture");
 
-                    foreach (XmlNode VARIABLE in baseNode)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        switch (attribName)
-                        {
-                            case "embedfonts":
-                                cTool.ChkEmbedFonts.Checked = (attribValue == "Yes") ? true : false;
-                                bool bEnabled = cTool.ChkEmbedFonts.Checked;
-                                cTool.ChkIncludeFontVariants.Enabled = bEnabled;
-                                cTool.DdlDefaultFont.Enabled = bEnabled;
-                                cTool.DdlMissingFont.Enabled = bEnabled;
-                                cTool.DdlNonSILFont.Enabled = bEnabled;
-                                break;
-                            case "includefontvariants":
-                                cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "includeimage":
-                                cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "pagebreak":
-                                cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "maximagewidth":
-                                cTool.TxtMaxImageWidth.Text = attribValue;
-                                break;
-                            case "basefontsize":
-                                cTool.TxtBaseFontSize.Text = attribValue;
-                                break;
-                            case "defaultlineheight":
-                                cTool.TxtDefaultLineHeight.Text = attribValue;
-                                break;
-                            case "defaultalignment":
-                                cTool.DdlDefaultAlignment.SelectedItem = attribValue;
-                                break;
-                            case "chapternumbers":
-                                cTool.DdlChapterNumbers.SelectedItem = attribValue;
-                                break;
-                            case "references":
-                                cTool.DdlReferences.SelectedItem = attribValue;
-                                break;
-                            case "defaultfont":
-                                cTool.DdlDefaultFont.SelectedItem = attribValue;
-                                break;
-                            case "missingfont":
-                                cTool.DdlMissingFont.SelectedItem = attribValue;
-                                break;
-                            case "nonsilfont":
-                                cTool.DdlNonSILFont.SelectedItem = attribValue;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                    SetOthersProperty(baseNode);
                     SetOthersSummary(null, null);
                     break;
                 case "web":
@@ -1855,67 +1801,7 @@ namespace SIL.PublishingSolution
                     // show/hide chapter numbers and references UI
                     SetEpubUIControls(inputTypeBL == "Scripture");
 
-                    foreach (XmlNode VARIABLE in baseNode2)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        switch (attribName)
-                        {
-                            case "ftpaddress":
-                                cTool.TxtFtpAddress.Text = attribValue;
-                                break;
-                            case "ftpuserid":
-                                cTool.TxtFtpUsername.Text = attribValue;
-                                break;
-                            case "ftppwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtFtpPassword.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                break;
-                            case "dbservername":
-                                cTool.TxtSqlServerName.Text = attribValue;
-                                break;
-                            case "dbname":
-                                cTool.TxtSqlDBName.Text = attribValue;
-                                break;
-                            case "dbuserid":
-                                cTool.TxtSqlUsername.Text = attribValue;
-                                break;
-                            case "dbpwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                break;
-                            case "weburl":
-                                cTool.TxtWebUrl.Text = attribValue;
-                                break;
-                            case "webadminusrnme":
-                                cTool.TxtWebAdminUsrNme.Text = attribValue;
-                                break;
-                            case "webadminpwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                break;
-                            case "webadminsitenme":
-                                cTool.TxtWebAdminSiteNme.Text = attribValue;
-                                break;
-                            case "webemailid":
-                                cTool.TxtWebEmailId.Text = attribValue;
-                                break;
-                            case "webftpfldrnme":
-                                cTool.TxtWebFtpFldrNme.Text = attribValue;
-                                break;
-                            case "comment":
-                                cTool.TxtComment.Text = attribValue;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                    SetWebProperty(baseNode2, hashUtil);
                     SetWebSummary(null, null);
                     break;
                 default:
@@ -1934,6 +1820,150 @@ namespace SIL.PublishingSolution
                 {
                     if (cTool.TabControl1.TabPages.ContainsKey("tabPreview"))
                         cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPreview"]);
+                }
+            }
+        }
+
+        private void SetMobileProperty(XmlNodeList baseNode1)
+        {
+            foreach (XmlNode VARIABLE in baseNode1)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value;
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                if (attribName.ToLower() == "fileproduced")
+                {
+                    cTool.DdlFiles.SelectedItem = attribValue;
+                }
+                else if (attribName.ToLower() == "redletter")
+                {
+                    cTool.DdlRedLetter.SelectedItem = attribValue;
+                }
+                else if (attribName.ToLower() == "language")
+                {
+                    cTool.DdlLanguage.SelectedItem = attribValue;
+                }
+            }
+        }
+
+        private void SetOthersProperty(XmlNodeList baseNode)
+        {
+            foreach (XmlNode VARIABLE in baseNode)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                switch (attribName)
+                {
+                    case "embedfonts":
+                        cTool.ChkEmbedFonts.Checked = (attribValue == "Yes") ? true : false;
+                        bool bEnabled = cTool.ChkEmbedFonts.Checked;
+                        cTool.ChkIncludeFontVariants.Enabled = bEnabled;
+                        cTool.DdlDefaultFont.Enabled = bEnabled;
+                        cTool.DdlMissingFont.Enabled = bEnabled;
+                        cTool.DdlNonSILFont.Enabled = bEnabled;
+                        break;
+                    case "includefontvariants":
+                        cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "includeimage":
+                        cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "pagebreak":
+                        cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "maximagewidth":
+                        cTool.TxtMaxImageWidth.Text = attribValue;
+                        break;
+                    case "basefontsize":
+                        cTool.TxtBaseFontSize.Text = attribValue;
+                        break;
+                    case "defaultlineheight":
+                        cTool.TxtDefaultLineHeight.Text = attribValue;
+                        break;
+                    case "defaultalignment":
+                        cTool.DdlDefaultAlignment.SelectedItem = attribValue;
+                        break;
+                    case "chapternumbers":
+                        cTool.DdlChapterNumbers.SelectedItem = attribValue;
+                        break;
+                    case "references":
+                        cTool.DdlReferences.SelectedItem = attribValue;
+                        break;
+                    case "defaultfont":
+                        cTool.DdlDefaultFont.SelectedItem = attribValue;
+                        break;
+                    case "missingfont":
+                        cTool.DdlMissingFont.SelectedItem = attribValue;
+                        break;
+                    case "nonsilfont":
+                        cTool.DdlNonSILFont.SelectedItem = attribValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetWebProperty(XmlNodeList baseNode2, HashUtilities hashUtil)
+        {
+            foreach (XmlNode VARIABLE in baseNode2)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                switch (attribName)
+                {
+                    case "ftpaddress":
+                        cTool.TxtFtpAddress.Text = attribValue;
+                        break;
+                    case "ftpuserid":
+                        cTool.TxtFtpUsername.Text = attribValue;
+                        break;
+                    case "ftppwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtFtpPassword.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        break;
+                    case "dbservername":
+                        cTool.TxtSqlServerName.Text = attribValue;
+                        break;
+                    case "dbname":
+                        cTool.TxtSqlDBName.Text = attribValue;
+                        break;
+                    case "dbuserid":
+                        cTool.TxtSqlUsername.Text = attribValue;
+                        break;
+                    case "dbpwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        break;
+                    case "weburl":
+                        cTool.TxtWebUrl.Text = attribValue;
+                        break;
+                    case "webadminusrnme":
+                        cTool.TxtWebAdminUsrNme.Text = attribValue;
+                        break;
+                    case "webadminpwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        break;
+                    case "webadminsitenme":
+                        cTool.TxtWebAdminSiteNme.Text = attribValue;
+                        break;
+                    case "webemailid":
+                        cTool.TxtWebEmailId.Text = attribValue;
+                        break;
+                    case "webftpfldrnme":
+                        cTool.TxtWebFtpFldrNme.Text = attribValue;
+                        break;
+                    case "comment":
+                        cTool.TxtComment.Text = attribValue;
+                        break;
+                    default:
+                        break;
                 }
             }
         }

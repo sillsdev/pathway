@@ -173,99 +173,12 @@ namespace SIL.Tool
                         if (System.Security.AccessControl.AccessControlType.Deny.Equals
                                 (rule.AccessControlType))
                         {
-                            if (contains(FileSystemRights.AppendData, rule))
-                                _denyAppendData = true;
-                            if (contains(FileSystemRights.ChangePermissions, rule))
-                                _denyChangePermissions = true;
-                            if (contains(FileSystemRights.CreateDirectories, rule))
-                                _denyCreateDirectories = true;
-                            if (contains(FileSystemRights.CreateFiles, rule))
-                                _denyCreateFiles = true;
-                            if (contains(FileSystemRights.Delete, rule))
-                                _denyDelete = true;
-                            if (contains(FileSystemRights.DeleteSubdirectoriesAndFiles,
-                                   rule)) _denyDeleteSubdirectoriesAndFiles = true;
-                            if (contains(FileSystemRights.ExecuteFile, rule))
-                                _denyExecuteFile = true;
-                            if (contains(FileSystemRights.FullControl, rule))
-                                _denyFullControl = true;
-                            if (contains(FileSystemRights.ListDirectory, rule))
-                                _denyListDirectory = true;
-                            if (contains(FileSystemRights.Modify, rule))
-                                _denyModify = true;
-                            if (contains(FileSystemRights.Read, rule)) _denyRead = true;
-                            if (contains(FileSystemRights.ReadAndExecute, rule))
-                                _denyReadAndExecute = true;
-                            if (contains(FileSystemRights.ReadAttributes, rule))
-                                _denyReadAttributes = true;
-                            if (contains(FileSystemRights.ReadData, rule))
-                                _denyReadData = true;
-                            if (contains(FileSystemRights.ReadExtendedAttributes, rule))
-                                _denyReadExtendedAttributes = true;
-                            if (contains(FileSystemRights.ReadPermissions, rule))
-                                _denyReadPermissions = true;
-                            if (contains(FileSystemRights.Synchronize, rule))
-                                _denySynchronize = true;
-                            if (contains(FileSystemRights.TakeOwnership, rule))
-                                _denyTakeOwnership = true;
-                            if (contains(FileSystemRights.Traverse, rule))
-                                _denyTraverse = true;
-                            if (contains(FileSystemRights.Write, rule)) _denyWrite = true;
-                            if (contains(FileSystemRights.WriteAttributes, rule))
-                                _denyWriteAttributes = true;
-                            if (contains(FileSystemRights.WriteData, rule))
-                                _denyWriteData = true;
-                            if (contains(FileSystemRights.WriteExtendedAttributes, rule))
-                                _denyWriteExtendedAttributes = true;
+                            AuthorizationDenyAccess(rule);
                         }
                         else if (System.Security.AccessControl.AccessControlType.
                                  Allow.Equals(rule.AccessControlType))
                         {
-                            if (contains(FileSystemRights.AppendData, rule))
-                                _allowAppendData = true;
-                            if (contains(FileSystemRights.ChangePermissions, rule))
-                                _allowChangePermissions = true;
-                            if (contains(FileSystemRights.CreateDirectories, rule))
-                                _allowCreateDirectories = true;
-                            if (contains(FileSystemRights.CreateFiles, rule))
-                                _allowCreateFiles = true;
-                            if (contains(FileSystemRights.Delete, rule))
-                                _allowDelete = true;
-                            if (contains(FileSystemRights.DeleteSubdirectoriesAndFiles,
-                                  rule)) _allowDeleteSubdirectoriesAndFiles = true;
-                            if (contains(FileSystemRights.ExecuteFile, rule))
-                                _allowExecuteFile = true;
-                            if (contains(FileSystemRights.FullControl, rule))
-                                _allowFullControl = true;
-                            if (contains(FileSystemRights.ListDirectory, rule))
-                                _allowListDirectory = true;
-                            if (contains(FileSystemRights.Modify, rule))
-                                _allowModify = true;
-                            if (contains(FileSystemRights.Read, rule)) _allowRead = true;
-                            if (contains(FileSystemRights.ReadAndExecute, rule))
-                                _allowReadAndExecute = true;
-                            if (contains(FileSystemRights.ReadAttributes, rule))
-                                _allowReadAttributes = true;
-                            if (contains(FileSystemRights.ReadData, rule))
-                                _allowReadData = true;
-                            if (contains(FileSystemRights.ReadExtendedAttributes, rule))
-                                _allowReadExtendedAttributes = true;
-                            if (contains(FileSystemRights.ReadPermissions, rule))
-                                _allowReadPermissions = true;
-                            if (contains(FileSystemRights.Synchronize, rule))
-                                _allowSynchronize = true;
-                            if (contains(FileSystemRights.TakeOwnership, rule))
-                                _allowTakeOwnership = true;
-                            if (contains(FileSystemRights.Traverse, rule))
-                                _allowTraverse = true;
-                            if (contains(FileSystemRights.Write, rule))
-                                _allowWrite = true;
-                            if (contains(FileSystemRights.WriteAttributes, rule))
-                                _allowWriteAttributes = true;
-                            if (contains(FileSystemRights.WriteData, rule))
-                                _allowWriteData = true;
-                            if (contains(FileSystemRights.WriteExtendedAttributes, rule))
-                                _allowWriteExtendedAttributes = true;
+                            AuthorizationAllowAccess(rule);
                         }
                     }
                 }
@@ -282,107 +195,12 @@ namespace SIL.Tool
                             if (System.Security.AccessControl.AccessControlType.
                                 Deny.Equals(rule.AccessControlType))
                             {
-                                if (contains(FileSystemRights.AppendData, rule))
-                                    _denyAppendData = true;
-                                if (contains(FileSystemRights.ChangePermissions, rule))
-                                    _denyChangePermissions = true;
-                                if (contains(FileSystemRights.CreateDirectories, rule))
-                                    _denyCreateDirectories = true;
-                                if (contains(FileSystemRights.CreateFiles, rule))
-                                    _denyCreateFiles = true;
-                                if (contains(FileSystemRights.Delete, rule))
-                                    _denyDelete = true;
-                                if (contains(FileSystemRights.
-                                    DeleteSubdirectoriesAndFiles, rule))
-                                    _denyDeleteSubdirectoriesAndFiles = true;
-                                if (contains(FileSystemRights.ExecuteFile, rule))
-                                    _denyExecuteFile = true;
-                                if (contains(FileSystemRights.FullControl, rule))
-                                    _denyFullControl = true;
-                                if (contains(FileSystemRights.ListDirectory, rule))
-                                    _denyListDirectory = true;
-                                if (contains(FileSystemRights.Modify, rule))
-                                    _denyModify = true;
-                                if (contains(FileSystemRights.Read, rule))
-                                    _denyRead = true;
-                                if (contains(FileSystemRights.ReadAndExecute, rule))
-                                    _denyReadAndExecute = true;
-                                if (contains(FileSystemRights.ReadAttributes, rule))
-                                    _denyReadAttributes = true;
-                                if (contains(FileSystemRights.ReadData, rule))
-                                    _denyReadData = true;
-                                if (contains(FileSystemRights.
-                                        ReadExtendedAttributes, rule))
-                                    _denyReadExtendedAttributes = true;
-                                if (contains(FileSystemRights.ReadPermissions, rule))
-                                    _denyReadPermissions = true;
-                                if (contains(FileSystemRights.Synchronize, rule))
-                                    _denySynchronize = true;
-                                if (contains(FileSystemRights.TakeOwnership, rule))
-                                    _denyTakeOwnership = true;
-                                if (contains(FileSystemRights.Traverse, rule))
-                                    _denyTraverse = true;
-                                if (contains(FileSystemRights.Write, rule))
-                                    _denyWrite = true;
-                                if (contains(FileSystemRights.WriteAttributes, rule))
-                                    _denyWriteAttributes = true;
-                                if (contains(FileSystemRights.WriteData, rule))
-                                    _denyWriteData = true;
-                                if (contains(FileSystemRights.
-                                        WriteExtendedAttributes, rule))
-                                    _denyWriteExtendedAttributes = true;
+                                IdentityDenyAccess(rule);
                             }
                             else if (System.Security.AccessControl.AccessControlType.
                                    Allow.Equals(rule.AccessControlType))
                             {
-                                if (contains(FileSystemRights.AppendData, rule))
-                                    _allowAppendData = true;
-                                if (contains(FileSystemRights.ChangePermissions, rule))
-                                    _allowChangePermissions = true;
-                                if (contains(FileSystemRights.CreateDirectories, rule))
-                                    _allowCreateDirectories = true;
-                                if (contains(FileSystemRights.CreateFiles, rule))
-                                    _allowCreateFiles = true;
-                                if (contains(FileSystemRights.Delete, rule))
-                                    _allowDelete = true;
-                                if (contains(FileSystemRights.
-                                    DeleteSubdirectoriesAndFiles, rule))
-                                    _allowDeleteSubdirectoriesAndFiles = true;
-                                if (contains(FileSystemRights.ExecuteFile, rule))
-                                    _allowExecuteFile = true;
-                                if (contains(FileSystemRights.FullControl, rule))
-                                    _allowFullControl = true;
-                                if (contains(FileSystemRights.ListDirectory, rule))
-                                    _allowListDirectory = true;
-                                if (contains(FileSystemRights.Modify, rule))
-                                    _allowModify = true;
-                                if (contains(FileSystemRights.Read, rule))
-                                    _allowRead = true;
-                                if (contains(FileSystemRights.ReadAndExecute, rule))
-                                    _allowReadAndExecute = true;
-                                if (contains(FileSystemRights.ReadAttributes, rule))
-                                    _allowReadAttributes = true;
-                                if (contains(FileSystemRights.ReadData, rule))
-                                    _allowReadData = true;
-                                if (contains(FileSystemRights.
-                                    ReadExtendedAttributes, rule))
-                                    _allowReadExtendedAttributes = true;
-                                if (contains(FileSystemRights.ReadPermissions, rule))
-                                    _allowReadPermissions = true;
-                                if (contains(FileSystemRights.Synchronize, rule))
-                                    _allowSynchronize = true;
-                                if (contains(FileSystemRights.TakeOwnership, rule))
-                                    _allowTakeOwnership = true;
-                                if (contains(FileSystemRights.Traverse, rule))
-                                    _allowTraverse = true;
-                                if (contains(FileSystemRights.Write, rule))
-                                    _allowWrite = true;
-                                if (contains(FileSystemRights.WriteAttributes, rule))
-                                    _allowWriteAttributes = true;
-                                if (contains(FileSystemRights.WriteData, rule))
-                                    _allowWriteData = true;
-                                if (contains(FileSystemRights.WriteExtendedAttributes,
-                                    rule)) _allowWriteExtendedAttributes = true;
+                                IdentityAllowAccess(rule);
                             }
                         }
                     }
@@ -394,6 +212,208 @@ namespace SIL.Tool
                 //throw e;
                 AccessDenied();
             }
+        }
+
+        private void AuthorizationDenyAccess(FileSystemAccessRule rule)
+        {
+            if (contains(FileSystemRights.AppendData, rule))
+                _denyAppendData = true;
+            if (contains(FileSystemRights.ChangePermissions, rule))
+                _denyChangePermissions = true;
+            if (contains(FileSystemRights.CreateDirectories, rule))
+                _denyCreateDirectories = true;
+            if (contains(FileSystemRights.CreateFiles, rule))
+                _denyCreateFiles = true;
+            if (contains(FileSystemRights.Delete, rule))
+                _denyDelete = true;
+            if (contains(FileSystemRights.DeleteSubdirectoriesAndFiles,
+                         rule)) _denyDeleteSubdirectoriesAndFiles = true;
+            if (contains(FileSystemRights.ExecuteFile, rule))
+                _denyExecuteFile = true;
+            if (contains(FileSystemRights.FullControl, rule))
+                _denyFullControl = true;
+            if (contains(FileSystemRights.ListDirectory, rule))
+                _denyListDirectory = true;
+            if (contains(FileSystemRights.Modify, rule))
+                _denyModify = true;
+            if (contains(FileSystemRights.Read, rule)) _denyRead = true;
+            if (contains(FileSystemRights.ReadAndExecute, rule))
+                _denyReadAndExecute = true;
+            if (contains(FileSystemRights.ReadAttributes, rule))
+                _denyReadAttributes = true;
+            if (contains(FileSystemRights.ReadData, rule))
+                _denyReadData = true;
+            if (contains(FileSystemRights.ReadExtendedAttributes, rule))
+                _denyReadExtendedAttributes = true;
+            if (contains(FileSystemRights.ReadPermissions, rule))
+                _denyReadPermissions = true;
+            if (contains(FileSystemRights.Synchronize, rule))
+                _denySynchronize = true;
+            if (contains(FileSystemRights.TakeOwnership, rule))
+                _denyTakeOwnership = true;
+            if (contains(FileSystemRights.Traverse, rule))
+                _denyTraverse = true;
+            if (contains(FileSystemRights.Write, rule)) _denyWrite = true;
+            if (contains(FileSystemRights.WriteAttributes, rule))
+                _denyWriteAttributes = true;
+            if (contains(FileSystemRights.WriteData, rule))
+                _denyWriteData = true;
+            if (contains(FileSystemRights.WriteExtendedAttributes, rule))
+                _denyWriteExtendedAttributes = true;
+        }
+
+        private void AuthorizationAllowAccess(FileSystemAccessRule rule)
+        {
+            if (contains(FileSystemRights.AppendData, rule))
+                _allowAppendData = true;
+            if (contains(FileSystemRights.ChangePermissions, rule))
+                _allowChangePermissions = true;
+            if (contains(FileSystemRights.CreateDirectories, rule))
+                _allowCreateDirectories = true;
+            if (contains(FileSystemRights.CreateFiles, rule))
+                _allowCreateFiles = true;
+            if (contains(FileSystemRights.Delete, rule))
+                _allowDelete = true;
+            if (contains(FileSystemRights.DeleteSubdirectoriesAndFiles,
+                         rule)) _allowDeleteSubdirectoriesAndFiles = true;
+            if (contains(FileSystemRights.ExecuteFile, rule))
+                _allowExecuteFile = true;
+            if (contains(FileSystemRights.FullControl, rule))
+                _allowFullControl = true;
+            if (contains(FileSystemRights.ListDirectory, rule))
+                _allowListDirectory = true;
+            if (contains(FileSystemRights.Modify, rule))
+                _allowModify = true;
+            if (contains(FileSystemRights.Read, rule)) _allowRead = true;
+            if (contains(FileSystemRights.ReadAndExecute, rule))
+                _allowReadAndExecute = true;
+            if (contains(FileSystemRights.ReadAttributes, rule))
+                _allowReadAttributes = true;
+            if (contains(FileSystemRights.ReadData, rule))
+                _allowReadData = true;
+            if (contains(FileSystemRights.ReadExtendedAttributes, rule))
+                _allowReadExtendedAttributes = true;
+            if (contains(FileSystemRights.ReadPermissions, rule))
+                _allowReadPermissions = true;
+            if (contains(FileSystemRights.Synchronize, rule))
+                _allowSynchronize = true;
+            if (contains(FileSystemRights.TakeOwnership, rule))
+                _allowTakeOwnership = true;
+            if (contains(FileSystemRights.Traverse, rule))
+                _allowTraverse = true;
+            if (contains(FileSystemRights.Write, rule))
+                _allowWrite = true;
+            if (contains(FileSystemRights.WriteAttributes, rule))
+                _allowWriteAttributes = true;
+            if (contains(FileSystemRights.WriteData, rule))
+                _allowWriteData = true;
+            if (contains(FileSystemRights.WriteExtendedAttributes, rule))
+                _allowWriteExtendedAttributes = true;
+        }
+
+        private void IdentityAllowAccess(FileSystemAccessRule rule)
+        {
+            if (contains(FileSystemRights.AppendData, rule))
+                _allowAppendData = true;
+            if (contains(FileSystemRights.ChangePermissions, rule))
+                _allowChangePermissions = true;
+            if (contains(FileSystemRights.CreateDirectories, rule))
+                _allowCreateDirectories = true;
+            if (contains(FileSystemRights.CreateFiles, rule))
+                _allowCreateFiles = true;
+            if (contains(FileSystemRights.Delete, rule))
+                _allowDelete = true;
+            if (contains(FileSystemRights.
+                             DeleteSubdirectoriesAndFiles, rule))
+                _allowDeleteSubdirectoriesAndFiles = true;
+            if (contains(FileSystemRights.ExecuteFile, rule))
+                _allowExecuteFile = true;
+            if (contains(FileSystemRights.FullControl, rule))
+                _allowFullControl = true;
+            if (contains(FileSystemRights.ListDirectory, rule))
+                _allowListDirectory = true;
+            if (contains(FileSystemRights.Modify, rule))
+                _allowModify = true;
+            if (contains(FileSystemRights.Read, rule))
+                _allowRead = true;
+            if (contains(FileSystemRights.ReadAndExecute, rule))
+                _allowReadAndExecute = true;
+            if (contains(FileSystemRights.ReadAttributes, rule))
+                _allowReadAttributes = true;
+            if (contains(FileSystemRights.ReadData, rule))
+                _allowReadData = true;
+            if (contains(FileSystemRights.
+                             ReadExtendedAttributes, rule))
+                _allowReadExtendedAttributes = true;
+            if (contains(FileSystemRights.ReadPermissions, rule))
+                _allowReadPermissions = true;
+            if (contains(FileSystemRights.Synchronize, rule))
+                _allowSynchronize = true;
+            if (contains(FileSystemRights.TakeOwnership, rule))
+                _allowTakeOwnership = true;
+            if (contains(FileSystemRights.Traverse, rule))
+                _allowTraverse = true;
+            if (contains(FileSystemRights.Write, rule))
+                _allowWrite = true;
+            if (contains(FileSystemRights.WriteAttributes, rule))
+                _allowWriteAttributes = true;
+            if (contains(FileSystemRights.WriteData, rule))
+                _allowWriteData = true;
+            if (contains(FileSystemRights.WriteExtendedAttributes,
+                         rule)) _allowWriteExtendedAttributes = true;
+        }
+
+        private void IdentityDenyAccess(FileSystemAccessRule rule)
+        {
+            if (contains(FileSystemRights.AppendData, rule))
+                _denyAppendData = true;
+            if (contains(FileSystemRights.ChangePermissions, rule))
+                _denyChangePermissions = true;
+            if (contains(FileSystemRights.CreateDirectories, rule))
+                _denyCreateDirectories = true;
+            if (contains(FileSystemRights.CreateFiles, rule))
+                _denyCreateFiles = true;
+            if (contains(FileSystemRights.Delete, rule))
+                _denyDelete = true;
+            if (contains(FileSystemRights.
+                             DeleteSubdirectoriesAndFiles, rule))
+                _denyDeleteSubdirectoriesAndFiles = true;
+            if (contains(FileSystemRights.ExecuteFile, rule))
+                _denyExecuteFile = true;
+            if (contains(FileSystemRights.FullControl, rule))
+                _denyFullControl = true;
+            if (contains(FileSystemRights.ListDirectory, rule))
+                _denyListDirectory = true;
+            if (contains(FileSystemRights.Modify, rule))
+                _denyModify = true;
+            if (contains(FileSystemRights.Read, rule))
+                _denyRead = true;
+            if (contains(FileSystemRights.ReadAndExecute, rule))
+                _denyReadAndExecute = true;
+            if (contains(FileSystemRights.ReadAttributes, rule))
+                _denyReadAttributes = true;
+            if (contains(FileSystemRights.ReadData, rule))
+                _denyReadData = true;
+            if (contains(FileSystemRights.
+                             ReadExtendedAttributes, rule))
+                _denyReadExtendedAttributes = true;
+            if (contains(FileSystemRights.ReadPermissions, rule))
+                _denyReadPermissions = true;
+            if (contains(FileSystemRights.Synchronize, rule))
+                _denySynchronize = true;
+            if (contains(FileSystemRights.TakeOwnership, rule))
+                _denyTakeOwnership = true;
+            if (contains(FileSystemRights.Traverse, rule))
+                _denyTraverse = true;
+            if (contains(FileSystemRights.Write, rule))
+                _denyWrite = true;
+            if (contains(FileSystemRights.WriteAttributes, rule))
+                _denyWriteAttributes = true;
+            if (contains(FileSystemRights.WriteData, rule))
+                _denyWriteData = true;
+            if (contains(FileSystemRights.
+                             WriteExtendedAttributes, rule))
+                _denyWriteExtendedAttributes = true;
         }
 
         private void AccessDenied()

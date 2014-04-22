@@ -486,37 +486,7 @@ namespace SIL.PublishingSolution
 
                 _commonSettings.SetColumnCount(ddlIndexesColumns);
 
-                ddlMediaPosition.Items.Add("right");
-                ddlMediaPosition.Items.Add("left");
-                ddlMediaPosition.Items.Add("center");
-                ddlMediaPosition.SelectedIndex = 0;
-
-                chkMediaImport.Checked = true;
-
-                ddlMediaSize.Items.Add("2.5cm high");
-                ddlMediaSize.Items.Add("2.5cm wide");
-                ddlMediaSize.SelectedIndex = 0;
-                _commonSettings.SetFontStyle(ddlMediaHeaderFontStyle, 1);
-                ddlMediaRules.Items.Add("all");
-                ddlMediaRules.Items.Add("inside");
-                ddlMediaRules.Items.Add("outside");
-                ddlMediaRules.Items.Add("horizondal");
-                ddlMediaRules.Items.Add("vertical");
-                ddlMediaRules.SelectedIndex = 0;
-
-                ddlFieldsBasis.Items.Add("stem");
-                ddlFieldsBasis.Items.Add("root");
-
-                ddlSensesNumberSenses.Items.Add("numbers");
-                ddlSensesNumberSenses.Items.Add("symbols");
-                ddlSensesNumberSenses.SelectedIndex = 0;
-
-                if (txtSensesPunctuation.Text == "")
-                    txtSensesPunctuation.Text = ")";
-
-                ddlHeadingsPageNumberLocation.Items.Add("top center");
-                ddlHeadingsPageNumberLocation.Items.Add("bottom Center");
-                ddlHeadingsPageNumberLocation.SelectedIndex = 0;
+                PopupValues();
 
                 string[] dims = GetDefault("PAGE/PROPERTY/size");
                 if (dims.Length == 2)
@@ -527,81 +497,13 @@ namespace SIL.PublishingSolution
                                                    ddlPagePaperSize, chkPageCropMark);
                 }
                 string[] margins = GetDefault("PAGE/PROPERTY/margin");
-                switch (margins.Length)
-                {
-                    case 4:
-                        txtPageTop.Text = margins[0];
-                        txtPageOutside.Text = margins[1];
-                        txtPageBottom.Text = margins[2];
-                        txtPageInside.Text = margins[3];
-                        break;
-                    case 3:
-                        txtPageTop.Text = margins[0];
-                        txtPageOutside.Text = txtPageInside.Text = margins[1];
-                        txtPageBottom.Text = margins[2];
-                        break;
-                    case 2:
-                        txtPageTop.Text = txtPageBottom.Text = margins[0];
-                        txtPageOutside.Text = txtPageInside.Text = margins[1];
-                        break;
-                    case 1:
-                        txtPageTop.Text = txtPageBottom.Text = txtPageOutside.Text = txtPageInside.Text = margins[0];
-                        break;
-                }
-                string[] margint = GetDefault("PAGE/PROPERTY/margin-top");
-                if (margint.Length == 1)
-                {
-                    txtPageTop.Text = margint[0];
-                }
-                string[] marginb = GetDefault("PAGE/PROPERTY/margin-bottom");
-                if (marginb.Length == 1)
-                {
-                    txtPageBottom.Text = marginb[0];
-                }
-                string[] marginl = GetDefault("PAGE/PROPERTY/margin-left");
-                if (marginl.Length == 1)
-                {
-                    txtPageInside.Text = marginl[0];
-                }
-                string[] marginr = GetDefault("PAGE/PROPERTY/margin-right");
-                if (marginr.Length == 1)
-                {
-                    txtPageOutside.Text = marginr[0];
-                }
-                string[] mark = GetDefault("PAGE/PROPERTY/marks");
-                if (mark.Length > 0)
-                {
-                    if (ddlPagePaperSize.Enabled && mark[0] == "crop")
-                    {
-                        chkPageCropMark.Checked = true;
-                    }
-                    else
-                    {
-                        chkPageCropMark.Checked = false;
-                    }
-                }
-                string[] regTop = GetDefault("PAGE/REGION/top-center");
-                if (regTop.Length > 0)
-                {
-                    ddlHeadingsPageNumberLocation.Text = "Top center";
-                    chkHeadingsGuideWords.Checked = true;
-                    string[] topFSize = GetDefault("PAGE/REGION/top-center", "PROPERTY/font-size");
-                    if (topFSize.Length > 0)
-                    {
-                        txtHeadingsRunningFontSize.Text = topFSize[0];
-                    }
-                }
-                string[] regBottom = GetDefault("PAGE/REGION/bottom-center");
-                if (regBottom.Length > 0)
-                {
-                    ddlHeadingsPageNumberLocation.Text = "Bottom Center";
-                    chkHeadingsGuideWords.Checked = true;
-                    string[] bottomFSize = GetDefault("PAGE/REGION/bottom-center", "PROPERTY/font-size");
-                    if (bottomFSize.Length > 0)
-                    {
-                        txtHeadingsRunningFontSize.Text = bottomFSize[0];
-                    }
-                }
+
+                SetMargin(margins);
+                SetPageMargin();
+                SetPageCropMark();
+                
+                SetTopCenter();
+                SetBottomCenter();
 
                 // Add the Default List Items from Array to Sections - if its no from flex plugin
                 if (!_plugin)
@@ -638,18 +540,8 @@ namespace SIL.PublishingSolution
                     chkPageVerticalRule.Checked = colRule[0] != "none";
                 }
                 string[] fHeadFamily = GetDefault("RULE/CLASS/letHead", "PROPERTY/font-family");
-                if (fHeadFamily.Length > 0)
-                {
-                    txtHeadingsFontName.Text = fHeadFamily[0].Replace("\"", "");
-                }
-                else
-                {
-                    string[] fFamily = GetDefault("RULE/CLASS/letter", "PROPERTY/font-family");
-                    if (fFamily.Length > 0)
-                    {
-                        txtHeadingsFontName.Text = fFamily[0].Replace("\"", "");
-                    }
-                }
+                SetHeadingFont(fHeadFamily);
+
                 string[] fSize = GetDefault("RULE/CLASS/letHead", "PROPERTY/font-size");
                 if (fSize.Length > 0)
                 {
@@ -733,93 +625,19 @@ namespace SIL.PublishingSolution
                     chkSensesSensesParagraph.Checked = sensePara[0] == "block";
                 }
                 string[] sensePunc = GetDefault("RULE/CLASS/xsensenumber/PSEUDO/after", "PROPERTY/content");
-                if (sensePunc.Length > 0)
-                {
-                    if (sensePunc[0].Replace("\"", "") != "none")
-                    {
-                        txtSensesPunctuation.Text = sensePunc[0].Replace("\"", "");
-                        ddlSensesNumberSenses.Text = "numbers";
-                    }
-                    else
-                    {
-                        txtSensesPunctuation.Text = "";
-                    }
-                }
+                SetSensePunc(sensePunc);
 
                 string[] senseSymbol = GetDefault("RULE/CLASS/xsensenumber/PSEUDO/before", "PROPERTY/content");
-                if (senseSymbol.Length > 0)
-                {
-                    string senseContent = senseSymbol[0].Replace("\"", "");
-                    senseContent = senseContent.Replace("'", "").Trim();
+                SetSymbol(senseSymbol);
 
-                    if (senseContent != "none")
-                    {
-                        string allSymbols = string.Empty;
-                        if (senseContent.IndexOf(' ') > 0)
-                        {
-                            string[] symbols = senseContent.Split(' ');
-                            foreach (string symb in symbols)
-                            {
-                                allSymbols = allSymbols + Common.ConvertUnicodeToString(symb.Replace("\"", ""));
-                            }
-                        }
-                        else
-                        {
-                            allSymbols = Common.ConvertUnicodeToString(senseSymbol[0].Replace("\"", ""));
-                        }
-                        txtSensesSymbols.Text = allSymbols;
-                        ddlSensesNumberSenses.Text = "symbols";
-                    }
-                    else
-                    {
-                        txtSensesSymbols.Text = "";
-                    }
-                }
                 string[] symbolFontName = GetDefault("RULE/CLASS/xsensenumber/PSEUDO/before", "PROPERTY/font-family");
                 txtSensesSymbols.Font = symbolFontName.Length == 1
                                             ? new Font(symbolFontName[0].Replace("\"", ""), 12.0F)
                                             : new Font("arial", 12.0F);
-                if (lbTextWritingSystem.Items.Count > 0)
-                {
-                    string fontfamily = string.Empty;
-                    string fontsize = string.Empty;
-                    string color = string.Empty;
-                    string letterspacing = string.Empty;
-                    string princehyphenatepatterns = string.Empty;
-                    Dictionary<string, string> dictList = new Dictionary<string, string>();
-                    dictList.Add("txtFF", "fontfamily");
-                    dictList.Add("txtFS", "fontsize");
-                    dictList.Add("txtC", "color");
-                    dictList.Add("txtLS", "letterspacing");
-                    dictList.Add("txtPHP", "princehyphenatepatterns");
+                SetWritingSystem();
 
-                    foreach (string item in lbTextWritingSystem.Items)
-                    {
-                        string[] txtFF = GetDefault("RULE/ANY/ATTRIB/lang/ATTRIBEQUAL/" + item, "PROPERTY/font-family");
-                        string[] txtFS = GetDefault("RULE/ANY/ATTRIB/lang/ATTRIBEQUAL/" + item, "PROPERTY/font-size");
-                        string[] txtC = GetDefault("RULE/ANY/ATTRIB/lang/ATTRIBEQUAL/" + item, "PROPERTY/color");
-                        string[] txtLS = GetDefault("RULE/ANY/ATTRIB/lang/ATTRIBEQUAL/" + item, "PROPERTY/letter-spacing");
-                        string[] txtPHP = GetDefault("RULE/ANY/ATTRIB/lang/ATTRIBEQUAL/" + item, "PROPERTY/prince-hyphenate-patterns");
-                        fontfamily = GetValue(fontfamily, txtFF);
-                        fontsize = GetValue(fontsize, txtFS);
-                        color = GetValue(color, txtC);
-                        letterspacing = GetValue(letterspacing, txtLS);
-                        princehyphenatepatterns = GetValue(princehyphenatepatterns, txtPHP);
-                        _dictLangTagProperty[item] = fontfamily + "," + fontsize + "," + color + "," + letterspacing + "," + princehyphenatepatterns;
-                    }
-                }
+                var mediaRule = SetMediaRule();
 
-                string mediaRule = string.Empty;
-                var lstRule = new string[] { "all", "inside", "outside", "horizondal", "vertical" };
-                foreach (string rname in lstRule)
-                {
-                    string[] iMedia = GetDefault("MEDIA/" + rname);
-                    if (iMedia.Length > 0)
-                    {
-                        ddlMediaRules.Text = rname;
-                        mediaRule = rname;
-                    }
-                }
                 string[] importMedia = GetDefault("MEDIA/" + mediaRule, "RULE/CLASS/common", "PROPERTY/import");
                 chkMediaImport.Checked = importMedia.Length > 0;
                 string[] posMedia = GetDefault("MEDIA/" + mediaRule, "RULE/CLASS/common", "PROPERTY/position");
@@ -859,19 +677,269 @@ namespace SIL.PublishingSolution
                     chkIndexesVerticalRuleInGutter.Checked = colRuleIndexes[0] != "none";
                 }
                 string[] indexSeperator = GetDefault("RULE/CLASS/revSense/PRECEDES/CLASS/revSense", "PROPERTY/content");
-                if (indexSeperator.Length > 0)
-                {
-                    if (indexSeperator[0] == "&amp;")
-                    {
-                        indexSeperator[0] = "&";
-                    }
-                    txtIndexesSenseSeperator.Text = indexSeperator[0].Trim();
-                }
+                SetIndexSeperator(indexSeperator);
             }
             catch (Exception ex)
             {
                 var msg = new[] { ex.Message };
                 LocDB.Message("defErrMsg", ex.Message, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
+            }
+        }
+
+        private void SetHeadingFont(string[] fHeadFamily)
+        {
+            if (fHeadFamily.Length > 0)
+            {
+                txtHeadingsFontName.Text = fHeadFamily[0].Replace("\"", "");
+            }
+            else
+            {
+                string[] fFamily = GetDefault("RULE/CLASS/letter", "PROPERTY/font-family");
+                if (fFamily.Length > 0)
+                {
+                    txtHeadingsFontName.Text = fFamily[0].Replace("\"", "");
+                }
+            }
+        }
+
+        private void SetIndexSeperator(string[] indexSeperator)
+        {
+            if (indexSeperator.Length > 0)
+            {
+                if (indexSeperator[0] == "&amp;")
+                {
+                    indexSeperator[0] = "&";
+                }
+                txtIndexesSenseSeperator.Text = indexSeperator[0].Trim();
+            }
+        }
+
+        private string SetMediaRule()
+        {
+            string mediaRule = string.Empty;
+            var lstRule = new string[] {"all", "inside", "outside", "horizondal", "vertical"};
+            foreach (string rname in lstRule)
+            {
+                string[] iMedia = GetDefault("MEDIA/" + rname);
+                if (iMedia.Length > 0)
+                {
+                    ddlMediaRules.Text = rname;
+                    mediaRule = rname;
+                }
+            }
+            return mediaRule;
+        }
+
+        private void SetSensePunc(string[] sensePunc)
+        {
+            if (sensePunc.Length > 0)
+            {
+                if (sensePunc[0].Replace("\"", "") != "none")
+                {
+                    txtSensesPunctuation.Text = sensePunc[0].Replace("\"", "");
+                    ddlSensesNumberSenses.Text = "numbers";
+                }
+                else
+                {
+                    txtSensesPunctuation.Text = "";
+                }
+            }
+        }
+
+        private void SetBottomCenter()
+        {
+            string[] regBottom = GetDefault("PAGE/REGION/bottom-center");
+            if (regBottom.Length > 0)
+            {
+                ddlHeadingsPageNumberLocation.Text = "Bottom Center";
+                chkHeadingsGuideWords.Checked = true;
+                string[] bottomFSize = GetDefault("PAGE/REGION/bottom-center", "PROPERTY/font-size");
+                if (bottomFSize.Length > 0)
+                {
+                    txtHeadingsRunningFontSize.Text = bottomFSize[0];
+                }
+            }
+        }
+
+        private void SetTopCenter()
+        {
+            string[] regTop = GetDefault("PAGE/REGION/top-center");
+            if (regTop.Length > 0)
+            {
+                ddlHeadingsPageNumberLocation.Text = "Top center";
+                chkHeadingsGuideWords.Checked = true;
+                string[] topFSize = GetDefault("PAGE/REGION/top-center", "PROPERTY/font-size");
+                if (topFSize.Length > 0)
+                {
+                    txtHeadingsRunningFontSize.Text = topFSize[0];
+                }
+            }
+        }
+
+        private void SetPageCropMark()
+        {
+            string[] mark = GetDefault("PAGE/PROPERTY/marks");
+            if (mark.Length > 0)
+            {
+                if (ddlPagePaperSize.Enabled && mark[0] == "crop")
+                {
+                    chkPageCropMark.Checked = true;
+                }
+                else
+                {
+                    chkPageCropMark.Checked = false;
+                }
+            }
+        }
+
+        private void SetPageMargin()
+        {
+            string[] margint = GetDefault("PAGE/PROPERTY/margin-top");
+            if (margint.Length == 1)
+            {
+                txtPageTop.Text = margint[0];
+            }
+            string[] marginb = GetDefault("PAGE/PROPERTY/margin-bottom");
+            if (marginb.Length == 1)
+            {
+                txtPageBottom.Text = marginb[0];
+            }
+            string[] marginl = GetDefault("PAGE/PROPERTY/margin-left");
+            if (marginl.Length == 1)
+            {
+                txtPageInside.Text = marginl[0];
+            }
+            string[] marginr = GetDefault("PAGE/PROPERTY/margin-right");
+            if (marginr.Length == 1)
+            {
+                txtPageOutside.Text = marginr[0];
+            }
+        }
+
+        private void PopupValues()
+        {
+            ddlMediaPosition.Items.Add("right");
+            ddlMediaPosition.Items.Add("left");
+            ddlMediaPosition.Items.Add("center");
+            ddlMediaPosition.SelectedIndex = 0;
+
+            chkMediaImport.Checked = true;
+
+            ddlMediaSize.Items.Add("2.5cm high");
+            ddlMediaSize.Items.Add("2.5cm wide");
+            ddlMediaSize.SelectedIndex = 0;
+            _commonSettings.SetFontStyle(ddlMediaHeaderFontStyle, 1);
+            ddlMediaRules.Items.Add("all");
+            ddlMediaRules.Items.Add("inside");
+            ddlMediaRules.Items.Add("outside");
+            ddlMediaRules.Items.Add("horizondal");
+            ddlMediaRules.Items.Add("vertical");
+            ddlMediaRules.SelectedIndex = 0;
+
+            ddlFieldsBasis.Items.Add("stem");
+            ddlFieldsBasis.Items.Add("root");
+
+            ddlSensesNumberSenses.Items.Add("numbers");
+            ddlSensesNumberSenses.Items.Add("symbols");
+            ddlSensesNumberSenses.SelectedIndex = 0;
+
+            if (txtSensesPunctuation.Text == "")
+                txtSensesPunctuation.Text = ")";
+
+            ddlHeadingsPageNumberLocation.Items.Add("top center");
+            ddlHeadingsPageNumberLocation.Items.Add("bottom Center");
+            ddlHeadingsPageNumberLocation.SelectedIndex = 0;
+        }
+
+        private void SetMargin(string[] margins)
+        {
+            switch (margins.Length)
+            {
+                case 4:
+                    txtPageTop.Text = margins[0];
+                    txtPageOutside.Text = margins[1];
+                    txtPageBottom.Text = margins[2];
+                    txtPageInside.Text = margins[3];
+                    break;
+                case 3:
+                    txtPageTop.Text = margins[0];
+                    txtPageOutside.Text = txtPageInside.Text = margins[1];
+                    txtPageBottom.Text = margins[2];
+                    break;
+                case 2:
+                    txtPageTop.Text = txtPageBottom.Text = margins[0];
+                    txtPageOutside.Text = txtPageInside.Text = margins[1];
+                    break;
+                case 1:
+                    txtPageTop.Text = txtPageBottom.Text = txtPageOutside.Text = txtPageInside.Text = margins[0];
+                    break;
+            }
+        }
+
+        private void SetSymbol(string[] senseSymbol)
+        {
+            if (senseSymbol.Length > 0)
+            {
+                string senseContent = senseSymbol[0].Replace("\"", "");
+                senseContent = senseContent.Replace("'", "").Trim();
+
+                if (senseContent != "none")
+                {
+                    string allSymbols = string.Empty;
+                    if (senseContent.IndexOf(' ') > 0)
+                    {
+                        string[] symbols = senseContent.Split(' ');
+                        foreach (string symb in symbols)
+                        {
+                            allSymbols = allSymbols + Common.ConvertUnicodeToString(symb.Replace("\"", ""));
+                        }
+                    }
+                    else
+                    {
+                        allSymbols = Common.ConvertUnicodeToString(senseSymbol[0].Replace("\"", ""));
+                    }
+                    txtSensesSymbols.Text = allSymbols;
+                    ddlSensesNumberSenses.Text = "symbols";
+                }
+                else
+                {
+                    txtSensesSymbols.Text = "";
+                }
+            }
+        }
+
+        private void SetWritingSystem()
+        {
+            if (lbTextWritingSystem.Items.Count > 0)
+            {
+                string fontfamily = string.Empty;
+                string fontsize = string.Empty;
+                string color = string.Empty;
+                string letterspacing = string.Empty;
+                string princehyphenatepatterns = string.Empty;
+                Dictionary<string, string> dictList = new Dictionary<string, string>();
+                dictList.Add("txtFF", "fontfamily");
+                dictList.Add("txtFS", "fontsize");
+                dictList.Add("txtC", "color");
+                dictList.Add("txtLS", "letterspacing");
+                dictList.Add("txtPHP", "princehyphenatepatterns");
+
+                foreach (string item in lbTextWritingSystem.Items)
+                {
+                    string[] txtFF = GetDefault("RULE/ANY/ATTRIB/lang/ATTRIBEQUAL/" + item, "PROPERTY/font-family");
+                    string[] txtFS = GetDefault("RULE/ANY/ATTRIB/lang/ATTRIBEQUAL/" + item, "PROPERTY/font-size");
+                    string[] txtC = GetDefault("RULE/ANY/ATTRIB/lang/ATTRIBEQUAL/" + item, "PROPERTY/color");
+                    string[] txtLS = GetDefault("RULE/ANY/ATTRIB/lang/ATTRIBEQUAL/" + item, "PROPERTY/letter-spacing");
+                    string[] txtPHP = GetDefault("RULE/ANY/ATTRIB/lang/ATTRIBEQUAL/" + item,
+                                                 "PROPERTY/prince-hyphenate-patterns");
+                    fontfamily = GetValue(fontfamily, txtFF);
+                    fontsize = GetValue(fontsize, txtFS);
+                    color = GetValue(color, txtC);
+                    letterspacing = GetValue(letterspacing, txtLS);
+                    princehyphenatepatterns = GetValue(princehyphenatepatterns, txtPHP);
+                    _dictLangTagProperty[item] = fontfamily + "," + fontsize + "," + color + "," + letterspacing + "," +
+                                                 princehyphenatepatterns;
+                }
             }
         }
 

@@ -275,40 +275,7 @@ namespace SIL.PublishingSolution
                 }
                 else if (inFormat == InputFormat.XHTML)
                 {
-                    if (projectInfo.ProjectInputType == "Dictionary")
-                    {
-                        // dictionary
-                        // main - if there's a file name of "main" in the list, we'll use it as the default xhtml; 
-                        // if not, we'll use the first item in the list
-                        int index = files.FindIndex(
-                            something => (something.ToLower().Equals("main.xhtml"))
-                            );
-                        projectInfo.DefaultXhtmlFileWithPath = (index >= 0)
-                                                                   ? Common.PathCombine(projectInfo.ProjectPath,
-                                                                                  files[index])
-                                                                   : Common.PathCombine(projectInfo.ProjectPath, files[0]);
-                        // reversal index - needs to be named "flexrev.xhtml" 
-                        // (for compatibility with transforms in Pathway)
-                        index = files.FindIndex(
-                            something => (something.ToLower().Equals("flexrev.xhtml"))
-                            );
-                        projectInfo.IsReversalExist = (index >= 0);
-
-                        projectInfo.IsLexiconSectionExist = File.Exists(projectInfo.DefaultXhtmlFileWithPath);
-                        projectInfo.ProjectFileWithPath = projectInfo.DefaultXhtmlFileWithPath;
-                        projectInfo.SwapHeadword = false;
-                        projectInfo.FromPlugin = true;
-                        projectInfo.DefaultRevCssFileWithPath =
-                            Common.PathCombine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
-                        projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.ProjectPath);
-                    }
-                    else if (projectInfo.ProjectInputType == "Scripture")
-                    {
-                        if (projectInfo.DefaultXhtmlFileWithPath == null)
-                        {
-                            projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, files[0]);
-                        }
-                    }
+                    SetFileName(projectInfo, files);
                 }
 
                 if (projectInfo.DefaultXhtmlFileWithPath == null)
@@ -352,6 +319,44 @@ namespace SIL.PublishingSolution
                 Environment.Exit(-1);
             }
             Environment.Exit(0);
+        }
+
+        private static void SetFileName(PublicationInformation projectInfo, List<string> files)
+        {
+            if (projectInfo.ProjectInputType == "Dictionary")
+            {
+                // dictionary
+                // main - if there's a file name of "main" in the list, we'll use it as the default xhtml; 
+                // if not, we'll use the first item in the list
+                int index = files.FindIndex(
+                    something => (something.ToLower().Equals("main.xhtml"))
+                    );
+                projectInfo.DefaultXhtmlFileWithPath = (index >= 0)
+                                                           ? Common.PathCombine(projectInfo.ProjectPath,
+                                                                                files[index])
+                                                           : Common.PathCombine(projectInfo.ProjectPath, files[0]);
+                // reversal index - needs to be named "flexrev.xhtml" 
+                // (for compatibility with transforms in Pathway)
+                index = files.FindIndex(
+                    something => (something.ToLower().Equals("flexrev.xhtml"))
+                    );
+                projectInfo.IsReversalExist = (index >= 0);
+
+                projectInfo.IsLexiconSectionExist = File.Exists(projectInfo.DefaultXhtmlFileWithPath);
+                projectInfo.ProjectFileWithPath = projectInfo.DefaultXhtmlFileWithPath;
+                projectInfo.SwapHeadword = false;
+                projectInfo.FromPlugin = true;
+                projectInfo.DefaultRevCssFileWithPath =
+                    Common.PathCombine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
+                projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.ProjectPath);
+            }
+            else if (projectInfo.ProjectInputType == "Scripture")
+            {
+                if (projectInfo.DefaultXhtmlFileWithPath == null)
+                {
+                    projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, files[0]);
+                }
+            }
         }
 
         private static void ConvertUsx2Xhtml(XmlNode databaseName, Dictionary<string, object> linkParam, StringBuilder xmlText, string fileName)
