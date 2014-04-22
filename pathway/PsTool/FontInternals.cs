@@ -632,16 +632,27 @@ namespace SIL.Tool
         public static bool IsSILFont(string fontFullName)
         {
             CheckUserFileAccessRights rights = new CheckUserFileAccessRights(fontFullName);
+            if (Common.IsUnixOS())
+            {
+                return CheckIsSilFont(fontFullName);
+            }
+
             if (rights.canRead())
             {
-                string result = GetFontCopyright(fontFullName);
-                if (result != "")
+                return CheckIsSilFont(fontFullName);
+            }
+            return false;
+        }
+
+        private static bool CheckIsSilFont(string fontFullName)
+        {
+            string result = GetFontCopyright(fontFullName);
+            if (result != "")
+            {
+                // we got something out of the CopyrightId slot - does it contain "SIL" or "Summer Institute of Linguistics"?
+                if (result.Contains("SIL") || result.Contains("Summer Institute of Linguistics"))
                 {
-                    // we got something out of the CopyrightId slot - does it contain "SIL" or "Summer Institute of Linguistics"?
-                    if (result.Contains("SIL") || result.Contains("Summer Institute of Linguistics"))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             return false;
