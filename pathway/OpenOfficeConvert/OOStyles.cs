@@ -41,6 +41,7 @@ namespace SIL.PublishingSolution
         //Marks_crop - Declaration
         private const double _lineLength = 0.8;
         private const double _gapToMargin = .2;
+        private string _writingMode = "lr-tb";
 
         float _PageWidth = 0.00F;
         float _leftMargin = 0.00F;
@@ -3073,7 +3074,7 @@ namespace SIL.PublishingSolution
 
         private void PageLayout()
         {
-            bool isDirChange = GetPageDirection();
+            GetPageDirection();
 
             _writer.WriteStartElement("style:page-layout");
             _writer.WriteAttributeString("style:name", "pm1");
@@ -3118,7 +3119,10 @@ namespace SIL.PublishingSolution
             {
                 _writer.WriteAttributeString(para.Key, para.Value);
             }
-
+            if (_writingMode.ToLower() == "rl-tb")
+            {
+                _writer.WriteAttributeString("style:writing-mode", _writingMode);
+            }
             _writer.WriteStartElement("style:background-image");
 
             _writer.WriteEndElement();
@@ -3142,7 +3146,10 @@ namespace SIL.PublishingSolution
             {
                 _writer.WriteAttributeString(para.Key, para.Value);
             }
-
+            if (_writingMode.ToLower() == "rl-tb")
+            {
+                _writer.WriteAttributeString("style:writing-mode", _writingMode);
+            }
             _writer.WriteStartElement("style:background-image");
             _writer.WriteEndElement();
             // START FootNote Seperator
@@ -3198,6 +3205,10 @@ namespace SIL.PublishingSolution
                 {
                     _writer.WriteAttributeString(para.Key, para.Value);
                 }
+                if (_writingMode.ToLower() == "rl-tb")
+                {
+                    _writer.WriteAttributeString("style:writing-mode", _writingMode);
+                }
                 _writer.WriteStartElement("style:background-image");
                 _writer.WriteEndElement();
                 // START FootNote Seperator
@@ -3223,6 +3234,10 @@ namespace SIL.PublishingSolution
                 foreach (KeyValuePair<string, string> para in _rightPageLayoutProperty)
                 {
                     _writer.WriteAttributeString(para.Key, para.Value);
+                }
+                if (_writingMode.ToLower() == "rl-tb")
+                {
+                    _writer.WriteAttributeString("style:writing-mode", _writingMode);
                 }
                 _writer.WriteStartElement("style:background-image");
                 _writer.WriteEndElement();
@@ -3270,8 +3285,10 @@ namespace SIL.PublishingSolution
             {
                 _writer.WriteAttributeString(para.Key, para.Value);
             }
-            if (isDirChange)
-                _writer.WriteAttributeString("style:writing-mode", "rl-tb");
+            if (_writingMode.ToLower() == "rl-tb")
+            {
+                _writer.WriteAttributeString("style:writing-mode", _writingMode);
+            }
             _writer.WriteStartElement("style:background-image");
             _writer.WriteEndElement();
             // START FootNote Seperator
@@ -3289,17 +3306,21 @@ namespace SIL.PublishingSolution
         /// To change the page direction based on the direction property from the CSS file.
         /// </summary>
         /// <returns>true / false</returns>
-        public bool GetPageDirection()
+        public void GetPageDirection()
         {
+            string dirValue = "ltr";
             if (_cssProperty.ContainsKey("body") && _cssProperty["body"].ContainsKey("direction"))
             {
-                return (_cssProperty["body"]["direction"] == "rtl");
+                dirValue = _cssProperty["body"]["direction"];
             }
             if (_cssProperty.ContainsKey("scrBody") && _cssProperty["scrBody"].ContainsKey("direction"))
             {
-                return (_cssProperty["scrBody"]["direction"] == "rtl");
+                dirValue = _cssProperty["scrBody"]["direction"];
             }
-            return false;
+            if (dirValue.ToLower() == "rtl")
+            {
+                _writingMode = "rl-tb";
+            }
         }
 
         private void LoadFooterSettings(int index)
