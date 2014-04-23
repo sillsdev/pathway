@@ -113,8 +113,10 @@
       <option name="Gen 1:1" file="Running_Head_Mirrored_Verse_Abbr.css" type="Mirrored" />      
       <option name="Gen 1" file="Running_Head_Mirrored_Chapter_Abbr.css" type="Mirrored" />
       <option name="Gen 1-2" file="Running_Head_Paged_Chapter_Abbr.css" type="Mirrored" />
-	  <option name="Genesis 1:1-2:1" file="Running_Head_Paged_Verse.css" type="Every Page" />
-	  <option name="Gen 1:1-2:1" file="Running_Head_Paged_Verse_Abbr.css" type="Every Page" />
+      <option name="Genesis 1-2" file="Running_Head_Paged_MultiChapter.css" type="Every Page" />
+      <option name="Gen 1-2" file="Running_Head_Paged_MultiChapter_Abbr.css" type="Every Page" />
+      <option name="Genesis 1" file="Running_Head_Paged_Chapter.css" type="Every Page" />
+      <option name="Gen 1" file="Running_Head_Paged_Chapter_Abbr.css" type="Every Page" />
     </feature>	
 	 <feature name="Page Number">
       <option name="Top Inside Margin" file="PageNumber_TopInside.css" type="Mirrored" />
