@@ -552,8 +552,8 @@ about={2} \
 <p>{4} \
 <p>\
 <p> . . . . . . . . . . . . . . . . . . .\
-<p><b>Creative Commons</b> <i>Atribution-Non Comercial-No Derivatives 3.0</i>\
-<p><font color=blue><i>http://creativecommons.org/licenses/by-nc-nd/3.0</i></font>\
+<p><b>Creative Commons</b> <i>Atribution-Non Comercial-No Derivatives 4.0</i>\
+<p><font color=blue><i>http://creativecommons.org/licenses/by-nc-nd/4.0</i></font>\
 ";
             var langCode = GetSsfValue("//EthnologueCode", "zxx");
             const bool isConfigurationTool = false;
