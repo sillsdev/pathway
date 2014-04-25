@@ -81,7 +81,7 @@ namespace SIL.PublishingSolution
 #if (TIME_IT)
                 DateTime dt1 = DateTime.Now;    // time this thing
 #endif
-            var inProcess = new InProcess(0, 6);
+            var inProcess = new InProcess(0, 7);
             try
             {
                 var curdir = Environment.CurrentDirectory;
@@ -98,6 +98,8 @@ namespace SIL.PublishingSolution
                 string exportGoBibleInputPath = string.Empty;
                 exportGoBibleInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
                 processFolder = exportGoBibleInputPath;
+                PartialBooks.AddChapters(Common.PathCombine(processFolder, "SFM"));
+                inProcess.PerformStep();
                 CreateCollectionsTextFile(exportGoBibleInputPath);
                 inProcess.PerformStep();
                 var iconFullName = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore", "Icon.png"));
@@ -314,9 +316,9 @@ namespace SIL.PublishingSolution
                 sw.WriteLine("Source-Format: usfm");
                 sw.WriteLine("Source-FileExtension: sfm");
                 sw.WriteLine("Phone-Icon-Filepath: Icon.png");
-                sw.WriteLine("Application-Name: " + GetInfo(Param.Title));
-                sw.WriteLine("MIDlet-Vendor: " + GetInfo(Param.Title) + " Vendor");
-                sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org");
+                //sw.WriteLine("Application-Name: " + GetInfo(Param.Title)); - this line makes output unusable (bug in GoBibleCreator?)
+                sw.WriteLine("MIDlet-Vendor: " + GetInfo(Param.Publisher));
+                //sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org"); - we need to find out best place to post Go Bible modules
                 sw.WriteLine("Codepage: UTF-8");
                 sw.WriteLine("RedLettering: false");
                 sw.WriteLine(@"USFM-TitleTag: \id"); // + Common.BookNameTag);

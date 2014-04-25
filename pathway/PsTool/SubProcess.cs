@@ -343,6 +343,7 @@ namespace SIL.Tool
         /// </summary>
         public static void BeforeProcess(string outFullName)
         {
+            RedirectOutput = string.Empty;
             const string BeforeProcess = "BeforePwConvert.bat";
             string processFolder = GetProcessFolder(outFullName);
             if (File.Exists(Common.PathCombine(processFolder, BeforeProcess)))
@@ -364,6 +365,7 @@ namespace SIL.Tool
         /// </summary>
         public static void AfterProcess(string outFullName)
         {
+            RedirectOutput = string.Empty;
             const string AfterProcess = "AfterPwConvert.bat";
             try
             {
