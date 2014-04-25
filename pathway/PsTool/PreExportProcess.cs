@@ -3621,33 +3621,26 @@ namespace SIL.Tool
             if (_projInfo.ProjectInputType.ToLower() != "scripture")
             { return; }
 
-            //if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
-            //XmlDocument xDoc = Common.DeclareXMLDocument(true);
-            //XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-            //namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            //xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
-            //string xPath = "//div[@class='scrBook']";
-            //XmlNodeList bookLists = xDoc.SelectNodes(xPath, namespaceManager);
-            //if (bookLists.Count > 0)
-            //{
-            //    for (int i = 0; i < bookLists.Count; i++)
-            //    {
-            //        XmlNode divNode = xDoc.CreateElement("div");
-            //        XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
-            //        xmlAttribute.Value = "bookPageBreak";
-            //        if (divNode.Attributes != null) divNode.Attributes.Append(xmlAttribute);
-            //        divNode.InnerText = " ";
-            //        bookLists[i].InsertBefore(divNode, bookLists[i].FirstChild);
-            //    }
-            //}
-            //xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
-
-            TextWriter tw = new StreamWriter(_projInfo.DefaultCssFileWithPath, true);
-            tw.WriteLine(".Title_Main {");
-            tw.WriteLine("page-break-before: always;");
-            tw.WriteLine("}");
-            tw.Close();
-
+            if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
+            const string xPath = "//div[@class='Title_Main']";
+            XmlNodeList bookLists = xDoc.SelectNodes(xPath, namespaceManager);
+            if (bookLists != null && bookLists.Count > 0)
+            {
+                for (int i = 0; i < bookLists.Count; i++)
+                {
+                    XmlNode divNode = xDoc.CreateElement("div");
+                    XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
+                    xmlAttribute.Value = "hideDiv";
+                    if (divNode.Attributes != null) divNode.Attributes.Append(xmlAttribute);
+                    divNode.InnerText = " ";
+                    bookLists[i].InsertBefore(divNode, bookLists[i].FirstChild);
+                }
+            }
+            xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
         }
 
         public void InsertEmptyDiv(string fileName)

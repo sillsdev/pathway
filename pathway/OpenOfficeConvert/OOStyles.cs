@@ -3297,9 +3297,6 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement(); // end of style:page-layout-properties
             _writer.WriteEndElement();
             /* pm7 ends*/
-
-
-
         }
 
         /// <summary>
