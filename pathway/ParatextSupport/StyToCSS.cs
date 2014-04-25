@@ -110,13 +110,13 @@ namespace SIL.PublishingSolution
             string ssfFile = database + ".ssf";
             string ssfFullPath = string.Empty;
 
-            if (Common.GetOsName() == "Windows7")
+            if (Common.GetOsName().Contains("Windows"))
             {
                 ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\ScrChecks\\1.0\\Settings_Directory", "");
-            }
-            else if (Common.GetOsName() == "Windows XP")
-            {
-                ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Settings_Directory", "");
+                if (string.IsNullOrEmpty(ssfFullPath))
+                { // Handle 32-bit Windows 7 and XP
+                    ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Settings_Directory", "");
+                }
             }
             else
             {

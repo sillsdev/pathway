@@ -3461,7 +3461,7 @@ namespace SIL.Tool
                         case 6:
                             if (osInfo.Version.Minor == 1)
                                 return "Windows7";
-                            break;
+                            return "Windows8";
                     }
                     break;
 
@@ -4599,29 +4599,22 @@ namespace SIL.Tool
             return isPermission;
         }
 
-        public static string GetLibraofficeVersion(string osName)
+        public static string GetLibreofficeVersion(string osName)
         {
+            string libreofficeVersion = null;
             try
             {
-                string libraofficeVersion = null;
-                if (osName == "Windows7")
+                if (osName.Contains("Windows"))
                 {
-                    libraofficeVersion =
-                        Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\LibreOffice\\UNO\\InstallPath",
-                                                    "");
+                    libreofficeVersion = GetValueFromRegistry("SOFTWARE\\Wow6432Node\\LibreOffice\\UNO\\InstallPath", "");
+                    if (string.IsNullOrEmpty(libreofficeVersion))
+                    { // Handle 32-bit Windows 7 and XP
+                        libreofficeVersion = GetValueFromRegistry("SOFTWARE\\LibreOffice\\UNO\\InstallPath", "");
+                    }
                 }
-                else if (osName == "Windows XP")
-                {
-                    libraofficeVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX",
-                                                                     "");
-                }
-                return libraofficeVersion;
-
             }
-            catch
-            {
-                return string.Empty;
-            }
+            catch {}
+            return libreofficeVersion;
         }
 
         public static bool CreateLicenseFileForRunningPdfApplyCopyright(string tempDirectoryFolder, string workingDirectoryXhtmlFileName, string exportTitle, string creatorTool, string inputType)

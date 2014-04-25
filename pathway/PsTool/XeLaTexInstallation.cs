@@ -39,15 +39,15 @@ namespace SIL.Tool
         {
             string pathwayXeLaTeXPath = string.Empty;
             string osName = Common.GetOsName();
-            if (osName == "Windows7")
+            if (osName.Contains("Windows"))
             {
                 pathwayXeLaTeXPath =
                    Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\PathwayXeLaTeX",
                                                "XeLaTexDir");
-            }
-            else if (osName == "Windows XP")
-            {
-                pathwayXeLaTeXPath = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX", "XeLaTexDir");
+                if (string.IsNullOrEmpty(pathwayXeLaTeXPath))
+                { // Handle 32-bit Windows 7 and XP
+                    pathwayXeLaTeXPath = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX", "XeLaTexDir");
+                }
             }
             else if (Common.IsUnixOS())
             {
