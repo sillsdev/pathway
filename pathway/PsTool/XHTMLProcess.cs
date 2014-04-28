@@ -1121,7 +1121,11 @@ namespace SIL.PublishingSolution
                     }
                     else if (_outputType == Common.OutputType.XETEX || _outputType == Common.OutputType.XELATEX)
                     {
-                        if (_paragraphPropertyList != null) if (_paragraphPropertyList.Contains(property.Key)) continue;
+                        if (_paragraphPropertyList != null)
+                        {
+                            if (_paragraphPropertyList.Contains(property.Key))
+                                continue;
+                        }
                         if (_tempStyle.ContainsKey(property.Key) == false)
                         {
                             _tempStyle[property.Key] = property.Value;

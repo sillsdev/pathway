@@ -339,8 +339,9 @@ namespace SIL.PublishingSolution
         protected void DefaultProjectFileSetup(string outDir)
         {
             _projectFile = Common.PathCombine(outDir, DataType + ".de");
-            if (!File.Exists(_projectFile))
-                File.Copy(Common.FromRegistry(Common.PathCombine(Param.Value[Param.SamplePath], Path.GetFileName(_projectFile))), _projectFile);
+            string deFile = Common.FromRegistry(Common.PathCombine(Param.Value[Param.SamplePath], Path.GetFileName(_projectFile)));
+            if (!File.Exists(_projectFile) && File.Exists(deFile))
+                File.Copy(deFile, _projectFile);
         }
 
         protected void LoadDataTypeSettings()

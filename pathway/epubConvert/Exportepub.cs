@@ -160,11 +160,11 @@ namespace SIL.PublishingSolution
             var noXmlSpaceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.noXmlSpace.xsl");
             Debug.Assert(noXmlSpaceStream != null);
             _noXmlSpace.Load(XmlReader.Create(noXmlSpaceStream));
-            _addDicTocHeads.Load(XmlReader.Create(UsersXsl("addDicTocHeads.xsl")));
+            _addDicTocHeads.Load(XmlReader.Create(Common.UsersXsl("addDicTocHeads.xsl")));
 
-            _fixEpub.Load(XmlReader.Create(UsersXsl("FixEpub.xsl")));
+            _fixEpub.Load(XmlReader.Create(Common.UsersXsl("FixEpub.xsl")));
 
-            _fixEpubToc.Load(XmlReader.Create(UsersXsl("FixEpubToc.xsl")));
+            _fixEpubToc.Load(XmlReader.Create(Common.UsersXsl("FixEpubToc.xsl")));
 
 
             _isUnixOS = Common.UnixVersionCheck();
@@ -311,8 +311,8 @@ namespace SIL.PublishingSolution
                     Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, " lang=\"", " xml:lang=\"");
                 }
 
-                ApplyXslt(preProcessor.ProcessedXhtml, _noXmlSpace);
-                ApplyXslt(preProcessor.ProcessedXhtml, _fixEpub);
+                Common.ApplyXslt(preProcessor.ProcessedXhtml, _noXmlSpace);
+                Common.ApplyXslt(preProcessor.ProcessedXhtml, _fixEpub);
                 // end EDB 10/22/2010
                 inProcess.PerformStep();
 
@@ -387,7 +387,7 @@ namespace SIL.PublishingSolution
                                                        langArray[0], Common.GetTextDirection(langArray[0])));
                         Common.StreamReplaceInFile(revFile, " lang=\"", " xml:lang=\"");
                     }
-                    ApplyXslt(revFile, _addRevId);      // also removes xml:space="preserve" attributes
+                    Common.ApplyXslt(revFile, _addRevId);      // also removes xml:space="preserve" attributes
                     // now split out the html as needed
                     List<string> fileNameWithPath = new List<string>();
                     fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
@@ -726,14 +726,6 @@ namespace SIL.PublishingSolution
                 }
             }
             xDoc.Save(fileName);
-        }
-
-        private string UsersXsl(string xslName)
-        {
-            var myPath = Common.PathCombine(Common.GetAllUserPath(), xslName);
-            if (File.Exists(myPath))
-                return myPath;
-            return Common.FromRegistry(xslName);
         }
 
         #region Private Functions
@@ -3778,9 +3770,9 @@ namespace SIL.PublishingSolution
             FixPlayOrder(tocFullPath);
             if (_inputType.ToLower() == "dictionary")
             {
-                ApplyXslt(tocFullPath, _addDicTocHeads);
+                Common.ApplyXslt(tocFullPath, _addDicTocHeads);
             }
-            ApplyXslt(tocFullPath, _fixEpubToc);
+            Common.ApplyXslt(tocFullPath, _fixEpubToc);
             FixPlayOrder(tocFullPath);
         }
 
@@ -3824,23 +3816,6 @@ namespace SIL.PublishingSolution
             XmlWriter writer = XmlWriter.Create(xmlFile);
             tocDoc.Save(writer);
             xmlFile.Close();
-        }
-
-        private void ApplyXslt(string fileFullPath, XslCompiledTransform xslt)
-        {
-            var folder = Path.GetDirectoryName(fileFullPath);
-            var name = Path.GetFileNameWithoutExtension(fileFullPath);
-            var tempFullName = Common.PathCombine(folder, name) + "-1.xml";
-            File.Copy(fileFullPath, tempFullName);
-
-            XmlTextReader reader = Common.DeclareXmlTextReader(tempFullName, true);
-            FileStream xmlFile = new FileStream(fileFullPath, FileMode.Create);
-            XmlWriter writer = XmlWriter.Create(xmlFile, xslt.OutputSettings);
-            xslt.Transform(reader, null, writer, null);
-            xmlFile.Close();
-            reader.Close();
-
-            File.Delete(tempFullName);
         }
 
         private void WriteNavPoint(XmlWriter ncx, string index, string text, string name)

@@ -38,3 +38,8 @@
 .pictureCenter {
     float:left;
 }
+
+span[lang='en']{ direction: ltr;}
+span[lang='ur']{ direction: rtl;} 
+div[lang='en']{ direction: ltr;}
+div[lang='ur']{ direction: rtl;}

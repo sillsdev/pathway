@@ -91,7 +91,9 @@ namespace SIL.PublishingSolution
         private bool _bookPageBreak;
         private bool _hideFirstVerseNo;
         private bool _removeSpaceAfterVerse;
-		private bool _directionEnd = false;
+		//private bool _directionEnd = false;
+        private string _directionStart = string.Empty;
+
         #endregion
 
         #region Private Variables
@@ -626,26 +628,26 @@ namespace SIL.PublishingSolution
                 {
                     content = string.Empty;
                 }
-                if (_characterName != null && IdAllClass.ContainsKey(_characterName) && IdAllClass[_characterName].ContainsKey("direction"))
-                {
-                    if (IdAllClass[_characterName]["direction"] == "rtl")
-                    {
-                        _xetexFile.Write("\\RL{");
-                        _directionEnd = true;
-                    }
-                }
+                //if (_characterName != null && IdAllClass.ContainsKey(_characterName) && IdAllClass[_characterName].ContainsKey("direction"))
+                //{
+                //    if (IdAllClass[_characterName]["direction"] == "rtl")
+                //    {
+                //        _xetexFile.Write("\\RL{");
+                //        _directionEnd = true;
+                //    }
+                //}
 
                 if (_childName.ToLower().Contains("sectionhead"))//spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody
                 {
                     _inlineCount++;
                 }
                 _xetexFile.Write(content);
-                if (_directionEnd)
-                {
-                    string directionEnd = "}";
-                    _xetexFile.Write(directionEnd);
-                    _directionEnd = false;
-                }
+                //if (_directionEnd)
+                //{
+                //    string directionEnd = "}";
+                //    _xetexFile.Write(directionEnd);
+                //    _directionEnd = false;
+                //}
                 CloseInlineInnerStyle(value);
                 for (int i = 1; i <= _inlineCount; i++) // close braces for inline style
                 {
@@ -1375,6 +1377,8 @@ namespace SIL.PublishingSolution
             SetHomographNumber(true);
             FooterSetup(Common.OutputType.XELATEX.ToString());
 
+            Direction();
+
             WriteParagraphInline();
 
             if (IdAllClass.ContainsKey(_classNameWithLang))
@@ -1392,6 +1396,22 @@ namespace SIL.PublishingSolution
                 {
                     _textFrameClass.Add(_childName);
                 }
+            }
+        }
+
+        private void Direction()
+        {
+            string getStyleName = StackPeek(_allStyle);
+            if (IdAllClass[getStyleName].ContainsKey("direction"))
+            {
+                if (IdAllClass[getStyleName]["direction"] == "rtl")
+                {
+                    _directionStart = "\\RL{";
+                }
+                //else if (IdAllClass[getStyleName]["direction"] == "ltr")
+                //{
+                //    _directionStart = "\\LR{";
+                //}
             }
         }
 
@@ -1419,8 +1439,8 @@ namespace SIL.PublishingSolution
 
             string paraStyle = _childName.Replace("_body", ""); ;
             string childClass = Common.LeftString(paraStyle, "_");
-            string directionStart = string.Empty;
-            string directionEnd = string.Empty;
+            //string directionStart1 = string.Empty;
+            //string directionEnd1 = string.Empty;
             if (_divType.Contains(_tagType) && _classInlineStyle.ContainsKey(childClass))
             {
                 string endParagraphString = string.Empty;
@@ -1504,11 +1524,11 @@ namespace SIL.PublishingSolution
                             displayNoneStart = "\\begin{comment}";
                             displayNoneEnd = "\\end{comment}\r\n";
                         }
-                        else if (propName == "RTL")
-                        {
-                            directionStart = "\\begin{RTLitems} \\item";
-                            directionEnd = "\\end{RTLitems}";
-                        }
+                        //else if (propName == "RTL")
+                        //{
+                        //    directionStart = "\\begin{RTLitems} \\item";
+                        //    directionEnd = "\\end{RTLitems}";
+                        //}
                         else if (propName == "padding-left")
                         {
                             paddingLeft = Common.RightString(property, " ");
@@ -1592,11 +1612,11 @@ namespace SIL.PublishingSolution
                     _xetexFile.WriteLine(displayNoneStart);
                     endParagraphString = displayNoneEnd + " " + endParagraphString;
                 }
-                if (directionStart != string.Empty)
-                {
-                    _xetexFile.WriteLine(directionStart);
-                    endParagraphString = directionEnd + " " + endParagraphString;
-                }
+                //if (directionStart != string.Empty)
+                //{
+                //    _xetexFile.WriteLine(directionStart);
+                //    endParagraphString = directionEnd + " " + endParagraphString;
+                //}
                 if (endParagraphString != string.Empty)
                 {
                     _braceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
@@ -1633,11 +1653,11 @@ namespace SIL.PublishingSolution
                             displayNoneStart = "\\begin{comment}";
                             displayNoneEnd = "\\end{comment}\r\n";
                         }
-                        else if (propName == "RTL")
-                        {
-                            directionStart = "\\begin{RTLitems} \\item";
-                            directionEnd = "\\end{RTLitems}";
-                        }
+                        //else if (propName == "RTL")
+                        //{
+                        //    directionStart = "\\begin{RTLitems} \\item";
+                        //    directionEnd = "\\end{RTLitems}";
+                        //}
                     }
                 }
 
@@ -1647,10 +1667,11 @@ namespace SIL.PublishingSolution
                     _xetexFile.WriteLine(displayNoneStart);
                     endParagraphString = displayNoneEnd + " " + endParagraphString;
                 }
-                if (directionStart != string.Empty)
+                if (_directionStart != string.Empty)
                 {
-                    _xetexFile.WriteLine(directionStart);
-                    endParagraphString = directionEnd + " " + endParagraphString;
+                    _xetexFile.Write(_directionStart);
+                    endParagraphString = "} " + endParagraphString;
+                    _directionStart = string.Empty;
                 }
                 if (endParagraphString != string.Empty)
                 {
@@ -1946,7 +1967,7 @@ namespace SIL.PublishingSolution
             _paragraphPropertyList.Add("orphans");
 
             //Direction right to left
-            _paragraphPropertyList.Add("RTL");
+            _paragraphPropertyList.Add("direction");
 
             if(IdAllClass.ContainsKey("@page"))
             {

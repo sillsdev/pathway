@@ -1173,6 +1173,16 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void BidiTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Bidi";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         #endregion
 
         #region Private Functions

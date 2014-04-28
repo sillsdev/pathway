@@ -22,6 +22,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Xsl;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -48,6 +49,8 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _tocPropertyList = new Dictionary<string, string>();
         private Dictionary<string, string> _langFontCodeandName;
         private Dictionary<string, string> _fontLangMap = new Dictionary<string, string>();
+        private readonly XslCompiledTransform _xhtmlXelatexXslProcess = new XslCompiledTransform();
+
         #region Public Functions
         public string ExportType
         {
@@ -77,6 +80,14 @@ namespace SIL.PublishingSolution
         /// </summary>
         public bool Export(PublicationInformation projInfo)
         {
+
+            _xhtmlXelatexXslProcess.Load(XmlReader.Create(Common.UsersXsl("AddBidi.xsl")));
+
+            if (_inputType.ToLower() == "dictionary")
+            {
+                Common.ApplyXslt(projInfo.DefaultXhtmlFileWithPath, _xhtmlXelatexXslProcess);
+            }
+
             _langFontDictionary = new Dictionary<string, string>();
             _langFontCodeandName = new Dictionary<string, string>();
             string mainXhtmlFileWithPath = projInfo.DefaultXhtmlFileWithPath;
@@ -185,6 +196,10 @@ namespace SIL.PublishingSolution
 
             if (projInfo.IsReversalExist)
             {
+                if (_inputType.ToLower() == "dictionary")
+                {
+                    Common.ApplyXslt(projInfo.DefaultXhtmlFileWithPath, _xhtmlXelatexXslProcess);
+                }
                 if (ExportReversalIndex(projInfo))
                 {
                     _reversalIndexTexCreated = true;
@@ -221,7 +236,7 @@ namespace SIL.PublishingSolution
             }
             UpdateXeLaTexFontCacheIfNecessary();
             CallXeLaTex(xeLatexFullFile, true, imgPath);
-            //ProcessRampFile(projInfo, xeLatexFullFile, organization);
+            ProcessRampFile(projInfo, xeLatexFullFile, organization);
             return true;
         }
 
@@ -839,88 +854,6 @@ namespace SIL.PublishingSolution
 
         }
         #endregion
-
-        /// <summary>
-        /// Parses the specified file and sets the internal languages list to all the languages found in the file.
-        /// </summary>
-        /// <param name="xhtmlFileName">File name to parse</param>
-        private void BuildLanguagesListOLD(string xhtmlFileName)
-        {
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
-            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            // should only be one of these after splitting out the chapters.
-            XmlNodeList nodes;
-            nodes = xmlDocument.SelectNodes("//@lang", namespaceManager);
-            if (nodes.Count > 0)
-            {
-                foreach (XmlNode node in nodes)
-                {
-                    string value;
-                    if (_langFontDictionary.TryGetValue(node.Value, out value))
-                    {
-                        // already have this item in our list - continue
-                        continue;
-                    }
-                    if (node.Value.ToLower() == "utf-8")
-                    {
-                        // TE-9078 "utf-8" showing up as language in html tag - remove when fixed
-                        continue;
-                    }
-                    // add an entry for this language in the list (the * gets overwritten in BuildFontsList())
-                    _langFontDictionary.Add(node.Value, "*");
-                }
-            }
-
-
-
-            // now go check to see if we're working on scripture or dictionary data
-            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
-            if (nodes.Count == 0)
-            {
-                // not in this file - this might be scripture?
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                if (nodes.Count > 0)
-                    _inputType = "scripture";
-            }
-            else
-            {
-                _inputType = "dictionary";
-            }
-        }
-
-        private void GetXhtmlFileFontCodeandFontNameOLD(string xhtmlFileName)
-        {
-            if (!File.Exists(xhtmlFileName)) return;
-            XmlDocument xdoc = new XmlDocument();
-            xdoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
-            xdoc.Load(xhtmlFileName);
-            XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
-            if (metaNodes != null && metaNodes.Count > 0)
-            {
-                try
-                {
-                    foreach (XmlNode metaNode in metaNodes)
-                    {
-                        FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
-                        foreach (FontFamily systemFont in systemFontList)
-                        {
-                            if (metaNode.Attributes["content"].Value.ToLower() == systemFont.Name.ToLower())
-                            {
-                                _langFontCodeandName.Add(metaNode.Attributes["name"].Value, metaNode.Attributes["content"].Value);
-                                break;
-                            }
-                        }
-                    }
-                }
-                catch { }
-            }
-        }
 
         #endregion
     }

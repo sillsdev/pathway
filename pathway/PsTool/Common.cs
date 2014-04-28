@@ -30,6 +30,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
+using System.Xml.Xsl;
 using Microsoft.Win32;
 using SIL.PublishingSolution;
 using SIL.Tool.Localization;
@@ -4812,6 +4813,29 @@ namespace SIL.Tool
             return inputText;
         }
 
+        public static void ApplyXslt(string fileFullPath, XslCompiledTransform xslt)
+        {
+            var folder = Path.GetDirectoryName(fileFullPath);
+            var name = Path.GetFileNameWithoutExtension(fileFullPath);
+            var tempFullName = Common.PathCombine(folder, name) + "-1.xml";
+            File.Copy(fileFullPath, tempFullName);
 
+            XmlTextReader reader = Common.DeclareXmlTextReader(tempFullName, true);
+            FileStream xmlFile = new FileStream(fileFullPath, FileMode.Create);
+            XmlWriter writer = XmlWriter.Create(xmlFile, xslt.OutputSettings);
+            xslt.Transform(reader, null, writer, null);
+            xmlFile.Close();
+            reader.Close();
+
+            File.Delete(tempFullName);
+        }
+
+        public static string UsersXsl(string xslName)
+        {
+            var myPath = Common.PathCombine(GetAllUserPath(), xslName);
+            if (File.Exists(myPath))
+                return myPath;
+            return FromRegistry(xslName);
+        }
     }
 }
