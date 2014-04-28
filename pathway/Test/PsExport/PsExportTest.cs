@@ -223,11 +223,13 @@ namespace Test.PsExport
         #endregion SeExport Common
 
         #region PsExport Common
+
         /// <summary>
         /// Test PsExport function.
         /// </summary>
         /// <param name="testName">test name (also folder name of test)</param>
         /// <param name="mainXhtml">input xhtml name in folder</param>
+        /// <param name="dataType"></param>
         /// <param name="target">desired destination</param>
         /// <param name="tests">array of tests to apply to result</param>
         /// <param name="msg">message to identify test if error occurs</param>

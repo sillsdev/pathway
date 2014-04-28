@@ -531,6 +531,7 @@ namespace SIL.Tool
         /// Sets the default attribute of the Nodes to False
         /// </summary>
         /// <param name="root">The Root Node</param>
+        /// <param name="fileExtension">File Extensions to be removed.</param>
         public void DicExplorerRemoveDefault(XmlNode root, string[] fileExtension)
         {
 
@@ -749,7 +750,6 @@ namespace SIL.Tool
             }
         }
 
- 
 
         /// <summary>
         /// Add the given file to the Project xml file
@@ -759,6 +759,7 @@ namespace SIL.Tool
         /// <param name="addToParentFolder">Forced to add in root of Solution Explorer</param>
         /// <param name="destPathParent">Parent of current folder - used for recursive copy</param>
         /// <param name="showFileExist">To Show the information about file already exist</param>
+        /// <param name="visible"></param>
         /// <returns>Returns True/False</returns>
         public bool AddFileToXML(string fullFileName, string setDefault, bool addToParentFolder, string destPathParent, bool showFileExist, bool visible)
         {

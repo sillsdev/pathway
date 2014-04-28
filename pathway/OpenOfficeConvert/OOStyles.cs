@@ -448,6 +448,7 @@ namespace SIL.PublishingSolution
         /// Create custom List
         /// list-style-type: none;
         /// </summary>
+        /// <param name="className">class name of list</param>
         /// <param name="listType">Type Name</param>
         private void CreateListType(string className, string listType)
         {

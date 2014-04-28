@@ -1210,6 +1210,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="attribName"></param>
         /// <param name="attribValue"></param>
+        /// <param name="styleName">style in which to look for attribute</param>
         public static void UpdateMobileAtrrib(string attribName, string attribValue, string styleName)
         {
             string searchStyleName = styleName;
@@ -1238,6 +1239,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="attribName"></param>
         /// <param name="attribValue"></param>
+        /// <param name="styleName">style name in which to look for attribute</param>
         public static void UpdateOthersAtrrib(string attribName, string attribValue, string styleName)
         {
             string searchStyleName = styleName;

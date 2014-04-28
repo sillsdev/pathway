@@ -389,7 +389,7 @@ namespace SIL.Tool
         /// Checks all the Paths of image and returns the Path
         /// </summary>
         /// <param name="src">Image Source </param>
-        /// <param name="metaname">Metaname from XHTML</param>
+        /// <param name="metaName">Metaname from XHTML</param>
         /// <param name="sourcePicturePath">Source Dictionary path</param>
         /// <returns>The Path where picture exist</returns>
         public static string GetPictureFromPath(string src, string metaName, string sourcePicturePath)
@@ -1195,6 +1195,7 @@ namespace SIL.Tool
         /// <param name="reader"></param>
         /// <param name="writers"></param>
         /// <param name="bookSplitterClass"></param>
+        /// <param name="adjacentClass"></param>
         static void SplitXhtmlFileAdjacent(XmlReader reader, Dictionary<string, XmlWriter> writers, string bookSplitterClass, bool adjacentClass)
         {
             int srcCount = 0;

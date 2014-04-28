@@ -406,14 +406,12 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Generate first block of Styles.xml
-        /// 
-        /// <list> 
-        /// </list>
         /// </summary>
         /// <param name="targetFile">content.xml</param>
+        /// <param name="cssProperty">used to retrieve header font</param>
         /// <returns> </returns>
         /// -------------------------------------------------------------------------------------------
-        protected void CreateODTStyles(string targetFile, Dictionary<string, Dictionary<string, string>> _cssProperty)
+        protected void CreateODTStyles(string targetFile, Dictionary<string, Dictionary<string, string>> cssProperty)
         {
             try
             {
@@ -475,7 +473,7 @@ namespace SIL.PublishingSolution
 
                 //TD-2815
                 _writer.WriteStartElement("style:font-face");
-                string headerFontName = Common.GetHeaderFontName(_cssProperty, _projInfo.DefaultCssFileWithPath);
+                string headerFontName = Common.GetHeaderFontName(cssProperty, _projInfo.DefaultCssFileWithPath);
                 _writer.WriteAttributeString("style:name", headerFontName);
                 _writer.WriteAttributeString("svg:font-family", "'" + headerFontName + "'");
                 _writer.WriteAttributeString("style:font-pitch", "variable");

@@ -2480,13 +2480,13 @@ namespace SIL.PublishingSolution
                     {
                         if (rectWidth == "0") //H=72 W=0
                         {
-                            rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
+                            rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
                         }
 
                     }
                     else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72 
                     {
-                        rectHeight = Common.CalcDimension(fromPath, ref rectWidth, 'H');
+                        rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
                     }
                     else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0, 
                     {
@@ -2503,13 +2503,13 @@ namespace SIL.PublishingSolution
                             }
                         }
                         rectWidth = Convert.ToString(Common.ColumnWidth * value);
-                        rectHeight = Common.CalcDimension(fromPath, ref rectWidth, 'H');
+                        rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
                     }
                     else
                     {
                         //Default value is 72 
                         rectHeight = "72"; // fixed the width as 1 in = 72pt;
-                        rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
+                        rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
                     }
                     if (rectWidth == "0")
                     {
@@ -3568,8 +3568,8 @@ namespace SIL.PublishingSolution
         /// Read XHTML content
         /// </summary>
         /// <param name="filePath">File path of the XHTML file</param>
-        /// <param name="searchText">Text to be search</param>
-        public static void ReadAllFirstEntryData(string filePath, Dictionary<string, string> XHTMLData)
+        /// <param name="xhtmlData">Updated with the first entry for each letter</param>
+        public static void ReadAllFirstEntryData(string filePath, Dictionary<string, string> xhtmlData)
         {
             XmlTextReader reader;
             using (reader = Common.DeclareXmlTextReader(filePath, true))
@@ -3643,7 +3643,7 @@ namespace SIL.PublishingSolution
                                     entry = reader.Value;
                                     isEntry = false;
                                     isReadData = false;
-                                    XHTMLData[letter] = entry;
+                                    xhtmlData[letter] = entry;
                                 }
                             }
                             break;

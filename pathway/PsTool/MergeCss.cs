@@ -54,10 +54,12 @@ namespace SIL.PublishingSolution
         #endregion Destructor
 
         #region Public Methods
+
         /// <summary>
         /// Create temporary CSS that combines all imported
         /// </summary>
         /// <param name="css">root css file</param>
+        /// <param name="outputFileName">file name where css output should be written</param>
         /// <returns>name of temporary file</returns>
         public string Make(string css, string outputFileName)
         {

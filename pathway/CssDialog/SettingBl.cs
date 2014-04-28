@@ -633,6 +633,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// LoadCss - Loads CSS into private class member variable
         /// </summary>
+        /// <param name="dicPath">path for output (including css file)</param>
         /// <param name="cssFileName">CSS Filename</param>
         /// <returns>returns TreeNode</returns>
         public TreeNode LoadCss(string dicPath, string cssFileName)

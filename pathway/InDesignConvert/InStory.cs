@@ -527,18 +527,18 @@ namespace SIL.PublishingSolution
                 {
                     if (rectWidth == "0")
                     {
-                        rectWidth = Common.CalcDimension(fileName1, ref rectHeight, 'W');
+                        rectWidth = Common.CalcDimension(fileName1, ref rectHeight, Common.CalcType.Width);
                     }
                 }
                 else if (rectWidth != "0")
                 {
-                    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, 'H');
+                    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, Common.CalcType.Height);
                 }
                 else
                 {
                     //Default value is 72 However the line draws 36pt in X-axis and 36pt in y-axis.
                     rectWidth = "36"; // fixed the width as 1 in;
-                    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, 'H');
+                    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, Common.CalcType.Height);
                     if (rectHeight == "0")
                     {
                         rectHeight = "36";

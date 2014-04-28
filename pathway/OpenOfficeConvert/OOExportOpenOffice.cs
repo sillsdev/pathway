@@ -1197,6 +1197,7 @@ namespace SIL.PublishingSolution
         /// TD-2488
         /// </summary>
         /// <param name="directoryPath">File Directory path</param>
+        /// <param name="styleFilename">style file into which content will be inserted</param>
         public static void InsertKeepWithNextinEntryStyle(string directoryPath, string styleFilename)
         {
             string filename = Common.PathCombine(directoryPath, styleFilename);

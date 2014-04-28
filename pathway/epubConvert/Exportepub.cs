@@ -1111,6 +1111,7 @@ namespace SIL.PublishingSolution
             sb.AppendLine(";");
             Common.StreamReplaceInFile(cssFile, "text-align:left;", sb.ToString());
         }
+
         /// <summary>
         /// This method addresses an ugly problem in e-book readers, where the :before and :after pseudo-items in the CSS aren't
         /// recognized (causing some bad spacing / punctuation). We work around the issue by moving the properties into an XSLT
@@ -1119,6 +1120,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="cssFile">CSS file containing content properties that need to be moved into the XHTML</param>
         /// <param name="xhtmlFiles">List of XHTML files that will get the content characters inserted via our generated XSLT.</param>
+        /// <param name="inProcess">Progress bar</param>
         private void ContentCssToXhtml(string cssFile, List<string> xhtmlFiles, InProcess inProcess)
         {
             if (!File.Exists(cssFile)) { return; }
@@ -1582,6 +1584,7 @@ namespace SIL.PublishingSolution
         /// - Sets the font-family for the body:lang selector to the referenced font
         /// </summary>
         /// <param name="cssFile"></param>
+        /// <param name="projInfo">Project information - used to find path to reversal file.</param>
         private void ReferenceFonts(string cssFile, IPublicationInformation projInfo)
         {
             if (!File.Exists(cssFile)) return;

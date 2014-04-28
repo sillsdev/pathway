@@ -46,9 +46,32 @@ namespace SIL.Tool
     {
         #region Public variable
 
-        public enum Action { New, Delete, Edit, Copy };
-        public enum ProjType { Dictionary, Scripture };
-        public enum OutputType { ODT, ODM, IDML, PDF, MOBILE, EPUB, XETEX, XELATEX };
+        public enum Action
+        {
+            New,
+            Delete,
+            Edit,
+            Copy
+        };
+
+        public enum ProjType
+        {
+            Dictionary,
+            Scripture
+        };
+
+        public enum OutputType
+        {
+            ODT,
+            ODM,
+            IDML,
+            PDF,
+            MOBILE,
+            EPUB,
+            XETEX,
+            XELATEX
+        };
+
         public static string SamplePath = string.Empty;
         public static List<string> BookNameCollection = new List<string>();
         public static string BookNameTag = string.Empty;
@@ -63,7 +86,7 @@ namespace SIL.Tool
         /* Non Breaking Space. It has differerence from normal space and the non breaking space */
         public static string NonBreakingSpace = Common.ConvertUnicodeToString("\\00a0");
 
-        static readonly ArrayList _units = new ArrayList();
+        private static readonly ArrayList _units = new ArrayList();
         public static ErrorProvider _errProvider = new ErrorProvider();
         public static Font UIFont;
         public static OdtType OdType;
@@ -72,18 +95,27 @@ namespace SIL.Tool
         public static string databaseName = string.Empty;
         public static DateTime TimeStarted { get; set; }
         public static OutputType _outputType = OutputType.ODT;
+
         public enum FileType
         {
-            Directory, DirectoryExcluded, File, FileExcluded, Project
+            Directory,
+            DirectoryExcluded,
+            File,
+            FileExcluded,
+            Project
         }
 
         public enum OdtType
         {
-            OdtChild, OdtMaster, OdtNoMaster
+            OdtChild,
+            OdtMaster,
+            OdtNoMaster
         }
+
         public enum ProjectType
         {
-            Dictionary, Scripture
+            Dictionary,
+            Scripture
         }
 
         /// <summary>
@@ -100,6 +132,7 @@ namespace SIL.Tool
         }
 
         #region LanguageCodeAndName()
+
         /// <summary>
         /// This method returns Language Code and Name Collection as Dictionary
         /// </summary>
@@ -236,6 +269,7 @@ namespace SIL.Tool
 
             return _myLanguageCodeAndName;
         }
+
         #endregion
 
         public static bool Testing; // To differentiate between Nunit test or from Application(UI or Flex).
@@ -246,14 +280,16 @@ namespace SIL.Tool
 
 
         #region FillName(string cssFileWithPath)
+
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// This method collects css files names into ArrayList based on base CSS File.
         /// </summary>
         /// <param name="cssFileWithPath">Its gets the file path of the CSS File</param>
+        /// <param name="baseCssFileWithPath">prevents the base from being added multiple times</param>
         /// <returns>ArrayList contains CSS filenames which are used</returns>
         /// -------------------------------------------------------------------------------------------
-        public static ArrayList GetCSSFileNames(string cssFileWithPath, string BaseCssFileWithPath)
+        public static ArrayList GetCSSFileNames(string cssFileWithPath, string baseCssFileWithPath)
         {
             ArrayList arrayCSSFile = new ArrayList();
             if (!File.Exists(cssFileWithPath))
@@ -266,7 +302,7 @@ namespace SIL.Tool
             var sr = new StreamReader(fs);
             try
             {
-                if (BaseCssFileWithPath != cssFileWithPath)
+                if (baseCssFileWithPath != cssFileWithPath)
                 {
                     arrayCSSFile.Add(cssFileWithPath);
                 }
@@ -274,17 +310,24 @@ namespace SIL.Tool
                 {
                     if (strText.Contains("@import"))
                     {
-                        string cssFile = strText.Substring((strText.IndexOf('"') + 1), strText.LastIndexOf('"') - (strText.IndexOf('"') + 1));
+                        string cssFile = strText.Substring((strText.IndexOf('"') + 1),
+                                                           strText.LastIndexOf('"') - (strText.IndexOf('"') + 1));
 
                         string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
 
                         if (executablePath.Contains("ReSharper") || executablePath.Contains("NUnit"))
                         {
                             //This code will work when this method call from NUnit Test case
-                            int binFolderPart = Environment.CurrentDirectory.IndexOf(Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar);
-                            executablePath = DirectoryPathReplace(Environment.CurrentDirectory.Substring(0, binFolderPart) + "/ConfigurationTool/TestFiles/input");
+                            int binFolderPart =
+                                Environment.CurrentDirectory.IndexOf(Path.DirectorySeparatorChar + "bin" +
+                                                                     Path.DirectorySeparatorChar);
+                            executablePath =
+                                DirectoryPathReplace(Environment.CurrentDirectory.Substring(0, binFolderPart) +
+                                                     "/ConfigurationTool/TestFiles/input");
                         }
-                        else if (executablePath.ToLower().Contains("fieldworks") || executablePath.ToLower().Contains("configurationtool") || executablePath.ToLower().Contains("testbed"))
+                        else if (executablePath.ToLower().Contains("fieldworks") ||
+                                 executablePath.ToLower().Contains("configurationtool") ||
+                                 executablePath.ToLower().Contains("testbed"))
                         {
                             executablePath = Common.GetPSApplicationPath();
                             if (SamplePath == String.Empty)
@@ -305,7 +348,7 @@ namespace SIL.Tool
                         {
                             cssPath = PathCombine(executablePath, SamplePath);
                         }
-                        arrayCSSFile.AddRange(GetCSSFileNames(PathCombine(cssPath, cssFile), BaseCssFileWithPath));
+                        arrayCSSFile.AddRange(GetCSSFileNames(PathCombine(cssPath, cssFile), baseCssFileWithPath));
                     }
                 }
             }
@@ -316,6 +359,7 @@ namespace SIL.Tool
             }
             return arrayCSSFile;
         }
+
         #endregion
 
 
@@ -390,6 +434,7 @@ namespace SIL.Tool
         #region GetTextDirection(string languageCode)
 
         public static string TextDirectionLanguageFile = null; //Set during testing
+
         /// <summary>
         /// Looks up the text direction for the specified language code in the appropriate .ldml file.
         /// This lookup will not work with Paratext, which does not yet use an .ldml file.
@@ -402,7 +447,8 @@ namespace SIL.Tool
             string direction = "ltr";
             try
             {
-                if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe" || TextDirectionLanguageFile != null) // is paratext
+                if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe" ||
+                    TextDirectionLanguageFile != null) // is paratext
                 {
                     string fileName = TextDirectionLanguageFile;
                     if (fileName == null)
@@ -410,7 +456,7 @@ namespace SIL.Tool
                         SettingsHelper settingsHelper = new SettingsHelper(Param.DatabaseName);
                         fileName = settingsHelper.GetLanguageFilename();
                     }
-                    foreach (string line in FileData.Get(fileName).Split(new[] { '\n' }))
+                    foreach (string line in FileData.Get(fileName).Split(new[] {'\n'}))
                     {
                         if (line.StartsWith("RTL="))
                         {
@@ -453,9 +499,11 @@ namespace SIL.Tool
             }
             return direction;
         }
+
         #endregion
 
         #region GetLanguageName(string languageCode)
+
         /// <summary>
         /// This method returns Language Name for particular Language Code
         /// </summary>
@@ -517,9 +565,11 @@ namespace SIL.Tool
             }
             return _languageName;
         }
+
         #endregion
 
         #region LeftString(string fullString, string splitString)
+
         /// <summary>
         /// Example: LeftString("Entry_Letdata", "_Letdata") returns "Entry"
         /// </summary>
@@ -539,9 +589,11 @@ namespace SIL.Tool
             }
             return result;
         }
+
         #endregion
 
         #region ReplaceCSSClassName(string cssClassName)
+
         /// <summary>
         /// Example: ReplaceCSSClassName("Entry_string1") returns "Entry_stringb"
         /// </summary>
@@ -556,7 +608,7 @@ namespace SIL.Tool
                 if (char.IsNumber(changeToChar))
                 {
                     int charValue = Convert.ToInt32(changeToChar) + 49;
-                    c = (char)charValue;
+                    c = (char) charValue;
                 }
                 else
                 {
@@ -570,6 +622,7 @@ namespace SIL.Tool
         #endregion
 
         #region PublishingSolutionsEnvironmentReset()
+
         /// <summary>
         /// Remove all files saved in All Users\AppData, 
         /// (Executing this method when these files are expected to be present may cause a crash).
@@ -580,9 +633,11 @@ namespace SIL.Tool
             string appDataDir = Common.GetAllUserPath();
             DeleteDirectory(appDataDir);
         }
+
         #endregion
 
         #region RightString(string fullString, string splitString)
+
         /// <summary>
         /// Example: RightString("Entry_Letdata_Letdata", "_") ==> "Letdata_Letdata"
         /// </summary>
@@ -998,6 +1053,7 @@ namespace SIL.Tool
         #endregion
 
         #region RightRemove(string fullString, string splitString)
+
         /// <summary>
         /// Example: RightRemove("Entry_Letdata_Letdata", "_") ==> "Entry_Letdata"
         /// </summary>
@@ -1017,9 +1073,11 @@ namespace SIL.Tool
             }
             return result;
         }
+
         #endregion
 
         #region LeftRemove(string fullString, string splitString)
+
         /// <summary>
         /// Example: RightRemove("Entry_Letdata", "_") ==> "Letdata"
         /// </summary>
@@ -1039,9 +1097,11 @@ namespace SIL.Tool
             }
             return result;
         }
+
         #endregion
 
         #region ValidateNumber(string number)
+
         /// <summary>
         /// Validate a given string value is numeric or not
         /// Valid Numbers: 2, 2.34, +34, -45.653 
@@ -1067,9 +1127,11 @@ namespace SIL.Tool
             }
             return result;
         }
+
         #endregion
 
         #region ValidateNumber(string number)
+
         /// <summary>
         /// Validate a given string value is numeric or not
         /// Valid Numbers: 34 
@@ -1095,9 +1157,11 @@ namespace SIL.Tool
             }
             return result;
         }
+
         #endregion
 
         #region ValidateAlphabets(string stringValue)
+
         /// <summary>
         /// Validate a given string is alphabets or not 
         /// </summary>
@@ -1120,9 +1184,11 @@ namespace SIL.Tool
             }
             return result;
         }
+
         #endregion
 
         #region ValidateStartsWithAlphabet(string stringValue)
+
         /// <summary>
         /// Validate a given string is Starts with alphabets or not 
         /// </summary>
@@ -1133,6 +1199,7 @@ namespace SIL.Tool
             bool result = !string.IsNullOrEmpty(stringValue.Trim());
             return result;
         }
+
         #endregion
 
         #region ConvertToInch(string attribute)
@@ -1154,11 +1221,11 @@ namespace SIL.Tool
                 string attributeUnit = attribute.Substring(counter);
                 if (attributeUnit == "cm")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 0.3937008F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*0.3937008F;
                 }
                 else if (attributeUnit == "pt")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 72F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))/72F;
                 }
             }
             catch
@@ -1167,9 +1234,11 @@ namespace SIL.Tool
             }
             return attributeValue;
         }
+
         #endregion
 
         #region UnitConverter(string inputValue, string outputUnit)
+
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Unit Conversion One Unit to another Unit
@@ -1197,44 +1266,44 @@ namespace SIL.Tool
 
                 if (attributeUnit == "pcTopt")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 12;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*12;
                 }
                 else if (attributeUnit == "pxTopt")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 0.75F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*0.75F;
                 }
                 else if (attributeUnit == "inTopt")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 72F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*72F;
                 }
                 else if (attributeUnit == "cmTopt")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 28.346456693F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*28.346456693F;
                 }
                 else if (attributeUnit == "cmToin")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 0.3937008F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*0.3937008F;
                 }
                 else if (attributeUnit == "inTocm")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 0.3937008F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))/0.3937008F;
                 }
                 else if (attributeUnit == "ptToin")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 72F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))/72F;
                 }
                 else if (attributeUnit == "ptTocm")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 28.346456693F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))/28.346456693F;
                 }
                 else if (attributeUnit == "pcToin")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 0.1666666667F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*0.1666666667F;
                 }
 
                 else if (attributeUnit == "exToem")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 2F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))/2F;
                 }
 
             }
@@ -1270,19 +1339,19 @@ namespace SIL.Tool
                 }
                 else if (attributeUnit == "pcTopt")
                 {
-                    attributeValue = (attrib * 12).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib*12).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "pxTopt")
                 {
-                    attributeValue = (attrib * 0.75F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib*0.75F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "inTopt")
                 {
-                    attributeValue = (attrib * 72F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib*72F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "cmTopt")
                 {
-                    attributeValue = (attrib * 28.346456693F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib*28.346456693F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "%Topt")
                 {
@@ -1290,42 +1359,44 @@ namespace SIL.Tool
                 }
                 else if (attributeUnit == "emTopt")
                 {
-                    attributeValue = String.Format(CultureInfo.GetCultureInfo("en-US"), "{0}{1}", (attrib * 100F), "%");
+                    attributeValue = String.Format(CultureInfo.GetCultureInfo("en-US"), "{0}{1}", (attrib*100F), "%");
                 }
                 else if (attributeUnit == "cmToin")
                 {
-                    attributeValue = (attrib * 0.3937008F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib*0.3937008F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "inTocm")
                 {
-                    attributeValue = (attrib / 0.3937008F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib/0.3937008F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "ptToin")
                 {
-                    attributeValue = (attrib / 72F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib/72F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "ptTocm")
                 {
-                    attributeValue = (attrib / 28.346456693F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib/28.346456693F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "pcToin")
                 {
-                    attributeValue = (attrib * 0.1666666667F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib*0.1666666667F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "ptTopc")
                 {
-                    attributeValue = (attrib / 12).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib/12).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "exToem")
                 {
-                    attributeValue = (attrib / 2F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib/2F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else
                 {
                     attributeValue = string.Empty;
                 }
             }
-            catch { }
+            catch
+            {
+            }
             return attributeValue;
         }
 
@@ -1350,7 +1421,7 @@ namespace SIL.Tool
                 if (parameter.Length > 0)
                 {
                     if (parameter.Trim() == "\"\'\"" || parameter.Trim() == "\" \'\"" || parameter.Trim() == "\"\' \""
-                            || parameter.Trim() == @"'" || parameter.Trim() == @" '" || parameter.Trim() == @"' ")
+                        || parameter.Trim() == @"'" || parameter.Trim() == @" '" || parameter.Trim() == @"' ")
                     {
                         return parameter.Replace("\"", "");
                     }
@@ -1388,7 +1459,9 @@ namespace SIL.Tool
                             int value = parameter[count];
 
                             //if condition added to check any escape character precede with slash
-                            if (!((value > 47 && value < 58) || (value > 64 && value < 71) || (value > 96 && value < 103)))
+                            if (
+                                !((value > 47 && value < 58) || (value > 64 && value < 71) ||
+                                  (value > 96 && value < 103)))
                             {
                                 result += parameter[count];
                                 count++;
@@ -1402,7 +1475,8 @@ namespace SIL.Tool
                             while (count < strlen)
                             {
                                 value = parameter[count];
-                                if ((value > 47 && value < 58) || (value > 64 && value < 71) || (value > 96 && value < 103))
+                                if ((value > 47 && value < 58) || (value > 64 && value < 71) ||
+                                    (value > 96 && value < 103))
                                 {
                                     unicode += parameter[count];
                                 }
@@ -1421,7 +1495,7 @@ namespace SIL.Tool
                             {
                                 // unicode convertion
                                 int decimalvalue = Convert.ToInt32(unicode, 16);
-                                var c = (char)decimalvalue;
+                                var c = (char) decimalvalue;
                                 result += c.ToString();
                             }
                         }
@@ -1450,7 +1524,9 @@ namespace SIL.Tool
                 return result;
             }
         }
+
         #region AssignValuePageUnit
+
         public static bool AssignValuePageUnit(object sender, EventArgs e)
         {
             try
@@ -1461,7 +1537,7 @@ namespace SIL.Tool
                 _units.Add("cm");
                 _units.Add("in");
 
-                var ctrl = ((Control)sender);
+                var ctrl = ((Control) sender);
                 string textValue = ConcateUnit(ctrl);
                 ctrl.Text = textValue;
                 // Page Tab
@@ -1496,12 +1572,13 @@ namespace SIL.Tool
             }
             catch (Exception ex)
             {
-                var msg = new[] { ex.Message };
+                var msg = new[] {ex.Message};
                 LocDB.Message("errInstlFile", ex.Message, msg, LocDB.MessageTypes.Error,
                               LocDB.MessageDefault.First);
             }
             return false;
         }
+
         #endregion AssignValuePageUnit
 
         /// <summary>
@@ -1544,7 +1621,8 @@ namespace SIL.Tool
                     float convertedMaxValue = UnitConverterOO(maxValue, userUnit);
                     if (userValue < convertedMinValue || userValue > convertedMaxValue)
                     {
-                        message = "Enter a value between " + convertedMinValue + userUnit + " to " + convertedMaxValue + userUnit + " inclusive.";
+                        message = "Enter a value between " + convertedMinValue + userUnit + " to " + convertedMaxValue +
+                                  userUnit + " inclusive.";
                         return message;
                     }
                 }
@@ -1575,7 +1653,7 @@ namespace SIL.Tool
             for (counter = 0; counter < inputValue.Length; counter++)
             {
                 char character = char.Parse(inputValue.Substring(counter, 1));
-                var val = (int)character;
+                var val = (int) character;
                 if (!((val >= 48 && val <= 57) || val == 43 || val == 45 || val == 46)) // + - 0 to 9 and decimal
                 {
                     break;
@@ -1584,9 +1662,11 @@ namespace SIL.Tool
             }
             return attrib;
         }
+
         #endregion
 
         #region GetLargerSmaller(StyleAttribute parentFontsizeAttribute, string type)
+
         /// <summary>
         /// Calculate the font-size: larger; and font-size: smaller;
         /// </summary>
@@ -1595,18 +1675,21 @@ namespace SIL.Tool
         /// <returns>absolute value of relavite parameter</returns>
         public static int GetLargerSmaller(float parentFont, string type)
         {
-            var parentFontSize = (int)parentFont;
+            var parentFontSize = (int) parentFont;
 
             int childFontSize = 0;
             if (type == "larger")
             {
                 // 0pt to 23pt table value
-                var numbers = new int[24] {0,
-                                             1, 2, 3, 4, 6,
-                                             8, 9, 10, 11, 12,
-                                             13, 14, 15, 16, 18,
-                                             20, 20, 22, 24, 24,
-                                             26, 27, 28 };
+                var numbers = new int[24]
+                    {
+                        0,
+                        1, 2, 3, 4, 6,
+                        8, 9, 10, 11, 12,
+                        13, 14, 15, 16, 18,
+                        20, 20, 22, 24, 24,
+                        26, 27, 28
+                    };
                 if (parentFontSize < 0)
                 {
                     childFontSize = 14;
@@ -1617,20 +1700,23 @@ namespace SIL.Tool
                 }
                 else if (parentFontSize > 23) // 150%
                 {
-                    childFontSize = (int)Math.Round(parentFontSize + parentFontSize / 2F);
+                    childFontSize = (int) Math.Round(parentFontSize + parentFontSize/2F);
                 }
             }
             else if (type == "smaller")
             {
                 // 0pt to 23pt table value
-                var numbers = new int[35] {1,
-                                             1, 1, 2, 3, 4,
-                                             5, 6, 7, 7, 8,
-                                             9, 9, 11, 12, 12,
-                                             12, 13, 13, 14, 15,
-                                             16, 16, 17, 18, 18,
-                                             19, 20, 20, 21, 21,
-                                             22, 22, 23, 23};
+                var numbers = new int[35]
+                    {
+                        1,
+                        1, 1, 2, 3, 4,
+                        5, 6, 7, 7, 8,
+                        9, 9, 11, 12, 12,
+                        12, 13, 13, 14, 15,
+                        16, 16, 17, 18, 18,
+                        19, 20, 20, 21, 21,
+                        22, 22, 23, 23
+                    };
                 if (parentFontSize < 0)
                 {
                     childFontSize = 9;
@@ -1641,7 +1727,7 @@ namespace SIL.Tool
                 }
                 else if (parentFontSize > 34) // 66%
                 {
-                    childFontSize = (int)Math.Round(parentFontSize * 0.66F);
+                    childFontSize = (int) Math.Round(parentFontSize*0.66F);
                 }
             }
             else
@@ -1650,21 +1736,25 @@ namespace SIL.Tool
             }
             return (childFontSize);
         }
+
         #endregion
 
         #region GetExportType()
+
         /// <summary>
         /// Returns the export file format
         /// </summary>
         /// <returns>Output File Formats</returns>
         public static ArrayList GetExportType()
         {
-            var exportType = new ArrayList { "OpenOffice Document", "PDF" };
+            var exportType = new ArrayList {"OpenOffice Document", "PDF"};
             return exportType;
         }
+
         #endregion
 
-        public static string GetHeaderFontName(Dictionary<string, Dictionary<string, string>> _cssProperty, string cssFileName)//TD-2682
+        public static string GetHeaderFontName(Dictionary<string, Dictionary<string, string>> _cssProperty,
+                                               string cssFileName) //TD-2682
         {
             string headerFontName = "Times New Roman";
             if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("font-family"))
@@ -1673,7 +1763,7 @@ namespace SIL.Tool
             }
             else
             {
-                headerFontName = ParaTextFontName(cssFileName);//"Charis SIL"
+                headerFontName = ParaTextFontName(cssFileName); //"Charis SIL"
                 if (headerFontName == string.Empty)
                 {
                     headerFontName = "Times New Roman";
@@ -1682,29 +1772,33 @@ namespace SIL.Tool
             return headerFontName;
         }
 
-        public static string GetHeaderFontWeight(Dictionary<string, Dictionary<string, string>> _cssProperty)//TD-2815
+        public static string GetHeaderFontWeight(Dictionary<string, Dictionary<string, string>> _cssProperty) //TD-2815
         {
             string headerFontWeight = "regular";
-            if (_cssProperty.ContainsKey("@page-top-center") && _cssProperty["@page-top-center"].ContainsKey("font-weight"))
+            if (_cssProperty.ContainsKey("@page-top-center") &&
+                _cssProperty["@page-top-center"].ContainsKey("font-weight"))
             {
                 headerFontWeight = _cssProperty["@page-top-center"]["font-weight"];
             }
-            else if (_cssProperty.ContainsKey("@page-top-right") && _cssProperty["@page-top-right"].ContainsKey("font-weight"))
+            else if (_cssProperty.ContainsKey("@page-top-right") &&
+                     _cssProperty["@page-top-right"].ContainsKey("font-weight"))
             {
                 headerFontWeight = _cssProperty["@page-top-right"]["font-weight"];
             }
-            else if (_cssProperty.ContainsKey("@page-bottom-center") && _cssProperty["@page-bottom-center"].ContainsKey("font-weight"))
+            else if (_cssProperty.ContainsKey("@page-bottom-center") &&
+                     _cssProperty["@page-bottom-center"].ContainsKey("font-weight"))
             {
                 headerFontWeight = _cssProperty["@page-bottom-center"]["font-weight"];
             }
-            else if (_cssProperty.ContainsKey("@page-bottom-right") && _cssProperty["@page-bottom-right"].ContainsKey("font-weight"))
+            else if (_cssProperty.ContainsKey("@page-bottom-right") &&
+                     _cssProperty["@page-bottom-right"].ContainsKey("font-weight"))
             {
                 headerFontWeight = _cssProperty["@page-bottom-right"]["font-weight"];
             }
             return headerFontWeight;
         }
 
-        public static string GetHeaderFontSize(Dictionary<string, Dictionary<string, string>> _cssProperty)//TD-2815
+        public static string GetHeaderFontSize(Dictionary<string, Dictionary<string, string>> _cssProperty) //TD-2815
         {
             string headerFontSize = "12";
             if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("font-size"))
@@ -1737,7 +1831,8 @@ namespace SIL.Tool
                     {
                         using (RegistryKey subkey = key.OpenSubKey(subkeyName))
                         {
-                            if (subkey.GetValue("ProductName").ToString().ToLower().IndexOf(ExecutableName.ToLower()) != -1)
+                            if (subkey.GetValue("ProductName").ToString().ToLower().IndexOf(ExecutableName.ToLower()) !=
+                                -1)
                             {
                                 return true;
                             }
@@ -1779,16 +1874,18 @@ namespace SIL.Tool
         }
 
         #region ReplaceInFile(string filePath, string searchText, string replaceText)
+
         /// <summary>
         /// Function to replace a fullString in a existing file.
         /// </summary>
         /// <param name="filePath">File path of the XHTML file</param>
         /// <param name="searchText">Text to be search</param>
         /// <param name="replaceText">Text to be replace</param>
-        static public void ReplaceInCssFile(string filePath, string searchText, string replaceText)
+        public static void ReplaceInCssFile(string filePath, string searchText, string replaceText)
         {
             if (!File.Exists(filePath)) return;
-            string tempFile = Common.PathCombine(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath) + "1.xhtml");
+            string tempFile = Common.PathCombine(Path.GetDirectoryName(filePath),
+                                                 Path.GetFileNameWithoutExtension(filePath) + "1.xhtml");
             File.Move(filePath, tempFile);
             var reader = new StreamReader(tempFile);
             string contentWriter;
@@ -1872,7 +1969,8 @@ namespace SIL.Tool
 
                     case XmlNodeType.DocumentType:
 
-                        writer.WriteDocType(reader.Name, reader.GetAttribute("PUBLIC"), reader.GetAttribute("SYSTEM"), reader.Value);
+                        writer.WriteDocType(reader.Name, reader.GetAttribute("PUBLIC"), reader.GetAttribute("SYSTEM"),
+                                            reader.Value);
 
                         break;
 
@@ -1901,6 +1999,7 @@ namespace SIL.Tool
         #endregion
 
         #region StreamReplaceInFile(string filePath, string searchText, string replaceText)
+
         /// <summary>
         /// Stream-based version of ReplaceInFile. This uses a straight find/replace rather than a Regex
         /// (which only works on strings) - if you don't need a full regex, this will keep your memory consumption
@@ -1910,7 +2009,7 @@ namespace SIL.Tool
         /// <param name="searchText"></param>
         /// <param name="replaceText"></param>
         /// <returns>true if an instance of the search string was found / replaced.</returns>
-        static public bool StreamReplaceInFile(string filePath, string searchText, string replaceText)
+        public static bool StreamReplaceInFile(string filePath, string searchText, string replaceText)
         {
             if (!File.Exists(filePath)) return false;
             bool foundString = false;
@@ -1921,13 +2020,15 @@ namespace SIL.Tool
                 {
                     File.Delete(filePath + ".tmp");
                 }
-                catch { }
+                catch
+                {
+                }
             }
             var writer = new FileStream(filePath + ".tmp", FileMode.Create);
             int next;
             while ((next = reader.ReadByte()) != -1)
             {
-                byte b = (byte)next;
+                byte b = (byte) next;
                 if (b == searchText[0]) // first char in search text?
                 {
                     // yes - searchText.Length chars into a buffer and compare them
@@ -1974,9 +2075,11 @@ namespace SIL.Tool
             }
             return foundString;
         }
+
         #endregion
 
         #region GetNewFolderName(string filePath, string folderName, string UserFileName)
+
         /// <summary>
         /// Return the New Folder Name after checking it whether its existing.
         /// </summary>
@@ -1991,11 +2094,14 @@ namespace SIL.Tool
             {
                 userFileName = PathCombine(filePath, folderName + ++counter);
             }
-            return userFileName.Substring(userFileName.LastIndexOfAny(new char[2] { Path.DirectorySeparatorChar, ':' }) + 1);
+            return
+                userFileName.Substring(userFileName.LastIndexOfAny(new char[2] {Path.DirectorySeparatorChar, ':'}) + 1);
         }
+
         #endregion
 
         #region GetNewFileName(string filePath, string file)
+
         /// <summary>
         /// Return the New File Name after checking it whether its existing.
         /// </summary>
@@ -2015,9 +2121,11 @@ namespace SIL.Tool
             }
             return preferedName;
         }
+
         #endregion
 
         #region ConvertUnicodeToChar
+
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Unicode to char conversion 
@@ -2049,6 +2157,7 @@ namespace SIL.Tool
         #endregion
 
         #region ConvertUnicodeToStrin
+
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// unicode to String Conversion 
@@ -2115,7 +2224,7 @@ namespace SIL.Tool
                     }
                     // unicode convertion
                     int decimalValue = Convert.ToInt32(unicode, 16);
-                    var ch = (char)decimalValue;
+                    var ch = (char) decimalValue;
                     result += ch.ToString();
                 }
                 else
@@ -2179,6 +2288,7 @@ namespace SIL.Tool
         #endregion
 
         #region string GetTempCopy(string name)
+
         /// <summary>
         /// Makes a copy of folder in a writable location
         /// </summary>
@@ -2195,9 +2305,11 @@ namespace SIL.Tool
             FolderTree.Copy(Common.FromRegistry(name), folder);
             return folder;
         }
+
         #endregion string GetXeTeXToolFolder()
 
         #region isRightFieldworksVersion()
+
         /// <summary>
         /// Checks that version numbers of fieldworks assemblies agree with those available at compile time
         /// </summary>
@@ -2242,11 +2354,11 @@ namespace SIL.Tool
         public static IEnumerable VersionElements()
         {
             string fieldworksVersionPath = GetFieldworksVersionPath();
-            string[] fieldworksVersions = FileData.Get(fieldworksVersionPath).Split(new[] { '\n' });
+            string[] fieldworksVersions = FileData.Get(fieldworksVersionPath).Split(new[] {'\n'});
             foreach (string fieldworksVersion in fieldworksVersions)
             {
                 if (fieldworksVersion == "") break;
-                string[] element = fieldworksVersion.Trim().Split(new[] { ',' });
+                string[] element = fieldworksVersion.Trim().Split(new[] {','});
                 yield return element;
             }
         }
@@ -2275,12 +2387,14 @@ namespace SIL.Tool
         {
             return PathCombine(GetPSApplicationPath(), "FieldworksVersions.txt");
         }
+
         #endregion isRightFieldworksVersion()
 
         #region GetPSApplicationPath()
 
         public static string ProgInstall = string.Empty;
         public static string SupportFolder = string.Empty;
+
         /// <summary>
         /// Return the Local setting Path+ "SIL\Dictionary" 
         /// </summary>
@@ -2291,9 +2405,11 @@ namespace SIL.Tool
                 ProgInstall = GetApplicationPath();
             return SupportFolder == "" ? ProgInstall : PathCombine(ProgInstall, SupportFolder);
         }
+
         #endregion
 
         #region GetXmlNodeInDesignNamespace
+
         /// <summary>
         /// Returns XML Node in the file based on the xpath
         /// XmlNode = GetXmlNode("c:\en.xml", "\\book[id = 10]")
@@ -2321,9 +2437,11 @@ namespace SIL.Tool
             }
             return null;
         }
+
         #endregion
 
         #region GetXmlNodeListInDesignNamespace
+
         /// <summary>
         /// Returns XMLNodeList 
         /// </summary>
@@ -2352,9 +2470,11 @@ namespace SIL.Tool
             }
             return returnNode;
         }
+
         #endregion
 
         #region GetLDMLPath
+
         public static string GetLDMLPath()
         {
             string path = string.Empty;
@@ -2362,33 +2482,37 @@ namespace SIL.Tool
             try
             {
                 if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyCurrentUser,
-                    "Pathway", "WritingSystemStore", out regObj))
+                                                      "Pathway", "WritingSystemStore", out regObj))
                 {
                     Common.SupportFolder = "";
-                    return (string)regObj;
+                    return (string) regObj;
                 }
                 if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
-                    "Pathway", "WritingSystemStore", out regObj))
+                                                      "Pathway", "WritingSystemStore", out regObj))
                 {
                     Common.SupportFolder = "";
-                    return (string)regObj;
+                    return (string) regObj;
                 }
                 if (IsUnixOS())
                 {
                     return Common.PathCombine("/var/lib/fieldworks", "SIL/WritingSystemStore");
                 }
                 // fall back on the special environment folder (e.g., c:/ProgramData) - this directory depends on OS
-                return Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "SIL/WritingSystemStore");
+                return Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                                          "SIL/WritingSystemStore");
             }
             catch
             {
                 // fall back on the special environment folder (e.g., c:/ProgramData) - this directory depends on OS
-                return Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "SIL/WritingSystemStore");
+                return Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                                          "SIL/WritingSystemStore");
             }
         }
+
         #endregion
 
         #region GetApplicationPath
+
         public static string GetApplicationPath()
         {
             string pathwayDir = PathwayPath.GetPathwayDir();
@@ -2404,6 +2528,7 @@ namespace SIL.Tool
         }
 
         public static string ProgBase = string.Empty;
+
         /// <summary>
         /// Calculates the path to the file based on the program directory set in the registry.
         /// </summary>
@@ -2420,7 +2545,8 @@ namespace SIL.Tool
                 {
                     if (!Testing)
                     {
-                        Debug.Fail(@"Pathway directory is not specified in the registry (HKEY_LOCAL_MACHINE/SOFTWARE/SIL/PATHWAY/PathwayDir)");
+                        Debug.Fail(
+                            @"Pathway directory is not specified in the registry (HKEY_LOCAL_MACHINE/SOFTWARE/SIL/PATHWAY/PathwayDir)");
                         return FromProg(file);
                     }
 
@@ -2442,20 +2568,26 @@ namespace SIL.Tool
                 ProgBase = Path.GetDirectoryName(Application.ExecutablePath);
             return Common.PathCombine(ProgBase, s);
         }
+
         #endregion
 
         #region GetFiledWorksPath()
+
         /// <summary>
         /// Return the Field Works Path 
         /// </summary>
         /// <returns>Field Works Path</returns>
         public static string GetFiledWorksPath()
         {
-            return DirectoryPathReplace(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"/SIL/FieldWorks/");
+            return
+                DirectoryPathReplace(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
+                                     @"/SIL/FieldWorks/");
         }
+
         #endregion
 
         #region GetFiledWorksPath Version()
+
         /// <summary>
         /// Return the Field Works Path 
         /// </summary>
@@ -2464,10 +2596,12 @@ namespace SIL.Tool
         {
             string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
             if (executablePath.Contains("FieldWorks 7"))
-                return Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"/SIL/FieldWorks 7/";
+                return Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                       @"/SIL/FieldWorks 7/";
 
             return GetFiledWorksPath();
         }
+
         #endregion
 
         public static string GetProductName()
@@ -2640,7 +2774,9 @@ namespace SIL.Tool
                         File.Delete(file);
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             string[] FolderList = Directory.GetDirectories(outputFolder);
@@ -2760,7 +2896,7 @@ namespace SIL.Tool
                         {
                             File.Delete(outputFile);
                         }
-                        // delete the Scripture.de / Dictionary.de file as well
+                            // delete the Scripture.de / Dictionary.de file as well
                         else if (outputFile.EndsWith(".de"))
                         {
                             File.Delete(outputFile);
@@ -2788,7 +2924,8 @@ namespace SIL.Tool
                 try
                 {
                     DirectoryInfo dirInfo = new DirectoryInfo(directoryPath);
-                    bool isReadOnly = ((File.GetAttributes(directoryPath) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly);
+                    bool isReadOnly = ((File.GetAttributes(directoryPath) & FileAttributes.ReadOnly) ==
+                                       FileAttributes.ReadOnly);
                     if (isReadOnly)
                     {
                         dirInfo.Attributes = FileAttributes.Normal;
@@ -2825,7 +2962,9 @@ namespace SIL.Tool
                 }
                 WaitForDirectoryToBecomeEmpty(di);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private static void WaitForDirectoryToBecomeEmpty(DirectoryInfo di)
@@ -2835,7 +2974,7 @@ namespace SIL.Tool
                 if (di.GetFileSystemInfos().Length == 0)
                     return;
                 Console.WriteLine(di.FullName + i);
-                System.Threading.Thread.Sleep(50 * i);
+                System.Threading.Thread.Sleep(50*i);
             }
         }
 
@@ -2853,7 +2992,9 @@ namespace SIL.Tool
                     DirectoryInfo di = new DirectoryInfo(directory);
                     Common.CleanDirectory(di);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
@@ -2881,6 +3022,7 @@ namespace SIL.Tool
         }
 
         #region MakeSingleCSS(string fullPath)
+
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// This method collects css files names into ArrayList based on base CSS File.
@@ -2971,17 +3113,22 @@ namespace SIL.Tool
                     removeMirrorPage = true;
                 }
                 if (removeMirrorPage)
-                {//1893
-                    if (cssFile.IndexOf("Running_Head_Mirrored") >= 0 || cssFile.IndexOf("PageNumber_TopInside") >= 0 || cssFile.IndexOf("PageNumber_TopOutside") >= 0
-                        || cssFile.IndexOf("PageNumber_TopCenter_Mirrored") >= 0 || cssFile.IndexOf("PageNumber_BottomInside") >= 0 ||
-                        cssFile.IndexOf("PageNumber_BottomOutside") >= 0 || cssFile.IndexOf("PageNumber_BottomCenter_Mirrored") >= 0)
+                {
+//1893
+                    if (cssFile.IndexOf("Running_Head_Mirrored") >= 0 || cssFile.IndexOf("PageNumber_TopInside") >= 0 ||
+                        cssFile.IndexOf("PageNumber_TopOutside") >= 0
+                        || cssFile.IndexOf("PageNumber_TopCenter_Mirrored") >= 0 ||
+                        cssFile.IndexOf("PageNumber_BottomInside") >= 0 ||
+                        cssFile.IndexOf("PageNumber_BottomOutside") >= 0 ||
+                        cssFile.IndexOf("PageNumber_BottomCenter_Mirrored") >= 0)
                     {
                         arrayCssFile.RemoveAt(i);
                     }
                 }
 
                 ////For Remove Every Page TD-3307
-                if (cssFile.IndexOf("Running_Head_Mirrored_Chapter") >= 0 || cssFile.IndexOf("PageNumber_TopInside") >= 0 || cssFile.IndexOf("PageNumber_TopOutside") >= 0)
+                if (cssFile.IndexOf("Running_Head_Mirrored_Chapter") >= 0 ||
+                    cssFile.IndexOf("PageNumber_TopInside") >= 0 || cssFile.IndexOf("PageNumber_TopOutside") >= 0)
                 {
                     removeEveryPage = true;
                 }
@@ -3047,7 +3194,8 @@ namespace SIL.Tool
             }
             catch (UnauthorizedAccessException)
             {
-                MessageBox.Show("Sorry! You might not have permission to use this resource.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sorry! You might not have permission to use this resource.", Application.ProductName,
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 returnValue = false;
             }
             catch (Exception ex)
@@ -3076,19 +3224,21 @@ namespace SIL.Tool
             }
             return result.Trim();
         }
+
         #endregion
 
+        public enum CalcType
+        {
+            Height,
+            Width
+        };
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// To find the width of the image.
-        /// 
-        /// <list> 
-        /// </list>
         /// </summary>
-        /// <param> </param>
         /// <returns> </returns>
         /// -------------------------------------------------------------------------------------------
-        public static string CalcDimension(string fromPath, ref string imgDimension, char Type)
+        public static string CalcDimension(string fromPath, ref string imgDimension, CalcType calcType)
         {
             double retValue = 0.0;
             try
@@ -3100,7 +3250,7 @@ namespace SIL.Tool
                     double width = fullimage.Width;
                     fullimage.Dispose();
 
-                    if (Type == 'W') // Find width
+                    if (calcType == CalcType.Width)
                     {
                         retValue = width / height * double.Parse(imgDimension, CultureInfo.GetCultureInfo("en-US"));
                         if (ColumnWidth > 0 && retValue > ColumnWidth)
@@ -3108,7 +3258,7 @@ namespace SIL.Tool
                             retValue = ColumnWidth * .9;
                         }
                     }
-                    else if (Type == 'H') // Find height
+                    else if (calcType == CalcType.Height)
                     {
                         int counter;
                         string retValue1 = GetNumericChar(imgDimension, out counter);
@@ -3853,6 +4003,7 @@ namespace SIL.Tool
         /// </summary>
         /// <param name="xhtmlFileName"></param>
         /// <param name="creatorTool"></param>
+        /// <param name="inputType">dictionary or scripture - written to control file</param>
         /// <returns></returns>
         public static string InsertCopyrightInPdf(string xhtmlFileName, string creatorTool, string inputType)
         {
@@ -4524,9 +4675,10 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// 
+        /// Determine picture width based on page with and number of columns
         /// </summary>
-        /// <param name="cssClass"></param>
+        /// <param name="cssClass">structure containng css information</param>
+        /// <param name="inputType">dictionary or scripture - determines where to look for number of columns in css</param>
         /// <returns></returns>
         public static int GetPictureWidth(Dictionary<string, Dictionary<string, string>> cssClass, string inputType)
         {

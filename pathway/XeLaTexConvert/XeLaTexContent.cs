@@ -1053,25 +1053,25 @@ namespace SIL.PublishingSolution
                 {
                     if (rectWidth == "0") //H=72 W=0
                     {
-                        rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
+                        rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
                     }
 
                 }
                 else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72 
                 {
-                    rectHeight = Common.CalcDimension(fromPath, ref rectWidth, 'H');
+                    rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
                 }
                 else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0, 
                 {
 
                     rectWidth = Convert.ToString(Common.ColumnWidth * .9);
-                    rectHeight = Common.CalcDimension(fromPath, ref rectWidth, 'H');
+                    rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
                 }
                 else
                 {
                     //Default value is 72 
                     rectHeight = defaultHeight.ToString(); // fixed the width as 1 in = 72pt;
-                    rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
+                    rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
                 }
                 if (rectWidth == "0")
                 {

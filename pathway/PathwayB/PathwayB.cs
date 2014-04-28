@@ -471,8 +471,8 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Converts USFM to USX.
         /// </summary>
+        /// <param name="projInfo">contains path to Paratext project</param>
         /// <param name="files">List of files to convert. This can be a single file or wildcard (*).</param>
-        /// <returns></returns>
         private static void UsfmToXhtml(PublicationInformation projInfo, List<string> files)
         {
             var docs = new List<XmlDocument>();
