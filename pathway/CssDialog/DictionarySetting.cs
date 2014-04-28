@@ -180,7 +180,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// GetDefault - Get default value from css
         /// </summary>
-        /// <param name="s_xpath">string representation of xpath divided by slashes</param>
+        /// <param name="xPath">string representation of xpath divided by slashes</param>
         /// <returns>array of values in css</returns>
         public string[] GetDefault(string xPath)
         {
@@ -2969,11 +2969,9 @@ namespace SIL.PublishingSolution
                     return;
                 }
                 string selectedItem = string.Empty;
-                int index = 0;
                 foreach (ListViewItem lvwSelectedItem in lvwDocumentSection.SelectedItems)
                 {
                     selectedItem = lvwSelectedItem.Text.Trim();
-                    index = lvwSelectedItem.Index;
                 }
 
                 lvwPreparationSteps.Items.Clear();

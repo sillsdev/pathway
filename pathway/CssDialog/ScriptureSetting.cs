@@ -2157,7 +2157,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Reads the SectionTypes.xml and sets the xml type
         /// </summary>
-        /// <param name="Section"></param>
+        /// <param name="section"></param>
         private void ReadPreparationTabSteps(string section)
         {
             try
@@ -2531,8 +2531,8 @@ namespace SIL.PublishingSolution
         /// Adds the FileName to Solution Explorer 
         /// Based on the prviously opened xmlDocument File.
         /// </summary>
-        /// <param name="filename">File Name</param>
-        /// <param name="m_projXml">Project XML</param>
+        /// <param name="fileName">File Name</param>
+        /// <param name="projXml">Project XML</param>
         /// <returns>Nothing</returns>
         public void AddFileToSolutinExplorer(string fileName, XmlDocument projXml)
         {
@@ -2586,7 +2586,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// GetDefault - Get default value from css
         /// </summary>
-        /// <param name="s_xpath">string representation of xpath divided by slashes</param>
+        /// <param name="xPath">string representation of xpath divided by slashes</param>
         /// <returns>array of values in css</returns>
         private string[] GetDefault(string xPath)
         {

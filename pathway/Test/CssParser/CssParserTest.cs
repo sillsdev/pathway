@@ -1228,7 +1228,7 @@ namespace Test.CssParserTest
         }
 
         [Test]
-        /// To remove "_" from Classnames ( letter_L2 == letterL2)
+        // To remove "_" from Classnames ( letter_L2 == letterL2)
         public void BuildTreeTest11()
         {
             _methodName = "BuildTreeTest11 - RemoveUnderscore ";
@@ -1240,7 +1240,7 @@ namespace Test.CssParserTest
         }
 
         [Test]
-        /// To split MultiLine syntax into Individual (x:before,y:before,z:before{content:"Test"})
+        // To split MultiLine syntax into Individual (x:before,y:before,z:before{content:"Test"})
         public void BuildTreeTest12()
         {
             _methodName = "BuildTreeTest12 - MultiLineSyntax ";
@@ -1252,7 +1252,7 @@ namespace Test.CssParserTest
         }
 
         [Test]
-        /// Handled new case in Oxes_test.CSS for TD-244
+        // Handled new case in Oxes_test.CSS for TD-244
         public void BuildTreeTest13()
         {
             _methodName = "BuildTreeTest13 - OxesProperty ";

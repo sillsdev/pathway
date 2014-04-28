@@ -1938,7 +1938,7 @@ namespace SIL.PublishingSolution
         {}
 
         /// <summary>
-        /// Collects <Table> information
+        /// Collects Table information
         /// </summary>
         private void Table()
         {
@@ -1963,7 +1963,7 @@ namespace SIL.PublishingSolution
 
 
         /// <summary>
-        /// Writes <Table> information
+        /// Writes Table information
         /// </summary>
         private void WriteTable()
         {
@@ -3471,7 +3471,6 @@ namespace SIL.PublishingSolution
         /// Read XHTML content
         /// </summary>
         /// <param name="filePath">File path of the XHTML file</param>
-        /// <param name="searchText">Text to be search</param>
         public static string ReadXHTMLFirstData(string filePath)
         {
             XmlTextReader reader = Common.DeclareXmlTextReader(filePath, true);

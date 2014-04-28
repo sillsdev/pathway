@@ -1886,7 +1886,7 @@ namespace SIL.Tool
 
 
         /// <summary>
-        /// Modify <body> tag as <body xml:space="preserve">
+        /// Modify body tag as body xml:space="preserve"
         /// </summary>
         public string PreserveSpace_temp()
         {
@@ -1921,7 +1921,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// Modify <body> tag as <body xml:space="preserve">
+        /// Modify body tag as body xml:space="preserve"
         /// </summary>
         public string RewriteXhtml()
         {
@@ -2017,8 +2017,8 @@ namespace SIL.Tool
 
 
         /// <summary>
-        /// 1. Modify <html  xmlns="http://www.w3.org/1999/xhtml"> tag as <html>
-        /// 2. Modify <body> tag as <body xml:space="preserve">
+        /// 1. Modify html  xmlns="http://www.w3.org/1999/xhtml" tag as html
+        /// 2. Modify body tag as body xml:space="preserve"
         /// </summary>
         public string PreserveSpace()
         {

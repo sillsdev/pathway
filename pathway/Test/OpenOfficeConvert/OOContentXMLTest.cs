@@ -1450,7 +1450,7 @@ namespace Test.OpenOfficeConvert
 
 
             ////Note - The Styles will be created while processing xhtml(content.xml)
-            /// //Commented because of ldml files.
+            ////Commented because of ldml files.
             ////Style Test - Second
             //_validate = new ValidateXMLFile(styleOutput);
             //_validate.ClassName = "span_.ggo-Telu-IN_TitleMain_scrBook_scrBody";
@@ -2620,7 +2620,7 @@ namespace Test.OpenOfficeConvert
             const string file = "PageTest";
             _index = 1;
             string styleOutput = GetStyleOutput(file);
-            _index = 0; /// reset
+            _index = 0; // reset
 
             string xpath = "//office:automatic-styles";
             _validate = new ValidateXMLFile(styleOutput);
@@ -2733,7 +2733,7 @@ namespace Test.OpenOfficeConvert
             const string file = "PageTest";
             _index = 4;
             string styleOutput = GetStyleOutput(file);
-            _index = 0; /// reset
+            _index = 0; // reset
 
             string xpath = "//office:automatic-styles";
             _validate = new ValidateXMLFile(styleOutput);
@@ -2774,7 +2774,7 @@ namespace Test.OpenOfficeConvert
             const string file = "PageTest";
             _index = 5;
             string styleOutput = GetStyleOutput(file);
-            _index = 0; /// reset
+            _index = 0; // reset
 
             string xpath = "//office:automatic-styles";
             _validate = new ValidateXMLFile(styleOutput);
@@ -2815,7 +2815,7 @@ namespace Test.OpenOfficeConvert
             const string file = "PageTest";
             _index = 6;
             string styleOutput = GetStyleOutput(file);
-            _index = 0; /// reset
+            _index = 0; // reset
 
             string xpath = "//office:automatic-styles";
             _validate = new ValidateXMLFile(styleOutput);
@@ -2856,7 +2856,7 @@ namespace Test.OpenOfficeConvert
             const string file = "PageTest";
             _index = 7;
             string styleOutput = GetStyleOutput(file);
-            _index = 0; /// reset
+            _index = 0; // reset
 
             string xpath = "//office:automatic-styles";
             _validate = new ValidateXMLFile(styleOutput);
@@ -2898,7 +2898,7 @@ namespace Test.OpenOfficeConvert
             const string file = "PageTest";
             _index = 8;
             string styleOutput = GetStyleOutput(file);
-            _index = 0; /// reset
+            _index = 0; // reset
 
             string xpath = "//office:automatic-styles";
             _validate = new ValidateXMLFile(styleOutput);

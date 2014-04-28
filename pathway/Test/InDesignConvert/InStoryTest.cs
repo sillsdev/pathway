@@ -1634,7 +1634,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        /// TD-1967 - TD-1968 - DropCaps with No of Digits Test
+        // TD-1967 - TD-1968 - DropCaps with No of Digits Test
         public void DropCaps_Digits()
         {
             _storyXML = new InStory();
@@ -1708,7 +1708,6 @@ namespace Test.InDesignConvert
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            ///
             _storyXML = new InStory();
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case2.css");
             ExportProcess();

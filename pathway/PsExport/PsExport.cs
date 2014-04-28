@@ -387,7 +387,6 @@ namespace SIL.PublishingSolution
         /// /// <param name="lexiconCSS">main css file with style info</param>
         /// <param name="revFull">reversal content</param>
         /// <param name="revCSS">rev CSS file with style info</param>
-        /// <param name="gramFull">grammar content</param>
         public void DeExport(string lexiconFull, string lexiconCSS, string revFull, string revCSS)
         {
             var projInfo = new PublicationInformation();

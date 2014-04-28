@@ -331,11 +331,6 @@ namespace SIL.PublishingSolution
             return result;
         }
  
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="targetPath"></param>
         private void StartElement()
         {
             if (!IsEmptyElement)

@@ -249,6 +249,7 @@ namespace SIL.Tool
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// This method collects css files names into ArrayList based on base CSS File.
+        /// </summary>
         /// <param name="cssFileWithPath">Its gets the file path of the CSS File</param>
         /// <returns>ArrayList contains CSS filenames which are used</returns>
         /// -------------------------------------------------------------------------------------------
@@ -1172,7 +1173,8 @@ namespace SIL.Tool
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Unit Conversion One Unit to another Unit
-        /// <example UnitConverter("12px", "pt") => 8pt
+        /// example UnitConverter("12px", "pt") => 8pt
+        /// </summary>
         /// <param name="inputValue">User input value</param>
         /// <param name="outputUnit">Output Unit</param>
         /// <returns>Converted value From User input to output Unit</returns>
@@ -1801,7 +1803,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// Modify <body> tag as <body xml:space="preserve">
+        /// Modify body tag as body xml:space="preserve"
         /// </summary>
         public static string ReplaceInXhtmlFile(string filePath)
         {
@@ -2019,11 +2021,8 @@ namespace SIL.Tool
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Unicode to char conversion 
-        /// <summary>
-        /// <list> 
-        /// </list>
         /// </summary>
-        /// <param name="parameter">Example: 0041, (U+0041 is A)</param>
+        /// <param name="unicodeString">Example: 0041, (U+0041 is A)</param>
         /// <returns>A</returns>
         /// -------------------------------------------------------------------------------------------
         public static string ConvertUnicodeToChar(string unicodeString)
@@ -2053,9 +2052,6 @@ namespace SIL.Tool
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// unicode to String Conversion 
-        /// <summary>
-        /// <list> 
-        /// </list>
         /// </summary>
         /// <param name="parameter">String</param>
         /// <returns>unicode Character</returns>

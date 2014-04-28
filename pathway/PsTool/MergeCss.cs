@@ -128,7 +128,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Read a css file into the temporary file
         /// </summary>
-        /// <param name="name">name of css file to read</param>
+        /// <param name="cssFileName">name of css file to read</param>
         /// <param name="sw">output stream to write contents</param>
         public void ImportFile(string cssFileName, TextWriter sw)
         {
@@ -157,7 +157,7 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// This method collects css files names into ArrayList based on base CSS File.
-        /// <param name="cssFileWithPath">Its gets the file path of the CSS File</param>
+        /// </summary>
         /// <returns>ArrayList contains CSS filenames which are used</returns>
         /// -------------------------------------------------------------------------------------------
         public ArrayList GetCssNameList(string name, ArrayList arrayCssFile)

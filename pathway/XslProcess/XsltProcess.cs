@@ -35,7 +35,6 @@ namespace PSXslProcess
         /// <param name="inputFile">input file</param>
         /// <param name="xsltFile">xslt file name. It is assumed to be in Dictionary Express folder</param>
         /// <param name="ext">new extension</param>
-        /// <param name="myParams">pass a dictionary of parameters and values</param>
         /// <param name="PsAppPath"> </param>
         /// <returns>results or error message</returns>
         public string XsltTransform(string inputFile, string xsltFile, string ext, string PsAppPath)

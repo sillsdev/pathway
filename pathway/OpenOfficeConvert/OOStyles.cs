@@ -2539,12 +2539,12 @@ namespace SIL.PublishingSolution
 
             #region STANDARD CODE PART
 
-            ///STANDARD CODE PART
+            //STANDARD CODE PART
             _writer.WriteStartElement("style:master-page");
             _writer.WriteAttributeString("style:name", "Standard");
             _writer.WriteAttributeString("style:page-layout-name", "pm1");
             _writer.WriteEndElement();
-            ///STANDARD CODE PART ENDS 
+            //STANDARD CODE PART ENDS 
 
             #endregion
 

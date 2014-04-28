@@ -631,6 +631,7 @@ namespace Test.PsTool
             Assert.AreEqual(expected, actual);
         }
 
+        ///<summary>
         ///A test for UnitConverterOO // TODO - Should be changed to UnitConverter
         ///</summary>
 
@@ -913,6 +914,7 @@ namespace Test.PsTool
        #endregion
 
         #region PathCombine
+        ///<summary>
         ///A test for PathCombine
         ///</summary>
         [Test]

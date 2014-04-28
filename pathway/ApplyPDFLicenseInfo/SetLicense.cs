@@ -160,7 +160,7 @@ namespace ApplyPDFLicenseInfo
                         case 6:
                             if (osInfo.Version.Minor == 1)
                                 return "Windows7";
-                            break;
+                            return "Windows8";
                     }
                     break;
 

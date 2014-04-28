@@ -829,7 +829,6 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// now go check to see if we're working on scripture or dictionary data
         /// </summary>
-        /// <param name="xhtmlFileName">File name to parse</param>
         private void FindInputType(XmlTextReader _reader)
         {
             if (_isInputTypeFound)

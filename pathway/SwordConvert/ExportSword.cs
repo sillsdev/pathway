@@ -328,7 +328,6 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Uses Sword Output Execute Process
         /// </summary>
-        /// <param name="Sword Output"></param>
         protected void SwordOutputBuildProcess(string processFolder, string swordOutputPath, string[] osisFilesList, string projectPath)
         {
             string Creator = "osis2mod";

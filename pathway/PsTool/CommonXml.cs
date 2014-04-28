@@ -225,7 +225,7 @@ namespace SIL.Tool
         /// Get MetaData information from DictionaryStyleSettings.xml/ScriptureStyleSettings.xml
         /// </summary>
         /// <param name="_projectInputType">Dictionary / Scripture</param>
-        /// <param name="path"></param>
+        /// <param name="metaDataFull"></param>
         /// <returns>The metaDataList information</returns>
         public static Dictionary<string, string> GetMetaData(string _projectInputType, string metaDataFull)
         {
