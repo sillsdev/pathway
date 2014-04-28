@@ -1233,7 +1233,7 @@ namespace SIL.Tool
             this.LoadProjectFile(projectFile);
             XmlNode explorer = GetSolutionExplorerNode();
             XmlNode folderNode = _DeXml.CreateNode("element", "dummy", "");
-            XmlNode fileNode = _DeXml.CreateNode("element", "dummy", ""); ;
+            XmlNode fileNode = _DeXml.CreateNode("element", "dummy", "");
             XmlNode allType = _DeXml.CreateNode("element", "dummy", "");
             int count = explorer.ChildNodes.Count;
             for (int i = 0; i < count; i++)

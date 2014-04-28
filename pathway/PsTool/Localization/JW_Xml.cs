@@ -603,7 +603,7 @@ namespace JWTools
 			if (sMarker.Length == 0)
 				throw new Exception("Empty marker");
 			if (sMarker.Length == 1 && sMarker[0] == '\\')
-				throw new Exception("Marker is only a backslash.");;
+				throw new Exception("Marker is only a backslash.");
 
 			// Make sure the marker begins with a backslash
 			if (sMarker[0] != '\\')

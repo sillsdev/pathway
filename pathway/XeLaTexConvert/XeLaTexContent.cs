@@ -1291,7 +1291,7 @@ namespace SIL.PublishingSolution
         {
             if (_allParagraph.Count > 0)
             {
-                string[] splitedClassName = _allParagraph.ToArray(); ; // _allStyle.ToArray();
+                string[] splitedClassName = _allParagraph.ToArray(); // _allStyle.ToArray();
 
                 if (splitedClassName.Length > 0)
                 {
@@ -1437,7 +1437,7 @@ namespace SIL.PublishingSolution
         {
             string getStyleName = StackPeek(_allStyle);
 
-            string paraStyle = _childName.Replace("_body", ""); ;
+            string paraStyle = _childName.Replace("_body", "");
             string childClass = Common.LeftString(paraStyle, "_");
             //string directionStart1 = string.Empty;
             //string directionEnd1 = string.Empty;

@@ -90,7 +90,7 @@ namespace SIL.PublishingSolution
             {
                 if (LsTasks.Items.Count >= 1)
                 {
-                    LsTasks.SelectedIndex = LsTasks.Items.Count - 1; ;
+                    LsTasks.SelectedIndex = LsTasks.Items.Count - 1;
                 }
                 else
                 {
@@ -109,7 +109,7 @@ namespace SIL.PublishingSolution
             {
                 if (LsStyles.Items.Count >= 1)
                 {
-                    LsStyles.SelectedIndex = LsStyles.Items.Count - 1; ;
+                    LsStyles.SelectedIndex = LsStyles.Items.Count - 1;
                 }
                 else
                 {

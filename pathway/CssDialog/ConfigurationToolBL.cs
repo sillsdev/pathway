@@ -724,7 +724,7 @@ namespace SIL.PublishingSolution
 
         protected void AddNewRow()
         {
-            DataRow row = DataSetForGrid.Tables["Styles"].NewRow(); ;
+            DataRow row = DataSetForGrid.Tables["Styles"].NewRow();
             DataSetForGrid.Tables["Styles"].Rows.Add(row);
             cTool.StylesGrid.Refresh();
             SelectRow(cTool.StylesGrid, "");
@@ -2589,7 +2589,7 @@ namespace SIL.PublishingSolution
 
         public void PopulateFeatureLists(TreeView TvFeatures)
         {
-            string defaultSheet = Param.DefaultValue.ContainsKey(Param.LayoutSelected) ? Param.DefaultValue[Param.LayoutSelected] : string.Empty; ;
+            string defaultSheet = Param.DefaultValue.ContainsKey(Param.LayoutSelected) ? Param.DefaultValue[Param.LayoutSelected] : string.Empty;
             if (defaultSheet.Length == 0) return;
             var featureSheet = new FeatureSheet(Param.StylePath(defaultSheet));
             featureSheet.ReadToEnd();

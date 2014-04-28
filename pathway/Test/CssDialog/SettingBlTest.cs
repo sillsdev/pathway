@@ -383,7 +383,7 @@ namespace Test.CssDialog
         public void GetNewFileNameTest1()
         {
             _methodName = "GetNewFileNameTest1";
-            string fileName = Common.PathCombine(_inputBasePath, "GetNewFileNameTest1.css"); ;
+            string fileName = Common.PathCombine(_inputBasePath, "GetNewFileNameTest1.css");
             const string suffix = "job";
             string path = _expectBasePath;
             const string onChange = "onsave";

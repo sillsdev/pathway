@@ -557,7 +557,7 @@ namespace SIL.PublishingSolution
                 //To get Image details
                 int xx = GCD(width, height);
                 string xxw = string.Format("{0}:{1}", width/xx, height/xx);
-;
+
                 string imageFloatLeftRightOrCenter = string.Empty;
                 string anchorPoint = string.Empty;
                 string horizontalAlignment = string.Empty;

@@ -84,8 +84,6 @@ namespace ApplyPDFLicenseInfo
 
         private static string ProcessLicensePdf(string pdfFileName, string executePath)
         {
-            string getFileName;
-            bool isUnix = false;
             string[] pdfFiles = Directory.GetFiles(executePath, "*.pdf");
             string getCopyrightPdfFileName;
             if (pdfFiles.Length > 0)
@@ -94,10 +92,10 @@ namespace ApplyPDFLicenseInfo
             }
             if (pdfFileName != string.Empty || pdfFileName != null)
             {
-                getFileName = Path.GetFileName(pdfFileName);
+                var getFileName = Path.GetFileName(pdfFileName);
                 if (File.Exists(pdfFileName))
                 {
-                    isUnix = SetLicense.UnixVersionCheck();
+                    var isUnix = SetLicense.UnixVersionCheck();
 
                     if (isUnix)
                     {

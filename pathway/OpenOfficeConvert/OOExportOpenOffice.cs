@@ -407,7 +407,7 @@ namespace SIL.PublishingSolution
                         string attString = tempNodeSearch.ChildNodes[i].Attributes[j].Name.ToString();
                         if (attString == "Name")
                         {
-                            attName = tempNodeSearch.ChildNodes[i].Attributes[j].Value.ToString(); ;
+                            attName = tempNodeSearch.ChildNodes[i].Attributes[j].Value.ToString();
                         }
                         else if (attString == "Value")
                         {
@@ -431,7 +431,7 @@ namespace SIL.PublishingSolution
                                     string attChildString = childNodes.ChildNodes[ii].Attributes[jj].Name.ToString();
                                     if (attChildString == "Name")
                                     {
-                                        attChildName = childNodes.ChildNodes[ii].Attributes[jj].Value.ToString(); ;
+                                        attChildName = childNodes.ChildNodes[ii].Attributes[jj].Value.ToString();
                                     }
                                     else if (attChildString == "Value")
                                     {

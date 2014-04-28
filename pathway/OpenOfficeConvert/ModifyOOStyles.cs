@@ -394,7 +394,7 @@ namespace SIL.PublishingSolution
                     node.AppendChild(paraNode);
                 }
 
-                _nameElement = (XmlElement)paraNode; ;
+                _nameElement = (XmlElement)paraNode;
                 foreach (KeyValuePair<string, string> para in _paragraphProperty)
                 {
                     string[] property = para.Key.Split(':');
