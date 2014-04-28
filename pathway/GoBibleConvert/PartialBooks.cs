@@ -37,6 +37,7 @@ namespace SIL.PublishingSolution
                 var output = new StringBuilder();
                 var data = input.ReadToEnd();
                 input.Close();
+                var changed = false;
                 var p = 0;
                 var nextCh = 1;
                 foreach (Match match in ChPat.Matches(data))
@@ -44,6 +45,7 @@ namespace SIL.PublishingSolution
                     output.Append(data.Substring(p, match.Index - p));
                     p = match.Index;
                     var c = int.Parse(match.Groups[1].Value);
+                    changed |= (nextCh < c);
                     while (nextCh < c)
                     {
                         output.Append(string.Format(EmptyCh, nextCh, EmptyContent));
@@ -55,12 +57,14 @@ namespace SIL.PublishingSolution
                     if (data.Substring(p, 3) == "\\c ")
                     {
                         output.Append(EmptyContent);
+                        changed = true;
                     }
                     else
                     {
-                        AddEmptyVerses(data, p, output);
+                        changed |= AddEmptyVerses(data, p, output);
                     }
                 }
+                if (!changed) continue;
                 output.Append(data.Substring(p, data.Length - p));
                 var writer = new StreamWriter(fileInfo.FullName, DoNotAppend, Utf8NoBom);
                 writer.Write(output.ToString());
@@ -68,19 +72,22 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static void AddEmptyVerses(string data, int p, StringBuilder output)
+        private static bool AddEmptyVerses(string data, int p, StringBuilder output)
         {
+            var changed = false;
             var vrsMatch = VrsPat.Match(data.Substring(p));
             if (vrsMatch.Success)
             {
                 var v = int.Parse(vrsMatch.Groups[1].Value);
                 var nextVrs = 1;
+                changed |= (nextVrs < v);
                 while (nextVrs < v)
                 {
                     output.Append(string.Format(EmptyVrs, nextVrs));
                     nextVrs += 1;
                 }
             }
+            return changed;
         }
     }
 }

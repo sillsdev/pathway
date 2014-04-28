@@ -41,7 +41,7 @@ namespace Test.GoBibleConvert
             string outputFullName = _testFiles.SubOutput("SFM", fileName);
             File.Copy(inputFullName, outputFullName);
             PartialBooks.AddChapters(_testFiles.Output("SFM"));
-            FileAssert.AreEqual(_testFiles.Expected(fileName), outputFullName);
+            TextFileAssert.AreEqual(_testFiles.Expected(fileName), outputFullName);
         }
     }
 }
