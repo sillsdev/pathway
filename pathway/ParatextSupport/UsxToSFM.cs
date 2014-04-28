@@ -486,8 +486,8 @@ namespace SIL.PublishingSolution
 
         /// <summary>
         /// Collect Figure Tag Information
-        /// <figure style="fig" desc="Map of Israel and Moab during the time of Naomi and Ruth"
-        /// file="Ruth-CS4_BW_ver2.pdf" size="col" loc="" copy="" ref="RUT 1.0">
+        /// figure style="fig" desc="Map of Israel and Moab during the time of Naomi and Ruth"
+        /// file="Ruth-CS4_BW_ver2.pdf" size="col" loc="" copy="" ref="RUT 1.0"
         /// </summary>
         private void GetFigure()
         {

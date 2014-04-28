@@ -22,7 +22,7 @@ using SIL.Tool.Localization;
 
 namespace SIL.PublishingSolution
 {
-    /// <summary
+    /// <summary>
     /// Popup Form used in Dictionary Settings.
     /// </summary>
     public partial class PopupForm : Form

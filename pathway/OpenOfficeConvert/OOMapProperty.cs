@@ -405,8 +405,8 @@ namespace SIL.PublishingSolution
 
         /// <summary>
         /// Superscript and Subscript
-        /// make 6pt to 9pt (1.5 times) if <10pt
-        /// make 100% to 150% (1.5 times) if <=100%
+        /// make 6pt to 9pt (1.5 times) if greater than 10pt
+        /// make 100% to 150% (1.5 times) if less than or equal to 100%
         /// </summary>
         public void SuperSub()
         {

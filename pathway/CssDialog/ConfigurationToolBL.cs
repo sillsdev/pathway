@@ -1042,7 +1042,7 @@ namespace SIL.PublishingSolution
         /// transfers grid row values to InfoPanel
         ///
         /// 
-        /// </summary
+        /// </summary>
         protected void ShowInfoValue()
         {
             if (!(_screenMode == ScreenMode.View || _screenMode == ScreenMode.Edit)) return;

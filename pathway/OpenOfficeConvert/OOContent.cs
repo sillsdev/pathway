@@ -1938,7 +1938,7 @@ namespace SIL.PublishingSolution
         {}
 
         /// <summary>
-        /// Collects <Table> information
+        /// Collects Table information
         /// </summary>
         private void Table()
         {
@@ -1963,7 +1963,7 @@ namespace SIL.PublishingSolution
 
 
         /// <summary>
-        /// Writes <Table> information
+        /// Writes Table information
         /// </summary>
         private void WriteTable()
         {

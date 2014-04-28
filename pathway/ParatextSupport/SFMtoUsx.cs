@@ -199,7 +199,7 @@ namespace SIL.PublishingSolution
 
 
         /// <summary>
-        /// input:  <verse number="1" style="v" />abc </verse>
+        /// input:  <verse number="1" style="v">abc </verse>
         /// output: \v 1 abc
         /// </summary>
         private void Verse(string style, string content)

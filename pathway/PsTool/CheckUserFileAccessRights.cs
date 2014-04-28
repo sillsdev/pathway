@@ -15,9 +15,6 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security;
 using System.Security.AccessControl;
 using System.Security.Principal;
 
@@ -121,38 +118,36 @@ namespace SIL.Tool
               _allowWriteExtendedAttributes;
         }
 
-        /// <span class="code-SummaryComment"><summary></span>
+        /// <summary>
         /// Simple accessor
-        /// <span class="code-SummaryComment"></summary></span>
-        /// <span class="code-SummaryComment"><returns></returns></span>
+        /// </summary>
         public System.Security.Principal.WindowsIdentity getWindowsIdentity()
         {
             return _principal;
         }
-        /// <span class="code-SummaryComment"><summary></span>
+        /// <summary>
         /// Simple accessor
-        /// <span class="code-SummaryComment"></summary></span>
-        /// <span class="code-SummaryComment"><returns></returns></span>
+        /// </summary>
         public String getPath()
         {
             return _path;
         }
 
-        /// <span class="code-SummaryComment"><summary></span>
+        /// <summary>
         /// Convenience constructor assumes the current user
-        /// <span class="code-SummaryComment"></summary></span>
-        /// <span class="code-SummaryComment"><param name="path"></param></span>
+        /// </summary>
+        /// <param name="path"></param>
         public CheckUserFileAccessRights(string path) :
             this(path, System.Security.Principal.WindowsIdentity.GetCurrent()) { }
 
 
-        /// <span class="code-SummaryComment"><summary></span>
+        /// <summary>
         /// Supply the path to the file or directory and a user or group. 
         /// Access checks are done
         /// during instantiation to ensure we always have a valid object
-        /// <span class="code-SummaryComment"></summary></span>
-        /// <span class="code-SummaryComment"><param name="path"></param></span>
-        /// <span class="code-SummaryComment"><param name="principal"></param></span>
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="principal"></param>
         public CheckUserFileAccessRights(string path,
             System.Security.Principal.WindowsIdentity principal)
         {
@@ -443,12 +438,12 @@ namespace SIL.Tool
             _denyWriteExtendedAttributes = false;
         }
 
-        /// <span class="code-SummaryComment"><summary></span>
+        /// <summary>
         /// Simply displays all allowed rights
         /// 
         /// Useful if say you want to test for write access and find
         /// it is false;
-        /// <span class="code-SummaryComment"><xmp></span>
+        /// <xmp>
         /// UserFileAccessRights rights = new UserFileAccessRights(txtLogPath.Text);
         /// System.IO.FileInfo fi = new System.IO.FileInfo(txtLogPath.Text);
         /// if (rights.canWrite() && rights.canRead()) {
@@ -464,9 +459,8 @@ namespace SIL.Tool
         ///     }
         /// }
         /// 
-        /// <span class="code-SummaryComment"></xmp></span>
-        /// <span class="code-SummaryComment"></summary></span>
-        /// <span class="code-SummaryComment"><returns></returns></span>
+        /// </xmp>
+        /// </summary>
         public override String ToString()
         {
             string str = "";
@@ -591,12 +585,9 @@ namespace SIL.Tool
             return str;
         }
 
-        /// <span class="code-SummaryComment"><summary></span>
+        /// <summary>
         /// Convenience method to test if the right exists within the given rights
-        /// <span class="code-SummaryComment"></summary></span>
-        /// <span class="code-SummaryComment"><param name="right"></param></span>
-        /// <span class="code-SummaryComment"><param name="rule"></param></span>
-        /// <span class="code-SummaryComment"><returns></returns></span>
+        /// </summary>
         public bool contains(System.Security.AccessControl.FileSystemRights right,
             System.Security.AccessControl.FileSystemAccessRule rule)
         {
