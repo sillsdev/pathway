@@ -429,10 +429,10 @@ namespace TestBed
         private void StyConvert_Click(object sender, EventArgs e)
         {
 #if !Not7
-            StyToCSS styToCss = new StyToCSS();
+            StyToCss styToCss = new StyToCss();
             styToCss.StyFullPath = txtCSSInput.Text;
             string outputCSS = txtCSSInput.Text.Replace(".sty", ".css");
-            styToCss.ConvertStyToCSS("TestBed", outputCSS);
+            styToCss.ConvertStyToCss("TestBed", outputCSS);
             MessageBox.Show("Exported in " + outputCSS);
 #endif
         }
@@ -736,7 +736,7 @@ namespace TestBed
                 return;
             }
 
-            SFMtoUsx sfMtoUsx = new SFMtoUsx();
+            SfmToUsx sfMtoUsx = new SfmToUsx();
             sfMtoUsx.ConvertSFMtoUsx(txtInputPath.Text, Path.GetDirectoryName(txtInputPath.Text) + "\\output.usx");
             MessageBox.Show("Done");
         }

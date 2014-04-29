@@ -32,7 +32,7 @@ namespace Test.ParatextSupport
     /// </summary>
     /// ----------------------------------------------------------------------------------------
     [TestFixture]
-    public class StyToCssTest: StyToCSS
+    public class StyToCssTest: StyToCss
     {
         #region setup
         private static string _inputPath;

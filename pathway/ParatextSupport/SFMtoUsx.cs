@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="SFMtoUsx.cs" from='2009' to='2014' company='SIL International'>
+// <copyright file="SfmToUsx.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -22,7 +22,7 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class SFMtoUsx
+    public class SfmToUsx
     {
         #region Private Variable
 
@@ -45,6 +45,20 @@ namespace SIL.PublishingSolution
             _sfmFullPath = sfmFullPath;
             _usxFullPath = usxFullPath;
             OpenFile();
+            ProcessSFM();
+        }
+
+        /// <summary>
+        /// Converter used by PathwayB ... called by reflection
+        /// </summary>
+// ReSharper disable UnusedMember.Global
+        public void ConvertSfmToUsx(XmlTextWriter xmlw, string sfmFullPath, string usxFullPath)
+// ReSharper restore UnusedMember.Global
+        {
+            _writer = xmlw;
+            _sfmFullPath = sfmFullPath;
+            _usxFullPath = usxFullPath;
+            OpenFileDirectText();
             ProcessSFM();
         }
 
@@ -246,6 +260,16 @@ namespace SIL.PublishingSolution
             _writer.WriteStartDocument();
             _writer.WriteStartElement("USX");
             _sfmFile = new StreamReader(_sfmFullPath,true);
+        }
+
+        /// <summary>
+        /// Open usx and sfm file (Used by 3 argument constructor)
+        /// </summary>
+        private void OpenFileDirectText()
+        {
+            _writer.WriteStartDocument();
+            _writer.WriteStartElement("usx");
+            _sfmFile = new StreamReader(_sfmFullPath, true);
         }
     }
 }

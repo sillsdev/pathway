@@ -256,6 +256,9 @@
       <DependentUpon>ConfigurationTool.cs</DependentUpon>
     </Compile>
     <Compile Include="ConfigurationToolBL.cs" />
+    <Compile Include="Contents.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ExportDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -328,6 +331,9 @@
     </Compile>
     <Compile Include="PublicationTask.designer.cs">
       <DependentUpon>PublicationTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptureContents.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SelectOrganizationDialog.cs">
       <SubType>Form</SubType>

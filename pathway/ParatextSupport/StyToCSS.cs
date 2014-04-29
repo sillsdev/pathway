@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="StyToCSS.cs" from='2009' to='2014' company='SIL International'>
+// <copyright file="StyToCss.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -23,7 +23,7 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class StyToCSS
+    public class StyToCss
     {
         public string StyFullPath { get; set; }
         private string _cssFullPath;
@@ -40,10 +40,8 @@ namespace SIL.PublishingSolution
         /// </param>
         /// <param name="cssFullPath">The CSS full path.</param>
         /// ------------------------------------------------------------
-        public void ConvertStyToCSS(string database, string cssFullPath)
+        public void ConvertStyToCss(string database, string cssFullPath)
         {
-
-            //StyFullPath = styFullPath;
             _cssFullPath = cssFullPath;
             FindStyFile(database);
             MapClassName();
@@ -53,6 +51,23 @@ namespace SIL.PublishingSolution
 
             // Create custom.css from custom.sty
             SetCustomPath(database);
+            ParseFile();
+            SetFontAndDirection();
+            WriteCSS();
+        }
+
+        /// <summary>
+        /// Override to convert the sty file to CSS, assuming the
+        /// sty file is already set for this class. (Used by PathwayB.
+        /// Loaded by reflection.)
+        /// </summary>
+        /// <param name="cssFullPath"></param>
+// ReSharper disable UnusedMember.Global
+        public void ConvertStyToCss(string cssFullPath)
+// ReSharper restore UnusedMember.Global
+        {
+            _cssFullPath = cssFullPath;
+            MapClassName();
             ParseFile();
             SetFontAndDirection();
             WriteCSS();

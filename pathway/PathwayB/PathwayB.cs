@@ -535,7 +535,7 @@ namespace SIL.PublishingSolution
                         // load the ParatextSupport DLL dynamically
                         Assembly asmPTSupport =
                             Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
-                        Type tSfmToUsx = asmPTSupport.GetType("SIL.PublishingSolution.SFMtoUsx");
+                        Type tSfmToUsx = asmPTSupport.GetType("SIL.PublishingSolution.SfmToUsx");
                         Object objSFMtoUsx = null;
                         if (tSfmToUsx != null)
                         {
@@ -544,7 +544,7 @@ namespace SIL.PublishingSolution
                             args[0] = xmlTextWriter;
                             args[1] = filename;
                             args[2] = filename.Replace(".SFM", ".usx");
-                            tSfmToUsx.InvokeMember("ConvertSFMtoUsx", BindingFlags.Default | BindingFlags.InvokeMethod, null, objSFMtoUsx, args);
+                            tSfmToUsx.InvokeMember("ConvertSfmToUsx", BindingFlags.Default | BindingFlags.InvokeMethod, null, objSFMtoUsx, args);
                         }
                     }
                     catch (Exception)
@@ -575,7 +575,7 @@ namespace SIL.PublishingSolution
 
                 // Convert the stylesheet to css
                 // new ScrStylesheet(styFile)
-                Type tStyToCSS = asmPTSupport.GetType("SIL.PublishingSolution.StyToCSS");
+                Type tStyToCSS = asmPTSupport.GetType("SIL.PublishingSolution.StyToCss");
                 Object oScrStylesheet = null;
                 if (tStyToCSS != null)
                 {
@@ -587,7 +587,7 @@ namespace SIL.PublishingSolution
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
                     Object[] args = new object[1];
                     args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
-                    Object oResult = tStyToCSS.InvokeMember("ConvertStyToCSS",
+                    Object oResult = tStyToCSS.InvokeMember("ConvertStyToCss",
                                                             BindingFlags.Default | BindingFlags.InvokeMethod, null,
                                                             oScrStylesheet, args);
                 }
@@ -604,8 +604,9 @@ namespace SIL.PublishingSolution
                     args[3] = "zxx";
                     args[4] = "PathwayB";
                     Object oPPL = Activator.CreateInstance(tPPL, args);
-                    Object[] argsCombine = new object[1];
+                    Object[] argsCombine = new object[2];
                     argsCombine[0] = docs;
+                    argsCombine[1] = Param.PrintVia;
                     XmlDocument scrBooksDoc = (XmlDocument)tPPL.InvokeMember
                                                                 ("CombineUsxDocs",
                                                                  BindingFlags.Default | BindingFlags.InvokeMethod,
