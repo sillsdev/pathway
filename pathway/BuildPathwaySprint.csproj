@@ -293,8 +293,8 @@
   </Target>
   <ItemGroup>
     <TestOutput Include="**\TestFiles\output\**"/>
-    <PathwayProjects Include="PdfLicense;ApplyPDFLicenseInfo;ApplyXslt;BookletBuilder;BuildPathway;BuildTasks;ConfigurationTool;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;epubValidator;GoBibleConvert;HelpImprove;InDesignConvert;LiftPrepare;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExe;TestBed;Test;theWordConvert;WordPressConvert;XeLaTexConvert;XslProcess" />
-    <PathwayTests Include="PdfLicense;ApplyPDFLicenseInfo;ApplyXslt;Build;ConfigurationTool;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;GoBibleConvert;InDesignConvert;LiftPrepare;OpenOfficeConvert;OpenOfficeConvert_OLD;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExeUi;theWordConvert;WordPressConvert;XeLatex;XhtmlExport"/>
+    <PathwayProjects Include="PdfLicense;ApplyPDFLicenseInfo;ApplyXslt;BookletBuilder;BuildPathway;BuildTasks;ConfigurationTool;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;epubValidator;GoBibleConvert;HelpImprove;InDesignConvert;LiftPrepare;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExe;SwordConvert;TestBed;Test;theWordConvert;WordPressConvert;XeLaTexConvert;XslProcess" />
+    <PathwayTests Include="PdfLicense;ApplyPDFLicenseInfo;ApplyXslt;Build;ConfigurationTool;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;GoBibleConvert;InDesignConvert;LiftPrepare;OpenOfficeConvert;OpenOfficeConvert_OLD;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExeUi;SwordConvert;theWordConvert;WordPressConvert;XeLatex;XhtmlExport"/>
     <RampTests Include="PathwayB;epubConvert" />
   </ItemGroup>
   <Target Name="RemoveSprint">
