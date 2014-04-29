@@ -415,9 +415,7 @@
     <Copy SourceFiles="@(ConfigurationTool)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(Plugin)" DestinationFolder="Files\ConfigurationTool\" />
     <!-- Copy SourceFiles="@(GhostScript)" DestinationFolder="Files\ConfigurationTool\" /-->
-    <Copy SourceFiles="@(Icu)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BatchProcess)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(LiftPrepare)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(ParatextSupport)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(AllBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(epubBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
@@ -434,7 +432,6 @@
     <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'Files\ConfigurationTool\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'Files\ConfigurationTool\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(FwVersion)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BteHelpFile)" DestinationFolder="Files\ConfigurationTool\Help" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
     <Copy SourceFiles="@(SeHelpFile)" DestinationFolder="Files\ConfigurationTool\Help" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(BteStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
@@ -458,7 +455,6 @@
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'Files\ConfigurationTool\TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
-    <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'Files\ConfigurationTool\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
@@ -482,7 +478,6 @@
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <!-- GhostScript Include="..\ThirdParty\gsdll32.dll" / -->
     <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
     <PdfLicenseManager Include="..\PsSupport\pdflicensemanager-2.3.jar" />
     <ApplyPdfLicense Include="..\ApplyPDFLicenseInfo\$(OutputPath)\ApplyPDFLicenseInfo.*" />
     <PdfLicense Include="..\PdfLicense\$(OutputPath)\PdfLicense.*" />
