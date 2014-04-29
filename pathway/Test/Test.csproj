@@ -253,17 +253,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="icu.net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\LiftPrepare\lib\PalasoLib\icu.net.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Palaso, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\LiftPrepare\lib\PalasoLib\Palaso.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
