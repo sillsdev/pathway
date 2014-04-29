@@ -114,18 +114,7 @@
     </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
-    <OutputPath>bin\PwCtx\</OutputPath>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Edition />
-    <ProductName>Pathway mini-ConTeXt</ProductName>
-    <ConfTag>PwCtx</ConfTag>
-    <Status>Testing</Status>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -199,18 +188,7 @@
     </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|x86' ">
-    <OutputPath>bin\x86\PwCtx\</OutputPath>
-    <PlatformTarget>x86</PlatformTarget>
-    <Edition />
-    <ProductName>Pathway mini-ConTeXt</ProductName>
-    <ConfTag>PwCtx</ConfTag>
-    <Status>Testing</Status>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -235,49 +213,10 @@
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayYouVersion|AnyCPU' ">
-    <OutputPath>bin\PathwayYouVersion\</OutputPath>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Edition />
-    <ProductName>Pathway YouVersion</ProductName>
-    <ConfTag>YouVersion</ConfTag>
-    <Status>Testing</Status>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayYouVersion|x86' ">
-    <OutputPath>bin\x86\PathwayYouVersion\</OutputPath>
-    <PlatformTarget>x86</PlatformTarget>
-    <Edition />
-    <ProductName>Pathway YouVersion</ProductName>
-    <ConfTag>YouVersion</ConfTag>
-    <Status>Testing</Status>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Checking|x86' ">
-    <OutputPath>bin\x86\xmlMarkup\</OutputPath>
-    <PlatformTarget>x86</PlatformTarget>
-    <Edition />
-    <ProductName>Pathway BTE Debug</ProductName>
-    <ConfTag>Checking</ConfTag>
-    <Status>Testing</Status>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Checking|AnyCPU'">
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <OutputPath>bin\Checking</OutputPath>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-  </PropertyGroup>
+  
+  
+  
+  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
     <OutputPath>bin\Corporate7EPUB\</OutputPath>
     <DebugType>pdbonly</DebugType>
