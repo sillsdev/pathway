@@ -17,7 +17,6 @@
 using System;
 using System.Windows.Forms;
 using System.Collections;
-using JWTools;
 using SIL.Tool;
 using SIL.Tool.Localization;
 

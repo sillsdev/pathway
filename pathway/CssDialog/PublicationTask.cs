@@ -15,11 +15,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Xml;
-using JWTools;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
