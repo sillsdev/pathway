@@ -69,9 +69,7 @@ namespace Test.CssDialog
             Form myForm = new Form();
             target.ParentForm = myForm;
             CommonTestMethod.DisableDebugAsserts();
-            Assert.Throws<KeyNotFoundException>(
-                target.PdfPreview
-                );
+            Assert.Throws(typeof (KeyNotFoundException), delegate { target.PdfPreview(); });
         }
 
         /// <summary>

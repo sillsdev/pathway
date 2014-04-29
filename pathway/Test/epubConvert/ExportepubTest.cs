@@ -382,6 +382,11 @@ namespace Test.epubConvert
             return Common.PathCombine(_outputPath, fileName);
         }
 
+        private string FileExpected(string fileName)
+        {
+            return Common.PathCombine(_expectedPath, fileName);
+        }
+
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
