@@ -130,15 +130,6 @@ namespace SIL.PublishingSolution
             BtConfigure.Visible = role != "Output User";
         }
 
-        private void BtStyles_Click(object sender, EventArgs e)
-        {
-            var dlg = new ConfigureTasks { Task = _currentTask, ProjectName = this.ProjectName };
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                _currentTask = dlg.Task;
-            }
-        }
-
         private void PublicationTask_DoubleClick(object sender, EventArgs e)
         {
 #if DEBUG

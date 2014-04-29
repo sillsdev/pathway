@@ -30,11 +30,9 @@ namespace SIL.PublishingSolution
     public class MakeProperty
     {
         #region Private Variable
-        Dictionary<string, string> _dicAttributeInfo;
         readonly Dictionary<string, string> _dicColorInfo = new Dictionary<string, string>();
         readonly Dictionary<string, string> _dictFontSize = new Dictionary<string, string>();
         readonly ArrayList _unit = new ArrayList();
-        private readonly VerboseClass _verboseWriter = VerboseClass.GetInstance();
         private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
         #endregion
 
@@ -1084,55 +1082,6 @@ namespace SIL.PublishingSolution
                 counter++;
             }
             return rgbConcat;
-        }
-
-        private static string FontHeight(string attributeStringValue, bool lineHeight)
-        {
-            string strVal;
-            try
-            {
-                string[] attValues = attributeStringValue.Split(',');
-                string unit;
-
-                float newValue = float.Parse(attValues[0]);
-                if (attValues.Length > 1)
-                {
-                    unit = attValues[1];
-                    if (unit == "em")
-                    {
-                        newValue -= 1;
-                    }
-                    else if (unit == "%")
-                    {
-                        newValue /= 100;
-                        newValue -= 1;
-                        unit = "em";
-                    }
-                    else if (lineHeight && unit == "pt")
-                    {
-                        strVal = newValue + "-em";
-                        return (strVal);
-                    }
-                }
-                else
-                {
-                    unit = "em";
-                    newValue = newValue - 1;
-                }
-                if (lineHeight)
-                {
-                    newValue = newValue / 2F;
-                }
-                strVal = newValue.ToString();
-                strVal = strVal + unit;
-            }
-            catch (Exception ex)
-            {
-                strVal = null;
-                Console.Write(ex.Message);
-            }
-
-            return (strVal);
         }
 
         /// -------------------------------------------------------------------------------------------

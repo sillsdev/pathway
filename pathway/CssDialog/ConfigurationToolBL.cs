@@ -43,7 +43,6 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> standardSize = new Dictionary<string, string>();
         public string Caption = "Pathway Configuration Tool";
         public TraceSwitch _traceOnBL = new TraceSwitch("General", "Trace level for application");
-        private List<string> _infoValue = new List<string>();
         private List<string> _propertyValue = new List<string>();
         private List<string> _groupPropertyValue = new List<string>();
         private bool _isUnixOS = false;
@@ -109,7 +108,6 @@ namespace SIL.PublishingSolution
         #region Protected Variables
         protected readonly ArrayList _cssNames = new ArrayList();
         ErrorProvider _errProvider = new ErrorProvider();
-        DictionarySetting _ds = new DictionarySetting();
         protected bool _isCreatePreview1;
         protected string _caption = "Pathway Configuration Tool";
         protected string _redoUndoBufferValue = string.Empty;
@@ -720,18 +718,6 @@ namespace SIL.PublishingSolution
                 projType = Param.Value["InputType"];
             }
             return projType;
-        }
-
-        protected void AddNewRow()
-        {
-            DataRow row = DataSetForGrid.Tables["Styles"].NewRow();
-            DataSetForGrid.Tables["Styles"].Rows.Add(row);
-            cTool.StylesGrid.Refresh();
-            SelectRow(cTool.StylesGrid, "");
-            ShowInfoValue();
-            string newName = GetNewStyleName(_cssNames, "new");
-            cTool.TxtName.Text = newName;
-            SetInfoCaption(newName);
         }
 
         protected void SetFocusToName()
@@ -1380,33 +1366,6 @@ namespace SIL.PublishingSolution
                     default:
                         break;
                 }
-            }
-        }
-
-        /// <summary>
-        /// Save Info tab initial value
-        /// </summary>
-        private void SaveInfoValue()
-        {
-            Control.ControlCollection ctls = cTool.TabControl1.TabPages[0].Controls;
-            _infoValue.Clear();
-            foreach (Control control in ctls)
-            {
-                if (control.GetType().Name == "Label")
-                    continue;
-
-                string val;
-
-                if (control.GetType().Name == "CheckBox")
-                {
-                    CheckBox checkBox = (CheckBox)control;
-                    val = checkBox.Checked.ToString();
-                }
-                else
-                {
-                    val = control.Text;
-                }
-                _infoValue.Add(val);
             }
         }
 
@@ -2084,47 +2043,6 @@ namespace SIL.PublishingSolution
             return result;
         }
 
-        protected bool SetUI(ModifyData control)
-        {
-            bool success = true;
-            string controlName = control.FileName;
-            string controlText = control.ControlText;
-
-            Control[] ctls = cTool.TabInfo.Controls.Find(controlName, true);
-            if (ctls.Length > 0)
-            {
-                Control ctl = ctls[0];
-                if (ctl.Text == controlText)
-                {
-                    success = false;
-                }
-                else
-                {
-                    SelectRow(cTool.StylesGrid, control.EditStyleName);
-                    if (ctl is TextBox)
-                    {
-                        TextBox textBox = (TextBox)ctl;
-                        textBox.Text = controlText;
-                        textBox.Focus();
-                        textBox.SelectAll();
-                    }
-                    else if (ctl is CheckBox)
-                    {
-                        CheckBox checkBox = (CheckBox)ctl;
-                        checkBox.Checked = controlText == "True" ? true : false;
-                    }
-                    else
-                    {
-                        ctl.Text = controlText;
-                        ctl.Focus();
-                        ctl.Select();
-                    }
-                }
-                UpdateGrid(ctl, cTool.StylesGrid);
-            }
-            return success;
-        }
-
         protected static int GetPageSize(string paperSize, string dimension)
         {
             int pageWidth = 612;
@@ -2180,22 +2098,6 @@ namespace SIL.PublishingSolution
             }
             return 0;
 
-        }
-
-        protected void Preview_PDF_Export(string inputPath)
-        {
-            string _backendPath = Common.ProgInstall;
-            Backend.Load(_backendPath);
-            PublicationInformation _projectInfo = new PublicationInformation();
-            _projectInfo.DictionaryOutputName = StyleName + "_" + FileName;
-            //_projectInfo.IsOpenOutput = false;
-            _projectInfo.IsOpenOutput = true;
-            string sampleFilePath = Path.GetDirectoryName(Path.GetDirectoryName(Common.GetPSApplicationPath()));
-            string xthmlPath = Common.PathCombine(sampleFilePath, "BuangExport.xhtml");
-            _projectInfo.DefaultXhtmlFileWithPath = xthmlPath;
-            string cssPath = Common.PathCombine(inputPath, FileName);
-            _projectInfo.DefaultCssFileWithPath = cssPath;
-            Backend.Launch("Pdf", _projectInfo);
         }
 
         /// <summary>
@@ -3204,18 +3106,6 @@ namespace SIL.PublishingSolution
             _errProvider.SetError(cTool.TxtPageGutterWidth, errMessage);
             ShowCssSummary();
         }
-
-        public void ValidateLineHeightBL()
-        {
-            if (cTool.DdlFontSize.Text.Length > 0 && cTool.DdlLeading.Text != "No Change")
-            {
-                int selectedfontSize = int.Parse(cTool.DdlFontSize.Text);
-                int selectedLineHeight = int.Parse(cTool.DdlLeading.Text);
-                int expectedLineHeight = selectedfontSize * 120 / 100;
-                string errMessage = selectedLineHeight < expectedLineHeight ? "Line height should be 120% of font size" : "";
-                _errProvider.SetError(cTool.TxtPageInside, errMessage);
-            }
-        }
         #endregion
 
         #region Event Method
@@ -3574,42 +3464,6 @@ namespace SIL.PublishingSolution
             return propertyModified;
         }
 
-        /// <summary>
-        /// Comparing the loaded values in info tab values vs changed info values
-        /// Except the Label controls
-        /// </summary>
-        /// <returns></returns>
-        private bool IsInfoValueModified()
-        {
-            if (_infoValue.Count == 0)
-                return false;
-
-            bool infoValueModified = false;
-            int i = 0;
-            Control.ControlCollection ctls = cTool.TabControl1.TabPages[0].Controls;
-            foreach (Control control in ctls)
-            {
-                if (control.GetType().Name == "Label") continue;
-                string val;
-
-                if (control.GetType().Name == "CheckBox")
-                {
-                    CheckBox checkBox = (CheckBox)control;
-                    val = checkBox.Checked.ToString();
-                }
-                else
-                {
-                    val = control.Text;
-                }
-
-                if (_infoValue[i++] != val)
-                {
-                    infoValueModified = true;
-                    break;
-                }
-            }
-            return infoValueModified;
-        }
         public void CreateToolTip()
         {
             ToolTip toolTip = new ToolTip();
@@ -3709,11 +3563,6 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        public void tsRedo_ClickBL(object sender, EventArgs e)
-        {
-           
-        }
-
         public void DdlRunningHeadSelectedIndexChangedBl(string pageType)
         {
             string xPath = string.Empty;
@@ -3761,11 +3610,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void tsUndo_ClickBL(object sender, EventArgs e)
-        {
-            
-        }
-
         public void chkAvailable_CheckedChangedBL(object sender)
         {
             try
@@ -3790,16 +3634,6 @@ namespace SIL.PublishingSolution
         }
 
         public void chkAvailable_ValidatedBL(object sender)
-        {
-            try
-            {
-                WriteAttrib(AttribShown, sender);
-                EnableToolStripButtons(true);
-            }
-            catch { }
-        }
-
-        public void chkFixedLineHeight_ValidatedBL(object sender)
         {
             try
             {
@@ -4099,11 +3933,6 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
-        }
-
-        private void ValidateLineHeight(object sender, EventArgs e)
-        {
-            ValidateLineHeightBL();
         }
 
         private void ValidatePageWidthMargins(object sender, EventArgs e)
@@ -4519,15 +4348,6 @@ namespace SIL.PublishingSolution
             cTool.PnlOtherFormat.Top = cTool.PnlReferenceFormat.Location.Y + cTool.PnlReferenceFormat.Height;
         }
 
-        public void ddlFileProduceDict_ValidatedBL(object sender)
-        {
-            try
-            {
-                _fileProduce = cTool.DdlFileProduceDict.SelectedItem.ToString();
-            }
-            catch { }
-        }
-
         public void tsSaveAs_ClickBL()
         {
             try
@@ -4683,16 +4503,6 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
-        }
-
-        public void ddlPageNumber_SelectedIndexChange()
-        {
-            if (_screenMode == ScreenMode.Edit)
-            {
-                SetModifyMode(true);
-                ShowCssSummary();
-                WriteCss();
-            }
         }
 
         private string GetDdlRunningHead()

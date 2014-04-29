@@ -73,24 +73,6 @@ namespace Test.OpenOfficeConvert
         #endregion Setup
 
         #region Private Functions
-        private string _outputName = "styles.xml";
-        private string _expectedName = "styles.xml";
-        private string _errorMessage = " syntax failed in Styles.xml";
-        
-        private void FileTest(string file)
-        {
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + _outputName);
-            //_stylesXML.CreateStyles(input, output, _errorFile, true);
-
-            string expected = FileExpected(file + _expectedName);
-            XmlAssert.AreEqual(expected, output, file + _errorMessage);
-            // Reset defaults
-            _outputName = "styles.xml";
-            _expectedName = "styles.xml";
-            _errorMessage = " syntax failed in Styles.xml";
-        }
-
         private string FileInput(string fileName)
         {
             return Common.PathCombine(_inputPath, fileName);
@@ -99,11 +81,6 @@ namespace Test.OpenOfficeConvert
         private string FileOutput(string fileName)
         {
             return Common.PathCombine(_outputPath, fileName);
-        }
-
-        private string FileExpected(string fileName)
-        {
-            return Common.PathCombine(_expectedPath, fileName);
         }
         #endregion Private Functions
 
@@ -1061,7 +1038,8 @@ namespace Test.OpenOfficeConvert
         ///TD-428 Impliment Start and Last References in Mirror page
 
         /// </summary>      
-        //[Test]
+        [Test]
+        [Ignore]
         public void MirroredPageRefTest_Node()
         {
             const string file = "MirroredPageRef";

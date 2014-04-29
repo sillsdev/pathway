@@ -292,9 +292,6 @@
     <Compile Include="SwordConvert\SwordTest.cs" />
     <Compile Include="theWordConvert\ExportTheWordTest.cs" />
     <Compile Include="XeLatex\XeLaTexContentTest.cs" />
-    <Compile Include="CssDialog\ContentsTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CssParser\ClassInfoTest.cs" />
     <Compile Include="CssParser\CssTreeTest.cs" />
     <Compile Include="FileUtilsTest.cs" />
@@ -310,35 +307,12 @@
     </Compile>
     <Compile Include="InDesignConvert\InStoryTest.cs" />
     <Compile Include="InDesignConvert\InStylesTest.cs" />
-    <Compile Include="LiftPrepare\LiftFilters.cs" />
-    <Compile Include="LiftPrepare\FilterTests\LiftEntryAndSenseFilterLoadingTester.cs" />
-    <Compile Include="LiftPrepare\FilterTests\LiftFilterTester.cs" />
-    <Compile Include="LiftPrepare\FilterTests\LiftLanguageFilterLoadingTest.cs" />
-    <Compile Include="LiftPrepare\FullTests\FullAkooseTest.cs" />
-    <Compile Include="LiftPrepare\LiftDocumentTester.cs" />
-    <Compile Include="LiftPrepare\LiftEntryTester.cs" />
-    <Compile Include="LiftPrepare\LiftPreparerTester.cs" />
-    <Compile Include="LiftPrepare\LiftPrepareTester.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LiftPrepare\LiftPrepareTester.Designer.cs">
-      <DependentUpon>LiftPrepareTester.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LiftPrepare\LiftReaderTester.cs" />
-    <Compile Include="LiftPrepare\LiftWriterTester.cs" />
-    <Compile Include="LiftPrepare\SortTests\LiftEntrySortLoadTester.cs" />
-    <Compile Include="LiftPrepare\SortTests\LiftLangSortLoadTester.cs" />
-    <Compile Include="LiftPrepare\SortTests\LiftSortTester.cs" />
-    <Compile Include="LiftPrepare\TestEnvironment.cs" />
-    <Compile Include="LiftPrepare\TransformTests\TransformTester.cs" />
-    <Compile Include="LiftPrepare\WritingSystemSorterTester.cs" />
     <Compile Include="OdtTest.cs" />
     <Compile Include="CssDialog\CommonTestMethod.cs" />
     <Compile Include="CssDialog\FeatureSheetTest.cs" />
     <Compile Include="CssDialog\MergeCssTest.cs" />
     <Compile Include="CssDialog\PdfTest.cs" />
     <Compile Include="CssDialog\PreviewTest.cs" />
-    <Compile Include="CssDialog\SettingBlTest.cs" />
     <Compile Include="CssParser\ClassAttributeTest.cs" />
     <Compile Include="CssParser\StyleAttributeTest.cs" />
     <Compile Include="CssParser\CssParserTest.cs" />
@@ -370,7 +344,6 @@
     <Compile Include="epubConvert\EmbeddedFontTest.cs" />
     <Compile Include="epubConvert\ExportepubTest.cs" />
     <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
-    <Compile Include="GoBibleConvert\GoBibleTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ApplyPDFLicenseInfo\ApplyPDFLicenseInfo.csproj">
@@ -413,10 +386,6 @@
       <Project>{8D0D307D-3785-4561-A923-FF3DDF6C2F14}</Project>
       <Name>InDesignConvert</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
-      <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
-      <Name>LiftPrepare</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
       <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
       <Name>OpenOfficeConvert</Name>
@@ -457,12 +426,6 @@
       <Project>{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}</Project>
       <Name>XeLaTexConvert</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="LiftPrepare\LiftPrepareTester.resx">
-      <DependentUpon>LiftPrepareTester.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

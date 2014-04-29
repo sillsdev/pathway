@@ -176,11 +176,6 @@ namespace Test.WordPressConvert
         }
 
         #region Private Functions
-        private string FileProg(string fileName)
-        {
-            return Common.PathCombine(Common.GetPSApplicationPath(), fileName);
-        }
-
         private string FileInput(string fileName)
         {
             return Common.PathCombine(_inputPath, fileName);

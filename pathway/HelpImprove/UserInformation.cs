@@ -229,24 +229,6 @@ namespace SIL.PublishingSolution
         }
 
 
-        private bool IsDeveloperInfo()
-        {
-
-            List<string> developerName = new List<string>();
-            developerName.Add("TRIHUS-1007");
-            developerName.Add("JAMES-PC");
-            developerName.Add("SAMDOSS-PC");
-            developerName.Add("KARTHI-PC");
-            developerName.Add("SANKAR-SIL");
-
-            if (developerName.Contains(GetMachineName()))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         private static string GetsystemCountry(string Language)
         {
             try
@@ -508,28 +490,6 @@ namespace SIL.PublishingSolution
             }
             catch {}
             return javaVersion;
-        }
-
-        private static string GetUserIpAddress()
-        {
-            try
-            {
-                string userIpAddress = string.Empty;
-                IPHostEntry ip = Dns.GetHostEntry(Dns.GetHostName());
-                foreach (IPAddress ipAddress in ip.AddressList)
-                {
-                    if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
-                    {
-                        userIpAddress = ipAddress.ToString();
-                        return userIpAddress;
-                    }
-                }
-                return userIpAddress;
-            }
-            catch
-            {
-                return string.Empty;
-            }
         }
 
         private static string GetMachineName()
@@ -802,42 +762,6 @@ namespace SIL.PublishingSolution
             string hash = BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
 
             return hash;
-        }
-
-        private static void Search_For_Registry_Value(RegistryKey registryKey, string subKey, string search, bool getSubKey)
-        {
-            if (registryKey.ValueCount > 0)
-            {
-                foreach (var temp in registryKey.GetValueNames())
-                {
-                    if (temp.ToLower().Contains(search.ToLower()))
-                    {
-                        Console.WriteLine(String.Format("Match Found In Registry Key Value {0} Present At Location {1}", temp, registryKey.Name));
-                    }
-                }
-            }
-
-            if (getSubKey)
-            {
-                registryKey = registryKey.OpenSubKey(subKey);
-            }
-
-
-
-            if (registryKey.SubKeyCount > 0)
-            {
-                foreach (var temp in registryKey.GetSubKeyNames())
-                {
-                    try
-                    {
-                        if (registryKey.OpenSubKey(temp).SubKeyCount > 0)
-                        {
-                            Search_For_Registry_Value(registryKey.OpenSubKey(temp), subKey, search, false);
-                        }
-                    }
-                    catch { }
-                }
-            }
         }
 
         #endregion

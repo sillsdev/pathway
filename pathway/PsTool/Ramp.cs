@@ -81,7 +81,6 @@ namespace SIL.PublishingSolution
         protected string _outputExtension = string.Empty;
         protected string _projInputType = string.Empty;
         private string _outputFileTitle = string.Empty;
-        private RampFile rampFile;
         protected Dictionary<string, string> _isoLanguageCode = new Dictionary<string, string>();
         protected Dictionary<string, string> _isoLanguageCodeandName = new Dictionary<string, string>();
         protected Dictionary<string, string> _isoLanguageScriptandName = new Dictionary<string, string>();
@@ -1269,24 +1268,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void CreateRampDescTableofContentsHas(Json json)
-        {
-            if (DescTableofContentsHas != null && DescTableofContentsHas.Trim().Length > 0)
-            {
-                json.WriteTag("description.tableofcontents.has");
-                json.WriteText(DescTableofContentsHas);
-            }
-        }
-
-        private void CreateRampDescSponsership(Json json)
-        {
-            if (DescSponsership != null && DescSponsership.Trim().Length > 0)
-            {
-                json.WriteTag("dc.description.sponsorship");
-                json.WriteText(DescSponsership);
-            }
-        }
-
         private void CreateRampFormatExtentImages(Json json)
         {
             if (FormatExtentImages != null && FormatExtentImages.Trim().Length > 0)
@@ -1381,36 +1362,6 @@ namespace SIL.PublishingSolution
             {
                 json.WriteTag("subject.subjectLanguage.has");
                 json.WriteText(SubjectLanguageHas);
-            }
-        }
-
-        private void CreateRampCoverageSpacialCountry(Json json)
-        {
-            if (CoverageSpacialCountry.Count > 0)
-            {
-                json.WriteTag("coverage.spatial.country");
-                json.StartTag();
-                for (int i = 0; i < CoverageSpacialCountry.Count; i++)
-                {
-                    string[] cntry = CoverageSpacialCountry[i].Split(',');
-                    json.WriteTag(i.ToString());
-                    json.StartTag();
-                    json.WriteText(" \": \"" + cntry[0] + "\", \"place\": \"" + cntry[1]);
-                    json.EndTag();
-                    if (i < CoverageSpacialCountry.Count - 1)
-                        json.WriteComma();
-                }
-                json.EndTag();
-                json.WriteComma();
-            }
-        }
-
-        private void CreateRampCoverageSpacialRegionHas(Json json)
-        {
-            if (CoverageSpacialRegionHas != null && CoverageSpacialRegionHas.Trim().Length > 0)
-            {
-                json.WriteTag("coverage.spatial.region.has");
-                json.WriteText(CoverageSpacialRegionHas);
             }
         }
 
@@ -1557,15 +1508,6 @@ namespace SIL.PublishingSolution
             {
                 json.WriteTag("created_at");
                 json.WriteText(CreatedOn);
-            }
-        }
-
-        private void CreateRampId(Json json)
-        {
-            if (RampId != null && RampId.Trim().Length > 0)
-            {
-                json.WriteTag("id");
-                json.WriteText(RampId);
             }
         }
 
@@ -1766,33 +1708,6 @@ namespace SIL.PublishingSolution
                 zipFile.CommitUpdate();
             }
         }
-
-        private void CleanUpFolder(List<string> files, string folderPath)
-        {
-            try
-            {
-                List<string> validExtension = new List<string>();
-                DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
-
-                validExtension.AddRange(_outputExtension.Split(','));
-
-                foreach (var file in files)
-                {
-                    string ext = Path.GetExtension(file);
-
-                    if (!validExtension.Contains(ext))
-                    {
-                        File.Delete(file);
-                    }
-                }
-
-                foreach (DirectoryInfo subfolder in directoryInfo.GetDirectories())
-                {
-                    subfolder.Delete(true);
-                }
-            }catch{}
-        }
-
 
         /// <summary>
         /// 

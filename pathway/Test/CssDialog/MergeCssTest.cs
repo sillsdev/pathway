@@ -37,7 +37,6 @@ namespace Test.CssDialog
         string _expectBasePath = string.Empty;
         /// <summary>path to all users output</summary>
         string _publishingSolutionsData = string.Empty;
-        const string _StyleSettings = "StyleSettings.xml";
 
         [TestFixtureSetUp]
         protected void SetUp()

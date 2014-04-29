@@ -13,7 +13,6 @@
 // Stylepick FeatureSheet
 // </remarks>
 // --------------------------------------------------------------------------------------------
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -21,48 +20,48 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class DictionaryForMIDsProperties
+    public class DictionaryForMidsProperties
     {
-        protected StreamWriter Sw { get; set; }
+        private StreamWriter Sw { get; set; }
 
         #region Properties
-        public string InfoText { get; set; }
-        public string DictionaryAbbreviation { get; set; }
-        public int NumberOfAvailableLanguages { get; set; }
-        public int Language1NumberOfContentDeclarations { get; set; }
+        public string InfoText { private get; set; }
+        private string DictionaryAbbreviation { get; set; }
+        private int Language1NumberOfContentDeclarations { get; set; }
         #endregion Properties
 
         #region indexed by language
-        public readonly Dictionary<int, string> DisplayText = new Dictionary<int, string>();
-        public readonly Dictionary<int, string> FilePostfix = new Dictionary<int, string>();
+
+        private readonly Dictionary<int, string> _displayText = new Dictionary<int, string>();
+        private readonly Dictionary<int, string> _filePostfix = new Dictionary<int, string>();
         #endregion indexed by language
 
         #region indexed by content (style number)
-        public DictionaryForMIDsStyle Styles;
+
+        private readonly DictionaryForMIDsStyle _styles;
         #endregion indexed by content (style number)
 
-        public DictionaryForMIDsProperties(PublicationInformation projInfo, DictionaryForMIDsStyle contentStyles)
+        public DictionaryForMidsProperties(PublicationInformation projInfo, DictionaryForMIDsStyle contentStyles)
         {
             var myPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             Debug.Assert(myPath != null);
-            Styles = contentStyles;
+            _styles = contentStyles;
             Sw = new StreamWriter(Common.PathCombine(myPath, "DictionaryForMIDs.properties"));
             DictionaryAbbreviation = "SIL";
-            NumberOfAvailableLanguages = 2;
-            Language1NumberOfContentDeclarations = Styles.NumStyles;
+            Language1NumberOfContentDeclarations = _styles.NumStyles;
         }
 
         public void SetLanguage(int num, string iso, string name)
         {
-            DisplayText[num] = name;
-            FilePostfix[num] = iso;
+            _displayText[num] = name;
+            _filePostfix[num] = iso;
         }
 
         public void Write()
         {
-            Sw.WriteLine(string.Format("infoText:{0}", InfoText));
+            Sw.WriteLine("infoText:{0}", InfoText);
             Sw.WriteLine();
-            Sw.WriteLine(string.Format("dictionaryAbbreviation:{0}", DictionaryAbbreviation));
+            Sw.WriteLine("dictionaryAbbreviation:{0}", DictionaryAbbreviation);
             Sw.WriteLine("numberOfAvailableLanguages:2");
             Sw.WriteLine();
             Sw.WriteLine(@"indexFileSeparationCharacter:'\t'");
@@ -77,28 +76,28 @@ namespace SIL.PublishingSolution
             Sw.WriteLine();
             Sw.WriteLine("dictionaryGenerationOmitParFromIndex:true");
             Sw.WriteLine();
-            Sw.WriteLine(string.Format("language1DisplayText:{0}", DisplayText[1]));
-            Sw.WriteLine(string.Format("language1FilePostfix:{0}", FilePostfix[1]));
+            Sw.WriteLine("language1DisplayText:{0}", _displayText[1]);
+            Sw.WriteLine("language1FilePostfix:{0}", _filePostfix[1]);
             Sw.WriteLine();
             Sw.WriteLine("language1IsSearchable:true");
             Sw.WriteLine("language1GenerateIndex:true");
             Sw.WriteLine("language1HasSeparateDictionaryFile:false");
             Sw.WriteLine();
-            Sw.WriteLine(string.Format("language2DisplayText:{0}", DisplayText[2]));
-            Sw.WriteLine(string.Format("language2FilePostfix:{0}", FilePostfix[2]));
+            Sw.WriteLine("language2DisplayText:{0}", _displayText[2]);
+            Sw.WriteLine("language2FilePostfix:{0}", _filePostfix[2]);
             Sw.WriteLine();
             Sw.WriteLine("language2IsSearchable:true");
             Sw.WriteLine("language2GenerateIndex:true");
             Sw.WriteLine("language2HasSeparateDictionaryFile:false");
             Sw.WriteLine();
-            Sw.WriteLine(string.Format("language1NumberOfContentDeclarations:{0}", Language1NumberOfContentDeclarations));
+            Sw.WriteLine("language1NumberOfContentDeclarations:{0}", Language1NumberOfContentDeclarations);
             Sw.WriteLine("language2NumberOfContentDeclarations:1");
             for (int n = 1; n <= Language1NumberOfContentDeclarations; n++)
             {
-                Sw.WriteLine(string.Format("language1Content{0:D2}DisplayText:{1}", n, Styles.DisplayText(n)));
-                Sw.WriteLine(string.Format("language1Content{0:D2}FontColour:{1}", n, Styles.FontColor(n)));
-                Sw.WriteLine(string.Format("language1Content{0:D2}FontStyle:{1}", n, Styles.ContentStyle(n)));
-                Sw.WriteLine(string.Format("language1Content{0:D2}DisplaySelectable:true", n));
+                Sw.WriteLine("language1Content{0:D2}DisplayText:{1}", n, _styles.DisplayText(n));
+                Sw.WriteLine("language1Content{0:D2}FontColour:{1}", n, _styles.FontColor(n));
+                Sw.WriteLine("language1Content{0:D2}FontStyle:{1}", n, _styles.ContentStyle(n));
+                Sw.WriteLine("language1Content{0:D2}DisplaySelectable:true", n);
             }
             Sw.WriteLine();
             Sw.WriteLine("language2Content01DisplayText:Gloss");

@@ -244,7 +244,6 @@
   <ItemGroup>
     <Compile Include="ClassAttribute.cs" />
     <Compile Include="CssParser.cs" />
-    <Compile Include="CssParserDuplicateClass.cs" />
     <Compile Include="CssTree.cs" />
     <!-- Antlr3 Include="csst3.g3">
       <Generator>MSBuild:Compile</Generator>

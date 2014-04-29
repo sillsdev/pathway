@@ -18,11 +18,6 @@ namespace TestBed
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             TreeNode _nodeTemp = new TreeNode();

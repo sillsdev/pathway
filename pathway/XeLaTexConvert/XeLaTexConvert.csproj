@@ -243,7 +243,6 @@
     <Compile Include="ModifyXeLaTexStyles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XeLaTexContent.cs" />
-    <Compile Include="XeLaTexContentHeaderFooter.cs" />
     <Compile Include="XeLaTexMapProperty.cs" />
     <Compile Include="XeLaTexStyleBase.cs" />
     <Compile Include="XeLaTexStyles.cs" />

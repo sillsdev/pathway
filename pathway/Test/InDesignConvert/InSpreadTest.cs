@@ -172,7 +172,8 @@ namespace Test.InDesignConvert
             Assert.AreEqual(result, "TF1", _methodName + " failed");
         }
 
-        //[Test]
+        [Test]
+        [Ignore]
         public void MarginPreferenceTest()
         {
             ClearFiles();
@@ -228,7 +229,8 @@ namespace Test.InDesignConvert
             Assert.IsTrue(nodesList.Count == 4, _methodName + " failed");
         }
 
-        //[Test]
+        [Test]
+        [Ignore]
         public void PathPointTypeTest2()
         {
             ClearFiles();

@@ -51,7 +51,6 @@ namespace SIL.Tool
         private string _subPathValue;
         private string _projectPath;
         private string _tempOutputFolder;
-        private string _templateCSS;
         private string _projectName;
         private string _projectFileWithPath;
         private string _projectInputType;
@@ -76,7 +75,6 @@ namespace SIL.Tool
 
         private string _headerReferenceFormat = string.Empty;
         private string _includeXRefSymbol;
-        private string _hideVerseNumberOne;
         private string _includeFootnoteSymbol;
         private string _splitFileByLetter;
         private string _mainLastFileName;
@@ -103,30 +101,15 @@ namespace SIL.Tool
         public string LanguageFilterKey;
         public string LanguageFilterString;
         public bool IsLanguageFilterMatchCase;
-
-        public bool IsLanguageSort;
-        public bool IsEntrySort;
         #endregion
 
         #endregion
 
         #region Properties
-        public bool HideFileInExplorer
-        {
-            get { return _hideFile; }
-            set { _hideFile = value; }
-        }
-
         public bool IsOpenOutput
         {
             get { return _isOpenOutput; }
             set { _isOpenOutput = value; }
-        }
-
-        public string LinkedCSS
-        {
-            get { return _linkedCSS; }
-            set { _linkedCSS = value; }
         }
 
         public string ProjectMode
@@ -147,12 +130,6 @@ namespace SIL.Tool
             set { _tempOutputFolder = value; }
         }
 
-        public string TemplateCSS
-        {
-            get { return _templateCSS; }
-            set { _templateCSS = value; }
-        }
-        
         public string ProjectName
         {
             get { return _projectName; }
@@ -171,22 +148,10 @@ namespace SIL.Tool
             set { _projectInputType = value; }
         }
 
-        public string FullPath
-        {
-            get { return _fullPath; }
-            set { _fullPath = value; }
-        }
-
         public string ProjectPath
         {
             get { return _projectPath; }
             set { _projectPath = value; }
-        }
-
-        public string SubPath
-        {
-            get { return _subPathValue; }
-            set { _subPathValue = value; }
         }
 
         public XmlDocument ProjectDeXML
@@ -347,36 +312,6 @@ namespace SIL.Tool
             return returnNode;
         }
 
-        /// <summary>
-        /// Initial Creation of the .de file
-        /// </summary>
-        /// <param name="dictionaryExplorer">The Solution Explorer</param>
-        public void CreateProjectFile(TreeView dictionaryExplorer)
-        {
-            var xmlSetting = new XmlWriterSettings {Indent = true};
-            XmlWriter projFile = XmlWriter.Create(_projectFileWithPath, xmlSetting);
-            if (projFile != null)
-            {
-                projFile.WriteComment("To store the Project files");
-                projFile.WriteStartElement("Project"); // Project Start
-
-                projFile.WriteStartElement("SolutionExplorer");
-                projFile.WriteEndElement();
-                projFile.WriteStartElement("DocumentSettings");
-                projFile.WriteEndElement();
-                projFile.WriteStartElement("PropertyGroup");
-                projFile.WriteEndElement();
-
-                projFile.WriteEndElement(); // Project End
-                projFile.Close();
-            }
-
-            _DeXml.XmlResolver = FileStreamXmlResolver.GetNullResolver();
-            _DeXml.Load(_projectFileWithPath);
-            _dictExplorer = dictionaryExplorer;
-            AddInitialFiles();
-        }
-
         public void LoadProjectFile(string projFile)
         {
             ProjectFileWithPath = projFile;
@@ -426,36 +361,6 @@ namespace SIL.Tool
             }
             ProjectProperty(_projectMode);
             PopulateDicExplorer(dictionaryExplorer);
-        }
-
-        /// <summary>
-        /// Add the xhtml,css and Image files to solution explorer
-        /// </summary>
-        private void AddInitialFiles()
-        {
-            if (AddFileToXML(_DefaultXhtmlFileWithPath, "True", true, "", true, true))
-            {
-                _DefaultCssFileWithPath = Common.GetLinkedCSS(_DefaultXhtmlFileWithPath);
-
-                //Include Merged CSS file
-                if (_DefaultCssFileWithPath != "")
-                {
-                    _DefaultCssFileWithPath = Common.PathCombine(Path.GetDirectoryName(_DefaultXhtmlFileWithPath), _DefaultCssFileWithPath);
-                    if(File.Exists(_DefaultCssFileWithPath))
-                      _DefaultCssFileWithPath = Common.MakeSingleCSS(_DefaultCssFileWithPath, "");
-                    AddFileToXML(_DefaultCssFileWithPath, "True", true, "", true, true);
-                    _DefaultCssFileWithPath = Common.PathCombine(_dictionaryPath, Path.GetFileName(_DefaultCssFileWithPath));
-                }
-                _projectInputType = Common.GetProjectType(_DefaultXhtmlFileWithPath);
-                ProjectProperty(_projectMode);
-                AddImageFiles(_DefaultXhtmlFileWithPath, _projectName);
-
-                _DefaultXhtmlFileWithPath = Common.PathCombine(_dictionaryPath, Path.GetFileName(_DefaultXhtmlFileWithPath));
-                if (_templateCSS != null)
-                {
-                    AddFileToXML(_templateCSS, "True", true, "", true, true);
-                }
-            }
         }
 
         /// <summary>
@@ -1026,96 +931,6 @@ namespace SIL.Tool
         }
         
         #region Image Files Copy to Local Folder
-
-        /// <summary>
-        /// Search the img Tags and Adds the files to Solution Explorer.
-        /// </summary>
-        /// <param name="filename">The sourceFolder file</param>
-        /// <param name="projectName">The Current Project xml file</param>
-        public void AddImageFiles(string filename, string projectName)
-        {
-            // Reading the XHTML file
-            string metaValue = Common.GetMetaValue(filename);
-
-            var streamReader = new StreamReader(filename);
-            string text = streamReader.ReadToEnd();
-            streamReader.Close();
-
-            string[] fileList = Common.ReturnImageSource(text); //  To find the img Tags.
-            if (fileList.Length > 0)
-            {
-                foreach (string file in fileList)
-                {
-                    bool addToRoot = false;
-                    _fullPath = string.Empty;  // Make it empty. To add it to Root 
-                    _subPathValue = string.Empty;
-
-                    //Adding Folder
-                    string imagePath = Path.GetDirectoryName(file);
-                    if (imagePath.Length == 0)
-                    {
-                        addToRoot = true;
-                    }
-                    string dirName = Common.PathCombine(_dictionaryPath, Path.GetFileName(imagePath));
-                    if (!Directory.Exists(dirName))
-                    {
-                        // Adding Folder to Solution Explorer
-                        AddFolderToXML(dirName, "");
-                    }
-
-                    // Getting the sourceFolder file and Path
-                    string fromPath = Path.GetDirectoryName(filename);
-                    string imageFileName = Path.GetFileName(file);
-                    string imageFileWithPath = Common.PathCombine(fromPath, Common.PathCombine(imagePath, imageFileName));
-
-                    //Adding File
-                    if (File.Exists(imageFileWithPath))
-                    {
-                        // Adding File to Solution Explorer
-                        _fullPath = _dictionaryPath + "/"; // Add the "/" to the folder to Add the file to sub folder.
-                        _subPathValue = projectName + "/";
-                        AddFileToXML(imageFileWithPath, "False", addToRoot, imagePath, false, true);
-                        _subPathValue = projectName;
-                        _fullPath = _dictionaryPath;
-                    }
-                    else if (metaValue.Length > 0)
-                    {
-                        const string pictureFolder = "Pictures";
-                        string pictDirName = Common.PathCombine(_dictionaryPath, pictureFolder);
-                        if (!Directory.Exists(pictDirName))
-                        {
-                            // Adding Folder to Solution Explorer
-                            AddFolderToXML(pictDirName, "");
-                        }
-
-                        //fromPath = metaValue;
-                        string fileWithPath = Common.PathCombine(fromPath, Common.PathCombine(metaValue, file));
-
-                        //Adding File with Exact Path
-                        if (File.Exists(fileWithPath))
-                        {
-                            // Adding File to Solution Explorer
-                            _fullPath = _dictionaryPath + "/"; // Add the "/" to the folder to Add the file to sub folder.
-                            _subPathValue = projectName + "/";
-                            AddFileToXML(fileWithPath, "False", false, pictureFolder, false, true);
-                            _subPathValue = projectName;
-                            _fullPath = _dictionaryPath;
-                        }
-                        fileWithPath = Common.PathCombine(fromPath, Common.PathCombine(metaValue, imageFileName));
-                        //Adding File with image only
-                        if (File.Exists(fileWithPath))
-                        {
-                            // Adding File to Solution Explorer
-                            _fullPath = _dictionaryPath + "/"; // Add the "/" to the folder to Add the file to sub folder.
-                            _subPathValue = projectName + "/";
-                            AddFileToXML(fileWithPath, "False", false, pictureFolder, false, true);
-                            _subPathValue = projectName;
-                            _fullPath = _dictionaryPath;
-                        }
-                    }
-                }
-            }
-        }
 
         /// <summary>
         /// To sets the projects type/version and date of creation/modification

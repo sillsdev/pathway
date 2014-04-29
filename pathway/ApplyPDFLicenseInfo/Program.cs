@@ -76,8 +76,7 @@ namespace ApplyPDFLicenseInfo
 
         private static void CreateRAMP(string executePath, string inputType)
         {
-            string outputExtn = string.Empty;
-            outputExtn = ".pdf";
+            string outputExtn = ".pdf";
             Ramp ramp = new Ramp();
             ramp.Create(executePath, outputExtn, inputType);
         }
@@ -150,31 +149,6 @@ namespace ApplyPDFLicenseInfo
                     reader.Close();
 
                     executePath = fileLoc;
-                }
-            }
-            return executePath;
-        }
-
-        private string ReadPathinLicenseFile(string allUserPath, int readLineNumber)
-        {
-            string fileLoc = Path.Combine(allUserPath, "License.txt");
-            string executePath = string.Empty;
-            int countRead = 0;
-
-            if (File.Exists(fileLoc))
-            {
-                using (StreamReader reader = new StreamReader(fileLoc))
-                {
-                    string line;
-
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        _readLicenseFilesBylines.Add(line);
-                    }
-
-                    reader.Close();
-
-                    executePath = _readLicenseFilesBylines[readLineNumber].ToString();
                 }
             }
             return executePath;

@@ -29,12 +29,9 @@ namespace SIL.PublishingSolution
     class ModifyLOStyles : LOStyles
     {
         private XmlDocument _styleXMLdoc;
-        private XmlNode _node;
         private XmlElement _root;
         private XmlNamespaceManager nsmgr;
-        const string _styleSeperator = "_";
         private string _projectPath;
-        private string _tagType;
         private string _xPath;
         private XmlElement _nameElement;
         private string _tagName;
@@ -46,7 +43,6 @@ namespace SIL.PublishingSolution
         private Dictionary<string, ArrayList> _spellCheck = new Dictionary<string, ArrayList>();
         private List<string> _languageFont = new List<string>();
         private Dictionary<string, string> fontLangMap = new Dictionary<string, string>();
-        private string _defaultFont = "Tahoma";
 
 
         public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass, string odmMTFont)
@@ -1078,100 +1074,6 @@ namespace SIL.PublishingSolution
             return columnGap;
         }
         #endregion
-
-        #region GetFontweight(string styleFilePath, Stack styleStack, StyleAttribute childAttribute)
-
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Calculate the Fontweight value based on it'textElement parent _attribute value
-        /// </summary>
-        /// <param name="styleFilePath">syles.xml path</param>
-        /// <param name="styleStack">Parent list</param>
-        /// <param name="childAttribute">Child _attribute information</param>
-        /// <returns>absolute value of relavite parameter</returns>
-        /// -------------------------------------------------------------------------------------------
-        public string GetFontweight(string styleFilePath, Stack styleStack, StyleAttribute childAttribute)
-        {
-            string attributeName = childAttribute.Name;
-            var parentAttribute = new StyleAttribute();
-            float abs;
-            string absValue = string.Empty;
-
-            var doc = new XmlDocument();
-            doc.Load(styleFilePath);
-
-            var nsmgr = new XmlNamespaceManager(doc.NameTable);
-            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-
-            XmlNode node;
-            XmlElement root = doc.DocumentElement;
-
-            string MakeClassName = string.Empty;
-
-            // Find parent value
-            foreach (string parentClass in styleStack)
-            {
-                if (parentClass == "ClassEmpty")
-                {
-                    continue;
-                }
-                MakeClassName = MakeClassName + parentClass + "_";
-                string style = "//st:style[@st:name='" + parentClass.Trim() + "']";
-                if (root != null)
-                {
-                    node = root.SelectSingleNode(style, nsmgr); // work}
-                    if (node != null)
-                    {
-                        for (int i = 0; i < node.ChildNodes.Count; i++)
-                        {
-                            XmlNode child = node.ChildNodes[i];
-                            foreach (XmlAttribute attribute in child.Attributes)
-                            {
-                                if (attribute.Name == attributeName)
-                                {
-                                    parentAttribute.SetAttribute(attribute.Value);
-                                    if (childAttribute.StringValue == "lighter")
-                                    {
-                                        abs = parentAttribute.NumericValue - 300;
-                                        if (abs < 100)
-                                        {
-                                            abs = 100;
-                                        }
-                                        absValue = abs.ToString();
-                                        return (absValue);
-                                    }
-                                    if (childAttribute.StringValue == "bolder")
-                                    {
-                                        abs = parentAttribute.NumericValue + 300;
-                                        if (abs > 900)
-                                        {
-                                            abs = 900;
-                                        }
-                                        absValue = abs.ToString();
-                                        return (absValue);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            // Apply default value to Related value
-
-            if (childAttribute.StringValue == "lighter")
-            {
-                absValue = "400"; // 0.5em -> 6pt
-            }
-            else if (childAttribute.StringValue == "bolder")
-            {
-                absValue = "700"; // 50% -> 6pt
-                //abs = 0.0F * childAttribute.NumericValue / 100.0F; // 50% -> 0pt
-            }
-            return (absValue);
-        }
-        #endregion
-
 
         private string OpenIDStyles()
         {

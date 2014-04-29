@@ -454,12 +454,6 @@ namespace SIL.Tool
             return string.Empty;
         }
 
-        public static bool IsGraphite(string familyName, string style)
-        {
-            string fontName = GetFontFileName(familyName, style);
-            return IsGraphite(fontName);
-        }
-
         public static bool IsGraphite(string fontFullName)
         {
             if (!File.Exists(fontFullName))

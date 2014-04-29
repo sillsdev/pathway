@@ -977,22 +977,6 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        /// <summary>
-        /// Preprocess the xhtml file to replace image names, and link to the merged css file.
-        /// </summary>
-        /// <param name="projInfo">information about input data</param>
-        /// <returns>path name to processed xthml file</returns>
-        private string GetProcessedXhtml(PublicationInformation projInfo)
-        {
-            var result = projInfo.DefaultXhtmlFileWithPath;
-
-            result = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
-                                              ".xhtml");//collectionName + ".xhtml"
-            File.Copy(projInfo.DefaultXhtmlFileWithPath, result, true);
-
-            return result;
-        }
-
         private static void SaveDefaultProperty(ExportThroughPathway dlg)
         {
             Param.SetDefaultValue(Param.PrintVia, dlg.Format);

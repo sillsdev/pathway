@@ -33,7 +33,6 @@ namespace SIL.PublishingSolution
         readonly CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
         readonly TextInfo textInfo;
         private static string strMacroPath;
-        private static PublicationInformation projInfo;
         private string supportFileFolder = string.Empty;
         #endregion
 

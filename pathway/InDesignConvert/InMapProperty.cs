@@ -394,14 +394,6 @@ namespace SIL.PublishingSolution
             }
             _IDProperty["PageBreakBefore"] = propertyValue;
         }
-        public void PageBreakAfter(string propertyValue)
-        {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            _IDProperty["PageBreakAfter"] = propertyValue;
-        }
         public void PaddingLeft(string propertyValue)
         {
             if (propertyValue == string.Empty)

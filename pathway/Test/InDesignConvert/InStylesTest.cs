@@ -44,7 +44,6 @@ namespace Test.InDesignConvert
         #endregion
 
         #region Public Variables
-        public XPathNodeIterator NodeIter;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
         private CssTree _cssTree;
         #endregion

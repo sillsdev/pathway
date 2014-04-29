@@ -306,10 +306,6 @@
       <Project>{403F8C54-4154-4D79-AED7-326B976875B4}</Project>
       <Name>epubValidator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
-      <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
-      <Name>LiftPrepare</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool</Name>

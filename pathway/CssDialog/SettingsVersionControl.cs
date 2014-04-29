@@ -33,7 +33,7 @@ namespace SIL.PublishingSolution
         protected string _xmlFileWithPath;
         protected string ProjSchemaPath;
 
-        private string _userFilePath, _pathwayFilePath, _pathwayApplicationPath;
+        private string _userFilePath, _pathwayFilePath;
         private XmlDocument _userXml, _pathwayXml;
         private XmlElement _userRoot, _pathwayRoot;
         private bool _compareVersion = false;

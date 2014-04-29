@@ -26,8 +26,6 @@ namespace SIL.PublishingSolution
 {
     public class ExportSword : IExportProcess
     {
-        protected string _processFolder;
-        private const string RedirectOutputFileName = "Convert.log";
         private bool _isUnixOS;
         private string _languageName;
         private bool _openOutputDirectory = true;

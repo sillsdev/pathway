@@ -210,19 +210,5 @@ namespace Test
             xmlDocument.LoadXml(text);
             return xmlDocument;
         }
-
-        public static XmlNamespaceManager NamespaceManager(XmlDocument xmlDocument)
-        {
-            var root = xmlDocument.DocumentElement;
-            Assert.IsNotNull(root, "Missing xml document");
-            var nsManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            foreach (XmlAttribute attribute in root.Attributes)
-            {
-                var namePart = attribute.Name.Split(':');
-                if (namePart[0] == "xmlns")
-                    nsManager.AddNamespace(namePart[1], attribute.Value);
-            }
-            return nsManager;
-        }
     }
 }

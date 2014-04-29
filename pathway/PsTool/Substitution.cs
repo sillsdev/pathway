@@ -57,77 +57,6 @@ namespace SIL.Tool
         public string Brackets { get; set; }
         #endregion Properties
 
-        #region FileSubstitute
-        /// <summary>
-        /// Substitute using NameMap in InpudTemplate producing OutputFile in TargetPath.
-        /// </summary>
-        public void FileSubstitute()
-        {
-            var templateFullName = TargetPath != null ? Common.PathCombine(TargetPath, InputTemplate) : InputTemplate;
-            string inp = FileData.Get(templateFullName);
-
-            var del = new MyDelegate(NameMap);
-            // Find %(xx)<yy> and look up xx in dicMap and if it is not blank include yy in result.
-            if (Brackets == null || Brackets.Length < 2)
-                Brackets = "<>";
-            string blockPattern = string.Format(@"%\(([^)]*)\){0}([^{1}]*){1}", Brackets.Substring(0, 1), Brackets.Substring(1, 1));
-            string res = DoSubstitute(inp, blockPattern, RegexOptions.Multiline, del.myOptional);
-            inp = res;
-            // Find %(xx)s in line and look up xx in dicMap. If found put the value in place of this designator.
-            res = DoSubstitute(inp, @"%\(([^)]*)\)s", RegexOptions.None, del.myValue);
-
-            var outputFullName = TargetPath != null ? Common.PathCombine(TargetPath, OutputFile) : OutputFile;
-            StreamWriter sw = File.CreateText(outputFullName);
-            sw.Write(res);
-            sw.Close();
-        }
-
-        /// <summary>
-        /// Substitutes names in template with values from map creating output file
-        /// </summary>
-        public void FileSubstitute(string template, Dictionary<string, string> map, string output)
-        {
-            InputTemplate = template;
-            NameMap = map;
-            OutputFile = output;
-            FileSubstitute();
-        }
-
-        /// <summary>
-        /// Substitutes names in template with values from map creating output file by removing -tpl from template name
-        /// </summary>
-        public void FileSubstitute(string template, Dictionary<string, string> map)
-        {
-            InputTemplate = template;
-            NameMap = map;
-            OutputFile = template.Replace("-tpl", "");
-            FileSubstitute();
-        }
-        #endregion FileSubstitute
-
-        #region UpdateGroup1
-        /// <summary>
-        /// Sustitute all occurances of pattern.Group(1) with myValue
-        /// </summary>
-        public void UpdateGroup1(string pattern, string myValue)
-        {
-            var inputFullPath = TargetPath != null ? Common.PathCombine(TargetPath, InputFile) : InputFile; 
-            string data = FileData.Get(inputFullPath);
-            var mats = Regex.Matches(data, pattern);
-            var outputFullName = TargetPath != null ? Common.PathCombine(TargetPath, OutputFile) : OutputFile;
-            var ostr = new StreamWriter(outputFullName);
-            int beg = 0;
-            foreach (Match m in mats)
-            {
-                ostr.Write(data.Substring(beg, m.Groups[1].Index - beg));
-                ostr.Write(myValue);
-                beg = m.Groups[1].Index + m.Groups[1].Length;
-            }
-            ostr.Write(data.Substring(beg));
-            ostr.Close();
-        }
-        #endregion UpdateGroup1
-
         #region MyDelegate
         /// <summary>
         /// myDelegate class contains the dictionary of settings and insert functions for template
@@ -153,24 +82,6 @@ namespace SIL.Tool
             public MyDelegate(Dictionary<string, string> dicMap)
             {
                 myDicMap = dicMap;
-            }
-            #endregion
-
-            #region myOptional
-            /// <summary>
-            /// Delegate function for angle bracket matching
-            /// </summary>
-            /// <param name="m">match containing two groups: variable name and optional lines</param>
-            /// <returns>value to be inserted in output</returns>
-            public string myOptional(Match m)
-            {
-                if (myDicMap.ContainsKey(m.Groups[1].Value))
-                {
-                    if (myDicMap[m.Groups[1].Value] != "")
-                        return m.Groups[2].Value;
-                    return "";
-                }
-                return null;
             }
             #endregion
 

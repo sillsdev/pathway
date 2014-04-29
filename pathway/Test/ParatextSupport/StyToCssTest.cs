@@ -35,7 +35,6 @@ namespace Test.ParatextSupport
     public class StyToCssTest: StyToCSS
     {
         #region setup
-        private static Mockery mocks = new Mockery();
         private static string _inputPath;
         private static string _outputPath;
         private static string _expectedPath;
@@ -70,11 +69,6 @@ namespace Test.ParatextSupport
         }
 
         #region Private Functions
-        private static string FileProg(string fileName)
-        {
-            return Common.PathCombine(Common.GetPSApplicationPath(), fileName);
-        }
-
         private static string FileInput(string fileName)
         {
             return Common.PathCombine(_inputPath, fileName);
@@ -88,20 +82,6 @@ namespace Test.ParatextSupport
         private static string FileExpected(string fileName)
         {
             return Common.PathCombine(_expectedPath, fileName);
-        }
-
-        /// <summary>
-        /// Create a simple PublicationInformation instance
-        /// </summary>
-        private static PublicationInformation GetProjInfo(string XhtmlName, string BlankName)
-        {
-            PublicationInformation projInfo = new PublicationInformation();
-            File.Copy(FileInput(XhtmlName), FileOutput(XhtmlName), true);
-            File.Copy(FileInput(BlankName), FileOutput(BlankName), true);
-            projInfo.DefaultXhtmlFileWithPath = FileOutput(XhtmlName);
-            projInfo.DefaultCssFileWithPath = FileOutput(BlankName);
-            projInfo.IsOpenOutput = false;
-            return projInfo;
         }
         #endregion PrivateFunctions
     }

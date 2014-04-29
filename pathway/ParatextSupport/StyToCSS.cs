@@ -70,20 +70,6 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Override to convert the sty file to CSS, assuming the
-        /// sty file is already set for this class.
-        /// </summary>
-        /// <param name="cssFullPath"></param>
-        public void ConvertStyToCSS(string cssFullPath)
-        {
-            _cssFullPath = cssFullPath;
-            MapClassName();
-            ParseFile();
-            SetFontAndDirection();
-            WriteCSS();
-        }
-
-        /// <summary>
         /// Add Properties for font and direction
         /// </summary>
         private void SetFontAndDirection()

@@ -30,7 +30,6 @@ namespace SIL.PublishingSolution
         private XmlNode _node;
         private XmlElement _root;
         private XmlNamespaceManager nsmgr;
-        const string _styleSeperator = "_";
         private string _projectPath;
         private string _tagType;
         private string _xPath;

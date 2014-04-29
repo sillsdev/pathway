@@ -38,7 +38,6 @@ namespace Test.PsTool
         PublicationInformation _target;
         XmlDocument actualDocument;
         private string _projectFilePath;
-        public string _node;
         string _allUserPath;
         string _inputBasePath = string.Empty;
         string _outputBasePath = string.Empty;
@@ -1198,10 +1197,6 @@ namespace Test.PsTool
         private static string GetFileNameWithExpectedPath(string fileName)
         {
             return Common.DirectoryPathReplace(GetPath("Expected", fileName));
-        }
-        private static string GetFileNameWithProgPath(string filename)
-        {
-            return Common.DirectoryPathReplace(GetPath("../../../PsSupport", filename));
         }
         private static void CopyToOutput(string input, string output)
         {

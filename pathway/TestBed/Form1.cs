@@ -30,11 +30,6 @@ namespace TestBed
     public partial class frmTreeView : Form
     {
         /// <summary>
-        /// Results are stored here
-        /// </summary>
-        TreeNode resultNode = new TreeNode();
-
-        /// <summary>
         /// Constructor to initialize form
         /// </summary>
         public frmTreeView()
@@ -54,7 +49,7 @@ namespace TestBed
             dlg.Filter = "Cascading Style Sheet (*.css)|*.css";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                var clsBL = new CssParserDuplicateClass();
+                var clsBL = new CssParser();
                 TreeNode node = clsBL.BuildTree(dlg.FileName);
                 treeView1.Nodes.Clear();
                 treeView1.Nodes.Add((TreeNode)node.Clone());

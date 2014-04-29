@@ -92,7 +92,7 @@ namespace Test.CssParserTest
             Assert.AreEqual(_outputClassAttrib.Attribute, _expectedClassAttrib.Attribute, "CoreClass test Failed");
         }
 
-        //[Test]
+        [Test]
         [Ignore]
         public void Parent()
         {

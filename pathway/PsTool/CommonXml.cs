@@ -356,36 +356,6 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// Removing the empty anchor tags <a href="sample"/>
-        /// </summary>
-        /// <param name="sourceFile">The Xhtml File</param>
-        private static string RemoveEmptyAnchorTag(string sourceFile)
-        {
-            const string tag = "a";
-            var xDoc = new XmlDocument();
-            xDoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
-            xDoc.Load(sourceFile);
-            XmlNodeList nodeList = xDoc.GetElementsByTagName(tag);
-            if (nodeList.Count > 0)
-            {
-                while (true)
-                {
-                    bool removed = false;
-                    foreach (XmlNode item in nodeList)
-                    {
-                        item.ParentNode.RemoveChild(item);
-                        removed = true;
-                        break;
-                    }
-                    if (!removed)
-                        break;
-                }
-                xDoc.Save(sourceFile);
-            }
-            return sourceFile;
-        }
-
-        /// <summary>
         /// Checks all the Paths of image and returns the Path
         /// </summary>
         /// <param name="src">Image Source </param>
@@ -758,19 +728,6 @@ namespace SIL.Tool
         }
         #endregion
 
-        #region CreateXMLFile
-        /// <summary>
-        /// Returns XmlTextWriter 
-        /// </summary>
-        /// <param name="xmlFileNameWithPath">File Name</param>
-        /// <returns>Returns XmlTextWriter</returns>
-        public static XmlTextWriter CreateXMLFile(string xmlFileNameWithPath)
-        {
-            XmlTextWriter writer = new XmlTextWriter(xmlFileNameWithPath, null) { Formatting = Formatting.Indented };
-            return writer;
-        }
-        #endregion
-
         #region GetXmlNode
         /// <summary>
         /// Returns ArrayList Example: Apple, Ball
@@ -955,52 +912,6 @@ namespace SIL.Tool
         }
 
         #endregion GetProjectType
-
-        #region PicturePathAssign
-        /// <summary>
-        /// PicturePathAssign is used for preview of the xhtml files
-        /// </summary>
-        /// <param name="xn">XML Node</param>
-        /// <param name="sourcePath">Source Path</param>
-        public static void PicturePathAssign(XmlNode xn, string sourcePath)
-        {
-            foreach (XmlNode childNode in xn.ChildNodes)
-            {
-                if (childNode.Name == "img" && childNode.Attributes.Count > 0)
-                {
-                    for (int i = 0; i < childNode.Attributes.Count; i++)
-                    {
-                        if (childNode.Attributes[i].Name == "src")
-                        {
-                            string fromPath;
-                            string source = childNode.Attributes[i].Value;
-                            if (source.IndexOf("file://") >= 0)
-                            {
-                                fromPath = source;
-                            }
-                            else
-                            {
-                                fromPath = PathCombine(sourcePath, source);
-                                if (!File.Exists(fromPath))
-                                {
-                                    string flexPict = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"/SIL/FieldWorks/" + source;
-                                    if (File.Exists(flexPict))
-                                    {
-                                        fromPath = flexPict;
-                                    }
-                                }
-                            }
-                            childNode.Attributes[i].Value = fromPath;
-                        }
-                    }
-                }
-                if (childNode.HasChildNodes)
-                {
-                    PicturePathAssign(childNode, sourcePath);
-                }
-            }
-        }
-        #endregion PicturePathAssign
 
         #region GetCountryCode(string language, string country, string langCountry, Dictionary spellCheck)
         /// <summary>
@@ -1345,143 +1256,6 @@ namespace SIL.Tool
                             writerCount5++;
                         }
 
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// From the one xmlreader multiple xmlwriter are ued to split the class
-        /// using dictionary
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="writers"></param>
-        /// <param name="bookSplitterClass"></param>
-        static void SplitXhtmlFileAdjacent_Old(XmlReader reader, Dictionary<string, XmlWriter> writers, string bookSplitterClass, bool adjacentClass)
-        {
-
-            int srcCount = 0;
-            XmlWriter writer;
-
-            if (reader == null)
-            {
-                throw new ArgumentNullException("reader");
-            }
-            while (reader.Read())
-            {
-            srcWritten:
-                switch (reader.NodeType)
-                {
-                    case XmlNodeType.Element:
-
-                        string prefix = reader.Prefix;
-                        string localName = reader.LocalName;
-                        string nameSpace = reader.NamespaceURI;
-                        string className = string.Empty;
-                        className = reader.GetAttribute("class") ?? "";
-                        if (className.ToLower() == bookSplitterClass)
-                        {
-                            srcCount++;
-                            string f1 = reader.ReadOuterXml();  // current node - Ex: LetHead
-
-                            string f2 = string.Empty;
-                            if (adjacentClass)
-                            {
-                                f2 = reader.ReadOuterXml();  // Adjacent node - Ex: LetData
-                                f1 += f2;
-                            }
-
-                            int writerCount = 1;
-                            foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                            {
-                                if (srcCount == writerCount)
-                                {
-                                    writer = pair.Value;
-                                    writer.WriteRaw(f1);
-                                }
-                                writerCount++;
-                            }
-                            goto srcWritten;  // Note - The reader already points to next node.
-                            // Note - so need of reading again. start process the node.
-                        }
-                        {
-                            foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                            {
-                                writer = pair.Value;
-                                writer.WriteStartElement(prefix, localName, nameSpace);
-                                writer.WriteAttributes(reader, true);
-                                if (reader.IsEmptyElement)
-                                {
-                                    writer.WriteEndElement();
-                                }
-                            }
-                        }
-                        break;
-                    case XmlNodeType.Text:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteString(reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.Whitespace:
-                    case XmlNodeType.SignificantWhitespace:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteWhitespace(reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.CDATA:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteCData(reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.EntityReference:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteEntityRef(reader.Name);
-                        }
-                        break;
-                    case XmlNodeType.XmlDeclaration:
-                    case XmlNodeType.ProcessingInstruction:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteProcessingInstruction(reader.Name, reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.DocumentType:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteDocType(reader.Name, reader.GetAttribute("PUBLIC"),
-                                                reader.GetAttribute("SYSTEM"), reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.Comment:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteComment(reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.EndElement:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            try
-                            {
-                                writer = pair.Value;
-                                writer.WriteFullEndElement();
-                            }
-                            catch
-                            {
-                                return;
-                            }
-                        }
                         break;
                 }
             }

@@ -29,7 +29,6 @@ namespace SIL.PublishingSolution
         private bool _IsKeepLineWrittern = false;
         private bool _isLinux = false;
         private string _className;
-        private Int32 _hangparaPropertyValue;
         private string _fontName;
         private List<string> _fontOption = new List<string>();
         private List<string> _fontStyle = new List<string>();
@@ -175,22 +174,6 @@ namespace SIL.PublishingSolution
 
         }
 
-        public string XeLaTexPageProperty(Dictionary<string, string> cssProperty, string className, List<string> inlineStyle, List<string> includePackageList, List<string> inlineText)
-        {
-            Initialize(className, cssProperty, inlineStyle, includePackageList, inlineText);
-            foreach (KeyValuePair<string, string> property in cssProperty)
-            {
-                switch (property.Key.ToLower())
-                {
-                    case "marks":
-                        Marks(property.Value);
-                        break;
-                }
-            }
-            string style = ComposeStyle();
-            return style;
-        }
-
         private void Initialize(string className, Dictionary<string, string> cssProperty, List<string> inlineStyle, List<string> includePackageList, List<string> inlineText)
         {
             _className = className;
@@ -267,28 +250,6 @@ namespace SIL.PublishingSolution
             return style;
         }
 
-        public void VerticalJustification(string propertyValue)
-        {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            string value = propertyValue;
-            if (propertyValue == "Top")
-            {
-                value = "TopAlign";
-            }
-            else if (propertyValue == "Center")
-            {
-                value = "CenterAlign";
-            }
-            else if (propertyValue == "Bottom")
-            {
-                value = "BottomAlign";
-            }
-            _IDProperty["VerticalJustification"] = value;
-        }
-
         private void Widows(string propertyValue)
         {
             if (propertyValue == string.Empty)
@@ -343,66 +304,6 @@ namespace SIL.PublishingSolution
             string space = ":letterspace=" + propertyValue;
             _fontStyle.Add(space);
 
-        }
-
-
-        public void HyphenateLines(string propertyValue)
-        {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            _IDProperty["HyphenateLadderLimit"] = propertyValue;
-        }
-        public void HyphenateAfter(string propertyValue)
-        {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            _IDProperty["HyphenateAfterFirst"] = propertyValue;
-        }
-        public void HyphenateBefore(string propertyValue)
-        {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            _IDProperty["HyphenateBeforeLast"] = propertyValue;
-        }
-        public void Hyphens(string propertyValue)
-        {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            string value = propertyValue == "none" ? "false" : "true";
-            _IDProperty["Hyphenation"] = value;
-        }
-        public void SimpleProperty(KeyValuePair<string, string> property)
-        {
-            string value = property.Value;
-            switch (property.Key.ToLower())
-            {
-                case "float":
-                case "clear":
-                case "white-space":
-                case "counter-increment":
-                case "counter-reset":
-                case "content":
-                case "position":
-                case "left":
-                case "right":
-                case "width":
-                case "height":
-                case "visibility":
-                case "prince-text-replace":
-                    _IDProperty[property.Key] = value;
-                    break;
-                default:
-                    //throw new Exception("Not a valid CSS Command");
-                    break;
-            }
         }
 
         public void Marks(string propertyValue)
@@ -495,14 +396,6 @@ namespace SIL.PublishingSolution
             }
             _inlineStyle.Add(propertyValue);
         }
-        public void PageBreakBefore(string propertyValue)
-        {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            _IDProperty["PageBreakBefore"] = propertyValue;
-        }
         public void PaddingLeft(string propertyValue)
         {
             if (propertyValue == string.Empty)
@@ -565,14 +458,6 @@ namespace SIL.PublishingSolution
             propertyValue = "\\usepackage{changepage}";
             if (!_includePackageList.Contains(propertyValue))
                 _includePackageList.Add(propertyValue);
-        }
-        public void Mirror(string propertyValue)
-        {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            _IDProperty["FacingPages"] = propertyValue;
         }
         public void PageHeight(string propertyValue)
         {
@@ -698,16 +583,6 @@ namespace SIL.PublishingSolution
 
             _fontName = fontName;
             return _fontName;
-        }
-
-        public string GetFontSize()
-        {
-            string fontSize = string.Empty;
-            if (_cssProperty.ContainsKey("font-size"))
-            {
-                fontSize = " at " + _cssProperty["font-size"] + "pt";
-            }
-            return fontSize;
         }
 
         public void TextIndent(string propertyValue, string className, Dictionary<string, string> cssProperty)
@@ -838,16 +713,6 @@ namespace SIL.PublishingSolution
                 _includePackageList.Add(propertyValue);
 
         }
-        public void ColumnGap(string propertyValue)
-        {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            propertyValue = "\\setlength\\columnseprule{" + propertyValue + "}";
-            _inlineStyle.Add(propertyValue);
-            _IDProperty["TextColumnGutter"] = propertyValue;
-        }
 
         public void FontVariant(string propertyValue)
         {
@@ -972,42 +837,6 @@ namespace SIL.PublishingSolution
             else
                 _fontSize = " at " + Common.SetPropertyValue(string.Empty, propertyValue);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="hexValue">"#ff0000"</param>
-        /// <returns>"255 0 0"</returns>
-        public string ConvertHexToDec(string hexValue)
-        {
-            string concatChar = string.Empty;
-            string decValue = string.Empty;
-            try
-            {
-                if (hexValue.IndexOf("#") == -1) return "00 00 00";
-                string hexFormat = hexValue.Replace("#", "");
-                char[] RGB = hexFormat.ToCharArray();
-                if (RGB.Length < 6)
-                    return "00 00 00";
-
-                for (int i = 0; i < RGB.Length; i++)
-                {
-                    if (i % 2 == 0)
-                    {
-                        concatChar = RGB[i].ToString();
-                        continue;
-                    }
-                    concatChar += RGB[i].ToString();
-                    decValue += " " + int.Parse(concatChar, System.Globalization.NumberStyles.HexNumber);
-                    concatChar = string.Empty;
-                }
-            }
-            catch
-            {
-                decValue = "00 00 00";
-            }
-            return decValue.Trim();
-        }
-
 
         private string rgb2cmyk(int r, int g, int b)
         {

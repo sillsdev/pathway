@@ -33,10 +33,7 @@ namespace SIL.PublishingSolution
     {
         #region Private Variable
 
-        private int _storyNo = 0;
-        private int _hyperLinkNo = 0;
         private bool isFileEmpty = true;
-        private bool isFileCreated;
         private bool _isDropCaps;
         private bool _nextContent;
         private int _incrementDropCap = 0;
@@ -48,11 +45,8 @@ namespace SIL.PublishingSolution
         private string imageClass = string.Empty;
         private string _inputPath;
         private ArrayList _textFrameClass = new ArrayList();
-        private ArrayList _textVariables = new ArrayList();
-        private ArrayList _columnClass = new ArrayList();
         private ArrayList _psuedoBefore = new ArrayList();
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
-        private Dictionary<string, ArrayList> _styleName = new Dictionary<string, ArrayList>();
         private ArrayList _crossRef = new ArrayList();
         private int _crossRefCounter = 1;
         private bool _isWhiteSpace = true;
@@ -60,10 +54,7 @@ namespace SIL.PublishingSolution
         private List<string> _usedStyleName = new List<string>();
         private List<string> _mergedInlineStyle;
         private bool _IsHeadword = false;
-        private bool _isDropCap = false;
         private bool _xetexNewLine;
-        private string _dropCapStyle = string.Empty;
-        private string _currentStoryName = string.Empty;
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
         Dictionary<string, List<string>> _classInlineInnerStyle = new Dictionary<string, List<string>>();
         private string xhtmlFile;
@@ -77,7 +68,6 @@ namespace SIL.PublishingSolution
         private List<string> _mathStyle = new List<string>();
         private int _inlineCount;
         private string _headerContent = string.Empty;
-        private bool _dictionaryStarting = false;
         public bool _dictionaryEnding = false;
         private string _tocStartingPage;
         private int _tocPageStock = 0;
@@ -1712,45 +1702,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void DropCapsOLD()
-        {
-            string classNameWOLang = _classNameWithLang;
-            if (classNameWOLang.IndexOf("_.") > 0)
-                classNameWOLang = Common.LeftString(classNameWOLang, "_.");
-            string inner = string.Empty;
-
-            if (classNameWOLang == "ChapterNumber")
-            {
-                _chapterNo = _reader.ReadString();
-            }
-            if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("vertical-align"))
-            {
-                Dictionary<string, string> mystyle = new Dictionary<string, string>();
-                _isDropCap = true;
-                string lines = "2";
-                _allStyle.Pop();
-                CollectFootNoteChapterVerse(_chapterNo, Common.OutputType.XELATEX.ToString());
-
-                try
-                {
-                    if (IdAllClass[classNameWOLang].ContainsKey("PointSize") && IdAllClass[classNameWOLang]["PointSize"].IndexOf('%') > 0)
-                    {
-                        lines = (int.Parse(IdAllClass[classNameWOLang]["PointSize"].Replace("%", "")) / 100).ToString();
-                    }
-                }
-                catch
-                {
-                }
-                mystyle["DropCapCharacters"] = _chapterNo.Length.ToString();
-                mystyle["DropCapLines"] = lines; // No of Lines.
-                _paragraphName = classNameWOLang + _chapterNo.Length.ToString();
-                _newProperty[_paragraphName] = mystyle;
-                _dropCapStyle = _paragraphName;
-                Write();
-
-            }
-        }
-
         private void EndElement()
         {
             _characterName = null;
@@ -1870,14 +1821,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void WriteEmptyHomographStyle()
-        {
-            if (isHomographNumber)
-            {
-                isHomographNumber = false;
-            }
-        }
-
         private void Psuedo()
         {
             // Psuedo Before
@@ -1932,7 +1875,6 @@ namespace SIL.PublishingSolution
             IdAllClass = new Dictionary<string, Dictionary<string, string>>();
             _newProperty = new Dictionary<string, Dictionary<string, string>>();
             ParentClass = new Dictionary<string, string>();
-            _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
 
             IdAllClass = idAllClass;

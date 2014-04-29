@@ -37,7 +37,6 @@ namespace SIL.PublishingSolution
         public ArrayList WhiteSpace;
         public ArrayList DisplayBlock;
         public ArrayList DisplayInline;
-        public ArrayList DisplayNone;
         public Dictionary<string, int> ContentCounter;
         public Dictionary<string, string> ContentCounterReset;
         public Dictionary<string, Dictionary<string, string>> CounterParent;
@@ -65,11 +64,9 @@ namespace SIL.PublishingSolution
         public ArrayList DropCap;
         public Dictionary<string, string> ReplaceSymbolToText; //TD-479( create property to substitute quote characters)
 
-        public bool IsVerseNumberInclude;
         public string ReferenceFormat;
 
         public bool IsAutoWidthforCaption;
-        public ArrayList UsedFontsList; //TD-504
 
         public Dictionary<string, string> VisibilityClassName;
 

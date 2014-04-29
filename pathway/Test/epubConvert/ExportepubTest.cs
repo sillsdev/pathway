@@ -336,12 +336,6 @@ namespace Test.epubConvert
             return Common.PathCombine(_outputPath, fileName);
         }
 
-        private string FileExpected(string fileName)
-        {
-            return Common.PathCombine(_expectedPath, fileName);
-        }
-
-
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -405,13 +399,6 @@ namespace Test.epubConvert
             zfExpected.ExtractZip(result, FileOutput("InsertBeforeAfterComparisonExpect"), ".*");
             FileCompare("InsertBeforeAfterComparison/OEBPS/PartFile00001_.xhtml", "InsertBeforeAfterComparisonExpect/OEBPS/PartFile00001_.xhtml");
             
-        }
-
-        private void FileCompare(string file)
-        {
-            string xhtmlOutput = FileOutput(file);
-            string xhtmlExpected = FileExpected(file);
-            TextFileAssert.AreEqual(xhtmlOutput, xhtmlExpected, file + " in epub ");
         }
 
         private void FileCompare(string file1, string file2)

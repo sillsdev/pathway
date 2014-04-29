@@ -482,25 +482,6 @@ namespace Test.CssParserTest
             Assert.AreEqual(expected,output, _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
-        /// <summary>
-        ///A test for FontHeight
-        ///</summary>
-        //[Test]
-        public void FontHeight()
-        {
-
-        
-        }
-
-        /// <summary>
-        ///A test for Language
-        ///</summary>
-        //[Test]
-
-        public void Language()
-        {
-        }
-
         #region FontFamily
         [Test]
         public void FontFamily1()

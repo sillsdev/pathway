@@ -45,74 +45,6 @@ namespace PdfLicense
 
         /// --------------------------------------------------------------------------------
         /// <summary>
-        /// Method for retrieving a Registry Value.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <param name="defaultValue">The default value.</param>
-        /// <returns></returns>
-        /// --------------------------------------------------------------------------------
-        static public string GetStringRegistryValue(string key, string defaultValue)
-        {
-            return (string)GetRegistryValue(key, defaultValue);
-        }
-
-        /// --------------------------------------------------------------------------------
-        /// <summary>
-        /// Method for retrieving a Registry Value.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <param name="defaultValue">The default value.</param>
-        /// <returns></returns>
-        /// --------------------------------------------------------------------------------
-        static public int GetIntRegistryValue(string key, int defaultValue)
-        {
-            return (int)GetRegistryValue(key, defaultValue);
-        }
-
-        /// --------------------------------------------------------------------------------
-        /// <summary>
-        /// Method for retrieving a Registry Value.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <param name="defaultValue">The default value.</param>
-        /// <returns></returns>
-        /// --------------------------------------------------------------------------------
-        static private object GetRegistryValue(string key, object defaultValue)
-        {
-            RegistryKey rkCompany;
-            RegistryKey rkApplication;
-            // The generic Company Name is SIL International, but in the registry we want this
-            // to use SIL. If we want to keep a generic approach, we probably need another member
-            // variable
-            // for ShortCompanyName, or something similar.
-            //rkCompany = Registry.CurrentUser.OpenSubKey(SOFTWARE_KEY, false).OpenSubKey(Application.CompanyName, false);
-            try
-            {
-                rkCompany = Registry.CurrentUser.OpenSubKey(SOFTWARE_KEY, false).OpenSubKey("SIL", false);
-            }
-            catch (System.Exception)
-            {
-                rkCompany = null;
-            }
-            if (rkCompany != null)
-            {
-                rkApplication = rkCompany.OpenSubKey(ProductName, false);
-                if (rkApplication != null)
-                {
-                    foreach (string sKey in rkApplication.GetValueNames())
-                    {
-                        if (sKey == key)
-                        {
-                            return rkApplication.GetValue(sKey);
-                        }
-                    }
-                }
-            }
-            return defaultValue;
-        }
-
-        /// --------------------------------------------------------------------------------
-        /// <summary>
         /// Method for storing a Registry Value.
         /// </summary>
         /// <param name="key">The key.</param>
@@ -121,18 +53,6 @@ namespace PdfLicense
         static public void SetStringRegistryValue(string key, string stringValue)
         {
             SetRegistryValue(key, stringValue);
-        }
-
-        /// --------------------------------------------------------------------------------
-        /// <summary>
-        /// Method for storing a Registry Value.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <param name="val">The value.</param>
-        /// --------------------------------------------------------------------------------
-        static public void SetIntRegistryValue(string key, int val)
-        {
-            SetRegistryValue(key, val);
         }
 
         private static void SetRegistryValue(string key, object val)

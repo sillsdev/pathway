@@ -35,12 +35,6 @@ namespace SIL.PublishingSolution
         private XmlTextReader _reader;
         private StreamWriter _sfmFile;
 
-        private Dictionary<string, Dictionary<string, string>> _styleInfo =
-            new Dictionary<string, Dictionary<string, string>>();
-
-        private Dictionary<string, string> _cssProp;
-        private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
-
         private string _tagName, _style, _number, _code, _caller, _content;
         private string _parentTagName = string.Empty, _parentStyleName = string.Empty;
         private string _verseNumber = string.Empty;
@@ -561,30 +555,6 @@ namespace SIL.PublishingSolution
                 line = "\\" + _style + Space + _caller + Space;
                 _sfmFile.Write(line);
             }
-        }
-
-        private void MapClassName()
-        {
-            _mapClassName["toc1"] = "scrBookCode";
-            _mapClassName["toc2"] = "scrBookName";
-            _mapClassName["mt1"] = "Title_Main";
-            _mapClassName["mt2"] = "Title_Secondary";
-            _mapClassName["w"] = "See_In_Glossary";
-            _mapClassName["v"] = "Verse_Number";
-            _mapClassName["fr"] = "Note_Target_Reference";
-            _mapClassName["fq"] = "Alternate_Reading";
-            _mapClassName["f"] = "Note_General_Paragraph";
-            _mapClassName["p"] = "Paragraph";
-            _mapClassName["s"] = "Section_Head";
-            _mapClassName["r"] = "Parallel_Passage_Reference";
-            _mapClassName["c"] = "Chapter_Number";
-            _mapClassName["rem"] = "rem";
-            _mapClassName["fig"] = "fig";
-            _mapClassName["q1"] = "Line1";
-            _mapClassName["q2"] = "Line2";
-            _mapClassName["m"] = "Paragraph_Continuation";
-            _mapClassName["fqa"] = "fqa";
-            _mapClassName["sc"] = "Inscription";
         }
 
         private string SignificantSpace(string content)

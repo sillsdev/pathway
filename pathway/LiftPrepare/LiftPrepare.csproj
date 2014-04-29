@@ -251,20 +251,10 @@
     <Compile Include="LiftDocument.cs" />
     <Compile Include="LiftEntries.cs" />
     <Compile Include="Filter\LiftFilter.cs" />
-    <Compile Include="LiftPreparer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LiftPreparer.Designer.cs">
-      <DependentUpon>LiftPreparer.cs</DependentUpon>
-    </Compile>
     <Compile Include="LiftReader.cs" />
     <Compile Include="Sort\LiftEntrySorter.cs" />
     <Compile Include="LiftWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="LiftPreparer.resx">
-      <DependentUpon>LiftPreparer.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

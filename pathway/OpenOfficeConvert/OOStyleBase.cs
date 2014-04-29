@@ -52,31 +52,12 @@ namespace SIL.PublishingSolution
 
         protected Dictionary<string, string> _columnSep;
 
-        ClassInfo _selectorClass;
-        ArrayList _multiClass = new ArrayList();
-        ArrayList _tagName = new ArrayList();  // for merge style in CloseODTStyles() function
-
-
-        StyleAttribute _attributeInfo;
-        string _className = string.Empty;
-        bool _borderAdded = false;
-
-        Dictionary<string, string> _attribute;
-        Dictionary<string, string> _dispClassName = new Dictionary<string, string>();
-        OOMapProperty _mapProperty = new OOMapProperty();
-        bool _pageFirst = false;
-        bool _isDictionary = false;
-        bool _pseudoClassName = false;
         protected string _styleFilePath;
-        string _attribClassName = string.Empty;
         protected ArrayList _firstPageContentNone = new ArrayList();
         #endregion
 
         #region public Variable
         public bool isMirrored = false; //TD-410
-        public bool IsPosition = false;
-        public static bool IsCropMarkChecked; // TD-190(marks:crop)
-        public static bool IsMarginChanged; // TD-190(marks:crop)
         public static string HeaderRule; // TD-1007(Add a ruling line to the bottom of the header.)
         #endregion
 

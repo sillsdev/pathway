@@ -962,12 +962,6 @@ namespace SIL.PublishingSolution
             EditMobileCSS(sender, e);
         }
 
-        private void ddlFileProduceDict_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.ddlFileProduceDict_ValidatedBL(sender);
-            EditMobileCSS(sender, e);
-        }
-
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             _CToolBL.tabControl1_SelectedIndexChangedBL();
@@ -1017,40 +1011,9 @@ namespace SIL.PublishingSolution
             _CToolBL.SetModifyMode(true);
         }
 
-        //TD-3607
-        private void txtGuidewordLength_KeyUp(object sender, KeyEventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-
         private void txtPageInside_KeyUp(object sender, KeyEventArgs e)
         {
             _CToolBL.SetModifyMode(true);
-        }
-
-        private bool RangeCheck(string txtValue)
-        {
-            bool isValid = true;
-            try
-            {
-                if (txtValue.Trim().Length == 0 || txtValue.Trim() == "-" ||
-                    txtValue.Trim() == "+")
-                    return isValid;
-
-                string numValue = txtValue.Replace("pt", "");
-                numValue = numValue.Replace("p", "");
-                float value = float.Parse(numValue);
-                if (value < -200 || value > 200)
-                {
-                    isValid = false;
-                }
-            }
-            catch (Exception)
-            {
-                isValid = false;
-            }
-            return isValid;
-
         }
 
         private void txtPageOutside_KeyUp(object sender, KeyEventArgs e)
@@ -1140,21 +1103,6 @@ namespace SIL.PublishingSolution
             EditOthersCSS(sender, e);
         }
 
-        private void txtInformation_KeyUp(object sender, KeyEventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-
-        private void txtCopyright_KeyUp(object sender, KeyEventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-
-        private void btnBrowse_KeyUp(object sender, KeyEventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-
         private void txtMaxImageWidth_Validated(object sender, EventArgs e)
         {
             _CToolBL.txtMaxImageWidth_ValidatedBL(sender);
@@ -1239,15 +1187,10 @@ namespace SIL.PublishingSolution
 
         private void lnkLblUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using (System.Diagnostics.Process.Start("http://pathway.sil.org/"))
+            using (Process.Start("http://pathway.sil.org/"))
             {
                 return;
             }
-        }
-
-        private void ddlPageNumber_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _CToolBL.ddlPageNumber_SelectedIndexChange();
         }
 
         private void txtFnCallerSymbol_KeyUp(object sender, KeyEventArgs e)

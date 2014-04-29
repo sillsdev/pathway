@@ -590,53 +590,6 @@ namespace Test
 
         /// ------------------------------------------------------------------------------------
         /// <summary>
-        /// Create a mocked Standard Format file with \id line and file contents as specified.
-        /// No BOM. Encoding will be UTF8.
-        /// </summary>
-        /// <param name="sBookId">The book id (if set, this will cause \id line to be written
-        /// as the first line of the fiel)</param>
-        /// <param name="lines">Remaining lines of the file</param>
-        /// ------------------------------------------------------------------------------------
-        public string MakeSfFile(string sBookId, params string[] lines)
-        {
-            return MakeSfFile(false, sBookId, lines);
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Create a mocked Standard Format file with \id line and file contents as specified.
-        /// Encoding will be UTF8.
-        /// </summary>
-        /// <param name="fIncludeBOM">Indicates whether file contents should include the byte
-        /// order mark</param>
-        /// <param name="sBookId">The book id (if set, this will cause \id line to be written
-        /// as the first line of the fiel)</param>
-        /// <param name="lines">Remaining lines of the file</param>
-        /// ------------------------------------------------------------------------------------
-        public string MakeSfFile(bool fIncludeBOM, string sBookId, params string[] lines)
-        {
-            return MakeSfFile(Encoding.UTF8, fIncludeBOM, sBookId, lines);
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Create a mocked Standard Format file with \id line and file contents as specified.
-        /// </summary>
-        /// <param name="encoding">File encoding</param>
-        /// <param name="fIncludeBOM">Indicates whether file contents should include the byte
-        /// order mark</param>
-        /// <param name="sBookId">The book id (if set, this will cause \id line to be written
-        /// as the first line of the fiel)</param>
-        /// <param name="lines">Remaining lines of the file</param>
-        /// ------------------------------------------------------------------------------------
-        public string MakeSfFile(Encoding encoding, bool fIncludeBOM, string sBookId,
-                                 params string[] lines)
-        {
-            return MakeFile(CreateFileContents(fIncludeBOM, sBookId, lines), encoding);
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
         /// Adds the given filename to the collection of files that should be considered to
         /// exist and set its contents so it can be read.
         /// </summary>
@@ -658,33 +611,6 @@ namespace Test
         public void LockFile(string filename)
         {
             m_existingFiles[filename].Lock = FileLockType.Write;
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Create the simulated file contents, suitable for calling MakeFile or AddFile.
-        /// </summary>
-        /// <param name="fIncludeBOM">Indicates whether file contents should include the byte
-        /// order mark</param>
-        /// <param name="sBookId">The book id (if set, this will cause \id line to be written
-        /// as the first line of the fiel)</param>
-        /// <param name="lines">Remaining lines of the file</param>
-        /// ------------------------------------------------------------------------------------
-        public static string CreateFileContents(bool fIncludeBOM, string sBookId, params string[] lines)
-        {
-            StringBuilder bldr = new StringBuilder();
-            if (fIncludeBOM)
-                bldr.Append("\ufeff");
-            if (!String.IsNullOrEmpty(sBookId))
-            {
-                bldr.Append(@"\id ");
-                bldr.AppendLine(sBookId);
-            }
-            foreach (string sLine in lines)
-                bldr.AppendLine(sLine);
-            bldr.Length = bldr.Length - Environment.NewLine.Length;
-
-            return bldr.ToString();
         }
         #endregion
 

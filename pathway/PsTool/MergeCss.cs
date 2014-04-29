@@ -90,46 +90,6 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Read a css file into the temporary file
         /// </summary>
-        /// <param name="name">name of css file to read</param>
-        /// <param name="sw">output stream to write contents</param>
-        public void ImportFile1(string name, TextWriter sw)
-        {
-            StreamReader sr;
-            var validName = name;
-            if (!File.Exists(name))
-            {
-                validName = Common.PathCombine(_cssPath, Path.GetFileName(name));
-                if (!File.Exists(validName))
-                {
-                    try
-                    {
-                        validName = Param.StylePath(Path.GetFileName(name));
-                    }
-                    catch (KeyNotFoundException ex)
-                    {
-                        return;
-                    }
-                    if (!File.Exists(validName)) return;
-                }
-            }
-            sr = new StreamReader(validName);
-            while (!sr.EndOfStream)
-            {
-                string line = sr.ReadLine();
-                Match m = Regex.Match(line, "@import \"(.*)\";", RegexOptions.IgnoreCase);
-                if (m.Success)
-                {
-                    ImportFile1(m.Groups[1].Value, sw);
-                    continue;
-                }
-                sw.WriteLine(line);
-            }
-            sr.Close();
-        }
-
-        /// <summary>
-        /// Read a css file into the temporary file
-        /// </summary>
         /// <param name="cssFileName">name of css file to read</param>
         /// <param name="sw">output stream to write contents</param>
         public void ImportFile(string cssFileName, TextWriter sw)

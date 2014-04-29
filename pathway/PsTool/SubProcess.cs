@@ -194,55 +194,6 @@ namespace SIL.Tool
             myProcess.Close();
         }
 
-        public static void RunCommandWithErrorLog(string instPath, string name, string arg, bool wait, string errorLogPath)
-        {
-            elapsedTime = 0;
-            eventHandled = false;
-
-            try
-            {
-                // Start a process to print a file and raise an event when done.
-                myProcess.StartInfo.FileName = name;
-                myProcess.StartInfo.Arguments = arg;
-                myProcess.StartInfo.CreateNoWindow = true;
-                myProcess.EnableRaisingEvents = true;
-                myProcess.StartInfo.CreateNoWindow = true;
-                myProcess.StartInfo.UseShellExecute = string.IsNullOrEmpty(RedirectOutput);
-                myProcess.StartInfo.WorkingDirectory = instPath;
-
-                myProcess.Exited += new EventHandler(myProcess_Exited);
-                myProcess.Start();
-                
-            }
-            catch (Exception ex)
-            {
-                if (!string.IsNullOrEmpty(RedirectOutput))
-                {
-                    string result = string.Empty;
-                    StreamWriter streamWriter = new StreamWriter(Common.PathCombine(errorLogPath, RedirectOutput));
-                    var errorArgs = string.Format("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
-                    result += errorArgs;
-                    streamWriter.Write(result);
-                    streamWriter.Close();
-                    RedirectOutput = null;
-                }
-                return;
-            }
-
-            // Wait for Exited event, but not more than 30 seconds. 
-            const int SLEEP_AMOUNT = 100;
-            while (!eventHandled)
-            {
-                elapsedTime += SLEEP_AMOUNT;
-                if (elapsedTime > 30000)
-                {
-                    break;
-                }
-                Thread.Sleep(SLEEP_AMOUNT);
-            }
-            myProcess.Close();
-        }
-
         // Handle Exited event and display process information. 
         private static void myProcess_Exited(object sender, System.EventArgs e)
         {

@@ -88,17 +88,5 @@ namespace Test.GoBibleConvert
             Assert.AreEqual("TestFiles", result);
             mocks.VerifyAllExpectationsHaveBeenMet();
         }
-
-        #region private Methods
-        private static string GetSupportPath()
-        {
-            return PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
-        }
-        private string GetFileNameWithSupportPath(string name)
-        {
-            return Common.PathCombine(GetSupportPath(), name);
-        }
-
-        #endregion
     }
 }

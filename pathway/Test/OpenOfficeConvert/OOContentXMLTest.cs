@@ -49,8 +49,6 @@ namespace Test.OpenOfficeConvert
         private int _index = 0;
         private bool _isLinux = false;
         private static string _outputBasePath = string.Empty;
-        private string _supportSource = string.Empty;
-        private static string _pathwayPath = string.Empty;
         #endregion Private Variables
 
         #region SetUp
@@ -103,11 +101,6 @@ namespace Test.OpenOfficeConvert
         private string FileOutput(string fileName)
         {
             return Common.PathCombine(_outputPath, fileName);
-        }
-
-        private string FileExpected(string fileName)
-        {
-            return Common.PathCombine(_expectedPath, fileName);
         }
 
         private void InLineMethod()
@@ -2434,6 +2427,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         /// TD-1239 -  Two column output from TE can conflict with two column stylesheets, not wrap correctly at section breaks.
         /// </summary>      
+        [Test]
         [Ignore]
         [Category("SkipOnTeamCity")]
         public void TableProperty()
@@ -3599,6 +3593,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///Full Scripture Test
         /// </summary>      
+        [Test]
         [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -3734,6 +3729,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///Table structure Test
         /// </summary>      
+        [Test]
         [Ignore]
         public void Table2Test()
         {
@@ -4217,37 +4213,6 @@ namespace Test.OpenOfficeConvert
             contentXML.CreateStory(_projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, 325, pageSize);
             _projInfo.TempOutputFolder = _projInfo.TempOutputFolder + _contentFile;
             return styleOutput;
-        }
-
-        private void CopyFile()
-        {
-            string fileName = "StyleSettings.xml";
-            CopyFilesSupportToPathway(fileName, "");
-
-            fileName = "DictionaryStyleSettings.xml";
-            CopyFilesSupportToPathway(fileName, "Dictionary");
-
-            fileName = "ScriptureStyleSettings.xml";
-            CopyFilesSupportToPathway(fileName, "Scripture");
-        }
-
-        private void CopyFilesSupportToPathway(string fileName, string type)
-        {
-            const string schemaFile = "StyleSettings.xsd";
-            string fromFileName = Common.PathCombine(_supportSource, fileName);
-            File.Copy(fromFileName, Common.PathCombine(_outputBasePath, fileName), true);
-            string partialPath = Common.PathCombine(_pathwayPath, type);
-            string toFileName = Common.PathCombine(partialPath, fileName);
-            //if (Directory.Exists(partialPath))
-            //    Directory.Delete(partialPath, true);
-            Common.DeleteDirectory(partialPath);
-            Directory.CreateDirectory(partialPath);
-            File.Copy(fromFileName, toFileName, true);
-
-            fromFileName = Common.PathCombine(_supportSource, schemaFile);
-            File.Copy(fromFileName, Common.PathCombine(_outputBasePath, schemaFile), true);
-            toFileName = Common.PathCombine(partialPath, schemaFile);
-            File.Copy(fromFileName, toFileName, true);
         }
 
         private static void LoadParam(string inputType, string tocTrueFalse)

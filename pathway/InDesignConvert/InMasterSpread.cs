@@ -287,26 +287,6 @@ namespace SIL.PublishingSolution
         }
 
 
-        private void SetTextFramePreference()
-        {
-            _writer.WriteStartElement("TextFramePreference");
-            _writer.WriteAttributeString("TextColumnFixedWidth", GetColumnPosition());
-            SetVerticalJustify();
-            _writer.WriteEndElement();
-        }
-
-        private void SetVerticalJustify()
-        {
-            if (_cssProperty.ContainsKey("@page"))
-            {
-
-                if (_cssProperty["@page"].ContainsKey("VerticalJustification"))
-                {
-                    _writer.WriteAttributeString("VerticalJustification", _cssProperty["@page"]["VerticalJustification"]);
-                }
-            }
-        }
-
         private string GetColumnPosition()
         {
             float colPosition = float.Parse(_cssProperty[_pageClass]["Page-Width"], CultureInfo.GetCultureInfo("en-US"))
@@ -321,61 +301,6 @@ namespace SIL.PublishingSolution
                                        (float.Parse(_cssProperty[_pageClass]["Margin-Left"], CultureInfo.GetCultureInfo("en-US")) +
                                        float.Parse(_cssProperty[_pageClass]["Margin-Right"], CultureInfo.GetCultureInfo("en-US"))));
             return (pageWidthNoMargin / 3F).ToString();
-        }
-
-        /// <summary>
-        /// Content Frame
-        /// </summary>
-        private void CreatePathPointArray()
-        {
-            Dictionary<string, string> classValues = _cssProperty[_pageClass];
-
-            float halfWidth = float.Parse(classValues["Page-Width"], CultureInfo.GetCultureInfo("en-US")) / 2;
-            float xPosLeft = halfWidth - float.Parse(classValues["Margin-Left"], CultureInfo.GetCultureInfo("en-US"));
-            float xPosRight = halfWidth - float.Parse(classValues["Margin-Right"], CultureInfo.GetCultureInfo("en-US"));
-
-            float halfHeight = float.Parse(classValues["Page-Height"], CultureInfo.GetCultureInfo("en-US")) / 2;
-            float yPosTop = halfHeight - float.Parse(classValues["Margin-Top"], CultureInfo.GetCultureInfo("en-US"));
-            float yPosBottom = halfHeight - float.Parse(classValues["Margin-Bottom"], CultureInfo.GetCultureInfo("en-US"));
-
-            _writer.WriteStartElement("Properties");
-            _writer.WriteStartElement("PathGeometry");
-            _writer.WriteStartElement("GeometryPathType");
-            _writer.WriteAttributeString("PathOpen", "false");
-            _writer.WriteStartElement("PathPointArray");
-            
-            //Top Left           
-            _writer.WriteStartElement("PathPointType");
-            _writer.WriteAttributeString("Anchor", "-" + xPosLeft + " -" + yPosTop);
-            _writer.WriteAttributeString("LeftDirection", "-" + xPosLeft + " -" + yPosTop);
-            _writer.WriteAttributeString("RightDirection", "-" + xPosLeft + " -" + yPosTop);
-            _writer.WriteEndElement();
-
-            // Bottom Left
-            _writer.WriteStartElement("PathPointType");
-            _writer.WriteAttributeString("Anchor", "-" + xPosLeft + " " + yPosBottom);
-            _writer.WriteAttributeString("LeftDirection", "-" + xPosLeft + " " + yPosBottom);
-            _writer.WriteAttributeString("RightDirection", "-" + xPosLeft + " " + yPosBottom);
-            _writer.WriteEndElement();
-
-            // Bottom Right
-            _writer.WriteStartElement("PathPointType");
-            _writer.WriteAttributeString("Anchor", xPosRight + " " + yPosBottom);
-            _writer.WriteAttributeString("LeftDirection", xPosRight + " " + yPosBottom);
-            _writer.WriteAttributeString("RightDirection", xPosRight + " " + yPosBottom);
-            _writer.WriteEndElement();
-
-            // Top Right
-            _writer.WriteStartElement("PathPointType");
-            _writer.WriteAttributeString("Anchor", xPosRight + " -" + yPosTop);
-            _writer.WriteAttributeString("LeftDirection", xPosRight + " -" + yPosTop);
-            _writer.WriteAttributeString("RightDirection", xPosRight + " -" + yPosTop);
-            _writer.WriteEndElement();
-
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
         }
 
         private void CreateMasterSpread(string pageName, string prefix, string baseName)

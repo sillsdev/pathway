@@ -37,7 +37,6 @@ namespace Test.InDesignConvert
         private string _outputStory;
         private string _outputStyles;
         private Dictionary<string, string> _expected = new Dictionary<string, string>();
-        private string _className = "a";
         private string _testFolderPath = string.Empty;
         Dictionary<string, Dictionary<string, string>> _idAllClass = new Dictionary<string, Dictionary<string, string>>();
         private InStyles _stylesXML;
@@ -47,7 +46,6 @@ namespace Test.InDesignConvert
         #endregion
 
         #region Public Variables
-        public XPathNodeIterator NodeIter;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
         private CssTree _cssTree;
         #endregion

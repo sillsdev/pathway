@@ -28,7 +28,6 @@ namespace SIL.PublishingSolution
     public class Json
     {
         private StringBuilder sbJSON;
-        private StreamWriter writer;
 
         private string _outputFile;
         private int _tagcount = 0;

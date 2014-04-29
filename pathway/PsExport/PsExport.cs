@@ -30,7 +30,6 @@ namespace SIL.PublishingSolution
     /// </summary>
     public class PsExport: IExporter
     {
-        private const bool _Wait = true;
         public bool _fromNUnit = false;
         private string _selectedCssFromTemplate = string.Empty;
         private Progress pb;

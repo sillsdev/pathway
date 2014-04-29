@@ -26,9 +26,6 @@ namespace SIL.PublishingSolution
     {
         #region Private Variable
 
-        private Stack<string> _allStyle = new Stack<string>();
-        private Stack<string> _alltagName = new Stack<string>();
-
         private string _usxFullPath, _sfmFullPath;
 
         private XmlTextWriter _writer;
@@ -37,23 +34,6 @@ namespace SIL.PublishingSolution
 
         private Dictionary<string, Dictionary<string, string>> _styleInfo =
             new Dictionary<string, Dictionary<string, string>>();
-
-        private Dictionary<string, string> _cssProp;
-        private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
-
-        private string _tagName, _style, _number, _code, _caller, _content;
-        private string _parentTagName = string.Empty, _parentStyleName = string.Empty;
-
-        private string _desc, _file, _size, _loc, _copy, _ref;
-        private bool _significant, _isEmptyNode, _isParaWritten;
-
-        private const string Space = " ";
-        private const string Bar = "|";
-
-        private bool _isclassNameExist;
-        private List<string> _xhtmlAttribute = new List<string>();
-
-
         #endregion
 
         /// <summary>
@@ -65,15 +45,6 @@ namespace SIL.PublishingSolution
             _sfmFullPath = sfmFullPath;
             _usxFullPath = usxFullPath;
             OpenFile();
-            ProcessSFM();
-        }
-
-        public void ConvertSFMtoUsx(XmlTextWriter xmlw, string sfmFullPath, string usxFullPath)
-        {
-            _writer = xmlw;
-            _sfmFullPath = sfmFullPath;
-            _usxFullPath = usxFullPath;
-            OpenFileDirectText();
             ProcessSFM();
         }
 
@@ -111,7 +82,6 @@ namespace SIL.PublishingSolution
         /// ------------------------------------------------------------
         private void ParseLine(string line)
         {
-            string value;
             string[] parse = line.Split('\\');
             foreach (string node in parse)
             {
@@ -264,48 +234,6 @@ namespace SIL.PublishingSolution
 
         }
 
-        private void FindStartEnd(string data,string startStr,string endStr, out int start,out int end)
-        {
-            start = data.IndexOf(startStr);
-            end = data.IndexOf(endStr) + endStr.Length;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data">This is Pathway</param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <param name="sourcePart"></param>
-        /// <param name="extractPart"></param>
-        private void BreakNode(string data, int start, int end, out string sourcePart,out string extractPart)
-        {
-
-            extractPart = data.Substring(start, end - start );
-            sourcePart = data.Remove(start, end - start);
-        }
-
-
-        private string StackPop(Stack<string> stack)
-        {
-            string result = string.Empty;
-            if (stack.Count > 0)
-            {
-                result = stack.Pop();
-            }
-            return result;
-        }
-
-        private string StackPeek(Stack<string> stack)
-        {
-            string result = string.Empty;
-            if (stack.Count > 0)
-            {
-                result = stack.Peek();
-            }
-            return result;
-        }
-
         /// <summary>
         /// Open usx and sfm file
         /// </summary>
@@ -318,16 +246,6 @@ namespace SIL.PublishingSolution
             _writer.WriteStartDocument();
             _writer.WriteStartElement("USX");
             _sfmFile = new StreamReader(_sfmFullPath,true);
-        }
-
-        /// <summary>
-        /// Open usx and sfm file
-        /// </summary>
-        private void OpenFileDirectText()
-        {
-            _writer.WriteStartDocument();
-            _writer.WriteStartElement("usx");
-            _sfmFile = new StreamReader(_sfmFullPath, true);
         }
     }
 }

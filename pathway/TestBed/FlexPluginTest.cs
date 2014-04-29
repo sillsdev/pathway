@@ -15,29 +15,16 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Reflection;
 using System.Text;
-using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using System.Xml;
 using JWTools;
-using Microsoft.Win32;
-using MySql.Data.MySqlClient;
 using SIL.PublishingSolution;
-using SIL.PublishingSolution.Sort;
 using SIL.Tool;
 using SIL.Tool.Localization;
-using System.Data.Common;
-using System.Data;
-using TestBed.Properties;
 using epubValidator;
 using Test;
 
@@ -147,67 +134,6 @@ namespace TestBed
                             continue;
                         }
                         if (fstr.Contains("#endregion")) iniComp = false;
-                    }
-                    sw2.WriteLine(fstr);
-                }
-                sr.Close();
-                fs.Close();
-                sw2.Close();
-                fs2.Close();
-            }
-
-            foreach (var directoryInfo in di.GetDirectories())
-            {
-                if (directoryInfo.Name.Substring(0, 1) == ".")
-                    continue;
-                PutAccessibleName(directoryInfo.FullName);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="src"></param>
-        public void PutAccessibleNamenew(string src)
-        {
-            string source = src;
-            var di = new DirectoryInfo(src);
-
-            if (di.Name.ToLower() == "properties")
-                return;
-
-            string fstr;
-            var filter = "*.designer.cs";
-            designerPath += "/";
-            foreach (var fileInfo in di.GetFiles(filter))
-            {
-                string dest = di.Root.ToString();
-                string destPath = source.Replace(dest, designerPath);
-                if (!Directory.Exists(destPath))
-                {
-                    Directory.CreateDirectory(destPath);
-                }
-
-                string sourceFile = fileInfo.Name;
-                var fs = new FileStream(Common.PathCombine(src, sourceFile), FileMode.Open);
-                var sr = new StreamReader(fs);
-
-                string filePath = Common.PathCombine(destPath, sourceFile);
-                var fs2 = new FileStream(filePath, FileMode.Create, FileAccess.Write);
-                var sw2 = new StreamWriter(fs2);
-                //bool iniComp = false;
-
-
-                while ((fstr = sr.ReadLine()) != null)
-                {
-                    if (fstr.Contains(".Name ="))
-                    {
-                        string newString = fstr.Replace(".Name", ".AccessibleName");
-                        sw2.WriteLine(newString);
-                    }
-                    else if (fstr.Contains(".AccessibleName ="))
-                    {
-                        continue;
                     }
                     sw2.WriteLine(fstr);
                 }
@@ -466,12 +392,6 @@ namespace TestBed
 
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //PdftoJpg pd = new PdftoJpg();
-            //pd.ConvertPdftoJpg(); 
-        }
-
         private void FlexPluginTest_Load(object sender, EventArgs e)
         {
             var supportFolder = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
@@ -504,13 +424,6 @@ namespace TestBed
         {
             string os = Common.GetOsName();
             MessageBox.Show(os);
-            return;
-#if !Not7
-            ParatextPathwayLink paraText = new ParatextPathwayLink("NKOu1", "NKOu1", "en", "en", "Sankar");
-            XmlDocument usfxDoc = new XmlDocument();
-            usfxDoc.Load(txtInputPath.Text);
-            paraText.ExportToPathway(usfxDoc);
-#endif
         }
 
         private void StyConvert_Click(object sender, EventArgs e)
@@ -669,19 +582,6 @@ namespace TestBed
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            if (!File.Exists(txtInputPath.Text))
-            {
-                MessageBox.Show("Please enter the valid XHTML path");
-                return;
-            }
-
-            XhtmlToHtml xhtmlToHtml = new XhtmlToHtml();
-            xhtmlToHtml.Convert(txtInputPath.Text);
-            MessageBox.Show("Exported.");
         }
 
         private void btnWordPress_Click(object sender, EventArgs e)
@@ -946,97 +846,6 @@ namespace TestBed
                 convertedText = Encoding.UTF8.GetString(decodedBytes);
             }
             return convertedText;
-        }
-
-        private void SetRampData(Ramp ramp)
-        {
-            RampFile rampFile;
-
-            //ramp.RampId = "ykmb9i6zlh";
-            ramp.CreatedOn = DateTime.Now.ToString("r");
-            ramp.Ready = "Y";
-            ramp.Title = "Gondwana / English / Telegu / Hindi";
-            ramp.BroadType = "wider_audience";
-            ramp.TypeMode = "Text,Photograph,Software application";
-            ramp.FormatMedium = "Paper,Other";
-            ramp.DescStage = "rough_draft";
-            ramp.VersionType = "first";
-            ramp.TypeScholarlyWork = "Other";
-            ramp.AddSubjLanguage("gon: Gondi");
-            ramp.CoverageSpacialRegionHas = "Y";
-            ramp.AddCoverageSpacialCountry("IN: India, Andhra Pradesh");
-            ramp.SubjectLanguageHas = "Y";
-            ramp.AddLanguageIso("eng: English");
-            ramp.AddLanguageIso("tel: Telugu");
-            ramp.AddLanguageIso("hin: Hindi");
-            ramp.AddLanguageScript("Latn: Latin");
-            ramp.AddLanguageScript("Telu: Telugu");
-            ramp.AddLanguageScript("Deva: Devanagari(Nagari)");
-            ramp.AddContributor("Mark Penny,researcher");
-            ramp.FormatExtentText = "8";
-            ramp.FormatExtentImages = "2";
-            ramp.DescSponsership = "SIL International";
-            ramp.DescTableofContentsHas = " ";
-            ramp.SilDomain = "LING: Linguistics";
-            ramp.DomainSubTypeLing = "language documentation(LING)";
-            ramp.AddSubject("foreign languages and literature;dictionary;lexicon;,eng");
-            ramp.RelRequiresHas = "Y";
-            ramp.AddRelRequires("OFL");
-            ramp.RelConformsto = "odf";
-            ramp.AddRightsHolder("( c ) 2013 SIL International®");
-            ramp.Rights = "creative commons share alike";
-            ramp.SilSensitivityMetaData = "Public";
-            ramp.SilSensitivityPresentation = "Public";
-            ramp.SilSensitivitySource = "Insite users";
-
-            rampFile = new RampFile();
-            rampFile.FileName = "main.odm";
-            rampFile.FileDescription = "Master document";
-            rampFile.FileRelationship = "presentation";
-            rampFile.FileIsPrimary = "Y";
-            rampFile.FileSilPublic = "Y";
-            ramp.AddFile(rampFile);
-
-            rampFile = new RampFile();
-            rampFile.FileName = "main.odt";
-            rampFile.FileDescription = "main";
-            rampFile.FileRelationship = "presentation";
-            rampFile.FileSilPublic = "Y";
-            ramp.AddFile(rampFile);
-
-            rampFile = new RampFile();
-            rampFile.FileName = "FlexRev.odt";
-            rampFile.FileDescription = "English Reversal Index";
-            rampFile.FileRelationship = "presentation";
-            rampFile.FileSilPublic = "Y";
-            ramp.AddFile(rampFile);
-
-            rampFile = new RampFile();
-            rampFile.FileName = "main.xhtml";
-            rampFile.FileDescription = "main";
-            rampFile.FileRelationship = "source";
-            ramp.AddFile(rampFile);
-
-            rampFile = new RampFile();
-            rampFile.FileName = "FlexRev.xhtml";
-            rampFile.FileDescription = "English Reversal Index";
-            rampFile.FileRelationship = "source";
-            ramp.AddFile(rampFile);
-
-            rampFile = new RampFile();
-            rampFile.FileName = "2087191251mergedmain.css";
-            rampFile.FileDescription = "main stylesheet";
-            rampFile.FileRelationship = "source";
-            ramp.AddFile(rampFile);
-
-            rampFile = new RampFile();
-            rampFile.FileName = "119888425mergedFlexRev.css";
-            rampFile.FileDescription = "Reversal stylesheet";
-            rampFile.FileRelationship = "source";
-            ramp.AddFile(rampFile);
-
-            ramp.Status = "ready";
-
         }
 
         private void button13_Click(object sender, EventArgs e)

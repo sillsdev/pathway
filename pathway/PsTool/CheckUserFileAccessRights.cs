@@ -119,21 +119,6 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// Simple accessor
-        /// </summary>
-        public System.Security.Principal.WindowsIdentity getWindowsIdentity()
-        {
-            return _principal;
-        }
-        /// <summary>
-        /// Simple accessor
-        /// </summary>
-        public String getPath()
-        {
-            return _path;
-        }
-
-        /// <summary>
         /// Convenience constructor assumes the current user
         /// </summary>
         /// <param name="path"></param>

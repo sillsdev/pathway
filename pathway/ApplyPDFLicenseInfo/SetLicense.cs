@@ -91,19 +91,6 @@ namespace ApplyPDFLicenseInfo
         /// <summary>
         /// Make sure the path contains the proper / for the operating system.
         /// </summary>
-        /// <param name="path1"></param>
-        /// <param name="path2"></param>
-        /// <returns>normalized path</returns>
-        public static string PathCombine(string path1, string path2)
-        {
-            path1 = DirectoryPathReplace(path1);
-            path2 = DirectoryPathReplace(path2);
-            return Path.Combine(path1, path2);
-        }
-
-        /// <summary>
-        /// Make sure the path contains the proper / for the operating system.
-        /// </summary>
         /// <param name="path">input path</param>
         /// <returns>normalized path</returns>
         public static string DirectoryPathReplace(string path)

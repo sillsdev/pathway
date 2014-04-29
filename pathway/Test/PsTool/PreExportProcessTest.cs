@@ -26,7 +26,6 @@ namespace Test.PsTool
     public class PreExportProcessTest
     {
         PreExportProcess preExportProcess;
-        public string _node;
 
         [TestFixtureSetUp]
         protected void SetUp()

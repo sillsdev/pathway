@@ -34,35 +34,16 @@ namespace SIL.PublishingSolution
     public class LOContent : XHTMLProcess
     {
         #region Private Variable
-        public OldStyles _oldStyles = new OldStyles();
         string _strBook = string.Empty;
         string _strBook2ndBook = string.Empty;
         private bool _is1stBookFound = false;
-        readonly Stack _styleStack = new Stack();
-        readonly Stack _allSpanStack = new Stack();
-        readonly Stack _allDivStack = new Stack();
-        readonly Stack _usedSpanStack = new Stack();
-        readonly Stack _tagTypeStack = new Stack(); // P - Para, T - Text, I - Image, L - <ol>/<ul> tag , S - <li> tag,  O - Others
-        readonly Dictionary<string, string> _makeAttribute = new Dictionary<string, string>();
         private ArrayList _sectionName = new ArrayList();
 
         bool isHiddenText = false;
         readonly OOUtility _util = new OOUtility();
-        readonly StyleAttribute _attributeInfo = new StyleAttribute();
-        readonly StyleAttribute _fontsizeAttributeInfo = new StyleAttribute();
-        string _familyType = string.Empty;
-        string _styleName = string.Empty;
         // Image
         int _frameCount; //For Picture Frame count
-        string _beforePseudoValue = string.Empty;
-        string _beforePseudoParentValue = string.Empty;
-        readonly Stack _prevLangStack = new Stack(); // For handle previous Language
-        readonly StringBuilder _pseudoBuilder = new StringBuilder();
-        bool _contentReplace;
-        readonly StringBuilder _classContentBuilder = new StringBuilder();
-        int _styleCounter;
         string _metaValue = string.Empty;   // TD-278 <meta name />
-        ArrayList _odtFiles;
 
         string _outputExtension = string.Empty;
         int _autoFootNoteCount;
@@ -78,79 +59,31 @@ namespace SIL.PublishingSolution
 
         // from local
         OldStyles _structStyles;
-        int _pbCounter;
-        string _readerValue = string.Empty;
-        string _footnoteValue = string.Empty;
-        string _classAfter = string.Empty;
-        char _closeTagType;
-        string _parentStyleName;
-        readonly Dictionary<string, string> _existingStyleName = new Dictionary<string, string>();
 
         string _styleFilePath;
-        float _columnWidth;
-        string _temp;
-        string _divClass = string.Empty;
-        string _allDiv = string.Empty;
-        string _class = string.Empty;
         private bool _pseudoSingleSpace = false;
-        //bool _isWhiteSpace;
-        bool _isNewLine = true;
-        string _prevLang = string.Empty;
-        string _parentClass = string.Empty;
-        string _parentLang = string.Empty;
-        string _projectType = string.Empty;
-        readonly Dictionary<string, string> _counterVolantryReset = new Dictionary<string, string>();
-        readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
         readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");
         readonly string _zeroWidthNoBreakSpace = Common.ConvertUnicodeToString("\uFEFF");
-        readonly string _fixedSpace = Common.ConvertUnicodeToString("\u2002");
-        readonly string _thinSpace = Common.ConvertUnicodeToString("\u2009");
 
         ArrayList _anchor = new ArrayList();
-        private XmlDocument _xmldoc;
-        private bool _imageStart;
-        private string _imageParent;
-        bool _imageDiv;
-        private bool progressBarError;
         private string _imageGraphicsName = string.Empty;
         private bool _imageTextAvailable;
         private ArrayList _imageCaptionEmpty = new ArrayList();
-        private int _imageZindexCounter;
         private bool _imagePreviousFinished = false;
-        private bool _imageParaForCaption = false;
-        private List<string> _unUsedParagraphStyle = new List<string>();
         string footCallSymb = string.Empty;
-        List<string> LanguageFontStyleName = new List<string>();
-        private int _storyNo = 0;
-        private int _hyperLinkNo = 0;
-        private bool isFileEmpty = true;
-        private bool isFileCreated;
-        private bool isImage;
-        private bool isHomographNumber = false;
         private string imageClass = string.Empty;
-        private string _inputPath;
-        private ArrayList _textFrameClass = new ArrayList();
-        private ArrayList _textVariables = new ArrayList();
         private ArrayList _columnClass = new ArrayList();
         private ArrayList _psuedoBefore = new ArrayList();
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
-        private ArrayList _crossRef = new ArrayList();
-        private int _crossRefCounter = 1;
-        private bool _isWhiteSpace = false;
-        private bool _isForcedWhiteSpace = false;
         private bool _isVerseNumberContent = false;
         private StringBuilder _verseContent = new StringBuilder();
         private bool _IsHeadword = false;
         private bool _significant;
         private bool _footnoteSpace;
-        private bool _isListBegin;
-        private Dictionary<string, string> ListType;
         private bool _anchorWrite;
         private List<string> _sourceList = new List<string>();
         private List<string> _targetList = new List<string>();
         private bool _isPictureDisplayNone = false;
-        private bool _isEmptyTitleExist;
-        private int _titleCounter = 1;
         private int _pageWidth;
         private bool _isEmptyPageInsertedForDic = false;
         private bool _isPageSpaceGiven;
@@ -161,16 +94,12 @@ namespace SIL.PublishingSolution
 
         List<string> _headwordVariable = new List<string>();
         private int _headwordIndex = 0;
-        private bool _isFootnoteCallerStared;
         private string _customFootnoteSymbol = string.Empty;
         private string _customXRefSymbol = string.Empty;
         private string firstRevHeadWord = string.Empty;
         Dictionary<string, string> FirstDataOnEntry = new Dictionary<string, string>();
         private int _guidewordLength;
         private bool _isPreviousGlossary;//3719
-        private int _pronunciationformCount;//3718
-        private bool _isNonPronunciationform = true;
-        private bool _isPrimaryrefs;
         private bool _isAllowWhiteSpace = true;
         private bool _isEmptyPageInserted;
         private bool _isH2Complaint;
@@ -181,7 +110,6 @@ namespace SIL.PublishingSolution
         public bool _multiLanguageHeader = false;
         public string RefFormat = "Genesis 1";
         public bool IsMirrorPage;
-        public string _ChapterNo = "1";
         public bool IsFirstEntry;
         //private bool isPageBreak;
         private string _previousContent = "Reversal";
@@ -195,23 +123,6 @@ namespace SIL.PublishingSolution
 
         #region Public Methods
 
-        public bool IsNewLine
-        {
-            get { return _isNewLine; }
-        }
-
-        public string AllDiv
-        {
-            get { return _allDiv; }
-        }
-
-        public static long CountLinesInString(string text)
-        {
-            var reg = new Regex("</", RegexOptions.Multiline);
-            MatchCollection mat = reg.Matches(text);
-            return mat.Count;
-        }
-
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass,
             Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
         {
@@ -220,12 +131,10 @@ namespace SIL.PublishingSolution
             _structStyles = styleInfo;
             _structStyles.IsMacroEnable = true;
             _pageSize = pageSize;
-            _isFootnoteCallerStared = true;
             _isFromExe = Common.CheckExecutionPath();
             _customFootnoteSymbol = projInfo.IncludeFootnoteSymbol;
             _customXRefSymbol = projInfo.IncludeXRefSymbol;
             _isPageSpaceSingle = PageBreakSpace(idAllClass);
-            string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             ProcessProperty();
             Preprocess();
@@ -262,13 +171,6 @@ namespace SIL.PublishingSolution
             {
                 _headwordVariable = preProcessor.PrepareCurrentNextHeadwordPair();
             }
-        }
-
-        private void PreprocessAnchor(string xhtmlFile)
-        {
-            PreExportProcess preProcessor = new PreExportProcess(_projInfo);
-            preProcessor.AnchorTagProcessing(xhtmlFile, ref _anchor);
-
         }
 
         /// <summary>
@@ -460,7 +362,6 @@ namespace SIL.PublishingSolution
             IdAllClass = new Dictionary<string, Dictionary<string, string>>();
             ParentClass = new Dictionary<string, string>();
             _newProperty = new Dictionary<string, Dictionary<string, string>>();
-            _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
             _projInfo = projInfo;
 
@@ -478,33 +379,6 @@ namespace SIL.PublishingSolution
         {
             OOUtility utility = new OOUtility();
             utility.GraphicContentChange(contentFilePath, _imageCaptionEmpty);
-        }
-
-        /// <summary>
-        /// Cleanup Process
-        /// </summary>
-        public void CleanUp()
-        {
-            if (File.Exists(_tempFile))
-            {
-                File.Delete(_tempFile);
-            }
-
-            _util.RemoveUnUsedStyle(_styleFilePath, _unUsedParagraphStyle);
-        }
-
-        /// <summary>
-        /// To change the class name when the classname have contains selector
-        /// </summary>
-        /// <param name="sourceFile">Source XHTML file</param>
-        /// <param name="structStyles">Styles Structure</param>
-        /// <returns>return Source filename </returns>  
-        private string PreProcess(string sourceFile, OldStyles structStyles)
-        {
-            _sourcePicturePath = Path.GetDirectoryName(sourceFile);
-            ClassContainsText(sourceFile, structStyles);
-            sourceFile = CheckSourceChanged(sourceFile);
-            return sourceFile;
         }
 
         /// <summary>
@@ -536,115 +410,11 @@ namespace SIL.PublishingSolution
             return data;
         }
 
-        /// <summary>
-        /// Used for preprocess work to point the tempfile copied from source xhtml file.
-        /// </summary>
-        /// <param name="sourceFile">xhtml file</param>
-        /// <returns>Changed file name</returns>
-        private string CheckSourceChanged(string sourceFile)
-        {
-            if (_xmldoc != null)
-            {
-                sourceFile = _tempFile;
-            }
-            return sourceFile;
-        }
-
-        /// <summary>
-        /// Class Contains method modifies the style Name of the container
-        /// </summary>
-        /// <param name="sourceFile">The Xhtml File</param>
-        /// <param name="structStyles">The Structure of Styles objects</param>
-        private void ClassContainsText(string sourceFile, OldStyles structStyles)
-        {
-            if (structStyles.ClassContainsSelector.Count > 0)
-            {
-                FileOpen(sourceFile);
-                foreach (string classKey in structStyles.ClassContainsSelector.Keys)
-                {
-                    XmlNodeList nodeList;
-                    string mValue = structStyles.ClassContainsSelector[classKey];
-                    string mAttrib = Common.LeftString(classKey, "-");
-                    if (classKey.IndexOf('.') > 0)
-                    {
-                        int lastPos = classKey.LastIndexOf('.') + 1;
-                        string mClass = classKey.Substring(lastPos);
-                        nodeList = _xmldoc.GetElementsByTagName(mClass);
-                        ChangeClassName(mAttrib, mValue, nodeList);
-                    }
-                    else
-                    {
-                        string[] tags = { "div", "span" };
-                        for (int i = 0; i < tags.Length; i++)
-                        {
-                            nodeList = _xmldoc.GetElementsByTagName(tags[i]);
-                            if (nodeList.Count > 0)
-                            {
-                                ChangeClassName(mAttrib, mValue, nodeList);
-                            }
-                        }
-                    }
-                }
-                _xmldoc.Save(_tempFile);
-            }
-        }
-
-        /// <summary>
-        /// FileOpen used for Preprocessing temp File
-        /// </summary>
-        /// <param name="sourceFile">The input Xhtml File</param>
-        private void FileOpen(string sourceFile)
-        {
-            if (_xmldoc == null)
-            {
-                File.Copy(sourceFile, _tempFile, true);
-                _xmldoc = Common.DeclareXMLDocument(true);
-                _xmldoc.Load(_tempFile);
-            }
-        }
-
-
-        /// <summary>
-        /// To change the class name if the value matches with mValue.
-        /// </summary>
-        /// <param name="mAttrib">Classname to match</param>
-        /// <param name="mValue">Value to match</param>
-        /// <param name="nodeList">List of matched XMLNode</param>
-        private static void ChangeClassName(string mAttrib, string mValue, XmlNodeList nodeList)
-        {
-            foreach (XmlNode item in nodeList)
-            {
-                if (item.InnerText.Contains(mValue))
-                {
-
-                    XmlAttributeCollection attrColl = item.Attributes;
-                    for (int i = 0; i < attrColl.Count; i++)
-                    {
-                        if (string.Compare(attrColl.Item(i).Value, mAttrib) == 0
-                            && string.Compare(attrColl.Item(i).Name, "class") == 0)
-                        {
-                            attrColl.RemoveNamedItem(mAttrib); // To remove the old class attribute
-                            var newElement = (XmlElement)item; // To add New class attribute
-                            newElement.SetAttribute("class", mAttrib + mValue.Replace(" ", ""));
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-
         private void ProcessXHTML(ProgressBar pb, string Sourcefile, string targetPath)
         {
             if (_outputExtension == "odm") return;
 
-            if (pb != null && pb.Maximum == 0)
-            {
-                progressBarError = true;
-            }
-
             _styleFilePath = targetPath + "styles.xml";
-            _columnWidth = _structStyles.ColumnWidth;
             try
             {
                 using (_reader = Common.DeclareXmlTextReader(Sourcefile, true))
@@ -964,8 +734,6 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    //if (_paragraphName.IndexOf("bookPageBreak_") == 0)
-                    //    _paragraphName = _paragraphName.Replace("bookPageBreak_", "");
                     // Note: Paragraph Start Element
                     if ((_childName == "letter_letHead_dicBody" || _childName == "scrBookName_scrBook_scrBody") && IsTocExists())
                     {
@@ -978,16 +746,6 @@ namespace SIL.PublishingSolution
                         _writer.WriteStartElement("text:p");
                         _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass                        
                     }
-
-                    //isPageBreak = false;
-                    
-                    //if (_paragraphName.IndexOf("bookPageBreak_") == 0)
-                    //{
-                        //isPageBreak = true;
-                    //}
-
-                    if (_imageInserted)
-                        _imageParaForCaption = true;
                 }
                 AddUsedStyleName(_paragraphName);
                 _previousParagraphName = _paragraphName;
@@ -998,7 +756,6 @@ namespace SIL.PublishingSolution
             }
             WriteText();
             _previousChildName = _childName;
-            isFileEmpty = false;
         }
 
         private string GetOutlineLevel()
@@ -1281,7 +1038,6 @@ namespace SIL.PublishingSolution
                 else if (!VisibleHidden())
                 {
                     _pseudoSingleSpace = false;
-                    _isWhiteSpace = false;
 
                     content = content.Replace(" // ", @"text:line-break/");
                     if (content.IndexOf(@"text:line-break/") >= 0)
@@ -1548,10 +1304,6 @@ namespace SIL.PublishingSolution
 
         private void WriteFootNoteMarker(string footerClassName, string content, string marker)
         {
-            if (footCallSymb.Length == 0)
-            {
-                _isEmptyTitleExist = true;
-            }
             string footerCall = footerClassName + "..footnote-call";
             string footerMarker = footerClassName + "..footnote-marker";
             if (IdAllClass.ContainsKey(footerCall) && (footerClassName.IndexOf("NoteCross") != 0 && String.IsNullOrEmpty(footCallSymb)))
@@ -1711,17 +1463,8 @@ namespace SIL.PublishingSolution
             DropCaps();
             SetFootnote();
             FooterSetup(Common.OutputType.ODT.ToString());
-            ResetTitleCounter();
             IsAnchorBookMark();
             Table();
-        }
-
-        private void ResetTitleCounter()
-        {
-            if (_isEmptyTitleExist && _classNameWithLang == "scrBook")
-            {
-                _titleCounter = 1;
-            }
         }
 
         private void ListBegin()
@@ -1994,26 +1737,6 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region Private Methods
-
-        /// <summary>
-        /// Replace trailing "softspace" to "hardspace"
-        /// </summary>
-        /// <param name="className">Current ClassName</param>
-        /// <param name="data">text</param>
-        /// <returns></returns>
-        private string HardSpace(string className, string data)
-        {
-            if (className == "xsensenumber" || className == "xhomographnumber" || className == "xglossnumber")
-            {
-                int trimLen = data.Length;
-                data = data.TrimEnd(' ');
-                if (trimLen != 0)
-                {
-                    data = data.PadRight(trimLen, char.Parse(_hardSpace));
-                }
-            }
-            return data;
-        }
 
         private void WhiteSpace(string readerValue, string divClass)
         {
@@ -2417,7 +2140,6 @@ namespace SIL.PublishingSolution
                         string ccc = _imageClass;
                         _imageInsert = false;
                         _imageSource = string.Empty;
-                        _imageParaForCaption = true;
                         return false;
                     }
                     //1 inch = 72 PostScript points
@@ -2427,15 +2149,12 @@ namespace SIL.PublishingSolution
                     string srcFile;
                     string wrapMode = "BoundingBoxTextWrap";
                     string HoriAlignment = string.Empty;
-                    string VertAlignment = "center";
 
-                    isImage = true;
                     inserted = true;
                     string[] cc = _allStyle.ToArray();
                     imageClass = cc[0]; //cc[1];
                     srcFile = _imageSource;
                     string srcFilrLongDesc = _imageLongDesc;
-                    string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
                     string currentPicturePath = _sourcePicturePath;
                     if (_allStyle.Peek().IndexOf("logo") == 0)
                     {
@@ -2556,9 +2275,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("draw:style-name", strFrameStyCount);
                     _writer.WriteAttributeString("draw:name", strFrameCount);
 
-                    _imageZindexCounter++;
                     string imgWUnit = "pt";
-                    string imgHUnit = "pt";
                     string anchorType = string.Empty;
                     if (_imagePreviousFinished)
                     {
@@ -2753,7 +2470,6 @@ namespace SIL.PublishingSolution
             string strFrameCount = "Graphics" + _frameCount;
             _imageGraphicsName = strFrameCount;
 
-            _imageZindexCounter++;
             string imgWUnit = "pt";
             string imgHUnit = "pt";
             string width = rectWidth;
@@ -2823,7 +2539,6 @@ namespace SIL.PublishingSolution
                 if (_imageClass.Length > 0 && _closeChildName == _imageClass)
                 {
                     _isPictureDisplayNone = false;
-                    isImage = false;
                     _imageClass = string.Empty;
                     _isParagraphClosed = true;
                     isImageEnd = true;
@@ -2840,7 +2555,6 @@ namespace SIL.PublishingSolution
                     _writer.WriteEndElement(); // for ParagraphStyle
                     _writer.WriteEndElement(); // for Textframe
                     _allCharacter.Pop();    // retrieving it again.
-                    isImage = false;
                     _imageClass = string.Empty;
                     _isParagraphClosed = true;
                     isImageEnd = true;
@@ -2855,7 +2569,6 @@ namespace SIL.PublishingSolution
                         _writer.WriteEndElement(); // for ParagraphStyle}
                         _forcedPara = false;
                     }
-                    _imageParaForCaption = false;
 
                     if (_closeChildName.IndexOf("coverImage") != 0)
                     {
@@ -2863,7 +2576,6 @@ namespace SIL.PublishingSolution
                         _writer.WriteEndElement(); // for Textframe
                     }
 
-                    isImage = false;
                     _imageClass = "";
                     _isNewParagraph = false;
                     _isParagraphClosed = false;
@@ -3061,7 +2773,7 @@ namespace SIL.PublishingSolution
         private void UpdateRelativeInStylesXML()
         {
             ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
-            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", _IsHeadword, ParentClass, _projInfo.HeaderFontName);
+            modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", _IsHeadword, ParentClass, _projInfo.HeaderFontName);
         }
 
 
@@ -3148,75 +2860,6 @@ namespace SIL.PublishingSolution
             modifyContentXML.SetTableColumnCount(targetFile, _tableColumnModify);
         }
 
-
-        private void WriteGuidewordValueToVariable2(string content)
-        {
-            //TD-2580
-            string bookname = _strBook;
-            if (((_classNameWithLang.IndexOf("headword") == 0 || _classNameWithLang.IndexOf("reversalform") == 0) && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0)) ||
-             (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0)))
-            {
-
-                string chapterNo = content;
-
-                if (_strBook.Length > 0)
-                    content = _strBook + chapterNo;
-
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                _writer.WriteStartElement("text:variable-set");
-                _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                _writer.WriteAttributeString("text:display", "none");
-                _writer.WriteAttributeString("text:formula", "ooow: " + content);
-                _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("office:string-value", content);
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                _writer.WriteStartElement("text:variable-set");
-                _writer.WriteAttributeString("text:name", "Right_Guideword_R");
-                _writer.WriteAttributeString("text:display", "none");
-                _writer.WriteAttributeString("text:formula", "ooow: " + content);
-                _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("office:string-value", content);
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-
-                if (_multiLanguageHeader)
-                {
-                    if (_strBook2ndBook.Length > 0)
-                        content = _strBook2ndBook + chapterNo;
-
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                    _writer.WriteStartElement("text:variable-set");
-                    _writer.WriteAttributeString("text:name", "Left_Guideword_R");
-                    _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + content);
-                    _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", content);
-                    _writer.WriteEndElement();
-                    _writer.WriteEndElement();
-
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                    _writer.WriteStartElement("text:variable-set");
-                    _writer.WriteAttributeString("text:name", "Right_Guideword_L");
-                    _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + content);
-                    _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", content);
-                    _writer.WriteEndElement();
-                    _writer.WriteEndElement();
-                }
-
-                _writer.WriteStartElement("text:span");
-                _writer.WriteEndElement();
-                LanguageFontCheck(content, "headerFontStyleName");
-            }
-        }
 
         private void InsertBookNameBeforeBookIntroduction(string content)
         {
@@ -3373,76 +3016,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        /// <summary>
-        /// Read XHTML content
-        /// </summary>
-        /// <param name="filePath">File path of the XHTML file</param>
-        /// <param name="XHTMLData">Return value</param>
-        public static void ReadXHTMLData(string filePath, Dictionary<string, string> XHTMLData)
-        {
-            XmlTextReader reader = Common.DeclareXmlTextReader(filePath, true);
-
-            string className = "div";
-            string content;
-            bool headXML = true;
-            while (reader.Read())
-            {
-                if (headXML) // skip previous parts of <body> tag
-                {
-                    if (reader.Name == "body")
-                    {
-                        headXML = false;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-
-                if (reader.IsEmptyElement)
-                {
-                    if (reader.Name == "br")
-                    {
-                        //_writer.WriteRaw(@"<text:line-break/>");
-                        continue;
-                    }
-                    else
-                    {
-                        if (reader.Name == "a")
-                        {
-                            continue;
-                        }
-                        continue;
-                    }
-                }
-                switch (reader.NodeType)
-                {
-                    case XmlNodeType.Element:
-                        string clName = StartElement(reader);
-                        if (clName != String.Empty)
-                        {
-                            if (XHTMLData.ContainsKey(clName) || clName == "para")
-                            {
-                                if (XHTMLData[className].Trim() != String.Empty)
-                                {
-
-                                    XHTMLData[className] = XHTMLData[className] + @"<text:line-break/>";
-                                }
-                            }
-                            else
-                            {
-                                className = clName;
-                                XHTMLData[className] = String.Empty;
-                            }
-                        }
-                        break;
-                    case XmlNodeType.Text: // Text.Write
-                        XHTMLData[className] = XHTMLData[className] + reader.Value;
-                        break;
-                }
-            }
-        }
-
         private static string StartElement(XmlReader reader)
         {
             if (reader.Name == "p") return "para";
@@ -3536,32 +3109,6 @@ namespace SIL.PublishingSolution
             }
             reader.Close();
             return content;
-        }
-
-        public void InsertLoFrontMatterCss(string cssFilename)
-        {
-            string frontMatterCSSStyle = string.Empty;
-            try
-            {
-                frontMatterCSSStyle = frontMatterCSSStyle + ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
-                frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;} .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}";
-                frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:1pt;visibility:hidden;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;}.LText{font-size:12pt;font-style:italic}.LText:before{content: \"\\2028\"}.dummyTOC{text-align: left; font-size:1pt;visibility:hidden;page-break-after: always;} ";
-                frontMatterCSSStyle = frontMatterCSSStyle + ".TableOfContentLO{visibility:hidden;}";
-                if (frontMatterCSSStyle.Trim().Length > 0)
-                    frontMatterCSSStyle = frontMatterCSSStyle + ".dummypage{page-break-after: always;} ";
-                InsertLoFrontMatterCssFile(cssFilename, frontMatterCSSStyle);
-            }
-            catch
-            {
-
-            }
-        }
-
-        public void InsertLoFrontMatterCssFile(string inputCssFilePath, string frontMatterCSSStyle)
-        {
-            Param.LoadSettings();
-            if (!File.Exists(inputCssFilePath)) return;
-            Common.FileInsertText(inputCssFilePath, frontMatterCSSStyle);
         }
 
         /// <summary>

@@ -51,18 +51,6 @@
             this.PanelTask.SuspendLayout();
             this.SuspendLayout();
             // 
-            // BtConfigure
-            // 
-            this.BtConfigure.AccessibleName = "BtConfigure";
-            this.BtConfigure.Location = new System.Drawing.Point(495, 546);
-            this.BtConfigure.Name = "BtConfigure";
-            this.BtConfigure.Size = new System.Drawing.Size(75, 23);
-            this.BtConfigure.TabIndex = 2;
-            this.BtConfigure.Text = "Co&nfigure...";
-            this.BtConfigure.UseVisualStyleBackColor = true;
-            this.BtConfigure.Visible = false;
-            this.BtConfigure.Click += new System.EventHandler(this.BtStyles_Click);
-            // 
             // BtPreview
             // 
             this.BtPreview.AccessibleName = "BtPreview";

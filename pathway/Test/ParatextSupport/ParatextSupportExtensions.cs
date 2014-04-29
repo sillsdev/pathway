@@ -27,12 +27,12 @@ namespace Test.ParatextSupport
     {
         public static XslCompiledTransform UsxToUsfmXslt(ParatextPathwayLink converter)
         {
-            return (XslCompiledTransform)ReflectionHelperLite.GetField(converter, "m_usxToXhtml");
+            return (XslCompiledTransform)ReflectionHelperLite.GetField(converter, "_mUsxToXhtml");
         }
 
         public static XslCompiledTransform EncloseParasInSectionsXslt(ParatextPathwayLink converter)
         {
-            return (XslCompiledTransform)ReflectionHelperLite.GetField(converter, "m_encloseParasInSections");
+            return (XslCompiledTransform)ReflectionHelperLite.GetField(converter, "_mEncloseParasInSections");
         }
     }
 }

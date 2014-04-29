@@ -33,23 +33,11 @@ namespace Test.XeLatex
     public class XeLaTexContentTest : ExportXeLaTex
     {
         #region Private Variables
-        private string _inputCSS;
-        private string _inputXHTML;
         private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
-        private string _outputStory;
-        private string _outputStyles;
-        private Dictionary<string, string> _expected = new Dictionary<string, string>();
-        private string _className = "a";
         private string _testFolderPath = string.Empty;
-        Dictionary<string, Dictionary<string, string>> _idAllClass = new Dictionary<string, Dictionary<string, string>>();
-        private InStyles _stylesXML;
-        private InStory _storyXML;
-        private readonly ArrayList headwordStyles = new ArrayList();
 
-        private Dictionary<string, Dictionary<string, string>> _cssProperty;
-        private CssTree _cssTree;
         private PublicationInformation _projInfo;
         private Dictionary<string, List<string>> _classInlineStyle;
         Dictionary<string, string> _langFontCodeandName = new Dictionary<string, string>();
@@ -60,8 +48,6 @@ namespace Test.XeLatex
         protected void SetUpAll()
         {
             Common.Testing = true;
-            _stylesXML = new InStyles();
-            _storyXML = new InStory();
             _projInfo = new PublicationInformation();
             _classInlineStyle = new Dictionary<string, List<string>>();
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/XeLatex/TestFiles");
@@ -73,16 +59,7 @@ namespace Test.XeLatex
                 Directory.Delete(_outputPath, recursive);
             Directory.CreateDirectory(_outputPath);
             _projInfo.ProjectPath = _testFolderPath;
-            _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             Common.SupportFolder = "";
-            //Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
-            //Common.CopyOfficeFolder(_expectedPath, _outputPath);
-        }
-
-        [SetUp]
-        protected void SetupEach()
-        {
-            _cssTree = new CssTree();
         }
         #endregion Setup
 
@@ -776,7 +753,8 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        //[Test]
+        [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void LineHeightPercentageTest()
         {
@@ -786,7 +764,8 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        //[Test]
+        [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void LineHeightPointTest()
         {

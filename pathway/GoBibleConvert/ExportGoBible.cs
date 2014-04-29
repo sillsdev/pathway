@@ -203,45 +203,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void DeleteTempFiles(string exportGoBibleInputPath)
-        {
-            if (File.Exists(Common.PathCombine(exportGoBibleInputPath, _iconFile)))
-            {
-                File.Delete(Common.PathCombine(exportGoBibleInputPath, _iconFile));
-            }
-
-            var outputFiles = Directory.GetFiles(processFolder);
-            foreach (var outputFile in outputFiles)
-            {
-                try
-                {
-                    // Did we modify this file during our export? If so, delete it
-                    if (outputFile.EndsWith(".xhtml"))
-                    {
-                        File.Delete(outputFile);
-                    }
-                    if (outputFile.EndsWith(".css"))
-                    {
-                        File.Delete(outputFile);
-                    }
-                    if (outputFile.EndsWith(".tmp"))
-                    {
-                        File.Delete(outputFile);
-                    }
-                    // delete the Scripture.de / Dictionary.de file as well
-                    if (outputFile.EndsWith(".de"))
-                    {
-                        File.Delete(outputFile);
-                    }
-                }
-                catch (Exception)
-                {
-                    // problem with this file - just continue with the next one
-                    continue;
-                }
-            }
-        }
-
         private string GoBibleCreatorTempDirectory(string goBibleFullPath)
         {
             var goBibleDirectoryName = Path.GetFileNameWithoutExtension(goBibleFullPath);

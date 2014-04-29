@@ -46,20 +46,6 @@ namespace SIL.Tool
     {
         #region Public variable
 
-        public enum Action
-        {
-            New,
-            Delete,
-            Edit,
-            Copy
-        };
-
-        public enum ProjType
-        {
-            Dictionary,
-            Scripture
-        };
-
         public enum OutputType
         {
             ODT,
@@ -1741,16 +1727,6 @@ namespace SIL.Tool
 
         #region GetExportType()
 
-        /// <summary>
-        /// Returns the export file format
-        /// </summary>
-        /// <returns>Output File Formats</returns>
-        public static ArrayList GetExportType()
-        {
-            var exportType = new ArrayList {"OpenOffice Document", "PDF"};
-            return exportType;
-        }
-
         #endregion
 
         public static string GetHeaderFontName(Dictionary<string, Dictionary<string, string>> _cssProperty,
@@ -1811,192 +1787,6 @@ namespace SIL.Tool
             }
             return headerFontSize;
         }
-
-        /// <summary>
-        /// Returns whether the given executable is installed on the system. For Windows, this is based on the
-        /// items in the Installer / Uninstall areas of the registry - if the program was just copied over, it
-        /// will not show up as actually installed on your system.
-        /// </summary>
-        /// <param name="ExecutableName">Display name (without extension) of the program</param>
-        /// <returns></returns>
-        public static bool IsProgramInstalled(string ExecutableName)
-        {
-            // first check - HKCR\Installer\Products
-            const string installRegistryKey = @"Installer\Products";
-            using (var key = Registry.ClassesRoot.OpenSubKey(installRegistryKey))
-            {
-                foreach (string subkeyName in key.GetSubKeyNames())
-                {
-                    try
-                    {
-                        using (RegistryKey subkey = key.OpenSubKey(subkeyName))
-                        {
-                            if (subkey.GetValue("ProductName").ToString().ToLower().IndexOf(ExecutableName.ToLower()) !=
-                                -1)
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // If there was a problem getting the subkey, continue to the next key
-                        continue;
-                    }
-                }
-            }
-
-            // second check - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
-            const string uninstallRegistryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
-            using (var key = Registry.LocalMachine.OpenSubKey(uninstallRegistryKey))
-            {
-                foreach (string subkeyName in key.GetSubKeyNames())
-                {
-                    try
-                    {
-                        using (RegistryKey subkey = key.OpenSubKey(subkeyName))
-                        {
-                            if (subkey.GetValue("DisplayName").ToString().ToLower().Equals(ExecutableName.ToLower()))
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // If there was a problem getting the subkey, continue to the next key
-                        continue;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        #region ReplaceInFile(string filePath, string searchText, string replaceText)
-
-        /// <summary>
-        /// Function to replace a fullString in a existing file.
-        /// </summary>
-        /// <param name="filePath">File path of the XHTML file</param>
-        /// <param name="searchText">Text to be search</param>
-        /// <param name="replaceText">Text to be replace</param>
-        public static void ReplaceInCssFile(string filePath, string searchText, string replaceText)
-        {
-            if (!File.Exists(filePath)) return;
-            string tempFile = Common.PathCombine(Path.GetDirectoryName(filePath),
-                                                 Path.GetFileNameWithoutExtension(filePath) + "1.xhtml");
-            File.Move(filePath, tempFile);
-            var reader = new StreamReader(tempFile);
-            string contentWriter;
-            var writer = new StreamWriter(filePath);
-            while ((contentWriter = reader.ReadLine()) != null)
-            {
-                writer.Write(Regex.Replace(contentWriter, searchText, replaceText));
-            }
-            reader.Close();
-            writer.Close();
-            File.Delete(tempFile);
-        }
-
-        /// <summary>
-        /// Modify body tag as body xml:space="preserve"
-        /// </summary>
-        public static string ReplaceInXhtmlFile(string filePath)
-        {
-            XmlTextReader reader = DeclareXmlTextReader(filePath, true);
-            string fileDir = Path.GetDirectoryName(filePath);
-            string fileName = Path.GetFileName(filePath);
-            string Newfile = Common.PathCombine(fileDir, fileName.Replace(".xhtml", "_1.xhtml"));
-
-            XmlTextWriter writer = new XmlTextWriter(Newfile, null);
-
-            while (reader.Read())
-            {
-                switch (reader.NodeType)
-                {
-
-                    case XmlNodeType.Element:
-                        if (reader.Name == "html")
-                        {
-                            writer.WriteStartElement("html");
-                            break;
-                        }
-                        writer.WriteStartElement(reader.LocalName);
-                        writer.WriteAttributes(reader, true);
-                        if (reader.IsEmptyElement)
-                        {
-
-                            writer.WriteEndElement();
-
-                        }
-
-                        break;
-
-                    case XmlNodeType.Text:
-
-                        writer.WriteString(reader.Value);
-
-                        break;
-
-                    case XmlNodeType.Whitespace:
-
-                    case XmlNodeType.SignificantWhitespace:
-
-                        writer.WriteWhitespace(reader.Value);
-
-                        break;
-
-                    case XmlNodeType.CDATA:
-
-                        writer.WriteCData(reader.Value);
-
-                        break;
-
-                    case XmlNodeType.EntityReference:
-
-                        writer.WriteEntityRef(reader.Name);
-
-                        break;
-
-                    case XmlNodeType.XmlDeclaration:
-
-                    case XmlNodeType.ProcessingInstruction:
-
-                        writer.WriteProcessingInstruction(reader.Name, reader.Value);
-
-                        break;
-
-                    case XmlNodeType.DocumentType:
-
-                        writer.WriteDocType(reader.Name, reader.GetAttribute("PUBLIC"), reader.GetAttribute("SYSTEM"),
-                                            reader.Value);
-
-                        break;
-
-                    case XmlNodeType.Comment:
-
-                        writer.WriteComment(reader.Value);
-
-                        break;
-
-                    case XmlNodeType.EndElement:
-
-                        writer.WriteFullEndElement();
-
-                        break;
-
-                }
-            }
-            writer.Close();
-            reader.Close();
-            File.Copy(Newfile, filePath, true);
-            return filePath;
-        }
-
-
-
-        #endregion
 
         #region StreamReplaceInFile(string filePath, string searchText, string replaceText)
 
@@ -2120,38 +1910,6 @@ namespace SIL.Tool
                 preferedName = PathCombine(filePath, file + ++counter + fileExtension);
             }
             return preferedName;
-        }
-
-        #endregion
-
-        #region ConvertUnicodeToChar
-
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Unicode to char conversion 
-        /// </summary>
-        /// <param name="unicodeString">Example: 0041, (U+0041 is A)</param>
-        /// <returns>A</returns>
-        /// -------------------------------------------------------------------------------------------
-        public static string ConvertUnicodeToChar(string unicodeString)
-        {
-
-            // Create two different encodings.
-            Encoding ascii = Encoding.ASCII;
-            Encoding unicode = Encoding.Unicode;
-
-            // Convert the string into a byte array.
-            byte[] unicodeBytes = unicode.GetBytes(unicodeString);
-
-            // Perform the conversion from one encoding to the other.
-            byte[] asciiBytes = Encoding.Convert(unicode, ascii, unicodeBytes);
-
-            // Convert the new byte[] into a char[] and then into a string. 
-            char[] asciiChars = new char[ascii.GetCharCount(asciiBytes, 0, asciiBytes.Length)];
-            ascii.GetChars(asciiBytes, 0, asciiBytes.Length, asciiChars, 0);
-            string asciiString = new string(asciiChars);
-
-            return asciiString;
         }
 
         #endregion
@@ -2287,27 +2045,6 @@ namespace SIL.Tool
 
         #endregion
 
-        #region string GetTempCopy(string name)
-
-        /// <summary>
-        /// Makes a copy of folder in a writable location
-        /// </summary>
-        /// <returns>full path to folder</returns>
-        public static string GetTempCopy(string name)
-        {
-            var tempFolder = Path.GetTempPath();
-            var folder = Common.PathCombine(tempFolder, name);
-            if (Directory.Exists(folder))
-            {
-                DirectoryInfo di = new DirectoryInfo(folder);
-                Common.CleanDirectory(di);
-            }
-            FolderTree.Copy(Common.FromRegistry(name), folder);
-            return folder;
-        }
-
-        #endregion string GetXeTeXToolFolder()
-
         #region isRightFieldworksVersion()
 
         /// <summary>
@@ -2361,23 +2098,6 @@ namespace SIL.Tool
                 string[] element = fieldworksVersion.Trim().Split(new[] {','});
                 yield return element;
             }
-        }
-
-        /// <summary>
-        /// Creates a text file with names and version numbers
-        /// </summary>
-        /// <param name="dlls">path to assemblies to be included for compatibility testing</param>
-        public static void SaveFieldworksVersions(string dlls)
-        {
-            string fieldworksVersionPath = GetFieldworksVersionPath();
-            var writer = new StreamWriter(fieldworksVersionPath);
-            var di = new DirectoryInfo(dlls);
-            foreach (FileInfo fileInfo in di.GetFiles())
-            {
-                FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(fileInfo.FullName);
-                writer.WriteLine(string.Format("{0},{1}", fileInfo.Name, fileVersionInfo.FileVersion));
-            }
-            writer.Close();
         }
 
         /// <summary>
@@ -2663,16 +2383,6 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// Get all user path
-        /// </summary>
-        /// <returns></returns>
-        public static string GetApplicationDataPath()
-        {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            return path;
-        }
-
-        /// <summary>
         /// Path.GetFileNameWithoutEx failed in this case "5.25x8.25in 11pt Justified_2010-12-17_0251.xhtml"
         /// </summary>
         public static string GetFileNameWithoutExtension(string fileNameWithPath)
@@ -2848,67 +2558,6 @@ namespace SIL.Tool
             string returnPath = path.Replace('\\', '/');
             returnPath = returnPath.Replace(Path.DirectorySeparatorChar, '/');
             return returnPath;
-        }
-
-        /// <summary>
-        /// Cleans up the output directory of all "temporary" files created during the export process.
-        /// This is determined by comparing the timestamp on each file to the DateTime we stored in the
-        /// PrintVia.On_OK() method. Files with an earlier timestamp will be ignored, except for the .de file
-        /// (that gets copied over as part of the export process).
-        /// </summary>
-        /// <param name="outputFolder">Output directory to clean up</param>
-        /// <param name="keepFilename">This is the permanent output file you want to keep (.odt, .epub, etc.)</param>
-        public static void CleanupOutputDirectory(string outputFolder, string keepFilename)
-        {
-            var al = new ArrayList();
-            al.Add(keepFilename);
-            CleanupOutputDirectory(outputFolder, al);
-        }
-
-        public static void CleanupOutputDirectory(string outputFolder, string keepFilename, string keepJad)
-        {
-            var al = new ArrayList();
-            al.Add(keepFilename);
-            al.Add(keepJad);
-            CleanupOutputDirectory(outputFolder, al);
-        }
-
-        /// <summary>
-        /// Cleans up the output directory of all "temporary" files created during the export process.
-        /// This is determined by comparing the timestamp on each file to the DateTime we stored in the
-        /// PrintVia.On_OK() method. Files with an earlier timestamp will be ignored, except for the .de file
-        /// (that gets copied over as part of the export process).
-        /// This override allows for multiple files to be saved
-        /// </summary>
-        /// <param name="outputFolder">Output directory to clean up</param>
-        /// <param name="keepFilenames">ArrayList of string elements; these are the files to keep.</param>
-        public static void CleanupOutputDirectory(string outputFolder, ArrayList keepFilenames)
-        {
-            var outputFiles = Directory.GetFiles(outputFolder);
-            foreach (var outputFile in outputFiles)
-            {
-                if (!keepFilenames.Contains(outputFile))
-                {
-                    try
-                    {
-                        // Did we modify this file during our export? If so, delete it
-                        if (File.GetLastWriteTime(outputFile).CompareTo(TimeStarted) > 0)
-                        {
-                            File.Delete(outputFile);
-                        }
-                            // delete the Scripture.de / Dictionary.de file as well
-                        else if (outputFile.EndsWith(".de"))
-                        {
-                            File.Delete(outputFile);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // problem with this file - just continue with the next one
-                        continue;
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -3175,35 +2824,6 @@ namespace SIL.Tool
             {
                 return Path.Combine(path1, path2);
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="outPath"></param>
-        /// <returns></returns>
-        public static bool CreateDirectory(string outPath)
-        {
-            bool returnValue = true;
-            try
-            {
-                if (!Directory.Exists(outPath))
-                {
-                    Directory.CreateDirectory(outPath);
-                }
-            }
-            catch (UnauthorizedAccessException)
-            {
-                MessageBox.Show("Sorry! You might not have permission to use this resource.", Application.ProductName,
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                returnValue = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                returnValue = false;
-            }
-            return returnValue;
         }
 
         /// <summary>
@@ -3937,45 +3557,6 @@ namespace SIL.Tool
             return string.Empty;
         }
 
-        public static string ReadOutputFromCommandTerminal(string cmd)
-        {
-            string[] parts = cmd.Split(' ');
-            string cmd_name = parts[0];
-            string arguments = "";
-            if (parts.Length > 1)
-            {
-                for (int i = 1; i < parts.Length; i++)
-                {
-                    arguments += " " + parts[i];
-                }
-            }
-            System.Diagnostics.Process proc = new System.Diagnostics.Process();
-            proc.EnableRaisingEvents = false;
-            proc.StartInfo.FileName = cmd_name;
-            proc.StartInfo.Arguments = arguments;
-            proc.StartInfo.RedirectStandardError = true;
-            proc.StartInfo.RedirectStandardOutput = true;
-            try
-            {
-                if (proc.Start())
-                {
-                    proc.WaitForExit();
-                    string output = proc.StandardOutput.ReadToEnd().TrimEnd();
-                    string error = proc.StandardError.ReadToEnd().TrimEnd();
-                    if (output.Equals("") || output.Equals(" "))
-                        return error;
-                    else
-                        return output;
-                }
-            }
-            catch (System.ComponentModel.Win32Exception w32e)
-            {
-                string ret = "Error Thrown: " + w32e.ToString();
-                return ret;
-            }
-            return "Broken";
-        }
-
         public static bool RunCommand(string szCmd, string szArgs, int wait)
         {
             if (szCmd == null) return false;
@@ -4360,24 +3941,6 @@ namespace SIL.Tool
             return dcLanguage;
         }
 
-        /// <summary>
-        /// Get the fontSize from the Database.ssf file and insert it in css file
-        /// </summary>
-        public static string ParaTextFontSize()
-        {
-            string paraTextFontSize = string.Empty;
-            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext00
-            {
-                // read fontname from ssf
-                SettingsHelper settingsHelper = new SettingsHelper(Param.DatabaseName);
-                string fileName = settingsHelper.GetSettingsFilename();
-                string xPath = "//ScriptureText/DefaultFontSize";
-                XmlNode xmlFont = Common.GetXmlNode(fileName, xPath);
-                paraTextFontSize = xmlFont.InnerText;
-            }
-            return paraTextFontSize;
-        }
-
         public static XmlDocument DeclareXMLDocument(bool applyWhiteSpace)
         {
             XmlDocument destDoc = null;
@@ -4428,39 +3991,6 @@ namespace SIL.Tool
                             XmlResolver = null,
                             WhitespaceHandling = WhitespaceHandling.Significant
                         };
-                else
-                    reader = new XmlTextReader(fileName) { XmlResolver = null };
-
-            }
-            return reader;
-        }
-
-        public static XmlTextReader DeclareXmlTextReaderWhitespaceNone(string fileName, bool applyWhitespace)
-        {
-            XmlTextReader reader = null;
-            if (UnixVersionCheck())
-            {
-                XmlUrlResolver resolver = new XmlUrlResolver();
-                resolver.Credentials = CredentialCache.DefaultCredentials;
-
-                if (applyWhitespace)
-                {
-                    reader = new XmlTextReader(fileName);
-                    reader.XmlResolver = FileStreamXmlResolver.GetNullResolver();
-                    reader.ProhibitDtd = true;
-                    reader.WhitespaceHandling = WhitespaceHandling.None;
-                }
-                else
-                {
-                    reader = new XmlTextReader(fileName);
-                    reader.XmlResolver = FileStreamXmlResolver.GetNullResolver();
-                    reader.ProhibitDtd = true;
-                }
-            }
-            else
-            {
-                if (applyWhitespace)
-                    reader = new XmlTextReader(fileName) { XmlResolver = null, WhitespaceHandling = WhitespaceHandling.None };
                 else
                     reader = new XmlTextReader(fileName) { XmlResolver = null };
 
@@ -4653,25 +4183,6 @@ namespace SIL.Tool
             }
 
             return string.Empty;
-        }
-
-        /// <summary>
-        /// Reads path of default browser from registry
-        /// </summary>
-        /// <returns></returns>
-        public static string GetDefaultBrowserPath()
-        {
-            string key = @"htmlfile\shell\open\command";
-            RegistryKey registryKey = Registry.ClassesRoot.OpenSubKey(key, false);
-            // get default browser path
-            if (registryKey != null)
-            {
-                return ((string)registryKey.GetValue(null, null)).Split('"')[1];
-            }
-            else
-            {
-                return string.Empty;
-            }
         }
 
         /// <summary>

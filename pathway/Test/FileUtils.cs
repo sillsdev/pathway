@@ -147,41 +147,6 @@ namespace SIL.Tool
         #region Public methods
         /// ------------------------------------------------------------------------------------
         /// <summary>
-        /// Opens the two files specified and determines whether or not they are byte-for-byte
-        /// identical.
-        /// </summary>
-        /// <param name="file1"></param>
-        /// <param name="file2"></param>
-        /// <returns></returns>
-        /// ------------------------------------------------------------------------------------
-        public static bool AreFilesIdentical(string file1, string file2)
-        {
-            StreamReader sr1 = null;
-            StreamReader sr2 = null;
-            try
-            {
-                sr1 = new StreamReader(file1);
-                sr2 = new StreamReader(file2);
-                string str1 = sr1.ReadToEnd();
-                string str2 = sr2.ReadToEnd();
-				
-                return str1 == str2;
-            }
-            catch
-            {
-                return false;
-            }
-            finally
-            {
-                if (sr1 != null)
-                    sr1.Close();
-                if (sr2 != null)
-                    sr2.Close();
-            }
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
         /// Determine the file encoding for a Standard Format file
         /// </summary>
         /// <param name="fileName">file name to check</param>
@@ -290,18 +255,6 @@ namespace SIL.Tool
             {
                 return false;
             }
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Opens a TextReader on the given file
-        /// </summary>
-        /// <param name="filename">The fully-qualified filename</param>
-        /// <param name="encoding">The encoding to use for interpreting the contents</param>
-        /// ------------------------------------------------------------------------------------
-        public static TextReader OpenFileForRead(string filename, Encoding encoding)
-        {
-            return s_fileos.GetReader(filename, encoding);
         }
 
         /// ------------------------------------------------------------------------------------

@@ -43,13 +43,11 @@ namespace SIL.PublishingSolution
         protected Stack<string> _allParagraph;
         protected Stack<string> _allCharacter;
         protected Stack<string> _doNotInheritProperty;
-        protected Stack<string> _braceClass = new Stack<string>();
         protected string _doNotInheritOriginalClass = string.Empty;
         protected string _doNotInheritClass = string.Empty;
         protected Stack<ClassInfo> _allStyleInfo = new Stack<ClassInfo>();
         protected ClassAttrib _precedeClassAttrib = new ClassAttrib();
         protected ClassAttrib _xhtmlClassAttrib = new ClassAttrib();
-        protected ClassAttrib _parentClassAttrib = new ClassAttrib();
         protected ClassAttrib _parentPrecedeClassAttrib = new ClassAttrib();
 
         protected Dictionary<string, string> _childStyle;
@@ -61,7 +59,6 @@ namespace SIL.PublishingSolution
         protected ClassInfo _psuedoContainsStyle = new ClassInfo();
         private string _matchedCssStyleName;
         protected Dictionary<string, string> _tempStyle;
-        protected Dictionary<string, string> _displayBlock;
         protected string footerMarkerClassName = string.Empty;
 
         protected Dictionary<string, Dictionary<string, string>> IdAllClass;
@@ -72,7 +69,6 @@ namespace SIL.PublishingSolution
         //protected ClassInfo _classInfo = new ClassInfo();
         protected Dictionary<string, Dictionary<string, string>> _dictColumnGapEm = new Dictionary<string, Dictionary<string, string>>();
         protected string _className;
-        protected ArrayList _attribute;
         private string _isTagClass;
         private string _listType;
 
@@ -86,16 +82,12 @@ namespace SIL.PublishingSolution
         protected string _closeChildName = string.Empty;
         protected bool _isNewParagraph;
         protected bool _isParagraphClosed = true;
-        protected bool _isImageParagraphClosed = true;
         protected List<string> _divType;
         protected bool _isFirstPictureWritten;
 
         #region Footnote
-        protected bool _chapterNoStart;
-        protected bool _verserNoStart;
         protected string _chapterNo = string.Empty;
         protected string _verseNo;
-        protected bool _footnoteStart = false;
         protected bool isFootnote = false;
         protected string footnoteClass = string.Empty;
         protected StringBuilder footnoteContent = new StringBuilder();
@@ -137,7 +129,6 @@ namespace SIL.PublishingSolution
         protected string _classNameWithLang;
 
         protected Common.OutputType _outputType;
-        protected string _listName = string.Empty;
 
         protected ArrayList _headwordStyleName = new ArrayList();
         protected bool _headwordStyles = false;
@@ -851,7 +842,6 @@ namespace SIL.PublishingSolution
 
         private string CreateStyle()
         {
-            _parentClassAttrib = GetParent();
             _parentPrecedeClassAttrib = GetParentPrecede();
             ArrayList multiClassList = MultiClassCombination(_className);
 
@@ -1253,50 +1243,6 @@ namespace SIL.PublishingSolution
             WordCharSpace(ancestorFontSize);
         }
 
-        private void AssignPropertyOLD(string cssStyleName, float ancestorFontSize)
-        {
-            if (!IdAllClass.ContainsKey(cssStyleName))
-            {
-                return;
-            }
-
-            foreach (KeyValuePair<string, string> property in IdAllClass[cssStyleName])
-            {
-                if (_tempStyle.ContainsKey(property.Key)) continue;
-                if (property.Value.IndexOf("%") > 0)
-                {
-                    float value = float.Parse(property.Value.Replace("%", ""));
-                    _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString();
-                    const string point = "pt";
-                    if (_outputType != Common.OutputType.IDML)
-                    {
-                        float size = ancestorFontSize * value / 100;
-                        if (property.Key == "line-height")
-                        {
-                            float basepoint = size - ancestorFontSize;
-                            if (basepoint <= 0)
-                                basepoint = ancestorFontSize; // if 1eem or 0em
-                            else if (basepoint < ancestorFontSize)
-                                basepoint = size; // 110%
-                            size = basepoint;
-                        }
-                        _tempStyle[property.Key] = size + point;
-
-                        if (property.Key == "column-gap") // For column-gap: 2em; change the value as (-ve)
-                        {
-                            _dictColumnGapEm["Sect_" + _className.Trim()]["columnGap"] = _tempStyle[property.Key];
-                            _tempStyle[property.Key] = (-ancestorFontSize * value / 100).ToString();
-                        }
-                    }
-                }
-                else
-                {
-                    _tempStyle[property.Key] = property.Value;
-                }
-            }
-            WordCharSpace(ancestorFontSize);
-        }
-
         private bool CompareCoreClass(ClassAttrib classAttrib, ClassAttrib xhtmlClassInfo, string cssTagFamily)
         {
             if (_isclassNameExist == false)
@@ -1584,17 +1530,6 @@ namespace SIL.PublishingSolution
             return result;
         }
 
-        protected ClassInfo StackPop(Stack<ClassInfo> stack)
-        {
-            ClassInfo result = new ClassInfo();
-            result = null;
-            if (stack != null && stack.Count > 0)
-            {
-                result = stack.Pop();
-            }
-            return result;
-        }
-
         protected ClassAttrib GetPreced()
         {
             ClassAttrib result = new ClassAttrib();
@@ -1603,18 +1538,6 @@ namespace SIL.PublishingSolution
                 ClassInfo result1 = new ClassInfo();
                 result1 = _allStyleInfo.Pop();
                 result.SetClassAttrib(result1.CoreClass.ClassName, result1.CoreClass.Attribute);
-            }
-            return result;
-        }
-
-        protected ClassAttrib GetParent()
-        {
-            ClassAttrib result = new ClassAttrib();
-            if (_allStyleInfo != null && _allStyleInfo.Count > 0)
-            {
-                ClassInfo classInfo = new ClassInfo();
-                classInfo = _allStyleInfo.Peek();
-                result.SetClassAttrib(classInfo.CoreClass.ClassName, classInfo.CoreClass.Attribute);
             }
             return result;
         }

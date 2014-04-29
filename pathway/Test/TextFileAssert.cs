@@ -63,29 +63,5 @@ namespace Test
         {
             AreEqualEx(expectPath, outputPath, null, null);
         }
-        public static void AreNotEqual(string expectPath, string outputPath, string msg)
-        {
-            try
-            {
-                StreamReader expectStream = new StreamReader(expectPath);
-                StreamReader outputStream = new StreamReader(outputPath);
-                while (!expectStream.EndOfStream)
-                {
-                    var expectLine = expectStream.ReadLine();
-                    var outputLine = outputStream.ReadLine();
-                    if (expectLine != outputLine)
-                        return;
-                }
-                if (!outputStream.EndOfStream)
-                    return;
-                expectStream.Close();
-                outputStream.Close();
-            }
-            catch (Exception)
-            {
-                return;
-            }
-            Assert.Fail(msg);
-        }
     }
 }

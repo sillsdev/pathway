@@ -349,10 +349,6 @@
       <Project>{8D0D307D-3785-4561-A923-FF3DDF6C2F14}</Project>
       <Name>InDesignConvert</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
-      <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
-      <Name>LiftPrepare</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
       <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
       <Name>OpenOfficeConvert</Name>
@@ -452,7 +448,7 @@
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(AllSamples)" DestinationFiles="@(AllSamples->'Files\ConfigurationTool\Samples\Dictionary\%(RecursiveDir)\%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'Files\ConfigurationTool\Samples\Scripture\%(RecursiveDir)\%(Filename)%(Extension)')"  Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'Files\ConfigurationTool\Samples\Scripture\%(RecursiveDir)\%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -619,12 +615,12 @@
   </ItemGroup>
   <Target Name="WebonaryBeforeBuild">
     <MSBuild.ExtensionPack.FileSystem.FindUnder TaskAction="FindFiles" Path="$(MSBuildProjectDirectory)\..\ThirdParty" SearchPattern="lame*.zip">
-      <Output ItemName="AllFoundFiles" TaskParameter="FoundItems"/>
+      <Output ItemName="AllFoundFiles" TaskParameter="FoundItems" />
     </MSBuild.ExtensionPack.FileSystem.FindUnder>
-    <Message Text="===== Found Files =====" Importance="high"/>
-    <Message Text="AllFoundFiles:%0d%0a@(AllFoundFiles,'%0d%0a')"/>
+    <Message Text="===== Found Files =====" Importance="high" />
+    <Message Text="AllFoundFiles:%0d%0a@(AllFoundFiles,'%0d%0a')" />
     <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="Files\ConfigurationTool\Lame" ZipFileName="..\ThirdParty\lame3.99.5.zip" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''" />
-    <Delete Files="Files\ConfigurationTool\Lame\images\CVS\Entries.Extra.Old" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''"/>
+    <Delete Files="Files\ConfigurationTool\Lame\images\CVS\Entries.Extra.Old" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''" />
     <Delete Files="Files\ConfigurationTool\Lame\images\CVS\Entries.Old" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''" />
     <Delete Files="Files\ConfigurationTool\Lame\styles\CVS\Entries.Extra.Old" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''" />
     <Delete Files="Files\ConfigurationTool\Lame\styles\CVS\Entries.Old" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''" />

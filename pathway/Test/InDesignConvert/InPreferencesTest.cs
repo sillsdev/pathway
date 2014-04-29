@@ -33,8 +33,6 @@ namespace Test.InDesignConvert
         private string _testFolderPath = string.Empty;
         private string _fileNameWithPath;
         private string _xPath;
-        private string _currentDir;
-        private string _path;
         private CssTree _cssTree;
         private InStyles _stylesXML;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;

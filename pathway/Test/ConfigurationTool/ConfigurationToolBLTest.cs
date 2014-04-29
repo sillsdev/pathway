@@ -356,44 +356,6 @@ namespace Test.UIConfigurationToolBLTest
             }
         }
 
-        private void AssignNewTest()
-        {
-            cTool.TxtName.Text = "NewStyle";
-            cTool.TxtDesc.Text = "NewDescription";
-            cTool._CToolBL.txtDesc_KeyUpBL();
-            cTool.ChkAvailable.Checked = true;
-            cTool._CToolBL.chkAvailable_CheckedChangedBL(cTool.ChkAvailable);
-            cTool.TxtComment.Text = "NewComment";
-            cTool._CToolBL.txtComment_KeyUpBL();
-            cTool.TxtApproved.Text = "Tester";
-            cTool._CToolBL.txtApproved_ValidatedBL(cTool.TxtApproved);
-            cTool.DdlPagePageSize.Text = "A4";
-            cTool.TxtPageInside.Text = "18pt";
-            cTool.TxtPageOutside.Text = "18pt";
-            cTool.TxtPageTop.Text = "18pt";
-            cTool.TxtPageBottom.Text = "18pt";
-            cTool.DdlPageColumn.Text = "2";
-            cTool.TxtPageGutterWidth.Text = "6pt";
-            cTool.DdlJustified.Text = "Yes";
-            cTool.DdlVerticalJustify.Text = "Center";
-            cTool.DdlPicture.Text = "Yes";
-            cTool.DdlLeading.Text = "12";
-            cTool.DdlRunningHead.Text = "Every Page";
-            cTool.DdlRules.Text = "Yes";
-            cTool.DdlFontSize.Text = "11";
-            cTool.DdlFileProduceDict.Text = "One";
-            cTool.DdlSense.Text = "Bullet";
-            cTool.Close();
-        }
-
-        private void GetStyleName(string expStylename)
-        {
-            string expectedStyleName = expStylename;
-            int SelectedRowIndex = cTool.StylesGrid.RowCount - 1;
-            string actualStyleName = cTool.StylesGrid[0, SelectedRowIndex].Value.ToString();
-            Assert.IsTrue(expectedStyleName == actualStyleName, "GetStyleName Test failed");
-        }
-
         private void GridRowCount_Load()
         {
             const int expectedRowCount = 11;

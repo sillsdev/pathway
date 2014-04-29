@@ -32,11 +32,6 @@ namespace SIL.PublishingSolution
         string _outputExtension = string.Empty;
         private string _sourcePicturePath;
 
-        string _allDiv = string.Empty;
-        bool _isNewLine = true;
-        readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
-
-        private XmlDocument _xmldoc;
         private bool _imageParaForCaption = false;
         private bool isFileEmpty = true;
         
@@ -50,32 +45,7 @@ namespace SIL.PublishingSolution
         private bool IsEmptyElement = false;
         #endregion
 
-        #region Public Variable
-        public bool _multiLanguageHeader = false;
-        public string RefFormat = "Genesis 1";
-        public bool IsMirrorPage;
-        public string _ChapterNo = "1";
-
-        #endregion
-
         #region Public Methods
-
-        public bool IsNewLine
-        {
-            get { return _isNewLine; }
-        }
-
-        public string AllDiv
-        {
-            get { return _allDiv; }
-        }
-
-        public static long CountLinesInString(string text)
-        {
-            var reg = new Regex("</", RegexOptions.Multiline);
-            MatchCollection mat = reg.Matches(text);
-            return mat.Count;
-        }
 
         public void RemoveAfterBefore(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
@@ -138,21 +108,6 @@ namespace SIL.PublishingSolution
             }
             return data;
         }
-
-        /// <summary>
-        /// Used for preprocess work to point the tempfile copied from source xhtml file.
-        /// </summary>
-        /// <param name="sourceFile">xhtml file</param>
-        /// <returns>Changed file name</returns>
-        private string CheckSourceChanged(string sourceFile)
-        {
-            if (_xmldoc != null)
-            {
-                sourceFile = _tempFile;
-            }
-            return sourceFile;
-        }
-
 
         public void InsertBeforeAfter()
         {

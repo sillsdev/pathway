@@ -10,10 +10,6 @@ namespace PdfLicense
     public class Program
     {
         public static int ExitCode;
-        public static string RedirectOutput;
-        public static string LastError;
-        private static Process myProcess = new Process();
-        private static int _elapsedTime;
         private static bool _eventHandled;
         static List<string> _readLicenseFilesBylines = new List<string>();
 
@@ -108,55 +104,6 @@ namespace PdfLicense
             }
             catch { }
             return pathwayDir;
-        }
-
-        public static void RunCommand(string instPath, string name, string arg, bool wait)
-        {
-            _elapsedTime = 0;
-            _eventHandled = false;
-
-            try
-            {
-                // Start a process to print a file and raise an event when done.
-                myProcess.StartInfo.FileName = name;
-                myProcess.StartInfo.Arguments = arg;
-                myProcess.StartInfo.CreateNoWindow = true;
-                myProcess.EnableRaisingEvents = true;
-                myProcess.StartInfo.CreateNoWindow = true;
-                myProcess.StartInfo.UseShellExecute = string.IsNullOrEmpty(RedirectOutput);
-                myProcess.StartInfo.WorkingDirectory = instPath;
-
-                myProcess.Exited += new EventHandler(myProcess_Exited);
-                myProcess.Start();
-
-            }
-            catch (Exception ex)
-            {
-                if (!string.IsNullOrEmpty(RedirectOutput))
-                {
-                    string result = string.Empty;
-                    StreamWriter streamWriter = new StreamWriter(PathCombine(instPath, RedirectOutput));
-                    var errorArgs = string.Format("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
-                    result += errorArgs;
-                    streamWriter.Write(result);
-                    streamWriter.Close();
-                    RedirectOutput = null;
-                }
-                return;
-            }
-
-            // Wait for Exited event, but not more than 30 seconds. 
-            const int SLEEP_AMOUNT = 100;
-            while (!_eventHandled)
-            {
-                _elapsedTime += SLEEP_AMOUNT;
-                if (_elapsedTime > 30000)
-                {
-                    break;
-                }
-                Thread.Sleep(SLEEP_AMOUNT);
-            }
-            myProcess.Close();
         }
 
         public static bool RunCommand(string szCmd, string szArgs, int wait)

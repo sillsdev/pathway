@@ -41,7 +41,6 @@ namespace Test.CssDialog
         /// <summary>path to all users output</summary>
         string _publishingSolutionsData = string.Empty;
         const string _StyleSettings = "StyleSettings.xml";
-        private bool paramLoaded;
         private string xmlFile;
 
         #region Setup

@@ -52,19 +52,6 @@ namespace SIL.Tool
         /// <param name="defaultValue">The default value.</param>
         /// <returns></returns>
         /// --------------------------------------------------------------------------------
-        static public string GetStringRegistryValue(string key, string defaultValue)
-        {
-            return (string)GetRegistryValue(key, defaultValue);
-        }
-
-        /// --------------------------------------------------------------------------------
-        /// <summary>
-        /// Method for retrieving a Registry Value.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <param name="defaultValue">The default value.</param>
-        /// <returns></returns>
-        /// --------------------------------------------------------------------------------
         static public int GetIntRegistryValue(string key, int defaultValue)
         {
             return (int)GetRegistryValue(key, defaultValue);

@@ -66,27 +66,6 @@ namespace Test.PsExport
             Backend.Load(Common.ProgInstall);
         }
 
-        private static string _BasePath = string.Empty;
-        private static string _ConfigPath = string.Empty;
-
-        public static void DoBatch(string project, string process, string config)
-        {
-            SetBaseAndConfig();
-            var folder = _BasePath + project + _ConfigPath;
-            var processPath = Common.PathCombine(_BasePath + project, process);
-            //MessageBox.Show(folder);
-            SubProcess.Run(folder, processPath, config, true);
-        }
-
-        private static void SetBaseAndConfig()
-        {
-            if (_BasePath != string.Empty) return;
-            var m = Regex.Match(Environment.CurrentDirectory, "Test");
-            Debug.Assert(m.Success);
-            _BasePath = Environment.CurrentDirectory.Substring(0, m.Index);
-            _ConfigPath = Environment.CurrentDirectory.Substring(m.Index + m.Length);
-        }
-
         /// <summary>
         /// pretend we don't know the type of input after each test
         /// </summary>

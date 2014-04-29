@@ -392,24 +392,6 @@ namespace SIL.PublishingSolution
             xmlMap.Save(xmlFileNameWithPath);
         }
 
-        public static void SaveFontNameSize(string name, string size)
-        {
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(UiSettingPath);
-            XmlNode root = xmlDocument.DocumentElement;
-            if (root == null) return;
-            string xPath = "//stylePick/customize//font";
-            XmlNode returnNode = root.SelectSingleNode(xPath);
-            if (returnNode == null) return;
-            XmlNode fontName = returnNode.Attributes.GetNamedItem("name");
-            fontName.Value = name;
-            XmlNode strFontSize = returnNode.Attributes.GetNamedItem("size");
-            strFontSize.Value = size;
-            TextWriter textWriter = new StreamWriter(SettingOutputPath);
-            xmlDocument.Save(textWriter);
-            textWriter.Close();
-        }
-
         /// <summary>
         /// Sets the Gloabal Font Size and Font Name from StyleSettings.xml
         /// </summary>
@@ -505,17 +487,6 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
-        public static string GetTagIcon(XmlNode node)
-        {
-            var attr = node.Attributes.GetNamedItem("icon");
-            return (attr != null) ? attr.InnerText : "";
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="path"></param>
         /// <param name="tv"></param>
         /// <param name="features"></param>
@@ -578,28 +549,6 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="tv"></param>
-        public static void LoadCategories(string path, TreeView tv)
-        {
-            foreach (XmlNode node in GetItems(path))
-            {
-                var tn = new TreeNode { Text = Name(node) };
-                var selection = AttrValue(node, "select");
-                foreach (XmlNode child in node.ChildNodes)
-                {
-                    var name = Name(child);
-                    var opt = new TreeNode { Text = name, Checked = (name == selection) };
-                    tn.Nodes.Add(opt);
-                }
-                tn.Expand();
-                tv.Nodes.Add(tn);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="f"></param>
         public static void SetupHelp(Control f)
         {
@@ -615,35 +564,6 @@ namespace SIL.PublishingSolution
             hp.SetHelpNavigator(f, HelpNavigator.Topic);
             hp.SetHelpKeyword(f, f.Name + ".htm");
         }
-
-        private static bool busyChecking;
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="node"></param>
-        public static void Check(TreeNode node)
-        {
-            if (busyChecking) return;
-            busyChecking = true;
-            Debug.Assert(node != null, "Null node value");
-            if (node.Parent == null)
-            {
-                node.Checked = true;
-                node.SelectedImageIndex = -1;
-            }
-            else
-            {
-                foreach (TreeNode treeNode in node.Parent.Nodes)
-                {
-                    treeNode.Checked = false;
-                    treeNode.StateImageIndex = _selectedIndex;
-                }
-                node.Checked = true;
-                node.StateImageIndex = _UnSelectedIndex;
-            }
-            busyChecking = false;
-        }
-
 
         /// <summary>
         /// 
@@ -676,22 +596,6 @@ namespace SIL.PublishingSolution
             catch
             {
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tlp"></param>
-        public static void SaveSettings(TableLayoutPanel tlp)
-        {
-            Debug.Assert(tlp != null, "Invalid control");
-            for (var i = 0; i < tlp.Controls.Count; i += 2)
-            {
-                var key = tlp.Controls[i].Text;
-                var val = tlp.Controls[i + 1].Text;
-                SetValue(key, val);
-            }
-            Write();
         }
 
         /// <summary>
@@ -742,35 +646,6 @@ namespace SIL.PublishingSolution
             {
                 throw new Exception("Unable to set default value (name=" + id + ", value=" + val + ")", ex);
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tv"></param>
-        public static void SaveCategories(TreeView tv)
-        {
-            Debug.Assert(tv != null, "Invalid control");
-            var baseNode = xmlMap.SelectSingleNode("stylePick/categories");
-            Debug.Assert(baseNode != null);
-            baseNode.RemoveAll();
-            foreach (TreeNode node in tv.Nodes)
-            {
-                var cat = xmlMap.CreateElement("category");
-                AddAttrValue(cat, "name", node.Text);
-                var select = xmlMap.CreateAttribute("select");
-                foreach (TreeNode child in node.Nodes)
-                {
-                    var item = xmlMap.CreateElement("item");
-                    AddAttrValue(item, "name", child.Text);
-                    if (child.Checked)
-                        select.Value = child.Text;
-                    cat.AppendChild(item);
-                }
-                cat.Attributes.Append(select);
-                baseNode.AppendChild(cat);
-            }
-            Write();
         }
 
         /// <summary>
@@ -967,37 +842,6 @@ namespace SIL.PublishingSolution
             return prev.Attributes["action"].Value == "include" ? StyleCategories.YES : StyleCategories.NO;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="styleList"></param>
-        /// <returns></returns>
-        public static List<string> FilterStyles(List<string> styleList)
-        {
-            var stylesExcluded = new List<string>();
-            foreach (var style in styleList)
-            {
-                var styleNode = xmlMap.SelectSingleNode(string.Format("/stylePick/styles/" + MediaType + "/style[@name=\"{0}\"]", style));
-                Debug.Assert(styleNode != null, "Missing style " + style);
-                var exclude = styleNode.SelectNodes("criteria[@action=\"exclude\"]");
-                if (exclude == null) continue;
-                foreach (XmlNode criteria in exclude)
-                {
-                    var cat = criteria.Attributes["category"].Value;
-                    var opt = criteria.Attributes["option"].Value;
-                    var catNode = xmlMap.SelectSingleNode(string.Format("/stylePick/categories/category[@name=\"{0}\"]", cat));
-                    Debug.Assert(catNode != null, "Missing category " + cat);
-                    if (opt != catNode.Attributes["select"].Value) continue;
-                    stylesExcluded.Add(style);
-                }
-            }
-            foreach (var s in stylesExcluded)
-            {
-                styleList.Remove(s);
-            }
-            return styleList;
-        }
-
         public static void AddAttrValue(XmlNode node, string attrTag, string val)
         {
             var attr = xmlMap.CreateAttribute(attrTag);
@@ -1038,53 +882,6 @@ namespace SIL.PublishingSolution
 				fPath = Common.FromRegistry(Common.PathCombine(Value[MasterSheetPath], fn));
             }
             return fPath;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="kind"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public static XmlNode InsertKind(string kind, string name)
-        {
-            var sel = xmlMap.SelectSingleNode(string.Format("stylePick/{0}s/{1}[@name=\"{2}\"]", kind, kind, name));
-            if (sel != null) return sel;
-            var node = xmlMap.CreateElement(kind);
-            AddAttrValue(node, "name", name);
-            var baseNode = xmlMap.SelectSingleNode(string.Format("stylePick/{0}s", kind));
-            baseNode.AppendChild(node);
-            return node;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="feature"></param>
-        /// <param name="option"></param>
-        /// <param name="css"></param>
-        /// <param name="icon"></param>
-        public static void InsertOption(XmlNode feature, string option, string css, string icon)
-        {
-            if (option == "") return;
-            var sel = feature.SelectSingleNode("option[@name=\"" + option + "\"]");
-            if (sel == null)
-            {
-                var opt = xmlMap.CreateElement("option");
-                AddAttrValue(opt, "name", option);
-                AddAttrValue(opt, "file", css);
-                if (icon != "")
-                    AddAttrValue(opt, "icon", icon);
-                feature.AppendChild(opt);
-                return;
-            }
-            SetAttrValue(sel, "file", css);
-            if (icon != "")
-            {
-                SetAttrValue(sel, "icon", icon);
-                if (css != "")
-                    featureIcon[css.ToLower()] = Path.GetFileName(icon);
-            }
         }
 
         /// <summary>
@@ -1186,26 +983,6 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// To get the path of the file
-        /// </summary>
-        /// <param name="filePath">File path with filename</param>
-        /// <param name="fileName">CSS filename</param>
-        /// <returns></returns>
-        public static string GetValidFilePath(string filePath, string fileName)
-        {
-            if (!File.Exists(filePath))
-            {
-                string stylesPath = Common.PathCombine(Value["MasterSheetPath"], fileName);
-                filePath = Common.PathCombine(Path.GetDirectoryName(SettingPath), stylesPath);
-                if (!File.Exists(filePath))
-                {
-                    filePath = Common.PathCombine(Param.Value["UserSheetPath"], fileName);
-                }
-            }
-            return filePath;
-        }
-
-        /// <summary>
         /// To set the properties for Scripture GoBible
         /// </summary>
         /// <param name="attribName"></param>
@@ -1288,30 +1065,6 @@ namespace SIL.PublishingSolution
                 organization = "";
             }
             return XmlConvert.DecodeName(organization);
-        }
-
-        public static string GetDefaultMetadataValue(string name, string organization)
-        {
-            XmlNode node;
-            // attempt to get the organization default
-            try
-            {
-                node =
-                    GetItem("//stylePick/Metadata/meta[@name='" + name + "']/organizationDefault[@organizationName='" +
-                            XmlConvert.EncodeName(organization) + "']");
-                if (node == null)
-                {
-                    // no organization default for this node - get the default value
-                    node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/defaultValue");
-                    // test for null node is in the return value below
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.ToString());
-                node = null;
-            }
-            return (node == null) ? null : (XmlConvert.DecodeName(node.InnerText.Trim()));            
         }
 
         /// <summary>
@@ -1555,24 +1308,6 @@ namespace SIL.PublishingSolution
         /// </summary>
         static readonly Dictionary<string, string> featureIcon = new Dictionary<string, string>();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="lv"></param>
-        public static void LoadImages(ListView lv)
-        {
-            lv.Items.Clear();
-            lv.SmallImageList = imageListSmall;
-			var di = new DirectoryInfo(Common.FromRegistry(Value[IconPath]));
-            var exts = new List<string> { ".png" };
-            foreach (var fi in di.GetFiles())
-            {
-                var lcName = fi.Name.ToLower();
-                if (exts.Contains(Path.GetExtension(lcName)))
-                    lv.Items.Add(new ListViewItem { Text = lcName, ImageIndex = iconIdx[lcName] });
-            }
-        }
-
     	/// <summary>
         /// Load ListView icons from image folder
         /// </summary>
@@ -1603,29 +1338,6 @@ namespace SIL.PublishingSolution
             var bmp = new Bitmap(fileStream);
             fileStream.Close();
             return bmp;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="css"></param>
-        public static void NewIcon(string name, string css)
-        {
-            var nm = Path.GetFileName(name).ToLower();
-            featureIcon[css.ToLower()] = Path.GetFileName(nm);
-            var myName = Common.PathCombine(Value[IconPath], nm).ToLower();
-            var fi = new FileInfo(myName);
-            if (Path.GetExtension(myName) == ".png")
-            {
-                var icon = new Icon(myName);
-                var bmp = icon.ToBitmap();
-                AddBmpIcon(fi, bmp);
-            }
-            else
-            {
-                AddBmpIcon(fi, new Bitmap(myName));
-            }
         }
 
         /// <summary>

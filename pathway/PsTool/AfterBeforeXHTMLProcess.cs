@@ -158,19 +158,6 @@ namespace SIL.PublishingSolution
             _reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true);
         }
 
-        protected bool IsEmptyNode()
-        {
-            bool result = false;
-            if (_reader.IsEmptyElement)
-            {
-                if (_reader.Name != "img")
-                {
-                    result = true;
-                }
-            }
-            return result;
-        }
-
         protected void StartElementBase(bool isHeadword)
         {
             string[] divTypeList = new[] { "div", "ol", "ul", "li", "p", "body", "h1", "h2", "h3", "h4", "h5", "h6", "table", "tr", "td", "th" };
@@ -242,29 +229,6 @@ namespace SIL.PublishingSolution
             }
             if (_tagType != "img")
                 _allStyle.Push(_childName);
-        }
-
-        public void LanguageFontCheck(string content, string styleName)
-        {
-            if (_newProperty.ContainsKey(styleName) && _newProperty[styleName].ContainsKey("font-family"))
-            {
-                return;
-            }
-            if (LanguageFontStyleName.Contains(styleName) == false)
-            {
-                string font = Common.GetLanguageUnicode(content);
-                if (font != string.Empty) // Is telugu/assamese?
-                {
-                    if (_newProperty.ContainsKey(styleName) == false)
-                    {
-                        Dictionary<string, string> newStyle = new Dictionary<string, string>();
-                        _newProperty[styleName] = newStyle;
-                        ParentClass[styleName] = "Standard|div";
-                    }
-                    _newProperty[styleName]["font-family"] = font;
-                    _newProperty[styleName]["font-family-complex"] = font;
-                }
-            }
         }
 
         public virtual void CreateSectionClass(string name)
@@ -344,17 +308,6 @@ namespace SIL.PublishingSolution
             }
             return returnValue;
 
-        }
-
-        protected string GetPropertyValue(string className, string propertyName)
-        {
-            string value = string.Empty;
-            string classToCheck = className.Length > 0 ? className : _classNameWithLang;
-            if (IdAllClass.ContainsKey(classToCheck) && IdAllClass[classToCheck].ContainsKey(propertyName))
-            {
-                value = IdAllClass[classToCheck][propertyName];
-            }
-            return value;
         }
 
         protected string GetTagInfo()
@@ -512,42 +465,6 @@ namespace SIL.PublishingSolution
 
 
         }
-
-        protected string ModifiedContent(string content, string paragraphName, string characterName)
-        {
-            string styleName = characterName;
-            if (characterName == string.Empty || characterName == "$ID/[No character style]")
-            {
-                styleName = paragraphName;
-            }
-            string modifiedContent = content;
-            if (styleName != null && IdAllClass.ContainsKey(styleName))
-            {
-
-            }
-            return modifiedContent;
-        }
-
-
-        /// <summary>
-        /// Recursive Parents styles should be added
-        /// </summary>
-        /// <param name="styleName">current style Name</param>
-        protected void AddUsedParentStyleName(string styleName)
-        {
-            if (ParentClass.ContainsKey(styleName))
-            {
-                string parent = ParentClass[styleName];
-                parent = Common.LeftString(parent, "|");
-                if (_usedStyleName.Contains(parent))
-                {
-                    return;
-                }
-                _usedStyleName.Add(parent);
-                AddUsedParentStyleName(parent);
-            }
-        }
-
 
         protected virtual string StackPeekCharStyle(Stack<string> stack)
         {
@@ -1145,17 +1062,6 @@ namespace SIL.PublishingSolution
         {
             string result = string.Empty;
             if (stack.Count > 0)
-            {
-                result = stack.Pop();
-            }
-            return result;
-        }
-
-        protected ClassInfo StackPop(Stack<ClassInfo> stack)
-        {
-            ClassInfo result = new ClassInfo();
-            result = null;
-            if (stack != null && stack.Count > 0)
             {
                 result = stack.Pop();
             }

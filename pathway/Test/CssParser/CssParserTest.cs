@@ -34,7 +34,6 @@ namespace Test.CssParserTest
         private string inputCSSPath;
         CssParser target = new CssParser();
         TreeNode OutputNode = new TreeNode();
-        TreeNode ExpectedNode = new TreeNode();
 
         readonly TreeNode resultNode = new TreeNode();
         readonly TreeNode expectedNode = new TreeNode();
@@ -53,8 +52,6 @@ namespace Test.CssParserTest
         readonly TreeNode expectedIPCPNode = new TreeNode();
         readonly TreeNode resultRUSNode = new TreeNode();   // To remove "_" in classnames
         readonly TreeNode expectedRUSNode = new TreeNode();
-        readonly TreeNode resultIPPNode = new TreeNode();   // Inherit Parent Property
-        readonly TreeNode expectedIPPNode = new TreeNode();
         readonly TreeNode resultMLSNode = new TreeNode();   // MultiLineSyntax Property
         readonly TreeNode expectedMLSNode = new TreeNode();
         readonly TreeNode resultOSNode = new TreeNode();   // OxesCase Property
@@ -146,14 +143,6 @@ namespace Test.CssParserTest
             resultMLSNode.Nodes.Add((TreeNode)Node.Clone());
         }
 
-
-        public void ResultInheritParentPropertyTree()
-        {
-            var clsCSS = new CssParser();
-            var filePath = Common.DirectoryPathReplace(testPath + "/InheritParentProperty.css");
-            var Node = clsCSS.BuildTree(filePath);
-            resultIPPNode.Nodes.Add((TreeNode)Node.Clone());
-        }
 
         public void ResultOxesPropertyTree()
         {
@@ -552,9 +541,6 @@ namespace Test.CssParserTest
             tree.Nodes[1].Nodes.Add("PROPERTY");
             tree.Nodes[1].Nodes[2].Nodes.Add("color");
             tree.Nodes[1].Nodes[2].Nodes.Add("blue");
-            tree.Nodes[1].Nodes.Add("PROPERTY");
-            tree.Nodes[1].Nodes[3].Nodes.Add("font-style");
-            tree.Nodes[1].Nodes[3].Nodes.Add("italic");
             tree.Nodes.Add("RULE");
             tree.Nodes[2].Nodes.Add("CLASS");
             tree.Nodes[2].Nodes[0].Nodes.Add("locator");
@@ -595,221 +581,6 @@ namespace Test.CssParserTest
             tree.Nodes[1].Nodes[1].Nodes.Add("color");
             tree.Nodes[1].Nodes[1].Nodes.Add("red");
             expectedRUSNode.Nodes.Add((TreeNode)tree.Clone());
-        }
-
-        public void ExpectedInheritParentPropertyTree()
-        {
-            expectedIPPNode.Nodes.Clear();
-            var tree = new TreeNode();
-            tree.Text = "ROOT";
-            tree.Nodes.Add("RULE");
-            tree.Nodes[0].Nodes.Add("CLASS");
-            tree.Nodes[0].Nodes[0].Nodes.Add("headword");
-            tree.Nodes.Add("RULE");
-            tree.Nodes[1].Nodes.Add("CLASS");
-            tree.Nodes[1].Nodes[0].Nodes.Add("pronunciation");
-            tree.Nodes[1].Nodes.Add("PROPERTY");
-            tree.Nodes[1].Nodes[1].Nodes.Add("font-size");
-            tree.Nodes[1].Nodes[1].Nodes.Add("20");
-            tree.Nodes[1].Nodes[1].Nodes.Add("pt");
-            tree.Nodes[1].Nodes.Add("PROPERTY");
-            tree.Nodes[1].Nodes[2].Nodes.Add("font-style");
-            tree.Nodes[1].Nodes[2].Nodes.Add("italic");
-            tree.Nodes[1].Nodes.Add("PROPERTY");
-            tree.Nodes[1].Nodes[3].Nodes.Add("color");
-            tree.Nodes[1].Nodes[3].Nodes.Add("green");
-            tree.Nodes.Add("RULE");
-            tree.Nodes[2].Nodes.Add("CLASS");
-            tree.Nodes[2].Nodes[0].Nodes.Add("article");
-            tree.Nodes[2].Nodes.Add("PARENTOF");
-            tree.Nodes[2].Nodes.Add("CLASS");
-            tree.Nodes[2].Nodes[2].Nodes.Add("pronunciation");
-            tree.Nodes[2].Nodes.Add("PRECEDES");
-            tree.Nodes[2].Nodes.Add("CLASS");
-            tree.Nodes[2].Nodes[4].Nodes.Add("pronunciation");
-            tree.Nodes[2].Nodes[4].Nodes.Add("ATTRIB");
-            tree.Nodes[2].Nodes[4].Nodes[1].Nodes.Add("lang");
-            tree.Nodes[2].Nodes[4].Nodes[1].Nodes.Add("ATTRIBEQUAL");
-            tree.Nodes[2].Nodes[4].Nodes[1].Nodes.Add(("en_US"));
-            tree.Nodes[2].Nodes.Add("PSEUDO");
-            tree.Nodes[2].Nodes[5].Nodes.Add("before");
-            tree.Nodes[2].Nodes.Add("PROPERTY");
-            tree.Nodes[2].Nodes[6].Nodes.Add("content");
-            tree.Nodes[2].Nodes[6].Nodes.Add("1");
-            tree.Nodes[2].Nodes.Add("PROPERTY");
-            tree.Nodes[2].Nodes[7].Nodes.Add("font-size");
-            tree.Nodes[2].Nodes[7].Nodes.Add("20");
-            tree.Nodes[2].Nodes[7].Nodes.Add("pt");
-            tree.Nodes[2].Nodes.Add("PROPERTY");
-            tree.Nodes[2].Nodes[8].Nodes.Add("font-style");
-            tree.Nodes[2].Nodes[8].Nodes.Add("italic");
-            tree.Nodes[2].Nodes.Add("PROPERTY");
-            tree.Nodes[2].Nodes[9].Nodes.Add("color");
-            tree.Nodes[2].Nodes[9].Nodes.Add("green");
-            tree.Nodes.Add("RULE");
-            tree.Nodes[3].Nodes.Add("CLASS");
-            tree.Nodes[3].Nodes[0].Nodes.Add("pronunciation");
-            tree.Nodes[3].Nodes[0].Nodes.Add("ATTRIB");
-            tree.Nodes[3].Nodes[0].Nodes[1].Nodes.Add("lang");
-            tree.Nodes[3].Nodes[0].Nodes[1].Nodes.Add("ATTRIBEQUAL");
-            tree.Nodes[3].Nodes[0].Nodes[1].Nodes.Add("en_US");
-            tree.Nodes[3].Nodes.Add("PRECEDES");
-            tree.Nodes[3].Nodes.Add("CLASS");
-            tree.Nodes[3].Nodes[2].Nodes.Add("pronunciation");
-            tree.Nodes[3].Nodes[2].Nodes.Add("ATTRIB");
-            tree.Nodes[3].Nodes[2].Nodes[1].Nodes.Add("lang");
-            tree.Nodes[3].Nodes[2].Nodes[1].Nodes.Add("ATTRIBEQUAL");
-            tree.Nodes[3].Nodes[2].Nodes[1].Nodes.Add("en_UK");
-            tree.Nodes[3].Nodes.Add("PSEUDO");
-            tree.Nodes[3].Nodes[3].Nodes.Add("before");
-            tree.Nodes[3].Nodes.Add("PROPERTY");
-            tree.Nodes[3].Nodes[4].Nodes.Add("content");
-            tree.Nodes[3].Nodes[4].Nodes.Add("2");
-            tree.Nodes[3].Nodes.Add("PROPERTY");
-            tree.Nodes[3].Nodes[5].Nodes.Add("color");
-            tree.Nodes[3].Nodes[5].Nodes.Add("blue");
-            tree.Nodes[3].Nodes.Add("PROPERTY");
-            tree.Nodes[3].Nodes[6].Nodes.Add("font-size");
-            tree.Nodes[3].Nodes[6].Nodes.Add("30");
-            tree.Nodes[3].Nodes[6].Nodes.Add("pt");
-            tree.Nodes[3].Nodes.Add("PROPERTY");
-            tree.Nodes[3].Nodes[7].Nodes.Add("font-style");
-            tree.Nodes[3].Nodes[7].Nodes.Add("italic");
-            tree.Nodes.Add("RULE");
-            tree.Nodes[4].Nodes.Add("CLASS");
-            tree.Nodes[4].Nodes[0].Nodes.Add("pronunciation");
-            tree.Nodes[4].Nodes[0].Nodes.Add("ATTRIB");
-            tree.Nodes[4].Nodes[0].Nodes[1].Nodes.Add("lang");
-            tree.Nodes[4].Nodes[0].Nodes[1].Nodes.Add("ATTRIBEQUAL");
-            tree.Nodes[4].Nodes[0].Nodes[1].Nodes.Add(("en_US"));
-            tree.Nodes[4].Nodes[0].Nodes.Add("ATTRIB");
-            tree.Nodes[4].Nodes[0].Nodes[2].Nodes.Add("lang");
-            tree.Nodes[4].Nodes[0].Nodes[2].Nodes.Add("HASVALUE");
-            tree.Nodes[4].Nodes[0].Nodes[2].Nodes.Add(("first-of-type"));
-            tree.Nodes[4].Nodes.Add("PSEUDO");
-            tree.Nodes[4].Nodes[1].Nodes.Add("before");
-            tree.Nodes[4].Nodes.Add("PROPERTY");
-            tree.Nodes[4].Nodes[2].Nodes.Add("content");
-            tree.Nodes[4].Nodes[2].Nodes.Add("3");
-            tree.Nodes[4].Nodes.Add("PROPERTY");
-            tree.Nodes[4].Nodes[3].Nodes.Add("font-size");
-            tree.Nodes[4].Nodes[3].Nodes.Add("20");
-            tree.Nodes[4].Nodes[3].Nodes.Add("pt");
-            tree.Nodes[4].Nodes.Add("PROPERTY");
-            tree.Nodes[4].Nodes[4].Nodes.Add("font-style");
-            tree.Nodes[4].Nodes[4].Nodes.Add("italic");
-            tree.Nodes[4].Nodes.Add("PROPERTY");
-            tree.Nodes[4].Nodes[5].Nodes.Add("color");
-            tree.Nodes[4].Nodes[5].Nodes.Add("green");
-            tree.Nodes.Add("RULE");
-            tree.Nodes[5].Nodes.Add("CLASS");
-            tree.Nodes[5].Nodes[0].Nodes.Add("pronunciation");
-            tree.Nodes[5].Nodes.Add("PRECEDES");
-            tree.Nodes[5].Nodes.Add("CLASS");
-            tree.Nodes[5].Nodes[2].Nodes.Add("pronunciation");
-            tree.Nodes[5].Nodes[2].Nodes.Add("ATTRIB");
-            tree.Nodes[5].Nodes[2].Nodes[1].Nodes.Add("lang");
-            tree.Nodes[5].Nodes[2].Nodes[1].Nodes.Add("ATTRIBEQUAL");
-            tree.Nodes[5].Nodes[2].Nodes[1].Nodes.Add(("en_US"));
-            tree.Nodes[5].Nodes.Add("PSEUDO");
-            tree.Nodes[5].Nodes[3].Nodes.Add("before");
-            tree.Nodes[5].Nodes.Add("PROPERTY");
-            tree.Nodes[5].Nodes[4].Nodes.Add("content");
-            tree.Nodes[5].Nodes[4].Nodes.Add("4");
-            tree.Nodes[5].Nodes.Add("PROPERTY");
-            tree.Nodes[5].Nodes[5].Nodes.Add("font-size");
-            tree.Nodes[5].Nodes[5].Nodes.Add("20");
-            tree.Nodes[5].Nodes[5].Nodes.Add("pt");
-            tree.Nodes[5].Nodes.Add("PROPERTY");
-            tree.Nodes[5].Nodes[6].Nodes.Add("font-style");
-            tree.Nodes[5].Nodes[6].Nodes.Add("italic");
-            tree.Nodes[5].Nodes.Add("PROPERTY");
-            tree.Nodes[5].Nodes[7].Nodes.Add("color");
-            tree.Nodes[5].Nodes[7].Nodes.Add("green");
-            tree.Nodes.Add("RULE");
-            tree.Nodes[6].Nodes.Add("CLASS");
-            tree.Nodes[6].Nodes[0].Nodes.Add("pronunciation");
-            tree.Nodes[6].Nodes[0].Nodes.Add("ATTRIB");
-            tree.Nodes[6].Nodes[0].Nodes[1].Nodes.Add("lang");
-            tree.Nodes[6].Nodes[0].Nodes[1].Nodes.Add("HASVALUE");
-            tree.Nodes[6].Nodes[0].Nodes[1].Nodes.Add(("first-of-type"));
-            tree.Nodes[6].Nodes.Add("PSEUDO");
-            tree.Nodes[6].Nodes[1].Nodes.Add("before");
-            tree.Nodes[6].Nodes.Add("PROPERTY");
-            tree.Nodes[6].Nodes[2].Nodes.Add("content");
-            tree.Nodes[6].Nodes[2].Nodes.Add("5");
-            tree.Nodes[6].Nodes.Add("PROPERTY");
-            tree.Nodes[6].Nodes[3].Nodes.Add("font-size");
-            tree.Nodes[6].Nodes[3].Nodes.Add("20");
-            tree.Nodes[6].Nodes[3].Nodes.Add("pt");
-            tree.Nodes[6].Nodes.Add("PROPERTY");
-            tree.Nodes[6].Nodes[4].Nodes.Add("font-style");
-            tree.Nodes[6].Nodes[4].Nodes.Add("italic");
-            tree.Nodes[6].Nodes.Add("PROPERTY");
-            tree.Nodes[6].Nodes[5].Nodes.Add("color");
-            tree.Nodes[6].Nodes[5].Nodes.Add("green");
-            tree.Nodes.Add("RULE");
-            tree.Nodes[7].Nodes.Add("CLASS");
-            tree.Nodes[7].Nodes[0].Nodes.Add("pronunciation");
-            tree.Nodes[7].Nodes[0].Nodes.Add("ATTRIB");
-            tree.Nodes[7].Nodes[0].Nodes[1].Nodes.Add("lang");
-            tree.Nodes[7].Nodes[0].Nodes[1].Nodes.Add("ATTRIBEQUAL");
-            tree.Nodes[7].Nodes[0].Nodes[1].Nodes.Add(("en_US"));
-            tree.Nodes[7].Nodes.Add("PSEUDO");
-            tree.Nodes[7].Nodes[1].Nodes.Add("before");
-            tree.Nodes[7].Nodes.Add("PROPERTY");
-            tree.Nodes[7].Nodes[2].Nodes.Add("content");
-            tree.Nodes[7].Nodes[2].Nodes.Add("6");
-            tree.Nodes[7].Nodes.Add("PROPERTY");
-            tree.Nodes[7].Nodes[3].Nodes.Add("font-size");
-            tree.Nodes[7].Nodes[3].Nodes.Add("20");
-            tree.Nodes[7].Nodes[3].Nodes.Add("pt");
-            tree.Nodes[7].Nodes.Add("PROPERTY");
-            tree.Nodes[7].Nodes[4].Nodes.Add("font-style");
-            tree.Nodes[7].Nodes[4].Nodes.Add("italic");
-            tree.Nodes[7].Nodes.Add("PROPERTY");
-            tree.Nodes[7].Nodes[5].Nodes.Add("color");
-            tree.Nodes[7].Nodes[5].Nodes.Add("green");
-            tree.Nodes.Add("RULE");
-            tree.Nodes[8].Nodes.Add("CLASS");
-            tree.Nodes[8].Nodes[0].Nodes.Add("pronunciation");
-            tree.Nodes[8].Nodes.Add("PRECEDES");
-            tree.Nodes[8].Nodes.Add("CLASS");
-            tree.Nodes[8].Nodes[2].Nodes.Add("pronunciation");
-            tree.Nodes[8].Nodes.Add("PSEUDO");
-            tree.Nodes[8].Nodes[3].Nodes.Add("before");
-            tree.Nodes[8].Nodes.Add("PROPERTY");
-            tree.Nodes[8].Nodes[4].Nodes.Add("content");
-            tree.Nodes[8].Nodes[4].Nodes.Add("7");
-            tree.Nodes[8].Nodes.Add("PROPERTY");
-            tree.Nodes[8].Nodes[5].Nodes.Add("font-size");
-            tree.Nodes[8].Nodes[5].Nodes.Add("20");
-            tree.Nodes[8].Nodes[5].Nodes.Add("pt");
-            tree.Nodes[8].Nodes.Add("PROPERTY");
-            tree.Nodes[8].Nodes[6].Nodes.Add("font-style");
-            tree.Nodes[8].Nodes[6].Nodes.Add("italic");
-            tree.Nodes[8].Nodes.Add("PROPERTY");
-            tree.Nodes[8].Nodes[7].Nodes.Add("color");
-            tree.Nodes[8].Nodes[7].Nodes.Add("green");
-            tree.Nodes.Add("RULE");
-            tree.Nodes[9].Nodes.Add("CLASS");
-            tree.Nodes[9].Nodes[0].Nodes.Add("pronunciation");
-            tree.Nodes[9].Nodes.Add("PSEUDO");
-            tree.Nodes[9].Nodes[1].Nodes.Add("before");
-            tree.Nodes[9].Nodes.Add("PROPERTY");
-            tree.Nodes[9].Nodes[2].Nodes.Add("content");
-            tree.Nodes[9].Nodes[2].Nodes.Add("8");
-            tree.Nodes[9].Nodes.Add("PROPERTY");
-            tree.Nodes[9].Nodes[3].Nodes.Add("font-size");
-            tree.Nodes[9].Nodes[3].Nodes.Add("20");
-            tree.Nodes[9].Nodes[3].Nodes.Add("pt");
-            tree.Nodes[9].Nodes.Add("PROPERTY");
-            tree.Nodes[9].Nodes[4].Nodes.Add("font-style");
-            tree.Nodes[9].Nodes[4].Nodes.Add("italic");
-            tree.Nodes[9].Nodes.Add("PROPERTY");
-            tree.Nodes[9].Nodes[5].Nodes.Add("color");
-            tree.Nodes[9].Nodes[5].Nodes.Add("green");
-            expectedIPPNode.Nodes.Add((TreeNode)tree.Clone());
         }
 
         public void ExpectedMultiLineSyntaxTree()
@@ -1262,19 +1033,6 @@ namespace Test.CssParserTest
             bool valid = CompareRecursiveTree(expectedOSNode, resultOSNode);
             Assert.AreEqual(true, valid, _methodName + " test failed");
         }
-
-        //[Test]
-        /// Inherit Parent Property
-        public void BuildTreeTest14()
-        {
-            _methodName = "BuildTreeTest14 - InheritParentClassPropertyTestB ";
-            RemoveCSS();
-            ResultInheritParentPropertyTree();
-            ExpectedInheritParentPropertyTree();
-            bool valid = CompareRecursiveTree(expectedIPPNode, resultIPPNode);
-            Assert.AreEqual(true, valid, _methodName + " test failed");
-        }
-
         #endregion
 
         #region Private Funtions
