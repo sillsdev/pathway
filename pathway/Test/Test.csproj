@@ -455,9 +455,7 @@
   <Target Name="BeforeBuild">
     <Copy SourceFiles="@(Plugin)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(GhostScript)" DestinationFolder="$(OutputPath)\" />
-    <Copy SourceFiles="@(Icu)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BatchProcess)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(LiftPrepare)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(ParatextSupport)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(AllBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(BteBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
@@ -490,7 +488,6 @@
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'$(OutputPath)\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'$(OutputPath)\TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'$(OutputPath)\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'$(OutputPath)\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'$(OutputPath)\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
@@ -504,12 +501,8 @@
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssParser.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssParser.pdb" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\ICSharpCode.SharpZipLib.dll" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\icu.net.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\LibreOfficeConvert.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\LibreOfficeConvert.pdb" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\LiftPrepare.dll" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\LiftPrepare.pdb" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\Palaso.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfConvert.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfConvert.pdb" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\Prince.dll" />
@@ -517,9 +510,7 @@
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PsTool.pdb" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
     <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
-    <LiftPrepare Include="..\LiftPrepare\$(OutputPath)\LiftPrepare.*" />
     <ParatextSupport Include="..\ParatextSupport\$(OutputPath)\ParatextSupport.*" />
     <AllBackend Include="..\InDesignConvert\$(OutputPath)\InDesignConvert.*" />
     <AllBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
@@ -709,7 +700,6 @@
     <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
     <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
