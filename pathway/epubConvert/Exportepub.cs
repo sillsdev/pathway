@@ -246,6 +246,11 @@ namespace SIL.PublishingSolution
                 {
                     cssFullPath = projInfo.DefaultCssFileWithPath;
                 }
+                else
+                {
+                    string expCssLine = "@import \"" + Path.GetFileName(projInfo.DefaultCssFileWithPath) +"\";";
+                    Common.FileInsertText(cssFullPath, expCssLine);
+                }
 
                 Common.WriteDefaultLanguages(projInfo, cssFullPath);
 
