@@ -686,7 +686,6 @@
     <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <FwVersion Include="..\BuildPathway\FieldworksVersions.txt" />
     <BteHelpFile Include="..\BuildPathway\Pathway_Configuration_Tool_BTE.chm" />
     <SeHelpFile Include="..\BuildPathway\Pathway_Configuration_Tool_SE.chm" />
     <BteStudent Include="..\BuildPathway\Pathway_Student_Manual_BTE.doc" />

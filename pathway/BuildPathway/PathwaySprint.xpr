@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="15.1">
+<project version="15.2">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="15.1" xml:space="preserve">
+            <serialized version="15.2" xml:space="preserve">
                 <map>
                     <entry>
                         <String>scenario.associations</String>
@@ -225,35 +225,16 @@
     </meta>
     <projectTree name="PathwaySprint.xpr">
         <file name="BuildPathway.csproj"/>
-        <file name="BuildPathway60.csproj"/>
         <file name="../BuildPathwaySprint.csproj"/>
         <file name="../BuildTasks/BuildTasks.csproj"/>
-        <file name="../BuildTasks/BuildTasks60.csproj"/>
-        <file name="../ConfigurationTool/ConfigurationTool60.csproj"/>
-        <file name="FeaturesPs-tpl.wxs"/>
-        <file name="FeaturesPw-tpl.wxs"/>
         <file name="FeaturesPw7-tpl.wxs"/>
-        <file name="FeaturesPwCtx-tpl.wxs"/>
-        <file name="FeaturesTxEx-tpl.wxs"/>
         <file name="FeaturesXeLaTeX-tpl.wxs"/>
-        <file name="FeaturesYouVersion-tpl.wxs"/>
-        <file name="FilesPs-tpl.wxs"/>
-        <file name="FilesPw-tpl.wxs"/>
         <file name="FilesPw7-tpl.wxs"/>
-        <file name="FilesPwCtx-tpl.wxs"/>
-        <file name="FilesTxEx-tpl.wxs"/>
         <file name="FilesXeLaTeX-tpl.wxs"/>
-        <file name="FilesYouVersion-tpl.wxs"/>
-        <file name="InstallPs-tpl.wxs"/>
         <file name="InstallPw7BTE-tpl.wxs"/>
         <file name="InstallPw7EPUB-tpl.wxs"/>
         <file name="InstallPw7SE-tpl.wxs"/>
-        <file name="InstallPwBTE-tpl.wxs"/>
-        <file name="InstallPwCtx-tpl.wxs"/>
-        <file name="InstallPwSE-tpl.wxs"/>
-        <file name="InstallPwTxEx-tpl.wxs"/>
         <file name="InstallXeLaTeX-tpl.wxs"/>
-        <file name="InstallYouVersion-tpl.wxs"/>
         <file name="../pathway.build"/>
         <file name="../Test/Test.csproj"/>
         <file name="UserInterface-tpl.wxs"/>
