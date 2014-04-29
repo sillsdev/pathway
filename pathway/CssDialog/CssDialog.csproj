@@ -242,7 +242,7 @@
     <Compile Include="ExportDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExportDlg.designer.cs">
+    <Compile Include="ExportDlg.Designer.cs">
       <DependentUpon>ExportDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="ExportThroughPathway.cs">
@@ -309,7 +309,7 @@
     <Compile Include="PublicationTask.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PublicationTask.designer.cs">
+    <Compile Include="PublicationTask.Designer.cs">
       <DependentUpon>PublicationTask.cs</DependentUpon>
     </Compile>
     <Compile Include="ScriptureContents.cs">
