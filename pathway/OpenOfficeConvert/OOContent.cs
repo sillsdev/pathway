@@ -35,6 +35,8 @@ namespace SIL.PublishingSolution
     {
         #region Private Variable
         string _strBook = string.Empty;
+        string _strPreviousChapterNumber = "-1";
+        string _refFormat = string.Empty;
         string _strBook2ndBook = string.Empty;
         private bool _is1stBookFound = false;
         private ArrayList _sectionName = new ArrayList();
@@ -114,7 +116,7 @@ namespace SIL.PublishingSolution
         //private bool isPageBreak;
         private string _previousContent = "Reversal";
         private bool _isWhiteSpaceSkipped = true;
-        
+
         public LOContent()
         {
             _outputType = Common.OutputType.ODT;
@@ -127,6 +129,10 @@ namespace SIL.PublishingSolution
             Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
         {
             OldStyles styleInfo = new OldStyles();
+            if (projInfo.ProjectInputType.ToLower() == "scripture")
+            {
+                _refFormat = Common.GetReferenceFormat(idAllClass, _refFormat);
+            }
             _pageWidth = pageWidth;
             _structStyles = styleInfo;
             _structStyles.IsMacroEnable = true;
@@ -698,7 +704,7 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            
+
 
             if (_childName.ToLower().Contains("tableofcontents"))
             {
@@ -793,7 +799,7 @@ namespace SIL.PublishingSolution
                 // but just in case, specify a default org.
                 organization = "SIL International";
             }
-            string tableOfContent =Param.GetMetadataValue(Param.TableOfContents, organization) ?? "";
+            string tableOfContent = Param.GetMetadataValue(Param.TableOfContents, organization) ?? "";
             return (tableOfContent.ToLower() == "true");
         }
 
@@ -887,7 +893,7 @@ namespace SIL.PublishingSolution
 
                 if (_isH2Complaint)
                 {
-                    if ((_allCharacter.Peek().IndexOf("h2_scrSection") >= 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) || 
+                    if ((_allCharacter.Peek().IndexOf("h2_scrSection") >= 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) ||
                         (_allCharacter.Peek().IndexOf("h2_scrSection") >= 0 &&
                             RefFormat.ToLower().IndexOf("genesis 1") == 0))
                     {
@@ -993,7 +999,7 @@ namespace SIL.PublishingSolution
                     _isPreviousGlossary = false;
                 }
 
-                if(_isWhiteSpaceSkipped)
+                if (_isWhiteSpaceSkipped)
                 {
                     if (_previousContent.Trim().Length > 0)
                     {
@@ -1186,7 +1192,7 @@ namespace SIL.PublishingSolution
             {
                 _imageTextAvailable = true;
             }
-            
+
             if ((_tagType == "span" || _tagType == "a") && characterStyle != "none" || (_tagType == "img" && _imageInserted)) //span start
             {
                 if (isFootnote)
@@ -1606,7 +1612,7 @@ namespace SIL.PublishingSolution
                 _closeChildName = StackPop(_allStyle);
             }
             if (_closeChildName == string.Empty) return;
-            
+
             string closeChild = Common.LeftString(_closeChildName, "_");
 
             ReferenceClose(_closeChildName);
@@ -1678,7 +1684,7 @@ namespace SIL.PublishingSolution
         }
 
         private void ReferenceClose(string closeChild)
-        {}
+        { }
 
         /// <summary>
         /// Collects Table information
@@ -2242,8 +2248,8 @@ namespace SIL.PublishingSolution
                     if (imageClass.ToLower().IndexOf("picturecenter") == 0)
                         HoriAlignment = "center";
 
-                    if(_frameCount == 0) //
-                    { 
+                    if (_frameCount == 0) //
+                    {
                         _frameCount = 1;
                     }
 
@@ -2269,7 +2275,7 @@ namespace SIL.PublishingSolution
                         _isNewParagraph = false;
                     }
 
-                    
+
                     // 1st frame
                     _writer.WriteStartElement("draw:frame");
                     _writer.WriteAttributeString("draw:style-name", strFrameStyCount);
@@ -2453,12 +2459,12 @@ namespace SIL.PublishingSolution
                     if (picheight > picwidth) // Find width
                     {
                         rectWidth =
-                            (picwidth/picheight*double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US"))).ToString();
+                            (picwidth / picheight * double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US"))).ToString();
                     }
                     else // Find height
                     {
                         rectHeight =
-                            (picheight/picwidth*double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US"))).ToString();
+                            (picheight / picwidth * double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US"))).ToString();
                     }
                 }
                 catch
@@ -2609,7 +2615,7 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-        
+
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Generate Second block of Content.xml, this block will called after inserting the column
@@ -2917,9 +2923,20 @@ namespace SIL.PublishingSolution
             }
             else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture
             {
-                if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0))
+                if (_refFormat.ToLower() == "genesis 1-2")
                 {
-                    fillHeadword = true;
+                    if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0) 
+                        || _previousParagraphName.ToLower().IndexOf("sectionhead") == 0)
+                    {
+                        fillHeadword = true;
+                    }
+                }
+                else
+                {
+                    if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0))
+                    {
+                        fillHeadword = true;
+                    }
                 }
             }
 
@@ -2947,6 +2964,19 @@ namespace SIL.PublishingSolution
                 }
 
                 string chapterNo = content;
+
+                if (_refFormat.ToLower() == "genesis 1-2")
+                {
+                    if (_previousParagraphName.ToLower().IndexOf("sectionhead") == 0)
+                    {
+                        chapterNo = _strPreviousChapterNumber;
+                    }
+                    else
+                    {
+                        _strPreviousChapterNumber = chapterNo;
+                    }
+                }
+
                 string rightContent = string.Empty;
                 if (_strBook.Length > 0)
                 {
@@ -2954,32 +2984,60 @@ namespace SIL.PublishingSolution
                     leftHeadword = content;
                     rightContent = _h3Book + chapterNo;
                 }
-
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                _writer.WriteStartElement("text:variable-set");
-                _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                _writer.WriteAttributeString("text:display", "none");
-                _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword);//leftHeadword
-                _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("office:string-value", leftHeadword);//leftHeadword
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-                if (_isH2Complaint)
+                if (_refFormat.ToLower() == "genesis 1-2")
                 {
-                    content = rightContent;
-                }
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                _writer.WriteStartElement("text:variable-set");
-                _writer.WriteAttributeString("text:name", "Right_Guideword_R");
-                _writer.WriteAttributeString("text:display", "none");
-                _writer.WriteAttributeString("text:formula", "ooow: " + content);
-                _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("office:string-value", content);
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
+                    if (chapterNo != "-1")
+                    {
+                        _writer.WriteStartElement("text:span");
+                        _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                        _writer.WriteStartElement("text:variable-set");
+                        _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                        _writer.WriteAttributeString("text:display", "none");
+                        _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword); 
+                        _writer.WriteAttributeString("office:value-type", "string");
+                        _writer.WriteAttributeString("office:string-value", leftHeadword); 
+                        _writer.WriteEndElement();
+                        _writer.WriteEndElement();
 
+                        _writer.WriteStartElement("text:span");
+                        _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                        _writer.WriteStartElement("text:variable-set");
+                        _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                        _writer.WriteAttributeString("text:display", "none");
+                        _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword); 
+                        _writer.WriteAttributeString("office:value-type", "string");
+                        _writer.WriteAttributeString("office:string-value", leftHeadword);
+                        _writer.WriteEndElement();
+                        _writer.WriteEndElement();
+                    }
+                }
+                else
+                {
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword);//leftHeadword
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", leftHeadword);//leftHeadword
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                    if (_isH2Complaint)
+                    {
+                        content = rightContent;
+                    }
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "Right_Guideword_R");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + content);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", content);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                }
                 if (_multiLanguageHeader)
                 {
                     if (_strBook2ndBook.Length > 0)
