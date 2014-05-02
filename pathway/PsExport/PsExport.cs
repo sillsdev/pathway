@@ -19,7 +19,6 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using JWTools;
-using RevHomographNum;
 using SIL.Tool;
 using SIL.Tool.Localization;
 

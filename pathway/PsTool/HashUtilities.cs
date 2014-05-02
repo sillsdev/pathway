@@ -19,7 +19,7 @@ using System.IO;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
 	#region cryptography class...
 

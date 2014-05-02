@@ -23,9 +23,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
-using SIL.Tool;
+using SIL.PublishingSolution;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
     /// <summary>
     /// Combines all css into a single file by implementing @import

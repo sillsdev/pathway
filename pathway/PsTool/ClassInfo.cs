@@ -16,7 +16,7 @@
 
 using System.Collections;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
     /// <summary>
     /// Storing classes and attributes

@@ -18,7 +18,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace SIL.Tool
+namespace SIL.PublishingSolution
 {
     /// ----------------------------------------------------------------------------------------
     /// <summary>

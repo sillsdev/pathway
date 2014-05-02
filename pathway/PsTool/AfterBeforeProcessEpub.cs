@@ -21,11 +21,11 @@ using System.Text;
 using System.Xml;
 using System.Collections;
 using System.IO;
-using System.Text.RegularExpressions;
-using SIL.Tool;
+using SIL.PublishingSolution;
 
 #endregion Using
-namespace SIL.PublishingSolution
+
+namespace SIL.Tool
 {
     public class AfterBeforeProcessEpub : AfterBeforeXHTMLProcess
     {

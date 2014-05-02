@@ -16,7 +16,6 @@
 
 #region Using
 using System;
-using System.Collections;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 #endregion

@@ -23,12 +23,9 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
-using SIL.PublishingSolution;
-using SIL.Tool;
-
 #endregion Using
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
     public class XHTMLProcess
     {

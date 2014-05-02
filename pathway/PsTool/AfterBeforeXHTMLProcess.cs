@@ -20,11 +20,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
-using SIL.Tool;
-
+using SIL.PublishingSolution;
 #endregion Using
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
     public class AfterBeforeXHTMLProcess
     {

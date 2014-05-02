@@ -21,9 +21,8 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using SIL.Tool;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 
 {
     public static class Backend

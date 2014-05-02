@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using System.IO;
+using SIL.PublishingSolution;
 using SIL.Tool;
 
 namespace Test
@@ -24,23 +25,23 @@ namespace Test
         public void IsFilePathValid()
         {
             // File names
-            Assert.IsTrue(SIL.Tool.FileUtils.IsPathNameValid("regularFilename.test"));
+            Assert.IsTrue(FileUtils.IsPathNameValid("regularFilename.test"));
 			if (!Common.UsingMonoVM)
 			{
 				// Pipes (|) are invalid in Windows
-				Assert.IsFalse(SIL.Tool.FileUtils.IsPathNameValid("|BadFilename|.test"));
+				Assert.IsFalse(FileUtils.IsPathNameValid("|BadFilename|.test"));
 			}
 
             // Absolute and relative path names
-            Assert.IsTrue(SIL.Tool.FileUtils.IsPathNameValid(@"\Tmp\Pictures\books.gif"));
-            Assert.IsTrue(SIL.Tool.FileUtils.IsPathNameValid(@"Tmp\Pictures\books.gif"));
+            Assert.IsTrue(FileUtils.IsPathNameValid(@"\Tmp\Pictures\books.gif"));
+            Assert.IsTrue(FileUtils.IsPathNameValid(@"Tmp\Pictures\books.gif"));
 
             // Path names with device
-            Assert.IsTrue(SIL.Tool.FileUtils.IsPathNameValid(@"C:\Tmp\Pictures\books.gif"));
+            Assert.IsTrue(FileUtils.IsPathNameValid(@"C:\Tmp\Pictures\books.gif"));
 			if (!Common.UsingMonoVM)
 			{
 				// this is interpreted as a "rootless" path in mono
-				Assert.IsFalse(SIL.Tool.FileUtils.IsPathNameValid(@"C\:Tmp\Pictures\books.gif"));
+				Assert.IsFalse(FileUtils.IsPathNameValid(@"C\:Tmp\Pictures\books.gif"));
 			}
         }
 
@@ -55,8 +56,8 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             fileOs.AddExistingFile("boo");
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
-            Assert.AreEqual("boo", SIL.Tool.FileUtils.ActualFilePath("boo"));
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
+            Assert.AreEqual("boo", FileUtils.ActualFilePath("boo"));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -69,8 +70,8 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             fileOs.AddExistingFile("flurp");
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
-            Assert.AreEqual("boo", SIL.Tool.FileUtils.ActualFilePath("boo"));
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
+            Assert.AreEqual("boo", FileUtils.ActualFilePath("boo"));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -84,8 +85,8 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             fileOs.AddExistingFile("\u00e9");
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
-            Assert.AreEqual("\u00e9", SIL.Tool.FileUtils.ActualFilePath("\u0065\u0301")); // accented e
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
+            Assert.AreEqual("\u00e9", FileUtils.ActualFilePath("\u0065\u0301")); // accented e
         }
 
         /// ------------------------------------------------------------------------------------
@@ -99,8 +100,8 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             fileOs.AddExistingFile("\u0065\u0301");
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
-            Assert.AreEqual("\u0065\u0301", SIL.Tool.FileUtils.ActualFilePath("\u00e9")); // accented e
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
+            Assert.AreEqual("\u0065\u0301", FileUtils.ActualFilePath("\u00e9")); // accented e
         }
 
         /// ------------------------------------------------------------------------------------
@@ -122,14 +123,14 @@ namespace Test
 			{
             	fileOs.m_existingDirectories.Add(@"c:\My Documents");
 			}
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
 			if (Common.UsingMonoVM)
 			{
-	            Assert.AreEqual(@"~/Documents/AbC", SIL.Tool.FileUtils.ActualFilePath(@"~/Documents/abc"));
+	            Assert.AreEqual(@"~/Documents/AbC", FileUtils.ActualFilePath(@"~/Documents/abc"));
 			}
 			else
 			{
-	            Assert.AreEqual(@"c:\My Documents\AbC", SIL.Tool.FileUtils.ActualFilePath(@"c:\My Documents\abc"));
+	            Assert.AreEqual(@"c:\My Documents\AbC", FileUtils.ActualFilePath(@"c:\My Documents\abc"));
 			}
         }
 
@@ -152,14 +153,14 @@ namespace Test
 			{
             	fileOs.m_existingDirectories.Add("c:\\My Docum\u00e9nts");
 			}
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
 			if (Common.UsingMonoVM)
 			{
-            	Assert.AreEqual("~/Docum\u00e9nts/AbC", SIL.Tool.FileUtils.ActualFilePath("~/Docum\u0065\u0301nts/abc"));
+            	Assert.AreEqual("~/Docum\u00e9nts/AbC", FileUtils.ActualFilePath("~/Docum\u0065\u0301nts/abc"));
 			}
 			else
 			{
-            	Assert.AreEqual("c:\\My Docum\u00e9nts\\AbC", SIL.Tool.FileUtils.ActualFilePath("c:\\My Docum\u0065\u0301nts\\abc"));
+            	Assert.AreEqual("c:\\My Docum\u00e9nts\\AbC", FileUtils.ActualFilePath("c:\\My Docum\u0065\u0301nts\\abc"));
 			}
         }
 
@@ -182,14 +183,14 @@ namespace Test
 			{
             	fileOs.m_existingDirectories.Add("c:\\My Docum\u0065\u0301nts");
 			}
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
 			if (Common.UsingMonoVM)
 			{
-            	Assert.AreEqual("~/Docum\u0065\u0301nts/AbC", SIL.Tool.FileUtils.ActualFilePath("~/Docum\u00e9nts/abc"));
+            	Assert.AreEqual("~/Docum\u0065\u0301nts/AbC", FileUtils.ActualFilePath("~/Docum\u00e9nts/abc"));
 			}
 			else
 			{
-	            Assert.AreEqual("c:\\My Docum\u0065\u0301nts\\AbC", SIL.Tool.FileUtils.ActualFilePath("c:\\My Docum\u00e9nts\\abc"));
+	            Assert.AreEqual("c:\\My Docum\u0065\u0301nts\\AbC", FileUtils.ActualFilePath("c:\\My Docum\u00e9nts\\abc"));
 			}
         }
         #endregion
@@ -205,9 +206,9 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             string filename = fileOs.MakeFile("\ufeff\\id EPH", Encoding.Unicode);
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
 
-            Assert.AreEqual(Encoding.Unicode, SIL.Tool.FileUtils.DetermineSfFileEncoding(filename));
+            Assert.AreEqual(Encoding.Unicode, FileUtils.DetermineSfFileEncoding(filename));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -220,9 +221,9 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             string filename = fileOs.MakeFile(@"\id EPH", Encoding.Unicode);
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
 
-            Assert.AreEqual(Encoding.Unicode, SIL.Tool.FileUtils.DetermineSfFileEncoding(filename));
+            Assert.AreEqual(Encoding.Unicode, FileUtils.DetermineSfFileEncoding(filename));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -235,9 +236,9 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             string filename = fileOs.MakeFile("\ufeff\\id EPH", Encoding.UTF8);
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
 
-            Assert.AreEqual(Encoding.UTF8, SIL.Tool.FileUtils.DetermineSfFileEncoding(filename));
+            Assert.AreEqual(Encoding.UTF8, FileUtils.DetermineSfFileEncoding(filename));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -252,9 +253,9 @@ namespace Test
             string filename = fileOs.MakeFile(
                 "\\id EPH\r\n\\ud 12/Aug/2002\r\n\\mt \u0782\u0785\u07a7\u0794\r\n\\c 1\r\n\\s \u0787\u0786\u078c\u07a6 \u0794\u0786\u078c\r\n\\p\r\n\\v 1\r\n\\vt \u078c\u0789\u0789\u0782\u0780\u07a2",
                 Encoding.UTF8);
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
 
-            Assert.AreEqual(Encoding.UTF8, SIL.Tool.FileUtils.DetermineSfFileEncoding(filename));
+            Assert.AreEqual(Encoding.UTF8, FileUtils.DetermineSfFileEncoding(filename));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -267,9 +268,9 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             string filename = fileOs.MakeFile("\\id EPH\r\n\\mt Ephesians\\c 1\\v 1", Encoding.ASCII);
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
 
-            Assert.AreEqual(Encoding.ASCII, SIL.Tool.FileUtils.DetermineSfFileEncoding(filename));
+            Assert.AreEqual(Encoding.ASCII, FileUtils.DetermineSfFileEncoding(filename));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -282,9 +283,9 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             string filename = fileOs.MakeFile("\ufeff\\id EPH", Encoding.BigEndianUnicode);
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
 
-            Assert.AreEqual(Encoding.BigEndianUnicode, SIL.Tool.FileUtils.DetermineSfFileEncoding(filename));
+            Assert.AreEqual(Encoding.BigEndianUnicode, FileUtils.DetermineSfFileEncoding(filename));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -297,9 +298,9 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             string filename = fileOs.MakeFile(@"\id EPH", Encoding.BigEndianUnicode);
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
 
-            Assert.AreEqual(Encoding.BigEndianUnicode, SIL.Tool.FileUtils.DetermineSfFileEncoding(filename));
+            Assert.AreEqual(Encoding.BigEndianUnicode, FileUtils.DetermineSfFileEncoding(filename));
         }
         #endregion
 
@@ -313,9 +314,9 @@ namespace Test
         public void IsFileReadable_True()
         {
             MockFileOS fileOs = new MockFileOS();
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
             string filename = fileOs.MakeFile("bumppiness");
-            Assert.IsTrue(SIL.Tool.FileUtils.IsFileReadable(filename));
+            Assert.IsTrue(FileUtils.IsFileReadable(filename));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -327,8 +328,8 @@ namespace Test
         public void IsFileReadable_NonExistent()
         {
             MockFileOS fileOs = new MockFileOS();
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
-            Assert.IsFalse(SIL.Tool.FileUtils.IsFileReadable("Whatever.txt"));
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
+            Assert.IsFalse(FileUtils.IsFileReadable("Whatever.txt"));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -340,10 +341,10 @@ namespace Test
         public void IsFileReadable_OpenForWrite()
         {
             MockFileOS fileOs = new MockFileOS();
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
             string filename = fileOs.MakeFile("bumppiness");
             fileOs.LockFile(filename);
-            Assert.IsFalse(SIL.Tool.FileUtils.IsFileReadable(filename));
+            Assert.IsFalse(FileUtils.IsFileReadable(filename));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -355,9 +356,9 @@ namespace Test
         public void IsFileReadableAndWritable_UnlockedFile()
         {
             MockFileOS fileOs = new MockFileOS();
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
             string filename = fileOs.MakeFile("bumppiness");
-            Assert.IsTrue(SIL.Tool.FileUtils.IsFileReadableAndWritable(filename));
+            Assert.IsTrue(FileUtils.IsFileReadableAndWritable(filename));
         }
 
         /// ------------------------------------------------------------------------------------
@@ -370,15 +371,15 @@ namespace Test
         public void IsFileReadableAndWritable_OpenForRead()
         {
             MockFileOS fileOs = new MockFileOS();
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
             string filename = fileOs.MakeFile("bumppiness", Encoding.UTF8);
             TextReader reader = fileOs.GetReader(filename, Encoding.UTF8);
             Stream stream = fileOs.OpenStreamForRead(filename);
-            Assert.IsFalse(SIL.Tool.FileUtils.IsFileReadableAndWritable(filename));
+            Assert.IsFalse(FileUtils.IsFileReadableAndWritable(filename));
             reader.Close();
-            Assert.IsFalse(SIL.Tool.FileUtils.IsFileReadableAndWritable(filename));
+            Assert.IsFalse(FileUtils.IsFileReadableAndWritable(filename));
             stream.Close();
-            Assert.IsTrue(SIL.Tool.FileUtils.IsFileReadableAndWritable(filename));
+            Assert.IsTrue(FileUtils.IsFileReadableAndWritable(filename));
         }
         #endregion
 
@@ -392,7 +393,7 @@ namespace Test
         public void Delete_FailsIfOpenForWrite()
         {
             MockFileOS fileOs = new MockFileOS();
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
             string filename = "ReadMe.txt";
             fileOs.AddFile(filename, "For more information, read this.", Encoding.ASCII);
             fileOs.LockFile(filename);
@@ -413,7 +414,7 @@ namespace Test
         public void Delete_FailsIfOpenForRead()
         {
             MockFileOS fileOs = new MockFileOS();
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
             string filename = "ReadMe.txt";
             fileOs.AddFile(filename, "For more information, read this.", Encoding.ASCII);
             TextReader reader = fileOs.GetReader(filename, Encoding.ASCII);
@@ -434,7 +435,7 @@ namespace Test
         public void Delete_FailsIfFileDoesNotExist()
         {
             MockFileOS fileOs = new MockFileOS();
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
             Assert.Throws<IOException>(
                 delegate
                     {
@@ -452,7 +453,7 @@ namespace Test
         public void Delete_Success()
         {
             MockFileOS fileOs = new MockFileOS();
-            ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
+            ReflectionHelperLite.SetField(typeof(FileUtils), "s_fileos", fileOs);
             string filename = fileOs.MakeFile("This file is going away.");
             fileOs.Delete(filename);
             Assert.IsFalse(fileOs.FileExists(filename));
@@ -465,7 +466,7 @@ namespace Test
     /// Mock version of IFileOS that lets us simulate existing files and directories.
     /// </summary>
     /// ----------------------------------------------------------------------------------------
-    public class MockFileOS : SIL.Tool.IFileOS
+    public class MockFileOS 
     {
         internal enum FileLockType
         {

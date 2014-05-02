@@ -21,7 +21,7 @@ using System.Xml;
 using System.Xml.Xsl;
 using SIL.Tool;
 
-namespace PSXslProcess
+namespace SIL.PublishingSolution
 {
     public class XsltProcess
     {
