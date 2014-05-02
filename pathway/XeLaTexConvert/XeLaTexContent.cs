@@ -1285,6 +1285,7 @@ namespace SIL.PublishingSolution
 
                 if (splitedClassName.Length > 0)
                 {
+                    bool result = false;
                     for (int i = 0; i < splitedClassName.Length; i++) // // From Recent to Begining Class
                     {
                         string clsName = splitedClassName[i];
@@ -1296,12 +1297,14 @@ namespace SIL.PublishingSolution
                                 AnchorPoint = "TopLeftAnchor";
                                 VertAlignment = "CenterAlign";
                                 VertRefPoint = "LineBaseline";
+                                result = true;
                                 break;
                             case "right":
                                 AnchorPoint = "TopRightAnchor";
                                 HoriAlignment = "RightAlign";
                                 VertAlignment = "CenterAlign";
                                 VertRefPoint = "LineBaseline";
+                                result = true;
                                 break;
                             case "top":
                             case "prince-column-top":
@@ -1312,12 +1315,14 @@ namespace SIL.PublishingSolution
                                 VertAlignment = "TopAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                             case "center":
                                 AnchorPoint = "TopCenterAnchor";
                                 HoriAlignment = "CenterAlign";
                                 VertAlignment = "CenterAlign";
                                 VertRefPoint = "LineBaseline";
+                                result = true;
                                 break;
                             case "top-right":
                                 AnchorPoint = "TopRightAnchor";
@@ -1325,6 +1330,7 @@ namespace SIL.PublishingSolution
                                 HoriAlignment = "RightAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                             case "bottom":
                             case "prince-column-bottom":
@@ -1335,6 +1341,7 @@ namespace SIL.PublishingSolution
                                 HoriAlignment = "LeftAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                             case "bottom-right":
                                 AnchorPoint = "BotomRightAnchor";
@@ -1342,14 +1349,19 @@ namespace SIL.PublishingSolution
                                 HoriAlignment = "RightAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                         }
                         wrapSide = GetPropertyValue(clsName, "clear", wrapSide);
-                        if (pos != "left" && wrapSide != "none")
+                        //if (pos != "left" && wrapSide != "none")
+                        //{
+                        //    break;
+                        //}
+                        //return;
+                        if (result)
                         {
                             break;
                         }
-                        return;
                     }
                 }
             }

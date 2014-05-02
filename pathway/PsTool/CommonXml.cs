@@ -648,10 +648,9 @@ namespace SIL.Tool
                         newNode.RemoveAll();
 
                     int countChild = findnodes.Count;
-                    for (int i = 0; i < countChild; i++)
+                    if (countChild > 0)
                     {
                         headnode.RemoveChild(findnodes[0]);
-                        break;
                     }
                 }
                 else
