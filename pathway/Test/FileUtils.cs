@@ -14,11 +14,10 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
 using System.IO;
 using System.Text;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
     /// ----------------------------------------------------------------------------------------
     /// <summary>
