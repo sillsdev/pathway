@@ -2461,6 +2461,10 @@ namespace SIL.PublishingSolution
                     string pageType = GetDdlRunningHead();
                     fileName = GetPageNumberImport(pageType, key);
                 }
+                if (fileName.IndexOf("_Paged_") > 0 && cTool.DdlRunningHead.Text.ToLower() == "mirrored")
+                {
+                    fileName = fileName.Replace("_Paged_", "_Mirrored_");
+                }
                 writeCss.WriteLine("@import \"" + fileName + "\";");
             }
         }
