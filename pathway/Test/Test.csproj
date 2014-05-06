@@ -639,12 +639,10 @@
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_Chapter.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_Chapter_Abbr.css" />
-    <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_Verse.css" />
-    <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_Verse_Abbr.css" />
+	<ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_MultiChapter.css" />
+    <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_MultiChapter_Abbr.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Paged_Chapter.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" />
-    <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Paged_MultiChapter.css" />
-    <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Paged_MultiChapter_Abbr.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Scripture.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\VerticalJustify_Bottom.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\VerticalJustify_Center.css" />
