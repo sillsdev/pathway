@@ -942,11 +942,11 @@ namespace SIL.Tool
                 if (titleNode != null)
                 {
                     frontMatterXHTMLContent = frontMatterXHTMLContent + titleNode.OuterXml;
-                    if (_includeTOCPage)
-                    {
-                        //frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
-                        frontMatterXHTMLContent = frontMatterXHTMLContent;
-                    }
+                    //if (_includeTOCPage)
+                    //{
+                    //    //frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
+                    //    frontMatterXHTMLContent = frontMatterXHTMLContent;
+                    //}
                     _projInfo.IsFrontMatterEnabled = true;
                     frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-family: 'Times New Roman', serif; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;font-family: 'Times New Roman', serif; } .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}";
                 }

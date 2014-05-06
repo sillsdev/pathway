@@ -158,7 +158,7 @@ namespace SIL.Tool
 					}
 				}
 			}
-			PasswordDeriveBytes key = new PasswordDeriveBytes(mKey, ASCIIEncoding.ASCII.GetBytes(mSalt));
+            Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(mKey, ASCIIEncoding.ASCII.GetBytes(mSalt));
 			return key.GetBytes(mKey.Length);
 		}
 

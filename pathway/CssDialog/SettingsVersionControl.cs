@@ -130,9 +130,12 @@ namespace SIL.PublishingSolution
             pathwayFolder = Common.PathCombine(pathwayFolder, "Pathway");
             if (!Directory.Exists(pathwayFolder))
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
+                if (File.Exists(_userFilePath))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
+                }
             }
-            if (!Directory.Exists(Path.GetDirectoryName(_userFilePath)))
+            if (File.Exists(_userFilePath) && !Directory.Exists(Path.GetDirectoryName(_userFilePath)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
             }
