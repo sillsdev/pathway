@@ -174,29 +174,6 @@ namespace Test.PsTool
         }
 
         /// <summary>
-        ///A test for Xslt2Process, test x: namespace for xhtml & dictionary params
-        ///</summary>
-        [Test]
-        public void XsltProcessTest6()
-        {
-            const string inputName = "main.xhtml";
-            const string xsltName = "xhtml2xpw-dic.xsl";
-            string inputFile = GetFileNameWithOutputPath(inputName);
-            string xsltFile = GetFileNameWithOutputPath(xsltName);
-            File.Copy(GetFileNameWithPath(inputName), inputFile, true);
-            File.Copy(GetFileNameWithPath(xsltName), xsltFile, true);
-            string ext = ".txt";
-            string expected = "main.txt";
-            var myParams = new Dictionary<string, string>();
-            myParams["ver"] = "bzh";
-            myParams["l1"] = "en";
-            myParams["l2"] = "tpi";
-            string actual = Common.XsltProcess(inputFile, xsltFile, ext, myParams);
-            Assert.AreEqual(expected, Path.GetFileName(actual));
-            TextFileAssert.AreEqual(GetFileNameWithExpectedPath(expected), actual);
-        }
-
-        /// <summary>
         ///A test for CreatePreviewFile
         ///</summary>
         [Test]

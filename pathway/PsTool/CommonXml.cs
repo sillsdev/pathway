@@ -803,13 +803,6 @@ namespace SIL.Tool
 
                 //Create an XsltArgumentList.
                 var xslArg = new XsltArgumentList();
-
-                //Add an object 
-                var obj = new FlexString();
-                var fun = new XmlFun(); // string-length replaed with stringLength
-                xslArg.AddExtensionObject("urn:reversal-conv", obj);
-                xslArg.AddExtensionObject("http://www.w3.org/2005/xpath-functions", fun);
-
                 if (myParams != null)
                     foreach (string param in myParams.Keys)
                     {
