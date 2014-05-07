@@ -676,7 +676,6 @@
     <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
     <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
