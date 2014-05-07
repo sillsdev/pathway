@@ -9,19 +9,19 @@
 \usepackage{calc}
 \usepackage{lettrine}
 \usepackage{alphalph}
+\usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
 \usepackage{changepage}
 \usepackage{needspace}
 \usepackage{multicol}
 \usepackage{bidi} 
 \usepackage{verbatim} 
-\usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
 
 \parindent=0pt
 \parskip=\medskipamount
-\begin{document} 
-\pagestyle{plain} 
-\sloppy 
-\setlength{\parfillskip}{0pt plus 1fil} 
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
 \font\letHeaddicBody="Times New Roman" at 12pt
 \font\letterletHeaddicBody="Times New Roman/B" at 24pt
 \font\letDatadicBody="Times New Roman" at 12pt
@@ -86,6 +86,7 @@
 \font\headwordafterentrycletDatadicBody="Times New Roman/B":color=0000FF at 10pt
 
 \pagestyle{fancy} 
+\renewcommand{\baselinestretch}{1.5} 
 \begin{center}
 \topskip 18pt{\section*{\needspace {8\baselineskip}{\letterletHeaddicBody{C c}}}}\end{center}
 \setlength{\columnsep}{0.5em} 

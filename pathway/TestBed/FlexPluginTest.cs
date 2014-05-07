@@ -470,12 +470,9 @@ namespace TestBed
 
         private void btnXeLaTex_Click(object sender, EventArgs e)
         {
-
-            char c = '\u25C6';
-            string hex = ((int)c).ToString("X4"); // Now hex = "0123"
-            string a = "\u25C6";
-
-            //MessageBox.Show(a); 
+            //char c = '\u25C6';
+            //string hex = ((int)c).ToString("X4"); // Now hex = "0123"
+            //string a = "\u25C6";
 
             if (!File.Exists(txtInputPath.Text))
             {
@@ -488,13 +485,16 @@ namespace TestBed
                 MessageBox.Show("Please enter the valid CSS path");
                 return;
             }
-            ExportXeLaTex exportXeLaTex = new ExportXeLaTex();
-            PublicationInformation projInfo = new PublicationInformation();
+            var exportXeLaTex = new ExportXeLaTex();
+            var projInfo = new PublicationInformation();
 
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
             projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
             projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
+
+            projInfo.DefaultRevCssFileWithPath = txtCSSInput.Text.Replace("main", "flexrev");
+            projInfo.IsReversalExist = true;
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             projInfo.DictionaryPath = projInfo.ProjectPath;
             exportXeLaTex.Export(projInfo);
