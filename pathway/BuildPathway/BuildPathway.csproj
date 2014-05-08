@@ -476,11 +476,11 @@
     <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
-    <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
+    <AllTransform Include="..\PsSupport\AddBidi.xsl" />
     <AllTransform Include="..\PsSupport\addDicTocHeads.xsl" />
     <AllTransform Include="..\PsSupport\FixEpub.xsl" />
     <AllTransform Include="..\PsSupport\FixEpubToc.xsl" />
+    <BteTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
     <BteTransform Include="..\PsSupport\*.xslt" />
     <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
