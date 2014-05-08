@@ -538,7 +538,7 @@
 # texlive.profile written on Tue Sep 13 10:00:58 2011 UTC
 # It will NOT be updated and reflects only the
 # installation profile at installation time.
-selected_scheme scheme-custom
+selected_scheme scheme-minimal
 TEXDIR $(TexLiveExeProp)
 TEXMFCONFIG $TEXMFSYSCONFIG
 TEXMFHOME $TEXMFLOCAL
@@ -548,22 +548,20 @@ TEXMFSYSVAR $(TexLiveExeProp)/texmf-var
 TEXMFVAR $TEXMFSYSVAR
 binary_win32 1
 collection-basic 1
-collection-langenglish 1
-in_place 0
+collection-wintools 1
+doc_splitting_supported 1
+inst_platform win32
+option_adjustrepo 1
 option_autobackup 1
 option_backupdir tlpkg/backups
-option_desktop_integration 0
-option_doc 0
-option_file_assocs 0
 option_fmt 1
 option_letter 1
-option_path 0
+option_path 1
 option_post_code 1
-option_src 0
+option_src 1
 option_sys_bin /usr/local/bin
-option_sys_info /usr/local/info
-option_sys_man /usr/local/man
-option_w32_multi_user 0
+option_sys_info /usr/local/share/info
+option_sys_man /usr/local/share/man
 option_write18_restricted 1
 portable 1
 " />
