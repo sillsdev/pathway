@@ -20,9 +20,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
-using SIL.Tool;
+using SIL.PublishingSolution;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
     /// <summary>
     /// Combines all css into a single file by implementing @import

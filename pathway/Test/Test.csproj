@@ -639,12 +639,10 @@
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_Chapter.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_Chapter_Abbr.css" />
-    <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_Verse.css" />
-    <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_Verse_Abbr.css" />
+	<ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_MultiChapter.css" />
+    <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_MultiChapter_Abbr.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Paged_Chapter.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" />
-    <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Paged_MultiChapter.css" />
-    <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Paged_MultiChapter_Abbr.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Scripture.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\VerticalJustify_Bottom.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\VerticalJustify_Center.css" />
@@ -678,8 +676,12 @@
     <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
-    <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
+    <AllTransform Include="..\PsSupport\AddBidi.xsl" />
+    <AllTransform Include="..\PsSupport\addDicTocHeads.xsl" />
+    <AllTransform Include="..\PsSupport\FixEpub.xsl" />
+    <AllTransform Include="..\PsSupport\FixEpubToc.xsl" />
+    <BteTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
+    <BteTransform Include="..\PsSupport\*.xslt" />
     <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
     <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />

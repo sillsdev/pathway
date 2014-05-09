@@ -14,13 +14,9 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using NUnit.Framework;
-using SIL.PublishingSolution;
+using SIL.Tool;
 
 namespace Test.CssParserTest
 {

@@ -14,20 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using System.Xml;
-using ICSharpCode.SharpZipLib.Zip;
-using SIL.Tool;
-
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
     /// <summary>
     /// Combines all css into a single file by implementing @import

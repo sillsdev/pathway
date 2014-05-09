@@ -460,5 +460,9 @@
    <menu:menuitem menu:id=".uno:About"/>
   </menu:menupopup>
  </menu:menu>
-
+ <menu:menu menu:id="vnd.openoffice.org:CustomMenu1" menu:label="Macro">
+  <menu:menupopup>
+   <menu:menuitem menu:id="vnd.sun.star.script:Standard.Module1.SetReference?language=Basic&amp;location=document" menu:helpid="vnd.sun.star.script:Standard.Module1.SetReference?language=Basic&amp;location=document" menu:label="Update References"/>
+  </menu:menupopup>
+ </menu:menu>
 </menu:menubar>

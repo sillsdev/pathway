@@ -219,7 +219,7 @@ namespace SIL.PublishingSolution
             _rightPageLayoutProperty = ProcessPageProperty(pageName);
 
             pageName = "@page-footnotes";
-            Dictionary<string, string> FootNoteSeperator = ProcessPageProperty(pageName);
+            ProcessPageProperty(pageName);
         }
 
         private Dictionary<string, string> ProcessPageProperty(string pageName)
@@ -256,7 +256,7 @@ namespace SIL.PublishingSolution
                 _inlineStyle = new List<string>();
                 _inlineText = new List<string>();
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
-                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList, _inlineText, LangFontDictionary);
+                mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList, _inlineText, LangFontDictionary);
                 
                 _classInlineStyle[replaceNumberInStyle] = _inlineStyle;
                 if (_inlineText.Count > 0)

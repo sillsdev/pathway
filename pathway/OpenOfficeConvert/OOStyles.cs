@@ -793,6 +793,7 @@ namespace SIL.PublishingSolution
                     if (para.Key.ToLower() == "-ps-referenceformat-string")
                     {
                         _styleName.ReferenceFormat = para.Value.Replace("\"", "");
+
                     }
                     else if (para.Key.ToLower() == "-ps-custom-footnote-caller")
                     {
@@ -1924,58 +1925,67 @@ namespace SIL.PublishingSolution
             }
         }
 
+
+
         private void CreateRightGuideword(int i)
         {
             string mainFrameName = "Mfr1";
-
-            _writer.WriteStartElement("draw:frame");
-            _writer.WriteAttributeString("draw:style-name", mainFrameName);
-            _writer.WriteAttributeString("draw:name", "Frame1");
-            _writer.WriteAttributeString("text:anchor-type", "paragraph");
-
-
-            string value = "0pt";
-            if (!String.IsNullOrEmpty(_pageLayoutProperty["fo:margin-top"]))
+            string _refFormat = string.Empty;
+            if (_projInfo.ProjectInputType.ToLower() == "scripture")
             {
-                value = _pageLayoutProperty["fo:margin-top"];
-                Array arValue = value.Split('p');
-                value = Convert.ToDouble(arValue.GetValue(0)) - 0.75 + "pt";
+                _refFormat = Common.GetReferenceFormat(_cssProperty, _refFormat);
             }
-            _writer.WriteAttributeString("svg:y", value);
-
-
-            string frameWidth = "145pt";
-
-            if (!String.IsNullOrEmpty(_pageLayoutProperty["fo:page-width"]))
+            if (_refFormat.ToLower() != "genesis 1-2")
             {
-                if (Convert.ToDouble(_pageLayoutProperty["fo:page-width"].Replace("pt", "")) < 400)
+                _writer.WriteStartElement("draw:frame");
+                _writer.WriteAttributeString("draw:style-name", mainFrameName);
+                _writer.WriteAttributeString("draw:name", "Frame1");
+                _writer.WriteAttributeString("text:anchor-type", "paragraph");
+
+
+                string value = "0pt";
+                if (!String.IsNullOrEmpty(_pageLayoutProperty["fo:margin-top"]))
                 {
-                    frameWidth = "100pt";
+                    value = _pageLayoutProperty["fo:margin-top"];
+                    Array arValue = value.Split('p');
+                    value = Convert.ToDouble(arValue.GetValue(0)) - 0.75 + "pt";
                 }
+                _writer.WriteAttributeString("svg:y", value);
+
+
+                string frameWidth = "145pt";
+
+                if (!String.IsNullOrEmpty(_pageLayoutProperty["fo:page-width"]))
+                {
+                    if (Convert.ToDouble(_pageLayoutProperty["fo:page-width"].Replace("pt", "")) < 400)
+                    {
+                        frameWidth = "100pt";
+                    }
+                }
+
+                _writer.WriteAttributeString("fo:min-width", frameWidth);
+
+                _writer.WriteAttributeString("draw:z-index", "1");
+                _writer.WriteStartElement("draw:text-box");
+                _writer.WriteAttributeString("fo:min-height", "14.14pt"); //added for TD-2579
+                _writer.WriteStartElement("text:p");
+                _writer.WriteAttributeString("text:style-name", "MP1");
+
+                //TD-2566
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", "MT1");
+
+                _writer.WriteStartElement("text:variable-get");
+                _writer.WriteAttributeString("text:name", "Right_Guideword_R");
+                _writer.WriteAttributeString("office:value-type", "string");
+
+                _writer.WriteEndElement();
+
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
             }
-
-            _writer.WriteAttributeString("fo:min-width", frameWidth);
-            
-            _writer.WriteAttributeString("draw:z-index", "1");
-            _writer.WriteStartElement("draw:text-box");
-            _writer.WriteAttributeString("fo:min-height", "14.14pt");//added for TD-2579
-            _writer.WriteStartElement("text:p");
-            _writer.WriteAttributeString("text:style-name", "MP1");
-
-            //TD-2566
-            _writer.WriteStartElement("text:span");
-            _writer.WriteAttributeString("text:style-name", "MT1");
-
-            _writer.WriteStartElement("text:variable-get");
-            _writer.WriteAttributeString("text:name", "Right_Guideword_R");
-            _writer.WriteAttributeString("office:value-type", "string");
-
-            _writer.WriteEndElement();
-
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
         }
 
         private void CreateEmptyHeader(bool isLeftGuidewordNeeded)

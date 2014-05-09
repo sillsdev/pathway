@@ -1729,6 +1729,38 @@ namespace SIL.Tool
 
         #endregion
 
+        #region GetReferenceFormat(Dictionary<string, Dictionary<string, string>> idAllClass, string refFormat)
+        /// <summary>
+        /// Get the Reference Format, what user selected in Configuration Tool
+        /// </summary>
+        /// <param name="idAllClass">All Class List</param>
+        /// <param name="refFormat">Reference Format String</param>
+        /// <returns></returns>
+        public static string GetReferenceFormat(Dictionary<string, Dictionary<string, string>> idAllClass, string refFormat)
+        {
+            if (idAllClass.ContainsKey("ReferenceFormat"))
+            {
+                if (idAllClass["ReferenceFormat"].ContainsKey("@page"))
+                {
+                    refFormat = idAllClass["ReferenceFormat"]["@page"];
+                }
+                else if (idAllClass["ReferenceFormat"].ContainsKey("@page:left"))
+                {
+                    refFormat = idAllClass["ReferenceFormat"]["@page:left"];
+                }
+                else if (idAllClass["ReferenceFormat"].ContainsKey("@page:right"))
+                {
+                    refFormat = idAllClass["ReferenceFormat"]["@page:right"];
+                }
+            }
+            else if (idAllClass.ContainsKey("@page-top-center"))
+            {
+                refFormat = idAllClass["@page-top-center"]["-ps-referenceformat"];
+            }
+            return refFormat;
+        }
+        #endregion
+
         public static string GetHeaderFontName(Dictionary<string, Dictionary<string, string>> _cssProperty,
                                                string cssFileName) //TD-2682
         {

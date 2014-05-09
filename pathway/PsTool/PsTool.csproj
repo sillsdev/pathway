@@ -97,7 +97,6 @@
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -162,7 +161,6 @@
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -181,8 +179,6 @@
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
-  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
     <OutputPath>bin\Corporate7EPUB\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -239,7 +235,6 @@
     </Compile>
     <Compile Include="CommonXml.cs" />
     <Compile Include="FileStreamXmlResolver.cs" />
-    <Compile Include="FlexString.cs" />
     <Compile Include="Json.cs" />
     <Compile Include="FontInternals.cs">
     </Compile>
@@ -300,7 +295,6 @@
     <Compile Include="SubProcess.cs" />
     <Compile Include="Substitution.cs" />
     <Compile Include="XHTMLProcess.cs" />
-    <Compile Include="XmlFun.cs" />
     <Compile Include="ZipFolder.cs" />
     <Compile Include="ZipUtil.cs" />
   </ItemGroup>

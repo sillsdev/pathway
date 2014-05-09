@@ -20,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
-using ANTLR_CSS;
 using Antlr.Runtime.Tree;
 using System.Windows.Forms;
 using SIL.Tool;

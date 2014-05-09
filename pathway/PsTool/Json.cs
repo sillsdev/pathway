@@ -14,13 +14,10 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Xml;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
     /// <summary>
     /// Combines all css into a single file by implementing @import

@@ -942,11 +942,11 @@ namespace SIL.Tool
                 if (titleNode != null)
                 {
                     frontMatterXHTMLContent = frontMatterXHTMLContent + titleNode.OuterXml;
-                    if (_includeTOCPage)
-                    {
-                        //frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
-                        frontMatterXHTMLContent = frontMatterXHTMLContent;
-                    }
+                    //if (_includeTOCPage)
+                    //{
+                    //    //frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
+                    //    frontMatterXHTMLContent = frontMatterXHTMLContent;
+                    //}
                     _projInfo.IsFrontMatterEnabled = true;
                     frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-family: 'Times New Roman', serif; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;font-family: 'Times New Roman', serif; } .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}";
                 }
@@ -2386,10 +2386,9 @@ namespace SIL.Tool
                 xPath = ".//xhtml:span[@class='Verse_Number']";
                 XmlNodeList verseNodeList = paraNode.SelectNodes(xPath, namespaceManager);
                 if (verseNodeList == null) return;
-                for (int j = 0; j < verseNodeList.Count; j++)
+                if (verseNodeList.Count > 0)
                 {
-                    verseNodeList[j].InnerText = "";
-                    break;
+                    verseNodeList[0].InnerText = "";
                 }
             }
             xDoc.Save(fileName);

@@ -22,7 +22,7 @@
 // fields for the user. These fields can be overridden by the user.
 //
 // A fuller description of this dialog can be found in the JIRA issue attachments
-// for TD-2344: https://www.jira.insitehome.org/secure/attachment/27139/PubInfo_Proposal_v5.docx
+// for TD-2344: https://jira.sil.org/secure/attachment/27139/PubInfo_Proposal_v5.docx
 // </remarks>
 // --------------------------------------------------------------------------------------
 

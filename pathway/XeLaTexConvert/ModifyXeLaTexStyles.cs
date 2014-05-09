@@ -51,7 +51,7 @@ namespace SIL.PublishingSolution
         private bool _isMirrored = false;
         private Dictionary<string, string> _langFontDictionary;
         private Dictionary<string, Dictionary<string, string>> _tocList;
-
+        private List<string> _xeLaTexPropertyFontStyleList = new List<string>();
         public string ProjectType
         {
             get { return _projectType; }
@@ -147,6 +147,12 @@ namespace SIL.PublishingSolution
             set { _langFontDictionary = value; }
         }
 
+        public List<string> XeLaTexPropertyFontStyleList
+        {
+            get { return _xeLaTexPropertyFontStyleList; }
+            set { _xeLaTexPropertyFontStyleList = value; }
+        }
+
         #endregion
 
         public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty,
@@ -187,9 +193,8 @@ namespace SIL.PublishingSolution
 
             StreamWriter sw = new StreamWriter(newFile2);
 
-            string xeLaTexProp = "";
             List<string> includePackageList = new List<string>();
-            List<string> xeLaTexProperty = new List<string>();
+            
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssClass)
             {
                 if (cssClass.Key.IndexOf("h1") >= 0 ||
@@ -201,10 +206,10 @@ namespace SIL.PublishingSolution
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
                 string className = RemoveBody(replaceNumberInStyle);
                 if (className.Length == 0) continue;
-                xeLaTexProp = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle, _langFontDictionary);
-                if (xeLaTexProp.Trim().Length > 0)
+                string xeLaTexProp = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle, _langFontDictionary);
+                if (xeLaTexProp.Trim().Length > 0 && !_xeLaTexPropertyFontStyleList.Contains(xeLaTexProp))
                 {
-                    xeLaTexProperty.Add(xeLaTexProp);
+                    _xeLaTexPropertyFontStyleList.Add(xeLaTexProp);
                 }
             }
 
@@ -263,12 +268,6 @@ namespace SIL.PublishingSolution
                 sw.WriteLine(@"\usepackage{calc}");
                 sw.WriteLine(@"\usepackage{lettrine}");
                 sw.WriteLine(@"\usepackage{alphalph}");
-
-                foreach (var package in includePackageList)
-                {
-                    sw.WriteLine(package);
-                }
-
                 if (pageTopMargin != 0 || pageBottomMargin != 0 || pageLeftMargin != 0 || pageRightMargin != 0)
                 {
                     pageTopMargin = (pageTopMargin * 0.03514598035);
@@ -286,18 +285,22 @@ namespace SIL.PublishingSolution
                 if (Convert.ToBoolean(CoverImage))
                     sw.WriteLine(@"\usepackage{eso-pic}");
 
+                foreach (var package in includePackageList)
+                {
+                    sw.WriteLine(package);
+                }
+
                 sw.WriteLine(_pageStyleFormat);
 
                 sw.WriteLine(@"\parindent=0pt");
                 sw.WriteLine(@"\parskip=\medskipamount");
-
-                sw.WriteLine(@"\begin{document} ");
-                sw.WriteLine(@"\pagestyle{plain} ");
-                sw.WriteLine(@"\sloppy ");
-                sw.WriteLine(@"\setlength{\parfillskip}{0pt plus 1fil} ");
+                sw.WriteLine(@"\begin{document}");
+                sw.WriteLine(@"\pagestyle{plain}");
+                sw.WriteLine(@"\sloppy");
+                sw.WriteLine(@"\setlength{\parfillskip}{0pt plus 1fil}");
             }
 
-            foreach (var prop in xeLaTexProperty)
+            foreach (var prop in _xeLaTexPropertyFontStyleList)
             {
                 sw.WriteLine(prop);
             }
@@ -348,7 +351,10 @@ namespace SIL.PublishingSolution
                 File.Delete(newFile1);
                 File.Delete(newFile2);
             }
-            catch (Exception e) { }
+            catch (Exception)
+            {
+                
+            }
         }
 
 
@@ -531,9 +537,8 @@ namespace SIL.PublishingSolution
             tableOfContent += "\\mbox{} \r\n";
             tableOfContent += "\\newpage \r\n";
             tableOfContent += "\\newpage \r\n";
-            
             tableOfContent += "\\setcounter{page}{1} \r\n";
-            tableOfContent += "\\pagenumbering{arabic}  \r\n";
+            tableOfContent += "\\pagenumbering{arabic} ";
             sw.WriteLine(tableOfContent);
         }
 
@@ -604,14 +609,7 @@ namespace SIL.PublishingSolution
                 string logoFileName = string.Empty;
                 if (Param.GetOrganization().StartsWith("SIL"))
                 {
-                    if (ProjectType.ToLower() == "dictionary")
-                    {
-                        logoFileName = "sil-bw-logo.jpg";
-                    }
-                    else
-                    {
-                        logoFileName = "WBT_H_RGB_red.png";
-                    }
+                    logoFileName = ProjectType.ToLower() == "dictionary" ? "sil-bw-logo.jpg" : "WBT_H_RGB_red.png";
                 }
                 else if (Param.GetOrganization().StartsWith("Wycliffe"))
                 {

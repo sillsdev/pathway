@@ -16,8 +16,8 @@
 
 using System;
 using System.IO;
-using ANTLR_CSS;
 using NUnit.Framework;
+using SIL.PublishingSolution;
 using SIL.Tool;
 
 namespace Test.CssParserTest

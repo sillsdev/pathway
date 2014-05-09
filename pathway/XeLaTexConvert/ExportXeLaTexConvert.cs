@@ -50,7 +50,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _langFontCodeandName;
         private Dictionary<string, string> _fontLangMap = new Dictionary<string, string>();
         private readonly XslCompiledTransform _xhtmlXelatexXslProcess = new XslCompiledTransform();
-
+        private List<string> _xeLaTexPropertyFullFontStyleList = new List<string>();
         #region Public Functions
         public string ExportType
         {
@@ -128,7 +128,7 @@ namespace SIL.PublishingSolution
 
             BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-            
+
             if (projInfo.DefaultXhtmlFileWithPath.Contains("FlexRev.xhtml"))
             {
                 projInfo.IsReversalExist = false;
@@ -152,7 +152,6 @@ namespace SIL.PublishingSolution
             StreamWriter xeLatexFile = new StreamWriter(xeLatexFullFile);
 
             Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
-            Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
             XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
             xeLaTexStyles.LangFontDictionary = _langFontCodeandName;
             classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
@@ -228,7 +227,9 @@ namespace SIL.PublishingSolution
                 }
             }
 
+            modifyXeLaTexStyles.XeLaTexPropertyFontStyleList = _xeLaTexPropertyFullFontStyleList;
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include, _langFontCodeandName);
+
             Dictionary<string, string> imgPath = new Dictionary<string, string>();
             if (newProperty.ContainsKey("ImagePath"))
             {
@@ -259,7 +260,7 @@ namespace SIL.PublishingSolution
 
             if (File.Exists(pdfFullName))
             {
-                Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif,.tex,.log,.exe,.xml,.jar",
+                Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif,.log,.exe,.xml,.jar",
                                            "layout.css,mergedmain1,preserve", string.Empty);
                 CreateRAMP(projInfo);
             }
@@ -322,27 +323,16 @@ namespace SIL.PublishingSolution
 
                 StreamWriter xeLatexFile = new StreamWriter(xeLatexCopyrightFile);
                 Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
-                Dictionary<string, Dictionary<string, string>> xeTexAllClass =
-                    new Dictionary<string, Dictionary<string, string>>();
                 XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
                 xeLaTexStyles.LangFontDictionary = _langFontCodeandName;
                 classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
 
                 XeLaTexContent xeLaTexContent = new XeLaTexContent();
                 Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
-                Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo,
-                                                                                                          cssClass,
-                                                                                                          xeLatexFile,
-                                                                                                          classInlineStyle,
-                                                                                                          cssTree.
-                                                                                                              SpecificityClass,
-                                                                                                          cssTree.
-                                                                                                              CssClassOrder,
-                                                                                                          classInlineText, pageWidth);
+                xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 
                 _xelatexDocumentOpenClosedRequired = true; //Don't change the place.
                 CloseDocument(xeLatexFile, false, string.Empty);
-                string include = xeLaTexStyles.PageStyle.ToString();
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
                 modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
@@ -479,7 +469,7 @@ namespace SIL.PublishingSolution
                 modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
                 modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
                                                     xeLatexRevesalIndexFile, include, _langFontCodeandName);
-
+                _xeLaTexPropertyFullFontStyleList = modifyXeLaTexStyles.XeLaTexPropertyFontStyleList;
 
                 if (newProperty.ContainsKey("TableofContent") && newProperty["TableofContent"].Count > 0)
                 {
@@ -645,7 +635,7 @@ namespace SIL.PublishingSolution
                         if (File.Exists(pdfFullName))
                         {
 
-                            pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex", _inputType);
+                            Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex", _inputType);
                         }
                     }
                     catch { }
@@ -656,7 +646,7 @@ namespace SIL.PublishingSolution
                 Directory.SetCurrentDirectory(originalDirectory);
                 pdfFullName = CopyProcessResult(xeLaTexInstallationPath, texNameOnly, ".pdf", userFolder);
                 string logFullName = CopyProcessResult(xeLaTexInstallationPath, texNameOnly, ".log", userFolder);
-
+                Console.WriteLine(logFullName);
                 if (openFile && File.Exists(pdfFullName))
                 {
                     try
@@ -739,7 +729,6 @@ namespace SIL.PublishingSolution
         /// <param name="xhtmlFileName">File name to parse</param>
         private void BuildLanguagesList(string xhtmlFileName)
         {
-            bool isInputTypeFound = false;
             XmlTextReader _reader = Common.DeclareXmlTextReader(xhtmlFileName, true);
             while (_reader.Read())
             {

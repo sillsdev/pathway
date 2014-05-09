@@ -19,7 +19,7 @@ using System.IO;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
 	#region cryptography class...
 
@@ -158,7 +158,7 @@ namespace SIL.PublishingSolution
 					}
 				}
 			}
-			PasswordDeriveBytes key = new PasswordDeriveBytes(mKey, ASCIIEncoding.ASCII.GetBytes(mSalt));
+            Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(mKey, ASCIIEncoding.ASCII.GetBytes(mSalt));
 			return key.GetBytes(mKey.Length);
 		}
 

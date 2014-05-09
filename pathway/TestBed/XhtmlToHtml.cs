@@ -14,15 +14,12 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Reflection;
-using System.Windows.Forms;
 using System.Xml;
+using SIL.Tool;
 
-namespace SIL.Tool
+namespace SIL.PublishingSolution
 {
     public class XhtmlToHtml
     {

@@ -16,13 +16,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using SIL.Tool;
-using Path = System.IO.Path;
 using Antlr.Runtime;
 using Antlr.Runtime.Tree;
 
-namespace ANTLR_CSS
+namespace SIL.PublishingSolution
 {
     /// <summary>
     /// CSharp logic for calling Antlr generated parser and returning results as properties.

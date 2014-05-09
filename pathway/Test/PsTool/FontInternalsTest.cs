@@ -102,7 +102,11 @@ namespace Test.PsTool
             string style = "Regular";
             string actual = FontInternals.GetFontFileName(familyName, style);
             string expected = "CharisSIL-R.ttf";
-            Assert.AreEqual(expected, Path.GetFileName(actual));
+            string actualFilename = Path.GetFileName(actual);
+            Assert.IsNotNull(actualFilename);
+            // Match the name whether the hyphen is present or not.
+            Assert.True(actualFilename.StartsWith(expected.Substring(0, expected.IndexOf('-'))));
+            Assert.True(actualFilename.EndsWith(expected.Substring(expected.IndexOf('-') + 1)));
         }
 
 
@@ -114,7 +118,11 @@ namespace Test.PsTool
             string style = "Bold";
             string actual = FontInternals.GetFontFileName(familyName, style);
             string expected = "CharisSIL-B.ttf";
-            Assert.AreEqual(expected, Path.GetFileName(actual));
+            string actualFilename = Path.GetFileName(actual);
+            Assert.IsNotNull(actualFilename);
+            // Match the name whether the hyphen is present or not.
+            Assert.True(actualFilename.StartsWith(expected.Substring(0, expected.IndexOf('-'))));
+            Assert.True(actualFilename.EndsWith(expected.Substring(expected.IndexOf('-') + 1)));
         }
 
 
@@ -125,12 +133,9 @@ namespace Test.PsTool
             string familyName = "Doulos SIL";
             string style = "Regular";
             string actual = FontInternals.GetFontFileName(familyName, style);
-            string expected = "DoulosSIL-R.ttf";
-            if (Common.IsUnixOS())
-            {
-                expected = "DoulosSIL-R.ttf";
-            }
-            Assert.AreEqual(expected, Path.GetFileName(actual));
+            string expected = "DoulosSIL-R";
+            string actualFilename = Path.GetFileName(actual);
+            Assert.True(actualFilename.Contains(expected));
         }
 
 

@@ -18,7 +18,7 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using SIL.Tool;
 
-namespace RevHomographNum
+namespace SIL.PublishingSolution
 {
     public static class AddHomographAndSenseNumClassNames
     {

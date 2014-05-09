@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Apr-01-2014 for TD-3893
+
+Dim LastParagraph(0) As String
+Dim References(50) As String
+Dim rCount
+
+&apos;Changed On May-02-2014 for TD-3803
 
 &apos;This is main method, which will be called when document opened. It calls other mothods to perform 
 Sub StartDontForget
@@ -14,6 +19,10 @@ On Error GoTo MyError:
 	
 	UpdateTOC()
 	
+	If ReferenceFormat = &quot;Genesis 1-2&quot; Then
+		SetReference()
+	End If
+	
 	HideODMVariable()
 	
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
@@ -22,6 +31,7 @@ On Error GoTo MyError:
 	
 	Exit Sub
 MyError:
+msgbox Err.Description
 End Sub
 
 &apos;This method aligns Cover page Image to Page Align(Full Page)
@@ -173,5 +183,325 @@ Function MakePropertyValue( Optional cName As String, Optional uValue ) As com.s
    MakePropertyValue() = oPropertyValue 
 End Function 
 
+&apos;---------------------------------------------------------------------------------------------------------
+&apos;The main procedure to show the Reference (Ex. Mark 1:1 - 2:26)
+Sub SetReference()
 
+On Error GoTo MyError:
+Dim myArraw
+Dim VerseCharStyle, ChapterCharStyle, BookCharStyle
+Dim isEndChapterFoundAlready As Boolean
+PageCount = TotalPages
+
+Dim isProgressClosed As Boolean
+
+	oDoc = ThisComponent 
+
+&apos;RemoveOldGuides
+
+Redim LastParagraph(PageCount+2) As String
+Dim HiddenParagraph(PageCount) As String
+
+rCount = 0
+strStartBook = &quot;&quot;
+strEndBook = &quot;&quot;
+strStartChapter = 1
+strPrevStartChapter = 1
+strEndChapter = 0
+strStartVerse = 1
+strEndVerse = 1
+&apos;Assign the possible style Names to References (Book, Chapter, Verse)
+&apos;VerseCharStyle = &quot;VerseNumber_ParagraphContinuation_scrSection_scrBook,VerseNumber_Line1_scrSection_scrBook,VerseNumber_Line2_scrSection_scrBook,VerseNumber_EmbeddedTextLine1_scrSection_scrBook,VerseNumber_Paragraph_scrSection_scrBook,VerseNumberAlternate_Paragraph_scrSection_scrBook,verseNumber_div_section_scriptureText,verseNumber_first_section_scriptureText,verseNumber_li_ul_section_scriptureText,VerseNumber_\f*_scrSection_columns_scrBook,VerseNumber_Paragraph_scrSection_columns_scrBook,VerseNumber_.bgt_Paragraph_scrSection_columns_scrBook,VerseNumber_.bgt_ParagraphContinuation_scrSection_columns_scrBook,VerseNumber_.x-kal_Paragraph_scrSection_columns_scrBook,VerseNumber_.x-kal_Paragraph1_scrSection_columns_scrBook,VerseNumber1_.x-kal_Paragraph1_scrSection_columns_scrBook&quot;
+&apos;ChapterCharStyle = &quot;ChapterNumber_Paragraph_scrSection_scrBook,chapterNumber_first_section_scriptureText,ChapterNumber_Paragraph_scrSection_columns_scrBook,ChapterNumber_Paragraph1_scrSection_columns_scrBook&quot;
+																										 
+&apos;BookCharStyle = &quot;span_TitleMain_scrBook,scrBookName_scrBook,book_,span_.x-kal_TitleMain_scrBook&quot;
+GetLastParagraph
+ThisComponent.currentController.getViewCursor().jumpToPage(1)
+oDoc = ThisComponent 
+oVC = oDoc.CurrentController.getViewCursor 
+oVC.gotoStart(false) 
+&apos; ( -00012 )
+
+
+
+&apos;This loop read the file Page by Page
+Do
+    page = oVC.getPage 
+&apos;If page &gt; 3 Then
+
+	&apos;If page &gt; 1 Then
+		&apos;oVC.jumpToStartOfPage
+	
+	
+	oVC.jumpToStartOfPage
+	First = oDoc.Text.createTextCursorByRange(oVC)	
+	&apos;Assign Start Chapter Number
+	strStartChapter = strPreviousChapter
+	GetReferenceASC(First,page,strStartChapter,&quot;C&quot;)
+
+
+&apos;If strStartChapter &lt;&gt; &quot;&quot; Then
+&apos;	myArraw = split(Trim(strStartChapter),&quot;,&quot;)
+   &apos; If  UBound(myArraw) &gt; 1 Then
+      &apos; strStartChapter = myArraw(0) &amp; &quot;-&quot; +  myArraw(UBound(myArraw)-1)
+      &apos; strPreviousChapter = myArraw(UBound(myArraw)-1)
+   &apos; else
+      &apos; strStartChapter = myArraw(0)
+       &apos;strPreviousChapter = strStartChapter
+    &apos;End IF
+     &apos;strPreviousChapter =  strPreviousChapter &amp; &quot;,&quot;
+&apos;End If
+   &apos; If Len(Trim(strStartChapter)) &gt; 0 Then
+	&apos;	HiddenParagraph(page) = page &amp; &quot;`~&quot; &amp; strStartChapter
+&apos;	End If
+&apos;	HiddenParagraph(page-1,1) = page-1 &amp; &quot;`~&quot; &amp; strFirstReference
+    				
+&apos;	strPrevStartChapter = strEndChapter
+&apos;	strStartBook = strEndBook
+	&apos;Else
+		&apos;FirstPageBook(strStartBook)
+		&apos;page = oVC.getPage 
+		&apos;FirstChapterNumber(strStartChapter)
+	&apos;	page = oVC.getPage 
+		&apos;strEndChapter = strStartChapter 
+		&apos;strPrevStartChapter =  strStartChapter
+		&apos;strEndBook = strStartBook
+	&apos;End If	
+&apos;End If	
+Loop While oVC.jumpToNextPage 
+    keep = keep &amp; chr(10) &amp; &quot;After Main &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+    mytime= now
+    Test()
+    msgbox &quot;completed&quot;
+    &apos;HideODMVariable()
+    &apos;InsertReference(HiddenParagraph,PageCount)
+
+    &apos;oProgressBarModel.ProgressValue = PageCount * 4
+
+    keep = keep &amp; chr(10) &amp; &quot;After Print &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+    &apos;msgbox keep
+	&apos;oDoc.store() 
+&apos;===========Progressbar
+	&apos;CloseProgressBar
+	isProgressClosed = True
+&apos;===========Progressbar  	
+	&apos;AutoSaveEnableDisable(true)&apos;enable the &quot;Auto Recovery&quot;
+		
+		
+	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		&apos;ExportToDOC_PDF
+	End IF
+Exit Sub
+MyError:
+	If isProgressClosed = False Then
+		&apos;CloseProgressBar
+	End If
+	&apos;msgbox Err.Description
+	If Err &lt;&gt; 1 Then
+		Msgbox &quot;Sorry! Could not update the References.&quot; , 0 + 64,  &quot;Update References&quot;
+	End IF
+	&apos;oContWindow.Visible = true 
+End Sub
+
+Sub GetLastParagraph
+On Error GoTo MyError:
+&apos;Picture
+	dim document   as object
+	dim dispatcher as object
+	document = ThisComponent.CurrentController.Frame 
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;) 
+	
+	ThisComponent.currentController.getViewCursor().jumpToPage(2)
+oDoc = ThisComponent 
+oVC = oDoc.CurrentController.getViewCursor 
+oVC.gotoStart(false) 
+Do 
+
+		&apos;=========Progressbar    
+			ProgressValue=ProgressValue+1
+			&apos;MyProgressBar(ProgressValue)
+		&apos;=========Progressbar 
+		
+	page = oVC.getPage
+
+	oVC.jumpToEndOfPage 
+	Last = oDoc.Text.createTextCursorByRange(oVC) 
+	&apos;msgbox Last.String
+	&apos;Last.gotoStartOfSentence(false)
+	Last.gotoStartOfParagraph(true)
+	&apos;Last.gotoEndOfParagraph(false)
+
+	differ=oVC.getPage 
+
+  	if differ &gt; page Then
+	  	dispatcher.executeDispatch(document, &quot;.uno:GoToPrevPara&quot;, &quot;&quot;, 0, Array()) 
+	  	dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array()) 	  	
+	  	dispatcher.executeDispatch(document, &quot;.uno:GoToPrevPara&quot;, &quot;&quot;, 0, Array()) 
+		Last = oDoc.Text.createTextCursorByRange(oVC)
+		Last.gotoStartOfParagraph(false)
+		Last.gotoEndOfParagraph(true)
+	end if
+	LastParagraph(page) = Last.String
+Loop While oVC.jumpToNextPage 	 
+
+Exit sub
+MyError:
+s=0
+
+End Sub
+
+&apos;This Procedure loops the page in ASC order and get the First Chapter/Verse by using ReturnReferenceVerse/ReturnReferenceChapter
+Sub GetReferenceASC(MyParagraph,PageNo,RefVariable,Source)
+Dim strVariable
+
+		Do
+		  	MyParagraph.gotoEndOfParagraph(true) 
+			If Source = &quot;C&quot; Then
+				&apos;InsertSectionHeaderReference(MyParagraph,PageNo)
+			  	strVariable =  ReturnReferenceChapter(MyParagraph,PageNo)
+			  	If Len(Trim(strVariable)) &gt; 0 Then
+					&apos;ReDim References(Ubound(References) + 1) As String 
+					&apos;References(Ubound(References) - 1) = PageNo&apos; &amp; &quot;`~&quot; &amp; strStartChapter
+				  	RefVariable = RefVariable  + strVariable + &quot;,&quot;
+				  	&apos;var = PageNo(MyParagraph)
+				  	&apos;c = 10
+			  	End If
+		  	End If
+		  	&apos;//If Len(Trim(RefVariable)) &gt; 0 Then
+		  		&apos;//Exit Do
+		  	&apos;//End If
+		  	&apos;If Len(Trim(MyParagraph.String)) &gt; 11 Then
+		  		If Left(Trim(MyParagraph.String),15) = Left(Trim(LastParagraph(PageNo)),15) Then
+					Exit Do
+		  		End If
+		  	&apos;End If
+		Loop While MyParagraph.gotoNextParagraph(false)
+End Sub
+
+&apos;This Procedure loops the given Paragraph and find the Chapter
+Function ReturnReferenceChapter(MyParagraph,PageNo)
+	oParaEnume = MyParagraph.createEnumeration() 
+	While oParaEnume.hasMoreElements() 
+	 	oPara = oParaEnume.nextElement() 
+			If InStr(oPara.ParaStyleName, &quot;SectionHead&quot;) &gt; 0 Then
+				References(rCount) = PageNo&apos; &amp; &quot;`~&quot; &amp; strStartChapter
+				rCount = rCount + 1
+			End If 	 	
+		&apos;enumeration for portions in the paragraph 
+	  	oPortionEnume = oPara.createEnumeration() 
+	  	While oPortionEnume.hasMoreElements() 
+    	oPortion = oPortionEnume.nextElement() 
+	    	&apos;If Len(Trim(oPortion.CharStyleName)) &gt; 0 And Len(Trim(oPortion.String)) &gt; 0 Then
+	    	If Len(Trim(oPortion.CharStyleName)) &gt; 12 And Len(Trim(oPortion.String)) &gt; 0 Then
+		    	If Mid(Lcase(Trim(oPortion.CharStyleName)),1,13) = &quot;chapternumber&quot; Then
+			    	&apos;If InStr(Trim(RefStyleName),oPortion.CharStyleName) &gt; 0 Then
+						References(rCount) = PageNo&apos; &amp; &quot;`~&quot; &amp; strStartChapter
+						rCount = rCount + 1
+			    		ReturnReferenceChapter = oPortion.String
+			    	&apos;End If
+			    	Exit Function
+			    End If
+		    End If	
+	  	WEnd 
+	WEnd	
+End Function
+
+Sub Test()
+Dim var
+oFieldMaster = ThisComponent.TextFieldMasters
+oField = oFieldMaster.getByName(&quot;com.sun.star.text.fieldmaster.SetExpression.Left_Guideword_L&quot;)
+stDTF = oField.DependentTextFields
+&apos;msgbox Ubound(stDTF)
+Dim HiddenParagraph((Ubound(stDTF)/2)-1,1) As String
+j=0
+for i = Ubound(stDTF) to 1 step -2
+	HiddenParagraph(j ,0) = stDTF(i-1).Content
+	HiddenParagraph(j ,1) = stDTF(i).Content
+	j = j + 1
+Next
+
+
+for i = 0 to Ubound(HiddenParagraph) 
+	MyRef = Split(HiddenParagraph(i ,0),&quot; &quot;)
+	MyValue = Split(MyRef(1),&quot;-&quot;)
+	HiddenParagraph(i ,0) = MyRef(0) + &quot; &quot; + MyValue(0)
+	HiddenParagraph(i ,1) = MyRef(0) + &quot; &quot; + MyValue(0)
+next
+
+Dim PageNo
+Dim StartPage
+Dim EndPage
+for i = 0 to Ubound(References) -1
+	References(i) = References(i+1) 
+next
+for i = 0 to Ubound(HiddenParagraph) - 1
+	If References(i) = References(i + 1) Then
+		If References(i) = References(i + 2) Then
+			If References(i) = References(i + 3) Then
+
+		        
+			Else &apos; 1 and 2 and 3 are same
+				 &apos;Set Mat 1-3
+		        first = Split(HiddenParagraph(i,0),&quot; &quot;)
+		        last = Split(HiddenParagraph(i+2,0),&quot; &quot;)
+		        If first(1) &lt;&gt; last(1) Then
+		        	&apos;Previous
+		        	HiddenParagraph(i-1,1) = first(0) + &quot; &quot; + first(1) + &quot;-&quot; + last(1)&apos;Previous Reference set and last element
+					&apos;Current
+			        HiddenParagraph(i,0) = first(0) + &quot; &quot; + first(1) + &quot;-&quot; + last(1)
+			        HiddenParagraph(i,1) = first(0) + &quot; &quot; + last(1)
+					&apos;Next
+			        HiddenParagraph(i+2,1) = last(0) + &quot; &quot; + last(1)
+				End if	
+				i = i + 2			 
+			End if
+		Else &apos; 1 and 2 are same
+				&apos;Set Mat 1-2
+		        first = Split(HiddenParagraph(i,0),&quot; &quot;)
+		        last = Split(HiddenParagraph(i+1,0),&quot; &quot;)
+		        If first(1) &lt;&gt; last(1) Then
+		        	&apos;Previous
+		        	HiddenParagraph(i-1,1) = first(0) + &quot; &quot; + first(1) + &quot;-&quot; + last(1)&apos;Previous Reference set and last element
+					&apos;Current
+			        HiddenParagraph(i,0) = first(0) + &quot; &quot; + first(1) + &quot;-&quot; + last(1)
+			        HiddenParagraph(i,1) = first(0) + &quot; &quot; + last(1)
+					&apos;Next
+			        HiddenParagraph(i+1,1) = last(0) + &quot; &quot; + last(1)
+				End if
+				i = i + 1
+		End if
+	End If
+Next
+
+j=1
+stDTF(0).Content = HiddenParagraph(0 ,0)
+for i = Ubound(HiddenParagraph) to 1 step -1
+	stDTF(j).Content = HiddenParagraph(i ,1)
+	stDTF(j+1).Content = HiddenParagraph(i ,0)
+	j = j + 2
+Next
+
+PageCount = TotalPages
+ThisComponent.currentController.getViewCursor().jumpToPage(7)
+
+
+dim document   as object
+dim dispatcher as object
+
+document   = ThisComponent.CurrentController.Frame
+dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+
+dim args1(0) as new com.sun.star.beans.PropertyValue
+args1(0).Name = &quot;Text&quot;
+args1(0).Value = &quot;&quot;
+
+dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 0, args1())
+
+dispatcher.executeDispatch(document, &quot;.uno:SwBackspace&quot;, &quot;&quot;, 0,  args1())
+ThisComponent.currentController.getViewCursor().jumpToPage(1)
+&apos;oDoc = ThisComponent 
+&apos;oDoc.store()
+&apos;stDTF(2).Content = &quot;James&quot;
+&apos;var = pageNo(stDTF(2).Content)
+End Sub
 </script:module>

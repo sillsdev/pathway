@@ -259,10 +259,9 @@ namespace SIL.PublishingSolution
                 xPath = ".//xhtml:span[@class='scrBookCode']";
                 XmlNodeList verseNodeList = paraNode.SelectNodes(xPath, namespaceManager);
                 if (verseNodeList == null) return;
-                for (int j = 0; j < verseNodeList.Count; j++)
+                if(verseNodeList.Count > 0)
                 {
-                    SectionNodeList.Item(i).InnerText = verseNodeList[j].InnerText;
-                    break;
+                    SectionNodeList.Item(i).InnerText = verseNodeList[0].InnerText;
                 }
             }
             xDoc.Save(fileName);

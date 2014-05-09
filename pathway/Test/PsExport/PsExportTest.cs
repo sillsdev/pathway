@@ -17,14 +17,11 @@
 #region Using
 using System;
 using System.Collections;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.IO;
-using System.Xml;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
-using RevHomographNum;
 
 #endregion Using
 
