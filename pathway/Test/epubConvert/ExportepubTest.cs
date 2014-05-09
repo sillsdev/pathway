@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -216,7 +217,8 @@ namespace Test.epubConvert
             zf = new FastZip();
             zf.ExtractZip(result, FileOutput("ExportDictionaryCSSFileComparison"), ".*");
 
-            FileCompare("ExportDictionaryCSSFileComparison/OEBPS/book.css", "main/OEBPS/book.css");
+            TextFileAssert.AreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparison/OEBPS/book.css"), new ArrayList { 3, 52, 93, 110, 112, 643, 652, 965 });
+            
         }
 
         [Test]

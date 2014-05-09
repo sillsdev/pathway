@@ -282,13 +282,13 @@ namespace SIL.PublishingSolution
                     sw.WriteLine(@"\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm,includeheadfoot]{geometry}");
                 }
 
+                if (Convert.ToBoolean(CoverImage))
+                    sw.WriteLine(@"\usepackage{eso-pic}");
+
                 foreach (var package in includePackageList)
                 {
                     sw.WriteLine(package);
                 }
-
-                if (Convert.ToBoolean(CoverImage))
-                    sw.WriteLine(@"\usepackage{eso-pic}");
 
                 sw.WriteLine(_pageStyleFormat);
 
@@ -311,7 +311,6 @@ namespace SIL.PublishingSolution
                 InsertTableOfContent(sw);
 
             sw.WriteLine(@"\pagestyle{fancy} ");
-            sw.WriteLine(@"\renewcommand{\baselinestretch}{1.5} ");
             sw.Flush();
             sw.Close();
             MergeFile(newFile1, newFile2);
@@ -538,9 +537,8 @@ namespace SIL.PublishingSolution
             tableOfContent += "\\mbox{} \r\n";
             tableOfContent += "\\newpage \r\n";
             tableOfContent += "\\newpage \r\n";
-            
             tableOfContent += "\\setcounter{page}{1} \r\n";
-            tableOfContent += "\\pagenumbering{arabic}  \r\n";
+            tableOfContent += "\\pagenumbering{arabic} ";
             sw.WriteLine(tableOfContent);
         }
 

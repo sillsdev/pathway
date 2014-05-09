@@ -133,12 +133,9 @@ namespace Test.PsTool
             string familyName = "Doulos SIL";
             string style = "Regular";
             string actual = FontInternals.GetFontFileName(familyName, style);
-            string expected = "DoulosSIL-R.ttf";
-            if (Common.IsUnixOS())
-            {
-                expected = "DoulosSIL-R.ttf";
-            }
-            Assert.AreEqual(expected, Path.GetFileName(actual));
+            string expected = "DoulosSIL-R";
+            string actualFilename = Path.GetFileName(actual);
+            Assert.True(actualFilename.Contains(expected));
         }
 
 
