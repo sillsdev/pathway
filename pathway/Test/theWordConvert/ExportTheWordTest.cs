@@ -16,13 +16,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
 using NMock2;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
+using Test.CssDialog;
 
 namespace Test.TheWordConvertTest
 {
@@ -39,6 +44,7 @@ namespace Test.TheWordConvertTest
         private static string _inputPath;
         private static string _outputPath;
         private static string _expectedPath;
+        private static string _converterPath;
 
         [TestFixtureSetUp]
         public void Setup()
@@ -53,8 +59,21 @@ namespace Test.TheWordConvertTest
             if (Directory.Exists(_outputPath))
                 Directory.Delete(_outputPath, true);
             Directory.CreateDirectory(_outputPath);
+            _converterPath = Common.PathCombine(_outputPath, "TheWord");
+            FolderTree.Copy(Path.Combine(Common.ProgInstall, "TheWord"), _converterPath);
+            FolderTree.Copy(Path.Combine(_converterPath, Directory.Exists(@"C:\Program Files (x86)") ? "x64" : "x32"), _converterPath);
         }
         #endregion setup
+
+        /// <summary>
+        ///A test for ExportTheWord Constructor
+        ///</summary>
+        [Test]
+        public void ExportTheWordConstructorTest()
+        {
+            var target = new ExportTheWord();
+            Assert.IsNotNull(target);
+        }
 
         [Test]
         public void ExportTypeTest()
@@ -457,6 +476,132 @@ namespace Test.TheWordConvertTest
             TestDataCase("GEN", "001GENheg2.usx", 4, "<sup>(4a-4b)</sup> Ama Lamtua Allah in koet apan-dapa kua nol apan-kloma kia ka, un dehet ta ela.<CM> <sup>4b</sup> <TS1>Ama Lamtua Allah koet biklobe nol bihata<Ts><TS3><i>(<a href=\"tw://bible.*?40.19:4-6.1\">Matius 19:4-6</a>; <a href=\"tw://bible.*?41.10:4-9.1\">Markus 10:4-9</a>; <a href=\"tw://bible.*?46.6:16.1\">Korintus mesa la 6:16</a>; <a href=\"tw://bible.*?46.15:45.1\">15:45</a>, <a href=\"tw://bible.*?46.15:45.47\">47</a>; <a href=\"tw://bible.*?49.5:31-33.1\">Efesus 5:31-33</a>)</i><Ts>Dedeng AMA LAMTUA Allah halas-sam mana le koet apan-dapa ku nol apan-kloma kia ka,", bookNames, ".");
         }
 
+        /// <summary>
+        ///A test for AttachMetadata
+        ///</summary>
+        [Test]
+        public void AttachMetadataTest()
+        {
+            Common.Testing = true;      // Don't write settings to settings folder.
+            var inputParams = Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.ScriptureStyleSettingsCopy.xml");
+            Debug.Assert(inputParams != null);
+            Param.LoadValues(inputParams);
+            var memory = new MemoryStream();
+            var sw = new StreamWriter(memory, Encoding.UTF8);
+            AttachMetadata(sw);
+            sw.Flush();
+            Assert.AreEqual(579, memory.Length);
+        }
+
+        /// <summary>
+        ///A Bad Converter Path test for ConvertToMySword
+        ///</summary>
+        [Test]
+        public void ConvertToMySwordBadConvertPathTest()
+        {
+            string resultName = string.Empty;
+            string tempTheWordCreatorPath = string.Empty;
+            string exportTheWordInputPath = string.Empty;
+            Assert.Throws(typeof (Win32Exception), delegate
+                {
+                    var actual = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
+                });
+            //Assert.AreEqual("<No MySword Result>", actual);
+        }
+
+        /// <summary>
+        ///A No Output test for ConvertToMySword
+        ///</summary>
+        [Test]
+        public void ConvertToMySwordNoOutputTest()
+        {
+            string resultName = string.Empty;
+            string tempTheWordCreatorPath = _converterPath;
+            string exportTheWordInputPath = string.Empty;
+            var actual = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
+            Assert.AreEqual("<No MySword Result>", actual);
+        }
+
+        /// <summary>
+        ///A test for ConvertToMySword
+        ///</summary>
+        [Test]
+        public void ConvertToMySwordTest()
+        {
+            const string nkont = "nko.nt";
+            var outName = Path.Combine(Path.Combine(_outputPath, "TheWord"), nkont);
+            File.Copy(Path.Combine(_inputPath, nkont), outName, true); // overwrite
+            const string resultName = nkont;
+            string tempTheWordCreatorPath = _converterPath;
+            string exportTheWordInputPath = _outputPath;
+            var actual = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
+            Assert.AreEqual(Path.Combine(_outputPath, "nko.bbl.mybible"), actual);
+            Assert.True(File.Exists(actual));
+        }
+
+        /// <summary>
+        ///A test for CopyTheWordFolderToTemp
+        ///</summary>
+        [Test]
+        public void CopyTheWordFolderToTempTest()
+        {
+            const string theWord = "TheWord";
+            string sourceFolder = Path.Combine(Common.ProgBase, theWord);
+            string destFolder = Path.Combine(Path.GetTempPath(), theWord);
+            CopyTheWordFolderToTemp(sourceFolder, destFolder);
+            Assert.AreEqual(6, new DirectoryInfo(destFolder).GetFiles().Length);
+            Directory.Delete(destFolder, true); // Recurse and delete all sub folders too
+        }
+
+        /// <summary>
+        ///A test for CreateRAMP
+        ///</summary>
+        [Test]
+        public void CreateRampTest()
+        {
+            Common.Testing = true;
+            var projInfo = (IPublicationInformation) mocks.NewMock(typeof (IPublicationInformation));
+            Expect.Once.On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(_outputPath));
+            Expect.Once.On(projInfo).GetProperty("ProjectInputType").Will(Return.Value("Scripture"));
+            CreateRAMP(projInfo);
+            mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        /// <summary>
+        ///A test for DisplayMessageReport
+        ///</summary>
+        [Test]
+        public void DisplayMessageReportTest()
+        {
+            Common.Testing = true;
+            DisplayMessageReport();
+        }
+
+        /// <summary>
+        ///A test for Export
+        ///</summary>
+        [Test]
+        public void ExportTest()
+        {
+            Common.Testing = true;
+            var projInfo = new PublicationInformation();
+            var target = new ExportTheWord();
+            CommonTestMethod.DisableDebugAsserts();
+            bool actual = target.Export(projInfo);
+            Assert.False(actual);
+            CommonTestMethod.EnableDebugAsserts();
+        }
+
+        /// <summary>
+        ///A test for FindParatextProject
+        ///</summary>
+        [Test]
+        public void FindParatextProjectTest()
+        {
+            FindParatextProject();
+            Assert.AreEqual(0, Ssf.Length); // Since we are not running from Paratext or PathwayB
+        }
+
         //[Test]
         //public void myTest()
         //{
@@ -469,5 +614,10 @@ namespace Test.TheWordConvertTest
             return Common.PathCombine(_inputPath, fileName);
         }
         #endregion Private Functions
+    }
+
+    public interface IStreamWriter
+    {
+        void Write(string value);
     }
 }

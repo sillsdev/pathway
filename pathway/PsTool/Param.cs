@@ -224,48 +224,13 @@ namespace SIL.Tool
             }
             UnLoadValues();
 
-			try 
+			try
 			{
-				var xmlReaderSettings = new XmlReaderSettings();
-				xmlReaderSettings.ValidationType = ValidationType.Schema;
-				var resolver = new XmlUrlResolver();
-				resolver.Credentials = System.Net.CredentialCache.DefaultCredentials;
-                if (Common.IsUnixOS())
-                {
-                    xmlReaderSettings.XmlResolver = resolver;
-                }
-                else
-                {
-                    xmlReaderSettings.XmlResolver = null;
-                }
-			    xmlReaderSettings.ValidationEventHandler += new ValidationEventHandler (ValidationCallBack);
-	            _validateXmlSuccess = true;
-	            var reader = XmlReader.Create(path, xmlReaderSettings);
-				xmlMap.Load(reader);
-	            reader.Close();
-	            if (!_validateXmlSuccess)
-	            {
-	                InvalidStyleSettingsException err = new InvalidStyleSettingsException();
-	                err.ErrorMessage = _validateXmlError.ToString();
-	                err.FullFilePath = path;
-	                throw err;
-	            }
-	            XmlNode root = xmlMap.DocumentElement;
-	            if (root != null)
-	            {
-	                LoadDictionary(Value, "settings/property", "value");
-	                LoadDictionary(DefaultValue, "defaultSettings/property", "value");
-	                ApplyVariables();
-	                ArrayList keys = new ArrayList();
-	                foreach (string key in Value.Keys)
-	                    keys.Add(key);
-	                foreach (string key in keys)
-	                {
-	                    Value[key] = Common.DirectoryPathReplace(Value[key]);
-	                }
-	            }
-	            return root;
-			} 
+			    var sr = new StreamReader(path);
+			    var result = LoadValues(sr.BaseStream);
+                sr.Close();
+			    return result;
+			}
 			catch (Exception ex) 
 			{
 				var sb = new StringBuilder();
@@ -278,6 +243,37 @@ namespace SIL.Tool
 				MessageBox.Show(sb.ToString(), "Fatal Error");
 				return null;
 			}
+        }
+
+        public static XmlNode LoadValues(Stream stream)
+        {
+            var xmlReaderSettings = new XmlReaderSettings {ValidationType = ValidationType.Schema};
+            var resolver = new XmlUrlResolver {Credentials = System.Net.CredentialCache.DefaultCredentials};
+            xmlReaderSettings.XmlResolver = Common.IsUnixOS() ? resolver : null;
+            xmlReaderSettings.ValidationEventHandler += ValidationCallBack;
+            _validateXmlSuccess = true;
+            var reader = XmlReader.Create(stream, xmlReaderSettings);
+            xmlMap.Load(reader);
+            reader.Close();
+            if (!_validateXmlSuccess)
+            {
+                throw new InvalidStyleSettingsException { ErrorMessage = _validateXmlError.ToString() };
+            }
+            XmlNode root = xmlMap.DocumentElement;
+            if (root != null)
+            {
+                LoadDictionary(Value, "settings/property", "value");
+                LoadDictionary(DefaultValue, "defaultSettings/property", "value");
+                ApplyVariables();
+                var keys = new ArrayList();
+                foreach (string key in Value.Keys)
+                    keys.Add(key);
+                foreach (string key in keys)
+                {
+                    Value[key] = Common.DirectoryPathReplace(Value[key]);
+                }
+            }
+            return root;
         }
 
         /// <summary>

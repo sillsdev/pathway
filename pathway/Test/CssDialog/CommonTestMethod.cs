@@ -37,5 +37,15 @@ namespace Test.CssDialog
             }
         }
 
+        public static void EnableDebugAsserts()
+        {
+            if (traceListeners.Count <= 0) return;
+            Debug.Listeners.Clear();
+            for (var i = traceListeners.Count; i-- != 0;)
+            {
+                Debug.Listeners.Add((TraceListener)traceListeners[0]);
+                traceListeners.RemoveAt(0);
+            }
+        }
     }
 }

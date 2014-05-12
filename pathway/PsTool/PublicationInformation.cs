@@ -28,6 +28,7 @@ namespace SIL.Tool
     {
         string DefaultXhtmlFileWithPath { get; set; }
         string DefaultCssFileWithPath { get; set; }
+        string ProjectInputType { get; set; }
     }
 
     /// <summary>

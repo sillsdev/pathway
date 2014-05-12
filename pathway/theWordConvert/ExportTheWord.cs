@@ -162,11 +162,11 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        private void DisplayMessageReport()
+        protected void DisplayMessageReport()
         {
-            var result = MessageBox.Show("Display issues encountered during conversion?", "theWord Conversion Messages",
-                                         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error,
-                                         MessageBoxDefaultButton.Button1);
+            var result = !Common.Testing? MessageBox.Show("Display issues encountered during conversion?", "theWord Conversion Messages",
+                                            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error,
+                                            MessageBoxDefaultButton.Button1) : DialogResult.No;
             switch (result)
             {
                 case DialogResult.Yes:
@@ -180,7 +180,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void CreateRAMP(PublicationInformation projInfo)
+        protected void CreateRAMP(IPublicationInformation projInfo)
         {
             Ramp ramp = new Ramp();
             ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".mybible,.nt,.ont", projInfo.ProjectInputType);
@@ -188,6 +188,7 @@ namespace SIL.PublishingSolution
 
         private static void ReportFailure(Exception ex)
         {
+            if (Common.Testing) return;
             if (ex.Message.Contains("BookNames"))
             {
                 MessageBox.Show("Please run the References basic check.", "theWord Export", MessageBoxButtons.OK,
@@ -409,7 +410,7 @@ namespace SIL.PublishingSolution
             return otFlag;
         }
 
-        private static void FindParatextProject()
+        protected static void FindParatextProject()
         {
             RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out ParatextData);
             var sh = new SettingsHelper(Param.DatabaseName);
@@ -497,7 +498,7 @@ namespace SIL.PublishingSolution
             return folder;
         }
 
-        private void CopyTheWordFolderToTemp(string sourceFolder, string destFolder)
+        protected void CopyTheWordFolderToTemp(string sourceFolder, string destFolder)
         {
             if (Directory.Exists(destFolder))
             {
@@ -507,7 +508,7 @@ namespace SIL.PublishingSolution
             FolderTree.Copy(sourceFolder, destFolder);
         }
 
-        private static string ConvertToMySword(string resultName, string tempTheWordCreatorPath, string exportTheWordInputPath)
+        protected static string ConvertToMySword(string resultName, string tempTheWordCreatorPath, string exportTheWordInputPath)
         {
             var myProc = Process.Start(new ProcessStartInfo
             {
@@ -529,7 +530,7 @@ namespace SIL.PublishingSolution
             return mySwordResult;
         }
 
-        private void AttachMetadata(StreamWriter sw)
+        protected void AttachMetadata(StreamWriter sw)
         {
             var format = @"verse.rule=""(<a href[^>]+>)(.*?)(</a>)"" ""$1<font color=defclr6>$2</font>$3""
 id=W{0}
@@ -586,9 +587,12 @@ about={2} \
                     return curFormat;
                 }
             }
-            var sw = new StreamWriter(fullPath);
-            sw.Write(format);
-            sw.Close();
+            if (!Common.Testing)
+            {
+                var sw = new StreamWriter(fullPath);
+                sw.Write(format);
+                sw.Close();
+            }
             return format;
         }
 
