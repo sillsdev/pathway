@@ -171,6 +171,36 @@ namespace Test.TheWordConvertTest
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        ///A test for ProcessAllBooks
+        ///</summary>
+        [Test]
+        public void ProcessAllBooksTest()
+        {
+            Common.Testing = true;      // Don't write settings to settings folder.
+            var inputParams = Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.ScriptureStyleSettingsCopy.xml");
+            Debug.Assert(inputParams != null);
+            Param.LoadValues(inputParams);
+            LoadMyXslt();
+            string fullName = Path.GetTempFileName();
+            const bool otFlag = false;
+            IEnumerable<string> otBooks = new List<string>(0);
+            IEnumerable<string> ntBooks = new List<string>(2) { "MAT", "MRK" };
+            var codeNames = new Dictionary<string, string>(2);
+            codeNames["MAT"] = FileInput(@"USX\040MAT.usx");
+            codeNames["MRK"] = FileInput(@"USX\041MRK.usx");
+            var xsltArgs = new XsltArgumentList();
+            xsltArgs.AddParam("bookNames", "", "file://" + FileInput("BookNames.xml"));
+            var inProcess = (IInProcess)mocks.NewMock(typeof(IInProcess));
+            Expect.Exactly(2).On(inProcess).Method("PerformStep");
+            ProcessAllBooks(fullName, otFlag, otBooks, ntBooks, codeNames, xsltArgs, inProcess);
+            var sr = new StreamReader(fullName);
+            var data = sr.ReadToEnd();
+            sr.Close();
+            File.Delete(fullName);
+            Assert.AreEqual(1773, data.Split(new[] { '\n' }).Length);
+            mocks.VerifyAllExpectationsHaveBeenMet();
+        }
 
         [Test]
         public void ProcessTestamentTest()
@@ -593,6 +623,22 @@ namespace Test.TheWordConvertTest
         }
 
         /// <summary>
+        ///A test for Launch
+        ///</summary>
+        [Test]
+        public void LaunchTest()
+        {
+            Common.Testing = true;
+            const string exportType = "theWord/mySword";
+            var publicationInformation = new PublicationInformation();
+            var target = new ExportTheWord();
+            CommonTestMethod.DisableDebugAsserts();
+            bool actual = target.Launch(exportType, publicationInformation);
+            Assert.False(actual);
+            CommonTestMethod.EnableDebugAsserts();
+        }
+
+        /// <summary>
         ///A test for FindParatextProject
         ///</summary>
         [Test]
@@ -600,6 +646,272 @@ namespace Test.TheWordConvertTest
         {
             FindParatextProject();
             Assert.AreEqual(0, Ssf.Length); // Since we are not running from Paratext or PathwayB
+        }
+
+        /// <summary>
+        ///A test for GetBookNamesUri
+        ///</summary>
+        [Test]
+        public void GetBookNamesUriTest()
+        {
+            string actual = GetBookNamesUri();
+            Assert.AreEqual("file:///BookNames.xml", actual);
+       }
+
+        /// <summary>
+        ///A test for GetFormat
+        ///</summary>
+        [Test]
+        public void GetFormatTest()
+        {
+            string thewordformatTxt = string.Empty;
+            string format = string.Empty;
+            string actual;
+            Assert.Throws(typeof (UnauthorizedAccessException), delegate
+                {
+                    actual = GetFormat(thewordformatTxt, format);
+                });
+        }
+
+        /// <summary>
+        ///A test for GetRtlParam
+        ///</summary>
+        [Test]
+        public void GetRtlParamTest()
+        {
+            XsltArgumentList xsltArgs = null;
+            GetRtlParam(xsltArgs);
+            Assert.False(R2l);
+        }
+
+        /// <summary>
+        ///A test for GetSsfValue
+        ///</summary>
+        [Test]
+        public void GetSsfValueTest()
+        {
+            const string xpath = "//EthnologueCode";
+            const string def = "zxx"; // Default
+            const string expected = "zxx";
+            string actual = GetSsfValue(xpath, def);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for GetSsfValue
+        ///</summary>
+        [Test]
+        public void GetSsfValueTest1()
+        {
+            const string xpath = "//Name";
+            string actual = GetSsfValue(xpath);
+            Assert.Null(actual);
+        }
+
+        /// <summary>
+        ///A test for LaunchFileNavigator
+        ///</summary>
+        [Test]
+        public void LaunchFileNavigatorTest()
+        {
+            Common.Testing = true;
+            string exportTheWordInputPath = string.Empty; // TODO: Initialize to an appropriate value
+            LaunchFileNavigator(exportTheWordInputPath);
+            Assert.AreEqual(0, SubProcess.ExitCode);
+        }
+
+        /// <summary>
+        ///A test for LoadMetadata
+        ///</summary>
+        [Test]
+        public void LoadMetadataTest()
+        {
+            Common.Testing = true;      // Don't write settings to settings folder.
+            var inputParams = Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.ScriptureStyleSettingsCopy.xml");
+            Debug.Assert(inputParams != null);
+            Param.LoadValues(inputParams);
+            LoadMetadata();
+            Assert.Greater(Param.Value.Count, 0);
+        }
+
+        /// <summary>
+        ///A test for LogStatus
+        ///</summary>
+        [Test]
+        public void LogStatusTest()
+        {
+            var savedOut = Console.Out;
+            var memory = new MemoryStream();
+            var writer = new StreamWriter(memory);
+            Console.SetOut(writer);
+            const string format = "Processing: {0}";
+            object[] args = { "MyName.txt" };
+            Verbosity = 0;
+            LogStatus(format, args);
+            writer.Flush();
+            memory.Flush();
+            Assert.AreEqual(0, memory.Length);
+            Console.SetOut(savedOut);
+            writer.Close();
+        }
+
+        /// <summary>
+        ///A test for LogStatus
+        ///</summary>
+        [Test]
+        public void LogStatusTest1()
+        {
+            var savedOut = Console.Out;
+            var memory = new MemoryStream();
+            var writer = new StreamWriter(memory);
+            Console.SetOut(writer);
+            const string format = "Processing: {0}";
+            object[] args = { "MyName.txt" };
+            Verbosity = 1;
+            LogStatus(format, args);
+            writer.Flush();
+            memory.Flush();
+            Assert.AreEqual(26, memory.Length);
+            Console.SetOut(savedOut);
+            writer.Close();
+            Verbosity = 0;
+        }
+
+        /// <summary>
+        ///A test for ReportFailure
+        ///</summary>
+        [Test]
+        public void ReportFailureTest()
+        {
+            Common.Testing = true;
+            Exception ex = new ArgumentException("Test Message");
+            ReportFailure(ex);
+        }
+
+        /// <summary>
+        ///A test for ReportResults
+        ///</summary>
+        [Test]
+        public void ReportResultsTest()
+        {
+            Common.Testing = true;
+            const string nsont = "nko.nt";
+            var resultFullName = Path.Combine(_outputPath, nsont);
+            File.Copy(Path.Combine(_inputPath, nsont), resultFullName);
+            var mySwordResult = Path.Combine(_outputPath, "nko.bbl.mysword");
+            var exportTheWordInputPath = Path.Combine(Common.ProgInstall, "TheWord");
+            const bool expected = true;
+            bool actual = ReportResults(resultFullName, mySwordResult, exportTheWordInputPath);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for ReportWhenTheWordInstalled
+        ///</summary>
+        [Test]
+        public void ReportWhenTheWordInstalledTest()
+        {
+            Common.Testing = true;
+            const string nsont = "nko.nt";
+            var resultFullName = Path.Combine(_outputPath, nsont);
+            File.Copy(Path.Combine(_inputPath, nsont), resultFullName, true);
+            string theWordFolder =
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "The Word");
+            string mySwordResult = Path.Combine(_outputPath, "nko.bbl.mysword");
+            string exportTheWordInputPath = Path.Combine(Common.ProgInstall, "TheWord");
+            ReportWhenTheWordInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
+        }
+
+        /// <summary>
+        ///A test for ReportWhenTheWordNotInstalled
+        ///</summary>
+        [Test]
+        public void ReportWhenTheWordNotInstalledTest()
+        {
+            Common.Testing = true;
+            const string nsont = "nko.nt";
+            var resultFullName = Path.Combine(_outputPath, nsont);
+            File.Copy(Path.Combine(_inputPath, nsont), resultFullName, true);
+            var theWordFolder =
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "The Word");
+            var mySwordResult = Path.Combine(_outputPath, "nko.bbl.mysword");
+            var exportTheWordInputPath = Path.Combine(Common.ProgInstall, "TheWord");
+            ReportWhenTheWordNotInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
+        }
+
+        /// <summary>
+        ///A test for TheWordCreatorTempDirectory
+        ///</summary>
+        [Test]
+        public void TheWordCreatorTempDirectoryTest()
+        {
+            var theWordFullPath = Path.Combine(Common.ProgInstall, "TheWord");
+            string actual = TheWordCreatorTempDirectory(theWordFullPath);
+            Assert.True(actual.EndsWith("AppData\\Local\\Temp\\TheWord"));
+        }
+
+        /// <summary>
+        ///A test for Transform
+        ///</summary>
+        [Test]
+        public void TransformTest()
+        {
+            LoadXslt();
+            var name = Path.GetTempFileName();
+            var swIn = new StreamWriter(name);
+            swIn.Write("<usx><book code=\"2TI\"/></usx>");
+            swIn.Close();
+            var xsltArgs = new XsltArgumentList();
+            xsltArgs.AddParam("bookNames", "", "file://" + FileInput("BookNames.xml"));
+            var memory = new MemoryStream();
+            var sw = new StreamWriter(memory);
+            Transform(name, xsltArgs, sw);
+            sw.Flush();
+            File.Delete(name);
+            memory.Position = 0;
+            var sr = new StreamReader(memory);
+            var data = sr.ReadToEnd();
+            sr.Close();
+            Assert.AreEqual(84, data.Split(new[] { '\n' }).Length);
+        }
+
+        /// <summary>
+        ///A test for UsxDir
+        ///</summary>
+        [Test]
+        public void UsxDirTest()
+        {
+            var exportTheWordInputPath = _inputPath;
+            var expected = Path.Combine(_inputPath, "USX");
+            string actual = UsxDir(exportTheWordInputPath);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for UsxDir
+        ///</summary>
+        [Test]
+        public void UsxDirTest1()
+        {
+            var exportTheWordInputPath = Path.Combine(_inputPath, "USX");
+            Assert.Throws(typeof (FileNotFoundException), delegate
+                {
+                    string actual = UsxDir(exportTheWordInputPath);
+                });
+        }
+
+        /// <summary>
+        ///A test for XsltMessage
+        ///</summary>
+        [Test]
+        public void XsltMessageTest()
+        {
+            const object o = null;
+            const XsltMessageEncounteredEventArgs a = null;
+            Assert.Throws(typeof (NullReferenceException), delegate
+                {
+                    XsltMessage(o, a);
+                });
         }
 
         //[Test]
@@ -614,10 +926,5 @@ namespace Test.TheWordConvertTest
             return Common.PathCombine(_inputPath, fileName);
         }
         #endregion Private Functions
-    }
-
-    public interface IStreamWriter
-    {
-        void Write(string value);
     }
 }

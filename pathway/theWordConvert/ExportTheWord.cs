@@ -29,7 +29,7 @@ namespace SIL.PublishingSolution
 {
     public class ExportTheWord : IExportProcess
     {
-        static int Verbosity = 0;
+        protected static int Verbosity = 0;
         protected static object ParatextData;
         protected static string Ssf;
         protected static bool R2l;
@@ -186,7 +186,7 @@ namespace SIL.PublishingSolution
             ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".mybible,.nt,.ont", projInfo.ProjectInputType);
         }
 
-        private static void ReportFailure(Exception ex)
+        protected static void ReportFailure(Exception ex)
         {
             if (Common.Testing) return;
             if (ex.Message.Contains("BookNames"))
@@ -200,7 +200,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static bool ReportResults(string resultFullName, string mySwordResult, string exportTheWordInputPath)
+        protected static bool ReportResults(string resultFullName, string mySwordResult, string exportTheWordInputPath)
         {
             bool success;
 
@@ -228,21 +228,24 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                MessageBox.Show("Failed Exporting TheWord Process.", "theWord Export", MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
+                if (!Common.Testing)
+                {
+                    MessageBox.Show("Failed Exporting TheWord Process.", "theWord Export", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                }
                 success = false;
             }
             return success;
         }
 
-        private static void ReportWhenTheWordNotInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
+        protected static void ReportWhenTheWordNotInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
         {
-            string msgFormat = "Do you want to open the folder with the results?\n\n\u25CF Click Yes.\n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n";
-            string resultName = Path.GetFileName(resultFullName);
-            string resultDir = Path.GetDirectoryName(resultFullName);
-            string msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
-            DialogResult dialogResult = MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNo,
-                                                        MessageBoxIcon.Information);
+            const string msgFormat = "Do you want to open the folder with the results?\n\n\u25CF Click Yes.\n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n";
+            var resultName = Path.GetFileName(resultFullName);
+            var resultDir = Path.GetDirectoryName(resultFullName);
+            var msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
+            var dialogResult = !Common.Testing ? MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information) : DialogResult.Cancel;
 
             if (dialogResult == DialogResult.Yes)
             {
@@ -250,13 +253,13 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static void ReportWhenTheWordInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
+        protected static void ReportWhenTheWordInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
         {
-            string msgFormat = "Do you want to start theWord?\n\n\u25CF Click Yes.\n\nThe program will copy the \"{0}\" file to {1} and start theWord. \n\n\u25CF Click No. \n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n";
-            string resultName = Path.GetFileName(resultFullName);
-            string resultDir = Path.GetDirectoryName(resultFullName);
-            string msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
-            DialogResult dialogResult = MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+            const string msgFormat = "Do you want to start theWord?\n\n\u25CF Click Yes.\n\nThe program will copy the \"{0}\" file to {1} and start theWord. \n\n\u25CF Click No. \n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n";
+            var resultName = Path.GetFileName(resultFullName);
+            var resultDir = Path.GetDirectoryName(resultFullName);
+            var msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
+            var dialogResult = !Common.Testing ? MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) : DialogResult.Cancel;
 
             if (dialogResult == DialogResult.Yes)
             {
@@ -270,7 +273,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static void LaunchFileNavigator(string exportTheWordInputPath)
+        protected static void LaunchFileNavigator(string exportTheWordInputPath)
         {
             const bool noWait = false;
             SubProcess.Run(exportTheWordInputPath, Common.IsUnixOS() ? "nautilus" : "explorer.exe", exportTheWordInputPath, noWait);
@@ -315,7 +318,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void ProcessAllBooks(string fullName, bool otFlag, IEnumerable<string> otBooks, IEnumerable<string> ntBooks, Dictionary<string, string> codeNames, XsltArgumentList xsltArgs, InProcess inProcess)
+        protected void ProcessAllBooks(string fullName, bool otFlag, IEnumerable<string> otBooks, IEnumerable<string> ntBooks, Dictionary<string, string> codeNames, XsltArgumentList xsltArgs, IInProcess inProcess)
         {
             LogStatus("Creating MySword: {0}", Path.GetFileName(fullName));
             // false = do not append but overwrite instead
@@ -370,7 +373,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static void Transform(string name, XsltArgumentList xsltArgs, StreamWriter sw)
+        protected static void Transform(string name, XsltArgumentList xsltArgs, StreamWriter sw)
         {
             //var readerSettings = new XmlReaderSettings {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
             var readerSettings = new XmlReaderSettings {};
@@ -417,11 +420,11 @@ namespace SIL.PublishingSolution
             Ssf = sh.GetSettingsFilename();
         }
 
-        private static string GetSsfValue(string xpath)
+        protected static string GetSsfValue(string xpath)
         {
             return GetSsfValue(xpath, null);
         }
-        private static string GetSsfValue(string xpath, string def)
+        protected static string GetSsfValue(string xpath, string def)
         {
             var node = Common.GetXmlNode(Ssf, xpath);
             return (node != null)? node.InnerText : def;
@@ -436,7 +439,7 @@ namespace SIL.PublishingSolution
             return xsltArgs;
         }
 
-        private static void GetRtlParam(XsltArgumentList xsltArgs)
+        protected static void GetRtlParam(XsltArgumentList xsltArgs)
         {
             R2l = false;
             var language = GetSsfValue("//Language", "English");
@@ -468,13 +471,13 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static string GetBookNamesUri()
+        protected static string GetBookNamesUri()
         {
             var myProj = Common.PathCombine((string) ParatextData, GetSsfValue("//Name"));
             return "file:///" + Common.PathCombine(myProj, "BookNames.xml");
         }
 
-        private static string UsxDir(string exportTheWordInputPath)
+        protected static string UsxDir(string exportTheWordInputPath)
         {
             var usxDir = Common.PathCombine(exportTheWordInputPath, "USX");
             if (!Directory.Exists(usxDir))
@@ -484,7 +487,7 @@ namespace SIL.PublishingSolution
             return usxDir;
         }
 
-        private string TheWordCreatorTempDirectory(string theWordFullPath)
+        protected string TheWordCreatorTempDirectory(string theWordFullPath)
         {
             var theWordDirectoryName = Path.GetFileNameWithoutExtension(theWordFullPath);
             Debug.Assert(theWordDirectoryName != null);
@@ -575,7 +578,7 @@ about={2} \
             sw.Write(string.Format(myFormat, langCode, shortTitle, FullTitle, description, copyright, createDate, publisher, publishDate, creator, font));
         }
 
-        private string GetFormat(string thewordformatTxt, string format)
+        protected string GetFormat(string thewordformatTxt, string format)
         {
             var folder = Common.GetAllUserPath();
             var fullPath = Common.PathCombine(Common.PathCombine(folder, "Scripture"), thewordformatTxt);
@@ -596,13 +599,11 @@ about={2} \
             return format;
         }
 
-        static void LogStatus(string format, params object[] args)
+        protected static void LogStatus(string format, params object[] args)
         {
-            if (Verbosity > 0)
-            {
-                Console.Write("# ");
-                Console.WriteLine(format, args);
-            }
+            if (Verbosity <= 0) return;
+            Console.Write("# ");
+            Console.WriteLine(format, args);
         }
 
     }

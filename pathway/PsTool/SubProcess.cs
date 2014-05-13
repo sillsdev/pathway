@@ -122,6 +122,8 @@ namespace SIL.Tool
             if (arg != null)
                 info.Arguments = arg;
             Debug.Print("Run: Filename: {0}", info.FileName);
+            ExitCode = 0;
+            if (Common.Testing) return;
             using (Process p1 = Process.Start(info))
             {
                 if (wait)
