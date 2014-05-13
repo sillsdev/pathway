@@ -99,7 +99,8 @@
             <option name="End of book" file=""/>
         </feature -->
     <feature name="Pictures">
-      <option name="Yes" file="Pictures_Yes.css" />
+      <option name="Frame" file="Pictures_Frame.css" />
+	  <option name="Paragraph" file="Pictures_Paragraph.css" />
       <option name="No" file="Pictures_No.css" />
     </feature>
 	<feature name="Running Head">

@@ -692,7 +692,160 @@ namespace SIL.PublishingSolution
             }
         }
 
- 
+        /// -------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Create a Graphics style in style.xml, if style has parent.
+        /// New style inherits its parent.
+        /// float = floatProperty =  left/ right/ center
+        /// display = displayproperty = none/ block
+        /// <list> 
+        /// </list>
+        /// </summary>
+        /// <param name="styleFilePath">syles.xml path</param>
+        /// <param name="makeClassName">combination of child and parent "style name"</param>
+        /// <param name="parentName">Parent "style name"</param>
+        /// <param name="floatProperty">Left/Right</param>
+        /// <param name="displayProperty">Left/Right</param>
+        /// <returns>None</returns>
+        /// -------------------------------------------------------------------------------------------
+        public void CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string floatProperty, string displayProperty)
+        {
+            const string className = "Graphics";
+            _styleXMLdoc = Common.DeclareXMLDocument(true);
+            _styleXMLdoc.Load(styleFilePath);
+
+            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+
+
+
+            // if new stylename exists
+            XmlElement root = _styleXMLdoc.DocumentElement;
+            string style = "//st:style[@st:name='" + makeClassName + "']";
+            if (root != null)
+            {
+                XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                if (node != null)
+                {
+                    return;
+                }
+                style = "//st:style[@st:name='" + className + "']";
+                node = root.SelectSingleNode(style, nsmgr); // work
+
+                XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
+                styleNode.InnerXml = node.OuterXml;
+                node.ParentNode.InsertAfter(styleNode, node);
+
+                //        <style:style style:name="fr4" style:family="graphic" style:parent-style-name="Graphics">
+                //    <style:graphic-properties fo:margin-left="0in" fo:margin-right="0in" fo:margin-top="0in"
+                //        fo:margin-bottom="0in" style:run-through="foreground" style:wrap="none"
+                //        style:vertical-pos="top" style:vertical-rel="paragraph-content"
+                //        style:horizontal-pos="center" style:horizontal-rel="paragraph-content"
+                //        style:mirror="none" fo:clip="rect(0in, 0in, 0in, 0in)" draw:luminance="0%"
+                //        draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%"
+                //        draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard"/>
+                //</style:style>
+
+                _nameElement = (XmlElement)node;
+
+                SetAttribute(makeClassName, "style:name");
+                string wrap = "dynamic";
+                if (displayProperty == "block")
+                {
+                    wrap = "none";
+                    displayProperty = "center";
+                }
+                else if (displayProperty == "frame")
+                {
+                    wrap = "dynamic";
+                    displayProperty = "right";
+                }
+
+                _nameElement = (XmlElement)node.ChildNodes[1];
+                SetAttribute("foreground", "style:run-through");
+                SetAttribute(wrap, "style:wrap");
+                SetAttribute("no-limit", "style:number-wrapped-paragraphs");
+                SetAttribute("false", "style:wrap-contour");
+                SetAttribute("from-top", "style:vertical-pos");
+                SetAttribute("paragraph-content", "style:vertical-rel");
+                SetAttribute(displayProperty, "style:horizontal-pos");
+                SetAttribute("paragraph", "style:horizontal-rel");
+                SetAttribute("true", "style:flow-with-text");
+            }
+            _styleXMLdoc.Save(styleFilePath);
+        }
+
+        /// <summary>
+        /// float = floatProperty =  left/ right/ center
+        /// display = displayproperty = none/ block
+        /// </summary>
+        /// <param name="styleFilePath"></param>
+        /// <param name="makeClassName"></param>
+        /// <param name="parentName"></param>
+        /// <param name="floatProperty"></param>
+        /// <param name="displayProperty"></param>
+        /// <param name="graphicStyle"></param>
+        public void CreateFrameStyle(string styleFilePath, string makeClassName, string parentName, string floatProperty, string displayProperty, string graphicStyle)
+        {
+            // float = floatProperty =  left/ right/ center
+            // display = displayproperty = none/ block
+
+            const string className = "Frame";
+            _styleXMLdoc = Common.DeclareXMLDocument(true);
+            _styleXMLdoc.Load(styleFilePath);
+
+            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+
+            // if new stylename exists
+            XmlElement root = _styleXMLdoc.DocumentElement;
+            string style = "//st:style[@st:name='" + makeClassName + "']";
+            if (root != null)
+            {
+                XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                if (node != null)
+                {
+                    return;
+                }
+                style = "//st:style[@st:name='" + className + "']";
+                node = root.SelectSingleNode(style, nsmgr); // work
+
+                XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
+                styleNode.InnerXml = node.OuterXml;
+                node.ParentNode.InsertAfter(styleNode, node);
+
+                _nameElement = (XmlElement)node;
+                SetAttribute(makeClassName, "style:name");
+                SetAttribute(graphicStyle, "style:parent-style-name");
+                string wrap = "dynamic";
+                if (displayProperty == "block")
+                {
+                    wrap = "none";
+                    displayProperty = "center";
+                }
+                else if (displayProperty == "frame")
+                {
+                    wrap = "dynamic";
+                    displayProperty = "right";
+                }
+
+                _nameElement = (XmlElement)node.ChildNodes[1];
+                SetAttribute("foreground", "style:run-through");
+                SetAttribute(wrap, "style:wrap");
+                SetAttribute("no-limit", "style:number-wrapped-paragraphs");
+                SetAttribute("false", "style:wrap-contour");
+                SetAttribute("from-top", "style:vertical-pos");
+                SetAttribute("paragraph-content", "style:vertical-rel");
+                SetAttribute(displayProperty, "style:horizontal-pos");
+                SetAttribute("paragraph", "style:horizontal-rel");
+                SetAttribute("true", "style:flow-with-text");
+
+            }
+            _styleXMLdoc.Save(styleFilePath);
+        }
+
 
         #region CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string position, string side)
         /// -------------------------------------------------------------------------------------------
@@ -709,7 +862,7 @@ namespace SIL.PublishingSolution
         /// <param name="side">Left/Right</param>
         /// <returns>None</returns>
         /// -------------------------------------------------------------------------------------------
-        public void CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string position, string side)
+        public void CreateGraphicsStyleLogo(string styleFilePath, string makeClassName, string parentName, string position, string side)
         {
             const string className = "Graphics";
 	        _styleXMLdoc = Common.DeclareXMLDocument(true);
@@ -821,7 +974,7 @@ namespace SIL.PublishingSolution
             _styleXMLdoc.Save(styleFilePath);
         }
 
-        public void CreateFrameStyle(string styleFilePath, string makeClassName, string parentName, string position, string side, string graphicStyle)
+        public void CreateFrameStyleLogo(string styleFilePath, string makeClassName, string parentName, string position, string side, string graphicStyle)
         {
 
             const string className = "Frame";

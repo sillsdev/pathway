@@ -508,14 +508,23 @@ namespace SIL.PublishingSolution
         {
             get
             {
+                string result;
                 string task = "pictureRight";
                 string key = "display";
-                string display = GetValue(task, key, "No");
-                if (display == "none")
+                string display = GetValue(task, key, "Frame");
+                if (display == "block")
                 {
-                    return "No";
+                    result =  "Paragraph";
                 }
-                return "Yes";
+                else if (display == "none")
+                {
+                    result = "No";
+                }
+                else
+                {
+                    result = "Frame";
+                }
+                return result;
             }
         }
 

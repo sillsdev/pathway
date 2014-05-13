@@ -195,7 +195,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlVerticalJustify.Text;
             Assert.AreEqual("Top", actual, "Grid vertical justify Test Failes");
             actual = cTool.DdlPicture.Text;
-            Assert.AreEqual("Yes", actual, "Grid picture Test Failes");
+            Assert.AreEqual("Paragraph", actual, "Grid picture Test Failes");
             actual = cTool.DdlLeading.Text;
             Assert.AreEqual("13", actual, "Grid leading Test Failes");
             actual = cTool.DdlRunningHead.Text;
@@ -260,7 +260,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlVerticalJustify.Text;
             Assert.AreEqual("Top", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlPicture.Text;
-            Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("Paragraph", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlLeading.Text;
             Assert.AreEqual("13", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlRunningHead.Text;

@@ -530,6 +530,55 @@ namespace SIL.Tool
             }
         }
 
+        public List<string> GetMultiPictureEntryId(string fileName)
+        {
+            string clsName, id, entryId = null;
+            bool isfirstImage = false;
+            List<string> entryIdList = new List<string>();
+            if (!File.Exists(fileName)) return null;
+            try
+            {
+                XmlTextReader _reader = Common.DeclareXmlTextReader(fileName, true);
+                while (_reader.Read())
+                {
+                    if (_reader.NodeType == XmlNodeType.Element)
+                    {
+                        if (_reader.Name == "div")
+                        {
+                            clsName = _reader.GetAttribute("class");
+                            id = _reader.GetAttribute("id");
+                            if (clsName != null)
+                            {
+                                if (clsName == "entry")
+                                {
+                                    isfirstImage = false;
+                                    entryId = id;
+                                }
+                            }
+                        }
+                        else if (_reader.Name == "img")
+                        {
+                            if (!isfirstImage)
+                            {
+                                isfirstImage = true;
+                            }
+                            else
+                            {
+                                if (entryId != null && !entryIdList.Contains(entryId))
+                                {
+                                    entryIdList.Add(entryId);
+                                }
+                            }
+                        }
+                    }
+                }
+                _reader.Close();
+            }
+            catch
+            {
+            }
+            return entryIdList;
+        }
 
         /// <summary>
         /// Returns the string contents of the copyright / license xhtml for inserting into the dictionary / scripture data.
