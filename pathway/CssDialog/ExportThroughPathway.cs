@@ -1058,7 +1058,7 @@ namespace SIL.PublishingSolution
         private void btnHelp_Click(object sender, EventArgs e)
         {
             SetTabbedHelpTopic();
-            SendKeys.Send("{F1}");
+            ShowHelp.ShowHelpTopicKeyPress(this, _helpTopic, Common.IsUnixOS());
         }
 
         private void BtnBrwsLayout_Click(object sender, EventArgs e)
@@ -1209,7 +1209,6 @@ namespace SIL.PublishingSolution
         private void lnkIP_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             _helpTopic = "Concepts/Intellectual_Property.htm";
-            SetTabbedHelpTopic();
             ShowHelp.ShowHelpTopicKeyPress(this, _helpTopic, Common.IsUnixOS());
         }
 
