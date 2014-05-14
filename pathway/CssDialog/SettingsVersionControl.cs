@@ -128,9 +128,9 @@ namespace SIL.PublishingSolution
             _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
             string pathwayFolder = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
             pathwayFolder = Common.PathCombine(pathwayFolder, "Pathway");
-            if (!Directory.Exists(pathwayFolder))
+            if (!Directory.Exists(pathwayFolder) || !Directory.Exists(_userFilePath))
             {
-                if (File.Exists(_userFilePath))
+                if (!File.Exists(_userFilePath))
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
                 }
