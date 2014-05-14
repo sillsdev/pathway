@@ -520,7 +520,7 @@ namespace Test.TheWordConvertTest
             var sw = new StreamWriter(memory, Encoding.UTF8);
             AttachMetadata(sw);
             sw.Flush();
-            Assert.AreEqual(579, memory.Length);
+            Assert.AreEqual(581, memory.Length);
         }
 
         /// <summary>
@@ -664,13 +664,12 @@ namespace Test.TheWordConvertTest
         [Test]
         public void GetFormatTest()
         {
+            Common.Testing = true;
             string thewordformatTxt = string.Empty;
             string format = string.Empty;
             string actual;
-            Assert.Throws(typeof (UnauthorizedAccessException), delegate
-                {
-                    actual = GetFormat(thewordformatTxt, format);
-                });
+            actual = GetFormat(thewordformatTxt, format);
+            Assert.AreEqual(string.Empty, actual);
         }
 
         /// <summary>
@@ -901,17 +900,20 @@ namespace Test.TheWordConvertTest
         }
 
         /// <summary>
-        ///A test for XsltMessage
+        ///A test for PostTransformMessage
         ///</summary>
         [Test]
-        public void XsltMessageTest()
+        public void PostTransformMessageTest()
         {
-            const object o = null;
-            const XsltMessageEncounteredEventArgs a = null;
-            Assert.Throws(typeof (NullReferenceException), delegate
-                {
-                    XsltMessage(o, a);
-                });
+            _messageFullName = Path.GetTempFileName();
+            const string message = "Test Message";
+            PostTransformMessage(message);
+            XsltMessageClose();
+            var data = FileData.Get(_messageFullName);
+            File.Delete(_messageFullName);
+            Assert.True(data.Contains(message));
+            Assert.True(data.StartsWith("<html>"));
+            Assert.True(data.TrimEnd().EndsWith("</html>"));
         }
 
         //[Test]

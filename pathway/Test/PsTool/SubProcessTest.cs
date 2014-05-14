@@ -29,36 +29,31 @@ namespace Test.PsTool
     public class SubProcessTest
     {
         /// <summary>
-        ///A test for Run
-        ///</summary>
-        [Test]
-        public void RunEmptyTest1()
-        {
-            string instPath = string.Empty;
-            string name = string.Empty;
-            bool wait = false;
-            Assert.Throws<InvalidOperationException>(
-                delegate
-                    {
-                        SubProcess.Run(instPath, name, wait);
-                    }
-                );
-        }
-
-        /// <summary>
-        ///A test for Run
+        ///A test for Run when not testing
         ///</summary>
         [Test]
         public void RunEmptyTest()
         {
+            Common.Testing = false;
             string instPath = string.Empty;
             string name = string.Empty;
-            Assert.Throws<InvalidOperationException>(
-                delegate
-                    {
-                        SubProcess.Run(instPath, name);
-                    }
-                );
+            Assert.Throws(typeof (InvalidOperationException), delegate
+                {
+                    SubProcess.Run(instPath, name);
+                });
+        }
+
+        /// <summary>
+        /// A test for Run when Testing
+        /// </summary>
+        [Test]
+        public void RunEmptyTest1()
+        {
+            Common.Testing = true;
+            string instPath = string.Empty;
+            string name = string.Empty;
+            SubProcess.Run(instPath, name);
+            Assert.AreEqual(0, SubProcess.ExitCode);
         }
 
         /// <summary>
@@ -69,14 +64,16 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void RunTest()
         {
+            Common.Testing = false; // Testing as true will prevent Java from being called.
             string instPath = Path.GetTempPath();
             string name = "java";
             string arg = "-version";
             bool wait = true;
             const string EchoLog = "JavaVersion.log";
-            var progFolder = SubProcess.JavaLocation(name);
+            SubProcess.Location = string.Empty;
+            var javaFullName = SubProcess.JavaFullName(name);
             SubProcess.RedirectOutput = EchoLog;
-            SubProcess.Run(instPath, Common.PathCombine(progFolder,name), arg, wait);
+            SubProcess.Run(instPath, javaFullName, arg, wait);
             string logFullName = Common.PathCombine(instPath, EchoLog);
             Assert.IsTrue(File.Exists(logFullName));
             File.Delete(logFullName);

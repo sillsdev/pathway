@@ -357,8 +357,7 @@ namespace SIL.PublishingSolution
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
             var creatorFullPath = Common.PathCombine(goBibleCreatorPath, Creator);
-            var progFolder = SubProcess.JavaLocation(prog);
-            var progFullName = Common.PathCombine(progFolder, prog);
+            var progFullName = SubProcess.JavaFullName(prog);
             if (progFullName.EndsWith(".exe"))
             {
                 progFullName = progFullName.Substring(0, progFullName.Length - 4);

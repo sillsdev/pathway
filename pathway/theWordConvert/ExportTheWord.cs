@@ -332,22 +332,28 @@ namespace SIL.PublishingSolution
             sw.Close();
         }
 
-        protected static StreamWriter MessageStream;
-        public static void XsltMessage(object o, XsltMessageEncounteredEventArgs a)
+        private static void XsltMessage(object o, XsltMessageEncounteredEventArgs a)
         {
-            LogStatus("Message {0}", a.Message);
+            var message = a.Message;
+            PostTransformMessage(message);
+        }
+
+        protected static StreamWriter MessageStream;
+        protected static void PostTransformMessage(string message)
+        {
+            LogStatus("Message {0}", message);
             if (!_hasMessages)
             {
                 _hasMessages = true;
                 MessageStream = new StreamWriter(_messageFullName);
                 MessageStream.WriteLine("<html><head><title>theWord conversion messages</title></head>\n<body>\n<ul>");
             }
-            MessageStream.WriteLine("<li>{0}</li>", a.Message);
+            MessageStream.WriteLine("<li>{0}</li>", message);
         }
 
         public static void XsltMessageClose()
         {
-            MessageStream.WriteLine("</ul>\n</body>\n");
+            MessageStream.WriteLine("</ul>\n</body>\n</html>");
             MessageStream.Close();
             _hasMessages = false;
         }
