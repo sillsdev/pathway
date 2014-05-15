@@ -18,6 +18,7 @@
     <xsl:param name="sequencePunc">,</xsl:param>
     <xsl:param name="bookSequencePunc">;</xsl:param>
     <xsl:param name="bookNames">BookNames.xml</xsl:param>
+    <xsl:param name="verseStructure">vrs.xml</xsl:param>
     <xsl:param name="noStar" select="false()"/>
     <xsl:param name="noSaltillo" select="false()"/>
     <xsl:param name="rtl" select="false()"/>
@@ -28,7 +29,7 @@
     <xsl:output  encoding="UTF-8" method="text"/>
     
     <xsl:variable name="code" select="//book/@code"/>
-    <xsl:variable name="verseRefs" select="document('vrs.xml')//bk"/>
+    <xsl:variable name="verseRefs" select="document($verseStructure)//bk"/>
     <xsl:variable name="vrs" select="$verseRefs[@code=$code]"/>
     <xsl:variable name="bookNamesBook" select="document($bookNames)//book"/>
     

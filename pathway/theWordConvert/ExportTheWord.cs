@@ -33,6 +33,7 @@ namespace SIL.PublishingSolution
         protected static object ParatextData;
         protected static string Ssf;
         protected static bool R2l;
+        protected static string VrsName = "vrs.xml";
         private static object _theWorProgPath;
         protected static bool _hasMessages = false;
         protected static string _messageFullName;
@@ -88,7 +89,7 @@ namespace SIL.PublishingSolution
                 LoadXslt();
                 inProcess.PerformStep();
 
-                var exportTheWordInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
+                var exportTheWordInputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                 Debug.Assert(exportTheWordInputPath != null);
 
                 LoadMetadata();
@@ -138,7 +139,10 @@ namespace SIL.PublishingSolution
                 var mySwordResult = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
                 inProcess.PerformStep();
 
-                Directory.Delete(tempTheWordCreatorPath, true);
+                if (Directory.Exists(tempTheWordCreatorPath))
+                {
+                    Directory.Delete(tempTheWordCreatorPath, true);
+                }
                 success = true;
 
                 inProcess.Close();
@@ -152,6 +156,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 success = false;
                 inProcess.PerformStep();
                 inProcess.Close();
@@ -159,6 +164,7 @@ namespace SIL.PublishingSolution
                 Cursor.Current = myCursor;
                 ReportFailure(ex);
             }
+            Ssf = string.Empty;
             return success;
         }
 
@@ -299,7 +305,7 @@ namespace SIL.PublishingSolution
         protected static void CollectTestamentBooks(List<string> otBooks, List<string> ntBooks)
         {
             var xmlDoc = Common.DeclareXMLDocument(true);
-            var vfs = new StreamReader("vrs.xml");
+            var vfs = new StreamReader(VrsName);
             xmlDoc.Load(vfs);
             vfs.Close();
             var codeNodes = xmlDoc.SelectNodes("//@code");
@@ -421,6 +427,7 @@ namespace SIL.PublishingSolution
 
         protected static void FindParatextProject()
         {
+            if (!string.IsNullOrEmpty(Ssf)) return;
             RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out ParatextData);
             var sh = new SettingsHelper(Param.DatabaseName);
             Ssf = sh.GetSettingsFilename();
@@ -441,6 +448,7 @@ namespace SIL.PublishingSolution
             var xsltArgs = new XsltArgumentList();
             xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
             xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
+            xsltArgs.AddParam("verseStructure", "", GetVerseStructureUri());
             GetRtlParam(xsltArgs);
             return xsltArgs;
         }
@@ -481,6 +489,11 @@ namespace SIL.PublishingSolution
         {
             var myProj = Common.PathCombine((string) ParatextData, GetSsfValue("//Name"));
             return "file:///" + Common.PathCombine(myProj, "BookNames.xml");
+        }
+
+        protected static string GetVerseStructureUri()
+        {
+            return "file:///" + VrsName;
         }
 
         protected static string UsxDir(string exportTheWordInputPath)

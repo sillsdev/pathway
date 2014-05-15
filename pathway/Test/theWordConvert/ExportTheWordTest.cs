@@ -567,6 +567,10 @@ namespace Test.TheWordConvertTest
             var actual = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
             Assert.AreEqual(Path.Combine(_outputPath, "nko.bbl.mybible"), actual);
             Assert.True(File.Exists(actual));
+            if (File.Exists(actual))
+            {
+                File.Delete(actual);
+            }
         }
 
         /// <summary>
@@ -615,11 +619,15 @@ namespace Test.TheWordConvertTest
         {
             Common.Testing = true;
             var projInfo = new PublicationInformation();
+            var vrsPath = PathPart.Bin(Environment.CurrentDirectory, @"/../TheWordConvert");
+            VrsName = Path.Combine(vrsPath, "vrs.xml");
+            projInfo.DefaultXhtmlFileWithPath = Path.Combine(_outputPath, "name.xhtml"); //Directory name used as output folder
+            Ssf = Path.Combine(_inputPath, "nkoNT.ssf"); // Ssf file used for Paratext settings
+            const string usxFolder = "USX"; //USX folder must be present for input
+            FolderTree.Copy(Path.Combine(_inputPath, usxFolder), Path.Combine(_outputPath, usxFolder));
             var target = new ExportTheWord();
-            CommonTestMethod.DisableDebugAsserts();
             bool actual = target.Export(projInfo);
-            Assert.False(actual);
-            CommonTestMethod.EnableDebugAsserts();
+            Assert.True(actual);
         }
 
         /// <summary>
@@ -654,6 +662,7 @@ namespace Test.TheWordConvertTest
         [Test]
         public void GetBookNamesUriTest()
         {
+            ParatextData = null;
             string actual = GetBookNamesUri();
             Assert.AreEqual("file:///BookNames.xml", actual);
        }
@@ -679,8 +688,10 @@ namespace Test.TheWordConvertTest
         public void GetRtlParamTest()
         {
             XsltArgumentList xsltArgs = null;
+            Ssf = Path.Combine(_inputPath, "nkoNT.ssf");
             GetRtlParam(xsltArgs);
             Assert.False(R2l);
+            Ssf = string.Empty;
         }
 
         /// <summary>
@@ -796,7 +807,7 @@ namespace Test.TheWordConvertTest
             Common.Testing = true;
             const string nsont = "nko.nt";
             var resultFullName = Path.Combine(_outputPath, nsont);
-            File.Copy(Path.Combine(_inputPath, nsont), resultFullName);
+            File.Copy(Path.Combine(_inputPath, nsont), resultFullName, true);
             var mySwordResult = Path.Combine(_outputPath, "nko.bbl.mysword");
             var exportTheWordInputPath = Path.Combine(Common.ProgInstall, "TheWord");
             const bool expected = true;
