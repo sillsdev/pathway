@@ -20,7 +20,9 @@ using System.Resources;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
+using Microsoft.Win32;
 
 namespace SIL.Tool
 {
@@ -122,6 +124,7 @@ namespace SIL.Tool
             if (arg != null)
                 info.Arguments = arg;
             Debug.Print("Run: Filename: {0}", info.FileName);
+            if (Common.Testing) return;
             using (Process p1 = Process.Start(info))
             {
                 if (wait)
@@ -248,32 +251,32 @@ namespace SIL.Tool
         }
         #endregion ExistsOnPath(string name)
 
-        #region JavaLocation(name)
+        #region JavaFullName(name)
         /// <summary>
         /// Identify Java program location
         /// </summary>
-        public static string JavaLocation(string name)
+        public static string JavaFullName(string name)
         {
             string progFolder = GetLocation(name);
             if (string.IsNullOrEmpty(progFolder) || !File.Exists(Common.PathCombine(progFolder, "java.exe")))
             {
-                foreach (string progBases in new ArrayList { "C:\\Program Files", "C:\\Program Files (x86)" })
+                var r = RegistryHelperLite.JarFile;
+                Debug.Assert(r != null);
+                r = r.OpenSubKey("shell");
+                Debug.Assert(r != null);
+                r = r.OpenSubKey("open");
+                Debug.Assert(r != null);
+                r = r.OpenSubKey("command");
+                Debug.Assert(r != null);
+                var c = (string)r.GetValue("");
+                var pat = new Regex(@"""([^""]*)");
+                var match = pat.Match(c);
+                if (match.Success)
                 {
-                    string javaPath = Common.PathCombine(progBases, "java");
-
-                    if (Directory.Exists(javaPath))
-                    {
-                        var info = new DirectoryInfo(javaPath);
-                        foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
-                        {
-                            progFolder = Common.PathCombine(directoryInfo.FullName, "bin");
-                            if (File.Exists(Common.PathCombine(progFolder, "java.exe")))
-                                return progFolder;
-                        }
-                    }
+                    progFolder = Path.GetDirectoryName(match.Groups[1].Value);
                 }
             }
-            return progFolder;
+            return string.IsNullOrEmpty(progFolder)? string.Empty : Path.Combine(progFolder, "java.exe");
         }
 
         #endregion JavaLocation(name)

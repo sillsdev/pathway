@@ -57,6 +57,12 @@ namespace Test.CssDialog
             _publishingSolutionsData = Common.GetAllUserPath();
         }
 
+        [TestFixtureTearDown]
+        protected void TearDown()
+        {
+            CommonTestMethod.EnableDebugAsserts();
+        }
+
         [SetUp]
         protected void SetupEach()
         {

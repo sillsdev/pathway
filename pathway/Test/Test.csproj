@@ -249,7 +249,6 @@
     </Compile>
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsRecTest.cs" />
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsTests.cs" />
-    <Compile Include="FileUtils.cs" />
     <Compile Include="GoBibleConvert\PartialBookTest.cs" />
     <Compile Include="GoBibleConvert\UsxToSFMTest.cs" />
     <Compile Include="ParatextSupport\EncloseParasInSectionsTests.cs" />
@@ -264,7 +263,6 @@
     <Compile Include="XeLatex\XeLaTexContentTest.cs" />
     <Compile Include="CssParser\ClassInfoTest.cs" />
     <Compile Include="CssParser\CssTreeTest.cs" />
-    <Compile Include="FileUtilsTest.cs" />
     <Compile Include="IdmlTest.cs" />
     <Compile Include="InDesignConvert\InDesignMapTest.cs" />
     <Compile Include="InDesignConvert\InGraphicTest.cs" />
@@ -639,7 +637,7 @@
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_Chapter.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_Chapter_Abbr.css" />
-	<ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_MultiChapter.css" />
+    <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_MultiChapter.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Mirrored_MultiChapter_Abbr.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Paged_Chapter.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" />
@@ -687,6 +685,9 @@
     <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <WixSoftware Include="..\BuildPathway\WixSoftware\**\*.*" Exclude="WixSoftware\**\.svn\**\*.*" />
     <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ScriptureStyleSettingsCopy.xml" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent />
