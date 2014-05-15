@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
+&apos;Changed On May-15-2014 for TD-3803
 
-Dim LastParagraph(0) As String
-Dim References(50) As String
-Dim rCount
+&apos; needs writer document 
+Dim oProgressBarModel As Object 
+Dim oSubWindow As Object
+Dim oFrame As Object
+Dim oSubFrame As Object
+Dim ProgressValue As Long
+Dim PageCount as Integer
 
-&apos;Changed On May-02-2014 for TD-3803
 
 &apos;This is main method, which will be called when document opened. It calls other mothods to perform 
 Sub StartDontForget
@@ -20,7 +24,9 @@ On Error GoTo MyError:
 	UpdateTOC()
 	
 	If ReferenceFormat = &quot;Genesis 1-2&quot; Then
-		SetReference()
+		If IsMacroRunAlready = &quot;False&quot; Then
+			SetReference()
+		End If
 	End If
 	
 	HideODMVariable()
@@ -33,6 +39,8 @@ On Error GoTo MyError:
 MyError:
 msgbox Err.Description
 End Sub
+
+
 
 &apos;This method aligns Cover page Image to Page Align(Full Page)
 Sub SetImageToCoverPage
@@ -183,325 +191,412 @@ Function MakePropertyValue( Optional cName As String, Optional uValue ) As com.s
    MakePropertyValue() = oPropertyValue 
 End Function 
 
-&apos;---------------------------------------------------------------------------------------------------------
-&apos;The main procedure to show the Reference (Ex. Mark 1:1 - 2:26)
+
+&apos;============================================= MACRO 
+
+&apos;This method adjust the Reference value
 Sub SetReference()
-
 On Error GoTo MyError:
-Dim myArraw
-Dim VerseCharStyle, ChapterCharStyle, BookCharStyle
-Dim isEndChapterFoundAlready As Boolean
-PageCount = TotalPages
 
+If ReferenceFormat &lt;&gt; &quot;Genesis 1-2&quot; Then
+	Msgbox &quot;This function is applicable only for Spanning Chapters (Genesis 1-2)&quot;
+	Exit Sub
+End If
+mytime = now
+Dim PageNo
+
+&apos;PageCount = TotalPages
+
+mytime = now
+&apos;---------------Progressbar
 Dim isProgressClosed As Boolean
-
+ShowProcessingDialog() 
 	oDoc = ThisComponent 
-
-&apos;RemoveOldGuides
-
-Redim LastParagraph(PageCount+2) As String
-Dim HiddenParagraph(PageCount) As String
-
-rCount = 0
-strStartBook = &quot;&quot;
-strEndBook = &quot;&quot;
-strStartChapter = 1
-strPrevStartChapter = 1
-strEndChapter = 0
-strStartVerse = 1
-strEndVerse = 1
-&apos;Assign the possible style Names to References (Book, Chapter, Verse)
-&apos;VerseCharStyle = &quot;VerseNumber_ParagraphContinuation_scrSection_scrBook,VerseNumber_Line1_scrSection_scrBook,VerseNumber_Line2_scrSection_scrBook,VerseNumber_EmbeddedTextLine1_scrSection_scrBook,VerseNumber_Paragraph_scrSection_scrBook,VerseNumberAlternate_Paragraph_scrSection_scrBook,verseNumber_div_section_scriptureText,verseNumber_first_section_scriptureText,verseNumber_li_ul_section_scriptureText,VerseNumber_\f*_scrSection_columns_scrBook,VerseNumber_Paragraph_scrSection_columns_scrBook,VerseNumber_.bgt_Paragraph_scrSection_columns_scrBook,VerseNumber_.bgt_ParagraphContinuation_scrSection_columns_scrBook,VerseNumber_.x-kal_Paragraph_scrSection_columns_scrBook,VerseNumber_.x-kal_Paragraph1_scrSection_columns_scrBook,VerseNumber1_.x-kal_Paragraph1_scrSection_columns_scrBook&quot;
-&apos;ChapterCharStyle = &quot;ChapterNumber_Paragraph_scrSection_scrBook,chapterNumber_first_section_scriptureText,ChapterNumber_Paragraph_scrSection_columns_scrBook,ChapterNumber_Paragraph1_scrSection_columns_scrBook&quot;
-																										 
-&apos;BookCharStyle = &quot;span_TitleMain_scrBook,scrBookName_scrBook,book_,span_.x-kal_TitleMain_scrBook&quot;
-GetLastParagraph
-ThisComponent.currentController.getViewCursor().jumpToPage(1)
-oDoc = ThisComponent 
-oVC = oDoc.CurrentController.getViewCursor 
-oVC.gotoStart(false) 
-&apos; ( -00012 )
-
-
-
-&apos;This loop read the file Page by Page
-Do
-    page = oVC.getPage 
-&apos;If page &gt; 3 Then
-
-	&apos;If page &gt; 1 Then
-		&apos;oVC.jumpToStartOfPage
+	oContWindow = oDoc.CurrentController.Frame.ContainerWindow 
+	
+	&apos;msgbox &quot;The Open Office window will be hidden while the headers are updated since this cuts the time required for the update in half.&quot;,,&quot;Update References&quot;
+	oContWindow.Visible = false 
+	
+&apos;=========Progressbar
+&apos;ShowProcessingDialog() 
+ProgressValue = 1
+keep = keep &amp; chr(10) &amp; &quot;After ProgressBar &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+mytime = now
+	oFieldMaster = ThisComponent.TextFieldMasters
+	oField = oFieldMaster.getByName(&quot;com.sun.star.text.fieldmaster.SetExpression.Left_Guideword_L&quot;)
+	stDTF = oField.DependentTextFields
 	
 	
-	oVC.jumpToStartOfPage
-	First = oDoc.Text.createTextCursorByRange(oVC)	
-	&apos;Assign Start Chapter Number
-	strStartChapter = strPreviousChapter
-	GetReferenceASC(First,page,strStartChapter,&quot;C&quot;)
+keep =  keep &amp; chr(10) &amp; &quot;After DTF &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+mytime = now
+oProgressBarModel.ProgressValueMax = Ubound(stDTF) * 4
+&apos;=========Progressbar
+
+oProgressBarModel.ProgressValue = ProgressValue	
+&apos;---------------Progressbar	
 
 
-&apos;If strStartChapter &lt;&gt; &quot;&quot; Then
-&apos;	myArraw = split(Trim(strStartChapter),&quot;,&quot;)
-   &apos; If  UBound(myArraw) &gt; 1 Then
-      &apos; strStartChapter = myArraw(0) &amp; &quot;-&quot; +  myArraw(UBound(myArraw)-1)
-      &apos; strPreviousChapter = myArraw(UBound(myArraw)-1)
-   &apos; else
-      &apos; strStartChapter = myArraw(0)
-       &apos;strPreviousChapter = strStartChapter
-    &apos;End IF
-     &apos;strPreviousChapter =  strPreviousChapter &amp; &quot;,&quot;
-&apos;End If
-   &apos; If Len(Trim(strStartChapter)) &gt; 0 Then
-	&apos;	HiddenParagraph(page) = page &amp; &quot;`~&quot; &amp; strStartChapter
-&apos;	End If
-&apos;	HiddenParagraph(page-1,1) = page-1 &amp; &quot;`~&quot; &amp; strFirstReference
-    				
-&apos;	strPrevStartChapter = strEndChapter
-&apos;	strStartBook = strEndBook
-	&apos;Else
-		&apos;FirstPageBook(strStartBook)
-		&apos;page = oVC.getPage 
-		&apos;FirstChapterNumber(strStartChapter)
-	&apos;	page = oVC.getPage 
-		&apos;strEndChapter = strStartChapter 
-		&apos;strPrevStartChapter =  strStartChapter
-		&apos;strEndBook = strStartBook
-	&apos;End If	
-&apos;End If	
-Loop While oVC.jumpToNextPage 
-    keep = keep &amp; chr(10) &amp; &quot;After Main &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-    mytime= now
-    Test()
-    msgbox &quot;completed&quot;
-    &apos;HideODMVariable()
-    &apos;InsertReference(HiddenParagraph,PageCount)
 
-    &apos;oProgressBarModel.ProgressValue = PageCount * 4
-
-    keep = keep &amp; chr(10) &amp; &quot;After Print &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-    &apos;msgbox keep
-	&apos;oDoc.store() 
-&apos;===========Progressbar
-	&apos;CloseProgressBar
-	isProgressClosed = True
-&apos;===========Progressbar  	
-	&apos;AutoSaveEnableDisable(true)&apos;enable the &quot;Auto Recovery&quot;
-		
-		
-	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
-		&apos;ExportToDOC_PDF
-	End IF
-Exit Sub
-MyError:
-	If isProgressClosed = False Then
-		&apos;CloseProgressBar
+	&apos;FirstPageBook(PageNo)
+	PageNo = FindStartPageNumber()&apos;2
+	DiffPageNo = 0
+	If PageNo &lt;&gt; 2 Then
+		DiffPageNo = 2
 	End If
-	&apos;msgbox Err.Description
-	If Err &lt;&gt; 1 Then
-		Msgbox &quot;Sorry! Could not update the References.&quot; , 0 + 64,  &quot;Update References&quot;
-	End IF
-	&apos;oContWindow.Visible = true 
-End Sub
-
-Sub GetLastParagraph
-On Error GoTo MyError:
-&apos;Picture
-	dim document   as object
-	dim dispatcher as object
-	document = ThisComponent.CurrentController.Frame 
-	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;) 
+	&apos;msgbox PageNo
 	
-	ThisComponent.currentController.getViewCursor().jumpToPage(2)
-oDoc = ThisComponent 
-oVC = oDoc.CurrentController.getViewCursor 
-oVC.gotoStart(false) 
-Do 
+keep = keep &amp; chr(10) &amp; &quot;After FirstPageNumber &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+mytime = now	
+	oFieldMaster = ThisComponent.TextFieldMasters
+	oField = oFieldMaster.getByName(&quot;com.sun.star.text.fieldmaster.SetExpression.Left_Guideword_L&quot;)
+	stDTF = oField.DependentTextFields
+
+	If stDTF(0).Hint = &quot;&quot; Then&apos;Fresh
+		For i = 0 to  Ubound(stDTF)
+			stDTF(i).Hint = stDTF(i).Content
+		&apos;=========Progressbar    
+			ProgressValue=ProgressValue+1
+			MyProgressBar(ProgressValue)
+		&apos;=========Progressbar 			
+		Next
+	Else&apos;Rerun
+		For i = 0 to  Ubound(stDTF)
+			stDTF(i).Content = stDTF(i).Hint
+		&apos;=========Progressbar    
+			ProgressValue=ProgressValue+1
+			MyProgressBar(ProgressValue)
+		&apos;=========Progressbar 			
+		Next
+	End If
+
+keep = keep &amp; chr(10) &amp; &quot;After Fresh/Exists &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+mytime = now
+
+	&apos;Get All reference and assing to HiddenParagraph
+	Dim HiddenParagraph((Ubound(stDTF))) As String
+	Dim References((Ubound(stDTF))) As String
+	References(0) = PageNo
+	For i = Ubound(stDTF) to 1 step -1
+		HiddenParagraph(j) = stDTF(i).Content
+		References(j) = PageNo
+		
+		&apos;=========Progressbar    
+			ProgressValue=ProgressValue+1
+			MyProgressBar(ProgressValue)
+		&apos;=========Progressbar 
+				
+		If stDTF(i).GetAnchor.PageStyleName &lt;&gt; stDTF(i-1).GetAnchor.PageStyleName Then
+			PageNo = PageNo + 1
+			
+
+			
+			If stDTF(i).Content &lt;&gt; stDTF(i-1).Content Then
+				CurrVariablePageNo = PageNo&apos; GetPageNumber(stDTF(i).GetAnchor)
+				NextVariablePageNo = GetPageNumber(stDTF(i-1).GetAnchor)
+				NextVariablePageNo = NextVariablePageNo - DiffPageNo
+				If CurrVariablePageNo = NextVariablePageNo Then
+					References(j) = PageNo
+					&apos;HiddenParagraph(j+1) = HiddenParagraph(j)
+				End If
+			End If			
+			
+			&apos;if last variable for next Book, we need to set last variable page number is next page number
+			CurrentValue = Split(HiddenParagraph(j),&quot; &quot;)
+			PreviousValue = Split(HiddenParagraph(j-1),&quot; &quot;)
+						
+			CurrentBook = GetBookName(CurrentValue)
+			PreviousBook = GetBookName(PreviousValue)	
+			If PreviousBook = &quot;&quot; Then
+				PreviousBook = CurrentBook
+			End If
+				
+			If 	CurrentBook &lt;&gt; 	PreviousBook Then
+				References(j) = PageNo&apos;Added Page Number
+			End If
+			
+		End If
+		
+
+					
+		j = j + 1
+	Next
+	
+keep = keep &amp; chr(10) &amp; &quot;After Convert to Hidden &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+mytime = now	
+	&apos;Write Code to get the Page Number of the Reference Fields
+	
+	dim startNo
+	dim endNo
+	
+for i = 0 to Ubound(References) 
 
 		&apos;=========Progressbar    
 			ProgressValue=ProgressValue+1
-			&apos;MyProgressBar(ProgressValue)
+			MyProgressBar(ProgressValue)
 		&apos;=========Progressbar 
 		
-	page = oVC.getPage
+	PageNo = References(i)
+	startNo = i
+				if startNo = 844 Then
+				s=10
+				end if
+	GetLastNumber(References,startNo,endNo)
+	
+	if startNo = Ubound(References) Then
+		Exit For
+	End if
+	
+	If HiddenParagraph(startNo) &lt;&gt; HiddenParagraph(endNo) Then
+		FirstValue = Split(HiddenParagraph(startNo),&quot; &quot;)
+		LastValue = Split(HiddenParagraph(endNo),&quot; &quot;)
 
-	oVC.jumpToEndOfPage 
-	Last = oDoc.Text.createTextCursorByRange(oVC) 
-	&apos;msgbox Last.String
-	&apos;Last.gotoStartOfSentence(false)
-	Last.gotoStartOfParagraph(true)
-	&apos;Last.gotoEndOfParagraph(false)
+		FirstBook = GetBookName(FirstValue)
+		LastBook = GetBookName(LastValue)
+					
+		If FirstBook &lt;&gt; LastBook Then
+			If startNo &gt; 2 Then
+			    HiddenParagraph(startNo-1) = HiddenParagraph(endNo)
+                HiddenParagraph(startNo) = HiddenParagraph(endNo)
+                HiddenParagraph(startNo+1) = HiddenParagraph(endNo)
+			Else
+				HiddenParagraph(startNo) = HiddenParagraph(endNo)
+			End If    
+		Else
+			HiddenParagraph(startNo) = LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
+			If startNo &gt; 2 Then
+			    HiddenParagraph(startNo-1) = HiddenParagraph(startNo)&apos; LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
+                HiddenParagraph(startNo) = HiddenParagraph(startNo) &apos; LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
+				if startNo = 183 Then
+				s=10
+				end if
+                ChangeNo = GetLastReference(HiddenParagraph,startNo)
+                HiddenParagraph(ChangeNo) = HiddenParagraph(startNo)&apos; LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
+			&apos;Else
+				&apos;HiddenParagraph(startNo) = LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
+			End If 		
 
-	differ=oVC.getPage 
+		End If
+	End if
+	i = endNo
+Next
+keep = keep &amp; chr(10) &amp; &quot;After adjust page &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+mytime = now
+	
+	&apos;Submit processed References to Reference Fields
+	j=1
+	stDTF(0).Content = HiddenParagraph(0)
+	for i = Ubound(HiddenParagraph) to 1 step -1
+		stDTF(j).Content = HiddenParagraph(i)
+		j = j + 1
+		&apos;=========Progressbar    
+			ProgressValue=ProgressValue+1
+			MyProgressBar(ProgressValue)
+		&apos;=========Progressbar 		
+	Next
+	thisComponent.getTextFields.refresh()
+keep = keep &amp; chr(10) &amp; &quot;After UpdateHeader &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+mytime = now	
+ oProgressBarModel.ProgressValue =  Ubound(stDTF) * 4
 
-  	if differ &gt; page Then
-	  	dispatcher.executeDispatch(document, &quot;.uno:GoToPrevPara&quot;, &quot;&quot;, 0, Array()) 
-	  	dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array()) 	  	
-	  	dispatcher.executeDispatch(document, &quot;.uno:GoToPrevPara&quot;, &quot;&quot;, 0, Array()) 
-		Last = oDoc.Text.createTextCursorByRange(oVC)
-		Last.gotoStartOfParagraph(false)
-		Last.gotoEndOfParagraph(true)
-	end if
-	LastParagraph(page) = Last.String
-Loop While oVC.jumpToNextPage 	 
+	&apos;oDoc.store() 
+&apos;===========Progressbar
+	CloseProgressBar
+	isProgressClosed = True
+&apos;===========Progressbar  	
+		
+	oContWindow.Visible = true 
+	&apos;msgbox keep
 
-Exit sub
+Exit Sub
 MyError:
-s=0
-
+	If isProgressClosed = False Then
+		CloseProgressBar
+	End If
+	If Err &lt;&gt; 1 Then
+		Msgbox &quot;Sorry! Could not update the References.&quot; , 0 + 64,  &quot;Update References&quot;
+	End IF
+	oContWindow.Visible = true 	
 End Sub
 
-&apos;This Procedure loops the page in ASC order and get the First Chapter/Verse by using ReturnReferenceVerse/ReturnReferenceChapter
-Sub GetReferenceASC(MyParagraph,PageNo,RefVariable,Source)
-Dim strVariable
-
-		Do
-		  	MyParagraph.gotoEndOfParagraph(true) 
-			If Source = &quot;C&quot; Then
-				&apos;InsertSectionHeaderReference(MyParagraph,PageNo)
-			  	strVariable =  ReturnReferenceChapter(MyParagraph,PageNo)
-			  	If Len(Trim(strVariable)) &gt; 0 Then
-					&apos;ReDim References(Ubound(References) + 1) As String 
-					&apos;References(Ubound(References) - 1) = PageNo&apos; &amp; &quot;`~&quot; &amp; strStartChapter
-				  	RefVariable = RefVariable  + strVariable + &quot;,&quot;
-				  	&apos;var = PageNo(MyParagraph)
-				  	&apos;c = 10
-			  	End If
-		  	End If
-		  	&apos;//If Len(Trim(RefVariable)) &gt; 0 Then
-		  		&apos;//Exit Do
-		  	&apos;//End If
-		  	&apos;If Len(Trim(MyParagraph.String)) &gt; 11 Then
-		  		If Left(Trim(MyParagraph.String),15) = Left(Trim(LastParagraph(PageNo)),15) Then
-					Exit Do
-		  		End If
-		  	&apos;End If
-		Loop While MyParagraph.gotoNextParagraph(false)
-End Sub
-
-&apos;This Procedure loops the given Paragraph and find the Chapter
-Function ReturnReferenceChapter(MyParagraph,PageNo)
-	oParaEnume = MyParagraph.createEnumeration() 
-	While oParaEnume.hasMoreElements() 
-	 	oPara = oParaEnume.nextElement() 
-			If InStr(oPara.ParaStyleName, &quot;SectionHead&quot;) &gt; 0 Then
-				References(rCount) = PageNo&apos; &amp; &quot;`~&quot; &amp; strStartChapter
-				rCount = rCount + 1
-			End If 	 	
-		&apos;enumeration for portions in the paragraph 
-	  	oPortionEnume = oPara.createEnumeration() 
-	  	While oPortionEnume.hasMoreElements() 
-    	oPortion = oPortionEnume.nextElement() 
-	    	&apos;If Len(Trim(oPortion.CharStyleName)) &gt; 0 And Len(Trim(oPortion.String)) &gt; 0 Then
-	    	If Len(Trim(oPortion.CharStyleName)) &gt; 12 And Len(Trim(oPortion.String)) &gt; 0 Then
-		    	If Mid(Lcase(Trim(oPortion.CharStyleName)),1,13) = &quot;chapternumber&quot; Then
-			    	&apos;If InStr(Trim(RefStyleName),oPortion.CharStyleName) &gt; 0 Then
-						References(rCount) = PageNo&apos; &amp; &quot;`~&quot; &amp; strStartChapter
-						rCount = rCount + 1
-			    		ReturnReferenceChapter = oPortion.String
-			    	&apos;End If
-			    	Exit Function
-			    End If
-		    End If	
-	  	WEnd 
-	WEnd	
+&apos;This function return True/False wheter macro run already
+Function IsMacroRunAlready()
+	oFieldMaster = ThisComponent.TextFieldMasters
+	oField = oFieldMaster.getByName(&quot;com.sun.star.text.fieldmaster.SetExpression.Left_Guideword_L&quot;)
+	stDTF = oField.DependentTextFields
+	For i = 0 to  Ubound(stDTF)
+		If InStr(stDTF(i).Content, &quot;-&quot;) Then
+			IsMacroRunAlready = &quot;True&quot;
+			Exit Function
+		End If
+	Next
+	IsMacroRunAlready = &quot;False&quot;
 End Function
 
-Sub Test()
-Dim var
-oFieldMaster = ThisComponent.TextFieldMasters
-oField = oFieldMaster.getByName(&quot;com.sun.star.text.fieldmaster.SetExpression.Left_Guideword_L&quot;)
-stDTF = oField.DependentTextFields
-&apos;msgbox Ubound(stDTF)
-Dim HiddenParagraph((Ubound(stDTF)/2)-1,1) As String
-j=0
-for i = Ubound(stDTF) to 1 step -2
-	HiddenParagraph(j ,0) = stDTF(i-1).Content
-	HiddenParagraph(j ,1) = stDTF(i).Content
-	j = j + 1
-Next
+&apos;This function return the page number, where first content page start
+Function FindStartPageNumber()
 
+On Error GoTo MyError:
 
-for i = 0 to Ubound(HiddenParagraph) 
-	MyRef = Split(HiddenParagraph(i ,0),&quot; &quot;)
-	MyValue = Split(MyRef(1),&quot;-&quot;)
-	HiddenParagraph(i ,0) = MyRef(0) + &quot; &quot; + MyValue(0)
-	HiddenParagraph(i ,1) = MyRef(0) + &quot; &quot; + MyValue(0)
-next
-
-Dim PageNo
-Dim StartPage
-Dim EndPage
-for i = 0 to Ubound(References) -1
-	References(i) = References(i+1) 
-next
-for i = 0 to Ubound(HiddenParagraph) - 1
-	If References(i) = References(i + 1) Then
-		If References(i) = References(i + 2) Then
-			If References(i) = References(i + 3) Then
-
-		        
-			Else &apos; 1 and 2 and 3 are same
-				 &apos;Set Mat 1-3
-		        first = Split(HiddenParagraph(i,0),&quot; &quot;)
-		        last = Split(HiddenParagraph(i+2,0),&quot; &quot;)
-		        If first(1) &lt;&gt; last(1) Then
-		        	&apos;Previous
-		        	HiddenParagraph(i-1,1) = first(0) + &quot; &quot; + first(1) + &quot;-&quot; + last(1)&apos;Previous Reference set and last element
-					&apos;Current
-			        HiddenParagraph(i,0) = first(0) + &quot; &quot; + first(1) + &quot;-&quot; + last(1)
-			        HiddenParagraph(i,1) = first(0) + &quot; &quot; + last(1)
-					&apos;Next
-			        HiddenParagraph(i+2,1) = last(0) + &quot; &quot; + last(1)
-				End if	
-				i = i + 2			 
-			End if
-		Else &apos; 1 and 2 are same
-				&apos;Set Mat 1-2
-		        first = Split(HiddenParagraph(i,0),&quot; &quot;)
-		        last = Split(HiddenParagraph(i+1,0),&quot; &quot;)
-		        If first(1) &lt;&gt; last(1) Then
-		        	&apos;Previous
-		        	HiddenParagraph(i-1,1) = first(0) + &quot; &quot; + first(1) + &quot;-&quot; + last(1)&apos;Previous Reference set and last element
-					&apos;Current
-			        HiddenParagraph(i,0) = first(0) + &quot; &quot; + first(1) + &quot;-&quot; + last(1)
-			        HiddenParagraph(i,1) = first(0) + &quot; &quot; + last(1)
-					&apos;Next
-			        HiddenParagraph(i+1,1) = last(0) + &quot; &quot; + last(1)
-				End if
-				i = i + 1
-		End if
-	End If
-Next
-
-j=1
-stDTF(0).Content = HiddenParagraph(0 ,0)
-for i = Ubound(HiddenParagraph) to 1 step -1
-	stDTF(j).Content = HiddenParagraph(i ,1)
-	stDTF(j+1).Content = HiddenParagraph(i ,0)
-	j = j + 2
-Next
-
-PageCount = TotalPages
-ThisComponent.currentController.getViewCursor().jumpToPage(7)
-
-
-dim document   as object
-dim dispatcher as object
-
-document   = ThisComponent.CurrentController.Frame
-dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
-
-dim args1(0) as new com.sun.star.beans.PropertyValue
-args1(0).Name = &quot;Text&quot;
-args1(0).Value = &quot;&quot;
-
-dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 0, args1())
-
-dispatcher.executeDispatch(document, &quot;.uno:SwBackspace&quot;, &quot;&quot;, 0,  args1())
 ThisComponent.currentController.getViewCursor().jumpToPage(1)
-&apos;oDoc = ThisComponent 
-&apos;oDoc.store()
-&apos;stDTF(2).Content = &quot;James&quot;
-&apos;var = pageNo(stDTF(2).Content)
+oDoc = ThisComponent 
+oVC = oDoc.CurrentController.getViewCursor 
+oVC.gotoStart(false) 
+
+
+Do
+    page = oVC.getPage 
+	FindStartPageNumber = page
+	oVC.jumpToStartOfPage
+	First = oDoc.Text.createTextCursorByRange(oVC)	
+	If page &gt; 4 Then
+		exit Do
+	End If
+
+Loop While oVC.jumpToNextPage 
+Exit Function
+MyError:
+&apos;msgbox Err.Description
+End Function
+
+
+&apos;This function return page number of given Reference value
+Function GetPageNumber(stDTF)
+	oVC = ThisComponent.CurrentController.ViewCursor
+	Anch = stDTF
+	oVC.gotoRange(Anch.Start, False)
+	GetPageNumber =  oVC.Page
+End Function
+
+&apos;This method show the progress bar
+Sub ShowProcessingDialog() 
+  oDoc = ThisComponent &apos; needs document 
+  oController = oDoc.getCurrentController() 
+  oFrame = oController.getFrame() 
+  oContainerWindow = oFrame.ContainerWindow 
+  oToolkit = oContainerWindow.Toolkit 
+  
+  &apos; sub window with sub frame 
+  oSubWindow = CreateNewWindow(oToolkit,oContainerWindow, 300,300,500,120) 
+  oSubWindow.Title=&quot;Update References&quot;
+  oSubFrame = CreateUnoService(&quot;com.sun.star.frame.Frame&quot;) 
+  oSubFrame.initialize(oSubWindow) 
+  oFrame.getFrames().append(oSubFrame) 
+  
+  &apos; container of controls (Frame)
+  oContainer = CreateUnoService(&quot;com.sun.star.awt.UnoControlContainer&quot;) 
+  oContainerModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlContainerModel&quot;) 
+  oContainerModel.BackgroundColor = &quot;&amp;HEEEEEE&quot; &apos;-1 
+  oContainer.setModel(oContainerModel) 
+  oContainer.setPosSize(0,0,500,120,com.sun.star.awt.PosSize.POSSIZE) 
+  oContainer.createPeer(oToolkit,oSubWindow) 
+  
+  &apos; progressbar 
+  oProgressBarModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlProgressBarModel&quot;) 
+  oProgressBar = CreateUnoService( &quot;com.sun.star.awt.UnoControlProgressBar&quot; ) 
+  oProgressBar.setModel(oProgressBarModel) 
+  oProgressBar.setPosSize(50,65,400,30, com.sun.star.awt.PosSize.POSSIZE ) 
+  oContainer.addControl(&quot;progressbar&quot;,oProgressBar) 
+  
+  &apos; label 1
+  oLabel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedText&quot;) 
+  oLabelModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedTextModel&quot;) 
+  oLabelModel.Label = &quot;The Open Office window will be hidden while the headers are updated&quot;
+  oLabel.setModel(oLabelModel) 
+  oLabel.Alignment = 1
+  oLabel.setPosSize(5,20,500,30,com.sun.star.awt.PosSize.POSSIZE) 
+  oContainer.addControl(&quot;label&quot;,oLabel) 
+
+  &apos; label 2
+  oLabel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedText&quot;) 
+  oLabelModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedTextModel&quot;) 
+  oLabelModel.Label = &quot;because this reduces the time it takes to do the update.&quot; 
+  oLabel.setModel(oLabelModel) 
+  oLabel.Alignment = 1
+  oLabel.setPosSize(5,37,500,30,com.sun.star.awt.PosSize.POSSIZE) 
+  oContainer.addControl(&quot;label&quot;,oLabel) 
+  
+  &apos; show window 
+  oSubWindow.setEnable(False) 
+  oSubWindow.setVisible(True) 
+ &apos; oSubWindow.setVisible(False) 
+End Sub 
+
+&apos;Increments progressbar value
+Sub MyProgressBar(ProgressValue)
+	oProgressBarModel.ProgressValue = ProgressValue &apos; * 1
 End Sub
+
+&apos; create new non-modal dialog 
+Function CreateNewWindow(oToolkit,oParent,nX,nY,nWidth,nHeight) As Object 
+  aRect = CreateUnoStruct(&quot;com.sun.star.awt.Rectangle&quot;) 
+  With aRect 
+    .X = nX 
+    .Y = nY 
+    .Width = nWidth 
+    .Height = nHeight 
+  End With 
+  aWinDesc = CreateUnoStruct(&quot;com.sun.star.awt.WindowDescriptor&quot;) 
+  With aWinDesc 
+    .Type = com.sun.star.awt.WindowClass.TOP 
+    .WindowServiceName = &quot;dialog&quot; 
+    .ParentIndex = -1 
+    .Bounds = aRect 
+    .Parent = oParent 
+    .WindowAttributes = com.sun.star.awt.WindowAttribute.MOVEABLE + com.sun.star.awt.WindowAttribute.CLOSEABLE 
+  End With 
+  CreateNewWindow = oToolkit.createWindow(aWinDesc) 
+End Function  
+
+&apos;This function returns last reference of the page
+Function GetLastReference(HiddenParagraph,startNo)
+GetLastReference = startNo
+for i = startNo+1 to Ubound(HiddenParagraph) - 1 
+	FirstValue = Split(HiddenParagraph(startNo),&quot; &quot;)
+	LastValue = Split(HiddenParagraph(i),&quot; &quot;)
+	FirstChapter = Split(FirstValue(Ubound(FirstValue)),&quot;-&quot;)
+	If FirstChapter(0) &lt;&gt; LastValue(Ubound(LastValue)) Then
+		GetLastReference =  i
+		Exit For		
+	Else
+		HiddenParagraph(i) = HiddenParagraph(startNo)
+	End if
+Next
+End Function
+
+&apos;This function get BookName from Array(I Peter 3)
+Function GetBookName(BookArray)
+	For i = 0 to Ubound(BookArray) - 1
+		GetBookName = GetBookName + BookArray(i) + &quot; &quot;
+	Next
+End Function
+
+&apos;This procedure dispose the ProgressBar
+Sub CloseProgressBar
+  oSubWindow.setVisible(False) 
+  oFrame.getFrames().remove(oSubFrame) 
+  oSubWindow.dispose() 
+End Sub
+
+
+&apos;Get Last Reference Number for current Page
+Sub GetLastNumber(References,startNo,endNo)
+
+for i = startNo to Ubound(References) - 1 &apos;- (startNo + 1)
+	If References(i) &lt;&gt; References(i+1) Then
+		endNo =  i
+		Exit For
+	End If
+	endNo =  i
+Next
+End Sub
+
+
+
+
+
+
+
+
+
+
 </script:module>

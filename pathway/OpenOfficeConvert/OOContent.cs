@@ -35,7 +35,7 @@ namespace SIL.PublishingSolution
     {
         #region Private Variable
         string _strBook = string.Empty;
-        string _strPreviousChapterNumber = "-1";
+        string _strPreviousChapterNumber = "1";
         string _refFormat = string.Empty;
         string _strBook2ndBook = string.Empty;
         private bool _is1stBookFound = false;
@@ -107,6 +107,8 @@ namespace SIL.PublishingSolution
         private bool _isH2Complaint;
         private string _h3Book = string.Empty;
         private string _displayProperty, _floatProperty;
+        private bool _nextVerse;
+        private string _previousGuideword = string.Empty;
         #endregion
 
         #region Public Variable
@@ -483,6 +485,7 @@ namespace SIL.PublishingSolution
                                 StartElement(targetPath);
                                 break;
                             case XmlNodeType.EndElement:
+								InsertVariableForSpanningChapaters();
                                 EndElement();
                                 break;
                             case XmlNodeType.Text: // Text.Write
@@ -522,6 +525,30 @@ namespace SIL.PublishingSolution
             }
         }
 
+
+        /// <summary>
+        /// Insert Variable for Spanning Chapters
+        /// </summary>
+        private void InsertVariableForSpanningChapaters()
+        {
+            if (_reader.Name == "div" && _nextVerse && _classNameWithLang.ToLower() == "paragraph")
+            {
+                if (!string.IsNullOrEmpty(_previousGuideword))
+                {
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + _previousGuideword);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", _previousGuideword);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                }
+                _nextVerse = false;
+            }            
+        }
         /// <summary>
         /// Insert Empty Span if Picture comes first for a LetHead in Dictionary
         /// </summary>
@@ -3243,10 +3270,14 @@ namespace SIL.PublishingSolution
             {
                 if (_refFormat.ToLower() == "genesis 1-2")
                 {
-                    if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0) 
-                        || _previousParagraphName.ToLower().IndexOf("sectionhead") == 0)
+                    if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0)
+                    {
+                        _strPreviousChapterNumber = content;
+                    }
+                    if (_classNameWithLang.ToLower().IndexOf("versenumber") == 0)// && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0)
                     {
                         fillHeadword = true;
+                        _nextVerse = true;
                     }
                 }
                 else
@@ -3283,17 +3314,6 @@ namespace SIL.PublishingSolution
 
                 string chapterNo = content;
 
-                if (_refFormat.ToLower() == "genesis 1-2")
-                {
-                    if (_previousParagraphName.ToLower().IndexOf("sectionhead") == 0)
-                    {
-                        chapterNo = _strPreviousChapterNumber;
-                    }
-                    else
-                    {
-                        _strPreviousChapterNumber = chapterNo;
-                    }
-                }
 
                 string rightContent = string.Empty;
                 if (_strBook.Length > 0)
@@ -3304,30 +3324,20 @@ namespace SIL.PublishingSolution
                 }
                 if (_refFormat.ToLower() == "genesis 1-2")
                 {
-                    if (chapterNo != "-1")
-                    {
-                        _writer.WriteStartElement("text:span");
-                        _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                        _writer.WriteStartElement("text:variable-set");
-                        _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                        _writer.WriteAttributeString("text:display", "none");
-                        _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword); 
-                        _writer.WriteAttributeString("office:value-type", "string");
-                        _writer.WriteAttributeString("office:string-value", leftHeadword); 
-                        _writer.WriteEndElement();
-                        _writer.WriteEndElement();
+                    leftHeadword = _strBook + _strPreviousChapterNumber;
 
-                        _writer.WriteStartElement("text:span");
-                        _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                        _writer.WriteStartElement("text:variable-set");
-                        _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                        _writer.WriteAttributeString("text:display", "none");
-                        _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword); 
-                        _writer.WriteAttributeString("office:value-type", "string");
-                        _writer.WriteAttributeString("office:string-value", leftHeadword);
-                        _writer.WriteEndElement();
-                        _writer.WriteEndElement();
-                    }
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", leftHeadword);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+
+                    _previousGuideword = leftHeadword;
                 }
                 else
                 {
