@@ -29,14 +29,14 @@ namespace SIL.PublishingSolution
 {
     public class ExportTheWord : IExportProcess
     {
-        protected static int Verbosity = 0;
+        protected static int Verbosity;
         protected static object ParatextData;
         protected static string Ssf;
-        protected static bool R2l;
+        protected static bool R2L;
         protected static string VrsName = "vrs.xml";
         private static object _theWorProgPath;
-        protected static bool _hasMessages = false;
-        protected static string _messageFullName;
+        private static bool _hasMessages;
+        protected static string MessageFullName;
 
         protected static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
 
@@ -110,7 +110,7 @@ namespace SIL.PublishingSolution
                 var fullName = UsxDir(exportTheWordInputPath);
                 LogStatus("Processing: {0}", fullName);
                 xsltArgs.XsltMessageEncountered += XsltMessage;
-                _messageFullName = Common.PathCombine(exportTheWordInputPath, "Messages.html");
+                MessageFullName = Common.PathCombine(exportTheWordInputPath, "Messages.html");
 
                 var codeNames = new Dictionary<string, string>();
                 var otFlag = OtFlag(fullName, codeNames, otBooks);
@@ -141,9 +141,8 @@ namespace SIL.PublishingSolution
 
                 if (Directory.Exists(tempTheWordCreatorPath))
                 {
-                    Directory.Delete(tempTheWordCreatorPath, true);
+                    Common.DeleteDirectory(tempTheWordCreatorPath);
                 }
-                success = true;
 
                 inProcess.Close();
                 Environment.CurrentDirectory = originalDir;
@@ -176,12 +175,12 @@ namespace SIL.PublishingSolution
             switch (result)
             {
                 case DialogResult.Yes:
-                    Process.Start(_messageFullName);
+                    Process.Start(MessageFullName);
                     break;
                 case DialogResult.No:
                     break;
                 case DialogResult.Cancel:
-                    File.Delete(_messageFullName);
+                    File.Delete(MessageFullName);
                     break;
             }
         }
@@ -351,7 +350,7 @@ namespace SIL.PublishingSolution
             if (!_hasMessages)
             {
                 _hasMessages = true;
-                MessageStream = new StreamWriter(_messageFullName);
+                MessageStream = new StreamWriter(MessageFullName);
                 MessageStream.WriteLine("<html><head><title>theWord conversion messages</title></head>\n<body>\n<ul>");
             }
             MessageStream.WriteLine("<li>{0}</li>", message);
@@ -388,7 +387,7 @@ namespace SIL.PublishingSolution
         protected static void Transform(string name, XsltArgumentList xsltArgs, StreamWriter sw)
         {
             //var readerSettings = new XmlReaderSettings {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
-            var readerSettings = new XmlReaderSettings {};
+            var readerSettings = new XmlReaderSettings();
             var reader = XmlReader.Create(name, readerSettings);
             TheWord.Transform(reader, xsltArgs, sw);
             reader.Close();
@@ -455,7 +454,7 @@ namespace SIL.PublishingSolution
 
         protected static void GetRtlParam(XsltArgumentList xsltArgs)
         {
-            R2l = false;
+            R2L = false;
             var language = GetSsfValue("//Language", "English");
             var languagePath = Path.GetDirectoryName(Ssf);
             var languageFile = Common.PathCombine(languagePath, language);
@@ -479,7 +478,7 @@ namespace SIL.PublishingSolution
                     if (cleanLine.Length > 4 && cleanLine.Substring(4, 1) == "t")
                     {
                         xsltArgs.AddParam("rtl", "", "1");
-                        R2l = true;
+                        R2L = true;
                     }
                 }
             }
@@ -512,11 +511,15 @@ namespace SIL.PublishingSolution
             Debug.Assert(theWordDirectoryName != null);
             var tempFolder = Path.GetTempPath();
             var folder = Common.PathCombine(tempFolder, theWordDirectoryName);
-            if (Directory.Exists(folder))
-                Directory.Delete(folder, true);
-
             CopyTheWordFolderToTemp(theWordFullPath, folder);
-            FolderTree.Copy(Common.PathCombine(folder, Directory.Exists(@"C:\Program Files (x86)") ? "x64" : "x32"), folder);
+            try
+            {
+                FolderTree.Copy(Common.PathCombine(folder, Directory.Exists(@"C:\Program Files (x86)") ? "x64" : "x32"), folder);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             return folder;
         }
 
@@ -527,7 +530,14 @@ namespace SIL.PublishingSolution
                 Common.DeleteDirectory(destFolder);
             }
             Directory.CreateDirectory(destFolder);
-            FolderTree.Copy(sourceFolder, destFolder);
+            try
+            {
+                FolderTree.Copy(sourceFolder, destFolder);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         protected static string ConvertToMySword(string resultName, string tempTheWordCreatorPath, string exportTheWordInputPath)
@@ -581,7 +591,7 @@ about={2} \
             var langCode = GetSsfValue("//EthnologueCode", "zxx");
             const bool isConfigurationTool = false;
             var shortTitle = Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool);
-            var FullTitle = GetSsfValue("//FullName", shortTitle);
+            var fullTitle = GetSsfValue("//FullName", shortTitle);
             var description = Param.GetMetadataValue("Description");
             var copyright = Common.UpdateCopyrightYear(Param.GetMetadataValue("Copyright Holder"));
             var createDate = DateTime.Now.ToString("yyyy.M.d");
@@ -590,11 +600,11 @@ about={2} \
             var creator = Param.GetMetadataValue("Creator");
             var font = GetSsfValue("//DefaultFont", "Charis SIL");
             var myFormat = GetFormat("theWordFormat.txt", format);
-            if (R2l)
+            if (R2L)
             {
                 font += "\r\nr2l=1";
             }
-            sw.Write(string.Format(myFormat, langCode, shortTitle, FullTitle, description, copyright, createDate, publisher, publishDate, creator, font));
+            sw.Write(string.Format(myFormat, langCode, shortTitle, fullTitle, description, copyright, createDate, publisher, publishDate, creator, font));
         }
 
         protected string GetFormat(string thewordformatTxt, string format)

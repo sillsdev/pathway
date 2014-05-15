@@ -29,7 +29,7 @@ using SIL.PublishingSolution;
 using SIL.Tool;
 using Test.CssDialog;
 
-namespace Test.TheWordConvertTest
+namespace Test.theWordConvert
 {
     /// ----------------------------------------------------------------------------------------
     /// <summary>
@@ -40,10 +40,10 @@ namespace Test.TheWordConvertTest
     public class ExportTheWordTest: ExportTheWord
     {
         #region setup
-        private static Mockery mocks = new Mockery();
+        private static readonly Mockery Mocks = new Mockery();
         private static string _inputPath;
         private static string _outputPath;
-        private static string _expectedPath;
+        //private static string _expectedPath;
         private static string _converterPath;
 
         [TestFixtureSetUp]
@@ -55,7 +55,7 @@ namespace Test.TheWordConvertTest
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/theWordConvert/TestFiles");
             _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "Expected");
+            //_expectedPath = Common.PathCombine(testPath, "Expected");
             if (Directory.Exists(_outputPath))
                 Directory.Delete(_outputPath, true);
             Directory.CreateDirectory(_outputPath);
@@ -106,7 +106,7 @@ namespace Test.TheWordConvertTest
         public void ExportNullTest()
         {
             var target = new ExportTheWord();
-            PublicationInformation projInfo = null;
+            const PublicationInformation projInfo = null;
             var actual = target.Export(projInfo);
             Assert.IsFalse(actual);
         }
@@ -161,8 +161,8 @@ namespace Test.TheWordConvertTest
         [Test]
         public void TempNameTest()
         {
-            string book = "MAT";
-            string expected = @"<usx><book code= ""MAT""/></usx>";
+            const string book = "MAT";
+            const string expected = @"<usx><book code= ""MAT""/></usx>";
             string actualTempName = TempName(book);
             var sr = new StreamReader(actualTempName);
             string actual = sr.ReadToEnd();
@@ -191,7 +191,7 @@ namespace Test.TheWordConvertTest
             codeNames["MRK"] = FileInput(@"USX\041MRK.usx");
             var xsltArgs = new XsltArgumentList();
             xsltArgs.AddParam("bookNames", "", "file://" + FileInput("BookNames.xml"));
-            var inProcess = (IInProcess)mocks.NewMock(typeof(IInProcess));
+            var inProcess = (IInProcess)Mocks.NewMock(typeof(IInProcess));
             Expect.Exactly(2).On(inProcess).Method("PerformStep");
             ProcessAllBooks(fullName, otFlag, otBooks, ntBooks, codeNames, xsltArgs, inProcess);
             var sr = new StreamReader(fullName);
@@ -199,7 +199,7 @@ namespace Test.TheWordConvertTest
             sr.Close();
             File.Delete(fullName);
             Assert.AreEqual(1773, data.Split(new[] { '\n' }).Length);
-            mocks.VerifyAllExpectationsHaveBeenMet();
+            Mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test]
@@ -214,7 +214,7 @@ namespace Test.TheWordConvertTest
             xsltArgs.AddParam("bookNames", "", "file://" + FileInput("BookNames.xml"));
             var temp = Path.GetTempFileName();
             var sw = new StreamWriter(temp);
-            var inProcess = (IInProcess) mocks.NewMock(typeof (IInProcess));
+            var inProcess = (IInProcess) Mocks.NewMock(typeof (IInProcess));
             Expect.Exactly(2).On(inProcess).Method("PerformStep");
             ProcessTestament(books, codeNames, xsltArgs, sw, inProcess);
             sw.Close();
@@ -223,16 +223,16 @@ namespace Test.TheWordConvertTest
             sr.Close();
             File.Delete(temp);
             Assert.AreEqual(1750, data.Split(new[] { '\n' }).Length);
-            mocks.VerifyAllExpectationsHaveBeenMet();
+            Mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
         private static void LoadMyXslt()
         {
-            var xsltSettings = new XsltSettings() {EnableDocumentFunction = true};
+            var xsltSettings = new XsltSettings {EnableDocumentFunction = true};
             string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
             var name = Common.PathCombine(codePath, "theWord.xsl");
             //var readerSettings = new XmlReaderSettings {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
-            var readerSettings = new XmlReaderSettings {};
+            var readerSettings = new XmlReaderSettings();
             var reader = XmlReader.Create(name, readerSettings);
             TheWord.Load(reader, xsltSettings, null);
         }
@@ -287,7 +287,7 @@ namespace Test.TheWordConvertTest
             }
             var temp = Path.GetTempFileName();
             var sw = new StreamWriter(temp);
-            var inProcess = (IInProcess)mocks.NewMock(typeof(IInProcess));
+            var inProcess = (IInProcess)Mocks.NewMock(typeof(IInProcess));
             Expect.Once.On(inProcess).Method("PerformStep");
             ProcessTestament(books, codeNames, xsltArgs, sw, inProcess);
             sw.Close();
@@ -300,7 +300,7 @@ namespace Test.TheWordConvertTest
             sr.Close();
             File.Delete(temp);
             Assert.AreEqual(expectedResult, data);
-            mocks.VerifyAllExpectationsHaveBeenMet();
+            Mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test]
@@ -476,7 +476,7 @@ namespace Test.TheWordConvertTest
         }
 
         [Test]
-        public void mt2b4mt1Test()
+        public void Mt2B4Mt1Test()
         {
             TestDataCase("GAL", "048GAL.usx", 1, "<TS2><font color=teal size=-1><b>To Suyat ni Pablo diya to mgo Taga-</b></font><Ts><TS1><font color=teal>GALACIA</font><Ts><sup>(1,2)</sup> Siak si Pablo iyan migsuyat to seini diyan iyu no mgo magtutuu no oghihimun duon to mgo kayunsudan no sakup to Galacia.<CM>Igpadomdom ku iyu no seini katongdanan ku to pagka-apustul, kona no otow to migpili dow migsugu kanay ko kona no si Jesu-Cristo yagboy dow to Diyus no Amoy no iyan migbanhaw kandin.<CM>Siak dow to tibo mgo suun ta kani duon ki Cristo nangumusta iyu.");
         }
@@ -534,7 +534,8 @@ namespace Test.TheWordConvertTest
             string exportTheWordInputPath = string.Empty;
             Assert.Throws(typeof (Win32Exception), delegate
                 {
-                    var actual = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
+                    //var actual = 
+                        ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
                 });
             //Assert.AreEqual("<No MySword Result>", actual);
         }
@@ -594,11 +595,11 @@ namespace Test.TheWordConvertTest
         public void CreateRampTest()
         {
             Common.Testing = true;
-            var projInfo = (IPublicationInformation) mocks.NewMock(typeof (IPublicationInformation));
+            var projInfo = (IPublicationInformation) Mocks.NewMock(typeof (IPublicationInformation));
             Expect.Once.On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(_outputPath));
             Expect.Once.On(projInfo).GetProperty("ProjectInputType").Will(Return.Value("Scripture"));
             CreateRAMP(projInfo);
-            mocks.VerifyAllExpectationsHaveBeenMet();
+            Mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
         /// <summary>
@@ -676,8 +677,7 @@ namespace Test.TheWordConvertTest
             Common.Testing = true;
             string thewordformatTxt = string.Empty;
             string format = string.Empty;
-            string actual;
-            actual = GetFormat(thewordformatTxt, format);
+            string actual = GetFormat(thewordformatTxt, format);
             Assert.AreEqual(string.Empty, actual);
         }
 
@@ -687,10 +687,11 @@ namespace Test.TheWordConvertTest
         [Test]
         public void GetRtlParamTest()
         {
-            XsltArgumentList xsltArgs = null;
+            const XsltArgumentList xsltArgs = null;
             Ssf = Path.Combine(_inputPath, "nkoNT.ssf");
+            // This test uses English.LDS in the input testfiles.
             GetRtlParam(xsltArgs);
-            Assert.False(R2l);
+            Assert.False(R2L);
             Ssf = string.Empty;
         }
 
@@ -725,7 +726,7 @@ namespace Test.TheWordConvertTest
         public void LaunchFileNavigatorTest()
         {
             Common.Testing = true;
-            string exportTheWordInputPath = string.Empty; // TODO: Initialize to an appropriate value
+            string exportTheWordInputPath = string.Empty;
             LaunchFileNavigator(exportTheWordInputPath);
             Assert.AreEqual(0, SubProcess.ExitCode);
         }
@@ -906,7 +907,8 @@ namespace Test.TheWordConvertTest
             var exportTheWordInputPath = Path.Combine(_inputPath, "USX");
             Assert.Throws(typeof (FileNotFoundException), delegate
                 {
-                    string actual = UsxDir(exportTheWordInputPath);
+                    //string actual = 
+                        UsxDir(exportTheWordInputPath);
                 });
         }
 
@@ -916,12 +918,12 @@ namespace Test.TheWordConvertTest
         [Test]
         public void PostTransformMessageTest()
         {
-            _messageFullName = Path.GetTempFileName();
+            MessageFullName = Path.GetTempFileName();
             const string message = "Test Message";
             PostTransformMessage(message);
             XsltMessageClose();
-            var data = FileData.Get(_messageFullName);
-            File.Delete(_messageFullName);
+            var data = FileData.Get(MessageFullName);
+            File.Delete(MessageFullName);
             Assert.True(data.Contains(message));
             Assert.True(data.StartsWith("<html>"));
             Assert.True(data.TrimEnd().EndsWith("</html>"));

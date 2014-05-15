@@ -29,7 +29,7 @@
     <xsl:output  encoding="UTF-8" method="text"/>
     
     <xsl:variable name="code" select="//book/@code"/>
-    <xsl:variable name="verseRefs" select="document($verseStructure)//bk"/>
+    <xsl:variable name="verseRefs" select="document($versification)//bk"/>
     <xsl:variable name="vrs" select="$verseRefs[@code=$code]"/>
     <xsl:variable name="bookNamesBook" select="document($bookNames)//book"/>
     
