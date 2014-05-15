@@ -18,7 +18,7 @@
     <xsl:param name="sequencePunc">,</xsl:param>
     <xsl:param name="bookSequencePunc">;</xsl:param>
     <xsl:param name="bookNames">BookNames.xml</xsl:param>
-    <xsl:param name="verseStructure">vrs.xml</xsl:param>
+    <xsl:param name="versification">vrs.xml</xsl:param>
     <xsl:param name="noStar" select="false()"/>
     <xsl:param name="noSaltillo" select="false()"/>
     <xsl:param name="rtl" select="false()"/>
