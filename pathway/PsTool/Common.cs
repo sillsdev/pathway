@@ -1757,6 +1757,10 @@ namespace SIL.Tool
             {
                 refFormat = idAllClass["@page-top-center"]["-ps-referenceformat"];
             }
+            else if (idAllClass.ContainsKey("@page:left-top-left"))
+            {
+                refFormat = idAllClass["@page:left-top-left"]["-ps-referenceformat"];
+            }
             return refFormat;
         }
         #endregion

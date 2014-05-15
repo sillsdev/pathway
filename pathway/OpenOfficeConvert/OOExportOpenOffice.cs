@@ -499,7 +499,7 @@ namespace SIL.PublishingSolution
             var isCoverImageInserted = EditCSSValues(idAllClass, out isToc);
 
 
-            _refFormat = GetReferenceFormat(idAllClass, _refFormat);
+            _refFormat = Common.GetReferenceFormat(idAllClass, _refFormat);
             IncludeTextinMacro(strMacroPath, _refFormat, macroFileName, projInfo.IsExtraProcessing, isCoverImageInserted, isToc);
 
             // BEGIN Generate Meta.Xml File
@@ -891,24 +891,6 @@ namespace SIL.PublishingSolution
             }
             xdoc.PreserveWhitespace = true;
             xdoc.Save(filename);
-        }
-
-        private string GetReferenceFormat(Dictionary<string, Dictionary<string, string>> idAllClass, string refFormat)
-        {
-            if (idAllClass.ContainsKey("ReferenceFormat"))
-                if (idAllClass["ReferenceFormat"].ContainsKey("@page"))
-                {
-                    refFormat = idAllClass["ReferenceFormat"]["@page"];
-                }
-                else if (idAllClass["ReferenceFormat"].ContainsKey("@page:left"))
-                {
-                    refFormat = idAllClass["ReferenceFormat"]["@page:left"];
-                }
-                else if (idAllClass["ReferenceFormat"].ContainsKey("@page:right"))
-                {
-                    refFormat = idAllClass["ReferenceFormat"]["@page:right"];
-                }
-            return refFormat;
         }
 
         private static void MoveStylesToContent(string strStylePath, string strContentPath)
