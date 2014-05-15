@@ -897,6 +897,7 @@ namespace Test.PsTool
         // C:\ProgramData\SIL\WritingSystemStore\ur.ldml
         public void GetTextDirection()
         {
+            Common.TextDirectionLanguageFile = null; // This test depends on this variable not being set in advance
             string expected = "ltr";
             string NkonyaCode = "nko";  //Used in Nkonya dataset
             string SenaCode = "seh";    //Used in Sena dataset
