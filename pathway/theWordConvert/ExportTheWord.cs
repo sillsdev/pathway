@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Security;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -213,8 +214,16 @@ namespace SIL.PublishingSolution
             {
                 var appData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var theWordFolder = Common.PathCombine(Common.PathCombine(appData, "The Word"), "Bibles");
-                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.TheWordKey, "RegisteredLocation", "",
-                                                      out _theWorProgPath))
+                try
+                {
+                    RegistryHelperLite.RegEntryExists(RegistryHelperLite.TheWordKey, "RegisteredLocation", "",
+                                                      out _theWorProgPath);
+                }
+                catch (SecurityException) // on Ubuntu this error comes too
+                {
+                    _theWorProgPath = null;
+                }
+                if (_theWorProgPath != null)
                 {
                     if (!File.Exists((string) _theWorProgPath))
                     {
