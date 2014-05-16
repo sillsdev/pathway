@@ -896,11 +896,11 @@ namespace Test.theWordConvert
             string actual = TheWordCreatorTempDirectory(theWordFullPath);
             if (!Common.IsUnixOS())
             {
-                Assert.True(actual.EndsWith("AppData\\Local\\Temp\\TheWord"));
+                Assert.True(actual.EndsWith(@"\Temp\TheWord"), "actual = " + actual);
             }
             else
             {
-                Assert.True(actual.EndsWith("/TheWord"));
+                Assert.True(actual.EndsWith("/TheWord"), "actual = " + actual);
             }
         }
 
