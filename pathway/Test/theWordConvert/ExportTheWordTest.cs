@@ -894,14 +894,7 @@ namespace Test.theWordConvert
         {
             var theWordFullPath = Path.Combine(Common.ProgInstall, "TheWord");
             string actual = TheWordCreatorTempDirectory(theWordFullPath);
-            if (!Common.IsUnixOS())
-            {
-                Assert.True(actual.EndsWith(@"\Temp\TheWord"), "actual = " + actual);
-            }
-            else
-            {
-                Assert.True(actual.EndsWith("/TheWord"), "actual = " + actual);
-            }
+            Assert.True(actual.EndsWith(@"TheWord"), "actual = " + actual);
         }
 
         /// <summary>
