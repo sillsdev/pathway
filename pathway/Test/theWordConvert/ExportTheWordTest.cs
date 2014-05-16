@@ -577,6 +577,7 @@ namespace Test.theWordConvert
         ///A test for ConvertToMySword
         ///</summary>
         [Test]
+        [NUnit.Framework.Category("ShortTest")]
         [NUnit.Framework.Category("SkipOnTeamCity")]
         public void ConvertToMySwordTest()
         {
@@ -644,6 +645,8 @@ namespace Test.theWordConvert
         ///A test for Export
         ///</summary>
         [Test]
+        [NUnit.Framework.Category("ShortTest")]
+        [NUnit.Framework.Category("SkipOnTeamCity")]
         public void ExportTest()
         {
             Common.Testing = true;
