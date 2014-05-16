@@ -14,6 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
+#region using
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +29,7 @@ using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
 using Test.CssDialog;
-using System.Security;
+#endregion using
 
 namespace Test.theWordConvert
 {
@@ -576,6 +577,7 @@ namespace Test.theWordConvert
         ///A test for ConvertToMySword
         ///</summary>
         [Test]
+        [NUnit.Framework.Category("SkipOnTeamCity")]
         public void ConvertToMySwordTest()
         {
             const string nkont = "nko.nt";
