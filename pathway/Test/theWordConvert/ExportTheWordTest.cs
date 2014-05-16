@@ -895,7 +895,7 @@ namespace Test.theWordConvert
             }
             else
             {
-                Assert.AreEqual("/tmp/TheWord", actual);
+                Assert.True(actual.EndsWith("/TheWord"));
             }
         }
 
