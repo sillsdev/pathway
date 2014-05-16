@@ -291,8 +291,9 @@ mytime = now
 
 			
 			If stDTF(i).Content &lt;&gt; stDTF(i-1).Content Then
-				CurrVariablePageNo = PageNo&apos; GetPageNumber(stDTF(i).GetAnchor)
+				CurrVariablePageNo = GetPageNumber(stDTF(i).GetAnchor)
 				NextVariablePageNo = GetPageNumber(stDTF(i-1).GetAnchor)
+				CurrVariablePageNo = CurrVariablePageNo - DiffPageNo
 				NextVariablePageNo = NextVariablePageNo - DiffPageNo
 				If CurrVariablePageNo = NextVariablePageNo Then
 					References(j) = PageNo
@@ -406,7 +407,7 @@ mytime = now
 		
 	oContWindow.Visible = true 
 	&apos;msgbox keep
-
+oDoc.store() 
 Exit Sub
 MyError:
 	If isProgressClosed = False Then
