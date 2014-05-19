@@ -531,7 +531,11 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void InsertVariableForSpanningChapaters()
         {
-            if (_reader.Name == "div" && _nextVerse && _classNameWithLang.ToLower() == "paragraph")
+            if (!_nextVerse && (_classNameWithLang.ToLower().IndexOf("paragraph") == 0 || _classNameWithLang.ToLower().IndexOf("line") == 0))
+            {
+                _nextVerse = true;
+            }
+            if (_reader.Name == "div" && _nextVerse && (_classNameWithLang.ToLower().IndexOf("paragraph") == 0 || _classNameWithLang.ToLower().IndexOf("line") == 0))//_classNameWithLang.ToLower() == "paragraph" 
             {
                 if (!string.IsNullOrEmpty(_previousGuideword))
                 {
@@ -3266,7 +3270,7 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture
+            else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture dictionary
             {
                 if (_refFormat.ToLower() == "genesis 1-2")
                 {
