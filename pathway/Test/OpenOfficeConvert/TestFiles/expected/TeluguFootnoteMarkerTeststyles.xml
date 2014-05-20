@@ -67,9 +67,6 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ChapterNumber_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headerFontStyleName" style:family="paragraph" style:parent-style-name="Standard">
-      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" />
-    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
@@ -764,17 +761,7 @@
         </text:p>
       </style:header>
       <style:footer>
-        <text:p text:style-name="Footer">
-          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="35.25pt" fo:min-width="145pt" draw:z-index="1">
-            <draw:text-box fo:min-height="14.14pt">
-              <text:p text:style-name="MP1">
-                <text:span text:style-name="MT1">
-                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
-                </text:span>
-              </text:p>
-            </draw:text-box>
-          </draw:frame>
-        </text:p>
+        <text:p text:style-name="Footer" />
       </style:footer>
     </style:master-page>
   </office:master-styles>

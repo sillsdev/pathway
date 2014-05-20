@@ -1935,7 +1935,7 @@ namespace SIL.PublishingSolution
             {
                 _refFormat = Common.GetReferenceFormat(_cssProperty, _refFormat);
             }
-            if (_refFormat.ToLower() != "genesis 1-2")
+            if (_refFormat.IndexOf("1-2") == -1)
             {
                 _writer.WriteStartElement("draw:frame");
                 _writer.WriteAttributeString("draw:style-name", mainFrameName);

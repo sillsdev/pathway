@@ -531,27 +531,34 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void InsertVariableForSpanningChapaters()
         {
-            if (!_nextVerse && (_classNameWithLang.ToLower().IndexOf("paragraph") == 0 || _classNameWithLang.ToLower().IndexOf("line") == 0))
+            if (_refFormat.IndexOf("1-2") > 0)
             {
-                _nextVerse = true;
-            }
-            if (_reader.Name == "div" && _nextVerse && (_classNameWithLang.ToLower().IndexOf("paragraph") == 0 || _classNameWithLang.ToLower().IndexOf("line") == 0))//_classNameWithLang.ToLower() == "paragraph" 
-            {
-                if (!string.IsNullOrEmpty(_previousGuideword))
+                if (!_nextVerse &&
+                    (_classNameWithLang.ToLower().IndexOf("paragraph") == 0 ||
+                     _classNameWithLang.ToLower().IndexOf("line") == 0))
                 {
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                    _writer.WriteStartElement("text:variable-set");
-                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                    _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + _previousGuideword);
-                    _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", _previousGuideword);
-                    _writer.WriteEndElement();
-                    _writer.WriteEndElement();
+                    _nextVerse = true;
                 }
-                _nextVerse = false;
-            }            
+                if (_reader.Name == "div" && _nextVerse &&
+                    (_classNameWithLang.ToLower().IndexOf("paragraph") == 0 ||
+                     _classNameWithLang.ToLower().IndexOf("line") == 0)) //_classNameWithLang.ToLower() == "paragraph" 
+                {
+                    if (!string.IsNullOrEmpty(_previousGuideword))
+                    {
+                        _writer.WriteStartElement("text:span");
+                        _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                        _writer.WriteStartElement("text:variable-set");
+                        _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                        _writer.WriteAttributeString("text:display", "none");
+                        _writer.WriteAttributeString("text:formula", "ooow: " + _previousGuideword);
+                        _writer.WriteAttributeString("office:value-type", "string");
+                        _writer.WriteAttributeString("office:string-value", _previousGuideword);
+                        _writer.WriteEndElement();
+                        _writer.WriteEndElement();
+                    }
+                    _nextVerse = false;
+                }
+            }
         }
         /// <summary>
         /// Insert Empty Span if Picture comes first for a LetHead in Dictionary
@@ -929,17 +936,17 @@ namespace SIL.PublishingSolution
 
                 if (_isH2Complaint)
                 {
-                    if ((_allCharacter.Peek().IndexOf("h2_scrSection") >= 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) ||
+                    if ((_allCharacter.Peek().IndexOf("h2_scrSection") >= 0 && _refFormat.ToLower().IndexOf("gen 1") == 0) ||
                         (_allCharacter.Peek().IndexOf("h2_scrSection") >= 0 &&
-                            RefFormat.ToLower().IndexOf("genesis 1") == 0))
+                            _refFormat.ToLower().IndexOf("genesis 1") == 0))
                     {
                         content = content.TrimEnd() + " ";
                         _strBook = content;
                         InsertLeftRightReference(_strBook, "Left_Guideword_L");
                     }
-                    else if ((_allCharacter.Peek().IndexOf("h3_scrSection") >= 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) ||
+                    else if ((_allCharacter.Peek().IndexOf("h3_scrSection") >= 0 && _refFormat.ToLower().IndexOf("gen 1") == 0) ||
                         (_allCharacter.Peek().IndexOf("h3_scrSection") >= 0 &&
-                            RefFormat.ToLower().IndexOf("genesis 1") == 0))
+                            _refFormat.ToLower().IndexOf("genesis 1") == 0))
                     {
                         content = content.TrimEnd() + " ";
                         _h3Book = content;
@@ -948,9 +955,9 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat.ToLower().IndexOf("gen 1") == 0) ||
+                    if ((_allCharacter.Peek().IndexOf("scrBookCode") == 0 && _refFormat.ToLower().IndexOf("gen 1") == 0) ||
                         (_allCharacter.Peek().IndexOf("scrBookName") == 0 &&
-                         RefFormat.ToLower().IndexOf("genesis 1") == 0))
+                         _refFormat.ToLower().IndexOf("genesis 1") == 0))
                     {
                         //_strBook = content;
                         content = content.TrimEnd() + " ";
@@ -961,7 +968,7 @@ namespace SIL.PublishingSolution
                         _strBook = content;
                     }
                     else if (_allCharacter.Peek().IndexOf("span_TitleMain") == 0 &&
-                             RefFormat.ToLower().IndexOf("genesis 1") == 0 && _strBook.Trim().Length == 0)
+                             _refFormat.ToLower().IndexOf("genesis 1") == 0 && _strBook.Trim().Length == 0)
                     {
                         //_strBook = content;
                         content = content.TrimEnd() + " ";
@@ -3272,7 +3279,7 @@ namespace SIL.PublishingSolution
             }
             else if (_projInfo.ProjectInputType.ToLower() == "scripture")//scripture dictionary
             {
-                if (_refFormat.ToLower() == "genesis 1-2")
+                if (_refFormat.IndexOf("1-2") > 0)
                 {
                     if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0)
                     {
@@ -3326,7 +3333,7 @@ namespace SIL.PublishingSolution
                     leftHeadword = content;
                     rightContent = _h3Book + chapterNo;
                 }
-                if (_refFormat.ToLower() == "genesis 1-2")
+                if (_refFormat.IndexOf("1-2") > 0)
                 {
                     leftHeadword = _strBook + _strPreviousChapterNumber;
 
