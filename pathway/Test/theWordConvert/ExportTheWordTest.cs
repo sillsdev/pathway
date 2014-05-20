@@ -588,18 +588,11 @@ namespace Test.theWordConvert
             string tempTheWordCreatorPath = _converterPath;
             string exportTheWordInputPath = _outputPath;
             var actual = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
-            if (!Common.IsUnixOS())
+            Assert.AreEqual(Path.Combine(_outputPath, "nko.bbl.mybible"), actual);
+            Assert.True(File.Exists(actual));
+            if (File.Exists(actual))
             {
-                Assert.AreEqual(Path.Combine(_outputPath, "nko.bbl.mybible"), actual);
-                Assert.True(File.Exists(actual));
-                if (File.Exists(actual))
-                {
-                    File.Delete(actual);
-                }
-            }
-            else
-            {
-                Assert.AreEqual("<No MySword Result>", actual);
+                File.Delete(actual);
             }
         }
 
