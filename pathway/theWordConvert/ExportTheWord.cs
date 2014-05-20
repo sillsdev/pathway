@@ -551,14 +551,19 @@ namespace SIL.PublishingSolution
 
         protected static string ConvertToMySword(string resultName, string tempTheWordCreatorPath, string exportTheWordInputPath)
         {
-            var myProc = Process.Start(new ProcessStartInfo
-            {
-                Arguments = resultName,
-                FileName = "TheWordBible2MySword.exe",
-                WorkingDirectory = tempTheWordCreatorPath,
-                CreateNoWindow = true
-            });
-            myProc.WaitForExit();
+			const string converterName = "TheWordBible2MySword.exe";
+			var processStartInfo = new ProcessStartInfo {
+	                Arguments = resultName,
+	                FileName = converterName,
+	                WorkingDirectory = tempTheWordCreatorPath,
+	                CreateNoWindow = true
+	            };
+			if (Common.IsUnixOS())
+			{
+				processStartInfo.Arguments = string.Format("{0} {1}", converterName, resultName);
+				processStartInfo.FileName = "mono";
+			}
+            Process.Start(processStartInfo).WaitForExit();
             var mySwordFiles = Directory.GetFiles(tempTheWordCreatorPath, "*.mybible");
             var mySwordResult = "<No MySword Result>";
             if (mySwordFiles.Length >= 1)

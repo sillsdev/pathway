@@ -440,7 +440,7 @@
     <!-- TestBackend Include="..\CadreBibleConvert\$(OutputPath)\CadreBibleConvert.*" / -->
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
     <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
-    <BteBackend Include="..\theWordConvert\$(OutputPath)\theWordConvert.*" />
+    <BteBackend Include="..\theWordConvert\$(OutputPath)\TheWordConvert.*" />
     <BteBackend Include="..\theWordConvert\$(OutputPath)\*.xml" />
     <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
