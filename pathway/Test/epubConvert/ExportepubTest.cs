@@ -217,7 +217,7 @@ namespace Test.epubConvert
             zf = new FastZip();
             zf.ExtractZip(result, FileOutput("ExportDictionaryCSSFileComparison"), ".*");
 
-            TextFileAssert.AreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparison/OEBPS/book.css"), new ArrayList { 3, 52, 93, 110, 112, 643, 652, 965 });
+            TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparison/OEBPS/book.css"), new ArrayList { 3, 52, 93, 110, 112, 643, 652, 965 });
             
         }
 

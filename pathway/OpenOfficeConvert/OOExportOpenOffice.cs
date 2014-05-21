@@ -406,6 +406,15 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private void SetBookReferenceDivInCSS(string cssFileName)
+        {
+            TextWriter tw = new StreamWriter(cssFileName, true);
+            tw.WriteLine(".BookReferenceDiv {");
+            tw.WriteLine(" display: none;");
+            tw.WriteLine("}");
+            tw.Close();
+        }
+
         /// <summary>
         /// Convert XHTML to ODT and ODM
         /// </summary>
@@ -449,6 +458,7 @@ namespace SIL.PublishingSolution
             }
 
             string cssFile = projInfo.DefaultCssFileWithPath;
+            SetBookReferenceDivInCSS(cssFile);
             var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(defaultXhtml);
             if(projInfo.DefaultRevCssFileWithPath != null && projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
             {

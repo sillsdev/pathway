@@ -2892,7 +2892,8 @@ namespace SIL.Tool
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
-            const string xPath = "//div[@class='Title_Main']";
+            string bookName = string.Empty;
+            const string xPath = "//div[@class='scrBook']";
             XmlNodeList bookLists = xDoc.SelectNodes(xPath, namespaceManager);
             if (bookLists != null && bookLists.Count > 0)
             {
@@ -2904,6 +2905,31 @@ namespace SIL.Tool
                     if (divNode.Attributes != null) divNode.Attributes.Append(xmlAttribute);
                     divNode.InnerText = " ";
                     bookLists[i].InsertBefore(divNode, bookLists[i].FirstChild);
+
+                    XmlNode getBookName = bookLists[i].ParentNode;
+                    XmlNodeList bookNodeList = getBookName.SelectNodes("//span[@class='scrBookName']", namespaceManager);
+                    bookName = bookNodeList.Item(i).InnerText;
+
+
+                    XmlNode divReferenceNode = xDoc.CreateElement("div");
+                    XmlAttribute xmlReferenceAttribute = xDoc.CreateAttribute("class");
+                    xmlReferenceAttribute.Value = "BookReferenceDiv";
+                    if (divReferenceNode.Attributes != null) divReferenceNode.Attributes.Append(xmlReferenceAttribute);
+                    divReferenceNode.InnerText = bookName;
+                    if (i == 0)
+                    {
+                        bookLists[i].InsertBefore(divReferenceNode, bookLists[i].FirstChild);
+                    }
+                    else
+                    {
+                        //bookLists[i-1].InsertAfter(divReferenceNode, bookLists[i-1].LastChild);
+                        XmlNodeList columnList = bookLists[i - 1].SelectNodes(".//div[@class='columns']", namespaceManager);
+                        if (columnList != null && columnList.Count > 0)
+                        {
+                            columnList[columnList.Count - 1].InsertAfter(divReferenceNode, columnList[columnList.Count-1].LastChild);
+                        }
+                    }
+                    
                 }
             }
             xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);

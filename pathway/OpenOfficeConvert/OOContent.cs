@@ -3227,7 +3227,7 @@ namespace SIL.PublishingSolution
         {
             if (!_isH2Complaint)
             {
-                if (_classNameWithLang.IndexOf("scrBookName") == 0) // == "scrBook_scrBody"
+                if (_classNameWithLang.IndexOf("BookReferenceDiv") == 0) // == "scrBook_scrBody" // BookReferenceDiv
                 {
                     content += "1";
                     _writer.WriteStartElement("text:span");
