@@ -4393,7 +4393,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                const string msg = "Are you sure you want to delete the current settings file and reset to default settings?";
+                const string msg = "Are you sure you want to remove all custom style sheets and restore settings to their initial values? (This can not be undone.)";
                 const string caption = "Reset Settings";
                 if (!cTool._fromNunit)
                 {
@@ -4409,6 +4409,7 @@ namespace SIL.PublishingSolution
                     Common.CleanDirectory(di);
                 }
                 SelectedRowIndex = 0;
+                inputTypeBL = cTool.InputType;
                 ConfigurationTool_LoadBL();
                 MessageBox.Show("Settings files are reset successfully.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

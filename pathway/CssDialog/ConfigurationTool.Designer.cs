@@ -281,7 +281,7 @@ namespace SIL.PublishingSolution
             this.stylesGrid.RowHeadersVisible = false;
             this.stylesGrid.RowTemplate.Height = 24;
             this.stylesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.stylesGrid.Size = new System.Drawing.Size(601, 717);
+            this.stylesGrid.Size = new System.Drawing.Size(600, 717);
             this.stylesGrid.TabIndex = 0;
             this.stylesGrid.TabStop = false;
             this.stylesGrid.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.stylesGrid_ColumnWidthChanged);
@@ -298,8 +298,8 @@ namespace SIL.PublishingSolution
             this.tsUndo,
             this.tsRedo,
             this.tsPreview,
-            this.tsReset,
             this.tsDefault,
+            this.tsReset,
             this.tsSend,
             this.toolStripSplitButton1});
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
@@ -492,10 +492,10 @@ namespace SIL.PublishingSolution
             this.tabControl1.Controls.Add(this.tabPicture);
             this.tabControl1.HotTrack = true;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(413, 659);
+            this.tabControl1.Size = new System.Drawing.Size(414, 659);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -516,10 +516,10 @@ namespace SIL.PublishingSolution
             this.tabInfo.Controls.Add(this.txtName);
             this.tabInfo.Controls.Add(this.lblName);
             this.tabInfo.Location = new System.Drawing.Point(4, 25);
-            this.tabInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabInfo.Margin = new System.Windows.Forms.Padding(4);
             this.tabInfo.Name = "tabInfo";
-            this.tabInfo.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabInfo.Size = new System.Drawing.Size(405, 630);
+            this.tabInfo.Padding = new System.Windows.Forms.Padding(4);
+            this.tabInfo.Size = new System.Drawing.Size(406, 630);
             this.tabInfo.TabIndex = 0;
             this.tabInfo.Text = "Info";
             this.tabInfo.UseVisualStyleBackColor = true;
@@ -553,10 +553,10 @@ namespace SIL.PublishingSolution
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtApproved.Enabled = false;
             this.txtApproved.Location = new System.Drawing.Point(101, 263);
-            this.txtApproved.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtApproved.Margin = new System.Windows.Forms.Padding(4);
             this.txtApproved.MaxLength = 10;
             this.txtApproved.Name = "txtApproved";
-            this.txtApproved.Size = new System.Drawing.Size(399, 22);
+            this.txtApproved.Size = new System.Drawing.Size(400, 22);
             this.txtApproved.TabIndex = 5;
             this.txtApproved.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtApproved.Validated += new System.EventHandler(this.txtApproved_Validated);
@@ -576,9 +576,9 @@ namespace SIL.PublishingSolution
             this.btnApproved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApproved.Location = new System.Drawing.Point(324, 507);
-            this.btnApproved.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnApproved.Margin = new System.Windows.Forms.Padding(4);
             this.btnApproved.Name = "btnApproved";
-            this.btnApproved.Size = new System.Drawing.Size(178, 31);
+            this.btnApproved.Size = new System.Drawing.Size(179, 31);
             this.btnApproved.TabIndex = 6;
             this.btnApproved.Text = "...";
             this.btnApproved.UseVisualStyleBackColor = true;
@@ -598,7 +598,7 @@ namespace SIL.PublishingSolution
             // 
             this.chkAvailable.AutoSize = true;
             this.chkAvailable.Location = new System.Drawing.Point(107, 144);
-            this.chkAvailable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkAvailable.Margin = new System.Windows.Forms.Padding(4);
             this.chkAvailable.Name = "chkAvailable";
             this.chkAvailable.Size = new System.Drawing.Size(18, 17);
             this.chkAvailable.TabIndex = 3;
@@ -612,12 +612,12 @@ namespace SIL.PublishingSolution
             this.txtComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtComment.Location = new System.Drawing.Point(101, 165);
-            this.txtComment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtComment.Margin = new System.Windows.Forms.Padding(4);
             this.txtComment.MaxLength = 250;
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
             this.txtComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtComment.Size = new System.Drawing.Size(399, 91);
+            this.txtComment.Size = new System.Drawing.Size(400, 91);
             this.txtComment.TabIndex = 4;
             this.txtComment.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtComment.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtComment_KeyUp);
@@ -637,12 +637,12 @@ namespace SIL.PublishingSolution
             this.txtDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDesc.Location = new System.Drawing.Point(101, 46);
-            this.txtDesc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDesc.Margin = new System.Windows.Forms.Padding(4);
             this.txtDesc.MaxLength = 250;
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDesc.Size = new System.Drawing.Size(399, 91);
+            this.txtDesc.Size = new System.Drawing.Size(400, 91);
             this.txtDesc.TabIndex = 2;
             this.txtDesc.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.txtDesc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDesc_KeyUp);
@@ -662,10 +662,10 @@ namespace SIL.PublishingSolution
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.Location = new System.Drawing.Point(101, 14);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(399, 22);
+            this.txtName.Size = new System.Drawing.Size(400, 22);
             this.txtName.TabIndex = 1;
             this.txtName.Enter += new System.EventHandler(this.txtName_Enter);
             this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyUp);
@@ -715,10 +715,10 @@ namespace SIL.PublishingSolution
             this.tabDisplay.Controls.Add(this.ddlPagePageSize);
             this.tabDisplay.Controls.Add(this.lblPagePageSize);
             this.tabDisplay.Location = new System.Drawing.Point(4, 25);
-            this.tabDisplay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabDisplay.Margin = new System.Windows.Forms.Padding(4);
             this.tabDisplay.Name = "tabDisplay";
-            this.tabDisplay.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabDisplay.Size = new System.Drawing.Size(404, 622);
+            this.tabDisplay.Padding = new System.Windows.Forms.Padding(4);
+            this.tabDisplay.Size = new System.Drawing.Size(405, 630);
             this.tabDisplay.TabIndex = 1;
             this.tabDisplay.Text = "Properties";
             this.tabDisplay.UseVisualStyleBackColor = true;
@@ -727,7 +727,7 @@ namespace SIL.PublishingSolution
             // 
             this.chkDisableWO.AutoSize = true;
             this.chkDisableWO.Location = new System.Drawing.Point(144, 235);
-            this.chkDisableWO.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkDisableWO.Margin = new System.Windows.Forms.Padding(4);
             this.chkDisableWO.Name = "chkDisableWO";
             this.chkDisableWO.Size = new System.Drawing.Size(227, 21);
             this.chkDisableWO.TabIndex = 107;
@@ -740,7 +740,7 @@ namespace SIL.PublishingSolution
             this.pnlGuidewordLength.Controls.Add(this.txtGuidewordLength);
             this.pnlGuidewordLength.Controls.Add(this.label9);
             this.pnlGuidewordLength.Location = new System.Drawing.Point(1, 385);
-            this.pnlGuidewordLength.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlGuidewordLength.Margin = new System.Windows.Forms.Padding(4);
             this.pnlGuidewordLength.Name = "pnlGuidewordLength";
             this.pnlGuidewordLength.Size = new System.Drawing.Size(389, 31);
             this.pnlGuidewordLength.TabIndex = 106;
@@ -749,7 +749,7 @@ namespace SIL.PublishingSolution
             // 
             this.txtGuidewordLength.AccessibleName = "txtPageGutterWidth";
             this.txtGuidewordLength.Location = new System.Drawing.Point(143, 1);
-            this.txtGuidewordLength.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtGuidewordLength.Margin = new System.Windows.Forms.Padding(4);
             this.txtGuidewordLength.MaxLength = 2;
             this.txtGuidewordLength.Name = "txtGuidewordLength";
             this.txtGuidewordLength.Size = new System.Drawing.Size(57, 22);
@@ -781,7 +781,7 @@ namespace SIL.PublishingSolution
             this.pnlOtherFormat.Controls.Add(this.lblFont);
             this.pnlOtherFormat.Controls.Add(this.ddlFontSize);
             this.pnlOtherFormat.Location = new System.Drawing.Point(12, 558);
-            this.pnlOtherFormat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlOtherFormat.Margin = new System.Windows.Forms.Padding(4);
             this.pnlOtherFormat.Name = "pnlOtherFormat";
             this.pnlOtherFormat.Size = new System.Drawing.Size(367, 192);
             this.pnlOtherFormat.TabIndex = 103;
@@ -790,7 +790,7 @@ namespace SIL.PublishingSolution
             // 
             this.chkSplitFileByLetter.AutoSize = true;
             this.chkSplitFileByLetter.Location = new System.Drawing.Point(131, 154);
-            this.chkSplitFileByLetter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkSplitFileByLetter.Margin = new System.Windows.Forms.Padding(4);
             this.chkSplitFileByLetter.Name = "chkSplitFileByLetter";
             this.chkSplitFileByLetter.Size = new System.Drawing.Size(143, 21);
             this.chkSplitFileByLetter.TabIndex = 109;
@@ -817,7 +817,7 @@ namespace SIL.PublishingSolution
             this.ddlPageNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlPageNumber.FormattingEnabled = true;
             this.ddlPageNumber.Location = new System.Drawing.Point(131, 1);
-            this.ddlPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlPageNumber.Margin = new System.Windows.Forms.Padding(4);
             this.ddlPageNumber.Name = "ddlPageNumber";
             this.ddlPageNumber.Size = new System.Drawing.Size(233, 24);
             this.ddlPageNumber.TabIndex = 99;
@@ -830,7 +830,7 @@ namespace SIL.PublishingSolution
             this.ddlFileProduceDict.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlFileProduceDict.FormattingEnabled = true;
             this.ddlFileProduceDict.Location = new System.Drawing.Point(131, 90);
-            this.ddlFileProduceDict.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlFileProduceDict.Margin = new System.Windows.Forms.Padding(4);
             this.ddlFileProduceDict.Name = "ddlFileProduceDict";
             this.ddlFileProduceDict.Size = new System.Drawing.Size(233, 24);
             this.ddlFileProduceDict.TabIndex = 102;
@@ -854,7 +854,7 @@ namespace SIL.PublishingSolution
             this.ddlSense.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlSense.FormattingEnabled = true;
             this.ddlSense.Location = new System.Drawing.Point(131, 119);
-            this.ddlSense.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlSense.Margin = new System.Windows.Forms.Padding(4);
             this.ddlSense.Name = "ddlSense";
             this.ddlSense.Size = new System.Drawing.Size(233, 24);
             this.ddlSense.TabIndex = 103;
@@ -889,7 +889,7 @@ namespace SIL.PublishingSolution
             this.ddlRules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlRules.FormattingEnabled = true;
             this.ddlRules.Location = new System.Drawing.Point(131, 31);
-            this.ddlRules.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlRules.Margin = new System.Windows.Forms.Padding(4);
             this.ddlRules.Name = "ddlRules";
             this.ddlRules.Size = new System.Drawing.Size(233, 24);
             this.ddlRules.TabIndex = 100;
@@ -913,7 +913,7 @@ namespace SIL.PublishingSolution
             this.ddlFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlFontSize.FormattingEnabled = true;
             this.ddlFontSize.Location = new System.Drawing.Point(131, 60);
-            this.ddlFontSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlFontSize.Margin = new System.Windows.Forms.Padding(4);
             this.ddlFontSize.Name = "ddlFontSize";
             this.ddlFontSize.Size = new System.Drawing.Size(233, 24);
             this.ddlFontSize.TabIndex = 101;
@@ -929,7 +929,7 @@ namespace SIL.PublishingSolution
             this.pnlReferenceFormat.Controls.Add(this.ddlReferenceFormat);
             this.pnlReferenceFormat.Controls.Add(this.lblReferenceFormat);
             this.pnlReferenceFormat.Location = new System.Drawing.Point(0, 422);
-            this.pnlReferenceFormat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlReferenceFormat.Margin = new System.Windows.Forms.Padding(4);
             this.pnlReferenceFormat.Name = "pnlReferenceFormat";
             this.pnlReferenceFormat.Size = new System.Drawing.Size(389, 126);
             this.pnlReferenceFormat.TabIndex = 102;
@@ -938,7 +938,7 @@ namespace SIL.PublishingSolution
             // 
             this.chkHideSpaceVerseNo.AutoSize = true;
             this.chkHideSpaceVerseNo.Location = new System.Drawing.Point(143, 106);
-            this.chkHideSpaceVerseNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkHideSpaceVerseNo.Margin = new System.Windows.Forms.Padding(4);
             this.chkHideSpaceVerseNo.Name = "chkHideSpaceVerseNo";
             this.chkHideSpaceVerseNo.Size = new System.Drawing.Size(227, 21);
             this.chkHideSpaceVerseNo.TabIndex = 111;
@@ -949,7 +949,7 @@ namespace SIL.PublishingSolution
             // txtXrefCusSymbol
             // 
             this.txtXrefCusSymbol.Location = new System.Drawing.Point(319, 64);
-            this.txtXrefCusSymbol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtXrefCusSymbol.Margin = new System.Windows.Forms.Padding(4);
             this.txtXrefCusSymbol.Name = "txtXrefCusSymbol";
             this.txtXrefCusSymbol.Size = new System.Drawing.Size(57, 22);
             this.txtXrefCusSymbol.TabIndex = 110;
@@ -959,7 +959,7 @@ namespace SIL.PublishingSolution
             // 
             this.chkXrefCusSymbol.AutoSize = true;
             this.chkXrefCusSymbol.Location = new System.Drawing.Point(143, 62);
-            this.chkXrefCusSymbol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkXrefCusSymbol.Margin = new System.Windows.Forms.Padding(4);
             this.chkXrefCusSymbol.Name = "chkXrefCusSymbol";
             this.chkXrefCusSymbol.Size = new System.Drawing.Size(150, 21);
             this.chkXrefCusSymbol.TabIndex = 109;
@@ -971,7 +971,7 @@ namespace SIL.PublishingSolution
             // 
             this.chkTurnOffFirstVerse.AutoSize = true;
             this.chkTurnOffFirstVerse.Location = new System.Drawing.Point(143, 84);
-            this.chkTurnOffFirstVerse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkTurnOffFirstVerse.Margin = new System.Windows.Forms.Padding(4);
             this.chkTurnOffFirstVerse.Name = "chkTurnOffFirstVerse";
             this.chkTurnOffFirstVerse.Size = new System.Drawing.Size(138, 21);
             this.chkTurnOffFirstVerse.TabIndex = 107;
@@ -984,7 +984,7 @@ namespace SIL.PublishingSolution
             this.txtFnCallerSymbol.AccessibleName = "txtPageGutterWidth";
             this.txtFnCallerSymbol.Enabled = false;
             this.txtFnCallerSymbol.Location = new System.Drawing.Point(319, 36);
-            this.txtFnCallerSymbol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFnCallerSymbol.Margin = new System.Windows.Forms.Padding(4);
             this.txtFnCallerSymbol.MaxLength = 1;
             this.txtFnCallerSymbol.Name = "txtFnCallerSymbol";
             this.txtFnCallerSymbol.Size = new System.Drawing.Size(57, 22);
@@ -996,7 +996,7 @@ namespace SIL.PublishingSolution
             // 
             this.chkIncludeCusFnCaller.AutoSize = true;
             this.chkIncludeCusFnCaller.Location = new System.Drawing.Point(143, 38);
-            this.chkIncludeCusFnCaller.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkIncludeCusFnCaller.Margin = new System.Windows.Forms.Padding(4);
             this.chkIncludeCusFnCaller.Name = "chkIncludeCusFnCaller";
             this.chkIncludeCusFnCaller.Size = new System.Drawing.Size(175, 21);
             this.chkIncludeCusFnCaller.TabIndex = 105;
@@ -1012,7 +1012,7 @@ namespace SIL.PublishingSolution
             this.ddlReferenceFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlReferenceFormat.FormattingEnabled = true;
             this.ddlReferenceFormat.Location = new System.Drawing.Point(143, 6);
-            this.ddlReferenceFormat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlReferenceFormat.Margin = new System.Windows.Forms.Padding(4);
             this.ddlReferenceFormat.Name = "ddlReferenceFormat";
             this.ddlReferenceFormat.Size = new System.Drawing.Size(241, 24);
             this.ddlReferenceFormat.TabIndex = 99;
@@ -1031,7 +1031,7 @@ namespace SIL.PublishingSolution
             // chkFixedLineHeight
             // 
             this.chkFixedLineHeight.Location = new System.Drawing.Point(143, 330);
-            this.chkFixedLineHeight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkFixedLineHeight.Margin = new System.Windows.Forms.Padding(4);
             this.chkFixedLineHeight.Name = "chkFixedLineHeight";
             this.chkFixedLineHeight.Size = new System.Drawing.Size(144, 21);
             this.chkFixedLineHeight.TabIndex = 11;
@@ -1047,9 +1047,9 @@ namespace SIL.PublishingSolution
             this.ddlVerticalJustify.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlVerticalJustify.FormattingEnabled = true;
             this.ddlVerticalJustify.Location = new System.Drawing.Point(143, 201);
-            this.ddlVerticalJustify.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlVerticalJustify.Margin = new System.Windows.Forms.Padding(4);
             this.ddlVerticalJustify.Name = "ddlVerticalJustify";
-            this.ddlVerticalJustify.Size = new System.Drawing.Size(296, 24);
+            this.ddlVerticalJustify.Size = new System.Drawing.Size(282, 24);
             this.ddlVerticalJustify.TabIndex = 8;
             this.ddlVerticalJustify.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -1072,9 +1072,9 @@ namespace SIL.PublishingSolution
             this.ddlPicture.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlPicture.FormattingEnabled = true;
             this.ddlPicture.Location = new System.Drawing.Point(143, 263);
-            this.ddlPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlPicture.Margin = new System.Windows.Forms.Padding(4);
             this.ddlPicture.Name = "ddlPicture";
-            this.ddlPicture.Size = new System.Drawing.Size(296, 24);
+            this.ddlPicture.Size = new System.Drawing.Size(282, 24);
             this.ddlPicture.TabIndex = 9;
             this.ddlPicture.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -1108,9 +1108,9 @@ namespace SIL.PublishingSolution
             this.ddlLeading.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlLeading.FormattingEnabled = true;
             this.ddlLeading.Location = new System.Drawing.Point(143, 295);
-            this.ddlLeading.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlLeading.Margin = new System.Windows.Forms.Padding(4);
             this.ddlLeading.Name = "ddlLeading";
-            this.ddlLeading.Size = new System.Drawing.Size(296, 24);
+            this.ddlLeading.Size = new System.Drawing.Size(282, 24);
             this.ddlLeading.TabIndex = 10;
             this.ddlLeading.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
@@ -1122,9 +1122,9 @@ namespace SIL.PublishingSolution
             this.ddlRunningHead.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlRunningHead.FormattingEnabled = true;
             this.ddlRunningHead.Location = new System.Drawing.Point(143, 354);
-            this.ddlRunningHead.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlRunningHead.Margin = new System.Windows.Forms.Padding(4);
             this.ddlRunningHead.Name = "ddlRunningHead";
-            this.ddlRunningHead.Size = new System.Drawing.Size(296, 24);
+            this.ddlRunningHead.Size = new System.Drawing.Size(282, 24);
             this.ddlRunningHead.TabIndex = 12;
             this.ddlRunningHead.SelectedIndexChanged += new System.EventHandler(this.ddlRunningHead_SelectedIndexChanged);
             // 
@@ -1143,7 +1143,7 @@ namespace SIL.PublishingSolution
             // 
             this.txtPageGutterWidth.AccessibleName = "txtPageGutterWidth";
             this.txtPageGutterWidth.Location = new System.Drawing.Point(143, 140);
-            this.txtPageGutterWidth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPageGutterWidth.Margin = new System.Windows.Forms.Padding(4);
             this.txtPageGutterWidth.MaxLength = 6;
             this.txtPageGutterWidth.Name = "txtPageGutterWidth";
             this.txtPageGutterWidth.Size = new System.Drawing.Size(57, 22);
@@ -1179,7 +1179,7 @@ namespace SIL.PublishingSolution
             // 
             this.txtPageOutside.AccessibleName = "txtPageOutside";
             this.txtPageOutside.Location = new System.Drawing.Point(299, 47);
-            this.txtPageOutside.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPageOutside.Margin = new System.Windows.Forms.Padding(4);
             this.txtPageOutside.MaxLength = 6;
             this.txtPageOutside.Name = "txtPageOutside";
             this.txtPageOutside.Size = new System.Drawing.Size(43, 22);
@@ -1193,7 +1193,7 @@ namespace SIL.PublishingSolution
             // 
             this.txtPageInside.AccessibleName = "txtPageInside";
             this.txtPageInside.Location = new System.Drawing.Point(185, 47);
-            this.txtPageInside.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPageInside.Margin = new System.Windows.Forms.Padding(4);
             this.txtPageInside.MaxLength = 6;
             this.txtPageInside.Name = "txtPageInside";
             this.txtPageInside.Size = new System.Drawing.Size(43, 22);
@@ -1207,7 +1207,7 @@ namespace SIL.PublishingSolution
             // 
             this.txtPageTop.AccessibleName = "txtPageTop";
             this.txtPageTop.Location = new System.Drawing.Point(185, 79);
-            this.txtPageTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPageTop.Margin = new System.Windows.Forms.Padding(4);
             this.txtPageTop.MaxLength = 6;
             this.txtPageTop.Name = "txtPageTop";
             this.txtPageTop.Size = new System.Drawing.Size(43, 22);
@@ -1221,7 +1221,7 @@ namespace SIL.PublishingSolution
             // 
             this.txtPageBottom.AccessibleName = "txtPageBottom";
             this.txtPageBottom.Location = new System.Drawing.Point(299, 79);
-            this.txtPageBottom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPageBottom.Margin = new System.Windows.Forms.Padding(4);
             this.txtPageBottom.MaxLength = 6;
             this.txtPageBottom.Name = "txtPageBottom";
             this.txtPageBottom.Size = new System.Drawing.Size(43, 22);
@@ -1283,9 +1283,9 @@ namespace SIL.PublishingSolution
             this.ddlJustified.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlJustified.FormattingEnabled = true;
             this.ddlJustified.Location = new System.Drawing.Point(143, 170);
-            this.ddlJustified.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlJustified.Margin = new System.Windows.Forms.Padding(4);
             this.ddlJustified.Name = "ddlJustified";
-            this.ddlJustified.Size = new System.Drawing.Size(296, 24);
+            this.ddlJustified.Size = new System.Drawing.Size(282, 24);
             this.ddlJustified.TabIndex = 7;
             this.ddlJustified.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlJustified.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -1309,9 +1309,9 @@ namespace SIL.PublishingSolution
             this.ddlPageColumn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlPageColumn.FormattingEnabled = true;
             this.ddlPageColumn.Location = new System.Drawing.Point(143, 111);
-            this.ddlPageColumn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlPageColumn.Margin = new System.Windows.Forms.Padding(4);
             this.ddlPageColumn.Name = "ddlPageColumn";
-            this.ddlPageColumn.Size = new System.Drawing.Size(296, 24);
+            this.ddlPageColumn.Size = new System.Drawing.Size(282, 24);
             this.ddlPageColumn.TabIndex = 5;
             this.ddlPageColumn.SelectedIndexChanged += new System.EventHandler(this.ddlPageColumn_SelectedIndexChanged);
             this.ddlPageColumn.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -1335,9 +1335,9 @@ namespace SIL.PublishingSolution
             this.ddlPagePageSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlPagePageSize.FormattingEnabled = true;
             this.ddlPagePageSize.Location = new System.Drawing.Point(143, 14);
-            this.ddlPagePageSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlPagePageSize.Margin = new System.Windows.Forms.Padding(4);
             this.ddlPagePageSize.Name = "ddlPagePageSize";
-            this.ddlPagePageSize.Size = new System.Drawing.Size(296, 24);
+            this.ddlPagePageSize.Size = new System.Drawing.Size(282, 24);
             this.ddlPagePageSize.TabIndex = 0;
             this.ddlPagePageSize.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlPagePageSize.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -1369,10 +1369,10 @@ namespace SIL.PublishingSolution
             this.tabMobile.Controls.Add(this.pictureBox4);
             this.tabMobile.Controls.Add(this.mobileIcon);
             this.tabMobile.Location = new System.Drawing.Point(4, 25);
-            this.tabMobile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabMobile.Margin = new System.Windows.Forms.Padding(4);
             this.tabMobile.Name = "tabMobile";
-            this.tabMobile.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabMobile.Size = new System.Drawing.Size(404, 622);
+            this.tabMobile.Padding = new System.Windows.Forms.Padding(4);
+            this.tabMobile.Size = new System.Drawing.Size(405, 630);
             this.tabMobile.TabIndex = 2;
             this.tabMobile.Text = "Properties";
             this.tabMobile.UseVisualStyleBackColor = true;
@@ -1385,7 +1385,7 @@ namespace SIL.PublishingSolution
             this.ddlLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlLanguage.FormattingEnabled = true;
             this.ddlLanguage.Location = new System.Drawing.Point(149, 199);
-            this.ddlLanguage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlLanguage.Margin = new System.Windows.Forms.Padding(4);
             this.ddlLanguage.Name = "ddlLanguage";
             this.ddlLanguage.Size = new System.Drawing.Size(208, 24);
             this.ddlLanguage.TabIndex = 70;
@@ -1430,7 +1430,7 @@ namespace SIL.PublishingSolution
             // btnBrowse
             // 
             this.btnBrowse.Location = new System.Drawing.Point(184, 164);
-            this.btnBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(91, 28);
             this.btnBrowse.TabIndex = 10;
@@ -1457,7 +1457,7 @@ namespace SIL.PublishingSolution
             this.ddlRedLetter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlRedLetter.FormattingEnabled = true;
             this.ddlRedLetter.Location = new System.Drawing.Point(149, 130);
-            this.ddlRedLetter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlRedLetter.Margin = new System.Windows.Forms.Padding(4);
             this.ddlRedLetter.Name = "ddlRedLetter";
             this.ddlRedLetter.Size = new System.Drawing.Size(208, 24);
             this.ddlRedLetter.TabIndex = 4;
@@ -1482,7 +1482,7 @@ namespace SIL.PublishingSolution
             this.ddlFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlFiles.FormattingEnabled = true;
             this.ddlFiles.Location = new System.Drawing.Point(149, 96);
-            this.ddlFiles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlFiles.Margin = new System.Windows.Forms.Padding(4);
             this.ddlFiles.Name = "ddlFiles";
             this.ddlFiles.Size = new System.Drawing.Size(208, 24);
             this.ddlFiles.TabIndex = 2;
@@ -1504,7 +1504,7 @@ namespace SIL.PublishingSolution
             this.pictureBox4.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.cell;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox4.Location = new System.Drawing.Point(9, 9);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(43, 43);
             this.pictureBox4.TabIndex = 67;
@@ -1514,7 +1514,7 @@ namespace SIL.PublishingSolution
             // 
             this.mobileIcon.Image = ((System.Drawing.Image)(resources.GetObject("mobileIcon.Image")));
             this.mobileIcon.Location = new System.Drawing.Point(149, 166);
-            this.mobileIcon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mobileIcon.Margin = new System.Windows.Forms.Padding(4);
             this.mobileIcon.Name = "mobileIcon";
             this.mobileIcon.Size = new System.Drawing.Size(27, 25);
             this.mobileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1558,9 +1558,9 @@ namespace SIL.PublishingSolution
             this.tabOthers.Controls.Add(this.lblPct);
             this.tabOthers.Controls.Add(this.pictureBox1);
             this.tabOthers.Location = new System.Drawing.Point(4, 25);
-            this.tabOthers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabOthers.Margin = new System.Windows.Forms.Padding(4);
             this.tabOthers.Name = "tabOthers";
-            this.tabOthers.Size = new System.Drawing.Size(404, 622);
+            this.tabOthers.Size = new System.Drawing.Size(405, 630);
             this.tabOthers.TabIndex = 3;
             this.tabOthers.Text = "Properties";
             this.tabOthers.UseVisualStyleBackColor = true;
@@ -1569,7 +1569,7 @@ namespace SIL.PublishingSolution
             // 
             this.chkPageBreaks.AutoSize = true;
             this.chkPageBreaks.Location = new System.Drawing.Point(68, 294);
-            this.chkPageBreaks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkPageBreaks.Margin = new System.Windows.Forms.Padding(4);
             this.chkPageBreaks.Name = "chkPageBreaks";
             this.chkPageBreaks.Size = new System.Drawing.Size(213, 21);
             this.chkPageBreaks.TabIndex = 40;
@@ -1582,7 +1582,7 @@ namespace SIL.PublishingSolution
             // 
             this.chkIncludeImage.AutoSize = true;
             this.chkIncludeImage.Location = new System.Drawing.Point(68, 196);
-            this.chkIncludeImage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkIncludeImage.Margin = new System.Windows.Forms.Padding(4);
             this.chkIncludeImage.Name = "chkIncludeImage";
             this.chkIncludeImage.Size = new System.Drawing.Size(124, 21);
             this.chkIncludeImage.TabIndex = 39;
@@ -1597,7 +1597,7 @@ namespace SIL.PublishingSolution
             this.ddlReferences.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlReferences.FormattingEnabled = true;
             this.ddlReferences.Location = new System.Drawing.Point(196, 325);
-            this.ddlReferences.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlReferences.Margin = new System.Windows.Forms.Padding(4);
             this.ddlReferences.Name = "ddlReferences";
             this.ddlReferences.Size = new System.Drawing.Size(161, 24);
             this.ddlReferences.TabIndex = 14;
@@ -1618,7 +1618,7 @@ namespace SIL.PublishingSolution
             this.picFonts.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picFonts.BackgroundImage")));
             this.picFonts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picFonts.Location = new System.Drawing.Point(9, 391);
-            this.picFonts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picFonts.Margin = new System.Windows.Forms.Padding(4);
             this.picFonts.Name = "picFonts";
             this.picFonts.Size = new System.Drawing.Size(43, 36);
             this.picFonts.TabIndex = 38;
@@ -1629,7 +1629,7 @@ namespace SIL.PublishingSolution
             this.pictureBox2.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.DocumentTools;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox2.Location = new System.Drawing.Point(9, 96);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(43, 44);
             this.pictureBox2.TabIndex = 37;
@@ -1642,7 +1642,7 @@ namespace SIL.PublishingSolution
             this.ddlNonSILFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlNonSILFont.FormattingEnabled = true;
             this.ddlNonSILFont.Location = new System.Drawing.Point(184, 481);
-            this.ddlNonSILFont.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlNonSILFont.Margin = new System.Windows.Forms.Padding(4);
             this.ddlNonSILFont.Name = "ddlNonSILFont";
             this.ddlNonSILFont.Size = new System.Drawing.Size(173, 24);
             this.ddlNonSILFont.TabIndex = 20;
@@ -1669,7 +1669,7 @@ namespace SIL.PublishingSolution
             this.ddlMissingFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlMissingFont.FormattingEnabled = true;
             this.ddlMissingFont.Location = new System.Drawing.Point(184, 448);
-            this.ddlMissingFont.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlMissingFont.Margin = new System.Windows.Forms.Padding(4);
             this.ddlMissingFont.Name = "ddlMissingFont";
             this.ddlMissingFont.Size = new System.Drawing.Size(173, 24);
             this.ddlMissingFont.TabIndex = 18;
@@ -1682,7 +1682,7 @@ namespace SIL.PublishingSolution
             this.ddlDefaultAlignment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlDefaultAlignment.FormattingEnabled = true;
             this.ddlDefaultAlignment.Location = new System.Drawing.Point(196, 160);
-            this.ddlDefaultAlignment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlDefaultAlignment.Margin = new System.Windows.Forms.Padding(4);
             this.ddlDefaultAlignment.Name = "ddlDefaultAlignment";
             this.ddlDefaultAlignment.Size = new System.Drawing.Size(161, 24);
             this.ddlDefaultAlignment.TabIndex = 6;
@@ -1739,7 +1739,7 @@ namespace SIL.PublishingSolution
             this.ddlDefaultFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlDefaultFont.FormattingEnabled = true;
             this.ddlDefaultFont.Location = new System.Drawing.Point(184, 514);
-            this.ddlDefaultFont.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlDefaultFont.Margin = new System.Windows.Forms.Padding(4);
             this.ddlDefaultFont.Name = "ddlDefaultFont";
             this.ddlDefaultFont.Size = new System.Drawing.Size(173, 24);
             this.ddlDefaultFont.TabIndex = 22;
@@ -1771,7 +1771,7 @@ namespace SIL.PublishingSolution
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chkIncludeFontVariants.AutoSize = true;
             this.chkIncludeFontVariants.Location = new System.Drawing.Point(68, 420);
-            this.chkIncludeFontVariants.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkIncludeFontVariants.Margin = new System.Windows.Forms.Padding(4);
             this.chkIncludeFontVariants.Name = "chkIncludeFontVariants";
             this.chkIncludeFontVariants.Size = new System.Drawing.Size(193, 21);
             this.chkIncludeFontVariants.TabIndex = 16;
@@ -1796,7 +1796,7 @@ namespace SIL.PublishingSolution
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chkEmbedFonts.AutoSize = true;
             this.chkEmbedFonts.Location = new System.Drawing.Point(68, 391);
-            this.chkEmbedFonts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkEmbedFonts.Margin = new System.Windows.Forms.Padding(4);
             this.chkEmbedFonts.Name = "chkEmbedFonts";
             this.chkEmbedFonts.Size = new System.Drawing.Size(196, 21);
             this.chkEmbedFonts.TabIndex = 15;
@@ -1807,7 +1807,7 @@ namespace SIL.PublishingSolution
             // txtMaxImageWidth
             // 
             this.txtMaxImageWidth.Location = new System.Drawing.Point(249, 225);
-            this.txtMaxImageWidth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMaxImageWidth.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaxImageWidth.MaxLength = 4;
             this.txtMaxImageWidth.Name = "txtMaxImageWidth";
             this.txtMaxImageWidth.Size = new System.Drawing.Size(59, 22);
@@ -1821,7 +1821,7 @@ namespace SIL.PublishingSolution
             this.ddlTocLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlTocLevel.FormattingEnabled = true;
             this.ddlTocLevel.Location = new System.Drawing.Point(157, 258);
-            this.ddlTocLevel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlTocLevel.Margin = new System.Windows.Forms.Padding(4);
             this.ddlTocLevel.Name = "ddlTocLevel";
             this.ddlTocLevel.Size = new System.Drawing.Size(200, 24);
             this.ddlTocLevel.TabIndex = 10;
@@ -1862,7 +1862,7 @@ namespace SIL.PublishingSolution
             // txtBaseFontSize
             // 
             this.txtBaseFontSize.Location = new System.Drawing.Point(196, 96);
-            this.txtBaseFontSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBaseFontSize.Margin = new System.Windows.Forms.Padding(4);
             this.txtBaseFontSize.MaxLength = 2;
             this.txtBaseFontSize.Name = "txtBaseFontSize";
             this.txtBaseFontSize.Size = new System.Drawing.Size(59, 22);
@@ -1897,7 +1897,7 @@ namespace SIL.PublishingSolution
             this.ddlChapterNumbers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlChapterNumbers.FormattingEnabled = true;
             this.ddlChapterNumbers.Location = new System.Drawing.Point(196, 292);
-            this.ddlChapterNumbers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlChapterNumbers.Margin = new System.Windows.Forms.Padding(4);
             this.ddlChapterNumbers.Name = "ddlChapterNumbers";
             this.ddlChapterNumbers.Size = new System.Drawing.Size(161, 24);
             this.ddlChapterNumbers.TabIndex = 12;
@@ -1906,7 +1906,7 @@ namespace SIL.PublishingSolution
             // txtDefaultLineHeight
             // 
             this.txtDefaultLineHeight.Location = new System.Drawing.Point(196, 128);
-            this.txtDefaultLineHeight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDefaultLineHeight.Margin = new System.Windows.Forms.Padding(4);
             this.txtDefaultLineHeight.MaxLength = 3;
             this.txtDefaultLineHeight.Name = "txtDefaultLineHeight";
             this.txtDefaultLineHeight.Size = new System.Drawing.Size(59, 22);
@@ -1939,7 +1939,7 @@ namespace SIL.PublishingSolution
             this.pictureBox1.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.epub_logo_color;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Location = new System.Drawing.Point(9, 9);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(43, 48);
             this.pictureBox1.TabIndex = 32;
@@ -1951,9 +1951,9 @@ namespace SIL.PublishingSolution
             this.tabWeb.Controls.Add(this.groupBox2);
             this.tabWeb.Controls.Add(this.groupBox1);
             this.tabWeb.Location = new System.Drawing.Point(4, 25);
-            this.tabWeb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabWeb.Margin = new System.Windows.Forms.Padding(4);
             this.tabWeb.Name = "tabWeb";
-            this.tabWeb.Size = new System.Drawing.Size(404, 622);
+            this.tabWeb.Size = new System.Drawing.Size(405, 630);
             this.tabWeb.TabIndex = 6;
             this.tabWeb.Text = "Properties";
             this.tabWeb.UseVisualStyleBackColor = true;
@@ -1973,9 +1973,9 @@ namespace SIL.PublishingSolution
             this.groupBox3.Controls.Add(this.txtWebUrl);
             this.groupBox3.Controls.Add(this.label17);
             this.groupBox3.Location = new System.Drawing.Point(13, 346);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(352, 230);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
@@ -1994,7 +1994,7 @@ namespace SIL.PublishingSolution
             // txtWebFtpFldrNme
             // 
             this.txtWebFtpFldrNme.Location = new System.Drawing.Point(135, 197);
-            this.txtWebFtpFldrNme.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtWebFtpFldrNme.Margin = new System.Windows.Forms.Padding(4);
             this.txtWebFtpFldrNme.MaxLength = 50;
             this.txtWebFtpFldrNme.Name = "txtWebFtpFldrNme";
             this.txtWebFtpFldrNme.Size = new System.Drawing.Size(203, 22);
@@ -2003,7 +2003,7 @@ namespace SIL.PublishingSolution
             // txtWebEmailID
             // 
             this.txtWebEmailID.Location = new System.Drawing.Point(135, 164);
-            this.txtWebEmailID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtWebEmailID.Margin = new System.Windows.Forms.Padding(4);
             this.txtWebEmailID.MaxLength = 50;
             this.txtWebEmailID.Name = "txtWebEmailID";
             this.txtWebEmailID.Size = new System.Drawing.Size(203, 22);
@@ -2022,7 +2022,7 @@ namespace SIL.PublishingSolution
             // txtWebAdminSiteNme
             // 
             this.txtWebAdminSiteNme.Location = new System.Drawing.Point(135, 132);
-            this.txtWebAdminSiteNme.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtWebAdminSiteNme.Margin = new System.Windows.Forms.Padding(4);
             this.txtWebAdminSiteNme.MaxLength = 50;
             this.txtWebAdminSiteNme.Name = "txtWebAdminSiteNme";
             this.txtWebAdminSiteNme.Size = new System.Drawing.Size(203, 22);
@@ -2041,7 +2041,7 @@ namespace SIL.PublishingSolution
             // txtWebAdminPwd
             // 
             this.txtWebAdminPwd.Location = new System.Drawing.Point(135, 100);
-            this.txtWebAdminPwd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtWebAdminPwd.Margin = new System.Windows.Forms.Padding(4);
             this.txtWebAdminPwd.MaxLength = 25;
             this.txtWebAdminPwd.Name = "txtWebAdminPwd";
             this.txtWebAdminPwd.PasswordChar = '*';
@@ -2061,7 +2061,7 @@ namespace SIL.PublishingSolution
             // txtWebAdminUsrNme
             // 
             this.txtWebAdminUsrNme.Location = new System.Drawing.Point(135, 68);
-            this.txtWebAdminUsrNme.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtWebAdminUsrNme.Margin = new System.Windows.Forms.Padding(4);
             this.txtWebAdminUsrNme.MaxLength = 25;
             this.txtWebAdminUsrNme.Name = "txtWebAdminUsrNme";
             this.txtWebAdminUsrNme.Size = new System.Drawing.Size(203, 22);
@@ -2080,7 +2080,7 @@ namespace SIL.PublishingSolution
             // txtWebUrl
             // 
             this.txtWebUrl.Location = new System.Drawing.Point(16, 37);
-            this.txtWebUrl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtWebUrl.Margin = new System.Windows.Forms.Padding(4);
             this.txtWebUrl.MaxLength = 100;
             this.txtWebUrl.Name = "txtWebUrl";
             this.txtWebUrl.Size = new System.Drawing.Size(321, 22);
@@ -2106,9 +2106,9 @@ namespace SIL.PublishingSolution
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.txtFtpUsername);
             this.groupBox2.Location = new System.Drawing.Point(16, 5);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(352, 151);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
@@ -2117,7 +2117,7 @@ namespace SIL.PublishingSolution
             // txtFtpPassword
             // 
             this.txtFtpPassword.Location = new System.Drawing.Point(127, 107);
-            this.txtFtpPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFtpPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtFtpPassword.MaxLength = 50;
             this.txtFtpPassword.Name = "txtFtpPassword";
             this.txtFtpPassword.PasswordChar = '*';
@@ -2137,7 +2137,7 @@ namespace SIL.PublishingSolution
             // txtFtpFileLocation
             // 
             this.txtFtpFileLocation.Location = new System.Drawing.Point(16, 42);
-            this.txtFtpFileLocation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFtpFileLocation.Margin = new System.Windows.Forms.Padding(4);
             this.txtFtpFileLocation.MaxLength = 500;
             this.txtFtpFileLocation.Name = "txtFtpFileLocation";
             this.txtFtpFileLocation.Size = new System.Drawing.Size(319, 22);
@@ -2167,7 +2167,7 @@ namespace SIL.PublishingSolution
             // txtFtpUsername
             // 
             this.txtFtpUsername.Location = new System.Drawing.Point(127, 75);
-            this.txtFtpUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFtpUsername.Margin = new System.Windows.Forms.Padding(4);
             this.txtFtpUsername.MaxLength = 1000;
             this.txtFtpUsername.Name = "txtFtpUsername";
             this.txtFtpUsername.Size = new System.Drawing.Size(208, 22);
@@ -2184,9 +2184,9 @@ namespace SIL.PublishingSolution
             this.groupBox1.Controls.Add(this.txtSqlServerName);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Location = new System.Drawing.Point(16, 167);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(352, 170);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
@@ -2195,7 +2195,7 @@ namespace SIL.PublishingSolution
             // txtSqlPassword
             // 
             this.txtSqlPassword.Location = new System.Drawing.Point(127, 135);
-            this.txtSqlPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSqlPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtSqlPassword.MaxLength = 50;
             this.txtSqlPassword.Name = "txtSqlPassword";
             this.txtSqlPassword.PasswordChar = '*';
@@ -2215,7 +2215,7 @@ namespace SIL.PublishingSolution
             // txtSqlUsername
             // 
             this.txtSqlUsername.Location = new System.Drawing.Point(127, 103);
-            this.txtSqlUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSqlUsername.Margin = new System.Windows.Forms.Padding(4);
             this.txtSqlUsername.MaxLength = 25;
             this.txtSqlUsername.Name = "txtSqlUsername";
             this.txtSqlUsername.Size = new System.Drawing.Size(208, 22);
@@ -2234,7 +2234,7 @@ namespace SIL.PublishingSolution
             // txtSqlDBName
             // 
             this.txtSqlDBName.Location = new System.Drawing.Point(127, 71);
-            this.txtSqlDBName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSqlDBName.Margin = new System.Windows.Forms.Padding(4);
             this.txtSqlDBName.MaxLength = 25;
             this.txtSqlDBName.Name = "txtSqlDBName";
             this.txtSqlDBName.Size = new System.Drawing.Size(208, 22);
@@ -2253,7 +2253,7 @@ namespace SIL.PublishingSolution
             // txtSqlServerName
             // 
             this.txtSqlServerName.Location = new System.Drawing.Point(16, 41);
-            this.txtSqlServerName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSqlServerName.Margin = new System.Windows.Forms.Padding(4);
             this.txtSqlServerName.MaxLength = 100;
             this.txtSqlServerName.Name = "txtSqlServerName";
             this.txtSqlServerName.Size = new System.Drawing.Size(319, 22);
@@ -2272,9 +2272,9 @@ namespace SIL.PublishingSolution
             // tabDict4Mids
             // 
             this.tabDict4Mids.Location = new System.Drawing.Point(4, 25);
-            this.tabDict4Mids.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabDict4Mids.Margin = new System.Windows.Forms.Padding(4);
             this.tabDict4Mids.Name = "tabDict4Mids";
-            this.tabDict4Mids.Size = new System.Drawing.Size(404, 622);
+            this.tabDict4Mids.Size = new System.Drawing.Size(405, 630);
             this.tabDict4Mids.TabIndex = 7;
             this.tabDict4Mids.Text = "Properties";
             this.tabDict4Mids.UseVisualStyleBackColor = true;
@@ -2286,9 +2286,9 @@ namespace SIL.PublishingSolution
             this.tabPreview.Controls.Add(this.btnNext);
             this.tabPreview.Controls.Add(this.picPreview);
             this.tabPreview.Location = new System.Drawing.Point(4, 25);
-            this.tabPreview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPreview.Margin = new System.Windows.Forms.Padding(4);
             this.tabPreview.Name = "tabPreview";
-            this.tabPreview.Size = new System.Drawing.Size(404, 622);
+            this.tabPreview.Size = new System.Drawing.Size(405, 630);
             this.tabPreview.TabIndex = 4;
             this.tabPreview.Text = "Preview";
             this.tabPreview.UseVisualStyleBackColor = true;
@@ -2297,7 +2297,7 @@ namespace SIL.PublishingSolution
             // 
             this.btnPrevious.Enabled = false;
             this.btnPrevious.Location = new System.Drawing.Point(281, 0);
-            this.btnPrevious.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrevious.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(33, 28);
             this.btnPrevious.TabIndex = 12;
@@ -2309,7 +2309,7 @@ namespace SIL.PublishingSolution
             // 
             this.btnNext.Enabled = false;
             this.btnNext.Location = new System.Drawing.Point(317, 0);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(4);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(33, 28);
             this.btnNext.TabIndex = 11;
@@ -2322,7 +2322,7 @@ namespace SIL.PublishingSolution
             this.picPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picPreview.Location = new System.Drawing.Point(4, 30);
-            this.picPreview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPreview.Margin = new System.Windows.Forms.Padding(4);
             this.picPreview.Name = "picPreview";
             this.picPreview.Size = new System.Drawing.Size(348, 433);
             this.picPreview.TabIndex = 0;
@@ -2336,9 +2336,9 @@ namespace SIL.PublishingSolution
             this.tabPicture.Controls.Add(this.DdlPicPosition);
             this.tabPicture.Controls.Add(this.GrpPicture);
             this.tabPicture.Location = new System.Drawing.Point(4, 25);
-            this.tabPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPicture.Margin = new System.Windows.Forms.Padding(4);
             this.tabPicture.Name = "tabPicture";
-            this.tabPicture.Size = new System.Drawing.Size(404, 622);
+            this.tabPicture.Size = new System.Drawing.Size(405, 630);
             this.tabPicture.TabIndex = 5;
             this.tabPicture.Text = "Pictures";
             this.tabPicture.UseVisualStyleBackColor = true;
@@ -2347,7 +2347,7 @@ namespace SIL.PublishingSolution
             // 
             this.ChkDontPicture.AutoSize = true;
             this.ChkDontPicture.Location = new System.Drawing.Point(21, 16);
-            this.ChkDontPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ChkDontPicture.Margin = new System.Windows.Forms.Padding(4);
             this.ChkDontPicture.Name = "ChkDontPicture";
             this.ChkDontPicture.Size = new System.Drawing.Size(175, 21);
             this.ChkDontPicture.TabIndex = 5;
@@ -2368,7 +2368,7 @@ namespace SIL.PublishingSolution
             // 
             this.DdlPicPosition.FormattingEnabled = true;
             this.DdlPicPosition.Location = new System.Drawing.Point(145, 245);
-            this.DdlPicPosition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DdlPicPosition.Margin = new System.Windows.Forms.Padding(4);
             this.DdlPicPosition.Name = "DdlPicPosition";
             this.DdlPicPosition.Size = new System.Drawing.Size(160, 24);
             this.DdlPicPosition.TabIndex = 1;
@@ -2383,9 +2383,9 @@ namespace SIL.PublishingSolution
             this.GrpPicture.Controls.Add(this.LblPictureWidth);
             this.GrpPicture.Controls.Add(this.SpinPicWidth);
             this.GrpPicture.Location = new System.Drawing.Point(4, 43);
-            this.GrpPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GrpPicture.Margin = new System.Windows.Forms.Padding(4);
             this.GrpPicture.Name = "GrpPicture";
-            this.GrpPicture.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GrpPicture.Padding = new System.Windows.Forms.Padding(4);
             this.GrpPicture.Size = new System.Drawing.Size(345, 190);
             this.GrpPicture.TabIndex = 0;
             this.GrpPicture.TabStop = false;
@@ -2404,7 +2404,7 @@ namespace SIL.PublishingSolution
             // 
             this.RadSingleColumn.AutoSize = true;
             this.RadSingleColumn.Location = new System.Drawing.Point(69, 121);
-            this.RadSingleColumn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RadSingleColumn.Margin = new System.Windows.Forms.Padding(4);
             this.RadSingleColumn.Name = "RadSingleColumn";
             this.RadSingleColumn.Size = new System.Drawing.Size(119, 21);
             this.RadSingleColumn.TabIndex = 5;
@@ -2416,7 +2416,7 @@ namespace SIL.PublishingSolution
             // 
             this.RadEntirePage.AutoSize = true;
             this.RadEntirePage.Location = new System.Drawing.Point(69, 145);
-            this.RadEntirePage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RadEntirePage.Margin = new System.Windows.Forms.Padding(4);
             this.RadEntirePage.Name = "RadEntirePage";
             this.RadEntirePage.Size = new System.Drawing.Size(103, 21);
             this.RadEntirePage.TabIndex = 4;
@@ -2429,7 +2429,7 @@ namespace SIL.PublishingSolution
             this.RadWidthIf.AutoSize = true;
             this.RadWidthIf.Checked = true;
             this.RadWidthIf.Location = new System.Drawing.Point(69, 65);
-            this.RadWidthIf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RadWidthIf.Margin = new System.Windows.Forms.Padding(4);
             this.RadWidthIf.Name = "RadWidthIf";
             this.RadWidthIf.Size = new System.Drawing.Size(259, 21);
             this.RadWidthIf.TabIndex = 3;
@@ -2441,7 +2441,7 @@ namespace SIL.PublishingSolution
             // 
             this.RadWidthAll.AutoSize = true;
             this.RadWidthAll.Location = new System.Drawing.Point(69, 94);
-            this.RadWidthAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RadWidthAll.Margin = new System.Windows.Forms.Padding(4);
             this.RadWidthAll.Name = "RadWidthAll";
             this.RadWidthAll.Size = new System.Drawing.Size(209, 21);
             this.RadWidthAll.TabIndex = 2;
@@ -2467,7 +2467,7 @@ namespace SIL.PublishingSolution
             0,
             65536});
             this.SpinPicWidth.Location = new System.Drawing.Point(105, 33);
-            this.SpinPicWidth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SpinPicWidth.Margin = new System.Windows.Forms.Padding(4);
             this.SpinPicWidth.Name = "SpinPicWidth";
             this.SpinPicWidth.Size = new System.Drawing.Size(135, 22);
             this.SpinPicWidth.TabIndex = 0;
@@ -2493,7 +2493,7 @@ namespace SIL.PublishingSolution
             this.label2.Location = new System.Drawing.Point(125, 1);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(613, 28);
+            this.label2.Size = new System.Drawing.Size(612, 28);
             this.label2.TabIndex = 1;
             this.label2.Text = "Stylesheets";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2503,7 +2503,7 @@ namespace SIL.PublishingSolution
             this.lblInfoCaption.BackColor = System.Drawing.Color.RoyalBlue;
             this.lblInfoCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInfoCaption.ForeColor = System.Drawing.Color.White;
-            this.lblInfoCaption.Location = new System.Drawing.Point(739, 1);
+            this.lblInfoCaption.Location = new System.Drawing.Point(738, 1);
             this.lblInfoCaption.Margin = new System.Windows.Forms.Padding(0);
             this.lblInfoCaption.Name = "lblInfoCaption";
             this.lblInfoCaption.Size = new System.Drawing.Size(413, 28);
@@ -2515,7 +2515,7 @@ namespace SIL.PublishingSolution
             // 
             this.txtCss.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtCss.Location = new System.Drawing.Point(4, 4);
-            this.txtCss.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCss.Margin = new System.Windows.Forms.Padding(4);
             this.txtCss.Multiline = true;
             this.txtCss.Name = "txtCss";
             this.txtCss.ReadOnly = true;
@@ -2530,7 +2530,7 @@ namespace SIL.PublishingSolution
             this.TLPanelOuter.ColumnCount = 3;
             this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 123F));
             this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 428F));
+            this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 429F));
             this.TLPanelOuter.Controls.Add(this.label2, 1, 0);
             this.TLPanelOuter.Controls.Add(this.TLPanel1, 0, 1);
             this.TLPanelOuter.Controls.Add(this.lblInfoCaption, 2, 0);
@@ -2567,7 +2567,7 @@ namespace SIL.PublishingSolution
             this.panel1.Controls.Add(this.btnScripture);
             this.panel1.Controls.Add(this.btnDictionary);
             this.panel1.Location = new System.Drawing.Point(4, 358);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(113, 59);
             this.panel1.TabIndex = 0;
@@ -2578,7 +2578,7 @@ namespace SIL.PublishingSolution
             this.btnScripture.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
             this.btnScripture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnScripture.Location = new System.Drawing.Point(0, 28);
-            this.btnScripture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnScripture.Margin = new System.Windows.Forms.Padding(4);
             this.btnScripture.Name = "btnScripture";
             this.btnScripture.Size = new System.Drawing.Size(113, 28);
             this.btnScripture.TabIndex = 1;
@@ -2592,7 +2592,7 @@ namespace SIL.PublishingSolution
             this.btnDictionary.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
             this.btnDictionary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDictionary.Location = new System.Drawing.Point(0, 0);
-            this.btnDictionary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDictionary.Margin = new System.Windows.Forms.Padding(4);
             this.btnDictionary.Name = "btnDictionary";
             this.btnDictionary.Size = new System.Drawing.Size(113, 28);
             this.btnDictionary.TabIndex = 0;
@@ -2609,7 +2609,7 @@ namespace SIL.PublishingSolution
             this.panel2.Controls.Add(this.btnPaper);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(4, 4);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(113, 346);
             this.panel2.TabIndex = 20;
@@ -2623,7 +2623,7 @@ namespace SIL.PublishingSolution
             this.btnOthers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOthers.Image = ((System.Drawing.Image)(resources.GetObject("btnOthers.Image")));
             this.btnOthers.Location = new System.Drawing.Point(0, 258);
-            this.btnOthers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOthers.Margin = new System.Windows.Forms.Padding(4);
             this.btnOthers.Name = "btnOthers";
             this.btnOthers.Size = new System.Drawing.Size(113, 86);
             this.btnOthers.TabIndex = 3;
@@ -2641,7 +2641,7 @@ namespace SIL.PublishingSolution
             this.btnWeb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWeb.Image = ((System.Drawing.Image)(resources.GetObject("btnWeb.Image")));
             this.btnWeb.Location = new System.Drawing.Point(0, 172);
-            this.btnWeb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnWeb.Margin = new System.Windows.Forms.Padding(4);
             this.btnWeb.Name = "btnWeb";
             this.btnWeb.Size = new System.Drawing.Size(113, 86);
             this.btnWeb.TabIndex = 2;
@@ -2659,7 +2659,7 @@ namespace SIL.PublishingSolution
             this.btnMobile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMobile.Image = ((System.Drawing.Image)(resources.GetObject("btnMobile.Image")));
             this.btnMobile.Location = new System.Drawing.Point(0, 86);
-            this.btnMobile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMobile.Margin = new System.Windows.Forms.Padding(4);
             this.btnMobile.Name = "btnMobile";
             this.btnMobile.Size = new System.Drawing.Size(113, 86);
             this.btnMobile.TabIndex = 1;
@@ -2677,7 +2677,7 @@ namespace SIL.PublishingSolution
             this.btnPaper.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPaper.Image = ((System.Drawing.Image)(resources.GetObject("btnPaper.Image")));
             this.btnPaper.Location = new System.Drawing.Point(0, 0);
-            this.btnPaper.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPaper.Margin = new System.Windows.Forms.Padding(4);
             this.btnPaper.Name = "btnPaper";
             this.btnPaper.Size = new System.Drawing.Size(113, 86);
             this.btnPaper.TabIndex = 0;
@@ -2694,12 +2694,12 @@ namespace SIL.PublishingSolution
             this.TLPanel2.Controls.Add(this.stylesGrid, 0, 0);
             this.TLPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TLPanel2.Location = new System.Drawing.Point(129, 34);
-            this.TLPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TLPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.TLPanel2.Name = "TLPanel2";
             this.TLPanel2.RowCount = 1;
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 709F));
-            this.TLPanel2.Size = new System.Drawing.Size(605, 717);
+            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 717F));
+            this.TLPanel2.Size = new System.Drawing.Size(604, 717);
             this.TLPanel2.TabIndex = 4;
             // 
             // TLPanel3
@@ -2709,14 +2709,14 @@ namespace SIL.PublishingSolution
             this.TLPanel3.Controls.Add(this.panel3, 0, 1);
             this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
             this.TLPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TLPanel3.Location = new System.Drawing.Point(743, 34);
-            this.TLPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TLPanel3.Location = new System.Drawing.Point(742, 34);
+            this.TLPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.TLPanel3.Name = "TLPanel3";
             this.TLPanel3.RowCount = 2;
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 215F));
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.TLPanel3.Size = new System.Drawing.Size(420, 717);
+            this.TLPanel3.Size = new System.Drawing.Size(421, 717);
             this.TLPanel3.TabIndex = 5;
             // 
             // panel3
@@ -2725,9 +2725,9 @@ namespace SIL.PublishingSolution
             this.panel3.Controls.Add(this.tabControl1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(4, 54);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(412, 659);
+            this.panel3.Size = new System.Drawing.Size(413, 659);
             this.panel3.TabIndex = 20;
             // 
             // lblType
@@ -2770,7 +2770,7 @@ namespace SIL.PublishingSolution
             this.Controls.Add(this.toolStripMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ConfigurationTool";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Pathway Configuration Tool";
