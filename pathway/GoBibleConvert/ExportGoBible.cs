@@ -357,11 +357,11 @@ namespace SIL.PublishingSolution
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
             var creatorFullPath = Common.PathCombine(goBibleCreatorPath, Creator);
-            var progFullName = SubProcess.JavaFullName(prog);
-            if (progFullName.EndsWith(".exe"))
-            {
-                progFullName = progFullName.Substring(0, progFullName.Length - 4);
-            }
+            //var progFullName = SubProcess.JavaFullName(prog);
+            //if (progFullName.EndsWith(".exe"))
+            //{
+            //    progFullName = progFullName.Substring(0, progFullName.Length - 4);
+            //}
             collectionFullName = Common.PathCombine(processFolder, "Collections.txt");
             var args = string.Format(@" -Xmx128m -jar ""{0}""  ""{1}""", creatorFullPath, collectionFullName);
             SubProcess.RedirectOutput = RedirectOutputFileName;
