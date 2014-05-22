@@ -454,9 +454,8 @@ namespace SIL.PublishingSolution
 
                 //TD-2815
                 _writer.WriteStartElement("style:font-face");
-                string headerFontName = Common.GetHeaderFontName(cssProperty, _projInfo.DefaultCssFileWithPath);
-                _writer.WriteAttributeString("style:name", headerFontName);
-                _writer.WriteAttributeString("svg:font-family", "'" + headerFontName + "'");
+                _writer.WriteAttributeString("style:name", _projInfo.HeaderFontName);
+                _writer.WriteAttributeString("svg:font-family", "'" + _projInfo.HeaderFontName + "'");
                 _writer.WriteAttributeString("style:font-pitch", "variable");
                 _writer.WriteEndElement();
 
@@ -465,6 +464,13 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("style:font-face");
                 _writer.WriteAttributeString("style:name", "Gautami1");
                 _writer.WriteAttributeString("svg:font-family", "'Gautami'");
+                _writer.WriteAttributeString("style:font-pitch", "variable");
+                _writer.WriteEndElement();
+
+                _writer.WriteStartElement("style:font-face");
+                _writer.WriteAttributeString("style:name", "Times New Roman");
+                _writer.WriteAttributeString("svg:font-family", "'" + "Times New Roman" + "'");
+                _writer.WriteAttributeString("style:font-family-generic", "roman");
                 _writer.WriteAttributeString("style:font-pitch", "variable");
                 _writer.WriteEndElement();
 

@@ -72,6 +72,7 @@ namespace SIL.Tool
         private bool _isFrontMatterEnabled = false;
         private bool _isODM;
         public string _headerFontName = "Times New Roman";
+        public string _reversalFontName = "Times New Roman";
         public string _selectedTemplateStyle = string.Empty;
 
         private string _headerReferenceFormat = string.Empty;
@@ -232,6 +233,12 @@ namespace SIL.Tool
         {
             get { return _headerFontName; }
             set { _headerFontName = value; }
+        }
+
+        public string ReversalFontName
+        {
+            get { return _reversalFontName; }
+            set { _reversalFontName = value; }
         }
 
         public string SelectedTemplateStyle

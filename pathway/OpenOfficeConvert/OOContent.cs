@@ -109,6 +109,8 @@ namespace SIL.PublishingSolution
         private string _displayProperty, _floatProperty;
         private bool _nextVerse;
         private string _previousGuideword = string.Empty;
+        private string _firstText = string.Empty;
+        private string _secondText = string.Empty;
         #endregion
 
         #region Public Variable
@@ -122,6 +124,8 @@ namespace SIL.PublishingSolution
         private List<string> _entryIdList = new List<string>();
         private bool _isParaPicture, _isFirstPicture;
         private int _pictureNo;
+        private bool _isReversalFile = false;
+
 
         public LOContent()
         {
@@ -135,10 +139,8 @@ namespace SIL.PublishingSolution
             Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
         {
             OldStyles styleInfo = new OldStyles();
-            if (projInfo.ProjectInputType.ToLower() == "scripture")
-            {
-                _refFormat = Common.GetReferenceFormat(idAllClass, _refFormat);
-            }
+            GetRefFormat(projInfo, idAllClass);
+            SetReversalFile(projInfo);
             _pageWidth = pageWidth;
             _structStyles = styleInfo;
             _structStyles.IsMacroEnable = true;
@@ -161,6 +163,27 @@ namespace SIL.PublishingSolution
             ModifyContentXML(projInfo.TempOutputFolder);
 
             return new Dictionary<string, ArrayList>();
+        }
+
+        /// <summary>
+        /// For Dictionary reversal guidewords, to set the correct guideword font
+        /// </summary>
+        /// <param name="projInfo"></param>
+        private void SetReversalFile(PublicationInformation projInfo)
+        {
+            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            if (fileNameWithoutExtension != null && fileNameWithoutExtension.ToLower().IndexOf("main") == -1)
+            {
+                _isReversalFile = true;
+            }
+        }
+
+        private void GetRefFormat(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass)
+        {
+            if (projInfo.ProjectInputType.ToLower() == "scripture")
+            {
+                _refFormat = Common.GetReferenceFormat(idAllClass, _refFormat);
+            }
         }
 
         private bool PageBreakSpace(Dictionary<string, Dictionary<string, string>> idAllClass)
@@ -598,6 +621,16 @@ namespace SIL.PublishingSolution
                             _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
                             _writer.WriteStartElement("text:variable-set");
                             _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                            _writer.WriteAttributeString("text:display", "none");
+                            _writer.WriteAttributeString("text:formula", "ooow: " + string.Empty);
+                            _writer.WriteAttributeString("office:value-type", "string");
+                            _writer.WriteAttributeString("office:string-value", string.Empty);
+                            _writer.WriteEndElement();
+                            _writer.WriteEndElement();
+                            _writer.WriteStartElement("text:p");
+                            _writer.WriteAttributeString("text:style-name", "hideDiv_dicBody");
+                            _writer.WriteStartElement("text:variable-set");
+                            _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
                             _writer.WriteAttributeString("text:display", "none");
                             _writer.WriteAttributeString("text:formula", "ooow: " + firstRevHeadWord);
                             _writer.WriteAttributeString("office:value-type", "string");
@@ -1206,12 +1239,21 @@ namespace SIL.PublishingSolution
             {
                 if (FirstDataOnEntry.ContainsKey(content))
                 {
+                    SetGuidewordTextPos(FirstDataOnEntry[content]);
                     _writer.WriteStartElement("text:variable-set");
                     _writer.WriteAttributeString("text:name", "Left_Guideword_L");
                     _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + FirstDataOnEntry[content]);
+                    _writer.WriteAttributeString("text:formula", "ooow: " + _firstText);
                     _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", FirstDataOnEntry[content]);
+                    _writer.WriteAttributeString("office:string-value", _firstText);
+                    _writer.WriteEndElement();
+
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + _secondText);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", _secondText);
                     _writer.WriteEndElement();
                 }
             }
@@ -3110,6 +3152,11 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Left_Guideword_L");
             _writer.WriteEndElement();
+            _writer.WriteStartElement("text:variable-decls");
+            _writer.WriteStartElement("text:variable-decl");
+            _writer.WriteAttributeString("office:value-type", "string");
+            _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
+            _writer.WriteEndElement();
 
             //TD-2575 to avoid Mirror page Variables for Normal Page
             if (IsMirrorPage)
@@ -3122,11 +3169,24 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("office:value-type", "string");
                 _writer.WriteAttributeString("text:name", "Left_Guideword_R");
                 _writer.WriteEndElement();
+                _writer.WriteStartElement("text:variable-decl");
+                _writer.WriteAttributeString("office:value-type", "string");
+                _writer.WriteAttributeString("text:name", "RRight_Guideword_L");
+                _writer.WriteEndElement();
+                _writer.WriteStartElement("text:variable-decl");
+                _writer.WriteAttributeString("office:value-type", "string");
+                _writer.WriteAttributeString("text:name", "RLeft_Guideword_R");
+                _writer.WriteEndElement();
             }
 
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Right_Guideword_R");
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("text:variable-decl");
+            _writer.WriteAttributeString("office:value-type", "string");
+            _writer.WriteAttributeString("text:name", "RRight_Guideword_R");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
         }
@@ -3352,28 +3412,51 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
+                    SetGuidewordTextPos(leftHeadword);
                     _writer.WriteStartElement("text:span");
                     _writer.WriteAttributeString("text:style-name", _classNameWithLang);
                     _writer.WriteStartElement("text:variable-set");
                     _writer.WriteAttributeString("text:name", "Left_Guideword_L");
                     _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword);//leftHeadword
+                    _writer.WriteAttributeString("text:formula", "ooow: " + _firstText);//leftHeadword
                     _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", leftHeadword);//leftHeadword
+                    _writer.WriteAttributeString("office:string-value", _firstText);//leftHeadword
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + _secondText);//leftHeadword
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", _secondText);//leftHeadword
                     _writer.WriteEndElement();
                     _writer.WriteEndElement();
                     if (_isH2Complaint)
                     {
                         content = rightContent;
                     }
+                    SetGuidewordTextPos(content);
                     _writer.WriteStartElement("text:span");
                     _writer.WriteAttributeString("text:style-name", _classNameWithLang);
                     _writer.WriteStartElement("text:variable-set");
                     _writer.WriteAttributeString("text:name", "Right_Guideword_R");
                     _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + content);
+                    _writer.WriteAttributeString("text:formula", "ooow: " + _firstText);
                     _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", content);
+                    _writer.WriteAttributeString("office:string-value", _firstText);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "RRight_Guideword_R");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + _secondText);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", _secondText);
                     _writer.WriteEndElement();
                     _writer.WriteEndElement();
                 }
@@ -3384,6 +3467,7 @@ namespace SIL.PublishingSolution
                         content = _strBook2ndBook + chapterNo;
                         leftHeadword = content;
                     }
+
                     _writer.WriteStartElement("text:span");
                     _writer.WriteAttributeString("text:style-name", _classNameWithLang);
                     _writer.WriteStartElement("text:variable-set");
@@ -3614,6 +3698,26 @@ namespace SIL.PublishingSolution
                 }
             }
             reader.Close();
+        }
+
+        /// <summary>
+        /// Two guidewords are introduced on left/right position. 
+        /// We set to empty(_secondText) for main 
+        /// and set toempty(_firstText) for Reversal
+        /// </summary>
+        /// <param name="content"></param>
+        private void SetGuidewordTextPos(string content)
+        {
+            _firstText = string.Empty;
+            _secondText = string.Empty;
+            if (_isReversalFile)
+            {
+                _secondText = content;
+            }
+            else
+            {
+                _firstText = content;
+            }
         }
         #endregion
     }

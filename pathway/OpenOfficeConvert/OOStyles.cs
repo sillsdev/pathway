@@ -1159,9 +1159,8 @@ namespace SIL.PublishingSolution
 
             //TD-2682
             _writer.WriteStartElement("style:text-properties");//style:text-properties
-            string headerFontName = Common.GetHeaderFontName(_cssProperty, _projInfo.DefaultCssFileWithPath);
             //TD-3304
-            _writer.WriteAttributeString("style:font-name", headerFontName);
+            _writer.WriteAttributeString("style:font-name", _projInfo.HeaderFontName);
             //TD-2815
             string headerFontWeight = Common.GetHeaderFontWeight(_cssProperty);
             _writer.WriteAttributeString("fo:font-weight", headerFontWeight);
@@ -1293,8 +1292,7 @@ namespace SIL.PublishingSolution
 
             //TD-2682
             _writer.WriteStartElement("style:text-properties");//style:text-properties
-            headerFontName = Common.GetHeaderFontName(_cssProperty, _projInfo.DefaultCssFileWithPath);
-            _writer.WriteAttributeString("style:font-name", headerFontName);
+            _writer.WriteAttributeString("style:font-name", _projInfo.HeaderFontName);
 
             //TD-2815
             headerFontWeight = Common.GetHeaderFontWeight(_cssProperty);
@@ -1918,9 +1916,12 @@ namespace SIL.PublishingSolution
         {
             if (!_cssProperty.ContainsKey("@page:none-none"))
             {
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", "MT3");
                 _writer.WriteStartElement("text:page-number");
                 _writer.WriteAttributeString("text:select-page", "current");
                 _writer.WriteString("4");
+                _writer.WriteEndElement();
                 _writer.WriteEndElement();
             }
         }
@@ -1974,14 +1975,20 @@ namespace SIL.PublishingSolution
                 //TD-2566
                 _writer.WriteStartElement("text:span");
                 _writer.WriteAttributeString("text:style-name", "MT1");
-
                 _writer.WriteStartElement("text:variable-get");
                 _writer.WriteAttributeString("text:name", "Right_Guideword_R");
                 _writer.WriteAttributeString("office:value-type", "string");
-
+                _writer.WriteEndElement();
                 _writer.WriteEndElement();
 
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", "MT2");
+                _writer.WriteStartElement("text:variable-get");
+                _writer.WriteAttributeString("text:name", "RRight_Guideword_R");
+                _writer.WriteAttributeString("office:value-type", "string");
                 _writer.WriteEndElement();
+                _writer.WriteEndElement();
+
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
@@ -2033,6 +2040,16 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:style-name", "MT1");
             _writer.WriteStartElement("text:variable-get");
             _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+            _writer.WriteAttributeString("office:value-type", "string");
+            _writer.WriteEndElement(); //text:variable-get
+
+            _writer.WriteEndElement();
+
+            _writer.WriteStartElement("text:span");
+            _writer.WriteAttributeString("text:style-name", "MT2");
+
+            _writer.WriteStartElement("text:variable-get");
+            _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteEndElement(); //text:variable-get
             _writer.WriteEndElement(); //text:span
@@ -2120,7 +2137,7 @@ namespace SIL.PublishingSolution
 
             //TD-2566
             _writer.WriteStartElement("text:span");
-            _writer.WriteAttributeString("text:style-name", "MT1");
+            _writer.WriteAttributeString("text:style-name", "MT3");
             _writer.WriteStartElement("text:page-number");
             _writer.WriteAttributeString("text:select-page", "current");
             _writer.WriteString("4");
@@ -2461,14 +2478,30 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:name", "MT1");
             _writer.WriteAttributeString("style:family", "text");
             _writer.WriteStartElement("style:text-properties");
-
             //TD-3854
-            string strHeaderFont = "GenericFont";
+            _writer.WriteAttributeString("style:font-name", _projInfo.HeaderFontName);
+            _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
+            _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
 
-            strHeaderFont = GetHeaderFont(strHeaderFont);
+            _writer.WriteStartElement("style:style");
+            _writer.WriteAttributeString("style:name", "MT2");
+            _writer.WriteAttributeString("style:family", "text");
+            _writer.WriteStartElement("style:text-properties");
+            _writer.WriteAttributeString("style:font-name", _projInfo.ReversalFontName);
+            _writer.WriteAttributeString("style:font-name-asian", _projInfo.ReversalFontName);
+            _writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
 
-            _writer.WriteAttributeString("style:font-name-complex", strHeaderFont);
-
+            _writer.WriteStartElement("style:style");
+            _writer.WriteAttributeString("style:name", "MT3");
+            _writer.WriteAttributeString("style:family", "text");
+            _writer.WriteStartElement("style:text-properties");
+            _writer.WriteAttributeString("style:font-name", "Charis SIL");
+            _writer.WriteAttributeString("style:font-name-asian", "Charis SIL");
+            _writer.WriteAttributeString("style:font-name-complex", "Charis SIL");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
