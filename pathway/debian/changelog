@@ -1,5 +1,99 @@
-pathway (1.7.3.3707-1) unstable; urgency=high
+pathway (1.8.0.3957-1) unstable; urgency=high
 
+  * pathway sprint 1.8.0
+    - Common: Adjust linkage to Paratext and Flex. Document in code
+    - Common: Adjust xslt included with installer and tests
+    - Common: Remove FRT process that is integrated into code
+    - Common: Remove dependance in Lift, Icu and Palaso Library
+    - Common: Remove unused code, folders and project files
+    - Common: Removed Undo Redo and added Reset
+    - Common: ReSharper issues in the css and project files
+    - Common: registry files don't work correctly in UTF-8
+    - Common: fix pdf parameter parsing
+    - Common: TD-3814 Remove extended Unicode characters from source
+    - Common: TD-3868 Settings not migrated Properly
+    - Common: TD-3913 Refactoring the most complex methods
+    - Common: TD-3933 remove empty statements
+    - Common: TD-3934 Correct namespaces
+    - Common: TD-3935 Update Creative Commons license
+    - Common: TD-3936 Refactoring code is unreachable issues
+    - Common: TD-3939 Issues identified by ReSharper warnings
+    - Help: Added blurb about where first page with data shows page number
+    - Help: Added brief description of new space transformation
+    - Help: Create README.md
+    - Installer: Update solution for building 64-bit PathwayXeLaTeX (Any CPU)
+    - Installer: TD-3929 fix install of PDF viewer
+    - Ubuntu: Add PdfLicense to Ubuntu build
+    - Ubuntu: Correct case of TheWordConvert
+    - Ubuntu: Don't require reboot on Ubuntu
+    - Ubuntu: Set resolver to null for Windows and Ubuntu
+    - Ubuntu: TD-3075 Linux Test failures
+    - Ubuntu: TD-3860 Linux Counter1node hangs on Precise 64
+    - LibreOffice: enableDebugListeners, remove FileUtils
+    - LibreOffice: D33 scriptures data.
+    - LibreOffice: TD-3546 Picture comes in between the texts
+    - LibreOffice: TD-3803 spanning chapters option doesn't work
+    - LibreOffice: TD-3854 Square boxes appears as headers
+    - LibreOffice: TD-3869 Entries with pictures are indented one space
+    - LibreOffice: TD-3879 Custom License SIL link not hyperlinked
+    - LibreOffice: TD-3880, TD-3882 Fix custom Licenses
+    - LibreOffice: TD-3888 Table of content number doesn't update
+    - LibreOffice: TD-3892 Scriptures doesn't appear in new page
+    - LibreOffice: TD-3893 Cover image doesn't appear if One File Per Book set
+    - LibreOffice: TD-3897 Scripture first paragraph fails when fixed line height
+    - LibreOffice: TD-3902 Guide Word overlapped to page number
+    - LibreOffice: TD-3906 Verse number doesn't appear on header as Gen 1:1 format
+    - LibreOffice: TD-3940 Genesis 1-2 Reference Format
+    - LibreOffice: TD-3941 Introduce Menu that updates header reference guide words
+    - LibreOffice: TD-3944 Reference Format does not retain the value set
+    - LibreOffice: TD-3952 Avoid Empty Pages between books
+    - LibreOffice: TD-3954 Introduce Macro Progress Bar
+    - LibreOffice: TD-3957 Gen 1-2 reference format - abbreviated book name
+    - LibreOffice: TD-850 Right to Left scripts appear incorrectly in Open Office
+    - E-Reader: No partial books so books don't change
+    - E-Reader: Right Align added for Epub
+    - E-Reader: TD-3871 Generic family names should not be quotes
+    - E-Reader: TD-3876 add the iftex package to the PathwayXeLaTeX installer
+    - E-Reader: TD-3885 Font Header overlaps with the text of the content
+    - E-Reader: TD-3903 Fallback font is missing in Linux
+    - E-Reader: TD-3908 fix space inside quotes in footnotes
+    - E-Reader: TD-3910 updated transform to handle book names with multi-word names
+    - E-Reader: TD-3912 theWord length error
+    - E-Reader: TD-3937 Go Bible support for partial books
+    - Stylesheet: TD-3931 Extra page breaks inserted
+    - UI: Added shortcut keys to toolbar topic
+    - UI: Adjust tool tips
+    - UI: Update URL in comment
+    - UI: correct spelling of Reset tool tip
+    - UI: Move reset icon on tool bar
+    - UI: TD-3877 Setting default custom license not remembered
+    - UI: TD-3878 Custom License causes SIL logo to disappear from title page
+    - UI: TD-3881 Help Button shows wrong topic
+    - UI: TD-3894 Configuration Tool pathway link is not working in Linux
+    - UI: TD-3896 Repeatedly open the preview page after I closed it
+    - UI: TD-3905 Error message after modified custom style sheet
+    - UI: TD-3928 SE Version of Pathway ConfigurationTool Crashes
+    - UI: TD-3951 Wrong help topic from Intellectual Property link
+    - XeLaTeX: Put all XeLaTeX files in texmf-dist folder
+    - XeLaTeX: Hide Verse No:1
+    - XeLaTeX: Remove Space After Verse No box.
+    - XeLaTeX: TD-2327 Handle scripture Reference Format for Normal Page
+    - XeLaTeX: TD-3419 Add needspace package
+    - XeLaTeX: TD-3836 Scripture output start left to right towards
+    - XeLaTeX: TD-3837 Squares box appears in the copyright page when exporting scriptures
+    - XeLaTeX: TD-3838 Verse number appears wrong in the xelatex
+    - XeLaTeX: TD-3827 Title page image appears at top
+    - XeLaTeX: TD-3829 Two page number appear in single page
+    - XeLaTeX: TD-3830 Page number appear in xelatex output
+    - XeLaTeX: TD-3841 "2023" Number appear in sense number place
+    - XeLaTeX: TD-3842 Homograph Number graph appears after the word
+    - XeLaTeX: TD-3847 LetterHead appears at the bottom of the previous page
+    - XeLaTeX: TD-3883 Bullets don't appear at sub entry
+    - XeLaTeX: TD-3884 Reversal TOC name missing
+    - XeLaTeX: TD-3886 Telugu letters do not appear properly
+    - XeLaTeX: TD-3909 Crash on Export
+    - XeLaTeX: TD-3938 Handle XeLaTeX on 32-bit Windows 7
+    - XeLaTeX: TD-3947 Update to 2013 version of XeLaTeX
   * pathway 1.7.3 daily
     - handle install when launched from Firefox
   * pathway 1.7.2 daily
