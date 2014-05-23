@@ -55,6 +55,8 @@ binary:
 
 clean:
 	xbuild /target:Clean BuildPathwaySprint.csproj
+
+uninstall:
 	-sudo apt-get -y remove pathway
 	sudo rm -rf $(DESTDIR)$(prefix)/lib/pathway
 	sudo rm -rf $(DESTDIR)$(prefix)/share/doc/pathway

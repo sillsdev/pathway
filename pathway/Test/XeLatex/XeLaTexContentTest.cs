@@ -33,23 +33,11 @@ namespace Test.XeLatex
     public class XeLaTexContentTest : ExportXeLaTex
     {
         #region Private Variables
-        private string _inputCSS;
-        private string _inputXHTML;
         private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
-        private string _outputStory;
-        private string _outputStyles;
-        private Dictionary<string, string> _expected = new Dictionary<string, string>();
-        private string _className = "a";
         private string _testFolderPath = string.Empty;
-        Dictionary<string, Dictionary<string, string>> _idAllClass = new Dictionary<string, Dictionary<string, string>>();
-        private InStyles _stylesXML;
-        private InStory _storyXML;
-        private readonly ArrayList headwordStyles = new ArrayList();
 
-        private Dictionary<string, Dictionary<string, string>> _cssProperty;
-        private CssTree _cssTree;
         private PublicationInformation _projInfo;
         private Dictionary<string, List<string>> _classInlineStyle;
         Dictionary<string, string> _langFontCodeandName = new Dictionary<string, string>();
@@ -60,8 +48,6 @@ namespace Test.XeLatex
         protected void SetUpAll()
         {
             Common.Testing = true;
-            _stylesXML = new InStyles();
-            _storyXML = new InStory();
             _projInfo = new PublicationInformation();
             _classInlineStyle = new Dictionary<string, List<string>>();
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/XeLatex/TestFiles");
@@ -73,16 +59,7 @@ namespace Test.XeLatex
                 Directory.Delete(_outputPath, recursive);
             Directory.CreateDirectory(_outputPath);
             _projInfo.ProjectPath = _testFolderPath;
-            _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             Common.SupportFolder = "";
-            //Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
-            //Common.CopyOfficeFolder(_expectedPath, _outputPath);
-        }
-
-        [SetUp]
-        protected void SetupEach()
-        {
-            _cssTree = new CssTree();
         }
         #endregion Setup
 
@@ -96,6 +73,7 @@ namespace Test.XeLatex
         /// </summary>
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TextAlignTest()
         {
@@ -106,6 +84,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TextIndentTest()
         {
@@ -116,6 +95,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void ListSmallTest()
         {
@@ -126,6 +106,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TextColorTest()
         {
@@ -136,6 +117,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void ChapterNumberTest()
         {
@@ -146,6 +128,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void ChapterNumberOnHeaderTest()
         {
@@ -156,6 +139,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void DropCapTest()
         {
@@ -166,6 +150,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontStyleItalicTest()
         {
@@ -176,6 +161,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void Inherit()
         {
@@ -186,6 +172,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontStyleNormalTest()
         {
@@ -196,6 +183,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontWeight()
         {
@@ -206,6 +194,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontVariantSmallCapTest()
         {
@@ -216,6 +205,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontVariantNormalTest()
         {
@@ -226,6 +216,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontSizePointTest()
         {
@@ -236,6 +227,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void WordSpace()
         {
@@ -246,6 +238,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void LineHeight()
         {
@@ -256,6 +249,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontSizeCmToPointTest()
         {
@@ -266,6 +260,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontSizeXXSmallTest()
         {
@@ -276,6 +271,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontWeightBoldTest()
         {
@@ -286,6 +282,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontWeightNormalTest()
         {
@@ -297,6 +294,7 @@ namespace Test.XeLatex
 
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontWeightBoldRegular()  // TD-2330()
         {
@@ -308,6 +306,7 @@ namespace Test.XeLatex
 
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontBoldItalicTest()  // TD-2188()
         {
@@ -318,6 +317,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontWeight400Test()
         {
@@ -328,6 +328,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontWeight700Test()
         {
@@ -338,6 +339,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TextAlignCenterTest()
         {
@@ -348,6 +350,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void MarginTopTest()
         {
@@ -358,6 +361,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void DisplayBlockTest()
         {
@@ -368,6 +372,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TextAlignRightTest()
         {
@@ -378,6 +383,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void PseudoAfterTest()
         {
@@ -389,6 +395,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void GautamiFontTest()
         {
@@ -507,6 +514,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void PictureCaptionTest()
         {
@@ -517,6 +525,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void ImageBaseTest()
         {
@@ -528,6 +537,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TextIndentPcTest()
         {
@@ -538,6 +548,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void MarginRightTest()
         {
@@ -549,6 +560,7 @@ namespace Test.XeLatex
 
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void UnderlineTest()
         {
@@ -608,6 +620,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
         public void FontFamily2a()
@@ -619,6 +632,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
         public void FontFamily3()
@@ -640,6 +654,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
         public void FontFamily5()
@@ -661,6 +676,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TextAlignJustifyTest()
         {
@@ -672,6 +688,7 @@ namespace Test.XeLatex
 
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void Counter1Test()
         {
@@ -682,6 +699,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void Counter2Test()
         {
@@ -692,6 +710,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void Counter3Test()
         {
@@ -702,6 +721,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void LanguageTest()
         {
@@ -712,6 +732,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void LetterspaceTest()
         {
@@ -722,6 +743,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void LineHeightNoneTest()
         {
@@ -731,7 +753,8 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        //[Test]
+        [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void LineHeightPercentageTest()
         {
@@ -741,7 +764,8 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        //[Test]
+        [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void LineHeightPointTest()
         {
@@ -752,6 +776,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void PaddingLeftTest()
         {
@@ -762,6 +787,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void PageBGColorTest()
         {
@@ -772,6 +798,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void PageSizeTest()
         {
@@ -782,6 +809,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FootNote1Test()
         {
@@ -793,6 +821,7 @@ namespace Test.XeLatex
 
         [Ignore]
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FootNote2Test()
         {
@@ -804,6 +833,7 @@ namespace Test.XeLatex
 
         [Ignore]
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FootNoteUnicodeTest()
         {
@@ -815,6 +845,7 @@ namespace Test.XeLatex
 
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void ReplaceStringTest()
         {
@@ -836,6 +867,7 @@ namespace Test.XeLatex
         
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void VerticalAlignTest()
         {
@@ -846,6 +878,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void UnicodeSymbolTest()
         {
@@ -857,6 +890,7 @@ namespace Test.XeLatex
 
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void HashSymbolTest()
         {
@@ -868,6 +902,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void Precede1()
         {
@@ -878,6 +913,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void PrecedesPseudoLangTest()
         {
@@ -888,6 +924,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void PrecedesPseudoTest()
         {
@@ -898,6 +935,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void PrecedesPseudoTestA()
         {
@@ -908,6 +946,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void PrecedesPseudoTestB()
         {
@@ -918,6 +957,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void Parent1()
         {
@@ -928,6 +968,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void VisibilityTest()
         {
@@ -938,6 +979,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void multiClass()
         {
@@ -948,6 +990,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TaggedText()
         {
@@ -958,6 +1001,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TextFontSizeTestC()
         {
@@ -970,6 +1014,7 @@ namespace Test.XeLatex
 
         [Ignore]
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void VisibilityCensorPackageTest()
         {
@@ -987,6 +1032,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void ColumnCount()
         {
@@ -997,6 +1043,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void ColumnGap()
         {
@@ -1007,6 +1054,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void XeLaTexPath()
         {
@@ -1015,6 +1063,7 @@ namespace Test.XeLatex
 
         [Ignore]
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void XeLaTexVersion()
         {
@@ -1029,6 +1078,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void LineBreak()
         {
@@ -1039,6 +1089,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FootNoteMarker()
         {
@@ -1049,6 +1100,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TOCLetters()
         {
@@ -1059,6 +1111,7 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void XeLaTexUpdateCache()
         {
@@ -1069,6 +1122,7 @@ namespace Test.XeLatex
 
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TwoColumnInputCase()
         {
@@ -1094,6 +1148,16 @@ namespace Test.XeLatex
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "BRTag";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void BidiTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Bidi";
             ExportProcess(file);
             FileCompare(file);
         }

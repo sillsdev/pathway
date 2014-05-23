@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Antlr.Runtime.Tree;
-using ANTLR_CSS;
 using SIL.PublishingSolution;
 
 namespace TestBed
@@ -16,11 +15,6 @@ namespace TestBed
         public ANTLR()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)

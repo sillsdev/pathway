@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="33">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="35">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -130,7 +130,8 @@
       <option name="No Change" file="Embedded_Spans_nc.css" />
     </feature>
     <feature name="Pictures">
-      <option name="Yes" file="Pictures_Yes.css" />
+      <option name="Frame" file="Pictures_Frame.css" />
+	  <option name="Paragraph" file="Pictures_Paragraph.css" />
       <option name="No" file="Pictures_No.css" />
     </feature>
     <feature name="Running Head">
@@ -352,6 +353,35 @@
         <styleProperty name="BaseFontSize" value="13" />
         <styleProperty name="DefaultLineHeight" value="125" />
         <styleProperty name="DefaultAlignment" value="Left" />
+        <styleProperty name="ChapterNumbers" value="Drop Cap" />
+        <styleProperty name="MaxImageWidth" value="600" />
+        <styleProperty name="EmbedFonts" value="Yes"/>
+        <styleProperty name="IncludeFontVariants" value="Yes" />
+        <styleProperty name="DefaultFont" value="Charis SIL" />
+        <styleProperty name="MissingFont" value="Prompt User"/>
+        <styleProperty name="NonSILFont" value="Prompt User" />
+        <styleProperty name="Title" value=" "/>
+        <styleProperty name="Creator" value=" " />
+        <styleProperty name="Publisher" value=" " />
+        <styleProperty name="Type" value=" " />
+        <styleProperty name="Source" value=" " />
+        <styleProperty name="Format" value=" " />
+        <styleProperty name="Contributor" value=" " />
+        <styleProperty name="Relation" value=" " />
+        <styleProperty name="Coverage" value=" " />
+		<styleProperty name="IncludeImage" value="Yes" />		
+        <styleProperty name="Information" value="DRAFT Dictionary." />
+        <styleProperty name="Copyright" value="© 2014 SIL International®." />
+		<styleProperty name="PageBreak" value="No" />
+      </style>
+	  <style name="EBook (epub) Right Align" file="epubRightAlign.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg" shown="Yes">
+        <description>1 column flowed text, Right aligned, default font for each writing system</description>
+        <styleProperty name="CoverImage" value="cover.png"/>
+        <styleProperty name="TOCLevel" value="2 - Letter and Entry"/>
+        <styleProperty name="AddColophonPage" value="Yes" />
+        <styleProperty name="BaseFontSize" value="13" />
+        <styleProperty name="DefaultLineHeight" value="125" />
+        <styleProperty name="DefaultAlignment" value="Right" />
         <styleProperty name="ChapterNumbers" value="Drop Cap" />
         <styleProperty name="MaxImageWidth" value="600" />
         <styleProperty name="EmbedFonts" value="Yes"/>

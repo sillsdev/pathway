@@ -16,7 +16,6 @@
 
 using System.Diagnostics;
 using Microsoft.Win32;
-using System.Windows.Forms;
 
 namespace SIL.Tool
 {
@@ -42,19 +41,6 @@ namespace SIL.Tool
             {
                 return _productName;
             }
-        }
-
-        /// --------------------------------------------------------------------------------
-        /// <summary>
-        /// Method for retrieving a Registry Value.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <param name="defaultValue">The default value.</param>
-        /// <returns></returns>
-        /// --------------------------------------------------------------------------------
-        static public string GetStringRegistryValue(string key, string defaultValue)
-        {
-            return (string)GetRegistryValue(key, defaultValue);
         }
 
         /// --------------------------------------------------------------------------------

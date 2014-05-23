@@ -94,6 +94,7 @@ namespace Test.WordPressConvert
         ///</summary>
         [Ignore]
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void ExportPassTest()
         {
@@ -175,11 +176,6 @@ namespace Test.WordPressConvert
         }
 
         #region Private Functions
-        private string FileProg(string fileName)
-        {
-            return Common.PathCombine(Common.GetPSApplicationPath(), fileName);
-        }
-
         private string FileInput(string fileName)
         {
             return Common.PathCombine(_inputPath, fileName);

@@ -95,24 +95,6 @@ namespace SIL.PublishingSolution
             return outName;
         }
 
-        private string InsertMainCSS(string css)
-        {
-            if (string.IsNullOrEmpty(css)) return string.Empty;
-            // Read the default css file
-            string PreviewCSSPath = css;
-            if (!string.IsNullOrEmpty(DefaultCSS) && File.Exists(DefaultCSS))
-            {
-                PreviewCSSPath = Common.PathCombine(Common.GetAllUserPath(), "Preview.css");
-                if (File.Exists(PreviewCSSPath)) { File.Delete(PreviewCSSPath); }
-                if (File.Exists(css))
-                File.Copy(css, PreviewCSSPath, true);
-                var myFile = new StreamReader(DefaultCSS);
-                string DefaultCSSContent = myFile.ReadToEnd();
-                Common.FileInsertText(PreviewCSSPath, DefaultCSSContent);
-                myFile.Close();
-            }
-            return PreviewCSSPath;
-        }
         #region CreatePreviewFile(string xhtmlFile, string cssFile, string outputFileName)
         /// <summary>
         /// Return the name of the preview html name in the link tag.

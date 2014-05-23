@@ -30,7 +30,6 @@ namespace Test.InDesignConvert
         private string _testFolderPath;
         private InInsertMacro _InsertMacro;
         private CssTree _cssTree;
-        private Dictionary<string, Dictionary<string, string>> _cssProperty;
         private Dictionary<string, Dictionary<string, string>> _cssClass = new Dictionary<string, Dictionary<string, string>>();
         #endregion
 

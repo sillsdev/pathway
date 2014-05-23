@@ -26,7 +26,6 @@ namespace Test.PsTool
     public class PreExportProcessTest
     {
         PreExportProcess preExportProcess;
-        public string _node;
 
         [TestFixtureSetUp]
         protected void SetUp()
@@ -47,7 +46,7 @@ namespace Test.PsTool
             PublicationInformation projInfo = new PublicationInformation();
             
             string expected = GetFileNameWithExpectedPath(filename);
-            string output = input.Replace("InputFiles\\", "Output\\");
+            string output = GetFileNameWithOutputPath(filename);
             CopyToOutput(input, output);
             projInfo.DefaultXhtmlFileWithPath = output;
             projInfo.ProjectInputType = "Scripture";
@@ -102,7 +101,7 @@ namespace Test.PsTool
             projInfo.DefaultXhtmlFileWithPath = input;
             preExportProcess = new PreExportProcess(projInfo);
             string expected = GetFileNameWithExpectedPath(filename);
-            string outputFile = projInfo.DefaultXhtmlFileWithPath.Replace("InputFiles", "output");
+            string outputFile = GetFileNameWithOutputPath(filename);
             File.Copy(projInfo.DefaultXhtmlFileWithPath, outputFile, true);
             string output = preExportProcess.SetLangforLetter(outputFile);
             XmlAssert.AreEqual(expected, output, "");

@@ -36,10 +36,6 @@ namespace Test.PsTool
         {
             string fileName = GetFileNameWithPath("Test.xhtml");
             string _expected = @"C:\FieldWorks";
-            if(Common.IsUnixOS())
-            {
-                _expected = Common.PathCombine(Common.GetAllUserAppPath(), "fieldworks");
-            }
             string actual = Common.GetMetaValue(fileName);
             Assert.AreEqual(_expected, actual);
         }
@@ -175,29 +171,6 @@ namespace Test.PsTool
             string expected = "FlexRev.xml";
             string actual = Common.XsltProcess(inputFile, xsltFile, ext);
             Assert.AreEqual(expected, Path.GetFileName(actual));
-        }
-
-        /// <summary>
-        ///A test for Xslt2Process, test x: namespace for xhtml & dictionary params
-        ///</summary>
-        [Test]
-        public void XsltProcessTest6()
-        {
-            const string inputName = "main.xhtml";
-            const string xsltName = "xhtml2xpw-dic.xsl";
-            string inputFile = GetFileNameWithOutputPath(inputName);
-            string xsltFile = GetFileNameWithOutputPath(xsltName);
-            File.Copy(GetFileNameWithPath(inputName), inputFile, true);
-            File.Copy(GetFileNameWithPath(xsltName), xsltFile, true);
-            string ext = ".txt";
-            string expected = "main.txt";
-            var myParams = new Dictionary<string, string>();
-            myParams["ver"] = "bzh";
-            myParams["l1"] = "en";
-            myParams["l2"] = "tpi";
-            string actual = Common.XsltProcess(inputFile, xsltFile, ext, myParams);
-            Assert.AreEqual(expected, Path.GetFileName(actual));
-            TextFileAssert.AreEqual(GetFileNameWithExpectedPath(expected), actual);
         }
 
         /// <summary>

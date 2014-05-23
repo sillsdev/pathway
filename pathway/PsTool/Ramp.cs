@@ -23,9 +23,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
-using SIL.Tool;
+using SIL.PublishingSolution;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
     /// <summary>
     /// Combines all css into a single file by implementing @import
@@ -81,7 +81,6 @@ namespace SIL.PublishingSolution
         protected string _outputExtension = string.Empty;
         protected string _projInputType = string.Empty;
         private string _outputFileTitle = string.Empty;
-        private RampFile rampFile;
         protected Dictionary<string, string> _isoLanguageCode = new Dictionary<string, string>();
         protected Dictionary<string, string> _isoLanguageCodeandName = new Dictionary<string, string>();
         protected Dictionary<string, string> _isoLanguageScriptandName = new Dictionary<string, string>();
@@ -386,7 +385,7 @@ namespace SIL.PublishingSolution
 
         protected void LoadLanguagefromXML()
         {
-            string xmlFilePath = Common.PathCombine(Common.GetBinPath(), "RampLangCode.xml");
+            string xmlFilePath = CopiedToTempRampLangXMLFile();
             if (!File.Exists(xmlFilePath))
                 return;
 
@@ -419,6 +418,32 @@ namespace SIL.PublishingSolution
                     _isoLanguageScriptandName.Add(node.Attributes["name"].Value, node.Attributes["scriptname"].Value);
                 }
             }
+        }
+
+        private string CopiedToTempRampLangXMLFile()
+        {
+            string fileName = "RampLangCode.xml";
+            string PsSupportPath = Common.GetBinPath();
+            string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, fileName);
+            string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
+            if (Directory.Exists(tempFolder))
+            {
+                try
+                {
+                    DirectoryInfo di = new DirectoryInfo(tempFolder);
+                    Common.CleanDirectory(di);
+                }
+                catch
+                {
+                    tempFolder = Common.PathCombine(Path.GetTempPath(),
+                                                    "SilPathWay" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
+                }
+            }
+            Directory.CreateDirectory(tempFolder);
+            string tempGenericFontFile = Common.PathCombine(tempFolder, fileName);
+
+            File.Copy(xmlFileNameWithPath, tempGenericFontFile, true);
+            return tempGenericFontFile;
         }
 
         private bool IsFromTestBed()
@@ -1243,24 +1268,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void CreateRampDescTableofContentsHas(Json json)
-        {
-            if (DescTableofContentsHas != null && DescTableofContentsHas.Trim().Length > 0)
-            {
-                json.WriteTag("description.tableofcontents.has");
-                json.WriteText(DescTableofContentsHas);
-            }
-        }
-
-        private void CreateRampDescSponsership(Json json)
-        {
-            if (DescSponsership != null && DescSponsership.Trim().Length > 0)
-            {
-                json.WriteTag("dc.description.sponsorship");
-                json.WriteText(DescSponsership);
-            }
-        }
-
         private void CreateRampFormatExtentImages(Json json)
         {
             if (FormatExtentImages != null && FormatExtentImages.Trim().Length > 0)
@@ -1355,36 +1362,6 @@ namespace SIL.PublishingSolution
             {
                 json.WriteTag("subject.subjectLanguage.has");
                 json.WriteText(SubjectLanguageHas);
-            }
-        }
-
-        private void CreateRampCoverageSpacialCountry(Json json)
-        {
-            if (CoverageSpacialCountry.Count > 0)
-            {
-                json.WriteTag("coverage.spatial.country");
-                json.StartTag();
-                for (int i = 0; i < CoverageSpacialCountry.Count; i++)
-                {
-                    string[] cntry = CoverageSpacialCountry[i].Split(',');
-                    json.WriteTag(i.ToString());
-                    json.StartTag();
-                    json.WriteText(" \": \"" + cntry[0] + "\", \"place\": \"" + cntry[1]);
-                    json.EndTag();
-                    if (i < CoverageSpacialCountry.Count - 1)
-                        json.WriteComma();
-                }
-                json.EndTag();
-                json.WriteComma();
-            }
-        }
-
-        private void CreateRampCoverageSpacialRegionHas(Json json)
-        {
-            if (CoverageSpacialRegionHas != null && CoverageSpacialRegionHas.Trim().Length > 0)
-            {
-                json.WriteTag("coverage.spatial.region.has");
-                json.WriteText(CoverageSpacialRegionHas);
             }
         }
 
@@ -1534,15 +1511,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void CreateRampId(Json json)
-        {
-            if (RampId != null && RampId.Trim().Length > 0)
-            {
-                json.WriteTag("id");
-                json.WriteText(RampId);
-            }
-        }
-
         private void CreateRampDescriptionHas(Json json)
         {
             if (RampDescriptionHas != null && RampDescriptionHas.Trim().Length > 0)
@@ -1648,18 +1616,25 @@ namespace SIL.PublishingSolution
                 {
                     licenseXml = filename;
                 }
-                XmlDocument xDoc = Common.DeclareXMLDocument(true);
-                var namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-                namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
-                xDoc.Load(licenseXml);
-                const string xPath = "//x:div[@id='LicenseInformation']";
-                XmlNodeList nodeList = xDoc.SelectNodes(xPath, namespaceManager);
-                if (nodeList != null && nodeList.Count > 0)
+                try
                 {
-                    if (nodeList[nodeList.Count - 1] != null)
+                    XmlDocument xDoc = Common.DeclareXMLDocument(true);
+                    var namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+                    namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
+                    xDoc.Load(licenseXml);
+                    const string xPath = "//x:div[@id='LicenseInformation']";
+                    XmlNodeList nodeList = xDoc.SelectNodes(xPath, namespaceManager);
+                    if (nodeList != null && nodeList.Count > 0)
                     {
-                        text = nodeList[nodeList.Count - 1].InnerText;
+                        if (nodeList[nodeList.Count - 1] != null)
+                        {
+                            text = nodeList[nodeList.Count - 1].InnerText;
+                        }
                     }
+                }
+                catch
+                {
+                    text = string.Empty;
                 }
             }
             else
@@ -1706,6 +1681,7 @@ namespace SIL.PublishingSolution
             {
                 _outputFileTitle = "Default Title";
             }
+            _outputFileTitle = Common.ReplaceSymbolToUnderline(_outputFileTitle);
 
             using (ZipFile zipFile = ZipFile.Create(Common.PathCombine(Path.GetDirectoryName(_folderPath), _outputFileTitle) + ".ramp"))
             {
@@ -1732,33 +1708,6 @@ namespace SIL.PublishingSolution
                 zipFile.CommitUpdate();
             }
         }
-
-        private void CleanUpFolder(List<string> files, string folderPath)
-        {
-            try
-            {
-                List<string> validExtension = new List<string>();
-                DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
-
-                validExtension.AddRange(_outputExtension.Split(','));
-
-                foreach (var file in files)
-                {
-                    string ext = Path.GetExtension(file);
-
-                    if (!validExtension.Contains(ext))
-                    {
-                        File.Delete(file);
-                    }
-                }
-
-                foreach (DirectoryInfo subfolder in directoryInfo.GetDirectories())
-                {
-                    subfolder.Delete(true);
-                }
-            }catch{}
-        }
-
 
         /// <summary>
         /// 

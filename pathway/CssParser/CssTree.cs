@@ -50,7 +50,7 @@ namespace SIL.PublishingSolution
 
         public Dictionary<string, Dictionary<string, string>> CreateCssProperty(string cssSourceFile, bool setDefaultPageValue)
         {
-            var cssTree = new CssParserDuplicateClass();
+            var cssTree = new CssParser();
             cssTree.OutputType = OutputType;
             Common._outputType = OutputType;
             TreeNode node = cssTree.BuildTree(cssSourceFile);
@@ -490,18 +490,6 @@ namespace SIL.PublishingSolution
             //}
         }
 
-        private void CreateFullyQualifiedName(StyleAttribute _attributeInfo)
-        {
-            if (_attributeInfo.ClassName == "@page")
-            {
-                if (_attributeInfo.Name == "margin-left" || _attributeInfo.Name == "margin-right" ||
-                    _attributeInfo.Name == "margin-top" || _attributeInfo.Name == "margin-bottom" || _attributeInfo.Name == "margin")
-                {
-                    _attributeInfo.Name = "page-" + _attributeInfo.Name;
-                }
-            }
-        }
-
         static private void CreateFullyQualifiedClassName(StyleAttribute _attributeInfo)
         {
             if (_attributeInfo.ClassName.IndexOf("@page") == -1)
@@ -855,25 +843,6 @@ namespace SIL.PublishingSolution
 	            }
 			}
             return fontList;
-        }
-
-        public string PageSize(string dimension)
-        {
-            var sizes = new Dictionary<string, string>
-            {
-            {"595x842", "a4"},
-            {"420x595", "a5"},
-            {"298x420", "a6"},
-            {"459x649", "c5"},
-            {"378x594", "gps1"},
-            {"418x626", "gps2"},
-            {"396x612", "halfletter"},
-            {"612x792", "letter"},
-            {"432x648", "middle"},
-            };
-            if (sizes.ContainsKey(dimension))
-                return sizes[dimension];
-            return "letter";
         }
     }
 }

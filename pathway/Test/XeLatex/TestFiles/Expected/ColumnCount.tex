@@ -1,6 +1,4 @@
 \documentclass[a4paper]{article} 
-\usepackage{changepage}
-\usepackage{multicol}
 \usepackage{float}
 \usepackage{grffile}
 \usepackage{graphicx}
@@ -10,13 +8,18 @@
 \usepackage{multicol}
 \usepackage{calc}
 \usepackage{lettrine}
+\usepackage{alphalph}
 \usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
+\usepackage{changepage}
+\usepackage{needspace}
+\usepackage{multicol}
 
 \parindent=0pt
 \parskip=\medskipamount
-\begin{document} 
-\pagestyle{plain} 
-\sloppy 
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
 \font\revHeaderrevAppendix="Charis SIL/B" at 18pt
 \font\letDatarevAppendix="Times New Roman" at 12pt
 \font\entrybletDatarevAppendix="Times New Roman" at 12pt
@@ -33,7 +36,7 @@
 \setlength{\columnsep}{1.5em} 
 \setlength\columnseprule{0.4pt} 
 \begin{multicols}{4}{\raggedright} 
-\entrybletDatarevAppendix{ Welcome to the English-language Wiktionary, a collaborative project to produce a free-content multilingual dictionary. Designed as the lexical companion to Wikipedia, the encyclopaedia project, Wiktionary has grown beyond a standard dictionary and now includes a thesaurus, a rhyme guide, phrase books, language statistics and extensive appendices. We aim to include not only the definition of a word, but also enough information to really understand it. Thus etymologies, pronunciations, sample quotations, synonyms, antonyms and translations are included. Wiktionary is a wiki, which means that you can edit it, and all the content is dual-licensed under both the Creative Commons Attribution-ShareAlike 3.0 Unported License as well as the GNU Free Documentation License. Before you contribute, you may wish to read through some of our Help pages, and bear in mind that we do things quite differently from other wikis. In particular, we have strict layout conventions and inclusion criteria. Learn how to start a page, how to edit entries, experiment in the sandbox and visit our Community Portal to see how you can participate in the development of Wiktionary. }
+\entrybletDatarevAppendix{ Welcome to the English-language Wiktionary, a collaborative project to produce a free-content multilingual dictionary. Designed as the lexical companion to Wikipedia, the encyclopaedia project, Wiktionary has grown beyond a standard dictionary and now includes a thesaurus, a rhyme guide, phrase books, language statistics and extensive appendices. We aim to include not only the definition of a word, but also enough information to really understand it. Thus etymologies, pronunciations, sample quotations, synonyms, antonyms and translations are included. Wiktionary is a wiki, which means that you can edit it, and all the content is dual-licensed under both the Creative Commons Attribution-ShareAlike 4.0 Unported License as well as the GNU Free Documentation License. Before you contribute, you may wish to read through some of our Help pages, and bear in mind that we do things quite differently from other wikis. In particular, we have strict layout conventions and inclusion criteria. Learn how to start a page, how to edit entries, experiment in the sandbox and visit our Community Portal to see how you can participate in the development of Wiktionary. }
  \end{multicols}\setlength{\columnsep}{1.5em} 
 \setlength\columnseprule{0.4pt} 
 \begin{multicols}{3}{\raggedright} 

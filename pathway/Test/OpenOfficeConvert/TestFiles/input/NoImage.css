@@ -52,7 +52,7 @@
     text-indent: 0pt;
     margin-left: 0pt;
 }
-.grammatical-info:after { content: " " }
+.grammatical-info:after { content: " "}
 .headword {
     /* lang = 'seh' */
     /* explicit FieldWorks style = 'Dictionary-Headword' */

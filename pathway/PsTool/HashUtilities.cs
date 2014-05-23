@@ -19,7 +19,7 @@ using System.IO;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
 	#region cryptography class...
 
@@ -158,7 +158,7 @@ namespace SIL.PublishingSolution
 					}
 				}
 			}
-			PasswordDeriveBytes key = new PasswordDeriveBytes(mKey, ASCIIEncoding.ASCII.GetBytes(mSalt));
+            Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(mKey, ASCIIEncoding.ASCII.GetBytes(mSalt));
 			return key.GetBytes(mKey.Length);
 		}
 
@@ -248,100 +248,5 @@ namespace SIL.PublishingSolution
 		#endregion
 	}
 	#endregion
-
-	#region Hash Class...
-	
-	/// <summary>CHashProtector is a password protection one way encryption algorithm</summary>
-	/// <programmer>Chidi C. Ezeukwu</programmer>
-	/// <written>May 16, 2004</written>
-	/// <Updated>Aug 07, 2004</Updated>
-		
-	public class Hash
-	{
-		#region Private member variables...
-
-		private string mSalt;
-		private HashAlgorithm mCryptoService;
-
-		#endregion
-
-		#region Public interfaces...
-
-		public enum ServiceProviderEnum: int
-		{
-			// Supported algorithms
-			SHA1, 
-			SHA256, 
-			SHA384, 
-			SHA512, 
-			MD5
-		}
-
-		public Hash()
-		{
-			// Default Hash algorithm
-			mCryptoService = new SHA1Managed();
-		}
-
-		public Hash(ServiceProviderEnum serviceProvider)
-		{	
-			// Select hash algorithm
-			switch(serviceProvider)
-			{
-				case ServiceProviderEnum.MD5:
-					mCryptoService = new MD5CryptoServiceProvider();
-					break;
-				case ServiceProviderEnum.SHA1:
-					mCryptoService = new SHA1Managed();
-					break;
-				case ServiceProviderEnum.SHA256:
-					mCryptoService = new SHA256Managed();
-					break;
-				case ServiceProviderEnum.SHA384:
-					mCryptoService = new SHA384Managed();
-					break;
-				case ServiceProviderEnum.SHA512:
-					mCryptoService = new SHA512Managed();
-					break;
-			}
-		}
-
-		public Hash(string serviceProviderName)
-		{
-			try
-			{
-				// Set Hash algorithm
-				mCryptoService = (HashAlgorithm)CryptoConfig.CreateFromName(serviceProviderName.ToUpper());
-			}
-			catch
-			{
-				throw;
-			}
-		}
-
-		public virtual string Encrypt(string plainText)
-		{
-			byte[] cryptoByte =  mCryptoService.ComputeHash(ASCIIEncoding.ASCII.GetBytes(plainText + mSalt));
-			
-			// Convert into base 64 to enable result to be used in Xml
-			return Convert.ToBase64String(cryptoByte, 0, cryptoByte.Length);
-		}
-
-		public string Salt
-		{
-			// Salt value
-			get
-			{
-				return mSalt;
-			}
-			set
-			{
-				mSalt = value;
-			}
-		}
-		#endregion
-	}
-	#endregion
-
 }
 

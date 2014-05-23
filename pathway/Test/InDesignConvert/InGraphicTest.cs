@@ -35,11 +35,9 @@ namespace Test.InDesignConvert
         private Dictionary<string, string> _expected = new Dictionary<string, string>();
         private string _testFolderPath = string.Empty;
         private InGraphic _graphicXML;
-        private ArrayList _borderColor;
         #endregion
 
         #region Public Variables
-        public XPathNodeIterator NodeIter;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
         private CssTree _cssTree;
         #endregion

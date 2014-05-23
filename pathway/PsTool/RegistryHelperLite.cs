@@ -154,5 +154,10 @@ namespace SIL.Tool
                 return Registry.ClassesRoot.OpenSubKey("theWordModule");
             }
         }
+
+        public static RegistryKey JarFile
+        {
+            get { return Registry.ClassesRoot.OpenSubKey("jarfile"); }
+        }
     }
 }

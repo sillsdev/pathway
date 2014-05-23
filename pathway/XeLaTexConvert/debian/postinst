@@ -26,19 +26,24 @@ case "$1" in
 		fmtutil --all
 	fi
 	if [ -d "${prefix}/lib/pwtex/bin/x86_64-linux" ]; then
-		cd ${prefix}/lib/pwtex/bin/x86_64-linux
-		./mktexlsr
-		TEXMFMAIN=${prefix}/lib/pwtex/texmf;./fmtutil --all
+		export PATH=${prefix}/lib/pwtex/bin/x86_64-linux:$PATH
+		mktexlsr
+		fmtutil --all
 	fi
-        #mv /etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml.dpkg-dist /etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml
-#rm -f ${prefix}/share/man/man7/ConfigurationTool.7.gz
-#link ${prefix}/share/man/man7/pathwayB.7.gz ${prefix}/share/man/man7/ConfigurationTool.7.gz
-#exec ${prefix}/share/pathway/WritePathwayKeys.cs
+	if [ ! -z "$SUDO_USER" ]; then
+		sudo -u $SUDO_USER bash ${prefix}/share/pwtex/pathwayXelatexRegistryKeys.sh
+	else
+		mkdir -p /etc/profile.d
+		cp ${prefix}/share/pwtex/pathwayXelatexRegistryKeys.sh /etc/profile.d
+		/usr/share/update-notifier/notify-reboot-required
+	fi
 
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
-#rm -f ${prefix}/share/man/man7/ConfigurationTool.7.gz
+	if [ -f "/etc/profile.d/pathwayXelatexRegistryKeys.sh" ]; then
+		rm -f /etc/profile.d/pathwayXelatexRegistryKeys.sh
+	fi
     ;;
 
     *)

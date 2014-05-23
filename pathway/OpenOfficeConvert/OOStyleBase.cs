@@ -52,31 +52,12 @@ namespace SIL.PublishingSolution
 
         protected Dictionary<string, string> _columnSep;
 
-        ClassInfo _selectorClass;
-        ArrayList _multiClass = new ArrayList();
-        ArrayList _tagName = new ArrayList();  // for merge style in CloseODTStyles() function
-
-
-        StyleAttribute _attributeInfo;
-        string _className = string.Empty;
-        bool _borderAdded = false;
-
-        Dictionary<string, string> _attribute;
-        Dictionary<string, string> _dispClassName = new Dictionary<string, string>();
-        OOMapProperty _mapProperty = new OOMapProperty();
-        bool _pageFirst = false;
-        bool _isDictionary = false;
-        bool _pseudoClassName = false;
         protected string _styleFilePath;
-        string _attribClassName = string.Empty;
         protected ArrayList _firstPageContentNone = new ArrayList();
         #endregion
 
         #region public Variable
         public bool isMirrored = false; //TD-410
-        public bool IsPosition = false;
-        public static bool IsCropMarkChecked; // TD-190(marks:crop)
-        public static bool IsMarginChanged; // TD-190(marks:crop)
         public static string HeaderRule; // TD-1007(Add a ruling line to the bottom of the header.)
         #endregion
 
@@ -406,14 +387,12 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Generate first block of Styles.xml
-        /// 
-        /// <list> 
-        /// </list>
         /// </summary>
         /// <param name="targetFile">content.xml</param>
+        /// <param name="cssProperty">used to retrieve header font</param>
         /// <returns> </returns>
         /// -------------------------------------------------------------------------------------------
-        protected void CreateODTStyles(string targetFile, Dictionary<string, Dictionary<string, string>> _cssProperty)
+        protected void CreateODTStyles(string targetFile, Dictionary<string, Dictionary<string, string>> cssProperty)
         {
             try
             {
@@ -475,9 +454,8 @@ namespace SIL.PublishingSolution
 
                 //TD-2815
                 _writer.WriteStartElement("style:font-face");
-                string headerFontName = Common.GetHeaderFontName(_cssProperty, _projInfo.DefaultCssFileWithPath);
-                _writer.WriteAttributeString("style:name", headerFontName);
-                _writer.WriteAttributeString("svg:font-family", "'" + headerFontName + "'");
+                _writer.WriteAttributeString("style:name", _projInfo.HeaderFontName);
+                _writer.WriteAttributeString("svg:font-family", "'" + _projInfo.HeaderFontName + "'");
                 _writer.WriteAttributeString("style:font-pitch", "variable");
                 _writer.WriteEndElement();
 
@@ -486,6 +464,13 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("style:font-face");
                 _writer.WriteAttributeString("style:name", "Gautami1");
                 _writer.WriteAttributeString("svg:font-family", "'Gautami'");
+                _writer.WriteAttributeString("style:font-pitch", "variable");
+                _writer.WriteEndElement();
+
+                _writer.WriteStartElement("style:font-face");
+                _writer.WriteAttributeString("style:name", "Times New Roman");
+                _writer.WriteAttributeString("svg:font-family", "'" + "Times New Roman" + "'");
+                _writer.WriteAttributeString("style:font-family-generic", "roman");
                 _writer.WriteAttributeString("style:font-pitch", "variable");
                 _writer.WriteEndElement();
 

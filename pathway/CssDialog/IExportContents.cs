@@ -53,7 +53,7 @@ namespace SIL.PublishingSolution
 		string DictionaryName { get; }
 		#endregion Properties
 
-		/// <summary>Method to display form dialog</summary>
-		DialogResult ShowDialog();
-	}
+        /// <summary>Method to display form dialog</summary>
+        DialogResult ShowDialog();
+    }
 }

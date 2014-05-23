@@ -96,17 +96,7 @@
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
-    <OutputPath>bin\PwCtx\</OutputPath>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Edition>BTE</Edition>
-    <ConfTag>Pw7</ConfTag>
-    <Status>Testing</Status>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -171,17 +161,7 @@
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|x86' ">
-    <OutputPath>bin\x86\PwCtx\</OutputPath>
-    <PlatformTarget>x86</PlatformTarget>
-    <Edition>BTE</Edition>
-    <ConfTag>Pw7</ConfTag>
-    <Status>Testing</Status>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -243,7 +223,6 @@
     <Compile Include="ModifyXeLaTexStyles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XeLaTexContent.cs" />
-    <Compile Include="XeLaTexContentHeaderFooter.cs" />
     <Compile Include="XeLaTexMapProperty.cs" />
     <Compile Include="XeLaTexStyleBase.cs" />
     <Compile Include="XeLaTexStyles.cs" />

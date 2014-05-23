@@ -69,9 +69,7 @@ namespace SIL.PublishingSolution
             _isUnixOS = Common.IsUnixOS();
             CreateColumn();
             LoadGridValues(sender);
-            Common.PathwayHelpSetup();
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            ShowHelp.ShowHelpTopic(this, _helpTopic, Common.IsUnixOS(), false);
             CreateToolTip();
             btnEdit.Visible = _showEdit;
             btnPrevious.Visible = false;
@@ -289,10 +287,17 @@ namespace SIL.PublishingSolution
             if (page == 1)
             {
                 if (grid.SelectedRows[0].Cells[6].Value.ToString().ToLower() == "custom")
+                {
                     ShowPreview(ref _previewFileName1);
+                    btnPrevious.Enabled = false;
+                    btnNext.Enabled = false;
+                }
+                else
+                {
+                    btnPrevious.Enabled = false;
+                    btnNext.Enabled = true;
+                }
                 preview = _previewFileName1;
-                btnPrevious.Enabled = false;
-                btnNext.Enabled = true;
             }
             else
             {
@@ -425,20 +430,7 @@ namespace SIL.PublishingSolution
 
         private void BtnHelp_Click(object sender, EventArgs e)
         {
-            Common.PathwayHelpSetup();
-            if (_isUnixOS)
-            {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "chmsee";
-                startInfo.Arguments = Common.HelpProv.HelpNamespace;
-                Process.Start(startInfo);
-            }
-            else
-            {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-                SendKeys.Send("{F1}");
-            }
+            ShowHelp.ShowHelpTopicKeyPress(this, _helpTopic, Common.IsUnixOS());
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -485,6 +477,18 @@ namespace SIL.PublishingSolution
                 {
                 }
             }
+        }
+
+        private void PreviewPrintVia_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.F1)
+                {
+                    ShowHelp.ShowHelpTopic(this, _helpTopic, Common.IsUnixOS(), true);
+                }
+            }
+            catch { }
         }
     }
 }

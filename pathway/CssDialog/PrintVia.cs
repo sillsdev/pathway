@@ -235,9 +235,7 @@ namespace SIL.PublishingSolution
             LoadExtraProcessing();
             LoadProperty();
             txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, cmbSelectLayout.Text);
-            Common.PathwayHelpSetup();
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            ShowHelp.ShowHelpTopic(this, _helpTopic, Common.IsUnixOS(), false);
             Common.databaseName = DatabaseName;
         }
 
@@ -304,7 +302,7 @@ namespace SIL.PublishingSolution
         private void LoadLayouts()
         {
             cmbSelectLayout.Items.Clear();
-            
+
             ApprovedByValidation();
 
             ShownValidation();
@@ -368,7 +366,7 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            if (isUpdated )
+            if (isUpdated)
             {
                 Param.Write();
             }
@@ -422,7 +420,7 @@ namespace SIL.PublishingSolution
                     DirectoryInfo di = new DirectoryInfo(txtSaveInFolder.Text);
                     Common.CleanDirectory(di);
                 }
-                BtnOk.Enabled = false; 
+                BtnOk.Enabled = false;
             }
             catch (Exception)
             {
@@ -466,7 +464,7 @@ namespace SIL.PublishingSolution
             {
                 txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + cmbSelectLayout.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
             }
-            
+
         }
 
         private void chkConfigDictionary_CheckedChanged(object sender, EventArgs e)
@@ -548,10 +546,7 @@ namespace SIL.PublishingSolution
 
         private void BtnHelp_Click(object sender, EventArgs e)
         {
-            Common.PathwayHelpSetup();
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-            SendKeys.Send("{F1}");
+            ShowHelp.ShowHelpTopicKeyPress(this, _helpTopic, Common.IsUnixOS());
         }
 
         private void BtnBrwsLayout_Click(object sender, EventArgs e)
@@ -578,7 +573,7 @@ namespace SIL.PublishingSolution
             {
                 // Take into account custom directory installs - just look for the ConfigurationTool.exe
                 // in the same directory as this .dll.
-                string fullPathwayPath = Path.GetDirectoryName(Assembly.GetAssembly(typeof (PrintVia)).CodeBase);
+                string fullPathwayPath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(PrintVia)).CodeBase);
                 // if the path returned starts with file://, trim that part out
                 string pathwayPath = (fullPathwayPath.StartsWith("file"))
                                          ? fullPathwayPath.Substring(6)
@@ -623,7 +618,7 @@ namespace SIL.PublishingSolution
 
         private void ShowAvoidOdtCrash()
         {
-            if(cmbPrintVia.Text.ToLower().IndexOf("libreoffice") >= 0 )
+            if (cmbPrintVia.Text.ToLower().IndexOf("libreoffice") >= 0)
             {
                 chkAvoidOdtCrash.Visible = true;
             }

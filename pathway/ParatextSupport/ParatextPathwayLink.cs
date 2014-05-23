@@ -29,47 +29,45 @@ namespace SIL.PublishingSolution
 {
     public class ParatextPathwayLink
     {
-        private Dictionary<string, object> m_xslParams;
-        private string m_projectName;
-        private string m_databaseName;
-        private string m_outputLocationPath;
-        private string m_format;
-        private XslCompiledTransform m_cleanUsx = new XslCompiledTransform();
-        private XslCompiledTransform m_separateIntoBooks = new XslCompiledTransform();
-        private XslCompiledTransform m_usxToXhtml = new XslCompiledTransform();
-        private XslCompiledTransform m_encloseParasInSections = new XslCompiledTransform();
+        private readonly Dictionary<string, object> _mXslParams;
+        private readonly string _mProjectName;
+        private string _mDatabaseName;
+        private string _mOutputLocationPath;
+        private string _mFormat;
+        private readonly XslCompiledTransform _mCleanUsx = new XslCompiledTransform();
+        private readonly XslCompiledTransform _mSeparateIntoBooks = new XslCompiledTransform();
+        private readonly XslCompiledTransform _mUsxToXhtml = new XslCompiledTransform();
+        private readonly XslCompiledTransform _mEncloseParasInSections = new XslCompiledTransform();
 
         /// ------------------------------------------------------------------------------------
         /// <summary>
         /// Initializes a new instance of the <see cref="ParatextPathwayLink"/> class.
+        /// Used by Paratext. Called by Reflection.
         /// </summary>
         /// <param name="databaseName">Name of the database.</param>
         /// <param name="xslParams">The parameters from Paratext for the XSLT.</param>
         /// ------------------------------------------------------------------------------------
         public ParatextPathwayLink(string databaseName, Dictionary<string, object> xslParams)
         {
-            m_databaseName = databaseName;
-            m_xslParams = xslParams;
+            _mDatabaseName = databaseName;
+            _mXslParams = xslParams;
 
             // If the writing system is undefined or set (by default) to English, add a writing system code 
             // that should not have a dictionary to prevent all words from being marked as misspelled.
             object strWs;
-            if (m_xslParams.TryGetValue("ws", out strWs))
+            if (_mXslParams.TryGetValue("ws", out strWs))
             {
                 if ((string)strWs == "en")
-                    m_xslParams["ws"] = "zxx";
+                    _mXslParams["ws"] = "zxx";
             }
             else
             {
                 Debug.Fail("Missing writing system parameter for XSLT");
-                m_xslParams.Add("ws", "zxx");
+                _mXslParams.Add("ws", "zxx");
             }
-            object projObj;
-            if (m_xslParams.TryGetValue("projName", out projObj))
-                m_projectName = (string)projObj;
-            if (!m_xslParams.ContainsKey("langInfo"))
+            if (!_mXslParams.ContainsKey("langInfo"))
             {
-                m_xslParams.Add("langInfo", Common.ParaTextDcLanguage(databaseName));
+                _mXslParams.Add("langInfo", Common.ParaTextDcLanguage(databaseName));
             }
             LoadStyleSheets();
         }
@@ -77,8 +75,7 @@ namespace SIL.PublishingSolution
         /// ------------------------------------------------------------------------------------
         /// <summary>
         /// Initializes a new instance of the <see cref="ParatextPathwayLink"/> class.
-        /// This method overload is included only for backward compatibility with earlier versions 
-        /// of Paratext.
+        /// This method is used by PathwayB. It will be called by Reflection.
         /// </summary>
         /// <param name="projName">Name of the project (from scrText.Name)</param>
         /// <param name="databaseName">Name of the database.</param>
@@ -86,22 +83,24 @@ namespace SIL.PublishingSolution
         /// <param name="userWs">The user writing system locale.</param>
         /// <param name="userName">Name of the user.</param>
         /// ------------------------------------------------------------------------------------
+// ReSharper disable UnusedMember.Global
         public ParatextPathwayLink(string projName, string databaseName, string ws, string userWs, string userName)
+// ReSharper restore UnusedMember.Global
         {
             if (ws == "en")
                 ws = "zxx";
 
-            m_projectName = projName;
-            m_databaseName = databaseName;
+            _mProjectName = projName;
+            _mDatabaseName = databaseName;
             Common.databaseName = databaseName;
             // Set parameters for the XSLT.
-            m_xslParams = new Dictionary<string, object>();
-            m_xslParams.Add("ws", ws);
-            m_xslParams.Add("userWs", userWs);
+            _mXslParams = new Dictionary<string, object>();
+            _mXslParams.Add("ws", ws);
+            _mXslParams.Add("userWs", userWs);
             DateTime now = DateTime.Now;
-            m_xslParams.Add("dateTime", now.Date);
-            m_xslParams.Add("user", userName);
-            m_xslParams.Add("projName", projName);
+            _mXslParams.Add("dateTime", now.Date);
+            _mXslParams.Add("user", userName);
+            _mXslParams.Add("projName", projName);
 
             LoadStyleSheets();
         }
@@ -114,92 +113,35 @@ namespace SIL.PublishingSolution
         private void LoadStyleSheets()
         {
             // Create stylesheets
-            m_cleanUsx.Load(XmlReader.Create(
+            _mCleanUsx.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "ParatextSupport.XML_without_line_breaks.xsl")));
-            m_separateIntoBooks.Load(XmlReader.Create(
+            _mSeparateIntoBooks.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "ParatextSupport.SeparateIntoBooks.xsl")));
-            m_usxToXhtml.Load(XmlReader.Create(
+            _mUsxToXhtml.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "ParatextSupport.UsfxToXhtml.xsl")));
-            m_encloseParasInSections.Load(XmlReader.Create(
+            _mEncloseParasInSections.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "ParatextSupport.EncloseParasInSections.xsl")));
         }
 
         /// ------------------------------------------------------------------------------------
         /// <summary>
-        /// Exports to the current Scripture book to pathway.
-        /// </summary>
-        /// <param name="usxDoc">The XML document representation of the USFM file.</param>
-        /// ------------------------------------------------------------------------------------
-        public void ExportToPathway(XmlDocument usxDoc)
-        {
-            //// TestBed Code
-            if (string.IsNullOrEmpty(usxDoc.InnerText))
-            {
-                // TODO: Localize string
-                MessageBox.Show("The current book has no content to export.", string.Empty, MessageBoxButtons.OK);
-                return;
-            }
-            ScriptureContents dlg = new ScriptureContents();
-            dlg.DatabaseName = m_databaseName;
-            DialogResult result = dlg.ShowDialog();
-            if (result != DialogResult.Cancel)
-            {
-                string pubName = dlg.PublicationName;
-
-                m_format = dlg.Format;
-
-                // Get the file name as set on the dialog.
-                m_outputLocationPath = dlg.OutputLocationPath;
-
-                string cssFullPath = Common.PathCombine(m_outputLocationPath, pubName + ".css");
-                StyToCSS styToCss = new StyToCSS();
-                styToCss.ConvertStyToCSS(m_projectName, cssFullPath);
-                string fileName = Common.PathCombine(m_outputLocationPath, pubName + ".xhtml");
-
-                if (File.Exists(fileName))
-                {
-                    // TODO: Localize string
-                    result = MessageBox.Show(string.Format("{0}" + Environment.NewLine +
-                        " already exists. Overwrite?", fileName), string.Empty,
-                        MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                        fileName = Common.PathCombine(m_outputLocationPath, pubName + "-" + DateTime.Now.Second + ".xhtml");
-                    else if (result == DialogResult.No)
-                        return;
-                }
-
-                try
-                {
-                    Application.UseWaitCursor = true;
-                    ConvertUsxToPathwayXhtmlFile(usxDoc.InnerXml, fileName);
-                }
-                finally
-                {
-                    Application.UseWaitCursor = false;
-                }
-
-                PsExport exporter = new PsExport();
-                exporter.DataType = "Scripture";
-                exporter.Export(fileName);
-            }
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
         /// Exports to the specified Scripture books to pathway.
+        /// (Called from Paratext by Reflection.)
         /// </summary>
         /// <param name="usxBooksToExport">The XML document representation of the Scripture 
         /// books in USFM file.</param>
         /// ------------------------------------------------------------------------------------
+// ReSharper disable UnusedMember.Global
         public void ExportToPathway(List<XmlDocument> usxBooksToExport)
+// ReSharper restore UnusedMember.Global
         {
             bool success;
             ScriptureContents dlg = new ScriptureContents();
-            dlg.DatabaseName = m_databaseName;
+            dlg.DatabaseName = _mDatabaseName;
             DialogResult result = dlg.ShowDialog();
             if (result != DialogResult.Cancel)
             {
@@ -219,22 +161,22 @@ namespace SIL.PublishingSolution
 
                 string pubName = dlg.PublicationName;
 
-                m_format = dlg.Format;
+                _mFormat = dlg.Format;
 
                 // Get the file name as set on the dialog.
-                m_outputLocationPath = dlg.OutputLocationPath;
+                _mOutputLocationPath = dlg.OutputLocationPath;
                 inProcess.PerformStep();
-                if (m_format.StartsWith("theWord"))
+                if (_mFormat.StartsWith("theWord"))
                 {
                     ExportUsx(usxBooksToExport);
                 }
 
                 inProcess.PerformStep();
 
-                string cssFullPath = Common.PathCombine(m_outputLocationPath, pubName + ".css");
-                StyToCSS styToCss = new StyToCSS();
-                styToCss.ConvertStyToCSS(m_projectName, cssFullPath);
-                string fileName = Common.PathCombine(m_outputLocationPath, pubName + ".xhtml");
+                string cssFullPath = Common.PathCombine(_mOutputLocationPath, pubName + ".css");
+                StyToCss StyToCss = new StyToCss();
+                StyToCss.ConvertStyToCss(_mProjectName, cssFullPath);
+                string fileName = Common.PathCombine(_mOutputLocationPath, pubName + ".xhtml");
                 inProcess.PerformStep();
 
                 if (File.Exists(fileName))
@@ -245,7 +187,7 @@ namespace SIL.PublishingSolution
                         MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
-                        fileName = Common.PathCombine(m_outputLocationPath, pubName + "-" + DateTime.Now.Second + ".xhtml");
+                        fileName = Common.PathCombine(_mOutputLocationPath, pubName + "-" + DateTime.Now.Second + ".xhtml");
                     }
                     else if (result == DialogResult.No)
                     {
@@ -253,7 +195,7 @@ namespace SIL.PublishingSolution
                     }
                 }
                 inProcess.PerformStep();
-                XmlDocument scrBooksDoc = CombineUsxDocs(usxBooksToExport);
+                XmlDocument scrBooksDoc = CombineUsxDocs(usxBooksToExport, _mFormat);
                 inProcess.PerformStep();
                 if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
                 {
@@ -270,7 +212,7 @@ namespace SIL.PublishingSolution
                 PsExport exporter = new PsExport();
                 exporter.DataType = "Scripture";
                 exporter.Export(fileName);
-                
+
             }
         }
 
@@ -280,7 +222,7 @@ namespace SIL.PublishingSolution
         /// <param name="usxBooksToExport"></param>
         private void ExportUsx(List<XmlDocument> usxBooksToExport)
         {
-            var usxDir = Common.PathCombine(m_outputLocationPath, "USX");
+            var usxDir = Common.PathCombine(_mOutputLocationPath, "USX");
             Directory.CreateDirectory(usxDir);
             foreach (XmlDocument xmlDocument in usxBooksToExport)
             {
@@ -296,17 +238,22 @@ namespace SIL.PublishingSolution
 
         /// ------------------------------------------------------------------------------------
         /// <summary>
-        /// Combines USX of multiple books into a single XmlDocument.
+        /// Combines USX of multiple books into a single XmlDocument. This method is called
+        /// from PathwayB by Reflection.
         /// </summary>
         /// <param name="usxBooksToExport">The Scripture books in USX format to export.</param>
+        /// <param name="format">Needs to be the name reported by the back end Handler.</param>
         /// <returns>a single XmlDocument containing all books.</returns>
         /// ------------------------------------------------------------------------------------
-        public XmlDocument CombineUsxDocs(List<XmlDocument> usxBooksToExport)
+// ReSharper disable UnusedMember.Global
+        public XmlDocument CombineUsxDocs(List<XmlDocument> usxBooksToExport, string format)
+// ReSharper restore UnusedMember.Global
         {
             Debug.Assert(usxBooksToExport != null && usxBooksToExport.Count > 0);
+            _mFormat = format;
 
-            if (m_format == "CadreBible" || m_format == "Go Bible" || m_format == "Sword")
-                ExportUSXRawToUSX(usxBooksToExport);
+            if (_mFormat == "CadreBible" || _mFormat == "Go Bible" || _mFormat == "Sword")
+                ExportUsxRawToUsx(usxBooksToExport);
 
             XmlDocument allBooks = usxBooksToExport[0];
             if (usxBooksToExport.Count == 1)
@@ -325,12 +272,12 @@ namespace SIL.PublishingSolution
             return allBooks;
         }
 
-        public void ExportUSXRawToUSX(List<XmlDocument> usxBooksToExport)
+        public void ExportUsxRawToUsx(List<XmlDocument> usxBooksToExport)
         {
-            if (m_format != "Go Bible")
+            if (_mFormat != "Go Bible")
             {
-                string vrsFileDest = Common.PathCombine(m_outputLocationPath, "versification.vrs");
-                string ldsFileDest = Common.PathCombine(m_outputLocationPath, "English.lds");
+                string vrsFileDest = Common.PathCombine(_mOutputLocationPath, "versification.vrs");
+                string ldsFileDest = Common.PathCombine(_mOutputLocationPath, "English.lds");
 
                 string paratextProjectLocation = string.Empty;
                 object paraTextprojectPath;
@@ -338,7 +285,7 @@ namespace SIL.PublishingSolution
                                                       "Settings_Directory", "", out paraTextprojectPath))
                 {
                     paratextProjectLocation = (string)paraTextprojectPath;
-                    paratextProjectLocation = Common.PathCombine(paratextProjectLocation, m_projectName);
+                    paratextProjectLocation = Common.PathCombine(paratextProjectLocation, _mProjectName);
                     paratextProjectLocation = Common.PathCombine(paratextProjectLocation, "gather");
 
                     string vrsFileName = "eng";
@@ -366,16 +313,16 @@ namespace SIL.PublishingSolution
 
                 }
 
-                m_outputLocationPath = Common.PathCombine(m_outputLocationPath, "USX");
+                _mOutputLocationPath = Common.PathCombine(_mOutputLocationPath, "USX");
             }
             else
             {
-                m_outputLocationPath = Common.PathCombine(m_outputLocationPath, "SFM");
+                _mOutputLocationPath = Common.PathCombine(_mOutputLocationPath, "SFM");
             }
 
 
-            if (!Directory.Exists(m_outputLocationPath))
-                Directory.CreateDirectory(m_outputLocationPath);
+            if (!Directory.Exists(_mOutputLocationPath))
+                Directory.CreateDirectory(_mOutputLocationPath);
 
             for (int iDoc = 0; iDoc < usxBooksToExport.Count; iDoc++)
             {
@@ -410,30 +357,30 @@ namespace SIL.PublishingSolution
 
                 // Create argument list
                 XsltArgumentList args = new XsltArgumentList();
-                foreach (string paramName in m_xslParams.Keys)
-                    args.AddParam(paramName, "", m_xslParams[paramName]);
+                foreach (string paramName in _mXslParams.Keys)
+                    args.AddParam(paramName, "", _mXslParams[paramName]);
 
                 // Step 1. Separate books into their own elements for subsequent processing.
                 StringBuilder separatedBooks = new StringBuilder();
-                XmlWriter htmlw1 = XmlWriter.Create(separatedBooks, m_usxToXhtml.OutputSettings);
-                m_separateIntoBooks.Transform(XmlReader.Create(new StringReader(usx)), null, htmlw1, null);
+                XmlWriter htmlw1 = XmlWriter.Create(separatedBooks, _mUsxToXhtml.OutputSettings);
+                _mSeparateIntoBooks.Transform(XmlReader.Create(new StringReader(usx)), null, htmlw1, null);
 
                 // Step 2. Remove line breaks for next step (to prevent creation of empty spans).
                 StringBuilder cleanUsx = new StringBuilder();
-                XmlWriter htmlw2 = XmlWriter.Create(cleanUsx, m_cleanUsx.OutputSettings);
-                m_cleanUsx.Transform(XmlReader.Create(new StringReader(separatedBooks.ToString())), null, htmlw2, null);
+                XmlWriter htmlw2 = XmlWriter.Create(cleanUsx, _mCleanUsx.OutputSettings);
+                _mCleanUsx.Transform(XmlReader.Create(new StringReader(separatedBooks.ToString())), null, htmlw2, null);
 
                 // Step 3. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the 
                 //       following elements to Pathway's format: book title, chapters, figures, footnotes.
                 StringBuilder html = new StringBuilder();
-                XmlWriter htmlw3 = XmlWriter.Create(html, m_usxToXhtml.OutputSettings);
-                m_usxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw3, null);
+                XmlWriter htmlw3 = XmlWriter.Create(html, _mUsxToXhtml.OutputSettings);
+                _mUsxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw3, null);
 
                 cleanUsx = cleanUsx.Replace("utf-16", "utf-8");
                 cleanUsx = cleanUsx.Replace("<usfm>", "<USX>");
                 cleanUsx = cleanUsx.Replace("</usfm>", "</USX>");
 
-                string bookFileName = Common.PathCombine(m_outputLocationPath, bookName + ".usx");
+                string bookFileName = Common.PathCombine(_mOutputLocationPath, bookName + ".usx");
                 XmlDocument doc = new XmlDocument();
                 XmlTextWriter txtWriter = new XmlTextWriter(bookFileName, null);
                 txtWriter.Formatting = Formatting.Indented;
@@ -441,7 +388,7 @@ namespace SIL.PublishingSolution
                 doc.Save(txtWriter);
                 txtWriter.Close();
 
-                if (m_format == "Go Bible")
+                if (_mFormat == "Go Bible")
                 {
                     UsxToSFM usxToSfm = new UsxToSFM();
                     string targetFile = bookFileName.Replace(".usx", ".sfm");
@@ -457,33 +404,35 @@ namespace SIL.PublishingSolution
 
         /// ------------------------------------------------------------------------------------
         /// <summary>
-        /// Converts the USX to an XHTML file for Pathway.
+        /// Converts the USX to an XHTML file for Pathway. Called by PathwayB with Reflection.
         /// </summary>
         /// <param name="usx">The XML document representation of the USFM file.</param>
         /// <param name="fileName">file name with full path where xhtml file will be written</param>
         /// ------------------------------------------------------------------------------------
+// ReSharper disable UnusedMember.Global
         public void ConvertUsxToPathwayXhtmlFile(string usx, string fileName)
+// ReSharper restore UnusedMember.Global
         {
             // Create argument list
             XsltArgumentList args = new XsltArgumentList();
-            foreach (string paramName in m_xslParams.Keys)
-                args.AddParam(paramName, "", m_xslParams[paramName]);
+            foreach (string paramName in _mXslParams.Keys)
+                args.AddParam(paramName, "", _mXslParams[paramName]);
 
             // Step 1. Separate books into their own elements for subsequent processing.
             StringBuilder separatedBooks = new StringBuilder();
-            XmlWriter htmlw1 = XmlWriter.Create(separatedBooks, m_usxToXhtml.OutputSettings);
-            m_separateIntoBooks.Transform(XmlReader.Create(new StringReader(usx)), null, htmlw1, null);
+            XmlWriter htmlw1 = XmlWriter.Create(separatedBooks, _mUsxToXhtml.OutputSettings);
+            _mSeparateIntoBooks.Transform(XmlReader.Create(new StringReader(usx)), null, htmlw1, null);
 
             // Step 2. Remove line breaks for next step (to prevent creation of empty spans).
             StringBuilder cleanUsx = new StringBuilder();
-            XmlWriter htmlw2 = XmlWriter.Create(cleanUsx, m_cleanUsx.OutputSettings);
-            m_cleanUsx.Transform(XmlReader.Create(new StringReader(separatedBooks.ToString())), null, htmlw2, null);
+            XmlWriter htmlw2 = XmlWriter.Create(cleanUsx, _mCleanUsx.OutputSettings);
+            _mCleanUsx.Transform(XmlReader.Create(new StringReader(separatedBooks.ToString())), null, htmlw2, null);
 
             // Step 3. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the 
             //       following elements to Pathway's format: book title, chapters, figures, footnotes.
             StringBuilder html = new StringBuilder();
-            XmlWriter htmlw3 = XmlWriter.Create(html, m_usxToXhtml.OutputSettings);
-            m_usxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw3, null);
+            XmlWriter htmlw3 = XmlWriter.Create(html, _mUsxToXhtml.OutputSettings);
+            _mUsxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw3, null);
 
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ProhibitDtd = false;
@@ -491,9 +440,9 @@ namespace SIL.PublishingSolution
             // Step 4. Move paragraphs into appropriate section type (as determined by the paragraph styles) and 
             //       include the Scripture sections within columns.
             FileStream xhtmlFile = new FileStream(fileName, FileMode.Create);
-            XmlWriter htmlw4 = XmlWriter.Create(xhtmlFile, m_encloseParasInSections.OutputSettings);
+            XmlWriter htmlw4 = XmlWriter.Create(xhtmlFile, _mEncloseParasInSections.OutputSettings);
             XmlReader reader4 = XmlReader.Create(new StringReader(html.ToString()), settings);
-            m_encloseParasInSections.Transform(reader4, null, htmlw4, null);
+            _mEncloseParasInSections.Transform(reader4, null, htmlw4, null);
             xhtmlFile.Close();
         }
     }

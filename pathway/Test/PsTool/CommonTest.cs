@@ -38,7 +38,6 @@ namespace Test.PsTool
         PublicationInformation _target;
         XmlDocument actualDocument;
         private string _projectFilePath;
-        public string _node;
         string _allUserPath;
         string _inputBasePath = string.Empty;
         string _outputBasePath = string.Empty;
@@ -631,6 +630,7 @@ namespace Test.PsTool
             Assert.AreEqual(expected, actual);
         }
 
+        ///<summary>
         ///A test for UnitConverterOO // TODO - Should be changed to UnitConverter
         ///</summary>
 
@@ -891,11 +891,13 @@ namespace Test.PsTool
 
         #region LanguageTests
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         // If unit fails, please confirm the below file exist,
         // C:\ProgramData\SIL\WritingSystemStore\ur.ldml
         public void GetTextDirection()
         {
+            Common.TextDirectionLanguageFile = null; // This test depends on this variable not being set in advance
             string expected = "ltr";
             string NkonyaCode = "nko";  //Used in Nkonya dataset
             string SenaCode = "seh";    //Used in Sena dataset
@@ -912,6 +914,7 @@ namespace Test.PsTool
        #endregion
 
         #region PathCombine
+        ///<summary>
         ///A test for PathCombine
         ///</summary>
         [Test]
@@ -1132,6 +1135,7 @@ namespace Test.PsTool
 
         #region SaveInFolderTests
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void GetSaveInFolderTest()
         {
@@ -1194,10 +1198,6 @@ namespace Test.PsTool
         private static string GetFileNameWithExpectedPath(string fileName)
         {
             return Common.DirectoryPathReplace(GetPath("Expected", fileName));
-        }
-        private static string GetFileNameWithProgPath(string filename)
-        {
-            return Common.DirectoryPathReplace(GetPath("../../../PsSupport", filename));
         }
         private static void CopyToOutput(string input, string output)
         {

@@ -21,21 +21,17 @@ using System.Text;
 using System.Xml;
 using System.Collections;
 using System.IO;
-using System.Text.RegularExpressions;
-using SIL.Tool;
+using SIL.PublishingSolution;
 
 #endregion Using
-namespace SIL.PublishingSolution
+
+namespace SIL.Tool
 {
     public class AfterBeforeProcessEpub : AfterBeforeXHTMLProcess
     {
         #region Private Variable
 
         private bool IsEmptyElement = false;
-        private string _allDiv = string.Empty;
-        private bool _isNewLine = true;
-        private readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
-        private XmlDocument _xmldoc;
         private ArrayList _psuedoBefore = new ArrayList();
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
         private bool _IsHeadword = false;
@@ -51,33 +47,7 @@ namespace SIL.PublishingSolution
 
         #endregion
 
-        #region Public Variable
-
-        public bool _multiLanguageHeader = false;
-        public string RefFormat = "Genesis 1";
-        public bool IsMirrorPage;
-        public string _ChapterNo = "1";
-
-        #endregion
-
         #region Public Methods
-
-        public bool IsNewLine
-        {
-            get { return _isNewLine; }
-        }
-
-        public string AllDiv
-        {
-            get { return _allDiv; }
-        }
-
-        public static long CountLinesInString(string text)
-        {
-            var reg = new Regex("</", RegexOptions.Multiline);
-            MatchCollection mat = reg.Matches(text);
-            return mat.Count;
-        }
 
         public void RemoveAfterBefore(PublicationInformation projInfo,
                                       Dictionary<string, Dictionary<string, string>> idAllClass,
@@ -144,21 +114,6 @@ namespace SIL.PublishingSolution
             }
             return data;
         }
-
-        /// <summary>
-        /// Used for preprocess work to point the tempfile copied from source xhtml file.
-        /// </summary>
-        /// <param name="sourceFile">xhtml file</param>
-        /// <returns>Changed file name</returns>
-        private string CheckSourceChanged(string sourceFile)
-        {
-            if (_xmldoc != null)
-            {
-                sourceFile = _tempFile;
-            }
-            return sourceFile;
-        }
-
 
         public void InsertBeforeAfter()
         {
@@ -387,10 +342,6 @@ namespace SIL.PublishingSolution
             return content;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="targetPath"></param>
         private void StartElement()
         {
             if (!IsEmptyElement)

@@ -67,17 +67,8 @@ namespace BuildTasks
         //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
         //
 
-        public ZeroLengthFileException()
-        {
-        }
-
         public ZeroLengthFileException(string message)
             : base(message)
-        {
-        }
-
-        public ZeroLengthFileException(string message, Exception inner)
-            : base(message, inner)
         {
         }
 

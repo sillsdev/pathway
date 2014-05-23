@@ -18,26 +18,16 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using SIL.Tool;
 
-namespace RevHomographNum
+namespace SIL.PublishingSolution
 {
     public static class AddHomographAndSenseNumClassNames
     {
         #region InsertHomographClass
         private static bool _insertHomographClass = true;
-        public static bool InsertHomographClass
-        {
-            get { return _insertHomographClass; }
-            set { _insertHomographClass = value; }
-        }
         #endregion InsertHomographClass
 
         #region InsertSenseNumClass
         private static bool _insertSenseNumClass = true;
-        public static bool InsertSenseNumClass
-        {
-            get { return _insertSenseNumClass; }
-            set { _insertSenseNumClass = value; }
-        }
         #endregion InsertSenseNumClass
 
         public static void Execute(string inputFile, string output)

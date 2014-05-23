@@ -132,12 +132,20 @@ namespace SIL.Tool
         {
             if (!File.Exists(fileName)) return string.Empty;
             string metaName = string.Empty;
+            bool isLinux = Common.IsUnixOS();
             XmlTextReader reader = Common.DeclareXmlTextReader(fileName, true);
-            if (Common.IsUnixOS())
+            metaName = isLinux ? ReadMetaNameValueForLinux(reader, metaName, true) : ReadMetaNameValue(reader, metaName);
+            reader.Close();
+            return metaName;
+        }
+
+        private static string ReadMetaNameValue(XmlTextReader reader, string metaName)
+        {
+            while (reader.Read())
             {
-                while (reader.Read())
+                if (reader.IsEmptyElement)
                 {
-                    if (reader.Name == "meta")
+                    if (string.Compare(reader.Name, "meta", true) >= 0)
                     {
                         if (reader.GetAttribute("name") != null)
                         {
@@ -147,13 +155,7 @@ namespace SIL.Tool
                                 if (reader.GetAttribute("content") != null)
                                 {
                                     metaName = reader.GetAttribute("content");
-                                    if (Common.UnixVersionCheck() && metaName == null)
-                                    {
-                                        metaName = Common.GetAllUserAppPath();
-                                        metaName = Common.RightRemove(metaName, "sil");
-                                        metaName = Common.PathCombine(metaName, "fieldworks");
-                                    }
-                                    else if (metaName.IndexOf("file://") >= 0) // from the file access
+                                    if (metaName.IndexOf("file://") >= 0) // from the file access
                                     {
                                         const int designatorLength = 7;
                                         metaName = metaName.Substring(designatorLength,
@@ -161,76 +163,69 @@ namespace SIL.Tool
                                     }
                                     break;
                                 }
-
                             }
                         }
                     }
-                    // Check only in the header and retrun 
-                    if (reader.NodeType == XmlNodeType.EndElement)
-                    {
-                        if (reader.Name == "head")
-                        {
-                            break;
-                        }
-                    }
                 }
-            }
-            else
-            {
-                while (reader.Read())
+                // Check only in the header and retrun 
+                if (reader.NodeType == XmlNodeType.EndElement)
                 {
-                    if (reader.IsEmptyElement)
+                    if (string.Compare(reader.Name, "head", true) >= 0)
                     {
-                        if (string.Compare(reader.Name, "meta", true) >= 0)
-                        {
-                            if (reader.GetAttribute("name") != null)
-                            {
-                                metaName = reader.GetAttribute("name");
-                                if (metaName.IndexOf("RootDir") >= 0)
-                                {
-                                    if (reader.GetAttribute("content") != null)
-                                    {
-                                        metaName = reader.GetAttribute("content");
-                                        if (Common.UnixVersionCheck())
-                                        {
-                                            metaName = Common.GetAllUserAppPath();
-                                            metaName = Common.RightRemove(metaName, "sil");
-                                            metaName = Common.PathCombine(metaName, "fieldworks");
-                                        }
-                                        else if (metaName.IndexOf("file://") >= 0) // from the file access
-                                        {
-                                            const int designatorLength = 7;
-                                            metaName = metaName.Substring(designatorLength,
-                                                                          metaName.Length - designatorLength);
-                                        }
-                                        break;
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                    // Check only in the header and retrun 
-                    if (reader.NodeType == XmlNodeType.EndElement)
-                    {
-                        if (string.Compare(reader.Name, "head", true) >= 0)
-                        {
-                            break;
-                        }
+                        break;
                     }
                 }
             }
-            reader.Close();
             return metaName;
         }
 
-
+        private static string ReadMetaNameValueForLinux(XmlTextReader reader, string metaName, bool isLinux)
+        {
+            while (reader.Read())
+            {
+                if (reader.Name == "meta")
+                {
+                    if (reader.GetAttribute("name") != null)
+                    {
+                        metaName = reader.GetAttribute("name");
+                        if (metaName.IndexOf("RootDir") >= 0)
+                        {
+                            if (reader.GetAttribute("content") != null)
+                            {
+                                metaName = reader.GetAttribute("content");
+                                if (isLinux && metaName == null)
+                                {
+                                    metaName = Common.PathCombine(Common.GetAllUserAppPath(), "fieldworks");
+                                }
+                                else if (metaName.IndexOf("file://") >= 0) // from the file access
+                                {
+                                    const int designatorLength = 7;
+                                    metaName = metaName.Substring(designatorLength,
+                                                                  metaName.Length - designatorLength);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+                // Check only in the header and retrun 
+                if (reader.NodeType == XmlNodeType.EndElement)
+                {
+                    if (reader.Name == "head")
+                    {
+                        break;
+                    }
+                }
+            }
+            return metaName;
+        }
+        
         private static Dictionary<string, string> _metaDataDic = null;
         /// <summary>
         /// Get MetaData information from DictionaryStyleSettings.xml/ScriptureStyleSettings.xml
         /// </summary>
         /// <param name="_projectInputType">Dictionary / Scripture</param>
-        /// <param name="path"></param>
+        /// <param name="metaDataFull"></param>
         /// <returns>The metaDataList information</returns>
         public static Dictionary<string, string> GetMetaData(string _projectInputType, string metaDataFull)
         {
@@ -361,39 +356,10 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// Removing the empty anchor tags <a href="sample"/>
-        /// </summary>
-        /// <param name="sourceFile">The Xhtml File</param>
-        private static string RemoveEmptyAnchorTag(string sourceFile)
-        {
-            const string tag = "a";
-            var xDoc = new XmlDocument { XmlResolver = null };
-            xDoc.Load(sourceFile);
-            XmlNodeList nodeList = xDoc.GetElementsByTagName(tag);
-            if (nodeList.Count > 0)
-            {
-                while (true)
-                {
-                    bool removed = false;
-                    foreach (XmlNode item in nodeList)
-                    {
-                        item.ParentNode.RemoveChild(item);
-                        removed = true;
-                        break;
-                    }
-                    if (!removed)
-                        break;
-                }
-                xDoc.Save(sourceFile);
-            }
-            return sourceFile;
-        }
-
-        /// <summary>
         /// Checks all the Paths of image and returns the Path
         /// </summary>
         /// <param name="src">Image Source </param>
-        /// <param name="metaname">Metaname from XHTML</param>
+        /// <param name="metaName">Metaname from XHTML</param>
         /// <param name="sourcePicturePath">Source Dictionary path</param>
         /// <returns>The Path where picture exist</returns>
         public static string GetPictureFromPath(string src, string metaName, string sourcePicturePath)
@@ -462,6 +428,18 @@ namespace SIL.Tool
                     }
                 }
             }
+            // Pathway7 Copyrights folder
+            if (fromPath == string.Empty)
+            {
+                // sil + fileName with exact sourceFolder path
+                var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+                string flexPict = PathCombine(copyrightDir, src);
+                if (File.Exists(flexPict))
+                {
+                    fromPath = flexPict;
+                }
+            }
+            
 
             if (Testing) return fromPath; // Linux Test, Registry error
 
@@ -653,49 +631,51 @@ namespace SIL.Tool
             {
                 return;
             }
-            var xmldoc = Common.DeclareXMLDocument(true);
-            xmldoc.Load(xhtmlFile);
-            XmlNodeList headnodes = xmldoc.GetElementsByTagName("head");
-            XmlNode headnode = headnodes[0];
-            XmlNode newNode;
-            XmlNodeList findnodes = xmldoc.GetElementsByTagName("link");
-            if (findnodes.Count > 0)
+            try
             {
-                newNode = findnodes[0].Clone();
-                if (newNode.Attributes.Count > 0)
-                    newNode.Attributes.RemoveAll();
-                if (newNode.ChildNodes.Count > 0)
-                    newNode.RemoveAll();
-
-                int countChild = findnodes.Count;
-                for (int i = 0; i < countChild; i++)
+                var xmldoc = Common.DeclareXMLDocument(true);
+                xmldoc.Load(xhtmlFile);
+                XmlNodeList headnodes = xmldoc.GetElementsByTagName("head");
+                XmlNode headnode = headnodes[0];
+                XmlNode newNode;
+                XmlNodeList findnodes = xmldoc.GetElementsByTagName("link");
+                if (findnodes.Count > 0)
                 {
-                    headnode.RemoveChild(findnodes[0]);
-                    break;
+                    newNode = findnodes[0].Clone();
+                    if (newNode.Attributes.Count > 0)
+                        newNode.Attributes.RemoveAll();
+                    if (newNode.ChildNodes.Count > 0)
+                        newNode.RemoveAll();
+
+                    int countChild = findnodes.Count;
+                    if (countChild > 0)
+                    {
+                        headnode.RemoveChild(findnodes[0]);
+                    }
                 }
+                else
+                {
+
+                    newNode = xmldoc.CreateElement("link");
+                }
+
+                XmlAttribute xmlAttrib = xmldoc.CreateAttribute("type");
+                xmlAttrib.Value = "text/css";
+                newNode.Attributes.Append(xmlAttrib);
+
+                xmlAttrib = xmldoc.CreateAttribute("rel");
+                xmlAttrib.Value = "stylesheet";
+                newNode.Attributes.Append(xmlAttrib);
+
+                xmlAttrib = xmldoc.CreateAttribute("href");
+                xmlAttrib.Value = defaultCSS;
+                newNode.Attributes.Append(xmlAttrib);
+
+                headnode.AppendChild(newNode);
+
+                xmldoc.Save(xhtmlFile);
             }
-            else
-            {
-
-                newNode = xmldoc.CreateElement("link");
-            }
-
-            XmlAttribute xmlAttrib = xmldoc.CreateAttribute("type");
-            xmlAttrib.Value = "text/css";
-            newNode.Attributes.Append(xmlAttrib);
-
-            xmlAttrib = xmldoc.CreateAttribute("rel");
-            xmlAttrib.Value = "stylesheet";
-            newNode.Attributes.Append(xmlAttrib);
-
-            xmlAttrib = xmldoc.CreateAttribute("href");
-            xmlAttrib.Value = defaultCSS;
-            newNode.Attributes.Append(xmlAttrib);
-
-            headnode.AppendChild(newNode);
-
-            xmldoc.Save(xhtmlFile);
-
+            catch {}
         }
 
         #region GetXmlNode
@@ -744,19 +724,6 @@ namespace SIL.Tool
             return resultNodeList;
 
 
-        }
-        #endregion
-
-        #region CreateXMLFile
-        /// <summary>
-        /// Returns XmlTextWriter 
-        /// </summary>
-        /// <param name="xmlFileNameWithPath">File Name</param>
-        /// <returns>Returns XmlTextWriter</returns>
-        public static XmlTextWriter CreateXMLFile(string xmlFileNameWithPath)
-        {
-            XmlTextWriter writer = new XmlTextWriter(xmlFileNameWithPath, null) { Formatting = Formatting.Indented };
-            return writer;
         }
         #endregion
 
@@ -836,13 +803,6 @@ namespace SIL.Tool
 
                 //Create an XsltArgumentList.
                 var xslArg = new XsltArgumentList();
-
-                //Add an object 
-                var obj = new FlexString();
-                var fun = new XmlFun(); // string-length replaed with stringLength
-                xslArg.AddExtensionObject("urn:reversal-conv", obj);
-                xslArg.AddExtensionObject("http://www.w3.org/2005/xpath-functions", fun);
-
                 if (myParams != null)
                     foreach (string param in myParams.Keys)
                     {
@@ -944,52 +904,6 @@ namespace SIL.Tool
         }
 
         #endregion GetProjectType
-
-        #region PicturePathAssign
-        /// <summary>
-        /// PicturePathAssign is used for preview of the xhtml files
-        /// </summary>
-        /// <param name="xn">XML Node</param>
-        /// <param name="sourcePath">Source Path</param>
-        public static void PicturePathAssign(XmlNode xn, string sourcePath)
-        {
-            foreach (XmlNode childNode in xn.ChildNodes)
-            {
-                if (childNode.Name == "img" && childNode.Attributes.Count > 0)
-                {
-                    for (int i = 0; i < childNode.Attributes.Count; i++)
-                    {
-                        if (childNode.Attributes[i].Name == "src")
-                        {
-                            string fromPath;
-                            string source = childNode.Attributes[i].Value;
-                            if (source.IndexOf("file://") >= 0)
-                            {
-                                fromPath = source;
-                            }
-                            else
-                            {
-                                fromPath = PathCombine(sourcePath, source);
-                                if (!File.Exists(fromPath))
-                                {
-                                    string flexPict = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"/SIL/FieldWorks/" + source;
-                                    if (File.Exists(flexPict))
-                                    {
-                                        fromPath = flexPict;
-                                    }
-                                }
-                            }
-                            childNode.Attributes[i].Value = fromPath;
-                        }
-                    }
-                }
-                if (childNode.HasChildNodes)
-                {
-                    PicturePathAssign(childNode, sourcePath);
-                }
-            }
-        }
-        #endregion PicturePathAssign
 
         #region GetCountryCode(string language, string country, string langCountry, Dictionary spellCheck)
         /// <summary>
@@ -1184,6 +1098,7 @@ namespace SIL.Tool
         /// <param name="reader"></param>
         /// <param name="writers"></param>
         /// <param name="bookSplitterClass"></param>
+        /// <param name="adjacentClass"></param>
         static void SplitXhtmlFileAdjacent(XmlReader reader, Dictionary<string, XmlWriter> writers, string bookSplitterClass, bool adjacentClass)
         {
             int srcCount = 0;
@@ -1333,143 +1248,6 @@ namespace SIL.Tool
                             writerCount5++;
                         }
 
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// From the one xmlreader multiple xmlwriter are ued to split the class
-        /// using dictionary
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="writers"></param>
-        /// <param name="bookSplitterClass"></param>
-        static void SplitXhtmlFileAdjacent_Old(XmlReader reader, Dictionary<string, XmlWriter> writers, string bookSplitterClass, bool adjacentClass)
-        {
-
-            int srcCount = 0;
-            XmlWriter writer;
-
-            if (reader == null)
-            {
-                throw new ArgumentNullException("reader");
-            }
-            while (reader.Read())
-            {
-            srcWritten:
-                switch (reader.NodeType)
-                {
-                    case XmlNodeType.Element:
-
-                        string prefix = reader.Prefix;
-                        string localName = reader.LocalName;
-                        string nameSpace = reader.NamespaceURI;
-                        string className = string.Empty;
-                        className = reader.GetAttribute("class") ?? "";
-                        if (className.ToLower() == bookSplitterClass)
-                        {
-                            srcCount++;
-                            string f1 = reader.ReadOuterXml();  // current node - Ex: LetHead
-
-                            string f2 = string.Empty;
-                            if (adjacentClass)
-                            {
-                                f2 = reader.ReadOuterXml();  // Adjacent node - Ex: LetData
-                                f1 += f2;
-                            }
-
-                            int writerCount = 1;
-                            foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                            {
-                                if (srcCount == writerCount)
-                                {
-                                    writer = pair.Value;
-                                    writer.WriteRaw(f1);
-                                }
-                                writerCount++;
-                            }
-                            goto srcWritten;  // Note - The reader already points to next node.
-                            // Note - so need of reading again. start process the node.
-                        }
-                        {
-                            foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                            {
-                                writer = pair.Value;
-                                writer.WriteStartElement(prefix, localName, nameSpace);
-                                writer.WriteAttributes(reader, true);
-                                if (reader.IsEmptyElement)
-                                {
-                                    writer.WriteEndElement();
-                                }
-                            }
-                        }
-                        break;
-                    case XmlNodeType.Text:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteString(reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.Whitespace:
-                    case XmlNodeType.SignificantWhitespace:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteWhitespace(reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.CDATA:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteCData(reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.EntityReference:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteEntityRef(reader.Name);
-                        }
-                        break;
-                    case XmlNodeType.XmlDeclaration:
-                    case XmlNodeType.ProcessingInstruction:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteProcessingInstruction(reader.Name, reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.DocumentType:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteDocType(reader.Name, reader.GetAttribute("PUBLIC"),
-                                                reader.GetAttribute("SYSTEM"), reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.Comment:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            writer = pair.Value;
-                            writer.WriteComment(reader.Value);
-                        }
-                        break;
-                    case XmlNodeType.EndElement:
-                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
-                        {
-                            try
-                            {
-                                writer = pair.Value;
-                                writer.WriteFullEndElement();
-                            }
-                            catch
-                            {
-                                return;
-                            }
-                        }
                         break;
                 }
             }

@@ -95,17 +95,7 @@
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
-    <OutputPath>bin\PwCtx\</OutputPath>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Edition>BTE</Edition>
-    <ConfTag>Pw7</ConfTag>
-    <Status>Testing</Status>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -170,17 +160,7 @@
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|x86' ">
-    <OutputPath>bin\x86\PwCtx\</OutputPath>
-    <PlatformTarget>x86</PlatformTarget>
-    <Edition>BTE</Edition>
-    <ConfTag>Pw7</ConfTag>
-    <Status>Testing</Status>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -244,7 +224,6 @@
   <ItemGroup>
     <Compile Include="ClassAttribute.cs" />
     <Compile Include="CssParser.cs" />
-    <Compile Include="CssParserDuplicateClass.cs" />
     <Compile Include="CssTree.cs" />
     <!-- Antlr3 Include="csst3.g3">
       <Generator>MSBuild:Compile</Generator>

@@ -18,6 +18,7 @@ using System.Security.Cryptography.Xml;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
+using SIL.Tool;
 
 namespace Test
 {
@@ -41,10 +42,10 @@ namespace Test
                     string outputEntry = new StreamReader(outFl.GetInputStream(outFl.GetEntry(zipEntry.Name).ZipFileIndex)).ReadToEnd();
                     string expectEntry = new StreamReader(expFl.GetInputStream(expFl.GetEntry(zipEntry.Name).ZipFileIndex)).ReadToEnd();
                     XmlDocument outputDocument = new XmlDocument();
-                    outputDocument.XmlResolver = new XmlUrlResolver();
+                    outputDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
                     outputDocument.LoadXml(outputEntry);
                     XmlDocument expectDocument = new XmlDocument();
-                    expectDocument.XmlResolver = new XmlUrlResolver();
+                    outputDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
                     expectDocument.LoadXml(expectEntry);
                     XmlDsigC14NTransform outputCanon = new XmlDsigC14NTransform();
                     outputCanon.Resolver = new XmlUrlResolver();
@@ -67,39 +68,6 @@ namespace Test
                 if (name.StartsWith(begining))
                     return true;
             return false;
-        }
-
-        /// <summary>
-        /// Load Xml data from part of IDML file (usually content.xml or styles.xml)
-        /// </summary>
-        /// <param name="idmlPath">full path to idml</param>
-        /// <param name="sectionName">section name (usually content.xml or styles.xml)</param>
-        /// <returns>xmlDocument with <paramref name="sectionName">sectionName</paramref> loaded</returns>
-        public static XmlDocument LoadXml(string idmlPath, string sectionName)
-        {
-            var idmlFile = new ZipFile(idmlPath);
-            var reader = new StreamReader(idmlFile.GetInputStream(idmlFile.GetEntry(sectionName).ZipFileIndex));
-            var text = reader.ReadToEnd();
-            reader.Close();
-            idmlFile.Close();
-            var xmlDocument = new XmlDocument();
-            xmlDocument.XmlResolver = new XmlUrlResolver();
-            xmlDocument.LoadXml(text);
-            return xmlDocument;
-        }
-
-        public static XmlNamespaceManager NamespaceManager(XmlDocument xmlDocument)
-        {
-            var root = xmlDocument.DocumentElement;
-            Assert.IsNotNull(root, "Missing xml document");
-            var nsManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            foreach (XmlAttribute attribute in root.Attributes)
-            {
-                var namePart = attribute.Name.Split(':');
-                if (namePart[0] == "xmlns")
-                    nsManager.AddNamespace(namePart[1], attribute.Value);
-            }
-            return nsManager;
         }
     }
 }

@@ -269,7 +269,7 @@ text-align: justify;
 }
 
 .pictureCenter {
-    float:center;
+    text-align: center;
     clear: both;
     margin: 0pt 0pt 4pt 4pt;
     padding: 2pt;

@@ -20,7 +20,9 @@ using System.Resources;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
+using Microsoft.Win32;
 
 namespace SIL.Tool
 {
@@ -122,6 +124,7 @@ namespace SIL.Tool
             if (arg != null)
                 info.Arguments = arg;
             Debug.Print("Run: Filename: {0}", info.FileName);
+            if (Common.Testing) return;
             using (Process p1 = Process.Start(info))
             {
                 if (wait)
@@ -171,55 +174,6 @@ namespace SIL.Tool
                 {
                     string result = string.Empty;
                     StreamWriter streamWriter = new StreamWriter(Common.PathCombine(instPath, RedirectOutput));
-                    var errorArgs = string.Format("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
-                    result += errorArgs;
-                    streamWriter.Write(result);
-                    streamWriter.Close();
-                    RedirectOutput = null;
-                }
-                return;
-            }
-
-            // Wait for Exited event, but not more than 30 seconds. 
-            const int SLEEP_AMOUNT = 100;
-            while (!eventHandled)
-            {
-                elapsedTime += SLEEP_AMOUNT;
-                if (elapsedTime > 30000)
-                {
-                    break;
-                }
-                Thread.Sleep(SLEEP_AMOUNT);
-            }
-            myProcess.Close();
-        }
-
-        public static void RunCommandWithErrorLog(string instPath, string name, string arg, bool wait, string errorLogPath)
-        {
-            elapsedTime = 0;
-            eventHandled = false;
-
-            try
-            {
-                // Start a process to print a file and raise an event when done.
-                myProcess.StartInfo.FileName = name;
-                myProcess.StartInfo.Arguments = arg;
-                myProcess.StartInfo.CreateNoWindow = true;
-                myProcess.EnableRaisingEvents = true;
-                myProcess.StartInfo.CreateNoWindow = true;
-                myProcess.StartInfo.UseShellExecute = string.IsNullOrEmpty(RedirectOutput);
-                myProcess.StartInfo.WorkingDirectory = instPath;
-
-                myProcess.Exited += new EventHandler(myProcess_Exited);
-                myProcess.Start();
-                
-            }
-            catch (Exception ex)
-            {
-                if (!string.IsNullOrEmpty(RedirectOutput))
-                {
-                    string result = string.Empty;
-                    StreamWriter streamWriter = new StreamWriter(Common.PathCombine(errorLogPath, RedirectOutput));
                     var errorArgs = string.Format("An error occurred trying to print \"{0}\":" + "\n" + ex.Message, arg);
                     result += errorArgs;
                     streamWriter.Write(result);
@@ -297,32 +251,32 @@ namespace SIL.Tool
         }
         #endregion ExistsOnPath(string name)
 
-        #region JavaLocation(name)
+        #region JavaFullName(name)
         /// <summary>
         /// Identify Java program location
         /// </summary>
-        public static string JavaLocation(string name)
+        public static string JavaFullName(string name)
         {
             string progFolder = GetLocation(name);
             if (string.IsNullOrEmpty(progFolder) || !File.Exists(Common.PathCombine(progFolder, "java.exe")))
             {
-                foreach (string progBases in new ArrayList { "C:\\Program Files", "C:\\Program Files (x86)" })
+                var r = RegistryHelperLite.JarFile;
+                Debug.Assert(r != null);
+                r = r.OpenSubKey("shell");
+                Debug.Assert(r != null);
+                r = r.OpenSubKey("open");
+                Debug.Assert(r != null);
+                r = r.OpenSubKey("command");
+                Debug.Assert(r != null);
+                var c = (string)r.GetValue("");
+                var pat = new Regex(@"""([^""]*)");
+                var match = pat.Match(c);
+                if (match.Success)
                 {
-                    string javaPath = Common.PathCombine(progBases, "java");
-
-                    if (Directory.Exists(javaPath))
-                    {
-                        var info = new DirectoryInfo(javaPath);
-                        foreach (DirectoryInfo directoryInfo in info.GetDirectories("jdk*"))
-                        {
-                            progFolder = Common.PathCombine(directoryInfo.FullName, "bin");
-                            if (File.Exists(Common.PathCombine(progFolder, "java.exe")))
-                                return progFolder;
-                        }
-                    }
+                    progFolder = Path.GetDirectoryName(match.Groups[1].Value);
                 }
             }
-            return progFolder;
+            return string.IsNullOrEmpty(progFolder)? string.Empty : Path.Combine(progFolder, "java.exe");
         }
 
         #endregion JavaLocation(name)
@@ -343,6 +297,7 @@ namespace SIL.Tool
         /// </summary>
         public static void BeforeProcess(string outFullName)
         {
+            RedirectOutput = string.Empty;
             const string BeforeProcess = "BeforePwConvert.bat";
             string processFolder = GetProcessFolder(outFullName);
             if (File.Exists(Common.PathCombine(processFolder, BeforeProcess)))
@@ -364,6 +319,7 @@ namespace SIL.Tool
         /// </summary>
         public static void AfterProcess(string outFullName)
         {
+            RedirectOutput = string.Empty;
             const string AfterProcess = "AfterPwConvert.bat";
             try
             {

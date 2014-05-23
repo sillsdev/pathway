@@ -76,16 +76,13 @@ namespace ApplyPDFLicenseInfo
 
         private static void CreateRAMP(string executePath, string inputType)
         {
-            string outputExtn = string.Empty;
-            outputExtn = ".pdf";
+            string outputExtn = ".pdf";
             Ramp ramp = new Ramp();
             ramp.Create(executePath, outputExtn, inputType);
         }
 
         private static string ProcessLicensePdf(string pdfFileName, string executePath)
         {
-            string getFileName;
-            bool isUnix = false;
             string[] pdfFiles = Directory.GetFiles(executePath, "*.pdf");
             string getCopyrightPdfFileName;
             if (pdfFiles.Length > 0)
@@ -94,10 +91,10 @@ namespace ApplyPDFLicenseInfo
             }
             if (pdfFileName != string.Empty || pdfFileName != null)
             {
-                getFileName = Path.GetFileName(pdfFileName);
+                var getFileName = Path.GetFileName(pdfFileName);
                 if (File.Exists(pdfFileName))
                 {
-                    isUnix = SetLicense.UnixVersionCheck();
+                    var isUnix = SetLicense.UnixVersionCheck();
 
                     if (isUnix)
                     {
@@ -152,31 +149,6 @@ namespace ApplyPDFLicenseInfo
                     reader.Close();
 
                     executePath = fileLoc;
-                }
-            }
-            return executePath;
-        }
-
-        private string ReadPathinLicenseFile(string allUserPath, int readLineNumber)
-        {
-            string fileLoc = Path.Combine(allUserPath, "License.txt");
-            string executePath = string.Empty;
-            int countRead = 0;
-
-            if (File.Exists(fileLoc))
-            {
-                using (StreamReader reader = new StreamReader(fileLoc))
-                {
-                    string line;
-
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        _readLicenseFilesBylines.Add(line);
-                    }
-
-                    reader.Close();
-
-                    executePath = _readLicenseFilesBylines[readLineNumber].ToString();
                 }
             }
             return executePath;

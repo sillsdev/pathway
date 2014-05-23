@@ -21,6 +21,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using SIL.PublishingSolution;
+using SIL.Tool;
 
 #endregion Using
 
@@ -35,13 +36,14 @@ namespace Test.CssParserTest
         private Dictionary<string, string> _expected;
         private Dictionary<string, string> _output;
         private string[] _position;
-
+        private bool _isLinux;
         #endregion Private Variables
 
         #region Setup
         [TestFixtureSetUp]
         protected void SetUp()
         {
+            _isLinux = Common.IsUnixOS();
             _input = new StyleAttribute();
             _makeProperty = new MakeProperty();
             _expected = new Dictionary<string, string>();
@@ -480,25 +482,6 @@ namespace Test.CssParserTest
             Assert.AreEqual(expected,output, _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
-        /// <summary>
-        ///A test for FontHeight
-        ///</summary>
-        //[Test]
-        public void FontHeight()
-        {
-
-        
-        }
-
-        /// <summary>
-        ///A test for Language
-        ///</summary>
-        //[Test]
-
-        public void Language()
-        {
-        }
-
         #region FontFamily
         [Test]
         public void FontFamily1()
@@ -507,7 +490,14 @@ namespace Test.CssParserTest
             _input.StringValue = "\"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", "Times New Roman");
+            if (_isLinux)
+            {
+                _expected.Add("font-family", "serif");
+            }
+            else
+            {
+                _expected.Add("font-family", "Times New Roman");
+            }
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
@@ -530,7 +520,14 @@ namespace Test.CssParserTest
             _input.StringValue = "Georgia, \"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", "Georgia");
+            if (_isLinux)
+            {
+                _expected.Add("font-family", "Times New Roman");
+            }
+            else
+            {
+                _expected.Add("font-family", "Georgia");
+            }
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
@@ -541,7 +538,14 @@ namespace Test.CssParserTest
             _input.StringValue = "dummyfont, Georgia,\"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", "Georgia");
+            if (_isLinux)
+            {
+                _expected.Add("font-family", "Times New Roman");
+            }
+            else
+            {
+                _expected.Add("font-family", "Georgia");
+            }
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
@@ -572,7 +576,14 @@ namespace Test.CssParserTest
             _input.StringValue = "Arial, sans-serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", "Arial");
+            if (_isLinux)
+            {
+                _expected.Add("font-family", "Verdana");
+            }
+            else
+            {
+                _expected.Add("font-family", "Arial");
+            }
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
@@ -613,7 +624,14 @@ namespace Test.CssParserTest
             _makeProperty.Font(_input);
             _expected.Clear();
             _expected.Add("font-size", "24");
-            _expected.Add("font-family", "Times New Roman");
+            if (_isLinux)
+            {
+                _expected.Add("font-family", "serif");
+            }
+            else
+            {
+                _expected.Add("font-family", "Times New Roman");
+            }
             _expected.Add("font-style", "italic");
             _expected.Add("font-variant", "small-caps");
             _expected.Add("font-weight", "bold");

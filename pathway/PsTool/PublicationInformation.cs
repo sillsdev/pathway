@@ -28,6 +28,7 @@ namespace SIL.Tool
     {
         string DefaultXhtmlFileWithPath { get; set; }
         string DefaultCssFileWithPath { get; set; }
+        string ProjectInputType { get; set; }
     }
 
     /// <summary>
@@ -51,7 +52,6 @@ namespace SIL.Tool
         private string _subPathValue;
         private string _projectPath;
         private string _tempOutputFolder;
-        private string _templateCSS;
         private string _projectName;
         private string _projectFileWithPath;
         private string _projectInputType;
@@ -71,12 +71,12 @@ namespace SIL.Tool
         public float DefaultFontSize = 12;
         private bool _isFrontMatterEnabled = false;
         private bool _isODM;
-        public string _headerFontName = "GenericFont";
+        public string _headerFontName = "Times New Roman";
+        public string _reversalFontName = "Times New Roman";
         public string _selectedTemplateStyle = string.Empty;
 
         private string _headerReferenceFormat = string.Empty;
         private string _includeXRefSymbol;
-        private string _hideVerseNumberOne;
         private string _includeFootnoteSymbol;
         private string _splitFileByLetter;
         private string _mainLastFileName;
@@ -103,30 +103,15 @@ namespace SIL.Tool
         public string LanguageFilterKey;
         public string LanguageFilterString;
         public bool IsLanguageFilterMatchCase;
-
-        public bool IsLanguageSort;
-        public bool IsEntrySort;
         #endregion
 
         #endregion
 
         #region Properties
-        public bool HideFileInExplorer
-        {
-            get { return _hideFile; }
-            set { _hideFile = value; }
-        }
-
         public bool IsOpenOutput
         {
             get { return _isOpenOutput; }
             set { _isOpenOutput = value; }
-        }
-
-        public string LinkedCSS
-        {
-            get { return _linkedCSS; }
-            set { _linkedCSS = value; }
         }
 
         public string ProjectMode
@@ -147,12 +132,6 @@ namespace SIL.Tool
             set { _tempOutputFolder = value; }
         }
 
-        public string TemplateCSS
-        {
-            get { return _templateCSS; }
-            set { _templateCSS = value; }
-        }
-        
         public string ProjectName
         {
             get { return _projectName; }
@@ -171,22 +150,10 @@ namespace SIL.Tool
             set { _projectInputType = value; }
         }
 
-        public string FullPath
-        {
-            get { return _fullPath; }
-            set { _fullPath = value; }
-        }
-
         public string ProjectPath
         {
             get { return _projectPath; }
             set { _projectPath = value; }
-        }
-
-        public string SubPath
-        {
-            get { return _subPathValue; }
-            set { _subPathValue = value; }
         }
 
         public XmlDocument ProjectDeXML
@@ -268,6 +235,12 @@ namespace SIL.Tool
             set { _headerFontName = value; }
         }
 
+        public string ReversalFontName
+        {
+            get { return _reversalFontName; }
+            set { _reversalFontName = value; }
+        }
+
         public string SelectedTemplateStyle
         {
             get { return _selectedTemplateStyle; }
@@ -347,54 +320,10 @@ namespace SIL.Tool
             return returnNode;
         }
 
-        /// <summary>
-        /// Initial Creation of the .de file
-        /// </summary>
-        /// <param name="dictionaryExplorer">The Solution Explorer</param>
-        public void CreateProjectFile(TreeView dictionaryExplorer)
-        {
-            var xmlSetting = new XmlWriterSettings {Indent = true};
-            XmlWriter projFile = XmlWriter.Create(_projectFileWithPath, xmlSetting);
-            if (projFile != null)
-            {
-                projFile.WriteComment("To store the Project files");
-                projFile.WriteStartElement("Project"); // Project Start
-
-                projFile.WriteStartElement("SolutionExplorer");
-                projFile.WriteEndElement();
-                projFile.WriteStartElement("DocumentSettings");
-                projFile.WriteEndElement();
-                projFile.WriteStartElement("PropertyGroup");
-                projFile.WriteEndElement();
-
-                projFile.WriteEndElement(); // Project End
-                projFile.Close();
-            }
-            if (Common.IsUnixOS())
-            {
-                _DeXml.XmlResolver = new XmlUrlResolver();
-            }
-            else
-            {
-                _DeXml.XmlResolver = null;
-            }
-            _DeXml.Load(_projectFileWithPath);
-            _dictExplorer = dictionaryExplorer;
-            AddInitialFiles();
-        }
-
         public void LoadProjectFile(string projFile)
         {
             ProjectFileWithPath = projFile;
-
-            if (Common.IsUnixOS())
-            {
-                _DeXml.XmlResolver = new XmlUrlResolver();
-            }
-            else
-            {
-                _DeXml.XmlResolver = null;
-            }
+            _DeXml.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             _DeXml.Load(projFile);
         }
 
@@ -403,14 +332,7 @@ namespace SIL.Tool
         /// </summary>
         private void UpdateProjectFile()
         {
-            if (Common.IsUnixOS())
-            {
-                _DeXml.XmlResolver = new XmlUrlResolver();
-            }
-            else
-            {
-                _DeXml.XmlResolver = null;
-            }
+            _DeXml.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             _DeXml.Load(_projectFileWithPath);
             XmlElement root = GetRootNode();
             const string xPath = "/Project/SolutionExplorer";
@@ -447,36 +369,6 @@ namespace SIL.Tool
             }
             ProjectProperty(_projectMode);
             PopulateDicExplorer(dictionaryExplorer);
-        }
-
-        /// <summary>
-        /// Add the xhtml,css and Image files to solution explorer
-        /// </summary>
-        private void AddInitialFiles()
-        {
-            if (AddFileToXML(_DefaultXhtmlFileWithPath, "True", true, "", true, true))
-            {
-                _DefaultCssFileWithPath = Common.GetLinkedCSS(_DefaultXhtmlFileWithPath);
-
-                //Include Merged CSS file
-                if (_DefaultCssFileWithPath != "")
-                {
-                    _DefaultCssFileWithPath = Common.PathCombine(Path.GetDirectoryName(_DefaultXhtmlFileWithPath), _DefaultCssFileWithPath);
-                    if(File.Exists(_DefaultCssFileWithPath))
-                      _DefaultCssFileWithPath = Common.MakeSingleCSS(_DefaultCssFileWithPath, "");
-                    AddFileToXML(_DefaultCssFileWithPath, "True", true, "", true, true);
-                    _DefaultCssFileWithPath = Common.PathCombine(_dictionaryPath, Path.GetFileName(_DefaultCssFileWithPath));
-                }
-                _projectInputType = Common.GetProjectType(_DefaultXhtmlFileWithPath);
-                ProjectProperty(_projectMode);
-                AddImageFiles(_DefaultXhtmlFileWithPath, _projectName);
-
-                _DefaultXhtmlFileWithPath = Common.PathCombine(_dictionaryPath, Path.GetFileName(_DefaultXhtmlFileWithPath));
-                if (_templateCSS != null)
-                {
-                    AddFileToXML(_templateCSS, "True", true, "", true, true);
-                }
-            }
         }
 
         /// <summary>
@@ -552,6 +444,7 @@ namespace SIL.Tool
         /// Sets the default attribute of the Nodes to False
         /// </summary>
         /// <param name="root">The Root Node</param>
+        /// <param name="fileExtension">File Extensions to be removed.</param>
         public void DicExplorerRemoveDefault(XmlNode root, string[] fileExtension)
         {
 
@@ -770,7 +663,6 @@ namespace SIL.Tool
             }
         }
 
- 
 
         /// <summary>
         /// Add the given file to the Project xml file
@@ -780,6 +672,7 @@ namespace SIL.Tool
         /// <param name="addToParentFolder">Forced to add in root of Solution Explorer</param>
         /// <param name="destPathParent">Parent of current folder - used for recursive copy</param>
         /// <param name="showFileExist">To Show the information about file already exist</param>
+        /// <param name="visible"></param>
         /// <returns>Returns True/False</returns>
         public bool AddFileToXML(string fullFileName, string setDefault, bool addToParentFolder, string destPathParent, bool showFileExist, bool visible)
         {
@@ -1048,96 +941,6 @@ namespace SIL.Tool
         #region Image Files Copy to Local Folder
 
         /// <summary>
-        /// Search the img Tags and Adds the files to Solution Explorer.
-        /// </summary>
-        /// <param name="filename">The sourceFolder file</param>
-        /// <param name="projectName">The Current Project xml file</param>
-        public void AddImageFiles(string filename, string projectName)
-        {
-            // Reading the XHTML file
-            string metaValue = Common.GetMetaValue(filename);
-
-            var streamReader = new StreamReader(filename);
-            string text = streamReader.ReadToEnd();
-            streamReader.Close();
-
-            string[] fileList = Common.ReturnImageSource(text); //  To find the img Tags.
-            if (fileList.Length > 0)
-            {
-                foreach (string file in fileList)
-                {
-                    bool addToRoot = false;
-                    _fullPath = string.Empty;  // Make it empty. To add it to Root 
-                    _subPathValue = string.Empty;
-
-                    //Adding Folder
-                    string imagePath = Path.GetDirectoryName(file);
-                    if (imagePath.Length == 0)
-                    {
-                        addToRoot = true;
-                    }
-                    string dirName = Common.PathCombine(_dictionaryPath, Path.GetFileName(imagePath));
-                    if (!Directory.Exists(dirName))
-                    {
-                        // Adding Folder to Solution Explorer
-                        AddFolderToXML(dirName, "");
-                    }
-
-                    // Getting the sourceFolder file and Path
-                    string fromPath = Path.GetDirectoryName(filename);
-                    string imageFileName = Path.GetFileName(file);
-                    string imageFileWithPath = Common.PathCombine(fromPath, Common.PathCombine(imagePath, imageFileName));
-
-                    //Adding File
-                    if (File.Exists(imageFileWithPath))
-                    {
-                        // Adding File to Solution Explorer
-                        _fullPath = _dictionaryPath + "/"; // Add the "/" to the folder to Add the file to sub folder.
-                        _subPathValue = projectName + "/";
-                        AddFileToXML(imageFileWithPath, "False", addToRoot, imagePath, false, true);
-                        _subPathValue = projectName;
-                        _fullPath = _dictionaryPath;
-                    }
-                    else if (metaValue.Length > 0)
-                    {
-                        const string pictureFolder = "Pictures";
-                        string pictDirName = Common.PathCombine(_dictionaryPath, pictureFolder);
-                        if (!Directory.Exists(pictDirName))
-                        {
-                            // Adding Folder to Solution Explorer
-                            AddFolderToXML(pictDirName, "");
-                        }
-
-                        //fromPath = metaValue;
-                        string fileWithPath = Common.PathCombine(fromPath, Common.PathCombine(metaValue, file));
-
-                        //Adding File with Exact Path
-                        if (File.Exists(fileWithPath))
-                        {
-                            // Adding File to Solution Explorer
-                            _fullPath = _dictionaryPath + "/"; // Add the "/" to the folder to Add the file to sub folder.
-                            _subPathValue = projectName + "/";
-                            AddFileToXML(fileWithPath, "False", false, pictureFolder, false, true);
-                            _subPathValue = projectName;
-                            _fullPath = _dictionaryPath;
-                        }
-                        fileWithPath = Common.PathCombine(fromPath, Common.PathCombine(metaValue, imageFileName));
-                        //Adding File with image only
-                        if (File.Exists(fileWithPath))
-                        {
-                            // Adding File to Solution Explorer
-                            _fullPath = _dictionaryPath + "/"; // Add the "/" to the folder to Add the file to sub folder.
-                            _subPathValue = projectName + "/";
-                            AddFileToXML(fileWithPath, "False", false, pictureFolder, false, true);
-                            _subPathValue = projectName;
-                            _fullPath = _dictionaryPath;
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// To sets the projects type/version and date of creation/modification
         /// </summary>
         /// <param name="mode">The Project mode (new / open)</param>
@@ -1254,7 +1057,7 @@ namespace SIL.Tool
             this.LoadProjectFile(projectFile);
             XmlNode explorer = GetSolutionExplorerNode();
             XmlNode folderNode = _DeXml.CreateNode("element", "dummy", "");
-            XmlNode fileNode = _DeXml.CreateNode("element", "dummy", ""); ;
+            XmlNode fileNode = _DeXml.CreateNode("element", "dummy", "");
             XmlNode allType = _DeXml.CreateNode("element", "dummy", "");
             int count = explorer.ChildNodes.Count;
             for (int i = 0; i < count; i++)

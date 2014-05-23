@@ -13,41 +13,7 @@ using SIL.PublishingSolution;
 
 namespace SIL.Tool
 {
-    public interface IPreExportProcess
-    {
-        string ProcessedXhtml { get; }
-        string ProcessedCss { get; }
-
-        string GetCreatedTempFolderPath { get; }
-        /// <summary>
-        /// To swap the headword and reversal-form when main.xhtml and FlexRev.xhtml included
-        /// </summary>
-        void SwapHeadWordAndReversalForm();
-
-        /// <summary>
-        /// This function is created for the task TD-872(Kabwa Scripture formatting in XP). Flex exporting css as "REVERSE_SOLIDUS"
-        /// when "\" comes with the classname. So this function replace the classname which contains "\" into "REVERSE_SOLIDUS" in the XHTML files
-        /// like class="\Citation_Line1" to class="REVERSE_SOLIDUSCitation_line1"
-        /// </summary>
-        void ReplaceSlashToREVERSE_SOLIDUS();
-
-        /// <summary>
-        /// FileOpen used for Preprocessing temp File
-        /// </summary>
-        /// <param name="isInDesign"> </param>
-        string ImagePreprocess(bool isInDesign);
-
-        void GetTempFolderPath();
-
-        /// <summary>
-        /// To replace the symbol string if the symbol matches with the text
-        /// </summary>
-        void ReplaceStringInCss(string cssFile);
-
-        void SetDropCapInCSS(string cssFileName);
-    }
-
-    public class PreExportProcess : IPreExportProcess
+    public class PreExportProcess
     {
         private string _xhtmlFileNameWithPath;
         private string _cssFileNameWithPath;
@@ -564,6 +530,55 @@ namespace SIL.Tool
             }
         }
 
+        public List<string> GetMultiPictureEntryId(string fileName)
+        {
+            string clsName, id, entryId = null;
+            bool isfirstImage = false;
+            List<string> entryIdList = new List<string>();
+            if (!File.Exists(fileName)) return null;
+            try
+            {
+                XmlTextReader _reader = Common.DeclareXmlTextReader(fileName, true);
+                while (_reader.Read())
+                {
+                    if (_reader.NodeType == XmlNodeType.Element)
+                    {
+                        if (_reader.Name == "div")
+                        {
+                            clsName = _reader.GetAttribute("class");
+                            id = _reader.GetAttribute("id");
+                            if (clsName != null)
+                            {
+                                if (clsName == "entry")
+                                {
+                                    isfirstImage = false;
+                                    entryId = id;
+                                }
+                            }
+                        }
+                        else if (_reader.Name == "img")
+                        {
+                            if (!isfirstImage)
+                            {
+                                isfirstImage = true;
+                            }
+                            else
+                            {
+                                if (entryId != null && !entryIdList.Contains(entryId))
+                                {
+                                    entryIdList.Add(entryId);
+                                }
+                            }
+                        }
+                    }
+                }
+                _reader.Close();
+            }
+            catch
+            {
+            }
+            return entryIdList;
+        }
 
         /// <summary>
         /// Returns the string contents of the copyright / license xhtml for inserting into the dictionary / scripture data.
@@ -871,160 +886,6 @@ namespace SIL.Tool
 
         #endregion
 
-        #region InDesign Front Matter
-        public void InsertInDesignFrontMatterContent(string inputXhtmlFilePath)
-        {
-            Param.LoadSettings();
-            string organization;
-            string frontMatterXHTMLContent = string.Empty;
-            string frontMatterCSSStyle = string.Empty;
-            try
-            {
-                organization = Param.Value.ContainsKey("Organization")
-                                   ? Param.Value["Organization"]
-                                   : "SIL International";
-            }
-            catch (Exception)
-            {
-                organization = "SIL International";
-            }
-
-            bool _coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, organization));
-            string _coverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, organization);
-            bool _includeTitlePage = (Param.GetMetadataValue(Param.TitlePage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, organization));
-            bool _copyrightInformation = (Param.GetMetadataValue(Param.CopyrightPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, organization));
-            string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
-            bool _includeTitleinCoverImage = (Param.GetMetadataValue(Param.CoverPageTitle, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, organization));
-
-            if (!File.Exists(inputXhtmlFilePath)) return;
-            const string tag = "body";
-
-            try
-            {
-                XmlDocument xmldoc = Common.DeclareXMLDocument(true);
-                XmlNode coverImageNode = null;
-                XmlNode coverTitleNode = null;
-                FileStream fs = File.OpenRead(inputXhtmlFilePath);
-                xmldoc.Load(fs);
-                fs.Close();
-                XmlNodeList mainXhtmlFile = xmldoc.GetElementsByTagName(tag);
-                XmlAttribute xmlDAttribute = xmldoc.CreateAttribute("class");
-
-                XmlNode pNode = null;
-                pNode = xmldoc.CreateElement("div");
-                xmlDAttribute = xmldoc.CreateAttribute("class");
-                xmlDAttribute.Value = "P4";
-                pNode.Attributes.Append(xmlDAttribute);
-
-                //COVER IMAGE
-                if (_coverImage && File.Exists(_coverPageImagePath))
-                {
-                    coverImageNode = xmldoc.CreateElement("div");
-                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
-                    xmlAttribute.Value = "coverImage";
-                    coverImageNode.Attributes.Append(xmlAttribute);
-
-                    XmlNode newNodeImg = xmldoc.CreateElement("img");
-                    xmlAttribute = xmldoc.CreateAttribute("src");
-                    xmlAttribute.Value = _coverPageImagePath;
-                    newNodeImg.Attributes.Append(xmlAttribute);
-
-                    xmlAttribute = xmldoc.CreateAttribute("alt");
-                    xmlAttribute.Value = _coverPageImagePath;
-                    newNodeImg.Attributes.Append(xmlAttribute);
-                    coverImageNode.AppendChild(newNodeImg);
-
-                    coverTitleNode = xmldoc.CreateElement("div");
-                    xmlAttribute = xmldoc.CreateAttribute("class");
-                    xmlAttribute.Value = "cover";
-                    coverTitleNode.Attributes.Append(xmlAttribute);
-                    coverTitleNode.InnerText = " ";
-
-                    if (_includeTitleinCoverImage)
-                    {
-                        coverTitleNode.InnerText = Param.GetMetadataValue(Param.Title);
-                    }
-                }
-                //COVER TITLE
-                if (coverTitleNode != null)
-                {
-                    frontMatterXHTMLContent = coverTitleNode.OuterXml;
-                    _projInfo.IsFrontMatterEnabled = true;
-                    frontMatterCSSStyle = frontMatterCSSStyle + ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
-                }
-                //END OF COVER TITLE
-                if (coverImageNode != null)
-                {
-                    frontMatterXHTMLContent = coverImageNode.OuterXml + frontMatterXHTMLContent;
-                    _projInfo.IsFrontMatterEnabled = true;
-                }
-                //END OF COVER IMAGE
-                //TITLE
-                XmlNode titleNode = null;
-                if (_includeTitlePage)
-                {
-                    titleNode = xmldoc.CreateElement("div");
-                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
-                    xmlAttribute.Value = "title";
-                    titleNode.Attributes.Append(xmlAttribute);
-                    titleNode.InnerText = Param.GetMetadataValue(Param.Title);
-                }
-
-                if (titleNode != null)
-                {
-                    frontMatterXHTMLContent = frontMatterXHTMLContent + titleNode.OuterXml;
-                    _projInfo.IsFrontMatterEnabled = true;
-                    frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
-                }
-                //END OF TITLE
-                //COPYRIGHT 
-                if (File.Exists(copyRightFilePath))
-                {
-                    XmlDocument crdoc = Common.DeclareXMLDocument(true);
-                    crdoc.Load(copyRightFilePath);
-                    XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
-
-
-                    XmlNode copyRightContentNode = null;
-                    if (_copyrightInformation)
-                    {
-                        copyRightContentNode = xmldoc.CreateElement("div");
-                        XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
-                        xmlAttribute.Value = "copyright";
-                        copyRightContentNode.Attributes.Append(xmlAttribute);
-                        copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", " ").Replace("\t", "");
-                    }
-
-                    if (copyRightFile.Count > 0 && _copyrightInformation)
-                    {
-                        frontMatterXHTMLContent = frontMatterXHTMLContent + copyRightContentNode.OuterXml;
-                        _projInfo.IsFrontMatterEnabled = true;
-                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:12pt;page-break-after: always;";
-                    }
-                }
-                //END OF COPYRIGHT 
-
-                mainXhtmlFile[0].InnerXml = frontMatterXHTMLContent + pNode.OuterXml + mainXhtmlFile[0].InnerXml;
-
-                xmldoc.Save(inputXhtmlFilePath);
-
-                InsertInDesignFrontMatterCssFile(_projInfo.DefaultCssFileWithPath, frontMatterCSSStyle);
-            }
-            catch
-            {
-
-            }
-        }
-
-        public void InsertInDesignFrontMatterCssFile(string inputCssFilePath, string frontMatterCSSStyle)
-        {
-            Param.LoadSettings();
-            if (!File.Exists(inputCssFilePath)) return;
-            Common.FileInsertText(inputCssFilePath, frontMatterCSSStyle);
-        }
-
-        #endregion InDesign Front Matter
-
         #region LibreOfficeFrontMatter
         public void InsertLoFrontMatterContent(string inputXhtmlFilePath, bool isMainAlone)
         {
@@ -1130,11 +991,11 @@ namespace SIL.Tool
                 if (titleNode != null)
                 {
                     frontMatterXHTMLContent = frontMatterXHTMLContent + titleNode.OuterXml;
-                    if (_includeTOCPage)
-                    {
-                        //frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
-                        frontMatterXHTMLContent = frontMatterXHTMLContent;
-                    }
+                    //if (_includeTOCPage)
+                    //{
+                    //    //frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
+                    //    frontMatterXHTMLContent = frontMatterXHTMLContent;
+                    //}
                     _projInfo.IsFrontMatterEnabled = true;
                     frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-family: 'Times New Roman', serif; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;font-family: 'Times New Roman', serif; } .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}";
                 }
@@ -1145,35 +1006,41 @@ namespace SIL.Tool
                 {
                     if (_copyrightInformation)
                     {
+                        try
+                        {
+                            string draftTempFileName = Common.PathCombine(Path.GetTempPath(), Path.GetFileName(copyRightFilePath));
+                            File.Copy(copyRightFilePath, draftTempFileName, true);
+                            var languageCode = JustLanguageCode();
+                            Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageName'></span>", Common.GetLanguageName(languageCode));
+                            Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageCode'></span>", languageCode);
+                            Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageUrl'></span>", GetLanguageUrl(languageCode));
+                            Common.StreamReplaceInFile(draftTempFileName,
+                                                       "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>",
+                                                       GetCopyrightInfoForLO());
+                            Common.StreamReplaceInFile(draftTempFileName, "<h1>", "<span class='LHeading'>");
+                            Common.StreamReplaceInFile(draftTempFileName, "</h1>", "</span>");
+                            Common.StreamReplaceInFile(draftTempFileName, "<p>", "<span class='LText'>");
+                            Common.StreamReplaceInFile(draftTempFileName, "</p>", "</span>");
+                            Common.StreamReplaceInFile(draftTempFileName, "<em>", "<span>");
+                            Common.StreamReplaceInFile(draftTempFileName, "</em>", "</span>");
 
-                        string draftTempFileName = Common.PathCombine(Path.GetTempPath(), Path.GetFileName(copyRightFilePath));
+                            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+                            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
+                            namespaceManager.AddNamespace("html", "http://www.w3.org/1999/xhtml");
+                            xDoc.Load(draftTempFileName);
+                            XmlNode bodyNode = xDoc.SelectSingleNode("//html:body", namespaceManager);
 
-                        File.Copy(copyRightFilePath, draftTempFileName, true);
-                        var languageCode = JustLanguageCode();
-                        Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageName'></span>", Common.GetLanguageName(languageCode));
-                        Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageCode'></span>", languageCode);
-                        Common.StreamReplaceInFile(draftTempFileName, "<span class='LanguageUrl'></span>", GetLanguageUrl(languageCode));
-                        Common.StreamReplaceInFile(draftTempFileName,
-                                                   "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>",
-                                                   GetCopyrightInfoForLO());
-                        Common.StreamReplaceInFile(draftTempFileName, "<h1>", "<span class='LHeading'>");
-                        Common.StreamReplaceInFile(draftTempFileName, "</h1>", "</span>");
-                        Common.StreamReplaceInFile(draftTempFileName, "<p>", "<span class='LText'>");
-                        Common.StreamReplaceInFile(draftTempFileName, "</p>", "</span>");
-                        Common.StreamReplaceInFile(draftTempFileName, "<em>", "<span>");
-                        Common.StreamReplaceInFile(draftTempFileName, "</em>", "</span>");
+                            copyRightContentNode = xmldoc.CreateElement("div");
 
-                        XmlDocument xDoc = Common.DeclareXMLDocument(true);
-                        XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
-                        namespaceManager.AddNamespace("html", "http://www.w3.org/1999/xhtml");
-                        xDoc.Load(draftTempFileName);
-                        XmlNode bodyNode = xDoc.SelectSingleNode("//html:body", namespaceManager);
+                            XmlNode importNode = copyRightContentNode.OwnerDocument.ImportNode(bodyNode, true);
 
-                        copyRightContentNode = xmldoc.CreateElement("div");
-
-                        XmlNode importNode = copyRightContentNode.OwnerDocument.ImportNode(bodyNode, true);
-
-                        copyRightContentNode.InnerXml = importNode.InnerXml;
+                            copyRightContentNode.InnerXml = importNode.InnerXml;
+                        }
+                        catch
+                        {
+                            copyRightContentNode = xmldoc.CreateElement("div");
+                            copyRightContentNode.InnerXml = " ";
+                        }
                     }
 
                     if (copyRightContentNode != null && _copyrightInformation)
@@ -1232,57 +1099,6 @@ namespace SIL.Tool
             Param.LoadSettings();
             if (!File.Exists(inputCssFilePath)) return;
             Common.FileInsertText(inputCssFilePath, frontMatterCSSStyle);
-        }
-
-
-        /// <summary>
-        /// This method to include the dummy Title_secondary if the Title_Main don't have this node. So it helps to
-        /// produce output with Tile_Main starts on first line.
-        /// </summary>
-        /// <param name="inputXhtmlFilePath">Input XHTML file</param>
-        public void InsertDummyTitleSecondary(string inputXhtmlFilePath)
-        {
-            if (_projInfo.ProjectInputType.ToLower() != "scripture") return;
-            XmlDocument xmldoc = Common.DeclareXMLDocument(true);
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            FileStream fs = File.OpenRead(inputXhtmlFilePath);
-            xmldoc.Load(fs);
-            fs.Close();
-            XmlNodeList titleMainNodeList = xmldoc.SelectNodes("//div[@class='Title_Main']", namespaceManager);
-            if (titleMainNodeList != null && titleMainNodeList.Count > 0)
-            {
-                for (int i = 0; i < titleMainNodeList.Count; i++)
-                {
-                    XmlNode node = titleMainNodeList[i];
-                    if (node.ChildNodes.Count > 0)
-                    {
-                        bool isTitleSecExists = false;
-                        XmlNodeList spanList = node.SelectNodes(".//span", namespaceManager);
-                        for (int j = 0; j < spanList.Count; j++)
-                        {
-                            var xmlAttributeCollection = spanList[j].Attributes;
-                            if (xmlAttributeCollection != null && xmlAttributeCollection["class"] != null && xmlAttributeCollection["class"].Value.ToLower() == "title_secondary")
-                            {
-                                isTitleSecExists = true;
-                            }
-                        }
-                        if (isTitleSecExists == false)
-                        {
-                            XmlNode newNodeSpan = xmldoc.CreateElement("span");
-                            XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
-                            xmlAttribute.Value = "Title_Secondary";
-                            newNodeSpan.InnerText = " ";
-                            newNodeSpan.Attributes.Append(xmlAttribute);
-
-                            node.InsertBefore(newNodeSpan, node.FirstChild);
-                        }
-
-                    }
-                }
-
-            }
-            xmldoc.Save(inputXhtmlFilePath);
         }
         #endregion
 
@@ -1816,58 +1632,6 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
-        /// <summary>
-        /// AnchorTage Processing for <a> Tag to point the href</a>
-        /// </summary>
-        /// <param name="sourceFile">The Xhtml File</param>
-        /// <param name="anchor">Arraylist value</param>
-        public void AnchorTagProcessing(string sourceFile, ref ArrayList anchor)
-        {
-            try
-            {
-                const string tag = "a";
-                XmlDocument xDoc = Common.DeclareXMLDocument(true);
-                xDoc.Load(sourceFile);
-                XmlNodeList nodeList = xDoc.GetElementsByTagName(tag);
-                if (nodeList.Count > 0)
-                {
-                    nodeList = xDoc.GetElementsByTagName(tag);
-                    string fileContent = xDoc.OuterXml.ToLower();
-                    if (nodeList.Count > 0)
-                    {
-                        foreach (XmlNode item in nodeList)
-                        {
-                            var name = item.Attributes.GetNamedItem("href");
-                            if (name != null)
-                            {
-                                if (name.Value.IndexOf('#') >= 0)
-                                {
-                                    var href = name.Value.Replace("#", "");
-                                    if (href.Length > 0)
-                                    {
-                                        href = href.ToLower();
-                                        string hrefQuot = "\"" + href + "\"";
-                                        if (fileContent.IndexOf(hrefQuot) < 0)
-                                        {
-                                            name.Value = "";
-                                        }
-                                        else
-                                        {
-                                            anchor.Add(href.ToLower());
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    xDoc.Save(sourceFile);
-                }
-            }
-            catch
-            {
-            }
-        }
-
         private string OpenFile()
         {
             string OutputFile = _xhtmlFileNameWithPath;
@@ -1878,141 +1642,9 @@ namespace SIL.Tool
             return OutputFile;
         }
 
-
         /// <summary>
-        /// Modify <body> tag as <body xml:space="preserve">
-        /// </summary>
-        public string PreserveSpace_temp()
-        {
-            string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
-            string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
-            string newfile = Common.PathCombine(fileDir, fileName);
-
-            File.Copy(_xhtmlFileNameWithPath, newfile);
-
-            XmlDocument _styleXMLdoc = new XmlDocument();
-            _styleXMLdoc.Load(newfile);
-            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
-            nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
-            //office:font-face-decls
-            // if new stylename exists
-            XmlElement root = _styleXMLdoc.DocumentElement;
-            string style = "//body";
-            if (root != null)
-            {
-                XmlNode node = root.SelectSingleNode(style, nsmgr);
-                if (node == null)
-                {
-                    return _xhtmlFileNameWithPath;
-                }
-                XmlAttribute attribute = _styleXMLdoc.CreateAttribute("xml:space");
-                attribute.Value = "preserve";
-                node.Attributes.Append(attribute);
-            }
-            _styleXMLdoc.Save(newfile);
-            _xhtmlFileNameWithPath = newfile;
-            return _xhtmlFileNameWithPath;
-        }
-
-        /// <summary>
-        /// Modify <body> tag as <body xml:space="preserve">
-        /// </summary>
-        public string RewriteXhtml()
-        {
-            XmlTextReader reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
-            string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
-            string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
-            string Newfile = Common.PathCombine(fileDir, fileName);
-
-            XmlTextWriter writer = new XmlTextWriter(Newfile, null);
-
-            while (reader.Read())
-            {
-                switch (reader.NodeType)
-                {
-
-                    case XmlNodeType.Element:
-
-                        writer.WriteStartElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
-                        if (reader.Name == "body")
-                        {
-                            writer.WriteAttributeString("xml:space", "preserve");
-                        }
-                        writer.WriteAttributes(reader, true);
-
-                        if (reader.IsEmptyElement)
-                        {
-
-                            writer.WriteEndElement();
-
-                        }
-
-                        break;
-
-                    case XmlNodeType.Text:
-
-                        writer.WriteString(reader.Value);
-
-                        break;
-
-                    case XmlNodeType.Whitespace:
-
-                    case XmlNodeType.SignificantWhitespace:
-
-                        writer.WriteWhitespace(reader.Value);
-
-                        break;
-
-                    case XmlNodeType.CDATA:
-
-                        writer.WriteCData(reader.Value);
-
-                        break;
-
-                    case XmlNodeType.EntityReference:
-
-                        writer.WriteEntityRef(reader.Name);
-
-                        break;
-
-                    case XmlNodeType.XmlDeclaration:
-
-                    case XmlNodeType.ProcessingInstruction:
-
-                        writer.WriteProcessingInstruction(reader.Name, reader.Value);
-
-                        break;
-
-                    case XmlNodeType.DocumentType:
-
-                        writer.WriteDocType(reader.Name, reader.GetAttribute("PUBLIC"), reader.GetAttribute("SYSTEM"), reader.Value);
-
-                        break;
-
-                    case XmlNodeType.Comment:
-
-                        writer.WriteComment(reader.Value);
-
-                        break;
-
-                    case XmlNodeType.EndElement:
-
-                        writer.WriteFullEndElement();
-
-                        break;
-
-                }
-            }
-            writer.Close();
-            reader.Close();
-            _xhtmlFileNameWithPath = Newfile;
-            return _xhtmlFileNameWithPath;
-        }
-
-
-        /// <summary>
-        /// 1. Modify <html  xmlns="http://www.w3.org/1999/xhtml"> tag as <html>
-        /// 2. Modify <body> tag as <body xml:space="preserve">
+        /// 1. Modify html  xmlns="http://www.w3.org/1999/xhtml" tag as html
+        /// 2. Modify body tag as body xml:space="preserve"
         /// </summary>
         public string PreserveSpace()
         {
@@ -2052,55 +1684,6 @@ namespace SIL.Tool
                     }
                     sw2.WriteLine(line);
                 }
-            }
-            sw2.Close();
-            fs.Close();
-            fs2.Close();
-
-            _xhtmlFileNameWithPath = Newfile;
-            return _xhtmlFileNameWithPath;
-        }
-
-        public string PreserveSpace1()
-        {
-            FileStream fs = new FileStream(_xhtmlFileNameWithPath, FileMode.Open);
-            StreamReader stream = new StreamReader(fs);
-
-            string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
-            string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
-            string Newfile = Common.PathCombine(fileDir, fileName);
-
-            var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
-            var sw2 = new StreamWriter(fs2);
-            string line;
-
-            bool replace = true;
-            while ((line = stream.ReadLine()) != null)
-            {
-                if (replace)
-                {
-                    int htmlNodeStart = line.IndexOf("<html");
-                    if (htmlNodeStart >= 0)
-                    {
-                        int htmlNodeEnd = line.IndexOf(">", htmlNodeStart);
-                        string line1 = "<?xml version=\"1.0\" encoding=\"utf-8\"?> ";
-                        line = line1 + "<html" + line.Substring(htmlNodeEnd);
-                        sw2.WriteLine(line);
-                    }
-                    else if (line.IndexOf("<body") >= 0)
-                    {
-                        line = line.Replace("<body", @" <body xml:space=""preserve""  ");
-                        sw2.WriteLine(line);
-                        replace = false;
-                    }
-
-                }
-                else
-                {
-
-                    sw2.WriteLine(line);
-                }
-
             }
             sw2.Close();
             fs.Close();
@@ -2320,73 +1903,6 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
-        public void RemoveEmptySpanHeadword(string fileName)
-        {
-            string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
-            if (!File.Exists(flexRevFileName)) return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(true);
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            xDoc.Load(flexRevFileName);
-            string xPath = "//xhtml:span[@class='reversal-form']";
-            XmlNodeList RevFormNodes = xDoc.SelectNodes(xPath, namespaceManager);
-            for (int i = 0; i < RevFormNodes.Count; i++)
-            {
-                RevFormNodes[i].InnerXml = RevFormNodes[i].InnerText;
-            }
-            xDoc.Save(flexRevFileName);
-
-
-        }
-
-        public void ChangeEntryMultiPictClassName(string fileName)
-        {
-            if (!File.Exists(fileName)) return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(true);
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            FileStream fs = File.OpenRead(fileName);
-            xDoc.Load(fs);
-            fs.Close();
-            string xPath = "//div[@class='entry']";
-            XmlNodeList entryNodes = xDoc.SelectNodes(xPath, namespaceManager);
-
-            for (int i = 0; i < entryNodes.Count; i++)
-            {
-                xPath = ".//img";
-                XmlNodeList imgNodes = entryNodes[i].SelectNodes(xPath, namespaceManager);
-                if (imgNodes.Count <= 1) continue;
-                for (int j = 0; j < imgNodes.Count; j++)
-                {
-                    if (j == 0) continue;
-                    XmlNode imgNode = imgNodes[j].ParentNode;
-                    imgNode.Attributes["class"].Value = "pictureNone";
-                }
-            }
-            xDoc.Save(fileName);
-            SetPictureNoneInCSS();
-
-        }
-
-
-        public void RemoveEmptySpan(string fileName)
-        {
-            if (!File.Exists(fileName)) return;
-            XmlDocument xDoc = Common.DeclareXMLDocument(true);
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            xDoc.Load(fileName);
-            string xPath = "//xhtml:span[@class='reversal-form']";
-            XmlNodeList RevFormNodes = xDoc.SelectNodes(xPath, namespaceManager);
-
-            for (int i = 0; i < RevFormNodes.Count; i++)
-            {
-                XmlDocumentFragment docFrag = InsertEmptyHeadword(xDoc);
-                RevFormNodes[i].AppendChild(docFrag);
-            }
-            xDoc.Save(fileName);
-        }
-
         public void InsertEmptyHeadwordForReversal(string fileName)
         {
             string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
@@ -2452,70 +1968,6 @@ namespace SIL.Tool
             xDoc.Save(_xhtmlFileNameWithPath);
             SetHideVerseNumberInCSS();
             return _xhtmlFileNameWithPath;
-        }
-
-        /// <summary>
-        /// Returns the "main" language code in use by the document.
-        /// </summary>
-        /// <returns></returns>
-        public string GetLanguageCodeForLO()
-        {
-            XmlDocument xDoc = Common.DeclareXMLDocument(true);
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-            namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
-            xDoc.Load(_xhtmlFileNameWithPath);
-            XmlNodeList nodes;
-            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-            {
-                // dictionary
-                try
-                {
-                    nodes = xDoc.SelectNodes("//span[@class='headword']", namespaceManager);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                    nodes = null;
-                }
-                if (nodes != null && nodes.Count > 0)
-                {
-                    XmlNode node = nodes[0];
-                    var atts = node.Attributes;
-                    if (atts != null)
-                    {
-                        if (atts["lang"] != null)
-                            return (atts["lang"].Value);
-                        else if (atts["xml:lang"] != null)
-                            return (atts["xml:lang"].Value);
-                    }
-                }
-            }
-            else
-            {
-                // scripture
-                try
-                {
-                    nodes = xDoc.SelectNodes("//span[@class='Chapter_Number']", namespaceManager);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                    nodes = null;
-                }
-                if (nodes != null && nodes.Count > 0)
-                {
-                    XmlNode node = nodes[0];
-                    var atts = node.Attributes;
-                    if (atts != null)
-                    {
-                        if (atts["lang"] != null)
-                            return (atts["lang"].Value);
-                        else if (atts["xml:lang"] != null)
-                            return (atts["xml:lang"].Value);
-                    }
-                }
-            }
-            return string.Empty;
         }
 
         /// <summary>
@@ -2851,92 +2303,6 @@ namespace SIL.Tool
             _reader.Close();
         }
 
-        public void GetReferenceList1(List<string> sourceList, List<string> targetList)
-        {
-            XmlDocument xdoc = new XmlDocument();
-            xdoc.Load(_xhtmlFileNameWithPath);
-            const string searchTag = "a";
-            var anchorList = xdoc.GetElementsByTagName(searchTag);
-            if (anchorList.Count > 1)
-            {
-                foreach (XmlNode anchorNode in anchorList)
-                {
-                    if (anchorNode.Attributes != null)
-                    {
-                        XmlAttribute attrib = anchorNode.Attributes["href"];
-                        if (attrib != null)
-                        {
-                            string anchorID = attrib.Value.Replace("#", "");
-                            if (sourceList.Contains(anchorID)) continue;
-                            sourceList.Add(anchorID);
-                        }
-                    }
-                }
-            }
-
-            string query;
-            foreach (string anchorRef in sourceList)
-            {
-                XmlElement anchorId = xdoc.GetElementById(anchorRef);
-                if (anchorId != null)
-                {
-                    if (targetList.Contains(anchorRef)) continue;
-                    targetList.Add(anchorRef);
-                }
-
-
-                query = string.Format("//*[@name='{0}']", anchorId);
-                XmlElement ancName = (XmlElement)xdoc.SelectSingleNode(query);
-                if (ancName != null)
-                {
-                    if (targetList.Contains(anchorRef)) continue;
-                    targetList.Add(anchorRef);
-                }
-
-            }
-
-            string id = "u1_000";
-            query = string.Format("//*[@id='{0}']", id);
-            XmlElement el = (XmlElement)xdoc.SelectSingleNode(query);
-            string OutputFile = OpenFile();
-            Dictionary<string, string> dicMatch = new Dictionary<string, string>();
-            MatchCollection m1 = Regex.Matches(_fileContent.ToString(), "<a\\shref.*?>");
-            string st;
-            foreach (Match m in m1)
-            {
-                st = Common.RightRemove(m.Value, "\"");
-                st = Common.LeftRemove(st, "#").Replace("#", "").ToLower();
-
-                if (sourceList.Contains(st)) continue;
-                sourceList.Add(st);
-            }
-
-            string pattern = "id.*?>";
-            MatchCollection m2 = Regex.Matches(_fileContent.ToString(), pattern);
-            foreach (Match m in m2)
-            {
-                st = Common.LeftRemove(m.Value, "=\"");
-                st = Common.LeftString(st, "\"").ToLower();
-
-
-                if (targetList.Contains(st)) continue;
-                targetList.Add(st);
-            }
-
-            pattern = "name.*?>";
-            MatchCollection m3 = Regex.Matches(_fileContent.ToString(), pattern);
-            foreach (Match m in m3)
-            {
-                st = Common.LeftRemove(m.Value, "=\"");
-                st = Common.LeftString(st, "\"").ToLower();
-
-                if (targetList.Contains(st)) continue;
-                targetList.Add(st);
-            }
-
-        }
-
-
         /// <summary>
         /// TD-3482 
         /// </summary>
@@ -3069,10 +2435,9 @@ namespace SIL.Tool
                 xPath = ".//xhtml:span[@class='Verse_Number']";
                 XmlNodeList verseNodeList = paraNode.SelectNodes(xPath, namespaceManager);
                 if (verseNodeList == null) return;
-                for (int j = 0; j < verseNodeList.Count; j++)
+                if (verseNodeList.Count > 0)
                 {
-                    verseNodeList[j].InnerText = "";
-                    break;
+                    verseNodeList[0].InnerText = "";
                 }
             }
             xDoc.Save(fileName);
@@ -3220,73 +2585,6 @@ namespace SIL.Tool
             }
         }
 
-        /// <summary>
-        /// For dictionary data, returns the first and last letter count
-        /// </summary>
-        /// <returns></returns>
-        public string GetDictionaryLetterCount()
-        {
-            bool isLetterFound = false;
-            string lastLetterString = string.Empty;
-            XmlTextReader _reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
-            while (_reader.Read())
-            {
-                if (_reader.NodeType == XmlNodeType.Element)
-                {
-                    if (_reader.Name == "div")
-                    {
-                        string name = _reader.GetAttribute("class");
-                        if (name != null)
-                        {
-                            if (name.ToLower() == "letter")
-                            {
-                                isLetterFound = true;
-                            }
-                        }
-                    }
-                }
-
-                if (isLetterFound)
-                {
-                    if (_reader.NodeType == XmlNodeType.Text)
-                    {
-                        lastLetterString = _reader.Value;
-                        isLetterFound = false;
-                    }
-                }
-
-            }
-            _reader.Close();
-
-            return lastLetterString;
-        }
-
-        /// <summary>
-        /// For dictionary data, returns the first and last letter count
-        /// </summary>
-        /// <returns></returns>
-        public string GetDictionaryLetterCountOLD()
-        {
-            string lastLetterString = string.Empty;
-            XmlDocument xDoc = Common.DeclareXMLDocument(true);
-            xDoc.Load(_xhtmlFileNameWithPath);
-            XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
-            if (nodeList.Count > 0)
-            {
-                foreach (XmlNode node in nodeList)
-                {
-                    if (node == null || node.Attributes["class"] == null)
-                        continue;
-                    string className = node.Attributes["class"].Value;
-                    if (className.ToLower() == "letter")
-                    {
-                        lastLetterString = node.InnerText;
-                    }
-                }
-            }
-            return lastLetterString;
-        }
-
         public void InsertFolderNameForAudioFilesinXhtml()
         {
             try
@@ -3338,6 +2636,28 @@ namespace SIL.Tool
                 }
                 searchPos = findFrom - 1;
             }
+        }
+
+        public void RemoveStringInCss(string cssFileName, string match)
+        {
+            var sr = new StreamReader(cssFileName);
+            string fileContent = sr.ReadToEnd();
+            sr.Close();
+            int searchPos = fileContent.Length;
+            while (true)
+            {
+                int findFrom = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
+                if (findFrom == -1)
+                {
+                    break;
+                }
+                int closingbracePos = fileContent.IndexOf(";", findFrom) + 1;
+                fileContent = fileContent.Substring(0, findFrom) + fileContent.Substring(closingbracePos);
+                searchPos = findFrom - 1;
+            }
+            var sw = new StreamWriter(cssFileName);
+            sw.Write(fileContent);
+            sw.Close();
         }
 
         public void RemoveDeclaration(string cssFileName, string match)
@@ -3434,18 +2754,6 @@ namespace SIL.Tool
             tw.WriteLine(".Cover img{");
             tw.WriteLine("height: 100%;");
             tw.WriteLine("width: 100%;");
-            tw.WriteLine("}");
-            tw.Close();
-        }
-
-        public void SetPictureNoneInCSS()
-        {
-            TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
-            tw.WriteLine(".PictureNone {");
-            tw.WriteLine("float: none;");
-            tw.WriteLine("display: none;");
-            tw.WriteLine("text-align: center;");
-            tw.WriteLine("clear: none;");
             tw.WriteLine("}");
             tw.Close();
         }
@@ -3574,20 +2882,6 @@ namespace SIL.Tool
             xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
         }
 
-        /// <summary>
-        /// Calculate Column width of Picture
-        /// </summary>
-        /// <param name="pictureWidth"></param>
-        /// <param name="columnWidth"></param>
-        /// <param name="columnCount"></param>
-        /// <param name="columnGap"></param>
-        /// <returns></returns>
-        private bool IsPictureColumnWidthChange(double pictureWidth, double columnWidth, byte columnCount, byte columnGap)
-        {
-            bool isColumnWidthChange = pictureWidth > ((columnWidth - (columnGap * columnCount)) / 2);
-            return isColumnWidthChange;
-        }
-
         public void InsertBookPageBreak()
         {
             if (_projInfo.ProjectInputType.ToLower() != "scripture")
@@ -3598,28 +2892,47 @@ namespace SIL.Tool
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
-            string xPath = "//div[@class='scrBook']";
+            string bookName = string.Empty;
+            const string xPath = "//div[@class='scrBook']";
             XmlNodeList bookLists = xDoc.SelectNodes(xPath, namespaceManager);
-            if (bookLists.Count > 0)
+            if (bookLists != null && bookLists.Count > 0)
             {
                 for (int i = 0; i < bookLists.Count; i++)
                 {
                     XmlNode divNode = xDoc.CreateElement("div");
                     XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
-                    xmlAttribute.Value = "bookPageBreak";
+                    xmlAttribute.Value = "hideDiv";
                     if (divNode.Attributes != null) divNode.Attributes.Append(xmlAttribute);
                     divNode.InnerText = " ";
                     bookLists[i].InsertBefore(divNode, bookLists[i].FirstChild);
+
+                    XmlNode getBookName = bookLists[i].ParentNode;
+                    XmlNodeList bookNodeList = getBookName.SelectNodes("//span[@class='scrBookName']", namespaceManager);
+                    bookName = bookNodeList.Item(i).InnerText;
+
+
+                    XmlNode divReferenceNode = xDoc.CreateElement("div");
+                    XmlAttribute xmlReferenceAttribute = xDoc.CreateAttribute("class");
+                    xmlReferenceAttribute.Value = "BookReferenceDiv";
+                    if (divReferenceNode.Attributes != null) divReferenceNode.Attributes.Append(xmlReferenceAttribute);
+                    divReferenceNode.InnerText = bookName;
+                    if (i == 0)
+                    {
+                        bookLists[i].InsertBefore(divReferenceNode, bookLists[i].FirstChild);
+                    }
+                    else
+                    {
+                        //bookLists[i-1].InsertAfter(divReferenceNode, bookLists[i-1].LastChild);
+                        XmlNodeList columnList = bookLists[i - 1].SelectNodes(".//div[@class='columns']", namespaceManager);
+                        if (columnList != null && columnList.Count > 0)
+                        {
+                            columnList[columnList.Count - 1].InsertAfter(divReferenceNode, columnList[columnList.Count-1].LastChild);
+                        }
+                    }
+                    
                 }
             }
             xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
-
-            TextWriter tw = new StreamWriter(_projInfo.DefaultCssFileWithPath, true);
-            tw.WriteLine(".bookPageBreak {");
-            tw.WriteLine("page-break-before: always;");
-            tw.WriteLine("}");
-            tw.Close();
-
         }
 
         public void InsertEmptyDiv(string fileName)

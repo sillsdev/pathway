@@ -73,24 +73,6 @@ namespace Test.OpenOfficeConvert
         #endregion Setup
 
         #region Private Functions
-        private string _outputName = "styles.xml";
-        private string _expectedName = "styles.xml";
-        private string _errorMessage = " syntax failed in Styles.xml";
-        
-        private void FileTest(string file)
-        {
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + _outputName);
-            //_stylesXML.CreateStyles(input, output, _errorFile, true);
-
-            string expected = FileExpected(file + _expectedName);
-            XmlAssert.AreEqual(expected, output, file + _errorMessage);
-            // Reset defaults
-            _outputName = "styles.xml";
-            _expectedName = "styles.xml";
-            _errorMessage = " syntax failed in Styles.xml";
-        }
-
         private string FileInput(string fileName)
         {
             return Common.PathCombine(_inputPath, fileName);
@@ -100,17 +82,11 @@ namespace Test.OpenOfficeConvert
         {
             return Common.PathCombine(_outputPath, fileName);
         }
-
-        private string FileExpected(string fileName)
-        {
-            return Common.PathCombine(_expectedPath, fileName);
-        }
         #endregion Private Functions
 
         //#region File Comparision
         ///<summary>
         ///TD-244 (Update CSSParser to handle revised grammar)
-        /// <summary>
         /// </summary>      
         /*       [Test]
         public void OxesCSSTest()
@@ -207,7 +183,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD55 font-Weigth: 700 syntax in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void TextFontWeightTestA_Node()
@@ -227,7 +203,6 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD55 font-Weigth: 700 syntax in Styles.xml
-        /// <summary>
         /// </summary>      
         [Test]
         public void TextFontWeightTestB_Node()
@@ -247,7 +222,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD37 font-Weigtht: bold syntax in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void TextFontWeightTestC_Node()
@@ -266,7 +241,6 @@ namespace Test.OpenOfficeConvert
         }
         ///<summary>
         ///TD50 font-Weigtht: normal syntax in Styles.xml
-        /// <summary>
         /// </summary>      
         [Test]
         public void TextFontWeightTestD_Node()
@@ -286,7 +260,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD53 font-Weigtht: inherit; syntax in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void TextFontWeightTestE_Node()
@@ -313,7 +287,6 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-662 (Rudimentary table formatting)
-        /// <summary>
         /// </summary>      
         [Test]
         public void TableProperty()
@@ -333,7 +306,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD42 font-style: normal; syntax in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void TextFontStyleTestA_Node()
@@ -353,7 +326,6 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD43 font-style: inherit; syntax in Styles.xml
-        /// <summary>
         /// </summary>      
         [Test]
         public void TextFontStyleTestB_Node()
@@ -381,7 +353,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD49 font-family: in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         [Ignore("India team has to figure out why this fails")]
@@ -498,7 +470,6 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD60 font-size: 3cm; syntax in Styles.xml
-        /// <summary>
         /// </summary>      
         [Test]
         public void TextFontSizeTestA_Node()
@@ -528,7 +499,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD58 font-size: 1.5em; syntax in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void TextFontSizeTestB_Node()
@@ -563,7 +534,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD57 font-size: xx-small; syntax in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void TextFontSizeTestC_Node()
@@ -597,7 +568,6 @@ namespace Test.OpenOfficeConvert
         }
         ///<summary>
         ///TD61 font-size: inherit; syntax in Styles.xml
-        /// <summary>
         /// </summary>      
         [Test]
         public void TextFontSizeTestD_Node()
@@ -633,7 +603,6 @@ namespace Test.OpenOfficeConvert
 
                 ///<summary>
                 ///TD70 padding-bottom: 9pt; syntax in Styles.xml
-                /// <summary>
                 /// </summary>     
                 ///
                 [Ignore]
@@ -669,7 +638,7 @@ namespace Test.OpenOfficeConvert
         */
         ///<summary>
         ///TD81 page-break-before: always syntax in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void PageBreakBeforeTest_Node()
@@ -690,7 +659,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD63 font-variant: normal; syntax in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void TextFontVariantTestA_Node()
@@ -716,7 +685,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD51 font-weight: bolder;  in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void FontWeightBolder_Node()
@@ -752,7 +721,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-64 font: 80% san-serif; in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         [Ignore("India team has to figure out why this fails")]
@@ -827,7 +796,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-270 (Direction:ltr)
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void DirectionTest_Node()
@@ -861,7 +830,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-305 (widows) and TD-306(orphans)
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void WidowsandOrphans_Node()
@@ -883,7 +852,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD344 page-break-after: always syntax in Styles.xml
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void PageBreakAfterTest_Node()
@@ -903,7 +872,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD307 Open Office: border-style, border-color, border-width
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void BorderTest_Node()
@@ -929,7 +898,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD350 position:relative;
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void PositionTest_Node()
@@ -955,7 +924,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-407 Unit Conversions in Map Property;
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void UnitConversionTest_Node()
@@ -986,7 +955,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-425 Impliment Start and Last References in same page
-        /// <summary>
+
         /// </summary>
         [Ignore]      
         [Test]
@@ -1067,9 +1036,10 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-428 Impliment Start and Last References in Mirror page
-        /// <summary>
+
         /// </summary>      
-        //[Test]
+        [Test]
+        [Ignore]
         public void MirroredPageRefTest_Node()
         {
             const string file = "MirroredPageRef";
@@ -1158,7 +1128,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-245 Handle hyphenation related keywords
-        /// <summary>
+
         /// </summary>      
         [Test]
         public void HyphenationKeywordsTest_Node()
@@ -1187,7 +1157,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-46  - Open Office font-family: Gentium
-        /// <summary>
+
         /// 
         /// </summary>      
         //Note : This is already in Node check
@@ -1228,9 +1198,10 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-432 Charis SIL Font
-        /// <summary>
+
         /// </summary>      
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void CharisSILFont_Node()
         {
@@ -1250,9 +1221,10 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-59 (Open Office font-size: larger;) -  Doulos SIL Font
-        /// <summary>
+
         /// </summary>      
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void DoulosSILFont_Node()
         {
@@ -1293,7 +1265,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-663 Space between header and text  
-        /// <summary>
+
         /// </summary> 
         [Ignore]     
         [Test]
@@ -1327,7 +1299,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-3807 Page ends with Parallel reference
-        /// <summary>
+
         /// Add Keep with next paragraph property for parallel reference class
         /// </summary> 
         [Test]

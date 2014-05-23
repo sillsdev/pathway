@@ -63,6 +63,7 @@ namespace Test.PdfConvert
         #region Nunits
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void ScriptureReplaceBookNametoBookCodeTest()
         {
@@ -80,6 +81,7 @@ namespace Test.PdfConvert
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void CSSStyleForHeaderShowInPrincePdfTest()
         {

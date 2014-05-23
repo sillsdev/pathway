@@ -152,6 +152,7 @@ namespace Test.PsTool
         ///A test for SetDefaultCSS
         ///</summary>
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void SetDefaultCSSTest()
         {

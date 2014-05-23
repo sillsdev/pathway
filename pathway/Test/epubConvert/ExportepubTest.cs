@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -171,6 +172,53 @@ namespace Test.epubConvert
             Assert.AreEqual(3, nodes.Count, "Should be 3 chapter links for Titus");
             var next = nodes[nodes.Count - 1].NextSibling.NextSibling;
             Assert.AreEqual("Section_Head", next.Attributes.GetNamedItem("class").InnerText, "Section head should follow chapter links");
+        }
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void ExportDictionaryCSSFileComparisonTest()
+        {
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+            string appDataDir = Common.GetAllUserPath();
+            if (Directory.Exists(appDataDir))
+            {
+                Directory.Delete(appDataDir, true);
+            }
+            const string XhtmlName = "main.xhtml";
+            const string CssName = "main.css";
+            PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+            File.Copy(FileInput("FlexRev.xhtml"), FileOutput("FlexRev.xhtml"), true);
+            File.Copy(FileInput("FlexRev.css"), FileOutput("FlexRev.css"), true);
+            File.Copy(FileProg(@"Styles\Dictionary\epub.css"), FileOutput("epub.css"), true);
+            projInfo.IsReversalExist = true;
+            projInfo.IsLexiconSectionExist = true;
+            projInfo.ProjectInputType = "Dictionary";
+            projInfo.DefaultRevCssFileWithPath = Common.PathCombine(_inputPath, "FlexRev.css");
+            string expCssLine = "@import \"" + Path.GetFileName(projInfo.DefaultRevCssFileWithPath) + "\";";
+            Common.FileInsertText(FileOutput("epub.css"), expCssLine);
+            Param.LoadSettings();
+            projInfo.ProjectName = "EBook (epub)_" + DateTime.Now.Date.ToShortDateString() + "_" +
+                                   DateTime.Now.Date.ToShortTimeString();
+            var target = new Exportepub();
+            var actual = target.Export(projInfo);
+            Assert.IsTrue(actual);
+            var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+            var zf = new FastZip();
+            zf.ExtractZip(result, FileOutput("main"), ".*");
+
+            File.Copy(FileExpected("ExportDictionaryCSSFileComparison.epub"), FileOutput("ExportDictionaryCSSFileComparison.epub"), true);
+            result = FileOutput("ExportDictionaryCSSFileComparison.epub");
+            zf = new FastZip();
+            zf.ExtractZip(result, FileOutput("ExportDictionaryCSSFileComparison"), ".*");
+
+            TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparison/OEBPS/book.css"), new ArrayList { 3, 52, 93, 110, 112, 643, 652, 965 });
+            
         }
 
         [Test]
@@ -341,7 +389,6 @@ namespace Test.epubConvert
             return Common.PathCombine(_expectedPath, fileName);
         }
 
-
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -405,13 +452,6 @@ namespace Test.epubConvert
             zfExpected.ExtractZip(result, FileOutput("InsertBeforeAfterComparisonExpect"), ".*");
             FileCompare("InsertBeforeAfterComparison/OEBPS/PartFile00001_.xhtml", "InsertBeforeAfterComparisonExpect/OEBPS/PartFile00001_.xhtml");
             
-        }
-
-        private void FileCompare(string file)
-        {
-            string xhtmlOutput = FileOutput(file);
-            string xhtmlExpected = FileExpected(file);
-            TextFileAssert.AreEqual(xhtmlOutput, xhtmlExpected, file + " in epub ");
         }
 
         private void FileCompare(string file1, string file2)

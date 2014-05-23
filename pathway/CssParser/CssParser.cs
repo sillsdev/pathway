@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="CSSParser.cs" from='2009' to='2014' company='SIL International'>
+// <copyright file="CssParser.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -10,7 +10,7 @@
 // Last reviewed: 
 // 
 // <remarks>
-// Parsing the css files using ANTlr
+// Handling duplicate classes
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -20,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
-using ANTLR_CSS;
 using Antlr.Runtime.Tree;
 using System.Windows.Forms;
 using SIL.Tool;
@@ -38,25 +37,10 @@ namespace SIL.PublishingSolution
 
         #region Private Variables
         private bool _isReCycle;
-        // Page References
-        private bool _isRefLocAdded;
-        private bool _isPageNumLocAdded;
-        // Page: first References
-        private bool _isRefLocAddedF;
-        private bool _isPageNumLocAddedF;
-        // Page: left References
-        private bool _isRefLocAddedL;
-        private bool _isPageNumLocAddedL;
-        // Page: right References
-        private bool _isRefLocAddedR;
-        private bool _isPageNumLocAddedR;
-        string _filePath = string.Empty;
-        string _mergepath = string.Empty;
         readonly TreeNode _nodeTemp = new TreeNode();
         readonly TreeNode _nodeFinal = new TreeNode("ROOT");
         readonly ArrayList _checkRuleNode = new ArrayList();
         readonly ArrayList _checkMediaNode = new ArrayList();
-        readonly Dictionary<string, ArrayList> _pageRegionInfo = new Dictionary<string, ArrayList>();
         readonly Dictionary<string, ArrayList> _pagePropertyInfo = new Dictionary<string, ArrayList>();
 
         readonly ArrayList _checkPageName = new ArrayList();
@@ -93,15 +77,17 @@ namespace SIL.PublishingSolution
             var emptyTree = new TreeNode();
             if (inputCSSPath.Length <= 0 || !File.Exists(inputCSSPath)) return emptyTree;
 
-            _filePath = Path.GetDirectoryName(inputCSSPath);
-            _mergepath = Common.PathCombine(Path.GetTempPath(), "_MergedCSS.css");
             try
             {
                 string BaseCssFileWithPath = inputCSSPath;
                 ArrayList arrayCSSFile = Common.GetCSSFileNames(inputCSSPath, BaseCssFileWithPath);
                 arrayCSSFile.Add(BaseCssFileWithPath);
                 Common.RemovePreviousMirroredPage(arrayCSSFile);
-                GetErrorReport(inputCSSPath);
+                try
+                {
+                    GetErrorReport(inputCSSPath);
+                }
+                catch{}
                 string file = Common.MakeSingleCSS(inputCSSPath, "_MergedCSS.css");
                 var fileSize = new FileInfo(file);
                 if (fileSize.Length > 0)
@@ -343,35 +329,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        /// <summary>
-        /// To check the node has the search string, if yes remove node from the Tree
-        /// </summary>
-        /// <param name="regNode">Region node to be search</param>
-        /// <param name="_isRefLocAdded">bool value of Reference Node</param>
-        /// <param name="_isPageNumLocAdded">bool value of PageNumber Node</param>
-        private static void NodeCheckInRegion(TreeNode regNode, ref bool _isRefLocAdded, ref bool _isPageNumLocAdded)
-        {
-            foreach (TreeNode c in regNode.Nodes)
-            {
-                if (c.Text == "PROPERTY")
-                {
-                    if (c.Nodes.Count > 20 && (c.FirstNode.Text == "content"))
-                    {
-                        if (_isRefLocAdded)
-                            c.Remove();
-                        _isRefLocAdded = true;
-                    }
-                    else if (c.Nodes.Count > 5 && (c.Nodes[3].Text == "page"))
-                    {
-                        if (_isPageNumLocAdded)
-                            c.Remove();
-                        _isPageNumLocAdded = true;
-                    }
-                }
-            }
-        }
-
-
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// This method inherits the properties which having same classname in CSS file and added to the TreeNode.
@@ -416,7 +373,7 @@ namespace SIL.PublishingSolution
                                                 {
                                                     foreach (TreeNode mNode in pNode.Nodes)
                                                     {
-                                                        if (mNode.Text == "PROPERTY" && prpNode.Text == "PROPERTY" && mNode.FirstNode.Text == prpNode.FirstNode.Text)
+                                                        if (mNode != null && mNode.Text == "PROPERTY" && prpNode.Text == "PROPERTY" && mNode.FirstNode.Text == prpNode.FirstNode.Text)
                                                         {
                                                             pNode.Nodes.Remove(mNode);
                                                         }
@@ -489,100 +446,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void ParsePage_OLD(TreeNode node, TreeNode nodeFine)
-        {
-            string pageName = GetPageName(node);
-            if (!_pageRegionInfo.ContainsKey(pageName))
-            {
-                GetPageContains(node);
-                ArrayList tempPropertyList = GetPageInfo(pageName, _pagePropertyInfo);
-                _pageRegionInfo.Add(pageName, tempPropertyList);
-                nodeFine.Nodes.Add((TreeNode)node.Clone());
-            }
-            else
-            {
-                ArrayList tempPropertyList = GetPageInfo(pageName, _pagePropertyInfo);
-                ArrayList tempRegionList = GetPageInfo(pageName, _pageRegionInfo);
-                foreach (TreeNode propNode in node.Nodes)
-                {
-                    string propertyName;
-                    if (propNode.Text == "PROPERTY")
-                    {
-                        if (tempPropertyList.Contains(propNode.FirstNode.Text))
-                        {
-                            propertyName = propNode.FirstNode.Text;
-                            InsertPageProperty(pageName, propertyName, propNode, null);
-                            InsertNewPageProperty(nodeFine, pageName, tempPropertyList, propNode, _pagePropertyInfo);
-                        }
-                        else
-                        {
-                            InsertNewPageProperty(nodeFine, pageName, tempPropertyList, propNode, _pagePropertyInfo);
-                        }
-                    }
-                    else if (propNode.Text == "REGION")
-                    {
-                        if (tempRegionList.Contains(propNode.FirstNode.Text))
-                        {
-                            foreach (TreeNode regionNode in propNode.Nodes)
-                            {
-                                if (regionNode.Text == "PROPERTY")
-                                {
-                                    if (_isRefLocAdded && (regionNode.FirstNode.NextNode.Text != "string"))
-                                    {
-                                        propertyName = regionNode.FirstNode.Text;
-                                        InsertPageProperty(regionNode.Parent.FirstNode.Text, propertyName,
-                                                           regionNode, pageName);
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (pageName.IndexOf("first") > 0)
-                            {
-                                NodeCheckInRegion(propNode, ref _isRefLocAddedF, ref _isPageNumLocAddedF);
-                            }
-                            else if (pageName.IndexOf("left") > 0)
-                            {
-                                NodeCheckInRegion(propNode, ref _isRefLocAddedL, ref _isPageNumLocAddedL);
-                                _isRefLocAdded = true;
-                                _isPageNumLocAdded = true;
-                            }
-                            else if (pageName.IndexOf("right") > 0)
-                            {
-                                NodeCheckInRegion(propNode, ref _isRefLocAddedR, ref _isPageNumLocAddedR);
-                                _isRefLocAdded = true;
-                                _isPageNumLocAdded = true;
-                            }
-                            else
-                            {
-                                NodeCheckInRegion(propNode, ref _isRefLocAdded, ref _isPageNumLocAdded);
-                            }
-                            InsertNewPageProperty(nodeFine, pageName, tempRegionList, propNode, _pageRegionInfo);
-                        }
-                    }
-                }
-            }
-        }
-
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// To copy the arraylist value from the pageIngfo[pageName]
-        /// </summary>
-        /// <param name="pageName">current Page name</param>
-        /// <param name="pageInfo">Collection of Page Property</param>
-        /// <returns>returns ArrayList</returns>
-        /// -------------------------------------------------------------------------------------------
-        private static ArrayList GetPageInfo(string pageName, IDictionary<string, ArrayList> pageInfo)
-        {
-            var tempList = new ArrayList();
-            if (pageInfo.ContainsKey(pageName))
-            {
-                tempList.AddRange(pageInfo[pageName]);
-            }
-            return tempList;
-        }
-
         private ArrayList GetPropertyNames(TreeNode node)
         {
             ArrayList temp = new ArrayList();
@@ -594,68 +457,6 @@ namespace SIL.PublishingSolution
                 }
             }
             return temp;
-        }
-
-        private void GetPageContains_OLD(TreeNode node)
-        {
-            string pageName = "PAGE";
-            ArrayList regionExists;
-            foreach (TreeNode item in node.Nodes)
-            {
-                switch (item.Text)
-                {
-                    case "PSEUDO":
-                        pageName = pageName + _pageSeperator + item.FirstNode.Text;
-                        break;
-                    case "REGION":
-                        regionExists = new ArrayList();
-                        if (_pageRegionInfo.ContainsKey(pageName))
-                        {
-                            regionExists.AddRange(_pageRegionInfo[pageName]);
-                        }
-                        regionExists.Add(item.FirstNode.Text);
-                        if (pageName.IndexOf("first") > 0)
-                        {
-                            NodeCheckInRegion(item, ref _isRefLocAddedF, ref _isPageNumLocAddedF);
-                        }
-                        else if (pageName.IndexOf("left") > 0)
-                        {
-                            if (_isRefLocAdded)
-                                _isRefLocAddedL = true;
-                            if (_isPageNumLocAdded)
-                                _isPageNumLocAddedL = true;
-                            NodeCheckInRegion(item, ref _isRefLocAddedL, ref _isPageNumLocAddedL);
-                            _isRefLocAdded = true;
-                            _isPageNumLocAdded = true;
-                        }
-                        else if (pageName.IndexOf("right") > 0)
-                        {
-                            if (_isRefLocAdded)
-                                _isRefLocAddedR = true;
-                            if (_isPageNumLocAdded)
-                                _isPageNumLocAddedR = true;
-                            NodeCheckInRegion(item, ref _isRefLocAddedR, ref _isPageNumLocAddedR);
-                            _isRefLocAdded = true;
-                            _isPageNumLocAdded = true;
-                        }
-                        else
-                        {
-                            NodeCheckInRegion(item, ref _isRefLocAdded, ref _isPageNumLocAdded);
-                        }
-                        break;
-                    case "PROPERTY":
-                        regionExists = new ArrayList();
-                        if (_pagePropertyInfo.ContainsKey(pageName))
-                        {
-                            regionExists.AddRange(_pagePropertyInfo[pageName]);
-                        }
-                        regionExists.Add(item.FirstNode.Text);
-                        _pagePropertyInfo[pageName] = regionExists;
-                        break;
-                    default:
-                        break;
-                }
-            }
         }
 
         /// -------------------------------------------------------------------------------------------
@@ -704,33 +505,6 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-        /// ------------------------------------------------------------------------------------------- 
-        /// <summary>
-        /// To insert new page property in the Page node
-        /// </summary>
-        /// <param name="nodeFine">nodeFine(Main node)</param>
-        /// <param name="pageName">Pagename of the node</param>
-        /// <param name="tempList">ArrayList which contains existing property</param>
-        /// <param name="propNode">Property Node</param>
-        /// <param name="pageProperty">current Page Node</param>
-        /// -------------------------------------------------------------------------------------------
-        private static void InsertNewPageProperty(TreeNode nodeFine, string pageName, ArrayList tempList, TreeNode propNode, IDictionary<string, ArrayList> pageProperty)
-        {
-            tempList.Add(propNode.FirstNode.Text);
-            pageProperty[pageName] = tempList;
-            foreach (TreeNode item in nodeFine.Nodes)
-            {
-                if (item.Text == "PAGE")
-                {
-                    string currPage = GetPageName(item);
-                    if (currPage == pageName)
-                    {
-                        item.Nodes.Add((TreeNode)propNode.Clone());
-                    }
-                }
-            }
-        }
-
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// To get the page name with Pseudo value like page, page~first, page~left, page~right
@@ -801,12 +575,7 @@ namespace SIL.PublishingSolution
                         }
                         else if (parentClass.Length >= 2)
                         {
-                            if (parentClass[1].IndexOf("=") > 0)
-                            {
-                                parentClass[1] = parentClass[1].Substring(0, parentClass[1].IndexOf("="));
-                                InsertNewRuleProperty(node, "." + parentClass[1], 'd', false);
-                            }
-                            else if (parentClass[1].IndexOf(":") > 0)
+                            if (parentClass[1].IndexOf(":") > 0)
                             {
                                 parentClass[1] = parentClass[1].Substring(0, parentClass[1].IndexOf(":"));
                                 InsertNewRuleProperty(node, "." + parentClass[1], 'd', false);
@@ -860,7 +629,7 @@ namespace SIL.PublishingSolution
                     if (dir == 'u')
                     {
                         repProperty = GetPropertyList(RuleNode);
-                        InsertInfoNode(repNode, repProperty);
+                        InsertInfoNode(repNode, repProperty);                        
                         foreach (TreeNode childNode in repNode.Nodes)
                         {
                             if (childNode.Text == "PROPERTY" && isSameClass)
@@ -879,7 +648,7 @@ namespace SIL.PublishingSolution
                     else
                     {
                         repProperty = GetPropertyList(repNode);
-                        InsertInfoNode(repNode, repProperty);
+                        InsertInfoNode(repNode, repProperty);  
                         foreach (TreeNode childNode in RuleNode.Nodes)
                         {
                             if (childNode.Text == "PROPERTY")
@@ -912,7 +681,6 @@ namespace SIL.PublishingSolution
                 repNode.Nodes.Add(node.FirstNode);
             }
         }
-
         private string GetRuleClassname(TreeNode node)
         {
             string className = string.Empty;
@@ -920,7 +688,10 @@ namespace SIL.PublishingSolution
             {
                 if (childNode.Text == "CLASS")
                 {
-                    childNode.FirstNode.Text = childNode.FirstNode.Text.Replace("_", "").Replace("-", "");
+                    if (OutputType != Common.OutputType.EPUB)
+                    {
+                        childNode.FirstNode.Text = childNode.FirstNode.Text.Replace("_", "").Replace("-", "");
+                    }
                     className += "." + childNode.FirstNode.Text;
                     if (childNode.Nodes.Count > 1)
                     {
@@ -971,7 +742,7 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                        className += "*"; 
+                        className += "*";
                     }
                     
                 }
@@ -1002,7 +773,7 @@ namespace SIL.PublishingSolution
                         if(PNode.Text == "PROPERTY" && PNode.FirstNode.Text == newNode.FirstNode.Text)
                         {
                             PNode.Remove();
-                            snode.Nodes.Add((TreeNode)newNode.Clone());
+                            snode.Nodes.Add(newNode);
                         }
                     }
                     
@@ -1106,79 +877,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// To insert the new page property which are not existing in the current node.
-        /// </summary>
-        /// <param name="parentName">Class name of the current treeenode</param>
-        /// <param name="propertyName">Property name of the current treenode</param>
-        /// <param name="propNode">Treenode of the current node</param>
-        /// <param name="regionPage">Treenode of the Page</param>
-        /// -------------------------------------------------------------------------------------------
-        private void InsertPageProperty(string parentName, string propertyName, TreeNode propNode, string regionPage)
-        {
-            bool propertyFound = false;
-            bool regionPropertyFound = false;
-            foreach (TreeNode subNode in _nodeFinal.Nodes)
-            {
-                if (subNode.Text == "PAGE")
-                {
-                    string pageName = GetPageName(subNode);
-                    foreach (TreeNode item in subNode.Nodes)
-                    {
-                        if (item.Text == "REGION" && item.FirstNode.Text == parentName && regionPage == pageName)
-                        {
-                            AddProperty(propertyName, propNode, item, regionPropertyFound);
-                            regionPropertyFound = true;
-                            break;
-                        }
-                        if ((!regionPropertyFound) && item.Text == "PROPERTY" && pageName == parentName)
-                        {
-                            if (item.Nodes.Count > 0 && item.Nodes[0].Text == propertyName)
-                            {
-                                propertyFound = true;
-                                break;
-                            }
-                        }
-                    }
-                    if ((!propertyFound) && (!regionPropertyFound))
-                    {
-                        foreach (TreeNode item in _nodeFinal.Nodes)
-                        {
-                            if (item.Text == "PAGE")
-                            {
-                                string currPage = GetPageName(item);
-                                if (currPage == parentName)
-                                {
-                                    item.Nodes.Add((TreeNode)propNode.Clone());
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private static void AddProperty(string propertyName, TreeNode mainNode, TreeNode node, bool propertyFound)
-        {
-            foreach (TreeNode subNode in node.Nodes)
-            {
-                propertyFound = false;
-                if (subNode.Text == "PROPERTY" && subNode.Nodes[0].Text == propertyName)
-                {
-                    propertyFound = true;
-                }
-                if (propertyFound)
-                    break;
-            }
-            if (propertyFound == false)
-            {
-                node.Nodes.Add(mainNode);
-            }
-            return;
-        }
-
- 
         /// <summary>
         /// To list the errors found in CSS inout file and error's are added into ErrorList.
         /// </summary>
@@ -1215,7 +913,7 @@ namespace SIL.PublishingSolution
             }
             finally
             {
-                
+              
             }
 
         }
@@ -1227,7 +925,10 @@ namespace SIL.PublishingSolution
             {
                 if (childNode.Text == "CLASS")
                 {
-                    childNode.FirstNode.Text = childNode.FirstNode.Text.Replace("_", "").Replace("-", "");
+                    if (OutputType != Common.OutputType.EPUB)
+                    {
+                        childNode.FirstNode.Text = childNode.FirstNode.Text.Replace("_", "").Replace("-", "");
+                    }
                     getRuleInfo.ClassName += "." + childNode.FirstNode.Text;
                     if (childNode.Nodes.Count > 1)
                     {
@@ -1306,11 +1007,12 @@ namespace SIL.PublishingSolution
                         {
                             getRuleInfo.IsClassContent = true;
                         }
-                        for (int i = 1; i < childNode.Nodes.Count; i++)
+                        for (int i = 0; i < childNode.Nodes.Count; i++)
                         {
                             if ((!_isReCycle) && (childNode.Nodes[i].Text.IndexOf("'") >= 0 || childNode.Nodes[i].Text.IndexOf("\"") >= 0))
                             {
-                                childNode.Nodes[i].Text = Common.UnicodeConversion(childNode.Nodes[i].Text);
+                                
+                                childNode.Nodes[i].Text =  Common.UnicodeConversion(childNode.Nodes[i].Text);
                             }
                         }
                     }

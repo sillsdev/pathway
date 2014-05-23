@@ -8,6 +8,8 @@
 .Alternate_Reading {
     font-style: italic;
     display: inline;
+    /* http://dev.w3.org/csswg/css-gcpm/#creating-footnotes */
+    float: footnote;
     display: footnote;
     display: prince-footnote;
     position: footnote;
@@ -86,7 +88,7 @@
 .Intro_Section_Head {
     font-weight: bold;	/* cascaded environment */
     font-style: normal;	/* cascaded environment */
-    text-align: left;
+    text-align: center;
     text-indent: 0pt;
     margin-left: 0pt;
     margin-top: 3pt;
@@ -114,6 +116,8 @@
     text-indent: 0pt;
     margin-left: 0pt;
     display: inline;
+    /* http://dev.w3.org/csswg/css-gcpm/#creating-footnotes */
+    float: footnote;
     display: footnote;
     display: prince-footnote;
     position: footnote;
@@ -136,6 +140,8 @@
     text-indent: 1pt;
     margin-left: 0pt;
     display: inline;
+    /* http://dev.w3.org/csswg/css-gcpm/#creating-footnotes */
+    float: footnote;
     display: footnote;
     display: prince-footnote;
     position: footnote;

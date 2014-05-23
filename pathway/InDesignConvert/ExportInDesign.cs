@@ -105,7 +105,7 @@ namespace SIL.PublishingSolution
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
 
             SubProcess.AfterProcess(projInfo.ProjectFileWithPath);
-
+            fileName = Common.ReplaceSymbolToUnderline(fileName);
             string ldmlFullName = Common.PathCombine(projInfo.DictionaryPath, fileName + ".idml");
             Compress(projInfo.TempOutputFolder, ldmlFullName);
 

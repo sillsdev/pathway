@@ -52,8 +52,6 @@ namespace SIL.PublishingSolution
         private string fileNamewithPath = string.Empty;
         private static bool _fromPlugin;
         private string currentValidatingFileName = string.Empty;
-        private bool isCopySettingsFile = false;
-        private bool isCopyProjSettingsFile = false;
         #endregion
 
         #region Constructor
@@ -582,25 +580,6 @@ namespace SIL.PublishingSolution
             return true;
         }
 
-        //CssEditor contains a valid executable path
-        protected bool ValidateCssEditor(XmlNode parentNode)
-        {
-            try
-            {
-                const string methodname = "CssEditor";
-                const string xPath = "//stylePick/settings/property[@name=\"CssEditor\"]";
-                XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string path = childNode.Attributes["value"].Value;
-                if (!File.Exists(path))
-                {
-                    errorTag = methodname + "|" + path;
-                    return false;
-                }
-            }
-            catch { }
-            return true;
-        }
-
         //SelectedIcon exists in the program folder
         protected bool ValidateSelectedIcon(XmlNode parentNode)
         {
@@ -645,66 +624,6 @@ namespace SIL.PublishingSolution
             }
             catch { }
             return true;
-        }
-
-        //PrintVia setting contains the name of valid back end
-        protected bool ValidatePrintVia(XmlNode parentNode)
-        {
-            try
-            {
-                const string methodname = "PrintVia";
-                bool isExists = false;
-                const string xPath = "//stylePick/settings/property[@name=\"PrintVia\"]";
-                XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string result = childNode.Attributes["value"].Value;
-                if ((result.ToLower() == "word (using openoffice/libreoffice)") || (result.ToLower() == "pdf (using openoffice/libreoffice) "))
-                    result = "OpenOffice/LibreOffice";
-                List<IExportProcess> backEnd = LoadBackends();
-                foreach (IExportProcess process in backEnd)
-                {
-                    if (result.ToLower() == "pdf (using prince)")
-                    {
-                        isExists = true;
-                        break;
-                    }
-
-                    if (result.ToLower() == process.ExportType.ToLower())
-                    {
-                        isExists = true;
-                        break;
-                    }
-                }
-                errorTag = methodname;
-                return isExists;
-            }
-            catch { }
-            return true;
-        }
-
-        //To load the backends
-        protected static List<IExportProcess> LoadBackends()
-        {
-            string path = Path.GetDirectoryName(Param.SettingPath);
-            if (path.Contains("PathwaySupport"))
-                path = path.Replace("PathwaySupport", "");
-            var _backend = new List<IExportProcess>();
-            var directoryInfo = new DirectoryInfo(path);
-            _backend.Clear();
-            foreach (FileInfo fileInfo in directoryInfo.GetFiles("*Convert.dll"))
-            {
-                try
-                {
-                    string fileName = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Convert", "");
-                    fileName = "SIL.PublishingSolution.Export" + fileName;
-                    var exportProcess = Backend.CreateObject(fileInfo.FullName, fileName) as IExportProcess;
-                    _backend.Add(exportProcess);
-                }
-                catch (Exception)
-                {
-                    continue;
-                }
-            }
-            return _backend;
         }
 
         //ConfigureDictionary setting is True or False
@@ -844,34 +763,6 @@ namespace SIL.PublishingSolution
                         return false;
                     }
                 }
-            }
-            catch { }
-            return true;
-        }
-
-        //PrintVia default setting contains the name of valid back end
-        protected bool ValidateDefaultPrintVia(XmlNode parentNode)
-        {
-            try
-            {
-                const string methodname = "PrintVia";
-                bool isExists = false;
-                const string xPath = "//stylePick/defaultSettings/property[@name=\"PrintVia\"]";
-                XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string result = childNode.Attributes["value"].Value;
-                if ((result.ToLower() == "word (using openoffice/libreoffice)") || (result.ToLower() == "pdf (using openoffice/libreoffice) "))
-                    result = "OpenOffice/LibreOffice";
-                List<IExportProcess> backEnd = LoadBackends();
-                foreach (IExportProcess process in backEnd)
-                {
-                    if (result.ToLower() == process.ExportType.ToLower())
-                    {
-                        isExists = true;
-                        break;
-                    }
-                }
-                errorTag = methodname;
-                return isExists;
             }
             catch { }
             return true;

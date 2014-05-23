@@ -44,7 +44,6 @@ namespace Test.InDesignConvert
         #endregion
 
         #region Public Variables
-        public XPathNodeIterator NodeIter;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
         private CssTree _cssTree;
         #endregion
@@ -135,6 +134,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void FontFamily3()
         {
@@ -433,7 +433,7 @@ namespace Test.InDesignConvert
             _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             const string classname = "a_1";
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + classname + "\"]";
-            string fileNameWithPath = Common.PathCombine(_outputStyles, "styles.xml");
+            string fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
             XmlNodeList nodesList = Common.GetXmlNodeListInDesignNamespace(fileNameWithPath, XPath);
             XmlNode node = nodesList[0];
             XmlAttributeCollection attrb = node.Attributes;
@@ -615,7 +615,7 @@ namespace Test.InDesignConvert
         public void Position()
         {
             _className = "positionLeft";
-            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Position.css");
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/position.css");
             _cssProperty = _cssTree.CreateCssProperty(_input, true);
             _stylesXML.CreateIDStyles(_output, _cssProperty);
             FileNameWithPath = Common.PathCombine(_output, "Styles.xml");

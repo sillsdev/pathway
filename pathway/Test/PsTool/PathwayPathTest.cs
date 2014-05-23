@@ -45,6 +45,7 @@ namespace Test.PsTool
         ///??       Fw7 / Paratext 7.1 developer (resharper/NUnit) FieldWorks (Flex / TE): $(btaiRoot)PublishingSolution\PsExport\bin\Debug
         ///</summary>
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void GetPathwayDirTest()
         {

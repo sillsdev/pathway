@@ -81,7 +81,7 @@ namespace SIL.PublishingSolution
 #if (TIME_IT)
                 DateTime dt1 = DateTime.Now;    // time this thing
 #endif
-            var inProcess = new InProcess(0, 6);
+            var inProcess = new InProcess(0, 7);
             try
             {
                 var curdir = Environment.CurrentDirectory;
@@ -98,6 +98,8 @@ namespace SIL.PublishingSolution
                 string exportGoBibleInputPath = string.Empty;
                 exportGoBibleInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
                 processFolder = exportGoBibleInputPath;
+                PartialBooks.AddChapters(Common.PathCombine(processFolder, "SFM"));
+                inProcess.PerformStep();
                 CreateCollectionsTextFile(exportGoBibleInputPath);
                 inProcess.PerformStep();
                 var iconFullName = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore", "Icon.png"));
@@ -201,45 +203,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void DeleteTempFiles(string exportGoBibleInputPath)
-        {
-            if (File.Exists(Common.PathCombine(exportGoBibleInputPath, _iconFile)))
-            {
-                File.Delete(Common.PathCombine(exportGoBibleInputPath, _iconFile));
-            }
-
-            var outputFiles = Directory.GetFiles(processFolder);
-            foreach (var outputFile in outputFiles)
-            {
-                try
-                {
-                    // Did we modify this file during our export? If so, delete it
-                    if (outputFile.EndsWith(".xhtml"))
-                    {
-                        File.Delete(outputFile);
-                    }
-                    if (outputFile.EndsWith(".css"))
-                    {
-                        File.Delete(outputFile);
-                    }
-                    if (outputFile.EndsWith(".tmp"))
-                    {
-                        File.Delete(outputFile);
-                    }
-                    // delete the Scripture.de / Dictionary.de file as well
-                    if (outputFile.EndsWith(".de"))
-                    {
-                        File.Delete(outputFile);
-                    }
-                }
-                catch (Exception)
-                {
-                    // problem with this file - just continue with the next one
-                    continue;
-                }
-            }
-        }
-
         private string GoBibleCreatorTempDirectory(string goBibleFullPath)
         {
             var goBibleDirectoryName = Path.GetFileNameWithoutExtension(goBibleFullPath);
@@ -314,9 +277,9 @@ namespace SIL.PublishingSolution
                 sw.WriteLine("Source-Format: usfm");
                 sw.WriteLine("Source-FileExtension: sfm");
                 sw.WriteLine("Phone-Icon-Filepath: Icon.png");
-                sw.WriteLine("Application-Name: " + GetInfo(Param.Title));
-                sw.WriteLine("MIDlet-Vendor: " + GetInfo(Param.Title) + " Vendor");
-                sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org");
+                //sw.WriteLine("Application-Name: " + GetInfo(Param.Title)); - this line makes output unusable (bug in GoBibleCreator?)
+                sw.WriteLine("MIDlet-Vendor: " + GetInfo(Param.Publisher));
+                //sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org"); - we need to find out best place to post Go Bible modules
                 sw.WriteLine("Codepage: UTF-8");
                 sw.WriteLine("RedLettering: false");
                 sw.WriteLine(@"USFM-TitleTag: \id"); // + Common.BookNameTag);
@@ -394,12 +357,11 @@ namespace SIL.PublishingSolution
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
             var creatorFullPath = Common.PathCombine(goBibleCreatorPath, Creator);
-            var progFolder = SubProcess.JavaLocation(prog);
-            var progFullName = Common.PathCombine(progFolder, prog);
-            if (progFullName.EndsWith(".exe"))
-            {
-                progFullName = progFullName.Substring(0, progFullName.Length - 4);
-            }
+            //var progFullName = SubProcess.JavaFullName(prog);
+            //if (progFullName.EndsWith(".exe"))
+            //{
+            //    progFullName = progFullName.Substring(0, progFullName.Length - 4);
+            //}
             collectionFullName = Common.PathCombine(processFolder, "Collections.txt");
             var args = string.Format(@" -Xmx128m -jar ""{0}""  ""{1}""", creatorFullPath, collectionFullName);
             SubProcess.RedirectOutput = RedirectOutputFileName;

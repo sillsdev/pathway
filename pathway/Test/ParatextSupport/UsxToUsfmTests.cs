@@ -43,17 +43,10 @@ namespace Test.ParatextSupport
         private const string usxSectionHead = "<para style=\"s\">Section</para>";
         private const string usxParaVerse = "<para style=\"p\"><verse number=\"1\" style=\"v\" />Para 1</para>";
         private const string usxPara = "<para style=\"p\">Para</para><para style=\"p\">Para</para>";
-        private const string usxTable = "<table><row style=\"tr\"><cell style=\"tc1\" align=\"start\">cell 1</cell><cell style=\"tc2\" align=\"start\">cell 2</cell>" +
-            "<cell style=\"tc3\" align=\"start\">cell 3</cell></row><row style=\"tr\"><cell style=\"tc1\" align=\"start\">cell 1</cell>" +
-            "<cell style=\"tc2\" align=\"start\">cell 2</cell><cell style=\"tc3\" align=\"start\">cell 3</cell></row></table>";
-
         private const string introSectionHead = "<h1 class=\"Intro_Section_Head\"><span lang=\"zxx\">Intro Section</span></h1>";
         private const string introSectionContent = "<p class=\"Intro_Paragraph\"><span lang=\"zxx\">Intro Para</span></p>";
-        private const string table = "<table><tr style=\"tr\"><td style=\"tc1\">cell 1</td><td style=\"tc2\">cell 2</td><td style=\"tc3\">cell 3</td></tr>" +
-            "<tr style=\"tr\"><td style=\"tc1\">cell 1</td><td style=\"tc2\">cell 2</td><td style=\"tc3\">cell 3</td></tr></table>";
         private const string chapterVersePara = "<p class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span>" +
             "<span class=\"Verse_Number\" lang=\"zxx\">1</span><span lang=\"zxx\">Para 1</span></p>";
-        private const string chapterPara = "<p class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span><span lang=\"zxx\">Para</span></p>";
         private const string scrSectionHead = "<h1 class=\"Section_Head\"><span lang=\"zxx\">Section</span></h1>";
         private const string scrSectionContent = "<p class=\"Paragraph\"><span lang=\"zxx\">Para</span></p><p class=\"Paragraph\"><span lang=\"zxx\">Para</span></p>";
 
@@ -71,13 +64,6 @@ namespace Test.ParatextSupport
             "<span class=\"scrBookCode\" lang=\"zxx\">JDG</span>";
         private const string title = "<div class=\"Title_Main\"><span class=\"Title_Secondary\" lang=\"zxx\">OT: Narrative</span><span lang=\"zxx\">Judges</span></div>";
         private const string bookClose = "</div></body></html>";
-        private const string expectedIntroSectionHead = "<div class=\"Intro_Section_Head\"><span lang=\"zxx\">intro section</span></div>";
-        private const string expectedCreatedIntroSectionHead = "<div class=\"Intro_Section_Head\"><span lang=\"zxx\"></span></div>";
-        private const string expectedIntroSectionContent = "<div class=\"Intro_Paragraph\"><span lang=\"zxx\">intro para</span></div>";
-        private const string expectedChapterVersePara = "<div class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span><span class=\"Verse_Number\" lang=\"zxx\">1</span></div>";
-        private const string expectedScrSectionHead = "<div class=\"Section_Head\"><span lang=\"zxx\">Section</span></div>";
-        private const string expectedCreatedScrSectionHead = "<div class=\"Section_Head\"><span lang=\"zxx\"></span></div>";
-        private const string expectedScrSectionContent = "<div class=\"Paragraph\"><span lang=\"zxx\">para content</span><span lang=\"zxx\">Para</span></div>";
         #endregion
 
         private XslCompiledTransform usxToXhtmlXslt;
@@ -89,7 +75,7 @@ namespace Test.ParatextSupport
         {
             xslParams = new Dictionary<string, object>();
             DateTime dateTime = new DateTime(2013, 8, 27);
-            xslParams.Add("dateTime", dateTime.Date);
+            xslParams.Add("dateTime", String.Format("{0:s}", dateTime));
             xslParams.Add("user", "Tester");
             xslParams.Add("projName", "TestProj");
             xslParams.Add("stylesheet", "usfm");

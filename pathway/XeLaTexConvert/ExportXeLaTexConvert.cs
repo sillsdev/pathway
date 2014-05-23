@@ -22,6 +22,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Xsl;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -48,6 +49,8 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _tocPropertyList = new Dictionary<string, string>();
         private Dictionary<string, string> _langFontCodeandName;
         private Dictionary<string, string> _fontLangMap = new Dictionary<string, string>();
+        private readonly XslCompiledTransform _xhtmlXelatexXslProcess = new XslCompiledTransform();
+        private List<string> _xeLaTexPropertyFullFontStyleList = new List<string>();
         #region Public Functions
         public string ExportType
         {
@@ -77,6 +80,14 @@ namespace SIL.PublishingSolution
         /// </summary>
         public bool Export(PublicationInformation projInfo)
         {
+
+            _xhtmlXelatexXslProcess.Load(XmlReader.Create(Common.UsersXsl("AddBidi.xsl")));
+
+            if (_inputType.ToLower() == "dictionary")
+            {
+                Common.ApplyXslt(projInfo.DefaultXhtmlFileWithPath, _xhtmlXelatexXslProcess);
+            }
+
             _langFontDictionary = new Dictionary<string, string>();
             _langFontCodeandName = new Dictionary<string, string>();
             string mainXhtmlFileWithPath = projInfo.DefaultXhtmlFileWithPath;
@@ -117,7 +128,7 @@ namespace SIL.PublishingSolution
 
             BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-            
+
             if (projInfo.DefaultXhtmlFileWithPath.Contains("FlexRev.xhtml"))
             {
                 projInfo.IsReversalExist = false;
@@ -141,7 +152,6 @@ namespace SIL.PublishingSolution
             StreamWriter xeLatexFile = new StreamWriter(xeLatexFullFile);
 
             Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
-            Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
             XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
             xeLaTexStyles.LangFontDictionary = _langFontCodeandName;
             classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
@@ -185,6 +195,10 @@ namespace SIL.PublishingSolution
 
             if (projInfo.IsReversalExist)
             {
+                if (_inputType.ToLower() == "dictionary")
+                {
+                    Common.ApplyXslt(projInfo.DefaultXhtmlFileWithPath, _xhtmlXelatexXslProcess);
+                }
                 if (ExportReversalIndex(projInfo))
                 {
                     _reversalIndexTexCreated = true;
@@ -213,7 +227,9 @@ namespace SIL.PublishingSolution
                 }
             }
 
+            modifyXeLaTexStyles.XeLaTexPropertyFontStyleList = _xeLaTexPropertyFullFontStyleList;
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include, _langFontCodeandName);
+
             Dictionary<string, string> imgPath = new Dictionary<string, string>();
             if (newProperty.ContainsKey("ImagePath"))
             {
@@ -244,7 +260,7 @@ namespace SIL.PublishingSolution
 
             if (File.Exists(pdfFullName))
             {
-                Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif,.tex,.log,.exe,.xml,.jar",
+                Common.CleanupExportFolder(xeLatexFullFile, ".tmp,.de,.jpg,.tif,.log,.exe,.xml,.jar",
                                            "layout.css,mergedmain1,preserve", string.Empty);
                 CreateRAMP(projInfo);
             }
@@ -307,32 +323,19 @@ namespace SIL.PublishingSolution
 
                 StreamWriter xeLatexFile = new StreamWriter(xeLatexCopyrightFile);
                 Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
-                Dictionary<string, Dictionary<string, string>> xeTexAllClass =
-                    new Dictionary<string, Dictionary<string, string>>();
                 XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
                 xeLaTexStyles.LangFontDictionary = _langFontCodeandName;
                 classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
 
                 XeLaTexContent xeLaTexContent = new XeLaTexContent();
                 Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
-                Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo,
-                                                                                                          cssClass,
-                                                                                                          xeLatexFile,
-                                                                                                          classInlineStyle,
-                                                                                                          cssTree.
-                                                                                                              SpecificityClass,
-                                                                                                          cssTree.
-                                                                                                              CssClassOrder,
-                                                                                                          classInlineText, pageWidth);
+                xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 
                 _xelatexDocumentOpenClosedRequired = true; //Don't change the place.
                 CloseDocument(xeLatexFile, false, string.Empty);
-                string include = xeLaTexStyles.PageStyle.ToString();
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
                 modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
-                modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
-                                                    xeLatexCopyrightFile, include, _langFontCodeandName);
 
                 string copyright = GetLanguageInfo(mainXhtmlFileWithPath, projInfo);
                 InsertInFile(xeLatexCopyrightFile, "copyright information", copyright);
@@ -466,7 +469,7 @@ namespace SIL.PublishingSolution
                 modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
                 modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
                                                     xeLatexRevesalIndexFile, include, _langFontCodeandName);
-
+                _xeLaTexPropertyFullFontStyleList = modifyXeLaTexStyles.XeLaTexPropertyFontStyleList;
 
                 if (newProperty.ContainsKey("TableofContent") && newProperty["TableofContent"].Count > 0)
                 {
@@ -632,7 +635,7 @@ namespace SIL.PublishingSolution
                         if (File.Exists(pdfFullName))
                         {
 
-                            pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex", _inputType);
+                            Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex", _inputType);
                         }
                     }
                     catch { }
@@ -643,7 +646,7 @@ namespace SIL.PublishingSolution
                 Directory.SetCurrentDirectory(originalDirectory);
                 pdfFullName = CopyProcessResult(xeLaTexInstallationPath, texNameOnly, ".pdf", userFolder);
                 string logFullName = CopyProcessResult(xeLaTexInstallationPath, texNameOnly, ".log", userFolder);
-
+                Console.WriteLine(logFullName);
                 if (openFile && File.Exists(pdfFullName))
                 {
                     try
@@ -726,7 +729,6 @@ namespace SIL.PublishingSolution
         /// <param name="xhtmlFileName">File name to parse</param>
         private void BuildLanguagesList(string xhtmlFileName)
         {
-            bool isInputTypeFound = false;
             XmlTextReader _reader = Common.DeclareXmlTextReader(xhtmlFileName, true);
             while (_reader.Read())
             {
@@ -816,7 +818,6 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// now go check to see if we're working on scripture or dictionary data
         /// </summary>
-        /// <param name="xhtmlFileName">File name to parse</param>
         private void FindInputType(XmlTextReader _reader)
         {
             if (_isInputTypeFound)
@@ -841,86 +842,6 @@ namespace SIL.PublishingSolution
 
         }
         #endregion
-
-        /// <summary>
-        /// Parses the specified file and sets the internal languages list to all the languages found in the file.
-        /// </summary>
-        /// <param name="xhtmlFileName">File name to parse</param>
-        private void BuildLanguagesListOLD(string xhtmlFileName)
-        {
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
-            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            // should only be one of these after splitting out the chapters.
-            XmlNodeList nodes;
-            nodes = xmlDocument.SelectNodes("//@lang", namespaceManager);
-            if (nodes.Count > 0)
-            {
-                foreach (XmlNode node in nodes)
-                {
-                    string value;
-                    if (_langFontDictionary.TryGetValue(node.Value, out value))
-                    {
-                        // already have this item in our list - continue
-                        continue;
-                    }
-                    if (node.Value.ToLower() == "utf-8")
-                    {
-                        // TE-9078 "utf-8" showing up as language in html tag - remove when fixed
-                        continue;
-                    }
-                    // add an entry for this language in the list (the * gets overwritten in BuildFontsList())
-                    _langFontDictionary.Add(node.Value, "*");
-                }
-            }
-
-
-
-            // now go check to see if we're working on scripture or dictionary data
-            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
-            if (nodes.Count == 0)
-            {
-                // not in this file - this might be scripture?
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                if (nodes.Count > 0)
-                    _inputType = "scripture";
-            }
-            else
-            {
-                _inputType = "dictionary";
-            }
-        }
-
-        private void GetXhtmlFileFontCodeandFontNameOLD(string xhtmlFileName)
-        {
-            if (!File.Exists(xhtmlFileName)) return;
-            XmlDocument xdoc = new XmlDocument { XmlResolver = null };
-            xdoc.Load(xhtmlFileName);
-            XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
-            if (metaNodes != null && metaNodes.Count > 0)
-            {
-                try
-                {
-                    foreach (XmlNode metaNode in metaNodes)
-                    {
-                        FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
-                        foreach (FontFamily systemFont in systemFontList)
-                        {
-                            if (metaNode.Attributes["content"].Value.ToLower() == systemFont.Name.ToLower())
-                            {
-                                _langFontCodeandName.Add(metaNode.Attributes["name"].Value, metaNode.Attributes["content"].Value);
-                                break;
-                            }
-                        }
-                    }
-                }
-                catch { }
-            }
-        }
 
         #endregion
     }

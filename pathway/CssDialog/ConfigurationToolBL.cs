@@ -43,7 +43,6 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> standardSize = new Dictionary<string, string>();
         public string Caption = "Pathway Configuration Tool";
         public TraceSwitch _traceOnBL = new TraceSwitch("General", "Trace level for application");
-        private List<string> _infoValue = new List<string>();
         private List<string> _propertyValue = new List<string>();
         private List<string> _groupPropertyValue = new List<string>();
         private bool _isUnixOS = false;
@@ -98,12 +97,17 @@ namespace SIL.PublishingSolution
         public int ColumnFile = 6;
         public int PreviewFile1 = 7;
         public int PreviewFile2 = 8;
+        protected bool IsUnixOs
+        {
+            get { return _isUnixOS; }
+            set { _isUnixOS = value; }
+        }
+
         #endregion
 
         #region Protected Variables
         protected readonly ArrayList _cssNames = new ArrayList();
         ErrorProvider _errProvider = new ErrorProvider();
-        DictionarySetting _ds = new DictionarySetting();
         protected bool _isCreatePreview1;
         protected string _caption = "Pathway Configuration Tool";
         protected string _redoUndoBufferValue = string.Empty;
@@ -504,14 +508,23 @@ namespace SIL.PublishingSolution
         {
             get
             {
+                string result;
                 string task = "pictureRight";
                 string key = "display";
-                string display = GetValue(task, key, "No");
-                if (display == "none")
+                string display = GetValue(task, key, "Frame");
+                if (display == "block")
                 {
-                    return "No";
+                    result =  "Paragraph";
                 }
-                return "Yes";
+                else if (display == "none")
+                {
+                    result = "No";
+                }
+                else
+                {
+                    result = "Frame";
+                }
+                return result;
             }
         }
 
@@ -662,13 +675,7 @@ namespace SIL.PublishingSolution
                 return ((AssemblyFileVersionAttribute)attributes[0]).Version;
             }
         }
-
-        public bool IsUnixOs
-        {
-            get { return _isUnixOS; }
-            set { _isUnixOS = value; }
-        }
-
+        
         /// <summary>
         /// Method to add the file location to copy the attached files.
         /// </summary>
@@ -720,18 +727,6 @@ namespace SIL.PublishingSolution
                 projType = Param.Value["InputType"];
             }
             return projType;
-        }
-
-        protected void AddNewRow()
-        {
-            DataRow row = DataSetForGrid.Tables["Styles"].NewRow(); ;
-            DataSetForGrid.Tables["Styles"].Rows.Add(row);
-            cTool.StylesGrid.Refresh();
-            SelectRow(cTool.StylesGrid, "");
-            ShowInfoValue();
-            string newName = GetNewStyleName(_cssNames, "new");
-            cTool.TxtName.Text = newName;
-            SetInfoCaption(newName);
         }
 
         protected void SetFocusToName()
@@ -1042,7 +1037,7 @@ namespace SIL.PublishingSolution
         /// transfers grid row values to InfoPanel
         ///
         /// 
-        /// </summary
+        /// </summary>
         protected void ShowInfoValue()
         {
             if (!(_screenMode == ScreenMode.View || _screenMode == ScreenMode.Edit)) return;
@@ -1183,23 +1178,7 @@ namespace SIL.PublishingSolution
                         filePath = Param.SettingPath;
                     }
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                    foreach (XmlNode VARIABLE in baseNode1)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value;
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        if (attribName.ToLower() == "fileproduced")
-                        {
-                            cTool.DdlFiles.SelectedItem = attribValue;
-                        }
-                        else if (attribName.ToLower() == "redletter")
-                        {
-                            cTool.DdlRedLetter.SelectedItem = attribValue;
-                        }
-                        else if (attribName.ToLower() == "language")
-                        {
-                            cTool.DdlLanguage.SelectedItem = attribValue;
-                        }
-                    }
+                    ShowMoblieCSS(baseNode1);
                     SetMobileSummary(null, null);
                 }
                 else if (MediaType.ToLower() == "others")
@@ -1208,63 +1187,7 @@ namespace SIL.PublishingSolution
                     // show/hide epub UI controls based on the input type
                     SetEpubUIControls(inputTypeBL == "Scripture");
 
-                    foreach (XmlNode VARIABLE in baseNode1)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        switch (attribName)
-                        {
-                            case "embedfonts":
-                                cTool.ChkEmbedFonts.Checked = (attribValue == "Yes") ? true : false;
-                                bool bEnabled = cTool.ChkEmbedFonts.Checked;
-                                cTool.ChkIncludeFontVariants.Enabled = bEnabled;
-                                cTool.DdlDefaultFont.Enabled = bEnabled;
-                                cTool.DdlMissingFont.Enabled = bEnabled;
-                                cTool.DdlNonSILFont.Enabled = bEnabled;
-                                break;
-                            case "includefontvariants":
-                                cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "includeimage":
-                                cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "pagebreak":
-                                cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "maximagewidth":
-                                cTool.TxtMaxImageWidth.Text = attribValue;
-                                break;
-                            case "toclevel":
-                                cTool.DdlTocLevel.SelectedItem = attribValue;
-                                break;
-                            case "basefontsize":
-                                cTool.TxtBaseFontSize.Text = attribValue;
-                                break;
-                            case "defaultlineheight":
-                                cTool.TxtDefaultLineHeight.Text = attribValue;
-                                break;
-                            case "defaultalignment":
-                                cTool.DdlDefaultAlignment.SelectedItem = attribValue;
-                                break;
-                            case "chapternumbers":
-                                cTool.DdlChapterNumbers.SelectedItem = attribValue;
-                                break;
-                            case "references":
-                                cTool.DdlReferences.SelectedItem = attribValue;
-                                break;
-                            case "defaultfont":
-                                cTool.DdlDefaultFont.SelectedItem = attribValue;
-                                break;
-                            case "missingfont":
-                                cTool.DdlMissingFont.SelectedItem = attribValue;
-                                break;
-                            case "nonsilfont":
-                                cTool.DdlNonSILFont.SelectedItem = attribValue;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                    ShowOthersCSS(baseNode1);
                     SetOthersSummary(null, null);
                 }
                 else if (MediaType.ToLower() == "web")
@@ -1276,79 +1199,7 @@ namespace SIL.PublishingSolution
                     // show/hide web UI controls based on the input type
                     SetWebUIControls(inputTypeBL == "Dictionary");
 
-                    foreach (XmlNode VARIABLE in baseNode1)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        switch (attribName)
-                        {
-                            case "ftpaddress":
-                                cTool.TxtFtpAddress.Text = attribValue;
-                                break;
-                            case "ftpuserid":
-                                cTool.TxtFtpUsername.Text = attribValue;
-                                break;
-                            case "ftppwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtFtpPassword.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                else
-                                {
-                                    cTool.TxtFtpPassword.Text = "";
-                                }
-                                break;
-                            case "dbservername":
-                                cTool.TxtSqlServerName.Text = attribValue;
-                                break;
-                            case "dbname":
-                                cTool.TxtSqlDBName.Text = attribValue;
-                                break;
-                            case "dbuserid":
-                                cTool.TxtSqlUsername.Text = attribValue;
-                                break;
-                            case "dbpwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                else
-                                {
-                                    cTool.TxtSqlPassword.Text = "";
-                                }
-                                break;
-                            case "weburl":
-                                cTool.TxtWebUrl.Text = attribValue;
-                                break;
-                            case "webadminusrnme":
-                                cTool.TxtWebAdminUsrNme.Text = attribValue;
-                                break;
-                            case "webadminpwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                else
-                                {
-                                    cTool.TxtWebAdminPwd.Text = "";
-                                }
-                                break;
-                            case "webadminsitenme":
-                                cTool.TxtWebAdminSiteNme.Text = attribValue;
-                                break;
-                            case "webemailid":
-                                cTool.TxtWebEmailId.Text = attribValue;
-                                break;
-                            case "webftpfldrnme":
-                                cTool.TxtWebFtpFldrNme.Text = attribValue;
-                                break;
-                            case "comment":
-                                cTool.TxtComment.Text = attribValue;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                    ShowWebCSS(baseNode1, hashUtil);
                     SetWebSummary(null, null);
                 }
                 else
@@ -1368,30 +1219,162 @@ namespace SIL.PublishingSolution
             _screenMode = ScreenMode.Edit;
         }
 
-        /// <summary>
-        /// Save Info tab initial value
-        /// </summary>
-        private void SaveInfoValue()
+        private void ShowMoblieCSS(XmlNodeList baseNode1)
         {
-            Control.ControlCollection ctls = cTool.TabControl1.TabPages[0].Controls;
-            _infoValue.Clear();
-            foreach (Control control in ctls)
+            foreach (XmlNode VARIABLE in baseNode1)
             {
-                if (control.GetType().Name == "Label")
-                    continue;
-
-                string val;
-
-                if (control.GetType().Name == "CheckBox")
+                string attribName = VARIABLE.Attributes["name"].Value;
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                if (attribName.ToLower() == "fileproduced")
                 {
-                    CheckBox checkBox = (CheckBox)control;
-                    val = checkBox.Checked.ToString();
+                    cTool.DdlFiles.SelectedItem = attribValue;
                 }
-                else
+                else if (attribName.ToLower() == "redletter")
                 {
-                    val = control.Text;
+                    cTool.DdlRedLetter.SelectedItem = attribValue;
                 }
-                _infoValue.Add(val);
+                else if (attribName.ToLower() == "language")
+                {
+                    cTool.DdlLanguage.SelectedItem = attribValue;
+                }
+            }
+        }
+
+        private void ShowOthersCSS(XmlNodeList baseNode1)
+        {
+            foreach (XmlNode VARIABLE in baseNode1)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                switch (attribName)
+                {
+                    case "embedfonts":
+                        cTool.ChkEmbedFonts.Checked = (attribValue == "Yes") ? true : false;
+                        bool bEnabled = cTool.ChkEmbedFonts.Checked;
+                        cTool.ChkIncludeFontVariants.Enabled = bEnabled;
+                        cTool.DdlDefaultFont.Enabled = bEnabled;
+                        cTool.DdlMissingFont.Enabled = bEnabled;
+                        cTool.DdlNonSILFont.Enabled = bEnabled;
+                        break;
+                    case "includefontvariants":
+                        cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "includeimage":
+                        cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "pagebreak":
+                        cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "maximagewidth":
+                        cTool.TxtMaxImageWidth.Text = attribValue;
+                        break;
+                    case "toclevel":
+                        cTool.DdlTocLevel.SelectedItem = attribValue;
+                        break;
+                    case "basefontsize":
+                        cTool.TxtBaseFontSize.Text = attribValue;
+                        break;
+                    case "defaultlineheight":
+                        cTool.TxtDefaultLineHeight.Text = attribValue;
+                        break;
+                    case "defaultalignment":
+                        cTool.DdlDefaultAlignment.SelectedItem = attribValue;
+                        break;
+                    case "chapternumbers":
+                        cTool.DdlChapterNumbers.SelectedItem = attribValue;
+                        break;
+                    case "references":
+                        cTool.DdlReferences.SelectedItem = attribValue;
+                        break;
+                    case "defaultfont":
+                        cTool.DdlDefaultFont.SelectedItem = attribValue;
+                        break;
+                    case "missingfont":
+                        cTool.DdlMissingFont.SelectedItem = attribValue;
+                        break;
+                    case "nonsilfont":
+                        cTool.DdlNonSILFont.SelectedItem = attribValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void ShowWebCSS(XmlNodeList baseNode1, HashUtilities hashUtil)
+        {
+            foreach (XmlNode VARIABLE in baseNode1)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                switch (attribName)
+                {
+                    case "ftpaddress":
+                        cTool.TxtFtpAddress.Text = attribValue;
+                        break;
+                    case "ftpuserid":
+                        cTool.TxtFtpUsername.Text = attribValue;
+                        break;
+                    case "ftppwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtFtpPassword.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        else
+                        {
+                            cTool.TxtFtpPassword.Text = "";
+                        }
+                        break;
+                    case "dbservername":
+                        cTool.TxtSqlServerName.Text = attribValue;
+                        break;
+                    case "dbname":
+                        cTool.TxtSqlDBName.Text = attribValue;
+                        break;
+                    case "dbuserid":
+                        cTool.TxtSqlUsername.Text = attribValue;
+                        break;
+                    case "dbpwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        else
+                        {
+                            cTool.TxtSqlPassword.Text = "";
+                        }
+                        break;
+                    case "weburl":
+                        cTool.TxtWebUrl.Text = attribValue;
+                        break;
+                    case "webadminusrnme":
+                        cTool.TxtWebAdminUsrNme.Text = attribValue;
+                        break;
+                    case "webadminpwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        else
+                        {
+                            cTool.TxtWebAdminPwd.Text = "";
+                        }
+                        break;
+                    case "webadminsitenme":
+                        cTool.TxtWebAdminSiteNme.Text = attribValue;
+                        break;
+                    case "webemailid":
+                        cTool.TxtWebEmailId.Text = attribValue;
+                        break;
+                    case "webftpfldrnme":
+                        cTool.TxtWebFtpFldrNme.Text = attribValue;
+                        break;
+                    case "comment":
+                        cTool.TxtComment.Text = attribValue;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -1421,11 +1404,37 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private string CopiedToTempLanguageXMLFile(string languageXmlFile)
+        {
+            string fileName = "Languages.xml";
+            string xmlFileNameWithPath = languageXmlFile;
+            string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
+            if (Directory.Exists(tempFolder))
+            {
+                try
+                {
+                    DirectoryInfo di = new DirectoryInfo(tempFolder);
+                    Common.CleanDirectory(di);
+                }
+                catch
+                {
+                    tempFolder = Common.PathCombine(Path.GetTempPath(),
+                                                    "SilPathWay" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
+                }
+            }
+            Directory.CreateDirectory(tempFolder);
+            string tempFile = Common.PathCombine(tempFolder, fileName);
+
+            File.Copy(xmlFileNameWithPath, tempFile, true);
+            return tempFile;
+        }
+
         private void LoadData()
         {
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             string executablePath = Common.GetApplicationPath();
             executablePath = Common.PathCombine(executablePath, @"GoBible\Localizations\Languages.xml");
+            executablePath = CopiedToTempLanguageXMLFile(executablePath);
             if (!File.Exists(executablePath)) return;
             xDoc.Load(executablePath);
             string XPath = "//Languages/language";
@@ -1737,23 +1746,7 @@ namespace SIL.PublishingSolution
                     cTool.TabControl1.TabPages.Insert(2, tabpreview);
 
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                    foreach (XmlNode VARIABLE in baseNode1)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value;
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        if (attribName.ToLower() == "fileproduced")
-                        {
-                            cTool.DdlFiles.SelectedItem = attribValue;
-                        }
-                        else if (attribName.ToLower() == "redletter")
-                        {
-                            cTool.DdlRedLetter.SelectedItem = attribValue;
-                        }
-                        else if (attribName.ToLower() == "language")
-                        {
-                            cTool.DdlLanguage.SelectedItem = attribValue;
-                        }
-                    }
+                    SetMobileProperty(baseNode1);
                     SetMobileSummary(null, null);
                     break;
                 case "others":
@@ -1764,60 +1757,7 @@ namespace SIL.PublishingSolution
                     // show/hide chapter numbers and references UI
                     SetEpubUIControls(inputTypeBL == "Scripture");
 
-                    foreach (XmlNode VARIABLE in baseNode)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        switch (attribName)
-                        {
-                            case "embedfonts":
-                                cTool.ChkEmbedFonts.Checked = (attribValue == "Yes") ? true : false;
-                                bool bEnabled = cTool.ChkEmbedFonts.Checked;
-                                cTool.ChkIncludeFontVariants.Enabled = bEnabled;
-                                cTool.DdlDefaultFont.Enabled = bEnabled;
-                                cTool.DdlMissingFont.Enabled = bEnabled;
-                                cTool.DdlNonSILFont.Enabled = bEnabled;
-                                break;
-                            case "includefontvariants":
-                                cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "includeimage":
-                                cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "pagebreak":
-                                cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
-                                break;
-                            case "maximagewidth":
-                                cTool.TxtMaxImageWidth.Text = attribValue;
-                                break;
-                            case "basefontsize":
-                                cTool.TxtBaseFontSize.Text = attribValue;
-                                break;
-                            case "defaultlineheight":
-                                cTool.TxtDefaultLineHeight.Text = attribValue;
-                                break;
-                            case "defaultalignment":
-                                cTool.DdlDefaultAlignment.SelectedItem = attribValue;
-                                break;
-                            case "chapternumbers":
-                                cTool.DdlChapterNumbers.SelectedItem = attribValue;
-                                break;
-                            case "references":
-                                cTool.DdlReferences.SelectedItem = attribValue;
-                                break;
-                            case "defaultfont":
-                                cTool.DdlDefaultFont.SelectedItem = attribValue;
-                                break;
-                            case "missingfont":
-                                cTool.DdlMissingFont.SelectedItem = attribValue;
-                                break;
-                            case "nonsilfont":
-                                cTool.DdlNonSILFont.SelectedItem = attribValue;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                    SetOthersProperty(baseNode);
                     SetOthersSummary(null, null);
                     break;
                 case "web":
@@ -1829,67 +1769,7 @@ namespace SIL.PublishingSolution
                     // show/hide chapter numbers and references UI
                     SetEpubUIControls(inputTypeBL == "Scripture");
 
-                    foreach (XmlNode VARIABLE in baseNode2)
-                    {
-                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
-                        string attribValue = VARIABLE.Attributes["value"].Value;
-                        switch (attribName)
-                        {
-                            case "ftpaddress":
-                                cTool.TxtFtpAddress.Text = attribValue;
-                                break;
-                            case "ftpuserid":
-                                cTool.TxtFtpUsername.Text = attribValue;
-                                break;
-                            case "ftppwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtFtpPassword.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                break;
-                            case "dbservername":
-                                cTool.TxtSqlServerName.Text = attribValue;
-                                break;
-                            case "dbname":
-                                cTool.TxtSqlDBName.Text = attribValue;
-                                break;
-                            case "dbuserid":
-                                cTool.TxtSqlUsername.Text = attribValue;
-                                break;
-                            case "dbpwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                break;
-                            case "weburl":
-                                cTool.TxtWebUrl.Text = attribValue;
-                                break;
-                            case "webadminusrnme":
-                                cTool.TxtWebAdminUsrNme.Text = attribValue;
-                                break;
-                            case "webadminpwd":
-                                if (attribValue.Trim().Length > 0)
-                                {
-                                    cTool.TxtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
-                                }
-                                break;
-                            case "webadminsitenme":
-                                cTool.TxtWebAdminSiteNme.Text = attribValue;
-                                break;
-                            case "webemailid":
-                                cTool.TxtWebEmailId.Text = attribValue;
-                                break;
-                            case "webftpfldrnme":
-                                cTool.TxtWebFtpFldrNme.Text = attribValue;
-                                break;
-                            case "comment":
-                                cTool.TxtComment.Text = attribValue;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                    SetWebProperty(baseNode2, hashUtil);
                     SetWebSummary(null, null);
                     break;
                 default:
@@ -1908,6 +1788,150 @@ namespace SIL.PublishingSolution
                 {
                     if (cTool.TabControl1.TabPages.ContainsKey("tabPreview"))
                         cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPreview"]);
+                }
+            }
+        }
+
+        private void SetMobileProperty(XmlNodeList baseNode1)
+        {
+            foreach (XmlNode VARIABLE in baseNode1)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value;
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                if (attribName.ToLower() == "fileproduced")
+                {
+                    cTool.DdlFiles.SelectedItem = attribValue;
+                }
+                else if (attribName.ToLower() == "redletter")
+                {
+                    cTool.DdlRedLetter.SelectedItem = attribValue;
+                }
+                else if (attribName.ToLower() == "language")
+                {
+                    cTool.DdlLanguage.SelectedItem = attribValue;
+                }
+            }
+        }
+
+        private void SetOthersProperty(XmlNodeList baseNode)
+        {
+            foreach (XmlNode VARIABLE in baseNode)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                switch (attribName)
+                {
+                    case "embedfonts":
+                        cTool.ChkEmbedFonts.Checked = (attribValue == "Yes") ? true : false;
+                        bool bEnabled = cTool.ChkEmbedFonts.Checked;
+                        cTool.ChkIncludeFontVariants.Enabled = bEnabled;
+                        cTool.DdlDefaultFont.Enabled = bEnabled;
+                        cTool.DdlMissingFont.Enabled = bEnabled;
+                        cTool.DdlNonSILFont.Enabled = bEnabled;
+                        break;
+                    case "includefontvariants":
+                        cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "includeimage":
+                        cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "pagebreak":
+                        cTool.ChkPageBreaks.Checked = (attribValue == "Yes") ? true : false;
+                        break;
+                    case "maximagewidth":
+                        cTool.TxtMaxImageWidth.Text = attribValue;
+                        break;
+                    case "basefontsize":
+                        cTool.TxtBaseFontSize.Text = attribValue;
+                        break;
+                    case "defaultlineheight":
+                        cTool.TxtDefaultLineHeight.Text = attribValue;
+                        break;
+                    case "defaultalignment":
+                        cTool.DdlDefaultAlignment.SelectedItem = attribValue;
+                        break;
+                    case "chapternumbers":
+                        cTool.DdlChapterNumbers.SelectedItem = attribValue;
+                        break;
+                    case "references":
+                        cTool.DdlReferences.SelectedItem = attribValue;
+                        break;
+                    case "defaultfont":
+                        cTool.DdlDefaultFont.SelectedItem = attribValue;
+                        break;
+                    case "missingfont":
+                        cTool.DdlMissingFont.SelectedItem = attribValue;
+                        break;
+                    case "nonsilfont":
+                        cTool.DdlNonSILFont.SelectedItem = attribValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void SetWebProperty(XmlNodeList baseNode2, HashUtilities hashUtil)
+        {
+            foreach (XmlNode VARIABLE in baseNode2)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                switch (attribName)
+                {
+                    case "ftpaddress":
+                        cTool.TxtFtpAddress.Text = attribValue;
+                        break;
+                    case "ftpuserid":
+                        cTool.TxtFtpUsername.Text = attribValue;
+                        break;
+                    case "ftppwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtFtpPassword.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        break;
+                    case "dbservername":
+                        cTool.TxtSqlServerName.Text = attribValue;
+                        break;
+                    case "dbname":
+                        cTool.TxtSqlDBName.Text = attribValue;
+                        break;
+                    case "dbuserid":
+                        cTool.TxtSqlUsername.Text = attribValue;
+                        break;
+                    case "dbpwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        break;
+                    case "weburl":
+                        cTool.TxtWebUrl.Text = attribValue;
+                        break;
+                    case "webadminusrnme":
+                        cTool.TxtWebAdminUsrNme.Text = attribValue;
+                        break;
+                    case "webadminpwd":
+                        if (attribValue.Trim().Length > 0)
+                        {
+                            cTool.TxtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
+                        }
+                        break;
+                    case "webadminsitenme":
+                        cTool.TxtWebAdminSiteNme.Text = attribValue;
+                        break;
+                    case "webemailid":
+                        cTool.TxtWebEmailId.Text = attribValue;
+                        break;
+                    case "webftpfldrnme":
+                        cTool.TxtWebFtpFldrNme.Text = attribValue;
+                        break;
+                    case "comment":
+                        cTool.TxtComment.Text = attribValue;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -2028,47 +2052,6 @@ namespace SIL.PublishingSolution
             return result;
         }
 
-        protected bool SetUI(ModifyData control)
-        {
-            bool success = true;
-            string controlName = control.FileName;
-            string controlText = control.ControlText;
-
-            Control[] ctls = cTool.TabInfo.Controls.Find(controlName, true);
-            if (ctls.Length > 0)
-            {
-                Control ctl = ctls[0];
-                if (ctl.Text == controlText)
-                {
-                    success = false;
-                }
-                else
-                {
-                    SelectRow(cTool.StylesGrid, control.EditStyleName);
-                    if (ctl is TextBox)
-                    {
-                        TextBox textBox = (TextBox)ctl;
-                        textBox.Text = controlText;
-                        textBox.Focus();
-                        textBox.SelectAll();
-                    }
-                    else if (ctl is CheckBox)
-                    {
-                        CheckBox checkBox = (CheckBox)ctl;
-                        checkBox.Checked = controlText == "True" ? true : false;
-                    }
-                    else
-                    {
-                        ctl.Text = controlText;
-                        ctl.Focus();
-                        ctl.Select();
-                    }
-                }
-                UpdateGrid(ctl, cTool.StylesGrid);
-            }
-            return success;
-        }
-
         protected static int GetPageSize(string paperSize, string dimension)
         {
             int pageWidth = 612;
@@ -2124,22 +2107,6 @@ namespace SIL.PublishingSolution
             }
             return 0;
 
-        }
-
-        protected void Preview_PDF_Export(string inputPath)
-        {
-            string _backendPath = Common.ProgInstall;
-            Backend.Load(_backendPath);
-            PublicationInformation _projectInfo = new PublicationInformation();
-            _projectInfo.DictionaryOutputName = StyleName + "_" + FileName;
-            //_projectInfo.IsOpenOutput = false;
-            _projectInfo.IsOpenOutput = true;
-            string sampleFilePath = Path.GetDirectoryName(Path.GetDirectoryName(Common.GetPSApplicationPath()));
-            string xthmlPath = Common.PathCombine(sampleFilePath, "BuangExport.xhtml");
-            _projectInfo.DefaultXhtmlFileWithPath = xthmlPath;
-            string cssPath = Common.PathCombine(inputPath, FileName);
-            _projectInfo.DefaultCssFileWithPath = cssPath;
-            Backend.Launch("Pdf", _projectInfo);
         }
 
         /// <summary>
@@ -2503,6 +2470,10 @@ namespace SIL.PublishingSolution
                     string pageType = GetDdlRunningHead();
                     fileName = GetPageNumberImport(pageType, key);
                 }
+                if (fileName.IndexOf("_Paged_") > 0 && cTool.DdlRunningHead.Text.ToLower() == "mirrored")
+                {
+                    fileName = fileName.Replace("_Paged_", "_Mirrored_");
+                }
                 writeCss.WriteLine("@import \"" + fileName + "\";");
             }
         }
@@ -2533,7 +2504,7 @@ namespace SIL.PublishingSolution
 
         public void PopulateFeatureLists(TreeView TvFeatures)
         {
-            string defaultSheet = Param.DefaultValue.ContainsKey(Param.LayoutSelected) ? Param.DefaultValue[Param.LayoutSelected] : string.Empty; ;
+            string defaultSheet = Param.DefaultValue.ContainsKey(Param.LayoutSelected) ? Param.DefaultValue[Param.LayoutSelected] : string.Empty;
             if (defaultSheet.Length == 0) return;
             var featureSheet = new FeatureSheet(Param.StylePath(defaultSheet));
             featureSheet.ReadToEnd();
@@ -2752,6 +2723,8 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void ClearPropertyTab(TabPage tabPage)
         {
+            if (tabPage == null) return;
+
             foreach (Control ctl in tabPage.Controls)
             {
                 if (ctl is TextBox)
@@ -3146,18 +3119,6 @@ namespace SIL.PublishingSolution
             _errProvider.SetError(cTool.TxtPageGutterWidth, errMessage);
             ShowCssSummary();
         }
-
-        public void ValidateLineHeightBL()
-        {
-            if (cTool.DdlFontSize.Text.Length > 0 && cTool.DdlLeading.Text != "No Change")
-            {
-                int selectedfontSize = int.Parse(cTool.DdlFontSize.Text);
-                int selectedLineHeight = int.Parse(cTool.DdlLeading.Text);
-                int expectedLineHeight = selectedfontSize * 120 / 100;
-                string errMessage = selectedLineHeight < expectedLineHeight ? "Line height should be 120% of font size" : "";
-                _errProvider.SetError(cTool.TxtPageInside, errMessage);
-            }
-        }
         #endregion
 
         #region Event Method
@@ -3427,7 +3388,7 @@ namespace SIL.PublishingSolution
                             if (success)
                             {
                                 string os = Common.GetOsName();
-                                string libre = Common.GetLibraofficeVersion(os);
+                                string libre = Common.GetLibreofficeVersion(os);
                                 if (os.IndexOf("Windows") == 0 && libre == null)
                                 {
                                     success = false;
@@ -3516,42 +3477,6 @@ namespace SIL.PublishingSolution
             return propertyModified;
         }
 
-        /// <summary>
-        /// Comparing the loaded values in info tab values vs changed info values
-        /// Except the Label controls
-        /// </summary>
-        /// <returns></returns>
-        private bool IsInfoValueModified()
-        {
-            if (_infoValue.Count == 0)
-                return false;
-
-            bool infoValueModified = false;
-            int i = 0;
-            Control.ControlCollection ctls = cTool.TabControl1.TabPages[0].Controls;
-            foreach (Control control in ctls)
-            {
-                if (control.GetType().Name == "Label") continue;
-                string val;
-
-                if (control.GetType().Name == "CheckBox")
-                {
-                    CheckBox checkBox = (CheckBox)control;
-                    val = checkBox.Checked.ToString();
-                }
-                else
-                {
-                    val = control.Text;
-                }
-
-                if (_infoValue[i++] != val)
-                {
-                    infoValueModified = true;
-                    break;
-                }
-            }
-            return infoValueModified;
-        }
         public void CreateToolTip()
         {
             ToolTip toolTip = new ToolTip();
@@ -3651,11 +3576,6 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        public void tsRedo_ClickBL(object sender, EventArgs e)
-        {
-           
-        }
-
         public void DdlRunningHeadSelectedIndexChangedBl(string pageType)
         {
             string xPath = string.Empty;
@@ -3703,11 +3623,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void tsUndo_ClickBL(object sender, EventArgs e)
-        {
-            
-        }
-
         public void chkAvailable_CheckedChangedBL(object sender)
         {
             try
@@ -3732,16 +3647,6 @@ namespace SIL.PublishingSolution
         }
 
         public void chkAvailable_ValidatedBL(object sender)
-        {
-            try
-            {
-                WriteAttrib(AttribShown, sender);
-                EnableToolStripButtons(true);
-            }
-            catch { }
-        }
-
-        public void chkFixedLineHeight_ValidatedBL(object sender)
         {
             try
             {
@@ -4043,11 +3948,6 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        private void ValidateLineHeight(object sender, EventArgs e)
-        {
-            ValidateLineHeightBL();
-        }
-
         private void ValidatePageWidthMargins(object sender, EventArgs e)
         {
             ValidatePageWidthMarginsBL(sender);
@@ -4228,11 +4128,15 @@ namespace SIL.PublishingSolution
                 tabweb = cTool.TabControl1.TabPages["tabweb"];
                 tabDict4Mids = cTool.TabControl1.TabPages["tabDict4Mids"];
 
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabmobile"]);
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabothers"]);
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabweb"]);
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabDict4Mids"]);
+                string[] removeTabs = { "tabmobile", "tabothers", "tabweb", "tabPicture", "tabDict4Mids" };
+
+                foreach (var removeTab in removeTabs)
+                {
+                    if (cTool.TabControl1.TabPages[removeTab] != null)
+                    {
+                        cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[removeTab]);
+                    }
+                }
             }
 
             if (IsUnixOs)
@@ -4303,9 +4207,9 @@ namespace SIL.PublishingSolution
                         cTool.tsDelete_Click(sender, null);
                     }
                 }
-                else if (e.KeyCode == Keys.F1 && !IsUnixOs)
+                else if (e.KeyCode == Keys.F1)
                 {
-                    CallHelp();
+                    CallHelp(new Label());
                 }
 
                 //Show Version when Ctrl+F12
@@ -4317,27 +4221,14 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        public void HelpButton_Clicked()
+        public void HelpButton_Clicked(Control ctrl)
         {
-            CallHelp();
+            CallHelp(ctrl);
         }
 
-        private void CallHelp()
+        private void CallHelp(Control ctrl)
         {
-            Common.PathwayHelpSetup();
-            if (IsUnixOs)
-            {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "chmsee";
-                startInfo.Arguments = Common.HelpProv.HelpNamespace;
-                Process.Start(startInfo);
-            }
-            else
-            {
-                Common.HelpProv.SetHelpNavigator(cTool, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(cTool, "Overview.htm");
-                SendKeys.Send("{F1}");
-            }
+            ShowHelp.ShowHelpTopicKeyPress(ctrl, "Overview.htm", _isUnixOS);
         }
 
         public void StudentManual()
@@ -4470,15 +4361,6 @@ namespace SIL.PublishingSolution
             cTool.PnlOtherFormat.Top = cTool.PnlReferenceFormat.Location.Y + cTool.PnlReferenceFormat.Height;
         }
 
-        public void ddlFileProduceDict_ValidatedBL(object sender)
-        {
-            try
-            {
-                _fileProduce = cTool.DdlFileProduceDict.SelectedItem.ToString();
-            }
-            catch { }
-        }
-
         public void tsSaveAs_ClickBL()
         {
             try
@@ -4505,6 +4387,36 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+        }
+
+        public void tsReset_ClickBL()
+        {
+            try
+            {
+                const string msg = "Are you sure you want to remove all custom style sheets and restore settings to their initial values? (This can not be undone.)";
+                const string caption = "Reset Settings";
+                if (!cTool._fromNunit)
+                {
+                    DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
+                                                          MessageBoxDefaultButton.Button2);
+                    if (result != DialogResult.OK) return;
+                }
+
+                string allUsersPath = Common.GetAllUserPath();
+                if (Directory.Exists(allUsersPath))
+                {
+                    DirectoryInfo di = new DirectoryInfo(allUsersPath);
+                    Common.CleanDirectory(di);
+                }
+                SelectedRowIndex = 0;
+                inputTypeBL = cTool.InputType;
+                ConfigurationTool_LoadBL();
+                MessageBox.Show("Settings files are reset successfully.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Settings files cannot be reset.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         public void ShowPreview(int page)
@@ -4605,16 +4517,6 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
-        }
-
-        public void ddlPageNumber_SelectedIndexChange()
-        {
-            if (_screenMode == ScreenMode.Edit)
-            {
-                SetModifyMode(true);
-                ShowCssSummary();
-                WriteCss();
-            }
         }
 
         private string GetDdlRunningHead()

@@ -151,6 +151,11 @@ namespace SIL.PublishingSolution
             get { return tsSend; }
         }
 
+        public ToolStripButton TsReset
+        {
+            get { return tsReset; }
+        }
+
         public TabControl TabControl1
         {
             get { return tabControl1; }
@@ -957,12 +962,6 @@ namespace SIL.PublishingSolution
             EditMobileCSS(sender, e);
         }
 
-        private void ddlFileProduceDict_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.ddlFileProduceDict_ValidatedBL(sender);
-            EditMobileCSS(sender, e);
-        }
-
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             _CToolBL.tabControl1_SelectedIndexChangedBL();
@@ -1012,40 +1011,9 @@ namespace SIL.PublishingSolution
             _CToolBL.SetModifyMode(true);
         }
 
-        //TD-3607
-        private void txtGuidewordLength_KeyUp(object sender, KeyEventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-
         private void txtPageInside_KeyUp(object sender, KeyEventArgs e)
         {
             _CToolBL.SetModifyMode(true);
-        }
-
-        private bool RangeCheck(string txtValue)
-        {
-            bool isValid = true;
-            try
-            {
-                if (txtValue.Trim().Length == 0 || txtValue.Trim() == "-" ||
-                    txtValue.Trim() == "+")
-                    return isValid;
-
-                string numValue = txtValue.Replace("pt", "");
-                numValue = numValue.Replace("p", "");
-                float value = float.Parse(numValue);
-                if (value < -200 || value > 200)
-                {
-                    isValid = false;
-                }
-            }
-            catch (Exception)
-            {
-                isValid = false;
-            }
-            return isValid;
-
         }
 
         private void txtPageOutside_KeyUp(object sender, KeyEventArgs e)
@@ -1135,21 +1103,6 @@ namespace SIL.PublishingSolution
             EditOthersCSS(sender, e);
         }
 
-        private void txtInformation_KeyUp(object sender, KeyEventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-
-        private void txtCopyright_KeyUp(object sender, KeyEventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-
-        private void btnBrowse_KeyUp(object sender, KeyEventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-
         private void txtMaxImageWidth_Validated(object sender, EventArgs e)
         {
             _CToolBL.txtMaxImageWidth_ValidatedBL(sender);
@@ -1186,7 +1139,7 @@ namespace SIL.PublishingSolution
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _CToolBL.HelpButton_Clicked();
+            _CToolBL.HelpButton_Clicked(this);
         }
 
         private void studentManualToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1201,7 +1154,7 @@ namespace SIL.PublishingSolution
 
         private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
         {
-            _CToolBL.HelpButton_Clicked();
+            _CToolBL.HelpButton_Clicked(this);
         }
 
         private void chkFixedLineHeight_CheckStateChanged(object sender, EventArgs e)
@@ -1234,60 +1187,9 @@ namespace SIL.PublishingSolution
 
         private void lnkLblUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
+            using (Process.Start("http://pathway.sil.org/"))
             {
-                Process p = new Process();
-                p.StartInfo.FileName = Common.GetDefaultBrowserPath();
-                p.StartInfo.Arguments = lnkLblUrl.Text;
-                p.Start();
-            }
-            catch (Exception exc1)
-            {
-                // System.ComponentModel.Win32Exception is a known exception that occurs when Firefox is default browser.  
-                // It actually opens the browser but STILL throws this exception so we can just ignore it.  If not this exception,
-                // then attempt to open the URL in IE instead.
-                if (exc1.GetType().ToString() != "System.ComponentModel.Win32Exception")
-                {
-                    // sometimes throws exception so we have to just ignore
-                    // this is a common .NET bug that no one online really has a great reason for so now we just need to try to open
-                    // the URL using IE if we can.
-                    try
-                    {
-                        System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo("IExplore.exe", lnkLblUrl.Text);
-                        System.Diagnostics.Process.Start(startInfo);
-                        startInfo = null;
-                    }
-                    catch (Exception exc2)
-                    {
-                        // still nothing we can do so just show the error to the user here.
-                    }
-                }
-            }
-        }
-
-        private void ddlPageNumber_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _CToolBL.ddlPageNumber_SelectedIndexChange();
-        }
-
-        private void ConfigurationTool_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (_CToolBL.IsUnixOs)
-            {
-                if (e.KeyCode == Keys.ShiftKey)
-                {
-                    bool shiftKey = (ModifierKeys & Keys.Shift) == Keys.Shift;
-
-                    string allUsersPath = Common.GetAllUserPath();
-                    if (ModifierKeys == Keys.Shift && shiftKey)
-                    {
-                        if (Directory.Exists(allUsersPath))
-                        {
-                            DirectoryInfo di = new DirectoryInfo(allUsersPath);
-                            Common.CleanDirectory(di);
-                        }
-                    }
-                }
+                return;
             }
         }
 
@@ -1342,6 +1244,11 @@ namespace SIL.PublishingSolution
         {
             EditCSS(sender, e);
             _CToolBL.chkDisableWO_CheckStateChangedBL(sender, e);
+        }
+
+        private void tsReset_Click(object sender, EventArgs e)
+        {
+            _CToolBL.tsReset_ClickBL();
         }
     }
 }

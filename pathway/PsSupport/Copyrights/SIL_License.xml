@@ -15,7 +15,7 @@
    </rdf:Description>
    <rdf:Description rdf:about='' xmlns:xapRights='http://ns.adobe.com/xap/1.0/rights/'>
     <xapRights:Marked>True</xapRights:Marked>
-    <xapRights:WebStatement>http://creativecommons.org/licenses/by-sa/3.0/</xapRights:WebStatement>
+    <xapRights:WebStatement>http://creativecommons.org/licenses/by-nc-sa/4.0/</xapRights:WebStatement>
    </rdf:Description>
    <rdf:Description rdf:about=""
     xmlns:dc="http://purl.org/dc/elements/1.1/">
@@ -50,7 +50,7 @@
     </dc:rights>
    </rdf:Description>
    <rdf:Description rdf:about='' xmlns:cc='http://creativecommons.org/ns#'>
-    <cc:license>http://creativecommons.org/licenses/by-sa/3.0/</cc:license>
+    <cc:license>http://creativecommons.org/licenses/by-nc-sa/4.0/</cc:license>
    </rdf:Description>
   </rdf:RDF>
  </x:xmpmeta>

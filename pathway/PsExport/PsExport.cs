@@ -19,7 +19,6 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using JWTools;
-using RevHomographNum;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -30,7 +29,6 @@ namespace SIL.PublishingSolution
     /// </summary>
     public class PsExport: IExporter
     {
-        private const bool _Wait = true;
         public bool _fromNUnit = false;
         private string _selectedCssFromTemplate = string.Empty;
         private Progress pb;
@@ -339,8 +337,9 @@ namespace SIL.PublishingSolution
         protected void DefaultProjectFileSetup(string outDir)
         {
             _projectFile = Common.PathCombine(outDir, DataType + ".de");
-            if (!File.Exists(_projectFile))
-                File.Copy(Common.FromRegistry(Common.PathCombine(Param.Value[Param.SamplePath], Path.GetFileName(_projectFile))), _projectFile);
+            string deFile = Common.FromRegistry(Common.PathCombine(Param.Value[Param.SamplePath], Path.GetFileName(_projectFile)));
+            if (!File.Exists(_projectFile) && File.Exists(deFile))
+                File.Copy(deFile, _projectFile);
         }
 
         protected void LoadDataTypeSettings()
@@ -386,7 +385,6 @@ namespace SIL.PublishingSolution
         /// /// <param name="lexiconCSS">main css file with style info</param>
         /// <param name="revFull">reversal content</param>
         /// <param name="revCSS">rev CSS file with style info</param>
-        /// <param name="gramFull">grammar content</param>
         public void DeExport(string lexiconFull, string lexiconCSS, string revFull, string revCSS)
         {
             var projInfo = new PublicationInformation();

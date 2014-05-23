@@ -31,7 +31,6 @@ namespace Test.DictionaryForMIDsConvert
     [TestFixture]
     public class DictionaryForMIDsTest : ExportDictionaryForMIDs
     {
-        private readonly Mockery mocks = new Mockery();
         #region Setup
 
         private TestFiles _testFiles;
@@ -193,6 +192,7 @@ namespace Test.DictionaryForMIDsConvert
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void CreateDictionaryForMIDsTest()
         {
@@ -214,17 +214,5 @@ namespace Test.DictionaryForMIDsConvert
             CreateDictionaryForMIDs(projInfo);
             Assert.True(Directory.Exists(Common.PathCombine(outDir, "DfM_lojen_SIL")));
         }
-
-        #region private Methods
-        private static string GetSupportPath()
-        {
-            return PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
-        }
-        private string GetFileNameWithSupportPath(string name)
-        {
-            return Common.PathCombine(GetSupportPath(), name);
-        }
-
-        #endregion
     }
 }

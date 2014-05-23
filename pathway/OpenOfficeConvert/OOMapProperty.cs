@@ -26,7 +26,6 @@ namespace SIL.PublishingSolution
     {
         private Dictionary<string, string> _IDProperty = new Dictionary<string, string>();
         private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
-        private bool _IsKeepLineWrittern = false;
         readonly Dictionary<string, string> _dicColorInfo = new Dictionary<string, string>();
         readonly Dictionary<string, string> _dictFontSize = new Dictionary<string, string>();
         readonly ArrayList _arrUnits = new ArrayList();
@@ -303,15 +302,6 @@ namespace SIL.PublishingSolution
             _IDProperty[_propertyKey] = propertyValue;
         }
 
-        private void AddKeepLinesTogetherProperty()
-        {
-            if (_IsKeepLineWrittern == false)
-            {
-                _IDProperty["KeepLinesTogether"] = "true";
-            }
-            _IsKeepLineWrittern = true;
-        }
-
         public void WordSpacing(string propertyValue)
         {
             _IDProperty["MinimumWordSpacing"] = "0";
@@ -405,8 +395,8 @@ namespace SIL.PublishingSolution
 
         /// <summary>
         /// Superscript and Subscript
-        /// make 6pt to 9pt (1.5 times) if <10pt
-        /// make 100% to 150% (1.5 times) if <=100%
+        /// make 6pt to 9pt (1.5 times) if greater than 10pt
+        /// make 100% to 150% (1.5 times) if less than or equal to 100%
         /// </summary>
         public void SuperSub()
         {
@@ -836,54 +826,7 @@ namespace SIL.PublishingSolution
             _IDProperty[_propertyKey] = propertyValue;
         }
 
-        public void ListStyle(string propertyValue)
-        {
-            if (propertyValue == "inside")
-            {
-                _IDProperty["margin-left"] = "0.25in";
-                _IDProperty["margin-right"] = "0in";
-                _IDProperty["text-indent"] = "-0.25in";
-                _IDProperty["auto-text-indent"] = "false";
-            }
-        }
-
-
         #region private methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="hexValue">"#ff0000"</param>
-        /// <returns>"255 0 0"</returns>
-        public string ConvertHexToDec(string hexValue)
-        {
-            string concatChar = string.Empty;
-            string decValue = string.Empty;
-            try
-            {
-                string hexFormat = hexValue.Replace("#", "");
-                char[] RGB = hexFormat.ToCharArray();
-                if (RGB.Length < 6)
-                    return "00 00 00";
-
-                for (int i = 0; i < RGB.Length; i++)
-                {
-                    if (i % 2 == 0)
-                    {
-                        concatChar = RGB[i].ToString();
-                        continue;
-                    }
-                    concatChar += RGB[i].ToString();
-                    decValue += " " + int.Parse(concatChar, System.Globalization.NumberStyles.HexNumber);
-                    concatChar = string.Empty;
-                }
-            }
-            catch
-            {
-                decValue = "00 00 00";
-            }
-            return decValue.Trim();
-        }
-
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Converts rgb(47,96,255) to "#ff0000" format
@@ -891,7 +834,7 @@ namespace SIL.PublishingSolution
         /// <list>
         /// </list>
         /// </summary>
-        /// <param name="AttributeStringValue">attribute value like rgb(47,96,255)</param>
+        /// <param name="attributeStringValue">attribute value like rgb(47,96,255)</param>
         /// <returns>"#ff0000" format data</returns>
         /// -------------------------------------------------------------------------------------------
         private static string ColorRGB(string attributeStringValue)
@@ -1157,80 +1100,6 @@ namespace SIL.PublishingSolution
             _arrUnits.Add("mm");
             _arrUnits.Add("pt");
             _arrUnits.Add("pc");
-        }
-
-        private string CheckInput(string attribValue, string attributeName)
-        {
-            if (attribValue.IndexOf(',') > 0)
-            {
-                string[] tempValues = attribValue.Split(',');
-                if (!Common.ValidateNumber(tempValues[0]))
-                {
-                    throw new Exception("Numeric Value is expected");
-                }
-
-                if (tempValues[1] != "em" && tempValues[1] != "%")
-                {
-                    if (!_arrUnits.Contains(tempValues[1]))
-                    {
-                        throw new Exception("Unit is not valid");
-                    }
-                }
-            }
-            else
-            {
-                throw new Exception("Input is not valid");
-            }
-            return attributeName;
-        }
-
-        private static string FontHeight(string attributeStringValue, bool lineHeight)
-        {
-            string strVal;
-            try
-            {
-                string[] attValues = attributeStringValue.Split(',');
-                string unit;
-
-                float newValue = float.Parse(attValues[0]);
-                if (attValues.Length > 1)
-                {
-                    unit = attValues[1];
-                    if (unit == "em")
-                    {
-                        newValue -= 1;
-                    }
-                    else if (unit == "%")
-                    {
-                        newValue /= 100;
-                        newValue -= 1;
-                        unit = "em";
-                    }
-                    else if (lineHeight && unit == "pt")
-                    {
-                        strVal = newValue + "-em";
-                        return (strVal);
-                    }
-                }
-                else
-                {
-                    unit = "em";
-                    newValue = newValue - 1;
-                }
-                if (lineHeight)
-                {
-                    newValue = newValue / 2F;
-                }
-                strVal = newValue.ToString();
-                strVal = strVal + unit;
-            }
-            catch (Exception ex)
-            {
-                strVal = null;
-                Console.Write(ex.Message);
-            }
-
-            return (strVal);
         }
         #endregion
     }

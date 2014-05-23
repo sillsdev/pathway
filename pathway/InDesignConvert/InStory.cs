@@ -34,13 +34,10 @@ namespace SIL.PublishingSolution
     {
         #region Private Variable
         private int _storyNo = 0;
-        private int _hyperLinkNo = 0;
         private bool isFileEmpty = true;
         private bool isFileCreated;
-        private bool isImage;
         private bool isHomographNumber = false;
         private string imageClass = string.Empty;
-        private string _inputPath;
         private ArrayList _textFrameClass = new ArrayList();
         private ArrayList _textVariables = new ArrayList();
         private ArrayList _columnClass = new ArrayList();
@@ -54,8 +51,6 @@ namespace SIL.PublishingSolution
         private List<string> _usedStyleName = new List<string>();
         private bool _IsHeadword = false;
         private bool _isDropCap = false;
-        private string _dropCapStyle = string.Empty;
-        private string _currentStoryName = string.Empty;
         #endregion
 
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
@@ -490,7 +485,6 @@ namespace SIL.PublishingSolution
                 int width = 72; // 1 in
 
 
-                isImage = true;
                 inserted = true;
                 string[] cc = _allParagraph.ToArray();
                 imageClass = cc[1];
@@ -527,18 +521,18 @@ namespace SIL.PublishingSolution
                 {
                     if (rectWidth == "0")
                     {
-                        rectWidth = Common.CalcDimension(fileName1, ref rectHeight, 'W');
+                        rectWidth = Common.CalcDimension(fileName1, ref rectHeight, Common.CalcType.Width);
                     }
                 }
                 else if (rectWidth != "0")
                 {
-                    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, 'H');
+                    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, Common.CalcType.Height);
                 }
                 else
                 {
                     //Default value is 72 However the line draws 36pt in X-axis and 36pt in y-axis.
                     rectWidth = "36"; // fixed the width as 1 in;
-                    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, 'H');
+                    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, Common.CalcType.Height);
                     if (rectHeight == "0")
                     {
                         rectHeight = "36";
@@ -557,7 +551,7 @@ namespace SIL.PublishingSolution
                 //To get Image details
                 int xx = GCD(width, height);
                 string xxw = string.Format("{0}:{1}", width/xx, height/xx);
-;
+
                 string imageFloatLeftRightOrCenter = string.Empty;
                 string anchorPoint = string.Empty;
                 string horizontalAlignment = string.Empty;
@@ -817,14 +811,8 @@ namespace SIL.PublishingSolution
                 _imageInsert = false;
                 _imageSource = string.Empty;
                 _isNewParagraph = false;
-                _isImageParagraphClosed = false;
             }
             return inserted;
-        }
-
-        private void CalculateImageDimension()
-        {
-
         }
 
         private static int GCD(int width, int height)
@@ -949,6 +937,7 @@ namespace SIL.PublishingSolution
 
                 if (splitedClassName.Length > 0)
                 {
+                    bool result = false;
                     for (int i = 0; i < splitedClassName.Length; i++) // // From Recent to Begining Class
                     {
                         string clsName = splitedClassName[i];
@@ -960,12 +949,14 @@ namespace SIL.PublishingSolution
                                 AnchorPoint = "TopLeftAnchor";
                                 VertAlignment = "CenterAlign";
                                 VertRefPoint = "LineBaseline";
+                                result = true;
                                 break;
                             case "right":
                                 AnchorPoint = "TopRightAnchor";
                                 HoriAlignment = "RightAlign";
                                 VertAlignment = "CenterAlign";
                                 VertRefPoint = "LineBaseline";
+                                result = true;
                                 break;
                             case "top":
                             case "prince-column-top":
@@ -976,12 +967,14 @@ namespace SIL.PublishingSolution
                                 VertAlignment = "TopAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                             case "center":
                                 AnchorPoint = "TopCenterAnchor";
                                 HoriAlignment = "CenterAlign";
                                 VertAlignment = "CenterAlign";
                                 VertRefPoint = "LineBaseline";
+                                result = true;
                                 break;
                             case "top-right":
                                 AnchorPoint = "TopRightAnchor";
@@ -989,6 +982,7 @@ namespace SIL.PublishingSolution
                                 HoriAlignment = "RightAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                             case "bottom":
                             case "prince-column-bottom":
@@ -999,6 +993,7 @@ namespace SIL.PublishingSolution
                                 HoriAlignment = "LeftAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                             case "bottom-right":
                                 AnchorPoint = "BotomRightAnchor";
@@ -1006,14 +1001,19 @@ namespace SIL.PublishingSolution
                                 HoriAlignment = "RightAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                         }
                         wrapSide = GetPropertyValue(clsName, "clear", wrapSide);
-                        if (pos != "left" && wrapSide != "none")
+                        //if (pos != "left" && wrapSide != "none")
+                        //{
+                        //    break;
+                        //}
+                        //return;
+                        if (result)
                         {
                             break;
                         }
-                        return;
                     }
                 }
             }
@@ -1122,7 +1122,6 @@ namespace SIL.PublishingSolution
                 mystyle["DropCapLines"] = lines; // No of Lines.
                 if (IdAllClass[classNameWOLang].ContainsKey("PointSize"))
                 {
-                    string className = classNameWOLang + "_" + _chapterNo.Length.ToString();
                     if (IdAllClass.ContainsKey("Paragraph") && IdAllClass["Paragraph"].ContainsKey("PointSize"))
                     {
                         mystyle["BaselineShift"] = IdAllClass["Paragraph"]["PointSize"];
@@ -1134,7 +1133,6 @@ namespace SIL.PublishingSolution
                 }
                 _paragraphName = classNameWOLang + _chapterNo.Length.ToString();
                 _newProperty[_paragraphName] = mystyle;
-                _dropCapStyle = _paragraphName;
                 Write();
             }
             else if (classNameWOLang == "ChapterNumber")
@@ -1217,10 +1215,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteEndElement(); // for Textframe
                     _writer.WriteEndElement(); // for rectangle
                     _allCharacter.Pop();    // retrieving it again.
-                    isImage = false;
                     imageClass = "";
-                    _isImageParagraphClosed = true;
-
                 }
             }
             else // With Caption
@@ -1232,24 +1227,8 @@ namespace SIL.PublishingSolution
                     _writer.WriteEndElement(); // for Textframe
                     _writer.WriteEndElement(); // for rectangle
 
-                    isImage = false;
                     imageClass = "";
-                    _isImageParagraphClosed = true;
                 }
-            }
-        }
-
-        private void WriteEmptyHomographStyle()
-        {
-            if (isHomographNumber)
-            {
-                _writer.WriteStartElement("CharacterStyleRange");
-                _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/xhomographnumber_headword_entry_letData_dicBody");
-                _writer.WriteStartElement("Content");
-                _writer.WriteString(" ");
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-                isHomographNumber = false;
             }
         }
 
@@ -1294,7 +1273,6 @@ namespace SIL.PublishingSolution
             IdAllClass = new Dictionary<string, Dictionary<string, string>>();
             _newProperty = new Dictionary<string, Dictionary<string, string>>();
             ParentClass = new Dictionary<string, string>();
-            _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
 
             IdAllClass = idAllClass;

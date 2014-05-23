@@ -26,8 +26,6 @@ namespace SIL.PublishingSolution
 {
     public class ExportSword : IExportProcess
     {
-        protected string _processFolder;
-        private const string RedirectOutputFileName = "Convert.log";
         private bool _isUnixOS;
         private string _languageName;
         private bool _openOutputDirectory = true;
@@ -328,7 +326,6 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Uses Sword Output Execute Process
         /// </summary>
-        /// <param name="Sword Output"></param>
         protected void SwordOutputBuildProcess(string processFolder, string swordOutputPath, string[] osisFilesList, string projectPath)
         {
             string Creator = "osis2mod";

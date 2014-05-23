@@ -19,7 +19,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Xml;
-using SIL.Tool;
 
 namespace SIL.Tool
 {

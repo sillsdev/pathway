@@ -148,6 +148,7 @@ namespace Test.UIConfigurationToolBLTest
 
 
         [Test]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void NewWithDefaultTest()
         {
@@ -194,7 +195,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlVerticalJustify.Text;
             Assert.AreEqual("Top", actual, "Grid vertical justify Test Failes");
             actual = cTool.DdlPicture.Text;
-            Assert.AreEqual("Yes", actual, "Grid picture Test Failes");
+            Assert.AreEqual("Frame", actual, "Grid picture Test Failes");
             actual = cTool.DdlLeading.Text;
             Assert.AreEqual("13", actual, "Grid leading Test Failes");
             actual = cTool.DdlRunningHead.Text;
@@ -212,6 +213,7 @@ namespace Test.UIConfigurationToolBLTest
         }
 
         [Test]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void SaveAsWithDefaultTest()
         {
@@ -258,7 +260,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlVerticalJustify.Text;
             Assert.AreEqual("Top", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlPicture.Text;
-            Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("Frame", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlLeading.Text;
             Assert.AreEqual("13", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlRunningHead.Text;
@@ -275,6 +277,7 @@ namespace Test.UIConfigurationToolBLTest
         }
 
         [Test]
+        [Category("LongTest")]
         public void DeleteWithDefaultTest()
         {
             SetUp();
@@ -312,6 +315,7 @@ namespace Test.UIConfigurationToolBLTest
 
 
         [Test]
+        [Category("LongTest")]
         public void SaveInputTypeTest()
         {
             SetUp();
@@ -340,9 +344,9 @@ namespace Test.UIConfigurationToolBLTest
         [Test]
         public void GetMailBodyTest()
         {
+            IsUnixOs = Common.IsUnixOS();
             string returnValue = GetMailBody("Dictionary", "Extract Zip contents to an appropriate folder.%0D%0A%0D%0A");
-            bool isUnix = Common.IsUnixOS();
-            if (isUnix)
+            if (IsUnixOs)
             {
                 Assert.IsTrue(returnValue.Contains("Ubuntu"), "missing Ubuntu");
             }
@@ -350,44 +354,6 @@ namespace Test.UIConfigurationToolBLTest
             {
                 Assert.IsTrue(returnValue.Contains("7 and 8"), "Missing 8");
             }
-        }
-
-        private void AssignNewTest()
-        {
-            cTool.TxtName.Text = "NewStyle";
-            cTool.TxtDesc.Text = "NewDescription";
-            cTool._CToolBL.txtDesc_KeyUpBL();
-            cTool.ChkAvailable.Checked = true;
-            cTool._CToolBL.chkAvailable_CheckedChangedBL(cTool.ChkAvailable);
-            cTool.TxtComment.Text = "NewComment";
-            cTool._CToolBL.txtComment_KeyUpBL();
-            cTool.TxtApproved.Text = "Tester";
-            cTool._CToolBL.txtApproved_ValidatedBL(cTool.TxtApproved);
-            cTool.DdlPagePageSize.Text = "A4";
-            cTool.TxtPageInside.Text = "18pt";
-            cTool.TxtPageOutside.Text = "18pt";
-            cTool.TxtPageTop.Text = "18pt";
-            cTool.TxtPageBottom.Text = "18pt";
-            cTool.DdlPageColumn.Text = "2";
-            cTool.TxtPageGutterWidth.Text = "6pt";
-            cTool.DdlJustified.Text = "Yes";
-            cTool.DdlVerticalJustify.Text = "Center";
-            cTool.DdlPicture.Text = "Yes";
-            cTool.DdlLeading.Text = "12";
-            cTool.DdlRunningHead.Text = "Every Page";
-            cTool.DdlRules.Text = "Yes";
-            cTool.DdlFontSize.Text = "11";
-            cTool.DdlFileProduceDict.Text = "One";
-            cTool.DdlSense.Text = "Bullet";
-            cTool.Close();
-        }
-
-        private void GetStyleName(string expStylename)
-        {
-            string expectedStyleName = expStylename;
-            int SelectedRowIndex = cTool.StylesGrid.RowCount - 1;
-            string actualStyleName = cTool.StylesGrid[0, SelectedRowIndex].Value.ToString();
-            Assert.IsTrue(expectedStyleName == actualStyleName, "GetStyleName Test failed");
         }
 
         private void GridRowCount_Load()
@@ -419,6 +385,7 @@ namespace Test.UIConfigurationToolBLTest
             PreviewButtonEnable();
             DefaultButtonEnable();
             SendButtonEnable();
+            ResetButtonEnable();
             PaperButtonEnable();
             MobileButtonEnable();
             WebButtonEnable();
@@ -509,6 +476,13 @@ namespace Test.UIConfigurationToolBLTest
             //To check the new button enable property
             bool buttonNew = cTool.TsNew.Enabled;
             Assert.IsTrue(buttonNew, "New button enable Test failed");
+        }
+
+        private void ResetButtonEnable()
+        {
+            //To check the Preview button enable property
+            bool buttonPreview = cTool.TsReset.Enabled;
+            Assert.IsTrue(buttonPreview, "Reset button enable Test failed");
         }
 
         private void DisplayTabEnable()

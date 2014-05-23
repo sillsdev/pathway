@@ -76,7 +76,8 @@ namespace SIL.PublishingSolution
 
         protected static XmlDocument LoadXmlDocument(PublicationInformation projInfo)
         {
-            var xml = new XmlDocument {XmlResolver = null};
+            var xml = new XmlDocument();
+            xml.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             var streamReader = new StreamReader(projInfo.DefaultXhtmlFileWithPath);
             xml.Load(streamReader);
             streamReader.Close();

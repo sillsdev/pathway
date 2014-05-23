@@ -77,10 +77,10 @@ namespace Test
                     string outputEntry = new StreamReader(outFl.GetInputStream(outFl.GetEntry(name).ZipFileIndex)).ReadToEnd();
                     string expectEntry = new StreamReader(expFl.GetInputStream(expFl.GetEntry(name).ZipFileIndex)).ReadToEnd();
                     XmlDocument outputDocument = new XmlDocument();
-                    outputDocument.XmlResolver = new XmlUrlResolver();
+                    outputDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
                     outputDocument.LoadXml(outputEntry);
                     XmlDocument expectDocument = new XmlDocument();
-                    expectDocument.XmlResolver = new XmlUrlResolver();
+                    expectDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
                     expectDocument.LoadXml(expectEntry);
                     XmlDsigC14NTransform outputCanon = new XmlDsigC14NTransform();
                     outputCanon.Resolver = new XmlUrlResolver();
@@ -206,23 +206,9 @@ namespace Test
             reader.Close();
             odtFile.Close();
             var xmlDocument = new XmlDocument();
-            xmlDocument.XmlResolver = new XmlUrlResolver();
+            xmlDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             xmlDocument.LoadXml(text);
             return xmlDocument;
-        }
-
-        public static XmlNamespaceManager NamespaceManager(XmlDocument xmlDocument)
-        {
-            var root = xmlDocument.DocumentElement;
-            Assert.IsNotNull(root, "Missing xml document");
-            var nsManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            foreach (XmlAttribute attribute in root.Attributes)
-            {
-                var namePart = attribute.Name.Split(':');
-                if (namePart[0] == "xmlns")
-                    nsManager.AddNamespace(namePart[1], attribute.Value);
-            }
-            return nsManager;
         }
     }
 }

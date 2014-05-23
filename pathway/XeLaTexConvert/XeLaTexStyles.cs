@@ -28,9 +28,6 @@ namespace SIL.PublishingSolution
         #region Private Variables
 
         Dictionary<string, Dictionary<string, string>> _cssProperty = new Dictionary<string, Dictionary<string, string>>();
-        Dictionary<string, Dictionary<string, string>> _IDAllClass = new Dictionary<string, Dictionary<string, string>>();
-        private Dictionary<string, string> _IDProperty = new Dictionary<string, string>();
-        private Dictionary<string, string> _IDClass = new Dictionary<string, string>();
         XeLaTexMapProperty mapProperty = new XeLaTexMapProperty();
         private StreamWriter _xetexFile;
         private List<string> _inlineStyle;
@@ -41,7 +38,6 @@ namespace SIL.PublishingSolution
         protected bool IsMirrored = false;
         public StringBuilder PageStyle = new StringBuilder();
         readonly Dictionary<string, string> _pageStyleFormat = new Dictionary<string, string>();
-        public string referenceFormat = string.Empty;
         private Dictionary<string, string> _langFontDictionary = new Dictionary<string, string>();
 
         #endregion
@@ -105,7 +101,10 @@ namespace SIL.PublishingSolution
                 _pageStyleFormat.Add("@page-top-center", "\\chead");
                 _pageStyleFormat.Add("@page-top-right", "\\rhead");
                 _pageStyleFormat.Add("@page-bottom-left", "\\lfoot");
-                _pageStyleFormat.Add("@page-bottom-center", "\\cfoot");
+                if (_cssProperty.ContainsKey("@page-bottom-center") && _cssProperty["@page-bottom-center"]["content"] == "|counter(page)|")
+                {
+                    _pageStyleFormat.Add("@page-bottom-center", "\\cfoot");
+                }
                 _pageStyleFormat.Add("@page-bottom-right", "\\rfoot");
                 _pageStyleFormat.Add("@page:first-top-left", "\\lhead");
                 _pageStyleFormat.Add("@page:first-top-center", "\\chead");
@@ -148,7 +147,9 @@ namespace SIL.PublishingSolution
                 pageName = "@page:right";
                 SetPageHeaderFooter(pageName);
             }
-            PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \\renewcommand{\\footrulewidth}{0.4pt}");
+            PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \r\n \\renewcommand{\\footrulewidth}{0.4pt} \r\n");
+            PageStyle.AppendLine("\\renewcommand{\\thefootnote}{\\alphalph{\\value{footnote}}} \r\n");
+            
         }
 
         private void SetPageHeaderFooter(string pageName)
@@ -175,7 +176,10 @@ namespace SIL.PublishingSolution
                             }
                             else if (writingString.IndexOf("counter(page)") >= 0)
                             {
-                                PageStyle.AppendLine(_pageStyleFormat[currentPagePosition] + "{\\thepage}");
+                                if (!_cssProperty.ContainsKey("@page:none-none"))
+                                {
+                                    PageStyle.AppendLine(_pageStyleFormat[currentPagePosition] + "{\\thepage}");
+                                }
                             }
                             if (writingString.IndexOf("booknamefirst") >= 0)
                             {
@@ -203,10 +207,10 @@ namespace SIL.PublishingSolution
         private void CreatePageFirstPage()
         {
             string pageName = "@page";
-            _pageLayoutProperty = ProcessPageProperty(pageName);
+            ProcessPageProperty(pageName);
 
             pageName = "@page:first";
-            _firstPageLayoutProperty = ProcessPageProperty(pageName);
+            ProcessPageProperty(pageName);
 
             pageName = "@page:left";
             _leftPageLayoutProperty = ProcessPageProperty(pageName);
@@ -215,12 +219,7 @@ namespace SIL.PublishingSolution
             _rightPageLayoutProperty = ProcessPageProperty(pageName);
 
             pageName = "@page-footnotes";
-            Dictionary<string, string> FootNoteSeperator = ProcessPageProperty(pageName);
-
-            if (_leftPageLayoutProperty.Count > 0 || _rightPageLayoutProperty.Count > 0)
-            {
-                isMirrored = true;
-            }
+            ProcessPageProperty(pageName);
         }
 
         private Dictionary<string, string> ProcessPageProperty(string pageName)
@@ -228,8 +227,18 @@ namespace SIL.PublishingSolution
             Dictionary<string, string> pageLayoutProperty = new Dictionary<string, string>();
             if (_cssProperty.ContainsKey(pageName))
             {
-                Dictionary<string, string> cssClass1 = _cssProperty[pageName];
-                
+                Dictionary<string, string> cssClassProperty = _cssProperty[pageName];
+
+                if (cssClassProperty.ContainsKey("-ps-custom-footnote-caller"))
+                {
+                    foreach (KeyValuePair<string, string> para in cssClassProperty)
+                    {
+                        if (para.Key == "-ps-custom-footnote-caller" && para.Value != string.Empty)
+                        {
+                            PageStyle.AppendLine("\\renewcommand{\\thefootnote}{\\textit{\\"+ para.Value +"{}\\value{footnote}}} \r\n");
+                        }
+                    }
+                }
             }
             return pageLayoutProperty;
         }
@@ -247,143 +256,12 @@ namespace SIL.PublishingSolution
                 _inlineStyle = new List<string>();
                 _inlineText = new List<string>();
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
-                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList, _inlineText, LangFontDictionary);
+                mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList, _inlineText, LangFontDictionary);
                 
                 _classInlineStyle[replaceNumberInStyle] = _inlineStyle;
                 if (_inlineText.Count > 0)
                     _classInlineText[replaceNumberInStyle] = _inlineText;
             }
         }
-
-        private void DeleteRelativeInFootnote(KeyValuePair<string, Dictionary<string, string>> cssClass)
-        {
-            if (cssClass.Key.IndexOf("..footnote-cal") > 0 || cssClass.Key.IndexOf("..footnote-marker") > 0)
-            {
-                ArrayList removeProperty = new ArrayList();
-                foreach (KeyValuePair<string, string> property in _IDProperty)
-                {
-                    if (property.Value.IndexOf("%") > 0)
-                    {
-                        removeProperty.Add(property.Key);
-                    }
-                }
-                foreach (string property in removeProperty)
-                {
-                    _IDProperty.Remove(property);
-                }
-            }
-        }
-
-        private void PositionProperty()
-        {
-            //Note: Paragraph Margins are not Completed.
-            //Note: Currently "left" and "right" are added to padding because of Indesign 
-            //Note: which does not have property for Paragraph Margin.
-            //Note: Also It does not support the Negative Values in Margin. Everything restricted within the frames.
-
-                if (_IDProperty.ContainsKey("position") && (_IDProperty.ContainsKey("left") || _IDProperty.ContainsKey("right")) )
-                {
-                    _IDProperty.Remove("position");
-
-                    if (_IDProperty.ContainsKey("left"))
-                    {
-                        if (_IDProperty.ContainsKey("LeftIndent"))
-                        {
-                            _IDProperty["LeftIndent"] = (int.Parse(_IDProperty["LeftIndent"]) 
-                                                        + int.Parse(_IDProperty["left"])).ToString();
-                        }
-                        else
-                        {
-                            _IDProperty["LeftIndent"] = _IDProperty["left"];
-                        }
-                    }
-                    else if (_IDProperty.ContainsKey("right"))
-                    {
-                        if (_IDProperty.ContainsKey("RightIndent"))
-                        {
-                            _IDProperty["RightIndent"] = (int.Parse(_IDProperty["RightIndent"]) 
-                                                         + int.Parse(_IDProperty["right"])).ToString();
-                        }
-                        else
-                        {
-                            _IDProperty["RightIndent"] = _IDProperty["right"];
-                        }
-                    }
-                }
-
-                if (_IDProperty.ContainsKey("position"))
-                {
-                    _IDProperty.Remove("position");
-                }
-                if (_IDProperty.ContainsKey("left"))
-                {
-                    _IDProperty.Remove("left");
-                }
-                if (_IDProperty.ContainsKey("right"))
-                {
-                    _IDProperty.Remove("right");
-                }
-        }
-
-        private void CreateParagraphProperty(string propertyName, string propertyType)
-        {
-            if (_IDProperty.ContainsKey(propertyName))
-            {
-                _writer.WriteStartElement(propertyName);
-                _writer.WriteAttributeString("type", propertyType);
-                _writer.WriteString(_IDProperty[propertyName]);
-                _writer.WriteEndElement();
-            }
-        }
-
-        private void InsertBackgroundColor(string propertyValue)
-        {
-            _IDClass["StrokeWeight"] = "1";
-            _IDClass["StrokeColor"] = propertyValue;
-            _IDClass["EndJoin"] = "BevelEndJoin";
-
-            _writer.WriteAttributeString("StrokeWeight", "1");
-            _writer.WriteAttributeString("StrokeColor", propertyValue);
-            _writer.WriteAttributeString("EndJoin", "BevelEndJoin");
-        }
-
-        /// <summary>
-        /// Increase font-size 250% for Subscript and Superscript
-        /// </summary>
-        /// <param name="isIncrease">to increase font-size even the property is not super/sub script</param>
-        private void SuperscriptSubscriptIncreaseFontSize(bool isIncrease)
-        {
-            bool isSuperSub = false;
-            if (_IDProperty.ContainsKey("Position") && (_IDProperty["Position"] == "Subscript" || _IDProperty["Position"] == "Superscript"))
-            {
-                isSuperSub = true;
-            }
-
-            if (isSuperSub || isIncrease) // increase font-size for superscipt & subscript
-            {
-                string newValue = "100%";
-                if (_IDProperty.ContainsKey("PointSize"))
-                {
-                    string fontValue = _IDProperty["PointSize"];
-                    int counter;
-                    string retValue = Common.GetNumericChar(fontValue, out counter);
-                    if (retValue.Length > 0)
-                    {
-                        float value = float.Parse(retValue) * 1.0F;
-                        string unit = fontValue.Substring(counter);
-                        newValue = value + unit;
-                    }
-                    else
-                    {
-                        if (fontValue == "larger" || fontValue == "smaller")
-                        {
-                            newValue = fontValue;
-                        }
-                    }
-                }
-                _IDProperty["PointSize"] = newValue;
-            }
-        }
-
     }
 }

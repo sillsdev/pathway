@@ -37,7 +37,6 @@ namespace Test.InDesignConvert
         private string _outputStory;
         private string _outputStyles;
         private Dictionary<string, string> _expected = new Dictionary<string, string>();
-        private string _className = "a";
         private string _testFolderPath = string.Empty;
         Dictionary<string, Dictionary<string, string>> _idAllClass = new Dictionary<string, Dictionary<string, string>>();
         private InStyles _stylesXML;
@@ -47,7 +46,6 @@ namespace Test.InDesignConvert
         #endregion
 
         #region Public Variables
-        public XPathNodeIterator NodeIter;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
         private CssTree _cssTree;
         #endregion
@@ -1634,7 +1632,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        /// TD-1967 - TD-1968 - DropCaps with No of Digits Test
+        // TD-1967 - TD-1968 - DropCaps with No of Digits Test
         public void DropCaps_Digits()
         {
             _storyXML = new InStory();
@@ -1666,8 +1664,8 @@ namespace Test.InDesignConvert
         public void FootNote()
         {
             _storyXML = new InStory();
-            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/FootNote.css");
-            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/FootNote.xhtml");
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/Footnote.css");
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/Footnote.xhtml");
             ExportProcess();
 
             _expected.Add("Position", "Superscript");
@@ -1708,7 +1706,6 @@ namespace Test.InDesignConvert
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
-            ///
             _storyXML = new InStory();
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case2.css");
             ExportProcess();
@@ -1878,7 +1875,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TokPisin()
         {
@@ -1890,7 +1887,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TeTest()
         {
@@ -1902,7 +1899,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         [Ignore]
         public void Bughotugospels()
@@ -1915,7 +1912,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void B1pe()
         {
@@ -1929,7 +1926,7 @@ namespace Test.InDesignConvert
         [Ignore]
         // Sankar
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void Kabwa()
         {

@@ -33,7 +33,7 @@ namespace SIL.PublishingSolution
         protected string _xmlFileWithPath;
         protected string ProjSchemaPath;
 
-        private string _userFilePath, _pathwayFilePath, _pathwayApplicationPath;
+        private string _userFilePath, _pathwayFilePath;
         private XmlDocument _userXml, _pathwayXml;
         private XmlElement _userRoot, _pathwayRoot;
         private bool _compareVersion = false;
@@ -62,7 +62,11 @@ namespace SIL.PublishingSolution
 
             foreach (KeyValuePair<string, string> data in inputType)
             {
-
+                string styleSettingsFile = Common.PathCombine(Path.GetDirectoryName(appPath), data.Value);
+                if (!File.Exists(styleSettingsFile))
+                {
+                    continue;
+                }
                 if (CreateSettingsFile(appPath, data))
                 {
                     continue;
@@ -70,8 +74,7 @@ namespace SIL.PublishingSolution
 
                 _pathwayFilePath = Common.PathCombine(Path.GetDirectoryName(appPath), data.Value);
                 _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
-                
-                
+
                 if (!OpenFile())
                 {
                     continue;
@@ -102,7 +105,6 @@ namespace SIL.PublishingSolution
                 {
                     File.Delete(_userFilePath);
                 }
-
             }
 
             if (!_compareVersion)
@@ -126,11 +128,14 @@ namespace SIL.PublishingSolution
             _userFilePath = Common.PathCombine(Common.GetAllUserAppPath(), data.Key);
             string pathwayFolder = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
             pathwayFolder = Common.PathCombine(pathwayFolder, "Pathway");
-            if (!Directory.Exists(pathwayFolder))
+            if (!Directory.Exists(pathwayFolder) || !Directory.Exists(_userFilePath))
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
+                if (!File.Exists(_userFilePath))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
+                }
             }
-            if (!Directory.Exists(Path.GetDirectoryName(_userFilePath)))
+            if (File.Exists(_userFilePath) && !Directory.Exists(Path.GetDirectoryName(_userFilePath)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(_userFilePath));
             }
@@ -323,7 +328,7 @@ namespace SIL.PublishingSolution
                 return false;
             }
 
-            _pathwayXml = Common.DeclareXMLDocument(false);
+            _pathwayXml = new XmlDocument();
             _pathwayXml.Load(_pathwayFilePath);
             _pathwayRoot = _pathwayXml.DocumentElement;
             if (_pathwayRoot == null)

@@ -60,16 +60,6 @@ namespace Test.CssDialog
         #endregion
 
         /// <summary>
-        ///A test for ShowPreview Constructor
-        ///</summary>
-        //[Test]
-        public void PreviewConstructorTest()
-        {
-            Preview target = new Preview();
-            //Assert.Inconclusive("TODO: Implement code to verify target");
-        }
-
-        /// <summary>
         ///A test for PdfPreview
         ///</summary>
         [Test]
@@ -79,12 +69,8 @@ namespace Test.CssDialog
             Form myForm = new Form();
             target.ParentForm = myForm;
             CommonTestMethod.DisableDebugAsserts();
-            Assert.Throws<KeyNotFoundException>(
-                delegate
-                    {
-                        target.PdfPreview();
-                    }
-                );
+            Assert.Throws(typeof (KeyNotFoundException), delegate { target.PdfPreview(); });
+            CommonTestMethod.EnableDebugAsserts();
         }
 
         /// <summary>

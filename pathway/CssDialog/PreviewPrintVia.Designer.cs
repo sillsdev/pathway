@@ -176,6 +176,7 @@
             this.Text = "Select Layout";
             this.Activated += new System.EventHandler(this.PreviewPrintVia_Activated);
             this.Load += new System.EventHandler(this.PreviewPrintVia_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PreviewPrintVia_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

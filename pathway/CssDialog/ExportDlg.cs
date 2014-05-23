@@ -27,7 +27,7 @@ namespace SIL.PublishingSolution
     public partial class ExportDlg : Form
     {
         public string ExportType { get; set; }
-
+        private string _helpTopic = string.Empty;
         #region Constructor
         public ExportDlg()
         {
@@ -39,8 +39,8 @@ namespace SIL.PublishingSolution
         private void ExportDlg_Load(object sender, EventArgs e)
         {
             LocDB.Localize(this, null);     // Form Controls
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "Exporting.htm");
+            _helpTopic = "Exporting.htm";
+            ShowHelp.ShowHelpTopic(this, _helpTopic, Common.IsUnixOS(), false);
             ArrayList exportType = Backend.GetExportType(ExportType);
             if (exportType.Count > 0)
             {

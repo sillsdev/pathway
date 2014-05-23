@@ -48,7 +48,7 @@ namespace SIL.PublishingSolution
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 string organizationName = dlg.Organization;
-                if(organizationName.Trim().Length == 0)
+                if (organizationName.Trim().Length == 0)
                 {
                     ddlOrganization.SelectedIndex = 0;
                     return;
@@ -156,11 +156,7 @@ namespace SIL.PublishingSolution
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            Common.PathwayHelpSetup();
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-            SendKeys.Send("{F1}");
-
+            ShowHelp.ShowHelpTopicKeyPress(this, _helpTopic, Common.IsUnixOS());
         }
     }
 }

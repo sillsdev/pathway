@@ -52,10 +52,6 @@ namespace Test.InDesignConvert
         private readonly Dictionary<string, string> _expected = new Dictionary<string, string>();
         #endregion
 
-        #region Public Variables
-        public XPathNodeIterator NodeIter;
-        #endregion
-
         #region Setup
         [TestFixtureSetUp]
         protected void SetUp()

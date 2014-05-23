@@ -77,6 +77,10 @@ namespace Test.CssDialog
                 ArgumentNullException expectedException = new ArgumentNullException();
                 Assert.AreEqual(expectedException.GetType(), e.GetType());
             }
+            finally
+            {
+                CommonTestMethod.EnableDebugAsserts();
+            }
         }
 
         /// <summary>
@@ -98,6 +102,10 @@ namespace Test.CssDialog
             {
                 KeyNotFoundException expectedException = new KeyNotFoundException();
                 Assert.AreEqual(expectedException.GetType(), e.GetType());
+            }
+            finally
+            {
+                CommonTestMethod.EnableDebugAsserts();
             }
         }
 
@@ -121,6 +129,10 @@ namespace Test.CssDialog
             {
                 NullReferenceException expectedException = new NullReferenceException();
                 Assert.AreEqual(expectedException.GetType(), e.GetType());
+            }
+            finally
+            {
+                CommonTestMethod.EnableDebugAsserts();
             }
         }
 

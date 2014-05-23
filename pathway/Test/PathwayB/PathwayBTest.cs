@@ -272,6 +272,7 @@ namespace Test
         /// Runs PathwayB.exe with the -h parameter, to get the usage info back
         /// </summary>
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void UsageTest()
         {
@@ -281,6 +282,7 @@ namespace Test
         }
 
         [Test]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void XhtmlDictionaryMainAndRevTest()
         {
@@ -311,6 +313,7 @@ namespace Test
         /// Export from TE itself is not affected by this code.
         /// </summary>
         [Test]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void XhtmlScriptureTest()
         {
@@ -332,6 +335,7 @@ namespace Test
         /// to pass, you need to have ParatextShared.dll and NetLoc.dll in your Pathway installation directory.
         /// </summary>
         [Test]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void UsfmTest()
         {
@@ -365,6 +369,7 @@ namespace Test
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void UsxTest()
         {

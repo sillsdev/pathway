@@ -14,9 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
 
 namespace SIL.Tool
 {

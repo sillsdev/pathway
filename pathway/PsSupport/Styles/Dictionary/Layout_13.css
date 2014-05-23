@@ -13,18 +13,33 @@
 @import "Leading_nc.css";
 @import "Background_Transparent.css";
 @import "Embedded_Spans_nc.css";
-@import "Pictures_Yes.css";
+@import "Pictures_Frame.css";
 @import "Running_Head_Mirrored.css";
 @import "Rules_Yes.css";
 @import "PageNumber_TopInside.css"; 
 @import "Reversal_Reference_Numbers.css";
 
+.body {
+	direction: rtl;
+}
+
+.entry{
+	text-align:right;
+}
+
 .pictureRight {
     float:left;
 }
+
 .pictureLeft {
     float:left;
 }
+
 .pictureCenter {
     float:left;
 }
+
+span[lang='en']{ direction: ltr;}
+span[lang='ur']{ direction: rtl;} 
+div[lang='en']{ direction: ltr;}
+div[lang='ur']{ direction: rtl;}

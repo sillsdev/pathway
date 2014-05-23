@@ -39,13 +39,11 @@ namespace Test.CssDialog
 
         public static void EnableDebugAsserts()
         {
-            if (Debug.Listeners.Count > 0)
-                return;
-            for (var i = traceListeners.Count; i-- != 0; )
+            if (traceListeners.Count <= 0) return;
+            Debug.Listeners.Clear();
+            for (var i = traceListeners.Count; i-- != 0;)
             {
-                TraceListener traceListener = traceListeners[0] as TraceListener;
-                Debug.Assert(traceListener != null);
-                Debug.Listeners.Add(traceListener);
+                Debug.Listeners.Add((TraceListener)traceListeners[0]);
                 traceListeners.RemoveAt(0);
             }
         }

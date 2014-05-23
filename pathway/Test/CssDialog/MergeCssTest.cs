@@ -37,7 +37,6 @@ namespace Test.CssDialog
         string _expectBasePath = string.Empty;
         /// <summary>path to all users output</summary>
         string _publishingSolutionsData = string.Empty;
-        const string _StyleSettings = "StyleSettings.xml";
 
         [TestFixtureSetUp]
         protected void SetUp()
@@ -48,6 +47,12 @@ namespace Test.CssDialog
             _expectBasePath = Common.PathCombine(currentFolder, "Expected");
             var allUsersDataDir = Common.GetAllUserAppPath();
             _publishingSolutionsData = Common.PathCombine(allUsersDataDir, Common.PathCombine("SIL", "Pathway"));
+        }
+
+        [TestFixtureTearDown]
+        protected void TearDown()
+        {
+            CommonTestMethod.EnableDebugAsserts();
         }
 
         #region Additional test attributes
@@ -104,7 +109,7 @@ namespace Test.CssDialog
             MergeCss target = new MergeCss(); // TODO: Initialize to an appropriate value
             string css = Common.PathCombine(_inputBasePath, "MergeFile4.css"); // TODO: Initialize to an appropriate value
             string actual = target.Make(css, "Temp1.css");
-            string expected = Common.PathCombine(_expectBasePath, "MergeFile.css"); ; // TODO: Initialize to an appropriate value
+            string expected = Common.PathCombine(_expectBasePath, "MergeFile.css"); // TODO: Initialize to an appropriate value
             TextFileAssert.AreEqual(expected, actual, "Make Funtion test failed");
         }
 
@@ -117,7 +122,7 @@ namespace Test.CssDialog
             MergeCss target = new MergeCss(); // TODO: Initialize to an appropriate value
             string css = Common.PathCombine(_inputBasePath, "MergeFile5.css"); // TODO: Initialize to an appropriate value
             string actual = target.Make(css, "Temp1.css");
-            string expected = Common.PathCombine(_expectBasePath, "MergeMissingFile.css"); ; // TODO: Initialize to an appropriate value
+            string expected = Common.PathCombine(_expectBasePath, "MergeMissingFile.css"); // TODO: Initialize to an appropriate value
             TextFileAssert.AreEqual(expected, actual, "Make Funtion missing file test failed");
         }
 
@@ -133,7 +138,7 @@ namespace Test.CssDialog
                 Directory.Delete(workDir,true);
             string css = Common.PathCombine(_inputBasePath, "MergeFile4.css"); // TODO: Initialize to an appropriate value
             string actual = target.Make(css, "Temp1.css");
-            string expected = Common.PathCombine(_expectBasePath, "MergeFile.css"); ; // TODO: Initialize to an appropriate value
+            string expected = Common.PathCombine(_expectBasePath, "MergeFile.css"); // TODO: Initialize to an appropriate value
             TextFileAssert.AreEqual(expected, actual, "Make Funtion test failed");
         }
 
@@ -149,7 +154,7 @@ namespace Test.CssDialog
                 Directory.Delete(workDir, true);
             string css = Common.PathCombine(_inputBasePath, "MergeFile7.css"); // TODO: Initialize to an appropriate value
             string actual = target.Make(css, "Temp1.css");
-            string expected = Common.PathCombine(_expectBasePath, "MergeBottomImportFile.css"); ; // TODO: Initialize to an appropriate value
+            string expected = Common.PathCombine(_expectBasePath, "MergeBottomImportFile.css"); // TODO: Initialize to an appropriate value
             TextFileAssert.AreEqual(expected, actual, "Make Funtion test failed");
         }
     }

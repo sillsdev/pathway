@@ -14,9 +14,8 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using SIL.Tool;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
     public interface IExportProcess
     {

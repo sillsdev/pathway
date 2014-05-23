@@ -22,7 +22,7 @@
 // fields for the user. These fields can be overridden by the user.
 //
 // A fuller description of this dialog can be found in the JIRA issue attachments
-// for TD-2344: https://www.jira.insitehome.org/secure/attachment/27139/PubInfo_Proposal_v5.docx
+// for TD-2344: https://jira.sil.org/secure/attachment/27139/PubInfo_Proposal_v5.docx
 // </remarks>
 // --------------------------------------------------------------------------------------
 
@@ -390,13 +390,7 @@ namespace SIL.PublishingSolution
                 LoadProperty();
                 EnableUIElements();
 
-                if (!_isUnixOS)
-                {
-                    Common.PathwayHelpSetup();
-                    Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                    Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-                }
-
+                ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS, false);
                 if (AppDomain.CurrentDomain.FriendlyName.ToLower().IndexOf("configurationtool") == -1)
                 {
                     Common.databaseName = DatabaseName;
@@ -983,22 +977,6 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        /// <summary>
-        /// Preprocess the xhtml file to replace image names, and link to the merged css file.
-        /// </summary>
-        /// <param name="projInfo">information about input data</param>
-        /// <returns>path name to processed xthml file</returns>
-        private string GetProcessedXhtml(PublicationInformation projInfo)
-        {
-            var result = projInfo.DefaultXhtmlFileWithPath;
-
-            result = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
-                                              ".xhtml");//collectionName + ".xhtml"
-            File.Copy(projInfo.DefaultXhtmlFileWithPath, result, true);
-
-            return result;
-        }
-
         private static void SaveDefaultProperty(ExportThroughPathway dlg)
         {
             Param.SetDefaultValue(Param.PrintVia, dlg.Format);
@@ -1080,7 +1058,7 @@ namespace SIL.PublishingSolution
         private void btnHelp_Click(object sender, EventArgs e)
         {
             SetTabbedHelpTopic();
-            SendKeys.Send("{F1}");
+            ShowHelp.ShowHelpTopicKeyPress(this, _helpTopic, Common.IsUnixOS());
         }
 
         private void BtnBrwsLayout_Click(object sender, EventArgs e)
@@ -1168,9 +1146,7 @@ namespace SIL.PublishingSolution
             // expand / collapse the dialog (Toggle)
             IsExpanded = !IsExpanded;
             ResizeDialog();
-
-            if (!_isUnixOS)
-                SetTabbedHelpTopic();
+            SetTabbedHelpTopic();
         }
 
         private void ddlStyle_SelectedIndexChanged(object sender, EventArgs e)
@@ -1233,8 +1209,7 @@ namespace SIL.PublishingSolution
         private void lnkIP_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             _helpTopic = "Concepts/Intellectual_Property.htm";
-            SetTabbedHelpTopic();
-            SendKeys.Send("{F1}");
+            ShowHelp.ShowHelpTopicKeyPress(this, _helpTopic, Common.IsUnixOS());
         }
 
         private void btnCoverImage_Click(object sender, EventArgs e)
@@ -1310,16 +1285,27 @@ namespace SIL.PublishingSolution
             ddlCopyrightStatement.Enabled = rdoStandardCopyright.Checked;
             txtColophonFile.Enabled = rdoCustomCopyright.Checked;
             btnBrowseColophon.Enabled = rdoCustomCopyright.Checked;
-            var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
-            txtColophonFile.Text = Common.PathCombine(copyrightDir, "SIL_Custom_Template.xhtml");
+            txtColophonFile.Text = GetCopyRightFileName();
+        }
+
+        /// <summary>
+        /// Get the Custom copyright file when exist in the location 
+        /// </summary>
+        /// <returns></returns>
+        private string GetCopyRightFileName()
+        {
+            string copyrightFileName = Param.GetMetadataValue(Param.CopyrightPageFilename, Organization);
+            if (!File.Exists(copyrightFileName))
+            {
+                var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+                copyrightFileName = Common.PathCombine(copyrightDir, "SIL_Custom_Template.xhtml");
+            }
+            return copyrightFileName;
         }
 
         private void lnkChooseCopyright_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            // TODO: replace with correct help topic
-
-            _helpTopic = "Tasks/Basic_Tasks/Choosing_a_rights_statement_overview.htm";
-            btnHelp_Click(sender, e);
+            ShowHelp.ShowHelpTopicKeyPress(this, "User_Interface/User_Interface_Terms/Copyright_Information_Page.htm", Common.IsUnixOS());
         }
 
         private void ddlCopyrightStatement_SelectedIndexChanged(object sender, EventArgs e)
@@ -1354,10 +1340,13 @@ namespace SIL.PublishingSolution
         private void SetTabbedHelpTopic()
         {
             if (!IsExpanded)
+            {
                 _helpTopic = (Text.Contains("Set Defaults"))
-                                ? "User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm"
-                                : "User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm";
+                                 ? "User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm"
+                                 : "User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm";
+            }
             else
+            {
                 switch (tabControl1.SelectedIndex)
                 {
                     case 0:
@@ -1370,28 +1359,12 @@ namespace SIL.PublishingSolution
                         _helpTopic = "User_Interface/Dialog_boxes/Processing_Options_tab.htm";
                         break;
                 }
-            //_helpTopic = "Concepts/Intellectual_Property.htm";
-            //_helpTopic = "/Concepts/Intellectual_Property_(Copyright)_Info.htm";//Concepts/Intellectual_Property.htm
-            if (_isUnixOS)
-            {
-                Common.PathwayHelpSetup();
-                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-                startInfo.FileName = "chmsee";
-                startInfo.Arguments = Common.HelpProv.HelpNamespace;
-                System.Diagnostics.Process.Start(startInfo);
             }
-            else
-            {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-            }
-
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!_isUnixOS)
-                SetTabbedHelpTopic();
+            SetTabbedHelpTopic();
         }
 
         private void btnHelpShow_Click(object sender, EventArgs e)
@@ -1401,20 +1374,19 @@ namespace SIL.PublishingSolution
 
         private void CallHelp()
         {
-            Common.PathwayHelpSetup();
-            if (_isUnixOS)
+            ShowHelp.ShowHelpTopicKeyPress(this, @"Concepts\Destination.htm", _isUnixOS);
+        }
+
+        private void ExportThroughPathway_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "chmsee";
-                startInfo.Arguments = Common.HelpProv.HelpNamespace;
-                Process.Start(startInfo);
+                if (e.KeyCode == Keys.F1)
+                {
+                    ShowHelp.ShowHelpTopicKeyPress(this, _helpTopic, _isUnixOS);
+                }
             }
-            else
-            {
-                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-                Common.HelpProv.SetHelpKeyword(this, @"Concepts\Destination.htm");
-                SendKeys.Send("{F1}");
-            }
+            catch { }
         }
     }
 }

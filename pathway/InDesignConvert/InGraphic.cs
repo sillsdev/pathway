@@ -27,21 +27,12 @@ namespace SIL.PublishingSolution
     {
         #region Private Variables
         XmlTextWriter _writer;
-        CssTree _cssTree = new CssTree();
         InMapProperty mapProperty = new InMapProperty();
         Dictionary<string, Dictionary<string, string>> _cssProperty = new Dictionary<string, Dictionary<string, string>>();
         ArrayList _cssBorderColor = new ArrayList();
         #endregion
 
-        #region Constructor
-        public InGraphic()
-        {
-
-        }
-        #endregion
-
-
-        public bool CreateIDGraphic(string projectPath, Dictionary<string, Dictionary<string, string>> cssProperty, ArrayList cssBorderColor)
+        public void CreateIDGraphic(string projectPath, Dictionary<string, Dictionary<string, string>> cssProperty, ArrayList cssBorderColor)
         {
             try
             {
@@ -55,14 +46,11 @@ namespace SIL.PublishingSolution
                 CreateGradient();
                 CreateStrokeStyle();
                 EndIDGraphic();
-
-                return true;
             }
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
             }
-            return false;
         }
 
         private void EndIDGraphic()

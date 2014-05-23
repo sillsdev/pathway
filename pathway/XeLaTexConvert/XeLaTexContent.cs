@@ -33,10 +33,7 @@ namespace SIL.PublishingSolution
     {
         #region Private Variable
 
-        private int _storyNo = 0;
-        private int _hyperLinkNo = 0;
         private bool isFileEmpty = true;
-        private bool isFileCreated;
         private bool _isDropCaps;
         private bool _nextContent;
         private int _incrementDropCap = 0;
@@ -48,11 +45,8 @@ namespace SIL.PublishingSolution
         private string imageClass = string.Empty;
         private string _inputPath;
         private ArrayList _textFrameClass = new ArrayList();
-        private ArrayList _textVariables = new ArrayList();
-        private ArrayList _columnClass = new ArrayList();
         private ArrayList _psuedoBefore = new ArrayList();
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
-        private Dictionary<string, ArrayList> _styleName = new Dictionary<string, ArrayList>();
         private ArrayList _crossRef = new ArrayList();
         private int _crossRefCounter = 1;
         private bool _isWhiteSpace = true;
@@ -60,10 +54,7 @@ namespace SIL.PublishingSolution
         private List<string> _usedStyleName = new List<string>();
         private List<string> _mergedInlineStyle;
         private bool _IsHeadword = false;
-        private bool _isDropCap = false;
         private bool _xetexNewLine;
-        private string _dropCapStyle = string.Empty;
-        private string _currentStoryName = string.Empty;
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
         Dictionary<string, List<string>> _classInlineInnerStyle = new Dictionary<string, List<string>>();
         private string xhtmlFile;
@@ -77,7 +68,6 @@ namespace SIL.PublishingSolution
         private List<string> _mathStyle = new List<string>();
         private int _inlineCount;
         private string _headerContent = string.Empty;
-        private bool _dictionaryStarting = false;
         public bool _dictionaryEnding = false;
         private string _tocStartingPage;
         private int _tocPageStock = 0;
@@ -86,9 +76,11 @@ namespace SIL.PublishingSolution
         private bool _isHeadwordInsertedAfterImage = false;
         private string _bookName = string.Empty;
         public string _dicMainReversal = string.Empty;
-        private string _chapterStyleforHeader = string.Empty;
         private int _bookCount = 0;
         private bool _bookPageBreak;
+        private bool _hideFirstVerseNo;
+		//private bool _directionEnd = false;
+        private string _directionStart = string.Empty;
 
         #endregion
 
@@ -124,9 +116,7 @@ namespace SIL.PublishingSolution
             _inputPath = projInfo.ProjectPath;
 
             _dicMainReversal = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-
             xhtmlFile = projInfo.DefaultXhtmlFileWithPath;
-            Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             InitializeData(projInfo.ProjectPath, cssClass, classFamily, cssClassOrder);
             InitializeMathStyle();
             ProcessProperty();
@@ -398,6 +388,7 @@ namespace SIL.PublishingSolution
             catch (XmlException e)
             {
                 var msg = new[] { e.Message, xhtmlFileWithPath };
+                Console.WriteLine(msg);
             }
         }
 
@@ -566,17 +557,20 @@ namespace SIL.PublishingSolution
                 }
                 content = builder.ToString();
             }
-            // No space after versenumber
-            if (_classNameWithLang.IndexOf("VerseNumber") == 0)
-            {
-                _isWhiteSpace = true;
-            }
+            //// No space after versenumber
+            //if (_classNameWithLang.IndexOf("VerseNumber") == 0)
+            //{
+            //    _isWhiteSpace = true;
+            //}
             return content;
         }
 
         private void WriteCharacterStyle(string content, string characterStyle)
         {
             SetHomographNumber(false);
+
+            
+
             string footerClassName = string.Empty;
             if (_isDropCaps)
             {
@@ -615,10 +609,32 @@ namespace SIL.PublishingSolution
                 }
 
 
-                content = content.Replace("~", "\\textasciitilde{~}");
+                if (content != null) content = content.Replace("~", "\\textasciitilde{~}");
 
+                if(_hideFirstVerseNo && _childName.ToLower().IndexOf("verse") == 0)
+                {
+                    content = string.Empty;
+                }
+                //if (_characterName != null && IdAllClass.ContainsKey(_characterName) && IdAllClass[_characterName].ContainsKey("direction"))
+                //{
+                //    if (IdAllClass[_characterName]["direction"] == "rtl")
+                //    {
+                //        _xetexFile.Write("\\RL{");
+                //        _directionEnd = true;
+                //    }
+                //}
+
+                if (_childName.ToLower().Contains("sectionhead"))//spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody
+                {
+                    _inlineCount++;
+                }
                 _xetexFile.Write(content);
-
+                //if (_directionEnd)
+                //{
+                //    string directionEnd = "}";
+                //    _xetexFile.Write(directionEnd);
+                //    _directionEnd = false;
+                //}
                 CloseInlineInnerStyle(value);
                 for (int i = 1; i <= _inlineCount; i++) // close braces for inline style
                 {
@@ -626,8 +642,10 @@ namespace SIL.PublishingSolution
 
                 }
                 _inlineCount = 0;
+
                 _xetexFile.Write("}");
 
+                
                 if (_incrementDropCap != 0)
                 {
                     _xetexFile.Write("}");
@@ -669,10 +687,7 @@ namespace SIL.PublishingSolution
             {
                 for (int i = 0; i < value.Count; i++)
                 {
-                    if (value[i].IndexOf("$") == -1)
-                        _xetexFile.Write("}");
-                    else
-                        _xetexFile.Write("}$");
+                    _xetexFile.Write(value[i].IndexOf("$") == -1 ? "}" : "}$");
                 }
             }
         }
@@ -720,14 +735,7 @@ namespace SIL.PublishingSolution
 
                 string paraStyle;
 
-                if (characterStyle.IndexOf("No character style") > 0)
-                {
-                    paraStyle = _previousParagraphName;
-                }
-                else
-                {
-                    paraStyle = characterStyle;
-                }
+                paraStyle = characterStyle.IndexOf("No character style") > 0 ? _previousParagraphName : characterStyle;
                 string mergedParaStyle = MergeInlineStyle(paraStyle);
 
                 string getStyleName = StackPeek(_allStyle);
@@ -735,8 +743,14 @@ namespace SIL.PublishingSolution
                 {
                     List<string> inlineStyle = _classInlineStyle[mergedParaStyle];
                     int paraStyleCount = 0;
+                    int letterInlineCount = 0;
                     foreach (string property in inlineStyle)
                     {
+                        if (property.Contains("\\section*{\\needspace"))
+                        {
+                            letterInlineCount++;
+                        }
+
                         string propName = Common.LeftString(property, " ");
                         if (_paragraphPropertyList.Contains(propName))
                         {
@@ -751,16 +765,12 @@ namespace SIL.PublishingSolution
                         _xetexFile.Write(property);
                         _xetexFile.Write("{");
                     }
-                    _inlineCount = inlineStyle.Count - paraStyleCount;
+                    _inlineCount = (inlineStyle.Count - paraStyleCount) + letterInlineCount;
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
                     if (_projInfo.ProjectInputType.ToLower() == "scripture")
                     {
                         string headerStyle = Common.ReplaceSeperators(_previousParagraphName);
                         string referenceFormat = _projInfo.HeaderReferenceFormat;
-                        if (mergedParaStyle.ToLower().IndexOf("chapter") == 0)
-                        {
-                            _chapterStyleforHeader = mergedParaStyle;
-                        }
                         if (mergedParaStyle.ToLower().IndexOf("chapter") == 0 && (referenceFormat == "Genesis 1" || referenceFormat == "Gen 1"))
                         {
                             if (_headerContent.Trim().Length == 0)
@@ -851,8 +861,10 @@ namespace SIL.PublishingSolution
                             _headerContent = content;
                         }
                     }
-
-                    _xetexFile.Write("\\" + mergedParaStyle + "{");
+                    if (mergedParaStyle.ToLower().Contains("sectionhead"))//spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody
+                        _xetexFile.Write("\\section*{\\needspace {8\\baselineskip}\\" + mergedParaStyle + "{");
+                    else
+                        _xetexFile.Write("\\" + mergedParaStyle + "{");
                 }
                 AddUsedStyleName(characterStyle);
             }
@@ -925,7 +937,7 @@ namespace SIL.PublishingSolution
             {
                 string styleName = _childName;
                 styleName = Common.ReplaceSeperators(styleName);
-                _xetexFile.Write(" \\footnote {\\" + styleName + "{" + content + "} } ");
+                _xetexFile.Write("\\footnote {\\" + styleName + "{" + content + "}}");
             }
         }
 
@@ -936,7 +948,6 @@ namespace SIL.PublishingSolution
                 string status = _anchorBookMarkName.Substring(0, 4);
                 if (status == "href")
                 {
-                    string bookMark = _anchorBookMarkName.Replace("href#", "");
                     _anchorBookMarkName = "endbookmark";
                 }
                 else if (status == "name")
@@ -969,7 +980,6 @@ namespace SIL.PublishingSolution
                 string srcFile;
                 string wrapMode = "BoundingBoxTextWrap";
                 string HoriAlignment = "LeftAlign";
-                const string HoriRefPoint = "ColumnEdge";
                 string VertAlignment = "CenterAlign";
                 string VertRefPoint = "LineBaseline";
                 string AnchorPoint = "TopLeftAnchor";
@@ -1010,25 +1020,25 @@ namespace SIL.PublishingSolution
                 {
                     if (rectWidth == "0") //H=72 W=0
                     {
-                        rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
+                        rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
                     }
 
                 }
                 else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72 
                 {
-                    rectHeight = Common.CalcDimension(fromPath, ref rectWidth, 'H');
+                    rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
                 }
                 else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0, 
                 {
 
                     rectWidth = Convert.ToString(Common.ColumnWidth * .9);
-                    rectHeight = Common.CalcDimension(fromPath, ref rectWidth, 'H');
+                    rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
                 }
                 else
                 {
                     //Default value is 72 
                     rectHeight = defaultHeight.ToString(); // fixed the width as 1 in = 72pt;
-                    rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
+                    rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
                 }
                 if (rectWidth == "0")
                 {
@@ -1051,73 +1061,13 @@ namespace SIL.PublishingSolution
 
                 double x = double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US")) / 3;
                 double y = double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US")) / 3;
-
-                string xPlus = x.ToString();
-                string xMinus = "-" + xPlus;
-
-                string yPlus = y.ToString();
-                string yMinus = "-" + yPlus;
-
+                
                 int height = Convert.ToInt32(y); //1 in
                 int width = Convert.ToInt32(x); // 1 in
 
                 string picFile = string.Empty;
-                //TODO Make it function 
-                //To get Image details
-                if (File.Exists(fromPath))
-                {
-                    picFile = Path.GetFileName(fromPath);
-                    string toPath = Common.PathCombine(_inputPath, picFile);
-                    string installedDirectory = XeLaTexInstallation.GetXeLaTexDir();
-                    string destination = string.Empty;
 
-                    if (Common.IsUnixOS())
-                    {
-                        toPath = _inputPath;
-                        if (picFile.IndexOf(".tif") >= 0)
-                        {
-                            if (picFile != null)
-                                picFile = picFile.Replace(".tif", ".jpg");
-                        }
-                        destination = Common.PathCombine(_inputPath, Path.GetFileName(picFile));
-                        installedDirectory = _inputPath;
-                    }
-                    else
-                    {
-                        installedDirectory = Common.PathCombine(installedDirectory, "bin");
-                        installedDirectory = Common.PathCombine(installedDirectory, "win32");
-                        toPath = installedDirectory;
-                        destination = Common.PathCombine(installedDirectory, Path.GetFileName(picFile));
-                    }
-
-                    if (!File.Exists(destination))
-                    {
-                        if (fromPath.IndexOf(".tif") >= 0)
-                        {
-                            toPath = Common.ConvertTifftoImage(fromPath, "jpg");
-                            if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
-                            if (destination != null) destination = destination.Replace(".tif", ".jpg");
-                            fromPath = toPath;
-                            toPath = installedDirectory;
-                        }
-                        if (!string.IsNullOrEmpty(toPath))
-                        {
-                            if (fromPath != Common.PathCombine(toPath, Path.GetFileName(fromPath)))
-                                File.Copy(fromPath, Common.PathCombine(toPath, Path.GetFileName(fromPath)), true);
-
-                        }
-                    }
-                    else
-                    {
-                        if (picFile.IndexOf(".tif") >= 0)
-                        {
-                            if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
-                        }
-                    }
-                    Dictionary<string, string> prop = new Dictionary<string, string>();
-                    prop.Add("filePath", toPath);
-                    _newProperty["ImagePath"] = prop;
-                }
+                picFile = ImageFileProcessing(fromPath, picFile);
 
                 WriteImage(picFile, height, width);
 
@@ -1127,6 +1077,64 @@ namespace SIL.PublishingSolution
                 _isParagraphClosed = true;
             }
             return inserted;
+        }
+
+        private string ImageFileProcessing(string fromPath, string picFile)
+        {
+            if (File.Exists(fromPath))
+            {
+                picFile = Path.GetFileName(fromPath);
+                string toPath = Common.PathCombine(_inputPath, picFile);
+                string installedDirectory = XeLaTexInstallation.GetXeLaTexDir();
+                string destination = string.Empty;
+
+                if (Common.IsUnixOS())
+                {
+                    toPath = _inputPath;
+                    if (picFile != null && picFile.IndexOf(".tif") >= 0)
+                    {
+                        if (picFile != null)
+                            picFile = picFile.Replace(".tif", ".jpg");
+                    }
+                    destination = Common.PathCombine(_inputPath, Path.GetFileName(picFile));
+                    installedDirectory = _inputPath;
+                }
+                else
+                {
+                    installedDirectory = Common.PathCombine(installedDirectory, "bin");
+                    installedDirectory = Common.PathCombine(installedDirectory, "win32");
+                    toPath = installedDirectory;
+                    destination = Common.PathCombine(installedDirectory, Path.GetFileName(picFile));
+                }
+
+                if (!File.Exists(destination))
+                {
+                    if (fromPath.IndexOf(".tif") >= 0)
+                    {
+                        toPath = Common.ConvertTifftoImage(fromPath, "jpg");
+                        if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
+                        if (destination != null) destination = destination.Replace(".tif", ".jpg");
+                        fromPath = toPath;
+                        toPath = installedDirectory;
+                    }
+                    if (!string.IsNullOrEmpty(toPath))
+                    {
+                        if (fromPath != Common.PathCombine(toPath, Path.GetFileName(fromPath)))
+                            File.Copy(fromPath, Common.PathCombine(toPath, Path.GetFileName(fromPath)), true);
+                    }
+                }
+                else
+                {
+                    if (picFile != null && picFile.IndexOf(".tif") >= 0)
+                    {
+                        if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
+                    }
+                }
+                Dictionary<string, string> prop = new Dictionary<string, string>();
+                prop.Add("filePath", toPath);
+                _newProperty["ImagePath"] = prop;
+            }
+            return picFile;
         }
 
         private void WriteImage(string picFile, int height, int width)
@@ -1248,10 +1256,11 @@ namespace SIL.PublishingSolution
         {
             if (_allParagraph.Count > 0)
             {
-                string[] splitedClassName = _allParagraph.ToArray(); ; // _allStyle.ToArray();
+                string[] splitedClassName = _allParagraph.ToArray(); // _allStyle.ToArray();
 
                 if (splitedClassName.Length > 0)
                 {
+                    bool result = false;
                     for (int i = 0; i < splitedClassName.Length; i++) // // From Recent to Begining Class
                     {
                         string clsName = splitedClassName[i];
@@ -1263,12 +1272,14 @@ namespace SIL.PublishingSolution
                                 AnchorPoint = "TopLeftAnchor";
                                 VertAlignment = "CenterAlign";
                                 VertRefPoint = "LineBaseline";
+                                result = true;
                                 break;
                             case "right":
                                 AnchorPoint = "TopRightAnchor";
                                 HoriAlignment = "RightAlign";
                                 VertAlignment = "CenterAlign";
                                 VertRefPoint = "LineBaseline";
+                                result = true;
                                 break;
                             case "top":
                             case "prince-column-top":
@@ -1279,12 +1290,14 @@ namespace SIL.PublishingSolution
                                 VertAlignment = "TopAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                             case "center":
                                 AnchorPoint = "TopCenterAnchor";
                                 HoriAlignment = "CenterAlign";
                                 VertAlignment = "CenterAlign";
                                 VertRefPoint = "LineBaseline";
+                                result = true;
                                 break;
                             case "top-right":
                                 AnchorPoint = "TopRightAnchor";
@@ -1292,6 +1305,7 @@ namespace SIL.PublishingSolution
                                 HoriAlignment = "RightAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                             case "bottom":
                             case "prince-column-bottom":
@@ -1302,6 +1316,7 @@ namespace SIL.PublishingSolution
                                 HoriAlignment = "LeftAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                             case "bottom-right":
                                 AnchorPoint = "BotomRightAnchor";
@@ -1309,14 +1324,19 @@ namespace SIL.PublishingSolution
                                 HoriAlignment = "RightAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                result = true;
                                 break;
                         }
                         wrapSide = GetPropertyValue(clsName, "clear", wrapSide);
-                        if (pos != "left" && wrapSide != "none")
+                        //if (pos != "left" && wrapSide != "none")
+                        //{
+                        //    break;
+                        //}
+                        //return;
+                        if (result)
                         {
                             break;
                         }
-                        return;
                     }
                 }
             }
@@ -1333,6 +1353,8 @@ namespace SIL.PublishingSolution
             DropCaps();
             SetHomographNumber(true);
             FooterSetup(Common.OutputType.XELATEX.ToString());
+
+            Direction();
 
             WriteParagraphInline();
 
@@ -1351,6 +1373,22 @@ namespace SIL.PublishingSolution
                 {
                     _textFrameClass.Add(_childName);
                 }
+            }
+        }
+
+        private void Direction()
+        {
+            string getStyleName = StackPeek(_allStyle);
+            if (IdAllClass[getStyleName].ContainsKey("direction"))
+            {
+                if (IdAllClass[getStyleName]["direction"] == "rtl")
+                {
+                    _directionStart = "\\RL{";
+                }
+                //else if (IdAllClass[getStyleName]["direction"] == "ltr")
+                //{
+                //    _directionStart = "\\LR{";
+                //}
             }
         }
 
@@ -1376,8 +1414,10 @@ namespace SIL.PublishingSolution
         {
             string getStyleName = StackPeek(_allStyle);
 
-            string paraStyle = _childName.Replace("_body", ""); ;
+            string paraStyle = _childName.Replace("_body", "");
             string childClass = Common.LeftString(paraStyle, "_");
+            //string directionStart1 = string.Empty;
+            //string directionEnd1 = string.Empty;
             if (_divType.Contains(_tagType) && _classInlineStyle.ContainsKey(childClass))
             {
                 string endParagraphString = string.Empty;
@@ -1461,6 +1501,11 @@ namespace SIL.PublishingSolution
                             displayNoneStart = "\\begin{comment}";
                             displayNoneEnd = "\\end{comment}\r\n";
                         }
+                        //else if (propName == "RTL")
+                        //{
+                        //    directionStart = "\\begin{RTLitems} \\item";
+                        //    directionEnd = "\\end{RTLitems}";
+                        //}
                         else if (propName == "padding-left")
                         {
                             paddingLeft = Common.RightString(property, " ");
@@ -1485,6 +1530,7 @@ namespace SIL.PublishingSolution
                         {
                             orphans = "\\clubpenalty=300";
                         }
+
                     }
                 }
 
@@ -1516,8 +1562,6 @@ namespace SIL.PublishingSolution
                     }
                 }
 
-
-
                 if (mdFrameStart != string.Empty)
                 {
                     string prop = "{\\begin{mdframed}[linecolor=white";
@@ -1540,13 +1584,16 @@ namespace SIL.PublishingSolution
                     _xetexFile.Write(txtAlignStart);
                     endParagraphString = txtAlignEnd + endParagraphString;
                 }
-
-
                 if (displayNoneStart != string.Empty)
                 {
                     _xetexFile.WriteLine(displayNoneStart);
                     endParagraphString = displayNoneEnd + " " + endParagraphString;
                 }
+                //if (directionStart != string.Empty)
+                //{
+                //    _xetexFile.WriteLine(directionStart);
+                //    endParagraphString = directionEnd + " " + endParagraphString;
+                //}
                 if (endParagraphString != string.Empty)
                 {
                     _braceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
@@ -1562,13 +1609,10 @@ namespace SIL.PublishingSolution
                 {
                     _xetexFile.WriteLine(orphans);
                 }
-
-
                 if (textIndent != string.Empty)
                 {
                     _xetexFile.Write(textIndent);
                 }
-
             }
             else if ((_tagType == "span") && _classInlineStyle.ContainsKey(childClass))
             {
@@ -1586,6 +1630,11 @@ namespace SIL.PublishingSolution
                             displayNoneStart = "\\begin{comment}";
                             displayNoneEnd = "\\end{comment}\r\n";
                         }
+                        //else if (propName == "RTL")
+                        //{
+                        //    directionStart = "\\begin{RTLitems} \\item";
+                        //    directionEnd = "\\end{RTLitems}";
+                        //}
                     }
                 }
 
@@ -1594,6 +1643,12 @@ namespace SIL.PublishingSolution
 
                     _xetexFile.WriteLine(displayNoneStart);
                     endParagraphString = displayNoneEnd + " " + endParagraphString;
+                }
+                if (_directionStart != string.Empty)
+                {
+                    _xetexFile.Write(_directionStart);
+                    endParagraphString = "} " + endParagraphString;
+                    _directionStart = string.Empty;
                 }
                 if (endParagraphString != string.Empty)
                 {
@@ -1606,7 +1661,8 @@ namespace SIL.PublishingSolution
 
         private void SetHeadwordTrue()
         {
-            if (_reader.GetAttribute("class") != null && _reader.GetAttribute("class").ToLower() == "headword")
+            var attribute = _reader.GetAttribute("class");
+            if (attribute != null && (attribute != null && attribute.ToLower() == "headword"))
             {
                 _IsHeadword = true;
                 _headwordStyles = true;
@@ -1631,45 +1687,6 @@ namespace SIL.PublishingSolution
             if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("vertical-align"))
             {
                 _isDropCaps = true;
-            }
-        }
-
-        private void DropCapsOLD()
-        {
-            string classNameWOLang = _classNameWithLang;
-            if (classNameWOLang.IndexOf("_.") > 0)
-                classNameWOLang = Common.LeftString(classNameWOLang, "_.");
-            string inner = string.Empty;
-
-            if (classNameWOLang == "ChapterNumber")
-            {
-                _chapterNo = _reader.ReadString();
-            }
-            if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("vertical-align"))
-            {
-                Dictionary<string, string> mystyle = new Dictionary<string, string>();
-                _isDropCap = true;
-                string lines = "2";
-                _allStyle.Pop();
-                CollectFootNoteChapterVerse(_chapterNo, Common.OutputType.XELATEX.ToString());
-
-                try
-                {
-                    if (IdAllClass[classNameWOLang].ContainsKey("PointSize") && IdAllClass[classNameWOLang]["PointSize"].IndexOf('%') > 0)
-                    {
-                        lines = (int.Parse(IdAllClass[classNameWOLang]["PointSize"].Replace("%", "")) / 100).ToString();
-                    }
-                }
-                catch
-                {
-                }
-                mystyle["DropCapCharacters"] = _chapterNo.Length.ToString();
-                mystyle["DropCapLines"] = lines; // No of Lines.
-                _paragraphName = classNameWOLang + _chapterNo.Length.ToString();
-                _newProperty[_paragraphName] = mystyle;
-                _dropCapStyle = _paragraphName;
-                Write();
-
             }
         }
 
@@ -1792,14 +1809,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void WriteEmptyHomographStyle()
-        {
-            if (isHomographNumber)
-            {
-                isHomographNumber = false;
-            }
-        }
-
         private void Psuedo()
         {
             // Psuedo Before
@@ -1854,7 +1863,6 @@ namespace SIL.PublishingSolution
             IdAllClass = new Dictionary<string, Dictionary<string, string>>();
             _newProperty = new Dictionary<string, Dictionary<string, string>>();
             ParentClass = new Dictionary<string, string>();
-            _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
 
             IdAllClass = idAllClass;
@@ -1888,7 +1896,16 @@ namespace SIL.PublishingSolution
             _paragraphPropertyList.Add("widows");
             _paragraphPropertyList.Add("orphans");
 
+            //Direction right to left
+            _paragraphPropertyList.Add("direction");
 
+            if(IdAllClass.ContainsKey("@page"))
+            {
+                if(IdAllClass["@page"].ContainsKey("-ps-hide-versenumber-one"))
+                {
+                    _hideFirstVerseNo = bool.Parse(IdAllClass["@page"]["-ps-hide-versenumber-one"]);
+                }
+            }
         }
 
         /// -------------------------------------------------------------------------------------------

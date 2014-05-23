@@ -21,7 +21,6 @@ using System.Globalization;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml;
-using SIL.PublishingSolution.Sort;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -55,24 +54,9 @@ namespace SIL.PublishingSolution
         Dictionary<string, Dictionary<string, string>> _dictStepFilenames = new Dictionary<string, Dictionary<string, string>>();
         SortedDictionary<int, Dictionary<string, string>> _dictSorderSection = new SortedDictionary<int, Dictionary<string, string>>();
         ArrayList _odtFiles = new ArrayList();
-        string _endQuote = ")";
-        string _singleQuote = "'";
-        string _comma = ",";
         private bool isMultiLanguageHeader = false;
         private bool _isFromExe = false;
         private bool _isFirstODT = true;
-
-        private void SplitFile(PublicationInformation publicationInformation)
-        {
-            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-            CssTree cssTree = new CssTree();
-            cssClass = cssTree.CreateCssProperty(publicationInformation.DefaultCssFileWithPath, true);
-
-            if (cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
-            {
-                publicationInformation.FileToProduce = cssClass["@page"]["-ps-fileproduce"];
-            }
-        }
 
         private Dictionary<string, string> SplitXhtmlAsMultiplePart(PublicationInformation publicationInformation, Dictionary<string, string> dictSecName)
         {
@@ -103,243 +87,6 @@ namespace SIL.PublishingSolution
                 publicationInformation.MainLastFileName = fileNameWithPath[fileNameWithPath.Count - 1];
             }
             return dictSecName;
-        }
-
-        public void SetPublication(PublicationInformation pubInfo)
-        {
-            publicationInfo = pubInfo;
-        }
-
-        public string TransformLiftToXhtml(PublicationInformation pubInfo)
-        {
-            string entryFilterXpath = "true()";
-            string senseFilterXpath = "true()";
-            string languageFilterXpath = "true()";
-            string liftSupportPath = Common.PathCombine(Common.GetPSApplicationPath(), "LiftSupport");
-
-            string inputFile = pubInfo.DefaultXhtmlFileWithPath;
-            string xhtmlFile = inputFile;
-            string transFormfile = Common.PathCombine(liftSupportPath, "liftTransform.xsl");
-            string filterFile = Common.PathCombine(liftSupportPath, "liftEntryAndSenseFilter.xsl");
-            string newTempXslfile = Common.PathCombine(Path.GetTempPath(), "tempFilter.xsl");
-            string newTempXslfile1 = Common.PathCombine(Path.GetTempPath(), "tempFilter1.xsl");
-
-
-            string languageSortFile = Common.PathCombine(Path.GetTempPath(), "langSortedFile.xhtml");
-            try
-            {
-                // Transformation files
-
-                // Filter starts
-                if (pubInfo.IsSenseFilter)
-                {
-                    senseFilterXpath = GetSenseFilterXpath();
-                }
-                if (pubInfo.IsEntryFilter)
-                {
-                    entryFilterXpath = GetEntryFilterXpath();
-                }
-                if (pubInfo.IsLanguageFilter)
-                {
-                    languageFilterXpath = GetLanguageFilterXpath();
-                }
-
-                string xmlFile = Path.ChangeExtension(inputFile, "xml");
-                string lXmlFile = Path.ChangeExtension(inputFile, "lxml");
-
-                xhtmlFile = Path.ChangeExtension(inputFile, "xhtml");
-                File.Copy(filterFile, newTempXslfile, true);
-
-                //Replace the filter key strings and Transformation takes place
-                ReplaceFilters("entry", newTempXslfile, entryFilterXpath);
-                ReplaceFilters("sense", newTempXslfile, senseFilterXpath);
-
-                Common.XsltProcess(inputFile, newTempXslfile, ".xml");
-
-                if (pubInfo.IsLanguageFilter)
-                {
-                    ReplaceNamespace(xmlFile);
-                    string langFilterFile = Common.PathCombine(liftSupportPath, "liftLangFilter.xsl");
-                    File.Copy(langFilterFile, newTempXslfile1, true);
-
-                    ReplaceFilters("language", newTempXslfile1, languageFilterXpath);
-                    Common.XsltProcess(xmlFile, newTempXslfile1, ".lxml");
-                    xmlFile = lXmlFile;
-                }
-
-                ReplaceNamespace(xmlFile);
-                Common.XsltProcess(xmlFile, transFormfile, ".xhtml");
-
-                if (pubInfo.IsLanguageSort)
-                {
-                    bool sorted = LiftSortWritingSys(xhtmlFile, languageSortFile);
-                    if (sorted)
-                    {
-                        xhtmlFile = languageSortFile;
-                    }
-                }
-
-                if (pubInfo.IsEntrySort)
-                {
-                    LiftPreparer lp = new LiftPreparer();
-                    lp.loadLift(pubInfo.DefaultXhtmlFileWithPath);
-                    lp.applySort();
-                    lp.getCurrentLift();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.Message);
-            }
-            return xhtmlFile;
-        }
-
-        public bool LiftSortWritingSys(string fileName, string outputfile)
-        {
-            bool returnValue = true;
-            try
-            {
-                var liftDoc = new LiftDocument(fileName);
-                var sorter = new LiftLangSorter(liftDoc);
-                sorter.sortWritingSystems();
-                var writer = new LiftWriter(outputfile);
-                liftDoc.Save(writer);
-                writer.Close();
-            }
-            catch (Exception)
-            {
-                returnValue = false;
-            } 
-            return returnValue;
-        }
-        private void ReplaceFilters(string key,string newTempXslfile, string filterXpath)
-        {
-            const string entryFilterParameter = "EntFltParam";
-            const string senseFilterParameter = "SenseFltParam";
-            const string langFilterParameter = "LangFltParam";
-
-            string filterParameter = string.Empty;
-            switch (key.ToLower())
-            {
-                case "entry":
-                    filterParameter = entryFilterParameter;
-                    break;
-                case "sense":
-                    filterParameter = senseFilterParameter;
-                    break;
-                case "language":
-                    filterParameter = langFilterParameter;
-                    break;
-
-            }
-            Common.StreamReplaceInFile(newTempXslfile, filterParameter, filterXpath);
-        }
-
-        private void ReplaceNamespace(string xmlFile)
-        {
-            string nameSpace = "xmlns=\"http://www.w3.org/1999/XSL/Transform\"";
-            Common.StreamReplaceInFile(xmlFile, nameSpace, ""); // replacing the namespace with empty
-        }
-
-
-        private string GetFilterXpath(string mid, string forEntry)
-        {
-            string filterString = string.Empty;
-            string searchKey = string.Empty;
-            bool matchCase = false;
-            string comma = _comma;
-            string endQuote = _endQuote;
-            if (forEntry.ToLower() == "entry" && publicationInfo.IsEntryFilter)
-            {
-                filterString = publicationInfo.EntryFilterString;
-                searchKey = publicationInfo.EntryFilterKey;
-                matchCase = publicationInfo.IsEntryFilterMatchCase;
-
-            }
-            else if (forEntry.ToLower() == "sense" && publicationInfo.IsSenseFilter)
-            {
-                filterString = publicationInfo.SenseFilterString;
-                searchKey = publicationInfo.SenseFilterKey;
-                matchCase = publicationInfo.IsSenseFilterMatchCase;
-            }
-            else if (forEntry.ToLower() == "language" && publicationInfo.IsLanguageFilter)
-            {
-                filterString = publicationInfo.LanguageFilterString;
-                searchKey = publicationInfo.LanguageFilterKey;
-                matchCase = publicationInfo.IsLanguageFilterMatchCase;
-            }
-
-            string searchKeyValue;
-
-            if (!matchCase)
-            {
-                mid = SubstitueTranslateWithLowerCase(mid);
-                string filterStringwithQuote = _singleQuote + filterString + _singleQuote;
-                searchKeyValue = SubstitueTranslateWithLowerCase(filterStringwithQuote);
-            }
-            else // as it is - Match Case
-            {
-                searchKeyValue = _singleQuote + filterString + _singleQuote;
-            }
-
-            switch (searchKey.ToLower())
-            {
-                case "at start":
-                    searchKey = "starts-with(";
-                    break;
-                case "at end": // not working in 1.0 works in 2.0
-                    mid = "substring(" + mid + ", string-length(" + mid + ") - string-length(" + searchKeyValue + ") +1,string-length(" +
-                          searchKeyValue + "))";
-                    searchKey = "starts-with(";
-                    break;
-                case "anywhere":
-                    searchKey = "contains(";
-                    break;
-                case "not equal":
-                    endQuote = string.Empty;
-                    searchKey = string.Empty;
-                    comma = " != "; 
-                    break;
-
-                case "whole item":
-                    endQuote = string.Empty;
-                    searchKey = string.Empty;
-                    comma = " = ";
-                    break;
-            }
-            string filterXpath = searchKey + mid + comma + searchKeyValue + endQuote;
-            return filterXpath;
-        }
-
-        private string GetSenseFilterXpath()
-        {
-            string mid = "$pentry/sense[$senseno]/definition//text"; // using variable for sense search
-            string senseFilterXpath = GetFilterXpath(mid, "sense");
-            return senseFilterXpath;
-        }
-
-        private string GetEntryFilterXpath()
-        {
-            const string mid = "lexical-unit/form/text";
-            string filterXpath = GetFilterXpath(mid, "entry");
-            return filterXpath;
-        }
-
-        private string GetLanguageFilterXpath()
-        {
-            const string mid = "@lang";
-            string filterXpath = GetFilterXpath(mid, "language");
-            return filterXpath;
-        }
-
-        private string SubstitueTranslateWithLowerCase(string input)
-        {
-            const string translateCommand = "translate(";
-            string lowercase = _comma + "$lowercase";
-            string uppercase = _comma + "$uppercase";
-            input = translateCommand + input + uppercase + lowercase + _endQuote;
-            return input;
         }
 
         private Dictionary<string, string> CreatePageDictionary(PublicationInformation projInfo)
@@ -407,7 +154,7 @@ namespace SIL.PublishingSolution
                         string attString = tempNodeSearch.ChildNodes[i].Attributes[j].Name.ToString();
                         if (attString == "Name")
                         {
-                            attName = tempNodeSearch.ChildNodes[i].Attributes[j].Value.ToString(); ;
+                            attName = tempNodeSearch.ChildNodes[i].Attributes[j].Value.ToString();
                         }
                         else if (attString == "Value")
                         {
@@ -431,7 +178,7 @@ namespace SIL.PublishingSolution
                                     string attChildString = childNodes.ChildNodes[ii].Attributes[jj].Name.ToString();
                                     if (attChildString == "Name")
                                     {
-                                        attChildName = childNodes.ChildNodes[ii].Attributes[jj].Value.ToString(); ;
+                                        attChildName = childNodes.ChildNodes[ii].Attributes[jj].Value.ToString();
                                     }
                                     else if (attChildString == "Value")
                                     {
@@ -659,6 +406,15 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private void SetBookReferenceDivInCSS(string cssFileName)
+        {
+            TextWriter tw = new StreamWriter(cssFileName, true);
+            tw.WriteLine(".BookReferenceDiv {");
+            tw.WriteLine(" display: none;");
+            tw.WriteLine("}");
+            tw.Close();
+        }
+
         /// <summary>
         /// Convert XHTML to ODT and ODM
         /// </summary>
@@ -702,6 +458,7 @@ namespace SIL.PublishingSolution
             }
 
             string cssFile = projInfo.DefaultCssFileWithPath;
+            SetBookReferenceDivInCSS(cssFile);
             var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(defaultXhtml);
             if(projInfo.DefaultRevCssFileWithPath != null && projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
             {
@@ -733,6 +490,7 @@ namespace SIL.PublishingSolution
             cssTree.OutputType = Common.OutputType.ODT;
             cssClass = cssTree.CreateCssProperty(cssFile, true);
             HandledInCss(ref projInfo, ref cssClass);
+            SetHeaderFontName(projInfo, cssClass);
             int pageWidth = GetPictureWidth(cssClass);
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
@@ -746,15 +504,12 @@ namespace SIL.PublishingSolution
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
-            string isCoverImageInserted = "false";
-            if (idAllClass.ContainsKey("cover"))
-                isCoverImageInserted = "true";
 
-            string isToc = "false";
-            if (idAllClass.ContainsKey("TableOfContentLO"))
-                isToc = "true";
+            string isToc;
+            var isCoverImageInserted = EditCSSValues(idAllClass, out isToc);
 
-            _refFormat = GetReferenceFormat(idAllClass, _refFormat);
+
+            _refFormat = Common.GetReferenceFormat(idAllClass, _refFormat);
             IncludeTextinMacro(strMacroPath, _refFormat, macroFileName, projInfo.IsExtraProcessing, isCoverImageInserted, isToc);
 
             // BEGIN Generate Meta.Xml File
@@ -780,7 +535,6 @@ namespace SIL.PublishingSolution
             cXML._multiLanguageHeader = isMultiLanguageHeader;
             cXML.RefFormat = this._refFormat;
 
-            SetHeaderFontName(projInfo, idAllClass);
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize);
             PostProcess(projInfo);
 
@@ -846,6 +600,37 @@ namespace SIL.PublishingSolution
             return returnValue;
         }
 
+        private static string EditCSSValues(Dictionary<string, Dictionary<string, string>> idAllClass, out string isToc)
+        {
+            // Enable Table of content for macro
+            isToc = "false";
+            if (idAllClass.ContainsKey("TableOfContentLO"))
+            {
+                isToc = "true";
+            }
+
+            // Enable Cover Image for macro
+            string isCoverImageInserted = "false";
+            if (idAllClass.ContainsKey("cover"))
+            {
+                isCoverImageInserted = "true";
+            }
+
+            // If chapternumber found in css, vertical-align = "auto"
+            foreach (string cls in idAllClass.Keys)
+            {
+                if (cls.ToLower().IndexOf("chapternumber") == 0 && cls.ToLower().IndexOf("chapternumber_") != 0)
+                {
+                    if (idAllClass.ContainsKey(cls) && idAllClass[cls].ContainsKey("vertical-align"))
+                    {
+                        //idAllClass[cls]["vertical-align"] = "auto";
+                    }
+                }
+            }
+
+            return isCoverImageInserted;
+        }
+
         private void CreateRAMP()
         {
             string outputExtn = ".odt";
@@ -893,11 +678,30 @@ namespace SIL.PublishingSolution
 
         private static void SetHeaderFontName(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass)
         {
+            projInfo.HeaderFontName = "Times New Roman";
             if (projInfo.ProjectInputType == "Dictionary")
             {
-                if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
+                if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath.ToLower()) == "preservemain")
                 {
-                    projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
+                    if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
+                    {
+                        projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
+                    }
+                }
+                else
+                {
+                    if (idAllClass.ContainsKey("reversalform") && idAllClass["reversalform"].ContainsKey("font-family"))
+                    {
+                        projInfo.HeaderFontName = idAllClass["reversalform"]["font-family"];
+                        projInfo.ReversalFontName = idAllClass["reversalform"]["font-family"];
+                    }
+                }
+            }
+            else if (projInfo.ProjectInputType == "Scripture")
+            {
+                if (idAllClass.ContainsKey("scrBody") && idAllClass["scrBody"].ContainsKey("font-family"))
+                {
+                    projInfo.HeaderFontName = idAllClass["scrBody"]["font-family"];
                 }
             }
         }
@@ -912,92 +716,6 @@ namespace SIL.PublishingSolution
             {
                 InsertChapterNumber(projInfo.TempOutputFolder);
                 ContentPostProcess(projInfo.TempOutputFolder);
-            }
-        }
-
-        public static void InsertFirstGuidewordForReversal(string tempOutputFolder)
-        {
-            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            FileStream fs = File.OpenRead(filename);
-            xdoc.Load(fs);
-            fs.Close();
-
-            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
-            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
-
-            //CopyChapterVariableBeforeSectionHead
-            string xpath = "//text:p[@text:style-name='letter_letHead_dicBody']"; //letter_letHead_body
-
-            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
-            if (list != null)
-            {
-                foreach (XmlNode xmlNode in list)
-                {
-                    if (xmlNode.ParentNode != null)
-                    {
-                        XmlNode letDataNode = xmlNode.ParentNode.NextSibling;
-                        xpath = ".//text:variable-set[@text:name='Left_Guideword_L']";
-                        if (letDataNode == null)
-                        {
-                            continue;
-                        }
-                        XmlNodeList leftGuidewordList = letDataNode.SelectNodes(xpath, nsmgr1);
-                        if (leftGuidewordList.Count > 0)
-                        {
-                            string xpath1 = "//text:p[@text:style-name='hideDiv_dicBody']";//hideDiv_body
-
-                            XmlNodeList list1 = xdoc.SelectNodes(xpath1, nsmgr1);
-                            if (list1 != null && list1.Count > 0)
-                            {
-                                list1[0].AppendChild(leftGuidewordList[0].Clone());
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-
-            xdoc.PreserveWhitespace = true;
-            xdoc.Save(filename);
-        }
-
-        public static void InsertGuidewordAfterLetter(string tempOutputFolder)
-        {
-
-            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
-            xdoc.Load(filename);
-
-            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
-            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
-
-            //CopyChapterVariableBeforeSectionHead
-            string xpath = "//text:p[@text:style-name='letter_letHead_body']";
-
-            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
-            if (list != null)
-            {
-                foreach (XmlNode xmlNode in list)
-                {
-                    if (xmlNode.ParentNode != null)
-                    {
-                        XmlNode letDataNode = xmlNode.ParentNode.NextSibling;
-                        xpath = ".//text:variable-set[@text:name='Left_Guideword_L']";
-                        XmlNodeList leftGuidewordList = letDataNode.SelectNodes(xpath, nsmgr1);
-                        if (leftGuidewordList.Count > 0)
-                        {
-                            xmlNode.AppendChild(leftGuidewordList[0].Clone());
-                            continue;
-                        }
-                    }
-                }
-                xdoc.PreserveWhitespace = true;
-                xdoc.Save(filename);
             }
         }
 
@@ -1053,115 +771,11 @@ namespace SIL.PublishingSolution
             xdoc.Save(filename);
         }
 
-        public static void InsertPublisherOnTitlePage(string tempOutputFolder)
-        {
-            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = new XmlDocument();
-            xdoc.Load(filename);
-
-            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
-            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
-            nsmgr1.AddNamespace("draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0");
-
-            string xpath = "//text:p[@text:style-name='logo_div_dicBody']";
-            if (publicationInfo.ProjectInputType.ToLower() == "scripture")
-            {
-                xpath = "//text:p[@text:style-name='logo_div_scrBody']";
-            }
-
-            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
-            if (list != null)
-            {
-                foreach (XmlNode xmlNode in list)
-                {
-                    XmlNode FirstNode = xmlNode.FirstChild.CloneNode(true);
-                    xmlNode.RemoveChild(xmlNode.FirstChild);
-                    xpath = "//draw:frame/draw:text-box";
-                    XmlNode list1 = xdoc.SelectSingleNode(xpath, nsmgr1);
-                    if (list1 != null)
-                    {
-                        list1.InnerXml = FirstNode.OuterXml.Replace("text:span", "text:p") +
-                                         @"<text:p text:style-name=""Illustration"">" + list1.InnerXml + "</text:p>";
-                    }
-                }
-            }
-            xdoc.PreserveWhitespace = true;
-            xdoc.Save(filename);
-        }
-
-        public static void ChangeTitleNameasBookName(string tempOutputFolder)
-        {
-            string filename = Common.PathCombine(tempOutputFolder, "content.xml");
-            XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            FileStream fs = File.OpenRead(filename);
-            xdoc.Load(fs);
-            fs.Close();
-
-            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
-            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
-            if (publicationInfo.ProjectInputType.ToLower() == "scripture")
-            {
-                string xx = "//text:section[@text:style-name='Sect_scrBook']";
-                XmlNodeList bookList = xdoc.SelectNodes(xx, nsmgr1);
-                if(bookList != null && bookList.Count > 0)
-                {
-                    for (int i = 0; i < bookList.Count; i++)
-                    {
-                        string xpath = ".//text:span[@text:style-name='scrBookName_scrBook_scrBody']";
-                        XmlNode bookNameNode = bookList[i].SelectSingleNode(xpath, nsmgr1);
-                        if (bookNameNode != null)
-                        {
-                            string bookName = bookNameNode.InnerText;
-                            xpath = ".//text:span[@text:style-name='span_TitleMain_scrBook_scrBody']";
-                            XmlNode titleNode = bookList[i].SelectSingleNode(xpath, nsmgr1);
-                            if (titleNode != null) titleNode.InnerText = bookName;
-                        }
-                    }
-                }
-            }
-            xdoc.PreserveWhitespace = true;
-            xdoc.Save(filename);
-        }
-
-        private static void RenameContentStyleOnCondition(string tempFolder)
-        {
-            string filename = Common.PathCombine(tempFolder, "content.xml");
-            XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            FileStream fs = File.OpenRead(filename);
-            xdoc.Load(fs);
-            fs.Close();
-
-            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
-            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
-
-            string xpath = "//text:p[@text:style-name='DictionarySubentry_a_subentries_entry_letData_dicBody']";
-            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
-            if (list != null)
-            {
-                foreach (XmlNode xmlNode in list)
-                {
-                    XmlNode prevEntryNode = xmlNode.PreviousSibling;
-                    if (prevEntryNode.Attributes != null)
-                    {
-                        string copyAttr = prevEntryNode.Attributes["text:style-name"].Value;
-                        prevEntryNode.Attributes["text:style-name"].Value = copyAttr.Replace("entry", "entry1");
-                    }
-                }
-            }
-            xdoc.PreserveWhitespace = true;
-            xdoc.Save(filename);
-        }
-
         /// <summary>
         /// TD-2488
         /// </summary>
         /// <param name="directoryPath">File Directory path</param>
+        /// <param name="styleFilename">style file into which content will be inserted</param>
         public static void InsertKeepWithNextinEntryStyle(string directoryPath, string styleFilename)
         {
             string filename = Common.PathCombine(directoryPath, styleFilename);
@@ -1299,69 +913,6 @@ namespace SIL.PublishingSolution
             }
             xdoc.PreserveWhitespace = true;
             xdoc.Save(filename);
-        }
-
-        /// <summary>
-        /// TD-2488
-        /// </summary>
-        /// <param name="tempFolder">Temp folder path</param>
-        private static void InsertVariableOnLetHead(string tempFolder)
-        {
-
-            string filename = Common.PathCombine(tempFolder, "content.xml");
-            XmlDocument xdoc = Common.DeclareXMLDocument(true);
-            FileStream fs = File.OpenRead(filename);
-            xdoc.Load(fs);
-            fs.Close();
-            xdoc.Load(filename);
-
-            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
-            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
-
-            string xpath = "//text:p[@text:style-name=\"letter_letHead_dicBody\"]";
-
-            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
-            if (list.Count > 0)
-            {
-                foreach (XmlNode VARIABLE in list)
-                {
-                    if (VARIABLE.ParentNode.NextSibling != null)
-                    {
-                        XmlNode nde = VARIABLE.ParentNode.NextSibling.CloneNode(true);
-
-
-                        string xpath1 = "//text:span/text:variable-set[@text:name=\"Left_Guideword_L\"]";
-                        XmlNodeList list1 = nde.SelectNodes(xpath1, nsmgr1);
-                        if (list1 != null)
-                            if (list1.Count > 0)
-                            {
-                                VARIABLE.AppendChild(list1[0].CloneNode(true));
-                            }
-                    }
-                }
-            }
-            xdoc.PreserveWhitespace = true;
-            xdoc.Save(filename);
-        }
-
-        private string GetReferenceFormat(Dictionary<string, Dictionary<string, string>> idAllClass, string refFormat)
-        {
-            if (idAllClass.ContainsKey("ReferenceFormat"))
-                if (idAllClass["ReferenceFormat"].ContainsKey("@page"))
-                {
-                    refFormat = idAllClass["ReferenceFormat"]["@page"];
-                }
-                else if (idAllClass["ReferenceFormat"].ContainsKey("@page:left"))
-                {
-                    refFormat = idAllClass["ReferenceFormat"]["@page:left"];
-                }
-                else if (idAllClass["ReferenceFormat"].ContainsKey("@page:right"))
-                {
-                    refFormat = idAllClass["ReferenceFormat"]["@page:right"];
-                }
-            return refFormat;
         }
 
         private static void MoveStylesToContent(string strStylePath, string strContentPath)

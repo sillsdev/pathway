@@ -20,20 +20,23 @@ set -e
 
 case "$1" in
     configure)
-rm -f ${prefix}/share/man/man7/ConfigurationTool.7.gz
-link ${prefix}/share/man/man7/pathwayB.7.gz ${prefix}/share/man/man7/ConfigurationTool.7.gz
-if [-f "/etc/mono/registry/last-btime"]; then
-    chmod 666 /etc/mono/registry/last-btime
-fi
-mkdir -p /etc/profile.d
-cp ${prefix}/share/pathway/pathwayRegistryKeys.sh /etc/profile.d
-#cp ${prefix}/share/pathway/InstallPathwayXeLaTeX.sh /etc/profile.d
-/usr/share/update-notifier/notify-reboot-required
+	rm -f ${prefix}/share/man/man7/ConfigurationTool.7.gz
+	link ${prefix}/share/man/man7/pathwayB.7.gz ${prefix}/share/man/man7/ConfigurationTool.7.gz
+	#SUDO_USER is defined if the user runs the installer from the command window
+	if [ ! -z "$SUDO_USER" ]; then
+		sudo -u $SUDO_USER bash ${prefix}/share/pathway/pathwayRegistryKeys.sh
+	else
+		mkdir -p /etc/profile.d
+		cp ${prefix}/share/pathway/pathwayRegistryKeys.sh /etc/profile.d
+		/usr/share/update-notifier/notify-reboot-required
+	fi
+
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
-rm -f ${prefix}/share/man/man7/ConfigurationTool.7.gz
-rm -f /etc/profile.d/pathwayRegistryKeys.sh
+	rm -f ${prefix}/share/man/man7/ConfigurationTool.7.gz
+	rm -f /etc/profile.d/pathwayRegistryKeys.sh
+
     ;;
 
     *)

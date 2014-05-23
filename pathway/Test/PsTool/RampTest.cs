@@ -33,7 +33,6 @@ namespace Test.PsTool
     public class RampTest: Ramp
     {
         #region setup
-        private static Mockery mocks = new Mockery();
         private static string _inputPath;
         private static string _outputPath;
         private static string _expectedPath;
@@ -135,6 +134,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void AddContributorTest()
         {
@@ -147,6 +147,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampFormatExtentImagesTest()
         {
@@ -159,6 +160,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampRelRequiresTest()
         {
@@ -173,6 +175,7 @@ namespace Test.PsTool
 
         [Test]
         [Ignore]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampRightsTest()
         {
@@ -185,6 +188,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampCreatedOnTest()
         {
@@ -197,6 +201,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampModifiedDateTest()
         {
@@ -209,6 +214,7 @@ namespace Test.PsTool
         }
 
         [Test]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampDescriptionTest()
         {
@@ -243,38 +249,9 @@ namespace Test.PsTool
             }
         }
 
-        private static string FileProg(string fileName)
-        {
-            return Common.PathCombine(Common.GetPSApplicationPath(), fileName);
-        }
-
         private static string FileInput(string fileName)
         {
             return Common.PathCombine(_inputPath, fileName);
-        }
-
-        private static string FileOutput(string fileName)
-        {
-            return Common.PathCombine(_outputPath, fileName);
-        }
-
-        private static string FileExpected(string fileName)
-        {
-            return Common.PathCombine(_expectedPath, fileName);
-        }
-
-        /// <summary>
-        /// Create a simple PublicationInformation instance
-        /// </summary>
-        private static PublicationInformation GetProjInfo(string XhtmlName, string BlankName)
-        {
-            PublicationInformation projInfo = new PublicationInformation();
-            File.Copy(FileInput(XhtmlName), FileOutput(XhtmlName), true);
-            File.Copy(FileInput(BlankName), FileOutput(BlankName), true);
-            projInfo.DefaultXhtmlFileWithPath = FileOutput(XhtmlName);
-            projInfo.DefaultCssFileWithPath = FileOutput(BlankName);
-            projInfo.IsOpenOutput = false;
-            return projInfo;
         }
         #endregion PrivateFunctions
     }

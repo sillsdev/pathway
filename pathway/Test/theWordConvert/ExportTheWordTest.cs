@@ -14,17 +14,24 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
+#region using
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
 using NMock2;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
+using Test.CssDialog;
+#endregion using
 
-namespace Test.TheWordConvertTest
+namespace Test.theWordConvert
 {
     /// ----------------------------------------------------------------------------------------
     /// <summary>
@@ -35,10 +42,11 @@ namespace Test.TheWordConvertTest
     public class ExportTheWordTest: ExportTheWord
     {
         #region setup
-        private static Mockery mocks = new Mockery();
+        private static readonly Mockery Mocks = new Mockery();
         private static string _inputPath;
         private static string _outputPath;
-        private static string _expectedPath;
+        //private static string _expectedPath;
+        private static string _converterPath;
 
         [TestFixtureSetUp]
         public void Setup()
@@ -49,12 +57,25 @@ namespace Test.TheWordConvertTest
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/theWordConvert/TestFiles");
             _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "Expected");
+            //_expectedPath = Common.PathCombine(testPath, "Expected");
             if (Directory.Exists(_outputPath))
                 Directory.Delete(_outputPath, true);
             Directory.CreateDirectory(_outputPath);
+            _converterPath = Common.PathCombine(_outputPath, "TheWord");
+            FolderTree.Copy(Path.Combine(Common.ProgInstall, "TheWord"), _converterPath);
+            FolderTree.Copy(Path.Combine(_converterPath, Directory.Exists(@"C:\Program Files (x86)") ? "x64" : "x32"), _converterPath);
         }
         #endregion setup
+
+        /// <summary>
+        ///A test for ExportTheWord Constructor
+        ///</summary>
+        [Test]
+        public void ExportTheWordConstructorTest()
+        {
+            var target = new ExportTheWord();
+            Assert.IsNotNull(target);
+        }
 
         [Test]
         public void ExportTypeTest()
@@ -87,7 +108,7 @@ namespace Test.TheWordConvertTest
         public void ExportNullTest()
         {
             var target = new ExportTheWord();
-            PublicationInformation projInfo = null;
+            const PublicationInformation projInfo = null;
             var actual = target.Export(projInfo);
             Assert.IsFalse(actual);
         }
@@ -125,7 +146,7 @@ namespace Test.TheWordConvertTest
             Ssf = FileInput("MP1.ssf");
             var actual = LoadXsltParameters();
             Assert.AreEqual(":", actual.GetParam("refPunc", ""));
-            Assert.AreEqual(@"file:///C:\MP1\BookNames.xml", actual.GetParam("bookNames", ""));
+            Assert.AreEqual("file:///" + Common.PathCombine(@"C:\MP1", "BookNames.xml"), actual.GetParam("bookNames", ""));
         }
 
         [Test]
@@ -142,8 +163,8 @@ namespace Test.TheWordConvertTest
         [Test]
         public void TempNameTest()
         {
-            string book = "MAT";
-            string expected = @"<usx><book code= ""MAT""/></usx>";
+            const string book = "MAT";
+            const string expected = @"<usx><book code= ""MAT""/></usx>";
             string actualTempName = TempName(book);
             var sr = new StreamReader(actualTempName);
             string actual = sr.ReadToEnd();
@@ -152,22 +173,50 @@ namespace Test.TheWordConvertTest
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        ///A test for ProcessAllBooks
+        ///</summary>
+        [Test]
+        public void ProcessAllBooksTest()
+        {
+            Common.Testing = true;      // Don't write settings to settings folder.
+            var inputParams = Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.ScriptureStyleSettingsCopy.xml");
+            Debug.Assert(inputParams != null);
+            Param.LoadValues(inputParams);
+            LoadMyXslt();
+            string fullName = Path.GetTempFileName();
+            const bool otFlag = false;
+            IEnumerable<string> otBooks = new List<string>(0);
+            IEnumerable<string> ntBooks = new List<string>(2) { "MAT", "MRK" };
+            var codeNames = new Dictionary<string, string>(2);
+            codeNames["MAT"] = FileInput(@"USX\040MAT.usx");
+            codeNames["MRK"] = FileInput(@"USX\041MRK.usx");
+            var xsltArgs = new XsltArgumentList();
+            xsltArgs.AddParam("bookNames", "", "file://" + FileInput("BookNames.xml"));
+            var inProcess = (IInProcess)Mocks.NewMock(typeof(IInProcess));
+            Expect.Exactly(2).On(inProcess).Method("PerformStep");
+            ProcessAllBooks(fullName, otFlag, otBooks, ntBooks, codeNames, xsltArgs, inProcess);
+            var sr = new StreamReader(fullName);
+            var data = sr.ReadToEnd();
+            sr.Close();
+            File.Delete(fullName);
+            Assert.AreEqual(1773, data.Split(new[] { '\n' }).Length);
+            Mocks.VerifyAllExpectationsHaveBeenMet();
+        }
 
         [Test]
         public void ProcessTestamentTest()
         {
-            var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
-            string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
-            TheWord.Load(XmlReader.Create(Common.PathCombine(codePath, "theWord.xsl")), xsltSettings, null);
+            LoadMyXslt();
             IEnumerable<string> books = new List<string>(2) { "MAT", "MRK" };
             var codeNames = new Dictionary<string, string>(2);
             codeNames["MAT"] = FileInput(@"USX\040MAT.usx");
             codeNames["MRK"] = FileInput(@"USX\041MRK.usx");
             var xsltArgs = new XsltArgumentList();
-            xsltArgs.AddParam("bookNames", "", "file:///" + FileInput("BookNames.xml"));
+            xsltArgs.AddParam("bookNames", "", "file://" + FileInput("BookNames.xml"));
             var temp = Path.GetTempFileName();
             var sw = new StreamWriter(temp);
-            var inProcess = (IInProcess) mocks.NewMock(typeof (IInProcess));
+            var inProcess = (IInProcess) Mocks.NewMock(typeof (IInProcess));
             Expect.Exactly(2).On(inProcess).Method("PerformStep");
             ProcessTestament(books, codeNames, xsltArgs, sw, inProcess);
             sw.Close();
@@ -176,7 +225,18 @@ namespace Test.TheWordConvertTest
             sr.Close();
             File.Delete(temp);
             Assert.AreEqual(1750, data.Split(new[] { '\n' }).Length);
-            mocks.VerifyAllExpectationsHaveBeenMet();
+            Mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        private static void LoadMyXslt()
+        {
+            var xsltSettings = new XsltSettings {EnableDocumentFunction = true};
+            string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
+            var name = Common.PathCombine(codePath, "theWord.xsl");
+            //var readerSettings = new XmlReaderSettings {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
+            var readerSettings = new XmlReaderSettings();
+            var reader = XmlReader.Create(name, readerSettings);
+            TheWord.Load(reader, xsltSettings, null);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, bool rtl)
@@ -201,9 +261,7 @@ namespace Test.TheWordConvertTest
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo, bool rtl)
         {
-            var xsltSettings = new XsltSettings() { EnableDocumentFunction = true };
-            string codePath = PathPart.Bin(Environment.CurrentDirectory, "/../theWordConvert");
-            TheWord.Load(XmlReader.Create(Common.PathCombine(codePath, "theWord.xsl")), xsltSettings, null);
+            LoadMyXslt();
             IEnumerable<string> books = new List<string>(1) { code };
             var codeNames = new Dictionary<string, string>(2);
             codeNames[code] = FileInput(fileName);
@@ -214,7 +272,7 @@ namespace Test.TheWordConvertTest
             }
             else
             {
-                xsltArgs.AddParam("bookNames", "", "file:///" + FileInput("BookNames.xml"));
+                xsltArgs.AddParam("bookNames", "", "file://" + FileInput("BookNames.xml"));
             }
             if (punc != null)
             {
@@ -231,7 +289,7 @@ namespace Test.TheWordConvertTest
             }
             var temp = Path.GetTempFileName();
             var sw = new StreamWriter(temp);
-            var inProcess = (IInProcess)mocks.NewMock(typeof(IInProcess));
+            var inProcess = (IInProcess)Mocks.NewMock(typeof(IInProcess));
             Expect.Once.On(inProcess).Method("PerformStep");
             ProcessTestament(books, codeNames, xsltArgs, sw, inProcess);
             sw.Close();
@@ -244,13 +302,13 @@ namespace Test.TheWordConvertTest
             sr.Close();
             File.Delete(temp);
             Assert.AreEqual(expectedResult, data);
-            mocks.VerifyAllExpectationsHaveBeenMet();
+            Mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test]
         public void NoMt2()
         {
-            var bookNames = "file:///" + FileInput("avtBookNames.xml");
+            var bookNames = "file://" + FileInput("avtBookNames.xml");
             TestDataCase("MAT", "040MAT.usx", 1, "<TS1><font color=teal>H\u0268m Yaaim Me Krais Matyu Kewis\u0268m Mau T\u0268wei</font><Ts><TS1>Niuk me maamrer ne weiw\u0268k me Jisas<Ts><TS3><i>(<a href=\"tw://bible.*?42.3.23-38\">Lu 3:23-38</a>)</i><Ts><RF q=*><a href=\"tw://bible.*?1.22.18\">Jen 22:18</a>; <a href=\"tw://bible.*?13.17.11\">1Kro 17:11</a><Rf>Menmen im hi hewis\u0268m h\u0268ram niuk me maamrer yap\u0268rwe ne weiw\u0268k miut\u0268p me Jisas Krais, kerek h\u0268rak nepenyek ke m\u0268t\u0268k iuwe Devit, h\u0268rak nepenyek hak ke maam n\u0268pu kaiu Ebraham.<CI>", bookNames, ":");
         }
 
@@ -299,7 +357,7 @@ namespace Test.TheWordConvertTest
         [Test]
         public void S2Test()
         {
-            TestDataCase("GEN", "001GEN.usx", 237, "<TS1><font size=-1>The Japhethites</font><Ts><PI>\u2022 The sons<RF q=+><i>Sons </i> may mean <i>descendants </i> or <i>successors </i> or <i>nations; </i> also in verses 3, 4, 6, 7, 20-23, 29 and 31.<Rf> of Japheth:<CI><PI2>\u2022 Gomer, Magog, Madai, Javan, Tubal, Meshech and Tiras.<CI>");
+            TestDataCase("GEN", "001GEN.usx", 237, "<TS1><font size=-1>The Japhethites</font><Ts><PI>\u2022 The sons<RF q=+><i>Sons </i>may mean <i>descendants </i>or <i>successors </i>or <i>nations; </i>also in verses 3, 4, 6, 7, 20-23, 29 and 31.<Rf> of Japheth:<CI><PI2>\u2022 Gomer, Magog, Madai, Javan, Tubal, Meshech and Tiras.<CI>");
         }
 
         [Test]
@@ -335,14 +393,14 @@ namespace Test.TheWordConvertTest
         [Test]
         public void SpaceInCrossRefNameTest()
         {
-            var bookNames = "file:///" + FileInput("aauBookNames.xml");
+            var bookNames = "file://" + FileInput("aauBookNames.xml");
             TestDataCase("PHM", "057PHM.usx", 2, "Hrorkwe mamey okukwe seyr, hromo ine Apia o, hromo wayh Arkipus, hrere nion ma non-orok ono o, seyr uwrsa sios ko, hno a mon ma hokruw sohom o, hme mey kow.<RF q=*><a href=\"tw://bible.*?51.4.17\">Kol 4:17</a>; <a href=\"tw://bible.*?55.2.3\">2 Ti 2:3</a><Rf><CM>", bookNames, ":");
         }
 
         [Test]
         public void WithoutBookNameTest()
         {
-            var bookNames = "file:///" + FileInput("aauBookNames.xml");
+            var bookNames = "file://" + FileInput("aauBookNames.xml");
             TestDataCase("PHM", "057PHM.usx", 22, "Hano me-nonkway ok kamon kokwe senkin, hunkwe ampok, ha liawon ey se kwa lonhan naruok koruay. Payhokuaw, hano uron hokwe hyohyo senkin lon, hom God se ma mesopok me hokuaw, God hiykwe ha hme nion manon-wak e ipan ya lon a.<RF q=*><a href=\"tw://bible.*?50.1.25\">Fl 1:25</a>; <a href=\"tw://bible.*?50.2.24\">2:24</a><Rf><CM>", bookNames, ":");
         }
 
@@ -367,49 +425,49 @@ namespace Test.TheWordConvertTest
         [Test]
         public void RefListTest()
         {
-            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            var bookNames = "file://" + FileInput("BookNames-refList.xml");
             TestDataCase("MAT", "040MAT-refList.usx", 26, "<TS1>complex xref test<Ts><RF q=*><a href=\"tw://bible.*?19.2.7\">Pal 2:7</a>; <a href=\"tw://bible.*?19.22.2\">22:2</a>, <a href=\"tw://bible.*?19.22.14\">14</a><Rf>Verse one.", bookNames, ":");
         }
 
         [Test]
         public void RefList2Test()
         {
-            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            var bookNames = "file://" + FileInput("BookNames-refList.xml");
             TestDataCase("MAT", "040MAT-refList.usx", 27, "<RF q=*><a href=\"tw://bible.*?2.37.11\">Tav 37:11</a>, <a href=\"tw://bible.*?2.37.28\">28</a>; <a href=\"tw://bible.*?2.39.2\">39:2</a>, <a href=\"tw://bible.*?2.39.21-23\">21-23</a><Rf>Verse two.", bookNames, ":");
         }
 
         [Test]
         public void RefSingleChapterTest()
         {
-            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            var bookNames = "file://" + FileInput("BookNames-refList.xml");
             TestDataCase("MAT", "040MAT-refList.usx", 30, "<RF q=*><a href=\"tw://bible.*?1.18.20\u201319:28\">Jen 18:20\u201319:28</a>; <a href=\"tw://bible.*?40.11.24\">Mt 11:24</a>; <a href=\"tw://bible.*?61.2.6\">2Pi 2:6</a>; <a href=\"tw://bible.*?65.1.7\">Ju 7</a><Rf>Hi hetpi werek. Maain w\u0268 God skelim m\u0268t, h\u0268rak God kaknep m\u0268t miyap\u0268r enun n\u0268paa nau Sodom ketike wit Gomora kakn\u0268p kike. Te m\u0268t miyap\u0268r kerek nanweik\u0268n sip nanwet h\u0268m mi, maain God kakn\u0268p iuwe kaknepi.", bookNames, ":");
         }
 
         [Test]
         public void StarSaltilloTest()
         {
-            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            var bookNames = "file://" + FileInput("BookNames-refList.xml");
             TestDataCase("MAT", "040MAT-refList.usx", 31, "<i>Judá tusha chumu, ñu Belén pebulu,</i><CI><i>vee mujtu aa pebulu chumulaba buute\uA78C pensangue keeñu, ne balejtuu pebulu jutyuve;</i><CI><i>matyu ñu junuren main bale chachi fale,</i><CI><i>kumuinchi in Israel chachillanu washkenu juñu mitya,</i><RF q=+>Miqueas 5.2 <Rf> ti pillave, tila bale rukula.", bookNames, ":", true);
         }
 
         [Test]
         public void RefNoVerseTest()
         {
-            var bookNames = "file:///" + FileInput("BookNames-refList.xml");
+            var bookNames = "file://" + FileInput("BookNames-refList.xml");
             TestDataCase("MAT", "040MAT-refList.usx", 47, "<RF q=*><a href=\"tw://bible.*?23.23.1\">Ais 23</a>; <a href=\"tw://bible.*?26.26.1\u201328:26\">Esi 26:1\u201328:26</a>; <a href=\"tw://bible.*?29.3.4-8\">Joe 3:4-8</a>; <a href=\"tw://bible.*?30.1.9-10\">Emo 1:9-10</a>; <a href=\"tw://bible.*?36.9.2-4\">Sek 9:2-4</a><Rf>Hi hetpi werek. Maain w\u0268 kerek God skelim m\u0268t, h\u0268rak kaknep m\u0268t ne Taia netike m\u0268t ne Saidon kakn\u0268p kike, te yi m\u0268t au h\u0268rak kakiwep iuwe.", bookNames, ":");
         }
 
         [Test]
         public void ShortNameTest()
         {
-            var bookNames = "file:///" + FileInput("akeBookNames.xml");
+            var bookNames = "file://" + FileInput("akeBookNames.xml");
             TestDataCase("1CO", "0461CO.usx", 2, "Papa so\uA78Csii, Koren pon enakan, kamoro K\u0289rai Sises win\u0268 iyekonekasa\uA78C kon wak\u0289 pe te\uA78Cton kon pe, kamoro m\u0268 aw\u0268r\u0268 na\uA78Cne\uA78C nan am\u0289t\u0289 pe esii\uA78Cma Sises K\u0289rai, uyepuru kon esak\u0289 p\u0268\uA78C na\uA78Cne\uA78C nan, to\uA78C epuru m\u0268r\u0268 awonsi\uA78Ck\u0268 uyepuru kon n\u0268 n\u0268r\u0268:<RF q=*><a href=\"tw://bible.*?44.18.1\">Inkup\u0289\uA78Cp\u0289 18:1</a><Rf>", bookNames, ":");
         }
 
         [Test]
         public void SpaceAfterRefTest()
         {
-            var bookNames = "file:///" + FileInput("aauBookNames.xml");
+            var bookNames = "file://" + FileInput("aauBookNames.xml");
             TestDataCase("MRK", "041MRK.usx", 647, "Hmo prueyn hiy laplap kopi non nak-sau nok nok, wain ma laroray non sakeyn prouk nok, now-ho mon piynay nok, sa Jisas se seyn arnak-nakray, hiy lowswa e.<RF q=*><a href=\"tw://bible.*?19.69.21\">Sng 69:21</a><Rf> Uwr sohiy nak-me, \u201CPereipia, hromkwe lira ey, Elaija po pankaw laye pakane, hye now ko se kandieys kow se.\u201D", bookNames, ":");
         }
 
@@ -420,7 +478,7 @@ namespace Test.TheWordConvertTest
         }
 
         [Test]
-        public void mt2b4mt1Test()
+        public void Mt2B4Mt1Test()
         {
             TestDataCase("GAL", "048GAL.usx", 1, "<TS2><font color=teal size=-1><b>To Suyat ni Pablo diya to mgo Taga-</b></font><Ts><TS1><font color=teal>GALACIA</font><Ts><sup>(1,2)</sup> Siak si Pablo iyan migsuyat to seini diyan iyu no mgo magtutuu no oghihimun duon to mgo kayunsudan no sakup to Galacia.<CM>Igpadomdom ku iyu no seini katongdanan ku to pagka-apustul, kona no otow to migpili dow migsugu kanay ko kona no si Jesu-Cristo yagboy dow to Diyus no Amoy no iyan migbanhaw kandin.<CM>Siak dow to tibo mgo suun ta kani duon ki Cristo nangumusta iyu.");
         }
@@ -437,6 +495,469 @@ namespace Test.TheWordConvertTest
             TestDataCase("MAT", "040MATtvb.usx", 4, "<sup>(4-5)</sup> Dungure Yesu maan iru di tongwa, \u201COmilin gi dungwa ibal pilaa dire kanungure, te kawn kebil sungwa u wai pire kol warungure, te seki egilungwa ibal gain wiige sungure, te kiraan gi dungwa ibal kwi pilaa dire ka pirungure, te gulungwa ibal alere u kwi pire mile paingure, te kal aa te nekungwa ibal na guunan kanan pirungure, kal iru erungwa main i kane pire, pi Yon di tenana po.");
         }
 
+        [Test]
+        public void FootnoteEmbeddedItalicTest()
+        {
+            TestDataCase("GEN", "001GENheg.usx", 23, "Net bihatang na kon, atuling nga tek noan,<CI><PI>\u201cEli le! Ni halas-sam tom nol au!<CI><PI2>Un seen na banansila el auk seen ni kon.<CI>Nol un sisin na kon banansila el auk sising ngia.<CI>Undeng un daid deng biklobe lia, tiata auk ngali un ngala ka noan \u2018bihata\u2019.\u201d<RF q=+>Se dais Ibranin nam, biklobe li noken \u2018<i>ish</i>\u2019. Nol bihata li \u2018<i>isha</i>\u2019. Tiata se nia, oen kuti dais noan \u201c<i>isha</i> (bihata) daid deng <i>ish</i> (biklobe).\u201d<Rf><CI>");
+        }
+
+        [Test]
+        public void MultiWordBookNameTest()
+        {
+            var bookNames = "file://" + FileInput("hegBookNames.xml");
+            TestDataCase("GEN", "001GENheg2.usx", 4, "<sup>(4a-4b)</sup> Ama Lamtua Allah in koet apan-dapa kua nol apan-kloma kia ka, un dehet ta ela.<CM> <sup>4b</sup> <TS1>Ama Lamtua Allah koet biklobe nol bihata<Ts><TS3><i>(<a href=\"tw://bible.*?40.19:4-6.1\">Matius 19:4-6</a>; <a href=\"tw://bible.*?41.10:4-9.1\">Markus 10:4-9</a>; <a href=\"tw://bible.*?46.6:16.1\">Korintus mesa la 6:16</a>; <a href=\"tw://bible.*?46.15:45.1\">15:45</a>, <a href=\"tw://bible.*?46.15:45.47\">47</a>; <a href=\"tw://bible.*?49.5:31-33.1\">Efesus 5:31-33</a>)</i><Ts>Dedeng AMA LAMTUA Allah halas-sam mana le koet apan-dapa ku nol apan-kloma kia ka,", bookNames, ".");
+        }
+
+        /// <summary>
+        ///A test for AttachMetadata
+        ///</summary>
+        [Test]
+        public void AttachMetadataTest()
+        {
+            Common.Testing = true;      // Don't write settings to settings folder.
+            var inputParams = Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.ScriptureStyleSettingsCopy.xml");
+            Debug.Assert(inputParams != null);
+            Param.LoadValues(inputParams);
+            var memory = new MemoryStream();
+            var sw = new StreamWriter(memory, Encoding.UTF8);
+            AttachMetadata(sw);
+            sw.Flush();
+            memory.Position = 0;
+            var sr = new StreamReader(memory);
+            var data = sr.ReadToEnd();
+            sr.Close();
+            sw.Close();
+            var lines = data.Split('\n');
+            Assert.AreEqual(24, lines.Length);
+        }
+
+        /// <summary>
+        ///A Bad Converter Path test for ConvertToMySword
+        ///</summary>
+        [Test]
+        public void ConvertToMySwordBadConvertPathTest()
+        {
+            string resultName = string.Empty;
+            string tempTheWordCreatorPath = string.Empty;
+            string exportTheWordInputPath = string.Empty;
+            // Throws Win32Exception on Windows, ArgumentException on Ubuntu
+            try
+            {
+                //var actual = 
+                ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
+            }
+            catch (Win32Exception) // Windows
+            {
+            }
+            catch (ArgumentException) // Ubuntu
+            {
+            }
+            //Assert.Throws(typeof (Win32Exception), delegate
+            //    {
+            //        //var actual = 
+            //        ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
+            //    });
+            //Assert.AreEqual("<No MySword Result>", actual);
+        }
+
+        /// <summary>
+        ///A No Output test for ConvertToMySword
+        ///</summary>
+        [Test]
+        public void ConvertToMySwordNoOutputTest()
+        {
+            string resultName = string.Empty;
+            string tempTheWordCreatorPath = _converterPath;
+            string exportTheWordInputPath = string.Empty;
+            var actual = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
+            Assert.AreEqual("<No MySword Result>", actual);
+        }
+
+        /// <summary>
+        ///A test for ConvertToMySword
+        ///</summary>
+        [Test]
+        [NUnit.Framework.Category("ShortTest")]
+        [NUnit.Framework.Category("SkipOnTeamCity")]
+        public void ConvertToMySwordTest()
+        {
+            const string nkont = "nko.nt";
+            var outName = Path.Combine(Path.Combine(_outputPath, "TheWord"), nkont);
+            File.Copy(Path.Combine(_inputPath, nkont), outName, true); // overwrite
+            const string resultName = nkont;
+            string tempTheWordCreatorPath = _converterPath;
+            string exportTheWordInputPath = _outputPath;
+            var actual = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
+            Assert.AreEqual(Path.Combine(_outputPath, "nko.bbl.mybible"), actual);
+            Assert.True(File.Exists(actual));
+            if (File.Exists(actual))
+            {
+                File.Delete(actual);
+            }
+        }
+
+        /// <summary>
+        ///A test for CopyTheWordFolderToTemp
+        ///</summary>
+        [Test]
+        public void CopyTheWordFolderToTempTest()
+        {
+            const string theWord = "TheWord";
+            string sourceFolder = Path.Combine(Common.ProgBase, theWord);
+            string destFolder = Path.Combine(Path.GetTempPath(), theWord);
+            CopyTheWordFolderToTemp(sourceFolder, destFolder);
+            Assert.AreEqual(6, new DirectoryInfo(destFolder).GetFiles().Length);
+            Directory.Delete(destFolder, true); // Recurse and delete all sub folders too
+        }
+
+        /// <summary>
+        ///A test for CreateRAMP
+        ///</summary>
+        [Test]
+        public void CreateRampTest()
+        {
+            Common.Testing = true;
+            var projInfo = (IPublicationInformation) Mocks.NewMock(typeof (IPublicationInformation));
+            Expect.Once.On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(_outputPath));
+            Expect.Once.On(projInfo).GetProperty("ProjectInputType").Will(Return.Value("Scripture"));
+            CreateRAMP(projInfo);
+            Mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        /// <summary>
+        ///A test for DisplayMessageReport
+        ///</summary>
+        [Test]
+        public void DisplayMessageReportTest()
+        {
+            Common.Testing = true;
+            DisplayMessageReport();
+        }
+
+        /// <summary>
+        ///A test for Export
+        ///</summary>
+        [Test]
+        [NUnit.Framework.Category("ShortTest")]
+        [NUnit.Framework.Category("SkipOnTeamCity")]
+        public void ExportTest()
+        {
+            Common.Testing = true;
+            var projInfo = new PublicationInformation();
+            var vrsPath = PathPart.Bin(Environment.CurrentDirectory, @"/../theWordConvert");
+            VrsName = Path.Combine(vrsPath, "vrs.xml");
+            projInfo.DefaultXhtmlFileWithPath = Path.Combine(_outputPath, "name.xhtml"); //Directory name used as output folder
+            Ssf = Path.Combine(_inputPath, "nkoNT.ssf"); // Ssf file used for Paratext settings
+            const string usxFolder = "USX"; //USX folder must be present for input
+            FolderTree.Copy(Path.Combine(_inputPath, usxFolder), Path.Combine(_outputPath, usxFolder));
+            var target = new ExportTheWord();
+            bool actual = target.Export(projInfo);
+            Assert.True(actual);
+        }
+
+        /// <summary>
+        ///A test for Launch
+        ///</summary>
+        [Test]
+        public void LaunchTest()
+        {
+            Common.Testing = true;
+            const string exportType = "theWord/mySword";
+            var publicationInformation = new PublicationInformation();
+            var target = new ExportTheWord();
+            CommonTestMethod.DisableDebugAsserts();
+            bool actual = target.Launch(exportType, publicationInformation);
+            Assert.False(actual);
+            CommonTestMethod.EnableDebugAsserts();
+        }
+
+        /// <summary>
+        ///A test for FindParatextProject
+        ///</summary>
+        [Test]
+        public void FindParatextProjectTest()
+        {
+            FindParatextProject();
+            Assert.AreEqual(0, Ssf.Length); // Since we are not running from Paratext or PathwayB
+        }
+
+        /// <summary>
+        ///A test for GetBookNamesUri
+        ///</summary>
+        [Test]
+        public void GetBookNamesUriTest()
+        {
+            ParatextData = null;
+            string actual = GetBookNamesUri();
+            Assert.AreEqual("file:///BookNames.xml", actual);
+       }
+
+        /// <summary>
+        ///A test for GetFormat
+        ///</summary>
+        [Test]
+        public void GetFormatTest()
+        {
+            Common.Testing = true;
+            string thewordformatTxt = string.Empty;
+            string format = string.Empty;
+            string actual = GetFormat(thewordformatTxt, format);
+            Assert.AreEqual(string.Empty, actual);
+        }
+
+        /// <summary>
+        ///A test for GetRtlParam
+        ///</summary>
+        [Test]
+        public void GetRtlParamTest()
+        {
+            const XsltArgumentList xsltArgs = null;
+            Ssf = Path.Combine(_inputPath, "nkoNT.ssf");
+            // This test uses English.LDS in the input testfiles.
+            GetRtlParam(xsltArgs);
+            Assert.False(R2L);
+            Ssf = string.Empty;
+        }
+
+        /// <summary>
+        ///A test for GetSsfValue
+        ///</summary>
+        [Test]
+        public void GetSsfValueTest()
+        {
+            const string xpath = "//EthnologueCode";
+            const string def = "zxx"; // Default
+            const string expected = "zxx";
+            string actual = GetSsfValue(xpath, def);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for GetSsfValue
+        ///</summary>
+        [Test]
+        public void GetSsfValueTest1()
+        {
+            const string xpath = "//Name";
+            string actual = GetSsfValue(xpath);
+            Assert.Null(actual);
+        }
+
+        /// <summary>
+        ///A test for LaunchFileNavigator
+        ///</summary>
+        [Test]
+        public void LaunchFileNavigatorTest()
+        {
+            Common.Testing = true;
+            string exportTheWordInputPath = string.Empty;
+            LaunchFileNavigator(exportTheWordInputPath);
+            Assert.AreEqual(0, SubProcess.ExitCode);
+        }
+
+        /// <summary>
+        ///A test for LoadMetadata
+        ///</summary>
+        [Test]
+        public void LoadMetadataTest()
+        {
+            Common.Testing = true;      // Don't write settings to settings folder.
+            var inputParams = Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.ScriptureStyleSettingsCopy.xml");
+            Debug.Assert(inputParams != null);
+            Param.LoadValues(inputParams);
+            LoadMetadata();
+            Assert.Greater(Param.Value.Count, 0);
+        }
+
+        /// <summary>
+        ///A test for LogStatus
+        ///</summary>
+        [Test]
+        public void LogStatusTest()
+        {
+            var savedOut = Console.Out;
+            var memory = new MemoryStream();
+            var writer = new StreamWriter(memory);
+            Console.SetOut(writer);
+            const string format = "Processing: {0}";
+            object[] args = { "MyName.txt" };
+            Verbosity = 0;
+            LogStatus(format, args);
+            writer.Flush();
+            memory.Flush();
+            Assert.AreEqual(0, memory.Length);
+            Console.SetOut(savedOut);
+            writer.Close();
+        }
+
+        /// <summary>
+        ///A test for LogStatus
+        ///</summary>
+        [Test]
+        public void LogStatusTest1()
+        {
+            var savedOut = Console.Out;
+            var memory = new MemoryStream();
+            var writer = new StreamWriter(memory);
+            Console.SetOut(writer);
+            const string format = "Processing: {0}";
+            object[] args = { "MyName.txt" };
+            Verbosity = 1;
+            LogStatus(format, args);
+            writer.Flush();
+            memory.Flush();
+            memory.Position = 0;
+            var sr = new StreamReader(memory);
+            var data = sr.ReadToEnd();
+            sr.Close();
+            writer.Close();
+            Assert.AreEqual(24, data.Trim().Length);
+            Console.SetOut(savedOut);
+            writer.Close();
+            Verbosity = 0;
+        }
+
+        /// <summary>
+        ///A test for ReportFailure
+        ///</summary>
+        [Test]
+        public void ReportFailureTest()
+        {
+            Common.Testing = true;
+            Exception ex = new ArgumentException("Test Message");
+            ReportFailure(ex);
+        }
+
+        /// <summary>
+        ///A test for ReportResults
+        ///</summary>
+        [Test]
+        public void ReportResultsTest()
+        {
+            Common.Testing = true;
+            const string nsont = "nko.nt";
+            var resultFullName = Path.Combine(_outputPath, nsont);
+            File.Copy(Path.Combine(_inputPath, nsont), resultFullName, true);
+            var mySwordResult = Path.Combine(_outputPath, "nko.bbl.mysword");
+            var exportTheWordInputPath = Path.Combine(Common.ProgInstall, "TheWord");
+            const bool expected = true;
+            bool actual = ReportResults(resultFullName, mySwordResult, exportTheWordInputPath);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for ReportWhenTheWordInstalled
+        ///</summary>
+        [Test]
+        public void ReportWhenTheWordInstalledTest()
+        {
+            Common.Testing = true;
+            const string nsont = "nko.nt";
+            var resultFullName = Path.Combine(_outputPath, nsont);
+            File.Copy(Path.Combine(_inputPath, nsont), resultFullName, true);
+            string theWordFolder =
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "The Word");
+            string mySwordResult = Path.Combine(_outputPath, "nko.bbl.mysword");
+            string exportTheWordInputPath = Path.Combine(Common.ProgInstall, "TheWord");
+            ReportWhenTheWordInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
+        }
+
+        /// <summary>
+        ///A test for ReportWhenTheWordNotInstalled
+        ///</summary>
+        [Test]
+        public void ReportWhenTheWordNotInstalledTest()
+        {
+            Common.Testing = true;
+            const string nsont = "nko.nt";
+            var resultFullName = Path.Combine(_outputPath, nsont);
+            File.Copy(Path.Combine(_inputPath, nsont), resultFullName, true);
+            var theWordFolder =
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "The Word");
+            var mySwordResult = Path.Combine(_outputPath, "nko.bbl.mysword");
+            var exportTheWordInputPath = Path.Combine(Common.ProgInstall, "TheWord");
+            ReportWhenTheWordNotInstalled(resultFullName, theWordFolder, mySwordResult, exportTheWordInputPath);
+        }
+
+        /// <summary>
+        ///A test for TheWordCreatorTempDirectory
+        ///</summary>
+        [Test]
+        public void TheWordCreatorTempDirectoryTest()
+        {
+            var theWordFullPath = Path.Combine(Common.ProgInstall, "TheWord");
+            string actual = TheWordCreatorTempDirectory(theWordFullPath);
+            Assert.True(actual.EndsWith(@"TheWord"), "actual = " + actual);
+        }
+
+        /// <summary>
+        ///A test for Transform
+        ///</summary>
+        [Test]
+        public void TransformTest()
+        {
+            LoadXslt();
+            var name = Path.GetTempFileName();
+            var swIn = new StreamWriter(name);
+            swIn.Write("<usx><book code=\"2TI\"/></usx>");
+            swIn.Close();
+            var xsltArgs = new XsltArgumentList();
+            xsltArgs.AddParam("bookNames", "", "file://" + FileInput("BookNames.xml"));
+            var memory = new MemoryStream();
+            var sw = new StreamWriter(memory);
+            Transform(name, xsltArgs, sw);
+            sw.Flush();
+            File.Delete(name);
+            memory.Position = 0;
+            var sr = new StreamReader(memory);
+            var data = sr.ReadToEnd();
+            sr.Close();
+            Assert.AreEqual(84, data.Split(new[] { '\n' }).Length);
+        }
+
+        /// <summary>
+        ///A test for UsxDir
+        ///</summary>
+        [Test]
+        public void UsxDirTest()
+        {
+            var exportTheWordInputPath = _inputPath;
+            var expected = Path.Combine(_inputPath, "USX");
+            string actual = UsxDir(exportTheWordInputPath);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for UsxDir
+        ///</summary>
+        [Test]
+        public void UsxDirTest1()
+        {
+            var exportTheWordInputPath = Path.Combine(_inputPath, "USX");
+            Assert.Throws(typeof (FileNotFoundException), delegate
+                {
+                    //string actual = 
+                        UsxDir(exportTheWordInputPath);
+                });
+        }
+
+        /// <summary>
+        ///A test for PostTransformMessage
+        ///</summary>
+        [Test]
+        public void PostTransformMessageTest()
+        {
+            MessageFullName = Path.GetTempFileName();
+            const string message = "Test Message";
+            PostTransformMessage(message);
+            XsltMessageClose();
+            var data = FileData.Get(MessageFullName);
+            File.Delete(MessageFullName);
+            Assert.True(data.Contains(message));
+            Assert.True(data.StartsWith("<html>"));
+            Assert.True(data.TrimEnd().EndsWith("</html>"));
+        }
+
         //[Test]
         //public void myTest()
         //{
@@ -444,39 +965,10 @@ namespace Test.TheWordConvertTest
         //}
 
         #region Private Functions
-        private static string FileProg(string fileName)
-        {
-            return Common.PathCombine(Common.GetPSApplicationPath(), fileName);
-        }
-
         private static string FileInput(string fileName)
         {
             return Common.PathCombine(_inputPath, fileName);
         }
-
-        private static string FileOutput(string fileName)
-        {
-            return Common.PathCombine(_outputPath, fileName);
-        }
-
-        private static string FileExpected(string fileName)
-        {
-            return Common.PathCombine(_expectedPath, fileName);
-        }
-
-        /// <summary>
-        /// Create a simple PublicationInformation instance
-        /// </summary>
-        private static PublicationInformation GetProjInfo(string XhtmlName, string BlankName)
-        {
-            PublicationInformation projInfo = new PublicationInformation();
-            File.Copy(FileInput(XhtmlName), FileOutput(XhtmlName), true);
-            File.Copy(FileInput(BlankName), FileOutput(BlankName), true);
-            projInfo.DefaultXhtmlFileWithPath = FileOutput(XhtmlName);
-            projInfo.DefaultCssFileWithPath = FileOutput(BlankName);
-            projInfo.IsOpenOutput = false;
-            return projInfo;
-        }
-        #endregion PrivateFunctions
+        #endregion Private Functions
     }
 }

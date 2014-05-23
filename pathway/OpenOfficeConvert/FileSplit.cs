@@ -15,15 +15,13 @@
 // --------------------------------------------------------------------------------------------
 
 #region Using
-
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-
+using SIL.Tool;
 #endregion Using
 
-
-namespace SIL.Tool
+namespace SIL.PublishingSolution
 {
     public class FileSplit
     {

@@ -187,7 +187,7 @@ namespace SIL.PublishingSolution
         protected void CreateProperties(PublicationInformation projInfo)
         {
             var input = Input(projInfo);
-            var myProps = new DictionaryForMIDsProperties(projInfo, ContentStyles);
+            var myProps = new DictionaryForMidsProperties(projInfo, ContentStyles);
             myProps.SetLanguage(1, input.VernacularIso(), input.VernacularName());
             myProps.SetLanguage(2, input.AnalysisIso(), input.AnalysisName());
             myProps.InfoText = GetInfo();

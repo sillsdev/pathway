@@ -29,12 +29,9 @@ namespace SIL.PublishingSolution
     class ModifyLOStyles : LOStyles
     {
         private XmlDocument _styleXMLdoc;
-        private XmlNode _node;
         private XmlElement _root;
         private XmlNamespaceManager nsmgr;
-        const string _styleSeperator = "_";
         private string _projectPath;
-        private string _tagType;
         private string _xPath;
         private XmlElement _nameElement;
         private string _tagName;
@@ -46,7 +43,6 @@ namespace SIL.PublishingSolution
         private Dictionary<string, ArrayList> _spellCheck = new Dictionary<string, ArrayList>();
         private List<string> _languageFont = new List<string>();
         private Dictionary<string, string> fontLangMap = new Dictionary<string, string>();
-        private string _defaultFont = "Tahoma";
 
 
         public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass, string odmMTFont)
@@ -394,7 +390,7 @@ namespace SIL.PublishingSolution
                     node.AppendChild(paraNode);
                 }
 
-                _nameElement = (XmlElement)paraNode; ;
+                _nameElement = (XmlElement)paraNode;
                 foreach (KeyValuePair<string, string> para in _paragraphProperty)
                 {
                     string[] property = para.Key.Split(':');
@@ -696,7 +692,160 @@ namespace SIL.PublishingSolution
             }
         }
 
- 
+        /// -------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Create a Graphics style in style.xml, if style has parent.
+        /// New style inherits its parent.
+        /// float = floatProperty =  left/ right/ center
+        /// display = displayproperty = none/ block
+        /// <list> 
+        /// </list>
+        /// </summary>
+        /// <param name="styleFilePath">syles.xml path</param>
+        /// <param name="makeClassName">combination of child and parent "style name"</param>
+        /// <param name="parentName">Parent "style name"</param>
+        /// <param name="floatProperty">Left/Right</param>
+        /// <param name="displayProperty">Left/Right</param>
+        /// <returns>None</returns>
+        /// -------------------------------------------------------------------------------------------
+        public void CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string floatProperty, string displayProperty)
+        {
+            const string className = "Graphics";
+            _styleXMLdoc = Common.DeclareXMLDocument(true);
+            _styleXMLdoc.Load(styleFilePath);
+
+            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+
+
+
+            // if new stylename exists
+            XmlElement root = _styleXMLdoc.DocumentElement;
+            string style = "//st:style[@st:name='" + makeClassName + "']";
+            if (root != null)
+            {
+                XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                if (node != null)
+                {
+                    return;
+                }
+                style = "//st:style[@st:name='" + className + "']";
+                node = root.SelectSingleNode(style, nsmgr); // work
+
+                XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
+                styleNode.InnerXml = node.OuterXml;
+                node.ParentNode.InsertAfter(styleNode, node);
+
+                //        <style:style style:name="fr4" style:family="graphic" style:parent-style-name="Graphics">
+                //    <style:graphic-properties fo:margin-left="0in" fo:margin-right="0in" fo:margin-top="0in"
+                //        fo:margin-bottom="0in" style:run-through="foreground" style:wrap="none"
+                //        style:vertical-pos="top" style:vertical-rel="paragraph-content"
+                //        style:horizontal-pos="center" style:horizontal-rel="paragraph-content"
+                //        style:mirror="none" fo:clip="rect(0in, 0in, 0in, 0in)" draw:luminance="0%"
+                //        draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%"
+                //        draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard"/>
+                //</style:style>
+
+                _nameElement = (XmlElement)node;
+
+                SetAttribute(makeClassName, "style:name");
+                string wrap = "dynamic";
+                if (displayProperty == "block")
+                {
+                    wrap = "none";
+                    displayProperty = "center";
+                }
+                else if (displayProperty == "frame")
+                {
+                    wrap = "dynamic";
+                    displayProperty = "right";
+                }
+
+                _nameElement = (XmlElement)node.ChildNodes[1];
+                SetAttribute("foreground", "style:run-through");
+                SetAttribute(wrap, "style:wrap");
+                SetAttribute("no-limit", "style:number-wrapped-paragraphs");
+                SetAttribute("false", "style:wrap-contour");
+                SetAttribute("from-top", "style:vertical-pos");
+                SetAttribute("paragraph-content", "style:vertical-rel");
+                SetAttribute(displayProperty, "style:horizontal-pos");
+                SetAttribute("paragraph", "style:horizontal-rel");
+                SetAttribute("true", "style:flow-with-text");
+            }
+            _styleXMLdoc.Save(styleFilePath);
+        }
+
+        /// <summary>
+        /// float = floatProperty =  left/ right/ center
+        /// display = displayproperty = none/ block
+        /// </summary>
+        /// <param name="styleFilePath"></param>
+        /// <param name="makeClassName"></param>
+        /// <param name="parentName"></param>
+        /// <param name="floatProperty"></param>
+        /// <param name="displayProperty"></param>
+        /// <param name="graphicStyle"></param>
+        public void CreateFrameStyle(string styleFilePath, string makeClassName, string parentName, string floatProperty, string displayProperty, string graphicStyle)
+        {
+            // float = floatProperty =  left/ right/ center
+            // display = displayproperty = none/ block
+
+            const string className = "Frame";
+            _styleXMLdoc = Common.DeclareXMLDocument(true);
+            _styleXMLdoc.Load(styleFilePath);
+
+            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+
+            // if new stylename exists
+            XmlElement root = _styleXMLdoc.DocumentElement;
+            string style = "//st:style[@st:name='" + makeClassName + "']";
+            if (root != null)
+            {
+                XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                if (node != null)
+                {
+                    return;
+                }
+                style = "//st:style[@st:name='" + className + "']";
+                node = root.SelectSingleNode(style, nsmgr); // work
+
+                XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
+                styleNode.InnerXml = node.OuterXml;
+                node.ParentNode.InsertAfter(styleNode, node);
+
+                _nameElement = (XmlElement)node;
+                SetAttribute(makeClassName, "style:name");
+                SetAttribute(graphicStyle, "style:parent-style-name");
+                string wrap = "dynamic";
+                if (displayProperty == "block")
+                {
+                    wrap = "none";
+                    displayProperty = "center";
+                }
+                else if (displayProperty == "frame")
+                {
+                    wrap = "dynamic";
+                    displayProperty = "right";
+                }
+
+                _nameElement = (XmlElement)node.ChildNodes[1];
+                SetAttribute("foreground", "style:run-through");
+                SetAttribute(wrap, "style:wrap");
+                SetAttribute("no-limit", "style:number-wrapped-paragraphs");
+                SetAttribute("false", "style:wrap-contour");
+                SetAttribute("from-top", "style:vertical-pos");
+                SetAttribute("paragraph-content", "style:vertical-rel");
+                SetAttribute(displayProperty, "style:horizontal-pos");
+                SetAttribute("paragraph", "style:horizontal-rel");
+                SetAttribute("true", "style:flow-with-text");
+
+            }
+            _styleXMLdoc.Save(styleFilePath);
+        }
+
 
         #region CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string position, string side)
         /// -------------------------------------------------------------------------------------------
@@ -713,7 +862,7 @@ namespace SIL.PublishingSolution
         /// <param name="side">Left/Right</param>
         /// <returns>None</returns>
         /// -------------------------------------------------------------------------------------------
-        public void CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string position, string side)
+        public void CreateGraphicsStyleLogo(string styleFilePath, string makeClassName, string parentName, string position, string side)
         {
             const string className = "Graphics";
 	        _styleXMLdoc = Common.DeclareXMLDocument(true);
@@ -768,7 +917,7 @@ namespace SIL.PublishingSolution
                     }
                     else if (side == "right" || side == "left")
                     {
-                        SetAttribute("side","style:wrap");
+                        SetAttribute(side,"style:wrap");
                     }
                     else if (side == "center")
                     {
@@ -825,7 +974,7 @@ namespace SIL.PublishingSolution
             _styleXMLdoc.Save(styleFilePath);
         }
 
-        public void CreateFrameStyle(string styleFilePath, string makeClassName, string parentName, string position, string side, string graphicStyle)
+        public void CreateFrameStyleLogo(string styleFilePath, string makeClassName, string parentName, string position, string side, string graphicStyle)
         {
 
             const string className = "Frame";
@@ -876,7 +1025,7 @@ namespace SIL.PublishingSolution
                 {
                     _nameElement = (XmlElement)node.ChildNodes[1];
                     SetAttribute("foreground", "style:run-through");
-                    SetAttribute("dynamic", "style:wrap");
+                    SetAttribute(side == "logo" ? "none" : "dynamic", "style:wrap");
                     SetAttribute("no-limit", "style:number-wrapped-paragraphs");
                     SetAttribute("false", "style:wrap-contour");
                     SetAttribute("from-top", "style:vertical-pos");
@@ -976,6 +1125,12 @@ namespace SIL.PublishingSolution
                                     attribToBeChanged.Value = noOfChar.ToString();
                                 }
                             }
+
+                            var nameAttribute = childNode.Attributes["style:vertical-align"];
+                            if (nameAttribute != null)
+                            {
+                                childNode.Attributes["style:vertical-align"].Value = "auto";
+                            }
                         }
                     }
                 }
@@ -1072,100 +1227,6 @@ namespace SIL.PublishingSolution
             return columnGap;
         }
         #endregion
-
-        #region GetFontweight(string styleFilePath, Stack styleStack, StyleAttribute childAttribute)
-
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Calculate the Fontweight value based on it'textElement parent _attribute value
-        /// </summary>
-        /// <param name="styleFilePath">syles.xml path</param>
-        /// <param name="styleStack">Parent list</param>
-        /// <param name="childAttribute">Child _attribute information</param>
-        /// <returns>absolute value of relavite parameter</returns>
-        /// -------------------------------------------------------------------------------------------
-        public string GetFontweight(string styleFilePath, Stack styleStack, StyleAttribute childAttribute)
-        {
-            string attributeName = childAttribute.Name;
-            var parentAttribute = new StyleAttribute();
-            float abs;
-            string absValue = string.Empty;
-
-            var doc = new XmlDocument();
-            doc.Load(styleFilePath);
-
-            var nsmgr = new XmlNamespaceManager(doc.NameTable);
-            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-
-            XmlNode node;
-            XmlElement root = doc.DocumentElement;
-
-            string MakeClassName = string.Empty;
-
-            // Find parent value
-            foreach (string parentClass in styleStack)
-            {
-                if (parentClass == "ClassEmpty")
-                {
-                    continue;
-                }
-                MakeClassName = MakeClassName + parentClass + "_";
-                string style = "//st:style[@st:name='" + parentClass.Trim() + "']";
-                if (root != null)
-                {
-                    node = root.SelectSingleNode(style, nsmgr); // work}
-                    if (node != null)
-                    {
-                        for (int i = 0; i < node.ChildNodes.Count; i++)
-                        {
-                            XmlNode child = node.ChildNodes[i];
-                            foreach (XmlAttribute attribute in child.Attributes)
-                            {
-                                if (attribute.Name == attributeName)
-                                {
-                                    parentAttribute.SetAttribute(attribute.Value);
-                                    if (childAttribute.StringValue == "lighter")
-                                    {
-                                        abs = parentAttribute.NumericValue - 300;
-                                        if (abs < 100)
-                                        {
-                                            abs = 100;
-                                        }
-                                        absValue = abs.ToString();
-                                        return (absValue);
-                                    }
-                                    if (childAttribute.StringValue == "bolder")
-                                    {
-                                        abs = parentAttribute.NumericValue + 300;
-                                        if (abs > 900)
-                                        {
-                                            abs = 900;
-                                        }
-                                        absValue = abs.ToString();
-                                        return (absValue);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            // Apply default value to Related value
-
-            if (childAttribute.StringValue == "lighter")
-            {
-                absValue = "400"; // 0.5em -> 6pt
-            }
-            else if (childAttribute.StringValue == "bolder")
-            {
-                absValue = "700"; // 50% -> 6pt
-                //abs = 0.0F * childAttribute.NumericValue / 100.0F; // 50% -> 0pt
-            }
-            return (absValue);
-        }
-        #endregion
-
 
         private string OpenIDStyles()
         {

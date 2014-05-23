@@ -41,7 +41,6 @@ namespace Test.CssDialog
         /// <summary>path to all users output</summary>
         string _publishingSolutionsData = string.Empty;
         const string _StyleSettings = "StyleSettings.xml";
-        private bool paramLoaded;
         private string xmlFile;
 
         #region Setup
@@ -56,6 +55,12 @@ namespace Test.CssDialog
             _inputBasePath = Common.PathCombine(currentFolder, "Input");
             _supportPath = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
             _publishingSolutionsData = Common.GetAllUserPath();
+        }
+
+        [TestFixtureTearDown]
+        protected void TearDown()
+        {
+            CommonTestMethod.EnableDebugAsserts();
         }
 
         [SetUp]

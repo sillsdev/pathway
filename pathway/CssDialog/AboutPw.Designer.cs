@@ -154,7 +154,6 @@
             this.label2.Size = new System.Drawing.Size(217, 21);
             this.label2.TabIndex = 15;
             this.label2.Text = "(C) 2008 - 2014 SIL International";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // pictureBox1
             // 
@@ -208,7 +207,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About Pathway Configuration Tool";
-            this.Activated += new System.EventHandler(this.AboutPw_Activated);
             this.Load += new System.EventHandler(this.AboutPw_Load);
             this.DoubleClick += new System.EventHandler(this.AboutPw_DoubleClick);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
