@@ -1981,13 +1981,16 @@ namespace SIL.PublishingSolution
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
 
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", "MT2");
-                _writer.WriteStartElement("text:variable-get");
-                _writer.WriteAttributeString("text:name", "RRight_Guideword_R");
-                _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", "MT2");
+                    _writer.WriteStartElement("text:variable-get");
+                    _writer.WriteAttributeString("text:name", "RRight_Guideword_R");
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                }
 
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
@@ -2042,17 +2045,18 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:name", "Left_Guideword_L");
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteEndElement(); //text:variable-get
-
             _writer.WriteEndElement();
 
-            _writer.WriteStartElement("text:span");
-            _writer.WriteAttributeString("text:style-name", "MT2");
-
-            _writer.WriteStartElement("text:variable-get");
-            _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
-            _writer.WriteAttributeString("office:value-type", "string");
-            _writer.WriteEndElement(); //text:variable-get
-            _writer.WriteEndElement(); //text:span
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", "MT2");
+                _writer.WriteStartElement("text:variable-get");
+                _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
+                _writer.WriteAttributeString("office:value-type", "string");
+                _writer.WriteEndElement(); //text:variable-get
+                _writer.WriteEndElement(); //text:span
+            }
         }
 
         private void CreateLeftGuidewordPageNumber(int i, string type)
@@ -2484,16 +2488,19 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "MT2");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            _writer.WriteAttributeString("style:font-name", _projInfo.ReversalFontName);
-            _writer.WriteAttributeString("style:font-name-asian", _projInfo.ReversalFontName);
-            _writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
+            
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                _writer.WriteStartElement("style:style");
+                _writer.WriteAttributeString("style:name", "MT2");
+                _writer.WriteAttributeString("style:family", "text");
+                _writer.WriteStartElement("style:text-properties");
+                _writer.WriteAttributeString("style:font-name", _projInfo.ReversalFontName);
+                _writer.WriteAttributeString("style:font-name-asian", _projInfo.ReversalFontName);
+                _writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+            }
 
             _writer.WriteStartElement("style:style");
             _writer.WriteAttributeString("style:name", "MT3");
