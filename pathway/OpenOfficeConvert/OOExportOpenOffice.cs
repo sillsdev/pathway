@@ -678,11 +678,23 @@ namespace SIL.PublishingSolution
 
         private static void SetHeaderFontName(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass)
         {
+            projInfo.HeaderFontName = "Times New Roman";
             if (projInfo.ProjectInputType == "Dictionary")
             {
-                if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
+                if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath.ToLower()) == "preservemain")
                 {
-                    projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
+                    if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
+                    {
+                        projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
+                    }
+                }
+                else
+                {
+                    if (idAllClass.ContainsKey("reversalform") && idAllClass["reversalform"].ContainsKey("font-family"))
+                    {
+                        projInfo.HeaderFontName = idAllClass["reversalform"]["font-family"];
+                        projInfo.ReversalFontName = idAllClass["reversalform"]["font-family"];
+                    }
                 }
             }
             else if (projInfo.ProjectInputType == "Scripture")
