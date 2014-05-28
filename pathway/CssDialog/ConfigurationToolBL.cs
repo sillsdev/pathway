@@ -4401,9 +4401,9 @@ namespace SIL.PublishingSolution
                 const string caption = "Reset Settings";
                 if (!cTool._fromNunit)
                 {
-                    DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
+                    DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                                                           MessageBoxDefaultButton.Button2);
-                    if (result != DialogResult.OK) return;
+                    if (result == DialogResult.No) return;
                 }
 
                 string allUsersPath = Common.GetAllUserPath();

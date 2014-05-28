@@ -123,9 +123,9 @@ namespace SIL.PublishingSolution
             bool isValidScriSettings = ProcessValidator(settingsScriPNode, true);
             if (!isValidScriSettings)
             {
-                CopyCustomStyles(fileNamewithPath);
+                //CopyCustomStyles(fileNamewithPath);
                 CopySettingsFile(FileName.ScriptureStyleSettings.ToString(), inputtype, fileNamewithPath);
-                RestoreCustomStyles(fileNamewithPath);
+                //RestoreCustomStyles(fileNamewithPath);
             }
         }
 
@@ -944,6 +944,8 @@ namespace SIL.PublishingSolution
                         if (node.Attributes != null)
                         {
                             string value = node.Attributes["name"].Value;
+
+                            if (value.ToLower() == "reference format") continue;
                             string xPathOption = "//stylePick/features/feature[@name=\"" + value + "\"]/option";
                             XmlNodeList OptionNode = parentNode.SelectNodes(xPathOption);
                             var optionList = new ArrayList();
