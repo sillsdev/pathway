@@ -333,9 +333,6 @@
     <style:style style:name="MT1" style:family="text">
       <style:text-properties style:font-name="Times New Roman" style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" />
     </style:style>
-    <style:style style:name="MT2" style:family="text">
-      <style:text-properties style:font-name="Times New Roman" style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" />
-    </style:style>
     <style:style style:name="MT3" style:family="text">
       <style:text-properties style:font-name="Charis SIL" style:font-name-asian="Charis SIL" style:font-name-complex="Charis SIL" />
     </style:style>

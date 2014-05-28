@@ -3134,8 +3134,10 @@ namespace SIL.Tool
             string backUpFilePath = Common.PathCombine(Path.GetDirectoryName(userSheet), backUpFileName);
             File.Copy(userSheet, backUpFilePath, true);
 
-            if (!File.Exists(userSheet))
-                File.Copy(updatedSheet, userSheet, true);
+            if (File.Exists(userSheet))
+                File.Delete(userSheet);
+            
+            File.Copy(updatedSheet, userSheet, true);
 
             userSettings.Load(backUpFilePath);
             installerSettings.Load(userSheet);

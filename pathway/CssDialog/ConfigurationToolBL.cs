@@ -4123,10 +4123,14 @@ namespace SIL.PublishingSolution
             tabpreview = cTool.TabControl1.TabPages["tabPreview"];
             if (cTool.TabControl1.TabPages.Count > 2)
             {
-                tabmob = cTool.TabControl1.TabPages["tabmobile"];
-                tabothers = cTool.TabControl1.TabPages["tabothers"];
-                tabweb = cTool.TabControl1.TabPages["tabweb"];
-                tabDict4Mids = cTool.TabControl1.TabPages["tabDict4Mids"];
+                if (cTool.TabControl1.TabPages["tabmobile"] != null)
+                    tabmob = cTool.TabControl1.TabPages["tabmobile"];
+                if (cTool.TabControl1.TabPages["tabothers"] != null)
+                    tabothers = cTool.TabControl1.TabPages["tabothers"];
+                if (cTool.TabControl1.TabPages["tabweb"] != null)
+                    tabweb = cTool.TabControl1.TabPages["tabweb"];
+                if (cTool.TabControl1.TabPages["tabDict4Mids"] != null)
+                    tabDict4Mids = cTool.TabControl1.TabPages["tabDict4Mids"];
 
                 string[] removeTabs = { "tabmobile", "tabothers", "tabweb", "tabPicture", "tabDict4Mids" };
 
@@ -4397,9 +4401,9 @@ namespace SIL.PublishingSolution
                 const string caption = "Reset Settings";
                 if (!cTool._fromNunit)
                 {
-                    DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
+                    DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                                                           MessageBoxDefaultButton.Button2);
-                    if (result != DialogResult.OK) return;
+                    if (result == DialogResult.No) return;
                 }
 
                 string allUsersPath = Common.GetAllUserPath();

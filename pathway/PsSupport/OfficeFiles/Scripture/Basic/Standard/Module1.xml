@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On May-20-2014 for TD-3803
+&apos;Changed On May-23-2014 for TD-3961
 
 &apos; needs writer document 
 Dim oProgressBarModel As Object 
@@ -192,12 +192,18 @@ End Function
 
 
 &apos;============================================= MACRO 
+&apos;This method hides the menubar
+Sub HideMenuBar
+	layout = Thiscomponent.CurrentController.Frame.LayoutManager
+	layout.hideElement(&quot;private:resource/menubar/menubar&quot;)
+End Sub
 
 &apos;This method adjust the Reference value
 Sub SetReference()
 On Error GoTo MyError:
 
 If InStr(ReferenceFormat, &quot;1-2&quot;) = 0 Then
+	&apos;HideMenuBar()
 	Msgbox &quot;This function is applicable only for Spanning Chapters (Genesis 1-2)&quot;
 	Exit Sub
 End If
