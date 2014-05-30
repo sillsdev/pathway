@@ -147,17 +147,18 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
-            //projInfo.IsReversalExist = true;
-            //projInfo.OutputExtension = "pdf";
             var fixPlayorderStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.fixPlayorder.xsl");
             Debug.Assert(fixPlayorderStream != null);
             _fixPlayOrder.Load(XmlReader.Create(fixPlayorderStream));
+
             var addRevIdStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.addRevId.xsl");
             Debug.Assert(addRevIdStream != null);
             _addRevId.Load(XmlReader.Create(addRevIdStream));
+
             var noXmlSpaceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.noXmlSpace.xsl");
             Debug.Assert(noXmlSpaceStream != null);
             _noXmlSpace.Load(XmlReader.Create(noXmlSpaceStream));
+
             _addDicTocHeads.Load(XmlReader.Create(Common.UsersXsl("addDicTocHeads.xsl")));
 
             _fixEpub.Load(XmlReader.Create(Common.UsersXsl("FixEpub.xsl")));

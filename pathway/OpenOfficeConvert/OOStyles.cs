@@ -2362,19 +2362,6 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("style:horizontal-pos", "right");
                 }
             }
-            //else if (_pageHeaderFooter[6].ContainsKey("content") && _pageHeaderFooter[6]["content"].IndexOf("last)") > 0 ||
-            //     _pageHeaderFooter[12].ContainsKey("content") && _pageHeaderFooter[12]["content"].IndexOf("last)") > 0 ||
-            //    _pageHeaderFooter[18].ContainsKey("content") && _pageHeaderFooter[18]["content"].IndexOf("last)") > 0)
-            //{
-            //    if (source == "Variable")
-            //    {
-            //        _writer.WriteAttributeString("fo:text-align", "start");
-            //    }
-            //    else
-            //    {
-            //        _writer.WriteAttributeString("style:horizontal-pos", "left");
-            //    }
-            //}
             else if (_pageHeaderFooter[7].ContainsKey("content") && _pageHeaderFooter[7]["content"].IndexOf("last)") > 0 ||
                  _pageHeaderFooter[13].ContainsKey("content") && _pageHeaderFooter[13]["content"].IndexOf("last)") > 0 ||
                 _pageHeaderFooter[19].ContainsKey("content") && _pageHeaderFooter[19]["content"].IndexOf("last)") > 0)
@@ -2401,66 +2388,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string GetHeaderFont(string strHeaderFont)
-        {
-            foreach (string font in _cssProperty.Keys)
-            {
-                if (font.IndexOf("reversalform") == 0 && _cssProperty[font].ContainsKey("font-family"))
-                {
-                    string languageCode = string.Empty;
-                    XmlDocument xdoc = Common.DeclareXMLDocument(true);
-                    xdoc.Load(_projInfo.DefaultXhtmlFileWithPath);
-                    string xhtmlPath = "//span[@class='reversal-form_L4']";
-                    XmlNodeList nodes = xdoc.SelectNodes(xhtmlPath);
-                    if (nodes.Count > 0)
-                    {
-                        for (int i = 0; i < nodes.Count; i++)
-                        {
-                            var xmlAttributeCollection = nodes[i].Attributes;
-                            if (xmlAttributeCollection != null)
-                                if (xmlAttributeCollection["lang"] != null)
-                                {
-                                    if (xmlAttributeCollection["lang"].Value != null)
-                                    {
-                                        languageCode = xmlAttributeCollection["lang"].Value;
-                                        break;
-                                    }
-                                }
-                        }
-                    }
-
-
-                    string fontName = string.Empty;
-                    string PsSupportPath = Common.GetPSApplicationPath();
-                    string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
-                    string xPath = "//font-language-mapping";
-                    XmlNodeList fontList = Common.GetXmlNodes(xmlFileNameWithPath, xPath);
-                    if (fontList != null && fontList.Count > 0)
-                    {
-                        foreach (XmlNode xmlNode in fontList)
-                        {
-                            if (xmlNode.Attributes != null)
-                            {
-                                foreach (XmlAttribute attribute in xmlNode.Attributes) // open it'line attributes
-                                {
-                                    if (attribute.Value == languageCode)
-                                    {
-                                        fontName = xmlNode.InnerText.Trim();
-                                        break;
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-
-
-                    strHeaderFont = fontName; // _cssProperty[font]["font-family"];
-                    break;
-                }
-            }
-            return strHeaderFont;
-        }
 
         private void CreateHeaderFrame()
         {

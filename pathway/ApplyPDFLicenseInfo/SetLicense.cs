@@ -82,7 +82,9 @@ namespace ApplyPDFLicenseInfo
         }
 
         // Handle Exited event and display process information. 
+// ReSharper disable InconsistentNaming
         private static void myProcess_Exited(object sender, System.EventArgs e)
+// ReSharper restore InconsistentNaming
         {
 
             _eventHandled = true;

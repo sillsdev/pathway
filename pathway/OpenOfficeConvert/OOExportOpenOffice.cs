@@ -690,10 +690,14 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    if (idAllClass.ContainsKey("reversalform") && idAllClass["reversalform"].ContainsKey("font-family"))
+                    foreach (string clsName in idAllClass.Keys)
                     {
-                        projInfo.HeaderFontName = idAllClass["reversalform"]["font-family"];
-                        projInfo.ReversalFontName = idAllClass["reversalform"]["font-family"];
+                        if(clsName.IndexOf("reversalform") == 0)
+                        {
+                            projInfo.HeaderFontName = idAllClass[clsName]["font-family"];
+                            projInfo.ReversalFontName = idAllClass[clsName]["font-family"];
+                            break;
+                        }
                     }
                 }
             }

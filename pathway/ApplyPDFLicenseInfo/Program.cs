@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using SIL.PublishingSolution;
 using SIL.Tool;
-
+//This will be called by macro externally. so, please do not remove this since it is not called by any other classes.
 namespace ApplyPDFLicenseInfo
 {
     class Program

@@ -30,7 +30,7 @@ namespace SIL.PublishingSolution
     {
         #region Protected Variable
         protected string Type;
-        protected string _xmlFileWithPath;
+        protected string XmlFileWithPath;
         protected string ProjSchemaPath;
 
         private string _userFilePath, _pathwayFilePath;
@@ -110,13 +110,13 @@ namespace SIL.PublishingSolution
             if (!_compareVersion)
             {
                 const string settingFileXsd = "StyleSettings.xsd";
-                const string settingFileXML = "StyleSettings.xml";
+                const string settingFileXml = "StyleSettings.xml";
                 string pathwayFolder = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
                 pathwayFolder = Common.PathCombine(pathwayFolder, "Pathway");
                 File.Copy(Common.PathCombine(Path.GetDirectoryName(appPath), settingFileXsd),
                           Common.PathCombine(pathwayFolder, settingFileXsd), true);
-                File.Copy(Common.PathCombine(Path.GetDirectoryName(appPath), settingFileXML),
-                          Common.PathCombine(pathwayFolder, settingFileXML), true);
+                File.Copy(Common.PathCombine(Path.GetDirectoryName(appPath), settingFileXml),
+                          Common.PathCombine(pathwayFolder, settingFileXml), true);
             }
 
         }
@@ -211,13 +211,16 @@ namespace SIL.PublishingSolution
             XmlNodeList userNodeList = _userRoot.SelectNodes(xPath);
             foreach (XmlNode userNode in userNodeList)
             {
-                string propName = userNode.Attributes["name"].Value;
-                string parent = targetXPath + "meta[@name='" + propName + "']";
-
-                XmlNode pathwayNode = _pathwayRoot.SelectSingleNode(parent);
-                if (pathwayNode != null)
+                if (userNode.Attributes != null)
                 {
-                    pathwayNode.InnerXml = userNode.InnerXml;
+                    string propName = userNode.Attributes["name"].Value;
+                    string parent = targetXPath + "meta[@name='" + propName + "']";
+
+                    XmlNode pathwayNode = _pathwayRoot.SelectSingleNode(parent);
+                    if (pathwayNode != null)
+                    {
+                        pathwayNode.InnerXml = userNode.InnerXml;
+                    }
                 }
             }
         }
@@ -292,8 +295,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                string filePath;
-                filePath = _userFilePath;
+                string filePath = _userFilePath;
                 _userFilePath = _userFilePath.Replace(".xml", "Temp.xml");
                 File.Copy(filePath, _userFilePath, true);
                 File.Copy(_pathwayFilePath, filePath, true);

@@ -3907,6 +3907,7 @@ namespace SIL.Tool
                 {
                     newProperty.AppendLine("div[lang='zxx']{ font-family: \"" + paraTextFontName + "\";}");
                     newProperty.AppendLine("span[lang='zxx']{ font-family: \"" + paraTextFontName + "\";}");
+                    newProperty.AppendLine("@page{ font-family: \"" + paraTextFontName + "\";}");
 
                     FileInsertText(inputCssFileName, newProperty.ToString());
                 }

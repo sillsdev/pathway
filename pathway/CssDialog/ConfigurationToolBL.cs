@@ -3450,7 +3450,7 @@ namespace SIL.PublishingSolution
             {
                 if (control.GetType().Name == "Label") continue;
 
-                if (control.GetType().Name == "GroupBox")
+                if (_groupPropertyValue.Count > 0 && _groupPropertyValue.Count >= g && control.GetType().Name == "GroupBox")
                 {
                     foreach (Control subControl in control.Controls)
                     {
