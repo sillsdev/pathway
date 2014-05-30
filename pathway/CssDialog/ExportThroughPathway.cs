@@ -1305,7 +1305,7 @@ namespace SIL.PublishingSolution
 
         private void lnkChooseCopyright_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ShowHelp.ShowHelpTopicKeyPress(this, "User_Interface/User_Interface_Terms/Copyright_Information_Page.htm", Common.IsUnixOS());
+            ShowHelp.ShowHelpTopicKeyPress(this, "Tasks/Basic_Tasks/Choosing_a_rights_statement_overview.htm", Common.IsUnixOS());
         }
 
         private void ddlCopyrightStatement_SelectedIndexChanged(object sender, EventArgs e)

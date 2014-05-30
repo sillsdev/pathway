@@ -18,8 +18,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.AccessControl;
-using System.Security.Principal;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;

@@ -43,7 +43,7 @@ namespace SIL.PublishingSolution
         protected static ProgressBar _pb;
         private string _iconFile;
         private const string RedirectOutputFileName = "Convert.log";
-        List<string> DuplicateBooks;
+        List<string> _duplicateBooks;
         private bool _isLinux;
 
         public string ExportType
@@ -330,22 +330,22 @@ namespace SIL.PublishingSolution
 
         protected bool IsDuplicateBooks(XmlNodeList books)
         {
-            DuplicateBooks = new List<string>();
+            _duplicateBooks = new List<string>();
             List<string> allBooks = new List<string>();
             foreach (XmlNode bookNode in books)
             {
                 string bookName = bookNode.Value;
                 if (allBooks.Contains(bookName))
                 {
-                    if (!DuplicateBooks.Contains(bookName))
-                        DuplicateBooks.Add(bookName);
+                    if (!_duplicateBooks.Contains(bookName))
+                        _duplicateBooks.Add(bookName);
                 }
                 else
                 {
                     allBooks.Add(bookName);
                 }
             }
-            return DuplicateBooks.Count > 0;
+            return _duplicateBooks.Count > 0;
         }
 
         /// <summary>
@@ -354,9 +354,9 @@ namespace SIL.PublishingSolution
         /// <param name="goBibleCreatorPath"></param>
         protected void BuildApplication(string goBibleCreatorPath)
         {
-            const string Creator = "GoBibleCreator.jar";
+            const string creator = "GoBibleCreator.jar";
             const string prog = "java";
-            var creatorFullPath = Common.PathCombine(goBibleCreatorPath, Creator);
+            var creatorFullPath = Common.PathCombine(goBibleCreatorPath, creator);
             //var progFullName = SubProcess.JavaFullName(prog);
             //if (progFullName.EndsWith(".exe"))
             //{
@@ -365,7 +365,7 @@ namespace SIL.PublishingSolution
             collectionFullName = Common.PathCombine(processFolder, "Collections.txt");
             var args = string.Format(@" -Xmx128m -jar ""{0}""  ""{1}""", creatorFullPath, collectionFullName);
             SubProcess.RedirectOutput = RedirectOutputFileName;
-            SubProcess.RunCommand(processFolder, "java", args, true);
+            SubProcess.RunCommand(processFolder, prog, args, true);
         }
 
         /// <summary>
