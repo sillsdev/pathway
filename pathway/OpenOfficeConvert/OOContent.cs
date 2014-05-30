@@ -1203,25 +1203,30 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:style-name", "publisher");
                 _writer.WriteString(Param.GetMetadataCurrentValue(Param.Publisher));
                 _writer.WriteEndElement();
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "Illustration");
-                _writer.WriteStartElement("draw:frame");
-                _writer.WriteAttributeString("draw:style-name", "GraphicsI2");
-                _writer.WriteAttributeString("draw:name", "graphics1");
-                _writer.WriteAttributeString("text:anchor-type", "paragraph");
-                _writer.WriteAttributeString("svg:height", height);
-                _writer.WriteAttributeString("svg:width", width);
-                _writer.WriteStartElement("draw:image");
-                _writer.WriteAttributeString("xlink:type", "simple");
-                _writer.WriteAttributeString("xlink:show", "embed");
-                _writer.WriteAttributeString("xlink:actuate", "onLoad");
-                _writer.WriteAttributeString("xlink:href", "Pictures/" + logoName);
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("svg:title");
-                _writer.WriteString(logoName);
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
+
+                if (!string.IsNullOrEmpty(logoName))
+                {
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "Illustration");
+                    _writer.WriteStartElement("draw:frame");
+                    _writer.WriteAttributeString("draw:style-name", "GraphicsI2");
+                    _writer.WriteAttributeString("draw:name", "graphics1");
+                    _writer.WriteAttributeString("text:anchor-type", "paragraph");
+                    _writer.WriteAttributeString("svg:height", height);
+                    _writer.WriteAttributeString("svg:width", width);
+                    _writer.WriteStartElement("draw:image");
+                    _writer.WriteAttributeString("xlink:type", "simple");
+                    _writer.WriteAttributeString("xlink:show", "embed");
+                    _writer.WriteAttributeString("xlink:actuate", "onLoad");
+                    _writer.WriteAttributeString("xlink:href", "Pictures/" + logoName);
+                    _writer.WriteEndElement();
+                    _writer.WriteStartElement("svg:title");
+                    _writer.WriteString(logoName);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                }
+
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
                 content = string.Empty;
