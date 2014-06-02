@@ -1002,8 +1002,8 @@ namespace SIL.PublishingSolution
 
         private void toolStripMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            _CToolBL.PreviousStyleName = txtName.Text;
-            _CToolBL.txtName_ValidatingBL(sender);
+            //_CToolBL.PreviousStyleName = txtName.Text;
+            //_CToolBL.txtName_ValidatingBL(sender);
         }
 
         private void txtPageGutterWidth_KeyUp(object sender, KeyEventArgs e)
