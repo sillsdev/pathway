@@ -3294,7 +3294,7 @@ namespace SIL.PublishingSolution
             {
                 if (_classNameWithLang.IndexOf("BookReferenceDiv") == 0) // == "scrBook_scrBody" // BookReferenceDiv
                 {
-                    content += "1";
+                    content += " 1";
                     _writer.WriteStartElement("text:span");
                     _writer.WriteAttributeString("text:style-name", _classNameWithLang);
                     _writer.WriteStartElement("text:variable-set");
@@ -3396,6 +3396,7 @@ namespace SIL.PublishingSolution
                 {
                     content = _strBook + chapterNo;
                     leftHeadword = content;
+                    _firstText = content;
                     rightContent = _h3Book + chapterNo;
                 }
                 if (_refFormat.IndexOf("1-2") > 0)
@@ -3417,7 +3418,10 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    SetGuidewordTextPos(leftHeadword);
+                    if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                    {
+                        SetGuidewordTextPos(leftHeadword);
+                    }
                     _writer.WriteStartElement("text:span");
                     _writer.WriteAttributeString("text:style-name", _classNameWithLang);
                     _writer.WriteStartElement("text:variable-set");
@@ -3443,7 +3447,10 @@ namespace SIL.PublishingSolution
                     {
                         content = rightContent;
                     }
-                    SetGuidewordTextPos(content);
+                    if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                    {
+                        SetGuidewordTextPos(content);
+                    }
                     _writer.WriteStartElement("text:span");
                     _writer.WriteAttributeString("text:style-name", _classNameWithLang);
                     _writer.WriteStartElement("text:variable-set");
