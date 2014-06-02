@@ -678,35 +678,44 @@ namespace SIL.PublishingSolution
 
         private static void SetHeaderFontName(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass)
         {
-            projInfo.HeaderFontName = "Times New Roman";
-            if (projInfo.ProjectInputType == "Dictionary")
+            try
             {
-                if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath.ToLower()) == "preservemain")
+                projInfo.HeaderFontName = "Times New Roman";
+                if (projInfo.ProjectInputType == "Dictionary")
                 {
-                    if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
+                    if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath.ToLower()) == "preservemain")
                     {
-                        projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
-                    }
-                }
-                else
-                {
-                    foreach (string clsName in idAllClass.Keys)
-                    {
-                        if(clsName.IndexOf("reversalform") == 0)
+                        if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
                         {
-                            projInfo.HeaderFontName = idAllClass[clsName]["font-family"];
-                            projInfo.ReversalFontName = idAllClass[clsName]["font-family"];
-                            break;
+                            projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
+                        }
+                    }
+                    else
+                    {
+                        foreach (string clsName in idAllClass.Keys)
+                        {
+                            if (clsName.IndexOf("reversalform") == 0)
+                            {
+                                if (idAllClass[clsName].ContainsKey("font-family"))
+                                {
+                                    projInfo.HeaderFontName = idAllClass[clsName]["font-family"];
+                                    projInfo.ReversalFontName = idAllClass[clsName]["font-family"];
+                                }
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            else if (projInfo.ProjectInputType == "Scripture")
-            {
-                if (idAllClass.ContainsKey("scrBody") && idAllClass["scrBody"].ContainsKey("font-family"))
+                else if (projInfo.ProjectInputType == "Scripture")
                 {
-                    projInfo.HeaderFontName = idAllClass["scrBody"]["font-family"];
+                    if (idAllClass.ContainsKey("scrBody") && idAllClass["scrBody"].ContainsKey("font-family"))
+                    {
+                        projInfo.HeaderFontName = idAllClass["scrBody"]["font-family"];
+                    }
                 }
+            }
+            catch
+            {
             }
         }
 
