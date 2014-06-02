@@ -35,7 +35,7 @@ namespace SIL.PublishingSolution
         public string AttribPreviewFile2 = "previewfile2";
         public string AttribCSSName = "file";
         public string StyleName = "type";
-        private bool _isUnixOS = false;
+        private bool _isUnixOs = false;
         public string SelectedStyle = string.Empty;
 
         DataSet DataSetForGrid = new DataSet();
@@ -66,10 +66,10 @@ namespace SIL.PublishingSolution
 
         private void PreviewPrintVia_Load(object sender, EventArgs e)
         {
-            _isUnixOS = Common.IsUnixOS();
+            _isUnixOs = Common.IsUnixOS();
             CreateColumn();
             LoadGridValues(sender);
-            ShowHelp.ShowHelpTopic(this, _helpTopic, Common.IsUnixOS(), false);
+            ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOs, false);
             CreateToolTip();
             btnEdit.Visible = _showEdit;
             btnPrevious.Visible = false;
@@ -283,7 +283,7 @@ namespace SIL.PublishingSolution
             string preview;
             btnPrevious.Visible = true;
             btnNext.Visible = true;
-
+            ShowPreviewMessage(string.Empty);
             if (page == 1)
             {
                 if (grid.SelectedRows[0].Cells[6].Value.ToString().ToLower() == "custom")
@@ -306,19 +306,35 @@ namespace SIL.PublishingSolution
                 btnNext.Enabled = false;
             }
 
+            ShowPreviewMessage(preview);
+        }
+
+        private void ShowPreviewMessage(string preview)
+        {
             if (File.Exists(preview))
             {
                 lblPreview.Text = "Sample data in this layout:";
                 pictureBox1.Visible = true;
                 pictureBox1.Image = Image.FromFile(preview);
             }
-            else
+            else if (grid.SelectedRows[0].Cells[6].Value.ToString().ToLower() == "custom")
             {
+                string pathwayDirectory = PathwayPath.GetPathwayDir();
+                pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+                pathwayDirectory = Common.PathCombine(pathwayDirectory, Param.Value["InputType"]);
+                pathwayDirectory = Common.PathCombine(pathwayDirectory, "Preview");
+                preview = Common.PathCombine(pathwayDirectory, "PreviewMessage.jpg");
+                if (File.Exists(preview))
+                {
+                    pictureBox1.Visible = true;
+                    pictureBox1.Image = Image.FromFile(preview);
+                    btnPrevious.Enabled = false;
+                    btnNext.Enabled = false;
+                }
                 lblPreview.Text = "Sample data not available for a custom stylesheet.";
                 btnPrevious.Visible = false;
                 btnNext.Visible = false;
             }
-
         }
 
         public void ShowPreview(ref string _previewFileName1)
@@ -453,30 +469,16 @@ namespace SIL.PublishingSolution
 
         private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (grid.RowCount > 0)
-            {
-                try
-                {
-                    ShowPreview(1);
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void PreviewPrintVia_Activated(object sender, EventArgs e)
-        {
-            if (grid.RowCount > 0)
-            {
-                try
-                {
-                    ShowPreview(1);
-                }
-                catch
-                {
-                }
-            }
+            //if (grid.RowCount > 0)
+            //{
+            //    try
+            //    {
+            //        ShowPreview(1);
+            //    }
+            //    catch
+            //    {
+            //    }
+            //}
         }
 
         private void PreviewPrintVia_KeyUp(object sender, KeyEventArgs e)
@@ -489,6 +491,26 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+        }
+
+        private void grid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            var myCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+
+            if (grid.RowCount > 0)
+            {
+                try
+                {
+                    ShowPreview(1);
+                }
+                catch
+                {
+                }
+            }
+            Cursor.Current = myCursor;
+
         }
     }
 }

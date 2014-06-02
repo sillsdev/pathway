@@ -4425,6 +4425,9 @@ namespace SIL.PublishingSolution
 
         public void ShowPreview(int page)
         {
+            var myCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            
             string preview;
 
             if (!File.Exists(PreviewFileName1) || _screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit)
@@ -4457,13 +4460,51 @@ namespace SIL.PublishingSolution
                 cTool.BtnNext.Enabled = false;
             }
 
+            ShowPreviewBasedFileType(preview);
+            Cursor.Current = myCursor;
+        }
+
+        private void ShowPreviewBasedFileType(string preview)
+        {
+            if (FileType.ToLower() == "custom")
+            {
+                if (File.Exists(preview))
+                {
+                    cTool.PicPreview.Visible = true;
+                    cTool.PicPreview.Image = Image.FromFile(preview);
+                }
+                else
+                {
+                    ShowCustomPreviewImage();
+                }
+            }
+            else
+            {
+                if (File.Exists(preview))
+                {
+                    cTool.PicPreview.Visible = true;
+                    cTool.PicPreview.Image = Image.FromFile(preview);
+                }
+                else
+                {
+                    cTool.BtnPrevious.Visible = false;
+                    cTool.BtnNext.Visible = false;
+                }
+            }
+        }
+
+        private void ShowCustomPreviewImage()
+        {
+            string preview;
+            string pathwayDirectory = PathwayPath.GetPathwayDir();
+            pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+            pathwayDirectory = Common.PathCombine(pathwayDirectory, inputTypeBL);
+            pathwayDirectory = Common.PathCombine(pathwayDirectory, "Preview");
+            preview = Common.PathCombine(pathwayDirectory, "PreviewMessage.jpg");
             if (File.Exists(preview))
             {
                 cTool.PicPreview.Visible = true;
                 cTool.PicPreview.Image = Image.FromFile(preview);
-            }
-            else
-            {
                 cTool.BtnPrevious.Visible = false;
                 cTool.BtnNext.Visible = false;
             }
