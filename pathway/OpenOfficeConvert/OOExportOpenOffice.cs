@@ -76,7 +76,7 @@ namespace SIL.PublishingSolution
                 fileNameWithPath = fs.SplitFile(publicationInformation.DefaultXhtmlFileWithPath);
                 string flexRevFile =
                     Common.PathCombine(Path.GetDirectoryName(publicationInformation.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-                if(File.Exists(flexRevFile))
+                if (File.Exists(flexRevFile))
                     fileNameWithPath.Add(flexRevFile);
             }
 
@@ -105,8 +105,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> CreateJoiningForSplited(List<string> fileNames)
         {
             Dictionary<string, string> dictSecName = new Dictionary<string, string>();
-              if (fileNames.Count> 0)
-            
+            if (fileNames.Count > 0)
             {
                 bool mainAdded = false;
                 int fileCount = 1;
@@ -219,7 +218,7 @@ namespace SIL.PublishingSolution
             publicationInfo.IsODM = true;
             foreach (KeyValuePair<int, Dictionary<string, string>> keyvalue in _dictSorderSection)
             {
-                
+
                 var Sections = keyvalue.Value;
                 foreach (var subSection in Sections)
                 {
@@ -344,7 +343,7 @@ namespace SIL.PublishingSolution
             VerboseClass verboseClass = VerboseClass.GetInstance();
             _isFromExe = Common.CheckExecutionPath();
 
-            Common.DeleteDirectoryWildCard(Path.GetTempPath(), "SilPathwaytmp*"); 
+            Common.DeleteDirectoryWildCard(Path.GetTempPath(), "SilPathwaytmp*");
 
             string strFromOfficeFolder = Common.FromRegistry("OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
             projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
@@ -369,7 +368,7 @@ namespace SIL.PublishingSolution
                 dictSecName = GetPageSectionSteps();
             }
             dictSecName = SplitXhtmlAsMultiplePart(projInfo, dictSecName);
-            
+
             if (dictSecName.Count > 1)
             {
                 GeneratedPdfFileName = dictSecName["Main"];
@@ -460,14 +459,14 @@ namespace SIL.PublishingSolution
             string cssFile = projInfo.DefaultCssFileWithPath;
             SetBookReferenceDivInCSS(cssFile);
             var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(defaultXhtml);
-            if(projInfo.DefaultRevCssFileWithPath != null && projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
+            if (projInfo.DefaultRevCssFileWithPath != null && projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
             {
                 if (fileNameWithoutExtension != null && fileNameWithoutExtension.ToLower() == "flexrev")
                 {
                     cssFile = projInfo.DefaultRevCssFileWithPath;
                 }
             }
-            
+
 
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             if (fileNameWithoutExtension != null && fileNameWithoutExtension.ToLower() == "flexrev")
@@ -694,13 +693,10 @@ namespace SIL.PublishingSolution
                     {
                         foreach (string clsName in idAllClass.Keys)
                         {
-                            if (clsName.IndexOf("reversalform") == 0)
+                            if (clsName.IndexOf("reversalform") == 0 && idAllClass[clsName].ContainsKey("font-family"))
                             {
-                                if (idAllClass[clsName].ContainsKey("font-family"))
-                                {
-                                    projInfo.HeaderFontName = idAllClass[clsName]["font-family"];
-                                    projInfo.ReversalFontName = idAllClass[clsName]["font-family"];
-                                }
+                                projInfo.HeaderFontName = idAllClass[clsName]["font-family"];
+                                projInfo.ReversalFontName = idAllClass[clsName]["font-family"];
                                 break;
                             }
                         }
@@ -734,7 +730,7 @@ namespace SIL.PublishingSolution
 
         public static void ContentPostProcess(string tempOutputFolder)
         {
-            
+
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(true);
             FileStream fs = File.OpenRead(filename);
@@ -992,18 +988,18 @@ namespace SIL.PublishingSolution
             string officeNode1 = "//of:automatic-styles";
             if (root2 != null)
             {
-                XmlNode node1 = root2.SelectSingleNode(officeNode1, nsmgr); 
+                XmlNode node1 = root2.SelectSingleNode(officeNode1, nsmgr);
                 if (node1 != null)
                 {
                     node1.InnerXml = node1.InnerXml + allStyles;
-               }
+                }
                 docContent.Save(strContentPath);
             }
         }
 
         private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime, string isCoverImageInserted, string isToc)
         {
-    	    var xmldoc = Common.DeclareXMLDocument(true);
+            var xmldoc = Common.DeclareXMLDocument(true);
             xmldoc.Load(strMacroPath);
             XmlElement ele = xmldoc.DocumentElement;
             string autoMacro = "False";
@@ -1016,7 +1012,7 @@ namespace SIL.PublishingSolution
             }
             if (ele != null)
             {
-                
+
                 string seperator = "\n";
                 string line1 = string.Empty;
                 if (publicationInfo.ProjectInputType.ToLower() == "scripture")
@@ -1039,7 +1035,7 @@ namespace SIL.PublishingSolution
         }
 
 
-        
+
         #endregion
 
         #region Private Functions
