@@ -508,7 +508,7 @@ namespace SIL.PublishingSolution
                                 StartElement(targetPath);
                                 break;
                             case XmlNodeType.EndElement:
-								InsertVariableForSpanningChapaters();
+                                InsertVariableForSpanningChapaters();
                                 EndElement();
                                 break;
                             case XmlNodeType.Text: // Text.Write
@@ -2795,7 +2795,15 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("draw:frame");
             _writer.WriteAttributeString("draw:style-name", "fr0");
             _writer.WriteAttributeString("draw:name", strFrameCount);
-            _writer.WriteAttributeString("text:anchor-type", "page");
+            if ((_projInfo.DefaultRevCssFileWithPath != null && _projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
+                || _projInfo.FileToProduce == "One Per Book" || _projInfo.FileToProduce == "One Per Letter")
+            {
+                _writer.WriteAttributeString("text:anchor-type", "paragraph");
+            }
+            else
+            {
+                _writer.WriteAttributeString("text:anchor-type", "page");
+            }
             _writer.WriteAttributeString("svg:width", rectWidth + "pt");
             _writer.WriteAttributeString("svg:height", rectHeight + "pt");
             _writer.WriteStartElement("draw:image");
@@ -2805,7 +2813,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("xlink:href", "Pictures/" + Path.GetFileName(_imageSource));
             _writer.WriteEndElement();
             _writer.WriteEndElement();
-            
+
             _imageInsert = false;
             _imageSource = string.Empty;
             _isNewParagraph = false;
