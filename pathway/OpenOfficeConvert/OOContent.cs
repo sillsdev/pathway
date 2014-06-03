@@ -508,7 +508,7 @@ namespace SIL.PublishingSolution
                                 StartElement(targetPath);
                                 break;
                             case XmlNodeType.EndElement:
-								InsertVariableForSpanningChapaters();
+                                InsertVariableForSpanningChapaters();
                                 EndElement();
                                 break;
                             case XmlNodeType.Text: // Text.Write
@@ -2777,80 +2777,17 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void CoverImage()
         {
-            string rectHeight = "0";
-            string rectWidth = "0";
-            string srcFile;
-            string[] cc = _allStyle.ToArray();
-            imageClass = cc[0];
-            srcFile = _imageSource;
-            string srcFilrLongDesc = _imageLongDesc;
-            string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, _sourcePicturePath);
-            string fileName = Path.GetFileName(srcFile);
-            string normalTargetFile = _projInfo.TempOutputFolder;
-            string basePath = normalTargetFile.Substring(0, normalTargetFile.LastIndexOf(Path.DirectorySeparatorChar));
-            String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + fileName);
-            if (File.Exists(fromPath))
-            {
-                File.Copy(fromPath, toPath, true);
-            }
-
+            string fromPath = Common.GetPictureFromPath(_imageSource, _metaValue, _sourcePicturePath);
+            string basePath = _projInfo.TempOutputFolder.Substring(0, _projInfo.TempOutputFolder.LastIndexOf(Path.DirectorySeparatorChar));
             string clsName = _allStyle.Peek();
-            if (srcFilrLongDesc.Length > 0 && IdAllClass.ContainsKey(clsName))
-            {
-                rectHeight = GetPropertyValue(srcFilrLongDesc, "height", rectHeight);
-                rectWidth = GetPropertyValue(srcFilrLongDesc, "width", rectWidth);
-            }
+            String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + Path.GetFileName(_imageSource));
+            string rectHeight = GetPropertyValue(clsName, "height", _pageSize["height"]);
+            string rectWidth = GetPropertyValue(clsName, "width", _pageSize["width"]);
 
-            //Calculate Cover Imagesize
-            if (clsName.IndexOf("coverImage") == 0 && rectHeight == "0" && rectWidth == "0")
-            {
-                // Get Page property
-                clsName = _childName;
-                rectHeight = GetPropertyValue(clsName, "height", _pageSize["height"]);
-                rectWidth = GetPropertyValue(clsName, "width", _pageSize["width"]);
-
-                // Get Picture property
-                double picheight = 0.0;
-                double picwidth = 0.0;
-                if (File.Exists(fromPath))
-                {
-                    Image fullimage = Image.FromFile(fromPath);
-                    picheight = fullimage.Height;
-                    picwidth = fullimage.Width;
-                    fullimage.Dispose();
-                }
-
-                try
-                {
-                    //Find aspect Ratio
-                    if (picheight > picwidth) // Find width
-                    {
-                        rectWidth =
-                            (picwidth / picheight * double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US"))).ToString();
-                    }
-                    else // Find height
-                    {
-                        rectHeight =
-                            (picheight / picwidth * double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US"))).ToString();
-                    }
-                }
-                catch
-                {
-                }
-            }
-            //END Calculate Cover Imagesize
+            if (File.Exists(fromPath)) { File.Copy(fromPath, toPath, true); }
 
             string strFrameCount = "Graphics" + _frameCount;
-            _imageGraphicsName = strFrameCount;
 
-            string imgWUnit = "pt";
-            string width = rectWidth;
-            if (rectWidth.IndexOf("%") == -1)
-                width = rectWidth + imgWUnit;
-
-            string height = rectHeight;
-            if (rectHeight.IndexOf("%") == -1)
-                height = rectHeight + imgWUnit;
             _frameCount++;
 
             _writer.WriteStartElement("text:p");
@@ -2867,17 +2804,16 @@ namespace SIL.PublishingSolution
             {
                 _writer.WriteAttributeString("text:anchor-type", "page");
             }
-            if (width != "100%")
-                _writer.WriteAttributeString("svg:width", width);
-            _writer.WriteAttributeString("svg:height", height);
-
+            _writer.WriteAttributeString("svg:width", rectWidth + "pt");
+            _writer.WriteAttributeString("svg:height", rectHeight + "pt");
             _writer.WriteStartElement("draw:image");
             _writer.WriteAttributeString("xlink:type", "simple");
             _writer.WriteAttributeString("xlink:show", "embed");
             _writer.WriteAttributeString("xlink:actuate", "onLoad");
-            _writer.WriteAttributeString("xlink:href", "Pictures/" + fileName);
+            _writer.WriteAttributeString("xlink:href", "Pictures/" + Path.GetFileName(_imageSource));
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+
             _imageInsert = false;
             _imageSource = string.Empty;
             _isNewParagraph = false;
