@@ -1479,6 +1479,7 @@ namespace SIL.PublishingSolution
                 foreach (var fontFamily in pfc.Families)
                 {
                     cTool.DdlDefaultFont.Items.Add(fontFamily.GetName(0));
+                    cTool.DdlDefaultFont.SelectedIndex = 0;
                 }
             }
             TreeView TvFeatures = new TreeView();
@@ -4119,8 +4120,10 @@ namespace SIL.PublishingSolution
             _screenMode = ScreenMode.Load;
             _lastSelectedLayout = StyleEXE;
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
-            tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
-            tabpreview = cTool.TabControl1.TabPages["tabPreview"];
+            if (cTool.TabControl1.TabPages["tabdisplay"] != null)
+                tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
+            if (cTool.TabControl1.TabPages["tabPreview"] != null)
+                tabpreview = cTool.TabControl1.TabPages["tabPreview"];
             if (cTool.TabControl1.TabPages.Count > 2)
             {
                 if (cTool.TabControl1.TabPages["tabmobile"] != null)

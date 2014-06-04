@@ -317,24 +317,34 @@ namespace SIL.PublishingSolution
                 pictureBox1.Visible = true;
                 pictureBox1.Image = Image.FromFile(preview);
             }
-            else if (grid.SelectedRows[0].Cells[6].Value.ToString().ToLower() == "custom")
+            else if (grid.SelectedRows[0].Cells[6].Value.ToString().ToLower() == "custom" && (grid.SelectedRows[0].Cells[4].Value.ToString().ToLower() == "paper" || grid.SelectedRows[0].Cells[4].Value.ToString().ToLower() == "others"))
             {
-                string pathwayDirectory = PathwayPath.GetPathwayDir();
-                pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
-                pathwayDirectory = Common.PathCombine(pathwayDirectory, Param.Value["InputType"]);
-                pathwayDirectory = Common.PathCombine(pathwayDirectory, "Preview");
-                preview = Common.PathCombine(pathwayDirectory, "PreviewMessage.jpg");
-                if (File.Exists(preview))
-                {
-                    pictureBox1.Visible = true;
-                    pictureBox1.Image = Image.FromFile(preview);
-                    btnPrevious.Enabled = false;
-                    btnNext.Enabled = false;
-                }
-                lblPreview.Text = "Sample data not available for a custom stylesheet.";
-                btnPrevious.Visible = false;
-                btnNext.Visible = false;
+                ShowImageForPreviewLayout("PreviewMessage.jpg", "Sample data for a custom stylesheet:");
             }
+            else
+            {
+                ShowImageForPreviewLayout("NoPreview.jpg", "Sample data not available:");
+            }
+        }
+
+        private void ShowImageForPreviewLayout(string imageFileName, string message)
+        {
+            string preview;
+            string pathwayDirectory = PathwayPath.GetPathwayDir();
+            pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+            pathwayDirectory = Common.PathCombine(pathwayDirectory, Param.Value["InputType"]);
+            pathwayDirectory = Common.PathCombine(pathwayDirectory, "Preview");
+            preview = Common.PathCombine(pathwayDirectory, imageFileName);
+            if (File.Exists(preview))
+            {
+                pictureBox1.Visible = true;
+                pictureBox1.Image = Image.FromFile(preview);
+                btnPrevious.Enabled = false;
+                btnNext.Enabled = false;
+            }
+            lblPreview.Text = message;
+            btnPrevious.Visible = false;
+            btnNext.Visible = false;
         }
 
         public void ShowPreview(ref string _previewFileName1)

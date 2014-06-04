@@ -1162,6 +1162,25 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void HideVerseNumYes()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "HideVerseNumYes";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void HideVerseNumNo()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "HideVerseNumNo";
+            ExportProcess(file);
+            FileCompare(file);
+        }
         #endregion
 
         #region Private Functions
