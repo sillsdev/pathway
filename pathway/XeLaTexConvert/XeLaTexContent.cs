@@ -79,6 +79,7 @@ namespace SIL.PublishingSolution
         private int _bookCount = 0;
         private bool _bookPageBreak;
         private bool _hideFirstVerseNo;
+        private bool _isFirstVerseNo;
 		//private bool _directionEnd = false;
         private string _directionStart = string.Empty;
 
@@ -608,38 +609,31 @@ namespace SIL.PublishingSolution
                     _xetexFile.Write("\r\n \\label{PageStock_" + _dicMainReversal + TocPageStock.ToString() + "} ");
                 }
 
-
                 if (content != null) content = content.Replace("~", "\\textasciitilde{~}");
 
-                if(_hideFirstVerseNo && _childName.ToLower().IndexOf("verse") == 0)
+                if (_hideFirstVerseNo)
                 {
-                    content = string.Empty;
+                    if (_childName.ToLower().IndexOf("chapter") == 0)
+                    {
+                        _isFirstVerseNo = true;
+                    }
+                    else if (_isFirstVerseNo && _childName.ToLower().IndexOf("verse") == 0)
+                    {
+                        content = " ";
+                        _isFirstVerseNo = false;
+                    }
                 }
-                //if (_characterName != null && IdAllClass.ContainsKey(_characterName) && IdAllClass[_characterName].ContainsKey("direction"))
-                //{
-                //    if (IdAllClass[_characterName]["direction"] == "rtl")
-                //    {
-                //        _xetexFile.Write("\\RL{");
-                //        _directionEnd = true;
-                //    }
-                //}
+                
 
                 if (_childName.ToLower().Contains("sectionhead"))//spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody
                 {
                     _inlineCount++;
                 }
                 _xetexFile.Write(content);
-                //if (_directionEnd)
-                //{
-                //    string directionEnd = "}";
-                //    _xetexFile.Write(directionEnd);
-                //    _directionEnd = false;
-                //}
                 CloseInlineInnerStyle(value);
                 for (int i = 1; i <= _inlineCount; i++) // close braces for inline style
                 {
                     _xetexFile.Write("}");
-
                 }
                 _inlineCount = 0;
 
