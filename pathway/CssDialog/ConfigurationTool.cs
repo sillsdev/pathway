@@ -1250,5 +1250,13 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.tsReset_ClickBL();
         }
+
+        private void moreHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (Process.Start("http://pathway.sil.org/demo/accessing-online-help-and-student-guide/"))
+            {
+                return;
+            }
+        }
     }
 }
