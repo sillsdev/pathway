@@ -1479,6 +1479,7 @@ namespace SIL.PublishingSolution
                 foreach (var fontFamily in pfc.Families)
                 {
                     cTool.DdlDefaultFont.Items.Add(fontFamily.GetName(0));
+                    cTool.DdlDefaultFont.SelectedIndex = 0;
                 }
             }
             TreeView TvFeatures = new TreeView();

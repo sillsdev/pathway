@@ -704,7 +704,7 @@ namespace SIL.Tool
         {
             if (Common.UsingMonoVM)
             {
-                return "/usr/share/fonts/truetype";
+                return "/usr/share/fonts";
             }
             OperatingSystem osInfo = Environment.OSVersion;
             if (osInfo.Platform == PlatformID.Win32NT && osInfo.Version.Major >= 6)
