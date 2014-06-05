@@ -53,12 +53,32 @@ namespace SIL.Tool
                     Common.SupportFolder = "";
                     return myPathwayDir;
                 }
-                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
-                    "Pathway", "PathwayDir", out regObj))
+
+
+                if (GetPathwayInstallerDirectoryForCurrentUserRegistry(out pathwayDir))
+                {
+                    return pathwayDir;
+                }
+
+                if (GetPathwayInstallerDirectoryForLocalMachineRegistry(out pathwayDir))
+                {
+                    return pathwayDir;
+                }
+                
+                string pathwayInstalledLocation = "C:\\Program Files (x86)\\SIL\\Pathway7\\";
+                if (Directory.Exists(pathwayInstalledLocation))
                 {
                     Common.SupportFolder = "";
-                    return (string)regObj;
+                    return pathwayInstalledLocation;
                 }
+
+                pathwayInstalledLocation = "C:\\Program Files\\SIL\\Pathway7\\";
+                if (Directory.Exists(pathwayInstalledLocation))
+                {
+                    Common.SupportFolder = "";
+                    return pathwayInstalledLocation;
+                }
+
                 var fwKey = RegistryHelperLite.CompanyKeyLocalMachine.OpenSubKey("FieldWorks");
                 if (fwKey != null && Common.fromPlugin)
                 {
@@ -84,6 +104,48 @@ namespace SIL.Tool
             }
             catch { }
             return pathwayDir;
+        }
+
+        private static bool GetPathwayInstallerDirectoryForCurrentUserRegistry(out string pathwayDir)
+        {
+            bool isAvailable = false;
+            pathwayDir = null;
+            try
+            {
+                object regObj;
+                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyCurrentUser,
+                                                      "Pathway", "PathwayDir", out regObj))
+                {
+                    Common.SupportFolder = "";
+                    pathwayDir = (string)regObj;
+                    isAvailable = true;
+                }
+            }
+            catch
+            {
+            }
+            return isAvailable;
+        }
+
+        private static bool GetPathwayInstallerDirectoryForLocalMachineRegistry(out string pathwayDir)
+        {
+            bool isAvailable = false;
+            pathwayDir = null;
+            try
+            {
+                object regObj;
+                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
+                                                      "Pathway", "PathwayDir", out regObj))
+                {
+                    Common.SupportFolder = "";
+                    pathwayDir = (string)regObj;
+                    isAvailable = true;
+                }
+            }
+            catch
+            {
+            }
+            return isAvailable;
         }
     }
 }
