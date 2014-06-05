@@ -1,0 +1,10 @@
+MIDlet-Name: DfM_lojen_SIL
+MIDlet-Version: 3.5.8
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+Built-By: kim
+MIDlet-Vendor: Gert Nuber and Contributors
+MIDlet-1: DfM_lojen_SIL, /icons/Application/DictionaryForMIDs.png, de.kugihan.dictionaryformids.hmi_java_me.DictionaryForMIDs
+MIDlet-Jar-URL: DfM_lojen_SIL.jar
+logLevel: 0
+MIDlet-Jar-Size: 256096

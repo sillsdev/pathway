@@ -28,10 +28,9 @@ namespace SIL.PublishingSolution
 
         public DictionaryForMIDsStreamWriter(PublicationInformation projInfo)
         {
-            var name = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             Directory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             Debug.Assert(Directory != null);
-            FullPath = Common.PathCombine(Directory, name + ".txt");
+            FullPath = Common.PathCombine(Directory, "main.txt");
         }
 
         public void Open()

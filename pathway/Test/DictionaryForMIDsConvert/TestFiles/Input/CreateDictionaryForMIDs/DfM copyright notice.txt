@@ -1,0 +1,7 @@
+Copyright notice
+
+The copyright conditions of DictionaryForMIDs are defined by the GNU General Public License (GPL) <http://www.gnu.org/licenses/gpl-faq.html>, see file COPYING <http://dictionarymid.sourceforge.net/COPYING>. DictionaryForMIDs is free SW.
+
+Please note that specific copyrights apply to the dictionary for which DictionaryForMIDs is set up. See the DictionaryForMIDs info-dialog for more information on the copyright of a dictionary.
+
+Android app available at http://dictionarymid.sourceforge.net/android-dl.html

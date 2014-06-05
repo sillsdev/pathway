@@ -2530,11 +2530,7 @@ namespace SIL.Tool
             {
                 if (lstDirecorylike.Contains(Path.GetFileName(folderName)))
                 {
-                    if (Directory.Exists(folderName))
-                    {
-                        DirectoryInfo di = new DirectoryInfo(folderName);
-                        Common.CleanDirectory(di);
-                    }
+                    Directory.Delete(folderName, true);
                 }
             }
 

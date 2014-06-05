@@ -1,0 +1,79 @@
+java -jar DfM-Creator.jar -DictionaryGeneration ". C:\Users\Trihus\git\pathway\pathway\Test\DictionaryForMIDsConvert\TestFiles\output\CreateDictionaryForMIDs\\main.txt" ". C:\Users\Trihus\git\pathway\pathway\Test\DictionaryForMIDsConvert\TestFiles\output\CreateDictionaryForMIDs" ". C:\Users\Trihus\git\pathway\pathway\Test\DictionaryForMIDsConvert\TestFiles\output\CreateDictionaryForMIDs"
+java -jar DfM-Creator.jar -JarCreator ". C:\Users\Trihus\git\pathway\pathway\Test\DictionaryForMIDsConvert\TestFiles\output\CreateDictionaryForMIDs\\Dictionary\\" ". C:\Users\Trihus\git\pathway\pathway\Test\DictionaryForMIDsConvert\TestFiles\output\CreateDictionaryForMIDs\\Empty_Jar-Jad\\" ". C:\Users\Trihus\git\pathway\pathway\Test\DictionaryForMIDsConvert\TestFiles\output\CreateDictionaryForMIDs"
+
+
+You invoked the commad line version of DictionaryGeneration
+
+
+DictionaryForMIDs - DictionaryGeneration
+Copyright (C) 2005, 2006, 2007  Gert Nuber (dict@kugihan.de) et al
+
+DictionaryGeneration is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+DictionaryGeneration is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with DictionaryGeneration; if not, write to the Free Software Foundation,
+Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+For documentation and source code, see http://dictionarymid.sourceforge.net
+
+Checking: .\\\\main.txt\
+Done: Checking
+Creating: dictionary files
+Done generating dictionary files
+
+Creating: index and searchlist files
+Done: index and searchlist files création.
+
+Total number of searchlist entries : 2 
+Total number of index entries : 4 
+Total number of dictionary entries : 2 
+
+
+
+Creating: .\dictionary\DictionaryForMIDs.properties
+Property searchListFileMaxSize  set to 12
+Property indexFileMaxSize  set to 27
+Property dictionaryFileMaxSize  set to 66
+Property language1IndexNumberOfSourceEntries  set to 2
+Property language2IndexNumberOfSourceEntries  set to 2
+Done: property file
+
+complete
+
+
+
+You invoked the commad line version of JarCreator
+
+
+DictionaryForMIDs - JarCreator, Copyright (C) 2005-2009 Mathis Karmann et al
+
+JarCreator is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+JarCreator is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with JarCreator; if not, write to the Free Software Foundation,
+Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+For documentation and source code, see http://dictionarymid.sourceforge.net
+Written JAR-file: .\DfM_lojen_SIL\DfM_lojen_SIL.jar
+Written JAD-file: .\DfM_lojen_SIL\DfM_lojen_SIL.jar
+
+You may now create DictionaryForMIDs_VVVVV_XXXYYY_ZZZ.zip
+VVVVV: version of DictionaryForMIDs
+XXX: language1FilePostfix
+YYY: language2FilePostfix
+ZZZ: dictionaryAbbreviation
+e.g: DictionaryForMIDs_3.5.8_EngDef_GCIDE.zip
