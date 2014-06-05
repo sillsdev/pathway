@@ -83,11 +83,6 @@ namespace SIL.PublishingSolution
 
             _xhtmlXelatexXslProcess.Load(XmlReader.Create(Common.UsersXsl("AddBidi.xsl")));
 
-            if (_inputType.ToLower() == "dictionary")
-            {
-                Common.ApplyXslt(projInfo.DefaultXhtmlFileWithPath, _xhtmlXelatexXslProcess);
-            }
-
             _langFontDictionary = new Dictionary<string, string>();
             _langFontCodeandName = new Dictionary<string, string>();
             string mainXhtmlFileWithPath = projInfo.DefaultXhtmlFileWithPath;
@@ -99,6 +94,12 @@ namespace SIL.PublishingSolution
             }
             preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
             preProcessor.XelatexImagePreprocess();
+
+            if (_inputType.ToLower() == "dictionary")
+            {
+                Common.ApplyXslt(projInfo.DefaultXhtmlFileWithPath, _xhtmlXelatexXslProcess);
+            }
+
             Param.LoadSettings();
             string organization;
             try
