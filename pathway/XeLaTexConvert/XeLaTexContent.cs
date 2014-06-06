@@ -1495,6 +1495,10 @@ namespace SIL.PublishingSolution
                             displayNoneStart = "\\begin{comment}";
                             displayNoneEnd = "\\end{comment}\r\n";
                         }
+                        if (propName == "RTL")
+                        {
+                            _directionStart = "\\RL{";
+                        }
                         //else if (propName == "RTL")
                         //{
                         //    directionStart = "\\begin{RTLitems} \\item";
@@ -1583,6 +1587,12 @@ namespace SIL.PublishingSolution
                     _xetexFile.WriteLine(displayNoneStart);
                     endParagraphString = displayNoneEnd + " " + endParagraphString;
                 }
+                if (_directionStart != string.Empty)
+                {
+                    _xetexFile.Write(_directionStart);
+                    endParagraphString = "} " + endParagraphString;
+                    _directionStart = string.Empty;
+                }
                 //if (directionStart != string.Empty)
                 //{
                 //    _xetexFile.WriteLine(directionStart);
@@ -1624,11 +1634,10 @@ namespace SIL.PublishingSolution
                             displayNoneStart = "\\begin{comment}";
                             displayNoneEnd = "\\end{comment}\r\n";
                         }
-                        //else if (propName == "RTL")
-                        //{
-                        //    directionStart = "\\begin{RTLitems} \\item";
-                        //    directionEnd = "\\end{RTLitems}";
-                        //}
+                        else if (propName == "RTL")
+                        {
+                            _directionStart = "\\RL{";
+                        }
                     }
                 }
 

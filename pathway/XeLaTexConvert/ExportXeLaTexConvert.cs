@@ -95,7 +95,7 @@ namespace SIL.PublishingSolution
             preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
             preProcessor.XelatexImagePreprocess();
 
-            if (_inputType.ToLower() == "dictionary")
+            if (_inputType.ToLower() == "dictionary" && projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 Common.ApplyXslt(projInfo.DefaultXhtmlFileWithPath, _xhtmlXelatexXslProcess);
             }

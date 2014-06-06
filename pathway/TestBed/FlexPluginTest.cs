@@ -494,7 +494,9 @@ namespace TestBed
             projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
 
             projInfo.DefaultRevCssFileWithPath = txtCSSInput.Text.Replace("main", "flexrev");
-            projInfo.IsReversalExist = true;
+            if (projInfo.ProjectInputType.ToLower() == "dictionary")
+                projInfo.IsReversalExist = true;
+
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             projInfo.DictionaryPath = projInfo.ProjectPath;
             exportXeLaTex.Export(projInfo);

@@ -671,11 +671,11 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            //if (propertyValue.ToLower() == "rtl")
-            //{
-            //    propertyValue = "RTL";
-            //    _inlineStyle.Add(propertyValue);
-            //}
+            if (propertyValue.ToLower() == "rtl")
+            {
+                propertyValue = "RTL";
+                _inlineStyle.Add(propertyValue);
+            }
             //else if (propertyValue.ToLower() == "ltr")
             //{
             //    propertyValue = "LTR";
@@ -685,7 +685,7 @@ namespace SIL.PublishingSolution
             //{
             //    return;
             //}
-            //_IDProperty["direction"] = propertyValue;
+            _IDProperty["direction"] = propertyValue;
             propertyValue = "\\usepackage{bidi} ";
             if (!_includePackageList.Contains(propertyValue))
                 _includePackageList.Add(propertyValue);
