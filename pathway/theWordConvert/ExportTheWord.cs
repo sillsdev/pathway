@@ -441,10 +441,18 @@ namespace SIL.PublishingSolution
             Ssf = sh.GetSettingsFilename();
         }
 
-        protected static string GetSsfValue(string xpath, string def = null)
+        protected static string GetSsfValue(string xpath, string def)
         {
             var node = Common.GetXmlNode(Ssf, xpath);
             return (node != null)? node.InnerText : def;
+        }
+
+        protected static string GetSsfValue(string xpath)
+        {
+// Default Parameters are not allowed in Team City build server.
+// ReSharper disable IntroduceOptionalParameters.Global
+            return GetSsfValue(xpath, null);
+// ReSharper restore IntroduceOptionalParameters.Global
         }
 
         protected static XsltArgumentList LoadXsltParameters()
