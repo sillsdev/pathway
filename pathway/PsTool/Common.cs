@@ -3053,7 +3053,7 @@ namespace SIL.Tool
 
         public static Dictionary<string, string> FillMappedFonts(Dictionary<string, string> fontLangMapTemp)
         {
-            var tempGenericFontFile = CopiedToTempGenericFontFile();
+            var tempGenericFontFile = CopyXmlFileToTempDirectory("GenericFont.xml");
 
             string xPath = "//font-language-mapping";
             XmlNodeList fontList = GetXmlNodes(tempGenericFontFile, xPath);
@@ -3068,31 +3068,7 @@ namespace SIL.Tool
             return fontLangMapTemp;
         }
 
-        private static string CopiedToTempGenericFontFile()
-        {
-            string fileName = "GenericFont.xml";
-            string PsSupportPath = GetPSApplicationPath();
-            string xmlFileNameWithPath = PathCombine(PsSupportPath, fileName);
-            string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
-            if (Directory.Exists(tempFolder))
-            {
-                try
-                {
-                    DirectoryInfo di = new DirectoryInfo(tempFolder);
-                    Common.CleanDirectory(di);
-                }
-                catch
-                {
-                    tempFolder = Common.PathCombine(Path.GetTempPath(),
-                                                    "SilPathWay" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
-                }
-            }
-            Directory.CreateDirectory(tempFolder);
-            string tempGenericFontFile = PathCombine(tempFolder, fileName);
-
-            File.Copy(xmlFileNameWithPath, tempGenericFontFile, true);
-            return tempGenericFontFile;
-        }
+        
 
         public static Dictionary<string, string> FillMappedFonts(string wsPath, Dictionary<string, string> fontLangMapTemp)
         {
@@ -3281,7 +3257,7 @@ namespace SIL.Tool
             int unicodeDecimal = 0;
             unicodeString = unicodeString.Trim();
             string fontName = string.Empty;
-            string xmlFileNameWithPath = CopiedToTempGenericFontFile();
+            string xmlFileNameWithPath = CopyXmlFileToTempDirectory("GenericFont.xml");
             string xPath = "//font-language-unicode-map";
             XmlNodeList fontList = GetXmlNodes(xmlFileNameWithPath, xPath);
             if (fontList != null && fontList.Count > 0)
@@ -4370,7 +4346,7 @@ namespace SIL.Tool
         {
             Dictionary<string, string> _isoLanguage = new Dictionary<string, string>();
 
-            string xmlFilePath = Common.PathCombine(Common.GetBinPath(), "RampLangCode.xml");
+            string xmlFilePath = CopyXmlFileToTempDirectory("RampLangCode.xml");
             if (!File.Exists(xmlFilePath))
                 return null;
 
@@ -4407,6 +4383,36 @@ namespace SIL.Tool
                 }
             }
             return _isoLanguage;
+        }
+        
+        public static string CopyXmlFileToTempDirectory(string fileName)
+        {
+            string tempXmlFile = string.Empty;
+            string psSupportPath = GetPSApplicationPath();
+            string xmlFileNameWithPath = Common.PathCombine(psSupportPath, fileName);
+            if (File.Exists(xmlFileNameWithPath))
+            {
+                string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
+                if (Directory.Exists(tempFolder))
+                {
+                    try
+                    {
+                        var di = new DirectoryInfo(tempFolder);
+                        Common.CleanDirectory(di);
+                    }
+                    catch
+                    {
+                        tempFolder = Common.PathCombine(Path.GetTempPath(),
+                                                        "SilPathWay" +
+                                                        Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
+                    }
+                }
+                Directory.CreateDirectory(tempFolder);
+                tempXmlFile = Common.PathCombine(tempFolder, fileName);
+
+                File.Copy(xmlFileNameWithPath, tempXmlFile, true);
+            }
+            return tempXmlFile;
         }
 
         /// <summary>

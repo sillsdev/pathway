@@ -898,8 +898,8 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            string genericFamily = font[fontLength - 1];
-            genericFamily = genericFamily.Replace("\"", "").Trim().ToLower();
+            //string genericFamily = font[fontLength - 1];
+            //genericFamily = genericFamily.Replace("\"", "").Trim().ToLower();
             ArrayList genericFamilyList = new ArrayList(new[] { "serif", "sans-serif", "cursive", "fantasy", "monospace" });
             fontName = font[0];
             for (int i = 0; i < fontLength; i++)
@@ -910,7 +910,7 @@ namespace SIL.PublishingSolution
 
                 if (genericFamilyList.Contains(fontName.ToLower()))
                 {
-                    string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
+                    string xmlFileNameWithPath = Common.CopyXmlFileToTempDirectory("GenericFont.xml");
                     string xPath = "//font-preference/generic-family [@name = \"" + fontName.ToLower() + "\"]";
                     ArrayList fontList = new ArrayList();
                     fontList = Common.GetXmlNodeList(xmlFileNameWithPath, xPath);

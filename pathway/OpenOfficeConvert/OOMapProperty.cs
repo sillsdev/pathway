@@ -559,7 +559,6 @@ namespace SIL.PublishingSolution
 
         public void FontFamily(string propertyValue)
         {
-            string PsSupportPath = Common.GetPSApplicationPath();
             string[] font = propertyValue.Split(',');
             int fontLength = font.Length;
             if (fontLength == 0)
@@ -590,7 +589,7 @@ namespace SIL.PublishingSolution
             fontName = font[0];
             if (genericFamilyList.Contains(genericFamily))
             {
-                string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
+                string xmlFileNameWithPath = Common.CopyXmlFileToTempDirectory("GenericFont.xml");
                 string xPath = "//font-preference/generic-family [@name = \"" + genericFamily + "\"]";
                 ArrayList fontList = new ArrayList();
                 fontList = Common.GetXmlNodeList(xmlFileNameWithPath, xPath);
