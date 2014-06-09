@@ -4174,7 +4174,7 @@ namespace Test.OpenOfficeConvert
             pageSize["width"] = cssClass["@page"]["page-width"];
             _projInfo.DefaultXhtmlFileWithPath = FileInput(file + ".xhtml");
             _projInfo.TempOutputFolder = FileOutput(file);
-            _projInfo.HideSpaceVerseNumber = stylesXML._hideSpaceVerseNumber;
+            _projInfo.HideSpaceVerseNumber = stylesXML.HideSpaceVerseNumber;
 
             PreExportProcess preProcessor = new PreExportProcess(_projInfo);
             preProcessor.GetTempFolderPath();

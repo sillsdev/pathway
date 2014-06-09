@@ -35,23 +35,16 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> _LOClass = new Dictionary<string, string>();
         private Dictionary<string, string> _LOProperty = new Dictionary<string, string>();
         OOMapProperty mapProperty = new OOMapProperty();
-        protected bool isFixedLengthEnabled = false;
-
+        protected bool IsFixedLengthEnabled = false;
         //Marks_crop - Declaration
         private string _writingMode = "lr-tb";
-
-        public bool _multiLanguageHeader = false;
-        private string _projectType = string.Empty;
+        public bool MultiLanguageHeader = false;
         private string _enableKerning = "true";
-
-        public string _customFootnoteCaller;
-        public string _customXRefCaller;
-        public string _hideVerseNumberOne;
-        public string _hideSpaceVerseNumber = "False";
-
-        public string _splitFileByLetter = "False";
-
-
+        public string CustomFootnoteCaller;
+        public string CustomXRefCaller;
+        public string HideVerseNumberOne;
+        public string HideSpaceVerseNumber = "False";
+        public string SplitFileByLetter = "False";
         private bool _isFromExe = false;
         private bool _isCenterTabStopNeeded = true;
         private int _guidewordLength;
@@ -64,7 +57,6 @@ namespace SIL.PublishingSolution
                 string outputFile = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 string strStylePath = Common.PathCombine(projInfo.TempOutputFolder, outputFileName);
                 _isFromExe = Common.CheckExecutionPath();
-                _projectType = projInfo.ProjectInputType;
                 _projInfo = projInfo;
                 _cssProperty = cssProperty;
                 GetGuidewordLength(cssProperty);
@@ -137,7 +129,7 @@ namespace SIL.PublishingSolution
         {
             if (_cssProperty.ContainsKey("@page") && _cssProperty["@page"].ContainsKey("-ps-fixed-line-height"))
             {
-                isFixedLengthEnabled = Convert.ToBoolean(_cssProperty["@page"]["-ps-fixed-line-height"]);
+                IsFixedLengthEnabled = Convert.ToBoolean(_cssProperty["@page"]["-ps-fixed-line-height"]);
             }
         }
 
@@ -199,7 +191,7 @@ namespace SIL.PublishingSolution
                     propValue.Add("direction", "rtl");
                 }
 
-                _LOProperty = mapProperty.IDProperty(propValue, isFixedLengthEnabled);
+                _LOProperty = mapProperty.IDProperty(propValue, IsFixedLengthEnabled);
                 if (cssClass.Key == "revsensenumber")
                 {
                     if (!_LOProperty.ContainsKey("font-family"))
@@ -788,7 +780,7 @@ namespace SIL.PublishingSolution
             if (_cssProperty.ContainsKey(pageName))
             {
                 Dictionary<string, string> cssClass1 = _cssProperty[pageName];
-                _LOProperty = mapProperty.IDProperty(cssClass1, isFixedLengthEnabled);
+                _LOProperty = mapProperty.IDProperty(cssClass1, IsFixedLengthEnabled);
                 foreach (KeyValuePair<string, string> para in _LOProperty)
                     if (para.Key.ToLower() == "-ps-referenceformat-string")
                     {
@@ -797,23 +789,23 @@ namespace SIL.PublishingSolution
                     }
                     else if (para.Key.ToLower() == "-ps-custom-footnote-caller")
                     {
-                        _customFootnoteCaller = para.Value.Replace("\"", "");
+                        CustomFootnoteCaller = para.Value.Replace("\"", "");
                     }
                     else if (para.Key.ToLower() == "-ps-custom-xref-caller")
                     {
-                        _customXRefCaller = para.Value.Replace("\"", "");
+                        CustomXRefCaller = para.Value.Replace("\"", "");
                     }
                     else if (para.Key.ToLower() == "-ps-hide-versenumber-one")
                     {
-                        _hideVerseNumberOne = para.Value.Replace("\"", "");
+                        HideVerseNumberOne = para.Value.Replace("\"", "");
                     }
                     else if (para.Key.ToLower() == "-ps-split-file-by-letter")
                     {
-                        _splitFileByLetter = para.Value.Replace("\"", "");
+                        SplitFileByLetter = para.Value.Replace("\"", "");
                     }
                     else if (para.Key.ToLower() == "-ps-hide-space-versenumber")
                     {
-                        _hideSpaceVerseNumber = para.Value.Replace("\"", "");
+                        HideSpaceVerseNumber = para.Value.Replace("\"", "");
                     }
                     else if (para.Key == "border-top"
                              || para.Key == "border-top-style"
@@ -909,7 +901,7 @@ namespace SIL.PublishingSolution
                     {
                         Dictionary<string, string> cssProp = _cssProperty[currentPagePosition];
 
-                        _LOProperty = mapProperty.IDProperty(cssProp, isFixedLengthEnabled);
+                        _LOProperty = mapProperty.IDProperty(cssProp, IsFixedLengthEnabled);
                         foreach (KeyValuePair<string, string> para in _LOProperty)
                         {
                             if (para.Key == "content")
@@ -1253,9 +1245,9 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("style:text-properties");
             _writer.WriteAttributeString("fo:font-size", "12pt");
             _writer.WriteAttributeString("fo:font-style", "italic");
-            _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-size-asian", "12pt");
             _writer.WriteAttributeString("style:font-style-asian", "italic");
+            _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-size-complex", "12pt");
             _writer.WriteAttributeString("style:font-style-complex", "italic");
@@ -1275,7 +1267,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteStartElement("style:text-properties");
             _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
-            _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
+            _writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
@@ -2465,7 +2457,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
-            if (_multiLanguageHeader)
+            if (MultiLanguageHeader)
             {
 
                 _writer.WriteStartElement("style:style");

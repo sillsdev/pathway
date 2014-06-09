@@ -2959,6 +2959,49 @@ namespace SIL.Tool
 
         }
 
+        public void InsertSpanAfterLetter(string fileName)
+        {
+            string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
+            string letterLang = "en";
+            if (!File.Exists(flexRevFileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(flexRevFileName);
+            string entryPath = "//xhtml:div[@class='entry'][1]";
+            XmlNodeList RevFormNodes = xDoc.SelectNodes(entryPath, namespaceManager);
+            if (RevFormNodes.Count > 0)
+            {
+                string xPath = "//xhtml:span";
+                XmlNodeList spanList = xDoc.SelectNodes(xPath, namespaceManager);
+                if (spanList.Count > 0)
+                {
+                    foreach (XmlNode item in spanList)
+                    {
+                        if(item.Attributes["class"].Value != null && item.Attributes["lang"].Value != null)
+                        {
+                            if(item.Attributes["class"].Value.ToLower().IndexOf("reversal-form") == 0)
+                            {
+                                letterLang = item.Attributes["lang"].Value;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            string letterPath = "//xhtml:div[@class=\"letter\"]";
+            XmlNodeList letterList = xDoc.SelectNodes(letterPath, namespaceManager);
+            if (letterList.Count > 0)
+            {
+                foreach (XmlNode letter in letterList)
+                {
+                    letter.InnerXml = "<span lang=\"" + letterLang + "\">" + letter.InnerText + "</span>";
+                }
+            }
+            xDoc.Save(flexRevFileName);
+        }
+
         /// <summary>
         /// Appends the product / assembly version to the .css file for field troubleshooting
         /// (this allows us to see what versions of the software the user has installed).

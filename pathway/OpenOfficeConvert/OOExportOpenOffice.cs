@@ -472,6 +472,7 @@ namespace SIL.PublishingSolution
             if (fileNameWithoutExtension != null && fileNameWithoutExtension.ToLower() == "flexrev")
             {
                 preProcessor.InsertEmptyDiv(preProcessor.ProcessedXhtml);
+                preProcessor.InsertSpanAfterLetter(preProcessor.ProcessedXhtml);
             }
             preProcessor.GetTempFolderPath();
             preProcessor.GetDefaultLanguage(projInfo);
@@ -488,18 +489,18 @@ namespace SIL.PublishingSolution
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.ODT;
             cssClass = cssTree.CreateCssProperty(cssFile, true);
-            HandledInCss(ref projInfo, ref cssClass);
             SetHeaderFontName(projInfo, cssClass);
+            HandledInCss(ref projInfo, ref cssClass);
             int pageWidth = GetPictureWidth(cssClass);
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             LOStyles inStyles = new LOStyles();
-            inStyles._multiLanguageHeader = isMultiLanguageHeader;
+            inStyles.MultiLanguageHeader = isMultiLanguageHeader;
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
-            projInfo.IncludeFootnoteSymbol = inStyles._customFootnoteCaller;
-            projInfo.IncludeXRefSymbol = inStyles._customXRefCaller;
-            projInfo.SplitFileByLetter = inStyles._splitFileByLetter;
-            projInfo.HideSpaceVerseNumber = inStyles._hideSpaceVerseNumber;
+            projInfo.IncludeFootnoteSymbol = inStyles.CustomFootnoteCaller;
+            projInfo.IncludeXRefSymbol = inStyles.CustomXRefCaller;
+            projInfo.SplitFileByLetter = inStyles.SplitFileByLetter;
+            projInfo.HideSpaceVerseNumber = inStyles.HideSpaceVerseNumber;
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
@@ -673,6 +674,13 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
+            else
+            {
+                if (cssClass.ContainsKey("letter") && cssClass["letter"].ContainsKey("font-family")) //TD-3281  
+                {
+                        cssClass["letter"]["font-family"] = projInfo.HeaderFontName;
+                }
+            }
         }
 
         private static void SetHeaderFontName(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass)
@@ -687,6 +695,7 @@ namespace SIL.PublishingSolution
                         if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
                         {
                             projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
+                            projInfo.ReversalFontName = idAllClass["headword"]["font-family"];
                         }
                     }
                     else
@@ -707,6 +716,7 @@ namespace SIL.PublishingSolution
                     if (idAllClass.ContainsKey("scrBody") && idAllClass["scrBody"].ContainsKey("font-family"))
                     {
                         projInfo.HeaderFontName = idAllClass["scrBody"]["font-family"];
+                        projInfo.ReversalFontName = idAllClass["scrBody"]["font-family"];
                     }
                 }
             }
