@@ -33,15 +33,12 @@ namespace SIL.PublishingSolution
     {
         #region Private Variable
 
-        private bool isFileEmpty = true;
         private bool _isDropCaps;
         private bool _nextContent;
         private int _incrementDropCap = 0;
-
         private bool _hasImgCloseTag;
-        private bool isImageAvailable;
-        private bool isHomographNumber = false;
-        private string columnCount = string.Empty;
+        private bool _isImageAvailable;
+        private string _columnCount = string.Empty;
         private string imageClass = string.Empty;
         private string _inputPath;
         private ArrayList _textFrameClass = new ArrayList();
@@ -53,35 +50,36 @@ namespace SIL.PublishingSolution
         private bool _imageInserted;
         private List<string> _usedStyleName = new List<string>();
         private List<string> _mergedInlineStyle;
-        private bool _IsHeadword = false;
+        private bool _isHeadword = false;
         private bool _xetexNewLine;
-        Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
-        Dictionary<string, List<string>> _classInlineInnerStyle = new Dictionary<string, List<string>>();
-        private string xhtmlFile;
         private Dictionary<string, string> _endParagraphStringDic = new Dictionary<string, string>();
-        private int _pageWidth;
-
-        protected Stack<string> _braceClass = new Stack<string>();
-        protected Stack<string> _braceInlineClass = new Stack<string>();
-        protected Dictionary<string, int> _braceInlineClassCount = new Dictionary<string, int>();
-        protected Stack<string> _mathStyleClass = new Stack<string>();
         private List<string> _mathStyle = new List<string>();
         private int _inlineCount;
         private string _headerContent = string.Empty;
-        public bool _dictionaryEnding = false;
+        Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
+        Dictionary<string, List<string>> _classInlineInnerStyle = new Dictionary<string, List<string>>();
         private string _tocStartingPage;
         private int _tocPageStock = 0;
         private string _tocStyleName;
         private Dictionary<string, string> _toc = new Dictionary<string, string>();
         private bool _isHeadwordInsertedAfterImage = false;
         private string _bookName = string.Empty;
-        public string _dicMainReversal = string.Empty;
         private int _bookCount = 0;
         private bool _bookPageBreak;
         private bool _hideFirstVerseNo;
         private bool _isFirstVerseNo;
-		//private bool _directionEnd = false;
+        //private bool _directionEnd = false;
         private string _directionStart = string.Empty;
+        private bool _removeSpaceAfterVerse;
+        private bool _isVerseNo;
+
+        protected Stack<string> _braceClass = new Stack<string>();
+        protected Stack<string> _braceInlineClass = new Stack<string>();
+        protected Dictionary<string, int> _braceInlineClassCount = new Dictionary<string, int>();
+        protected Stack<string> _mathStyleClass = new Stack<string>();
+
+        public bool _dictionaryEnding = false;
+        public string _dicMainReversal = string.Empty;
 
         #endregion
 
@@ -113,11 +111,9 @@ namespace SIL.PublishingSolution
             _xetexFile = xetexFile;
             _classInlineStyle = classInlineStyle;
             _classInlineInnerStyle = classInlineText;
-            _pageWidth = pageWidth;
             _inputPath = projInfo.ProjectPath;
 
             _dicMainReversal = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-            xhtmlFile = projInfo.DefaultXhtmlFileWithPath;
             InitializeData(projInfo.ProjectPath, cssClass, classFamily, cssClassOrder);
             InitializeMathStyle();
             ProcessProperty();
@@ -422,7 +418,6 @@ namespace SIL.PublishingSolution
                     _bookName = _reader.Value;
             }
             WriteText();
-            isFileEmpty = false;
         }
 
         private void DoNotInheritClassStart()
@@ -623,7 +618,16 @@ namespace SIL.PublishingSolution
                         _isFirstVerseNo = false;
                     }
                 }
-                
+
+                if (!_removeSpaceAfterVerse && !_isVerseNo && _childName.ToLower().IndexOf("verse") == 0)
+                {
+                    _isVerseNo = true;
+                }
+                else if (_isVerseNo)
+                {
+                    content = " " + content;
+                    _isVerseNo = false;
+                }
 
                 if (_childName.ToLower().Contains("sectionhead"))//spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody
                 {
@@ -978,7 +982,7 @@ namespace SIL.PublishingSolution
                 string VertRefPoint = "LineBaseline";
                 string AnchorPoint = "TopLeftAnchor";
 
-                isImageAvailable = true;
+                _isImageAvailable = true;
                 inserted = true;
 
                 string[] cc = _allStyle.ToArray();
@@ -1135,7 +1139,7 @@ namespace SIL.PublishingSolution
         {
             if (!string.IsNullOrEmpty(picFile))
             {
-                isImageAvailable = true;
+                _isImageAvailable = true;
 
                 _xetexFile.WriteLine("\r\n");
 
@@ -1339,7 +1343,7 @@ namespace SIL.PublishingSolution
         private void StartElement()
         {
             SetHeadwordTrue();
-            StartElementBase(_IsHeadword);
+            StartElementBase(_isHeadword);
             _imageInserted = InsertImage();
             ListBegin();
             SetClassCounter();
@@ -1361,9 +1365,9 @@ namespace SIL.PublishingSolution
                 }
                 if (IdAllClass[_classNameWithLang].ContainsKey("column-count"))
                 {
-                    columnCount = IdAllClass[_classNameWithLang]["column-count"];
+                    _columnCount = IdAllClass[_classNameWithLang]["column-count"];
                 }
-                if (isPageBreak || columnCount != string.Empty)
+                if (isPageBreak || _columnCount != string.Empty)
                 {
                     _textFrameClass.Add(_childName);
                 }
@@ -1470,9 +1474,9 @@ namespace SIL.PublishingSolution
                                 txtAlignStart = "\\begin{" + Common.RightString(property, " ") + "}";
                                 txtAlignEnd = "\\end{" + Common.RightString(property, " ") + "}";
 
-                                if (isImageAvailable)
+                                if (_isImageAvailable)
                                 {
-                                    isImageAvailable = false;
+                                    _isImageAvailable = false;
                                     txtAlignEnd = txtAlignEnd + " ";
                                 }
                             }
@@ -1667,7 +1671,7 @@ namespace SIL.PublishingSolution
             var attribute = _reader.GetAttribute("class");
             if (attribute != null && (attribute != null && attribute.ToLower() == "headword"))
             {
-                _IsHeadword = true;
+                _isHeadword = true;
                 _headwordStyles = true;
             }
         }
@@ -1676,7 +1680,6 @@ namespace SIL.PublishingSolution
         {
             if (_classNameWithLang.IndexOf("homographnumber") >= 0)
             {
-                isHomographNumber = defValue;
             }
         }
 
@@ -1765,7 +1768,7 @@ namespace SIL.PublishingSolution
         {
             if (_closeChildName.ToLower() == "headword")
             {
-                _IsHeadword = false;
+                _isHeadword = false;
                 _headwordStyles = false;
             }
         }
@@ -1794,7 +1797,7 @@ namespace SIL.PublishingSolution
                 {
                     _allCharacter.Push(_imageClass); // temporarily storing to get width and position
                     _allCharacter.Pop();    // retrieving it again.
-                    isImageAvailable = false;
+                    _isImageAvailable = false;
                     imageClass = "";
                     _isParagraphClosed = true;
 
@@ -1804,7 +1807,7 @@ namespace SIL.PublishingSolution
             {
                 if (imageClass.Length > 0 && _closeChildName == imageClass)
                 {
-                    isImageAvailable = false;
+                    _isImageAvailable = false;
                     _isHeadwordInsertedAfterImage = true;
                     imageClass = "";
                     _isParagraphClosed = false;
@@ -1904,9 +1907,13 @@ namespace SIL.PublishingSolution
 
             if(IdAllClass.ContainsKey("@page"))
             {
-                if(IdAllClass["@page"].ContainsKey("-ps-hide-versenumber-one"))
+                if (IdAllClass["@page"].ContainsKey("-ps-hide-versenumber-one"))
                 {
                     _hideFirstVerseNo = bool.Parse(IdAllClass["@page"]["-ps-hide-versenumber-one"]);
+                }
+                if (IdAllClass["@page"].ContainsKey("-ps-hide-space-versenumber"))
+                {
+                    _removeSpaceAfterVerse = bool.Parse(IdAllClass["@page"]["-ps-hide-space-versenumber"]);
                 }
             }
         }
