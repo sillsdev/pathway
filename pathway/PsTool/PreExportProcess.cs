@@ -2978,7 +2978,7 @@ namespace SIL.Tool
                 {
                     foreach (XmlNode item in spanList)
                     {
-                        if(item.Attributes["class"].Value != null && item.Attributes["lang"].Value != null)
+                        if(item.Attributes["class"] != null && item.Attributes["lang"] != null)
                         {
                             if(item.Attributes["class"].Value.ToLower().IndexOf("reversal-form") == 0)
                             {

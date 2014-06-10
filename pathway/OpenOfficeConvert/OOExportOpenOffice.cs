@@ -695,7 +695,7 @@ namespace SIL.PublishingSolution
                         if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
                         {
                             projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
-                            projInfo.ReversalFontName = idAllClass["headword"]["font-family"];
+                            //projInfo.ReversalFontName = idAllClass["headword"]["font-family"];
                         }
                     }
                     else
