@@ -1025,8 +1025,11 @@ namespace SIL.Tool
                 var childNode = xmlMap.CreateNode(XmlNodeType.Element, "styleProperty", "");
                 AddAttrValue(childNode, "name", attribName);
                 AddAttrValue(childNode, "value", attribValue);
-                baseNode.AppendChild(childNode);
-                Write();
+                if (baseNode != null)
+                {
+                    baseNode.AppendChild(childNode);
+                    Write();
+                }
             }
             else
             {

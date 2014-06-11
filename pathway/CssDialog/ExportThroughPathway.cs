@@ -863,7 +863,17 @@ namespace SIL.PublishingSolution
             }
             if (node != null)
             {
-                int index;
+// ReSharper disable RedundantAssignment
+                string copyrightFileName = string.Empty;
+// ReSharper restore RedundantAssignment
+                if (_isUnixOS)
+                {
+                    copyrightFileName = Common.LeftRemove(CopyrightPagePath, "\\");
+                }
+                else
+                {
+                    copyrightFileName = Path.GetFileName(CopyrightPagePath);
+                }
                 foreach (XmlNode subnode in node.ChildNodes)
                 {
                     if (subnode.Attributes != null)
@@ -872,8 +882,8 @@ namespace SIL.PublishingSolution
                         if (!ddlCopyrightStatement.Items.Contains(value))
                         {
                             // not currently in the list - add it now
-                            index = ddlCopyrightStatement.Items.Add(value);
-                            if (Path.GetFileName(CopyrightPagePath) == subnode.Attributes["file"].Value)
+                            int index = ddlCopyrightStatement.Items.Add(value);
+                            if (copyrightFileName == subnode.Attributes["file"].Value)
                             {
                                 // this is the selected copyright statement - 
                                 // select it in the dropdown and check the standard radio button
