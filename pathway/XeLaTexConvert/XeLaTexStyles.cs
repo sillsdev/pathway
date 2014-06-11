@@ -110,7 +110,7 @@ namespace SIL.PublishingSolution
                 _pageStyleFormat.Add("@page:first-top-center", "\\chead");
                 _pageStyleFormat.Add("@page:first-top-right", "\\rhead");
                 _pageStyleFormat.Add("@page:first-bottom-left", "\\lfoot");
-                _pageStyleFormat.Add("@page:first-bottom-center", "\\cfoot");
+                //_pageStyleFormat.Add("@page:first-bottom-center", "\\cfoot");
                 _pageStyleFormat.Add("@page:first-bottom-right", "\\rfoot");
             }
             
