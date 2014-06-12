@@ -3265,7 +3265,7 @@ namespace SIL.PublishingSolution
                       _childName.Replace("span_", "").IndexOf("headword") == 0 ||
                       _childName.Replace("span_", "").IndexOf("reversalform") == 0))
                     &&
-                    (_previousParagraphName.IndexOf("minorentries_") == 0 ||
+                    (_previousParagraphName.IndexOf("minorentries_") == 0 || _previousParagraphName.IndexOf("minorentry_") == 0 ||
                      _previousParagraphName.IndexOf("entry_") == 0 ||
                      _previousParagraphName.IndexOf("div_pictureCaption") == 0 ||
                      _previousParagraphName.IndexOf("picture") >= 0) && _previousChildName.IndexOf("headword") == -1 &&
