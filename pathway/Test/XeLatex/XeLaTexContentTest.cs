@@ -1026,7 +1026,7 @@ namespace Test.XeLatex
             File.Copy(FileInput(inputname), xeLatexFullFile, overwrite);
             var imgPath = new Dictionary<string, string>();
             UpdateXeLaTexFontCacheIfNecessary();
-            CallXeLaTex(xeLatexFullFile, true, imgPath);
+            CallXeLaTex(_projInfo, xeLatexFullFile, true, imgPath);
             var outname = testFileName + ".log";
             TextFileAssert.AreEqualEx(FileExpected(outname), FileOutput(outname), new ArrayList { 1, 55, 56, 57, 58, 60 });
         }

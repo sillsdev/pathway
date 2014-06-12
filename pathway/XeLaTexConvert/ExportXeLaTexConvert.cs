@@ -51,6 +51,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _fontLangMap = new Dictionary<string, string>();
         private readonly XslCompiledTransform _xhtmlXelatexXslProcess = new XslCompiledTransform();
         private List<string> _xeLaTexPropertyFullFontStyleList = new List<string>();
+        private bool _isUnixOs = false;
         #region Public Functions
         public string ExportType
         {
@@ -82,13 +83,13 @@ namespace SIL.PublishingSolution
         {
 
             _xhtmlXelatexXslProcess.Load(XmlReader.Create(Common.UsersXsl("AddBidi.xsl")));
-
+            _isUnixOs = Common.IsUnixOS();
             _langFontDictionary = new Dictionary<string, string>();
             _langFontCodeandName = new Dictionary<string, string>();
             string mainXhtmlFileWithPath = projInfo.DefaultXhtmlFileWithPath;
             projInfo.OutputExtension = "pdf";
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
-            if (Common.IsUnixOS())
+            if (_isUnixOs)
             {
                 Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
             }
@@ -237,7 +238,7 @@ namespace SIL.PublishingSolution
                 imgPath = newProperty["ImagePath"];
             }
             UpdateXeLaTexFontCacheIfNecessary();
-            CallXeLaTex(xeLatexFullFile, true, imgPath);
+            CallXeLaTex(projInfo, xeLatexFullFile, true, imgPath);
             ProcessRampFile(projInfo, xeLatexFullFile, organization);
             return true;
         }
@@ -511,9 +512,9 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
+        public void CallXeLaTex(PublicationInformation projInfo, string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
-
+            string originalDirectory = Directory.GetCurrentDirectory();
             string[] pdfFiles = Directory.GetFiles(Path.GetDirectoryName(xeLatexFullFile), "*.pdf");
             foreach (string pdfFile in pdfFiles)
             {
@@ -523,20 +524,16 @@ namespace SIL.PublishingSolution
                 }
                 catch { }
             }
-
-
-            bool isUnixOs = Common.IsUnixOS();
+            string exportDirectory = Path.GetDirectoryName(xeLatexFullFile);
             string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
-
             if (!Directory.Exists(xeLaTexInstallationPath))
             {
                 MessageBox.Show("Please install the Xelatex application.");
                 return;
             }
-
             string name = "xelatex.exe";
             string arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
-            if (isUnixOs)
+            if (_isUnixOs)
             {
                 string path = Environment.GetEnvironmentVariable("PATH");
                 Debug.Assert(path != null);
@@ -544,39 +541,65 @@ namespace SIL.PublishingSolution
                 {
                     Environment.SetEnvironmentVariable("PATH", string.Format("{0}:{1}", xeLaTexInstallationPath, path));
                 }
-                xeLaTexInstallationPath = Path.GetDirectoryName(xeLatexFullFile);
-                name = "xelatex";
-                arguments = "-interaction=batchmode \"" + xeLatexFullFile + "\"";
+                name = Common.PathCombine(xeLaTexInstallationPath, "xelatex");
+                arguments = " -interaction=batchmode \"" + xeLatexFullFile + "\"";
             }
             else
             {
                 xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
                 xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
             }
-
-
-            string originalDirectory = Directory.GetCurrentDirectory();
-            string dest = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(xeLatexFullFile));
-
+            string dest = Common.PathCombine(exportDirectory, Path.GetFileName(xeLatexFullFile));
             if (xeLatexFullFile != dest)
                 File.Copy(xeLatexFullFile, dest, true);
 
             if (_copyrightTexCreated)
             {
-                string copyrightDest = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(_copyrightTexFileName));
+                string copyrightDest = Common.PathCombine(exportDirectory, Path.GetFileName(_copyrightTexFileName));
                 if (_copyrightTexFileName != copyrightDest)
                     File.Copy(_copyrightTexFileName, copyrightDest, true);
             }
 
             if (_reversalIndexTexCreated)
             {
-                string copyrightDest = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(_reversalIndexTexFileName));
+                string copyrightDest = Common.PathCombine(exportDirectory, Path.GetFileName(_reversalIndexTexFileName));
                 if (_reversalIndexTexFileName != copyrightDest)
                     File.Copy(_reversalIndexTexFileName, copyrightDest, true);
             }
+            Directory.SetCurrentDirectory(exportDirectory);
+            if (_isUnixOs)
+            {
+                if (_inputType.ToLower() == "scripture" || projInfo.ProjectInputType == "scripture")
+                {
+                    arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
+                    WriteShellScript(exportDirectory, xeLaTexInstallationPath, arguments);
+                    name = "sh";
+                    arguments = "runxelatex.sh";
+                    //if pdf file not produced. Look at the LOG file in the exported directory 
+                }
+            }
+            
+            ExecuteXelatexProcess(xeLatexFullFile, name, arguments);
+            OpenXelatexOutput(xeLatexFullFile, openFile, originalDirectory, xeLaTexInstallationPath, dest);
+        }
 
-            Directory.SetCurrentDirectory(xeLaTexInstallationPath);
 
+        private void WriteShellScript(string xelatexOutputLocation, string xelatexInstallerPath, string arguments)
+        {
+            xelatexOutputLocation = Common.PathCombine(xelatexOutputLocation, "runxelatex.sh");
+            var fs2 = new FileStream(xelatexOutputLocation, FileMode.Create, FileAccess.Write);
+            var sw2 = new StreamWriter(fs2);
+
+            WriteConfig(sw2, "echo process started");
+            WriteConfig(sw2, "cp -r /usr/lib/pwtex ~/pwtex");
+            WriteConfig(sw2, Common.PathCombine(xelatexInstallerPath, "xelatex") + " " + arguments);
+            WriteConfig(sw2, "echo process completed");
+            sw2.Close();
+            fs2.Close();
+        }
+
+        private void ExecuteXelatexProcess(string xeLatexFullFile, string name, string arguments)
+        {
             string p1Error = string.Empty;
             using (Process p1 = new Process())
             {
@@ -618,13 +641,17 @@ namespace SIL.PublishingSolution
                     p1.WaitForExit();
                     p1Error = p1.StandardError.ReadToEnd();
                 }
-
             }
+        }
+
+        private void OpenXelatexOutput(string xeLatexFullFile, bool openFile, string originalDirectory,
+                                       string xeLaTexInstallationPath, string dest)
+        {
             string pdfFullName = string.Empty;
             string texNameOnly = Path.GetFileNameWithoutExtension(xeLatexFullFile);
             string userFolder = Path.GetDirectoryName(xeLatexFullFile);
 
-            if (isUnixOs)
+            if (_isUnixOs)
             {
                 if (userFolder != null)
                     pdfFullName = Common.PathCombine(userFolder, texNameOnly + ".pdf");
@@ -635,11 +662,12 @@ namespace SIL.PublishingSolution
                     {
                         if (File.Exists(pdfFullName))
                         {
-
                             Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex", _inputType);
                         }
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
             else
@@ -669,7 +697,6 @@ namespace SIL.PublishingSolution
                             }
                         }
                     }
-
                 }
                 try
                 {
@@ -689,6 +716,11 @@ namespace SIL.PublishingSolution
                 {
                 }
             }
+        }
+        
+        private static void WriteConfig(StreamWriter sw2, string content)
+        {
+            sw2.WriteLine(content);
         }
 
         protected static string CopyProcessResult(string instPath, string texNameOnly, string ext, string userFolder)
@@ -825,18 +857,17 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-
             string name = _reader.GetAttribute("class");
             if (name != null)
             {
-                if (name == "headword")
-                {
-                    _inputType = "scripture";
-                    _isInputTypeFound = true;
-                }
-                else if (name == "scrBookName")
+                if (name.ToLower() == "headword")
                 {
                     _inputType = "dictionary";
+                    _isInputTypeFound = true;
+                }
+                else if (name.ToLower() == "scrbookname")
+                {
+                    _inputType = "scripture";
                     _isInputTypeFound = true;
                 }
             }
