@@ -571,10 +571,9 @@ namespace SIL.PublishingSolution
             {
                 if (_inputType.ToLower() == "scripture" || projInfo.ProjectInputType == "scripture")
                 {
-                    arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
-                    WriteShellScript(exportDirectory, xeLaTexInstallationPath, arguments);
+                    string xelatexArguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
+                    arguments = WriteShellScript(exportDirectory, xeLaTexInstallationPath, xelatexArguments);
                     name = "sh";
-                    arguments = "runxelatex.sh";
                     //if pdf file not produced. Look at the LOG file in the exported directory 
                 }
             }
@@ -584,18 +583,26 @@ namespace SIL.PublishingSolution
         }
 
 
-        private void WriteShellScript(string xelatexOutputLocation, string xelatexInstallerPath, string arguments)
+        private string WriteShellScript(string xelatexOutputLocation, string xelatexInstallerPath, string arguments)
         {
-            xelatexOutputLocation = Common.PathCombine(xelatexOutputLocation, "runxelatex.sh");
-            var fs2 = new FileStream(xelatexOutputLocation, FileMode.Create, FileAccess.Write);
+            const string processLocation = "~/pwtex";
+            string scriptName = "runxelatex.sh";
+            var fs2 = new FileStream(Path.Combine(xelatexOutputLocation,scriptName), FileMode.Create, FileAccess.Write);
             var sw2 = new StreamWriter(fs2);
 
             WriteConfig(sw2, "echo process started");
-            WriteConfig(sw2, "cp -r /usr/lib/pwtex ~/pwtex");
+            WriteConfig(sw2, string.Format("cp -R /usr/lib/pwtex {0}", processLocation));
+            WriteConfig(sw2, string.Format("cd {0}", processLocation));
+            WriteConfig(sw2, string.Format("cp -R {0}/. .", xelatexOutputLocation));
             WriteConfig(sw2, Common.PathCombine(xelatexInstallerPath, "xelatex") + " " + arguments);
+            WriteConfig(sw2, string.Format("cp *.pdf {0}", xelatexOutputLocation));
+            WriteConfig(sw2, string.Format("cp *.log {0}", xelatexOutputLocation));
+            WriteConfig(sw2, string.Format("cd {0}", xelatexOutputLocation));
+            WriteConfig(sw2, string.Format("rm -rf {0}", processLocation));
             WriteConfig(sw2, "echo process completed");
             sw2.Close();
             fs2.Close();
+            return scriptName;
         }
 
         private void ExecuteXelatexProcess(string xeLatexFullFile, string name, string arguments)
