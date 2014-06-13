@@ -1740,26 +1740,26 @@ namespace SIL.Tool
         {
             if (idAllClass.ContainsKey("ReferenceFormat"))
             {
-                if (idAllClass["ReferenceFormat"].ContainsKey("@page"))
-                {
-                    refFormat = idAllClass["ReferenceFormat"]["@page"];
-                }
-                else if (idAllClass["ReferenceFormat"].ContainsKey("@page:left"))
+                if (idAllClass["ReferenceFormat"].ContainsKey("@page:left"))
                 {
                     refFormat = idAllClass["ReferenceFormat"]["@page:left"];
+                }
+                else if (idAllClass["ReferenceFormat"].ContainsKey("@page"))
+                {
+                    refFormat = idAllClass["ReferenceFormat"]["@page"];
                 }
                 else if (idAllClass["ReferenceFormat"].ContainsKey("@page:right"))
                 {
                     refFormat = idAllClass["ReferenceFormat"]["@page:right"];
                 }
             }
-            else if (idAllClass.ContainsKey("@page-top-center"))
-            {
-                refFormat = idAllClass["@page-top-center"]["-ps-referenceformat"];
-            }
             else if (idAllClass.ContainsKey("@page:left-top-left"))
             {
                 refFormat = idAllClass["@page:left-top-left"]["-ps-referenceformat"];
+            }
+            else if (idAllClass.ContainsKey("@page-top-center"))
+            {
+                refFormat = idAllClass["@page-top-center"]["-ps-referenceformat"];
             }
             return refFormat;
         }
