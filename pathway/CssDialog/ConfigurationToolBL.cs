@@ -762,21 +762,25 @@ namespace SIL.PublishingSolution
             {
                 cTool.BtnPaper.BackColor = _selectedColor;
                 cTool.BtnPaper.FlatAppearance.BorderSize = 1;
+                cTool.TsPreview.Enabled = true;
             }
             else if (MediaType == "mobile")
             {
                 cTool.BtnMobile.BackColor = _selectedColor;
                 cTool.BtnMobile.FlatAppearance.BorderSize = 1;
+                cTool.TsPreview.Enabled = false;
             }
             else if (MediaType == "web")
             {
                 cTool.BtnWeb.BackColor = _selectedColor;
                 cTool.BtnWeb.FlatAppearance.BorderSize = 1;
+                cTool.TsPreview.Enabled = true;
             }
             else if (MediaType == "others")
             {
                 cTool.BtnOthers.BackColor = _selectedColor;
                 cTool.BtnOthers.FlatAppearance.BorderSize = 1;
+                cTool.TsPreview.Enabled = true;
             }
         }
 
@@ -1069,7 +1073,6 @@ namespace SIL.PublishingSolution
                 if (type == TypeStandard)
                 {
                     EnableDisablePanel(false);
-                    cTool.TsPreview.Enabled = true;
                     cTool.TxtApproved.Visible = true;
                     cTool.LblApproved.Visible = true;
                 }
@@ -1742,10 +1745,7 @@ namespace SIL.PublishingSolution
                         cTool.TabControl1.TabPages.Insert(1, tabDict4Mids);
                         return;
                     }
-
                     cTool.TabControl1.TabPages.Insert(1, tabmob);
-                    cTool.TabControl1.TabPages.Insert(2, tabpreview);
-
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     SetMobileProperty(baseNode1);
                     SetMobileSummary(null, null);
