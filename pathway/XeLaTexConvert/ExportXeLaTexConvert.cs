@@ -543,32 +543,9 @@ namespace SIL.PublishingSolution
                 }
                 name = Common.PathCombine(xeLaTexInstallationPath, "xelatex");
                 arguments = " -interaction=batchmode \"" + xeLatexFullFile + "\"";
-            }
-            else
-            {
-                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
-                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
-            }
-            string dest = Common.PathCombine(exportDirectory, Path.GetFileName(xeLatexFullFile));
-            if (xeLatexFullFile != dest)
-                File.Copy(xeLatexFullFile, dest, true);
 
-            if (_copyrightTexCreated)
-            {
-                string copyrightDest = Common.PathCombine(exportDirectory, Path.GetFileName(_copyrightTexFileName));
-                if (_copyrightTexFileName != copyrightDest)
-                    File.Copy(_copyrightTexFileName, copyrightDest, true);
-            }
+                Directory.SetCurrentDirectory(exportDirectory);
 
-            if (_reversalIndexTexCreated)
-            {
-                string copyrightDest = Common.PathCombine(exportDirectory, Path.GetFileName(_reversalIndexTexFileName));
-                if (_reversalIndexTexFileName != copyrightDest)
-                    File.Copy(_reversalIndexTexFileName, copyrightDest, true);
-            }
-            Directory.SetCurrentDirectory(exportDirectory);
-            if (_isUnixOs)
-            {
                 if (_inputType.ToLower() == "scripture" || projInfo.ProjectInputType == "scripture")
                 {
                     string xelatexArguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
@@ -576,10 +553,36 @@ namespace SIL.PublishingSolution
                     name = "sh";
                     //if pdf file not produced. Look at the LOG file in the exported directory 
                 }
+                Directory.SetCurrentDirectory(exportDirectory);
+            }
+            else
+            {
+                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
+                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
+
+                string dest = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(xeLatexFullFile));
+                if (xeLatexFullFile != dest)
+                    File.Copy(xeLatexFullFile, dest, true);
+
+                if (_copyrightTexCreated)
+                {
+                    string copyrightDest = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(_copyrightTexFileName));
+                    if (_copyrightTexFileName != copyrightDest)
+                        File.Copy(_copyrightTexFileName, copyrightDest, true);
+                }
+
+                if (_reversalIndexTexCreated)
+                {
+                    string copyrightDest = Common.PathCombine(xeLaTexInstallationPath,
+                                                              Path.GetFileName(_reversalIndexTexFileName));
+                    if (_reversalIndexTexFileName != copyrightDest)
+                        File.Copy(_reversalIndexTexFileName, copyrightDest, true);
+                }
+                Directory.SetCurrentDirectory(xeLaTexInstallationPath);
             }
             
             ExecuteXelatexProcess(xeLatexFullFile, name, arguments);
-            OpenXelatexOutput(xeLatexFullFile, openFile, originalDirectory, xeLaTexInstallationPath, dest);
+            OpenXelatexOutput(xeLatexFullFile, openFile, originalDirectory, xeLaTexInstallationPath);
         }
 
 
@@ -652,7 +655,7 @@ namespace SIL.PublishingSolution
         }
 
         private void OpenXelatexOutput(string xeLatexFullFile, bool openFile, string originalDirectory,
-                                       string xeLaTexInstallationPath, string dest)
+                                       string xeLaTexInstallationPath)
         {
             string pdfFullName = string.Empty;
             string texNameOnly = Path.GetFileNameWithoutExtension(xeLatexFullFile);
@@ -716,8 +719,6 @@ namespace SIL.PublishingSolution
                     {
                         File.Delete(picturefile);
                     }
-
-                    File.Delete(dest);
                 }
                 catch
                 {
