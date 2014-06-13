@@ -118,6 +118,8 @@ namespace SIL.PublishingSolution
         public FontHandling NonSilFont { get; set; }
         public ArrayList _pseudoClass = new ArrayList();
         public bool pageBreak = false;
+        private Dictionary<string, string> _tocIdMapping = new Dictionary<string, string>();
+        List<string> _tocIDs = new List<string>();
 
         // interface methods
         public string ExportType
@@ -147,6 +149,12 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
+            if (projInfo == null)
+                return false;
+
+            PreExportProcess preProcessor = new PreExportProcess(projInfo);
+            preProcessor.RemoveBrokenImage();
+
             var fixPlayorderStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.fixPlayorder.xsl");
             Debug.Assert(fixPlayorderStream != null);
             _fixPlayOrder.Load(XmlReader.Create(fixPlayorderStream));
@@ -184,7 +192,7 @@ namespace SIL.PublishingSolution
                 DateTime dt1 = DateTime.Now;    // time this thing
 #endif
                 // basic setup
-                PreExportProcess preProcessor = new PreExportProcess(projInfo);
+                //PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 if (_isUnixOS)
                 {
                     Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
@@ -248,7 +256,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    string expCssLine = "@import \"" + Path.GetFileName(projInfo.DefaultCssFileWithPath) +"\";";
+                    string expCssLine = "@import \"" + Path.GetFileName(projInfo.DefaultCssFileWithPath) + "\";";
                     Common.FileInsertText(cssFullPath, expCssLine);
                 }
 
@@ -637,31 +645,118 @@ namespace SIL.PublishingSolution
                 }
                 File.Move(file, dest);
                 // split the file into smaller pieces if needed
-                List<string> files = new List<string>();
+                var files = new List<string>();
 
                 if (!pageBreak && _inputType.ToLower() == "dictionary")
+                {
                     files = SplitBook(dest);
+                }
 
                 if (_inputType.ToLower() == "scripture")
                 {
                     files = SplitBook(dest);
                 }
 
+                if (files.Count > 1)
+                {
+                    if (File.Exists(dest))
+                        File.Delete(dest);
+                }
+
                 if (dest.Contains("File3TOC"))
                 {
                     tocFiletoUpdate = dest;
+                    GetTocId(tocFiletoUpdate);
                 }
-                if (files.Count > 1)
-                {
-                    Common.StreamReplaceInFile(tocFiletoUpdate, Path.GetFileName(dest), Path.GetFileName(files[0]));
-                    try
-                    {
 
-                        File.Delete(tocFiletoUpdate + ".tmp");
+                if (files.Count > 0 && files[0].Contains("PartFile"))
+                {
+                    MapTocIdAndSectionHeadId(files);
+                }
+            }
+            UpdateTocIdAfterFileSplit(tocFiletoUpdate);
+        }
+
+        private void UpdateTocIdAfterFileSplit(string tocFiletoUpdate)
+        {
+            if (tocFiletoUpdate == string.Empty || !File.Exists(tocFiletoUpdate))
+            {
+                return;
+            }
+            XmlDocument xmlDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xmlDoc.Load(tocFiletoUpdate);
+            XmlNodeList tagList = xmlDoc.GetElementsByTagName("a");
+            if (tagList.Count > 0)
+            {
+                foreach (XmlNode tagValue in tagList)
+                {
+                    if (tagValue.Attributes != null && (tagValue.Attributes.Count > 0 && tagValue.Attributes["href"] != null))
+                    {
+                        if (_tocIdMapping.ContainsKey(tagValue.Attributes["href"].Value))
+                            tagValue.Attributes["href"].Value = _tocIdMapping[tagValue.Attributes["href"].Value];
                     }
-                    catch { }
-                    // file was split out - delete "dest" (it's been replaced)
-                    File.Delete(dest);
+                }
+            }
+            xmlDoc.Save(tocFiletoUpdate);
+        }
+
+        private void MapTocIdAndSectionHeadId(List<string> files)
+        {
+            foreach (string partFile in files)
+            {
+                XmlDocument xDoc = Common.DeclareXMLDocument(true);
+                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                xDoc.Load(partFile);
+                XmlNodeList divList = xDoc.GetElementsByTagName("div");
+                if (divList.Count > 0)
+                {
+                    foreach (XmlNode divTag in divList)
+                    {
+                        if (divTag.Attributes.Count > 0 && divTag.Attributes["class"] != null &&
+                            divTag.Attributes["id"] != null
+                            && divTag.Attributes["class"].Value == "Section_Head")
+                        {
+                            string sectionHeadId = divTag.Attributes["id"].Value;
+                            foreach (string idVal in _tocIDs)
+                            {
+                                if (idVal.IndexOf('#') > 0)
+                                {
+                                    var val = idVal.Split('#');
+                                    var oldPartFileName = Common.LeftString(val[0], "_");
+                                    var newPartFileName =
+                                        Common.LeftString(Path.GetFileNameWithoutExtension(partFile), "_");
+                                    if (oldPartFileName == newPartFileName && val[1] == sectionHeadId)
+                                    {
+                                        if (!_tocIdMapping.ContainsKey(idVal))
+                                            _tocIdMapping.Add(idVal,
+                                                              Path.GetFileName(partFile) + "#" + sectionHeadId);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void GetTocId(string tocFiletoUpdate)
+        {
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(tocFiletoUpdate);
+            XmlNodeList anchorList = xDoc.GetElementsByTagName("a");
+            if (anchorList.Count > 0)
+            {
+                foreach (XmlNode VARIABLE1 in anchorList)
+                {
+                    if (VARIABLE1.Attributes.Count > 0 && VARIABLE1.Attributes["href"] != null)
+                    {
+                        _tocIDs.Add(VARIABLE1.Attributes["href"].Value);
+                    }
                 }
             }
         }
@@ -1313,7 +1408,7 @@ namespace SIL.PublishingSolution
 
         private string IncludeQuoteOnFontName(string fontname)
         {
-            if(fontname.Trim().IndexOf(' ') > 0)
+            if (fontname.Trim().IndexOf(' ') > 0)
             {
                 fontname = "'" + fontname + "'";
             }
@@ -3087,7 +3182,15 @@ namespace SIL.PublishingSolution
                     opf.WriteStartElement("item"); // item (image)
                     opf.WriteAttributeString("id", "image" + nameNoExt);
                     opf.WriteAttributeString("href", name);
-                    opf.WriteAttributeString("media-type", "image/jpeg");
+                    if (nameNoExt != null && nameNoExt.Contains("sil-bw-logo"))
+                    {
+                        opf.WriteAttributeString("media-type", "image/png");    
+                    }
+                    else
+                    {
+                        opf.WriteAttributeString("media-type", "image/jpeg");    
+                    }
+                    
                     opf.WriteEndElement(); // item
                 }
                 else if (name.ToLower().EndsWith(".gif"))
@@ -3934,7 +4037,7 @@ namespace SIL.PublishingSolution
                             titleMainInnerText = titleNodes[0].InnerText;
                         }
 
-                        StringBuilder  nodeInnerText = new StringBuilder();
+                        StringBuilder nodeInnerText = new StringBuilder();
                         nodeInnerText.Append(nodes[0].InnerXml);
                         nodeInnerText = nodeInnerText.Replace(titleMainInnerText + "</div>" + titleMainInnerText, titleMainInnerText + "</div>");
                         nodes[0].InnerXml = nodeInnerText.ToString();
