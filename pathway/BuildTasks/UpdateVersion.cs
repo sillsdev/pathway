@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using System.Collections.Generic;
@@ -84,16 +85,18 @@ namespace BuildTasks
         #endregion HelpFile
         #endregion Properties
 
+        private readonly Regex _versionPattern = new Regex(@"([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+");
+
         public override bool Execute()
         {
             var instPath = Environment.CurrentDirectory;
+            UpdateLinuxChangeLog(instPath);
             var sub = new Substitution { TargetPath = instPath };
             var map = new Dictionary<string, string>();
             map["PwVer"] = _version;
             if (!string.IsNullOrEmpty(_buildVersion))
             {
-                var exp = new Regex(@"([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+");
-                var match = exp.Match(_buildVersion);
+                var match = _versionPattern.Match(_buildVersion);
                 if (match.Success)
                     map["PwVer"] = match.Groups[1].Value;
             }
@@ -104,6 +107,19 @@ namespace BuildTasks
             sub.FileSubstitute(_template, map);
             FileData.MoveToWix(_template.Replace("-tpl", ""));
             return true;
+        }
+
+        private void UpdateLinuxChangeLog(string instPath)
+        {
+            var debianDir = Path.Combine(Path.Combine(instPath, ".."), "debian");
+            var changeLogFullPath = Path.Combine(debianDir, "changelog");
+            var changeLog = FileData.Get(changeLogFullPath);
+            var logMatch = _versionPattern.Match(changeLog);
+            var outStream = new StreamWriter(changeLogFullPath);
+            outStream.Write(changeLog.Substring(0, logMatch.Index));
+            outStream.Write(_buildVersion);
+            outStream.Write(changeLog.Substring(logMatch.Index + logMatch.Length));
+            outStream.Close();
         }
     }
 }
