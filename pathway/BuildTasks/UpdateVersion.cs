@@ -90,7 +90,6 @@ namespace BuildTasks
         public override bool Execute()
         {
             var instPath = Environment.CurrentDirectory;
-            UpdateLinuxChangeLog(instPath);
             var sub = new Substitution { TargetPath = instPath };
             var map = new Dictionary<string, string>();
             map["PwVer"] = _version;
@@ -107,19 +106,6 @@ namespace BuildTasks
             sub.FileSubstitute(_template, map);
             FileData.MoveToWix(_template.Replace("-tpl", ""));
             return true;
-        }
-
-        private void UpdateLinuxChangeLog(string instPath)
-        {
-            var debianDir = Path.Combine(Path.Combine(instPath, ".."), "debian");
-            var changeLogFullPath = Path.Combine(debianDir, "changelog");
-            var changeLog = FileData.Get(changeLogFullPath);
-            var logMatch = _versionPattern.Match(changeLog);
-            var outStream = new StreamWriter(changeLogFullPath);
-            outStream.Write(changeLog.Substring(0, logMatch.Index));
-            outStream.Write(_buildVersion);
-            outStream.Write(changeLog.Substring(logMatch.Index + logMatch.Length));
-            outStream.Close();
         }
     }
 }
