@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On May-23-2014 for TD-3961
+&apos;Changed On May-23-2014 for TD-3961(13-Jun)
 
 &apos; needs writer document 
 Dim oProgressBarModel As Object 
@@ -361,9 +361,9 @@ for i = 0 to Ubound(References)
 					
 		If FirstBook &lt;&gt; LastBook Then
 			If startNo &gt; 2 Then
-			    HiddenParagraph(startNo-1) = HiddenParagraph(endNo)
-                HiddenParagraph(startNo) = HiddenParagraph(endNo)
-                HiddenParagraph(startNo+1) = HiddenParagraph(endNo)
+			    &apos;HiddenParagraph(startNo-1) = HiddenParagraph(endNo)
+                &apos;HiddenParagraph(startNo) = HiddenParagraph(endNo)
+                &apos;HiddenParagraph(startNo+1) = HiddenParagraph(endNo)
 			Else
 				HiddenParagraph(startNo) = HiddenParagraph(endNo)
 			End If    
