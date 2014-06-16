@@ -280,6 +280,11 @@
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
     <CallTarget Targets="Release7BTE"/>
   </Target>
+  <Target Name="DailySE">
+    <CallTarget Targets="Clean"/>
+    <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
+    <CallTarget Targets="Release7SE"/>
+  </Target>
   <Target Name="BeforeBuild"/>
   <Target Name="AfterBuild"/>
   <Target Name="Clean">
