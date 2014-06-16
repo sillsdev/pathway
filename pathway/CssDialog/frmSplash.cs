@@ -67,7 +67,7 @@ namespace SIL.PublishingSolution
         {
             string version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 
-            string versionDate = String.Format("Version {0} ({1})", version, AssemblyFileDate);
+            string versionDate = String.Format("{0} ({1})", version, AssemblyFileDate);
 
             lblVersionwithDate.Text = "Version: " + versionDate;
             tSplash.Start();
