@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using SIL.PublishingSolution;
 using SIL.Tool;
 //This will be called by macro externally. so, please do not remove this since it is not called by any other classes.
 namespace ApplyPDFLicenseInfo
@@ -76,7 +75,7 @@ namespace ApplyPDFLicenseInfo
 
         private static void CreateRAMP(string executePath, string inputType)
         {
-            string outputExtn = ".pdf";
+            const string outputExtn = ".pdf";
             Ramp ramp = new Ramp();
             ramp.Create(executePath, outputExtn, inputType);
         }

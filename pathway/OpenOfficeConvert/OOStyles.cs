@@ -15,14 +15,10 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml;
-using Microsoft.Win32;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -42,7 +38,6 @@ namespace SIL.PublishingSolution
         private string _enableKerning = "true";
         public string CustomFootnoteCaller;
         public string CustomXRefCaller;
-        public string HideVerseNumberOne;
         public string HideSpaceVerseNumber = "False";
         public string SplitFileByLetter = "False";
         private bool _isFromExe = false;
@@ -64,7 +59,7 @@ namespace SIL.PublishingSolution
                 LoadAllProperty();  // Loads all properties
                 LoadSpellCheck();
                 FixedLineHeightStatus();
-                CreateODTStyles(strStylePath, _cssProperty);
+                CreateODTStyles(strStylePath);
                 CreateCssStyle();
                 CreatePageStyle();
                 AddTagStyle(); // Add missing tags in styles.xml (h1,h2,..)
@@ -797,7 +792,6 @@ namespace SIL.PublishingSolution
                     }
                     else if (para.Key.ToLower() == "-ps-hide-versenumber-one")
                     {
-                        HideVerseNumberOne = para.Value.Replace("\"", "");
                     }
                     else if (para.Key.ToLower() == "-ps-split-file-by-letter")
                     {
@@ -1923,12 +1917,12 @@ namespace SIL.PublishingSolution
         private void CreateRightGuideword(int i)
         {
             string mainFrameName = "Mfr1";
-            string _refFormat = string.Empty;
+            string refFormat = string.Empty;
             if (_projInfo.ProjectInputType.ToLower() == "scripture")
             {
-                _refFormat = Common.GetReferenceFormat(_cssProperty, _refFormat);
+                refFormat = Common.GetReferenceFormat(_cssProperty, refFormat);
             }
-            if (_refFormat.IndexOf("1-2") == -1)
+            if (refFormat.IndexOf("1-2") == -1)
             {
                 _writer.WriteStartElement("draw:frame");
                 _writer.WriteAttributeString("draw:style-name", mainFrameName);

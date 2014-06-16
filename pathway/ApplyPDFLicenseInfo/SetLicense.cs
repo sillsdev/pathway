@@ -28,7 +28,7 @@ namespace ApplyPDFLicenseInfo
         public static int ExitCode;
         public static string RedirectOutput;
         public static string LastError;
-        private static Process myProcess = new Process();
+        private static readonly Process MyProcess = new Process();
         private static int _elapsedTime;
         private static bool _eventHandled;
 
@@ -40,16 +40,16 @@ namespace ApplyPDFLicenseInfo
             try
             {
                 // Start a process to print a file and raise an event when done.
-                myProcess.StartInfo.FileName = name;
-                myProcess.StartInfo.Arguments = arg;
-                myProcess.StartInfo.CreateNoWindow = true;
-                myProcess.EnableRaisingEvents = true;
-                myProcess.StartInfo.CreateNoWindow = true;
-                myProcess.StartInfo.UseShellExecute = string.IsNullOrEmpty(RedirectOutput);
-                myProcess.StartInfo.WorkingDirectory = instPath;
+                MyProcess.StartInfo.FileName = name;
+                MyProcess.StartInfo.Arguments = arg;
+                MyProcess.StartInfo.CreateNoWindow = true;
+                MyProcess.EnableRaisingEvents = true;
+                MyProcess.StartInfo.CreateNoWindow = true;
+                MyProcess.StartInfo.UseShellExecute = string.IsNullOrEmpty(RedirectOutput);
+                MyProcess.StartInfo.WorkingDirectory = instPath;
 
-                myProcess.Exited += new EventHandler(myProcess_Exited);
-                myProcess.Start();
+                MyProcess.Exited += new EventHandler(myProcess_Exited);
+                MyProcess.Start();
 
             }
             catch (Exception ex)
@@ -78,7 +78,7 @@ namespace ApplyPDFLicenseInfo
                 }
                 Thread.Sleep(SLEEP_AMOUNT);
             }
-            myProcess.Close();
+            MyProcess.Close();
         }
 
         // Handle Exited event and display process information. 

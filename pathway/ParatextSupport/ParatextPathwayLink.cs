@@ -74,39 +74,6 @@ namespace SIL.PublishingSolution
 
         /// ------------------------------------------------------------------------------------
         /// <summary>
-        /// Initializes a new instance of the <see cref="ParatextPathwayLink"/> class.
-        /// This method is used by PathwayB. It will be called by Reflection.
-        /// </summary>
-        /// <param name="projName">Name of the project (from scrText.Name)</param>
-        /// <param name="databaseName">Name of the database.</param>
-        /// <param name="ws">The writing system locale.</param>
-        /// <param name="userWs">The user writing system locale.</param>
-        /// <param name="userName">Name of the user.</param>
-        /// ------------------------------------------------------------------------------------
-// ReSharper disable UnusedMember.Global
-        public ParatextPathwayLink(string projName, string databaseName, string ws, string userWs, string userName)
-// ReSharper restore UnusedMember.Global
-        {
-            if (ws == "en")
-                ws = "zxx";
-
-            _mProjectName = projName;
-            _mDatabaseName = databaseName;
-            Common.databaseName = databaseName;
-            // Set parameters for the XSLT.
-            _mXslParams = new Dictionary<string, object>();
-            _mXslParams.Add("ws", ws);
-            _mXslParams.Add("userWs", userWs);
-            DateTime now = DateTime.Now;
-            _mXslParams.Add("dateTime", now.Date);
-            _mXslParams.Add("user", userName);
-            _mXslParams.Add("projName", projName);
-
-            LoadStyleSheets();
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
         /// Loads the style sheets that are used to transform from Paratext USX to XHTML.
         /// </summary>
         /// ------------------------------------------------------------------------------------
@@ -174,8 +141,8 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
 
                 string cssFullPath = Common.PathCombine(_mOutputLocationPath, pubName + ".css");
-                StyToCss StyToCss = new StyToCss();
-                StyToCss.ConvertStyToCss(_mProjectName, cssFullPath);
+                StyToCss styToCss = new StyToCss();
+                styToCss.ConvertStyToCss(_mProjectName, cssFullPath);
                 string fileName = Common.PathCombine(_mOutputLocationPath, pubName + ".xhtml");
                 inProcess.PerformStep();
 

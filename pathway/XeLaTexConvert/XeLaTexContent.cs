@@ -47,8 +47,8 @@ namespace SIL.PublishingSolution
         private ArrayList _crossRef = new ArrayList();
         private int _crossRefCounter = 1;
         private bool _isWhiteSpace = true;
-        private bool _imageInserted;
-        private List<string> _usedStyleName = new List<string>();
+        private new bool _imageInserted;
+        private new List<string> _usedStyleName = new List<string>();
         private List<string> _mergedInlineStyle;
         private bool _isHeadword = false;
         private bool _xetexNewLine;
@@ -73,13 +73,13 @@ namespace SIL.PublishingSolution
         private bool _removeSpaceAfterVerse;
         private bool _isVerseNo;
 
-        protected Stack<string> _braceClass = new Stack<string>();
-        protected Stack<string> _braceInlineClass = new Stack<string>();
-        protected Dictionary<string, int> _braceInlineClassCount = new Dictionary<string, int>();
-        protected Stack<string> _mathStyleClass = new Stack<string>();
+        protected Stack<string> BraceClass = new Stack<string>();
+        protected Stack<string> BraceInlineClass = new Stack<string>();
+        protected Dictionary<string, int> BraceInlineClassCount = new Dictionary<string, int>();
+        protected Stack<string> MathStyleClass = new Stack<string>();
 
-        public bool _dictionaryEnding = false;
-        public string _dicMainReversal = string.Empty;
+        public bool DictionaryEnding = false;
+        public string DicMainReversal = string.Empty;
 
         #endregion
 
@@ -113,7 +113,7 @@ namespace SIL.PublishingSolution
             _classInlineInnerStyle = classInlineText;
             _inputPath = projInfo.ProjectPath;
 
-            _dicMainReversal = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            DicMainReversal = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo.ProjectPath, cssClass, classFamily, cssClassOrder);
             InitializeMathStyle();
             ProcessProperty();
@@ -600,8 +600,8 @@ namespace SIL.PublishingSolution
                     _tocStartingPage = content;
                     _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
                     TocPageStock++;
-                    _toc.Add("PageStock_" + _dicMainReversal + TocPageStock.ToString(), "\\" + _childName + "{" + _tocStartingPage + "}");
-                    _xetexFile.Write("\r\n \\label{PageStock_" + _dicMainReversal + TocPageStock.ToString() + "} ");
+                    _toc.Add("PageStock_" + DicMainReversal + TocPageStock.ToString(), "\\" + _childName + "{" + _tocStartingPage + "}");
+                    _xetexFile.Write("\r\n \\label{PageStock_" + DicMainReversal + TocPageStock.ToString() + "} ");
                 }
 
                 if (content != null) content = content.Replace("~", "\\textasciitilde{~}");
@@ -672,8 +672,8 @@ namespace SIL.PublishingSolution
                     _tocStartingPage = content;
                     _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
                     TocPageStock++;
-                    _toc.Add("PageStock_" + _dicMainReversal + TocPageStock.ToString(), "\\" + _childName + "{" + _tocStartingPage + "}");
-                    _xetexFile.Write("\r\n \\label{PageStock_" + _dicMainReversal + TocPageStock.ToString() + "} ");
+                    _toc.Add("PageStock_" + DicMainReversal + TocPageStock.ToString(), "\\" + _childName + "{" + _tocStartingPage + "}");
+                    _xetexFile.Write("\r\n \\label{PageStock_" + DicMainReversal + TocPageStock.ToString() + "} ");
                 }
             }
             AnchorBookMark();
@@ -758,7 +758,7 @@ namespace SIL.PublishingSolution
                         if (_mathStyle.Contains(property))
                         {
                             _xetexFile.Write("$");
-                            _mathStyleClass.Push(getStyleName);
+                            MathStyleClass.Push(getStyleName);
                         }
                         _xetexFile.Write(property);
                         _xetexFile.Write("{");
@@ -1604,8 +1604,8 @@ namespace SIL.PublishingSolution
                 //}
                 if (endParagraphString != string.Empty)
                 {
-                    _braceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
-                    _braceInlineClass.Push(getStyleName);
+                    BraceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
+                    BraceInlineClass.Push(getStyleName);
 
                     _endParagraphStringDic[getStyleName] = endParagraphString;
                 }
@@ -1659,8 +1659,8 @@ namespace SIL.PublishingSolution
                 }
                 if (endParagraphString != string.Empty)
                 {
-                    _braceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
-                    _braceInlineClass.Push(getStyleName);
+                    BraceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
+                    BraceInlineClass.Push(getStyleName);
                     _endParagraphStringDic[getStyleName] = endParagraphString;
                 }
             }
@@ -1738,7 +1738,7 @@ namespace SIL.PublishingSolution
 
             if (_closeChildName.IndexOf("scrBookName") == 0)
             {
-                _xetexFile.Write("\r\n \\label{PageStock_" + _dicMainReversal + TocPageStock.ToString() + "} ");
+                _xetexFile.Write("\r\n \\label{PageStock_" + DicMainReversal + TocPageStock.ToString() + "} ");
                 _bookName = string.Empty;
                 _bookPageBreak = false;
             }
@@ -1748,19 +1748,19 @@ namespace SIL.PublishingSolution
 
         private void CloseBrace(string closeChildName)
         {
-            string closeStyle = StackPeek(_braceInlineClass);
+            string closeStyle = StackPeek(BraceInlineClass);
             if (closeChildName == closeStyle && _endParagraphStringDic.ContainsKey(closeStyle))
             {
                 _xetexFile.Write(_endParagraphStringDic[closeStyle]);
                 _endParagraphStringDic[closeStyle] = string.Empty;
-                StackPop(_braceInlineClass);
+                StackPop(BraceInlineClass);
             }
 
-            string dollar = StackPeek(_mathStyleClass);
+            string dollar = StackPeek(MathStyleClass);
             if (dollar.Length != 0 && closeChildName == dollar)
             {
                 _xetexFile.Write("$");
-                StackPop(_mathStyleClass);
+                StackPop(MathStyleClass);
             }
         }
 
@@ -1834,7 +1834,7 @@ namespace SIL.PublishingSolution
         /// Store used Paragraph adn Character style name. This data used in ModifyIDStyle.cs
         /// </summary>
         /// <param name="styleName">a_b</param>
-        private void AddUsedStyleName(string styleName)
+        private new void AddUsedStyleName(string styleName)
         {
             if (!_usedStyleName.Contains(styleName))
                 _usedStyleName.Add(styleName);

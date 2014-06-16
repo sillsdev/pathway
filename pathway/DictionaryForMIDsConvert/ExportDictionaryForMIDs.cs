@@ -61,9 +61,9 @@ namespace SIL.PublishingSolution
         /// <param name="exportType">scripture / dictionary</param>
         /// <param name="publicationInformation">structure with other necessary information about project.</param>
         /// <returns></returns>
-        public bool Launch(string exportType, PublicationInformation publicationInformation)
+        protected void Launch(string exportType, PublicationInformation publicationInformation)
         {
-            return Export(publicationInformation);
+            Export(publicationInformation);
         }
 
         public bool Export(PublicationInformation projInfo)

@@ -32,7 +32,6 @@ using System.Globalization;
 using System.Xml;
 using System.Xml.Xsl;
 using Microsoft.Win32;
-using SIL.PublishingSolution;
 using SIL.Tool.Localization;
 
 #endregion Using
@@ -260,7 +259,6 @@ namespace SIL.Tool
 
         public static bool Testing; // To differentiate between Nunit test or from Application(UI or Flex).
         public static bool ShowMessage; // Show or Suppress MessageBox in Creating Zip Folder.
-        public static bool fromPlugin; // To differentiate between Plugin or from UI
 
         #endregion
 
@@ -1765,25 +1763,6 @@ namespace SIL.Tool
         }
         #endregion
 
-        public static string GetHeaderFontName(Dictionary<string, Dictionary<string, string>> _cssProperty,
-                                               string cssFileName) //TD-2682
-        {
-            string headerFontName = "Times New Roman";
-            if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("font-family"))
-            {
-                headerFontName = _cssProperty["entry"]["font-family"];
-            }
-            else
-            {
-                headerFontName = ParaTextFontName(cssFileName); //"Charis SIL"
-                if (headerFontName == string.Empty)
-                {
-                    headerFontName = "Times New Roman";
-                }
-            }
-            return headerFontName;
-        }
-
         public static string GetHeaderFontWeight(Dictionary<string, Dictionary<string, string>> _cssProperty) //TD-2815
         {
             string headerFontWeight = "regular";
@@ -2275,12 +2254,6 @@ namespace SIL.Tool
             if (string.IsNullOrEmpty(pathwayDir))
                 return Path.GetDirectoryName(Application.ExecutablePath);
             return pathwayDir;
-        }
-
-        public static string GetBinPath()
-        {
-            var uri = new Uri(Assembly.GetExecutingAssembly().CodeBase);
-            return Path.GetDirectoryName(uri.LocalPath);
         }
 
         public static string ProgBase = string.Empty;
@@ -4497,10 +4470,7 @@ namespace SIL.Tool
 
                 FileInsertText(cssFileName, cssProperty.ToString());
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch{}
         }
 
         /// <summary>

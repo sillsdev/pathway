@@ -44,12 +44,11 @@ namespace SIL.Tool
         private bool _isReversalExist;
         private bool _isExtraProcessing = true;
         private bool _swapHeadword;
-        private string _linkedCSS;
         private string _projectMode;
         private bool _isOpenOutput;
         private string _dictionaryPath;
-        private string _fullPath;
-        private string _subPathValue;
+        private string _fullPath = string.Empty;
+        private string _subPathValue = string.Empty;
         private string _projectPath;
         private string _tempOutputFolder;
         private string _projectName;
@@ -72,7 +71,7 @@ namespace SIL.Tool
         private bool _isFrontMatterEnabled = false;
         private bool _isODM;
         public string _headerFontName = "Times New Roman";
-        public string _reversalFontName = "Times New Roman";
+        private string _reversalFontName = "Times New Roman";
         public string _selectedTemplateStyle = string.Empty;
 
         private string _headerReferenceFormat = string.Empty;
@@ -84,27 +83,9 @@ namespace SIL.Tool
         #endregion
 
         #region public Variable
-        public string _userRole = string.Empty;
+        private readonly string _userRole = string.Empty;
         public ProgressBar ProgressBar;
         public ArrayList FileSequence;
-
-        #region Filter for Lift
-        public bool IsEntryFilter;
-        public string EntryFilterKey;
-        public string EntryFilterString;
-        public bool IsEntryFilterMatchCase;
-
-        public bool IsSenseFilter;
-        public string SenseFilterKey;
-        public string SenseFilterString;
-        public bool IsSenseFilterMatchCase;
-
-        public bool IsLanguageFilter;
-        public string LanguageFilterKey;
-        public string LanguageFilterString;
-        public bool IsLanguageFilterMatchCase;
-        #endregion
-
         #endregion
 
         #region Properties
@@ -607,7 +588,7 @@ namespace SIL.Tool
                                     _DefaultXhtmlFileWithPath = Common.PathCombine(_dictionaryPath, fileName); // xhtml
                                     if (fileName.IndexOf(".xhtml") >= 0)
                                     {
-                                        _linkedCSS = Common.GetLinkedCSS(_DefaultXhtmlFileWithPath);
+                                        Common.GetLinkedCSS(_DefaultXhtmlFileWithPath);
                                     }
                                 }
                             }
@@ -787,7 +768,7 @@ namespace SIL.Tool
         /// <param name="folderNameWithPath">Folder with full path</param>
         /// <param name="destPathParent">Parent of current folder - used for recursive copy</param>
         /// <returns>Returns True/False</returns>
-        public bool AddFolderToXML(string folderNameWithPath, string destPathParent)
+        private bool AddFolderToXML(string folderNameWithPath, string destPathParent)
         {
             try
             {
@@ -824,7 +805,7 @@ namespace SIL.Tool
         /// <param name="destPathParent">Parent of current folder</param>
         /// <param name="visible">File visible</param>
         /// <returns>Returns True/False </returns>
-        public bool XMLOperation(string fileName, char fileType, string setDefaultCSS, bool addToParentFolder, string actionToBeTaken, string destPathParent, bool visible)
+        private bool XMLOperation(string fileName, char fileType, string setDefaultCSS, bool addToParentFolder, string actionToBeTaken, string destPathParent, bool visible)
         {
             XmlNode newNode;
             XmlElement root = GetRootNode();

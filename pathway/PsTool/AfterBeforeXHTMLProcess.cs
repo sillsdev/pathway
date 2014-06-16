@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
-using SIL.PublishingSolution;
+
 #endregion Using
 
 namespace SIL.Tool
@@ -140,13 +140,9 @@ namespace SIL.Tool
         protected bool _isDisplayNone = false;
         protected string _displayNoneStyle = string.Empty;
 
-        protected List<string> _usedStyleName = new List<string>();
         protected bool _textWritten = false;
         protected bool _imageInserted;
         protected bool _overWriteParagraph;
-
-        protected List<string> LanguageFontStyleName = new List<string>();
-
         //Xetex
         protected List<string> _paragraphPropertyList;
         #endregion

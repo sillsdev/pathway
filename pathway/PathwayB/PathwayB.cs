@@ -22,7 +22,6 @@ using System.Xml;
 using System.Reflection;
 using System.Xml.Xsl;
 using ICSharpCode.SharpZipLib.Zip;
-using Microsoft.Win32;
 using SIL.Tool;
 using System.Collections.Generic;
 

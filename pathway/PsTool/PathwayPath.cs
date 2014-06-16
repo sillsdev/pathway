@@ -80,7 +80,7 @@ namespace SIL.Tool
                 }
 
                 var fwKey = RegistryHelperLite.CompanyKeyLocalMachine.OpenSubKey("FieldWorks");
-                if (fwKey != null && Common.fromPlugin)
+                if (fwKey != null)
                 {
                     if (!RegistryHelperLite.RegEntryExists(fwKey, "8.0", "RootCodeDir", out regObj))
                         if (!RegistryHelperLite.RegEntryExists(fwKey, "7.0", "RootCodeDir", out regObj))

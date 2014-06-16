@@ -328,7 +328,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         protected void SwordOutputBuildProcess(string processFolder, string swordOutputPath, string[] osisFilesList, string projectPath)
         {
-            string Creator = "osis2mod";
+            const string creator = "osis2mod";
             string moreArguments = "-z -N -v NRSV";
             foreach (var osisFile in osisFilesList)
             {
@@ -337,7 +337,7 @@ namespace SIL.PublishingSolution
                 const bool noWait = false;
                 string stdOutput = string.Empty;
                 string stdOutErr = string.Empty;
-                SubProcess.Run(processFolder, Creator, args, true);
+                SubProcess.Run(processFolder, creator, args, true);
                 moreArguments = "-a -z -N -v NRSV";
 
             }

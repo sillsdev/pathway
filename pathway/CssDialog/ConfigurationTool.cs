@@ -1189,7 +1189,6 @@ namespace SIL.PublishingSolution
         {
             using (Process.Start("http://pathway.sil.org/"))
             {
-                return;
             }
         }
 
@@ -1255,7 +1254,6 @@ namespace SIL.PublishingSolution
         {
             using (Process.Start("http://pathway.sil.org/demo/accessing-online-help-and-student-guide/"))
             {
-                return;
             }
         }
     }

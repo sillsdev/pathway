@@ -751,7 +751,6 @@ namespace SIL.Tool
         #endregion
 
         #region XsltProcess(string inputFile, string xsltFile, string ext)
-        public static ProgressBar XsltProgressBar = null;
         public static Formatting XsltFormat = Formatting.None;
         public static bool IncludeUtf8BomIdentifier = true;
 
@@ -767,7 +766,7 @@ namespace SIL.Tool
         /// <param name="ext">new extension</param>
         /// <param name="myParams">pass a dictionary of parameters and values</param>
         /// <returns>results or error message</returns>
-        public static string XsltProcess(string inputFile, string xsltFile, string ext, Dictionary<string, string> myParams)
+        private static string XsltProcess(string inputFile, string xsltFile, string ext, Dictionary<string, string> myParams)
         {
             if (!File.Exists(inputFile))
                 return string.Empty;

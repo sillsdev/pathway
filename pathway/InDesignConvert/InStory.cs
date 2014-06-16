@@ -36,7 +36,6 @@ namespace SIL.PublishingSolution
         private int _storyNo = 0;
         private bool isFileEmpty = true;
         private bool isFileCreated;
-        private bool isHomographNumber = false;
         private string imageClass = string.Empty;
         private ArrayList _textFrameClass = new ArrayList();
         private ArrayList _textVariables = new ArrayList();
@@ -47,10 +46,10 @@ namespace SIL.PublishingSolution
         private ArrayList _crossRef = new ArrayList();
         private int _crossRefCounter = 1;
         private bool _isWhiteSpace = true;
-        private bool _imageInserted;
-        private List<string> _usedStyleName = new List<string>();
+        private bool _IdImageInserted;
+        private List<string> _IdUsedStyleName = new List<string>();
         private bool _IsHeadword = false;
-        private bool _isDropCap = false;
+        private bool _isIdDropCap = false;
         #endregion
 
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
@@ -221,7 +220,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("ParagraphStyleRange");
                 // Note: Paragraph Start Element
                 _writer.WriteAttributeString("AppliedParagraphStyle", "ParagraphStyle/" + _paragraphName);
-                AddUsedStyleName(_paragraphName);
+                AddIdUsedStyleName(_paragraphName);
                 _previousParagraphName = _paragraphName;
                 _paragraphName = null;
                 _isNewParagraph = false;
@@ -353,7 +352,7 @@ namespace SIL.PublishingSolution
 
         private void WriteCharacterStyle(string content, string characterStyle)
         {
-            _imageInserted = InsertImage();
+            _IdImageInserted = InsertImage();
             SetHomographNumber(false);
             _writer.WriteStartElement("CharacterStyleRange");
 
@@ -370,10 +369,10 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("Content");
                 content = WriteCounter(content);
                 content = whiteSpacePre(content);
-                if (_isDropCap)
+                if (_isIdDropCap)
                 {
                     content = _chapterNo;
-                    _isDropCap = false;
+                    _isIdDropCap = false;
                 }
 
                 _writer.WriteString(content);
@@ -395,7 +394,7 @@ namespace SIL.PublishingSolution
             else // regular style
             {
                 _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/" + characterStyle);
-                AddUsedStyleName(characterStyle);
+                AddIdUsedStyleName(characterStyle);
             }
             return footerClassName;
         }
@@ -1084,7 +1083,6 @@ namespace SIL.PublishingSolution
         {
             if (_classNameWithLang.IndexOf("homographnumber") >= 0)
             {
-                isHomographNumber = defValue;
             }
         }
 
@@ -1103,7 +1101,7 @@ namespace SIL.PublishingSolution
             Dictionary<string, string> mystyle = new Dictionary<string, string>();
             if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("BaselineShift"))
             {
-                _isDropCap = true;
+                _isIdDropCap = true;
                 string lines = "2";
                 _allStyle.Pop();
                 CollectFootNoteChapterVerse(_chapterNo, Common.OutputType.IDML.ToString());
@@ -1140,7 +1138,7 @@ namespace SIL.PublishingSolution
                 CollectFootNoteChapterVerse(_chapterNo, Common.OutputType.IDML.ToString());
                 _paragraphName = classNameWOLang + _chapterNo.Length.ToString();
                 _newProperty[_paragraphName] = mystyle;
-                _isDropCap = true;
+                _isIdDropCap = true;
                 Write();
             }
         }
@@ -1205,12 +1203,12 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void EndElementForImage()
         {
-            if (_imageInsert && !_imageInserted)
+            if (_imageInsert && !_IdImageInserted)
             {
                 if (_closeChildName == _imageClass) // Without Caption
                 {
                     _allCharacter.Push(_imageClass); // temporarily storing to get width and position
-                    _imageInserted = InsertImage();
+                    _IdImageInserted = InsertImage();
                     _writer.WriteEndElement(); // for ParagraphStyle
                     _writer.WriteEndElement(); // for Textframe
                     _writer.WriteEndElement(); // for rectangle
@@ -1251,10 +1249,10 @@ namespace SIL.PublishingSolution
         /// Store used Paragraph adn Character style name. This data used in ModifyIDStyle.cs
         /// </summary>
         /// <param name="styleName">a_b</param>
-        private void AddUsedStyleName(string styleName)
+        private void AddIdUsedStyleName(string styleName)
         {
-            if (!_usedStyleName.Contains(styleName))
-                _usedStyleName.Add(styleName);
+            if (!_IdUsedStyleName.Contains(styleName))
+                _IdUsedStyleName.Add(styleName);
         }
 
         #region Private Methods
@@ -1320,7 +1318,7 @@ namespace SIL.PublishingSolution
         private void UpdateRelativeInStylesXML()
         {
             ModifyIDStyles modifyIDStyles = new ModifyIDStyles();
-            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", _IsHeadword);
+            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _IdUsedStyleName, _languageStyleName, "", _IsHeadword);
         }
 
         private void CloseFile()

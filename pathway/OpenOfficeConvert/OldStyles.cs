@@ -58,7 +58,6 @@ namespace SIL.PublishingSolution
         public Dictionary<string, string> FootNoteSeperator;
         public Dictionary<string, ArrayList> SpellCheck;
 
-        public Dictionary<string, string> ClassContainsSelector; //TD-351[Implement :contains("Lamutua")]
         public Dictionary<string, Dictionary<string, string>> ImageSource;
         public ArrayList AllCSSName;
         public ArrayList DropCap;

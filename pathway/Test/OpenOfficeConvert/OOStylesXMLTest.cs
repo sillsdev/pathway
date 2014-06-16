@@ -39,7 +39,6 @@ namespace Test.OpenOfficeConvert
         string _errorFile;
         private string _inputPath;
         private string _outputPath;
-        private string _expectedPath;
         private ValidateXMLFile _validate;
         private bool returnValue;
         private PublicationInformation projInfo = new PublicationInformation();
@@ -56,7 +55,7 @@ namespace Test.OpenOfficeConvert
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/OpenOfficeConvert/TestFiles");
             _inputPath = Common.PathCombine(testPath, "input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "expected");
+            Common.PathCombine(testPath, "expected");
             Common.SupportFolder = "";
             Common.ProgInstall = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../../PsSupport");
             projInfo.ProjectInputType = "Dictionary";

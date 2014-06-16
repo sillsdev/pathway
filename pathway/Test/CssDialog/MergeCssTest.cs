@@ -15,7 +15,6 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using SIL.PublishingSolution;
 using NUnit.Framework;
 using System.IO;
 using SIL.Tool;

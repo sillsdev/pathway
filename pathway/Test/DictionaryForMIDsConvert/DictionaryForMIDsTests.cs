@@ -22,7 +22,6 @@ using NUnit.Framework;
 using System;
 using SIL.PublishingSolution;
 using SIL.Tool;
-using NMock2;
 
 namespace Test.DictionaryForMIDsConvert
 {

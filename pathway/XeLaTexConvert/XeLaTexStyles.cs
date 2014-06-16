@@ -213,10 +213,10 @@ namespace SIL.PublishingSolution
             ProcessPageProperty(pageName);
 
             pageName = "@page:left";
-            _leftPageLayoutProperty = ProcessPageProperty(pageName);
+            LeftPageLayoutProperty = ProcessPageProperty(pageName);
 
             pageName = "@page:right";
-            _rightPageLayoutProperty = ProcessPageProperty(pageName);
+            RightPageLayoutProperty = ProcessPageProperty(pageName);
 
             pageName = "@page-footnotes";
             ProcessPageProperty(pageName);

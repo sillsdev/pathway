@@ -41,7 +41,7 @@ namespace SIL.PublishingSolution
         protected ArrayList _baseTagName = new ArrayList();  // for insert tagName
         protected ArrayList _allTagName = new ArrayList();  // for all tagName
         protected Dictionary<string, string>[] _pageHeaderFooter;
-        protected Dictionary<string, Dictionary<string, string>> _tagProperty = new Dictionary<string, Dictionary<string, string>>();
+        private Dictionary<string, Dictionary<string, string>> _tagProperty = new Dictionary<string, Dictionary<string, string>>();
         protected VerboseClass _verboseWriter = VerboseClass.GetInstance();
 
         protected Dictionary<string, string> _columnProperty  = new Dictionary<string, string>();
@@ -49,10 +49,7 @@ namespace SIL.PublishingSolution
         protected Dictionary<string, string> _firstPageLayoutProperty;
         protected Dictionary<string, string> _leftPageLayoutProperty;
         protected Dictionary<string, string> _rightPageLayoutProperty;
-
         protected Dictionary<string, string> _columnSep;
-
-        protected string _styleFilePath;
         protected ArrayList _firstPageContentNone = new ArrayList();
         #endregion
 
@@ -115,7 +112,6 @@ namespace SIL.PublishingSolution
             _styleName.TagAttrib = new Dictionary<string, string>();
             _styleName.ListType = new Dictionary<string, string>();
             _styleName.WhiteSpace = new ArrayList();
-            _styleName.ClassContainsSelector = new Dictionary<string, string>(); //TD-351[Implement :contains("Lamutua")]
             _styleName.ImageSource = new Dictionary<string, Dictionary<string, string>>();
             _styleName.AllCSSName = new ArrayList();
             _styleName.DropCap = new ArrayList();
@@ -389,14 +385,12 @@ namespace SIL.PublishingSolution
         /// Generate first block of Styles.xml
         /// </summary>
         /// <param name="targetFile">content.xml</param>
-        /// <param name="cssProperty">used to retrieve header font</param>
         /// <returns> </returns>
         /// -------------------------------------------------------------------------------------------
-        protected void CreateODTStyles(string targetFile, Dictionary<string, Dictionary<string, string>> cssProperty)
+        protected void CreateODTStyles(string targetFile)
         {
             try
             {
-                _styleFilePath = targetFile;
                 _writer = new XmlTextWriter(targetFile, null);
                 _writer.Formatting = Formatting.Indented;
                 _writer.WriteStartDocument();

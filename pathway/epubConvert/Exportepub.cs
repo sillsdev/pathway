@@ -325,7 +325,6 @@ namespace SIL.PublishingSolution
                 // split the .XHTML into multiple files, as specified by the user
                 List<string> htmlFiles = new List<string>();
                 List<string> splitFiles = new List<string>();
-                Common.XsltProgressBar = inProcess.Bar();
 
                 // insert the front matter items as separate files in the output folder
                 inProcess.SetStatus("Adding content");

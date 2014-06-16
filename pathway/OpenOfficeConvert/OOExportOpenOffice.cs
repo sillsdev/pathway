@@ -405,7 +405,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void SetBookReferenceDivInCSS(string cssFileName)
+        private void SetBookReferenceDivInCss(string cssFileName)
         {
             TextWriter tw = new StreamWriter(cssFileName, true);
             tw.WriteLine(".BookReferenceDiv {");
@@ -457,7 +457,7 @@ namespace SIL.PublishingSolution
             }
 
             string cssFile = projInfo.DefaultCssFileWithPath;
-            SetBookReferenceDivInCSS(cssFile);
+            SetBookReferenceDivInCss(cssFile);
             var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(defaultXhtml);
             if (projInfo.DefaultRevCssFileWithPath != null && projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
             {
@@ -506,7 +506,7 @@ namespace SIL.PublishingSolution
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
 
             string isToc;
-            var isCoverImageInserted = EditCSSValues(idAllClass, out isToc);
+            var isCoverImageInserted = EditCssValues(idAllClass, out isToc);
 
 
             _refFormat = Common.GetReferenceFormat(idAllClass, _refFormat);
@@ -533,7 +533,6 @@ namespace SIL.PublishingSolution
 
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML._multiLanguageHeader = isMultiLanguageHeader;
-            cXML.RefFormat = this._refFormat;
 
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize);
             PostProcess(projInfo);
@@ -600,7 +599,7 @@ namespace SIL.PublishingSolution
             return returnValue;
         }
 
-        private static string EditCSSValues(Dictionary<string, Dictionary<string, string>> idAllClass, out string isToc)
+        private static string EditCssValues(Dictionary<string, Dictionary<string, string>> idAllClass, out string isToc)
         {
             // Enable Table of content for macro
             isToc = "false";
@@ -720,9 +719,7 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            catch
-            {
-            }
+            catch{}
         }
 
         private static void PostProcess(PublicationInformation projInfo)

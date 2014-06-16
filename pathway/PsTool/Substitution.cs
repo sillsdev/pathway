@@ -24,38 +24,6 @@ namespace SIL.Tool
     /// </summary>
     public class Substitution
     {
-        #region Properties
-        /// <summary>
-        /// Gets or sets path name where substitution takes place
-        /// </summary>
-        public string TargetPath { get; set; }
-
-        /// <summary>
-        /// Gets or sets input file name (used when pattern changes are done)
-        /// </summary>
-        public string InputFile { get; set; }
-
-        /// <summary>
-        /// Gets or sets input template (used by substitution)
-        /// </summary>
-        public string InputTemplate { get; set; }
-
-        /// <summary>
-        /// Gets or sets dictionary of names and their replacement values
-        /// </summary>
-        public Dictionary<string, string> NameMap { get; set; }
-
-        /// <summary>
-        /// Gets or sets output file to be created
-        /// </summary>
-        public string OutputFile { get; set; }
-
-        /// <summary>
-        /// Gets or sets open and closing bracket for block substitutions.
-        /// </summary>
-        public string Brackets { get; set; }
-        #endregion Properties
-
         #region MyDelegate
         /// <summary>
         /// myDelegate class contains the dictionary of settings and insert functions for template

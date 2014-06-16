@@ -141,7 +141,7 @@ namespace SIL.PublishingSolution
                 if (File.Exists(jarFile))
                 {
                     Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", string.Empty, string.Empty);
-                    CreateRAMP(projInfo);
+                    CreateRamp(projInfo);
                     Common.DeleteDirectory(tempGoBibleCreatorPath);
 
                     success = true;
@@ -180,7 +180,7 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        private void CreateRAMP(PublicationInformation projInfo)
+        private void CreateRamp(PublicationInformation projInfo)
         {
             Ramp ramp = new Ramp();
             ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".jad,.jar", projInfo.ProjectInputType);

@@ -15,14 +15,12 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Resources;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Microsoft.Win32;
 
 namespace SIL.Tool
 {
@@ -103,7 +101,7 @@ namespace SIL.Tool
             Run(instPath, name, true);
         }
 
-        public static void Run(string instPath, string name, bool wait)
+        private static void Run(string instPath, string name, bool wait)
         {
             Run(instPath, name, null, wait);
         }

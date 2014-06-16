@@ -19,7 +19,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Collections;
 using System.IO;
-using SIL.PublishingSolution;
 
 #endregion Using
 
@@ -38,7 +37,7 @@ namespace SIL.Tool
         private ArrayList _psuedoBefore = new ArrayList();
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
 
-        private bool _IsHeadword = false;
+        private const bool IsHeadword = false;
         private bool _anchorWrite;
         private bool _isPictureDisplayNone = false;
         
@@ -290,7 +289,7 @@ namespace SIL.Tool
         {
             if (!IsEmptyElement)
             {
-                StartElementBase(_IsHeadword);
+                StartElementBase(IsHeadword);
                 Psuedo();
             }
             IsEmptyElement = false;

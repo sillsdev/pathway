@@ -23,15 +23,13 @@ namespace SIL.PublishingSolution
 {
     public class XeLaTexMapProperty
     {
-        private Dictionary<string, string> _IDProperty = new Dictionary<string, string>();
-        private string _property;
-        private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
-        private bool _IsKeepLineWrittern = false;
+        private readonly Dictionary<string, string> _idProperty = new Dictionary<string, string>();
+        private bool _isKeepLineWrittern = false;
         private bool _isLinux = false;
         private string _className;
         private string _fontName;
-        private List<string> _fontOption = new List<string>();
-        private List<string> _fontStyle = new List<string>();
+        private readonly List<string> _fontOption = new List<string>();
+        private readonly List<string> _fontStyle = new List<string>();
         private string _fontSize;
         private List<string> _inlineStyle;
         private List<string> _includePackageList;
@@ -46,7 +44,7 @@ namespace SIL.PublishingSolution
             Initialize(className, cssProperty, inlineStyle, includePackageList, inlineInnerStyle);
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
-                string propertyValue = PercentageToEM(property.Value);
+                string propertyValue = PercentageToEm(property.Value);
 
                 switch (property.Key.ToLower())
                 {
@@ -177,8 +175,6 @@ namespace SIL.PublishingSolution
         private void Initialize(string className, Dictionary<string, string> cssProperty, List<string> inlineStyle, List<string> includePackageList, List<string> inlineText)
         {
             _className = className;
-            _property = string.Empty;
-            _cssProperty = cssProperty;
             _inlineStyle = inlineStyle;
             _includePackageList = includePackageList;
             _inlineInnerStyle = inlineText;
@@ -224,8 +220,8 @@ namespace SIL.PublishingSolution
             if (_className == "@page")
             {
                 //cmyk 0.1 0.9 0.5 0
-                if (_IDProperty.ContainsKey("backgroundColor"))
-                    style += @"\special{background cmyk " + _IDProperty["backgroundColor"] + "}";
+                if (_idProperty.ContainsKey("backgroundColor"))
+                    style += @"\special{background cmyk " + _idProperty["backgroundColor"] + "}";
             }
             else
             {
@@ -258,7 +254,7 @@ namespace SIL.PublishingSolution
             }
             propertyValue = Common.SetPropertyValue("widows", propertyValue);
             _inlineStyle.Add(propertyValue);
-            _IDProperty["KeepLastLines"] = propertyValue;
+            _idProperty["KeepLastLines"] = propertyValue;
             AddKeepLinesTogetherProperty();
         }
 
@@ -270,17 +266,17 @@ namespace SIL.PublishingSolution
             }
             propertyValue = Common.SetPropertyValue("orphans", propertyValue);
             _inlineStyle.Add(propertyValue);
-            _IDProperty["KeepFirstLines"] = propertyValue;
+            _idProperty["KeepFirstLines"] = propertyValue;
             AddKeepLinesTogetherProperty();
         }
 
         private void AddKeepLinesTogetherProperty()
         {
-            if (_IsKeepLineWrittern == false)
+            if (_isKeepLineWrittern == false)
             {
-                _IDProperty["KeepLinesTogether"] = "true";
+                _idProperty["KeepLinesTogether"] = "true";
             }
-            _IsKeepLineWrittern = true;
+            _isKeepLineWrittern = true;
         }
 
         public void WordSpacing(string propertyValue)
@@ -291,7 +287,7 @@ namespace SIL.PublishingSolution
             }
             propertyValue = Common.SetPropertyValue("\\spaceskip", propertyValue);
             _inlineStyle.Add(propertyValue);
-            _IDProperty["WordSpacing"] = propertyValue;
+            _idProperty["WordSpacing"] = propertyValue;
         }
 
         public void LetterSpacing(string propertyValue)
@@ -342,7 +338,7 @@ namespace SIL.PublishingSolution
             propertyValue = propertyValue.Replace("pt", "");
 
 
-            _IDProperty["line-height"] = propertyValue;
+            _idProperty["line-height"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
             propertyValue = "\\usepackage{setspace}";
@@ -403,9 +399,9 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            _IDProperty["LeftIndent"] = propertyValue;
+            _idProperty["LeftIndent"] = propertyValue;
             propertyValue = Common.SetPropertyValue("padding-left", propertyValue);
-            _IDProperty["padding-left"] = propertyValue;
+            _idProperty["padding-left"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
             propertyValue = "\\usepackage{changepage}";
@@ -420,7 +416,7 @@ namespace SIL.PublishingSolution
             }
 
             propertyValue = Common.SetPropertyValue("padding-right", propertyValue);
-            _IDProperty["padding-right"] = propertyValue;
+            _idProperty["padding-right"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
             propertyValue = "\\usepackage{changepage}";
@@ -434,9 +430,9 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            _IDProperty["SpaceBefore"] = propertyValue;
+            _idProperty["SpaceBefore"] = propertyValue;
             propertyValue = Common.SetPropertyValue("padding-top", propertyValue);
-            _IDProperty["padding-top"] = propertyValue;
+            _idProperty["padding-top"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
             propertyValue = "\\usepackage{changepage}";
@@ -450,9 +446,9 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            _IDProperty["SpaceAfter"] = propertyValue;
+            _idProperty["SpaceAfter"] = propertyValue;
             propertyValue = Common.SetPropertyValue("padding-bottom", propertyValue);
-            _IDProperty["padding-bottom"] = propertyValue;
+            _idProperty["padding-bottom"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
             propertyValue = "\\usepackage{changepage}";
@@ -465,7 +461,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty["Page-Height"] = propertyValue;
+            _idProperty["Page-Height"] = propertyValue;
         }
         public void PageWidth(string propertyValue)
         {
@@ -473,7 +469,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty["Page-Width"] = propertyValue;
+            _idProperty["Page-Width"] = propertyValue;
         }
         public void MarginLeft(string propertyValue)
         {
@@ -500,11 +496,11 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            _IDProperty["Margin-Right"] = propertyValue;
+            _idProperty["Margin-Right"] = propertyValue;
 
             propertyValue = Common.SetPropertyValue("\\rightmargin", propertyValue);
 
-            _IDProperty["margin-right"] = propertyValue;
+            _idProperty["margin-right"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
             propertyValue = "\\usepackage{changepage}";
@@ -518,11 +514,11 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty["Margin-Top"] = propertyValue;
+            _idProperty["Margin-Top"] = propertyValue;
 
             propertyValue = Common.SetPropertyValue("\\topskip", propertyValue);
 
-            _IDProperty["margin-top"] = propertyValue;
+            _idProperty["margin-top"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
             propertyValue = "\\usepackage{changepage}";
@@ -535,11 +531,11 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty["Margin-Bottom"] = propertyValue;
+            _idProperty["Margin-Bottom"] = propertyValue;
             //propertyValue = Common.SetPropertyValue("\\needspace\\baselineskip","");//propertyValue
             //\section*{\needspace {3\baselineskip}{\topskip 18pt{\letterhiletHeaddicBody{र sam}}}}
             propertyValue = "\\section*{\\needspace {8\\baselineskip}";
-            _IDProperty["margin-bottom"] = propertyValue;
+            _idProperty["margin-bottom"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
             propertyValue = "\\usepackage{needspace}";
@@ -639,7 +635,7 @@ namespace SIL.PublishingSolution
             int blue = int.Parse(cVal.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
 
 
-            _IDProperty["backgroundColor"] = rgb2cmyk(red, green, blue);
+            _idProperty["backgroundColor"] = Rgb2Cmyk(red, green, blue);
 
         }
         public void Display(string propertyValue)
@@ -658,13 +654,13 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty["display"] = propertyValue;
+            _idProperty["display"] = propertyValue;
             propertyValue = "\\usepackage{verbatim} ";
             if (!_includePackageList.Contains(propertyValue))
                 _includePackageList.Add(propertyValue);
         }
 
-        public void Direction(string propertyValue)
+        private void Direction(string propertyValue)
         {
             if (propertyValue == string.Empty)
             {
@@ -676,16 +672,7 @@ namespace SIL.PublishingSolution
                 propertyValue = "RTL";
                 _inlineStyle.Add(propertyValue);
             }
-            //else if (propertyValue.ToLower() == "ltr")
-            //{
-            //    propertyValue = "LTR";
-            //    _inlineStyle.Add(propertyValue);
-            //}
-            //else
-            //{
-            //    return;
-            //}
-            _IDProperty["direction"] = propertyValue;
+            _idProperty["direction"] = propertyValue;
             propertyValue = "\\usepackage{bidi} ";
             if (!_includePackageList.Contains(propertyValue))
                 _includePackageList.Add(propertyValue);
@@ -696,16 +683,16 @@ namespace SIL.PublishingSolution
             if (propertyValue == string.Empty || Common.ValidateAlphabets(propertyValue)
                 || propertyValue.IndexOf('-') > -1)
             {
-                _IDProperty["TextColumnCount"] = "1";
+                _idProperty["TextColumnCount"] = "1";
             }
             else
             {
-                _IDProperty["TextColumnCount"] = propertyValue;
+                _idProperty["TextColumnCount"] = propertyValue;
             }
 
-            _IDProperty["column-count"] = propertyValue;
+            _idProperty["column-count"] = propertyValue;
             propertyValue = "column-count " + propertyValue;
-            _IDProperty["column-count"] = propertyValue;
+            _idProperty["column-count"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
             propertyValue = "\\usepackage{multicol}";
@@ -729,7 +716,7 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = "\\textsc";
             }
-            _IDProperty["Capitalization"] = propertyValue;
+            _idProperty["Capitalization"] = propertyValue;
             if (propertyValue.Trim().Length > 0)
                 _inlineInnerStyle.Add(propertyValue);
         }
@@ -753,7 +740,7 @@ namespace SIL.PublishingSolution
 
         public void FontWeight(Dictionary<string, string> cssProperty)
         {
-            if (_IDProperty.ContainsKey("FontStyle")) return;
+            if (_idProperty.ContainsKey("FontStyle")) return;
 
             string propertyWeight = "";
             string propertyStyle = "";
@@ -786,7 +773,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty["FontStyleBold"] = propertyValue;
+            _idProperty["FontStyleBold"] = propertyValue;
             if (propertyValue.Trim().Length > 0 && !_fontOption.Contains(propertyValue))
                 _fontOption.Add(propertyValue);
         }
@@ -812,7 +799,7 @@ namespace SIL.PublishingSolution
             }
             if (propertyValue != "justify")
             {
-                _IDProperty["Justification"] = propertyValue;
+                _idProperty["Justification"] = propertyValue;
                 _inlineStyle.Add(propertyValue);
             }
         }
@@ -821,14 +808,14 @@ namespace SIL.PublishingSolution
         {
             if (propertyValue == "larger" || propertyValue == "smaller")
             {
-                _IDProperty["PointSize"] = propertyValue;
+                _idProperty["PointSize"] = propertyValue;
             }
             else if (propertyValue == string.Empty || Common.ValidateAlphabets(propertyValue)
                 || propertyValue.IndexOf('-') > -1)
             {
                 return;
             }
-            _IDProperty["PointSize"] = propertyValue;
+            _idProperty["PointSize"] = propertyValue;
 
             if (propertyValue == "larger")
                 _fontSize = " at 20pt";
@@ -838,7 +825,7 @@ namespace SIL.PublishingSolution
                 _fontSize = " at " + Common.SetPropertyValue(string.Empty, propertyValue);
         }
 
-        private string rgb2cmyk(int r, int g, int b)
+        private string Rgb2Cmyk(int r, int g, int b)
         {
             float computedC = 0;
             float computedM = 0;
@@ -865,7 +852,7 @@ namespace SIL.PublishingSolution
             string cmyk = computedC + " " + computedM + " " + computedY + " " + computedK;
             return cmyk;
         }
-        private string PercentageToEM(string propertyValue)
+        private string PercentageToEm(string propertyValue)
         {
             if (propertyValue.IndexOf("%") > 0)
             {

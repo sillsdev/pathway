@@ -29,7 +29,7 @@ namespace Test.PsTool
     [Category("ShortTest")]
     public class FontTest
     {
-        private bool isLinux = Common.IsUnixOS();
+        private readonly bool _isLinux = Common.IsUnixOS();
         /// <summary>
         ///A test Arial Postscript font name
         ///</summary>
@@ -38,7 +38,7 @@ namespace Test.PsTool
         {
             string fontName = "Arial";
             var expected = "ArialMT";
-            if (isLinux)
+            if (_isLinux)
             {
                 fontName = "Ubuntu";
                 expected = "Ubuntu";
@@ -56,7 +56,7 @@ namespace Test.PsTool
         {
             string fontName = "Times New Roman";
             var expected = "TimesNewRomanPSMT";
-            if (isLinux)
+            if (_isLinux)
             {
                 fontName = "Liberation Serif";
                 expected = "LiberationSerif";
@@ -135,7 +135,7 @@ namespace Test.PsTool
             string actual = FontInternals.GetFontFileName(familyName, style);
             string expected = "DoulosSIL-R";
             string actualFilename = Path.GetFileName(actual);
-            Assert.True(actualFilename.Contains(expected));
+            Assert.True(actualFilename != null && actualFilename.Contains(expected));
         }
 
 

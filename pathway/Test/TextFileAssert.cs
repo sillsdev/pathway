@@ -51,7 +51,8 @@ namespace Test
                 Assert.Fail(msg);
             }
         }
-        public static void CheckLineAreEqualEx(string expectPath, string outputPath, ArrayList ex, string msg)
+
+        private static void CheckLineAreEqualEx(string expectPath, string outputPath, ArrayList ex, string msg)
         {
             try
             {

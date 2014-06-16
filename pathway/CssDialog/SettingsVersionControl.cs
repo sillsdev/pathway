@@ -30,7 +30,6 @@ namespace SIL.PublishingSolution
     {
         #region Protected Variable
         protected string Type;
-        protected string XmlFileWithPath;
         protected string ProjSchemaPath;
 
         private string _userFilePath, _pathwayFilePath;

@@ -17,9 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using NMock2;
 using NUnit.Framework;
-using SIL.PublishingSolution;
 using SIL.Tool;
 
 namespace Test.PsTool
@@ -35,7 +33,6 @@ namespace Test.PsTool
         #region setup
         private static string _inputPath;
         private static string _outputPath;
-        private static string _expectedPath;
 
         [TestFixtureSetUp]
         public void Setup()
@@ -46,7 +43,7 @@ namespace Test.PsTool
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles");
             _inputPath = Common.PathCombine(testPath, "InputFiles");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "Expected");
+            Common.PathCombine(testPath, "Expected");
             if (Directory.Exists(_outputPath))
                 Directory.Delete(_outputPath, true);
             Directory.CreateDirectory(_outputPath);

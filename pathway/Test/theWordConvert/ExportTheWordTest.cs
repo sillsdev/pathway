@@ -620,7 +620,7 @@ namespace Test.theWordConvert
             var projInfo = (IPublicationInformation) Mocks.NewMock(typeof (IPublicationInformation));
             Expect.Once.On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(_outputPath));
             Expect.Once.On(projInfo).GetProperty("ProjectInputType").Will(Return.Value("Scripture"));
-            CreateRAMP(projInfo);
+            CreateRamp(projInfo);
             Mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
@@ -934,11 +934,7 @@ namespace Test.theWordConvert
         public void UsxDirTest1()
         {
             var exportTheWordInputPath = Path.Combine(_inputPath, "USX");
-            Assert.Throws(typeof (FileNotFoundException), delegate
-                {
-                    //string actual = 
-                        UsxDir(exportTheWordInputPath);
-                });
+            Assert.Throws(typeof (FileNotFoundException), () => UsxDir(exportTheWordInputPath));
         }
 
         /// <summary>

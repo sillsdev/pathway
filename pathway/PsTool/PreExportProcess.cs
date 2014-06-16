@@ -9,7 +9,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Windows.Forms;
-using SIL.PublishingSolution;
 
 namespace SIL.Tool
 {
@@ -532,7 +531,7 @@ namespace SIL.Tool
 
         public List<string> GetMultiPictureEntryId(string fileName)
         {
-            string clsName, id, entryId = null;
+            string entryId = null;
             bool isfirstImage = false;
             List<string> entryIdList = new List<string>();
             if (!File.Exists(fileName)) return null;
@@ -545,8 +544,8 @@ namespace SIL.Tool
                     {
                         if (_reader.Name == "div")
                         {
-                            clsName = _reader.GetAttribute("class");
-                            id = _reader.GetAttribute("id");
+                            string clsName = _reader.GetAttribute("class");
+                            string id = _reader.GetAttribute("id");
                             if (clsName != null)
                             {
                                 if (clsName == "entry")

@@ -23,7 +23,6 @@ using System.Xml;
 using System.Collections;
 using System.Windows.Forms;
 using System.IO;
-using System.Drawing;
 using System.Text.RegularExpressions;
 using SIL.Tool;
 using SIL.Tool.Localization;
@@ -79,7 +78,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
         private bool _isVerseNumberContent = false;
         private StringBuilder _verseContent = new StringBuilder();
-        private bool _IsHeadword = false;
+        private bool IsHeadword = false;
         private bool _significant;
         private bool _footnoteSpace;
         private bool _anchorWrite;
@@ -99,7 +98,7 @@ namespace SIL.PublishingSolution
         private string _customFootnoteSymbol = string.Empty;
         private string _customXRefSymbol = string.Empty;
         private string firstRevHeadWord = string.Empty;
-        Dictionary<string, string> FirstDataOnEntry = new Dictionary<string, string>();
+        readonly Dictionary<string, string> _firstDataOnEntry = new Dictionary<string, string>();
         private int _guidewordLength;
         private bool _isPreviousGlossary;//3719
         private bool _isAllowWhiteSpace = true;
@@ -115,7 +114,6 @@ namespace SIL.PublishingSolution
 
         #region Public Variable
         public bool _multiLanguageHeader = false;
-        public string RefFormat = "Genesis 1";
         public bool IsMirrorPage;
         public bool IsFirstEntry;
         //private bool isPageBreak;
@@ -1242,9 +1240,9 @@ namespace SIL.PublishingSolution
         {
             if (_classNameWithLang.IndexOf("letter") == 0)
             {
-                if (FirstDataOnEntry.ContainsKey(content))
+                if (_firstDataOnEntry.ContainsKey(content))
                 {
-                    SetGuidewordTextPos(FirstDataOnEntry[content]);
+                    SetGuidewordTextPos(_firstDataOnEntry[content]);
                     _writer.WriteStartElement("text:variable-set");
                     _writer.WriteAttributeString("text:name", "Left_Guideword_L");
                     _writer.WriteAttributeString("text:display", "none");
@@ -1550,7 +1548,7 @@ namespace SIL.PublishingSolution
         /// <param name="targetPath"></param>
         private void StartElement(string targetPath)
         {
-            StartElementBase(_IsHeadword);
+            StartElementBase(IsHeadword);
             PictureParaOrFrame();
             _imageInserted = InsertImage();
             ListBegin();
@@ -2396,7 +2394,6 @@ namespace SIL.PublishingSolution
 
             string imgWUnit = "pt";
             string anchorType = string.Empty;
-            string zIndex = "0";
 
             if (_isParaPicture)
             {
@@ -2477,8 +2474,8 @@ namespace SIL.PublishingSolution
             _frameCount++;
 
             ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
-            modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strGraphicsCount, _util.ParentName, _floatProperty, _displayProperty);
-            modifyIDStyles.CreateFrameStyle(_styleFilePath, strFrameStyCount, _util.ParentName, _floatProperty, _displayProperty, strGraphicsCount);
+            modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strGraphicsCount, _util.ParentName, _displayProperty);
+            modifyIDStyles.CreateFrameStyle(_styleFilePath, strFrameStyCount, _util.ParentName, _displayProperty, strGraphicsCount);
 
             _writer.WriteStartElement("draw:frame");
             _writer.WriteAttributeString("draw:style-name", "gr" + (_frameCount));
@@ -2992,7 +2989,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
 
             //Get the list of headwords to insert guideword after the letdata
-            ReadAllFirstEntryData(_projInfo.DefaultXhtmlFileWithPath, FirstDataOnEntry);
+            ReadAllFirstEntryData(_projInfo.DefaultXhtmlFileWithPath, _firstDataOnEntry);
 
             //To be insert left guideword on flexrev file
             WriteLeftGuidewordOnODT();
@@ -3136,7 +3133,7 @@ namespace SIL.PublishingSolution
         private void UpdateRelativeInStylesXML()
         {
             ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
-            modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", _IsHeadword, ParentClass, _projInfo.HeaderFontName);
+            modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", IsHeadword, ParentClass, _projInfo.HeaderFontName);
         }
 
 

@@ -115,7 +115,7 @@ namespace SIL.PublishingSolution
         protected Color _selectedInputTypeColor = Color.Orange;
         protected Color _deSelectedColor = SystemColors.Control;
         protected string _styleName;
-        protected string _previousStyleName;
+        private string _previousStyleName;
         protected string _fileProduce = "One";
         protected bool _fixedLineHeight = false;
         protected bool _includeImage = true;
@@ -1181,7 +1181,7 @@ namespace SIL.PublishingSolution
                         filePath = Param.SettingPath;
                     }
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                    ShowMoblieCSS(baseNode1);
+                    ShowMoblieCss(baseNode1);
                     SetMobileSummary(null, null);
                 }
                 else if (MediaType.ToLower() == "others")
@@ -1190,7 +1190,7 @@ namespace SIL.PublishingSolution
                     // show/hide epub UI controls based on the input type
                     SetEpubUIControls(inputTypeBL == "Scripture");
 
-                    ShowOthersCSS(baseNode1);
+                    ShowOthersCss(baseNode1);
                     SetOthersSummary(null, null);
                 }
                 else if (MediaType.ToLower() == "web")
@@ -1202,7 +1202,7 @@ namespace SIL.PublishingSolution
                     // show/hide web UI controls based on the input type
                     SetWebUIControls(inputTypeBL == "Dictionary");
 
-                    ShowWebCSS(baseNode1, hashUtil);
+                    ShowWebCss(baseNode1, hashUtil);
                     SetWebSummary(null, null);
                 }
                 else
@@ -1222,7 +1222,7 @@ namespace SIL.PublishingSolution
             _screenMode = ScreenMode.Edit;
         }
 
-        private void ShowMoblieCSS(XmlNodeList baseNode1)
+        private void ShowMoblieCss(XmlNodeList baseNode1)
         {
             foreach (XmlNode VARIABLE in baseNode1)
             {
@@ -1243,7 +1243,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void ShowOthersCSS(XmlNodeList baseNode1)
+        private void ShowOthersCss(XmlNodeList baseNode1)
         {
             foreach (XmlNode VARIABLE in baseNode1)
             {
@@ -1304,7 +1304,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void ShowWebCSS(XmlNodeList baseNode1, HashUtilities hashUtil)
+        private void ShowWebCss(XmlNodeList baseNode1, HashUtilities hashUtil)
         {
             foreach (XmlNode VARIABLE in baseNode1)
             {

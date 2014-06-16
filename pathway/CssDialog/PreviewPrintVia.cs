@@ -16,7 +16,6 @@
 
 using System;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -329,12 +328,11 @@ namespace SIL.PublishingSolution
 
         private void ShowImageForPreviewLayout(string imageFileName, string message)
         {
-            string preview;
             string pathwayDirectory = PathwayPath.GetPathwayDir();
             pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
             pathwayDirectory = Common.PathCombine(pathwayDirectory, Param.Value["InputType"]);
             pathwayDirectory = Common.PathCombine(pathwayDirectory, "Preview");
-            preview = Common.PathCombine(pathwayDirectory, imageFileName);
+            string preview = Common.PathCombine(pathwayDirectory, imageFileName);
             if (File.Exists(preview))
             {
                 pictureBox1.Visible = true;

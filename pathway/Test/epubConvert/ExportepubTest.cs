@@ -177,7 +177,7 @@ namespace Test.epubConvert
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
-        public void ExportDictionaryCSSFileComparisonTest()
+        public void ExportDictionaryCssFileComparisonTest()
         {
             // clean out old files
             foreach (var file in Directory.GetFiles(_outputPath))
