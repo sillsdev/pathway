@@ -751,6 +751,7 @@ namespace SIL.Tool
         #endregion
 
         #region XsltProcess(string inputFile, string xsltFile, string ext)
+        public static ProgressBar XsltProgressBar = null;
         public static Formatting XsltFormat = Formatting.None;
         public static bool IncludeUtf8BomIdentifier = true;
 
