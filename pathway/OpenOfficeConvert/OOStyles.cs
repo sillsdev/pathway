@@ -1954,7 +1954,14 @@ namespace SIL.PublishingSolution
 
                 _writer.WriteAttributeString("draw:z-index", "1");
                 _writer.WriteStartElement("draw:text-box");
-                _writer.WriteAttributeString("fo:min-height", "14.14pt"); //added for TD-2579
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    _writer.WriteAttributeString("fo:min-height", "19.00pt"); //added for TD-4006 14.14
+                }
+                else
+                {
+                    _writer.WriteAttributeString("fo:min-height", "14.14pt"); //added for TD-2579
+                }
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "MP1");
 

@@ -163,7 +163,7 @@ namespace SIL.PublishingSolution
         private void AboutPw_Load(object sender, EventArgs e)
         {
             lblProductName.Text = AssemblyProduct;
-            lblVersion.Text = String.Format("Version {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
+            lblVersion.Text = String.Format("Version: {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
 
             HelpImproveGetValue(chkHelpToImprove); 
         }
