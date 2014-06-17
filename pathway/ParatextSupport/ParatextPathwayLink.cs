@@ -166,8 +166,8 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
                 if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
                 {
-                    // TODO: Localize string
-                    MessageBox.Show("The current book has no content to export.", string.Empty, MessageBoxButtons.OK);
+                    const string message = "The current book has no content to export.";
+                    MessageBox.Show(message, string.Empty, MessageBoxButtons.OK);
                     return;
                 }
                 ConvertUsxToPathwayXhtmlFile(scrBooksDoc.InnerXml, fileName);

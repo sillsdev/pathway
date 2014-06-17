@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
-using SIL.PublishingSolution;
 
 namespace SIL.Tool
 {

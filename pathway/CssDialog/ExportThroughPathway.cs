@@ -327,7 +327,9 @@ namespace SIL.PublishingSolution
 
                 if (!Common.isRightFieldworksVersion())
                 {
-                    MessageBox.Show("Please download and install a Pathway version compatible with your software", "Incompatible Pathway Version", MessageBoxButtons.OK,
+                    const string message = "Please download and install a Pathway version compatible with your software";
+                    const string caption = "Incompatible Pathway Version";
+                    MessageBox.Show(message, caption, MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
                     DialogResult = DialogResult.Cancel;
                     Close();
@@ -669,7 +671,9 @@ namespace SIL.PublishingSolution
                 DialogResult dialogResult;
                 if (!Common.Testing)
                 {
-                    dialogResult = MessageBox.Show("Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.", "Pathway", MessageBoxButtons.AbortRetryIgnore,
+                    const string message = "Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.";
+                    const string caption = "Pathway";
+                    dialogResult = MessageBox.Show(message, caption, MessageBoxButtons.AbortRetryIgnore,
                                     MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 }
                 else
@@ -745,7 +749,9 @@ namespace SIL.PublishingSolution
             }
             catch (Exception)
             {
-                MessageBox.Show("Please select a folder for which you have creation permission", "Pathway", MessageBoxButtons.OK,
+                const string message = "Please select a folder for which you have creation permission";
+                const string caption = "Pathway";
+                MessageBox.Show(message, caption, MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
                 return;
             }
@@ -952,7 +958,8 @@ namespace SIL.PublishingSolution
             {
                 // User wants a title page or a cover page with a title, but they haven't told us the title.
                 // Make them enter one now.
-                MessageBox.Show("Please enter a title for this publication.", dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                const string message = "Please enter a title for this publication.";
+                MessageBox.Show(message, dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dlg.IsExpanded = true;
                 dlg.ResizeDialog();
                 dlg.tabControl1.SelectedTab = dlg.tabPage1;
@@ -970,7 +977,8 @@ namespace SIL.PublishingSolution
                 if (!success)
                 {
                     // Dictionary with nothing to export. Make them export something.
-                    MessageBox.Show("Please select at least one item to include in the export.", dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    const string message = "Please select at least one item to include in the export.";
+                    MessageBox.Show(message, dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     dlg.IsExpanded = true;
                     dlg.ResizeDialog();
                     dlg.tabControl1.SelectedTab = dlg.tabPage3;
@@ -1238,8 +1246,8 @@ namespace SIL.PublishingSolution
                     double width = iconImage.Width;
                     if (height > 1000 || width > 1000)
                     {
-                        MessageBox.Show("The selected image is too large. Please select an image that is smaller than 1000 x 1000 pixels.",
-                            this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        const string message = "The selected image is too large. Please select an image that is smaller than 1000 x 1000 pixels.";
+                        MessageBox.Show(message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
                     CoverPageImagePath = filename;

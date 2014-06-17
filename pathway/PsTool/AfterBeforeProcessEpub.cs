@@ -21,7 +21,6 @@ using System.Text;
 using System.Xml;
 using System.Collections;
 using System.IO;
-using SIL.PublishingSolution;
 
 #endregion Using
 

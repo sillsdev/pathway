@@ -1032,7 +1032,8 @@ namespace SIL.PublishingSolution
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + ex.Message + "'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    string message = "Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + ex.Message + "'";
+                    MessageBox.Show(message, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 }
             _screenMode = ScreenMode.Edit;
         }
@@ -2396,7 +2397,8 @@ namespace SIL.PublishingSolution
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
             if (PreviousStyleName.Length > 50)
             {
-                MessageBox.Show("Styles should not be greater than 50 characters.", Caption, MessageBoxButtons.OK,
+                const string message = "Styles should not be greater than 50 characters.";
+                MessageBox.Show(message, Caption, MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
                 return false;
             }
@@ -4398,6 +4400,7 @@ namespace SIL.PublishingSolution
 
         public void tsReset_ClickBL()
         {
+            string message = "Settings files cannot be reset.";
             try
             {
                 const string msg = "Are you sure you want to remove all custom style sheets and restore settings to their initial values? (This can not be undone.)";
@@ -4418,12 +4421,10 @@ namespace SIL.PublishingSolution
                 SelectedRowIndex = 0;
                 inputTypeBL = cTool.InputType;
                 ConfigurationTool_LoadBL();
-                MessageBox.Show("Settings files are reset successfully.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message = "Settings files are reset successfully.";
             }
-            catch
-            {
-                MessageBox.Show("Settings files cannot be reset.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            catch{}
+            MessageBox.Show(message, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void ShowPreview(int page)

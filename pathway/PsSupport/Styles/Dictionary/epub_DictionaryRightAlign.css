@@ -136,12 +136,6 @@ padding-right: 5px;
 .LexEntryType-publishStemComplexFormType-ReverseAbbrPub {
     padding-right: 0.5em;
 }
-.xitem + .xitem,
-.variantref-form-sub,
-.LexSense-publishStemComponentTarget-GlossPub,
-.LexEntry-publishStemComponentTarget-SummaryDefinitionPub {
-    /*padding-left: 0.5em;*/
-}
 .variantref-form-sub,
 .definition_L2,
 .pronunciations,

@@ -170,7 +170,9 @@ namespace SIL.PublishingSolution
 
         protected void DisplayMessageReport()
         {
-            var result = !Common.Testing? MessageBox.Show("Display issues encountered during conversion?", "theWord Conversion Messages",
+            const string message = "Display issues encountered during conversion?";
+            const string caption = "theWord Conversion Messages";
+            var result = !Common.Testing ? MessageBox.Show(message, caption,
                                             MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error,
                                             MessageBoxDefaultButton.Button1) : DialogResult.No;
             switch (result)

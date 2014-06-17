@@ -15,11 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
