@@ -81,87 +81,76 @@ namespace SIL.PublishingSolution
         /// </summary>
         public bool Export(PublicationInformation projInfo)
         {
-
+            string xeLatexFullFile;
+            StreamWriter xeLatexFile;
+            XeLaTexStyles xeLaTexStyles;
             _xhtmlXelatexXslProcess.Load(XmlReader.Create(Common.UsersXsl("AddBidi.xsl")));
             _isUnixOs = Common.IsUnixOS();
             _langFontDictionary = new Dictionary<string, string>();
             _langFontCodeandName = new Dictionary<string, string>();
             string mainXhtmlFileWithPath = projInfo.DefaultXhtmlFileWithPath;
             projInfo.OutputExtension = "pdf";
-            PreExportProcess preProcessor = new PreExportProcess(projInfo);
-            if (_isUnixOs)
-            {
-                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
-            }
-            preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
-            preProcessor.XelatexImagePreprocess();
 
-            if (_inputType.ToLower() == "dictionary" && projInfo.ProjectInputType.ToLower() == "dictionary")
-            {
-                Common.ApplyXslt(projInfo.DefaultXhtmlFileWithPath, _xhtmlXelatexXslProcess);
-            }
-
-            Param.LoadSettings();
-            string organization;
-            try
-            {
-                // get the organization
-                organization = Param.Value["Organization"];
-            }
-            catch (Exception)
-            {
-                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
-                // but just in case, specify a default org.
-                organization = "SIL International";
-            }
-            _coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, organization));
-            _coverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, organization);
-
-
-            _titleInCoverPage = (Param.GetMetadataValue(Param.TitlePage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, organization));
-
-
-            _copyrightInformation = (Param.GetMetadataValue(Param.CopyrightPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, organization));
-            _copyrightInformationPagePath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
-
-            _includeBookTitleintheImage = (Param.GetMetadataValue(Param.CoverPageTitle, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, organization));
-
-            _tableOfContent = (Param.GetMetadataValue(Param.TableOfContents, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TableOfContents, organization));
-
+            var preProcessor = new PreExportProcess(projInfo);
+            ExportPreprocessForXelatex(projInfo, preProcessor);
+            var organization = SettingFrontmatter();
             BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
+            
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
 
-            if (projInfo.DefaultXhtmlFileWithPath.Contains("FlexRev.xhtml"))
-            {
-                projInfo.IsReversalExist = false;
-            }
-
-            projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
-            projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
-            projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
-            preProcessor.InsertPropertyForXelatexCss(projInfo.DefaultCssFileWithPath);
-            projInfo.DefaultCssFileWithPath = preProcessor.RemoveTextIndent(projInfo.DefaultCssFileWithPath);
+            AssignExportFile(projInfo, preProcessor);
             ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
             modifyXeLaTexStyles.LangFontDictionary = _langFontCodeandName;
 
+            Dictionary<string, Dictionary<string, string>> newProperty;
+            var cssClass = WrittingTexFile(projInfo, fileName, out xeLatexFullFile, out xeLatexFile, out xeLaTexStyles, out newProperty);
+            string include = xeLaTexStyles.PageStyle.ToString();
+
+            InitilizeXelatexStyle(modifyXeLaTexStyles);
+
+            if (ExportCopyright(projInfo, mainXhtmlFileWithPath))
+            {
+                _copyrightTexCreated = true;
+                modifyXeLaTexStyles.CopyrightTexCreated = true;
+                modifyXeLaTexStyles.CopyrightTexFilename = Path.GetFileName(_copyrightTexFileName);
+            }
+
+            ExportReversalProcess(projInfo, modifyXeLaTexStyles);
+            ProcessWrittingStyles(projInfo, modifyXeLaTexStyles, newProperty, xeLatexFile, cssClass, xeLatexFullFile, include);
+            Dictionary<string, string> imgPath = new Dictionary<string, string>();
+            if (newProperty.ContainsKey("ImagePath"))
+            {
+                imgPath = newProperty["ImagePath"];
+            }
+            UpdateXeLaTexFontCacheIfNecessary();
+            CallXeLaTex(projInfo, xeLatexFullFile, true, imgPath);
+            ProcessRampFile(projInfo, xeLatexFullFile, organization);
+            return true;
+        }
+
+        private Dictionary<string, Dictionary<string, string>> WrittingTexFile(PublicationInformation projInfo, string fileName, out string xeLatexFullFile,
+                                           out StreamWriter xeLatexFile, out XeLaTexStyles xeLaTexStyles,
+                                           out Dictionary<string, Dictionary<string, string>> newProperty)
+        {
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.XELATEX;
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
             int pageWidth = Common.GetPictureWidth(cssClass, projInfo.ProjectInputType);
 
-            string xeLatexFullFile = Common.PathCombine(projInfo.ProjectPath, fileName + ".tex");
-            StreamWriter xeLatexFile = new StreamWriter(xeLatexFullFile);
+            xeLatexFullFile = Common.PathCombine(projInfo.ProjectPath, fileName + ".tex");
+            xeLatexFile = new StreamWriter(xeLatexFullFile);
 
             Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
-            XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
+            xeLaTexStyles = new XeLaTexStyles();
             xeLaTexStyles.LangFontDictionary = _langFontCodeandName;
             classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
 
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
-            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle,
-                cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
+            newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle,
+                                                       cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText,
+                                                       pageWidth);
 
             if (projInfo.IsReversalExist)
             {
@@ -175,9 +164,34 @@ namespace SIL.PublishingSolution
             {
                 CloseDocument(xeLatexFile, false, string.Empty);
             }
+            return cssClass;
+        }
 
-            string include = xeLaTexStyles.PageStyle.ToString();
+        private void ProcessWrittingStyles(PublicationInformation projInfo, ModifyXeLaTexStyles modifyXeLaTexStyles, Dictionary<string, Dictionary<string, string>> newProperty,
+                              StreamWriter xeLatexFile, Dictionary<string, Dictionary<string, string>> cssClass, string xeLatexFullFile, string include)
+        {
+            modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = false;
+            _xelatexDocumentOpenClosedRequired = false;
+            modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
 
+            if (newProperty.ContainsKey("TableofContent") && newProperty["TableofContent"].Count > 0)
+            {
+                foreach (var tocSection in _tocPropertyList)
+                {
+                    if (tocSection.Key.Contains("PageStock"))
+                    {
+                        newProperty["TableofContent"].Add(tocSection.Key, tocSection.Value);
+                    }
+                }
+            }
+
+            modifyXeLaTexStyles.XeLaTexPropertyFontStyleList = _xeLaTexPropertyFullFontStyleList;
+            modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile,
+                                                include, _langFontCodeandName);
+        }
+
+        private void InitilizeXelatexStyle(ModifyXeLaTexStyles modifyXeLaTexStyles)
+        {
             modifyXeLaTexStyles.ProjectType = _inputType;
             modifyXeLaTexStyles.TocChecked = _tableOfContent.ToString();
 
@@ -187,14 +201,10 @@ namespace SIL.PublishingSolution
             modifyXeLaTexStyles.IncludeBookTitleintheImage = _includeBookTitleintheImage.ToString();
             modifyXeLaTexStyles.CopyrightInformationPagePath = _copyrightInformationPagePath;
             modifyXeLaTexStyles.CoverPageImagePath = _coverPageImagePath;
+        }
 
-            if (ExportCopyright(projInfo, mainXhtmlFileWithPath))
-            {
-                _copyrightTexCreated = true;
-                modifyXeLaTexStyles.CopyrightTexCreated = true;
-                modifyXeLaTexStyles.CopyrightTexFilename = Path.GetFileName(_copyrightTexFileName);
-            }
-
+        private void ExportReversalProcess(PublicationInformation projInfo, ModifyXeLaTexStyles modifyXeLaTexStyles)
+        {
             if (projInfo.IsReversalExist)
             {
                 if (_inputType.ToLower() == "dictionary")
@@ -213,34 +223,76 @@ namespace SIL.PublishingSolution
                     modifyXeLaTexStyles.ReversalIndexTexFilename = Path.GetFileName(xeLatexReversalFile);
                 }
             }
+        }
 
-            modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = false;
-            _xelatexDocumentOpenClosedRequired = false;
-            modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
-
-            if (newProperty.ContainsKey("TableofContent") && newProperty["TableofContent"].Count > 0)
+        private static void AssignExportFile(PublicationInformation projInfo, PreExportProcess preProcessor)
+        {
+            if (projInfo.DefaultXhtmlFileWithPath.Contains("FlexRev.xhtml"))
             {
-                foreach (var tocSection in _tocPropertyList)
-                {
-                    if (tocSection.Key.Contains("PageStock"))
-                    {
-                        newProperty["TableofContent"].Add(tocSection.Key, tocSection.Value);
-                    }
-                }
+                projInfo.IsReversalExist = false;
             }
 
-            modifyXeLaTexStyles.XeLaTexPropertyFontStyleList = _xeLaTexPropertyFullFontStyleList;
-            modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include, _langFontCodeandName);
+            projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
+            projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
+            projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
+            preProcessor.InsertPropertyForXelatexCss(projInfo.DefaultCssFileWithPath);
+            projInfo.DefaultCssFileWithPath = preProcessor.RemoveTextIndent(projInfo.DefaultCssFileWithPath);
+        }
 
-            Dictionary<string, string> imgPath = new Dictionary<string, string>();
-            if (newProperty.ContainsKey("ImagePath"))
+        private string SettingFrontmatter()
+        {
+            Param.LoadSettings();
+            string organization;
+            try
             {
-                imgPath = newProperty["ImagePath"];
+                // get the organization
+                organization = Param.Value["Organization"];
             }
-            UpdateXeLaTexFontCacheIfNecessary();
-            CallXeLaTex(projInfo, xeLatexFullFile, true, imgPath);
-            ProcessRampFile(projInfo, xeLatexFullFile, organization);
-            return true;
+            catch (Exception)
+            {
+                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                // but just in case, specify a default org.
+                organization = "SIL International";
+            }
+            _coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null)
+                              ? false
+                              : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, organization));
+            _coverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, organization);
+
+
+            _titleInCoverPage = (Param.GetMetadataValue(Param.TitlePage, organization) == null)
+                                    ? false
+                                    : Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, organization));
+
+
+            _copyrightInformation = (Param.GetMetadataValue(Param.CopyrightPage, organization) == null)
+                                        ? false
+                                        : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, organization));
+            _copyrightInformationPagePath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
+
+            _includeBookTitleintheImage = (Param.GetMetadataValue(Param.CoverPageTitle, organization) == null)
+                                              ? false
+                                              : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, organization));
+
+            _tableOfContent = (Param.GetMetadataValue(Param.TableOfContents, organization) == null)
+                                  ? false
+                                  : Boolean.Parse(Param.GetMetadataValue(Param.TableOfContents, organization));
+            return organization;
+        }
+
+        private void ExportPreprocessForXelatex(PublicationInformation projInfo, PreExportProcess preProcessor)
+        {
+            if (_isUnixOs)
+            {
+                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
+            }
+            preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
+            preProcessor.XelatexImagePreprocess();
+
+            if (_inputType.ToLower() == "dictionary" && projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                Common.ApplyXslt(projInfo.DefaultXhtmlFileWithPath, _xhtmlXelatexXslProcess);
+            }
         }
 
         private void ProcessRampFile(PublicationInformation projInfo, string xeLatexFullFile, string organization)

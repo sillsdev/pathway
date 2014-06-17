@@ -565,7 +565,7 @@ namespace SIL.PublishingSolution
         {
             SetHomographNumber(false);
 
-            
+
 
             string footerClassName = string.Empty;
             if (_isDropCaps)
@@ -643,7 +643,7 @@ namespace SIL.PublishingSolution
 
                 _xetexFile.Write("}");
 
-                
+
                 if (_incrementDropCap != 0)
                 {
                     _xetexFile.Write("}");
@@ -1059,7 +1059,7 @@ namespace SIL.PublishingSolution
 
                 double x = double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US")) / 3;
                 double y = double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US")) / 3;
-                
+
                 int height = Convert.ToInt32(y); //1 in
                 int width = Convert.ToInt32(x); // 1 in
 
@@ -1411,258 +1411,220 @@ namespace SIL.PublishingSolution
         private void WriteParagraphInline()
         {
             string getStyleName = StackPeek(_allStyle);
-
             string paraStyle = _childName.Replace("_body", "");
             string childClass = Common.LeftString(paraStyle, "_");
-            //string directionStart1 = string.Empty;
-            //string directionEnd1 = string.Empty;
             if (_divType.Contains(_tagType) && _classInlineStyle.ContainsKey(childClass))
             {
                 string endParagraphString = string.Empty;
-
                 string mdFrameStart = string.Empty;
                 string txtAlignStart = string.Empty;
                 string txtAlignEnd = string.Empty;
                 string txtLineSpaceStart = string.Empty;
                 string txtLineSpaceEnd = string.Empty;
                 string columnStart = string.Empty;
-                string paddingLeft = string.Empty;
-                string paddingRight = string.Empty;
-                string paddingTop = string.Empty;
-                string paddingBottom = string.Empty;
                 string displayNoneStart = string.Empty;
                 string displayNoneEnd = string.Empty;
                 string widows = string.Empty;
                 string orphans = string.Empty;
                 string textIndent = string.Empty;
-
                 foreach (string property in _classInlineStyle[childClass])
                 {
                     string propName = Common.LeftString(property, " ");
-                    if (_paragraphPropertyList.Contains(propName))
-                    {
-                        if (propName == "column-count" && property != "column-count 1")
-                        {
-                            if (IdAllClass[childClass].ContainsKey("column-gap") &&
-                                IdAllClass[childClass]["column-gap"] != null)
-                            {
-                                string propertyValue = Common.PercentageToEm(IdAllClass[childClass]["column-gap"]);
-                                columnStart = "\\setlength{\\columnsep}{" + propertyValue + "} \r\n";
-                                columnStart = columnStart + "\\setlength\\columnseprule{" + "0.4pt" + "} \r\n";
-                            }
-                            columnStart = columnStart + "\\begin{multicols}{" + Common.RightString(property, " ") + "}";
-                        }
-                        else if (propName == "margin")
-                        {
-                            mdFrameStart += ", " + Common.RightString(property, " ");
-                        }
-                        else if (propName == "line-height")
-                        {
-                            string prop = Common.RightString(property, " ");
-                            if (prop.Trim() != "0")
-                            {
-                                txtLineSpaceStart = "\\begin{spacing}{" + prop + "}";
-                                txtLineSpaceEnd = "\\end{spacing}";
-                            }
-
-                        }
-                        else if (propName == "text-align")
-                        {
-
-                            if (property.IndexOf("center") > 0)
-                            {
-                                txtAlignStart = "\\begin{" + Common.RightString(property, " ") + "}";
-                                txtAlignEnd = "\\end{" + Common.RightString(property, " ") + "}";
-
-                                if (_isImageAvailable)
-                                {
-                                    _isImageAvailable = false;
-                                    txtAlignEnd = txtAlignEnd + " ";
-                                }
-                            }
-                            else
-                            {
-                                txtAlignStart = "{\\" + Common.RightString(property, " ") + "} ";
-                                txtAlignEnd = " ";
-                            }
-                        }
-                        else if (propName.Contains("text-indent"))
-                        {
-                            if (property.Contains("text-indent"))
-                            {
-                                string hangingLength = property.Replace("text-indent", "");
-                                txtAlignStart = "\r\n\\hangindent=" + hangingLength + "\r\n\\hangafter=1";
-                            }
-                        }
-                        else if (propName == "display-none")
-                        {
-                            displayNoneStart = "\\begin{comment}";
-                            displayNoneEnd = "\\end{comment}\r\n";
-                        }
-                        if (propName == "RTL")
-                        {
-                            _directionStart = "\\RL{";
-                        }
-                        //else if (propName == "RTL")
-                        //{
-                        //    directionStart = "\\begin{RTLitems} \\item";
-                        //    directionEnd = "\\end{RTLitems}";
-                        //}
-                        else if (propName == "padding-left")
-                        {
-                            paddingLeft = Common.RightString(property, " ");
-                        }
-                        else if (propName == "padding-right")
-                        {
-                            paddingRight = Common.RightString(property, " ");
-                        }
-                        else if (propName == "padding-top")
-                        {
-                            paddingTop = Common.RightString(property, " ");
-                        }
-                        else if (propName == "padding-bottom")
-                        {
-                            paddingBottom = Common.RightString(property, " ");
-                        }
-                        else if (propName == "widows")
-                        {
-                            widows = "\\widowpenalty=300";
-                        }
-                        else if (propName == "orphans")
-                        {
-                            orphans = "\\clubpenalty=300";
-                        }
-
-                    }
+                    columnStart = CollectDivClassInlineStyles(propName, property, childClass, columnStart, ref mdFrameStart, ref txtLineSpaceStart, ref txtLineSpaceEnd, ref txtAlignStart, ref txtAlignEnd, ref displayNoneStart, ref displayNoneEnd, ref widows, ref orphans);
                 }
 
-
-                // column -> mdframe -> text-align
-                if (columnStart != string.Empty)
-                {
-                    _xetexFile.Write(columnStart);
-                    endParagraphString = "\\end{multicols}";
-                }
-
-                if ((childClass.ToLower().IndexOf("line") == -1) && (paddingLeft.Length > 0 || paddingRight.Length > 0 || paddingTop.Length > 0 || paddingBottom.Length > 0))
-                {
-                    if (paddingLeft.Length == 0)
-                    {
-                        paddingLeft = "0pt";
-                    }
-                    if (paddingRight.Length == 0)
-                    {
-                        paddingRight = "0pt";
-                    }
-                    if (paddingTop.Length == 0)
-                    {
-                        paddingTop = "0pt";
-                    }
-                    if (paddingBottom.Length == 0)
-                    {
-                        paddingBottom = "0pt";
-                    }
-                }
-
-                if (mdFrameStart != string.Empty)
-                {
-                    string prop = "{\\begin{mdframed}[linecolor=white";
-
-                    _xetexFile.Write(prop);
-                    _xetexFile.Write(mdFrameStart);
-                    _xetexFile.Write("]");
-                    endParagraphString = "\\end{mdframed}}" + endParagraphString;
-                }
-
-
-                if (txtLineSpaceStart != string.Empty)
-                {
-                    _xetexFile.Write(txtLineSpaceStart);
-                    endParagraphString = txtLineSpaceEnd + endParagraphString;
-                }
-
-                if (txtAlignStart != string.Empty)
-                {
-                    _xetexFile.Write(txtAlignStart);
-                    endParagraphString = txtAlignEnd + endParagraphString;
-                }
-                if (displayNoneStart != string.Empty)
-                {
-                    _xetexFile.WriteLine(displayNoneStart);
-                    endParagraphString = displayNoneEnd + " " + endParagraphString;
-                }
-                if (_directionStart != string.Empty)
-                {
-                    _xetexFile.Write(_directionStart);
-                    endParagraphString = "} " + endParagraphString;
-                    _directionStart = string.Empty;
-                }
-                //if (directionStart != string.Empty)
-                //{
-                //    _xetexFile.WriteLine(directionStart);
-                //    endParagraphString = directionEnd + " " + endParagraphString;
-                //}
-                if (endParagraphString != string.Empty)
-                {
-                    BraceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
-                    BraceInlineClass.Push(getStyleName);
-
-                    _endParagraphStringDic[getStyleName] = endParagraphString;
-                }
-                if (widows != string.Empty)
-                {
-                    _xetexFile.WriteLine(widows);
-                }
-                if (orphans != string.Empty)
-                {
-                    _xetexFile.WriteLine(orphans);
-                }
-                if (textIndent != string.Empty)
-                {
-                    _xetexFile.Write(textIndent);
-                }
+                WriteStylePropertyValues(columnStart, endParagraphString, mdFrameStart, txtLineSpaceStart, txtLineSpaceEnd, txtAlignStart, txtAlignEnd, displayNoneStart, displayNoneEnd, getStyleName, childClass, widows, orphans, textIndent);
             }
             else if ((_tagType == "span") && _classInlineStyle.ContainsKey(childClass))
             {
-                string endParagraphString = string.Empty;
-                string displayNoneStart = string.Empty;
-                string displayNoneEnd = string.Empty;
+                CollectSpanClassInlineStyle(childClass, getStyleName);
+            }
+        }
 
-                foreach (string property in _classInlineStyle[childClass])
+        private string CollectDivClassInlineStyles(string propName, string property, string childClass, string columnStart,
+                                                   ref string mdFrameStart, ref string txtLineSpaceStart,
+                                                   ref string txtLineSpaceEnd, ref string txtAlignStart, ref string txtAlignEnd,
+                                                   ref string displayNoneStart, ref string displayNoneEnd, ref string widows,
+                                                   ref string orphans)
+        {
+
+            if (_paragraphPropertyList.Contains(propName))
+            {
+                if (propName == "column-count" && property != "column-count 1")
                 {
-                    string propName = Common.LeftString(property, " ");
-                    if (_paragraphPropertyList.Contains(propName))
+                    if (IdAllClass[childClass].ContainsKey("column-gap") &&
+                        IdAllClass[childClass]["column-gap"] != null)
                     {
-                        if (propName == "display-none")
-                        {
-                            displayNoneStart = "\\begin{comment}";
-                            displayNoneEnd = "\\end{comment}\r\n";
-                        }
-                        else if (propName == "RTL")
-                        {
-                            _directionStart = "\\RL{";
-                        }
+                        string propertyValue = Common.PercentageToEm(IdAllClass[childClass]["column-gap"]);
+                        columnStart = "\\setlength{\\columnsep}{" + propertyValue + "} \r\n";
+                        columnStart = columnStart + "\\setlength\\columnseprule{" + "0.4pt" + "} \r\n";
+                    }
+                    columnStart = columnStart + "\\begin{multicols}{" + Common.RightString(property, " ") + "}";
+                }
+                else if (propName == "margin")
+                {
+                    mdFrameStart += ", " + Common.RightString(property, " ");
+                }
+                else if (propName == "line-height")
+                {
+                    string prop = Common.RightString(property, " ");
+                    if (prop.Trim() != "0")
+                    {
+                        txtLineSpaceStart = "\\begin{spacing}{" + prop + "}";
+                        txtLineSpaceEnd = "\\end{spacing}";
                     }
                 }
+                else if (propName == "text-align")
+                {
+                    if (property.IndexOf("center") > 0)
+                    {
+                        txtAlignStart = "\\begin{" + Common.RightString(property, " ") + "}";
+                        txtAlignEnd = "\\end{" + Common.RightString(property, " ") + "}";
 
-                if (displayNoneStart != string.Empty)
+                        if (_isImageAvailable)
+                        {
+                            _isImageAvailable = false;
+                            txtAlignEnd = txtAlignEnd + " ";
+                        }
+                    }
+                    else
+                    {
+                        txtAlignStart = "{\\" + Common.RightString(property, " ") + "} ";
+                        txtAlignEnd = " ";
+                    }
+                }
+                else if (propName.Contains("text-indent"))
                 {
+                    if (property.Contains("text-indent"))
+                    {
+                        string hangingLength = property.Replace("text-indent", "");
+                        txtAlignStart = "\r\n\\hangindent=" + hangingLength + "\r\n\\hangafter=1";
+                    }
+                }
+                else if (propName == "display-none")
+                {
+                    displayNoneStart = "\\begin{comment}";
+                    displayNoneEnd = "\\end{comment}\r\n";
+                }
+                if (propName == "RTL")
+                {
+                    _directionStart = "\\RL{";
+                }
+                else if (propName == "widows")
+                {
+                    widows = "\\widowpenalty=300";
+                }
+                else if (propName == "orphans")
+                {
+                    orphans = "\\clubpenalty=300";
+                }
+            }
+            return columnStart;
+        }
 
-                    _xetexFile.WriteLine(displayNoneStart);
-                    endParagraphString = displayNoneEnd + " " + endParagraphString;
-                }
-                if (_directionStart != string.Empty)
+        private void WriteStylePropertyValues(string columnStart, string endParagraphString, string mdFrameStart,
+                                              string txtLineSpaceStart, string txtLineSpaceEnd, string txtAlignStart,
+                                              string txtAlignEnd, string displayNoneStart, string displayNoneEnd,
+                                              string getStyleName, string childClass, string widows, string orphans,
+                                              string textIndent)
+        {
+            if (columnStart != string.Empty)
+            {
+                _xetexFile.Write(columnStart);
+                endParagraphString = "\\end{multicols}";
+            }
+
+            if (mdFrameStart != string.Empty)
+            {
+                string prop = "{\\begin{mdframed}[linecolor=white";
+
+                _xetexFile.Write(prop);
+                _xetexFile.Write(mdFrameStart);
+                _xetexFile.Write("]");
+                endParagraphString = "\\end{mdframed}}" + endParagraphString;
+            }
+            if (txtLineSpaceStart != string.Empty)
+            {
+                _xetexFile.Write(txtLineSpaceStart);
+                endParagraphString = txtLineSpaceEnd + endParagraphString;
+            }
+
+            if (txtAlignStart != string.Empty)
+            {
+                _xetexFile.Write(txtAlignStart);
+                endParagraphString = txtAlignEnd + endParagraphString;
+            }
+            if (displayNoneStart != string.Empty)
+            {
+                _xetexFile.WriteLine(displayNoneStart);
+                endParagraphString = displayNoneEnd + " " + endParagraphString;
+            }
+            if (_directionStart != string.Empty)
+            {
+                _xetexFile.Write(_directionStart);
+                endParagraphString = "} " + endParagraphString;
+                _directionStart = string.Empty;
+            }
+            if (endParagraphString != string.Empty)
+            {
+                BraceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
+                BraceInlineClass.Push(getStyleName);
+
+                _endParagraphStringDic[getStyleName] = endParagraphString;
+            }
+            if (widows != string.Empty)
+            {
+                _xetexFile.WriteLine(widows);
+            }
+            if (orphans != string.Empty)
+            {
+                _xetexFile.WriteLine(orphans);
+            }
+            if (textIndent != string.Empty)
+            {
+                _xetexFile.Write(textIndent);
+            }
+        }
+
+        private void CollectSpanClassInlineStyle(string childClass, string getStyleName)
+        {
+            string endParagraphString = string.Empty;
+            string displayNoneStart = string.Empty;
+            string displayNoneEnd = string.Empty;
+
+            foreach (string property in _classInlineStyle[childClass])
+            {
+                string propName = Common.LeftString(property, " ");
+                if (_paragraphPropertyList.Contains(propName))
                 {
-                    _xetexFile.Write(_directionStart);
-                    endParagraphString = "} " + endParagraphString;
-                    _directionStart = string.Empty;
+                    if (propName == "display-none")
+                    {
+                        displayNoneStart = "\\begin{comment}";
+                        displayNoneEnd = "\\end{comment}\r\n";
+                    }
+                    else if (propName == "RTL")
+                    {
+                        _directionStart = "\\RL{";
+                    }
                 }
-                if (endParagraphString != string.Empty)
-                {
-                    BraceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
-                    BraceInlineClass.Push(getStyleName);
-                    _endParagraphStringDic[getStyleName] = endParagraphString;
-                }
+            }
+
+            if (displayNoneStart != string.Empty)
+            {
+                _xetexFile.WriteLine(displayNoneStart);
+                endParagraphString = displayNoneEnd + " " + endParagraphString;
+            }
+            if (_directionStart != string.Empty)
+            {
+                _xetexFile.Write(_directionStart);
+                endParagraphString = "} " + endParagraphString;
+                _directionStart = string.Empty;
+            }
+            if (endParagraphString != string.Empty)
+            {
+                BraceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
+                BraceInlineClass.Push(getStyleName);
+                _endParagraphStringDic[getStyleName] = endParagraphString;
             }
         }
 
@@ -1905,7 +1867,7 @@ namespace SIL.PublishingSolution
             //Direction right to left
             _paragraphPropertyList.Add("direction");
 
-            if(IdAllClass.ContainsKey("@page"))
+            if (IdAllClass.ContainsKey("@page"))
             {
                 if (IdAllClass["@page"].ContainsKey("-ps-hide-versenumber-one"))
                 {
