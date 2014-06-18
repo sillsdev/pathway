@@ -3,12 +3,13 @@
 
 using System;
 using Antlr.Runtime;
-using IList 		= System.Collections.IList;
-using ArrayList 	= System.Collections.ArrayList;
-using Stack 		= Antlr.Runtime.Collections.StackList;
+using IList = System.Collections.IList;
+using ArrayList = System.Collections.ArrayList;
+using Stack = Antlr.Runtime.Collections.StackList;
 
 
-public class csst3Lexer : Lexer {
+public class csst3Lexer : Lexer
+{
     public const int FUNCTION = 17;
     public const int CLASS = 21;
     public const int ATTRIB = 9;
@@ -64,35 +65,37 @@ public class csst3Lexer : Lexer {
     // delegates
     // delegators
 
-    public csst3Lexer() 
+    public csst3Lexer()
     {
-		InitializeCyclicDFAs();
+        InitializeCyclicDFAs();
     }
     public csst3Lexer(ICharStream input)
-		: this(input, null) {
+        : this(input, null)
+    {
     }
     public csst3Lexer(ICharStream input, RecognizerSharedState state)
-		: base(input, state) {
-		InitializeCyclicDFAs(); 
+        : base(input, state)
+    {
+        InitializeCyclicDFAs();
 
     }
-    
+
     override public string GrammarFileName
     {
-    	get { return "C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g";} 
+        get { return "C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g"; }
     }
 
     // $ANTLR start "T__30"
     public void mT__30() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__30;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:7:7: ( '@import' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:7:9: '@import'
             {
-            	Match("@import"); 
+                Match("@import");
 
 
             }
@@ -100,8 +103,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__30"
@@ -109,14 +112,14 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__31"
     public void mT__31() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__31;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:8:7: ( '@include' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:8:9: '@include'
             {
-            	Match("@include"); 
+                Match("@include");
 
 
             }
@@ -124,8 +127,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__31"
@@ -133,22 +136,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__32"
     public void mT__32() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__32;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:9:7: ( ';' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:9:9: ';'
             {
-            	Match(';'); 
+                Match(';');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__32"
@@ -156,14 +159,14 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__33"
     public void mT__33() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__33;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:10:7: ( '@media' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:10:9: '@media'
             {
-            	Match("@media"); 
+                Match("@media");
 
 
             }
@@ -171,8 +174,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__33"
@@ -180,22 +183,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__34"
     public void mT__34() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__34;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:11:7: ( '{' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:11:9: '{'
             {
-            	Match('{'); 
+                Match('{');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__34"
@@ -203,22 +206,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__35"
     public void mT__35() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__35;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:12:7: ( '}' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:12:9: '}'
             {
-            	Match('}'); 
+                Match('}');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__35"
@@ -226,14 +229,14 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__36"
     public void mT__36() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__36;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:13:7: ( '@page' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:13:9: '@page'
             {
-            	Match("@page"); 
+                Match("@page");
 
 
             }
@@ -241,8 +244,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__36"
@@ -250,22 +253,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__37"
     public void mT__37() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__37;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:14:7: ( '@' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:14:9: '@'
             {
-            	Match('@'); 
+                Match('@');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__37"
@@ -273,22 +276,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__38"
     public void mT__38() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__38;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:15:7: ( ',' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:15:9: ','
             {
-            	Match(','); 
+                Match(',');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__38"
@@ -296,22 +299,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__39"
     public void mT__39() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__39;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:16:7: ( '>' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:16:9: '>'
             {
-            	Match('>'); 
+                Match('>');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__39"
@@ -319,22 +322,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__40"
     public void mT__40() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__40;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:17:7: ( '+' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:17:9: '+'
             {
-            	Match('+'); 
+                Match('+');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__40"
@@ -342,22 +345,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__41"
     public void mT__41() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__41;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:18:7: ( '#' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:18:9: '#'
             {
-            	Match('#'); 
+                Match('#');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__41"
@@ -365,22 +368,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__42"
     public void mT__42() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__42;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:19:7: ( '.' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:19:9: '.'
             {
-            	Match('.'); 
+                Match('.');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__42"
@@ -388,22 +391,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__43"
     public void mT__43() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__43;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:20:7: ( '*' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:20:9: '*'
             {
-            	Match('*'); 
+                Match('*');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__43"
@@ -411,22 +414,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__44"
     public void mT__44() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__44;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:21:7: ( ':' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:21:9: ':'
             {
-            	Match(':'); 
+                Match(':');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__44"
@@ -434,14 +437,14 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__45"
     public void mT__45() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__45;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:22:7: ( '::' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:22:9: '::'
             {
-            	Match("::"); 
+                Match("::");
 
 
             }
@@ -449,8 +452,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__45"
@@ -458,22 +461,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__46"
     public void mT__46() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__46;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:23:7: ( '[' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:23:9: '['
             {
-            	Match('['); 
+                Match('[');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__46"
@@ -481,22 +484,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__47"
     public void mT__47() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__47;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:24:7: ( ']' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:24:9: ']'
             {
-            	Match(']'); 
+                Match(']');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__47"
@@ -504,22 +507,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__48"
     public void mT__48() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__48;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:25:7: ( '=' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:25:9: '='
             {
-            	Match('='); 
+                Match('=');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__48"
@@ -527,14 +530,14 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__49"
     public void mT__49() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__49;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:26:7: ( '~=' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:26:9: '~='
             {
-            	Match("~="); 
+                Match("~=");
 
 
             }
@@ -542,8 +545,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__49"
@@ -551,14 +554,14 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__50"
     public void mT__50() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__50;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:27:7: ( '|=' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:27:9: '|='
             {
-            	Match("|="); 
+                Match("|=");
 
 
             }
@@ -566,8 +569,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__50"
@@ -575,22 +578,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__51"
     public void mT__51() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__51;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:28:7: ( '%' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:28:9: '%'
             {
-            	Match('%'); 
+                Match('%');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__51"
@@ -598,22 +601,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__52"
     public void mT__52() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__52;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:29:7: ( '(' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:29:9: '('
             {
-            	Match('('); 
+                Match('(');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__52"
@@ -621,22 +624,22 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "T__53"
     public void mT__53() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = T__53;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:30:7: ( ')' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:30:9: ')'
             {
-            	Match(')'); 
+                Match(')');
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "T__53"
@@ -644,130 +647,130 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "UNIT"
     public void mUNIT() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = UNIT;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:11: ( 'em' | 'px' | 'cm' | 'mm' | 'in' | 'pt' | 'pc' | 'ex' | 'deg' | 'rad' | 'grad' | 'ms' | 's' | 'hz' | 'khz' )
             int alt1 = 15;
             alt1 = dfa1.Predict(input);
-            switch (alt1) 
+            switch (alt1)
             {
-                case 1 :
+                case 1:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:13: 'em'
                     {
-                    	Match("em"); 
+                        Match("em");
 
 
                     }
                     break;
-                case 2 :
+                case 2:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:18: 'px'
                     {
-                    	Match("px"); 
+                        Match("px");
 
 
                     }
                     break;
-                case 3 :
+                case 3:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:23: 'cm'
                     {
-                    	Match("cm"); 
+                        Match("cm");
 
 
                     }
                     break;
-                case 4 :
+                case 4:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:28: 'mm'
                     {
-                    	Match("mm"); 
+                        Match("mm");
 
 
                     }
                     break;
-                case 5 :
+                case 5:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:33: 'in'
                     {
-                    	Match("in"); 
+                        Match("in");
 
 
                     }
                     break;
-                case 6 :
+                case 6:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:38: 'pt'
                     {
-                    	Match("pt"); 
+                        Match("pt");
 
 
                     }
                     break;
-                case 7 :
+                case 7:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:43: 'pc'
                     {
-                    	Match("pc"); 
+                        Match("pc");
 
 
                     }
                     break;
-                case 8 :
+                case 8:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:48: 'ex'
                     {
-                    	Match("ex"); 
+                        Match("ex");
 
 
                     }
                     break;
-                case 9 :
+                case 9:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:53: 'deg'
                     {
-                    	Match("deg"); 
+                        Match("deg");
 
 
                     }
                     break;
-                case 10 :
+                case 10:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:59: 'rad'
                     {
-                    	Match("rad"); 
+                        Match("rad");
 
 
                     }
                     break;
-                case 11 :
+                case 11:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:65: 'grad'
                     {
-                    	Match("grad"); 
+                        Match("grad");
 
 
                     }
                     break;
-                case 12 :
+                case 12:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:72: 'ms'
                     {
-                    	Match("ms"); 
+                        Match("ms");
 
 
                     }
                     break;
-                case 13 :
+                case 13:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:77: 's'
                     {
-                    	Match('s'); 
+                        Match('s');
 
                     }
                     break;
-                case 14 :
+                case 14:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:81: 'hz'
                     {
-                    	Match("hz"); 
+                        Match("hz");
 
 
                     }
                     break;
-                case 15 :
+                case 15:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:138:86: 'khz'
                     {
-                    	Match("khz"); 
+                        Match("khz");
 
 
                     }
@@ -777,8 +780,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "UNIT"
@@ -786,142 +789,146 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "IDENT"
     public void mIDENT() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = IDENT;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:141:2: ( ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )* | '-' ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )* )
             int alt4 = 2;
             int LA4_0 = input.LA(1);
 
-            if ( ((LA4_0 >= 'A' && LA4_0 <= 'Z') || LA4_0 == '_' || (LA4_0 >= 'a' && LA4_0 <= 'z') || (LA4_0 >= '\u0100' && LA4_0 <= '\uFFFE')) )
+            if (((LA4_0 >= 'A' && LA4_0 <= 'Z') || LA4_0 == '_' || (LA4_0 >= 'a' && LA4_0 <= 'z') || (LA4_0 >= '\u0100' && LA4_0 <= '\uFFFE')))
             {
                 alt4 = 1;
             }
-            else if ( (LA4_0 == '-') )
+            else if ((LA4_0 == '-'))
             {
                 alt4 = 2;
             }
-            else 
+            else
             {
                 NoViableAltException nvae_d4s0 =
                     new NoViableAltException("", 4, 0, input);
 
                 throw nvae_d4s0;
             }
-            switch (alt4) 
+            switch (alt4)
             {
-                case 1 :
+                case 1:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:141:4: ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
                     {
-                    	if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') || (input.LA(1) >= '\u0100' && input.LA(1) <= '\uFFFE') ) 
-                    	{
-                    	    input.Consume();
+                        if ((input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') || (input.LA(1) >= '\u0100' && input.LA(1) <= '\uFFFE'))
+                        {
+                            input.Consume();
 
-                    	}
-                    	else 
-                    	{
-                    	    MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	    Recover(mse);
-                    	    throw mse;}
+                        }
+                        else
+                        {
+                            MismatchedSetException mse = new MismatchedSetException(null, input);
+                            Recover(mse);
+                            throw mse;
+                        }
 
-                    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:142:3: ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
-                    	do 
-                    	{
-                    	    int alt2 = 2;
-                    	    int LA2_0 = input.LA(1);
+                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:142:3: ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
+                        do
+                        {
+                            int alt2 = 2;
+                            int LA2_0 = input.LA(1);
 
-                    	    if ( (LA2_0 == '-' || (LA2_0 >= '0' && LA2_0 <= '9') || (LA2_0 >= 'A' && LA2_0 <= 'Z') || LA2_0 == '_' || (LA2_0 >= 'a' && LA2_0 <= 'z') || (LA2_0 >= '\u0100' && LA2_0 <= '\uFFFE')) )
-                    	    {
-                    	        alt2 = 1;
-                    	    }
-
-
-                    	    switch (alt2) 
-                    		{
-                    			case 1 :
-                    			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:
-                    			    {
-                    			    	if ( input.LA(1) == '-' || (input.LA(1) >= '0' && input.LA(1) <= '9') || (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') || (input.LA(1) >= '\u0100' && input.LA(1) <= '\uFFFE') ) 
-                    			    	{
-                    			    	    input.Consume();
-
-                    			    	}
-                    			    	else 
-                    			    	{
-                    			    	    MismatchedSetException mse = new MismatchedSetException(null,input);
-                    			    	    Recover(mse);
-                    			    	    throw mse;}
+                            if ((LA2_0 == '-' || (LA2_0 >= '0' && LA2_0 <= '9') || (LA2_0 >= 'A' && LA2_0 <= 'Z') || LA2_0 == '_' || (LA2_0 >= 'a' && LA2_0 <= 'z') || (LA2_0 >= '\u0100' && LA2_0 <= '\uFFFE')))
+                            {
+                                alt2 = 1;
+                            }
 
 
-                    			    }
-                    			    break;
+                            switch (alt2)
+                            {
+                                case 1:
+                                    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:
+                                    {
+                                        if (input.LA(1) == '-' || (input.LA(1) >= '0' && input.LA(1) <= '9') || (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') || (input.LA(1) >= '\u0100' && input.LA(1) <= '\uFFFE'))
+                                        {
+                                            input.Consume();
 
-                    			default:
-                    			    goto loop2;
-                    	    }
-                    	} while (true);
+                                        }
+                                        else
+                                        {
+                                            MismatchedSetException mse = new MismatchedSetException(null, input);
+                                            Recover(mse);
+                                            throw mse;
+                                        }
 
-                    	loop2:
-                    		;	// Stops C# compiler whining that label 'loop2' has no statements
+
+                                    }
+                                    break;
+
+                                default:
+                                    goto loop2;
+                            }
+                        } while (true);
+
+                    loop2:
+                        ;	// Stops C# compiler whining that label 'loop2' has no statements
 
 
                     }
                     break;
-                case 2 :
+                case 2:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:143:4: '-' ( '_' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' ) ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
                     {
-                    	Match('-'); 
-                    	if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') || (input.LA(1) >= '\u0100' && input.LA(1) <= '\uFFFE') ) 
-                    	{
-                    	    input.Consume();
+                        Match('-');
+                        if ((input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') || (input.LA(1) >= '\u0100' && input.LA(1) <= '\uFFFE'))
+                        {
+                            input.Consume();
 
-                    	}
-                    	else 
-                    	{
-                    	    MismatchedSetException mse = new MismatchedSetException(null,input);
-                    	    Recover(mse);
-                    	    throw mse;}
+                        }
+                        else
+                        {
+                            MismatchedSetException mse = new MismatchedSetException(null, input);
+                            Recover(mse);
+                            throw mse;
+                        }
 
-                    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:144:3: ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
-                    	do 
-                    	{
-                    	    int alt3 = 2;
-                    	    int LA3_0 = input.LA(1);
+                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:144:3: ( '_' | '-' | 'a' .. 'z' | 'A' .. 'Z' | '\\u0100' .. '\\ufffe' | '0' .. '9' )*
+                        do
+                        {
+                            int alt3 = 2;
+                            int LA3_0 = input.LA(1);
 
-                    	    if ( (LA3_0 == '-' || (LA3_0 >= '0' && LA3_0 <= '9') || (LA3_0 >= 'A' && LA3_0 <= 'Z') || LA3_0 == '_' || (LA3_0 >= 'a' && LA3_0 <= 'z') || (LA3_0 >= '\u0100' && LA3_0 <= '\uFFFE')) )
-                    	    {
-                    	        alt3 = 1;
-                    	    }
-
-
-                    	    switch (alt3) 
-                    		{
-                    			case 1 :
-                    			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:
-                    			    {
-                    			    	if ( input.LA(1) == '-' || (input.LA(1) >= '0' && input.LA(1) <= '9') || (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') || (input.LA(1) >= '\u0100' && input.LA(1) <= '\uFFFE') ) 
-                    			    	{
-                    			    	    input.Consume();
-
-                    			    	}
-                    			    	else 
-                    			    	{
-                    			    	    MismatchedSetException mse = new MismatchedSetException(null,input);
-                    			    	    Recover(mse);
-                    			    	    throw mse;}
+                            if ((LA3_0 == '-' || (LA3_0 >= '0' && LA3_0 <= '9') || (LA3_0 >= 'A' && LA3_0 <= 'Z') || LA3_0 == '_' || (LA3_0 >= 'a' && LA3_0 <= 'z') || (LA3_0 >= '\u0100' && LA3_0 <= '\uFFFE')))
+                            {
+                                alt3 = 1;
+                            }
 
 
-                    			    }
-                    			    break;
+                            switch (alt3)
+                            {
+                                case 1:
+                                    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:
+                                    {
+                                        if (input.LA(1) == '-' || (input.LA(1) >= '0' && input.LA(1) <= '9') || (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') || (input.LA(1) >= '\u0100' && input.LA(1) <= '\uFFFE'))
+                                        {
+                                            input.Consume();
 
-                    			default:
-                    			    goto loop3;
-                    	    }
-                    	} while (true);
+                                        }
+                                        else
+                                        {
+                                            MismatchedSetException mse = new MismatchedSetException(null, input);
+                                            Recover(mse);
+                                            throw mse;
+                                        }
 
-                    	loop3:
-                    		;	// Stops C# compiler whining that label 'loop3' has no statements
+
+                                    }
+                                    break;
+
+                                default:
+                                    goto loop3;
+                            }
+                        } while (true);
+
+                    loop3:
+                        ;	// Stops C# compiler whining that label 'loop3' has no statements
 
 
                     }
@@ -931,8 +938,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "IDENT"
@@ -940,180 +947,184 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "STRING"
     public void mSTRING() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = STRING;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:149:2: ( '\"' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\"' | '\\n' | '\\r' | '\\\\' ) )* '\"' | '\\'' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\\'' | '\\n' | '\\r' | '\\\\' ) )* '\\'' )
             int alt7 = 2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0 == '\"') )
+            if ((LA7_0 == '\"'))
             {
                 alt7 = 1;
             }
-            else if ( (LA7_0 == '\'') )
+            else if ((LA7_0 == '\''))
             {
                 alt7 = 2;
             }
-            else 
+            else
             {
                 NoViableAltException nvae_d7s0 =
                     new NoViableAltException("", 7, 0, input);
 
                 throw nvae_d7s0;
             }
-            switch (alt7) 
+            switch (alt7)
             {
-                case 1 :
+                case 1:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:149:4: '\"' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\"' | '\\n' | '\\r' | '\\\\' ) )* '\"'
                     {
-                    	Match('\"'); 
-                    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:149:8: ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\"' | '\\n' | '\\r' | '\\\\' ) )*
-                    	do 
-                    	{
-                    	    int alt5 = 3;
-                    	    int LA5_0 = input.LA(1);
+                        Match('\"');
+                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:149:8: ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\"' | '\\n' | '\\r' | '\\\\' ) )*
+                        do
+                        {
+                            int alt5 = 3;
+                            int LA5_0 = input.LA(1);
 
-                    	    if ( (LA5_0 == '\\') )
-                    	    {
-                    	        alt5 = 1;
-                    	    }
-                    	    else if ( ((LA5_0 >= '\u0000' && LA5_0 <= '\t') || (LA5_0 >= '\u000B' && LA5_0 <= '\f') || (LA5_0 >= '\u000E' && LA5_0 <= '!') || (LA5_0 >= '#' && LA5_0 <= '[') || (LA5_0 >= ']' && LA5_0 <= '\uFFFF')) )
-                    	    {
-                    	        alt5 = 2;
-                    	    }
-
-
-                    	    switch (alt5) 
-                    		{
-                    			case 1 :
-                    			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:149:10: ( '\\\\' ~ ( '\\n' ) )
-                    			    {
-                    			    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:149:10: ( '\\\\' ~ ( '\\n' ) )
-                    			    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:149:11: '\\\\' ~ ( '\\n' )
-                    			    	{
-                    			    		Match('\\'); 
-                    			    		if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\uFFFF') ) 
-                    			    		{
-                    			    		    input.Consume();
-
-                    			    		}
-                    			    		else 
-                    			    		{
-                    			    		    MismatchedSetException mse = new MismatchedSetException(null,input);
-                    			    		    Recover(mse);
-                    			    		    throw mse;}
+                            if ((LA5_0 == '\\'))
+                            {
+                                alt5 = 1;
+                            }
+                            else if (((LA5_0 >= '\u0000' && LA5_0 <= '\t') || (LA5_0 >= '\u000B' && LA5_0 <= '\f') || (LA5_0 >= '\u000E' && LA5_0 <= '!') || (LA5_0 >= '#' && LA5_0 <= '[') || (LA5_0 >= ']' && LA5_0 <= '\uFFFF')))
+                            {
+                                alt5 = 2;
+                            }
 
 
-                    			    	}
+                            switch (alt5)
+                            {
+                                case 1:
+                                    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:149:10: ( '\\\\' ~ ( '\\n' ) )
+                                    {
+                                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:149:10: ( '\\\\' ~ ( '\\n' ) )
+                                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:149:11: '\\\\' ~ ( '\\n' )
+                                        {
+                                            Match('\\');
+                                            if ((input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\uFFFF'))
+                                            {
+                                                input.Consume();
+
+                                            }
+                                            else
+                                            {
+                                                MismatchedSetException mse = new MismatchedSetException(null, input);
+                                                Recover(mse);
+                                                throw mse;
+                                            }
 
 
-                    			    }
-                    			    break;
-                    			case 2 :
-                    			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:150:17: ~ ( '\"' | '\\n' | '\\r' | '\\\\' )
-                    			    {
-                    			    	if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\f') || (input.LA(1) >= '\u000E' && input.LA(1) <= '!') || (input.LA(1) >= '#' && input.LA(1) <= '[') || (input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) 
-                    			    	{
-                    			    	    input.Consume();
-
-                    			    	}
-                    			    	else 
-                    			    	{
-                    			    	    MismatchedSetException mse = new MismatchedSetException(null,input);
-                    			    	    Recover(mse);
-                    			    	    throw mse;}
+                                        }
 
 
-                    			    }
-                    			    break;
+                                    }
+                                    break;
+                                case 2:
+                                    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:150:17: ~ ( '\"' | '\\n' | '\\r' | '\\\\' )
+                                    {
+                                        if ((input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\f') || (input.LA(1) >= '\u000E' && input.LA(1) <= '!') || (input.LA(1) >= '#' && input.LA(1) <= '[') || (input.LA(1) >= ']' && input.LA(1) <= '\uFFFF'))
+                                        {
+                                            input.Consume();
 
-                    			default:
-                    			    goto loop5;
-                    	    }
-                    	} while (true);
+                                        }
+                                        else
+                                        {
+                                            MismatchedSetException mse = new MismatchedSetException(null, input);
+                                            Recover(mse);
+                                            throw mse;
+                                        }
 
-                    	loop5:
-                    		;	// Stops C# compiler whining that label 'loop5' has no statements
 
-                    	Match('\"'); 
+                                    }
+                                    break;
+
+                                default:
+                                    goto loop5;
+                            }
+                        } while (true);
+
+                    loop5:
+                        ;	// Stops C# compiler whining that label 'loop5' has no statements
+
+                        Match('\"');
 
                     }
                     break;
-                case 2 :
+                case 2:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:152:4: '\\'' ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\\'' | '\\n' | '\\r' | '\\\\' ) )* '\\''
                     {
-                    	Match('\''); 
-                    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:152:9: ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\\'' | '\\n' | '\\r' | '\\\\' ) )*
-                    	do 
-                    	{
-                    	    int alt6 = 3;
-                    	    int LA6_0 = input.LA(1);
+                        Match('\'');
+                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:152:9: ( ( '\\\\' ~ ( '\\n' ) ) | ~ ( '\\'' | '\\n' | '\\r' | '\\\\' ) )*
+                        do
+                        {
+                            int alt6 = 3;
+                            int LA6_0 = input.LA(1);
 
-                    	    if ( (LA6_0 == '\\') )
-                    	    {
-                    	        alt6 = 1;
-                    	    }
-                    	    else if ( ((LA6_0 >= '\u0000' && LA6_0 <= '\t') || (LA6_0 >= '\u000B' && LA6_0 <= '\f') || (LA6_0 >= '\u000E' && LA6_0 <= '&') || (LA6_0 >= '(' && LA6_0 <= '[') || (LA6_0 >= ']' && LA6_0 <= '\uFFFF')) )
-                    	    {
-                    	        alt6 = 2;
-                    	    }
-
-
-                    	    switch (alt6) 
-                    		{
-                    			case 1 :
-                    			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:152:11: ( '\\\\' ~ ( '\\n' ) )
-                    			    {
-                    			    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:152:11: ( '\\\\' ~ ( '\\n' ) )
-                    			    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:152:12: '\\\\' ~ ( '\\n' )
-                    			    	{
-                    			    		Match('\\'); 
-                    			    		if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\uFFFF') ) 
-                    			    		{
-                    			    		    input.Consume();
-
-                    			    		}
-                    			    		else 
-                    			    		{
-                    			    		    MismatchedSetException mse = new MismatchedSetException(null,input);
-                    			    		    Recover(mse);
-                    			    		    throw mse;}
+                            if ((LA6_0 == '\\'))
+                            {
+                                alt6 = 1;
+                            }
+                            else if (((LA6_0 >= '\u0000' && LA6_0 <= '\t') || (LA6_0 >= '\u000B' && LA6_0 <= '\f') || (LA6_0 >= '\u000E' && LA6_0 <= '&') || (LA6_0 >= '(' && LA6_0 <= '[') || (LA6_0 >= ']' && LA6_0 <= '\uFFFF')))
+                            {
+                                alt6 = 2;
+                            }
 
 
-                    			    	}
+                            switch (alt6)
+                            {
+                                case 1:
+                                    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:152:11: ( '\\\\' ~ ( '\\n' ) )
+                                    {
+                                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:152:11: ( '\\\\' ~ ( '\\n' ) )
+                                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:152:12: '\\\\' ~ ( '\\n' )
+                                        {
+                                            Match('\\');
+                                            if ((input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\uFFFF'))
+                                            {
+                                                input.Consume();
+
+                                            }
+                                            else
+                                            {
+                                                MismatchedSetException mse = new MismatchedSetException(null, input);
+                                                Recover(mse);
+                                                throw mse;
+                                            }
 
 
-                    			    }
-                    			    break;
-                    			case 2 :
-                    			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:153:17: ~ ( '\\'' | '\\n' | '\\r' | '\\\\' )
-                    			    {
-                    			    	if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\f') || (input.LA(1) >= '\u000E' && input.LA(1) <= '&') || (input.LA(1) >= '(' && input.LA(1) <= '[') || (input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) 
-                    			    	{
-                    			    	    input.Consume();
-
-                    			    	}
-                    			    	else 
-                    			    	{
-                    			    	    MismatchedSetException mse = new MismatchedSetException(null,input);
-                    			    	    Recover(mse);
-                    			    	    throw mse;}
+                                        }
 
 
-                    			    }
-                    			    break;
+                                    }
+                                    break;
+                                case 2:
+                                    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:153:17: ~ ( '\\'' | '\\n' | '\\r' | '\\\\' )
+                                    {
+                                        if ((input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\f') || (input.LA(1) >= '\u000E' && input.LA(1) <= '&') || (input.LA(1) >= '(' && input.LA(1) <= '[') || (input.LA(1) >= ']' && input.LA(1) <= '\uFFFF'))
+                                        {
+                                            input.Consume();
 
-                    			default:
-                    			    goto loop6;
-                    	    }
-                    	} while (true);
+                                        }
+                                        else
+                                        {
+                                            MismatchedSetException mse = new MismatchedSetException(null, input);
+                                            Recover(mse);
+                                            throw mse;
+                                        }
 
-                    	loop6:
-                    		;	// Stops C# compiler whining that label 'loop6' has no statements
 
-                    	Match('\''); 
+                                    }
+                                    break;
+
+                                default:
+                                    goto loop6;
+                            }
+                        } while (true);
+
+                    loop6:
+                        ;	// Stops C# compiler whining that label 'loop6' has no statements
+
+                        Match('\'');
 
                     }
                     break;
@@ -1122,8 +1133,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "STRING"
@@ -1131,200 +1142,200 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "NUM"
     public void mNUM() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = NUM;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:2: ( '-' ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+ | ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+ )
             int alt14 = 2;
             int LA14_0 = input.LA(1);
 
-            if ( (LA14_0 == '-') )
+            if ((LA14_0 == '-'))
             {
                 alt14 = 1;
             }
-            else if ( (LA14_0 == '.' || (LA14_0 >= '0' && LA14_0 <= '9')) )
+            else if ((LA14_0 == '.' || (LA14_0 >= '0' && LA14_0 <= '9')))
             {
                 alt14 = 2;
             }
-            else 
+            else
             {
                 NoViableAltException nvae_d14s0 =
                     new NoViableAltException("", 14, 0, input);
 
                 throw nvae_d14s0;
             }
-            switch (alt14) 
+            switch (alt14)
             {
-                case 1 :
+                case 1:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:4: '-' ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+
                     {
-                    	Match('-'); 
-                    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:8: ( ( '0' .. '9' )* '.' )?
-                    	int alt9 = 2;
-                    	alt9 = dfa9.Predict(input);
-                    	switch (alt9) 
-                    	{
-                    	    case 1 :
-                    	        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:9: ( '0' .. '9' )* '.'
-                    	        {
-                    	        	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:9: ( '0' .. '9' )*
-                    	        	do 
-                    	        	{
-                    	        	    int alt8 = 2;
-                    	        	    int LA8_0 = input.LA(1);
+                        Match('-');
+                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:8: ( ( '0' .. '9' )* '.' )?
+                        int alt9 = 2;
+                        alt9 = dfa9.Predict(input);
+                        switch (alt9)
+                        {
+                            case 1:
+                                // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:9: ( '0' .. '9' )* '.'
+                                {
+                                    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:9: ( '0' .. '9' )*
+                                    do
+                                    {
+                                        int alt8 = 2;
+                                        int LA8_0 = input.LA(1);
 
-                    	        	    if ( ((LA8_0 >= '0' && LA8_0 <= '9')) )
-                    	        	    {
-                    	        	        alt8 = 1;
-                    	        	    }
-
-
-                    	        	    switch (alt8) 
-                    	        		{
-                    	        			case 1 :
-                    	        			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:10: '0' .. '9'
-                    	        			    {
-                    	        			    	MatchRange('0','9'); 
-
-                    	        			    }
-                    	        			    break;
-
-                    	        			default:
-                    	        			    goto loop8;
-                    	        	    }
-                    	        	} while (true);
-
-                    	        	loop8:
-                    	        		;	// Stops C# compiler whining that label 'loop8' has no statements
-
-                    	        	Match('.'); 
-
-                    	        }
-                    	        break;
-
-                    	}
-
-                    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:27: ( '0' .. '9' )+
-                    	int cnt10 = 0;
-                    	do 
-                    	{
-                    	    int alt10 = 2;
-                    	    int LA10_0 = input.LA(1);
-
-                    	    if ( ((LA10_0 >= '0' && LA10_0 <= '9')) )
-                    	    {
-                    	        alt10 = 1;
-                    	    }
+                                        if (((LA8_0 >= '0' && LA8_0 <= '9')))
+                                        {
+                                            alt8 = 1;
+                                        }
 
 
-                    	    switch (alt10) 
-                    		{
-                    			case 1 :
-                    			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:28: '0' .. '9'
-                    			    {
-                    			    	MatchRange('0','9'); 
+                                        switch (alt8)
+                                        {
+                                            case 1:
+                                                // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:10: '0' .. '9'
+                                                {
+                                                    MatchRange('0', '9');
 
-                    			    }
-                    			    break;
+                                                }
+                                                break;
 
-                    			default:
-                    			    if ( cnt10 >= 1 ) goto loop10;
-                    		            EarlyExitException eee10 =
-                    		                new EarlyExitException(10, input);
-                    		            throw eee10;
-                    	    }
-                    	    cnt10++;
-                    	} while (true);
+                                            default:
+                                                goto loop8;
+                                        }
+                                    } while (true);
 
-                    	loop10:
-                    		;	// Stops C# compiler whinging that label 'loop10' has no statements
+                                loop8:
+                                    ;	// Stops C# compiler whining that label 'loop8' has no statements
+
+                                    Match('.');
+
+                                }
+                                break;
+
+                        }
+
+                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:27: ( '0' .. '9' )+
+                        int cnt10 = 0;
+                        do
+                        {
+                            int alt10 = 2;
+                            int LA10_0 = input.LA(1);
+
+                            if (((LA10_0 >= '0' && LA10_0 <= '9')))
+                            {
+                                alt10 = 1;
+                            }
+
+
+                            switch (alt10)
+                            {
+                                case 1:
+                                    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:158:28: '0' .. '9'
+                                    {
+                                        MatchRange('0', '9');
+
+                                    }
+                                    break;
+
+                                default:
+                                    if (cnt10 >= 1) goto loop10;
+                                    EarlyExitException eee10 =
+                                        new EarlyExitException(10, input);
+                                    throw eee10;
+                            }
+                            cnt10++;
+                        } while (true);
+
+                    loop10:
+                        ;	// Stops C# compiler whinging that label 'loop10' has no statements
 
 
                     }
                     break;
-                case 2 :
+                case 2:
                     // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:4: ( ( '0' .. '9' )* '.' )? ( '0' .. '9' )+
                     {
-                    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:4: ( ( '0' .. '9' )* '.' )?
-                    	int alt12 = 2;
-                    	alt12 = dfa12.Predict(input);
-                    	switch (alt12) 
-                    	{
-                    	    case 1 :
-                    	        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:5: ( '0' .. '9' )* '.'
-                    	        {
-                    	        	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:5: ( '0' .. '9' )*
-                    	        	do 
-                    	        	{
-                    	        	    int alt11 = 2;
-                    	        	    int LA11_0 = input.LA(1);
+                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:4: ( ( '0' .. '9' )* '.' )?
+                        int alt12 = 2;
+                        alt12 = dfa12.Predict(input);
+                        switch (alt12)
+                        {
+                            case 1:
+                                // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:5: ( '0' .. '9' )* '.'
+                                {
+                                    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:5: ( '0' .. '9' )*
+                                    do
+                                    {
+                                        int alt11 = 2;
+                                        int LA11_0 = input.LA(1);
 
-                    	        	    if ( ((LA11_0 >= '0' && LA11_0 <= '9')) )
-                    	        	    {
-                    	        	        alt11 = 1;
-                    	        	    }
-
-
-                    	        	    switch (alt11) 
-                    	        		{
-                    	        			case 1 :
-                    	        			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:6: '0' .. '9'
-                    	        			    {
-                    	        			    	MatchRange('0','9'); 
-
-                    	        			    }
-                    	        			    break;
-
-                    	        			default:
-                    	        			    goto loop11;
-                    	        	    }
-                    	        	} while (true);
-
-                    	        	loop11:
-                    	        		;	// Stops C# compiler whining that label 'loop11' has no statements
-
-                    	        	Match('.'); 
-
-                    	        }
-                    	        break;
-
-                    	}
-
-                    	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:23: ( '0' .. '9' )+
-                    	int cnt13 = 0;
-                    	do 
-                    	{
-                    	    int alt13 = 2;
-                    	    int LA13_0 = input.LA(1);
-
-                    	    if ( ((LA13_0 >= '0' && LA13_0 <= '9')) )
-                    	    {
-                    	        alt13 = 1;
-                    	    }
+                                        if (((LA11_0 >= '0' && LA11_0 <= '9')))
+                                        {
+                                            alt11 = 1;
+                                        }
 
 
-                    	    switch (alt13) 
-                    		{
-                    			case 1 :
-                    			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:24: '0' .. '9'
-                    			    {
-                    			    	MatchRange('0','9'); 
+                                        switch (alt11)
+                                        {
+                                            case 1:
+                                                // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:6: '0' .. '9'
+                                                {
+                                                    MatchRange('0', '9');
 
-                    			    }
-                    			    break;
+                                                }
+                                                break;
 
-                    			default:
-                    			    if ( cnt13 >= 1 ) goto loop13;
-                    		            EarlyExitException eee13 =
-                    		                new EarlyExitException(13, input);
-                    		            throw eee13;
-                    	    }
-                    	    cnt13++;
-                    	} while (true);
+                                            default:
+                                                goto loop11;
+                                        }
+                                    } while (true);
 
-                    	loop13:
-                    		;	// Stops C# compiler whinging that label 'loop13' has no statements
+                                loop11:
+                                    ;	// Stops C# compiler whining that label 'loop11' has no statements
+
+                                    Match('.');
+
+                                }
+                                break;
+
+                        }
+
+                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:23: ( '0' .. '9' )+
+                        int cnt13 = 0;
+                        do
+                        {
+                            int alt13 = 2;
+                            int LA13_0 = input.LA(1);
+
+                            if (((LA13_0 >= '0' && LA13_0 <= '9')))
+                            {
+                                alt13 = 1;
+                            }
+
+
+                            switch (alt13)
+                            {
+                                case 1:
+                                    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:159:24: '0' .. '9'
+                                    {
+                                        MatchRange('0', '9');
+
+                                    }
+                                    break;
+
+                                default:
+                                    if (cnt13 >= 1) goto loop13;
+                                    EarlyExitException eee13 =
+                                        new EarlyExitException(13, input);
+                                    throw eee13;
+                            }
+                            cnt13++;
+                        } while (true);
+
+                    loop13:
+                        ;	// Stops C# compiler whinging that label 'loop13' has no statements
 
 
                     }
@@ -1334,8 +1345,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "NUM"
@@ -1343,58 +1354,59 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "COLOR"
     public void mCOLOR() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = COLOR;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:163:2: ( '#' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:163:4: '#' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
-            	Match('#'); 
-            	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:163:8: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
-            	int cnt15 = 0;
-            	do 
-            	{
-            	    int alt15 = 2;
-            	    int LA15_0 = input.LA(1);
+                Match('#');
+                // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:163:8: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+                int cnt15 = 0;
+                do
+                {
+                    int alt15 = 2;
+                    int LA15_0 = input.LA(1);
 
-            	    if ( ((LA15_0 >= '0' && LA15_0 <= '9') || (LA15_0 >= 'A' && LA15_0 <= 'F') || (LA15_0 >= 'a' && LA15_0 <= 'f')) )
-            	    {
-            	        alt15 = 1;
-            	    }
-
-
-            	    switch (alt15) 
-            		{
-            			case 1 :
-            			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:
-            			    {
-            			    	if ( (input.LA(1) >= '0' && input.LA(1) <= '9') || (input.LA(1) >= 'A' && input.LA(1) <= 'F') || (input.LA(1) >= 'a' && input.LA(1) <= 'f') ) 
-            			    	{
-            			    	    input.Consume();
-
-            			    	}
-            			    	else 
-            			    	{
-            			    	    MismatchedSetException mse = new MismatchedSetException(null,input);
-            			    	    Recover(mse);
-            			    	    throw mse;}
+                    if (((LA15_0 >= '0' && LA15_0 <= '9') || (LA15_0 >= 'A' && LA15_0 <= 'F') || (LA15_0 >= 'a' && LA15_0 <= 'f')))
+                    {
+                        alt15 = 1;
+                    }
 
 
-            			    }
-            			    break;
+                    switch (alt15)
+                    {
+                        case 1:
+                            // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:
+                            {
+                                if ((input.LA(1) >= '0' && input.LA(1) <= '9') || (input.LA(1) >= 'A' && input.LA(1) <= 'F') || (input.LA(1) >= 'a' && input.LA(1) <= 'f'))
+                                {
+                                    input.Consume();
 
-            			default:
-            			    if ( cnt15 >= 1 ) goto loop15;
-            		            EarlyExitException eee15 =
-            		                new EarlyExitException(15, input);
-            		            throw eee15;
-            	    }
-            	    cnt15++;
-            	} while (true);
+                                }
+                                else
+                                {
+                                    MismatchedSetException mse = new MismatchedSetException(null, input);
+                                    Recover(mse);
+                                    throw mse;
+                                }
 
-            	loop15:
-            		;	// Stops C# compiler whinging that label 'loop15' has no statements
+
+                            }
+                            break;
+
+                        default:
+                            if (cnt15 >= 1) goto loop15;
+                            EarlyExitException eee15 =
+                                new EarlyExitException(15, input);
+                            throw eee15;
+                    }
+                    cnt15++;
+                } while (true);
+
+            loop15:
+                ;	// Stops C# compiler whinging that label 'loop15' has no statements
 
 
             }
@@ -1402,8 +1414,8 @@ public class csst3Lexer : Lexer {
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "COLOR"
@@ -1411,122 +1423,123 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "SL_COMMENT"
     public void mSL_COMMENT() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = SL_COMMENT;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:168:2: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? ) )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:168:4: '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )
             {
-            	Match("//"); 
+                Match("//");
 
-            	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:3: (~ ( '\\n' | '\\r' ) )*
-            	do 
-            	{
-            	    int alt16 = 2;
-            	    int LA16_0 = input.LA(1);
+                // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:3: (~ ( '\\n' | '\\r' ) )*
+                do
+                {
+                    int alt16 = 2;
+                    int LA16_0 = input.LA(1);
 
-            	    if ( ((LA16_0 >= '\u0000' && LA16_0 <= '\t') || (LA16_0 >= '\u000B' && LA16_0 <= '\f') || (LA16_0 >= '\u000E' && LA16_0 <= '\uFFFF')) )
-            	    {
-            	        alt16 = 1;
-            	    }
-
-
-            	    switch (alt16) 
-            		{
-            			case 1 :
-            			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:4: ~ ( '\\n' | '\\r' )
-            			    {
-            			    	if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\f') || (input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFF') ) 
-            			    	{
-            			    	    input.Consume();
-
-            			    	}
-            			    	else 
-            			    	{
-            			    	    MismatchedSetException mse = new MismatchedSetException(null,input);
-            			    	    Recover(mse);
-            			    	    throw mse;}
+                    if (((LA16_0 >= '\u0000' && LA16_0 <= '\t') || (LA16_0 >= '\u000B' && LA16_0 <= '\f') || (LA16_0 >= '\u000E' && LA16_0 <= '\uFFFF')))
+                    {
+                        alt16 = 1;
+                    }
 
 
-            			    }
-            			    break;
+                    switch (alt16)
+                    {
+                        case 1:
+                            // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:4: ~ ( '\\n' | '\\r' )
+                            {
+                                if ((input.LA(1) >= '\u0000' && input.LA(1) <= '\t') || (input.LA(1) >= '\u000B' && input.LA(1) <= '\f') || (input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFF'))
+                                {
+                                    input.Consume();
 
-            			default:
-            			    goto loop16;
-            	    }
-            	} while (true);
-
-            	loop16:
-            		;	// Stops C# compiler whining that label 'loop16' has no statements
-
-            	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:19: ( '\\n' | '\\r' ( '\\n' )? )
-            	int alt18 = 2;
-            	int LA18_0 = input.LA(1);
-
-            	if ( (LA18_0 == '\n') )
-            	{
-            	    alt18 = 1;
-            	}
-            	else if ( (LA18_0 == '\r') )
-            	{
-            	    alt18 = 2;
-            	}
-            	else 
-            	{
-            	    NoViableAltException nvae_d18s0 =
-            	        new NoViableAltException("", 18, 0, input);
-
-            	    throw nvae_d18s0;
-            	}
-            	switch (alt18) 
-            	{
-            	    case 1 :
-            	        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:20: '\\n'
-            	        {
-            	        	Match('\n'); 
-
-            	        }
-            	        break;
-            	    case 2 :
-            	        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:25: '\\r' ( '\\n' )?
-            	        {
-            	        	Match('\r'); 
-            	        	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:29: ( '\\n' )?
-            	        	int alt17 = 2;
-            	        	int LA17_0 = input.LA(1);
-
-            	        	if ( (LA17_0 == '\n') )
-            	        	{
-            	        	    alt17 = 1;
-            	        	}
-            	        	switch (alt17) 
-            	        	{
-            	        	    case 1 :
-            	        	        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:30: '\\n'
-            	        	        {
-            	        	        	Match('\n'); 
-
-            	        	        }
-            	        	        break;
-
-            	        	}
+                                }
+                                else
+                                {
+                                    MismatchedSetException mse = new MismatchedSetException(null, input);
+                                    Recover(mse);
+                                    throw mse;
+                                }
 
 
-            	        }
-            	        break;
+                            }
+                            break;
 
-            	}
+                        default:
+                            goto loop16;
+                    }
+                } while (true);
 
-            	_channel=HIDDEN;
+            loop16:
+                ;	// Stops C# compiler whining that label 'loop16' has no statements
+
+                // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:19: ( '\\n' | '\\r' ( '\\n' )? )
+                int alt18 = 2;
+                int LA18_0 = input.LA(1);
+
+                if ((LA18_0 == '\n'))
+                {
+                    alt18 = 1;
+                }
+                else if ((LA18_0 == '\r'))
+                {
+                    alt18 = 2;
+                }
+                else
+                {
+                    NoViableAltException nvae_d18s0 =
+                        new NoViableAltException("", 18, 0, input);
+
+                    throw nvae_d18s0;
+                }
+                switch (alt18)
+                {
+                    case 1:
+                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:20: '\\n'
+                        {
+                            Match('\n');
+
+                        }
+                        break;
+                    case 2:
+                        // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:25: '\\r' ( '\\n' )?
+                        {
+                            Match('\r');
+                            // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:29: ( '\\n' )?
+                            int alt17 = 2;
+                            int LA17_0 = input.LA(1);
+
+                            if ((LA17_0 == '\n'))
+                            {
+                                alt17 = 1;
+                            }
+                            switch (alt17)
+                            {
+                                case 1:
+                                    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:169:30: '\\n'
+                                    {
+                                        Match('\n');
+
+                                    }
+                                    break;
+
+                            }
+
+
+                        }
+                        break;
+
+                }
+
+                _channel = HIDDEN;
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "SL_COMMENT"
@@ -1534,71 +1547,71 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "COMMENT"
     public void mCOMMENT() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = COMMENT;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:175:2: ( '/*' ( . )* '*/' )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:175:4: '/*' ( . )* '*/'
             {
-            	Match("/*"); 
+                Match("/*");
 
-            	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:175:9: ( . )*
-            	do 
-            	{
-            	    int alt19 = 2;
-            	    int LA19_0 = input.LA(1);
+                // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:175:9: ( . )*
+                do
+                {
+                    int alt19 = 2;
+                    int LA19_0 = input.LA(1);
 
-            	    if ( (LA19_0 == '*') )
-            	    {
-            	        int LA19_1 = input.LA(2);
+                    if ((LA19_0 == '*'))
+                    {
+                        int LA19_1 = input.LA(2);
 
-            	        if ( (LA19_1 == '/') )
-            	        {
-            	            alt19 = 2;
-            	        }
-            	        else if ( ((LA19_1 >= '\u0000' && LA19_1 <= '.') || (LA19_1 >= '0' && LA19_1 <= '\uFFFF')) )
-            	        {
-            	            alt19 = 1;
-            	        }
-
-
-            	    }
-            	    else if ( ((LA19_0 >= '\u0000' && LA19_0 <= ')') || (LA19_0 >= '+' && LA19_0 <= '\uFFFF')) )
-            	    {
-            	        alt19 = 1;
-            	    }
+                        if ((LA19_1 == '/'))
+                        {
+                            alt19 = 2;
+                        }
+                        else if (((LA19_1 >= '\u0000' && LA19_1 <= '.') || (LA19_1 >= '0' && LA19_1 <= '\uFFFF')))
+                        {
+                            alt19 = 1;
+                        }
 
 
-            	    switch (alt19) 
-            		{
-            			case 1 :
-            			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:175:9: .
-            			    {
-            			    	MatchAny(); 
+                    }
+                    else if (((LA19_0 >= '\u0000' && LA19_0 <= ')') || (LA19_0 >= '+' && LA19_0 <= '\uFFFF')))
+                    {
+                        alt19 = 1;
+                    }
 
-            			    }
-            			    break;
 
-            			default:
-            			    goto loop19;
-            	    }
-            	} while (true);
+                    switch (alt19)
+                    {
+                        case 1:
+                            // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:175:9: .
+                            {
+                                MatchAny();
 
-            	loop19:
-            		;	// Stops C# compiler whining that label 'loop19' has no statements
+                            }
+                            break;
 
-            	Match("*/"); 
+                        default:
+                            goto loop19;
+                    }
+                } while (true);
 
-            	 _channel = HIDDEN; 
+            loop19:
+                ;	// Stops C# compiler whining that label 'loop19' has no statements
+
+                Match("*/");
+
+                _channel = HIDDEN;
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "COMMENT"
@@ -1606,67 +1619,68 @@ public class csst3Lexer : Lexer {
     // $ANTLR start "WS"
     public void mWS() // throws RecognitionException [2]
     {
-    		try
-    		{
+        try
+        {
             int _type = WS;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:179:4: ( ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+ )
             // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:179:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
             {
-            	// C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:179:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
-            	int cnt20 = 0;
-            	do 
-            	{
-            	    int alt20 = 2;
-            	    int LA20_0 = input.LA(1);
+                // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:179:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
+                int cnt20 = 0;
+                do
+                {
+                    int alt20 = 2;
+                    int LA20_0 = input.LA(1);
 
-            	    if ( ((LA20_0 >= '\t' && LA20_0 <= '\n') || (LA20_0 >= '\f' && LA20_0 <= '\r') || LA20_0 == ' ') )
-            	    {
-            	        alt20 = 1;
-            	    }
-
-
-            	    switch (alt20) 
-            		{
-            			case 1 :
-            			    // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:
-            			    {
-            			    	if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n') || (input.LA(1) >= '\f' && input.LA(1) <= '\r') || input.LA(1) == ' ' ) 
-            			    	{
-            			    	    input.Consume();
-
-            			    	}
-            			    	else 
-            			    	{
-            			    	    MismatchedSetException mse = new MismatchedSetException(null,input);
-            			    	    Recover(mse);
-            			    	    throw mse;}
+                    if (((LA20_0 >= '\t' && LA20_0 <= '\n') || (LA20_0 >= '\f' && LA20_0 <= '\r') || LA20_0 == ' '))
+                    {
+                        alt20 = 1;
+                    }
 
 
-            			    }
-            			    break;
+                    switch (alt20)
+                    {
+                        case 1:
+                            // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:
+                            {
+                                if ((input.LA(1) >= '\t' && input.LA(1) <= '\n') || (input.LA(1) >= '\f' && input.LA(1) <= '\r') || input.LA(1) == ' ')
+                                {
+                                    input.Consume();
 
-            			default:
-            			    if ( cnt20 >= 1 ) goto loop20;
-            		            EarlyExitException eee20 =
-            		                new EarlyExitException(20, input);
-            		            throw eee20;
-            	    }
-            	    cnt20++;
-            	} while (true);
+                                }
+                                else
+                                {
+                                    MismatchedSetException mse = new MismatchedSetException(null, input);
+                                    Recover(mse);
+                                    throw mse;
+                                }
 
-            	loop20:
-            		;	// Stops C# compiler whinging that label 'loop20' has no statements
 
-            	 _channel = HIDDEN; 
+                            }
+                            break;
+
+                        default:
+                            if (cnt20 >= 1) goto loop20;
+                            EarlyExitException eee20 =
+                                new EarlyExitException(20, input);
+                            throw eee20;
+                    }
+                    cnt20++;
+                } while (true);
+
+            loop20:
+                ;	// Stops C# compiler whinging that label 'loop20' has no statements
+
+                _channel = HIDDEN;
 
             }
 
             state.type = _type;
             state.channel = _channel;
         }
-        finally 
-    	{
+        finally
+        {
         }
     }
     // $ANTLR end "WS"
@@ -1676,229 +1690,229 @@ public class csst3Lexer : Lexer {
         // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:8: ( T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | UNIT | IDENT | STRING | NUM | COLOR | SL_COMMENT | COMMENT | WS )
         int alt21 = 32;
         alt21 = dfa21.Predict(input);
-        switch (alt21) 
+        switch (alt21)
         {
-            case 1 :
+            case 1:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:10: T__30
                 {
-                	mT__30(); 
+                    mT__30();
 
                 }
                 break;
-            case 2 :
+            case 2:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:16: T__31
                 {
-                	mT__31(); 
+                    mT__31();
 
                 }
                 break;
-            case 3 :
+            case 3:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:22: T__32
                 {
-                	mT__32(); 
+                    mT__32();
 
                 }
                 break;
-            case 4 :
+            case 4:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:28: T__33
                 {
-                	mT__33(); 
+                    mT__33();
 
                 }
                 break;
-            case 5 :
+            case 5:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:34: T__34
                 {
-                	mT__34(); 
+                    mT__34();
 
                 }
                 break;
-            case 6 :
+            case 6:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:40: T__35
                 {
-                	mT__35(); 
+                    mT__35();
 
                 }
                 break;
-            case 7 :
+            case 7:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:46: T__36
                 {
-                	mT__36(); 
+                    mT__36();
 
                 }
                 break;
-            case 8 :
+            case 8:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:52: T__37
                 {
-                	mT__37(); 
+                    mT__37();
 
                 }
                 break;
-            case 9 :
+            case 9:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:58: T__38
                 {
-                	mT__38(); 
+                    mT__38();
 
                 }
                 break;
-            case 10 :
+            case 10:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:64: T__39
                 {
-                	mT__39(); 
+                    mT__39();
 
                 }
                 break;
-            case 11 :
+            case 11:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:70: T__40
                 {
-                	mT__40(); 
+                    mT__40();
 
                 }
                 break;
-            case 12 :
+            case 12:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:76: T__41
                 {
-                	mT__41(); 
+                    mT__41();
 
                 }
                 break;
-            case 13 :
+            case 13:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:82: T__42
                 {
-                	mT__42(); 
+                    mT__42();
 
                 }
                 break;
-            case 14 :
+            case 14:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:88: T__43
                 {
-                	mT__43(); 
+                    mT__43();
 
                 }
                 break;
-            case 15 :
+            case 15:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:94: T__44
                 {
-                	mT__44(); 
+                    mT__44();
 
                 }
                 break;
-            case 16 :
+            case 16:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:100: T__45
                 {
-                	mT__45(); 
+                    mT__45();
 
                 }
                 break;
-            case 17 :
+            case 17:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:106: T__46
                 {
-                	mT__46(); 
+                    mT__46();
 
                 }
                 break;
-            case 18 :
+            case 18:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:112: T__47
                 {
-                	mT__47(); 
+                    mT__47();
 
                 }
                 break;
-            case 19 :
+            case 19:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:118: T__48
                 {
-                	mT__48(); 
+                    mT__48();
 
                 }
                 break;
-            case 20 :
+            case 20:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:124: T__49
                 {
-                	mT__49(); 
+                    mT__49();
 
                 }
                 break;
-            case 21 :
+            case 21:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:130: T__50
                 {
-                	mT__50(); 
+                    mT__50();
 
                 }
                 break;
-            case 22 :
+            case 22:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:136: T__51
                 {
-                	mT__51(); 
+                    mT__51();
 
                 }
                 break;
-            case 23 :
+            case 23:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:142: T__52
                 {
-                	mT__52(); 
+                    mT__52();
 
                 }
                 break;
-            case 24 :
+            case 24:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:148: T__53
                 {
-                	mT__53(); 
+                    mT__53();
 
                 }
                 break;
-            case 25 :
+            case 25:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:154: UNIT
                 {
-                	mUNIT(); 
+                    mUNIT();
 
                 }
                 break;
-            case 26 :
+            case 26:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:159: IDENT
                 {
-                	mIDENT(); 
+                    mIDENT();
 
                 }
                 break;
-            case 27 :
+            case 27:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:165: STRING
                 {
-                	mSTRING(); 
+                    mSTRING();
 
                 }
                 break;
-            case 28 :
+            case 28:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:172: NUM
                 {
-                	mNUM(); 
+                    mNUM();
 
                 }
                 break;
-            case 29 :
+            case 29:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:176: COLOR
                 {
-                	mCOLOR(); 
+                    mCOLOR();
 
                 }
                 break;
-            case 30 :
+            case 30:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:182: SL_COMMENT
                 {
-                	mSL_COMMENT(); 
+                    mSL_COMMENT();
 
                 }
                 break;
-            case 31 :
+            case 31:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:193: COMMENT
                 {
-                	mCOMMENT(); 
+                    mCOMMENT();
 
                 }
                 break;
-            case 32 :
+            case 32:
                 // C:\\Users\\Trihus\\git\\pathway\\pathway\\CssParser\\csst3.g:1:201: WS
                 {
-                	mWS(); 
+                    mWS();
 
                 }
                 break;
@@ -1912,17 +1926,17 @@ public class csst3Lexer : Lexer {
     protected DFA9 dfa9;
     protected DFA12 dfa12;
     protected DFA21 dfa21;
-	private void InitializeCyclicDFAs()
-	{
-	    this.dfa1 = new DFA1(this);
-	    this.dfa9 = new DFA9(this);
-	    this.dfa12 = new DFA12(this);
-	    this.dfa21 = new DFA21(this);
+    private void InitializeCyclicDFAs()
+    {
+        this.dfa1 = new DFA1(this);
+        this.dfa9 = new DFA9(this);
+        this.dfa12 = new DFA12(this);
+        this.dfa21 = new DFA21(this);
 
 
 
 
-	}
+    }
 
     const string DFA1_eotS =
         "\x13\uffff";
@@ -1933,8 +1947,8 @@ public class csst3Lexer : Lexer {
     const string DFA1_maxS =
         "\x01\x73\x02\x78\x01\uffff\x01\x73\x0e\uffff";
     const string DFA1_acceptS =
-        "\x03\uffff\x01\x03\x01\uffff\x01\x05\x01\x09\x01\x0a\x01\x0b\x01"+
-        "\x0d\x01\x0e\x01\x0f\x01\x01\x01\x08\x01\x02\x01\x06\x01\x07\x01"+
+        "\x03\uffff\x01\x03\x01\uffff\x01\x05\x01\x09\x01\x0a\x01\x0b\x01" +
+        "\x0d\x01\x0e\x01\x0f\x01\x01\x01\x08\x01\x02\x01\x06\x01\x07\x01" +
         "\x04\x01\x0c";
     const string DFA1_specialS =
         "\x13\uffff}>";
@@ -2094,29 +2108,29 @@ public class csst3Lexer : Lexer {
     }
 
     const string DFA21_eotS =
-        "\x01\uffff\x01\x28\x06\uffff\x01\x2a\x01\x2b\x01\uffff\x01\x2d"+
-        "\x08\uffff\x08\x1f\x01\x3a\x02\x1f\x0f\uffff\x09\x3a\x03\x1f\x01"+
+        "\x01\uffff\x01\x28\x06\uffff\x01\x2a\x01\x2b\x01\uffff\x01\x2d" +
+        "\x08\uffff\x08\x1f\x01\x3a\x02\x1f\x0f\uffff\x09\x3a\x03\x1f\x01" +
         "\uffff\x01\x3a\x01\x1f\x04\uffff\x02\x3a\x01\x1f\x02\x3a";
     const string DFA21_eofS =
         "\x46\uffff";
     const string DFA21_minS =
-        "\x01\x09\x01\x69\x06\uffff\x02\x30\x01\uffff\x01\x3a\x08\uffff"+
-        "\x01\x6d\x01\x63\x02\x6d\x01\x6e\x01\x65\x01\x61\x01\x72\x01\x2d"+
-        "\x01\x7a\x01\x68\x01\uffff\x01\x2e\x02\uffff\x01\x2a\x01\uffff\x01"+
-        "\x6d\x08\uffff\x09\x2d\x01\x67\x01\x64\x01\x61\x01\uffff\x01\x2d"+
+        "\x01\x09\x01\x69\x06\uffff\x02\x30\x01\uffff\x01\x3a\x08\uffff" +
+        "\x01\x6d\x01\x63\x02\x6d\x01\x6e\x01\x65\x01\x61\x01\x72\x01\x2d" +
+        "\x01\x7a\x01\x68\x01\uffff\x01\x2e\x02\uffff\x01\x2a\x01\uffff\x01" +
+        "\x6d\x08\uffff\x09\x2d\x01\x67\x01\x64\x01\x61\x01\uffff\x01\x2d" +
         "\x01\x7a\x04\uffff\x02\x2d\x01\x64\x02\x2d";
     const string DFA21_maxS =
-        "\x01\ufffe\x01\x70\x06\uffff\x01\x66\x01\x39\x01\uffff\x01\x3a"+
-        "\x08\uffff\x02\x78\x01\x6d\x01\x73\x01\x6e\x01\x65\x01\x61\x01\x72"+
-        "\x01\ufffe\x01\x7a\x01\x68\x01\uffff\x01\ufffe\x02\uffff\x01\x2f"+
-        "\x01\uffff\x01\x6e\x08\uffff\x09\ufffe\x01\x67\x01\x64\x01\x61\x01"+
+        "\x01\ufffe\x01\x70\x06\uffff\x01\x66\x01\x39\x01\uffff\x01\x3a" +
+        "\x08\uffff\x02\x78\x01\x6d\x01\x73\x01\x6e\x01\x65\x01\x61\x01\x72" +
+        "\x01\ufffe\x01\x7a\x01\x68\x01\uffff\x01\ufffe\x02\uffff\x01\x2f" +
+        "\x01\uffff\x01\x6e\x08\uffff\x09\ufffe\x01\x67\x01\x64\x01\x61\x01" +
         "\uffff\x01\ufffe\x01\x7a\x04\uffff\x02\ufffe\x01\x64\x02\ufffe";
     const string DFA21_acceptS =
-        "\x02\uffff\x01\x03\x01\x05\x01\x06\x01\x09\x01\x0a\x01\x0b\x02"+
-        "\uffff\x01\x0e\x01\uffff\x01\x11\x01\x12\x01\x13\x01\x14\x01\x15"+
-        "\x01\x16\x01\x17\x01\x18\x0b\uffff\x01\x1a\x01\uffff\x01\x1b\x01"+
-        "\x1c\x01\uffff\x01\x20\x01\uffff\x01\x04\x01\x07\x01\x08\x01\x1d"+
-        "\x01\x0c\x01\x0d\x01\x10\x01\x0f\x0c\uffff\x01\x19\x02\uffff\x01"+
+        "\x02\uffff\x01\x03\x01\x05\x01\x06\x01\x09\x01\x0a\x01\x0b\x02" +
+        "\uffff\x01\x0e\x01\uffff\x01\x11\x01\x12\x01\x13\x01\x14\x01\x15" +
+        "\x01\x16\x01\x17\x01\x18\x0b\uffff\x01\x1a\x01\uffff\x01\x1b\x01" +
+        "\x1c\x01\uffff\x01\x20\x01\uffff\x01\x04\x01\x07\x01\x08\x01\x1d" +
+        "\x01\x0c\x01\x0d\x01\x10\x01\x0f\x0c\uffff\x01\x19\x02\uffff\x01" +
         "\x1e\x01\x1f\x01\x01\x01\x02\x05\uffff";
     const string DFA21_specialS =
         "\x46\uffff}>";
@@ -2248,6 +2262,6 @@ public class csst3Lexer : Lexer {
 
     }
 
- 
-    
+
+
 }
