@@ -1817,17 +1817,9 @@ namespace SIL.Tool
         {
             if (!File.Exists(filePath)) return false;
             bool foundString = false;
+            int len = searchText.Length;
+            var buf = new byte[len];
             var reader = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4080, false);
-            if (File.Exists(filePath + ".tmp"))
-            {
-                try
-                {
-                    File.Delete(filePath + ".tmp");
-                }
-                catch
-                {
-                }
-            }
             var writer = new FileStream(filePath + ".tmp", FileMode.Create);
             int next;
             while ((next = reader.ReadByte()) != -1)
@@ -1836,9 +1828,7 @@ namespace SIL.Tool
                 if (b == searchText[0]) // first char in search text?
                 {
                     // yes - searchText.Length chars into a buffer and compare them
-                    int len = searchText.Length;
                     long pos = reader.Position;
-                    byte[] buf = new byte[len];
                     buf[0] = b;
                     if (reader.Read(buf, 1, (len - 1)) == -1)
                     {
@@ -1860,7 +1850,6 @@ namespace SIL.Tool
                         reader.Position = pos;
                         writer.WriteByte(b);
                     }
-                    data = null;
                 }
                 else // not what we're looking for - just write it out
                 {
@@ -1868,15 +1857,15 @@ namespace SIL.Tool
                 }
             }
             reader.Close();
-            reader.Dispose();
+            writer.Flush();
             writer.Close();
-            writer.Dispose();
             // replace the original file with the new one
             if (foundString)
             {
                 // at least one instance of the string was found - replace
                 File.Copy(filePath + ".tmp", filePath, true);
             }
+            File.Delete(filePath + ".tmp");
             return foundString;
         }
 
