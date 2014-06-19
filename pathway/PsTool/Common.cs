@@ -4272,6 +4272,7 @@ namespace SIL.Tool
                     sw.WriteLine(exportTitle);
                     sw.WriteLine(creatorTool);
                     sw.WriteLine(inputType);
+                    sw.WriteLine("Common.Testing" + Common.Testing.ToString());
                 }
                 isCreated = true;
             }

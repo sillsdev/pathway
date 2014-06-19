@@ -2220,9 +2220,8 @@ namespace SIL.PublishingSolution
 
         public bool InsertImage()
         {
-
-            string classPicture = _reader.GetAttribute("class") ?? "img";
-            string altText = _imageAltText;
+            //string classPicture = _reader.GetAttribute("class") ?? "img";
+            //string altText = _imageAltText;
             _overWriteParagraph = false;
             bool inserted = false;
             if (_imageInsert)
@@ -2281,82 +2280,15 @@ namespace SIL.PublishingSolution
             string fileName = Path.GetFileName(srcFile);
 
             string normalTargetFile = _projInfo.TempOutputFolder;
-            string basePath = normalTargetFile.Substring(0,
-                                                         normalTargetFile.LastIndexOf(
-                                                             Path.DirectorySeparatorChar));
+            string basePath = normalTargetFile.Substring(0, normalTargetFile.LastIndexOf(Path.DirectorySeparatorChar));
             String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + fileName);
             if (File.Exists(fromPath))
             {
                 File.Copy(fromPath, toPath, true);
             }
-
-            string clsName = _allStyle.Peek();
-            GetAlignment(ref wrapSide, ref HoriAlignment);
-            if (srcFilrLongDesc.Length > 0 && IdAllClass.ContainsKey(clsName) &&
-                (HoriAlignment == "left" || HoriAlignment == "right"))
-            {
-                rectHeight = GetPropertyValue(srcFilrLongDesc, "height", rectHeight);
-                rectWidth = GetPropertyValue(srcFilrLongDesc, "width", rectWidth);
-                if (rectHeight == "0" && rectWidth == "0")
-                {
-                    clsName = _childName;
-                    rectHeight = GetPropertyValue(clsName, "height", rectHeight);
-                    rectWidth = GetPropertyValue(clsName, "width", rectWidth);
-                }
-                GetAlignment(ref HoriAlignment, srcFilrLongDesc);
-            }
-            else
-            {
-                GetHeightandWidth(ref rectHeight, ref rectWidth);
-                GetWrapSide(ref wrapSide, ref wrapMode);
-            }
-
-            // Setting the Height and Width according css value or the image size
-            if (rectHeight != "0")
-            {
-                if (rectWidth == "0") //H=72 W=0
-                {
-                    rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
-                }
-            }
-            else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72 
-            {
-                rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
-            }
-            else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0, 
-            {
-                double value = .9;
-                if (_allStyle.Peek().IndexOf("logo") == 0 || _allStyle.Peek().IndexOf("LText_FrontMatter") == 0)
-                {
-                    if (_projInfo.ProjectInputType.ToLower() == "scripture")
-                    {
-                        value = .45;
-                    }
-                    else if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-                    {
-                        value = .25;
-                    }
-                }
-                rectWidth = Convert.ToString(Common.ColumnWidth * value);
-                rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
-            }
-            else
-            {
-                //Default value is 72 
-                rectHeight = "72"; // fixed the width as 1 in = 72pt;
-                rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
-            }
-            if (rectWidth == "0")
-            {
-                rectWidth = "72";
-            }
-            if (rectHeight == "0")
-            {
-                rectHeight = "72";
-            }
+            CalculatingPictureWidthandHeight(wrapSide, ref HoriAlignment, srcFilrLongDesc, wrapMode, fromPath, ref rectHeight, ref rectWidth);
             // End - Calculating picture width and height
-
-
+            
             if (imageClass.ToLower().IndexOf("picturecenter") == 0)
                 HoriAlignment = "center";
 
@@ -2365,36 +2297,76 @@ namespace SIL.PublishingSolution
                 _frameCount = 1;
             }
 
-            string strGraphicsCount = "Graphics" + (_frameCount + 1);
-            string strFrameCount = "Frame" + (_frameCount + 1);
-            string strFrameStyCount = "fr" + (_frameCount + 1);
-            _imageGraphicsName = strFrameCount;
-            if (_isParagraphClosed) // Forcing a Paragraph Style, if it is not exist
+            string strGraphicsCount;
+            string strFrameCount;
+            string strFrameStyCount;
+            WritingPictureParagraphStyle(out strGraphicsCount, out strFrameCount, out strFrameStyCount);
+
+            string imgWUnit;
+            string anchorType;
+            string width;
+            string height;
+            WritingPictureFrameStyle(strFrameStyCount, strFrameCount, HoriAlignment, rectWidth, rectHeight, out imgWUnit, out anchorType, out width, out height);
+
+            //1st textbox
+            _writer.WriteStartElement("draw:text-box");
+            _writer.WriteAttributeString("fo:min-height", "1in");
+            _frameCount++;
+            WritingDrawPictureStyle(width, height, strGraphicsCount, strFrameStyCount, rectWidth, imgWUnit, rectHeight, fileName);
+
+            _imageInsert = false;
+            _imageSource = string.Empty;
+            _isNewParagraph = false;
+            _isParagraphClosed = true;
+            return inserted;
+        }
+
+        private void WritingDrawPictureStyle(string width, string height, string strGraphicsCount, string strFrameStyCount, string rectWidth, string imgWUnit,
+                                             string rectHeight, string fileName)
+        {
+            
+            ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
+            modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strGraphicsCount, _util.ParentName, _displayProperty);
+            modifyIDStyles.CreateFrameStyle(_styleFilePath, strFrameStyCount, _util.ParentName, _displayProperty,
+                                            strGraphicsCount);
+
+            _writer.WriteStartElement("draw:frame");
+            _writer.WriteAttributeString("draw:style-name", "gr" + (_frameCount));
+            _writer.WriteAttributeString("draw:name", strGraphicsCount);
+            _writer.WriteAttributeString("text:anchor-type", "paragraph");
+
+            if (rectWidth.IndexOf("%") == -1)
             {
-                int counter = _allParagraph.Count;
-                string divTagName = string.Empty;
-                if (counter > 0)
-                {
-                    var tempStyle = new string[counter];
-                    _allParagraph.CopyTo(tempStyle, 0);
-                    divTagName = counter > 1 ? tempStyle[1] : tempStyle[0];
-                }
-
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", divTagName);
-
-                _isParagraphClosed = false;
-                _isNewParagraph = false;
+                width = rectWidth + imgWUnit;
+                _writer.WriteAttributeString("svg:width", width);
+            }
+            if (rectHeight.IndexOf("%") == -1)
+            {
+                height = rectHeight + imgWUnit;
+                _writer.WriteAttributeString("svg:height", height);
             }
 
+            _writer.WriteStartElement("draw:image");
+            _writer.WriteAttributeString("xlink:type", "simple");
+            _writer.WriteAttributeString("xlink:show", "embed");
+            _writer.WriteAttributeString("xlink:actuate", "onLoad");
+            _writer.WriteAttributeString("xlink:href", "Pictures/" + fileName);
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("svg:title");
+            _writer.WriteString(fileName);
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+        }
+
+        private void WritingPictureFrameStyle(string strFrameStyCount, string strFrameCount, string HoriAlignment,
+                                              string rectWidth, string rectHeight, out string imgWUnit, out string anchorType,
+                                              out string width, out string height)
+        {
             // 1st frame
             _writer.WriteStartElement("draw:frame");
             _writer.WriteAttributeString("draw:style-name", strFrameStyCount);
             _writer.WriteAttributeString("draw:name", strFrameCount);
-
-            string imgWUnit = "pt";
-            string anchorType = string.Empty;
-
+            imgWUnit = "pt";
             if (_isParaPicture)
             {
                 _displayProperty = "block";
@@ -2437,11 +2409,11 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            string width = rectWidth;
+            width = rectWidth;
             if (rectWidth.IndexOf("%") == -1)
                 width = rectWidth + imgWUnit;
 
-            string height = rectHeight;
+            height = rectHeight;
             if (rectHeight.IndexOf("%") == -1)
                 height = rectHeight + imgWUnit;
 
@@ -2465,91 +2437,38 @@ namespace SIL.PublishingSolution
             {
                 _writer.WriteAttributeString("fo:min-width", rectWidth + imgWUnit);
             }
-
-            //1st textbox
-            _writer.WriteStartElement("draw:text-box");
-            _writer.WriteAttributeString("fo:min-height", "1in");
-
-
-            _frameCount++;
-
-            ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
-            modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strGraphicsCount, _util.ParentName, _displayProperty);
-            modifyIDStyles.CreateFrameStyle(_styleFilePath, strFrameStyCount, _util.ParentName, _displayProperty, strGraphicsCount);
-
-            _writer.WriteStartElement("draw:frame");
-            _writer.WriteAttributeString("draw:style-name", "gr" + (_frameCount));
-            _writer.WriteAttributeString("draw:name", strGraphicsCount);
-            _writer.WriteAttributeString("text:anchor-type", "paragraph");
-
-            if (rectWidth.IndexOf("%") == -1)
-            {
-                width = rectWidth + imgWUnit;
-                _writer.WriteAttributeString("svg:width", width);
-            }
-            if (rectHeight.IndexOf("%") == -1)
-            {
-                height = rectHeight + imgWUnit;
-                _writer.WriteAttributeString("svg:height", height);
-            }
-
-            _writer.WriteStartElement("draw:image");
-            _writer.WriteAttributeString("xlink:type", "simple");
-            _writer.WriteAttributeString("xlink:show", "embed");
-            _writer.WriteAttributeString("xlink:actuate", "onLoad");
-            _writer.WriteAttributeString("xlink:href", "Pictures/" + fileName);
-            _writer.WriteEndElement();
-            _writer.WriteStartElement("svg:title");
-            _writer.WriteString(fileName);
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _imageInsert = false;
-            _imageSource = string.Empty;
-            _isNewParagraph = false;
-            _isParagraphClosed = true;
-            return inserted;
         }
 
-        /// <summary>
-        /// Insert logo and frontmatter pictures
-        /// </summary>
-        /// <returns></returns>
-        private bool Logo()
+        private void WritingPictureParagraphStyle(out string strGraphicsCount, out string strFrameCount,
+                                                  out string strFrameStyCount)
         {
-            bool inserted;
-            // Start - Calculating picture width and height
-            // (1 inch = 72 PostScript points)
-            string wrapSide = string.Empty;
-            string rectHeight = "0";
-            string rectWidth = "0";
-            string srcFile;
-            string wrapMode = "BoundingBoxTextWrap";
-            string HoriAlignment = string.Empty;
-
-            inserted = true;
-            string[] cc = _allStyle.ToArray();
-            imageClass = cc[0]; //cc[1];
-            srcFile = _imageSource;
-            string srcFilrLongDesc = _imageLongDesc;
-            string currentPicturePath = _sourcePicturePath;
-            if (_allStyle.Peek().IndexOf("logo") == 0)
+            strGraphicsCount = "Graphics" + (_frameCount + 1);
+            strFrameCount = "Frame" + (_frameCount + 1);
+            strFrameStyCount = "fr" + (_frameCount + 1);
+            _imageGraphicsName = strFrameCount;
+            if (_isParagraphClosed) // Forcing a Paragraph Style, if it is not exist
             {
-                currentPicturePath = Common.FromRegistry("Copyrights");
-            }
-            string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, currentPicturePath);
-            string fileName = Path.GetFileName(srcFile);
+                int counter = _allParagraph.Count;
+                string divTagName = string.Empty;
+                if (counter > 0)
+                {
+                    var tempStyle = new string[counter];
+                    _allParagraph.CopyTo(tempStyle, 0);
+                    divTagName = counter > 1 ? tempStyle[1] : tempStyle[0];
+                }
 
-            string normalTargetFile = _projInfo.TempOutputFolder;
-            string basePath = normalTargetFile.Substring(0,
-                                                         normalTargetFile.LastIndexOf(
-                                                             Path.DirectorySeparatorChar));
-            String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + fileName);
-            if (File.Exists(fromPath))
-            {
-                File.Copy(fromPath, toPath, true);
-            }
+                _writer.WriteStartElement("text:p");
+                _writer.WriteAttributeString("text:style-name", divTagName);
 
+                _isParagraphClosed = false;
+                _isNewParagraph = false;
+            }
+        }
+
+        private void CalculatingPictureWidthandHeight(string wrapSide, ref string HoriAlignment, string srcFilrLongDesc,
+                                                      string wrapMode, string fromPath, ref string rectHeight,
+                                                      ref string rectWidth)
+        {
             string clsName = _allStyle.Peek();
             GetAlignment(ref wrapSide, ref HoriAlignment);
             if (srcFilrLongDesc.Length > 0 && IdAllClass.ContainsKey(clsName) &&
@@ -2597,7 +2516,7 @@ namespace SIL.PublishingSolution
                         value = .25;
                     }
                 }
-                rectWidth = Convert.ToString(Common.ColumnWidth * value);
+                rectWidth = Convert.ToString(Common.ColumnWidth*value);
                 rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
             }
             else
@@ -2614,6 +2533,48 @@ namespace SIL.PublishingSolution
             {
                 rectHeight = "72";
             }
+        }
+
+        /// <summary>
+        /// Insert logo and frontmatter pictures
+        /// </summary>
+        /// <returns></returns>
+        private bool Logo()
+        {
+            bool inserted;
+            // Start - Calculating picture width and height
+            // (1 inch = 72 PostScript points)
+            string wrapSide = string.Empty;
+            string rectHeight = "0";
+            string rectWidth = "0";
+            string srcFile;
+            string wrapMode = "BoundingBoxTextWrap";
+            string HoriAlignment = string.Empty;
+
+            inserted = true;
+            string[] cc = _allStyle.ToArray();
+            imageClass = cc[0]; //cc[1];
+            srcFile = _imageSource;
+            string srcFilrLongDesc = _imageLongDesc;
+            string currentPicturePath = _sourcePicturePath;
+            if (_allStyle.Peek().IndexOf("logo") == 0)
+            {
+                currentPicturePath = Common.FromRegistry("Copyrights");
+            }
+            string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, currentPicturePath);
+            string fileName = Path.GetFileName(srcFile);
+
+            string normalTargetFile = _projInfo.TempOutputFolder;
+            string basePath = normalTargetFile.Substring(0,
+                                                         normalTargetFile.LastIndexOf(
+                                                             Path.DirectorySeparatorChar));
+            String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + fileName);
+            if (File.Exists(fromPath))
+            {
+                File.Copy(fromPath, toPath, true);
+            }
+
+            CalculatingLogoWidthandHeight(ref wrapSide, srcFilrLongDesc, wrapMode, fromPath, ref HoriAlignment, ref rectHeight, ref rectWidth);
             // End - Calculating picture width and height
 
 
@@ -2648,6 +2609,18 @@ namespace SIL.PublishingSolution
             }
 
 
+            CreatingLogoFrame(strFrameStyCount, strFrameCount, wrapSide, HoriAlignment, rectWidth, rectHeight, strGraphicsCount, fileName); 
+
+            _imageInsert = false;
+            _imageSource = string.Empty;
+            _isNewParagraph = false;
+            _isParagraphClosed = true;
+            return inserted;
+        }
+
+        private void CreatingLogoFrame(string strFrameStyCount, string strFrameCount, string wrapSide, string HoriAlignment,
+                                       string rectWidth, string rectHeight, string strGraphicsCount, string fileName)
+        {
             // 1st frame
             _writer.WriteStartElement("draw:frame");
             _writer.WriteAttributeString("draw:style-name", strFrameStyCount);
@@ -2727,13 +2700,13 @@ namespace SIL.PublishingSolution
 
             ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
             modifyIDStyles.CreateGraphicsStyleLogo(_styleFilePath, strGraphicsCount, _util.ParentName, HoriAlignment,
-                                               wrapSide);
+                                                   wrapSide);
             if (_allStyle.Peek().IndexOf("LText_FrontMatter") == 0)
             {
                 wrapSide = "logo";
             }
             modifyIDStyles.CreateFrameStyleLogo(_styleFilePath, strFrameStyCount, _util.ParentName, HoriAlignment,
-                                            wrapSide, strGraphicsCount);
+                                                wrapSide, strGraphicsCount);
 
             _writer.WriteStartElement("draw:frame");
             _writer.WriteAttributeString("draw:style-name", "gr" + (_frameCount));
@@ -2761,12 +2734,75 @@ namespace SIL.PublishingSolution
             _writer.WriteString(fileName);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+        }
 
-            _imageInsert = false;
-            _imageSource = string.Empty;
-            _isNewParagraph = false;
-            _isParagraphClosed = true;
-            return inserted;
+        private void CalculatingLogoWidthandHeight(ref string wrapSide, string srcFilrLongDesc, string wrapMode, string fromPath,
+                                                   ref string HoriAlignment, ref string rectHeight, ref string rectWidth)
+        {
+            string clsName = _allStyle.Peek();
+            GetAlignment(ref wrapSide, ref HoriAlignment);
+            if (srcFilrLongDesc.Length > 0 && IdAllClass.ContainsKey(clsName) &&
+                (HoriAlignment == "left" || HoriAlignment == "right"))
+            {
+                rectHeight = GetPropertyValue(srcFilrLongDesc, "height", rectHeight);
+                rectWidth = GetPropertyValue(srcFilrLongDesc, "width", rectWidth);
+                if (rectHeight == "0" && rectWidth == "0")
+                {
+                    clsName = _childName;
+                    rectHeight = GetPropertyValue(clsName, "height", rectHeight);
+                    rectWidth = GetPropertyValue(clsName, "width", rectWidth);
+                }
+                GetAlignment(ref HoriAlignment, srcFilrLongDesc);
+            }
+            else
+            {
+                GetHeightandWidth(ref rectHeight, ref rectWidth);
+                GetWrapSide(ref wrapSide, ref wrapMode);
+            }
+
+            // Setting the Height and Width according css value or the image size
+            if (rectHeight != "0")
+            {
+                if (rectWidth == "0") //H=72 W=0
+                {
+                    rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
+                }
+            }
+            else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72 
+            {
+                rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
+            }
+            else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0, 
+            {
+                double value = .9;
+                if (_allStyle.Peek().IndexOf("logo") == 0 || _allStyle.Peek().IndexOf("LText_FrontMatter") == 0)
+                {
+                    if (_projInfo.ProjectInputType.ToLower() == "scripture")
+                    {
+                        value = .45;
+                    }
+                    else if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                    {
+                        value = .25;
+                    }
+                }
+                rectWidth = Convert.ToString(Common.ColumnWidth*value);
+                rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
+            }
+            else
+            {
+                //Default value is 72 
+                rectHeight = "72"; // fixed the width as 1 in = 72pt;
+                rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
+            }
+            if (rectWidth == "0")
+            {
+                rectWidth = "72";
+            }
+            if (rectHeight == "0")
+            {
+                rectHeight = "72";
+            }
         }
 
         /// <summary>

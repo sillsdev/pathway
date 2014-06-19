@@ -452,124 +452,110 @@ namespace SIL.Tool
 
             if (canAppendData())
             {
-                if (!String.IsNullOrEmpty(str)) str +=
-","; str += "AppendData";
+                ReturnValue(str, "AppendData");
             }
             if (canChangePermissions())
             {
-                if (!String.IsNullOrEmpty(str)) str +=
-","; str += "ChangePermissions";
+                ReturnValue(str, "ChangePermissions");
             }
             if (canCreateDirectories())
             {
-                if (!String.IsNullOrEmpty(str)) str +=
-","; str += "CreateDirectories";
+                ReturnValue(str, "CreateDirectories");
             }
             if (canCreateFiles())
             {
-                if (!String.IsNullOrEmpty(str)) str +=
-","; str += "CreateFiles";
+                ReturnValue(str, "CreateFiles");
             }
             if (canDelete())
             {
-                if (!String.IsNullOrEmpty(str)) str +=
-   ","; str += "Delete";
+                ReturnValue(str, "Delete");
             }
             if (canDeleteSubdirectoriesAndFiles())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "DeleteSubdirectoriesAndFiles";
+                ReturnValue(str, "DeleteSubdirectoriesAndFiles");
             }
             if (canExecuteFile())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "ExecuteFile";
+                ReturnValue(str, "ExecuteFile");
             }
             if (canFullControl())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "FullControl";
+                ReturnValue(str, "FullControl");
             }
             if (canListDirectory())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "ListDirectory";
+                ReturnValue(str, "ListDirectory");
             }
             if (canModify())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "Modify";
+                ReturnValue(str, "Modify");
             }
             if (canRead())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "Read";
+                ReturnValue(str, "Read");
             }
             if (canReadAndExecute())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "ReadAndExecute";
+                ReturnValue(str, "ReadAndExecute");
             }
             if (canReadAttributes())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "ReadAttributes";
+                ReturnValue(str, "ReadAttributes");
             }
             if (canReadData())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "ReadData";
+                ReturnValue(str, "ReadData");
             }
             if (canReadExtendedAttributes())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "ReadExtendedAttributes";
+                ReturnValue(str, "ReadExtendedAttributes");
             }
             if (canReadPermissions())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "ReadPermissions";
+                ReturnValue(str, "ReadPermissions");
             }
             if (canSynchronize())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "Synchronize";
+                ReturnValue(str, "Synchronize");
             }
             if (canTakeOwnership())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "TakeOwnership";
+                ReturnValue(str, "TakeOwnership");
             }
             if (canTraverse())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "Traverse";
+                ReturnValue(str, "Traverse");
             }
             if (canWrite())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "Write";
+                ReturnValue(str, "Write");
             }
             if (canWriteAttributes())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "WriteAttributes";
+                ReturnValue(str, "WriteAttributes");
             }
             if (canWriteData())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "WriteData";
+                ReturnValue(str, "WriteData");
             }
             if (canWriteExtendedAttributes())
             {
-                if (!String.IsNullOrEmpty(str))
-                    str += ","; str += "WriteExtendedAttributes";
+                ReturnValue(str, "WriteExtendedAttributes");
             }
             if (String.IsNullOrEmpty(str))
                 str = "None";
+
             return str;
         }
 
+        private string ReturnValue(string str, string permissionType)
+        {
+            if (!String.IsNullOrEmpty(str))
+                str += ",";
+                str += permissionType;
+            
+            return str;
+        }
         /// <summary>
         /// Convenience method to test if the right exists within the given rights
         /// </summary>

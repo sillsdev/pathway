@@ -80,6 +80,59 @@ namespace Test.PdfConvert
             FileCompare(file, ".xhtml");
         }
 
+        /// <summary>
+        ///A test for Export
+        ///</summary>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void ExportDictionaryTest()
+        {
+            string inputSourceDirectory = FileInput("");
+            string outputDirectory = FileOutput("");
+            if (Directory.Exists(outputDirectory))
+            {
+                Directory.Delete(outputDirectory, true);
+            }
+            FolderTree.Copy(inputSourceDirectory, outputDirectory);
+            Param.LoadSettings();
+            _projInfo.ProjectPath = outputDirectory;
+            _projInfo.ProjectInputType = "Dictionary";
+            _projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "ExportDictionarymain.xhtml");
+            _projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "ExportDictionarymain.css");
+
+            var target = new ExportPdf();
+            const bool expectedResult = true;
+            bool actual = target.Export(_projInfo);
+            Assert.AreEqual(expectedResult, actual);
+        }
+
+        /// <summary>
+        ///A test for Export
+        ///</summary>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void ExportScriptureTest()
+        {
+            string inputSourceDirectory = FileInput("");
+            string outputDirectory = FileOutput("");
+            if (Directory.Exists(outputDirectory))
+            {
+                Directory.Delete(outputDirectory, true);
+            }
+            FolderTree.Copy(inputSourceDirectory, outputDirectory);
+            Param.LoadSettings();
+            _projInfo.ProjectPath = outputDirectory;
+            _projInfo.ProjectInputType = "Scripture";
+            _projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "ScriptureDraft.xhtml");
+            _projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "ScriptureDraft.css");
+
+            var target = new ExportPdf();
+            const bool expectedResult = true;
+            bool actual = target.Export(_projInfo);
+            Assert.AreEqual(expectedResult, actual);
+        }
+
+
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
