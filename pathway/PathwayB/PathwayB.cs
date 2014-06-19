@@ -63,124 +63,10 @@ namespace SIL.PublishingSolution
                 }
                 while (i < args.Length)
                 {
-                    switch (args[i++])
-                    {
-                        case "--directory":
-                        case "-d":
-                            projectInfo.ProjectPath = args[i++];
-                            break;
-                        case "--files":
-                        case "-f":
-                            i = CaptureFileList(args, i, files);
-                            break;
-                        case "--inputformat":
-                        case "-if":
-                            var format = args[i++];
-                            switch (format)
-                            {
-                                case "xhtml":
-                                    inFormat = InputFormat.XHTML;
-                                    break;
-                                case "usfm":
-                                    inFormat = InputFormat.USFM;
-                                    break;
-                                case "usx":
-                                    inFormat = InputFormat.USX;
-                                    break;
-                                case "ptb":
-                                    inFormat = InputFormat.PTBUNDLE;
-                                    break;
-                            }
-                            break;
-                        case "--xhtml":
-                        case "-x":
-                            // retained for backwards compatibility (not documented)
-                            inFormat = InputFormat.XHTML;
-                            projectInfo.DefaultXhtmlFileWithPath = args[i++];
-                            break;
-                        case "--showdialog":
-                        case "-s":
-                            bShowDialog = true;
-                            break;
-                        case "--css":
-                        case "-c":
-                            projectInfo.DefaultCssFileWithPath = args[i++];
-                            break;
-                        case "--target":
-                        case "-t":
-                            //Note: If export type is more than one word, quotes must be used
-                            exportType = args[i++];
-                            bOutputSpecified = true;
-                            break;
-                        case "--input":
-                        case "-i":
-                            projectInfo.ProjectInputType = args[i++];
-                            break;
-                        case "--launch":
-                        case "-l":
-                            projectInfo.IsOpenOutput = true;
-                            break;
-                        case "--name":
-                        case "-n":
-                            projectInfo.ProjectName = args[i++];
-                            break;
-                        case "-?":
-                        case "-h":
-                            Usage();
-                            Environment.Exit(0);
-                            break;
-                        default:
-                            i = CaptureFileList(args, --i, files);
-                            if (files.Count > 0)
-                            {
-                                var lcName = files[0].ToLower();
-                                if (lcName.EndsWith(".zip"))
-                                {
-                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.PTBUNDLE, projectInfo, lcName);
-                                    break;
-                                }
-                                if (lcName.EndsWith(".xhtml"))
-                                {
-                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.XHTML, projectInfo, lcName, "Dictionary");
-                                    break;
-                                }
-                                if (lcName.EndsWith(".usx"))
-                                {
-                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USX, projectInfo, lcName);
-                                    break;
-                                }
-                                if (lcName.EndsWith(".usfm") || lcName.EndsWith(".sfm"))
-                                {
-                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USFM, projectInfo, lcName);
-                                    break;
-                                }
-                            }
-                            Usage();
-                            throw new ArgumentException("Invalid Command Line Argument: " + args[i]);
-                    }
+                    i = ProcessExportType(args, i, projectInfo, files, ref inFormat, ref bShowDialog, ref exportType, ref bOutputSpecified);
                 }
-                if (string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) && files.Count > 0)
-                {
-                    projectInfo.DefaultXhtmlFileWithPath = files[0];
-                }
-                if (!string.IsNullOrEmpty(projectInfo.ProjectPath))
-                {
-                    if (!string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) && !Path.IsPathRooted(projectInfo.DefaultXhtmlFileWithPath))
-                    {
-                        projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, projectInfo.DefaultXhtmlFileWithPath);
-                    }
-                    if (!string.IsNullOrEmpty(projectInfo.DefaultCssFileWithPath) && !Path.IsPathRooted(projectInfo.DefaultCssFileWithPath))
-                    {
-                        projectInfo.DefaultRevCssFileWithPath = Common.PathCombine(projectInfo.ProjectPath, projectInfo.DefaultCssFileWithPath);
-                    }
-                    for (int n = 0; n < files.Count; n++)
-                    {
-                        if (!Path.IsPathRooted(files[n]))
-                        {
-                            files[n] = Common.PathCombine(projectInfo.ProjectPath, files[n]);
-                        }
-                    }
-                }
+
+                SettingProcessExportFile(projectInfo, files);
 
                 Common.ProgBase = Common.GetPSApplicationPath();
                 // load settings from the settings file
@@ -213,69 +99,7 @@ namespace SIL.PublishingSolution
 
                 // run headless from the command line
                 Common.Testing = true;
-                if (inFormat == InputFormat.PTBUNDLE)
-                {
-                    var zf = new FastZip();
-                    zf.ExtractZip(files[0], projectInfo.ProjectPath, ".*");
-                    var metadata = Common.DeclareXMLDocument(false);
-                    metadata.Load(Common.PathCombine(projectInfo.ProjectPath, "metadata.xml"));
-                    var titleNode = metadata.SelectSingleNode("//bookList[@id='default']/name");
-                    Param.UpdateTitleMetadataValue(Param.Title, titleNode.InnerText, false);
-                    var descriptionNode = metadata.SelectSingleNode("//bookList[@id='default']//range");
-                    Param.UpdateMetadataValue(Param.Description, descriptionNode.InnerText);
-                    var rightsHolderNode = metadata.SelectSingleNode("//rightsHolder");
-                    Param.UpdateMetadataValue(Param.Publisher, rightsHolderNode.InnerText);
-                    var copyrightNode = metadata.SelectSingleNode("//statement");
-                    Param.UpdateMetadataValue(Param.CopyrightHolder, copyrightNode.InnerText);
-                    var bookNodes = metadata.SelectNodes("//bookList[@id='default']//book");
-                    var usxFolder = Common.PathCombine(projectInfo.ProjectPath, "USX");
-                    var xmlText = new StringBuilder(@"<usx version=""2.0"">");
-                    var oneBook = Common.DeclareXMLDocument(false);
-                    foreach (XmlElement bookNode in bookNodes)
-                    {
-                        oneBook.Load(Common.PathCombine(usxFolder, bookNode.SelectSingleNode("@code").InnerText + ".usx"));
-                        xmlText.Append(oneBook.DocumentElement.InnerXml);
-                        oneBook.RemoveAll();
-                    }
-                    xmlText.Append(@"</usx>" + "\r\n");
-                    var fileName = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".xhtml");
-                    var databaseName = metadata.SelectSingleNode("//identification/abbreviation");
-                    var linkParam = new Dictionary<string, object>();
-                    linkParam["dateTime"] = DateTime.Now.ToShortDateString();
-                    linkParam["user"] = "ukn";
-                    var wsNode = metadata.SelectSingleNode("//language/iso");
-                    linkParam["ws"] = wsNode.InnerText;
-                    linkParam["userWs"] = wsNode.InnerText;
-                    var nameNode = metadata.SelectSingleNode("//identification/description");
-                    linkParam["projName"] = nameNode.InnerText;
-                    var langNameNode = metadata.SelectSingleNode("//language/name");
-                    linkParam["langInfo"] = string.Format("{0}:{1}", wsNode.InnerText, langNameNode.InnerText);
-                    ConvertUsx2Xhtml(databaseName, linkParam, xmlText, fileName);
-                    projectInfo.DefaultXhtmlFileWithPath = fileName;
-                    var ptxStyle2Css = new XslCompiledTransform();
-                    ptxStyle2Css.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                        "PathwayB.ptx2css.xsl")));
-                    projectInfo.DefaultCssFileWithPath = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".css");
-                    var writer = new XmlTextWriter(projectInfo.DefaultCssFileWithPath, Encoding.UTF8);
-                    ptxStyle2Css.Transform(Common.PathCombine(projectInfo.ProjectPath, "styles.xml"), null, writer);
-                    writer.Close();
-                    metadata.RemoveAll();
-                    inFormat = InputFormat.XHTML;
-                }
-                if (inFormat == InputFormat.USFM)
-                {
-                    // convert from USFM to xhtml
-                    UsfmToXhtml(projectInfo, files);
-                }
-                else if (inFormat == InputFormat.USX)
-                {
-                    // convert from USX to xhtml
-                    UsxToXhtml(projectInfo, files);
-                }
-                else if (inFormat == InputFormat.XHTML)
-                {
-                    SetFileName(projectInfo, files);
-                }
+                ProcessInputFormat(inFormat, files, projectInfo);
 
                 if (projectInfo.DefaultXhtmlFileWithPath == null)
                 {
@@ -318,6 +142,205 @@ namespace SIL.PublishingSolution
                 Environment.Exit(-1);
             }
             Environment.Exit(0);
+        }
+
+        private static void SettingProcessExportFile(PublicationInformation projectInfo, List<string> files)
+        {
+            if (string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) && files.Count > 0)
+            {
+                projectInfo.DefaultXhtmlFileWithPath = files[0];
+            }
+            if (!string.IsNullOrEmpty(projectInfo.ProjectPath))
+            {
+                if (!string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) &&
+                    !Path.IsPathRooted(projectInfo.DefaultXhtmlFileWithPath))
+                {
+                    projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath,
+                                                                              projectInfo.DefaultXhtmlFileWithPath);
+                }
+                if (!string.IsNullOrEmpty(projectInfo.DefaultCssFileWithPath) &&
+                    !Path.IsPathRooted(projectInfo.DefaultCssFileWithPath))
+                {
+                    projectInfo.DefaultRevCssFileWithPath = Common.PathCombine(projectInfo.ProjectPath,
+                                                                               projectInfo.DefaultCssFileWithPath);
+                }
+                for (int n = 0; n < files.Count; n++)
+                {
+                    if (!Path.IsPathRooted(files[n]))
+                    {
+                        files[n] = Common.PathCombine(projectInfo.ProjectPath, files[n]);
+                    }
+                }
+            }
+        }
+
+        private static void ProcessInputFormat(InputFormat inFormat, List<string> files, PublicationInformation projectInfo)
+        {
+            if (inFormat == InputFormat.PTBUNDLE)
+            {
+                var zf = new FastZip();
+                zf.ExtractZip(files[0], projectInfo.ProjectPath, ".*");
+                var metadata = Common.DeclareXMLDocument(false);
+                metadata.Load(Common.PathCombine(projectInfo.ProjectPath, "metadata.xml"));
+                var titleNode = metadata.SelectSingleNode("//bookList[@id='default']/name");
+                Param.UpdateTitleMetadataValue(Param.Title, titleNode.InnerText, false);
+                var descriptionNode = metadata.SelectSingleNode("//bookList[@id='default']//range");
+                Param.UpdateMetadataValue(Param.Description, descriptionNode.InnerText);
+                var rightsHolderNode = metadata.SelectSingleNode("//rightsHolder");
+                Param.UpdateMetadataValue(Param.Publisher, rightsHolderNode.InnerText);
+                var copyrightNode = metadata.SelectSingleNode("//statement");
+                Param.UpdateMetadataValue(Param.CopyrightHolder, copyrightNode.InnerText);
+                var bookNodes = metadata.SelectNodes("//bookList[@id='default']//book");
+                var usxFolder = Common.PathCombine(projectInfo.ProjectPath, "USX");
+                var xmlText = new StringBuilder(@"<usx version=""2.0"">");
+                var oneBook = Common.DeclareXMLDocument(false);
+                foreach (XmlElement bookNode in bookNodes)
+                {
+                    oneBook.Load(Common.PathCombine(usxFolder, bookNode.SelectSingleNode("@code").InnerText + ".usx"));
+                    xmlText.Append(oneBook.DocumentElement.InnerXml);
+                    oneBook.RemoveAll();
+                }
+                xmlText.Append(@"</usx>" + "\r\n");
+                var fileName = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".xhtml");
+                var databaseName = metadata.SelectSingleNode("//identification/abbreviation");
+                var linkParam = new Dictionary<string, object>();
+                linkParam["dateTime"] = DateTime.Now.ToShortDateString();
+                linkParam["user"] = "ukn";
+                var wsNode = metadata.SelectSingleNode("//language/iso");
+                linkParam["ws"] = wsNode.InnerText;
+                linkParam["userWs"] = wsNode.InnerText;
+                var nameNode = metadata.SelectSingleNode("//identification/description");
+                linkParam["projName"] = nameNode.InnerText;
+                var langNameNode = metadata.SelectSingleNode("//language/name");
+                linkParam["langInfo"] = string.Format("{0}:{1}", wsNode.InnerText, langNameNode.InnerText);
+                ConvertUsx2Xhtml(databaseName, linkParam, xmlText, fileName);
+                projectInfo.DefaultXhtmlFileWithPath = fileName;
+                var ptxStyle2Css = new XslCompiledTransform();
+                ptxStyle2Css.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                    "PathwayB.ptx2css.xsl")));
+                projectInfo.DefaultCssFileWithPath = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".css");
+                var writer = new XmlTextWriter(projectInfo.DefaultCssFileWithPath, Encoding.UTF8);
+                ptxStyle2Css.Transform(Common.PathCombine(projectInfo.ProjectPath, "styles.xml"), null, writer);
+                writer.Close();
+                metadata.RemoveAll();
+                inFormat = InputFormat.XHTML;
+            }
+            if (inFormat == InputFormat.USFM)
+            {
+                // convert from USFM to xhtml
+                UsfmToXhtml(projectInfo, files);
+            }
+            else if (inFormat == InputFormat.USX)
+            {
+                // convert from USX to xhtml
+                UsxToXhtml(projectInfo, files);
+            }
+            else if (inFormat == InputFormat.XHTML)
+            {
+                SetFileName(projectInfo, files);
+            }
+        }
+
+        private static int ProcessExportType(string[] args, int i, PublicationInformation projectInfo, List<string> files,
+                                             ref InputFormat inFormat, ref bool bShowDialog, ref string exportType,
+                                             ref bool bOutputSpecified)
+        {
+            switch (args[i++])
+            {
+                case "--directory":
+                case "-d":
+                    projectInfo.ProjectPath = args[i++];
+                    break;
+                case "--files":
+                case "-f":
+                    i = CaptureFileList(args, i, files);
+                    break;
+                case "--inputformat":
+                case "-if":
+                    var format = args[i++];
+                    switch (format)
+                    {
+                        case "xhtml":
+                            inFormat = InputFormat.XHTML;
+                            break;
+                        case "usfm":
+                            inFormat = InputFormat.USFM;
+                            break;
+                        case "usx":
+                            inFormat = InputFormat.USX;
+                            break;
+                        case "ptb":
+                            inFormat = InputFormat.PTBUNDLE;
+                            break;
+                    }
+                    break;
+                case "--xhtml":
+                case "-x":
+                    // retained for backwards compatibility (not documented)
+                    inFormat = InputFormat.XHTML;
+                    projectInfo.DefaultXhtmlFileWithPath = args[i++];
+                    break;
+                case "--showdialog":
+                case "-s":
+                    bShowDialog = true;
+                    break;
+                case "--css":
+                case "-c":
+                    projectInfo.DefaultCssFileWithPath = args[i++];
+                    break;
+                case "--target":
+                case "-t":
+                    //Note: If export type is more than one word, quotes must be used
+                    exportType = args[i++];
+                    bOutputSpecified = true;
+                    break;
+                case "--input":
+                case "-i":
+                    projectInfo.ProjectInputType = args[i++];
+                    break;
+                case "--launch":
+                case "-l":
+                    projectInfo.IsOpenOutput = true;
+                    break;
+                case "--name":
+                case "-n":
+                    projectInfo.ProjectName = args[i++];
+                    break;
+                case "-?":
+                case "-h":
+                    Usage();
+                    Environment.Exit(0);
+                    break;
+                default:
+                    i = CaptureFileList(args, --i, files);
+                    if (files.Count > 0)
+                    {
+                        var lcName = files[0].ToLower();
+                        if (lcName.EndsWith(".zip"))
+                        {
+                            inFormat = SetDefaultsBasedOnInputFormat(InputFormat.PTBUNDLE, projectInfo, lcName);
+                            break;
+                        }
+                        if (lcName.EndsWith(".xhtml"))
+                        {
+                            inFormat = SetDefaultsBasedOnInputFormat(InputFormat.XHTML, projectInfo, lcName, "Dictionary");
+                            break;
+                        }
+                        if (lcName.EndsWith(".usx"))
+                        {
+                            inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USX, projectInfo, lcName);
+                            break;
+                        }
+                        if (lcName.EndsWith(".usfm") || lcName.EndsWith(".sfm"))
+                        {
+                            inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USFM, projectInfo, lcName);
+                            break;
+                        }
+                    }
+                    Usage();
+                    throw new ArgumentException("Invalid Command Line Argument: " + args[i]);
+            }
+            return i;
         }
 
         private static void SetFileName(PublicationInformation projectInfo, List<string> files)
