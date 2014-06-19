@@ -149,16 +149,22 @@ namespace SIL.PublishingSolution
                     inProcess.PerformStep();
                     inProcess.Close();
 
-                    // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
-                    string msg = string.Format("Please copy the file {0} to your phone.\n\nDo you want to open the folder?", jarFile);
-                    DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                    if (dialogResult == DialogResult.Yes)
+                    if (!Common.Testing)
                     {
-                        string dirPath = Path.GetDirectoryName(jarFile);
-                        Process.Start(dirPath);
+                        // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
+                        string msg =
+                            string.Format("Please copy the file {0} to your phone.\n\nDo you want to open the folder?",
+                                          jarFile);
+                        DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo,
+                                                                    MessageBoxIcon.Information);
+
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            string dirPath = Path.GetDirectoryName(jarFile);
+                            Process.Start(dirPath);
+                        }
                     }
-                    
+
                 }
                 else
                 {
@@ -166,7 +172,11 @@ namespace SIL.PublishingSolution
                     Cursor.Current = myCursor;
                     inProcess.PerformStep();
                     inProcess.Close();
-                    MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (!Common.Testing)
+                    {
+                        MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+                    }
                 }
                 
             }
@@ -180,7 +190,7 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        private void CreateRamp(PublicationInformation projInfo)
+        public void CreateRamp(PublicationInformation projInfo)
         {
             Ramp ramp = new Ramp();
             ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".jad,.jar", projInfo.ProjectInputType);
@@ -203,7 +213,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string GoBibleCreatorTempDirectory(string goBibleFullPath)
+        public string GoBibleCreatorTempDirectory(string goBibleFullPath)
         {
             var goBibleDirectoryName = Path.GetFileNameWithoutExtension(goBibleFullPath);
             var tempFolder = Path.GetTempPath();
@@ -218,7 +228,7 @@ namespace SIL.PublishingSolution
             return folder;
         }
 
-        private void CopyGoBibleCreatorFolderToTemp(string sourceFolder, string destFolder)
+        public void CopyGoBibleCreatorFolderToTemp(string sourceFolder, string destFolder)
         {
             if (Directory.Exists(destFolder))
             {
@@ -252,7 +262,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void CreateCollectionsTextFile(string exportGoBiblePath)
+        public void CreateCollectionsTextFile(string exportGoBiblePath)
         {
             string fileLoc = Common.PathCombine(exportGoBiblePath, "Collections.txt");
 
@@ -303,7 +313,7 @@ namespace SIL.PublishingSolution
         }
 
 
-        private string GetInfo(string metadataValue)
+        public string GetInfo(string metadataValue)
         {
             string organization;
             try
@@ -328,7 +338,7 @@ namespace SIL.PublishingSolution
             return sb.ToString();
         }
 
-        protected bool IsDuplicateBooks(XmlNodeList books)
+        public bool IsDuplicateBooks(XmlNodeList books)
         {
             _duplicateBooks = new List<string>();
             List<string> allBooks = new List<string>();
@@ -352,7 +362,7 @@ namespace SIL.PublishingSolution
         /// Uses Java to create GoBible application
         /// </summary>
         /// <param name="goBibleCreatorPath"></param>
-        protected void BuildApplication(string goBibleCreatorPath)
+        public void BuildApplication(string goBibleCreatorPath)
         {
             const string creator = "GoBibleCreator.jar";
             const string prog = "java";
@@ -373,7 +383,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="projInfo">data on project</param>
         /// <returns>Project Name</returns>
-        protected string GetProjectName(IPublicationInformation projInfo)
+        public string GetProjectName(IPublicationInformation projInfo)
         {
             var scrDir = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             var projDir = Path.GetDirectoryName(scrDir);

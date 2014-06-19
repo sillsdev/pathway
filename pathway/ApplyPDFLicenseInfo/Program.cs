@@ -27,6 +27,7 @@ namespace ApplyPDFLicenseInfo
             string exportTitle = _readLicenseFilesBylines[2];
             string creatorTool = _readLicenseFilesBylines[3];
             string inputType = _readLicenseFilesBylines[4];
+            string commonTesting = _readLicenseFilesBylines[5];
             string pdfFileName = string.Empty;
             
             pdfFileName = ProcessLicensePdf(pdfFileName, executePath);
@@ -41,10 +42,14 @@ namespace ApplyPDFLicenseInfo
             if (File.Exists(licencePdfFile))
             {
                 File.Copy(licencePdfFile, exportTitle, true);
-                using (Process process = new Process())
+
+                if (commonTesting.ToLower().Contains("false"))
                 {
-                    process.StartInfo.FileName = exportTitle;
-                    process.Start();
+                    using (Process process = new Process())
+                    {
+                        process.StartInfo.FileName = exportTitle;
+                        process.Start();
+                    }
                 }
             }
 

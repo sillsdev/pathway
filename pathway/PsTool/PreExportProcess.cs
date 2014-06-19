@@ -2383,8 +2383,11 @@ namespace SIL.Tool
                     nextNode = nextNode.NextSibling;
                 }
                 verseNodeList[i].InnerText = verseNodeList[i].InnerText.Trim() + " ";
-                nextNode.InnerXml = verseNodeList[i].OuterXml + nextNode.InnerXml;
-                nextNode.ParentNode.RemoveChild(verseNodeList[i]);
+                if (nextNode != null)
+                {
+                    nextNode.InnerXml = verseNodeList[i].OuterXml + nextNode.InnerXml;
+                    nextNode.ParentNode.RemoveChild(verseNodeList[i]);
+                }
             }
             xDoc.Save(fileName);
         }
