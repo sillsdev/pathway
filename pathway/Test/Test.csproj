@@ -472,6 +472,7 @@
     <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'$(OutputPath)\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'$(OutputPath)\TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'$(OutputPath)\Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing'" />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'$(OutputPath)\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
@@ -504,8 +505,9 @@
     <AllBackend Include="..\ApplyPdfLicenseInfo\$(OutputPath)\ApplyPdfLicenseInfo.*" />
     <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
-    <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
-    <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
+    <TestBackend Include="..\SwordConvert\$(OutputPath)\SwordConvert.*" />
+    <AllBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
+    <AllBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
     <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
     <BteBackend Include="..\theWordConvert\$(OutputPath)\theWordConvert.*" />
@@ -682,6 +684,7 @@
     <AllBackend Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
     <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <SwordFiles Include="..\PsSupport\Sword\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <AllTransform Include="..\PsSupport\AddBidi.xsl" />
     <AllTransform Include="..\PsSupport\addDicTocHeads.xsl" />
