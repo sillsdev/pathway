@@ -61,9 +61,9 @@ namespace SIL.PublishingSolution
         /// <param name="exportType">scripture / dictionary</param>
         /// <param name="publicationInformation">structure with other necessary information about project.</param>
         /// <returns></returns>
-        public bool Launch(string exportType, PublicationInformation publicationInformation)
+        protected void Launch(string exportType, PublicationInformation publicationInformation)
         {
-            return Export(publicationInformation);
+            Export(publicationInformation);
         }
 
         public bool Export(PublicationInformation projInfo)
@@ -121,7 +121,7 @@ namespace SIL.PublishingSolution
             inProcess.Close();
             Environment.CurrentDirectory = curdir;
             Cursor.Current = myCursor;
-            Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.jar,.zip,.bat,.de", string.Empty, "Empty_Jar-Jad,dictionary");
+            CleanUp(projInfo.DefaultXhtmlFileWithPath);
             if (Common.Testing == false)
             {
                 MoveJarFile(projInfo);
@@ -130,7 +130,12 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        private void MoveJarFile(PublicationInformation projInfo)
+        protected static void CleanUp(string name)
+        {
+            Common.CleanupExportFolder(name, ".tmp,.jar,.bat,.de", string.Empty, "Empty_Jar-Jad,dictionary");
+        }
+
+        protected void MoveJarFile(PublicationInformation projInfo)
         {
             var folder = Directory.GetDirectories(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "DfM_*");
             if (folder.Length == 0) {
@@ -170,15 +175,17 @@ namespace SIL.PublishingSolution
         {
             var outFile = new DictionaryForMIDsStreamWriter(projInfo);
             outFile.Open();
+            var className = projInfo.IsLexiconSectionExist ? "definition" : "headref";
             var input = Input(projInfo);
-            foreach (XmlNode sense in input.SelectNodes("//*[@class = 'entry']//*[@id]"))
+            var sensePath = projInfo.IsLexiconSectionExist ? "//*[@class = 'entry']//*[@id]" : "//*[@class = 'headref']/parent::*";
+            foreach (XmlNode sense in input.SelectNodes(sensePath))
             {
                 var rec = new DictionaryForMIDsRec { CssClass = CssClass, Styles = ContentStyles };
                 rec.AddHeadword(sense);
                 rec.AddBeforeSense(sense);
                 rec.AddSense(sense);
                 rec.AddAfterSense(sense);
-                rec.AddReversal(sense);
+                rec.AddReversal(sense, className);
                 outFile.WriteLine(rec.Rec);
             }
             outFile.Close();
@@ -232,7 +239,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                SubProcess.RunCommand(output.Directory, processFullPath, ".", true);
+                SubProcess.Run(output.Directory, processFullPath, ".", true);
             }
         }
 
@@ -255,7 +262,8 @@ namespace SIL.PublishingSolution
         protected void ReportReults(PublicationInformation projInfo)
         {
             var output = new DictionaryForMIDsStreamWriter(projInfo);
-            var result = MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display output files?", output.Directory), "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+            var result = !Common.Testing ? MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display output files?", output.Directory), "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) :
+                DialogResult.No;
             if (result == DialogResult.Yes)
             {
                 DisplayOutput(projInfo);

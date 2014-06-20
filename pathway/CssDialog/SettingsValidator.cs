@@ -18,8 +18,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.AccessControl;
-using System.Security.Principal;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
@@ -144,45 +142,6 @@ namespace SIL.PublishingSolution
                 CopyCustomStyles(fileNamewithPath);
                 CopySettingsFile(FileName.DictionaryStyleSettings.ToString(), inputtype, fileNamewithPath);
             }
-        }
-
-        /// <summary>
-        /// To paste the customs syles(copied from overwritten file) to the Dictionary/ Scripture stylesettings.xml file
-        /// </summary>
-        /// <param name="cssFilePath">Settings file path</param>
-        protected void RestoreCustomStyles(string cssFilePath)
-        {
-            var settingsXML = new XmlDocument();
-            settingsXML.Load(cssFilePath);
-            XmlElement parentNode = settingsXML.DocumentElement;
-            foreach (string media in mediaList)
-            {
-                string xPathMStyles = "//stylePick/styles/" + media;
-                if (parentNode != null)
-                {
-                    XmlNode childNode = parentNode.SelectSingleNode(xPathMStyles);
-                    if (childNode != null)
-                    {
-                        if (media == "paper" && customPaper.Count > 0)
-                        {
-                            foreach (XmlNode node in customPaper) { AppendChildNode(settingsXML, childNode, node); }
-                        }
-                        else if (media == "mobile" && customMobile.Count > 0)
-                        {
-                            foreach (XmlNode node in customMobile) { AppendChildNode(settingsXML, childNode, node); }
-                        }
-                        else if (media == "web" && customWeb.Count > 0)
-                        {
-                            foreach (XmlNode node in customWeb) { AppendChildNode(settingsXML, childNode, node); }
-                        }
-                        else if (media == "others" && customOther.Count > 0)
-                        {
-                            foreach (XmlNode node in customOther) { AppendChildNode(settingsXML, childNode, node); }
-                        }
-                    }
-                }
-            }
-            settingsXML.Save(cssFilePath);
         }
 
         /// <summary>
@@ -1095,7 +1054,7 @@ namespace SIL.PublishingSolution
         }
 
         //It will return DictionaryForMids css name
-        public string GetNodeString()
+        private string GetNodeString()
         {
             return "dictionaryformids.css";
         }

@@ -37,7 +37,7 @@ namespace Test.XeLatex
         private string _outputPath;
         private string _expectedPath;
         private string _testFolderPath = string.Empty;
-
+        ExportXeLaTex _xeLaTex = new ExportXeLaTex();
         private PublicationInformation _projInfo;
         private Dictionary<string, List<string>> _classInlineStyle;
         Dictionary<string, string> _langFontCodeandName = new Dictionary<string, string>();
@@ -48,24 +48,144 @@ namespace Test.XeLatex
         protected void SetUpAll()
         {
             Common.Testing = true;
-            _projInfo = new PublicationInformation();
-            _classInlineStyle = new Dictionary<string, List<string>>();
-            _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/XeLatex/TestFiles");
-            _inputPath = Common.PathCombine(_testFolderPath, "input");
-            _outputPath = Common.PathCombine(_testFolderPath, "output");
-            _expectedPath = Common.PathCombine(_testFolderPath, "Expected");
-            const bool recursive = true;
-            if (Directory.Exists(_outputPath))
-                Directory.Delete(_outputPath, recursive);
-            Directory.CreateDirectory(_outputPath);
-            _projInfo.ProjectPath = _testFolderPath;
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
             Common.SupportFolder = "";
+            Common.ProgBase = Common.ProgInstall;
+
+            _projInfo = new PublicationInformation();
+            string testPath = PathPart.Bin(Environment.CurrentDirectory, "/XeLatex/TestFiles");
+            _inputPath = Common.PathCombine(testPath, "input");
+            _outputPath = Common.PathCombine(testPath, "output");
+            _expectedPath = Common.PathCombine(testPath, "Expected");
+
+            if (Directory.Exists(_outputPath))
+                Directory.Delete(_outputPath, true);
+            Directory.CreateDirectory(_outputPath);
+            _projInfo.ProjectPath = testPath;
+            _classInlineStyle = new Dictionary<string, List<string>>();
+            string pathwayDirectory = PathwayPath.GetPathwayDir();
+            string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
+           
+            ValidateXMLVersion(styleSettingFile);
+            Common.ProgInstall = pathwayDirectory;
+            Param.LoadSettings();
+            Param.SetValue(Param.InputType, "Scripture");
+            Param.LoadSettings();
         }
+
         #endregion Setup
 
         #region Public Functions
 
+        private void ValidateXMLVersion(string filePath)
+        {
+            var versionControl = new SettingsVersionControl();
+            var validator = new SettingsValidator();
+            if (File.Exists(filePath))
+            {
+                versionControl.UpdateSettingsFile(filePath);
+                bool isValid = validator.ValidateSettingsFile(filePath, true);
+                if (!isValid)
+                {
+                }
+            }
+        }
+
         #region Nunits
+
+        /// <summary>
+        ///A test for Export Xelatex For Scripture
+        ///</summary>
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void ScriptureExportTest()
+        {
+            string inputSourceDirectory = FileInput("ExportXelatex");
+            string outputDirectory = FileOutput("ExportXelatex");
+            if (Directory.Exists(outputDirectory))
+            {
+                Directory.Delete(outputDirectory, true);
+            }
+            FolderTree.Copy(inputSourceDirectory, outputDirectory);
+            Param.LoadSettings();
+            _projInfo.ProjectPath = outputDirectory;
+            _projInfo.ProjectInputType = "Scripture";
+            _projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "ScriptureInput.xhtml");
+            _projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "ScriptureInput.css");
+
+            EnableConfigurationSettings(outputDirectory);
+
+            var target = new ExportXeLaTex();
+            const bool expectedResult = true;
+            bool actual = target.Export(_projInfo);
+            Assert.AreEqual(expectedResult, actual);
+        }
+
+        private void EnableConfigurationSettings(string outputDirectory)
+        {
+            Param.SetValue(Param.PrintVia, "Xelatex");
+            Param.SetValue(Param.LayoutSelected, "A4 Cols ApplicationStyles");
+            // Publication Information tab
+            Param.UpdateTitleMetadataValue(Param.Title, "XelatexExport", false);
+            Param.UpdateMetadataValue(Param.Description, "XelatexDescription");
+            Param.UpdateMetadataValue(Param.Creator, "XelatexCreator");
+            Param.UpdateMetadataValue(Param.Publisher, "XelatexPublisher");
+            Param.UpdateMetadataValue(Param.CopyrightHolder, "SIL International");
+            // also persist the other DC elements
+            Param.UpdateMetadataValue(Param.Subject, "Bible");
+            Param.UpdateMetadataValue(Param.Date, DateTime.Today.ToString("yyyy-MM-dd"));
+            Param.UpdateMetadataValue(Param.CoverPage, "True");
+            
+            string pathwayDirectory = PathwayPath.GetPathwayDir();
+            string coverImageFilePath = Common.PathCombine(pathwayDirectory, "Graphic");
+            coverImageFilePath = Common.PathCombine(coverImageFilePath, "cover.png");
+            Param.UpdateMetadataValue(Param.CoverPageFilename, coverImageFilePath);
+
+            Param.UpdateMetadataValue(Param.CoverPageTitle, "True");
+            Param.UpdateMetadataValue(Param.TitlePage, "True");
+            Param.UpdateMetadataValue(Param.CopyrightPage, "True");
+
+            string copyrightsFilePath = Common.PathCombine(pathwayDirectory, "Copyrights");
+            copyrightsFilePath = Common.PathCombine(copyrightsFilePath, "SIL_CC-by-nc-sa.xhtml");
+            Param.UpdateMetadataValue(Param.CopyrightPageFilename, copyrightsFilePath);
+
+            Param.UpdateMetadataValue(Param.TableOfContents, "True");
+            Param.SetValue(Param.Media, "paper");
+            Param.SetValue(Param.PublicationLocation, outputDirectory);
+            Param.Write();
+            
+        }
+
+        /// <summary>
+        ///A test for Export Xelatex For Scripture
+        ///</summary>
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void DictionaryExportTest()
+        {
+            string inputSourceDirectory = FileInput("ExportXelatex");
+            string outputDirectory = FileOutput("ExportXelatex");
+            if (Directory.Exists(outputDirectory))
+            {
+                Directory.Delete(outputDirectory, true);
+            }
+            FolderTree.Copy(inputSourceDirectory, outputDirectory);
+            Param.LoadSettings();
+            _projInfo.ProjectPath = outputDirectory;
+            _projInfo.ProjectInputType = "Dictionary";
+            _projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "DictionaryInput.xhtml");
+            _projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "DictionaryInput.css");
+
+            EnableConfigurationSettings(outputDirectory);
+
+            var target = new ExportXeLaTex();
+            const bool expectedResult = true;
+            bool actual = target.Export(_projInfo);
+            Assert.AreEqual(expectedResult, actual);
+        }
+
 
         /// <summary>
         /// Multi Parent Test - .subsenses > .sense > .xsensenumber { font-size:10pt;}
@@ -1018,7 +1138,7 @@ namespace Test.XeLatex
         [Category("SkipOnTeamCity")]
         public void VisibilityCensorPackageTest()
         {
-
+            
             const string testFileName = "VisibilityPackage";
             var inputname = testFileName + ".tex";
             var xeLatexFullFile = FileOutput(inputname);
@@ -1026,7 +1146,7 @@ namespace Test.XeLatex
             File.Copy(FileInput(inputname), xeLatexFullFile, overwrite);
             var imgPath = new Dictionary<string, string>();
             UpdateXeLaTexFontCacheIfNecessary();
-            CallXeLaTex(xeLatexFullFile, true, imgPath);
+            CallXeLaTex(_projInfo, xeLatexFullFile, true, imgPath);
             var outname = testFileName + ".log";
             TextFileAssert.AreEqualEx(FileExpected(outname), FileOutput(outname), new ArrayList { 1, 55, 56, 57, 58, 60 });
         }
@@ -1162,6 +1282,25 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void HideVerseNumYes()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "HideVerseNumYes";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void HideVerseNumNo()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "HideVerseNumNo";
+            ExportProcess(file);
+            FileCompare(file);
+        }
         #endregion
 
         #region Private Functions

@@ -58,6 +58,71 @@ namespace SIL.PublishingSolution
         private bool _isFromExe = false;
         private bool _isFirstODT = true;
 
+        /// <summary>
+        /// Convert XHTML to ODT
+        /// </summary>
+        public bool Export(PublicationInformation projInfo)
+        {
+            publicationInfo = projInfo;
+            string defaultXhtml = projInfo.DefaultXhtmlFileWithPath;
+            GeneratedPdfFileName = defaultXhtml;
+            projInfo.OutputExtension = "odt";
+            Common.OdType = Common.OdtType.OdtChild;
+            bool returnValue = false;
+            VerboseClass verboseClass = VerboseClass.GetInstance();
+            _isFromExe = Common.CheckExecutionPath();
+
+            Common.DeleteDirectoryWildCard(Path.GetTempPath(), "SilPathwaytmp*");
+
+            string strFromOfficeFolder = Common.FromRegistry("OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
+            projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
+            CopyOfficeFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
+            Dictionary<string, string> dictSecName = new Dictionary<string, string>();
+
+            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
+            CssTree cssTree = new CssTree();
+            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+
+            if (cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
+            {
+                projInfo.FileToProduce = cssClass["@page"]["-ps-fileproduce"];
+            }
+
+            if (projInfo.FromPlugin && projInfo.IsReversalExist)
+            {
+                dictSecName = CreatePageDictionary(projInfo);
+            }
+            else
+            {
+                dictSecName = GetPageSectionSteps();
+            }
+            dictSecName = SplitXhtmlAsMultiplePart(projInfo, dictSecName);
+
+            if (dictSecName.Count > 1)
+            {
+                GeneratedPdfFileName = dictSecName["Main"];
+                ExportODM(publicationInfo.ProgressBar);
+            }
+            else
+            {
+                publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
+                returnValue = ExportODT(publicationInfo);
+            }
+
+            if (publicationInfo.FinalOutput != null && publicationInfo.FinalOutput.ToLower() == "pdf")
+            {
+                publicationInfo.OutputExtension = "pdf";
+                Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice", projInfo.ProjectInputType);
+            }
+            else
+            {
+                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.jar,.xml", "layout.css", string.Empty);
+                CreateRAMP();
+                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".css,.xhtml,.xml", String.Empty, String.Empty);
+            }
+            return returnValue;
+        }
+
         private Dictionary<string, string> SplitXhtmlAsMultiplePart(PublicationInformation publicationInformation, Dictionary<string, string> dictSecName)
         {
             var fileNameWithPath = new List<string>();
@@ -76,7 +141,7 @@ namespace SIL.PublishingSolution
                 fileNameWithPath = fs.SplitFile(publicationInformation.DefaultXhtmlFileWithPath);
                 string flexRevFile =
                     Common.PathCombine(Path.GetDirectoryName(publicationInformation.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-                if(File.Exists(flexRevFile))
+                if (File.Exists(flexRevFile))
                     fileNameWithPath.Add(flexRevFile);
             }
 
@@ -105,8 +170,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> CreateJoiningForSplited(List<string> fileNames)
         {
             Dictionary<string, string> dictSecName = new Dictionary<string, string>();
-              if (fileNames.Count> 0)
-            
+            if (fileNames.Count > 0)
             {
                 bool mainAdded = false;
                 int fileCount = 1;
@@ -219,7 +283,7 @@ namespace SIL.PublishingSolution
             publicationInfo.IsODM = true;
             foreach (KeyValuePair<int, Dictionary<string, string>> keyvalue in _dictSorderSection)
             {
-                
+
                 var Sections = keyvalue.Value;
                 foreach (var subSection in Sections)
                 {
@@ -330,71 +394,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        /// <summary>
-        /// Convert XHTML to ODT
-        /// </summary>
-        public bool Export(PublicationInformation projInfo)
-        {
-            publicationInfo = projInfo;
-            string defaultXhtml = projInfo.DefaultXhtmlFileWithPath;
-            GeneratedPdfFileName = defaultXhtml;
-            projInfo.OutputExtension = "odt";
-            Common.OdType = Common.OdtType.OdtChild;
-            bool returnValue = false;
-            VerboseClass verboseClass = VerboseClass.GetInstance();
-            _isFromExe = Common.CheckExecutionPath();
-
-            Common.DeleteDirectoryWildCard(Path.GetTempPath(), "SilPathwaytmp*"); 
-
-            string strFromOfficeFolder = Common.FromRegistry("OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
-            projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
-            CopyOfficeFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
-            Dictionary<string, string> dictSecName = new Dictionary<string, string>();
-
-            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-            CssTree cssTree = new CssTree();
-            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            if (cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
-            {
-                projInfo.FileToProduce = cssClass["@page"]["-ps-fileproduce"];
-            }
-
-            if (projInfo.FromPlugin && projInfo.IsReversalExist)
-            {
-                dictSecName = CreatePageDictionary(projInfo);
-            }
-            else
-            {
-                dictSecName = GetPageSectionSteps();
-            }
-            dictSecName = SplitXhtmlAsMultiplePart(projInfo, dictSecName);
-            
-            if (dictSecName.Count > 1)
-            {
-                GeneratedPdfFileName = dictSecName["Main"];
-                ExportODM(publicationInfo.ProgressBar);
-            }
-            else
-            {
-                publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
-                returnValue = ExportODT(publicationInfo);
-            }
-
-            if (publicationInfo.FinalOutput.ToLower() == "pdf")
-            {
-                publicationInfo.OutputExtension = "pdf";
-                Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice", projInfo.ProjectInputType);
-            }
-            else
-            {
-                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.jar,.xml", "layout.css", string.Empty);
-                CreateRAMP();
-                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".css,.xhtml,.xml", String.Empty, String.Empty);
-            }
-            return returnValue;
-        }
-
         private void InsertFrontMatter(PublicationInformation projInfo)
         {
             if (_isFromExe && _isFirstODT)
@@ -406,7 +405,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void SetBookReferenceDivInCSS(string cssFileName)
+        private void SetBookReferenceDivInCss(string cssFileName)
         {
             TextWriter tw = new StreamWriter(cssFileName, true);
             tw.WriteLine(".BookReferenceDiv {");
@@ -458,21 +457,22 @@ namespace SIL.PublishingSolution
             }
 
             string cssFile = projInfo.DefaultCssFileWithPath;
-            SetBookReferenceDivInCSS(cssFile);
+            SetBookReferenceDivInCss(cssFile);
             var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(defaultXhtml);
-            if(projInfo.DefaultRevCssFileWithPath != null && projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
+            if (projInfo.DefaultRevCssFileWithPath != null && projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
             {
                 if (fileNameWithoutExtension != null && fileNameWithoutExtension.ToLower() == "flexrev")
                 {
                     cssFile = projInfo.DefaultRevCssFileWithPath;
                 }
             }
-            
+
 
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             if (fileNameWithoutExtension != null && fileNameWithoutExtension.ToLower() == "flexrev")
             {
                 preProcessor.InsertEmptyDiv(preProcessor.ProcessedXhtml);
+                preProcessor.InsertSpanAfterLetter(preProcessor.ProcessedXhtml);
             }
             preProcessor.GetTempFolderPath();
             preProcessor.GetDefaultLanguage(projInfo);
@@ -489,24 +489,24 @@ namespace SIL.PublishingSolution
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.ODT;
             cssClass = cssTree.CreateCssProperty(cssFile, true);
-            HandledInCss(ref projInfo, ref cssClass);
             SetHeaderFontName(projInfo, cssClass);
+            HandledInCss(ref projInfo, ref cssClass);
             int pageWidth = GetPictureWidth(cssClass);
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             LOStyles inStyles = new LOStyles();
-            inStyles._multiLanguageHeader = isMultiLanguageHeader;
+            inStyles.MultiLanguageHeader = isMultiLanguageHeader;
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
-            projInfo.IncludeFootnoteSymbol = inStyles._customFootnoteCaller;
-            projInfo.IncludeXRefSymbol = inStyles._customXRefCaller;
-            projInfo.SplitFileByLetter = inStyles._splitFileByLetter;
-            projInfo.HideSpaceVerseNumber = inStyles._hideSpaceVerseNumber;
+            projInfo.IncludeFootnoteSymbol = inStyles.CustomFootnoteCaller;
+            projInfo.IncludeXRefSymbol = inStyles.CustomXRefCaller;
+            projInfo.SplitFileByLetter = inStyles.SplitFileByLetter;
+            projInfo.HideSpaceVerseNumber = inStyles.HideSpaceVerseNumber;
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
 
             string isToc;
-            var isCoverImageInserted = EditCSSValues(idAllClass, out isToc);
+            var isCoverImageInserted = EditCssValues(idAllClass, out isToc);
 
 
             _refFormat = Common.GetReferenceFormat(idAllClass, _refFormat);
@@ -533,7 +533,6 @@ namespace SIL.PublishingSolution
 
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML._multiLanguageHeader = isMultiLanguageHeader;
-            cXML.RefFormat = this._refFormat;
 
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize);
             PostProcess(projInfo);
@@ -600,7 +599,7 @@ namespace SIL.PublishingSolution
             return returnValue;
         }
 
-        private static string EditCSSValues(Dictionary<string, Dictionary<string, string>> idAllClass, out string isToc)
+        private static string EditCssValues(Dictionary<string, Dictionary<string, string>> idAllClass, out string isToc)
         {
             // Enable Table of content for macro
             isToc = "false";
@@ -674,36 +673,53 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
+            else
+            {
+                if (cssClass.ContainsKey("letter") && cssClass["letter"].ContainsKey("font-family")) //TD-3281  
+                {
+                        cssClass["letter"]["font-family"] = projInfo.HeaderFontName;
+                }
+            }
         }
 
         private static void SetHeaderFontName(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass)
         {
-            projInfo.HeaderFontName = "Times New Roman";
-            if (projInfo.ProjectInputType == "Dictionary")
+            try
             {
-                if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath.ToLower()) == "preservemain")
+                projInfo.HeaderFontName = "Times New Roman";
+                if (projInfo.ProjectInputType == "Dictionary")
                 {
-                    if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
+                    if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath.ToLower()) == "preservemain")
                     {
-                        projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
+                        if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
+                        {
+                            projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
+                            //projInfo.ReversalFontName = idAllClass["headword"]["font-family"];
+                        }
+                    }
+                    else
+                    {
+                        foreach (string clsName in idAllClass.Keys)
+                        {
+                            if (clsName.IndexOf("reversalform") == 0 && idAllClass[clsName].ContainsKey("font-family"))
+                            {
+                                projInfo.HeaderFontName = idAllClass[clsName]["font-family"];
+                                projInfo.ReversalFontName = idAllClass[clsName]["font-family"];
+                                break;
+                            }
+                        }
                     }
                 }
-                else
+                else if (projInfo.ProjectInputType == "Scripture")
                 {
-                    if (idAllClass.ContainsKey("reversalform") && idAllClass["reversalform"].ContainsKey("font-family"))
+                    if (idAllClass.ContainsKey("scrBody") && idAllClass["scrBody"].ContainsKey("font-family"))
                     {
-                        projInfo.HeaderFontName = idAllClass["reversalform"]["font-family"];
-                        projInfo.ReversalFontName = idAllClass["reversalform"]["font-family"];
+                        projInfo.HeaderFontName = idAllClass["scrBody"]["font-family"];
+                        projInfo.ReversalFontName = idAllClass["scrBody"]["font-family"];
                     }
                 }
             }
-            else if (projInfo.ProjectInputType == "Scripture")
-            {
-                if (idAllClass.ContainsKey("scrBody") && idAllClass["scrBody"].ContainsKey("font-family"))
-                {
-                    projInfo.HeaderFontName = idAllClass["scrBody"]["font-family"];
-                }
-            }
+            catch{}
         }
 
         private static void PostProcess(PublicationInformation projInfo)
@@ -721,7 +737,7 @@ namespace SIL.PublishingSolution
 
         public static void ContentPostProcess(string tempOutputFolder)
         {
-            
+
             string filename = Common.PathCombine(tempOutputFolder, "content.xml");
             XmlDocument xdoc = Common.DeclareXMLDocument(true);
             FileStream fs = File.OpenRead(filename);
@@ -979,18 +995,18 @@ namespace SIL.PublishingSolution
             string officeNode1 = "//of:automatic-styles";
             if (root2 != null)
             {
-                XmlNode node1 = root2.SelectSingleNode(officeNode1, nsmgr); 
+                XmlNode node1 = root2.SelectSingleNode(officeNode1, nsmgr);
                 if (node1 != null)
                 {
                     node1.InnerXml = node1.InnerXml + allStyles;
-               }
+                }
                 docContent.Save(strContentPath);
             }
         }
 
         private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime, string isCoverImageInserted, string isToc)
         {
-    	    var xmldoc = Common.DeclareXMLDocument(true);
+            var xmldoc = Common.DeclareXMLDocument(true);
             xmldoc.Load(strMacroPath);
             XmlElement ele = xmldoc.DocumentElement;
             string autoMacro = "False";
@@ -1003,7 +1019,7 @@ namespace SIL.PublishingSolution
             }
             if (ele != null)
             {
-                
+
                 string seperator = "\n";
                 string line1 = string.Empty;
                 if (publicationInfo.ProjectInputType.ToLower() == "scripture")
@@ -1026,7 +1042,7 @@ namespace SIL.PublishingSolution
         }
 
 
-        
+
         #endregion
 
         #region Private Functions

@@ -33,7 +33,7 @@ namespace SIL.Tool
         public string Database { get; set; }
         private bool _isLoaded;
         private HostProgram _hostProgram;
-        public enum HostProgram
+        private enum HostProgram
         {
             Paratext,
             FieldWorks,

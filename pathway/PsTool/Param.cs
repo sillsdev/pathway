@@ -57,17 +57,16 @@ namespace SIL.Tool
 		// Settings
         public const string InputPath = "InputPath";
         public const string OutputPath = "OutputPath";
-        public const string UserSheetPath = "UserSheetPath";
+        private const string UserSheetPath = "UserSheetPath";
         public const string PublicationLocation = "PublicationLocation";
         public const string MasterSheetPath = "MasterSheetPath";
-        public const string IconPath = "IconPath";
+        private const string IconPath = "IconPath";
         public const string SamplePath = "SamplePath";
         public const string DefaultIcon = "DefaultIcon";
         public const string CurrentInput = "CurrentInput";
         public const string InputType = "InputType";
         public const string LastTask = "LastTask";
         public const string PreviewType = "PreviewType";
-        public const string CssEditor = "CssEditor";
         public const string SelectedIcon = "SelectedIcon";
         public const string MissingIcon = "MissingIcon";
         public const string Help = "Help";
@@ -153,7 +152,7 @@ namespace SIL.Tool
         public static Dictionary<string, Dictionary<string, string>> featureList = new Dictionary<string, Dictionary<string, string>>();
         public static readonly XmlDocument xmlMap = Common.DeclareXMLDocument(false);
         private static int _selectedIndex = 1;
-        private static int _UnSelectedIndex = 2;
+        private const int UnSelectedIndex = 2;
         private static string _configureType = string.Empty;
 
 
@@ -391,7 +390,7 @@ namespace SIL.Tool
         /// <summary>
         /// Sets the Gloabal Font Size and Font Name from StyleSettings.xml
         /// </summary>
-        public static void SetFontNameSize()
+        protected static void SetFontNameSize()
         {
             XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             xmlDocument.Load(UiSettingPath);
@@ -411,7 +410,7 @@ namespace SIL.Tool
         /// <param name="path"></param>
         /// <param name="attr"></param>
         /// <returns></returns>
-        public static string GetAttrSummary(string path, string attr)
+        protected static string GetAttrSummary(string path, string attr)
         {
             var summary = "";
             foreach (XmlNode node in GetItems(path))
@@ -525,7 +524,7 @@ namespace SIL.Tool
                                 else
                                 {
                                     //opt.ImageIndex = 2;
-                                    opt.StateImageIndex = _UnSelectedIndex;
+                                    opt.StateImageIndex = UnSelectedIndex;
                                 }
 
                             }
@@ -608,7 +607,6 @@ namespace SIL.Tool
                 Value[id] = val;
                 var node = xmlMap.SelectSingleNode(string.Format("stylePick/settings/property[@name=\"{0}\"]", id));
                 Debug.Assert(node != null && node.Attributes != null);
-                if (node != null)
                 {
                     var valueAttr = node.Attributes.GetNamedItem("value");
                     valueAttr.Value = val;
@@ -650,7 +648,7 @@ namespace SIL.Tool
         /// <param name="sheet"></param>
         /// <param name="description"></param>
         /// <param name="fileNamewithPath"></param>
-        public static void SaveSheet(string sheet, string fileNamewithPath, string description)
+        private static void SaveSheet(string sheet, string fileNamewithPath, string description)
         {
             Debug.Assert(sheet != "", "Missing sheet name");
             var baseNode = xmlMap.SelectSingleNode("stylePick/styles/" + MediaType);
@@ -868,7 +866,7 @@ namespace SIL.Tool
         /// <param name="sheet"></param>
         /// <param name="fa"></param>
         /// <returns></returns>
-        public static string StylePath(string sheet, FileAccess fa)
+        private static string StylePath(string sheet, FileAccess fa)
         {
             var fn = sheet.Contains(".css") ? sheet : StyleFile.ContainsKey(sheet) ? StyleFile[sheet] :  "";
             var fPath = Common.PathCombine(Value[UserSheetPath], fn);
@@ -1025,8 +1023,11 @@ namespace SIL.Tool
                 var childNode = xmlMap.CreateNode(XmlNodeType.Element, "styleProperty", "");
                 AddAttrValue(childNode, "name", attribName);
                 AddAttrValue(childNode, "value", attribValue);
-                baseNode.AppendChild(childNode);
-                Write();
+                if (baseNode != null)
+                {
+                    baseNode.AppendChild(childNode);
+                    Write();
+                }
             }
             else
             {
@@ -1114,26 +1115,26 @@ namespace SIL.Tool
         /// <summary>
         /// To set the properties for "metadata" branch items.
         /// </summary>
-        /// <param name="Name">Name of metadata element to update</param>
-        /// <param name="Value">Value to set as Current Value</param>
-        public static void UpdateMetadataValue(string Name, string Value)
+        /// <param name="name">Name of metadata element to update</param>
+        /// <param name="currValue">Value to set as Current Value</param>
+        public static void UpdateMetadataValue(string name, string currValue)
         {
             try
             {
-                VerifyMetaNode(Name);
+                VerifyMetaNode(name);
 
-                XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
+                XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/currentValue");
                 var newValue = " ";
-                if(Value != null && Value.Trim().Length > 0)
+                if(currValue != null && currValue.Trim().Length > 0)
                 {
-                    newValue = Value.Trim();
+                    newValue = currValue.Trim();
                 }
 
                 //var newValue = (Value.Trim().Length > 0) ? Value.Trim() : " ";
                 if (node == null)
                 {
                     // currentValue node doesn't exist yet - create it now
-                    XmlNode baseNode = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']");
+                    XmlNode baseNode = GetItem("//stylePick/Metadata/meta[@name='" + name + "']");
                     var childNode = xmlMap.CreateNode(XmlNodeType.Element, "currentValue", "");
                     childNode.InnerText = XmlConvert.EncodeName(newValue);
                     baseNode.AppendChild(childNode);
@@ -1148,7 +1149,7 @@ namespace SIL.Tool
             }
             catch (Exception ex)
             {
-                throw new Exception("Unable to update Metadata Value (Name=" + Name + ", Value=" + Value + ")", ex);
+                throw new Exception("Unable to update Metadata Value (Name=" + name + ", Value=" + currValue + ")", ex);
             }
         }
 
@@ -1307,7 +1308,7 @@ namespace SIL.Tool
     	/// <summary>
         /// Load ListView icons from image folder
         /// </summary>
-        public static void LoadImageList()
+        private static void LoadImageList()
         {
             LoadIconMap();
             imageListSmall.Images.Clear();

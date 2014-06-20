@@ -362,21 +362,21 @@ namespace SIL.PublishingSolution
             ValidateLineHeight(styleAttributeInfo);
         }
 
-         private void FixedLineHeight(StyleAttribute styleAttributeInfo)
+        private void FixedLineHeight(StyleAttribute styleAttributeInfo)
         {
             ValidateFixedLineHeight(styleAttributeInfo);
         }
 
-         private void DisableWidowandOrphan(StyleAttribute styleAttributeInfo)
-         {
-             _cssProperty[styleAttributeInfo.Name] = styleAttributeInfo.StringValue;
-         }
+        private void DisableWidowandOrphan(StyleAttribute styleAttributeInfo)
+        {
+            _cssProperty[styleAttributeInfo.Name] = styleAttributeInfo.StringValue;
+        }
 
         private void BorderMethod2(StyleAttribute styleAttributeInfo)
         {
             string propertyName = styleAttributeInfo.Name;
             string propertyValue = styleAttributeInfo.StringValue;
-            var borderSide = new[] {"border-top-", "border-right-", "border-bottom-", "border-left-"};
+            var borderSide = new[] { "border-top-", "border-right-", "border-bottom-", "border-left-" };
             switch (styleAttributeInfo.Name)
             {
                 case "border-style":
@@ -457,9 +457,9 @@ namespace SIL.PublishingSolution
             {
                 attrValue = "100%";
             }
-            else if(styleAttributeInfo.StringValue.IndexOf(",") < 0)
+            else if (styleAttributeInfo.StringValue.IndexOf(",") < 0)
             {
-                int value = int.Parse(styleAttributeInfo.StringValue)*100;
+                int value = int.Parse(styleAttributeInfo.StringValue) * 100;
                 attrValue = value.ToString() + "%";
             }
 
@@ -477,7 +477,7 @@ namespace SIL.PublishingSolution
         private void ValidateFixedLineHeight(StyleAttribute styleAttributeInfo)
         {
             string attrValue = DeleteSeperator(styleAttributeInfo.StringValue);
-           _cssProperty[styleAttributeInfo.Name] = attrValue;
+            _cssProperty[styleAttributeInfo.Name] = attrValue;
         }
 
         private void TextAlign(StyleAttribute styleAttributeInfo)
@@ -632,7 +632,7 @@ namespace SIL.PublishingSolution
                 case "-ps-fileproduce":
                 case "prince-text-replace":
                 case "-ps-referenceformat":
-                case "-ps-positionchapternumbers-string": 
+                case "-ps-positionchapternumbers-string":
                 case "-ps-includeversenumber-string":
                 case "-ps-includeverseinheaderreferences-string":
                 case "ps-nonconsecutivereferenceseparator-string":
@@ -874,7 +874,6 @@ namespace SIL.PublishingSolution
         private void FontFamily(StyleAttribute styleAttributeInfo)
         {
             string[] font = styleAttributeInfo.StringValue.Split(',');
-            string familyName = string.Empty;
             int fontLength = font.Length;
             if (fontLength == 0 || styleAttributeInfo.StringValueLower == "inherit")
             {
@@ -897,20 +896,18 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-
-            string genericFamily = font[fontLength - 1];
-            genericFamily = genericFamily.Replace("\"", "").Trim().ToLower();
             ArrayList genericFamilyList = new ArrayList(new[] { "serif", "sans-serif", "cursive", "fantasy", "monospace" });
             fontName = font[0];
             for (int i = 0; i < fontLength; i++)
             {
-                fontName = font[i].Replace("<","");
+                fontName = font[i].Replace("<", "");
                 fontName = fontName.Replace(">", "");
                 fontName = fontName.Replace("default", "").Trim();
 
                 if (genericFamilyList.Contains(fontName.ToLower()))
                 {
                     string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
+
                     string xPath = "//font-preference/generic-family [@name = \"" + fontName.ToLower() + "\"]";
                     ArrayList fontList = new ArrayList();
                     fontList = Common.GetXmlNodeList(xmlFileNameWithPath, xPath);
@@ -989,7 +986,7 @@ namespace SIL.PublishingSolution
                     {
                         borderColor = ColorHash(value[i]);
                         GetBorderColorList(borderColor);
-                        
+
                     }
                     else if (_dicColorInfo.ContainsKey(value[i])) // red conversion to #ff0000
                     {
@@ -1140,7 +1137,7 @@ namespace SIL.PublishingSolution
                 }
                 if (colorLen == 5)
                 {
-                    retValue = "#" + attributeStringValue[1] + attributeStringValue[2]  + attributeStringValue[3] + attributeStringValue[4] + "00";
+                    retValue = "#" + attributeStringValue[1] + attributeStringValue[2] + attributeStringValue[3] + attributeStringValue[4] + "00";
                 }
                 if (retValue.Length != 7)
                 {

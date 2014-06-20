@@ -103,7 +103,8 @@ Func GetInstaller($name)
 		;$urlPath = 'http://pathway.googlecode.com/files/'
 		$urlPath = 'http://pathway.sil.org/wp-content/stable/' & $name
 	Elseif StringInStr($name, "XeLaTeX") Then
-		$urlPath = 'http://pathway.sil.org/wp-content/sprint/' & $name
+		;$urlPath = 'http://pathway.sil.org/wp-content/sprint/' & $name
+		$urlPath = 'http://build.palaso.org/repository/download/bt190/.lastPinned/' & $name & '?guest=1'
 	Else
 		$urlPath = 'http://build.palaso.org/repository/download/bt84/.lastPinned/' & $name & '?guest=1'
 	EndIf
@@ -507,7 +508,10 @@ Func XeLaTexInstalled($size)
 			EndIf
 			$latest = IniRead("PathwayBootstrap.Ini", "Versions", "XeLaTex", "1.6")
 			;MsgBox(4096,"Status","XeLaTeX ver " & $ver & ", latest " & $latest)
-			if $ver = $latest Then
+			Local $verSplit = StringSplit($ver, ".")
+			Local $latestSplit = StringSplit($latest, ".")
+			;MsgBox(4096,"Status","XeLaTeX ver " & $verSplit[1] & "/" & $verSplit[2] & "/" & $verSplit[3] & ", latest " & $latestSplit[1] & "/" & $latestSplit[2] & "/" & $latestSplit[3])
+			if $verSplit[1] = $latestSplit[1] and $verSplit[2] = $latestSplit[2] and $verSplit[3] = $latestSplit[3] Then
 				Return True
 			EndIf
 		EndIf
@@ -523,7 +527,9 @@ Func InstallXeLaTeXIfNecessary()
 	if $InstallStable or Not $INS_XeLaTex Then
 		Return
 	Endif
-	Local $name = "SetupXeLaTeX" & $XeLaTexSuffix
+	Local $latest = IniRead("PathwayBootstrap.Ini", "Versions", "XeLaTex", "1.6")
+	Local $suffix = "Testing-" & $latest
+	Local $name = "SetupXeLaTeX" & $suffix & ".msi"
 	CleanUp($name)
 	GetInstaller($name)
 	LaunchInstaller($name)

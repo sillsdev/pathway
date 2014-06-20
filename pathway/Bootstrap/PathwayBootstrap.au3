@@ -18,7 +18,7 @@
 
 ;Global $StableVersionDate = '-0.7.1-2011-04-12'
 Global $StableVersionDate = ''
-Global $XeLaTexSuffix = 'Testing-1.7.0.3077.msi'
+;Global $XeLaTexSuffix = 'Testing-1.7.0.3077.msi' - currently installing from Team City
 Global $DEL_Installer = True
 
 Opt('MustDeclareVars', 1)

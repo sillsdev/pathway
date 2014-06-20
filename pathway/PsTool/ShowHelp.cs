@@ -29,9 +29,11 @@ namespace SIL.Tool
             if (isLinux && isKeyPress)
             {
                 helpKeyword = ModifySlashForLinuxProcess(helpKeyword);
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "chmsee";
-                startInfo.Arguments = Common.PathwayHelpFileDirectory() + "::" + helpKeyword;
+                var startInfo = new ProcessStartInfo
+                                                 {
+                                                     FileName = "chmsee",
+                                                     Arguments = Common.PathwayHelpFileDirectory() + "::" + helpKeyword
+                                                 };
                 Process.Start(startInfo);
             }
             else
@@ -47,9 +49,11 @@ namespace SIL.Tool
             if (isLinux)
             {
                 helpKeyword = ModifySlashForLinuxProcess(helpKeyword);
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "chmsee";
-                startInfo.Arguments = Common.PathwayHelpFileDirectory() + "::" + helpKeyword;
+                var startInfo = new ProcessStartInfo
+                                                 {
+                                                     FileName = "chmsee",
+                                                     Arguments = Common.PathwayHelpFileDirectory() + "::" + helpKeyword
+                                                 };
                 Process.Start(startInfo);
             }
             else

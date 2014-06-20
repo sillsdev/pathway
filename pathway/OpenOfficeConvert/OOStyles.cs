@@ -15,14 +15,10 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml;
-using Microsoft.Win32;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -35,23 +31,15 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> _LOClass = new Dictionary<string, string>();
         private Dictionary<string, string> _LOProperty = new Dictionary<string, string>();
         OOMapProperty mapProperty = new OOMapProperty();
-        protected bool isFixedLengthEnabled = false;
-
+        protected bool IsFixedLengthEnabled = false;
         //Marks_crop - Declaration
         private string _writingMode = "lr-tb";
-
-        public bool _multiLanguageHeader = false;
-        private string _projectType = string.Empty;
+        public bool MultiLanguageHeader = false;
         private string _enableKerning = "true";
-
-        public string _customFootnoteCaller;
-        public string _customXRefCaller;
-        public string _hideVerseNumberOne;
-        public string _hideSpaceVerseNumber = "False";
-
-        public string _splitFileByLetter = "False";
-
-
+        public string CustomFootnoteCaller;
+        public string CustomXRefCaller;
+        public string HideSpaceVerseNumber = "False";
+        public string SplitFileByLetter = "False";
         private bool _isFromExe = false;
         private bool _isCenterTabStopNeeded = true;
         private int _guidewordLength;
@@ -64,7 +52,6 @@ namespace SIL.PublishingSolution
                 string outputFile = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 string strStylePath = Common.PathCombine(projInfo.TempOutputFolder, outputFileName);
                 _isFromExe = Common.CheckExecutionPath();
-                _projectType = projInfo.ProjectInputType;
                 _projInfo = projInfo;
                 _cssProperty = cssProperty;
                 GetGuidewordLength(cssProperty);
@@ -72,7 +59,7 @@ namespace SIL.PublishingSolution
                 LoadAllProperty();  // Loads all properties
                 LoadSpellCheck();
                 FixedLineHeightStatus();
-                CreateODTStyles(strStylePath, _cssProperty);
+                CreateODTStyles(strStylePath);
                 CreateCssStyle();
                 CreatePageStyle();
                 AddTagStyle(); // Add missing tags in styles.xml (h1,h2,..)
@@ -137,7 +124,7 @@ namespace SIL.PublishingSolution
         {
             if (_cssProperty.ContainsKey("@page") && _cssProperty["@page"].ContainsKey("-ps-fixed-line-height"))
             {
-                isFixedLengthEnabled = Convert.ToBoolean(_cssProperty["@page"]["-ps-fixed-line-height"]);
+                IsFixedLengthEnabled = Convert.ToBoolean(_cssProperty["@page"]["-ps-fixed-line-height"]);
             }
         }
 
@@ -199,7 +186,7 @@ namespace SIL.PublishingSolution
                     propValue.Add("direction", "rtl");
                 }
 
-                _LOProperty = mapProperty.IDProperty(propValue, isFixedLengthEnabled);
+                _LOProperty = mapProperty.IDProperty(propValue, IsFixedLengthEnabled);
                 if (cssClass.Key == "revsensenumber")
                 {
                     if (!_LOProperty.ContainsKey("font-family"))
@@ -788,7 +775,7 @@ namespace SIL.PublishingSolution
             if (_cssProperty.ContainsKey(pageName))
             {
                 Dictionary<string, string> cssClass1 = _cssProperty[pageName];
-                _LOProperty = mapProperty.IDProperty(cssClass1, isFixedLengthEnabled);
+                _LOProperty = mapProperty.IDProperty(cssClass1, IsFixedLengthEnabled);
                 foreach (KeyValuePair<string, string> para in _LOProperty)
                     if (para.Key.ToLower() == "-ps-referenceformat-string")
                     {
@@ -797,23 +784,22 @@ namespace SIL.PublishingSolution
                     }
                     else if (para.Key.ToLower() == "-ps-custom-footnote-caller")
                     {
-                        _customFootnoteCaller = para.Value.Replace("\"", "");
+                        CustomFootnoteCaller = para.Value.Replace("\"", "");
                     }
                     else if (para.Key.ToLower() == "-ps-custom-xref-caller")
                     {
-                        _customXRefCaller = para.Value.Replace("\"", "");
+                        CustomXRefCaller = para.Value.Replace("\"", "");
                     }
                     else if (para.Key.ToLower() == "-ps-hide-versenumber-one")
                     {
-                        _hideVerseNumberOne = para.Value.Replace("\"", "");
                     }
                     else if (para.Key.ToLower() == "-ps-split-file-by-letter")
                     {
-                        _splitFileByLetter = para.Value.Replace("\"", "");
+                        SplitFileByLetter = para.Value.Replace("\"", "");
                     }
                     else if (para.Key.ToLower() == "-ps-hide-space-versenumber")
                     {
-                        _hideSpaceVerseNumber = para.Value.Replace("\"", "");
+                        HideSpaceVerseNumber = para.Value.Replace("\"", "");
                     }
                     else if (para.Key == "border-top"
                              || para.Key == "border-top-style"
@@ -909,7 +895,7 @@ namespace SIL.PublishingSolution
                     {
                         Dictionary<string, string> cssProp = _cssProperty[currentPagePosition];
 
-                        _LOProperty = mapProperty.IDProperty(cssProp, isFixedLengthEnabled);
+                        _LOProperty = mapProperty.IDProperty(cssProp, IsFixedLengthEnabled);
                         foreach (KeyValuePair<string, string> para in _LOProperty)
                         {
                             if (para.Key == "content")
@@ -1253,9 +1239,9 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("style:text-properties");
             _writer.WriteAttributeString("fo:font-size", "12pt");
             _writer.WriteAttributeString("fo:font-style", "italic");
-            _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-size-asian", "12pt");
             _writer.WriteAttributeString("style:font-style-asian", "italic");
+            _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-size-complex", "12pt");
             _writer.WriteAttributeString("style:font-style-complex", "italic");
@@ -1275,7 +1261,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteStartElement("style:text-properties");
             _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
-            _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
+            _writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
@@ -1931,12 +1917,12 @@ namespace SIL.PublishingSolution
         private void CreateRightGuideword(int i)
         {
             string mainFrameName = "Mfr1";
-            string _refFormat = string.Empty;
+            string refFormat = string.Empty;
             if (_projInfo.ProjectInputType.ToLower() == "scripture")
             {
-                _refFormat = Common.GetReferenceFormat(_cssProperty, _refFormat);
+                refFormat = Common.GetReferenceFormat(_cssProperty, refFormat);
             }
-            if (_refFormat.IndexOf("1-2") == -1)
+            if (refFormat.IndexOf("1-2") == -1)
             {
                 _writer.WriteStartElement("draw:frame");
                 _writer.WriteAttributeString("draw:style-name", mainFrameName);
@@ -1968,7 +1954,14 @@ namespace SIL.PublishingSolution
 
                 _writer.WriteAttributeString("draw:z-index", "1");
                 _writer.WriteStartElement("draw:text-box");
-                _writer.WriteAttributeString("fo:min-height", "14.14pt"); //added for TD-2579
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    _writer.WriteAttributeString("fo:min-height", "19.00pt"); //added for TD-4006 14.14
+                }
+                else
+                {
+                    _writer.WriteAttributeString("fo:min-height", "14.14pt"); //added for TD-2579
+                }
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "MP1");
 
@@ -2362,19 +2355,6 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("style:horizontal-pos", "right");
                 }
             }
-            //else if (_pageHeaderFooter[6].ContainsKey("content") && _pageHeaderFooter[6]["content"].IndexOf("last)") > 0 ||
-            //     _pageHeaderFooter[12].ContainsKey("content") && _pageHeaderFooter[12]["content"].IndexOf("last)") > 0 ||
-            //    _pageHeaderFooter[18].ContainsKey("content") && _pageHeaderFooter[18]["content"].IndexOf("last)") > 0)
-            //{
-            //    if (source == "Variable")
-            //    {
-            //        _writer.WriteAttributeString("fo:text-align", "start");
-            //    }
-            //    else
-            //    {
-            //        _writer.WriteAttributeString("style:horizontal-pos", "left");
-            //    }
-            //}
             else if (_pageHeaderFooter[7].ContainsKey("content") && _pageHeaderFooter[7]["content"].IndexOf("last)") > 0 ||
                  _pageHeaderFooter[13].ContainsKey("content") && _pageHeaderFooter[13]["content"].IndexOf("last)") > 0 ||
                 _pageHeaderFooter[19].ContainsKey("content") && _pageHeaderFooter[19]["content"].IndexOf("last)") > 0)
@@ -2401,66 +2381,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string GetHeaderFont(string strHeaderFont)
-        {
-            foreach (string font in _cssProperty.Keys)
-            {
-                if (font.IndexOf("reversalform") == 0 && _cssProperty[font].ContainsKey("font-family"))
-                {
-                    string languageCode = string.Empty;
-                    XmlDocument xdoc = Common.DeclareXMLDocument(true);
-                    xdoc.Load(_projInfo.DefaultXhtmlFileWithPath);
-                    string xhtmlPath = "//span[@class='reversal-form_L4']";
-                    XmlNodeList nodes = xdoc.SelectNodes(xhtmlPath);
-                    if (nodes.Count > 0)
-                    {
-                        for (int i = 0; i < nodes.Count; i++)
-                        {
-                            var xmlAttributeCollection = nodes[i].Attributes;
-                            if (xmlAttributeCollection != null)
-                                if (xmlAttributeCollection["lang"] != null)
-                                {
-                                    if (xmlAttributeCollection["lang"].Value != null)
-                                    {
-                                        languageCode = xmlAttributeCollection["lang"].Value;
-                                        break;
-                                    }
-                                }
-                        }
-                    }
-
-
-                    string fontName = string.Empty;
-                    string PsSupportPath = Common.GetPSApplicationPath();
-                    string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
-                    string xPath = "//font-language-mapping";
-                    XmlNodeList fontList = Common.GetXmlNodes(xmlFileNameWithPath, xPath);
-                    if (fontList != null && fontList.Count > 0)
-                    {
-                        foreach (XmlNode xmlNode in fontList)
-                        {
-                            if (xmlNode.Attributes != null)
-                            {
-                                foreach (XmlAttribute attribute in xmlNode.Attributes) // open it'line attributes
-                                {
-                                    if (attribute.Value == languageCode)
-                                    {
-                                        fontName = xmlNode.InnerText.Trim();
-                                        break;
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-
-
-                    strHeaderFont = fontName; // _cssProperty[font]["font-family"];
-                    break;
-                }
-            }
-            return strHeaderFont;
-        }
 
         private void CreateHeaderFrame()
         {
@@ -2488,7 +2408,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
-            
+
             if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 _writer.WriteStartElement("style:style");
@@ -2538,7 +2458,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
-            if (_multiLanguageHeader)
+            if (MultiLanguageHeader)
             {
 
                 _writer.WriteStartElement("style:style");
@@ -2617,37 +2537,208 @@ namespace SIL.PublishingSolution
         {
             GetPageDirection();
 
-            _writer.WriteStartElement("style:page-layout");
-            _writer.WriteAttributeString("style:name", "pm1");
+            WritePageLayoutStyle();
+
+            WritePageLayoutStyleTwo();
+
+            WritePageLayoutStyleThree();
+
+            WritePageLayoutStyleSix();
+
             if (isMirrored)
             {
-                _writer.WriteAttributeString("style:page-usage", "mirrored"); // If mirrored Page TD-410
-                _writer.WriteStartElement("style:page-layout-properties");
-                foreach (KeyValuePair<string, string> para in _pageLayoutProperty)
-                {
-                    _writer.WriteAttributeString(para.Key, para.Value);
-                }
-            }
-            else
-            {
-                _writer.WriteStartElement("style:page-layout-properties");
-                foreach (KeyValuePair<string, string> para in _pageLayoutProperty)
-                {
-                    _writer.WriteAttributeString(para.Key, para.Value);
-                }
+                WritePageLayoutStyleMirroredFour();
+
+                WritePageLayoutStyleMirroredFive();
             }
 
+            WritePageLayoutStylePropertyTwelve();
+
+            WritePageLayoutStylePropertyThirteen();
+
+            WritePageLayoutStylePropertySeven();
+        }
+
+        private void WritePageLayoutStylePropertySeven()
+        {
+            /* pm7 starts - Non Footer settings */
+            _writer.WriteStartElement("style:page-layout"); // pm7
+            _writer.WriteAttributeString("style:name", "pm7"); // First Page
+            _writer.WriteStartElement("style:page-layout-properties");
+            foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
+            {
+                _writer.WriteAttributeString(para.Key, para.Value);
+            }
+            if (_writingMode.ToLower() == "rl-tb")
+            {
+                _writer.WriteAttributeString("style:writing-mode", _writingMode);
+            }
+            _writer.WriteStartElement("style:background-image");
+            _writer.WriteEndElement();
             // START FootNote Seperator
             FootnoteSeperator();
             // END FootNote Seperator
+            _writer.WriteEndElement(); // end of style:page-layout-properties
             _writer.WriteEndElement();
+            /* pm7 ends*/
+        }
+
+        private void WritePageLayoutStylePropertyThirteen()
+        {
+            _writer.WriteStartElement("style:page-layout");
+            _writer.WriteAttributeString("style:name", "pm13");
+            _writer.WriteStartElement("style:page-layout-properties");
+            foreach (KeyValuePair<string, string> para in _pageLayoutProperty)
+            {
+                _writer.WriteAttributeString(para.Key, para.Value);
+            }
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+        }
+
+        private void WritePageLayoutStylePropertyTwelve()
+        {
+            _writer.WriteStartElement("style:page-layout");
+            _writer.WriteAttributeString("style:name", "pm12");
+            _writer.WriteStartElement("style:page-layout-properties");
+            foreach (KeyValuePair<string, string> para in _pageLayoutProperty)
+            {
+                _writer.WriteAttributeString(para.Key, para.Value);
+            }
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+        }
+
+        private void WritePageLayoutStyleMirroredFive()
+        {
+            /* pm5 starts */
+            _writer.WriteStartElement("style:page-layout"); // pm5
+            _writer.WriteAttributeString("style:name", "pm5"); // Right Page
+            _writer.WriteAttributeString("style:page-usage", "mirrored");
+            _writer.WriteStartElement("style:page-layout-properties");
+            foreach (KeyValuePair<string, string> para in _rightPageLayoutProperty)
+            {
+                _writer.WriteAttributeString(para.Key, para.Value);
+            }
+            if (_writingMode.ToLower() == "rl-tb")
+            {
+                _writer.WriteAttributeString("style:writing-mode", _writingMode);
+            }
+            _writer.WriteStartElement("style:background-image");
+            _writer.WriteEndElement();
+            // START FootNote Seperator
+            FootnoteSeperator();
+            // END FootNote Seperator
+            _writer.WriteEndElement(); // end of style:page-layout-properties
+            //Header & Footer styles for pm5
             _writer.WriteStartElement("style:header-style");
+            LoadHeaderSettings();
             _writer.WriteEndElement();
             _writer.WriteStartElement("style:footer-style");
+            LoadFooterSettings(21);
             _writer.WriteEndElement();
+            //End Header & Footer styles for pm5
             _writer.WriteEndElement();
+            /* pm5 ends*/
+        }
 
+        private void WritePageLayoutStyleMirroredFour()
+        {
+            /* pm4 starts */
+            _writer.WriteStartElement("style:page-layout"); // pm4
+            _writer.WriteAttributeString("style:name", "pm4"); // Left Page
+            _writer.WriteAttributeString("style:page-usage", "mirrored");
+            _writer.WriteStartElement("style:page-layout-properties");
+            foreach (KeyValuePair<string, string> para in _leftPageLayoutProperty)
+            {
+                _writer.WriteAttributeString(para.Key, para.Value);
+            }
+            if (_writingMode.ToLower() == "rl-tb")
+            {
+                _writer.WriteAttributeString("style:writing-mode", _writingMode);
+            }
+            _writer.WriteStartElement("style:background-image");
+            _writer.WriteEndElement();
+            // START FootNote Seperator
+            FootnoteSeperator();
+            // END FootNote Seperator
+            _writer.WriteEndElement(); // end of style:page-layout-properties
+            //Header & Footer styles for pm4
+            _writer.WriteStartElement("style:header-style");
+            LoadHeaderSettings();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("style:footer-style");
+            LoadFooterSettings(15);
+            _writer.WriteEndElement();
+            //End Header & Footer styles for pm4
+            _writer.WriteEndElement();
+            /* pm4 ends*/
+        }
 
+        private void WritePageLayoutStyleSix()
+        {
+            if (_isFromExe)
+            {
+                /* pm6 starts */
+                _writer.WriteStartElement("style:page-layout"); // pm6
+                _writer.WriteAttributeString("style:name", "pm6"); // Index Page
+                _writer.WriteStartElement("style:page-layout-properties");
+                foreach (KeyValuePair<string, string> para in _pageLayoutProperty)
+                {
+                    _writer.WriteAttributeString(para.Key, para.Value);
+                }
+                _writer.WriteStartElement("style:background-image");
+                _writer.WriteEndElement();
+                // START FootNote Seperator
+                FootnoteSeperator();
+                // END FootNote Seperator
+                _writer.WriteEndElement(); // end of style:page-layout-properties
+                //Header & Footer styles for pm6
+                _writer.WriteStartElement("style:header-style");
+                _writer.WriteEndElement();
+                _writer.WriteStartElement("style:footer-style");
+                LoadFooterSettings(9);
+                _writer.WriteEndElement();
+                //End Header & Footer styles for pm6
+                _writer.WriteEndElement();
+                /* pm6 ends*/
+            }
+        }
+
+        private void WritePageLayoutStyleThree()
+        {
+            /* pm3 starts */
+            _writer.WriteStartElement("style:page-layout"); // pm3
+            _writer.WriteAttributeString("style:name", "pm3"); // First Page
+            _writer.WriteStartElement("style:page-layout-properties");
+            foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
+            {
+                _writer.WriteAttributeString(para.Key, para.Value);
+            }
+            if (_writingMode.ToLower() == "rl-tb")
+            {
+                _writer.WriteAttributeString("style:writing-mode", _writingMode);
+            }
+            _writer.WriteStartElement("style:background-image");
+            _writer.WriteEndElement();
+            // START FootNote Seperator
+            FootnoteSeperator();
+            // END FootNote Seperator
+            _writer.WriteEndElement(); // end of style:page-layout-properties
+            //Header & Footer styles for pm3
+            _writer.WriteStartElement("style:header-style");
+            LoadHeaderSettings();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("style:footer-style");
+            LoadFooterSettings(3);
+            _writer.WriteEndElement();
+            //End Header & Footer styles for pm3
+            _writer.WriteEndElement();
+            /* pm3 ends*/
+        }
+
+        private void WritePageLayoutStyleTwo()
+        {
             /* pm2 starts */
             _writer.WriteStartElement("style:page-layout"); // pm2
             _writer.WriteAttributeString("style:name", "pm2"); // All Page
@@ -2678,166 +2769,39 @@ namespace SIL.PublishingSolution
             //End Header & Footer styles for pm2
             _writer.WriteEndElement();
             /* pm2 Ends*/
+        }
 
-            /* pm3 starts */
-            _writer.WriteStartElement("style:page-layout"); // pm3
-            _writer.WriteAttributeString("style:name", "pm3"); // First Page
-            _writer.WriteStartElement("style:page-layout-properties");
-            foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
+        private void WritePageLayoutStyle()
+        {
+            _writer.WriteStartElement("style:page-layout");
+            _writer.WriteAttributeString("style:name", "pm1");
+            if (isMirrored)
             {
-                _writer.WriteAttributeString(para.Key, para.Value);
-            }
-            if (_writingMode.ToLower() == "rl-tb")
-            {
-                _writer.WriteAttributeString("style:writing-mode", _writingMode);
-            }
-            _writer.WriteStartElement("style:background-image");
-            _writer.WriteEndElement();
-            // START FootNote Seperator
-            FootnoteSeperator();
-            // END FootNote Seperator
-            _writer.WriteEndElement(); // end of style:page-layout-properties
-            //Header & Footer styles for pm3
-            _writer.WriteStartElement("style:header-style");
-            LoadHeaderSettings();
-            _writer.WriteEndElement();
-            _writer.WriteStartElement("style:footer-style");
-            LoadFooterSettings(3);
-            _writer.WriteEndElement();
-            //End Header & Footer styles for pm3
-            _writer.WriteEndElement();
-            /* pm3 ends*/
-
-            if (_isFromExe)
-            {
-                /* pm6 starts */
-                _writer.WriteStartElement("style:page-layout"); // pm6
-                _writer.WriteAttributeString("style:name", "pm6"); // Index Page
+                _writer.WriteAttributeString("style:page-usage", "mirrored"); // If mirrored Page TD-410
                 _writer.WriteStartElement("style:page-layout-properties");
                 foreach (KeyValuePair<string, string> para in _pageLayoutProperty)
                 {
                     _writer.WriteAttributeString(para.Key, para.Value);
                 }
-                _writer.WriteStartElement("style:background-image");
-                _writer.WriteEndElement();
-                // START FootNote Seperator
-                FootnoteSeperator();
-                // END FootNote Seperator
-                _writer.WriteEndElement(); // end of style:page-layout-properties
-                //Header & Footer styles for pm6
-                _writer.WriteStartElement("style:header-style");
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("style:footer-style");
-                LoadFooterSettings(9);
-                _writer.WriteEndElement();
-                //End Header & Footer styles for pm6
-                _writer.WriteEndElement();
-                /* pm6 ends*/
             }
-
-            if (isMirrored)
+            else
             {
-                /* pm4 starts */
-                _writer.WriteStartElement("style:page-layout"); // pm4
-                _writer.WriteAttributeString("style:name", "pm4"); // Left Page
-                _writer.WriteAttributeString("style:page-usage", "mirrored");
                 _writer.WriteStartElement("style:page-layout-properties");
-                foreach (KeyValuePair<string, string> para in _leftPageLayoutProperty)
+                foreach (KeyValuePair<string, string> para in _pageLayoutProperty)
                 {
                     _writer.WriteAttributeString(para.Key, para.Value);
                 }
-                if (_writingMode.ToLower() == "rl-tb")
-                {
-                    _writer.WriteAttributeString("style:writing-mode", _writingMode);
-                }
-                _writer.WriteStartElement("style:background-image");
-                _writer.WriteEndElement();
-                // START FootNote Seperator
-                FootnoteSeperator();
-                // END FootNote Seperator
-                _writer.WriteEndElement(); // end of style:page-layout-properties
-                //Header & Footer styles for pm4
-                _writer.WriteStartElement("style:header-style");
-                LoadHeaderSettings();
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("style:footer-style");
-                LoadFooterSettings(15);
-                _writer.WriteEndElement();
-                //End Header & Footer styles for pm4
-                _writer.WriteEndElement();
-                /* pm4 ends*/
-
-                /* pm5 starts */
-                _writer.WriteStartElement("style:page-layout"); // pm5
-                _writer.WriteAttributeString("style:name", "pm5"); // Right Page
-                _writer.WriteAttributeString("style:page-usage", "mirrored");
-                _writer.WriteStartElement("style:page-layout-properties");
-                foreach (KeyValuePair<string, string> para in _rightPageLayoutProperty)
-                {
-                    _writer.WriteAttributeString(para.Key, para.Value);
-                }
-                if (_writingMode.ToLower() == "rl-tb")
-                {
-                    _writer.WriteAttributeString("style:writing-mode", _writingMode);
-                }
-                _writer.WriteStartElement("style:background-image");
-                _writer.WriteEndElement();
-                // START FootNote Seperator
-                FootnoteSeperator();
-                // END FootNote Seperator
-                _writer.WriteEndElement(); // end of style:page-layout-properties
-                //Header & Footer styles for pm5
-                _writer.WriteStartElement("style:header-style");
-                LoadHeaderSettings();
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("style:footer-style");
-                LoadFooterSettings(21);
-                _writer.WriteEndElement();
-                //End Header & Footer styles for pm5
-                _writer.WriteEndElement();
-                /* pm5 ends*/
             }
 
-            _writer.WriteStartElement("style:page-layout");
-            _writer.WriteAttributeString("style:name", "pm12");
-            _writer.WriteStartElement("style:page-layout-properties");
-            foreach (KeyValuePair<string, string> para in _pageLayoutProperty)
-            {
-                _writer.WriteAttributeString(para.Key, para.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:page-layout");
-            _writer.WriteAttributeString("style:name", "pm13");
-            _writer.WriteStartElement("style:page-layout-properties");
-            foreach (KeyValuePair<string, string> para in _pageLayoutProperty)
-            {
-                _writer.WriteAttributeString(para.Key, para.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            /* pm7 starts - Non Footer settings */
-            _writer.WriteStartElement("style:page-layout"); // pm7
-            _writer.WriteAttributeString("style:name", "pm7"); // First Page
-            _writer.WriteStartElement("style:page-layout-properties");
-            foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
-            {
-                _writer.WriteAttributeString(para.Key, para.Value);
-            }
-            if (_writingMode.ToLower() == "rl-tb")
-            {
-                _writer.WriteAttributeString("style:writing-mode", _writingMode);
-            }
-            _writer.WriteStartElement("style:background-image");
-            _writer.WriteEndElement();
             // START FootNote Seperator
             FootnoteSeperator();
             // END FootNote Seperator
-            _writer.WriteEndElement(); // end of style:page-layout-properties
             _writer.WriteEndElement();
-            /* pm7 ends*/
+            _writer.WriteStartElement("style:header-style");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("style:footer-style");
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
         }
 
         /// <summary>

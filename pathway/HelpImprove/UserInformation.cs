@@ -263,11 +263,8 @@ namespace SIL.PublishingSolution
                 if (osName.Contains("Windows"))
                 {
                     RegistryKey installedVersions =
-                        Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Wow6432Node\\Microsoft\\NET Framework Setup\\NDP");
-                    if (installedVersions == null)
-                    { // Handle 32-bit Windows 7 and XP
-                        installedVersions = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Microsoft\\NET Framework Setup\\NDP");
-                    }
+                        Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Wow6432Node\\Microsoft\\NET Framework Setup\\NDP") ??
+                        Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Microsoft\\NET Framework Setup\\NDP");
                     if (installedVersions != null)
                     {
                         string[] versionNames = installedVersions.GetSubKeyNames();

@@ -51,7 +51,7 @@ namespace Test.CssParserTest
         }
 
         [Test]
-        public void CoreClass()
+        public new void CoreClass()
         {
             _classInfo = new ClassInfo();
             ClassAttrib _expectedClassAttrib = new ClassAttrib();
@@ -70,7 +70,7 @@ namespace Test.CssParserTest
         }
 
         [Test]
-        public void Precede()
+        public new void Precede()
         {
             _classInfo = new ClassInfo();
             ClassAttrib _expectedClassAttrib = new ClassAttrib();
@@ -109,7 +109,7 @@ namespace Test.CssParserTest
         }
 
         [Test]
-        public void Ancestor()
+        public new void Ancestor()
         {
             _classInfo = new ClassInfo();
             ClassAttrib _expectedClassAttrib = new ClassAttrib();
@@ -128,7 +128,7 @@ namespace Test.CssParserTest
         }
 
         [Test]
-        public void ParentPrecede()
+        public new void ParentPrecede()
         {
             _classInfo = new ClassInfo();
             ClassAttrib _expectedClassAttrib = new ClassAttrib();

@@ -1002,8 +1002,8 @@ namespace SIL.PublishingSolution
 
         private void toolStripMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            _CToolBL.PreviousStyleName = txtName.Text;
-            _CToolBL.txtName_ValidatingBL(sender);
+            //_CToolBL.PreviousStyleName = txtName.Text;
+            //_CToolBL.txtName_ValidatingBL(sender);
         }
 
         private void txtPageGutterWidth_KeyUp(object sender, KeyEventArgs e)
@@ -1189,7 +1189,6 @@ namespace SIL.PublishingSolution
         {
             using (Process.Start("http://pathway.sil.org/"))
             {
-                return;
             }
         }
 
@@ -1249,6 +1248,13 @@ namespace SIL.PublishingSolution
         private void tsReset_Click(object sender, EventArgs e)
         {
             _CToolBL.tsReset_ClickBL();
+        }
+
+        private void moreHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (Process.Start("http://pathway.sil.org/demo/accessing-online-help-and-student-guide/"))
+            {
+            }
         }
     }
 }

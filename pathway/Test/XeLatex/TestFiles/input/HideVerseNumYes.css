@@ -1,0 +1,24 @@
+div[lang='zxx']{ font-family: "Charis SIL";}
+span[lang='zxx']{ font-family: "Charis SIL";}
+@page{ font-family: "Charis SIL";}
+
+div[lang='aai']{ font-family: "Charis SIL"; font-size: 14pt;}
+span[lang='aai']{ font-family: "Charis SIL";}
+
+.scrBody
+{
+direction: ltr;
+font-family: "Charis SIL";
+}
+
+@page {
+    -ps-hide-versenumber-one: "True";
+}
+
+.Paragraph {
+    text-indent: 12pt;
+    margin-left: 0pt;
+	orphans: 2;
+    widows:2;
+}
+

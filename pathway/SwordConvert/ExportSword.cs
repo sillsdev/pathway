@@ -72,7 +72,19 @@ namespace SIL.PublishingSolution
             projInfo.ProjectPath = usxFilePath;
             usxFilePath = Common.PathCombine(usxFilePath, "usx");
             string osisFilePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-            string tempSwordCreatorPath = SwordCreatorTempDirectory(swordFullPath);
+
+            string tempSwordCreatorPath = string.Empty;
+
+            if (Directory.Exists(swordFullPath))
+            {
+                tempSwordCreatorPath = SwordCreatorTempDirectory(swordFullPath);
+            }
+            else
+            {
+                throw new ArgumentException("Sword export option failed, Osis2Mod convertion file missing in the installer.");
+                return false;
+            }
+
             string swordTempFolder = tempSwordCreatorPath;
             osisFilePath = Common.PathCombine(osisFilePath, "OSIS");
             CreateDirectoryForSwordOutput(osisFilePath);
@@ -113,13 +125,10 @@ namespace SIL.PublishingSolution
             if (_openOutputDirectory)
             {
                 var output = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-                var result =
-                    MessageBox.Show(
-                        string.Format("Dictionary for Mid output successfully created in {0}. Display output?", output),
-                        "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
-                if (result == DialogResult.Yes)
+                if (output != null && (!Common.Testing && Directory.Exists(output)))
                 {
-                    if (Directory.Exists(output))
+                    var result = MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display output?", output), "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+                    if (result == DialogResult.Yes)
                     {
                         DisplayOutput(output);
                     }
@@ -328,16 +337,13 @@ namespace SIL.PublishingSolution
         /// </summary>
         protected void SwordOutputBuildProcess(string processFolder, string swordOutputPath, string[] osisFilesList, string projectPath)
         {
-            string Creator = "osis2mod";
+            const string creator = "osis2mod";
             string moreArguments = "-z -N -v NRSV";
             foreach (var osisFile in osisFilesList)
             {
                 var args = string.Format(@"""{0}"" ""{1}"" {2}", swordOutputPath, osisFile, moreArguments);
-
-                const bool noWait = false;
-                string stdOutput = string.Empty;
-                string stdOutErr = string.Empty;
-                SubProcess.Run(processFolder, Creator, args, true);
+                
+                SubProcess.Run(processFolder, creator, args, true);
                 moreArguments = "-a -z -N -v NRSV";
 
             }

@@ -25,8 +25,8 @@ namespace SIL.PublishingSolution
 {
     public class XeLaTexStyleBase
     {
-        protected Dictionary<string, string> _leftPageLayoutProperty;
-        protected Dictionary<string, string> _rightPageLayoutProperty;
+        protected Dictionary<string, string> LeftPageLayoutProperty;
+        protected Dictionary<string, string> RightPageLayoutProperty;
         protected PublicationInformation _projInfo = new PublicationInformation();
     }
 }

@@ -203,7 +203,7 @@
     </style:style>
     <style:style style:name="Caption" style:family="paragraph" style:parent-style-name="Standard" style:class="extra">
       <style:paragraph-properties fo:margin-top="0.0835in" fo:margin-bottom="0.0835in" text:number-lines="false" text:line-number="0" />
-      <style:text-properties fo:font-size="12pt" fo:font-style="italic" style:font-name-asian="Times New Roman" style:font-size-asian="12pt" style:font-style-asian="italic" style:font-name-complex="Times New Roman" style:font-size-complex="12pt" style:font-style-complex="italic" />
+      <style:text-properties fo:font-size="12pt" fo:font-style="italic" style:font-size-asian="12pt" style:font-style-asian="italic" style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" style:font-size-complex="12pt" style:font-style-complex="italic" />
     </style:style>
     <style:style style:name="Index" style:family="paragraph" style:parent-style-name="Standard" style:class="index">
       <style:paragraph-properties text:number-lines="false" text:line-number="0" />
@@ -481,7 +481,7 @@
       <style:footer>
         <text:p text:style-name="Footer">
           <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="55.95pt" fo:min-width="145pt" draw:z-index="1">
-            <draw:text-box fo:min-height="14.14pt">
+            <draw:text-box fo:min-height="19.00pt">
               <text:p text:style-name="MP1">
                 <text:span text:style-name="MT1">
                   <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />

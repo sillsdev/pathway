@@ -354,92 +354,103 @@ namespace SIL.PublishingSolution
                     if(sNode.Text == "PAGE")
                     {
                         pageName = GetPageName(sNode);
-                        if(pageName == duppageName)
-                        {
-                            foreach (TreeNode dupNode in node.Nodes)
-                            {
-                                ArrayList regtemp;
-                                ArrayList temp;
-                                if (dupNode.Text == "REGION" && _pagePropertyInfo.ContainsKey(pageName + "." + dupNode.FirstNode.Text))
-                                {
-                                    regtemp = _pagePropertyInfo[pageName + "." + dupNode.FirstNode.Text];
-                                    foreach (TreeNode prpNode in dupNode.Nodes)
-                                    {
-                                        if (prpNode.Text == "PROPERTY" && !regtemp.Contains(prpNode.FirstNode.Text))
-                                        {
-                                            foreach (TreeNode pNode in sNode.Nodes)
-                                            {
-                                                if (pNode.Text == "REGION" && pNode.FirstNode.Text == dupNode.FirstNode.Text)
-                                                {
-                                                    foreach (TreeNode mNode in pNode.Nodes)
-                                                    {
-                                                        if (mNode != null && mNode.Text == "PROPERTY" && prpNode.Text == "PROPERTY" && mNode.FirstNode.Text == prpNode.FirstNode.Text)
-                                                        {
-                                                            pNode.Nodes.Remove(mNode);
-                                                        }
-                                                    }
-                                                    pNode.Nodes.Add(prpNode);
-                                                }
-                                            }                                            
-                                            ArrayList tempList = GetPropertyNames(dupNode.Parent);
-                                            _pagePropertyInfo[pageName + "." + dupNode.FirstNode.Text] = tempList;
-                                        }
-                                        else
-                                        {
-                                            foreach (TreeNode pNode in sNode.Nodes)
-                                            {
-                                                if(pNode.Text == "REGION" && pNode.FirstNode.Text == dupNode.FirstNode.Text)
-                                                {
-                                                    foreach (TreeNode propNode in pNode.Nodes)
-                                                    {
-                                                        if (prpNode.Text == "PROPERTY" && propNode.Text == "PROPERTY" && propNode.FirstNode.Text == prpNode.FirstNode.Text)
-                                                        {
-                                                            pNode.Nodes.Remove(propNode);
-                                                            pNode.Nodes.Add(prpNode);
-                                                        }
-                                                    }
-                                                    break;
-                                                }
-                                            }
-                                        
-                                        }
-                                    }
-                                }
-                                else if (dupNode.Text == "PROPERTY" && _pagePropertyInfo.ContainsKey(pageName))
-                                {
-                                    temp = _pagePropertyInfo[pageName];
+                        ProcessParserPageNodewise(node, pageName, duppageName, sNode);
+                    }
+                }
+            }
+        }
 
-                                    if (!temp.Contains(dupNode.FirstNode.Text))
-                                    {
-                                        sNode.Nodes.Add(dupNode);
-                                        ArrayList tempList = GetPropertyNames(dupNode.Parent);
-                                        _pagePropertyInfo[pageName] = tempList;
-                                    }
-                                    else
-                                    {
-                                        foreach (TreeNode pNode in sNode.Nodes)
-                                        {
-                                            if (pNode.Text == "PROPERTY" && pNode.FirstNode.Text == dupNode.FirstNode.Text)
-                                            {
-                                                sNode.Nodes.Remove(pNode);
-                                                sNode.Nodes.Add(dupNode);
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (dupNode.Text == "REGION")
+        private void ProcessParserPageNodewise(TreeNode node, string pageName, string duppageName, TreeNode sNode)
+        {
+            if (pageName == duppageName)
+            {
+                foreach (TreeNode dupNode in node.Nodes)
+                {
+                    ArrayList temp;
+                    if (dupNode.Text == "REGION" && _pagePropertyInfo.ContainsKey(pageName + "." + dupNode.FirstNode.Text))
+                    {
+                        PagePropertyFirstNode(pageName, dupNode, sNode);
+                    }
+                    else if (dupNode.Text == "PROPERTY" && _pagePropertyInfo.ContainsKey(pageName))
+                    {
+                        temp = _pagePropertyInfo[pageName];
+
+                        if (!temp.Contains(dupNode.FirstNode.Text))
+                        {
+                            sNode.Nodes.Add(dupNode);
+                            ArrayList tempList = GetPropertyNames(dupNode.Parent);
+                            _pagePropertyInfo[pageName] = tempList;
+                        }
+                        else
+                        {
+                            foreach (TreeNode pNode in sNode.Nodes)
+                            {
+                                if (pNode.Text == "PROPERTY" && pNode.FirstNode.Text == dupNode.FirstNode.Text)
                                 {
-                                    ArrayList t = GetPropertyNames(dupNode);
-                                    _pagePropertyInfo[pageName + "." + dupNode.FirstNode.Text] = t;
-                                    sNode.Nodes.Add(dupNode);
-                                }
-                                else if (dupNode.Text == "PROPERTY")
-                                {
-                                    ArrayList t = GetPropertyNames(dupNode);
-                                    _pagePropertyInfo[pageName] = t;
+                                    sNode.Nodes.Remove(pNode);
                                     sNode.Nodes.Add(dupNode);
                                 }
                             }
+                        }
+                    }
+                    else if (dupNode.Text == "REGION")
+                    {
+                        ArrayList t = GetPropertyNames(dupNode);
+                        _pagePropertyInfo[pageName + "." + dupNode.FirstNode.Text] = t;
+                        sNode.Nodes.Add(dupNode);
+                    }
+                    else if (dupNode.Text == "PROPERTY")
+                    {
+                        ArrayList t = GetPropertyNames(dupNode);
+                        _pagePropertyInfo[pageName] = t;
+                        sNode.Nodes.Add(dupNode);
+                    }
+                }
+            }
+        }
+
+        private void PagePropertyFirstNode(string pageName, TreeNode dupNode, TreeNode sNode)
+        {
+            ArrayList regtemp;
+            regtemp = _pagePropertyInfo[pageName + "." + dupNode.FirstNode.Text];
+            foreach (TreeNode prpNode in dupNode.Nodes)
+            {
+                if (prpNode.Text == "PROPERTY" && !regtemp.Contains(prpNode.FirstNode.Text))
+                {
+                    foreach (TreeNode pNode in sNode.Nodes)
+                    {
+                        if (pNode.Text == "REGION" && pNode.FirstNode.Text == dupNode.FirstNode.Text)
+                        {
+                            foreach (TreeNode mNode in pNode.Nodes)
+                            {
+                                if (mNode != null && mNode.Text == "PROPERTY" && prpNode.Text == "PROPERTY" &&
+                                    mNode.FirstNode.Text == prpNode.FirstNode.Text)
+                                {
+                                    pNode.Nodes.Remove(mNode);
+                                }
+                            }
+                            pNode.Nodes.Add(prpNode);
+                        }
+                    }
+                    ArrayList tempList = GetPropertyNames(dupNode.Parent);
+                    _pagePropertyInfo[pageName + "." + dupNode.FirstNode.Text] = tempList;
+                }
+                else
+                {
+                    foreach (TreeNode pNode in sNode.Nodes)
+                    {
+                        if (pNode.Text == "REGION" && pNode.FirstNode.Text == dupNode.FirstNode.Text)
+                        {
+                            foreach (TreeNode propNode in pNode.Nodes)
+                            {
+                                if (prpNode.Text == "PROPERTY" && propNode.Text == "PROPERTY" &&
+                                    propNode.FirstNode.Text == prpNode.FirstNode.Text)
+                                {
+                                    pNode.Nodes.Remove(propNode);
+                                    pNode.Nodes.Add(prpNode);
+                                }
+                            }
+                            break;
                         }
                     }
                 }

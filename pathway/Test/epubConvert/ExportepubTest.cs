@@ -158,7 +158,7 @@ namespace Test.epubConvert
         {
             const string FolderName = "ChapterLinkTest";
             FolderTree.Copy(FileInput(FolderName), FileOutput(FolderName));
-            _inputType = "scripture";
+            InputType = "scripture";
             InsertChapterLinkBelowBookName(FileOutput(FolderName));
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
@@ -177,7 +177,7 @@ namespace Test.epubConvert
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
-        public void ExportDictionaryCSSFileComparisonTest()
+        public void ExportDictionaryCssFileComparisonTest()
         {
             // clean out old files
             foreach (var file in Directory.GetFiles(_outputPath))
@@ -226,7 +226,7 @@ namespace Test.epubConvert
         {
             const string FolderName = "ChapterLinkTest";
             FolderTree.Copy(FileInput(FolderName), FileOutput(FolderName));
-            _inputType = "scripture";
+            InputType = "scripture";
             InsertChapterLinkBelowBookName(FileOutput(FolderName));
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
@@ -262,7 +262,7 @@ namespace Test.epubConvert
             FolderTree.Copy(FileInput(FolderName), FileOutput(TestFolderName));
 
 
-            _inputType = "dictionary";
+            InputType = "dictionary";
             List<string> htmlFiles = new List<string>();
             string[] files = Directory.GetFiles(FileOutput(TestFolderName), "PartFile*.xhtml");
             foreach (var htmlFile in files)
@@ -270,7 +270,7 @@ namespace Test.epubConvert
                 htmlFiles.Add(htmlFile);
             }
 
-            pageBreak = false;
+            PageBreak = false;
             SplitPageSections(htmlFiles, FileOutput(FolderName), "");
             outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
 
@@ -302,7 +302,7 @@ namespace Test.epubConvert
             FolderTree.Copy(FileInput(FolderName), FileOutput(TestFolderName));
 
 
-            _inputType = "dictionary";
+            InputType = "dictionary";
             List<string> htmlFiles = new List<string>();
             string[] files = Directory.GetFiles(FileOutput(TestFolderName), "PartFile*.xhtml");
             foreach (var htmlFile in files)
@@ -310,7 +310,7 @@ namespace Test.epubConvert
                 htmlFiles.Add(htmlFile);
             }
 
-            pageBreak = true;
+            PageBreak = true;
             SplitPageSections(htmlFiles, FileOutput(FolderName), "");
             outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
 

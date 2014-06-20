@@ -106,11 +106,11 @@ namespace SIL.PublishingSolution
             Rec += "}}";
         }
 
-        public void AddReversal(XmlNode sense)
+        public void AddReversal(XmlNode sense, string className)
         {
             DisableStyles = true;
             Rec += "\t";
-            RenderChildClass(sense, "definition");
+            RenderChildClass(sense, className);
             DisableStyles = false;
         }
 
@@ -127,19 +127,11 @@ namespace SIL.PublishingSolution
             Styled = false;
         }
 
-        private void RenderChildClass(XmlNode sense, string p)
+        private void RenderChildClass(XmlNode sense, string className)
         {
-            foreach (XmlNode node in sense.ChildNodes)
-            {
-                var nodeClass = node.Attributes.GetNamedItem("class");
-                if (nodeClass != null && nodeClass.InnerText.Length >= p.Length &&  nodeClass.InnerText.Substring(0, p.Length) == p)
-                {
-                    if (node.ChildNodes.Count > 1)
-                        RenderNode(node.FirstChild);
-                    else
-                        RenderNode(node);
-                }
-            }
+            var classPath = string.Format(@"//*[starts-with(@class, '{0}')]/*[normalize-space() != '']", className);
+            XmlNode node = sense.SelectSingleNode(classPath);
+            RenderNode(node);
         }
 
         private void RenderNode(XmlNode xmlNode)

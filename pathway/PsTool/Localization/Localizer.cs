@@ -773,11 +773,13 @@ namespace JWTools
         #region Cmd: cmdClosing
         private void cmdClosing(object sender, FormClosingEventArgs e)
         {
+            const string caption = " Localizer";
+            const string message = "Do you want to save your changes permanently?";
             // Save any edits that have been done
             HarvestChanges();
             DialogResult result = MessageBox.Show(
-                "Do you want to save your changes permanently?",
-                 Common.GetProductName() + " Localizer",
+                message,
+                 Common.GetProductName() + caption,
                 MessageBoxButtons.YesNoCancel,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button1);

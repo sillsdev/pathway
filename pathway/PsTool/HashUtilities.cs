@@ -33,19 +33,19 @@ namespace SIL.Tool
 
 		private string mKey = string.Empty;
 		private string mSalt = string.Empty;
-		private ServiceProviderEnum mAlgorithm;
-		private SymmetricAlgorithm mCryptoService;
+		private readonly ServiceProviderEnum _mAlgorithm;
+		private readonly SymmetricAlgorithm _mCryptoService;
 
 		private void SetLegalIV()
 		{
 			// Set symmetric algorithm
-			switch(mAlgorithm)
+			switch(_mAlgorithm)
 			{
 				case ServiceProviderEnum.Rijndael:
-					mCryptoService.IV = new byte[] {0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9, 0x5, 0x46, 0x9c, 0xea, 0xa8, 0x4b, 0x73,0xcc};
+					_mCryptoService.IV = new byte[] {0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9, 0x5, 0x46, 0x9c, 0xea, 0xa8, 0x4b, 0x73,0xcc};
 					break;
 				default:
-					mCryptoService.IV = new byte[] {0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9};
+					_mCryptoService.IV = new byte[] {0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9};
 					break;
 			}
 		}
@@ -66,9 +66,9 @@ namespace SIL.Tool
 		public HashUtilities()
 		{
 			// Default symmetric algorithm
-			mCryptoService = new RijndaelManaged();
-			mCryptoService.Mode = CipherMode.CBC;
-			mAlgorithm = ServiceProviderEnum.Rijndael;
+			_mCryptoService = new RijndaelManaged();
+			_mCryptoService.Mode = CipherMode.CBC;
+			_mAlgorithm = ServiceProviderEnum.Rijndael;
 		}
 
 		public HashUtilities(ServiceProviderEnum serviceProvider)
@@ -77,23 +77,23 @@ namespace SIL.Tool
 			switch(serviceProvider)
 			{
 				case ServiceProviderEnum.Rijndael:
-					mCryptoService = new RijndaelManaged();
-					mAlgorithm = ServiceProviderEnum.Rijndael;
+					_mCryptoService = new RijndaelManaged();
+					_mAlgorithm = ServiceProviderEnum.Rijndael;
 					break;
 				case ServiceProviderEnum.RC2:
-					mCryptoService = new RC2CryptoServiceProvider();
-					mAlgorithm = ServiceProviderEnum.RC2;
+					_mCryptoService = new RC2CryptoServiceProvider();
+					_mAlgorithm = ServiceProviderEnum.RC2;
 					break;
 				case ServiceProviderEnum.DES:
-					mCryptoService = new DESCryptoServiceProvider();
-					mAlgorithm = ServiceProviderEnum.DES;
+					_mCryptoService = new DESCryptoServiceProvider();
+					_mAlgorithm = ServiceProviderEnum.DES;
 					break;
 				case ServiceProviderEnum.TripleDES:
-					mCryptoService = new TripleDESCryptoServiceProvider();
-					mAlgorithm = ServiceProviderEnum.TripleDES;
+					_mCryptoService = new TripleDESCryptoServiceProvider();
+					_mAlgorithm = ServiceProviderEnum.TripleDES;
 					break;
 			}
-			mCryptoService.Mode = CipherMode.CBC;
+			_mCryptoService.Mode = CipherMode.CBC;
 		}
 
         public HashUtilities(string serviceProviderName)
@@ -105,25 +105,25 @@ namespace SIL.Tool
 				{
 					case "rijndael":
 						serviceProviderName = "Rijndael"; 
-						mAlgorithm = ServiceProviderEnum.Rijndael;
+						_mAlgorithm = ServiceProviderEnum.Rijndael;
 						break;
 					case "rc2":
 						serviceProviderName = "RC2";
-						mAlgorithm = ServiceProviderEnum.RC2;
+						_mAlgorithm = ServiceProviderEnum.RC2;
 						break;
 					case "des":
 						serviceProviderName = "DES";
-						mAlgorithm = ServiceProviderEnum.DES;
+						_mAlgorithm = ServiceProviderEnum.DES;
 						break;
 					case "tripledes":
 						serviceProviderName = "TripleDES";
-						mAlgorithm = ServiceProviderEnum.TripleDES;
+						_mAlgorithm = ServiceProviderEnum.TripleDES;
 						break;
 				}
 
 				// Set symmetric algorithm
-				mCryptoService = (SymmetricAlgorithm)CryptoConfig.CreateFromName(serviceProviderName);
-				mCryptoService.Mode = CipherMode.CBC;
+				_mCryptoService = (SymmetricAlgorithm)CryptoConfig.CreateFromName(serviceProviderName);
+				_mCryptoService.Mode = CipherMode.CBC;
 			}
 			catch
 			{
@@ -134,13 +134,13 @@ namespace SIL.Tool
 		public virtual byte[] GetLegalKey()
 		{
 			// Adjust key if necessary, and return a valid key
-			if (mCryptoService.LegalKeySizes.Length > 0)
+			if (_mCryptoService.LegalKeySizes.Length > 0)
 			{
 				// Key sizes in bits
 				int keySize = mKey.Length * 8;
-				int minSize = mCryptoService.LegalKeySizes[0].MinSize;
-				int maxSize = mCryptoService.LegalKeySizes[0].MaxSize;
-				int skipSize = mCryptoService.LegalKeySizes[0].SkipSize;
+				int minSize = _mCryptoService.LegalKeySizes[0].MinSize;
+				int maxSize = _mCryptoService.LegalKeySizes[0].MaxSize;
+				int skipSize = _mCryptoService.LegalKeySizes[0].SkipSize;
 				
 				if (keySize > maxSize)
 				{
@@ -168,11 +168,11 @@ namespace SIL.Tool
 			byte[] keyByte = GetLegalKey();
 
 			// Set private key
-			mCryptoService.Key = keyByte;
+			_mCryptoService.Key = keyByte;
 			SetLegalIV();
 			
 			// Encryptor object
-			ICryptoTransform cryptoTransform = mCryptoService.CreateEncryptor();
+			ICryptoTransform cryptoTransform = _mCryptoService.CreateEncryptor();
 			
 			// Memory stream object
 			MemoryStream ms = new MemoryStream();
@@ -198,11 +198,11 @@ namespace SIL.Tool
 			byte[] keyByte = GetLegalKey();
 
 			// Set private key
-			mCryptoService.Key = keyByte;
+			_mCryptoService.Key = keyByte;
 			SetLegalIV();
 
 			// Decryptor object
-			ICryptoTransform cryptoTransform = mCryptoService.CreateDecryptor();
+			ICryptoTransform cryptoTransform = _mCryptoService.CreateDecryptor();
 			try
 			{
 				// Memory stream object

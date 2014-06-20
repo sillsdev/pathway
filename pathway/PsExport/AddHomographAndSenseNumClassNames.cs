@@ -23,11 +23,15 @@ namespace SIL.PublishingSolution
     public static class AddHomographAndSenseNumClassNames
     {
         #region InsertHomographClass
-        private static bool _insertHomographClass = true;
+
+        private const bool _insertHomographClass = true;
+
         #endregion InsertHomographClass
 
         #region InsertSenseNumClass
-        private static bool _insertSenseNumClass = true;
+
+        private const bool _insertSenseNumClass = true;
+
         #endregion InsertSenseNumClass
 
         public static void Execute(string inputFile, string output)

@@ -152,7 +152,7 @@ namespace SIL.PublishingSolution
                 success = ReportResults(resultFullName, mySwordResult, exportTheWordInputPath);
 
                 Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout.css", string.Empty);
-                CreateRAMP(projInfo);
+                CreateRamp(projInfo);
             }
             catch (Exception ex)
             {
@@ -170,7 +170,9 @@ namespace SIL.PublishingSolution
 
         protected void DisplayMessageReport()
         {
-            var result = !Common.Testing? MessageBox.Show("Display issues encountered during conversion?", "theWord Conversion Messages",
+            const string message = "Display issues encountered during conversion?";
+            const string caption = "theWord Conversion Messages";
+            var result = !Common.Testing ? MessageBox.Show(message, caption,
                                             MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error,
                                             MessageBoxDefaultButton.Button1) : DialogResult.No;
             switch (result)
@@ -186,9 +188,9 @@ namespace SIL.PublishingSolution
             }
         }
 
-        protected void CreateRAMP(IPublicationInformation projInfo)
+        protected void CreateRamp(IPublicationInformation projInfo)
         {
-            Ramp ramp = new Ramp();
+            var ramp = new Ramp();
             ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".mybible,.nt,.ont", projInfo.ProjectInputType);
         }
 
@@ -352,23 +354,23 @@ namespace SIL.PublishingSolution
             PostTransformMessage(message);
         }
 
-        protected static StreamWriter MessageStream;
+        private static StreamWriter _messageStream;
         protected static void PostTransformMessage(string message)
         {
             LogStatus("Message {0}", message);
             if (!_hasMessages)
             {
                 _hasMessages = true;
-                MessageStream = new StreamWriter(MessageFullName);
-                MessageStream.WriteLine("<html><head><title>theWord conversion messages</title></head>\n<body>\n<ul>");
+                _messageStream = new StreamWriter(MessageFullName);
+                _messageStream.WriteLine("<html><head><title>theWord conversion messages</title></head>\n<body>\n<ul>");
             }
-            MessageStream.WriteLine("<li>{0}</li>", message);
+            _messageStream.WriteLine("<li>{0}</li>", message);
         }
 
-        public static void XsltMessageClose()
+        protected static void XsltMessageClose()
         {
-            MessageStream.WriteLine("</ul>\n</body>\n</html>");
-            MessageStream.Close();
+            _messageStream.WriteLine("</ul>\n</body>\n</html>");
+            _messageStream.Close();
             _hasMessages = false;
         }
 
@@ -441,14 +443,18 @@ namespace SIL.PublishingSolution
             Ssf = sh.GetSettingsFilename();
         }
 
-        protected static string GetSsfValue(string xpath)
-        {
-            return GetSsfValue(xpath, null);
-        }
         protected static string GetSsfValue(string xpath, string def)
         {
             var node = Common.GetXmlNode(Ssf, xpath);
             return (node != null)? node.InnerText : def;
+        }
+
+        protected static string GetSsfValue(string xpath)
+        {
+// Default Parameters are not allowed in Team City build server.
+// ReSharper disable IntroduceOptionalParameters.Global
+            return GetSsfValue(xpath, null);
+// ReSharper restore IntroduceOptionalParameters.Global
         }
 
         protected static XsltArgumentList LoadXsltParameters()
@@ -456,7 +462,7 @@ namespace SIL.PublishingSolution
             var xsltArgs = new XsltArgumentList();
             xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
             xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
-            xsltArgs.AddParam("versification", "", GetVerseStructureUri());
+            xsltArgs.AddParam("versification", "", VrsName);
             GetRtlParam(xsltArgs);
             return xsltArgs;
         }
@@ -497,11 +503,6 @@ namespace SIL.PublishingSolution
         {
             var myProj = Common.PathCombine((string) ParatextData, GetSsfValue("//Name"));
             return "file:///" + Common.PathCombine(myProj, "BookNames.xml");
-        }
-
-        protected static string GetVerseStructureUri()
-        {
-            return "file:///" + VrsName;
         }
 
         protected static string UsxDir(string exportTheWordInputPath)
@@ -578,7 +579,7 @@ namespace SIL.PublishingSolution
 
         protected void AttachMetadata(StreamWriter sw)
         {
-            var format = @"verse.rule=""(<a href[^>]+>)(.*?)(</a>)"" ""$1<font color=defclr6>$2</font>$3""
+            const string format = @"verse.rule=""(<a href[^>]+>)(.*?)(</a>)"" ""$1<font color=defclr6>$2</font>$3""
 id=W{0}
 charset=0
 lang={0}

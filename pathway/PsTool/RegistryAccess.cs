@@ -30,13 +30,8 @@ namespace SIL.Tool
         //private static string _productName = Application.ProductName;
         private static string _productName = "Pathway";
 
-        public static string ProductName
+        private static string ProductName
         {
-            set
-            {
-                Debug.Assert(string.IsNullOrEmpty(value));
-                _productName = value;
-            }
             get
             {
                 return _productName;

@@ -14,12 +14,10 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using SIL.PublishingSolution;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -28,7 +26,6 @@ namespace SIL.PublishingSolution
     public class Preview
     {
         public string Sheet { get; set; }
-        public string DefaultCSS { get; set; }
         public Form ParentForm { get; set; }
         /// <summary>
         /// To show the preview

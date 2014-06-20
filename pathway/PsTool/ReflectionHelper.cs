@@ -28,16 +28,6 @@ namespace SIL.Tool
     {
         /// ------------------------------------------------------------------------------------
         /// <summary>
-        /// Sets the specified field (i.e. member variable) on the specified binding.
-        /// </summary>
-        /// ------------------------------------------------------------------------------------
-        public static void SetField(object binding, string fieldName, object args)
-        {
-            Invoke(binding, fieldName, new object[] { args }, BindingFlags.SetField);
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
         /// Gets the specified field (i.e. member variable) on the specified binding.
         /// </summary>
         /// ------------------------------------------------------------------------------------

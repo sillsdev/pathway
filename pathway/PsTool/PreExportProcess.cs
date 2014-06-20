@@ -9,7 +9,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Windows.Forms;
-using SIL.PublishingSolution;
 
 namespace SIL.Tool
 {
@@ -532,7 +531,7 @@ namespace SIL.Tool
 
         public List<string> GetMultiPictureEntryId(string fileName)
         {
-            string clsName, id, entryId = null;
+            string entryId = null;
             bool isfirstImage = false;
             List<string> entryIdList = new List<string>();
             if (!File.Exists(fileName)) return null;
@@ -545,8 +544,8 @@ namespace SIL.Tool
                     {
                         if (_reader.Name == "div")
                         {
-                            clsName = _reader.GetAttribute("class");
-                            id = _reader.GetAttribute("id");
+                            string clsName = _reader.GetAttribute("class");
+                            string id = _reader.GetAttribute("id");
                             if (clsName != null)
                             {
                                 if (clsName == "entry")
@@ -782,23 +781,24 @@ namespace SIL.Tool
 
                             if (!skipChapter)
                             {
+                                if (bookId.ParentNode == null) break;
                                 XmlNodeList chapterSectionIDs;
                                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                                 {
                                     // for dictionaries, the letter is used both for the ID and name
-                                    chapterSectionIDs = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']",
+                                    chapterSectionIDs = bookId.ParentNode.SelectNodes(".//xhtml:div[@class='Section_Head']",
                                                                                 namespaceManager);
                                 }
                                 else
                                 {
                                     // for scripture, scrBookCode contains the preferred ID while the Title_Main contains the preferred / localized name
                                     // 1. Book ID: start out with the book code (e.g., 2CH for 2 Chronicles)
-                                    chapterSectionIDs = xmlDocument.SelectNodes("//xhtml:span[@class='Section_Head']",
+                                    chapterSectionIDs = bookId.ParentNode.SelectNodes(".//xhtml:span[@class='Section_Head']",
                                                                                 namespaceManager);
                                     if (chapterSectionIDs == null || chapterSectionIDs.Count == 0)
                                     {
                                         // no book code - try scrBookName
-                                        chapterSectionIDs = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']",
+                                        chapterSectionIDs = bookId.ParentNode.SelectNodes(".//xhtml:div[@class='Section_Head']",
                                                                                     namespaceManager);
                                     }
                                 }
@@ -2383,8 +2383,11 @@ namespace SIL.Tool
                     nextNode = nextNode.NextSibling;
                 }
                 verseNodeList[i].InnerText = verseNodeList[i].InnerText.Trim() + " ";
-                nextNode.InnerXml = verseNodeList[i].OuterXml + nextNode.InnerXml;
-                nextNode.ParentNode.RemoveChild(verseNodeList[i]);
+                if (nextNode != null)
+                {
+                    nextNode.InnerXml = verseNodeList[i].OuterXml + nextNode.InnerXml;
+                    nextNode.ParentNode.RemoveChild(verseNodeList[i]);
+                }
             }
             xDoc.Save(fileName);
         }
@@ -2959,6 +2962,49 @@ namespace SIL.Tool
 
         }
 
+        public void InsertSpanAfterLetter(string fileName)
+        {
+            string flexRevFileName = Common.PathCombine(Path.GetDirectoryName(fileName), "FlexRev.xhtml");
+            string letterLang = "en";
+            if (!File.Exists(flexRevFileName)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(flexRevFileName);
+            string entryPath = "//xhtml:div[@class='entry'][1]";
+            XmlNodeList RevFormNodes = xDoc.SelectNodes(entryPath, namespaceManager);
+            if (RevFormNodes.Count > 0)
+            {
+                string xPath = "//xhtml:span";
+                XmlNodeList spanList = xDoc.SelectNodes(xPath, namespaceManager);
+                if (spanList.Count > 0)
+                {
+                    foreach (XmlNode item in spanList)
+                    {
+                        if(item.Attributes["class"] != null && item.Attributes["lang"] != null)
+                        {
+                            if(item.Attributes["class"].Value.ToLower().IndexOf("reversal-form") == 0)
+                            {
+                                letterLang = item.Attributes["lang"].Value;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            string letterPath = "//xhtml:div[@class=\"letter\"]";
+            XmlNodeList letterList = xDoc.SelectNodes(letterPath, namespaceManager);
+            if (letterList.Count > 0)
+            {
+                foreach (XmlNode letter in letterList)
+                {
+                    letter.InnerXml = "<span lang=\"" + letterLang + "\">" + letter.InnerText + "</span>";
+                }
+            }
+            xDoc.Save(flexRevFileName);
+        }
+
         /// <summary>
         /// Appends the product / assembly version to the .css file for field troubleshooting
         /// (this allows us to see what versions of the software the user has installed).
@@ -2976,6 +3022,67 @@ namespace SIL.Tool
             sb.AppendLine(") */");
             tw.WriteLine(sb.ToString());
             tw.Close();
+        }
+
+        public void RemoveBrokenImage()
+        {
+            string sourcePicturePath = Path.GetDirectoryName(_baseXhtmlFileNameWithPath);
+            string metaname = Common.GetBaseValue(_baseXhtmlFileNameWithPath);
+            string paraTextprojectPath = Common.GetParatextProjectPath();
+            if (metaname.Length == 0)
+            {
+                metaname = Common.GetMetaValue(_baseXhtmlFileNameWithPath);
+            }
+
+            try
+            {
+                XmlDocument xDoc = Common.DeclareXMLDocument(false);
+                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                xDoc.Load(_baseXhtmlFileNameWithPath);
+                XmlElement elmRoot = xDoc.DocumentElement;
+                string[] pictureClass = {
+                                        "pictureColumn", "picturePage", "pictureRight ", "pictureLeft",
+                                        "pictureCenter"
+                                    };
+
+                foreach (string clsName in pictureClass)
+                {
+                    string xPath = "//xhtml:div[@class='" + clsName + "']";
+                    if (elmRoot != null)
+                    {
+                        XmlNodeList pictureNode = elmRoot.SelectNodes(xPath, namespaceManager);
+                        if (pictureNode != null && pictureNode.Count > 0)
+                        {
+                            for (int i = 0; i < pictureNode.Count; i++)
+                            {
+                                xPath = ".//xhtml:img";
+                                XmlNode pNode = pictureNode[i].SelectSingleNode(xPath, namespaceManager);
+                                if (pNode != null && pNode.Attributes["src"] != null)
+                                {
+                                    string pictureFile = pNode.Attributes["src"].Value;
+                                    if (_projInfo.ProjectInputType.ToLower() == "scripture")
+                                    {
+                                        pictureFile = Common.PathCombine(paraTextprojectPath, pictureFile);
+                                    }
+
+                                    string fromFileName = Common.GetPictureFromPath(pictureFile, metaname, sourcePicturePath);
+                                    if (!File.Exists(fromFileName))
+                                    {
+                                        if (pictureNode[i].ParentNode != null)
+                                            pictureNode[i].ParentNode.RemoveChild(pictureNode[i]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                xDoc.Save(_baseXhtmlFileNameWithPath);
+            }
+            catch
+            {
+
+            }
         }
 
         #endregion

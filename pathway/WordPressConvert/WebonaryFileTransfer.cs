@@ -215,14 +215,13 @@ namespace SIL.PublishingSolution
             }
             catch (WebException ex)
             {
+                const string caption = "Pathway";
+                string message = "FTP Username and Password are invalid, Please verify in the configuration tool in web property tab.";
                 if (ex.Message == "The remote server returned an error: (530) Not logged in.")
                 {
-                    MessageBox.Show("Error getting response : Connection failed. Please retry.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    message = "Error getting response : Connection failed. Please retry.";
                 }
-                else
-                {
-                    MessageBox.Show("FTP Username and Password are invalid, Please verify in the configuration tool in web property tab.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             catch (Exception ex)
@@ -268,7 +267,8 @@ namespace SIL.PublishingSolution
             //Move the Custom.css file to wp-content\themes\webonary-zeedisplay folder
             CopyCustomCssToFtp(sourceDirectory);
 
-            lblStatus.Text = "Started moving the files to FTP Location.";
+            const string message = "Started moving the files to FTP Location.";
+            lblStatus.Text = message;
 
             StartedFileTransferToFTPLocation();
         }
@@ -622,14 +622,13 @@ namespace SIL.PublishingSolution
             }
             catch (WebException ex)
             {
+                const string caption = "Pathway";
+                string message = "FTP settings are invalid, Please verify in the configuration tool in web property tab.";
                 if (ex.Message == "The remote server returned an error: (530) Not logged in.")
                 {
-                    MessageBox.Show("FTP Username and Password are invalid, Please verify in the configuration tool in web property tab.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    message = "FTP Username and Password are invalid, Please verify in the configuration tool in web property tab.";
                 }
-                else
-                {
-                    MessageBox.Show("FTP settings are invalid, Please verify in the configuration tool in web property tab.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             catch (Exception ex)

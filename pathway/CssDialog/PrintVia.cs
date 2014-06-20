@@ -213,15 +213,18 @@ namespace SIL.PublishingSolution
 
         private void PrintVia_Load(object sender, EventArgs e)
         {
+            const string strDefault = "Set Defaults";
             if (!Common.isRightFieldworksVersion())
             {
-                MessageBox.Show("Please download and install a Pathway version compatible with your software", "Incompatible Pathway Version", MessageBoxButtons.OK,
+                const string text = "Please download and install a Pathway version compatible with your software";
+                const string caption = "Incompatible Pathway Version";
+                MessageBox.Show(text, caption, MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
                 DialogResult = DialogResult.Cancel;
                 Close();
             }
 
-            if (this.Text != "Set Defaults")
+            if (this.Text != strDefault)
             {
                 Param.LoadSettings();
                 ValidateXMLVersion(Param.SettingPath);
@@ -424,7 +427,9 @@ namespace SIL.PublishingSolution
             }
             catch (Exception)
             {
-                MessageBox.Show("Please select a folder for which you have creation permission", "Pathway", MessageBoxButtons.OK,
+                const string text = "Please select a folder for which you have creation permission";
+                const string caption = "Pathway";
+                MessageBox.Show(text, caption, MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
                 return;
             }

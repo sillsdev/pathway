@@ -22,7 +22,6 @@ using System.Xml;
 using System.Reflection;
 using System.Xml.Xsl;
 using ICSharpCode.SharpZipLib.Zip;
-using Microsoft.Win32;
 using SIL.Tool;
 using System.Collections.Generic;
 
@@ -64,124 +63,10 @@ namespace SIL.PublishingSolution
                 }
                 while (i < args.Length)
                 {
-                    switch (args[i++])
-                    {
-                        case "--directory":
-                        case "-d":
-                            projectInfo.ProjectPath = args[i++];
-                            break;
-                        case "--files":
-                        case "-f":
-                            i = CaptureFileList(args, i, files);
-                            break;
-                        case "--inputformat":
-                        case "-if":
-                            var format = args[i++];
-                            switch (format)
-                            {
-                                case "xhtml":
-                                    inFormat = InputFormat.XHTML;
-                                    break;
-                                case "usfm":
-                                    inFormat = InputFormat.USFM;
-                                    break;
-                                case "usx":
-                                    inFormat = InputFormat.USX;
-                                    break;
-                                case "ptb":
-                                    inFormat = InputFormat.PTBUNDLE;
-                                    break;
-                            }
-                            break;
-                        case "--xhtml":
-                        case "-x":
-                            // retained for backwards compatibility (not documented)
-                            inFormat = InputFormat.XHTML;
-                            projectInfo.DefaultXhtmlFileWithPath = args[i++];
-                            break;
-                        case "--showdialog":
-                        case "-s":
-                            bShowDialog = true;
-                            break;
-                        case "--css":
-                        case "-c":
-                            projectInfo.DefaultCssFileWithPath = args[i++];
-                            break;
-                        case "--target":
-                        case "-t":
-                            //Note: If export type is more than one word, quotes must be used
-                            exportType = args[i++];
-                            bOutputSpecified = true;
-                            break;
-                        case "--input":
-                        case "-i":
-                            projectInfo.ProjectInputType = args[i++];
-                            break;
-                        case "--launch":
-                        case "-l":
-                            projectInfo.IsOpenOutput = true;
-                            break;
-                        case "--name":
-                        case "-n":
-                            projectInfo.ProjectName = args[i++];
-                            break;
-                        case "-?":
-                        case "-h":
-                            Usage();
-                            Environment.Exit(0);
-                            break;
-                        default:
-                            i = CaptureFileList(args, --i, files);
-                            if (files.Count > 0)
-                            {
-                                var lcName = files[0].ToLower();
-                                if (lcName.EndsWith(".zip"))
-                                {
-                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.PTBUNDLE, projectInfo, lcName);
-                                    break;
-                                }
-                                if (lcName.EndsWith(".xhtml"))
-                                {
-                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.XHTML, projectInfo, lcName, "Dictionary");
-                                    break;
-                                }
-                                if (lcName.EndsWith(".usx"))
-                                {
-                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USX, projectInfo, lcName);
-                                    break;
-                                }
-                                if (lcName.EndsWith(".usfm") || lcName.EndsWith(".sfm"))
-                                {
-                                    inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USFM, projectInfo, lcName);
-                                    break;
-                                }
-                            }
-                            Usage();
-                            throw new ArgumentException("Invalid Command Line Argument: " + args[i]);
-                    }
+                    i = ProcessExportType(args, i, projectInfo, files, ref inFormat, ref bShowDialog, ref exportType, ref bOutputSpecified);
                 }
-                if (string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) && files.Count > 0)
-                {
-                    projectInfo.DefaultXhtmlFileWithPath = files[0];
-                }
-                if (!string.IsNullOrEmpty(projectInfo.ProjectPath))
-                {
-                    if (!string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) && !Path.IsPathRooted(projectInfo.DefaultXhtmlFileWithPath))
-                    {
-                        projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, projectInfo.DefaultXhtmlFileWithPath);
-                    }
-                    if (!string.IsNullOrEmpty(projectInfo.DefaultCssFileWithPath) && !Path.IsPathRooted(projectInfo.DefaultCssFileWithPath))
-                    {
-                        projectInfo.DefaultRevCssFileWithPath = Common.PathCombine(projectInfo.ProjectPath, projectInfo.DefaultCssFileWithPath);
-                    }
-                    for (int n = 0; n < files.Count; n++)
-                    {
-                        if (!Path.IsPathRooted(files[n]))
-                        {
-                            files[n] = Common.PathCombine(projectInfo.ProjectPath, files[n]);
-                        }
-                    }
-                }
+
+                SettingProcessExportFile(projectInfo, files);
 
                 Common.ProgBase = Common.GetPSApplicationPath();
                 // load settings from the settings file
@@ -214,69 +99,7 @@ namespace SIL.PublishingSolution
 
                 // run headless from the command line
                 Common.Testing = true;
-                if (inFormat == InputFormat.PTBUNDLE)
-                {
-                    var zf = new FastZip();
-                    zf.ExtractZip(files[0], projectInfo.ProjectPath, ".*");
-                    var metadata = Common.DeclareXMLDocument(false);
-                    metadata.Load(Common.PathCombine(projectInfo.ProjectPath, "metadata.xml"));
-                    var titleNode = metadata.SelectSingleNode("//bookList[@id='default']/name");
-                    Param.UpdateTitleMetadataValue(Param.Title, titleNode.InnerText, false);
-                    var descriptionNode = metadata.SelectSingleNode("//bookList[@id='default']//range");
-                    Param.UpdateMetadataValue(Param.Description, descriptionNode.InnerText);
-                    var rightsHolderNode = metadata.SelectSingleNode("//rightsHolder");
-                    Param.UpdateMetadataValue(Param.Publisher, rightsHolderNode.InnerText);
-                    var copyrightNode = metadata.SelectSingleNode("//statement");
-                    Param.UpdateMetadataValue(Param.CopyrightHolder, copyrightNode.InnerText);
-                    var bookNodes = metadata.SelectNodes("//bookList[@id='default']//book");
-                    var usxFolder = Common.PathCombine(projectInfo.ProjectPath, "USX");
-                    var xmlText = new StringBuilder(@"<usx version=""2.0"">");
-                    var oneBook = Common.DeclareXMLDocument(false);
-                    foreach (XmlElement bookNode in bookNodes)
-                    {
-                        oneBook.Load(Common.PathCombine(usxFolder, bookNode.SelectSingleNode("@code").InnerText + ".usx"));
-                        xmlText.Append(oneBook.DocumentElement.InnerXml);
-                        oneBook.RemoveAll();
-                    }
-                    xmlText.Append(@"</usx>" + "\r\n");
-                    var fileName = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".xhtml");
-                    var databaseName = metadata.SelectSingleNode("//identification/abbreviation");
-                    var linkParam = new Dictionary<string, object>();
-                    linkParam["dateTime"] = DateTime.Now.ToShortDateString();
-                    linkParam["user"] = "ukn";
-                    var wsNode = metadata.SelectSingleNode("//language/iso");
-                    linkParam["ws"] = wsNode.InnerText;
-                    linkParam["userWs"] = wsNode.InnerText;
-                    var nameNode = metadata.SelectSingleNode("//identification/description");
-                    linkParam["projName"] = nameNode.InnerText;
-                    var langNameNode = metadata.SelectSingleNode("//language/name");
-                    linkParam["langInfo"] = string.Format("{0}:{1}", wsNode.InnerText, langNameNode.InnerText);
-                    ConvertUsx2Xhtml(databaseName, linkParam, xmlText, fileName);
-                    projectInfo.DefaultXhtmlFileWithPath = fileName;
-                    var ptxStyle2Css = new XslCompiledTransform();
-                    ptxStyle2Css.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                        "PathwayB.ptx2css.xsl")));
-                    projectInfo.DefaultCssFileWithPath = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".css");
-                    var writer = new XmlTextWriter(projectInfo.DefaultCssFileWithPath, Encoding.UTF8);
-                    ptxStyle2Css.Transform(Common.PathCombine(projectInfo.ProjectPath, "styles.xml"), null, writer);
-                    writer.Close();
-                    metadata.RemoveAll();
-                    inFormat = InputFormat.XHTML;
-                }
-                if (inFormat == InputFormat.USFM)
-                {
-                    // convert from USFM to xhtml
-                    UsfmToXhtml(projectInfo, files);
-                }
-                else if (inFormat == InputFormat.USX)
-                {
-                    // convert from USX to xhtml
-                    UsxToXhtml(projectInfo, files);
-                }
-                else if (inFormat == InputFormat.XHTML)
-                {
-                    SetFileName(projectInfo, files);
-                }
+                ProcessInputFormat(inFormat, files, projectInfo);
 
                 if (projectInfo.DefaultXhtmlFileWithPath == null)
                 {
@@ -319,6 +142,205 @@ namespace SIL.PublishingSolution
                 Environment.Exit(-1);
             }
             Environment.Exit(0);
+        }
+
+        private static void SettingProcessExportFile(PublicationInformation projectInfo, List<string> files)
+        {
+            if (string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) && files.Count > 0)
+            {
+                projectInfo.DefaultXhtmlFileWithPath = files[0];
+            }
+            if (!string.IsNullOrEmpty(projectInfo.ProjectPath))
+            {
+                if (!string.IsNullOrEmpty(projectInfo.DefaultXhtmlFileWithPath) &&
+                    !Path.IsPathRooted(projectInfo.DefaultXhtmlFileWithPath))
+                {
+                    projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath,
+                                                                              projectInfo.DefaultXhtmlFileWithPath);
+                }
+                if (!string.IsNullOrEmpty(projectInfo.DefaultCssFileWithPath) &&
+                    !Path.IsPathRooted(projectInfo.DefaultCssFileWithPath))
+                {
+                    projectInfo.DefaultRevCssFileWithPath = Common.PathCombine(projectInfo.ProjectPath,
+                                                                               projectInfo.DefaultCssFileWithPath);
+                }
+                for (int n = 0; n < files.Count; n++)
+                {
+                    if (!Path.IsPathRooted(files[n]))
+                    {
+                        files[n] = Common.PathCombine(projectInfo.ProjectPath, files[n]);
+                    }
+                }
+            }
+        }
+
+        private static void ProcessInputFormat(InputFormat inFormat, List<string> files, PublicationInformation projectInfo)
+        {
+            if (inFormat == InputFormat.PTBUNDLE)
+            {
+                var zf = new FastZip();
+                zf.ExtractZip(files[0], projectInfo.ProjectPath, ".*");
+                var metadata = Common.DeclareXMLDocument(false);
+                metadata.Load(Common.PathCombine(projectInfo.ProjectPath, "metadata.xml"));
+                var titleNode = metadata.SelectSingleNode("//bookList[@id='default']/name");
+                Param.UpdateTitleMetadataValue(Param.Title, titleNode.InnerText, false);
+                var descriptionNode = metadata.SelectSingleNode("//bookList[@id='default']//range");
+                Param.UpdateMetadataValue(Param.Description, descriptionNode.InnerText);
+                var rightsHolderNode = metadata.SelectSingleNode("//rightsHolder");
+                Param.UpdateMetadataValue(Param.Publisher, rightsHolderNode.InnerText);
+                var copyrightNode = metadata.SelectSingleNode("//statement");
+                Param.UpdateMetadataValue(Param.CopyrightHolder, copyrightNode.InnerText);
+                var bookNodes = metadata.SelectNodes("//bookList[@id='default']//book");
+                var usxFolder = Common.PathCombine(projectInfo.ProjectPath, "USX");
+                var xmlText = new StringBuilder(@"<usx version=""2.0"">");
+                var oneBook = Common.DeclareXMLDocument(false);
+                foreach (XmlElement bookNode in bookNodes)
+                {
+                    oneBook.Load(Common.PathCombine(usxFolder, bookNode.SelectSingleNode("@code").InnerText + ".usx"));
+                    xmlText.Append(oneBook.DocumentElement.InnerXml);
+                    oneBook.RemoveAll();
+                }
+                xmlText.Append(@"</usx>" + "\r\n");
+                var fileName = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".xhtml");
+                var databaseName = metadata.SelectSingleNode("//identification/abbreviation");
+                var linkParam = new Dictionary<string, object>();
+                linkParam["dateTime"] = DateTime.Now.ToShortDateString();
+                linkParam["user"] = "ukn";
+                var wsNode = metadata.SelectSingleNode("//language/iso");
+                linkParam["ws"] = wsNode.InnerText;
+                linkParam["userWs"] = wsNode.InnerText;
+                var nameNode = metadata.SelectSingleNode("//identification/description");
+                linkParam["projName"] = nameNode.InnerText;
+                var langNameNode = metadata.SelectSingleNode("//language/name");
+                linkParam["langInfo"] = string.Format("{0}:{1}", wsNode.InnerText, langNameNode.InnerText);
+                ConvertUsx2Xhtml(databaseName, linkParam, xmlText, fileName);
+                projectInfo.DefaultXhtmlFileWithPath = fileName;
+                var ptxStyle2Css = new XslCompiledTransform();
+                ptxStyle2Css.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                    "PathwayB.ptx2css.xsl")));
+                projectInfo.DefaultCssFileWithPath = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".css");
+                var writer = new XmlTextWriter(projectInfo.DefaultCssFileWithPath, Encoding.UTF8);
+                ptxStyle2Css.Transform(Common.PathCombine(projectInfo.ProjectPath, "styles.xml"), null, writer);
+                writer.Close();
+                metadata.RemoveAll();
+                inFormat = InputFormat.XHTML;
+            }
+            if (inFormat == InputFormat.USFM)
+            {
+                // convert from USFM to xhtml
+                UsfmToXhtml(projectInfo, files);
+            }
+            else if (inFormat == InputFormat.USX)
+            {
+                // convert from USX to xhtml
+                UsxToXhtml(projectInfo, files);
+            }
+            else if (inFormat == InputFormat.XHTML)
+            {
+                SetFileName(projectInfo, files);
+            }
+        }
+
+        private static int ProcessExportType(string[] args, int i, PublicationInformation projectInfo, List<string> files,
+                                             ref InputFormat inFormat, ref bool bShowDialog, ref string exportType,
+                                             ref bool bOutputSpecified)
+        {
+            switch (args[i++])
+            {
+                case "--directory":
+                case "-d":
+                    projectInfo.ProjectPath = args[i++];
+                    break;
+                case "--files":
+                case "-f":
+                    i = CaptureFileList(args, i, files);
+                    break;
+                case "--inputformat":
+                case "-if":
+                    var format = args[i++];
+                    switch (format)
+                    {
+                        case "xhtml":
+                            inFormat = InputFormat.XHTML;
+                            break;
+                        case "usfm":
+                            inFormat = InputFormat.USFM;
+                            break;
+                        case "usx":
+                            inFormat = InputFormat.USX;
+                            break;
+                        case "ptb":
+                            inFormat = InputFormat.PTBUNDLE;
+                            break;
+                    }
+                    break;
+                case "--xhtml":
+                case "-x":
+                    // retained for backwards compatibility (not documented)
+                    inFormat = InputFormat.XHTML;
+                    projectInfo.DefaultXhtmlFileWithPath = args[i++];
+                    break;
+                case "--showdialog":
+                case "-s":
+                    bShowDialog = true;
+                    break;
+                case "--css":
+                case "-c":
+                    projectInfo.DefaultCssFileWithPath = args[i++];
+                    break;
+                case "--target":
+                case "-t":
+                    //Note: If export type is more than one word, quotes must be used
+                    exportType = args[i++];
+                    bOutputSpecified = true;
+                    break;
+                case "--input":
+                case "-i":
+                    projectInfo.ProjectInputType = args[i++];
+                    break;
+                case "--launch":
+                case "-l":
+                    projectInfo.IsOpenOutput = true;
+                    break;
+                case "--name":
+                case "-n":
+                    projectInfo.ProjectName = args[i++];
+                    break;
+                case "-?":
+                case "-h":
+                    Usage();
+                    Environment.Exit(0);
+                    break;
+                default:
+                    i = CaptureFileList(args, --i, files);
+                    if (files.Count > 0)
+                    {
+                        var lcName = files[0].ToLower();
+                        if (lcName.EndsWith(".zip"))
+                        {
+                            inFormat = SetDefaultsBasedOnInputFormat(InputFormat.PTBUNDLE, projectInfo, lcName);
+                            break;
+                        }
+                        if (lcName.EndsWith(".xhtml"))
+                        {
+                            inFormat = SetDefaultsBasedOnInputFormat(InputFormat.XHTML, projectInfo, lcName, "Dictionary");
+                            break;
+                        }
+                        if (lcName.EndsWith(".usx"))
+                        {
+                            inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USX, projectInfo, lcName);
+                            break;
+                        }
+                        if (lcName.EndsWith(".usfm") || lcName.EndsWith(".sfm"))
+                        {
+                            inFormat = SetDefaultsBasedOnInputFormat(InputFormat.USFM, projectInfo, lcName);
+                            break;
+                        }
+                    }
+                    Usage();
+                    throw new ArgumentException("Invalid Command Line Argument: " + args[i]);
+            }
+            return i;
         }
 
         private static void SetFileName(PublicationInformation projectInfo, List<string> files)
@@ -414,58 +436,110 @@ namespace SIL.PublishingSolution
 
         private static void Usage()
         {
-            Console.Write("Usage: PathwayB [Options]\r\n\r\n");
-            Console.Write("where options include:\r\n");
-            Console.Write("   --input | -i <type>       (required) type of content. Can be one of:\r\n");
-            Console.Write("                             Dictionary   Dictionary content.\r\n");
-            Console.Write("                             Scripture    Scripture content.\r\n");
-            Console.Write("   --inputformat | -if <format>\r\n");
-            Console.Write("                             (required) content input format. Can be one of:\r\n");
-            Console.Write("                             usfm   Unified Standard Format Marker content.\r\n");
-            Console.Write("                             usx    USX content from Paratext 7.x.\r\n");
-            Console.Write("                             xhtml  XHTML from FieldWorks (FLEX or TE).\r\n");
-            Console.Write("                             ptb    Paratext bundle from Paratext 7.3.\r\n");
-            Console.Write("   --directory | -d <path>   (required) full path to the content.\r\n");
-            Console.Write("   --files | -f {<file>[, <file>] | *}\r\n");
-            Console.Write("                             (required) files to process, or * for all files in\r\n");
-            Console.Write("                             the directory specified by the -d flag.\r\n");
-            Console.Write("   --target | -t <format>    (required) desired output format. Can be one of:\r\n");
-            Console.Write("                             \"E-Book (.epub)\"           .epub format.\r\n");
-            Console.Write("                             \"Go Bible\"                 Go Bible .jar format.\r\n");
-            Console.Write("                             \"PDF (using OpenOffice/LibreOffice)\" \r\n");
-            Console.Write("                                                          .pdf format.\r\n");
-            Console.Write("                             \"PDF (using Prince)\"       .pdf format.\r\n");
-            Console.Write("                             \"InDesign\"                 .idml format.\r\n");
-            Console.Write("                             \"OpenOffice/LibreOffice\"   .odt format.\r\n");
-            Console.Write("                             \"XeLaTex\"                  .tex format.\r\n");
-            Console.Write("   --css | -c                stylesheet file name (required for xhtml only).\r\n");
-            Console.Write("   --showdialog | -s         Show the Export Through Pathway dialog, and take\r\n");
-            Console.Write("                             the values for target format, style, etc. from\r\n");
-            Console.Write("                             the user's input on the dialog.\r\n");
-            Console.Write("   --launch | -l             launch resulting output in target back end.\r\n");
-            Console.Write("   --name | -n               [main] Project name.\r\n\r\n\r\n");
-            Console.Write("Examples:\r\n\r\n");
-            Console.Write("   PathwayB.exe -d \"D:\\MyProject\" -if usfm -f * -t \"E-Book (.epub)\" \r\n");
-            Console.Write("                             -i \"Scripture\" -n \"SEN\" \r\n");
-            Console.Write("      Creates an .epub file from the USFM project found in D:\\MyProject.\r\n\r\n");
-            Console.Write("   PathwayB.exe -d \"D:\\MyDict\" -if xhtml -c \"D:\\MyDict\\main.css\" \r\n");
-            Console.Write("                             -f \"main.xhtml\", \"FlexRev.xhtml\" \r\n");
-            Console.Write("                             -t \"E-Book (.epub)\" -i \"Dictionary\" \r\n");
-            Console.Write("                             -n \"Sena 3-01\" \r\n");
-            Console.Write("      Creates an .epub file from the xhtml dictionary found in D:\\MyDict.\r\n");
-            Console.Write("      Both main and reversal index files are included in the output.\r\n\r\n");
-            Console.Write("   PathwayB.exe -d \"D:\\Project2\" -if usfm -f * -i \"Scripture\" -n \"SEN\"-s\r\n");
-            Console.Write("      Displays the Export Through Pathway dialog, then generates output from\r\n");
-            Console.Write("      the USFM project found in D:\\Project2 to the user-specified output \r\n");
-            Console.Write("      format and style.\r\n\r\n");
-            Console.Write("Notes:\r\n\r\n");
-            Console.Write("-  Not all output types may be available, depending on your installation\r\n");
-            Console.Write("   Package. To verify the available output types, open the Configuration\r\n");
-            Console.Write("   Tool, click the Defaults button and click on the Destination drop-down.\r\n");
-            Console.Write("   The available outputs match the selections in this list.\r\n\r\n");
-            Console.Write("-  For dictionary output, the reversal index file needs to be named\r\n");
-            Console.Write("   \"FlexRev.xhtml\". this is to maintain consistency with the file naming\r\n");
-            Console.Write("   convention used in Pathway.\r\n\r\n");
+            string val = "Usage: PathwayB [Options]";
+            Console.Write(val);
+            val = "where options include:\r\n";
+            Console.Write(val);
+            val = "   --input | -i <type>       (required) type of content. Can be one of:\r\n";
+            Console.Write(val);
+            val = "                             Dictionary   Dictionary content.\r\n";
+            Console.Write(val);
+            val = "                             Scripture    Scripture content.\r\n";
+            Console.Write(val);
+            val = "   --inputformat | -if <format>\r\n";
+            Console.Write(val);
+            val = "                             (required) content input format. Can be one of:\r\n";
+            Console.Write(val);
+            val = "                             usfm   Unified Standard Format Marker content.\r\n";
+            Console.Write(val);
+            val = "                             usx    USX content from Paratext 7.x.\r\n";
+            Console.Write(val);
+            val = "                             xhtml  XHTML from FieldWorks (FLEX or TE).\r\n";
+            Console.Write(val);
+            val = "                             ptb    Paratext bundle from Paratext 7.3.\r\n";
+            Console.Write(val);
+            val = "   --directory | -d <path>   (required) full path to the content.\r\n";
+            Console.Write(val);
+            val = "   --files | -f {<file>[, <file>] | *}\r\n";
+            Console.Write(val);
+            val = "                             (required) files to process, or * for all files in\r\n";
+            Console.Write(val);
+            val = "                             the directory specified by the -d flag.\r\n";
+            Console.Write(val);
+            val = "   --target | -t <format>    (required) desired output format. Can be one of:\r\n";
+            Console.Write(val);
+            val = "                             \"E-Book (.epub)\"           .epub format.\r\n";
+            Console.Write(val);
+            val = "                             \"Go Bible\"                 Go Bible .jar format.\r\n";
+            Console.Write(val);
+            val = "                             \"PDF (using OpenOffice/LibreOffice)\" \r\n";
+            Console.Write(val);
+            val = "                                                          .pdf format.\r\n";
+            Console.Write(val);
+            val = "                             \"PDF (using Prince)\"       .pdf format.\r\n";
+            Console.Write(val);
+            val = "                             \"InDesign\"                 .idml format.\r\n";
+            Console.Write(val);
+            val = "                             \"OpenOffice/LibreOffice\"   .odt format.\r\n";
+            Console.Write(val);
+            val = "                             \"XeLaTex\"                  .tex format.\r\n";
+            Console.Write(val);
+            val = "   --css | -c                stylesheet file name (required for xhtml only).\r\n";
+            Console.Write(val);
+            val = "   --showdialog | -s         Show the Export Through Pathway dialog, and take\r\n";
+            Console.Write(val);
+            val = "                             the values for target format, style, etc. from\r\n";
+            Console.Write(val);
+            val = "                             the user's input on the dialog.\r\n";
+            Console.Write(val);
+            val = "   --launch | -l             launch resulting output in target back end.\r\n";
+            Console.Write(val);
+            val = "   --name | -n               [main] Project name.\r\n\r\n\r\n";
+            Console.Write(val);
+            val = "Examples:\r\n\r\n";
+            Console.Write(val);
+            val = "   PathwayB.exe -d \"D:\\MyProject\" -if usfm -f * -t \"E-Book (.epub)\" \r\n";
+            Console.Write(val);
+            val = "                             -i \"Scripture\" -n \"SEN\" \r\n";
+            Console.Write(val);
+            val = "      Creates an .epub file from the USFM project found in D:\\MyProject.\r\n\r\n";
+            Console.Write(val);
+            val = "   PathwayB.exe -d \"D:\\MyDict\" -if xhtml -c \"D:\\MyDict\\main.css\" \r\n";
+            Console.Write(val);
+            val = "                             -f \"main.xhtml\", \"FlexRev.xhtml\" \r\n";
+            Console.Write(val);
+            val = "                             -t \"E-Book (.epub)\" -i \"Dictionary\" \r\n";
+            Console.Write(val);
+            val = "                             -n \"Sena 3-01\" \r\n";
+            Console.Write(val);
+            val = "      Creates an .epub file from the xhtml dictionary found in D:\\MyDict.\r\n";
+            Console.Write(val);
+            val = "      Both main and reversal index files are included in the output.\r\n\r\n";
+            Console.Write(val);
+            val = "   PathwayB.exe -d \"D:\\Project2\" -if usfm -f * -i \"Scripture\" -n \"SEN\"-s\r\n";
+            Console.Write(val);
+            val = "      Displays the Export Through Pathway dialog, then generates output from\r\n";
+            Console.Write(val);
+            val = "      the USFM project found in D:\\Project2 to the user-specified output \r\n";
+            Console.Write(val);
+            val = "      format and style.\r\n\r\n";
+            Console.Write(val);
+            val = "Notes:\r\n\r\n";
+            Console.Write(val);
+            val = "-  Not all output types may be available, depending on your installation\r\n";
+            Console.Write(val);
+            val = "   Package. To verify the available output types, open the Configuration\r\n";
+            Console.Write(val);
+            val = "   Tool, click the Defaults button and click on the Destination drop-down.\r\n";
+            Console.Write(val);
+            val = "   The available outputs match the selections in this list.\r\n\r\n";
+            Console.Write(val);
+            val = "-  For dictionary output, the reversal index file needs to be named\r\n";
+            Console.Write(val);
+            val = "   \"FlexRev.xhtml\". this is to maintain consistency with the file naming\r\n";
+            Console.Write(val);
+            val = "   convention used in Pathway.\r\n\r\n";
+            Console.Write(val);
         }
 
         /// <summary>

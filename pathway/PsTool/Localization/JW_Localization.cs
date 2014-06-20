@@ -1324,20 +1324,6 @@ namespace SIL.Tool.Localization
         }
         #endregion
 
-        #region Method: void SetPrimary(string sName)
-        public void SetPrimary(string sName)
-        {
-            PrimaryLanguage = null;
-
-            foreach (LocLanguage lang in Languages)
-            {
-                if (lang.Name == sName)
-                    PrimaryLanguage = lang;
-            }
-
-            SetToRegistry();
-        }
-        #endregion
         #region Method: void SetSecondary(string sName)
         public void SetSecondary(string sName)
         {

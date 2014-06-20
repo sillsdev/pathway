@@ -43,7 +43,7 @@ namespace SIL.PublishingSolution
         protected static ProgressBar _pb;
         private string _iconFile;
         private const string RedirectOutputFileName = "Convert.log";
-        List<string> DuplicateBooks;
+        List<string> _duplicateBooks;
         private bool _isLinux;
 
         public string ExportType
@@ -141,7 +141,7 @@ namespace SIL.PublishingSolution
                 if (File.Exists(jarFile))
                 {
                     Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", string.Empty, string.Empty);
-                    CreateRAMP(projInfo);
+                    CreateRamp(projInfo);
                     Common.DeleteDirectory(tempGoBibleCreatorPath);
 
                     success = true;
@@ -149,16 +149,22 @@ namespace SIL.PublishingSolution
                     inProcess.PerformStep();
                     inProcess.Close();
 
-                    // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
-                    string msg = string.Format("Please copy the file {0} to your phone.\n\nDo you want to open the folder?", jarFile);
-                    DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                    if (dialogResult == DialogResult.Yes)
+                    if (!Common.Testing)
                     {
-                        string dirPath = Path.GetDirectoryName(jarFile);
-                        Process.Start(dirPath);
+                        // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
+                        string msg =
+                            string.Format("Please copy the file {0} to your phone.\n\nDo you want to open the folder?",
+                                          jarFile);
+                        DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo,
+                                                                    MessageBoxIcon.Information);
+
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            string dirPath = Path.GetDirectoryName(jarFile);
+                            Process.Start(dirPath);
+                        }
                     }
-                    
+
                 }
                 else
                 {
@@ -166,7 +172,11 @@ namespace SIL.PublishingSolution
                     Cursor.Current = myCursor;
                     inProcess.PerformStep();
                     inProcess.Close();
-                    MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (!Common.Testing)
+                    {
+                        MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+                    }
                 }
                 
             }
@@ -180,7 +190,7 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        private void CreateRAMP(PublicationInformation projInfo)
+        public void CreateRamp(PublicationInformation projInfo)
         {
             Ramp ramp = new Ramp();
             ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".jad,.jar", projInfo.ProjectInputType);
@@ -203,7 +213,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string GoBibleCreatorTempDirectory(string goBibleFullPath)
+        public string GoBibleCreatorTempDirectory(string goBibleFullPath)
         {
             var goBibleDirectoryName = Path.GetFileNameWithoutExtension(goBibleFullPath);
             var tempFolder = Path.GetTempPath();
@@ -218,7 +228,7 @@ namespace SIL.PublishingSolution
             return folder;
         }
 
-        private void CopyGoBibleCreatorFolderToTemp(string sourceFolder, string destFolder)
+        public void CopyGoBibleCreatorFolderToTemp(string sourceFolder, string destFolder)
         {
             if (Directory.Exists(destFolder))
             {
@@ -252,7 +262,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void CreateCollectionsTextFile(string exportGoBiblePath)
+        public void CreateCollectionsTextFile(string exportGoBiblePath)
         {
             string fileLoc = Common.PathCombine(exportGoBiblePath, "Collections.txt");
 
@@ -303,7 +313,7 @@ namespace SIL.PublishingSolution
         }
 
 
-        private string GetInfo(string metadataValue)
+        public string GetInfo(string metadataValue)
         {
             string organization;
             try
@@ -328,35 +338,35 @@ namespace SIL.PublishingSolution
             return sb.ToString();
         }
 
-        protected bool IsDuplicateBooks(XmlNodeList books)
+        public bool IsDuplicateBooks(XmlNodeList books)
         {
-            DuplicateBooks = new List<string>();
+            _duplicateBooks = new List<string>();
             List<string> allBooks = new List<string>();
             foreach (XmlNode bookNode in books)
             {
                 string bookName = bookNode.Value;
                 if (allBooks.Contains(bookName))
                 {
-                    if (!DuplicateBooks.Contains(bookName))
-                        DuplicateBooks.Add(bookName);
+                    if (!_duplicateBooks.Contains(bookName))
+                        _duplicateBooks.Add(bookName);
                 }
                 else
                 {
                     allBooks.Add(bookName);
                 }
             }
-            return DuplicateBooks.Count > 0;
+            return _duplicateBooks.Count > 0;
         }
 
         /// <summary>
         /// Uses Java to create GoBible application
         /// </summary>
         /// <param name="goBibleCreatorPath"></param>
-        protected void BuildApplication(string goBibleCreatorPath)
+        public void BuildApplication(string goBibleCreatorPath)
         {
-            const string Creator = "GoBibleCreator.jar";
+            const string creator = "GoBibleCreator.jar";
             const string prog = "java";
-            var creatorFullPath = Common.PathCombine(goBibleCreatorPath, Creator);
+            var creatorFullPath = Common.PathCombine(goBibleCreatorPath, creator);
             //var progFullName = SubProcess.JavaFullName(prog);
             //if (progFullName.EndsWith(".exe"))
             //{
@@ -365,7 +375,7 @@ namespace SIL.PublishingSolution
             collectionFullName = Common.PathCombine(processFolder, "Collections.txt");
             var args = string.Format(@" -Xmx128m -jar ""{0}""  ""{1}""", creatorFullPath, collectionFullName);
             SubProcess.RedirectOutput = RedirectOutputFileName;
-            SubProcess.RunCommand(processFolder, "java", args, true);
+            SubProcess.RunCommand(processFolder, prog, args, true);
         }
 
         /// <summary>
@@ -373,7 +383,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="projInfo">data on project</param>
         /// <returns>Project Name</returns>
-        protected string GetProjectName(IPublicationInformation projInfo)
+        public string GetProjectName(IPublicationInformation projInfo)
         {
             var scrDir = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             var projDir = Path.GetDirectoryName(scrDir);

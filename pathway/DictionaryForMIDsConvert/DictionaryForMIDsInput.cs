@@ -27,11 +27,13 @@ namespace SIL.PublishingSolution
 
         protected XmlNamespaceManager Nsmgr;
         protected XmlDocument Xml;
+        private bool IsLexicon;
 
         public DictionaryForMIDsInput(PublicationInformation projInfo)
         {
             Xml = LoadXmlDocument(projInfo);
             Nsmgr = GetNamespaceManager(Xml);
+            IsLexicon = projInfo.IsLexiconSectionExist;
         }
 
         ~DictionaryForMIDsInput()
@@ -48,7 +50,8 @@ namespace SIL.PublishingSolution
         {
             if (_vernacularIso != null)
                 return _vernacularIso;
-            var node = Xml.SelectSingleNode("//*[@class='headword']/@lang", Nsmgr);
+            var vernLangPath = IsLexicon? "//*[@class='headword']/@lang": "//*[starts-with(@class,'reversal-form')]/@lang";
+            var node = Xml.SelectSingleNode(vernLangPath, Nsmgr);
             Debug.Assert(node != null);
             _vernacularIso = node.InnerText;
             return _vernacularIso;
@@ -63,7 +66,8 @@ namespace SIL.PublishingSolution
         {
             if (_analysisIso != null)
                 return _analysisIso;
-            var node = Xml.SelectSingleNode("//*[@class='entry']//*[@id]//@lang", Nsmgr);
+            var analLangPath = IsLexicon? "//*[@class='entry']//*[@id]//@lang": "//*[@class='headref']/@lang";
+            var node = Xml.SelectSingleNode(analLangPath, Nsmgr);
             Debug.Assert(node != null);
             _analysisIso = node.InnerText;
             return _analysisIso;
@@ -76,8 +80,7 @@ namespace SIL.PublishingSolution
 
         protected static XmlDocument LoadXmlDocument(PublicationInformation projInfo)
         {
-            var xml = new XmlDocument();
-            xml.XmlResolver = FileStreamXmlResolver.GetNullResolver();
+            var xml = new XmlDocument {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
             var streamReader = new StreamReader(projInfo.DefaultXhtmlFileWithPath);
             xml.Load(streamReader);
             streamReader.Close();

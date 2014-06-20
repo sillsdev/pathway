@@ -52,8 +52,6 @@ namespace SIL.PublishingSolution
 
         public string InputType { get; set; }
 
-        public string ProjectName { get; set; }
-
         public PublicationTask()
         {
             InitializeComponent();
@@ -380,7 +378,6 @@ namespace SIL.PublishingSolution
             Param.SetValue(Param.CurrentInput, CurrentInput);
             Preview preview = new Preview {};
             preview.Sheet = Param.TaskSheet(_currentTask);
-            preview.DefaultCSS = Common.GetLinkedCSS(CurrentInput);
             preview.ParentForm = this;
             string previewPdfFile = preview.CreatePreview();
             if (previewPdfFile != string.Empty)

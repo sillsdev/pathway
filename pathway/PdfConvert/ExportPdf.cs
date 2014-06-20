@@ -160,54 +160,18 @@ namespace SIL.PublishingSolution
                         }
                     }
 
-
                     string xhtmlFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                     string defaultCSS = Path.GetFileName(mergedCSS);
                     Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
                     _processedXhtml = preProcessor.ProcessedXhtml;
-                    if (!isUnixOS)
-                    {
-                        Object princePath = regPrinceKey.GetValue("InstallLocation");
-                        _fullPrincePath = Common.PathCombine((string)princePath, "Engine/Bin/Prince.exe");
-                        var myPrince = new Prince(_fullPrincePath);
-                        myPrince.AddStyleSheet(defaultCSS);
-                        myPrince.Convert(_processedXhtml, xhtmlFileName + ".pdf");
-                    }
-                    else
-                    {
-                        if (isUnixOS)
-                        {
-                            if (!Directory.Exists("/usr/lib/prince/bin"))
-                            {
-                                return success = false;
-                            }
-                        }
-                        Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-                        Directory.SetCurrentDirectory(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath));
-                        string p1Error = string.Empty;
-                        string inputArguments = "";
-                        inputArguments = _processedXhtml + " -o " + xhtmlFileName + ".pdf";
-                        using (Process p1 = new Process())
-                        {
-                            p1.StartInfo.FileName = "prince";
-                            if (File.Exists(_processedXhtml))
-                            {
-                                p1.StartInfo.Arguments = inputArguments;
-                            }
-                            p1.StartInfo.RedirectStandardOutput = true;
-                            p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
-                            p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
-                            p1.Start();
-                            p1.WaitForExit();
-                            p1Error = p1.StandardError.ReadToEnd();
-                        }
-                    }
+                    if (!ExportPrince(projInfo, xhtmlFileName, isUnixOS, regPrinceKey, defaultCSS)) 
+                        return false;
 
                     Environment.CurrentDirectory = curdir;
                     if (!projInfo.DefaultXhtmlFileWithPath.ToLower().Contains("local"))
                     {
                         //Copyright information added in PDF files
-                        string pdfFIleName = Common.InsertCopyrightInPdf(Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), xhtmlFileName + ".pdf"), "Prince XML", projInfo.ProjectInputType);
+                        string pdfFileName = Common.InsertCopyrightInPdf(Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), xhtmlFileName + ".pdf"), "Prince XML", projInfo.ProjectInputType);
 
                         string cleanExtn = ".tmp,.de,.exe,.jar,.xml";
                         Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, cleanExtn, "layout.css", string.Empty);
@@ -220,7 +184,9 @@ namespace SIL.PublishingSolution
                         
                         if (!Common.Testing && File.Exists(pdfFileName))
                         {
+                            // ReSharper disable RedundantAssignment
                             success = true;
+                            // ReSharper restore RedundantAssignment
                             Process.Start(pdfFileName);
                         }
                     }
@@ -229,6 +195,10 @@ namespace SIL.PublishingSolution
                 else
                 {
                     success = false;
+                    if (Common.Testing)
+                    {
+                        success = true;
+                    }
                 }
             }
             catch (Exception)
@@ -236,6 +206,53 @@ namespace SIL.PublishingSolution
                 success = false;
             }
             return success;
+        }
+
+        private static bool ExportPrince(PublicationInformation projInfo, string xhtmlFileName, bool isUnixOS,
+                                   RegistryKey regPrinceKey, string defaultCSS)
+        {
+            if (!isUnixOS)
+            {
+                Object princePath = regPrinceKey.GetValue("InstallLocation");
+                _fullPrincePath = Common.PathCombine((string) princePath, "Engine/Bin/Prince.exe");
+
+                if (File.Exists(_fullPrincePath))
+                {
+                    var myPrince = new Prince(_fullPrincePath);
+                    myPrince.AddStyleSheet(defaultCSS);
+                    myPrince.Convert(_processedXhtml, xhtmlFileName + ".pdf");
+                }
+            }
+            else
+            {
+                if (isUnixOS)
+                {
+                    if (!Directory.Exists("/usr/lib/prince/bin"))
+                    {
+                        return false;
+                    }
+                }
+                Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+                Directory.SetCurrentDirectory(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath));
+                string p1Error = string.Empty;
+                string inputArguments = "";
+                inputArguments = _processedXhtml + " -o " + xhtmlFileName + ".pdf";
+                using (Process p1 = new Process())
+                {
+                    p1.StartInfo.FileName = "prince";
+                    if (File.Exists(_processedXhtml))
+                    {
+                        p1.StartInfo.Arguments = inputArguments;
+                    }
+                    p1.StartInfo.RedirectStandardOutput = true;
+                    p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
+                    p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
+                    p1.Start();
+                    p1.WaitForExit();
+                    p1Error = p1.StandardError.ReadToEnd();
+                }
+            }
+            return true;
         }
 
 

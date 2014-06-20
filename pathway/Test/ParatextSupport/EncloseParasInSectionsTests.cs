@@ -36,7 +36,7 @@ namespace Test.ParatextSupport
         #region Constants
         private const string divider = "------------------------------------------------------------";
         private const string htmlOpen = "<?xml version=\"1.0\" encoding=\"utf-16\"?><html xml:lang=\"utf-8\" xmlns=\"http://www.w3.org/1999/xhtml\">";
-        private string htmlHeader = "<head><title /></head>";
+        private string _htmlHeader = "<head><title /></head>";
         private const string bookOpen = "<body class=\"scrBody\"><div class=\"scrBook\"><span class=\"scrBookName\" lang=\"zxx\">Genesis</span>" +
             "<span class=\"scrBookCode\" lang=\"zxx\">GEN</span>";
         private const string bookClose = "</div></body></html>";
@@ -80,7 +80,7 @@ namespace Test.ParatextSupport
 
             if (Common.IsUnixOS())
             {
-                htmlHeader = "<head><title></title></head>";
+                _htmlHeader = "<head><title></title></head>";
             }
 
             ParatextPathwayLink converter = new ParatextPathwayLink("testDb", xslParams);
@@ -97,7 +97,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(introSectionHead)
@@ -108,7 +108,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"scrIntroSection\">")
@@ -131,7 +131,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(introSectionContent)
@@ -140,7 +140,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"scrIntroSection\">")
@@ -158,7 +158,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(introSectionContent)
@@ -171,7 +171,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"scrIntroSection\">")
@@ -195,7 +195,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<h1 class=\"Section_Head\"><span lang=\"zxx\">The final speeches of Moses </span><span class=\"Verse_Number\" lang=\"zxx\">1-5</span></h1>")
@@ -213,7 +213,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"columns\"><div class=\"scrSection\">")
@@ -245,7 +245,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(scrSectionHead)
@@ -256,7 +256,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"columns\"><div class=\"scrSection\">")
@@ -278,7 +278,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(chapterVersePara)
@@ -288,7 +288,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"columns\"><div class=\"scrSection\">")
@@ -309,7 +309,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(chapterVersePara)
@@ -318,7 +318,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"columns\"><div class=\"scrSection\">")
@@ -335,7 +335,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(chapterPara)
@@ -345,7 +345,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"columns\"><div class=\"scrSection\">")
@@ -363,7 +363,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(chapterVersePara)
@@ -372,7 +372,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"columns\"><div class=\"scrSection\">")
@@ -394,7 +394,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(introSectionHead)
@@ -409,7 +409,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"scrIntroSection\">")
@@ -436,7 +436,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(introSectionContent)
@@ -449,7 +449,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"scrIntroSection\">")
@@ -474,7 +474,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(introSectionContent)
@@ -485,7 +485,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"scrIntroSection\">")
@@ -508,7 +508,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(table)
@@ -520,7 +520,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"scrIntroSection\">")
@@ -544,7 +544,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(introSectionHead)
@@ -555,7 +555,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"scrIntroSection\">")
@@ -578,7 +578,7 @@ namespace Test.ParatextSupport
         {
             StringBuilder inputBldr = new StringBuilder();
             inputBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append(introSectionContent)
@@ -593,7 +593,7 @@ namespace Test.ParatextSupport
 
             StringBuilder expectedBldr = new StringBuilder();
             expectedBldr.Append(htmlOpen)
-                .Append(htmlHeader)
+                .Append(_htmlHeader)
                 .Append(bookOpen)
                 .Append(title)
                 .Append("<div class=\"scrIntroSection\">")

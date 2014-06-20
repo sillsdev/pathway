@@ -45,7 +45,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> fontLangMap = new Dictionary<string, string>();
 
 
-        public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass, string odmMTFont)
+        public void ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass, string odmMTFont)
         {
             LoadAllProperty();
             LoadSpellCheck();
@@ -66,18 +66,16 @@ namespace SIL.PublishingSolution
             _root = _styleXMLdoc.DocumentElement;
             if (_root == null)
             {
-                return null;
+                return;
             }
 
-            string paraStyle = "Empty";
-            string charStyle = "Empty";
+            const string paraStyle = "Empty";
+            const string charStyle = "Empty";
 
             CreateStyle(paraStyle, charStyle, usedStyleName);
             _styleXMLdoc.Save(styleFilePath);
 
             AddFontDeclarative(styleFilePath, _languageFont);
-
-            return _textVariables;
         }
 
         public void SetHeaderFontName(string styleFilePath, string odmMTFont)
@@ -206,13 +204,13 @@ namespace SIL.PublishingSolution
 
             string familyType = parent_Type[1] == "div" ? "paragraph" : "text";
 
-            XmlNode _node = _root.SelectSingleNode(_xPath, nsmgr);
-            if (_node == null) return;
+            XmlNode node = _root.SelectSingleNode(_xPath, nsmgr);
+            if (node == null) return;
             XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
-            styleNode.InnerXml = _node.OuterXml;
-            _node.ParentNode.InsertAfter(styleNode, _node);
+            styleNode.InnerXml = node.OuterXml;
+            node.ParentNode.InsertAfter(styleNode, node);
 
-            _nameElement = (XmlElement)_node;
+            _nameElement = (XmlElement)node;
 
             string attribute = "style:name";
             SetAttribute(newClassName, attribute);
@@ -255,7 +253,7 @@ namespace SIL.PublishingSolution
             }
 
             SetTagProperty(className.Key);
-            AddParaTextNode(className, _node, familyType);
+            AddParaTextNode(className, node, familyType);
         }
 
         private void SetAttribute(string newClassName, string attibute)
@@ -704,11 +702,10 @@ namespace SIL.PublishingSolution
         /// <param name="styleFilePath">syles.xml path</param>
         /// <param name="makeClassName">combination of child and parent "style name"</param>
         /// <param name="parentName">Parent "style name"</param>
-        /// <param name="floatProperty">Left/Right</param>
         /// <param name="displayProperty">Left/Right</param>
         /// <returns>None</returns>
         /// -------------------------------------------------------------------------------------------
-        public void CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string floatProperty, string displayProperty)
+        public void CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string displayProperty)
         {
             const string className = "Graphics";
             _styleXMLdoc = Common.DeclareXMLDocument(true);
@@ -783,10 +780,9 @@ namespace SIL.PublishingSolution
         /// <param name="styleFilePath"></param>
         /// <param name="makeClassName"></param>
         /// <param name="parentName"></param>
-        /// <param name="floatProperty"></param>
         /// <param name="displayProperty"></param>
         /// <param name="graphicStyle"></param>
-        public void CreateFrameStyle(string styleFilePath, string makeClassName, string parentName, string floatProperty, string displayProperty, string graphicStyle)
+        public void CreateFrameStyle(string styleFilePath, string makeClassName, string parentName, string displayProperty, string graphicStyle)
         {
             // float = floatProperty =  left/ right/ center
             // display = displayproperty = none/ block

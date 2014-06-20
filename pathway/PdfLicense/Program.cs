@@ -10,7 +10,6 @@ namespace PdfLicense
     public class Program
     {
         public static int ExitCode;
-        private static bool _eventHandled;
         static List<string> _readLicenseFilesBylines = new List<string>();
 
         static void Main(string[] args)
@@ -201,12 +200,5 @@ namespace PdfLicense
             returnPath = returnPath.Replace('\\', Path.DirectorySeparatorChar);
             return returnPath;
         }
-
-        // Handle Exited event and display process information. 
-        private static void myProcess_Exited(object sender, System.EventArgs e)
-        {
-            _eventHandled = true;
-        }
-
     }
 }

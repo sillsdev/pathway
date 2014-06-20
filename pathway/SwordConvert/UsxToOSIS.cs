@@ -441,40 +441,7 @@ namespace SIL.PublishingSolution
             //Read Attributes
             if (_reader.HasAttributes)
             {
-                while (_reader.MoveToNextAttribute())
-                {
-
-                    if (_reader.Name == "style")
-                    {
-                        _isclassNameExist = true;
-                        _style = _reader.Value;
-                    }
-                    else if (_reader.Name == "number")
-                    {
-                        _number = _reader.Value;
-                        if (_tagName == "verse")
-                        {
-                            _verseNumber = _number;
-                        }
-                        else
-                        {
-                            _chapterNumber = _number;
-                        }
-                    }
-                    else if (_reader.Name == "code")
-                    {
-                        //_writer.WriteAttributeString(_reader.Name, _reader.Value);
-                    }
-                    else if (_reader.Name == "id")
-                    {
-                        //_writer.WriteAttributeString("osisID", _reader.Value);
-                    }
-                    else if (_reader.Name == "caller")
-                    {
-                        _caller = _reader.Value;
-                        //_writer.WriteAttributeString(_reader.Name, _reader.Value);
-                    }
-                }
+                WriteStyle();
             }
 
             if (_listItemOpen && _style != "io1")
@@ -485,111 +452,7 @@ namespace SIL.PublishingSolution
             //Write Start Element
             if (_tagName == "para")
             {
-                _paraStyle = _style;
-
-                if (_style == "s")
-                {
-                    string booksID = _bookCodeName + "." + _chapterNumber + "." + _verseNumber;
-                    if (!_isFirstScope)
-                    {
-                        _writer.WriteEndElement();
-
-                        _mappingScopeChapterandVerse.Add(_scopeKey, _scopeChapterandVerse[0].ToString() + "-" + _scopeChapterandVerse[_scopeChapterandVerse.Count - 1].ToString());
-                        _scopeKey = string.Empty;
-                        _scopeChapterandVerse.Clear();
-                    }
-                    _scopeKey = booksID;
-                    _writer.WriteStartElement("div");
-                    _writer.WriteAttributeString("scope", booksID);
-                    _writer.WriteAttributeString("type", "section");
-                    
-                    _writer.WriteStartElement("title");
-                    _isFirstScope = false;
-                }
-
-                else if (_style == "h" || _style == "is" || _style == "title")
-                {
-                    _writer.WriteStartElement("title");
-                }
-                else if (_style == "iot")
-                {
-                    _writer.WriteStartElement("div");
-                    _writer.WriteAttributeString("type", "outline");
-                    _openDivCount++;
-
-                    _writer.WriteStartElement("title");
-                }
-                else if (_style == "toc1" || _style == "toc2" || _style == "toc3")
-                {
-                    _skipTag = true;
-                }
-                else if (_style == "imt")
-                {
-                    _writer.WriteStartElement("div");
-                    _writer.WriteAttributeString("type", "introduction");
-                    _writer.WriteAttributeString("canonical", "false");
-                    _openDivCount++;
-
-                    _writer.WriteStartElement("title");
-                    _writer.WriteAttributeString("type", "main");
-                    _writer.WriteStartElement("title");
-                    _writer.WriteAttributeString("level", "1");
-                }
-                else if (_style == "mt" || _style == "mt1")
-                {
-                    _writer.WriteStartElement("title");
-                    _writer.WriteAttributeString("type", "main");
-
-                    _writer.WriteStartElement("title");
-                    _writer.WriteAttributeString("level", "1");
-                }
-                else if (_style == "mt2")
-                {
-                    _writer.WriteStartElement("title");
-                    _writer.WriteAttributeString("level", "2");
-                }
-                else if (_style == "im")
-                {
-                    _writer.WriteStartElement("p");
-                    _writer.WriteAttributeString("type", "x-continued");
-                }
-                else if (_style == "io1")
-                {
-                    if (_listItemOpen == false)
-                    {
-                        _writer.WriteStartElement("list");
-                        _listItemOpen = true;
-                    }
-                    _writer.WriteStartElement("item");
-                }
-                else if (_style == "r")
-                {
-                    _writer.WriteStartElement("title");
-                    _writer.WriteAttributeString("type", "parallel");
-                    _writer.WriteStartElement("reference");
-                }
-                else if (_style == "p")
-                {
-                    _writer.WriteStartElement("p");
-                }
-                else if (_style == "rem")
-                {
-                    //_writer.WriteStartElement("p");
-                }
-                else if (_style == "ms")
-                {
-                    _writer.WriteStartElement("title");
-                }
-                else if (_style == "mr")
-                {
-                    _writer.WriteStartElement("title");
-                    _writer.WriteAttributeString("type", "scope");
-                    _writer.WriteStartElement("reference");
-                }
-                else
-                {
-                    _writer.WriteStartElement("p");
-                }
+                WriteParagraphStyle();
             }
             else if (_tagName == "chapter")
             {
@@ -605,21 +468,7 @@ namespace SIL.PublishingSolution
             }
             else if (_tagName == "verse")
             {
-                string booksID = _bookCodeName + "." + _chapterNumber + "." + _verseNumber;
-                _scopeChapterandVerse.Add(booksID);
-                _writer.WriteStartElement("verse");
-
-                if (_verseNumber == "1")
-                {
-                    _writer.WriteAttributeString("subType", "x-first");
-                }
-                else
-                {
-                    _writer.WriteAttributeString("subType", "x-embedded");
-                }
-                _writer.WriteAttributeString("sID", booksID);
-                _writer.WriteAttributeString("n", _verseNumber);
-                _writer.WriteAttributeString("osisID", booksID);
+                WriteVerse();
             }
             else if (_tagName == "note")
             {
@@ -647,7 +496,6 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("char");
                 }
             }
-
             else
             {
                 _writer.WriteStartElement(_tagName);
@@ -663,6 +511,172 @@ namespace SIL.PublishingSolution
             {
                 _allStyle.Push(_style);
                 _alltagName.Push(_tagName);
+            }
+        }
+
+        private void WriteStyle()
+        {
+            while (_reader.MoveToNextAttribute())
+            {
+                if (_reader.Name == "style")
+                {
+                    _isclassNameExist = true;
+                    _style = _reader.Value;
+                }
+                else if (_reader.Name == "number")
+                {
+                    _number = _reader.Value;
+                    if (_tagName == "verse")
+                    {
+                        _verseNumber = _number;
+                    }
+                    else
+                    {
+                        _chapterNumber = _number;
+                    }
+                }
+                else if (_reader.Name == "code")
+                {
+                    //_writer.WriteAttributeString(_reader.Name, _reader.Value);
+                }
+                else if (_reader.Name == "id")
+                {
+                    //_writer.WriteAttributeString("osisID", _reader.Value);
+                }
+                else if (_reader.Name == "caller")
+                {
+                    _caller = _reader.Value;
+                    //_writer.WriteAttributeString(_reader.Name, _reader.Value);
+                }
+            }
+        }
+
+        private void WriteVerse()
+        {
+            string booksID = _bookCodeName + "." + _chapterNumber + "." + _verseNumber;
+            _scopeChapterandVerse.Add(booksID);
+            _writer.WriteStartElement("verse");
+
+            if (_verseNumber == "1")
+            {
+                _writer.WriteAttributeString("subType", "x-first");
+            }
+            else
+            {
+                _writer.WriteAttributeString("subType", "x-embedded");
+            }
+            _writer.WriteAttributeString("sID", booksID);
+            _writer.WriteAttributeString("n", _verseNumber);
+            _writer.WriteAttributeString("osisID", booksID);
+        }
+
+        private void WriteParagraphStyle()
+        {
+            _paraStyle = _style;
+
+            if (_style == "s")
+            {
+                string booksID = _bookCodeName + "." + _chapterNumber + "." + _verseNumber;
+                if (!_isFirstScope)
+                {
+                    _writer.WriteEndElement();
+
+                    _mappingScopeChapterandVerse.Add(_scopeKey,
+                                                     _scopeChapterandVerse[0].ToString() + "-" +
+                                                     _scopeChapterandVerse[_scopeChapterandVerse.Count - 1].ToString());
+                    _scopeKey = string.Empty;
+                    _scopeChapterandVerse.Clear();
+                }
+                _scopeKey = booksID;
+                _writer.WriteStartElement("div");
+                _writer.WriteAttributeString("scope", booksID);
+                _writer.WriteAttributeString("type", "section");
+
+                _writer.WriteStartElement("title");
+                _isFirstScope = false;
+            }
+            else if (_style == "h" || _style == "is" || _style == "title")
+            {
+                _writer.WriteStartElement("title");
+            }
+            else if (_style == "iot")
+            {
+                _writer.WriteStartElement("div");
+                _writer.WriteAttributeString("type", "outline");
+                _openDivCount++;
+
+                _writer.WriteStartElement("title");
+            }
+            else if (_style == "toc1" || _style == "toc2" || _style == "toc3")
+            {
+                _skipTag = true;
+            }
+            else if (_style == "imt")
+            {
+                _writer.WriteStartElement("div");
+                _writer.WriteAttributeString("type", "introduction");
+                _writer.WriteAttributeString("canonical", "false");
+                _openDivCount++;
+
+                _writer.WriteStartElement("title");
+                _writer.WriteAttributeString("type", "main");
+                _writer.WriteStartElement("title");
+                _writer.WriteAttributeString("level", "1");
+            }
+            else if (_style == "mt" || _style == "mt1")
+            {
+                _writer.WriteStartElement("title");
+                _writer.WriteAttributeString("type", "main");
+
+                _writer.WriteStartElement("title");
+                _writer.WriteAttributeString("level", "1");
+            }
+            else if (_style == "mt2")
+            {
+                _writer.WriteStartElement("title");
+                _writer.WriteAttributeString("level", "2");
+            }
+            else if (_style == "im")
+            {
+                _writer.WriteStartElement("p");
+                _writer.WriteAttributeString("type", "x-continued");
+            }
+            else if (_style == "io1")
+            {
+                if (_listItemOpen == false)
+                {
+                    _writer.WriteStartElement("list");
+                    _listItemOpen = true;
+                }
+                _writer.WriteStartElement("item");
+            }
+            else if (_style == "r")
+            {
+                _writer.WriteStartElement("title");
+                _writer.WriteAttributeString("type", "parallel");
+                _writer.WriteStartElement("reference");
+            }
+            else if (_style == "p")
+            {
+                _writer.WriteStartElement("p");
+            }
+            else if (_style == "rem")
+            {
+                //_writer.WriteStartElement("p");
+            }
+            else if (_style == "ms")
+            {
+                _writer.WriteStartElement("title");
+            }
+            else if (_style == "mr")
+            {
+                _writer.WriteStartElement("title");
+                _writer.WriteAttributeString("type", "scope");
+                _writer.WriteStartElement("reference");
+            }
+            else
+            {
+                _writer.WriteStartElement("p");
             }
         }
 

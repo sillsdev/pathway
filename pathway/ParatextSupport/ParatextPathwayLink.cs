@@ -42,6 +42,39 @@ namespace SIL.PublishingSolution
         /// ------------------------------------------------------------------------------------
         /// <summary>
         /// Initializes a new instance of the <see cref="ParatextPathwayLink"/> class.
+        /// This method is used by PathwayB. It will be called by Reflection.
+        /// </summary>
+        /// <param name="projName">Name of the project (from scrText.Name)</param>
+        /// <param name="databaseName">Name of the database.</param>
+        /// <param name="ws">The writing system locale.</param>
+        /// <param name="userWs">The user writing system locale.</param>
+        /// <param name="userName">Name of the user.</param>
+        /// ------------------------------------------------------------------------------------
+		// ReSharper disable UnusedMember.Global                
+		public ParatextPathwayLink(string projName, string databaseName, string ws, string userWs, string userName)
+		// ReSharper restore UnusedMember.Global        
+		{
+            if (ws == "en")
+                ws = "zxx";
+
+            _mProjectName = projName;
+            _mDatabaseName = databaseName;
+            Common.databaseName = databaseName;
+            // Set parameters for the XSLT.
+            _mXslParams = new Dictionary<string, object>();
+            _mXslParams.Add("ws", ws);
+            _mXslParams.Add("userWs", userWs);
+            DateTime now = DateTime.Now;
+            _mXslParams.Add("dateTime", now.Date);
+            _mXslParams.Add("user", userName);
+            _mXslParams.Add("projName", projName);
+
+            LoadStyleSheets();
+        }
+
+        /// ------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ParatextPathwayLink"/> class.
         /// Used by Paratext. Called by Reflection.
         /// </summary>
         /// <param name="databaseName">Name of the database.</param>
@@ -69,39 +102,6 @@ namespace SIL.PublishingSolution
             {
                 _mXslParams.Add("langInfo", Common.ParaTextDcLanguage(databaseName));
             }
-            LoadStyleSheets();
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ParatextPathwayLink"/> class.
-        /// This method is used by PathwayB. It will be called by Reflection.
-        /// </summary>
-        /// <param name="projName">Name of the project (from scrText.Name)</param>
-        /// <param name="databaseName">Name of the database.</param>
-        /// <param name="ws">The writing system locale.</param>
-        /// <param name="userWs">The user writing system locale.</param>
-        /// <param name="userName">Name of the user.</param>
-        /// ------------------------------------------------------------------------------------
-// ReSharper disable UnusedMember.Global
-        public ParatextPathwayLink(string projName, string databaseName, string ws, string userWs, string userName)
-// ReSharper restore UnusedMember.Global
-        {
-            if (ws == "en")
-                ws = "zxx";
-
-            _mProjectName = projName;
-            _mDatabaseName = databaseName;
-            Common.databaseName = databaseName;
-            // Set parameters for the XSLT.
-            _mXslParams = new Dictionary<string, object>();
-            _mXslParams.Add("ws", ws);
-            _mXslParams.Add("userWs", userWs);
-            DateTime now = DateTime.Now;
-            _mXslParams.Add("dateTime", now.Date);
-            _mXslParams.Add("user", userName);
-            _mXslParams.Add("projName", projName);
-
             LoadStyleSheets();
         }
 
@@ -174,8 +174,8 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
 
                 string cssFullPath = Common.PathCombine(_mOutputLocationPath, pubName + ".css");
-                StyToCss StyToCss = new StyToCss();
-                StyToCss.ConvertStyToCss(_mProjectName, cssFullPath);
+                StyToCss styToCss = new StyToCss();
+                styToCss.ConvertStyToCss(_mProjectName, cssFullPath);
                 string fileName = Common.PathCombine(_mOutputLocationPath, pubName + ".xhtml");
                 inProcess.PerformStep();
 
@@ -199,8 +199,8 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
                 if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
                 {
-                    // TODO: Localize string
-                    MessageBox.Show("The current book has no content to export.", string.Empty, MessageBoxButtons.OK);
+                    const string message = "The current book has no content to export.";
+                    MessageBox.Show(message, string.Empty, MessageBoxButtons.OK);
                     return;
                 }
                 ConvertUsxToPathwayXhtmlFile(scrBooksDoc.InnerXml, fileName);
@@ -337,23 +337,8 @@ namespace SIL.PublishingSolution
                 string xpath = "//book";
                 string bookName = string.Empty;
                 XmlNodeList list = scrBooksDoc.SelectNodes(xpath, nsmgr1);
-                if (list != null)
-                {
-                    foreach (XmlNode xmlNode in list)
-                    {
-                        if (xmlNode.Attributes != null)
-                        {
-                            try
-                            {
-                                bookName = xmlNode.Attributes["code"].Value;
-                            }
-                            catch (NullReferenceException)
-                            {
-                                bookName = xmlNode.Attributes["id"].Value;
-                            }
-                        }
-                    }
-                }
+
+                GetBookName(list, ref bookName);
 
                 // Create argument list
                 XsltArgumentList args = new XsltArgumentList();
@@ -397,6 +382,34 @@ namespace SIL.PublishingSolution
                     if (File.Exists(targetFile))
                     {
                         File.Delete(bookFileName);
+                    }
+                }
+            }
+        }
+
+        private static void GetBookName(XmlNodeList list, ref string bookName)
+        {
+            if (list != null)
+            {
+                foreach (XmlNode xmlNode in list)
+                {
+                    if (xmlNode.Attributes != null)
+                    {
+                        try
+                        {
+                            if (xmlNode.Attributes["code"] != null)
+                            {
+                                bookName = xmlNode.Attributes["code"].Value;
+                            }
+                            else
+                            {
+                                if (xmlNode.Attributes["id"] != null)
+                                    bookName = xmlNode.Attributes["id"].Value;
+                            }
+                        }
+                        catch (NullReferenceException)
+                        {
+                        }
                     }
                 }
             }

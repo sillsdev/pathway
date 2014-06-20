@@ -767,7 +767,7 @@ namespace SIL.Tool
         /// <param name="ext">new extension</param>
         /// <param name="myParams">pass a dictionary of parameters and values</param>
         /// <returns>results or error message</returns>
-        public static string XsltProcess(string inputFile, string xsltFile, string ext, Dictionary<string, string> myParams)
+        private static string XsltProcess(string inputFile, string xsltFile, string ext, Dictionary<string, string> myParams)
         {
             if (!File.Exists(inputFile))
                 return string.Empty;

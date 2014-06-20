@@ -22,7 +22,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
-using System.Reflection;
 using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -32,7 +31,6 @@ using System.Globalization;
 using System.Xml;
 using System.Xml.Xsl;
 using Microsoft.Win32;
-using SIL.PublishingSolution;
 using SIL.Tool.Localization;
 
 #endregion Using
@@ -260,7 +258,6 @@ namespace SIL.Tool
 
         public static bool Testing; // To differentiate between Nunit test or from Application(UI or Flex).
         public static bool ShowMessage; // Show or Suppress MessageBox in Creating Zip Folder.
-        public static bool fromPlugin; // To differentiate between Plugin or from UI
 
         #endregion
 
@@ -1740,49 +1737,30 @@ namespace SIL.Tool
         {
             if (idAllClass.ContainsKey("ReferenceFormat"))
             {
-                if (idAllClass["ReferenceFormat"].ContainsKey("@page"))
-                {
-                    refFormat = idAllClass["ReferenceFormat"]["@page"];
-                }
-                else if (idAllClass["ReferenceFormat"].ContainsKey("@page:left"))
+                if (idAllClass["ReferenceFormat"].ContainsKey("@page:left"))
                 {
                     refFormat = idAllClass["ReferenceFormat"]["@page:left"];
+                }
+                else if (idAllClass["ReferenceFormat"].ContainsKey("@page"))
+                {
+                    refFormat = idAllClass["ReferenceFormat"]["@page"];
                 }
                 else if (idAllClass["ReferenceFormat"].ContainsKey("@page:right"))
                 {
                     refFormat = idAllClass["ReferenceFormat"]["@page:right"];
                 }
             }
-            else if (idAllClass.ContainsKey("@page-top-center"))
-            {
-                refFormat = idAllClass["@page-top-center"]["-ps-referenceformat"];
-            }
             else if (idAllClass.ContainsKey("@page:left-top-left"))
             {
                 refFormat = idAllClass["@page:left-top-left"]["-ps-referenceformat"];
             }
+            else if (idAllClass.ContainsKey("@page-top-center"))
+            {
+                refFormat = idAllClass["@page-top-center"]["-ps-referenceformat"];
+            }
             return refFormat;
         }
         #endregion
-
-        public static string GetHeaderFontName(Dictionary<string, Dictionary<string, string>> _cssProperty,
-                                               string cssFileName) //TD-2682
-        {
-            string headerFontName = "Times New Roman";
-            if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("font-family"))
-            {
-                headerFontName = _cssProperty["entry"]["font-family"];
-            }
-            else
-            {
-                headerFontName = ParaTextFontName(cssFileName); //"Charis SIL"
-                if (headerFontName == string.Empty)
-                {
-                    headerFontName = "Times New Roman";
-                }
-            }
-            return headerFontName;
-        }
 
         public static string GetHeaderFontWeight(Dictionary<string, Dictionary<string, string>> _cssProperty) //TD-2815
         {
@@ -1839,18 +1817,11 @@ namespace SIL.Tool
         {
             if (!File.Exists(filePath)) return false;
             bool foundString = false;
+            int len = searchText.Length;
+            var buf = new byte[len];
             var reader = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4080, false);
-            if (File.Exists(filePath + ".tmp"))
-            {
-                try
-                {
-                    File.Delete(filePath + ".tmp");
-                }
-                catch
-                {
-                }
-            }
-            var writer = new FileStream(filePath + ".tmp", FileMode.Create);
+            var tempName = Path.GetTempFileName();
+            var writer = new FileStream(tempName, FileMode.Create);
             int next;
             while ((next = reader.ReadByte()) != -1)
             {
@@ -1858,9 +1829,7 @@ namespace SIL.Tool
                 if (b == searchText[0]) // first char in search text?
                 {
                     // yes - searchText.Length chars into a buffer and compare them
-                    int len = searchText.Length;
                     long pos = reader.Position;
-                    byte[] buf = new byte[len];
                     buf[0] = b;
                     if (reader.Read(buf, 1, (len - 1)) == -1)
                     {
@@ -1882,7 +1851,6 @@ namespace SIL.Tool
                         reader.Position = pos;
                         writer.WriteByte(b);
                     }
-                    data = null;
                 }
                 else // not what we're looking for - just write it out
                 {
@@ -1890,15 +1858,14 @@ namespace SIL.Tool
                 }
             }
             reader.Close();
-            reader.Dispose();
             writer.Close();
-            writer.Dispose();
             // replace the original file with the new one
             if (foundString)
             {
                 // at least one instance of the string was found - replace
-                File.Copy(filePath + ".tmp", filePath, true);
+                File.Copy(tempName, filePath, true);
             }
+            File.Delete(tempName);
             return foundString;
         }
 
@@ -2277,12 +2244,6 @@ namespace SIL.Tool
             return pathwayDir;
         }
 
-        public static string GetBinPath()
-        {
-            var uri = new Uri(Assembly.GetExecutingAssembly().CodeBase);
-            return Path.GetDirectoryName(uri.LocalPath);
-        }
-
         public static string ProgBase = string.Empty;
 
         /// <summary>
@@ -2530,11 +2491,7 @@ namespace SIL.Tool
             {
                 if (lstDirecorylike.Contains(Path.GetFileName(folderName)))
                 {
-                    if (Directory.Exists(folderName))
-                    {
-                        DirectoryInfo di = new DirectoryInfo(folderName);
-                        Common.CleanDirectory(di);
-                    }
+                    Directory.Delete(folderName, true);
                 }
             }
 
@@ -3057,7 +3014,7 @@ namespace SIL.Tool
 
         public static Dictionary<string, string> FillMappedFonts(Dictionary<string, string> fontLangMapTemp)
         {
-            var tempGenericFontFile = CopiedToTempGenericFontFile();
+            var tempGenericFontFile = CopyXmlFileToTempDirectory("GenericFont.xml");
 
             string xPath = "//font-language-mapping";
             XmlNodeList fontList = GetXmlNodes(tempGenericFontFile, xPath);
@@ -3072,31 +3029,7 @@ namespace SIL.Tool
             return fontLangMapTemp;
         }
 
-        private static string CopiedToTempGenericFontFile()
-        {
-            string fileName = "GenericFont.xml";
-            string PsSupportPath = GetPSApplicationPath();
-            string xmlFileNameWithPath = PathCombine(PsSupportPath, fileName);
-            string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
-            if (Directory.Exists(tempFolder))
-            {
-                try
-                {
-                    DirectoryInfo di = new DirectoryInfo(tempFolder);
-                    Common.CleanDirectory(di);
-                }
-                catch
-                {
-                    tempFolder = Common.PathCombine(Path.GetTempPath(),
-                                                    "SilPathWay" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
-                }
-            }
-            Directory.CreateDirectory(tempFolder);
-            string tempGenericFontFile = PathCombine(tempFolder, fileName);
-
-            File.Copy(xmlFileNameWithPath, tempGenericFontFile, true);
-            return tempGenericFontFile;
-        }
+        
 
         public static Dictionary<string, string> FillMappedFonts(string wsPath, Dictionary<string, string> fontLangMapTemp)
         {
@@ -3285,7 +3218,7 @@ namespace SIL.Tool
             int unicodeDecimal = 0;
             unicodeString = unicodeString.Trim();
             string fontName = string.Empty;
-            string xmlFileNameWithPath = CopiedToTempGenericFontFile();
+            string xmlFileNameWithPath = CopyXmlFileToTempDirectory("GenericFont.xml");
             string xPath = "//font-language-unicode-map";
             XmlNodeList fontList = GetXmlNodes(xmlFileNameWithPath, xPath);
             if (fontList != null && fontList.Count > 0)
@@ -3598,23 +3531,27 @@ namespace SIL.Tool
         public static bool RunCommand(string szCmd, string szArgs, int wait)
         {
             if (szCmd == null) return false;
-            System.Diagnostics.Process myproc = new System.Diagnostics.Process();
-            myproc.EnableRaisingEvents = false;
-            myproc.StartInfo.CreateNoWindow = true;
-            myproc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            myproc.StartInfo.FileName = szCmd;
-            myproc.StartInfo.Arguments = szArgs;
-
-            if (myproc.Start())
+            using (var myproc = new Process())
             {
+                myproc.EnableRaisingEvents = false;
+                myproc.StartInfo.CreateNoWindow = true;
+                myproc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                myproc.StartInfo.FileName = szCmd;
+                myproc.StartInfo.Arguments = szArgs;
+
+                if (!myproc.Start())
+                    return false;
                 //Using WaitForExit( ) allows for the host program
                 //to wait for the command its executing before it continues
-                if (wait == 1) myproc.WaitForExit();
-                else myproc.Close();
-
-                return true;
+                var exitCode = 0;
+                if (wait == 1)
+                {
+                    myproc.WaitForExit();
+                    exitCode = myproc.ExitCode;
+                }
+                myproc.Close();
+                return exitCode == 0;
             }
-            else return false;
         }
 
         /// <summary>
@@ -3907,6 +3844,7 @@ namespace SIL.Tool
                 {
                     newProperty.AppendLine("div[lang='zxx']{ font-family: \"" + paraTextFontName + "\";}");
                     newProperty.AppendLine("span[lang='zxx']{ font-family: \"" + paraTextFontName + "\";}");
+                    newProperty.AppendLine("@page{ font-family: \"" + paraTextFontName + "\";}");
 
                     FileInsertText(inputCssFileName, newProperty.ToString());
                 }
@@ -4338,6 +4276,7 @@ namespace SIL.Tool
                     sw.WriteLine(exportTitle);
                     sw.WriteLine(creatorTool);
                     sw.WriteLine(inputType);
+                    sw.WriteLine("Common.Testing" + Common.Testing.ToString());
                 }
                 isCreated = true;
             }
@@ -4373,7 +4312,7 @@ namespace SIL.Tool
         {
             Dictionary<string, string> _isoLanguage = new Dictionary<string, string>();
 
-            string xmlFilePath = Common.PathCombine(Common.GetBinPath(), "RampLangCode.xml");
+            string xmlFilePath = CopyXmlFileToTempDirectory("RampLangCode.xml");
             if (!File.Exists(xmlFilePath))
                 return null;
 
@@ -4411,6 +4350,36 @@ namespace SIL.Tool
             }
             return _isoLanguage;
         }
+        
+        public static string CopyXmlFileToTempDirectory(string fileName)
+        {
+            string tempXmlFile = string.Empty;
+            string psSupportPath = GetPSApplicationPath();
+            string xmlFileNameWithPath = Common.PathCombine(psSupportPath, fileName);
+            if (File.Exists(xmlFileNameWithPath))
+            {
+                string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
+                if (Directory.Exists(tempFolder))
+                {
+                    try
+                    {
+                        var di = new DirectoryInfo(tempFolder);
+                        Common.CleanDirectory(di);
+                    }
+                    catch
+                    {
+                        tempFolder = Common.PathCombine(Path.GetTempPath(),
+                                                        "SilPathWay" +
+                                                        Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
+                    }
+                }
+                Directory.CreateDirectory(tempFolder);
+                tempXmlFile = Common.PathCombine(tempFolder, fileName);
+
+                File.Copy(xmlFileNameWithPath, tempXmlFile, true);
+            }
+            return tempXmlFile;
+        }
 
         /// <summary>
         /// For dictionary data, returns the language code for the definitions
@@ -4424,13 +4393,13 @@ namespace SIL.Tool
             {
                 string fontSize = string.Empty;
                 Dictionary<string, string> xhtmlMetaLanguage = new Dictionary<string, string>();
-                var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-                if (fileNameWithoutExtension != null)
-                {
-                    string fileName = fileNameWithoutExtension.ToLower();
-                    if (fileName != "main" && fileName != "main1")
-                        return;
-                }
+                //var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                //if (fileNameWithoutExtension != null)
+                //{
+                //    string fileName = fileNameWithoutExtension.ToLower();
+                //    if (fileName != "main" && fileName != "main1")
+                //        return;
+                //}
 
                 var xDoc = Common.DeclareXMLDocument(true);
                 xDoc.Load(projInfo.DefaultXhtmlFileWithPath);
@@ -4494,10 +4463,7 @@ namespace SIL.Tool
 
                 FileInsertText(cssFileName, cssProperty.ToString());
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch{}
         }
 
         /// <summary>

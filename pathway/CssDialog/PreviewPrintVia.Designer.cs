@@ -105,6 +105,7 @@
             this.grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid.Size = new System.Drawing.Size(393, 497);
             this.grid.TabIndex = 7;
+            this.grid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellClick);
             this.grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellContentClick);
             this.grid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_RowEnter);
             // 
@@ -174,7 +175,6 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Select Layout";
-            this.Activated += new System.EventHandler(this.PreviewPrintVia_Activated);
             this.Load += new System.EventHandler(this.PreviewPrintVia_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PreviewPrintVia_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();

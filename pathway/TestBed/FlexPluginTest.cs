@@ -33,7 +33,7 @@ namespace TestBed
     public partial class FlexPluginTest : Form
     {
         private static string designerPath = "c:/AccessName/";
-        private static List<string> fileNames = new List<string>();
+        private static readonly List<string> FileNames = new List<string>();
         private static string sourceFolder = "c:\\temp";
         private Progress pb;
 
@@ -233,19 +233,19 @@ namespace TestBed
 
         private void btnFileSizeZero_Click(object sender, EventArgs e)
         {
-            fileNames.Clear();
+            FileNames.Clear();
             if (TxtInput.Text.Length <= 0)
             {
                 MessageBox.Show("Please select the inputPath");
                 return;
             }
             IncreaseFileSizeFromZeroBites(TxtInput.Text);
-            MessageBox.Show("Completed for " + fileNames.Count + " files");
+            MessageBox.Show("Completed for " + FileNames.Count + " files");
             int fileCount = 1;
             using (TextWriter streamWriter =
                 new StreamWriter("c:\\filenamesWithZeroBytes.txt"))
             {
-                foreach (string fileName in fileNames)
+                foreach (string fileName in FileNames)
                 {
                     streamWriter.WriteLine(fileCount++ + "  - " + fileName);
                 }
@@ -261,7 +261,7 @@ namespace TestBed
                 if (file.Length == 0)
                 {
                     string filePath = inputPath + "\\" + file.Name;
-                    fileNames.Add(filePath);
+                    FileNames.Add(filePath);
                     if (chkIncrease.Checked)
                     {
                         using (TextWriter streamWriter =
@@ -330,7 +330,7 @@ namespace TestBed
 
         private void button5_Click(object sender, EventArgs e)
         {
-            fileNames.Clear();
+            FileNames.Clear();
             sourceFolder = "c:\\temp";
             GetFilesFromFolder(sourceFolder);
 
@@ -339,11 +339,11 @@ namespace TestBed
             XmlNode returnValue = null;
             XmlDocument LoadedDoc = new XmlDocument();
             LoadedDoc.Load("c:\\FileLibrary.xml");
-            string XPath = "//FileLibrary";
+            const string xPath = "//FileLibrary";
             XmlElement root = LoadedDoc.DocumentElement;
             if (root != null)
             {
-                returnValue = root.SelectSingleNode(XPath);
+                returnValue = root.SelectSingleNode(xPath);
                 foreach (XmlNode xmlNode in returnValue.ChildNodes)
                 {
                     string path = xmlNode.Attributes.GetNamedItem("Path").Value;
@@ -352,7 +352,7 @@ namespace TestBed
             }
 
             //Find missing files in xml 
-            foreach (string file in fileNames)
+            foreach (string file in FileNames)
             {
                 if (!fileNamesXml.Contains(file))
                 {
@@ -381,7 +381,7 @@ namespace TestBed
                 string dstFullName = Common.PathCombine(srcfolder, fileInfo.Name);
                 FileInfo dstInfo = new FileInfo(dstFullName);
                 string fileName = dstInfo.FullName.Replace(sourceFolder, "Files");
-                fileNames.Add(fileName);
+                FileNames.Add(fileName);
             }
             foreach (var directoryInfo in dir.GetDirectories())
             {
@@ -494,7 +494,9 @@ namespace TestBed
             projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
 
             projInfo.DefaultRevCssFileWithPath = txtCSSInput.Text.Replace("main", "flexrev");
-            projInfo.IsReversalExist = true;
+            if (projInfo.ProjectInputType.ToLower() == "dictionary")
+                projInfo.IsReversalExist = true;
+
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             projInfo.DictionaryPath = projInfo.ProjectPath;
             exportXeLaTex.Export(projInfo);

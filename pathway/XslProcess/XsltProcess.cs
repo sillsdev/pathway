@@ -40,80 +40,69 @@ namespace SIL.PublishingSolution
         public string XsltTransform(string inputFile, string xsltFile, string ext, string PsAppPath)
         {
             if (!File.Exists(inputFile))
-                return string.Empty;
+                throw new ArgumentException("No Input file name given.");
 
             if (!File.Exists(xsltFile))
-                return inputFile;
+                throw new ArgumentException("Input file doesn't exist");
 
             if (string.IsNullOrEmpty(ext) || ext == "null")
                 ext = ".xhtml";
 
-            try
+            string path = PsAppPath;
+            string outputPath = Path.GetDirectoryName(inputFile);
+            string result = PathCombine(outputPath, Path.GetFileNameWithoutExtension(inputFile) + ext);
+
+            if (File.Exists(result))
             {
-                string path = PsAppPath;
-                string outputPath = Path.GetDirectoryName(inputFile);
-                string result = PathCombine(outputPath, Path.GetFileNameWithoutExtension(inputFile) + ext);
-
-                if (File.Exists(result))
-                {
-                    File.Delete(result);
-                }
-
-                string xsltPath = PathCombine(path, xsltFile);
-
-                //Create the XslCompiledTransform and load the stylesheet.
-                var xsltReader = XmlReader.Create(xsltPath);
-                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xsltReader.NameTable);
-                namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
-                namespaceManager.AddNamespace("fn", "http://www.w3.org/2005/xpath-functions");
-                var xslt = new XslCompiledTransform();
-                var xsltTransformSettings = new XsltSettings { EnableDocumentFunction = true };
-                xslt.Load(xsltReader, xsltTransformSettings, null);
-                xsltReader.Close();
-
-                //Create an XsltArgumentList.
-                var xslArg = new XsltArgumentList();
-
-                //Transform the file. and writing to temporary File
-                var setting = new XmlReaderSettings { ProhibitDtd = false, XmlResolver = null };
-                XmlReader reader = XmlReader.Create(inputFile, setting);
-                var writerSettings = new XmlWriterSettings();
-                if (!IncludeUtf8BomIdentifier || !ext.ToLower().Contains("xhtml"))
-                {
-                    writerSettings.ConformanceLevel = ConformanceLevel.Fragment;
-                }
-                if (IncludeUtf8BomIdentifier)
-                {
-                    writerSettings.Encoding = Encoding.UTF8;
-                }
-                else
-                {
-                    writerSettings.Encoding = new UTF8Encoding(IncludeUtf8BomIdentifier);
-                    IncludeUtf8BomIdentifier = true;   // reset to true for next time if it has been changed
-                }
-                if (XsltFormat == Formatting.Indented)
-                {
-                    writerSettings.Indent = true;
-                    XsltFormat = Formatting.None;       // reset to None for next time if it has been changed
-                }
-                var writer = XmlWriter.Create(result, writerSettings);
-                if (ext.ToLower().Contains("xhtml"))
-                {
-                    writer.WriteStartDocument();
-                }
-                xslt.Transform(reader, xslArg, writer);
-                writer.Close();
-                reader.Close();
-                return result;
+                File.Delete(result);
             }
-            catch (FileNotFoundException ex)
+
+            var xsltPath = Path.IsPathRooted(xsltFile)? xsltFile: PathCombine(path, xsltFile);
+
+            //Create the XslCompiledTransform and load the stylesheet.
+            var xsltReader = XmlReader.Create(xsltPath);
+            var namespaceManager = new XmlNamespaceManager(xsltReader.NameTable);
+            namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
+            namespaceManager.AddNamespace("fn", "http://www.w3.org/2005/xpath-functions");
+            var xslt = new XslCompiledTransform();
+            var xsltTransformSettings = new XsltSettings { EnableDocumentFunction = true };
+            xslt.Load(xsltReader, xsltTransformSettings, null);
+            xsltReader.Close();
+
+            //Create an XsltArgumentList.
+            var xslArg = new XsltArgumentList();
+
+            //Transform the file. and writing to temporary File
+            var setting = new XmlReaderSettings { ProhibitDtd = false, XmlResolver = null };
+            var reader = XmlReader.Create(inputFile, setting);
+            var writerSettings = new XmlWriterSettings();
+            if (!IncludeUtf8BomIdentifier || !ext.ToLower().Contains("xhtml"))
             {
-                return ex.Message;
+                writerSettings.ConformanceLevel = ConformanceLevel.Fragment;
             }
-            catch (Exception ex)
+            if (IncludeUtf8BomIdentifier)
             {
-                return ex.Message;
+                writerSettings.Encoding = Encoding.UTF8;
             }
+            else
+            {
+                writerSettings.Encoding = new UTF8Encoding(IncludeUtf8BomIdentifier);
+                IncludeUtf8BomIdentifier = true;   // reset to true for next time if it has been changed
+            }
+            if (XsltFormat == Formatting.Indented)
+            {
+                writerSettings.Indent = true;
+                XsltFormat = Formatting.None;       // reset to None for next time if it has been changed
+            }
+            var writer = XmlWriter.Create(result, writerSettings);
+            if (ext.ToLower().Contains("xhtml"))
+            {
+                writer.WriteStartDocument();
+            }
+            xslt.Transform(reader, xslArg, writer);
+            writer.Close();
+            reader.Close();
+            return result;
         }
         #endregion
 

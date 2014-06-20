@@ -16,7 +16,6 @@
 
 using System.Collections;
 using NUnit.Framework;
-using SIL.PublishingSolution;
 using SIL.Tool;
 
 namespace Test.CssDialog

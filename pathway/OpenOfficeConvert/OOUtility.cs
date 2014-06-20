@@ -17,12 +17,9 @@
 #region Using
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Xml;
 using SIL.Tool;
-using SIL.Tool.Localization;
 
 #endregion Using
 namespace SIL.PublishingSolution
@@ -42,7 +39,6 @@ namespace SIL.PublishingSolution
         public string ParentName
         {
             get { return _parentName; }
-            set { _parentName = value; }
         }
 
         #endregion

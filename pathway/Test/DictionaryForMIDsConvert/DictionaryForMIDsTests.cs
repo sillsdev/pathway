@@ -16,12 +16,12 @@
 
 using System.Diagnostics;
 using System.IO;
+using System.Collections;
 using Microsoft.Win32;
 using NUnit.Framework;
 using System;
 using SIL.PublishingSolution;
 using SIL.Tool;
-using NMock2;
 
 namespace Test.DictionaryForMIDsConvert
 {
@@ -57,7 +57,7 @@ namespace Test.DictionaryForMIDsConvert
         }
 
         [Test]
-        public void ExportTest()
+        public void ExportNullTest()
         {
             PublicationInformation projInfo = new PublicationInformation();
             Assert.IsFalse(Export(projInfo));
@@ -119,7 +119,7 @@ namespace Test.DictionaryForMIDsConvert
             var input = new DictionaryForMIDsInput(projInfo);
             var sense = input.SelectNodes("//*[@class = 'entry']/xhtml:div")[0];
             var rec = new DictionaryForMIDsRec();
-            rec.AddReversal(sense);
+            rec.AddReversal(sense, "definition");
             Assert.AreEqual("\tcantar", rec.Rec);
         }
 
@@ -128,6 +128,7 @@ namespace Test.DictionaryForMIDsConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
+            projInfo.IsLexiconSectionExist = true;
             var input = new DictionaryForMIDsInput(projInfo);
             var result = input.VernacularIso();
             Assert.AreEqual("seh", result);
@@ -154,6 +155,7 @@ namespace Test.DictionaryForMIDsConvert
             wr.Close();
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
+            projInfo.IsLexiconSectionExist = true;
             var input = new DictionaryForMIDsInput(projInfo);
             var result = input.VernacularName();
             if (oKey == null)
@@ -176,6 +178,7 @@ namespace Test.DictionaryForMIDsConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
+            projInfo.IsLexiconSectionExist = true;
             var input = new DictionaryForMIDsInput(projInfo);
             var result = input.AnalysisIso();
             Assert.AreEqual("pt", result);
@@ -186,6 +189,7 @@ namespace Test.DictionaryForMIDsConvert
         {
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Input("sena3-imba.xhtml");
+            projInfo.IsLexiconSectionExist = true;
             var input = new DictionaryForMIDsInput(projInfo);
             var result = input.AnalysisName();
             Assert.AreEqual("Portuguese", result);
@@ -210,9 +214,82 @@ namespace Test.DictionaryForMIDsConvert
             File.Copy(_testFiles.Input(props), Common.PathCombine(outDir, props));
 
             PublicationInformation projInfo = new PublicationInformation();
+            projInfo.IsLexiconSectionExist = true;
             projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outDir, "main.xhtml");
+            var curTesting = Common.Testing;
+            Common.Testing = false;
             CreateDictionaryForMIDs(projInfo);
             Assert.True(Directory.Exists(Common.PathCombine(outDir, "DfM_lojen_SIL")));
+            Common.Testing = curTesting;
+        }
+
+        [Test]
+        [Category("ShortTest")]
+        [Category("SkipOnTeamCity")]
+        public void CleanUpTest()
+        {
+            Common.Testing = true;
+            const string createFolder = "CreateDictionaryForMIDs";
+            var outDir = _testFiles.Output(createFolder);
+            if (Directory.Exists(outDir))
+            {
+                Directory.Delete(outDir, true);
+            }
+            var inDir = _testFiles.Input(createFolder);
+            FolderTree.Copy(inDir, outDir);
+            CleanUp(Common.PathCombine(outDir, "main.xhtml"));
+            Assert.True(Directory.Exists(Common.PathCombine(outDir, "DfM_lojen_SIL")));
+            Assert.False(Directory.Exists(Common.PathCombine(outDir, "dictionary")));
+            Assert.False(Directory.Exists(Common.PathCombine(outDir, "Empty_Jar-Jad")));
+            Assert.True(File.Exists(Common.PathCombine(outDir, "Convert.log")));
+            Assert.True(File.Exists(Common.PathCombine(outDir, "DfM copyright notice.txt")));
+            Assert.True(File.Exists(Common.PathCombine(outDir, "DictionaryForMIDs.properties")));
+            Assert.True(File.Exists(Common.PathCombine(outDir, "main.txt")));
+            Assert.False(File.Exists(Common.PathCombine(outDir, "DfM-Creator.jar")));
+            Assert.False(File.Exists(Common.PathCombine(outDir, "go.bat")));
+        }
+
+        [Test]
+        [Category("ShortTest")]
+        [Category("SkipOnTeamCity")]
+        public void LaunchTest()
+        {
+            Common.Testing = true;
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Copy("sena3-imba.xhtml");
+            projInfo.DefaultCssFileWithPath = _testFiles.Copy("sena3-imba.css");
+            projInfo.IsLexiconSectionExist = true;
+            Launch("dictionary", projInfo);
+            Assert.True(File.Exists(_testFiles.Output("DfM copyright notice.txt")));
+            TextFileAssert.AreEqual(_testFiles.Expected("main.txt"), _testFiles.Output("main.txt"), "main.txt");
+            TextFileAssert.AreEqualEx(_testFiles.Expected("DictionaryForMIDs.properties"), _testFiles.Output("DictionaryForMIDs.properties"), new ArrayList{ 1 }, "DictionaryForMIDs.properties");
+        }
+
+        [Test]
+        [Category("ShortTest")]
+        [Category("SkipOnTeamCity")]
+        public void MoveJarFileTest()
+        {
+            Common.Testing = true;
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Copy("sena3-imba.xhtml");
+            FolderTree.Copy(_testFiles.Input("DfM_enseh_SIL"), _testFiles.Output("DfM_enseh_SIL"));
+            MoveJarFile(projInfo);
+            Assert.True(File.Exists(_testFiles.Output("DfM_enseh_SIL.jar")));
+        }
+
+        [Test]
+        [Category("ShortTest")]
+        [Category("SkipOnTeamCity")]
+        public void CreateSubmissionTest()
+        {
+            Common.Testing = true;
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = _testFiles.Copy("sena3-imba.xhtml");
+            FolderTree.Copy(_testFiles.Input("DfM_enseh_SIL"), _testFiles.Output("DfM_enseh_SIL"));
+            CreateSubmission(projInfo);
+            var dirInfo = new DirectoryInfo(_testFiles.Output(""));
+            Assert.AreEqual(1, dirInfo.GetFiles("DictionaryForMIDs_*_enseh_SIL.zip").Length);
         }
     }
 }

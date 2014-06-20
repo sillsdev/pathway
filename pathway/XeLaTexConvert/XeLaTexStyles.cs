@@ -15,7 +15,6 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -110,7 +109,7 @@ namespace SIL.PublishingSolution
                 _pageStyleFormat.Add("@page:first-top-center", "\\chead");
                 _pageStyleFormat.Add("@page:first-top-right", "\\rhead");
                 _pageStyleFormat.Add("@page:first-bottom-left", "\\lfoot");
-                _pageStyleFormat.Add("@page:first-bottom-center", "\\cfoot");
+                //_pageStyleFormat.Add("@page:first-bottom-center", "\\cfoot");
                 _pageStyleFormat.Add("@page:first-bottom-right", "\\rfoot");
             }
             
@@ -213,10 +212,10 @@ namespace SIL.PublishingSolution
             ProcessPageProperty(pageName);
 
             pageName = "@page:left";
-            _leftPageLayoutProperty = ProcessPageProperty(pageName);
+            LeftPageLayoutProperty = ProcessPageProperty(pageName);
 
             pageName = "@page:right";
-            _rightPageLayoutProperty = ProcessPageProperty(pageName);
+            RightPageLayoutProperty = ProcessPageProperty(pageName);
 
             pageName = "@page-footnotes";
             ProcessPageProperty(pageName);

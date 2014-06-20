@@ -180,8 +180,7 @@ namespace SIL.PublishingSolution
                 }
                 else if (className.ToLower() == "entry" || className.ToLower() == "minorentry")
                 {
-                    XmlDocument xdocEntry = new XmlDocument();
-                    xdocEntry.XmlResolver = FileStreamXmlResolver.GetNullResolver();
+                    XmlDocument xdocEntry = new XmlDocument {XmlResolver = FileStreamXmlResolver.GetNullResolver()};
                     xdocEntry.LoadXml("<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                                         + node.OuterXml);
                     XmlNodeList spanNodeList = xdocEntry.GetElementsByTagName("span");

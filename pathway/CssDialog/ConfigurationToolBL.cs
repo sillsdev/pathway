@@ -115,7 +115,7 @@ namespace SIL.PublishingSolution
         protected Color _selectedInputTypeColor = Color.Orange;
         protected Color _deSelectedColor = SystemColors.Control;
         protected string _styleName;
-        protected string _previousStyleName;
+        private string _previousStyleName;
         protected string _fileProduce = "One";
         protected bool _fixedLineHeight = false;
         protected bool _includeImage = true;
@@ -762,21 +762,25 @@ namespace SIL.PublishingSolution
             {
                 cTool.BtnPaper.BackColor = _selectedColor;
                 cTool.BtnPaper.FlatAppearance.BorderSize = 1;
+                cTool.TsPreview.Enabled = true;
             }
             else if (MediaType == "mobile")
             {
                 cTool.BtnMobile.BackColor = _selectedColor;
                 cTool.BtnMobile.FlatAppearance.BorderSize = 1;
+                cTool.TsPreview.Enabled = false;
             }
             else if (MediaType == "web")
             {
                 cTool.BtnWeb.BackColor = _selectedColor;
                 cTool.BtnWeb.FlatAppearance.BorderSize = 1;
+                cTool.TsPreview.Enabled = true;
             }
             else if (MediaType == "others")
             {
                 cTool.BtnOthers.BackColor = _selectedColor;
                 cTool.BtnOthers.FlatAppearance.BorderSize = 1;
+                cTool.TsPreview.Enabled = true;
             }
         }
 
@@ -791,82 +795,15 @@ namespace SIL.PublishingSolution
                 foreach (XmlNode baseNode in baseNodeList)
                 {
                     string attribName = baseNode.Attributes["name"].Value.ToLower();
-                    switch (attribName)
-                    {
-                        case "ftpaddress":
-                            baseNode.Attributes["value"].Value = cTool.TxtFtpAddress.Text;
-                            break;
-                        case "ftpuserid":
-                            baseNode.Attributes["value"].Value = cTool.TxtFtpUsername.Text;
-                            break;
-                        case "ftppwd":
-                            if (cTool.TxtFtpPassword.Text.Trim().Length > 0)
-                            {
-                                baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtFtpPassword.Text);
-                            }
-                            else
-                            {
-                                baseNode.Attributes["value"].Value = "";
-                            }
-                            break;
-                        case "dbservername":
-                            baseNode.Attributes["value"].Value = cTool.TxtSqlServerName.Text;
-                            break;
-                        case "dbname":
-                            baseNode.Attributes["value"].Value = cTool.TxtSqlDBName.Text;
-                            break;
-                        case "dbuserid":
-                            baseNode.Attributes["value"].Value = cTool.TxtSqlUsername.Text;
-                            break;
-                        case "dbpwd":
-                            if (cTool.TxtSqlPassword.Text.Trim().Length > 0)
-                            {
-                                baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtSqlPassword.Text);
-                            }
-                            else
-                            {
-                                baseNode.Attributes["value"].Value = "";
-                            }
-                            break;
-                        case "weburl":
-                            baseNode.Attributes["value"].Value = cTool.TxtWebUrl.Text;
-                            break;
-                        case "webadminusrnme":
-                            baseNode.Attributes["value"].Value = cTool.TxtWebAdminUsrNme.Text;
-                            break;
-                        case "webadminpwd":
-                            if (cTool.TxtWebAdminPwd.Text.Trim().Length > 0)
-                            {
-                                baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtWebAdminPwd.Text);
-                            }
-                            else
-                            {
-                                baseNode.Attributes["value"].Value = "";
-                            }
-                            break;
-                        case "webadminsitenme":
-                            baseNode.Attributes["value"].Value = cTool.TxtWebAdminSiteNme.Text;
-                            break;
-                        case "webemailid":
-                            baseNode.Attributes["value"].Value = cTool.TxtWebEmailId.Text;
-                            break;
-                        case "webftpfldrnme":
-                            baseNode.Attributes["value"].Value = cTool.TxtWebFtpFldrNme.Text;
-                            break;
-                        case "comment":
-                            baseNode.Attributes["value"].Value = cTool.TxtComment.Text;
-                            break;
-                        default:
-                            break;
-                    }
+                    SetAttributesForWebProperties(attribName, baseNode, hashUtil);
                 }
                 Param.Write();
             }
 
             if (IsPropertyModified() == false || (FileType.ToLower() == "standard")) return;
             StreamWriter writeCss = null;
-
             if (MediaType.ToLower() != "web")
+            {
                 try
                 {
                     string path = Param.Value["UserSheetPath"]; // all user path
@@ -895,115 +832,7 @@ namespace SIL.PublishingSolution
                     // changes for paper media
                     if (MediaType == "paper")
                     {
-                        var value = new Dictionary<string, string>();
-                        string attribute = "Justified";
-                        string key = cTool.DdlJustified.Text;
-                        WriteAtImport(writeCss, attribute, key);
-
-                        attribute = "VerticalJustify";
-                        key = cTool.DdlVerticalJustify.Text;
-                        WriteAtImport(writeCss, attribute, key);
-
-                        attribute = "Page Size";
-                        key = cTool.DdlPagePageSize.Text;
-                        WriteAtImport(writeCss, attribute, key);
-
-                        attribute = "Columns";
-                        key = cTool.DdlPageColumn.Text;
-                        WriteAtImport(writeCss, attribute, key);
-
-                        attribute = "Font Size";
-                        key = cTool.DdlFontSize.Text;
-                        WriteAtImport(writeCss, attribute, key);
-
-                        attribute = "Leading";
-                        key = cTool.DdlLeading.Text;
-                        WriteAtImport(writeCss, attribute, key);
-
-                        attribute = "Pictures";
-                        key = cTool.DdlPicture.Text;
-                        WriteAtImport(writeCss, attribute, key);
-
-                        attribute = "Running Head";
-                        key = cTool.DdlRunningHead.Text;
-                        WriteAtImport(writeCss, attribute, key);
-
-                        if (inputTypeBL.ToLower() == "scripture")
-                        {
-                            attribute = "Reference Format";
-                            key = cTool.DdlReferenceFormat.Text;
-                            WriteAtImport(writeCss, attribute, key);
-                        }
-
-                        attribute = "Page Number";
-                        key = cTool.DdlPageNumber.Text;
-                        WriteAtImport(writeCss, attribute, key);
-
-                        attribute = "Rules";
-                        key = cTool.DdlRules.Text;
-                        WriteAtImport(writeCss, attribute, key);
-
-                        attribute = "Sense";
-                        key = cTool.DdlSense.Text;
-                        WriteAtImport(writeCss, attribute, key);
-
-                        //Writing TextBox Values into Css
-                        if (cTool.TxtPageGutterWidth.Text.Length > 0)
-                        {
-                            value["column-gap"] = cTool.TxtPageGutterWidth.Text;
-                            if (_loadType == "Scripture")
-                            {
-                                WriteCssClass(writeCss, "columns", value);
-                            }
-                            else
-                            {
-                                WriteCssClass(writeCss, "letData", value);
-                            }
-
-                        }
-                        value.Clear();
-                        //TD-3607
-                        if (cTool.TxtGuidewordLength.Text.Length > 0 && inputTypeBL.ToLower() == "dictionary")
-                        {
-                            int a;
-                            if (int.TryParse(cTool.TxtGuidewordLength.Text, out a))
-                            {
-                                value["guideword-length"] = Convert.ToInt16(cTool.TxtGuidewordLength.Text).ToString();
-                            }
-                            WriteCssClass(writeCss, "guidewordLength", value);
-                        }
-
-
-                        value.Clear();
-                        value["margin-top"] = cTool.TxtPageTop.Text;
-                        value["margin-right"] = cTool.TxtPageOutside.Text;
-                        value["margin-bottom"] = cTool.TxtPageBottom.Text;
-                        value["margin-left"] = cTool.TxtPageInside.Text;
-                        value["-ps-fileproduce"] = "\"" + cTool.DdlFileProduceDict.Text + "\"";
-                        value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
-                        value["-ps-split-file-by-letter"] = "\"" + _splitFileByLetter + "\"";
-                        if (inputTypeBL.ToLower() == "scripture")
-                        {
-                            value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
-                            value["-ps-custom-XRef-caller"] = "\"" + cTool.TxtXrefCusSymbol.Text + "\"";
-                            value["-ps-hide-versenumber-one"] = "\"" + cTool.ChkTurnOffFirstVerse.Checked + "\"";
-                            value["-ps-hide-space-versenumber"] = "\"" + cTool.ChkHideSpaceVerseNo.Checked + "\"";
-                        }
-                        value["-ps-disable-widow-orphan"] = "\"" + _disableWidowOrphan + "\"";
-                        WriteCssClass(writeCss, "page", value);
-
-                        if (cTool.DdlRunningHead.Text.ToLower() == "mirrored")
-                        {
-                            value.Clear();
-                            value["margin-right"] = cTool.TxtPageInside.Text;
-                            value["margin-left"] = cTool.TxtPageOutside.Text;
-                            WriteCssClass(writeCss, "page :left", value);
-
-                            value.Clear();
-                            value["margin-right"] = cTool.TxtPageOutside.Text;
-                            value["margin-left"] = cTool.TxtPageInside.Text;
-                            WriteCssClass(writeCss, "page :right", value);
-                        }
+                        SetAttributesForPaperProperties(writeCss);
                     }
                     // write out the changes
                     writeCss.Flush();
@@ -1028,9 +857,198 @@ namespace SIL.PublishingSolution
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + ex.Message + "'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    string message =
+                        "Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" +
+                        ex.Message + "'";
+                    MessageBox.Show(message, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                                    MessageBoxDefaultButton.Button1);
                 }
+            }
             _screenMode = ScreenMode.Edit;
+        }
+
+        private void SetAttributesForPaperProperties(StreamWriter writeCss)
+        {
+            var value = new Dictionary<string, string>();
+            string attribute = "Justified";
+            string key = cTool.DdlJustified.Text;
+            WriteAtImport(writeCss, attribute, key);
+
+            attribute = "VerticalJustify";
+            key = cTool.DdlVerticalJustify.Text;
+            WriteAtImport(writeCss, attribute, key);
+
+            attribute = "Page Size";
+            key = cTool.DdlPagePageSize.Text;
+            WriteAtImport(writeCss, attribute, key);
+
+            attribute = "Columns";
+            key = cTool.DdlPageColumn.Text;
+            WriteAtImport(writeCss, attribute, key);
+
+            attribute = "Font Size";
+            key = cTool.DdlFontSize.Text;
+            WriteAtImport(writeCss, attribute, key);
+
+            attribute = "Leading";
+            key = cTool.DdlLeading.Text;
+            WriteAtImport(writeCss, attribute, key);
+
+            attribute = "Pictures";
+            key = cTool.DdlPicture.Text;
+            WriteAtImport(writeCss, attribute, key);
+
+            attribute = "Running Head";
+            key = cTool.DdlRunningHead.Text;
+            WriteAtImport(writeCss, attribute, key);
+
+            if (inputTypeBL.ToLower() == "scripture")
+            {
+                attribute = "Reference Format";
+                key = cTool.DdlReferenceFormat.Text;
+                WriteAtImport(writeCss, attribute, key);
+            }
+
+            attribute = "Page Number";
+            key = cTool.DdlPageNumber.Text;
+            WriteAtImport(writeCss, attribute, key);
+
+            attribute = "Rules";
+            key = cTool.DdlRules.Text;
+            WriteAtImport(writeCss, attribute, key);
+
+            attribute = "Sense";
+            key = cTool.DdlSense.Text;
+            WriteAtImport(writeCss, attribute, key);
+
+            //Writing TextBox Values into Css
+            if (cTool.TxtPageGutterWidth.Text.Length > 0)
+            {
+                value["column-gap"] = cTool.TxtPageGutterWidth.Text;
+                if (_loadType == "Scripture")
+                {
+                    WriteCssClass(writeCss, "columns", value);
+                }
+                else
+                {
+                    WriteCssClass(writeCss, "letData", value);
+                }
+            }
+            value.Clear();
+            //TD-3607
+            if (cTool.TxtGuidewordLength.Text.Length > 0 && inputTypeBL.ToLower() == "dictionary")
+            {
+                int a;
+                if (int.TryParse(cTool.TxtGuidewordLength.Text, out a))
+                {
+                    value["guideword-length"] = Convert.ToInt16(cTool.TxtGuidewordLength.Text).ToString();
+                }
+                WriteCssClass(writeCss, "guidewordLength", value);
+            }
+
+
+            value.Clear();
+            value["margin-top"] = cTool.TxtPageTop.Text;
+            value["margin-right"] = cTool.TxtPageOutside.Text;
+            value["margin-bottom"] = cTool.TxtPageBottom.Text;
+            value["margin-left"] = cTool.TxtPageInside.Text;
+            value["-ps-fileproduce"] = "\"" + cTool.DdlFileProduceDict.Text + "\"";
+            value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
+            value["-ps-split-file-by-letter"] = "\"" + _splitFileByLetter + "\"";
+            if (inputTypeBL.ToLower() == "scripture")
+            {
+                value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
+                value["-ps-custom-XRef-caller"] = "\"" + cTool.TxtXrefCusSymbol.Text + "\"";
+                value["-ps-hide-versenumber-one"] = "\"" + cTool.ChkTurnOffFirstVerse.Checked + "\"";
+                value["-ps-hide-space-versenumber"] = "\"" + cTool.ChkHideSpaceVerseNo.Checked + "\"";
+            }
+            value["-ps-disable-widow-orphan"] = "\"" + _disableWidowOrphan + "\"";
+            WriteCssClass(writeCss, "page", value);
+
+            if (cTool.DdlRunningHead.Text.ToLower() == "mirrored")
+            {
+                value.Clear();
+                value["margin-right"] = cTool.TxtPageInside.Text;
+                value["margin-left"] = cTool.TxtPageOutside.Text;
+                WriteCssClass(writeCss, "page :left", value);
+
+                value.Clear();
+                value["margin-right"] = cTool.TxtPageOutside.Text;
+                value["margin-left"] = cTool.TxtPageInside.Text;
+                WriteCssClass(writeCss, "page :right", value);
+            }
+        }
+
+        private void SetAttributesForWebProperties(string attribName, XmlNode baseNode, HashUtilities hashUtil)
+        {
+            switch (attribName)
+            {
+                case "ftpaddress":
+                    baseNode.Attributes["value"].Value = cTool.TxtFtpAddress.Text;
+                    break;
+                case "ftpuserid":
+                    baseNode.Attributes["value"].Value = cTool.TxtFtpUsername.Text;
+                    break;
+                case "ftppwd":
+                    if (cTool.TxtFtpPassword.Text.Trim().Length > 0)
+                    {
+                        baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtFtpPassword.Text);
+                    }
+                    else
+                    {
+                        baseNode.Attributes["value"].Value = "";
+                    }
+                    break;
+                case "dbservername":
+                    baseNode.Attributes["value"].Value = cTool.TxtSqlServerName.Text;
+                    break;
+                case "dbname":
+                    baseNode.Attributes["value"].Value = cTool.TxtSqlDBName.Text;
+                    break;
+                case "dbuserid":
+                    baseNode.Attributes["value"].Value = cTool.TxtSqlUsername.Text;
+                    break;
+                case "dbpwd":
+                    if (cTool.TxtSqlPassword.Text.Trim().Length > 0)
+                    {
+                        baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtSqlPassword.Text);
+                    }
+                    else
+                    {
+                        baseNode.Attributes["value"].Value = "";
+                    }
+                    break;
+                case "weburl":
+                    baseNode.Attributes["value"].Value = cTool.TxtWebUrl.Text;
+                    break;
+                case "webadminusrnme":
+                    baseNode.Attributes["value"].Value = cTool.TxtWebAdminUsrNme.Text;
+                    break;
+                case "webadminpwd":
+                    if (cTool.TxtWebAdminPwd.Text.Trim().Length > 0)
+                    {
+                        baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtWebAdminPwd.Text);
+                    }
+                    else
+                    {
+                        baseNode.Attributes["value"].Value = "";
+                    }
+                    break;
+                case "webadminsitenme":
+                    baseNode.Attributes["value"].Value = cTool.TxtWebAdminSiteNme.Text;
+                    break;
+                case "webemailid":
+                    baseNode.Attributes["value"].Value = cTool.TxtWebEmailId.Text;
+                    break;
+                case "webftpfldrnme":
+                    baseNode.Attributes["value"].Value = cTool.TxtWebFtpFldrNme.Text;
+                    break;
+                case "comment":
+                    baseNode.Attributes["value"].Value = cTool.TxtComment.Text;
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
@@ -1069,7 +1087,6 @@ namespace SIL.PublishingSolution
                 if (type == TypeStandard)
                 {
                     EnableDisablePanel(false);
-                    cTool.TsPreview.Enabled = true;
                     cTool.TxtApproved.Visible = true;
                     cTool.LblApproved.Visible = true;
                 }
@@ -1178,7 +1195,7 @@ namespace SIL.PublishingSolution
                         filePath = Param.SettingPath;
                     }
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                    ShowMoblieCSS(baseNode1);
+                    ShowMoblieCss(baseNode1);
                     SetMobileSummary(null, null);
                 }
                 else if (MediaType.ToLower() == "others")
@@ -1187,7 +1204,7 @@ namespace SIL.PublishingSolution
                     // show/hide epub UI controls based on the input type
                     SetEpubUIControls(inputTypeBL == "Scripture");
 
-                    ShowOthersCSS(baseNode1);
+                    ShowOthersCss(baseNode1);
                     SetOthersSummary(null, null);
                 }
                 else if (MediaType.ToLower() == "web")
@@ -1199,7 +1216,7 @@ namespace SIL.PublishingSolution
                     // show/hide web UI controls based on the input type
                     SetWebUIControls(inputTypeBL == "Dictionary");
 
-                    ShowWebCSS(baseNode1, hashUtil);
+                    ShowWebCss(baseNode1, hashUtil);
                     SetWebSummary(null, null);
                 }
                 else
@@ -1219,7 +1236,7 @@ namespace SIL.PublishingSolution
             _screenMode = ScreenMode.Edit;
         }
 
-        private void ShowMoblieCSS(XmlNodeList baseNode1)
+        private void ShowMoblieCss(XmlNodeList baseNode1)
         {
             foreach (XmlNode VARIABLE in baseNode1)
             {
@@ -1240,7 +1257,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void ShowOthersCSS(XmlNodeList baseNode1)
+        private void ShowOthersCss(XmlNodeList baseNode1)
         {
             foreach (XmlNode VARIABLE in baseNode1)
             {
@@ -1301,7 +1318,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void ShowWebCSS(XmlNodeList baseNode1, HashUtilities hashUtil)
+        private void ShowWebCss(XmlNodeList baseNode1, HashUtilities hashUtil)
         {
             foreach (XmlNode VARIABLE in baseNode1)
             {
@@ -1479,6 +1496,7 @@ namespace SIL.PublishingSolution
                 foreach (var fontFamily in pfc.Families)
                 {
                     cTool.DdlDefaultFont.Items.Add(fontFamily.GetName(0));
+                    cTool.DdlDefaultFont.SelectedIndex = 0;
                 }
             }
             TreeView TvFeatures = new TreeView();
@@ -1490,110 +1508,114 @@ namespace SIL.PublishingSolution
                     string task = tn.Text;
                     foreach (TreeNode ctn in tn.Nodes)
                     {
-                        switch (task)
-                        {
-                            case "Page Size":
-                                if (!cTool.DdlPagePageSize.Items.Contains(ctn.Text))
-                                    cTool.DdlPagePageSize.Items.Add(ctn.Text);
-                                break;
-
-                            case "Columns":
-                                if (!cTool.DdlPageColumn.Items.Contains(ctn.Text))
-                                    cTool.DdlPageColumn.Items.Add(ctn.Text);
-                                break;
-
-                            case "Leading":
-                                if (!cTool.DdlLeading.Items.Contains(ctn.Text))
-                                    cTool.DdlLeading.Items.Add(ctn.Text);
-                                break;
-
-                            case "Font Size":
-                                if (!cTool.DdlFontSize.Items.Contains(ctn.Text))
-                                    cTool.DdlFontSize.Items.Add(ctn.Text);
-                                break;
-
-                            case "Running Head":
-                                if (!cTool.DdlRunningHead.Items.Contains(ctn.Text))
-                                    cTool.DdlRunningHead.Items.Add(ctn.Text);
-                                break;
-
-                            case "Page Number":
-                                if (!cTool.DdlPageNumber.Items.Contains(ctn.Text))
-                                    cTool.DdlPageNumber.Items.Add(ctn.Text);
-                                break;
-
-                            case "Rules":
-                                if (!cTool.DdlRules.Items.Contains(ctn.Text))
-                                    cTool.DdlRules.Items.Add(ctn.Text);
-                                break;
-
-                            case "Pictures":
-                                if (!cTool.DdlPicture.Items.Contains(ctn.Text))
-                                    cTool.DdlPicture.Items.Add(ctn.Text);
-                                break;
-
-                            case "Sense":
-                                if (!cTool.DdlSense.Items.Contains(ctn.Text))
-                                    cTool.DdlSense.Items.Add(ctn.Text);
-                                break;
-
-                            case "Justified":
-                                if (!cTool.DdlJustified.Items.Contains(ctn.Text))
-                                    cTool.DdlJustified.Items.Add(ctn.Text);
-                                break;
-
-                            case "VerticalJustify":
-                                if (!cTool.DdlVerticalJustify.Items.Contains(ctn.Text))
-                                    cTool.DdlVerticalJustify.Items.Add(ctn.Text);
-                                break;
-
-                            case "FileProduced":
-                                if (!cTool.DdlFiles.Items.Contains(ctn.Text))
-                                    cTool.DdlFiles.Items.Add(ctn.Text);
-                                if (!cTool.DdlFileProduceDict.Items.Contains(ctn.Text))
-                                    cTool.DdlFileProduceDict.Items.Add(ctn.Text);
-                                break;
-                               case "RedLetter":
-                                if (!cTool.DdlRedLetter.Items.Contains(ctn.Text))
-                                    cTool.DdlRedLetter.Items.Add(ctn.Text);
-                                break;
-
-                            case "ChapterNumbers":
-                                if (!cTool.DdlChapterNumbers.Items.Contains(ctn.Text))
-                                    cTool.DdlChapterNumbers.Items.Add(ctn.Text);
-                                break;
-
-                            case "References":
-                                if (!cTool.DdlReferences.Items.Contains(ctn.Text))
-                                    cTool.DdlReferences.Items.Add(ctn.Text);
-                                break;
-
-                            case "DefaultAlignment":
-                                if (!cTool.DdlDefaultAlignment.Items.Contains(ctn.Text))
-                                    cTool.DdlDefaultAlignment.Items.Add(ctn.Text);
-                                break;
-
-                            case "MissingFont":
-                                if (!cTool.DdlMissingFont.Items.Contains(ctn.Text))
-                                    cTool.DdlMissingFont.Items.Add(ctn.Text);
-                                break;
-
-                            case "NonSILFont":
-                                if (!cTool.DdlNonSILFont.Items.Contains(ctn.Text))
-                                    cTool.DdlNonSILFont.Items.Add(ctn.Text);
-                                break;
-
-                            case "TOCLevel":
-                                if (!cTool.DdlTocLevel.Items.Contains(ctn.Text))
-                                    cTool.DdlTocLevel.Items.Add(ctn.Text);
-                                break;
-
-                        }
+                        PopulateFeatureItemsInDropDownctrl(task, ctn);
                     }
                 }
             }
             catch
             {
+            }
+        }
+
+        private void PopulateFeatureItemsInDropDownctrl(string task, TreeNode ctn)
+        {
+            switch (task)
+            {
+                case "Page Size":
+                    if (!cTool.DdlPagePageSize.Items.Contains(ctn.Text))
+                        cTool.DdlPagePageSize.Items.Add(ctn.Text);
+                    break;
+
+                case "Columns":
+                    if (!cTool.DdlPageColumn.Items.Contains(ctn.Text))
+                        cTool.DdlPageColumn.Items.Add(ctn.Text);
+                    break;
+
+                case "Leading":
+                    if (!cTool.DdlLeading.Items.Contains(ctn.Text))
+                        cTool.DdlLeading.Items.Add(ctn.Text);
+                    break;
+
+                case "Font Size":
+                    if (!cTool.DdlFontSize.Items.Contains(ctn.Text))
+                        cTool.DdlFontSize.Items.Add(ctn.Text);
+                    break;
+
+                case "Running Head":
+                    if (!cTool.DdlRunningHead.Items.Contains(ctn.Text))
+                        cTool.DdlRunningHead.Items.Add(ctn.Text);
+                    break;
+
+                case "Page Number":
+                    if (!cTool.DdlPageNumber.Items.Contains(ctn.Text))
+                        cTool.DdlPageNumber.Items.Add(ctn.Text);
+                    break;
+
+                case "Rules":
+                    if (!cTool.DdlRules.Items.Contains(ctn.Text))
+                        cTool.DdlRules.Items.Add(ctn.Text);
+                    break;
+
+                case "Pictures":
+                    if (!cTool.DdlPicture.Items.Contains(ctn.Text))
+                        cTool.DdlPicture.Items.Add(ctn.Text);
+                    break;
+
+                case "Sense":
+                    if (!cTool.DdlSense.Items.Contains(ctn.Text))
+                        cTool.DdlSense.Items.Add(ctn.Text);
+                    break;
+
+                case "Justified":
+                    if (!cTool.DdlJustified.Items.Contains(ctn.Text))
+                        cTool.DdlJustified.Items.Add(ctn.Text);
+                    break;
+
+                case "VerticalJustify":
+                    if (!cTool.DdlVerticalJustify.Items.Contains(ctn.Text))
+                        cTool.DdlVerticalJustify.Items.Add(ctn.Text);
+                    break;
+
+                case "FileProduced":
+                    if (!cTool.DdlFiles.Items.Contains(ctn.Text))
+                        cTool.DdlFiles.Items.Add(ctn.Text);
+                    if (!cTool.DdlFileProduceDict.Items.Contains(ctn.Text))
+                        cTool.DdlFileProduceDict.Items.Add(ctn.Text);
+                    break;
+                case "RedLetter":
+                    if (!cTool.DdlRedLetter.Items.Contains(ctn.Text))
+                        cTool.DdlRedLetter.Items.Add(ctn.Text);
+                    break;
+
+                case "ChapterNumbers":
+                    if (!cTool.DdlChapterNumbers.Items.Contains(ctn.Text))
+                        cTool.DdlChapterNumbers.Items.Add(ctn.Text);
+                    break;
+
+                case "References":
+                    if (!cTool.DdlReferences.Items.Contains(ctn.Text))
+                        cTool.DdlReferences.Items.Add(ctn.Text);
+                    break;
+
+                case "DefaultAlignment":
+                    if (!cTool.DdlDefaultAlignment.Items.Contains(ctn.Text))
+                        cTool.DdlDefaultAlignment.Items.Add(ctn.Text);
+                    break;
+
+                case "MissingFont":
+                    if (!cTool.DdlMissingFont.Items.Contains(ctn.Text))
+                        cTool.DdlMissingFont.Items.Add(ctn.Text);
+                    break;
+
+                case "NonSILFont":
+                    if (!cTool.DdlNonSILFont.Items.Contains(ctn.Text))
+                        cTool.DdlNonSILFont.Items.Add(ctn.Text);
+                    break;
+
+                case "TOCLevel":
+                    if (!cTool.DdlTocLevel.Items.Contains(ctn.Text))
+                        cTool.DdlTocLevel.Items.Add(ctn.Text);
+                    break;
             }
         }
 
@@ -1741,10 +1763,7 @@ namespace SIL.PublishingSolution
                         cTool.TabControl1.TabPages.Insert(1, tabDict4Mids);
                         return;
                     }
-
                     cTool.TabControl1.TabPages.Insert(1, tabmob);
-                    cTool.TabControl1.TabPages.Insert(2, tabpreview);
-
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     SetMobileProperty(baseNode1);
                     SetMobileSummary(null, null);
@@ -2395,7 +2414,8 @@ namespace SIL.PublishingSolution
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
             if (PreviousStyleName.Length > 50)
             {
-                MessageBox.Show("Styles should not be greater than 50 characters.", Caption, MessageBoxButtons.OK,
+                const string message = "Styles should not be greater than 50 characters.";
+                MessageBox.Show(message, Caption, MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
                 return false;
             }
@@ -3450,7 +3470,7 @@ namespace SIL.PublishingSolution
             {
                 if (control.GetType().Name == "Label") continue;
 
-                if (control.GetType().Name == "GroupBox")
+                if (_groupPropertyValue.Count > 0 && _groupPropertyValue.Count >= g && control.GetType().Name == "GroupBox")
                 {
                     foreach (Control subControl in control.Controls)
                     {
@@ -4119,8 +4139,10 @@ namespace SIL.PublishingSolution
             _screenMode = ScreenMode.Load;
             _lastSelectedLayout = StyleEXE;
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
-            tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
-            tabpreview = cTool.TabControl1.TabPages["tabPreview"];
+            if (cTool.TabControl1.TabPages["tabdisplay"] != null)
+                tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
+            if (cTool.TabControl1.TabPages["tabPreview"] != null)
+                tabpreview = cTool.TabControl1.TabPages["tabPreview"];
             if (cTool.TabControl1.TabPages.Count > 2)
             {
                 if (cTool.TabControl1.TabPages["tabmobile"] != null)
@@ -4395,6 +4417,7 @@ namespace SIL.PublishingSolution
 
         public void tsReset_ClickBL()
         {
+            string message = "Settings files cannot be reset.";
             try
             {
                 const string msg = "Are you sure you want to remove all custom style sheets and restore settings to their initial values? (This can not be undone.)";
@@ -4415,16 +4438,17 @@ namespace SIL.PublishingSolution
                 SelectedRowIndex = 0;
                 inputTypeBL = cTool.InputType;
                 ConfigurationTool_LoadBL();
-                MessageBox.Show("Settings files are reset successfully.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message = "Settings files are reset successfully.";
             }
-            catch
-            {
-                MessageBox.Show("Settings files cannot be reset.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            catch{}
+            MessageBox.Show(message, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void ShowPreview(int page)
         {
+            var myCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            
             string preview;
 
             if (!File.Exists(PreviewFileName1) || _screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit)
@@ -4457,13 +4481,51 @@ namespace SIL.PublishingSolution
                 cTool.BtnNext.Enabled = false;
             }
 
+            ShowPreviewBasedFileType(preview);
+            Cursor.Current = myCursor;
+        }
+
+        private void ShowPreviewBasedFileType(string preview)
+        {
+            if (FileType.ToLower() == "custom")
+            {
+                if (File.Exists(preview))
+                {
+                    cTool.PicPreview.Visible = true;
+                    cTool.PicPreview.Image = Image.FromFile(preview);
+                }
+                else
+                {
+                    ShowCustomPreviewImage();
+                }
+            }
+            else
+            {
+                if (File.Exists(preview))
+                {
+                    cTool.PicPreview.Visible = true;
+                    cTool.PicPreview.Image = Image.FromFile(preview);
+                }
+                else
+                {
+                    cTool.BtnPrevious.Visible = false;
+                    cTool.BtnNext.Visible = false;
+                }
+            }
+        }
+
+        private void ShowCustomPreviewImage()
+        {
+            string preview;
+            string pathwayDirectory = PathwayPath.GetPathwayDir();
+            pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+            pathwayDirectory = Common.PathCombine(pathwayDirectory, inputTypeBL);
+            pathwayDirectory = Common.PathCombine(pathwayDirectory, "Preview");
+            preview = Common.PathCombine(pathwayDirectory, "PreviewMessage.jpg");
             if (File.Exists(preview))
             {
                 cTool.PicPreview.Visible = true;
                 cTool.PicPreview.Image = Image.FromFile(preview);
-            }
-            else
-            {
                 cTool.BtnPrevious.Visible = false;
                 cTool.BtnNext.Visible = false;
             }

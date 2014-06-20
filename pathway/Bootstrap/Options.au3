@@ -111,7 +111,7 @@ Func Options_Defaults()
 	Global $INS_Epub = Not EpubInstalled(43.2)
 	Global $INS_Pdf = Not PdfInstalled(13.8)
 	Global $INS_Prince = Not PrinceInstalled(4.0)
-	Global $INS_XeLaTex = Not XeLaTexInstalled(32.4)
+	Global $INS_XeLaTex = Not XeLaTexInstalled(96)
 EndFunc
 
 Func Options_Minimal()

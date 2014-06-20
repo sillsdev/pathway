@@ -490,14 +490,7 @@ namespace Test.CssParserTest
             _input.StringValue = "\"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            if (_isLinux)
-            {
-                _expected.Add("font-family", "serif");
-            }
-            else
-            {
-                _expected.Add("font-family", "Times New Roman");
-            }
+            _expected.Add("font-family", _isLinux ? "serif" : "Times New Roman");
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
@@ -520,14 +513,7 @@ namespace Test.CssParserTest
             _input.StringValue = "Georgia, \"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            if (_isLinux)
-            {
-                _expected.Add("font-family", "Times New Roman");
-            }
-            else
-            {
-                _expected.Add("font-family", "Georgia");
-            }
+            _expected.Add("font-family", _isLinux ? "Times New Roman" : "Georgia");
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
@@ -538,14 +524,7 @@ namespace Test.CssParserTest
             _input.StringValue = "dummyfont, Georgia,\"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            if (_isLinux)
-            {
-                _expected.Add("font-family", "Times New Roman");
-            }
-            else
-            {
-                _expected.Add("font-family", "Georgia");
-            }
+            _expected.Add("font-family", _isLinux ? "Times New Roman" : "Georgia");
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
@@ -576,14 +555,7 @@ namespace Test.CssParserTest
             _input.StringValue = "Arial, sans-serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            if (_isLinux)
-            {
-                _expected.Add("font-family", "Verdana");
-            }
-            else
-            {
-                _expected.Add("font-family", "Arial");
-            }
+            _expected.Add("font-family", _isLinux ? "Verdana" : "Arial");
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
@@ -624,14 +596,7 @@ namespace Test.CssParserTest
             _makeProperty.Font(_input);
             _expected.Clear();
             _expected.Add("font-size", "24");
-            if (_isLinux)
-            {
-                _expected.Add("font-family", "serif");
-            }
-            else
-            {
-                _expected.Add("font-family", "Times New Roman");
-            }
+            _expected.Add("font-family", _isLinux ? "serif" : "Times New Roman");
             _expected.Add("font-style", "italic");
             _expected.Add("font-variant", "small-caps");
             _expected.Add("font-weight", "bold");

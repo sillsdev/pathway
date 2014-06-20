@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using System.Collections.Generic;
@@ -84,6 +85,8 @@ namespace BuildTasks
         #endregion HelpFile
         #endregion Properties
 
+        private readonly Regex _versionPattern = new Regex(@"([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+");
+
         public override bool Execute()
         {
             var instPath = Environment.CurrentDirectory;
@@ -92,8 +95,7 @@ namespace BuildTasks
             map["PwVer"] = _version;
             if (!string.IsNullOrEmpty(_buildVersion))
             {
-                var exp = new Regex(@"([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+");
-                var match = exp.Match(_buildVersion);
+                var match = _versionPattern.Match(_buildVersion);
                 if (match.Success)
                     map["PwVer"] = match.Groups[1].Value;
             }

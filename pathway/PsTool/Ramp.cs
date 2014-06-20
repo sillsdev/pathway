@@ -23,7 +23,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
-using SIL.PublishingSolution;
 
 namespace SIL.Tool
 {
@@ -91,13 +90,6 @@ namespace SIL.Tool
         #endregion
 
         #region Public Variables
-        public string RampId
-        {
-            get { return _rampId; }
-            set { _rampId = value; }
-        }
-
-
         public List<string> LanguageIso
         {
             get { return _languageIso; }
@@ -146,139 +138,121 @@ namespace SIL.Tool
             set { _subjectLanguage = value; }
         }
 
-        public string CreatedOn
+        protected string CreatedOn
         {
             get { return _createdOn; }
-            set { _createdOn = value; }
+            private set { _createdOn = value; }
         }
 
-        public string Ready
+        private string Ready
         {
             get { return _ready; }
             set { _ready = value; }
         }
 
-        public string Title
+        private string Title
         {
             get { return _title; }
             set { _title = value; }
         }
 
-        public string BroadType
+        protected string BroadType
         {
             get { return _broadType; }
-            set { _broadType = value; }
+            private set { _broadType = value; }
         }
 
-        public string TypeMode
+        protected string TypeMode
         {
             get { return _typeMode; }
-            set { _typeMode = value; }
+            private set { _typeMode = value; }
         }
 
-        public string FormatMedium
+        private string FormatMedium
         {
             get { return _formatMedium; }
             set { _formatMedium = value; }
         }
 
-        public string DescStage
+        private string DescStage
         {
             get { return _descStage; }
             set { _descStage = value; }
         }
 
-        public string VersionType
+        private string VersionType
         {
             get { return _versionType; }
             set { _versionType = value; }
         }
 
-        public string TypeScholarlyWork
+        private string TypeScholarlyWork
         {
             get { return _typeScholarlyWork; }
             set { _typeScholarlyWork = value; }
         }
 
-        public string CoverageSpacialRegionHas
-        {
-            get { return _coverageSpacialRegionHas; }
-            set { _coverageSpacialRegionHas = value; }
-        }
-
-        public string SubjectLanguageHas
+        private string SubjectLanguageHas
         {
             get { return _subjectLanguageHas; }
             set { _subjectLanguageHas = value; }
         }
 
-        public string FormatExtentText
+        private string FormatExtentText
         {
             get { return _formatExtentText; }
             set { _formatExtentText = value; }
         }
 
-        public string FormatExtentImages
+        protected string FormatExtentImages
         {
             get { return _formatExtentImages; }
-            set { _formatExtentImages = value; }
+            private set { _formatExtentImages = value; }
         }
 
-        public string DescSponsership
-        {
-            get { return _descSponsership; }
-            set { _descSponsership = value; }
-        }
-
-        public string DescTableofContentsHas
-        {
-            get { return _descTableofContentsHas; }
-            set { _descTableofContentsHas = value; }
-        }
-
-        public string SilDomain
+        private string SilDomain
         {
             get { return _silDomain; }
             set { _silDomain = value; }
         }
 
-        public string DomainSubTypeLing
+        private string DomainSubTypeLing
         {
             get { return _domainSubTypeLing; }
             set { _domainSubTypeLing = value; }
         }
 
-        public string RelRequiresHas
+        private string RelRequiresHas
         {
             get { return _relRequiresHas; }
             set { _relRequiresHas = value; }
         }
 
-        public string RelConformsto
+        private string RelConformsto
         {
             get { return _relConformsto; }
             set { _relConformsto = value; }
         }
 
-        public string SilSensitivityMetaData
+        private string SilSensitivityMetaData
         {
             get { return _silSensitivityMetaData; }
             set { _silSensitivityMetaData = value; }
         }
 
-        public string SilSensitivityPresentation
+        private string SilSensitivityPresentation
         {
             get { return _silSensitivityPresentation; }
             set { _silSensitivityPresentation = value; }
         }
 
-        public string Rights
+        protected string Rights
         {
             get { return _rights; }
-            set { _rights = value; }
+            private set { _rights = value; }
         }
 
-        public string SilSensitivitySource
+        private string SilSensitivitySource
         {
             get { return _silSensitivitySource; }
             set { _silSensitivitySource = value; }
@@ -290,7 +264,7 @@ namespace SIL.Tool
             set { _rampFile = value; }
         }
 
-        public string Status
+        private string Status
         {
             get { return _status; }
             set { _status = value; }
@@ -385,7 +359,7 @@ namespace SIL.Tool
 
         protected void LoadLanguagefromXML()
         {
-            string xmlFilePath = CopiedToTempRampLangXMLFile();
+            string xmlFilePath = Common.CopyXmlFileToTempDirectory("RampLangCode.xml");
             if (!File.Exists(xmlFilePath))
                 return;
 
@@ -420,32 +394,6 @@ namespace SIL.Tool
             }
         }
 
-        private string CopiedToTempRampLangXMLFile()
-        {
-            string fileName = "RampLangCode.xml";
-            string PsSupportPath = Common.GetBinPath();
-            string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, fileName);
-            string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
-            if (Directory.Exists(tempFolder))
-            {
-                try
-                {
-                    DirectoryInfo di = new DirectoryInfo(tempFolder);
-                    Common.CleanDirectory(di);
-                }
-                catch
-                {
-                    tempFolder = Common.PathCombine(Path.GetTempPath(),
-                                                    "SilPathWay" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
-                }
-            }
-            Directory.CreateDirectory(tempFolder);
-            string tempGenericFontFile = Common.PathCombine(tempFolder, fileName);
-
-            File.Copy(xmlFileNameWithPath, tempGenericFontFile, true);
-            return tempGenericFontFile;
-        }
-
         private bool IsFromTestBed()
         {
             bool result = false;
@@ -461,7 +409,7 @@ namespace SIL.Tool
         /// <summary>
         /// 
         /// </summary>
-        public void AddSubjLanguage(string langList)
+        protected void AddSubjLanguage(string langList)
         {
             foreach (string lang in langList.Split(new[] { ';' }))
             {
@@ -496,7 +444,7 @@ namespace SIL.Tool
         /// <summary>
         /// 
         /// </summary>
-        public void AddLanguageIso(string langCollection)
+        protected void AddLanguageIso(string langCollection)
         {
             string[] languageCode = langCollection.Split(';');
             foreach (string s in languageCode)
@@ -560,12 +508,7 @@ namespace SIL.Tool
             return code;
         }
 
-        public void AddCoverageSpacialCountry(string country)
-        {
-            CoverageSpacialCountry.Add(country);
-        }
-
-        public void AddLanguageScript(string langCollection)
+        protected void AddLanguageScript(string langCollection)
         {
             string[] languageCode = langCollection.Split(',');
             foreach (string s in languageCode)
@@ -588,17 +531,17 @@ namespace SIL.Tool
             }
         }
 
-        public void AddContributor(string contrib)
+        private void AddContributor(string contrib)
         {
             Contributor.Add(contrib);
         }
 
-        public void AddSubject(string subj)
+        private void AddSubject(string subj)
         {
             Subject.Add(subj);
         }
 
-        public void AddRelRequires(string text)
+        private void AddRelRequires(string text)
         {
             string[] fontList = text.Split(';');
             foreach (string font in fontList)
@@ -608,12 +551,12 @@ namespace SIL.Tool
             }
         }
 
-        public void AddRightsHolder(string value)
+        private void AddRightsHolder(string value)
         {
             RightsHolder.Add(value);
         }
 
-        public void AddFile(RampFile file)
+        private void AddFile(RampFile file)
         {
             string newFile = string.Empty;
             if (file.FileName != null)

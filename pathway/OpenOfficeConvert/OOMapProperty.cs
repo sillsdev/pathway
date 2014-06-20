@@ -24,7 +24,7 @@ namespace SIL.PublishingSolution
 {
     public class OOMapProperty
     {
-        private Dictionary<string, string> _IDProperty = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _idProperty = new Dictionary<string, string>();
         private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
         readonly Dictionary<string, string> _dicColorInfo = new Dictionary<string, string>();
         readonly Dictionary<string, string> _dictFontSize = new Dictionary<string, string>();
@@ -40,7 +40,7 @@ namespace SIL.PublishingSolution
 
         public Dictionary<string, string> IDProperty(Dictionary<string, string> cssProperty, bool isFixedLineHeightEnable)
         {
-            _IDProperty.Clear();
+            _idProperty.Clear();
             _cssProperty = cssProperty;
             _isFixedLineHeightEnable = isFixedLineHeightEnable;
             foreach (KeyValuePair<string, string> property in cssProperty)
@@ -51,211 +51,277 @@ namespace SIL.PublishingSolution
                     continue;
                 }
                 _propertyKey = property.Key.ToLower();
-                switch (_propertyKey)
+                bool writtenProperty = MappingFontProperty(property);
+                if (!writtenProperty)
                 {
-                    case "font-weight":
-                        FontWeight(property.Value);
-                        break;
-                    case "font-style":
-                        FontStyle(property.Value);
-                        break;
-                    case "text-align":
-                        TextAlign(property.Value);
-                        break;
-                    case "font-size":
-                        FontSize(property.Value);
-                        break;
-                    case "text-decoration":
-                        TextDecoration(property.Value);
-                        break;
-                    case "font-variant":
-                        FontVariant(property.Value);
-                        break;
-                    case "text-indent":
-                        TextIndent(property.Value);
-                        break;
-                    case "margin-left":
-                        MarginLeft(property.Value);
-                        break;
-                    case "margin-right":
-                        MarginRight(property.Value);
-                        break;
-                    case "margin-top":
-                        MarginTop(property.Value);
-                        break;
-                    case "margin-bottom":
-                        MarginBottom(property.Value);
-                        break;
-                    case "font-family":
-                        FontFamily(property.Value);
-                        break;
-                    case "page-width":
-                        PageWidth(property.Value);
-                        break;
-                    case "page-height":
-                        PageHeight(property.Value);
-                        break;
-                    case "mirror":
-                        Mirror(property.Value);
-                        break;
-                    case "padding-left":
-                    case "class-margin-left":
-                        PaddingLeft(property.Value);
-                        break;
-                    case "padding-right":
-                    case "class-margin-right":
-                        PaddingRight(property.Value);
-                        break;
-                    case "padding-top":
-                    case "class-margin-top":
-                        PaddingTop(property.Value);
-                        break;
-                    case "padding-bottom":
-                    case "class-margin-bottom":
-                        PaddingBottom(property.Value);
-                        break;
-                    case "padding":
-                    case "margin":
-                        //Margin(styleAttributeInfo);
-                        break;
-                    case "color":
-                        Color(property.Value);
-                        break;
-                    case "background-color":
-                        BGColor(property.Value);
-                        break;
-                    case "size":
-                        //Size(styleAttributeInfo);
-                        break;
-                    case "language":
-                        //Language(styleAttributeInfo);
-                        break;
-                    case "border-top":
-                    case "border-bottom":
-                    case "border-left":
-                    case "border-right":
-                        Border(property.Value);
-                        break;
-                    case "column-count":
-                    case "columns":
-                        ColumnCount(property.Value);
-                        break;
-                    case "column-gap":
-                        ColumnGap(property.Value);
-                        break;
-                    case "display":
-                        Display(property.Value);
-                        break;
-                    case "page-break-before":
-                        PageBreakBefore(property.Value);
-                        break;
-                    case "page-break-after":
-                        PageBreakAfter(property.Value);
-                        break;
-                    case "page-break-inside":
-                        PageBreakInside(property.Value);
-                        break;
-                    case "text-transform":
-                        TextTransform(property.Value);
-                        break;
-                    case "vertical-align":
-                        VerticalAlign(property.Value);
-                        break;
-                    case "line-height":
-                        LineHeight(property.Value, cssProperty);
-                        break;
-                    case "hyphens":
-                        Hyphens(property.Value);
-                        break;
-                    case "hyphenate-before":
-                        HyphenateBefore(property.Value);
-                        break;
-                    case "hyphenate-after":
-                        HyphenateAfter(property.Value);
-                        break;
-                    case "hyphenate-lines":
-                        HyphenateLines(property.Value);
-                        break;
-                    case "letter-spacing":
-                        LetterSpacing(property.Value);
-                        break;
-                    case "word-spacing":
-                        WordSpacing(property.Value);
-                        break;
-                    case "orphans":
-                        Orphans(property.Value);
-                        break;
-                    case "widows":
-                        Widows(property.Value);
-                        break;
-                    case "direction":
-                        Direction(property.Value);
-                        break;
-                    case "-ps-vertical-justification":
-                        VerticalJustification(property.Value);
-                        break;
-                    case "column-fill":
-                        ColumnFill(property.Value);
-                        break;
-                    case "column-rule-style":
-                        ColumnRule(property.Value);
-                        break;
-                    case "column-rule-color":
-                        ColumnColor(property.Value);
-                        break;
-                    case "column-rule-width":
-                        ColumnWidth(property.Value);
-                        break;
-                    case "-ps-custom-footnote-caller":
-                        CustomFootnoteCaller(property.Value);
-                        break;
-                    case "-ps-custom-XRef-caller":
-                        CustomXrefCaller(property.Value);
-                        break;
-                    case "-ps-hide-space-versenumber":
-                        HideSpaceVerseNumber(property.Value);
-                        break;
-                    case "pathway":
-                        Pathway(property.Value);
-                        break;
-                    default:
-                        SimpleProperty(property);
-                        break;
+                    writtenProperty = MappingPageProperty(cssProperty, property);
+                }
+                if (!writtenProperty)
+                {
+                    MappingOtherProperty(property);
                 }
             }
 
-            return _IDProperty;
+            return _idProperty;
+        }
+
+        private void MappingOtherProperty(KeyValuePair<string, string> property)
+        {
+           
+            switch (_propertyKey)
+            {
+                case "hyphens":
+                    Hyphens(property.Value);
+                    break;
+                case "hyphenate-before":
+                    HyphenateBefore(property.Value);
+                    break;
+                case "hyphenate-after":
+                    HyphenateAfter(property.Value);
+                    break;
+                case "hyphenate-lines":
+                    HyphenateLines(property.Value);
+                    break;
+                case "letter-spacing":
+                    LetterSpacing(property.Value);
+                    break;
+                case "word-spacing":
+                    WordSpacing(property.Value);
+                    break;
+                case "orphans":
+                    Orphans(property.Value);
+                    break;
+                case "widows":
+                    Widows(property.Value);
+                    break;
+                case "direction":
+                    Direction(property.Value);
+                    break;
+                case "-ps-vertical-justification":
+                    VerticalJustification(property.Value);
+                    break;
+                case "column-fill":
+                    ColumnFill(property.Value);
+                    break;
+                case "column-rule-style":
+                    ColumnRule(property.Value);
+                    break;
+                case "column-rule-color":
+                    ColumnColor(property.Value);
+                    break;
+                case "column-rule-width":
+                    ColumnWidth(property.Value);
+                    break;
+                case "-ps-custom-footnote-caller":
+                    CustomFootnoteCaller(property.Value);
+                    break;
+                case "-ps-custom-XRef-caller":
+                    CustomXrefCaller(property.Value);
+                    break;
+                case "-ps-hide-space-versenumber":
+                    HideSpaceVerseNumber(property.Value);
+                    break;
+                case "pathway":
+                    Pathway(property.Value);
+                    break;
+                default:
+                    SimpleProperty(property);
+                    break;
+            }
+        }
+
+        private bool MappingPageProperty(Dictionary<string, string> cssProperty, KeyValuePair<string, string> property)
+        {
+            bool isPropertyWritten = false;
+            switch (_propertyKey)
+            {
+                case "padding-left":
+                case "class-margin-left":
+                    PaddingLeft(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "padding-right":
+                case "class-margin-right":
+                    PaddingRight(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "padding-top":
+                case "class-margin-top":
+                    PaddingTop(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "padding-bottom":
+                case "class-margin-bottom":
+                    PaddingBottom(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "padding":
+                case "margin":
+                    //Margin(styleAttributeInfo);
+                    isPropertyWritten = true;
+                    break;
+                case "color":
+                    Color(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "background-color":
+                    BGColor(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "size":
+                    //Size(styleAttributeInfo);
+                    isPropertyWritten = true;
+                    break;
+                case "language":
+                    //Language(styleAttributeInfo);
+                    isPropertyWritten = true;
+                    break;
+                case "border-top":
+                case "border-bottom":
+                case "border-left":
+                case "border-right":
+                    Border(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "column-count":
+                case "columns":
+                    ColumnCount(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "column-gap":
+                    ColumnGap(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "display":
+                    Display(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "page-break-before":
+                    PageBreakBefore(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "page-break-after":
+                    PageBreakAfter(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "page-break-inside":
+                    PageBreakInside(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "text-transform":
+                    TextTransform(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "vertical-align":
+                    VerticalAlign(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "line-height":
+                    LineHeight(property.Value, cssProperty);
+                    isPropertyWritten = true;
+                    break;
+            }
+            return isPropertyWritten;
+        }
+
+        private bool MappingFontProperty(KeyValuePair<string, string> property)
+        {
+            bool isPropertyWritten = false;
+            switch (_propertyKey)
+            {
+                case "font-weight":
+                    FontWeight(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "font-style":
+                    FontStyle(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "text-align":
+                    TextAlign(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "font-size":
+                    FontSize(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "text-decoration":
+                    TextDecoration(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "font-variant":
+                    FontVariant(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "text-indent":
+                    TextIndent(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "margin-left":
+                    MarginLeft(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "margin-right":
+                    MarginRight(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "margin-top":
+                    MarginTop(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "margin-bottom":
+                    MarginBottom(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "font-family":
+                    FontFamily(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "page-width":
+                    PageWidth(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "page-height":
+                    PageHeight(property.Value);
+                    isPropertyWritten = true;
+                    break;
+                case "mirror":
+                    Mirror(property.Value);
+                    isPropertyWritten = true;
+                    break;
+            }
+            return isPropertyWritten;
         }
 
         private void ColumnRule(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         private void ColumnColor(string propertyValue)
         {
             propertyValue = ColorConversion(propertyValue);
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         private void ColumnWidth(string propertyValue)
         {
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
         }
 
         private void CustomFootnoteCaller(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         private void CustomXrefCaller(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         private void HideSpaceVerseNumber(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         public void VerticalJustification(string propertyValue)
@@ -273,70 +339,70 @@ namespace SIL.PublishingSolution
             {
                 value = "BottomAlign";
             }
-            _IDProperty["VerticalJustification"] = value;
+            _idProperty["VerticalJustification"] = value;
         }
 
         public void Direction(string propertyValue)
         {
             if (propertyValue == "rtl")
             {
-                _IDProperty["writing-mode"] = "rl-tb";
-                if (!_IDProperty.ContainsKey("text-align") || _IDProperty["text-align"] != "center")
+                _idProperty["writing-mode"] = "rl-tb";
+                if (!_idProperty.ContainsKey("text-align") || _idProperty["text-align"] != "center")
                 {
-                    _IDProperty["text-align"] = "end";
+                    _idProperty["text-align"] = "end";
                 }
             }
             else if (propertyValue == "ltr")
             {
-                _IDProperty["writing-mode"] = "lr-tb";
+                _idProperty["writing-mode"] = "lr-tb";
             }
         }
 
         private void Widows(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         private void Orphans(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         public void WordSpacing(string propertyValue)
         {
-            _IDProperty["MinimumWordSpacing"] = "0";
-            _IDProperty["DesiredWordSpacing"] = propertyValue;
-            _IDProperty["MaximumWordSpacing"] = propertyValue;
+            _idProperty["MinimumWordSpacing"] = "0";
+            _idProperty["DesiredWordSpacing"] = propertyValue;
+            _idProperty["MaximumWordSpacing"] = propertyValue;
         }
         public void LetterSpacing(string propertyValue)
         {
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
         }
 
         public void HyphenateLines(string propertyValue)
         {
-            _IDProperty["hyphenation-ladder-count"] = propertyValue;
+            _idProperty["hyphenation-ladder-count"] = propertyValue;
         }
         public void HyphenateAfter(string propertyValue)
         {
-            _IDProperty["hyphenation-remain-char-count"] = propertyValue;
+            _idProperty["hyphenation-remain-char-count"] = propertyValue;
         }
         public void HyphenateBefore(string propertyValue)
         {
-            _IDProperty["hyphenation-push-char-count"] = propertyValue;
+            _idProperty["hyphenation-push-char-count"] = propertyValue;
         }
         public void Hyphens(string propertyValue)
         {
             string value = propertyValue == "none" ? "false" : "true";
-            _IDProperty["hyphenate"] = value;
+            _idProperty["hyphenate"] = value;
         }
         public void SimpleProperty(KeyValuePair<string, string> property)
         {
-            _IDProperty[property.Key.ToLower()] = property.Value;
+            _idProperty[property.Key.ToLower()] = property.Value;
         }
 
         public void LineHeight(string propertyValue, Dictionary<string, string> cssProperty)
-          {
+        {
             if (_isFixedLineHeightEnable)
             {
                 _propertyKey = "line-height";
@@ -352,11 +418,11 @@ namespace SIL.PublishingSolution
 
             if (propertyValue.IndexOf("%") > 0)
             {
-                _IDProperty[_propertyKey] = propertyValue; // refer xhtmlprocess.AssignProperty()
+                _idProperty[_propertyKey] = propertyValue; // refer xhtmlprocess.AssignProperty()
             }
             else
             {
-                _IDProperty[_propertyKey] = Add_pt(propertyValue);
+                _idProperty[_propertyKey] = Add_pt(propertyValue);
             }
         }
         public void VerticalAlign(string propertyValue)
@@ -386,7 +452,7 @@ namespace SIL.PublishingSolution
                 {
                     throw new Exception("Input not valid");
                 }
-                _IDProperty[_propertyKey] = propertyValue;
+                _idProperty[_propertyKey] = propertyValue;
             }
             catch
             {
@@ -411,15 +477,15 @@ namespace SIL.PublishingSolution
                     {
                         value = 100;
                     }
-                    _IDProperty["font-size"] = value + "%";
+                    _idProperty["font-size"] = value + "%";
                 }
                 else if (propertyValue == "smaller")
                 {
-                    _IDProperty["font-size"] = "75%";
+                    _idProperty["font-size"] = "75%";
                 }
                 else if (propertyValue == "larger")
                 {
-                    _IDProperty["font-size"] = "100%";
+                    _idProperty["font-size"] = "100%";
                 }
                 else
                 {
@@ -428,18 +494,18 @@ namespace SIL.PublishingSolution
                     {
                         value = 12;
                     }
-                    _IDProperty["font-size"] = value + "pt";
+                    _idProperty["font-size"] = value + "pt";
                 }
             }
             else
             {
-                _IDProperty["font-size"] = "75%";
+                _idProperty["font-size"] = "75%";
             }
         }
 
         public void TextTransform(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         public void PageBreakBefore(string propertyValue)
@@ -457,7 +523,7 @@ namespace SIL.PublishingSolution
                 _propertyKey = "page-break-before";
                 throw new Exception("Not a Valid input");
             }
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         private void RemoveClassHyphen()
@@ -471,26 +537,26 @@ namespace SIL.PublishingSolution
         public void PaddingLeft(string propertyValue)
         {
             RemoveClassHyphen();
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
             IncludeBorder(_propertyKey);
         }
 
         public void PaddingRight(string propertyValue)
         {
             RemoveClassHyphen();
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
             IncludeBorder(_propertyKey);
         }
         public void PaddingTop(string propertyValue)
         {
             RemoveClassHyphen();
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
             IncludeBorder(_propertyKey);
         }
         public void PaddingBottom(string propertyValue)
         {
             RemoveClassHyphen();
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
             IncludeBorder(_propertyKey);
         }
 
@@ -509,43 +575,43 @@ namespace SIL.PublishingSolution
 
         private void AppendBorderToPadding(string borderPos)
         {
-            if (!_IDProperty.ContainsKey(borderPos))
+            if (!_idProperty.ContainsKey(borderPos))
             {
-                _IDProperty[borderPos] = "0.5pt solid #ffffff";
+                _idProperty[borderPos] = "0.5pt solid #ffffff";
             }
         }
 
         public void Mirror(string propertyValue)
         {
-            _IDProperty["FacingPages"] = propertyValue;
+            _idProperty["FacingPages"] = propertyValue;
         }
         public void PageHeight(string propertyValue)
         {
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void PageWidth(string propertyValue)
         {
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void MarginLeft(string propertyValue)
         {
             RemoveClassHyphen();
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void MarginRight(string propertyValue)
         {
             RemoveClassHyphen();
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void MarginTop(string propertyValue)
         {
             RemoveClassHyphen();
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void MarginBottom(string propertyValue)
         {
             RemoveClassHyphen();
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
         }
 
         private string Add_pt(string propertyValue)
@@ -559,7 +625,6 @@ namespace SIL.PublishingSolution
 
         public void FontFamily(string propertyValue)
         {
-            string PsSupportPath = Common.GetPSApplicationPath();
             string[] font = propertyValue.Split(',');
             int fontLength = font.Length;
             if (fontLength == 0)
@@ -577,7 +642,7 @@ namespace SIL.PublishingSolution
                     if (fontName.ToLower() == systemFont.Name.ToLower())
                     {
                         propertyValue = systemFont.Name;
-                        _IDProperty["font-family"] = propertyValue;
+                        _idProperty["font-family"] = propertyValue;
                         return;
                     }
                 }
@@ -590,7 +655,7 @@ namespace SIL.PublishingSolution
             fontName = font[0];
             if (genericFamilyList.Contains(genericFamily))
             {
-                string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
+                string xmlFileNameWithPath = Common.CopyXmlFileToTempDirectory("GenericFont.xml");
                 string xPath = "//font-preference/generic-family [@name = \"" + genericFamily + "\"]";
                 ArrayList fontList = new ArrayList();
                 fontList = Common.GetXmlNodeList(xmlFileNameWithPath, xPath);
@@ -605,18 +670,18 @@ namespace SIL.PublishingSolution
             }
 
             propertyValue = fontName.Trim();
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         public void TextIndent(string propertyValue)
         {
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
         }
 
         public void Color(string propertyValue)
         {
             propertyValue = ColorConversion(propertyValue);
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         private string ColorConversion(string propertyValue)
@@ -652,7 +717,7 @@ namespace SIL.PublishingSolution
             {
                 _propertyKey = "column-count";
             }
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         public void ColumnGap(string propertyValue)
@@ -660,17 +725,17 @@ namespace SIL.PublishingSolution
             if (propertyValue == string.Empty || Common.ValidateAlphabets(propertyValue)
                 || propertyValue.IndexOf('-') > -1)
             {
-                _IDProperty[_propertyKey] = "12pt";
+                _idProperty[_propertyKey] = "12pt";
             }
             else
             {
-                _IDProperty[_propertyKey] = Add_pt(propertyValue);
+                _idProperty[_propertyKey] = Add_pt(propertyValue);
             }
         }
 
         public void FontVariant(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         /// <summary>
@@ -703,7 +768,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty[propertyName] = propertyValue;
+            _idProperty[propertyName] = propertyValue;
         }
 
         public void FontWeight(string propertyValue)
@@ -716,22 +781,22 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = "400";
             }
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         public void FontStyle(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         public void TextAlign(string propertyValue)
         {
-            _IDProperty["text-align"] = propertyValue;
+            _idProperty["text-align"] = propertyValue;
         }
 
         public void FontSize(string propertyValue)
         {
-            if (_IDProperty.ContainsKey("text-position"))
+            if (_idProperty.ContainsKey("text-position"))
             {
                 return;
             }
@@ -746,15 +811,15 @@ namespace SIL.PublishingSolution
             }
             else if (propertyValue == "smaller" || propertyValue == "larger")
             {
-                _IDProperty[_propertyKey] = propertyValue;
+                _idProperty[_propertyKey] = propertyValue;
                 return;
             }
-            _IDProperty[_propertyKey] = Add_pt(propertyValue); 
+            _idProperty[_propertyKey] = Add_pt(propertyValue);
         }
 
         private void Border(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         private void ColumnFill(string propertyValue)
@@ -772,7 +837,7 @@ namespace SIL.PublishingSolution
             {
                 //throw new Exception("Not a Valid input");
             }
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         public void PageBreakAfter(string propertyValue)
@@ -795,7 +860,7 @@ namespace SIL.PublishingSolution
                 _propertyKey = "page-break-after";
                 throw new Exception("Not a Valid input");
             }
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         public void PageBreakInside(string propertyValue)
@@ -813,17 +878,17 @@ namespace SIL.PublishingSolution
                 _propertyKey = "page-break-inside";
                 throw new Exception("Not a Valid input");
             }
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         public void Display(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         public void Pathway(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _idProperty[_propertyKey] = propertyValue;
         }
 
         #region private methods

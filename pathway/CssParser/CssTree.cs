@@ -768,7 +768,7 @@ namespace SIL.PublishingSolution
 		/// Parses through the fonts mentioned in the CSS file and attempts to find the font files that
 	    /// match.
 		/// </summary>
-        public ArrayList GetFontList(string cssFileWithPath)
+        protected ArrayList GetFontList(string cssFileWithPath)
         {
             ArrayList fontName = new ArrayList();
             ArrayList fontList = new ArrayList();

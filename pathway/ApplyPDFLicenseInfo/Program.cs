@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using SIL.PublishingSolution;
 using SIL.Tool;
-
+//This will be called by macro externally. so, please do not remove this since it is not called by any other classes.
 namespace ApplyPDFLicenseInfo
 {
     class Program
@@ -28,6 +27,7 @@ namespace ApplyPDFLicenseInfo
             string exportTitle = _readLicenseFilesBylines[2];
             string creatorTool = _readLicenseFilesBylines[3];
             string inputType = _readLicenseFilesBylines[4];
+            string commonTesting = _readLicenseFilesBylines[5];
             string pdfFileName = string.Empty;
             
             pdfFileName = ProcessLicensePdf(pdfFileName, executePath);
@@ -42,10 +42,14 @@ namespace ApplyPDFLicenseInfo
             if (File.Exists(licencePdfFile))
             {
                 File.Copy(licencePdfFile, exportTitle, true);
-                using (Process process = new Process())
+
+                if (commonTesting.ToLower().Contains("false"))
                 {
-                    process.StartInfo.FileName = exportTitle;
-                    process.Start();
+                    using (Process process = new Process())
+                    {
+                        process.StartInfo.FileName = exportTitle;
+                        process.Start();
+                    }
                 }
             }
 
@@ -76,7 +80,7 @@ namespace ApplyPDFLicenseInfo
 
         private static void CreateRAMP(string executePath, string inputType)
         {
-            string outputExtn = ".pdf";
+            const string outputExtn = ".pdf";
             Ramp ramp = new Ramp();
             ramp.Create(executePath, outputExtn, inputType);
         }

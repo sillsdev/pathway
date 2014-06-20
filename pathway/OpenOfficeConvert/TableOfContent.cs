@@ -20,7 +20,7 @@ namespace SIL.PublishingSolution
 {
     public class TableOfContent
     {
-        public void CreateTOC(XmlTextWriter _writer, string inputType, string outlineLevel)
+        public void CreateTOC(XmlTextWriter _writer, string inputType, string outlineLevel, string tocStyle)
         {
             _writer.WriteStartElement("text:p");
             _writer.WriteAttributeString("text:style-name", "copyright_dicBody"); //To give page break
@@ -72,14 +72,17 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:outline-level", outlineLevel);//"1"
             _writer.WriteStartElement("text:index-source-style");
 
-            if (inputType.ToLower() == "dictionary")
-            {
-                _writer.WriteAttributeString("text:style-name", "letter_letHead_dicBody");
-            }
-            else if (inputType.ToLower() == "scripture")
-            {
-                _writer.WriteAttributeString("text:style-name", "scrBook_scrBody");
-            }
+            _writer.WriteAttributeString("text:style-name", tocStyle); //TD-4017
+
+            //if (inputType.ToLower() == "dictionary")
+            //{
+            //    //_writer.WriteAttributeString("text:style-name", "letter_letHead_dicBody");
+            //    _writer.WriteAttributeString("text:style-name", "letter_letHead_body");
+            //}
+            //else if (inputType.ToLower() == "scripture")
+            //{
+            //    _writer.WriteAttributeString("text:style-name", "scrBook_scrBody");
+            //}
             
             _writer.WriteEndElement();
             _writer.WriteEndElement();
