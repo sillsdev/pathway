@@ -1820,7 +1820,8 @@ namespace SIL.Tool
             int len = searchText.Length;
             var buf = new byte[len];
             var reader = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4080, false);
-            var writer = new FileStream(filePath + ".tmp", FileMode.Create);
+            var tempName = Path.GetTempFileName();
+            var writer = new FileStream(tempName, FileMode.Create);
             int next;
             while ((next = reader.ReadByte()) != -1)
             {
@@ -1857,15 +1858,14 @@ namespace SIL.Tool
                 }
             }
             reader.Close();
-            writer.Flush();
             writer.Close();
             // replace the original file with the new one
             if (foundString)
             {
                 // at least one instance of the string was found - replace
-                File.Copy(filePath + ".tmp", filePath, true);
+                File.Copy(tempName, filePath, true);
             }
-            File.Delete(filePath + ".tmp");
+            File.Delete(tempName);
             return foundString;
         }
 
