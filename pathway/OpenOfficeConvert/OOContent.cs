@@ -814,8 +814,8 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    // Note: Paragraph Start Element
-                    if ((_childName == "letter_letHead_dicBody" || _childName == "scrBookName_scrBook_scrBody") && IsTocExists())
+                    // Note: Paragraph Start Element //TD-4017 for || _childName == "letter_letHead_body"
+                    if ((_childName == "letter_letHead_dicBody" || _childName == "letter_letHead_body" || _childName == "scrBookName_scrBook_scrBody") && IsTocExists())
                     {
                         _writer.WriteStartElement("text:h");
                         _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
@@ -3102,20 +3102,25 @@ namespace SIL.PublishingSolution
 
             if (tableOfContent.ToLower() == "true")
             {
+                string tocStyle = "letter_letHead_dicBody";//TD-4017
                 TableOfContent toc = new TableOfContent();
                 string strOutlineLevel = "1";
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
+                    if (IdAllClass.ContainsKey("body"))
+                        tocStyle = "letter_letHead_body";
                     if (IdAllClass.ContainsKey("letter") && IdAllClass["letter"].ContainsKey("-ps-outline-level"))
                         strOutlineLevel = IdAllClass["letter"]["-ps-outline-level"];
                 }
                 else
                 {
+                    tocStyle = "scrBook_scrBody";
                     if (IdAllClass.ContainsKey("scrBook") && IdAllClass["scrBook"].ContainsKey("-ps-outline-level"))
                         strOutlineLevel = IdAllClass["scrBook"]["-ps-outline-level"];
+                    
                 }
 
-                toc.CreateTOC(_writer, _projInfo.ProjectInputType, strOutlineLevel);
+                toc.CreateTOC(_writer, _projInfo.ProjectInputType, strOutlineLevel, tocStyle);
             }
         }
 
