@@ -409,7 +409,7 @@ namespace SIL.PublishingSolution
             return fileName;
         }
 
-        private void CopyStylesAndContentToEpub(string mergedCss, string defaultCss, List<string> htmlFiles, string contentFolder)
+        private void CopyStylesAndContentToEpub(string mergedCss, string defaultCss, IEnumerable<string> htmlFiles, string contentFolder)
         {
             var cssPath = Common.PathCombine(contentFolder, defaultCss);
             if (File.Exists(mergedCss))
@@ -469,47 +469,36 @@ namespace SIL.PublishingSolution
             {
                 foreach (string file in splitFiles)
                 {
+                    const string outputExtension = "_.xhtml";
+                    var inputExtension = Path.GetExtension(file);
+                    Debug.Assert(inputExtension != null);
+                    var xhtmlOutputFile = file.Replace(inputExtension, outputExtension);
                     if (_isUnixOs)
                     {
                         if (file.Contains("File2Cpy"))
                         {
-                            string copyRightpage = file.Replace(".xhtml", "_.xhtml");
-                            File.Copy(file, copyRightpage);
-                            htmlFiles.Add(Common.PathCombine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
-                            File.Delete(file);
+                            File.Copy(file, xhtmlOutputFile);
                         }
                         else
                         {
-                            Common.XsltProcess(file, xsltFullName, "_.xhtml");
-                            htmlFiles.Add(Common.PathCombine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
-                            File.Delete(file);
+                            Common.XsltProcess(file, xsltFullName, outputExtension);
                         }
                     }
                     else
                     {
-                        if (File.Exists(file))
-                        {
-                            const string outputExtension = "_.xhtml";
-                            var args = string.Format(@"""{0}"" ""{1}"" {2} ""{3}""", file, xsltFullName,
-                                                    outputExtension , getPsApplicationPath);
-                            Common.RunCommand(xsltProcessExe, args, 1);
-                            var inputExtension = Path.GetExtension(file);
-                            Debug.Assert(inputExtension != null);
-                            var xhtmlOutputFile = file.Replace(inputExtension, outputExtension);
-                            // add this file to the html files list
-
-                            if (File.Exists(xhtmlOutputFile))
-                            {
-                                htmlFiles.Add(xhtmlOutputFile);
-                                // clean up the un-transformed file
-                                File.Delete(file);
-                            }
-                            else
-                            {
-                                htmlFiles.Add(file);
-                            }
-                        }
+                        var args = string.Format(@"""{0}"" ""{1}"" {2} ""{3}""", file, xsltFullName,
+                                                outputExtension , getPsApplicationPath);
+                        Common.RunCommand(xsltProcessExe, args, 1);
                     }
+                    if (File.Exists(xhtmlOutputFile))
+                    {
+                        File.Delete(file);  // clean up the un-transformed file
+                    }
+                    else // SE version doesn't have the XSLT Transform
+                    {
+                        File.Move(file, xhtmlOutputFile);
+                    }
+                    htmlFiles.Add(xhtmlOutputFile);
                 }
             }
         }
@@ -908,17 +897,23 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                if (cssFileName.Trim().Length == 0) { return true; }
+                if (cssFileName.Trim().Length == 0)
+                {
+                    return true;
+                }
                 Param.LoadSettings();
                 var xDoc = Common.DeclareXMLDocument(false);
                 string path = Param.SettingOutputPath;
                 xDoc.Load(path);
-                var xPath = "//stylePick/styles/others/style[@file='" + cssFileName + ".css']/styleProperty[@name='IncludeImage']/@value";
+                var xPath = "//stylePick/styles/others/style[@file='" + cssFileName +
+                            ".css']/styleProperty[@name='IncludeImage']/@value";
                 var includeImageNode = xDoc.SelectSingleNode(xPath);
                 if (includeImageNode != null && includeImageNode.InnerText == "No")
                     _isIncludeImage = false;
             }
-            catch { }
+            catch
+            {
+            }
             return _isIncludeImage;
         }
 
@@ -1563,13 +1558,13 @@ namespace SIL.PublishingSolution
                         if (embeddedFont != null)
                             if (embeddedFont.HasItalic)
                             {
-                                embeddedFont = WriteItalicLanguageFondDeclarationBlock(sb, embeddedFont, languageName);
+                                embeddedFont = WriteItalicLanguageFondDeclarationBlock(sb, languageName);
                             }
                         // Bold version
                         if (embeddedFont != null)
                             if (embeddedFont.HasBold)
                             {
-                                embeddedFont = WriteBoldLanguageFontDeclarationBlock(sb, embeddedFont, languageName);
+                                WriteBoldLanguageFontDeclarationBlock(sb, languageName);
                             }
                     }
 
@@ -1594,13 +1589,13 @@ namespace SIL.PublishingSolution
                     if (embeddedFont != null)
                         if (embeddedFont.HasItalic)
                         {
-                            embeddedFont = WriteItalicClassesDeclarationBlock(sb, languageKey, languageName, embeddedFont);
+                            embeddedFont = WriteItalicClassesDeclarationBlock(sb, languageKey, languageName);
                         }
                     // bold version
                     if (embeddedFont != null)
                         if (embeddedFont.HasBold)
                         {
-                            embeddedFont = WriteBoldClassesDeclarationBlock(sb, languageKey, languageName, embeddedFont);
+                            WriteBoldClassesDeclarationBlock(sb, languageKey, languageName);
                         }
                 }
             }
@@ -1648,7 +1643,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private EmbeddedFont WriteBoldClassesDeclarationBlock(StringBuilder sb, string languageKey, string languageName, EmbeddedFont embeddedFont)
+        private void WriteBoldClassesDeclarationBlock(StringBuilder sb, string languageKey, string languageName)
         {
             // dictionary
             sb.Append(".headword:lang(");
@@ -1700,6 +1695,7 @@ namespace SIL.PublishingSolution
             sb.Append("font-family: ");
             sb.Append(IncludeQuoteOnFontName(languageName));
             sb.Append(", ");
+            EmbeddedFont embeddedFont;
             if (_embeddedFonts.TryGetValue(languageName, out embeddedFont))
             {
                 sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
@@ -1710,10 +1706,10 @@ namespace SIL.PublishingSolution
                 sb.AppendLine("Times, serif;");
             }
             sb.AppendLine("}");
-            return embeddedFont;
+            //return embeddedFont;
         }
 
-        private EmbeddedFont WriteItalicClassesDeclarationBlock(StringBuilder sb, string languageKey, string languageName, EmbeddedFont embeddedFont)
+        private EmbeddedFont WriteItalicClassesDeclarationBlock(StringBuilder sb, string languageKey, string languageName)
         {
             // dictionary
             sb.Append(".partofspeech:lang(");
@@ -1741,6 +1737,7 @@ namespace SIL.PublishingSolution
             sb.Append("font-family: ");
             sb.Append(IncludeQuoteOnFontName(languageName));
             sb.Append(", ");
+            EmbeddedFont embeddedFont;
             if (_embeddedFonts.TryGetValue(languageName, out embeddedFont))
             {
                 sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
@@ -1791,8 +1788,9 @@ namespace SIL.PublishingSolution
             sb.Append("';}");
         }
 
-        private EmbeddedFont WriteBoldLanguageFontDeclarationBlock(StringBuilder sb, EmbeddedFont embeddedFont, string mainLanguageName)
+        private void WriteBoldLanguageFontDeclarationBlock(StringBuilder sb, string mainLanguageName)
         {
+
             sb.Append(
                 ".headword, .headword-minor, .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, ");
             sb.Append(".LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .xsensenumber");
@@ -1816,6 +1814,7 @@ namespace SIL.PublishingSolution
                 sb.Append(IncludeQuoteOnFontName(mainLanguageName));
                 sb.Append(", ");
             }
+            EmbeddedFont embeddedFont;
             if (_embeddedFonts.TryGetValue(mainLanguageName, out embeddedFont))
             {
                 sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
@@ -1826,10 +1825,10 @@ namespace SIL.PublishingSolution
                 sb.AppendLine("Times, serif;");
             }
             sb.AppendLine("}");
-            return embeddedFont;
+            //return embeddedFont;
         }
 
-        private EmbeddedFont WriteItalicLanguageFondDeclarationBlock(StringBuilder sb, EmbeddedFont embeddedFont, string mainLanguageName)
+        private EmbeddedFont WriteItalicLanguageFondDeclarationBlock(StringBuilder sb, string mainLanguageName)
         {
             sb.Append(".partofspeech, .example, .grammatical-info, .lexref-type, ");
             sb.Append(".parallel_passage_reference, .Parallel_Passage_Reference, ");
@@ -1846,6 +1845,7 @@ namespace SIL.PublishingSolution
                 sb.Append(IncludeQuoteOnFontName(mainLanguageName));
                 sb.Append(", ");
             }
+            EmbeddedFont embeddedFont;
             if (_embeddedFonts.TryGetValue(mainLanguageName, out embeddedFont))
             {
                 sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
