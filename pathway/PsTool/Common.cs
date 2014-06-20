@@ -3531,23 +3531,27 @@ namespace SIL.Tool
         public static bool RunCommand(string szCmd, string szArgs, int wait)
         {
             if (szCmd == null) return false;
-            System.Diagnostics.Process myproc = new System.Diagnostics.Process();
-            myproc.EnableRaisingEvents = false;
-            myproc.StartInfo.CreateNoWindow = true;
-            myproc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            myproc.StartInfo.FileName = szCmd;
-            myproc.StartInfo.Arguments = szArgs;
-
-            if (myproc.Start())
+            using (var myproc = new Process())
             {
+                myproc.EnableRaisingEvents = false;
+                myproc.StartInfo.CreateNoWindow = true;
+                myproc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                myproc.StartInfo.FileName = szCmd;
+                myproc.StartInfo.Arguments = szArgs;
+
+                if (!myproc.Start())
+                    return false;
                 //Using WaitForExit( ) allows for the host program
                 //to wait for the command its executing before it continues
-                if (wait == 1) myproc.WaitForExit();
-                else myproc.Close();
-
-                return true;
+                var exitCode = 0;
+                if (wait == 1)
+                {
+                    myproc.WaitForExit();
+                    exitCode = myproc.ExitCode;
+                }
+                myproc.Close();
+                return exitCode == 0;
             }
-            else return false;
         }
 
         /// <summary>
@@ -4389,13 +4393,13 @@ namespace SIL.Tool
             {
                 string fontSize = string.Empty;
                 Dictionary<string, string> xhtmlMetaLanguage = new Dictionary<string, string>();
-                var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-                if (fileNameWithoutExtension != null)
-                {
-                    string fileName = fileNameWithoutExtension.ToLower();
-                    if (fileName != "main" && fileName != "main1")
-                        return;
-                }
+                //var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                //if (fileNameWithoutExtension != null)
+                //{
+                //    string fileName = fileNameWithoutExtension.ToLower();
+                //    if (fileName != "main" && fileName != "main1")
+                //        return;
+                //}
 
                 var xDoc = Common.DeclareXMLDocument(true);
                 xDoc.Load(projInfo.DefaultXhtmlFileWithPath);

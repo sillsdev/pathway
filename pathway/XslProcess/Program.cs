@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Xml;
-using System.Xml.Xsl;
+using System.Diagnostics;
 using SIL.PublishingSolution;
 
 
@@ -13,12 +9,20 @@ namespace PSXslProcess
     {
         static void Main(string[] args)
         {
-            if(args.Length < 4)
+            try
             {
-                return;
+                if (args.Length < 4)
+                {
+                    throw new ArgumentException("XslProcess: Wrong number of arguments");
+                }
+                XsltProcess xsltProcess = new XsltProcess();
+                xsltProcess.XsltTransform(args[0], args[1], args[2], args[3]);
             }
-            XsltProcess xsltProcess = new XsltProcess();
-            xsltProcess.XsltTransform(args[0], args[1], args[2], args[3]);
+            catch (Exception e)
+            {
+                Debug.Print(e.Message);
+                Environment.ExitCode = -1;
+            }
         }
     }
 }

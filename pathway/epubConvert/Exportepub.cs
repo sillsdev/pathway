@@ -227,19 +227,19 @@ namespace SIL.PublishingSolution
             inProcess.PerformStep();
             #endregion Adding Navigation and Front Matter
 
-            #region Splitting Files
-            inProcess.SetStatus("Splitting files");
+            #region Add Sections
+            inProcess.SetStatus("Add Sections");
             var htmlFiles = new List<string>();
             var splitFiles = new List<string>();
             splitFiles.AddRange(frontMatter);
-            SplittingXhtml(projInfo, preProcessor, defaultCss, splitFiles);
+            SplittingFrontMatter(projInfo, preProcessor, defaultCss, splitFiles);
             SplittingReversal(projInfo, addRevId, langArray, defaultCss, splitFiles);
-            MoveNotesAndReferences(inProcess, htmlFiles, splitFiles);
+            AddBooksMoveNotes(inProcess, htmlFiles, splitFiles);
             inProcess.PerformStep();
-            #endregion Splitting files
+            #endregion Add Sections
 
             #region Create structure and add end notes
-            inProcess.SetStatus("Creating .epub structure");
+            inProcess.SetStatus("Creating structure");
             string contentFolder = CreateContentStructure(projInfo, tempFolder);
             inProcess.PerformStep();
 
@@ -459,7 +459,7 @@ namespace SIL.PublishingSolution
             return contentFolder;
         }
 
-        private void MoveNotesAndReferences(InProcess inProcess, List<string> htmlFiles, IEnumerable<string> splitFiles)
+        private void AddBooksMoveNotes(InProcess inProcess, List<string> htmlFiles, IEnumerable<string> splitFiles)
         {
             string xsltFullName = GetXsltFile();
             string getPsApplicationPath = Common.GetPSApplicationPath();
@@ -489,20 +489,24 @@ namespace SIL.PublishingSolution
                     {
                         if (File.Exists(file))
                         {
-                            Common.RunCommand(xsltProcessExe, string.Format("{0}{1}{2}{3}", file, xsltFullName, "_.xhtml", getPsApplicationPath), 1);
-                            string xhtmlOutputFile = Path.GetFileNameWithoutExtension(file) + "_.xhtml";
+                            const string outputExtension = "_.xhtml";
+                            var args = string.Format(@"""{0}"" ""{1}"" {2} ""{3}""", file, xsltFullName,
+                                                    outputExtension , getPsApplicationPath);
+                            Common.RunCommand(xsltProcessExe, args, 1);
+                            var inputExtension = Path.GetExtension(file);
+                            Debug.Assert(inputExtension != null);
+                            var xhtmlOutputFile = file.Replace(inputExtension, outputExtension);
                             // add this file to the html files list
-                            htmlFiles.Add(Common.PathCombine(Path.GetDirectoryName(file), xhtmlOutputFile));
 
                             if (File.Exists(xhtmlOutputFile))
                             {
+                                htmlFiles.Add(xhtmlOutputFile);
                                 // clean up the un-transformed file
                                 File.Delete(file);
                             }
                             else
                             {
-                                Common.XsltProcess(file, xsltFullName, "_.xhtml");
-                                File.Delete(file);
+                                htmlFiles.Add(file);
                             }
                         }
                     }
@@ -525,7 +529,7 @@ namespace SIL.PublishingSolution
             return inProcess;
         }
 
-        private void SplittingXhtml(PublicationInformation projInfo, PreExportProcess preProcessor, string defaultCss, List<string> splitFiles)
+        private void SplittingFrontMatter(PublicationInformation projInfo, PreExportProcess preProcessor, string defaultCss, List<string> splitFiles)
         {
             foreach (var file in splitFiles)
             {
@@ -660,11 +664,12 @@ namespace SIL.PublishingSolution
             return niceNameCss;
         }
 
+        private static MergeCss _mc; // When mc is disposed it also deletes the merged file
         private static string MergeAndFilterCss(PreExportProcess preProcessor, string tempFolder, string cssFullPath)
         {
             var tempFolderName = Path.GetFileName(tempFolder);
-            var mc = new MergeCss { OutputLocation = tempFolderName };
-            var mergedCss = mc.Make(cssFullPath, "book.css");
+            _mc = new MergeCss { OutputLocation = tempFolderName };
+            var mergedCss = _mc.Make(cssFullPath, "book.css");
             preProcessor.RemoveDeclaration(mergedCss, "@top-");
             preProcessor.RemoveDeclaration(mergedCss, "@bottom-");
             preProcessor.RemoveDeclaration(mergedCss, "@footnote");
@@ -819,8 +824,29 @@ namespace SIL.PublishingSolution
             xmlDoc.Save(tocFiletoUpdate);
         }
 
-        private void MapTocIdAndSectionHeadId(IEnumerable<string> files)
+        private void MapTocIdAndSectionHeadId(List<string> files)
         {
+            var hasBookmark = false;
+            if (files.Count > 0)
+            {
+                var firstName = Path.GetFileName(files[0]);
+                Debug.Assert(!string.IsNullOrEmpty(firstName));
+                foreach (string idVal in _tocIDs)
+                {
+                    var name = Path.GetFileNameWithoutExtension(idVal);
+                    Debug.Assert(!string.IsNullOrEmpty(name));
+                    if (!idVal.Contains("#"))
+                    {
+                        if (firstName.Contains(name))
+                            _tocIdMapping.Add(idVal, firstName);
+                    }
+                    else
+                    {
+                        hasBookmark = true;
+                    }
+                }
+            }
+            if (!hasBookmark) return;
             foreach (string partFile in files)
             {
                 XmlDocument xDoc = Common.DeclareXMLDocument(true);
@@ -1126,6 +1152,8 @@ namespace SIL.PublishingSolution
         private string GetXsltFile()
         {
             string xsltFullName = Common.FromRegistry("TE_XHTML-to-epub_XHTML.xslt");
+            if (!File.Exists(xsltFullName))
+                return "";
             var tempXslt = Common.PathCombine(Path.GetTempPath(), Path.GetFileName(xsltFullName));
             File.Copy(xsltFullName, tempXslt, true);
             xsltFullName = tempXslt;
