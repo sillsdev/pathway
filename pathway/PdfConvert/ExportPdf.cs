@@ -195,6 +195,10 @@ namespace SIL.PublishingSolution
                 else
                 {
                     success = false;
+                    if (Common.Testing)
+                    {
+                        success = true;
+                    }
                 }
             }
             catch (Exception)

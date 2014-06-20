@@ -23,113 +23,96 @@ using SIL.Tool;
 namespace Test.SwordConvert
 {
     [TestFixture]
-    public class SwordTest
+    public class SwordTest : ExportThroughPathway
     {
 
         #region Private Variables
         private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
+        private PublicationInformation _projInfo;
         #endregion
 
         #region SetUp
         [TestFixtureSetUp]
         protected void SetUp()
         {
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
+            Common.SupportFolder = "";
+            Common.ProgBase = Common.ProgInstall;
             Common.Testing = true;
 
+            _projInfo = new PublicationInformation();
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/SwordConvert/TestFiles");
-            _inputPath = Common.PathCombine(testPath, "input");
+            _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "expected");
+            _expectedPath = Common.PathCombine(testPath, "Expected");
+
+            string pathwayDirectory = PathwayPath.GetPathwayDir();
+            string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
+            Common.Testing = true;
+            ValidateXMLVersion(styleSettingFile);
+            InputType = "Scripture";
+            Common.ProgInstall = pathwayDirectory;
+            Param.LoadSettings();
+            Param.SetValue(Param.InputType, InputType);
+            Param.LoadSettings();
         }
         #endregion
 
-        /////<summary>
-        /////Compare files
-        ///// </summary>      
-        //[Test]
-        //[Category("SkipOnTeamCity")]
-        //public void BM2BookTest()
-        //{
-        //    const string file = "BM2";
+        private void ValidateXMLVersion(string filePath)
+        {
+            var versionControl = new SettingsVersionControl();
+            var validator = new SettingsValidator();
+            if (File.Exists(filePath))
+            {
+                versionControl.UpdateSettingsFile(filePath);
+                bool isValid = validator.ValidateSettingsFile(filePath, true);
+                if (!isValid)
+                {
+                }
+            }
+        }
 
-        //    string input = Common.PathCombine(_inputPath, file + ".usx");
-        //    string output = Common.PathCombine(_outputPath, file + ".xml");
-        //    string expected = Common.PathCombine(_expectedPath, file + ".xml");
+        private string FileInput(string fileName)
+        {
+            return Common.PathCombine(_inputPath, fileName);
+        }
 
-        //    var inputTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName());
-        //    Directory.CreateDirectory(inputTmpDir);
-        //    inputTmpDir = Common.PathCombine(inputTmpDir, Path.GetFileName(input));
-        //    File.Copy(input, inputTmpDir, true);
+        private string FileOutput(string fileName)
+        {
+            return Common.PathCombine(_outputPath, fileName);
+        }
 
-        //    ExportSword swordObj = new ExportSword();
-        //    PublicationInformation projInfo = new PublicationInformation();
-        //    projInfo.ProjectPath = Path.GetDirectoryName(inputTmpDir);
-        //    projInfo.DefaultXhtmlFileWithPath = inputTmpDir;
-        //    projInfo.ProjectFileWithPath = projInfo.ProjectPath;
-        //    swordObj.Export(projInfo);
-        //    FileAssert.AreEqual(expected, output, file + " test fails");
-        //}
+        /// <summary>
+        ///A test for Export
+        ///</summary>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void ExportSwordTest()
+        {
+            string inputSourceDirectory = FileInput("SwordExportTest");
+            string outputDirectory = FileOutput("SwordExportTest");
+            if (Directory.Exists(outputDirectory))
+            {
+                Directory.Delete(outputDirectory, true);
+            }
+            FolderTree.Copy(inputSourceDirectory, outputDirectory);
+            Param.LoadSettings();
+            _projInfo.ProjectPath = outputDirectory;
+            _projInfo.ProjectInputType = "Scripture";
+            _projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "A4_Cols_ApplicationStyles.xhtml");
+            _projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "A4_Cols_ApplicationStyles.css");
 
-        /////<summary>
-        /////Compare files
-        ///// </summary>      
-        //[Test]
-        //[Category("SkipOnTeamCity")]
-        //public void ACCNTBookTest()
-        //{
-        //    const string file = "ACCNT";
-
-        //    string input = Common.PathCombine(_inputPath, file + ".usx");
-        //    string output = Common.PathCombine(_outputPath, file + ".xml");
-        //    string expected = Common.PathCombine(_expectedPath, file + ".xml");
-
-        //    var inputTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName());
-        //    Directory.CreateDirectory(inputTmpDir);
-        //    inputTmpDir = Common.PathCombine(inputTmpDir, Path.GetFileName(input));
-        //    File.Copy(input, inputTmpDir, true);
-
-        //    ExportSword swordObj = new ExportSword();
-        //    PublicationInformation projInfo = new PublicationInformation();
-        //    projInfo.ProjectPath = Path.GetDirectoryName(inputTmpDir);
-        //    projInfo.DefaultXhtmlFileWithPath = inputTmpDir;
-        //    projInfo.ProjectFileWithPath = projInfo.ProjectPath;
-        //    swordObj.Export(projInfo);
-        //    FileAssert.AreEqual(expected, output, file + " test fails");
-        //}
-
-        /////<summary>
-        /////Compare files
-        ///// </summary>      
-        //[Test]
-        //[Category("SkipOnTeamCity")]
-        //public void MatBookTest()
-        //{
-        //    const string file = "MAT";
-
-        //    string input = Common.PathCombine(_inputPath, file + ".usx");
-        //    string output = Common.PathCombine(_outputPath, file + ".xml");
-        //    string expected = Common.PathCombine(_expectedPath, file + ".xml");
-
-        //    var inputTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName());
-        //    Directory.CreateDirectory(inputTmpDir);
-        //    inputTmpDir = Common.PathCombine(inputTmpDir, Path.GetFileName(input));
-        //    File.Copy(input, inputTmpDir, true);
-
-        //    ExportSword swordObj = new ExportSword();
-        //    PublicationInformation projInfo = new PublicationInformation();
-        //    projInfo.ProjectPath = Path.GetDirectoryName(inputTmpDir);
-        //    projInfo.DefaultXhtmlFileWithPath = inputTmpDir;
-        //    projInfo.ProjectFileWithPath = projInfo.ProjectPath;
-        //    swordObj.Export(projInfo);
-        //    FileAssert.AreEqual(expected, output, file + " test fails");
-        //}
+            var target = new ExportSword();
+            const bool expectedResult = true;
+            bool actual = target.Export(_projInfo);
+            Assert.AreEqual(expectedResult, actual);
+        }
 
         ///<summary>
         ///Compare files
-        /// </summary>   
-        [Ignore]      
+        /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
         public void RutBookTest()
@@ -189,7 +172,6 @@ namespace Test.SwordConvert
         ///<summary>
         ///Compare files
         /// </summary>  
-        [Ignore]    
         [Test]
         [Category("SkipOnTeamCity")]
         public void JN2BookTest()

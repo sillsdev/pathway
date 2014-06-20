@@ -58,6 +58,71 @@ namespace SIL.PublishingSolution
         private bool _isFromExe = false;
         private bool _isFirstODT = true;
 
+        /// <summary>
+        /// Convert XHTML to ODT
+        /// </summary>
+        public bool Export(PublicationInformation projInfo)
+        {
+            publicationInfo = projInfo;
+            string defaultXhtml = projInfo.DefaultXhtmlFileWithPath;
+            GeneratedPdfFileName = defaultXhtml;
+            projInfo.OutputExtension = "odt";
+            Common.OdType = Common.OdtType.OdtChild;
+            bool returnValue = false;
+            VerboseClass verboseClass = VerboseClass.GetInstance();
+            _isFromExe = Common.CheckExecutionPath();
+
+            Common.DeleteDirectoryWildCard(Path.GetTempPath(), "SilPathwaytmp*");
+
+            string strFromOfficeFolder = Common.FromRegistry("OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
+            projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
+            CopyOfficeFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
+            Dictionary<string, string> dictSecName = new Dictionary<string, string>();
+
+            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
+            CssTree cssTree = new CssTree();
+            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+
+            if (cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
+            {
+                projInfo.FileToProduce = cssClass["@page"]["-ps-fileproduce"];
+            }
+
+            if (projInfo.FromPlugin && projInfo.IsReversalExist)
+            {
+                dictSecName = CreatePageDictionary(projInfo);
+            }
+            else
+            {
+                dictSecName = GetPageSectionSteps();
+            }
+            dictSecName = SplitXhtmlAsMultiplePart(projInfo, dictSecName);
+
+            if (dictSecName.Count > 1)
+            {
+                GeneratedPdfFileName = dictSecName["Main"];
+                ExportODM(publicationInfo.ProgressBar);
+            }
+            else
+            {
+                publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
+                returnValue = ExportODT(publicationInfo);
+            }
+
+            if (publicationInfo.FinalOutput != null && publicationInfo.FinalOutput.ToLower() == "pdf")
+            {
+                publicationInfo.OutputExtension = "pdf";
+                Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice", projInfo.ProjectInputType);
+            }
+            else
+            {
+                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.jar,.xml", "layout.css", string.Empty);
+                CreateRAMP();
+                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".css,.xhtml,.xml", String.Empty, String.Empty);
+            }
+            return returnValue;
+        }
+
         private Dictionary<string, string> SplitXhtmlAsMultiplePart(PublicationInformation publicationInformation, Dictionary<string, string> dictSecName)
         {
             var fileNameWithPath = new List<string>();
@@ -327,71 +392,6 @@ namespace SIL.PublishingSolution
                     _odtFiles.Add(Path.ChangeExtension(returnFileName, ".odt"));
                 }
             }
-        }
-
-        /// <summary>
-        /// Convert XHTML to ODT
-        /// </summary>
-        public bool Export(PublicationInformation projInfo)
-        {
-            publicationInfo = projInfo;
-            string defaultXhtml = projInfo.DefaultXhtmlFileWithPath;
-            GeneratedPdfFileName = defaultXhtml;
-            projInfo.OutputExtension = "odt";
-            Common.OdType = Common.OdtType.OdtChild;
-            bool returnValue = false;
-            VerboseClass verboseClass = VerboseClass.GetInstance();
-            _isFromExe = Common.CheckExecutionPath();
-
-            Common.DeleteDirectoryWildCard(Path.GetTempPath(), "SilPathwaytmp*");
-
-            string strFromOfficeFolder = Common.FromRegistry("OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
-            projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
-            CopyOfficeFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
-            Dictionary<string, string> dictSecName = new Dictionary<string, string>();
-
-            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-            CssTree cssTree = new CssTree();
-            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            if (cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
-            {
-                projInfo.FileToProduce = cssClass["@page"]["-ps-fileproduce"];
-            }
-
-            if (projInfo.FromPlugin && projInfo.IsReversalExist)
-            {
-                dictSecName = CreatePageDictionary(projInfo);
-            }
-            else
-            {
-                dictSecName = GetPageSectionSteps();
-            }
-            dictSecName = SplitXhtmlAsMultiplePart(projInfo, dictSecName);
-
-            if (dictSecName.Count > 1)
-            {
-                GeneratedPdfFileName = dictSecName["Main"];
-                ExportODM(publicationInfo.ProgressBar);
-            }
-            else
-            {
-                publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
-                returnValue = ExportODT(publicationInfo);
-            }
-
-            if (publicationInfo.FinalOutput.ToLower() == "pdf")
-            {
-                publicationInfo.OutputExtension = "pdf";
-                Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice", projInfo.ProjectInputType);
-            }
-            else
-            {
-                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.jar,.xml", "layout.css", string.Empty);
-                CreateRAMP();
-                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".css,.xhtml,.xml", String.Empty, String.Empty);
-            }
-            return returnValue;
         }
 
         private void InsertFrontMatter(PublicationInformation projInfo)

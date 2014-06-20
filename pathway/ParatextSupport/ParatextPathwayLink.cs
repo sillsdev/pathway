@@ -337,23 +337,8 @@ namespace SIL.PublishingSolution
                 string xpath = "//book";
                 string bookName = string.Empty;
                 XmlNodeList list = scrBooksDoc.SelectNodes(xpath, nsmgr1);
-                if (list != null)
-                {
-                    foreach (XmlNode xmlNode in list)
-                    {
-                        if (xmlNode.Attributes != null)
-                        {
-                            try
-                            {
-                                bookName = xmlNode.Attributes["code"].Value;
-                            }
-                            catch (NullReferenceException)
-                            {
-                                bookName = xmlNode.Attributes["id"].Value;
-                            }
-                        }
-                    }
-                }
+
+                GetBookName(list, ref bookName);
 
                 // Create argument list
                 XsltArgumentList args = new XsltArgumentList();
@@ -397,6 +382,34 @@ namespace SIL.PublishingSolution
                     if (File.Exists(targetFile))
                     {
                         File.Delete(bookFileName);
+                    }
+                }
+            }
+        }
+
+        private static void GetBookName(XmlNodeList list, ref string bookName)
+        {
+            if (list != null)
+            {
+                foreach (XmlNode xmlNode in list)
+                {
+                    if (xmlNode.Attributes != null)
+                    {
+                        try
+                        {
+                            if (xmlNode.Attributes["code"] != null)
+                            {
+                                bookName = xmlNode.Attributes["code"].Value;
+                            }
+                            else
+                            {
+                                if (xmlNode.Attributes["id"] != null)
+                                    bookName = xmlNode.Attributes["id"].Value;
+                            }
+                        }
+                        catch (NullReferenceException)
+                        {
+                        }
                     }
                 }
             }

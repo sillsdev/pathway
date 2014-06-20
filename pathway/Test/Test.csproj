@@ -254,6 +254,9 @@
     </Compile>
     <Compile Include="GoBibleConvert\PartialBookTest.cs" />
     <Compile Include="GoBibleConvert\UsxToSFMTest.cs" />
+    <Compile Include="OpenOfficeConvert\LOTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ParatextSupport\EncloseParasInSectionsTests.cs" />
     <Compile Include="ParatextSupport\ParatextSupportExtensions.cs" />
     <Compile Include="ParatextSupport\SfmToUsxTest.cs" />
@@ -262,7 +265,9 @@
     <Compile Include="PathwayB\PathwayBTest.cs" />
     <Compile Include="PdfConvert\ExportPdfTest.cs" />
     <Compile Include="PsTool\RampTest.cs" />
-    <Compile Include="SwordConvert\SwordTest.cs" />
+    <Compile Include="SwordConvert\SwordTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="theWordConvert\ExportTheWordTest.cs" />
     <Compile Include="XeLatex\XeLaTexContentTest.cs" />
     <Compile Include="CssParser\ClassInfoTest.cs" />
