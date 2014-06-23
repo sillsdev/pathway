@@ -1030,6 +1030,10 @@ namespace SIL.Tool
             {
                 value = value.Replace("25C6", Common.ConvertUnicodeToString("\\2666")) + " ";
             }
+            if (value.IndexOf("25CF") >= 0 || value.IndexOf("274D") >= 0)
+            {
+                value = value.Replace(value, Common.ConvertUnicodeToString("\\" + value)) + " ";
+            }
             return value;
         }
 
