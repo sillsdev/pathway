@@ -4420,7 +4420,7 @@ namespace SIL.PublishingSolution
             string message = "Settings files cannot be reset.";
             try
             {
-                const string msg = "Are you sure you want to remove all custom style sheets and restore settings to their initial values? (This can not be undone.)";
+                const string msg = "Are you sure you want to remove all custom style sheets and restore \r\n settings to their initial values? (This cannot be undone.)";
                 const string caption = "Reset Settings";
                 if (!cTool._fromNunit)
                 {
