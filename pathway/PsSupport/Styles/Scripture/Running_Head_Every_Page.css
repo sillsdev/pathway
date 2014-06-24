@@ -1,15 +1,13 @@
 /* Running Head Every Page.css */
 @page {
     @top-left {
-           content: string( guideword, first);
-           direction: ltr;
-           font-size: 12pt;
+        -ps-referenceFormat: "Genesis 1";
+        content: string(bookname, first) " "  string(chapter, first);
     }
     @top-center{ content: ''; }
     @top-right {
-           content: string( guideword, last);
-           direction: ltr;
-           font-size: 12pt;
+        -ps-referenceFormat: "Genesis 1";
+        content: string(bookname, last) " "  string(chapter, last);
     }
     @bottom-left   { content: ''; }
     @bottom-center { content: ''; }
