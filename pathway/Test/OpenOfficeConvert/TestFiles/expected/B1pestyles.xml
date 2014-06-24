@@ -74,7 +74,7 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:country="none" fo:language="zxx" fo:font-weight="700" style:font-weight-complex="700" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
@@ -106,7 +106,7 @@
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_Line1_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteCrossHYPHENReferenceParagraph_Line1_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="8pt" style:font-size-complex="8pt" text:display="prince-footnote" />
@@ -125,7 +125,7 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_ParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
       <style:paragraph-properties fo:float="top" fo:margin-top="0pt" fo:margin-right="3.75pt" fo:margin-bottom="3.75pt" fo:margin-left="0pt" fo:text-indent="0pt" fo:text-align="center" />
@@ -192,7 +192,7 @@
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="8pt" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="NoteCrossHYPHENReferenceParagraph..footnote-call" style:family="text" style:parent-style-name="none">
-      <style:text-properties fo:color="#800080" fo:font-size="12pt" style:text-position="super 55%" fo:font-family="Charis SIL" text:display="prince-footnote" />
+      <style:text-properties fo:color="#800080" fo:font-size="11pt" style:text-position="super 55%" fo:font-family="Charis SIL" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="NoteCrossHYPHENReferenceParagraph..footnote-marker" style:family="text" style:parent-style-name="none">
       <style:text-properties fo:font-size="8pt" fo:font-weight="700" fo:font-family="Charis SIL" text:display="prince-footnote" />
@@ -202,7 +202,7 @@
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="8pt" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="NoteGeneralParagraph..footnote-call" style:family="text" style:parent-style-name="none">
-      <style:text-properties fo:color="#800080" fo:font-size="12pt" style:text-position="super 55%" fo:font-family="Charis SIL" text:display="prince-footnote" />
+      <style:text-properties fo:color="#800080" fo:font-size="11pt" style:text-position="super 55%" fo:font-family="Charis SIL" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="NoteGeneralParagraph..footnote-marker" style:family="text" style:parent-style-name="none">
       <style:text-properties fo:font-size="8pt" fo:font-weight="700" fo:font-family="Charis SIL" text:display="prince-footnote" />
@@ -258,7 +258,7 @@
     </style:style>
     <style:style style:name="VerseNumber" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" style:text-position="super 55%" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-size="11pt" style:text-position="super 55%" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
@@ -394,7 +394,7 @@
     </style:style>
     <style:style style:name="Caption" style:family="paragraph" style:parent-style-name="Standard" style:class="extra">
       <style:paragraph-properties fo:margin-top="0.0835in" fo:margin-bottom="0.0835in" text:number-lines="false" text:line-number="0" />
-      <style:text-properties fo:font-size="12pt" fo:font-style="italic" style:font-name-asian="Times New Roman" style:font-size-asian="12pt" style:font-style-asian="italic" style:font-name-complex="Times New Roman" style:font-size-complex="12pt" style:font-style-complex="italic" />
+      <style:text-properties fo:font-size="12pt" fo:font-style="italic" style:font-size-asian="12pt" style:font-style-asian="italic" style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" style:font-size-complex="12pt" style:font-style-complex="italic" />
     </style:style>
     <style:style style:name="Index" style:family="paragraph" style:parent-style-name="Standard" style:class="index">
       <style:paragraph-properties text:number-lines="false" text:line-number="0" />
