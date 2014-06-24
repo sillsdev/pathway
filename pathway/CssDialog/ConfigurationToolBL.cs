@@ -4293,20 +4293,20 @@ namespace SIL.PublishingSolution
                         LoadParam();
                         ShowDataInGrid();
                         SetPropertyTab();
-                        string seletedLayout = string.Empty;
                         SelectedRowIndex = currentRowIndex;
                         if (currentRowIndex == cTool.StylesGrid.Rows.Count) // Is last row?
                             SelectedRowIndex = SelectedRowIndex - 1;
                         cTool.StylesGrid.ClearSelection();
                         cTool.StylesGrid.Rows[SelectedRowIndex].Selected = true;
-                        seletedLayout = cTool.StylesGrid.Rows[SelectedRowIndex].Cells[0].Value.ToString();
-                        _lastSelectedLayout = seletedLayout;
-                        _previousStyleName = seletedLayout;
-                        cTool.TxtName.Text = seletedLayout;
+                        string selectedLayout = cTool.StylesGrid.Rows[SelectedRowIndex].Cells[0].Value.ToString();
+                        _lastSelectedLayout = selectedLayout;
+                        _previousStyleName = selectedLayout;
+                        cTool.TxtName.Text = selectedLayout;
                         setLastSelectedLayout();
                         _screenMode = ScreenMode.View;
                         ShowInfoValue();
                         cTool.TxtName.Select();
+                        ConfigurationTool_LoadBL();
                     }
                     else
                     {

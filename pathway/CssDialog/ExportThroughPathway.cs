@@ -875,6 +875,7 @@ namespace SIL.PublishingSolution
                 if (_isUnixOS)
                 {
                     copyrightFileName = Common.LeftRemove(CopyrightPagePath, "\\");
+                    copyrightFileName = Path.GetFileName(copyrightFileName);
                 }
                 else
                 {
