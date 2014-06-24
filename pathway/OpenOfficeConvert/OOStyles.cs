@@ -1918,7 +1918,7 @@ namespace SIL.PublishingSolution
         {
             string mainFrameName = "Mfr1";
             string refFormat = string.Empty;
-            if (_projInfo.ProjectInputType.ToLower() == "scripture")
+            if (_projInfo.ProjectInputType.ToLower() == "scripture" && isMirrored)
             {
                 refFormat = Common.GetReferenceFormat(_cssProperty, refFormat);
             }
