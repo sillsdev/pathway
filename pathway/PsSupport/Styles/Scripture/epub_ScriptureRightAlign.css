@@ -185,6 +185,9 @@ the user's preferences from the Configuration Tool:
     display : none;
     visibility: hidden;
 }
+.scrBookName{
+    visibility: hidden;
+}
 .scrIntroSection {
     text-align: right;
 }
