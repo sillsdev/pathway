@@ -1479,7 +1479,7 @@ namespace SIL.PublishingSolution
             {
                 LoadData();
             }
-
+            cTool.DdlTocLevel.Items.Clear();
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulateFeatureSheet");
             // populate the font drop-down if needed
             if (cTool.DdlDefaultFont.Items.Count == 0)
@@ -1614,7 +1614,10 @@ namespace SIL.PublishingSolution
 
                 case "TOCLevel":
                     if (!cTool.DdlTocLevel.Items.Contains(ctn.Text))
+                    {
                         cTool.DdlTocLevel.Items.Add(ctn.Text);
+                        cTool.DdlTocLevel.SelectedIndex = 0;
+                    }
                     break;
             }
         }
