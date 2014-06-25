@@ -47,6 +47,7 @@ namespace SIL.PublishingSolution
         private List<string> _groupPropertyValue = new List<string>();
         private bool _isUnixOS = false;
         private int _cToolPnlOtherFormatTop = 0;
+        private bool _validateWebInput = false;
         #endregion
 
         #region Public Variable
@@ -514,7 +515,7 @@ namespace SIL.PublishingSolution
                 string display = GetValue(task, key, "Frame");
                 if (display == "block")
                 {
-                    result =  "Paragraph";
+                    result = "Paragraph";
                 }
                 else if (display == "none")
                 {
@@ -675,7 +676,7 @@ namespace SIL.PublishingSolution
                 return ((AssemblyFileVersionAttribute)attributes[0]).Version;
             }
         }
-        
+
         /// <summary>
         /// Method to add the file location to copy the attached files.
         /// </summary>
@@ -788,20 +789,28 @@ namespace SIL.PublishingSolution
         {
             if (MediaType.ToLower() == "web" && IsPropertyModified() == true)
             {
-                XmlNodeList baseNodeList = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                HashUtilities hashUtil = new HashUtilities();
-                hashUtil.Key = "%:#@?,*&";
-
-                foreach (XmlNode baseNode in baseNodeList)
+                if (ValidateWebAttributes())
                 {
-                    string attribName = baseNode.Attributes["name"].Value.ToLower();
-                    SetAttributesForWebProperties(attribName, baseNode, hashUtil);
+                    _validateWebInput = true;
+                    XmlNodeList baseNodeList = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
+                    HashUtilities hashUtil = new HashUtilities();
+                    hashUtil.Key = "%:#@?,*&";
+                    hashUtil.Salt = "$%^&*#$%";
+                    foreach (XmlNode baseNode in baseNodeList)
+                    {
+                        string attribName = baseNode.Attributes["name"].Value.ToLower();
+                        SetAttributesForWebProperties(attribName, baseNode, hashUtil);
+                    }
+                    Param.Write();
                 }
-                Param.Write();
+                else
+                {
+                    _validateWebInput = false;
+                    return;
+                }
             }
 
             if (IsPropertyModified() == false || (FileType.ToLower() == "standard")) return;
-            StreamWriter writeCss = null;
             if (MediaType.ToLower() != "web")
             {
                 try
@@ -825,7 +834,7 @@ namespace SIL.PublishingSolution
                     }
 
                     //Start Writing the Changes
-                    writeCss = new StreamWriter(file);
+                    var writeCss = new StreamWriter(file);
                     if (!string.IsNullOrEmpty(importStatement))
                         writeCss.WriteLine(importStatement);
 
@@ -1212,7 +1221,7 @@ namespace SIL.PublishingSolution
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     HashUtilities hashUtil = new HashUtilities();
                     hashUtil.Key = "%:#@?,*&";
-
+                    hashUtil.Salt = "$%^&*#$%";
                     // show/hide web UI controls based on the input type
                     SetWebUIControls(inputTypeBL == "Dictionary");
 
@@ -1785,6 +1794,7 @@ namespace SIL.PublishingSolution
                 case "web":
                     HashUtilities hashUtil = new HashUtilities();
                     hashUtil.Key = "%:#@?,*&";
+                    hashUtil.Salt = "$%^&*#$%";
                     cTool.TabControl1.TabPages.Insert(1, tabweb);
 
                     XmlNodeList baseNode2 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
@@ -2826,7 +2836,7 @@ namespace SIL.PublishingSolution
                 grid.Columns[8].Visible = false; // Preview File 2      
 
             }
-            
+
             if (grid.SelectedRows.Count <= 0 && IsUnixOs)
             {
                 Param.LoadSettings();
@@ -4079,6 +4089,13 @@ namespace SIL.PublishingSolution
         public void tsSend_ClickBL()
         {
             WriteCss();
+
+            if (!_validateWebInput)
+            {
+                _validateWebInput = true;
+                return;
+            }
+
             string tempfolder = Path.GetTempPath();
             string folderName = Path.GetFileNameWithoutExtension(Path.GetTempFileName());
             string folderPath = Common.PathCombine(tempfolder, folderName);
@@ -4443,7 +4460,7 @@ namespace SIL.PublishingSolution
                 ConfigurationTool_LoadBL();
                 message = "Settings files are reset successfully.";
             }
-            catch{}
+            catch { }
             MessageBox.Show(message, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -4451,7 +4468,7 @@ namespace SIL.PublishingSolution
         {
             var myCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
-            
+
             string preview;
 
             if (!File.Exists(PreviewFileName1) || _screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit)
@@ -4534,60 +4551,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void txtFtpFileLocation_ValidatedBL(object sender, EventArgs e)
-        {
-            try
-            {
-                bool result = false;
-                if (cTool.TxtFtpAddress.Text.Trim() != string.Empty)
-                {
-                    result = Regex.IsMatch(cTool.TxtFtpAddress.Text, @"^(ftp)://?");
-                    if (!result)
-                    {
-                        _errProvider = Common._errProvider;
-                        _errProvider.SetError(cTool.TxtFtpAddress, "Ftp address is not valid entry.");
-                        cTool.TxtFtpAddress.Focus();
-                    }
-                    else
-                    {
-                        _errProvider.SetError(cTool.TxtFtpAddress, "");
-                    }
-                }
-                else
-                {
-                    _errProvider.SetError(cTool.TxtFtpAddress, "");
-                }
-            }
-            catch { }
-        }
-
-        public void txtWebUrl_ValidatedBL(object sender, EventArgs e)
-        {
-            try
-            {
-                bool result = false;
-                if (cTool.TxtWebUrl.Text.Trim() != string.Empty)
-                {
-                    result = Regex.IsMatch(cTool.TxtWebUrl.Text, @"^(http|https)://?");
-                    if (!result)
-                    {
-                        _errProvider = Common._errProvider;
-                        _errProvider.SetError(cTool.TxtWebUrl, "Website URL address is not valid entry.");
-                        cTool.TxtWebUrl.Focus();
-                    }
-                    else
-                    {
-                        _errProvider.SetError(cTool.TxtWebUrl, "");
-                    }
-                }
-                else
-                {
-                    _errProvider.SetError(cTool.TxtWebUrl, "");
-                }
-            }
-            catch { }
-        }
-
         private string GetDdlRunningHead()
         {
             string pageType;
@@ -4618,6 +4581,415 @@ namespace SIL.PublishingSolution
                 ShowInfoValue();
             }
             catch { }
+        }
+
+        public void txtFtpFileLocation_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cTool.TxtFtpAddress.Text.Trim() != string.Empty)
+                {
+                    bool result = Regex.IsMatch(cTool.TxtFtpAddress.Text, @"^(ftp)://?");
+                    if (!result)
+                    {
+                        _errProvider = Common._errProvider;
+                        _errProvider.SetError(cTool.TxtFtpAddress, "Ftp address is not valid entry.");
+                        cTool.TxtFtpAddress.Focus();
+                    }
+                    else
+                    {
+                        _errProvider.SetError(cTool.TxtFtpAddress, "");
+                    }
+                }
+                else
+                {
+                    _errProvider.SetError(cTool.TxtFtpAddress, "");
+                }
+            }
+            catch { }
+        }
+
+        public void txtWebUrl_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cTool.TxtWebUrl.Text.Trim() != string.Empty)
+                {
+                    bool result = Regex.IsMatch(cTool.TxtWebUrl.Text, @"^(http|https)://?");
+                    if (!result)
+                    {
+                        _errProvider = Common._errProvider;
+                        _errProvider.SetError(cTool.TxtWebUrl, "Website URL address is not valid entry.");
+                        cTool.TxtWebUrl.Focus();
+                    }
+                    else
+                    {
+                        _errProvider.SetError(cTool.TxtWebUrl, "");
+                    }
+                }
+                else
+                {
+                    _errProvider.SetError(cTool.TxtWebUrl, "");
+                }
+            }
+            catch { }
+        }
+
+        public void txtSqlUsername_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cTool.TxtSqlUsername.Text.Trim() != string.Empty)
+                {
+                    int result = cTool.TxtSqlUsername.Text.Length;
+                    if (result <= 5)
+                    {
+                        _errProvider = Common._errProvider;
+                        _errProvider.SetError(cTool.TxtSqlUsername, "Sql username should be minimum 5 characters.");
+                        cTool.TxtSqlUsername.Focus();
+                    }
+                    else
+                    {
+                        _errProvider.SetError(cTool.TxtSqlUsername, "");
+                    }
+                }
+                else
+                {
+                    _errProvider.SetError(cTool.TxtSqlUsername, "");
+                }
+            }
+            catch { }
+        }
+
+        public void txtSqlPassword_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cTool.TxtSqlPassword.Text.Trim() != string.Empty)
+                {
+                    int result = cTool.TxtSqlPassword.Text.Length;
+                    if (result <= 8)
+                    {
+                        _errProvider = Common._errProvider;
+                        _errProvider.SetError(cTool.TxtSqlPassword, "Sql password should be minimum 8 characters.");
+                        cTool.TxtSqlPassword.Focus();
+                    }
+                    else
+                    {
+                        _errProvider.SetError(cTool.TxtSqlPassword, "");
+                    }
+                }
+                else
+                {
+                    _errProvider.SetError(cTool.TxtSqlPassword, "");
+                }
+            }
+            catch { }
+        }
+
+        public void txtWebAdminUsrNme_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cTool.TxtWebAdminUsrNme.Text.Trim() != string.Empty)
+                {
+                    int result = cTool.TxtWebAdminUsrNme.Text.Length;
+                    if (result <= 5)
+                    {
+                        _errProvider = Common._errProvider;
+                        _errProvider.SetError(cTool.TxtWebAdminUsrNme, "Web admin username should be minimum 5 characters.");
+                        cTool.TxtWebAdminUsrNme.Focus();
+                    }
+                    else
+                    {
+                        _errProvider.SetError(cTool.TxtWebAdminUsrNme, "");
+                    }
+                }
+                else
+                {
+                    _errProvider.SetError(cTool.TxtWebAdminUsrNme, "");
+                }
+            }
+            catch { }
+        }
+
+        public void txtWebAdminPwd_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cTool.TxtWebAdminPwd.Text.Trim() != string.Empty)
+                {
+                    int result = cTool.TxtWebAdminPwd.Text.Length;
+                    if (result <= 8)
+                    {
+                        _errProvider = Common._errProvider;
+                        _errProvider.SetError(cTool.TxtWebAdminPwd, "Web admin password should be minimum 8 characters.");
+                        cTool.TxtWebAdminPwd.Focus();
+                    }
+                    else
+                    {
+                        _errProvider.SetError(cTool.TxtWebAdminPwd, "");
+                    }
+                }
+                else
+                {
+                    _errProvider.SetError(cTool.TxtWebAdminPwd, "");
+                }
+            }
+            catch { }
+        }
+
+        public void txtFtpUsername_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cTool.TxtFtpUsername.Text.Trim() != string.Empty)
+                {
+                    int result = cTool.TxtFtpUsername.Text.Length;
+                    if (result <= 5)
+                    {
+                        _errProvider = Common._errProvider;
+                        _errProvider.SetError(cTool.TxtFtpUsername, "Ftp username should be minimum 5 characters.");
+                        cTool.TxtFtpUsername.Focus();
+                    }
+                    else
+                    {
+                        _errProvider.SetError(cTool.TxtFtpUsername, "");
+                    }
+                }
+                else
+                {
+                    _errProvider.SetError(cTool.TxtFtpUsername, "");
+                }
+            }
+            catch { }
+        }
+
+        public void txtFtpPassword_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cTool.TxtFtpPassword.Text.Trim() != string.Empty)
+                {
+                    int result = cTool.TxtFtpPassword.Text.Length;
+                    if (result <= 8)
+                    {
+                        _errProvider = Common._errProvider;
+                        _errProvider.SetError(cTool.TxtFtpPassword, "Ftp password should be minimum 8 characters.");
+                        cTool.TxtFtpPassword.Focus();
+                    }
+                    else
+                    {
+                        _errProvider.SetError(cTool.TxtFtpPassword, "");
+                    }
+                }
+                else
+                {
+                    _errProvider.SetError(cTool.TxtFtpPassword, "");
+                }
+            }
+            catch { }
+        }
+
+        public void txtWebEmailID_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cTool.TxtWebEmailId.Text.Trim() != string.Empty)
+                {
+                    bool isEmail = Regex.IsMatch(cTool.TxtWebEmailId.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+                    if (!isEmail)
+                    {
+                        _errProvider = Common._errProvider;
+                        _errProvider.SetError(cTool.TxtWebEmailId, "Email id is not valid entry.");
+                        cTool.TxtWebEmailId.Focus();
+                    }
+                    else
+                    {
+                        _errProvider.SetError(cTool.TxtWebEmailId, "");
+                    }
+                }
+                else
+                {
+                    _errProvider.SetError(cTool.TxtWebEmailId, "");
+                }
+            }
+            catch { }
+        }
+
+        private bool ValidateWebAttributes()
+        {
+            if (!ValidateFtpAddress())
+            {
+                return false;
+            }
+            if (!ValidateWebUrl())
+            {
+                return false;
+            }
+            if (!ValidateSqlUsername())
+            {
+                return false;
+            }
+            if (!ValidateSqlPassword())
+            {
+                return false;
+            }
+            if (!ValidateWebAdminUsrNme())
+            {
+                return false;
+            }
+            if (!ValidateWebAdminPwd())
+            {
+                return false;
+            }
+            if (!ValidateFtpUsername())
+            {
+                return false;
+            }
+            if (!ValidateFtpPassword())
+            {
+                return false;
+            }
+            if (!ValidateWebEmailId())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidateFtpAddress()
+        {
+            bool result = true;
+            if (cTool.TxtFtpAddress.Text.Trim() != string.Empty)
+            {
+                result = Regex.IsMatch(cTool.TxtFtpAddress.Text, @"^(ftp)://?");
+                if (!result)
+                {
+                    cTool.TxtFtpAddress.Focus();
+                }
+            }
+            return result;
+        }
+
+        private bool ValidateWebUrl()
+        {
+            bool result = true;
+            if (cTool.TxtWebUrl.Text.Trim() != string.Empty)
+            {
+                result = Regex.IsMatch(cTool.TxtWebUrl.Text, @"^(http|https)://?");
+                if (!result)
+                {
+                    cTool.TxtWebUrl.Focus();
+                }
+            }
+            return result;
+        }
+
+        private bool ValidateSqlUsername()
+        {
+            bool result = true;
+            if (cTool.TxtSqlUsername.Text.Trim() != string.Empty)
+            {
+                int textLength = cTool.TxtSqlUsername.Text.Length;
+                if (textLength <= 5)
+                {
+                    cTool.TxtSqlUsername.Focus();
+                    result = false;
+                }
+            }
+            return result;
+        }
+
+        private bool ValidateSqlPassword()
+        {
+            bool result = true;
+            if (cTool.TxtSqlPassword.Text.Trim() != string.Empty)
+            {
+                int textLength = cTool.TxtSqlPassword.Text.Length;
+                if (textLength <= 8)
+                {
+                    cTool.TxtSqlPassword.Focus();
+                    result = false;
+                }
+            }
+            return result;
+        }
+
+        private bool ValidateWebAdminUsrNme()
+        {
+            bool result = true;
+            if (cTool.TxtWebAdminUsrNme.Text.Trim() != string.Empty)
+            {
+                int textLength = cTool.TxtWebAdminUsrNme.Text.Length;
+                if (textLength <= 5)
+                {
+                    cTool.TxtWebAdminUsrNme.Focus();
+                    result = false;
+                }
+            }
+            return result;
+        }
+
+        private bool ValidateWebAdminPwd()
+        {
+            bool result = true;
+            if (cTool.TxtWebAdminPwd.Text.Trim() != string.Empty)
+            {
+                int textLength = cTool.TxtWebAdminPwd.Text.Length;
+                if (textLength <= 8)
+                {
+                    cTool.TxtWebAdminPwd.Focus();
+                    result = false;
+                }
+            }
+            return result;
+        }
+
+        private bool ValidateFtpUsername()
+        {
+            bool result = true;
+            if (cTool.TxtFtpUsername.Text.Trim() != string.Empty)
+            {
+                int textLength = cTool.TxtFtpUsername.Text.Length;
+                if (textLength <= 5)
+                {
+                    cTool.TxtFtpUsername.Focus();
+                    result = false;
+                }
+            }
+            return result;
+        }
+
+        private bool ValidateFtpPassword()
+        {
+            bool result = true;
+            if (cTool.TxtFtpPassword.Text.Trim() != string.Empty)
+            {
+                int textLength = cTool.TxtFtpPassword.Text.Length;
+                if (textLength <= 8)
+                {
+                    cTool.TxtFtpPassword.Focus();
+                    result = false;
+                }
+            }
+            return result;
+        }
+
+        private bool ValidateWebEmailId()
+        {
+            bool result = true;
+            if (cTool.TxtWebEmailId.Text.Trim() != string.Empty)
+            {
+                bool isEmail = Regex.IsMatch(cTool.TxtWebEmailId.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+                if (!isEmail)
+                {
+                    cTool.TxtWebEmailId.Focus();
+                    result = false;
+                }
+            }
+            return result;
         }
 
         #endregion
