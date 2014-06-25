@@ -217,6 +217,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmbeddedFont.cs" />
+    <Compile Include="EpubToc.cs" />
     <Compile Include="Exportepub.cs">
       <SubType>Code</SubType>
     </Compile>

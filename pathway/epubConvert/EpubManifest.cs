@@ -15,15 +15,20 @@
 // --------------------------------------------------------------------------------------------
 #endregion
 
+#region using
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Xml;
+using SIL.PublishingSolution;
 using SIL.Tool;
 
-namespace SIL.PublishingSolution
+#endregion using
+
+namespace epubConvert
 {
     public class EpubManifest
     {
@@ -31,14 +36,14 @@ namespace SIL.PublishingSolution
         private readonly Exportepub _parent;
         private readonly EpubFont _epubFont;
 
-        public string Title { get; set; }
-        public string Creator { get; set; }
-        public string Description { get; set; }
-        public string Publisher { get; set; }
-        public string Coverage { get; set; }
-        public string Rights { get; set; }
-        public string Format { get; set; }
-        public string Source { get; set; }
+        public string Title { get; private set; }
+        private string Creator { get; set; }
+        private string Description { get; set; }
+        private string Publisher { get; set; }
+        private string Coverage { get; set; }
+        private string Rights { get; set; }
+        private string Format { get; set; }
+        private string Source { get; set; }
 
         public EpubManifest(Exportepub exportepub, EpubFont epubFont)
         {
@@ -64,6 +69,23 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("version", "2.0");
             opf.WriteAttributeString("unique-identifier", "BookId");
             // metadata - items defined by the Dublin Core Metadata Initiative:
+            Metadata(projInfo, bookId, opf);
+            StartManifest(opf);
+            if (_parent.EmbedFonts)
+            {
+                ManifestFontEmbed(opf);
+            }
+            string[] files = Directory.GetFiles(contentFolder);
+            ManifestContent(opf, files);
+            Spine(opf, files);
+            Guide(projInfo, opf, files);
+            opf.WriteEndElement(); // package
+            opf.WriteEndDocument();
+            opf.Close();
+        }
+
+        private void Metadata(PublicationInformation projInfo, Guid bookId, XmlWriter opf)
+        {
             // (http://dublincore.org/documents/2004/12/20/dces/)
             opf.WriteStartElement("metadata");
             opf.WriteAttributeString("xmlns", "dc", null, "http://purl.org/dc/elements/1.1/");
@@ -120,6 +142,10 @@ namespace SIL.PublishingSolution
                 opf.WriteEndElement(); // meta
             }
             opf.WriteEndElement(); // metadata
+        }
+
+        private static void StartManifest(XmlWriter opf)
+        {
             // manifest
             opf.WriteStartElement("manifest");
             // (individual "item" elements in the manifest)
@@ -128,61 +154,62 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("href", "toc.ncx");
             opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
             opf.WriteEndElement(); // item
+        }
 
-            if (_parent.EmbedFonts)
+        private void ManifestFontEmbed(XmlWriter opf)
+        {
+            int fontNum = 1;
+            foreach (var embeddedFont in _epubFont.EmbeddedFonts())
             {
-                int fontNum = 1;
-                foreach (var embeddedFont in _epubFont.EmbeddedFonts())
+                if (embeddedFont.Filename == null)
                 {
-                    if (embeddedFont.Filename == null)
+                    // already written out that this font doesn't exist in the CSS file; just skip it here
+                    continue;
+                }
+                opf.WriteStartElement("item"); // item (charis embedded font)
+                opf.WriteAttributeString("id", "epub.embedded.font" + fontNum);
+                opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.Filename));
+                opf.WriteAttributeString("media-type", "font/opentype/");
+                opf.WriteEndElement(); // item
+                fontNum++;
+                if (_parent.IncludeFontVariants)
+                {
+                    // italic
+                    if (embeddedFont.HasItalic && String.Compare(embeddedFont.Filename, embeddedFont.ItalicFilename, StringComparison.Ordinal) != 0)
                     {
-                        // already written out that this font doesn't exist in the CSS file; just skip it here
-                        continue;
-                    }
-                    opf.WriteStartElement("item"); // item (charis embedded font)
-                    opf.WriteAttributeString("id", "epub.embedded.font" + fontNum);
-                    opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.Filename));
-                    opf.WriteAttributeString("media-type", "font/opentype/");
-                    opf.WriteEndElement(); // item
-                    fontNum++;
-                    if (_parent.IncludeFontVariants)
-                    {
-                        // italic
-                        if (embeddedFont.HasItalic && String.Compare(embeddedFont.Filename, embeddedFont.ItalicFilename, StringComparison.Ordinal) != 0)
+                        if (embeddedFont.ItalicFilename != string.Empty)
                         {
-                            if (embeddedFont.ItalicFilename != string.Empty)
-                            {
-                                opf.WriteStartElement("item"); // item (charis embedded font)
-                                opf.WriteAttributeString("id", "epub.embedded.font_i_" + fontNum);
+                            opf.WriteStartElement("item"); // item (charis embedded font)
+                            opf.WriteAttributeString("id", "epub.embedded.font_i_" + fontNum);
 
-                                opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.ItalicFilename));
+                            opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.ItalicFilename));
 
-                                opf.WriteAttributeString("media-type", "font/opentype/");
-                                opf.WriteEndElement(); // item
-                                fontNum++;
-                            }
+                            opf.WriteAttributeString("media-type", "font/opentype/");
+                            opf.WriteEndElement(); // item
+                            fontNum++;
                         }
-                        // bold
-                        if (embeddedFont.HasBold && String.Compare(embeddedFont.Filename, embeddedFont.BoldFilename, StringComparison.Ordinal) != 0)
+                    }
+                    // bold
+                    if (embeddedFont.HasBold && String.Compare(embeddedFont.Filename, embeddedFont.BoldFilename, StringComparison.Ordinal) != 0)
+                    {
+                        if (embeddedFont.BoldFilename != string.Empty)
                         {
-                            if (embeddedFont.BoldFilename != string.Empty)
-                            {
-                                opf.WriteStartElement("item"); // item (charis embedded font)
-                                opf.WriteAttributeString("id", "epub.embedded.font_b_" + fontNum);
-                                opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.BoldFilename));
-                                opf.WriteAttributeString("media-type", "font/opentype/");
-                                opf.WriteEndElement(); // item
-                                fontNum++;
-                            }
+                            opf.WriteStartElement("item"); // item (charis embedded font)
+                            opf.WriteAttributeString("id", "epub.embedded.font_b_" + fontNum);
+                            opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.BoldFilename));
+                            opf.WriteAttributeString("media-type", "font/opentype/");
+                            opf.WriteEndElement(); // item
+                            fontNum++;
                         }
                     }
                 }
             }
+        }
+
+        private void ManifestContent(XmlWriter opf, IEnumerable<string> files)
+        {
             var listIdRef = new List<string>();
             int counterSet = 1;
-            string idRefValue;
-            // now add the xhtml files to the manifest
-            string[] files = Directory.GetFiles(contentFolder);
             foreach (string file in files)
             {
                 // iterate through the file set and add <item> elements for each xhtml file
@@ -207,6 +234,7 @@ namespace SIL.PublishingSolution
                     // if we can, write out the "user friendly" book name in the TOC
                     string fileId = _parent.GetBookId(file);
 
+                    string idRefValue;
                     if (listIdRef.Contains(fileId))
                     {
                         listIdRef.Add(fileId + counterSet.ToString(CultureInfo.InvariantCulture));
@@ -269,6 +297,10 @@ namespace SIL.PublishingSolution
                 }
             }
             opf.WriteEndElement(); // manifest
+        }
+
+        private void Spine(XmlWriter opf, IEnumerable<string> files)
+        {
             // spine
             opf.WriteStartElement("spine");
             opf.WriteAttributeString("toc", "ncx");
@@ -281,8 +313,8 @@ namespace SIL.PublishingSolution
                 opf.WriteEndElement(); // itemref
             }
 
-            listIdRef = new List<string>();
-            counterSet = 1;
+            var listIdRef = new List<string>();
+            int counterSet = 1;
             foreach (string file in files)
             {
                 // is this the cover page?
@@ -296,6 +328,7 @@ namespace SIL.PublishingSolution
                 if (fileName.EndsWith(".xhtml"))
                 {
                     string fileId = _parent.GetBookId(file);
+                    string idRefValue;
                     if (listIdRef.Contains(fileId))
                     {
                         var counter = counterSet.ToString(CultureInfo.InvariantCulture);
@@ -318,6 +351,10 @@ namespace SIL.PublishingSolution
                 }
             }
             opf.WriteEndElement(); // spine
+        }
+
+        private static void Guide(PublicationInformation projInfo, XmlWriter opf, string[] files)
+        {
             // guide
             opf.WriteStartElement("guide");
             // cover image
@@ -346,9 +383,6 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("href", Path.GetFileName(files[index]));
             opf.WriteEndElement(); // reference
             opf.WriteEndElement(); // guide
-            opf.WriteEndElement(); // package
-            opf.WriteEndDocument();
-            opf.Close();
         }
         #endregion void CreateOpf(PublicationInformation projInfo, string contentFolder, Guid bookId)
 

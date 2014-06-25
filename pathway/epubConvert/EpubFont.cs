@@ -16,6 +16,7 @@
 #endregion
 
 #region using
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,12 +25,13 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Xml;
+using SIL.PublishingSolution;
 using SIL.Tool;
-using epubConvert;
 using epubConvert.Properties;
+
 #endregion using
 
-namespace SIL.PublishingSolution
+namespace epubConvert
 {
     public class EpubFont
     {
