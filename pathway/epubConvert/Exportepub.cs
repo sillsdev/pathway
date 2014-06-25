@@ -43,7 +43,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Xsl;
-using epubConvert;
 using epubConvert.Properties;
 using epubValidator;
 using SIL.Tool;
@@ -64,8 +63,7 @@ namespace SIL.PublishingSolution
 
     public class Exportepub : IExportProcess
     {
-        private Dictionary<string, EmbeddedFont> _embeddedFonts;  // font information for this export
-        private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
+        private EpubFont _epubFont;
         private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
         private readonly XslCompiledTransform _fixEpubToc = new XslCompiledTransform();
 
@@ -187,7 +185,8 @@ namespace SIL.PublishingSolution
             var outputFolder = SetOutputFolderAndCurrentDirectory(projInfo);
             Common.SetProgressBarValue(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath);
             XhtmlPreprocessing(projInfo, preProcessor);
-            var langArray = InitializeLangArray(projInfo);
+            _epubFont = new EpubFont(this);
+            var langArray = _epubFont.InitializeLangArray(projInfo);
             inProcess.PerformStep();
             #endregion Xhtml preprocessing
 
@@ -422,11 +421,11 @@ namespace SIL.PublishingSolution
         private bool FontProcessing(PublicationInformation projInfo, string[] langArray, string mergedCss, string contentFolder)
         {
             // First, get the list of fonts used in this project
-            BuildFontsList();
+            _epubFont.BuildFontsList();
             // Embed fonts if needed
             if (EmbedFonts)
             {
-                if (!EmbedAllFonts(langArray, contentFolder))
+                if (!_epubFont.EmbedAllFonts(langArray, contentFolder))
                 {
                     return false; // user aborted
                 }
@@ -434,8 +433,7 @@ namespace SIL.PublishingSolution
             // update the CSS file to reference any fonts used by the writing systems
             // (if they aren't embedded in the .epub, we'll still link to them here)
 
-            var rf = new ReferenceFontsClass(this, _embeddedFonts, _langFontDictionary);
-            rf.ReferenceFonts(mergedCss, projInfo);
+            _epubFont.ReferenceFonts(mergedCss, projInfo);
             return true; // successful
         }
 
@@ -697,15 +695,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string[] InitializeLangArray(PublicationInformation projInfo)
-        {
-            _langFontDictionary = new Dictionary<string, string>();
-            _embeddedFonts = new Dictionary<string, EmbeddedFont>();
-            BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
-            var langArray = new string[_langFontDictionary.Keys.Count];
-            _langFontDictionary.Keys.CopyTo(langArray, 0);
-            return langArray;
-        }
 
         private static XslCompiledTransform LoadFixEpubXslt()
         {
@@ -1295,314 +1284,11 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region Font Handling
-        /// <summary>
-        /// Handles font embedding for the .epub file. The fonts are verified before they are copied over, to
-        /// make sure they (1) exist on the system and (2) are SIL produced. For the latter, the user is able
-        /// to embed them anyway if they click that they have the appropriate rights (it's an honor system approach).
-        /// </summary>
-        /// <param name="langArray"></param>
-        /// <param name="contentFolder"></param>
-        /// <returns></returns>
-        private bool EmbedAllFonts(string[] langArray, string contentFolder)
-        {
-            var nonSilFonts = new Dictionary<EmbeddedFont, string>();
-            // Build the list of non-SIL fonts in use
-            foreach (var embeddedFont in _embeddedFonts)
-            {
-                if (!embeddedFont.Value.CanRedistribute)
-                {
-                    foreach (var language in _langFontDictionary.Keys)
-                    {
-                        if (_langFontDictionary[language].Equals(embeddedFont.Key))
-                        {
-                            // add this language to the list of langs that use this font
-                            string langs;
-                            if (nonSilFonts.TryGetValue(embeddedFont.Value, out langs))
-                            {
-                                // existing entry - add this language to the list of langs that use this font
-                                var sbName = new StringBuilder();
-                                sbName.Append(langs);
-                                sbName.Append(", ");
-                                sbName.Append(language);
-                                // set the value
-                                nonSilFonts[embeddedFont.Value] = sbName.ToString();
-                            }
-                            else
-                            {
-                                // new entry
-                                nonSilFonts.Add(embeddedFont.Value, language);
-                            }
-                        }
-                    }
-                }
-            }
-            // If there are any non-SIL fonts in use, show the Font Warning Dialog
-            // (possibly multiple times) and replace our embedded font items if needed
-            // (if we're running a test, skip the dialog and just embed the font)
-            if (nonSilFonts.Count > 0 && !Common.Testing)
-            {
-                var dlg = new FontWarningDlg {RepeatAction = false, RemainingIssues = nonSilFonts.Count - 1};
-                // Handle the cases where the user wants to automatically process non-SIL / missing fonts
-                if (NonSilFont == FontHandling.CancelExport)
-                {
-                    // TODO: implement message box
-                    // Give the user a message indicating there's a non-SIL font in their writing system, and
-                    // to go fix the problem. Don't let them continue with the export.
-                    return false;
-                }
-                if (NonSilFont != FontHandling.PromptUser)
-                {
-                    dlg.RepeatAction = true; // the handling picks up below...
-                    dlg.SelectedFont = DefaultFont;
-                }
-                foreach (var nonSilFont in nonSilFonts)
-                {
-                    dlg.MyEmbeddedFont = nonSilFont.Key.Name;
-                    dlg.Languages = nonSilFont.Value;
-                    bool isMissing = (nonSilFont.Key.Filename == null);
-                    bool isManualProcess = ((isMissing == false && NonSilFont == FontHandling.PromptUser) || (isMissing == true && MissingFont == FontHandling.PromptUser));
-                    if (dlg.RepeatAction)
-                    {
-                        // user wants to repeat the last action - if the last action
-                        // was to change the font, change this one as well
-                        // (this is also where the automatic FontHandling takes place)
-                        if ((!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont) && isManualProcess) || // manual "repeat this action" for non-SIL AND missing fonts
-                            (isMissing == false && NonSilFont == FontHandling.SubstituteDefaultFont && !nonSilFont.Key.Name.Equals(DefaultFont)) || // automatic for non-SIL fonts
-                            (isMissing == true && MissingFont == FontHandling.SubstituteDefaultFont && !nonSilFont.Key.Name.Equals(DefaultFont))) // automatic for missing fonts
-                        {
-                            // the user has chosen a different (SIL) font - 
-                            // create a new EmbeddedFont and add it to the list
-                            _embeddedFonts.Remove(nonSilFont.Key.Name);
-                            var newFont = new EmbeddedFont(dlg.SelectedFont);
-                            _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
-                            // also update the references in _langFontDictionary
-                            foreach (var lang in langArray)
-                            {
-                                if (_langFontDictionary[lang] == nonSilFont.Key.Name)
-                                {
-                                    _langFontDictionary[lang] = dlg.SelectedFont;
-                                }
-                            }
-                        }
-                        // the UseFontAnyway checkbox (and FontHandling.EmbedFont) cases fall through here -
-                        // The current non-SIL font is ignored and embedded below
-                        continue;
-                    }
-                    // sanity check - are there any SIL fonts installed?
-                    int count = dlg.BuildSILFontList();
-                    if (count == 0)
-                    {
-                        // No SIL fonts found (returns a DialogResult.Abort):
-                        // tell the user there are no SIL fonts installed, and allow them to Cancel
-                        // and install the fonts now
-                        if (MessageBox.Show(Resources.NoSILFontsMessage, Resources.NoSILFontsTitle,
-                                             MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
-                            == DialogResult.Cancel)
-                        {
-                            // user cancelled the operation - Cancel out of the whole .epub export
-                            return false;
-                        }
-                        // user clicked OK - leave the embedded font list alone and continue the export
-                        // (presumably the user has the proper rights to this font, even though it isn't
-                        // an SIL font)
-                        break;
-                    }
-                    // show the dialog
-                    DialogResult result = dlg.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
-                        if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
-                        {
-                            // the user has chosen a different (SIL) font - 
-                            // create a new EmbeddedFont and add it to the list
-                            _embeddedFonts.Remove(nonSilFont.Key.Name);
-                            var newFont = new EmbeddedFont(dlg.SelectedFont);
-                            _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
-                            // also update the references in _langFontDictionary
-                            foreach (var lang in langArray)
-                            {
-                                if (_langFontDictionary[lang] == nonSilFont.Key.Name)
-                                {
-                                    _langFontDictionary[lang] = dlg.SelectedFont;
-                                }
-                            }
-                        }
-                    }
-                    else if (result == DialogResult.Cancel)
-                    {
-                        // User cancelled - Cancel out of the whole .epub export
-                        return false;
-                    }
-                    // decrement the remaining issues for the next dialog display
-                    dlg.RemainingIssues--;
-                }
-            }
-            // copy all the fonts over
-            foreach (var embeddedFont in _embeddedFonts.Values)
-            {
-                if (embeddedFont.Filename == null)
-                {
-                    Debug.WriteLine("ERROR: embedded font " + embeddedFont.Name + " is not installed - skipping");
-                    continue;
-                }
-                string dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.Filename));
-                if (embeddedFont.Filename != string.Empty && File.Exists(embeddedFont.Filename))
-                {
-                    File.Copy(embeddedFont.Filename, dest, true);
 
-                    if (IncludeFontVariants)
-                    {
-                        // italic
-                        if (embeddedFont.HasItalic && embeddedFont.ItalicFilename.Trim().Length > 0 &&
-                            embeddedFont.ItalicFilename != embeddedFont.Filename)
-                        {
-                            dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.ItalicFilename));
-                            if (!File.Exists(dest))
-                            {
-                                File.Copy(embeddedFont.ItalicFilename, dest, true);
-                            }
-                        }
-                        // bold
-                        if (embeddedFont.HasBold && embeddedFont.BoldFilename.Trim().Length > 0 &&
-                            embeddedFont.BoldFilename != embeddedFont.Filename)
-                        {
-                            dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.BoldFilename));
-                            if (!File.Exists(dest))
-                            {
-                                File.Copy(embeddedFont.BoldFilename,
-                                          dest, true);
-                            }
-                        }
-                    }
-                }
-            }
-            // clean up
-            if (nonSilFonts.Count > 0)
-            {
-                nonSilFonts.Clear();
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Returns the font families for the languages in _langFontDictionary.
-        /// </summary>
-        private void BuildFontsList()
-        {
-            // modifying the _langFontDictionary dictionary - let's make an array copy for the iteration
-            int numLangs = _langFontDictionary.Keys.Count;
-            var langs = new string[numLangs];
-            _langFontDictionary.Keys.CopyTo(langs, 0);
-            foreach (var language in langs)
-            {
-                string[] langCoun = language.Split('-');
-
-                try
-                {
-                    // When no hyphen use entire value but when there is a hyphen, look for first part
-                    var langTarget = langCoun.Length < 2 ? langCoun[0] : language;
-                    string wsPath = Common.PathCombine(Common.GetLDMLPath(), langTarget + ".ldml");
-                    if (File.Exists(wsPath))
-                    {
-                        var ldml = Common.DeclareXMLDocument(false);
-                        ldml.Load(wsPath);
-                        var nsmgr = new XmlNamespaceManager(ldml.NameTable);
-                        nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
-                        var node = ldml.SelectSingleNode("//palaso:defaultFontFamily/@value", nsmgr);
-                        if (node != null)
-                        {
-                            // build the font information and return
-                            _langFontDictionary[language] = node.Value; // set the font used by this language
-                            _embeddedFonts[node.Value] = new EmbeddedFont(node.Value);
-                        }
-                    }
-                    else if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext
-                    {
-                        var settingsHelper = new SettingsHelper(Param.DatabaseName);
-                        string fileName = settingsHelper.GetSettingsFilename();
-                        const string xPath = "//ScriptureText/DefaultFont";
-                        XmlNode xmlFont = Common.GetXmlNode(fileName, xPath);
-                        if (xmlFont != null)
-                        {
-                            // get the text direction specified by the .ssf file
-                            _langFontDictionary[language] = xmlFont.InnerText; // set the font used by this language
-                            _embeddedFonts[xmlFont.InnerText] = new EmbeddedFont(xmlFont.InnerText);
-                        }
-                    }
-                    else
-                    {
-                        // Paratext case (no .ldml file) - fall back on Charis
-                        _langFontDictionary[language] = "Charis SIL"; // set the font used by this language
-                        _embeddedFonts["Charis SIL"] = new EmbeddedFont("Charis SIL");
-
-                    }
-                }
-                catch
-                {
-                }
-            }
-        }
 
         #endregion
 
         #region Language Handling
-        /// <summary>
-        /// Parses the specified file and sets the internal languages list to all the languages found in the file.
-        /// </summary>
-        /// <param name="xhtmlFileName">File name to parse</param>
-        private void BuildLanguagesList(string xhtmlFileName)
-        {
-            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
-            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
-            var xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            // should only be one of these after splitting out the chapters.
-            XmlNodeList nodes = xmlDocument.SelectNodes("//@lang", namespaceManager);
-            if (nodes != null && nodes.Count > 0)
-            {
-                foreach (XmlNode node in nodes)
-                {
-                    string value;
-                    if (_langFontDictionary.TryGetValue(node.Value, out value))
-                    {
-                        // already have this item in our list - continue
-                        continue;
-                    }
-                    if (node.Value.ToLower() == "utf-8")
-                    {
-                        // TE-9078 "utf-8" showing up as language in html tag - remove when fixed
-                        continue;
-                    }
-                    // add an entry for this language in the list (the * gets overwritten in BuildFontsList())
-                    _langFontDictionary.Add(node.Value, "*");
-                }
-            }
-            // now go check to see if we're working on scripture or dictionary data
-            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
-
-            if (nodes == null || nodes.Count == 0)
-            {
-                nodes = xmlDocument.SelectNodes("//span[@class='headword']", namespaceManager);
-            }
-            if (nodes != null && nodes.Count == 0)
-            {
-                // not in this file - this might be scripture?
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                if (nodes == null || nodes.Count == 0)
-                {
-                    nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
-                }
-                if (nodes != null && nodes.Count > 0)
-                    InputType = "scripture";
-            }
-            else
-            {
-                InputType = "dictionary";
-            }
-        }
 
         #endregion
 
@@ -2632,12 +2318,12 @@ namespace SIL.PublishingSolution
             if (Source.Length > 0)
                 opf.WriteElementString("dc", "source", null, Source);
 
-            if (_langFontDictionary.Count == 0)
+            if (_epubFont.LanguageCount == 0)
             {
                 opf.WriteElementString("dc", "language", null, "en");
             }
 
-            foreach (var lang in _langFontDictionary.Keys)
+            foreach (var lang in _epubFont.LanguageCodes())
             {
                 opf.WriteElementString("dc", "language", null, lang);
             }
@@ -2672,7 +2358,7 @@ namespace SIL.PublishingSolution
             if (EmbedFonts)
             {
                 int fontNum = 1;
-                foreach (var embeddedFont in _embeddedFonts.Values)
+                foreach (var embeddedFont in _epubFont.EmbeddedFonts())
                 {
                     if (embeddedFont.Filename == null)
                     {
