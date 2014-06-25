@@ -1261,6 +1261,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:line-number", "0");
             _writer.WriteEndElement();
             _writer.WriteStartElement("style:text-properties");
+            _writer.WriteAttributeString("style:font-name", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
             _writer.WriteEndElement();

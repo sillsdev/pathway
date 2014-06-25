@@ -207,7 +207,7 @@
     </style:style>
     <style:style style:name="Index" style:family="paragraph" style:parent-style-name="Standard" style:class="index">
       <style:paragraph-properties text:number-lines="false" text:line-number="0" />
-      <style:text-properties style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" />
+      <style:text-properties style:font-name="Times New Roman" style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" />
     </style:style>
     <style:style style:name="Frame_20_contents" style:display-name="Frame contents" style:family="paragraph" style:parent-style-name="headerFontStyleName" style:class="extra">
       <style:paragraph-properties fo:text-align="center" style:justify-single-word="false" />
