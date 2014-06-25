@@ -4589,7 +4589,7 @@ namespace SIL.PublishingSolution
             {
                 if (cTool.TxtFtpAddress.Text.Trim() != string.Empty)
                 {
-                    bool result = Regex.IsMatch(cTool.TxtFtpAddress.Text, @"^(ftp)://?");
+                    bool result = Regex.IsMatch(cTool.TxtFtpAddress.Text, @"(((ftp|ftps|sftp)://)|(www\.))+(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(/[a-zA-Z0-9\&amp;%_\./-~-]*)?");
                     if (!result)
                     {
                         _errProvider = Common._errProvider;
@@ -4864,7 +4864,7 @@ namespace SIL.PublishingSolution
             bool result = true;
             if (cTool.TxtFtpAddress.Text.Trim() != string.Empty)
             {
-                result = Regex.IsMatch(cTool.TxtFtpAddress.Text, @"^(ftp)://?");
+                result = Regex.IsMatch(cTool.TxtFtpAddress.Text, @"(((ftp|ftps|sftp)://)|(www\.))+(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(/[a-zA-Z0-9\&amp;%_\./-~-]*)?");
                 if (!result)
                 {
                     cTool.TxtFtpAddress.Focus();
