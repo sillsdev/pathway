@@ -23,3 +23,15 @@ content: attr(title);
 content: attr(title);
 }
 .scrBookName { display: block; font-size: 0pt; string-set: bookname content();}
+.pictureRight {
+padding: 5pt;
+}
+.pictureLeft {
+padding: 5pt;
+}
+.pictureCenter {
+padding: 5pt;
+}
+.picturePage {
+padding: 5pt;
+}

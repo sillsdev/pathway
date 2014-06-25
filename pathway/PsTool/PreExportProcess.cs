@@ -2726,6 +2726,23 @@ namespace SIL.Tool
 
             tw.WriteLine(".scrBookName { display: block; font-size: 0pt; string-set: bookname content();}");
 
+            //Picture Property
+            tw.WriteLine(".pictureRight {");
+            tw.WriteLine("padding: 5pt;");
+            tw.WriteLine("}");
+
+            tw.WriteLine(".pictureLeft {");
+            tw.WriteLine("padding: 5pt;");
+            tw.WriteLine("}");
+
+            tw.WriteLine(".pictureCenter {");
+            tw.WriteLine("padding: 5pt;");
+            tw.WriteLine("}");
+
+            tw.WriteLine(".picturePage {");
+            tw.WriteLine("padding: 5pt;");
+            tw.WriteLine("}");
+
             tw.Close();
         }
 
