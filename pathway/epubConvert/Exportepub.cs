@@ -64,6 +64,7 @@ namespace SIL.PublishingSolution
     public class Exportepub : IExportProcess
     {
         private EpubFont _epubFont;
+        private EpubManifest _epubManifest;
         private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
         private readonly XslCompiledTransform _fixEpubToc = new XslCompiledTransform();
 
@@ -80,14 +81,6 @@ namespace SIL.PublishingSolution
 
 
         // property implementations
-        public string Title { get; set; }
-        public string Creator { get; set; }
-        public string Description { get; set; }
-        public string Publisher { get; set; }
-        public string Coverage { get; set; }
-        public string Rights { get; set; }
-        public string Format { get; set; }
-        public string Source { get; set; }
         public bool EmbedFonts { get; set; }
         public bool IncludeFontVariants { get; set; }
         public string TocLevel { get; set; }
@@ -175,7 +168,10 @@ namespace SIL.PublishingSolution
 
             _isNoteTargetReferenceExists = Common.NodeExists(projInfo.DefaultXhtmlFileWithPath, "");
 
-            LoadPropertiesFromSettings();
+            _epubFont = new EpubFont(this);
+            _epubManifest = new EpubManifest(this, _epubFont);
+            _epubManifest.LoadPropertiesFromSettings();
+            LoadOtherFeatures();
             inProcess.PerformStep();
             #endregion Setup
 
@@ -185,7 +181,6 @@ namespace SIL.PublishingSolution
             var outputFolder = SetOutputFolderAndCurrentDirectory(projInfo);
             Common.SetProgressBarValue(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath);
             XhtmlPreprocessing(projInfo, preProcessor);
-            _epubFont = new EpubFont(this);
             var langArray = _epubFont.InitializeLangArray(projInfo);
             inProcess.PerformStep();
             #endregion Xhtml preprocessing
@@ -302,7 +297,7 @@ namespace SIL.PublishingSolution
 
             #region Manifest and Table of Contents
             inProcess.SetStatus("Generating .epub TOC and manifest");
-            CreateOpf(projInfo, contentFolder, bookId);
+            _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
             CreateNcx(projInfo, contentFolder, bookId);
             inProcess.PerformStep();
             #endregion Manifest and Table of Contents
@@ -349,6 +344,127 @@ namespace SIL.PublishingSolution
             #endregion Close Reporting
 
             return success;
+        }
+
+        private static Cursor UseWaitCursor()
+        {
+            var myCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            return myCursor;
+        }
+
+        private static InProcess SetupProgressReporting(int steps)
+        {
+            var inProcess = new InProcess(0, steps) { Text = Resources.Exportepub_Export_Exporting__epub_file }; // create a progress bar with 7 steps (we'll add more below)
+            inProcess.Show();
+            inProcess.ShowStatus = true;
+            return inProcess;
+        }
+
+        private void LoadOtherFeatures()
+        {
+            string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+            Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
+            EmbedFonts = !othersfeature.ContainsKey("EmbedFonts") || (othersfeature["EmbedFonts"].Trim().Equals("Yes"));
+            IncludeFontVariants = !othersfeature.ContainsKey("IncludeFontVariants") || (othersfeature["IncludeFontVariants"].Trim().Equals("Yes"));
+            if (othersfeature.ContainsKey("MaxImageWidth"))
+            {
+                try
+                {
+                    MaxImageWidth = int.Parse(othersfeature["MaxImageWidth"].Trim());
+                }
+                catch (Exception)
+                {
+                    MaxImageWidth = 600;
+                }
+            }
+            else
+            {
+                MaxImageWidth = 600;
+            }
+            TocLevel = othersfeature.ContainsKey("TOCLevel") ? othersfeature["TOCLevel"].Trim() : "";
+            DefaultFont = othersfeature.ContainsKey("DefaultFont") ? othersfeature["DefaultFont"].Trim() : "Charis SIL";
+            DefaultAlignment = othersfeature.ContainsKey("DefaultAlignment") ? othersfeature["DefaultAlignment"].Trim() : "Justified";
+            ChapterNumbers = othersfeature.ContainsKey("ChapterNumbers") ? othersfeature["ChapterNumbers"].Trim() : "Drop Cap";
+            References = othersfeature.ContainsKey("References") ? othersfeature["References"].Trim() : "After Each Section";
+
+            // base font size
+            if (othersfeature.ContainsKey("BaseFontSize"))
+            {
+                try
+                {
+                    BaseFontSize = int.Parse(othersfeature["BaseFontSize"].Trim());
+                }
+                catch (Exception)
+                {
+                    BaseFontSize = 13;
+                }
+            }
+            else
+            {
+                BaseFontSize = 13;
+            }
+            // default line height
+            if (othersfeature.ContainsKey("DefaultLineHeight"))
+            {
+                try
+                {
+                    DefaultLineHeight = int.Parse(othersfeature["DefaultLineHeight"].Trim());
+                }
+                catch (Exception)
+                {
+                    DefaultLineHeight = 125;
+                }
+            }
+            else
+            {
+                DefaultLineHeight = 125;
+            }
+            // Missing Font
+            // Note that the Embed Font enum value doesn't apply here (if it were to appear, we'd fall to the Default
+            // "Prompt user" case
+            if (othersfeature.ContainsKey("MissingFont"))
+            {
+                switch (othersfeature["MissingFont"].Trim())
+                {
+                    case "Use Fallback Font":
+                        MissingFont = FontHandling.SubstituteDefaultFont;
+                        break;
+                    case "Cancel Export":
+                        MissingFont = FontHandling.CancelExport;
+                        break;
+                    default: // "Prompt User" case goes here
+                        MissingFont = FontHandling.PromptUser;
+                        break;
+                }
+            }
+            else
+            {
+                MissingFont = FontHandling.PromptUser;
+            }
+            // Non SIL Font
+            if (othersfeature.ContainsKey("NonSILFont"))
+            {
+                switch (othersfeature["NonSILFont"].Trim())
+                {
+                    case "Embed Font Anyway":
+                        NonSilFont = FontHandling.EmbedFont;
+                        break;
+                    case "Use Fallback Font":
+                        NonSilFont = FontHandling.SubstituteDefaultFont;
+                        break;
+                    case "Cancel Export":
+                        NonSilFont = FontHandling.CancelExport;
+                        break;
+                    default: // "Prompt User" case goes here
+                        NonSilFont = FontHandling.PromptUser;
+                        break;
+                }
+            }
+            else
+            {
+                NonSilFont = FontHandling.PromptUser;
+            }
         }
 
         private void ValidateAndDisplayResult(string outputFolder, string fileName, string outputPathWithFileName)
@@ -398,8 +514,8 @@ namespace SIL.PublishingSolution
 
         private string CreateFileNameFromTitle(PublicationInformation projInfo)
         {
-            string fileName = Title;
-            if (string.IsNullOrEmpty(Title))
+            string fileName = _epubManifest.Title;
+            if (string.IsNullOrEmpty(_epubManifest.Title))
             {
                 fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             }
@@ -499,21 +615,6 @@ namespace SIL.PublishingSolution
                     htmlFiles.Add(xhtmlOutputFile);
                 }
             }
-        }
-
-        private static Cursor UseWaitCursor()
-        {
-            var myCursor = Cursor.Current;
-            Cursor.Current = Cursors.WaitCursor;
-            return myCursor;
-        }
-
-        private static InProcess SetupProgressReporting(int steps)
-        {
-            var inProcess = new InProcess(0, steps) { Text = Resources.Exportepub_Export_Exporting__epub_file }; // create a progress bar with 7 steps (we'll add more below)
-            inProcess.Show();
-            inProcess.ShowStatus = true;
-            return inProcess;
         }
 
         private void SplittingFrontMatter(PublicationInformation projInfo, PreExportProcess preProcessor, string defaultCss, List<string> splitFiles)
@@ -694,7 +795,6 @@ namespace SIL.PublishingSolution
                 preProcessor.SwapHeadWordAndReversalForm();
             }
         }
-
 
         private static XslCompiledTransform LoadFixEpubXslt()
         {
@@ -985,148 +1085,6 @@ namespace SIL.PublishingSolution
         }
         #endregion
 
-        #region Property persistence
-        /// <summary>
-        /// Loads the settings file and pulls out the values we look at.
-        /// </summary>
-        private void LoadPropertiesFromSettings()
-        {
-            // Load User Interface Collection Parameters
-            Param.LoadSettings();
-            string organization;
-            try
-            {
-                // get the organization
-                organization = Param.Value["Organization"];
-            }
-            catch (Exception)
-            {
-                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
-                // but just in case, specify a default org.
-                organization = "SIL International";
-            }
-            string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
-            Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
-            // Title (book title in Configuration Tool UI / dc:title in metadata)
-            Title = Param.GetMetadataValue(Param.Title, organization) ?? ""; // empty string if null / not found
-            // Creator (dc:creator))
-            Creator = Param.GetMetadataValue(Param.Creator, organization) ?? ""; // empty string if null / not found
-            // information
-            Description = Param.GetMetadataValue(Param.Description, organization) ?? ""; // empty string if null / not found
-            // Source
-            Source = Param.GetMetadataValue(Param.Source, organization) ?? ""; // empty string if null / not found
-            // Format
-            Format = Param.GetMetadataValue(Param.Format, organization) ?? ""; // empty string if null / not found
-            // Publisher
-            Publisher = Param.GetMetadataValue(Param.Publisher, organization) ?? ""; // empty string if null / not found
-            // Coverage
-            Coverage = Param.GetMetadataValue(Param.Coverage, organization) ?? ""; // empty string if null / not found
-            // Rights (dc:rights)
-            Rights = Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
-            Rights = Common.UpdateCopyrightYear(Rights);
-            EmbedFonts = !othersfeature.ContainsKey("EmbedFonts") || (othersfeature["EmbedFonts"].Trim().Equals("Yes"));
-            IncludeFontVariants = !othersfeature.ContainsKey("IncludeFontVariants") || (othersfeature["IncludeFontVariants"].Trim().Equals("Yes"));
-            if (othersfeature.ContainsKey("MaxImageWidth"))
-            {
-                try
-                {
-                    MaxImageWidth = int.Parse(othersfeature["MaxImageWidth"].Trim());
-                }
-                catch (Exception)
-                {
-                    MaxImageWidth = 600;
-                }
-            }
-            else
-            {
-                MaxImageWidth = 600;
-            }
-            TocLevel = othersfeature.ContainsKey("TOCLevel") ? othersfeature["TOCLevel"].Trim() : "";
-            DefaultFont = othersfeature.ContainsKey("DefaultFont") ? othersfeature["DefaultFont"].Trim() : "Charis SIL";
-            DefaultAlignment = othersfeature.ContainsKey("DefaultAlignment") ? othersfeature["DefaultAlignment"].Trim() : "Justified";
-            ChapterNumbers = othersfeature.ContainsKey("ChapterNumbers") ? othersfeature["ChapterNumbers"].Trim() : "Drop Cap";
-            References = othersfeature.ContainsKey("References") ? othersfeature["References"].Trim() : "After Each Section";
-
-            // base font size
-            if (othersfeature.ContainsKey("BaseFontSize"))
-            {
-                try
-                {
-                    BaseFontSize = int.Parse(othersfeature["BaseFontSize"].Trim());
-                }
-                catch (Exception)
-                {
-                    BaseFontSize = 13;
-                }
-            }
-            else
-            {
-                BaseFontSize = 13;
-            }
-            // default line height
-            if (othersfeature.ContainsKey("DefaultLineHeight"))
-            {
-                try
-                {
-                    DefaultLineHeight = int.Parse(othersfeature["DefaultLineHeight"].Trim());
-                }
-                catch (Exception)
-                {
-                    DefaultLineHeight = 125;
-                }
-            }
-            else
-            {
-                DefaultLineHeight = 125;
-            }
-            // Missing Font
-            // Note that the Embed Font enum value doesn't apply here (if it were to appear, we'd fall to the Default
-            // "Prompt user" case
-            if (othersfeature.ContainsKey("MissingFont"))
-            {
-                switch (othersfeature["MissingFont"].Trim())
-                {
-                    case "Use Fallback Font":
-                        MissingFont = FontHandling.SubstituteDefaultFont;
-                        break;
-                    case "Cancel Export":
-                        MissingFont = FontHandling.CancelExport;
-                        break;
-                    default: // "Prompt User" case goes here
-                        MissingFont = FontHandling.PromptUser;
-                        break;
-                }
-            }
-            else
-            {
-                MissingFont = FontHandling.PromptUser;
-            }
-            // Non SIL Font
-            if (othersfeature.ContainsKey("NonSILFont"))
-            {
-                switch (othersfeature["NonSILFont"].Trim())
-                {
-                    case "Embed Font Anyway":
-                        NonSilFont = FontHandling.EmbedFont;
-                        break;
-                    case "Use Fallback Font":
-                        NonSilFont = FontHandling.SubstituteDefaultFont;
-                        break;
-                    case "Cancel Export":
-                        NonSilFont = FontHandling.CancelExport;
-                        break;
-                    default: // "Prompt User" case goes here
-                        NonSilFont = FontHandling.PromptUser;
-                        break;
-                }
-            }
-            else
-            {
-                NonSilFont = FontHandling.PromptUser;
-            }
-        }
-        #endregion
-
         #region xslt processing
         /// <summary>
         /// Helper method that copies the epub xslt file into the temp directory, optionally inserts some
@@ -1283,15 +1241,6 @@ namespace SIL.PublishingSolution
         }
         #endregion
 
-        #region Font Handling
-
-
-        #endregion
-
-        #region Language Handling
-
-        #endregion
-
         #region Book ID and Name
         /// <summary>
         /// Returns a book ID to be used in the .opf file. This is similar to the GetBookName call, but here
@@ -1299,7 +1248,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="xhtmlFileName"></param>
         /// <returns></returns>
-        private string GetBookId(string xhtmlFileName)
+        public string GetBookId(string xhtmlFileName)
         {
             try
             {
@@ -2273,310 +2222,6 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region EPUB metadata handlers
-
-        /// <summary>
-        /// Generates the manifest and metadata information file used by the .epub reader
-        /// (content.opf). For more information, refer to <see cref="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm#Section2.0"/> 
-        /// </summary>
-        /// <param name="projInfo">Project information</param>
-        /// <param name="contentFolder">Content folder (.../OEBPS)</param>
-        /// <param name="bookId">Unique identifier for the book we're generating.</param>
-        private void CreateOpf(PublicationInformation projInfo, string contentFolder, Guid bookId)
-        {
-            XmlWriter opf = XmlWriter.Create(Common.PathCombine(contentFolder, "content.opf"));
-            opf.WriteStartDocument();
-            // package name
-            opf.WriteStartElement("package", "http://www.idpf.org/2007/opf");
-            opf.WriteAttributeString("version", "2.0");
-            opf.WriteAttributeString("unique-identifier", "BookId");
-            // metadata - items defined by the Dublin Core Metadata Initiative:
-            // (http://dublincore.org/documents/2004/12/20/dces/)
-            opf.WriteStartElement("metadata");
-            opf.WriteAttributeString("xmlns", "dc", null, "http://purl.org/dc/elements/1.1/");
-            opf.WriteAttributeString("xmlns", "opf", null, "http://www.idpf.org/2007/opf");
-            opf.WriteElementString("dc", "title", null,
-                                   (Title == "") ? (Common.databaseName + " " + projInfo.ProjectName) : Title);
-            opf.WriteStartElement("dc", "creator", null); //<dc:creator opf:role="aut">[author]</dc:creator>
-            opf.WriteAttributeString("opf", "role", null, "aut");
-            opf.WriteValue((Creator == "") ? Environment.UserName : Creator);
-            opf.WriteEndElement();
-            opf.WriteElementString("dc", "subject", null, InputType == "dictionary" ? "Reference" : "Religion & Spirituality");
-            if (Description.Length > 0)
-                opf.WriteElementString("dc", "description", null, Description);
-            if (Publisher.Length > 0)
-                opf.WriteElementString("dc", "publisher", null, Publisher);
-            opf.WriteStartElement("dc", "contributor", null); // authoring program as a "contributor", e.g.:
-            opf.WriteAttributeString("opf", "role", null, "bkp");
-            // <dc:contributor opf:role="bkp">FieldWorks 7</dc:contributor>
-            opf.WriteValue(Common.GetProductName());
-            opf.WriteEndElement();
-            opf.WriteElementString("dc", "date", null, DateTime.Today.ToString("yyyy-MM-dd"));
-            // .epub standard date format (http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.2.7)
-            opf.WriteElementString("dc", "type", null, "Text"); // 
-            if (Format.Length > 0)
-                opf.WriteElementString("dc", "format", null, Format);
-            if (Source.Length > 0)
-                opf.WriteElementString("dc", "source", null, Source);
-
-            if (_epubFont.LanguageCount == 0)
-            {
-                opf.WriteElementString("dc", "language", null, "en");
-            }
-
-            foreach (var lang in _epubFont.LanguageCodes())
-            {
-                opf.WriteElementString("dc", "language", null, lang);
-            }
-
-
-            if (Coverage.Length > 0)
-                opf.WriteElementString("dc", "coverage", null, Coverage);
-            if (Rights.Length > 0)
-                opf.WriteElementString("dc", "rights", null, Rights);
-            opf.WriteStartElement("dc", "identifier", null); // <dc:identifier id="BookId">[guid]</dc:identifier>
-            opf.WriteAttributeString("id", "BookId");
-            opf.WriteValue(bookId.ToString());
-            opf.WriteEndElement();
-            // cover image (optional)
-            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
-            {
-                opf.WriteStartElement("meta");
-                opf.WriteAttributeString("name", "cover");
-                opf.WriteAttributeString("content", "cover-image");
-                opf.WriteEndElement(); // meta
-            }
-            opf.WriteEndElement(); // metadata
-            // manifest
-            opf.WriteStartElement("manifest");
-            // (individual "item" elements in the manifest)
-            opf.WriteStartElement("item");
-            opf.WriteAttributeString("id", "ncx");
-            opf.WriteAttributeString("href", "toc.ncx");
-            opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
-            opf.WriteEndElement(); // item
-
-            if (EmbedFonts)
-            {
-                int fontNum = 1;
-                foreach (var embeddedFont in _epubFont.EmbeddedFonts())
-                {
-                    if (embeddedFont.Filename == null)
-                    {
-                        // already written out that this font doesn't exist in the CSS file; just skip it here
-                        continue;
-                    }
-                    opf.WriteStartElement("item"); // item (charis embedded font)
-                    opf.WriteAttributeString("id", "epub.embedded.font" + fontNum);
-                    opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.Filename));
-                    opf.WriteAttributeString("media-type", "font/opentype/");
-                    opf.WriteEndElement(); // item
-                    fontNum++;
-                    if (IncludeFontVariants)
-                    {
-                        // italic
-                        if (embeddedFont.HasItalic && String.Compare(embeddedFont.Filename, embeddedFont.ItalicFilename, StringComparison.Ordinal) != 0)
-                        {
-                            if (embeddedFont.ItalicFilename != string.Empty)
-                            {
-                                opf.WriteStartElement("item"); // item (charis embedded font)
-                                opf.WriteAttributeString("id", "epub.embedded.font_i_" + fontNum);
-
-                                opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.ItalicFilename));
-
-                                opf.WriteAttributeString("media-type", "font/opentype/");
-                                opf.WriteEndElement(); // item
-                                fontNum++;
-                            }
-                        }
-                        // bold
-                        if (embeddedFont.HasBold && String.Compare(embeddedFont.Filename, embeddedFont.BoldFilename, StringComparison.Ordinal) != 0)
-                        {
-                            if (embeddedFont.BoldFilename != string.Empty)
-                            {
-                                opf.WriteStartElement("item"); // item (charis embedded font)
-                                opf.WriteAttributeString("id", "epub.embedded.font_b_" + fontNum);
-                                opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.BoldFilename));
-                                opf.WriteAttributeString("media-type", "font/opentype/");
-                                opf.WriteEndElement(); // item
-                                fontNum++;
-                            }
-                        }
-                    }
-                }
-            }
-            var listIdRef = new List<string>();
-            int counterSet = 1;
-            string idRefValue;
-            // now add the xhtml files to the manifest
-            string[] files = Directory.GetFiles(contentFolder);
-            foreach (string file in files)
-            {
-                // iterate through the file set and add <item> elements for each xhtml file
-                string name = Path.GetFileName(file);
-                Debug.Assert(name != null);
-                string nameNoExt = Path.GetFileNameWithoutExtension(file);
-
-                if (name.EndsWith(".xhtml"))
-                {
-                    // is this the cover page?
-                    if (name.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
-                    {
-                        // yup - write it out and go to the next item
-                        opf.WriteStartElement("item");
-                        opf.WriteAttributeString("id", "cover");
-                        opf.WriteAttributeString("href", name);
-                        opf.WriteAttributeString("media-type", "application/xhtml+xml");
-                        opf.WriteEndElement(); // item
-                        continue;
-                    }
-
-                    // if we can, write out the "user friendly" book name in the TOC
-                    string fileId = GetBookId(file);
-
-                    if (listIdRef.Contains(fileId))
-                    {
-                        listIdRef.Add(fileId + counterSet.ToString(CultureInfo.InvariantCulture));
-                        idRefValue = fileId + counterSet.ToString(CultureInfo.InvariantCulture);
-                        counterSet++;
-                    }
-                    else
-                    {
-                        listIdRef.Add(fileId);
-                        idRefValue = fileId;
-                    }
-
-                    opf.WriteStartElement("item");
-                    // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
-                    var itemId = InputType == "dictionary" ? nameNoExt : idRefValue;
-                    opf.WriteAttributeString("id", itemId);
-                    opf.WriteAttributeString("href", name);
-                    opf.WriteAttributeString("media-type", "application/xhtml+xml");
-                    opf.WriteEndElement(); // item
-                }
-                else if (name.EndsWith(".css"))
-                {
-                    opf.WriteStartElement("item"); // item (stylesheet)
-                    opf.WriteAttributeString("id", "stylesheet");
-                    opf.WriteAttributeString("href", name);
-                    opf.WriteAttributeString("media-type", "text/css");
-                    opf.WriteEndElement(); // item
-                }
-                else if (name.ToLower().EndsWith(".jpg") || name.ToLower().EndsWith(".jpeg"))
-                {
-                    opf.WriteStartElement("item"); // item (image)
-                    opf.WriteAttributeString("id", "image" + nameNoExt);
-                    opf.WriteAttributeString("href", name);
-                    if (nameNoExt != null && nameNoExt.Contains("sil-bw-logo"))
-                    {
-                        opf.WriteAttributeString("media-type", "image/png");    
-                    }
-                    else
-                    {
-                        opf.WriteAttributeString("media-type", "image/jpeg");    
-                    }
-                    
-                    opf.WriteEndElement(); // item
-                }
-                else if (name.ToLower().EndsWith(".gif"))
-                {
-                    opf.WriteStartElement("item"); // item (image)
-                    opf.WriteAttributeString("id", "image" + nameNoExt);
-                    opf.WriteAttributeString("href", name);
-                    opf.WriteAttributeString("media-type", "image/gif");
-                    opf.WriteEndElement(); // item
-                }
-                else if (name.ToLower().EndsWith(".png"))
-                {
-                    opf.WriteStartElement("item"); // item (image)
-                    opf.WriteAttributeString("id", "image" + nameNoExt);
-                    opf.WriteAttributeString("href", name);
-                    opf.WriteAttributeString("media-type", "image/png");
-                    opf.WriteEndElement(); // item
-                }
-            }
-            opf.WriteEndElement(); // manifest
-            // spine
-            opf.WriteStartElement("spine");
-            opf.WriteAttributeString("toc", "ncx");
-            // a couple items for the cover image
-            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
-            {
-                opf.WriteStartElement("itemref");
-                opf.WriteAttributeString("idref", "cover");
-                opf.WriteAttributeString("linear", "yes");
-                opf.WriteEndElement(); // itemref
-            }
-
-            listIdRef = new List<string>();
-            counterSet = 1;
-            foreach (string file in files)
-            {
-                // is this the cover page?
-                var fileName = Path.GetFileName(file);
-                Debug.Assert(fileName != null);
-                if (fileName.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
-                {
-                    continue;
-                }
-                // add an <itemref> for each xhtml file in the set
-                if (fileName.EndsWith(".xhtml"))
-                {
-                    string fileId = GetBookId(file);
-                    if (listIdRef.Contains(fileId))
-                    {
-                        var counter = counterSet.ToString(CultureInfo.InvariantCulture);
-                        listIdRef.Add(fileId + counter);
-                        idRefValue = fileId + counter;
-                        counterSet++;
-                    }
-                    else
-                    {
-                        listIdRef.Add(fileId);
-                        idRefValue = fileId;
-                    }
-
-
-                    opf.WriteStartElement("itemref"); // item (stylesheet)
-                    // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
-                    var idRef = InputType == "dictionary" ? Path.GetFileNameWithoutExtension(file) : idRefValue;
-                    opf.WriteAttributeString("idref", idRef);
-                    opf.WriteEndElement(); // itemref
-                }
-            }
-            opf.WriteEndElement(); // spine
-            // guide
-            opf.WriteStartElement("guide");
-            // cover image
-            if (Param.GetMetadataValue(Param.CoverPage).Trim().Equals("True"))
-            {
-                opf.WriteStartElement("reference");
-                opf.WriteAttributeString("href", "File0Cvr00000_.xhtml");
-                opf.WriteAttributeString("type", "cover");
-                opf.WriteAttributeString("title", "Cover");
-                opf.WriteEndElement(); // reference
-            }
-            // first xhtml filename
-            opf.WriteStartElement("reference");
-            opf.WriteAttributeString("type", "text");
-            opf.WriteAttributeString("title", Common.databaseName + " " + projInfo.ProjectName);
-            int index = 0;
-            while (index < files.Length)
-            {
-                if (files[index].EndsWith(".xhtml"))
-                {
-                    break;
-                }
-                index++;
-            }
-            if (index == files.Length) index--; // edge case
-            opf.WriteAttributeString("href", Path.GetFileName(files[index]));
-            opf.WriteEndElement(); // reference
-            opf.WriteEndElement(); // guide
-            opf.WriteEndElement(); // package
-            opf.WriteEndDocument();
-            opf.Close();
-        }
-
         /// <summary>
         /// Creates the table of contents file used by .epub readers (toc.ncx).
         /// </summary>
@@ -2797,6 +2442,7 @@ namespace SIL.PublishingSolution
                 Common.AddingDTDForLinuxProcess(file);
             }
         }
+
         private void FixPlayOrder(string tocFullPath)
         {
             // Renumber all PlayOrder attributes in order with no gaps.
@@ -3057,7 +2703,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-
         private void WriteEndNoteLinks(string xhtmlFileName, ref int playOrder, XmlWriter ncx)
         {
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
@@ -3170,7 +2815,6 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-
 
         protected void InsertChapterLinkBelowBookName(string contentFolder)
         {
@@ -3342,8 +2986,6 @@ namespace SIL.PublishingSolution
 
             return PageBreak;
         }
-
-
         #endregion
 
         #endregion
