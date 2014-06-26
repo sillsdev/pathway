@@ -189,7 +189,7 @@ namespace SIL.PublishingSolution
                         _fontName = selectFontName.Value;
                         break;
                     }
-                }                
+                }
             }
             else
             {
@@ -571,6 +571,10 @@ namespace SIL.PublishingSolution
                     fontName = propertyValue;
                     break;
                 }
+                if (_isLinux)
+                {
+                    fontName = propertyValue;
+                }
             }
 
             _fontName = fontName;
@@ -612,7 +616,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            string color = ":color=" + propertyValue.Replace("#", ""); 
+            string color = ":color=" + propertyValue.Replace("#", "");
             _fontStyle.Add(color);
         }
         public void BGColor(string propertyValue)

@@ -1067,7 +1067,9 @@ namespace SIL.PublishingSolution
         /// </summary>
         protected void ShowInfoValue()
         {
-            if (!(_screenMode == ScreenMode.View || _screenMode == ScreenMode.Edit)) return;
+            if (!(_screenMode == ScreenMode.View || _screenMode == ScreenMode.Edit))
+                return;
+
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: ShowInfoValue");
             if (cTool.StylesGrid.RowCount > 0)
             {
@@ -1744,6 +1746,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                _screenMode = ScreenMode.View;
                 WriteMedia();
                 setLastSelectedLayout();
                 LoadParam();
@@ -2846,6 +2849,7 @@ namespace SIL.PublishingSolution
                     grid.ClearSelection();
                     grid.Rows[0].Selected = true;
                     SelectedRowIndex = 0;
+                    //_screenMode = ScreenMode.View;
                     ShowInfoValue();
                 }
             }
