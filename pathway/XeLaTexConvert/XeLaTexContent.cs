@@ -72,6 +72,7 @@ namespace SIL.PublishingSolution
         private string _directionStart = string.Empty;
         private bool _removeSpaceAfterVerse;
         private bool _isVerseNo;
+        private bool _isUnix;
 
         protected Stack<string> BraceClass = new Stack<string>();
         protected Stack<string> BraceInlineClass = new Stack<string>();
@@ -101,6 +102,12 @@ namespace SIL.PublishingSolution
         {
             get { return _tocPageStock; }
             set { _tocPageStock = value; }
+        }
+
+        public bool IsUnix
+        {
+            get { return _isUnix; }
+            set { _isUnix = value; }
         }
 
         #endregion
@@ -573,9 +580,6 @@ namespace SIL.PublishingSolution
         private void WriteCharacterStyle(string content, string characterStyle)
         {
             SetHomographNumber(false);
-
-
-
             string footerClassName = string.Empty;
             if (_isDropCaps)
             {
@@ -670,7 +674,11 @@ namespace SIL.PublishingSolution
                 string classNameWOLang = _classNameWithLang;
                 if (classNameWOLang.IndexOf("_.") > 0)
                     classNameWOLang = Common.RightString(classNameWOLang, ".");
-                string letterletHeadStyle = "letter";
+                string letterletHeadStyle = string.Empty;
+                if (IsUnix)
+                {
+                    letterletHeadStyle = "letter";
+                }
                 if (classNameWOLang != null || classNameWOLang != string.Empty)
                 {
                     letterletHeadStyle = letterletHeadStyle + classNameWOLang;

@@ -147,6 +147,7 @@ namespace SIL.PublishingSolution
             classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
 
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
+            xeLaTexContent.IsUnix = _isUnixOs;
             Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
             newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle,
                                                        cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText,
@@ -382,6 +383,7 @@ namespace SIL.PublishingSolution
                 classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo, xeLatexFile, cssClass);
 
                 XeLaTexContent xeLaTexContent = new XeLaTexContent();
+                xeLaTexContent.IsUnix = _isUnixOs;
                 Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
                 xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText, pageWidth);
 
@@ -503,6 +505,7 @@ namespace SIL.PublishingSolution
                 int pageWidth = Common.GetPictureWidth(cssClass, projInfo.ProjectInputType);
 
                 XeLaTexContent xeLaTexContent = new XeLaTexContent();
+                xeLaTexContent.IsUnix = _isUnixOs;
                 Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
                 Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo,
                                                                                                           cssClass,
@@ -871,6 +874,16 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
+            //if (_isUnixOs)
+            //{
+            //    XelatexFontMapping fontMapping = new XelatexFontMapping();
+
+            //    if (_langFontDictionary.Count > 0)
+            //        _langFontDictionary = fontMapping.GetFontList(_langFontDictionary);
+
+            //    if (_langFontCodeandName.Count > 0)
+            //        _langFontCodeandName = fontMapping.GetFontList(_langFontCodeandName);
+            //}
         }
 
         #endregion

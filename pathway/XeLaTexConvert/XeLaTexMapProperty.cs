@@ -571,10 +571,6 @@ namespace SIL.PublishingSolution
                     fontName = propertyValue;
                     break;
                 }
-                if (_isLinux)
-                {
-                    fontName = propertyValue;
-                }
             }
 
             _fontName = fontName;
