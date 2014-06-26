@@ -35,3 +35,9 @@ padding: 5pt;
 .picturePage {
 padding: 5pt;
 }
+.letData {
+padding: 20pt;
+}
+.letHead {
+page-break-after: avoid;
+}

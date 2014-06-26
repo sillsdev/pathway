@@ -2743,6 +2743,16 @@ namespace SIL.Tool
             tw.WriteLine("padding: 5pt;");
             tw.WriteLine("}");
 
+            //Space adjustment between letHead and LetData
+            tw.WriteLine(".letData {");
+            tw.WriteLine("padding: 20pt;");
+            tw.WriteLine("}");
+
+            //Avoid letHead as lastline of the page
+            tw.WriteLine(".letHead {");
+            tw.WriteLine("page-break-after: avoid;");
+            tw.WriteLine("}");
+
             tw.Close();
         }
 
