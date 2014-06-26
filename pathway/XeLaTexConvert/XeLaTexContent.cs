@@ -414,8 +414,17 @@ namespace SIL.PublishingSolution
 
             if (_previousParagraphName.ToLower().IndexOf("scrbook") == 0)
             {
-                if (_bookName.Trim().Length == 0)
+                string referenceFormat = _projInfo.HeaderReferenceFormat;
+                if (referenceFormat == "Genesis 1" && _childName.IndexOf("scrBookName") == 0)
+                {
                     _bookName = _reader.Value;
+                }
+                else if (referenceFormat == "Gen 1" && _childName.IndexOf("scrBookCode") == 0)
+                {
+                    _bookName = _reader.Value;
+                }
+                //if (_bookName.Trim().Length == 0)
+                //    _bookName = _reader.Value;
             }
             WriteText();
         }
@@ -1701,7 +1710,7 @@ namespace SIL.PublishingSolution
             if (_closeChildName.IndexOf("scrBookName") == 0)
             {
                 _xetexFile.Write("\r\n \\label{PageStock_" + DicMainReversal + TocPageStock.ToString() + "} ");
-                _bookName = string.Empty;
+                //_bookName = string.Empty;
                 _bookPageBreak = false;
             }
             _classNameWithLang = StackPeek(_allStyle);
