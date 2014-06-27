@@ -675,7 +675,7 @@ namespace SIL.PublishingSolution
                 if (classNameWOLang.IndexOf("_.") > 0)
                     classNameWOLang = Common.RightString(classNameWOLang, ".");
                 string letterletHeadStyle = string.Empty;
-                if (IsUnix)
+                if (!IsUnix)
                 {
                     letterletHeadStyle = "letter";
                 }
