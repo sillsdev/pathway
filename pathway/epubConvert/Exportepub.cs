@@ -168,7 +168,7 @@ namespace SIL.PublishingSolution
             _epubManifest = new EpubManifest(this, _epubFont);
             _epubManifest.LoadPropertiesFromSettings();
             LoadOtherFeatures();
-            var epubToc = new EpubToc(InputType, TocLevel);
+            var epubToc = new EpubToc(projInfo.ProjectInputType, TocLevel);
             inProcess.PerformStep();
             #endregion Setup
 
