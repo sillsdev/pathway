@@ -36,7 +36,6 @@ namespace SIL.PublishingSolution
             _isLinux = Common.IsUnixOS();
         }
 
-
         private bool _isLinux = false;
 
         public Dictionary<string, string> GetFontList(Dictionary<string, string> fontName)
@@ -44,16 +43,55 @@ namespace SIL.PublishingSolution
             Dictionary<string, string> fontList = new Dictionary<string, string>();
             if (_isLinux)
             {
-                foreach (var font in fontName)
+                var installedFontList = InstalledFontList();
+
+                foreach (var cfont in fontName)
                 {
-                    if (!FontInternals.IsInstalled(font.Value))
+                    if (installedFontList.ContainsKey(cfont.Value))
                     {
-                        var fullName = FontInternals.GetFontName(font.Key, string.Empty);
+                        fontList.Remove(cfont.Key);
+                        fontList.Add(cfont.Key, cfont.Value);
+                    }
+                    else
+                    {
+                        var fullName = FontInternals.GetFontName(cfont.Key, string.Empty);
                         if (fullName.Length > 0) // if length > 0, it's installed
                         {
                             // this style is installed on the machine - add it to the list
-                            fontList.Remove(font.Key);
-                            fontList.Add(font.Key, Path.GetFileName(fullName));
+                            fontList.Remove(cfont.Key);
+                            fontList.Add(cfont.Key, Path.GetFileName(fullName));
+                        }
+                        else
+                        {
+                            if (fullName.Length == 0)
+                            {
+                                string fontCode = Common.LeftString(cfont.Key, "-");
+                                
+                                fullName = FontInternals.GetFontName(fontCode, string.Empty);
+                                if (fullName.Length != 0 && fullName.Length > 0) // if length > 0, it's installed
+                                {
+                                    // this style is installed on the machine - add it to the list
+                                    fontList.Remove(cfont.Key);
+                                    fontList.Add(cfont.Key, Path.GetFileName(fullName));
+                                }
+                                else
+                                {
+                                    if (cfont.Key == "ggo-Telu-IN")
+                                    {
+                                        if (fontList.ContainsKey("te"))
+                                        {
+                                            fontList.Remove(cfont.Key);
+                                            fontList.Add(cfont.Key, fontList["te"]);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // this style is installed on the machine - add it to the list
+                                        fontList.Remove(cfont.Key);
+                                        fontList.Add(cfont.Key, "Charis SIL");
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -63,6 +101,23 @@ namespace SIL.PublishingSolution
                 return fontName;
             }
             return fontList;
+        }
+
+        public static Dictionary<string, string> InstalledFontList()
+        {
+            Dictionary<string, string> installedFontList = new Dictionary<string, string>();
+            string[] files = FontInternals.GetInstalledFontFiles();
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            foreach (var file in files)
+            {
+                pfc.AddFontFile(file);
+            }
+            foreach (var fontFamily in pfc.Families)
+            {
+                if (!installedFontList.ContainsKey(fontFamily.GetName(0)) && fontFamily.GetName(0) != string.Empty)
+                    installedFontList.Add(fontFamily.GetName(0), fontFamily.GetName(0));
+            }
+            return installedFontList;
         }
     }
 }
