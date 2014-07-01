@@ -95,7 +95,7 @@ namespace SIL.PublishingSolution
             ExportPreprocessForXelatex(projInfo, preProcessor);
             var organization = SettingFrontmatter();
             BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
-            
+
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
 
             AssignExportFile(projInfo, preProcessor);
@@ -635,7 +635,7 @@ namespace SIL.PublishingSolution
                 }
                 Directory.SetCurrentDirectory(xeLaTexInstallationPath);
             }
-            
+
             ExecuteXelatexProcess(xeLatexFullFile, name, arguments);
             OpenXelatexOutput(xeLatexFullFile, openFile, originalDirectory, xeLaTexInstallationPath);
         }
@@ -645,7 +645,7 @@ namespace SIL.PublishingSolution
         {
             const string processLocation = "~/pwtex";
             string scriptName = "runxelatex.sh";
-            var fs2 = new FileStream(Path.Combine(xelatexOutputLocation,scriptName), FileMode.Create, FileAccess.Write);
+            var fs2 = new FileStream(Path.Combine(xelatexOutputLocation, scriptName), FileMode.Create, FileAccess.Write);
             var sw2 = new StreamWriter(fs2);
 
             WriteConfig(sw2, "echo process started");
@@ -780,7 +780,7 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-        
+
         private static void WriteConfig(StreamWriter sw2, string content)
         {
             sw2.WriteLine(content);
@@ -854,36 +854,78 @@ namespace SIL.PublishingSolution
         {
             Common.FillMappedFonts(_fontLangMap);
 
-            foreach (var fontName in _fontLangMap)
+            if (_isUnixOs)
             {
-                if (_langFontCodeandName.ContainsKey(fontName.Key))
+                var unknownMeta = new List<string>();
+
+                foreach (var fontCode in _langFontCodeandName)
                 {
-                    if (fontName.Key.ToLower() != "en")
+                    if (!_langFontDictionary.ContainsKey(fontCode.Key))
                     {
-                        _langFontCodeandName.Remove(fontName.Key);
-                        _langFontCodeandName.Add(fontName.Key, fontName.Value);
+                        unknownMeta.Add(fontCode.Key);
                     }
                 }
 
-                if (_langFontDictionary.ContainsKey(fontName.Key))
+                foreach (var fontName in unknownMeta)
                 {
-                    if (fontName.Key.ToLower() != "en")
+                    _langFontCodeandName.Remove(fontName);
+                }
+                var fontMapping = new XelatexFontMapping();
+
+                var installedFontList = XelatexFontMapping.InstalledFontList();
+                //Using Generic Font List Mapping the Font set
+                foreach (var fontName in _fontLangMap)
+                {
+                    if (installedFontList.ContainsKey(fontName.Value))
                     {
-                        _langFontDictionary.Remove(fontName.Key);
-                        _langFontDictionary.Add(fontName.Key, fontName.Value);
+                        if (_langFontCodeandName.ContainsKey(fontName.Key))
+                        {
+                            _langFontCodeandName.Remove(fontName.Key);
+                            _langFontCodeandName.Add(fontName.Key, fontName.Value);
+                        }
+
+                        if (_langFontDictionary.ContainsKey(fontName.Key))
+                        {
+                            _langFontDictionary.Remove(fontName.Key);
+                            _langFontDictionary.Add(fontName.Key, fontName.Value);
+                        }
+                    }
+                }
+
+                if (_langFontDictionary.Count > 0)
+                    _langFontDictionary = fontMapping.GetFontList(_langFontDictionary);
+
+                if (_langFontCodeandName.Count > 0)
+                    _langFontCodeandName = fontMapping.GetFontList(_langFontCodeandName);
+
+                if (_langFontCodeandName.Count == 0)
+                {
+                    _langFontCodeandName = _langFontDictionary;
+                }
+            }
+            else
+            {
+                foreach (var fontName in _fontLangMap)
+                {
+                    if (_langFontCodeandName.ContainsKey(fontName.Key))
+                    {
+                        if (fontName.Key.ToLower() != "en")
+                        {
+                            _langFontCodeandName.Remove(fontName.Key);
+                            _langFontCodeandName.Add(fontName.Key, fontName.Value);
+                        }
+                    }
+
+                    if (_langFontDictionary.ContainsKey(fontName.Key))
+                    {
+                        if (fontName.Key.ToLower() != "en")
+                        {
+                            _langFontDictionary.Remove(fontName.Key);
+                            _langFontDictionary.Add(fontName.Key, fontName.Value);
+                        }
                     }
                 }
             }
-            //if (_isUnixOs)
-            //{
-            //    XelatexFontMapping fontMapping = new XelatexFontMapping();
-
-            //    if (_langFontDictionary.Count > 0)
-            //        _langFontDictionary = fontMapping.GetFontList(_langFontDictionary);
-
-            //    if (_langFontCodeandName.Count > 0)
-            //        _langFontCodeandName = fontMapping.GetFontList(_langFontCodeandName);
-            //}
         }
 
         #endregion
@@ -907,8 +949,21 @@ namespace SIL.PublishingSolution
                     {
                         if (content.ToLower() == systemFont.Name.ToLower())
                         {
+                            if (_langFontCodeandName.ContainsKey(name))
+                            {
+                                _langFontCodeandName.Remove(name);
+                                _langFontCodeandName.Add(name, content);
+                                break;
+                            }
                             _langFontCodeandName.Add(name, content);
                             break;
+                        }
+                        if (_isUnixOs)
+                        {
+                            if (!_langFontCodeandName.ContainsKey(name))
+                            {
+                                _langFontCodeandName.Add(name, content);
+                            }
                         }
                     }
                 }
