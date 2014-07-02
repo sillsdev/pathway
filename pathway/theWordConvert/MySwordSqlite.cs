@@ -18,7 +18,7 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-#if mono
+#if __MonoCS__
 using Mono.Data.Sqlite;
 #else
 using Devart.Data.SQLite;
@@ -28,6 +28,7 @@ using System.Xml;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
@@ -40,9 +41,14 @@ namespace SIL.PublishingSolution
 
         public MySwordSqlite()
         {
-            var vrsXmlStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("sqlite.vrs.xml");
-            Debug.Assert(vrsXmlStream != null);
-            _vrs.Load(XmlReader.Create(vrsXmlStream));
+            var executingAssembly = Assembly.GetExecutingAssembly().FullName;
+            var executingPath = Path.GetDirectoryName(executingAssembly);
+            Debug.Assert(executingPath != null);
+            var vrsFullName = Path.Combine(executingPath, "vrs.xml");
+            _vrs.Load(vrsFullName);
+            //var vrsXmlStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("sqlite.vrs.xml");
+            //Debug.Assert(vrsXmlStream != null);
+            //_vrs.Load(XmlReader.Create(vrsXmlStream));
         }
 
         public void Execute(string inName)
@@ -67,25 +73,32 @@ namespace SIL.PublishingSolution
             }
             var nameOnly = Path.GetFileNameWithoutExtension(inName);
             var filename = string.Format("{0}.bbl.mybible", nameOnly);
+            var inPath = Path.GetDirectoryName(inName);
+            if (string.IsNullOrEmpty(inPath))
+            {
+                Debug.Assert(inPath != null);
+                filename = Path.Combine(inPath, filename);
+            }
             return filename;
         }
 
-#if mono
+#if __MonoCS__
         private SqliteConnection NewMyBible(string filename)
 #else
         private SQLiteConnection NewMyBible(string filename)
 #endif
         {
-            string templateFilename = Path.Combine(Directory.GetCurrentDirectory(), "biblebase.sqlite"); // biblebase
+            var basePath = Common.FromRegistry("TheWord");
+            var templateFilename = Path.Combine(basePath, "biblebase.sqlite");
             File.Copy(templateFilename, filename, true);
-#if mono
+#if __MonoCS__
             return new SqliteConnection("Data Source=" + filename + ";Version=3;");
 #else
             return new SQLiteConnection("Data Source=" + filename + ";Version=3;");
 #endif
         }
 
-#if mono
+#if __MonoCS__
 		private void UpdateScripture (SqliteConnection updConn, bool ot)
 #else
         private void UpdateScripture(SQLiteConnection updConn, bool ot)
@@ -142,7 +155,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-#if mono
+#if __MonoCS__
 		private void PostDbParams(string inName, SqliteConnection updConn)
 #else
         private void PostDbParams(string inName, SQLiteConnection updConn)

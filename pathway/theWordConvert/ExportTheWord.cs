@@ -552,19 +552,21 @@ namespace SIL.PublishingSolution
 
         protected static string ConvertToMySword(string resultName, string tempTheWordCreatorPath, string exportTheWordInputPath)
         {
-			const string converterName = "TheWordBible2MySword.exe";
-			var processStartInfo = new ProcessStartInfo {
-	                Arguments = resultName,
-	                FileName = converterName,
-	                WorkingDirectory = tempTheWordCreatorPath,
-	                CreateNoWindow = true
-	            };
-			if (Common.IsUnixOS())
-			{
-				processStartInfo.Arguments = string.Format("{0} {1}", converterName, resultName);
-				processStartInfo.FileName = "mono";
-			}
-            Process.Start(processStartInfo).WaitForExit();
+            //const string converterName = "TheWordBible2MySword.exe";
+            //var processStartInfo = new ProcessStartInfo {
+            //        Arguments = resultName,
+            //        FileName = converterName,
+            //        WorkingDirectory = tempTheWordCreatorPath,
+            //        CreateNoWindow = true
+            //    };
+            //if (Common.IsUnixOS())
+            //{
+            //    processStartInfo.Arguments = string.Format("{0} {1}", converterName, resultName);
+            //    processStartInfo.FileName = "mono";
+            //}
+            //Process.Start(processStartInfo).WaitForExit();
+            var converter = new MySwordSqlite();
+            converter.Execute(resultName);
             var mySwordFiles = Directory.GetFiles(tempTheWordCreatorPath, "*.mybible");
             var mySwordResult = "<No MySword Result>";
             if (mySwordFiles.Length >= 1)
