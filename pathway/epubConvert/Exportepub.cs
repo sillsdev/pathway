@@ -1771,7 +1771,10 @@ namespace SIL.PublishingSolution
                 var xmlReader = XmlReader.Create(file, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
-                var footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
+                XmlNodeList footnoteNodes = null;
+                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_General_Paragraph']/a") 
+                    : xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
+
                 if (footnoteNodes == null)
                 {
                     return;
@@ -1781,8 +1784,9 @@ namespace SIL.PublishingSolution
                     if (footnoteNode.Attributes != null)
                         footnoteNode.Attributes["href"].Value = "zzReferences.xhtml" + footnoteNode.Attributes["href"].Value;
                 }
+                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_CrossHYPHENReference_Paragraph']/a") 
+                    : xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
 
-                footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
                 if (footnoteNodes == null)
                 {
                     return;
