@@ -24,16 +24,16 @@ content: attr(title);
 }
 .scrBookName { display: block; font-size: 0pt; string-set: bookname content();}
 .pictureRight {
-padding: 5pt;
+padding: 10pt;
 }
 .pictureLeft {
-padding: 5pt;
+padding: 10pt;
 }
 .pictureCenter {
-padding: 5pt;
+padding: 10pt;
 }
 .picturePage {
-padding: 5pt;
+padding: 10pt;
 }
 .letData {
 padding: 20pt;

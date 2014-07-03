@@ -2728,19 +2728,19 @@ namespace SIL.Tool
 
             //Picture Property
             tw.WriteLine(".pictureRight {");
-            tw.WriteLine("padding: 5pt;");
+            tw.WriteLine("padding: 10pt;");
             tw.WriteLine("}");
 
             tw.WriteLine(".pictureLeft {");
-            tw.WriteLine("padding: 5pt;");
+            tw.WriteLine("padding: 10pt;");
             tw.WriteLine("}");
 
             tw.WriteLine(".pictureCenter {");
-            tw.WriteLine("padding: 5pt;");
+            tw.WriteLine("padding: 10pt;");
             tw.WriteLine("}");
 
             tw.WriteLine(".picturePage {");
-            tw.WriteLine("padding: 5pt;");
+            tw.WriteLine("padding: 10pt;");
             tw.WriteLine("}");
 
             //Space adjustment between letHead and LetData
