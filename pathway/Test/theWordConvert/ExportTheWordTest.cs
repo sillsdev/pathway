@@ -583,7 +583,7 @@ namespace Test.theWordConvert
         public void ConvertToMySwordTest()
         {
             const string vrsName = "vrs.xml";
-            var pathPat = new Regex(@"(.*)[\\/]Test([\\/][A-Za-z])[\\/]TestFiles[\\/]output", RegexOptions.IgnoreCase);
+            var pathPat = new Regex(@"(.*)[\\/]Test([\\/][A-Za-z]+)[\\/]TestFiles[\\/]Input", RegexOptions.IgnoreCase);
             var match = pathPat.Match(_inputPath);
             var inVrs = Path.Combine(match.Groups[1].Value + match.Groups[2].Value, vrsName);
             var exportTheWordAssembly = Assembly.GetAssembly(typeof (ExportTheWord));

@@ -54,7 +54,7 @@ namespace SIL.PublishingSolution
 
         public void Execute(string inName)
         {
-            if (_vrs.DocumentElement == null)
+            if (_vrs.DocumentElement == null || string.IsNullOrEmpty(inName) || !File.Exists(inName))
             {
                 return;
             }
