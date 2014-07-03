@@ -775,7 +775,7 @@ namespace SIL.PublishingSolution
             {
                 cTool.BtnWeb.BackColor = _selectedColor;
                 cTool.BtnWeb.FlatAppearance.BorderSize = 1;
-                cTool.TsPreview.Enabled = true;
+                cTool.TsPreview.Enabled = false;
             }
             else if (MediaType == "others")
             {
