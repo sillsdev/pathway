@@ -41,18 +41,23 @@ namespace SIL.PublishingSolution
 
         public MySwordSqlite()
         {
-            var executingAssembly = Assembly.GetExecutingAssembly().FullName;
+            var executingAssembly = Assembly.GetExecutingAssembly().Location;
             var executingPath = Path.GetDirectoryName(executingAssembly);
             Debug.Assert(executingPath != null);
             var vrsFullName = Path.Combine(executingPath, "vrs.xml");
+            if (!File.Exists(vrsFullName))
+            {
+                return;
+            }
             _vrs.Load(vrsFullName);
-            //var vrsXmlStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("sqlite.vrs.xml");
-            //Debug.Assert(vrsXmlStream != null);
-            //_vrs.Load(XmlReader.Create(vrsXmlStream));
         }
 
         public void Execute(string inName)
         {
+            if (_vrs.DocumentElement == null)
+            {
+                return;
+            }
             var filename = GetFilename(inName);
             var updConn = NewMyBible(filename);
             updConn.Open();
@@ -74,9 +79,8 @@ namespace SIL.PublishingSolution
             var nameOnly = Path.GetFileNameWithoutExtension(inName);
             var filename = string.Format("{0}.bbl.mybible", nameOnly);
             var inPath = Path.GetDirectoryName(inName);
-            if (string.IsNullOrEmpty(inPath))
+            if (!string.IsNullOrEmpty(inPath))
             {
-                Debug.Assert(inPath != null);
                 filename = Path.Combine(inPath, filename);
             }
             return filename;

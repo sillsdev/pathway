@@ -22,6 +22,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Xsl;
 using NMock2;
@@ -581,6 +582,14 @@ namespace Test.theWordConvert
         [NUnit.Framework.Category("SkipOnTeamCity")]
         public void ConvertToMySwordTest()
         {
+            const string vrsName = "vrs.xml";
+            var pathPat = new Regex(@"(.*)[\\/]Test([\\/][A-Za-z])[\\/]TestFiles[\\/]output", RegexOptions.IgnoreCase);
+            var match = pathPat.Match(_inputPath);
+            var inVrs = Path.Combine(match.Groups[1].Value + match.Groups[2].Value, vrsName);
+            var exportTheWordAssembly = Assembly.GetAssembly(typeof (ExportTheWord));
+            var outPath = Path.GetDirectoryName(exportTheWordAssembly.Location);
+            Debug.Assert(!string.IsNullOrEmpty(outPath));
+            File.Copy(inVrs, Path.Combine(outPath, vrsName));
             const string nkont = "nko.nt";
             var outName = Path.Combine(Path.Combine(_outputPath, "TheWord"), nkont);
             File.Copy(Path.Combine(_inputPath, nkont), outName, true); // overwrite
