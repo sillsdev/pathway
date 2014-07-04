@@ -274,8 +274,16 @@ namespace SIL.PublishingSolution
             const string msgFormat = "Do you want to start theWord?\n\n\u25CF Click Yes.\n\nThe program will copy the \"{0}\" file to {1} and start theWord. \n\n\u25CF Click No. \n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n";
             var resultName = Path.GetFileName(resultFullName);
             var resultDir = Path.GetDirectoryName(resultFullName);
-            var msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
-            var dialogResult = !Common.Testing ? MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) : DialogResult.Cancel;
+            DialogResult dialogResult;
+            if (!Common.Testing)
+            {
+                var msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
+                dialogResult = MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+            }
+            else
+            {
+                dialogResult = DialogResult.Cancel;
+            }
 
             if (dialogResult == DialogResult.Yes)
             {
@@ -552,19 +560,8 @@ namespace SIL.PublishingSolution
 
         protected static string ConvertToMySword(string resultName, string tempTheWordCreatorPath, string exportTheWordInputPath)
         {
-			const string converterName = "TheWordBible2MySword.exe";
-			var processStartInfo = new ProcessStartInfo {
-	                Arguments = resultName,
-	                FileName = converterName,
-	                WorkingDirectory = tempTheWordCreatorPath,
-	                CreateNoWindow = true
-	            };
-			if (Common.IsUnixOS())
-			{
-				processStartInfo.Arguments = string.Format("{0} {1}", converterName, resultName);
-				processStartInfo.FileName = "mono";
-			}
-            Process.Start(processStartInfo).WaitForExit();
+            var converter = new MySwordSqlite();
+            converter.Execute(Path.Combine(tempTheWordCreatorPath, resultName));
             var mySwordFiles = Directory.GetFiles(tempTheWordCreatorPath, "*.mybible");
             var mySwordResult = "<No MySword Result>";
             if (mySwordFiles.Length >= 1)
