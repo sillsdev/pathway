@@ -4158,7 +4158,6 @@ namespace SIL.PublishingSolution
 
         public void ConfigurationTool_LoadBL()
         {
-
             IsUnixOs = Common.UnixVersionCheck();
             _screenMode = ScreenMode.Load;
             _lastSelectedLayout = StyleEXE;
@@ -4228,13 +4227,85 @@ namespace SIL.PublishingSolution
             sb.Append(Application.ProductVersion);
             cTool.Text = sb.ToString();
             SetFocusToName();
-
+            SetMenuToolStrip();
             //For the task TD-1481
             cTool.BtnOthers.Enabled = true;
 
             _screenMode = ScreenMode.View;
             ShowInfoValue();
             _screenMode = ScreenMode.Edit;
+        }
+
+        private void SetMenuToolStrip()
+        {
+            if (IsUnixOs)
+            {
+                Font cFont = new System.Drawing.Font("Charis SIL", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                Size cSize = new System.Drawing.Size(36, 49);
+                const ContentAlignment contentBc = System.Drawing.ContentAlignment.BottomCenter;
+                const ToolStripTextDirection toolStripTextDirection = ToolStripTextDirection.Horizontal;
+                const ContentAlignment contentTc = System.Drawing.ContentAlignment.TopCenter;
+                
+                cTool.TsNew.Font = cFont;
+                cTool.TsNew.Size = cSize;
+                cTool.TsNew.TextAlign = contentBc;
+                cTool.TsNew.TextDirection = toolStripTextDirection;
+                cTool.TsNew.ImageAlign = contentTc;
+                
+                cTool.TsSaveAs.Font = cFont;
+                cTool.TsSaveAs.Size = cSize;
+                cTool.TsSaveAs.TextAlign = contentBc;
+                cTool.TsSaveAs.TextDirection = toolStripTextDirection;
+                cTool.TsSaveAs.ImageAlign = contentTc;
+                
+                cTool.TsDelete.Font = cFont;
+                cTool.TsDelete.Size = cSize;
+                cTool.TsDelete.TextAlign = contentBc;
+                cTool.TsDelete.TextDirection = toolStripTextDirection;
+                cTool.TsDelete.ImageAlign = contentTc;
+                
+                cTool.TsUndo.Font = cFont;
+                cTool.TsUndo.Size = cSize;
+                cTool.TsUndo.TextAlign = contentBc;
+                cTool.TsUndo.TextDirection = toolStripTextDirection;
+                cTool.TsUndo.ImageAlign = contentTc;
+
+                cTool.TsRedo.Font = cFont;
+                cTool.TsRedo.Size = cSize;
+                cTool.TsRedo.TextAlign = contentBc;
+                cTool.TsRedo.TextDirection = toolStripTextDirection;
+                cTool.TsRedo.ImageAlign = contentTc;
+                
+                cTool.TsPreview.Font = cFont;
+                cTool.TsPreview.Size = cSize;
+                cTool.TsPreview.TextAlign = contentBc;
+                cTool.TsPreview.TextDirection = toolStripTextDirection;
+                cTool.TsPreview.ImageAlign = contentTc;
+
+                cTool.TsDefault.Font = cFont;
+                cTool.TsDefault.Size = cSize;
+                cTool.TsDefault.TextAlign = contentBc;
+                cTool.TsDefault.TextDirection = toolStripTextDirection;
+                cTool.TsDefault.ImageAlign = contentTc;
+                
+                cTool.TsReset.Font = cFont;
+                cTool.TsReset.Size = cSize;
+                cTool.TsReset.TextAlign = contentBc;
+                cTool.TsReset.TextDirection = toolStripTextDirection;
+                cTool.TsReset.ImageAlign = contentTc;
+                
+                cTool.TsSend.Font = cFont;
+                cTool.TsSend.Size = cSize;
+                cTool.TsSend.TextAlign = contentBc;
+                cTool.TsSend.TextDirection = toolStripTextDirection;
+                cTool.TsSend.ImageAlign = contentTc;
+                
+                cTool.ToolStripHelpButton.Font = cFont;
+                cTool.ToolStripHelpButton.Size = cSize;
+                cTool.ToolStripHelpButton.TextAlign = contentBc;
+                cTool.ToolStripHelpButton.TextDirection = toolStripTextDirection;
+                cTool.ToolStripHelpButton.ImageAlign = contentTc;
+            }
         }
 
         public void SetModifyMode(bool setEdited)

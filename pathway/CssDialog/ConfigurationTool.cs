@@ -156,6 +156,11 @@ namespace SIL.PublishingSolution
             get { return tsReset; }
         }
 
+        public ToolStripSplitButton ToolStripHelpButton
+        {
+            get { return toolStripHelpButton; }
+        }
+
         public TabControl TabControl1
         {
             get { return tabControl1; }
@@ -1152,7 +1157,7 @@ namespace SIL.PublishingSolution
             _CToolBL.AboutDialog();
         }
 
-        private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
+        private void toolStripHelpButton_ButtonClick(object sender, EventArgs e)
         {
             _CToolBL.HelpButton_Clicked(this);
         }

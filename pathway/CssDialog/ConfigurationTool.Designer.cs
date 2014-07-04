@@ -43,7 +43,7 @@ namespace SIL.PublishingSolution
             this.tsDefault = new System.Windows.Forms.ToolStripButton();
             this.tsReset = new System.Windows.Forms.ToolStripButton();
             this.tsSend = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolStripHelpButton = new System.Windows.Forms.ToolStripSplitButton();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.studentManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moreHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -302,7 +302,7 @@ namespace SIL.PublishingSolution
             this.tsDefault,
             this.tsReset,
             this.tsSend,
-            this.toolStripSplitButton1});
+            this.toolStripHelpButton});
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.Size = new System.Drawing.Size(876, 52);
@@ -439,23 +439,23 @@ namespace SIL.PublishingSolution
             this.tsSend.ToolTipText = "Send the stylesheets and settings to someone else (Alt+E)";
             this.tsSend.Click += new System.EventHandler(this.tsSend_Click);
             // 
-            // toolStripSplitButton1
+            // toolStripHelpButton
             // 
-            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripHelpButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.contentsToolStripMenuItem,
             this.studentManualToolStripMenuItem,
             this.moreHelpToolStripMenuItem,
             this.aboutToolStripMenuItem});
-            this.toolStripSplitButton1.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
-            this.toolStripSplitButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(48, 49);
-            this.toolStripSplitButton1.Text = "&Help";
-            this.toolStripSplitButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripSplitButton1.ToolTipText = "Help (Alt+H)";
-            this.toolStripSplitButton1.ButtonClick += new System.EventHandler(this.toolStripSplitButton1_ButtonClick);
+            this.toolStripHelpButton.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripHelpButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripHelpButton.Image")));
+            this.toolStripHelpButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripHelpButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripHelpButton.Name = "toolStripHelpButton";
+            this.toolStripHelpButton.Size = new System.Drawing.Size(48, 49);
+            this.toolStripHelpButton.Text = "&Help";
+            this.toolStripHelpButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripHelpButton.ToolTipText = "Help (Alt+H)";
+            this.toolStripHelpButton.ButtonClick += new System.EventHandler(this.toolStripHelpButton_ButtonClick);
             // 
             // contentsToolStripMenuItem
             // 
@@ -2788,7 +2788,7 @@ namespace SIL.PublishingSolution
         private System.Windows.Forms.Label lblMobileOptionsSection;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label lblGoBibleDescription;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripSplitButton toolStripHelpButton;
         private System.Windows.Forms.ToolStripMenuItem contentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ComboBox ddlReferences;
