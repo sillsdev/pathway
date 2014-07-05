@@ -64,7 +64,6 @@ namespace Test.theWordConvert
             Directory.CreateDirectory(_outputPath);
             _converterPath = Common.PathCombine(_outputPath, "TheWord");
             FolderTree.Copy(Path.Combine(Common.ProgInstall, "TheWord"), _converterPath);
-            FolderTree.Copy(Path.Combine(_converterPath, Directory.Exists(@"C:\Program Files (x86)") ? "x64" : "x32"), _converterPath);
         }
         #endregion setup
 
@@ -615,7 +614,7 @@ namespace Test.theWordConvert
             string sourceFolder = Path.Combine(Common.ProgBase, theWord);
             string destFolder = Path.Combine(Path.GetTempPath(), theWord);
             CopyTheWordFolderToTemp(sourceFolder, destFolder);
-            Assert.AreEqual(6, new DirectoryInfo(destFolder).GetFiles().Length);
+            Assert.AreEqual(1, new DirectoryInfo(destFolder).GetFiles().Length);
             Directory.Delete(destFolder, true); // Recurse and delete all sub folders too
         }
 
