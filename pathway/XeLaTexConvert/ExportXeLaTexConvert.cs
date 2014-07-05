@@ -52,6 +52,7 @@ namespace SIL.PublishingSolution
         private readonly XslCompiledTransform _xhtmlXelatexXslProcess = new XslCompiledTransform();
         private List<string> _xeLaTexPropertyFullFontStyleList = new List<string>();
         private bool _isUnixOs = false;
+        private string paraTextEnvVariable = string.Empty;
         #region Public Functions
         public string ExportType
         {
@@ -599,16 +600,13 @@ namespace SIL.PublishingSolution
                 name = Common.PathCombine(xeLaTexInstallationPath, "xelatex");
                 arguments = " -interaction=batchmode \"" + xeLatexFullFile + "\"";
 
-                Directory.SetCurrentDirectory(exportDirectory);
-
                 if (_inputType.ToLower() == "scripture" || projInfo.ProjectInputType == "scripture")
                 {
-                    string xelatexArguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
-                    arguments = WriteShellScript(exportDirectory, xeLaTexInstallationPath, xelatexArguments);
-                    name = "sh";
-                    //if pdf file not produced. Look at the LOG file in the exported directory 
+                    paraTextEnvVariable = Environment.GetEnvironmentVariable("TEXINPUTS");
+                    Environment.SetEnvironmentVariable("TEXINPUTS", "");
                 }
-                Directory.SetCurrentDirectory(exportDirectory);
+                if (exportDirectory != null) 
+                    Directory.SetCurrentDirectory(exportDirectory);
             }
             else
             {
@@ -638,29 +636,6 @@ namespace SIL.PublishingSolution
 
             ExecuteXelatexProcess(xeLatexFullFile, name, arguments);
             OpenXelatexOutput(xeLatexFullFile, openFile, originalDirectory, xeLaTexInstallationPath);
-        }
-
-
-        private string WriteShellScript(string xelatexOutputLocation, string xelatexInstallerPath, string arguments)
-        {
-            const string processLocation = "~/pwtex";
-            string scriptName = "runxelatex.sh";
-            var fs2 = new FileStream(Path.Combine(xelatexOutputLocation, scriptName), FileMode.Create, FileAccess.Write);
-            var sw2 = new StreamWriter(fs2);
-
-            WriteConfig(sw2, "echo process started");
-            WriteConfig(sw2, string.Format("cp -R /usr/lib/pwtex {0}", processLocation));
-            WriteConfig(sw2, string.Format("cd {0}", processLocation));
-            WriteConfig(sw2, string.Format("cp -R {0}/. .", xelatexOutputLocation));
-            WriteConfig(sw2, Common.PathCombine(xelatexInstallerPath, "xelatex") + " " + arguments);
-            WriteConfig(sw2, string.Format("cp *.pdf {0}", xelatexOutputLocation));
-            WriteConfig(sw2, string.Format("cp *.log {0}", xelatexOutputLocation));
-            WriteConfig(sw2, string.Format("cd {0}", xelatexOutputLocation));
-            WriteConfig(sw2, string.Format("rm -rf {0}", processLocation));
-            WriteConfig(sw2, "echo process completed");
-            sw2.Close();
-            fs2.Close();
-            return scriptName;
         }
 
         private void ExecuteXelatexProcess(string xeLatexFullFile, string name, string arguments)
@@ -707,6 +682,13 @@ namespace SIL.PublishingSolution
                     p1Error = p1.StandardError.ReadToEnd();
                 }
             }
+
+            if (paraTextEnvVariable != null && paraTextEnvVariable != string.Empty)
+            {
+                Environment.SetEnvironmentVariable("TEXINPUTS", paraTextEnvVariable);
+                paraTextEnvVariable = string.Empty;
+            }
+
         }
 
         private void OpenXelatexOutput(string xeLatexFullFile, bool openFile, string originalDirectory,
