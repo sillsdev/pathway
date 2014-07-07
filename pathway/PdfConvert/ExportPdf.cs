@@ -171,11 +171,13 @@ namespace SIL.PublishingSolution
                     if (!projInfo.DefaultXhtmlFileWithPath.ToLower().Contains("local"))
                     {
                         //Copyright information added in PDF files
+                        #pragma warning disable 168
                         string pdfFileName = Common.InsertCopyrightInPdf(Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), xhtmlFileName + ".pdf"), "Prince XML", projInfo.ProjectInputType);
+                        #pragma warning restore 168
 
-                        string cleanExtn = ".tmp,.de,.exe,.jar,.xml";
-                        Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, cleanExtn, "layout.css", string.Empty);
-                        CreateRAMP(projInfo);
+                        //string cleanExtn = ".tmp,.de,.exe,.jar,.xml";
+                        //Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, cleanExtn, "layout.css", string.Empty);
+                        //CreateRAMP(projInfo);
                     }
                     else
                     {

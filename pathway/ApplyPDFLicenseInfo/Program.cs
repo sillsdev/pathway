@@ -39,13 +39,47 @@ namespace ApplyPDFLicenseInfo
             exportTitle = Path.Combine(workingDirectory, exportTitle);
             string licencePdfFile = pdfFileName.Replace(".pdf", "1.pdf");
 
+            ShowPDFFile(licencePdfFile, exportTitle, commonTesting, pdfFileName);
+           
+            System.Globalization.TextInfo myTI = new System.Globalization.CultureInfo("en-US", false).TextInfo;
+            inputType = myTI.ToTitleCase(inputType);
+            if (creatorTool.ToLower() == "libreoffice")
+            {
+                Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout.css", string.Empty);
+                LoadParameters(inputType);
+                CreateRAMP(xhtmlFile, inputType);
+            }
+            if (creatorTool.ToLower().Contains("prince"))
+            {
+                string cleanExtn = ".tmp,.de,.exe,.jar,.xml";
+                Common.CleanupExportFolder(xhtmlFile, cleanExtn, "layout.css", string.Empty);
+                LoadParameters(inputType);
+                CreateRAMP(xhtmlFile, inputType);
+            }
+        }
+
+        private static void ShowPDFFile(string licencePdfFile, string exportTitle, string commonTesting, string pdfFileName)
+        {
             if (File.Exists(licencePdfFile))
             {
                 File.Copy(licencePdfFile, exportTitle, true);
 
                 if (commonTesting.ToLower().Contains("false"))
                 {
-                    using (Process process = new Process())
+                    using (var process = new Process())
+                    {
+                        process.StartInfo.FileName = exportTitle;
+                        process.Start();
+                    }
+                }
+            }
+            else
+            {
+                File.Copy(pdfFileName, exportTitle, true);
+
+                if (commonTesting.ToLower().Contains("false"))
+                {
+                    using (var process = new Process())
                     {
                         process.StartInfo.FileName = exportTitle;
                         process.Start();
@@ -60,14 +94,6 @@ namespace ApplyPDFLicenseInfo
             if (File.Exists(licencePdfFile) && File.Exists(exportTitle))
             {
                 File.Delete(licencePdfFile);
-            }
-            System.Globalization.TextInfo myTI = new System.Globalization.CultureInfo("en-US", false).TextInfo;
-            inputType = myTI.ToTitleCase(inputType);
-            if (creatorTool.ToLower() == "libreoffice")
-            {
-                Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout.css", string.Empty);
-                LoadParameters(inputType);
-                CreateRAMP(xhtmlFile, inputType);
             }
         }
 
