@@ -123,7 +123,7 @@ namespace SIL.PublishingSolution
         private bool _isParaPicture, _isFirstPicture;
         private int _pictureNo;
         private bool _isReversalFile = false;
-
+        private bool _isLinux = false;
 
         public LOContent()
         {
@@ -136,6 +136,7 @@ namespace SIL.PublishingSolution
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass,
             Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
         {
+            _isLinux = Common.UnixVersionCheck();
             OldStyles styleInfo = new OldStyles();
             GetRefFormat(projInfo, idAllClass);
             SetReversalFile(projInfo);
@@ -1716,7 +1717,16 @@ namespace SIL.PublishingSolution
             }
 
             TableClose();
-            SectionClose(closeChild);
+
+            if (_isLinux)
+            {
+                SectionClose(_closeChildName);
+            }
+            else
+            {
+                SectionClose(closeChild);
+            }
+
             ClosefooterNote();
             bool isImageEnd = EndElementForImage();
             EndElementBase(isImageEnd); //Note: base class

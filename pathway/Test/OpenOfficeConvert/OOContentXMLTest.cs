@@ -3835,7 +3835,7 @@ namespace Test.OpenOfficeConvert
 
             _totalTime = DateTime.Now - startTime;
             string style = string.Empty;
-            if (Common.UnixVersionCheck())
+            if (_isLinux)
             {
                 style = "_Unix";
             }
