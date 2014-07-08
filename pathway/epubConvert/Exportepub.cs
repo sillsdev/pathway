@@ -105,7 +105,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "E-Book (.epub)";
+                return "E-Book (Epub2 and Epub3)";//E-Book (.epub)
             }
         }
 

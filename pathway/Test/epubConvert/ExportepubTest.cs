@@ -62,7 +62,7 @@ namespace Test.epubConvert
         {
             var target = new Exportepub();
             var actual = target.ExportType;
-            Assert.AreEqual("E-Book (.epub)", actual);
+            Assert.AreEqual("E-Book (Epub2 and Epub3)", actual);
         }
 
         [Test]

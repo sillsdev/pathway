@@ -167,7 +167,7 @@ namespace Test.XhtmlExport
                 case "InDesign":
                     IdmlCheck(project, message);
                     break;
-                case "E-Book (.epub)":
+                case "E-Book (Epub2 and Epub3)":
                     //TODO: Epub needs more than a file compare test.
                     FileCheck(project, ".epub", message);
                     break;
