@@ -150,7 +150,14 @@ namespace SIL.PublishingSolution
             var noXmlSpace = LoadNoXmlSpaceXslt();
             var fixEpub = LoadFixEpubXslt();
             #endregion
-            
+
+            #region Create EpubFolder
+            if (!Common.Testing)
+            {
+                CreateEpubFolder(projInfo);
+            }
+            #endregion
+
             var preProcessor = new PreExportProcess(projInfo);
             preProcessor.RemoveBrokenImage();
 
@@ -299,6 +306,15 @@ namespace SIL.PublishingSolution
             inProcess.PerformStep();
             #endregion Manifest and Table of Contents
 
+            #region Copy Epub package for Epub3
+            if (!Common.Testing)
+            {
+                string epub3Path = Path.GetDirectoryName(projInfo.DictionaryPath);
+                epub3Path = Common.PathCombine(epub3Path, "Epub3");
+                Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
+            }
+            #endregion Copy Epub package for Epub3
+
             #region Packaging
             inProcess.SetStatus("Packaging");
             if (_isUnixOs)
@@ -341,6 +357,21 @@ namespace SIL.PublishingSolution
             #endregion Close Reporting
 
             return success;
+        }
+
+        private static void CreateEpubFolder(PublicationInformation projInfo)
+        {
+            Common.CopyFolderandSubFolder(projInfo.DictionaryPath, Common.PathCombine(projInfo.DictionaryPath, "Epub2"), false);
+            var di = new DirectoryInfo(projInfo.DictionaryPath);
+            Common.CleanFile(di);
+            projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(Common.PathCombine(projInfo.DictionaryPath, "Epub2"),
+                                                                   Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
+            projInfo.DefaultCssFileWithPath = Common.PathCombine(Common.PathCombine(projInfo.DictionaryPath, "Epub2"),
+                                                                 Path.GetFileName(projInfo.DefaultCssFileWithPath));
+            projInfo.DefaultRevCssFileWithPath = Common.PathCombine(Common.PathCombine(projInfo.DictionaryPath, "Epub2"),
+                                                                    Path.GetFileName(projInfo.DefaultRevCssFileWithPath));
+            projInfo.DictionaryPath = Common.PathCombine(projInfo.DictionaryPath, "Epub2");
+            projInfo.ProjectPath = Common.PathCombine(projInfo.DictionaryPath, "Epub2");
         }
 
         private static Cursor UseWaitCursor()

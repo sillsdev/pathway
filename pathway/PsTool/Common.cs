@@ -2613,6 +2613,24 @@ namespace SIL.Tool
             }
         }
 
+        public static void CleanFile(DirectoryInfo di)
+        {
+            try
+            {
+                if (di == null)
+                    return;
+
+                foreach (FileInfo fi in di.GetFiles())
+                {
+                    fi.IsReadOnly = false;
+                    fi.Delete();
+                }
+            }
+            catch
+            {
+            }
+        }
+
         private static void WaitForDirectoryToBecomeEmpty(DirectoryInfo di)
         {
             for (int i = 0; i < 5; i++)
@@ -3118,7 +3136,8 @@ namespace SIL.Tool
         /// </summary>
         /// <param name="sourceFolder"></param>
         /// <param name="destFolder"></param>
-        public static void CopyOfficeFolder(string sourceFolder, string destFolder)
+        /// <param name="copySubFolder"> </param>
+        public static void CopyFolderandSubFolder(string sourceFolder, string destFolder, bool copySubFolder)
         {
             if (Directory.Exists(destFolder))
             {
@@ -3136,14 +3155,17 @@ namespace SIL.Tool
                     File.Copy(file, dest);
                 }
 
-                string[] folders = Directory.GetDirectories(sourceFolder);
-                foreach (string folder in folders)
+                if (copySubFolder)
                 {
-                    string name = Path.GetFileName(folder);
-                    string dest = Common.PathCombine(destFolder, name);
-                    if (name != ".svn")
+                    string[] folders = Directory.GetDirectories(sourceFolder);
+                    foreach (string folder in folders)
                     {
-                        CopyOfficeFolder(folder, dest);
+                        string name = Path.GetFileName(folder);
+                        string dest = Common.PathCombine(destFolder, name);
+                        if (name != ".svn")
+                        {
+                            CopyFolderandSubFolder(folder, dest, true);
+                        }
                     }
                 }
             }

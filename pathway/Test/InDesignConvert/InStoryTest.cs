@@ -66,7 +66,7 @@ namespace Test.InDesignConvert
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             Common.SupportFolder = "";
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
-            Common.CopyOfficeFolder(_expectedPath, _outputPath);
+            Common.CopyFolderandSubFolder(_expectedPath, _outputPath, true);
         }
 
         [SetUp]

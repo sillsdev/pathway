@@ -696,7 +696,7 @@ namespace epubConvert
             xmlReader.Close();
             // should only be one of these after splitting out the chapters.
             XmlNodeList nodes;
-            if (InputType.Equals("dictionary"))
+            if (InputType.ToLower().Equals("dictionary"))
             {
                 nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
                 if (nodes == null || nodes.Count == 0)
