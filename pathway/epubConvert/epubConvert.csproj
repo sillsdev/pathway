@@ -221,6 +221,7 @@
     <Compile Include="Exportepub.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ExportEpub3.cs" />
     <Compile Include="FontWarningDlg.cs">
       <SubType>Form</SubType>
     </Compile>
