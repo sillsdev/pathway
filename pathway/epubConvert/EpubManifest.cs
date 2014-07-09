@@ -342,12 +342,16 @@ namespace epubConvert
                         idRefValue = fileId;
                     }
 
-
-                    opf.WriteStartElement("itemref"); // item (stylesheet)
-                    // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
-                    var idRef = _parent.InputType == "dictionary" ? Path.GetFileNameWithoutExtension(file) : idRefValue;
-                    opf.WriteAttributeString("idref", idRef);
-                    opf.WriteEndElement(); // itemref
+                    if (fileId.IndexOf("PartFile") == -1 && _parent.InputType == "dictionary")
+                    {
+                        opf.WriteStartElement("itemref"); // item (stylesheet)
+                        // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
+                        var idRef = _parent.InputType == "dictionary"
+                                        ? Path.GetFileNameWithoutExtension(file)
+                                        : idRefValue;
+                        opf.WriteAttributeString("idref", idRef);
+                        opf.WriteEndElement(); // itemref
+                    }
                 }
             }
             opf.WriteEndElement(); // spine
