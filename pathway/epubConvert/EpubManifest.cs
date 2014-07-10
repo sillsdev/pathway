@@ -66,8 +66,10 @@ namespace epubConvert
             opf.WriteStartDocument();
             // package name
             opf.WriteStartElement("package", "http://www.idpf.org/2007/opf");
+
             opf.WriteAttributeString("version", "2.0");
             opf.WriteAttributeString("unique-identifier", "BookId");
+
             // metadata - items defined by the Dublin Core Metadata Initiative:
             Metadata(projInfo, bookId, opf);
             StartManifest(opf);
@@ -84,18 +86,61 @@ namespace epubConvert
             opf.Close();
         }
 
+        /// <summary>
+        /// Generates the manifest and metadata information file used by the .epub reader
+        /// (content.opf). For more information, refer to <see cref="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm#Section2.0"/> 
+        /// </summary>
+        /// <param name="projInfo">Project information</param>
+        /// <param name="contentFolder">Content folder (.../OEBPS)</param>
+        /// <param name="bookId">Unique identifier for the book we're generating.</param>
+        public void CreateOpfV3(PublicationInformation projInfo, string contentFolder, Guid bookId)
+        {
+            XmlWriter opf = XmlWriter.Create(Common.PathCombine(contentFolder, "content.opf"));
+            opf.WriteStartDocument();
+            // package name
+            opf.WriteStartElement("package", "http://www.idpf.org/2007/opf");
+
+            opf.WriteAttributeString("version", "3.0");
+            opf.WriteAttributeString("xml","lang", null, "en");
+            opf.WriteAttributeString("unique-identifier", "pub-id");
+            opf.WriteAttributeString("prefix", "rendition",null,"http://www.idpf.org/vocab/rendition/#");
+
+            // metadata - items defined by the Dublin Core Metadata Initiative:
+            MetadataV3(projInfo, bookId, opf);
+            StartManifestV3(opf);
+            if (_parent.EmbedFonts)
+            {
+                ManifestFontEmbed(opf);
+            }
+            string[] files = Directory.GetFiles(contentFolder);
+            ManifestContent(opf, files);
+            SpineV3(opf, files);
+            Guide(projInfo, opf, files);
+            opf.WriteEndElement(); // package
+            opf.WriteEndDocument();
+            opf.Close();
+        }
+        
         private void Metadata(PublicationInformation projInfo, Guid bookId, XmlWriter opf)
         {
             // (http://dublincore.org/documents/2004/12/20/dces/)
             opf.WriteStartElement("metadata");
             opf.WriteAttributeString("xmlns", "dc", null, "http://purl.org/dc/elements/1.1/");
+
             opf.WriteAttributeString("xmlns", "opf", null, "http://www.idpf.org/2007/opf");
+
             opf.WriteElementString("dc", "title", null,
                                    (Title == "") ? (Common.databaseName + " " + projInfo.ProjectName) : Title);
+
+
             opf.WriteStartElement("dc", "creator", null); //<dc:creator opf:role="aut">[author]</dc:creator>
+
             opf.WriteAttributeString("opf", "role", null, "aut");
+
             opf.WriteValue((Creator == "") ? Environment.UserName : Creator);
             opf.WriteEndElement();
+
+
             opf.WriteElementString("dc", "subject", null, _parent.InputType == "dictionary" ? "Reference" : "Religion & Spirituality");
             if (Description.Length > 0)
                 opf.WriteElementString("dc", "description", null, Description);
@@ -144,6 +189,120 @@ namespace epubConvert
             opf.WriteEndElement(); // metadata
         }
 
+        private void MetadataV3(PublicationInformation projInfo, Guid bookId, XmlWriter opf)
+        {
+            // (http://dublincore.org/documents/2004/12/20/dces/)
+            opf.WriteStartElement("metadata");
+            opf.WriteAttributeString("xmlns", "dc", null, "http://purl.org/dc/elements/1.1/");
+            opf.WriteStartElement("dc", "title", null);
+            opf.WriteAttributeString("id", "title");
+
+            if (!string.IsNullOrEmpty(Title))
+            {
+                opf.WriteValue(Title);
+            }
+            else
+            {
+                opf.WriteValue(Common.databaseName + " " + projInfo.ProjectName);
+            }
+            opf.WriteEndElement();
+
+            opf.WriteStartElement("dc", "creator", null); //<dc:creator opf:role="aut">[author]</dc:creator>
+            opf.WriteAttributeString("id", "creator");
+            if (!string.IsNullOrEmpty(Creator))
+            {
+                opf.WriteValue(Creator);
+            }
+            else
+            {
+                opf.WriteValue(Environment.UserName);
+            }
+            
+            opf.WriteEndElement();
+
+            if (_epubFont.LanguageCount == 0)
+            {
+                opf.WriteElementString("dc", "language", null, "en");
+            }
+
+            foreach (var lang in _epubFont.LanguageCodes())
+            {
+                opf.WriteElementString("dc", "language", null, lang);
+            }
+
+            opf.WriteStartElement("dc", "identifier", null); 
+            opf.WriteAttributeString("id", "pub-id");
+            opf.WriteValue(bookId.ToString());
+            opf.WriteEndElement();
+
+            if (!string.IsNullOrEmpty(Source))
+                opf.WriteElementString("dc", "source", null, Source);
+            else
+                opf.WriteElementString("dc", "source", null, "Epub3 Source");
+                
+            
+
+            opf.WriteStartElement("meta"); 
+            opf.WriteAttributeString("property", "dcterms:modified");
+            opf.WriteValue(String.Format("{0:u}", DateTime.Today));
+            opf.WriteEndElement();
+
+
+            opf.WriteElementString("dc", "date", null, DateTime.Now.Year.ToString(CultureInfo.InvariantCulture));
+
+            if (!string.IsNullOrEmpty(Publisher))
+                opf.WriteElementString("dc", "publisher", null, Publisher);
+
+
+            opf.WriteStartElement("dc", "contributor", null); // authoring program as a "contributor", e.g.:
+            opf.WriteAttributeString("id", "contributor-id");
+            opf.WriteValue(Common.GetProductName());
+            opf.WriteEndElement();
+
+            if (!string.IsNullOrEmpty(Rights))
+                opf.WriteElementString("dc", "rights", null, Rights);
+
+            if (!string.IsNullOrEmpty(Description))
+                opf.WriteElementString("dc", "description", null, Description);
+            else
+                opf.WriteElementString("dc", "description", null, "Epub3 Export");
+
+            if (!string.IsNullOrEmpty(Coverage))
+                opf.WriteElementString("dc", "coverage", null, Coverage);
+
+            opf.WriteElementString("dc", "subject", null, _parent.InputType == "dictionary" ? "Reference" : "Religion & Spirituality");
+
+
+            opf.WriteElementString("dc", "type", null, "Text");
+
+
+            // cover image (optional)
+            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
+            {
+                opf.WriteStartElement("meta");
+                opf.WriteAttributeString("name", "cover");
+                opf.WriteAttributeString("content", "cover-image");
+                opf.WriteEndElement(); // meta
+            }
+
+            opf.WriteStartElement("meta");
+            opf.WriteAttributeString("property", "rendition:layout");
+            opf.WriteValue("reflowable");
+            opf.WriteEndElement(); // meta
+
+            opf.WriteStartElement("meta");
+            opf.WriteAttributeString("property", "rendition:orientation");
+            opf.WriteValue("auto");
+            opf.WriteEndElement(); // meta
+
+            opf.WriteStartElement("meta");
+            opf.WriteAttributeString("property", "rendition:spread");
+            opf.WriteValue("auto");
+            opf.WriteEndElement(); // meta
+            
+            opf.WriteEndElement(); // metadata
+        }
+
         private static void StartManifest(XmlWriter opf)
         {
             // manifest
@@ -153,6 +312,19 @@ namespace epubConvert
             opf.WriteAttributeString("id", "ncx");
             opf.WriteAttributeString("href", "toc.ncx");
             opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
+            opf.WriteEndElement(); // item
+        }
+
+        private static void StartManifestV3(XmlWriter opf)
+        {
+            // manifest <item id="toc" properties="nav" href="TOC.xhtml" media-type="application/xhtml+xml"/>
+            opf.WriteStartElement("manifest");
+            // (individual "item" elements in the manifest)
+            opf.WriteStartElement("item");
+            opf.WriteAttributeString("id", "toc");
+            opf.WriteAttributeString("properties", "nav");
+            opf.WriteAttributeString("href", "File3TOC000_.html");
+            opf.WriteAttributeString("media-type", "application/xhtml+xml");
             opf.WriteEndElement(); // item
         }
 
@@ -166,6 +338,7 @@ namespace epubConvert
                     // already written out that this font doesn't exist in the CSS file; just skip it here
                     continue;
                 }
+
                 opf.WriteStartElement("item"); // item (charis embedded font)
                 opf.WriteAttributeString("id", "epub.embedded.font" + fontNum);
                 opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.Filename));
@@ -217,7 +390,7 @@ namespace epubConvert
                 Debug.Assert(name != null);
                 string nameNoExt = Path.GetFileNameWithoutExtension(file);
 
-                if (name.EndsWith(".xhtml"))
+                if (name.EndsWith(".xhtml") || name.EndsWith(".html"))
                 {
                     // is this the cover page?
                     if (name.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
@@ -350,6 +523,66 @@ namespace epubConvert
                                         ? Path.GetFileNameWithoutExtension(file)
                                         : idRefValue;
                         opf.WriteAttributeString("idref", idRef);
+                        opf.WriteEndElement(); // itemref
+                    }
+                }
+            }
+            opf.WriteEndElement(); // spine
+        }
+
+        private void SpineV3(XmlWriter opf, IEnumerable<string> files)
+        {
+            // spine
+            opf.WriteStartElement("spine");
+            opf.WriteAttributeString("page-progression-direction", "ltr");
+            // a couple items for the cover image
+            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
+            {
+                opf.WriteStartElement("itemref");
+                opf.WriteAttributeString("idref", "cover");
+                opf.WriteAttributeString("linear", "yes");
+                opf.WriteEndElement(); // itemref
+            }
+
+            var listIdRef = new List<string>();
+            int counterSet = 1;
+            foreach (string file in files)
+            {
+                // is this the cover page?
+                var fileName = Path.GetFileName(file);
+                Debug.Assert(fileName != null);
+                if (fileName.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
+                {
+                    continue;
+                }
+                // add an <itemref> for each xhtml file in the set
+                if (fileName.EndsWith(".xhtml") || fileName.EndsWith(".html"))
+                {
+                    string fileId = _parent.GetBookId(file);
+                    string idRefValue;
+                    if (listIdRef.Contains(fileId))
+                    {
+                        var counter = counterSet.ToString(CultureInfo.InvariantCulture);
+                        listIdRef.Add(fileId + counter);
+                        idRefValue = fileId + counter;
+                        counterSet++;
+                    }
+                    else
+                    {
+                        listIdRef.Add(fileId);
+                        idRefValue = fileId;
+                    }
+
+                    if (fileId.IndexOf("PartFile") == -1 && _parent.InputType == "dictionary")
+                    {
+                        opf.WriteStartElement("itemref"); // item (stylesheet)
+                        // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
+                        var idRef = _parent.InputType == "dictionary"
+                                        ? Path.GetFileNameWithoutExtension(file)
+                                        : idRefValue;
+                        opf.WriteAttributeString("idref", idRef);
+                        opf.WriteAttributeString("linear","yes");
+                        opf.WriteAttributeString("properties", "rendition:layout-scrolling");
                         opf.WriteEndElement(); // itemref
                     }
                 }

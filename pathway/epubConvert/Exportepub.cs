@@ -66,7 +66,7 @@ namespace SIL.PublishingSolution
     {
         private EpubFont _epubFont;
         private EpubManifest _epubManifest;
-        ExportEpub3 _exportEpub3 = new ExportEpub3();
+        Epub3Transformation _exportEpub3;
         private bool _isIncludeImage = true;
 
         private bool _isNoteTargetReferenceExists;
@@ -312,7 +312,7 @@ namespace SIL.PublishingSolution
                 string epub3Path = Path.GetDirectoryName(projInfo.DictionaryPath);
                 epub3Path = Common.PathCombine(epub3Path, "Epub3");
                 Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
-
+                _exportEpub3 = new Epub3Transformation(this, _epubFont);
                 _exportEpub3.SplitFiles = splitFiles;
                 _exportEpub3.Epub3Directory = epub3Path;
                 _exportEpub3.Export(projInfo);
