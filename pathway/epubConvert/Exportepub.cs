@@ -1311,6 +1311,11 @@ namespace SIL.PublishingSolution
                         // no book code - use scrBookName
                         nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
                     }
+                    if (nodes == null || nodes.Count == 0)
+                    {
+                        // If no Title_Main, scrBookCode, scrBookName - use Chapter_Number(Landmarks)
+                        nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Chapter_Number']", namespaceManager);
+                    }
                 }
                 if (nodes != null && nodes.Count > 0)
                 {
