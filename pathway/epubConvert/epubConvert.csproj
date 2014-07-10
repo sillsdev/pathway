@@ -217,6 +217,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmbeddedFont.cs" />
+    <Compile Include="EpubExportTypeDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EpubExportTypeDlg.Designer.cs">
+      <DependentUpon>EpubExportTypeDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="EpubToc.cs" />
     <Compile Include="Exportepub.cs">
       <SubType>Code</SubType>
@@ -265,6 +271,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="EpubExportTypeDlg.resx">
+      <DependentUpon>EpubExportTypeDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FontWarningDlg.resx">
       <DependentUpon>FontWarningDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
