@@ -77,7 +77,6 @@ namespace SIL.PublishingSolution
 
         public const string ReferencesFilename = "zzReferences.xhtml";
 
-
         // property implementations
         public bool EmbedFonts { get; set; }
         public bool IncludeFontVariants { get; set; }
@@ -307,9 +306,10 @@ namespace SIL.PublishingSolution
             #endregion Manifest and Table of Contents
 
             #region Copy Epub package for Epub3
+            string epub3Path = Path.GetDirectoryName(projInfo.DictionaryPath);
             if (!Common.Testing)
             {
-                string epub3Path = Path.GetDirectoryName(projInfo.DictionaryPath);
+               
                 epub3Path = Common.PathCombine(epub3Path, "Epub3");
                 Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
                 _exportEpub3 = new Epub3Transformation(this, _epubFont);
@@ -319,8 +319,8 @@ namespace SIL.PublishingSolution
             }
             #endregion Copy Epub package for Epub3
 
-            #region Packaging
-            inProcess.SetStatus("Packaging");
+            #region Packaging for Epub2 and Epub3
+            inProcess.SetStatus("Packaging for Epub2");
             if (_isUnixOs)
             {
                 AddDtdInXhtml(contentFolder);
@@ -328,6 +328,15 @@ namespace SIL.PublishingSolution
             string fileName = CreateFileNameFromTitle(projInfo);
             Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
             var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
+            
+            inProcess.SetStatus("Packaging for Epub3");
+            if (_isUnixOs)
+            {
+                AddDtdInXhtml(contentFolder);
+            }
+            string fileNameV3 = CreateFileNameFromTitle(projInfo);
+            Compress(projInfo.TempOutputFolder, Common.PathCombine(epub3Path, fileNameV3));
+            var outputPathWithFileNameV3 = Common.PathCombine(epub3Path, fileNameV3) + ".epub";
 #if (TIME_IT)
             TimeSpan tsTotal = DateTime.Now - dt1;
             Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
@@ -337,13 +346,41 @@ namespace SIL.PublishingSolution
 
             #region Validate
             inProcess.SetStatus("Validate");
-            ValidateAndDisplayResult(outputFolder, fileName, outputPathWithFileName);
+            ValidateResult(outputFolder, fileName, outputPathWithFileName);
+            if (!Common.Testing)
+            {
+                ValidateResult(outputFolder, fileName, outputPathWithFileNameV3);
+            }
             inProcess.PerformStep();
             #endregion Validate
+
+            #region Option Dialog box
+            if (!Common.Testing)
+            {
+                EpubExportTypeDlg exportTypeDlg = new EpubExportTypeDlg();
+                exportTypeDlg.ShowDialog();
+                if (exportTypeDlg._exportType == "epub2")
+                {
+                    DisplayOutput(outputFolder, fileName, outputPathWithFileName);
+                }
+                else if (exportTypeDlg._exportType == "epub3")
+                {
+                    DisplayOutput(outputFolder, fileName, outputPathWithFileNameV3);
+                }
+                else if (exportTypeDlg._exportType == "folder")
+                {
+                    Process.Start("explorer.exe", Path.GetDirectoryName(outputFolder));
+                }
+            }
+            #endregion Option Dialog box
 
             #region Clean up
             inProcess.SetStatus("Clean up");
             Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1", string.Empty);
+            if (!Common.Testing)
+            {
+                Common.CleanupExportFolder(outputPathWithFileNameV3, ".tmp,.de", "_1", string.Empty);
+            }
             inProcess.PerformStep();
             #endregion Clean up
 
@@ -499,7 +536,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void ValidateAndDisplayResult(string outputFolder, string fileName, string outputPathWithFileName)
+        private void ValidateResult(string outputFolder, string fileName, string outputPathWithFileName)
         {
             // Postscript - validate the file using our epubcheck wrapper
             if (Common.Testing)
@@ -517,8 +554,6 @@ namespace SIL.PublishingSolution
                     var validationDialog = new ValidationDialog { FileName = outputPathWithFileName };
                     validationDialog.ShowDialog();
                 }
-
-                DisplayOutput(outputFolder, fileName, outputPathWithFileName);
             }
         }
 
@@ -785,6 +820,12 @@ namespace SIL.PublishingSolution
         }
 
         private static MergeCss _mc; // When mc is disposed it also deletes the merged file
+
+        //public Exportepub(string epub3Path)
+        //{
+        //    //this.epub3Path = epub3Path;
+        //}
+
         private static string MergeAndFilterCss(PreExportProcess preProcessor, string tempFolder, string cssFullPath)
         {
             var tempFolderName = Path.GetFileName(tempFolder);

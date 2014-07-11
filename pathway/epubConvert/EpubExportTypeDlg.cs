@@ -15,6 +15,7 @@ namespace epubConvert
 {
     public partial class EpubExportTypeDlg : Form
     {
+        public string _exportType = "epub2";
        public EpubExportTypeDlg()
         {
             InitializeComponent();
@@ -89,22 +90,26 @@ namespace epubConvert
 
         private void btnexprtEpub2_Click(object sender, EventArgs e)
         {
-
+            _exportType = "epub2";
+            Close();
         }
 
         private void btnexprtEpub3_Click(object sender, EventArgs e)
         {
-
+            _exportType = "epub3";
+            Close();
         }
 
         private void btnexprtfolder_Click(object sender, EventArgs e)
         {
-
+            _exportType = "folder";
+            Close();
         }
 
         private void btnexprtCancel_Click(object sender, EventArgs e)
         {
-
+            _exportType = "cancel";
+            Close();
         }
 
 
