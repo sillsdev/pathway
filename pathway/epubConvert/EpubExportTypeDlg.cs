@@ -29,13 +29,13 @@ namespace epubConvert
             messageBuilder.Append(Environment.NewLine);
             messageBuilder.Append(Environment.NewLine);
 
-            messageBuilder.Append(" \t\u25CF  Click Epub2. \n\n To open the epub2 version of the file\n");
+            messageBuilder.Append(" \t\u25CF  Click Epub2. \n\n To open the epub2 version of the file.\n");
             messageBuilder.Append(Environment.NewLine);
-            messageBuilder.Append(" \t\u25CF  Click Epub3. \n\n To open the epub3 version of the file\n");
+            messageBuilder.Append(" \t\u25CF  Click Epub3. \n\n To open the epub3 version of the file.\n");
             messageBuilder.Append(Environment.NewLine);
-            messageBuilder.Append(" \t\u25CF  Click Folder. \n\n To open the folder containing both the versions\n");
+            messageBuilder.Append(" \t\u25CF  Click Folder. \n\n To open the folder containing both the versions.\n");
             messageBuilder.Append(Environment.NewLine);
-            messageBuilder.Append(" \t\u25CF  Click Cancel.\n\n To cancel the operation\n");
+            messageBuilder.Append(" \t\u25CF  Click Cancel.\n\n To cancel the operation.\n");
             
             lblMessage.Text = messageBuilder.ToString();
 

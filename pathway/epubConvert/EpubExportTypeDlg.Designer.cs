@@ -79,7 +79,7 @@
             // 
             this.lblMessage.AutoSize = true;
             this.lblMessage.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessage.Location = new System.Drawing.Point(97, 33);
+            this.lblMessage.Location = new System.Drawing.Point(69, 33);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(250, 18);
             this.lblMessage.TabIndex = 1;
@@ -89,7 +89,7 @@
             // 
             this.IcnInfo.Location = new System.Drawing.Point(26, 33);
             this.IcnInfo.Name = "IcnInfo";
-            this.IcnInfo.Size = new System.Drawing.Size(50, 44);
+            this.IcnInfo.Size = new System.Drawing.Size(38, 35);
             this.IcnInfo.TabIndex = 0;
             this.IcnInfo.TabStop = false;
             // 
