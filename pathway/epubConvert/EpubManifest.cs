@@ -78,9 +78,9 @@ namespace epubConvert
                 ManifestFontEmbed(opf);
             }
             string[] files = Directory.GetFiles(contentFolder);
-            ManifestContent(opf, files);
+            ManifestContent(opf, files, "epub2");
             Spine(opf, files);
-            Guide(projInfo, opf, files);
+            Guide(projInfo, opf, files, "epub2");
             opf.WriteEndElement(); // package
             opf.WriteEndDocument();
             opf.Close();
@@ -95,15 +95,15 @@ namespace epubConvert
         /// <param name="bookId">Unique identifier for the book we're generating.</param>
         public void CreateOpfV3(PublicationInformation projInfo, string contentFolder, Guid bookId)
         {
+            LoadPropertiesFromSettings();
             XmlWriter opf = XmlWriter.Create(Common.PathCombine(contentFolder, "content.opf"));
             opf.WriteStartDocument();
             // package name
             opf.WriteStartElement("package", "http://www.idpf.org/2007/opf");
-
             opf.WriteAttributeString("version", "3.0");
-            opf.WriteAttributeString("xml","lang", null, "en");
+            opf.WriteAttributeString("xml", "lang", null, "en");
             opf.WriteAttributeString("unique-identifier", "pub-id");
-            opf.WriteAttributeString("prefix", "rendition",null,"http://www.idpf.org/vocab/rendition/#");
+            opf.WriteAttributeString("prefix", "rendition: http://www.idpf.org/vocab/rendition/#");
 
             // metadata - items defined by the Dublin Core Metadata Initiative:
             MetadataV3(projInfo, bookId, opf);
@@ -113,14 +113,14 @@ namespace epubConvert
                 ManifestFontEmbed(opf);
             }
             string[] files = Directory.GetFiles(contentFolder);
-            ManifestContent(opf, files);
+            ManifestContent(opf, files, "epub3");
             SpineV3(opf, files);
-            Guide(projInfo, opf, files);
+            Guide(projInfo, opf, files, "epub3");
             opf.WriteEndElement(); // package
             opf.WriteEndDocument();
             opf.Close();
         }
-        
+
         private void Metadata(PublicationInformation projInfo, Guid bookId, XmlWriter opf)
         {
             // (http://dublincore.org/documents/2004/12/20/dces/)
@@ -140,15 +140,17 @@ namespace epubConvert
             opf.WriteValue((Creator == "") ? Environment.UserName : Creator);
             opf.WriteEndElement();
 
-
             opf.WriteElementString("dc", "subject", null, _parent.InputType == "dictionary" ? "Reference" : "Religion & Spirituality");
+
             if (Description.Length > 0)
                 opf.WriteElementString("dc", "description", null, Description);
+
             if (Publisher.Length > 0)
                 opf.WriteElementString("dc", "publisher", null, Publisher);
+
             opf.WriteStartElement("dc", "contributor", null); // authoring program as a "contributor", e.g.:
             opf.WriteAttributeString("opf", "role", null, "bkp");
-            // <dc:contributor opf:role="bkp">FieldWorks 7</dc:contributor>
+
             opf.WriteValue(Common.GetProductName());
             opf.WriteEndElement();
             opf.WriteElementString("dc", "date", null, DateTime.Today.ToString("yyyy-MM-dd"));
@@ -217,7 +219,7 @@ namespace epubConvert
             {
                 opf.WriteValue(Environment.UserName);
             }
-            
+
             opf.WriteEndElement();
 
             if (_epubFont.LanguageCount == 0)
@@ -230,21 +232,21 @@ namespace epubConvert
                 opf.WriteElementString("dc", "language", null, lang);
             }
 
-            opf.WriteStartElement("dc", "identifier", null); 
+            opf.WriteStartElement("dc", "identifier", null);
             opf.WriteAttributeString("id", "pub-id");
             opf.WriteValue(bookId.ToString());
             opf.WriteEndElement();
 
-            if (!string.IsNullOrEmpty(Source))
+            if (!string.IsNullOrEmpty(Source.Trim()))
                 opf.WriteElementString("dc", "source", null, Source);
             else
                 opf.WriteElementString("dc", "source", null, "Epub3 Source");
-                
-            
 
-            opf.WriteStartElement("meta"); 
+
+
+            opf.WriteStartElement("meta");
             opf.WriteAttributeString("property", "dcterms:modified");
-            opf.WriteValue(String.Format("{0:u}", DateTime.Today));
+            opf.WriteValue(DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"));
             opf.WriteEndElement();
 
 
@@ -252,7 +254,8 @@ namespace epubConvert
 
             if (!string.IsNullOrEmpty(Publisher))
                 opf.WriteElementString("dc", "publisher", null, Publisher);
-
+            else
+                opf.WriteElementString("dc", "publisher", null, "Epub3");
 
             opf.WriteStartElement("dc", "contributor", null); // authoring program as a "contributor", e.g.:
             opf.WriteAttributeString("id", "contributor-id");
@@ -261,14 +264,19 @@ namespace epubConvert
 
             if (!string.IsNullOrEmpty(Rights))
                 opf.WriteElementString("dc", "rights", null, Rights);
+            else
+                opf.WriteElementString("dc", "rights", null, "Epub3");
 
             if (!string.IsNullOrEmpty(Description))
                 opf.WriteElementString("dc", "description", null, Description);
             else
                 opf.WriteElementString("dc", "description", null, "Epub3 Export");
 
-            if (!string.IsNullOrEmpty(Coverage))
+            if (!string.IsNullOrEmpty(Coverage.Trim()))
                 opf.WriteElementString("dc", "coverage", null, Coverage);
+            else
+                opf.WriteElementString("dc", "coverage", null, "Epub3");
+
 
             opf.WriteElementString("dc", "subject", null, _parent.InputType == "dictionary" ? "Reference" : "Religion & Spirituality");
 
@@ -299,7 +307,7 @@ namespace epubConvert
             opf.WriteAttributeString("property", "rendition:spread");
             opf.WriteValue("auto");
             opf.WriteEndElement(); // meta
-            
+
             opf.WriteEndElement(); // metadata
         }
 
@@ -323,7 +331,7 @@ namespace epubConvert
             opf.WriteStartElement("item");
             opf.WriteAttributeString("id", "toc");
             opf.WriteAttributeString("properties", "nav");
-            opf.WriteAttributeString("href", "File3TOC000_.html");
+            opf.WriteAttributeString("href", "toc.html");
             opf.WriteAttributeString("media-type", "application/xhtml+xml");
             opf.WriteEndElement(); // item
         }
@@ -379,7 +387,7 @@ namespace epubConvert
             }
         }
 
-        private void ManifestContent(XmlWriter opf, IEnumerable<string> files)
+        private void ManifestContent(XmlWriter opf, IEnumerable<string> files, string epubVersion)
         {
             var listIdRef = new List<string>();
             int counterSet = 1;
@@ -398,9 +406,18 @@ namespace epubConvert
                         // yup - write it out and go to the next item
                         opf.WriteStartElement("item");
                         opf.WriteAttributeString("id", "cover");
+                        if (epubVersion == "epub3")
+                        {
+                            opf.WriteAttributeString("properties", "scripted");
+                        }
                         opf.WriteAttributeString("href", name);
                         opf.WriteAttributeString("media-type", "application/xhtml+xml");
                         opf.WriteEndElement(); // item
+                        continue;
+                    }
+
+                    if (nameNoExt != null && nameNoExt.ToLower() == "toc")
+                    {
                         continue;
                     }
 
@@ -440,6 +457,12 @@ namespace epubConvert
                 {
                     opf.WriteStartElement("item"); // item (image)
                     opf.WriteAttributeString("id", "image" + nameNoExt);
+
+                    if (epubVersion == "epub3" && nameNoExt == "imagecover")
+                    {
+                         opf.WriteAttributeString("properties", "cover-image");
+                    }
+
                     opf.WriteAttributeString("href", name);
                     if (nameNoExt != null && nameNoExt.Contains("sil-bw-logo"))
                     {
@@ -538,10 +561,10 @@ namespace epubConvert
             // a couple items for the cover image
             if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
             {
-                opf.WriteStartElement("itemref");
-                opf.WriteAttributeString("idref", "cover");
-                opf.WriteAttributeString("linear", "yes");
-                opf.WriteEndElement(); // itemref
+                //opf.WriteStartElement("itemref");
+                //opf.WriteAttributeString("idref", "cover");
+                //opf.WriteAttributeString("linear", "yes");
+                //opf.WriteEndElement(); // itemref
             }
 
             var listIdRef = new List<string>();
@@ -555,6 +578,12 @@ namespace epubConvert
                 {
                     continue;
                 }
+
+                if (fileName.ToLower().Contains("toc.html"))
+                {
+                    continue;
+                }
+
                 // add an <itemref> for each xhtml file in the set
                 if (fileName.EndsWith(".xhtml") || fileName.EndsWith(".html"))
                 {
@@ -581,7 +610,7 @@ namespace epubConvert
                                         ? Path.GetFileNameWithoutExtension(file)
                                         : idRefValue;
                         opf.WriteAttributeString("idref", idRef);
-                        opf.WriteAttributeString("linear","yes");
+                        opf.WriteAttributeString("linear", "yes");
                         opf.WriteAttributeString("properties", "rendition:layout-scrolling");
                         opf.WriteEndElement(); // itemref
                     }
@@ -590,7 +619,7 @@ namespace epubConvert
             opf.WriteEndElement(); // spine
         }
 
-        private static void Guide(PublicationInformation projInfo, XmlWriter opf, string[] files)
+        private static void Guide(PublicationInformation projInfo, XmlWriter opf, string[] files, string epubVersion)
         {
             // guide
             opf.WriteStartElement("guide");
@@ -598,7 +627,14 @@ namespace epubConvert
             if (Param.GetMetadataValue(Param.CoverPage).Trim().Equals("True"))
             {
                 opf.WriteStartElement("reference");
-                opf.WriteAttributeString("href", "File0Cvr00000_.xhtml");
+                if (epubVersion == "epub3")
+                {
+                    opf.WriteAttributeString("href", "File0Cvr00000_.html");
+                }
+                else
+                {
+                    opf.WriteAttributeString("href", "File0Cvr00000_.xhtml");
+                }
                 opf.WriteAttributeString("type", "cover");
                 opf.WriteAttributeString("title", "Cover");
                 opf.WriteEndElement(); // reference
@@ -610,7 +646,7 @@ namespace epubConvert
             int index = 0;
             while (index < files.Length)
             {
-                if (files[index].EndsWith(".xhtml"))
+                if (files[index].EndsWith(".xhtml") || files[index].EndsWith(".html"))
                 {
                     break;
                 }

@@ -335,7 +335,7 @@ namespace SIL.PublishingSolution
                 AddDtdInXhtml(contentFolder);
             }
             string fileNameV3 = CreateFileNameFromTitle(projInfo);
-            Compress(projInfo.TempOutputFolder, Common.PathCombine(epub3Path, fileNameV3));
+            Compress(epub3Path, Common.PathCombine(epub3Path, fileNameV3));
             var outputPathWithFileNameV3 = Common.PathCombine(epub3Path, fileNameV3) + ".epub";
 #if (TIME_IT)
             TimeSpan tsTotal = DateTime.Now - dt1;

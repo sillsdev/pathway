@@ -85,12 +85,21 @@ namespace SIL.PublishingSolution
                     if (fileInfo.Extension == ".xhtml")
                     {
                         Common.ApplyXslt(curFile, xhmltohtml5Space);
-
                         if (File.Exists(curFile))
                         {
+                            string fileName = Path.GetFileName(curFile);
+
+                            if (fileName != null && fileName.ToLower().Contains("toc00000"))
+                            {
+                                File.Copy(curFile, curFile.Replace(fileName, "toc.html"), true);
+                            }
                             File.Copy(curFile, curFile.Replace(".xhtml", ".html"), true);
                             File.Delete(curFile);
                         }
+                    }
+                    if (fileInfo.Extension == ".ncx")
+                    {
+                        File.Delete(curFile);
                     }
                 }
             }
