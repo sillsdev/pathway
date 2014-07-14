@@ -2641,6 +2641,24 @@ namespace SIL.Tool
             }
         }
 
+        /// <summary>
+        /// To replace the symbol string if the symbol matches with the text
+        /// </summary>
+        public void ReplaceStringInCss(string cssFile, string existingContent, string replacingContent)
+        {
+            var sr = new StreamReader(cssFile);
+            string fileContent = sr.ReadToEnd();
+            sr.Close();
+
+            if (fileContent.Contains(existingContent))
+            {
+                fileContent = fileContent.Replace(existingContent, replacingContent);
+            }
+            var sw = new StreamWriter(cssFile);
+            sw.Write(fileContent);
+            sw.Close();
+        }
+
         public void RemoveStringInCss(string cssFileName, string match)
         {
             var sr = new StreamReader(cssFileName);

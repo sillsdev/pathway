@@ -224,7 +224,9 @@
       <DependentUpon>EpubExportTypeDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="EpubToc.cs" />
-    <Compile Include="EpubValidateTypeDlg.cs" />
+    <Compile Include="EpubValidateTypeDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EpubValidateTypeDlg.Designer.cs">
       <DependentUpon>EpubValidateTypeDlg.cs</DependentUpon>
     </Compile>
@@ -314,6 +316,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="xhtmltohtml5.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Epub3CoverPage.xsl" />
+    <EmbeddedResource Include="Epub3Toc.xsl" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

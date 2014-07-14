@@ -406,10 +406,10 @@ namespace epubConvert
                         // yup - write it out and go to the next item
                         opf.WriteStartElement("item");
                         opf.WriteAttributeString("id", "cover");
-                        if (epubVersion == "epub3")
-                        {
-                            opf.WriteAttributeString("properties", "scripted");
-                        }
+                        //if (epubVersion == "epub3")
+                        //{
+                           // opf.WriteAttributeString("properties", "scripted");
+                        //}
                         opf.WriteAttributeString("href", name);
                         opf.WriteAttributeString("media-type", "application/xhtml+xml");
                         opf.WriteEndElement(); // item

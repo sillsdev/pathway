@@ -36,9 +36,15 @@ namespace SIL.PublishingSolution
             bool epub3export = false;
             string oebpsPath;
             oebpsPath = Common.PathCombine(Epub3Directory, "OEBPS");
+            string cssFile = Common.PathCombine(oebpsPath, "book.css");
+
+            var preProcessor = new PreExportProcess();
+            preProcessor.ReplaceStringInCss(cssFile, "{direction:ltr}", "{direction:ltr;}");
+            preProcessor.RemoveStringInCss(cssFile, "direction:");
+            
 
             var xhmltohtml5Space = Loadxhmltohtml5Xslt();
-
+            
             string[] filesList = null;
 
             filesList = Convertxhtmltohtml5(oebpsPath, xhmltohtml5Space);
@@ -46,9 +52,34 @@ namespace SIL.PublishingSolution
             ModifyContainerXML();
 
             ModifyContentOPF(projInfo, oebpsPath);
+
+            ModifyTocContent(oebpsPath);
+
+            ModifyCoverpage(oebpsPath);
+
             epub3export = true;
 
             return epub3export;
+        }
+
+        private static void ModifyCoverpage(string oebpsPath)
+        {
+            var epub3CoverPage = LoadEpub3CoverPage();
+            string epub3CoverPageFile = Common.PathCombine(oebpsPath, "File0Cvr00000_.html");
+            if (File.Exists(epub3CoverPageFile))
+            {
+                Common.ApplyXslt(epub3CoverPageFile, epub3CoverPage);
+            }
+        }
+
+        private static void ModifyTocContent(string oebpsPath)
+        {
+            var epub3Toc = LoadEpub3Toc();
+            string epub3TocFile = Common.PathCombine(oebpsPath, "toc.html");
+            if (File.Exists(epub3TocFile))
+            {
+                Common.ApplyXslt(epub3TocFile, epub3Toc);
+            }
         }
 
         private void ModifyContentOPF(PublicationInformation projInfo, string oebpsPath)
@@ -120,5 +151,22 @@ namespace SIL.PublishingSolution
             return xhmltohtml5;
         }
 
+        private static XslCompiledTransform LoadEpub3Toc()
+        {
+            var xhmltohtml5Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.Epub3Toc.xsl");
+            Debug.Assert(xhmltohtml5Stream != null);
+            var xhmltohtml5 = new XslCompiledTransform();
+            xhmltohtml5.Load(XmlReader.Create(xhmltohtml5Stream));
+            return xhmltohtml5;
+        }
+
+        private static XslCompiledTransform LoadEpub3CoverPage()
+        {
+            var xhmltohtml5Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.Epub3CoverPage.xsl");
+            Debug.Assert(xhmltohtml5Stream != null);
+            var xhmltohtml5 = new XslCompiledTransform();
+            xhmltohtml5.Load(XmlReader.Create(xhmltohtml5Stream));
+            return xhmltohtml5;
+        }
     }
 }
