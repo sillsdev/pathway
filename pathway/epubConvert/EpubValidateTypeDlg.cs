@@ -12,6 +12,8 @@ namespace epubConvert
 {
     public partial class EpubValidateTypeDlg : Form
     {
+        public string _exportType = "epub2";
+
         public EpubValidateTypeDlg()
         {
             InitializeComponent();
@@ -40,22 +42,26 @@ namespace epubConvert
 
         private void btnValidateEpub2_Click(object sender, EventArgs e)
         {
-
+            _exportType = "epub2";
+            Close();
         }
 
         private void btnValidateEpub3_Click(object sender, EventArgs e)
         {
-
+            _exportType = "epub3";
+            Close();
         }
 
         private void btnBoth_Click(object sender, EventArgs e)
         {
-
+            _exportType = "both";
+            Close();
         }
 
         private void btnNeither_Click(object sender, EventArgs e)
         {
-
+            _exportType = "neigher";
+            Close();
         }
     }
 }
