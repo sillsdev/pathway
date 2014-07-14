@@ -224,6 +224,10 @@
       <DependentUpon>EpubExportTypeDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="EpubToc.cs" />
+    <Compile Include="EpubValidateTypeDlg.cs" />
+    <Compile Include="EpubValidateTypeDlg.Designer.cs">
+      <DependentUpon>EpubValidateTypeDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Exportepub.cs">
       <SubType>Code</SubType>
     </Compile>
