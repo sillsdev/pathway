@@ -249,6 +249,7 @@
     </Compile>
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsRecTest.cs" />
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsTests.cs" />
+    <Compile Include="epubConvert\EpubXsltTransformationTest.cs" />
     <Compile Include="GoBibleConvert\ExportGoBibleTest.cs">
       <SubType>Form</SubType>
     </Compile>

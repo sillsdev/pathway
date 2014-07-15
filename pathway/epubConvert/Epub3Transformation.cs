@@ -20,6 +20,12 @@ namespace SIL.PublishingSolution
         public string Epub3Directory = string.Empty;
         private readonly XslCompiledTransform _transformObj = new XslCompiledTransform();
 
+        public Epub3Transformation()
+        {
+            _parent = null;
+            _epubFont = null;
+        }
+
         public Epub3Transformation(Exportepub exportepub, EpubFont epubFont)
         {
             _parent = exportepub;
@@ -142,7 +148,7 @@ namespace SIL.PublishingSolution
             Common.StreamReplaceInFile(containerXmlFile, "<?xml version=\"1.0\"?>", "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
         }
 
-        private static XslCompiledTransform Loadxhmltohtml5Xslt(string projectInputType)
+        public static XslCompiledTransform Loadxhmltohtml5Xslt(string projectInputType)
         {
             string xsltName = string.Empty;
             xsltName = (projectInputType == "dictionary")
@@ -156,7 +162,7 @@ namespace SIL.PublishingSolution
             return xhmltohtml5;
         }
 
-        private static XslCompiledTransform LoadEpub3Toc()
+        public static XslCompiledTransform LoadEpub3Toc()
         {
             var xhmltohtml5Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.Epub3Toc.xsl");
             Debug.Assert(xhmltohtml5Stream != null);
@@ -165,7 +171,7 @@ namespace SIL.PublishingSolution
             return xhmltohtml5;
         }
 
-        private static XslCompiledTransform LoadEpub3CoverPage()
+        public static XslCompiledTransform LoadEpub3CoverPage()
         {
             var xhmltohtml5Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.Epub3CoverPage.xsl");
             Debug.Assert(xhmltohtml5Stream != null);
