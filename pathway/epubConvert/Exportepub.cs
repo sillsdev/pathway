@@ -203,7 +203,7 @@ namespace SIL.PublishingSolution
             Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCss);
             inProcess.PerformStep();
             #endregion Css preprocessing
-            
+
             #region Hacks
             XhtmlNamespaceHack(projInfo, preProcessor, langArray);
             Common.ApplyXslt(preProcessor.ProcessedXhtml, noXmlSpace);
@@ -307,16 +307,14 @@ namespace SIL.PublishingSolution
 
             #region Copy Epub package for Epub3
             string epub3Path = Path.GetDirectoryName(projInfo.DictionaryPath);
-            if (!Common.Testing)
-            {
-               
-                epub3Path = Common.PathCombine(epub3Path, "Epub3");
-                Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
-                _exportEpub3 = new Epub3Transformation(this, _epubFont);
-                _exportEpub3.SplitFiles = splitFiles;
-                _exportEpub3.Epub3Directory = epub3Path;
-                _exportEpub3.Export(projInfo);
-            }
+
+            epub3Path = Common.PathCombine(epub3Path, "Epub3");
+            Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
+            _exportEpub3 = new Epub3Transformation(this, _epubFont);
+            _exportEpub3.SplitFiles = splitFiles;
+            _exportEpub3.Epub3Directory = epub3Path;
+            _exportEpub3.Export(projInfo);
+
             #endregion Copy Epub package for Epub3
 
             #region Packaging for Epub2 and Epub3
@@ -328,15 +326,20 @@ namespace SIL.PublishingSolution
             string fileName = CreateFileNameFromTitle(projInfo);
             Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
             var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
-            
+
             inProcess.SetStatus("Packaging for Epub3");
             if (_isUnixOs)
             {
                 AddDtdInXhtml(contentFolder);
             }
             string fileNameV3 = CreateFileNameFromTitle(projInfo);
-            Compress(epub3Path, Common.PathCombine(epub3Path, fileNameV3));
-            var outputPathWithFileNameV3 = Common.PathCombine(epub3Path, fileNameV3) + ".epub";
+
+            string outputPathWithFileNameV3 = null;
+            if (epub3Path != null)
+            {
+                Compress(epub3Path, Common.PathCombine(epub3Path, fileNameV3));
+                outputPathWithFileNameV3 = Common.PathCombine(epub3Path, fileNameV3) + ".epub";
+            }
 #if (TIME_IT)
             TimeSpan tsTotal = DateTime.Now - dt1;
             Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
@@ -359,7 +362,7 @@ namespace SIL.PublishingSolution
                     DisplayOutput(outputFolder, fileName, outputPathWithFileName);
                     isOutputDilalogNeeded = false;
                 }
-                else if (validateTypeDlg._exportType == "epub3")
+                else if (validateTypeDlg._exportType == "epub3" && outputPathWithFileNameV3 != null)
                 {
                     ValidateResult(outputFolder, fileName, outputPathWithFileNameV3);
                     DisplayOutput(outputFolder, fileName, outputPathWithFileNameV3);
@@ -574,8 +577,8 @@ namespace SIL.PublishingSolution
                 //                    MessageBoxIcon.Information) == DialogResult.Yes)
                 //{
 
-                    var validationDialog = new ValidationDialog { FileName = outputPathWithFileName };
-                    validationDialog.ShowDialog();
+                var validationDialog = new ValidationDialog { FileName = outputPathWithFileName };
+                validationDialog.ShowDialog();
                 //}
             }
         }
@@ -691,7 +694,7 @@ namespace SIL.PublishingSolution
                     else
                     {
                         var args = string.Format(@"""{0}"" ""{1}"" {2} ""{3}""", file, xsltFullName,
-                                                outputExtension , getPsApplicationPath);
+                                                outputExtension, getPsApplicationPath);
                         Common.RunCommand(xsltProcessExe, args, 1);
                     }
                     if (File.Exists(xhtmlOutputFile))
@@ -919,7 +922,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRAMP(PublicationInformation projInfo)
         {
-            var ramp = new Ramp {ProjInputType = projInfo.ProjectInputType};
+            var ramp = new Ramp { ProjInputType = projInfo.ProjectInputType };
             ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".epub", projInfo.ProjectInputType);
         }
 
@@ -1602,9 +1605,9 @@ namespace SIL.PublishingSolution
             foreach (string file in imageFiles)
             {
                 Image image;
-// ReSharper disable PossibleNullReferenceException
+                // ReSharper disable PossibleNullReferenceException
                 switch (Path.GetExtension(file) == null ? "" : Path.GetExtension(file).ToLower())
-// ReSharper restore PossibleNullReferenceException
+                // ReSharper restore PossibleNullReferenceException
                 {
                     case ".jpg":
                     case ".jpeg":
@@ -1876,7 +1879,7 @@ namespace SIL.PublishingSolution
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
                 XmlNodeList footnoteNodes = null;
-                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_General_Paragraph']/a") 
+                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_General_Paragraph']/a")
                     : xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
 
                 if (footnoteNodes == null)
@@ -1888,7 +1891,7 @@ namespace SIL.PublishingSolution
                     if (footnoteNode.Attributes != null)
                         footnoteNode.Attributes["href"].Value = "zzReferences.xhtml" + footnoteNode.Attributes["href"].Value;
                 }
-                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_CrossHYPHENReference_Paragraph']/a") 
+                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_CrossHYPHENReference_Paragraph']/a")
                     : xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
 
                 if (footnoteNodes == null)
@@ -2149,8 +2152,8 @@ namespace SIL.PublishingSolution
                 {
                     // for the subsequent sections, we need the head + the substring (startIndex to realMax)
                     sb.Append(head);
-                    var bodyClass = InputType == "scripture"? "scrBody": "dicBody";
-                    var divClass = InputType == "scripture"? "scrBook": "letData";
+                    var bodyClass = InputType == "scripture" ? "scrBody" : "dicBody";
+                    var divClass = InputType == "scripture" ? "scrBook" : "letData";
                     sb.Append(string.Format("<body class=\"{0}\"><div class=\"{1}\">", bodyClass, divClass));
                     sb.Append(content.Substring(startIndex, (realMax - startIndex)));
                     sb.AppendLine("</div></body></html>"); // close out the xhtml
@@ -2232,18 +2235,21 @@ namespace SIL.PublishingSolution
             // add the content to the existing epub.zip file
             string zipFile = Common.PathCombine(sourceFolder, "epub.zip");
             string contentFolder = Common.PathCombine(sourceFolder, "OEBPS");
-            string[] files = Directory.GetFiles(contentFolder);
-            mOdt.AddToZip(files, zipFile);
-            var sb = new StringBuilder();
-            sb.Append(sourceFolder);
-            sb.Append(Path.DirectorySeparatorChar);
-            sb.Append("META-INF");
-            sb.Append(Path.DirectorySeparatorChar);
-            sb.Append("container.xml");
-            var containerFile = new[] { sb.ToString() };
-            mOdt.AddToZip(containerFile, zipFile);
-            // copy the results to the output directory
-            File.Copy(zipFile, outputPathWithFileName, true);
+            if (Directory.Exists(contentFolder))
+            {
+                string[] files = Directory.GetFiles(contentFolder);
+                mOdt.AddToZip(files, zipFile);
+                var sb = new StringBuilder();
+                sb.Append(sourceFolder);
+                sb.Append(Path.DirectorySeparatorChar);
+                sb.Append("META-INF");
+                sb.Append(Path.DirectorySeparatorChar);
+                sb.Append("container.xml");
+                var containerFile = new[] { sb.ToString() };
+                mOdt.AddToZip(containerFile, zipFile);
+                // copy the results to the output directory
+                File.Copy(zipFile, outputPathWithFileName, true);
+            }
         }
 
         #endregion
