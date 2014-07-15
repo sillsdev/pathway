@@ -47,7 +47,7 @@
             this.btnBoth.Name = "btnBoth";
             this.btnBoth.Size = new System.Drawing.Size(89, 33);
             this.btnBoth.TabIndex = 3;
-            this.btnBoth.Text = "&Folder";
+            this.btnBoth.Text = "&Both";
             this.btnBoth.UseVisualStyleBackColor = true;
             this.btnBoth.Click += new System.EventHandler(this.btnBoth_Click);
             // 
@@ -59,7 +59,7 @@
             this.btnNeither.Name = "btnNeither";
             this.btnNeither.Size = new System.Drawing.Size(89, 33);
             this.btnNeither.TabIndex = 4;
-            this.btnNeither.Text = "&Cancel";
+            this.btnNeither.Text = "&Neither";
             this.btnNeither.UseVisualStyleBackColor = true;
             this.btnNeither.Click += new System.EventHandler(this.btnNeither_Click);
             // 

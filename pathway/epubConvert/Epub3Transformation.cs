@@ -41,9 +41,9 @@ namespace SIL.PublishingSolution
             var preProcessor = new PreExportProcess();
             preProcessor.ReplaceStringInCss(cssFile, "{direction:ltr}", "{direction:ltr;}");
             preProcessor.RemoveStringInCss(cssFile, "direction:");
-            
 
-            var xhmltohtml5Space = Loadxhmltohtml5Xslt();
+
+            var xhmltohtml5Space = Loadxhmltohtml5Xslt(projInfo.ProjectInputType.ToLower());
             
             string[] filesList = null;
 
@@ -142,9 +142,14 @@ namespace SIL.PublishingSolution
             Common.StreamReplaceInFile(containerXmlFile, "<?xml version=\"1.0\"?>", "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
         }
 
-        private static XslCompiledTransform Loadxhmltohtml5Xslt()
+        private static XslCompiledTransform Loadxhmltohtml5Xslt(string projectInputType)
         {
-            var xhmltohtml5Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.xhtmltohtml5.xslt");
+            string xsltName = string.Empty;
+            xsltName = (projectInputType == "dictionary")
+                           ? "epubConvert.xhtmltohtml5.xslt"
+                          : "epubConvert.xhtmltohtml5.xslt";
+
+            var xhmltohtml5Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(xsltName);
             Debug.Assert(xhmltohtml5Stream != null);
             var xhmltohtml5 = new XslCompiledTransform();
             xhmltohtml5.Load(XmlReader.Create(xhmltohtml5Stream));
