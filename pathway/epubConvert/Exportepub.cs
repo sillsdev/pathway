@@ -307,14 +307,25 @@ namespace SIL.PublishingSolution
 
             #region Copy Epub package for Epub3
             string epub3Path = Path.GetDirectoryName(projInfo.DictionaryPath);
-
-            epub3Path = Common.PathCombine(epub3Path, "Epub3");
-            Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
-            _exportEpub3 = new Epub3Transformation(this, _epubFont);
-            _exportEpub3.SplitFiles = splitFiles;
-            _exportEpub3.Epub3Directory = epub3Path;
-            _exportEpub3.Export(projInfo);
-
+            if (!Common.Testing)
+            {
+               
+                epub3Path = Common.PathCombine(epub3Path, "Epub3");
+                Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
+                if (File.Exists(projInfo.DefaultXhtmlFileWithPath))
+                    File.Copy(projInfo.DefaultXhtmlFileWithPath,
+                              Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath)), true);
+                if (File.Exists(projInfo.DefaultCssFileWithPath))
+                    File.Copy(projInfo.DefaultCssFileWithPath,
+                              Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultCssFileWithPath)), true);
+                if (File.Exists(projInfo.DefaultRevCssFileWithPath))
+                    File.Copy(projInfo.DefaultRevCssFileWithPath,
+                              Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultRevCssFileWithPath)), true);
+                _exportEpub3 = new Epub3Transformation(this, _epubFont);
+                _exportEpub3.SplitFiles = splitFiles;
+                _exportEpub3.Epub3Directory = epub3Path;
+                _exportEpub3.Export(projInfo);
+            }
             #endregion Copy Epub package for Epub3
 
             #region Packaging for Epub2 and Epub3
@@ -333,13 +344,8 @@ namespace SIL.PublishingSolution
                 AddDtdInXhtml(contentFolder);
             }
             string fileNameV3 = CreateFileNameFromTitle(projInfo);
-
-            string outputPathWithFileNameV3 = null;
-            if (epub3Path != null)
-            {
-                Compress(epub3Path, Common.PathCombine(epub3Path, fileNameV3));
-                outputPathWithFileNameV3 = Common.PathCombine(epub3Path, fileNameV3) + ".epub";
-            }
+            Compress(projInfo.TempOutputFolder, Common.PathCombine(epub3Path, fileNameV3));
+            var outputPathWithFileNameV3 = Common.PathCombine(epub3Path, fileNameV3) + ".epub";
 #if (TIME_IT)
             TimeSpan tsTotal = DateTime.Now - dt1;
             Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
@@ -405,7 +411,7 @@ namespace SIL.PublishingSolution
             Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1", string.Empty);
             if (!Common.Testing)
             {
-                Common.CleanupExportFolder(outputPathWithFileNameV3, ".tmp,.de", "_1", string.Empty);
+                Common.CleanupExportFolder(outputPathWithFileNameV3, ".tmp,.de,.zip", "_1", "META-INF,OEBPS");
             }
             inProcess.PerformStep();
             #endregion Clean up
@@ -413,8 +419,23 @@ namespace SIL.PublishingSolution
             #region Archive
             inProcess.SetStatus("Archive");
             CreateRAMP(projInfo);
+            if (!Common.Testing)
+            {
+                projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
+                CreateRAMP(projInfo);
+            }
             inProcess.PerformStep();
             #endregion Archive
+
+            #region Clean up
+            inProcess.SetStatus("Final Clean up");
+            Common.CleanupExportFolder(outputPathWithFileName, ".xhtml,.xml, .css", string.Empty, "Test");
+            if (!Common.Testing)
+            {
+                Common.CleanupExportFolder(outputPathWithFileNameV3, ".xhtml,.xml, .css", string.Empty, "Test");
+            }
+            inProcess.PerformStep();
+            #endregion Clean up
 
             #region Close Reporting
             inProcess.Close();
