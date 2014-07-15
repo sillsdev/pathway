@@ -56,6 +56,7 @@ namespace Test.epubConvert
         #endregion setup
         
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ExportTypeXhtmltoHtmlTest()
         {
             const string file = "XhtmltoHtmlTransformation";
@@ -66,6 +67,7 @@ namespace Test.epubConvert
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ExportTypeEpub3TocTest()
         {
             const string file = "Epub3TOCTransformation";
@@ -76,6 +78,7 @@ namespace Test.epubConvert
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ExportTypeEpub3CoverPageTest()
         {
             const string file = "Epub3CoverPageTransformation";

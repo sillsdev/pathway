@@ -51,9 +51,7 @@ namespace SIL.PublishingSolution
 
             var xhmltohtml5Space = Loadxhmltohtml5Xslt(projInfo.ProjectInputType.ToLower());
             
-            string[] filesList = null;
-
-            filesList = Convertxhtmltohtml5(oebpsPath, xhmltohtml5Space);
+            Convertxhtmltohtml5(oebpsPath, xhmltohtml5Space);
 
             ModifyContainerXML();
 
@@ -110,7 +108,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string[] Convertxhtmltohtml5(string oebpsPath, XslCompiledTransform xhmltohtml5Space)
+        private void Convertxhtmltohtml5(string oebpsPath, XslCompiledTransform xhmltohtml5Space)
         {
             string[] filesList = null;
             if (Directory.Exists(oebpsPath))
@@ -140,7 +138,6 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            return filesList;
         }
 
         private void ModifyContainerXMLForEpub3(string containerXmlFile)
