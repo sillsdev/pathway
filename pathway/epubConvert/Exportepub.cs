@@ -149,12 +149,16 @@ namespace SIL.PublishingSolution
             var noXmlSpace = LoadNoXmlSpaceXslt();
             var fixEpub = LoadFixEpubXslt();
             #endregion
-
             #region Create EpubFolder
             if (!Common.Testing)
             {
                 CreateEpubFolder(projInfo);
             }
+            else
+            {
+                projInfo.ProjectPath = projInfo.DictionaryPath;
+            }
+
             #endregion
 
             var preProcessor = new PreExportProcess(projInfo);
@@ -306,26 +310,23 @@ namespace SIL.PublishingSolution
             #endregion Manifest and Table of Contents
 
             #region Copy Epub package for Epub3
-            string epub3Path = Path.GetDirectoryName(projInfo.DictionaryPath);
-            if (!Common.Testing)
-            {
-               
-                epub3Path = Common.PathCombine(epub3Path, "Epub3");
-                Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
-                if (File.Exists(projInfo.DefaultXhtmlFileWithPath))
-                    File.Copy(projInfo.DefaultXhtmlFileWithPath,
-                              Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath)), true);
-                if (File.Exists(projInfo.DefaultCssFileWithPath))
-                    File.Copy(projInfo.DefaultCssFileWithPath,
-                              Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultCssFileWithPath)), true);
-                if (File.Exists(projInfo.DefaultRevCssFileWithPath))
-                    File.Copy(projInfo.DefaultRevCssFileWithPath,
-                              Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultRevCssFileWithPath)), true);
-                _exportEpub3 = new Epub3Transformation(this, _epubFont);
-                _exportEpub3.SplitFiles = splitFiles;
-                _exportEpub3.Epub3Directory = epub3Path;
-                _exportEpub3.Export(projInfo);
-            }
+            string epub3Path = projInfo.ProjectPath;
+            epub3Path = Common.PathCombine(epub3Path, "Epub3");
+            Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
+            if (File.Exists(projInfo.DefaultXhtmlFileWithPath))
+                File.Copy(projInfo.DefaultXhtmlFileWithPath, Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath)), true);
+
+            if (File.Exists(projInfo.DefaultCssFileWithPath))
+                File.Copy(projInfo.DefaultCssFileWithPath, Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultCssFileWithPath)), true);
+
+            if (File.Exists(projInfo.DefaultRevCssFileWithPath))
+                File.Copy(projInfo.DefaultRevCssFileWithPath, Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultRevCssFileWithPath)), true);
+
+            _exportEpub3 = new Epub3Transformation(this, _epubFont);
+            _exportEpub3.SplitFiles = splitFiles;
+            _exportEpub3.Epub3Directory = epub3Path;
+            _exportEpub3.Export(projInfo);
+
             #endregion Copy Epub package for Epub3
 
             #region Packaging for Epub2 and Epub3
@@ -344,8 +345,12 @@ namespace SIL.PublishingSolution
                 AddDtdInXhtml(contentFolder);
             }
             string fileNameV3 = CreateFileNameFromTitle(projInfo);
-            Compress(projInfo.TempOutputFolder, Common.PathCombine(epub3Path, fileNameV3));
-            var outputPathWithFileNameV3 = Common.PathCombine(epub3Path, fileNameV3) + ".epub";
+            string outputPathWithFileNameV3 = null;
+            if (epub3Path != null)
+            {
+                Compress(epub3Path, Common.PathCombine(epub3Path, fileNameV3));
+                outputPathWithFileNameV3 = Common.PathCombine(epub3Path, fileNameV3) + ".epub";
+            }
 #if (TIME_IT)
             TimeSpan tsTotal = DateTime.Now - dt1;
             Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
@@ -429,10 +434,10 @@ namespace SIL.PublishingSolution
 
             #region Clean up
             inProcess.SetStatus("Final Clean up");
-            Common.CleanupExportFolder(outputPathWithFileName, ".xhtml,.xml, .css", string.Empty, "Test");
+            Common.CleanupExportFolder(outputPathWithFileName, ".xhtml,.xml,.css", string.Empty, "Test");
             if (!Common.Testing)
             {
-                Common.CleanupExportFolder(outputPathWithFileNameV3, ".xhtml,.xml, .css", string.Empty, "Test");
+                Common.CleanupExportFolder(outputPathWithFileNameV3, ".xhtml,.xml,.css", string.Empty, "Test");
             }
             inProcess.PerformStep();
             #endregion Clean up
@@ -458,8 +463,9 @@ namespace SIL.PublishingSolution
                                                                  Path.GetFileName(projInfo.DefaultCssFileWithPath));
             projInfo.DefaultRevCssFileWithPath = Common.PathCombine(Common.PathCombine(projInfo.DictionaryPath, "Epub2"),
                                                                     Path.GetFileName(projInfo.DefaultRevCssFileWithPath));
+
+            projInfo.ProjectPath = projInfo.DictionaryPath;
             projInfo.DictionaryPath = Common.PathCombine(projInfo.DictionaryPath, "Epub2");
-            projInfo.ProjectPath = Common.PathCombine(projInfo.DictionaryPath, "Epub2");
         }
 
         private static Cursor UseWaitCursor()
@@ -628,12 +634,16 @@ namespace SIL.PublishingSolution
 
         private string CreateFileNameFromTitle(PublicationInformation projInfo)
         {
-            string fileName = _epubManifest.Title;
-            if (string.IsNullOrEmpty(_epubManifest.Title))
+            string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            if (!Common.Testing)
             {
-                fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                fileName = _epubManifest.Title;
+                if (string.IsNullOrEmpty(_epubManifest.Title))
+                {
+                    fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                }
+                fileName = Common.ReplaceSymbolToUnderline(fileName);
             }
-            fileName = Common.ReplaceSymbolToUnderline(fileName);
             return fileName;
         }
 

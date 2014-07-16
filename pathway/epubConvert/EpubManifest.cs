@@ -211,7 +211,7 @@ namespace epubConvert
 
             opf.WriteStartElement("dc", "creator", null); //<dc:creator opf:role="aut">[author]</dc:creator>
             opf.WriteAttributeString("id", "creator");
-            if (!string.IsNullOrEmpty(Creator))
+            if (!string.IsNullOrEmpty(Creator.Trim()))
             {
                 opf.WriteValue(Creator);
             }
@@ -252,7 +252,7 @@ namespace epubConvert
 
             opf.WriteElementString("dc", "date", null, DateTime.Now.Year.ToString(CultureInfo.InvariantCulture));
 
-            if (!string.IsNullOrEmpty(Publisher))
+            if (!string.IsNullOrEmpty(Publisher.Trim()))
                 opf.WriteElementString("dc", "publisher", null, Publisher);
             else
                 opf.WriteElementString("dc", "publisher", null, "Epub3");
@@ -262,12 +262,12 @@ namespace epubConvert
             opf.WriteValue(Common.GetProductName());
             opf.WriteEndElement();
 
-            if (!string.IsNullOrEmpty(Rights))
+            if (!string.IsNullOrEmpty(Rights.Trim()))
                 opf.WriteElementString("dc", "rights", null, Rights);
             else
                 opf.WriteElementString("dc", "rights", null, "Epub3");
 
-            if (!string.IsNullOrEmpty(Description))
+            if (!string.IsNullOrEmpty(Description.Trim()))
                 opf.WriteElementString("dc", "description", null, Description);
             else
                 opf.WriteElementString("dc", "description", null, "Epub3 Export");
