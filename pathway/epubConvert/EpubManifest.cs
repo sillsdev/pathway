@@ -222,14 +222,17 @@ namespace epubConvert
 
             opf.WriteEndElement();
 
-            if (_epubFont.LanguageCount == 0)
+            if (_epubFont != null && _epubFont.LanguageCount == 0)
             {
                 opf.WriteElementString("dc", "language", null, "en");
             }
 
-            foreach (var lang in _epubFont.LanguageCodes())
+            if (_epubFont != null)
             {
-                opf.WriteElementString("dc", "language", null, lang);
+                foreach (var lang in _epubFont.LanguageCodes())
+                {
+                    opf.WriteElementString("dc", "language", null, lang);
+                }
             }
 
             opf.WriteStartElement("dc", "identifier", null);
@@ -242,13 +245,10 @@ namespace epubConvert
             else
                 opf.WriteElementString("dc", "source", null, "Epub3 Source");
 
-
-
             opf.WriteStartElement("meta");
             opf.WriteAttributeString("property", "dcterms:modified");
             opf.WriteValue(DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"));
             opf.WriteEndElement();
-
 
             opf.WriteElementString("dc", "date", null, DateTime.Now.Year.ToString(CultureInfo.InvariantCulture));
 
@@ -408,7 +408,7 @@ namespace epubConvert
                         opf.WriteAttributeString("id", "cover");
                         //if (epubVersion == "epub3")
                         //{
-                           // opf.WriteAttributeString("properties", "scripted");
+                        // opf.WriteAttributeString("properties", "scripted");
                         //}
                         opf.WriteAttributeString("href", name);
                         opf.WriteAttributeString("media-type", "application/xhtml+xml");
@@ -460,7 +460,7 @@ namespace epubConvert
 
                     if (epubVersion == "epub3" && nameNoExt == "imagecover")
                     {
-                         opf.WriteAttributeString("properties", "cover-image");
+                        opf.WriteAttributeString("properties", "cover-image");
                     }
 
                     opf.WriteAttributeString("href", name);

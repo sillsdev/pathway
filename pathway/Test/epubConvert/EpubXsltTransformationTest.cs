@@ -39,10 +39,12 @@ namespace Test.epubConvert
         private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
+        private bool _isUnix;
 
         [TestFixtureSetUp]
         public void Setup()
         {
+            _isUnix = Common.IsUnixOS();
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
@@ -56,7 +58,6 @@ namespace Test.epubConvert
         #endregion setup
         
         [Test]
-        [Category("SkipOnTeamCity")]
         public void ExportTypeXhtmltoHtmlTest()
         {
             const string file = "XhtmltoHtmlTransformation";
@@ -67,7 +68,6 @@ namespace Test.epubConvert
         }
 
         [Test]
-        [Category("SkipOnTeamCity")]
         public void ExportTypeEpub3TocTest()
         {
             const string file = "Epub3TOCTransformation";
@@ -78,7 +78,6 @@ namespace Test.epubConvert
         }
 
         [Test]
-        [Category("SkipOnTeamCity")]
         public void ExportTypeEpub3CoverPageTest()
         {
             const string file = "Epub3CoverPageTransformation";
@@ -91,7 +90,7 @@ namespace Test.epubConvert
         private void FileCompare(string file)
         {
             string htmlOutput = FileOutput(file + ".html");
-            string htmlExpected = FileExpected(file + ".html");
+            string htmlExpected = _isUnix ? FileExpected(file + "_linux.html") : FileExpected(file + ".html");
             TextFileAssert.AreEqual(htmlOutput, htmlExpected, file + " in xhtml to html ");
         }
 

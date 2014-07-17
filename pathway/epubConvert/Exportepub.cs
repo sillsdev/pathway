@@ -323,7 +323,6 @@ namespace SIL.PublishingSolution
                 File.Copy(projInfo.DefaultRevCssFileWithPath, Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultRevCssFileWithPath)), true);
 
             _exportEpub3 = new Epub3Transformation(this, _epubFont);
-            _exportEpub3.SplitFiles = splitFiles;
             _exportEpub3.Epub3Directory = epub3Path;
             _exportEpub3.Export(projInfo);
 
@@ -340,10 +339,7 @@ namespace SIL.PublishingSolution
             var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
 
             inProcess.SetStatus("Packaging for Epub3");
-            if (_isUnixOs)
-            {
-                AddDtdInXhtml(contentFolder);
-            }
+            
             string fileNameV3 = CreateFileNameFromTitle(projInfo);
             string outputPathWithFileNameV3 = null;
             if (epub3Path != null)
@@ -2258,7 +2254,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="sourceFolder">Folder to compress</param>
         /// <param name="outputPath">Output path and filename (without extension)</param>
-        private void Compress(string sourceFolder, string outputPath)
+        public void Compress(string sourceFolder, string outputPath)
         {
             var mOdt = new ZipFolder();
             string outputPathWithFileName = outputPath + ".epub";

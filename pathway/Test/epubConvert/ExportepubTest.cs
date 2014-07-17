@@ -454,6 +454,69 @@ namespace Test.epubConvert
             
         }
 
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void Epub3ExportTest()
+        {
+            CleanOutputDirectory();
+            string inputDataFolder = Common.PathCombine(_inputPath, "epub3Testcase");
+            string outputDataFolder = Common.PathCombine(_outputPath, "epub3Testcase");
+            Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
+            string inputCaseFileName = Common.PathCombine(outputDataFolder, "epub3Testcase.zip");
+            var zfExtract = new FastZip();
+            zfExtract.ExtractZip(inputCaseFileName, FileOutput("epub3Testcase"), ".*");
+            
+            const string xhtmlName = "FrenchHorse.xhtml";
+            const string cssName = "FrenchHorse.css";
+            var projInfo = new PublicationInformation();
+            projInfo.ProjectInputType = "Dictionary";
+            projInfo.ProjectPath = outputDataFolder;
+            projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDataFolder, xhtmlName);
+            projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
+            projInfo.ProjectName = "FrenchHorse";
+            Common.Testing = true;
+            var exportEpub3 = new Epub3Transformation(this, null) {Epub3Directory = outputDataFolder};
+            exportEpub3.Export(projInfo);
+            Compress(outputDataFolder, Common.PathCombine(outputDataFolder, "FrenchHorse"));
+            var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+            var zf = new FastZip();
+            zf.ExtractZip(result, FileOutput("FrenchHorse"), ".*");
+            var zfExpected = new FastZip();
+            result = Common.PathCombine(_expectedPath, "FrenchHorse.epub");
+            zfExpected.ExtractZip(result, FileOutput("FrenchHorseExpected"), ".*");
+
+            string expectedFilesPath = FileOutput("FrenchHorseExpected");
+            expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
+            string[] filesList = Directory.GetFiles(expectedFilesPath);
+            foreach (var fileName in filesList)
+            {
+                var info = new FileInfo(fileName);
+                if (info.Extension == ".css" || info.Extension == ".html")
+                {
+                    FileCompare("FrenchHorse/OEBPS/" + info.Name, "FrenchHorseExpected/OEBPS/" + info.Name);
+                }
+            }
+        }
+
+        private void CleanOutputDirectory()
+        {
+            Common.DeleteDirectory(_outputPath);
+            if (Directory.Exists(_outputPath))
+            {
+                // clean out old files
+                foreach (var file in Directory.GetFiles(_outputPath))
+                {
+                    if (File.Exists(file))
+                        File.Delete(file);
+                }
+            }
+            else
+            {
+                Directory.CreateDirectory(_outputPath);
+            }
+        }
+
         private void FileCompare(string file1, string file2)
         {
             string xhtmlOutput = FileOutput(file1);

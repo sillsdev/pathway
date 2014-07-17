@@ -16,9 +16,7 @@ namespace SIL.PublishingSolution
         private readonly Exportepub _parent;
         private readonly EpubFont _epubFont;
         public bool IsUnixOs;
-        public List<string> SplitFiles = new List<string>();
         public string Epub3Directory = string.Empty;
-        private readonly XslCompiledTransform _transformObj = new XslCompiledTransform();
 
         public Epub3Transformation()
         {
@@ -39,9 +37,8 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
-            bool epub3export = false;
-            string oebpsPath;
-            oebpsPath = Common.PathCombine(Epub3Directory, "OEBPS");
+            bool epub3Export = false;
+            string oebpsPath = Common.PathCombine(Epub3Directory, "OEBPS");
             string cssFile = Common.PathCombine(oebpsPath, "book.css");
 
             var preProcessor = new PreExportProcess();
@@ -61,9 +58,9 @@ namespace SIL.PublishingSolution
 
             ModifyCoverpage(oebpsPath);
 
-            epub3export = true;
+            epub3Export = true;
 
-            return epub3export;
+            return epub3Export;
         }
 
         private static void ModifyCoverpage(string oebpsPath)
