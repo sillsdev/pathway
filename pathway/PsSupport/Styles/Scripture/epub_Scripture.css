@@ -282,3 +282,15 @@ text-align: left;
 margin-left: .5pt;
 text-indent: 33pt;
 }
+
+.iot{
+text-align: center;
+font-weight : bold;
+page-break-after:avoid;
+widows:2;
+font-family: inherit;
+}
+
+.Intro_List_Item1 {
+    text-indent: 6%;
+}
