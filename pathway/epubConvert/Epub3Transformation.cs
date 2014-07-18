@@ -139,10 +139,10 @@ namespace SIL.PublishingSolution
 
         public static XslCompiledTransform Loadxhmltohtml5Xslt(string projectInputType)
         {
-            string xsltName = string.Empty;
-            xsltName = (projectInputType == "dictionary")
-                           ? "epubConvert.xhtmltohtml5.xslt"
-                          : "epubConvert.xhtmltohtml5.xslt";
+            string xsltName = "epubConvert.xhtmltohtml5.xslt";
+            //xsltName = (projectInputType == "dictionary")
+            //               ? "epubConvert.xhtmltohtml5.xslt"
+            //              : "epubConvert.xhtmltohtml5.xslt";
 
             var xhmltohtml5Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(xsltName);
             Debug.Assert(xhmltohtml5Stream != null);
