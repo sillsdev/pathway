@@ -315,11 +315,15 @@
     <EmbeddedResource Include="noXmlSpace.xsl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="xhtmltohtml5.xslt" />
+    <EmbeddedResource Include="xhtmltohtml5.xslt">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Epub3CoverPage.xsl" />
-    <EmbeddedResource Include="Epub3Toc.xsl" />
+    <EmbeddedResource Include="Epub3Toc.xsl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

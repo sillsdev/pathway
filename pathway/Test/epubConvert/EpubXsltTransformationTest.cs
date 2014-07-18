@@ -68,13 +68,14 @@ namespace Test.epubConvert
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ExportTypeEpub3TocTest()
         {
             const string file = "Epub3TOCTransformation";
-            File.Copy(FileInput(file + ".html"), FileOutput(file + ".html"), true);
+            File.Copy(FileInput(file + ".ncx"), FileOutput(file + ".ncx"), true);
             XslCompiledTransform epub3TocSpace = Epub3Transformation.LoadEpub3Toc();
-            Common.ApplyXslt(FileOutput(file + ".html"), epub3TocSpace);
-            FileCompare(file);
+            Common.ApplyXslt(FileOutput(file + ".ncx"), epub3TocSpace);
+            NcxFileCompare(file);
         }
 
         [Test]
@@ -92,6 +93,13 @@ namespace Test.epubConvert
             string htmlOutput = FileOutput(file + ".html");
             string htmlExpected = _isUnix ? FileExpected(file + "_linux.html") : FileExpected(file + ".html");
             TextFileAssert.AreEqual(htmlOutput, htmlExpected, file + " in xhtml to html ");
+        }
+
+        private void NcxFileCompare(string file)
+        {
+            string htmlOutput = FileOutput(file + ".ncx");
+            string htmlExpected = _isUnix ? FileExpected(file + "_linux.ncx") : FileExpected(file + ".ncx");
+            TextFileAssert.AreEqual(htmlOutput, htmlExpected, file + " in ncx to toc ncx ");
         }
 
         private string FileInput(string fileName)

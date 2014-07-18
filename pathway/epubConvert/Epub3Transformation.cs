@@ -76,10 +76,14 @@ namespace SIL.PublishingSolution
         private static void ModifyTocContent(string oebpsPath)
         {
             var epub3Toc = LoadEpub3Toc();
+            string ncxfile = Common.PathCombine(oebpsPath, "toc.ncx");
+
             string epub3TocFile = Common.PathCombine(oebpsPath, "toc.html");
-            if (File.Exists(epub3TocFile))
+            if (File.Exists(ncxfile))
             {
-                Common.ApplyXslt(epub3TocFile, epub3Toc);
+                Common.ApplyXslt(ncxfile, epub3Toc);
+                File.Copy(ncxfile,epub3TocFile,true);
+                File.Delete(ncxfile);
             }
         }
 
@@ -120,18 +124,9 @@ namespace SIL.PublishingSolution
                         if (File.Exists(curFile))
                         {
                             string fileName = Path.GetFileName(curFile);
-
-                            if (fileName != null && fileName.ToLower().Contains("toc00000"))
-                            {
-                                File.Copy(curFile, curFile.Replace(fileName, "toc.html"), true);
-                            }
                             File.Copy(curFile, curFile.Replace(".xhtml", ".html"), true);
                             File.Delete(curFile);
                         }
-                    }
-                    if (fileInfo.Extension == ".ncx")
-                    {
-                        File.Delete(curFile);
                     }
                 }
             }
