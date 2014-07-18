@@ -457,12 +457,11 @@ namespace epubConvert
                 {
                     opf.WriteStartElement("item"); // item (image)
                     opf.WriteAttributeString("id", "image" + nameNoExt);
-
-                    if (epubVersion == "epub3" && nameNoExt == "imagecover")
+                    
+                    if (nameNoExt != null && epubVersion == "epub3" && nameNoExt.ToLower() == "cover")
                     {
                         opf.WriteAttributeString("properties", "cover-image");
                     }
-
                     opf.WriteAttributeString("href", name);
                     if (nameNoExt != null && nameNoExt.Contains("sil-bw-logo"))
                     {
@@ -488,6 +487,10 @@ namespace epubConvert
                     opf.WriteStartElement("item"); // item (image)
                     opf.WriteAttributeString("id", "image" + nameNoExt);
                     opf.WriteAttributeString("href", name);
+                    if (nameNoExt != null && epubVersion == "epub3" && nameNoExt.ToLower() == "cover")
+                    {
+                        opf.WriteAttributeString("properties", "cover-image");
+                    }
                     opf.WriteAttributeString("media-type", "image/png");
                     opf.WriteEndElement(); // item
                 }
@@ -574,15 +577,15 @@ namespace epubConvert
                 // is this the cover page?
                 var fileName = Path.GetFileName(file);
                 Debug.Assert(fileName != null);
-                if (fileName.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
-                {
-                    continue;
-                }
+                //if (fileName.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
+                //{
+                //    continue;
+                //}
 
-                if (fileName.ToLower().Contains("toc.html"))
-                {
-                    continue;
-                }
+                //if (fileName.ToLower().Contains("toc.html"))
+                //{
+                //    continue;
+                //}
 
                 // add an <itemref> for each xhtml file in the set
                 if (fileName.EndsWith(".xhtml") || fileName.EndsWith(".html"))
@@ -609,6 +612,12 @@ namespace epubConvert
                         var idRef = _parent.InputType == "dictionary"
                                         ? Path.GetFileNameWithoutExtension(file)
                                         : idRefValue;
+
+                        if (idRef != null && idRef.Contains("File0Cvr00000"))
+                        {
+                            idRef = "cover";
+                        }
+
                         opf.WriteAttributeString("idref", idRef);
                         opf.WriteAttributeString("linear", "yes");
                         opf.WriteAttributeString("properties", "rendition:layout-scrolling");
