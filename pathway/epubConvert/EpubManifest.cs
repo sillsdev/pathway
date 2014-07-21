@@ -605,7 +605,7 @@ namespace epubConvert
                         idRefValue = fileId;
                     }
 
-                    if (fileId.IndexOf("PartFile") == -1 && _parent.InputType == "dictionary")
+                    if (fileId.IndexOf("PartFile") == -1)
                     {
                         opf.WriteStartElement("itemref"); // item (stylesheet)
                         // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
