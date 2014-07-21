@@ -186,5 +186,7 @@ padding-right: 5px;
 margin-left : 4%;
 margin-right: 4%;
 text-align: left;
-
+}
+.entry .senses > .sense + .sense::before {
+content: "";
 }
