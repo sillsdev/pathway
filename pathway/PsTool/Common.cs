@@ -2495,7 +2495,13 @@ namespace SIL.Tool
             {
                 if (lstDirecorylike.Contains(Path.GetFileName(folderName)))
                 {
-                    Directory.Delete(folderName, true);
+                    try
+                    {
+                        Directory.Delete(folderName, true);
+                    }
+                    catch
+                    {
+                    }
                 }
             }
 
