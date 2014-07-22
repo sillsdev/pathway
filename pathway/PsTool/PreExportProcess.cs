@@ -2649,39 +2649,45 @@ namespace SIL.Tool
         /// </summary>
         public void ReplaceStringInCss(string cssFile, string existingContent, string replacingContent)
         {
-            var sr = new StreamReader(cssFile);
-            string fileContent = sr.ReadToEnd();
-            sr.Close();
-
-            if (fileContent.Contains(existingContent))
+            if (File.Exists(cssFile))
             {
-                fileContent = fileContent.Replace(existingContent, replacingContent);
+                var sr = new StreamReader(cssFile);
+                string fileContent = sr.ReadToEnd();
+                sr.Close();
+
+                if (fileContent.Contains(existingContent))
+                {
+                    fileContent = fileContent.Replace(existingContent, replacingContent);
+                }
+                var sw = new StreamWriter(cssFile);
+                sw.Write(fileContent);
+                sw.Close();
             }
-            var sw = new StreamWriter(cssFile);
-            sw.Write(fileContent);
-            sw.Close();
         }
 
         public void RemoveStringInCss(string cssFileName, string match)
         {
-            var sr = new StreamReader(cssFileName);
-            string fileContent = sr.ReadToEnd();
-            sr.Close();
-            int searchPos = fileContent.Length;
-            while (true)
+            if (File.Exists(cssFileName))
             {
-                int findFrom = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
-                if (findFrom == -1)
+                var sr = new StreamReader(cssFileName);
+                string fileContent = sr.ReadToEnd();
+                sr.Close();
+                int searchPos = fileContent.Length;
+                while (true)
                 {
-                    break;
+                    int findFrom = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
+                    if (findFrom == -1)
+                    {
+                        break;
+                    }
+                    int closingbracePos = fileContent.IndexOf(";", findFrom) + 1;
+                    fileContent = fileContent.Substring(0, findFrom) + fileContent.Substring(closingbracePos);
+                    searchPos = findFrom - 1;
                 }
-                int closingbracePos = fileContent.IndexOf(";", findFrom) + 1;
-                fileContent = fileContent.Substring(0, findFrom) + fileContent.Substring(closingbracePos);
-                searchPos = findFrom - 1;
+                var sw = new StreamWriter(cssFileName);
+                sw.Write(fileContent);
+                sw.Close();
             }
-            var sw = new StreamWriter(cssFileName);
-            sw.Write(fileContent);
-            sw.Close();
         }
 
         public void RemoveDeclaration(string cssFileName, string match)

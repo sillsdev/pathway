@@ -180,16 +180,10 @@ namespace Test.epubConvert
         public void ExportDictionaryCssFileComparisonTest()
         {
             // clean out old files
-            foreach (var file in Directory.GetFiles(_outputPath))
-            {
-                if (File.Exists(file))
-                    File.Delete(file);
-            }
-            string appDataDir = Common.GetAllUserPath();
-            if (Directory.Exists(appDataDir))
-            {
-                Directory.Delete(appDataDir, true);
-            }
+            CleanOutputDirectory();
+            if (!Directory.Exists(FileOutput("ExportDictionary")))
+                Directory.CreateDirectory(FileOutput("ExportDictionary"));
+            
             const string XhtmlName = "main.xhtml";
             const string CssName = "main.css";
             PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -395,11 +389,9 @@ namespace Test.epubConvert
         public void EpubIndentFileComparisonTest()
         {
             // clean out old files
-            foreach (var file in Directory.GetFiles(_outputPath))
-            {
-                if (File.Exists(file))
-                    File.Delete(file);
-            }
+            CleanOutputDirectory();
+            if (!Directory.Exists(FileOutput("ExportDictionary")))
+                Directory.CreateDirectory(FileOutput("ExportDictionary"));
             
             const string XhtmlName = "EpubIndentFileComparison.xhtml";
             const string CssName = "EpubIndentFileComparison.css";
@@ -502,19 +494,6 @@ namespace Test.epubConvert
         private void CleanOutputDirectory()
         {
             Common.DeleteDirectory(_outputPath);
-            if (Directory.Exists(_outputPath))
-            {
-                // clean out old files
-                foreach (var file in Directory.GetFiles(_outputPath))
-                {
-                    if (File.Exists(file))
-                        File.Delete(file);
-                }
-            }
-            else
-            {
-                Directory.CreateDirectory(_outputPath);
-            }
         }
 
         private void FileCompare(string file1, string file2)
@@ -534,6 +513,7 @@ namespace Test.epubConvert
             File.Copy(FileInput(BlankName), FileOutput(BlankName), true);
             projInfo.DefaultXhtmlFileWithPath = FileOutput(XhtmlName);
             projInfo.DefaultCssFileWithPath = FileOutput(BlankName);
+            projInfo.DictionaryPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             projInfo.IsOpenOutput = false;
             return projInfo;
         }

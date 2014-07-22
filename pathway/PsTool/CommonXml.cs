@@ -675,7 +675,10 @@ namespace SIL.Tool
 
                 xmldoc.Save(xhtmlFile);
             }
-            catch {}
+            catch
+            {
+                
+            }
         }
 
         #region GetXmlNode

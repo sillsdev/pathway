@@ -203,8 +203,16 @@ namespace SIL.PublishingSolution
             CustomizeCss(mergedCss);
             var niceNameCss = NiceNameCss(projInfo, tempFolder, ref mergedCss);
             var defaultCss = Path.GetFileName(niceNameCss);
+            string tempCssFile = mergedCss.Replace(".css", "tmp.css");
+            File.Copy(mergedCss, tempCssFile, true);
+            
             Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCss);
             Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCss);
+            if (!File.Exists(mergedCss))
+            {
+                File.Copy(tempCssFile, mergedCss, true);
+            }
+
             inProcess.PerformStep();
             #endregion Css preprocessing
 
@@ -306,6 +314,10 @@ namespace SIL.PublishingSolution
             inProcess.SetStatus("Generating .epub TOC and manifest");
             _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
             epubToc.CreateNcx(projInfo, contentFolder, bookId);
+            if (File.Exists(tempCssFile))
+            {
+                File.Delete(tempCssFile);
+            }
             inProcess.PerformStep();
             #endregion Manifest and Table of Contents
 
@@ -337,7 +349,7 @@ namespace SIL.PublishingSolution
             string fileName = CreateFileNameFromTitle(projInfo);
             Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
             var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
-            
+
             if (!Common.Testing)
             {
 
@@ -348,7 +360,7 @@ namespace SIL.PublishingSolution
             }
 
             inProcess.SetStatus("Packaging for Epub3");
-            
+
             string fileNameV3 = CreateFileNameFromTitle(projInfo);
             string outputPathWithFileNameV3 = null;
             if (epub3Path != null)

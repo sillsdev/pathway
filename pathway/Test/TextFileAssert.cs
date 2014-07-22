@@ -54,6 +54,10 @@ namespace Test
 
         private static void CheckLineAreEqualEx(string expectPath, string outputPath, ArrayList ex, string msg)
         {
+            if (!File.Exists(expectPath) || !File.Exists(outputPath))
+            {
+                Assert.Fail(expectPath + " File missing");
+            }
             try
             {
                 Int32 line = 0;
