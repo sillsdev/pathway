@@ -3181,6 +3181,53 @@ namespace SIL.Tool
             }
         }
 
+        /// <summary>
+        /// To copy HTML, Images and fonts to HTML5 folder and ignore the "ignoreExtns" files
+        /// </summary>
+        /// <param name="sourceFolder"></param>
+        /// <param name="destFolder"></param>
+        /// <param name="ignoreFiles"> </param>
+        public static void CustomizedFileCopy(string sourceFolder, string destFolder, string ignoreFiles)
+        {
+            if (Directory.Exists(destFolder))
+            {
+                var di = new DirectoryInfo(destFolder);
+                Common.CleanDirectory(di);
+            }
+            Directory.CreateDirectory(destFolder);
+            string[] files = Directory.GetFiles(sourceFolder);
+            try
+            {
+                bool isfileIgnore = false;
+                string[] iFiles = ignoreFiles.Split(',');
+
+
+
+
+                foreach (string file in files)
+                {
+                    if (file == null) continue;
+                    foreach (var ifile in iFiles)
+                    {
+                        if (ifile.Trim() == Path.GetFileName(file))
+                        {
+                            isfileIgnore = true;
+                            break;
+                        }
+                        isfileIgnore = false;
+                    }
+                    if (isfileIgnore) continue;
+                    string name = Path.GetFileName(file);
+                    string dest = Common.PathCombine(destFolder, name);
+                    File.Copy(file, dest);
+                }
+            }
+            catch
+            {
+                return;
+            }
+        }
+
         public static string ReplaceSeperators(string styleName)
         {
             if (styleName.IndexOf(SepPseudo) > 0)

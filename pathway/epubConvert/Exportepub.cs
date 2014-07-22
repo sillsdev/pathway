@@ -309,7 +309,7 @@ namespace SIL.PublishingSolution
             inProcess.PerformStep();
             #endregion Manifest and Table of Contents
 
-            #region Copy Epub package for Epub3
+            #region Copy Epub2 package for Epub3
             string epub3Path = projInfo.ProjectPath;
             epub3Path = Common.PathCombine(epub3Path, "Epub3");
             Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
@@ -326,7 +326,7 @@ namespace SIL.PublishingSolution
             _exportEpub3.Epub3Directory = epub3Path;
             _exportEpub3.Export(projInfo);
 
-            #endregion Copy Epub package for Epub3
+            #endregion Copy Epub2 package for Epub3
 
             #region Packaging for Epub2 and Epub3
             inProcess.SetStatus("Packaging for Epub2");
@@ -337,6 +337,15 @@ namespace SIL.PublishingSolution
             string fileName = CreateFileNameFromTitle(projInfo);
             Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
             var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
+            
+            if (!Common.Testing)
+            {
+
+                inProcess.SetStatus("Copy html files");
+                string htmlFolderPath = Common.PathCombine(Path.GetDirectoryName(epub3Path), "HTML5");
+                string oebpsFolderPath = Common.PathCombine(epub3Path, "OEBPS");
+                Common.CustomizedFileCopy(oebpsFolderPath, htmlFolderPath, "content.opf, toc.html");
+            }
 
             inProcess.SetStatus("Packaging for Epub3");
             
