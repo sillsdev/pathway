@@ -58,8 +58,7 @@ namespace epubConvert
                     MessageBoxIcon.Information) == DialogResult.Yes)
                 {
 
-                    var validationDialog = new ValidationDialog {FileName = outputPathWithFileName};
-                    validationDialog.ShowDialog();
+                    ValidateEpub.ValidateEpubFile(outputPathWithFileName);
                 }
 
                 DisplayOutput(outputFolder, fileName, outputPathWithFileName);

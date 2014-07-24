@@ -387,20 +387,20 @@ namespace SIL.PublishingSolution
                 validateTypeDlg.ShowDialog();
                 if (validateTypeDlg._exportType == "epub2")
                 {
-                    ValidateResult(outputFolder, fileName, outputPathWithFileName);
+                    ValidateResult(outputPathWithFileName);
                     DisplayOutput(outputFolder, fileName, outputPathWithFileName);
                     isOutputDilalogNeeded = false;
                 }
                 else if (validateTypeDlg._exportType == "epub3" && outputPathWithFileNameV3 != null)
                 {
-                    ValidateResult(outputFolder, fileName, outputPathWithFileNameV3);
+                    ValidateResult(outputPathWithFileNameV3);
                     DisplayOutput(outputFolder, fileName, outputPathWithFileNameV3);
                     isOutputDilalogNeeded = false;
                 }
                 else if (validateTypeDlg._exportType == "both")
                 {
-                    ValidateResult(outputFolder, fileName, outputPathWithFileName);//2
-                    ValidateResult(outputFolder, fileName, outputPathWithFileNameV3);//3
+                    ValidateResult(outputPathWithFileName);// Epub2 ExportType
+                    ValidateResult(outputPathWithFileNameV3);//Epub3 ExportType
                 }
             }
             #endregion Option Dialog box
@@ -607,7 +607,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void ValidateResult(string outputFolder, string fileName, string outputPathWithFileName)
+        private void ValidateResult(string outputPathWithFileName)
         {
             // Postscript - validate the file using our epubcheck wrapper
             if (Common.Testing)
@@ -618,13 +618,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                //if (MessageBox.Show(Resources.ExportCallingEpubValidator + "\r\nDo you want to Validate ePub file", Resources.ExportComplete, MessageBoxButtons.YesNo,
-                //                    MessageBoxIcon.Information) == DialogResult.Yes)
-                //{
-
-                var validationDialog = new ValidationDialog { FileName = outputPathWithFileName };
-                validationDialog.ShowDialog();
-                //}
+                ValidateEpub.ValidateEpubFile(outputPathWithFileName);
             }
         }
 
