@@ -2047,7 +2047,26 @@ namespace SIL.Tool
             xDoc.Save(ProcessedXhtml);
         }
 
-
+        /// <summary>
+        /// For dictionary data, reversal title is empty, So it set as "Reversal"
+        /// </summary>
+        /// <returns></returns>
+        public void SetTitleValueOnReversal(string xhtmlFile)
+        {
+            if (_projInfo.ProjectInputType.ToLower() == "scripture") { return; }
+            string reversalFile = Path.Combine(Path.GetDirectoryName(xhtmlFile), "FlexRev.xhtml");
+            if (!File.Exists(reversalFile)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(reversalFile);
+            XmlNode titleNode = xDoc.SelectSingleNode("//head/title", namespaceManager);
+            if (titleNode != null)
+            {
+                titleNode.InnerText = "Reversal";
+            }
+            xDoc.Save(reversalFile);
+        }
 
         /// <summary>
         /// For dictionary data, returns the language code for the definitions

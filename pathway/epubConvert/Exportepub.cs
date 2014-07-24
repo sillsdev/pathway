@@ -180,6 +180,7 @@ namespace SIL.PublishingSolution
             LoadOtherFeatures();
             var epubToc = new EpubToc(projInfo.ProjectInputType, TocLevel);
             inProcess.PerformStep();
+
             #endregion Setup
 
             #region Xhtml preprocessing
@@ -937,6 +938,7 @@ namespace SIL.PublishingSolution
             preProcessor.GetTempFolderPath();
             preProcessor.ImagePreprocess(false);
             preProcessor.MoveBookcodeFRTtoFront(preProcessor.ProcessedXhtml);
+            preProcessor.SetTitleValueOnReversal(projInfo.DefaultXhtmlFileWithPath);
             if (projInfo.SwapHeadword)
             {
                 preProcessor.SwapHeadWordAndReversalForm();
