@@ -2,7 +2,7 @@
 xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace"
 xmlns:epub="http://www.idpf.org/2007/ops"
 exclude-result-prefixes="xhtml xsl xs xml">
-<xsl:output method="html" encoding="utf-8"/>
+<xsl:output method="html" encoding="utf-8" indent="no"/>
     <xsl:template match="xhtml:html">
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>
         <xsl:text>&#xa;</xsl:text>

@@ -5,7 +5,7 @@
     xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/"
     xmlns:epub="http://www.idpf.org/2007/ops"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:output method="html" omit-xml-declaration="yes"/>
+  <xsl:output method="html" omit-xml-declaration="yes" indent="no"/>
   <xsl:template match="ncx:ncx">
     <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>
     <xsl:text>&#xa;</xsl:text>
