@@ -58,4 +58,6 @@ exclude-result-prefixes="xhtml xsl xs xml">
             
         </head>  
     </xsl:template>
+  <xsl:template match="xhtml:link[@rel='schema.DCTERMS']"/>
+  <xsl:template match="xhtml:link[@rel='schema.DC']"/>
 </xsl:stylesheet>
