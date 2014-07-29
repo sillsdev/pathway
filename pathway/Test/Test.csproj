@@ -463,10 +463,10 @@
     <Copy SourceFiles="@(License)" DestinationFolder="Files\ConfigurationTool" />
     <Copy SourceFiles="@(AllSettings)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BteSettings)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\theWordConvert\$(OutputPath)Devart.Data.dll" DestinationFiles="$(OutputPath)\Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\theWordConvert\$(OutputPath)Devart.Data.xml" DestinationFiles="$(OutputPath)\Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\theWordConvert\$(OutputPath)Devart.Data.SQLite.dll" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\theWordConvert\$(OutputPath)Devart.Data.SQLite.xml" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\ThirdParty\Devart.Data.dll" DestinationFiles="$(OutputPath)\Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\ThirdParty\Devart.Data.xml" DestinationFiles="$(OutputPath)\Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\ThirdParty\Devart.Data.SQLite.dll" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\ThirdParty\Devart.Data.SQLite.xml" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
