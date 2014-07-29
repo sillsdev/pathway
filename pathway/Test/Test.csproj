@@ -467,6 +467,7 @@
     <Copy SourceFiles="..\ThirdParty\Devart.Data.xml" DestinationFiles="$(OutputPath)\Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="..\ThirdParty\Devart.Data.SQLite.dll" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="..\ThirdParty\Devart.Data.SQLite.xml" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\ThirdParty\sqlite3.dll" DestinationFiles="$(OutputPath)\sqlite3.dll" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
