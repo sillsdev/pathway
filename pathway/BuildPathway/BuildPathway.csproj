@@ -361,10 +361,10 @@
     <Copy SourceFiles="@(epubValid)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <!-- validator is referenced even if not called -->
     <Copy SourceFiles="@(BteBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\theWordConvert\$(OutputPath)\Devart.Data.dll" DestinationFiles="Files\ConfigurationTool\Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\theWordConvert\$(OutputPath)\Devart.Data.xml" DestinationFiles="Files\ConfigurationTool\Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\theWordConvert\$(OutputPath)\Devart.Data.SQLite.dll" DestinationFiles="Files\ConfigurationTool\Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\theWordConvert\$(OutputPath)\Devart.Data.SQLite.xml" DestinationFiles="Files\ConfigurationTool\Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\theWordConvert\$(OutputPath)Devart.Data.dll" DestinationFiles="Files\ConfigurationTool\Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\theWordConvert\$(OutputPath)Devart.Data.xml" DestinationFiles="Files\ConfigurationTool\Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\theWordConvert\$(OutputPath)Devart.Data.SQLite.dll" DestinationFiles="Files\ConfigurationTool\Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\theWordConvert\$(OutputPath)Devart.Data.SQLite.xml" DestinationFiles="Files\ConfigurationTool\Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TestBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
     <!-- Copy SourceFiles="@(UsfmConvert)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " / -->
     <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'Files\ConfigurationTool\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
