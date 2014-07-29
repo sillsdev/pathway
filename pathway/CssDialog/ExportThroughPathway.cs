@@ -525,6 +525,13 @@ namespace SIL.PublishingSolution
                 txtColophonFile.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoCustomCopyright.Checked : false;
                 btnBrowseColophon.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoCustomCopyright.Checked : false;
                 lnkChooseCopyright.Enabled = true;
+
+                chkTOC.Enabled = true;
+                if (ddlLayout.Text.Contains("Epub"))
+                {
+                    chkTOC.Checked = true;
+                    chkTOC.Enabled = false;
+                }
             }
 
             // Processing Options tab
