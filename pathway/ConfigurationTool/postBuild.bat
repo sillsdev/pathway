@@ -37,6 +37,7 @@ xcopy %base2%\SwordConvert\%cfg2%\SwordConvert.* . /y
 :justgobible
 xcopy %base2%\GoBibleConvert\%cfg2%\GoBibleConvert.* . /y
 xcopy %base2%\theWordConvert\%cfg2%\theWordConvert.* . /y
+xcopy %base2%\theWordConvert\%cfg2%\Devart*.* . /y
 xcopy %base2%\theWordConvert\%cfg2%\*.xml . /y
 xcopy %base2%\ParatextSupport\%cfg2%\ParatextSupport.* . /y
 xcopy %base2%\PsSupport\ScriptureStyleSettings.xml . /q /y
