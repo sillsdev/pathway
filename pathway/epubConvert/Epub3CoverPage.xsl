@@ -3,16 +3,19 @@
     xmlns:epub="http://www.idpf.org/2007/ops"
     exclude-result-prefixes="xhtml xsl xs xml epub">
   <xsl:output method="html" encoding="utf-8" indent="no"/>
+  <!-- New root for Html5-->
   <xsl:template match="/">
     <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>
     <xsl:text>&#xa;</xsl:text>
     <xsl:apply-templates></xsl:apply-templates>
   </xsl:template>
+  <!-- Recursive copy template -->
   <xsl:template match="node()|@*">
     <xsl:copy>
       <xsl:apply-templates select="node()|@*"/>
     </xsl:copy>
   </xsl:template>
+  <!-- Cover page Body template -->
   <xsl:template match="xhtml:body">
     <body id="coverbody" class="scrBody">
       <section class="cover cover-rw Cover-rw" style="text-align:center;" epub:type="cover">

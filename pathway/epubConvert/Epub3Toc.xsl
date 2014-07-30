@@ -6,6 +6,7 @@
     xmlns:epub="http://www.idpf.org/2007/ops"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="html" omit-xml-declaration="yes" indent="no"/>
+  <!-- New root for Html5-->
   <xsl:template match="ncx:ncx">
     <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>
     <xsl:text>&#xa;</xsl:text>
@@ -94,6 +95,8 @@
       ERROR: <xsl:value-of select="name(.)"/> not matched!
     </xsl:message>
   </xsl:template>
+
+  <!-- template for string replace from old one to new one-->
   <xsl:template name="string-replace-all">
     <xsl:param name="text" />
     <xsl:param name="replace" />
@@ -114,12 +117,14 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+  <!-- in and out variable declaration for a string replace -->
   <xsl:variable name="in">
     <xsl:text>.xhtml</xsl:text>
   </xsl:variable>
   <xsl:variable name="out">
     <xsl:text>.html</xsl:text>
   </xsl:variable>
+  <!-- Replacement from .xhtml url to .html-->
   <xsl:template match="ncx:content[1]/@src">
     <xsl:call-template name="string-replace-all">
       <xsl:with-param name="text" select="." />
