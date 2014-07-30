@@ -352,6 +352,8 @@ namespace SIL.Tool
             if (Param.GetMetadataValue(Param.Title) != null)
                 sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Title)));
 
+            sb.AppendLine("<br /><br /><br /><br /><br /><br /><br /><br /><br />");
+
             sb.AppendLine("</h1>");
             sb.Append("<p class='Publisher'>");
 
@@ -359,6 +361,7 @@ namespace SIL.Tool
                 sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher)));
 
             sb.AppendLine("</p>");
+            
             // logo stuff
             sb.Append("<p class='logo'>");
             if (Param.GetOrganization().StartsWith("SIL"))
