@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 11" />
+<title>Style naming</title>
+<link rel="StyleSheet" href="../Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.replace(strUrl.substring(0, n));
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Concepts\nStyle naming");
+addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	document.write("<p style=\"text-align:right\"> ");
+AddMasterBreadcrumbs("../Pathway_Configuration_Tool.htm", "", ">", "Home", "../Overview.htm");
+document.write("<a href=\"Concepts_overview.htm\">Concepts<\/a> > Style naming<\/p>");
+
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../Pathway_Configuration_Tool.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h2>Style names in the output file</h2>
+<p class="BodyText">When you export data, such as from SIL FieldWorks to OpenDocument (*.odt) format, you see names of styles in LibreOffice or OpenOffice that do not match those you see in Pathway Configuration Tool. Typically, you will see longer style names in the <a href="Destination.htm">output</a> file. This is especially true for character styles. During the export process, styles receive names based on which elements they contain.</p>
+<h4>Example</h4>
+<p class="BodyText">Some cascading stylesheet properties allow sizes to be set to relative values. A font size could be specified as 55%, which means 55% of the style tag that contains the element in question. It is important to know what element contains the current one. So, during the export process, styles are named in the resulting output with the names of the tags that contain this one.</p>
+<ul style="list-style: disc;">
+<li class="p-BodyText">
+<p class="BodyText"><span class="UserInterface">entry_LetterData</span> would mean the <span class="UserInterface">entry</span> contained in the <span class="UserInterface">LetterData</span>. This allows the style of a text element to vary based on the context in which it occurs.</p>
+</li>
+<li class="p-BodyText">
+<p class="BodyText"><span class="UserInterface">xsensenumber</span> is the style used for the number before the senses. It is the same style name whether the entry is a major entry, a minor entry, or a sub-entry. If you want to format these kinds of entries differently, having the subentry style named <span class="UserInterface">xsensenumber_sense_sensessub_subentry_subentries_entry_letData</span> and the main entry style named <span class="UserInterface">xsensenumber_sense_senses_entry_letData</span> could be helpful. If you wanted the main entries to be in 12pt and the subentries to be in 10pt., you could set the <span class="UserInterface">xsensenumber</span> style to be 80% of the font size of the containing element.</p>
+</li>
+</ul>
+<h4 class="BodyText">Related Topics</h4>
+<p class="BodyText"><a href="Concepts_overview.htm">Concepts overview</a></p>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Base_Font_Size.htm">Base Font Size</a></p>
+<script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

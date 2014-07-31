@@ -1,0 +1,352 @@
+﻿/*Created with Adobe RoboHelp.*/
+/*Created with Adobe RoboHelp.*/
+/*Created with Adobe RoboHelp.*/
+/*Created with Adobe RoboHelp.*/
+/*Created with Adobe RoboHelp.*/
+/* Help.css 2006-07-05 */
+
+/* Stylesheet for Help topics */
+
+/* The formatting for body and p is analogous to Normal style */
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 75%;
+}
+/* 12px at Medium Text Size */
+
+p {
+	font-size: 100%;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+/* 12px at Medium Text Size */
+
+LI.p {
+	font-size: 100%;
+}
+
+/* Always use paragraph classes in Help topics */
+	/* Necessary for WebHelp */
+	
+/* Block elements */
+
+/* Headings */
+
+h1,
+h2 /* Heading 1 is not used in Help topics */
+     {
+	font-size: 150%;
+	margin-top: 0;
+	margin-bottom: 0.4em;
+}
+/* Always use paragraph classes in Help topics */
+	/* Necessary for WebHelp */
+	
+/* Block elements */
+
+/* Headings */
+
+LI.h1,
+LI.h2 /* Heading 1 is not used in Help topics */
+     {
+	font-size: 150%;
+}
+
+h3 {
+	font-size: 115%;
+	margin-top: 0.87em;
+	margin-bottom: 0.52em;
+	x-next-class: BodyText;
+	x-next-type: p;
+}
+LI.h3 {
+	font-size: 115%;
+}
+
+h4 {
+	font-size: 100%;
+	margin-top: 1em;
+	margin-bottom: 0.6em;
+	x-next-class: BodyText;
+	x-next-type: p;
+}
+LI.h4 {
+	font-size: 100%;
+}
+
+p.BodyText {
+	margin-bottom: 0.6em;
+	x-next-class: BodyText;
+	x-next-type: p;
+}
+LI.p-BodyText {
+}
+
+/* 7px */
+
+p.SpaceSingle {
+	line-height: 1em;
+}
+/* 7px */
+
+LI.p-SpaceSingle {
+	line-height: 1em;
+}
+
+/* 12px */
+
+p.SpaceHalf {
+	line-height: 0.5em;
+}
+/* 12px */
+
+LI.p-SpaceHalf {
+	line-height: 0.5em;
+}
+
+/* 6px */
+
+/* Paragraphs in table cells */
+
+th p.BodyText,
+td p.BodyText /* Table Col Heading */
+     {
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
+}
+/* 6px */
+
+/* Paragraphs in table cells */
+
+th LI.p-BodyText,
+td LI.p-BodyText /* Table Col Heading */
+     {
+}
+
+/* Table Row */
+	/* 3px */
+	/* 3px */
+
+/* Tables */
+
+table {
+	font-size: 100%;
+	margin-top: 0em;
+	margin-bottom: 0em;
+	border-style: none;
+}
+/* Note: The default for cellspacing is 2 */
+
+tr {
+	vertical-align: top;
+}
+th,
+td {
+	vertical-align: top;
+	text-align: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-style: none;
+}
+/* Table Row */
+	
+th {
+	background: #DDDDDD;
+}
+/* Table Col Heading */
+	
+/*
+If a table needs borders, add two attributes to the table start tag:
+HTML: <table class=TableGrid cellspacing=0 ...>
+XHTML: <table class="TableGrid" cellspacing="0" ...>
+*/
+
+table.TableGrid {
+	border-spacing: 0px;
+	border-style: Solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+/* Table Grid */
+	/* #000000 */ /* Same as body color */
+
+table.TableGrid th,
+table.TableGrid td /* Table Col Heading */
+     {
+	border-spacing: 0px;
+	border-style: Solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+/* Table Row */
+	/* #000000 */ /* Same as body color */
+
+/* Lists */
+
+ol {
+	font-size: 100%;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: 2em;
+	padding-left: 0;
+}
+/* List Procedure 1 */
+	/* 24 px */
+	
+ul {
+	font-size: 100%;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: 1.5em;
+	padding-left: 0;
+}
+/* List Bullet */
+	/* 18 px */
+	
+ol ul,
+ul ul {
+	list-style: disc;
+}
+/* List Bullet 2 */
+	
+li {
+	margin-left: 0;
+}
+/* li contains one or more BodyText paragraphs */
+	
+/* Inline elements */
+
+/* Character styles */
+
+span.BookTitle {
+	font-style: italic;
+}
+span.DefinedWord {
+	font-style: italic;
+}
+span.Emphasis {
+	font-style: italic;
+}
+span.FileName {
+}
+/* Same as Default paragraph font in Help topics */
+
+span.Keyboard {
+	font-weight: bold;
+}
+span.Placeholder {
+	font-style: italic;
+}
+span.Strong {
+	font-weight: bold;
+}
+span.Style {
+	font-style: italic;
+}
+span.TypedText {
+	font-weight: bold;
+}
+span.UserInterface {
+	font-weight: bold;
+}
+span.VernacularWord {
+	font-weight: bold;
+}
+/* Hyperlinks */
+
+a:link,
+a:visited {
+	color: #0000ff;
+	text-decoration: underline;
+}
+/* #0000FF */
+
+a:active,
+a:hover {
+	color: #ff0000;
+	cursor: hand;
+	text-decoration: underline;
+}
+/* #FF0000 */
+	
+/* Popup links in HTML Help */
+
+a.popupspot:link,
+a.popupspot:visited {
+	color: #008000;
+}
+/* #008000 */
+
+a.popupspot:active,
+a.popupspot:hover {
+	color: #ff0000;
+}
+/* #FF0000 */
+
+/* Popup links in WebHelp */
+
+a.BSSCPopup:link,
+a.BSSCPopup:visited {
+	color: #008000;
+}
+/* #008000 */
+
+a.BSSCPopup:active,
+a.BSSCPopup:hover {
+	color: #ff0000;
+}
+/* #FF0000 */
+
+/* Expanding text for links (not recommended) */
+
+span.expandtext {
+	font-style: italic;
+	font-weight: normal;
+	color: #0000ff;
+}
+/* #0000FF */
+
+span.glosstext {
+	font-style: italic;
+	font-weight: normal;
+	color: #0000ff;
+}
+/* #0000FF */
+
+a.expandspot {
+	font-style: italic;
+	color: #008000;
+	cursor: hand;
+	text-decoration: none;
+}
+/* #008000 */
+	
+a.dropspot {
+	font-style: italic;
+	color: #008000;
+	cursor: hand;
+	text-decoration: none;
+}
+/* #008000 */
+	
+a.glossterm {
+	font-style: italic;
+	color: #008000;
+	cursor: hand;
+	text-decoration: none;
+}
+/* #008000 */
+	
+H2 {
+	x-next-class: BodyText;
+	x-next-type: p;
+}
+/* #008000 */
+	
+LI.H2 {
+}
+
+SPAN.SuperScript {
+	vertical-align: Super;
+}

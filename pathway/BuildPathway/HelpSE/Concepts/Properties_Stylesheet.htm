@@ -1,0 +1,3150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta name="generator" content="Adobe RoboHelp 11" />
+<title>Properties, Pathway Stylesheets</title>
+<link rel="stylesheet" type="text/css" href="../Help.css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.replace(strUrl.substring(0, n));
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Concepts\nProperties, Pathway Stylesheets");
+addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	document.write("<p style=\"text-align:right\"> ");
+AddMasterBreadcrumbs("../Pathway_Configuration_Tool.htm", "", ">", "Home", "../Overview.htm");
+document.write("<a href=\"Concepts_overview.htm\">Concepts<\/a> > Properties, Pathway Stylesheets<\/p>");
+
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../Pathway_Configuration_Tool.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h2><span class="Emphasis">Pathway Style Sheet Properties</span></h2>
+<p class="BodyText">The Pathway Configuration Tool (PCT) project prepares FieldWorks XHTML export (and eventually LIFT and OXES formatted data) for printing using <a href="OpenOffice_LibreOffice.htm">LibreOffice</a> or other rendering engines. LibreOffice works very much like Microsoft Office 2000/2003 program, but supports rendering complex fonts using <a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;cat_id=RenderingGraphite">Graphite</a> Technology and fonts. The stylesheet for the conversion of data for printing is based on the properties of the <a href="http://www.w3.org/TR/CSS2/intro.html">Cascading Style Sheet 2.1</a> standard. The supported properties are given in the table below. (Property names in parenthesis are <span class="Emphasis">not</span> implemented.) FieldWorks XHTML export will create a *.CSS file with these properties already included for the default formatting of the lexical data. The properties given below can be used to change the rendering of any style tag in the exported file.</p>
+<p class="BodyText">At the end of the first table is the <span class="UserInterface">Custom Properties</span> table. It lists properties that were added to help support the conversion and formatting of lexical data.</p>
+<table>
+<col />
+<col />
+<col />
+<col />
+<col />
+<col />
+<col />
+<col />
+<tr>
+<th>
+<p class="BodyText">Property Name</p>
+</th>
+<th>
+<p>Equivalent PCT Feature*</p>
+</th>
+<th>
+<p class="BodyText">Values</p>
+</th>
+<th>
+<p class="BodyText">Initial value</p>
+</th>
+<th>
+<p class="BodyText">Applies to<br />
+(Default: all)</p>
+</th>
+<th>
+<p class="BodyText">Inherited?</p>
+</th>
+<th>
+<p class="BodyText">Percentages<br />
+(Default: N/A)</p>
+</th>
+<th>
+<p class="BodyText">Media groups</p>
+</th>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/colors.html">'background-attachment'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">scroll | fixed | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">scroll</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/colors.html">'background-color'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;color&gt;</a> | transparent | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">transparent</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/colors.html">'background-image'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">&lt;uri&gt; | none | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/colors.html">'background-position'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[ [ <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | left | center | right ] [ <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ] | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">0% 0%</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to the size of the box itself</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/colors.html">'background-repeat'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">repeat | repeat-x | repeat-y | no-repeat | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">repeat</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/colors.html">'background'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[<a href="http://www.w3.org/tr/css2/colors.html">'background-color'</a> || <a href="http://www.w3.org/tr/css2/colors.html">'background-image'</a> || <a href="http://www.w3.org/tr/css2/colors.html">'background-repeat'</a> || <a href="http://www.w3.org/tr/css2/colors.html">'background-attachment'</a> || <a href="http://www.w3.org/tr/css2/colors.html">'background-position'</a>] | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">allowed on 'background-position'</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-gcpm.html">'bookmark-label'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">content | &lt;attr&gt; | &lt;string&gt;</p>
+</td>
+<td>
+<p class="BodyText">content</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">all</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-gcpm.html">'bookmark-level'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">none | &lt;integer&gt;</p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">all</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-gcpm.html">'bookmark-target'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">self | &lt;uri&gt; | &lt;attr&gt;</p>
+</td>
+<td>
+<p class="BodyText">self</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">all</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/tables.html">'border-collapse'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">collapse | separate | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">separate</p>
+</td>
+<td>
+<p class="BodyText">'table' and 'inline-table' elements</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">'border-color'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[ <a href="http://www.w3.org/tr/css2/syndata.html">&lt;color&gt;</a> | transparent ]{1,4} | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-gcpm.html">'border-length'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">&lt;length&gt; | auto</p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">@footnote areas</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to normal length of horizontal border of footnote area</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/tables.html">'border-spacing'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">&lt;length&gt; <a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a>? | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">0</p>
+</td>
+<td>
+<p class="BodyText">'table' and 'inline-table' elements</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">'border-style'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">&lt;border-style&gt;</a>{1,4} | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">'border-top'</a> <a href="http://www.w3.org/tr/css2/box.html">'border-right'</a> <a href="http://www.w3.org/tr/css2/box.html">'border-bottom'</a> <a href="http://www.w3.org/tr/css2/box.html">'border-left'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Divider_Lines.htm">Divider Lines (Yes)</a></p>
+</td>
+<td>
+<p class="BodyText">[ <a href="http://www.w3.org/tr/css2/box.html">&lt;border-width&gt;</a> || <a href="http://www.w3.org/tr/css2/box.html">&lt;border-style&gt;</a> || <a href="http://www.w3.org/tr/css2/box.html">'border-top-color'</a> ] | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/box.html">'border-top-color'</a>) (<a href="http://www.w3.org/tr/css2/box.html">'border-right-color'</a>) (<a href="http://www.w3.org/tr/css2/box.html">'border-bottom-color'</a>) (<a href="http://www.w3.org/tr/css2/box.html">'border-left-color'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;color&gt;</a> | transparent | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">the value of the 'color' property</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/box.html">'border-top-style'</a>) ( <a href="http://www.w3.org/tr/css2/box.html">'border-right-style'</a>) ( <a href="http://www.w3.org/tr/css2/box.html">'border-bottom-style'</a>) ( <a href="http://www.w3.org/tr/css2/box.html">'border-left-style'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">&lt;border-style&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/box.html">'border-top-width'</a>) ( <a href="http://www.w3.org/tr/css2/box.html">'border-right-width'</a>) ( <a href="http://www.w3.org/tr/css2/box.html">'border-bottom-width'</a>) ( <a href="http://www.w3.org/tr/css2/box.html">'border-left-width'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">&lt;border-width&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">medium</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">'border-width'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">&lt;border-width&gt;</a>{1,4} | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">'border'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[ <a href="http://www.w3.org/tr/css2/box.html">&lt;border-width&gt;</a> || <a href="http://www.w3.org/tr/css2/box.html">&lt;border-style&gt;</a> || <a href="http://www.w3.org/tr/css2/box.html">'border-top-color'</a> ] | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/visuren.html">'bottom'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | auto | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">positioned elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to height of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/tables.html">'caption-side'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">top | bottom | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">top</p>
+</td>
+<td>
+<p class="BodyText">'table-caption' elements</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visuren.html">'clear'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">none | left | right | both | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/visufx.html">'clip'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visufx.html">&lt;shape&gt;</a> | auto | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">absolutely positioned elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/colors.html">'color'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;color&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">depends on user agent</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-multicol.html">'column-break-after'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">auto | always | avoid</p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-multicol.html">'column-break-before'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">auto | always | avoid</p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css3-multicol.html">'column-count'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Columns.htm">Columns</a></p>
+</td>
+<td>
+<p class="BodyText">&lt;integer&gt; | auto</p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css3-multicol.html">'column-fill'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Columns.htm">Columns</a></p>
+</td>
+<td>
+<p class="BodyText">auto | balance</p>
+</td>
+<td>
+<p class="BodyText">balance</p>
+</td>
+<td>
+<p class="BodyText">multi-column elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">paged</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css3-multicol.html">'column-gap'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Columns.htm">Columns</a>, <a href="../User_Interface/User_Interface_terms/Column_Gap.htm">Column gap</a></p>
+</td>
+<td>
+<p class="BodyText">&lt;length&gt; | normal</p>
+</td>
+<td>
+<p class="BodyText">normal</p>
+</td>
+<td>
+<p class="BodyText">multi-column elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css3-multicol.html">'column-rule'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Divider_Lines.htm">Divider Lines</a></p>
+</td>
+<td>
+<p class="BodyText">&lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ]</p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">multi-column elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-multicol.html">'column-rule-color'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">&lt;color&gt;</p>
+</td>
+<td>
+<p class="BodyText">currentColor</p>
+</td>
+<td>
+<p class="BodyText">multi-column elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-multicol.html">'column-rule-style'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">&lt;border-style&gt;</p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">multi-column elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-multicol.html">'column-rule-width'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">&lt;border-width&gt;</p>
+</td>
+<td>
+<p class="BodyText">medium</p>
+</td>
+<td>
+<p class="BodyText">multi-column elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css3-multicol.html">'columns'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[ [ &lt;integer&gt; | auto] || [ &lt;length&gt; | auto] ]</p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-multicol.html">'column-span'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">1 | all</p>
+</td>
+<td>
+<p class="BodyText">1</p>
+</td>
+<td>
+<p class="BodyText">static, non-floating elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css3-multicol.html">'column-width'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">&lt;length&gt; | auto</p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/generate.html">'content'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Running_Header.htm">Running Header</a></p>
+</td>
+<td>
+<p class="BodyText">normal | none | [ <a href="http://www.w3.org/tr/css2/syndata.html">&lt;string&gt;</a> | &lt;uri&gt; | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;counter&gt;</a> | attr(<a href="http://www.w3.org/tr/css2/syndata.html">&lt;identifier&gt;</a>) | open-quote | close-quote | no-open-quote | no-close-quote ]+ | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">normal</p>
+</td>
+<td>
+<p class="BodyText">:before and :after pseudo-elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">all</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/generate.html">'counter-increment'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Page_size.htm">Page Size</a></p>
+</td>
+<td>
+<p class="BodyText">[ &lt;identifier&gt; <a href="http://www.w3.org/tr/css2/syndata.html">&lt;integer&gt;</a>? ]+ | none | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">all</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/generate.html">'counter-reset'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[ &lt;identifier&gt; <a href="http://www.w3.org/tr/css2/syndata.html">&lt;integer&gt;</a>? ]+ | none | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">all</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visuren.html">'direction'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Running_Header.htm">Running Header</a></p>
+</td>
+<td>
+<p class="BodyText">ltr | rtl | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">ltr</p>
+</td>
+<td>
+<p class="BodyText">all elements, but see prose</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visuren.html">'display'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Sense_Layout.htm">Sense Layout (Bullets)</a>, <a href="../User_Interface/User_Interface_terms/Pictures.htm">Pictures (Yes)</a></p>
+</td>
+<td>
+<p class="BodyText">inline | block | list-item | run-in | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">inline</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">all</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/tables.html">'empty-cells'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">show | hide | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">show</p>
+</td>
+<td>
+<p class="BodyText">'table-cell' elements</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-page.html">'fit'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">fill | hidden | meet | slice</p>
+</td>
+<td>
+<p class="BodyText">fill</p>
+</td>
+<td>
+<p class="BodyText">replaced elements</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-page.html">'fit-position'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[ [&lt;<span class="Emphasis">percentage</span>&gt; | &lt;<span class="Emphasis">length</span>&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | auto</p>
+</td>
+<td>
+<p class="BodyText">0% 0%</p>
+</td>
+<td>
+<p class="BodyText">replaced elements</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">refer to width and height of box itself</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visuren.html">'float'</a> 'float'</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">left | right | none | <a href="http://www.w3.org/tr/css3-gcpm.html">page</a> | inside | outside | top | bottom | next | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">all, but see <a href="http://www.w3.org/tr/css2/visuren.html">9.7</a></p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-gcpm.html">'float-offset'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">&lt;length&gt; &lt;length&gt; ?</p>
+</td>
+<td>
+<p class="BodyText">0 0</p>
+</td>
+<td>
+<p class="BodyText">floated elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to width and height of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/fonts.html">'font-family'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Running_Header.htm">Running Header</a></p>
+</td>
+<td>
+<p class="BodyText">[[ <a href="http://www.w3.org/tr/css2/fonts.html">&lt;family-name&gt;</a> | <a href="http://www.w3.org/tr/css2/fonts.html">&lt;generic-family&gt;</a> ] [, <a href="http://www.w3.org/tr/css2/fonts.html">&lt;family-name&gt;</a>| <a href="http://www.w3.org/tr/css2/fonts.html">&lt;generic-family&gt;</a>]* ] | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">depends on user agent</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/fonts.html">'font-size'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Base_Font_Size.htm">Base Font Size</a>, <a href="../User_Interface/User_Interface_terms/Running_Header.htm">Running Header</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/fonts.html">&lt;absolute-size&gt;</a> | <a href="http://www.w3.org/tr/css2/fonts.html">&lt;relative-size&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">medium</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">refer to parent element's font size</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/fonts.html">'font-style'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">normal | italic | oblique | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">normal</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/fonts.html">'font-variant'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">normal | small-caps | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">normal</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/fonts.html">'font-weight'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Running_Header.htm">Running Header</a></p>
+</td>
+<td>
+<p class="BodyText">normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">normal</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/fonts.html">'font'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Running_Header.htm">Running Header</a></p>
+</td>
+<td>
+<p class="BodyText">[ [ <a href="http://www.w3.org/tr/css2/fonts.html">'font-style'</a> || <a href="http://www.w3.org/tr/css2/fonts.html">'font-variant'</a> || <a href="http://www.w3.org/tr/css2/fonts.html">'font-weight'</a> ]? <a href="http://www.w3.org/tr/css2/fonts.html">'font-size'</a> [ / <a href="http://www.w3.org/tr/css2/visudet.html">'line-height'</a> ]? <a href="http://www.w3.org/tr/css2/fonts.html">'font-family'</a> ] | caption | icon | menu | message-box | small-caption | status-bar | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/visudet.html">'height'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | auto | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">all elements but non-replaced inline elements, table columns, and column groups</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">see prose</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css3-gcpm.html">'hyphenate-after' / 'hyphenate-before'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">&lt;integer&gt; | auto</p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-gcpm.html">'hyphenate-character'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">auto | &lt;string&gt;</p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css3-gcpm.html">'hyphenate-lines'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no-limit | &lt;integer&gt;</p>
+</td>
+<td>
+<p class="BodyText">no-limit</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-gcpm.html">'hyphenate-resource'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">none | &lt;uri&gt;</p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css3-gcpm.html">'hyphens'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">none | manual | auto</p>
+</td>
+<td>
+<p class="BodyText">manual</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-page.html">'image-orientation'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">auto | &lt;angle&gt;</p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">images</p>
+</td>
+<td>
+<p class="BodyText">N/A</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p><a href="http://www.w3.org/tr/css2/media.html">paged</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-gcpm.html">'image-resolution'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">normal | auto | &lt;dpi&gt; [ , normal | &lt;dpi&gt; ]?</p>
+</td>
+<td>
+<p class="BodyText">normal</p>
+</td>
+<td>
+<p class="BodyText">replaced elements</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visuren.html">'left'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | auto | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">positioned elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to width of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/text.html">'letter-spacing'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">normal | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">normal</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visudet.html">'line-height'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Base_Font_Size.htm">Font size</a>, <a href="../User_Interface/User_Interface_terms/Line_Spacing.htm">Line Spacing</a>, <a href="../User_Interface/User_Interface_terms/Sense_Layout.htm">Sense Layout (Bullets)</a></p>
+</td>
+<td>
+<p class="BodyText">normal | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;number&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">normal</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">refer to the font size of the element itself</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/generate.html">'list-style-image'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">&lt;uri&gt; | none | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">elements with 'display: list-item'</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/generate.html">'list-style-position'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">inside | outside | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">outside</p>
+</td>
+<td>
+<p class="BodyText">elements with 'display: list-item'</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/generate.html">'list-style-type'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-latin | upper-latin | armenian | georgian | lower-alpha | upper-alpha | none | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">disc</p>
+</td>
+<td>
+<p class="BodyText">elements with 'display: list-item'</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/generate.html">'list-style'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[ <a href="http://www.w3.org/tr/css2/generate.html">'list-style-type'</a> || <a href="http://www.w3.org/tr/css2/generate.html">'list-style-position'</a> || <a href="http://www.w3.org/tr/css2/generate.html">'list-style-image'</a> ] | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">elements with 'display: list-item'</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">'margin-right'</a> <a href="http://www.w3.org/tr/css2/box.html">'margin-left'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Page_margin.htm">Page Margin (Inside/Outside)</a>, <a href="../User_Interface/User_Interface_terms/Sense_Layout.htm">Sense Layout (Bullets)</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">&lt;margin-width&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">0</p>
+</td>
+<td>
+<p class="BodyText">all elements except elements with table display types other than table-caption, table and inline-table</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to width of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">'margin-top'</a> <a href="http://www.w3.org/tr/css2/box.html">'margin-bottom'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Page_margin.htm">Page Margin (Top/Bottom)</a>,</p>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Running_Header.htm">Running Header</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">&lt;margin-width&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">0</p>
+</td>
+<td>
+<p class="BodyText">all elements except elements with table display types other than table-caption, table and inline-table</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to width of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">'margin'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Page_size.htm">Page Size</a>, <a href="../User_Interface/User_Interface_terms/Divider_Lines.htm">Divider Lines (Yes)</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">&lt;margin-width&gt;</a>{1,4} | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">all elements except elements with table display types other than table-caption, table and inline-table</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to width of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css3-gcpm.html">'marks'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[ crop || cross ] | none</p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">page context</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">paged</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/visudet.html">'max-height'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | none | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">all elements but non-replaced inline elements, table columns, and column groups</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">see prose</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/visudet.html">'max-width'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | none | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">all elements but non-replaced inline elements, table rows, and row groups</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to width of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/visudet.html">'min-height'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">0</p>
+</td>
+<td>
+<p class="BodyText">all elements but non-replaced inline elements, table columns, and column groups</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">see prose</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/visudet.html">'min-width'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">0</p>
+</td>
+<td>
+<p class="BodyText">all elements but non-replaced inline elements, table rows, and row groups</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to width of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/page.html">'orphans'</a> <a href="http://www.w3.org/tr/css3-page.html">'orphans'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;integer&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">2</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a>, <a href="http://www.w3.org/tr/css2/media.html">paged</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/ui.html">'outline-color'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;color&gt;</a> | invert | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">invert</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a>, <a href="http://www.w3.org/tr/css2/media.html">interactive</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/ui.html">'outline-style'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">&lt;border-style&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a>, <a href="http://www.w3.org/tr/css2/media.html">interactive</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/ui.html">'outline-width'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">&lt;border-width&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">medium</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a>, <a href="http://www.w3.org/tr/css2/media.html">interactive</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/ui.html">'outline'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[ <a href="http://www.w3.org/tr/css2/ui.html">'outline-color'</a> || <a href="http://www.w3.org/tr/css2/ui.html">'outline-style'</a> || <a href="http://www.w3.org/tr/css2/ui.html">'outline-width'</a> ] | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a>, <a href="http://www.w3.org/tr/css2/media.html">interactive</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/visufx.html">'overflow'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">visible | hidden | scroll | auto | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">visible</p>
+</td>
+<td>
+<p class="BodyText">non-replaced block-level elements, table cells, and inline-block elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">'padding-top'</a> <a href="http://www.w3.org/tr/css2/box.html">'padding-right'</a> <a href="http://www.w3.org/tr/css2/box.html">'padding-bottom'</a> <a href="http://www.w3.org/tr/css2/box.html">'padding-left'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Divider_Lines.htm">Divider Lines (Yes)</a>, <a href="../User_Interface/User_Interface_terms/Sense_Layout.htm">Sense Layout (Bullets)</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">&lt;padding-width&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">0</p>
+</td>
+<td>
+<p class="BodyText">all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to width of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">'padding'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/box.html">&lt;padding-width&gt;</a>{1,4} | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">see individual properties</p>
+</td>
+<td>
+<p class="BodyText">all elements except table-row-group, table-header-group, table-footer-group, table-row, table-column-group and table-column</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to width of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-page.html">'page'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">auto | &lt;identifier&gt;</p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">paged</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/page.html">'page-break-after'</a> 'page-break-after')</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">auto | always | avoid | left | right | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a>, <a href="http://www.w3.org/tr/css2/media.html">paged</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/page.html">'page-break-before'</a> <a href="http://www.w3.org/tr/css3-page.html">'page-break-before'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">auto | always | avoid | left | right | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a>, <a href="http://www.w3.org/tr/css2/media.html">paged</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/page.html">'page-break-inside'</a> <a href="http://www.w3.org/tr/css3-page.html">'page-break-inside'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">avoid | auto | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a>, <a href="http://www.w3.org/tr/css2/media.html">paged</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visuren.html">'position'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">static | relative | absolute | fixed | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">static</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/generate.html">'quotes'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[<a href="http://www.w3.org/tr/css2/syndata.html">&lt;string&gt;</a> <a href="http://www.w3.org/tr/css2/syndata.html">&lt;string&gt;</a>]+ | none | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">depends on user agent</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visuren.html">'right'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | auto | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">positioned elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to width of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css3-page.html">'size'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Page_size.htm">Page Size</a></p>
+</td>
+<td>
+<p class="BodyText">&lt;length&gt;{1,2} | auto | [ &lt;page-size&gt; || [ portrait | landscape] ]</p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">page context</p>
+</td>
+<td>
+<p class="BodyText">N/A</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">paged</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-gcpm.html">'string-set'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[[ &lt;identifier&gt; &lt;content-list&gt;] [, &lt;identifier&gt; &lt;content-list&gt;]* ] | none</p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">all</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/tables.html">'table-layout'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">auto | fixed | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">'table' and 'inline-table' elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/text.html">'text-align'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Justified.htm">Justified</a></p>
+</td>
+<td>
+<p class="BodyText">left | right | center | justify | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">a nameless value that acts as 'left' if 'direction' is 'ltr', 'right' if 'direction' is 'rtl'</p>
+</td>
+<td>
+<p class="BodyText">block-level elements, table cells and inline blocks</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/text.html">'text-decoration'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">none | [ underline || overline || line-through || blink ] | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">no (see prose)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/text.html">'text-indent'</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/Sense_Layout.htm">Sense Layout (Bullets)</a></p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">0</p>
+</td>
+<td>
+<p class="BodyText">block-level elements, table cells and inline blocks</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">refer to width of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css3-gcpm.html">'text-replace'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">[&lt;string&gt; &lt;string&gt;]+ | none</p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes or?</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/text.html">'text-transform'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">capitalize | uppercase | lowercase | none | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">none</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/visuren.html">'top'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | auto | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">positioned elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to height of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">'unicode-bidi'</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">normal | embed | bidi-override | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">normal</p>
+</td>
+<td>
+<p class="BodyText">all elements, but see prose</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visudet.html">'vertical-align'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">baseline | sub | super | top | text-top | middle | bottom | text-bottom | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">baseline</p>
+</td>
+<td>
+<p class="BodyText">inline-level and 'table-cell' elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to the 'line-height' of the element itself</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visufx.html">'visibility'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">visible | hidden | collapse | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">visible</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/text.html">'white-space'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">normal | pre | (nowrap) | pre-wrap | pre-line | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">normal</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/page.html">'widows'</a> <a href="http://www.w3.org/tr/css3-page.html">'widows'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;integer&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">2</p>
+</td>
+<td>
+<p class="BodyText">block-level elements</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a>, <a href="http://www.w3.org/tr/css2/media.html">paged</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/visudet.html">'width'</a></p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;percentage&gt;</a> | auto | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">all elements but non-replaced inline elements, table rows, and row groups</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">refer to width of containing block</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/text.html">'word-spacing'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">normal | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;length&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">normal</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">yes</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="BodyText">(<a href="http://www.w3.org/tr/css2/visuren.html">'z-index'</a>)</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText">auto | <a href="http://www.w3.org/tr/css2/syndata.html">&lt;integer&gt;</a> | <a href="http://www.w3.org/tr/css2/cascade.html">inherit</a></p>
+</td>
+<td>
+<p class="BodyText">auto</p>
+</td>
+<td>
+<p class="BodyText">positioned elements</p>
+</td>
+<td>
+<p class="BodyText">no</p>
+</td>
+<td>
+<p class="BodyText">&#160;</p>
+</td>
+<td>
+<p class="BodyText"><a href="http://www.w3.org/tr/css2/media.html">visual</a></p>
+</td>
+</tr>
+</table>
+<h4 class="Note"><img src="../Note_Icon.gif" style="border: none;" alt="" width="10" height="10" border="0" /> Note</h4>
+<ul>
+<li class="p-BodyText">
+<p class="BodyText"><span class="UserInterface">*</span> Each <span class="UserInterface">Equivalent PCT Feature</span> is usually a selection you can make in the <span class="UserInterface">Info</span> tab or <span class="UserInterface">Properties</span> tab.</p>
+</li>
+<li class="p-BodyText">
+<p class="BodyText">To enable <a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;cat_id=RenderingGraphite">Graphite</a> in Open Office, make sure to use version 3.2 or later. Then, on the <span class="UserInterface">Tools</span> menu, click <span class="UserInterface">Options</span>. In the <span class="UserInterface">Options</span> dialog box expand <span class="UserInterface">Language Settings</span>,and then click <span class="UserInterface">Languages</span>. Under <span class="UserInterface">Enhanced Language Support</span>, select Asian, complex languages (CTL), or both. Click <span class="UserInterface">OK</span> to close the <span class="UserInterface">Options</span> dialog box. Then, when you open the dialog box you will be able to choose default fonts for complex or Asian languages.</p>
+</li>
+</ul>
+<h2><span class="Emphasis">Custom Properties</span></h2>
+<table width="100%">
+<col style="width: 29.204%;" />
+<col style="width: 11.504%;" />
+<col style="width: 11.504%;" />
+<col style="width: 7.08%;" />
+<col style="width: 15.044%;" />
+<col style="width: 8.85%;" />
+<col style="width: 10.619%;" />
+<col style="width: 6.195%;" />
+<tr>
+<th style="width: 29.204%;">
+<p class="BodyText">Name</p>
+</th>
+<th style="width: 11.504%;">
+<p class="BodyText">Equivalent PCT Feature*</p>
+</th>
+<th style="width: 11.504%;">
+<p class="BodyText">Values</p>
+</th>
+<th style="width: 7.08%;">
+<p class="BodyText">Initial value</p>
+</th>
+<th style="width: 15.044%;">
+<p class="BodyText">Applies to</p>
+</th>
+<th style="width: 8.85%;">
+<p class="BodyText">Inherited?</p>
+</th>
+<th style="width: 10.619%;">
+<p class="BodyText">Percentages<br />
+(Default: N/A)</p>
+</th>
+<th style="width: 6.195%;">
+<p class="BodyText">Media groups</p>
+</th>
+</tr>
+<tr>
+<td style="width: 29.204%;">
+<p class="BodyText">'prince-hyphenate-patterns'</p>
+</td>
+<td style="width: 11.504%;">
+<p class="BodyText">&#160;</p>
+</td>
+<td style="width: 11.504%;">
+<p class="BodyText">&lt;list of languages&gt;</p>
+</td>
+<td style="width: 7.08%;">
+<p class="BodyText">none</p>
+</td>
+<td style="width: 15.044%;">
+<p class="BodyText">Insert hyphenation symbol in pdf file based on language pattern (for Dictionary)</p>
+</td>
+<td style="width: 8.85%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 10.619%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 6.195%;">
+<p class="BodyText">none</p>
+</td>
+</tr>
+<tr>
+<td style="width: 29.204%;">
+<p class="BodyText">'-ps-paper-size '</p>
+</td>
+<td style="width: 11.504%;">
+<p class="BodyText">&#160;</p>
+</td>
+<td style="width: 11.504%;">
+<p class="BodyText">A4 / Letter</p>
+</td>
+<td style="width: 7.08%;">
+<p class="BodyText">A4</p>
+</td>
+<td style="width: 15.044%;">
+<p class="BodyText">Paper size</p>
+</td>
+<td style="width: 8.85%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 10.619%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 6.195%;">
+<p class="BodyText">none</p>
+</td>
+</tr>
+<tr>
+<td style="width: 29.204%;">
+<p class="BodyText">'-ps-heading-string '</p>
+</td>
+<td style="width: 11.504%;">
+<p class="BodyText">&#160;</p>
+</td>
+<td style="width: 11.504%;">
+<p class="BodyText">&lt;string&gt;</p>
+</td>
+<td style="width: 7.08%;">
+<p class="BodyText">none</p>
+</td>
+<td style="width: 15.044%;">
+<p class="BodyText">Letter heading (for Dictionary)</p>
+</td>
+<td style="width: 8.85%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 10.619%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 6.195%;">
+<p class="BodyText">none</p>
+</td>
+</tr>
+<tr>
+<td style="width: 29.204%;">
+<p class="BodyText">'-ps-HeadingsHomonymNumber'</p>
+</td>
+<td style="width: 11.504%;">
+<p class="BodyText">&#160;</p>
+</td>
+<td style="width: 11.504%;">
+<p class="BodyText">yes/ no</p>
+</td>
+<td style="width: 7.08%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 15.044%;">
+<p class="BodyText">Running head number (for Dictionary)</p>
+</td>
+<td style="width: 8.85%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 10.619%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 6.195%;">
+<p class="BodyText">none</p>
+</td>
+</tr>
+<tr>
+<td style="width: 29.204%;">
+<p class="BodyText">'-ps-HeadingsGuideWords'</p>
+</td>
+<td style="width: 11.504%;">
+<p class="BodyText">&#160;</p>
+</td>
+<td style="width: 11.504%;">
+<p class="BodyText">yes/ no</p>
+</td>
+<td style="width: 7.08%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 15.044%;">
+<p class="BodyText">Running head guide word (for Dictionary)</p>
+</td>
+<td style="width: 8.85%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 10.619%;">
+<p class="BodyText">no</p>
+</td>
+<td style="width: 6.195%;">
+<p class="BodyText">none</p>
+</td>
+</tr>
+</table>
+<h4 class="Note"><img src="../Note_Icon.gif" style="border: none;" alt="" width="10" height="10" border="0" /> Note</h4>
+<ul>
+<li class="p-BodyText">
+<p class="BodyText"><span class="UserInterface">*</span> Each <span class="UserInterface">Equivalent PCT Feature</span> is usually a selection you can make in the <span class="UserInterface">Info</span> tab or <span class="UserInterface">Properties</span> tab.</p>
+</li>
+</ul>
+<h4>Related Topics</h4>
+<p class="BodyText"><a href="Concepts_overview.htm">Concepts overview</a></p>
+<p class="BodyText"><a href="../Going_Further/Related_Software.htm">Related Software</a></p>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/User_Interface_terms_Info.htm">User Interface terms - Info tab</a></p>
+<p class="BodyText"><a href="../User_Interface/User_Interface_terms/User_Interface_terms_Properties.htm">User Interface terms - Properties tab</a></p>
+<script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

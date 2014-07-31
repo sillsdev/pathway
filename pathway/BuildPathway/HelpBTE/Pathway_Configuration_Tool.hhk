@@ -1,0 +1,1914 @@
+﻿<html>
+<!-- Sitemap 1.0 -->
+<object type="text/site properties">
+  <param name="FrameName" value="bsscright">
+  <param name="SiteType" value="index">
+</object>
+<ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="About Pathway">
+    <param name="Name" value="About Pathway">
+    <param name="Local" value="User_Interface/Dialog_boxes/About_Pathway.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Add References">
+    <param name="Name" value="Add References">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Add_References.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Agile development">
+    <param name="Name" value="Agile development">
+    <param name="Local" value="Concepts/Agile_development.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Also Embed Font Variants">
+    <param name="Name" value="Also Embed Font Variants">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Also_Embed_Font_Variants.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Android">
+    <param name="Name" value="theWord/MySword">
+    <param name="Local" value="Concepts/theWord_MySword.htm">
+    <param name="Name" value="DictionaryForMIDs">
+    <param name="Local" value="Concepts/DictionaryForMIDs.htm">
+    <param name="Name" value="Preparation before exporting data">
+    <param name="Local" value="User_Interface/Dialog_boxes/Preparation_before_exporting_data.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Destination">
+      <param name="Name" value="Destination">
+      <param name="Local" value="Concepts/Destination.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="DictionaryForMIDs">
+      <param name="Name" value="DictionaryForMIDs">
+      <param name="Local" value="Concepts/DictionaryForMIDs.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="theWord/MySword">
+      <param name="Name" value="theWord/MySword">
+      <param name="Local" value="Concepts/theWord_MySword.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Approved By">
+    <param name="Name" value="Approved By">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Approved_By.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Archive data through Pathway">
+    <param name="Name" value="Archive data through Pathway">
+    <param name="Local" value="Tasks/Basic_Tasks/Archive_data_through_Pathway.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Archive data through Pathway">
+      <param name="Name" value="Archive data through Pathway">
+      <param name="Local" value="Tasks/Basic_Tasks/Archive_data_through_Pathway.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Destination">
+      <param name="Name" value="Destination">
+      <param name="Local" value="Concepts/Destination.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="RAMP Metadata">
+      <param name="Name" value="RAMP Metadata">
+      <param name="Local" value="Tasks/Basic_Tasks/RAMP_Metadata.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Available check box">
+    <param name="Name" value="Available check box">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Available_check_box.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Base Font Size">
+    <param name="Name" value="Base Font Size">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Base_Font_Size.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Basic Tasks overview">
+    <param name="Name" value="Basic Tasks overview">
+    <param name="Local" value="Tasks/Basic_Tasks/Basic_tasks_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Book Title">
+    <param name="Name" value="Book Title">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Book_Title.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Brochures or Booklets">
+    <param name="Name" value="Brochures or Booklets">
+    <param name="Local" value="Concepts/Brochures_or_Booklets.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Bug or error, reporting">
+    <param name="Name" value="Technical Support">
+    <param name="Local" value="Tech_support.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Bug or Feature request">
+    <param name="Name" value="Technical Support">
+    <param name="Local" value="Tech_support.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Bullets">
+    <param name="Name" value="Bullets">
+    <param name="Local" value="Tasks/Dictionary_Tasks/Bullets.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="C5 Cols ApplicationStyles">
+    <param name="Name" value="Processing Scripture">
+    <param name="Local" value="Tasks/Scripture_Tasks/Processing_Scripture.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="calibre">
+    <param name="Name" value="calibre">
+    <param name="Local" value="Concepts/calibre.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Caller, footnote or XREF">
+    <param name="Name" value="Include XRef Caller">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Include_XRef_Caller.htm">
+    <param name="Name" value="Include Footnote Caller">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Include_Footnote_Caller.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Include Footnote Caller">
+      <param name="Name" value="Include Footnote Caller">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Include_Footnote_Caller.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Include XRef Caller">
+      <param name="Name" value="Include XRef Caller">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Include_XRef_Caller.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Cascade">
+    <param name="Name" value="Cascade">
+    <param name="Local" value="Concepts/Cascade.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Cell Phone">
+    <param name="Name" value="Go Bible">
+    <param name="Local" value="Concepts/Go_Bible.htm">
+    <param name="Name" value="Goals and Output">
+    <param name="Local" value="Concepts/Destination.htm">
+    <param name="Name" value="DictionaryForMIDs">
+    <param name="Local" value="Concepts/DictionaryForMIDs.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Chapter numbers">
+    <param name="Name" value="Chapter numbers">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Chapter_numbers.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Checking and approval">
+    <param name="Name" value="Checking and approval">
+    <param name="Local" value="Concepts/Checking_and_approval.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Choose a stylesheet">
+    <param name="Name" value="Display list of stylesheets">
+    <param name="Local" value="Tasks/Basic_Tasks/Display_list_of_stylesheets.htm">
+    <param name="Name" value="Set Defaults dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm">
+    <param name="Name" value="Export Through Pathway dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Choosing a rights statement">
+    <param name="Name" value="Choosing a rights statement">
+    <param name="Local" value="Tasks/Basic_Tasks/Choosing_a_rights_statement_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Colophon, copyright">
+    <param name="Name" value="Copyright Information Page">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Copyright_Information_Page.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Column Gap">
+    <param name="Name" value="Column Gap">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Column_Gap.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Columns">
+    <param name="Name" value="Columns">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Columns.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Column Gap">
+      <param name="Name" value="Column Gap">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Column_Gap.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Divider Lines">
+      <param name="Name" value="Divider Lines">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Divider_Lines.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Concepts overview">
+    <param name="Name" value="Concepts overview">
+    <param name="Local" value="Concepts/Concepts_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Content providing program">
+    <param name="Name" value="Content providing program">
+    <param name="Local" value="Concepts/Content_providing_program_.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Copy a stylesheet">
+    <param name="Name" value="Copy a stylesheet">
+    <param name="Local" value="Tasks/Basic_Tasks/Copy_a_stylesheet.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Copyright (IP)">
+    <param name="Name" value="Intellectual_Property">
+    <param name="Local" value="Concepts/Intellectual_Property.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Republishing">
+      <param name="Name" value="Republishing">
+      <param name="Local" value="Concepts/Republishing.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Setting default values">
+      <param name="Name" value="Setting default values">
+      <param name="Local" value="Tasks/Basic_Tasks/Setting_default_selections.htm">
+    </object>
+    <ul>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Specifying metadata">
+        <param name="Name" value="Specifying metadata">
+        <param name="Local" value="Tasks/Basic_Tasks/Specifying_metadata.htm">
+      </object>
+      </ul>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Copyright and License, Pathway">
+    <param name="Name" value="Copyright and License">
+    <param name="Local" value="Copyright_and_License.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Copyright holder">
+    <param name="Name" value="Copyright holder">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Copyright_Holder.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Copyright Information Page">
+    <param name="Name" value="Copyright Information Page">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Copyright_Information_Page.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Cover Image Page">
+    <param name="Name" value="Cover Image Page">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Cover_Image_Page.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Create a custom rights statement">
+    <param name="Name" value="Create a custom rights statement">
+    <param name="Local" value="Tasks/Basic_Tasks/Create_a_custom_rights_statement.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Cross references and footnotes">
+    <param name="Name" value="Footnotes and cross references">
+    <param name="Local" value="Tasks/Scripture_Tasks/Footnotes_and_cross_references.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Include Footnote Caller">
+      <param name="Name" value="Include Footnote Caller">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Include_Footnote_Caller.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Include XRef Caller">
+      <param name="Name" value="Include XRef Caller">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Include_XRef_Caller.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Custom installation">
+    <param name="Name" value="Custom installation">
+    <param name="Local" value="Going_Further/Custom_installation.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Custom rights statement">
+    <param name="Name" value="Create a custom rights statement">
+    <param name="Local" value="Tasks/Basic_Tasks/Create_a_custom_rights_statement.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Default Settings">
+    <param name="Name" value="Toolbar overview">
+    <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Processing Options tab">
+      <param name="Name" value="Processing Options tab">
+      <param name="Local" value="User_Interface/Dialog_boxes/Processing_Options_tab.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Publication Info tab">
+      <param name="Name" value="Publication Info tab">
+      <param name="Local" value="User_Interface/Dialog_boxes/Publication_Info_tab.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Select Your Organization dialog box">
+      <param name="Name" value="Select Your Organization dialog box">
+      <param name="Local" value="User_Interface/Dialog_boxes/Select_Your_Organization_dialog_box.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Set Defaults dialog box">
+      <param name="Name" value="Set Defaults dialog box">
+      <param name="Local" value="User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Setting default selections">
+      <param name="Name" value="Setting default selections">
+      <param name="Local" value="Tasks/Basic_Tasks/Setting_default_selections.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Toolbar overview">
+      <param name="Name" value="Toolbar overview">
+      <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Delete">
+    <param name="Name" value="Toolbar overview">
+    <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Description">
+    <param name="Name" value="Description">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Description.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Destination">
+    <param name="Name" value="Destinations">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Destination of output">
+      <param name="Name" value="Goals and Output">
+      <param name="Local" value="Concepts/Destination.htm">
+      <param name="Name" value="Navigation pane">
+      <param name="Local" value="User_Interface/Panes/Navigation_Pane.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Dialog boxes">
+    <param name="Name" value="Dialog boxes overview">
+    <param name="Local" value="User_Interface/Dialog_boxes/Dialog_boxes_overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Print via dialog box">
+      <param name="Name" value="Print via dialog box">
+      <param name="Local" value="User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Set Defaults dialog box">
+      <param name="Name" value="Set Defaults dialog box">
+      <param name="Local" value="User_Interface/Dialog_boxes/Select_Your_Organization_dialog_box.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Dictionary tasks overview">
+    <param name="Name" value="Dictionary tasks overview">
+    <param name="Local" value="Tasks/Dictionary_Tasks/Dictionary_Tasks_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="DictionaryForMIDs (Cell Phones)">
+    <param name="Name" value="DictionaryForMIDs">
+    <param name="Local" value="Concepts/DictionaryForMIDs.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Disable widow &amp; orphan control">
+    <param name="Name" value="Disable widow &amp; orphan control">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Disable_widow_orphan_control.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Discussions">
+    <param name="Name" value="Discussions">
+    <param name="Local" value="Going_Further/Discussions.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Display list of stylesheets">
+    <param name="Name" value="Display list of stylesheets">
+    <param name="Local" value="Tasks/Basic_Tasks/Display_list_of_stylesheets.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Divider Lines">
+    <param name="Name" value="Divider Lines">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Divider_Lines.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="doc/docx">
+    <param name="Name" value="Destination">
+    <param name="Local" value="Concepts/Destination.htm">
+    <param name="Name" value="Related Software">
+    <param name="Local" value="Going_Further/Related_Software.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Related Software">
+      <param name="Name" value="Related Software">
+      <param name="Local" value="Going_Further/Related_Software.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Downloading">
+    <param name="Name" value="Downloading">
+    <param name="Local" value="Installation/Downloading.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Draft pane">
+    <param name="Name" value="Draft pane">
+    <param name="Local" value="User_Interface/Panes/Stylesheet.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Dublin Core">
+    <param name="Name" value="Dublin Core">
+    <param name="Local" value="Concepts/Dublin_Core.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="E-Book (.epub)">
+    <param name="Name" value="EBook (epub)">
+    <param name="Local" value="Concepts/EBook_(epub).htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Destination">
+      <param name="Name" value="Destination">
+      <param name="Local" value="Concepts/Destination.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="EBook (epub)">
+    <param name="Name" value="EBook (epub)">
+    <param name="Local" value="Concepts/EBook_(epub).htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Cover Image Page">
+      <param name="Name" value="Cover Image Page">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Cover_Image_Page.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Display list of stylesheets">
+      <param name="Name" value="Display list of stylesheets">
+      <param name="Local" value="Tasks/Basic_Tasks/Display_list_of_stylesheets.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="UI terms - Properties tab">
+      <param name="Name" value="User Interface terms - Properties tab">
+      <param name="Local" value="User_Interface/User_Interface_Terms/User_Interface_terms_Properties.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Edition Notice, copyright">
+    <param name="Name" value="Copyright Information Page">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Copyright_Information_Page.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Electronic dictionary publication">
+    <param name="Name" value="Destination">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="email, send stylesheets">
+    <param name="Name" value="Sending stylesheets">
+    <param name="Local" value="Tasks/Basic_Tasks/Sending_stylesheets.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Embed Fonts in Document">
+    <param name="Name" value="Embed Fonts in Document">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Embed_Fonts_in_Document.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Entry formats">
+    <param name="Name" value="Entry formats">
+    <param name="Local" value="Tasks/Dictionary_Tasks/Entry_formats.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Entry or image not displaying">
+    <param name="Name" value="Maximum Image Width">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Maximum_Image_Width.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="epub">
+    <param name="Name" value="EBook (epub)">
+    <param name="Local" value="Concepts/EBook_(epub).htm">
+    <param name="Name" value="Destination">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Destination">
+      <param name="Name" value="Destination">
+      <param name="Local" value="Concepts/Destination.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="EBook (epub)">
+      <param name="Name" value="EBook (epub)">
+      <param name="Local" value="Concepts/EBook_(epub).htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Errors and features">
+    <param name="Name" value="Errors and features">
+    <param name="Local" value="Going_Further/Errors_and_features.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Export destination">
+    <param name="Name" value="Destination">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Destination">
+      <param name="Name" value="Destination">
+      <param name="Local" value="Concepts/Destination.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Export Through Pathway dialog box">
+    <param name="Name" value="Export Through Pathway dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Front Matter tab">
+      <param name="Name" value="Front Matter tab">
+      <param name="Local" value="User_Interface/Dialog_boxes/Front_Matter_tab.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Open the Export Through Pathway dialog box">
+      <param name="Name" value="Open the Export Through Pathway dialog box">
+      <param name="Local" value="User_Interface/Dialog_boxes/Open_the_Export_Through_Pathway_dialog_box.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Processing Options tab">
+      <param name="Name" value="Processing Options tab">
+      <param name="Local" value="User_Interface/Dialog_boxes/Processing_Options_tab.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Publication Info tab">
+      <param name="Name" value="Publication Info tab">
+      <param name="Local" value="User_Interface/Dialog_boxes/Publication_Info_tab.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Set Defaults dialog box">
+      <param name="Name" value="Set Defaults dialog box">
+      <param name="Local" value="User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Fallback Font">
+    <param name="Name" value="Fallback Font">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Fallback_Font.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Feature phone">
+    <param name="Name" value="DictionaryForMIDs">
+    <param name="Local" value="Concepts/DictionaryForMIDs.htm">
+    <param name="Name" value="Navigation pane">
+    <param name="Local" value="User_Interface/Panes/Navigation_Pane.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="FieldWorks">
+    <param name="Name" value="Print via dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="File management">
+    <param name="Name" value="File management">
+    <param name="Local" value="Going_Further/File_management.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Files Produced">
+    <param name="Name" value="Files produced">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Files_Produced.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Filters, preprocessing">
+    <param name="Name" value="Processing Options tab">
+    <param name="Local" value="User_Interface/Dialog_boxes/Processing_Options_tab.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Fixed Line Height">
+    <param name="Name" value="Fixed Line Height">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Fixed_Line_Height.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="FLEx">
+    <param name="Name" value="Print via dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Font Fallback">
+    <param name="Name" value="Fallback Font">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Fallback_Font.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Font Size">
+    <param name="Name" value="Font Size, EBook">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Font_Size.htm">
+    <param name="Name" value="Base Font Size">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Base_Font_Size.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Font variants, include or exclude">
+    <param name="Name" value="Include Font Variants">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Also_Embed_Font_Variants.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Footnotes and cross references">
+    <param name="Name" value="Footnotes and cross references">
+    <param name="Local" value="Tasks/Scripture_Tasks/Footnotes_and_cross_references.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Include Footnote Caller">
+      <param name="Name" value="Include Footnote Caller">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Include_Footnote_Caller.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Include XRef Caller">
+      <param name="Name" value="Include XRef Caller">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Include_XRef_Caller.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Formatting booklets">
+    <param name="Name" value="Formatting booklets">
+    <param name="Local" value="Tasks/Basic_Tasks/Formatting_booklets.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Front matter and back matter">
+    <param name="Name" value="Front matter and back matter">
+    <param name="Local" value="Known_Issues/Front_matter_and_back_matter.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Front Matter tab">
+    <param name="Name" value="Front Matter tab">
+    <param name="Local" value="User_Interface/Dialog_boxes/Front_Matter_tab.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Go Bible">
+    <param name="Name" value="Go Bible">
+    <param name="Local" value="Concepts/Go_Bible.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Goals of Pathway">
+    <param name="Name" value="Goals">
+    <param name="Local" value="Goals.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Goals of Pathway Config. Tool">
+    <param name="Name" value="Goals and Output">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="GoBible">
+    <param name="Name" value="Red Letter">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Red_Letter.htm">
+    <param name="Name" value="Files produced">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Files_Produced.htm">
+    <param name="Name" value="Icon for phone">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Icon_for_phone.htm">
+    <param name="Name" value="Processing Scripture">
+    <param name="Local" value="Tasks/Scripture_Tasks/Processing_Scripture.htm">
+    <param name="Name" value="Preparation before exporting data">
+    <param name="Local" value="User_Interface/Dialog_boxes/Preparation_before_exporting_data.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Processing Scripture">
+      <param name="Name" value="Processing Scripture">
+      <param name="Local" value="Tasks/Scripture_Tasks/Processing_Scripture.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Guide words">
+    <param name="Name" value="Guide words">
+    <param name="Local" value="Concepts/Guide_words.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Guideword Length">
+    <param name="Name" value="Guideword Length">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Guideword_Length.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Gutter width">
+    <param name="Name" value="Gutter width">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Column_Gap.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Head words in headers">
+    <param name="Name" value="Head words in headers">
+    <param name="Local" value="Tasks/Dictionary_Tasks/Head_words_in_headers.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Help menu">
+    <param name="Name" value="Toolbar overview">
+    <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Toolbar overview">
+      <param name="Name" value="Toolbar overview">
+      <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Hide Verse No 1">
+    <param name="Name" value="Hide Verse No 1">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Hide_Verse_No_1.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="How do I....">
+    <param name="Name" value="Pathway overview">
+    <param name="Local" value="Overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Concepts overview">
+      <param name="Name" value="Concepts overview">
+      <param name="Local" value="Concepts/Concepts_overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Going Further overview">
+      <param name="Name" value="Going Further overview">
+      <param name="Local" value="Going_Further/Going_Further_overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Installation overview">
+      <param name="Name" value="Installation overview">
+      <param name="Local" value="Installation/Installation_overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Known Issues overview">
+      <param name="Name" value="Known Issues overview">
+      <param name="Local" value="Known_Issues/Known_Issues_overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Pathway overview">
+      <param name="Name" value="Pathway overview">
+      <param name="Local" value="Overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Tasks overview">
+      <param name="Name" value="Tasks overview">
+      <param name="Local" value="Tasks/Tasks_overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="User Interface overview">
+      <param name="Name" value="User Interface overview">
+      <param name="Local" value="User_Interface/User_Interface_overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Using Help overview">
+      <param name="Name" value="Using Help overview">
+      <param name="Local" value="Using_Help/Using_help_overview.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="HTML (output)">
+    <param name="Name" value="Goals and Output">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Icon for phone">
+    <param name="Name" value="Icon for phone">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Icon_for_phone.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="If font is missing">
+    <param name="Name" value="If font is missing">
+    <param name="Local" value="User_Interface/User_Interface_Terms/If_font_is_missing.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="If font is non-SIL">
+    <param name="Name" value="If font is non-SIL">
+    <param name="Local" value="User_Interface/User_Interface_Terms/If_font_is_non-SIL.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Image size">
+    <param name="Name" value="Maximum Image Width">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Maximum_Image_Width.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Image size, control">
+    <param name="Name" value="Stylesheet pane">
+    <param name="Local" value="User_Interface/Panes/Stylesheet.htm">
+    <param name="Name" value="User Interface terms - Properties">
+    <param name="Local" value="User_Interface/User_Interface_Terms/User_Interface_terms_Properties.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Include Font Variants">
+    <param name="Name" value="Include Font Variants">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Also_Embed_Font_Variants.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Include Footnote Caller">
+    <param name="Name" value="Include Footnote Caller">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Include_Footnote_Caller.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Include Images">
+    <param name="Name" value="Include Images">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Include_Images.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="EBook (epub)">
+      <param name="Name" value="EBook (epub)">
+      <param name="Local" value="Concepts/EBook_(epub).htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Include XRef Caller">
+    <param name="Name" value="Include XRef Caller">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Include_XRef_Caller.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="InDesign">
+    <param name="Name" value="Goals and Output">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Info tab">
+    <param name="Name" value="Name">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Name.htm">
+    <param name="Name" value="Description">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Description.htm">
+    <param name="Name" value="Comment">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Comment.htm">
+    <param name="Name" value="Approved By">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Approved_By.htm">
+    <param name="Name" value="Available check box">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Available_check_box.htm">
+    <param name="Name" value="User Interface terms - Info">
+    <param name="Local" value="User_Interface/User_Interface_Terms/User_Interface_terms_Info.htm">
+    <param name="Name" value="User Interface overview">
+    <param name="Local" value="User_Interface/User_Interface_overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="User Interface terms - Info">
+      <param name="Name" value="User Interface terms - Info">
+      <param name="Local" value="User_Interface/User_Interface_Terms/User_Interface_terms_Info.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Installation overview">
+    <param name="Name" value="Installation overview">
+    <param name="Local" value="Installation/Installation_overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="USB Drive or CD-ROM installation package, make a">
+      <param name="Name" value="USB Drive or CD-ROM installation package">
+      <param name="Local" value="Going_Further/USB_Drive_or_CD-ROM_installation_package.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Intellectual Property">
+    <param name="Name" value="Intellectual Property">
+    <param name="Local" value="Concepts/Intellectual_Property.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Republishing">
+      <param name="Name" value="Republishing">
+      <param name="Local" value="Concepts/Republishing.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Internet, publish to">
+    <param name="Name" value="Set up Web overview">
+    <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_Web_overview.htm">
+    <param name="Name" value="Set up web stylesheet">
+    <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_web_stylesheet.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Set up Web overview">
+      <param name="Name" value="Set up Web overview">
+      <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_Web_overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Set up web stylesheet">
+      <param name="Name" value="Set up web stylesheet">
+      <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_web_stylesheet.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="jar">
+    <param name="Name" value="Processing Scripture">
+    <param name="Local" value="Tasks/Scripture_Tasks/Processing_Scripture.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Processing Scripture">
+      <param name="Name" value="Processing Scripture">
+      <param name="Local" value="Tasks/Scripture_Tasks/Processing_Scripture.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Java">
+    <param name="Name" value="Go Bible">
+    <param name="Local" value="Concepts/Go_Bible.htm">
+    <param name="Name" value="DictionaryForMIDs">
+    <param name="Local" value="Concepts/DictionaryForMIDs.htm">
+    <param name="Name" value="Processing Scripture">
+    <param name="Local" value="Tasks/Scripture_Tasks/Processing_Scripture.htm">
+    <param name="Name" value="USB Drive or CD-ROM installation package">
+    <param name="Local" value="Going_Further/USB_Drive_or_CD-ROM_installation_package.htm">
+    <param name="Name" value="Preparation before exporting data">
+    <param name="Local" value="User_Interface/Dialog_boxes/Preparation_before_exporting_data.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Justified">
+    <param name="Name" value="Justified">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Justified.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Kindle">
+    <param name="Name" value="calibre">
+    <param name="Local" value="Concepts/calibre.htm">
+    <param name="Name" value="EBook (epub)">
+    <param name="Local" value="Concepts/EBook_(epub).htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Known Issues overview">
+    <param name="Name" value="Known Issues overview">
+    <param name="Local" value="Known_Issues/Known_Issues_overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Front matter and back matter">
+      <param name="Name" value="Front matter and back matter">
+      <param name="Local" value="Known_Issues/Front_matter_and_back_matter.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Open Office issues">
+      <param name="Name" value="Open Office issues">
+      <param name="Local" value="Known_Issues/Open_Office_issues.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Paratext issues">
+      <param name="Name" value="Paratext issues">
+      <param name="Local" value="Known_Issues/Paratext_issues.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Language Explorer">
+    <param name="Name" value="Print via dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Language styles">
+    <param name="Name" value="Language styles">
+    <param name="Local" value="Tasks/Dictionary_Tasks/Language_syles.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Language, Go Bible UI">
+    <param name="Name" value="Language">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Language.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Large files, known issues">
+    <param name="Name" value="Open Office issues">
+    <param name="Local" value="Known_Issues/Open_Office_issues.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Letter Dividers, remove">
+    <param name="Name" value="Processing Options tab">
+    <param name="Local" value="User_Interface/Dialog_boxes/Processing_Options_tab.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Letter headers">
+    <param name="Name" value="Letter headers">
+    <param name="Local" value="Tasks/Basic_Tasks/Letter_headers.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="LibreOffice known issues">
+    <param name="Name" value="Open Office issues">
+    <param name="Local" value="Known_Issues/Open_Office_issues.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="LibreOffice/OpenOffice">
+    <param name="Name" value="OpenOffice and LibreOffice">
+    <param name="Local" value="Concepts/OpenOffice_LibreOffice.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Licenses - Examples">
+    <param name="Name" value="Licenses - Examples">
+    <param name="Local" value="Concepts/Licenses_examples.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Line Height">
+    <param name="Name" value="Line Height">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Line_Height.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Line Spacing">
+    <param name="Name" value="Line Spacing">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Line_Spacing.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Localization">
+    <param name="Name" value="Localization">
+    <param name="Local" value="Installation/Localization.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Maximum Image Width">
+    <param name="Name" value="Maximum Image Width">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Maximum_Image_Width.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Metadata">
+    <param name="Name" value="Specifying metadata">
+    <param name="Local" value="Tasks/Basic_Tasks/Specifying_metadata.htm">
+    <param name="Name" value="Stylesheet pane">
+    <param name="Local" value="User_Interface/Panes/Stylesheet.htm">
+    <param name="Name" value="Front matter and back matter">
+    <param name="Local" value="Known_Issues/Front_matter_and_back_matter.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="MOBI, Kindle">
+    <param name="Name" value="calibre">
+    <param name="Local" value="Concepts/calibre.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Mobile">
+    <param name="Name" value="Processing Scripture">
+    <param name="Local" value="Tasks/Scripture_Tasks/Processing_Scripture.htm">
+    <param name="Name" value="Navigation pane">
+    <param name="Local" value="User_Interface/Panes/Navigation_Pane.htm">
+    <param name="Name" value="Goals and Output">
+    <param name="Local" value="Concepts/Destination.htm">
+    <param name="Name" value="DictionaryForMIDs">
+    <param name="Local" value="Concepts/DictionaryForMIDs.htm">
+    <param name="Name" value="Go Bible">
+    <param name="Local" value="Concepts/Go_Bible.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="MySword (Android)">
+    <param name="Name" value="theWord/MySword">
+    <param name="Local" value="Concepts/theWord_MySword.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Name">
+    <param name="Name" value="Name">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Name.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Navigation pane">
+    <param name="Name" value="Navigation pane">
+    <param name="Local" value="User_Interface/Panes/Navigation_Pane.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="New">
+    <param name="Name" value="Toolbar overview">
+    <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="No page breaks within letters">
+    <param name="Name" value="No page breaks within letters">
+    <param name="Local" value="User_Interface/User_Interface_Terms/No_page_breaks_within_letters.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="odt/odf">
+    <param name="Name" value="Destination">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Destination">
+      <param name="Name" value="Destination">
+      <param name="Local" value="Concepts/Destination.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Related Software">
+      <param name="Name" value="Related Software">
+      <param name="Local" value="Going_Further/Related_Software.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="OneWeb">
+    <param name="Name" value="Set up web stylesheet">
+    <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_web_stylesheet.htm">
+    <param name="Name" value="Set up Web overview">
+    <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_Web_overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Set up web stylesheet">
+      <param name="Name" value="Set up web stylesheet">
+      <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_web_stylesheet.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Open Office issues">
+    <param name="Name" value="Open Office issues">
+    <param name="Local" value="Known_Issues/Open_Office_issues.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Open Office/LibreOffice">
+    <param name="Name" value="Goals and Output">
+    <param name="Local" value="Concepts/Destination.htm">
+    <param name="Name" value="OpenOffice">
+    <param name="Local" value="Concepts/OpenOffice_LibreOffice.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Others">
+    <param name="Name" value="Navigation pane">
+    <param name="Local" value="User_Interface/Panes/Navigation_Pane.htm">
+    <param name="Name" value="EBook (epub)">
+    <param name="Local" value="Concepts/EBook_(epub).htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Output files">
+    <param name="Name" value="File management">
+    <param name="Local" value="Going_Further/File_management.htm">
+    <param name="Name" value="Destination">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Destination">
+      <param name="Name" value="Destination">
+      <param name="Local" value="Concepts/Destination.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="File management">
+      <param name="Name" value="File management">
+      <param name="Local" value="Going_Further/File_management.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Output options?">
+    <param name="Name" value="Destination">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Destination">
+      <param name="Name" value="Destination">
+      <param name="Local" value="Concepts/Destination.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Overview">
+    <param name="Name" value="Overview">
+    <param name="Local" value="Overview.htm">
+    <param name="Name" value="Goals and Output">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Overviews">
+    <param name="Name" value="Concepts overview">
+    <param name="Local" value="Concepts/Concepts_overview.htm">
+    <param name="Name" value="Going Further overview">
+    <param name="Local" value="Going_Further/Going_Further_overview.htm">
+    <param name="Name" value="Installation overview">
+    <param name="Local" value="Installation/Installation_overview.htm">
+    <param name="Name" value="Known Issues overview">
+    <param name="Local" value="Known_Issues/Known_Issues_overview.htm">
+    <param name="Name" value="Dictionary tasks overview">
+    <param name="Local" value="Tasks/Dictionary_Tasks/Dictionary_Tasks_overview.htm">
+    <param name="Name" value="Scripture tasks overview">
+    <param name="Local" value="Tasks/Scripture_Tasks/Scripture_tasks_overview.htm">
+    <param name="Name" value="Tasks overview">
+    <param name="Local" value="Tasks/Tasks_overview.htm">
+    <param name="Name" value="Dialog boxes overview">
+    <param name="Local" value="User_Interface/Dialog_boxes/Dialog_boxes_overview.htm">
+    <param name="Name" value="Toolbar overview">
+    <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+    <param name="Name" value="User Interface overview">
+    <param name="Local" value="User_Interface/User_Interface_overview.htm">
+    <param name="Name" value="Goals and Output">
+    <param name="Local" value="Concepts/Destination.htm">
+    <param name="Name" value="Overview">
+    <param name="Local" value="Overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Page Margin">
+    <param name="Name" value="Page Margin">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Page_Margin.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Page Numbers">
+    <param name="Name" value="Page Numbers">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Page_Numbers.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Page Size">
+    <param name="Name" value="Page Size">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Page_Size.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Panes overview">
+    <param name="Name" value="Panes overview">
+    <param name="Local" value="User_Interface/Panes/Panes_overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Navigation pane">
+      <param name="Name" value="Navigation pane">
+      <param name="Local" value="User_Interface/Panes/Navigation_Pane.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Stylesheet pane">
+      <param name="Name" value="Stylesheet pane">
+      <param name="Local" value="User_Interface/Panes/Stylesheet.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Stylesheets pane">
+      <param name="Name" value="Stylesheets pane">
+      <param name="Local" value="User_Interface/Panes/Stylesheets_pane.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Paper">
+    <param name="Name" value="Navigation pane">
+    <param name="Local" value="User_Interface/Panes/Navigation_Pane.htm">
+    <param name="Name" value="Destination">
+    <param name="Local" value="Concepts/Destination.htm">
+    <param name="Name" value="User Interface terms - Properties tab">
+    <param name="Local" value="User_Interface/User_Interface_Terms/User_Interface_terms_Properties.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Paper Size">
+      <param name="Name" value="Paper Size">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Page_Size.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Paratext">
+    <param name="Name" value="Goals and Output">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Pdf">
+    <param name="Name" value="Destination">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Destination">
+      <param name="Name" value="Destination">
+      <param name="Local" value="Concepts/Destination.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Pdf (Using LibreOffice)">
+      <param name="Name" value="Pdf (Using LibreOffice)">
+      <param name="Local" value="Concepts/Pdf_(Using_LibreOffice).htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Pdf (Using Prince)">
+      <param name="Name" value="Pdf (Using Prince)">
+      <param name="Local" value="Concepts/Pdf_(Using_Prince).htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Picture not displaying in output">
+    <param name="Name" value="Maximum Image Width">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Maximum_Image_Width.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Picture size, epub">
+    <param name="Name" value="EBook (epub)">
+    <param name="Local" value="Concepts/EBook_(epub).htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Pictures">
+    <param name="Name" value="Pictures">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Pictures.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Pictures in text">
+    <param name="Name" value="Pictures in text">
+    <param name="Local" value="Tasks/Scripture_Tasks/Pictures_in_text.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Pictures with entries">
+    <param name="Name" value="Pictures with entries">
+    <param name="Local" value="Tasks/Dictionary_Tasks/Pictures_with_entries.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Point">
+    <param name="Name" value="Point">
+    <param name="Local" value="Concepts/Point.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Pre-Processing">
+    <param name="Name" value="Processing Options tab">
+    <param name="Local" value="User_Interface/Dialog_boxes/Processing_Options_tab.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Preparation before exporting data">
+    <param name="Name" value="Preparation for use of Print via dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Preparation_before_exporting_data.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Prerequisites">
+    <param name="Name" value="Prerequisites">
+    <param name="Local" value="Installation/Prerequisites.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Preview">
+    <param name="Name" value="Toolbar overview">
+    <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+    <param name="Name" value="Stylesheet pane">
+    <param name="Local" value="User_Interface/Panes/Stylesheet.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Preview tab, Stylesheets pane">
+      <param name="Name" value="Stylesheet pane">
+      <param name="Local" value="User_Interface/Panes/Stylesheet.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Preview, toolbar button">
+      <param name="Name" value="Toolbar overview">
+      <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="PrinceXML (pdf)">
+    <param name="Name" value="Destination">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Print via dialog box">
+    <param name="Name" value="Print via dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Problems">
+    <param name="Name" value="Technical Support">
+    <param name="Local" value="Tech_support.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Processing a dictionary">
+    <param name="Name" value="Processing a dictionary">
+    <param name="Local" value="Tasks/Dictionary_Tasks/Processing_a_dictionary.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Processing Options tab">
+    <param name="Name" value="Processing Options tab">
+    <param name="Local" value="User_Interface/Dialog_boxes/Processing_Options_tab.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Processing Scripture">
+    <param name="Name" value="Processing Scripture">
+    <param name="Local" value="Tasks/Scripture_Tasks/Processing_Scripture.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Properties (of stylesheets)">
+    <param name="Name" value="Properties, Pathway Stylesheets">
+    <param name="Local" value="Concepts/Properties_Stylesheet.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Properties tab">
+    <param name="Name" value="Column Gap">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Column_Gap.htm">
+    <param name="Name" value="Page Size">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Page_Size.htm">
+    <param name="Name" value="Page Margin">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Page_Margin.htm">
+    <param name="Name" value="Justified">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Justified.htm">
+    <param name="Name" value="Columns">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Columns.htm">
+    <param name="Name" value="Pictures">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Pictures.htm">
+    <param name="Name" value="Line Spacing">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Line_Spacing.htm">
+    <param name="Name" value="Running Header">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Running_Header.htm">
+    <param name="Name" value="Divider Lines">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Divider_Lines.htm">
+    <param name="Name" value="Base Font Size">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Base_Font_Size.htm">
+    <param name="Name" value="Files produced">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Files_Produced.htm">
+    <param name="Name" value="Sense Layout">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Sense_Layout.htm">
+    <param name="Name" value="Concepts overview">
+    <param name="Local" value="Concepts/Concepts_overview.htm">
+    <param name="Name" value="Head words in headers">
+    <param name="Local" value="Tasks/Dictionary_Tasks/Head_words_in_headers.htm">
+    <param name="Name" value="Pictures in text">
+    <param name="Local" value="Tasks/Scripture_Tasks/Pictures_in_text.htm">
+    <param name="Name" value="Pictures with entries">
+    <param name="Local" value="Tasks/Dictionary_Tasks/Pictures_with_entries.htm">
+    <param name="Name" value="References in headers">
+    <param name="Local" value="Tasks/Scripture_Tasks/References_in_headers.htm">
+    <param name="Name" value="Add a new stylesheet">
+    <param name="Local" value="Tasks/Basic_Tasks/Add_a_new_stylesheet.htm">
+    <param name="Name" value="Bullets">
+    <param name="Local" value="Tasks/Dictionary_Tasks/Bullets.htm">
+    <param name="Name" value="Copy a stylesheet">
+    <param name="Local" value="Tasks/Basic_Tasks/Copy_a_stylesheet.htm">
+    <param name="Name" value="User Interface terms - Properties">
+    <param name="Local" value="User_Interface/User_Interface_Terms/User_Interface_terms_Properties.htm">
+    <param name="Name" value="User Interface overview">
+    <param name="Local" value="User_Interface/User_Interface_overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Set up web stylesheet">
+      <param name="Name" value="Set up web stylesheet">
+      <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_web_stylesheet.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="User Interface terms - Properties">
+      <param name="Name" value="User Interface terms - Properties">
+      <param name="Local" value="User_Interface/User_Interface_Terms/User_Interface_terms_Properties.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Publication Info tab">
+    <param name="Name" value="Publication Info tab">
+    <param name="Local" value="User_Interface/Dialog_boxes/Publication_Info_tab.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="RAMP Metadata">
+    <param name="Name" value="RAMP Metadata">
+    <param name="Local" value="Tasks/Basic_Tasks/RAMP_Metadata.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Red Letter">
+    <param name="Name" value="Red Letter">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Red_Letter.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Reference Format">
+    <param name="Name" value="Reference Format">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Reference_Format.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="References in headers">
+    <param name="Name" value="References in headers">
+    <param name="Local" value="Tasks/Scripture_Tasks/References_in_headers.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Related Software">
+    <param name="Name" value="Related Software">
+    <param name="Local" value="Going_Further/Related_Software.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Relative and Absolute values">
+    <param name="Name" value="Relative and Absolute values">
+    <param name="Local" value="Concepts/Relative_and_Absolute_values.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Release Notes">
+    <param name="Name" value="Release Notes">
+    <param name="Local" value="Going_Further/Release_Notes.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Remove Space After Verse No">
+    <param name="Name" value="Remove Space After Verse No">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Remove_Space_After_Verse_No.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Republishing">
+    <param name="Name" value="Republishing">
+    <param name="Local" value="Concepts/Republishing.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Reset (settings)">
+    <param name="Name" value="Toolbar overview">
+    <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Rights statements">
+    <param name="Name" value="Create a custom rights statement">
+    <param name="Local" value="Tasks/Basic_Tasks/Create_a_custom_rights_statement.htm">
+    <param name="Name" value="Choosing a rights statement overview">
+    <param name="Local" value="Tasks/Basic_Tasks/Choosing_a_rights_statement_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Roles">
+    <param name="Name" value="Roles">
+    <param name="Local" value="Concepts/Roles.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Rules">
+    <param name="Name" value="Rules">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Divider_Lines.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Running Header">
+    <param name="Name" value="Running Header">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Running_Header.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Sample letter, copyright">
+    <param name="Name" value="Intellectual_Property">
+    <param name="Local" value="Concepts/Intellectual_Property.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Save As">
+    <param name="Name" value="Toolbar overview">
+    <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Scripture">
+    <param name="Name" value="theWord/MySword">
+    <param name="Local" value="Concepts/theWord_MySword.htm">
+    <param name="Name" value="Go Bible">
+    <param name="Local" value="Concepts/Go_Bible.htm">
+    <param name="Name" value="Scripture tasks overview">
+    <param name="Local" value="Tasks/Scripture_Tasks/Scripture_tasks_overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Go Bible">
+      <param name="Name" value="Go Bible">
+      <param name="Local" value="Concepts/Go_Bible.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Scripture tasks overview">
+      <param name="Name" value="Scripture tasks overview">
+      <param name="Local" value="Tasks/Scripture_Tasks/Scripture_tasks_overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="theWord/MySword">
+      <param name="Name" value="theWord/MySword">
+      <param name="Local" value="Concepts/theWord_MySword.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Select Layout dialog box">
+    <param name="Name" value="Select Layout dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Select_Layout_dialog_box.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Select Your Organization">
+    <param name="Name" value="Set Defaults dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm">
+    <param name="Name" value="Select Your Organization dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Select_Your_Organization_dialog_box.htm">
+    <param name="Name" value="Organization Name">
+    <param name="Local" value="User_Interface/Dialog_boxes/Organization_Name.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Set Defaults dialog box">
+      <param name="Name" value="Set Defaults dialog box">
+      <param name="Local" value="User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Send">
+    <param name="Name" value="Toolbar overview">
+    <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Sending stylesheets">
+    <param name="Name" value="Sending stylesheets">
+    <param name="Local" value="Tasks/Basic_Tasks/Sending_stylesheets.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Sense Layout">
+    <param name="Name" value="Sense Layout">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Sense_Layout.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Set Defaults dialog box">
+    <param name="Name" value="Set Defaults dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Export Through Pathway dialog box">
+      <param name="Name" value="Export Through Pathway dialog box">
+      <param name="Local" value="User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Front Matter tab">
+      <param name="Name" value="Front Matter tab">
+      <param name="Local" value="User_Interface/Dialog_boxes/Front_Matter_tab.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Processing Options tab">
+      <param name="Name" value="Processing Options tab">
+      <param name="Local" value="User_Interface/Dialog_boxes/Processing_Options_tab.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Publication Info tab">
+      <param name="Name" value="Publication Info tab">
+      <param name="Local" value="User_Interface/Dialog_boxes/Publication_Info_tab.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Set up Web overview">
+    <param name="Name" value="Set up Web overview">
+    <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_web_stylesheet.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Set up web stylesheet">
+      <param name="Name" value="Set up Web">
+      <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_web_stylesheet.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Setting default selections">
+    <param name="Name" value="Setting default selections">
+    <param name="Local" value="Tasks/Basic_Tasks/Setting_default_selections.htm">
+    <param name="Name" value="Select Your Organization dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Select_Your_Organization_dialog_box.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="SIL FieldWorks">
+    <param name="Name" value="Print via dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Smart Device">
+    <param name="Name" value="Destination">
+    <param name="Local" value="Concepts/Destination.htm">
+    <param name="Name" value="DictionaryForMIDs">
+    <param name="Local" value="Concepts/DictionaryForMIDs.htm">
+    <param name="Name" value="Go Bible">
+    <param name="Local" value="Concepts/Go_Bible.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Snippet">
+    <param name="Name" value="Snippet">
+    <param name="Local" value="Concepts/Snippet.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Specifying metadata">
+    <param name="Name" value="Specifying metadata">
+    <param name="Local" value="Tasks/Basic_Tasks/Specifying_metadata.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Specifying page size">
+    <param name="Name" value="Specifying page size">
+    <param name="Local" value="Tasks/Basic_Tasks/Specifying_page_size.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Split File by Letter">
+    <param name="Name" value="Split File by Letter">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Split_File_by_Letter.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Standard rights statements">
+    <param name="Name" value="Choosing a rights statement overview">
+    <param name="Local" value="Tasks/Basic_Tasks/Choosing_a_rights_statement_overview.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Choosing a rights statement overview">
+      <param name="Name" value="Choosing a rights statement overview">
+      <param name="Local" value="Tasks/Basic_Tasks/Choosing_a_rights_statement_overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Create a custom rights statement">
+      <param name="Name" value="Create a custom rights statement">
+      <param name="Local" value="Tasks/Basic_Tasks/Create_a_custom_rights_statement.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Standard versus custom">
+    <param name="Name" value="Standard versus custom">
+    <param name="Local" value="Concepts/Standard_versus_custom.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Style naming">
+    <param name="Name" value="Style naming">
+    <param name="Local" value="Concepts/Style_naming.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Style sheet properties">
+    <param name="Name" value="Properties, Pathway Stylesheets">
+    <param name="Local" value="Concepts/Properties_Stylesheet.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Stylesheet">
+    <param name="Name" value="Style Sheet">
+    <param name="Local" value="Concepts/Stylesheet.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Stylesheet editing">
+    <param name="Name" value="Stylesheet editing">
+    <param name="Local" value="Tasks/Basic_Tasks/Edit_a_stylesheet.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Stylesheet pane">
+    <param name="Name" value="Stylesheet pane">
+    <param name="Local" value="User_Interface/Panes/Stylesheet.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Stylesheet, choose">
+    <param name="Name" value="Export Through Pathway dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm">
+    <param name="Name" value="Set Defaults dialog box">
+    <param name="Local" value="User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm">
+    <param name="Name" value="Display list of stylesheets">
+    <param name="Local" value="Tasks/Basic_Tasks/Display_list_of_stylesheets.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Stylesheets pane">
+    <param name="Name" value="Stylesheets pane">
+    <param name="Local" value="User_Interface/Panes/Stylesheets_pane.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Support">
+    <param name="Name" value="Technical Support">
+    <param name="Local" value="Tech_support.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Tables">
+    <param name="Name" value="Open Office issues">
+    <param name="Local" value="Known_Issues/Open_Office_issues.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Tasks overview">
+    <param name="Name" value="Tasks overview">
+    <param name="Local" value="Tasks/Tasks_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Technical Support">
+    <param name="Name" value="Technical Support">
+    <param name="Local" value="Tech_support.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="terms, UI labels">
+    <param name="Name" value="User Interface terms - Info">
+    <param name="Local" value="User_Interface/User_Interface_Terms/User_Interface_terms_Info.htm">
+    <param name="Name" value="User Interface terms - Properties">
+    <param name="Local" value="User_Interface/User_Interface_Terms/User_Interface_terms_Properties.htm">
+    <param name="Name" value="User Interface overview">
+    <param name="Local" value="User_Interface/User_Interface_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Tex">
+    <param name="Name" value="XeLaTex">
+    <param name="Local" value="Concepts/XeLaTex.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Text Alignment">
+    <param name="Name" value="Text Alignment">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Text_Alignment.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="theWord/MySword">
+    <param name="Name" value="theWord/MySword">
+    <param name="Local" value="Concepts/theWord_MySword.htm">
+    <param name="Name" value="Preparation before exporting data">
+    <param name="Local" value="User_Interface/Dialog_boxes/Preparation_before_exporting_data.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Title Page">
+    <param name="Name" value="Title Page">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Title_Page.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="TOC Level">
+    <param name="Name" value="TOC level">
+    <param name="Local" value="User_Interface/User_Interface_Terms/TOC_level.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Toolbar overview">
+    <param name="Name" value="Toolbar overview">
+    <param name="Local" value="User_Interface/Toolbars/Toolbar_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Tutorials">
+    <param name="Name" value="Tutorials">
+    <param name="Local" value="Going_Further/Tutorials.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Usage tracking">
+    <param name="Name" value="Usage tracking">
+    <param name="Local" value="Concepts/Usage_tracking.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="USB Drive or CD-ROM installation package, make a">
+    <param name="Name" value="USB Drive or CD-ROM installation package">
+    <param name="Local" value="Going_Further/USB_Drive_or_CD-ROM_installation_package.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="User Interface language, Go Bible">
+    <param name="Name" value="Language">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Language.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="User Interface overview">
+    <param name="Name" value="User Interface overview">
+    <param name="Local" value="User_Interface/User_Interface_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="User Interface terms - Set Defaults">
+    <param name="Name" value="User Interface terms - Set Defaults">
+    <param name="Local" value="User_Interface/User_Interface_Terms/User_Interface_terms_Set_Defaults.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="User Interface terms overview">
+    <param name="Name" value="User Interface terms overview">
+    <param name="Local" value="User_Interface/User_Interface_Terms/User_Interface_terms_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Using Help overview">
+    <param name="Name" value="Using Help overview">
+    <param name="Local" value="Using_Help/Using_help_overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Verse numbers">
+    <param name="Name" value="Verse numbers">
+    <param name="Local" value="Tasks/Scripture_Tasks/Verse_numbers.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Hide Verse No 1">
+      <param name="Name" value="Hide Verse No 1">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Hide_Verse_No_1.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Remove Space After Verse No">
+      <param name="Name" value="Remove Space After Verse No">
+      <param name="Local" value="User_Interface/User_Interface_Terms/Remove_Space_After_Verse_No.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Verso, copyright">
+    <param name="Name" value="Copyright Information Page">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Copyright_Information_Page.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Vertical Justify">
+    <param name="Name" value="Vertical Justify">
+    <param name="Local" value="User_Interface/User_Interface_Terms/Vertical_Justify.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Web">
+    <param name="Name" value="Navigation pane">
+    <param name="Local" value="User_Interface/Panes/Navigation_Pane.htm">
+    <param name="Name" value="Goals and Output">
+    <param name="Local" value="Concepts/Destination.htm">
+    <param name="Name" value="Set up Web overview">
+    <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_Web_overview.htm">
+    <param name="Name" value="Set up web stylesheet">
+    <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_web_stylesheet.htm">
+    <param name="Name" value="Webonary">
+    <param name="Local" value="Concepts/Webonary.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Set up Web overview">
+      <param name="Name" value="Set up Web overview">
+      <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_Web_overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Set up web stylesheet">
+      <param name="Name" value="Set up web stylesheet">
+      <param name="Local" value="Tasks/Set_up_Web_tasks/Set_up_web_stylesheet.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Webonary">
+    <param name="Name" value="Webonary">
+    <param name="Local" value="Concepts/Webonary.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Word, Microsoft output to">
+    <param name="Name" value="Related Software">
+    <param name="Local" value="Going_Further/Related_Software.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="XeLaTex">
+    <param name="Name" value="XeLaTex">
+    <param name="Local" value="Concepts/XeLaTex.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="XeTex">
+    <param name="Name" value="XeLaTex">
+    <param name="Local" value="Concepts/XeLaTex.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="xml/xhtml output">
+    <param name="Name" value="Goals and Output">
+    <param name="Local" value="Concepts/Destination.htm">
+  </object>
+</ul>
+</html>
