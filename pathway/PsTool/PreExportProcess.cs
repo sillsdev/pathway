@@ -369,7 +369,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // dictionary - SIL logo
-                    sb.Append("<img src='sil-bw-logo.jpg' alt='SIL International Logo'/>");
+                    sb.Append("<img src='2014_sil_logo.png' alt='SIL International Logo'/>");
                 }
                 else
                 {
@@ -425,7 +425,7 @@ namespace SIL.Tool
             {
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
-                    File.Copy(Common.PathCombine(strCopyrightFolder, "sil-bw-logo.jpg"), Common.PathCombine(outputFolder, "sil-bw-logo.jpg"), true);
+                    File.Copy(Common.PathCombine(strCopyrightFolder, "2014_sil_logo.png"), Common.PathCombine(outputFolder, "2014_sil_logo.png"), true);
                 }
                 else
                 {
@@ -477,7 +477,7 @@ namespace SIL.Tool
             Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>", GetCopyrightInfo());
             if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
-                Common.StreamReplaceInFile(destFile, "src='sil-bw-logo.jpg' alt='SIL International logo'",
+                Common.StreamReplaceInFile(destFile, "src='2014_sil_logo.png' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
             }
             Common.SetDefaultCSS(destFile, Path.GetFileName(_cssFileNameWithPath));
@@ -617,7 +617,7 @@ namespace SIL.Tool
             string s0;
             if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
-                s0 = Regex.Replace(outData.ToString(), "src='sil-bw-logo.jpg' alt='SIL International logo'",
+                s0 = Regex.Replace(outData.ToString(), "src='2014_sil_logo.png' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
             }
             else

@@ -1162,7 +1162,7 @@ namespace SIL.PublishingSolution
                 if (organization.StartsWith("SIL"))
                 {
                     logoName = _projInfo.ProjectInputType.ToLower() == "dictionary"
-                                   ? "sil-bw-logo.jpg"
+                                   ? "2014_sil_logo.png"
                                    : "WBT_H_RGB_red.png";
                 }
                 else if (organization.StartsWith("Wycliffe"))

@@ -604,7 +604,7 @@ namespace SIL.PublishingSolution
                 string logoFileName = string.Empty;
                 if (Param.GetOrganization().StartsWith("SIL"))
                 {
-                    logoFileName = ProjectType.ToLower() == "dictionary" ? "sil-bw-logo.jpg" : "WBT_H_RGB_red.png";
+                    logoFileName = ProjectType.ToLower() == "dictionary" ? "2014_sil_logo.png" : "WBT_H_RGB_red.png";
                 }
                 else if (Param.GetOrganization().StartsWith("Wycliffe"))
                 {
