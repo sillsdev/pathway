@@ -30,7 +30,6 @@ namespace SIL.Tool
             if (password != null && password != String.Empty)
                 s.Password = password;
             ZipEntry theEntry;
-            string tmpEntry = String.Empty;
             while ((theEntry = s.GetNextEntry()) != null)
             {
                 string directoryName = outputFolder;

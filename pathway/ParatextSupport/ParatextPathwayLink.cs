@@ -430,11 +430,11 @@ namespace SIL.PublishingSolution
             XsltArgumentList args = new XsltArgumentList();
             foreach (string paramName in _mXslParams.Keys)
                 args.AddParam(paramName, "", _mXslParams[paramName]);
-
+            
             // Step 1. Separate books into their own elements for subsequent processing.
             StringBuilder separatedBooks = new StringBuilder();
             XmlWriter htmlw1 = XmlWriter.Create(separatedBooks, _mUsxToXhtml.OutputSettings);
-            _mSeparateIntoBooks.Transform(XmlReader.Create(new StringReader(usx)), null, htmlw1, null);
+            _mSeparateIntoBooks.Transform(XmlReader.Create(new StringReader(usx.Replace(">﻿ </book>", "></book>"))), null, htmlw1, null);
 
             // Step 2. Remove line breaks for next step (to prevent creation of empty spans).
             StringBuilder cleanUsx = new StringBuilder();
