@@ -270,6 +270,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="theWordConvert\ExportTheWordTest.cs" />
+    <Compile Include="theWordConvert\MySwordSqliteTest.cs" />
     <Compile Include="XeLatex\XeLaTexContentTest.cs" />
     <Compile Include="CssParser\ClassInfoTest.cs" />
     <Compile Include="CssParser\CssTreeTest.cs" />

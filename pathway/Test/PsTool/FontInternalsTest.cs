@@ -134,8 +134,9 @@ namespace Test.PsTool
             string style = "Regular";
             string actual = FontInternals.GetFontFileName(familyName, style);
             string expected = "DoulosSIL-R";
+            string expected2 = "DoulosSILR";
             string actualFilename = Path.GetFileName(actual);
-            Assert.True(actualFilename != null && actualFilename.Contains(expected));
+            Assert.True(actualFilename != null && (actualFilename.Contains(expected) || actualFilename.Contains(expected2)));
         }
 
 

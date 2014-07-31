@@ -530,14 +530,6 @@ namespace SIL.PublishingSolution
             var tempFolder = Path.GetTempPath();
             var folder = Common.PathCombine(tempFolder, theWordDirectoryName);
             CopyTheWordFolderToTemp(theWordFullPath, folder);
-            try
-            {
-                FolderTree.Copy(Common.PathCombine(folder, Directory.Exists(@"C:\Program Files (x86)") ? "x64" : "x32"), folder);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
             return folder;
         }
 

@@ -36,7 +36,7 @@ namespace SIL.PublishingSolution
     {
         private readonly XmlDocument _vrs = new XmlDocument();
         private readonly Regex _vrsPat = new Regex(@"[0-9]+\:([0-9]+)");
-        private readonly Dictionary<string, string> _dbParams = new Dictionary<string, string>();
+        protected readonly Dictionary<string, string> _dbParams = new Dictionary<string, string>();
         private StreamReader _sr;
 
         public MySwordSqlite()
@@ -67,7 +67,7 @@ namespace SIL.PublishingSolution
             LoadDbParams();
             PostDbParams(inName, updConn);
             _sr.Close();
-            updConn.Close();
+            updConn.Dispose();
         }
 
         string GetFilename(string inName)
@@ -176,7 +176,6 @@ namespace SIL.PublishingSolution
             var detailTrx = updConn.BeginTransaction();
             const string map = "Description=description,Abbreviation=short.title,Comments=about,Version=version,VersionDate=version.date,PublishDate=publish.date,RightToLeft=rtl,OT=ot,NT=nt,Strong=strong";
             var mapPat = new Regex(@"([A-Za-z]+)=([\.a-z]+)");
-            var datePat = new Regex(@"([0-9]+)\.([0-9]+)\.([0-9]+)");
             foreach (Match match in mapPat.Matches(map))
             {
                 var key = match.Groups[2].Value;
@@ -184,17 +183,43 @@ namespace SIL.PublishingSolution
                 {
                     var detailCmd = updConn.CreateCommand();
                     var newValue = string.Format(@"""{0}""", _dbParams[key]);
-                    if (key.EndsWith(".date"))
-                    {
-                        var dateMatch = datePat.Match(_dbParams[key]);
-                        newValue = string.Format(@"date('{0}-{1:00}-{2:00}')", dateMatch.Groups[1].Value, int.Parse(dateMatch.Groups[2].Value), int.Parse(dateMatch.Groups[3].Value));
-                    }
+                    newValue = ParseDateIfNecessary(key, newValue);
                     detailCmd.CommandText = string.Format("update Details SET {0} = {1}", match.Groups[1].Value, newValue);
                     int result = detailCmd.ExecuteNonQuery();
                     Debug.Assert(result == 1, match.Groups[0].Value);
                 }
             }
             detailTrx.Commit();
+        }
+
+        private readonly Regex _datePat = new Regex(@"([0-9]+)[\./-]([0-9]+)[\./-]([0-9]+)");
+        private readonly Regex _yearPat = new Regex(@"([0-9]+)");
+        protected string ParseDateIfNecessary(string key, string newValue)
+        {
+            try
+            {
+                if (key.EndsWith(".date"))
+                {
+                    var monthValue = 1;
+                    var dayValue = 1;
+                    var dateMatch = _datePat.Match(_dbParams[key]);
+                    if (dateMatch.Success)
+                    {
+                        monthValue = int.Parse(dateMatch.Groups[2].Value);
+                        dayValue = int.Parse(dateMatch.Groups[3].Value);
+                    }
+                    else
+                    {
+                        dateMatch = _yearPat.Match(_dbParams[key]);
+                    }
+                    newValue = string.Format(@"date('{0}-{1:00}-{2:00}')", dateMatch.Groups[1].Value, monthValue, dayValue);
+                }
+            }
+            catch (Exception)
+            {
+                throw new FormatException(string.Format("error parsing date {0} with value {1}", key, _dbParams[key]));
+            }
+            return newValue;
         }
     }
 }
