@@ -329,6 +329,7 @@
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="Build">
     <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' and '$(ConfTag)' != 'YouVersion' " />
+    <Copy SourceFiles="..\XeLaTexConvert\empty-hyph.txt" DestinationFiles="Files\ConfigurationTool\Help\Pathway_Configuration_Tool.glo" />
     <Delete Files="Files\ConfigurationTool\LibreOfficeConvert.dll;Files\ConfigurationTool\LibreOfficeConvert.pdb" Condition=" '$(Edition)' == 'EPUB'" />
     <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
     <CallTarget Targets="YouVersionBeforeBuild" Condition=" '$(ConfTag)' == 'YouVersion' " />
@@ -376,8 +377,8 @@
     <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'Files\ConfigurationTool\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'Files\ConfigurationTool\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(BteHelpFile)" DestinationFolder="Files\ConfigurationTool\Help" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
-    <Copy SourceFiles="@(SeHelpFile)" DestinationFolder="Files\ConfigurationTool\Help" Condition=" '$(Edition)' == 'SE' " />
+    <Copy SourceFiles="@(BteHelp)" DestinationFiles="@(BteHelp->'Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
+    <Copy SourceFiles="@(SeHelp)" DestinationFiles="@(SeHelp->'Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(BteStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
     <Copy SourceFiles="@(SeStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(Readme)" DestinationFolder="Files\ConfigurationTool" />
@@ -457,8 +458,8 @@
     <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <BteHelpFile Include="Pathway_Configuration_Tool_BTE.chm" />
-    <SeHelpFile Include="Pathway_Configuration_Tool_SE.chm" />
+    <BteHelp Include="HelpBTE\**\*.*" />
+    <SeHelp Include="HelpSE\**\*.*" />
     <BteStudent Include="Pathway_Student_Manual_BTE.pdf" />
     <SeStudent Include="Pathway_Student_Manual_SE.pdf" />
     <License Include="License.rtf" />
