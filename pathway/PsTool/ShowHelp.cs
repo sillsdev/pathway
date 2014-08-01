@@ -31,7 +31,7 @@ namespace SIL.Tool
                 helpKeyword = ModifySlashForLinuxProcess(helpKeyword);
                 var startInfo = new ProcessStartInfo
                                                  {
-                                                     FileName = "chmsee",
+                                                     FileName = "kchmviewer",
                                                      Arguments = Common.PathwayHelpFileDirectory() + "::" + helpKeyword
                                                  };
                 Process.Start(startInfo);
@@ -51,7 +51,7 @@ namespace SIL.Tool
                 helpKeyword = ModifySlashForLinuxProcess(helpKeyword);
                 var startInfo = new ProcessStartInfo
                                                  {
-                                                     FileName = "chmsee",
+                                                     FileName = "kchmviewer",
                                                      Arguments = Common.PathwayHelpFileDirectory() + "::" + helpKeyword
                                                  };
                 Process.Start(startInfo);
