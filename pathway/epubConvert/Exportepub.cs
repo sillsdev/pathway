@@ -383,52 +383,38 @@ namespace SIL.PublishingSolution
             bool isOutputDilalogNeeded = true;
             if (!Common.Testing)
             {
-                EpubValidateTypeDlg validateTypeDlg = new EpubValidateTypeDlg();
-                validateTypeDlg.ShowDialog();
-                if (validateTypeDlg._exportType == "epub2")
-                {
-                    ValidateResult(outputPathWithFileName);
-                    DisplayOutput(outputFolder, fileName, outputPathWithFileName);
-                    isOutputDilalogNeeded = false;
-                }
-                else if (validateTypeDlg._exportType == "epub3" && outputPathWithFileNameV3 != null)
-                {
-                    ValidateResult(outputPathWithFileNameV3);
-                    DisplayOutput(outputFolder, fileName, outputPathWithFileNameV3);
-                    isOutputDilalogNeeded = false;
-                }
-                else if (validateTypeDlg._exportType == "both")
+                if (MessageBox.Show(Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files", Resources.ExportComplete, MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     ValidateResult(outputPathWithFileName);// Epub2 ExportType
                     ValidateResult(outputPathWithFileNameV3);//Epub3 ExportType
                 }
+
+                #region Option Dialog box
+
+                if (!Common.Testing && isOutputDilalogNeeded)
+                {
+                    EpubExportTypeDlg exportTypeDlg = new EpubExportTypeDlg();
+                    exportTypeDlg.ShowDialog();
+                    if (exportTypeDlg._exportType == "epub2")
+                    {
+                        DisplayOutput(outputFolder, fileName, outputPathWithFileName);
+                    }
+                    else if (exportTypeDlg._exportType == "epub3")
+                    {
+                        DisplayOutput(outputFolder, fileName, outputPathWithFileNameV3);
+                    }
+                    else if (exportTypeDlg._exportType == "folder")
+                    {
+                        Process.Start("explorer.exe", Path.GetDirectoryName(outputFolder));
+                    }
+                }
+                #endregion Option Dialog box
             }
             #endregion Option Dialog box
 
             inProcess.PerformStep();
             #endregion Validate
-
-            #region Option Dialog box
-
-            if (!Common.Testing && isOutputDilalogNeeded)
-            {
-                EpubExportTypeDlg exportTypeDlg = new EpubExportTypeDlg();
-                exportTypeDlg.ShowDialog();
-                if (exportTypeDlg._exportType == "epub2")
-                {
-                    DisplayOutput(outputFolder, fileName, outputPathWithFileName);
-                }
-                else if (exportTypeDlg._exportType == "epub3")
-                {
-                    DisplayOutput(outputFolder, fileName, outputPathWithFileNameV3);
-                }
-                else if (exportTypeDlg._exportType == "folder")
-                {
-                    Process.Start("explorer.exe", Path.GetDirectoryName(outputFolder));
-                }
-            }
-            #endregion Option Dialog box
-
             #region Clean up
             inProcess.SetStatus("Clean up");
             Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1", string.Empty);
