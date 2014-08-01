@@ -44,7 +44,7 @@ xcopy %base2%\ThirdParty\sqlite3.* . /y
 xcopy %base2%\theWordConvert\%cfg2%\*.xml . /y
 xcopy %base2%\ParatextSupport\%cfg2%\ParatextSupport.* . /y
 xcopy %base2%\PsSupport\ScriptureStyleSettings.xml . /q /y
-xcopy %base2%\BuildPathway\HelpBTE\* .\Help /i /s /q /y
+rem xcopy %base2%\BuildPathway\HelpBTE\* .\Help /i /s /q /y
 goto endBible
 :nogobible
 del TE_XHTML-to-Libronix_MainFile.xslt
@@ -54,7 +54,7 @@ del TE_XHTML-to-Phone_XHTML.xslt
 del pxhtml2xpw-scr.xsl
 del scriptureTemplate.tpl
 del ScriptureStyleSettings.xml
-xcopy %base2%\BuildPathway\HelpSE\* .\Help /i /s /q /y
+rem xcopy %base2%\BuildPathway\HelpSE\* .\Help /i /s /q /y
 :endBible
 
 if exist styles rmdir styles /s /q

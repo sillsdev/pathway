@@ -329,7 +329,7 @@
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="Build">
     <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' and '$(ConfTag)' != 'YouVersion' " />
-    <Copy SourceFiles="..\XeLaTexConvert\empty-hyph.txt" DestinationFiles="Files\ConfigurationTool\Help\Pathway_Configuration_Tool.glo" />
+    <!--Copy SourceFiles="..\XeLaTexConvert\empty-hyph.txt" DestinationFiles="Files\ConfigurationTool\Help\Pathway_Configuration_Tool.glo" / -->
     <Delete Files="Files\ConfigurationTool\LibreOfficeConvert.dll;Files\ConfigurationTool\LibreOfficeConvert.pdb" Condition=" '$(Edition)' == 'EPUB'" />
     <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
     <CallTarget Targets="YouVersionBeforeBuild" Condition=" '$(ConfTag)' == 'YouVersion' " />
@@ -458,8 +458,10 @@
     <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <BteHelp Include="HelpBTE\**\*.*" />
-    <SeHelp Include="HelpSE\**\*.*" />
+    <!--BteHelp Include="HelpBTE\**\*.*" / -->
+    <BteHelp Include="Pathway_Configuration_Tool_BTE.chm" />
+    <!--SeHelp Include="HelpSE\**\*.*" /-->
+    <SeHelp Include="Pathway_Configuration_Tool_SE.chm" />
     <BteStudent Include="Pathway_Student_Manual_BTE.pdf" />
     <SeStudent Include="Pathway_Student_Manual_SE.pdf" />
     <License Include="License.rtf" />

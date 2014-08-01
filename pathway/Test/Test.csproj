@@ -456,8 +456,8 @@
     <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'$(OutputPath)\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'$(OutputPath)\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(FwVersion)" DestinationFolder="$(OutputPath)\" />
-    <Copy SourceFiles="@(BteHelpFile)" DestinationFolder="$(OutputPath)\Help" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(SeHelpFile)" DestinationFolder="$(OutputPath)\Help" Condition=" '$(Edition)' == 'SE' " />
+    <Copy SourceFiles="@(BteHelp)" DestinationFiles="@(BteHelp->'$(OutputPath)\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(SeHelp)" DestinationFiles="@(SeHelp->'$(OutputPath)\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(BteStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(SeStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(Readme)" DestinationFolder="Files\ConfigurationTool" />
@@ -669,8 +669,8 @@
     <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <BteHelpFile Include="..\BuildPathway\Pathway_Configuration_Tool_BTE.chm" />
-    <SeHelpFile Include="..\BuildPathway\Pathway_Configuration_Tool_SE.chm" />
+    <BteHelp Include="..\BuildPathway\Pathway_Configuration_Tool_BTE.chm" />
+    <SeHelp Include="..\BuildPathway\Pathway_Configuration_Tool_SE.chm" />
     <BteStudent Include="..\BuildPathway\Pathway_Student_Manual_BTE.doc" />
     <SeStudent Include="..\BuildPathway\Pathway_Student_Manual_SE.doc" />
     <License Include="..\BuildPathway\License.rtf" />
