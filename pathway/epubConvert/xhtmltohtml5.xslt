@@ -43,6 +43,21 @@ exclude-result-prefixes="xhtml xsl xs xml">
             <xsl:value-of select="."/>
         </xsl:attribute>
     </xsl:template>
+    <!-- Retains empty space in Span Tags -->
+    <xsl:template match="xhtml:span">
+        <xsl:choose>
+            <xsl:when test="not(string(.))">
+                <span>
+                    <xsl:text>&#160;</xsl:text>
+                </span>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="node()|@*"/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
   <!-- in and out variable declaration for a string replace -->
     <xsl:variable name="in"><xsl:text>.xhtml</xsl:text></xsl:variable>
     <xsl:variable name="out"><xsl:text>.html</xsl:text></xsl:variable>
