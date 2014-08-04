@@ -265,9 +265,11 @@
 				       (i.e. the previous node). Ugh. -->
 				<xsl:if test="@class = 'Verse_Number'">
 				<!--	<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="."/></xsl:attribute> -->
-					<!-- (sanitized to replace commas and colons in the verse with dashes) -->
-					<xsl:variable name="verseNum" select="." />
-					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="translate($verseNum, ',', '-')"/></xsl:attribute>
+					<!-- (sanitized to replace commas and colons in the verse with dashes and spaces with underscore) -->
+          <xsl:variable name="verseNum" select="translate(./text(),' &#160;','__')" />
+					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="translate($verseNum, ',', '-')"/>
+            <xsl:value-of select="substring(generate-id(),4,4)"/>
+          </xsl:attribute>
 				</xsl:if>
 				<xsl:if test="count(@class) = 0 or @class != 'scrFootnoteMarker'"> <!-- FWR-2550 we handled child above -->
 					<xsl:apply-templates/>

@@ -211,7 +211,7 @@ namespace Test.epubConvert
             zf = new FastZip();
             zf.ExtractZip(result, FileOutput("ExportDictionaryCSSFileComparison"), ".*");
 
-            TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparison/OEBPS/book.css"), new ArrayList { 3, 52, 93, 110, 112, 643, 652, 965 });
+            TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparison/OEBPS/book.css"), new ArrayList {93, 110, 112, 643, 652, 965 });
             
         }
 
@@ -409,7 +409,7 @@ namespace Test.epubConvert
             var zfExpected = new FastZip();
             result = result.Replace("Output", "Expected");
             zfExpected.ExtractZip(result, FileOutput("EpubIndentFileComparisonExpect"), ".*");
-            FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_.xhtml");
+            FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_01.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_01.xhtml");
            
         }
 

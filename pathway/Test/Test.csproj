@@ -373,6 +373,10 @@
       <Project>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</Project>
       <Name>ParatextSupport</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PathwayB\PathwayB.csproj">
+      <Project>{24E32D8C-5ECF-4263-98C1-C15D1A05ABDE}</Project>
+      <Name>PathwayB</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PdfConvert\PdfConvert.csproj">
       <Project>{E75BC85C-6240-45F0-ADBF-F0F80EEFD6D8}</Project>
       <Name>PdfConvert</Name>
