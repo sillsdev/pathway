@@ -541,8 +541,8 @@ namespace epubConvert
                         idRefValue = fileId;
                     }
                     //if ((fileId.IndexOf("PartFile") == -1 && _parent.InputType == "dictionary") || _parent.InputType == "scripture")
-                    if (fileId.IndexOf("PartFile") == -1 || _parent.InputType.ToLower() == "scripture")
-                    {
+                    //if (fileId.IndexOf("PartFile") == -1 || _parent.InputType.ToLower() == "scripture")
+                    //{
                         opf.WriteStartElement("itemref"); // item (stylesheet)
                         // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
                         var idRef = _parent.InputType == "dictionary"
@@ -550,7 +550,7 @@ namespace epubConvert
                                         : idRefValue;
                         opf.WriteAttributeString("idref", idRef);
                         opf.WriteEndElement(); // itemref
-                    }
+                    //}
                 }
             }
             opf.WriteEndElement(); // spine
@@ -605,8 +605,8 @@ namespace epubConvert
                         idRefValue = fileId;
                     }
 
-                    if (fileId.IndexOf("PartFile") == -1 || _parent.InputType.ToLower() == "scripture")
-                    {
+                    //if (fileId.IndexOf("PartFile") == -1 || _parent.InputType.ToLower() == "scripture")
+                    //{
                         opf.WriteStartElement("itemref"); // item (stylesheet)
                         // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
                         var idRef = _parent.InputType == "dictionary"
@@ -622,7 +622,7 @@ namespace epubConvert
                         opf.WriteAttributeString("linear", "yes");
                         opf.WriteAttributeString("properties", "rendition:layout-scrolling");
                         opf.WriteEndElement(); // itemref
-                    }
+                    //}
                 }
             }
             opf.WriteEndElement(); // spine
