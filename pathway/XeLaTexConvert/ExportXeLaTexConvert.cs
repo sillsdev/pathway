@@ -286,7 +286,7 @@ namespace SIL.PublishingSolution
         {
             if (_isUnixOs)
             {
-                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
+                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath,"xelatex");
             }
             preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
             preProcessor.XelatexImagePreprocess();
@@ -350,7 +350,7 @@ namespace SIL.PublishingSolution
                         if (!File.Exists(draftTempFileName))
                         {
                             File.Copy(copyRightFilePath, draftTempFileName, true);
-                            Common.RemoveDTDForLinuxProcess(draftTempFileName);
+                            Common.RemoveDTDForLinuxProcess(draftTempFileName, "xelatex");
                         }
                         projInfo.DefaultXhtmlFileWithPath = draftTempFileName;
                         copyRightFilePath = draftTempFileName;
@@ -483,7 +483,7 @@ namespace SIL.PublishingSolution
                 {
                     if (Common.UnixVersionCheck())
                     {
-                        Common.RemoveDTDForLinuxProcess(revFile);
+                        Common.RemoveDTDForLinuxProcess(revFile, "xelatex");
                     }
                 }
 

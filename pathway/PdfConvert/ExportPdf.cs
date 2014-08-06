@@ -118,7 +118,7 @@ namespace SIL.PublishingSolution
                     if (isUnixOS)
                     {
                         projInfo.DefaultXhtmlFileWithPath =
-                            Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
+                            Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath,"pdfconvert");
                     }
                     Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                     preProcessor.GetTempFolderPath();

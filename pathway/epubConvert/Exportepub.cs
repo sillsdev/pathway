@@ -167,7 +167,7 @@ namespace SIL.PublishingSolution
             _isUnixOs = Common.UnixVersionCheck();
             if (_isUnixOs)
             {
-                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
+                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath, "epub");
             }
 
             _isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
@@ -406,7 +406,14 @@ namespace SIL.PublishingSolution
                     }
                     else if (exportTypeDlg._exportType == "folder")
                     {
-                        Process.Start("explorer.exe", Path.GetDirectoryName(outputFolder));
+                        if (_isUnixOs)
+                        {
+                            SubProcess.Run(Path.GetDirectoryName(outputFolder), "nautilus", Path.GetDirectoryName(outputFolder), false);
+                        }
+                        else
+                        {
+                            SubProcess.Run(Path.GetDirectoryName(outputFolder), "explorer.exe", Path.GetDirectoryName(outputFolder), false);
+                        }
                     }
                 }
                 #endregion Option Dialog box
@@ -792,7 +799,7 @@ namespace SIL.PublishingSolution
 
             if (_isUnixOs)
             {
-                Common.RemoveDTDForLinuxProcess(revFile);
+                Common.RemoveDTDForLinuxProcess(revFile,"epub");
             }
             Common.SetDefaultCSS(revFile, defaultCss);
             // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
@@ -969,7 +976,7 @@ namespace SIL.PublishingSolution
 
                     if (_isUnixOs)
                     {
-                        Common.RemoveDTDForLinuxProcess(file);
+                        Common.RemoveDTDForLinuxProcess(file,"epub");
                     }
                     File.Move(file, dest);
                     // split the file into smaller pieces if needed

@@ -467,7 +467,7 @@ namespace SIL.Tool
             File.Copy(strCopyrightFile, destFile, true);
             if (Common.UnixVersionCheck())
             {
-                Common.RemoveDTDForLinuxProcess(destFile);
+                Common.RemoveDTDForLinuxProcess(destFile, "epub");
             }
             InsertCopyrightImageFiles(destFile, strCopyrightFile);
             var languageCode = JustLanguageCode();
