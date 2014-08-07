@@ -12,7 +12,7 @@
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     exclude-result-prefixes="xhtml">
     
-	<xsl:output method="xml" version="1.0" encoding="UTF-8" doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" indent="yes"/>
+	<xsl:output method="xml" version="1.0" encoding="UTF-8" doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" indent="yes"  />
 
 	<xsl:strip-space elements="*"/>
 
@@ -24,7 +24,7 @@
 	<xsl:variable name="docLanguage" select="xhtml:html/@lang" />
 	
 	<!--Straight copy for these elements. -->
-	<xsl:template match="xhtml:head | xhtml:title | xhtml:link | xhtml:a | xhtml:table | xhtml:tr | xhtml:td | xhtml:em | xhtml:br | xhtml:ul | xhtml:li">
+	<xsl:template match="xhtml:head | xhtml:title | xhtml:link | xhtml:a | xhtml:table | xhtml:tr | xhtml:th | xhtml:td | xhtml:em | xhtml:br | xhtml:ul | xhtml:li">
 		<xsl:copy>
 			<xsl:for-each select="@*">
 				<xsl:copy/>
