@@ -168,7 +168,6 @@
 			</xsl:if>
 			<xsl:value-of select="."/>
 		</xsl:element>
-		<xsl:apply-templates/>
 	</xsl:template>
 
 	<xsl:template match="xhtml:div[@class='Title_Main']/xhtml:span[@class='Title_Secondary']">
