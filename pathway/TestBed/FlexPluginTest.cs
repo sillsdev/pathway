@@ -51,7 +51,7 @@ namespace TestBed
 
         private void button10_Click(object sender, EventArgs e)
         {
-            var fd = new FolderBrowserDialog { ShowNewFolderButton = true };
+            var fd = new FolderBrowserDialog {ShowNewFolderButton = true};
             fd.ShowDialog();
             TxtOutput.Text = fd.SelectedPath;
         }
@@ -153,7 +153,7 @@ namespace TestBed
 
         private void BtnTETest_Click(object sender, EventArgs e)
         {
-            var plugin = new PsExport { DataType = "Scripture" };
+            var plugin = new PsExport {DataType = "Scripture"};
             string outputpath = "c:/1pe/1pe";
             plugin.Export(outputpath);
 
@@ -166,7 +166,7 @@ namespace TestBed
             printVia.ShowDialog();
 
             string target = printVia.BackEnd; //"OpenOffice";
-            var tpe = new PsExport { Destination = target, DataType = printVia.InputType };
+            var tpe = new PsExport {Destination = target, DataType = printVia.InputType};
             tpe.Export(txtInputPath.Text);
         }
 
@@ -197,7 +197,9 @@ namespace TestBed
 
         private void Btn_InputPath_Click(object sender, EventArgs e)
         {
-            txtInputPath.Text = GetFilePath("XHTML Files|*.xhtml|XML Files|*.xml|Tex|*.tex|Zip Files|*.zip|usx Files|*.usx|sfm Files|*.sfm|Text Files|*.txt|All Files|*.*");
+            txtInputPath.Text =
+                GetFilePath(
+                    "XHTML Files|*.xhtml|XML Files|*.xml|Tex|*.tex|Zip Files|*.zip|usx Files|*.usx|sfm Files|*.sfm|Text Files|*.txt|All Files|*.*");
             txtCSSInput.Text = Path.ChangeExtension(txtInputPath.Text, "css");
         }
 
@@ -216,8 +218,6 @@ namespace TestBed
             txtCSSInput.Text = GetFilePath("CSS Files|*.css|STY Files|*.sty");
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {}
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -415,7 +415,7 @@ namespace TestBed
             {
                 Directory.CreateDirectory(localizationPath);
                 File.Copy(Common.FromRegistry(@"Loc/" + LocDB.BaseName),
-                          Common.PathCombine(localizationPath, LocDB.BaseName));
+                    Common.PathCombine(localizationPath, LocDB.BaseName));
             }
             LocDB.Initialize(folderPath);
         }
@@ -463,7 +463,7 @@ namespace TestBed
             dlg.ShowDialog();
 
             string target = dlg.Format; //"OpenOffice";
-            var tpe = new PsExport { Destination = target, DataType = dlg.InputType };
+            var tpe = new PsExport {Destination = target, DataType = dlg.InputType};
             tpe.Export(txtInputPath.Text);
 
         }
@@ -533,7 +533,7 @@ namespace TestBed
         private void btnDotNet_Click(object sender, EventArgs e)
         {
             bool isDotnetInstalled = IsDotNet2IsInstalled(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v2.0.50727",
-                                                          "Version");
+                "Version");
 
             if (isDotnetInstalled)
             {
@@ -613,15 +613,21 @@ namespace TestBed
 
             WebonaryMysqlDatabaseTransfer webonaryMysql = new WebonaryMysqlDatabaseTransfer();
             webonaryMysql.projInfo = projInfo;
-            webonaryMysql.CreateDatabase("CreateUser-Db.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "samdoss");
+            webonaryMysql.CreateDatabase("CreateUser-Db.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306",
+                "samdoss");
 
-            webonaryMysql.InstallWordPressPHPPage("http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123", "Sam Wordpress", "Samdoss", "arthur", "samdoss@live.com", "1");
+            webonaryMysql.InstallWordPressPHPPage("http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123",
+                "Sam Wordpress", "Samdoss", "arthur", "samdoss@live.com", "1");
 
-            webonaryMysql.Drop2reset("drop2reset.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary");
+            webonaryMysql.Drop2reset("drop2reset.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306",
+                "sym147_webonary");
 
-            webonaryMysql.EmptyWebonary("EmptyWebonary.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary", "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123", "Webonary Site");
+            webonaryMysql.EmptyWebonary("EmptyWebonary.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306",
+                "sym147_webonary", "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123",
+                "Webonary Site");
 
-            webonaryMysql.Data("data.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary", "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123");
+            webonaryMysql.Data("data.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary",
+                "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123");
 
             MessageBox.Show("Data Exported to Wordpress.");
         }
@@ -822,7 +828,8 @@ namespace TestBed
             //SetRampData(ramp);
             //ramp.Create(Common.PathCombine(folderPath, "MyTest"), folderPath);
 
-            string x = "eyJjcmVhdGVkX2F0IjoiVGh1LCAzMSBPY3QgMjAxMyAwODo0Nzo0OCBHTVQiLCJyYW1wLmlzX3JlYWR5IjoiWSIsImRjLnRpdGxlIjoiVGVzdCIsImJyb2FkX3R5cGUiOiJ2ZXJuYWN1bGFyIiwiZGMudHlwZS5tb2RlIjpbIlRleHQiXSwiZGMuZm9ybWF0Lm1lZGl1bSI6WyJQYXBlciJdLCJkYy5kZXNjcmlwdGlvbi5zdGFnZSI6InJvdWdoX2RyYWZ0IiwidmVyc2lvbi50eXBlIjoiZmlyc3QiLCJyYW1wLnZlcm5hY3VsYXJtYXRlcmlhbHN0eXBlIjoic2NyaXB0dXJlIiwiZGMudHlwZS5zY3JpcHR1cmVUeXBlIjoiQmlibGUgdGV4dCBjb21wbGV0ZSIsImRjLnRpdGxlLnNjcmlwdHVyZVNjb3BlIjpbIldOVDpOZXcgVGVzdGFtZW50Il0sImRjLnR5cGUuc2Nob2xhcmx5V29yayI6IkJvb2siLCJkYy5zdWJqZWN0LnN1YmplY3RMYW5ndWFnZSI6eyIwIjp7ImRpYWxlY3QiIDogIiIsICIgIjogImF2dDphdnQifX0sInN1YmplY3Quc3ViamVjdExhbmd1YWdlLmhhcyI6IlkiLCJkYy5sYW5ndWFnZS5pc28iOnsiMCI6eyJkaWFsZWN0IiA6ICIiLCAiICI6ICJhdnQ6YXZ0In19LCJkYy5jb250cmlidXRvciI6eyIwIjp7IiAiOiAiQmlsbCBEeWNrIiwgInJvbGUiOiAiY29tcGlsZXIifX0sImRjLmRhdGUubW9kaWZpZWQiOiIyMDEzLTEwLTMxIiwiZm9ybWF0LmV4dGVudC50ZXh0IjoiMCIsImZvcm1hdC5leHRlbnQuaW1hZ2VzIjoiMCIsImRjLnN1YmplY3Quc2lsRG9tYWluIjpbIkxJTkc6TGluZ3Vpc3RpY3MiXSwidHlwZS5kb21haW5TdWJ0eXBlLkxJTkciOlsibGV4aWNvbiAoTElORykiXSwiZGMuc3ViamVjdCI6eyIwIjp7IiAiOiAiQmlibGUiLCAibGFuZyI6ICJlbmcifX0sImRjLnJlbGF0aW9uLmNvbmZvcm1zdG8iOiJUVEYiLCJkYy5yaWdodHNIb2xkZXIiOnsiMCI6eyIgIjogIld5Y2xpZmZlIEJpYmxlIFRyYW5zbGF0b3JzIn19LCJkYy5yaWdodHMiOiLCqSAyMDEzIFNJTCBJbnRlcm5hdGlvbmFsLiBUaGlzIHdvcmsgaXMgbGljZW5zZWQgdW5kZXIgdGhlIENyZWF0aXZlIENvbW1vbnMgQXR0cmlidXRpb24tTm9uQ29tbWVyY2lhbC1TaGFyZUFsaWtlIDMuMCBVbnBvcnRlZCBMaWNlbnNlLlRvIHZpZXcgYSBjb3B5IG9mIHRoaXMgbGljZW5zZSwgdmlzaXQgaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbGljZW5zZXMvYnktbmMtc2EvMy4wLyIsInNpbC5zZW5zaXRpdml0eS5tZXRhZGF0YSI6IlB1YmxpYyIsInNpbC5zZW5zaXRpdml0eS5wcmVzZW50YXRpb24iOiJQdWJsaWMiLCJzaWwuc2Vuc2l0aXZpdHkuc291cmNlIjoiSW5zaXRlIHVzZXJzIiwiZmlsZXMiOnsiMCI6eyIgIjogIjE5ODUzNDYwMTNtZXJnZWRDNV9Db2xzX0FwcGxpY2F0aW9uU3R5bGVzLmNzcyIsICJkZXNjcmlwdGlvbiI6ICIxOTg1MzQ2MDEzbWVyZ2VkQzVfQ29sc19BcHBsaWNhdGlvblN0eWxlcyBzdHlsZXNoZWV0IiwgInJlbGF0aW9uc2hpcCI6ICJzb3VyY2UifSwiMSI6eyIgIjogIkM1X0NvbHNfQXBwbGljYXRpb25TdHlsZXMub2R0IiwgImRlc2NyaXB0aW9uIjogIkM1X0NvbHNfQXBwbGljYXRpb25TdHlsZXMgb2R0IGRvY3VtZW50IiwgInJlbGF0aW9uc2hpcCI6ICJwcmVzZW50YXRpb24iLCAiaXNfcHJpbWFyeSI6ICJZIiwgInNpbFB1YmxpYyI6ICJZIn0sIjIiOnsiICI6ICJDNV9Db2xzX0FwcGxpY2F0aW9uU3R5bGVzLnhodG1sIiwgImRlc2NyaXB0aW9uIjogIkM1X0NvbHNfQXBwbGljYXRpb25TdHlsZXMgWEhUTUwgZmlsZSIsICJyZWxhdGlvbnNoaXAiOiAic291cmNlIn19LCJkZXNjcmlwdGlvbi5oYXMiOiJZIiwiZGMuZGVzY3JpcHRpb24iOnsiMCI6eyIgIiA6ICJOZXcgVGVzdGFtZW50IiwgImxhbmciOiAiZW5nIn19LCJzdGF0dXMiOiJyZWFkeSJ9";
+            string x =
+                "eyJjcmVhdGVkX2F0IjoiVGh1LCAzMSBPY3QgMjAxMyAwODo0Nzo0OCBHTVQiLCJyYW1wLmlzX3JlYWR5IjoiWSIsImRjLnRpdGxlIjoiVGVzdCIsImJyb2FkX3R5cGUiOiJ2ZXJuYWN1bGFyIiwiZGMudHlwZS5tb2RlIjpbIlRleHQiXSwiZGMuZm9ybWF0Lm1lZGl1bSI6WyJQYXBlciJdLCJkYy5kZXNjcmlwdGlvbi5zdGFnZSI6InJvdWdoX2RyYWZ0IiwidmVyc2lvbi50eXBlIjoiZmlyc3QiLCJyYW1wLnZlcm5hY3VsYXJtYXRlcmlhbHN0eXBlIjoic2NyaXB0dXJlIiwiZGMudHlwZS5zY3JpcHR1cmVUeXBlIjoiQmlibGUgdGV4dCBjb21wbGV0ZSIsImRjLnRpdGxlLnNjcmlwdHVyZVNjb3BlIjpbIldOVDpOZXcgVGVzdGFtZW50Il0sImRjLnR5cGUuc2Nob2xhcmx5V29yayI6IkJvb2siLCJkYy5zdWJqZWN0LnN1YmplY3RMYW5ndWFnZSI6eyIwIjp7ImRpYWxlY3QiIDogIiIsICIgIjogImF2dDphdnQifX0sInN1YmplY3Quc3ViamVjdExhbmd1YWdlLmhhcyI6IlkiLCJkYy5sYW5ndWFnZS5pc28iOnsiMCI6eyJkaWFsZWN0IiA6ICIiLCAiICI6ICJhdnQ6YXZ0In19LCJkYy5jb250cmlidXRvciI6eyIwIjp7IiAiOiAiQmlsbCBEeWNrIiwgInJvbGUiOiAiY29tcGlsZXIifX0sImRjLmRhdGUubW9kaWZpZWQiOiIyMDEzLTEwLTMxIiwiZm9ybWF0LmV4dGVudC50ZXh0IjoiMCIsImZvcm1hdC5leHRlbnQuaW1hZ2VzIjoiMCIsImRjLnN1YmplY3Quc2lsRG9tYWluIjpbIkxJTkc6TGluZ3Vpc3RpY3MiXSwidHlwZS5kb21haW5TdWJ0eXBlLkxJTkciOlsibGV4aWNvbiAoTElORykiXSwiZGMuc3ViamVjdCI6eyIwIjp7IiAiOiAiQmlibGUiLCAibGFuZyI6ICJlbmcifX0sImRjLnJlbGF0aW9uLmNvbmZvcm1zdG8iOiJUVEYiLCJkYy5yaWdodHNIb2xkZXIiOnsiMCI6eyIgIjogIld5Y2xpZmZlIEJpYmxlIFRyYW5zbGF0b3JzIn19LCJkYy5yaWdodHMiOiLCqSAyMDEzIFNJTCBJbnRlcm5hdGlvbmFsLiBUaGlzIHdvcmsgaXMgbGljZW5zZWQgdW5kZXIgdGhlIENyZWF0aXZlIENvbW1vbnMgQXR0cmlidXRpb24tTm9uQ29tbWVyY2lhbC1TaGFyZUFsaWtlIDMuMCBVbnBvcnRlZCBMaWNlbnNlLlRvIHZpZXcgYSBjb3B5IG9mIHRoaXMgbGljZW5zZSwgdmlzaXQgaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbGljZW5zZXMvYnktbmMtc2EvMy4wLyIsInNpbC5zZW5zaXRpdml0eS5tZXRhZGF0YSI6IlB1YmxpYyIsInNpbC5zZW5zaXRpdml0eS5wcmVzZW50YXRpb24iOiJQdWJsaWMiLCJzaWwuc2Vuc2l0aXZpdHkuc291cmNlIjoiSW5zaXRlIHVzZXJzIiwiZmlsZXMiOnsiMCI6eyIgIjogIjE5ODUzNDYwMTNtZXJnZWRDNV9Db2xzX0FwcGxpY2F0aW9uU3R5bGVzLmNzcyIsICJkZXNjcmlwdGlvbiI6ICIxOTg1MzQ2MDEzbWVyZ2VkQzVfQ29sc19BcHBsaWNhdGlvblN0eWxlcyBzdHlsZXNoZWV0IiwgInJlbGF0aW9uc2hpcCI6ICJzb3VyY2UifSwiMSI6eyIgIjogIkM1X0NvbHNfQXBwbGljYXRpb25TdHlsZXMub2R0IiwgImRlc2NyaXB0aW9uIjogIkM1X0NvbHNfQXBwbGljYXRpb25TdHlsZXMgb2R0IGRvY3VtZW50IiwgInJlbGF0aW9uc2hpcCI6ICJwcmVzZW50YXRpb24iLCAiaXNfcHJpbWFyeSI6ICJZIiwgInNpbFB1YmxpYyI6ICJZIn0sIjIiOnsiICI6ICJDNV9Db2xzX0FwcGxpY2F0aW9uU3R5bGVzLnhodG1sIiwgImRlc2NyaXB0aW9uIjogIkM1X0NvbHNfQXBwbGljYXRpb25TdHlsZXMgWEhUTUwgZmlsZSIsICJyZWxhdGlvbnNoaXAiOiAic291cmNlIn19LCJkZXNjcmlwdGlvbi5oYXMiOiJZIiwiZGMuZGVzY3JpcHRpb24iOnsiMCI6eyIgIiA6ICJOZXcgVGVzdGFtZW50IiwgImxhbmciOiAiZW5nIn19LCJzdGF0dXMiOiJyZWFkeSJ9";
             string y = EncodeDecodeBase64(x, "decode");
 
             MessageBox.Show("Done");
@@ -918,6 +925,34 @@ namespace TestBed
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             swordObj.Export(projInfo);
             MessageBox.Show("Done");
+        }
+
+        private void btnHtml5_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please select the valid usx file");
+                return;
+            }
+            string postData = "";
+            if (File.Exists(txtInputPath.Text))
+            {
+                StreamReader reader = new StreamReader(txtInputPath.Text);
+                do
+                {
+                    postData += reader.ReadLine();
+                } while (reader.Peek() != -1);
+                reader.Close();
+
+                const string webApiurl = "http://html5.validator.nu?showsource=yes&level=error";
+                string responseContent = Common.ExecuteWebAPIRequest(webApiurl, postData);
+                if (responseContent != null)
+                {
+                    string filename = string.Format(@"{0}\{1}", System.IO.Path.GetTempPath(), "result.html");
+                    File.WriteAllText(filename, responseContent);
+                    Process.Start(filename);
+                }
+            }
         }
     }
 }
