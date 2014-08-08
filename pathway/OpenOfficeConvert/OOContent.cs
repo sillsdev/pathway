@@ -3141,7 +3141,6 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Left_Guideword_L");
             _writer.WriteEndElement();
-            _writer.WriteStartElement("text:variable-decls");
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
@@ -3171,7 +3170,6 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Right_Guideword_R");
-            _writer.WriteEndElement();
             _writer.WriteEndElement();
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");
