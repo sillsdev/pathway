@@ -2,7 +2,7 @@
 xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace"
 xmlns:epub="http://www.idpf.org/2007/ops"
 exclude-result-prefixes="xhtml xsl xs xml">
-<xsl:output method="html" encoding="utf-8" indent="no"/>
+    <xsl:output method="html" encoding="utf-8" indent="no"/>
   <!-- New root for Html5-->
     <xsl:template match="xhtml:html">
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>
@@ -10,7 +10,8 @@ exclude-result-prefixes="xhtml xsl xs xml">
         <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en" xml:lang="en">
         <xsl:apply-templates></xsl:apply-templates>
         </html>
-    </xsl:template>
+    </xsl:template>   
+    
   <!-- template for string replace from old one to new one-->
     <xsl:template name="string-replace-all">
         <xsl:param name="text" />
@@ -78,6 +79,44 @@ exclude-result-prefixes="xhtml xsl xs xml">
         <head>
             
         </head>  
+    </xsl:template>
+    
+    <!-- identity templates -->
+    <xsl:template match="*[not(node())]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:text> </xsl:text>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="script[not(node())]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:text>//</xsl:text>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="*">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:apply-templates select="node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="area[not(node())]|base[not(node())]|
+        basefont[not(node())]|bgsound[not(node())]|br[not(node())]|
+        col[not(node())]|frame[not(node())]|hr[not(node())]|
+        img[not(node())]|input[not(node())]|isindex[not(node())]|
+        keygen[not(node())]|link[not(node())]|meta[not(node())]|
+        param[not(node())]">
+        <!-- identity without closing tags -->
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="@*|text()|comment()|processing-instruction()">
+        <xsl:copy/>
     </xsl:template>
   <!-- Ignore these elements -->
   <xsl:template match="xhtml:link[@rel='schema.DCTERMS']"/>
