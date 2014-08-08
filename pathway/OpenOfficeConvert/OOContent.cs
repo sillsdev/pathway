@@ -1172,7 +1172,7 @@ namespace SIL.PublishingSolution
 
                 string height = "19.575pt";
                 string width = "67.5pt";
-                if (logoName.ToLower().StartsWith("sil"))
+                if (logoName.ToLower().Contains("sil"))
                 {
                     height = "50pt";
                     width = "50pt";
