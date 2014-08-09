@@ -62,7 +62,7 @@ namespace Test.epubConvert
         {
             var target = new Exportepub();
             var actual = target.ExportType;
-            Assert.AreEqual("E-Book (.epub)", actual);
+            Assert.AreEqual("E-Book (Epub2 and Epub3)", actual);
         }
 
         [Test]
@@ -180,16 +180,10 @@ namespace Test.epubConvert
         public void ExportDictionaryCssFileComparisonTest()
         {
             // clean out old files
-            foreach (var file in Directory.GetFiles(_outputPath))
-            {
-                if (File.Exists(file))
-                    File.Delete(file);
-            }
-            string appDataDir = Common.GetAllUserPath();
-            if (Directory.Exists(appDataDir))
-            {
-                Directory.Delete(appDataDir, true);
-            }
+            CleanOutputDirectory();
+            if (!Directory.Exists(FileOutput("ExportDictionary")))
+                Directory.CreateDirectory(FileOutput("ExportDictionary"));
+            
             const string XhtmlName = "main.xhtml";
             const string CssName = "main.css";
             PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -217,7 +211,7 @@ namespace Test.epubConvert
             zf = new FastZip();
             zf.ExtractZip(result, FileOutput("ExportDictionaryCSSFileComparison"), ".*");
 
-            TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparison/OEBPS/book.css"), new ArrayList { 3, 52, 93, 110, 112, 643, 652, 965 });
+            TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparison/OEBPS/book.css"), new ArrayList {93, 110, 112, 643, 652, 965 });
             
         }
 
@@ -395,11 +389,9 @@ namespace Test.epubConvert
         public void EpubIndentFileComparisonTest()
         {
             // clean out old files
-            foreach (var file in Directory.GetFiles(_outputPath))
-            {
-                if (File.Exists(file))
-                    File.Delete(file);
-            }
+            CleanOutputDirectory();
+            if (!Directory.Exists(FileOutput("ExportDictionary")))
+                Directory.CreateDirectory(FileOutput("ExportDictionary"));
             
             const string XhtmlName = "EpubIndentFileComparison.xhtml";
             const string CssName = "EpubIndentFileComparison.css";
@@ -417,7 +409,7 @@ namespace Test.epubConvert
             var zfExpected = new FastZip();
             result = result.Replace("Output", "Expected");
             zfExpected.ExtractZip(result, FileOutput("EpubIndentFileComparisonExpect"), ".*");
-            FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_.xhtml");
+            FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_01.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_01.xhtml");
            
         }
 
@@ -454,6 +446,56 @@ namespace Test.epubConvert
             
         }
 
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void Epub3ExportTest()
+        {
+            CleanOutputDirectory();
+            string inputDataFolder = Common.PathCombine(_inputPath, "epub3Testcase");
+            string outputDataFolder = Common.PathCombine(_outputPath, "epub3Testcase");
+            Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
+            string inputCaseFileName = Common.PathCombine(outputDataFolder, "epub3Testcase.zip");
+            var zfExtract = new FastZip();
+            zfExtract.ExtractZip(inputCaseFileName, FileOutput("epub3Testcase"), ".*");
+            
+            const string xhtmlName = "FrenchHorse.xhtml";
+            const string cssName = "FrenchHorse.css";
+            var projInfo = new PublicationInformation();
+            projInfo.ProjectInputType = "Dictionary";
+            projInfo.ProjectPath = outputDataFolder;
+            projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDataFolder, xhtmlName);
+            projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
+            projInfo.ProjectName = "FrenchHorse";
+            Common.Testing = true;
+            var exportEpub3 = new Epub3Transformation(this, null) {Epub3Directory = outputDataFolder};
+            exportEpub3.Export(projInfo);
+            Compress(outputDataFolder, Common.PathCombine(outputDataFolder, "FrenchHorse"));
+            var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+            var zf = new FastZip();
+            zf.ExtractZip(result, FileOutput("FrenchHorse"), ".*");
+            var zfExpected = new FastZip();
+            result = Common.PathCombine(_expectedPath, "FrenchHorse.epub");
+            zfExpected.ExtractZip(result, FileOutput("FrenchHorseExpected"), ".*");
+
+            string expectedFilesPath = FileOutput("FrenchHorseExpected");
+            expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
+            string[] filesList = Directory.GetFiles(expectedFilesPath);
+            foreach (var fileName in filesList)
+            {
+                var info = new FileInfo(fileName);
+                if (info.Extension == ".css" || info.Extension == ".html")
+                {
+                    FileCompare("FrenchHorse/OEBPS/" + info.Name, "FrenchHorseExpected/OEBPS/" + info.Name);
+                }
+            }
+        }
+
+        private void CleanOutputDirectory()
+        {
+            Common.DeleteDirectory(_outputPath);
+        }
+
         private void FileCompare(string file1, string file2)
         {
             string xhtmlOutput = FileOutput(file1);
@@ -471,6 +513,7 @@ namespace Test.epubConvert
             File.Copy(FileInput(BlankName), FileOutput(BlankName), true);
             projInfo.DefaultXhtmlFileWithPath = FileOutput(XhtmlName);
             projInfo.DefaultCssFileWithPath = FileOutput(BlankName);
+            projInfo.DictionaryPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             projInfo.IsOpenOutput = false;
             return projInfo;
         }

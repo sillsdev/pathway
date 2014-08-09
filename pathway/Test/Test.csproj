@@ -249,6 +249,7 @@
     </Compile>
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsRecTest.cs" />
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsTests.cs" />
+    <Compile Include="epubConvert\EpubXsltTransformationTest.cs" />
     <Compile Include="GoBibleConvert\ExportGoBibleTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,6 +270,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="theWordConvert\ExportTheWordTest.cs" />
+    <Compile Include="theWordConvert\MySwordSqliteTest.cs" />
     <Compile Include="XeLatex\XeLaTexContentTest.cs" />
     <Compile Include="CssParser\ClassInfoTest.cs" />
     <Compile Include="CssParser\CssTreeTest.cs" />
@@ -371,6 +373,10 @@
       <Project>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</Project>
       <Name>ParatextSupport</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PathwayB\PathwayB.csproj">
+      <Project>{24E32D8C-5ECF-4263-98C1-C15D1A05ABDE}</Project>
+      <Name>PathwayB</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PdfConvert\PdfConvert.csproj">
       <Project>{E75BC85C-6240-45F0-ADBF-F0F80EEFD6D8}</Project>
       <Name>PdfConvert</Name>
@@ -454,14 +460,19 @@
     <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'$(OutputPath)\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'$(OutputPath)\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(FwVersion)" DestinationFolder="$(OutputPath)\" />
-    <Copy SourceFiles="@(BteHelpFile)" DestinationFolder="$(OutputPath)\Help" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(SeHelpFile)" DestinationFolder="$(OutputPath)\Help" Condition=" '$(Edition)' == 'SE' " />
+    <Copy SourceFiles="@(BteHelp)" DestinationFiles="@(BteHelp->'$(OutputPath)\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(SeHelp)" DestinationFiles="@(SeHelp->'$(OutputPath)\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(BteStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(SeStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(Readme)" DestinationFolder="Files\ConfigurationTool" />
     <Copy SourceFiles="@(License)" DestinationFolder="Files\ConfigurationTool" />
     <Copy SourceFiles="@(AllSettings)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BteSettings)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\ThirdParty\Devart.Data.dll" DestinationFiles="$(OutputPath)\Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\ThirdParty\Devart.Data.xml" DestinationFiles="$(OutputPath)\Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\ThirdParty\Devart.Data.SQLite.dll" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\ThirdParty\Devart.Data.SQLite.xml" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\ThirdParty\sqlite3.dll" DestinationFiles="$(OutputPath)\sqlite3.dll" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -662,8 +673,8 @@
     <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <BteHelpFile Include="..\BuildPathway\Pathway_Configuration_Tool_BTE.chm" />
-    <SeHelpFile Include="..\BuildPathway\Pathway_Configuration_Tool_SE.chm" />
+    <BteHelp Include="..\BuildPathway\Pathway_Configuration_Tool_BTE.chm" />
+    <SeHelp Include="..\BuildPathway\Pathway_Configuration_Tool_SE.chm" />
     <BteStudent Include="..\BuildPathway\Pathway_Student_Manual_BTE.doc" />
     <SeStudent Include="..\BuildPathway\Pathway_Student_Manual_SE.doc" />
     <License Include="..\BuildPathway\License.rtf" />

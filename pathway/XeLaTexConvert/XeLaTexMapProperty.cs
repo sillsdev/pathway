@@ -178,8 +178,6 @@ namespace SIL.PublishingSolution
             _inlineStyle = inlineStyle;
             _includePackageList = includePackageList;
             _inlineInnerStyle = inlineText;
-
-
             if (_langFontDictionary.Count > 0)
             {
                 foreach (var selectFontName in _langFontDictionary)
@@ -189,15 +187,22 @@ namespace SIL.PublishingSolution
                         _fontName = selectFontName.Value;
                         break;
                     }
-                }                
+                }
             }
             else
             {
                 _fontName = string.Empty;
             }
 
-            if (string.IsNullOrEmpty(_fontName))
-                _fontName = "Times New Roman";
+            if (_isLinux)
+            {
+                SetFontFamily();
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(_fontName))
+                    _fontName = "Times New Roman";
+            }
 
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
@@ -211,6 +216,41 @@ namespace SIL.PublishingSolution
             _fontOption.Clear();
             _fontStyle.Clear();
             _fontSize = " at 12pt";
+        }
+
+        private void SetFontFamily()
+        {
+            string fontName;
+            fontName = "Charis SIL";
+            if (_langFontDictionary.Count != 0)
+            {
+                string[] splitClassNameMeta = _className.Split('.');
+                if (splitClassNameMeta.Length > 1)
+                {
+                    splitClassNameMeta[1] = "." + splitClassNameMeta[1];
+                    foreach (string langCode in _langFontDictionary.Keys)
+                    {
+                        if (splitClassNameMeta[1].Contains("." + langCode))
+                        {
+                            fontName = _langFontDictionary[langCode];
+                            _fontName = fontName;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
+            foreach (FontFamily systemFont in systemFontList)
+            {
+                if (_fontName.ToLower() == systemFont.Name.ToLower())
+                {
+                    fontName = _fontName;
+                    break;
+                }
+            }
+
+            _fontName = fontName;
         }
 
         private string ComposeStyle()
@@ -545,6 +585,10 @@ namespace SIL.PublishingSolution
         public string FontFamily(string propertyValue)
         {
             string fontName = "Times New Roman";
+
+            if (_isLinux)
+                fontName = "Charis SIL";
+
             if (_langFontDictionary.Count != 0)
             {
                 string[] splitClassNameMeta = _className.Split('.');
@@ -570,10 +614,6 @@ namespace SIL.PublishingSolution
                 {
                     fontName = propertyValue;
                     break;
-                }
-                if (_isLinux)
-                {
-                    fontName = propertyValue;
                 }
             }
 
@@ -616,7 +656,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            string color = ":color=" + propertyValue.Replace("#", ""); 
+            string color = ":color=" + propertyValue.Replace("#", "");
             _fontStyle.Add(color);
         }
         public void BGColor(string propertyValue)

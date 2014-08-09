@@ -43,6 +43,7 @@ namespace SIL.PublishingSolution
         private bool _isFromExe = false;
         private bool _isCenterTabStopNeeded = true;
         private int _guidewordLength;
+        private string _defaultFontSize;
 
         public Dictionary<string, Dictionary<string, string>> CreateStyles(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssProperty, string outputFileName)
         {
@@ -59,6 +60,7 @@ namespace SIL.PublishingSolution
                 LoadAllProperty();  // Loads all properties
                 LoadSpellCheck();
                 FixedLineHeightStatus();
+                GetDefaultFontSize();
                 CreateODTStyles(strStylePath);
                 CreateCssStyle();
                 CreatePageStyle();
@@ -185,8 +187,7 @@ namespace SIL.PublishingSolution
                 {
                     propValue.Add("direction", "rtl");
                 }
-
-                _LOProperty = mapProperty.IDProperty(propValue, IsFixedLengthEnabled);
+                _LOProperty = mapProperty.IDProperty(propValue, IsFixedLengthEnabled, _defaultFontSize);
                 if (cssClass.Key == "revsensenumber")
                 {
                     if (!_LOProperty.ContainsKey("font-family"))
@@ -775,7 +776,7 @@ namespace SIL.PublishingSolution
             if (_cssProperty.ContainsKey(pageName))
             {
                 Dictionary<string, string> cssClass1 = _cssProperty[pageName];
-                _LOProperty = mapProperty.IDProperty(cssClass1, IsFixedLengthEnabled);
+                _LOProperty = mapProperty.IDProperty(cssClass1, IsFixedLengthEnabled, _defaultFontSize);
                 foreach (KeyValuePair<string, string> para in _LOProperty)
                     if (para.Key.ToLower() == "-ps-referenceformat-string")
                     {
@@ -895,7 +896,7 @@ namespace SIL.PublishingSolution
                     {
                         Dictionary<string, string> cssProp = _cssProperty[currentPagePosition];
 
-                        _LOProperty = mapProperty.IDProperty(cssProp, IsFixedLengthEnabled);
+                        _LOProperty = mapProperty.IDProperty(cssProp, IsFixedLengthEnabled, _defaultFontSize);
                         foreach (KeyValuePair<string, string> para in _LOProperty)
                         {
                             if (para.Key == "content")
@@ -1260,6 +1261,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:line-number", "0");
             _writer.WriteEndElement();
             _writer.WriteStartElement("style:text-properties");
+            _writer.WriteAttributeString("style:font-name", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
             _writer.WriteEndElement();
@@ -1596,7 +1598,8 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("style:text-properties");
             _writer.WriteAttributeString("style:use-window-font-color", "true");
             _writer.WriteAttributeString("style:font-name", _projInfo.DefaultFontName);
-            setFooterDefaultFont();//for TD-2889
+            _writer.WriteAttributeString("fo:font-size", _defaultFontSize);
+            //setFooterDefaultFont();//for TD-2889
 
             _writer.WriteAttributeString("fo:language", "none");
             _writer.WriteAttributeString("fo:country", "none");
@@ -1635,9 +1638,9 @@ namespace SIL.PublishingSolution
         }
 
         //This method set Default font for Footer (TD-2889)
-        private void setFooterDefaultFont()
+        private void GetDefaultFontSize()
         {
-            string _defaultFontSize = _projInfo.DefaultFontSize + "pt";
+            _defaultFontSize = _projInfo.DefaultFontSize + "pt";
             try
             {
                 if (_projInfo.ProjectInputType == "Dictionary")
@@ -1654,11 +1657,10 @@ namespace SIL.PublishingSolution
                         _defaultFontSize = _cssProperty["Paragraph"]["font-size"] + "pt";
                     }
                 }
-                _writer.WriteAttributeString("fo:font-size", _defaultFontSize);
             }
             catch
             {
-                _writer.WriteAttributeString("fo:font-size", _defaultFontSize);
+                
             }
         }
 
@@ -1918,7 +1920,7 @@ namespace SIL.PublishingSolution
         {
             string mainFrameName = "Mfr1";
             string refFormat = string.Empty;
-            if (_projInfo.ProjectInputType.ToLower() == "scripture")
+            if (_projInfo.ProjectInputType.ToLower() == "scripture" && isMirrored)
             {
                 refFormat = Common.GetReferenceFormat(_cssProperty, refFormat);
             }

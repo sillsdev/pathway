@@ -31,6 +31,7 @@ namespace SIL.PublishingSolution
         readonly ArrayList _arrUnits = new ArrayList();
         private string _propertyKey = string.Empty;
         private bool _isFixedLineHeightEnable = false;
+        private string _baseFontSize = string.Empty;
         public OOMapProperty()
         {
             CreateColor();
@@ -38,11 +39,12 @@ namespace SIL.PublishingSolution
             CreateUnit();
         }
 
-        public Dictionary<string, string> IDProperty(Dictionary<string, string> cssProperty, bool isFixedLineHeightEnable)
+        public Dictionary<string, string> IDProperty(Dictionary<string, string> cssProperty, bool isFixedLineHeightEnable, string baseFontSize)
         {
             _idProperty.Clear();
             _cssProperty = cssProperty;
             _isFixedLineHeightEnable = isFixedLineHeightEnable;
+            _baseFontSize = baseFontSize;
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
                 // Null or Empty or inherited property - skip the property
@@ -490,9 +492,10 @@ namespace SIL.PublishingSolution
                 else
                 {
                     int value = int.Parse(propertyValue.Replace("pt", ""));
-                    if (value < 12)
+                    int defaultSize = int.Parse(_baseFontSize.Replace("pt", ""));
+                    if (value < defaultSize)
                     {
-                        value = 12;
+                        value = defaultSize;
                     }
                     _idProperty["font-size"] = value + "pt";
                 }

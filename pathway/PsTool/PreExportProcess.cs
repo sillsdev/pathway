@@ -352,6 +352,8 @@ namespace SIL.Tool
             if (Param.GetMetadataValue(Param.Title) != null)
                 sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Title)));
 
+            sb.AppendLine("<br /><br /><br /><br /><br /><br /><br /><br /><br />");
+
             sb.AppendLine("</h1>");
             sb.Append("<p class='Publisher'>");
 
@@ -359,6 +361,7 @@ namespace SIL.Tool
                 sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher)));
 
             sb.AppendLine("</p>");
+            
             // logo stuff
             sb.Append("<p class='logo'>");
             if (Param.GetOrganization().StartsWith("SIL"))
@@ -366,7 +369,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // dictionary - SIL logo
-                    sb.Append("<img src='sil-bw-logo.jpg' alt='SIL International Logo'/>");
+                    sb.Append("<img src='2014_sil_logo.png' alt='SIL International Logo'/>");
                 }
                 else
                 {
@@ -422,7 +425,7 @@ namespace SIL.Tool
             {
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
-                    File.Copy(Common.PathCombine(strCopyrightFolder, "sil-bw-logo.jpg"), Common.PathCombine(outputFolder, "sil-bw-logo.jpg"), true);
+                    File.Copy(Common.PathCombine(strCopyrightFolder, "2014_sil_logo.png"), Common.PathCombine(outputFolder, "2014_sil_logo.png"), true);
                 }
                 else
                 {
@@ -464,7 +467,7 @@ namespace SIL.Tool
             File.Copy(strCopyrightFile, destFile, true);
             if (Common.UnixVersionCheck())
             {
-                Common.RemoveDTDForLinuxProcess(destFile);
+                Common.RemoveDTDForLinuxProcess(destFile, "epub");
             }
             InsertCopyrightImageFiles(destFile, strCopyrightFile);
             var languageCode = JustLanguageCode();
@@ -474,7 +477,7 @@ namespace SIL.Tool
             Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>", GetCopyrightInfo());
             if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
-                Common.StreamReplaceInFile(destFile, "src='sil-bw-logo.jpg' alt='SIL International logo'",
+                Common.StreamReplaceInFile(destFile, "src='2014_sil_logo.png' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
             }
             Common.SetDefaultCSS(destFile, Path.GetFileName(_cssFileNameWithPath));
@@ -614,7 +617,7 @@ namespace SIL.Tool
             string s0;
             if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
-                s0 = Regex.Replace(outData.ToString(), "src='sil-bw-logo.jpg' alt='SIL International logo'",
+                s0 = Regex.Replace(outData.ToString(), "src='2014_sil_logo.png' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
             }
             else
@@ -1849,15 +1852,18 @@ namespace SIL.Tool
                 {
                     if (value.Length > 1)
                     {
-                        string className = value[0].Substring(0, value[0].LastIndexOf("..", StringComparison.Ordinal));
-                        string pseudoName = value[0].Substring(value[0].LastIndexOf("..", StringComparison.Ordinal) + 2);
-                        if (className.ToLower().IndexOf("span", StringComparison.Ordinal) != 0)
+                        if (value[0].Contains(".."))
                         {
-                            className = "." + className;
+                            string className = value[0].Substring(0, value[0].LastIndexOf("..", StringComparison.Ordinal));
+                            string pseudoName = value[0].Substring(value[0].LastIndexOf("..", StringComparison.Ordinal) + 2);
+                            if (className.ToLower().IndexOf("span", StringComparison.Ordinal) != 0)
+                            {
+                                className = "." + className;
+                            }
+                            tw.WriteLine(className + ":" + pseudoName + " {");
+                            tw.WriteLine("content: '';");
+                            tw.WriteLine("}");
                         }
-                        tw.WriteLine(className + ":" + pseudoName + " {");
-                        tw.WriteLine("content: '';");
-                        tw.WriteLine("}");
                     }
                 }
                 catch { }
@@ -2044,7 +2050,26 @@ namespace SIL.Tool
             xDoc.Save(ProcessedXhtml);
         }
 
-
+        /// <summary>
+        /// For dictionary data, reversal title is empty, So it set as "Reversal"
+        /// </summary>
+        /// <returns></returns>
+        public void SetTitleValueOnReversal(string xhtmlFile)
+        {
+            if (_projInfo.ProjectInputType.ToLower() == "scripture") { return; }
+            string reversalFile = Path.Combine(Path.GetDirectoryName(xhtmlFile), "FlexRev.xhtml");
+            if (!File.Exists(reversalFile)) return;
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(reversalFile);
+            XmlNode titleNode = xDoc.SelectSingleNode("//head/title", namespaceManager);
+            if (titleNode != null)
+            {
+                titleNode.InnerText = "Reversal";
+            }
+            xDoc.Save(reversalFile);
+        }
 
         /// <summary>
         /// For dictionary data, returns the language code for the definitions
@@ -2641,26 +2666,50 @@ namespace SIL.Tool
             }
         }
 
+        /// <summary>
+        /// To replace the symbol string if the symbol matches with the text
+        /// </summary>
+        public void ReplaceStringInCss(string cssFile, string existingContent, string replacingContent)
+        {
+            if (File.Exists(cssFile))
+            {
+                var sr = new StreamReader(cssFile);
+                string fileContent = sr.ReadToEnd();
+                sr.Close();
+
+                if (fileContent.Contains(existingContent))
+                {
+                    fileContent = fileContent.Replace(existingContent, replacingContent);
+                }
+                var sw = new StreamWriter(cssFile);
+                sw.Write(fileContent);
+                sw.Close();
+            }
+        }
+
         public void RemoveStringInCss(string cssFileName, string match)
         {
-            var sr = new StreamReader(cssFileName);
-            string fileContent = sr.ReadToEnd();
-            sr.Close();
-            int searchPos = fileContent.Length;
-            while (true)
+            if (File.Exists(cssFileName))
             {
-                int findFrom = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
-                if (findFrom == -1)
+                var sr = new StreamReader(cssFileName);
+                string fileContent = sr.ReadToEnd();
+                sr.Close();
+                int searchPos = fileContent.Length;
+                while (true)
                 {
-                    break;
+                    int findFrom = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
+                    if (findFrom == -1)
+                    {
+                        break;
+                    }
+                    int closingbracePos = fileContent.IndexOf(";", findFrom) + 1;
+                    fileContent = fileContent.Substring(0, findFrom) + fileContent.Substring(closingbracePos);
+                    searchPos = findFrom - 1;
                 }
-                int closingbracePos = fileContent.IndexOf(";", findFrom) + 1;
-                fileContent = fileContent.Substring(0, findFrom) + fileContent.Substring(closingbracePos);
-                searchPos = findFrom - 1;
+                var sw = new StreamWriter(cssFileName);
+                sw.Write(fileContent);
+                sw.Close();
             }
-            var sw = new StreamWriter(cssFileName);
-            sw.Write(fileContent);
-            sw.Close();
         }
 
         public void RemoveDeclaration(string cssFileName, string match)
@@ -2725,6 +2774,33 @@ namespace SIL.Tool
             tw.WriteLine("}");
 
             tw.WriteLine(".scrBookName { display: block; font-size: 0pt; string-set: bookname content();}");
+
+            //Picture Property
+            tw.WriteLine(".pictureRight {");
+            tw.WriteLine("padding: 10pt;");
+            tw.WriteLine("}");
+
+            tw.WriteLine(".pictureLeft {");
+            tw.WriteLine("padding: 10pt;");
+            tw.WriteLine("}");
+
+            tw.WriteLine(".pictureCenter {");
+            tw.WriteLine("padding: 10pt;");
+            tw.WriteLine("}");
+
+            tw.WriteLine(".picturePage {");
+            tw.WriteLine("padding: 10pt;");
+            tw.WriteLine("}");
+
+            //Space adjustment between letHead and LetData
+            tw.WriteLine(".letData {");
+            tw.WriteLine("padding: 20pt;");
+            tw.WriteLine("}");
+
+            //Avoid letHead as lastline of the page
+            tw.WriteLine(".letHead {");
+            tw.WriteLine("page-break-after: avoid;");
+            tw.WriteLine("}");
 
             tw.Close();
         }

@@ -15,6 +15,8 @@ xcopy %base2%\LiftPrepare\%cfg2%\LiftPrepare.* . /y
 xcopy %base2%\InDesignConvert\%cfg2%\InDesignConvert.* . /y
 xcopy %base2%\epubConvert\%cfg2%\epubConvert.* . /y
 xcopy %base2%\epubValidator\%cfg2%\epubValidator.* . /y
+if exist Help rmdir Help /s /q
+mkdir Help
 if "%1" == "CorporateBTE" goto justgobible
 if "%1" == "Corporate7BTE" goto justgobible
 if "%1" == "CorporateSE" goto nogobible
@@ -28,7 +30,7 @@ xcopy %base2%\WordPressConvert\%cfg2%\MySql*.dll . /y
 xcopy %base2%\XeTeXConvert\%cfg2%\XeTeXConvert.* . /y
 xcopy %base2%\XeLaTeXConvert\%cfg2%\XeLaTeXWriter.* . /y
 xcopy %base2%\XeTex\%cfg2%\XeTexWriter.* . /y
-xcopy %base2%\XeTex\xetexExe .\xetexExe /i /s /q /y
+xcopy %base2%\XeTex\xetexExe .\xetexExe /i /s /y
 if "%1" == "ReleaseSE" goto nogobible
 if "%1" == "Release7SE" goto nogobible
 xcopy %base2%\YouVersionConvert\%cfg2%\YouVersionConvert.* . /y
@@ -37,9 +39,12 @@ xcopy %base2%\SwordConvert\%cfg2%\SwordConvert.* . /y
 :justgobible
 xcopy %base2%\GoBibleConvert\%cfg2%\GoBibleConvert.* . /y
 xcopy %base2%\theWordConvert\%cfg2%\theWordConvert.* . /y
+xcopy %base2%\theWordConvert\%cfg2%\Devart*.* . /y
+xcopy %base2%\ThirdParty\sqlite3.* . /y
 xcopy %base2%\theWordConvert\%cfg2%\*.xml . /y
 xcopy %base2%\ParatextSupport\%cfg2%\ParatextSupport.* . /y
 xcopy %base2%\PsSupport\ScriptureStyleSettings.xml . /q /y
+rem xcopy %base2%\BuildPathway\HelpBTE\* .\Help /i /s /q /y
 goto endBible
 :nogobible
 del TE_XHTML-to-Libronix_MainFile.xslt
@@ -49,6 +54,7 @@ del TE_XHTML-to-Phone_XHTML.xslt
 del pxhtml2xpw-scr.xsl
 del scriptureTemplate.tpl
 del ScriptureStyleSettings.xml
+rem xcopy %base2%\BuildPathway\HelpSE\* .\Help /i /s /q /y
 :endBible
 
 if exist styles rmdir styles /s /q

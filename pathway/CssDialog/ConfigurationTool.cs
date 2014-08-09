@@ -156,6 +156,11 @@ namespace SIL.PublishingSolution
             get { return tsReset; }
         }
 
+        public ToolStripSplitButton ToolStripHelpButton
+        {
+            get { return toolStripHelpButton; }
+        }
+
         public TabControl TabControl1
         {
             get { return tabControl1; }
@@ -1152,7 +1157,7 @@ namespace SIL.PublishingSolution
             _CToolBL.AboutDialog();
         }
 
-        private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
+        private void toolStripHelpButton_ButtonClick(object sender, EventArgs e)
         {
             _CToolBL.HelpButton_Clicked(this);
         }
@@ -1256,5 +1261,41 @@ namespace SIL.PublishingSolution
             {
             }
         }
+
+        private void txtSqlUsername_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtSqlUsername_ValidatedBL(sender, e);
+        }
+
+        private void txtSqlPassword_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtSqlPassword_ValidatedBL(sender, e);
+        }
+
+        private void txtWebAdminUsrNme_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtWebAdminUsrNme_ValidatedBL(sender, e);
+        }
+
+        private void txtWebAdminPwd_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtWebAdminPwd_ValidatedBL(sender, e);
+        }
+
+        private void txtFtpUsername_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtFtpUsername_ValidatedBL(sender, e);
+        }
+
+        private void txtFtpPassword_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtFtpPassword_ValidatedBL(sender, e);
+        }
+
+        private void txtWebEmailID_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtWebEmailID_ValidatedBL(sender, e);
+        }
+      
     }
 }

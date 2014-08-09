@@ -96,7 +96,6 @@
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -161,7 +160,6 @@
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -223,6 +221,7 @@
     <Compile Include="ModifyXeLaTexStyles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XeLaTexContent.cs" />
+    <Compile Include="XelatexFontMapping.cs" />
     <Compile Include="XeLaTexMapProperty.cs" />
     <Compile Include="XeLaTexStyleBase.cs" />
     <Compile Include="XeLaTexStyles.cs" />

@@ -2,7 +2,7 @@
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
 
-&apos;Changed On Jun-18-2014 for TD-4018
+&apos;Changed On Jun-30-2014 for TD-4004
 
 &apos; needs writer document 
 Dim oProgressBarModel As Object 
@@ -334,6 +334,7 @@ mytime = now
 	
 	dim startNo
 	dim endNo
+	dim PreviousPageBook
 	
 for i = 0 to Ubound(References) 
 
@@ -371,6 +372,7 @@ for i = 0 to Ubound(References)
 		Else
 			HiddenParagraph(startNo) = LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
 			If startNo &gt; 2 Then
+			    &apos;HiddenParagraph(startNo+1) = HiddenParagraph(startNo)			
 			    HiddenParagraph(startNo-1) = HiddenParagraph(startNo)&apos; LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
                 HiddenParagraph(startNo) = HiddenParagraph(startNo) &apos; LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
 				if startNo = 183 Then
@@ -383,6 +385,20 @@ for i = 0 to Ubound(References)
 			End If 		
 
 		End If
+	Else&apos;If Stating and ending Guidewords are same
+		If startNo &gt; 2 Then
+		
+		FirstValue = Split(HiddenParagraph(startNo),&quot; &quot;)
+		&apos;LastValue = Split(HiddenParagraph(endNo),&quot; &quot;)
+
+		FirstBook = GetBookName(FirstValue)
+		&apos;LastBook = GetBookName(LastValue)
+		
+			If FirstBook = PreviousPageBook And startNo &lt;&gt; endNo Then	&apos;Same book with more than one verses in a page	
+				HiddenParagraph(startNo - 1) = HiddenParagraph(startNo)
+			End If
+			PreviousPageBook = FirstBook
+		End If
 	End if
 	i = endNo
 Next
@@ -392,7 +408,7 @@ mytime = now
 	&apos;Submit processed References to Reference Fields
 	j=1
 	stDTF(0).Content = HiddenParagraph(0)
-	for i = Ubound(HiddenParagraph) to 1 step -1
+	for i = Ubound(HiddenParagraph) - 1 to 1 step -1
 		stDTF(j).Content = HiddenParagraph(i)
 		j = j + 1
 		&apos;=========Progressbar    

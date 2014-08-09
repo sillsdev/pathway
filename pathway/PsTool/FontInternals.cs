@@ -358,6 +358,40 @@ namespace SIL.Tool
             return Directory.GetFiles(fontFolder, "*.ttf", SearchOption.AllDirectories);
         }
 
+
+        public static string GetFontName(string substituteLanguageCode, string style)
+        {
+            // Linux lookup
+            if (Common.UsingMonoVM)
+            {
+                // Linux fonts are not listed in the registry; instead, linux (and mono) use the fontconfig library to
+                // provide support. 
+                // To find the font, we'll make a call to fc-list (one of the fontconfig commands) for the font, and parse the
+                // results for the filename
+                const string prog = "fc-list";
+                var args = new StringBuilder();
+                args.Append(":lang=");
+                args.Append(substituteLanguageCode);
+                args.Append("");
+                string stdOut = string.Empty;
+                string stdErr = string.Empty;
+                SubProcess.RunWithoutWait(Directory.GetCurrentDirectory(), prog, args.ToString(), out stdOut, out stdErr);
+                if (stdOut.Length < 1)
+                {
+                    return string.Empty;
+                }
+                // call returned successfully -- read the results
+                var start = Common.LeftString(stdOut,(":"));
+                if (start.Length > 0)
+                {
+                    return start.ToString();
+                }
+                return string.Empty;
+            }
+
+            return string.Empty;
+        }
+
         public static string GetFontFileName(string familyName, string style)
         {
             // Linux lookup

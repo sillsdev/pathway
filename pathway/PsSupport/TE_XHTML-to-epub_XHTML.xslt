@@ -12,7 +12,7 @@
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     exclude-result-prefixes="xhtml">
     
-	<xsl:output method="xml" version="1.0" encoding="UTF-8" doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" indent="yes"/>
+	<xsl:output method="xml" version="1.0" encoding="UTF-8" doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" indent="yes"  />
 
 	<xsl:strip-space elements="*"/>
 
@@ -24,7 +24,7 @@
 	<xsl:variable name="docLanguage" select="xhtml:html/@lang" />
 	
 	<!--Straight copy for these elements. -->
-	<xsl:template match="xhtml:head | xhtml:title | xhtml:link | xhtml:a | xhtml:table | xhtml:tr | xhtml:td | xhtml:em | xhtml:br | xhtml:ul | xhtml:li">
+	<xsl:template match="xhtml:head | xhtml:title | xhtml:link | xhtml:a | xhtml:table | xhtml:tr | xhtml:th | xhtml:td | xhtml:em | xhtml:br | xhtml:ul | xhtml:li">
 		<xsl:copy>
 			<xsl:for-each select="@*">
 				<xsl:copy/>
@@ -168,7 +168,6 @@
 			</xsl:if>
 			<xsl:value-of select="."/>
 		</xsl:element>
-		<xsl:apply-templates/>
 	</xsl:template>
 
 	<xsl:template match="xhtml:div[@class='Title_Main']/xhtml:span[@class='Title_Secondary']">
@@ -265,9 +264,11 @@
 				       (i.e. the previous node). Ugh. -->
 				<xsl:if test="@class = 'Verse_Number'">
 				<!--	<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="."/></xsl:attribute> -->
-					<!-- (sanitized to replace commas and colons in the verse with dashes) -->
-					<xsl:variable name="verseNum" select="." />
-					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="translate($verseNum, ',', '-')"/></xsl:attribute>
+					<!-- (sanitized to replace commas and colons in the verse with dashes and spaces with underscore) -->
+          <xsl:variable name="verseNum" select="translate(./text(),' &#160;','__')" />
+					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="translate($verseNum, ',', '-')"/>
+            <xsl:value-of select="substring(generate-id(),4,4)"/>
+          </xsl:attribute>
 				</xsl:if>
 				<xsl:if test="count(@class) = 0 or @class != 'scrFootnoteMarker'"> <!-- FWR-2550 we handled child above -->
 					<xsl:apply-templates/>

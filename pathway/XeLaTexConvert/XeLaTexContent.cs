@@ -72,6 +72,7 @@ namespace SIL.PublishingSolution
         private string _directionStart = string.Empty;
         private bool _removeSpaceAfterVerse;
         private bool _isVerseNo;
+        private bool _isUnix;
 
         protected Stack<string> BraceClass = new Stack<string>();
         protected Stack<string> BraceInlineClass = new Stack<string>();
@@ -101,6 +102,12 @@ namespace SIL.PublishingSolution
         {
             get { return _tocPageStock; }
             set { _tocPageStock = value; }
+        }
+
+        public bool IsUnix
+        {
+            get { return _isUnix; }
+            set { _isUnix = value; }
         }
 
         #endregion
@@ -414,8 +421,17 @@ namespace SIL.PublishingSolution
 
             if (_previousParagraphName.ToLower().IndexOf("scrbook") == 0)
             {
-                if (_bookName.Trim().Length == 0)
+                string referenceFormat = _projInfo.HeaderReferenceFormat;
+                if (referenceFormat == "Genesis 1" && _childName.IndexOf("scrBookName") == 0)
+                {
                     _bookName = _reader.Value;
+                }
+                else if (referenceFormat == "Gen 1" && _childName.IndexOf("scrBookCode") == 0)
+                {
+                    _bookName = _reader.Value;
+                }
+                //if (_bookName.Trim().Length == 0)
+                //    _bookName = _reader.Value;
             }
             WriteText();
         }
@@ -564,9 +580,6 @@ namespace SIL.PublishingSolution
         private void WriteCharacterStyle(string content, string characterStyle)
         {
             SetHomographNumber(false);
-
-
-
             string footerClassName = string.Empty;
             if (_isDropCaps)
             {
@@ -661,7 +674,11 @@ namespace SIL.PublishingSolution
                 string classNameWOLang = _classNameWithLang;
                 if (classNameWOLang.IndexOf("_.") > 0)
                     classNameWOLang = Common.RightString(classNameWOLang, ".");
-                string letterletHeadStyle = "letter";
+                string letterletHeadStyle = string.Empty;
+                if (!IsUnix)
+                {
+                    letterletHeadStyle = "letter";
+                }
                 if (classNameWOLang != null || classNameWOLang != string.Empty)
                 {
                     letterletHeadStyle = letterletHeadStyle + classNameWOLang;
@@ -1701,7 +1718,7 @@ namespace SIL.PublishingSolution
             if (_closeChildName.IndexOf("scrBookName") == 0)
             {
                 _xetexFile.Write("\r\n \\label{PageStock_" + DicMainReversal + TocPageStock.ToString() + "} ");
-                _bookName = string.Empty;
+                //_bookName = string.Empty;
                 _bookPageBreak = false;
             }
             _classNameWithLang = StackPeek(_allStyle);

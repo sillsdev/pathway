@@ -120,6 +120,7 @@ xcopy %SRC%\CSSParser.dll "%DST%" /y
 xcopy %SRC%\PsExport.dll "%DST%" /y
 xcopy %SRC%\PsTool.dll "%DST%" /y
 xcopy %BASE%\BuildPathway\Pathway_Configuration_Tool_BTE.chm "%DST%\Help" /y
+xcopy %BASE%\ConfigurationTool%cfg%\Help\* "%DST%Help" /i /s /q /y
 xcopy %SRC%\Antlr3.Runtime.dll "%DST%" /y
 xcopy %SRC%\Prince.dll "%DST%" /y
 rem xcopy %SRC%\IKVM*.* "%DST%" /y

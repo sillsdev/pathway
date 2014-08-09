@@ -44,5 +44,5 @@
             <xsl:value-of select="translate(translate(.,$apos,''),' ','_')"/>
         </xsl:attribute>
     </xsl:template>
-    
+     <xsl:template match="/xhtml:html/xhtml:body/xhtml:span"></xsl:template>
 </xsl:stylesheet>

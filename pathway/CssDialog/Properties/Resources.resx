@@ -118,8 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DocumentTools" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DocumentTools.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SIL-Logo-No-Tag-Color" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sil-bw-logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="go-down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\triangle-down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -127,25 +127,29 @@
   <data name="epub_logo_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\epub_logo_color.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SIL-Logo-No-Tag-Color" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sil-bw-logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DocumentTools" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DocumentTools.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SIL_Color_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SIL_Color_Logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LayoutTableTwoColumn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LayoutTableTwoColumn.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="go-up" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\triangle-up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LayoutTableTwoColumn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LayoutTableTwoColumn.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SIL_Color_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SIL_Color_Logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Help.Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help.Image.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="draw_text" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\draw-text.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cell" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cell.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>  
-  <data name="Help.Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Help.Image.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="2014_sil_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2014_sil_logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

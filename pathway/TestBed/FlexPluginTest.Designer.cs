@@ -44,6 +44,7 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSword = new System.Windows.Forms.Button();
             this.btnOsis = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.btnJson = new System.Windows.Forms.Button();
@@ -69,14 +70,13 @@
             this.radScripture = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnHtml5 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnFlexTest2 = new System.Windows.Forms.Button();
             this.chkIncrease = new System.Windows.Forms.CheckBox();
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnSword = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -263,7 +263,7 @@
             this.groupBox1.Controls.Add(this.panel3);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.btnHtml5);
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.InDesign);
             this.groupBox1.Location = new System.Drawing.Point(13, 247);
@@ -273,6 +273,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // btnSword
+            // 
+            this.btnSword.AccessibleName = "btnSword";
+            this.btnSword.BackColor = System.Drawing.Color.Crimson;
+            this.btnSword.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSword.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSword.Location = new System.Drawing.Point(234, 201);
+            this.btnSword.Name = "btnSword";
+            this.btnSword.Size = new System.Drawing.Size(100, 40);
+            this.btnSword.TabIndex = 83;
+            this.btnSword.Text = "Swor&d";
+            this.btnSword.UseCompatibleTextRendering = true;
+            this.btnSword.UseVisualStyleBackColor = false;
+            this.btnSword.Click += new System.EventHandler(this.btnSword_Click);
             // 
             // btnOsis
             // 
@@ -562,16 +577,18 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button1
+            // btnHtml5
             // 
-            this.button1.AccessibleName = "BtnFlexTest";
-            this.button1.Location = new System.Drawing.Point(340, 247);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 40);
-            this.button1.TabIndex = 51;
-            this.button1.Text = "&OLD_OpenOffice";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnHtml5.AccessibleName = "BtnFlexTest";
+            this.btnHtml5.BackColor = System.Drawing.Color.SpringGreen;
+            this.btnHtml5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHtml5.Location = new System.Drawing.Point(340, 247);
+            this.btnHtml5.Name = "btnHtml5";
+            this.btnHtml5.Size = new System.Drawing.Size(100, 40);
+            this.btnHtml5.TabIndex = 51;
+            this.btnHtml5.Text = "HTML5 Validator";
+            this.btnHtml5.UseVisualStyleBackColor = false;
+            this.btnHtml5.Click += new System.EventHandler(this.btnHtml5_Click);
             // 
             // groupBox2
             // 
@@ -642,24 +659,9 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnSword
-            // 
-            this.btnSword.AccessibleName = "btnSword";
-            this.btnSword.BackColor = System.Drawing.Color.Crimson;
-            this.btnSword.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSword.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSword.Location = new System.Drawing.Point(234, 201);
-            this.btnSword.Name = "btnSword";
-            this.btnSword.Size = new System.Drawing.Size(100, 40);
-            this.btnSword.TabIndex = 83;
-            this.btnSword.Text = "Swor&d";
-            this.btnSword.UseCompatibleTextRendering = true;
-            this.btnSword.UseVisualStyleBackColor = false;
-            this.btnSword.Click += new System.EventHandler(this.btnSword_Click);
-            // 
             // FlexPluginTest
             // 
-            this.AcceptButton = this.button1;
+            this.AcceptButton = this.btnHtml5;
             this.AccessibleName = "FlexPluginTest";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -705,7 +707,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button BtnInputCSS;
         private System.Windows.Forms.TextBox txtCSSInput;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnHtml5;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnFileSizeZero;

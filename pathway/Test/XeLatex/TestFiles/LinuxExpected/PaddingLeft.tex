@@ -1,0 +1,52 @@
+\documentclass[a4paper]{article} 
+\usepackage{float}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{lettrine}
+\usepackage{alphalph}
+\usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
+\usepackage{changepage}
+\usepackage{needspace}
+
+\parindent=0pt
+\parskip=\medskipamount
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
+\font\p="Charis SIL" at 12pt
+\font\ppaddingc="Charis SIL" at 12pt
+\font\ppaddingf="Charis SIL" at 12pt
+\font\ppaddingba="Charis SIL" at 12pt
+\font\ppaddingbc="Charis SIL" at 12pt
+\font\ppaddingbe="Charis SIL" at 12pt
+\font\ppaddingbg="Charis SIL" at 12pt
+\font\pnopadding="Charis SIL" at 12pt
+\font\ppadding="Charis SIL" at 12pt
+
+\pagestyle{fancy} 
+
+\p{This is a text with no left padding.}
+
+\ppaddingc{This text has a left padding of 2 pt.}
+
+\ppaddingf{This text has a left padding of 5 pt.}
+
+\ppaddingba{This text has a left padding of 10 pt.}
+
+\ppaddingbc{This text has a left padding of 12 pt.}
+
+\ppaddingbe{This text has a left padding of 14 pt.}
+
+\ppaddingbg{This text has a left padding of 16 pt.}
+
+\pnopadding{This is a paragraph with no specified padding.}
+
+\ppadding{This is a paragraph with specified paddings.}
+
+\end{document}

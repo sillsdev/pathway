@@ -1,5 +1,78 @@
-pathway (1.9.0.4064-1) unstable; urgency=high
+pathway (1.10.0.4196-1) unstable; urgency=high
 
+  * pathway 1.10.0 sprint
+    - Epub3: TD-4054 Create XSLT to transform Dictionore to (x)html5
+    - Epub3: TD-4057 Modify the package declaration for epub3
+    - Epub3: TD-4058 Produce epub3 complaint package
+    - Epub3: TD-4059 For dictionary, only letter heads in spine
+    - Epub3: TD-4060 Scripture TOC and Landmarks
+    - Epub3: TD-4061 create epub3 destination
+    - Epub3: TD-4063 Add Epub2 and Epub3 sub folders with files.
+    - Epub3: TD-4064 Export Epub3 output
+    - Epub3: TD-4065 Create Dialog screen with four options (Epub2,Epub3,Folder,Cancel)
+    - Epub3: TD-4066 Implement dialog result for Epub options 
+    - Epub3: TD-4067 Create dialog for Validation with four options(Epub2,Epub3,Both,Neither)
+    - Epub3: TD-4068 Implement dialog result for Epub Validations
+    - Epub3: TD-4069 Create RAMP for Epub3 
+    - Epub3: TD-4070 Create Meta-inf file for Epub3
+    - Epub3: TD-4071 Create content opf file for epub3
+    - Epub3: TD-4074 Attach Epub3 Xslt transform
+    - Epub3: TD-4075 Epub Navigation (ncx shows PartFile instead of Letter)
+    - Epub3: TD-4079 Semi colon in epub2 and epub3 
+    - Epub3: TD-4081 Error dialog is shown for epub2 and epub3
+    - Epub3: TD-4083 Wrong Indent for srcSection and IntroListitem 
+    - Epub3: TD-4085 Reversal TOC produced wrongly
+    - Epub3: TD-4086 Scripture TOC not working in Azardi
+    - Epub3: TD-4088 Create Html5 folder and copy .html files 
+    - Epub3: TD-4092 Validation error in windows
+    - Epub3: TD-4093 Validation error in Ubuntu
+    - Epub3: TD-4094 Duplicate Bookname in TOC 
+    - Epub3: TD-4095 Validate epub file dialog is not needed
+    - Epub3: TD-4096 TOC is created always
+    - Epub3: TD-4097 Title page image should be in bottom of the page.
+    - Epub3: TD-4098 Space in square brackets
+    - Epub3: TD-4100 Directory and File tree structure wrongly creating
+    - Epub3: TD-4103 None of the reversal content appears in Html5 
+    - Epub3: TD-4104 Research to validate html5 files
+    - Epub3: TD-4110 Remove validation dialog 
+    - Epub3: TD-4111 No space between chapter number
+    - Epub3: Removed 2.0 from epub references
+    - General: TD-4011 Text overlaps with Picture in PDF
+    - General: TD-4030 Texts goes beyond the margin in Prince pdf
+    - General: TD-4044 Picture, texts merges in Prince PDF output
+    - General: TD-4049 Custom style sheet fails after second export
+    - General: TD-4004 Last page of a book sometimes has wrong spanning header
+    - General: TD-4008 Variant form should not be bolded 
+    - General: TD-4019 Page number missing sometimes when set as "Bottom center"
+    - General: TD-4022 Half size verse number when using custom style sheet.
+    - General: TD-4036 "Every Page" header not working in Scripture
+    - General: TD-4048 Dictionary Entry content missing in entry with pictures
+    - General: TD-4113 Adding space after proper name
+    - Epub2: TD-3958, TD-4108 Add MySword conversion (remove dependency)
+    - Epub2: TD-4024 Scripture name appears at top of left corner in the Ebook output file. 
+    - Epub2: TD-4025 Chapter number link doesn't work it in EBook output file.
+    - Epub2: TD-4029 refactor epub conversion
+    - Epub2: TD-4040 Link letters fail if set to "At end of Document"
+    - UI: TD-3974 Third Table of Contents option not displayed correctly
+    - UI: TD-4020 Text doesnot appear clearly on reset dialog box
+    - UI: TD-4026 Crash when entering any characters for Send button
+    - UI: TD-4027 Warning prevents navigation
+    - UI: TD-4032 Shortcut key is not properly working
+    - UI: TD-4033 Header Menu button Help not showing the text properly
+    - UI: TD-4034 Scroll bar is appears in the Navigation Pane
+    - UI: TD-4035 Custom Sheet doesn't have default values
+    - UI: TD-4039 Replace Ubuntu help browser with xchm
+    - UI: TD-4041 Selected item doesn't save in single field.
+    - UI: TD-4042 Letter “T” is missing from "Fixed Line Height" label
+    - UI: TD-4050 Preview button should be disable for web output
+    - UI: TD-4105 Incomplete checkbox captions
+    - UI: TD-4112 Clicking link sends text to wrong position
+    - UI: Updated the SIL logo
+    - XeLaTex: TD-3196 Error on paratext when exporting as Xelatex
+    - XeLaTex: TD-4001 Output has boxes in reversal
+    - XeLaTex: TD-4028 Round Bullet produces Unicode Character
+    - XeLaTex: TD-4037 Book name doesn't appear fully on header.
+    - XeLaTex: TD-4038 TOC page doesnot have index
   * pathway sprint 1.9.0
     - Common: TD-3984 Question tag appears on the scripture header in Pdf Prince
     - Common: TD-3989 Use default locations if registry not accessible

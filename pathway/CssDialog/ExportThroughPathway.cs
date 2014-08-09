@@ -493,7 +493,7 @@ namespace SIL.PublishingSolution
         {
             // Front Matter tab
             // edb - temporary / remove as exports are implemented
-            if (!ddlLayout.Text.Contains("epub") && !ddlLayout.Text.Contains("OpenOffice/LibreOffice") && !ddlLayout.Text.Contains("InDesign") && !ddlLayout.Text.Contains("XeLaTex"))
+            if (!ddlLayout.Text.Contains("Epub") && !ddlLayout.Text.Contains("OpenOffice/LibreOffice") && !ddlLayout.Text.Contains("InDesign") && !ddlLayout.Text.Contains("XeLaTex"))
             {
                 tabPage2.Enabled = false;
                 chkCoverImage.Enabled = false;
@@ -513,7 +513,7 @@ namespace SIL.PublishingSolution
             {
                 tabPage2.Enabled = true;
                 chkTitlePage.Enabled = true;
-                chkCoverImage.Enabled = (ddlLayout.Text.Contains("epub") || ddlLayout.Text.Contains("OpenOffice/LibreOffice") || ddlLayout.Text.Contains("InDesign") || ddlLayout.Text.Contains("XeLaTex"));
+                chkCoverImage.Enabled = (ddlLayout.Text.Contains("Epub") || ddlLayout.Text.Contains("OpenOffice/LibreOffice") || ddlLayout.Text.Contains("InDesign") || ddlLayout.Text.Contains("XeLaTex"));
                 chkCoverImageTitle.Enabled = (chkCoverImage.Enabled && chkCoverImage.Checked);
                 btnCoverImage.Enabled = chkCoverImageTitle.Enabled;
                 imgCoverImage.Enabled = chkCoverImageTitle.Enabled;
@@ -525,6 +525,13 @@ namespace SIL.PublishingSolution
                 txtColophonFile.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoCustomCopyright.Checked : false;
                 btnBrowseColophon.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoCustomCopyright.Checked : false;
                 lnkChooseCopyright.Enabled = true;
+
+                chkTOC.Enabled = true;
+                if (ddlLayout.Text.Contains("Epub"))
+                {
+                    chkTOC.Checked = true;
+                    chkTOC.Enabled = false;
+                }
             }
 
             // Processing Options tab
@@ -875,6 +882,7 @@ namespace SIL.PublishingSolution
                 if (_isUnixOS)
                 {
                     copyrightFileName = Common.LeftRemove(CopyrightPagePath, "\\");
+                    copyrightFileName = Path.GetFileName(copyrightFileName);
                 }
                 else
                 {
@@ -1025,7 +1033,7 @@ namespace SIL.PublishingSolution
             var value = string.Empty;
             switch (exportType)
             {
-                case "E-Book (.epub)":
+                case "E-Book (Epub2 and Epub3)":
                     value = "application/epub+zip";
                     break;
                 case "Go Bible":
@@ -1144,7 +1152,7 @@ namespace SIL.PublishingSolution
             {
                 media = "mobile";
             }
-            else if (backend == "e-book (.epub)")
+            else if (backend == "e-book (epub2 and epub3)")//e-book (.epub)
             {
                 media = "others";
             }

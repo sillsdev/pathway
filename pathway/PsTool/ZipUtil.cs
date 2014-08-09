@@ -30,7 +30,6 @@ namespace SIL.Tool
             if (password != null && password != String.Empty)
                 s.Password = password;
             ZipEntry theEntry;
-            string tmpEntry = String.Empty;
             while ((theEntry = s.GetNextEntry()) != null)
             {
                 string directoryName = outputFolder;
@@ -44,7 +43,7 @@ namespace SIL.Tool
                 {
                     if (theEntry.Name.IndexOf(".ini") < 0)
                     {
-                        string fullPath = directoryName + "\\" + theEntry.Name;
+                        string fullPath = Common.PathCombine(directoryName, theEntry.Name);
                         fullPath = fullPath.Replace("\\ ", "\\");
                         string fullDirPath = Path.GetDirectoryName(fullPath);
                         if (!Directory.Exists(fullDirPath)) Directory.CreateDirectory(fullDirPath);

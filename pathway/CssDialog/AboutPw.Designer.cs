@@ -47,10 +47,9 @@
             // 
             this.lblProductName.AutoSize = true;
             this.lblProductName.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductName.Location = new System.Drawing.Point(231, 28);
-            this.lblProductName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProductName.Location = new System.Drawing.Point(173, 23);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(197, 29);
+            this.lblProductName.Size = new System.Drawing.Size(158, 22);
             this.lblProductName.TabIndex = 1;
             this.lblProductName.Text = "lblProductName";
             // 
@@ -58,10 +57,9 @@
             // 
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersion.Location = new System.Drawing.Point(232, 110);
-            this.lblVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblVersion.Location = new System.Drawing.Point(174, 89);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(69, 16);
+            this.lblVersion.Size = new System.Drawing.Size(54, 14);
             this.lblVersion.TabIndex = 2;
             this.lblVersion.Text = "lblVersion";
             // 
@@ -69,10 +67,9 @@
             // 
             this.lblProjUrl.AutoSize = true;
             this.lblProjUrl.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProjUrl.Location = new System.Drawing.Point(232, 268);
-            this.lblProjUrl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProjUrl.Location = new System.Drawing.Point(174, 218);
             this.lblProjUrl.Name = "lblProjUrl";
-            this.lblProjUrl.Size = new System.Drawing.Size(307, 16);
+            this.lblProjUrl.Size = new System.Drawing.Size(233, 14);
             this.lblProjUrl.TabIndex = 5;
             this.lblProjUrl.Text = "Other project related information is available at:";
             // 
@@ -80,20 +77,18 @@
             // 
             this.chkHelpToImprove.AutoSize = true;
             this.chkHelpToImprove.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkHelpToImprove.Location = new System.Drawing.Point(236, 303);
-            this.chkHelpToImprove.Margin = new System.Windows.Forms.Padding(4);
+            this.chkHelpToImprove.Location = new System.Drawing.Point(177, 246);
             this.chkHelpToImprove.Name = "chkHelpToImprove";
-            this.chkHelpToImprove.Size = new System.Drawing.Size(112, 20);
+            this.chkHelpToImprove.Size = new System.Drawing.Size(88, 18);
             this.chkHelpToImprove.TabIndex = 6;
             this.chkHelpToImprove.Text = "Help Improve";
             this.chkHelpToImprove.UseVisualStyleBackColor = true;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(573, 303);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOk.Location = new System.Drawing.Point(430, 246);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(100, 28);
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 7;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -102,10 +97,9 @@
             // lnkProj
             // 
             this.lnkProj.AutoSize = true;
-            this.lnkProj.Location = new System.Drawing.Point(540, 268);
-            this.lnkProj.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lnkProj.Location = new System.Drawing.Point(405, 218);
             this.lnkProj.Name = "lnkProj";
-            this.lnkProj.Size = new System.Drawing.Size(138, 17);
+            this.lnkProj.Size = new System.Drawing.Size(108, 13);
             this.lnkProj.TabIndex = 8;
             this.lnkProj.TabStop = true;
             this.lnkProj.Text = "http://pathway.sil.org";
@@ -115,10 +109,9 @@
             // 
             this.lnkGPL.AutoSize = true;
             this.lnkGPL.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkGPL.Location = new System.Drawing.Point(325, 175);
-            this.lnkGPL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lnkGPL.Location = new System.Drawing.Point(244, 142);
             this.lnkGPL.Name = "lnkGPL";
-            this.lnkGPL.Size = new System.Drawing.Size(87, 16);
+            this.lnkGPL.Size = new System.Drawing.Size(67, 14);
             this.lnkGPL.TabIndex = 10;
             this.lnkGPL.TabStop = true;
             this.lnkGPL.Text = "GNU GPL v3";
@@ -128,41 +121,38 @@
             // 
             this.lblGPL.AutoSize = true;
             this.lblGPL.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGPL.Location = new System.Drawing.Point(232, 175);
-            this.lblGPL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGPL.Location = new System.Drawing.Point(174, 142);
             this.lblGPL.Name = "lblGPL";
-            this.lblGPL.Size = new System.Drawing.Size(94, 16);
+            this.lblGPL.Size = new System.Drawing.Size(72, 14);
             this.lblGPL.TabIndex = 9;
             this.lblGPL.Text = "Code license:";
             // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(440, 150);
+            this.label5.Location = new System.Drawing.Point(330, 122);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(16, 14);
+            this.label5.Size = new System.Drawing.Size(12, 11);
             this.label5.TabIndex = 16;
             this.label5.Text = "®";
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(232, 154);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(174, 125);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(217, 21);
+            this.label2.Size = new System.Drawing.Size(163, 17);
             this.label2.TabIndex = 15;
             this.label2.Text = "(C) 2008 - 2014 SIL International";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.SIL_Logo_No_Tag_Color;
+            this.pictureBox1.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources._2014_sil_logo;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(29, 30);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Location = new System.Drawing.Point(22, 24);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(164, 158);
+            this.pictureBox1.Size = new System.Drawing.Size(123, 128);
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             // 
@@ -170,20 +160,19 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(231, 68);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(173, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(263, 32);
+            this.label1.Size = new System.Drawing.Size(195, 24);
             this.label1.TabIndex = 18;
             this.label1.Text = "Configuration Tool";
             // 
             // AboutPw
             // 
             this.AccessibleName = "AboutPw";
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(713, 357);
+            this.ClientSize = new System.Drawing.Size(535, 290);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label5);
@@ -198,11 +187,10 @@
             this.Controls.Add(this.lblProductName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutPw";
-            this.Padding = new System.Windows.Forms.Padding(12, 11, 12, 11);
+            this.Padding = new System.Windows.Forms.Padding(9, 9, 9, 9);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

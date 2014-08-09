@@ -52,7 +52,6 @@ namespace SIL.Tool
             const int timeout = 60;
             string theCurrent = Directory.GetCurrentDirectory();
             Directory.SetCurrentDirectory(instPath);
-            Process p1 = new Process();
             var proc = new Process
             {
                 StartInfo =
@@ -76,6 +75,54 @@ namespace SIL.Tool
                 // copy the results
                 stdErr = proc.StandardError.ReadToEnd();
                 proc.WaitForExit();
+                stdOut = proc.StandardOutput.ReadToEnd();
+                proc.WaitForExit();
+            }
+            catch (Exception e)
+            {
+                // exception thrown during the program's execution --
+                // copy the exception into stdErr
+                var sb = new StringBuilder();
+                sb.AppendLine(e.Message);
+                sb.AppendLine(e.StackTrace);
+                stdErr = sb.ToString();
+                stdOut = string.Empty;
+            }
+            // restore the current directory and return
+            Directory.SetCurrentDirectory(theCurrent);
+        }
+
+        /// <summary>
+        /// Override. Runs the process from the instPath folder. Waits until complete (with a timeout),
+        /// then returns the output and error results as strings.
+        /// </summary>
+        /// <param name="instPath">Execution path</param>
+        /// <param name="name">Name of file to execute</param>
+        /// <param name="arg">Arguments (optional)</param>
+        /// <param name="stdOut">Standard output results</param>
+        /// <param name="stdErr">Standard error results</param>
+        public static void RunWithoutWait(string instPath, string name, string arg, out string stdOut, out string stdErr)
+        {
+            string theCurrent = Directory.GetCurrentDirectory();
+            Directory.SetCurrentDirectory(instPath);
+            var proc = new Process
+            {
+                StartInfo =
+                {
+                    FileName = name,
+                    Arguments = arg,
+                    RedirectStandardError = true,
+                    RedirectStandardOutput = true,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    UseShellExecute = false
+                }
+            };
+            try
+            {
+                // attempt to run the process
+                proc.Start();
+                // copy the results
+                stdErr = proc.StandardError.ReadToEnd();
                 stdOut = proc.StandardOutput.ReadToEnd();
                 proc.WaitForExit();
             }

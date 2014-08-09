@@ -64,33 +64,20 @@ namespace SIL.PublishingSolution
 
     public class Exportepub : IExportProcess
     {
-
-        private Dictionary<string, EmbeddedFont> _embeddedFonts;  // font information for this export
-        private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
-        private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
-        private readonly XslCompiledTransform _fixEpubToc = new XslCompiledTransform();
-
-        private string _currentChapterNumber = string.Empty;
+        private EpubFont _epubFont;
+        private EpubManifest _epubManifest;
+        Epub3Transformation _exportEpub3;
         private bool _isIncludeImage = true;
 
         private bool _isNoteTargetReferenceExists;
         private bool _isUnixOs;
 
         //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
-        protected string InputType = "dictionary";
+        public string InputType = "dictionary";
 
         public const string ReferencesFilename = "zzReferences.xhtml";
 
-
         // property implementations
-        public string Title { get; set; }
-        public string Creator { get; set; }
-        public string Description { get; set; }
-        public string Publisher { get; set; }
-        public string Coverage { get; set; }
-        public string Rights { get; set; }
-        public string Format { get; set; }
-        public string Source { get; set; }
         public bool EmbedFonts { get; set; }
         public bool IncludeFontVariants { get; set; }
         public string TocLevel { get; set; }
@@ -117,7 +104,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "E-Book (.epub)";
+                return "E-Book (Epub2 and Epub3)";//E-Book (.epub)
             }
         }
 
@@ -161,25 +148,39 @@ namespace SIL.PublishingSolution
             var addRevId = LoadAddRevIdXslt();
             var noXmlSpace = LoadNoXmlSpaceXslt();
             var fixEpub = LoadFixEpubXslt();
-            _addDicTocHeads.Load(XmlReader.Create(Common.UsersXsl("addDicTocHeads.xsl")));
-            _fixEpubToc.Load(XmlReader.Create(Common.UsersXsl("FixEpubToc.xsl")));
             #endregion
-            
+            #region Create EpubFolder
+            if (!Common.Testing)
+            {
+                CreateEpubFolder(projInfo);
+            }
+            else
+            {
+                projInfo.ProjectPath = projInfo.DictionaryPath;
+            }
+
+            #endregion
+
             var preProcessor = new PreExportProcess(projInfo);
             preProcessor.RemoveBrokenImage();
 
             _isUnixOs = Common.UnixVersionCheck();
             if (_isUnixOs)
             {
-                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
+                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath, "epub");
             }
 
             _isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
 
             _isNoteTargetReferenceExists = Common.NodeExists(projInfo.DefaultXhtmlFileWithPath, "");
 
-            LoadPropertiesFromSettings();
+            _epubFont = new EpubFont(this);
+            _epubManifest = new EpubManifest(this, _epubFont);
+            _epubManifest.LoadPropertiesFromSettings();
+            LoadOtherFeatures();
+            var epubToc = new EpubToc(projInfo.ProjectInputType, TocLevel);
             inProcess.PerformStep();
+
             #endregion Setup
 
             #region Xhtml preprocessing
@@ -188,7 +189,7 @@ namespace SIL.PublishingSolution
             var outputFolder = SetOutputFolderAndCurrentDirectory(projInfo);
             Common.SetProgressBarValue(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath);
             XhtmlPreprocessing(projInfo, preProcessor);
-            var langArray = InitializeLangArray(projInfo);
+            var langArray = _epubFont.InitializeLangArray(projInfo);
             inProcess.PerformStep();
             #endregion Xhtml preprocessing
 
@@ -203,11 +204,19 @@ namespace SIL.PublishingSolution
             CustomizeCss(mergedCss);
             var niceNameCss = NiceNameCss(projInfo, tempFolder, ref mergedCss);
             var defaultCss = Path.GetFileName(niceNameCss);
+            string tempCssFile = mergedCss.Replace(".css", "tmp.css");
+            File.Copy(mergedCss, tempCssFile, true);
+            
             Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCss);
             Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCss);
+            if (!File.Exists(mergedCss))
+            {
+                File.Copy(tempCssFile, mergedCss, true);
+            }
+
             inProcess.PerformStep();
             #endregion Css preprocessing
-            
+
             #region Hacks
             XhtmlNamespaceHack(projInfo, preProcessor, langArray);
             Common.ApplyXslt(preProcessor.ProcessedXhtml, noXmlSpace);
@@ -304,13 +313,36 @@ namespace SIL.PublishingSolution
 
             #region Manifest and Table of Contents
             inProcess.SetStatus("Generating .epub TOC and manifest");
-            CreateOpf(projInfo, contentFolder, bookId);
-            CreateNcx(projInfo, contentFolder, bookId);
+            _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
+            epubToc.CreateNcx(projInfo, contentFolder, bookId);
+            if (File.Exists(tempCssFile))
+            {
+                File.Delete(tempCssFile);
+            }
             inProcess.PerformStep();
             #endregion Manifest and Table of Contents
 
-            #region Packaging
-            inProcess.SetStatus("Packaging");
+            #region Copy Epub2 package for Epub3
+            string epub3Path = projInfo.ProjectPath;
+            epub3Path = Common.PathCombine(epub3Path, "Epub3");
+            Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
+            if (File.Exists(projInfo.DefaultXhtmlFileWithPath))
+                File.Copy(projInfo.DefaultXhtmlFileWithPath, Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath)), true);
+
+            if (File.Exists(projInfo.DefaultCssFileWithPath))
+                File.Copy(projInfo.DefaultCssFileWithPath, Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultCssFileWithPath)), true);
+
+            if (File.Exists(projInfo.DefaultRevCssFileWithPath))
+                File.Copy(projInfo.DefaultRevCssFileWithPath, Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultRevCssFileWithPath)), true);
+
+            _exportEpub3 = new Epub3Transformation(this, _epubFont);
+            _exportEpub3.Epub3Directory = epub3Path;
+            _exportEpub3.Export(projInfo);
+
+            #endregion Copy Epub2 package for Epub3
+
+            #region Packaging for Epub2 and Epub3
+            inProcess.SetStatus("Packaging for Epub2");
             if (_isUnixOs)
             {
                 AddDtdInXhtml(contentFolder);
@@ -318,6 +350,25 @@ namespace SIL.PublishingSolution
             string fileName = CreateFileNameFromTitle(projInfo);
             Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
             var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
+
+            if (!Common.Testing)
+            {
+
+                inProcess.SetStatus("Copy html files");
+                string htmlFolderPath = Common.PathCombine(Path.GetDirectoryName(epub3Path), "HTML5");
+                string oebpsFolderPath = Common.PathCombine(epub3Path, "OEBPS");
+                Common.CustomizedFileCopy(oebpsFolderPath, htmlFolderPath, "content.opf, toc.html");
+            }
+
+            inProcess.SetStatus("Packaging for Epub3");
+
+            string fileNameV3 = CreateFileNameFromTitle(projInfo);
+            string outputPathWithFileNameV3 = null;
+            if (epub3Path != null)
+            {
+                Compress(epub3Path, Common.PathCombine(epub3Path, fileNameV3));
+                outputPathWithFileNameV3 = Common.PathCombine(epub3Path, fileNameV3) + ".epub";
+            }
 #if (TIME_IT)
             TimeSpan tsTotal = DateTime.Now - dt1;
             Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
@@ -327,21 +378,80 @@ namespace SIL.PublishingSolution
 
             #region Validate
             inProcess.SetStatus("Validate");
-            ValidateAndDisplayResult(outputFolder, fileName, outputPathWithFileName);
+
+            #region Option Dialog box
+            bool isOutputDilalogNeeded = true;
+            if (!Common.Testing)
+            {
+                if (MessageBox.Show(Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files", Resources.ExportComplete, MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    ValidateResult(outputPathWithFileName);// Epub2 ExportType
+                    ValidateResult(outputPathWithFileNameV3);//Epub3 ExportType
+                }
+
+                #region Option Dialog box
+
+                if (!Common.Testing && isOutputDilalogNeeded)
+                {
+                    EpubExportTypeDlg exportTypeDlg = new EpubExportTypeDlg();
+                    exportTypeDlg.ShowDialog();
+                    if (exportTypeDlg._exportType == "epub2")
+                    {
+                        DisplayOutput(outputFolder, fileName, outputPathWithFileName);
+                    }
+                    else if (exportTypeDlg._exportType == "epub3")
+                    {
+                        DisplayOutput(outputFolder, fileName, outputPathWithFileNameV3);
+                    }
+                    else if (exportTypeDlg._exportType == "folder")
+                    {
+                        if (_isUnixOs)
+                        {
+                            SubProcess.Run(Path.GetDirectoryName(outputFolder), "nautilus", Path.GetDirectoryName(outputFolder), false);
+                        }
+                        else
+                        {
+                            SubProcess.Run(Path.GetDirectoryName(outputFolder), "explorer.exe", Path.GetDirectoryName(outputFolder), false);
+                        }
+                    }
+                }
+                #endregion Option Dialog box
+            }
+            #endregion Option Dialog box
+
             inProcess.PerformStep();
             #endregion Validate
-
             #region Clean up
             inProcess.SetStatus("Clean up");
             Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1", string.Empty);
+            if (!Common.Testing)
+            {
+                Common.CleanupExportFolder(outputPathWithFileNameV3, ".tmp,.de,.zip", "_1", "META-INF,OEBPS");
+            }
             inProcess.PerformStep();
             #endregion Clean up
 
             #region Archive
             inProcess.SetStatus("Archive");
             CreateRAMP(projInfo);
+            if (!Common.Testing)
+            {
+                projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
+                CreateRAMP(projInfo);
+            }
             inProcess.PerformStep();
             #endregion Archive
+
+            #region Clean up
+            inProcess.SetStatus("Final Clean up");
+            Common.CleanupExportFolder(outputPathWithFileName, ".xhtml,.xml,.css", string.Empty, "Test");
+            if (!Common.Testing)
+            {
+                Common.CleanupExportFolder(outputPathWithFileNameV3, ".xhtml,.xml,.css", string.Empty, "Test");
+            }
+            inProcess.PerformStep();
+            #endregion Clean up
 
             #region Close Reporting
             inProcess.Close();
@@ -353,7 +463,144 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        private void ValidateAndDisplayResult(string outputFolder, string fileName, string outputPathWithFileName)
+        private static void CreateEpubFolder(PublicationInformation projInfo)
+        {
+            Common.CopyFolderandSubFolder(projInfo.DictionaryPath, Common.PathCombine(projInfo.DictionaryPath, "Epub2"), false);
+            var di = new DirectoryInfo(projInfo.DictionaryPath);
+            Common.CleanFile(di);
+            projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(Common.PathCombine(projInfo.DictionaryPath, "Epub2"),
+                                                                   Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
+            projInfo.DefaultCssFileWithPath = Common.PathCombine(Common.PathCombine(projInfo.DictionaryPath, "Epub2"),
+                                                                 Path.GetFileName(projInfo.DefaultCssFileWithPath));
+            projInfo.DefaultRevCssFileWithPath = Common.PathCombine(Common.PathCombine(projInfo.DictionaryPath, "Epub2"),
+                                                                    Path.GetFileName(projInfo.DefaultRevCssFileWithPath));
+
+            projInfo.ProjectPath = projInfo.DictionaryPath;
+            projInfo.DictionaryPath = Common.PathCombine(projInfo.DictionaryPath, "Epub2");
+        }
+
+        private static Cursor UseWaitCursor()
+        {
+            var myCursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            return myCursor;
+        }
+
+        private static InProcess SetupProgressReporting(int steps)
+        {
+            var inProcess = new InProcess(0, steps) { Text = Resources.Exportepub_Export_Exporting__epub_file }; // create a progress bar with 7 steps (we'll add more below)
+            inProcess.Show();
+            inProcess.ShowStatus = true;
+            return inProcess;
+        }
+
+        private void LoadOtherFeatures()
+        {
+            string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+            Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
+            EmbedFonts = !othersfeature.ContainsKey("EmbedFonts") || (othersfeature["EmbedFonts"].Trim().Equals("Yes"));
+            IncludeFontVariants = !othersfeature.ContainsKey("IncludeFontVariants") || (othersfeature["IncludeFontVariants"].Trim().Equals("Yes"));
+            if (othersfeature.ContainsKey("MaxImageWidth"))
+            {
+                try
+                {
+                    MaxImageWidth = int.Parse(othersfeature["MaxImageWidth"].Trim());
+                }
+                catch (Exception)
+                {
+                    MaxImageWidth = 600;
+                }
+            }
+            else
+            {
+                MaxImageWidth = 600;
+            }
+            TocLevel = othersfeature.ContainsKey("TOCLevel") ? othersfeature["TOCLevel"].Trim() : "";
+            DefaultFont = othersfeature.ContainsKey("DefaultFont") ? othersfeature["DefaultFont"].Trim() : "Charis SIL";
+            DefaultAlignment = othersfeature.ContainsKey("DefaultAlignment") ? othersfeature["DefaultAlignment"].Trim() : "Justified";
+            ChapterNumbers = othersfeature.ContainsKey("ChapterNumbers") ? othersfeature["ChapterNumbers"].Trim() : "Drop Cap";
+            References = othersfeature.ContainsKey("References") ? othersfeature["References"].Trim() : "After Each Section";
+
+            // base font size
+            if (othersfeature.ContainsKey("BaseFontSize"))
+            {
+                try
+                {
+                    BaseFontSize = int.Parse(othersfeature["BaseFontSize"].Trim());
+                }
+                catch (Exception)
+                {
+                    BaseFontSize = 13;
+                }
+            }
+            else
+            {
+                BaseFontSize = 13;
+            }
+            // default line height
+            if (othersfeature.ContainsKey("DefaultLineHeight"))
+            {
+                try
+                {
+                    DefaultLineHeight = int.Parse(othersfeature["DefaultLineHeight"].Trim());
+                }
+                catch (Exception)
+                {
+                    DefaultLineHeight = 125;
+                }
+            }
+            else
+            {
+                DefaultLineHeight = 125;
+            }
+            // Missing Font
+            // Note that the Embed Font enum value doesn't apply here (if it were to appear, we'd fall to the Default
+            // "Prompt user" case
+            if (othersfeature.ContainsKey("MissingFont"))
+            {
+                switch (othersfeature["MissingFont"].Trim())
+                {
+                    case "Use Fallback Font":
+                        MissingFont = FontHandling.SubstituteDefaultFont;
+                        break;
+                    case "Cancel Export":
+                        MissingFont = FontHandling.CancelExport;
+                        break;
+                    default: // "Prompt User" case goes here
+                        MissingFont = FontHandling.PromptUser;
+                        break;
+                }
+            }
+            else
+            {
+                MissingFont = FontHandling.PromptUser;
+            }
+            // Non SIL Font
+            if (othersfeature.ContainsKey("NonSILFont"))
+            {
+                switch (othersfeature["NonSILFont"].Trim())
+                {
+                    case "Embed Font Anyway":
+                        NonSilFont = FontHandling.EmbedFont;
+                        break;
+                    case "Use Fallback Font":
+                        NonSilFont = FontHandling.SubstituteDefaultFont;
+                        break;
+                    case "Cancel Export":
+                        NonSilFont = FontHandling.CancelExport;
+                        break;
+                    default: // "Prompt User" case goes here
+                        NonSilFont = FontHandling.PromptUser;
+                        break;
+                }
+            }
+            else
+            {
+                NonSilFont = FontHandling.PromptUser;
+            }
+        }
+
+        private void ValidateResult(string outputPathWithFileName)
         {
             // Postscript - validate the file using our epubcheck wrapper
             if (Common.Testing)
@@ -364,15 +611,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                if (MessageBox.Show(Resources.ExportCallingEpubValidator + "\r\nDo you want to Validate ePub file", Resources.ExportComplete, MessageBoxButtons.YesNo,
-                                    MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-
-                    var validationDialog = new ValidationDialog { FileName = outputPathWithFileName };
-                    validationDialog.ShowDialog();
-                }
-
-                DisplayOutput(outputFolder, fileName, outputPathWithFileName);
+                ValidateEpub.ValidateEpubFile(outputPathWithFileName);
             }
         }
 
@@ -400,12 +639,16 @@ namespace SIL.PublishingSolution
 
         private string CreateFileNameFromTitle(PublicationInformation projInfo)
         {
-            string fileName = Title;
-            if (string.IsNullOrEmpty(Title))
+            string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            if (!Common.Testing)
             {
-                fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                fileName = _epubManifest.Title;
+                if (string.IsNullOrEmpty(_epubManifest.Title))
+                {
+                    fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                }
+                fileName = Common.ReplaceSymbolToUnderline(fileName);
             }
-            fileName = Common.ReplaceSymbolToUnderline(fileName);
             return fileName;
         }
 
@@ -423,11 +666,11 @@ namespace SIL.PublishingSolution
         private bool FontProcessing(PublicationInformation projInfo, string[] langArray, string mergedCss, string contentFolder)
         {
             // First, get the list of fonts used in this project
-            BuildFontsList();
+            _epubFont.BuildFontsList();
             // Embed fonts if needed
             if (EmbedFonts)
             {
-                if (!EmbedAllFonts(langArray, contentFolder))
+                if (!_epubFont.EmbedAllFonts(langArray, contentFolder))
                 {
                     return false; // user aborted
                 }
@@ -435,7 +678,7 @@ namespace SIL.PublishingSolution
             // update the CSS file to reference any fonts used by the writing systems
             // (if they aren't embedded in the .epub, we'll still link to them here)
 
-            ReferenceFonts(mergedCss, projInfo);
+            _epubFont.ReferenceFonts(mergedCss, projInfo);
             return true; // successful
         }
 
@@ -487,7 +730,7 @@ namespace SIL.PublishingSolution
                     else
                     {
                         var args = string.Format(@"""{0}"" ""{1}"" {2} ""{3}""", file, xsltFullName,
-                                                outputExtension , getPsApplicationPath);
+                                                outputExtension, getPsApplicationPath);
                         Common.RunCommand(xsltProcessExe, args, 1);
                     }
                     if (File.Exists(xhtmlOutputFile))
@@ -501,21 +744,6 @@ namespace SIL.PublishingSolution
                     htmlFiles.Add(xhtmlOutputFile);
                 }
             }
-        }
-
-        private static Cursor UseWaitCursor()
-        {
-            var myCursor = Cursor.Current;
-            Cursor.Current = Cursors.WaitCursor;
-            return myCursor;
-        }
-
-        private static InProcess SetupProgressReporting(int steps)
-        {
-            var inProcess = new InProcess(0, steps) { Text = Resources.Exportepub_Export_Exporting__epub_file }; // create a progress bar with 7 steps (we'll add more below)
-            inProcess.Show();
-            inProcess.ShowStatus = true;
-            return inProcess;
         }
 
         private void SplittingFrontMatter(PublicationInformation projInfo, PreExportProcess preProcessor, string defaultCss, List<string> splitFiles)
@@ -571,7 +799,7 @@ namespace SIL.PublishingSolution
 
             if (_isUnixOs)
             {
-                Common.RemoveDTDForLinuxProcess(revFile);
+                Common.RemoveDTDForLinuxProcess(revFile,"epub");
             }
             Common.SetDefaultCSS(revFile, defaultCss);
             // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
@@ -654,6 +882,12 @@ namespace SIL.PublishingSolution
         }
 
         private static MergeCss _mc; // When mc is disposed it also deletes the merged file
+
+        //public Exportepub(string epub3Path)
+        //{
+        //    //this.epub3Path = epub3Path;
+        //}
+
         private static string MergeAndFilterCss(PreExportProcess preProcessor, string tempFolder, string cssFullPath)
         {
             var tempFolderName = Path.GetFileName(tempFolder);
@@ -691,20 +925,11 @@ namespace SIL.PublishingSolution
             preProcessor.GetTempFolderPath();
             preProcessor.ImagePreprocess(false);
             preProcessor.MoveBookcodeFRTtoFront(preProcessor.ProcessedXhtml);
+            preProcessor.SetTitleValueOnReversal(projInfo.DefaultXhtmlFileWithPath);
             if (projInfo.SwapHeadword)
             {
                 preProcessor.SwapHeadWordAndReversalForm();
             }
-        }
-
-        private string[] InitializeLangArray(PublicationInformation projInfo)
-        {
-            _langFontDictionary = new Dictionary<string, string>();
-            _embeddedFonts = new Dictionary<string, EmbeddedFont>();
-            BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
-            var langArray = new string[_langFontDictionary.Keys.Count];
-            _langFontDictionary.Keys.CopyTo(langArray, 0);
-            return langArray;
         }
 
         private static XslCompiledTransform LoadFixEpubXslt()
@@ -734,7 +959,7 @@ namespace SIL.PublishingSolution
 
         private void CreateRAMP(PublicationInformation projInfo)
         {
-            var ramp = new Ramp {ProjInputType = projInfo.ProjectInputType};
+            var ramp = new Ramp { ProjInputType = projInfo.ProjectInputType };
             ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".epub", projInfo.ProjectInputType);
         }
 
@@ -751,7 +976,7 @@ namespace SIL.PublishingSolution
 
                     if (_isUnixOs)
                     {
-                        Common.RemoveDTDForLinuxProcess(file);
+                        Common.RemoveDTDForLinuxProcess(file,"epub");
                     }
                     File.Move(file, dest);
                     // split the file into smaller pieces if needed
@@ -996,148 +1221,6 @@ namespace SIL.PublishingSolution
         }
         #endregion
 
-        #region Property persistence
-        /// <summary>
-        /// Loads the settings file and pulls out the values we look at.
-        /// </summary>
-        private void LoadPropertiesFromSettings()
-        {
-            // Load User Interface Collection Parameters
-            Param.LoadSettings();
-            string organization;
-            try
-            {
-                // get the organization
-                organization = Param.Value["Organization"];
-            }
-            catch (Exception)
-            {
-                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
-                // but just in case, specify a default org.
-                organization = "SIL International";
-            }
-            string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
-            Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
-            // Title (book title in Configuration Tool UI / dc:title in metadata)
-            Title = Param.GetMetadataValue(Param.Title, organization) ?? ""; // empty string if null / not found
-            // Creator (dc:creator))
-            Creator = Param.GetMetadataValue(Param.Creator, organization) ?? ""; // empty string if null / not found
-            // information
-            Description = Param.GetMetadataValue(Param.Description, organization) ?? ""; // empty string if null / not found
-            // Source
-            Source = Param.GetMetadataValue(Param.Source, organization) ?? ""; // empty string if null / not found
-            // Format
-            Format = Param.GetMetadataValue(Param.Format, organization) ?? ""; // empty string if null / not found
-            // Publisher
-            Publisher = Param.GetMetadataValue(Param.Publisher, organization) ?? ""; // empty string if null / not found
-            // Coverage
-            Coverage = Param.GetMetadataValue(Param.Coverage, organization) ?? ""; // empty string if null / not found
-            // Rights (dc:rights)
-            Rights = Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
-            Rights = Common.UpdateCopyrightYear(Rights);
-            EmbedFonts = !othersfeature.ContainsKey("EmbedFonts") || (othersfeature["EmbedFonts"].Trim().Equals("Yes"));
-            IncludeFontVariants = !othersfeature.ContainsKey("IncludeFontVariants") || (othersfeature["IncludeFontVariants"].Trim().Equals("Yes"));
-            if (othersfeature.ContainsKey("MaxImageWidth"))
-            {
-                try
-                {
-                    MaxImageWidth = int.Parse(othersfeature["MaxImageWidth"].Trim());
-                }
-                catch (Exception)
-                {
-                    MaxImageWidth = 600;
-                }
-            }
-            else
-            {
-                MaxImageWidth = 600;
-            }
-            TocLevel = othersfeature.ContainsKey("TOCLevel") ? othersfeature["TOCLevel"].Trim() : "";
-            DefaultFont = othersfeature.ContainsKey("DefaultFont") ? othersfeature["DefaultFont"].Trim() : "Charis SIL";
-            DefaultAlignment = othersfeature.ContainsKey("DefaultAlignment") ? othersfeature["DefaultAlignment"].Trim() : "Justified";
-            ChapterNumbers = othersfeature.ContainsKey("ChapterNumbers") ? othersfeature["ChapterNumbers"].Trim() : "Drop Cap";
-            References = othersfeature.ContainsKey("References") ? othersfeature["References"].Trim() : "After Each Section";
-
-            // base font size
-            if (othersfeature.ContainsKey("BaseFontSize"))
-            {
-                try
-                {
-                    BaseFontSize = int.Parse(othersfeature["BaseFontSize"].Trim());
-                }
-                catch (Exception)
-                {
-                    BaseFontSize = 13;
-                }
-            }
-            else
-            {
-                BaseFontSize = 13;
-            }
-            // default line height
-            if (othersfeature.ContainsKey("DefaultLineHeight"))
-            {
-                try
-                {
-                    DefaultLineHeight = int.Parse(othersfeature["DefaultLineHeight"].Trim());
-                }
-                catch (Exception)
-                {
-                    DefaultLineHeight = 125;
-                }
-            }
-            else
-            {
-                DefaultLineHeight = 125;
-            }
-            // Missing Font
-            // Note that the Embed Font enum value doesn't apply here (if it were to appear, we'd fall to the Default
-            // "Prompt user" case
-            if (othersfeature.ContainsKey("MissingFont"))
-            {
-                switch (othersfeature["MissingFont"].Trim())
-                {
-                    case "Use Fallback Font":
-                        MissingFont = FontHandling.SubstituteDefaultFont;
-                        break;
-                    case "Cancel Export":
-                        MissingFont = FontHandling.CancelExport;
-                        break;
-                    default: // "Prompt User" case goes here
-                        MissingFont = FontHandling.PromptUser;
-                        break;
-                }
-            }
-            else
-            {
-                MissingFont = FontHandling.PromptUser;
-            }
-            // Non SIL Font
-            if (othersfeature.ContainsKey("NonSILFont"))
-            {
-                switch (othersfeature["NonSILFont"].Trim())
-                {
-                    case "Embed Font Anyway":
-                        NonSilFont = FontHandling.EmbedFont;
-                        break;
-                    case "Use Fallback Font":
-                        NonSilFont = FontHandling.SubstituteDefaultFont;
-                        break;
-                    case "Cancel Export":
-                        NonSilFont = FontHandling.CancelExport;
-                        break;
-                    default: // "Prompt User" case goes here
-                        NonSilFont = FontHandling.PromptUser;
-                        break;
-                }
-            }
-            else
-            {
-                NonSilFont = FontHandling.PromptUser;
-            }
-        }
-        #endregion
-
         #region xslt processing
         /// <summary>
         /// Helper method that copies the epub xslt file into the temp directory, optionally inserts some
@@ -1294,834 +1377,14 @@ namespace SIL.PublishingSolution
         }
         #endregion
 
-        #region Font Handling
-        /// <summary>
-        /// Handles font embedding for the .epub file. The fonts are verified before they are copied over, to
-        /// make sure they (1) exist on the system and (2) are SIL produced. For the latter, the user is able
-        /// to embed them anyway if they click that they have the appropriate rights (it's an honor system approach).
-        /// </summary>
-        /// <param name="langArray"></param>
-        /// <param name="contentFolder"></param>
-        /// <returns></returns>
-        private bool EmbedAllFonts(string[] langArray, string contentFolder)
-        {
-            var nonSilFonts = new Dictionary<EmbeddedFont, string>();
-            // Build the list of non-SIL fonts in use
-            foreach (var embeddedFont in _embeddedFonts)
-            {
-                if (!embeddedFont.Value.CanRedistribute)
-                {
-                    foreach (var language in _langFontDictionary.Keys)
-                    {
-                        if (_langFontDictionary[language].Equals(embeddedFont.Key))
-                        {
-                            // add this language to the list of langs that use this font
-                            string langs;
-                            if (nonSilFonts.TryGetValue(embeddedFont.Value, out langs))
-                            {
-                                // existing entry - add this language to the list of langs that use this font
-                                var sbName = new StringBuilder();
-                                sbName.Append(langs);
-                                sbName.Append(", ");
-                                sbName.Append(language);
-                                // set the value
-                                nonSilFonts[embeddedFont.Value] = sbName.ToString();
-                            }
-                            else
-                            {
-                                // new entry
-                                nonSilFonts.Add(embeddedFont.Value, language);
-                            }
-                        }
-                    }
-                }
-            }
-            // If there are any non-SIL fonts in use, show the Font Warning Dialog
-            // (possibly multiple times) and replace our embedded font items if needed
-            // (if we're running a test, skip the dialog and just embed the font)
-            if (nonSilFonts.Count > 0 && !Common.Testing)
-            {
-                var dlg = new FontWarningDlg {RepeatAction = false, RemainingIssues = nonSilFonts.Count - 1};
-                // Handle the cases where the user wants to automatically process non-SIL / missing fonts
-                if (NonSilFont == FontHandling.CancelExport)
-                {
-                    // TODO: implement message box
-                    // Give the user a message indicating there's a non-SIL font in their writing system, and
-                    // to go fix the problem. Don't let them continue with the export.
-                    return false;
-                }
-                if (NonSilFont != FontHandling.PromptUser)
-                {
-                    dlg.RepeatAction = true; // the handling picks up below...
-                    dlg.SelectedFont = DefaultFont;
-                }
-                foreach (var nonSilFont in nonSilFonts)
-                {
-                    dlg.MyEmbeddedFont = nonSilFont.Key.Name;
-                    dlg.Languages = nonSilFont.Value;
-                    bool isMissing = (nonSilFont.Key.Filename == null);
-                    bool isManualProcess = ((isMissing == false && NonSilFont == FontHandling.PromptUser) || (isMissing == true && MissingFont == FontHandling.PromptUser));
-                    if (dlg.RepeatAction)
-                    {
-                        // user wants to repeat the last action - if the last action
-                        // was to change the font, change this one as well
-                        // (this is also where the automatic FontHandling takes place)
-                        if ((!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont) && isManualProcess) || // manual "repeat this action" for non-SIL AND missing fonts
-                            (isMissing == false && NonSilFont == FontHandling.SubstituteDefaultFont && !nonSilFont.Key.Name.Equals(DefaultFont)) || // automatic for non-SIL fonts
-                            (isMissing == true && MissingFont == FontHandling.SubstituteDefaultFont && !nonSilFont.Key.Name.Equals(DefaultFont))) // automatic for missing fonts
-                        {
-                            // the user has chosen a different (SIL) font - 
-                            // create a new EmbeddedFont and add it to the list
-                            _embeddedFonts.Remove(nonSilFont.Key.Name);
-                            var newFont = new EmbeddedFont(dlg.SelectedFont);
-                            _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
-                            // also update the references in _langFontDictionary
-                            foreach (var lang in langArray)
-                            {
-                                if (_langFontDictionary[lang] == nonSilFont.Key.Name)
-                                {
-                                    _langFontDictionary[lang] = dlg.SelectedFont;
-                                }
-                            }
-                        }
-                        // the UseFontAnyway checkbox (and FontHandling.EmbedFont) cases fall through here -
-                        // The current non-SIL font is ignored and embedded below
-                        continue;
-                    }
-                    // sanity check - are there any SIL fonts installed?
-                    int count = dlg.BuildSILFontList();
-                    if (count == 0)
-                    {
-                        // No SIL fonts found (returns a DialogResult.Abort):
-                        // tell the user there are no SIL fonts installed, and allow them to Cancel
-                        // and install the fonts now
-                        if (MessageBox.Show(Resources.NoSILFontsMessage, Resources.NoSILFontsTitle,
-                                             MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
-                            == DialogResult.Cancel)
-                        {
-                            // user cancelled the operation - Cancel out of the whole .epub export
-                            return false;
-                        }
-                        // user clicked OK - leave the embedded font list alone and continue the export
-                        // (presumably the user has the proper rights to this font, even though it isn't
-                        // an SIL font)
-                        break;
-                    }
-                    // show the dialog
-                    DialogResult result = dlg.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
-                        if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
-                        {
-                            // the user has chosen a different (SIL) font - 
-                            // create a new EmbeddedFont and add it to the list
-                            _embeddedFonts.Remove(nonSilFont.Key.Name);
-                            var newFont = new EmbeddedFont(dlg.SelectedFont);
-                            _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
-                            // also update the references in _langFontDictionary
-                            foreach (var lang in langArray)
-                            {
-                                if (_langFontDictionary[lang] == nonSilFont.Key.Name)
-                                {
-                                    _langFontDictionary[lang] = dlg.SelectedFont;
-                                }
-                            }
-                        }
-                    }
-                    else if (result == DialogResult.Cancel)
-                    {
-                        // User cancelled - Cancel out of the whole .epub export
-                        return false;
-                    }
-                    // decrement the remaining issues for the next dialog display
-                    dlg.RemainingIssues--;
-                }
-            }
-            // copy all the fonts over
-            foreach (var embeddedFont in _embeddedFonts.Values)
-            {
-                if (embeddedFont.Filename == null)
-                {
-                    Debug.WriteLine("ERROR: embedded font " + embeddedFont.Name + " is not installed - skipping");
-                    continue;
-                }
-                string dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.Filename));
-                if (embeddedFont.Filename != string.Empty && File.Exists(embeddedFont.Filename))
-                {
-                    File.Copy(embeddedFont.Filename, dest, true);
-
-                    if (IncludeFontVariants)
-                    {
-                        // italic
-                        if (embeddedFont.HasItalic && embeddedFont.ItalicFilename.Trim().Length > 0 &&
-                            embeddedFont.ItalicFilename != embeddedFont.Filename)
-                        {
-                            dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.ItalicFilename));
-                            if (!File.Exists(dest))
-                            {
-                                File.Copy(embeddedFont.ItalicFilename, dest, true);
-                            }
-                        }
-                        // bold
-                        if (embeddedFont.HasBold && embeddedFont.BoldFilename.Trim().Length > 0 &&
-                            embeddedFont.BoldFilename != embeddedFont.Filename)
-                        {
-                            dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.BoldFilename));
-                            if (!File.Exists(dest))
-                            {
-                                File.Copy(embeddedFont.BoldFilename,
-                                          dest, true);
-                            }
-                        }
-                    }
-                }
-            }
-            // clean up
-            if (nonSilFonts.Count > 0)
-            {
-                nonSilFonts.Clear();
-            }
-            return true;
-        }
-
-        private string IncludeQuoteOnFontName(string fontname)
-        {
-            if (fontname.Trim().IndexOf(' ') > 0)
-            {
-                fontname = "'" + fontname + "'";
-            }
-            return fontname;
-        }
-
-        /// <summary>
-        /// Inserts links in the CSS file to the fonts used by the writing systems:
-        /// - If the fonts are embedded, adds a @font-face declaration referencing the .ttf file 
-        ///   that's found in the archive
-        /// - Sets the font-family for the body:lang selector to the referenced font
-        /// </summary>
-        /// <param name="cssFile"></param>
-        /// <param name="projInfo">Project information - used to find path to reversal file.</param>
-        private void ReferenceFonts(string cssFile, IPublicationInformation projInfo)
-        {
-            if (!File.Exists(cssFile)) return;
-            // read in the CSS file
-            string mainTextDirection = "ltr";
-            var reader = new StreamReader(cssFile);
-            string content = reader.ReadToEnd();
-            reader.Close();
-            var sb = new StringBuilder();
-            // write a timestamp for field troubleshooting
-            WriteProductNameAndTimeStamp(sb);
-            // If we're embedding the fonts, build the @font-face elements))))
-            if (EmbedFonts)
-            {
-                foreach (var embeddedFont in _embeddedFonts.Values)
-                {
-                    if (embeddedFont.Filename == null)
-                    {
-                        WriteMissingFontMessage(sb, embeddedFont);
-                        continue;
-                    }
-                    WriteFontDeclarationBlock(sb, embeddedFont);
-                    // if we're also embedding the font variants (bold, italic), reference them now
-                    if (IncludeFontVariants)
-                    {
-                        // Italic version
-                        if (embeddedFont.HasItalic)
-                        {
-                            WriteItalicVariantDeclarationBlock(sb, embeddedFont);
-                        }
-                        // Bold version
-                        if (embeddedFont.HasBold)
-                        {
-                            WriteBoldVariantDeclarationBlock(sb, embeddedFont);
-                        }
-                    }
-                }
-            }
-            // add :lang pseudo-elements for each language and set them to the proper font
-            bool firstLang = true;
-            foreach (var language in _langFontDictionary)
-            {
-                var languageKey = language.Key;
-                var languageName = language.Value;
-                EmbeddedFont embeddedFont;
-                // If this is the first language in the loop (i.e., the main language),
-                // set the font for the body element
-                if (firstLang)
-                {
-                    mainTextDirection = Common.GetTextDirection(languageKey);
-                    embeddedFont = WriteMainLanguageDeclarationBlock(mainTextDirection, sb, languageName);
-                    if (IncludeFontVariants)
-                    {
-                        // Italic version
-                        if (embeddedFont != null)
-                            if (embeddedFont.HasItalic)
-                            {
-                                embeddedFont = WriteItalicLanguageFondDeclarationBlock(sb, languageName);
-                            }
-                        // Bold version
-                        if (embeddedFont != null)
-                            if (embeddedFont.HasBold)
-                            {
-                                WriteBoldLanguageFontDeclarationBlock(sb, languageName);
-                            }
-                    }
-
-                    var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-
-                    if (File.Exists(revFile))
-                    {
-                        string reverseSenseNumberFont = GetLanguageForReversalNumber(revFile, languageKey);
-                        WriteReversalFontDeclaration(sb, languageName, languageKey, reverseSenseNumberFont);
-                    }
-
-                    // finished processing - clear the flag
-                    firstLang = false;
-                }
-
-                // set the font for the *:lang(xxx) pseudo-element
-                embeddedFont = WriteGenericLanguageDeclarationBlock(sb, languageKey, languageName);
-
-                if (IncludeFontVariants)
-                {
-                    // italic version
-                    if (embeddedFont != null)
-                        if (embeddedFont.HasItalic)
-                        {
-                            embeddedFont = WriteItalicClassesDeclarationBlock(sb, languageKey, languageName);
-                        }
-                    // bold version
-                    if (embeddedFont != null)
-                        if (embeddedFont.HasBold)
-                        {
-                            WriteBoldClassesDeclarationBlock(sb, languageKey, languageName);
-                        }
-                }
-            }
-
-            sb.AppendLine("/* end auto-generated font info */");
-            sb.AppendLine();
-            RemovesImportStatementIfItExists(content, sb);
-            WriteUpdatedCssFile(cssFile, sb);
-            AddDirectionAndPaddingForScripture(cssFile, mainTextDirection, sb);
-        }
-
-        private static void WriteUpdatedCssFile(string cssFile, StringBuilder sb)
-        {
-            var writer = new StreamWriter(cssFile);
-            writer.Write(sb.ToString());
-            writer.Close();
-        }
-
-        private static void RemovesImportStatementIfItExists(string content, StringBuilder sb)
-        {
-            // nuke the @import statement (we're going off one CSS file here)
-            //string contentNoImport = content.Substring(content.IndexOf(';') + 1);
-            //sb.Append(contentNoImport);
-            // remove the @import statement IF it exists in the css file
-            sb.Append(content.StartsWith("@import") ? content.Substring(content.IndexOf(';') + 1) : content);
-        }
-
-        private void AddDirectionAndPaddingForScripture(string cssFile, string mainTextDirection, StringBuilder sb)
-        {
-            // Now that we know the text direction, we can add some padding info for the chapter numbers
-            // (Scripture only)
-            if (InputType == "scripture")
-            {
-                var mainDirection = mainTextDirection.ToLower().Equals("ltr") ? "left" : "right";
-                sb.Length = 0; // reset the stringbuilder
-                sb.AppendLine(".Chapter_Number {");
-                sb.Append("float: ");
-                sb.Append(mainDirection);
-                sb.AppendLine(";");
-                sb.Append("padding-right: 5pt; padding-");
-                sb.Append(mainDirection);
-                sb.Append(": ");
-                sb.Append((ChapterNumbers == "Drop Cap") ? "4%;" : "5pt;");
-                Common.StreamReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
-            }
-        }
-
-        private void WriteBoldClassesDeclarationBlock(StringBuilder sb, string languageKey, string languageName)
-        {
-            // dictionary
-            sb.Append(".headword:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .headword-minor:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .xsensenumber:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .complexform-form:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .crossref:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .LexEntry-publishStemComponentTarget-MLHeadWordPub:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .LexSense-publishStemComponentTarget-OwnerOutlinePub:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .sense-crossref:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .crossref-headword:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .reversal-form:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .Alternate_Reading:lang(");
-            // scripture
-            sb.Append(languageKey);
-            sb.Append("), .Section_Head:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .Section_Head_Minor:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .Inscription:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .Intro_Section_Head:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .Section_Head_Major:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .iot:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .revsensenumber:lang(");
-            sb.Append(languageKey);
-            sb.AppendLine(") {");
-            sb.Append("font-family: ");
-            sb.Append(IncludeQuoteOnFontName(languageName));
-            sb.Append(", ");
-            EmbeddedFont embeddedFont;
-            if (_embeddedFonts.TryGetValue(languageName, out embeddedFont))
-            {
-                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
-            }
-            else
-            {
-                // fall back on a serif font if we can't find it (shouldn't happen)
-                sb.AppendLine("Times, serif;");
-            }
-            sb.AppendLine("}");
-            //return embeddedFont;
-        }
-
-        private EmbeddedFont WriteItalicClassesDeclarationBlock(StringBuilder sb, string languageKey, string languageName)
-        {
-            // dictionary
-            sb.Append(".partofspeech:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .example:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .grammatical-info:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .lexref-type:lang(");
-            sb.Append(languageKey);
-            // scripture
-            sb.Append("), .parallel_passage_reference:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .Parallel_Passage_Reference:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .Emphasis:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .pictureCaption:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .Section_Range_Paragraph:lang(");
-            sb.Append(languageKey);
-            sb.Append("), .revsensenumber:lang(");
-            sb.Append(languageKey);
-            sb.AppendLine(") {");
-            sb.Append("font-family: ");
-            sb.Append(IncludeQuoteOnFontName(languageName));
-            sb.Append(", ");
-            EmbeddedFont embeddedFont;
-            if (_embeddedFonts.TryGetValue(languageName, out embeddedFont))
-            {
-                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
-            }
-            else
-            {
-                // fall back on a serif font if we can't find it (shouldn't happen)
-                sb.AppendLine("Times, serif;");
-            }
-            sb.AppendLine("}");
-            return embeddedFont;
-        }
-
-        private EmbeddedFont WriteGenericLanguageDeclarationBlock(StringBuilder sb, string languageKey, string languageName)
-        {
-            EmbeddedFont embeddedFont;
-            sb.Append("*:lang(");
-            sb.Append(languageKey);
-            sb.AppendLine(") {");
-            sb.Append("font-family: ");
-            sb.Append(IncludeQuoteOnFontName(languageName));
-            sb.Append(", ");
-            if (_embeddedFonts.TryGetValue(languageName, out embeddedFont))
-            {
-                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
-            }
-            else
-            {
-                // fall back on a serif font if we can't find it (shouldn't happen)
-                sb.AppendLine("Times, serif;");
-            }
-            // also insert the text direction for this language
-            sb.Append("direction: ");
-            sb.Append(Common.GetTextDirection(languageKey));
-            sb.AppendLine(";");
-            sb.AppendLine("}");
-            return embeddedFont;
-        }
-
-        private static void WriteReversalFontDeclaration(StringBuilder sb, string mainLanguageName, string languageKey, string reverseSenseNumberFont)
-        {
-            sb.Append(".revsensenumber {");
-            sb.Append("font-family: '");
-            if (languageKey == reverseSenseNumberFont)
-            {
-                sb.Append(mainLanguageName);
-            }
-            sb.Append("';}");
-        }
-
-        private void WriteBoldLanguageFontDeclarationBlock(StringBuilder sb, string mainLanguageName)
-        {
-
-            sb.Append(
-                ".headword, .headword-minor, .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, ");
-            sb.Append(".LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .xsensenumber");
-            sb.Append(
-                ".complexform-form, .crossref, .LexEntry-publishStemComponentTarget-MLHeadWordPub, ");
-            sb.Append(
-                ".LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .LexSense-publishStemComponentTarget-OwnerOutlinePub, ");
-            sb.Append(".LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, .sense-crossref, ");
-            sb.Append(".crossref-headword, .reversal-form, ");
-            sb.Append(".Alternate_Reading, .Section_Head_Minor, ");
-            sb.AppendLine(".Inscription, .Intro_Section_Head, .Section_Head_Major, .iot {");
-            if (mainLanguageName.ToLower() == "charis sil")
-            {
-                sb.Append("font-family: '" + mainLanguageName.Trim());
-                sb.Append("-b");
-                sb.Append("', ");
-            }
-            else
-            {
-                sb.Append("font-family: ");
-                sb.Append(IncludeQuoteOnFontName(mainLanguageName));
-                sb.Append(", ");
-            }
-            EmbeddedFont embeddedFont;
-            if (_embeddedFonts.TryGetValue(mainLanguageName, out embeddedFont))
-            {
-                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
-            }
-            else
-            {
-                // fall back on a serif font if we can't find it (shouldn't happen)
-                sb.AppendLine("Times, serif;");
-            }
-            sb.AppendLine("}");
-            //return embeddedFont;
-        }
-
-        private EmbeddedFont WriteItalicLanguageFondDeclarationBlock(StringBuilder sb, string mainLanguageName)
-        {
-            sb.Append(".partofspeech, .example, .grammatical-info, .lexref-type, ");
-            sb.Append(".parallel_passage_reference, .Parallel_Passage_Reference, ");
-            sb.AppendLine(".Emphasis, .pictureCaption, .Section_Range_Paragraph {");
-            if (mainLanguageName.ToLower() == "charis sil")
-            {
-                sb.Append("font-family: '" + mainLanguageName.Trim());
-                sb.Append("-i");
-                sb.Append("', ");
-            }
-            else
-            {
-                sb.Append("font-family: ");
-                sb.Append(IncludeQuoteOnFontName(mainLanguageName));
-                sb.Append(", ");
-            }
-            EmbeddedFont embeddedFont;
-            if (_embeddedFonts.TryGetValue(mainLanguageName, out embeddedFont))
-            {
-                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
-            }
-            else
-            {
-                // fall back on a serif font if we can't find it (shouldn't happen)
-                sb.AppendLine("Times, serif;");
-            }
-            sb.AppendLine("}");
-            return embeddedFont;
-        }
-
-        private EmbeddedFont WriteMainLanguageDeclarationBlock(string mainTextDirection, StringBuilder sb, string mainLanguageName)
-        {
-            EmbeddedFont embeddedFont;
-            sb.AppendLine("/* default language font info */");
-            sb.AppendLine("body {");
-            sb.Append("font-family: ");
-            sb.Append(IncludeQuoteOnFontName(mainLanguageName));
-            sb.Append(", ");
-            if (_embeddedFonts.TryGetValue(mainLanguageName, out embeddedFont))
-            {
-                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
-            }
-            else
-            {
-                // fall back on a serif font if we can't find it (shouldn't happen)
-                sb.AppendLine("Times, serif;");
-            }
-            // also insert the text direction for this language
-            sb.Append("direction: ");
-            sb.Append(mainTextDirection);
-            sb.AppendLine(";");
-            sb.AppendLine("}");
-            return embeddedFont;
-        }
-
-        private static void WriteBoldVariantDeclarationBlock(StringBuilder sb, EmbeddedFont embeddedFont)
-        {
-            sb.AppendLine("@font-face {");
-            sb.Append(" font-family : \"");
-            sb.Append(embeddedFont.Name + "\"");
-            sb.AppendLine(";");
-            sb.AppendLine(" font-weight : bold;");
-            sb.AppendLine(" font-style : normal;");
-            sb.AppendLine(" font-variant : normal;");
-            sb.AppendLine(" font-size : all;");
-            sb.Append(" src : url('");
-            sb.Append(Path.GetFileName(embeddedFont.BoldFilename));
-            sb.AppendLine("');");
-            sb.AppendLine("}");
-        }
-
-        private static void WriteItalicVariantDeclarationBlock(StringBuilder sb, EmbeddedFont embeddedFont)
-        {
-            sb.AppendLine("@font-face {");
-            sb.Append(" font-family : \"");
-            sb.Append(embeddedFont.Name + "\"");
-            sb.AppendLine(";");
-            sb.AppendLine(" font-weight : normal;");
-            sb.AppendLine(" font-style : italic;");
-            sb.AppendLine(" font-variant : normal;");
-            sb.AppendLine(" font-size : all;");
-            sb.Append(" src : url('");
-            sb.Append(Path.GetFileName(embeddedFont.ItalicFilename));
-            sb.AppendLine("');");
-            sb.AppendLine("}");
-        }
-
-        private static void WriteFontDeclarationBlock(StringBuilder sb, EmbeddedFont embeddedFont)
-        {
-            sb.AppendLine("@font-face {");
-            sb.Append(" font-family : ");
-            sb.Append("\"" + embeddedFont.Name + "\"");
-            sb.AppendLine(";");
-            sb.AppendLine(" font-weight : normal;");
-            sb.AppendLine(" font-style : normal;");
-            sb.AppendLine(" font-variant : normal;");
-            sb.AppendLine(" font-size : all;");
-            sb.Append(" src : url('");
-            sb.Append(Path.GetFileName(embeddedFont.Filename));
-            sb.AppendLine("');");
-            sb.AppendLine("}");
-        }
-
-        private static void WriteMissingFontMessage(StringBuilder sb, EmbeddedFont embeddedFont)
-        {
-            sb.Append("/* missing embedded font: ");
-            sb.Append(embeddedFont.Name);
-            sb.AppendLine(" */");
-        }
-
-        private static void WriteProductNameAndTimeStamp(StringBuilder sb)
-        {
-            sb.Append("/* font info - added by ");
-            sb.Append(Application.ProductName);
-            sb.Append(" (");
-            sb.Append(Assembly.GetCallingAssembly().FullName);
-            sb.AppendLine(") */");
-        }
-
-
-        private string GetLanguageForReversalNumber(string xhtmlFileName, string languageCode)
-        {
-            string language = languageCode;
-            XmlDocument xdoc = Common.DeclareXMLDocument(false);
-            var namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            xdoc.Load(xhtmlFileName);
-            // now go check to see if we're working on scripture or dictionary data
-            XmlNodeList nodes = xdoc.SelectNodes("//xhtml:span[@class='revsensenumber']", namespaceManager);
-            if (nodes == null || nodes.Count == 0)
-            {
-                nodes = xdoc.SelectNodes("//span[@class='revsensenumber']", namespaceManager);
-            }
-            if (nodes != null && nodes.Count > 0)
-            {
-                for (int i = 0; i < nodes.Count; i++)
-                {
-                    var xmlAttributeCollection = nodes[i].Attributes;
-                    if (xmlAttributeCollection != null)
-                        if (xmlAttributeCollection["lang"] != null)
-                        {
-                            if (xmlAttributeCollection["lang"].Value == language)
-                            {
-                                language = xmlAttributeCollection["lang"].Value;
-                                break;
-                            }
-                        }
-
-                    if (xmlAttributeCollection != null)
-                        if (xmlAttributeCollection["xml:lang"] != null)
-                        {
-                            if (xmlAttributeCollection["xml:lang"].Value == language)
-                            {
-                                language = xmlAttributeCollection["xml:lang"].Value;
-                                break;
-                            }
-                        }
-                }
-            }
-            return language;
-        }
-
-
-        /// <summary>
-        /// Returns the font families for the languages in _langFontDictionary.
-        /// </summary>
-        private void BuildFontsList()
-        {
-            // modifying the _langFontDictionary dictionary - let's make an array copy for the iteration
-            int numLangs = _langFontDictionary.Keys.Count;
-            var langs = new string[numLangs];
-            _langFontDictionary.Keys.CopyTo(langs, 0);
-            foreach (var language in langs)
-            {
-                string[] langCoun = language.Split('-');
-
-                try
-                {
-                    // When no hyphen use entire value but when there is a hyphen, look for first part
-                    var langTarget = langCoun.Length < 2 ? langCoun[0] : language;
-                    string wsPath = Common.PathCombine(Common.GetLDMLPath(), langTarget + ".ldml");
-                    if (File.Exists(wsPath))
-                    {
-                        var ldml = Common.DeclareXMLDocument(false);
-                        ldml.Load(wsPath);
-                        var nsmgr = new XmlNamespaceManager(ldml.NameTable);
-                        nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
-                        var node = ldml.SelectSingleNode("//palaso:defaultFontFamily/@value", nsmgr);
-                        if (node != null)
-                        {
-                            // build the font information and return
-                            _langFontDictionary[language] = node.Value; // set the font used by this language
-                            _embeddedFonts[node.Value] = new EmbeddedFont(node.Value);
-                        }
-                    }
-                    else if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext
-                    {
-                        var settingsHelper = new SettingsHelper(Param.DatabaseName);
-                        string fileName = settingsHelper.GetSettingsFilename();
-                        const string xPath = "//ScriptureText/DefaultFont";
-                        XmlNode xmlFont = Common.GetXmlNode(fileName, xPath);
-                        if (xmlFont != null)
-                        {
-                            // get the text direction specified by the .ssf file
-                            _langFontDictionary[language] = xmlFont.InnerText; // set the font used by this language
-                            _embeddedFonts[xmlFont.InnerText] = new EmbeddedFont(xmlFont.InnerText);
-                        }
-                    }
-                    else
-                    {
-                        // Paratext case (no .ldml file) - fall back on Charis
-                        _langFontDictionary[language] = "Charis SIL"; // set the font used by this language
-                        _embeddedFonts["Charis SIL"] = new EmbeddedFont("Charis SIL");
-
-                    }
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        #endregion
-
-        #region Language Handling
-        /// <summary>
-        /// Parses the specified file and sets the internal languages list to all the languages found in the file.
-        /// </summary>
-        /// <param name="xhtmlFileName">File name to parse</param>
-        private void BuildLanguagesList(string xhtmlFileName)
-        {
-            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
-            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
-            var xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            // should only be one of these after splitting out the chapters.
-            XmlNodeList nodes = xmlDocument.SelectNodes("//@lang", namespaceManager);
-            if (nodes != null && nodes.Count > 0)
-            {
-                foreach (XmlNode node in nodes)
-                {
-                    string value;
-                    if (_langFontDictionary.TryGetValue(node.Value, out value))
-                    {
-                        // already have this item in our list - continue
-                        continue;
-                    }
-                    if (node.Value.ToLower() == "utf-8")
-                    {
-                        // TE-9078 "utf-8" showing up as language in html tag - remove when fixed
-                        continue;
-                    }
-                    // add an entry for this language in the list (the * gets overwritten in BuildFontsList())
-                    _langFontDictionary.Add(node.Value, "*");
-                }
-            }
-            // now go check to see if we're working on scripture or dictionary data
-            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
-
-            if (nodes == null || nodes.Count == 0)
-            {
-                nodes = xmlDocument.SelectNodes("//span[@class='headword']", namespaceManager);
-            }
-            if (nodes != null && nodes.Count == 0)
-            {
-                // not in this file - this might be scripture?
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                if (nodes == null || nodes.Count == 0)
-                {
-                    nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
-                }
-                if (nodes != null && nodes.Count > 0)
-                    InputType = "scripture";
-            }
-            else
-            {
-                InputType = "dictionary";
-            }
-        }
-
-        #endregion
-
-        #region Book ID and Name
+        #region string GetBookId(string xhtmlFileName)
         /// <summary>
         /// Returns a book ID to be used in the .opf file. This is similar to the GetBookName call, but here
         /// we're wanting something that (1) doesn't start with a numeric value and (2) is unique.
         /// </summary>
         /// <param name="xhtmlFileName"></param>
         /// <returns></returns>
-        private string GetBookId(string xhtmlFileName)
+        public string GetBookId(string xhtmlFileName)
         {
             try
             {
@@ -2152,6 +1415,11 @@ namespace SIL.PublishingSolution
                         // no book code - use scrBookName
                         nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
                     }
+                    if (nodes == null || nodes.Count == 0)
+                    {
+                        // If no Title_Main, scrBookCode, scrBookName - use Chapter_Number(Landmarks)
+                        nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Chapter_Number']", namespaceManager);
+                    }
                 }
                 if (nodes != null && nodes.Count > 0)
                 {
@@ -2174,84 +1442,6 @@ namespace SIL.PublishingSolution
                 }
                 return Path.GetFileName(xhtmlFileName);
             }
-        }
-
-        /// <summary>
-        /// Returns the user-friendly book name inside this file.
-        /// </summary>
-        /// <param name="xhtmlFileName">Split xhtml filename in the form PartFile[#]_.xhtml</param>
-        /// <returns>User-friendly book name (value of the scrBookName or letter element in the xhtml file).</returns>
-        private string GetBookName(string xhtmlFileName)
-        {
-            var fileNoPath = Path.GetFileName(xhtmlFileName);
-            if (fileNoPath != null && fileNoPath.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
-            {
-                return ("Cover Page");
-            }
-            if (fileNoPath != null && fileNoPath.StartsWith(PreExportProcess.TitlePageFilename.Substring(0, 8)))
-            {
-                return ("Title Page");
-            }
-            if (fileNoPath != null && fileNoPath.StartsWith(PreExportProcess.TableOfContentsFilename.Substring(0, 8)))
-            {
-                return ("Table of Content");
-            }
-            if (fileNoPath != null && fileNoPath.StartsWith(PreExportProcess.CopyrightPageFilename.Substring(0, 8)))
-            {
-                return ("Copyright Information");
-            }
-            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
-            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
-            var xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            // should only be one of these after splitting out the chapters.
-            XmlNodeList nodes;
-            if (InputType.Equals("dictionary"))
-            {
-                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
-                if (nodes == null || nodes.Count == 0)
-                {
-                    nodes = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
-                }
-            }
-            else
-            {
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                if (nodes == null || nodes.Count == 0)
-                {
-                    nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
-                }
-                if (nodes == null || nodes.Count == 0)
-                {
-                    // nothing there - check on the Title_Main span
-                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
-                    // nothing there - check on the scrBookName span
-                    if (nodes == null || nodes.Count == 0)
-                    {
-                        nodes = xmlDocument.SelectNodes("//div[@class='Title_Main']", namespaceManager);
-                    }
-                }
-                if (nodes == null || nodes.Count == 0)
-                {
-                    // we're really scraping the bottom - check on the scrBookCode span
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
-                    if (nodes == null || nodes.Count == 0)
-                    {
-                        nodes = xmlDocument.SelectNodes("//span[@class='scrBookCode']", namespaceManager);
-                    }
-                }
-            }
-            if (nodes != null && nodes.Count > 0)
-            {
-                var sb = new StringBuilder();
-                sb.Append(nodes[0].InnerText);
-                return (sb.ToString());
-            }
-            // fall back on just the file name
-            return Path.GetFileName(xhtmlFileName);
         }
         #endregion
 
@@ -2452,9 +1642,9 @@ namespace SIL.PublishingSolution
             foreach (string file in imageFiles)
             {
                 Image image;
-// ReSharper disable PossibleNullReferenceException
+                // ReSharper disable PossibleNullReferenceException
                 switch (Path.GetExtension(file) == null ? "" : Path.GetExtension(file).ToLower())
-// ReSharper restore PossibleNullReferenceException
+                // ReSharper restore PossibleNullReferenceException
                 {
                     case ".jpg":
                     case ".jpeg":
@@ -2725,7 +1915,10 @@ namespace SIL.PublishingSolution
                 var xmlReader = XmlReader.Create(file, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
-                var footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
+                XmlNodeList footnoteNodes = null;
+                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_General_Paragraph']/a")
+                    : xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
+
                 if (footnoteNodes == null)
                 {
                     return;
@@ -2735,8 +1928,9 @@ namespace SIL.PublishingSolution
                     if (footnoteNode.Attributes != null)
                         footnoteNode.Attributes["href"].Value = "zzReferences.xhtml" + footnoteNode.Attributes["href"].Value;
                 }
+                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_CrossHYPHENReference_Paragraph']/a")
+                    : xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
 
-                footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
                 if (footnoteNodes == null)
                 {
                     return;
@@ -2995,8 +2189,8 @@ namespace SIL.PublishingSolution
                 {
                     // for the subsequent sections, we need the head + the substring (startIndex to realMax)
                     sb.Append(head);
-                    var bodyClass = InputType == "scripture"? "scrBody": "dicBody";
-                    var divClass = InputType == "scripture"? "scrBook": "letData";
+                    var bodyClass = InputType == "scripture" ? "scrBody" : "dicBody";
+                    var divClass = InputType == "scripture" ? "scrBook" : "letData";
                     sb.Append(string.Format("<body class=\"{0}\"><div class=\"{1}\">", bodyClass, divClass));
                     sb.Append(content.Substring(startIndex, (realMax - startIndex)));
                     sb.AppendLine("</div></body></html>"); // close out the xhtml
@@ -3070,7 +2264,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="sourceFolder">Folder to compress</param>
         /// <param name="outputPath">Output path and filename (without extension)</param>
-        private void Compress(string sourceFolder, string outputPath)
+        public void Compress(string sourceFolder, string outputPath)
         {
             var mOdt = new ZipFolder();
             string outputPathWithFileName = outputPath + ".epub";
@@ -3078,538 +2272,24 @@ namespace SIL.PublishingSolution
             // add the content to the existing epub.zip file
             string zipFile = Common.PathCombine(sourceFolder, "epub.zip");
             string contentFolder = Common.PathCombine(sourceFolder, "OEBPS");
-            string[] files = Directory.GetFiles(contentFolder);
-            mOdt.AddToZip(files, zipFile);
-            var sb = new StringBuilder();
-            sb.Append(sourceFolder);
-            sb.Append(Path.DirectorySeparatorChar);
-            sb.Append("META-INF");
-            sb.Append(Path.DirectorySeparatorChar);
-            sb.Append("container.xml");
-            var containerFile = new[] { sb.ToString() };
-            mOdt.AddToZip(containerFile, zipFile);
-            // copy the results to the output directory
-            File.Copy(zipFile, outputPathWithFileName, true);
+            if (Directory.Exists(contentFolder))
+            {
+                string[] files = Directory.GetFiles(contentFolder);
+                mOdt.AddToZip(files, zipFile);
+                var sb = new StringBuilder();
+                sb.Append(sourceFolder);
+                sb.Append(Path.DirectorySeparatorChar);
+                sb.Append("META-INF");
+                sb.Append(Path.DirectorySeparatorChar);
+                sb.Append("container.xml");
+                var containerFile = new[] { sb.ToString() };
+                mOdt.AddToZip(containerFile, zipFile);
+                // copy the results to the output directory
+                File.Copy(zipFile, outputPathWithFileName, true);
+            }
         }
 
         #endregion
-
-        #region EPUB metadata handlers
-
-        /// <summary>
-        /// Generates the manifest and metadata information file used by the .epub reader
-        /// (content.opf). For more information, refer to <see cref="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm#Section2.0"/> 
-        /// </summary>
-        /// <param name="projInfo">Project information</param>
-        /// <param name="contentFolder">Content folder (.../OEBPS)</param>
-        /// <param name="bookId">Unique identifier for the book we're generating.</param>
-        private void CreateOpf(PublicationInformation projInfo, string contentFolder, Guid bookId)
-        {
-            XmlWriter opf = XmlWriter.Create(Common.PathCombine(contentFolder, "content.opf"));
-            opf.WriteStartDocument();
-            // package name
-            opf.WriteStartElement("package", "http://www.idpf.org/2007/opf");
-            opf.WriteAttributeString("version", "2.0");
-            opf.WriteAttributeString("unique-identifier", "BookId");
-            // metadata - items defined by the Dublin Core Metadata Initiative:
-            // (http://dublincore.org/documents/2004/12/20/dces/)
-            opf.WriteStartElement("metadata");
-            opf.WriteAttributeString("xmlns", "dc", null, "http://purl.org/dc/elements/1.1/");
-            opf.WriteAttributeString("xmlns", "opf", null, "http://www.idpf.org/2007/opf");
-            opf.WriteElementString("dc", "title", null,
-                                   (Title == "") ? (Common.databaseName + " " + projInfo.ProjectName) : Title);
-            opf.WriteStartElement("dc", "creator", null); //<dc:creator opf:role="aut">[author]</dc:creator>
-            opf.WriteAttributeString("opf", "role", null, "aut");
-            opf.WriteValue((Creator == "") ? Environment.UserName : Creator);
-            opf.WriteEndElement();
-            opf.WriteElementString("dc", "subject", null, InputType == "dictionary" ? "Reference" : "Religion & Spirituality");
-            if (Description.Length > 0)
-                opf.WriteElementString("dc", "description", null, Description);
-            if (Publisher.Length > 0)
-                opf.WriteElementString("dc", "publisher", null, Publisher);
-            opf.WriteStartElement("dc", "contributor", null); // authoring program as a "contributor", e.g.:
-            opf.WriteAttributeString("opf", "role", null, "bkp");
-            // <dc:contributor opf:role="bkp">FieldWorks 7</dc:contributor>
-            opf.WriteValue(Common.GetProductName());
-            opf.WriteEndElement();
-            opf.WriteElementString("dc", "date", null, DateTime.Today.ToString("yyyy-MM-dd"));
-            // .epub standard date format (http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.2.7)
-            opf.WriteElementString("dc", "type", null, "Text"); // 
-            if (Format.Length > 0)
-                opf.WriteElementString("dc", "format", null, Format);
-            if (Source.Length > 0)
-                opf.WriteElementString("dc", "source", null, Source);
-
-            if (_langFontDictionary.Count == 0)
-            {
-                opf.WriteElementString("dc", "language", null, "en");
-            }
-
-            foreach (var lang in _langFontDictionary.Keys)
-            {
-                opf.WriteElementString("dc", "language", null, lang);
-            }
-
-
-            if (Coverage.Length > 0)
-                opf.WriteElementString("dc", "coverage", null, Coverage);
-            if (Rights.Length > 0)
-                opf.WriteElementString("dc", "rights", null, Rights);
-            opf.WriteStartElement("dc", "identifier", null); // <dc:identifier id="BookId">[guid]</dc:identifier>
-            opf.WriteAttributeString("id", "BookId");
-            opf.WriteValue(bookId.ToString());
-            opf.WriteEndElement();
-            // cover image (optional)
-            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
-            {
-                opf.WriteStartElement("meta");
-                opf.WriteAttributeString("name", "cover");
-                opf.WriteAttributeString("content", "cover-image");
-                opf.WriteEndElement(); // meta
-            }
-            opf.WriteEndElement(); // metadata
-            // manifest
-            opf.WriteStartElement("manifest");
-            // (individual "item" elements in the manifest)
-            opf.WriteStartElement("item");
-            opf.WriteAttributeString("id", "ncx");
-            opf.WriteAttributeString("href", "toc.ncx");
-            opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
-            opf.WriteEndElement(); // item
-
-            if (EmbedFonts)
-            {
-                int fontNum = 1;
-                foreach (var embeddedFont in _embeddedFonts.Values)
-                {
-                    if (embeddedFont.Filename == null)
-                    {
-                        // already written out that this font doesn't exist in the CSS file; just skip it here
-                        continue;
-                    }
-                    opf.WriteStartElement("item"); // item (charis embedded font)
-                    opf.WriteAttributeString("id", "epub.embedded.font" + fontNum);
-                    opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.Filename));
-                    opf.WriteAttributeString("media-type", "font/opentype/");
-                    opf.WriteEndElement(); // item
-                    fontNum++;
-                    if (IncludeFontVariants)
-                    {
-                        // italic
-                        if (embeddedFont.HasItalic && String.Compare(embeddedFont.Filename, embeddedFont.ItalicFilename, StringComparison.Ordinal) != 0)
-                        {
-                            if (embeddedFont.ItalicFilename != string.Empty)
-                            {
-                                opf.WriteStartElement("item"); // item (charis embedded font)
-                                opf.WriteAttributeString("id", "epub.embedded.font_i_" + fontNum);
-
-                                opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.ItalicFilename));
-
-                                opf.WriteAttributeString("media-type", "font/opentype/");
-                                opf.WriteEndElement(); // item
-                                fontNum++;
-                            }
-                        }
-                        // bold
-                        if (embeddedFont.HasBold && String.Compare(embeddedFont.Filename, embeddedFont.BoldFilename, StringComparison.Ordinal) != 0)
-                        {
-                            if (embeddedFont.BoldFilename != string.Empty)
-                            {
-                                opf.WriteStartElement("item"); // item (charis embedded font)
-                                opf.WriteAttributeString("id", "epub.embedded.font_b_" + fontNum);
-                                opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.BoldFilename));
-                                opf.WriteAttributeString("media-type", "font/opentype/");
-                                opf.WriteEndElement(); // item
-                                fontNum++;
-                            }
-                        }
-                    }
-                }
-            }
-            var listIdRef = new List<string>();
-            int counterSet = 1;
-            string idRefValue;
-            // now add the xhtml files to the manifest
-            string[] files = Directory.GetFiles(contentFolder);
-            foreach (string file in files)
-            {
-                // iterate through the file set and add <item> elements for each xhtml file
-                string name = Path.GetFileName(file);
-                Debug.Assert(name != null);
-                string nameNoExt = Path.GetFileNameWithoutExtension(file);
-
-                if (name.EndsWith(".xhtml"))
-                {
-                    // is this the cover page?
-                    if (name.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
-                    {
-                        // yup - write it out and go to the next item
-                        opf.WriteStartElement("item");
-                        opf.WriteAttributeString("id", "cover");
-                        opf.WriteAttributeString("href", name);
-                        opf.WriteAttributeString("media-type", "application/xhtml+xml");
-                        opf.WriteEndElement(); // item
-                        continue;
-                    }
-
-                    // if we can, write out the "user friendly" book name in the TOC
-                    string fileId = GetBookId(file);
-
-                    if (listIdRef.Contains(fileId))
-                    {
-                        listIdRef.Add(fileId + counterSet.ToString(CultureInfo.InvariantCulture));
-                        idRefValue = fileId + counterSet.ToString(CultureInfo.InvariantCulture);
-                        counterSet++;
-                    }
-                    else
-                    {
-                        listIdRef.Add(fileId);
-                        idRefValue = fileId;
-                    }
-
-                    opf.WriteStartElement("item");
-                    // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
-                    var itemId = InputType == "dictionary" ? nameNoExt : idRefValue;
-                    opf.WriteAttributeString("id", itemId);
-                    opf.WriteAttributeString("href", name);
-                    opf.WriteAttributeString("media-type", "application/xhtml+xml");
-                    opf.WriteEndElement(); // item
-                }
-                else if (name.EndsWith(".css"))
-                {
-                    opf.WriteStartElement("item"); // item (stylesheet)
-                    opf.WriteAttributeString("id", "stylesheet");
-                    opf.WriteAttributeString("href", name);
-                    opf.WriteAttributeString("media-type", "text/css");
-                    opf.WriteEndElement(); // item
-                }
-                else if (name.ToLower().EndsWith(".jpg") || name.ToLower().EndsWith(".jpeg"))
-                {
-                    opf.WriteStartElement("item"); // item (image)
-                    opf.WriteAttributeString("id", "image" + nameNoExt);
-                    opf.WriteAttributeString("href", name);
-                    if (nameNoExt != null && nameNoExt.Contains("sil-bw-logo"))
-                    {
-                        opf.WriteAttributeString("media-type", "image/png");    
-                    }
-                    else
-                    {
-                        opf.WriteAttributeString("media-type", "image/jpeg");    
-                    }
-                    
-                    opf.WriteEndElement(); // item
-                }
-                else if (name.ToLower().EndsWith(".gif"))
-                {
-                    opf.WriteStartElement("item"); // item (image)
-                    opf.WriteAttributeString("id", "image" + nameNoExt);
-                    opf.WriteAttributeString("href", name);
-                    opf.WriteAttributeString("media-type", "image/gif");
-                    opf.WriteEndElement(); // item
-                }
-                else if (name.ToLower().EndsWith(".png"))
-                {
-                    opf.WriteStartElement("item"); // item (image)
-                    opf.WriteAttributeString("id", "image" + nameNoExt);
-                    opf.WriteAttributeString("href", name);
-                    opf.WriteAttributeString("media-type", "image/png");
-                    opf.WriteEndElement(); // item
-                }
-            }
-            opf.WriteEndElement(); // manifest
-            // spine
-            opf.WriteStartElement("spine");
-            opf.WriteAttributeString("toc", "ncx");
-            // a couple items for the cover image
-            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
-            {
-                opf.WriteStartElement("itemref");
-                opf.WriteAttributeString("idref", "cover");
-                opf.WriteAttributeString("linear", "yes");
-                opf.WriteEndElement(); // itemref
-            }
-
-            listIdRef = new List<string>();
-            counterSet = 1;
-            foreach (string file in files)
-            {
-                // is this the cover page?
-                var fileName = Path.GetFileName(file);
-                Debug.Assert(fileName != null);
-                if (fileName.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
-                {
-                    continue;
-                }
-                // add an <itemref> for each xhtml file in the set
-                if (fileName.EndsWith(".xhtml"))
-                {
-                    string fileId = GetBookId(file);
-                    if (listIdRef.Contains(fileId))
-                    {
-                        var counter = counterSet.ToString(CultureInfo.InvariantCulture);
-                        listIdRef.Add(fileId + counter);
-                        idRefValue = fileId + counter;
-                        counterSet++;
-                    }
-                    else
-                    {
-                        listIdRef.Add(fileId);
-                        idRefValue = fileId;
-                    }
-
-
-                    opf.WriteStartElement("itemref"); // item (stylesheet)
-                    // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
-                    var idRef = InputType == "dictionary" ? Path.GetFileNameWithoutExtension(file) : idRefValue;
-                    opf.WriteAttributeString("idref", idRef);
-                    opf.WriteEndElement(); // itemref
-                }
-            }
-            opf.WriteEndElement(); // spine
-            // guide
-            opf.WriteStartElement("guide");
-            // cover image
-            if (Param.GetMetadataValue(Param.CoverPage).Trim().Equals("True"))
-            {
-                opf.WriteStartElement("reference");
-                opf.WriteAttributeString("href", "File0Cvr00000_.xhtml");
-                opf.WriteAttributeString("type", "cover");
-                opf.WriteAttributeString("title", "Cover");
-                opf.WriteEndElement(); // reference
-            }
-            // first xhtml filename
-            opf.WriteStartElement("reference");
-            opf.WriteAttributeString("type", "text");
-            opf.WriteAttributeString("title", Common.databaseName + " " + projInfo.ProjectName);
-            int index = 0;
-            while (index < files.Length)
-            {
-                if (files[index].EndsWith(".xhtml"))
-                {
-                    break;
-                }
-                index++;
-            }
-            if (index == files.Length) index--; // edge case
-            opf.WriteAttributeString("href", Path.GetFileName(files[index]));
-            opf.WriteEndElement(); // reference
-            opf.WriteEndElement(); // guide
-            opf.WriteEndElement(); // package
-            opf.WriteEndDocument();
-            opf.Close();
-        }
-
-        /// <summary>
-        /// Creates the table of contents file used by .epub readers (toc.ncx).
-        /// </summary>
-        /// <param name="projInfo">project information</param>
-        /// <param name="contentFolder">the content folder (../OEBPS)</param>
-        /// <param name="bookId">Unique identifier for the book we're creating</param>
-        private void CreateNcx(PublicationInformation projInfo, string contentFolder, Guid bookId)
-        {
-            // toc.ncx
-            string tocFullPath = Common.PathCombine(contentFolder, "toc.ncx");
-            XmlWriter ncx = XmlWriter.Create(tocFullPath);
-            ncx.WriteStartDocument();
-            ncx.WriteStartElement("ncx", "http://www.daisy.org/z3986/2005/ncx/");
-            ncx.WriteAttributeString("version", "2005-1");
-            ncx.WriteStartElement("head");
-            ncx.WriteStartElement("meta");
-            ncx.WriteAttributeString("name", "dtb:uid");
-            ncx.WriteAttributeString("content", bookId.ToString());
-            ncx.WriteEndElement(); // meta
-            ncx.WriteStartElement("meta");
-            ncx.WriteAttributeString("name", "epub-creator");
-            ncx.WriteAttributeString("content", Common.GetProductName());
-            ncx.WriteEndElement(); // meta
-            ncx.WriteStartElement("meta");
-            ncx.WriteAttributeString("name", "dtb:depth");
-            ncx.WriteAttributeString("content", "1");
-            ncx.WriteEndElement(); // meta
-            ncx.WriteStartElement("meta");
-            ncx.WriteAttributeString("name", "dtb:totalPageCount");
-            ncx.WriteAttributeString("content", "0"); // TODO: (is this possible?)
-            ncx.WriteEndElement(); // meta
-            ncx.WriteStartElement("meta");
-            ncx.WriteAttributeString("name", "dtb:maxPageNumber");
-            ncx.WriteAttributeString("content", "0"); // TODO: is this info available?
-            ncx.WriteEndElement(); // meta
-            ncx.WriteEndElement(); // head
-            ncx.WriteStartElement("docTitle");
-            ncx.WriteElementString("text", projInfo.ProjectName);
-            ncx.WriteEndElement(); // docTitle
-            ncx.WriteStartElement("navMap");
-            // individual navpoint elements (one for each xhtml)
-            string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
-            bool isMainOpen = false;
-            bool isMainSubOpen = false;
-            bool isRevOpen = false;
-            bool isRevSubOpen = false;
-            bool isScriptureSubOpen = false;
-            int index = 1;
-            bool skipChapterInfo = TocLevel.StartsWith("1");
-            foreach (string file in files)
-            {
-                string name = Path.GetFileName(file);
-                Debug.Assert(name != null);
-                string bookName = GetBookName(file);
-                if (name.IndexOf("File", StringComparison.Ordinal) == 0 && name.IndexOf("TOC", StringComparison.Ordinal) == -1)
-                {
-                    WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
-                    index++;
-                    // chapters within the books (nested as a subhead)
-                    if (!skipChapterInfo)
-                    {
-                        WriteChapterLinks(file, ref index, ncx);
-                    }
-                    // end the book's navPoint element
-                    ncx.WriteEndElement(); // navPoint
-                }
-                else
-                {
-                    if (name.IndexOf("TOC", StringComparison.Ordinal) != -1)
-                    {
-                        WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
-                        index++;
-                    }
-                    if (InputType.ToLower() == "dictionary")
-                    {
-                        if (name.Contains("PartFile"))
-                        {
-                            if (!isMainOpen)
-                            {
-                                isMainOpen = true;
-                            }
-                            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-                            if (fileNameWithoutExtension != null && (fileNameWithoutExtension.EndsWith("_") ||
-                                                                                   fileNameWithoutExtension.EndsWith("_01")))
-                            {
-                                if (isMainSubOpen)
-                                {
-                                    ncx.WriteEndElement(); // navPoint
-                                }
-                                WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
-                                index++;
-                                isMainSubOpen = true;
-                            }
-                            if (!skipChapterInfo)
-                            {
-                                WriteChapterLinks(file, ref index, ncx);
-                            }
-                        }
-                        else if (name.Contains("RevIndex"))
-                        {
-                            if (isMainOpen)
-                            {
-                                ncx.WriteEndElement(); // navPoint Main
-                                isMainSubOpen = false;
-                                isMainOpen = false;
-                            }
-                            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-                            if (fileNameWithoutExtension != null && (fileNameWithoutExtension.EndsWith("_") ||
-                                                                                   fileNameWithoutExtension.EndsWith("_01")))
-                            {
-                                if (isRevSubOpen)
-                                {
-                                    ncx.WriteEndElement(); // navPoint
-                                }
-                                if (!isRevOpen)
-                                {
-                                    isRevOpen = true;
-                                }
-                                WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
-                                index++;
-                                isRevSubOpen = true;
-                            }
-                            if (!skipChapterInfo)
-                            {
-                                WriteChapterLinks(file, ref index, ncx);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-                        if (fileNameWithoutExtension != null && (name.IndexOf("TOC", StringComparison.Ordinal) == -1 &&
-                                                                               (fileNameWithoutExtension.EndsWith("_") ||
-                                                                                fileNameWithoutExtension.EndsWith("_01"))))
-                        {
-                            if (isScriptureSubOpen)
-                            {
-                                ncx.WriteEndElement(); // navPoint
-                            }
-                            bookName = GetBookName(file);
-                            ncx.WriteStartElement("navPoint");
-                            ncx.WriteAttributeString("id", "dtb:uid");
-                            ncx.WriteAttributeString("playOrder", index.ToString(CultureInfo.InvariantCulture));
-                            ncx.WriteStartElement("navLabel");
-                            ncx.WriteElementString("text", bookName);
-                            ncx.WriteEndElement(); // navlabel
-                            ncx.WriteStartElement("content");
-                            ncx.WriteAttributeString("src", name);
-                            ncx.WriteEndElement(); // meta
-                            index++;
-                            // chapters within the books (nested as a subhead)
-                            if (!skipChapterInfo)
-                            {
-                                WriteChapterLinks(file, ref index, ncx);
-                            }
-                            isScriptureSubOpen = true;
-                        }
-                        else if (name.IndexOf("zzReference", StringComparison.Ordinal) == 0)
-                        {
-                            if (isScriptureSubOpen)
-                            {
-                                ncx.WriteEndElement(); // navPoint
-                            }
-                            ncx.WriteStartElement("navPoint");
-                            ncx.WriteAttributeString("id", "dtb:uid");
-                            ncx.WriteAttributeString("playOrder", index.ToString(CultureInfo.InvariantCulture));
-                            ncx.WriteStartElement("navLabel");
-                            ncx.WriteElementString("text", "End Notes");
-                            ncx.WriteEndElement(); // navlabel
-                            ncx.WriteStartElement("content");
-                            ncx.WriteAttributeString("src", name);
-                            ncx.WriteEndElement(); // meta
-                            index++;
-                            // chapters within the books (nested as a subhead)
-                            if (!skipChapterInfo)
-                            {
-                                WriteEndNoteLinks(file, ref index, ncx);
-                            }
-                        }
-                        else
-                        {
-                            if (!skipChapterInfo)
-                            {
-                                WriteChapterLinks(file, ref index, ncx);
-                            }
-                        }
-                    }
-                }
-
-            }
-            if (isRevOpen && InputType.ToLower() == "dictionary")
-            {
-                // end the book's navPoint element
-                ncx.WriteEndElement(); // navPoint TOC
-            }
-            if (isScriptureSubOpen)
-            {
-                ncx.WriteEndElement(); // navPoint
-            }
-            ncx.WriteEndElement(); // navPoint TOC
-            ncx.WriteEndElement(); // navmap
-            ncx.WriteEndDocument();
-            ncx.Close();
-            FixPlayOrder(tocFullPath);
-            if (InputType.ToLower() == "dictionary")
-            {
-                Common.ApplyXslt(tocFullPath, _addDicTocHeads);
-            }
-            Common.ApplyXslt(tocFullPath, _fixEpubToc);
-            FixPlayOrder(tocFullPath);
-        }
 
         private void AddDtdInXhtml(string contentFolder)
         {
@@ -3619,380 +2299,8 @@ namespace SIL.PublishingSolution
                 Common.AddingDTDForLinuxProcess(file);
             }
         }
-        private void FixPlayOrder(string tocFullPath)
-        {
-            // Renumber all PlayOrder attributes in order with no gaps.
-            XmlTextReader reader = Common.DeclareXmlTextReader(tocFullPath, true);
-            var tocDoc = new XmlDocument();
-            tocDoc.Load(reader);
-            reader.Close();
-            var nodes = tocDoc.SelectNodes("//@playOrder");
-            Debug.Assert(nodes != null);
-            int n = 1;
-            foreach (XmlAttribute node in nodes)
-            {
-                node.InnerText = n.ToString(CultureInfo.InvariantCulture);
-                n += 1;
-            }
 
-            if (_isUnixOs)
-            {
-                nodes = tocDoc.SelectNodes("//@id");
-                Debug.Assert(nodes != null);
-                n = 1;
-                foreach (XmlAttribute node in nodes)
-                {
-                    node.InnerText = node.InnerText + n.ToString(CultureInfo.InvariantCulture);
-                    n += 1;
-                }
-            }
-
-            var xmlFile = new FileStream(tocFullPath, FileMode.Create);
-            XmlWriter writer = XmlWriter.Create(xmlFile);
-            tocDoc.Save(writer);
-            xmlFile.Close();
-        }
-
-        private void WriteNavPoint(XmlWriter ncx, string index, string text, string name)
-        {
-            ncx.WriteStartElement("navPoint");
-            ncx.WriteAttributeString("id", "dtb:uid");
-            ncx.WriteAttributeString("playOrder", index);
-            ncx.WriteStartElement("navLabel");
-            ncx.WriteElementString("text", text);
-            ncx.WriteEndElement(); // navlabel
-            ncx.WriteStartElement("content");
-            ncx.WriteAttributeString("src", name);
-            ncx.WriteEndElement(); // meta
-        }
-
-        /// <summary>
-        /// Writes the chapter links out to the specified XmlWriter (the .ncx file).
-        /// </summary>
-        /// <returns>List of url strings</returns>
-        private void WriteChapterLinks(string xhtmlFileName, ref int playOrder, XmlWriter ncx)
-        {
-            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
-            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
-            var xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            bool isSectionHead = false, isChapterNumber = false, isVerseNumber = false;
-            string sectionHead = string.Empty, fromChapterNumber = string.Empty, firstVerseNumber = string.Empty, lastVerseNumber = string.Empty;
-            var divClass = InputType == "dictionary" ? "entry" : "scrBook";
-            var xPath = string.Format("//xhtml:div[@class='{0}']", divClass);
-            XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
-            if (nodes != null && nodes.Count > 0)
-            {
-                var sb = new StringBuilder();
-                string name = Path.GetFileName(xhtmlFileName);
-                foreach (XmlNode node in nodes)
-                {
-                    string textString = string.Empty;
-                    if (InputType.Equals("dictionary"))
-                    {
-                        sb.Append(name);
-                        sb.Append("#");
-                        XmlNode val = null;
-                        if (node.Attributes != null && node.Attributes["id"] != null)
-                        {
-                            val = node.Attributes["id"];
-                        }
-                        if (val != null)
-                            sb.Append(val.Value);
-
-                        // for a dictionary, the headword / headword-minor is the label
-                        if (!node.HasChildNodes)
-                        {
-                            // reset the stringbuilder
-                            sb.Length = 0;
-                            // This entry doesn't have any information - skip it
-                            continue;
-                        }
-                        const string headwordXPath = ".//xhtml:span[@class='headword']";
-                        XmlNode headwordNode = node.SelectSingleNode(headwordXPath, namespaceManager);
-                        textString = headwordNode != null ? headwordNode.InnerText : node.FirstChild.InnerText;
-
-                        if (textString.Trim().Length > 0)
-                        {
-                            // write out the node
-                            ncx.WriteStartElement("navPoint");
-                            ncx.WriteAttributeString("id", "dtb:uid");
-                            ncx.WriteAttributeString("playOrder", playOrder.ToString(CultureInfo.InvariantCulture));
-                            ncx.WriteStartElement("navLabel");
-                            ncx.WriteElementString("text", textString);
-                            ncx.WriteEndElement(); // navlabel
-                            ncx.WriteStartElement("content");
-                            ncx.WriteAttributeString("src", sb.ToString());
-                            ncx.WriteEndElement(); // meta
-                            playOrder++;
-                        }
-
-                        // If this is a dictionary with TOC level 3, gather the senses for this entry
-                        if (InputType.Equals("dictionary") && TocLevel.StartsWith("3"))
-                        {
-                            // see if there are any senses to add to this entry
-                            XmlNodeList childNodes = node.SelectNodes(".//xhtml:span[@class='sense']", namespaceManager);
-                            if (childNodes != null)
-                            {
-                                sb.Length = 0;
-                                foreach (XmlNode childNode in childNodes)
-                                {
-                                    // for a dictionary, the grammatical-info//partofspeech//span is the label
-                                    if (!childNode.HasChildNodes)
-                                    {
-                                        // reset the stringbuilder
-                                        sb.Length = 0;
-                                        // This entry doesn't have any information - skip it
-                                        continue;
-                                    }
-
-                                    if (childNode.HasChildNodes && childNode.FirstChild != null && childNode.FirstChild.FirstChild != null)
-                                        textString = childNode.FirstChild.FirstChild.InnerText;
-                                    sb.Append(name);
-                                    sb.Append("#");
-                                    if (childNode.Attributes != null && childNode.Attributes["id"] != null)
-                                    {
-                                        sb.Append(childNode.Attributes["id"].Value);
-                                    }
-                                    // write out the node
-                                    ncx.WriteStartElement("navPoint");
-                                    ncx.WriteAttributeString("id", "dtb:uid");
-                                    ncx.WriteAttributeString("playOrder", playOrder.ToString(CultureInfo.InvariantCulture));
-                                    ncx.WriteStartElement("navLabel");
-                                    ncx.WriteElementString("text", textString);
-                                    ncx.WriteEndElement(); // navlabel
-                                    ncx.WriteStartElement("content");
-                                    ncx.WriteAttributeString("src", sb.ToString());
-                                    ncx.WriteEndElement(); // meta
-                                    ncx.WriteEndElement(); // navPoint
-                                    // reset the stringbuilder
-                                    sb.Length = 0;
-                                    playOrder++;
-                                }
-                            }
-                        }
-                        if (textString.Trim().Length > 0)
-                        {
-                            ncx.WriteEndElement(); // navPoint
-                        }
-                    }
-                    else // Scripture
-                    {
-                        using (XmlReader reader = XmlReader.Create(new StringReader(node.OuterXml)))
-                        {
-                            // Parse the file and display each of the nodes.
-                            while (reader.Read())
-                            {
-                                switch (reader.NodeType)
-                                {
-                                    case XmlNodeType.Element:
-                                        string className = reader.GetAttribute("class");
-                                        if (className == "Section_Head")
-                                        {
-                                            if (fromChapterNumber == _currentChapterNumber)
-                                            {
-                                                textString = textString + "-" + lastVerseNumber + ")";
-                                            }
-                                            else
-                                            {
-                                                textString = textString + "-" + _currentChapterNumber + ":" +
-                                                               lastVerseNumber + ")";
-                                            }
-                                            if (textString.Trim().Length >= 4)
-                                            {
-                                                // write out the node
-                                                ncx.WriteStartElement("navPoint");
-                                                ncx.WriteAttributeString("id", "dtb:uid");
-                                                ncx.WriteAttributeString("playOrder", playOrder.ToString(CultureInfo.InvariantCulture));
-                                                ncx.WriteStartElement("navLabel");
-                                                ncx.WriteElementString("text", textString);
-                                                ncx.WriteEndElement(); // navlabel
-                                                ncx.WriteStartElement("content");
-                                                ncx.WriteAttributeString("src", sb.ToString());
-                                                ncx.WriteEndElement(); // meta
-                                                playOrder++;
-                                                sb.Length = 0;
-                                            }
-                                            if (reader.GetAttribute("id") != null)
-                                            {
-                                                sb.Append(name);
-                                                sb.Append("#");
-                                                sb.Append(reader.GetAttribute("id"));
-                                            }
-                                            if (textString.Trim().Length >= 4)
-                                            {
-                                                ncx.WriteEndElement(); // navPoint
-                                            }
-                                            textString = string.Empty;
-                                            firstVerseNumber = string.Empty;
-                                            isSectionHead = true;
-                                        }
-                                        else if (className == "Chapter_Number")
-                                        {
-                                            isChapterNumber = true;
-                                        }
-                                        else if (className != null && className.IndexOf("Verse_Number", StringComparison.Ordinal) == 0)
-                                        {
-                                            isVerseNumber = true;
-                                        }
-                                        break;
-                                    case XmlNodeType.Text:
-                                        if (isSectionHead)
-                                        {
-                                            sectionHead = reader.Value;
-                                            isSectionHead = false;
-                                        }
-                                        if (isChapterNumber)
-                                        {
-                                            _currentChapterNumber = reader.Value;
-                                            isChapterNumber = false;
-                                        }
-                                        if (isVerseNumber)
-                                        {
-                                            if (firstVerseNumber.Trim().Length == 0 && sectionHead.Length > 0)
-                                            {
-                                                firstVerseNumber = reader.Value;
-                                                fromChapterNumber = _currentChapterNumber;
-                                                textString = sectionHead + "(" + _currentChapterNumber + ":" + firstVerseNumber;
-                                            }
-                                            lastVerseNumber = reader.Value;
-                                            isVerseNumber = false;
-                                        }
-                                        break;
-                                    case XmlNodeType.XmlDeclaration:
-                                    case XmlNodeType.ProcessingInstruction:
-                                        break;
-                                    case XmlNodeType.Comment:
-                                        break;
-                                    case XmlNodeType.EndElement:
-                                        break;
-                                }
-                            }
-                        }
-                    }
-                    // reset the stringbuilder
-                    sb.Length = 0;
-                }
-            }
-        }
-
-
-        private void WriteEndNoteLinks(string xhtmlFileName, ref int playOrder, XmlWriter ncx)
-        {
-            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
-            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
-            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            bool isanchor = false, isBookName = false, isNoteTargetReference = false, isList = false;
-            string anchorValue = string.Empty, bookNameValue = string.Empty;
-            XmlNodeList nodes = xmlDocument.SelectNodes("//xhtml:li", namespaceManager);
-
-            if (nodes != null && nodes.Count > 0)
-            {
-                var sb = new StringBuilder();
-                string name = Path.GetFileName(xhtmlFileName);
-                foreach (XmlNode node in nodes)
-                {
-                    string textString = string.Empty;
-                    using (XmlReader reader = XmlReader.Create(new StringReader(node.OuterXml)))
-                    {
-                        // Parse the file and display each of the nodes.
-                        while (reader.Read())
-                        {
-                            switch (reader.NodeType)
-                            {
-                                case XmlNodeType.Element:
-                                    string className = reader.GetAttribute("class");
-                                    if (reader.Name == "a")
-                                    {
-                                        isanchor = true;
-                                    }
-                                    else if (reader.Name == "li")
-                                    {
-                                        if (reader.GetAttribute("id") != null)
-                                        {
-                                            sb.Append(name);
-                                            sb.Append("#");
-                                            sb.Append(reader.GetAttribute("id"));
-                                        }
-                                        isList = true;
-                                    }
-                                    else if (className == "BookName")
-                                    {
-                                        isBookName = true;
-                                    }
-                                    else if (className == "Note_Target_Reference")
-                                    {
-                                        isNoteTargetReference = true;
-                                    }
-                                    break;
-                                case XmlNodeType.Text:
-                                    if (isanchor)
-                                    {
-                                        anchorValue = reader.Value;
-                                        isanchor = false;
-                                    }
-                                    else if (isList)
-                                    {
-                                        //ListValue = reader.GetAttribute("id");
-                                    }
-                                    if (isBookName)
-                                    {
-                                        bookNameValue = reader.Value;
-                                        isBookName = false;
-                                    }
-                                    if (isNoteTargetReference)
-                                    {
-                                        if (anchorValue.Trim().Length > 0 && bookNameValue.Trim().Length > 0)
-                                        {
-                                            textString = anchorValue + " " + bookNameValue + " " + reader.Value;
-                                        }
-                                        if (textString.Trim().Length > 0)
-                                        {
-                                            // write out the node
-                                            ncx.WriteStartElement("navPoint");
-                                            ncx.WriteAttributeString("id", "dtb:uid");
-                                            ncx.WriteAttributeString("playOrder", playOrder.ToString(CultureInfo.InvariantCulture));
-                                            ncx.WriteStartElement("navLabel");
-                                            ncx.WriteElementString("text", textString);
-                                            ncx.WriteEndElement(); // navlabel
-                                            ncx.WriteStartElement("content");
-                                            ncx.WriteAttributeString("src", sb.ToString());
-                                            ncx.WriteEndElement(); // meta
-                                            playOrder++;
-                                            sb.Length = 0;
-                                        }
-
-                                        if (textString.Trim().Length > 4)
-                                        {
-                                            ncx.WriteEndElement(); // navPoint
-                                        }
-                                        isNoteTargetReference = false;
-                                    }
-                                    break;
-                                case XmlNodeType.XmlDeclaration:
-                                case XmlNodeType.ProcessingInstruction:
-                                    break;
-                                case XmlNodeType.Comment:
-                                    break;
-                                case XmlNodeType.EndElement:
-                                    break;
-                            }
-                        }
-
-                    }
-                    // reset the stringbuilder
-                    sb.Length = 0;
-                }
-            }
-        }
-
+        #region EPUB metadata handlers
 
         protected void InsertChapterLinkBelowBookName(string contentFolder)
         {
@@ -4164,8 +2472,6 @@ namespace SIL.PublishingSolution
 
             return PageBreak;
         }
-
-
         #endregion
 
         #endregion

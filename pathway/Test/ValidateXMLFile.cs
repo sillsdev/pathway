@@ -52,7 +52,7 @@ namespace Test
             string outputPath = Common.PathCombine(testPath, "output");
             string expectedPath = Common.PathCombine(testPath, "Expected");
             expectedPath = Common.PathCombine(expectedPath, "BuangExpect");
-            Common.CopyOfficeFolder(expectedPath, outputPath);
+            Common.CopyFolderandSubFolder(expectedPath, outputPath, true);
         }
         public bool ValidateNodeAttribute()
         {

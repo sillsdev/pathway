@@ -232,7 +232,7 @@ namespace SIL.PublishingSolution
             XmlNodeList baseNode1 = Param.GetItems("//styles/web/style[@name='" + "OneWeb" + "']/styleProperty");
             HashUtilities hashUtil = new HashUtilities();
             hashUtil.Key = "%:#@?,*&";
-
+            hashUtil.Salt = "$%^&*#$%";
             // show/hide web UI controls based on the input type
 
             foreach (XmlNode VARIABLE in baseNode1)

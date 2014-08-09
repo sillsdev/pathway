@@ -36,8 +36,7 @@ namespace Test.XeLatex
         private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
-        private string _testFolderPath = string.Empty;
-        ExportXeLaTex _xeLaTex = new ExportXeLaTex();
+        private bool _isLinux;
         private PublicationInformation _projInfo;
         private Dictionary<string, List<string>> _classInlineStyle;
         Dictionary<string, string> _langFontCodeandName = new Dictionary<string, string>();
@@ -51,12 +50,20 @@ namespace Test.XeLatex
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
-
+            _isLinux = Common.IsUnixOS();
             _projInfo = new PublicationInformation();
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/XeLatex/TestFiles");
             _inputPath = Common.PathCombine(testPath, "input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "Expected");
+
+            if (_isLinux)
+            {
+                _expectedPath = Common.PathCombine(testPath, "LinuxExpected");
+            }
+            else
+            {
+                _expectedPath = Common.PathCombine(testPath, "Expected");
+            }
 
             if (Directory.Exists(_outputPath))
                 Directory.Delete(_outputPath, true);

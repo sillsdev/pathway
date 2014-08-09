@@ -260,8 +260,7 @@ namespace SIL.Tool
         public static bool ShowMessage; // Show or Suppress MessageBox in Creating Zip Folder.
 
         #endregion
-
-
+        
         #region FillName(string cssFileWithPath)
 
         /// -------------------------------------------------------------------------------------------
@@ -344,76 +343,7 @@ namespace SIL.Tool
         }
 
         #endregion
-
-
-
-        //#region FillName(string cssFileWithPath)
-        ///// -------------------------------------------------------------------------------------------
-        ///// <summary>
-        ///// This method collects css files names into ArrayList based on base CSS File.
-        ///// <param name="cssFileWithPath">Its gets the file path of the CSS File</param>
-        ///// <returns>ArrayList contains CSS filenames which are used</returns>
-        ///// -------------------------------------------------------------------------------------------
-        //public static ArrayList GetCSSFileNames(string cssFileWithPath, string BaseCssFileWithPath)
-        //{
-        //    ArrayList arrayCSSFile = new ArrayList();
-        //    if (!File.Exists(cssFileWithPath))
-        //    {
-        //        return arrayCSSFile;
-        //    }
-        //    string cssPath = Path.GetDirectoryName(cssFileWithPath);
-        //    string strText;
-        //    var fs = new FileStream(cssFileWithPath, FileMode.Open, FileAccess.Read);
-        //    var sr = new StreamReader(fs);
-        //    try
-        //    {
-        //        if (BaseCssFileWithPath != cssFileWithPath)
-        //        {
-        //            arrayCSSFile.Add(cssFileWithPath);
-        //        }
-        //        while ((strText = sr.ReadLine()) != null)
-        //        {
-        //            if (strText.Contains("@import"))
-        //            {
-        //                string cssFile = strText.Substring((strText.IndexOf('"') + 1), strText.LastIndexOf('"') - (strText.IndexOf('"') + 1));
-        //                if (!File.Exists(PathCombine(cssPath, cssFile)) && SamplePath.Length > 0)
-        //                {
-        //                    string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
-        //                    if (executablePath.Contains("ReSharper") || executablePath.Contains("NUnit"))
-        //                    {
-        //                        //This code will work when this method call from NUnit Test case
-        //                        int binFolderPart = Environment.CurrentDirectory.IndexOf(Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar);
-        //                        executablePath = DirectoryPathReplace(Environment.CurrentDirectory.Substring(0, binFolderPart) + "/ConfigurationTool/TestFiles/input");
-        //                    }
-        //                    else if (executablePath.Contains("FieldWorks 7") || executablePath.Contains("FieldWorks") || executablePath.Contains("ConfigurationTool"))
-        //                    {
-        //                        //Change the path which have the default styles
-        //                        if (!File.Exists(executablePath))
-        //                        {
-        //                            executablePath = Common.GetPSApplicationPath();
-        //                        }
-        //                    }
-        //                    else if (executablePath.Contains("Paratext 7"))
-        //                    {
-        //                        //Change the path which have the default styles
-        //                        string folderName = LeftString(executablePath, "Paratext 7");
-        //                        executablePath = DirectoryPathReplace(PathCombine(folderName, "SIL\\Pathway7"));
-        //                    }
-        //                    cssPath = PathCombine(executablePath, SamplePath);
-        //                }
-        //                arrayCSSFile.AddRange(GetCSSFileNames(PathCombine(cssPath, cssFile), BaseCssFileWithPath));
-        //            }
-        //        }
-        //    }
-        //    finally
-        //    {
-        //        sr.Close();
-        //        fs.Close();
-        //    }
-        //    return arrayCSSFile;
-        //}
-        //#endregion
-
+        
         #region GetTextDirection(string languageCode)
 
         public static string TextDirectionLanguageFile = null; //Set during testing
@@ -439,7 +369,7 @@ namespace SIL.Tool
                         SettingsHelper settingsHelper = new SettingsHelper(Param.DatabaseName);
                         fileName = settingsHelper.GetLanguageFilename();
                     }
-                    foreach (string line in FileData.Get(fileName).Split(new[] {'\n'}))
+                    foreach (string line in FileData.Get(fileName).Split(new[] { '\n' }))
                     {
                         if (line.StartsWith("RTL="))
                         {
@@ -591,7 +521,7 @@ namespace SIL.Tool
                 if (char.IsNumber(changeToChar))
                 {
                     int charValue = Convert.ToInt32(changeToChar) + 49;
-                    c = (char) charValue;
+                    c = (char)charValue;
                 }
                 else
                 {
@@ -1030,6 +960,10 @@ namespace SIL.Tool
             {
                 value = value.Replace("25C6", Common.ConvertUnicodeToString("\\2666")) + " ";
             }
+            if (value.IndexOf("25CF") >= 0 || value.IndexOf("274D") >= 0)
+            {
+                value = value.Replace(value, Common.ConvertUnicodeToString("\\" + value)) + " ";
+            }
             return value;
         }
 
@@ -1204,11 +1138,11 @@ namespace SIL.Tool
                 string attributeUnit = attribute.Substring(counter);
                 if (attributeUnit == "cm")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*0.3937008F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 0.3937008F;
                 }
                 else if (attributeUnit == "pt")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))/72F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 72F;
                 }
             }
             catch
@@ -1249,44 +1183,44 @@ namespace SIL.Tool
 
                 if (attributeUnit == "pcTopt")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*12;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 12;
                 }
                 else if (attributeUnit == "pxTopt")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*0.75F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 0.75F;
                 }
                 else if (attributeUnit == "inTopt")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*72F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 72F;
                 }
                 else if (attributeUnit == "cmTopt")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*28.346456693F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 28.346456693F;
                 }
                 else if (attributeUnit == "cmToin")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*0.3937008F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 0.3937008F;
                 }
                 else if (attributeUnit == "inTocm")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))/0.3937008F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 0.3937008F;
                 }
                 else if (attributeUnit == "ptToin")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))/72F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 72F;
                 }
                 else if (attributeUnit == "ptTocm")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))/28.346456693F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 28.346456693F;
                 }
                 else if (attributeUnit == "pcToin")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))*0.1666666667F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 0.1666666667F;
                 }
 
                 else if (attributeUnit == "exToem")
                 {
-                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"))/2F;
+                    attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 2F;
                 }
 
             }
@@ -1322,19 +1256,19 @@ namespace SIL.Tool
                 }
                 else if (attributeUnit == "pcTopt")
                 {
-                    attributeValue = (attrib*12).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib * 12).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "pxTopt")
                 {
-                    attributeValue = (attrib*0.75F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib * 0.75F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "inTopt")
                 {
-                    attributeValue = (attrib*72F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib * 72F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "cmTopt")
                 {
-                    attributeValue = (attrib*28.346456693F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib * 28.346456693F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "%Topt")
                 {
@@ -1342,35 +1276,35 @@ namespace SIL.Tool
                 }
                 else if (attributeUnit == "emTopt")
                 {
-                    attributeValue = String.Format(CultureInfo.GetCultureInfo("en-US"), "{0}{1}", (attrib*100F), "%");
+                    attributeValue = String.Format(CultureInfo.GetCultureInfo("en-US"), "{0}{1}", (attrib * 100F), "%");
                 }
                 else if (attributeUnit == "cmToin")
                 {
-                    attributeValue = (attrib*0.3937008F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib * 0.3937008F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "inTocm")
                 {
-                    attributeValue = (attrib/0.3937008F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib / 0.3937008F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "ptToin")
                 {
-                    attributeValue = (attrib/72F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib / 72F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "ptTocm")
                 {
-                    attributeValue = (attrib/28.346456693F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib / 28.346456693F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "pcToin")
                 {
-                    attributeValue = (attrib*0.1666666667F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib * 0.1666666667F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "ptTopc")
                 {
-                    attributeValue = (attrib/12).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib / 12).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else if (attributeUnit == "exToem")
                 {
-                    attributeValue = (attrib/2F).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    attributeValue = (attrib / 2F).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
                 else
                 {
@@ -1478,7 +1412,7 @@ namespace SIL.Tool
                             {
                                 // unicode convertion
                                 int decimalvalue = Convert.ToInt32(unicode, 16);
-                                var c = (char) decimalvalue;
+                                var c = (char)decimalvalue;
                                 result += c.ToString();
                             }
                         }
@@ -1520,7 +1454,7 @@ namespace SIL.Tool
                 _units.Add("cm");
                 _units.Add("in");
 
-                var ctrl = ((Control) sender);
+                var ctrl = ((Control)sender);
                 string textValue = ConcateUnit(ctrl);
                 ctrl.Text = textValue;
                 // Page Tab
@@ -1555,7 +1489,7 @@ namespace SIL.Tool
             }
             catch (Exception ex)
             {
-                var msg = new[] {ex.Message};
+                var msg = new[] { ex.Message };
                 LocDB.Message("errInstlFile", ex.Message, msg, LocDB.MessageTypes.Error,
                               LocDB.MessageDefault.First);
             }
@@ -1636,7 +1570,7 @@ namespace SIL.Tool
             for (counter = 0; counter < inputValue.Length; counter++)
             {
                 char character = char.Parse(inputValue.Substring(counter, 1));
-                var val = (int) character;
+                var val = (int)character;
                 if (!((val >= 48 && val <= 57) || val == 43 || val == 45 || val == 46)) // + - 0 to 9 and decimal
                 {
                     break;
@@ -1658,7 +1592,7 @@ namespace SIL.Tool
         /// <returns>absolute value of relavite parameter</returns>
         public static int GetLargerSmaller(float parentFont, string type)
         {
-            var parentFontSize = (int) parentFont;
+            var parentFontSize = (int)parentFont;
 
             int childFontSize = 0;
             if (type == "larger")
@@ -1683,7 +1617,7 @@ namespace SIL.Tool
                 }
                 else if (parentFontSize > 23) // 150%
                 {
-                    childFontSize = (int) Math.Round(parentFontSize + parentFontSize/2F);
+                    childFontSize = (int)Math.Round(parentFontSize + parentFontSize / 2F);
                 }
             }
             else if (type == "smaller")
@@ -1710,7 +1644,7 @@ namespace SIL.Tool
                 }
                 else if (parentFontSize > 34) // 66%
                 {
-                    childFontSize = (int) Math.Round(parentFontSize*0.66F);
+                    childFontSize = (int)Math.Round(parentFontSize * 0.66F);
                 }
             }
             else
@@ -1825,7 +1759,7 @@ namespace SIL.Tool
             int next;
             while ((next = reader.ReadByte()) != -1)
             {
-                byte b = (byte) next;
+                byte b = (byte)next;
                 if (b == searchText[0]) // first char in search text?
                 {
                     // yes - searchText.Length chars into a buffer and compare them
@@ -1888,7 +1822,7 @@ namespace SIL.Tool
                 userFileName = PathCombine(filePath, folderName + ++counter);
             }
             return
-                userFileName.Substring(userFileName.LastIndexOfAny(new char[2] {Path.DirectorySeparatorChar, ':'}) + 1);
+                userFileName.Substring(userFileName.LastIndexOfAny(new char[2] { Path.DirectorySeparatorChar, ':' }) + 1);
         }
 
         #endregion
@@ -1985,7 +1919,7 @@ namespace SIL.Tool
                     }
                     // unicode convertion
                     int decimalValue = Convert.ToInt32(unicode, 16);
-                    var ch = (char) decimalValue;
+                    var ch = (char)decimalValue;
                     result += ch.ToString();
                 }
                 else
@@ -2094,11 +2028,11 @@ namespace SIL.Tool
         public static IEnumerable VersionElements()
         {
             string fieldworksVersionPath = GetFieldworksVersionPath();
-            string[] fieldworksVersions = FileData.Get(fieldworksVersionPath).Split(new[] {'\n'});
+            string[] fieldworksVersions = FileData.Get(fieldworksVersionPath).Split(new[] { '\n' });
             foreach (string fieldworksVersion in fieldworksVersions)
             {
                 if (fieldworksVersion == "") break;
-                string[] element = fieldworksVersion.Trim().Split(new[] {','});
+                string[] element = fieldworksVersion.Trim().Split(new[] { ',' });
                 yield return element;
             }
         }
@@ -2208,13 +2142,13 @@ namespace SIL.Tool
                                                       "Pathway", "WritingSystemStore", out regObj))
                 {
                     Common.SupportFolder = "";
-                    return (string) regObj;
+                    return (string)regObj;
                 }
                 if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
                                                       "Pathway", "WritingSystemStore", out regObj))
                 {
                     Common.SupportFolder = "";
-                    return (string) regObj;
+                    return (string)regObj;
                 }
                 if (IsUnixOS())
                 {
@@ -2491,7 +2425,13 @@ namespace SIL.Tool
             {
                 if (lstDirecorylike.Contains(Path.GetFileName(folderName)))
                 {
-                    Directory.Delete(folderName, true);
+                    try
+                    {
+                        Directory.Delete(folderName, true);
+                    }
+                    catch
+                    {
+                    }
                 }
             }
 
@@ -2609,6 +2549,24 @@ namespace SIL.Tool
             }
         }
 
+        public static void CleanFile(DirectoryInfo di)
+        {
+            try
+            {
+                if (di == null)
+                    return;
+
+                foreach (FileInfo fi in di.GetFiles())
+                {
+                    fi.IsReadOnly = false;
+                    fi.Delete();
+                }
+            }
+            catch
+            {
+            }
+        }
+
         private static void WaitForDirectoryToBecomeEmpty(DirectoryInfo di)
         {
             for (int i = 0; i < 5; i++)
@@ -2616,7 +2574,7 @@ namespace SIL.Tool
                 if (di.GetFileSystemInfos().Length == 0)
                     return;
                 Console.WriteLine(di.FullName + i);
-                System.Threading.Thread.Sleep(50*i);
+                System.Threading.Thread.Sleep(50 * i);
             }
         }
 
@@ -2756,7 +2714,7 @@ namespace SIL.Tool
                 }
                 if (removeMirrorPage)
                 {
-//1893
+                    //1893
                     if (cssFile.IndexOf("Running_Head_Mirrored") >= 0 || cssFile.IndexOf("PageNumber_TopInside") >= 0 ||
                         cssFile.IndexOf("PageNumber_TopOutside") >= 0
                         || cssFile.IndexOf("PageNumber_TopCenter_Mirrored") >= 0 ||
@@ -3029,7 +2987,7 @@ namespace SIL.Tool
             return fontLangMapTemp;
         }
 
-        
+
 
         public static Dictionary<string, string> FillMappedFonts(string wsPath, Dictionary<string, string> fontLangMapTemp)
         {
@@ -3069,7 +3027,7 @@ namespace SIL.Tool
 
             if (File.Exists(userSheet))
                 File.Delete(userSheet);
-            
+
             File.Copy(updatedSheet, userSheet, true);
 
             userSettings.Load(backUpFilePath);
@@ -3114,7 +3072,8 @@ namespace SIL.Tool
         /// </summary>
         /// <param name="sourceFolder"></param>
         /// <param name="destFolder"></param>
-        public static void CopyOfficeFolder(string sourceFolder, string destFolder)
+        /// <param name="copySubFolder"> </param>
+        public static void CopyFolderandSubFolder(string sourceFolder, string destFolder, bool copySubFolder)
         {
             if (Directory.Exists(destFolder))
             {
@@ -3132,15 +3091,65 @@ namespace SIL.Tool
                     File.Copy(file, dest);
                 }
 
-                string[] folders = Directory.GetDirectories(sourceFolder);
-                foreach (string folder in folders)
+                if (copySubFolder)
                 {
-                    string name = Path.GetFileName(folder);
-                    string dest = Common.PathCombine(destFolder, name);
-                    if (name != ".svn")
+                    string[] folders = Directory.GetDirectories(sourceFolder);
+                    foreach (string folder in folders)
                     {
-                        CopyOfficeFolder(folder, dest);
+                        string name = Path.GetFileName(folder);
+                        string dest = Common.PathCombine(destFolder, name);
+                        if (name != ".svn")
+                        {
+                            CopyFolderandSubFolder(folder, dest, true);
+                        }
                     }
+                }
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// To copy HTML, Images and fonts to HTML5 folder and ignore the "ignoreExtns" files
+        /// </summary>
+        /// <param name="sourceFolder"></param>
+        /// <param name="destFolder"></param>
+        /// <param name="ignoreFiles"> </param>
+        public static void CustomizedFileCopy(string sourceFolder, string destFolder, string ignoreFiles)
+        {
+            if (Directory.Exists(destFolder))
+            {
+                var di = new DirectoryInfo(destFolder);
+                Common.CleanDirectory(di);
+            }
+            Directory.CreateDirectory(destFolder);
+            string[] files = Directory.GetFiles(sourceFolder);
+            try
+            {
+                bool isfileIgnore = false;
+                string[] iFiles = ignoreFiles.Split(',');
+
+
+
+
+                foreach (string file in files)
+                {
+                    if (file == null) continue;
+                    foreach (var ifile in iFiles)
+                    {
+                        if (ifile.Trim() == Path.GetFileName(file))
+                        {
+                            isfileIgnore = true;
+                            break;
+                        }
+                        isfileIgnore = false;
+                    }
+                    if (isfileIgnore) continue;
+                    string name = Path.GetFileName(file);
+                    string dest = Common.PathCombine(destFolder, name);
+                    File.Copy(file, dest);
                 }
             }
             catch
@@ -3995,7 +4004,7 @@ namespace SIL.Tool
             return isRecentVersion;
         }
 
-        public static string RemoveDTDForLinuxProcess(string xhtmlFileNameWithPath)
+        public static string RemoveDTDForLinuxProcess(string xhtmlFileNameWithPath, string exportType)
         {
             FileStream fs = new FileStream(xhtmlFileNameWithPath, FileMode.Open);
             StreamReader stream = new StreamReader(fs);
@@ -4020,7 +4029,16 @@ namespace SIL.Tool
                     {
                         int htmlNodeEnd = line.IndexOf(">", htmlNodeStart);
                         string line1 = "<?xml version=\"1.0\" encoding=\"utf-8\"?> <!DOCTYPE html[]>";
-                        line = line1 + "<html" + line.Substring(htmlNodeEnd);
+                        if (exportType == "epub")
+                        {
+                            line = line1 +
+                                   "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\" " +
+                                   line.Substring(htmlNodeEnd);
+                        }
+                        else
+                        {
+                            line = line1 + "<html " + line.Substring(htmlNodeEnd);
+                        }
                         sw2.WriteLine(line);
                         continueProcess = true;
                     }
@@ -4249,7 +4267,7 @@ namespace SIL.Tool
                     }
                 }
             }
-            catch {}
+            catch { }
             return libreofficeVersion;
         }
 
@@ -4350,7 +4368,7 @@ namespace SIL.Tool
             }
             return _isoLanguage;
         }
-        
+
         public static string CopyXmlFileToTempDirectory(string fileName)
         {
             string tempXmlFile = string.Empty;
@@ -4463,7 +4481,7 @@ namespace SIL.Tool
 
                 FileInsertText(cssFileName, cssProperty.ToString());
             }
-            catch{}
+            catch { }
         }
 
         /// <summary>
@@ -4499,6 +4517,20 @@ namespace SIL.Tool
             if (File.Exists(myPath))
                 return myPath;
             return FromRegistry(xslName);
+        }
+
+        public static string ExecuteWebAPIRequest(string apiRequestURL, string postData)
+        {
+            System.Net.WebRequest webRequest = System.Net.WebRequest.Create(apiRequestURL);
+            webRequest.Method = "POST";
+            webRequest.ContentType = "text/html; charset=utf-8";
+            Stream reqStream = webRequest.GetRequestStream();
+            byte[] postArray = Encoding.ASCII.GetBytes(postData);
+            reqStream.Write(postArray, 0, postArray.Length);
+            reqStream.Close();
+            StreamReader sr = new StreamReader(webRequest.GetResponse().GetResponseStream());
+            string responseContent = sr.ReadToEnd();
+            return responseContent;
         }
     }
 }

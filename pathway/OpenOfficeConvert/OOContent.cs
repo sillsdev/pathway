@@ -123,7 +123,7 @@ namespace SIL.PublishingSolution
         private bool _isParaPicture, _isFirstPicture;
         private int _pictureNo;
         private bool _isReversalFile = false;
-
+        private bool _isLinux = false;
 
         public LOContent()
         {
@@ -136,6 +136,7 @@ namespace SIL.PublishingSolution
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass,
             Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
         {
+            _isLinux = Common.UnixVersionCheck();
             OldStyles styleInfo = new OldStyles();
             GetRefFormat(projInfo, idAllClass);
             SetReversalFile(projInfo);
@@ -1161,7 +1162,7 @@ namespace SIL.PublishingSolution
                 if (organization.StartsWith("SIL"))
                 {
                     logoName = _projInfo.ProjectInputType.ToLower() == "dictionary"
-                                   ? "sil-bw-logo.jpg"
+                                   ? "2014_sil_logo.png"
                                    : "WBT_H_RGB_red.png";
                 }
                 else if (organization.StartsWith("Wycliffe"))
@@ -1171,7 +1172,7 @@ namespace SIL.PublishingSolution
 
                 string height = "19.575pt";
                 string width = "67.5pt";
-                if (logoName.ToLower().StartsWith("sil"))
+                if (logoName.ToLower().Contains("sil"))
                 {
                     height = "50pt";
                     width = "50pt";
@@ -1716,7 +1717,16 @@ namespace SIL.PublishingSolution
             }
 
             TableClose();
-            SectionClose(closeChild);
+
+            if (_isLinux)
+            {
+                SectionClose(_closeChildName);
+            }
+            else
+            {
+                SectionClose(closeChild);
+            }
+
             ClosefooterNote();
             bool isImageEnd = EndElementForImage();
             EndElementBase(isImageEnd); //Note: base class
@@ -3131,7 +3141,6 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Left_Guideword_L");
             _writer.WriteEndElement();
-            _writer.WriteStartElement("text:variable-decls");
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
@@ -3161,7 +3170,6 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Right_Guideword_R");
-            _writer.WriteEndElement();
             _writer.WriteEndElement();
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");

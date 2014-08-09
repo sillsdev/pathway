@@ -153,7 +153,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.SIL_Logo_No_Tag_Color;
+            this.pictureBox1.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources._2014_sil_logo;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(19, 22);
             this.pictureBox1.Name = "pictureBox1";

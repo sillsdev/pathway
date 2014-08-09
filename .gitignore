@@ -106,7 +106,8 @@ pathway/YouVersionConvert/bin/*
 pathway/YouVersionConvert/obj/*
 pathway/epubConvert/bin/*
 pathway/epubConvert/obj/*
-pathway/epubValidator/*
+pathway/epubValidator/bin/*
+pathway/epubValidator/obj/*
 pathway/SwordConvert/bin/*
 pathway/SwordConvert/obj/*
 pathway/Test/ApplyXslt/TestFiles/output/*
