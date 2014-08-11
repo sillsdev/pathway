@@ -15,16 +15,12 @@
     </xsl:template>
     
     <xsl:template match = "book">
-      <xsl:choose>
-        <xsl:when test="not(string(.))">
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="following-sibling::*[1][not(self::book)]" mode="book"/>
-          </xsl:copy>
-        </xsl:otherwise>
-      </xsl:choose>
+        <xsl:if test="not(local-name(following-sibling::*[1]) = 'book')">
+            <xsl:copy>
+                <xsl:copy-of select="@*"/>
+                <xsl:apply-templates select="following-sibling::*[1][not(self::book)]" mode="book"/>
+            </xsl:copy>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match = "*" mode="book">
