@@ -12,11 +12,9 @@ namespace ApplyPDFLicenseInfo
 
         static void Main(string[] args)
         {
-            bool isUnix = false;
             Console.WriteLine("running.....");
             string allUserPath = GetAllUserPath();
-            string licenseFileName = ReadPathinLicenseFile(allUserPath);
-
+            ReadPathinLicenseFile(allUserPath);
             if (_readLicenseFilesBylines.Count < 0)
             {
                 return;
@@ -36,7 +34,7 @@ namespace ApplyPDFLicenseInfo
                 exportTitle = "ExportPdf";
 
             exportTitle = exportTitle.Replace(" ", "_") + ".pdf";
-            exportTitle = Path.Combine(workingDirectory, exportTitle);
+            if (workingDirectory != null) exportTitle = Path.Combine(workingDirectory, exportTitle);
             string licencePdfFile = pdfFileName.Replace(".pdf", "1.pdf");
 
             ShowPDFFile(licencePdfFile, exportTitle, commonTesting, pdfFileName);
@@ -48,13 +46,20 @@ namespace ApplyPDFLicenseInfo
                 Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout.css", string.Empty);
                 LoadParameters(inputType);
                 CreateRAMP(xhtmlFile, inputType);
+                Common.CleanupExportFolder(xhtmlFile, ".xhtml,.xml,.css", "layout.css", string.Empty);
             }
             if (creatorTool.ToLower().Contains("prince"))
             {
                 string cleanExtn = ".tmp,.de,.exe,.jar,.xml";
                 Common.CleanupExportFolder(xhtmlFile, cleanExtn, "layout.css", string.Empty);
                 LoadParameters(inputType);
-                CreateRAMP(xhtmlFile, inputType);
+                xhtmlFile = xhtmlFile.Replace(".pdf", ".xhtml");
+                if (File.Exists(xhtmlFile))
+                {
+                    CreateRAMP(xhtmlFile, inputType);
+                    cleanExtn = ".xhtml,.xml,.css";
+                    Common.CleanupExportFolder(xhtmlFile, cleanExtn, "layout.css", string.Empty);
+                }
             }
         }
 
@@ -75,7 +80,8 @@ namespace ApplyPDFLicenseInfo
             }
             else
             {
-                File.Copy(pdfFileName, exportTitle, true);
+                if(pdfFileName != exportTitle)
+                    File.Copy(pdfFileName, exportTitle, true);
 
                 if (commonTesting.ToLower().Contains("false"))
                 {
@@ -87,7 +93,7 @@ namespace ApplyPDFLicenseInfo
                 }
             }
 
-            if (File.Exists(pdfFileName) && File.Exists(exportTitle))
+            if (File.Exists(pdfFileName) && File.Exists(exportTitle) && pdfFileName != exportTitle)
             {
                 File.Delete(pdfFileName);
             }
