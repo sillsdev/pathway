@@ -25,25 +25,25 @@
 }
 
 .Inscription_Paragraph {
-    font-size: 10pt;	/* cascaded environment */
+    font-size: 12pt;	/* cascaded environment */
     line-height: 14pt;
     -ps-fixed-line-height: 14pt;
 }
 
 .Intro_List_Item1 {
-    font-size: 10pt;	/* cascaded environment */
+    font-size: 12pt;	/* cascaded environment */
     line-height: 14pt;
     -ps-fixed-line-height: 14pt;
 }
 
 .Intro_Paragraph {
-    font-size: 10pt;	/* cascaded environment */
+    font-size: 12pt;	/* cascaded environment */
     line-height: 14pt;
     -ps-fixed-line-height: 14pt;
 }
 
 .Intro_Section_Head {
-    font-size: 10pt;
+    font-size: 12pt;
     line-height: 14pt;
     -ps-fixed-line-height: 14pt;
 }
@@ -117,13 +117,13 @@
 }
 
 .Section_Head {
-    font-size: 10pt;
+    font-size: 12pt;
     line-height: 14pt;
     -ps-fixed-line-height: 14pt;
 }
 
 .iot{
-    font-size: 10pt;
+    font-size: 12pt;
     line-height: 14pt;
     -ps-fixed-line-height: 14pt;
 }
