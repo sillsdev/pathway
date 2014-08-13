@@ -707,10 +707,13 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Dictionary";
             string styleOutput = GetStyleOutput(file);
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            using (var p = Process.Start(Environment.GetEnvironmentVariable("COMSPEC"), string.Format("/c fc {0} {1} >{2}temp.txt", contentExpected, _projInfo.TempOutputFolder, file)))
+            if (!_isLinux)
             {
-                p.WaitForExit();
-                Debug.Print(FileData.Get(file + "temp.txt"));
+                using (var p = Process.Start(Environment.GetEnvironmentVariable("COMSPEC"), string.Format("/c fc {0} {1} >{2}temp.txt", contentExpected, _projInfo.TempOutputFolder, file)))
+                {
+                    p.WaitForExit();
+                    Debug.Print(FileData.Get(file + "temp.txt"));
+                }
             }
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -3765,10 +3768,13 @@ namespace Test.OpenOfficeConvert
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             TextFileAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            using (var p = Process.Start(Environment.GetEnvironmentVariable("COMSPEC"), string.Format("/c fc {0} {1} >{2}temp.txt", contentExpected, _projInfo.TempOutputFolder, file)))
+            if (!_isLinux)
             {
-                p.WaitForExit();
-                Debug.Print(FileData.Get(file + "temp.txt"));
+                using (var p = Process.Start(Environment.GetEnvironmentVariable("COMSPEC"), string.Format("/c fc {0} {1} >{2}temp.txt", contentExpected, _projInfo.TempOutputFolder, file)))
+                {
+                    p.WaitForExit();
+                    Debug.Print(FileData.Get(file + "temp.txt"));
+                }
             }
             TextFileAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
