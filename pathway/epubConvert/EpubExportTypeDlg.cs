@@ -15,7 +15,7 @@ namespace epubConvert
 {
     public partial class EpubExportTypeDlg : Form
     {
-        public string _exportType = "epub2";
+        public string _exportType = "cancel";
        public EpubExportTypeDlg()
         {
             InitializeComponent();
