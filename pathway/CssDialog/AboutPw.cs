@@ -30,6 +30,7 @@ namespace SIL.PublishingSolution
     public partial class AboutPw : Form
     {
         #region Constructor
+
         /// <summary>
         /// Initializes a new instance of the AboutDE class.
         /// </summary>
@@ -37,6 +38,7 @@ namespace SIL.PublishingSolution
         {
             InitializeComponent();
         }
+
         #endregion
 
         #region Assembly Attribute Accessors
@@ -45,10 +47,11 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+                object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(
+                    typeof (AssemblyTitleAttribute), false);
                 if (attributes.Length > 0)
                 {
-                    var titleAttribute = (AssemblyTitleAttribute)attributes[0];
+                    var titleAttribute = (AssemblyTitleAttribute) attributes[0];
                     if (titleAttribute.Title != "")
                     {
                         return titleAttribute.Title;
@@ -65,7 +68,8 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
+                object[] attributes =
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyFileVersionAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
@@ -98,12 +102,13 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
+                object[] attributes =
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyDescriptionAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
+                return ((AssemblyDescriptionAttribute) attributes[0]).Description;
             }
         }
 
@@ -114,12 +119,13 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+                object[] attributes =
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyProductAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyProductAttribute)attributes[0]).Product;
+                return ((AssemblyProductAttribute) attributes[0]).Product;
             }
         }
 
@@ -130,12 +136,13 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+                object[] attributes =
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyCopyrightAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+                return ((AssemblyCopyrightAttribute) attributes[0]).Copyright;
             }
         }
 
@@ -146,17 +153,20 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+                object[] attributes =
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyCompanyAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyCompanyAttribute)attributes[0]).Company;
+                return ((AssemblyCompanyAttribute) attributes[0]).Company;
             }
         }
+
         #endregion
 
         #region Events
+
         /// <summary>
         /// Load values into dialog controls
         /// </summary>
@@ -165,7 +175,7 @@ namespace SIL.PublishingSolution
             lblProductName.Text = AssemblyProduct;
             lblVersion.Text = String.Format("Version: {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
 
-            HelpImproveGetValue(chkHelpToImprove); 
+            HelpImproveGetValue(chkHelpToImprove);
         }
 
 
@@ -174,7 +184,7 @@ namespace SIL.PublishingSolution
 
         private static void HelpImproveSetValue(CheckBox chbHelpImprove)
         {
-            var helpImproveValue = (chbHelpImprove.Checked)? "Yes": "No";
+            var helpImproveValue = (chbHelpImprove.Checked) ? "Yes" : "No";
 
             RegistryKey subKey = Registry.CurrentUser.CreateSubKey(HelpImproveSubKeyName);
             subKey.SetValue(HelpImproveValueName, helpImproveValue);
@@ -199,10 +209,10 @@ namespace SIL.PublishingSolution
 
         private void AboutPw_DoubleClick(object sender, EventArgs e)
         {
-        #if DEBUG
+#if DEBUG
             var dlg = new Localizer(LocDB.DB);
             dlg.ShowDialog();
-        #endif
+#endif
         }
 
         private void lnkProj_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -219,11 +229,6 @@ namespace SIL.PublishingSolution
         {
             HelpImproveSetValue(chkHelpToImprove);
             Close();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
