@@ -130,10 +130,10 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(330, 122);
+            this.label5.Location = new System.Drawing.Point(332, 124);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(12, 11);
+            this.label5.Size = new System.Drawing.Size(25, 11);
             this.label5.TabIndex = 16;
             this.label5.Text = "®";
             // 
@@ -142,9 +142,10 @@
             this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(174, 125);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(163, 17);
+            this.label2.Size = new System.Drawing.Size(233, 17);
             this.label2.TabIndex = 15;
-            this.label2.Text = "(C) 2008 - 2014 SIL International";
+            this.label2.Text = "(C) 2008 - 2014 SIL International  ";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // pictureBox1
             // 
@@ -190,7 +191,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutPw";
-            this.Padding = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.Padding = new System.Windows.Forms.Padding(9);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
