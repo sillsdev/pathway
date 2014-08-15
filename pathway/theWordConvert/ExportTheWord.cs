@@ -99,7 +99,7 @@ namespace SIL.PublishingSolution
                 FindParatextProject();
                 inProcess.PerformStep();
 
-                var xsltArgs = LoadXsltParameters();
+                var xsltArgs = LoadXsltParameters(exportTheWordInputPath);
                 inProcess.PerformStep();
 
                 var otBooks = new List<string>();
@@ -465,14 +465,37 @@ namespace SIL.PublishingSolution
 // ReSharper restore IntroduceOptionalParameters.Global
         }
 
-        protected static XsltArgumentList LoadXsltParameters()
+        protected static XsltArgumentList LoadXsltParameters(string path)
         {
             var xsltArgs = new XsltArgumentList();
             xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
             xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
+            xsltArgs.AddParam("glossary", "", GetGlossaryUri(path));
             xsltArgs.AddParam("versification", "", VrsName);
             GetRtlParam(xsltArgs);
             return xsltArgs;
+        }
+
+        private static string GetGlossaryUri(string path)
+        {
+            var pathInfo = new DirectoryInfo(Common.PathCombine(path, "USX"));
+            var gloFile = pathInfo.GetFiles("GLO.usx");
+            if (gloFile.Length > 0)
+                return "file:///" + gloFile[0].FullName;
+            foreach (var fileInfo in pathInfo.GetFiles("XX*.usx"))
+            {
+                var sr = new StreamReader(fileInfo.FullName);
+                for (int i = 0; i < 4; i++)
+                {
+                    var line = sr.ReadLine();
+                    if (line.ToLower().Contains("glossary"))
+                    {
+                        return "file:///" + fileInfo.FullName;
+                    }
+                }
+
+            }
+            return "";
         }
 
         protected static void GetRtlParam(XsltArgumentList xsltArgs)

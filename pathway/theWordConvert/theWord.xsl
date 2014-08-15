@@ -18,6 +18,7 @@
     <xsl:param name="sequencePunc">,</xsl:param>
     <xsl:param name="bookSequencePunc">;</xsl:param>
     <xsl:param name="bookNames">BookNames.xml</xsl:param>
+    <xsl:param name="glossary">GLO.usx</xsl:param>
     <xsl:param name="versification">vrs.xml</xsl:param>
     <xsl:param name="noStar" select="false()"/>
     <xsl:param name="noSaltillo" select="false()"/>
@@ -32,6 +33,7 @@
     <xsl:variable name="verseRefs" select="document($versification)//bk"/>
     <xsl:variable name="vrs" select="$verseRefs[@code=$code]"/>
     <xsl:variable name="bookNamesBook" select="document($bookNames)//book"/>
+    <xsl:variable name="glossaryKey" select="document($glossary)//para[*/@style='k']"/>
     
     <xsl:template match="/">
         <xsl:choose>
@@ -392,7 +394,7 @@
                     <xsl:with-param name="bullet" select="$bullet"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="@style = 'it'">
+            <xsl:when test="@style = 'it' or @style='tl'">
                 <xsl:call-template name="Italic-char">
                     <xsl:with-param name="space" select="$space"/>
                 </xsl:call-template>
@@ -419,6 +421,11 @@
             </xsl:when>
             <xsl:when test="@style = 'nd'">
                 <xsl:call-template name="NameOfDiety">
+                    <xsl:with-param name="space" select="$space"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@style = 'w'">
+                <xsl:call-template name="GlossaryWord">
                     <xsl:with-param name="space" select="$space"/>
                 </xsl:call-template>
             </xsl:when>
@@ -559,6 +566,57 @@
         <xsl:apply-templates select="following::node()[1]" mode="t">
             <xsl:with-param name="space" select="1"/>
         </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="GlossaryWord">
+        <xsl:param name="space"/>
+        <xsl:if test="$space = 1">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:variable name="glossaryLookup" select="./text()"/>
+        <xsl:choose>
+            <xsl:when test="contains($glossaryLookup, '|')">
+                <xsl:call-template name="GlossaryFormatter">
+                    <xsl:with-param name="surfaceForm" select="substring-before($glossaryLookup, '|')"/>
+                    <xsl:with-param name="glossaryLookup" select="substring-after($glossaryLookup,'|')"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="GlossaryFormatter">
+                    <xsl:with-param name="surfaceForm" select="$glossaryLookup"/>
+                    <xsl:with-param name="glossaryLookup" select="$glossaryLookup"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="1"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xsl:template name="GlossaryFormatter">
+        <xsl:param name="surfaceForm"/>
+        <xsl:param name="glossaryLookup"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<font color=blue>]]></xsl:text>
+        <xsl:value-of select="$surfaceForm"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</font>]]></xsl:text>
+        <xsl:variable name="glossaryEntry" select="$glossaryKey[*[@style='k'] = $glossaryLookup]"/>
+        <xsl:if test="count($glossaryEntry) != 0">
+            <xsl:text disable-output-escaping="yes"><![CDATA[<RF q=*>]]></xsl:text>
+            <xsl:for-each select="$glossaryEntry/node()[position() &gt; 2]">
+                <xsl:choose>
+                    <xsl:when test="@style = 'tl'">
+                        <xsl:text disable-output-escaping="yes"><![CDATA[<i>]]></xsl:text>
+                        <xsl:call-template name="OutputText"/>
+                        <xsl:text disable-output-escaping="yes"><![CDATA[</i>]]></xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="OutputText"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:text> </xsl:text>
+            </xsl:for-each>
+            <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template name="SmallCap-char">
