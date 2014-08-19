@@ -988,6 +988,7 @@ namespace SIL.Tool
                 XmlNode titleNode = null;
                 if (_includeTitlePage)
                 {
+                    _projInfo.IsTitlePageEnabled = true;
                     titleNode = LoTitlePage(xmldoc);
                 }
 

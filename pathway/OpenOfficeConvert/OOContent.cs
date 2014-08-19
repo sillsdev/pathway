@@ -3079,12 +3079,21 @@ namespace SIL.PublishingSolution
         {
             if (!_projInfo.IsFrontMatterEnabled && _projInfo.OutputExtension == "odt")
             {
-                if (_projInfo.IsODM && Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath).ToLower() == "preserveflexrev") return;
-
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "P4");
-                _writer.WriteEndElement();
+                InsertP4Page();
             }
+            else if ((_projInfo.IsFrontMatterEnabled && !_projInfo.IsTitlePageEnabled) && _projInfo.OutputExtension == "odt")
+            {
+                InsertP4Page();
+            }
+        }
+
+        private void InsertP4Page()
+        {
+            if (_projInfo.IsODM && Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath).ToLower() == "preserveflexrev") return;
+
+            _writer.WriteStartElement("text:p");
+            _writer.WriteAttributeString("text:style-name", "P4");
+            _writer.WriteEndElement();            
         }
 
         private void CallTOC()
