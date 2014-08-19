@@ -38,6 +38,7 @@ namespace SIL.PublishingSolution
         private static object _theWorProgPath;
         private static bool _hasMessages;
         protected static string MessageFullName;
+        protected static string TempGlossaryName = "";
 
         protected static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
 
@@ -140,6 +141,11 @@ namespace SIL.PublishingSolution
                 var mySwordResult = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
                 inProcess.PerformStep();
 
+                if (TempGlossaryName != "")
+                {
+                    File.Delete(TempGlossaryName);
+                    TempGlossaryName = "";
+                }
                 if (Directory.Exists(tempTheWordCreatorPath))
                 {
                     Common.DeleteDirectory(tempTheWordCreatorPath);
@@ -495,7 +501,18 @@ namespace SIL.PublishingSolution
                 }
 
             }
-            return "";
+            MakeTempGlossary();
+            return "file:///" + TempGlossaryName;
+        }
+
+        private static void MakeTempGlossary()
+        {
+            TempGlossaryName = Path.GetTempFileName();
+            var w = XmlWriter.Create(TempGlossaryName);
+            var tempDoc = new XmlDocument();
+            tempDoc.LoadXml("<root/>");
+            tempDoc.WriteTo(w);
+            w.Close();
         }
 
         protected static void GetRtlParam(XsltArgumentList xsltArgs)
