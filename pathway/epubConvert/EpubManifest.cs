@@ -140,7 +140,7 @@ namespace epubConvert
             opf.WriteValue((Creator == "") ? Environment.UserName : Creator);
             opf.WriteEndElement();
 
-            opf.WriteElementString("dc", "subject", null, _parent.InputType == "dictionary" ? "Reference" : "Religion & Spirituality");
+            opf.WriteElementString("dc", "subject", null, _parent.InputType.ToLower() == "dictionary" ? "Reference" : "Religion & Spirituality");
 
             if (Description.Length > 0)
                 opf.WriteElementString("dc", "description", null, Description);
@@ -278,7 +278,7 @@ namespace epubConvert
                 opf.WriteElementString("dc", "coverage", null, "Epub3");
 
 
-            opf.WriteElementString("dc", "subject", null, _parent.InputType == "dictionary" ? "Reference" : "Religion & Spirituality");
+            opf.WriteElementString("dc", "subject", null, _parent.InputType.ToLower() == "dictionary" ? "Reference" : "Religion & Spirituality");
 
 
             opf.WriteElementString("dc", "type", null, "Text");
@@ -439,7 +439,7 @@ namespace epubConvert
 
                     opf.WriteStartElement("item");
                     // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
-                    var itemId = _parent.InputType == "dictionary" ? nameNoExt : idRefValue;
+                    var itemId = _parent.InputType.ToLower() == "dictionary" ? nameNoExt : idRefValue;
                     opf.WriteAttributeString("id", itemId);
                     opf.WriteAttributeString("href", name);
                     opf.WriteAttributeString("media-type", "application/xhtml+xml");
@@ -545,7 +545,7 @@ namespace epubConvert
                     //{
                         opf.WriteStartElement("itemref"); // item (stylesheet)
                         // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
-                        var idRef = _parent.InputType == "dictionary"
+                        var idRef = _parent.InputType.ToLower() == "dictionary"
                                         ? Path.GetFileNameWithoutExtension(file)
                                         : idRefValue;
                         opf.WriteAttributeString("idref", idRef);
@@ -609,7 +609,7 @@ namespace epubConvert
                     //{
                         opf.WriteStartElement("itemref"); // item (stylesheet)
                         // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
-                        var idRef = _parent.InputType == "dictionary"
+                        var idRef = _parent.InputType.ToLower() == "dictionary"
                                         ? Path.GetFileNameWithoutExtension(file)
                                         : idRefValue;
 

@@ -337,7 +337,7 @@ namespace epubConvert
             xmlReader.Close();
             bool isSectionHead = false, isChapterNumber = false, isVerseNumber = false;
             string sectionHead = string.Empty, fromChapterNumber = string.Empty, firstVerseNumber = string.Empty, lastVerseNumber = string.Empty;
-            var divClass = InputType == "dictionary" ? "entry" : "scrBook";
+            var divClass = InputType.ToLower() == "dictionary" ? "entry" : "scrBook";
             var xPath = string.Format("//xhtml:div[@class='{0}']", divClass);
             XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
             if (nodes != null && nodes.Count > 0)
@@ -347,7 +347,7 @@ namespace epubConvert
                 foreach (XmlNode node in nodes)
                 {
                     string textString = string.Empty;
-                    if (InputType.Equals("dictionary"))
+                    if (InputType.ToLower().Equals("dictionary"))
                     {
                         if (!WriteDictionaryChapters(ref playOrder, ncx, namespaceManager, sb, name, node,
                                                      ref textString))
@@ -500,7 +500,7 @@ namespace epubConvert
             }
 
             // If this is a dictionary with TOC level 3, gather the senses for this entry
-            if (InputType.Equals("dictionary") && TocLevel.StartsWith("3"))
+            if (InputType.ToLower().Equals("dictionary") && TocLevel.StartsWith("3"))
             {
                 // see if there are any senses to add to this entry
                 XmlNodeList childNodes = node.SelectNodes(".//xhtml:span[@class='sense']", namespaceManager);

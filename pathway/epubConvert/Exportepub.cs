@@ -291,7 +291,7 @@ namespace SIL.PublishingSolution
             DateTime dtRefStart = DateTime.Now;
 #endif
             inProcess.SetStatus("Processing hyperlinks");
-            if (InputType == "scripture" && References.Contains("End"))
+            if (InputType.ToLower() == "scripture" && References.Contains("End"))
             {
                 UpdateReferenceHyperlinks(contentFolder, inProcess);
                 UpdateReferenceSourcelinks(contentFolder, inProcess);
@@ -1348,7 +1348,7 @@ namespace SIL.PublishingSolution
             sb.AppendLine("%;");
             Common.StreamReplaceInFile(cssFile, "body {", sb.ToString());
             // ChapterNumbers - scripture only
-            if (InputType == "scripture")
+            if (InputType.ToLower() == "scripture")
             {
                 // ChapterNumbers (drop cap or in margin) - .Chapter_Number and .Paragraph1 class elements
                 sb.Length = 0;  // reset the stringbuilder
@@ -1397,7 +1397,7 @@ namespace SIL.PublishingSolution
                 xmlReader.Close();
                 // should only be one of these after splitting out the chapters.
                 XmlNodeList nodes;
-                if (InputType.Equals("dictionary"))
+                if (InputType.ToLower().Equals("dictionary"))
                 {
                     nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
                 }
@@ -2088,7 +2088,7 @@ namespace SIL.PublishingSolution
         private IEnumerable<string> SplitFile(string temporaryCvFullName, PublicationInformation pubInfo)
         {
             List<string> fileNameWithPath;
-            if (InputType.Equals("dictionary"))
+            if (InputType.ToLower().Equals("dictionary"))
             {
                 fileNameWithPath = Common.SplitXhtmlFile(temporaryCvFullName, "letHead", true);
             }
@@ -2144,7 +2144,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    var divClass = InputType == "scripture" ? "Section_Head" : "entry";
+                    var divClass = InputType.ToLower() == "scripture" ? "Section_Head" : "entry";
                     var target = string.Format("<div class=\"{0}", divClass);
                     realMax = content.IndexOf(target, softMax, StringComparison.Ordinal);
                 }
@@ -2160,7 +2160,7 @@ namespace SIL.PublishingSolution
                     // no more section heads - just pull in the rest of the content
                     // write out head + substring(startIndex to the end)
                     sb.Append(head);
-                    if (InputType == "scripture")
+                    if (InputType.ToLower() == "scripture")
                     {
                         sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
                         sb.Append(bookcode);
@@ -2189,8 +2189,8 @@ namespace SIL.PublishingSolution
                 {
                     // for the subsequent sections, we need the head + the substring (startIndex to realMax)
                     sb.Append(head);
-                    var bodyClass = InputType == "scripture" ? "scrBody" : "dicBody";
-                    var divClass = InputType == "scripture" ? "scrBook" : "letData";
+                    var bodyClass = InputType.ToLower() == "scripture" ? "scrBody" : "dicBody";
+                    var divClass = InputType.ToLower() == "scripture" ? "scrBook" : "letData";
                     sb.Append(string.Format("<body class=\"{0}\"><div class=\"{1}\">", bodyClass, divClass));
                     sb.Append(content.Substring(startIndex, (realMax - startIndex)));
                     sb.AppendLine("</div></body></html>"); // close out the xhtml
@@ -2319,7 +2319,7 @@ namespace SIL.PublishingSolution
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
 
-                if (InputType.Equals("scripture"))
+                if (InputType.ToLower().Equals("scripture"))
                 {
                     XmlNodeList nodes = xmlDocument.SelectNodes(".//xhtml:div[@class='Chapter_Number']", namespaceManager);
                     if (nodes != null)
@@ -2408,7 +2408,7 @@ namespace SIL.PublishingSolution
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
 
-                if (InputType.Equals("scripture"))
+                if (InputType.ToLower().Equals("scripture"))
                 {
                     const string xPath = ".//xhtml:div[@class='scrBook']";
                     XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
