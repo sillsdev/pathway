@@ -164,7 +164,7 @@ namespace epubConvert
                 ncx.WriteAttributeString("id", "dtb:uid");
                 ncx.WriteAttributeString("playOrder", index.ToString(CultureInfo.InvariantCulture));
                 ncx.WriteStartElement("navLabel");
-                ncx.WriteElementString("text", "End Notes");
+                ncx.WriteElementString("text", "Endnotes");
                 ncx.WriteEndElement(); // navlabel
                 ncx.WriteStartElement("content");
                 ncx.WriteAttributeString("src", name);

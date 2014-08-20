@@ -283,6 +283,7 @@ namespace SIL.PublishingSolution
             #region Insert Chapter Links
             inProcess.SetStatus("Insert Chapter Links");
             InsertChapterLinkBelowBookName(contentFolder);
+            InsertReferenceLinkInTocFile(contentFolder);
             inProcess.PerformStep();
             #endregion Insert Chapter Links
 
@@ -2391,6 +2392,54 @@ namespace SIL.PublishingSolution
                     }
                     xmlDocument.Save(sourceFile);
                 }
+            }
+        }
+
+        protected void InsertReferenceLinkInTocFile(string contentFolder)
+        {
+            string referenceFileName = Common.PathCombine(contentFolder, "zzReferences.xhtml");
+            if (!File.Exists(referenceFileName))
+                return;
+            string[] files = Directory.GetFiles(contentFolder, "File3TOC*.xhtml");
+            var xmlDocument = Common.DeclareXMLDocument(true);
+            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            
+            foreach (string sourceFile in files)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(sourceFile);
+                if (fileName != null)
+                {
+                    XmlReader xmlReader = XmlReader.Create(sourceFile, xmlReaderSettings);
+                    xmlDocument.Load(xmlReader);
+                    xmlReader.Close();
+                    const string xPath = ".//xhtml:div[@class='Contents'][1]/xhtml:ul";
+                    XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
+                    Debug.Assert(nodes != null);
+
+                    if (nodes.Count > 0)
+                    {
+                        var next = nodes[nodes.Count - 1].LastChild;
+                        if (next != null && next.Attributes != null)
+                        {
+// ReSharper disable PossibleNullReferenceException
+                            XmlNode spaceNode = xmlDocument.CreateElement("li", xmlDocument.DocumentElement.NamespaceURI);
+// ReSharper restore PossibleNullReferenceException
+// ReSharper disable PossibleNullReferenceException
+                            XmlNode nodeContent = xmlDocument.CreateElement("a", xmlDocument.DocumentElement.NamespaceURI);
+// ReSharper restore PossibleNullReferenceException
+                            Debug.Assert(nodeContent != null && nodeContent.Attributes != null);
+                            XmlAttribute attribute = xmlDocument.CreateAttribute("href");
+                            attribute.Value = "zzReferences.xhtml";
+                            nodeContent.Attributes.Append(attribute);
+                            nodeContent.InnerText = "Endnotes";
+                            spaceNode.AppendChild(nodeContent);
+                            nodes[nodes.Count - 1].InsertAfter(spaceNode, next);
+                        }
+                    }
+                }
+                xmlDocument.Save(sourceFile);
             }
         }
 
