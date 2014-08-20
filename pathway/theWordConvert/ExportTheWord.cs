@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -38,9 +39,10 @@ namespace SIL.PublishingSolution
         private static object _theWorProgPath;
         private static bool _hasMessages;
         protected static string MessageFullName;
-        protected static string TempGlossaryName = "";
+        private static string _tempGlossaryName = "";
 
         protected static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
+        protected static readonly XslCompiledTransform Xhtml2Usx = new XslCompiledTransform();
 
         public string ExportType
         {
@@ -100,6 +102,8 @@ namespace SIL.PublishingSolution
                 FindParatextProject();
                 inProcess.PerformStep();
 
+                CreateUsxIfNecessary(projInfo.DefaultXhtmlFileWithPath);
+
                 var xsltArgs = LoadXsltParameters(exportTheWordInputPath);
                 inProcess.PerformStep();
 
@@ -141,10 +145,10 @@ namespace SIL.PublishingSolution
                 var mySwordResult = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
                 inProcess.PerformStep();
 
-                if (TempGlossaryName != "")
+                if (_tempGlossaryName != "")
                 {
-                    File.Delete(TempGlossaryName);
-                    TempGlossaryName = "";
+                    File.Delete(_tempGlossaryName);
+                    _tempGlossaryName = "";
                 }
                 if (Directory.Exists(tempTheWordCreatorPath))
                 {
@@ -172,6 +176,62 @@ namespace SIL.PublishingSolution
             }
             Ssf = string.Empty;
             return success;
+        }
+
+        private void CreateUsxIfNecessary(string xhtmlFileName)
+        {
+            var xhtmlDir = Path.GetDirectoryName(xhtmlFileName);
+            var usxPath = Common.PathCombine(xhtmlDir, "USX");
+            if (Directory.Exists(usxPath)) return;
+            Directory.CreateDirectory(usxPath);
+            var xhtml2Usx = GetXhtml2Usx();
+            var xhtml2UsxArgs = LoadXhtml2XslArgs();
+            var bookCodes = GetBookCodes(xhtmlFileName);
+            foreach (string bookCode in bookCodes)
+            {
+                var readerSettings = new XmlReaderSettings();
+                var reader = XmlReader.Create(xhtmlFileName, readerSettings);
+                var outName = Common.PathCombine(usxPath, bookCode);
+                var w = XmlWriter.Create(outName);
+                xhtml2UsxArgs.AddParam("code", "", bookCode);
+                xhtml2Usx.Transform(reader, xhtml2UsxArgs, w);
+                reader.Close();
+                w.Close();
+            }
+        }
+
+        private ArrayList GetBookCodes(string xhtmlFileName)
+        {
+            var bookCodes = new ArrayList();
+            var xDoc = Common.DeclareXMLDocument(false);
+            xDoc.Load(xhtmlFileName);
+            var nodes = xDoc.SelectNodes("//*[@class = 'scrBookCode']/text()");
+            foreach (XmlText node in nodes)
+            {
+                bookCodes.Add(node.Value);
+            }
+            xDoc.RemoveAll();
+            return bookCodes;
+        }
+
+        private XsltArgumentList LoadXhtml2XslArgs()
+        {
+            var xsltArgs = new XsltArgumentList();
+            xsltArgs.AddParam("map", "", "file:///" + Common.FromRegistry("StyleMap.xml"));
+            return xsltArgs;
+        }
+
+        private XslCompiledTransform GetXhtml2Usx()
+        {
+            var xsltSettings = new XsltSettings { EnableDocumentFunction = true };
+            var inputXsl = new StreamReader(Common.FromRegistry("Xhtml-Usx.xsl"));
+            Debug.Assert(inputXsl != null);
+            var readerSettings = new XmlReaderSettings { XmlResolver = FileStreamXmlResolver.GetNullResolver() };
+            var reader = XmlReader.Create(inputXsl, readerSettings);
+            Xhtml2Usx.Load(reader, xsltSettings, null);
+            reader.Close();
+            inputXsl.Close();
+            return Xhtml2Usx;
         }
 
         protected void DisplayMessageReport()
@@ -494,6 +554,7 @@ namespace SIL.PublishingSolution
                 for (int i = 0; i < 4; i++)
                 {
                     var line = sr.ReadLine();
+                    if (line == null) break;
                     if (line.ToLower().Contains("glossary"))
                     {
                         return "file:///" + fileInfo.FullName;
@@ -502,13 +563,13 @@ namespace SIL.PublishingSolution
 
             }
             MakeTempGlossary();
-            return "file:///" + TempGlossaryName;
+            return "file:///" + _tempGlossaryName;
         }
 
         private static void MakeTempGlossary()
         {
-            TempGlossaryName = Path.GetTempFileName();
-            var w = XmlWriter.Create(TempGlossaryName);
+            _tempGlossaryName = Path.GetTempFileName();
+            var w = XmlWriter.Create(_tempGlossaryName);
             var tempDoc = new XmlDocument();
             tempDoc.LoadXml("<root/>");
             tempDoc.WriteTo(w);
