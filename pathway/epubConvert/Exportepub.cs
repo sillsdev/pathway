@@ -185,6 +185,10 @@ namespace SIL.PublishingSolution
 
             #region Xhtml preprocessing
             inProcess.SetStatus("Preprocessing content");
+
+            var glossorywords = WriteGlossaryLink(projInfo);
+            GlossaryLinkReferencing(projInfo,glossorywords);
+
             InsertBeforeAfterInXhtml(projInfo);
             var outputFolder = SetOutputFolderAndCurrentDirectory(projInfo);
             Common.SetProgressBarValue(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath);
@@ -206,7 +210,7 @@ namespace SIL.PublishingSolution
             var defaultCss = Path.GetFileName(niceNameCss);
             string tempCssFile = mergedCss.Replace(".css", "tmp.css");
             File.Copy(mergedCss, tempCssFile, true);
-            
+
             Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCss);
             Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCss);
             if (!File.Exists(mergedCss))
@@ -463,7 +467,108 @@ namespace SIL.PublishingSolution
 
             return success;
         }
+        private void GlossaryLinkReferencing(PublicationInformation projInfo,Dictionary<string,Dictionary<string,string>> glossoryreferncelist)
+        {
+            string tocFiletoUpdate = projInfo.DefaultXhtmlFileWithPath;
+            XmlDocument xmlDoc = Common.DeclareXMLDocument(true);
+            var namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            //Common.DeclareXmlReaderSettings(false);
 
+            if (!File.Exists(tocFiletoUpdate))
+                return;
+            xmlDoc.Load(tocFiletoUpdate);
+            XmlNodeList tagList = xmlDoc.GetElementsByTagName("a");
+            if (tagList.Count > 0)
+            {
+                foreach (KeyValuePair<string, Dictionary<string, string>> glossory in glossoryreferncelist)
+                {
+                    string glossorykey = glossory.Key;
+                    Dictionary<string, string> glossoryvalue = glossory.Value;
+
+                    foreach (XmlNode tagValue in tagList)
+                    {
+                        if (tagValue.Attributes != null && (tagValue.Attributes.Count > 0 && tagValue.Attributes["id"] != null) && tagValue.Attributes["class"].Value == "Glossary_Key")
+                        {
+                            if (glossoryvalue.ContainsKey(tagValue.Attributes["id"].Value))
+                            {
+                                tagValue.Attributes["href"].Value = "#" + glossorykey;
+                                string xpathkeyword = ".//xhtml:a[@class='Glossaryvaluehref'][@id='" + glossorykey + "']";
+                                XmlNode keywordnode = xmlDoc.SelectSingleNode(xpathkeyword, namespaceManager);
+                                if (keywordnode != null && keywordnode.Attributes != null &&
+                                    tagValue.Attributes["id"].Value.Length > 0)
+                                {
+                                    if (keywordnode.Attributes["href"].Value.Replace("#","").Trim().Length == 0)
+                                    {
+                                        keywordnode.Attributes["href"].Value = "#" + tagValue.Attributes["id"].Value;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            xmlDoc.Save(tocFiletoUpdate);
+        }
+        private Dictionary<string, Dictionary<string, string>> WriteGlossaryLink(PublicationInformation projInfo)
+        {
+            Dictionary<string, Dictionary<string, string>> glossorywordsDictionaries = new Dictionary<string, Dictionary<string, string>>();
+
+            string file = projInfo.DefaultXhtmlFileWithPath;
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            //Common.DeclareXmlReaderSettings(false);
+
+            if (!File.Exists(file))
+                return null;
+
+            XmlReader xmlReader = XmlReader.Create(file, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            if (projInfo.ProjectInputType.ToLower().Equals("scripture"))
+            {
+                const string xPath = ".//xhtml:a[@class='Glossaryvaluehref']";
+                XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
+                Debug.Assert(nodes != null);
+                if (nodes.Count > 0)
+                {
+                    foreach (XmlNode booknode in nodes)
+                    {
+                        Dictionary<string, string> glossorywordsDictionary = new Dictionary<string,string>();
+                        string booknodeid = booknode.Attributes["id"].Value;
+                        string booknodetext = booknode.InnerText.Trim();
+                        string xpathkeyword = ".//xhtml:a[@class='Glossary_Key'][translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='" + booknodetext.ToLower()+"']";
+                        XmlNodeList keywordnodesList = xmlDocument.SelectNodes(xpathkeyword, namespaceManager);
+                        if (keywordnodesList.Count > 0)
+                        {
+                            foreach (XmlNode keywordnode in keywordnodesList)
+                            {
+                                string glossoryid = keywordnode.Attributes["id"].Value;
+                                if (glossoryid != null)
+                                {
+                                    glossorywordsDictionary.Add(glossoryid,keywordnode.InnerText.Trim());
+                                }
+                            }
+                        }
+                        if (glossorywordsDictionary.Count > 0)
+                        {
+
+                            glossorywordsDictionaries.Add(booknodeid,glossorywordsDictionary);
+                        }
+                    }
+                    //var nodeInnerText = new StringBuilder();
+                    //nodeInnerText.Append(nodes[0].InnerXml);
+                    //nodeInnerText = nodeInnerText.Replace(titleMainInnerText + "</div>" + titleMainInnerText,
+                    //    titleMainInnerText + "</div>");
+                    //nodes[0].InnerXml = nodeInnerText.ToString();
+                }
+            }
+            return glossorywordsDictionaries;
+        }
         private static void CreateEpubFolder(PublicationInformation projInfo)
         {
             Common.CopyFolderandSubFolder(projInfo.DictionaryPath, Common.PathCombine(projInfo.DictionaryPath, "Epub2"), false);
@@ -800,7 +905,7 @@ namespace SIL.PublishingSolution
 
             if (_isUnixOs)
             {
-                Common.RemoveDTDForLinuxProcess(revFile,"epub");
+                Common.RemoveDTDForLinuxProcess(revFile, "epub");
             }
             Common.SetDefaultCSS(revFile, defaultCss);
             // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
@@ -977,7 +1082,7 @@ namespace SIL.PublishingSolution
 
                     if (_isUnixOs)
                     {
-                        Common.RemoveDTDForLinuxProcess(file,"epub");
+                        Common.RemoveDTDForLinuxProcess(file, "epub");
                     }
                     File.Move(file, dest);
                     // split the file into smaller pieces if needed
@@ -1827,7 +1932,7 @@ namespace SIL.PublishingSolution
                     if (reader.NodeType == XmlNodeType.Element)
                     {
                         string idString = searchText.Replace("id=\"", "").Replace("\"", "");
-                        if (reader.Name == "div" || reader.Name == "span")
+                        if (reader.Name == "div" || reader.Name == "span" || reader.Name=="a")
                         {
 
                             string id = reader.GetAttribute("id");

@@ -294,3 +294,21 @@ font-family: inherit;
 .Intro_List_Item1 {
     text-indent: 6%;
 }
+
+.Glossary_Key{
+    font-size: 12pt;
+}
+.Glossary_Keyvalue {
+    font-weight : bold;
+    font-style : italic;
+    font-size: 12pt;
+}
+.Glossaryvaluehref{    
+    font-weight : bold;
+    font-style : italic;
+    font-size: 12pt;
+}
+.Foreign{
+    font-style : italic;
+    font-size: 12pt;
+}

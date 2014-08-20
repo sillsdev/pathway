@@ -2297,6 +2297,13 @@ namespace SIL.Tool
                                 st = href.Replace("#", "").ToLower();
                                 if (sourceList.Contains(st)) continue;
                                 sourceList.Add(st);
+                                string id = _reader.GetAttribute("id");
+                                if (id != null)
+                                {
+                                    if (targetList.Contains(id.ToLower())) continue;
+                                    targetList.Add(id.ToLower());
+                                    continue;
+                                }
                                 continue;
                             }
                         }
