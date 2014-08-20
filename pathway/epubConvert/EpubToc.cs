@@ -518,25 +518,39 @@ namespace epubConvert
                             continue;
                         }
 
-                        if (childNode.HasChildNodes && childNode.FirstChild != null && childNode.FirstChild.FirstChild != null)
-                            textString = childNode.FirstChild.FirstChild.InnerText;
+                        textString = string.Empty;
+                        XmlNodeList childNodes1 = childNode.SelectNodes(".//xhtml:span[starts-with(@class,'definition')]", namespaceManager);
+                        if (childNodes1 == null) continue;
+                        foreach (XmlNode childNodeb in childNodes1)
+                        {
+                            textString = textString.Trim() + " " + childNodeb.InnerText;
+                            string[] textLen = textString.Trim().Split(' ');
+                            if (textLen.Length > 3)
+                            {
+                                textString = textLen[0] + " " + textLen[1] + " " + textLen[2] + " ...";
+                                break;
+                            }
+                        }
                         sb.Append(name);
                         sb.Append("#");
                         if (childNode.Attributes != null && childNode.Attributes["id"] != null)
                         {
                             sb.Append(childNode.Attributes["id"].Value);
                         }
-                        // write out the node
-                        ncx.WriteStartElement("navPoint");
-                        ncx.WriteAttributeString("id", "dtb:uid");
-                        ncx.WriteAttributeString("playOrder", playOrder.ToString(CultureInfo.InvariantCulture));
-                        ncx.WriteStartElement("navLabel");
-                        ncx.WriteElementString("text", textString);
-                        ncx.WriteEndElement(); // navlabel
-                        ncx.WriteStartElement("content");
-                        ncx.WriteAttributeString("src", sb.ToString());
-                        ncx.WriteEndElement(); // meta
-                        ncx.WriteEndElement(); // navPoint
+                        if (textString.Trim().Length > 0)
+                        {
+                            // write out the node
+                            ncx.WriteStartElement("navPoint");
+                            ncx.WriteAttributeString("id", "dtb:uid");
+                            ncx.WriteAttributeString("playOrder", playOrder.ToString(CultureInfo.InvariantCulture));
+                            ncx.WriteStartElement("navLabel");
+                            ncx.WriteElementString("text", textString.Trim());
+                            ncx.WriteEndElement(); // navlabel
+                            ncx.WriteStartElement("content");
+                            ncx.WriteAttributeString("src", sb.ToString());
+                            ncx.WriteEndElement(); // meta
+                            ncx.WriteEndElement(); // navPoint
+                        }
                         // reset the stringbuilder
                         sb.Length = 0;
                         playOrder++;
