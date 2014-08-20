@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <!-- Paragraph styles -->
+    <style level="p" te="Paragraph" pt="p"/>
+    <style level="p" te="Paragraph_Continuation" pt="m"/>
+    <style level="p" te="Inscription_Paragraph" pt="pc"/>
+    <style level="p" te="Embedded_Text_Paragraph" pt="pi"/>
+    <style level="p" te="Embedded_Text_Paragraph_Continuation" pt="pm"/>
+    <style level="p" te="List_Item1" pt="li1"/>
+    <style level="p" te="List_Item2" pt="li2"/>
+    <style level="p" te="Line1" pt="q1"/>
+    <style level="p" te="Line2" pt="q2"/>
+    <style level="p" te="Line3" pt="q3"/>
+    <style level="p" te="Doxology" pt="qc"/>
+    
+    <!-- Character styles -->
+    <style level="c" te="Quoted_Text" pt="qt"/>
+    <style level="c" te="See_In_Glossary" pt="w"/>
+    <style level="c" te="Words_Of_Christ" pt="wj"/>
+    <style level="c" te="Chapter_Number" pt="c"/>
+    <style level="c" te="Verse_Number" pt="v"/>
+</root>
