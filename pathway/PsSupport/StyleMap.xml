@@ -12,11 +12,60 @@
     <style level="p" te="Line2" pt="q2"/>
     <style level="p" te="Line3" pt="q3"/>
     <style level="p" te="Doxology" pt="qc"/>
+    <style level="p" te="Chapter_Head" pt="cl"/>
+    <style level="p" te="Citation_Paragraph" pt="ipq"/>
+    <style level="p" te="Embedded_Text_Closing" pt="pmc"/>
+    <style level="p" te="Embedded_Text_Line1" pt="qm"/>
+    <style level="p" te="Embedded_Text_Line2" pt="qm2"/>
+    <style level="p" te="Embedded_Text_Line3" pt="qm3"/>
+    <style level="p" te="Embedded_Text_Opening" pt="pmo"/>
+    <style level="p" te="Embedded_Text_Refrain" pt="pmr"/>
+    <style level="p" te="Hebrew_Title" pt="d"/>
+    <style level="p" te="Interlude" pt=""/>
+    <style level="p" te="List_Item1_Additional" pt="li1"/>
+    <style level="p" te="List_Item2_Additional" pt="li2"/>
+    <style level="p" te="List_Item3" pt="li3"/>
+    <style level="p" te="Refrain" pt="pmr"/>
+    <style level="p" te="Section_Head_Major" pt="ms"/>
+    <style level="p" te="Section_Head_Series" pt="ms"/>
+    <style level="p" te="Section_Range_Paragraph" pt="mr"/>
+    <style level="p" te="Speech_Line1" pt="q1"/>
+    <style level="p" te="Speech_Line2" pt="q2"/>
+    <style level="p" te="Speech_Speaker" pt="sp"/>
+    <style level="p" te="Stanza_Break" pt="b"/>
+    <style level="p" te="Table_Cell" pt="tc1"/>
+    <style level="p" te="Table_Cell_Head" pt="th1"/>
+    <style level="p" te="Table_Row" pt="tr"/>
+    <style level="p" te="Variant_Paragraph" pt="p"/>
+    <style level="p" te="Variant_Section_Head" pt="s"/>
+    <!--style level="p" te="Attribution" pt=""/>
+    <style level="p" te="Table_Cell_Head_Last" pt=""/>
+    <style level="p" te="Table_Cell_Last" pt=""/>
+    <style level="p" te="Variant_Section_Tail" pt=""/ -->
     
     <!-- Character styles -->
     <style level="c" te="Quoted_Text" pt="qt"/>
     <style level="c" te="See_In_Glossary" pt="w"/>
     <style level="c" te="Words_Of_Christ" pt="wj"/>
-    <style level="c" te="Chapter_Number" pt="c"/>
-    <style level="c" te="Verse_Number" pt="v"/>
+    <style level="c" te="Alluded_Text" pt="wh"/>
+    <style level="c" te="Book_Title_In_Text" pt="bk"/>
+    <style level="c" te="Emphasis" pt="em"/>
+    <style level="c" te="Foreign" pt="tl"/>
+    <style level="c" te="Gloss" pt="wr"/>
+    <style level="c" te="Inscription" pt="add"/>
+    <style level="c" te="Key_Word" pt="k"/>
+    <style level="c" te="Name_Of_God" pt="nd"/>
+    <style level="c" te="Ordinal_Number_Ending" pt="ord"/>
+    <style level="c" te="Variant" pt="sls"/>
+    <!--style level="c" te="Abbreviation" pt=""/>
+    <style level="c" te="Hand" pt=""/>
+    <style level="c" te="Label" pt=""/>
+    <style level="c" te="Mentioned" pt=""/>
+    <style level="c" te="So_Called" pt=""/>
+    <style level="c" te="Supplied" pt=""/ -->
+    
+    <!-- Paragraph header elements -->
+    <style level="h" te="Section_Head" pt="s"/>
+    <style level="h" te="Section_Head_Minor" pt="s2"/>
+    <style level="h" te="Parallel_Passage_Reference" pt="r"/>
 </root>

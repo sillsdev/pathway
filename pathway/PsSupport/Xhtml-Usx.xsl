@@ -89,25 +89,14 @@
     
     <xsl:template match="*" mode="p">
         <xsl:variable name="prevWithClass" select="(ancestor-or-self::*[@class])[last()]"/>
+        <xsl:variable name="style" select="$mapDoc[@te = $prevWithClass/@class]"/>
         <xsl:choose>
-            <xsl:when test="$prevWithClass/@class = 'Section_Head'">
+            <xsl:when test="$style/@level = 'h'">
                 <xsl:apply-templates select="preceding::*[1]" mode="p"/>
                 <xsl:element name="para">
-                    <xsl:attribute name="style">s</xsl:attribute>
-                    <xsl:value-of select="text()"/>
-                </xsl:element>
-            </xsl:when>
-            <xsl:when test="$prevWithClass/@class = 'Section_Head_Minor'">
-                <xsl:apply-templates select="preceding::*[1]" mode="p"/>
-                <xsl:element name="para">
-                    <xsl:attribute name="style">s2</xsl:attribute>
-                    <xsl:value-of select="text()"/>
-                </xsl:element>
-            </xsl:when>
-            <xsl:when test="$prevWithClass/@class = 'Parallel_Passage_Reference'">
-                <xsl:apply-templates select="preceding::*[1]" mode="p"/>
-                <xsl:element name="para">
-                    <xsl:attribute name="style">r</xsl:attribute>
+                    <xsl:attribute name="style">
+                        <xsl:value-of select="$style/@pt"/>
+                    </xsl:attribute>
                     <xsl:value-of select="text()"/>
                 </xsl:element>
             </xsl:when>
@@ -116,34 +105,24 @@
     
     <xsl:template match="*" mode="v">
         <xsl:variable name="class" select="@class"/>
-        <xsl:variable name="pstyle" select="$mapDoc[@te = $class and @level='p']"/>
+        <xsl:variable name="style" select="$mapDoc[@te = $class]"/>
         <xsl:choose>
-            <xsl:when test="count($pstyle) != 0">
+            <xsl:when test="$style/@level = 'p'">
                 <xsl:apply-templates select="preceding::*[1]" mode="p"/>
                 <xsl:element name="para">
                     <xsl:attribute name="style">
-                        <xsl:value-of select="$pstyle/@pt"/>
+                        <xsl:value-of select="$style/@pt"/>
                     </xsl:attribute>
                     <xsl:apply-templates select="node()" mode="v"/>
                 </xsl:element>
                 <xsl:apply-templates select="following::*[1]" mode="v"/>
             </xsl:when>
             <!-- Character Styles -->
-            <xsl:when test="@class = 'Quoted_Text'">
+            <xsl:when test="$style/@level = 'c'">
                 <xsl:element name="char">
-                    <xsl:attribute name="style">qt</xsl:attribute>
-                    <xsl:value-of select="text()"/>
-                </xsl:element>
-            </xsl:when>
-            <xsl:when test="@class = 'See_In_Glossary'">
-                <xsl:element name="char">
-                    <xsl:attribute name="style">w</xsl:attribute>
-                    <xsl:value-of select="text()"/>
-                </xsl:element>
-            </xsl:when>
-            <xsl:when test="@class = 'Words_Of_Christ'">
-                <xsl:element name="char">
-                    <xsl:attribute name="style">wj</xsl:attribute>
+                    <xsl:attribute name="style">
+                        <xsl:value-of select="$style/@pt"/>
+                    </xsl:attribute>
                     <xsl:value-of select="text()"/>
                 </xsl:element>
             </xsl:when>
@@ -159,7 +138,7 @@
             <xsl:when test="@class = 'scrSection'">
                 <xsl:apply-templates select="child::*[1]" mode="v"/>
             </xsl:when>
-            <xsl:when test="@class = 'Section_Head' or @class = 'Section_Head_Minor' or @class = 'Parallel_Passage_Reference'">
+            <xsl:when test="$style/@level = 'h'">
                 <xsl:apply-templates select="following::*[1]" mode="v"/>
             </xsl:when>
             <xsl:when test="@class = 'scrFootnoteMarker'"/>
