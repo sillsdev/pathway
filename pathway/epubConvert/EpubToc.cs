@@ -170,11 +170,11 @@ namespace epubConvert
                 ncx.WriteAttributeString("src", name);
                 ncx.WriteEndElement(); // meta
                 index++;
-                // chapters within the books (nested as a subhead)
-                if (!skipChapterInfo)
-                {
-                    WriteEndNoteLinks(file, ref index, ncx);
-                }
+                //// chapters within the books (nested as a subhead)
+                //if (!skipChapterInfo)
+                //{
+                //    WriteEndNoteLinks(file, ref index, ncx);
+                //}
             }
             else
             {
