@@ -352,7 +352,7 @@ namespace SIL.Tool
             if (Param.GetMetadataValue(Param.Title) != null)
                 sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Title)));
 
-            sb.AppendLine("<br /><br /><br /><br /><br /><br /><br /><br /><br />");
+            sb.AppendLine("<br /><br /><br /><br /><br /><br /><br />");
 
             sb.AppendLine("</h1>");
             sb.Append("<p class='Publisher'>");
