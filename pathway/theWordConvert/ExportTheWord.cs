@@ -187,17 +187,18 @@ namespace SIL.PublishingSolution
             var xhtml2Usx = GetXhtml2Usx();
             var xhtml2UsxArgs = LoadXhtml2XslArgs();
             var bookCodes = GetBookCodes(xhtmlFileName);
+            var xDoc = Common.DeclareXMLDocument(false);
+            xDoc.Load(xhtmlFileName);
             foreach (string bookCode in bookCodes)
             {
-                var readerSettings = new XmlReaderSettings();
-                var reader = XmlReader.Create(xhtmlFileName, readerSettings);
-                var outName = Common.PathCombine(usxPath, bookCode);
+                var outName = Common.PathCombine(usxPath, bookCode + ".usx");
                 var w = XmlWriter.Create(outName);
                 xhtml2UsxArgs.AddParam("code", "", bookCode);
-                xhtml2Usx.Transform(reader, xhtml2UsxArgs, w);
-                reader.Close();
+                xhtml2Usx.Transform(xDoc, xhtml2UsxArgs, w);
+                xhtml2UsxArgs.RemoveParam("code", "");
                 w.Close();
             }
+            xDoc.RemoveAll();
         }
 
         private ArrayList GetBookCodes(string xhtmlFileName)
@@ -579,6 +580,7 @@ namespace SIL.PublishingSolution
         protected static void GetRtlParam(XsltArgumentList xsltArgs)
         {
             R2L = false;
+            if (string.IsNullOrEmpty(Ssf)) return;
             var language = GetSsfValue("//Language", "English");
             var languagePath = Path.GetDirectoryName(Ssf);
             var languageFile = Common.PathCombine(languagePath, language);
