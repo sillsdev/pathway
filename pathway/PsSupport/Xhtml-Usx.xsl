@@ -83,7 +83,9 @@
                 </xsl:attribute>
                 <xsl:attribute name="style">c</xsl:attribute>
             </xsl:element>
-            <xsl:apply-templates select="parent::*" mode="v"/>
+            <xsl:apply-templates select="parent::*" mode="v">
+                <xsl:with-param name="first" select="true()"/>
+            </xsl:apply-templates>
         </xsl:for-each>
     </xsl:template>
     
@@ -104,18 +106,22 @@
     </xsl:template>
     
     <xsl:template match="*" mode="v">
+        <xsl:param name="first" select="false()"/>
         <xsl:variable name="class" select="@class"/>
         <xsl:variable name="style" select="$mapDoc[@te = $class]"/>
         <xsl:choose>
             <xsl:when test="$style/@level = 'p'">
-                <xsl:apply-templates select="preceding::*[1]" mode="p"/>
-                <xsl:element name="para">
-                    <xsl:attribute name="style">
-                        <xsl:value-of select="$style/@pt"/>
-                    </xsl:attribute>
-                    <xsl:apply-templates select="node()" mode="v"/>
-                </xsl:element>
-                <xsl:apply-templates select="following::*[1]" mode="v"/>
+                <xsl:variable name="childClass" select="child::*[1]/@class"/>
+                <xsl:if test="count($childClass) = 0 or $childClass != 'Chapter_Number' or $first">
+                    <xsl:apply-templates select="preceding::*[1]" mode="p"/>
+                    <xsl:element name="para">
+                        <xsl:attribute name="style">
+                            <xsl:value-of select="$style/@pt"/>
+                        </xsl:attribute>
+                        <xsl:apply-templates select="node()" mode="v"/>
+                    </xsl:element>
+                    <xsl:apply-templates select="following::*[1]" mode="v"/>
+                </xsl:if>
             </xsl:when>
             <!-- Character Styles -->
             <xsl:when test="$style/@level = 'c'">
