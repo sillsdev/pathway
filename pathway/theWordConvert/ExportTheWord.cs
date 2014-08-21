@@ -24,6 +24,7 @@ using System.Security;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.XPath;
 using System.Xml.Xsl;
 using SIL.Tool;
 
@@ -40,9 +41,11 @@ namespace SIL.PublishingSolution
         private static bool _hasMessages;
         protected static string MessageFullName;
         private static string _tempGlossaryName = "";
+        private static string _defaultLanguage = "zxx";
 
         protected static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
         protected static readonly XslCompiledTransform Xhtml2Usx = new XslCompiledTransform();
+        protected static readonly XslCompiledTransform Xhtml2BookNames = new XslCompiledTransform();
 
         public string ExportType
         {
@@ -112,7 +115,7 @@ namespace SIL.PublishingSolution
                 CollectTestamentBooks(otBooks, ntBooks);
                 inProcess.PerformStep();
 
-                var output = GetSsfValue("//EthnologueCode", "zxx");
+                var output = GetSsfValue("//EthnologueCode", _defaultLanguage);
                 var fullName = UsxDir(exportTheWordInputPath);
                 LogStatus("Processing: {0}", fullName);
                 xsltArgs.XsltMessageEncountered += XsltMessage;
@@ -184,34 +187,61 @@ namespace SIL.PublishingSolution
             var usxPath = Common.PathCombine(xhtmlDir, "USX");
             if (Directory.Exists(usxPath)) return;
             Directory.CreateDirectory(usxPath);
-            var xhtml2Usx = GetXhtml2Usx();
-            var xhtml2UsxArgs = LoadXhtml2XslArgs();
-            var bookCodes = GetBookCodes(xhtmlFileName);
             var xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(xhtmlFileName);
+            var bookCodes = GetBookCodes(xDoc);
+            SetDefaultLanguage(xDoc);
+            CreateBookNames(xDoc, usxPath);
+            CreateUsxBooks(bookCodes, usxPath, xDoc);
+            xDoc.RemoveAll();
+        }
+
+        private void CreateBookNames(IXPathNavigable xDoc, string usxPath)
+        {
+            GetXslt("Xhtml2BookNames.xsl", Xhtml2BookNames);
+            var args = new XsltArgumentList();
+            var outName = Common.PathCombine(usxPath, "BookNames.xml");
+            var w = XmlWriter.Create(outName);
+            Xhtml2BookNames.Transform(xDoc, args, w);
+            w.Close();
+        }
+
+        private void CreateUsxBooks(ArrayList bookCodes, string usxPath, IXPathNavigable xDoc)
+        {
+            Debug.Assert(bookCodes != null);
+            GetXslt("Xhtml-Usx.xsl", Xhtml2Usx);
+            var xhtml2UsxArgs = LoadXhtml2XslArgs();
             foreach (string bookCode in bookCodes)
             {
                 var outName = Common.PathCombine(usxPath, bookCode + ".usx");
                 var w = XmlWriter.Create(outName);
                 xhtml2UsxArgs.AddParam("code", "", bookCode);
-                xhtml2Usx.Transform(xDoc, xhtml2UsxArgs, w);
+                Xhtml2Usx.Transform(xDoc, xhtml2UsxArgs, w);
                 xhtml2UsxArgs.RemoveParam("code", "");
                 w.Close();
             }
-            xDoc.RemoveAll();
         }
 
-        private ArrayList GetBookCodes(string xhtmlFileName)
+        private static void SetDefaultLanguage(XmlDocument xDoc)
         {
+            Debug.Assert(xDoc != null);
+            var lang = xDoc.SelectSingleNode("(//@lang)[2]");
+            if (lang != null)
+            {
+                _defaultLanguage = lang.Value;
+            }
+        }
+
+        private static ArrayList GetBookCodes(XmlDocument xDoc)
+        {
+            Debug.Assert(xDoc != null);
             var bookCodes = new ArrayList();
-            var xDoc = Common.DeclareXMLDocument(false);
-            xDoc.Load(xhtmlFileName);
             var nodes = xDoc.SelectNodes("//*[@class = 'scrBookCode']/text()");
+            Debug.Assert(nodes != null);
             foreach (XmlText node in nodes)
             {
                 bookCodes.Add(node.Value);
             }
-            xDoc.RemoveAll();
             return bookCodes;
         }
 
@@ -222,17 +252,16 @@ namespace SIL.PublishingSolution
             return xsltArgs;
         }
 
-        private XslCompiledTransform GetXhtml2Usx()
+        private void GetXslt(string xsltName, XslCompiledTransform transform)
         {
             var xsltSettings = new XsltSettings { EnableDocumentFunction = true };
-            var inputXsl = new StreamReader(Common.FromRegistry("Xhtml-Usx.xsl"));
+            var inputXsl = new StreamReader(Common.FromRegistry(xsltName));
             Debug.Assert(inputXsl != null);
             var readerSettings = new XmlReaderSettings { XmlResolver = FileStreamXmlResolver.GetNullResolver() };
             var reader = XmlReader.Create(inputXsl, readerSettings);
-            Xhtml2Usx.Load(reader, xsltSettings, null);
+            transform.Load(reader, xsltSettings, null);
             reader.Close();
             inputXsl.Close();
-            return Xhtml2Usx;
         }
 
         protected void DisplayMessageReport()
@@ -536,7 +565,7 @@ namespace SIL.PublishingSolution
         {
             var xsltArgs = new XsltArgumentList();
             xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
-            xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
+            xsltArgs.AddParam("bookNames", "", GetBookNamesUri(path));
             xsltArgs.AddParam("glossary", "", GetGlossaryUri(path));
             xsltArgs.AddParam("versification", "", VrsName);
             GetRtlParam(xsltArgs);
@@ -610,8 +639,12 @@ namespace SIL.PublishingSolution
             }
         }
 
-        protected static string GetBookNamesUri()
+        protected static string GetBookNamesUri(string exportTheWordInputPath)
         {
+            if (string.IsNullOrEmpty(Ssf))
+            {
+                return "file:///" + Common.PathCombine(UsxDir(exportTheWordInputPath), "BookNames.xml");
+            }
             var myProj = Common.PathCombine((string) ParatextData, GetSsfValue("//Name"));
             return "file:///" + Common.PathCombine(myProj, "BookNames.xml");
         }
@@ -695,7 +728,7 @@ about={2} \
 <p><b>Creative Commons</b> <i>Atribution-Non Comercial-No Derivatives 4.0</i>\
 <p><font color=blue><i>http://creativecommons.org/licenses/by-nc-nd/4.0</i></font>\
 ";
-            var langCode = GetSsfValue("//EthnologueCode", "zxx");
+            var langCode = GetSsfValue("//EthnologueCode", _defaultLanguage);
             const bool isConfigurationTool = false;
             var shortTitle = Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool);
             var fullTitle = GetSsfValue("//FullName", shortTitle);

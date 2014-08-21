@@ -721,8 +721,10 @@ namespace Test.theWordConvert
         public void GetBookNamesUriTest()
         {
             ParatextData = null;
-            string actual = GetBookNamesUri();
-            Assert.AreEqual("file:///BookNames.xml", actual);
+            Ssf = "";
+            string expected = "file:///" + Path.Combine(_inputPath, Path.Combine("USX", "BookNames.xml"));
+            string actual = GetBookNamesUri(_inputPath);
+            Assert.AreEqual(expected, actual);
        }
 
         /// <summary>
