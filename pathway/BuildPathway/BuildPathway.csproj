@@ -491,6 +491,9 @@
     <AllTransform Include="..\PsSupport\addDicTocHeads.xsl" />
     <AllTransform Include="..\PsSupport\FixEpub.xsl" />
     <AllTransform Include="..\PsSupport\FixEpubToc.xsl" />
+    <AllTransform Include="..\PsSupport\Xhtml-Usx.xsl"/>
+    <AllTransform Include="..\PsSupport\Xhtml2BookNames.xsl"/>
+    <AllTransform Include="..\PsSupport\StyleMap.xml"/>
     <BteTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
     <BteTransform Include="..\PsSupport\*.xslt" />
     <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
