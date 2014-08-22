@@ -2493,6 +2493,10 @@ namespace SIL.PublishingSolution
                                 XmlAttribute attribute = xmlDocument.CreateAttribute("href");
                                 attribute.Value = variable;
                                 nodeContent.Attributes.Append(attribute);
+                                XmlAttribute attribute2 = xmlDocument.CreateAttribute("class");
+                                attribute2.Value = "chapternumberlink";
+                                nodeContent.Attributes.Append(attribute2);
+
                                 nodeContent.InnerText = GetChapterNumber(variable);
                                 Debug.Assert(next != null && next.ParentNode != null);
                                 next.ParentNode.InsertBefore(nodeContent, next);

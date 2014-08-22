@@ -42,7 +42,7 @@ namespace SIL.PublishingSolution
             string cssFile = Common.PathCombine(oebpsPath, "book.css");
 
             var preProcessor = new PreExportProcess();
-            preProcessor.ReplaceStringInCss(cssFile, "{direction:ltr}", "{direction:ltr;}");
+            preProcessor.ReplaceStringInFile(cssFile, "{direction:ltr}", "{direction:ltr;}");
             preProcessor.RemoveStringInCss(cssFile, "direction:");
 
 
@@ -76,14 +76,22 @@ namespace SIL.PublishingSolution
         private static void ModifyTocContent(string oebpsPath)
         {
             var epub3Toc = LoadEpub3Toc();
-            string ncxfile = Common.PathCombine(oebpsPath, "toc.ncx");
 
+            string ncxTempFile = Common.PathCombine(oebpsPath, "toctemp.ncx");
+            string ncxfile = Common.PathCombine(oebpsPath, "toc.ncx");
+            File.Copy(ncxfile, ncxTempFile, true);
             string epub3TocFile = Common.PathCombine(oebpsPath, "toc.html");
             if (File.Exists(ncxfile))
             {
                 Common.ApplyXslt(ncxfile, epub3Toc);
                 File.Copy(ncxfile,epub3TocFile,true);
-                File.Delete(ncxfile);
+                if (File.Exists(ncxTempFile))
+                {
+                    File.Copy(ncxTempFile, ncxfile, true);
+                    var preProcessor = new PreExportProcess();
+                    preProcessor.ReplaceStringInFile(ncxfile, ".xhtml", ".html");
+                    File.Delete(ncxTempFile);
+                }
             }
         }
 

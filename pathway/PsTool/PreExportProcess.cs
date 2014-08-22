@@ -2677,11 +2677,11 @@ namespace SIL.Tool
         /// <summary>
         /// To replace the symbol string if the symbol matches with the text
         /// </summary>
-        public void ReplaceStringInCss(string cssFile, string existingContent, string replacingContent)
+        public void ReplaceStringInFile(string replaceinFileName, string existingContent, string replacingContent)
         {
-            if (File.Exists(cssFile))
+            if (File.Exists(replaceinFileName))
             {
-                var sr = new StreamReader(cssFile);
+                var sr = new StreamReader(replaceinFileName);
                 string fileContent = sr.ReadToEnd();
                 sr.Close();
 
@@ -2689,7 +2689,7 @@ namespace SIL.Tool
                 {
                     fileContent = fileContent.Replace(existingContent, replacingContent);
                 }
-                var sw = new StreamWriter(cssFile);
+                var sw = new StreamWriter(replaceinFileName);
                 sw.Write(fileContent);
                 sw.Close();
             }

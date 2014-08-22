@@ -250,7 +250,7 @@ namespace epubConvert
             ncx.WriteStartElement("head");
             ncx.WriteStartElement("meta");
             ncx.WriteAttributeString("name", "dtb:uid");
-            ncx.WriteAttributeString("content", bookId.ToString());
+            ncx.WriteAttributeString("content", "http://pathway.sil.org/"); //  bookId.ToString()
             ncx.WriteEndElement(); // meta
             ncx.WriteStartElement("meta");
             ncx.WriteAttributeString("name", "epub-creator");
