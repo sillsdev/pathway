@@ -2145,7 +2145,15 @@ namespace SIL.PublishingSolution
                         outFile.Write(verseNode.InnerText);
                     }
                     outFile.Write("</a> ");
-                    outFile.Write(CleanupSpans(crossRefNode.InnerXml));
+                    XmlNode refText = crossRefNode.SelectSingleNode("xhtml:span[not (@class)]",namespaceManager);
+                    if (refText != null)
+                    {
+                        outFile.Write(CleanupSpans(refText.OuterXml));
+                    }
+                    else
+                    {
+                        outFile.Write(CleanupSpans(crossRefNode.InnerXml));
+                    }
                     outFile.WriteLine("</li>");
                 }
                 outFile.WriteLine("</ul>");
