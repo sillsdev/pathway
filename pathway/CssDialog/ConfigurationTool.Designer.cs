@@ -1228,7 +1228,7 @@ namespace SIL.PublishingSolution
             this.ddlJustified.FormattingEnabled = true;
             this.ddlJustified.Location = new System.Drawing.Point(107, 138);
             this.ddlJustified.Name = "ddlJustified";
-            this.ddlJustified.Size = new System.Drawing.Size(68, 21);
+            this.ddlJustified.Size = new System.Drawing.Size(80, 21);
             this.ddlJustified.TabIndex = 7;
             this.ddlJustified.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             this.ddlJustified.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -1253,7 +1253,7 @@ namespace SIL.PublishingSolution
             this.ddlPageColumn.FormattingEnabled = true;
             this.ddlPageColumn.Location = new System.Drawing.Point(107, 90);
             this.ddlPageColumn.Name = "ddlPageColumn";
-            this.ddlPageColumn.Size = new System.Drawing.Size(68, 21);
+            this.ddlPageColumn.Size = new System.Drawing.Size(80, 21);
             this.ddlPageColumn.TabIndex = 5;
             this.ddlPageColumn.SelectedIndexChanged += new System.EventHandler(this.ddlPageColumn_SelectedIndexChanged);
             this.ddlPageColumn.Enter += new System.EventHandler(this.SetGotFocusValue);
