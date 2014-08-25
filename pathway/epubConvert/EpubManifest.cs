@@ -458,12 +458,16 @@ namespace epubConvert
                 else if (name.ToLower().EndsWith(".jpg") || name.ToLower().EndsWith(".jpeg"))
                 {
                     opf.WriteStartElement("item"); // item (image)
-                    opf.WriteAttributeString("id", nameNoExt + "image");
-                    
                     if (nameNoExt != null && epubVersion == "epub3" && nameNoExt.ToLower() == "cover")
                     {
+                        opf.WriteAttributeString("id", nameNoExt + "image");
                         opf.WriteAttributeString("properties", "cover-image");
                     }
+                    else
+                    {
+                        opf.WriteAttributeString("id", "image" + nameNoExt);
+                    }
+
                     opf.WriteAttributeString("href", name);
                     if (nameNoExt != null && nameNoExt.Contains("sil-bw-logo"))
                     {

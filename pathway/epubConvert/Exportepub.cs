@@ -320,6 +320,7 @@ namespace SIL.PublishingSolution
             inProcess.SetStatus("Generating .epub TOC and manifest");
             _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
             epubToc.CreateNcx(projInfo, contentFolder, bookId);
+            ModifyTOCFile(contentFolder);
             if (File.Exists(tempCssFile))
             {
                 File.Delete(tempCssFile);
@@ -512,6 +513,32 @@ namespace SIL.PublishingSolution
             }
             xmlDoc.Save(tocFiletoUpdate);
         }
+
+        private static void ModifyTOCFile(string oebpsPath)
+        {
+            //NCX to XHTML
+            string ncxfile = Common.PathCombine(oebpsPath, "toc.ncx");
+            string ncxPath = Common.PathCombine(oebpsPath, "toc1.ncx");
+            File.Copy(ncxfile, ncxPath);
+            string xhtmlPath = Common.PathCombine(oebpsPath, "File3TOC00000_.xhtml");
+            if (File.Exists(ncxPath))
+            {
+                var tocHtml = CreateFileTocByNcx();
+                Common.ApplyXslt(ncxPath, tocHtml);
+                File.Copy(ncxPath, xhtmlPath, true);
+                File.Delete(ncxPath);
+            }
+        }
+
+        public static XslCompiledTransform CreateFileTocByNcx()
+        {
+            var ncxtoxhtmlStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.NcxToXhtml.xsl");
+            Debug.Assert(ncxtoxhtmlStream != null);
+            var ncxtoxhtml = new XslCompiledTransform();
+            ncxtoxhtml.Load(XmlReader.Create(ncxtoxhtmlStream));
+            return ncxtoxhtml;
+        }
+
         private Dictionary<string, Dictionary<string, string>> WriteGlossaryLink(PublicationInformation projInfo)
         {
             Dictionary<string, Dictionary<string, string>> glossorywordsDictionaries = new Dictionary<string, Dictionary<string, string>>();

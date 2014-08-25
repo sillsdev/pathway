@@ -851,7 +851,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // for dictionaries, the letter is used both for the ID and name
-                    revBookIDs = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
+                    revBookIDs = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
                     revBookNames = revBookIDs;
                 }
                 if (revBookIDs != null && revBookIDs.Count > 0)
