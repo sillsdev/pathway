@@ -81,7 +81,7 @@
             this.chkHelpToImprove.AutoSize = true;
             this.chkHelpToImprove.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkHelpToImprove.Location = new System.Drawing.Point(236, 303);
-            this.chkHelpToImprove.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkHelpToImprove.Margin = new System.Windows.Forms.Padding(4);
             this.chkHelpToImprove.Name = "chkHelpToImprove";
             this.chkHelpToImprove.Size = new System.Drawing.Size(112, 20);
             this.chkHelpToImprove.TabIndex = 6;
@@ -91,7 +91,7 @@
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(573, 303);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(4);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(100, 28);
             this.btnOk.TabIndex = 7;
@@ -113,12 +113,11 @@
             // 
             // lnkGPL
             // 
-            this.lnkGPL.AutoSize = true;
             this.lnkGPL.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnkGPL.Location = new System.Drawing.Point(325, 175);
             this.lnkGPL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkGPL.Name = "lnkGPL";
-            this.lnkGPL.Size = new System.Drawing.Size(87, 16);
+            this.lnkGPL.Size = new System.Drawing.Size(200, 16);
             this.lnkGPL.TabIndex = 10;
             this.lnkGPL.TabStop = true;
             this.lnkGPL.Text = "GNU GPL v3";
@@ -161,7 +160,7 @@
             this.pictureBox1.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources._2014_sil_logo;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(29, 30);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(164, 158);
             this.pictureBox1.TabIndex = 17;
@@ -199,7 +198,7 @@
             this.Controls.Add(this.lblProductName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutPw";

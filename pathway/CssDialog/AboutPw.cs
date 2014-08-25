@@ -176,6 +176,15 @@ namespace SIL.PublishingSolution
             lblVersion.Text = String.Format("Version: {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
 
             HelpImproveGetValue(chkHelpToImprove);
+
+            if (Common.IsUnixOS())
+            {
+                this.label5.Location = new Point(label5.Location.X - 20, label5.Location.Y);
+                this.lnkProj.Location = new Point(lnkProj.Location.X - 30, lnkProj.Location.Y - 51);
+                this.lblProjUrl.Location = new Point(lblProjUrl.Location.X, lblProjUrl.Location.Y - 50);
+                this.chkHelpToImprove.Location = new Point(chkHelpToImprove.Location.X, chkHelpToImprove.Location.Y - 50);
+                this.lnkGPL.Location = new Point(lnkGPL.Location.X - 10, lnkGPL.Location.Y);
+            }
         }
 
 
