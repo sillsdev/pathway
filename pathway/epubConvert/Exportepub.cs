@@ -1853,6 +1853,9 @@ namespace SIL.PublishingSolution
         /// <param name="image">File to resize</param>
         private Image ResizeImage(Image image)
         {
+            if (MaxImageWidth < 100)
+                MaxImageWidth = 100; //Set Minimum value
+
             float nPercent = ((float)MaxImageWidth / (float)image.Width);
             var destW = (int)(image.Width * nPercent);
             var destH = (int)(image.Height * nPercent);
