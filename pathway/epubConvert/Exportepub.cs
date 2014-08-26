@@ -2069,25 +2069,31 @@ namespace SIL.PublishingSolution
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
                 XmlNodeList footnoteNodes = null;
-                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_General_Paragraph']/a")
-                    : xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
+                footnoteNodes = xmlDocument.SelectNodes("//span[@class='Note_General_Paragraph']/a");
+                    
+                if (footnoteNodes == null || footnoteNodes.Count == 0)
+                {
+                    footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
+                }
 
                 if (footnoteNodes == null)
                 {
-                    return;
+                    foreach (XmlNode footnoteNode in footnoteNodes)
+                    {
+                        if (footnoteNode.Attributes != null)
+                            footnoteNode.Attributes["href"].Value = "zzReferences.xhtml" + footnoteNode.Attributes["href"].Value;
+                    }
                 }
-                foreach (XmlNode footnoteNode in footnoteNodes)
-                {
-                    if (footnoteNode.Attributes != null)
-                        footnoteNode.Attributes["href"].Value = "zzReferences.xhtml" + footnoteNode.Attributes["href"].Value;
-                }
-                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_CrossHYPHENReference_Paragraph']/a")
-                    : xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
 
-                if (footnoteNodes == null)
+                footnoteNodes = xmlDocument.SelectNodes("//span[@class='Note_CrossHYPHENReference_Paragraph']/a");
+                
+                if (footnoteNodes == null || footnoteNodes.Count == 0)
                 {
-                    return;
+                    footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
+                    if (footnoteNodes == null)
+                        return;
                 }
+
                 foreach (XmlNode footnoteNode in footnoteNodes)
                 {
                     if (footnoteNode.Attributes != null)
