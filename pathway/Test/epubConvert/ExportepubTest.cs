@@ -374,6 +374,19 @@ namespace Test.epubConvert
             node = resultDoc.SelectSingleNode(xPath, nsmgr);
             Assert.AreEqual(node.InnerText.Trim(), "[c] 2.41 Hari basar Paska Yahudi tu, orang Yahudi inga waktu dong pung tete nene moyang kaluar dari negara Mesir. Dolo dong jadi orang suru-suru di tampa tu, mar Allah kasi kaluar dong la bawa dong ka tana yang Antua su janji par dong."); 
         }
+
+        [Test]
+        public void RemoveEmptyHrefTest()
+        {
+            CleanOutputDirectory();
+            const string folderName = "RemoveEmptyHrefTest";
+            FolderTree.Copy(FileInput(folderName), FileOutput(folderName));
+            ReplaceEmptyHref(FileOutput(folderName));
+            string expectedFilesPath = FileExpected(folderName.Replace("Test","Expected"));
+            FileCompare(FileOutput(folderName) + "/PartFile00001_01.xhtml", expectedFilesPath + "/PartFile00001_01.xhtml");
+            FileCompare(FileOutput(folderName) + "/PartFile00001_03.xhtml", expectedFilesPath + "/PartFile00001_03.xhtml");
+        }
+
         public static void IsValid(string filename, string msg)
         {
             Assert.IsTrue(File.Exists(filename), string.Format("{0}: {1} does not exist", msg, filename));

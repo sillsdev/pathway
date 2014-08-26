@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<xsl:stylesheet version="1.0" 
+<xsl:stylesheet version="1.0"
                 exclude-result-prefixes="ncx xsl"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/"
@@ -8,7 +8,11 @@
 
   <xsl:template match="ncx:ncx">
     <html>
-      <head><title><xsl:apply-templates select="/ncx:ncx/ncx:docTitle/ncx:text"/></title></head>
+      <head>
+        <title>
+          <xsl:apply-templates select="/ncx:ncx/ncx:docTitle/ncx:text"/>
+        </title>
+      </head>
       <body>
         <xsl:apply-templates />
       </body>
@@ -17,38 +21,47 @@
 
   <xsl:template match="ncx:navMap">
     <div id="TOCPage" class="Contents">
-        <xsl:copy-of select="@class"/>
-        <xsl:choose>
-          <xsl:when test="ncx:navLabel">
-            <xsl:apply-templates select="ncx:navLabel" mode="heading"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:if test="self::ncx:navMap">
-              <h1>Table of Contents</h1>
-            </xsl:if>
-          </xsl:otherwise>
-        </xsl:choose>
-          <xsl:apply-templates select="ncx:navPoint/ncx:navPoint"/>
-      </div>
+      <xsl:copy-of select="@class"/>
+      <xsl:choose>
+        <xsl:when test="ncx:navLabel">
+          <xsl:apply-templates select="ncx:navLabel" mode="heading"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:if test="self::ncx:navMap">
+            <h1>Table of Contents</h1>
+          </xsl:if>
+        </xsl:otherwise>
+      </xsl:choose>
+      <ul>
+        <xsl:apply-templates select="ncx:navPoint/ncx:navPoint"/>
+      </ul>
+    </div>
   </xsl:template>
 
   <xsl:template match="ncx:navPoint">
     <xsl:text>&#10;</xsl:text>
     <xsl:choose>
       <xsl:when test="ncx:navPoint/ncx:navPoint">
-        <h2><xsl:value-of select="ncx:navLabel"></xsl:value-of></h2>
-        <ul> <xsl:apply-templates select="ncx:navPoint"/></ul>
+        <li>
+          <h2>
+            <xsl:value-of select="ncx:navLabel"></xsl:value-of>
+          </h2>
+          <ul>
+            <xsl:apply-templates select="ncx:navPoint"/>
+          </ul>
+        </li>
       </xsl:when>
       <xsl:otherwise>
         <li>
           <xsl:copy-of select="@class"/>
-          
+
           <!-- every navPoint and pageTarget has to have a navLabel and content -->
           <a href="{ncx:content[1]/@src}">
             <xsl:apply-templates select="ncx:navLabel"/>
           </a>
-          
-          <!-- Only some navPoints have more navPoints inside them for deep NCXes. pageTargets cannot nest. -->
+
+          <!-- Only some n
+            avPoints have more navPoints inside them for deep NCXes. pageTargets cannot nest. -->
           <xsl:if test="ncx:navPoint">
             <ul>
               <xsl:apply-templates select="ncx:navPoint"/>
@@ -56,8 +69,8 @@
           </xsl:if>
         </li>
       </xsl:otherwise>
-      </xsl:choose>
-    
+    </xsl:choose>
+
   </xsl:template>
 
   <xsl:template match="ncx:navLabel|ncx:text">
@@ -76,14 +89,15 @@
 
   <!-- Default rule to catch omissions -->
   <xsl:template match="*">
-    <xsl:message terminate="yes">ERROR: <xsl:value-of select="name(.)"/> not matched!
+    <xsl:message terminate="yes">
+      ERROR: <xsl:value-of select="name(.)"/> not matched!
     </xsl:message>
   </xsl:template>
 
   <xsl:template name="html-head">
     <head>
 
-    </head>  
+    </head>
   </xsl:template>
 
 </xsl:stylesheet>

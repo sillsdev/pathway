@@ -321,6 +321,7 @@ namespace SIL.PublishingSolution
             _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
             epubToc.CreateNcx(projInfo, contentFolder, bookId);
             ModifyTOCFile(contentFolder);
+            ReplaceEmptyHref(contentFolder);
             if (File.Exists(tempCssFile))
             {
                 File.Delete(tempCssFile);
@@ -467,6 +468,22 @@ namespace SIL.PublishingSolution
             #endregion Close Reporting
 
             return success;
+        }
+
+        protected void ReplaceEmptyHref(string contentFolder)
+        {
+            string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
+            foreach (string file in files)
+            {
+                var reader = new StreamReader(file);
+                var content = new StringBuilder();
+                content.Append(reader.ReadToEnd());
+                reader.Close();
+                content.Replace("a href=\"#\"", "a");
+                var writer = new StreamWriter(file);
+                writer.Write(content);
+                writer.Close();
+            }
         }
         private void GlossaryLinkReferencing(PublicationInformation projInfo,Dictionary<string,Dictionary<string,string>> glossoryreferncelist)
         {
