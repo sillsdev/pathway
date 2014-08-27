@@ -393,15 +393,18 @@ namespace SIL.PublishingSolution
                 if (MessageBox.Show(Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files", Resources.ExportComplete, MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    ValidateResult(outputPathWithFileName);// Epub2 ExportType
-                    ValidateResult(outputPathWithFileNameV3);//Epub3 ExportType
+                    ValidateResult(outputPathWithFileName);     // Epub2 ExportType
+                    ValidateResult(outputPathWithFileNameV3);   //Epub3 ExportType
                 }
 
                 #region Option Dialog box
 
                 if (!Common.Testing && isOutputDilalogNeeded)
                 {
-                    EpubExportTypeDlg exportTypeDlg = new EpubExportTypeDlg();
+                    outputPathWithFileName = RenameEpubFileName(outputPathWithFileName, "epub2");
+                    outputPathWithFileNameV3 = RenameEpubFileName(outputPathWithFileNameV3, "epub3");
+
+                    var exportTypeDlg = new EpubExportTypeDlg();
                     exportTypeDlg.ShowDialog();
                     if (exportTypeDlg._exportType == "epub2")
                     {
@@ -468,6 +471,13 @@ namespace SIL.PublishingSolution
             #endregion Close Reporting
 
             return success;
+        }
+
+        private static string RenameEpubFileName(string oldEpubFileName, string epubVersion)
+        {
+            string newEpubFileName = oldEpubFileName.Replace(".epub", "_" + epubVersion + ".epub");
+            File.Move(oldEpubFileName, newEpubFileName);
+            return newEpubFileName;
         }
 
         protected void ReplaceEmptyHref(string contentFolder)
