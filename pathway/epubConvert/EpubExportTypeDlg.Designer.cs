@@ -152,6 +152,7 @@
             this.Controls.Add(this.grpExportType);
             this.Controls.Add(this.btnexprtCancel);
             this.Controls.Add(this.btnexprtfolder);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EpubExportTypeDlg";
