@@ -43,6 +43,7 @@ namespace SIL.PublishingSolution
 
             var preProcessor = new PreExportProcess();
             preProcessor.ReplaceStringInFile(cssFile, "{direction:ltr}", "{direction:ltr;}");
+            preProcessor.ReplaceStringInFile(cssFile, "direction:", "dir:");
             //preProcessor.RemoveStringInCss(cssFile, "direction:");
 
 
