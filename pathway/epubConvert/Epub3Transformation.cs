@@ -43,11 +43,11 @@ namespace SIL.PublishingSolution
 
             var preProcessor = new PreExportProcess();
             preProcessor.ReplaceStringInFile(cssFile, "{direction:ltr}", "{direction:ltr;}");
-            preProcessor.RemoveStringInCss(cssFile, "direction:");
+            //preProcessor.RemoveStringInCss(cssFile, "direction:");
 
 
             var xhmltohtml5Space = Loadxhmltohtml5Xslt(projInfo.ProjectInputType.ToLower());
-            
+
             Convertxhtmltohtml5(oebpsPath, xhmltohtml5Space);
 
             ModifyContainerXML();
@@ -84,7 +84,7 @@ namespace SIL.PublishingSolution
             if (File.Exists(ncxfile))
             {
                 Common.ApplyXslt(ncxfile, epub3Toc);
-                File.Copy(ncxfile,epub3TocFile,true);
+                File.Copy(ncxfile, epub3TocFile, true);
                 if (File.Exists(ncxTempFile))
                 {
                     File.Copy(ncxTempFile, ncxfile, true);
@@ -120,6 +120,8 @@ namespace SIL.PublishingSolution
         private void Convertxhtmltohtml5(string oebpsPath, XslCompiledTransform xhmltohtml5Space)
         {
             string[] filesList = null;
+            //XslCompiledTransform _xhtmlXelatexXslProcess = new XslCompiledTransform();
+            //_xhtmlXelatexXslProcess.Load(XmlReader.Create(Common.UsersXsl("AddBidi.xsl")));
             if (Directory.Exists(oebpsPath))
             {
                 filesList = Directory.GetFiles(oebpsPath);
@@ -129,6 +131,8 @@ namespace SIL.PublishingSolution
                     if (fileInfo.Extension == ".xhtml")
                     {
                         Common.ApplyXslt(curFile, xhmltohtml5Space);
+                        //Common.ApplyXslt(curFile, _xhtmlXelatexXslProcess);
+
                         if (File.Exists(curFile))
                         {
                             string fileName = Path.GetFileName(curFile);

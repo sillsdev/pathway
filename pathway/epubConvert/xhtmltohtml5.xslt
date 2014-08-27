@@ -7,9 +7,12 @@ exclude-result-prefixes="xhtml xsl xs xml">
     <xsl:template match="xhtml:html">
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>
         <xsl:text>&#xa;</xsl:text>
-        <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en" xml:lang="en">
+      <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+        <xsl:attribute name="xml:lang">
+          <xsl:value-of select="@xml:lang"/>
+        </xsl:attribute>
         <xsl:apply-templates></xsl:apply-templates>
-        </html>
+      </html>
     </xsl:template>   
     
   <!-- template for string replace from old one to new one-->
