@@ -2086,7 +2086,7 @@ namespace SIL.PublishingSolution
                     footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
                 }
 
-                if (footnoteNodes == null)
+                if (footnoteNodes != null)
                 {
                     foreach (XmlNode footnoteNode in footnoteNodes)
                     {
