@@ -782,12 +782,7 @@ namespace SIL.PublishingSolution
                 if (_isUnixOs)
                 {
                     string epubFileName = fileName.Replace(" ", "") + ".epub";
-                    string replaceEmptyCharacterinFileName = Common.PathCombine(outputFolder, epubFileName);
-                    if (outputPathWithFileName != replaceEmptyCharacterinFileName && File.Exists(outputPathWithFileName))
-                    {
-                        File.Copy(outputPathWithFileName, replaceEmptyCharacterinFileName, true);
-                    }
-
+                    File.Move(outputPathWithFileName, epubFileName);
                     SubProcess.Run(outputFolder, "ebook-viewer", epubFileName, false);
                 }
                 else
