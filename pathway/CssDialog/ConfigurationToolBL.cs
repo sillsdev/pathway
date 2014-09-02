@@ -4214,7 +4214,7 @@ namespace SIL.PublishingSolution
             if (!File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")))
             {
                 // select the dictionary styles
-                btnDictionary_ClickBL();
+                //btnDictionary_ClickBL();
                 // hide the Scripture / Dictionary buttons (they don't apply)
                 cTool.BtnScripture.Enabled = false;
                 cTool.BtnScripture.Visible = false;
