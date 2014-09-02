@@ -1368,12 +1368,30 @@ namespace SIL.PublishingSolution
                 cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
                 string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
                 projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                RemovePseudoBefore(cssTree);
                 var afterBeforeProcessReversal = new AfterBeforeProcessEpub();
                 afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
                 Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", Common.NonBreakingSpace);
                 projInfo.DefaultXhtmlFileWithPath = originalDefaultXhtmlFileName;
             }
         }
+
+        /// <summary>
+        /// Remove After & Before in Css file
+        /// </summary>
+        private static void RemovePseudoBefore(CssTree cssTree)
+        {
+            if (cssTree.SpecificityClass.ContainsKey("subentry"))
+            {
+                ArrayList aa = cssTree.SpecificityClass["subentry"];
+                foreach (ClassInfo myvar in aa)
+                {
+                    if (myvar.Pseudo.ToLower() == "before")
+                        myvar.Content = "";
+                }
+            }
+        }
+
         #endregion
 
         #region xslt processing
