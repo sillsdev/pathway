@@ -408,11 +408,13 @@ namespace SIL.PublishingSolution
                     exportTypeDlg.ShowDialog();
                     if (exportTypeDlg._exportType == "epub2")
                     {
-                        DisplayOutput(outputFolder, fileName, outputPathWithFileName);
+                        outputFolder = Path.GetDirectoryName(outputPathWithFileName);
+                        DisplayOutput(outputFolder, fileName, ref outputPathWithFileName);
                     }
                     else if (exportTypeDlg._exportType == "epub3")
                     {
-                        DisplayOutput(outputFolder, fileName, outputPathWithFileNameV3);
+                        outputFolder = Path.GetDirectoryName(outputPathWithFileNameV3);
+                        DisplayOutput(outputFolder, fileName, ref outputPathWithFileNameV3);
                     }
                     else if (exportTypeDlg._exportType == "folder")
                     {
@@ -432,6 +434,7 @@ namespace SIL.PublishingSolution
 
             inProcess.PerformStep();
             #endregion Validate
+            
             #region Clean up
             inProcess.SetStatus("Clean up");
             Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1", string.Empty);
@@ -775,14 +778,15 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void DisplayOutput(string outputFolder, string fileName, string outputPathWithFileName)
+        private void DisplayOutput(string outputFolder, string fileName, ref string outputPathWithFileName)
         {
             if (File.Exists(outputPathWithFileName))
             {
                 if (_isUnixOs)
                 {
-                    string epubFileName = fileName.Replace(" ", "") + ".epub";
+                    string epubFileName = Common.PathCombine(outputFolder, fileName.Replace(" ", "") + ".epub");
                     File.Move(outputPathWithFileName, epubFileName);
+                    outputPathWithFileName = epubFileName;
                     SubProcess.Run(outputFolder, "ebook-viewer", epubFileName, false);
                 }
                 else
