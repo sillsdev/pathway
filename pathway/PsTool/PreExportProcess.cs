@@ -2810,6 +2810,10 @@ namespace SIL.Tool
             tw.WriteLine("page-break-after: avoid;");
             tw.WriteLine("}");
 
+            tw.WriteLine(".picture {");
+            tw.WriteLine("height: 1.0in;");
+            tw.WriteLine("}");
+
             tw.Close();
         }
 
