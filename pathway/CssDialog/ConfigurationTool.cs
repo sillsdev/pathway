@@ -108,8 +108,11 @@ namespace SIL.PublishingSolution
                 bool isValid = Validator.ValidateSettingsFile(filePath, false);
                 if (!isValid)
                 {
-                    _lastSelectedLayout = Param.Value["LayoutSelected"];
-                    this.Close();
+                    if (Param.Value != null && Param.Value.Count > 0)
+                    {
+                        _lastSelectedLayout = Param.Value["LayoutSelected"];
+                        this.Close();
+                    }
                 }
             }
         }

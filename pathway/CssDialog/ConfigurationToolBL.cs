@@ -1717,9 +1717,12 @@ namespace SIL.PublishingSolution
 
         protected void setDefaultInputType()
         {
-            Param.SetValue(Param.InputType, inputTypeBL); // last input type
-            Param.Write();
-            Param.CopySchemaIfNecessary();
+            if (!string.IsNullOrEmpty(inputTypeBL))
+            {
+                Param.SetValue(Param.InputType, inputTypeBL); // last input type
+                Param.Write();
+                Param.CopySchemaIfNecessary();
+            }
         }
 
         protected void setLastSelectedLayout()
@@ -1732,14 +1735,15 @@ namespace SIL.PublishingSolution
                     layoutName = _lastSelectedLayout;
 
                 StyleEXE = layoutName;
-                Param.SetValue(Param.LayoutSelected, StyleEXE); // last layout
-                Param.Write();
-
+                if (!string.IsNullOrEmpty(StyleEXE))
+                {
+                    Param.SetValue(Param.LayoutSelected, StyleEXE); // last layout
+                    Param.Write();
+                }
             }
             catch
             {
             }
-
         }
 
         public void SideBar()
@@ -2585,7 +2589,8 @@ namespace SIL.PublishingSolution
         public void WriteMedia()
         {
             XmlNode baseNode = Param.GetItem("//categories/category[@name = \"Media\"]");
-            if (MediaType.Length <= 0) MediaType = Param.GetAttrByName("//categories/category", "Media", "select").ToLower();
+            if (MediaType.Length <= 0) 
+                MediaType = Param.GetAttrByName("//categories/category", "Media", "select").ToLower();
             Param.SetAttrValue(baseNode, "select", MediaType);
             Param.Write();
         }
@@ -2663,7 +2668,10 @@ namespace SIL.PublishingSolution
             {
                 string value = xmlNode.Attributes["width"].Value;
                 int width = int.Parse(value);
-                grid.Columns[i].Width = width;
+                if (grid.ColumnCount > 0)
+                {
+                    grid.Columns[i].Width = width;
+                }
                 i++;
             }
         }
