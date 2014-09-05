@@ -549,6 +549,10 @@ namespace SIL.Tool
                     modifiedContent = TextTransform(content, styleName, modifiedContent);
                 }
             }
+            if (styleName != null && styleName == "LText_FrontMatter_div_div_scrBody")
+            {
+                modifiedContent = modifiedContent.Replace("\\u0026", "&amp;");
+            }
             return modifiedContent;
         }
 

@@ -685,7 +685,7 @@ namespace SIL.Tool
             string rights = Param.GetMetadataValue(Param.CopyrightHolder);
             if (rights.Trim().Length > 0)
             {
-                sb.Append(Common.UpdateCopyrightYear(rights));
+                sb.Append(Common.UpdateCopyrightYear(rights.Replace("&", @"\u0026")));
                 sb.Append("</span> ");
             }
             return sb.ToString();
