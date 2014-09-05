@@ -87,51 +87,26 @@
 	<xsl:template match="xhtml:meta" />
 	<!-- <xsl:template match="xhtml:span[../@class='Title_Main']" /> -->
 
-	<!-- Move the chapter number outside the paragraph div, so that it can be placed in the margin or drop-capped -->
-	<xsl:template match="xhtml:div[@class='Paragraph1']">
-		<xsl:if test="(count(descendant::xhtml:span[@class='Chapter_Number'])) > 0">
-			<xsl:element name="div">
-				<xsl:for-each select="@*">
-					<xsl:copy/>
-				</xsl:for-each>
-				<xsl:apply-templates select="descendant::xhtml:span[@class='Chapter_Number']/preceding-sibling::node()"/>
-			</xsl:element>
-			<xsl:element name="div">
-				<xsl:attribute name="class"><xsl:text>Chapter_Number</xsl:text></xsl:attribute>
-				<xsl:attribute name="id"><xsl:value-of select=".//xhtml:span[@class='Chapter_Number']/@id"/></xsl:attribute>
-				<xsl:value-of select="descendant::xhtml:span[@class='Chapter_Number']"/>
-			</xsl:element>
-			<xsl:element name="div">
-				<xsl:for-each select="@*">
-					<xsl:copy/>
-				</xsl:for-each>
-				<xsl:apply-templates select="descendant::xhtml:span[@class='Chapter_Number']/following-sibling::*"/>
-			</xsl:element>
-		</xsl:if>
-		<!-- 
-		<xsl:element name="div">
-			<xsl:for-each select="@*">
-				<xsl:copy/>
-			</xsl:for-each>
-			<xsl:apply-templates/>
-		</xsl:element>
-		-->
-	</xsl:template>
-	<xsl:template match="xhtml:div[@class='Paragraph']">
-		<xsl:if test="(count(descendant::xhtml:span[@class='Chapter_Number'])) > 0">
-			<xsl:element name="div">
-				<xsl:attribute name="class"><xsl:text>Chapter_Number</xsl:text></xsl:attribute>
-				<xsl:attribute name="id"><xsl:value-of select=".//xhtml:span[@class='Chapter_Number']/@id"/></xsl:attribute>
-				<xsl:value-of select="descendant::xhtml:span[@class='Chapter_Number']"/>
-			</xsl:element>
-		</xsl:if>
-		<xsl:element name="div">
-			<xsl:for-each select="@*">
-				<xsl:copy/>
-			</xsl:for-each>
-			<xsl:apply-templates/>
-		</xsl:element>
-	</xsl:template>
+  <!-- Move the chapter number outside the paragraph div, so that it can be placed in the margin or drop-capped -->
+  <xsl:template match="xhtml:div[xhtml:span[@class='Chapter_Number']]">
+    <xsl:if test="(count(descendant::xhtml:span[@class='Chapter_Number'])) > 0">
+      <xsl:element name="div">
+        <xsl:attribute name="class">
+          <xsl:text>Chapter_Number</xsl:text>
+        </xsl:attribute>
+        <xsl:attribute name="id">
+          <xsl:value-of select=".//xhtml:span[@class='Chapter_Number']/@id"/>
+        </xsl:attribute>
+        <xsl:value-of select="descendant::xhtml:span[@class='Chapter_Number']"/>
+      </xsl:element>
+    </xsl:if>
+    <xsl:element name="div">
+      <xsl:for-each select="@*">
+        <xsl:copy/>
+      </xsl:for-each>
+      <xsl:apply-templates/>
+    </xsl:element>
+  </xsl:template>
 	
 	<!-- write out the contents of these elements, but not the elements themselves -->
 	<xsl:template match="xhtml:div[@class='scrSection']">
