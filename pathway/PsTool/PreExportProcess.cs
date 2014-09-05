@@ -2336,6 +2336,39 @@ namespace SIL.Tool
             _reader.Close();
         }
 
+        public void GetGlossaryList(string xhtmlFileNameWithPath, Dictionary<string, string> glossaryList)
+        {
+            XmlTextReader _reader = Common.DeclareXmlTextReader(xhtmlFileNameWithPath, true);
+            try
+            {
+                while (_reader.Read())
+                {
+                    if (_reader.NodeType == XmlNodeType.Element)
+                    {
+                        string st;
+                        if (_reader.Name == "a")
+                        {
+                            string href = _reader.GetAttribute("href");
+                            string id = _reader.GetAttribute("id");
+                            if (href != null && id != null)
+                            {
+                                if (href != "#" && !glossaryList.ContainsKey(href))
+                                {
+                                    glossaryList[href] = id;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                Console.WriteLine("GetGlossaryList");
+            }
+            _reader.Close();
+        }
+
         /// <summary>
         /// TD-3482 
         /// </summary>

@@ -124,6 +124,8 @@ namespace SIL.PublishingSolution
         private int _pictureNo;
         private bool _isReversalFile = false;
         private bool _isLinux = false;
+        Dictionary<string, string> _glossaryList = new Dictionary<string, string>();
+        private bool _glossaryWrite;
 
         public LOContent()
         {
@@ -200,6 +202,7 @@ namespace SIL.PublishingSolution
         {
             PreExportProcess preProcessor = new PreExportProcess(_projInfo);
             preProcessor.GetReferenceList(_projInfo.DefaultXhtmlFileWithPath, _sourceList, _targetList);
+            preProcessor.GetGlossaryList(_projInfo.DefaultXhtmlFileWithPath, _glossaryList);
             //TD-2912
             if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
@@ -1313,7 +1316,7 @@ namespace SIL.PublishingSolution
 
             AddUsedStyleName(characterStyle);
 
-            bool isAnchorTagOpen = AnchorBookMark();
+            bool isAnchorTagOpen = AnchorBookMark(ref content);
             content = WriteCounter(content);
             whiteSpacePre(content); // TODO -2000 - SignificantSpace() - IN OO convert
             LanguageFontCheck(content, _childName);
@@ -1341,7 +1344,7 @@ namespace SIL.PublishingSolution
 
         }
 
-        private bool AnchorBookMark()
+        private bool AnchorBookMark(ref string content)
         {
             bool isAnchorTagOpen = false;
 
@@ -1373,6 +1376,34 @@ namespace SIL.PublishingSolution
                 _anchorIdValue = string.Empty;
                 _anchor.Clear();
                 _anchorWrite = false;
+            }
+            else if(_glossaryWrite)
+            {
+                string status = _anchorBookMarkName.Substring(0, 4);
+                if (_glossaryList.ContainsKey(_anchorBookMarkName.Replace(status, "")))
+                {
+                    string target = _glossaryList[_anchorBookMarkName.Replace(status, "")];
+                    string source = _anchorBookMarkName.Replace(status, "");
+                    if (_glossaryList.ContainsKey(source))
+                    {
+                        _writer.WriteStartElement("text:bookmark-start");
+                        _writer.WriteAttributeString("text:name", source.Replace("#", ""));
+                        _writer.WriteEndElement();
+                        _writer.WriteStartElement("text:bookmark-ref");
+                        _writer.WriteAttributeString("text:reference-format", "text");
+                        _writer.WriteAttributeString("text:ref-name", target.Replace("#", ""));
+                        _writer.WriteString(content);
+                        _writer.WriteEndElement();
+                        _writer.WriteStartElement("text:bookmark-end");
+                        _writer.WriteAttributeString("text:name", source.Replace("#", ""));
+                        _writer.WriteEndElement();
+                        content = string.Empty;
+                    }
+                }
+                _anchorBookMarkName = string.Empty;
+                _anchorIdValue = string.Empty;
+                _anchor.Clear();
+                _glossaryWrite = false;
             }
             else if (_anchorIdValue.Length > 0 && _sourceList.Contains(_anchorIdValue.Replace("#", "").ToLower()) && _targetList.Contains(_anchorIdValue.Replace("#", "").ToLower())) //search in source for writing target
             {
@@ -1471,7 +1502,12 @@ namespace SIL.PublishingSolution
                 if (_anchorBookMarkName.IndexOf("href#") == 0 || _anchorBookMarkName.IndexOf("name") == 0)
                 {
                     string val = _anchorBookMarkName.Replace("href#", "").Replace("name", "");
-                    if ((_sourceList.Contains(val.ToLower()) && _targetList.Contains(val.ToLower())))
+                    if (val.IndexOf("k_") == 0 || val.IndexOf("w_") == 0)
+                    //if (val.IndexOf("w_") == 0)
+                    {
+                        _glossaryWrite = true;
+                    }
+                    else if ((_sourceList.Contains(val.ToLower()) && _targetList.Contains(val.ToLower())))
                     {
                         _anchorWrite = true;
                     }
@@ -1688,6 +1724,10 @@ namespace SIL.PublishingSolution
             if (_reader.Name == "a" && _anchorWrite)
             {
                 _anchorWrite = false;
+            }
+            else if (_reader.Name == "a" && _glossaryWrite)
+            {
+                _glossaryWrite = false;
             }
 
             _characterNameAlways = _characterName;
