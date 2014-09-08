@@ -154,7 +154,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    if (ex.ToString().IndexOf("Module1.xml") == 0)
+                    if (ex.ToString().IndexOf("Module1.xml") == -1)
                     {
                         MessageBox.Show(ex.ToString(), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
