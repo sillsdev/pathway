@@ -140,6 +140,10 @@ namespace SIL.PublishingSolution
                     preProcessor.RemoveDeclaration(mergedCSS, "div.pictureLeft > img.picture");
                     mergedCSS = preProcessor.RemoveTextIndent(mergedCSS);
 
+                    if (isUnixOS)
+                    {
+                        Common.StreamReplaceInFile(mergedCSS, "Scheherazade Graphite Alpha", "Scheherazade");
+                    }
 
                     Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
                     CssTree cssTree = new CssTree();
