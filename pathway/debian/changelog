@@ -1,5 +1,43 @@
-pathway (1.10.0.4196-1) unstable; urgency=high
+pathway (1.11.0.4293-1) unstable; urgency=high
 
+  * pathway 1.11.0 sprint
+    - Epub3:TD-4129 Epub glossary popups
+    - Epub3:TD-4131 Close button in Epub type window should open E-Book
+    - Epub3:TD-4134 Epub3 output does not have endnote
+    - Epub3:TD-4135 Epub3 ebook output does not have hierarchy
+    - Epub3:TD-4137 References number appears twice in all ebook when set to "refs at end"
+    - Epub3:TD-4138 Headword appears in reverse order
+    - Epub3:TD-4139 TOC level doesn't work properly
+    - Epub3:TD-4143 Copyright information appears in the Epub3
+    - Epub3:TD-4144 Small text appears in the Ebook
+    - Epub3:TD-4145 Error message when the destination is a custom stylesheet
+    - Epub3:TD-4147 Endnote and reference does not work in ebook
+    - Epub3:TD-4155 Book fails to load in Epub3
+    - Epub3:TD-4157 Two bullets and two brackets
+    - Epub3:TD-4158 pre-process to remove ReversalIndexEntry_PartOfSpeech and PartOfSpeechLink
+    - Epub3:TD-4159 [Linux] Duplicate epub file 
+    - Epub3:TD-4160 Epub 3 & XHTML 5 output on left side for right-to-left dictionary.
+    - Epub3:TD-4164 validation errors exporting NKonya
+    - Epub3:TD-4166 Validation Error in Epub3
+    - Epub3:TD-4169 Error on Epub 3 output when exporting multiple scriptures in Linux
+    - Common:TD-4123 Apply license error with Prince.
+    - Common:TD-4162 Picture doesn't properly appear in the Prince output.
+    - Common:TD-4043 "FieldworksA4Styles" always given as the default
+    - Common:TD-4102 Check html5 content and picture in browser
+    - Installer:TD-4141 "International" is missing in About dialog
+    - LibreOffice:TD-4115 missing header
+    - LibreOffice:TD-4126 Point size doesn't reflect choice in Configuration Tool 
+    - Paratext:TD-4124 Scripture content missing.
+    - E-book:TD-4146 theWord / MySword glossary pop ups
+    - E-book:TD-4153 Export from Translation Editor to theWord/MySword
+    - UI:TD-4042 Letter “T” is missing from "Fixed Line Height" label
+    - UI:TD-4140 Reword epub results dialog to eliminate need for help
+    - UI:TD-4150 Remember checked export options 
+    - UI:TD-4151 Trademark symbol appears a notable distance from the SIL International word
+    - UI:TD-4154 [Linux] Picture and Running Header Combobox names show partially in Properties tab
+    - UI:TD-4171 Non ASCII copyright chars crash program
+    - Web:TD-4136 HTML 5 TOC doesn't have "Endnote & References".
+    - XeLaTeX:TD-4163 Null Reference Exception is thrown error
   * pathway 1.10.0 sprint
     - Epub3: TD-4054 Create XSLT to transform Dictionore to (x)html5
     - Epub3: TD-4057 Modify the package declaration for epub3
