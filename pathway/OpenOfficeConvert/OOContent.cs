@@ -126,6 +126,8 @@ namespace SIL.PublishingSolution
         private bool _isLinux = false;
         Dictionary<string, string> _glossaryList = new Dictionary<string, string>();
         private bool _glossaryWrite;
+        private Dictionary<string, string> _glossaryTitleLst = new Dictionary<string, string>();
+ 
 
         public LOContent()
         {
@@ -1380,12 +1382,31 @@ namespace SIL.PublishingSolution
             else if(_glossaryWrite)
             {
                 string status = _anchorBookMarkName.Substring(0, 4);
+                
+                if (_anchorBookMarkName.IndexOf("_.title") > 0)
+                {
+                    string[] res = _anchorBookMarkName.Split(new string[] { "_.title" }, StringSplitOptions.None);
+                    _anchorBookMarkName = res[0];
+                    _anchorTitleValue = res[1];
+                }
+
                 if (_glossaryList.ContainsKey(_anchorBookMarkName.Replace(status, "")))
                 {
                     string target = _glossaryList[_anchorBookMarkName.Replace(status, "")];
                     string source = _anchorBookMarkName.Replace(status, "");
+                    
+                    if(_anchorTitleValue.Trim().Length > 0)
+                    {
+                        target = _anchorTitleValue;
+                        if (!_glossaryTitleLst.ContainsKey("#" + _glossaryList[source]))
+                            _glossaryTitleLst.Add("#" + _glossaryList[source], target);
+                        _anchorTitleValue = string.Empty;
+                    }
+                    
                     if (_glossaryList.ContainsKey(source))
                     {
+                        if (_glossaryTitleLst.ContainsKey(source))
+                        { source = _glossaryTitleLst[source]; }
                         _writer.WriteStartElement("text:bookmark-start");
                         _writer.WriteAttributeString("text:name", source.Replace("#", ""));
                         _writer.WriteEndElement();
@@ -1399,6 +1420,27 @@ namespace SIL.PublishingSolution
                         _writer.WriteEndElement();
                         content = string.Empty;
                     }
+                }
+                else
+                {
+                    string source = _anchorTitleValue.Replace("_.", "");
+                    _writer.WriteStartElement("text:bookmark-start");
+                    _writer.WriteAttributeString("text:name", source.Replace("#", ""));
+                    _writer.WriteEndElement();
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", "T4");
+                    _writer.WriteString(content);
+                    _writer.WriteEndElement();
+                    _writer.WriteStartElement("text:bookmark-end");
+                    _writer.WriteAttributeString("text:name", source.Replace("#", ""));
+                    _writer.WriteEndElement();
+                    
+                    _writer.WriteStartElement("text:bookmark-ref");
+                    _writer.WriteAttributeString("text:reference-format", "text");
+                    _writer.WriteAttributeString("text:ref-name", source);
+                    _writer.WriteString(content);
+                    _writer.WriteEndElement();
+                    content = string.Empty;
                 }
                 _anchorBookMarkName = string.Empty;
                 _anchorIdValue = string.Empty;
@@ -1502,8 +1544,7 @@ namespace SIL.PublishingSolution
                 if (_anchorBookMarkName.IndexOf("href#") == 0 || _anchorBookMarkName.IndexOf("name") == 0)
                 {
                     string val = _anchorBookMarkName.Replace("href#", "").Replace("name", "");
-                    if (val.IndexOf("k_") == 0 || val.IndexOf("w_") == 0)
-                    //if (val.IndexOf("w_") == 0)
+                    if (val.IndexOf("k_") == 0 || val.IndexOf("w_") == 0 || val.IndexOf("_.title") == 0)
                     {
                         _glossaryWrite = true;
                     }
@@ -2026,12 +2067,22 @@ namespace SIL.PublishingSolution
 
             //office:automatic-styles - Sections and Columns area
             _writer.WriteStartElement("office:automatic-styles");
+            
             _writer.WriteStartElement("style:style");
             _writer.WriteAttributeString("style:name", "P4");
             _writer.WriteAttributeString("style:family", "paragraph");
             _writer.WriteAttributeString("style:master-page-name", "First_20_Page");
             _writer.WriteStartElement("style:paragraph-properties");
             _writer.WriteAttributeString("style:page-number", "auto");
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+            //Text style for display:none
+            _writer.WriteStartElement("style:style");
+            _writer.WriteAttributeString("style:name", "T4");
+            _writer.WriteAttributeString("style:family", "text");
+            _writer.WriteStartElement("style:text-properties");
+            _writer.WriteAttributeString("text:display", "none");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 

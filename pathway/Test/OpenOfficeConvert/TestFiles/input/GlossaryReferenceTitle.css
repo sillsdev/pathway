@@ -1,0 +1,34 @@
+div[lang='zxx']{ font-family: "Doulos SIL";}
+span[lang='zxx']{ font-family: "Doulos SIL";}
+
+.scrBody
+{
+direction: ltr;
+font-family: "Doulos SIL";
+}
+
+.Paragraph {
+    text-indent: 12pt;
+    margin-left: 0pt;
+	orphans: 2;
+    widows:2;
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.scrBook {
+    column-count: 1;
+    clear: both;
+    -ps-outline-level:2;
+}
+
+.scrSection {
+    text-align: left;
+}
+
+.See_In_Glossary {
+    color: blue;
+}
+
+

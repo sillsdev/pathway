@@ -1144,6 +1144,26 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         /// </summary>      
         [Test]
+        public void GlossaryReferenceTitleNode()
+        {
+            const string file = "GlossaryReferenceTitle";
+            _projInfo.ProjectInputType = "Scripture";
+            string styleOutput = GetStyleOutput(file);
+            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+            string xpath = "//text:p[1]/text:span[@text:style-name='SeeInGlossary_Paragraph_scrSection_scrBook_scrBody']";
+            string content = "<text:bookmark-start text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"sample text\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
+            bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+            Assert.IsTrue(returnValue1, "FootNote - Content Failure");
+
+            xpath = "//text:p[2]/text:span[@text:style-name='SeeInGlossary_Paragraph_scrSection_scrBook_scrBody']";
+            content = "<text:bookmark-start text:name=\"sample text\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"sample text\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
+            returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+            Assert.IsTrue(returnValue1, "FootNote - Content Failure");
+        }
+
+        ///<summary>
+        /// </summary>      
+        [Test]
         public void Counter2_Node()
         {
             const string file = "Counter2";
