@@ -241,7 +241,9 @@
 				<!--	<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="."/></xsl:attribute> -->
 					<!-- (sanitized to replace commas and colons in the verse with dashes and spaces with underscore) -->
           <xsl:variable name="verseNum" select="translate(./text(),' &#160;','__')" />
-					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="translate($verseNum, ',', '-')"/>
+					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text>
+            <xsl:value-of select="substring(generate-id(),1,4)"/>
+            <xsl:text>_</xsl:text>
             <xsl:value-of select="substring(generate-id(),4,4)"/>
           </xsl:attribute>
 				</xsl:if>
