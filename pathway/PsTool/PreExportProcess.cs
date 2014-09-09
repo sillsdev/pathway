@@ -352,7 +352,7 @@ namespace SIL.Tool
             if (Param.GetMetadataValue(Param.Title) != null)
                 sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Title)));
 
-            sb.AppendLine("<br /><br /><br /><br /><br /><br /><br /><br /><br />");
+            sb.AppendLine("<br /><br /><br /><br /><br /><br /><br />");
 
             sb.AppendLine("</h1>");
             sb.Append("<p class='Publisher'>");
@@ -662,7 +662,7 @@ namespace SIL.Tool
             rights = rights.Replace("\u00ae", "<span style='position: relative; top: -0.5em; font-size: 80%;'>\u00ae</span>");
             if (rights.Trim().Length > 0)
             {
-                sb.Append(Common.UpdateCopyrightYear(rights));
+                sb.Append(Common.UpdateCopyrightYear(rights.Replace("&", "&amp;")));
                 sb.Append("</p> ");
             }
             return sb.ToString();
@@ -685,7 +685,7 @@ namespace SIL.Tool
             string rights = Param.GetMetadataValue(Param.CopyrightHolder);
             if (rights.Trim().Length > 0)
             {
-                sb.Append(Common.UpdateCopyrightYear(rights));
+                sb.Append(Common.UpdateCopyrightYear(rights.Replace("&", @"\u0026")));
                 sb.Append("</span> ");
             }
             return sb.ToString();
@@ -851,7 +851,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // for dictionaries, the letter is used both for the ID and name
-                    revBookIDs = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
+                    revBookIDs = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
                     revBookNames = revBookIDs;
                 }
                 if (revBookIDs != null && revBookIDs.Count > 0)
@@ -988,6 +988,7 @@ namespace SIL.Tool
                 XmlNode titleNode = null;
                 if (_includeTitlePage)
                 {
+                    _projInfo.IsTitlePageEnabled = true;
                     titleNode = LoTitlePage(xmldoc);
                 }
 
@@ -2296,6 +2297,13 @@ namespace SIL.Tool
                                 st = href.Replace("#", "").ToLower();
                                 if (sourceList.Contains(st)) continue;
                                 sourceList.Add(st);
+                                string id = _reader.GetAttribute("id");
+                                if (id != null)
+                                {
+                                    if (targetList.Contains(id.ToLower())) continue;
+                                    targetList.Add(id.ToLower());
+                                    continue;
+                                }
                                 continue;
                             }
                         }
@@ -2324,6 +2332,39 @@ namespace SIL.Tool
             catch
             {
                 Console.WriteLine("GetReferenceList");
+            }
+            _reader.Close();
+        }
+
+        public void GetGlossaryList(string xhtmlFileNameWithPath, Dictionary<string, string> glossaryList)
+        {
+            XmlTextReader _reader = Common.DeclareXmlTextReader(xhtmlFileNameWithPath, true);
+            try
+            {
+                while (_reader.Read())
+                {
+                    if (_reader.NodeType == XmlNodeType.Element)
+                    {
+                        string st;
+                        if (_reader.Name == "a")
+                        {
+                            string href = _reader.GetAttribute("href");
+                            string id = _reader.GetAttribute("id");
+                            if (href != null && id != null)
+                            {
+                                if (href != "#" && !glossaryList.ContainsKey(href))
+                                {
+                                    glossaryList[href] = id;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                Console.WriteLine("GetGlossaryList");
             }
             _reader.Close();
         }
@@ -2669,11 +2710,11 @@ namespace SIL.Tool
         /// <summary>
         /// To replace the symbol string if the symbol matches with the text
         /// </summary>
-        public void ReplaceStringInCss(string cssFile, string existingContent, string replacingContent)
+        public void ReplaceStringInFile(string replaceinFileName, string existingContent, string replacingContent)
         {
-            if (File.Exists(cssFile))
+            if (File.Exists(replaceinFileName))
             {
-                var sr = new StreamReader(cssFile);
+                var sr = new StreamReader(replaceinFileName);
                 string fileContent = sr.ReadToEnd();
                 sr.Close();
 
@@ -2681,7 +2722,7 @@ namespace SIL.Tool
                 {
                     fileContent = fileContent.Replace(existingContent, replacingContent);
                 }
-                var sw = new StreamWriter(cssFile);
+                var sw = new StreamWriter(replaceinFileName);
                 sw.Write(fileContent);
                 sw.Close();
             }
@@ -2800,6 +2841,10 @@ namespace SIL.Tool
             //Avoid letHead as lastline of the page
             tw.WriteLine(".letHead {");
             tw.WriteLine("page-break-after: avoid;");
+            tw.WriteLine("}");
+
+            tw.WriteLine(".picture {");
+            tw.WriteLine("height: 1.0in;");
             tw.WriteLine("}");
 
             tw.Close();

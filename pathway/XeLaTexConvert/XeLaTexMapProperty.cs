@@ -240,16 +240,18 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
-            foreach (FontFamily systemFont in systemFontList)
+            if (_fontName != null)
             {
-                if (_fontName.ToLower() == systemFont.Name.ToLower())
+                FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
+                foreach (FontFamily systemFont in systemFontList)
                 {
-                    fontName = _fontName;
-                    break;
+                    if (_fontName.ToLower() == systemFont.Name.ToLower())
+                    {
+                        fontName = _fontName;
+                        break;
+                    }
                 }
             }
-
             _fontName = fontName;
         }
 

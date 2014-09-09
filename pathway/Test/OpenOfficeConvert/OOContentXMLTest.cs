@@ -707,10 +707,13 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Dictionary";
             string styleOutput = GetStyleOutput(file);
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            using (var p = Process.Start(Environment.GetEnvironmentVariable("COMSPEC"), string.Format("/c fc {0} {1} >{2}temp.txt", contentExpected, _projInfo.TempOutputFolder, file)))
+            if (!_isLinux)
             {
-                p.WaitForExit();
-                Debug.Print(FileData.Get(file + "temp.txt"));
+                using (var p = Process.Start(Environment.GetEnvironmentVariable("COMSPEC"), string.Format("/c fc {0} {1} >{2}temp.txt", contentExpected, _projInfo.TempOutputFolder, file)))
+                {
+                    p.WaitForExit();
+                    Debug.Print(FileData.Get(file + "temp.txt"));
+                }
             }
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -1116,6 +1119,46 @@ namespace Test.OpenOfficeConvert
 
             //bool returnValue = _validate.ValidateNodeAttributesNS(false);
             //Assert.IsTrue(returnValue, "Counter1 - Style Failure");
+        }
+
+        ///<summary>
+        /// </summary>      
+        [Test]
+        public void GlossaryReferenceNode()
+        {
+            const string file = "GlossaryReference";
+            _projInfo.ProjectInputType = "Scripture";
+            string styleOutput = GetStyleOutput(file);
+            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+            string xpath = "//text:p[1]/text:span[@text:style-name='SeeInGlossary_Paragraph_scrSection_scrBook_scrBody']";
+            string content = "<text:bookmark-start text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"w_2\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
+            bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+            Assert.IsTrue(returnValue1, "FootNote - Content Failure");
+
+            xpath = "//text:p[2]/text:span[@text:style-name='SeeInGlossary_Paragraph_scrSection_scrBook_scrBody']";
+            content = "<text:bookmark-start text:name=\"w_2\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"w_2\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
+            returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+            Assert.IsTrue(returnValue1, "FootNote - Content Failure");
+        }
+
+        ///<summary>
+        /// </summary>      
+        [Test]
+        public void GlossaryReferenceTitleNode()
+        {
+            const string file = "GlossaryReferenceTitle";
+            _projInfo.ProjectInputType = "Scripture";
+            string styleOutput = GetStyleOutput(file);
+            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+            string xpath = "//text:p[1]/text:span[@text:style-name='SeeInGlossary_Paragraph_scrSection_scrBook_scrBody']";
+            string content = "<text:bookmark-start text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"sample text\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
+            bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+            Assert.IsTrue(returnValue1, "FootNote - Content Failure");
+
+            xpath = "//text:p[2]/text:span[@text:style-name='SeeInGlossary_Paragraph_scrSection_scrBook_scrBody']";
+            content = "<text:bookmark-start text:name=\"sample text\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"sample text\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
+            returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+            Assert.IsTrue(returnValue1, "FootNote - Content Failure");
         }
 
         ///<summary>
@@ -3765,10 +3808,13 @@ namespace Test.OpenOfficeConvert
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             TextFileAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            using (var p = Process.Start(Environment.GetEnvironmentVariable("COMSPEC"), string.Format("/c fc {0} {1} >{2}temp.txt", contentExpected, _projInfo.TempOutputFolder, file)))
+            if (!_isLinux)
             {
-                p.WaitForExit();
-                Debug.Print(FileData.Get(file + "temp.txt"));
+                using (var p = Process.Start(Environment.GetEnvironmentVariable("COMSPEC"), string.Format("/c fc {0} {1} >{2}temp.txt", contentExpected, _projInfo.TempOutputFolder, file)))
+                {
+                    p.WaitForExit();
+                    Debug.Print(FileData.Get(file + "temp.txt"));
+                }
             }
             TextFileAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }

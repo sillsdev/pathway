@@ -44,7 +44,19 @@ namespace SIL.PublishingSolution
         {
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
             InitializeComponent();
-
+            if (Common.IsUnixOS())
+            {
+                ddlPagePageSize.Width = 200;
+                ddlPageColumn.Width = 200;
+                ddlJustified.Width = 200;
+                ddlVerticalJustify.Width = 200;
+                ddlPicture.Width = 200;
+                ddlLeading.Width = 200;
+                ddlRunningHead.Width = 200;
+                //ddlReferenceFormat.Width = 200;
+                //ddlPageNumber.Width = 200;
+                //ddlRules.Width = 200;
+            }
         }
         #endregion
 
@@ -96,8 +108,11 @@ namespace SIL.PublishingSolution
                 bool isValid = Validator.ValidateSettingsFile(filePath, false);
                 if (!isValid)
                 {
-                    _lastSelectedLayout = Param.Value["LayoutSelected"];
-                    this.Close();
+                    if (Param.Value != null && Param.Value.Count > 0)
+                    {
+                        _lastSelectedLayout = Param.Value["LayoutSelected"];
+                        this.Close();
+                    }
                 }
             }
         }

@@ -47,7 +47,8 @@ namespace SIL.PublishingSolution
 
                 foreach (var cfont in fontName)
                 {
-                    if (installedFontList.ContainsKey(cfont.Value))
+                    var fontFileName = CheckFontFileName(cfont);
+                    if (installedFontList.ContainsKey(fontFileName))
                     {
                         fontList.Remove(cfont.Key);
                         fontList.Add(cfont.Key, cfont.Value);
@@ -101,6 +102,13 @@ namespace SIL.PublishingSolution
                 return fontName;
             }
             return fontList;
+        }
+
+        private static string CheckFontFileName(KeyValuePair<string, string> cfont)
+        {
+            string fontFileName;
+            fontFileName = cfont.Value == "Scheherazade Graphite Alpha" ? "Scheherazade" : cfont.Value;
+            return fontFileName;
         }
 
         public static Dictionary<string, string> InstalledFontList()

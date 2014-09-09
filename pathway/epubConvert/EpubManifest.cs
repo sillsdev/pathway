@@ -140,7 +140,7 @@ namespace epubConvert
             opf.WriteValue((Creator == "") ? Environment.UserName : Creator);
             opf.WriteEndElement();
 
-            opf.WriteElementString("dc", "subject", null, _parent.InputType == "dictionary" ? "Reference" : "Religion & Spirituality");
+            opf.WriteElementString("dc", "subject", null, _parent.InputType.ToLower() == "dictionary" ? "Reference" : "Religion & Spirituality");
 
             if (Description.Length > 0)
                 opf.WriteElementString("dc", "description", null, Description);
@@ -178,7 +178,7 @@ namespace epubConvert
                 opf.WriteElementString("dc", "rights", null, Rights);
             opf.WriteStartElement("dc", "identifier", null); // <dc:identifier id="BookId">[guid]</dc:identifier>
             opf.WriteAttributeString("id", "BookId");
-            opf.WriteValue(bookId.ToString());
+            opf.WriteValue("http://pathway.sil.org/"); // bookId.ToString()
             opf.WriteEndElement();
             // cover image (optional)
             if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
@@ -237,7 +237,8 @@ namespace epubConvert
 
             opf.WriteStartElement("dc", "identifier", null);
             opf.WriteAttributeString("id", "pub-id");
-            opf.WriteValue(bookId.ToString());
+            opf.WriteValue("http://pathway.sil.org/");
+            //opf.WriteValue(bookId.ToString());
             opf.WriteEndElement();
 
             if (!string.IsNullOrEmpty(Source.Trim()))
@@ -278,7 +279,7 @@ namespace epubConvert
                 opf.WriteElementString("dc", "coverage", null, "Epub3");
 
 
-            opf.WriteElementString("dc", "subject", null, _parent.InputType == "dictionary" ? "Reference" : "Religion & Spirituality");
+            opf.WriteElementString("dc", "subject", null, _parent.InputType.ToLower() == "dictionary" ? "Reference" : "Religion & Spirituality");
 
 
             opf.WriteElementString("dc", "type", null, "Text");
@@ -329,10 +330,11 @@ namespace epubConvert
             opf.WriteStartElement("manifest");
             // (individual "item" elements in the manifest)
             opf.WriteStartElement("item");
-            opf.WriteAttributeString("id", "toc");
-            opf.WriteAttributeString("properties", "nav");
             opf.WriteAttributeString("href", "toc.html");
+            opf.WriteAttributeString("id", "nav");
+            opf.WriteAttributeString("properties", "nav");
             opf.WriteAttributeString("media-type", "application/xhtml+xml");
+
             opf.WriteEndElement(); // item
         }
 
@@ -439,7 +441,7 @@ namespace epubConvert
 
                     opf.WriteStartElement("item");
                     // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
-                    var itemId = _parent.InputType == "dictionary" ? nameNoExt : idRefValue;
+                    var itemId = _parent.InputType.ToLower() == "dictionary" ? nameNoExt : idRefValue;
                     opf.WriteAttributeString("id", itemId);
                     opf.WriteAttributeString("href", name);
                     opf.WriteAttributeString("media-type", "application/xhtml+xml");
@@ -456,12 +458,16 @@ namespace epubConvert
                 else if (name.ToLower().EndsWith(".jpg") || name.ToLower().EndsWith(".jpeg"))
                 {
                     opf.WriteStartElement("item"); // item (image)
-                    opf.WriteAttributeString("id", "image" + nameNoExt);
-                    
                     if (nameNoExt != null && epubVersion == "epub3" && nameNoExt.ToLower() == "cover")
                     {
+                        opf.WriteAttributeString("id", nameNoExt + "image");
                         opf.WriteAttributeString("properties", "cover-image");
                     }
+                    else
+                    {
+                        opf.WriteAttributeString("id", "image" + nameNoExt);
+                    }
+
                     opf.WriteAttributeString("href", name);
                     if (nameNoExt != null && nameNoExt.Contains("sil-bw-logo"))
                     {
@@ -493,6 +499,16 @@ namespace epubConvert
                     }
                     opf.WriteAttributeString("media-type", "image/png");
                     opf.WriteEndElement(); // item
+                }
+                else if (nameNoExt != null && name.ToLower() == "toc.ncx")
+                {
+                    opf.WriteStartElement("item");
+                    opf.WriteAttributeString("href", name);
+                    opf.WriteAttributeString("id", "ncx");
+
+                    opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
+                    opf.WriteEndElement(); // item
+                    continue;
                 }
             }
             opf.WriteEndElement(); // manifest
@@ -545,7 +561,7 @@ namespace epubConvert
                     //{
                         opf.WriteStartElement("itemref"); // item (stylesheet)
                         // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
-                        var idRef = _parent.InputType == "dictionary"
+                        var idRef = _parent.InputType.ToLower() == "dictionary"
                                         ? Path.GetFileNameWithoutExtension(file)
                                         : idRefValue;
                         opf.WriteAttributeString("idref", idRef);
@@ -560,6 +576,7 @@ namespace epubConvert
         {
             // spine
             opf.WriteStartElement("spine");
+            opf.WriteAttributeString("toc", "ncx");
             opf.WriteAttributeString("page-progression-direction", "ltr");
             // a couple items for the cover image
             if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
@@ -609,7 +626,7 @@ namespace epubConvert
                     //{
                         opf.WriteStartElement("itemref"); // item (stylesheet)
                         // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
-                        var idRef = _parent.InputType == "dictionary"
+                        var idRef = _parent.InputType.ToLower() == "dictionary"
                                         ? Path.GetFileNameWithoutExtension(file)
                                         : idRefValue;
 

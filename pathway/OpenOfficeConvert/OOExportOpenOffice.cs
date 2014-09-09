@@ -17,6 +17,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
 using System.IO;
@@ -71,7 +72,8 @@ namespace SIL.PublishingSolution
             bool returnValue = false;
             VerboseClass verboseClass = VerboseClass.GetInstance();
             _isFromExe = Common.CheckExecutionPath();
-
+            var glossorywords = WriteGlossaryLink(projInfo);
+            GlossaryLinkReferencing(projInfo, glossorywords);
             Common.DeleteDirectoryWildCard(Path.GetTempPath(), "SilPathwaytmp*");
 
             string strFromOfficeFolder = Common.FromRegistry("OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
@@ -122,6 +124,102 @@ namespace SIL.PublishingSolution
             }
             return returnValue;
         }
+
+        private Dictionary<string, Dictionary<string, string>> WriteGlossaryLink(PublicationInformation projInfo)
+        {
+            Dictionary<string, Dictionary<string, string>> glossorywordsDictionaries = new Dictionary<string, Dictionary<string, string>>();
+
+            string file = projInfo.DefaultXhtmlFileWithPath;
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            if (!File.Exists(file))
+                return null;
+
+            XmlReader xmlReader = XmlReader.Create(file, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            if (projInfo.ProjectInputType.ToLower().Equals("scripture"))
+            {
+                const string xPath = ".//xhtml:a[@class='Glossaryvaluehref']";
+                XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
+                Debug.Assert(nodes != null);
+                if (nodes.Count > 0)
+                {
+                    foreach (XmlNode booknode in nodes)
+                    {
+                        Dictionary<string, string> glossorywordsDictionary = new Dictionary<string, string>();
+                        string booknodeid = booknode.Attributes["id"].Value;
+                        string booknodetext = booknode.InnerText.Trim();
+                        string xpathkeyword = ".//xhtml:a[@class='Glossary_Key'][translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='" + booknodetext.ToLower() + "']";
+                        XmlNodeList keywordnodesList = xmlDocument.SelectNodes(xpathkeyword, namespaceManager);
+                        if (keywordnodesList.Count > 0)
+                        {
+                            foreach (XmlNode keywordnode in keywordnodesList)
+                            {
+                                string glossoryid = keywordnode.Attributes["id"].Value;
+                                if (glossoryid != null)
+                                {
+                                    glossorywordsDictionary.Add(glossoryid, keywordnode.InnerText.Trim());
+                                }
+                            }
+                        }
+                        if (glossorywordsDictionary.Count > 0)
+                        {
+
+                            glossorywordsDictionaries.Add(booknodeid, glossorywordsDictionary);
+                        }
+                    }
+                }
+            }
+            return glossorywordsDictionaries;
+        }
+
+        private void GlossaryLinkReferencing(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> glossoryreferncelist)
+        {
+            string tocFiletoUpdate = projInfo.DefaultXhtmlFileWithPath;
+            XmlDocument xmlDoc = Common.DeclareXMLDocument(true);
+            var namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            if (!File.Exists(tocFiletoUpdate))
+                return;
+            xmlDoc.Load(tocFiletoUpdate);
+            XmlNodeList tagList = xmlDoc.GetElementsByTagName("a");
+            if (tagList.Count > 0)
+            {
+                foreach (KeyValuePair<string, Dictionary<string, string>> glossory in glossoryreferncelist)
+                {
+                    string glossorykey = glossory.Key;
+                    Dictionary<string, string> glossoryvalue = glossory.Value;
+
+                    foreach (XmlNode tagValue in tagList)
+                    {
+                        if (tagValue.Attributes != null && (tagValue.Attributes.Count > 0 && tagValue.Attributes["id"] != null) && tagValue.Attributes["class"].Value == "Glossary_Key")
+                        {
+                            if (glossoryvalue.ContainsKey(tagValue.Attributes["id"].Value))
+                            {
+                                tagValue.Attributes["href"].Value = "#" + glossorykey;
+                                string xpathkeyword = ".//xhtml:a[@class='Glossaryvaluehref'][@id='" + glossorykey + "']";
+                                XmlNode keywordnode = xmlDoc.SelectSingleNode(xpathkeyword, namespaceManager);
+                                if (keywordnode != null && keywordnode.Attributes != null &&
+                                    tagValue.Attributes["id"].Value.Length > 0)
+                                {
+                                    if (keywordnode.Attributes["href"].Value.Replace("#", "").Trim().Length == 0)
+                                    {
+                                        keywordnode.Attributes["href"].Value = "#" + tagValue.Attributes["id"].Value;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+            xmlDoc.Save(tocFiletoUpdate);
+        }
+
 
         private Dictionary<string, string> SplitXhtmlAsMultiplePart(PublicationInformation publicationInformation, Dictionary<string, string> dictSecName)
         {

@@ -150,4 +150,13 @@
 .xhomographnumber {
     font-size : 67%;
 }
-
+.sensepara     { font-size: 100% !important;}
+.translation_L3 { font-size: 100% !important;}
+.translation-sub_L3 { font-size: 100% !important;}
+.pronunciation-minor { font-size: 100% !important;}
+.definition_L3 { font-size: 100% !important;}
+.definition-sub_L3{ font-size: 100% !important;}
+.LexSense-publishStem-GlossPub_L3{ font-size: 100% !important;}
+.LexSense-publishStem-GlossPub_L4{ font-size: 100% !important;}
+.xitem{ font-size: 100% !important;}
+.LexEntry-publishStemComponentTarget-HeadWordRef{font-size:100% !important;}

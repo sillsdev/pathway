@@ -136,8 +136,14 @@ namespace SIL.PublishingSolution
                     string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
                     preProcessor.ReplaceStringInCss(mergedCSS);
                     preProcessor.InsertPropertyInCSS(mergedCSS);
+                    preProcessor.RemoveDeclaration(mergedCSS, ".pictureRight > .picture");
+                    preProcessor.RemoveDeclaration(mergedCSS, "div.pictureLeft > img.picture");
                     mergedCSS = preProcessor.RemoveTextIndent(mergedCSS);
 
+                    if (isUnixOS)
+                    {
+                        Common.StreamReplaceInFile(mergedCSS, "Scheherazade Graphite Alpha", "Scheherazade");
+                    }
 
                     Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
                     CssTree cssTree = new CssTree();

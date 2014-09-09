@@ -140,7 +140,7 @@ namespace Test.epubConvert
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
-        public void AExportScripturePassTest()
+        public void ExportScripturePassTest()
         {
             const string XhtmlName = "Scripture Draft.xhtml";
             const string CssName = "Scripture Draft.css";
@@ -214,6 +214,26 @@ namespace Test.epubConvert
             TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparison/OEBPS/book.css"), new ArrayList {93, 110, 112, 643, 652, 965 });
             
         }
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void InsertReferenceLinkInTocFileTest()
+        {
+            // clean output directory
+            CleanOutputDirectory();
+            const string FolderName = "ReferenceLink";
+            
+            if (!Directory.Exists(FileOutput(FolderName)))
+                Directory.CreateDirectory(FileOutput(FolderName));
+
+            FolderTree.Copy(FileInput(FolderName), FileOutput(FolderName));
+            FolderTree.Copy(FileExpected(FolderName + "Expected"), FileOutput(FolderName + "Expected"));
+
+            InsertReferenceLinkInTocFile(FileOutput(FolderName));
+            FileCompare(FolderName + "/File3TOC00000_.xhtml", FolderName + "Expected" + "/File3TOC00000_.xhtml");
+        }
+
 
         [Test]
         public void ChapterLinkForSingleChapterTest()
@@ -354,6 +374,19 @@ namespace Test.epubConvert
             node = resultDoc.SelectSingleNode(xPath, nsmgr);
             Assert.AreEqual(node.InnerText.Trim(), "[c] 2.41 Hari basar Paska Yahudi tu, orang Yahudi inga waktu dong pung tete nene moyang kaluar dari negara Mesir. Dolo dong jadi orang suru-suru di tampa tu, mar Allah kasi kaluar dong la bawa dong ka tana yang Antua su janji par dong."); 
         }
+
+        [Test]
+        public void RemoveEmptyHrefTest()
+        {
+            CleanOutputDirectory();
+            const string folderName = "RemoveEmptyHrefTest";
+            FolderTree.Copy(FileInput(folderName), FileOutput(folderName));
+            ReplaceEmptyHref(FileOutput(folderName));
+            string expectedFilesPath = FileExpected(folderName.Replace("Test","Expected"));
+            FileCompare(FileOutput(folderName) + "/PartFile00001_01.xhtml", expectedFilesPath + "/PartFile00001_01.xhtml");
+            FileCompare(FileOutput(folderName) + "/PartFile00001_03.xhtml", expectedFilesPath + "/PartFile00001_03.xhtml");
+        }
+
         public static void IsValid(string filename, string msg)
         {
             Assert.IsTrue(File.Exists(filename), string.Format("{0}: {1} does not exist", msg, filename));

@@ -333,7 +333,7 @@ namespace epubConvert
         {
             // Now that we know the text direction, we can add some padding info for the chapter numbers
             // (Scripture only)
-            if (_parent.InputType == "scripture")
+            if (_parent.InputType.ToLower() == "scripture")
             {
                 var mainDirection = mainTextDirection.ToLower().Equals("ltr") ? "left" : "right";
                 sb.Length = 0; // reset the stringbuilder

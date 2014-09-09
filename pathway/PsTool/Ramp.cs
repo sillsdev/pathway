@@ -615,7 +615,9 @@ namespace SIL.Tool
         /// </summary>
         protected void SetRampData()
         {
-            Param.UnLoadValues(); 
+            Param.UnLoadValues();
+            Param.LoadSettings();
+            Param.SetValue(Param.InputType, _projInputType);
             Param.LoadSettings();
             //ramp.RampId = "ykmb9i6zlh";
             CreatedOn = DateTime.Now.ToString("r");

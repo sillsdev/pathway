@@ -15,7 +15,7 @@ namespace epubConvert
 {
     public partial class EpubExportTypeDlg : Form
     {
-        public string _exportType = "epub2";
+        public string _exportType = "cancel";
        public EpubExportTypeDlg()
         {
             InitializeComponent();
@@ -24,22 +24,34 @@ namespace epubConvert
         private void EpubExportTypeDlg_Load(object sender, EventArgs e)
         {
             IcnInfo.Image = SystemIcons.Information.ToBitmap();
-            StringBuilder messageBuilder = new StringBuilder(200);
+            StringBuilder messageBuilder = new StringBuilder(300);
 
-            messageBuilder.Append("To continue, please select one of the actions below:");
+            messageBuilder.Append("The export process is finished. There is a separate file for\n");
+            messageBuilder.Append("Epub2, Epub3 and HTML5.");
             messageBuilder.Append(Environment.NewLine);
             messageBuilder.Append(Environment.NewLine);
 
-            messageBuilder.Append(" \t\u25CF  Click Epub2. \n\n To open the epub2 version of the file.\n");
-            messageBuilder.Append(Environment.NewLine);
-            messageBuilder.Append(" \t\u25CF  Click Epub3. \n\n To open the epub3 version of the file.\n");
-            messageBuilder.Append(Environment.NewLine);
-            messageBuilder.Append(" \t\u25CF  Click Folder. \n\n To open the folder containing both the versions.\n");
-            messageBuilder.Append(Environment.NewLine);
-            messageBuilder.Append(" \t\u25CF  Click Cancel.\n\n To cancel the operation.\n");
-            
-            lblMessage.Text = messageBuilder.ToString();
+            messageBuilder.Append("Click a button below to open the desired Epub file in your\n");
+            messageBuilder.Append("default reader. Alternatively, click");
 
+            StringBuilder messageBuilder1 = new StringBuilder(300);
+            messageBuilder1.Append("to open the folder\n");
+            messageBuilder1.Append("that contains both Epub files and the HTML5. You can\n");
+            messageBuilder1.Append("display the HTML files in your internet browser.\n");
+
+            messageBuilder1.Append(Environment.NewLine);
+
+            lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Regular);
+            lblMessage.SelectedText = messageBuilder.ToString();
+            lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Bold);
+            lblMessage.SelectedText = " Folder ";
+            lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Regular);
+            lblMessage.SelectedText = messageBuilder1.ToString();
+
+            lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Bold);
+            lblMessage.SelectedText = "Note: ";
+            lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Regular);
+            lblMessage.SelectedText = "Some readers cannot display Epub3 files correctly.";
         }
 
        private void ValidateAndDisplayResult(string outputFolder, string fileName, string outputPathWithFileName)
@@ -110,7 +122,6 @@ namespace epubConvert
             _exportType = "cancel";
             Close();
         }
-
 
     }
 }

@@ -133,6 +133,8 @@ namespace SIL.PublishingSolution
                                            out StreamWriter xeLatexFile, out XeLaTexStyles xeLaTexStyles,
                                            out Dictionary<string, Dictionary<string, string>> newProperty)
         {
+            CheckFontFamilyAvailable(projInfo.DefaultCssFileWithPath);
+
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.XELATEX;
@@ -286,7 +288,7 @@ namespace SIL.PublishingSolution
         {
             if (_isUnixOs)
             {
-                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath,"xelatex");
+                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath, "xelatex");
             }
             preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
             preProcessor.XelatexImagePreprocess();
@@ -490,6 +492,9 @@ namespace SIL.PublishingSolution
                 projInfo.DefaultXhtmlFileWithPath = revFile;
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 preProcessor.SetLangforLetter(projInfo.DefaultXhtmlFileWithPath);
+
+                CheckFontFamilyAvailable(projInfo.DefaultRevCssFileWithPath);
+
                 Dictionary<string, Dictionary<string, string>> cssClass =
                     new Dictionary<string, Dictionary<string, string>>();
                 CssTree cssTree = new CssTree();
@@ -542,6 +547,18 @@ namespace SIL.PublishingSolution
                 return true;
             }
             return false;
+        }
+
+        private static void CheckFontFamilyAvailable(string cssFileName)
+        {
+            var installedFontList = XelatexFontMapping.InstalledFontList();
+            if (!installedFontList.ContainsKey("Scheherazade Graphite Alpha"))
+            {
+                if (installedFontList.ContainsKey("Scheherazade"))
+                {
+                    Common.StreamReplaceInFile(cssFileName, "Scheherazade Graphite Alpha", "Scheherazade");
+                }
+            }
         }
 
         protected void UpdateXeLaTexFontCacheIfNecessary()
@@ -605,7 +622,7 @@ namespace SIL.PublishingSolution
                     paraTextEnvVariable = Environment.GetEnvironmentVariable("TEXINPUTS");
                     Environment.SetEnvironmentVariable("TEXINPUTS", "");
                 }
-                if (exportDirectory != null) 
+                if (exportDirectory != null)
                     Directory.SetCurrentDirectory(exportDirectory);
             }
             else

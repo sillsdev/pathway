@@ -69,6 +69,7 @@ namespace SIL.Tool
         public string DefaultFontName = "Times New Roman";
         public float DefaultFontSize = 12;
         private bool _isFrontMatterEnabled = false;
+        private bool _isTitlePageEnabled = false;
         private bool _isODM;
         public string _headerFontName = "Times New Roman";
         private string _reversalFontName = "Times New Roman";
@@ -210,6 +211,13 @@ namespace SIL.Tool
             set { _isFrontMatterEnabled = value; }
         }
 
+        public bool IsTitlePageEnabled
+        {
+            get { return _isTitlePageEnabled; }
+            set { _isTitlePageEnabled = value; }
+        }
+
+        
         public string HeaderFontName
         {
             get { return _headerFontName; }

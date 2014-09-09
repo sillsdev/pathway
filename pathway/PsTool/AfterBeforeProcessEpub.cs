@@ -408,10 +408,17 @@ namespace SIL.Tool
                     }
                     else
                     {
-                        _writer.WriteString(classInfo.Content);
-                        if (classInfo.Content != null && !_psuedoClassName.Contains(classInfo.StyleName))
+                        if (_closeChildName.Contains("Glossary"))
                         {
-                            _psuedoClassName.Add(classInfo.StyleName);
+                            _writer.WriteString(" ");
+                        }
+                        else
+                        {
+                            _writer.WriteString(classInfo.Content);
+                            if (classInfo.Content != null && !_psuedoClassName.Contains(classInfo.StyleName))
+                            {
+                                _psuedoClassName.Add(classInfo.StyleName);
+                            }
                         }
                     }
                     _psuedoAfter.Remove(_closeChildName);

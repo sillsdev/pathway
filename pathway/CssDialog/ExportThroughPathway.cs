@@ -914,10 +914,12 @@ namespace SIL.PublishingSolution
             if (string.IsNullOrEmpty(InputType) || InputType == "Dictionary")
             {
                 ExportMain = Param.DefaultValue[Param.ConfigureDictionary] == "True";
+                if (chkConfiguredDictionary.Enabled)
+                    ExportMain = Param.Value[Param.ConfigureDictionary] == "True";
                 if (chkReversalIndexes.Enabled)
-                    ExportReversal = Param.DefaultValue[Param.ReversalIndex] == "True";
+                    ExportReversal = Param.Value[Param.ReversalIndex] == "True";
                 if (chkGrammarSketch.Enabled)
-                    ExportGrammar = Param.DefaultValue[Param.GrammarSketch] == "True";
+                    ExportGrammar = Param.Value[Param.GrammarSketch] == "True";
             }
             DictionaryName = Param.DefaultValue[Param.LayoutSelected];
             Media = Param.DefaultValue[Param.Media];

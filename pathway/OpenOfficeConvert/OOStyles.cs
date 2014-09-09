@@ -1605,11 +1605,11 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("fo:country", "none");
             _writer.WriteAttributeString("style:letter-kerning", _enableKerning);
             _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
-            _writer.WriteAttributeString("style:font-size-asian", "12pt");
+            _writer.WriteAttributeString("style:font-size-asian", _defaultFontSize);
             _writer.WriteAttributeString("style:language-asian", "none");
             _writer.WriteAttributeString("style:country-asian", "none");
             _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
-            _writer.WriteAttributeString("style:font-size-complex", "12pt");
+            _writer.WriteAttributeString("style:font-size-complex", _defaultFontSize);
             _writer.WriteAttributeString("style:language-complex", "zxx");
             _writer.WriteAttributeString("style:country-complex", "none");
             _writer.WriteAttributeString("fo:hyphenate", "false");

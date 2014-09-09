@@ -294,3 +294,34 @@ font-family: inherit;
 .Intro_List_Item1 {
     text-indent: 6%;
 }
+
+.Glossary_Key{
+    font-size: 12pt;
+}
+.Glossary_Keyvalue {
+    font-weight : bold;
+    font-style : italic;
+    font-size: 12pt;
+}
+.Glossaryvaluehref{    
+    font-weight : bold;
+    font-style : italic;
+    font-size: 12pt;
+}
+.Foreign{
+    font-style : italic;
+    font-size: 12pt;
+}
+.chapternumberlink{ 
+font-size: 0.9em; 
+line-height: 1.25em; 
+vertical-align: top; 
+background-color: rgb(255, 200, 255); 
+border-radius: 1em; 
+width: 1.25em; 
+height: 1.25em; 
+text-align: center; 
+display: inline-block; 
+text-indent: 0; 
+font-family: sans-serif;
+ }
