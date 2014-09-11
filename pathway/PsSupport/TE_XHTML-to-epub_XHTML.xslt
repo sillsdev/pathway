@@ -242,9 +242,8 @@
 					<!-- (sanitized to replace commas and colons in the verse with dashes and spaces with underscore) -->
           <xsl:variable name="verseNum" select="translate(./text(),' &#160;','__')" />
 					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text>
-            <xsl:value-of select="substring(generate-id(),1,4)"/>
-            <xsl:text>_</xsl:text>
-            <xsl:value-of select="substring(generate-id(),4,4)"/>
+						<xsl:text>vrs_</xsl:text>
+            <xsl:value-of select="count(preceding::xhtml:span[@class = 'Verse_Number'])+1"/>
           </xsl:attribute>
 				</xsl:if>
 				<xsl:if test="count(@class) = 0 or @class != 'scrFootnoteMarker'"> <!-- FWR-2550 we handled child above -->

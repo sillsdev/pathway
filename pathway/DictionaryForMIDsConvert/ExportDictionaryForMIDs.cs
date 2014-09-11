@@ -91,6 +91,7 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
 
                 LoadCss(projInfo);
+                _DictionaryForMIDsInput = null;
                 inProcess.PerformStep();
 
                 ReformatData(projInfo);
