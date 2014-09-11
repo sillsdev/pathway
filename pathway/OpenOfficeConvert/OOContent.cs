@@ -821,7 +821,7 @@ namespace SIL.PublishingSolution
                 else
                 {
                     // Note: Paragraph Start Element //TD-4017 for || _childName == "letter_letHead_body"
-                    if ((_childName == "letter_letHead_dicBody" || _childName == "letter_letHead_body" || _childName == "scrBookName_scrBook_scrBody") && IsTocExists())
+                    if ((_childName == "letter_letHead_dicBody" || _childName == "letter_letHead_body" || _childName == "scrBookName_scrBook_scrBody" || IsFlexLetHead()) && IsTocExists())
                     {
                         _writer.WriteStartElement("text:h");
                         _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
@@ -842,6 +842,27 @@ namespace SIL.PublishingSolution
             }
             WriteText();
             _previousChildName = _childName;
+        }
+
+        /// <summary>
+        /// On some cases, FlexRev.xhtml contains addition tag for LetHead Text for BookMark
+        /// For Ex. <div class="letHead"> <div class="letter"> <span lang="hi">अ</span> </div> </div>
+        /// This method pass the validation process if letHead contains additional span for Reversal XHTML file.
+        /// </summary>
+        /// <returns>returns true if the pattern matches and \w{2} may be any lang like 'hi','fr', 'en'</returns>
+        private bool IsFlexLetHead()
+        {
+            bool flexLetHead = false;
+            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0)
+            {
+                Regex regex = new Regex(@"span_.\w{2}_letter_letHead_dicBody");
+                Match match = regex.Match(_childName);
+                if (match.Success)
+                {
+                    flexLetHead = true;
+                }
+            }
+            return flexLetHead;
         }
 
         private string GetOutlineLevel()
@@ -1099,7 +1120,7 @@ namespace SIL.PublishingSolution
                     _isWhiteSpaceSkipped = false;
                 }
 
-                if (_classNameWithLang.ToLower().IndexOf("seeinglossary") == 0)
+                if (_classNameWithLang.ToLower().IndexOf("seeinglossary") == 0 || _classNameWithLang.ToLower().IndexOf("glossarykey") == 0 || _classNameWithLang.ToLower().IndexOf("glossaryvaluehref") == 0 || _classNameWithLang.ToLower().IndexOf("foreign") == 0)
                 {
                     _isPreviousGlossary = true;
                 }
