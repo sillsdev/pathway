@@ -330,7 +330,7 @@ namespace epubConvert
             opf.WriteStartElement("manifest");
             // (individual "item" elements in the manifest)
             opf.WriteStartElement("item");
-            opf.WriteAttributeString("href", "toc.html");
+            opf.WriteAttributeString("href", "toc.xhtml");
             opf.WriteAttributeString("id", "nav");
             opf.WriteAttributeString("properties", "nav");
             opf.WriteAttributeString("media-type", "application/xhtml+xml");
