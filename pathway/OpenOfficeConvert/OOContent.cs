@@ -1099,7 +1099,7 @@ namespace SIL.PublishingSolution
                     _isWhiteSpaceSkipped = false;
                 }
 
-                if (_classNameWithLang.ToLower().IndexOf("seeinglossary") == 0)
+                if (_classNameWithLang.ToLower().IndexOf("seeinglossary") == 0 || _classNameWithLang.ToLower().IndexOf("glossarykey") == 0 || _classNameWithLang.ToLower().IndexOf("glossaryvaluehref") == 0 || _classNameWithLang.ToLower().IndexOf("foreign") == 0)
                 {
                     _isPreviousGlossary = true;
                 }

@@ -270,6 +270,24 @@
     color: blue;
 }
 
+.Glossary_Key{
+    font-size: 12pt;
+}
+.Glossary_Keyvalue {
+    font-weight : bold;
+    font-style : italic;
+    font-size: 12pt;
+}
+.Glossaryvaluehref{    
+    font-weight : bold;
+    font-style : italic;
+    font-size: 12pt;
+}
+.Foreign{
+    font-style : italic;
+    font-size: 12pt;
+}
+
 span {
     prince-text-replace: "<<" "\201C" ">>" "\201D" "<" "\2018" ">" "\2019";
 }
