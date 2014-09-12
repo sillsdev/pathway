@@ -15,32 +15,18 @@
 <h1>Pathway Sprint Release Steps</h1>
 
 <ol>
-  <li>Make sure Debug build works and tests pass</li>
+  <li>Make sure Debug build works and tests pass on Team City</li>
   <li>Make sure CorporateBTE7 build works and install it and run through at least one test pass</li>
-  <li>from git bash use> git flow release start 1.1.1</li>
-  <li>Find the last sprint <a href="https://github.com/sillsdev/pathway/commits/develop/pathway/ConfigurationTool/Properties/AssemblyInfo.cs" target="_blank">Click History</a></li>
+  <li>Find the last sprint in git gui history</li>
   <li>Use git bash <code>git log --since="8 Nov 2013" >sprint-1.1.1.txt</code> (where date is replaced with the date of the change and 1.1.1 is the version).</li>
   <li>From git gui, use Tools, Version</li>
   <li>Create the corresponding sprint-1.1.1.xml by exporting the Jira rss xml feed of issues updated since last sprint release date.</li>
   <li>Drop sprint-1.1.1.txt onto SprintIssues.py. Then edit sprint-1.1.1.htm to create a list of issues for the post and to update the readme file.</li>
   <li>Create sprint-1.1.1.log in format needed for Linux</li>
-  <li>git checkout develop</li>
-  <li>git flow feature start 1.9.0.log</li>
-  <li>git add sprint-1.1.1.log</li>
-  <li>git commit -m"add 1.1.1 log"</li>
-  <li>git push origin develop</li>
-  <li>launch linux virtual machine</li>
-  <li>ctrl-alt-t (open terminal)</li>
-  <li>cd git/pathway</li>
-  <li>git pull origin develop</li>
-  <li>Update debian/changelog with changes from sprint-1.1.1.log and using git gui to determin the version sequence number</li>
-  <li>rm sprint-1.1.1.log</li>
-  <li>git add debian/changelog sprint-1.1.1.log</li>
-  <li>git commit origin develop</li>
+  <li>Copy sprint-1.1.1.log to onedrive</li>
+  <li>Download sprint-1.1.1.log from linux machine and update debian/changelog and check it in</li>
   <li>switch back to Windows machine</li>
-  <li>git pull origin develop</li>
-  <li>git checkout release/1.1.1</li>
-  <li>git rebase develop</li>
+  <li>from git bash use> git flow release start 1.1.1</li>
   <li>Update the BuildPathway/ReadmePw.rtf file with the new version # and list of changes</li>
   <li>Update BuildPathway/BuildPathway.csproj and BuildPathway60.csproj with new version #. Minimal change in 2nd # for auto upgrades.</li>
   <li><code>PathwaySprint.bat 1.1.1.2124</code> where 1.1.1.2124 is replaced by current version number</li>
