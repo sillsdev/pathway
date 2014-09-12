@@ -81,7 +81,7 @@ namespace SIL.PublishingSolution
             string ncxTempFile = Common.PathCombine(oebpsPath, "toctemp.ncx");
             string ncxfile = Common.PathCombine(oebpsPath, "toc.ncx");
             File.Copy(ncxfile, ncxTempFile, true);
-            string epub3TocFile = Common.PathCombine(oebpsPath, "toc.html");
+            string epub3TocFile = Common.PathCombine(oebpsPath, "toc.xhtml");
             if (File.Exists(ncxfile))
             {
                 Common.ApplyXslt(ncxfile, epub3Toc);

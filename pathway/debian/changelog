@@ -1,5 +1,10 @@
-pathway (1.11.0.4293-1) unstable; urgency=high
+pathway (1.12.0.4301-1) unstable; urgency=high
 
+  * pathway 1.12.0 sprint
+    - Epub3:TD-4176 Validation Error in D33
+    - LibreOffice:TD-4179 PDF missing reversal Table of Contents in bookmarks pane 
+    - LibreOffice:TD-4181 Table of contents missing from epub3
+    - LibreOffice:TD-4182 Missing space after glossary term
   * pathway 1.11.0 sprint
     - Epub3:TD-4129 Epub glossary popups
     - Epub3:TD-4131 Close button in Epub type window should open E-Book

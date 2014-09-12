@@ -39,6 +39,7 @@ namespace Test.epubConvert
         private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
+        private static TestFiles _tf;
 
         [TestFixtureSetUp]
         public void Setup()
@@ -522,6 +523,180 @@ namespace Test.epubConvert
                     FileCompare("FrenchHorse/OEBPS/" + info.Name, "FrenchHorseExpected/OEBPS/" + info.Name);
                 }
             }
+        }
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void ScriptureGlossaryExportTest()
+        {
+            CleanOutputDirectory();
+            string inputDataFolder = Common.PathCombine(_inputPath, "GlossaryTestcase");
+            string outputDataFolder = Common.PathCombine(_outputPath, "GlossaryTestcase");
+            Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
+
+            const string xhtmlName = "GlossaryTestCase.xhtml";
+            const string cssName = "GlossaryTestCase.css";
+            var projInfo = new PublicationInformation();
+            projInfo.ProjectInputType = "Scripture";
+            projInfo.ProjectPath = outputDataFolder;
+            projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDataFolder, xhtmlName);
+            projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
+            projInfo.ProjectName = "GlossaryTestCase";
+            Common.Testing = true;
+            var target = new Exportepub();
+            var actual = target.Export(projInfo);
+            Assert.IsTrue(actual);
+
+
+            var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+            var zf = new FastZip();
+            zf.ExtractZip(result, FileOutput("GlossaryTestCase"), ".*");
+            var zfExpected = new FastZip();
+            result = Common.PathCombine(_expectedPath, "GlossaryTestCaseExpected.epub");
+            zfExpected.ExtractZip(result, FileOutput("GlossaryTestCaseExpected"), ".*");
+
+            string expectedFilesPath = FileOutput("GlossaryTestCaseExpected");
+            expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
+            string[] filesList = Directory.GetFiles(expectedFilesPath);
+            foreach (var fileName in filesList)
+            {
+                var info = new FileInfo(fileName);
+                if (info.Extension == ".css" || info.Extension == ".xhtml")
+                {
+                    FileCompare("GlossaryTestCase/OEBPS/" + info.Name, "GlossaryTestCaseExpected/OEBPS/" + info.Name);
+                }
+            }
+        }
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void XPathwayScriptureSettingTest()
+        {
+            _tf = new TestFiles("epubConvert");
+            var pwf = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
+            var zfile = new FastZip();
+            string pathwaySettingFolder = Common.PathCombine(pwf, "Pathway");
+            Common.CopyFolderandSubFolder(pathwaySettingFolder, pathwaySettingFolder + "test", true);
+
+            zfile.ExtractZip(_tf.Input("Pathway.zip"), pwf, ".*");
+
+            LoadParamValue("Scripture");
+
+            CleanOutputDirectory();
+            string inputDataFolder = Common.PathCombine(_inputPath, "ScriptureSettingTest");
+            string outputDataFolder = Common.PathCombine(_outputPath, "ScriptureSettingTest");
+            Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
+
+            const string xhtmlName = "NkontTestCase.xhtml";
+            const string cssName = "NkontTestCase.css";
+            var projInfo = new PublicationInformation();
+            projInfo.ProjectInputType = "Scripture";
+            projInfo.ProjectPath = outputDataFolder;
+            projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDataFolder, xhtmlName);
+            projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
+            projInfo.ProjectName = "NkontTestCase";
+            Common.Testing = true;
+            var target = new Exportepub();
+            var actual = target.Export(projInfo);
+
+            Common.CopyFolderandSubFolder(pathwaySettingFolder + "test", pathwaySettingFolder, true);
+
+
+            Assert.IsTrue(actual);
+
+
+            var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+            var zf = new FastZip();
+            zf.ExtractZip(result, FileOutput("NkontTestCase"), ".*");
+            var zfExpected = new FastZip();
+            result = Common.PathCombine(_expectedPath, "NkontTestCaseExpected.epub");
+            zfExpected.ExtractZip(result, FileOutput("NkontTestCaseExpected"), ".*");
+
+            string expectedFilesPath = FileOutput("NkontTestCaseExpected");
+            expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
+            string[] filesList = Directory.GetFiles(expectedFilesPath);
+            foreach (var fileName in filesList)
+            {
+                var info = new FileInfo(fileName);
+                if (info.Extension == ".css" || info.Extension == ".xhtml")
+                {
+                    FileCompare("NkontTestCase/OEBPS/" + info.Name, "NkontTestCaseExpected/OEBPS/" + info.Name);
+                }
+            }
+           
+        }
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void XPathwayDictionarySettingTest()
+        {
+            _tf = new TestFiles("epubConvert");
+            var pwf = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
+            string pathwaySettingFolder = Common.PathCombine(pwf, "Pathway");
+            Common.CopyFolderandSubFolder(pathwaySettingFolder, pathwaySettingFolder + "test", true);
+
+            var zfile = new FastZip();
+            zfile.ExtractZip(_tf.Input("Pathway.zip"), pwf, ".*");
+
+            LoadParamValue("Dictionary");
+
+            CleanOutputDirectory();
+            string inputDataFolder = Common.PathCombine(_inputPath, "DictionarySettingTest");
+            string outputDataFolder = Common.PathCombine(_outputPath, "DictionarySettingTest");
+            Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
+
+            const string xhtmlName = "main.xhtml";
+            const string cssName = "main.css";
+            var projInfo = new PublicationInformation();
+            projInfo.ProjectInputType = "Dictionary";
+            projInfo.ProjectPath = outputDataFolder;
+            projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDataFolder, xhtmlName);
+            projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
+            projInfo.ProjectName = "ABSDictionaryTestCase";
+            Common.Testing = true;
+            var target = new Exportepub();
+            var actual = target.Export(projInfo);
+
+            Common.CopyFolderandSubFolder(pathwaySettingFolder + "test", pathwaySettingFolder, true);
+
+
+            Assert.IsTrue(actual);
+
+
+            var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+            var zf = new FastZip();
+            zf.ExtractZip(result, FileOutput("main"), ".*");
+            var zfExpected = new FastZip();
+            result = Common.PathCombine(_expectedPath, "mainExpected.epub");
+            zfExpected.ExtractZip(result, FileOutput("mainExpected"), ".*");
+
+            string expectedFilesPath = FileOutput("mainExpected");
+            expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
+            string[] filesList = Directory.GetFiles(expectedFilesPath);
+            foreach (var fileName in filesList)
+            {
+                var info = new FileInfo(fileName);
+                if (info.Extension == ".css" || info.Extension == ".xhtml")
+                {
+                    FileCompare("main/OEBPS/" + info.Name, "mainExpected/OEBPS/" + info.Name);
+                }
+            }
+
+        }
+
+        private void LoadParamValue(string inputType)
+        {
+            // Verifying the input setting file and css file - in Input Folder
+            string settingFile = inputType + "StyleSettings.xml";
+            string sFileName = Common.PathCombine(_inputPath, settingFile);
+           // Common.ProgBase = _outputPath;
+            Param.LoadValues(sFileName);
+            Param.SetLoadType = inputType;
+            //Param.Value["OutputPath"] = _outputPath;
+            //Param.Value["UserSheetPath"] = _outputPath;
         }
 
         private void CleanOutputDirectory()
