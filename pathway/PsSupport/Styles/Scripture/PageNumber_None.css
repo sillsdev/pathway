@@ -1,6 +1,6 @@
 /* None.css */
 @page :none {
     @none {
-          content: Counter( page);          
+          content: '';          
     }
 }

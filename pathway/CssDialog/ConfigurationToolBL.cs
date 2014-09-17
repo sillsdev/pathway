@@ -276,6 +276,10 @@ namespace SIL.PublishingSolution
                     {
                         return "Mirrored";
                     }
+                    if (result.ToLower() == "none")
+                    {
+                        return "None";
+                    }
                     defaultValue = "Every Page";
                 }
                 else
@@ -283,6 +287,10 @@ namespace SIL.PublishingSolution
                     if (result.IndexOf("bookname") > 0 || result.IndexOf("chapter") > 0 || result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0)
                     {
                         return "Mirrored";
+                    }
+                    if (result.ToLower() == "none")
+                    {
+                        return "None";
                     }
                     defaultValue = "Every Page";
                 }
@@ -331,6 +339,10 @@ namespace SIL.PublishingSolution
                     }
 
                     defaultValue = "Genesis 1:1-2:1";
+                }
+                else if (GetDdlRunningHead().ToLower() == "none")
+                {
+                    defaultValue = "None";
                 }
 
 
