@@ -115,6 +115,7 @@ namespace SIL.PublishingSolution
         #region Public Variable
         public bool _multiLanguageHeader = false;
         public bool IsMirrorPage;
+        public bool IsHeaderNeeded;
         public bool IsFirstEntry;
         //private bool isPageBreak;
         private string _previousContent = "Reversal";
@@ -183,6 +184,7 @@ namespace SIL.PublishingSolution
 
         private void GetRefFormat(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass)
         {
+            IsHeaderNeeded = true;
             if (projInfo.ProjectInputType.ToLower() == "scripture")
             {
                 _refFormat = Common.GetReferenceFormat(idAllClass, _refFormat);
@@ -955,8 +957,10 @@ namespace SIL.PublishingSolution
                 _isDropCap = false;
             }
             _psuedoBefore.Clear();
-
-            WriteGuidewordValueToVariable(content);
+            if (IsHeaderNeeded)
+            {
+                WriteGuidewordValueToVariable(content);
+            }
         }
 
         private void InsertLeftRightReference(string bookName, string referenceStyle)
