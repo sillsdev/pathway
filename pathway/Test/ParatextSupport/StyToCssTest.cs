@@ -32,7 +32,7 @@ namespace Test.ParatextSupport
     /// </summary>
     /// ----------------------------------------------------------------------------------------
     [TestFixture]
-    public class StyToCssTest: StyToCss
+    public class StyToCssTest : StyToCss
     {
         #region setup
         private static string _inputPath;
@@ -65,6 +65,35 @@ namespace Test.ParatextSupport
             Common.TextDirectionLanguageFile = FileInput("Dhivehi.lds");
             WriteLanguageFontDirection(sw);
             sw.Close();
+            TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
+        }
+
+
+        [Test]
+        public void StytoCSSnkoNTProjectCSSTest()
+        {
+            const string TestName = "nkoNT";
+            var cssFile = TestName + ".css";
+            string cssFileOutput = FileOutput(cssFile);
+            string ssfFileInputPath = FileInput(TestName);
+            ssfFileInputPath = Common.PathCombine(ssfFileInputPath, "gather");
+            ssfFileInputPath = Common.PathCombine(ssfFileInputPath, TestName + ".ssf");
+
+            StyToCss styToCssObj = new StyToCss();
+            styToCssObj.ConvertStyToCss("nkoNT", cssFileOutput, ssfFileInputPath);
+
+            TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
+        }
+
+        [Test]
+        public void StytoCSSTest()
+        {
+            const string TestName = "default";
+            var cssFile = TestName + ".css";
+            string cssFileOutput = FileOutput(cssFile);
+            StyToCss styToCssObj = new StyToCss();
+            styToCssObj.ConvertStyToCss(cssFileOutput);
+
             TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
         }
 

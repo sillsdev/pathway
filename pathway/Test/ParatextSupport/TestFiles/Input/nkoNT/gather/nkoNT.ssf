@@ -1,0 +1,34 @@
+<ScriptureText>
+  <Name>nkoNT</Name>
+  <StyleSheet>usfm.sty</StyleSheet>
+  <ChapterMarker>c</ChapterMarker>
+  <VerseMarker>v</VerseMarker>
+  <FullName>Nkonya NT (Ghana) [nko]</FullName>
+  <FileNameBookNameForm>41MAT</FileNameBookNameForm>
+  <FileNamePostPart>nko.SFM</FileNamePostPart>
+  <ContinueAt>p</ContinueAt>
+  <ContinueInnerQuotes>Yes</ContinueInnerQuotes>
+  <ContinueQuotes>Yes</ContinueQuotes>
+  <CreatedWithPTW6>T</CreatedWithPTW6>
+  <DefaultFont>Doulos SIL</DefaultFont>
+  <DefaultFontSize>11</DefaultFontSize>
+  <Editable>T</Editable>
+  <Encoding>65001</Encoding>
+  <InnerInnerQuotes>&lt;&lt; &gt;&gt;</InnerInnerQuotes>
+  <InnerQuotes>&lt; &gt;</InnerQuotes>
+  <Language>Nkonya</Language>
+  <Quotes>&lt;&lt; &gt;&gt;</Quotes>
+  <RangeIndicator>-</RangeIndicator>
+  <SegmentOrder>a b c d e f g h i j k l m n o p q r s t u v w x y z aa bb cc dd ee ff gg hh ii jj kk ll mm nn oo pp qq rr ss tt uu vv ww xx yy zz</SegmentOrder>
+  <SequenceIndicator>,</SequenceIndicator>
+  <VerboseQuotes>No</VerboseQuotes>
+  <Versification>4</Versification>
+  <TranslationInfo>Standard::</TranslationInfo>
+  <LanguageIsoCode>nko:::</LanguageIsoCode>
+  <EthnologueCode>nko</EthnologueCode>
+  <BiblicalTermsListSetting>Major::BiblicalTerms.xml</BiblicalTermsListSetting>
+  <Guid>5ef513a3bf8adce784d4b3e699783fa36f1f1341</Guid>
+  <NeedsEnglishLanguageFix>No</NeedsEnglishLanguageFix>
+  <NeedsPortugueseLanguageFix>No</NeedsPortugueseLanguageFix>
+  <Naming PrePart="" PostPart="nko.SFM" BookNameForm="41MAT" ChapterNumberForm="" />
+</ScriptureText>
