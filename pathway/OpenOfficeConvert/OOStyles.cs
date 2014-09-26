@@ -735,8 +735,10 @@ namespace SIL.PublishingSolution
 
         private void CreatePageStyle()   // PageHeaderFooter() in odt conversion 
         {
-            CreateHeaderFooter();
             CreatePageFirstPage();
+            if (_guidewordLength == 0 && _projInfo.ProjectInputType.ToLower() == "dictionary") return;
+            CreateHeaderFooter();
+            
         }
 
         private void CreatePageFirstPage()
