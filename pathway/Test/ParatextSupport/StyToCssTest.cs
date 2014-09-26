@@ -70,6 +70,7 @@ namespace Test.ParatextSupport
 
 
         [Test]
+		[Category("SkipOnTeamCity")]
         public void StytoCSSnkoNTProjectCSSTest()
         {
             const string TestName = "nkoNT";
