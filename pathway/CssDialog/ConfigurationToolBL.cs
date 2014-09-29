@@ -1152,8 +1152,6 @@ namespace SIL.PublishingSolution
             cTool.TxtPageBottom.Text = bottom + "pt";
 
             cTool.TxtPageGutterWidth.Text = GutterWidth;
-            cTool.TxtGuidewordLength.Text = GuidewordLength;
-
             if (GutterWidth.IndexOf('%') == -1)
             {
                 if (cTool.TxtPageGutterWidth.Text.Length > 0)
@@ -1170,36 +1168,13 @@ namespace SIL.PublishingSolution
             cTool.DdlRunningHead.SelectedItem = RunningHeader;
             cTool.ChkSplitFileByLetter.Checked = SplitFileByLetter;
 
-            string pageType;
-            pageType = GetDdlRunningHead();
+            string pageType = GetDdlRunningHead();
             DdlRunningHeadSelectedIndexChangedBl(pageType);
-
-            if (inputTypeBL.ToLower() == "scripture")
+            if (pageType != "None")
             {
-                cTool.DdlReferenceFormat.SelectedItem = ReferenceFormat;
-                if (CustomFootnoteCaller.ToLower() == "default")
-                {
-                    cTool.ChkIncludeCusFnCaller.Checked = false;
-                    cTool.TxtFnCallerSymbol.Text = "";
-                }
-                else
-                {
-                    cTool.ChkIncludeCusFnCaller.Checked = true;
-                    cTool.TxtFnCallerSymbol.Text = CustomFootnoteCaller;
-                }
-                if (CustomXRefCaller.ToLower() == "default")
-                {
-                    cTool.ChkXrefCusSymbol.Checked = false;
-                    cTool.TxtXrefCusSymbol.Text = "";
-                }
-                else
-                {
-                    cTool.ChkXrefCusSymbol.Checked = true;
-                    cTool.TxtXrefCusSymbol.Text = CustomXRefCaller;
-                }
-                cTool.ChkTurnOffFirstVerse.Checked = bool.Parse(HideVerseNumberOne);
-                cTool.ChkHideSpaceVerseNo.Checked = bool.Parse(HideSpaceVerseNumber);
+                cTool.TxtGuidewordLength.Text = GuidewordLength;
             }
+            SetScriptureValues();
             cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
             cTool.DdlSense.SelectedItem = Sense;
@@ -1257,6 +1232,36 @@ namespace SIL.PublishingSolution
             {
             }
             _screenMode = ScreenMode.Edit;
+        }
+
+        private void SetScriptureValues()
+        {
+            if (inputTypeBL.ToLower() == "scripture")
+            {
+                cTool.DdlReferenceFormat.SelectedItem = ReferenceFormat;
+                if (CustomFootnoteCaller.ToLower() == "default")
+                {
+                    cTool.ChkIncludeCusFnCaller.Checked = false;
+                    cTool.TxtFnCallerSymbol.Text = "";
+                }
+                else
+                {
+                    cTool.ChkIncludeCusFnCaller.Checked = true;
+                    cTool.TxtFnCallerSymbol.Text = CustomFootnoteCaller;
+                }
+                if (CustomXRefCaller.ToLower() == "default")
+                {
+                    cTool.ChkXrefCusSymbol.Checked = false;
+                    cTool.TxtXrefCusSymbol.Text = "";
+                }
+                else
+                {
+                    cTool.ChkXrefCusSymbol.Checked = true;
+                    cTool.TxtXrefCusSymbol.Text = CustomXRefCaller;
+                }
+                cTool.ChkTurnOffFirstVerse.Checked = bool.Parse(HideVerseNumberOne);
+                cTool.ChkHideSpaceVerseNo.Checked = bool.Parse(HideSpaceVerseNumber);
+            }
         }
 
         private void ShowMoblieCss(XmlNodeList baseNode1)
@@ -3635,6 +3640,16 @@ namespace SIL.PublishingSolution
 
         public void DdlRunningHeadSelectedIndexChangedBl(string pageType)
         {
+            if (pageType == "None")
+            {
+                cTool.TxtGuidewordLength.Text = "0";
+                cTool.TxtGuidewordLength.Enabled = false;
+            }
+            else
+            {
+                cTool.TxtGuidewordLength.Text = "99";
+                cTool.TxtGuidewordLength.Enabled = true;
+            }
             string xPath = string.Empty;
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulatePageNumberFeature");
             xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";

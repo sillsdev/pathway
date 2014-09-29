@@ -1146,9 +1146,10 @@ namespace SIL.PublishingSolution
 
         private void ddlRunningHead_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EditCSS(sender, e);
+            
             string pageType = ddlRunningHead.SelectedItem.ToString();
-            _CToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType);
+            _CToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType); 
+                EditCSS(sender, e);
         }
 
         private void ddlTocLevel_SelectedIndexChanged(object sender, EventArgs e)
