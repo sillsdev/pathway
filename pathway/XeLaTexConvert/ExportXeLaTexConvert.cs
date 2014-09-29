@@ -435,7 +435,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    writer.WriteLine(contentWriter);
+                    writer.WriteLine(contentWriter.Replace("&", @"\&"));
                 }
             }
             reader.Close();

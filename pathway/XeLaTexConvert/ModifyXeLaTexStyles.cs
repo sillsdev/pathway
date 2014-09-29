@@ -676,7 +676,7 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\begin{center}\r\n";
                 tableOfContent += "\\textsc{\\LARGE " + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
                 tableOfContent += "\\vspace{120 mm} \r\n";
-                tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Publisher) + "}\\\\[0.5cm] \r\n";
+                tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Publisher).Replace("&", @"\&") + "}\\\\[0.5cm] \r\n";
                 if (logoFileName.Contains(".png"))
                 {
                     tableOfContent += "\\includegraphics[width=0.15 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";
