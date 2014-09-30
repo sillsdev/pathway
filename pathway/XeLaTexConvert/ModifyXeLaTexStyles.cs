@@ -305,7 +305,22 @@ namespace SIL.PublishingSolution
             if (Convert.ToBoolean(TocChecked))
                 InsertTableOfContent(sw);
 
-            sw.WriteLine(@"\pagestyle{fancy} ");
+            if (_cssClass.ContainsKey("@page:left-top-left"))
+            {
+                Dictionary<string, string> pagePrty = _cssClass["@page:left-top-left"];
+                if (pagePrty.ContainsKey("content") && pagePrty["content"].Replace("'","").Equals("none"))
+                {
+                    sw.WriteLine(@"\pagestyle{plain} ");
+                }
+                else
+                {
+                    sw.WriteLine(@"\pagestyle{fancy} ");
+                }
+            }
+            else
+            {
+                sw.WriteLine(@"\pagestyle{fancy} ");
+            }
             sw.Flush();
             sw.Close();
             MergeFile(newFile1, newFile2);
