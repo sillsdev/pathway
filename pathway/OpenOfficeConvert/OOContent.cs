@@ -1266,27 +1266,24 @@ namespace SIL.PublishingSolution
         /// <param name="content"></param>
         private void WriteLeftGuidewordForLetter(string content)
         {
-            if (_classNameWithLang.IndexOf("letter") == 0)
+            if (_classNameWithLang.IndexOf("letter") == 0 && _firstDataOnEntry.ContainsKey(content))
             {
-                if (_firstDataOnEntry.ContainsKey(content))
-                {
-                    SetGuidewordTextPos(_firstDataOnEntry[content]);
-                    _writer.WriteStartElement("text:variable-set");
-                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                    _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + _firstText);
-                    _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", _firstText);
-                    _writer.WriteEndElement();
+                SetGuidewordTextPos(_firstDataOnEntry[content]);
+                _writer.WriteStartElement("text:variable-set");
+                _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                _writer.WriteAttributeString("text:display", "none");
+                _writer.WriteAttributeString("text:formula", "ooow: " + _firstText);
+                _writer.WriteAttributeString("office:value-type", "string");
+                _writer.WriteAttributeString("office:string-value", _firstText);
+                _writer.WriteEndElement();
 
-                    _writer.WriteStartElement("text:variable-set");
-                    _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
-                    _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + _secondText);
-                    _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", _secondText);
-                    _writer.WriteEndElement();
-                }
+                _writer.WriteStartElement("text:variable-set");
+                _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
+                _writer.WriteAttributeString("text:display", "none");
+                _writer.WriteAttributeString("text:formula", "ooow: " + _secondText);
+                _writer.WriteAttributeString("office:value-type", "string");
+                _writer.WriteAttributeString("office:string-value", _secondText);
+                _writer.WriteEndElement();
             }
         }
 
