@@ -2547,6 +2547,81 @@ namespace SIL.Tool
             return newFileName;
         }
 
+        /// <summary>
+        /// Include hyphenation words into XHTML input file using replace method.
+        /// </summary>
+        /// <param name="xhtmlFile">input XHTML file</param>
+        public void IncludeHyphenWordsOnXhtml(string xhtmlFile)
+        {
+            if(Common.Testing == false)
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary") return;
+            
+            var hyphenWords = GetHyphenationWords();
+
+            if (!File.Exists(xhtmlFile)) return;
+
+            // load the xhtml file we're working with
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReader xmlReader = XmlReader.Create(xhtmlFile, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+
+            const string xPath = "//xhtml:div[@class='Paragraph']";
+            XmlNodeList paragraphNodeList = xmlDocument.SelectNodes(xPath, namespaceManager);
+            if (paragraphNodeList != null && paragraphNodeList.Count > 0)
+            {
+                for (int i = 0; i < paragraphNodeList.Count; i++)
+                {
+                    foreach (string hyphenWord in hyphenWords.Keys)
+                    {
+                        if (paragraphNodeList[i].InnerText.Contains(" " + hyphenWord + " ") ||
+                            paragraphNodeList[i].InnerText.Contains(" " + hyphenWord + ","))
+                        {
+                            paragraphNodeList[i].InnerText = paragraphNodeList[i].InnerText.Replace(hyphenWord, hyphenWords[hyphenWord]);
+                        }
+                    }
+                }
+            }
+            xmlDocument.Save(xhtmlFile);
+        }
+
+        /// <summary>
+        /// Get the hyphenation words from the file "hyphenatedWords.txt" for scripture
+        /// </summary>
+        public Dictionary<string, string> GetHyphenationWords()
+        {
+            var hyphWords = new Dictionary<string, string>();
+            
+            string hyphFilePath = @"C:\Paratext Projects1\akeNT\hyphenatedWords.txt"; //Should get from Param.cs
+            if (Common.Testing == true)
+            {
+                const string fileName = "hyphenatedWords.txt";
+                string folderPath = Common.LeftString(Environment.CurrentDirectory, "bin");
+                String inputFolder = Common.PathCombine(folderPath, "PsTool/TestFiles/InputFiles");
+                hyphFilePath = Common.PathCombine(inputFolder, fileName);
+            }
+
+            if (File.Exists(hyphFilePath))
+            {
+                string line = string.Empty;
+                var fs = new FileStream(hyphFilePath, FileMode.Open);
+                var stream = new StreamReader(fs);
+                while ((line = stream.ReadLine()) != null)
+                {
+                    if (line.Trim().IndexOf(' ') == -1 && line.Trim().IndexOf('=') > 0)
+                    {
+                        string actText = line.Trim().Replace("=", "");
+                        string chgText = line.Trim().Replace("=", "\u00AD");
+                        hyphWords[actText] = chgText;
+                    }
+                }
+                fs.Close();
+            }
+            return hyphWords;
+        }
         #endregion
 
         #region XML PreProcessor

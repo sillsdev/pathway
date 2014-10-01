@@ -145,6 +145,28 @@ namespace Test.PsTool
             var index = data.IndexOf("@top-", 0, StringComparison.CurrentCultureIgnoreCase);
             Assert.AreEqual(-1, index);
         }
+
+        /// <summary>
+        ///     TD-4204 Write parser to collect hyphenation words
+        /// </summary>
+        [Test]
+        public void InsertHyphenationWords()
+        {
+            const string fileName = "InsertHyphenationWords.xhtml";
+            var input = GetFileNameWithPath(fileName);
+            var output = GetFileNameWithOutputPath(fileName);
+            var projInfo = new PublicationInformation
+            {
+                ProjectInputType = "Scripture"
+            };
+            CopyToOutput(input, output);
+            preExportProcess = new PreExportProcess();
+            preExportProcess.IncludeHyphenWordsOnXhtml(output);
+            string expected = GetFileNameWithExpectedPath(fileName);
+            XmlAssert.AreEqual(expected, output, "");
+        }
+
+
         #region private Methods
         private static string GetPath(string place, string filename)
         {
