@@ -30,6 +30,7 @@ namespace SIL.PublishingSolution
         {
 			Common.ProgBase = Common.GetPSApplicationPath();
             _realClass = new ExportThroughPathway();
+            _realClass.DatabaseName = this.DatabaseName;
             ((ExportThroughPathway)_realClass).InputType = "Scripture";
         }
 

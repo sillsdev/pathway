@@ -336,7 +336,7 @@ namespace SIL.PublishingSolution
                 }
                 _isUnixOS = Common.UnixVersionCheck();
                 PopulateFilesFromPreprocessingFolder();
-
+                
                 // Load the .ssf or .ldml as appropriate
                 _settingsHelper = new SettingsHelper(DatabaseName);
                 _settingsHelper.LoadValues();
@@ -389,9 +389,17 @@ namespace SIL.PublishingSolution
                 IsExpanded = false;
                 ResizeDialog();
                 SetOkStatus();
+                chkHyphen.Enabled = false;
+                chkHyphen.Checked = false;
+                clbHyphenlang.Items.Clear();
+                //Loads Hyphenation related settings
+                if (InputType == "Scripture")
+                {
+                    LoadHyphenationSettings();
+                }
                 LoadProperty();
                 EnableUIElements();
-
+                
                 ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS, false);
                 if (AppDomain.CurrentDomain.FriendlyName.ToLower().IndexOf("configurationtool") == -1)
                 {
@@ -399,6 +407,44 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+        }
+
+        private void LoadHyphenationSettings()
+        {
+            var ssf = _settingsHelper.GetSettingsFilename(_settingsHelper.Database);
+            if (ssf != null)
+            {
+                var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
+                Param.DatabaseName = _settingsHelper.Database;
+                Param.IsHyphen = false;
+                Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database);
+                foreach (string filename in Directory.GetFiles(paratextpath,"*.txt"))
+                {
+                    if (filename.Contains("hyphen"))
+                    {
+                        chkHyphen.Enabled = true;
+                        chkHyphen.Checked = false;
+                        Param.IsHyphen = true;
+                        Param.HyphenFilepath = filename;
+                    }
+                }
+            }
+            CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database,InputType);
+            chkHyphen.Checked = Convert.ToBoolean(Param.HyphenEnable);
+            chkHyphen.Enabled = Param.IsHyphen;
+            foreach (string lang in Param.HyphenLang.Split(','))
+            {
+                if (chkHyphen.Checked == true)
+                {
+                    clbHyphenlang.Enabled = true;
+                    clbHyphenlang.Items.Add(lang, (Param.HyphenationSelectedLanguagelist.Contains(lang) ? true : false));
+                }
+                else
+                {
+                    clbHyphenlang.Enabled = false;
+                    clbHyphenlang.Items.Add(lang, false);
+                }
+            }
         }
 
         private void AssignFolderDateTime()
@@ -765,6 +811,7 @@ namespace SIL.PublishingSolution
 
             ProcessSendingHelpImprove();
 
+            HyphenationSettings();
             if (!File.Exists(CoverPageImagePath))
             {
                 CoverPageImagePath = Common.PathCombine(Common.GetApplicationPath(), "Graphic\\cover.png");
@@ -805,11 +852,25 @@ namespace SIL.PublishingSolution
             this.Close();
         }
 
+        private void HyphenationSettings()
+        {
+            Param.HyphenEnable = chkHyphen.Checked.ToString();
+            var hyphenlang = string.Empty;
+            foreach (string chkBoxName in clbHyphenlang.CheckedItems)
+            {
+                if (hyphenlang.Length > 0)
+                    hyphenlang += ",";
+                hyphenlang += chkBoxName;
+            }
+            Param.HyphenLang = hyphenlang;
+            CreatingHyphenationSettings.CreateHyphenationFile(InputType);
+        }
+
         private static void ProcessSendingHelpImprove()
         {
             string getApplicationPath = Common.GetApplicationPath();
             string helpImproveCommand = Common.PathCombine(getApplicationPath, "HelpImprove.exe");
-            string registryPath = "Software\\SIL\\Pathway";
+            const string registryPath = "Software\\SIL\\Pathway";
 
             if (File.Exists(helpImproveCommand))
                 Common.RunCommand(helpImproveCommand, string.Format("{0} {1} {2}", "204.93.172.30", registryPath, "HelpImprove"), 0);
@@ -1415,6 +1476,14 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+        }
+
+        private void chkHyphen_CheckedChanged(object sender, EventArgs e)
+        {
+            bool hyphencheck = chkHyphen.Checked;
+            for (int i = 0; i < clbHyphenlang.Items.Count; i++)
+                clbHyphenlang.SetItemCheckState(i, ((hyphencheck&&Param.HyphenationSelectedLanguagelist.Contains(clbHyphenlang.GetItemText(i))) ? CheckState.Checked : CheckState.Unchecked)); 
+            clbHyphenlang.Enabled = hyphencheck;
         }
     }
 }
