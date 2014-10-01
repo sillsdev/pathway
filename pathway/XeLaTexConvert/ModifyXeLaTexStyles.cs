@@ -306,8 +306,11 @@ namespace SIL.PublishingSolution
             {
                 InsertTableOfContent(sw);
             }
-
-            InsertContentApplyFormat(sw);
+            else
+            {
+                InsertContentApplyFormat(sw);    
+            }
+            
 
 
             if (_cssClass.ContainsKey("@page:left-top-left"))
@@ -538,6 +541,8 @@ namespace SIL.PublishingSolution
 
                 tableOfContent += "\r\n";
                 tableOfContent += "\\newpage \r\n";
+                sw.WriteLine(tableOfContent);
+                InsertContentApplyFormat(sw);
             }
 
             if (_projectType.ToLower() == "scripture")
