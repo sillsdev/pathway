@@ -157,7 +157,7 @@ namespace Test.GoBibleConvert
 
             _usxToSfm.ConvertUsxToSFM(input, output);
 
-            FileAssert.AreEqual(expected, output, file + " test fails");
+            TextFileAssert.AreEqual(expected, output, file + " test fails");
             Assert.AreEqual(1, Common.BookNameCollection.Count);
             Assert.AreEqual("h", Common.BookNameTag);
         }
