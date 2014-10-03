@@ -292,7 +292,7 @@ namespace SIL.PublishingSolution
                 //sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org"); - we need to find out best place to post Go Bible modules
                 sw.WriteLine("Codepage: UTF-8");
                 sw.WriteLine("RedLettering: false");
-                sw.WriteLine(@"USFM-TitleTag: \id"); // + Common.BookNameTag);
+                sw.WriteLine(@"USFM-TitleTag: \" + Common.BookNameTag);
                 sw.WriteLine("Collection: " + GetInfo(Param.Title));
 
                 string sfmFiles = Common.PathCombine(exportGoBiblePath, "SFM");
