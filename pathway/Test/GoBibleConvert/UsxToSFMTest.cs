@@ -15,6 +15,8 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
+using System.Threading;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -41,7 +43,12 @@ namespace Test.GoBibleConvert
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/GoBibleConvert/TestFiles");
             _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "expected");
+            _expectedPath = Common.PathCombine(testPath, "Expected");
+            if (!Directory.Exists(_outputPath))
+            {
+	            Directory.CreateDirectory(_outputPath);
+                Thread.Sleep(1000);
+            }
         }
         #endregion
 
