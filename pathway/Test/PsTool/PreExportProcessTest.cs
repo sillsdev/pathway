@@ -163,7 +163,7 @@ namespace Test.PsTool
             preExportProcess = new PreExportProcess();
             preExportProcess.IncludeHyphenWordsOnXhtml(output);
             string expected = GetFileNameWithExpectedPath(fileName);
-            XmlAssert.AreEqual(expected, output, "");
+            TextFileAssert.AreEqual(expected, output, fileName + " in xhtml ");
         }
 
 
