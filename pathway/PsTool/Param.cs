@@ -159,7 +159,7 @@ namespace SIL.Tool
         public static bool IsHyphen = false;
         public static string HyphenLang = string.Empty;
         public static string HyphenFilepath = string.Empty;
-        public static string HyphenEnable = string.Empty;
+        public static bool HyphenEnable = false;
         public static List<string> HyphenationSelectedLanguagelist = new List<string>();
 
         /// <summary>

@@ -430,7 +430,7 @@ namespace SIL.PublishingSolution
                 }
             }
             CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database,InputType);
-            chkHyphen.Checked = Convert.ToBoolean(Param.HyphenEnable);
+            chkHyphen.Checked = Param.HyphenEnable;
             chkHyphen.Enabled = Param.IsHyphen;
             foreach (string lang in Param.HyphenLang.Split(','))
             {
@@ -854,7 +854,7 @@ namespace SIL.PublishingSolution
 
         private void HyphenationSettings()
         {
-            Param.HyphenEnable = chkHyphen.Checked.ToString();
+            Param.HyphenEnable = chkHyphen.Checked;
             var hyphenlang = string.Empty;
             foreach (string chkBoxName in clbHyphenlang.CheckedItems)
             {

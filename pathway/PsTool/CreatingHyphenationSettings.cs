@@ -26,7 +26,7 @@ namespace SIL.Tool
                 {
                     if (xexistprojnode.Attributes != null)
                     {
-                        xexistprojnode.Attributes["enable"].Value = Param.HyphenEnable;
+                        xexistprojnode.Attributes["enable"].Value = Param.HyphenEnable.ToString();
                         xexistprojnode.Attributes["languages"].Value = Param.HyphenLang;
                     }
                     xdoc.Save(hyphenxmlfile);
@@ -60,7 +60,7 @@ namespace SIL.Tool
                 xrootNode.AppendChild(xprojNode);
 
                 XmlAttribute xcheckAttr = xdoc.CreateAttribute("enable");
-                xcheckAttr.Value = Param.HyphenEnable;
+                xcheckAttr.Value = Param.HyphenEnable.ToString();
                 xprojNode.Attributes.Append(xcheckAttr);
 
                 XmlAttribute xlangAttr = xdoc.CreateAttribute("languages");
@@ -71,7 +71,7 @@ namespace SIL.Tool
 
         public static void ReadHyphenationSettings(string projName, string exportType)
         {
-            Param.HyphenEnable = "False";
+            Param.HyphenEnable = false;
             Param.HyphenationSelectedLanguagelist.Clear();
             if (string.IsNullOrEmpty(projName))
                 return;
@@ -88,7 +88,7 @@ namespace SIL.Tool
                 {
                     if (xExistProjnode.Attributes != null)
                     {
-                        Param.HyphenEnable = (Param.IsHyphen) ? xExistProjnode.Attributes["enable"].Value : "False";
+                        Param.HyphenEnable = (Param.IsHyphen) && Convert.ToBoolean(xExistProjnode.Attributes["enable"].Value);
                         var value = xExistProjnode.Attributes["languages"].Value;
                         if (value != null)
                         {
