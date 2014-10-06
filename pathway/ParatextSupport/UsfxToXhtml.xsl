@@ -651,8 +651,13 @@
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'k'">
-				<span class="Key_Word" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+				<span class="Glossary_Keyvalue" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+					<a href="#" class="Glossaryvaluehref">
+						<xsl:attribute name="id">
+							<xsl:text>k_</xsl:text>	<xsl:value-of select="count(preceding::char[@style='k'])+1"/>
+						</xsl:attribute>
+						<xsl:apply-templates/>
+					</a>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'nd'">
@@ -672,7 +677,22 @@
 			</xsl:when>
 			<xsl:when test="@style = 'w'">
 				<span class="See_In_Glossary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+          <a href="#" class="Glossary_Key">
+		          	<xsl:attribute name="id">
+		          		<xsl:text>w_</xsl:text>	<xsl:value-of select="count(preceding::char[@style='w'])+1"/>
+		          	</xsl:attribute>
+            <xsl:choose>
+              <xsl:when test="contains(text(),'|')">
+                <xsl:attribute name="title">
+                  <xsl:value-of select="substring-after(text(),'|')"/>
+                </xsl:attribute>
+                <xsl:value-of select="substring-before(text(),'|')"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:apply-templates/>
+              </xsl:otherwise>
+            </xsl:choose>
+		          </a>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'add'">

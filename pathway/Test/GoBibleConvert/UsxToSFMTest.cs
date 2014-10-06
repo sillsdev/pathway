@@ -39,7 +39,7 @@ namespace Test.GoBibleConvert
             Common.Testing = true;
 
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/GoBibleConvert/TestFiles");
-            _inputPath = Common.PathCombine(testPath, "input");
+            _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
             _expectedPath = Common.PathCombine(testPath, "expected");
         }
@@ -144,7 +144,6 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
         public void para()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -153,10 +152,14 @@ namespace Test.GoBibleConvert
             string input = Common.PathCombine(_inputPath, file + ".usx");
             string output = Common.PathCombine(_outputPath, file + ".sfm");
             string expected = Common.PathCombine(_expectedPath, file + ".sfm");
+            Common.BookNameCollection.Clear();
+            Common.BookNameTag = string.Empty;
 
             _usxToSfm.ConvertUsxToSFM(input, output);
 
-            FileAssert.AreEqual(expected, output, file + " test fails");
+            TextFileAssert.AreEqual(expected, output, file + " test fails");
+            Assert.AreEqual(1, Common.BookNameCollection.Count);
+            Assert.AreEqual("h", Common.BookNameTag);
         }
 
         ///<summary>

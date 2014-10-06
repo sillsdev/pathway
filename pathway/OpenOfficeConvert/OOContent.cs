@@ -124,6 +124,10 @@ namespace SIL.PublishingSolution
         private int _pictureNo;
         private bool _isReversalFile = false;
         private bool _isLinux = false;
+        Dictionary<string, string> _glossaryList = new Dictionary<string, string>();
+        private bool _glossaryWrite;
+        private Dictionary<string, string> _glossaryTitleLst = new Dictionary<string, string>();
+ 
 
         public LOContent()
         {
@@ -200,6 +204,7 @@ namespace SIL.PublishingSolution
         {
             PreExportProcess preProcessor = new PreExportProcess(_projInfo);
             preProcessor.GetReferenceList(_projInfo.DefaultXhtmlFileWithPath, _sourceList, _targetList);
+            preProcessor.GetGlossaryList(_projInfo.DefaultXhtmlFileWithPath, _glossaryList);
             //TD-2912
             if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
@@ -816,7 +821,7 @@ namespace SIL.PublishingSolution
                 else
                 {
                     // Note: Paragraph Start Element //TD-4017 for || _childName == "letter_letHead_body"
-                    if ((_childName == "letter_letHead_dicBody" || _childName == "letter_letHead_body" || _childName == "scrBookName_scrBook_scrBody") && IsTocExists())
+                    if ((_childName == "letter_letHead_dicBody" || _childName == "letter_letHead_body" || _childName == "scrBookName_scrBook_scrBody" || IsFlexLetHead()) && IsTocExists())
                     {
                         _writer.WriteStartElement("text:h");
                         _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
@@ -837,6 +842,27 @@ namespace SIL.PublishingSolution
             }
             WriteText();
             _previousChildName = _childName;
+        }
+
+        /// <summary>
+        /// On some cases, FlexRev.xhtml contains addition tag for LetHead Text for BookMark
+        /// For Ex. <div class="letHead"> <div class="letter"> <span lang="hi">अ</span> </div> </div>
+        /// This method pass the validation process if letHead contains additional span for Reversal XHTML file.
+        /// </summary>
+        /// <returns>returns true if the pattern matches and \w{2} may be any lang like 'hi','fr', 'en'</returns>
+        private bool IsFlexLetHead()
+        {
+            bool flexLetHead = false;
+            if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0)
+            {
+                Regex regex = new Regex(@"span_.\w{2}_letter_letHead_dicBody");
+                Match match = regex.Match(_childName);
+                if (match.Success)
+                {
+                    flexLetHead = true;
+                }
+            }
+            return flexLetHead;
         }
 
         private string GetOutlineLevel()
@@ -931,6 +957,7 @@ namespace SIL.PublishingSolution
             _psuedoBefore.Clear();
 
             WriteGuidewordValueToVariable(content);
+
         }
 
         private void InsertLeftRightReference(string bookName, string referenceStyle)
@@ -1094,7 +1121,7 @@ namespace SIL.PublishingSolution
                     _isWhiteSpaceSkipped = false;
                 }
 
-                if (_classNameWithLang.ToLower().IndexOf("seeinglossary") == 0)
+                if (_classNameWithLang.ToLower().IndexOf("seeinglossary") == 0 || _classNameWithLang.ToLower().IndexOf("glossarykey") == 0 || _classNameWithLang.ToLower().IndexOf("glossaryvaluehref") == 0 || _classNameWithLang.ToLower().IndexOf("foreign") == 0)
                 {
                     _isPreviousGlossary = true;
                 }
@@ -1239,27 +1266,24 @@ namespace SIL.PublishingSolution
         /// <param name="content"></param>
         private void WriteLeftGuidewordForLetter(string content)
         {
-            if (_classNameWithLang.IndexOf("letter") == 0)
+            if (_classNameWithLang.IndexOf("letter") == 0 && _firstDataOnEntry.ContainsKey(content))
             {
-                if (_firstDataOnEntry.ContainsKey(content))
-                {
-                    SetGuidewordTextPos(_firstDataOnEntry[content]);
-                    _writer.WriteStartElement("text:variable-set");
-                    _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-                    _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + _firstText);
-                    _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", _firstText);
-                    _writer.WriteEndElement();
+                SetGuidewordTextPos(_firstDataOnEntry[content]);
+                _writer.WriteStartElement("text:variable-set");
+                _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                _writer.WriteAttributeString("text:display", "none");
+                _writer.WriteAttributeString("text:formula", "ooow: " + _firstText);
+                _writer.WriteAttributeString("office:value-type", "string");
+                _writer.WriteAttributeString("office:string-value", _firstText);
+                _writer.WriteEndElement();
 
-                    _writer.WriteStartElement("text:variable-set");
-                    _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
-                    _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + _secondText);
-                    _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", _secondText);
-                    _writer.WriteEndElement();
-                }
+                _writer.WriteStartElement("text:variable-set");
+                _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
+                _writer.WriteAttributeString("text:display", "none");
+                _writer.WriteAttributeString("text:formula", "ooow: " + _secondText);
+                _writer.WriteAttributeString("office:value-type", "string");
+                _writer.WriteAttributeString("office:string-value", _secondText);
+                _writer.WriteEndElement();
             }
         }
 
@@ -1313,7 +1337,7 @@ namespace SIL.PublishingSolution
 
             AddUsedStyleName(characterStyle);
 
-            bool isAnchorTagOpen = AnchorBookMark();
+            bool isAnchorTagOpen = AnchorBookMark(ref content);
             content = WriteCounter(content);
             whiteSpacePre(content); // TODO -2000 - SignificantSpace() - IN OO convert
             LanguageFontCheck(content, _childName);
@@ -1341,7 +1365,7 @@ namespace SIL.PublishingSolution
 
         }
 
-        private bool AnchorBookMark()
+        private bool AnchorBookMark(ref string content)
         {
             bool isAnchorTagOpen = false;
 
@@ -1373,6 +1397,74 @@ namespace SIL.PublishingSolution
                 _anchorIdValue = string.Empty;
                 _anchor.Clear();
                 _anchorWrite = false;
+            }
+            else if(_glossaryWrite)
+            {
+                string status = _anchorBookMarkName.Substring(0, 4);
+                
+                if (_anchorBookMarkName.IndexOf("_.title") > 0)
+                {
+                    string[] res = _anchorBookMarkName.Split(new string[] { "_.title" }, StringSplitOptions.None);
+                    _anchorBookMarkName = res[0];
+                    _anchorTitleValue = res[1];
+                }
+
+                if (_glossaryList.ContainsKey(_anchorBookMarkName.Replace(status, "")))
+                {
+                    string target = _glossaryList[_anchorBookMarkName.Replace(status, "")];
+                    string source = _anchorBookMarkName.Replace(status, "");
+                    
+                    if(_anchorTitleValue.Trim().Length > 0)
+                    {
+                        target = _anchorTitleValue;
+                        if (!_glossaryTitleLst.ContainsKey("#" + _glossaryList[source]))
+                            _glossaryTitleLst.Add("#" + _glossaryList[source], target);
+                        _anchorTitleValue = string.Empty;
+                    }
+                    
+                    if (_glossaryList.ContainsKey(source))
+                    {
+                        if (_glossaryTitleLst.ContainsKey(source))
+                        { source = _glossaryTitleLst[source]; }
+                        _writer.WriteStartElement("text:bookmark-start");
+                        _writer.WriteAttributeString("text:name", source.Replace("#", ""));
+                        _writer.WriteEndElement();
+                        _writer.WriteStartElement("text:bookmark-ref");
+                        _writer.WriteAttributeString("text:reference-format", "text");
+                        _writer.WriteAttributeString("text:ref-name", target.Replace("#", ""));
+                        _writer.WriteString(content);
+                        _writer.WriteEndElement();
+                        _writer.WriteStartElement("text:bookmark-end");
+                        _writer.WriteAttributeString("text:name", source.Replace("#", ""));
+                        _writer.WriteEndElement();
+                        content = string.Empty;
+                    }
+                }
+                else
+                {
+                    string source = _anchorTitleValue.Replace("_.", "");
+                    _writer.WriteStartElement("text:bookmark-start");
+                    _writer.WriteAttributeString("text:name", source.Replace("#", ""));
+                    _writer.WriteEndElement();
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", "T4");
+                    _writer.WriteString(content);
+                    _writer.WriteEndElement();
+                    _writer.WriteStartElement("text:bookmark-end");
+                    _writer.WriteAttributeString("text:name", source.Replace("#", ""));
+                    _writer.WriteEndElement();
+                    
+                    _writer.WriteStartElement("text:bookmark-ref");
+                    _writer.WriteAttributeString("text:reference-format", "text");
+                    _writer.WriteAttributeString("text:ref-name", source);
+                    _writer.WriteString(content);
+                    _writer.WriteEndElement();
+                    content = string.Empty;
+                }
+                _anchorBookMarkName = string.Empty;
+                _anchorIdValue = string.Empty;
+                _anchor.Clear();
+                _glossaryWrite = false;
             }
             else if (_anchorIdValue.Length > 0 && _sourceList.Contains(_anchorIdValue.Replace("#", "").ToLower()) && _targetList.Contains(_anchorIdValue.Replace("#", "").ToLower())) //search in source for writing target
             {
@@ -1471,7 +1563,11 @@ namespace SIL.PublishingSolution
                 if (_anchorBookMarkName.IndexOf("href#") == 0 || _anchorBookMarkName.IndexOf("name") == 0)
                 {
                     string val = _anchorBookMarkName.Replace("href#", "").Replace("name", "");
-                    if ((_sourceList.Contains(val.ToLower()) && _targetList.Contains(val.ToLower())))
+                    if (val.IndexOf("k_") == 0 || val.IndexOf("w_") == 0 || val.IndexOf("_.title") == 0)
+                    {
+                        _glossaryWrite = true;
+                    }
+                    else if ((_sourceList.Contains(val.ToLower()) && _targetList.Contains(val.ToLower())))
                     {
                         _anchorWrite = true;
                     }
@@ -1688,6 +1784,10 @@ namespace SIL.PublishingSolution
             if (_reader.Name == "a" && _anchorWrite)
             {
                 _anchorWrite = false;
+            }
+            else if (_reader.Name == "a" && _glossaryWrite)
+            {
+                _glossaryWrite = false;
             }
 
             _characterNameAlways = _characterName;
@@ -1986,12 +2086,22 @@ namespace SIL.PublishingSolution
 
             //office:automatic-styles - Sections and Columns area
             _writer.WriteStartElement("office:automatic-styles");
+            
             _writer.WriteStartElement("style:style");
             _writer.WriteAttributeString("style:name", "P4");
             _writer.WriteAttributeString("style:family", "paragraph");
             _writer.WriteAttributeString("style:master-page-name", "First_20_Page");
             _writer.WriteStartElement("style:paragraph-properties");
             _writer.WriteAttributeString("style:page-number", "auto");
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+            //Text style for display:none
+            _writer.WriteStartElement("style:style");
+            _writer.WriteAttributeString("style:name", "T4");
+            _writer.WriteAttributeString("style:family", "text");
+            _writer.WriteStartElement("style:text-properties");
+            _writer.WriteAttributeString("text:display", "none");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
@@ -3079,12 +3189,21 @@ namespace SIL.PublishingSolution
         {
             if (!_projInfo.IsFrontMatterEnabled && _projInfo.OutputExtension == "odt")
             {
-                if (_projInfo.IsODM && Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath).ToLower() == "preserveflexrev") return;
-
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "P4");
-                _writer.WriteEndElement();
+                InsertP4Page();
             }
+            else if ((_projInfo.IsFrontMatterEnabled && !_projInfo.IsTitlePageEnabled) && _projInfo.OutputExtension == "odt")
+            {
+                InsertP4Page();
+            }
+        }
+
+        private void InsertP4Page()
+        {
+            if (_projInfo.IsODM && Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath).ToLower() == "preserveflexrev") return;
+
+            _writer.WriteStartElement("text:p");
+            _writer.WriteAttributeString("text:style-name", "P4");
+            _writer.WriteEndElement();            
         }
 
         private void CallTOC()

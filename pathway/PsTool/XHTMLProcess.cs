@@ -73,6 +73,7 @@ namespace SIL.Tool
         protected string _anchorBookMarkName = string.Empty;
         protected string _anchorIdValue = string.Empty;
         protected bool _anchorStart;
+        protected string _anchorTitleValue = string.Empty;
         #endregion
 
         protected string _childName = string.Empty;
@@ -235,6 +236,7 @@ namespace SIL.Tool
             else if (_tagType == "a")
             {
                 _anchorBookMarkName = Common.RightString(_classNameWithLang, Common.SepTag);
+                _anchorTitleValue = _reader.GetAttribute("title") ?? string.Empty;
                 _anchorStart = true;
             }
             else
@@ -548,6 +550,10 @@ namespace SIL.Tool
                 {
                     modifiedContent = TextTransform(content, styleName, modifiedContent);
                 }
+            }
+            if (styleName != null && styleName == "LText_FrontMatter_div_div_scrBody")
+            {
+                modifiedContent = modifiedContent.Replace("\\u0026", "&amp;");
             }
             return modifiedContent;
         }

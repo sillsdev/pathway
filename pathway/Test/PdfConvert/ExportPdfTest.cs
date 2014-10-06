@@ -85,6 +85,7 @@ namespace Test.PdfConvert
         ///</summary>
         [Test]
         [Category("SkipOnTeamCity")]
+        [Category("LongTest")]
         public void ExportDictionaryTest()
         {
             string inputSourceDirectory = FileInput("");
@@ -111,6 +112,7 @@ namespace Test.PdfConvert
         ///</summary>
         [Test]
         [Category("SkipOnTeamCity")]
+        [Category("LongTest")]
         public void ExportScriptureTest()
         {
             string inputSourceDirectory = FileInput("");

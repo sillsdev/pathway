@@ -303,12 +303,48 @@ namespace SIL.PublishingSolution
             InsertFrontMatter(sw);
 
             if (Convert.ToBoolean(TocChecked))
+            {
                 InsertTableOfContent(sw);
+            }
+            else
+            {
+                InsertContentApplyFormat(sw);    
+            }
+            
 
-            sw.WriteLine(@"\pagestyle{fancy} ");
+
+            if (_cssClass.ContainsKey("@page:left-top-left"))
+            {
+                Dictionary<string, string> pagePrty = _cssClass["@page:left-top-left"];
+                if (pagePrty.ContainsKey("content") && pagePrty["content"].Replace("'","").Equals("none"))
+                {
+                    sw.WriteLine(@"\pagestyle{plain} ");
+                }
+                else
+                {
+                    sw.WriteLine(@"\pagestyle{fancy} ");
+                }
+            }
+            else
+            {
+                sw.WriteLine(@"\pagestyle{fancy} ");
+            }
             sw.Flush();
             sw.Close();
             MergeFile(newFile1, newFile2);
+        }
+
+        private void InsertContentApplyFormat(StreamWriter sw)
+        {
+            String tableOfContent = string.Empty;
+            tableOfContent += "\\newpage \r\n";
+            tableOfContent += "\\thispagestyle{empty} \r\n";
+            tableOfContent += "\\mbox{} \r\n";
+            tableOfContent += "\\newpage \r\n";
+            tableOfContent += "\\newpage \r\n";
+            tableOfContent += "\\setcounter{page}{1} \r\n";
+            tableOfContent += "\\pagenumbering{arabic} ";
+            sw.WriteLine(tableOfContent);
         }
 
         private void MergeFile(string newFile1, string newFile2)
@@ -505,6 +541,8 @@ namespace SIL.PublishingSolution
 
                 tableOfContent += "\r\n";
                 tableOfContent += "\\newpage \r\n";
+                sw.WriteLine(tableOfContent);
+                InsertContentApplyFormat(sw);
             }
 
             if (_projectType.ToLower() == "scripture")
@@ -527,13 +565,6 @@ namespace SIL.PublishingSolution
             }
             tableOfContent += "\\pagestyle{plain} \r\n";
             tableOfContent += "\\tableofcontents \r\n";
-            tableOfContent += "\\newpage \r\n";
-            tableOfContent += "\\thispagestyle{empty} \r\n";
-            tableOfContent += "\\mbox{} \r\n";
-            tableOfContent += "\\newpage \r\n";
-            tableOfContent += "\\newpage \r\n";
-            tableOfContent += "\\setcounter{page}{1} \r\n";
-            tableOfContent += "\\pagenumbering{arabic} ";
             sw.WriteLine(tableOfContent);
         }
 
@@ -675,8 +706,8 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\begin{titlepage}\r\n";
                 tableOfContent += "\\begin{center}\r\n";
                 tableOfContent += "\\textsc{\\LARGE " + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
-                tableOfContent += "\\vspace{120 mm} \r\n";
-                tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Publisher) + "}\\\\[0.5cm] \r\n";
+                tableOfContent += "\\vspace{110 mm} \r\n";
+                tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Publisher).Replace("&", @"\&") + "}\\\\[0.5cm] \r\n";
                 if (logoFileName.Contains(".png"))
                 {
                     tableOfContent += "\\includegraphics[width=0.15 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";

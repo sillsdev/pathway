@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -23,6 +24,7 @@ using System.Security;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.XPath;
 using System.Xml.Xsl;
 using SIL.Tool;
 
@@ -38,8 +40,12 @@ namespace SIL.PublishingSolution
         private static object _theWorProgPath;
         private static bool _hasMessages;
         protected static string MessageFullName;
+        private static string _tempGlossaryName = "";
+        private static string _defaultLanguage = "zxx";
 
         protected static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
+        protected static readonly XslCompiledTransform Xhtml2Usx = new XslCompiledTransform();
+        protected static readonly XslCompiledTransform Xhtml2BookNames = new XslCompiledTransform();
 
         public string ExportType
         {
@@ -99,7 +105,9 @@ namespace SIL.PublishingSolution
                 FindParatextProject();
                 inProcess.PerformStep();
 
-                var xsltArgs = LoadXsltParameters();
+                CreateUsxIfNecessary(projInfo.DefaultXhtmlFileWithPath);
+
+                var xsltArgs = LoadXsltParameters(exportTheWordInputPath);
                 inProcess.PerformStep();
 
                 var otBooks = new List<string>();
@@ -107,7 +115,7 @@ namespace SIL.PublishingSolution
                 CollectTestamentBooks(otBooks, ntBooks);
                 inProcess.PerformStep();
 
-                var output = GetSsfValue("//EthnologueCode", "zxx");
+                var output = GetSsfValue("//EthnologueCode", _defaultLanguage);
                 var fullName = UsxDir(exportTheWordInputPath);
                 LogStatus("Processing: {0}", fullName);
                 xsltArgs.XsltMessageEncountered += XsltMessage;
@@ -140,6 +148,11 @@ namespace SIL.PublishingSolution
                 var mySwordResult = ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
                 inProcess.PerformStep();
 
+                if (_tempGlossaryName != "")
+                {
+                    File.Delete(_tempGlossaryName);
+                    _tempGlossaryName = "";
+                }
                 if (Directory.Exists(tempTheWordCreatorPath))
                 {
                     Common.DeleteDirectory(tempTheWordCreatorPath);
@@ -166,6 +179,89 @@ namespace SIL.PublishingSolution
             }
             Ssf = string.Empty;
             return success;
+        }
+
+        private void CreateUsxIfNecessary(string xhtmlFileName)
+        {
+            var xhtmlDir = Path.GetDirectoryName(xhtmlFileName);
+            var usxPath = Common.PathCombine(xhtmlDir, "USX");
+            if (Directory.Exists(usxPath)) return;
+            Directory.CreateDirectory(usxPath);
+            var xDoc = Common.DeclareXMLDocument(false);
+            xDoc.Load(xhtmlFileName);
+            var bookCodes = GetBookCodes(xDoc);
+            SetDefaultLanguage(xDoc);
+            CreateBookNames(xDoc, usxPath);
+            CreateUsxBooks(bookCodes, usxPath, xDoc);
+            xDoc.RemoveAll();
+        }
+
+        private void CreateBookNames(IXPathNavigable xDoc, string usxPath)
+        {
+            GetXslt("Xhtml2BookNames.xsl", Xhtml2BookNames);
+            var args = new XsltArgumentList();
+            var outName = Common.PathCombine(usxPath, "BookNames.xml");
+            var w = XmlWriter.Create(outName);
+            Xhtml2BookNames.Transform(xDoc, args, w);
+            w.Close();
+        }
+
+        private void CreateUsxBooks(ArrayList bookCodes, string usxPath, IXPathNavigable xDoc)
+        {
+            Debug.Assert(bookCodes != null);
+            GetXslt("Xhtml-Usx.xsl", Xhtml2Usx);
+            var xhtml2UsxArgs = LoadXhtml2XslArgs();
+            foreach (string bookCode in bookCodes)
+            {
+                var outName = Common.PathCombine(usxPath, bookCode + ".usx");
+                var w = XmlWriter.Create(outName);
+                xhtml2UsxArgs.AddParam("code", "", bookCode);
+                Xhtml2Usx.Transform(xDoc, xhtml2UsxArgs, w);
+                xhtml2UsxArgs.RemoveParam("code", "");
+                w.Close();
+            }
+        }
+
+        private static void SetDefaultLanguage(XmlDocument xDoc)
+        {
+            Debug.Assert(xDoc != null);
+            var lang = xDoc.SelectSingleNode("(//@lang)[2]");
+            if (lang != null)
+            {
+                _defaultLanguage = lang.Value;
+            }
+        }
+
+        private static ArrayList GetBookCodes(XmlDocument xDoc)
+        {
+            Debug.Assert(xDoc != null);
+            var bookCodes = new ArrayList();
+            var nodes = xDoc.SelectNodes("//*[@class = 'scrBookCode']/text()");
+            Debug.Assert(nodes != null);
+            foreach (XmlText node in nodes)
+            {
+                bookCodes.Add(node.Value);
+            }
+            return bookCodes;
+        }
+
+        private XsltArgumentList LoadXhtml2XslArgs()
+        {
+            var xsltArgs = new XsltArgumentList();
+            xsltArgs.AddParam("map", "", "file:///" + Common.FromRegistry("StyleMap.xml"));
+            return xsltArgs;
+        }
+
+        private void GetXslt(string xsltName, XslCompiledTransform transform)
+        {
+            var xsltSettings = new XsltSettings { EnableDocumentFunction = true };
+            var inputXsl = new StreamReader(Common.FromRegistry(xsltName));
+            Debug.Assert(inputXsl != null);
+            var readerSettings = new XmlReaderSettings { XmlResolver = FileStreamXmlResolver.GetNullResolver() };
+            var reader = XmlReader.Create(inputXsl, readerSettings);
+            transform.Load(reader, xsltSettings, null);
+            reader.Close();
+            inputXsl.Close();
         }
 
         protected void DisplayMessageReport()
@@ -465,19 +561,55 @@ namespace SIL.PublishingSolution
 // ReSharper restore IntroduceOptionalParameters.Global
         }
 
-        protected static XsltArgumentList LoadXsltParameters()
+        protected static XsltArgumentList LoadXsltParameters(string path)
         {
             var xsltArgs = new XsltArgumentList();
             xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
-            xsltArgs.AddParam("bookNames", "", GetBookNamesUri());
+            xsltArgs.AddParam("bookNames", "", GetBookNamesUri(path));
+            xsltArgs.AddParam("glossary", "", GetGlossaryUri(path));
             xsltArgs.AddParam("versification", "", VrsName);
             GetRtlParam(xsltArgs);
             return xsltArgs;
         }
 
+        private static string GetGlossaryUri(string path)
+        {
+            var pathInfo = new DirectoryInfo(Common.PathCombine(path, "USX"));
+            var gloFile = pathInfo.GetFiles("GLO.usx");
+            if (gloFile.Length > 0)
+                return "file:///" + gloFile[0].FullName;
+            foreach (var fileInfo in pathInfo.GetFiles("XX*.usx"))
+            {
+                var sr = new StreamReader(fileInfo.FullName);
+                for (int i = 0; i < 4; i++)
+                {
+                    var line = sr.ReadLine();
+                    if (line == null) break;
+                    if (line.ToLower().Contains("glossary"))
+                    {
+                        return "file:///" + fileInfo.FullName;
+                    }
+                }
+
+            }
+            MakeTempGlossary();
+            return "file:///" + _tempGlossaryName;
+        }
+
+        private static void MakeTempGlossary()
+        {
+            _tempGlossaryName = Path.GetTempFileName();
+            var w = XmlWriter.Create(_tempGlossaryName);
+            var tempDoc = new XmlDocument();
+            tempDoc.LoadXml("<root/>");
+            tempDoc.WriteTo(w);
+            w.Close();
+        }
+
         protected static void GetRtlParam(XsltArgumentList xsltArgs)
         {
             R2L = false;
+            if (string.IsNullOrEmpty(Ssf)) return;
             var language = GetSsfValue("//Language", "English");
             var languagePath = Path.GetDirectoryName(Ssf);
             var languageFile = Common.PathCombine(languagePath, language);
@@ -507,8 +639,12 @@ namespace SIL.PublishingSolution
             }
         }
 
-        protected static string GetBookNamesUri()
+        protected static string GetBookNamesUri(string exportTheWordInputPath)
         {
+            if (string.IsNullOrEmpty(Ssf))
+            {
+                return "file:///" + Common.PathCombine(UsxDir(exportTheWordInputPath), "BookNames.xml");
+            }
             var myProj = Common.PathCombine((string) ParatextData, GetSsfValue("//Name"));
             return "file:///" + Common.PathCombine(myProj, "BookNames.xml");
         }
@@ -592,7 +728,7 @@ about={2} \
 <p><b>Creative Commons</b> <i>Atribution-Non Comercial-No Derivatives 4.0</i>\
 <p><font color=blue><i>http://creativecommons.org/licenses/by-nc-nd/4.0</i></font>\
 ";
-            var langCode = GetSsfValue("//EthnologueCode", "zxx");
+            var langCode = GetSsfValue("//EthnologueCode", _defaultLanguage);
             const bool isConfigurationTool = false;
             var shortTitle = Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool);
             var fullTitle = GetSsfValue("//FullName", shortTitle);

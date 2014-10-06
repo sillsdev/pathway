@@ -185,6 +185,10 @@ namespace SIL.PublishingSolution
 
             #region Xhtml preprocessing
             inProcess.SetStatus("Preprocessing content");
+
+            var glossorywords = WriteGlossaryLink(projInfo);
+            GlossaryLinkReferencing(projInfo,glossorywords);
+
             InsertBeforeAfterInXhtml(projInfo);
             var outputFolder = SetOutputFolderAndCurrentDirectory(projInfo);
             Common.SetProgressBarValue(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath);
@@ -206,7 +210,7 @@ namespace SIL.PublishingSolution
             var defaultCss = Path.GetFileName(niceNameCss);
             string tempCssFile = mergedCss.Replace(".css", "tmp.css");
             File.Copy(mergedCss, tempCssFile, true);
-            
+
             Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCss);
             Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCss);
             if (!File.Exists(mergedCss))
@@ -283,6 +287,7 @@ namespace SIL.PublishingSolution
             #region Insert Chapter Links
             inProcess.SetStatus("Insert Chapter Links");
             InsertChapterLinkBelowBookName(contentFolder);
+            InsertReferenceLinkInTocFile(contentFolder);
             inProcess.PerformStep();
             #endregion Insert Chapter Links
 
@@ -291,7 +296,7 @@ namespace SIL.PublishingSolution
             DateTime dtRefStart = DateTime.Now;
 #endif
             inProcess.SetStatus("Processing hyperlinks");
-            if (InputType == "scripture" && References.Contains("End"))
+            if (InputType.ToLower() == "scripture" && References.Contains("End"))
             {
                 UpdateReferenceHyperlinks(contentFolder, inProcess);
                 UpdateReferenceSourcelinks(contentFolder, inProcess);
@@ -315,6 +320,8 @@ namespace SIL.PublishingSolution
             inProcess.SetStatus("Generating .epub TOC and manifest");
             _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
             epubToc.CreateNcx(projInfo, contentFolder, bookId);
+            ModifyTOCFile(contentFolder);
+            ReplaceEmptyHref(contentFolder);
             if (File.Exists(tempCssFile))
             {
                 File.Delete(tempCssFile);
@@ -386,23 +393,28 @@ namespace SIL.PublishingSolution
                 if (MessageBox.Show(Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files", Resources.ExportComplete, MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    ValidateResult(outputPathWithFileName);// Epub2 ExportType
-                    ValidateResult(outputPathWithFileNameV3);//Epub3 ExportType
+                    ValidateResult(outputPathWithFileName);     // Epub2 ExportType
+                    ValidateResult(outputPathWithFileNameV3);   //Epub3 ExportType
                 }
 
                 #region Option Dialog box
 
                 if (!Common.Testing && isOutputDilalogNeeded)
                 {
-                    EpubExportTypeDlg exportTypeDlg = new EpubExportTypeDlg();
+                    outputPathWithFileName = RenameEpubFileName(outputPathWithFileName, "epub2");
+                    outputPathWithFileNameV3 = RenameEpubFileName(outputPathWithFileNameV3, "epub3");
+
+                    var exportTypeDlg = new EpubExportTypeDlg();
                     exportTypeDlg.ShowDialog();
                     if (exportTypeDlg._exportType == "epub2")
                     {
-                        DisplayOutput(outputFolder, fileName, outputPathWithFileName);
+                        outputFolder = Path.GetDirectoryName(outputPathWithFileName);
+                        DisplayOutput(outputFolder, fileName, ref outputPathWithFileName);
                     }
                     else if (exportTypeDlg._exportType == "epub3")
                     {
-                        DisplayOutput(outputFolder, fileName, outputPathWithFileNameV3);
+                        outputFolder = Path.GetDirectoryName(outputPathWithFileNameV3);
+                        DisplayOutput(outputFolder, fileName, ref outputPathWithFileNameV3);
                     }
                     else if (exportTypeDlg._exportType == "folder")
                     {
@@ -422,6 +434,7 @@ namespace SIL.PublishingSolution
 
             inProcess.PerformStep();
             #endregion Validate
+            
             #region Clean up
             inProcess.SetStatus("Clean up");
             Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1", string.Empty);
@@ -463,6 +476,156 @@ namespace SIL.PublishingSolution
             return success;
         }
 
+        private static string RenameEpubFileName(string oldEpubFileName, string epubVersion)
+        {
+            string newEpubFileName = oldEpubFileName.Replace(".epub", "_" + epubVersion + ".epub");
+            File.Move(oldEpubFileName, newEpubFileName);
+            return newEpubFileName;
+        }
+
+        protected void ReplaceEmptyHref(string contentFolder)
+        {
+            string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
+            foreach (string file in files)
+            {
+                var reader = new StreamReader(file);
+                var content = new StringBuilder();
+                content.Append(reader.ReadToEnd());
+                reader.Close();
+                content.Replace("a href=\"#\"", "a");
+                var writer = new StreamWriter(file);
+                writer.Write(content);
+                writer.Close();
+            }
+        }
+        private void GlossaryLinkReferencing(PublicationInformation projInfo,Dictionary<string,Dictionary<string,string>> glossoryreferncelist)
+        {
+            string tocFiletoUpdate = projInfo.DefaultXhtmlFileWithPath;
+            XmlDocument xmlDoc = Common.DeclareXMLDocument(true);
+            var namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            //Common.DeclareXmlReaderSettings(false);
+
+            if (!File.Exists(tocFiletoUpdate))
+                return;
+            xmlDoc.Load(tocFiletoUpdate);
+            XmlNodeList tagList = xmlDoc.GetElementsByTagName("a");
+            if (tagList.Count > 0)
+            {
+                foreach (KeyValuePair<string, Dictionary<string, string>> glossory in glossoryreferncelist)
+                {
+                    string glossorykey = glossory.Key;
+                    Dictionary<string, string> glossoryvalue = glossory.Value;
+
+                    foreach (XmlNode tagValue in tagList)
+                    {
+                        if (tagValue.Attributes != null && (tagValue.Attributes.Count > 0 && tagValue.Attributes["id"] != null) && tagValue.Attributes["class"].Value == "Glossary_Key")
+                        {
+                            if (glossoryvalue.ContainsKey(tagValue.Attributes["id"].Value))
+                            {
+                                tagValue.Attributes["href"].Value = "#" + glossorykey;
+                                string xpathkeyword = ".//xhtml:a[@class='Glossaryvaluehref'][@id='" + glossorykey + "']";
+                                XmlNode keywordnode = xmlDoc.SelectSingleNode(xpathkeyword, namespaceManager);
+                                if (keywordnode != null && keywordnode.Attributes != null &&
+                                    tagValue.Attributes["id"].Value.Length > 0)
+                                {
+                                    if (keywordnode.Attributes["href"].Value.Replace("#","").Trim().Length == 0)
+                                    {
+                                        keywordnode.Attributes["href"].Value = "#" + tagValue.Attributes["id"].Value;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            xmlDoc.Save(tocFiletoUpdate);
+        }
+
+        private static void ModifyTOCFile(string oebpsPath)
+        {
+            //NCX to XHTML
+            string ncxfile = Common.PathCombine(oebpsPath, "toc.ncx");
+            string ncxPath = Common.PathCombine(oebpsPath, "toc1.ncx");
+            File.Copy(ncxfile, ncxPath);
+            string xhtmlPath = Common.PathCombine(oebpsPath, "File3TOC00000_.xhtml");
+            if (File.Exists(ncxPath))
+            {
+                var tocHtml = CreateFileTocByNcx();
+                Common.ApplyXslt(ncxPath, tocHtml);
+                File.Copy(ncxPath, xhtmlPath, true);
+                File.Delete(ncxPath);
+            }
+        }
+
+        public static XslCompiledTransform CreateFileTocByNcx()
+        {
+            var ncxtoxhtmlStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.NcxToXhtml.xsl");
+            Debug.Assert(ncxtoxhtmlStream != null);
+            var ncxtoxhtml = new XslCompiledTransform();
+            ncxtoxhtml.Load(XmlReader.Create(ncxtoxhtmlStream));
+            return ncxtoxhtml;
+        }
+
+        private Dictionary<string, Dictionary<string, string>> WriteGlossaryLink(PublicationInformation projInfo)
+        {
+            Dictionary<string, Dictionary<string, string>> glossorywordsDictionaries = new Dictionary<string, Dictionary<string, string>>();
+
+            string file = projInfo.DefaultXhtmlFileWithPath;
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            //Common.DeclareXmlReaderSettings(false);
+
+            if (!File.Exists(file))
+                return null;
+
+            XmlReader xmlReader = XmlReader.Create(file, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            if (projInfo.ProjectInputType.ToLower().Equals("scripture"))
+            {
+                const string xPath = ".//xhtml:a[@class='Glossaryvaluehref']";
+                XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
+                Debug.Assert(nodes != null);
+                if (nodes.Count > 0)
+                {
+                    foreach (XmlNode booknode in nodes)
+                    {
+                        Dictionary<string, string> glossorywordsDictionary = new Dictionary<string,string>();
+                        string booknodeid = booknode.Attributes["id"].Value;
+                        string booknodetext = booknode.InnerText.Trim();
+                        string xpathkeyword = ".//xhtml:a[@class='Glossary_Key'][translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='" + booknodetext.ToLower()+"']";
+                        XmlNodeList keywordnodesList = xmlDocument.SelectNodes(xpathkeyword, namespaceManager);
+                        if (keywordnodesList.Count > 0)
+                        {
+                            foreach (XmlNode keywordnode in keywordnodesList)
+                            {
+                                string glossoryid = keywordnode.Attributes["id"].Value;
+                                if (glossoryid != null)
+                                {
+                                    glossorywordsDictionary.Add(glossoryid,keywordnode.InnerText.Trim());
+                                }
+                            }
+                        }
+                        if (glossorywordsDictionary.Count > 0)
+                        {
+
+                            glossorywordsDictionaries.Add(booknodeid,glossorywordsDictionary);
+                        }
+                    }
+                    //var nodeInnerText = new StringBuilder();
+                    //nodeInnerText.Append(nodes[0].InnerXml);
+                    //nodeInnerText = nodeInnerText.Replace(titleMainInnerText + "</div>" + titleMainInnerText,
+                    //    titleMainInnerText + "</div>");
+                    //nodes[0].InnerXml = nodeInnerText.ToString();
+                }
+            }
+            return glossorywordsDictionaries;
+        }
         private static void CreateEpubFolder(PublicationInformation projInfo)
         {
             Common.CopyFolderandSubFolder(projInfo.DictionaryPath, Common.PathCombine(projInfo.DictionaryPath, "Epub2"), false);
@@ -615,19 +778,15 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void DisplayOutput(string outputFolder, string fileName, string outputPathWithFileName)
+        private void DisplayOutput(string outputFolder, string fileName, ref string outputPathWithFileName)
         {
             if (File.Exists(outputPathWithFileName))
             {
                 if (_isUnixOs)
                 {
-                    string epubFileName = fileName.Replace(" ", "") + ".epub";
-                    string replaceEmptyCharacterinFileName = Common.PathCombine(outputFolder, epubFileName);
-                    if (outputPathWithFileName != replaceEmptyCharacterinFileName && File.Exists(outputPathWithFileName))
-                    {
-                        File.Copy(outputPathWithFileName, replaceEmptyCharacterinFileName, true);
-                    }
-
+                    string epubFileName = Common.PathCombine(outputFolder, fileName.Replace(" ", "") + ".epub");
+                    File.Move(outputPathWithFileName, epubFileName);
+                    outputPathWithFileName = epubFileName;
                     SubProcess.Run(outputFolder, "ebook-viewer", epubFileName, false);
                 }
                 else
@@ -799,7 +958,7 @@ namespace SIL.PublishingSolution
 
             if (_isUnixOs)
             {
-                Common.RemoveDTDForLinuxProcess(revFile,"epub");
+                Common.RemoveDTDForLinuxProcess(revFile, "epub");
             }
             Common.SetDefaultCSS(revFile, defaultCss);
             // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
@@ -976,7 +1135,7 @@ namespace SIL.PublishingSolution
 
                     if (_isUnixOs)
                     {
-                        Common.RemoveDTDForLinuxProcess(file,"epub");
+                        Common.RemoveDTDForLinuxProcess(file, "epub");
                     }
                     File.Move(file, dest);
                     // split the file into smaller pieces if needed
@@ -1213,12 +1372,30 @@ namespace SIL.PublishingSolution
                 cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
                 string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
                 projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                RemovePseudoBefore(cssTree);
                 var afterBeforeProcessReversal = new AfterBeforeProcessEpub();
                 afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
                 Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", Common.NonBreakingSpace);
                 projInfo.DefaultXhtmlFileWithPath = originalDefaultXhtmlFileName;
             }
         }
+
+        /// <summary>
+        /// Remove After & Before in Css file
+        /// </summary>
+        private static void RemovePseudoBefore(CssTree cssTree)
+        {
+            if (cssTree.SpecificityClass.ContainsKey("subentry"))
+            {
+                ArrayList aa = cssTree.SpecificityClass["subentry"];
+                foreach (ClassInfo myvar in aa)
+                {
+                    if (myvar.Pseudo.ToLower() == "before")
+                        myvar.Content = "";
+                }
+            }
+        }
+
         #endregion
 
         #region xslt processing
@@ -1348,7 +1525,7 @@ namespace SIL.PublishingSolution
             sb.AppendLine("%;");
             Common.StreamReplaceInFile(cssFile, "body {", sb.ToString());
             // ChapterNumbers - scripture only
-            if (InputType == "scripture")
+            if (InputType.ToLower() == "scripture")
             {
                 // ChapterNumbers (drop cap or in margin) - .Chapter_Number and .Paragraph1 class elements
                 sb.Length = 0;  // reset the stringbuilder
@@ -1397,7 +1574,7 @@ namespace SIL.PublishingSolution
                 xmlReader.Close();
                 // should only be one of these after splitting out the chapters.
                 XmlNodeList nodes;
-                if (InputType.Equals("dictionary"))
+                if (InputType.ToLower().Equals("dictionary"))
                 {
                     nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
                 }
@@ -1720,6 +1897,9 @@ namespace SIL.PublishingSolution
         /// <param name="image">File to resize</param>
         private Image ResizeImage(Image image)
         {
+            if (MaxImageWidth < 100)
+                MaxImageWidth = 100; //Set Minimum value
+
             float nPercent = ((float)MaxImageWidth / (float)image.Width);
             var destW = (int)(image.Width * nPercent);
             var destH = (int)(image.Height * nPercent);
@@ -1826,7 +2006,7 @@ namespace SIL.PublishingSolution
                     if (reader.NodeType == XmlNodeType.Element)
                     {
                         string idString = searchText.Replace("id=\"", "").Replace("\"", "");
-                        if (reader.Name == "div" || reader.Name == "span")
+                        if (reader.Name == "div" || reader.Name == "span" || reader.Name=="a")
                         {
 
                             string id = reader.GetAttribute("id");
@@ -1916,25 +2096,31 @@ namespace SIL.PublishingSolution
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
                 XmlNodeList footnoteNodes = null;
-                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_General_Paragraph']/a")
-                    : xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
+                footnoteNodes = xmlDocument.SelectNodes("//span[@class='Note_General_Paragraph']/a");
+                    
+                if (footnoteNodes == null || footnoteNodes.Count == 0)
+                {
+                    footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
+                }
 
-                if (footnoteNodes == null)
+                if (footnoteNodes != null)
                 {
-                    return;
+                    foreach (XmlNode footnoteNode in footnoteNodes)
+                    {
+                        if (footnoteNode.Attributes != null)
+                            footnoteNode.Attributes["href"].Value = "zzReferences.xhtml" + footnoteNode.Attributes["href"].Value;
+                    }
                 }
-                foreach (XmlNode footnoteNode in footnoteNodes)
-                {
-                    if (footnoteNode.Attributes != null)
-                        footnoteNode.Attributes["href"].Value = "zzReferences.xhtml" + footnoteNode.Attributes["href"].Value;
-                }
-                footnoteNodes = _isUnixOs ? xmlDocument.SelectNodes("//span[@class='Note_CrossHYPHENReference_Paragraph']/a")
-                    : xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
 
-                if (footnoteNodes == null)
+                footnoteNodes = xmlDocument.SelectNodes("//span[@class='Note_CrossHYPHENReference_Paragraph']/a");
+                
+                if (footnoteNodes == null || footnoteNodes.Count == 0)
                 {
-                    return;
+                    footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
+                    if (footnoteNodes == null)
+                        return;
                 }
+
                 foreach (XmlNode footnoteNode in footnoteNodes)
                 {
                     if (footnoteNode.Attributes != null)
@@ -2039,7 +2225,15 @@ namespace SIL.PublishingSolution
                         outFile.Write(verseNode.InnerText);
                     }
                     outFile.Write("</a> ");
-                    outFile.Write(CleanupSpans(crossRefNode.InnerXml));
+                    XmlNode refText = crossRefNode.SelectSingleNode("xhtml:span[not (@class)]",namespaceManager);
+                    if (refText != null)
+                    {
+                        outFile.Write(CleanupSpans(refText.OuterXml));
+                    }
+                    else
+                    {
+                        outFile.Write(CleanupSpans(crossRefNode.InnerXml));
+                    }
                     outFile.WriteLine("</li>");
                 }
                 outFile.WriteLine("</ul>");
@@ -2088,7 +2282,7 @@ namespace SIL.PublishingSolution
         private IEnumerable<string> SplitFile(string temporaryCvFullName, PublicationInformation pubInfo)
         {
             List<string> fileNameWithPath;
-            if (InputType.Equals("dictionary"))
+            if (InputType.ToLower().Equals("dictionary"))
             {
                 fileNameWithPath = Common.SplitXhtmlFile(temporaryCvFullName, "letHead", true);
             }
@@ -2144,7 +2338,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    var divClass = InputType == "scripture" ? "Section_Head" : "entry";
+                    var divClass = InputType.ToLower() == "scripture" ? "Section_Head" : "entry";
                     var target = string.Format("<div class=\"{0}", divClass);
                     realMax = content.IndexOf(target, softMax, StringComparison.Ordinal);
                 }
@@ -2160,7 +2354,7 @@ namespace SIL.PublishingSolution
                     // no more section heads - just pull in the rest of the content
                     // write out head + substring(startIndex to the end)
                     sb.Append(head);
-                    if (InputType == "scripture")
+                    if (InputType.ToLower() == "scripture")
                     {
                         sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
                         sb.Append(bookcode);
@@ -2189,8 +2383,8 @@ namespace SIL.PublishingSolution
                 {
                     // for the subsequent sections, we need the head + the substring (startIndex to realMax)
                     sb.Append(head);
-                    var bodyClass = InputType == "scripture" ? "scrBody" : "dicBody";
-                    var divClass = InputType == "scripture" ? "scrBook" : "letData";
+                    var bodyClass = InputType.ToLower() == "scripture" ? "scrBody" : "dicBody";
+                    var divClass = InputType.ToLower() == "scripture" ? "scrBook" : "letData";
                     sb.Append(string.Format("<body class=\"{0}\"><div class=\"{1}\">", bodyClass, divClass));
                     sb.Append(content.Substring(startIndex, (realMax - startIndex)));
                     sb.AppendLine("</div></body></html>"); // close out the xhtml
@@ -2319,7 +2513,7 @@ namespace SIL.PublishingSolution
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
 
-                if (InputType.Equals("scripture"))
+                if (InputType.ToLower().Equals("scripture"))
                 {
                     XmlNodeList nodes = xmlDocument.SelectNodes(".//xhtml:div[@class='Chapter_Number']", namespaceManager);
                     if (nodes != null)
@@ -2379,6 +2573,10 @@ namespace SIL.PublishingSolution
                                 XmlAttribute attribute = xmlDocument.CreateAttribute("href");
                                 attribute.Value = variable;
                                 nodeContent.Attributes.Append(attribute);
+                                XmlAttribute attribute2 = xmlDocument.CreateAttribute("class");
+                                attribute2.Value = "chapternumberlink";
+                                nodeContent.Attributes.Append(attribute2);
+
                                 nodeContent.InnerText = GetChapterNumber(variable);
                                 Debug.Assert(next != null && next.ParentNode != null);
                                 next.ParentNode.InsertBefore(nodeContent, next);
@@ -2391,6 +2589,54 @@ namespace SIL.PublishingSolution
                     }
                     xmlDocument.Save(sourceFile);
                 }
+            }
+        }
+
+        protected void InsertReferenceLinkInTocFile(string contentFolder)
+        {
+            string referenceFileName = Common.PathCombine(contentFolder, "zzReferences.xhtml");
+            if (!File.Exists(referenceFileName))
+                return;
+            string[] files = Directory.GetFiles(contentFolder, "File3TOC*.xhtml");
+            var xmlDocument = Common.DeclareXMLDocument(true);
+            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            
+            foreach (string sourceFile in files)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(sourceFile);
+                if (fileName != null)
+                {
+                    XmlReader xmlReader = XmlReader.Create(sourceFile, xmlReaderSettings);
+                    xmlDocument.Load(xmlReader);
+                    xmlReader.Close();
+                    const string xPath = ".//xhtml:div[@class='Contents'][1]/xhtml:ul";
+                    XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
+                    Debug.Assert(nodes != null);
+
+                    if (nodes.Count > 0)
+                    {
+                        var next = nodes[nodes.Count - 1].LastChild;
+                        if (next != null && next.Attributes != null)
+                        {
+// ReSharper disable PossibleNullReferenceException
+                            XmlNode spaceNode = xmlDocument.CreateElement("li", xmlDocument.DocumentElement.NamespaceURI);
+// ReSharper restore PossibleNullReferenceException
+// ReSharper disable PossibleNullReferenceException
+                            XmlNode nodeContent = xmlDocument.CreateElement("a", xmlDocument.DocumentElement.NamespaceURI);
+// ReSharper restore PossibleNullReferenceException
+                            Debug.Assert(nodeContent != null && nodeContent.Attributes != null);
+                            XmlAttribute attribute = xmlDocument.CreateAttribute("href");
+                            attribute.Value = "zzReferences.xhtml";
+                            nodeContent.Attributes.Append(attribute);
+                            nodeContent.InnerText = "Endnotes";
+                            spaceNode.AppendChild(nodeContent);
+                            nodes[nodes.Count - 1].InsertAfter(spaceNode, next);
+                        }
+                    }
+                }
+                xmlDocument.Save(sourceFile);
             }
         }
 
@@ -2408,7 +2654,7 @@ namespace SIL.PublishingSolution
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
 
-                if (InputType.Equals("scripture"))
+                if (InputType.ToLower().Equals("scripture"))
                 {
                     const string xPath = ".//xhtml:div[@class='scrBook']";
                     XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);

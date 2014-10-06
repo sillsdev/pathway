@@ -23,6 +23,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
@@ -65,12 +66,20 @@ namespace SIL.PublishingSolution
 
         private void frmSplash_Load(object sender, EventArgs e)
         {
+
+            if (Common.IsUnixOS())
+            {
+                this.label5.Location = new Point(label5.Location.X - 20, label5.Location.Y);
+            }
+
             string version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 
             string versionDate = String.Format("{0} ({1})", version, AssemblyFileDate);
 
             lblVersionwithDate.Text = "Version: " + versionDate;
             tSplash.Start();
+
+
         }
     }
 }

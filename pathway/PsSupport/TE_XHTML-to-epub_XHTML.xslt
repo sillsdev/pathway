@@ -87,51 +87,26 @@
 	<xsl:template match="xhtml:meta" />
 	<!-- <xsl:template match="xhtml:span[../@class='Title_Main']" /> -->
 
-	<!-- Move the chapter number outside the paragraph div, so that it can be placed in the margin or drop-capped -->
-	<xsl:template match="xhtml:div[@class='Paragraph1']">
-		<xsl:if test="(count(descendant::xhtml:span[@class='Chapter_Number'])) > 0">
-			<xsl:element name="div">
-				<xsl:for-each select="@*">
-					<xsl:copy/>
-				</xsl:for-each>
-				<xsl:apply-templates select="descendant::xhtml:span[@class='Chapter_Number']/preceding-sibling::node()"/>
-			</xsl:element>
-			<xsl:element name="div">
-				<xsl:attribute name="class"><xsl:text>Chapter_Number</xsl:text></xsl:attribute>
-				<xsl:attribute name="id"><xsl:value-of select=".//xhtml:span[@class='Chapter_Number']/@id"/></xsl:attribute>
-				<xsl:value-of select="descendant::xhtml:span[@class='Chapter_Number']"/>
-			</xsl:element>
-			<xsl:element name="div">
-				<xsl:for-each select="@*">
-					<xsl:copy/>
-				</xsl:for-each>
-				<xsl:apply-templates select="descendant::xhtml:span[@class='Chapter_Number']/following-sibling::*"/>
-			</xsl:element>
-		</xsl:if>
-		<!-- 
-		<xsl:element name="div">
-			<xsl:for-each select="@*">
-				<xsl:copy/>
-			</xsl:for-each>
-			<xsl:apply-templates/>
-		</xsl:element>
-		-->
-	</xsl:template>
-	<xsl:template match="xhtml:div[@class='Paragraph']">
-		<xsl:if test="(count(descendant::xhtml:span[@class='Chapter_Number'])) > 0">
-			<xsl:element name="div">
-				<xsl:attribute name="class"><xsl:text>Chapter_Number</xsl:text></xsl:attribute>
-				<xsl:attribute name="id"><xsl:value-of select=".//xhtml:span[@class='Chapter_Number']/@id"/></xsl:attribute>
-				<xsl:value-of select="descendant::xhtml:span[@class='Chapter_Number']"/>
-			</xsl:element>
-		</xsl:if>
-		<xsl:element name="div">
-			<xsl:for-each select="@*">
-				<xsl:copy/>
-			</xsl:for-each>
-			<xsl:apply-templates/>
-		</xsl:element>
-	</xsl:template>
+  <!-- Move the chapter number outside the paragraph div, so that it can be placed in the margin or drop-capped -->
+  <xsl:template match="xhtml:div[xhtml:span[@class='Chapter_Number']]">
+    <xsl:if test="(count(descendant::xhtml:span[@class='Chapter_Number'])) > 0">
+      <xsl:element name="div">
+        <xsl:attribute name="class">
+          <xsl:text>Chapter_Number</xsl:text>
+        </xsl:attribute>
+        <xsl:attribute name="id">
+          <xsl:value-of select=".//xhtml:span[@class='Chapter_Number']/@id"/>
+        </xsl:attribute>
+        <xsl:value-of select="descendant::xhtml:span[@class='Chapter_Number']"/>
+      </xsl:element>
+    </xsl:if>
+    <xsl:element name="div">
+      <xsl:for-each select="@*">
+        <xsl:copy/>
+      </xsl:for-each>
+      <xsl:apply-templates/>
+    </xsl:element>
+  </xsl:template>
 	
 	<!-- write out the contents of these elements, but not the elements themselves -->
 	<xsl:template match="xhtml:div[@class='scrSection']">
@@ -266,8 +241,9 @@
 				<!--	<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="."/></xsl:attribute> -->
 					<!-- (sanitized to replace commas and colons in the verse with dashes and spaces with underscore) -->
           <xsl:variable name="verseNum" select="translate(./text(),' &#160;','__')" />
-					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="translate($verseNum, ',', '-')"/>
-            <xsl:value-of select="substring(generate-id(),4,4)"/>
+					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text>
+						<xsl:text>vrs_</xsl:text>
+            <xsl:value-of select="count(preceding::xhtml:span[@class = 'Verse_Number'])+1"/>
           </xsl:attribute>
 				</xsl:if>
 				<xsl:if test="count(@class) = 0 or @class != 'scrFootnoteMarker'"> <!-- FWR-2550 we handled child above -->

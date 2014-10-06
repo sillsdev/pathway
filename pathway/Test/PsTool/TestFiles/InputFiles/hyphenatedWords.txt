@@ -1,0 +1,12 @@
+﻿SoftHyphen = "="
+SoftHyphenOut = "\u00ad"
+HardHyphen = "-"
+
+tamo=kori
+a'kwarʉ=pɨ'=nin
+amʉra=nʉkʉ='pʉ
+apurɨ=pɨ'=se'na
+apurɨpɨtʉ='pʉ
+ari'po'=pɨ'=to'
+a'saruta=nʉ'nin
+A'saruta=nʉ'sa'

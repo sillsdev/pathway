@@ -666,6 +666,7 @@ namespace SIL.PublishingSolution
                 case "word-spacing":
                 case "left":
                 case "right":
+                case "border-radius":
                     _cssProperty[styleAttributeInfo.Name] = Common.UnitConverter(value);
                     break;
                 case "height":

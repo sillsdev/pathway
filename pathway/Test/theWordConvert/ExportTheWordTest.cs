@@ -144,7 +144,7 @@ namespace Test.theWordConvert
         {
             ParatextData = @"C:\";
             Ssf = FileInput("MP1.ssf");
-            var actual = LoadXsltParameters();
+            var actual = LoadXsltParameters(_inputPath);
             Assert.AreEqual(":", actual.GetParam("refPunc", ""));
             Assert.AreEqual("file:///" + Common.PathCombine(@"C:\MP1", "BookNames.xml"), actual.GetParam("bookNames", ""));
         }
@@ -241,25 +241,30 @@ namespace Test.theWordConvert
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, bool rtl)
         {
-            TestDataCase(code, fileName, rec, expectedResult, null, null, false, rtl);
+            TestDataCase(code, fileName, rec, expectedResult, null, null, false, rtl, null);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult)
         {
-            TestDataCase(code, fileName, rec, expectedResult, null, null, false, false);
+            TestDataCase(code, fileName, rec, expectedResult, null, null, false, false, null);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc)
         {
-            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false, false);
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false, false, null);
+        }
+
+        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, string glossary)
+        {
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false, false, glossary);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo)
         {
-            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, starSaltillo, false);
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, starSaltillo, false, null);
         }
 
-        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo, bool rtl)
+        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo, bool rtl, string glossary)
         {
             LoadMyXslt();
             IEnumerable<string> books = new List<string>(1) { code };
@@ -286,6 +291,10 @@ namespace Test.theWordConvert
             if (rtl)
             {
                 xsltArgs.AddParam("rtl", "", "1");
+            }
+            if (glossary != null)
+            {
+                xsltArgs.AddParam("glossary", "", glossary);
             }
             var temp = Path.GetTempFileName();
             var sw = new StreamWriter(temp);
@@ -508,6 +517,22 @@ namespace Test.theWordConvert
             TestDataCase("GEN", "001GENheg2.usx", 4, "<sup>(4a-4b)</sup> Ama Lamtua Allah in koet apan-dapa kua nol apan-kloma kia ka, un dehet ta ela.<CM> <sup>4b</sup> <TS1>Ama Lamtua Allah koet biklobe nol bihata<Ts><TS3><i>(<a href=\"tw://bible.*?40.19:4-6.1\">Matius 19:4-6</a>; <a href=\"tw://bible.*?41.10:4-9.1\">Markus 10:4-9</a>; <a href=\"tw://bible.*?46.6:16.1\">Korintus mesa la 6:16</a>; <a href=\"tw://bible.*?46.15:45.1\">15:45</a>, <a href=\"tw://bible.*?46.15:45.47\">47</a>; <a href=\"tw://bible.*?49.5:31-33.1\">Efesus 5:31-33</a>)</i><Ts>Dedeng AMA LAMTUA Allah halas-sam mana le koet apan-dapa ku nol apan-kloma kia ka,", bookNames, ".");
         }
 
+        [Test]
+        public void Glossary()
+        {
+            var bookNames = "file://" + FileInput("nkoBookNames.xml");
+            var glossary = "file://" + FileInput("NKOXXA.usx");
+            TestDataCase("JHN", "NKOJHN.usx", 21, "Bɛfɩtɛ́ mʋ bɛɛ, “Mʋ́mʋ́ fʋ́gyí ma? Fʋ́gyí <font color=blue>Elia</font><RF q=*> <i>Elijah</i> Bulu ɔnɔ́sʋ́ ɔtɔɩ́pʋ́ kpɔnkpɔɔnkpɔntɩ ɔkʋ ogyi. Mʋlɔ́wa klʋn ká awíe laláhɛ pʋ́ ahá ánɩ́ bʋtosúm ɩkpɩ ansɩ́tɔ́ Israel ɔmátɔ́ nɩ́. Yudafɔ botosúsu bɛɛ, Elia obéyinkí bá bɛla ahá yáɩ́ asa Kristo amʋ ɔbɛ́ba. Asú Ɔbɔpʋ́ Yohane lɛ́lɩan Elia anfɩ ɔkpa tsɔtsɔɔtsɔsʋ. Mʋ́ sʋ bɛfɩtɛ́ mʋ bɛɛ, “Fʋ́gyí Elia nɩ?” (Mat. 17:10-13; Mar. 9:4; Rom. 11:2-5; Yak. 5:17) <Rf>?”<CM>Ɔlɛlɛ mʋ́ ɔnɔ́ ɔbɛ́ɛ, “Megyí mɩ́gyí Elia.”<CM>Bɛtrá fɩtɛ́ mʋ bɛɛ, “Fʋ́gyí Bulu ɔnɔ́sʋ́ ɔtɔɩ́pʋ́ amʋ́ʋ́ ɔbɛ́ba amʋ?”<CM>Ɔlɛlɛ mʋ́ ɔnɔ́ ɔbɛ́ɛ, “Ó-o.”<CM>", bookNames, ".", glossary);
+        }
+
+        [Test]
+        public void GlossaryWithRoot()
+        {
+            var bookNames = "file://" + FileInput("nkoBookNames.xml");
+            var glossary = "file://" + FileInput("NKOXXA.usx");
+            TestDataCase("JHN", "NKOJHN.usx", 19, "<TS1>Asú Ɔbɔpʋ́ Yohane Bulu Asʋ́n Ɔkanda<Ts><TS3><i>(<a href=\"tw://bible.*?40.3:1-12.1\">Mateo 3:1-12</a>; <a href=\"tw://bible.*?41.1:1-8.1\">Marko 1:1-8</a>; <a href=\"tw://bible.*?42.3:1-18.1\">Luka 3:1-18</a>)</i><Ts><sup>(19-20)</sup> <font color=blue>Yudafɔ</font><RF q=*> <i>Joseph</i> Bɛtɩ ahá ɔtsan-ɔtsan Yosef Ntam Pɔpwɛ anfɩtɔ: <Rf> ahandɛ ánɩ́ bʋbʋ Yerusalem bɔwa Bulu igyí ahapʋ́ pʋ́ Lewifɔ Yohane wá bɛɛ bʋyɛ́fɩtɛ́ mʋ bɛɛ, ma ogyi? Yohane mési asʋansʋ ŋáín amʋ́. Ɔlɛlɛ bláa amʋ́ ɔbɛ́ɛ, “Megyí mɩ́gyí Kristo, (ɔhá ámʋ́ʋ́ Bulu ladá mʋ ofúli amʋ).”", bookNames, ".", glossary);
+        }
+
         /// <summary>
         ///A test for AttachMetadata
         ///</summary>
@@ -696,8 +721,10 @@ namespace Test.theWordConvert
         public void GetBookNamesUriTest()
         {
             ParatextData = null;
-            string actual = GetBookNamesUri();
-            Assert.AreEqual("file:///BookNames.xml", actual);
+            Ssf = "";
+            string expected = "file:///" + Path.Combine(_inputPath, Path.Combine("USX", "BookNames.xml"));
+            string actual = GetBookNamesUri(_inputPath);
+            Assert.AreEqual(expected, actual);
        }
 
         /// <summary>

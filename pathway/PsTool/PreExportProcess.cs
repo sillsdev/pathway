@@ -352,7 +352,7 @@ namespace SIL.Tool
             if (Param.GetMetadataValue(Param.Title) != null)
                 sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Title)));
 
-            sb.AppendLine("<br /><br /><br /><br /><br /><br /><br /><br /><br />");
+            sb.AppendLine("<br /><br /><br /><br /><br /><br /><br />");
 
             sb.AppendLine("</h1>");
             sb.Append("<p class='Publisher'>");
@@ -662,7 +662,7 @@ namespace SIL.Tool
             rights = rights.Replace("\u00ae", "<span style='position: relative; top: -0.5em; font-size: 80%;'>\u00ae</span>");
             if (rights.Trim().Length > 0)
             {
-                sb.Append(Common.UpdateCopyrightYear(rights));
+                sb.Append(Common.UpdateCopyrightYear(rights.Replace("&", "&amp;")));
                 sb.Append("</p> ");
             }
             return sb.ToString();
@@ -685,7 +685,7 @@ namespace SIL.Tool
             string rights = Param.GetMetadataValue(Param.CopyrightHolder);
             if (rights.Trim().Length > 0)
             {
-                sb.Append(Common.UpdateCopyrightYear(rights));
+                sb.Append(Common.UpdateCopyrightYear(rights.Replace("&", @"\u0026")));
                 sb.Append("</span> ");
             }
             return sb.ToString();
@@ -851,7 +851,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // for dictionaries, the letter is used both for the ID and name
-                    revBookIDs = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
+                    revBookIDs = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
                     revBookNames = revBookIDs;
                 }
                 if (revBookIDs != null && revBookIDs.Count > 0)
@@ -988,6 +988,7 @@ namespace SIL.Tool
                 XmlNode titleNode = null;
                 if (_includeTitlePage)
                 {
+                    _projInfo.IsTitlePageEnabled = true;
                     titleNode = LoTitlePage(xmldoc);
                 }
 
@@ -2296,6 +2297,13 @@ namespace SIL.Tool
                                 st = href.Replace("#", "").ToLower();
                                 if (sourceList.Contains(st)) continue;
                                 sourceList.Add(st);
+                                string id = _reader.GetAttribute("id");
+                                if (id != null)
+                                {
+                                    if (targetList.Contains(id.ToLower())) continue;
+                                    targetList.Add(id.ToLower());
+                                    continue;
+                                }
                                 continue;
                             }
                         }
@@ -2324,6 +2332,39 @@ namespace SIL.Tool
             catch
             {
                 Console.WriteLine("GetReferenceList");
+            }
+            _reader.Close();
+        }
+
+        public void GetGlossaryList(string xhtmlFileNameWithPath, Dictionary<string, string> glossaryList)
+        {
+            XmlTextReader _reader = Common.DeclareXmlTextReader(xhtmlFileNameWithPath, true);
+            try
+            {
+                while (_reader.Read())
+                {
+                    if (_reader.NodeType == XmlNodeType.Element)
+                    {
+                        string st;
+                        if (_reader.Name == "a")
+                        {
+                            string href = _reader.GetAttribute("href");
+                            string id = _reader.GetAttribute("id");
+                            if (href != null && id != null)
+                            {
+                                if (href != "#" && !glossaryList.ContainsKey(href))
+                                {
+                                    glossaryList[href] = id;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                Console.WriteLine("GetGlossaryList");
             }
             _reader.Close();
         }
@@ -2506,6 +2547,81 @@ namespace SIL.Tool
             return newFileName;
         }
 
+        /// <summary>
+        /// Include hyphenation words into XHTML input file using replace method.
+        /// </summary>
+        /// <param name="xhtmlFile">input XHTML file</param>
+        public void IncludeHyphenWordsOnXhtml(string xhtmlFile)
+        {
+            if(Common.Testing == false)
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary") return;
+            
+            var hyphenWords = GetHyphenationWords();
+
+            if (!File.Exists(xhtmlFile)) return;
+
+            // load the xhtml file we're working with
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+            var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReader xmlReader = XmlReader.Create(xhtmlFile, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+
+            const string xPath = "//xhtml:div[@class='Paragraph']";
+            XmlNodeList paragraphNodeList = xmlDocument.SelectNodes(xPath, namespaceManager);
+            if (paragraphNodeList != null && paragraphNodeList.Count > 0)
+            {
+                for (int i = 0; i < paragraphNodeList.Count; i++)
+                {
+                    foreach (string hyphenWord in hyphenWords.Keys)
+                    {
+                        if (paragraphNodeList[i].InnerText.Contains(" " + hyphenWord + " ") ||
+                            paragraphNodeList[i].InnerText.Contains(" " + hyphenWord + ","))
+                        {
+                            paragraphNodeList[i].InnerText = paragraphNodeList[i].InnerText.Replace(hyphenWord, hyphenWords[hyphenWord]);
+                        }
+                    }
+                }
+            }
+            xmlDocument.Save(xhtmlFile);
+        }
+
+        /// <summary>
+        /// Get the hyphenation words from the file "hyphenatedWords.txt" for scripture
+        /// </summary>
+        public Dictionary<string, string> GetHyphenationWords()
+        {
+            var hyphWords = new Dictionary<string, string>();
+            
+            string hyphFilePath = @"C:\Paratext Projects1\akeNT\hyphenatedWords.txt"; //Should get from Param.cs
+            if (Common.Testing == true)
+            {
+                const string fileName = "hyphenatedWords.txt";
+                string folderPath = Common.LeftString(Environment.CurrentDirectory, "bin");
+                String inputFolder = Common.PathCombine(folderPath, "PsTool/TestFiles/InputFiles");
+                hyphFilePath = Common.PathCombine(inputFolder, fileName);
+            }
+
+            if (File.Exists(hyphFilePath))
+            {
+                string line = string.Empty;
+                var fs = new FileStream(hyphFilePath, FileMode.Open);
+                var stream = new StreamReader(fs);
+                while ((line = stream.ReadLine()) != null)
+                {
+                    if (line.Trim().IndexOf(' ') == -1 && line.Trim().IndexOf('=') > 0)
+                    {
+                        string actText = line.Trim().Replace("=", "");
+                        string chgText = line.Trim().Replace("=", "\u00AD");
+                        hyphWords[actText] = chgText;
+                    }
+                }
+                fs.Close();
+            }
+            return hyphWords;
+        }
         #endregion
 
         #region XML PreProcessor
@@ -2669,11 +2785,11 @@ namespace SIL.Tool
         /// <summary>
         /// To replace the symbol string if the symbol matches with the text
         /// </summary>
-        public void ReplaceStringInCss(string cssFile, string existingContent, string replacingContent)
+        public void ReplaceStringInFile(string replaceinFileName, string existingContent, string replacingContent)
         {
-            if (File.Exists(cssFile))
+            if (File.Exists(replaceinFileName))
             {
-                var sr = new StreamReader(cssFile);
+                var sr = new StreamReader(replaceinFileName);
                 string fileContent = sr.ReadToEnd();
                 sr.Close();
 
@@ -2681,7 +2797,7 @@ namespace SIL.Tool
                 {
                     fileContent = fileContent.Replace(existingContent, replacingContent);
                 }
-                var sw = new StreamWriter(cssFile);
+                var sw = new StreamWriter(replaceinFileName);
                 sw.Write(fileContent);
                 sw.Close();
             }
@@ -2800,6 +2916,10 @@ namespace SIL.Tool
             //Avoid letHead as lastline of the page
             tw.WriteLine(".letHead {");
             tw.WriteLine("page-break-after: avoid;");
+            tw.WriteLine("}");
+
+            tw.WriteLine(".picture {");
+            tw.WriteLine("height: 1.0in;");
             tw.WriteLine("}");
 
             tw.Close();

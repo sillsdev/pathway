@@ -92,6 +92,8 @@ namespace SIL.Tool
         public const string Format = "Format";
         public const string Contributor = "Contributor";
         public const string Relation = "Relation";
+
+
         public const string Coverage = "Coverage";
         public const string Subject = "Subject";
         public const string Date = "Date";
@@ -105,7 +107,7 @@ namespace SIL.Tool
         public const string CopyrightPage = "Copyright Page";
         public const string CopyrightPageFilename = "Copyright Page Filename";
         public const string TableOfContents = "Table of Contents";
-
+       
         // Other constants
         private const string DefaultSettingsFileName = "StyleSettings.xml";
         public static string UserRole = "Output User";
@@ -154,7 +156,11 @@ namespace SIL.Tool
         private static int _selectedIndex = 1;
         private const int UnSelectedIndex = 2;
         private static string _configureType = string.Empty;
-
+        public static bool IsHyphen = false;
+        public static string HyphenLang = string.Empty;
+        public static string HyphenFilepath = string.Empty;
+        public static bool HyphenEnable = false;
+        public static List<string> HyphenationSelectedLanguagelist = new List<string>();
 
         /// <summary>
         /// Load settings first from program path and then from user path.

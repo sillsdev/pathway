@@ -234,6 +234,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CommonXml.cs" />
+    <Compile Include="CreatingHyphenationSettings.cs" />
     <Compile Include="FileStreamXmlResolver.cs" />
     <Compile Include="Json.cs" />
     <Compile Include="FontInternals.cs">

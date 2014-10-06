@@ -164,17 +164,17 @@ namespace epubConvert
                 ncx.WriteAttributeString("id", "dtb:uid");
                 ncx.WriteAttributeString("playOrder", index.ToString(CultureInfo.InvariantCulture));
                 ncx.WriteStartElement("navLabel");
-                ncx.WriteElementString("text", "End Notes");
+                ncx.WriteElementString("text", "Endnotes");
                 ncx.WriteEndElement(); // navlabel
                 ncx.WriteStartElement("content");
                 ncx.WriteAttributeString("src", name);
                 ncx.WriteEndElement(); // meta
                 index++;
-                // chapters within the books (nested as a subhead)
-                if (!skipChapterInfo)
-                {
-                    WriteEndNoteLinks(file, ref index, ncx);
-                }
+                //// chapters within the books (nested as a subhead)
+                //if (!skipChapterInfo)
+                //{
+                //    WriteEndNoteLinks(file, ref index, ncx);
+                //}
             }
             else
             {
@@ -250,7 +250,7 @@ namespace epubConvert
             ncx.WriteStartElement("head");
             ncx.WriteStartElement("meta");
             ncx.WriteAttributeString("name", "dtb:uid");
-            ncx.WriteAttributeString("content", bookId.ToString());
+            ncx.WriteAttributeString("content", "http://pathway.sil.org/"); //  bookId.ToString()
             ncx.WriteEndElement(); // meta
             ncx.WriteStartElement("meta");
             ncx.WriteAttributeString("name", "epub-creator");
@@ -337,7 +337,7 @@ namespace epubConvert
             xmlReader.Close();
             bool isSectionHead = false, isChapterNumber = false, isVerseNumber = false;
             string sectionHead = string.Empty, fromChapterNumber = string.Empty, firstVerseNumber = string.Empty, lastVerseNumber = string.Empty;
-            var divClass = InputType == "dictionary" ? "entry" : "scrBook";
+            var divClass = InputType.ToLower() == "dictionary" ? "entry" : "scrBook";
             var xPath = string.Format("//xhtml:div[@class='{0}']", divClass);
             XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
             if (nodes != null && nodes.Count > 0)
@@ -347,7 +347,7 @@ namespace epubConvert
                 foreach (XmlNode node in nodes)
                 {
                     string textString = string.Empty;
-                    if (InputType.Equals("dictionary"))
+                    if (InputType.ToLower().Equals("dictionary"))
                     {
                         if (!WriteDictionaryChapters(ref playOrder, ncx, namespaceManager, sb, name, node,
                                                      ref textString))
@@ -500,7 +500,7 @@ namespace epubConvert
             }
 
             // If this is a dictionary with TOC level 3, gather the senses for this entry
-            if (InputType.Equals("dictionary") && TocLevel.StartsWith("3"))
+            if (InputType.ToLower().Equals("dictionary") && TocLevel.StartsWith("3"))
             {
                 // see if there are any senses to add to this entry
                 XmlNodeList childNodes = node.SelectNodes(".//xhtml:span[@class='sense']", namespaceManager);
@@ -518,25 +518,39 @@ namespace epubConvert
                             continue;
                         }
 
-                        if (childNode.HasChildNodes && childNode.FirstChild != null && childNode.FirstChild.FirstChild != null)
-                            textString = childNode.FirstChild.FirstChild.InnerText;
+                        textString = string.Empty;
+                        XmlNodeList childNodes1 = childNode.SelectNodes(".//xhtml:span[starts-with(@class,'definition')]", namespaceManager);
+                        if (childNodes1 == null) continue;
+                        foreach (XmlNode childNodeb in childNodes1)
+                        {
+                            textString = textString.Trim() + " " + childNodeb.InnerText;
+                            string[] textLen = textString.Trim().Split(' ');
+                            if (textLen.Length > 3)
+                            {
+                                textString = textLen[0] + " " + textLen[1] + " " + textLen[2] + " ...";
+                                break;
+                            }
+                        }
                         sb.Append(name);
                         sb.Append("#");
                         if (childNode.Attributes != null && childNode.Attributes["id"] != null)
                         {
                             sb.Append(childNode.Attributes["id"].Value);
                         }
-                        // write out the node
-                        ncx.WriteStartElement("navPoint");
-                        ncx.WriteAttributeString("id", "dtb:uid");
-                        ncx.WriteAttributeString("playOrder", playOrder.ToString(CultureInfo.InvariantCulture));
-                        ncx.WriteStartElement("navLabel");
-                        ncx.WriteElementString("text", textString);
-                        ncx.WriteEndElement(); // navlabel
-                        ncx.WriteStartElement("content");
-                        ncx.WriteAttributeString("src", sb.ToString());
-                        ncx.WriteEndElement(); // meta
-                        ncx.WriteEndElement(); // navPoint
+                        if (textString.Trim().Length > 0)
+                        {
+                            // write out the node
+                            ncx.WriteStartElement("navPoint");
+                            ncx.WriteAttributeString("id", "dtb:uid");
+                            ncx.WriteAttributeString("playOrder", playOrder.ToString(CultureInfo.InvariantCulture));
+                            ncx.WriteStartElement("navLabel");
+                            ncx.WriteElementString("text", textString.Trim());
+                            ncx.WriteEndElement(); // navlabel
+                            ncx.WriteStartElement("content");
+                            ncx.WriteAttributeString("src", sb.ToString());
+                            ncx.WriteEndElement(); // meta
+                            ncx.WriteEndElement(); // navPoint
+                        }
                         // reset the stringbuilder
                         sb.Length = 0;
                         playOrder++;

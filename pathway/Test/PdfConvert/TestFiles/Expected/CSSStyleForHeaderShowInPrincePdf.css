@@ -41,3 +41,6 @@ padding: 20pt;
 .letHead {
 page-break-after: avoid;
 }
+.picture {
+height: 1.0in;
+}

@@ -186,8 +186,8 @@ namespace SIL.PublishingSolution
                 Common.BookNameTag = "h";
                 if (Common.BookNameCollection.Contains(bookName) == false && bookName != string.Empty)
                 {
-                    //Common.BookNameCollection.Remove(_code);
-                    //Common.BookNameCollection.Add(bookName);
+                    Common.BookNameCollection.Remove(_code);
+                    Common.BookNameCollection.Add(bookName);
                 }
             }
 

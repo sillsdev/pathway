@@ -3415,7 +3415,7 @@ namespace SIL.Tool
             XmlNodeList fontList = xdoc.GetElementsByTagName("meta");
             foreach (XmlNode fontName in fontList)
             {
-                if (isFLEX && fontName.OuterXml.IndexOf("scheme=\"Default Font\"") > 0)
+                if (isFLEX && (fontName.OuterXml.IndexOf("scheme=\"Default Font\"") > 0 || fontName.OuterXml.IndexOf("scheme=\"language to font\"") > 0))
                 {
                     string fntName = fontName.Attributes["name"].Value;
                     string fntContent = fontName.Attributes["content"].Value;
