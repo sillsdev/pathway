@@ -572,7 +572,7 @@ namespace SIL.PublishingSolution
                 preProcessor.InsertEmptyDiv(preProcessor.ProcessedXhtml);
                 preProcessor.InsertSpanAfterLetter(preProcessor.ProcessedXhtml);
             }
-            //preProcessor.IncludeHyphenWordsOnXhtml(preProcessor.ProcessedXhtml);
+            preProcessor.IncludeHyphenWordsOnXhtml(preProcessor.ProcessedXhtml);
             preProcessor.GetTempFolderPath();
             preProcessor.GetDefaultLanguage(projInfo);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();

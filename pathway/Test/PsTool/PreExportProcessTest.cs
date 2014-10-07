@@ -159,6 +159,7 @@ namespace Test.PsTool
             {
                 ProjectInputType = "Scripture"
             };
+            Param.HyphenEnable = true;
             CopyToOutput(input, output);
             preExportProcess = new PreExportProcess();
             preExportProcess.IncludeHyphenWordsOnXhtml(output);

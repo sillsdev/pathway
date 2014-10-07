@@ -4159,6 +4159,32 @@ namespace Test.OpenOfficeConvert
             XmlAssert.AreEqual(styleExpected, output, styleFilename + " in styles.xml");
         }
 
+        ///<summary>
+        /// TD-4210
+        /// The word "itamo­kori" has hidden hyphenation by unicode hyphen character(\u00AD).
+        /// Can copy and paste it in notepad.
+        /// </summary>      
+        [Test]
+        [Category("ShortTest")]
+        [Category("SkipOnTeamCity")]
+        public void HyphenationWordTest()
+        {
+            _projInfo.ProjectInputType = "Scripture";
+            const string file = "HyphenationRuleLO";
+            Param.HyphenEnable = true;
+            string styleOutput = GetStyleOutput(file);
+
+            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+            _validate.GetInnerText = true;
+            _validate.ClassName = "Paragraph_scrBook_scrBody";
+            const string content = "17\n Epʉraꞌan awonsiꞌkɨ Tepiꞌ, kin pe teꞌsen pʉꞌkʉ pona, 14 kaisa rɨ itamo­kori ton uꞌtɨsaꞌ esiꞌpʉ mɨrɨ.";
+            bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
+            Assert.IsTrue(returnValue1, "Hyphenation word test failure");
+            Param.HyphenEnable = false;
+
+        }
+
+
 
         #endregion
         #endregion
@@ -4236,6 +4262,8 @@ namespace Test.OpenOfficeConvert
             PreExportProcess preProcessor = new PreExportProcess(_projInfo);
             preProcessor.GetTempFolderPath();
             _projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
+            if (Param.HyphenEnable)
+                preProcessor.IncludeHyphenWordsOnXhtml(_projInfo.DefaultXhtmlFileWithPath);
 
             AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
             afterBeforeProcess.RemoveAfterBefore(_projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
