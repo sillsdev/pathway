@@ -2556,6 +2556,8 @@ namespace SIL.Tool
             if(Common.Testing == false)
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary") return;
             
+            if(!Param.HyphenEnable) return;
+
             var hyphenWords = GetHyphenationWords();
 
             if (!File.Exists(xhtmlFile)) return;
@@ -2594,8 +2596,8 @@ namespace SIL.Tool
         public Dictionary<string, string> GetHyphenationWords()
         {
             var hyphWords = new Dictionary<string, string>();
-            
-            string hyphFilePath = @"C:\Paratext Projects1\akeNT\hyphenatedWords.txt"; //Should get from Param.cs
+            string hyphFilePath = Param.HyphenFilepath;
+
             if (Common.Testing == true)
             {
                 const string fileName = "hyphenatedWords.txt";
