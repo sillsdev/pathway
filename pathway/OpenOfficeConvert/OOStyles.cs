@@ -1301,7 +1301,8 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("style:text-properties");
             _writer.WriteAttributeString("style:font-name", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
-            _writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
+            //_writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
+            _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
