@@ -420,7 +420,7 @@ namespace SIL.PublishingSolution
                     {
                         if (_isUnixOs)
                         {
-                            SubProcess.Run(Path.GetDirectoryName(outputFolder), "nautilus", Path.GetDirectoryName(outputFolder), false);
+                            SubProcess.Run(Path.GetDirectoryName(outputFolder), "nautilus", Path.GetDirectoryName(outputFolder).Replace(" ", @"\ "), false);
                         }
                         else
                         {

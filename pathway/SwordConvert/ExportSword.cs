@@ -142,7 +142,7 @@ namespace SIL.PublishingSolution
             const bool noWait = false;
             if (_isUnixOS)
             {
-                SubProcess.Run(outputDirectory, "nautilus", outputDirectory, noWait);
+                SubProcess.Run(outputDirectory, "nautilus", outputDirectory.Replace(" ", @"\ "), noWait);
             }
             else
             {
