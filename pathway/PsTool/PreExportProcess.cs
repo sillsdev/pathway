@@ -2580,7 +2580,8 @@ namespace SIL.Tool
                     foreach (string hyphenWord in hyphenWords.Keys)
                     {
                         if (paragraphNodeList[i].InnerText.Contains(" " + hyphenWord + " ") ||
-                            paragraphNodeList[i].InnerText.Contains(" " + hyphenWord + ","))
+                            paragraphNodeList[i].InnerText.Contains(" " + hyphenWord + ",") ||
+                            paragraphNodeList[i].InnerText.Contains(hyphenWord + ","))
                         {
                             paragraphNodeList[i].InnerText = paragraphNodeList[i].InnerText.Replace(hyphenWord, hyphenWords[hyphenWord]);
                         }
@@ -2616,7 +2617,9 @@ namespace SIL.Tool
                     if (line.Trim().IndexOf(' ') == -1 && line.Trim().IndexOf('=') > 0)
                     {
                         string actText = line.Trim().Replace("=", "");
+                        actText = actText.Replace("*", "");
                         string chgText = line.Trim().Replace("=", "\u00AD");
+                        chgText = chgText.Replace("*", "");
                         hyphWords[actText] = chgText;
                     }
                 }
