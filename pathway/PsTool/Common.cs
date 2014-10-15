@@ -4532,5 +4532,27 @@ namespace SIL.Tool
             string responseContent = sr.ReadToEnd();
             return responseContent;
         }
+
+        public static string HandleSpaceinLinuxPath(string filePath)
+        {
+            var name = new List<string>();
+            string[] ss = filePath.Split('/');
+            foreach (string variable in ss)
+            {
+                if (variable.IndexOf(' ') > 0)
+                {
+                    name.Add(variable);
+                }
+            }
+
+            if (name.Count > 0)
+            {
+                foreach (var variable in name)
+                {
+                    filePath = filePath.Replace(variable, "'" + variable + "'");
+                }
+            }
+            return filePath;
+        }
     }
 }

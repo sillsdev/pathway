@@ -90,7 +90,7 @@ namespace epubConvert
                         File.Copy(outputPathWithFileName, replaceEmptyCharacterinFileName, true);
                     }
 
-                    SubProcess.Run(outputFolder.Replace(" ", @"\ "), "ebook-viewer", epubFileName, false);
+                    SubProcess.Run(outputFolder, "ebook-viewer", epubFileName, false);
                 }
                 else
                 {
