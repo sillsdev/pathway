@@ -412,7 +412,7 @@ namespace SIL.PublishingSolution
         private void LoadHyphenationSettings()
         {
             var ssf = _settingsHelper.GetSettingsFilename(_settingsHelper.Database);
-            if (ssf != null)
+            if (ssf != null && ssf.Trim().Length > 0)
             {
                 var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
                 Param.DatabaseName = _settingsHelper.Database;
