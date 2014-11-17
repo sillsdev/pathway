@@ -432,6 +432,11 @@
             <xsl:when test="@style = 'sp'">
                 <xsl:call-template name="Speaker"/>
             </xsl:when>
+            <xsl:when test="@style = 'wj'">
+                <xsl:call-template name="WordsOfJesus">
+                    <xsl:with-param name="space" select="$space"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:when test="@style = 'm' or @style = 'b' or @style = 'tr'">
                 <xsl:if test="not(contains(preceding-sibling::verse[1]/@number | preceding::verse[1]/@number, $bridgePunc))">
                     <xsl:text disable-output-escaping="yes"><![CDATA[<CL>]]></xsl:text>
@@ -561,6 +566,19 @@
             <xsl:text> </xsl:text>
         </xsl:if>
         <xsl:text disable-output-escaping="yes"><![CDATA[<font color=green>]]></xsl:text>
+        <xsl:call-template name="OutputText"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</font>]]></xsl:text>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="1"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="WordsOfJesus">
+        <xsl:param name="space"/>
+        <xsl:if test="$space = 1">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<font color=red>]]></xsl:text>
         <xsl:call-template name="OutputText"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[</font>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">

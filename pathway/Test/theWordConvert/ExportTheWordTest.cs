@@ -328,6 +328,12 @@ namespace Test.theWordConvert
         }
 
         [Test]
+        public void WordsOfJesus()
+        {
+            TestDataCase("REV", "066REV.usx", 395, "Higeno Jisasi'a anage hu'ne, <font color=red>Antahiho, Nagra ame hu'na mizana eri'nena egahuankina, maka vahe'mo'zama nehanaza zmavuzmavate mizana eme zamigahue.</font>");
+        }
+
+        [Test]
         public void NdTest()
         {
             TestDataCase("EZR", "015EZR.usx", 1, "<TS1><font color=teal>Ezra</font><Ts><TS1>Cyrus Helps the Exiles to Return<Ts>In the first year of Cyrus king of Persia, in order to fulfill the word of the <font color=green>Lord</font> spoken by Jeremiah, the <font color=green>Lord</font> moved the heart of Cyrus king of Persia to make a proclamation throughout his realm and to put it in writing:<CM>");
