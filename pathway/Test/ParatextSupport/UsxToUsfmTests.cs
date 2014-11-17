@@ -141,8 +141,6 @@ namespace Test.ParatextSupport
             string outputXhtmlFile = Common.PathCombine(outputFolder, xhtmlFile);
 
             TextFileAssert.AreEqual(expectedXhtmlFile, outputXhtmlFile, FileData.Get(outputXhtmlFile));
-
-            TextFileAssert.AreEqual(expectedCssFile, outputCssFile, FileData.Get(outputCssFile));
         }
 
         [Test]
@@ -178,8 +176,6 @@ namespace Test.ParatextSupport
             string outputXhtmlFile = Common.PathCombine(outputFolder, xhtmlFile);
 
             TextFileAssert.AreEqual(expectedXhtmlFile, outputXhtmlFile, FileData.Get(outputXhtmlFile));
-
-            TextFileAssert.AreEqual(expectedCssFile, outputCssFile, FileData.Get(outputCssFile));
         }
 
 

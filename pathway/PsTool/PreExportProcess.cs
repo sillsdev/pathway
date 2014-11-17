@@ -178,7 +178,7 @@ namespace SIL.Tool
                             files.Add(outFilename);
                         }
                     }
-                    if (Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("true"))
+                    if (Param.TableOfContents.ToLower() == "table of contents")
                     {
                         // title page
                         if (mergeFiles)
