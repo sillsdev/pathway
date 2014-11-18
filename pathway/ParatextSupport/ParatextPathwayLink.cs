@@ -42,6 +42,7 @@ namespace SIL.PublishingSolution
         private readonly XslCompiledTransform _mSeparateIntoBooks = new XslCompiledTransform();
         private readonly XslCompiledTransform _mUsxToXhtml = new XslCompiledTransform();
         private readonly XslCompiledTransform _mEncloseParasInSections = new XslCompiledTransform();
+        private readonly XslCompiledTransform _mSectionHeadMissing = new XslCompiledTransform();
 
         #endregion
 
@@ -349,6 +350,10 @@ namespace SIL.PublishingSolution
             XmlWriter htmlw1 = XmlWriter.Create(separatedBooks, _mUsxToXhtml.OutputSettings);
             _mSeparateIntoBooks.Transform(XmlReader.Create(new StringReader(usx.Replace(">﻿ </book>", "></book>"))), null, htmlw1, null);
 
+            //Replace stylename "nb" to "p"
+            //"nb" is invalid class in Usx file
+            separatedBooks = separatedBooks.Replace("style=\"nb\"", "style=\"p\"");
+
             // Step 2. Remove line breaks for next step (to prevent creation of empty spans).
             StringBuilder cleanUsx = new StringBuilder();
             XmlWriter htmlw2 = XmlWriter.Create(cleanUsx, _mCleanUsx.OutputSettings);
@@ -356,19 +361,27 @@ namespace SIL.PublishingSolution
 
             // Step 3. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the 
             //       following elements to Pathway's format: book title, chapters, figures, footnotes.
-            StringBuilder html = new StringBuilder();
-            XmlWriter htmlw3 = XmlWriter.Create(html, _mUsxToXhtml.OutputSettings);
+            StringBuilder html3 = new StringBuilder();
+            XmlWriter htmlw3 = XmlWriter.Create(html3, _mUsxToXhtml.OutputSettings);
             _mUsxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw3, null);
 
+
+            // Step 4. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the 
+            //       following elements to Pathway's format: book title, chapters, figures, footnotes.
+            StringBuilder html4 = new StringBuilder();
+            XmlWriter htmlw4 = XmlWriter.Create(html4, _mSectionHeadMissing.OutputSettings);
+            _mSectionHeadMissing.Transform(XmlReader.Create(new StringReader(html3.ToString())), args, htmlw4, null);
+
+            
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ProhibitDtd = false;
 
             // Step 4. Move paragraphs into appropriate section type (as determined by the paragraph styles) and 
             //       include the Scripture sections within columns.
             FileStream xhtmlFile = new FileStream(fileName, FileMode.Create);
-            XmlWriter htmlw4 = XmlWriter.Create(xhtmlFile, _mEncloseParasInSections.OutputSettings);
-            XmlReader reader4 = XmlReader.Create(new StringReader(html.ToString()), settings);
-            _mEncloseParasInSections.Transform(reader4, null, htmlw4, null);
+            XmlWriter htmlw5 = XmlWriter.Create(xhtmlFile, _mEncloseParasInSections.OutputSettings);
+            XmlReader reader5 = XmlReader.Create(new StringReader(html4.ToString()), settings);
+            _mEncloseParasInSections.Transform(reader5, null, htmlw5, null);
             xhtmlFile.Close();
         }
         
@@ -396,6 +409,9 @@ namespace SIL.PublishingSolution
             _mEncloseParasInSections.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "ParatextSupport.EncloseParasInSections.xsl")));
+            _mSectionHeadMissing.Load(XmlReader.Create(
+                Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                "ParatextSupport.SectionHeadMismatch.xsl")));
         }
         
         private void ExportProcess(List<XmlDocument> usxBooksToExport, string publicationName, string format, string outputLocationPath, DialogResult result)
