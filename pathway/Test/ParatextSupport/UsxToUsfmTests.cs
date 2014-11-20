@@ -239,6 +239,34 @@ namespace Test.ParatextSupport
 
             Assert.AreEqual(expectedBldr.ToString(), ApplyTransform(inputBldr.ToString()));
         }
+
+
+        [Test]
+        public void UsxtoSFM_RevTest()
+        {
+            const string file = "REV";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        private void ExportProcess(string file)
+        {
+            string input = FileInput(file + ".usx");
+            string output = FileOutput(file + ".usx");
+            string sfmOutput = FileOutput(file + ".sfm");
+            File.Copy(input, output, true);
+            UsxToSFM usxToSfm = new UsxToSFM();
+            usxToSfm.ConvertUsxToSFM(output, sfmOutput);
+
+        }
+
+        private void FileCompare(string file)
+        {
+            string sfmOutput = FileOutput(file + ".sfm");
+            string sfmExpected = FileExpected(file + ".sfm");
+            TextFileAssert.AreEqual(sfmOutput, sfmExpected, file + " in sfm.");
+        }
+
         #endregion
 
         #region Private helper methods

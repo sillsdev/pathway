@@ -221,7 +221,7 @@ namespace SIL.PublishingSolution
                 _sfmFile.Write(line);
                 _verseNumber = string.Empty;
             }
-            
+
         }
 
         private bool HandleBridgeVerseNumbers(string verseNumber)
@@ -320,8 +320,15 @@ namespace SIL.PublishingSolution
         {
             string prefix = string.Empty;
             if (_style != string.Empty)
-            {
-                prefix = Space + "\\" + _style + Space;
+            {                
+                if (_style == "bdit" || _style == "wj")
+                {
+                    _sfmFile.WriteLine();
+                    string line = "\\v " + _verseNumber + Space +_content;
+                    _sfmFile.Write(line);
+                    return;
+                }   
+                prefix = Space + "\\" + _style + Space;             
             }
 
             if (_parentTagName == "note")
@@ -443,7 +450,7 @@ namespace SIL.PublishingSolution
                     {
                         _sfmFile.WriteLine();
                     }
-                }
+                }                
                 _isEmptyNode = false;
             }
             else
