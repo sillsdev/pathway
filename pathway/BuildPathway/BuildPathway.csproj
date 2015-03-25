@@ -40,7 +40,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -114,7 +115,6 @@
     </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -188,7 +188,6 @@
     </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -213,10 +212,6 @@
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
-  
-  
-  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
     <OutputPath>bin\Corporate7EPUB\</OutputPath>
     <DebugType>pdbonly</DebugType>
@@ -491,9 +486,9 @@
     <AllTransform Include="..\PsSupport\addDicTocHeads.xsl" />
     <AllTransform Include="..\PsSupport\FixEpub.xsl" />
     <AllTransform Include="..\PsSupport\FixEpubToc.xsl" />
-    <AllTransform Include="..\PsSupport\Xhtml-Usx.xsl"/>
-    <AllTransform Include="..\PsSupport\Xhtml2BookNames.xsl"/>
-    <AllTransform Include="..\PsSupport\StyleMap.xml"/>
+    <AllTransform Include="..\PsSupport\Xhtml-Usx.xsl" />
+    <AllTransform Include="..\PsSupport\Xhtml2BookNames.xsl" />
+    <AllTransform Include="..\PsSupport\StyleMap.xml" />
     <BteTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
     <BteTransform Include="..\PsSupport\*.xslt" />
     <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
