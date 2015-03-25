@@ -201,6 +201,7 @@ namespace Test.DictionaryForMIDsConvert
         public void CreateDictionaryForMIDsTest()
         {
             Common.Testing = true;
+            Common.ProgInstall = Environment.CurrentDirectory;
             var outDir = _testFiles.Output("CreateDictionaryForMIDs");
             if (Directory.Exists(outDir))
             {
