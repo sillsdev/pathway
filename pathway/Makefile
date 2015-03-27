@@ -25,30 +25,30 @@ build:
 	cp -r $(binsrc)/BuildPathway/Files/ConfigurationTool/* $(bindst)
 
 install:
-	sudo mkdir -p $(DESTDIR)$(prefix)/lib/pathway
-	sudo cp -r bin/. $(DESTDIR)$(prefix)/lib/pathway
-	sudo mkdir -p $(DESTDIR)$(prefix)/bin
-	sudo cp PathwayB.sh $(DESTDIR)$(prefix)/bin/pathwayB
-	sudo cp ConfigurationTool.sh $(DESTDIR)$(prefix)/bin/ConfigurationTool
-	sudo mkdir -p $(DESTDIR)$(prefix)/share/python-support
-	sudo chmod 777 $(DESTDIR)$(prefix)/share/python-support
-	sudo mkdir -p $(DESTDIR)$(prefix)/share/doc/pathway
-	sudo chmod 777 $(DESTDIR)$(prefix)/share/doc/pathway
-	sudo mkdir -p $(DESTDIR)$(prefix)/share/pathway
-	sudo chmod 777 $(DESTDIR)$(prefix)/share/pathway
-	sudo cp -r debian/pathwayValues.xml $(DESTDIR)$(prefix)/share/pathway/pathwayValues.xml
-	sudo cp -r debian/pathwayWsValues.xml $(DESTDIR)$(prefix)/share/pathway/pathwayWsValues.xml
-	sudo cp -r debian/pathwayRegistryKeys.sh $(DESTDIR)$(prefix)/share/pathway/pathwayRegistryKeys.sh
-	sudo cp -r XeLaTexConvert/InstallPathwayXeLaTeX.sh $(DESTDIR)$(prefix)/share/pathway/InstallPathwayXeLaTeX.sh
-	sudo mkdir -p $(DESTDIR)$(prefix)/share/applications
-	sudo chmod 777 $(DESTDIR)$(prefix)/share/applications
-	sudo cp debian/*.desktop $(DESTDIR)$(prefix)/share/applications
-	sudo mkdir -p $(DESTDIR)$(prefix)/share/pixmaps
-	sudo chmod 777 $(DESTDIR)$(prefix)/share/pixmaps
-	sudo cp debian/*.png $(DESTDIR)$(prefix)/share/pixmaps
-	sudo cp debian/*.xpm $(DESTDIR)$(prefix)/share/pixmaps
-	sudo mkdir -p $(DESTDIR)$(prefix)/share/man
-	sudo chmod 777 $(DESTDIR)$(prefix)/share/man
+	mkdir -p $(DESTDIR)$(prefix)/lib/pathway
+	cp -r bin/. $(DESTDIR)$(prefix)/lib/pathway
+	mkdir -p $(DESTDIR)$(prefix)/bin
+	cp PathwayB.sh $(DESTDIR)$(prefix)/bin/pathwayB
+	cp ConfigurationTool.sh $(DESTDIR)$(prefix)/bin/ConfigurationTool
+	mkdir -p $(DESTDIR)$(prefix)/share/python-support
+	chmod 777 $(DESTDIR)$(prefix)/share/python-support
+	mkdir -p $(DESTDIR)$(prefix)/share/doc/pathway
+	chmod 777 $(DESTDIR)$(prefix)/share/doc/pathway
+	mkdir -p $(DESTDIR)$(prefix)/share/pathway
+	chmod 777 $(DESTDIR)$(prefix)/share/pathway
+	cp -r debian/pathwayValues.xml $(DESTDIR)$(prefix)/share/pathway/pathwayValues.xml
+	cp -r debian/pathwayWsValues.xml $(DESTDIR)$(prefix)/share/pathway/pathwayWsValues.xml
+	cp -r debian/pathwayRegistryKeys.sh $(DESTDIR)$(prefix)/share/pathway/pathwayRegistryKeys.sh
+	cp -r XeLaTexConvert/InstallPathwayXeLaTeX.sh $(DESTDIR)$(prefix)/share/pathway/InstallPathwayXeLaTeX.sh
+	mkdir -p $(DESTDIR)$(prefix)/share/applications
+	chmod 777 $(DESTDIR)$(prefix)/share/applications
+	cp debian/*.desktop $(DESTDIR)$(prefix)/share/applications
+	mkdir -p $(DESTDIR)$(prefix)/share/pixmaps
+	chmod 777 $(DESTDIR)$(prefix)/share/pixmaps
+	cp debian/*.png $(DESTDIR)$(prefix)/share/pixmaps
+	cp debian/*.xpm $(DESTDIR)$(prefix)/share/pixmaps
+	mkdir -p $(DESTDIR)$(prefix)/share/man
+	chmod 777 $(DESTDIR)$(prefix)/share/man
 
 binary:
 	exit 0
