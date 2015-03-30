@@ -32,6 +32,7 @@ namespace SIL.PublishingSolution
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigurationTool));
+            this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
             this.stylesGrid = new System.Windows.Forms.DataGridView();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.tsNew = new System.Windows.Forms.ToolStripButton();
@@ -48,6 +49,7 @@ namespace SIL.PublishingSolution
             this.studentManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moreHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._uiLanguageMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabInfo = new System.Windows.Forms.TabPage();
             this.lnkLblUrl = new System.Windows.Forms.LinkLabel();
@@ -245,6 +247,7 @@ namespace SIL.PublishingSolution
             ((System.ComponentModel.ISupportInitialize)(this.picFonts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
             this.tabWeb.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -263,6 +266,13 @@ namespace SIL.PublishingSolution
             this.panel3.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
+
+            // 
+            // l10NSharpExtender1
+            // 
+            this.l10NSharpExtender1.LocalizationManagerId = "Pathway";
+            this.l10NSharpExtender1.PrefixForNewItems = "ConfigurationTool";
+
             // 
             // stylesGrid
             // 
@@ -318,6 +328,10 @@ namespace SIL.PublishingSolution
             this.tsNew.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.tsNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.tsNew, "New");
+            this.l10NSharpExtender1.SetLocalizationComment(this.tsNew, "Create New");
+            this.l10NSharpExtender1.SetLocalizationPriority(this.tsNew, L10NSharp.LocalizationPriority.Low);
+            this.l10NSharpExtender1.SetLocalizingId(this.tsNew, "ConfigurationTool.tsNew");
             this.tsNew.Name = "tsNew";
             this.tsNew.Size = new System.Drawing.Size(36, 49);
             this.tsNew.Text = "&New";
@@ -445,6 +459,7 @@ namespace SIL.PublishingSolution
             this.contentsToolStripMenuItem,
             this.studentManualToolStripMenuItem,
             this.moreHelpToolStripMenuItem,
+            this._uiLanguageMenu,
             this.aboutToolStripMenuItem});
             this.toolStripHelpButton.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripHelpButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripHelpButton.Image")));
@@ -456,6 +471,18 @@ namespace SIL.PublishingSolution
             this.toolStripHelpButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripHelpButton.ToolTipText = "Help (Alt+H)";
             this.toolStripHelpButton.ButtonClick += new System.EventHandler(this.toolStripHelpButton_ButtonClick);
+            // 
+            // _uiLanguageMenu
+            // 
+            this._uiLanguageMenu.ForeColor = System.Drawing.Color.DarkGray;
+            this.l10NSharpExtender1.SetLocalizableToolTip(this._uiLanguageMenu, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this._uiLanguageMenu, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this._uiLanguageMenu, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this._uiLanguageMenu, "ConfigurationTool._uiLanguageMenu");
+            this._uiLanguageMenu.Name = "_uiLanguageMenu";
+            this._uiLanguageMenu.Size = new System.Drawing.Size(58, 20);
+            this._uiLanguageMenu.Text = "English";
+            this._uiLanguageMenu.ToolTipText = "User-interface Language";
             // 
             // contentsToolStripMenuItem
             // 
@@ -2655,6 +2682,7 @@ namespace SIL.PublishingSolution
             this.panel3.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2662,6 +2690,8 @@ namespace SIL.PublishingSolution
 
         #endregion
 
+        private L10NSharp.UI.L10NSharpExtender l10NSharpExtender1;
+        private System.Windows.Forms.ToolStripDropDownButton _uiLanguageMenu;
         private System.Windows.Forms.DataGridView stylesGrid;
         private System.Windows.Forms.ToolStrip toolStripMain;
         private System.Windows.Forms.ToolStripButton tsNew;

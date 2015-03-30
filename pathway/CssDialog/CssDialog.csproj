@@ -211,11 +211,33 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Analytics.NET">
+      <HintPath>..\ThirdParty\Analytics.2.0.0\lib\Analytics.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="DesktopAnalytics">
+      <HintPath>..\ThirdParty\DesktopAnalytics.1.1.2\lib\net40\DesktopAnalytics.dll</HintPath>
+    </Reference>
+    <Reference Include="L10NSharp">
+      <HintPath>..\ThirdParty\L10NSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="NetSparkle.Net40">
+      <HintPath>..\ThirdParty\NetSparkle.Net40.dll</HintPath>
+    </Reference>
+    <Reference Include="Palaso">
+      <HintPath>..\ThirdParty\Palaso.dll</HintPath>
+    </Reference>
+    <Reference Include="Palaso.Media">
+      <HintPath>..\ThirdParty\Palaso.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="PalasoUIWindowsForms">
+      <HintPath>..\ThirdParty\PalasoUIWindowsForms.dll</HintPath>
+    </Reference>
     <Reference Include="Prince, Version=1.0.3835.23744, Culture=neutral, PublicKeyToken=8d9b0a8b53aaa3c7">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\Prince.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />

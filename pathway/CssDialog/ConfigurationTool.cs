@@ -17,9 +17,12 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using SIL.PublishingSolution.Properties;
 using SIL.Tool;
+using L10NSharp;
 
 namespace SIL.PublishingSolution
 {
@@ -44,6 +47,8 @@ namespace SIL.PublishingSolution
         {
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
             InitializeComponent();
+            SetupUILanguageMenu();
+
             if (Common.IsUnixOS())
             {
                 ddlPagePageSize.Width = 200;
@@ -58,6 +63,37 @@ namespace SIL.PublishingSolution
                 //ddlRules.Width = 200;
             }
         }
+
+        private void SetupUILanguageMenu()
+        {
+            _uiLanguageMenu.DropDownItems.Clear();
+            foreach (var lang in LocalizationManager.GetUILanguages(true))
+            {
+                var item = _uiLanguageMenu.DropDownItems.Add(lang.NativeName);
+                item.Tag = lang;
+                item.Click += ((a, b) =>
+                {
+                    LocalizationManager.SetUILanguage(((CultureInfo)item.Tag).IetfLanguageTag, true);
+                    Settings.Default.UserInterfaceLanguage = ((CultureInfo)item.Tag).IetfLanguageTag;
+                    item.Select();
+                    _uiLanguageMenu.Text = ((CultureInfo)item.Tag).NativeName;
+                });
+                if (((CultureInfo)item.Tag).IetfLanguageTag == Settings.Default.UserInterfaceLanguage)
+                {
+                    _uiLanguageMenu.Text = ((CultureInfo)item.Tag).NativeName;
+                }
+            }
+
+            _uiLanguageMenu.DropDownItems.Add(new ToolStripSeparator());
+            var menu = _uiLanguageMenu.DropDownItems.Add(LocalizationManager.GetString("MainWindow.MoreMenuItem",
+                "More...", "Last item in menu of UI languages"));
+            menu.Click += ((a, b) =>
+            {
+                LocalizationManager.ShowLocalizationDialogBox(this);
+                SetupUILanguageMenu();
+            });
+        }
+
         #endregion
 
         #region Method
@@ -118,7 +154,6 @@ namespace SIL.PublishingSolution
         }
 
         #endregion
-
 
         #region Property
         public DataGridView StylesGrid

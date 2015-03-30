@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,13 +30,24 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using DesktopAnalytics;
+using SIL.PublishingSolution.Properties;
 using SIL.Tool;
+using L10NSharp;
+using Palaso;
+using Palaso.IO;
+using Palaso.Reporting;
 
 namespace SIL.PublishingSolution
 {
     public class ConfigurationToolBL
     {
         #region Private Variables
+
+        public const string kCompany = "SIL";
+        public const string kProduct = "Pathway";
+        private static List<Exception> _pendingExceptionsToReportToAnalytics = new List<Exception>();
+
         private string _cssPath;
         private string _loadType;
         private Dictionary<string, Dictionary<string, string>> _cssClass =
@@ -51,6 +63,7 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region Public Variable
+
         public DataSet DataSetForGrid = new DataSet();
         public string MediaType = string.Empty;
         public string StyleName = string.Empty;
@@ -148,6 +161,7 @@ namespace SIL.PublishingSolution
         #region Constructor
         public ConfigurationToolBL()
         {
+           
             standardSize["595x842"] = "A4";
             standardSize["420x595"] = "A5";
             standardSize["499x709"] = "B5";
@@ -176,6 +190,10 @@ namespace SIL.PublishingSolution
             pageDict.Add("@page-bottom-right", "Bottom Right Margin");
             pageDict.Add("@page-bottom-left", "Bottom Left Margin");
             pageDict.Add("@page-bottom-center", "Bottom Center");
+            //LocalizationManager.UILanguageId
+            var userInfo = new UserInfo { FirstName = "", LastName = "", UILanguageCode = "fr", Email = "" };
+            SetUpErrorHandling();
+            SetupLocalization();
 
         }
         #endregion
@@ -5102,6 +5120,59 @@ namespace SIL.PublishingSolution
             return result;
         }
 
+        #endregion
+
+        #region Localization
+        public static string GetUserConfigFilePath()
+        {
+            try
+            {
+                return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+            }
+            catch (System.Configuration.ConfigurationErrorsException e)
+            {
+                _pendingExceptionsToReportToAnalytics.Add(e);
+                File.Delete(e.Filename);
+                return e.Filename;
+            }
+        }
+
+        private static void SetupLocalization()
+        {
+            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
+            var targetTmxFilePath = Path.Combine(kCompany, kProduct);
+            string desiredUiLangId = Settings.Default.UserInterfaceLanguage;
+            desiredUiLangId = "en";
+            LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
+                null, targetTmxFilePath, null, IssuesEmailAddress, "Pathway");
+            // For now, do not set up localization for Palaso UI components etc.
+            // Doing so introduces a large number of things to localize that are not actually used in HearThis, and few if any
+            // that actually ARE used.
+            //LocalizationManager.Create(desiredUiLangId, "Palaso", "Palaso", Application.ProductVersion, installedStringFileFolder,
+            //						   targetTmxFilePath, Resources.HearThis, IssuesEmailAddress, "Palaso.UI");
+        }
+
+        /// <summary>
+        /// The email address people should write to with problems (or new localizations?) for HearThis.
+        /// </summary>
+        public static string IssuesEmailAddress
+        {
+            get { return "issues@hearthis.palaso.org"; }
+        }
+
+        /// ------------------------------------------------------------------------------------
+        private static void SetUpErrorHandling()
+        {
+            ErrorReport.EmailAddress = "issues@hearthis.palaso.org";
+            ErrorReport.AddStandardProperties();
+            ExceptionHandler.Init();
+            ExceptionHandler.AddDelegate(ReportError);
+        }
+
+        private static void ReportError(object sender, CancelExceptionHandlingEventArgs e)
+        {
+            Analytics.ReportException(e.Exception);
+        }
         #endregion
     }
 }

@@ -17,11 +17,13 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using JWTools;
 using Microsoft.Win32;
+using SIL.PublishingSolution.Properties;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -36,6 +38,12 @@ namespace SIL.PublishingSolution
         /// </summary>
         public AboutPw()
         {
+            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
+            //var targetTmxFilePath = Path.Combine("SIL", "Pathway");
+            //string desiredUiLangId = Settings.Default.UserInterfaceLanguage;
+            //desiredUiLangId = "fr";
+            //LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
+            //    installedStringFileFolder, targetTmxFilePath, null, "issues@hearthis.palaso.org", "Pathway");
             InitializeComponent();
         }
 
@@ -172,8 +180,19 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void AboutPw_Load(object sender, EventArgs e)
         {
-            lblProductName.Text = AssemblyProduct;
-            lblVersion.Text = String.Format("Version: {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
+            lblProductName.Text = AssemblyProduct.ToString(CultureInfo.CurrentUICulture);
+            lblVersion.Text = String.Format("Version: {0} ({1})", AssemblyFileVersion, AssemblyFileDate).ToString(CultureInfo.CurrentUICulture);
+            //this.l10NSharpExtender1.SetLocalizingId(this.lblProductName, "AboutPw.lblProductName");
+            //ToString(CultureInfo.CurrentCulture)
+            //this.l10NSharpExtender1.SetLocalizableToolTip(this.lblProductName, null);
+            //this.l10NSharpExtender1.SetLocalizationComment(this.lblProductName, null);
+            //this.l10NSharpExtender1.SetLocalizationPriority(this.lblProductName, L10NSharp.LocalizationPriority.High);
+            //this.l10NSharpExtender1.SetLocalizingId(this.lblProductName, "AboutPw.lblProductName");
+
+            //this.l10NSharpExtender1.SetLocalizableToolTip(this.lblVersion, null);
+            //this.l10NSharpExtender1.SetLocalizationComment(this.lblVersion, null);
+            //this.l10NSharpExtender1.SetLocalizationPriority(this.lblVersion, L10NSharp.LocalizationPriority.High);
+            //this.l10NSharpExtender1.SetLocalizingId(this.lblVersion, "AboutPw.lblVersion");  
 
             HelpImproveGetValue(chkHelpToImprove);
 

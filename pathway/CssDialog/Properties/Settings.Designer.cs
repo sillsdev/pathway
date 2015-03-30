@@ -22,5 +22,22 @@ namespace SIL.PublishingSolution.Properties {
                 return defaultInstance;
             }
         }
+
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UserInterfaceLanguage
+        {
+            get
+            {
+                return ((string)(this["UserInterfaceLanguage"]));
+            }
+            set
+            {
+                this["UserInterfaceLanguage"] = value;
+            }
+        }
+        
     }
 }
