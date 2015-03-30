@@ -22,6 +22,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using JWTools;
+using L10NSharp;
 using Microsoft.Win32;
 using SIL.PublishingSolution.Properties;
 using SIL.Tool;
@@ -56,10 +57,10 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(
-                    typeof (AssemblyTitleAttribute), false);
+                    typeof(AssemblyTitleAttribute), false);
                 if (attributes.Length > 0)
                 {
-                    var titleAttribute = (AssemblyTitleAttribute) attributes[0];
+                    var titleAttribute = (AssemblyTitleAttribute)attributes[0];
                     if (titleAttribute.Title != "")
                     {
                         return titleAttribute.Title;
@@ -77,12 +78,12 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes =
-                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyFileVersionAttribute), false);
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyFileVersionAttribute) attributes[0]).Version;
+                return ((AssemblyFileVersionAttribute)attributes[0]).Version;
             }
         }
 
@@ -111,12 +112,12 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes =
-                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyDescriptionAttribute), false);
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyDescriptionAttribute) attributes[0]).Description;
+                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
             }
         }
 
@@ -128,12 +129,12 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes =
-                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyProductAttribute), false);
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyProductAttribute) attributes[0]).Product;
+                return ((AssemblyProductAttribute)attributes[0]).Product;
             }
         }
 
@@ -145,12 +146,12 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes =
-                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyCopyrightAttribute), false);
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyCopyrightAttribute) attributes[0]).Copyright;
+                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
             }
         }
 
@@ -162,12 +163,12 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes =
-                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyCompanyAttribute), false);
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyCompanyAttribute) attributes[0]).Company;
+                return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
 
@@ -180,19 +181,6 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void AboutPw_Load(object sender, EventArgs e)
         {
-            lblProductName.Text = AssemblyProduct.ToString(CultureInfo.CurrentUICulture);
-            lblVersion.Text = String.Format("Version: {0} ({1})", AssemblyFileVersion, AssemblyFileDate).ToString(CultureInfo.CurrentUICulture);
-            //this.l10NSharpExtender1.SetLocalizingId(this.lblProductName, "AboutPw.lblProductName");
-            //ToString(CultureInfo.CurrentCulture)
-            //this.l10NSharpExtender1.SetLocalizableToolTip(this.lblProductName, null);
-            //this.l10NSharpExtender1.SetLocalizationComment(this.lblProductName, null);
-            //this.l10NSharpExtender1.SetLocalizationPriority(this.lblProductName, L10NSharp.LocalizationPriority.High);
-            //this.l10NSharpExtender1.SetLocalizingId(this.lblProductName, "AboutPw.lblProductName");
-
-            //this.l10NSharpExtender1.SetLocalizableToolTip(this.lblVersion, null);
-            //this.l10NSharpExtender1.SetLocalizationComment(this.lblVersion, null);
-            //this.l10NSharpExtender1.SetLocalizationPriority(this.lblVersion, L10NSharp.LocalizationPriority.High);
-            //this.l10NSharpExtender1.SetLocalizingId(this.lblVersion, "AboutPw.lblVersion");  
 
             HelpImproveGetValue(chkHelpToImprove);
 

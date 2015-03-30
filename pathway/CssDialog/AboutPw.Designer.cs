@@ -1,4 +1,7 @@
-﻿namespace SIL.PublishingSolution
+﻿using System;
+using System.Globalization;
+
+namespace SIL.PublishingSolution
 {
     partial class AboutPw
     {
@@ -62,10 +65,10 @@
             this.l10NSharpExtender1.SetLocalizingId(this.lblProductName, "AboutPw.lblProductName");            
             this.lblProductName.Location = new System.Drawing.Point(231, 28);
             this.lblProductName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblProductName.Name = "lblProductName";
+            this.lblProductName.Text = AssemblyProduct.ToString(CultureInfo.CurrentUICulture);
             this.lblProductName.Size = new System.Drawing.Size(197, 29);
             this.lblProductName.TabIndex = 1;
-            this.lblProductName.Text = "lblProductName";
+            
             // 
             // lblVersion
             // 
@@ -77,10 +80,10 @@
             this.l10NSharpExtender1.SetLocalizingId(this.lblVersion, "AboutPw.lblVersion");             
             this.lblVersion.Location = new System.Drawing.Point(232, 110);
             this.lblVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Text = String.Format("Version: {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
             this.lblVersion.Size = new System.Drawing.Size(69, 16);
             this.lblVersion.TabIndex = 2;
-            this.lblVersion.Text = "lblVersion";
+            
             // 
             // lblProjUrl
             // 
