@@ -507,7 +507,7 @@
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PsTool.dll" />
     <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PsTool.pdb" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
-    <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" />
     <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
     <ParatextSupport Include="..\ParatextSupport\$(OutputPath)\ParatextSupport.*" />
     <AllBackend Include="..\InDesignConvert\$(OutputPath)\InDesignConvert.*" />
@@ -523,7 +523,7 @@
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
     <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
     <BteBackend Include="..\theWordConvert\$(OutputPath)\theWordConvert.*" />
-    <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\base_font_andika.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\base_font_charis.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\base_font_charis_compact.css" />
@@ -668,12 +668,12 @@
     <ScrStyles Include="..\PsSupport\Styles\Scripture\VerticalJustify_Bottom.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\VerticalJustify_Center.css" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\VerticalJustify_Top.css" />
-    <DictionaryForMIDs Include="..\PsSupport\Dic4Mid\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Icons Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <DictionaryForMIDs Include="..\PsSupport\Dic4Mid\**\*.*" />
+    <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" />
+    <Icons Include="..\PsSupport\Icons\**\*.*" />
+    <Graphic Include="..\PsSupport\Graphic\**\*.*" />
+    <Loc Include="..\PsSupport\Loc\**\*.*" />
+    <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" />
     <BteHelp Include="..\BuildPathway\Pathway_Configuration_Tool_BTE.chm" />
     <SeHelp Include="..\BuildPathway\Pathway_Configuration_Tool_SE.chm" />
     <BteStudent Include="..\BuildPathway\Pathway_Student_Manual_BTE.doc" />
@@ -688,26 +688,26 @@
     <BteSettings Include="..\PsSupport\ScriptureStyleSettings.xml" />
     <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
     <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
-    <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <AllSamples Include="..\PsSupport\Samples\Dictionary\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <BteSamples Include="..\PsSupport\Samples\Scripture\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" />
+    <AllSamples Include="..\PsSupport\Samples\Dictionary\*.*" />
+    <BteSamples Include="..\PsSupport\Samples\Scripture\*.*" />
+    <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" />
+    <epubFiles Include="..\PsSupport\epub\**\*.*" />
     <AllBackend Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
-    <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <SwordFiles Include="..\PsSupport\Sword\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" />
+    <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" />
+    <SwordFiles Include="..\PsSupport\Sword\**\*.*" />
+    <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" />
     <AllTransform Include="..\PsSupport\AddBidi.xsl" />
     <AllTransform Include="..\PsSupport\addDicTocHeads.xsl" />
     <AllTransform Include="..\PsSupport\FixEpub.xsl" />
     <AllTransform Include="..\PsSupport\FixEpubToc.xsl" />
     <BteTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
     <BteTransform Include="..\PsSupport\*.xslt" />
-    <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
-    <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <WixSoftware Include="..\BuildPathway\WixSoftware\**\*.*" Exclude="WixSoftware\**\.svn\**\*.*" />
+    <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" />
+    <XeTexExe Include="..\XeTex\xetexExe\**\*.*" />
+    <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" />
+    <WixSoftware Include="..\BuildPathway\WixSoftware\**\*.*" />
     <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
   </ItemGroup>
   <ItemGroup>
