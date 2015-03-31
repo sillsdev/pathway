@@ -20,9 +20,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using L10NSharp;
 using SIL.PublishingSolution.Properties;
 using SIL.Tool;
-using L10NSharp;
 
 namespace SIL.PublishingSolution
 {

@@ -17,16 +17,11 @@
 
 using System;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-using JWTools;
-using L10NSharp;
 using Microsoft.Win32;
-using SIL.PublishingSolution.Properties;
 using SIL.Tool;
-using SIL.Tool.Localization;
 
 namespace SIL.PublishingSolution
 {

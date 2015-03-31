@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
@@ -225,17 +226,11 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Analytics.NET">
-      <HintPath>..\ThirdParty\Analytics.2.0.0\lib\Analytics.NET.dll</HintPath>
-    </Reference>
     <Reference Include="DesktopAnalytics">
       <HintPath>..\ThirdParty\DesktopAnalytics.1.1.2\lib\net40\DesktopAnalytics.dll</HintPath>
     </Reference>
     <Reference Include="L10NSharp">
       <HintPath>..\ThirdParty\L10NSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="NetSparkle.Net40">
-      <HintPath>..\ThirdParty\NetSparkle.Net40.dll</HintPath>
     </Reference>
     <Reference Include="Palaso">
       <HintPath>..\ThirdParty\Palaso.dll</HintPath>

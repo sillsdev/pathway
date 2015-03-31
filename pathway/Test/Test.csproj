@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
@@ -35,6 +36,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -48,6 +50,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\Release7BTE\</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -61,6 +64,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\Release7SE\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -74,6 +78,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\Corporate7BTE\</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -86,6 +91,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\Corporate7SE\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -98,6 +104,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -112,6 +119,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\x86\Release7BTE\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -125,6 +133,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\x86\Release7SE\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -138,6 +147,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\x86\Corporate7BTE\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -150,6 +160,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\x86\Corporate7SE\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -162,6 +173,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Status>Testing</Status>
@@ -171,6 +183,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\x86\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
@@ -180,6 +193,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\Corporate7EPUB\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
@@ -196,6 +210,7 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>bin\x86\Corporate7EPUB\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
@@ -216,11 +231,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="L10NSharp">
+      <HintPath>..\ThirdParty\L10NSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities" />
     <Reference Include="NMock2, Version=2.0.0.44, Culture=neutral, PublicKeyToken=37d3be0adc87c2b7">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\NMock2.dll</HintPath>
+    </Reference>
+    <Reference Include="Palaso">
+      <HintPath>..\ThirdParty\Palaso.dll</HintPath>
+    </Reference>
+    <Reference Include="Palaso.Media">
+      <HintPath>..\ThirdParty\Palaso.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="PalasoUIWindowsForms">
+      <HintPath>..\ThirdParty\PalasoUIWindowsForms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
