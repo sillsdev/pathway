@@ -20,8 +20,10 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using JWTools;
 using Microsoft.Win32;
 using SIL.Tool;
+using SIL.Tool.Localization;
 
 namespace SIL.PublishingSolution
 {
@@ -220,10 +222,10 @@ namespace SIL.PublishingSolution
 
         private void AboutPw_DoubleClick(object sender, EventArgs e)
         {
-#if DEBUG
+
             var dlg = new Localizer(LocDB.DB);
             dlg.ShowDialog();
-#endif
+
         }
 
         private void lnkProj_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
