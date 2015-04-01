@@ -5150,11 +5150,6 @@ namespace SIL.PublishingSolution
             desiredUiLangId = "en";
             LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
                 null, targetTmxFilePath, null, IssuesEmailAddress, "Pathway");
-            // For now, do not set up localization for Palaso UI components etc.
-            // Doing so introduces a large number of things to localize that are not actually used in HearThis, and few if any
-            // that actually ARE used.
-            //LocalizationManager.Create(desiredUiLangId, "Palaso", "Palaso", Application.ProductVersion, installedStringFileFolder,
-            //						   targetTmxFilePath, Resources.HearThis, IssuesEmailAddress, "Palaso.UI");
         }
 
         /// <summary>
@@ -5162,16 +5157,19 @@ namespace SIL.PublishingSolution
         /// </summary>
         public static string IssuesEmailAddress
         {
-            get { return "issues@hearthis.palaso.org"; }
+            get { return "pathway@sil.org"; }
         }
 
         /// ------------------------------------------------------------------------------------
         private static void SetUpErrorHandling()
         {
-            ErrorReport.EmailAddress = "issues@hearthis.palaso.org";
-            ErrorReport.AddStandardProperties();
-            ExceptionHandler.Init();
-            ExceptionHandler.AddDelegate(ReportError);
+            if (ErrorReport.EmailAddress == null)
+            {
+                ExceptionHandler.Init();
+                ErrorReport.EmailAddress = IssuesEmailAddress;
+                ErrorReport.AddStandardProperties();
+                ExceptionHandler.AddDelegate(ReportError);
+            }
         }
 
         private static void ReportError(object sender, CancelExceptionHandlingEventArgs e)
