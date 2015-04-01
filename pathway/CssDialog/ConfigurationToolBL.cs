@@ -122,6 +122,7 @@ namespace SIL.PublishingSolution
         #region Protected Variables
         protected readonly ArrayList _cssNames = new ArrayList();
         ErrorProvider _errProvider = new ErrorProvider();
+        public bool SkipNunit = false;
         protected bool _isCreatePreview1;
         protected string _caption = "Pathway Configuration Tool";
         protected string _redoUndoBufferValue = string.Empty;
@@ -192,8 +193,12 @@ namespace SIL.PublishingSolution
             pageDict.Add("@page-bottom-center", "Bottom Center");
             //LocalizationManager.UILanguageId
             var userInfo = new UserInfo { FirstName = "", LastName = "", UILanguageCode = "fr", Email = "" };
-            SetUpErrorHandling();
-            SetupLocalization();
+
+            if (!SkipNunit)
+            {
+                SetUpErrorHandling();
+                SetupLocalization();
+            }
 
         }
         #endregion

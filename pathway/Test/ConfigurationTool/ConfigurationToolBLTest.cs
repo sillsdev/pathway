@@ -335,6 +335,7 @@ namespace Test.UIConfigurationToolBLTest
         public void CheckStylesString()
         {
             string returnValue = string.Empty;
+            cToolBL.SkipNunit = true;
             cToolBL = new ConfigurationToolBL();
             returnValue = cToolBL.GenerateStylesString();
             Assert.IsTrue(returnValue == "Styles", "Values not equal");
