@@ -473,13 +473,11 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
          -->
-  <Target Name="TeamCityTest">
+  <Target Name="TeamCityTest" DependsOnTargets="Build">
     <NUnitTeamCity
       Assemblies="$(TeamCityRootDir)/Test/bin/Debug/Test.dll"
       ExcludeCategory="SkipOnTeamCity;LongTest"
-      NUnitVersion="NUnit-2.5.10"
-      Platform="x64"
-      Version="v4.0" />
+      NUnitVersion="NUnit-2.5.10" />
   </Target>
   <Target Name="BeforeBuild">
     <Copy SourceFiles="@(Plugin)" DestinationFolder="$(OutputPath)\" />
