@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <UsingTask TaskName="NUnitTeamCity" AssemblyFile="$(agent_home_dir)/plugins/dotnetPlugin/bin/JetBrains.BuildServer.MSBuildLoggers.dll" />
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -34,6 +35,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <TeamCityRootDir>$(teamcity_build_checkoutDir)</TeamCityRootDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -471,6 +473,14 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
          -->
+  <Target Name="TeamCityTest">
+    <NUnitTeamCity
+      Assemblies="$(TeamCityRootDir)/Test/bin/Debug/Test.dll"
+      ExcludeCategory="SkipOnTeamCity;LongTest"
+      NUnitVersion="NUnit-2.5.10"
+      Platform="x64"
+      Version="v4.0" />
+  </Target>
   <Target Name="BeforeBuild">
     <Copy SourceFiles="@(Plugin)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(GhostScript)" DestinationFolder="$(OutputPath)\" />

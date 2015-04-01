@@ -8,7 +8,6 @@
   <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="MSBuild.ExtensionPack.Framework.TextString" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="NUnitTeamCity" AssemblyFile="$(agent_home_dir)/plugins/dotnetPlugin/bin/JetBrains.BuildServer.MSBuildLoggers.dll" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -17,7 +16,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TeamCityRootDir>$(teamcity_build_checkoutDir)</TeamCityRootDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Any CPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -289,12 +287,6 @@
   </Target>
   <Target Name="BeforeBuild"/>
   <Target Name="AfterBuild"/>
-  <Target Name="TeamCityTest" DependsOnTargets="Build">
-    <NUnitTeamCity
-      Assemblies="$(TeamCityRootDir)/Test/bin/Debug/Test.dll"
-      ExcludeCategory="SkipOnTeamCity"
-      NUnitVersion="NUnit-2.5.5" />
-  </Target>
   <Target Name="Clean">
     <CallTarget Targets="RemoveSprint"/>
     <!-- See: http://en.csharp-online.net/MSBuild:_By_Example%E2%80%94Understanding_the_Difference_between_@_and_%25 and http://en.csharp-online.net/MSBuild:_By_Example%E2%80%94Introducing_Well-Known_Metadata -->
