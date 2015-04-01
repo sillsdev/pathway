@@ -24,30 +24,20 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
-using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using DesktopAnalytics;
-using SIL.PublishingSolution.Properties;
 using SIL.Tool;
-using L10NSharp;
-using Palaso;
-using Palaso.IO;
-using Palaso.Reporting;
+
 
 namespace SIL.PublishingSolution
 {
     public class ConfigurationToolBL
     {
         #region Private Variables
-
-        public const string kCompany = "SIL";
-        public const string kProduct = "Pathway";
-        private static List<Exception> _pendingExceptionsToReportToAnalytics = new List<Exception>();
-
+        
         private string _cssPath;
         private string _loadType;
         private Dictionary<string, Dictionary<string, string>> _cssClass =
@@ -122,7 +112,6 @@ namespace SIL.PublishingSolution
         #region Protected Variables
         protected readonly ArrayList _cssNames = new ArrayList();
         ErrorProvider _errProvider = new ErrorProvider();
-        public bool SkipNunit = false;
         protected bool _isCreatePreview1;
         protected string _caption = "Pathway Configuration Tool";
         protected string _redoUndoBufferValue = string.Empty;
@@ -162,7 +151,7 @@ namespace SIL.PublishingSolution
         #region Constructor
         public ConfigurationToolBL()
         {
-           
+
             standardSize["595x842"] = "A4";
             standardSize["420x595"] = "A5";
             standardSize["499x709"] = "B5";
@@ -191,15 +180,7 @@ namespace SIL.PublishingSolution
             pageDict.Add("@page-bottom-right", "Bottom Right Margin");
             pageDict.Add("@page-bottom-left", "Bottom Left Margin");
             pageDict.Add("@page-bottom-center", "Bottom Center");
-            //LocalizationManager.UILanguageId
-            var userInfo = new UserInfo { FirstName = "", LastName = "", UILanguageCode = "fr", Email = "" };
-
-            if (!SkipNunit)
-            {
-                SetUpErrorHandling();
-                SetupLocalization();
-            }
-
+            
         }
         #endregion
 
@@ -2629,7 +2610,7 @@ namespace SIL.PublishingSolution
         public void WriteMedia()
         {
             XmlNode baseNode = Param.GetItem("//categories/category[@name = \"Media\"]");
-            if (MediaType.Length <= 0) 
+            if (MediaType.Length <= 0)
                 MediaType = Param.GetAttrByName("//categories/category", "Media", "select").ToLower();
             Param.SetAttrValue(baseNode, "select", MediaType);
             Param.Write();
@@ -4303,25 +4284,25 @@ namespace SIL.PublishingSolution
                 const ContentAlignment contentBc = System.Drawing.ContentAlignment.BottomCenter;
                 const ToolStripTextDirection toolStripTextDirection = ToolStripTextDirection.Horizontal;
                 const ContentAlignment contentTc = System.Drawing.ContentAlignment.TopCenter;
-                
+
                 cTool.TsNew.Font = cFont;
                 cTool.TsNew.Size = cSize;
                 cTool.TsNew.TextAlign = contentBc;
                 cTool.TsNew.TextDirection = toolStripTextDirection;
                 cTool.TsNew.ImageAlign = contentTc;
-                
+
                 cTool.TsSaveAs.Font = cFont;
                 cTool.TsSaveAs.Size = cSize;
                 cTool.TsSaveAs.TextAlign = contentBc;
                 cTool.TsSaveAs.TextDirection = toolStripTextDirection;
                 cTool.TsSaveAs.ImageAlign = contentTc;
-                
+
                 cTool.TsDelete.Font = cFont;
                 cTool.TsDelete.Size = cSize;
                 cTool.TsDelete.TextAlign = contentBc;
                 cTool.TsDelete.TextDirection = toolStripTextDirection;
                 cTool.TsDelete.ImageAlign = contentTc;
-                
+
                 cTool.TsUndo.Font = cFont;
                 cTool.TsUndo.Size = cSize;
                 cTool.TsUndo.TextAlign = contentBc;
@@ -4333,7 +4314,7 @@ namespace SIL.PublishingSolution
                 cTool.TsRedo.TextAlign = contentBc;
                 cTool.TsRedo.TextDirection = toolStripTextDirection;
                 cTool.TsRedo.ImageAlign = contentTc;
-                
+
                 cTool.TsPreview.Font = cFont;
                 cTool.TsPreview.Size = cSize;
                 cTool.TsPreview.TextAlign = contentBc;
@@ -4345,19 +4326,19 @@ namespace SIL.PublishingSolution
                 cTool.TsDefault.TextAlign = contentBc;
                 cTool.TsDefault.TextDirection = toolStripTextDirection;
                 cTool.TsDefault.ImageAlign = contentTc;
-                
+
                 cTool.TsReset.Font = cFont;
                 cTool.TsReset.Size = cSize;
                 cTool.TsReset.TextAlign = contentBc;
                 cTool.TsReset.TextDirection = toolStripTextDirection;
                 cTool.TsReset.ImageAlign = contentTc;
-                
+
                 cTool.TsSend.Font = cFont;
                 cTool.TsSend.Size = cSize;
                 cTool.TsSend.TextAlign = contentBc;
                 cTool.TsSend.TextDirection = toolStripTextDirection;
                 cTool.TsSend.ImageAlign = contentTc;
-                
+
                 cTool.ToolStripHelpButton.Font = cFont;
                 cTool.ToolStripHelpButton.Size = cSize;
                 cTool.ToolStripHelpButton.TextAlign = contentBc;
@@ -5127,55 +5108,6 @@ namespace SIL.PublishingSolution
 
         #endregion
 
-        #region Localization
-        public static string GetUserConfigFilePath()
-        {
-            try
-            {
-                return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
-            }
-            catch (System.Configuration.ConfigurationErrorsException e)
-            {
-                _pendingExceptionsToReportToAnalytics.Add(e);
-                File.Delete(e.Filename);
-                return e.Filename;
-            }
-        }
-
-        private static void SetupLocalization()
-        {
-            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
-            var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-            string desiredUiLangId = Settings.Default.UserInterfaceLanguage;
-            desiredUiLangId = "en";
-            LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-                null, targetTmxFilePath, null, IssuesEmailAddress, "Pathway");
-        }
-
-        /// <summary>
-        /// The email address people should write to with problems (or new localizations?) for HearThis.
-        /// </summary>
-        public static string IssuesEmailAddress
-        {
-            get { return "pathway@sil.org"; }
-        }
-
-        /// ------------------------------------------------------------------------------------
-        private static void SetUpErrorHandling()
-        {
-            if (ErrorReport.EmailAddress == null)
-            {
-                ExceptionHandler.Init();
-                ErrorReport.EmailAddress = IssuesEmailAddress;
-                ErrorReport.AddStandardProperties();
-                ExceptionHandler.AddDelegate(ReportError);
-            }
-        }
-
-        private static void ReportError(object sender, CancelExceptionHandlingEventArgs e)
-        {
-            Analytics.ReportException(e.Exception);
-        }
-        #endregion
+        
     }
 }

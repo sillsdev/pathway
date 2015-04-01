@@ -16,13 +16,20 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using DesktopAnalytics;
 using L10NSharp;
 using SIL.PublishingSolution.Properties;
 using SIL.Tool;
+using L10NSharp;
+using Palaso;
+using Palaso.IO;
+using Palaso.Reporting;
+using System.Collections.Generic;
 
 namespace SIL.PublishingSolution
 {
@@ -33,9 +40,12 @@ namespace SIL.PublishingSolution
         public string _previousTxtName;
         private string _lastSelectedLayout = string.Empty;
         private TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
+        private static List<Exception> _pendingExceptionsToReportToAnalytics = new List<Exception>();
         #endregion
 
         #region Public Variable
+        public const string kCompany = "SIL";
+        public const string kProduct = "Pathway";
         public bool _fromNunit = false;
         public string InputType = string.Empty;
         public string MediaType = string.Empty;
@@ -847,6 +857,9 @@ namespace SIL.PublishingSolution
         #region Event Method
         private void ConfigurationTool_Load(object sender, EventArgs e)
         {
+            SetUpErrorHandling();
+            SetupLocalization();
+
             _CToolBL = new ConfigurationToolBL();
             _CToolBL.inputTypeBL = InputType;
             _CToolBL.MediaTypeEXE = MediaType;
@@ -1347,6 +1360,57 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.txtWebEmailID_ValidatedBL(sender, e);
         }
+
+        #region Localization
+        public static string GetUserConfigFilePath()
+        {
+            try
+            {
+                return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+            }
+            catch (System.Configuration.ConfigurationErrorsException e)
+            {
+                _pendingExceptionsToReportToAnalytics.Add(e);
+                File.Delete(e.Filename);
+                return e.Filename;
+            }
+        }
+
+        private static void SetupLocalization()
+        {
+            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
+            var targetTmxFilePath = Path.Combine(kCompany, kProduct);
+            string desiredUiLangId = Settings.Default.UserInterfaceLanguage;
+            desiredUiLangId = "en";
+            LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
+                null, targetTmxFilePath, null, IssuesEmailAddress, "Pathway");
+        }
+
+        /// <summary>
+        /// The email address people should write to with problems (or new localizations?) for HearThis.
+        /// </summary>
+        public static string IssuesEmailAddress
+        {
+            get { return "pathway@sil.org"; }
+        }
+
+        /// ------------------------------------------------------------------------------------
+        private static void SetUpErrorHandling()
+        {
+            if (ErrorReport.EmailAddress == null)
+            {
+                ExceptionHandler.Init();
+                ErrorReport.EmailAddress = IssuesEmailAddress;
+                ErrorReport.AddStandardProperties();
+                ExceptionHandler.AddDelegate(ReportError);
+            }
+        }
+
+        private static void ReportError(object sender, CancelExceptionHandlingEventArgs e)
+        {
+            Analytics.ReportException(e.Exception);
+        }
+        #endregion
       
     }
 }
