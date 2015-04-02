@@ -28,16 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrganizationNameDialog));
+            this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
+
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtOrganization = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
+            // l10NSharpExtender1
+            // 
+            this.l10NSharpExtender1.LocalizationManagerId = "Pathway";
+            this.l10NSharpExtender1.PrefixForNewItems = "OrganizationNameDialog";
             // 
             // btnOK
             // 
             this.btnOK.Location = new System.Drawing.Point(106, 67);
             this.btnOK.Name = "btnOK";
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnOK, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnOK, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.btnOK, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnOK, "OrganizationNameDialog.btnOK");
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "&OK";
@@ -49,6 +61,10 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(187, 67);
             this.btnCancel.Name = "btnCancel";
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnCancel, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnCancel, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.btnCancel, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnCancel, "OrganizationNameDialog.btnCancel");
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "&Cancel";
@@ -60,6 +76,10 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 15);
             this.label1.Name = "label1";
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.label1, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.label1, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.label1, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.label1, "OrganizationNameDialog.label1");
             this.label1.Size = new System.Drawing.Size(187, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Type in the &name of your organization:";
@@ -90,12 +110,14 @@
             this.Text = "Organization Name";
             this.Load += new System.EventHandler(this.OrganizationNameDialog_Load);
             this.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).EndInit();
             this.PerformLayout();
 
         }
 
         #endregion
 
+        private L10NSharp.UI.L10NSharpExtender l10NSharpExtender1 = null;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label1;
