@@ -146,7 +146,7 @@ namespace Test.theWordConvert
             Ssf = FileInput("MP1.ssf");
             var actual = LoadXsltParameters(_inputPath);
             Assert.AreEqual(":", actual.GetParam("refPunc", ""));
-            Assert.AreEqual("file:///" + Common.PathCombine(@"C:\MP1", "BookNames.xml"), actual.GetParam("bookNames", ""));
+            Assert.AreEqual(FileUrlPrefix + Common.PathCombine(@"C:\MP1", "BookNames.xml"), actual.GetParam("bookNames", ""));
         }
 
         [Test]
@@ -619,7 +619,7 @@ namespace Test.theWordConvert
             var exportTheWordAssembly = Assembly.GetAssembly(typeof (ExportTheWord));
             var outPath = Path.GetDirectoryName(exportTheWordAssembly.Location);
             Debug.Assert(!string.IsNullOrEmpty(outPath));
-            File.Copy(inVrs, Path.Combine(outPath, vrsName));
+            File.Copy(inVrs, Path.Combine(outPath, vrsName), true);
             const string nkont = "nko.nt";
             var outName = Path.Combine(Path.Combine(_outputPath, "TheWord"), nkont);
             File.Copy(Path.Combine(_inputPath, nkont), outName, true); // overwrite
@@ -728,7 +728,7 @@ namespace Test.theWordConvert
         {
             ParatextData = null;
             Ssf = "";
-            string expected = "file:///" + Path.Combine(_inputPath, Path.Combine("USX", "BookNames.xml"));
+            string expected = FileUrlPrefix + Path.Combine(_inputPath, Path.Combine("USX", "BookNames.xml"));
             string actual = GetBookNamesUri(_inputPath);
             Assert.AreEqual(expected, actual);
        }

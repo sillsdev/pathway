@@ -47,6 +47,17 @@ namespace SIL.PublishingSolution
         protected static readonly XslCompiledTransform Xhtml2Usx = new XslCompiledTransform();
         protected static readonly XslCompiledTransform Xhtml2BookNames = new XslCompiledTransform();
 
+        protected static string FileUrlPrefix
+        {
+            get
+            {
+                if (Common.IsUnixOS())
+                    return "file://";
+                else
+                    return "file:///";
+            }
+        }
+
         public string ExportType
         {
             get
@@ -248,7 +259,7 @@ namespace SIL.PublishingSolution
         private XsltArgumentList LoadXhtml2XslArgs()
         {
             var xsltArgs = new XsltArgumentList();
-            xsltArgs.AddParam("map", "", "file:///" + Common.FromRegistry("StyleMap.xml"));
+            xsltArgs.AddParam("map", "", FileUrlPrefix + Common.FromRegistry("StyleMap.xml"));
             return xsltArgs;
         }
 
@@ -577,7 +588,7 @@ namespace SIL.PublishingSolution
             var pathInfo = new DirectoryInfo(Common.PathCombine(path, "USX"));
             var gloFile = pathInfo.GetFiles("GLO.usx");
             if (gloFile.Length > 0)
-                return "file:///" + gloFile[0].FullName;
+                return FileUrlPrefix + gloFile[0].FullName;
             foreach (var fileInfo in pathInfo.GetFiles("XX*.usx"))
             {
                 var sr = new StreamReader(fileInfo.FullName);
@@ -587,13 +598,13 @@ namespace SIL.PublishingSolution
                     if (line == null) break;
                     if (line.ToLower().Contains("glossary"))
                     {
-                        return "file:///" + fileInfo.FullName;
+                        return FileUrlPrefix + fileInfo.FullName;
                     }
                 }
 
             }
             MakeTempGlossary();
-            return "file:///" + _tempGlossaryName;
+            return FileUrlPrefix + _tempGlossaryName;
         }
 
         private static void MakeTempGlossary()
@@ -643,10 +654,10 @@ namespace SIL.PublishingSolution
         {
             if (string.IsNullOrEmpty(Ssf))
             {
-                return "file:///" + Common.PathCombine(UsxDir(exportTheWordInputPath), "BookNames.xml");
+                return FileUrlPrefix + Common.PathCombine(UsxDir(exportTheWordInputPath), "BookNames.xml");
             }
             var myProj = Common.PathCombine((string) ParatextData, GetSsfValue("//Name"));
-            return "file:///" + Common.PathCombine(myProj, "BookNames.xml");
+            return FileUrlPrefix + Common.PathCombine(myProj, "BookNames.xml");
         }
 
         protected static string UsxDir(string exportTheWordInputPath)
