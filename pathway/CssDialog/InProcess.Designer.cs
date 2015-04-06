@@ -1,4 +1,6 @@
-﻿namespace SIL.PublishingSolution
+﻿using SIL.Tool;
+
+namespace SIL.PublishingSolution
 {
     partial class InProcess : IInProcess
     {
@@ -28,16 +30,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
+            if (!Common.Testing)
+                this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblDetails = new System.Windows.Forms.Label();
             this.SuspendLayout();
 
             // l10NSharpExtender1
             // 
-            this.l10NSharpExtender1.LocalizationManagerId = "Pathway";
-            this.l10NSharpExtender1.PrefixForNewItems = "InProcess";
-
+            if (!Common.Testing)
+            {
+                this.l10NSharpExtender1.LocalizationManagerId = "Pathway";
+                this.l10NSharpExtender1.PrefixForNewItems = "InProcess";
+            }
             // 
             // progressBar1
             // 
@@ -65,9 +70,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this, null);
-            this.l10NSharpExtender1.SetLocalizingId(this, "InProcess.WindowTitle");
+            if (!Common.Testing)
+            {
+                this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
+                this.l10NSharpExtender1.SetLocalizationComment(this, null);
+                this.l10NSharpExtender1.SetLocalizingId(this, "InProcess.WindowTitle");
+            }
             this.Name = "InProcess";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
