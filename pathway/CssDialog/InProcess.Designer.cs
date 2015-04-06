@@ -30,19 +30,19 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void InitializeComponent()
         {
-            if (!Common.Testing)
-                this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InProcess));
+
+            this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblDetails = new System.Windows.Forms.Label();
             this.SuspendLayout();
 
             // l10NSharpExtender1
             // 
-            if (!Common.Testing)
-            {
-                this.l10NSharpExtender1.LocalizationManagerId = "Pathway";
-                this.l10NSharpExtender1.PrefixForNewItems = "InProcess";
-            }
+            this.l10NSharpExtender1.LocalizationManagerId = "Pathway";
+            this.l10NSharpExtender1.PrefixForNewItems = "InProcess";
+
             // 
             // progressBar1
             // 
@@ -70,12 +70,11 @@ namespace SIL.PublishingSolution
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            if (!Common.Testing)
-            {
-                this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
-                this.l10NSharpExtender1.SetLocalizationComment(this, null);
-                this.l10NSharpExtender1.SetLocalizingId(this, "InProcess.WindowTitle");
-            }
+
+            this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this, null);
+            this.l10NSharpExtender1.SetLocalizingId(this, "InProcess.WindowTitle");
+
             this.Name = "InProcess";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
