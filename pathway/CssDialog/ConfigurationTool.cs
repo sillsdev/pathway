@@ -20,14 +20,13 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using DesktopAnalytics;
 using L10NSharp;
 using SIL.PublishingSolution.Properties;
 using SIL.Tool;
-using L10NSharp;
-using Palaso;
-using Palaso.IO;
 using Palaso.Reporting;
 using System.Collections.Generic;
 
@@ -99,9 +98,21 @@ namespace SIL.PublishingSolution
                 "More...", "Last item in menu of UI languages"));
             menu.Click += ((a, b) =>
             {
+                InitializeOtherProjects();
                 LocalizationManager.ShowLocalizationDialogBox(this);
                 SetupUILanguageMenu();
             });
+        }
+
+        private static void InitializeOtherProjects()
+        {
+            string epubinstalleddirectory = Common.FromRegistry("epubConvert.dll");
+
+            var s_assembly = Assembly.LoadFrom(epubinstalleddirectory);
+            foreach (var type in s_assembly.GetTypes().Where(s => s.BaseType == typeof (Form)))
+            {
+                s_assembly.CreateInstance(type.FullName);
+            }
         }
 
         #endregion
@@ -1383,7 +1394,7 @@ namespace SIL.PublishingSolution
             string desiredUiLangId = Settings.Default.UserInterfaceLanguage;
             desiredUiLangId = "en";
             LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-                null, targetTmxFilePath, null, IssuesEmailAddress, "Pathway");
+                null, targetTmxFilePath, null, IssuesEmailAddress, "SIL.PublishingSolution");
         }
 
         /// <summary>

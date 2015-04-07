@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -9,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using epubConvert.Properties;
 using epubValidator;
+using L10NSharp;
 using SIL.Tool;
 
 namespace epubConvert
@@ -16,8 +14,18 @@ namespace epubConvert
     public partial class EpubExportTypeDlg : Form
     {
         public string _exportType = "cancel";
+        public const string kCompany = "SIL";
+        public const string kProduct = "Pathway";
+        /// <summary>
+        /// The email address people should write to with problems (or new localizations?) for HearThis.
+        /// </summary>
+        public static string IssuesEmailAddress
+        {
+            get { return "pathway@sil.org"; }
+        }
        public EpubExportTypeDlg()
         {
+            SetupLocalization();
             InitializeComponent();
         }
 
@@ -53,7 +61,13 @@ namespace epubConvert
             lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Regular);
             lblMessage.SelectedText = "Some readers cannot display Epub3 files correctly.";
         }
-
+        private static void SetupLocalization()
+        {
+            var targetTmxFilePath = Path.Combine(kCompany, kProduct);
+            const string desiredUiLangId = "en";
+            LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
+                null, targetTmxFilePath, null, IssuesEmailAddress, "epubConvert");
+        }
        private void ValidateAndDisplayResult(string outputFolder, string fileName, string outputPathWithFileName)
         {
             // Postscript - validate the file using our epubcheck wrapper
