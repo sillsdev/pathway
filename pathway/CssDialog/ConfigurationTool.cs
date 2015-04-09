@@ -25,6 +25,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using DesktopAnalytics;
 using L10NSharp;
+using Palaso.IO;
 using SIL.PublishingSolution.Properties;
 using SIL.Tool;
 using Palaso.Reporting;
@@ -55,6 +56,8 @@ namespace SIL.PublishingSolution
         public ConfigurationTool()
         {
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
+
+            SetupLocalization();
             InitializeComponent();
             SetupUILanguageMenu();
 
@@ -869,7 +872,6 @@ namespace SIL.PublishingSolution
         private void ConfigurationTool_Load(object sender, EventArgs e)
         {
             SetUpErrorHandling();
-            SetupLocalization();
 
             _CToolBL = new ConfigurationToolBL();
             _CToolBL.inputTypeBL = InputType;
@@ -929,6 +931,7 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.ConfigurationTool_FormClosingBL();
             Style = _CToolBL.StyleEXE.ToString();
+            Settings.Default.Save();
         }
 
         private void btnDictionary_Click(object sender, EventArgs e)
@@ -1389,12 +1392,11 @@ namespace SIL.PublishingSolution
 
         private static void SetupLocalization()
         {
-            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
+            var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
             var targetTmxFilePath = Path.Combine(kCompany, kProduct);
             string desiredUiLangId = Settings.Default.UserInterfaceLanguage;
-            desiredUiLangId = "en";
             LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-                null, targetTmxFilePath, null, IssuesEmailAddress, "SIL.PublishingSolution");
+                installedStringFileFolder, targetTmxFilePath, null, IssuesEmailAddress, "SIL.PublishingSolution");
         }
 
         /// <summary>
