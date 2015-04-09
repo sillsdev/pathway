@@ -215,6 +215,7 @@
             this.Text = "SIL International";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.frmSplash_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

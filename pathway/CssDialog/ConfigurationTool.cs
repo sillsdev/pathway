@@ -55,7 +55,6 @@ namespace SIL.PublishingSolution
         public ConfigurationTool()
         {
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
-
             SetupLocalization();
             InitializeComponent();
             SetupUILanguageMenu();
@@ -871,6 +870,7 @@ namespace SIL.PublishingSolution
         private void ConfigurationTool_Load(object sender, EventArgs e)
         {
             SetUpErrorHandling();
+            
 
             _CToolBL = new ConfigurationToolBL();
             _CToolBL.inputTypeBL = InputType;
