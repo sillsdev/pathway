@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
             this.btnBoth = new System.Windows.Forms.Button();
             this.btnNeither = new System.Windows.Forms.Button();
             this.grpExportType = new System.Windows.Forms.GroupBox();
@@ -37,10 +39,14 @@
             this.btnValidateEpub2 = new System.Windows.Forms.Button();
             this.grpExportType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IcnInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBoth
-            // 
+            //
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnBoth, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnBoth, null);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnBoth, "EpubValidateTypeDlg.btnBoth");
             this.btnBoth.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnBoth.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBoth.Location = new System.Drawing.Point(286, 389);
@@ -53,6 +59,9 @@
             // 
             // btnNeither
             // 
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnNeither, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnNeither, null);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnNeither, "EpubValidateTypeDlg.btnNeither");
             this.btnNeither.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnNeither.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNeither.Location = new System.Drawing.Point(386, 389);
@@ -65,6 +74,9 @@
             // 
             // grpExportType
             // 
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.grpExportType, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.grpExportType, null);
+            this.l10NSharpExtender1.SetLocalizingId(this.grpExportType, "EpubValidateTypeDlg.grpExportType");
             this.grpExportType.BackColor = System.Drawing.Color.White;
             this.grpExportType.Controls.Add(this.lblMessage);
             this.grpExportType.Controls.Add(this.IcnInfo);
@@ -77,6 +89,9 @@
             // 
             // lblMessage
             // 
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.lblMessage, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.lblMessage, null);
+            this.l10NSharpExtender1.SetLocalizingId(this.lblMessage, "EpubValidateTypeDlg.lblMessage");
             this.lblMessage.AutoSize = true;
             this.lblMessage.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessage.Location = new System.Drawing.Point(69, 33);
@@ -88,6 +103,9 @@
             // 
             // IcnInfo
             // 
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.IcnInfo, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.IcnInfo, null);
+            this.l10NSharpExtender1.SetLocalizingId(this.IcnInfo, "EpubValidateTypeDlg.IcnInfo");
             this.IcnInfo.Location = new System.Drawing.Point(26, 33);
             this.IcnInfo.Name = "IcnInfo";
             this.IcnInfo.Size = new System.Drawing.Size(38, 35);
@@ -96,6 +114,9 @@
             // 
             // btnValidateEpub3
             // 
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnValidateEpub3, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnValidateEpub3, null);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnValidateEpub3, "EpubValidateTypeDlg.btnValidateEpub3");
             this.btnValidateEpub3.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnValidateEpub3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnValidateEpub3.Location = new System.Drawing.Point(186, 389);
@@ -108,6 +129,9 @@
             // 
             // btnValidateEpub2
             // 
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnValidateEpub2, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnValidateEpub2, null);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnValidateEpub2, "EpubValidateTypeDlg.btnValidateEpub2");
             this.btnValidateEpub2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnValidateEpub2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnValidateEpub2.Location = new System.Drawing.Point(86, 389);
@@ -117,8 +141,13 @@
             this.btnValidateEpub2.Text = "Epub&2";
             this.btnValidateEpub2.UseVisualStyleBackColor = true;
             this.btnValidateEpub2.Click += new System.EventHandler(this.btnValidateEpub2_Click);
+            
+            // l10NSharpExtender1
             // 
-            // EpubExportTypeDlg
+            this.l10NSharpExtender1.LocalizationManagerId = "Pathway";
+            this.l10NSharpExtender1.PrefixForNewItems = "EpubValidateTypeDlg";
+            // 
+            // EpubValidateTypeDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -130,19 +159,23 @@
             this.Controls.Add(this.btnBoth);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this, null);
+            this.l10NSharpExtender1.SetLocalizingId(this, "EpubValidateTypeDlg.WindowTitle");
             this.Name = "EpubValidateTypeDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Open Validate Type";
             this.Load += new System.EventHandler(this.EpubValidateTypeDlg_Load);
             this.grpExportType.ResumeLayout(false);
             this.grpExportType.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IcnInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
+        private L10NSharp.UI.L10NSharpExtender l10NSharpExtender1;
         private System.Windows.Forms.Button btnBoth;
         private System.Windows.Forms.Button btnNeither;
         private System.Windows.Forms.GroupBox grpExportType;

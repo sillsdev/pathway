@@ -17,6 +17,7 @@
 // --------------------------------------------------------------------------------------
 using System;
 using System.Windows.Forms;
+using SIL.Tool;
 
 namespace epubValidator
 {
@@ -26,6 +27,7 @@ namespace epubValidator
 
         public frmResults()
         {
+            Common.SetupLocalization("epubValidator");
             InitializeComponent();
         }
 

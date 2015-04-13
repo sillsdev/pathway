@@ -35,27 +35,30 @@ namespace SIL.PublishingSolution
     public partial class ConfigurationTool : Form
     {
         #region Private Variables
+
         public ConfigurationToolBL _CToolBL = new ConfigurationToolBL();
         public string _previousTxtName;
         private string _lastSelectedLayout = string.Empty;
         private TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
         private static List<Exception> _pendingExceptionsToReportToAnalytics = new List<Exception>();
+
         #endregion
 
         #region Public Variable
-        public const string kCompany = "SIL";
-        public const string kProduct = "Pathway";
+
         public bool _fromNunit = false;
         public string InputType = string.Empty;
         public string MediaType = string.Empty;
         public string Style = string.Empty;
+
         #endregion
 
         #region Constructor
+
         public ConfigurationTool()
         {
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
-            SetupLocalization();
+            Common.SetupLocalization("SIL.PublishingSolution");
             InitializeComponent();
             SetupUILanguageMenu();
 
@@ -83,14 +86,14 @@ namespace SIL.PublishingSolution
                 item.Tag = lang;
                 item.Click += ((a, b) =>
                 {
-                    LocalizationManager.SetUILanguage(((CultureInfo)item.Tag).IetfLanguageTag, true);
-                    Settings.Default.UserInterfaceLanguage = ((CultureInfo)item.Tag).IetfLanguageTag;
+                    LocalizationManager.SetUILanguage(((CultureInfo) item.Tag).IetfLanguageTag, true);
+                    Settings.Default.UserInterfaceLanguage = ((CultureInfo) item.Tag).IetfLanguageTag;
                     item.Select();
-                    _uiLanguageMenu.Text = ((CultureInfo)item.Tag).NativeName;
+                    _uiLanguageMenu.Text = ((CultureInfo) item.Tag).NativeName;
                 });
-                if (((CultureInfo)item.Tag).IetfLanguageTag == Settings.Default.UserInterfaceLanguage)
+                if (((CultureInfo) item.Tag).IetfLanguageTag == Settings.Default.UserInterfaceLanguage)
                 {
-                    _uiLanguageMenu.Text = ((CultureInfo)item.Tag).NativeName;
+                    _uiLanguageMenu.Text = ((CultureInfo) item.Tag).NativeName;
                 }
             }
 
@@ -107,18 +110,38 @@ namespace SIL.PublishingSolution
 
         private static void InitializeOtherProjects()
         {
-            string epubinstalleddirectory = Common.FromRegistry("epubConvert.dll");
-
-            var s_assembly = Assembly.LoadFrom(epubinstalleddirectory);
-            foreach (var type in s_assembly.GetTypes().Where(s => s.BaseType == typeof (Form)))
+            using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry("epubConvert.dll")))
             {
-                s_assembly.CreateInstance(type.FullName);
+
+                var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
+
+                foreach (
+                    var stype in
+                        sAssembly.GetTypes()
+                            .Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+                {
+                    sAssembly.CreateInstance(stype.FullName);
+                }              
             }
+            using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry("epubValidator.exe")))
+            {
+                var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
+                foreach (
+                    var stype in
+                        sAssembly.GetTypes()
+                            .Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+                {
+                    sAssembly.CreateInstance(stype.FullName);
+                }
+
+            }
+            GC.Collect();
         }
 
         #endregion
 
         #region Method
+
         protected static void RemoveSettingsFile()
         {
             string allUsersPath = Common.GetAllUserPath();
@@ -178,6 +201,7 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region Property
+
         public DataGridView StylesGrid
         {
             get { return stylesGrid; }
@@ -262,7 +286,7 @@ namespace SIL.PublishingSolution
         {
             get { return chkPageBreaks; }
         }
-        
+
 
         public TextBox TxtComment
         {
@@ -864,13 +888,15 @@ namespace SIL.PublishingSolution
         {
             get { return chkDisableWO; }
         }
+
         #endregion
 
         #region Event Method
+
         private void ConfigurationTool_Load(object sender, EventArgs e)
         {
             SetUpErrorHandling();
-            
+
 
             _CToolBL = new ConfigurationToolBL();
             _CToolBL.inputTypeBL = InputType;
@@ -931,8 +957,8 @@ namespace SIL.PublishingSolution
             _CToolBL.ConfigurationTool_FormClosingBL();
             Style = _CToolBL.StyleEXE.ToString();
             Settings.Default.Save();
+            Common.SaveLocalizationSettings(Settings.Default.UserInterfaceLanguage);
         }
-
         private void btnDictionary_Click(object sender, EventArgs e)
         {
             _CToolBL.btnDictionary_ClickBL();
@@ -1387,15 +1413,6 @@ namespace SIL.PublishingSolution
                 File.Delete(e.Filename);
                 return e.Filename;
             }
-        }
-
-        private static void SetupLocalization()
-        {
-            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
-            var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-            string desiredUiLangId = Settings.Default.UserInterfaceLanguage;
-            LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-                null, targetTmxFilePath, null, IssuesEmailAddress, "SIL.PublishingSolution");
         }
 
         /// <summary>

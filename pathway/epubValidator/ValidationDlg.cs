@@ -19,16 +19,17 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Resources;
+using SIL.Tool;
 
 namespace epubValidator
 {
     public partial class ValidationDialog : Form
     {
-        public string FileName { get; set; }
-
+        public string FileName { get; set; }
         ResourceManager _rm = new ResourceManager("epubValidator.Properties.Resources", typeof(ValidationDialog).Assembly);
         public ValidationDialog()
         {
+            Common.SetupLocalization("epubValidator");
             InitializeComponent();
         }
 
@@ -91,6 +92,6 @@ namespace epubValidator
         {
             Close();
         }
-
+       
     }
 }

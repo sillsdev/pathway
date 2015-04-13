@@ -30,7 +30,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
 using System.Xml.Xsl;
+using L10NSharp;
 using Microsoft.Win32;
+using Palaso.Xml;
 using SIL.Tool.Localization;
 
 #endregion Using
@@ -79,7 +81,15 @@ namespace SIL.Tool
         public static string databaseName = string.Empty;
         public static DateTime TimeStarted { get; set; }
         public static OutputType _outputType = OutputType.ODT;
-
+        public const string kCompany = "SIL";
+        public const string kProduct = "Pathway";
+        /// <summary>
+        /// The email address people should write to with problems (or new localizations?) for Pathway.
+        /// </summary>
+        public static string IssuesEmailAddress
+        {
+            get { return "pathway@sil.org"; }
+        }
         public enum FileType
         {
             Directory,
@@ -4554,5 +4564,37 @@ namespace SIL.Tool
             }
             return filePath;
         }
+        #region "Localization"
+        public static void SaveLocalizationSettings(string setting)
+        {
+            string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
+            string content = XmlSerializationHelper.SerializeToString(setting);
+            File.WriteAllText(fileName, content);
+        }
+
+        public static string GetLocalizationSettings()
+        {
+            try
+            {
+                var fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
+                var content = File.ReadAllText(fileName);
+                var doc = new XmlDocument();
+                doc.LoadXml(content);
+                var node = doc.SelectSingleNode("//string");
+                return (node != null) ? node.InnerText : "en";
+            }
+            catch (Exception)
+            {
+                return "en";
+            }
+        }
+        public static void SetupLocalization(string namespaces)
+        {
+            var targetTmxFilePath = Path.Combine(kCompany, kProduct);
+            var desiredUiLangId = GetLocalizationSettings();
+            LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
+                null, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
+        }
+        #endregion
     }
 }

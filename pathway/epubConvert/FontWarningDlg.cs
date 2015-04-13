@@ -85,13 +85,14 @@ namespace epubConvert
         // variables
         private PrivateFontCollection pfc = new PrivateFontCollection();
         private string[] _silFonts;
-
+        
         // methods
         /// <summary>
         /// Constructor.
         /// </summary>
         public FontWarningDlg()
         {
+            Common.SetupLocalization("epubConvert");
             InitializeComponent();
         }
         
@@ -193,6 +194,5 @@ namespace epubConvert
         {
             RepeatAction = chkRepeatAction.Checked;
         }
-
     }
 }

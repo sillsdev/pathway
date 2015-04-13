@@ -209,6 +209,12 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="L10NSharp">
+      <HintPath>..\ThirdParty\L10NSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Palaso">
+      <HintPath>..\ThirdParty\Palaso.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
