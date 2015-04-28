@@ -51,7 +51,7 @@
             this.l10NSharpExtender1.SetLocalizationComment(this.icnWarning, null);
             this.l10NSharpExtender1.SetLocalizingId(this.icnWarning, "FontWarningDlg.icnWarning");
             this.icnWarning.Location = new System.Drawing.Point(16, 15);
-            this.icnWarning.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.icnWarning.Margin = new System.Windows.Forms.Padding(4);
             this.icnWarning.Name = "icnWarning";
             this.icnWarning.Size = new System.Drawing.Size(32, 32);
             this.icnWarning.TabIndex = 1;
@@ -67,7 +67,7 @@
             this.l10NSharpExtender1.SetLocalizationComment(this.grpOptions, null);
             this.l10NSharpExtender1.SetLocalizingId(this.grpOptions, "FontWarningDlg.grpOptions");
             this.grpOptions.Location = new System.Drawing.Point(16, 98);
-            this.grpOptions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpOptions.Margin = new System.Windows.Forms.Padding(4);
             this.grpOptions.Name = "grpOptions";
             this.grpOptions.Size = new System.Drawing.Size(410, 75);
             this.grpOptions.TabIndex = 3;
@@ -96,8 +96,8 @@
             this.l10NSharpExtender1.SetLocalizableToolTip(this.ddlSILFonts, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.ddlSILFonts, null);
             this.l10NSharpExtender1.SetLocalizingId(this.ddlSILFonts, "FontWarningDlg.ddlSILFonts");
-            this.ddlSILFonts.Location = new System.Drawing.Point(255, 53);
-            this.ddlSILFonts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ddlSILFonts.Location = new System.Drawing.Point(192, 50);
+            this.ddlSILFonts.Margin = new System.Windows.Forms.Padding(4);
             this.ddlSILFonts.Name = "ddlSILFonts";
             this.ddlSILFonts.Size = new System.Drawing.Size(213, 21);
             this.ddlSILFonts.TabIndex = 2;
@@ -111,7 +111,7 @@
             this.l10NSharpExtender1.SetLocalizationComment(this.rdoConvertToSILFont, null);
             this.l10NSharpExtender1.SetLocalizingId(this.rdoConvertToSILFont, "FontWarningDlg.rdoConvertToSILFont");
             this.rdoConvertToSILFont.Location = new System.Drawing.Point(9, 54);
-            this.rdoConvertToSILFont.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoConvertToSILFont.Margin = new System.Windows.Forms.Padding(4);
             this.rdoConvertToSILFont.Name = "rdoConvertToSILFont";
             this.rdoConvertToSILFont.Size = new System.Drawing.Size(127, 17);
             this.rdoConvertToSILFont.TabIndex = 1;
@@ -127,7 +127,7 @@
             this.l10NSharpExtender1.SetLocalizationComment(this.rdoEmbedFont, null);
             this.l10NSharpExtender1.SetLocalizingId(this.rdoEmbedFont, "FontWarningDlg.rdoEmbedFont");
             this.rdoEmbedFont.Location = new System.Drawing.Point(9, 26);
-            this.rdoEmbedFont.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoEmbedFont.Margin = new System.Windows.Forms.Padding(4);
             this.rdoEmbedFont.Name = "rdoEmbedFont";
             this.rdoEmbedFont.Size = new System.Drawing.Size(94, 17);
             this.rdoEmbedFont.TabIndex = 0;
@@ -142,8 +142,8 @@
             this.l10NSharpExtender1.SetLocalizableToolTip(this.btn_OK, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.btn_OK, null);
             this.l10NSharpExtender1.SetLocalizingId(this.btn_OK, "FontWarningDlg.btn_OK");
-            this.btn_OK.Location = new System.Drawing.Point(347, 207);
-            this.btn_OK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_OK.Location = new System.Drawing.Point(238, 208);
+            this.btn_OK.Margin = new System.Windows.Forms.Padding(4);
             this.btn_OK.Name = "btn_OK";
             this.btn_OK.Size = new System.Drawing.Size(75, 23);
             this.btn_OK.TabIndex = 4;
@@ -156,8 +156,8 @@
             this.l10NSharpExtender1.SetLocalizableToolTip(this.btnCancel, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.btnCancel, null);
             this.l10NSharpExtender1.SetLocalizingId(this.btnCancel, "FontWarningDlg.btnCancel");
-            this.btnCancel.Location = new System.Drawing.Point(455, 207);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Location = new System.Drawing.Point(346, 208);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 5;
@@ -172,11 +172,11 @@
             this.l10NSharpExtender1.SetLocalizationComment(this.txtWarning, null);
             this.l10NSharpExtender1.SetLocalizingId(this.txtWarning, "FontWarningDlg.txtWarning");
             this.txtWarning.Location = new System.Drawing.Point(80, 15);
-            this.txtWarning.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtWarning.Margin = new System.Windows.Forms.Padding(4);
             this.txtWarning.Multiline = true;
             this.txtWarning.Name = "txtWarning";
             this.txtWarning.ReadOnly = true;
-            this.txtWarning.Size = new System.Drawing.Size(362, 62);
+            this.txtWarning.Size = new System.Drawing.Size(341, 62);
             this.txtWarning.TabIndex = 6;
             // 
             // chkRepeatAction
@@ -186,7 +186,7 @@
             this.l10NSharpExtender1.SetLocalizationComment(this.chkRepeatAction, null);
             this.l10NSharpExtender1.SetLocalizingId(this.chkRepeatAction, "FontWarningDlg.chkRepeatAction");
             this.chkRepeatAction.Location = new System.Drawing.Point(17, 212);
-            this.chkRepeatAction.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkRepeatAction.Margin = new System.Windows.Forms.Padding(4);
             this.chkRepeatAction.Name = "chkRepeatAction";
             this.chkRepeatAction.Size = new System.Drawing.Size(109, 17);
             this.chkRepeatAction.TabIndex = 7;
@@ -205,7 +205,7 @@
             this.AcceptButton = this.btn_OK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 202);
+            this.ClientSize = new System.Drawing.Size(434, 239);
             this.Controls.Add(this.chkRepeatAction);
             this.Controls.Add(this.txtWarning);
             this.Controls.Add(this.btnCancel);
@@ -215,7 +215,7 @@
             this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
             this.l10NSharpExtender1.SetLocalizationComment(this, null);
             this.l10NSharpExtender1.SetLocalizingId(this, "FontWarningDlg.WindowTitle");
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FontWarningDlg";
