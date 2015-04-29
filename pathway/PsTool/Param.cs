@@ -25,6 +25,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Schema;
+using L10NSharp;
 using SIL.PublishingSolution;
 
 namespace SIL.Tool
@@ -245,7 +246,8 @@ namespace SIL.Tool
 				sb.AppendLine("The full exception encountered is shown below.");
 				sb.AppendLine();
 				sb.AppendLine(ex.ToString());
-				MessageBox.Show(sb.ToString(), "Fatal Error");
+                var msg = LocalizationManager.GetString("Param.LoadValues.Message", sb.ToString(), "");
+                MessageBox.Show(msg, "Fatal Error");
 				return null;
 			}
         }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using epubConvert.Properties;
 using epubValidator;
+using L10NSharp;
 using SIL.Tool;
 
 namespace epubConvert
@@ -63,7 +64,8 @@ namespace epubConvert
             }
             else
             {
-                if (MessageBox.Show(Resources.ExportCallingEpubValidator + "\r\nDo you want to Validate ePub file",
+                var msg = LocalizationManager.GetString("EpubExportTypeDlg.ValidateAndDisplay.Message", "\r\nDo you want to Validate ePub file", "");
+                if (MessageBox.Show(Resources.ExportCallingEpubValidator + msg,
                     Resources.ExportComplete, MessageBoxButtons.YesNo,
                     MessageBoxIcon.Information) == DialogResult.Yes)
                 {

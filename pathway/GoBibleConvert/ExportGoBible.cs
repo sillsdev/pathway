@@ -30,6 +30,7 @@ using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
 using System.Threading;
+using L10NSharp;
 
 
 namespace SIL.PublishingSolution
@@ -152,9 +153,8 @@ namespace SIL.PublishingSolution
                     if (!Common.Testing)
                     {
                         // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
-                        string msg =
-                            string.Format("Please copy the file {0} to your phone.\n\nDo you want to open the folder?",
-                                          jarFile);
+                        var msg = LocalizationManager.GetString("ExportGoBible.ExportClick.Message1", "Please copy the file {0} to your phone.\n\nDo you want to open the folder?", "");
+                        msg = string.Format(msg, jarFile);
                         DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo,
                                                                     MessageBoxIcon.Information);
 
@@ -174,7 +174,8 @@ namespace SIL.PublishingSolution
                     inProcess.Close();
                     if (!Common.Testing)
                     {
-                        MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK,
+                        var msg = LocalizationManager.GetString("ExportGoBible.ExportClick.Message2", "Failed Exporting GoBible Process.", "");
+                        MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.OK,
                                         MessageBoxIcon.Information);
                     }
                 }

@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using JWTools;
+using L10NSharp;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -142,7 +143,8 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    MessageBox.Show(string.Format(err.ToString(), "Sorry! You might not have permission to use this resource."), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    var msg = LocalizationManager.GetString("PsExport.ExportClick.Message", "Sorry! You might not have permission to use this resource.", "");
+                    MessageBox.Show(string.Format(err.ToString(), msg), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return;
             }

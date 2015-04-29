@@ -410,7 +410,7 @@ namespace SIL.PublishingSolution
 
                         if (!success)
                         {
-                            var message = LocalizationManager.GetString("ConfigurationToolBL.CreatePreviewFile.Message", "Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", "");
+                            var message = LocalizationManager.GetString("PreviewPrintVia.CreatePreviewFile.Message", "Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", "");
                             MessageBox.Show(message, "Select Layout", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                         }
 

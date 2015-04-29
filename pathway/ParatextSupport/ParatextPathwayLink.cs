@@ -23,6 +23,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Xsl;
+using L10NSharp;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -453,9 +454,8 @@ namespace SIL.PublishingSolution
             if (File.Exists(fileName))
             {
                 // TODO: Localize string
-                result = MessageBox.Show(string.Format("{0}" + Environment.NewLine +
-                    " already exists. Overwrite?", fileName), string.Empty,
-                    MessageBoxButtons.YesNo);
+                var msg = LocalizationManager.GetString("ParatextPathwayLink.ExportProcess.Message1", " already exists. Overwrite?", "");
+                result = MessageBox.Show(string.Format("{0}" + Environment.NewLine + msg, fileName), string.Empty, MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
                     fileName = Common.PathCombine(MOutputLocationPath, pubName + "-" + DateTime.Now.Second + ".xhtml");
@@ -470,7 +470,7 @@ namespace SIL.PublishingSolution
             inProcess.PerformStep();
             if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
             {
-                const string message = "The current book has no content to export.";
+                var message = LocalizationManager.GetString("ParatextPathwayLink.ExportProcess.Message2", "The current book has no content to export.", "");
                 MessageBox.Show(message, string.Empty, MessageBoxButtons.OK);
                 return;
             }
