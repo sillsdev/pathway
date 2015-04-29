@@ -29,6 +29,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using L10NSharp;
 using SIL.Tool;
 
 
@@ -882,10 +883,10 @@ namespace SIL.PublishingSolution
                 }
                 catch (Exception ex)
                 {
-                    string message =
-                        "Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" +
-                        ex.Message + "'";
-                    MessageBox.Show(message, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                    var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.NoDuplicateStyleName.Message", 
+                        "Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'", "");
+                    confirmationStringMessage = string.Format(confirmationStringMessage, ex.Message);
+                    MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
                                     MessageBoxDefaultButton.Button1);
                 }
             }
@@ -2068,11 +2069,12 @@ namespace SIL.PublishingSolution
         /// <returns>True/False</returns>
         protected bool ValidateStyleName(string stringValue)
         {
-            string result = string.Empty;
+            string result1 = string.Empty;
+            var validateStringMessage = string.Empty;
             bool valid = true;
             if (!Common.ValidateStartsWithAlphabet(stringValue))
             {
-                result = "Style name should not be empty. Please enter the valid name";
+                validateStringMessage = LocalizationManager.GetString("ConfigurationToolBL.ValidateStyleName.Message1", "Style name should not be empty. Please enter the valid name", "");
             }
             else
             {
@@ -2081,14 +2083,15 @@ namespace SIL.PublishingSolution
                     if (!(ch == '-' || ch == '_' || ch == ' ' || ch == '.' || ch == '(' || ch == ')' ||
                         (ch >= 48 && ch <= 57) || (ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)))
                     {
-                        result = "Please avoid " + ch + " in the Style name";
+                        validateStringMessage = LocalizationManager.GetString("ConfigurationToolBL.ValidateStyleName.Message2", "Please avoid {0} in the Style name", "");
+                        validateStringMessage = string.Format(validateStringMessage, ch);
                         break;
                     }
                 }
             }
-            if (result != string.Empty)
+            if (validateStringMessage != string.Empty)
             {
-                MessageBox.Show(result, _caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(validateStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 valid = false;
             }
             return valid;
@@ -2103,8 +2106,9 @@ namespace SIL.PublishingSolution
                 // Edit- Check it, while the name changed in Stylename textBox.
                 if (IsNameExists(cTool.StylesGrid, cTool.TxtName.Text))
                 {
-                    MessageBox.Show("Stylesheet Name [" + cTool.TxtName.Text + "] already exists", _caption,
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.NoDuplicateStyleName.Message", "Stylesheet Name [{0}] already exists", "");
+                    confirmationStringMessage = string.Format(confirmationStringMessage, cTool.TxtName.Text);
+                    MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     result = false;
                 }
                 cTool._previousTxtName = cTool.TxtName.Text;
@@ -2455,9 +2459,8 @@ namespace SIL.PublishingSolution
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
             if (PreviousStyleName.Length > 50)
             {
-                const string message = "Styles should not be greater than 50 characters.";
-                MessageBox.Show(message, Caption, MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.CopyStyle.Message", "Styles should not be greater than 50 characters.", "");
+                MessageBox.Show(confirmationStringMessage, Caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             var currentDescription = "Based on " + currentApprovedBy + " stylesheet " + StyleName;
@@ -3204,7 +3207,8 @@ namespace SIL.PublishingSolution
                     double width = iconImage.Width;
                     if (height != 20 || width != 20)
                     {
-                        MessageBox.Show("Please choose the icon with 20 x 20 dim.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.BrowseButton.Message", "Please choose the icon with 20 x 20 dim.", "");
+                        MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
                     string userPath = (Param.Value["UserSheetPath"]);
@@ -3464,7 +3468,8 @@ namespace SIL.PublishingSolution
 
                         if (!success)
                         {
-                            MessageBox.Show(@"Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                            var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.CreatePreviewFile.Message", "Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", "");
+                            MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                         }
 
                         PreviewFileName1 = Common.PathCombine(stylenamePath, "PreviewMessage.jpg");
@@ -3876,7 +3881,9 @@ namespace SIL.PublishingSolution
                     string errMsg = CreateCssFile(FileName);
                     if (errMsg.Length > 0)
                     {
-                        MessageBox.Show(@"Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + errMsg + @"'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                        var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.NameValidate.Message", "Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'", "");
+                        confirmationStringMessage = String.Format(confirmationStringMessage, errMsg);
+                        MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     }
                     AddNew(cTool.TxtName.Text);
                     EnableToolStripButtons(true);
@@ -4172,6 +4179,7 @@ namespace SIL.PublishingSolution
                 }
                 catch (Exception ex)
                 {
+
                     MessageBox.Show(ex.Message, _caption);
                 }
             }
@@ -4406,11 +4414,12 @@ namespace SIL.PublishingSolution
         {
             _screenMode = ScreenMode.Delete;
             string name = cTool.TxtName.Text;
-            string msg = "Are you sure you want to delete the " + name + " stylesheet?";
             string caption = "Delete Stylesheet";
+            var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabDeleteClick.Message1", "Are you sure you want to delete the {0} stylesheet?", "");
+            confirmationStringMessage = string.Format(confirmationStringMessage, name);
             if (!cTool._fromNunit)
             {
-                DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
+                DialogResult result = MessageBox.Show(confirmationStringMessage, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
                                                       MessageBoxDefaultButton.Button2);
                 if (result != DialogResult.OK) return;
             }
@@ -4444,12 +4453,14 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                        MessageBox.Show("Factory style sheet can not be deleted", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabDeleteClick.Message2", "Factory style sheet can not be deleted", "");
+                        MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please select a style sheet to delete", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabDeleteClick.Message3", "Please select a style sheet to delete", "");
+                    MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch
@@ -4551,14 +4562,15 @@ namespace SIL.PublishingSolution
 
         public void tsReset_ClickBL()
         {
-            string message = "Settings files cannot be reset.";
+            var confirmationStringMessage = "Settings files cannot be reset.";
             try
             {
-                const string msg = "Are you sure you want to remove all custom style sheets and restore \r\n settings to their initial values? (This cannot be undone.)";
+                confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabResetClick1.Message", 
+                    "Are you sure you want to remove all custom style sheets and restore \r\n settings to their initial values? (This cannot be undone.)", "");
                 const string caption = "Reset Settings";
                 if (!cTool._fromNunit)
                 {
-                    DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                    DialogResult result = MessageBox.Show(confirmationStringMessage, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                                                           MessageBoxDefaultButton.Button2);
                     if (result == DialogResult.No) return;
                 }
@@ -4572,10 +4584,11 @@ namespace SIL.PublishingSolution
                 SelectedRowIndex = 0;
                 inputTypeBL = cTool.InputType;
                 ConfigurationTool_LoadBL();
-                message = "Settings files are reset successfully.";
+                confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabResetClick2.Message",
+                    "Settings files are reset successfully", "");
             }
             catch { }
-            MessageBox.Show(message, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void ShowPreview(int page)
