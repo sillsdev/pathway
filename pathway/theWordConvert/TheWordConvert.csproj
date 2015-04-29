@@ -220,6 +220,10 @@
       <HintPath>..\ThirdParty\Devart.Data.SQLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="L10NSharp, Version=2.0.17.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\L10NSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Data.Sqlite">
       <Private>True</Private>
     </Reference>

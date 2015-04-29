@@ -23,6 +23,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Xsl;
+using L10NSharp;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -601,7 +602,8 @@ namespace SIL.PublishingSolution
             string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
             if (!Directory.Exists(xeLaTexInstallationPath))
             {
-                MessageBox.Show("Please install the Xelatex application.");
+                var msg = LocalizationManager.GetString("ExportXelatex.CallXelatex.Message", "Please install the Xelatex application.", "");
+                MessageBox.Show(msg);
                 return;
             }
             string name = "xelatex.exe";
@@ -756,8 +758,9 @@ namespace SIL.PublishingSolution
                             if (File.Exists(pdfFullName))
                             {
                                 string installedLocation = pdfFullName;
-                                MessageBox.Show("The output has been save in " + installedLocation +
-                                                ".\n Please install the Xelatex application.");
+                                var msg = LocalizationManager.GetString("ExportXelatex.OpenXelatexOutput.Message", "The output has been save in {0}.\n Please install the Xelatex application.", "");
+                                msg = string.Format(msg, installedLocation);
+                                MessageBox.Show(msg);
                             }
                         }
                     }
