@@ -21,6 +21,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
+using L10NSharp;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -216,7 +217,7 @@ namespace SIL.PublishingSolution
             const string strDefault = "Set Defaults";
             if (!Common.isRightFieldworksVersion())
             {
-                const string text = "Please download and install a Pathway version compatible with your software";
+                var text = LocalizationManager.GetString("ConfigurationToolBL.PrintViaLoad.Message", "Please download and install a Pathway version compatible with your software", "");
                 const string caption = "Incompatible Pathway Version";
                 MessageBox.Show(text, caption, MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
@@ -393,7 +394,8 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("Please Install the Plugin Backends", "Pathway", MessageBoxButtons.AbortRetryIgnore,
+                var message = LocalizationManager.GetString("ConfigurationToolBL.NoDuplicateStyleName.Message", "Please Install the Plugin Backends", "");
+                DialogResult dialogResult = MessageBox.Show(message, "Pathway", MessageBoxButtons.AbortRetryIgnore,
                                 MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 if (dialogResult == DialogResult.Ignore)
                     return;
@@ -427,7 +429,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception)
             {
-                const string text = "Please select a folder for which you have creation permission";
+                var text = LocalizationManager.GetString("ConfigurationToolBL.OkButtonClick.Message", "Please select a folder for which you have creation permission", "");
                 const string caption = "Pathway";
                 MessageBox.Show(text, caption, MessageBoxButtons.OK,
                 MessageBoxIcon.Error);

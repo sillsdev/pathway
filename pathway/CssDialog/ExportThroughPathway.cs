@@ -35,6 +35,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
+using L10NSharp;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -327,7 +328,7 @@ namespace SIL.PublishingSolution
 
                 if (!Common.isRightFieldworksVersion())
                 {
-                    const string message = "Please download and install a Pathway version compatible with your software";
+                    var message = LocalizationManager.GetString("ConfigurationToolBL.ExportThroughPathwayLoad.Message", "Please download and install a Pathway version compatible with your software", "");
                     const string caption = "Incompatible Pathway Version";
                     MessageBox.Show(message, caption, MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
@@ -724,7 +725,7 @@ namespace SIL.PublishingSolution
                 DialogResult dialogResult;
                 if (!Common.Testing)
                 {
-                    const string message = "Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.";
+                    var message = LocalizationManager.GetString("ConfigurationToolBL.LoadAvailFormat.Message", "Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.", "");
                     const string caption = "Pathway";
                     dialogResult = MessageBox.Show(message, caption, MessageBoxButtons.AbortRetryIgnore,
                                     MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -802,7 +803,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception)
             {
-                const string message = "Please select a folder for which you have creation permission";
+                var message = LocalizationManager.GetString("ConfigurationToolBL.OkButtonClick.Message", "Please select a folder for which you have creation permission", "");
                 const string caption = "Pathway";
                 MessageBox.Show(message, caption, MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
@@ -1029,7 +1030,7 @@ namespace SIL.PublishingSolution
             {
                 // User wants a title page or a cover page with a title, but they haven't told us the title.
                 // Make them enter one now.
-                const string message = "Please enter a title for this publication.";
+                var message = LocalizationManager.GetString("ConfigurationToolBL.SaveProperty.Message1", "Please enter a title for this publication.", "");
                 MessageBox.Show(message, dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dlg.IsExpanded = true;
                 dlg.ResizeDialog();
@@ -1048,7 +1049,7 @@ namespace SIL.PublishingSolution
                 if (!success)
                 {
                     // Dictionary with nothing to export. Make them export something.
-                    const string message = "Please select at least one item to include in the export.";
+                    var message = LocalizationManager.GetString("ConfigurationToolBL.SaveProperty.Message2", "Please select at least one item to include in the export.", "");
                     MessageBox.Show(message, dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     dlg.IsExpanded = true;
                     dlg.ResizeDialog();
@@ -1317,7 +1318,8 @@ namespace SIL.PublishingSolution
                     double width = iconImage.Width;
                     if (height > 1000 || width > 1000)
                     {
-                        const string message = "The selected image is too large. Please select an image that is smaller than 1000 x 1000 pixels.";
+                        var message = LocalizationManager.GetString("ConfigurationToolBL.CoverImageClick.Message", 
+                            "The selected image is too large. Please select an image that is smaller than 1000 x 1000 pixels.", "");
                         MessageBox.Show(message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
