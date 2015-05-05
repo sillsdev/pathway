@@ -24,6 +24,12 @@ build:
 	mkdir $(bindst)
 	cp -r $(binsrc)/BuildPathway/Files/ConfigurationTool/* $(bindst)
 
+compile:
+	xbuild /target:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform=Any\ CPU\;OS=Linux PublishingSolution.sln
+
+test:
+	nunit-console -exclude=SkipOnTeamCity\;LongTest -labels -nodots Test/bin/Debug/Test.dll
+
 install:
 	mkdir -p $(DESTDIR)$(prefix)/lib/pathway
 	cp -r bin/. $(DESTDIR)$(prefix)/lib/pathway
