@@ -707,7 +707,7 @@
     <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" />
     <Icons Include="..\PsSupport\Icons\**\*.*" />
     <Graphic Include="..\PsSupport\Graphic\**\*.*" />
-    <Loc Include="..\PsSupport\Loc\**\*.*" />
+    <Loc Include="..\PsSupport\localizations\**\*.*" />
     <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" />
     <BteHelp Include="..\BuildPathway\Pathway_Configuration_Tool_BTE.chm" />
     <SeHelp Include="..\BuildPathway\Pathway_Configuration_Tool_SE.chm" />

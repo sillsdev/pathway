@@ -370,7 +370,7 @@
     <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'Files\ConfigurationTool\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'Files\ConfigurationTool\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'Files\ConfigurationTool\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'Files\ConfigurationTool\Loc\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
     <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'Files\ConfigurationTool\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(BteHelp)" DestinationFiles="@(BteHelp->'Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
     <Copy SourceFiles="@(SeHelp)" DestinationFiles="@(SeHelp->'Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'SE' " />
@@ -451,7 +451,7 @@
     <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" />
     <Icons Include="..\PsSupport\Icons\**\*.*" />
     <Graphic Include="..\PsSupport\Graphic\**\*.*" />
-    <Loc Include="..\PsSupport\Loc\**\*.*" />
+    <Loc Include="..\PsSupport\localizations\**\*.*" />
     <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" />
     <!--BteHelp Include="HelpBTE\**\*.*" / -->
     <BteHelp Include="Pathway_Configuration_Tool_BTE.chm" />
