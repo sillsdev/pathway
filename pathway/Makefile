@@ -27,7 +27,7 @@ build:
 compile:
 	xbuild /target:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform=Any\ CPU\;OS=Linux PublishingSolution.sln
 
-test:
+dotests:
 	nunit-console -exclude=SkipOnTeamCity\;LongTest -labels -nodots Test/bin/Debug/Test.dll
 
 install:
