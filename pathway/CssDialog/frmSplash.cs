@@ -39,7 +39,6 @@ namespace SIL.PublishingSolution
         public DialogResult dr;
         public frmSplash()
         {
-            SetupLocalization();
             InitializeComponent();
         }
 
@@ -87,15 +86,6 @@ namespace SIL.PublishingSolution
             tSplash.Start();
 
 
-        }
-
-        private static void SetupLocalization()
-        {
-            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
-            var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-            string desiredUiLangId = Settings.Default.UserInterfaceLanguage;
-            LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-                null, targetTmxFilePath, null, IssuesEmailAddress, "SIL.PublishingSolution");
         }
 
         /// <summary>

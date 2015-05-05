@@ -36,12 +36,6 @@ namespace SIL.PublishingSolution
         /// </summary>
         public AboutPw()
         {
-            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
-            //var targetTmxFilePath = Path.Combine("SIL", "Pathway");
-            //string desiredUiLangId = Settings.Default.UserInterfaceLanguage;
-            //desiredUiLangId = "fr";
-            //LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-            //    installedStringFileFolder, targetTmxFilePath, null, "issues@hearthis.palaso.org", "Pathway");
             InitializeComponent();
         }
 

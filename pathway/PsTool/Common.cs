@@ -4588,13 +4588,57 @@ namespace SIL.Tool
                 return "en";
             }
         }
+
+        //public static void SetupLocalization(string namespaces)
+        //{
+        //    var targetTmxFilePath = Path.Combine(kCompany, kProduct);
+        //    var desiredUiLangId = GetLocalizationSettings();
+        //    LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
+        //        null, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
+        //}
+
         public static void SetupLocalization(string namespaces)
         {
+            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
             var targetTmxFilePath = Path.Combine(kCompany, kProduct);
+            string localizedStringFilesFolder = CopyInstalledLocalizations(targetTmxFilePath);
             var desiredUiLangId = GetLocalizationSettings();
+            if (desiredUiLangId == string.Empty)
+                desiredUiLangId = "en";
             LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-                null, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
+                              localizedStringFilesFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
         }
+
+        private static string CopyInstalledLocalizations(string silLocation)
+        {
+            string localizedStringFilesFolder = Common.PathCombine(Common.GetAllUserAppPath(), silLocation);
+            localizedStringFilesFolder = Common.PathCombine(localizedStringFilesFolder, "localizations");
+            var installedLocalizationsFolder = Path.Combine(Application.StartupPath, "localizations");
+
+            if (Directory.Exists(installedLocalizationsFolder))
+            {
+                if (!Directory.Exists(localizedStringFilesFolder))
+                    Directory.CreateDirectory(localizedStringFilesFolder);
+
+                foreach (var file in Directory.GetFiles(installedLocalizationsFolder))
+                {
+                    var name = Path.GetFileName(file);
+                    var dest = Path.Combine(localizedStringFilesFolder, name);
+                    if (!File.Exists(dest) || FileLength(file) != FileLength(dest))
+                        File.Copy(file, dest, true);
+                }
+            }
+
+            return localizedStringFilesFolder;
+        }
+
+        private static long FileLength(string file)
+        {
+            return new FileInfo(file).Length;
+        }
+
+
+
         #endregion
     }
 }

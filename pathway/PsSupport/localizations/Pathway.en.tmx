@@ -1,0 +1,1090 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tmx version="1.4">
+  <header srclang="en" adminlang="en" creationtool="Palaso Localization Manager" creationtoolversion="2.0.17.0" segtype="block" datatype="unknown" o-tmf="PalasoTMXUtils">
+    <prop type="x-appversion">1.9.1.4065</prop>
+    <prop type="x-hardlinebreakreplacement">\n</prop>
+  </header>
+  <body>
+    <tu tuid="AboutPw.btnOk">
+      <tuv xml:lang="en">
+        <seg>Ok</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.chkHelpToImprove">
+      <tuv xml:lang="en">
+        <seg>Help Improve</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.label1">
+      <tuv xml:lang="en">
+        <seg>Configuration Tool</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.label2">
+      <tuv xml:lang="en">
+        <seg>(C) 2008 - 2014 SIL International  </seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.lblGPL">
+      <tuv xml:lang="en">
+        <seg>Code license:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.lblProjUrl">
+      <tuv xml:lang="en">
+        <seg>Other project related information is available at:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.lnkProj">
+      <tuv xml:lang="en">
+        <seg>http://pathway.sil.org</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>About Pathway Configuration Tool</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool._uiLanguageMenu">
+      <tuv xml:lang="en">
+        <seg>English</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.aboutToolStripMenuItem">
+      <tuv xml:lang="en">
+        <seg>&amp;About</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnApproved">
+      <tuv xml:lang="en">
+        <seg>...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnBrowse">
+      <tuv xml:lang="en">
+        <seg>Browse...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnDictionary">
+      <tuv xml:lang="en">
+        <seg>&amp;Dictionary</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnMobile">
+      <tuv xml:lang="en">
+        <seg>&amp;Mobile</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnNext">
+      <tuv xml:lang="en">
+        <seg>&gt;</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnOthers">
+      <tuv xml:lang="en">
+        <seg>&amp;Others</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnPaper">
+      <tuv xml:lang="en">
+        <seg>&amp;Paper</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnPrevious">
+      <tuv xml:lang="en">
+        <seg>&lt;</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnScripture">
+      <tuv xml:lang="en">
+        <seg>&amp;Scripture</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnWeb">
+      <tuv xml:lang="en">
+        <seg>&amp;Web</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkDisableWO">
+      <tuv xml:lang="en">
+        <seg>Disable widow &amp;&amp; orphan</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.ChkDontPicture">
+      <tuv xml:lang="en">
+        <seg>Do not include pictures</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkEmbedFonts">
+      <tuv xml:lang="en">
+        <seg>Embed Fonts in Document</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkFixedLineHeight">
+      <tuv xml:lang="en">
+        <seg>Fixed Line Height   </seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkHideSpaceVerseNo">
+      <tuv xml:lang="en">
+        <seg>Remove Space After Verse No.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkIncludeCusFnCaller">
+      <tuv xml:lang="en">
+        <seg>Include Footnote Caller</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkIncludeFontVariants">
+      <tuv xml:lang="en">
+        <seg>Also Embed Font Variants</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkIncludeImage">
+      <tuv xml:lang="en">
+        <seg>Include Images</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkPageBreaks">
+      <tuv xml:lang="en">
+        <seg>No page breaks within letters</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkSplitFileByLetter">
+      <tuv xml:lang="en">
+        <seg>Split File by Letter</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkTurnOffFirstVerse">
+      <tuv xml:lang="en">
+        <seg>Hide Verse No. 1</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkXrefCusSymbol">
+      <tuv xml:lang="en">
+        <seg>Include XRef Caller</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.contentsToolStripMenuItem">
+      <tuv xml:lang="en">
+        <seg>Help</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.groupBox1">
+      <tuv xml:lang="en">
+        <seg>MySql Database Details</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.groupBox2">
+      <tuv xml:lang="en">
+        <seg>FTP Details</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.groupBox3">
+      <tuv xml:lang="en">
+        <seg>Website Details</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label1">
+      <tuv xml:lang="en">
+        <seg>Icon for Phone</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label10">
+      <tuv xml:lang="en">
+        <seg>Password</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label11">
+      <tuv xml:lang="en">
+        <seg>User Name</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label12">
+      <tuv xml:lang="en">
+        <seg>Database Name</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label13">
+      <tuv xml:lang="en">
+        <seg>MySql Server name / IP Address</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label14">
+      <tuv xml:lang="en">
+        <seg>Site Title</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label15">
+      <tuv xml:lang="en">
+        <seg>Admin Password</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label16">
+      <tuv xml:lang="en">
+        <seg>Admin Username</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label17">
+      <tuv xml:lang="en">
+        <seg>Website url</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label18">
+      <tuv xml:lang="en">
+        <seg>Email ID</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label19">
+      <tuv xml:lang="en">
+        <seg>Ftp Folder Name</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label2">
+      <tuv xml:lang="en">
+        <seg>Stylesheets</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label20">
+      <tuv xml:lang="en">
+        <seg>Language</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label3">
+      <tuv xml:lang="en">
+        <seg>FTP Password</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label4">
+      <tuv xml:lang="en">
+        <seg>Pictures</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label5">
+      <tuv xml:lang="en">
+        <seg>Page Margin</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label6">
+      <tuv xml:lang="en">
+        <seg>FTP Username</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label7">
+      <tuv xml:lang="en">
+        <seg>Red Letter</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label8">
+      <tuv xml:lang="en">
+        <seg>Files Produced</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label9">
+      <tuv xml:lang="en">
+        <seg>Guideword Length</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblApproved">
+      <tuv xml:lang="en">
+        <seg>Approved By\n\n</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblAvailable">
+      <tuv xml:lang="en">
+        <seg>Available</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblBaseFontSize">
+      <tuv xml:lang="en">
+        <seg>Font Size:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblChapterNumbers">
+      <tuv xml:lang="en">
+        <seg>Chapter Numbers:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.Lblcm">
+      <tuv xml:lang="en">
+        <seg>cm</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblComment">
+      <tuv xml:lang="en">
+        <seg>Comment</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblDefaultAlignment">
+      <tuv xml:lang="en">
+        <seg>Text Alignment:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblDefaultFont">
+      <tuv xml:lang="en">
+        <seg>Fallback Font:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblDesc">
+      <tuv xml:lang="en">
+        <seg>Description</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblEpubDescription">
+      <tuv xml:lang="en">
+        <seg>Change the settings for e-book content.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblEpubFontsSection">
+      <tuv xml:lang="en">
+        <seg>Embedded Fonts</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblEputLayoutSection">
+      <tuv xml:lang="en">
+        <seg>Layout</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblFileProduceDict">
+      <tuv xml:lang="en">
+        <seg>Files Produced</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblFont">
+      <tuv xml:lang="en">
+        <seg>BaseFont Size</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblGoBibleDescription">
+      <tuv xml:lang="en">
+        <seg>Change the settings for mobile content.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblInfoCaption">
+      <tuv xml:lang="en">
+        <seg>Css</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblJustified">
+      <tuv xml:lang="en">
+        <seg>Justified</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblLineSpace">
+      <tuv xml:lang="en">
+        <seg>Line Spacing </seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblLineSpacing">
+      <tuv xml:lang="en">
+        <seg>Line Height:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblMaxImageWidth">
+      <tuv xml:lang="en">
+        <seg>Maximum Image Width:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblMissingFont">
+      <tuv xml:lang="en">
+        <seg>If font is missing:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblMobileOptionsSection">
+      <tuv xml:lang="en">
+        <seg>Options</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblName">
+      <tuv xml:lang="en">
+        <seg>Name</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblNonSILFont">
+      <tuv xml:lang="en">
+        <seg>If font is non-SIL:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageBottom">
+      <tuv xml:lang="en">
+        <seg>Bottom</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageColumn">
+      <tuv xml:lang="en">
+        <seg>Columns</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageGutter">
+      <tuv xml:lang="en">
+        <seg>Column Gap</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageInside">
+      <tuv xml:lang="en">
+        <seg>Inside</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageNumber">
+      <tuv xml:lang="en">
+        <seg>Page Numbers</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageOutside">
+      <tuv xml:lang="en">
+        <seg>Outside</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPagePageSize">
+      <tuv xml:lang="en">
+        <seg>Page Size</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageTop">
+      <tuv xml:lang="en">
+        <seg>Top</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPct">
+      <tuv xml:lang="en">
+        <seg>%</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.LblPicPosition">
+      <tuv xml:lang="en">
+        <seg>Picture Position</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.LblPictureWidth">
+      <tuv xml:lang="en">
+        <seg>Picture Width</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblProjectUrl">
+      <tuv xml:lang="en">
+        <seg>Other project related information is available at:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPt">
+      <tuv xml:lang="en">
+        <seg>pt</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPx">
+      <tuv xml:lang="en">
+        <seg>px</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblReferenceFormat">
+      <tuv xml:lang="en">
+        <seg>Reference Format</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblReferences">
+      <tuv xml:lang="en">
+        <seg>Add References:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblRules">
+      <tuv xml:lang="en">
+        <seg>Divider Lines</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblRunningHeader">
+      <tuv xml:lang="en">
+        <seg>Running Header</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblSenseLayout">
+      <tuv xml:lang="en">
+        <seg>Sense Layout</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblTargetFileLocation">
+      <tuv xml:lang="en">
+        <seg>FTP Address (ex: ftp://ip address/path)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblTocLevel">
+      <tuv xml:lang="en">
+        <seg>TOC Level:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblType">
+      <tuv xml:lang="en">
+        <seg>Dictionary</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblVerticalJustify">
+      <tuv xml:lang="en">
+        <seg>Vertical Justify</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lnkLblUrl">
+      <tuv xml:lang="en">
+        <seg>http://pathway.sil.org</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.moreHelpToolStripMenuItem">
+      <tuv xml:lang="en">
+        <seg>More &amp;Help</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.RadEntirePage">
+      <tuv xml:lang="en">
+        <seg>Entire Page</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.RadSingleColumn">
+      <tuv xml:lang="en">
+        <seg>Single Column</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.RadWidthAll">
+      <tuv xml:lang="en">
+        <seg>Use this width for all pictures</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.RadWidthIf">
+      <tuv xml:lang="en">
+        <seg>Use this width if a width not specified</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.studentManualToolStripMenuItem">
+      <tuv xml:lang="en">
+        <seg>Student &amp;Manual</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabDict4Mids">
+      <tuv xml:lang="en">
+        <seg>Properties</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabDisplay">
+      <tuv xml:lang="en">
+        <seg>Properties</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabInfo">
+      <tuv xml:lang="en">
+        <seg>Info</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabMobile">
+      <tuv xml:lang="en">
+        <seg>Properties</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabOthers">
+      <tuv xml:lang="en">
+        <seg>Properties</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabPicture">
+      <tuv xml:lang="en">
+        <seg>Pictures</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabPreview">
+      <tuv xml:lang="en">
+        <seg>Preview</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabWeb">
+      <tuv xml:lang="en">
+        <seg>Properties</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.toolStripHelpButton">
+      <tuv xml:lang="en">
+        <seg>&amp;Help</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.toolStripMain">
+      <tuv xml:lang="en">
+        <seg>New</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.toolStripStatusLabel1">
+      <tuv xml:lang="en">
+        <seg>Changes will be automatically saved.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsDefault">
+      <tuv xml:lang="en">
+        <seg>De&amp;faults</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsDelete">
+      <tuv xml:lang="en">
+        <seg>De&amp;lete</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsNew">
+      <tuv xml:lang="en">
+        <seg>&amp;New</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsPreview">
+      <tuv xml:lang="en">
+        <seg>Pre&amp;view</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsRedo">
+      <tuv xml:lang="en">
+        <seg> Redo</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsReset">
+      <tuv xml:lang="en">
+        <seg>&amp;Reset</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsSaveAs">
+      <tuv xml:lang="en">
+        <seg>Save &amp;As</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsSend">
+      <tuv xml:lang="en">
+        <seg>S&amp;end</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsUndo">
+      <tuv xml:lang="en">
+        <seg> &amp;Undo</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Pathway Configuration Tool</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.BrowseButton.Message">
+      <tuv xml:lang="en">
+        <seg>Please choose the icon with 20 x 20 dim.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.CopyStyle.Message">
+      <tuv xml:lang="en">
+        <seg>Styles should not be greater than 50 characters.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.CreatePreviewFile.Message">
+      <tuv xml:lang="en">
+        <seg>Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.NameValidate.Message">
+      <tuv xml:lang="en">
+        <seg>Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.NoDuplicateStyleName.Message">
+      <tuv xml:lang="en">
+        <seg>Stylesheet Name [{0}] already exists</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabDeleteClick.Message1">
+      <tuv xml:lang="en">
+        <seg>Are you sure you want to delete the {0} stylesheet?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabDeleteClick.Message2">
+      <tuv xml:lang="en">
+        <seg>Factory style sheet can not be deleted</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabDeleteClick.Message3">
+      <tuv xml:lang="en">
+        <seg>Please select a style sheet to delete</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabResetClick1.Message">
+      <tuv xml:lang="en">
+        <seg>Are you sure you want to remove all custom style sheets and restore \n settings to their initial values? (This cannot be undone.)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabResetClick2.Message">
+      <tuv xml:lang="en">
+        <seg>Settings files are reset successfully</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.ValidateStyleName.Message1">
+      <tuv xml:lang="en">
+        <seg>Style name should not be empty. Please enter the valid name</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.ValidateStyleName.Message2">
+      <tuv xml:lang="en">
+        <seg>Please avoid {0} in the Style name</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.btnBrowseColophon">
+      <tuv xml:lang="en">
+        <seg>...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.btnCancel">
+      <tuv xml:lang="en">
+        <seg>&amp;Cancel</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.btnCoverImage">
+      <tuv xml:lang="en">
+        <seg>&amp;Select...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.btnHelp">
+      <tuv xml:lang="en">
+        <seg>&amp;Help</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.btnMoreLessOptions">
+      <tuv xml:lang="en">
+        <seg>Less</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.btnOK">
+      <tuv xml:lang="en">
+        <seg>&amp;OK</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkColophon">
+      <tuv xml:lang="en">
+        <seg>Copyright Infomation Page</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkConfiguredDictionary">
+      <tuv xml:lang="en">
+        <seg>Configured Dictionary</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkCoverImage">
+      <tuv xml:lang="en">
+        <seg>Cover Image Page:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkCoverImageTitle">
+      <tuv xml:lang="en">
+        <seg>Include the book's title in the image</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkGrammarSketch">
+      <tuv xml:lang="en">
+        <seg>Grammar Sketch</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkHyphen">
+      <tuv xml:lang="en">
+        <seg>Enable Hyphenation</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkIP">
+      <tuv xml:lang="en">
+        <seg>I have complied with my organization's Intellectual Property (copyright) and Archiving policies.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkOOReduceStyleNames">
+      <tuv xml:lang="en">
+        <seg>Replace styles with direct formatting in OpenOffice/LibreOffice</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkReversalIndexes">
+      <tuv xml:lang="en">
+        <seg>Reversal Indexes</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkTitlePage">
+      <tuv xml:lang="en">
+        <seg>Title Page (page with book's title)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkTOC">
+      <tuv xml:lang="en">
+        <seg>Table of Contents</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.CoverImageClick.Message">
+      <tuv xml:lang="en">
+        <seg>The selected image is too large. Please select an image that is smaller than 1000 x 1000 pixels.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.ExportThroughPathway.btnBrowseSaveInFolder">
+      <tuv xml:lang="en">
+        <seg>...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.ExportThroughPathway.txtSaveInFolder">
+      <tuv xml:lang="en">
+        <seg>C:\Users\brommerse\Documents\Publications\Nkonya\Scripture</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.ExportThroughPathwayLoad.Message">
+      <tuv xml:lang="en">
+        <seg>Please download and install a Pathway version compatible with your software</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.gbHyphnSettings">
+      <tuv xml:lang="en">
+        <seg>Language Settings</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.groupBox1">
+      <tuv xml:lang="en">
+        <seg>Preprocessing Transformation:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.grpInclude">
+      <tuv xml:lang="en">
+        <seg>Select data to include:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.label1">
+      <tuv xml:lang="en">
+        <seg>Destination:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.label2">
+      <tuv xml:lang="en">
+        <seg>Stylesheet:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.label5">
+      <tuv xml:lang="en">
+        <seg>Add the following pages to the document:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.label7">
+      <tuv xml:lang="en">
+        <seg>Describe this publication:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.label8">
+      <tuv xml:lang="en">
+        <seg>Save in Folder :</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblBookTitle">
+      <tuv xml:lang="en">
+        <seg>Book Title</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblCreator">
+      <tuv xml:lang="en">
+        <seg>Creator</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblDescription">
+      <tuv xml:lang="en">
+        <seg>Description</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblHyphenFonts">
+      <tuv xml:lang="en">
+        <seg>Include Language</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblPublisher">
+      <tuv xml:lang="en">
+        <seg>Publisher</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblRights">
+      <tuv xml:lang="en">
+        <seg>Copyright Holder</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lnkChooseCopyright">
+      <tuv xml:lang="en">
+        <seg>Help me choose a rights statement...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lnkIP">
+      <tuv xml:lang="en">
+        <seg>Intellectual Property Info</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.LoadAvailFormat.Message">
+      <tuv xml:lang="en">
+        <seg>Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.OkButtonClick.Message">
+      <tuv xml:lang="en">
+        <seg>Please select a folder for which you have creation permission</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.rdoCustomCopyright">
+      <tuv xml:lang="en">
+        <seg>Custom:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.rdoStandardCopyright">
+      <tuv xml:lang="en">
+        <seg>Standard Rights Statement:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.SaveProperty.Message1">
+      <tuv xml:lang="en">
+        <seg>Please enter a title for this publication.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.SaveProperty.Message2">
+      <tuv xml:lang="en">
+        <seg>Please select at least one item to include in the export.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.tabPage1">
+      <tuv xml:lang="en">
+        <seg>Publication Info</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.tabPage2">
+      <tuv xml:lang="en">
+        <seg>Front Matter</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.tabPage3">
+      <tuv xml:lang="en">
+        <seg>Processing Options</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.tpHyphenation">
+      <tuv xml:lang="en">
+        <seg>Hyphenation</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Export Through Pathway</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.label1">
+      <tuv xml:lang="en">
+        <seg>Configuration Tool</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.label2">
+      <tuv xml:lang="en">
+        <seg>(C) 2008 - 2014 SIL International</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.label3">
+      <tuv xml:lang="en">
+        <seg>Loading ....</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.lblCompany">
+      <tuv xml:lang="en">
+        <seg>SIL International in collaboration with EC Group Datasoft Private Limited</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.lblGPL">
+      <tuv xml:lang="en">
+        <seg>Code license: GNU GPL v3</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.lblSilPathway">
+      <tuv xml:lang="en">
+        <seg>Pathway</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.lblVersionwithDate">
+      <tuv xml:lang="en">
+        <seg>Version: 1.4.0</seg>
+      </tuv>
+    </tu>
+    <tu tuid="InProcess.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Export In Process</seg>
+      </tuv>
+    </tu>
+    <tu tuid="MainWindow.MoreMenuItem">
+      <note>Last item in menu of UI languages</note>
+      <tuv xml:lang="en">
+        <seg>More...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="OrganizationNameDialog.btnCancel">
+      <tuv xml:lang="en">
+        <seg>&amp;Cancel</seg>
+      </tuv>
+    </tu>
+    <tu tuid="OrganizationNameDialog.btnOK">
+      <tuv xml:lang="en">
+        <seg>&amp;OK</seg>
+      </tuv>
+    </tu>
+    <tu tuid="OrganizationNameDialog.label1">
+      <tuv xml:lang="en">
+        <seg>Type in the &amp;name of your organization:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PreviewPrintVia.CreatePreviewFile.Message">
+      <tuv xml:lang="en">
+        <seg>Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PrintVia.LoadBackEnds.Message">
+      <tuv xml:lang="en">
+        <seg>Please Install the Plugin Backends</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PrintVia.OkButtonClick.Message">
+      <tuv xml:lang="en">
+        <seg>Please select a folder for which you have creation permission</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PrintVia.PrintViaLoad.Message">
+      <tuv xml:lang="en">
+        <seg>Please download and install a Pathway version compatible with your software</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.btnCancel">
+      <tuv xml:lang="en">
+        <seg>&amp;Cancel</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.btnHelp">
+      <tuv xml:lang="en">
+        <seg>&amp;Help</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.btnOK">
+      <tuv xml:lang="en">
+        <seg>&amp;OK</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.btnOther">
+      <tuv xml:lang="en">
+        <seg>O&amp;ther...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.lblInstructions">
+      <tuv xml:lang="en">
+        <seg>Select the organization you are representing, Pathway will automatically fill in copyright statements, etc. based on your selection.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.lblOrganization">
+      <tuv xml:lang="en">
+        <seg>My o&amp;rganization:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.lblOther">
+      <tuv xml:lang="en">
+        <seg>If your organization is not on the above list, click the Other... button:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SettingsValidator.CopySettingsFile.Message1">
+      <tuv xml:lang="en">
+        <seg>Settings file  "{0}".xml is invalid, do you want to overwrite it with the setting file previously installed. \n (Specifically, "{1}" property has an invalid path.)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SettingsValidator.CopySettingsFile.Message2">
+      <tuv xml:lang="en">
+        <seg>Settings file  "{0}".xml is invalid, do you want to overwrite it with the setting file previously installed. \n (Specifically, "{1}" property has an invalid value.)</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>
