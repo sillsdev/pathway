@@ -493,7 +493,7 @@
     <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'$(OutputPath)\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'$(OutputPath)\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'$(OutputPath)\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'$(OutputPath)\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'$(OutputPath)\localizations\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
     <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'$(OutputPath)\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(FwVersion)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BteHelp)" DestinationFiles="@(BteHelp->'$(OutputPath)\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
