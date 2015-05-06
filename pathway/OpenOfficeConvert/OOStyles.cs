@@ -1849,10 +1849,13 @@ namespace SIL.PublishingSolution
                     else if (_pageHeaderFooter[i]["content"].IndexOf("counter") > 0)
                     {
                         CreateHeaderFooter(i, "PageNumber", ref isHeaderCreated, ref isFooterCreated, ref isHeaderClosed, ref isFooterClosed);
-                        CreateLeftGuidewordPageNumber(i, "PageNumber");
-                        if (i < 21) //PageNumber Created on RightPage Header
+                        if (i != 15)
                         {
-                            isPageNumber = true;
+                            CreateLeftGuidewordPageNumber(i, "PageNumber");
+                            if (i < 21) //PageNumber Created on RightPage Header
+                            {
+                                isPageNumber = true;
+                            }
                         }
                     }
                 }
@@ -2895,6 +2898,8 @@ namespace SIL.PublishingSolution
             {
                 ht = "fo:min-height";
             }
+            if (index == 15)
+                height = "10.8pt";
             _writer.WriteAttributeString("fo:margin-bottom", space); //Spacing
             _writer.WriteAttributeString(ht, height); //Height
             _writer.WriteAttributeString("fo:margin-left", "0pt");
