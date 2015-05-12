@@ -437,7 +437,25 @@ namespace Test.theWordConvert
             TestDataCase("MAT", "040MAT-bridgeB4P.usx", 1, "<sup>(1-2)</sup> Verse one text. Verse two text");
         }
 
-        [Test]
+		[Test]
+		public void BridgeEndPTest()
+		{
+			TestDataCase("1PE", "1PE-bridge.usx", 3, "(-)<CM>");
+		}
+
+		[Test]
+		public void BridgeEndQTest()
+		{
+			TestDataCase("1PE", "1PE-bridge.usx", 28, "(-)<CI>");
+		}
+
+		[Test]
+		public void BridgeMidPTest()
+		{
+			TestDataCase("1PE", "1PE-bridge.usx", 19, "(-)");
+		}
+
+		[Test]
         public void RefListTest()
         {
             var bookNames = "file://" + FileInput("BookNames-refList.xml");
