@@ -8,6 +8,8 @@ Pathway prepares dictionary and Scripture data in open document (odf), e-book (e
 
 Pathway installs as an add-on of SIL FieldWorks and Paratext, or it can be launched in batch process.
 
+[Old stable release](http://www.sil.org/resources/software_fonts/pathway)
+
 
 License
 -------
@@ -44,6 +46,12 @@ Issue Tracking
 Development
 -----------
 Pathway is currently running under .net 4.0.
+
+*Before building Pathway*
+
+Before building Pathway, the developer should install the latest L10NSharp library. This is done with
+`BuildPathway/getDependencies.sh`
+This command runs a bash script. (On Windows, make sure you have git installed and run from the bash window.) This will go to Team City and download the latest successful build of L10NSharp and put it in the ThirdParty folder.
 
 *Building on Windows*
 
