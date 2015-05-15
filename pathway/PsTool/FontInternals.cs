@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
@@ -88,9 +89,77 @@ namespace SIL.Tool
         public ushort uStringOffset;
     }
 
-    public static class FontInternals
-    {
-        // Windows only - Guid for Fonts folder
+	// https://www.microsoft.com/typography/otspec/os2.htm
+	public enum FsType : ushort
+	{
+		Installable = 0x0000,
+		Restricted = 0x0002,
+		PreviewPrint = 0x0004,
+		Editable = 0x0008,
+		NoSubset = 0x0100,
+		BitmapOnly = 0x0200
+	};
+
+	[StructLayout(LayoutKind.Sequential, Pack = 0x1)]
+	struct TT_OS2_RECORD
+	{
+		public ushort version;
+		public short  xAvgCharWidth;
+		public ushort usWeightClass;
+		public ushort usWidthClass;
+		public FsType fsType;
+		public short  ySubscritXSize;
+		public short  ySubscritYSize;
+		public short  ySubscritXOffset;
+		public short  ySubscritYOffset;
+		public short  ySuperscritXSize;
+		public short  ySuperscritYSize;
+		public short  ySuperscritXOffset;
+		public short  ySuperscritYOffset;
+		public short  yStrikeoutSize;
+		public short  yStrikeoutPosition;
+		public short  sFamilyClass;
+		public byte   panose0;
+		public byte   panose1;
+		public byte   panose2;
+		public byte   panose3;
+		public byte   panose4;
+		public byte   panose5;
+		public byte   panose6;
+		public byte   panose7;
+		public byte   panose8;
+		public byte   panose9;
+		public ulong  ulUnicodeRange1; // Bits 0-31
+		public ulong  ulUnicodeRange2; // Bits 32-63
+		public ulong  ulUnicodeRange3; // Bits 64-95
+		public ulong  ulUnicodeRange4; // Bits 96-127
+		public char   achVendID0;
+		public char   achVendID1;
+		public char   achVendID2;
+		public char   achVendID3;
+		public ushort fsSelection;
+		public ushort usFirstCharIndex;
+		public ushort usLastCharIndex;
+		public short sTypoAscender;
+		public short sTypoDescender;
+		public short sTypeLineGap;
+		public ushort usWinAscent;
+		public ushort usWinDescent;
+		public ulong ulCodePageRange1; // Bits 0-31
+		public ulong ulCodePageRange2; //Bits 32-63
+		public short sxHeight;
+		public short sCapHeight;
+		public ushort usDefaultChar;
+		public ushort usBreakChar;
+		public ushort usMaxContext;
+		public ushort usLowerOpticalPointSize;
+		public ushort usUpperOpticalPointSize;
+	}
+
+
+	public static class FontInternals
+	{
+		// Windows only - Guid for Fonts folder
         public static readonly Guid FontsFolder = new Guid("FD228CB7-AE11-4AE3-864C-16F3910AB8FE");
 
         private static TT_OFFSET_TABLE ttOffsetTable;
@@ -102,11 +171,95 @@ namespace SIL.Tool
         private static TT_TABLE_DIRECTORY tblDir;
         private static TT_NAME_TABLE_HEADER ttNTHeader;
         private static TT_NAME_RECORD ttNMRecord;
+		private static TT_OS2_RECORD ttOs2Record;
 
         public static string GetPostscriptName(string familyName, string style)
         {
             string fontName = GetFontFileName(familyName, style);
             return GetPostscriptName(fontName);
+        }
+
+        public static FsType GetFsType(string fontFullName)
+        {
+            if (!File.Exists(fontFullName)) throw new FileNotFoundException("Font file note found", fontFullName);
+
+            FileStream fs = new FileStream(fontFullName, FileMode.Open, FileAccess.Read);
+            BinaryReader r = new BinaryReader(fs);
+            TT_OFFSET_TABLE ttResult = GetOffsetTable(r);
+
+            //ttf Must be maj =1 minor = 0
+            int numTables = 0;
+            if (ttResult.uMajorVersion == 1 && ttResult.uMinorVersion == 0)
+            {
+                numTables = ttResult.uNumOfTables;
+            }
+            else
+            {
+                fs.Position = 0L;
+                SFNT sFnt = GetSfnt(r);
+                string szSfnt = string.Format("{0}{1}{2}{3}", (char)sFnt.szSfnt1, (char)sFnt.szSfnt2, (char)sFnt.szSfnt3, (char)sFnt.szSfnt4);
+                switch (szSfnt)
+                {
+                    case "OTTO":
+                        OT_OFFSET_TABLE otResult = GetOpenTypeOffsetTable(r);
+                        numTables = otResult.uNumOfTables;
+                        break;
+                    case "ttcf":
+                        TTC_HEADER_1 ttcHeader = GetTtcHeader(r);
+                        if ((ttcHeader.uMajorVersion != 1 && ttcHeader.uMajorVersion != 2) || ttcHeader.uMinorVersion != 0)
+                            throw new VersionNotFoundException("Expected header version 1.0 or 2.0");
+                        GetTtcOffsets(r, ttcHeader.uNumFonts);
+                        fs.Position = long.Parse(ttcOffsets[0].ToString());
+                        ttResult = GetOffsetTable(r);
+                        if (ttResult.uMajorVersion == 1 && ttResult.uMinorVersion == 0)
+                        {
+                            numTables = ttResult.uNumOfTables;
+                        }
+                        else
+                        {
+                            throw new VersionNotFoundException("FontInternals: Expected TrueType version 1.0");
+                        }
+                        break;
+                    default:
+                        throw new MissingFieldException("FontInternals", "Font type");
+                }
+            }
+
+            bool bFound = false;
+            TT_TABLE_DIRECTORY tbName = new TT_TABLE_DIRECTORY();
+            for (int i = 0; i < numTables; i++)
+            {
+                tbName = GetNameTable(r);
+                string szName = tbName.szTag1.ToString() + tbName.szTag2.ToString() + tbName.szTag3.ToString() + tbName.szTag4.ToString();
+                if (szName != null)
+                {
+                    if (szName == "OS/2") // http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=IWS-AppendixC
+                    {
+                        bFound = true;
+                        tbName.uLength = BigEndianValue(tbName.uLength);
+                        tbName.uOffset = BigEndianValue(tbName.uOffset);
+                        break;
+                    }
+                }
+            }
+            if (bFound)
+            {
+                fs.Position = tbName.uOffset;
+                TT_OS2_RECORD ttOs2Result = GetOs2Record(r);
+	            return ttOs2Result.fsType;
+            }
+            throw new MissingFieldException("FontInternals", "OS/2");
+        }
+
+        private static TT_OS2_RECORD GetOs2Record(BinaryReader r)
+        {
+            byte[] btOs2Record = r.ReadBytes(Marshal.SizeOf(ttOs2Record));
+            btOs2Record = BigEndian(btOs2Record);
+            IntPtr ptrOs2Record = Marshal.AllocHGlobal(btOs2Record.Length);
+            Marshal.Copy(btOs2Record, 0x0, ptrOs2Record, btOs2Record.Length);
+            TT_OS2_RECORD ttOs2Result = (TT_OS2_RECORD)Marshal.PtrToStructure(ptrOs2Record, typeof(TT_OS2_RECORD));
+            Marshal.FreeHGlobal(ptrOs2Record);
+            return ttOs2Result;
         }
 
         public static string GetPostscriptName(string fontFullName)

@@ -30,7 +30,26 @@ namespace Test.PsTool
     public class FontTest
     {
         private readonly bool _isLinux = Common.IsUnixOS();
-        /// <summary>
+
+		/// <summary>
+		///A test Arial Postscript font name
+		///</summary>
+		[Test]
+		public void ArialEmbeddingTest()
+		{
+			string fontName = "Arial";
+			var expected = FsType.Editable;
+			if (_isLinux)
+			{
+				fontName = "Ubuntu";
+				expected = FsType.Installable;
+			}
+			var fontFullName = FontInternals.GetFontFileName(fontName, "normal");
+			var actual = FontInternals.GetFsType(fontFullName);
+			Assert.AreEqual(expected, actual);
+		}
+
+		/// <summary>
         ///A test Arial Postscript font name
         ///</summary>
         [Test]
