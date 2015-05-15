@@ -53,6 +53,7 @@ namespace Test.PsTool
 		///A test Arial Postscript font name
 		///</summary>
 		[Test]
+		[Category("SkipOnTeamCity")]
 		public void CharisEmbeddingTest()
 		{
 			string familyName = "Charis SIL";

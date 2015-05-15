@@ -181,7 +181,7 @@ namespace SIL.Tool
 
         public static FsType GetFsType(string fontFullName)
         {
-            if (!File.Exists(fontFullName)) throw new FileNotFoundException("Font file note found", fontFullName);
+            if (!File.Exists(fontFullName)) throw new FileNotFoundException(fontFullName);
 
             FileStream fs = new FileStream(fontFullName, FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fs);
@@ -207,7 +207,7 @@ namespace SIL.Tool
                     case "ttcf":
                         TTC_HEADER_1 ttcHeader = GetTtcHeader(r);
                         if ((ttcHeader.uMajorVersion != 1 && ttcHeader.uMajorVersion != 2) || ttcHeader.uMinorVersion != 0)
-                            throw new VersionNotFoundException("Expected header version 1.0 or 2.0");
+                            throw new VersionNotFoundException(fontFullName + " Expected header version 1.0 or 2.0");
                         GetTtcOffsets(r, ttcHeader.uNumFonts);
                         fs.Position = long.Parse(ttcOffsets[0].ToString());
                         ttResult = GetOffsetTable(r);
@@ -217,11 +217,11 @@ namespace SIL.Tool
                         }
                         else
                         {
-                            throw new VersionNotFoundException("FontInternals: Expected TrueType version 1.0");
+                            throw new VersionNotFoundException(fontFullName + " expected TrueType version 1.0");
                         }
                         break;
                     default:
-                        throw new MissingFieldException("FontInternals", "Font type");
+                        throw new MissingFieldException(fontFullName + " Font type should be ttcf or OTTO");
                 }
             }
 
@@ -248,7 +248,7 @@ namespace SIL.Tool
                 TT_OS2_RECORD ttOs2Result = GetOs2Record(r);
 	            return ttOs2Result.fsType;
             }
-            throw new MissingFieldException("FontInternals", "OS/2");
+            throw new MissingFieldException(fontFullName + " should contain OS/2 table");
         }
 
         private static TT_OS2_RECORD GetOs2Record(BinaryReader r)
