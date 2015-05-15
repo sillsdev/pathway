@@ -612,11 +612,18 @@ namespace SIL.Tool
         {
             try
             {
-                var fonturi = new Uri(fontFullName);
-                GlyphTypeface fc = new GlyphTypeface(fonturi);
-                var t = fc.EmbeddingRights;
-                if (t != FontEmbeddingRight.RestrictedLicense)
+                if (!Common.IsUnixOS())
+                {
+                    var fonturi = new Uri(fontFullName);
+                    GlyphTypeface fc = new GlyphTypeface(fonturi);
+                    var t = fc.EmbeddingRights;
+                    if (t != FontEmbeddingRight.RestrictedLicense)
+                        return true;
+                }
+                else
+                {
                     return true;
+                }
 
                 return false;
             }
