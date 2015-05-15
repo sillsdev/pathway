@@ -34,11 +34,11 @@ namespace Test.epubConvert
         /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
-        public void NonSilFontTest()
+        public void RestrictedFontTest()
         {
             Assert.IsTrue(FontInternals.IsInstalled("Arial"));
             var arialFont = new EmbeddedFont("Arial");
-            Assert.IsFalse(arialFont.CanRedistribute);
+            Assert.IsTrue(arialFont.CanRedistribute);
             const string fontFilename = "Arial.ttf";
             Assert.IsTrue(fontFilename.ToLower().Equals(Path.GetFileName(arialFont.Filename).ToLower()));
         }

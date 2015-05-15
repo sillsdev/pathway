@@ -718,29 +718,29 @@ namespace epubConvert
         /// <returns></returns>
         public bool EmbedAllFonts(string[] langArray, string contentFolder)
         {
-            var nonSilFonts = NonSilFonts();
+            var restrictedFonts = RestrictedFonts();
             // If there are any non-SIL fonts in use, show the Font Warning Dialog
             // (possibly multiple times) and replace our embedded font items if needed
             // (if we're running a test, skip the dialog and just embed the font)
-            if (nonSilFonts.Count > 0 && !Common.Testing)
+            if (restrictedFonts.Count > 0 && !Common.Testing)
             {
-                if (!AskUserAboutEachFont(langArray, nonSilFonts))
+                if (!AskUserAboutEachFont(langArray, restrictedFonts))
                 {
                     return false; // User Cancels operation
                 }
             }
             CopyFonts(contentFolder);
             // clean up
-            if (nonSilFonts.Count > 0)
+            if (restrictedFonts.Count > 0)
             {
-                nonSilFonts.Clear();
+                restrictedFonts.Clear();
             }
             return true;
         }
 
-        private Dictionary<EmbeddedFont, string> NonSilFonts()
+        private Dictionary<EmbeddedFont, string> RestrictedFonts()
         {
-            var nonSilFonts = new Dictionary<EmbeddedFont, string>();
+            var restrictedFonts = new Dictionary<EmbeddedFont, string>();
             // Build the list of non-SIL fonts in use
             foreach (var embeddedFont in _embeddedFonts)
             {
@@ -752,7 +752,7 @@ namespace epubConvert
                         {
                             // add this language to the list of langs that use this font
                             string langs;
-                            if (nonSilFonts.TryGetValue(embeddedFont.Value, out langs))
+                            if (restrictedFonts.TryGetValue(embeddedFont.Value, out langs))
                             {
                                 // existing entry - add this language to the list of langs that use this font
                                 var sbName = new StringBuilder();
@@ -760,60 +760,60 @@ namespace epubConvert
                                 sbName.Append(", ");
                                 sbName.Append(language);
                                 // set the value
-                                nonSilFonts[embeddedFont.Value] = sbName.ToString();
+                                restrictedFonts[embeddedFont.Value] = sbName.ToString();
                             }
                             else
                             {
                                 // new entry
-                                nonSilFonts.Add(embeddedFont.Value, language);
+                                restrictedFonts.Add(embeddedFont.Value, language);
                             }
                         }
                     }
                 }
             }
-            return nonSilFonts;
+            return restrictedFonts;
         }
 
-        private bool AskUserAboutEachFont(string[] langArray, Dictionary<EmbeddedFont, string> nonSilFonts)
+        private bool AskUserAboutEachFont(string[] langArray, Dictionary<EmbeddedFont, string> restrictedFonts)
         {
-            var dlg = new FontWarningDlg { RepeatAction = false, RemainingIssues = nonSilFonts.Count - 1 };
+            var dlg = new FontWarningDlg { RepeatAction = false, RemainingIssues = restrictedFonts.Count - 1 };
             // Handle the cases where the user wants to automatically process non-SIL / missing fonts
-            if (_parent.NonSilFont == FontHandling.CancelExport)
+            if (_parent.IfRestricted == FontHandling.CancelExport)
             {
                 // TODO: implement message box
                 // Give the user a message indicating there's a non-SIL font in their writing system, and
                 // to go fix the problem. Don't let them continue with the export.
                 return false;
             }
-            if (_parent.NonSilFont != FontHandling.PromptUser)
+            if (_parent.IfRestricted != FontHandling.PromptUser)
             {
                 dlg.RepeatAction = true; // the handling picks up below...
                 dlg.SelectedFont = _parent.DefaultFont;
             }
-            foreach (var nonSilFont in nonSilFonts)
+            foreach (var restrictedFont in restrictedFonts)
             {
-                dlg.MyEmbeddedFont = nonSilFont.Key.Name;
-                dlg.Languages = nonSilFont.Value;
-                bool isMissing = (nonSilFont.Key.Filename == null);
-                bool isManualProcess = ((isMissing == false && _parent.NonSilFont == FontHandling.PromptUser) || (isMissing == true && _parent.MissingFont == FontHandling.PromptUser));
+                dlg.MyEmbeddedFont = restrictedFont.Key.Name;
+                dlg.Languages = restrictedFont.Value;
+                bool isMissing = (restrictedFont.Key.Filename == null);
+                bool isManualProcess = ((isMissing == false && _parent.IfRestricted == FontHandling.PromptUser) || (isMissing && _parent.MissingFont == FontHandling.PromptUser));
                 if (dlg.RepeatAction)
                 {
                     // user wants to repeat the last action - if the last action
                     // was to change the font, change this one as well
                     // (this is also where the automatic FontHandling takes place)
-                    if ((!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont) && isManualProcess) || // manual "repeat this action" for non-SIL AND missing fonts
-                        (isMissing == false && _parent.NonSilFont == FontHandling.SubstituteDefaultFont && !nonSilFont.Key.Name.Equals(_parent.DefaultFont)) || // automatic for non-SIL fonts
-                        (isMissing == true && _parent.MissingFont == FontHandling.SubstituteDefaultFont && !nonSilFont.Key.Name.Equals(_parent.DefaultFont))) // automatic for missing fonts
+                    if ((!dlg.UseFontAnyway() && !restrictedFont.Key.Name.Equals(dlg.SelectedFont) && isManualProcess) || // manual "repeat this action" for non-SIL AND missing fonts
+                        (isMissing == false && _parent.IfRestricted == FontHandling.SubstituteDefaultFont && !restrictedFont.Key.Name.Equals(_parent.DefaultFont)) || // automatic for non-SIL fonts
+                        (isMissing == true && _parent.MissingFont == FontHandling.SubstituteDefaultFont && !restrictedFont.Key.Name.Equals(_parent.DefaultFont))) // automatic for missing fonts
                     {
                         // the user has chosen a different (SIL) font - 
                         // create a new EmbeddedFont and add it to the list
-                        _embeddedFonts.Remove(nonSilFont.Key.Name);
+                        _embeddedFonts.Remove(restrictedFont.Key.Name);
                         var newFont = new EmbeddedFont(dlg.SelectedFont);
                         _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
                         // also update the references in _langFontDictionary
                         foreach (var lang in langArray)
                         {
-                            if (_langFontDictionary[lang] == nonSilFont.Key.Name)
+                            if (_langFontDictionary[lang] == restrictedFont.Key.Name)
                             {
                                 _langFontDictionary[lang] = dlg.SelectedFont;
                             }
@@ -846,17 +846,17 @@ namespace epubConvert
                 DialogResult result = dlg.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
+                    if (!dlg.UseFontAnyway() && !restrictedFont.Key.Name.Equals(dlg.SelectedFont))
                     {
                         // the user has chosen a different (SIL) font - 
                         // create a new EmbeddedFont and add it to the list
-                        _embeddedFonts.Remove(nonSilFont.Key.Name);
+                        _embeddedFonts.Remove(restrictedFont.Key.Name);
                         var newFont = new EmbeddedFont(dlg.SelectedFont);
                         _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
                         // also update the references in _langFontDictionary
                         foreach (var lang in langArray)
                         {
-                            if (_langFontDictionary[lang] == nonSilFont.Key.Name)
+                            if (_langFontDictionary[lang] == restrictedFont.Key.Name)
                             {
                                 _langFontDictionary[lang] = dlg.SelectedFont;
                             }
