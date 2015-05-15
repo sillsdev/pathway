@@ -22,9 +22,7 @@ using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Text;
-using System.Windows.Media;
 using Microsoft.Win32;
-using FontFamily = System.Drawing.FontFamily;
 
 namespace SIL.Tool
 {
@@ -610,67 +608,48 @@ namespace SIL.Tool
         /// <returns></returns>
         public static bool IsFreeFont(string fontFullName)
         {
-            try
+            Dictionary<string, string> _dt = new Dictionary<string, string>();
+            using (InstalledFontCollection col = new InstalledFontCollection())
             {
-                var fonturi = new Uri(fontFullName);
-                GlyphTypeface fc = new GlyphTypeface(fonturi);
-                var t = fc.EmbeddingRights;
-                if (t != FontEmbeddingRight.RestrictedLicense)
-                    return true;
-
-                return false;
-            }
-            catch (Exception e)
-            {
-                return false;
+                foreach (FontFamily fa in col.Families)
+                {
+                    _dt.Add(fa.Name,fa.Name);
+                }
             }
 
+            // try looking at the copyright
+            CheckUserFileAccessRights rights = new CheckUserFileAccessRights(fontFullName);
+            if (rights.canRead())
+            {
+                string copyright = GetFontCopyright(fontFullName);
+                if (copyright.Length > 0)
+                {
+                    if (copyright.Contains("SIL") || copyright.Contains("Summer Institute of Linguistics"))
+                    {
+                        // SIL fonts
+                        return true;
+                    }
+                    // GPL / OFL license
+                    if (copyright.ToLower().Contains("general public license") ||
+                        copyright.ToLower().Contains("open font license"))
+                    {
+                        return true;
+                    }
+                    // redistributable Creative Commons licenses
+                    if (copyright.ToLower().Contains("cc by-sa") || copyright.ToLower().Contains("cc by ") ||
+                        copyright.ToLower().Contains("cc by-nd") || copyright.ToLower().Contains("cc by-nc") ||
+                        copyright.ToLower().Contains("cc by-nc-sa") || copyright.ToLower().Contains("cc by-nc-nd") ||
+                        copyright.ToLower().Contains("cc0"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            // TODO: known free fonts that don't match the copyright string tests above can be tested here by looking for their
+            // font names. This will probably be done on an as-needed basis.
 
-            //Dictionary<string, string> _dt = new Dictionary<string, string>();
-            //using (InstalledFontCollection col = new InstalledFontCollection())
-            //{
-            //    foreach (System.Drawing.FontFamily fa in col.Families)
-            //    {
-            //        _dt.Add(fa.Name,fa.Name);
-            //    }
-            //}
-
-
-            
-
-            //// try looking at the copyright
-            //CheckUserFileAccessRights rights = new CheckUserFileAccessRights(fontFullName);
-            //if (rights.canRead())
-            //{
-            //    string copyright = GetFontCopyright(fontFullName);
-            //    if (copyright.Length > 0)
-            //    {
-            //        if (copyright.Contains("SIL") || copyright.Contains("Summer Institute of Linguistics"))
-            //        {
-            //            // SIL fonts
-            //            return true;
-            //        }
-            //        // GPL / OFL license
-            //        if (copyright.ToLower().Contains("general public license") ||
-            //            copyright.ToLower().Contains("open font license"))
-            //        {
-            //            return true;
-            //        }
-            //        // redistributable Creative Commons licenses
-            //        if (copyright.ToLower().Contains("cc by-sa") || copyright.ToLower().Contains("cc by ") ||
-            //            copyright.ToLower().Contains("cc by-nd") || copyright.ToLower().Contains("cc by-nc") ||
-            //            copyright.ToLower().Contains("cc by-nc-sa") || copyright.ToLower().Contains("cc by-nc-nd") ||
-            //            copyright.ToLower().Contains("cc0"))
-            //        {
-            //            return true;
-            //        }
-            //    }
-            //}
-            //// TODO: known free fonts that don't match the copyright string tests above can be tested here by looking for their
-            //// font names. This will probably be done on an as-needed basis.
-
-            //// can't determine - return false
-            //return false;
+            // can't determine - return false
+            return false;
         }
 
         /// <summary>

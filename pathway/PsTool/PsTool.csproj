@@ -215,7 +215,6 @@
     <Reference Include="Palaso">
       <HintPath>..\ThirdParty\Palaso.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />

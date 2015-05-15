@@ -94,7 +94,7 @@ namespace SIL.PublishingSolution
         public string ChapterNumbers { get; set; }
         public string References { get; set; }
         public FontHandling MissingFont { get; set; } // note that this doesn't use all the enum values
-        public FontHandling IfRestricted { get; set; }
+        public FontHandling NonSilFont { get; set; }
         private ArrayList PseudoClass = new ArrayList();
         public bool PageBreak;
         private readonly Dictionary<string, string> _tocIdMapping = new Dictionary<string, string>();
@@ -746,22 +746,22 @@ namespace SIL.PublishingSolution
                 switch (othersfeature["NonSILFont"].Trim())
                 {
                     case "Embed Font Anyway":
-                        IfRestricted = FontHandling.EmbedFont;
+                        NonSilFont = FontHandling.EmbedFont;
                         break;
                     case "Use Fallback Font":
-                        IfRestricted = FontHandling.SubstituteDefaultFont;
+                        NonSilFont = FontHandling.SubstituteDefaultFont;
                         break;
                     case "Cancel Export":
-                        IfRestricted = FontHandling.CancelExport;
+                        NonSilFont = FontHandling.CancelExport;
                         break;
                     default: // "Prompt User" case goes here
-                        IfRestricted = FontHandling.PromptUser;
+                        NonSilFont = FontHandling.PromptUser;
                         break;
                 }
             }
             else
             {
-                IfRestricted = FontHandling.PromptUser;
+                NonSilFont = FontHandling.PromptUser;
             }
         }
 
