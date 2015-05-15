@@ -50,6 +50,19 @@ namespace Test.PsTool
 		}
 
 		/// <summary>
+		///A test Arial Postscript font name
+		///</summary>
+		[Test]
+		public void CharisEmbeddingTest()
+		{
+			string familyName = "Charis SIL";
+			var expected = FsType.Installable;
+			var fontFullName = FontInternals.GetFontFileName(familyName, "Regular");
+			var actual = FontInternals.GetFsType(fontFullName);
+			Assert.AreEqual(expected, actual);
+		}
+
+		/// <summary>
         ///A test Arial Postscript font name
         ///</summary>
         [Test]
