@@ -765,7 +765,7 @@ namespace SIL.Tool
             {
                 FsType myType = GetFsType(fontFullName);
 
-                if (myType != FsType.Restricted)
+                if (myType != FsType.Restricted && myType != FsType.PreviewPrint)
                     return true;
             }
             catch (Exception)

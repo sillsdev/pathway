@@ -30,11 +30,11 @@ namespace Test.epubConvert
     public class EmbeddedFontTest
     {
         /// <summary>
-        /// Test a known Restricted font
+        /// Test a known Free font
         /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
-        public void RestrictedFontTest()
+        public void FreeFontTest()
         {
             Assert.IsTrue(FontInternals.IsInstalled("Arial"));
             var arialFont = new EmbeddedFont("Arial");
