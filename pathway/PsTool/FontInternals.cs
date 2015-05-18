@@ -761,47 +761,17 @@ namespace SIL.Tool
         /// <returns></returns>
         public static bool IsFreeFont(string fontFullName)
         {
-            Dictionary<string, string> _dt = new Dictionary<string, string>();
-            using (InstalledFontCollection col = new InstalledFontCollection())
+            try
             {
-                foreach (FontFamily fa in col.Families)
-                {
-                    _dt.Add(fa.Name,fa.Name);
-                }
-            }
+                FsType myType = GetFsType(fontFullName);
 
-            // try looking at the copyright
-            CheckUserFileAccessRights rights = new CheckUserFileAccessRights(fontFullName);
-            if (rights.canRead())
+                if (myType != FsType.Restricted)
+                    return true;
+            }
+            catch (Exception)
             {
-                string copyright = GetFontCopyright(fontFullName);
-                if (copyright.Length > 0)
-                {
-                    if (copyright.Contains("SIL") || copyright.Contains("Summer Institute of Linguistics"))
-                    {
-                        // SIL fonts
-                        return true;
-                    }
-                    // GPL / OFL license
-                    if (copyright.ToLower().Contains("general public license") ||
-                        copyright.ToLower().Contains("open font license"))
-                    {
-                        return true;
-                    }
-                    // redistributable Creative Commons licenses
-                    if (copyright.ToLower().Contains("cc by-sa") || copyright.ToLower().Contains("cc by ") ||
-                        copyright.ToLower().Contains("cc by-nd") || copyright.ToLower().Contains("cc by-nc") ||
-                        copyright.ToLower().Contains("cc by-nc-sa") || copyright.ToLower().Contains("cc by-nc-nd") ||
-                        copyright.ToLower().Contains("cc0"))
-                    {
-                        return true;
-                    }
-                }
+                return false;
             }
-            // TODO: known free fonts that don't match the copyright string tests above can be tested here by looking for their
-            // font names. This will probably be done on an as-needed basis.
-
-            // can't determine - return false
             return false;
         }
 
