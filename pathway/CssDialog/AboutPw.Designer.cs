@@ -46,6 +46,9 @@ namespace SIL.PublishingSolution
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblCompany = new System.Windows.Forms.Label();
+            this.lblSilPathway = new System.Windows.Forms.Label();
+            this.lblVersionwithDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -166,7 +169,7 @@ namespace SIL.PublishingSolution
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(168, 14);
             this.label2.TabIndex = 15;
-            this.label2.Text = "(C) 2008 - 2014 SIL International  ";
+            this.label2.Text = "(C) 2008 - 2015 SIL International  ";
             // 
             // label1
             // 
@@ -231,6 +234,49 @@ namespace SIL.PublishingSolution
             this.flowLayoutPanel1.Size = new System.Drawing.Size(336, 20);
             this.flowLayoutPanel1.TabIndex = 19;
             // 
+            // lblCompany
+            // 
+            this.lblCompany.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblCompany.AutoSize = true;
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.lblCompany, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.lblCompany, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.lblCompany, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.lblCompany, "AboutPw.lblCompany");
+            this.lblCompany.Location = new System.Drawing.Point(175, 187);
+            this.lblCompany.Name = "lblCompany";
+            this.lblCompany.Size = new System.Drawing.Size(344, 13);
+            this.lblCompany.TabIndex = 20;
+            this.lblCompany.Text = "SIL International in collaboration with EC Group Datasoft Private Limited";
+            this.lblCompany.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSilPathway
+            // 
+            this.lblSilPathway.AutoSize = true;
+            this.lblSilPathway.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.lblSilPathway, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.lblSilPathway, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.lblSilPathway, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.lblSilPathway, "AboutPw.lblSilPathway");
+            this.lblSilPathway.Location = new System.Drawing.Point(174, 23);
+            this.lblSilPathway.Name = "lblSilPathway";
+            this.lblSilPathway.Size = new System.Drawing.Size(94, 24);
+            this.lblSilPathway.TabIndex = 21;
+            this.lblSilPathway.Text = "Pathway";
+            // 
+            // lblVersionwithDate
+            // 
+            this.lblVersionwithDate.AutoSize = true;
+            this.lblVersionwithDate.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.lblVersionwithDate, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.lblVersionwithDate, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.lblVersionwithDate, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.lblVersionwithDate, "AboutPw.lblVersionwithDate");
+            this.lblVersionwithDate.Location = new System.Drawing.Point(175, 89);
+            this.lblVersionwithDate.Name = "lblVersionwithDate";
+            this.lblVersionwithDate.Size = new System.Drawing.Size(74, 14);
+            this.lblVersionwithDate.TabIndex = 22;
+            this.lblVersionwithDate.Text = "Version: 1.4.0";
+            // 
             // AboutPw
             // 
             this.AccessibleName = "AboutPw";
@@ -238,6 +284,9 @@ namespace SIL.PublishingSolution
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(535, 290);
+            this.Controls.Add(this.lblVersionwithDate);
+            this.Controls.Add(this.lblSilPathway);
+            this.Controls.Add(this.lblCompany);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
@@ -257,7 +306,7 @@ namespace SIL.PublishingSolution
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutPw";
-            this.Padding = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.Padding = new System.Windows.Forms.Padding(9);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -289,6 +338,9 @@ namespace SIL.PublishingSolution
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label lblCompany;
+        private System.Windows.Forms.Label lblSilPathway;
+        private System.Windows.Forms.Label lblVersionwithDate;
 
     }
 }

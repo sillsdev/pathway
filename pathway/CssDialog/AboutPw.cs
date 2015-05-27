@@ -183,6 +183,12 @@ namespace SIL.PublishingSolution
                 this.chkHelpToImprove.Location = new Point(chkHelpToImprove.Location.X, chkHelpToImprove.Location.Y - 50);
                 this.lnkGPL.Location = new Point(lnkGPL.Location.X - 10, lnkGPL.Location.Y);
             }
+
+            string version = Assembly.GetEntryAssembly().GetName().Version.ToString();
+
+            string versionDate = String.Format("{0} ({1})", version, AssemblyFileDate);
+
+            lblVersionwithDate.Text = "Version: " + versionDate;
         }
 
 
