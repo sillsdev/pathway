@@ -33,8 +33,6 @@
             this.grpOptions = new System.Windows.Forms.GroupBox();
             this.lblSubstituteSILFont = new System.Windows.Forms.Label();
             this.ddlSILFonts = new System.Windows.Forms.ComboBox();
-            this.rdoConvertToSILFont = new System.Windows.Forms.RadioButton();
-            this.rdoEmbedFont = new System.Windows.Forms.RadioButton();
             this.btn_OK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtWarning = new System.Windows.Forms.TextBox();
@@ -61,8 +59,6 @@
             // 
             this.grpOptions.Controls.Add(this.lblSubstituteSILFont);
             this.grpOptions.Controls.Add(this.ddlSILFonts);
-            this.grpOptions.Controls.Add(this.rdoConvertToSILFont);
-            this.grpOptions.Controls.Add(this.rdoEmbedFont);
             this.l10NSharpExtender1.SetLocalizableToolTip(this.grpOptions, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.grpOptions, null);
             this.l10NSharpExtender1.SetLocalizingId(this.grpOptions, "FontWarningDlg.grpOptions");
@@ -80,7 +76,7 @@
             this.l10NSharpExtender1.SetLocalizableToolTip(this.lblSubstituteSILFont, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.lblSubstituteSILFont, null);
             this.l10NSharpExtender1.SetLocalizingId(this.lblSubstituteSILFont, "FontWarningDlg.lblSubstituteSILFont");
-            this.lblSubstituteSILFont.Location = new System.Drawing.Point(60, 57);
+            this.lblSubstituteSILFont.Location = new System.Drawing.Point(23, 37);
             this.lblSubstituteSILFont.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSubstituteSILFont.Name = "lblSubstituteSILFont";
             this.lblSubstituteSILFont.Size = new System.Drawing.Size(101, 13);
@@ -96,45 +92,12 @@
             this.l10NSharpExtender1.SetLocalizableToolTip(this.ddlSILFonts, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.ddlSILFonts, null);
             this.l10NSharpExtender1.SetLocalizingId(this.ddlSILFonts, "FontWarningDlg.ddlSILFonts");
-            this.ddlSILFonts.Location = new System.Drawing.Point(192, 50);
+            this.ddlSILFonts.Location = new System.Drawing.Point(153, 34);
             this.ddlSILFonts.Margin = new System.Windows.Forms.Padding(4);
             this.ddlSILFonts.Name = "ddlSILFonts";
             this.ddlSILFonts.Size = new System.Drawing.Size(213, 21);
             this.ddlSILFonts.TabIndex = 2;
             this.ddlSILFonts.SelectedIndexChanged += new System.EventHandler(this.ddlSILFonts_SelectedIndexChanged);
-            // 
-            // rdoConvertToSILFont
-            // 
-            this.rdoConvertToSILFont.AutoSize = true;
-            this.rdoConvertToSILFont.Checked = true;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.rdoConvertToSILFont, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.rdoConvertToSILFont, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.rdoConvertToSILFont, "FontWarningDlg.rdoConvertToSILFont");
-            this.rdoConvertToSILFont.Location = new System.Drawing.Point(9, 54);
-            this.rdoConvertToSILFont.Margin = new System.Windows.Forms.Padding(4);
-            this.rdoConvertToSILFont.Name = "rdoConvertToSILFont";
-            this.rdoConvertToSILFont.Size = new System.Drawing.Size(127, 17);
-            this.rdoConvertToSILFont.TabIndex = 1;
-            this.rdoConvertToSILFont.TabStop = true;
-            this.rdoConvertToSILFont.Text = "rdoConvertToSILFont";
-            this.rdoConvertToSILFont.UseVisualStyleBackColor = true;
-            this.rdoConvertToSILFont.CheckedChanged += new System.EventHandler(this.rdoConvertToSILFont_CheckedChanged);
-            // 
-            // rdoEmbedFont
-            // 
-            this.rdoEmbedFont.AutoSize = true;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.rdoEmbedFont, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.rdoEmbedFont, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.rdoEmbedFont, "FontWarningDlg.rdoEmbedFont");
-            this.rdoEmbedFont.Location = new System.Drawing.Point(9, 26);
-            this.rdoEmbedFont.Margin = new System.Windows.Forms.Padding(4);
-            this.rdoEmbedFont.Name = "rdoEmbedFont";
-            this.rdoEmbedFont.Size = new System.Drawing.Size(94, 17);
-            this.rdoEmbedFont.TabIndex = 0;
-            this.rdoEmbedFont.TabStop = true;
-            this.rdoEmbedFont.Text = "rdoEmbedFont";
-            this.rdoEmbedFont.UseVisualStyleBackColor = true;
-            this.rdoEmbedFont.CheckedChanged += new System.EventHandler(this.rdoEmbedFont_CheckedChanged);
             // 
             // btn_OK
             // 
@@ -235,8 +198,6 @@
 
         private System.Windows.Forms.PictureBox icnWarning;
         private System.Windows.Forms.GroupBox grpOptions;
-        private System.Windows.Forms.RadioButton rdoConvertToSILFont;
-        private System.Windows.Forms.RadioButton rdoEmbedFont;
         private System.Windows.Forms.Button btn_OK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox ddlSILFonts;

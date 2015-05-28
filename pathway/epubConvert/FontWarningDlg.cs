@@ -79,7 +79,8 @@ namespace epubConvert
         public bool UseFontAnyway()
         {
             //return (!rdoEmbedFont.Visible) ? false : rdoEmbedFont.Checked;
-            return (!rdoEmbedFont.Checked) ? false : true;
+            //return (!rdoEmbedFont.Checked) ? false : true;
+            return true;
         }
 
         // variables
@@ -106,9 +107,9 @@ namespace epubConvert
                 // show "missing font" UI (only option is to substitute)
                 Text = String.Format(Resources.MissingFontTitle, MyEmbeddedFont);
                 txtWarning.Text = String.Format(Resources.MissingFontWarning, MyEmbeddedFont, Languages);
-                grpOptions.Text = "";
-                rdoEmbedFont.Visible = false;
-                rdoConvertToSILFont.Visible = false;
+                grpOptions.Text = Resources.EmbedFontOptions;
+                //rdoEmbedFont.Visible = false;
+                //rdoConvertToSILFont.Visible = false;
                 lblSubstituteSILFont.Visible = true;
                 lblSubstituteSILFont.Text = Resources.ConvertToSILFont;
                 ddlSILFonts.Enabled = true;
@@ -119,9 +120,11 @@ namespace epubConvert
                 Text = Resources.FontWarningDlgTitle;
                 txtWarning.Text = String.Format(Resources.EmbedFontsWarning, MyEmbeddedFont, Languages);
                 grpOptions.Text = Resources.EmbedFontOptions;
-                rdoEmbedFont.Text = Resources.EmbedFont;
-                rdoConvertToSILFont.Text = Resources.ConvertToSILFont;
-                lblSubstituteSILFont.Visible = false;
+                //rdoEmbedFont.Text = Resources.EmbedFont;
+                //rdoConvertToSILFont.Text = Resources.ConvertToSILFont;
+                lblSubstituteSILFont.Visible = true;
+                lblSubstituteSILFont.Text = Resources.ConvertToSILFont;
+                ddlSILFonts.Enabled = true;
             }
             if (ddlSILFonts.Items.Count == 0)
             {

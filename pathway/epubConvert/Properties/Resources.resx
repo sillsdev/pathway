@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FontWarningDlgTitle" xml:space="preserve">
     <value>Font Copyright Warning</value>
@@ -124,13 +124,13 @@
     <value>&amp;Embed the font. I have the proper rights to redistribute it.</value>
   </data>
   <data name="ConvertToSILFont" xml:space="preserve">
-    <value>&amp;Use this font instead:</value>
+    <value>&amp;Alternative font:</value>
   </data>
   <data name="EmbedFontsWarning" xml:space="preserve">
-    <value>'{0}' is specified as the default font for language(s): '{1}'. You will need the proper rights in order to embed this font in your distributed document.</value>
+    <value>'{0}' is specified as the default font for language(s): '{1}'. That font's license does not permit the font to be embedded into your distributed document. Select another font to use instead, or click Cancel to stop the conversion to .epub.</value>
   </data>
   <data name="EmbedFontOptions" xml:space="preserve">
-    <value>What do you want to do?</value>
+    <value>Select font</value>
   </data>
   <data name="Chapter" xml:space="preserve">
     <value>Chapter </value>
