@@ -102,7 +102,7 @@ namespace epubConvert
         {
             icnWarning.Image = SystemIcons.Warning.ToBitmap();
             EmbeddedFont curfont = new EmbeddedFont(MyEmbeddedFont);
-            if (curfont.Filename == null)
+            if (string.IsNullOrEmpty(curfont.Filename))
             {
                 // show "missing font" UI (only option is to substitute)
                 Text = String.Format(Resources.MissingFontTitle, MyEmbeddedFont);

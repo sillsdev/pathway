@@ -794,7 +794,7 @@ namespace epubConvert
             {
                 dlg.MyEmbeddedFont = nonSilFont.Key.Name;
                 dlg.Languages = nonSilFont.Value;
-                bool isMissing = (nonSilFont.Key.Filename == null);
+                bool isMissing = (string.IsNullOrEmpty(nonSilFont.Key.Filename));
                 bool isManualProcess = ((isMissing == false && _parent.NonSilFont == FontHandling.PromptUser) || (isMissing == true && _parent.MissingFont == FontHandling.PromptUser));
                 if (dlg.RepeatAction)
                 {
