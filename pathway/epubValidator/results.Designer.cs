@@ -86,9 +86,6 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.linkLabel1, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.linkLabel1, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.linkLabel1, "frmResults.linkLabel1");
             this.linkLabel1.Location = new System.Drawing.Point(16, 90);
             this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel1.Name = "linkLabel1";

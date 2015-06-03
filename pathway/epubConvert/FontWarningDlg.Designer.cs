@@ -59,9 +59,6 @@
             // 
             this.grpOptions.Controls.Add(this.lblSubstituteSILFont);
             this.grpOptions.Controls.Add(this.ddlSILFonts);
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.grpOptions, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.grpOptions, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.grpOptions, "FontWarningDlg.grpOptions");
             this.grpOptions.Location = new System.Drawing.Point(16, 98);
             this.grpOptions.Margin = new System.Windows.Forms.Padding(4);
             this.grpOptions.Name = "grpOptions";
@@ -73,9 +70,6 @@
             // lblSubstituteSILFont
             // 
             this.lblSubstituteSILFont.AutoSize = true;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.lblSubstituteSILFont, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.lblSubstituteSILFont, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.lblSubstituteSILFont, "FontWarningDlg.lblSubstituteSILFont");
             this.lblSubstituteSILFont.Location = new System.Drawing.Point(23, 37);
             this.lblSubstituteSILFont.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSubstituteSILFont.Name = "lblSubstituteSILFont";
@@ -145,9 +139,6 @@
             // chkRepeatAction
             // 
             this.chkRepeatAction.AutoSize = true;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.chkRepeatAction, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.chkRepeatAction, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.chkRepeatAction, "FontWarningDlg.chkRepeatAction");
             this.chkRepeatAction.Location = new System.Drawing.Point(17, 212);
             this.chkRepeatAction.Margin = new System.Windows.Forms.Padding(4);
             this.chkRepeatAction.Name = "chkRepeatAction";
@@ -183,7 +174,7 @@
             this.MinimizeBox = false;
             this.Name = "FontWarningDlg";
             this.ShowIcon = false;
-            this.Text = "FontWarningDlg";
+            this.Text = "Font Warning Dialog";
             this.Load += new System.EventHandler(this.FontWarningDlg_Load);
             ((System.ComponentModel.ISupportInitialize)(this.icnWarning)).EndInit();
             this.grpOptions.ResumeLayout(false);

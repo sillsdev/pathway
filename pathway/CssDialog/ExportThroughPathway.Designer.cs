@@ -529,10 +529,6 @@ namespace SIL.PublishingSolution
             // btnBrowseColophon
             // 
             this.btnBrowseColophon.Enabled = false;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnBrowseColophon, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.btnBrowseColophon, null);
-            this.l10NSharpExtender1.SetLocalizationPriority(this.btnBrowseColophon, L10NSharp.LocalizationPriority.High);
-            this.l10NSharpExtender1.SetLocalizingId(this.btnBrowseColophon, "ExportThroughPathway.btnBrowseColophon");
             this.btnBrowseColophon.Location = new System.Drawing.Point(317, 160);
             this.btnBrowseColophon.Name = "btnBrowseColophon";
             this.btnBrowseColophon.Size = new System.Drawing.Size(27, 23);
@@ -723,9 +719,6 @@ namespace SIL.PublishingSolution
             // 
             // btnBrowseSaveInFolder
             // 
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnBrowseSaveInFolder, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.btnBrowseSaveInFolder, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.btnBrowseSaveInFolder, "ExportThroughPathway.ExportThroughPathway.btnBrowseSaveInFolder");
             this.btnBrowseSaveInFolder.Location = new System.Drawing.Point(332, 17);
             this.btnBrowseSaveInFolder.Name = "btnBrowseSaveInFolder";
             this.btnBrowseSaveInFolder.Size = new System.Drawing.Size(24, 23);
@@ -736,9 +729,6 @@ namespace SIL.PublishingSolution
             // 
             // txtSaveInFolder
             // 
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.txtSaveInFolder, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.txtSaveInFolder, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.txtSaveInFolder, "ExportThroughPathway.ExportThroughPathway.txtSaveInFolder");
             this.txtSaveInFolder.Location = new System.Drawing.Point(92, 22);
             this.txtSaveInFolder.Name = "txtSaveInFolder";
             this.txtSaveInFolder.Size = new System.Drawing.Size(237, 20);

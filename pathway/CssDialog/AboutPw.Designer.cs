@@ -131,10 +131,6 @@ namespace SIL.PublishingSolution
             // lnkProj
             // 
             this.lnkProj.AutoSize = true;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.lnkProj, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.lnkProj, null);
-            this.l10NSharpExtender1.SetLocalizationPriority(this.lnkProj, L10NSharp.LocalizationPriority.High);
-            this.l10NSharpExtender1.SetLocalizingId(this.lnkProj, "AboutPw.lnkProj");
             this.lnkProj.Location = new System.Drawing.Point(405, 218);
             this.lnkProj.Name = "lnkProj";
             this.lnkProj.Size = new System.Drawing.Size(108, 13);
