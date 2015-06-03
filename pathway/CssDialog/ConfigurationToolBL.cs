@@ -3207,7 +3207,7 @@ namespace SIL.PublishingSolution
                     double width = iconImage.Width;
                     if (height != 20 || width != 20)
                     {
-                        var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.BrowseButton.Message", "Please choose the icon with 20 x 20 dim.", "");
+                        var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.BrowseButton.Message", "Please choose the icon with 20 x 20 px.", "");
                         MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }

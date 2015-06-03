@@ -662,7 +662,7 @@
     </tu>
     <tu tuid="ConfigurationToolBL.BrowseButton.Message">
       <tuv xml:lang="en">
-        <seg>Please choose the icon with 20 x 20 dim.</seg>
+        <seg>Please choose the icon with 20 x 20 px.</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationToolBL.CopyStyle.Message">
