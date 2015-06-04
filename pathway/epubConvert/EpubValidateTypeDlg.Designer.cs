@@ -98,7 +98,7 @@
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(250, 18);
             this.lblMessage.TabIndex = 1;
-            this.lblMessage.Text = "Do you want select the Epub validate type ?";
+            this.lblMessage.Text = "Do you want to select the Epub validate type?";
 
             // 
             // IcnInfo
