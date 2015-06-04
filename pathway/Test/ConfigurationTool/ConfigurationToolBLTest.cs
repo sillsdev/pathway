@@ -155,16 +155,16 @@ namespace Test.UIConfigurationToolBLTest
             SetUp();
             CopyFile();
             LoadParam();
-            cTool._CToolBL = new ConfigurationToolBL();
-            cTool._CToolBL.inputTypeBL = "Dictionary";
-            cTool._CToolBL.MediaTypeEXE = "paper";
-            cTool._CToolBL.StyleEXE = "OneColumn"; //
-            cTool._CToolBL.SetClassReference(cTool);
-            cTool._CToolBL.CreateToolTip();
-            cTool._CToolBL.ConfigurationTool_LoadBL();
-            cTool._CToolBL.tsNew_ClickBL();
+            cTool._cToolBL = new ConfigurationToolBL();
+            cTool._cToolBL.inputTypeBL = "Dictionary";
+            cTool._cToolBL.MediaTypeEXE = "paper";
+            cTool._cToolBL.StyleEXE = "OneColumn"; //
+            cTool._cToolBL.SetClassReference(cTool);
+            cTool._cToolBL.CreateToolTip();
+            cTool._cToolBL.ConfigurationTool_LoadBL();
+            cTool._cToolBL.tsNew_ClickBL();
             cTool.TabControl1.SelectedIndex = 1;
-            cTool._CToolBL.tabControl1_SelectedIndexChangedBL();
+            cTool._cToolBL.tabControl1_SelectedIndexChangedBL();
             int SelectedRowIndex = cTool.StylesGrid.RowCount - 1;
             string actualStyleName = cTool.StylesGrid[0, SelectedRowIndex].Value.ToString();
             Assert.AreEqual("CustomSheet-1", actualStyleName, "GridRowValueTest Test Failes");
@@ -220,16 +220,16 @@ namespace Test.UIConfigurationToolBLTest
             SetUp();
             CopyFile();
             LoadParam();
-            cTool._CToolBL = new ConfigurationToolBL();
-            cTool._CToolBL.inputTypeBL = "Dictionary";
-            cTool._CToolBL.MediaTypeEXE = "paper";
-            cTool._CToolBL.StyleEXE = "OneColumn"; //
-            cTool._CToolBL.SetClassReference(cTool);
-            cTool._CToolBL.CreateToolTip();
-            cTool._CToolBL.ConfigurationTool_LoadBL();
-            cTool._CToolBL.tsSaveAs_ClickBL();
+            cTool._cToolBL = new ConfigurationToolBL();
+            cTool._cToolBL.inputTypeBL = "Dictionary";
+            cTool._cToolBL.MediaTypeEXE = "paper";
+            cTool._cToolBL.StyleEXE = "OneColumn"; //
+            cTool._cToolBL.SetClassReference(cTool);
+            cTool._cToolBL.CreateToolTip();
+            cTool._cToolBL.ConfigurationTool_LoadBL();
+            cTool._cToolBL.tsSaveAs_ClickBL();
             cTool.TabControl1.SelectedIndex = 1;
-            cTool._CToolBL.tabControl1_SelectedIndexChangedBL();
+            cTool._cToolBL.tabControl1_SelectedIndexChangedBL();
             int SelectedRowIndex = cTool.StylesGrid.RowCount - 1;
             string actualStyleName = cTool.StylesGrid[0, SelectedRowIndex].Value.ToString();
             Assert.AreEqual("Copy of OneColumn", actualStyleName, "GridRowValueTest Test Failes");
@@ -283,17 +283,17 @@ namespace Test.UIConfigurationToolBLTest
             SetUp();
             CopyFile();
             LoadParam();
-            cTool._CToolBL = new ConfigurationToolBL();
-            cTool._CToolBL.inputTypeBL = "Dictionary";
-            cTool._CToolBL.MediaTypeEXE = "paper";
-            cTool._CToolBL.StyleEXE = "Draft"; //
-            cTool._CToolBL.SetClassReference(cTool);
-            cTool._CToolBL.CreateToolTip();
-            cTool._CToolBL.ConfigurationTool_LoadBL();
-            cTool._CToolBL.tsNew_ClickBL();
+            cTool._cToolBL = new ConfigurationToolBL();
+            cTool._cToolBL.inputTypeBL = "Dictionary";
+            cTool._cToolBL.MediaTypeEXE = "paper";
+            cTool._cToolBL.StyleEXE = "Draft"; //
+            cTool._cToolBL.SetClassReference(cTool);
+            cTool._cToolBL.CreateToolTip();
+            cTool._cToolBL.ConfigurationTool_LoadBL();
+            cTool._cToolBL.tsNew_ClickBL();
             int afterNew = cTool.StylesGrid.RowCount;
             Assert.AreEqual(9, afterNew, "New Count Test Fails");
-            cTool._CToolBL.tsDelete_ClickBL();
+            cTool._cToolBL.tsDelete_ClickBL();
             int afterDelete = cTool.StylesGrid.RowCount;
             Assert.AreEqual(8, afterDelete, "New Count Test Fails");
             cTool.Close();
@@ -306,8 +306,8 @@ namespace Test.UIConfigurationToolBLTest
             SetUp();
             CopyFile();
             LoadParam();
-            cTool._CToolBL.ConfigurationTool_LoadBL();
-            cTool._CToolBL.ConfigurationTool_FormClosingBL();
+            cTool._cToolBL.ConfigurationTool_LoadBL();
+            cTool._cToolBL.ConfigurationTool_FormClosingBL();
             GridRowCount_Load();
             GridRowValue_Load();
             FormButtonEnable_Load();

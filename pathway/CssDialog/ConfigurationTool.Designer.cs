@@ -292,7 +292,7 @@ namespace SIL.PublishingSolution
             this._uiLanguageMenu.ForeColor = System.Drawing.Color.DarkGray;
             this.l10NSharpExtender1.SetLocalizableToolTip(this._uiLanguageMenu, null);
             this.l10NSharpExtender1.SetLocalizationComment(this._uiLanguageMenu, null);
-            this.l10NSharpExtender1.SetLocalizingId(this._uiLanguageMenu, "ConfigurationTool._uiLanguageMenu");
+            this.l10NSharpExtender1.SetLocalizingId(this._uiLanguageMenu, "ConfigurationTool.uiLanguageMenu");
             this._uiLanguageMenu.Name = "_uiLanguageMenu";
             this._uiLanguageMenu.Size = new System.Drawing.Size(59, 17);
             this._uiLanguageMenu.Text = "English";
@@ -602,9 +602,6 @@ namespace SIL.PublishingSolution
             this.lnkLblUrl.AutoSize = true;
             this.lnkLblUrl.LinkArea = new System.Windows.Forms.LinkArea(0, 22);
             this.lnkLblUrl.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.lnkLblUrl, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.lnkLblUrl, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.lnkLblUrl, "ConfigurationTool.ConfigurationTool.lnkLblUrl");
             this.lnkLblUrl.Location = new System.Drawing.Point(13, 463);
             this.lnkLblUrl.Name = "lnkLblUrl";
             this.lnkLblUrl.Size = new System.Drawing.Size(108, 13);
@@ -656,9 +653,6 @@ namespace SIL.PublishingSolution
             // 
             this.btnApproved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnApproved, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.btnApproved, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.btnApproved, "ConfigurationTool.ConfigurationTool.btnApproved");
             this.btnApproved.Location = new System.Drawing.Point(243, 412);
             this.btnApproved.Name = "btnApproved";
             this.btnApproved.Size = new System.Drawing.Size(169, 25);
@@ -2206,9 +2200,6 @@ namespace SIL.PublishingSolution
             // lblPct
             // 
             this.lblPct.AutoSize = true;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.lblPct, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.lblPct, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.lblPct, "ConfigurationTool.ConfigurationTool.lblPct");
             this.lblPct.Location = new System.Drawing.Point(205, 107);
             this.lblPct.Name = "lblPct";
             this.lblPct.Size = new System.Drawing.Size(15, 13);
@@ -2646,9 +2637,6 @@ namespace SIL.PublishingSolution
             // btnPrevious
             // 
             this.btnPrevious.Enabled = false;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnPrevious, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.btnPrevious, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.btnPrevious, "ConfigurationTool.ConfigurationTool.btnPrevious");
             this.btnPrevious.Location = new System.Drawing.Point(211, 0);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(25, 23);
@@ -2660,9 +2648,6 @@ namespace SIL.PublishingSolution
             // btnNext
             // 
             this.btnNext.Enabled = false;
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnNext, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.btnNext, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.btnNext, "ConfigurationTool.ConfigurationTool.btnNext");
             this.btnNext.Location = new System.Drawing.Point(238, 0);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(25, 23);
@@ -2843,9 +2828,6 @@ namespace SIL.PublishingSolution
             0,
             0,
             65536});
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.SpinPicWidth, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.SpinPicWidth, null);
-            this.l10NSharpExtender1.SetLocalizingId(this.SpinPicWidth, "ConfigurationTool.ConfigurationTool.SpinPicWidth");
             this.SpinPicWidth.Location = new System.Drawing.Point(79, 27);
             this.SpinPicWidth.Name = "SpinPicWidth";
             this.SpinPicWidth.Size = new System.Drawing.Size(101, 20);

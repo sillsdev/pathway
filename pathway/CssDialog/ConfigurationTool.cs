@@ -105,6 +105,7 @@ namespace SIL.PublishingSolution
                 InitializeOtherProjects();
                 LocalizationManager.ShowLocalizationDialogBox(this);
                 SetupUILanguageMenu();
+                _cToolBL.ConfigurationTool_LoadBL();
             });
         }
 

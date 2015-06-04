@@ -110,11 +110,6 @@
         <seg>Pathway Configuration Tool</seg>
       </tuv>
     </tu>
-    <tu tuid="ConfigurationTool._uiLanguageMenu">
-      <tuv xml:lang="en">
-        <seg>English</seg>
-      </tuv>
-    </tu>
     <tu tuid="ConfigurationTool.aboutToolStripMenuItem">
       <tuv xml:lang="en">
         <seg>&amp;About</seg>
@@ -660,6 +655,11 @@
         <seg> &amp;Undo</seg>
       </tuv>
     </tu>
+    <tu tuid="ConfigurationTool.uiLanguageMenu">
+      <tuv xml:lang="en">
+        <seg>English</seg>
+      </tuv>
+    </tu>
     <tu tuid="ConfigurationToolBL.BrowseButton.Message">
       <tuv xml:lang="en">
         <seg>Please choose the icon with 20 x 20 px.</seg>
@@ -673,6 +673,241 @@
     <tu tuid="ConfigurationToolBL.CreatePreviewFile.Message">
       <tuv xml:lang="en">
         <seg>Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.ChapterNumbers.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.ChapterNumbers.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.DefaultAlignment.Justify">
+      <tuv xml:lang="en">
+        <seg>Justify</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.DefaultAlignment.Left">
+      <tuv xml:lang="en">
+        <seg>Left</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.DefaultAlignment.Right">
+      <tuv xml:lang="en">
+        <seg>Right</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.FileProduced.One">
+      <tuv xml:lang="en">
+        <seg>One</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.FileProduced.OnePerLetter">
+      <tuv xml:lang="en">
+        <seg>One Per Letter</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.FontSize.NoChange">
+      <tuv xml:lang="en">
+        <seg>No Change</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Justified.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Justified.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Leading.NoChange">
+      <tuv xml:lang="en">
+        <seg>No Change</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.MissingFont.CancelExport">
+      <tuv xml:lang="en">
+        <seg>Cancel Export</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.MissingFont.PromptUser">
+      <tuv xml:lang="en">
+        <seg>Prompt User</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.MissingFont.UseFallbackFont">
+      <tuv xml:lang="en">
+        <seg>Use Fallback Font</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.CancelExport">
+      <tuv xml:lang="en">
+        <seg>Cancel Export</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.EmbedFontAnyway">
+      <tuv xml:lang="en">
+        <seg>Embed Font Anyway</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.PromptUser">
+      <tuv xml:lang="en">
+        <seg>Prompt User</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.UseFallbackFont">
+      <tuv xml:lang="en">
+        <seg>Use Fallback Font</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.BottomCenter">
+      <tuv xml:lang="en">
+        <seg>Bottom Center</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.BottomInsideMargin">
+      <tuv xml:lang="en">
+        <seg>Bottom Inside Margin</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.BottomOutsideMargin">
+      <tuv xml:lang="en">
+        <seg>Bottom Outside Margin</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.None">
+      <tuv xml:lang="en">
+        <seg>None</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.TopCenter">
+      <tuv xml:lang="en">
+        <seg>Top Center</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.TopInsideMargin">
+      <tuv xml:lang="en">
+        <seg>Top Inside Margin</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.TopOutsideMargin">
+      <tuv xml:lang="en">
+        <seg>Top Outside Margin</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageSize.HalfLetter">
+      <tuv xml:lang="en">
+        <seg>Half letter</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageSize.Letter">
+      <tuv xml:lang="en">
+        <seg>Letter</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Pictures.Frame">
+      <tuv xml:lang="en">
+        <seg>Frame</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Pictures.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Pictures.Paragraph">
+      <tuv xml:lang="en">
+        <seg>Paragraph</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RedLetter.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RedLetter.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.References.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.References.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Rules.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Rules.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RunningHead.EveryPage">
+      <tuv xml:lang="en">
+        <seg>Every Page</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RunningHead.Mirrored">
+      <tuv xml:lang="en">
+        <seg>Mirrored</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RunningHead.None">
+      <tuv xml:lang="en">
+        <seg>None</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Sense.Bullet">
+      <tuv xml:lang="en">
+        <seg>Bullet</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Sense.Nochange">
+      <tuv xml:lang="en">
+        <seg>No change</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.TOCLevel.LetterEntryandSense">
+      <tuv xml:lang="en">
+        <seg>3 - Letter, Entry and Sense</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.TOCLevel.LetterOnly">
+      <tuv xml:lang="en">
+        <seg>1 - Letter Only</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.TOCLevel.LetterandEntry">
+      <tuv xml:lang="en">
+        <seg>2 - Letter and Entry</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.VerticalJustify.Bottom">
+      <tuv xml:lang="en">
+        <seg>Bottom</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.VerticalJustify.Center">
+      <tuv xml:lang="en">
+        <seg>Center</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.VerticalJustify.Top">
+      <tuv xml:lang="en">
+        <seg>Top</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationToolBL.NameValidate.Message">
@@ -772,7 +1007,7 @@
     </tu>
     <tu tuid="EpubValidateTypeDlg.lblMessage">
       <tuv xml:lang="en">
-        <seg>Do you want to select the Epub validate type?</seg>
+        <seg>Do you want select the Epub validate type ?</seg>
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.CoverImageClick.Message">

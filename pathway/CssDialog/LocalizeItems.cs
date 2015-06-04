@@ -139,6 +139,22 @@ namespace SIL.PublishingSolution
                     else if (controlText.ToLower() == "3 - letter, entry and sense")
                         controlText = LocalizationManager.GetString("ConfigurationToolBL.DropDownControl.TOCLevel.LetterEntryandSense", "3 - Letter, Entry and Sense", null);
                     break;
+
+                case "Page Size":
+                    if (controlText.ToLower() == "letter")
+                        controlText = LocalizationManager.GetString("ConfigurationToolBL.DropDownControl.PageSize.Letter", "Letter", null);
+                    else if (controlText.ToLower() == "half letter")
+                        controlText = LocalizationManager.GetString("ConfigurationToolBL.DropDownControl.PageSize.HalfLetter", "Half letter", null);
+                    break;
+
+                case "Leading":
+                    if (controlText.ToLower() == "no change")
+                        controlText = LocalizationManager.GetString("ConfigurationToolBL.DropDownControl.Leading.NoChange", "No Change", null);
+                    break;
+                case "Font Size":
+                    if (controlText.ToLower() == "no change")
+                        controlText = LocalizationManager.GetString("ConfigurationToolBL.DropDownControl.FontSize.NoChange", "No Change", null);
+                    break;
             }
 
             return controlText;
