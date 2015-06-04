@@ -772,7 +772,7 @@
     </tu>
     <tu tuid="EpubValidateTypeDlg.lblMessage">
       <tuv xml:lang="en">
-        <seg>Do you want select the Epub validate type ?</seg>
+        <seg>Do you want to select the Epub validate type?</seg>
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.CoverImageClick.Message">
