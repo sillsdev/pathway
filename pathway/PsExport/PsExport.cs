@@ -75,7 +75,6 @@ namespace SIL.PublishingSolution
                 string supportPath = GetSupportPath();
 				Backend.Load(Common.ProgInstall);
                 LoadProgramSettings(supportPath);
-                LocalizationSetup();
                 LoadDataTypeSettings();
                 var outDir = Path.GetDirectoryName(outFullName);
                 DefaultProjectFileSetup(outDir);
@@ -351,21 +350,6 @@ namespace SIL.PublishingSolution
         {
             Param.Value[Param.InputType] = DataType;
             Param.LoadSettings();
-        }
-
-        protected static void LocalizationSetup()
-        {
-            JW_Registry.RootKey = @"SOFTWARE\The Seed Company\Dictionary Express!";
-            LocDB.SetAppTitle();
-            LocDB.BaseName = "PsLocalization.xml";
-            var folderPath = Param.Value[Param.OutputPath];
-            var localizationPath = Common.PathCombine(folderPath, "Loc");
-            if (!Directory.Exists(localizationPath))
-            {
-                Directory.CreateDirectory(localizationPath);
-				File.Copy(Common.FromRegistry(@"Loc/" + LocDB.BaseName), Common.PathCombine(localizationPath, LocDB.BaseName));
-            }
-            LocDB.Initialize(folderPath);
         }
 
         protected static void LoadProgramSettings(string supportPath)
