@@ -1,6 +1,6 @@
 /* None.css */
 @page :none {
     @none {
-          content: '';          
+          content: 'none';          
     }
 }

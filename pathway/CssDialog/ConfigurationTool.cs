@@ -36,7 +36,7 @@ namespace SIL.PublishingSolution
     {
         #region Private Variables
 
-        public ConfigurationToolBL _CToolBL = new ConfigurationToolBL();
+        public ConfigurationToolBL _cToolBL = new ConfigurationToolBL();
         public string _previousTxtName;
         private string _lastSelectedLayout = string.Empty;
         private TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
@@ -86,14 +86,14 @@ namespace SIL.PublishingSolution
                 item.Tag = lang;
                 item.Click += ((a, b) =>
                 {
-                    LocalizationManager.SetUILanguage(((CultureInfo) item.Tag).IetfLanguageTag, true);
-                    Settings.Default.UserInterfaceLanguage = ((CultureInfo) item.Tag).IetfLanguageTag;
+                    LocalizationManager.SetUILanguage(((CultureInfo)item.Tag).IetfLanguageTag, true);
+                    Settings.Default.UserInterfaceLanguage = ((CultureInfo)item.Tag).IetfLanguageTag;
                     item.Select();
-                    _uiLanguageMenu.Text = ((CultureInfo) item.Tag).NativeName;
+                    _uiLanguageMenu.Text = ((CultureInfo)item.Tag).NativeName;
                 });
-                if (((CultureInfo) item.Tag).IetfLanguageTag == Settings.Default.UserInterfaceLanguage)
+                if (((CultureInfo)item.Tag).IetfLanguageTag == Settings.Default.UserInterfaceLanguage)
                 {
-                    _uiLanguageMenu.Text = ((CultureInfo) item.Tag).NativeName;
+                    _uiLanguageMenu.Text = ((CultureInfo)item.Tag).NativeName;
                 }
             }
 
@@ -121,7 +121,7 @@ namespace SIL.PublishingSolution
                             .Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
                 {
                     sAssembly.CreateInstance(stype.FullName);
-                }              
+                }
             }
             using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry("epubValidator.exe")))
             {
@@ -157,24 +157,24 @@ namespace SIL.PublishingSolution
 
         public void LoadSettings()
         {
-            Trace.WriteLineIf(_CToolBL._traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: LoadSettings");
+            Trace.WriteLineIf(_cToolBL._traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: LoadSettings");
             //Note: Configuration tool can run by two ways
             //Note: 1 -  Standalone Application
             //Note: 2 -  The ConfigurationTool.EXE is called by PrintVia dialog from FLEX/TE/etc.,);
-            if (_CToolBL.inputTypeBL.Length == 0)
+            if (_cToolBL.inputTypeBL.Length == 0)
             {
                 //It will call when the Configtool from Application
                 RemoveSettingsFile();
                 if (!_fromNunit)
                     ValidateXMLVersion(Param.SettingPath);
                 Param.LoadSettings(); // Load StyleSetting.xml
-                _CToolBL.inputTypeBL = _CToolBL.LoadInputType();
+                _cToolBL.inputTypeBL = _cToolBL.LoadInputType();
             }
             else
             {
                 //It will call when the Configtool from exe(FLEX/TE/etc.,)
                 Param.LoadSettings(); // Load StyleSetting.xml
-                Param.SetLoadType = _CToolBL.inputTypeBL;
+                Param.SetLoadType = _cToolBL.inputTypeBL;
                 tsDefault.Enabled = false;
             }
         }
@@ -898,96 +898,96 @@ namespace SIL.PublishingSolution
             SetUpErrorHandling();
 
 
-            _CToolBL = new ConfigurationToolBL();
-            _CToolBL.inputTypeBL = InputType;
-            _CToolBL.MediaTypeEXE = MediaType;
-            _CToolBL.StyleEXE = Style.Replace('&', ' '); //
-            _CToolBL.SetClassReference(this);
-            _CToolBL.CreateToolTip();
-            _CToolBL.ConfigurationTool_LoadBL();
+            _cToolBL = new ConfigurationToolBL();
+            _cToolBL.inputTypeBL = InputType;
+            _cToolBL.MediaTypeEXE = MediaType;
+            _cToolBL.StyleEXE = Style.Replace('&', ' '); //
+            _cToolBL.SetClassReference(this);
+            _cToolBL.CreateToolTip();
+            _cToolBL.ConfigurationTool_LoadBL();
         }
 
         public void tsDelete_Click(object sender, EventArgs e)
         {
-            _CToolBL.tsDelete_ClickBL();
+            _cToolBL.tsDelete_ClickBL();
         }
 
         private void tsSend_Click(object sender, EventArgs e)
         {
-            _CToolBL.tsSend_ClickBL();
+            _cToolBL.tsSend_ClickBL();
         }
 
         private void tsNew_Click(object sender, EventArgs e)
         {
-            _CToolBL.tsNew_ClickBL();
+            _cToolBL.tsNew_ClickBL();
         }
 
         private void tsDefault_Click(object sender, EventArgs e)
         {
-            _CToolBL.tsDefault_ClickBL();
+            _cToolBL.tsDefault_ClickBL();
         }
 
         private void txtPageGutterWidth_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtPageGutterWidth_ValidatedBL(sender, e);
+            _cToolBL.txtPageGutterWidth_ValidatedBL(sender, e);
         }
 
         private void txtPageInside_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtPageInside_ValidatedBL(sender, e);
+            _cToolBL.txtPageInside_ValidatedBL(sender, e);
         }
 
         private void txtPageOutside_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtPageOutside_ValidatedBL(sender, e);
+            _cToolBL.txtPageOutside_ValidatedBL(sender, e);
         }
 
         private void txtPageTop_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtPageTop_ValidatedBL(sender, e);
+            _cToolBL.txtPageTop_ValidatedBL(sender, e);
         }
 
         private void txtPageBottom_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtPageBottom_ValidatedBL(sender, e);
+            _cToolBL.txtPageBottom_ValidatedBL(sender, e);
         }
 
         private void ConfigurationTool_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _CToolBL.ConfigurationTool_FormClosingBL();
-            Style = _CToolBL.StyleEXE.ToString();
+            _cToolBL.ConfigurationTool_FormClosingBL();
+            Style = _cToolBL.StyleEXE.ToString();
             Settings.Default.Save();
             Common.SaveLocalizationSettings(Settings.Default.UserInterfaceLanguage);
         }
         private void btnDictionary_Click(object sender, EventArgs e)
         {
-            _CToolBL.btnDictionary_ClickBL();
+            _cToolBL.btnDictionary_ClickBL();
         }
 
         private void btnScripture_Click(object sender, EventArgs e)
         {
-            _CToolBL.btnScripture_ClickBL();
+            _cToolBL.btnScripture_ClickBL();
         }
 
         private void chkAvailable_CheckedChanged(object sender, EventArgs e)
         {
-            _CToolBL.chkAvailable_CheckedChangedBL(sender);
+            _cToolBL.chkAvailable_CheckedChangedBL(sender);
         }
 
         private void txtApproved_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtApproved_ValidatedBL(sender);
+            _cToolBL.txtApproved_ValidatedBL(sender);
         }
 
         private void ConfigurationTool_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.ConfigurationTool_KeyUpBL(sender, e);
+            _cToolBL.ConfigurationTool_KeyUpBL(sender, e);
         }
 
         private void stylesGrid_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             Cursor.Current = Cursors.Hand;
-            _CToolBL.stylesGrid_RowEnterBL(e);
+            _cToolBL.stylesGrid_RowEnterBL(e);
         }
 
         private void txtName_Enter(object sender, EventArgs e)
@@ -998,113 +998,113 @@ namespace SIL.PublishingSolution
 
         private void btnPaper_Click(object sender, EventArgs e)
         {
-            _CToolBL.MediaTypeEXE = "paper";
-            _CToolBL.MediaType = "paper";
-            _CToolBL.SideBar();
+            _cToolBL.MediaTypeEXE = "paper";
+            _cToolBL.MediaType = "paper";
+            _cToolBL.SideBar();
         }
 
         private void btnMobile_Click(object sender, EventArgs e)
         {
-            _CToolBL.MediaTypeEXE = "mobile";
-            _CToolBL.MediaType = "mobile";
-            _CToolBL.SideBar();
+            _cToolBL.MediaTypeEXE = "mobile";
+            _cToolBL.MediaType = "mobile";
+            _cToolBL.SideBar();
         }
 
         private void btnWeb_Click(object sender, EventArgs e)
         {
-            _CToolBL.MediaTypeEXE = "web";
-            _CToolBL.MediaType = "web";
-            _CToolBL.SideBar();
+            _cToolBL.MediaTypeEXE = "web";
+            _cToolBL.MediaType = "web";
+            _cToolBL.SideBar();
         }
 
         private void btnOthers_Click(object sender, EventArgs e)
         {
-            _CToolBL.MediaTypeEXE = "others";
-            _CToolBL.MediaType = "others";
-            _CToolBL.SideBar();
+            _cToolBL.MediaTypeEXE = "others";
+            _cToolBL.MediaType = "others";
+            _cToolBL.SideBar();
         }
 
         private void stylesGrid_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
-            _CToolBL.stylesGrid_ColumnWidthChangedBL(e);
+            _cToolBL.stylesGrid_ColumnWidthChangedBL(e);
         }
 
         private void txtDesc_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.txtDesc_KeyUpBL();
-            _CToolBL.txtDesc_ValidatedBL(sender, txtDesc.Modified);
+            _cToolBL.txtDesc_KeyUpBL();
+            _cToolBL.txtDesc_ValidatedBL(sender, txtDesc.Modified);
         }
 
         private void txtComment_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.txtComment_KeyUpBL();
-            _CToolBL.txtComment_ValidatedBL(sender, txtComment.Modified );
+            _cToolBL.txtComment_KeyUpBL();
+            _cToolBL.txtComment_ValidatedBL(sender, txtComment.Modified);
         }
 
         private void txtName_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.txtName_KeyUpBL();
+            _cToolBL.txtName_KeyUpBL();
         }
 
         private void ddlPageColumn_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.ddlPageColumn_SelectedIndexChangedBL(sender, e);
+            _cToolBL.ddlPageColumn_SelectedIndexChangedBL(sender, e);
             EditCSS(sender, e);
         }
 
         private void tsPreview_Click(object sender, EventArgs e)
         {
-            _CToolBL.tsPreview_ClickBL();
+            _cToolBL.tsPreview_ClickBL();
         }
 
         private void ddlRedLetter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.ddlRedLetter_SelectedIndexChangedBL(sender, e);
+            _cToolBL.ddlRedLetter_SelectedIndexChangedBL(sender, e);
             EditMobileCSS(sender, e);
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            _CToolBL.btnBrowse_ClickBL();
+            _cToolBL.btnBrowse_ClickBL();
             EditMobileCSS(sender, e);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.tabControl1_SelectedIndexChangedBL();
+            _cToolBL.tabControl1_SelectedIndexChangedBL();
         }
 
         private void tsSaveAs_Click(object sender, EventArgs e)
         {
-            _CToolBL.tsSaveAs_ClickBL();
+            _cToolBL.tsSaveAs_ClickBL();
         }
 
         public void SetGotFocusValue(object sender, EventArgs e)
         {
-            _CToolBL.SetGotFocusValueBL(sender);
+            _cToolBL.SetGotFocusValueBL(sender);
         }
         #endregion
 
         private void EditCSS(object sender, EventArgs e)
         {
-            _CToolBL.SetModifyMode(false);
-            _CToolBL.ShowCssSummary();
+            _cToolBL.SetModifyMode(false);
+            _cToolBL.ShowCssSummary();
         }
 
         private void EditMobileCSS(object sender, EventArgs e)
         {
-            _CToolBL.SetModifyMode(false);
-            _CToolBL.ShowMobileSummaryBL();
+            _cToolBL.SetModifyMode(false);
+            _cToolBL.ShowMobileSummaryBL();
         }
 
         private void EditOthersCSS(object sender, EventArgs e)
         {
-            _CToolBL.ShowOthersSummaryBL();
+            _cToolBL.ShowOthersSummaryBL();
         }
 
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _CToolBL.txtName_ValidatingBL(sender);
+            _cToolBL.txtName_ValidatingBL(sender);
         }
 
         private void toolStripMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -1115,182 +1115,182 @@ namespace SIL.PublishingSolution
 
         private void txtPageGutterWidth_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.SetModifyMode(true);
+            _cToolBL.SetModifyMode(true);
         }
 
         private void txtPageInside_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.SetModifyMode(true);
+            _cToolBL.SetModifyMode(true);
         }
 
         private void txtPageOutside_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.SetModifyMode(true);
+            _cToolBL.SetModifyMode(true);
         }
 
         private void txtPageTop_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.SetModifyMode(true);
+            _cToolBL.SetModifyMode(true);
         }
 
         private void txtPageBottom_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.SetModifyMode(true);
+            _cToolBL.SetModifyMode(true);
         }
 
         private void ddlFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.ddlFiles_SelectedIndexChangedBL(sender, e);
+            _cToolBL.ddlFiles_SelectedIndexChangedBL(sender, e);
             EditMobileCSS(sender, e);
         }
 
         private void ddlLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.ddlLanguage_SelectedIndexChangedBL(sender, e);
+            _cToolBL.ddlLanguage_SelectedIndexChangedBL(sender, e);
             EditMobileCSS(sender, e);
         }
 
         private void chkIncludeFontVariants_CheckedChanged(object sender, EventArgs e)
         {
-            _CToolBL.chkIncludeFontVariants_CheckedChangedBL(sender, e);
+            _cToolBL.chkIncludeFontVariants_CheckedChangedBL(sender, e);
             EditOthersCSS(sender, e);
         }
 
         private void chkEmbedFonts_CheckedChanged(object sender, EventArgs e)
         {
-            _CToolBL.chkEmbedFonts_CheckedChangedBL(sender, e);
+            _cToolBL.chkEmbedFonts_CheckedChangedBL(sender, e);
             EditOthersCSS(sender, e);
         }
 
         private void txtBaseFontSize_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtBaseFontSize_ValidatedBL(sender);
+            _cToolBL.txtBaseFontSize_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
 
         private void txtDefaultLineHeight_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtDefaultLineHeight_ValidatedBL(sender);
+            _cToolBL.txtDefaultLineHeight_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
 
         private void ddlChapterNumbers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.ddlChapterNumbers_SelectedIndexChangedBL(sender, e);
+            _cToolBL.ddlChapterNumbers_SelectedIndexChangedBL(sender, e);
             EditOthersCSS(sender, e);
         }
 
         private void ddlReferences_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.ddlReferences_SelectedIndexChangedBL(sender, e);
+            _cToolBL.ddlReferences_SelectedIndexChangedBL(sender, e);
             EditOthersCSS(sender, e);
         }
 
         private void ddlDefaultAlignment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.ddlDefaultAlignment_SelectedIndexChangedBL(sender, e);
+            _cToolBL.ddlDefaultAlignment_SelectedIndexChangedBL(sender, e);
             EditOthersCSS(sender, e);
         }
 
         private void ddlDefaultFont_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.ddlDefaultFont_SelectedIndexChangedBL(sender, e);
+            _cToolBL.ddlDefaultFont_SelectedIndexChangedBL(sender, e);
             EditOthersCSS(sender, e);
         }
 
         private void ddlMissingFont_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.ddlMissingFont_SelectedIndexChangedBL(sender, e);
+            _cToolBL.ddlMissingFont_SelectedIndexChangedBL(sender, e);
             EditOthersCSS(sender, e);
         }
 
         private void ddlNonSILFont_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.ddlNonSILFont_SelectedIndexChangedBL(sender, e);
+            _cToolBL.ddlNonSILFont_SelectedIndexChangedBL(sender, e);
             EditOthersCSS(sender, e);
         }
 
         private void txtMaxImageWidth_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtMaxImageWidth_ValidatedBL(sender);
+            _cToolBL.txtMaxImageWidth_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            _CToolBL.ShowPreview(1);
+            _cToolBL.ShowPreview(1);
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            _CToolBL.ShowPreview(2);
+            _cToolBL.ShowPreview(2);
         }
 
         private void chkAvailable_CheckStateChanged(object sender, EventArgs e)
         {
-            _CToolBL.chkAvailable_ValidatedBL(sender);
+            _cToolBL.chkAvailable_ValidatedBL(sender);
         }
 
         private void ddlRunningHead_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            string pageType = ddlRunningHead.SelectedItem.ToString();
-            _CToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType); 
-                EditCSS(sender, e);
+
+            string pageType = ((ComboBoxItem)ddlRunningHead.SelectedItem).Value;
+            _cToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType);
+            EditCSS(sender, e);
         }
 
         private void ddlTocLevel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _CToolBL.ddlTocLevel_SelectedIndexChangedBL(sender, e);
+            _cToolBL.ddlTocLevel_SelectedIndexChangedBL(sender, e);
             EditOthersCSS(sender, e);
         }
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _CToolBL.HelpButton_Clicked(this);
+            _cToolBL.HelpButton_Clicked(this);
         }
 
         private void studentManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _CToolBL.StudentManual();
+            _cToolBL.StudentManual();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _CToolBL.AboutDialog();
+            _cToolBL.AboutDialog();
         }
 
         private void toolStripHelpButton_ButtonClick(object sender, EventArgs e)
         {
-            _CToolBL.HelpButton_Clicked(this);
+            _cToolBL.HelpButton_Clicked(this);
         }
 
         private void chkFixedLineHeight_CheckStateChanged(object sender, EventArgs e)
         {
             EditCSS(sender, e);
-            _CToolBL.chkFixedLineHeight_CheckedChangedBL();
+            _cToolBL.chkFixedLineHeight_CheckedChangedBL();
         }
 
         private void chkIncludeCusFnCaller_CheckStateChanged(object sender, EventArgs e)
         {
             EditCSS(sender, e);
-            _CToolBL.chkIncludeCusFnCaller_CheckedChangedBL(sender, e);
+            _cToolBL.chkIncludeCusFnCaller_CheckedChangedBL(sender, e);
         }
 
         private void txtFtpFileLocation_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtFtpFileLocation_ValidatedBL(sender, e);
+            _cToolBL.txtFtpFileLocation_ValidatedBL(sender, e);
         }
 
         private void txtWebUrl_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtWebUrl_ValidatedBL(sender, e);
+            _cToolBL.txtWebUrl_ValidatedBL(sender, e);
         }
 
         private void chkIncludeImage_CheckedChanged(object sender, EventArgs e)
         {
             EditCSS(sender, e);
-            _CToolBL.chkIncludeImage_CheckedChangedBL(sender, e);
+            _cToolBL.chkIncludeImage_CheckedChangedBL(sender, e);
         }
 
         private void lnkLblUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1302,60 +1302,60 @@ namespace SIL.PublishingSolution
 
         private void txtFnCallerSymbol_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.txtFnCallerSymbol_KeyUpBL();
-            _CToolBL.SetModifyMode(true);
+            _cToolBL.txtFnCallerSymbol_KeyUpBL();
+            _cToolBL.SetModifyMode(true);
         }
 
         private void chkTurnOffFirstVerse_CheckStateChanged(object sender, EventArgs e)
         {
             EditCSS(sender, e);
-            _CToolBL.chkTurnOffFirstVerse_CheckStateChangedBL(sender, e);
+            _cToolBL.chkTurnOffFirstVerse_CheckStateChangedBL(sender, e);
         }
 
         private void txtXrefCusSymbol_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.TxtXRefCusSymbol_KeyUpBL();
-            _CToolBL.SetModifyMode(true);
+            _cToolBL.TxtXRefCusSymbol_KeyUpBL();
+            _cToolBL.SetModifyMode(true);
         }
 
         private void chkXrefCusSymbol_CheckStateChanged(object sender, EventArgs e)
         {
             EditCSS(sender, e);
-            _CToolBL.chkXrefCusSymbol_CheckStateChangedBL(sender, e);
+            _cToolBL.chkXrefCusSymbol_CheckStateChangedBL(sender, e);
         }
 
         private void chkPageBreaks_CheckedChanged(object sender, EventArgs e)
         {
             EditCSS(sender, e);
-            _CToolBL.chkPageBreaks_CheckedChangedBL(sender, e);
+            _cToolBL.chkPageBreaks_CheckedChangedBL(sender, e);
         }
 
         private void chkHideSpaceVerseNo_CheckStateChanged(object sender, EventArgs e)
         {
             EditCSS(sender, e);
-            _CToolBL.chkHideSpaceVerseNo_CheckStateChangedBL(sender, e);
+            _cToolBL.chkHideSpaceVerseNo_CheckStateChangedBL(sender, e);
         }
 
         private void stylesGrid_SelectionChanged(object sender, EventArgs e)
         {
-            _CToolBL.stylesGrid_SelectionChanged(sender, e);
+            _cToolBL.stylesGrid_SelectionChanged(sender, e);
         }
 
         private void chkSplitFileByLetter_CheckStateChanged(object sender, EventArgs e)
         {
             EditCSS(sender, e);
-            _CToolBL.chkSplitFileByLetter_CheckStateChangedBL(sender, e);
+            _cToolBL.chkSplitFileByLetter_CheckStateChangedBL(sender, e);
         }
 
         private void chkDisableWO_CheckStateChanged(object sender, EventArgs e)
         {
             EditCSS(sender, e);
-            _CToolBL.chkDisableWO_CheckStateChangedBL(sender, e);
+            _cToolBL.chkDisableWO_CheckStateChangedBL(sender, e);
         }
 
         private void tsReset_Click(object sender, EventArgs e)
         {
-            _CToolBL.tsReset_ClickBL();
+            _cToolBL.tsReset_ClickBL();
         }
 
         private void moreHelpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1367,37 +1367,37 @@ namespace SIL.PublishingSolution
 
         private void txtSqlUsername_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtSqlUsername_ValidatedBL(sender, e);
+            _cToolBL.txtSqlUsername_ValidatedBL(sender, e);
         }
 
         private void txtSqlPassword_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtSqlPassword_ValidatedBL(sender, e);
+            _cToolBL.txtSqlPassword_ValidatedBL(sender, e);
         }
 
         private void txtWebAdminUsrNme_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtWebAdminUsrNme_ValidatedBL(sender, e);
+            _cToolBL.txtWebAdminUsrNme_ValidatedBL(sender, e);
         }
 
         private void txtWebAdminPwd_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtWebAdminPwd_ValidatedBL(sender, e);
+            _cToolBL.txtWebAdminPwd_ValidatedBL(sender, e);
         }
 
         private void txtFtpUsername_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtFtpUsername_ValidatedBL(sender, e);
+            _cToolBL.txtFtpUsername_ValidatedBL(sender, e);
         }
 
         private void txtFtpPassword_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtFtpPassword_ValidatedBL(sender, e);
+            _cToolBL.txtFtpPassword_ValidatedBL(sender, e);
         }
 
         private void txtWebEmailID_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtWebEmailID_ValidatedBL(sender, e);
+            _cToolBL.txtWebEmailID_ValidatedBL(sender, e);
         }
 
         #region Localization
@@ -1440,6 +1440,6 @@ namespace SIL.PublishingSolution
             Analytics.ReportException(e.Exception);
         }
         #endregion
-      
+
     }
 }

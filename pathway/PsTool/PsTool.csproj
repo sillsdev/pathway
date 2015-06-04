@@ -233,6 +233,7 @@
     <Compile Include="Backend.cs" />
     <Compile Include="CheckUserFileAccessRights.cs" />
     <Compile Include="ClassInfo.cs" />
+    <Compile Include="ComboBoxItem.cs" />
     <Compile Include="Common.cs">
       <SubType>Code</SubType>
     </Compile>

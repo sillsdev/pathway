@@ -270,6 +270,7 @@
     <Compile Include="Contents.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ComboBoxItem.cs" />
     <Compile Include="ExportDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -302,6 +303,7 @@
       <DependentUpon>InProcess.cs</DependentUpon>
     </Compile>
     <Compile Include="IScriptureContents.cs" />
+    <Compile Include="LocalizeItems.cs" />
     <Compile Include="OrganizationNameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
