@@ -4612,7 +4612,15 @@ namespace SIL.Tool
             string localizedStringFilesFolder = Common.PathCombine(Common.GetAllUserAppPath(), silLocation);
             localizedStringFilesFolder = Common.PathCombine(localizedStringFilesFolder, "localizations");
             string pathwayDirectory = PathwayPath.GetPathwayDir();
-            var installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
+            var installedLocalizationsFolder = string.Empty;
+            if (pathwayDirectory != null)
+            {
+                installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
+            }
+            else
+            {
+                installedLocalizationsFolder = Path.Combine(Application.StartupPath, "localizations");
+            }
 
             if (Directory.Exists(installedLocalizationsFolder))
             {
