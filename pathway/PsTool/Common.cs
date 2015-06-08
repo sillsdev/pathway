@@ -270,7 +270,7 @@ namespace SIL.Tool
         public static bool ShowMessage; // Show or Suppress MessageBox in Creating Zip Folder.
 
         #endregion
-        
+
         #region FillName(string cssFileWithPath)
 
         /// -------------------------------------------------------------------------------------------
@@ -353,7 +353,7 @@ namespace SIL.Tool
         }
 
         #endregion
-        
+
         #region GetTextDirection(string languageCode)
 
         public static string TextDirectionLanguageFile = null; //Set during testing
@@ -4577,6 +4577,11 @@ namespace SIL.Tool
             try
             {
                 var fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
+                if (!File.Exists(fileName))
+                {
+                    SaveLocalizationSettings("en");
+                }
+
                 var content = File.ReadAllText(fileName);
                 var doc = new XmlDocument();
                 doc.LoadXml(content);
@@ -4588,14 +4593,7 @@ namespace SIL.Tool
                 return "en";
             }
         }
-
-        //public static void SetupLocalization(string namespaces)
-        //{
-        //    var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-        //    var desiredUiLangId = GetLocalizationSettings();
-        //    LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-        //        null, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
-        //}
+        
 
         public static void SetupLocalization(string namespaces)
         {
@@ -4605,15 +4603,16 @@ namespace SIL.Tool
             var desiredUiLangId = GetLocalizationSettings();
             if (desiredUiLangId == string.Empty)
                 desiredUiLangId = "en";
-            LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-                              localizedStringFilesFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
+             L10NMngr = LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
+                               localizedStringFilesFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
         }
 
         private static string CopyInstalledLocalizations(string silLocation)
         {
             string localizedStringFilesFolder = Common.PathCombine(Common.GetAllUserAppPath(), silLocation);
             localizedStringFilesFolder = Common.PathCombine(localizedStringFilesFolder, "localizations");
-            var installedLocalizationsFolder = Path.Combine(Application.StartupPath, "localizations");
+            string pathwayDirectory = PathwayPath.GetPathwayDir();
+            var installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
 
             if (Directory.Exists(installedLocalizationsFolder))
             {
@@ -4629,7 +4628,7 @@ namespace SIL.Tool
                 }
             }
 
-            return localizedStringFilesFolder;
+            return installedLocalizationsFolder;
         }
 
         private static long FileLength(string file)
@@ -4637,6 +4636,39 @@ namespace SIL.Tool
             return new FileInfo(file).Length;
         }
 
+        #region Localization Manager Access methods
+        /// ------------------------------------------------------------------------------------
+        public static LocalizationManager L10NMngr { get; set; }
+
+        ///// ------------------------------------------------------------------------------------
+        //internal static void SaveOnTheFlyLocalizations()
+        //{
+        //    if (L10NMngr != null)
+        //        L10NMngr.SaveOnTheFlyLocalizations();
+        //}
+
+        ///// ------------------------------------------------------------------------------------
+        //internal static void ReapplyLocalizationsToAllObjects(string localizationManagerID)
+        //{
+        //    LocalizationManager.ReapplyLocalizationsToAllObjectsInAllManagers();
+        //    //if (L10NMngr != null)
+        //    //    LocalizationManager.ReapplyLocalizationsToAllObjects(localizationManagerID);
+        //}
+
+        /// ------------------------------------------------------------------------------------
+        internal static void RefreshToolTipsOnLocalizationManager()
+        {
+            if (L10NMngr != null)
+                L10NMngr.RefreshToolTips();
+        }
+
+        /// ------------------------------------------------------------------------------------
+        internal static string GetUILanguageId()
+        {
+            return LocalizationManager.UILanguageId;
+        }
+
+        #endregion
 
 
         #endregion

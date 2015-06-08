@@ -45,7 +45,7 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region Public Variable
-
+        
         public bool _fromNunit = false;
         public string InputType = string.Empty;
         public string MediaType = string.Empty;
@@ -103,10 +103,16 @@ namespace SIL.PublishingSolution
             menu.Click += ((a, b) =>
             {
                 InitializeOtherProjects();
-                LocalizationManager.ShowLocalizationDialogBox(this);
+                ShowL10NsharpDlg();
+                //LocalizationManager.ShowLocalizationDialogBox(this);
                 SetupUILanguageMenu();
                 _cToolBL.ConfigurationTool_LoadBL();
             });
+        }
+
+        public static void ShowL10NsharpDlg()
+        {
+            Common.L10NMngr.ShowLocalizationDialogBox(false);
         }
 
         private static void InitializeOtherProjects()
