@@ -4593,7 +4593,6 @@ namespace SIL.Tool
                 return "en";
             }
         }
-        
 
         public static void SetupLocalization(string namespaces)
         {
@@ -4603,8 +4602,9 @@ namespace SIL.Tool
             var desiredUiLangId = GetLocalizationSettings();
             if (desiredUiLangId == string.Empty)
                 desiredUiLangId = "en";
-             L10NMngr = LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-                               localizedStringFilesFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
+            if (!Testing)
+                L10NMngr = LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
+                                  localizedStringFilesFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
         }
 
         private static string CopyInstalledLocalizations(string silLocation)
