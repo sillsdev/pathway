@@ -184,7 +184,7 @@ namespace SIL.PublishingSolution
                 this.lnkGPL.Location = new Point(lnkGPL.Location.X - 10, lnkGPL.Location.Y);
             }
 
-            string version = Assembly.GetEntryAssembly().GetName().Version.ToString();
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             string versionDate = String.Format("{0} ({1})", version, AssemblyFileDate);
 
