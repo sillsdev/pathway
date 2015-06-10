@@ -35,6 +35,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
+using L10NSharp;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -327,7 +328,7 @@ namespace SIL.PublishingSolution
 
                 if (!Common.isRightFieldworksVersion())
                 {
-                    const string message = "Please download and install a Pathway version compatible with your software";
+                    var message = LocalizationManager.GetString("ExportThroughPathway.ExportThroughPathwayLoad.Message", "Please download and install a Pathway version compatible with your software", "");
                     const string caption = "Incompatible Pathway Version";
                     MessageBox.Show(message, caption, MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
@@ -336,7 +337,7 @@ namespace SIL.PublishingSolution
                 }
                 _isUnixOS = Common.UnixVersionCheck();
                 PopulateFilesFromPreprocessingFolder();
-
+                
                 // Load the .ssf or .ldml as appropriate
                 _settingsHelper = new SettingsHelper(DatabaseName);
                 _settingsHelper.LoadValues();
@@ -389,9 +390,17 @@ namespace SIL.PublishingSolution
                 IsExpanded = false;
                 ResizeDialog();
                 SetOkStatus();
+                chkHyphen.Enabled = false;
+                chkHyphen.Checked = false;
+                clbHyphenlang.Items.Clear();
+                //Loads Hyphenation related settings
+                if (InputType == "Scripture")
+                {
+                    LoadHyphenationSettings();
+                }
                 LoadProperty();
                 EnableUIElements();
-
+                
                 ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS, false);
                 if (AppDomain.CurrentDomain.FriendlyName.ToLower().IndexOf("configurationtool") == -1)
                 {
@@ -399,6 +408,44 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+        }
+
+        private void LoadHyphenationSettings()
+        {
+            var ssf = _settingsHelper.GetSettingsFilename(_settingsHelper.Database);
+            if (ssf != null && ssf.Trim().Length > 0)
+            {
+                var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
+                Param.DatabaseName = _settingsHelper.Database;
+                Param.IsHyphen = false;
+                Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database);
+                foreach (string filename in Directory.GetFiles(paratextpath,"*.txt"))
+                {
+                    if (filename.Contains("hyphen"))
+                    {
+                        chkHyphen.Enabled = true;
+                        chkHyphen.Checked = false;
+                        Param.IsHyphen = true;
+                        Param.HyphenFilepath = filename;
+                    }
+                }
+            }
+            CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database,InputType);
+            chkHyphen.Checked = Param.HyphenEnable;
+            chkHyphen.Enabled = Param.IsHyphen;
+            foreach (string lang in Param.HyphenLang.Split(','))
+            {
+                if (chkHyphen.Checked == true)
+                {
+                    clbHyphenlang.Enabled = true;
+                    clbHyphenlang.Items.Add(lang, (Param.HyphenationSelectedLanguagelist.Contains(lang) ? true : false));
+                }
+                else
+                {
+                    clbHyphenlang.Enabled = false;
+                    clbHyphenlang.Items.Add(lang, false);
+                }
+            }
         }
 
         private void AssignFolderDateTime()
@@ -678,7 +725,7 @@ namespace SIL.PublishingSolution
                 DialogResult dialogResult;
                 if (!Common.Testing)
                 {
-                    const string message = "Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.";
+                    var message = LocalizationManager.GetString("ExportThroughPathway.LoadAvailFormat.Message", "Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.", "");
                     const string caption = "Pathway";
                     dialogResult = MessageBox.Show(message, caption, MessageBoxButtons.AbortRetryIgnore,
                                     MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -756,7 +803,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception)
             {
-                const string message = "Please select a folder for which you have creation permission";
+                var message = LocalizationManager.GetString("ExportThroughPathway.OkButtonClick.Message", "Please select a folder for which you have creation permission", "");
                 const string caption = "Pathway";
                 MessageBox.Show(message, caption, MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
@@ -765,6 +812,7 @@ namespace SIL.PublishingSolution
 
             ProcessSendingHelpImprove();
 
+            HyphenationSettings();
             if (!File.Exists(CoverPageImagePath))
             {
                 CoverPageImagePath = Common.PathCombine(Common.GetApplicationPath(), "Graphic\\cover.png");
@@ -805,11 +853,25 @@ namespace SIL.PublishingSolution
             this.Close();
         }
 
+        private void HyphenationSettings()
+        {
+            Param.HyphenEnable = chkHyphen.Checked;
+            var hyphenlang = string.Empty;
+            foreach (string chkBoxName in clbHyphenlang.CheckedItems)
+            {
+                if (hyphenlang.Length > 0)
+                    hyphenlang += ",";
+                hyphenlang += chkBoxName;
+            }
+            Param.HyphenLang = hyphenlang;
+            CreatingHyphenationSettings.CreateHyphenationFile(InputType);
+        }
+
         private static void ProcessSendingHelpImprove()
         {
             string getApplicationPath = Common.GetApplicationPath();
             string helpImproveCommand = Common.PathCombine(getApplicationPath, "HelpImprove.exe");
-            string registryPath = "Software\\SIL\\Pathway";
+            const string registryPath = "Software\\SIL\\Pathway";
 
             if (File.Exists(helpImproveCommand))
                 Common.RunCommand(helpImproveCommand, string.Format("{0} {1} {2}", "204.93.172.30", registryPath, "HelpImprove"), 0);
@@ -968,7 +1030,7 @@ namespace SIL.PublishingSolution
             {
                 // User wants a title page or a cover page with a title, but they haven't told us the title.
                 // Make them enter one now.
-                const string message = "Please enter a title for this publication.";
+                var message = LocalizationManager.GetString("ExportThroughPathway.SaveProperty.Message1", "Please enter a title for this publication.", "");
                 MessageBox.Show(message, dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dlg.IsExpanded = true;
                 dlg.ResizeDialog();
@@ -987,7 +1049,7 @@ namespace SIL.PublishingSolution
                 if (!success)
                 {
                     // Dictionary with nothing to export. Make them export something.
-                    const string message = "Please select at least one item to include in the export.";
+                    var message = LocalizationManager.GetString("ExportThroughPathway.SaveProperty.Message2", "Please select at least one item to include in the export.", "");
                     MessageBox.Show(message, dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     dlg.IsExpanded = true;
                     dlg.ResizeDialog();
@@ -1256,7 +1318,8 @@ namespace SIL.PublishingSolution
                     double width = iconImage.Width;
                     if (height > 1000 || width > 1000)
                     {
-                        const string message = "The selected image is too large. Please select an image that is smaller than 1000 x 1000 pixels.";
+                        var message = LocalizationManager.GetString("ExportThroughPathway.CoverImageClick.Message", 
+                            "The selected image is too large. Please select an image that is smaller than 1000 x 1000 pixels.", "");
                         MessageBox.Show(message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
@@ -1415,6 +1478,14 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+        }
+
+        private void chkHyphen_CheckedChanged(object sender, EventArgs e)
+        {
+            bool hyphencheck = chkHyphen.Checked;
+            for (int i = 0; i < clbHyphenlang.Items.Count; i++)
+                clbHyphenlang.SetItemCheckState(i, ((hyphencheck&&Param.HyphenationSelectedLanguagelist.Contains(clbHyphenlang.GetItemText(i))) ? CheckState.Checked : CheckState.Unchecked)); 
+            clbHyphenlang.Enabled = hyphencheck;
         }
     }
 }

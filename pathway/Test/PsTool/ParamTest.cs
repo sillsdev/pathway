@@ -129,11 +129,14 @@ namespace Test.CssDialog
             Param.LoadValues(actual);
             if (!Directory.Exists(_publishingSolutionsData))
                 Directory.CreateDirectory(_publishingSolutionsData);
-			Common.ProgBase = _inputBasePath;
+            var schema = Path.GetFileNameWithoutExtension(_StyleSettings) + ".xsd";
+            var schemaFullName = Path.Combine(_publishingSolutionsData, schema);
+            if (File.Exists(schemaFullName))
+                File.Delete(schemaFullName);
+            Common.ProgBase = _inputBasePath;
             Param.Write();
             var expected = Common.PathCombine(_publishingSolutionsData, _StyleSettings);
             XmlAssert.AreEqual(expected, actual, _StyleSettings);
-            var schema = Path.GetFileNameWithoutExtension(_StyleSettings) + ".xsd";
             var sourceSchema = Common.PathCombine(_inputBasePath, schema);
             var destinationSchema = Common.PathCombine(_publishingSolutionsData, schema);
             XmlAssert.AreEqual(sourceSchema, destinationSchema, schema);

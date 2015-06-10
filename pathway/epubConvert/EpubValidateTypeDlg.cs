@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using epubConvert.Properties;
-using epubValidator;
 using SIL.Tool;
 
 namespace epubConvert
@@ -16,6 +12,7 @@ namespace epubConvert
 
         public EpubValidateTypeDlg()
         {
+            Common.SetupLocalization("epubConvert");
             InitializeComponent();
         }
 

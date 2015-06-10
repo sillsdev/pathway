@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -9,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using epubConvert.Properties;
 using epubValidator;
+using L10NSharp;
 using SIL.Tool;
 
 namespace epubConvert
@@ -16,8 +14,10 @@ namespace epubConvert
     public partial class EpubExportTypeDlg : Form
     {
         public string _exportType = "cancel";
+      
        public EpubExportTypeDlg()
         {
+            Common.SetupLocalization("epubConvert");
             InitializeComponent();
         }
 
@@ -53,7 +53,6 @@ namespace epubConvert
             lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Regular);
             lblMessage.SelectedText = "Some readers cannot display Epub3 files correctly.";
         }
-
        private void ValidateAndDisplayResult(string outputFolder, string fileName, string outputPathWithFileName)
         {
             // Postscript - validate the file using our epubcheck wrapper
@@ -65,7 +64,8 @@ namespace epubConvert
             }
             else
             {
-                if (MessageBox.Show(Resources.ExportCallingEpubValidator + "\r\nDo you want to Validate ePub file",
+                var msg = LocalizationManager.GetString("EpubExportTypeDlg.ValidateAndDisplay.Message", "\r\nDo you want to Validate ePub file", "");
+                if (MessageBox.Show(Resources.ExportCallingEpubValidator + msg,
                     Resources.ExportComplete, MessageBoxButtons.YesNo,
                     MessageBoxIcon.Information) == DialogResult.Yes)
                 {

@@ -20,6 +20,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using L10NSharp;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -409,7 +410,8 @@ namespace SIL.PublishingSolution
 
                         if (!success)
                         {
-                            MessageBox.Show(@"Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", "Select Layout", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                            var message = LocalizationManager.GetString("PreviewPrintVia.CreatePreviewFile.Message", "Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", "");
+                            MessageBox.Show(message, "Select Layout", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                         }
 
                         _previewFileName1 = Common.PathCombine(stylenamePath, "PreviewMessage.jpg");

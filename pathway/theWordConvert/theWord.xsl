@@ -175,6 +175,18 @@
         <xsl:if test="count($bridgeVerse) + count($seqVerse) + count($partVerse) = 0">
             <!-- missing verses -->
             <xsl:value-of select="$missing"/>
+            <xsl:variable name="verse" select="//verse[@number=string($v+1)][preceding::chapter[1]/@number=$c]"/>
+            <xsl:if test="count($verse) != 0 and count($verse/preceding-sibling::*) = 0">
+                <xsl:variable name="parentStyle" select="$verse/parent::*[1]/@style"/>
+                <xsl:choose>
+                    <xsl:when test="starts-with($parentStyle, 'q')">
+                        <xsl:text disable-output-escaping="yes"><![CDATA[<CI>]]></xsl:text>
+                    </xsl:when>
+                    <xsl:when test="starts-with($parentStyle, 'p')">
+                        <xsl:text disable-output-escaping="yes"><![CDATA[<CM>]]></xsl:text>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:if>
             <xsl:text>&#13;&#10;</xsl:text>
         </xsl:if>
     </xsl:template>
@@ -432,6 +444,11 @@
             <xsl:when test="@style = 'sp'">
                 <xsl:call-template name="Speaker"/>
             </xsl:when>
+            <xsl:when test="@style = 'wj'">
+                <xsl:call-template name="WordsOfJesus">
+                    <xsl:with-param name="space" select="$space"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:when test="@style = 'm' or @style = 'b' or @style = 'tr'">
                 <xsl:if test="not(contains(preceding-sibling::verse[1]/@number | preceding::verse[1]/@number, $bridgePunc))">
                     <xsl:text disable-output-escaping="yes"><![CDATA[<CL>]]></xsl:text>
@@ -568,6 +585,19 @@
         </xsl:apply-templates>
     </xsl:template>
     
+    <xsl:template name="WordsOfJesus">
+        <xsl:param name="space"/>
+        <xsl:if test="$space = 1">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<font color=red>]]></xsl:text>
+        <xsl:call-template name="OutputText"/>
+        <xsl:text disable-output-escaping="yes"><![CDATA[</font>]]></xsl:text>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="1"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
     <xsl:template name="GlossaryWord">
         <xsl:param name="space"/>
         <xsl:if test="$space = 1">
@@ -673,7 +703,9 @@
     
     <xsl:template name="Quote-1">
         <xsl:param name="indent"/>
-        <xsl:text disable-output-escaping="yes"><![CDATA[<CI>]]></xsl:text>
+        <xsl:if test="not(contains(preceding-sibling::verse[1]/@number | preceding::verse[1]/@number, $bridgePunc))">
+            <xsl:text disable-output-escaping="yes"><![CDATA[<CI>]]></xsl:text>
+        </xsl:if>
         <xsl:choose>
             <xsl:when test="$indent = 1 or $indent = 3">
                 <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
@@ -692,7 +724,9 @@
     
     <xsl:template name="Quote-2">
         <xsl:param name="indent"/>
-        <xsl:text disable-output-escaping="yes"><![CDATA[<CI>]]></xsl:text>
+        <xsl:if test="not(contains(preceding-sibling::verse[1]/@number | preceding::verse[1]/@number, $bridgePunc))">
+            <xsl:text disable-output-escaping="yes"><![CDATA[<CI>]]></xsl:text>
+        </xsl:if>
         <xsl:choose>
             <xsl:when test="$indent = 2 or $indent = 4">
                 <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">

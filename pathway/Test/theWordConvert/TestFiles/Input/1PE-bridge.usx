@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<usx version="2.0">
+  <book code="1PE" style="id">- Verse Bridge End Of Paragraph</book>
+  <chapter number="1" style="c" />
+  <para style="p">
+    <verse number="1" style="v" />Test verse one <verse number="2-3" style="v" />Test verse two and three.</para>
+  <para style="p">
+    <verse number="4" style="v" />Test verse four. <verse number="5" style="v" />Test verse five.</para>
+  <para style="p">
+    <verse number="6" style="v" />Test verse six <verse number="7-8" style="v" />Test verse seven and eight.</para>
+  <para style="p">
+    <verse number="9" style="v" />Test verse nine. <verse number="10-11" style="v" />Test verse ten and eleven.</para>
+  <para style="p">
+    <verse number="12" style="v" />Test Verse twelve. <verse number="13-14" style="v" />Test verse thirteen-fourteen.</para>
+  <para style="p">
+    <verse number="15" style="v" />Test verse fifteen <verse number="16" style="v" />Test verse sixteen. <verse number="17" style="v" />Test verse seventeen.</para>
+  <para style="s">New Section</para>
+  <para style="p">
+    <verse number="18-19" style="v" />Test verse eighteen and 19. <verse number="20" style="v" />twenty <verse number="21-22" style="v" />twenty-one and twenty-two <verse number="23" style="v" />twenty-three <verse number="24-25" style="v" />twenty-four and twenty-five</para>
+  <chapter number="2" style="c" />
+  <para style="q">
+    <verse number="1" style="v" />Test verse one <verse number="2-3" style="v" />Test verse two and three.</para>
+  <para style="q">
+    <verse number="4" style="v" />Test verse four. <verse number="5" style="v" />Test verse five.</para>
+  <para style="q">
+    <verse number="6" style="v" />Test verse six <verse number="7-8" style="v" />Test verse seven and eight.</para>
+  <para style="q">
+    <verse number="9" style="v" />Test verse nine. <verse number="10-11" style="v" />Test verse ten and eleven.</para>
+  <para style="q">
+    <verse number="12" style="v" />Test Verse twelve. <verse number="13-14" style="v" />Test verse thirteen-fourteen.</para>
+  <para style="q">
+    <verse number="15" style="v" />Test verse fifteen <verse number="16" style="v" />Test verse sixteen. <verse number="17" style="v" />Test verse seventeen.</para>
+  <para style="s">New Section</para>
+  <para style="q">
+    <verse number="18-19" style="v" />Test verse eighteen and 19. <verse number="20" style="v" />twenty <verse number="21-22" style="v" />twenty-one and twenty-two <verse number="23" style="v" />twenty-three <verse number="24-25" style="v" />twenty-four and twenty-five</para>
+  <chapter number="3" style="c" />
+  <verse number="1" style="v" />
+  <verse number="2" style="v" />
+  <verse number="3" style="v" />
+  <verse number="4" style="v" />
+  <verse number="5" style="v" />
+  <verse number="6" style="v" />
+  <verse number="7" style="v" />
+  <verse number="8" style="v" />
+  <verse number="9" style="v" />
+  <verse number="10" style="v" />
+  <verse number="11" style="v" />
+  <verse number="12" style="v" />
+  <verse number="13" style="v" />
+  <verse number="14" style="v" />
+  <verse number="15" style="v" />
+  <verse number="16" style="v" />
+  <verse number="17" style="v" />
+  <verse number="18" style="v" />
+  <verse number="19" style="v" />
+  <verse number="20" style="v" />
+  <verse number="21" style="v" />
+  <verse number="22" style="v" />
+  <chapter number="4" style="c" />
+  <verse number="1" style="v" />
+  <verse number="2" style="v" />
+  <verse number="3" style="v" />
+  <verse number="4" style="v" />
+  <verse number="5" style="v" />
+  <verse number="6" style="v" />
+  <verse number="7" style="v" />
+  <verse number="8" style="v" />
+  <verse number="9" style="v" />
+  <verse number="10" style="v" />
+  <verse number="11" style="v" />
+  <verse number="12" style="v" />
+  <verse number="13" style="v" />
+  <verse number="14" style="v" />
+  <verse number="15" style="v" />
+  <verse number="16" style="v" />
+  <verse number="17" style="v" />
+  <verse number="18" style="v" />
+  <verse number="19" style="v" />
+  <chapter number="5" style="c" />
+  <verse number="1" style="v" />
+  <verse number="2" style="v" />
+  <verse number="3" style="v" />
+  <verse number="4" style="v" />
+  <verse number="5" style="v" />
+  <verse number="6" style="v" />
+  <verse number="7" style="v" />
+  <verse number="8" style="v" />
+  <verse number="9" style="v" />
+  <verse number="10" style="v" />
+  <verse number="11" style="v" />
+  <verse number="12" style="v" />
+  <verse number="13" style="v" />
+  <verse number="14" style="v" />
+</usx>

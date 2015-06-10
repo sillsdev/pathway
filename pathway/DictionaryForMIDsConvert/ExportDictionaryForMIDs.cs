@@ -22,6 +22,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
+using L10NSharp;
 using SIL.Tool;
 
 
@@ -112,7 +113,8 @@ namespace SIL.PublishingSolution
             }
             catch (Exception ex)
             {
-                var result = MessageBox.Show(string.Format("{0} Display partial results?", ex.Message), "Report: Failure", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                var msg = LocalizationManager.GetString("ExportDictionaryForMIDs.ExportClick.Message", "{0} Display partial results?", "");
+                var result = MessageBox.Show(string.Format(msg, ex.Message), "Report: Failure", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (result == DialogResult.Yes)
                 {
                     DisplayOutput(projInfo);
@@ -263,7 +265,8 @@ namespace SIL.PublishingSolution
         protected void ReportReults(PublicationInformation projInfo)
         {
             var output = new DictionaryForMIDsStreamWriter(projInfo);
-            var result = !Common.Testing ? MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display output files?", output.Directory), "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) :
+            var msg = LocalizationManager.GetString("ExportDictionaryForMIDs.ReportResults.Message", "Dictionary for Mid output successfully created in {0}. Display output files?", "");
+            var result = !Common.Testing ? MessageBox.Show(string.Format(msg, output.Directory), "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) :
                 DialogResult.No;
             if (result == DialogResult.Yes)
             {
@@ -277,7 +280,7 @@ namespace SIL.PublishingSolution
             const bool noWait = false;
             if (_isUnixOS)
             {
-                SubProcess.Run(output.Directory, "nautilus", output.Directory, noWait);
+                SubProcess.Run("", "nautilus", Common.HandleSpaceinLinuxPath(output.Directory), noWait);
             }
             else
             {

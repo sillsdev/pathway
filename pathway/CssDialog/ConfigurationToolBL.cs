@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,19 +24,22 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
-using System.Net;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using L10NSharp;
 using SIL.Tool;
+
 
 namespace SIL.PublishingSolution
 {
     public class ConfigurationToolBL
     {
         #region Private Variables
+
         private string _cssPath;
         private string _loadType;
         private Dictionary<string, Dictionary<string, string>> _cssClass =
@@ -51,6 +55,7 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region Public Variable
+
         public DataSet DataSetForGrid = new DataSet();
         public string MediaType = string.Empty;
         public string StyleName = string.Empty;
@@ -148,6 +153,7 @@ namespace SIL.PublishingSolution
         #region Constructor
         public ConfigurationToolBL()
         {
+
             standardSize["595x842"] = "A4";
             standardSize["420x595"] = "A5";
             standardSize["499x709"] = "B5";
@@ -276,6 +282,10 @@ namespace SIL.PublishingSolution
                     {
                         return "Mirrored";
                     }
+                    if (result.ToLower() == "none")
+                    {
+                        return "None";
+                    }
                     defaultValue = "Every Page";
                 }
                 else
@@ -283,6 +293,10 @@ namespace SIL.PublishingSolution
                     if (result.IndexOf("bookname") > 0 || result.IndexOf("chapter") > 0 || result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0)
                     {
                         return "Mirrored";
+                    }
+                    if (result.ToLower() == "none")
+                    {
+                        return "None";
                     }
                     defaultValue = "Every Page";
                 }
@@ -306,7 +320,7 @@ namespace SIL.PublishingSolution
                     result = GetPageValue(task, key, "false");
                     if (result.Length > 0)
                     {
-                        if (cTool.DdlReferenceFormat.Items.Contains(result))
+                        if (!ComboBoxContains(result, cTool.DdlReferenceFormat))
                             return result;
                     }
 
@@ -314,7 +328,7 @@ namespace SIL.PublishingSolution
                     result = GetPageValue(task, key, "false");
                     if (result.Length > 0)
                     {
-                        if (cTool.DdlReferenceFormat.Items.Contains(result))
+                        if (!ComboBoxContains(result, cTool.DdlReferenceFormat))
                             return result;
                     }
 
@@ -326,11 +340,15 @@ namespace SIL.PublishingSolution
                     result = GetPageValue(task, key, "false");
                     if (result.Length > 0)
                     {
-                        if (cTool.DdlReferenceFormat.Items.Contains(result))
+                        if (!ComboBoxContains(result, cTool.DdlReferenceFormat))
                             return result;
                     }
 
                     defaultValue = "Genesis 1:1-2:1";
+                }
+                else if (GetDdlRunningHead().ToLower() == "none")
+                {
+                    defaultValue = "None";
                 }
 
 
@@ -349,10 +367,10 @@ namespace SIL.PublishingSolution
                     {
                         const string key = "content";
                         string result = GetValue(srchKey, key, "false");
-                        if (result.IndexOf("page") > 0)
+                        if (result.IndexOf("page") > 0 || result == "none")
                         {
                             string pageNumberValue = pageDict[srchKey];
-                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
+                            if (!ComboBoxContains(pageNumberValue, cTool.DdlPageNumber))
                                 return pageDict[srchKey];
                         }
                     }
@@ -366,7 +384,7 @@ namespace SIL.PublishingSolution
                         if (result.IndexOf("page") > 0)
                         {
                             string pageNumberValue = pageDict[srchKey];
-                            if (cTool.DdlPageNumber.Items.Contains(pageNumberValue))
+                            if (!ComboBoxContains(pageNumberValue, cTool.DdlPageNumber))
                                 return pageDict[srchKey];
                         }
                     }
@@ -374,6 +392,7 @@ namespace SIL.PublishingSolution
                 return defaultValue;
             }
         }
+
         public string ColumnCount
         {
             get
@@ -866,10 +885,10 @@ namespace SIL.PublishingSolution
                 }
                 catch (Exception ex)
                 {
-                    string message =
-                        "Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" +
-                        ex.Message + "'";
-                    MessageBox.Show(message, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                    var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.NoDuplicateStyleName.Message",
+                        "Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'", "");
+                    confirmationStringMessage = string.Format(confirmationStringMessage, ex.Message);
+                    MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
                                     MessageBoxDefaultButton.Button1);
                 }
             }
@@ -880,54 +899,54 @@ namespace SIL.PublishingSolution
         {
             var value = new Dictionary<string, string>();
             string attribute = "Justified";
-            string key = cTool.DdlJustified.Text;
+            string key = ((ComboBoxItem)cTool.DdlJustified.SelectedItem).Value;
             WriteAtImport(writeCss, attribute, key);
 
             attribute = "VerticalJustify";
-            key = cTool.DdlVerticalJustify.Text;
+            key = ((ComboBoxItem)cTool.DdlVerticalJustify.SelectedItem).Value;
             WriteAtImport(writeCss, attribute, key);
 
             attribute = "Page Size";
-            key = cTool.DdlPagePageSize.Text;
+            key = ((ComboBoxItem)cTool.DdlPagePageSize.SelectedItem).Value;
             WriteAtImport(writeCss, attribute, key);
 
             attribute = "Columns";
-            key = cTool.DdlPageColumn.Text;
+            key = ((ComboBoxItem)cTool.DdlPageColumn.SelectedItem).Value;
             WriteAtImport(writeCss, attribute, key);
 
             attribute = "Font Size";
-            key = cTool.DdlFontSize.Text;
+            key = ((ComboBoxItem)cTool.DdlFontSize.SelectedItem).Value;
             WriteAtImport(writeCss, attribute, key);
 
             attribute = "Leading";
-            key = cTool.DdlLeading.Text;
+            key = ((ComboBoxItem)cTool.DdlLeading.SelectedItem).Value;
             WriteAtImport(writeCss, attribute, key);
 
             attribute = "Pictures";
-            key = cTool.DdlPicture.Text;
+            key = ((ComboBoxItem)cTool.DdlPicture.SelectedItem).Value;
             WriteAtImport(writeCss, attribute, key);
 
             attribute = "Running Head";
-            key = cTool.DdlRunningHead.Text;
+            key = ((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value;
             WriteAtImport(writeCss, attribute, key);
 
             if (inputTypeBL.ToLower() == "scripture")
             {
                 attribute = "Reference Format";
-                key = cTool.DdlReferenceFormat.Text;
+                key = ((ComboBoxItem)cTool.DdlReferenceFormat.SelectedItem).Value;
                 WriteAtImport(writeCss, attribute, key);
             }
 
             attribute = "Page Number";
-            key = cTool.DdlPageNumber.Text;
+            key = ((ComboBoxItem)cTool.DdlPageNumber.SelectedItem).Value;
             WriteAtImport(writeCss, attribute, key);
 
             attribute = "Rules";
-            key = cTool.DdlRules.Text;
+            key = ((ComboBoxItem)cTool.DdlRules.SelectedItem).Value;
             WriteAtImport(writeCss, attribute, key);
 
             attribute = "Sense";
-            key = cTool.DdlSense.Text;
+            key = ((ComboBoxItem)cTool.DdlSense.SelectedItem).Value;
             WriteAtImport(writeCss, attribute, key);
 
             //Writing TextBox Values into Css
@@ -961,7 +980,7 @@ namespace SIL.PublishingSolution
             value["margin-right"] = cTool.TxtPageOutside.Text;
             value["margin-bottom"] = cTool.TxtPageBottom.Text;
             value["margin-left"] = cTool.TxtPageInside.Text;
-            value["-ps-fileproduce"] = "\"" + cTool.DdlFileProduceDict.Text + "\"";
+            value["-ps-fileproduce"] = "\"" + ((ComboBoxItem)cTool.DdlFileProduceDict.SelectedItem).Value + "\"";
             value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
             value["-ps-split-file-by-letter"] = "\"" + _splitFileByLetter + "\"";
             if (inputTypeBL.ToLower() == "scripture")
@@ -974,7 +993,7 @@ namespace SIL.PublishingSolution
             value["-ps-disable-widow-orphan"] = "\"" + _disableWidowOrphan + "\"";
             WriteCssClass(writeCss, "page", value);
 
-            if (cTool.DdlRunningHead.Text.ToLower() == "mirrored")
+            if (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
             {
                 value.Clear();
                 value["margin-right"] = cTool.TxtPageInside.Text;
@@ -1140,58 +1159,35 @@ namespace SIL.PublishingSolution
             cTool.TxtPageBottom.Text = bottom + "pt";
 
             cTool.TxtPageGutterWidth.Text = GutterWidth;
-            cTool.TxtGuidewordLength.Text = GuidewordLength;
-
             if (GutterWidth.IndexOf('%') == -1)
             {
                 if (cTool.TxtPageGutterWidth.Text.Length > 0)
                     cTool.TxtPageGutterWidth.Text = cTool.TxtPageGutterWidth.Text + "pt";
             }
-            cTool.DdlPageColumn.SelectedItem = ColumnCount;
-            cTool.DdlFontSize.SelectedItem = FontSize;
-            cTool.DdlLeading.SelectedItem = Leading;
+
+            cTool.DdlPageColumn.SelectedItem = (ComboBoxItem)cTool.DdlPageColumn.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == ColumnCount);
+            cTool.DdlFontSize.SelectedItem = (ComboBoxItem)cTool.DdlFontSize.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == FontSize);
+            cTool.DdlLeading.SelectedItem = (ComboBoxItem)cTool.DdlLeading.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == Leading);
             cTool.ChkDisableWO.Checked = DisableWidowOrphan;
             cTool.ChkFixedLineHeight.Checked = FixedLineHeight;
-            cTool.DdlPicture.SelectedItem = Picture;
-            cTool.DdlJustified.SelectedItem = JustifyUI;
-            cTool.DdlPagePageSize.SelectedItem = PageSize;
-            cTool.DdlRunningHead.SelectedItem = RunningHeader;
+            cTool.DdlPicture.SelectedItem = (ComboBoxItem)cTool.DdlPicture.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == Picture);
+            cTool.DdlJustified.SelectedItem = (ComboBoxItem)cTool.DdlJustified.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == JustifyUI);
+            cTool.DdlPagePageSize.SelectedItem = (ComboBoxItem)cTool.DdlPagePageSize.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == PageSize);
+            cTool.DdlRunningHead.SelectedItem = (ComboBoxItem)cTool.DdlRunningHead.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == RunningHeader);
             cTool.ChkSplitFileByLetter.Checked = SplitFileByLetter;
 
-            string pageType;
-            pageType = GetDdlRunningHead();
+            string pageType = GetDdlRunningHead();
             DdlRunningHeadSelectedIndexChangedBl(pageType);
-
-            if (inputTypeBL.ToLower() == "scripture")
+            if (pageType != "None")
             {
-                cTool.DdlReferenceFormat.SelectedItem = ReferenceFormat;
-                if (CustomFootnoteCaller.ToLower() == "default")
-                {
-                    cTool.ChkIncludeCusFnCaller.Checked = false;
-                    cTool.TxtFnCallerSymbol.Text = "";
-                }
-                else
-                {
-                    cTool.ChkIncludeCusFnCaller.Checked = true;
-                    cTool.TxtFnCallerSymbol.Text = CustomFootnoteCaller;
-                }
-                if (CustomXRefCaller.ToLower() == "default")
-                {
-                    cTool.ChkXrefCusSymbol.Checked = false;
-                    cTool.TxtXrefCusSymbol.Text = "";
-                }
-                else
-                {
-                    cTool.ChkXrefCusSymbol.Checked = true;
-                    cTool.TxtXrefCusSymbol.Text = CustomXRefCaller;
-                }
-                cTool.ChkTurnOffFirstVerse.Checked = bool.Parse(HideVerseNumberOne);
-                cTool.ChkHideSpaceVerseNo.Checked = bool.Parse(HideSpaceVerseNumber);
+                cTool.TxtGuidewordLength.Text = GuidewordLength;
             }
-            cTool.DdlPageNumber.SelectedItem = PageNumber;
-            cTool.DdlRules.SelectedItem = ColumnRule;
-            cTool.DdlSense.SelectedItem = Sense;
-            cTool.DdlVerticalJustify.SelectedItem = VerticalJustify;
+            SetScriptureValues();
+
+            cTool.DdlPageNumber.SelectedItem = (ComboBoxItem)cTool.DdlPageNumber.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == PageNumber);
+            cTool.DdlRules.SelectedItem = (ComboBoxItem)cTool.DdlRules.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == ColumnRule);
+            cTool.DdlSense.SelectedItem = (ComboBoxItem)cTool.DdlSense.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == Sense);
+            cTool.DdlVerticalJustify.SelectedItem = (ComboBoxItem)cTool.DdlVerticalJustify.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == VerticalJustify);
             try
             {
                 if (inputTypeBL.ToLower() == "scripture" && MediaType.ToLower() == "mobile")
@@ -1232,7 +1228,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    cTool.DdlFileProduceDict.SelectedItem = FileProduced.ToString();
+                    cTool.DdlFileProduceDict.SelectedItem = (ComboBoxItem)cTool.DdlFileProduceDict.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == FileProduced);
                     ShowCssSummary();
                     if (cTool.StylesGrid.RowCount > 0)
                     {
@@ -1247,6 +1243,36 @@ namespace SIL.PublishingSolution
             _screenMode = ScreenMode.Edit;
         }
 
+        private void SetScriptureValues()
+        {
+            if (inputTypeBL.ToLower() == "scripture")
+            {
+                cTool.DdlReferenceFormat.SelectedItem = (ComboBoxItem)cTool.DdlReferenceFormat.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == ReferenceFormat);
+                if (CustomFootnoteCaller.ToLower() == "default")
+                {
+                    cTool.ChkIncludeCusFnCaller.Checked = false;
+                    cTool.TxtFnCallerSymbol.Text = "";
+                }
+                else
+                {
+                    cTool.ChkIncludeCusFnCaller.Checked = true;
+                    cTool.TxtFnCallerSymbol.Text = CustomFootnoteCaller;
+                }
+                if (CustomXRefCaller.ToLower() == "default")
+                {
+                    cTool.ChkXrefCusSymbol.Checked = false;
+                    cTool.TxtXrefCusSymbol.Text = "";
+                }
+                else
+                {
+                    cTool.ChkXrefCusSymbol.Checked = true;
+                    cTool.TxtXrefCusSymbol.Text = CustomXRefCaller;
+                }
+                cTool.ChkTurnOffFirstVerse.Checked = bool.Parse(HideVerseNumberOne);
+                cTool.ChkHideSpaceVerseNo.Checked = bool.Parse(HideSpaceVerseNumber);
+            }
+        }
+
         private void ShowMoblieCss(XmlNodeList baseNode1)
         {
             foreach (XmlNode VARIABLE in baseNode1)
@@ -1255,15 +1281,15 @@ namespace SIL.PublishingSolution
                 string attribValue = VARIABLE.Attributes["value"].Value;
                 if (attribName.ToLower() == "fileproduced")
                 {
-                    cTool.DdlFiles.SelectedItem = attribValue;
+                    cTool.DdlFiles.SelectedItem = (ComboBoxItem)cTool.DdlFiles.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                 }
                 else if (attribName.ToLower() == "redletter")
                 {
-                    cTool.DdlRedLetter.SelectedItem = attribValue;
+                    cTool.DdlRedLetter.SelectedItem = (ComboBoxItem)cTool.DdlRedLetter.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                 }
                 else if (attribName.ToLower() == "language")
                 {
-                    cTool.DdlLanguage.SelectedItem = attribValue;
+                    cTool.DdlLanguage.SelectedItem = (ComboBoxItem)cTool.DdlLanguage.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                 }
             }
         }
@@ -1297,7 +1323,7 @@ namespace SIL.PublishingSolution
                         cTool.TxtMaxImageWidth.Text = attribValue;
                         break;
                     case "toclevel":
-                        cTool.DdlTocLevel.SelectedItem = attribValue;
+                        cTool.DdlTocLevel.SelectedItem = (ComboBoxItem)cTool.DdlTocLevel.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     case "basefontsize":
                         cTool.TxtBaseFontSize.Text = attribValue;
@@ -1306,22 +1332,22 @@ namespace SIL.PublishingSolution
                         cTool.TxtDefaultLineHeight.Text = attribValue;
                         break;
                     case "defaultalignment":
-                        cTool.DdlDefaultAlignment.SelectedItem = attribValue;
+                        cTool.DdlDefaultAlignment.SelectedItem = (ComboBoxItem)cTool.DdlDefaultAlignment.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     case "chapternumbers":
-                        cTool.DdlChapterNumbers.SelectedItem = attribValue;
+                        cTool.DdlChapterNumbers.SelectedItem = (ComboBoxItem)cTool.DdlChapterNumbers.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     case "references":
-                        cTool.DdlReferences.SelectedItem = attribValue;
+                        cTool.DdlReferences.SelectedItem = (ComboBoxItem)cTool.DdlReferences.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     case "defaultfont":
-                        cTool.DdlDefaultFont.SelectedItem = attribValue;
+                        cTool.DdlDefaultFont.SelectedItem = (ComboBoxItem)cTool.DdlDefaultFont.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     case "missingfont":
-                        cTool.DdlMissingFont.SelectedItem = attribValue;
+                        cTool.DdlMissingFont.SelectedItem = (ComboBoxItem)cTool.DdlMissingFont.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     case "nonsilfont":
-                        cTool.DdlNonSILFont.SelectedItem = attribValue;
+                        cTool.DdlNonSILFont.SelectedItem = (ComboBoxItem)cTool.DdlNonSILFont.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     default:
                         break;
@@ -1473,7 +1499,7 @@ namespace SIL.PublishingSolution
                 cTool.DdlLanguage.Items.Clear();
                 foreach (XmlNode language in languageList)
                 {
-                    cTool.DdlLanguage.Items.Add(language.InnerText);
+                    cTool.DdlLanguage.Items.Add(new ComboBoxItem(language.InnerText, language.InnerText));
                 }
                 cTool.DdlLanguage.Sorted = true;
             }
@@ -1506,7 +1532,7 @@ namespace SIL.PublishingSolution
                 }
                 foreach (var fontFamily in pfc.Families)
                 {
-                    cTool.DdlDefaultFont.Items.Add(fontFamily.GetName(0));
+                    cTool.DdlDefaultFont.Items.Add(new ComboBoxItem(fontFamily.GetName(0), fontFamily.GetName(0)));
                     cTool.DdlDefaultFont.SelectedIndex = 0;
                 }
             }
@@ -1530,107 +1556,116 @@ namespace SIL.PublishingSolution
 
         private void PopulateFeatureItemsInDropDownctrl(string task, TreeNode ctn)
         {
+
+            string enText = ctn.Text;
+            ctn.Text = LocalizeItems.LocalizeItem(task, ctn.Text);
+
             switch (task)
             {
                 case "Page Size":
-                    if (!cTool.DdlPagePageSize.Items.Contains(ctn.Text))
-                        cTool.DdlPagePageSize.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlPagePageSize))
+                        cTool.DdlPagePageSize.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "Columns":
-                    if (!cTool.DdlPageColumn.Items.Contains(ctn.Text))
-                        cTool.DdlPageColumn.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlPageColumn))
+                        cTool.DdlPageColumn.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "Leading":
-                    if (!cTool.DdlLeading.Items.Contains(ctn.Text))
-                        cTool.DdlLeading.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlLeading))
+                        cTool.DdlLeading.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "Font Size":
-                    if (!cTool.DdlFontSize.Items.Contains(ctn.Text))
-                        cTool.DdlFontSize.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlFontSize))
+                        cTool.DdlFontSize.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "Running Head":
-                    if (!cTool.DdlRunningHead.Items.Contains(ctn.Text))
-                        cTool.DdlRunningHead.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlRunningHead))
+                        cTool.DdlRunningHead.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "Page Number":
-                    if (!cTool.DdlPageNumber.Items.Contains(ctn.Text))
-                        cTool.DdlPageNumber.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlPageNumber))
+                        cTool.DdlPageNumber.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "Rules":
-                    if (!cTool.DdlRules.Items.Contains(ctn.Text))
-                        cTool.DdlRules.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlRules))
+                        cTool.DdlRules.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "Pictures":
-                    if (!cTool.DdlPicture.Items.Contains(ctn.Text))
-                        cTool.DdlPicture.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlPicture))
+                        cTool.DdlPicture.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "Sense":
-                    if (!cTool.DdlSense.Items.Contains(ctn.Text))
-                        cTool.DdlSense.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlSense))
+                        cTool.DdlSense.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "Justified":
-                    if (!cTool.DdlJustified.Items.Contains(ctn.Text))
-                        cTool.DdlJustified.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlJustified))
+                        cTool.DdlJustified.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "VerticalJustify":
-                    if (!cTool.DdlVerticalJustify.Items.Contains(ctn.Text))
-                        cTool.DdlVerticalJustify.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlVerticalJustify))
+                        cTool.DdlVerticalJustify.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "FileProduced":
-                    if (!cTool.DdlFiles.Items.Contains(ctn.Text))
-                        cTool.DdlFiles.Items.Add(ctn.Text);
-                    if (!cTool.DdlFileProduceDict.Items.Contains(ctn.Text))
-                        cTool.DdlFileProduceDict.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlFiles))
+                        cTool.DdlFiles.Items.Add(new ComboBoxItem(enText, ctn.Text));
+                    if (ComboBoxContains(enText, cTool.DdlFileProduceDict))
+                        cTool.DdlFileProduceDict.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
                 case "RedLetter":
-                    if (!cTool.DdlRedLetter.Items.Contains(ctn.Text))
-                        cTool.DdlRedLetter.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlRedLetter))
+                        cTool.DdlRedLetter.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "ChapterNumbers":
-                    if (!cTool.DdlChapterNumbers.Items.Contains(ctn.Text))
-                        cTool.DdlChapterNumbers.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlChapterNumbers))
+                        cTool.DdlChapterNumbers.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "References":
-                    if (!cTool.DdlReferences.Items.Contains(ctn.Text))
-                        cTool.DdlReferences.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlReferences))
+                        cTool.DdlReferences.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "DefaultAlignment":
-                    if (!cTool.DdlDefaultAlignment.Items.Contains(ctn.Text))
-                        cTool.DdlDefaultAlignment.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlDefaultAlignment))
+                        cTool.DdlDefaultAlignment.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "MissingFont":
-                    if (!cTool.DdlMissingFont.Items.Contains(ctn.Text))
-                        cTool.DdlMissingFont.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlMissingFont))
+                        cTool.DdlMissingFont.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "NonSILFont":
-                    if (!cTool.DdlNonSILFont.Items.Contains(ctn.Text))
-                        cTool.DdlNonSILFont.Items.Add(ctn.Text);
+                    if (ComboBoxContains(enText, cTool.DdlNonSILFont))
+                        cTool.DdlNonSILFont.Items.Add(new ComboBoxItem(enText, ctn.Text));
                     break;
 
                 case "TOCLevel":
-                    if (!cTool.DdlTocLevel.Items.Contains(ctn.Text))
+                    if (ComboBoxContains(enText, cTool.DdlTocLevel))
                     {
-                        cTool.DdlTocLevel.Items.Add(ctn.Text);
+                        cTool.DdlTocLevel.Items.Add(new ComboBoxItem(enText, ctn.Text));
                         cTool.DdlTocLevel.SelectedIndex = 0;
                     }
                     break;
             }
+        }
+
+        private bool ComboBoxContains(string enText, ComboBox cbBox)
+        {
+            return cbBox.Items.OfType<ComboBoxItem>().All(s => s.Value != enText);
         }
 
 
@@ -1647,27 +1682,57 @@ namespace SIL.PublishingSolution
                     return;
                 }
 
-                string leading = (cTool.DdlLeading.Text.Length > 0) ? " Line Spacing " + cTool.DdlLeading.Text + ", " : " ";
-                string fontSize = (cTool.DdlFontSize.Text.Length > 0) ? " Base FontSize - " + cTool.DdlFontSize.Text + ", " : "";
+                string leading = string.Empty;
+                if (cTool.DdlLeading.SelectedItem != null)
+                    leading = (((ComboBoxItem)cTool.DdlLeading.SelectedItem).Value.Length > 0) ? " Line Spacing " + ((ComboBoxItem)cTool.DdlLeading.SelectedItem).Value + ", " : " ";
 
-                string rules = cTool.DdlRules.Text == "Yes"
-                                   ? "With Divider Lines, "
-                                   : "Without Divider Lines, ";
-                string justified = cTool.DdlJustified.Text == "Yes"
-                                       ? "Justified, "
-                                       : "";
-                string picture = cTool.DdlPicture.Text == "Yes"
-                                     ? "With picture "
-                                     : "Without picture ";
-                string pageSize = (cTool.DdlPagePageSize.Text.Length > 0) ? cTool.DdlPagePageSize.Text + "," : "";
-                string pageColumn = (cTool.DdlPageColumn.Text.Length > 0) ? cTool.DdlPageColumn.Text + " Column(s), " : "";
-                string gutter = cTool.TxtPageGutterWidth.Text.Length > 0 ? "Column Gap - " + cTool.TxtPageGutterWidth.Text + ", " : "";
+                string fontSize = string.Empty;
+                if (cTool.DdlFontSize.SelectedItem != null)
+                    fontSize = (((ComboBoxItem)cTool.DdlFontSize.SelectedItem).Value.Length > 0) ? " Base FontSize - " + ((ComboBoxItem)cTool.DdlFontSize.SelectedItem).Value + ", " : "";
 
-                string marginTop = cTool.TxtPageTop.Text.Length > 0 ? "Margin Top - " + cTool.TxtPageTop.Text + ", " : "";
-                string marginBottom = cTool.TxtPageBottom.Text.Length > 0 ? "Margin Bottom - " + cTool.TxtPageBottom.Text + ", " : "";
-                string marginInside = cTool.TxtPageInside.Text.Length > 0 ? "Margin Inside - " + cTool.TxtPageInside.Text + ", " : "";
-                string marginOutside = cTool.TxtPageOutside.Text.Length > 0 ? "Margin Outside - " + cTool.TxtPageOutside.Text + ", " : "";
-                string sense = (cTool.DdlSense.Text.Length > 0) ? " Sense Layout - " + cTool.DdlSense.Text + "," : "";
+                string rules = string.Empty;
+                if (cTool.DdlRules.SelectedItem != null)
+                    rules = ((ComboBoxItem)cTool.DdlRules.SelectedItem).Value == "Yes" ? "With Divider Lines, " : "Without Divider Lines, ";
+
+                string justified = string.Empty;
+                if (cTool.DdlJustified.SelectedItem != null)
+                    justified = ((ComboBoxItem)cTool.DdlJustified.SelectedItem).Value == "Yes" ? "Justified, " : "";
+
+                string picture = string.Empty;
+                if (cTool.DdlPicture.SelectedItem != null)
+                    picture = ((ComboBoxItem)cTool.DdlPicture.SelectedItem).Value == "Yes" ? "With picture " : "Without picture ";
+
+                string pageSize = string.Empty;
+                if (cTool.DdlPagePageSize.SelectedItem != null)
+                    pageSize = (((ComboBoxItem)cTool.DdlPagePageSize.SelectedItem).Value.Length > 0) ? ((ComboBoxItem)cTool.DdlPagePageSize.SelectedItem).Value + "," : "";
+
+                string pageColumn = string.Empty;
+                if (cTool.DdlPageColumn.SelectedItem != null)
+                    pageColumn = (((ComboBoxItem)cTool.DdlPageColumn.SelectedItem).Value.Length > 0) ? ((ComboBoxItem)cTool.DdlPageColumn.SelectedItem).Value + " Column(s), " : "";
+
+                string gutter = string.Empty;
+                gutter = cTool.TxtPageGutterWidth.Text.Length > 0 ? "Column Gap - " + cTool.TxtPageGutterWidth.Text + ", " : "";
+
+                string marginTop = string.Empty;
+                marginTop = cTool.TxtPageTop.Text.Length > 0 ? "Margin Top - " + cTool.TxtPageTop.Text + ", " : "";
+
+                string marginBottom = string.Empty;
+                marginBottom = cTool.TxtPageBottom.Text.Length > 0 ? "Margin Bottom - " + cTool.TxtPageBottom.Text + ", " : "";
+
+                string marginInside = string.Empty;
+                marginInside = cTool.TxtPageInside.Text.Length > 0 ? "Margin Inside - " + cTool.TxtPageInside.Text + ", " : "";
+
+                string marginOutside = string.Empty;
+                marginOutside = cTool.TxtPageOutside.Text.Length > 0 ? "Margin Outside - " + cTool.TxtPageOutside.Text + ", " : "";
+
+                string sense = string.Empty;
+                if (cTool.DdlSense.SelectedItem != null)
+                    sense = (((ComboBoxItem)cTool.DdlSense.SelectedItem).Value.Length > 0) ? " Sense Layout - " + ((ComboBoxItem)cTool.DdlSense.SelectedItem).Value + "," : "";
+
+                string RunningHead = string.Empty;
+                if (cTool.DdlRunningHead.SelectedItem != null)
+                    RunningHead = (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.Length > 0) ? " Running Head - " + ((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value + "," : "";
+
                 string combined = pageSize + " " +
                                   pageColumn + "  " +
                                   gutter + " " +
@@ -1677,7 +1742,7 @@ namespace SIL.PublishingSolution
                                   marginOutside + " " +
                                   leading + " " +
                                   fontSize + " " +
-                                  cTool.DdlRunningHead.Text + " " +
+                                  RunningHead + " " +
                                   rules + " " +
                                   justified + " " +
                                   sense + " " +
@@ -1839,15 +1904,15 @@ namespace SIL.PublishingSolution
                 string attribValue = VARIABLE.Attributes["value"].Value;
                 if (attribName.ToLower() == "fileproduced")
                 {
-                    cTool.DdlFiles.SelectedItem = attribValue;
+                    cTool.DdlFiles.SelectedItem = (ComboBoxItem)cTool.DdlFiles.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                 }
                 else if (attribName.ToLower() == "redletter")
                 {
-                    cTool.DdlRedLetter.SelectedItem = attribValue;
+                    cTool.DdlRedLetter.SelectedItem = (ComboBoxItem)cTool.DdlRedLetter.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                 }
                 else if (attribName.ToLower() == "language")
                 {
-                    cTool.DdlLanguage.SelectedItem = attribValue;
+                    cTool.DdlLanguage.SelectedItem = (ComboBoxItem)cTool.DdlLanguage.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                 }
             }
         }
@@ -1887,22 +1952,22 @@ namespace SIL.PublishingSolution
                         cTool.TxtDefaultLineHeight.Text = attribValue;
                         break;
                     case "defaultalignment":
-                        cTool.DdlDefaultAlignment.SelectedItem = attribValue;
+                        cTool.DdlDefaultAlignment.SelectedItem = (ComboBoxItem)cTool.DdlDefaultAlignment.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     case "chapternumbers":
-                        cTool.DdlChapterNumbers.SelectedItem = attribValue;
+                        cTool.DdlChapterNumbers.SelectedItem = (ComboBoxItem)cTool.DdlChapterNumbers.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     case "references":
-                        cTool.DdlReferences.SelectedItem = attribValue;
+                        cTool.DdlReferences.SelectedItem = (ComboBoxItem)cTool.DdlReferences.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     case "defaultfont":
-                        cTool.DdlDefaultFont.SelectedItem = attribValue;
+                        cTool.DdlDefaultFont.SelectedItem = (ComboBoxItem)cTool.DdlDefaultFont.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     case "missingfont":
-                        cTool.DdlMissingFont.SelectedItem = attribValue;
+                        cTool.DdlMissingFont.SelectedItem = (ComboBoxItem)cTool.DdlMissingFont.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     case "nonsilfont":
-                        cTool.DdlNonSILFont.SelectedItem = attribValue;
+                        cTool.DdlNonSILFont.SelectedItem = (ComboBoxItem)cTool.DdlNonSILFont.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == attribValue);
                         break;
                     default:
                         break;
@@ -2047,11 +2112,12 @@ namespace SIL.PublishingSolution
         /// <returns>True/False</returns>
         protected bool ValidateStyleName(string stringValue)
         {
-            string result = string.Empty;
+            string result1 = string.Empty;
+            var validateStringMessage = string.Empty;
             bool valid = true;
             if (!Common.ValidateStartsWithAlphabet(stringValue))
             {
-                result = "Style name should not be empty. Please enter the valid name";
+                validateStringMessage = LocalizationManager.GetString("ConfigurationToolBL.ValidateStyleName.Message1", "Style name should not be empty. Please enter the valid name", "");
             }
             else
             {
@@ -2060,14 +2126,15 @@ namespace SIL.PublishingSolution
                     if (!(ch == '-' || ch == '_' || ch == ' ' || ch == '.' || ch == '(' || ch == ')' ||
                         (ch >= 48 && ch <= 57) || (ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)))
                     {
-                        result = "Please avoid " + ch + " in the Style name";
+                        validateStringMessage = LocalizationManager.GetString("ConfigurationToolBL.ValidateStyleName.Message2", "Please avoid {0} in the Style name", "");
+                        validateStringMessage = string.Format(validateStringMessage, ch);
                         break;
                     }
                 }
             }
-            if (result != string.Empty)
+            if (validateStringMessage != string.Empty)
             {
-                MessageBox.Show(result, _caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(validateStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 valid = false;
             }
             return valid;
@@ -2082,8 +2149,9 @@ namespace SIL.PublishingSolution
                 // Edit- Check it, while the name changed in Stylename textBox.
                 if (IsNameExists(cTool.StylesGrid, cTool.TxtName.Text))
                 {
-                    MessageBox.Show("Stylesheet Name [" + cTool.TxtName.Text + "] already exists", _caption,
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.NoDuplicateStyleName.Message", "Stylesheet Name [{0}] already exists", "");
+                    confirmationStringMessage = string.Format(confirmationStringMessage, cTool.TxtName.Text);
+                    MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     result = false;
                 }
                 cTool._previousTxtName = cTool.TxtName.Text;
@@ -2434,9 +2502,8 @@ namespace SIL.PublishingSolution
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
             if (PreviousStyleName.Length > 50)
             {
-                const string message = "Styles should not be greater than 50 characters.";
-                MessageBox.Show(message, Caption, MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.CopyStyle.Message", "Styles should not be greater than 50 characters.", "");
+                MessageBox.Show(confirmationStringMessage, Caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             var currentDescription = "Based on " + currentApprovedBy + " stylesheet " + StyleName;
@@ -2510,7 +2577,7 @@ namespace SIL.PublishingSolution
                     string pageType = GetDdlRunningHead();
                     fileName = GetPageNumberImport(pageType, key);
                 }
-                if (fileName.IndexOf("_Paged_") > 0 && cTool.DdlRunningHead.Text.ToLower() == "mirrored")
+                if (fileName.IndexOf("_Paged_") > 0 && ((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
                 {
                     fileName = fileName.Replace("_Paged_", "_Mirrored_");
                 }
@@ -2589,7 +2656,7 @@ namespace SIL.PublishingSolution
         public void WriteMedia()
         {
             XmlNode baseNode = Param.GetItem("//categories/category[@name = \"Media\"]");
-            if (MediaType.Length <= 0) 
+            if (MediaType.Length <= 0)
                 MediaType = Param.GetAttrByName("//categories/category", "Media", "select").ToLower();
             Param.SetAttrValue(baseNode, "select", MediaType);
             Param.Write();
@@ -3096,7 +3163,8 @@ namespace SIL.PublishingSolution
             sb.Append("pt Font, ");
             sb.Append(cTool.TxtDefaultLineHeight.Text);
             sb.Append("% Line Height, Alignment: ");
-            sb.Append(cTool.DdlDefaultAlignment.SelectedText.ToString(CultureInfo.InvariantCulture));
+            if (cTool.DdlJustified.SelectedItem != null)
+                sb.Append(((ComboBoxItem)cTool.DdlDefaultAlignment.SelectedItem).Value.ToString(CultureInfo.InvariantCulture));
 
             cTool.TxtCss.Text = sb.ToString();
         }
@@ -3117,10 +3185,10 @@ namespace SIL.PublishingSolution
                 cTool.TxtCss.Text = @"No custom properties for DictionaryForMIDs";
             }
             string comma = ", ";
-            string red = (cTool.DdlRedLetter.Text.Length > 0 && cTool.DdlRedLetter.Text.ToLower() == "yes") ? " Red Letter  " : "";
+            string red = (((ComboBoxItem)cTool.DdlRedLetter.SelectedItem).Value.Length > 0 && ((ComboBoxItem)cTool.DdlRedLetter.SelectedItem).Value.ToLower() == "yes") ? " Red Letter  " : "";
             if (red.Length == 0)
                 comma = "";
-            string files = (cTool.DdlFiles.Text.Length > 0) ? " Numbers of files produced -  " + cTool.DdlFiles.Text + comma : " ";
+            string files = (((ComboBoxItem)cTool.DdlFiles.SelectedItem).Value.Length > 0) ? " Numbers of files produced -  " + ((ComboBoxItem)cTool.DdlFiles.SelectedItem).Value + comma : " ";
 
             string combined =
                 files + " " +
@@ -3133,7 +3201,7 @@ namespace SIL.PublishingSolution
         {
             int marginTop = GetDefaultValue(cTool.TxtPageTop.Text);
             int marginBottom = GetDefaultValue(cTool.TxtPageBottom.Text);
-            int expectedHeight = GetPageSize(cTool.DdlPagePageSize.Text, "Height") / 4;
+            int expectedHeight = GetPageSize(((ComboBoxItem)cTool.DdlPagePageSize.SelectedItem).Value, "Height") / 4;
             int outputHeight = marginTop + marginBottom;
 
             Control ctrl = ((Control)sender);
@@ -3153,7 +3221,7 @@ namespace SIL.PublishingSolution
             int marginLeft = GetDefaultValue(cTool.TxtPageInside.Text);
             int marginRight = GetDefaultValue(cTool.TxtPageOutside.Text);
             int columnGap = GetDefaultValue(cTool.TxtPageGutterWidth.Text);
-            int expectedWidth = GetPageSize(cTool.DdlPagePageSize.Text, "Width") / 2;
+            int expectedWidth = GetPageSize(((ComboBoxItem)cTool.DdlPagePageSize.SelectedItem).Value, "Width") / 2;
             int outputWidth = marginLeft + columnGap + marginRight;
 
             Control ctrl = ((Control)sender);
@@ -3183,7 +3251,8 @@ namespace SIL.PublishingSolution
                     double width = iconImage.Width;
                     if (height != 20 || width != 20)
                     {
-                        MessageBox.Show("Please choose the icon with 20 x 20 dim.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.BrowseButton.Message", "Please choose the icon with 20 x 20 px.", "");
+                        MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
                     string userPath = (Param.Value["UserSheetPath"]);
@@ -3201,7 +3270,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateMobileAtrrib("RedLetter", cTool.DdlRedLetter.Text, StyleName);
+                Param.UpdateMobileAtrrib("RedLetter", ((ComboBoxItem)cTool.DdlRedLetter.SelectedItem).Value, StyleName);
                 SetMobileSummary(sender, e);
             }
             catch { }
@@ -3212,7 +3281,7 @@ namespace SIL.PublishingSolution
             try
             {
                 _fileProduce = cTool.DdlFiles.Text;
-                Param.UpdateMobileAtrrib("FileProduced", cTool.DdlFiles.Text, StyleName);
+                Param.UpdateMobileAtrrib("FileProduced", ((ComboBoxItem)cTool.DdlFiles.SelectedItem).Value, StyleName);
                 SetMobileSummary(sender, e);
             }
             catch { }
@@ -3223,7 +3292,7 @@ namespace SIL.PublishingSolution
             try
             {
                 _fileProduce = cTool.DdlLanguage.Text;
-                Param.UpdateMobileAtrrib("Language", cTool.DdlLanguage.Text, StyleName);
+                Param.UpdateMobileAtrrib("Language", ((ComboBoxItem)cTool.DdlLanguage.SelectedItem).Value, StyleName);
                 SetMobileSummary(sender, e);
             }
             catch { }
@@ -3234,7 +3303,7 @@ namespace SIL.PublishingSolution
             try
             {
                 _tocLevel = cTool.DdlTocLevel.Text;
-                Param.UpdateOthersAtrrib("TOCLevel", cTool.DdlTocLevel.Text, StyleName);
+                Param.UpdateOthersAtrrib("TOCLevel", ((ComboBoxItem)cTool.DdlTocLevel.SelectedItem).Value, StyleName);
                 SetOthersSummary(sender, e);
             }
             catch { }
@@ -3271,7 +3340,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("DefaultAlignment", cTool.DdlDefaultAlignment.Text, StyleName);
+                Param.UpdateOthersAtrrib("DefaultAlignment", ((ComboBoxItem)cTool.DdlDefaultAlignment.SelectedItem).Value, StyleName);
                 SetOthersSummary(sender, e);
             }
             catch { }
@@ -3281,7 +3350,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("ChapterNumbers", cTool.DdlChapterNumbers.Text, StyleName);
+                Param.UpdateOthersAtrrib("ChapterNumbers", ((ComboBoxItem)cTool.DdlChapterNumbers.SelectedItem).Value, StyleName);
                 SetOthersSummary(sender, e);
             }
             catch { }
@@ -3291,7 +3360,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("References", cTool.DdlReferences.Text, StyleName);
+                Param.UpdateOthersAtrrib("References", ((ComboBoxItem)cTool.DdlReferences.SelectedItem).Value, StyleName);
                 SetOthersSummary(sender, e);
             }
             catch { }
@@ -3301,7 +3370,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("DefaultFont", cTool.DdlDefaultFont.Text, StyleName);
+                Param.UpdateOthersAtrrib("DefaultFont", ((ComboBoxItem)cTool.DdlDefaultFont.SelectedItem).Value, StyleName);
                 SetOthersSummary(sender, e);
             }
             catch { }
@@ -3311,7 +3380,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("MissingFont", cTool.DdlMissingFont.Text, StyleName);
+                Param.UpdateOthersAtrrib("MissingFont", ((ComboBoxItem)cTool.DdlMissingFont.SelectedItem).Value, StyleName);
                 SetOthersSummary(sender, e);
             }
             catch { }
@@ -3321,7 +3390,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("NonSILFont", cTool.DdlNonSILFont.Text, StyleName);
+                Param.UpdateOthersAtrrib("NonSILFont", ((ComboBoxItem)cTool.DdlNonSILFont.SelectedItem).Value, StyleName);
                 SetOthersSummary(sender, e);
             }
             catch { }
@@ -3443,7 +3512,8 @@ namespace SIL.PublishingSolution
 
                         if (!success)
                         {
-                            MessageBox.Show(@"Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                            var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.CreatePreviewFile.Message", "Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", "");
+                            MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                         }
 
                         PreviewFileName1 = Common.PathCombine(stylenamePath, "PreviewMessage.jpg");
@@ -3623,49 +3693,62 @@ namespace SIL.PublishingSolution
 
         public void DdlRunningHeadSelectedIndexChangedBl(string pageType)
         {
+            if (pageType == "None")
+            {
+                cTool.TxtGuidewordLength.Text = "0";
+                cTool.TxtGuidewordLength.Enabled = false;
+            }
+            else
+            {
+                cTool.TxtGuidewordLength.Text = "99";
+                cTool.TxtGuidewordLength.Enabled = true;
+            }
             string xPath = string.Empty;
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulatePageNumberFeature");
             xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
 
             XmlNodeList pageNumList = Param.GetItems(xPath);
             cTool.DdlPageNumber.Items.Clear();
-            try
+            cTool.DdlReferenceFormat.Items.Clear();
+
+            foreach (XmlNode node in pageNumList)
             {
-                foreach (XmlNode node in pageNumList)
+                if (node.Attributes != null)
                 {
-                    if (node.Attributes != null)
+                    string value = node.Attributes["name"].Value;
+                    if (ComboBoxContains(value, cTool.DdlPageNumber))
                     {
-                        string value = node.Attributes["name"].Value;
-                        if (!cTool.DdlPageNumber.Items.Contains(value))
-                            cTool.DdlPageNumber.Items.Add(value);
+                        string enText = value;
+                        value = LocalizeItems.LocalizeItem("Page Number", value);
+                        cTool.DdlPageNumber.Items.Add(new ComboBoxItem(enText, value));
+
+                        if (enText.ToLower() == "none")
+                        {
+                            value = LocalizeItems.LocalizeItem("Reference Format", value);
+                            cTool.DdlReferenceFormat.Items.Add(new ComboBoxItem(enText, value));
+                        }
                     }
                 }
-                cTool.DdlPageNumber.SelectedIndex = 0;
             }
-            catch
-            {
-            }
-
+            cTool.DdlPageNumber.SelectedIndex = 0;
             xPath = "//features/feature[@name='Reference Format']/option[@type='" + pageType + "' or @type= 'Both']";
             pageNumList = Param.GetItems(xPath);
-            cTool.DdlReferenceFormat.Items.Clear();
-            try
+            foreach (XmlNode node in pageNumList)
             {
-                foreach (XmlNode node in pageNumList)
+                if (node.Attributes != null)
                 {
-                    if (node.Attributes != null)
+                    string value = node.Attributes["name"].Value;
+                    if (ComboBoxContains(value, cTool.DdlReferenceFormat))
                     {
-                        string value = node.Attributes["name"].Value;
-                        if (!cTool.DdlReferenceFormat.Items.Contains(value))
-                            cTool.DdlReferenceFormat.Items.Add(value);
+                        string enText = value;
+                        value = LocalizeItems.LocalizeItem("Reference Format", value);
+                        cTool.DdlReferenceFormat.Items.Add(new ComboBoxItem(enText, value));
                     }
+
                 }
-                if (cTool.DdlReferenceFormat.Items.Count > 0)
-                    cTool.DdlReferenceFormat.SelectedIndex = 0;
             }
-            catch
-            {
-            }
+            if (cTool.DdlReferenceFormat.Items.Count > 0)
+                cTool.DdlReferenceFormat.SelectedIndex = 0;
         }
 
         public void chkAvailable_CheckedChangedBL(object sender)
@@ -3845,7 +3928,9 @@ namespace SIL.PublishingSolution
                     string errMsg = CreateCssFile(FileName);
                     if (errMsg.Length > 0)
                     {
-                        MessageBox.Show(@"Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + errMsg + @"'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                        var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.NameValidate.Message", "Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'", "");
+                        confirmationStringMessage = String.Format(confirmationStringMessage, errMsg);
+                        MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     }
                     AddNew(cTool.TxtName.Text);
                     EnableToolStripButtons(true);
@@ -4141,6 +4226,7 @@ namespace SIL.PublishingSolution
                 }
                 catch (Exception ex)
                 {
+
                     MessageBox.Show(ex.Message, _caption);
                 }
             }
@@ -4253,25 +4339,25 @@ namespace SIL.PublishingSolution
                 const ContentAlignment contentBc = System.Drawing.ContentAlignment.BottomCenter;
                 const ToolStripTextDirection toolStripTextDirection = ToolStripTextDirection.Horizontal;
                 const ContentAlignment contentTc = System.Drawing.ContentAlignment.TopCenter;
-                
+
                 cTool.TsNew.Font = cFont;
                 cTool.TsNew.Size = cSize;
                 cTool.TsNew.TextAlign = contentBc;
                 cTool.TsNew.TextDirection = toolStripTextDirection;
                 cTool.TsNew.ImageAlign = contentTc;
-                
+
                 cTool.TsSaveAs.Font = cFont;
                 cTool.TsSaveAs.Size = cSize;
                 cTool.TsSaveAs.TextAlign = contentBc;
                 cTool.TsSaveAs.TextDirection = toolStripTextDirection;
                 cTool.TsSaveAs.ImageAlign = contentTc;
-                
+
                 cTool.TsDelete.Font = cFont;
                 cTool.TsDelete.Size = cSize;
                 cTool.TsDelete.TextAlign = contentBc;
                 cTool.TsDelete.TextDirection = toolStripTextDirection;
                 cTool.TsDelete.ImageAlign = contentTc;
-                
+
                 cTool.TsUndo.Font = cFont;
                 cTool.TsUndo.Size = cSize;
                 cTool.TsUndo.TextAlign = contentBc;
@@ -4283,7 +4369,7 @@ namespace SIL.PublishingSolution
                 cTool.TsRedo.TextAlign = contentBc;
                 cTool.TsRedo.TextDirection = toolStripTextDirection;
                 cTool.TsRedo.ImageAlign = contentTc;
-                
+
                 cTool.TsPreview.Font = cFont;
                 cTool.TsPreview.Size = cSize;
                 cTool.TsPreview.TextAlign = contentBc;
@@ -4295,19 +4381,19 @@ namespace SIL.PublishingSolution
                 cTool.TsDefault.TextAlign = contentBc;
                 cTool.TsDefault.TextDirection = toolStripTextDirection;
                 cTool.TsDefault.ImageAlign = contentTc;
-                
+
                 cTool.TsReset.Font = cFont;
                 cTool.TsReset.Size = cSize;
                 cTool.TsReset.TextAlign = contentBc;
                 cTool.TsReset.TextDirection = toolStripTextDirection;
                 cTool.TsReset.ImageAlign = contentTc;
-                
+
                 cTool.TsSend.Font = cFont;
                 cTool.TsSend.Size = cSize;
                 cTool.TsSend.TextAlign = contentBc;
                 cTool.TsSend.TextDirection = toolStripTextDirection;
                 cTool.TsSend.ImageAlign = contentTc;
-                
+
                 cTool.ToolStripHelpButton.Font = cFont;
                 cTool.ToolStripHelpButton.Size = cSize;
                 cTool.ToolStripHelpButton.TextAlign = contentBc;
@@ -4375,11 +4461,12 @@ namespace SIL.PublishingSolution
         {
             _screenMode = ScreenMode.Delete;
             string name = cTool.TxtName.Text;
-            string msg = "Are you sure you want to delete the " + name + " stylesheet?";
             string caption = "Delete Stylesheet";
+            var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabDeleteClick.Message1", "Are you sure you want to delete the {0} stylesheet?", "");
+            confirmationStringMessage = string.Format(confirmationStringMessage, name);
             if (!cTool._fromNunit)
             {
-                DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
+                DialogResult result = MessageBox.Show(confirmationStringMessage, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
                                                       MessageBoxDefaultButton.Button2);
                 if (result != DialogResult.OK) return;
             }
@@ -4413,12 +4500,14 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                        MessageBox.Show("Factory style sheet can not be deleted", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabDeleteClick.Message2", "Factory style sheet can not be deleted", "");
+                        MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please select a style sheet to delete", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabDeleteClick.Message3", "Please select a style sheet to delete", "");
+                    MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch
@@ -4520,14 +4609,15 @@ namespace SIL.PublishingSolution
 
         public void tsReset_ClickBL()
         {
-            string message = "Settings files cannot be reset.";
+            var confirmationStringMessage = "Settings files cannot be reset.";
             try
             {
-                const string msg = "Are you sure you want to remove all custom style sheets and restore \r\n settings to their initial values? (This cannot be undone.)";
+                confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabResetClick1.Message",
+                    "Are you sure you want to remove all custom style sheets and restore \r\n settings to their initial values? (This cannot be undone.)", "");
                 const string caption = "Reset Settings";
                 if (!cTool._fromNunit)
                 {
-                    DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                    DialogResult result = MessageBox.Show(confirmationStringMessage, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                                                           MessageBoxDefaultButton.Button2);
                     if (result == DialogResult.No) return;
                 }
@@ -4541,10 +4631,11 @@ namespace SIL.PublishingSolution
                 SelectedRowIndex = 0;
                 inputTypeBL = cTool.InputType;
                 ConfigurationTool_LoadBL();
-                message = "Settings files are reset successfully.";
+                confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabResetClick2.Message",
+                    "Settings files are reset successfully", "");
             }
             catch { }
-            MessageBox.Show(message, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void ShowPreview(int page)
@@ -4636,14 +4727,16 @@ namespace SIL.PublishingSolution
 
         private string GetDdlRunningHead()
         {
-            string pageType;
+            string pageType = string.Empty;
             if (cTool.DdlRunningHead.SelectedIndex != -1)
             {
-                pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+                pageType = ((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value;
             }
             else
             {
-                pageType = cTool.DdlRunningHead.Items[0].ToString();
+                if (cTool.DdlRunningHead.Items.Count > 0)
+                    pageType = ((ComboBoxItem)cTool.DdlRunningHead.Items[0]).Value;
+                //pageType = cTool.DdlRunningHead.Items[0].ToString();
             }
             return pageType;
         }

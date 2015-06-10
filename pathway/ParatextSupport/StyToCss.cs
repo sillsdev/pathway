@@ -40,10 +40,10 @@ namespace SIL.PublishingSolution
         /// </param>
         /// <param name="cssFullPath">The CSS full path.</param>
         /// ------------------------------------------------------------
-        public void ConvertStyToCss(string database, string cssFullPath)
+        public void ConvertStyToCss(string database, string cssFullPath, string ssfFullPath)
         {
             _cssFullPath = cssFullPath;
-            FindStyFile(database);
+            FindStyFile(database, ssfFullPath);
             MapClassName();
             ParseFile();
             SetFontAndDirection();
@@ -62,9 +62,9 @@ namespace SIL.PublishingSolution
         /// Loaded by reflection.)
         /// </summary>
         /// <param name="cssFullPath"></param>
-// ReSharper disable UnusedMember.Global
+        // ReSharper disable UnusedMember.Global
         public void ConvertStyToCss(string cssFullPath)
-// ReSharper restore UnusedMember.Global
+        // ReSharper restore UnusedMember.Global
         {
             _cssFullPath = cssFullPath;
             MapClassName();
@@ -106,25 +106,30 @@ namespace SIL.PublishingSolution
         /// <param name="database">The settings for the Paratext database.
         /// </param>
         /// ------------------------------------------------------------
-        private void FindStyFile(string database)
+        private void FindStyFile(string database, string ssfFullPath)
         {
             string ssfFile = database + ".ssf";
-            string ssfFullPath = string.Empty;
-
-            if (Common.GetOsName().Contains("Windows"))
+            if (string.IsNullOrEmpty(ssfFullPath))
             {
-                ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\ScrChecks\\1.0\\Settings_Directory", "");
-                if (string.IsNullOrEmpty(ssfFullPath))
-                { // Handle 32-bit Windows 7 and XP
-                    ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Settings_Directory", "");
+                if (Common.GetOsName().Contains("Windows"))
+                {
+                    ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\ScrChecks\\1.0\\Settings_Directory", "");
+                    if (string.IsNullOrEmpty(ssfFullPath))
+                    { // Handle 32-bit Windows 7 and XP
+                        ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Settings_Directory", "");
+                    }
                 }
+                else
+                {
+
+                    ssfFullPath = Common.GetParatextProjectPath();
+                    StyFullPath = Common.PathCombine(ssfFullPath, ssfFile);
+
+                }
+
+                ssfFullPath = ssfFullPath + ssfFile;
             }
-            else
-            {
-                ssfFullPath = Common.GetParatextProjectPath();
-                StyFullPath = Common.PathCombine(ssfFullPath, ssfFile);
-            }
-            ssfFullPath = ssfFullPath + ssfFile;
+            
 
             bool isStylesheet = false;
 

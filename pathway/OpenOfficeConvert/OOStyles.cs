@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Xml;
+using Microsoft.Win32;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -44,6 +45,7 @@ namespace SIL.PublishingSolution
         private bool _isCenterTabStopNeeded = true;
         private int _guidewordLength;
         private string _defaultFontSize;
+        private bool IsHyphenEnabled = false;
 
         public Dictionary<string, Dictionary<string, string>> CreateStyles(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssProperty, string outputFileName)
         {
@@ -55,6 +57,7 @@ namespace SIL.PublishingSolution
                 _isFromExe = Common.CheckExecutionPath();
                 _projInfo = projInfo;
                 _cssProperty = cssProperty;
+                EnableHyphenation();
                 GetGuidewordLength(cssProperty);
                 InitializeObject(outputFile); // Creates new Objects
                 LoadAllProperty();  // Loads all properties
@@ -90,6 +93,39 @@ namespace SIL.PublishingSolution
                     }
                 }
                 _guidewordLength = _guidewordLength > 0 ? _guidewordLength : 99;
+            }
+        }
+
+        /// <summary>
+        /// Enabling hyphenation
+        /// </summary>
+        private void EnableHyphenation()
+        {
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                if (!Param.HyphenEnable)
+                {
+                    try
+                    {
+                        OperatingSystem OS = Environment.OSVersion;
+                        if (OS.ToString().IndexOf("Microsoft") == 0)
+                        {
+                            string strFilePath;
+                            string strPath = @"SOFTWARE\Classes\.odt\LibreOffice.WriterDocument.1\ShellNew\";
+                            RegistryKey regKeyAppRoot = Registry.LocalMachine.OpenSubKey(strPath);
+                            strFilePath = (string) regKeyAppRoot.GetValue("FileName");
+                            strFilePath = strFilePath.Replace(@"template\shellnew\soffice.odt", @"extensions\");
+                            string[] files = Directory.GetFiles(strFilePath, "hyph*.dic", SearchOption.AllDirectories);
+                            if (files.Length > 0)
+                            {
+                                IsHyphenEnabled = true;
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
             }
         }
 
@@ -735,8 +771,10 @@ namespace SIL.PublishingSolution
 
         private void CreatePageStyle()   // PageHeaderFooter() in odt conversion 
         {
-            CreateHeaderFooter();
             CreatePageFirstPage();
+            if (_guidewordLength == 0 && _projInfo.ProjectInputType.ToLower() == "dictionary") return;
+            CreateHeaderFooter();
+            
         }
 
         private void CreatePageFirstPage()
@@ -1263,7 +1301,8 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("style:text-properties");
             _writer.WriteAttributeString("style:font-name", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
-            _writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
+            //_writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
+            _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
@@ -1810,10 +1849,13 @@ namespace SIL.PublishingSolution
                     else if (_pageHeaderFooter[i]["content"].IndexOf("counter") > 0)
                     {
                         CreateHeaderFooter(i, "PageNumber", ref isHeaderCreated, ref isFooterCreated, ref isHeaderClosed, ref isFooterClosed);
-                        CreateLeftGuidewordPageNumber(i, "PageNumber");
-                        if (i < 21) //PageNumber Created on RightPage Header
+                        if (i != 15)
                         {
-                            isPageNumber = true;
+                            CreateLeftGuidewordPageNumber(i, "PageNumber");
+                            if (i < 21) //PageNumber Created on RightPage Header
+                            {
+                                isPageNumber = true;
+                            }
                         }
                     }
                 }
@@ -2856,6 +2898,8 @@ namespace SIL.PublishingSolution
             {
                 ht = "fo:min-height";
             }
+            if (index == 15)
+                height = "10.8pt";
             _writer.WriteAttributeString("fo:margin-bottom", space); //Spacing
             _writer.WriteAttributeString(ht, height); //Height
             _writer.WriteAttributeString("fo:margin-left", "0pt");

@@ -1,0 +1,30 @@
+/* Running Head None.css */
+@page :left {
+    @top-left {
+           content: 'none';           
+    }
+    @top-center    { content: ''; }
+    @top-right  { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left   { content: ''; }
+    @top-center { content: ''; }
+    @top-right  { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+
+
+

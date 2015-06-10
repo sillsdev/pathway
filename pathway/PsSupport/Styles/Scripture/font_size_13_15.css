@@ -42,6 +42,12 @@
     -ps-fixed-line-height: 15pt;
 }
 
+.Intro_Title_Main {
+    font-size: 13pt;	/* cascaded environment */
+    line-height: 15pt;
+    -ps-fixed-line-height: 15pt;
+}
+
 .Intro_Section_Head {
     font-size: 13pt;
     line-height: 15pt;

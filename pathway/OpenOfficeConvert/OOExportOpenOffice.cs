@@ -152,7 +152,7 @@ namespace SIL.PublishingSolution
                         Dictionary<string, string> glossorywordsDictionary = new Dictionary<string, string>();
                         string booknodeid = booknode.Attributes["id"].Value;
                         string booknodetext = booknode.InnerText.Trim();
-                        string xpathkeyword = ".//xhtml:a[@class='Glossary_Key'][translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='" + booknodetext.ToLower() + "']";
+                        string xpathkeyword = ".//xhtml:a[@class='Glossary_Key'][translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='" + booknodetext.ToLower() + "' or translate(@title,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='" + booknodetext.ToLower() + "']";
                         XmlNodeList keywordnodesList = xmlDocument.SelectNodes(xpathkeyword, namespaceManager);
                         if (keywordnodesList.Count > 0)
                         {
@@ -572,6 +572,7 @@ namespace SIL.PublishingSolution
                 preProcessor.InsertEmptyDiv(preProcessor.ProcessedXhtml);
                 preProcessor.InsertSpanAfterLetter(preProcessor.ProcessedXhtml);
             }
+            preProcessor.IncludeHyphenWordsOnXhtml(preProcessor.ProcessedXhtml);
             preProcessor.GetTempFolderPath();
             preProcessor.GetDefaultLanguage(projInfo);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();

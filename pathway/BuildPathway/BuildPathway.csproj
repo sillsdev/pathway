@@ -40,7 +40,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -114,7 +115,6 @@
     </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -188,7 +188,6 @@
     </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -213,10 +212,6 @@
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
-  
-  
-  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
     <OutputPath>bin\Corporate7EPUB\</OutputPath>
     <DebugType>pdbonly</DebugType>
@@ -339,7 +334,7 @@
   </Target>
   <Target Name="Wix">
     <RemoveDir Directories="Wix" />
-    <UpdateVersion Product="$(ProductName) " Version="1.12.0" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
+    <UpdateVersion Product="$(ProductName) " Version="1.13.0" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
     <ZeroCheck />
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs" />
@@ -375,7 +370,8 @@
     <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'Files\ConfigurationTool\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'Files\ConfigurationTool\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'Files\ConfigurationTool\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Local)" DestinationFiles="@(Local->'Files\ConfigurationTool\localizations\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EngLocal)" DestinationFiles="@(EngLocal->'Files\ConfigurationTool\localizations\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
     <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'Files\ConfigurationTool\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(BteHelp)" DestinationFiles="@(BteHelp->'Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
     <Copy SourceFiles="@(SeHelp)" DestinationFiles="@(SeHelp->'Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'SE' " />
@@ -423,7 +419,7 @@
     <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <!-- GhostScript Include="..\ThirdParty\gsdll32.dll" / -->
-    <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <EpubCheck Include="..\PsSupport\epubcheck-3.0.1\**\*.*" />
     <PdfLicenseManager Include="..\PsSupport\pdflicensemanager-2.3.jar" />
     <ApplyPdfLicense Include="..\ApplyPDFLicenseInfo\$(OutputPath)\ApplyPDFLicenseInfo.*" />
     <PdfLicense Include="..\PdfLicense\$(OutputPath)\PdfLicense.*" />
@@ -450,14 +446,15 @@
     <BteBackend Include="..\theWordConvert\$(OutputPath)\TheWordConvert.*" />
     <!--TestBackend Include="..\SwordConvert\$(OutputPath)\SwordConvert.*" /-->
     <BteBackend Include="..\theWordConvert\$(OutputPath)\*.xml" />
-    <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <DictionaryForMIDs Include="..\PsSupport\Dic4Mid\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Icons Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" />
+    <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" />
+    <DictionaryForMIDs Include="..\PsSupport\Dic4Mid\**\*.*" />
+    <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" />
+    <Icons Include="..\PsSupport\Icons\**\*.*" />
+    <Graphic Include="..\PsSupport\Graphic\**\*.*" />
+    <Local Include="..\PsSupport\localizations\**\*.*" />
+    <EngLocal Include="..\PsSupport\Pathway.en.tmx" />
+    <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" />
     <!--BteHelp Include="HelpBTE\**\*.*" / -->
     <BteHelp Include="Pathway_Configuration_Tool_BTE.chm" />
     <!--SeHelp Include="HelpSE\**\*.*" /-->
@@ -475,30 +472,30 @@
     <BteSettings Include="..\PsSupport\ScriptureStyleSettings.xml" />
     <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
     <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
-    <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <AllSamples Include="..\PsSupport\Samples\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <BteSamples Include="..\PsSupport\Samples\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" />
+    <AllSamples Include="..\PsSupport\Samples\Dictionary\**\*.*" />
+    <BteSamples Include="..\PsSupport\Samples\Scripture\**\*.*" />
+    <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" />
+    <epubFiles Include="..\PsSupport\epub\**\*.*" />
     <epubValid Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
     <!-- Validator is referenced even if not called -->
-    <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <!--SwordFiles Include="..\PsSupport\Sword\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" /-->
-    <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" />
+    <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" />
+    <!--SwordFiles Include="..\PsSupport\Sword\**\*.*" /-->
+    <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" />
+    <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" />
     <AllTransform Include="..\PsSupport\AddBidi.xsl" />
     <AllTransform Include="..\PsSupport\addDicTocHeads.xsl" />
     <AllTransform Include="..\PsSupport\FixEpub.xsl" />
     <AllTransform Include="..\PsSupport\FixEpubToc.xsl" />
-    <AllTransform Include="..\PsSupport\Xhtml-Usx.xsl"/>
-    <AllTransform Include="..\PsSupport\Xhtml2BookNames.xsl"/>
-    <AllTransform Include="..\PsSupport\StyleMap.xml"/>
+    <AllTransform Include="..\PsSupport\Xhtml-Usx.xsl" />
+    <AllTransform Include="..\PsSupport\Xhtml2BookNames.xsl" />
+    <AllTransform Include="..\PsSupport\StyleMap.xml" />
     <BteTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
     <BteTransform Include="..\PsSupport\*.xslt" />
-    <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
-    <WixSoftware Include="WixSoftware\**\*.*" Exclude="WixSoftware\**\.svn\**\*.*" />
+    <WordpressFiles Include="..\PsSupport\Wordpress\**\*.*" />
+    <XeTexExe Include="..\XeTex\xetexExe\**\*.*" />
+    <WixSoftware Include="WixSoftware\**\*.*" />
     <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
@@ -527,11 +524,11 @@
     <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
   </Target>
   <ItemGroup>
-    <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\**\.svn\**\*.*" />
-    <XeLaTexTexmf Include="..\XeLaTexConvert\XeLaTexExe\texmf\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf\**\.svn\**\*.*" />
-    <XeLaTexConfig Include="..\XeLaTexConvert\XeLaTexExe\texmf-config\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-config\**\.svn\**\*.*" />
-    <XeLaTexDist Include="..\XeLaTexConvert\XeLaTexExe\texmf-dist\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-dist\**\.svn\**\*.*" />
-    <XeLaTexVar Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-var\**\.svn\**\*.*" />
+    <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" />
+    <XeLaTexTexmf Include="..\XeLaTexConvert\XeLaTexExe\texmf\**\*.*" />
+    <XeLaTexConfig Include="..\XeLaTexConvert\XeLaTexExe\texmf-config\**\*.*" />
+    <XeLaTexDist Include="..\XeLaTexConvert\XeLaTexExe\texmf-dist\**\*.*" />
+    <XeLaTexVar Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\**\*.*" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cache.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cat.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-list.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-match.exe" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\icudt*.dll" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\kpathsea*.dll" />
@@ -558,7 +555,7 @@
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\pdftex" />
     <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\mf-nowin" />
     <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\*.cache-3" />
-    <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" Exclude="..\XeLaTexConvert\Paratexmf\**\.svn\**\**" />
+    <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" />
   </ItemGroup>
   <Target Name="WebonaryBeforeBuild">
     <MSBuild.ExtensionPack.FileSystem.FindUnder TaskAction="FindFiles" Path="$(MSBuildProjectDirectory)\..\ThirdParty" SearchPattern="lame*.zip">
@@ -576,7 +573,7 @@
     <Copy SourceFiles="@(YouVersion)" DestinationFiles="@(YouVersion->'Files\PwYouVersion\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   <ItemGroup>
-    <YouVersion Include="..\YouVersionConvert\PwYouVer\**\*.*" Exclude="..\YouVersionConvert\PwYouVer\**\.svn\**\*.*" />
+    <YouVersion Include="..\YouVersionConvert\PwYouVer\**\*.*" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

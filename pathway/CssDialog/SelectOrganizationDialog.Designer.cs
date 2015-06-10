@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectOrganizationDialog));
+            this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOther = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
@@ -37,12 +40,20 @@
             this.lblInstructions = new System.Windows.Forms.Label();
             this.btnHelp = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // l10NSharpExtender1
+            // 
+            this.l10NSharpExtender1.LocalizationManagerId = "Pathway";
+            this.l10NSharpExtender1.PrefixForNewItems = "SelectOrganizationDialog";
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(226, 127);
             this.btnCancel.Name = "btnCancel";
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnCancel, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnCancel, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.btnCancel, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnCancel, "SelectOrganizationDialog.btnCancel");
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "&Cancel";
@@ -53,6 +64,10 @@
             // 
             this.btnOther.Location = new System.Drawing.Point(307, 79);
             this.btnOther.Name = "btnOther";
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnOther, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnOther, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.btnOther, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnOther, "SelectOrganizationDialog.btnOther");
             this.btnOther.Size = new System.Drawing.Size(75, 23);
             this.btnOther.TabIndex = 4;
             this.btnOther.Text = "O&ther...";
@@ -63,6 +78,10 @@
             // 
             this.btnOK.Location = new System.Drawing.Point(145, 127);
             this.btnOK.Name = "btnOK";
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnOK, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnOK, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.btnOK, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnOK, "SelectOrganizationDialog.btnOK");
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 5;
             this.btnOK.Text = "&OK";
@@ -74,6 +93,10 @@
             this.lblOrganization.AutoSize = true;
             this.lblOrganization.Location = new System.Drawing.Point(12, 50);
             this.lblOrganization.Name = "lblOrganization";
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.lblOrganization, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.lblOrganization, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.lblOrganization, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.lblOrganization, "SelectOrganizationDialog.lblOrganization");
             this.lblOrganization.Size = new System.Drawing.Size(84, 13);
             this.lblOrganization.TabIndex = 1;
             this.lblOrganization.Text = "My o&rganization:";
@@ -91,6 +114,10 @@
             // 
             this.lblOther.Location = new System.Drawing.Point(12, 79);
             this.lblOther.Name = "lblOther";
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.lblOther, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.lblOther, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.lblOther, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.lblOther, "SelectOrganizationDialog.lblOther");
             this.lblOther.Size = new System.Drawing.Size(253, 30);
             this.lblOther.TabIndex = 3;
             this.lblOther.Text = "If your organization is not on the above list, click the Other... button:";
@@ -99,6 +126,10 @@
             // 
             this.lblInstructions.Location = new System.Drawing.Point(12, 12);
             this.lblInstructions.Name = "lblInstructions";
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.lblInstructions, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.lblInstructions, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.lblInstructions, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.lblInstructions, "SelectOrganizationDialog.lblInstructions");
             this.lblInstructions.Size = new System.Drawing.Size(370, 31);
             this.lblInstructions.TabIndex = 11;
             this.lblInstructions.Text = "Select the organization you are representing, Pathway will automatically fill in " +
@@ -108,6 +139,10 @@
             // 
             this.btnHelp.Location = new System.Drawing.Point(307, 127);
             this.btnHelp.Name = "btnHelp";
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnHelp, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnHelp, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.btnHelp, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnHelp, "SelectOrganizationDialog.btnHelp");
             this.btnHelp.Size = new System.Drawing.Size(75, 23);
             this.btnHelp.TabIndex = 7;
             this.btnHelp.Text = "&Help";
@@ -137,12 +172,14 @@
             this.Text = "Select Your Organization";
             this.Load += new System.EventHandler(this.SelectOrganizationDialog_Load);
             this.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).EndInit();
             this.PerformLayout();
 
         }
 
         #endregion
 
+        private L10NSharp.UI.L10NSharpExtender l10NSharpExtender1 = null;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOther;
         private System.Windows.Forms.Button btnOK;

@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EpubExportTypeDlg));
+            this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
             this.btnexprtfolder = new System.Windows.Forms.Button();
             this.btnexprtCancel = new System.Windows.Forms.Button();
             this.grpExportType = new System.Windows.Forms.GroupBox();
@@ -38,14 +41,25 @@
             this.btnexprtEpub3 = new System.Windows.Forms.Button();
             this.btnexprtEpub2 = new System.Windows.Forms.Button();
             this.grpExportType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IcnInfo)).BeginInit();
             this.SuspendLayout();
+
+            // l10NSharpExtender1
+            // 
+            this.l10NSharpExtender1.LocalizationManagerId = "Pathway";
+            this.l10NSharpExtender1.PrefixForNewItems = "EpubExportTypeDlg";
+
             // 
             // btnexprtfolder
             // 
             this.btnexprtfolder.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnexprtfolder.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnexprtfolder.Location = new System.Drawing.Point(356, 275);
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnexprtfolder, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnexprtfolder, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.btnexprtfolder, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnexprtfolder, "EpubExportTypeDlg.btnexprtfolder");
             this.btnexprtfolder.Name = "btnexprtfolder";
             this.btnexprtfolder.Size = new System.Drawing.Size(82, 33);
             this.btnexprtfolder.TabIndex = 3;
@@ -58,6 +72,10 @@
             this.btnexprtCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnexprtCancel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnexprtCancel.Location = new System.Drawing.Point(456, 275);
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnexprtCancel, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnexprtCancel, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.btnexprtCancel, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnexprtCancel, "EpubExportTypeDlg.btnexprtCancel");
             this.btnexprtCancel.Name = "btnexprtCancel";
             this.btnexprtCancel.Size = new System.Drawing.Size(82, 33);
             this.btnexprtCancel.TabIndex = 4;
@@ -74,6 +92,10 @@
             this.grpExportType.Controls.Add(this.IcnInfo);
             this.grpExportType.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpExportType.Location = new System.Drawing.Point(5, 0);
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.grpExportType, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.grpExportType, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.grpExportType, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.grpExportType, "EpubExportTypeDlg.grpExportType");
             this.grpExportType.Name = "grpExportType";
             this.grpExportType.Size = new System.Drawing.Size(548, 269);
             this.grpExportType.TabIndex = 5;
@@ -85,7 +107,11 @@
             this.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lblMessage.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.lblMessage.Location = new System.Drawing.Point(70, 19);
-            this.lblMessage.Name = "lblMessage";
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.lblMessage, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.lblMessage, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.lblMessage, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.lblMessage, "EpubExportTypeDlg.lblMessage");
+            this.lblMessage.Name = "lblMessage";            
             this.lblMessage.ReadOnly = true;
             this.lblMessage.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.lblMessage.Size = new System.Drawing.Size(442, 243);
@@ -113,6 +139,10 @@
             // IcnInfo
             // 
             this.IcnInfo.Location = new System.Drawing.Point(26, 33);
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.IcnInfo, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.IcnInfo, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.IcnInfo, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.IcnInfo, "EpubExportTypeDlg.IcnInfo");
             this.IcnInfo.Name = "IcnInfo";
             this.IcnInfo.Size = new System.Drawing.Size(38, 35);
             this.IcnInfo.TabIndex = 0;
@@ -123,6 +153,10 @@
             this.btnexprtEpub3.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnexprtEpub3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnexprtEpub3.Location = new System.Drawing.Point(256, 275);
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnexprtEpub3, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnexprtEpub3, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.btnexprtEpub3, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnexprtEpub3, "EpubExportTypeDlg.btnexprtEpub3");
             this.btnexprtEpub3.Name = "btnexprtEpub3";
             this.btnexprtEpub3.Size = new System.Drawing.Size(82, 33);
             this.btnexprtEpub3.TabIndex = 6;
@@ -135,6 +169,10 @@
             this.btnexprtEpub2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnexprtEpub2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnexprtEpub2.Location = new System.Drawing.Point(156, 275);
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.btnexprtEpub2, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.btnexprtEpub2, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this.btnexprtEpub2, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this.btnexprtEpub2, "EpubExportTypeDlg.btnexprtEpub2");
             this.btnexprtEpub2.Name = "btnexprtEpub2";
             this.btnexprtEpub2.Size = new System.Drawing.Size(82, 33);
             this.btnexprtEpub2.TabIndex = 7;
@@ -155,18 +193,23 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this, null);
+            this.l10NSharpExtender1.SetLocalizationPriority(this, L10NSharp.LocalizationPriority.High);
+            this.l10NSharpExtender1.SetLocalizingId(this, "EpubExportTypeDlg.WindowTitle");
             this.Name = "EpubExportTypeDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Open Epub File Type";
             this.Load += new System.EventHandler(this.EpubExportTypeDlg_Load);
             this.grpExportType.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.IcnInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
+        private L10NSharp.UI.L10NSharpExtender l10NSharpExtender1 = null;
         private System.Windows.Forms.Button btnexprtfolder;
         private System.Windows.Forms.Button btnexprtCancel;
         private System.Windows.Forms.GroupBox grpExportType;

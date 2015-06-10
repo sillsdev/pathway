@@ -669,23 +669,44 @@ namespace SIL.PublishingSolution
             string[] spellFiles = Directory.GetFiles(openOfficePath, "acor_*.dat");
             foreach (string fileName in spellFiles)
             {
+                string lang = "zxx";
+                string coun = "none";
                 string fName = Path.GetFileNameWithoutExtension(fileName);
                 string[] lang_coun = fName.Substring(5).Split('-');
                 if (lang_coun.Length == 2)
                 {
-                    string lang = lang_coun[0];
-                    string coun = lang_coun[1];
+                    lang = lang_coun[0];
+                    coun = lang_coun[1];
+                }
+                else if (lang_coun.Length == 1)
+                {
+                    lang = lang_coun[0];
+                    switch (lang)
+                    { 
+                        case "es":
+                            coun = "ES";
+                            break;
+                        case "fr":
+                            coun = "FR";
+                            break;
+                        case "it":
+                            coun = "IT";
+                            break;
+                        case "de":
+                            coun = "DE";
+                            break;
+                    }
+                }
 
-                    if (_spellCheck.ContainsKey(lang))
-                    {
-                        _spellCheck[lang].Add(coun);
-                    }
-                    else
-                    {
-                        ArrayList arLang = new ArrayList();
-                        arLang.Add(coun);
-                        _spellCheck[lang] = arLang;
-                    }
+                if (_spellCheck.ContainsKey(lang))
+                {
+                    _spellCheck[lang].Add(coun);
+                }
+                else
+                {
+                    ArrayList arLang = new ArrayList();
+                    arLang.Add(coun);
+                    _spellCheck[lang] = arLang;
                 }
             }
         }

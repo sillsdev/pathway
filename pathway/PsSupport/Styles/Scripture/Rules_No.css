@@ -16,4 +16,5 @@
 
 .columns {
     border-style: none;
+	column-rule: solid 0pt #aa0000;
 }

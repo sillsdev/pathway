@@ -146,7 +146,7 @@ namespace Test.theWordConvert
             Ssf = FileInput("MP1.ssf");
             var actual = LoadXsltParameters(_inputPath);
             Assert.AreEqual(":", actual.GetParam("refPunc", ""));
-            Assert.AreEqual("file:///" + Common.PathCombine(@"C:\MP1", "BookNames.xml"), actual.GetParam("bookNames", ""));
+            Assert.AreEqual(FileUrlPrefix + Common.PathCombine(@"C:\MP1", "BookNames.xml"), actual.GetParam("bookNames", ""));
         }
 
         [Test]
@@ -328,6 +328,12 @@ namespace Test.theWordConvert
         }
 
         [Test]
+        public void WordsOfJesus()
+        {
+            TestDataCase("REV", "066REV.usx", 395, "Higeno Jisasi'a anage hu'ne, <font color=red>Antahiho, Nagra ame hu'na mizana eri'nena egahuankina, maka vahe'mo'zama nehanaza zmavuzmavate mizana eme zamigahue.</font>");
+        }
+
+        [Test]
         public void NdTest()
         {
             TestDataCase("EZR", "015EZR.usx", 1, "<TS1><font color=teal>Ezra</font><Ts><TS1>Cyrus Helps the Exiles to Return<Ts>In the first year of Cyrus king of Persia, in order to fulfill the word of the <font color=green>Lord</font> spoken by Jeremiah, the <font color=green>Lord</font> moved the heart of Cyrus king of Persia to make a proclamation throughout his realm and to put it in writing:<CM>");
@@ -431,7 +437,25 @@ namespace Test.theWordConvert
             TestDataCase("MAT", "040MAT-bridgeB4P.usx", 1, "<sup>(1-2)</sup> Verse one text. Verse two text");
         }
 
-        [Test]
+		[Test]
+		public void BridgeEndPTest()
+		{
+			TestDataCase("1PE", "1PE-bridge.usx", 3, "(-)<CM>");
+		}
+
+		[Test]
+		public void BridgeEndQTest()
+		{
+			TestDataCase("1PE", "1PE-bridge.usx", 28, "(-)<CI>");
+		}
+
+		[Test]
+		public void BridgeMidPTest()
+		{
+			TestDataCase("1PE", "1PE-bridge.usx", 19, "(-)");
+		}
+
+		[Test]
         public void RefListTest()
         {
             var bookNames = "file://" + FileInput("BookNames-refList.xml");
@@ -613,7 +637,7 @@ namespace Test.theWordConvert
             var exportTheWordAssembly = Assembly.GetAssembly(typeof (ExportTheWord));
             var outPath = Path.GetDirectoryName(exportTheWordAssembly.Location);
             Debug.Assert(!string.IsNullOrEmpty(outPath));
-            File.Copy(inVrs, Path.Combine(outPath, vrsName));
+            File.Copy(inVrs, Path.Combine(outPath, vrsName), true);
             const string nkont = "nko.nt";
             var outName = Path.Combine(Path.Combine(_outputPath, "TheWord"), nkont);
             File.Copy(Path.Combine(_inputPath, nkont), outName, true); // overwrite
@@ -722,7 +746,7 @@ namespace Test.theWordConvert
         {
             ParatextData = null;
             Ssf = "";
-            string expected = "file:///" + Path.Combine(_inputPath, Path.Combine("USX", "BookNames.xml"));
+            string expected = FileUrlPrefix + Path.Combine(_inputPath, Path.Combine("USX", "BookNames.xml"));
             string actual = GetBookNamesUri(_inputPath);
             Assert.AreEqual(expected, actual);
        }

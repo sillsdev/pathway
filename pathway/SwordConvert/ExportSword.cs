@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using L10NSharp;
 using SIL.Tool;
 
 
@@ -127,7 +128,9 @@ namespace SIL.PublishingSolution
                 var output = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                 if (output != null && (!Common.Testing && Directory.Exists(output)))
                 {
-                    var result = MessageBox.Show(string.Format("Dictionary for Mid output successfully created in {0}. Display output?", output), "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+                    var msg = LocalizationManager.GetString("ExportSword.ExportClick.Message", "Dictionary for Mid output successfully created in {0}. Display output?", "");
+                    msg = string.Format(msg, output);
+                    var result = MessageBox.Show(msg, "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
                     if (result == DialogResult.Yes)
                     {
                         DisplayOutput(output);
@@ -142,7 +145,7 @@ namespace SIL.PublishingSolution
             const bool noWait = false;
             if (_isUnixOS)
             {
-                SubProcess.Run(outputDirectory, "nautilus", outputDirectory, noWait);
+                SubProcess.Run("", "nautilus",  Common.HandleSpaceinLinuxPath(outputDirectory), noWait);
             }
             else
             {

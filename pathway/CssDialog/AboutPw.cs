@@ -48,10 +48,10 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes = Assembly.GetCallingAssembly().GetCustomAttributes(
-                    typeof (AssemblyTitleAttribute), false);
+                    typeof(AssemblyTitleAttribute), false);
                 if (attributes.Length > 0)
                 {
-                    var titleAttribute = (AssemblyTitleAttribute) attributes[0];
+                    var titleAttribute = (AssemblyTitleAttribute)attributes[0];
                     if (titleAttribute.Title != "")
                     {
                         return titleAttribute.Title;
@@ -69,12 +69,12 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes =
-                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyFileVersionAttribute), false);
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyFileVersionAttribute) attributes[0]).Version;
+                return ((AssemblyFileVersionAttribute)attributes[0]).Version;
             }
         }
 
@@ -103,12 +103,12 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes =
-                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyDescriptionAttribute), false);
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyDescriptionAttribute) attributes[0]).Description;
+                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
             }
         }
 
@@ -120,12 +120,12 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes =
-                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyProductAttribute), false);
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyProductAttribute) attributes[0]).Product;
+                return ((AssemblyProductAttribute)attributes[0]).Product;
             }
         }
 
@@ -137,12 +137,12 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes =
-                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyCopyrightAttribute), false);
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyCopyrightAttribute) attributes[0]).Copyright;
+                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
             }
         }
 
@@ -154,12 +154,12 @@ namespace SIL.PublishingSolution
             get
             {
                 object[] attributes =
-                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof (AssemblyCompanyAttribute), false);
+                    Assembly.GetCallingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return "";
                 }
-                return ((AssemblyCompanyAttribute) attributes[0]).Company;
+                return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
 
@@ -172,8 +172,6 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void AboutPw_Load(object sender, EventArgs e)
         {
-            lblProductName.Text = AssemblyProduct;
-            lblVersion.Text = String.Format("Version: {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
 
             HelpImproveGetValue(chkHelpToImprove);
 
@@ -185,6 +183,12 @@ namespace SIL.PublishingSolution
                 this.chkHelpToImprove.Location = new Point(chkHelpToImprove.Location.X, chkHelpToImprove.Location.Y - 50);
                 this.lnkGPL.Location = new Point(lnkGPL.Location.X - 10, lnkGPL.Location.Y);
             }
+
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            string versionDate = String.Format("{0} ({1})", version, AssemblyFileDate);
+
+            lblVersionwithDate.Text = "Version: " + versionDate;
         }
 
 
@@ -218,10 +222,10 @@ namespace SIL.PublishingSolution
 
         private void AboutPw_DoubleClick(object sender, EventArgs e)
         {
-#if DEBUG
+
             var dlg = new Localizer(LocDB.DB);
             dlg.ShowDialog();
-#endif
+
         }
 
         private void lnkProj_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

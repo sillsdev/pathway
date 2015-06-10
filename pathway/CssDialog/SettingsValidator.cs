@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using L10NSharp;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -199,15 +200,21 @@ namespace SIL.PublishingSolution
 
         protected void CopySettingsFile(string fileName, string supportPath, string filePath)
         {
-            string msg;
+            var msg = String.Empty;
             if (errorTag.IndexOf("|") > 0)
             {
                 string[] errMessage = errorTag.Split('|');
-                msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errMessage[0] + "\" property has an invalid path.)";
+                msg = LocalizationManager.GetString("SettingsValidator.CopySettingsFile.Message1",
+                    "Settings file  \"{0}\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"{1}\" property has an invalid path.)", "");
+                msg = String.Format(msg, filePath, errMessage[0]);
+                //msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errMessage[0] + "\" property has an invalid path.)";
             }
             else
             {
-                msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errorTag + "\" property has an invalid value.)";
+                msg = LocalizationManager.GetString("SettingsValidator.CopySettingsFile.Message2",
+                   "Settings file  \"{0}\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"{1}\" property has an invalid value.)", "");
+                msg = String.Format(msg, filePath, errorTag);
+                //msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errorTag + "\" property has an invalid value.)";
             }
 
             DialogResult result;

@@ -23,6 +23,10 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+using DesktopAnalytics;
+using L10NSharp;
+using Palaso.Reporting;
+using SIL.PublishingSolution.Properties;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -30,6 +34,8 @@ namespace SIL.PublishingSolution
     public partial class frmSplash : Form
     {
         private int _counter = 0;
+        public const string kCompany = "SIL";
+        public const string kProduct = "Pathway";
         public DialogResult dr;
         public frmSplash()
         {
@@ -80,6 +86,31 @@ namespace SIL.PublishingSolution
             tSplash.Start();
 
 
+        }
+
+        /// <summary>
+        /// The email address people should write to with problems (or new localizations?) for HearThis.
+        /// </summary>
+        public static string IssuesEmailAddress
+        {
+            get { return "pathway@sil.org"; }
+        }
+
+        /// ------------------------------------------------------------------------------------
+        private static void SetUpErrorHandling()
+        {
+            if (ErrorReport.EmailAddress == null)
+            {
+                ExceptionHandler.Init();
+                ErrorReport.EmailAddress = IssuesEmailAddress;
+                ErrorReport.AddStandardProperties();
+                ExceptionHandler.AddDelegate(ReportError);
+            }
+        }
+
+        private static void ReportError(object sender, CancelExceptionHandlingEventArgs e)
+        {
+            Analytics.ReportException(e.Exception);
         }
     }
 }

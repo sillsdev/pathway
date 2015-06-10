@@ -30,7 +30,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
 using System.Xml.Xsl;
+using L10NSharp;
 using Microsoft.Win32;
+using Palaso.Xml;
 using SIL.Tool.Localization;
 
 #endregion Using
@@ -79,7 +81,15 @@ namespace SIL.Tool
         public static string databaseName = string.Empty;
         public static DateTime TimeStarted { get; set; }
         public static OutputType _outputType = OutputType.ODT;
-
+        public const string kCompany = "SIL";
+        public const string kProduct = "Pathway";
+        /// <summary>
+        /// The email address people should write to with problems (or new localizations?) for Pathway.
+        /// </summary>
+        public static string IssuesEmailAddress
+        {
+            get { return "pathway@sil.org"; }
+        }
         public enum FileType
         {
             Directory,
@@ -260,7 +270,7 @@ namespace SIL.Tool
         public static bool ShowMessage; // Show or Suppress MessageBox in Creating Zip Folder.
 
         #endregion
-        
+
         #region FillName(string cssFileWithPath)
 
         /// -------------------------------------------------------------------------------------------
@@ -343,7 +353,7 @@ namespace SIL.Tool
         }
 
         #endregion
-        
+
         #region GetTextDirection(string languageCode)
 
         public static string TextDirectionLanguageFile = null; //Set during testing
@@ -3415,7 +3425,7 @@ namespace SIL.Tool
             XmlNodeList fontList = xdoc.GetElementsByTagName("meta");
             foreach (XmlNode fontName in fontList)
             {
-                if (isFLEX && fontName.OuterXml.IndexOf("scheme=\"Default Font\"") > 0)
+                if (isFLEX && (fontName.OuterXml.IndexOf("scheme=\"Default Font\"") > 0 || fontName.OuterXml.IndexOf("scheme=\"language to font\"") > 0))
                 {
                     string fntName = fontName.Attributes["name"].Value;
                     string fntContent = fontName.Attributes["content"].Value;
@@ -4532,5 +4542,143 @@ namespace SIL.Tool
             string responseContent = sr.ReadToEnd();
             return responseContent;
         }
+
+        public static string HandleSpaceinLinuxPath(string filePath)
+        {
+            var name = new List<string>();
+            string[] ss = filePath.Split('/');
+            foreach (string variable in ss)
+            {
+                if (variable.IndexOf(' ') > 0)
+                {
+                    name.Add(variable);
+                }
+            }
+
+            if (name.Count > 0)
+            {
+                foreach (var variable in name)
+                {
+                    filePath = filePath.Replace(variable, "'" + variable + "'");
+                }
+            }
+            return filePath;
+        }
+        #region "Localization"
+        public static void SaveLocalizationSettings(string setting)
+        {
+            string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
+            string content = XmlSerializationHelper.SerializeToString(setting);
+            File.WriteAllText(fileName, content);
+        }
+
+        public static string GetLocalizationSettings()
+        {
+            try
+            {
+                var fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
+                if (!File.Exists(fileName))
+                {
+                    SaveLocalizationSettings("en");
+                }
+
+                var content = File.ReadAllText(fileName);
+                var doc = new XmlDocument();
+                doc.LoadXml(content);
+                var node = doc.SelectSingleNode("//string");
+                return (node != null) ? node.InnerText : "en";
+            }
+            catch (Exception)
+            {
+                return "en";
+            }
+        }
+
+        public static void SetupLocalization(string namespaces)
+        {
+            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
+            var targetTmxFilePath = Path.Combine(kCompany, kProduct);
+            string localizedStringFilesFolder = CopyInstalledLocalizations(targetTmxFilePath);
+            var desiredUiLangId = GetLocalizationSettings();
+            if (desiredUiLangId == string.Empty)
+                desiredUiLangId = "en";
+            if (!Testing)
+                L10NMngr = LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
+                                  localizedStringFilesFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
+        }
+
+        private static string CopyInstalledLocalizations(string silLocation)
+        {
+            string localizedStringFilesFolder = Common.PathCombine(Common.GetAllUserAppPath(), silLocation);
+            localizedStringFilesFolder = Common.PathCombine(localizedStringFilesFolder, "localizations");
+            string pathwayDirectory = PathwayPath.GetPathwayDir();
+            var installedLocalizationsFolder = string.Empty;
+            if (pathwayDirectory != null)
+            {
+                installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
+            }
+            else
+            {
+                installedLocalizationsFolder = Path.Combine(Application.StartupPath, "localizations");
+            }
+
+            if (Directory.Exists(installedLocalizationsFolder))
+            {
+                if (!Directory.Exists(localizedStringFilesFolder))
+                    Directory.CreateDirectory(localizedStringFilesFolder);
+
+                foreach (var file in Directory.GetFiles(installedLocalizationsFolder))
+                {
+                    var name = Path.GetFileName(file);
+                    var dest = Path.Combine(localizedStringFilesFolder, name);
+                    if (!File.Exists(dest) || FileLength(file) != FileLength(dest))
+                        File.Copy(file, dest, true);
+                }
+            }
+
+            return installedLocalizationsFolder;
+        }
+
+        private static long FileLength(string file)
+        {
+            return new FileInfo(file).Length;
+        }
+
+        #region Localization Manager Access methods
+        /// ------------------------------------------------------------------------------------
+        public static LocalizationManager L10NMngr { get; set; }
+
+        ///// ------------------------------------------------------------------------------------
+        //internal static void SaveOnTheFlyLocalizations()
+        //{
+        //    if (L10NMngr != null)
+        //        L10NMngr.SaveOnTheFlyLocalizations();
+        //}
+
+        ///// ------------------------------------------------------------------------------------
+        //internal static void ReapplyLocalizationsToAllObjects(string localizationManagerID)
+        //{
+        //    LocalizationManager.ReapplyLocalizationsToAllObjectsInAllManagers();
+        //    //if (L10NMngr != null)
+        //    //    LocalizationManager.ReapplyLocalizationsToAllObjects(localizationManagerID);
+        //}
+
+        /// ------------------------------------------------------------------------------------
+        internal static void RefreshToolTipsOnLocalizationManager()
+        {
+            if (L10NMngr != null)
+                L10NMngr.RefreshToolTips();
+        }
+
+        /// ------------------------------------------------------------------------------------
+        internal static string GetUILanguageId()
+        {
+            return LocalizationManager.UILanguageId;
+        }
+
+        #endregion
+
+
+        #endregion
     }
 }

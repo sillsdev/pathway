@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Text;
 using System.IO;
 using NUnit.Framework;
+using SIL.PublishingSolution;
 using SIL.Tool;
 
 namespace Test
@@ -297,13 +298,18 @@ namespace Test
                 Directory.Delete(settingsFolder,true);
             }
             // make a copy of the xhtml and CSS files
+
+            _outputPath = Common.PathCombine(_outputPath, "DictionaryTest");
+            Directory.CreateDirectory(_outputPath);
+
             File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "main.xhtml"), Common.PathCombine(_outputPath, "main.xhtml"), true);
             File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "FlexRev.xhtml"), Common.PathCombine(_outputPath, "FlexRev.xhtml"), true);
             File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "main.css"), Common.PathCombine(_outputPath, "main.css"), true);
             // run the test
+
             RunPathwayB(InputFormat.XHTML, "\"main.xhtml\", \"FlexRev.xhtml\"", "Sena 3-01", "main", "Dictionary", "E-Book (Epub2 and Epub3)", "MainAndRevTest");
         }
-
+      
         /// <summary>
         /// EDB 11/1/2011 -
         /// Note: The validation on this test is currently failing due to a bug in TE (FWR 2550 - mismatched cases in hyperlink IDs). There is

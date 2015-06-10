@@ -26,6 +26,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
+using L10NSharp;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -46,6 +47,17 @@ namespace SIL.PublishingSolution
         protected static readonly XslCompiledTransform TheWord = new XslCompiledTransform();
         protected static readonly XslCompiledTransform Xhtml2Usx = new XslCompiledTransform();
         protected static readonly XslCompiledTransform Xhtml2BookNames = new XslCompiledTransform();
+
+        protected static string FileUrlPrefix
+        {
+            get
+            {
+                if (Common.IsUnixOS())
+                    return "file://";
+                else
+                    return "file:///";
+            }
+        }
 
         public string ExportType
         {
@@ -248,7 +260,7 @@ namespace SIL.PublishingSolution
         private XsltArgumentList LoadXhtml2XslArgs()
         {
             var xsltArgs = new XsltArgumentList();
-            xsltArgs.AddParam("map", "", "file:///" + Common.FromRegistry("StyleMap.xml"));
+            xsltArgs.AddParam("map", "", FileUrlPrefix + Common.FromRegistry("StyleMap.xml"));
             return xsltArgs;
         }
 
@@ -266,7 +278,7 @@ namespace SIL.PublishingSolution
 
         protected void DisplayMessageReport()
         {
-            const string message = "Display issues encountered during conversion?";
+            var message = LocalizationManager.GetString("ExportTheWord.DisplayMessageReport.Message", "Display issues encountered during conversion?", "");
             const string caption = "theWord Conversion Messages";
             var result = !Common.Testing ? MessageBox.Show(message, caption,
                                             MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error,
@@ -295,7 +307,8 @@ namespace SIL.PublishingSolution
             if (Common.Testing) return;
             if (ex.Message.Contains("BookNames"))
             {
-                MessageBox.Show("Please run the References basic check.", "theWord Export", MessageBoxButtons.OK,
+                var msg = LocalizationManager.GetString("ExportTheWord.ReportFailure.Message", "Please run the References basic check.", "");
+                MessageBox.Show(msg, "theWord Export", MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
             else
@@ -342,8 +355,8 @@ namespace SIL.PublishingSolution
             {
                 if (!Common.Testing)
                 {
-                    MessageBox.Show("Failed Exporting TheWord Process.", "theWord Export", MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error);
+                    var msg = LocalizationManager.GetString("ExportTheWord.ReportResults.Message", "Failed Exporting TheWord Process.", "");
+                    MessageBox.Show(msg, "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 success = false;
             }
@@ -352,9 +365,10 @@ namespace SIL.PublishingSolution
 
         protected static void ReportWhenTheWordNotInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
         {
-            const string msgFormat = "Do you want to open the folder with the results?\n\n\u25CF Click Yes.\n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n";
             var resultName = Path.GetFileName(resultFullName);
             var resultDir = Path.GetDirectoryName(resultFullName);
+            var msgFormat = LocalizationManager.GetString("ExportTheWord.ReportWhenTheWordNotInstalled.Message", 
+                "Do you want to open the folder with the results?\n\n\u25CF Click Yes.\n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n", "");
             var msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
             var dialogResult = !Common.Testing ? MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Information) : DialogResult.Cancel;
@@ -367,7 +381,8 @@ namespace SIL.PublishingSolution
 
         protected static void ReportWhenTheWordInstalled(string resultFullName, string theWordFolder, string mySwordResult, string exportTheWordInputPath)
         {
-            const string msgFormat = "Do you want to start theWord?\n\n\u25CF Click Yes.\n\nThe program will copy the \"{0}\" file to {1} and start theWord. \n\n\u25CF Click No. \n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n";
+            var msgFormat = LocalizationManager.GetString("ExportTheWord.ReportWhenTheWordInstalled.Message",
+                 "Do you want to start theWord?\n\n\u25CF Click Yes.\n\nThe program will copy the \"{0}\" file to {1} and start theWord. \n\n\u25CF Click No. \n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n", "");
             var resultName = Path.GetFileName(resultFullName);
             var resultDir = Path.GetDirectoryName(resultFullName);
             DialogResult dialogResult;
@@ -577,7 +592,7 @@ namespace SIL.PublishingSolution
             var pathInfo = new DirectoryInfo(Common.PathCombine(path, "USX"));
             var gloFile = pathInfo.GetFiles("GLO.usx");
             if (gloFile.Length > 0)
-                return "file:///" + gloFile[0].FullName;
+                return FileUrlPrefix + gloFile[0].FullName;
             foreach (var fileInfo in pathInfo.GetFiles("XX*.usx"))
             {
                 var sr = new StreamReader(fileInfo.FullName);
@@ -587,13 +602,13 @@ namespace SIL.PublishingSolution
                     if (line == null) break;
                     if (line.ToLower().Contains("glossary"))
                     {
-                        return "file:///" + fileInfo.FullName;
+                        return FileUrlPrefix + fileInfo.FullName;
                     }
                 }
 
             }
             MakeTempGlossary();
-            return "file:///" + _tempGlossaryName;
+            return FileUrlPrefix + _tempGlossaryName;
         }
 
         private static void MakeTempGlossary()
@@ -643,10 +658,10 @@ namespace SIL.PublishingSolution
         {
             if (string.IsNullOrEmpty(Ssf))
             {
-                return "file:///" + Common.PathCombine(UsxDir(exportTheWordInputPath), "BookNames.xml");
+                return FileUrlPrefix + Common.PathCombine(UsxDir(exportTheWordInputPath), "BookNames.xml");
             }
             var myProj = Common.PathCombine((string) ParatextData, GetSsfValue("//Name"));
-            return "file:///" + Common.PathCombine(myProj, "BookNames.xml");
+            return FileUrlPrefix + Common.PathCombine(myProj, "BookNames.xml");
         }
 
         protected static string UsxDir(string exportTheWordInputPath)

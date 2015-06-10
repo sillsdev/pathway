@@ -562,7 +562,7 @@ namespace Test.epubConvert
             foreach (var fileName in filesList)
             {
                 var info = new FileInfo(fileName);
-                if (info.Extension == ".css" || info.Extension == ".xhtml")
+                if (info.Extension == ".xhtml")
                 {
                     FileCompare("GlossaryTestCase/OEBPS/" + info.Name, "GlossaryTestCaseExpected/OEBPS/" + info.Name);
                 }
@@ -620,7 +620,7 @@ namespace Test.epubConvert
             foreach (var fileName in filesList)
             {
                 var info = new FileInfo(fileName);
-                if (info.Extension == ".css" || info.Extension == ".xhtml")
+                if (info.Extension == ".xhtml")
                 {
                     FileCompare("NkontTestCase/OEBPS/" + info.Name, "NkontTestCaseExpected/OEBPS/" + info.Name);
                 }
@@ -679,7 +679,7 @@ namespace Test.epubConvert
             foreach (var fileName in filesList)
             {
                 var info = new FileInfo(fileName);
-                if (info.Extension == ".css" || info.Extension == ".xhtml")
+                if (info.Extension == ".xhtml")
                 {
                     FileCompare("main/OEBPS/" + info.Name, "mainExpected/OEBPS/" + info.Name);
                 }

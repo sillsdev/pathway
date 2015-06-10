@@ -46,6 +46,7 @@ using System.Xml.Xsl;
 using epubConvert;
 using epubConvert.Properties;
 using epubValidator;
+using L10NSharp;
 using SIL.Tool;
 
 
@@ -127,6 +128,7 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
+            Common.SetupLocalization("SIL.PublishingSolution");
             if (projInfo == null)
                 return false;
             const bool success = true;
@@ -390,7 +392,7 @@ namespace SIL.PublishingSolution
             bool isOutputDilalogNeeded = true;
             if (!Common.Testing)
             {
-                if (MessageBox.Show(Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files", Resources.ExportComplete, MessageBoxButtons.YesNo,
+                if (MessageBox.Show(LocalizationManager.GetString("Exportepub.ValidateMsgBox", Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files"), Resources.ExportComplete, MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     ValidateResult(outputPathWithFileName);     // Epub2 ExportType
@@ -420,7 +422,7 @@ namespace SIL.PublishingSolution
                     {
                         if (_isUnixOs)
                         {
-                            SubProcess.Run(Path.GetDirectoryName(outputFolder), "nautilus", Path.GetDirectoryName(outputFolder), false);
+                            SubProcess.Run("", "nautilus",  Common.HandleSpaceinLinuxPath(Path.GetDirectoryName(outputFolder)), false);
                         }
                         else
                         {
@@ -598,7 +600,7 @@ namespace SIL.PublishingSolution
                         Dictionary<string, string> glossorywordsDictionary = new Dictionary<string,string>();
                         string booknodeid = booknode.Attributes["id"].Value;
                         string booknodetext = booknode.InnerText.Trim();
-                        string xpathkeyword = ".//xhtml:a[@class='Glossary_Key'][translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='" + booknodetext.ToLower()+"']";
+                        string xpathkeyword = ".//xhtml:a[@class='Glossary_Key'][translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='" + booknodetext.ToLower() + "' or translate(@title,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='" + booknodetext.ToLower() + "']";
                         XmlNodeList keywordnodesList = xmlDocument.SelectNodes(xpathkeyword, namespaceManager);
                         if (keywordnodesList.Count > 0)
                         {

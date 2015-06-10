@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using JWTools;
+using L10NSharp;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -74,7 +75,6 @@ namespace SIL.PublishingSolution
                 string supportPath = GetSupportPath();
 				Backend.Load(Common.ProgInstall);
                 LoadProgramSettings(supportPath);
-                LocalizationSetup();
                 LoadDataTypeSettings();
                 var outDir = Path.GetDirectoryName(outFullName);
                 DefaultProjectFileSetup(outDir);
@@ -142,7 +142,8 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    MessageBox.Show(string.Format(err.ToString(), "Sorry! You might not have permission to use this resource."), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    var msg = LocalizationManager.GetString("PsExport.ExportClick.Message", "Sorry! You might not have permission to use this resource.", "");
+                    MessageBox.Show(string.Format(err.ToString(), msg), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return;
             }
@@ -349,21 +350,6 @@ namespace SIL.PublishingSolution
         {
             Param.Value[Param.InputType] = DataType;
             Param.LoadSettings();
-        }
-
-        protected static void LocalizationSetup()
-        {
-            JW_Registry.RootKey = @"SOFTWARE\The Seed Company\Dictionary Express!";
-            LocDB.SetAppTitle();
-            LocDB.BaseName = "PsLocalization.xml";
-            var folderPath = Param.Value[Param.OutputPath];
-            var localizationPath = Common.PathCombine(folderPath, "Loc");
-            if (!Directory.Exists(localizationPath))
-            {
-                Directory.CreateDirectory(localizationPath);
-				File.Copy(Common.FromRegistry(@"Loc/" + LocDB.BaseName), Common.PathCombine(localizationPath, LocDB.BaseName));
-            }
-            LocDB.Initialize(folderPath);
         }
 
         protected static void LoadProgramSettings(string supportPath)
