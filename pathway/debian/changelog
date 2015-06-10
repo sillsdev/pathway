@@ -1,5 +1,49 @@
-pathway (1.12.0.4301-1) unstable; urgency=high
+pathway (1.13.0.4435-1) unstable; urgency=high
 
+﻿  * pathway 1.13.0 sprint
+    - Epub: TD-4283 Add method to see if font is embeddable
+    - Installer: TD-4278 Add English Localization to Linux installer.
+    - Installer: TD-4278 Change folder name from Loc to localizations
+    - Installer: TD-4252 Update All projects to use .net 4.0
+    - Installer:Update Makefile to not require sudo for build package
+    - Installer:Add debug build and test to Makefile
+    - Installer:Update Readme.md to give more orientation to Pathway project.
+    - Installer:Update README.md Add information about installing dependencies.
+    - Installer:Update build scripts removing svn exceptions
+    - Installer:Update installer logo
+    - Installer:Updated so Pathway works with the latest version of Libre Office.
+    - Installer:Changed path to TMX files in Linux
+    - LibreOffice:TD-4269 Make only one Running Header for Custom Stylesheet
+    - LibreOffice:TD-4280 Add Footer in left Page
+    - SmartDevice:TD-4235 GoBible "words of Jesus" conversion
+    - SmartDevice:TD-4262 Adjust file url for Linux so MySword links work
+    - SmartDevice:TD-4284 Add CM or CI,PI after verse bridge at end of para
+    - UI:TD-4302 Displays Pathway build and version number
+    - UI:TD-4243 Right align labels for Localization fields
+    - UI:TD-4244 Localization using L10NSharp for ConfigurationTool 
+    - UI:TD-4245 Localization using L10NSharp for ExportThroughPathway
+    - UI:TD-4246 Localization using L10NSharp for ExportInProgress
+    - UI:TD-4247 Localization using L10NSharp for SelectYourOrganization 
+    - UI:TD-4248 Update About with Version information and copyright year
+    - UI:TD-4249 Localization using L10NSharp for Splash 
+    - UI:TD-4250 Localization using L10NSharp for Validation Result
+    - UI:TD-4251 Localization using L10NSharp for OpenEpubFileType 
+    - UI:TD-4255 NUnit failure issue
+    - UI:TD-4258 Linux Show Properties when not in full screen
+    - UI:TD-4263 Save user settings
+    - UI:TD-4274 Apply Localization for messageboxes 
+    - UI:TD-4275 Make the label right aligned for Localization fields
+    - UI:TD-4281 Handled Font Copyright Warning based on font permissions
+    - UI:TD-4289 Set word wrap to Localization text 
+    - UI:TD-4290 Text not visible properly in ConfigurationTool
+    - UI:TD-4291 Localize ConfigurationTool Dropdown Property Text
+    - UI:TD-4293 PsLocalization.xml missing error 
+    - UI:TD-4294 Don't show this again not functional
+    - UI:TD-4294 Dont show this again dialog not functional
+    - UI:TD-4295 List of items are removed from the localization item
+    - UI:TD-4296 extra space before the question mark 
+    - UI:TD-4297 what is the significance of 'dim'?
+    - UI:TD-4299, TD-1344 Add non-English localizations to Windows installer
   * pathway 1.12.0 sprint
     - Epub3:TD-4176 Validation Error in D33
     - LibreOffice:TD-4179 PDF missing reversal Table of Contents in bookmarks pane 
