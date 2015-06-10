@@ -370,7 +370,8 @@
     <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'Files\ConfigurationTool\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'Files\ConfigurationTool\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'Files\ConfigurationTool\localizations\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
+    <Copy SourceFiles="@(Local)" DestinationFiles="@(Local->'Files\ConfigurationTool\localizations\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EngLocal)" DestinationFiles="@(EngLocal->'Files\ConfigurationTool\localizations\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
     <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'Files\ConfigurationTool\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(BteHelp)" DestinationFiles="@(BteHelp->'Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
     <Copy SourceFiles="@(SeHelp)" DestinationFiles="@(SeHelp->'Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'SE' " />
@@ -451,7 +452,8 @@
     <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" />
     <Icons Include="..\PsSupport\Icons\**\*.*" />
     <Graphic Include="..\PsSupport\Graphic\**\*.*" />
-    <Loc Include="..\PsSupport\localizations\**\*.*" />
+    <Local Include="..\PsSupport\localizations\**\*.*" />
+    <EngLocal Include="..\PsSupport\Pathway.en.tmx" />
     <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" />
     <!--BteHelp Include="HelpBTE\**\*.*" / -->
     <BteHelp Include="Pathway_Configuration_Tool_BTE.chm" />
