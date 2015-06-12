@@ -1,5 +1,7 @@
-pathway (1.13.0.4435-1) unstable; urgency=high
+pathway (1.13.1.4435-1) unstable; urgency=high
 
+  * pathway 1.13.1 hotfix
+    - remove registered trade mark from package description
 ﻿  * pathway 1.13.0 sprint
     - Epub: TD-4283 Add method to see if font is embeddable
     - Installer: TD-4278 Add English Localization to Linux installer.
