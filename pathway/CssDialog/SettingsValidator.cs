@@ -205,14 +205,14 @@ namespace SIL.PublishingSolution
             {
                 string[] errMessage = errorTag.Split('|');
                 msg = LocalizationManager.GetString("SettingsValidator.CopySettingsFile.Message1",
-                    "Settings file  \"{0}\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"{1}\" property has an invalid path.)", "");
+                    "Settings file  \"{0}\".xml" + " is invalid. Do you want to overwrite it with the setting file previously installed? \r\n (Specifically, \"{1}\" property has an invalid path.)", "");
                 msg = String.Format(msg, filePath, errMessage[0]);
                 //msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errMessage[0] + "\" property has an invalid path.)";
             }
             else
             {
                 msg = LocalizationManager.GetString("SettingsValidator.CopySettingsFile.Message2",
-                   "Settings file  \"{0}\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"{1}\" property has an invalid value.)", "");
+                   "Settings file  \"{0}\".xml" + " is invalid. Do you want to overwrite it with the setting file previously installed? \r\n (Specifically, \"{1}\" property has an invalid value.)", "");
                 msg = String.Format(msg, filePath, errorTag);
                 //msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errorTag + "\" property has an invalid value.)";
             }
