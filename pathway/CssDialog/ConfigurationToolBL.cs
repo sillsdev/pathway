@@ -2502,7 +2502,7 @@ namespace SIL.PublishingSolution
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
             if (PreviousStyleName.Length > 50)
             {
-                var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.CopyStyle.Message", "Styles should not be greater than 50 characters.", "");
+                var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.CopyStyle.Message", "Names of styles should not be greater than 50 characters.", "");
                 MessageBox.Show(confirmationStringMessage, Caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
