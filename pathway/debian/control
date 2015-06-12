@@ -14,7 +14,7 @@ Description: Pathway prepares dictionary and Scripture data in open
  document (odf), e-book (epub 2.0), portable document (pdf), TeX and
  J2ME (jar) formats. Print and electronic publications can be distributed
  on web sites, Android cell phones, and Java feature phones. Indirectly
- Pathway can be used for doc, docx, Kindle®, and Nook®. The epub format
- will also work on tablets using software for reading e-books.
+ Pathway can be used for doc, docx, Kindle(R), and Nook(R). The epub
+ format will also work on tablets using software for reading e-books.
     Pathway installs as an add-on of SIL FieldWorks and Paratext, or it
  can be launched in batch process.
