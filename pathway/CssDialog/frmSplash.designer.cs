@@ -34,17 +34,17 @@
             this.lblCompany = new System.Windows.Forms.Label();
             this.lblGPL = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.lblVersionwithDate = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblSilPathway = new System.Windows.Forms.Label();
-            this.tSplash = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tSplash = new System.Windows.Forms.Timer(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // l10NSharpExtender1
@@ -55,17 +55,16 @@
             // lblCompany
             // 
             this.lblCompany.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblCompany.AutoSize = true;
             this.l10NSharpExtender1.SetLocalizableToolTip(this.lblCompany, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.lblCompany, null);
             this.l10NSharpExtender1.SetLocalizationPriority(this.lblCompany, L10NSharp.LocalizationPriority.High);
             this.l10NSharpExtender1.SetLocalizingId(this.lblCompany, "frmSplash.lblCompany");
             this.lblCompany.Location = new System.Drawing.Point(159, 215);
             this.lblCompany.Name = "lblCompany";
-            this.lblCompany.Size = new System.Drawing.Size(344, 13);
+            this.lblCompany.Size = new System.Drawing.Size(344, 33);
             this.lblCompany.TabIndex = 12;
             this.lblCompany.Text = "SIL International in collaboration with EC Group Datasoft Private Limited";
-            this.lblCompany.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCompany.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblGPL
             // 
@@ -94,20 +93,6 @@
             this.label3.Size = new System.Drawing.Size(60, 14);
             this.label3.TabIndex = 6;
             this.label3.Text = "Loading ....";
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.label2, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.label2, null);
-            this.l10NSharpExtender1.SetLocalizationPriority(this.label2, L10NSharp.LocalizationPriority.High);
-            this.l10NSharpExtender1.SetLocalizingId(this.label2, "frmSplash.label2");
-            this.label2.Location = new System.Drawing.Point(160, 163);
-            this.label2.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(238, 18);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "(C) 2008 - 2015 SIL International";
             // 
             // lblVersionwithDate
             // 
@@ -151,31 +136,6 @@
             this.lblSilPathway.TabIndex = 1;
             this.lblSilPathway.Text = "Pathway";
             // 
-            // tSplash
-            // 
-            this.tSplash.Enabled = true;
-            this.tSplash.Interval = 500;
-            this.tSplash.Tick += new System.EventHandler(this.tSplash_Tick);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.lblCompany);
-            this.panel1.Controls.Add(this.lblGPL);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.lblVersionwithDate);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lblSilPathway);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(513, 296);
-            this.panel1.TabIndex = 0;
-            // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -202,6 +162,41 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(160, 163);
+            this.label2.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(238, 18);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "(C) 2008 - 2015 SIL International";
+            // 
+            // tSplash
+            // 
+            this.tSplash.Enabled = true;
+            this.tSplash.Interval = 500;
+            this.tSplash.Tick += new System.EventHandler(this.tSplash_Tick);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.lblCompany);
+            this.panel1.Controls.Add(this.lblGPL);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.lblVersionwithDate);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lblSilPathway);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(513, 296);
+            this.panel1.TabIndex = 0;
+            // 
             // frmSplash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,9 +220,9 @@
             this.TopMost = true;
             this.Load += new System.EventHandler(this.frmSplash_Load);
             ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

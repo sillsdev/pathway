@@ -38,17 +38,17 @@ namespace SIL.PublishingSolution
             this.lblProjUrl = new System.Windows.Forms.Label();
             this.chkHelpToImprove = new System.Windows.Forms.CheckBox();
             this.btnOk = new System.Windows.Forms.Button();
-            this.lnkProj = new System.Windows.Forms.LinkLabel();
             this.lblGPL = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lnkGPL = new System.Windows.Forms.LinkLabel();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.lblCompany = new System.Windows.Forms.Label();
             this.lblSilPathway = new System.Windows.Forms.Label();
             this.lblVersionwithDate = new System.Windows.Forms.Label();
+            this.lnkProj = new System.Windows.Forms.LinkLabel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -128,17 +128,6 @@ namespace SIL.PublishingSolution
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // lnkProj
-            // 
-            this.lnkProj.AutoSize = true;
-            this.lnkProj.Location = new System.Drawing.Point(405, 218);
-            this.lnkProj.Name = "lnkProj";
-            this.lnkProj.Size = new System.Drawing.Size(108, 13);
-            this.lnkProj.TabIndex = 8;
-            this.lnkProj.TabStop = true;
-            this.lnkProj.Text = "http://pathway.sil.org";
-            this.lnkProj.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProj_LinkClicked);
-            // 
             // lblGPL
             // 
             this.lblGPL.AutoSize = true;
@@ -152,20 +141,6 @@ namespace SIL.PublishingSolution
             this.lblGPL.Size = new System.Drawing.Size(72, 14);
             this.lblGPL.TabIndex = 9;
             this.lblGPL.Text = "Code license:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.label2, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.label2, null);
-            this.l10NSharpExtender1.SetLocalizationPriority(this.label2, L10NSharp.LocalizationPriority.High);
-            this.l10NSharpExtender1.SetLocalizingId(this.label2, "AboutPw.label2");
-            this.label2.Location = new System.Drawing.Point(174, 125);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(168, 14);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "(C) 2008 - 2015 SIL International  ";
             // 
             // label1
             // 
@@ -221,29 +196,19 @@ namespace SIL.PublishingSolution
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.lblGPL);
-            this.flowLayoutPanel1.Controls.Add(this.lnkGPL);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(172, 143);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(336, 20);
-            this.flowLayoutPanel1.TabIndex = 19;
-            // 
             // lblCompany
             // 
             this.lblCompany.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblCompany.AutoSize = true;
             this.l10NSharpExtender1.SetLocalizableToolTip(this.lblCompany, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.lblCompany, null);
             this.l10NSharpExtender1.SetLocalizationPriority(this.lblCompany, L10NSharp.LocalizationPriority.High);
             this.l10NSharpExtender1.SetLocalizingId(this.lblCompany, "AboutPw.lblCompany");
-            this.lblCompany.Location = new System.Drawing.Point(175, 187);
+            this.lblCompany.Location = new System.Drawing.Point(175, 177);
             this.lblCompany.Name = "lblCompany";
-            this.lblCompany.Size = new System.Drawing.Size(344, 13);
+            this.lblCompany.Size = new System.Drawing.Size(344, 31);
             this.lblCompany.TabIndex = 20;
             this.lblCompany.Text = "SIL International in collaboration with EC Group Datasoft Private Limited";
-            this.lblCompany.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCompany.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblSilPathway
             // 
@@ -272,6 +237,39 @@ namespace SIL.PublishingSolution
             this.lblVersionwithDate.Size = new System.Drawing.Size(74, 14);
             this.lblVersionwithDate.TabIndex = 22;
             this.lblVersionwithDate.Text = "Version: 1.4.0";
+            // 
+            // lnkProj
+            // 
+            this.lnkProj.AutoSize = true;
+            this.l10NSharpExtender1.SetLocalizableToolTip(this.lnkProj, null);
+            this.l10NSharpExtender1.SetLocalizationComment(this.lnkProj, null);
+            this.l10NSharpExtender1.SetLocalizingId(this.lnkProj, "AboutPw.AboutPw.lnkProj");
+            this.lnkProj.Location = new System.Drawing.Point(405, 218);
+            this.lnkProj.Name = "lnkProj";
+            this.lnkProj.Size = new System.Drawing.Size(108, 13);
+            this.lnkProj.TabIndex = 8;
+            this.lnkProj.TabStop = true;
+            this.lnkProj.Text = "http://pathway.sil.org";
+            this.lnkProj.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProj_LinkClicked);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(174, 125);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(168, 14);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "(C) 2008 - 2015 SIL International  ";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.lblGPL);
+            this.flowLayoutPanel1.Controls.Add(this.lnkGPL);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(172, 143);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(336, 20);
+            this.flowLayoutPanel1.TabIndex = 19;
             // 
             // AboutPw
             // 
