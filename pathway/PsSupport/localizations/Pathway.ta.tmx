@@ -1,0 +1,2338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tmx version="1.4">
+  <header srclang="ta" adminlang="en" creationtool="Palaso Localization Manager" creationtoolversion="2.0.17.0" segtype="block" datatype="unknown" o-tmf="PalasoTMXUtils">
+    <prop type="x-appversion">1.9.1.4065</prop>
+    <prop type="x-hardlinebreakreplacement">\n</prop>
+  </header>
+  <body>
+    <tu tuid="AboutPw.AboutPw.label5">
+      <tuv xml:lang="en">
+        <seg>®</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>®</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.AboutPw.lnkGPL">
+      <tuv xml:lang="en">
+        <seg>GNU GPL v3</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>GNU GPL v3</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>About Pathway Configuration Tool</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பற்றி Pathway உள்ளமைவு கருவி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.btnOk">
+      <tuv xml:lang="en">
+        <seg>Ok</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>சரி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.chkHelpToImprove">
+      <tuv xml:lang="en">
+        <seg>Help Improve</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மேம்படுத்த</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.label1">
+      <tuv xml:lang="en">
+        <seg>Configuration Tool</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உள்ளமைவு கருவி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.label2">
+      <tuv xml:lang="en">
+        <seg>(C) 2008 - 2015 SIL International  </seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>(இ) 2008-வாக்கில் SIL சர்வதேச</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.lblCompany">
+      <tuv xml:lang="en">
+        <seg>SIL International in collaboration with EC Group Datasoft Private Limited</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>SIL சர்வதேச கழகத்துடன் இணைந்து தேர்தல் குழு Datasoft தனியார் லிமிடெட்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.lblGPL">
+      <tuv xml:lang="en">
+        <seg>Code license:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>குறியீடு உரிமம்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.lblProjUrl">
+      <tuv xml:lang="en">
+        <seg>Other project related information is available at:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மற்ற திட்டம் தொடர்பான தகவலை:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.lblSilPathway">
+      <tuv xml:lang="en">
+        <seg>Pathway</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Pathway</seg>
+      </tuv>
+    </tu>
+    <tu tuid="AboutPw.lblVersionwithDate">
+      <tuv xml:lang="en">
+        <seg>Version: 1.4.0</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பதிப்பு: 1.4.0</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.ChkDontPicture">
+      <tuv xml:lang="en">
+        <seg>Do not include pictures</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>படங்களை சேர்க்க வேண்டாம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.LblPicPosition">
+      <tuv xml:lang="en">
+        <seg>Picture Position</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>படம் இருப்பிடம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.LblPictureWidth">
+      <tuv xml:lang="en">
+        <seg>Picture Width</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>படம் அகலம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.Lblcm">
+      <tuv xml:lang="en">
+        <seg>cm</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>முதல்வர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.RadEntirePage">
+      <tuv xml:lang="en">
+        <seg>Entire Page</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>முழு பக்கம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.RadSingleColumn">
+      <tuv xml:lang="en">
+        <seg>Single Column</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஒரு நெடுவரிசையில்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.RadWidthAll">
+      <tuv xml:lang="en">
+        <seg>Use this width for all pictures</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அனைத்து எதற்கு இந்த அகலத்தை பயன்படுத்தவும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.RadWidthIf">
+      <tuv xml:lang="en">
+        <seg>Use this width if a width not specified</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இந்த அகல இருந்தால் குறிப்பிடப்படாத ஒரு அகல பயன்படுத்தவும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Pathway Configuration Tool</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Pathway உள்ளமைவு கருவி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.aboutToolStripMenuItem">
+      <tuv xml:lang="en">
+        <seg>&amp;About</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பற்றி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnBrowse">
+      <tuv xml:lang="en">
+        <seg>Browse...</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உலாவு...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnDictionary">
+      <tuv xml:lang="en">
+        <seg>&amp;Dictionary</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அகராதி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnMobile">
+      <tuv xml:lang="en">
+        <seg>&amp;Mobile</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மொபைல்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnOthers">
+      <tuv xml:lang="en">
+        <seg>&amp;Others</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மற்றவர்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnPaper">
+      <tuv xml:lang="en">
+        <seg>&amp;Paper</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>காகிதம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnScripture">
+      <tuv xml:lang="en">
+        <seg>&amp;Scripture</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நூலான கிராந்த்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.btnWeb">
+      <tuv xml:lang="en">
+        <seg>&amp;Web</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வலை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkDisableWO">
+      <tuv xml:lang="en">
+        <seg>Disable widow &amp;&amp; orphan</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>விதவை &amp; அநாதை முடக்கு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkEmbedFonts">
+      <tuv xml:lang="en">
+        <seg>Embed Fonts in Document</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஆவணத்தில் எழுத்துருக்களை விதை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkFixedLineHeight">
+      <tuv xml:lang="en">
+        <seg>Fixed Line Height   </seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நிலையான வரி உயரம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkHideSpaceVerseNo">
+      <tuv xml:lang="en">
+        <seg>Remove Space After Verse No.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பிறகு அட செய்க இடைவெளியை நீக்கு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkIncludeCusFnCaller">
+      <tuv xml:lang="en">
+        <seg>Include Footnote Caller</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அடிக்குறிப்பு அழைப்பாளர் சேர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkIncludeFontVariants">
+      <tuv xml:lang="en">
+        <seg>Also Embed Font Variants</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மேலும் எழுத்துரு மாறுபவை விதை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkIncludeImage">
+      <tuv xml:lang="en">
+        <seg>Include Images</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>படிமங்கள் சேர்க்க</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkPageBreaks">
+      <tuv xml:lang="en">
+        <seg>No page breaks within letters</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உள்ள எழுத்துக்கள் எந்த பக்க வெட்டுகள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkSplitFileByLetter">
+      <tuv xml:lang="en">
+        <seg>Split File by Letter</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>எழுத்தாக பிரி கோப்பு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkTurnOffFirstVerse">
+      <tuv xml:lang="en">
+        <seg>Hide Verse No. 1</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மறை அட செய்க 1</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkXrefCusSymbol">
+      <tuv xml:lang="en">
+        <seg>Include XRef Caller</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>XRef அழைப்பாளர் சேர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.contentsToolStripMenuItem">
+      <tuv xml:lang="en">
+        <seg>Help</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உதவி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.groupBox1">
+      <tuv xml:lang="en">
+        <seg>MySql Database Details</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>MySql தரவுத்தள விவரங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.groupBox2">
+      <tuv xml:lang="en">
+        <seg>FTP Details</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>FTP விவரங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.groupBox3">
+      <tuv xml:lang="en">
+        <seg>Website Details</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வலைத்தளம் விவரங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label1">
+      <tuv xml:lang="en">
+        <seg>Icon for Phone</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தொலைபேசி பொம்மை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label10">
+      <tuv xml:lang="en">
+        <seg>Password</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கடவுச்சொல்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label11">
+      <tuv xml:lang="en">
+        <seg>User Name</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பயனர் பெயர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label12">
+      <tuv xml:lang="en">
+        <seg>Database Name</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தரவுதள பெயர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label13">
+      <tuv xml:lang="en">
+        <seg>MySql Server name / IP Address</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>MySql சேவகன் பெயர் / IP முகவரி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label14">
+      <tuv xml:lang="en">
+        <seg>Site Title</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தள தலைப்பு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label15">
+      <tuv xml:lang="en">
+        <seg>Admin Password</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நிர்வாகி கடவுச்சொல்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label16">
+      <tuv xml:lang="en">
+        <seg>Admin Username</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நிர்வாக பயனர் பெயர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label17">
+      <tuv xml:lang="en">
+        <seg>Website url</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வலைத்தள url</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label18">
+      <tuv xml:lang="en">
+        <seg>Email ID</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மின் அஞ்சல்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label19">
+      <tuv xml:lang="en">
+        <seg>Ftp Folder Name</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Ftp கோப்புறை பெயர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label2">
+      <tuv xml:lang="en">
+        <seg>Stylesheets</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஸ்டைல்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label20">
+      <tuv xml:lang="en">
+        <seg>Language</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மொழி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label3">
+      <tuv xml:lang="en">
+        <seg>FTP Password</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>FTP கடவுச்சொல்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label4">
+      <tuv xml:lang="en">
+        <seg>Pictures</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>படங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label5">
+      <tuv xml:lang="en">
+        <seg>Page Margin</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பக்க ஓரம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label6">
+      <tuv xml:lang="en">
+        <seg>FTP Username</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>FTP பயனர் பெயர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label7">
+      <tuv xml:lang="en">
+        <seg>Red Letter</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>சிவப்பு கடிதம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label8">
+      <tuv xml:lang="en">
+        <seg>Files Produced</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கோப்புகளை ஆஜர்படுத்தப்பட்டனர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.label9">
+      <tuv xml:lang="en">
+        <seg>Guideword Length</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Guideword நீளம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblApproved">
+      <tuv xml:lang="en">
+        <seg>Approved By\n\n</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஒப்புதல் அளிக்கப்பட்ட By\n(-999)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblAvailable">
+      <tuv xml:lang="en">
+        <seg>Available</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கிடைக்கப்பெறும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblBaseFontSize">
+      <tuv xml:lang="en">
+        <seg>Font Size:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>எழுத்துரு அளவு:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblChapterNumbers">
+      <tuv xml:lang="en">
+        <seg>Chapter Numbers:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அத்தியாய எண்கள்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblComment">
+      <tuv xml:lang="en">
+        <seg>Comment</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கருத்துரை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblDefaultAlignment">
+      <tuv xml:lang="en">
+        <seg>Text Alignment:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உரை ஒழுங்கமைத்தல்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblDefaultFont">
+      <tuv xml:lang="en">
+        <seg>Fallback Font:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Fallback எழுத்துரு:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblDesc">
+      <tuv xml:lang="en">
+        <seg>Description</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>விளக்கம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblEpubDescription">
+      <tuv xml:lang="en">
+        <seg>Change the settings for e-book content.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இ-புத்தகம் உள்ளடக்கத்திற்கான அமைப்புகளை மாற்றவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblEpubFontsSection">
+      <tuv xml:lang="en">
+        <seg>Embedded Fonts</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>விதை எழுத்துருக்களை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblEputLayoutSection">
+      <tuv xml:lang="en">
+        <seg>Layout</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உருவமைப்பு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblFileProduceDict">
+      <tuv xml:lang="en">
+        <seg>Files Produced</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கோப்புகளை ஆஜர்படுத்தப்பட்டனர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblFont">
+      <tuv xml:lang="en">
+        <seg>Base Font Size</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அடிப்படை எழுத்துரு அளவு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblGoBibleDescription">
+      <tuv xml:lang="en">
+        <seg>Change the settings for mobile content.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மொபைல் உள்ளடக்கத்திற்கான அமைப்புகளை மாற்றவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblInfoCaption">
+      <tuv xml:lang="en">
+        <seg>Css</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Css</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblJustified">
+      <tuv xml:lang="en">
+        <seg>Justified</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வரிசீரமை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblLineSpace">
+      <tuv xml:lang="en">
+        <seg>Line Spacing </seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கோடு இடைவெளியை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblLineSpacing">
+      <tuv xml:lang="en">
+        <seg>Line Height:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வரி உயரம்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblMaxImageWidth">
+      <tuv xml:lang="en">
+        <seg>Maximum Image Width:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அதிகபட்ச உருவம் அகலம்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblMissingFont">
+      <tuv xml:lang="en">
+        <seg>If font is missing:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>எழுத்துரு காணாமல் இருந்தால்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblMobileOptionsSection">
+      <tuv xml:lang="en">
+        <seg>Options</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>விருப்பங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblName">
+      <tuv xml:lang="en">
+        <seg>Name</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பெயர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblNonSILFont">
+      <tuv xml:lang="en">
+        <seg>If restricted:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வரையறுக்கப்பட்டது இருந்தால்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageBottom">
+      <tuv xml:lang="en">
+        <seg>Bottom</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கீழே</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageColumn">
+      <tuv xml:lang="en">
+        <seg>Columns</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நெடுவரிசைகள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageGutter">
+      <tuv xml:lang="en">
+        <seg>Column Gap</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பத்தி இடைவெளி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageInside">
+      <tuv xml:lang="en">
+        <seg>Inside</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உள்ளே</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageNumber">
+      <tuv xml:lang="en">
+        <seg>Page Numbers</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பக்க எண்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageOutside">
+      <tuv xml:lang="en">
+        <seg>Outside</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வெளிப்புறம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPagePageSize">
+      <tuv xml:lang="en">
+        <seg>Page Size</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பக்க அளவு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPageTop">
+      <tuv xml:lang="en">
+        <seg>Top</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மேலே</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblProjectUrl">
+      <tuv xml:lang="en">
+        <seg>Other project related information is available at:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மற்ற திட்டம் தொடர்பான தகவலை:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPt">
+      <tuv xml:lang="en">
+        <seg>pt</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பெரிதாக்கு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblPx">
+      <tuv xml:lang="en">
+        <seg>px</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>px</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblReferenceFormat">
+      <tuv xml:lang="en">
+        <seg>Reference Format</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஒப்பீடு வடிவமைப்பு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblReferences">
+      <tuv xml:lang="en">
+        <seg>Add References:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஒப்பீடுகள் சேர்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblRules">
+      <tuv xml:lang="en">
+        <seg>Divider Lines</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வகுப்பானை கோடுகள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblRunningHeader">
+      <tuv xml:lang="en">
+        <seg>Running Header</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இயங்கும் மேல்குறிப்பு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblSenseLayout">
+      <tuv xml:lang="en">
+        <seg>Sense Layout</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பார்த்தால் உருவமைப்பு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblTargetFileLocation">
+      <tuv xml:lang="en">
+        <seg>FTP Address (ex: ftp://ip address/path)</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>FTP முகவரி (முன்னாள்: ftp://ip முகவரி/பாதை)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblTocLevel">
+      <tuv xml:lang="en">
+        <seg>TOC Level:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>TOC மட்டம்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblType">
+      <tuv xml:lang="en">
+        <seg>Dictionary</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அகராதி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblVerticalJustify">
+      <tuv xml:lang="en">
+        <seg>Vertical Justify</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>செங்குத்து வரிசீரமை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.moreHelpToolStripMenuItem">
+      <tuv xml:lang="en">
+        <seg>More &amp;Help</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மேலும் உதவி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.studentManualToolStripMenuItem">
+      <tuv xml:lang="en">
+        <seg>Student &amp;Manual</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மாணவர் கையேடு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabDict4Mids">
+      <tuv xml:lang="en">
+        <seg>Properties</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>குணங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabDisplay">
+      <tuv xml:lang="en">
+        <seg>Properties</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>குணங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabInfo">
+      <tuv xml:lang="en">
+        <seg>Info</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தகவல்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabMobile">
+      <tuv xml:lang="en">
+        <seg>Properties</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>குணங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabOthers">
+      <tuv xml:lang="en">
+        <seg>Properties</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>குணங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabPicture">
+      <tuv xml:lang="en">
+        <seg>Pictures</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>படங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabPreview">
+      <tuv xml:lang="en">
+        <seg>Preview</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>முன்னோட்டம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tabWeb">
+      <tuv xml:lang="en">
+        <seg>Properties</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>குணங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.toolStripHelpButton">
+      <tuv xml:lang="en">
+        <seg>&amp;Help</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உதவி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.toolStripMain">
+      <tuv xml:lang="en">
+        <seg>New</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>புதிய</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.toolStripStatusLabel1">
+      <tuv xml:lang="en">
+        <seg>Changes will be automatically saved.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மாற்றங்கள் தானாகவே சேமிக்கப்படும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsDefault">
+      <tuv xml:lang="en">
+        <seg>De&amp;faults</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இயல்புநிலைகள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsDelete">
+      <tuv xml:lang="en">
+        <seg>De&amp;lete</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நீக்கு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsNew">
+      <tuv xml:lang="en">
+        <seg>&amp;New</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>புதிய</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsPreview">
+      <tuv xml:lang="en">
+        <seg>Pre&amp;view</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>முன்னோட்டம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsRedo">
+      <tuv xml:lang="en">
+        <seg> Redo</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மீண்டும் செய்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsReset">
+      <tuv xml:lang="en">
+        <seg>&amp;Reset</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மீட்டமை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsSaveAs">
+      <tuv xml:lang="en">
+        <seg>Save &amp;As</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இவ்வாறு சேமி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsSend">
+      <tuv xml:lang="en">
+        <seg>S&amp;end</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அனுப்பு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.tsUndo">
+      <tuv xml:lang="en">
+        <seg> &amp;Undo</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>செயல்தவிர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.uiLanguageMenu">
+      <tuv xml:lang="en">
+        <seg>English</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஆங்கிலம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.BrowseButton.Message">
+      <tuv xml:lang="en">
+        <seg>Please choose the icon with 20 x 20 px.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கொண்ட 20 x 20 படவுருவை தேர்ந்தெடு px.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.CopyStyle.Message">
+      <tuv xml:lang="en">
+        <seg>Names of styles should not be greater than 50 characters.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பாணிகளை வேண்டும் 50 கேரக்டர்களை விட அதிகமாக.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.CreatePreviewFile.Message">
+      <tuv xml:lang="en">
+        <seg>Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மன்னிக்கவும், இந்த பாணிதாள் முன்னோட்டம் கிடைக்கப்பெறவில்லை. PrinceXML அல்லது LibreOffice உள்ள முன்னோட்டப் செயல்படுத்த நிறுவவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.ChapterNumbers.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.ChapterNumbers.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஆம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.DefaultAlignment.Justify">
+      <tuv xml:lang="en">
+        <seg>Justify</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வரிசீரமை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.DefaultAlignment.Left">
+      <tuv xml:lang="en">
+        <seg>Left</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இடது</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.DefaultAlignment.Right">
+      <tuv xml:lang="en">
+        <seg>Right</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வலது</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.FileProduced.One">
+      <tuv xml:lang="en">
+        <seg>One</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஒன்று</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.FileProduced.OnePerLetter">
+      <tuv xml:lang="en">
+        <seg>One Per Letter</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஒரு கடிதம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.FontSize.NoChange">
+      <tuv xml:lang="en">
+        <seg>No Change</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மாற்றம் இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Justified.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Justified.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஆம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Leading.NoChange">
+      <tuv xml:lang="en">
+        <seg>No Change</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மாற்றம் இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.MissingFont.CancelExport">
+      <tuv xml:lang="en">
+        <seg>Cancel Export</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஏற்றுமதி ரத்து</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.MissingFont.PromptUser">
+      <tuv xml:lang="en">
+        <seg>Prompt User</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>விழிப்பூட்டு பயனர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.MissingFont.UseFallbackFont">
+      <tuv xml:lang="en">
+        <seg>Use Fallback Font</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Fallback எழுத்துரு பயன்படுத்து</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.CancelExport">
+      <tuv xml:lang="en">
+        <seg>Cancel Export</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஏற்றுமதி ரத்து</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.EmbedFontAnyway">
+      <tuv xml:lang="en">
+        <seg>Embed Font Anyway</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>எழுத்துரு எப்படியும் விதை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.PromptUser">
+      <tuv xml:lang="en">
+        <seg>Prompt User</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>விழிப்பூட்டு பயனர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.UseFallbackFont">
+      <tuv xml:lang="en">
+        <seg>Use Fallback Font</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Fallback எழுத்துரு பயன்படுத்து</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.BottomCenter">
+      <tuv xml:lang="en">
+        <seg>Bottom Center</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நடுவில்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.BottomInsideMargin">
+      <tuv xml:lang="en">
+        <seg>Bottom Inside Margin</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கீழ் ஒரம் உள்ளே</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.BottomOutsideMargin">
+      <tuv xml:lang="en">
+        <seg>Bottom Outside Margin</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கீழ் ஒரம் வெளியே</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.None">
+      <tuv xml:lang="en">
+        <seg>None</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>யாரும் இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.TopCenter">
+      <tuv xml:lang="en">
+        <seg>Top Center</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மேல் மையம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.TopInsideMargin">
+      <tuv xml:lang="en">
+        <seg>Top Inside Margin</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மேல் ஓரம் உள்ளே</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.TopOutsideMargin">
+      <tuv xml:lang="en">
+        <seg>Top Outside Margin</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மேல் ஓரம் வெளியே</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageSize.HalfLetter">
+      <tuv xml:lang="en">
+        <seg>Half letter</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அரை கடிதம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageSize.Letter">
+      <tuv xml:lang="en">
+        <seg>Letter</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கடிதம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Pictures.Frame">
+      <tuv xml:lang="en">
+        <seg>Frame</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>திரை சட்டம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Pictures.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Pictures.Paragraph">
+      <tuv xml:lang="en">
+        <seg>Paragraph</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பத்தி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RedLetter.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RedLetter.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஆம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.References.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.References.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஆம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Rules.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Rules.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஆம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RunningHead.EveryPage">
+      <tuv xml:lang="en">
+        <seg>Every Page</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஒவ்வொரு மணிநேரமும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RunningHead.Mirrored">
+      <tuv xml:lang="en">
+        <seg>Mirrored</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Mirrored</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RunningHead.None">
+      <tuv xml:lang="en">
+        <seg>None</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>யாரும் இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Sense.Bullet">
+      <tuv xml:lang="en">
+        <seg>Bullet</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பொட்டு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Sense.Nochange">
+      <tuv xml:lang="en">
+        <seg>No change</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மாற்றம் இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.TOCLevel.LetterEntryandSense">
+      <tuv xml:lang="en">
+        <seg>3 - Letter, Entry and Sense</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>3 - எழுத்து, உள்ளீடு மற்றும் பார்த்தால்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.TOCLevel.LetterOnly">
+      <tuv xml:lang="en">
+        <seg>1 - Letter Only</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>1 - எழுத்து மட்டும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.TOCLevel.LetterandEntry">
+      <tuv xml:lang="en">
+        <seg>2 - Letter and Entry</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>2 - எழுத்து மற்றும் உள்ளீடு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.VerticalJustify.Bottom">
+      <tuv xml:lang="en">
+        <seg>Bottom</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கீழே</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.VerticalJustify.Center">
+      <tuv xml:lang="en">
+        <seg>Center</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மையம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.VerticalJustify.Top">
+      <tuv xml:lang="en">
+        <seg>Top</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மேலே</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.NameValidate.Message">
+      <tuv xml:lang="en">
+        <seg>Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மன்னிக்கவும், உங்கள் சமீபத்திய மாற்றங்களை சேமிக்க இயலாது ஏனென்றால் Pathway '{0}' பாணிதாள் கோப்பை கண்டுபிடிக்க முடியவில்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.NoDuplicateStyleName.Message">
+      <tuv xml:lang="en">
+        <seg>Stylesheet Name [{0}] already exists</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பாணிதாள் பெயர் [{0}] ஏற்கனவே உள்ளது</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabDeleteClick.Message1">
+      <tuv xml:lang="en">
+        <seg>Are you sure you want to delete the {0} stylesheet?</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நிச்சயமாக {0} பாணிதாள் நீக்க விரும்புகிறீர்களா?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabDeleteClick.Message2">
+      <tuv xml:lang="en">
+        <seg>Factory style sheet can not be deleted</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தொழிற்சாலை பாணி தாளை நீக்க முடியும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabDeleteClick.Message3">
+      <tuv xml:lang="en">
+        <seg>Please select a style sheet to delete</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தயவுசெய்து நீக்க ஒரு பாணி தாளை தேர்ந்தெடு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabResetClick1.Message">
+      <tuv xml:lang="en">
+        <seg>Are you sure you want to remove all custom style sheets and restore \n settings to their initial values? (This cannot be undone.)</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நீங்கள் உறுதியாக அனைத்து விருப்ப பாணி தாள்கள் நீக்கி அதன் துவக்க மதிப்புகளுக்கு \nஅமைப்புகளை மீட்டெடுக்க விரும்புகிறீர்களா? (இது செய்யாமல் இருக்க இயலாது.)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabResetClick2.Message">
+      <tuv xml:lang="en">
+        <seg>Settings files are reset successfully</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அமைப்புகள் கோப்புகள் வெற்றிகரமாக மீட்டமை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.ValidateStyleName.Message1">
+      <tuv xml:lang="en">
+        <seg>Style name should not be empty. Please enter the valid name</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பாணி பெயர் வேண்டும் காலி. செல்லுபடியான பெயரை உள்ளிடவும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.ValidateStyleName.Message2">
+      <tuv xml:lang="en">
+        <seg>Please avoid {0} in the Style name</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>{0} பாணி பெயரில் தயவுசெய்து தவிர்க்கவும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Open Epub File Type</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>திறந்த Epub கோப்பு வகை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.btnexprtCancel">
+      <tuv xml:lang="en">
+        <seg>&amp;Close</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மூடு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.btnexprtEpub2">
+      <tuv xml:lang="en">
+        <seg>Epub&amp;2</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Epub2</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.btnexprtEpub3">
+      <tuv xml:lang="en">
+        <seg>Epub&amp;3</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Epub3</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.btnexprtfolder">
+      <tuv xml:lang="en">
+        <seg>&amp;Folder</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கோப்புறை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubValidateTypeDlg.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Open Validate Type</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வகையை நேர்மையானது திற</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubValidateTypeDlg.btnBoth">
+      <tuv xml:lang="en">
+        <seg>&amp;Both</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இரண்டும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubValidateTypeDlg.btnNeither">
+      <tuv xml:lang="en">
+        <seg>&amp;Neither</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>திரண்ட</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubValidateTypeDlg.btnValidateEpub2">
+      <tuv xml:lang="en">
+        <seg>Epub&amp;2</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Epub2</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubValidateTypeDlg.btnValidateEpub3">
+      <tuv xml:lang="en">
+        <seg>Epub&amp;3</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Epub3</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubValidateTypeDlg.lblMessage">
+      <tuv xml:lang="en">
+        <seg>Do you want select the Epub validate type ?</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வேண்டுமா தேர்ந்தெடுத்து, Epub வகையை நேர்மையானது?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.CoverImageClick.Message">
+      <tuv xml:lang="en">
+        <seg>The selected image is too large. Please select an image that is smaller than 1000 x 1000 pixels.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தேர்ந்தெடுக்கப்பட்ட உருவம் மிகவும் பெரிதாக உள்ளது. இதைவிட 1000 x 1000 படப்புள்ளிகள் ஒரு உருவத்தை தயவுசெய்து தேர்ந்தெடுக்கவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.ExportThroughPathwayLoad.Message">
+      <tuv xml:lang="en">
+        <seg>Please download and install a Pathway version compatible with your software</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தயவுசெய்து பதிவிறக்கம் செய்து உங்கள் மென்பொருளை கூடியவை Pathway பதிப்பை நிறுவ</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.LoadAvailFormat.Message">
+      <tuv xml:lang="en">
+        <seg>Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Pathway ஆல் எந்த ஏற்றுமதி வடிவமைப்புகள் கண்டுபிடிக்க இயலவில்லை. இந்த பிழை சரி செய்ய Pathway மீண்டும் நிறுவவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.OkButtonClick.Message">
+      <tuv xml:lang="en">
+        <seg>Please select a folder for which you have creation permission</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தயவுகூர்ந்து உருவாக்க அனுமதி உங்களுக்கு கோப்புறை தேர்ந்தெடு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.SaveProperty.Message1">
+      <tuv xml:lang="en">
+        <seg>Please enter a title for this publication.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இந்த தயாரித்து ஒரு தலைப்பை உள்ளிடவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.SaveProperty.Message2">
+      <tuv xml:lang="en">
+        <seg>Please select at least one item to include in the export.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஏற்றுமதி சேர்க்க ஒரு உருப்படியை தேர்ந்தெடுக்கவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Export Through Pathway</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Pathway மூலம் ஏற்றுமதி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.btnCancel">
+      <tuv xml:lang="en">
+        <seg>&amp;Cancel</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ரத்து செய்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.btnCoverImage">
+      <tuv xml:lang="en">
+        <seg>&amp;Select...</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தேர்ந்தெடு...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.btnHelp">
+      <tuv xml:lang="en">
+        <seg>&amp;Help</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உதவி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.btnMoreLessOptions">
+      <tuv xml:lang="en">
+        <seg>Less</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>குறைவாக</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.btnOK">
+      <tuv xml:lang="en">
+        <seg>&amp;OK</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>சரி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkColophon">
+      <tuv xml:lang="en">
+        <seg>Copyright Infomation Page</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பதிப்புரிமை Infomation பக்கம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkConfiguredDictionary">
+      <tuv xml:lang="en">
+        <seg>Configured Dictionary</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உள்ளமைக்கவில்லை அகராதி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkCoverImage">
+      <tuv xml:lang="en">
+        <seg>Cover Image Page:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>முகப்பு உருவம் பக்கம்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkCoverImageTitle">
+      <tuv xml:lang="en">
+        <seg>Include the book's title in the image</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உருவம் உள்ள இந்த புத்தகம் தலைப்பு சேர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkGrammarSketch">
+      <tuv xml:lang="en">
+        <seg>Grammar Sketch</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இலக்கணம் ஒன்று</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkHyphen">
+      <tuv xml:lang="en">
+        <seg>Enable Hyphenation</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>சொல் பிரிவை செயல்படுத்து</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkIP">
+      <tuv xml:lang="en">
+        <seg>I have complied with my organization's Intellectual Property (copyright) and Archiving policies.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நான் என் நிறுவனத்தின் அறிவுசார் (பதிப்புரிமை) மற்றும் Archiving கோட்பாடுகள் complied வேண்டும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkOOReduceStyleNames">
+      <tuv xml:lang="en">
+        <seg>Replace styles with direct formatting in OpenOffice/LibreOffice</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நேரடி வடிவமைத்தல் OpenOffice/LibreOffice பாணிகள் மாற்றிடவும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkReversalIndexes">
+      <tuv xml:lang="en">
+        <seg>Reversal Indexes</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வாடுவது அடைவுகளை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkTOC">
+      <tuv xml:lang="en">
+        <seg>Table of Contents</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பொருளடக்க அட்டவணை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkTitlePage">
+      <tuv xml:lang="en">
+        <seg>Title Page (page with book's title)</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தலைப்பு பக்கம் (பக்கம் புத்தகம் என்ற தலைப்புடன்)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.gbHyphnSettings">
+      <tuv xml:lang="en">
+        <seg>Language Settings</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மொழி அமைப்புகள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.groupBox1">
+      <tuv xml:lang="en">
+        <seg>Preprocessing Transformation:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Preprocessing மாற்றம்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.grpInclude">
+      <tuv xml:lang="en">
+        <seg>Select data to include:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>சேர்க்க வேண்டிய தரவு தேர்ந்தெடு:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.label1">
+      <tuv xml:lang="en">
+        <seg>Destination:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இலக்கு:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.label2">
+      <tuv xml:lang="en">
+        <seg>Stylesheet:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பாணிதாள்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.label5">
+      <tuv xml:lang="en">
+        <seg>Add the following pages to the document:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பின்வரும் பக்கங்களில் ஆவணத்தை சேர்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.label7">
+      <tuv xml:lang="en">
+        <seg>Describe this publication:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இந்த வெளியீட்டை விளக்க:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.label8">
+      <tuv xml:lang="en">
+        <seg>Save in Folder :</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கோப்புறையில் சேமி:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblBookTitle">
+      <tuv xml:lang="en">
+        <seg>Book Title</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>புத்தக தலைப்பு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblCreator">
+      <tuv xml:lang="en">
+        <seg>Creator</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Creator</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblDescription">
+      <tuv xml:lang="en">
+        <seg>Description</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>விளக்கம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblHyphenFonts">
+      <tuv xml:lang="en">
+        <seg>Include Language</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மொழி சேர்க்கவும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblPublisher">
+      <tuv xml:lang="en">
+        <seg>Publisher</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வெளியீட்டாளர்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lblRights">
+      <tuv xml:lang="en">
+        <seg>Copyright Holder</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பதிப்புரிமை கொண்டிருப்பவர்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lnkChooseCopyright">
+      <tuv xml:lang="en">
+        <seg>Help me choose a rights statement...</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உரிமைகள் அறிக்கையில் தேர்வு செய்ய எனக்கு உதவவும்...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.lnkIP">
+      <tuv xml:lang="en">
+        <seg>Intellectual Property Info</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அறிவுசார் சொத்து விவரம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.rdoCustomCopyright">
+      <tuv xml:lang="en">
+        <seg>Custom:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>விருப்பம்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.rdoStandardCopyright">
+      <tuv xml:lang="en">
+        <seg>Standard Rights Statement:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நிலையான உரிமைகள் அறிக்கை:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.tabPage1">
+      <tuv xml:lang="en">
+        <seg>Publication Info</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>வெளியீட்டை தகவல்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.tabPage2">
+      <tuv xml:lang="en">
+        <seg>Front Matter</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அணி விஷயம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.tabPage3">
+      <tuv xml:lang="en">
+        <seg>Processing Options</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>செயலாக்க விருப்பங்கள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.tpHyphenation">
+      <tuv xml:lang="en">
+        <seg>Hyphenation</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>சொல் பிரிவை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="FontWarningDlg.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>FontWarningDlg</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>FontWarningDlg</seg>
+      </tuv>
+    </tu>
+    <tu tuid="FontWarningDlg.btnCancel">
+      <tuv xml:lang="en">
+        <seg>&amp;Cancel</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ரத்து செய்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="FontWarningDlg.btn_OK">
+      <tuv xml:lang="en">
+        <seg>&amp;OK</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>சரி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="FontWarningDlg.chkRepeatAction">
+      <tuv xml:lang="en">
+        <seg>chkRepeatAction</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>chkRepeatAction</seg>
+      </tuv>
+    </tu>
+    <tu tuid="FontWarningDlg.grpOptions">
+      <tuv xml:lang="en">
+        <seg>grpOptions</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>grpOptions</seg>
+      </tuv>
+    </tu>
+    <tu tuid="FontWarningDlg.lblSubstituteSILFont">
+      <tuv xml:lang="en">
+        <seg>lblSubstituteSILFont</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>lblSubstituteSILFont</seg>
+      </tuv>
+    </tu>
+    <tu tuid="InProcess.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Export In Process</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>செயலாக்கத்தில் ஏற்றுமதி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="MainWindow.MoreMenuItem">
+      <note>Last item in menu of UI languages</note>
+      <tuv xml:lang="en">
+        <seg>More...</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மேலும்...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="OrganizationNameDialog.btnCancel">
+      <tuv xml:lang="en">
+        <seg>&amp;Cancel</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ரத்து செய்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="OrganizationNameDialog.btnOK">
+      <tuv xml:lang="en">
+        <seg>&amp;OK</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>சரி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="OrganizationNameDialog.label1">
+      <tuv xml:lang="en">
+        <seg>Type in the &amp;name of your organization:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உங்கள் நிறுவன என்ற பெயரில் தட்டச்சு செய்யவும்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PreviewPrintVia.CreatePreviewFile.Message">
+      <tuv xml:lang="en">
+        <seg>Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மன்னிக்கவும், இந்த பாணிதாள் முன்னோட்டம் கிடைக்கப்பெறவில்லை. PrinceXML அல்லது LibreOffice உள்ள முன்னோட்டப் செயல்படுத்த நிறுவவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PrintVia.LoadBackEnds.Message">
+      <tuv xml:lang="en">
+        <seg>Please Install the Plugin Backends</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தயவுசெய்து கூடுதல் Backends நிறுவ</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PrintVia.OkButtonClick.Message">
+      <tuv xml:lang="en">
+        <seg>Please select a folder for which you have creation permission</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தயவுகூர்ந்து உருவாக்க அனுமதி உங்களுக்கு கோப்புறை தேர்ந்தெடு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PrintVia.PrintViaLoad.Message">
+      <tuv xml:lang="en">
+        <seg>Please download and install a Pathway version compatible with your software</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தயவுசெய்து பதிவிறக்கம் செய்து உங்கள் மென்பொருளை கூடியவை Pathway பதிப்பை நிறுவ</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.btnCancel">
+      <tuv xml:lang="en">
+        <seg>&amp;Cancel</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ரத்து செய்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.btnHelp">
+      <tuv xml:lang="en">
+        <seg>&amp;Help</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உதவி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.btnOK">
+      <tuv xml:lang="en">
+        <seg>&amp;OK</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>சரி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.btnOther">
+      <tuv xml:lang="en">
+        <seg>O&amp;ther...</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மற்ற...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.lblInstructions">
+      <tuv xml:lang="en">
+        <seg>Select the organization you are representing, Pathway will automatically fill in copyright statements, etc. based on your selection.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நீங்கள் ஆஜராகும் நிறுவன தேர்ந்தெடுக்கவும், Pathway இருக்கும் தானாக நிரப்பு பதிப்புரிமை அறிவிப்புகளை, போன்ற உங்கள் தேர்வு பகுதியை சார்ந்து.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.lblOrganization">
+      <tuv xml:lang="en">
+        <seg>My o&amp;rganization:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>எனது அமைப்பு:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.lblOther">
+      <tuv xml:lang="en">
+        <seg>If your organization is not on the above list, click the Other... button:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இல்லையென்றால் உங்கள் நிறுவன மேற்கண்ட பட்டியலில், கிளிக் அடுத்தவர்... விசை:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SettingsValidator.CopySettingsFile.Message1">
+      <tuv xml:lang="en">
+        <seg>Settings file  "{0}".xml is invalid. Do you want to overwrite it with the setting file previously installed? \n (Specifically, "{1}" property has an invalid path.)</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அமைப்புகள் கோப்பில் "{0}".xml செல்லாது, முன்பு நிறுவப்பட்ட அமைப்பு கோப்பை மாற்றியெழுத விரும்புகிறீர்களா. \n (குறிப்பாக, "{1}" சொத்து உள்ளது ஒரு செல்லாத பாதை.)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SettingsValidator.CopySettingsFile.Message2">
+      <tuv xml:lang="en">
+        <seg>Settings file  "{0}".xml is invalid. Do you want to overwrite it with the setting file previously installed? \n (Specifically, "{1}" property has an invalid value.)</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அமைப்புகள் கோப்பில் "{0}".xml செல்லாது, முன்பு நிறுவப்பட்ட அமைப்பு கோப்பை மாற்றியெழுத விரும்புகிறீர்களா. \n (குறிப்பாக, "{1}" சொத்து செல்லாத மதிப்பு உள்ளது.)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Validate .epub File</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>.Epub கோப்பை செல்லத்தக்கதாக்க</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.btnBrowse">
+      <tuv xml:lang="en">
+        <seg>&amp;Browse...</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உலாவு...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.btnCancel">
+      <tuv xml:lang="en">
+        <seg>&amp;Cancel</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ரத்து செய்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.btnValidate">
+      <tuv xml:lang="en">
+        <seg>&amp;Validate</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நேர்மையானது</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.groupBox1">
+      <tuv xml:lang="en">
+        <seg>&amp;File to Validate:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நேர்மையானது கோப்பு:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.label1">
+      <tuv xml:lang="en">
+        <seg>Welcome to the .epub file validator. This program uses an open source utility called "epubcheck" to help find errors within the .epub file that could prevent it from opening or displaying properly in e-book readers.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>.Epub கோப்பு validator வரவேற்கிறோம். இந்த நிரல் பிழைகள் எல்லைக்குள் முடியவில்லை தடை செய்யும் அது திறக்கும் அல்லது உள்ள மின்-புத்தகம் படிப்பான்கள் சரியாக காண்பிக்க .epub கோப்பை கண்டறிய "epubcheck" எனப்படும் ஒரு ஓப்பன் சோர்ஸ் பயன்பாடு பயன்படுத்துகிறது.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.lblInstructions">
+      <tuv xml:lang="en">
+        <seg>Click the Validate button below to start the process.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>செயல்பாடு தொடங்க கீழுள்ள Validate பொத்தானை கிளிக் செய்யவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.lblStatus">
+      <tuv xml:lang="en">
+        <seg>Validating file - please wait.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஐ மதிப்பிடுகையில் கோப்பு - தயவுசெய்து காத்திருக்கவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmResults.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Validation Results</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>செல்லத்தக்கதாக்குதல் முடிவுகள்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmResults.btnClose">
+      <tuv xml:lang="en">
+        <seg>&amp;Close</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மூடு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmResults.label1">
+      <tuv xml:lang="en">
+        <seg>Validation process complete.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>செய்கை முடிந்தது.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmResults.label2">
+      <tuv xml:lang="en">
+        <seg>Following are the validation results. For more information about specific errors, please refer to the epubcheck utility documentation:</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பின்வரும் செல்லத்தக்கதாக்குதல் முடிவுகள் உள்ளன. குறிப்பிட்ட பிழைகள் பற்றிய கூடுதல் தகவலுக்கு, தயவுசெய்து குறிக்க epubcheck பயன்பாடு பார்க்கவும்:</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmResults.linkLabel1">
+      <tuv xml:lang="en">
+        <seg>http://code.google.com/p/epubcheck/wiki/Errors</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>http://code.google.com/p/epubcheck/wiki/Errors</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>SIL International</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>SIL சர்வதேச</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.frmSplash.label5">
+      <tuv xml:lang="en">
+        <seg>®</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>®</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.label1">
+      <tuv xml:lang="en">
+        <seg>Configuration Tool</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உள்ளமைவு கருவி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.label2">
+      <tuv xml:lang="en">
+        <seg>(C) 2008 - 2015 SIL International</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>(இ) 2008-வாக்கில் SIL சர்வதேச</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.label3">
+      <tuv xml:lang="en">
+        <seg>Loading ....</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஏற்றுகிறது...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.lblCompany">
+      <tuv xml:lang="en">
+        <seg>SIL International in collaboration with EC Group Datasoft Private Limited</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>SIL சர்வதேச கழகத்துடன் இணைந்து தேர்தல் குழு Datasoft தனியார் லிமிடெட்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.lblGPL">
+      <tuv xml:lang="en">
+        <seg>Code license: GNU GPL v3</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>குறியீடு உரிமம்: GNU GPL v3</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.lblSilPathway">
+      <tuv xml:lang="en">
+        <seg>Pathway</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Pathway</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmSplash.lblVersionwithDate">
+      <tuv xml:lang="en">
+        <seg>Version: 1.4.0</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பதிப்பு: 1.4.0</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>
