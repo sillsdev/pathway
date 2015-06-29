@@ -4569,6 +4569,11 @@ namespace SIL.Tool
         {
             string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
             string content = XmlSerializationHelper.SerializeToString(setting);
+	        var fileFolder = Path.GetDirectoryName(fileName);
+	        if (!Directory.Exists(fileFolder))
+	        {
+		        Directory.CreateDirectory(fileFolder);
+	        }
             File.WriteAllText(fileName, content);
         }
 
@@ -4598,19 +4603,17 @@ namespace SIL.Tool
         {
             //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
             var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-            string localizedStringFilesFolder = CopyInstalledLocalizations(targetTmxFilePath);
+			string installedLocalizationsFolder = InstalledLocalizations();
             var desiredUiLangId = GetLocalizationSettings();
             if (desiredUiLangId == string.Empty)
                 desiredUiLangId = "en";
             if (!Testing)
                 L10NMngr = LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-                                  localizedStringFilesFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
+								  installedLocalizationsFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
         }
 
-        private static string CopyInstalledLocalizations(string silLocation)
+        private static string InstalledLocalizations()
         {
-            string localizedStringFilesFolder = Common.PathCombine(Common.GetAllUserAppPath(), silLocation);
-            localizedStringFilesFolder = Common.PathCombine(localizedStringFilesFolder, "localizations");
             string pathwayDirectory = PathwayPath.GetPathwayDir();
             var installedLocalizationsFolder = string.Empty;
             if (pathwayDirectory != null)
@@ -4622,26 +4625,7 @@ namespace SIL.Tool
                 installedLocalizationsFolder = Path.Combine(Application.StartupPath, "localizations");
             }
 
-            if (Directory.Exists(installedLocalizationsFolder))
-            {
-                if (!Directory.Exists(localizedStringFilesFolder))
-                    Directory.CreateDirectory(localizedStringFilesFolder);
-
-                foreach (var file in Directory.GetFiles(installedLocalizationsFolder))
-                {
-                    var name = Path.GetFileName(file);
-                    var dest = Path.Combine(localizedStringFilesFolder, name);
-                    if (!File.Exists(dest) || FileLength(file) > FileLength(dest))
-                        File.Copy(file, dest, true);
-                }
-            }
-
             return installedLocalizationsFolder;
-        }
-
-        private static long FileLength(string file)
-        {
-            return new FileInfo(file).Length;
         }
 
         #region Localization Manager Access methods
