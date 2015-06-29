@@ -4631,7 +4631,7 @@ namespace SIL.Tool
                 {
                     var name = Path.GetFileName(file);
                     var dest = Path.Combine(localizedStringFilesFolder, name);
-                    if (!File.Exists(dest) || FileLength(file) != FileLength(dest))
+                    if (!File.Exists(dest) || FileLength(file) > FileLength(dest))
                         File.Copy(file, dest, true);
                 }
             }
