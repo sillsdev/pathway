@@ -1,4 +1,4 @@
-pathway (1.13.1.4435-1) unstable; urgency=high
+pathway (1.13.1.4453-1) unstable; urgency=high
 
   * pathway 1.13.1 hotfix
     - remove registered trade mark from package description
@@ -13,7 +13,7 @@ pathway (1.13.1.4435-1) unstable; urgency=high
     - Installer:Update README.md Add information about installing dependencies.
     - Installer:Update build scripts removing svn exceptions
     - Installer:Update installer logo
-    - Installer:Updated so Pathway works with the latest version of Libre Office.
+    - Installer:Work with the latest version of Libre Office.
     - Installer:Changed path to TMX files in Linux
     - LibreOffice:TD-4269 Make only one Running Header for Custom Stylesheet
     - LibreOffice:TD-4280 Add Footer in left Page
