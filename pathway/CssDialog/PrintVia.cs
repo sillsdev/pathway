@@ -214,7 +214,8 @@ namespace SIL.PublishingSolution
 
         private void PrintVia_Load(object sender, EventArgs e)
         {
-            const string strDefault = "Set Defaults";
+			string formText = LocalizationManager.GetString("ExportThroughPathway.Form.Text", "Set Defaults", "");
+			string strDefault = formText.ToString();
             if (!Common.isRightFieldworksVersion())
             {
                 var text = LocalizationManager.GetString("PrintVia.PrintViaLoad.Message", "Please download and install a Pathway version compatible with your software", "");
