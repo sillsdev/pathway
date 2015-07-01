@@ -34,6 +34,7 @@ using L10NSharp;
 using Microsoft.Win32;
 using Palaso.Xml;
 using SIL.Tool.Localization;
+using System.Reflection;
 
 #endregion Using
 
@@ -4601,6 +4602,12 @@ namespace SIL.Tool
 
         public static void SetupLocalization(string namespaces)
         {
+			Assembly assembly = Assembly.GetExecutingAssembly();
+			FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+			var companyName = fvi.CompanyName;
+			var productName = fvi.ProductName;
+			var productVersion = fvi.ProductVersion;
+
             //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
             var targetTmxFilePath = Path.Combine(kCompany, kProduct);
 			string installedLocalizationsFolder = InstalledLocalizations();
@@ -4608,8 +4615,8 @@ namespace SIL.Tool
             if (desiredUiLangId == string.Empty)
                 desiredUiLangId = "en";
             if (!Testing)
-                L10NMngr = LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-								  installedLocalizationsFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
+				L10NMngr = LocalizationManager.Create(desiredUiLangId, productName, productName, productVersion,
+                                  installedLocalizationsFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
         }
 
         private static string InstalledLocalizations()
