@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tmx version="1.4">
-  <header srclang="fr" adminlang="en" creationtool="Palaso Localization Manager" creationtoolversion="2.0.33.0" segtype="block" datatype="unknown" o-tmf="PalasoTMXUtils">
-    <prop type="x-appversion">1.12.0.4374</prop>
+  <header srclang="fr" adminlang="en" creationtool="Palaso Localization Manager" creationtoolversion="2.0.35.0" segtype="block" datatype="unknown" o-tmf="PalasoTMXUtils">
+    <prop type="x-appversion">1.13.1.4442</prop>
     <prop type="x-hardlinebreakreplacement">\n</prop>
   </header>
   <body>
@@ -21,12 +21,20 @@
         <seg>GNU GPL v3</seg>
       </tuv>
     </tu>
+    <tu tuid="AboutPw.AboutPw.lnkProj">
+      <tuv xml:lang="en">
+        <seg>http://pathway.sil.org</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>http://pathway.sil.org</seg>
+      </tuv>
+    </tu>
     <tu tuid="AboutPw.WindowTitle">
       <tuv xml:lang="en">
         <seg>About Pathway Configuration Tool</seg>
       </tuv>
       <tuv xml:lang="fr">
-        <seg>À propos de Pathway Configuration Tool</seg>
+        <seg>Ouvrir le type de fichier Epub </seg>
       </tuv>
     </tu>
     <tu tuid="AboutPw.btnOk">
@@ -51,14 +59,6 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Configuration Tool</seg>
-      </tuv>
-    </tu>
-    <tu tuid="AboutPw.label2">
-      <tuv xml:lang="en">
-        <seg>(C) 2008 - 2015 SIL International  </seg>
-      </tuv>
-      <tuv xml:lang="fr">
-        <seg>(C) 2008-2015 SIL International</seg>
       </tuv>
     </tu>
     <tu tuid="AboutPw.lblCompany">
@@ -99,14 +99,6 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Version: 1.4.0</seg>
-      </tuv>
-    </tu>
-    <tu tuid="AboutPw.lnkProj">
-      <tuv xml:lang="en">
-        <seg>http://pathway.sil.org</seg>
-      </tuv>
-      <tuv xml:lang="fr">
-        <seg>http://pathway.sil.org</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.ChkDontPicture">
@@ -182,6 +174,7 @@
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool._uiLanguageMenu">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>English</seg>
       </tuv>
@@ -198,6 +191,7 @@
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.btnApproved">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>...</seg>
       </tuv>
@@ -230,6 +224,7 @@
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.btnNext">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&gt;</seg>
       </tuv>
@@ -254,6 +249,7 @@
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.btnPrevious">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&lt;</seg>
       </tuv>
@@ -331,6 +327,22 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Inclure des Images</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkPageBreaks">
+      <tuv xml:lang="en">
+        <seg>No page breaks within letters</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Aucun saut de page dans une lettre</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.chkSplitFileByLetter">
+      <tuv xml:lang="en">
+        <seg>Split File by Letter</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Scinder le fichier par lettre</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.chkTurnOffFirstVerse">
@@ -453,6 +465,14 @@
         <seg>URL du site web</seg>
       </tuv>
     </tu>
+    <tu tuid="ConfigurationTool.label18">
+      <tuv xml:lang="en">
+        <seg>Email ID</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>adresse de courriel</seg>
+      </tuv>
+    </tu>
     <tu tuid="ConfigurationTool.label19">
       <tuv xml:lang="en">
         <seg>Ftp Folder Name</seg>
@@ -466,7 +486,7 @@
         <seg>Stylesheets</seg>
       </tuv>
       <tuv xml:lang="fr">
-        <seg>Feuilles de style</seg>
+        <seg>(C) 2008-2015 SIL International</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.label20">
@@ -589,6 +609,14 @@
         <seg>Description</seg>
       </tuv>
     </tu>
+    <tu tuid="ConfigurationTool.lblEpubDescription">
+      <tuv xml:lang="en">
+        <seg>Change the settings for e-book content.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Modifier les paramètres de contenu livrel.</seg>
+      </tuv>
+    </tu>
     <tu tuid="ConfigurationTool.lblEpubFontsSection">
       <tuv xml:lang="en">
         <seg>Embedded Fonts</seg>
@@ -619,6 +647,14 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Taille de la police de base</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblGoBibleDescription">
+      <tuv xml:lang="en">
+        <seg>Change the settings for mobile content.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Modifier les paramètres de contenu portable.</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.lblInfoCaption">
@@ -683,6 +719,14 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Nom</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblNonSILFont">
+      <tuv xml:lang="en">
+        <seg>If font is non-SIL:</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Si la police ne vient pas de SIL :</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.lblPageBottom">
@@ -750,11 +794,20 @@
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.lblPct">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>%</seg>
       </tuv>
       <tuv xml:lang="fr">
         <seg>%</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblProjectUrl">
+      <tuv xml:lang="en">
+        <seg>Other project related information is available at:</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Autres informations du projet disponibles à :</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.lblPt">
@@ -771,6 +824,46 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>px</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblReferenceFormat">
+      <tuv xml:lang="en">
+        <seg>Reference Format</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Format de références</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblReferences">
+      <tuv xml:lang="en">
+        <seg>Add References:</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Ajouter des références :</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblRules">
+      <tuv xml:lang="en">
+        <seg>Divider Lines</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Lignes intercalaires</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblRunningHeader">
+      <tuv xml:lang="en">
+        <seg>Running Header</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>En-tête continu</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.lblSenseLayout">
+      <tuv xml:lang="en">
+        <seg>Sense Layout</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Mise en page du sens</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.lblTargetFileLocation">
@@ -806,6 +899,7 @@
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.lnkLblUrl">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>http://pathway.sil.org</seg>
       </tuv>
@@ -989,15 +1083,488 @@
         <seg>Annuler</seg>
       </tuv>
     </tu>
-    <tu tuid="EpubExportTypeDlg.WindowTitle">
+    <tu tuid="ConfigurationTool.uiLanguageMenu">
       <tuv xml:lang="en">
-        <seg>Open Epub File Type</seg>
+        <seg>English</seg>
       </tuv>
       <tuv xml:lang="fr">
-        <seg>Ouvrir le type de fichier Epub </seg>
+        <seg>Anglais</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.BrowseButton.Message">
+      <tuv xml:lang="en">
+        <seg>Please choose the icon with 20 x 20 px.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Veuillez choisir l'icône de 20 x 20 px.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.CopyStyle.Message">
+      <tuv xml:lang="en">
+        <seg>Names of styles should not be greater than 50 characters.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Les noms de style ne peuvent pas dépasser 50 caractères.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.CreatePreviewFile.Message">
+      <tuv xml:lang="en">
+        <seg>Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Désolé. Un aperçu de cette feuille de style n'est pas disponible. Veuillez installer PrinceXML ou LibreOffice pour activer l'aperçu.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.ChapterNumbers.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Non</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.ChapterNumbers.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.DefaultAlignment.Justify">
+      <tuv xml:lang="en">
+        <seg>Justify</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Justifier</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.DefaultAlignment.Left">
+      <tuv xml:lang="en">
+        <seg>Left</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Gauche</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.DefaultAlignment.Right">
+      <tuv xml:lang="en">
+        <seg>Right</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Droite</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.FileProduced.One">
+      <tuv xml:lang="en">
+        <seg>One</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Un</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.FileProduced.OnePerLetter">
+      <tuv xml:lang="en">
+        <seg>One Per Letter</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Un par lettre</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.FontSize.NoChange">
+      <tuv xml:lang="en">
+        <seg>No Change</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Pas de changement</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Justified.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Non</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Justified.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Leading.NoChange">
+      <tuv xml:lang="en">
+        <seg>No Change</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Pas de changement</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.MissingFont.CancelExport">
+      <tuv xml:lang="en">
+        <seg>Cancel Export</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Annuler l'exportation</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.MissingFont.PromptUser">
+      <tuv xml:lang="en">
+        <seg>Prompt User</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Demander à l'utilisateur</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.MissingFont.UseFallbackFont">
+      <tuv xml:lang="en">
+        <seg>Use Fallback Font</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Utiliser des polices de repli</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.CancelExport">
+      <tuv xml:lang="en">
+        <seg>Cancel Export</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Annuler l'exportation</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.EmbedFontAnyway">
+      <tuv xml:lang="en">
+        <seg>Embed Font Anyway</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Incorporer la police quand même</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.PromptUser">
+      <tuv xml:lang="en">
+        <seg>Prompt User</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Demander à l'utilisateur</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.NonSILFont.UseFallbackFont">
+      <tuv xml:lang="en">
+        <seg>Use Fallback Font</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Utiliser des polices de repli</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.BottomCenter">
+      <tuv xml:lang="en">
+        <seg>Bottom Center</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>En bas au centre</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.BottomInsideMargin">
+      <tuv xml:lang="en">
+        <seg>Bottom Inside Margin</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>En bas à la marge intérieure</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.BottomOutsideMargin">
+      <tuv xml:lang="en">
+        <seg>Bottom Outside Margin</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>En bas à la marge extérieure</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.None">
+      <tuv xml:lang="en">
+        <seg>None</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Aucun</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.TopCenter">
+      <tuv xml:lang="en">
+        <seg>Top Center</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>En haut au centre</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.TopInsideMargin">
+      <tuv xml:lang="en">
+        <seg>Top Inside Margin</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>En haut à la marge intérieure</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageNumber.TopOutsideMargin">
+      <tuv xml:lang="en">
+        <seg>Top Outside Margin</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>En haut à la marge extérieure</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageSize.HalfLetter">
+      <tuv xml:lang="en">
+        <seg>Half letter</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Demi-lettre</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.PageSize.Letter">
+      <tuv xml:lang="en">
+        <seg>Letter</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Lettre</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Pictures.Frame">
+      <tuv xml:lang="en">
+        <seg>Frame</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Cadre</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Pictures.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Non</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Pictures.Paragraph">
+      <tuv xml:lang="en">
+        <seg>Paragraph</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Paragraphe</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RedLetter.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Non</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RedLetter.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.References.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Non</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.References.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Rules.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Non</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Rules.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RunningHead.EveryPage">
+      <tuv xml:lang="en">
+        <seg>Every Page</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Chaque page</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RunningHead.Mirrored">
+      <tuv xml:lang="en">
+        <seg>Mirrored</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Vis-à-vis</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.RunningHead.None">
+      <tuv xml:lang="en">
+        <seg>None</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Aucune</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Sense.Bullet">
+      <tuv xml:lang="en">
+        <seg>Bullet</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Puce</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.Sense.Nochange">
+      <tuv xml:lang="en">
+        <seg>No change</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Pas de changement</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.TOCLevel.LetterEntryandSense">
+      <tuv xml:lang="en">
+        <seg>3 - Letter, Entry and Sense</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>3 - Lettre, entrée et sens</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.TOCLevel.LetterOnly">
+      <tuv xml:lang="en">
+        <seg>1 - Letter Only</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>1 - Lettre seule</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.TOCLevel.LetterandEntry">
+      <tuv xml:lang="en">
+        <seg>2 - Letter and Entry</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>2 - Lettre et entrée</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.VerticalJustify.Bottom">
+      <tuv xml:lang="en">
+        <seg>Bottom</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>En bas</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.VerticalJustify.Center">
+      <tuv xml:lang="en">
+        <seg>Center</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Au centre</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.DropDownControl.VerticalJustify.Top">
+      <tuv xml:lang="en">
+        <seg>Top</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>En haut</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.NameValidate.Message">
+      <tuv xml:lang="en">
+        <seg>Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Désolé, Pathway ne peut pas enregistrer vos modifications récentes parce qu'il ne trouve pas le fichier de feuille de style '{0}'</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.NoDuplicateStyleName.Message">
+      <tuv xml:lang="en">
+        <seg>Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Désolé, Pathway ne peut pas enregistrer vos modifications récentes parce qu'il ne trouve pas le fichier de feuille de style '{0}'</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabDeleteClick.Message1">
+      <tuv xml:lang="en">
+        <seg>Are you sure you want to delete the {0} stylesheet?</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Êtes-vous sûr de vouloir supprimer la feuille de style {0} ?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabDeleteClick.Message2">
+      <tuv xml:lang="en">
+        <seg>Factory style sheet can not be deleted</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>On ne peut pas supprimer la feuille de style usine</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabDeleteClick.Message3">
+      <tuv xml:lang="en">
+        <seg>Please select a style sheet to delete</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Veuillez sélectionner une feuille de style à supprimer</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabResetClick1.Message">
+      <tuv xml:lang="en">
+        <seg>Are you sure you want to remove all custom style sheets and restore \n settings to their initial values? (This cannot be undone.)</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Êtes-vous sûr de vouloir supprimer toutes les feuilles de style personnalisées et restaurer les paramètres à leurs valeurs initiales ? (On ne peut pas annuler cette action.)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.TabResetClick2.Message">
+      <tuv xml:lang="en">
+        <seg>Settings files are reset successfully</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Les fichiers de paramètres sont réinitialisés avec succès</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.ValidateStyleName.Message1">
+      <tuv xml:lang="en">
+        <seg>Style name should not be empty. Please enter the valid name</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Le nom du style ne peut pas être vide. Veuillez entrer un nom valide.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationToolBL.ValidateStyleName.Message2">
+      <tuv xml:lang="en">
+        <seg>Please avoid {0} in the Style name</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Veuillez éviter {0} dans le nom de style</seg>
       </tuv>
     </tu>
     <tu tuid="EpubExportTypeDlg.btnexprtCancel">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;Close</seg>
       </tuv>
@@ -1006,6 +1573,7 @@
       </tuv>
     </tu>
     <tu tuid="EpubExportTypeDlg.btnexprtEpub2">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>Epub&amp;2</seg>
       </tuv>
@@ -1014,6 +1582,7 @@
       </tuv>
     </tu>
     <tu tuid="EpubExportTypeDlg.btnexprtEpub3">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>Epub&amp;3</seg>
       </tuv>
@@ -1022,6 +1591,7 @@
       </tuv>
     </tu>
     <tu tuid="EpubExportTypeDlg.btnexprtfolder">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;Folder</seg>
       </tuv>
@@ -1030,6 +1600,7 @@
       </tuv>
     </tu>
     <tu tuid="EpubValidateTypeDlg.btnBoth">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;Both</seg>
       </tuv>
@@ -1038,6 +1609,7 @@
       </tuv>
     </tu>
     <tu tuid="EpubValidateTypeDlg.btnNeither">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;Neither</seg>
       </tuv>
@@ -1046,6 +1618,7 @@
       </tuv>
     </tu>
     <tu tuid="EpubValidateTypeDlg.btnValidateEpub2">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>Epub&amp;2</seg>
       </tuv>
@@ -1054,6 +1627,7 @@
       </tuv>
     </tu>
     <tu tuid="EpubValidateTypeDlg.btnValidateEpub3">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>Epub&amp;3</seg>
       </tuv>
@@ -1069,12 +1643,29 @@
         <seg>L'image sélectionnée est trop grande. Veuillez sélectionner une image qui est plus petite que 1000 x 1000 pixels.</seg>
       </tuv>
     </tu>
+    <tu tuid="ExportThroughPathway.Dialog">
+      <tuv xml:lang="en">
+        <seg>Set Defaults</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Établir les valeurs par défaut</seg>
+      </tuv>
+    </tu>
     <tu tuid="ExportThroughPathway.ExportThroughPathway.btnBrowseSaveInFolder">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>...</seg>
       </tuv>
       <tuv xml:lang="fr">
         <seg>...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.ExportThroughPathway.txtSaveInFolder">
+      <tuv xml:lang="en">
+        <seg>C:\Users\brommerse\Documents\Publications\Nkonya\Scripture</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>C:\Users\brommerse\Documents\Publications\Nkonya\Scripture</seg>
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.ExportThroughPathwayLoad.Message">
@@ -1083,6 +1674,14 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Veuillez télécharger et installer une version de Pathway compatible avec votre logiciel</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.Form.Text">
+      <tuv xml:lang="en">
+        <seg>Set Defaults</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Établir les valeurs par défaut</seg>
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.LoadAvailFormat.Message">
@@ -1126,6 +1725,7 @@
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.btnBrowseColophon">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>...</seg>
       </tuv>
@@ -1173,12 +1773,76 @@
         <seg>&amp;OK</seg>
       </tuv>
     </tu>
+    <tu tuid="ExportThroughPathway.chkColophon">
+      <tuv xml:lang="en">
+        <seg>Copyright Infomation Page</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Page de copyright</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkConfiguredDictionary">
+      <tuv xml:lang="en">
+        <seg>Configured Dictionary</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Dictionnaire configué</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkCoverImage">
+      <tuv xml:lang="en">
+        <seg>Cover Image Page:</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Page de l'image de couverture :</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkCoverImageTitle">
+      <tuv xml:lang="en">
+        <seg>Include the book's title in the image</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Inclure le titre du livre dans l'image</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkGrammarSketch">
+      <tuv xml:lang="en">
+        <seg>Grammar Sketch</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Esquisse de grammaire</seg>
+      </tuv>
+    </tu>
     <tu tuid="ExportThroughPathway.chkHyphen">
       <tuv xml:lang="en">
         <seg>Enable Hyphenation</seg>
       </tuv>
       <tuv xml:lang="fr">
         <seg>Activer la coupure de mots</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkIP">
+      <tuv xml:lang="en">
+        <seg>I have complied with my organization's Intellectual Property (copyright) and Archiving policies.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>J'ai respecté les politiques de mon organisation sur la propriété intellectuelle (droit d'auteur) et l'archivage.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkOOReduceStyleNames">
+      <tuv xml:lang="en">
+        <seg>Replace styles with direct formatting in OpenOffice/LibreOffice</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Remplacer des styles avec des mises en forme directes d'OpenOffice/LibreOffice</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.chkReversalIndexes">
+      <tuv xml:lang="en">
+        <seg>Reversal Indexes</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Les index d'inversion</seg>
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.chkTOC">
@@ -1373,6 +2037,14 @@
         <seg>Coupure de mots</seg>
       </tuv>
     </tu>
+    <tu tuid="FontWarningDlg.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Font Warning Dialog</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Avertissement de police</seg>
+      </tuv>
+    </tu>
     <tu tuid="FontWarningDlg.btnCancel">
       <tuv xml:lang="en">
         <seg>&amp;Cancel</seg>
@@ -1382,6 +2054,7 @@
       </tuv>
     </tu>
     <tu tuid="FontWarningDlg.btn_OK">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;OK</seg>
       </tuv>
@@ -1438,6 +2111,30 @@
         <seg>Désolé. Un aperçu de cette feuille de style n'est pas disponible. Veuillez installer PrinceXML ou LibreOffice pour permettre l'aperçu.</seg>
       </tuv>
     </tu>
+    <tu tuid="PrintVia.LoadBackEnds.Message">
+      <tuv xml:lang="en">
+        <seg>Please Install the Plugin Backends</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Veuillez installer le Plugin Backends</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PrintVia.OkButtonClick.Message">
+      <tuv xml:lang="en">
+        <seg>Please select a folder for which you have creation permission</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Veuillez sélectionner un dossier pour lequel vous avez l'autorisation de création</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PrintVia.PrintViaLoad.Message">
+      <tuv xml:lang="en">
+        <seg>Please download and install a Pathway version compatible with your software</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Veuillez télécharger et installer une version de Pathway compatible avec votre logiciel</seg>
+      </tuv>
+    </tu>
     <tu tuid="SelectOrganizationDialog.btnCancel">
       <tuv xml:lang="en">
         <seg>&amp;Cancel</seg>
@@ -1467,7 +2164,15 @@
         <seg>O&amp;ther...</seg>
       </tuv>
       <tuv xml:lang="fr">
-        <seg>Au&amp;tres...</seg>
+        <seg>Au&amp;tre...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.lblInstructions">
+      <tuv xml:lang="en">
+        <seg>Select the organization you are representing, Pathway will automatically fill in copyright statements, etc. based on your selection.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Sélectionner l'organisation que vous représentez. Pathway complétera automatiquement les déclarations de droits d'auteur, etc. selon votre sélection.</seg>
       </tuv>
     </tu>
     <tu tuid="SelectOrganizationDialog.lblOrganization">
@@ -1476,6 +2181,38 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Mon o&amp;rganisation :</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.lblOther">
+      <tuv xml:lang="en">
+        <seg>If your organization is not on the above list, click the Other... button:</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Si votre organisation ne figure pas sur la liste ci-dessus, cliquer sur le bouton Autre... :</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SettingsValidator.CopySettingsFile.Message1">
+      <tuv xml:lang="en">
+        <seg>Settings file  "{0}".xml is invalid. Do you want to overwrite it with the setting file previously installed? \n (Specifically, "{1}" property has an invalid path.)</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Le fichier de paramètres "{0}".xml n'est pas valide. Voulez-vous le remplacer par le fichier de paramètres installé précédemment ?\n(Plus précisément, le chemin de la propriété "{1}" n'est pas valide.)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SettingsValidator.CopySettingsFile.Message2">
+      <tuv xml:lang="en">
+        <seg>Settings file  "{0}".xml is invalid. Do you want to overwrite it with the setting file previously installed? \n (Specifically, "{1}" property has an invalid value.)</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Le fichier de paramètres "{0}".xml n'est pas valide. Voulez-vous le remplacer par le fichier de paramètres installé précédemment ?\n(Plus précisément, la valeur de la propriété "{1}" n'est pas valide.)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Validate .epub File</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Valider le fichier .epub</seg>
       </tuv>
     </tu>
     <tu tuid="ValidationDialog.btnBrowse">
@@ -1494,7 +2231,40 @@
         <seg>Annuler</seg>
       </tuv>
     </tu>
+    <tu tuid="ValidationDialog.groupBox1">
+      <tuv xml:lang="en">
+        <seg>&amp;File to Validate:</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>&amp;Fichier à valider :</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.label1">
+      <tuv xml:lang="en">
+        <seg>Welcome to the .epub file validator. This program uses an open source utility called "epubcheck" to help find errors within the .epub file that could prevent it from opening or displaying properly in e-book readers.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Bienvenue sur le validateur de fichier .epub. Ce logiciel utilise un utilitaire open source appelé 'epubcheck' pour chercher des erreurs dans un fichier .epub qui pourraient l'empêcher d'ouvrir ou de s'afficher correctement dans des lecteurs de livrels (livres électroniques).</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.lblInstructions">
+      <tuv xml:lang="en">
+        <seg>Click the Validate button below to start the process.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Cliquer sur le bouton Valider ci-dessous pour démarrer le processus.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmResults.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Validation Results</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Résultats de validation</seg>
+      </tuv>
+    </tu>
     <tu tuid="frmResults.btnClose">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;Close</seg>
       </tuv>
@@ -1502,7 +2272,24 @@
         <seg>Fermer</seg>
       </tuv>
     </tu>
+    <tu tuid="frmResults.label1">
+      <tuv xml:lang="en">
+        <seg>Validation process complete.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Processus de validation complète.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="frmResults.label2">
+      <tuv xml:lang="en">
+        <seg>Following are the validation results. For more information about specific errors, please refer to the epubcheck utility documentation:</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Voici les résultats de validation. Pour plus d'informations sur les erreurs spécifiques, veuillez vous reporter à la documentation d'utilitaire epubcheck :</seg>
+      </tuv>
+    </tu>
     <tu tuid="frmResults.linkLabel1">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>http://code.google.com/p/epubcheck/wiki/Errors</seg>
       </tuv>
@@ -1532,14 +2319,6 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Configuration Tool</seg>
-      </tuv>
-    </tu>
-    <tu tuid="frmSplash.label2">
-      <tuv xml:lang="en">
-        <seg>(C) 2008 - 2015 SIL International</seg>
-      </tuv>
-      <tuv xml:lang="fr">
-        <seg>(C) 2008-2015 SIL International</seg>
       </tuv>
     </tu>
     <tu tuid="frmSplash.label3">
