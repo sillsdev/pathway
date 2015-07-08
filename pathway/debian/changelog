@@ -1,5 +1,7 @@
-pathway (1.13.1.4454-1) unstable; urgency=high
+pathway (1.13.2.4457-1) unstable; urgency=high
 
+  * pathway 1.13.2 hotfix
+    - update dependencies in debian/control for vivid
   * pathway 1.13.1 hotfix
     - remove registered trade mark from package description
   ﻿* pathway 1.13.0 sprint

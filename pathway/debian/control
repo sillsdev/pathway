@@ -8,7 +8,7 @@ Homepage: http://pathway.sil.org
 
 Package: pathway
 Architecture: any
-Depends: default-jre-headless, mono-runtime, libmono-winforms2.0-cil, mono-csharp-shell, lame, mono-gmcs, xchm
+Depends: default-jre-headless, mono-basic-sil, fonts-sil-charissil, libmono-system-core4.0-cil, libmono-system-xml-linq4.0-cil, libmono-winforms2.0-cil, lame, xchm
 Recommends: libreoffice-writer, prince, calibre, evince
 Description: Pathway prepares dictionary and Scripture data in open
  document (odf), e-book (epub 2.0), portable document (pdf), TeX and
