@@ -545,6 +545,14 @@
         <seg>Fichiers générés</seg>
       </tuv>
     </tu>
+    <tu tuid="ConfigurationTool.label9">
+      <tuv xml:lang="en">
+        <seg>Guideword Length</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Longueur de mot repère</seg>
+      </tuv>
+    </tu>
     <tu tuid="ConfigurationTool.lblApproved">
       <tuv xml:lang="en">
         <seg>Approved By\n\n</seg>
@@ -1563,6 +1571,14 @@
         <seg>Veuillez éviter {0} dans le nom de style</seg>
       </tuv>
     </tu>
+    <tu tuid="EpubExportTypeDlg.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Open Epub File Type</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Ouvrir un fichier de type Epub</seg>
+      </tuv>
+    </tu>
     <tu tuid="EpubExportTypeDlg.btnexprtCancel">
       <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
@@ -1597,6 +1613,14 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Dossier</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubValidateTypeDlg.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Open Validate Type</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Valider un fichier de type Epub</seg>
       </tuv>
     </tu>
     <tu tuid="EpubValidateTypeDlg.btnBoth">
