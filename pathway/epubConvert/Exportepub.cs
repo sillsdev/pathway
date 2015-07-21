@@ -2049,6 +2049,8 @@ namespace SIL.PublishingSolution
             bool looped = false;
             foreach (var href in hrefs)
             {
+				if (string.IsNullOrEmpty(href))
+					continue; // A glossary term with no glossary entry
                 // find where the target is for this reference -
                 // since the lists are sequential in the references file, we're using an index instead
                 // of a foreach loop (so the search continues in the same file the last href left off on).
