@@ -398,47 +398,56 @@
         <xsl:param name="space" select="0"/>
         <xsl:param name="indent" select="0"/>
         <xsl:param name="bullet" select="false()"/>
+        <xsl:param name="embedded" select="false()"/>
         <xsl:choose>
             <xsl:when test="local-name() = '' and normalize-space() != ''">
                 <xsl:call-template name="NormalText">
                     <xsl:with-param name="indent" select="$indent"/>
                     <xsl:with-param name="space" select="$space"/>
                     <xsl:with-param name="bullet" select="$bullet"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="@style = 'it' or @style = 'em' or @style='tl' or @style = 'dc' or @style = 'sls'">
                 <xsl:call-template name="Italic-char">
                     <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="@style = 'bd' or @style = 'bk' or @style = 'add' or @style = 'pn'">
                 <xsl:call-template name="Bold-char">
                     <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="@style = 'bdit'">
                 <xsl:call-template name="BoldItalic-char">
                     <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="@style = 'sc'">
                 <xsl:call-template name="SmallCap-char">
                     <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="@style = 'sup' or @style = 'ord'">
                 <xsl:call-template name="Sup-char">
                     <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="@style = 'nd'">
                 <xsl:call-template name="NameOfDiety">
                     <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="@style = 'w'">
                 <xsl:call-template name="GlossaryWord">
                     <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="@style = 'sp'">
@@ -447,6 +456,7 @@
             <xsl:when test="@style = 'wj'">
                 <xsl:call-template name="WordsOfJesus">
                     <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="@style = 'm' or @style = 'b' or @style = 'tr'">
@@ -458,6 +468,7 @@
             <xsl:when test="@style = 'no' or @style = 'qt'">
                 <xsl:call-template name="Normal-char">
                     <xsl:with-param name="space" select="$space"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="starts-with(@style, 'p') or @style = 'sig'">
@@ -469,11 +480,13 @@
             <xsl:when test="@style = 'q' or @style = 'q1' or @style = 'li' or @style = 'li1' or @style = 'qm' or @style = 'qm1'">
                 <xsl:call-template name="Quote-1">
                     <xsl:with-param name="indent" select="$indent"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="@style = 'q2' or @style = 'q3' or @style = 'q4' or starts-with(@style, 'li')">
                 <xsl:call-template name="Quote-2">
                     <xsl:with-param name="indent" select="$indent"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="@style = 'f' or @style = 'ef'">
@@ -514,6 +527,7 @@
                 <xsl:apply-templates select="following::node()[1]" mode="t">
                     <xsl:with-param name="space" select="$space"/>
                     <xsl:with-param name="indent" select="$indent"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:apply-templates>
             </xsl:otherwise>
         </xsl:choose>
@@ -523,6 +537,7 @@
         <xsl:param name="indent"/> <!-- 1=q (or q1), 2=q2 (or q3-4), 3=continue q, 4=continue q2 -->
         <xsl:param name="space"/>
         <xsl:param name="bullet"/>
+        <xsl:param name="embedded" select="false()"/>
         <xsl:if test="$indent = 1">
             <xsl:text disable-output-escaping="yes"><![CDATA[<PI>]]></xsl:text>
         </xsl:if>
@@ -539,10 +554,47 @@
             </xsl:if>
         </xsl:if>
         <xsl:call-template name="OutputText"/>
-        <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
-            <xsl:with-param name="space" select="1"/>
-            <xsl:with-param name="indent" select="$indent"/>
-        </xsl:apply-templates>
+        <xsl:variable name="precChar" select="substring(., string-length(.))"></xsl:variable>
+        <xsl:choose>
+            <xsl:when test="$embedded">
+                <xsl:apply-templates select="(child::node() | following-sibling::node())[1]" mode="t">
+                    <xsl:with-param name="space" select="$precChar != '&#x2018;' and $precChar != '&#x201c;'"/>
+                    <xsl:with-param name="indent" select="$indent"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
+                    <xsl:with-param name="space" select="$precChar != '&#x2018;' and $precChar != '&#x201c;'"/>
+                    <xsl:with-param name="indent" select="$indent"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
+                </xsl:apply-templates>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="EmbeddedText">
+        <xsl:param name="embedded"/>
+        <xsl:choose>
+            <xsl:when test="count(child::node()) &lt; 2">
+                <xsl:call-template name="OutputText"/>
+            </xsl:when>
+            <xsl:when test="child::node()[1]/@style">
+                <xsl:apply-templates select="child::node()[1]" mode="t">
+                    <xsl:with-param name="embedded" select="$embedded"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="child::node()[1]">
+                    <xsl:call-template name="OutputText"/>
+                </xsl:for-each>
+                <xsl:variable name="precChar" select="substring(child::node()[1], string-length(child::node()[1]))"/>
+                <xsl:apply-templates select="child::node()[2]" mode="t">
+                    <xsl:with-param name="space" select="$precChar != '&#x2018;' and $precChar != '&#x201c;'"/>
+                    <xsl:with-param name="embedded" select="true()"/>
+                </xsl:apply-templates>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template name="OutputText">
@@ -563,33 +615,38 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template name="Normal-char">
         <xsl:param name="space"/>
+        <xsl:param name="embedded"/>
         <xsl:if test="$space = 1">
             <xsl:text> </xsl:text>
         </xsl:if>
         <xsl:call-template name="OutputText"/>
         <xsl:apply-templates select="following::node()[1]" mode="t">
             <xsl:with-param name="space" select="1"/>
+            <xsl:with-param name="embedded" select="$embedded"/>
         </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template name="Italic-char">
         <xsl:param name="space"/>
+        <xsl:param name="embedded"/>
         <xsl:if test="$space = 1">
             <xsl:text> </xsl:text>
         </xsl:if>
         <xsl:text disable-output-escaping="yes"><![CDATA[<i>]]></xsl:text>
-        <xsl:call-template name="OutputText"/>
+        <xsl:call-template name="EmbeddedText"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[</i>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">
             <xsl:with-param name="space" select="1"/>
+            <xsl:with-param name="embedded" select="$embedded"/>
         </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template name="NameOfDiety">
         <xsl:param name="space"/>
+        <xsl:param name="embedded"/>
         <xsl:if test="$space = 1">
             <xsl:text> </xsl:text>
         </xsl:if>
@@ -598,24 +655,28 @@
         <xsl:text disable-output-escaping="yes"><![CDATA[</font>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">
             <xsl:with-param name="space" select="1"/>
+            <xsl:with-param name="embedded" select="$embedded"/>
         </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template name="WordsOfJesus">
         <xsl:param name="space"/>
+        <xsl:param name="embedded"/>
         <xsl:if test="$space = 1">
             <xsl:text> </xsl:text>
         </xsl:if>
         <xsl:text disable-output-escaping="yes"><![CDATA[<font color=red>]]></xsl:text>
-        <xsl:call-template name="OutputText"/>
+        <xsl:call-template name="EmbeddedText"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[</font>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">
             <xsl:with-param name="space" select="1"/>
+            <xsl:with-param name="embedded" select="$embedded"/>
         </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template name="GlossaryWord">
         <xsl:param name="space"/>
+        <xsl:param name="embedded"/>
         <xsl:if test="$space = 1">
             <xsl:text> </xsl:text>
         </xsl:if>
@@ -636,6 +697,7 @@
         </xsl:choose>
         <xsl:apply-templates select="following::node()[1]" mode="t">
             <xsl:with-param name="space" select="1"/>
+            <xsl:with-param name="embedded" select="$embedded"/>
         </xsl:apply-templates>
     </xsl:template>
 
@@ -667,45 +729,52 @@
     
     <xsl:template name="SmallCap-char">
         <xsl:param name="space"/>
+        <xsl:param name="embedded"/>
         <xsl:if test="$space = 1">
             <xsl:text> </xsl:text>
         </xsl:if>
         <xsl:text disable-output-escaping="yes"><![CDATA[<font size=-1>]]></xsl:text>
-        <xsl:call-template name="OutputText"/>
+        <xsl:call-template name="EmbeddedText"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[</font>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">
             <xsl:with-param name="space" select="1"/>
+            <xsl:with-param name="embedded" select="$embedded"/>
         </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template name="Bold-char">
         <xsl:param name="space"/>
+        <xsl:param name="embedded"/>
         <xsl:if test="$space = 1">
             <xsl:text> </xsl:text>
         </xsl:if>
         <xsl:text disable-output-escaping="yes"><![CDATA[<b>]]></xsl:text>
-        <xsl:call-template name="OutputText"/>
+        <xsl:call-template name="EmbeddedText"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[</b>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">
             <xsl:with-param name="space" select="1"/>
+            <xsl:with-param name="embedded" select="$embedded"/>
         </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template name="BoldItalic-char">
         <xsl:param name="space"/>
+        <xsl:param name="embedded"/>
         <xsl:if test="$space = 1">
             <xsl:text> </xsl:text>
         </xsl:if>
         <xsl:text disable-output-escaping="yes"><![CDATA[<b><i>]]></xsl:text>
-        <xsl:call-template name="OutputText"/>
+        <xsl:call-template name="EmbeddedText"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[</i></b>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">
             <xsl:with-param name="space" select="1"/>
+            <xsl:with-param name="embedded" select="$embedded"/>
         </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template name="Sup-char">
         <xsl:param name="space"/>
+        <xsl:param name="embedded"/>
         <xsl:if test="$space = 1">
             <xsl:text> </xsl:text>
         </xsl:if>
@@ -714,11 +783,13 @@
         <xsl:text disable-output-escaping="yes"><![CDATA[</sup>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">
             <xsl:with-param name="space" select="1"/>
+            <xsl:with-param name="embedded" select="$embedded"/>
         </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template name="Quote-1">
         <xsl:param name="indent"/>
+        <xsl:param name="embedded"/>
         <xsl:if test="not(contains(preceding-sibling::verse[1]/@number | preceding::verse[1]/@number, $bridgePunc))">
             <xsl:text disable-output-escaping="yes"><![CDATA[<CI>]]></xsl:text>
         </xsl:if>
@@ -727,12 +798,14 @@
                 <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
                     <xsl:with-param name="indent" select="3"/>
                     <xsl:with-param name="bullet" select="contains(@style, 'li')"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
                     <xsl:with-param name="indent" select="1"/>
                     <xsl:with-param name="bullet" select="contains(@style, 'li')"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:apply-templates>
             </xsl:otherwise>
         </xsl:choose>
@@ -740,6 +813,7 @@
     
     <xsl:template name="Quote-2">
         <xsl:param name="indent"/>
+        <xsl:param name="embedded"/>
         <xsl:if test="not(contains(preceding-sibling::verse[1]/@number | preceding::verse[1]/@number, $bridgePunc))">
             <xsl:text disable-output-escaping="yes"><![CDATA[<CI>]]></xsl:text>
         </xsl:if>
@@ -748,12 +822,14 @@
                 <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
                     <xsl:with-param name="indent" select="4"/>
                     <xsl:with-param name="bullet" select="contains(@style, 'li')"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t">
                     <xsl:with-param name="indent" select="2"/>
                     <xsl:with-param name="bullet" select="contains(@style, 'li')"/>
+                    <xsl:with-param name="embedded" select="$embedded"/>
                 </xsl:apply-templates>
             </xsl:otherwise>
         </xsl:choose>
@@ -778,37 +854,16 @@
                         <xsl:text> </xsl:text>
                     </xsl:if>
                     <xsl:text disable-output-escaping="yes"><![CDATA[<i>]]></xsl:text>
-                    <xsl:value-of select="text()"/>
+                    <xsl:call-template name="EmbeddedText"/>
                     <xsl:text disable-output-escaping="yes"><![CDATA[</i>]]></xsl:text>
+                    <xsl:if test="starts-with(following-sibling::node()[1], ' ') or substring(., string-length(.)) = ' '">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:for-each select="node()">
-                        <xsl:choose>
-                            <xsl:when test="@style = 'it' or @style = 'fq'">
-                                <xsl:variable name="precChar" select="substring(preceding::node()[1], string-length(preceding::node()[1]))"/>
-                                <!-- check that preceding character was not an open single quote (U+2018) or an open double quote (U+201C) -->
-                                <xsl:if test="normalize-space(preceding-sibling::*[@style !='fr']/text()) != '' and $precChar != '&#x2018;' and $precChar != '&#x201c;'">
-                                    <xsl:text> </xsl:text>
-                                </xsl:if>
-                                <xsl:text disable-output-escaping="yes"><![CDATA[<i>]]></xsl:text>
-                                <xsl:value-of select="text()"/>
-                                <xsl:text disable-output-escaping="yes"><![CDATA[</i>]]></xsl:text>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <!-- the next text should not begin with a closing single quote (U+2019) or a closing double quote (U+201D) -->
-                                <xsl:if test="normalize-space(preceding-sibling::*[@style != 'fr']/text()) != '' and not(starts-with(.,'&#x2019;')) and not(starts-with(.,'&#x201d;'))">
-                                    <xsl:text> </xsl:text>
-                                </xsl:if>
-                                <xsl:call-template name="OutputText"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:for-each>
-                    <xsl:if test="count(node()) = 0">
-                        <xsl:if test="normalize-space(preceding-sibling::*[@style != 'fr']/text()) != ''">
-                            <xsl:text> </xsl:text>
-                        </xsl:if>
-                        <xsl:call-template name="OutputText"/>
-                    </xsl:if>
+                    <xsl:call-template name="EmbeddedText">
+                        <xsl:with-param name="embedded" select="true()"/>
+                    </xsl:call-template>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
