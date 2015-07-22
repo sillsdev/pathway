@@ -5,7 +5,7 @@
     #
     # Author:      Greg Trihus <greg_trihus@sil.org>
     #
-    # Created:     2013/07/27
+    # Created:     2015/07/21
     # Copyright:   (c) 2013 SIL International
     # Licence:     <LPGL>
     ################################################################-->
@@ -406,12 +406,12 @@
                     <xsl:with-param name="bullet" select="$bullet"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="@style = 'it' or @style='tl'">
+            <xsl:when test="@style = 'it' or @style = 'em' or @style='tl' or @style = 'dc' or @style = 'sls'">
                 <xsl:call-template name="Italic-char">
                     <xsl:with-param name="space" select="$space"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="@style = 'bd' or @style = 'em'">
+            <xsl:when test="@style = 'bd' or @style = 'bk' or @style = 'add' or @style = 'pn'">
                 <xsl:call-template name="Bold-char">
                     <xsl:with-param name="space" select="$space"/>
                 </xsl:call-template>
@@ -426,7 +426,7 @@
                     <xsl:with-param name="space" select="$space"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="@style = 'sup'">
+            <xsl:when test="@style = 'sup' or @style = 'ord'">
                 <xsl:call-template name="Sup-char">
                     <xsl:with-param name="space" select="$space"/>
                 </xsl:call-template>
@@ -455,6 +455,11 @@
                 </xsl:if>
                 <xsl:apply-templates select="(child::node() | following::node())[1]" mode="t"/>
             </xsl:when>
+            <xsl:when test="@style = 'no' or @style = 'qt'">
+                <xsl:call-template name="Normal-char">
+                    <xsl:with-param name="space" select="$space"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:when test="starts-with(@style, 'p') or @style = 'sig'">
                 <xsl:if test="not(contains(preceding-sibling::verse[1]/@number | preceding::verse[1]/@number, $bridgePunc))">
                     <xsl:text disable-output-escaping="yes"><![CDATA[<CM>]]></xsl:text>
@@ -466,7 +471,7 @@
                     <xsl:with-param name="indent" select="$indent"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="starts-with(@style, 'q') or starts-with(@style, 'li')">
+            <xsl:when test="@style = 'q2' or @style = 'q3' or @style = 'q4' or starts-with(@style, 'li')">
                 <xsl:call-template name="Quote-2">
                     <xsl:with-param name="indent" select="$indent"/>
                 </xsl:call-template>
@@ -557,6 +562,17 @@
                 <xsl:value-of select="normalize-space(translate(., '&#xa78c;*', $apos))"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="Normal-char">
+        <xsl:param name="space"/>
+        <xsl:if test="$space = 1">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:call-template name="OutputText"/>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="1"/>
+        </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template name="Italic-char">

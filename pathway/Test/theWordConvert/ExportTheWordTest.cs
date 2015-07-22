@@ -534,7 +534,49 @@ namespace Test.theWordConvert
             TestDataCase("GEN", "001GENheg.usx", 23, "Net bihatang na kon, atuling nga tek noan,<CI><PI>\u201cEli le! Ni halas-sam tom nol au!<CI><PI2>Un seen na banansila el auk seen ni kon.<CI>Nol un sisin na kon banansila el auk sising ngia.<CI>Undeng un daid deng biklobe lia, tiata auk ngali un ngala ka noan \u2018bihata\u2019.\u201d<RF q=+>Se dais Ibranin nam, biklobe li noken \u2018<i>ish</i>\u2019. Nol bihata li \u2018<i>isha</i>\u2019. Tiata se nia, oen kuti dais noan \u201c<i>isha</i> (bihata) daid deng <i>ish</i> (biklobe).\u201d<Rf><CI>");
         }
 
-        [Test]
+		[Test]
+		public void EmbeddedDcMarkerTest()
+		{
+			TestDataCase("MAT", "TnmMAT.usx", 2, "<i>Deuterocanonical addition</i>");
+		}
+
+		[Test]
+		public void EmbeddedOrdMarkerTest()
+		{
+			TestDataCase("MAT", "TnmMAT.usx", 3, "The 1 <sup>st</sup> first item. The 2 <sup>nd</sup> second item.");
+		}
+
+		[Test]
+		public void EmbeddedPnMarkerTest()
+		{
+			TestDataCase("MAT", "TnmMAT.usx", 4, "<b>Greg</b> was here.<CI>");
+		}
+
+		[Test]
+		public void EmbeddedQtLitMarkerTest()
+		{
+			TestDataCase("MAT", "TnmMAT.usx", 5, "<PI>Roses are red<CI>Violets are blue<CI><PI2>• Selah<CM>");
+		}
+
+		[Test]
+		public void EmbeddedSlsMarkerTest()
+		{
+			TestDataCase("MAT", "TnmMAT.usx", 7, "<i>E plurabus unim</i><CM>");
+		}
+
+		[Test]
+		public void EmbeddedTlMarkerTest()
+		{
+			TestDataCase("MAT", "TnmMAT.usx", 8, "<i>kwa fair</i>");
+		}
+
+		[Test]
+		public void EmbeddedEmBdItBditNoScOptBreakMarkerTest()
+		{
+			TestDataCase("MAT", "TnmMAT.usx", 10, "<i>I insist .</i> <b>Do it now.</b> <i>If not, there will be consequences.</i> <b><i>Don't test me.</i></b> or you will find out what happens. <font size=-1>you have been warned.</font> 1 Cor. 3:17 So we say");
+		}
+
+		[Test]
         public void MultiWordBookNameTest()
         {
             var bookNames = "file://" + FileInput("hegBookNames.xml");
