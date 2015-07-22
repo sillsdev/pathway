@@ -476,7 +476,7 @@
                     <xsl:with-param name="indent" select="$indent"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="@style = 'f'">
+            <xsl:when test="@style = 'f' or @style = 'ef'">
                 <xsl:call-template name="Footnotes">
                     <xsl:with-param name="space" select="$space"/>
                     <xsl:with-param name="indent" select="$indent"/>
