@@ -167,6 +167,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this, null);
+			this.l10NSharpExtender1.SetLocalizationPriority(this, L10NSharp.LocalizationPriority.High);
+			this.l10NSharpExtender1.SetLocalizingId(this, "SelectOrganizationDialog.WindowTitle");
             this.Name = "SelectOrganizationDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Your Organization";
