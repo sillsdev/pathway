@@ -107,10 +107,6 @@
             this.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lblMessage.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.lblMessage.Location = new System.Drawing.Point(70, 19);
-            this.l10NSharpExtender1.SetLocalizableToolTip(this.lblMessage, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this.lblMessage, null);
-            this.l10NSharpExtender1.SetLocalizationPriority(this.lblMessage, L10NSharp.LocalizationPriority.High);
-            this.l10NSharpExtender1.SetLocalizingId(this.lblMessage, "EpubExportTypeDlg.lblMessage");
             this.lblMessage.Name = "lblMessage";            
             this.lblMessage.ReadOnly = true;
             this.lblMessage.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;

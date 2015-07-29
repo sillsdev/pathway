@@ -36,6 +36,7 @@ namespace SIL.PublishingSolution
             this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblDetails = new System.Windows.Forms.Label();
+			((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
             this.SuspendLayout();
 
             // l10NSharpExtender1

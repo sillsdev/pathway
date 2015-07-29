@@ -42,7 +42,7 @@ namespace epubConvert
             messageBuilder1.Append(Environment.NewLine);
 
             lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Regular);
-            lblMessage.SelectedText = messageBuilder.ToString();
+			lblMessage.SelectedText = LocalizationManager.GetString("EpubExportTypeDlg.EpubFileType.Message", messageBuilder.ToString(), "");
             lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Bold);
             lblMessage.SelectedText = " Folder ";
             lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Regular);
