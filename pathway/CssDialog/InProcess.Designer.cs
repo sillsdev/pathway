@@ -73,6 +73,7 @@ namespace SIL.PublishingSolution
 
             this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
             this.l10NSharpExtender1.SetLocalizationComment(this, null);
+			this.l10NSharpExtender1.SetLocalizationPriority(this, L10NSharp.LocalizationPriority.High);
             this.l10NSharpExtender1.SetLocalizingId(this, "InProcess.WindowTitle");
 
             this.Name = "InProcess";
