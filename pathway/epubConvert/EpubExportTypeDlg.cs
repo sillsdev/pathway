@@ -64,7 +64,7 @@ namespace epubConvert
             }
             else
             {
-                var msg = LocalizationManager.GetString("EpubExportTypeDlg.ValidateAndDisplay.Message", "\r\nDo you want to Validate ePub file", "");
+                var msg = LocalizationManager.GetString("EpubExportTypeDlg.ValidateAndDisplay.Message", "\r\nDo you want to Validate ePub file?", "");
                 if (MessageBox.Show(Resources.ExportCallingEpubValidator + msg,
                     Resources.ExportComplete, MessageBoxButtons.YesNo,
                     MessageBoxIcon.Information) == DialogResult.Yes)

@@ -392,7 +392,7 @@ namespace SIL.PublishingSolution
             bool isOutputDilalogNeeded = true;
             if (!Common.Testing)
             {
-                if (MessageBox.Show(LocalizationManager.GetString("Exportepub.ValidateMsgBox", Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files"), Resources.ExportComplete, MessageBoxButtons.YesNo,
+                if (MessageBox.Show(LocalizationManager.GetString("Exportepub.ValidateMsgBox", Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files?"), Resources.ExportComplete, MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     ValidateResult(outputPathWithFileName);     // Epub2 ExportType
