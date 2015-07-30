@@ -27,6 +27,7 @@ using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 using L10NSharp;
+using SilTools;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -305,15 +306,16 @@ namespace SIL.PublishingSolution
         protected static void ReportFailure(Exception ex)
         {
             if (Common.Testing) return;
+			string caption = LocalizationManager.GetString("ExportTheWord.ReportFailure.Caption", "theWord Export", "");
             if (ex.Message.Contains("BookNames"))
             {
                 var msg = LocalizationManager.GetString("ExportTheWord.ReportFailure.Message", "Please run the References basic check.", "");
-                MessageBox.Show(msg, "theWord Export", MessageBoxButtons.OK,
+				Utils.MsgBox(msg, caption, MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show(ex.Message, "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Utils.MsgBox(ex.Message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -355,8 +357,9 @@ namespace SIL.PublishingSolution
             {
                 if (!Common.Testing)
                 {
+					string caption = LocalizationManager.GetString("ExportTheWord.ReportResults.Caption", "theWord Export", "");
                     var msg = LocalizationManager.GetString("ExportTheWord.ReportResults.Message", "Failed Exporting TheWord Process.", "");
-                    MessageBox.Show(msg, "theWord Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Utils.MsgBox(msg, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 success = false;
             }
@@ -370,7 +373,8 @@ namespace SIL.PublishingSolution
             var msgFormat = LocalizationManager.GetString("ExportTheWord.ReportWhenTheWordNotInstalled.Message", 
                 "Do you want to open the folder with the results?\n\n\u25CF Click Yes.\n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n", "");
             var msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
-            var dialogResult = !Common.Testing ? MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNo,
+			string caption = LocalizationManager.GetString("ExportTheWord.ReportWhenTheWordNotInstalled.Caption", "theWord Export", "");
+			var dialogResult = !Common.Testing ? Utils.MsgBox(msg, caption, MessageBoxButtons.YesNo,
                 MessageBoxIcon.Information) : DialogResult.Cancel;
 
             if (dialogResult == DialogResult.Yes)
@@ -389,7 +393,8 @@ namespace SIL.PublishingSolution
             if (!Common.Testing)
             {
                 var msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
-                dialogResult = MessageBox.Show(msg, "theWord Export", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+				string caption = LocalizationManager.GetString("ExportTheWord.Title", "theWord Export");
+				dialogResult = Utils.MsgBox(msg, caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
             }
             else
             {

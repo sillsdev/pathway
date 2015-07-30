@@ -23,6 +23,7 @@ using System.IO;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
 using L10NSharp;
+using SilTools;
 using SIL.Tool;
 
 
@@ -114,7 +115,8 @@ namespace SIL.PublishingSolution
             catch (Exception ex)
             {
                 var msg = LocalizationManager.GetString("ExportDictionaryForMIDs.ExportClick.Message", "{0} Display partial results?", "");
-                var result = MessageBox.Show(string.Format(msg, ex.Message), "Report: Failure", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+				string caption = LocalizationManager.GetString("ExportDictionaryForMIDs.ExportClick.Caption", "Report: Failure", "");
+				var result = Utils.MsgBox(string.Format(msg, ex.Message), caption, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (result == DialogResult.Yes)
                 {
                     DisplayOutput(projInfo);

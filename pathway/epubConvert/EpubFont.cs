@@ -28,6 +28,7 @@ using System.Xml;
 using SIL.PublishingSolution;
 using SIL.Tool;
 using epubConvert.Properties;
+using SilTools;
 
 #endregion using
 
@@ -830,7 +831,7 @@ namespace epubConvert
                     // No SIL fonts found (returns a DialogResult.Abort):
                     // tell the user there are no SIL fonts installed, and allow them to Cancel
                     // and install the fonts now
-                    if (MessageBox.Show(Resources.NoSILFontsMessage, Resources.NoSILFontsTitle,
+					if (Utils.MsgBox(Resources.NoSILFontsMessage, Resources.NoSILFontsTitle,
                                          MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
                         == DialogResult.Cancel)
                     {

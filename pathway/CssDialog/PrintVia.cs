@@ -22,6 +22,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using L10NSharp;
+using SilTools;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -219,8 +220,8 @@ namespace SIL.PublishingSolution
             if (!Common.isRightFieldworksVersion())
             {
                 var text = LocalizationManager.GetString("PrintVia.PrintViaLoad.Message", "Please download and install a Pathway version compatible with your software", "");
-                const string caption = "Incompatible Pathway Version";
-                MessageBox.Show(text, caption, MessageBoxButtons.OK,
+				string caption = LocalizationManager.GetString("PrintVia.PrintViaLoad.Caption", "Incompatible Pathway Version", "");
+				Utils.MsgBox(text, caption, MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
                 DialogResult = DialogResult.Cancel;
                 Close();
@@ -396,7 +397,8 @@ namespace SIL.PublishingSolution
             else
             {
                 var message = LocalizationManager.GetString("PrintVia.LoadBackEnds.Message", "Please Install the Plugin Backends", "");
-                DialogResult dialogResult = MessageBox.Show(message, "Pathway", MessageBoxButtons.AbortRetryIgnore,
+				string caption = LocalizationManager.GetString("PrintVia.LoadBackEnds.projectname", "Pathway", "");
+				DialogResult dialogResult = Utils.MsgBox(message, caption, MessageBoxButtons.AbortRetryIgnore,
                                 MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 if (dialogResult == DialogResult.Ignore)
                     return;
@@ -431,8 +433,8 @@ namespace SIL.PublishingSolution
             catch (Exception)
             {
                 var text = LocalizationManager.GetString("PrintVia.OkButtonClick.Message", "Please select a folder for which you have creation permission", "");
-                const string caption = "Pathway";
-                MessageBox.Show(text, caption, MessageBoxButtons.OK,
+				string caption = LocalizationManager.GetString("PrintVia.OkButtonClick.projectname", "Pathway", "");
+				Utils.MsgBox(text, caption, MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
                 return;
             }

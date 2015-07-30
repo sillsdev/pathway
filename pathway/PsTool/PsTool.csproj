@@ -245,6 +245,7 @@
     </Compile>
     <Compile Include="HashUtilities.cs" />
     <Compile Include="MergeCss.cs" />
+    <Compile Include="MessageBoxExtender.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="PathPart.cs" />
     <Compile Include="PathwayPath.cs" />
@@ -271,6 +272,7 @@
     <Compile Include="StyleCategories.Designer.cs">
       <DependentUpon>StyleCategories.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils.cs" />
     <Compile Include="VerboseClass.cs" />
     <Compile Include="XeLaTexInstallation.cs" />
     <Compile Include="FileData.cs" />

@@ -21,6 +21,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using L10NSharp;
+using SilTools;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -220,7 +221,8 @@ namespace SIL.PublishingSolution
             DialogResult result;
             if (!Common.Testing)
             {
-                result = MessageBox.Show(msg, "Information",
+				string caption = LocalizationManager.GetString("CopySettingsFile.MessageBoxCaption.Caption", "Information", "");
+				result = Utils.MsgBox(msg, caption,
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
             else

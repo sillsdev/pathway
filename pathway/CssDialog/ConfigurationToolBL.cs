@@ -31,6 +31,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using L10NSharp;
+using SilTools;
 using SIL.Tool;
 
 
@@ -153,7 +154,6 @@ namespace SIL.PublishingSolution
 		#region Constructor
 		public ConfigurationToolBL()
 		{
-
 			standardSize["595x842"] = "A4";
 			standardSize["420x595"] = "A5";
 			standardSize["499x709"] = "B5";
@@ -183,6 +183,7 @@ namespace SIL.PublishingSolution
 			pageDict.Add("@page-bottom-left", "Bottom Left Margin");
 			pageDict.Add("@page-bottom-center", "Bottom Center");
 
+			_caption = LocalizationManager.GetString("ConfigurationToolBL.MessageBoxCaption.projectname", "Pathway Configuration Tool", "");
 		}
 		#endregion
 
@@ -888,7 +889,8 @@ namespace SIL.PublishingSolution
 					var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.NoDuplicateStyleName.Message",
 						"Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'", "");
 					confirmationStringMessage = string.Format(confirmationStringMessage, ex.Message);
-					MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+					var caption = LocalizationManager.GetString("ConfigurationToolBL.MessageBoxCaption.Caption", _caption, "");
+					Utils.MsgBox(confirmationStringMessage, caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
 									MessageBoxDefaultButton.Button1);
 				}
 			}
@@ -2159,7 +2161,7 @@ namespace SIL.PublishingSolution
 			}
 			if (validateStringMessage != string.Empty)
 			{
-				MessageBox.Show(validateStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Utils.MsgBox(validateStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				valid = false;
 			}
 			return valid;
@@ -2176,7 +2178,7 @@ namespace SIL.PublishingSolution
 				{
 					var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.NoDuplicateStyleName.Message", "Stylesheet Name [{0}] already exists", "");
 					confirmationStringMessage = string.Format(confirmationStringMessage, cTool.TxtName.Text);
-					MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Utils.MsgBox(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					result = false;
 				}
 				cTool._previousTxtName = cTool.TxtName.Text;
@@ -2528,7 +2530,7 @@ namespace SIL.PublishingSolution
 			if (PreviousStyleName.Length > 50)
 			{
 				var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.CopyStyle.Message", "Names of styles should not be greater than 50 characters.", "");
-				MessageBox.Show(confirmationStringMessage, Caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				Utils.MsgBox(confirmationStringMessage, Caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
 			var currentDescription = "Based on " + currentApprovedBy + " stylesheet " + StyleName;
@@ -3279,7 +3281,7 @@ namespace SIL.PublishingSolution
 					if (height != 20 || width != 20)
 					{
 						var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.BrowseButton.Message", "Please choose the icon with 20 x 20 px.", "");
-						MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+						Utils.MsgBox(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 						return;
 					}
 					string userPath = (Param.Value["UserSheetPath"]);
@@ -3540,7 +3542,7 @@ namespace SIL.PublishingSolution
 						if (!success)
 						{
 							var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.CreatePreviewFile.Message", "Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.", "");
-							MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+							Utils.MsgBox(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
 						}
 
 						PreviewFileName1 = Common.PathCombine(stylenamePath, "PreviewMessage.jpg");
@@ -3957,7 +3959,7 @@ namespace SIL.PublishingSolution
 					{
 						var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.NameValidate.Message", "Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'", "");
 						confirmationStringMessage = String.Format(confirmationStringMessage, errMsg);
-						MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+						Utils.MsgBox(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
 					}
 					AddNew(cTool.TxtName.Text);
 					EnableToolStripButtons(true);
@@ -4255,7 +4257,7 @@ namespace SIL.PublishingSolution
 				catch (Exception ex)
 				{
 
-					MessageBox.Show(ex.Message, _caption);
+					Utils.MsgBox(ex.Message, _caption);
 				}
 			}
 		}
@@ -4494,7 +4496,7 @@ namespace SIL.PublishingSolution
 			confirmationStringMessage = string.Format(confirmationStringMessage, name);
 			if (!cTool._fromNunit)
 			{
-				DialogResult result = MessageBox.Show(confirmationStringMessage, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
+				DialogResult result = Utils.MsgBox(confirmationStringMessage, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
 													  MessageBoxDefaultButton.Button2);
 				if (result != DialogResult.OK) return;
 			}
@@ -4529,13 +4531,13 @@ namespace SIL.PublishingSolution
 					else
 					{
 						confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabDeleteClick.Message2", "Factory style sheet can not be deleted", "");
-						MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+						Utils.MsgBox(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					}
 				}
 				else
 				{
 					confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabDeleteClick.Message3", "Please select a style sheet to delete", "");
-					MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					Utils.MsgBox(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
 			}
 			catch
@@ -4645,7 +4647,7 @@ namespace SIL.PublishingSolution
 				const string caption = "Reset Settings";
 				if (!cTool._fromNunit)
 				{
-					DialogResult result = MessageBox.Show(confirmationStringMessage, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+					DialogResult result = Utils.MsgBox(confirmationStringMessage, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
 														  MessageBoxDefaultButton.Button2);
 					if (result == DialogResult.No) return;
 				}
@@ -4663,7 +4665,7 @@ namespace SIL.PublishingSolution
 					"Settings files are reset successfully", "");
 			}
 			catch { }
-			MessageBox.Show(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+			Utils.MsgBox(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		public void ShowPreview(int page)

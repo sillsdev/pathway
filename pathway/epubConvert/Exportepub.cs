@@ -47,6 +47,7 @@ using epubConvert;
 using epubConvert.Properties;
 using epubValidator;
 using L10NSharp;
+using SilTools;
 using SIL.Tool;
 
 
@@ -392,7 +393,8 @@ namespace SIL.PublishingSolution
             bool isOutputDilalogNeeded = true;
             if (!Common.Testing)
             {
-                if (MessageBox.Show(LocalizationManager.GetString("Exportepub.ValidateMsgBox", Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files?"), Resources.ExportComplete, MessageBoxButtons.YesNo,
+				string caption = LocalizationManager.GetString("EpubExportTypeDlg.ValidateAndDisplay.Caption", "Export Complete", "");
+				if (Utils.MsgBox(LocalizationManager.GetString("Exportepub.ValidateMsgBox", Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files?"), caption, MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     ValidateResult(outputPathWithFileName);     // Epub2 ExportType

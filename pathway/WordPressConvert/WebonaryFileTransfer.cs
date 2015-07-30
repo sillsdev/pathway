@@ -26,6 +26,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using SilTools;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -221,7 +222,7 @@ namespace SIL.PublishingSolution
                 {
                     message = "Error getting response : Connection failed. Please retry.";
                 }
-                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				Utils.MsgBox(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             catch (Exception ex)
@@ -628,7 +629,7 @@ namespace SIL.PublishingSolution
                 {
                     message = "FTP Username and Password are invalid, Please verify in the configuration tool in web property tab.";
                 }
-                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				Utils.MsgBox(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             catch (Exception ex)
