@@ -4647,7 +4647,7 @@ namespace SIL.Tool
 	    public static void InitializeOtherProjects()
 	    {
 		    string pathwayDirectory = PathwayPath.GetPathwayDir();
-		    DirectoryInfo directoryInfo = new DirectoryInfo(pathwayDirectory);
+			if (pathwayDirectory == null) return;
 
 		    foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$")))
 		    {
