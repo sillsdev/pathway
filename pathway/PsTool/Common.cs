@@ -4619,21 +4619,23 @@ namespace SIL.Tool
 
 	    public static void SetupLocalization()
 	    {
-		    string[] namespacebeginnings = GetnamespacestoLocalize();
-		    Assembly assembly = Assembly.GetExecutingAssembly();
-		    FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-		    var companyName = fvi.CompanyName;
-		    var productName = fvi.ProductName;
-		    var productVersion = fvi.ProductVersion;
-
-		    //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
-		    var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-		    string installedLocalizationsFolder = InstalledLocalizations();
-		    var desiredUiLangId = GetLocalizationSettings();
-		    if (desiredUiLangId == string.Empty)
-			    desiredUiLangId = "en";
 		    if (!Testing)
 		    {
+			    var namespacebeginnings = GetnamespacestoLocalize();
+			    if (namespacebeginnings == null) return;
+			    Assembly assembly = Assembly.GetExecutingAssembly();
+			    FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+			    var companyName = fvi.CompanyName;
+			    var productName = fvi.ProductName;
+			    var productVersion = fvi.ProductVersion;
+
+			    //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
+			    var targetTmxFilePath = Path.Combine(kCompany, kProduct);
+			    string installedLocalizationsFolder = InstalledLocalizations();
+			    var desiredUiLangId = GetLocalizationSettings();
+			    if (desiredUiLangId == string.Empty)
+				    desiredUiLangId = "en";
+
 
 			    L10NMngr = LocalizationManager.Create(desiredUiLangId, productName, productName, productVersion,
 				    installedLocalizationsFolder, targetTmxFilePath, null, IssuesEmailAddress, namespacebeginnings);
@@ -4676,10 +4678,10 @@ namespace SIL.Tool
 	    public static string[] GetnamespacestoLocalize()
 	    {
 		    var namespacestoLocalize = new List<string>();
-		    string pathwayDirectory = PathwayPath.GetPathwayDir();
-		    DirectoryInfo directoryInfo = new DirectoryInfo(pathwayDirectory);
-
-		    foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$")))
+		    var pathwayDirectory = PathwayPath.GetPathwayDir();
+		    if (pathwayDirectory == null) return null;
+		    foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$"))
+			    )
 		    {
 			    var fileInfo = new FileInfo(file);
 			    if ((fileInfo.Name == "PsTool.dll") || (fileInfo.Name.Contains("Convert")) ||
