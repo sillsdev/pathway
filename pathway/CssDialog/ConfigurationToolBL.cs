@@ -1516,7 +1516,8 @@ namespace SIL.PublishingSolution
 			{
 				LoadData();
 			}
-			cTool.DdlTocLevel.Items.Clear();
+
+			ClearDropdownListItems();
 			Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulateFeatureSheet");
 			// populate the font drop-down if needed
 			if (cTool.DdlDefaultFont.Items.Count == 0)
@@ -1552,6 +1553,30 @@ namespace SIL.PublishingSolution
 			catch
 			{
 			}
+		}
+
+		private void ClearDropdownListItems()
+		{
+			cTool.DdlPagePageSize.Items.Clear();
+			cTool.DdlPageColumn.Items.Clear();
+			cTool.DdlLeading.Items.Clear();
+			cTool.DdlFontSize.Items.Clear();
+			cTool.DdlRunningHead.Items.Clear();
+			cTool.DdlPageNumber.Items.Clear();
+			cTool.DdlRules.Items.Clear();
+			cTool.DdlPicture.Items.Clear();
+			cTool.DdlSense.Items.Clear();
+			cTool.DdlJustified.Items.Clear();
+			cTool.DdlVerticalJustify.Items.Clear();
+			cTool.DdlFiles.Items.Clear();
+			cTool.DdlFileProduceDict.Items.Clear();
+			cTool.DdlRedLetter.Items.Clear();
+			cTool.DdlChapterNumbers.Items.Clear();
+			cTool.DdlReferences.Items.Clear();
+			cTool.DdlDefaultAlignment.Items.Clear();
+			cTool.DdlMissingFont.Items.Clear();
+			cTool.DdlNonSILFont.Items.Clear();
+			cTool.DdlTocLevel.Items.Clear();
 		}
 
 		private void PopulateFeatureItemsInDropDownctrl(string task, TreeNode ctn)
