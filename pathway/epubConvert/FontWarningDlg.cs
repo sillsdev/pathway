@@ -93,7 +93,7 @@ namespace epubConvert
         /// </summary>
         public FontWarningDlg()
         {
-            Common.SetupLocalization("epubConvert");
+	        Common.SetupLocalization();
             InitializeComponent();
         }
         

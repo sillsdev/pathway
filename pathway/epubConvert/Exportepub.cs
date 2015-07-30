@@ -128,7 +128,7 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
-            Common.SetupLocalization("SIL.PublishingSolution");
+	        Common.SetupLocalization();
             if (projInfo == null)
                 return false;
             const bool success = true;

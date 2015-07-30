@@ -58,10 +58,10 @@ namespace SIL.PublishingSolution
         public ConfigurationTool()
         {
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
-            Common.SetupLocalization("SIL.PublishingSolution");
+			Common.InitializeOtherProjects();
+			Common.SetupLocalization();
             InitializeComponent();
             SetupUILanguageMenu();
-
             if (Common.IsUnixOS())
             {
                 ddlPagePageSize.Width = 200;
@@ -102,7 +102,6 @@ namespace SIL.PublishingSolution
                 "More...", "Last item in menu of UI languages"));
             menu.Click += ((a, b) =>
             {
-                InitializeOtherProjects();
                 ShowL10NsharpDlg();
                 //LocalizationManager.ShowLocalizationDialogBox(this);
                 SetupUILanguageMenu();
@@ -113,37 +112,7 @@ namespace SIL.PublishingSolution
         public static void ShowL10NsharpDlg()
         {
             Common.L10NMngr.ShowLocalizationDialogBox(false);
-        }
-
-        private static void InitializeOtherProjects()
-        {
-            using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry("epubConvert.dll")))
-            {
-
-                var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
-
-                foreach (
-                    var stype in
-                        sAssembly.GetTypes()
-                            .Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
-                {
-                    sAssembly.CreateInstance(stype.FullName);
-                }
-            }
-            using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry("epubValidator.exe")))
-            {
-                var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
-                foreach (
-                    var stype in
-                        sAssembly.GetTypes()
-                            .Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
-                {
-                    sAssembly.CreateInstance(stype.FullName);
-                }
-
-            }
-            GC.Collect();
-        }
+		}       
 
         #endregion
 

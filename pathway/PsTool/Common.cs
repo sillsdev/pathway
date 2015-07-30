@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Security.Permissions;
 using System.Text;
@@ -4600,25 +4601,6 @@ namespace SIL.Tool
             }
         }
 
-        public static void SetupLocalization(string namespaces)
-        {
-			Assembly assembly = Assembly.GetExecutingAssembly();
-			FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-			var companyName = fvi.CompanyName;
-			var productName = fvi.ProductName;
-			var productVersion = fvi.ProductVersion;
-
-            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
-            var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-			string installedLocalizationsFolder = InstalledLocalizations();
-            var desiredUiLangId = GetLocalizationSettings();
-            if (desiredUiLangId == string.Empty)
-                desiredUiLangId = "en";
-            if (!Testing)
-				L10NMngr = LocalizationManager.Create(desiredUiLangId, productName, productName, productVersion,
-                                  installedLocalizationsFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
-        }
-
         private static string InstalledLocalizations()
         {
             string pathwayDirectory = PathwayPath.GetPathwayDir();
@@ -4635,7 +4617,96 @@ namespace SIL.Tool
             return installedLocalizationsFolder;
         }
 
-        #region Localization Manager Access methods
+	    public static void SetupLocalization()
+	    {
+		    string[] namespacebeginnings = GetnamespacestoLocalize();
+		    Assembly assembly = Assembly.GetExecutingAssembly();
+		    FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+		    var companyName = fvi.CompanyName;
+		    var productName = fvi.ProductName;
+		    var productVersion = fvi.ProductVersion;
+
+		    //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
+		    var targetTmxFilePath = Path.Combine(kCompany, kProduct);
+		    string installedLocalizationsFolder = InstalledLocalizations();
+		    var desiredUiLangId = GetLocalizationSettings();
+		    if (desiredUiLangId == string.Empty)
+			    desiredUiLangId = "en";
+		    if (!Testing)
+		    {
+
+			    L10NMngr = LocalizationManager.Create(desiredUiLangId, productName, productName, productVersion,
+				    installedLocalizationsFolder, targetTmxFilePath, null, IssuesEmailAddress, namespacebeginnings);
+
+			    LocalizationManager.SetUILanguage(desiredUiLangId, true);
+		    }
+	    }
+
+	    public static void InitializeOtherProjects()
+	    {
+		    string pathwayDirectory = PathwayPath.GetPathwayDir();
+		    DirectoryInfo directoryInfo = new DirectoryInfo(pathwayDirectory);
+
+		    foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$")))
+		    {
+			    var fileInfo = new FileInfo(file);
+			    if ((fileInfo.Name == "PsTool.dll") || (fileInfo.Name.Contains("Convert")) ||
+			        (fileInfo.Name.Contains("Writer")) || (fileInfo.Name.Contains("Validator")))
+			    {
+				    using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry(fileInfo.FullName)))
+				    {
+
+					    var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
+
+					    foreach (
+						    var stype in
+							    sAssembly.GetTypes()
+								    .Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+					    {
+						    sAssembly.CreateInstance(stype.FullName);
+					    }
+
+				    }
+
+			    }
+		    }
+		    GC.Collect();
+	    }
+
+	    public static string[] GetnamespacestoLocalize()
+	    {
+		    var namespacestoLocalize = new List<string>();
+		    string pathwayDirectory = PathwayPath.GetPathwayDir();
+		    DirectoryInfo directoryInfo = new DirectoryInfo(pathwayDirectory);
+
+		    foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$")))
+		    {
+			    var fileInfo = new FileInfo(file);
+			    if ((fileInfo.Name == "PsTool.dll") || (fileInfo.Name.Contains("Convert")) ||
+			        (fileInfo.Name.Contains("Writer")) || (fileInfo.Name.Contains("Validator")))
+			    {
+				    using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry(fileInfo.FullName)))
+				    {
+
+					    var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
+
+					    foreach (
+						    var stype in
+							    sAssembly.GetTypes()
+								    .Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+					    {
+						    if (!namespacestoLocalize.Contains(stype.Namespace))
+							    namespacestoLocalize.Add(stype.Namespace);
+					    }
+
+				    }
+
+			    }
+		    }
+		    return namespacestoLocalize.Distinct().ToArray();
+	    }
+
+	    #region Localization Manager Access methods
         /// ------------------------------------------------------------------------------------
         public static LocalizationManager L10NMngr { get; set; }
 

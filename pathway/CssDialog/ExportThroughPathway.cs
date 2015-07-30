@@ -60,6 +60,7 @@ namespace SIL.PublishingSolution
         private string _sDateTime = string.Empty;
         public ExportThroughPathway()
         {
+			Common.SetupLocalization();
             InitializeComponent();
             _helpTopic = "User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm";
             _fromPlugIn = true;

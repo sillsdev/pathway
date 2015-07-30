@@ -27,7 +27,7 @@ namespace epubValidator
 
         public frmResults()
         {
-            Common.SetupLocalization("epubValidator");
+	        Common.SetupLocalization();
             InitializeComponent();
         }
 

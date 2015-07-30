@@ -16,10 +16,10 @@ namespace epubConvert
         public string _exportType = "cancel";
       
        public EpubExportTypeDlg()
-        {
-            Common.SetupLocalization("epubConvert");
-            InitializeComponent();
-        }
+       {
+	       Common.SetupLocalization();
+	       InitializeComponent();
+       }
 
         private void EpubExportTypeDlg_Load(object sender, EventArgs e)
         {
