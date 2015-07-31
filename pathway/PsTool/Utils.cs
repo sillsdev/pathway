@@ -88,6 +88,19 @@ namespace SilTools
 
 #if !__MonoCS__
 		[DllImport("user32.dll", CharSet = CharSet.Auto)]
+		public static extern void SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
+#else
+		public static void SendMessage(IntPtr hWnd, int msg, int wParam, int lParam)
+		{
+			if(msg != PaintingHelper.WM_NCPAINT) { // repaint
+				Console.WriteLine("Warning--using unimplemented method SendMessage"); // FIXME Linux
+			}
+			return;
+		}
+#endif
+
+#if !__MonoCS__
+		[DllImport("user32.dll", CharSet = CharSet.Auto)]
 		public static extern bool PostMessage(int hWnd, uint msg, int wParam, int lParam);
 #else
 		public static bool PostMessage(int hWnd, uint msg, int wParam, int lParam)
