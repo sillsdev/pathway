@@ -16,11 +16,13 @@
 
 function usage
 {
-    echo "usage: PwLinuxCopy [-dbg | -test | -bte | -se | -h]"
+    echo "usage: PwLinuxCopy [-dbg | -dbg64 | -test | -bte | -se | -h]"
 }
 
 case $1 in
     -dbg | --debug )        builddir=bin/x86/Debug
+                            ;;
+    -dbg64 | --debug )        builddir=bin/Debug
                             ;;
     -test | --releasebte ) builddir=bin/x86/Release7BTE
                             ;;
@@ -61,12 +63,9 @@ sudo cp $SRCDIR/CssParser/$builddir/* $outdir
 sudo cp $SRCDIR/DictionaryForMIDsConvert/$builddir/* $outdir
 sudo cp $SRCDIR/epubConvert/$builddir/* $outdir
 sudo cp $SRCDIR/epubValidator/$builddir/* $outdir
-sudo cp -r $SRCDIR/ThirdParty/epubcheck-1.2/* $outdir
 sudo cp $SRCDIR/GoBibleConvert/$builddir/* $outdir
 sudo cp $SRCDIR/HelpImprove/$builddir/* $outdir
 sudo cp $SRCDIR/InDesignConvert/$builddir/* $outdir
-sudo cp $SRCDIR/LiftPrepare/$builddir/* $outdir
-sudo cp $SRCDIR/LogosConvert/$builddir/* $outdir
 sudo cp $SRCDIR/OpenOfficeConvert/$builddir/* $outdir
 sudo cp $SRCDIR/ParatextSupport/$builddir/* $outdir
 sudo cp $SRCDIR/PathwayB/$builddir/* $outdir
@@ -75,6 +74,8 @@ sudo cp $SRCDIR/PdfConvert/$builddir/* $outdir
 sudo cp $SRCDIR/PsExport/$builddir/* $outdir
 sudo cp -r $SRCDIR/PsSupport/* $outdir
 sudo cp $SRCDIR/PsTool/$builddir/* $outdir
+sudo cp $SRCDIR/SwordConvert/$builddir/* $outdir
+sudo cp $SRCDIR/theWordConvert/$builddir/* $outdir
 sudo cp $SRCDIR/WordPressConvert/$builddir/* $outdir
 sudo cp $SRCDIR/XeLaTexConvert/$builddir/* $outdir
 sudo cp $SRCDIR/XslProcess/$builddir/* $outdir
