@@ -38,6 +38,7 @@ namespace SIL.PublishingSolution
         public SelectOrganizationDialog(string inputType)
         {
             _inputType = inputType;
+			Common.SetupLocalization();
             InitializeComponent();
             _helpTopic = "User_Interface/Dialog_boxes/Select_Your_Organization_dialog_box.htm";
         }

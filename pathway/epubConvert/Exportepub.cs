@@ -656,7 +656,7 @@ namespace SIL.PublishingSolution
         private static InProcess SetupProgressReporting(int steps)
         {
             var inProcess = new InProcess(0, steps) { Text = Resources.Exportepub_Export_Exporting__epub_file }; // create a progress bar with 7 steps (we'll add more below)
-			inProcess.Text = LocalizationManager.GetString("InProcess.Window.Title", inProcess.Text, "");
+			inProcess.Text = LocalizationManager.GetString("Exportepub.InProcessWindow.Title", "Exporting .epub file", "");
 			inProcess.Show();
             inProcess.ShowStatus = true;
             return inProcess;

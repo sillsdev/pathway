@@ -1,4 +1,5 @@
-﻿using SIL.Tool;
+﻿using L10NSharp;
+using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
@@ -61,8 +62,6 @@ namespace SIL.PublishingSolution
             // 
             // InProcess
             // 
-
-
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 89);
@@ -71,17 +70,11 @@ namespace SIL.PublishingSolution
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-
-            this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
-            this.l10NSharpExtender1.SetLocalizationComment(this, null);
-			this.l10NSharpExtender1.SetLocalizationPriority(this, L10NSharp.LocalizationPriority.High);
-            this.l10NSharpExtender1.SetLocalizingId(this, "InProcess.WindowTitle");
-
             this.Name = "InProcess";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Export In Process";
+			this.Text = LocalizationManager.GetString("InProcess.Window.Title", "Export In Process", "");
             this.ResumeLayout(false);
 
         }

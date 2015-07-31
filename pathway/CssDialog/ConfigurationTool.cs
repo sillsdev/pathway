@@ -92,6 +92,7 @@ namespace SIL.PublishingSolution
 
 					_uiLanguageMenu.Text = ((CultureInfo)item.Tag).NativeName;
 					LocalizationManager.ReapplyLocalizationsToAllObjects(Common.L10NMngr.Id);
+					Common.SaveLocalizationSettings(Settings.Default.UserInterfaceLanguage);
 					_cToolBL.ConfigurationTool_LoadBL();
 				});
 				if (((CultureInfo)item.Tag).IetfLanguageTag == Settings.Default.UserInterfaceLanguage)
